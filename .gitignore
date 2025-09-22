@@ -1,0 +1,9 @@
+build
+
+src/PPU_MIRROR*.asm
+src/PRG15.asm
+src/PRG*_MIRROR.asm
+src/RAM_MIRROR*.asm
+src/SRAM.asm
+
+.*.swp

@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+  <title>DEFS - Faxanadu (U).nes</title>
+  <style>
+
+body {
+  background: #1c212d;
+  color: white;
+  font-family: Roboto Mono;
+  font-size: 9.5pt;
+  padding: 0.5em;
+}
+
+a:link,
+a:visited {
+  color: #9bdeff;
+}
+
+pre {
+  display: grid;
+  grid-template-columns: minmax(70ch, max-content) 1fr;
+  gap: 0 4ch;
+  margin: 0;
+  padding: 0;
+}
+
+.equs {
+  display: grid;
+  grid-template-columns: minmax(50ch, max-content) min-content auto;
+  gap: 0 1ch;
+}
+
+.l {
+    min-height: 1lh;
+}
+
+.l {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.c,
+.cp,
+.equs,
+.l {
+  grid-column: 1 / -1;
+}
+
+.cp {
+  color: #6fafb5;
+}
+
+.c, .ce {
+  color: #8aa9ac;
+}
+
+.ce {
+  text-wrap: wrap;
+  text-indent: 2ch hanging;
+}
+
+.lla {
+  margin-left: 2ch;
+}
+
+.la,
+.lla {
+  font-weight: bold;
+}
+
+.la {
+  color: #e8e801;
+}
+
+.lla {
+  color: #caca00;
+}
+
+.i {
+  color: #f26969;
+  display: inline-block;
+  margin-left: 4ch;
+  min-width: 3ch;
+}
+
+.o {
+  color: #e3e3e3;
+  margin-left: 1ch;
+}
+
+  </style>
+ </head>
+ <body>
+  <pre>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Area
+;============================================================================
+</div><div class="equs"><div class="n">AREA_EOLIS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">AREA_APOLUNE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">AREA_FOREPAW</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">AREA_MASCON</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">AREA_VICTIM</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">AREA_CONFLATE</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">AREA_DAYBREAK</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">AREA_EVIL_FORTRESS</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; AreasRegion
+;============================================================================
+</div><div class="equs"><div class="n">REGION_EOLIS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">REGION_TRUNK</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">REGION_MIST</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">REGION_BRANCH</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">REGION_DARTMOOR</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">REGION_EVIL_FORTRESS</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ArmorInventory
+;============================================================================
+</div><div class="equs"><div class="n">ARMORINVENTORY_LEATHER</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">ARMORINVENTORY_STUDDED_MAIL</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">ARMORINVENTORY_FULL_PLATE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">ARMORINVENTORY_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; BlockProperty
+;============================================================================
+</div><div class="equs"><div class="n">BLOCK_IS_AIR</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">BLOCK_IS_SOLID</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">BLOCK_IS_LADDER</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">BLOCK_IS_DOOR</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">BLOCK_FG_0x04</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">BLOCK_0x05</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">BLOCK_PUSHABLE</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">BLOCK_0x07</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">BLOCK_0x08</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">BLOCK_FG_0x09</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">BLOCK_MAYBE_SOMETHING_CLIMBABLE</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">BLOCK_0x0b</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">BLOCK_AREA_TRANSITION_L2R</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">BLOCK_AREA_TRANSITION_R2L</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">BLOCK_0x0e</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">BLOCK_LOWER_NIBBLE</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">BLOCK_UPPER_NIBBLE</div> <div class="i">EQU</div> <div class="v">$f0</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ButtonBitmask
+;============================================================================
+</div><div class="equs"><div class="n">BUTTON_BIT_NONE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">BUTTON_BIT_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">BUTTON_BIT_LEFT</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">BUTTON_BIT_DOWN</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">BUTTON_BIT_UP</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">BUTTON_BITS_DPAD</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">BUTTON_BIT_START</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">BUTTON_BIT_SELECT</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">BUTTON_BIT_B</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">BUTTON_BIT_A</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; CastMagicFlags
+;============================================================================
+</div><div class="equs"><div class="n">CAST_MAGIC_FLAGS_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">CAST_MAGIC_FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">CAST_MAGIC_CLEAR_FALLING</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+<div class="n">CAST_MAGIC_FALLING</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; enum
+;============================================================================
+</div><div class="equs"><div class="n">BLOCK_MAYBE_LADDER_1</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">BLOCK_MAYBE_LADDER_2</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; FacingDirectionBit
+;============================================================================
+</div><div class="equs"><div class="n">FACING_LEFT</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Inventory
+;============================================================================
+</div><div class="equs"><div class="n">INVENTORY_WEAPONS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">INVENTORY_ARMOR</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">INVENTORY_SHIELD</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">INVENTORY_MAGIC</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">INVENTORY_SPECIAL</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; InventoryItem
+;============================================================================
+</div><div class="equs"><div class="n">WEAPON_HAND_DAGGER</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">WEAPON_LONG_SWORD</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">WEAPON_GIANT_BLADE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">WEAPON_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">ARMOR_LEATHER</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">ARMOR_STUDDED_MAIL</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">ARMOR_FULL_PLATE</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">ARMOR_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">SHIELD_SMALL</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">SHIELD_LARGE</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">SHIELD_MAGIC</div> <div class="i">EQU</div> <div class="v">$42</div>
+
+<div class="n">SHIELD_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$43</div>
+
+<div class="n">MAGIC_DELUGE</div> <div class="i">EQU</div> <div class="v">$60</div>
+
+<div class="n">MAGIC_THUNDER</div> <div class="i">EQU</div> <div class="v">$61</div>
+
+<div class="n">MAGIC_FIRE</div> <div class="i">EQU</div> <div class="v">$62</div>
+
+<div class="n">MAGIC_DEATH</div> <div class="i">EQU</div> <div class="v">$63</div>
+
+<div class="n">MAGIC_TILTE</div> <div class="i">EQU</div> <div class="v">$64</div>
+
+<div class="n">SPECIAL_RING_OF_ELF</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">SPECIAL_RING_OF_RUBY</div> <div class="i">EQU</div> <div class="v">$81</div>
+
+<div class="n">SPECIAL_RING_OF_DWORF</div> <div class="i">EQU</div> <div class="v">$82</div>
+
+<div class="n">SPECIAL_DEMONS_RING</div> <div class="i">EQU</div> <div class="v">$83</div>
+
+<div class="n">KEY_A</div> <div class="i">EQU</div> <div class="v">$84</div>
+
+<div class="n">KEY_K</div> <div class="i">EQU</div> <div class="v">$85</div>
+
+<div class="n">KEY_Q</div> <div class="i">EQU</div> <div class="v">$86</div>
+
+<div class="n">KEY_J</div> <div class="i">EQU</div> <div class="v">$87</div>
+
+<div class="n">KEY_JO</div> <div class="i">EQU</div> <div class="v">$88</div>
+
+<div class="n">MATTOCK</div> <div class="i">EQU</div> <div class="v">$89</div>
+
+<div class="n">SPECIAL_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$8a</div>
+
+<div class="n">UNUSED_CRYSTAL</div> <div class="i">EQU</div> <div class="v">$8b</div>
+
+<div class="n">UNUSED_LAMP</div> <div class="i">EQU</div> <div class="v">$8c</div>
+
+<div class="n">ITEM_HOUR_GLASS</div> <div class="i">EQU</div> <div class="v">$8d</div>
+
+<div class="n">UNUSED_BOOK</div> <div class="i">EQU</div> <div class="v">$8e</div>
+
+<div class="n">ITEM_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$8f</div>
+
+<div class="n">ITEM_RED_POTION</div> <div class="i">EQU</div> <div class="v">$90</div>
+
+<div class="n">ITEM_POISON</div> <div class="i">EQU</div> <div class="v">$91</div>
+
+<div class="n">SPECIAL_ELIXIR</div> <div class="i">EQU</div> <div class="v">$92</div>
+
+<div class="n">SPECIAL_PENDANT</div> <div class="i">EQU</div> <div class="v">$93</div>
+
+<div class="n">SPECIAL_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$94</div>
+
+<div class="n">SPECIAL_FIRE_CRYSTAL</div> <div class="i">EQU</div> <div class="v">$95</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; IScriptAction
+;============================================================================
+</div><div class="equs"><div class="n">ISCRIPT_ACTION_END</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_MESSAGE</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">ISCRIPT_ACTION_PAY_GOLD</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">ISCRIPT_ACTION_SET_SPAWN_POINT</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">ISCRIPT_ACTION_ADD_ITEM</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">ISCRIPT_ACTION_OPEN_SHOP</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">ISCRIPT_ACTION_ADD_GOLD</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">ISCRIPT_ACTION_ADD_MP</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">ISCRIPT_ACTION_CHECK_QUEST</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">ISCRIPT_ACTION_CHECK_PLAYER_RANK</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">ISCRIPT_ACTION_CHECK_GOLD</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">ISCRIPT_ACTION_SET_QUEST_COMPLETE</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_BUY_SELL_MENU</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">ISCRIPT_ACTION_CONSUME_ITEM</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_SELL_MENU</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">ISCRIPT_ACTION_CHECK_FOR_ITEM</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">ISCRIPT_ACTION_ADD_HP</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">ISCRIPT_ACTION_SHOW_PASSWORD</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">ISCRIPT_ACTION_END_GAME</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">ISCRIPT_ACTION_22</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">ISCRIPT_ACTION_JUMP</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; IScriptEntity
+;============================================================================
+</div><div class="equs"><div class="n">ISCRIPT_ENTITY_GENERIC</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">ISCRIPT_ENTITY_KING</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">ISCRIPT_ENTITY_GURU</div> <div class="i">EQU</div> <div class="v">$81</div>
+
+<div class="n">ISCRIPT_ENTITY_MARTIAL_ARTIST</div> <div class="i">EQU</div> <div class="v">$82</div>
+
+<div class="n">ISCRIPT_ENTITY_MAGICIAN</div> <div class="i">EQU</div> <div class="v">$83</div>
+
+<div class="n">ISCRIPT_ENTITY_DOCTOR</div> <div class="i">EQU</div> <div class="v">$84</div>
+
+<div class="n">ISCRIPT_ENTITY_NURSE</div> <div class="i">EQU</div> <div class="v">$85</div>
+
+<div class="n">ISCRIPT_ENTITY_PINK_SHIRT_GUY</div> <div class="i">EQU</div> <div class="v">$86</div>
+
+<div class="n">ISCRIPT_ENTIY_SMOKING_GUY</div> <div class="i">EQU</div> <div class="v">$87</div>
+
+<div class="n">ISCRIPT_ENTITY_MEAT_SALESMAN</div> <div class="i">EQU</div> <div class="v">$88</div>
+
+<div class="n">ISCRIPT_ENTITY_TOOLS_SALESMAN</div> <div class="i">EQU</div> <div class="v">$89</div>
+
+<div class="n">ISCRIPT_ENTITY_KEY_SALESMAN</div> <div class="i">EQU</div> <div class="v">$8a</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; IScriptEntrypoint
+;============================================================================
+</div><div class="equs"><div class="n">ISCRIPT_ENTRYPOINT_INTRO</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_WALKING_MAN_1</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_MARK_OF_JACK</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_WALKING_WOMAN_1</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_GURU</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_WALKING_WOMAN_2</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_SMOKING_MAN</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_KINGS_GUARD</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_KING</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_9</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_10</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_MARTIAL_ARTS_MAGIC_SHOP</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_EOLIS_MARTIAL_ARTS</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_16</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_17</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_18</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_19</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_20</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_APOLUNE_DOCTOR</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_22</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_23</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_24</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_APOLUNE_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_APOLUNE_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_27</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_APOLUNE_GURU</div> <div class="i">EQU</div> <div class="v">$1c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_BEFORE_APOLUNE_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_30_INTRO</div> <div class="i">EQU</div> <div class="v">$1e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_31_REMEMBER_YOUR_MANTRA</div> <div class="i">EQU</div> <div class="v">$1f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_32_FOREPAW_GREETER</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_33</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_34</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_35</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_36</div> <div class="i">EQU</div> <div class="v">$24</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_37_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$25</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_38_SPRING_OF_TRUNK</div> <div class="i">EQU</div> <div class="v">$26</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_39</div> <div class="i">EQU</div> <div class="v">$27</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_40_FOREPAW_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$28</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_41_FOREPAW_GURU</div> <div class="i">EQU</div> <div class="v">$29</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_42_FOREPAW_DOCTOR</div> <div class="i">EQU</div> <div class="v">$2a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_43_FOREPAW_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$2b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_44_FOREPAW_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$2c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_45_INTRO</div> <div class="i">EQU</div> <div class="v">$2d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_46_INTRO</div> <div class="i">EQU</div> <div class="v">$2e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_47_INTRO</div> <div class="i">EQU</div> <div class="v">$2f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_48</div> <div class="i">EQU</div> <div class="v">$30</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_49</div> <div class="i">EQU</div> <div class="v">$31</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_50</div> <div class="i">EQU</div> <div class="v">$32</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_51</div> <div class="i">EQU</div> <div class="v">$33</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_52</div> <div class="i">EQU</div> <div class="v">$34</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_53_OVERWORLD_MIST_HOUSE_MAN</div> <div class="i">EQU</div> <div class="v">$35</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_54_OVERWORLD_MIST_HOUSE_WOMAN</div> <div class="i">EQU</div> <div class="v">$36</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_55</div> <div class="i">EQU</div> <div class="v">$37</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_56_MASCON_DOCTOR</div> <div class="i">EQU</div> <div class="v">$38</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_57_MASCON_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$39</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_58_MASCON_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$3a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_59_MASCON_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$3b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_60_AFTER_MASCON_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$3c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_61_MASCON_GURU</div> <div class="i">EQU</div> <div class="v">$3d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_62_INTRO</div> <div class="i">EQU</div> <div class="v">$3e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_63_INTRO</div> <div class="i">EQU</div> <div class="v">$3f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_64</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_65</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_66</div> <div class="i">EQU</div> <div class="v">$42</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_67</div> <div class="i">EQU</div> <div class="v">$43</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_68</div> <div class="i">EQU</div> <div class="v">$44</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_69</div> <div class="i">EQU</div> <div class="v">$45</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_70</div> <div class="i">EQU</div> <div class="v">$46</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_71_VICTIM_DOCTOR</div> <div class="i">EQU</div> <div class="v">$47</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_72_VICTIM_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$48</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_73_VICTIM_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$49</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_74_VICTIM_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$4a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_75_AFTER_VICTIM_MAGIC_SHOP</div> <div class="i">EQU</div> <div class="v">$4b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_76_VICTIM_GURU</div> <div class="i">EQU</div> <div class="v">$4c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_77_INTRO</div> <div class="i">EQU</div> <div class="v">$4d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_78_INTRO</div> <div class="i">EQU</div> <div class="v">$4e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_79_INTRO</div> <div class="i">EQU</div> <div class="v">$4f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_80</div> <div class="i">EQU</div> <div class="v">$50</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_81</div> <div class="i">EQU</div> <div class="v">$51</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_82</div> <div class="i">EQU</div> <div class="v">$52</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_83</div> <div class="i">EQU</div> <div class="v">$53</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_84</div> <div class="i">EQU</div> <div class="v">$54</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_85_CONFLATE_GURU</div> <div class="i">EQU</div> <div class="v">$55</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_86_CONFLATE_DOCTOR</div> <div class="i">EQU</div> <div class="v">$56</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_87_CONFLATE_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$57</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_88_CONFLATE_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$58</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_89_INTRO</div> <div class="i">EQU</div> <div class="v">$59</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_90_INTRO</div> <div class="i">EQU</div> <div class="v">$5a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_91_INTRO</div> <div class="i">EQU</div> <div class="v">$5b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_92_INTRO</div> <div class="i">EQU</div> <div class="v">$5c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_93_INTRO</div> <div class="i">EQU</div> <div class="v">$5d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_94_INTRO</div> <div class="i">EQU</div> <div class="v">$5e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_95_INTRO</div> <div class="i">EQU</div> <div class="v">$5f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_96</div> <div class="i">EQU</div> <div class="v">$60</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_97</div> <div class="i">EQU</div> <div class="v">$61</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_98</div> <div class="i">EQU</div> <div class="v">$62</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_99</div> <div class="i">EQU</div> <div class="v">$63</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_100</div> <div class="i">EQU</div> <div class="v">$64</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_101</div> <div class="i">EQU</div> <div class="v">$65</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_102_DAYBREAK_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$66</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_103_DAYBREAK_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$67</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_104_DAYBREAK_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$68</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_105_DAYBREAK_GURU</div> <div class="i">EQU</div> <div class="v">$69</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_106_INTRO</div> <div class="i">EQU</div> <div class="v">$6a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_107_INTRO</div> <div class="i">EQU</div> <div class="v">$6b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_108_INTRO</div> <div class="i">EQU</div> <div class="v">$6c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_109_INTRO</div> <div class="i">EQU</div> <div class="v">$6d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_110_INTRO</div> <div class="i">EQU</div> <div class="v">$6e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_111_INTRO</div> <div class="i">EQU</div> <div class="v">$6f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_112</div> <div class="i">EQU</div> <div class="v">$70</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_113_OVERWORLD_HOUSE_MAN</div> <div class="i">EQU</div> <div class="v">$71</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_114_OVERWORLD_HOUSE_WOMAN</div> <div class="i">EQU</div> <div class="v">$72</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_115</div> <div class="i">EQU</div> <div class="v">$73</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_116_FRATERNAL_GURU</div> <div class="i">EQU</div> <div class="v">$74</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_117_DARTMOOR_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$75</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_118_DARTMOOR_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$76</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_119_DARTMOOR_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$77</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_120_FINAL_GURU</div> <div class="i">EQU</div> <div class="v">$78</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_121_GLAD_YOU_ARE_BACK</div> <div class="i">EQU</div> <div class="v">$79</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_122_DARTMOOR_DOCTOR</div> <div class="i">EQU</div> <div class="v">$7a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_123_MARK_OF_QUEEN</div> <div class="i">EQU</div> <div class="v">$7b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_124_MARK_OF_KING</div> <div class="i">EQU</div> <div class="v">$7c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_125_MARK_OF_ACE</div> <div class="i">EQU</div> <div class="v">$7d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_126_MARK_OF_JOKER</div> <div class="i">EQU</div> <div class="v">$7e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_127_NEED_RING_FOR_DOOR</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_128_USED_RED_POTION</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_129_USED_MATTOCK</div> <div class="i">EQU</div> <div class="v">$81</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_130_USED_HOURGLASS</div> <div class="i">EQU</div> <div class="v">$82</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_131_USED_WINGBOOTS</div> <div class="i">EQU</div> <div class="v">$83</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_132_USED_KEY</div> <div class="i">EQU</div> <div class="v">$84</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_133_USED_ELIXIR</div> <div class="i">EQU</div> <div class="v">$85</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_134_GOT_ELIXIR</div> <div class="i">EQU</div> <div class="v">$86</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_135_GOT_RED_POTION</div> <div class="i">EQU</div> <div class="v">$87</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_136_GOT_MATTOCK</div> <div class="i">EQU</div> <div class="v">$88</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_137_GOT_WINGBOOTS</div> <div class="i">EQU</div> <div class="v">$89</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_138_GOT_HOURGLASS</div> <div class="i">EQU</div> <div class="v">$8a</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_139_GOT_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$8b</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_140_GOT_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$8c</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_141_GOT_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$8d</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_142_GOT_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$8e</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_143_GOT_PENDANT</div> <div class="i">EQU</div> <div class="v">$8f</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_144_GOT_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$90</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_145_TOUCHED_POISON</div> <div class="i">EQU</div> <div class="v">$91</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_146_GOT_POWER_GLOVE</div> <div class="i">EQU</div> <div class="v">$92</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_147_POWER_GLOVE_GONE</div> <div class="i">EQU</div> <div class="v">$93</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_148_OINTMENT_USED</div> <div class="i">EQU</div> <div class="v">$94</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_149_OINTMENT_GONE</div> <div class="i">EQU</div> <div class="v">$95</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_150_WINGBOOTS_GONE</div> <div class="i">EQU</div> <div class="v">$96</div>
+
+<div class="n">ISCRIPT_ENTRYPOINT_151_HOURGLASS_GONE</div> <div class="i">EQU</div> <div class="v">$97</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ItemInventory
+;============================================================================
+</div><div class="equs"><div class="n">ITEMINVENTORY_RING_OF_ELF</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">ITEMINVENTORY_RING_OF_RUBY</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">ITEMINVENTORY_RING_OF_DWORF</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">ITEMINVENTORY_DEMONS_RING</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">ITEMINVENTORY_KEY_A</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">ITEMINVENTORY_KEY_K</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">ITEMINVENTORY_KEY_Q</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">ITEMINVENTORY_KEY_J</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">ITEMINVENTORY_KEY_JO</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">ITEMINVENTORY_MATTOCK</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">ITEMINVENTORY_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">ITEMINVENTORY_CRYSTAL</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">ITEMINVENTORY_LAMP</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">ITEMINVENTORY_HOUR_GLASS</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">ITEMINVENTORY_BOOK</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">ITEMINVENTORY_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">ITEMINVENTORY_RED_POTION</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">ITEMINVENTORY_POISON</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">ITEMINVENTORY_ELIXIR</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">ITEMINVENTORY_PENDANT</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">ITEMINVENTORY_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">ITEMINVENTORY_FIRE_CRYSTAL</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">ITEMINVENTORY_NO_ITEM_SELECTED</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; LoadedState
+;============================================================================
+</div><div class="equs"><div class="n">LOADED_STATE_READY</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">LOADED_STATE_NOT_PLAYING</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Message
+;============================================================================
+</div><div class="equs"><div class="n">MESSAGEID_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">MESSAGEID_HELP_WITH_ANYTHING</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">MESSAGEID_THANK_YOU_FOR_SHOPPING</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">MESSAGEID_NOT_ENOUGH_GOLD</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">MESSAGEID_ANYTHING_ELSE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">MESSAGEID_COME_BACK_AGAIN</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">MESSAGEID_CANT_CARRY_MORE</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_50G</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_150G</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_180G</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_250G</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_350G</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_500G</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">MESSAGEID_DRIED_MEAT_800G</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">MESSAGEID_I_SELL_KEYS</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">MESSAGEID_I_SELL_TOOLS</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">MESSAGEID_COME_HERE_TO_BUY_SELL</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">MESSAGEID_NO_KEY</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">MESSAGEID_NOTHING_TO_BUY</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">MESSAGEID_WHICH_TO_SELL</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">MESSAGEID_WHAT_WOULD_YOU_LIKE</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">MESSAGEID_MAGIC_200G</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">MESSAGEID_WATCH_POWER_LEVEL</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">MESSAGEID_MAGIC_FIRE_3000G</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">MESSAGEID_DONT_RELY_ON_MAGIC</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">MESSAGEID_MARTIAL_ARTS_200G</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">MESSAGEID_DO_YOU_WANT_TREATMENT</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">MESSAGEID_DONT_TRY_TOO_HARD</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">MESSAGEID_250G_PLEASE</div> <div class="i">EQU</div> <div class="v">$1c</div>
+
+<div class="n">MESSAGEID_500G_PLEASE</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+<div class="n">MESSAGEID_1000G_PLEASE</div> <div class="i">EQU</div> <div class="v">$1e</div>
+
+<div class="n">MESSAGEID_2500G_PLEASE</div> <div class="i">EQU</div> <div class="v">$1f</div>
+
+<div class="n">MESSAGEID_1800G_PLEASE</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">MESSAGEID_3000G_PLEASE</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">MESSAGEID_MEDITATE_WITH_YOU</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">MESSAGEID_NEW_TITLE</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">MESSAGEID_REMEMBER_YOUR_MANTRA</div> <div class="i">EQU</div> <div class="v">$24</div>
+
+<div class="n">MESSAGEID_HEAR_AGAIN</div> <div class="i">EQU</div> <div class="v">$25</div>
+
+<div class="n">MESSAGEID_INTRO</div> <div class="i">EQU</div> <div class="v">$26</div>
+
+<div class="n">MESSAGEID_GO_SEE_KING</div> <div class="i">EQU</div> <div class="v">$27</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_APOLUNE</div> <div class="i">EQU</div> <div class="v">$28</div>
+
+<div class="n">MESSAGEID_MARK_OF_JACK</div> <div class="i">EQU</div> <div class="v">$29</div>
+
+<div class="n">MESSAGEID_THIS_IS_EOLIS</div> <div class="i">EQU</div> <div class="v">$2a</div>
+
+<div class="n">MESSAGEID_LOOK_FOR_RINGS</div> <div class="i">EQU</div> <div class="v">$2b</div>
+
+<div class="n">MESSAGEID_TAKE_RING_TO_KING</div> <div class="i">EQU</div> <div class="v">$2c</div>
+
+<div class="n">MESSAGEID_VISIT_GURUS_GET_TITLE</div> <div class="i">EQU</div> <div class="v">$2d</div>
+
+<div class="n">MESSAGEID_LAST_WELL_ALMOST_DRY</div> <div class="i">EQU</div> <div class="v">$2e</div>
+
+<div class="n">MESSAGEID_THIS_IS_FOREPAW</div> <div class="i">EQU</div> <div class="v">$2f</div>
+
+<div class="n">MESSAGEID_DWARVES_ARE_HERE</div> <div class="i">EQU</div> <div class="v">$30</div>
+
+<div class="n">MESSAGEID_DO_YOU_HAVE_WEAPON</div> <div class="i">EQU</div> <div class="v">$31</div>
+
+<div class="n">MESSAGEID_CANT_LET_YOU_GO</div> <div class="i">EQU</div> <div class="v">$32</div>
+
+<div class="n">MESSAGEID_KING_IS_WAITING</div> <div class="i">EQU</div> <div class="v">$33</div>
+
+<div class="n">MESSAGEID_GOOD_LUCK</div> <div class="i">EQU</div> <div class="v">$34</div>
+
+<div class="n">MESSAGEID_KING_EXPOSITION</div> <div class="i">EQU</div> <div class="v">$35</div>
+
+<div class="n">MESSAGEID_NOTHING_MORE_TO_HELP</div> <div class="i">EQU</div> <div class="v">$36</div>
+
+<div class="n">MESSAGEID_DWARVES_ROBBING_ELVES</div> <div class="i">EQU</div> <div class="v">$37</div>
+
+<div class="n">MESSAGEID_METEORITE_EXPOSITION</div> <div class="i">EQU</div> <div class="v">$38</div>
+
+<div class="n">MESSAGEID_LISTEN_TO_PEOPLE</div> <div class="i">EQU</div> <div class="v">$39</div>
+
+<div class="n">MESSAGEID_DONT_TRY_TOO_HARD_2</div> <div class="i">EQU</div> <div class="v">$3a</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_APOLUNE</div> <div class="i">EQU</div> <div class="v">$3b</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_FOREPAW</div> <div class="i">EQU</div> <div class="v">$3c</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_TO_TRUNK</div> <div class="i">EQU</div> <div class="v">$3d</div>
+
+<div class="n">MESSAGEID_GOOD_LUCK_2</div> <div class="i">EQU</div> <div class="v">$3e</div>
+
+<div class="n">MESSAGEID_SHOULD_HAVE_SHIELD</div> <div class="i">EQU</div> <div class="v">$3f</div>
+
+<div class="n">MESSAGEID_MATTOCK_IN_TOWER</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">MESSAGEID_BLOCKED_PASSAGE</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">MESSAGEID_MATTOCK_BREAKS_WALL</div> <div class="i">EQU</div> <div class="v">$42</div>
+
+<div class="n">MESSAGEID_YOU_NEED_KEY</div> <div class="i">EQU</div> <div class="v">$43</div>
+
+<div class="n">MESSAGEID_YOU_NEED_DIFFERENT_KEY</div> <div class="i">EQU</div> <div class="v">$44</div>
+
+<div class="n">MESSAGEID_DOCTOR_CAN_HELP</div> <div class="i">EQU</div> <div class="v">$45</div>
+
+<div class="n">MESSAGEID_POISON_IS_BAD</div> <div class="i">EQU</div> <div class="v">$46</div>
+
+<div class="n">MESSAGEID_LEARN_MANTRAS</div> <div class="i">EQU</div> <div class="v">$47</div>
+
+<div class="n">MESSAGEID_SECRET_GURU_IN_TOWER</div> <div class="i">EQU</div> <div class="v">$48</div>
+
+<div class="n">MESSAGEID_CARRY_ITEMS</div> <div class="i">EQU</div> <div class="v">$49</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_FOREPAW</div> <div class="i">EQU</div> <div class="v">$4a</div>
+
+<div class="n">MESSAGEID_FOUNTAIN_WILL_FLOW_TO_TOWN</div> <div class="i">EQU</div> <div class="v">$4b</div>
+
+<div class="n">MESSAGEID_FIND_3_SPRINGS</div> <div class="i">EQU</div> <div class="v">$4c</div>
+
+<div class="n">MESSAGEID_WATER_IS_FLOWING</div> <div class="i">EQU</div> <div class="v">$4d</div>
+
+<div class="n">MESSAGEID_FOUNTAIN_IN_SKY</div> <div class="i">EQU</div> <div class="v">$4e</div>
+
+<div class="n">MESSAGEID_PUSH_FOUNTAIN_ROCK</div> <div class="i">EQU</div> <div class="v">$4f</div>
+
+<div class="n">MESSAGEID_SPRING_IN_TOWER</div> <div class="i">EQU</div> <div class="v">$50</div>
+
+<div class="n">MESSAGEID_WINGBOOTS_IN_TOWER</div> <div class="i">EQU</div> <div class="v">$51</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_TO_MASCON</div> <div class="i">EQU</div> <div class="v">$52</div>
+
+<div class="n">MESSAGEID_LOOK_FOR_WINGBOOTS</div> <div class="i">EQU</div> <div class="v">$53</div>
+
+<div class="n">MESSAGEID_FOUNTAIN_IN_SKY_HINT</div> <div class="i">EQU</div> <div class="v">$54</div>
+
+<div class="n">MESSAGEID_USE_THIS_KEY_FOR_FIRST_SPRING</div> <div class="i">EQU</div> <div class="v">$55</div>
+
+<div class="n">MESSAGEID_GET_JOKER_OR_COME_BACK</div> <div class="i">EQU</div> <div class="v">$56</div>
+
+<div class="n">MESSAGEID_HO_HO_HO_ZZZ</div> <div class="i">EQU</div> <div class="v">$57</div>
+
+<div class="n">MESSAGEID_GET_KEY_FIND_FOUNTAIN</div> <div class="i">EQU</div> <div class="v">$58</div>
+
+<div class="n">MESSAGEID_THIS_IS_SPRING_OF_TRUNK_GET_ELIXIR</div> <div class="i">EQU</div> <div class="v">$59</div>
+
+<div class="n">MESSAGEID_2_MORE_SPRINGS</div> <div class="i">EQU</div> <div class="v">$5a</div>
+
+<div class="n">MESSAGEID_COME_BACK_WITH_MEDICINE</div> <div class="i">EQU</div> <div class="v">$5b</div>
+
+<div class="n">MESSAGEID_FIND_POISON_IN_MASCON</div> <div class="i">EQU</div> <div class="v">$5c</div>
+
+<div class="n">MESSAGEID_WILL_REVIVE_SPRING</div> <div class="i">EQU</div> <div class="v">$5d</div>
+
+<div class="n">MESSAGEID_GIVING_RING_OF_RUBY</div> <div class="i">EQU</div> <div class="v">$5e</div>
+
+<div class="n">MESSAGEID_TRUST_YOUR_POWER</div> <div class="i">EQU</div> <div class="v">$5f</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_MASCON</div> <div class="i">EQU</div> <div class="v">$60</div>
+
+<div class="n">MESSAGEID_PREPARE_BEFORE_FOREPAW</div> <div class="i">EQU</div> <div class="v">$61</div>
+
+<div class="n">MESSAGEID_METEORITE_BECOMES_POISON</div> <div class="i">EQU</div> <div class="v">$62</div>
+
+<div class="n">MESSAGEID_DID_YOU_GET_PENDANT</div> <div class="i">EQU</div> <div class="v">$63</div>
+
+<div class="n">MESSAGEID_STORES_OUTSIDE_TOWN</div> <div class="i">EQU</div> <div class="v">$64</div>
+
+<div class="n">MESSAGEID_THIS_IS_LARGE_SHIELD</div> <div class="i">EQU</div> <div class="v">$65</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_TO_SUFFER</div> <div class="i">EQU</div> <div class="v">$66</div>
+
+<div class="n">MESSAGEID_NEED_WING_BOOTS_FOR_MIST</div> <div class="i">EQU</div> <div class="v">$67</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_MIST</div> <div class="i">EQU</div> <div class="v">$68</div>
+
+<div class="n">MESSAGEID_HOUSE_OUTSIDE_ABANDONED</div> <div class="i">EQU</div> <div class="v">$69</div>
+
+<div class="n">MESSAGEID_TOWER_OF_SUFFER_SOON</div> <div class="i">EQU</div> <div class="v">$6a</div>
+
+<div class="n">MESSAGEID_KEEP_PENDANT</div> <div class="i">EQU</div> <div class="v">$6b</div>
+
+<div class="n">MESSAGEID_DWARVES_CHANTING</div> <div class="i">EQU</div> <div class="v">$6c</div>
+
+<div class="n">MESSAGEID_METEORITE_WAS_MOVED</div> <div class="i">EQU</div> <div class="v">$6d</div>
+
+<div class="n">MESSAGEID_HOUR_GLASS</div> <div class="i">EQU</div> <div class="v">$6e</div>
+
+<div class="n">MESSAGEID_HOUR_GLASS_USES_ENERGY</div> <div class="i">EQU</div> <div class="v">$6f</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_VICTIM</div> <div class="i">EQU</div> <div class="v">$70</div>
+
+<div class="n">MESSAGEID_DANGEROUS_WITHOUT_MAGIC</div> <div class="i">EQU</div> <div class="v">$71</div>
+
+<div class="n">MESSAGEID_MAGIC_HALL_OUTSIDE_TOWN</div> <div class="i">EQU</div> <div class="v">$72</div>
+
+<div class="n">MESSAGEID_MAGIC_CANE</div> <div class="i">EQU</div> <div class="v">$73</div>
+
+<div class="n">MESSAGEID_GO_TO_CAPITAL</div> <div class="i">EQU</div> <div class="v">$74</div>
+
+<div class="n">MESSAGEID_GOT_ARMOR_FOR_BOTTLE</div> <div class="i">EQU</div> <div class="v">$75</div>
+
+<div class="n">MESSAGEID_ILL_HAVE_DRINK</div> <div class="i">EQU</div> <div class="v">$76</div>
+
+<div class="n">MESSAGEID_IM_LOST</div> <div class="i">EQU</div> <div class="v">$77</div>
+
+<div class="n">MESSAGEID_IM_LOST_MAGIC_DOES_NOT_WORK</div> <div class="i">EQU</div> <div class="v">$78</div>
+
+<div class="n">MESSAGEID_MAGIC_OF_JUSTICE_OR_DESTRUCTION</div> <div class="i">EQU</div> <div class="v">$79</div>
+
+<div class="n">MESSAGEID_MAGIC_INDIVIDUAL_POWERS</div> <div class="i">EQU</div> <div class="v">$7a</div>
+
+<div class="n">MESSAGEID_MAGIC_CONSUMES_POWER</div> <div class="i">EQU</div> <div class="v">$7b</div>
+
+<div class="n">MESSAGEID_METEORITE_BECOMES_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$7c</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_TO_TOWER_OF_MIST</div> <div class="i">EQU</div> <div class="v">$7d</div>
+
+<div class="n">MESSAGEID_USE_KEY_FOR_CONFLATE</div> <div class="i">EQU</div> <div class="v">$7e</div>
+
+<div class="n">MESSAGEID_YOU_NEED_KEY_ACE</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+<div class="n">MESSAGEID_WELCOME_TO_CONFLATE</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">MESSAGEID_LEGENDARY_SHIELD_HELMET</div> <div class="i">EQU</div> <div class="v">$81</div>
+
+<div class="n">MESSAGEID_TOWN_SURROUNDED_BY_DOORS</div> <div class="i">EQU</div> <div class="v">$82</div>
+
+<div class="n">MESSAGEID_SEE_GURU_AFTER_SHIELD_HELMET</div> <div class="i">EQU</div> <div class="v">$83</div>
+
+<div class="n">MESSAGEID_GUARDIAN_OF_GURU</div> <div class="i">EQU</div> <div class="v">$84</div>
+
+<div class="n">MESSAGEID_SOMETHING_YOU_CAN_GET</div> <div class="i">EQU</div> <div class="v">$85</div>
+
+<div class="n">MESSAGEID_DONT_RELY_ON_MAGIC_FINAL_BATTLE</div> <div class="i">EQU</div> <div class="v">$86</div>
+
+<div class="n">MESSAGEID_USED_TO_TRADE_WITH_DWARVES</div> <div class="i">EQU</div> <div class="v">$87</div>
+
+<div class="n">MESSAGEID_USED_TO_BE_SKILLED</div> <div class="i">EQU</div> <div class="v">$88</div>
+
+<div class="n">MESSAGEID_USED_TO_VISIT_DWARVES</div> <div class="i">EQU</div> <div class="v">$89</div>
+
+<div class="n">MESSAGEID_I_AM_PICKPOCKET</div> <div class="i">EQU</div> <div class="v">$8a</div>
+
+<div class="n">MESSAGEID_NEED_FINAL_WEAPON_ARMOR</div> <div class="i">EQU</div> <div class="v">$8b</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_DARTMORE</div> <div class="i">EQU</div> <div class="v">$8c</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_DAYBREAK</div> <div class="i">EQU</div> <div class="v">$8d</div>
+
+<div class="n">MESSAGEID_FRIENDS_IN_DARTMOOR</div> <div class="i">EQU</div> <div class="v">$8e</div>
+
+<div class="n">MESSAGEID_LOOK_FOR_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$8f</div>
+
+<div class="n">MESSAGEID_FIND_MAGIC_CANE</div> <div class="i">EQU</div> <div class="v">$90</div>
+
+<div class="n">MESSAGEID_YOU_ARE_FAMOUS_GOOD_LOOKING</div> <div class="i">EQU</div> <div class="v">$91</div>
+
+<div class="n">MESSAGEID_AUTOGRAPH</div> <div class="i">EQU</div> <div class="v">$92</div>
+
+<div class="n">MESSAGEID_WHEN_TAKE_BATH</div> <div class="i">EQU</div> <div class="v">$93</div>
+
+<div class="n">MESSAGEID_GURU_CONFLATE_HAS_RING_DWARVES</div> <div class="i">EQU</div> <div class="v">$94</div>
+
+<div class="n">MESSAGEID_DID_YOU_GET_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$95</div>
+
+<div class="n">MESSAGEID_DARTMORE_IS_MAZE</div> <div class="i">EQU</div> <div class="v">$96</div>
+
+<div class="n">MESSAGEID_IS_FIRST_VISIT_TO_STORE</div> <div class="i">EQU</div> <div class="v">$97</div>
+
+<div class="n">MESSAGEID_MAGIC_CANE_ABOVE_TOWER</div> <div class="i">EQU</div> <div class="v">$98</div>
+
+<div class="n">MESSAGEID_DIRECTIONS_TO_FRATERNAL</div> <div class="i">EQU</div> <div class="v">$99</div>
+
+<div class="n">MESSAGEID_YOU_NEED_DEMONS_RING</div> <div class="i">EQU</div> <div class="v">$9a</div>
+
+<div class="n">MESSAGEID_KING_GRIEVE_HAS_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$9b</div>
+
+<div class="n">MESSAGEID_DEFEAT_EVIL_WITH_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$9c</div>
+
+<div class="n">MESSAGEID_GO_TO_FRATERNAL_GURU</div> <div class="i">EQU</div> <div class="v">$9d</div>
+
+<div class="n">MESSAGEID_GURU_HAS_DEMONS_RING</div> <div class="i">EQU</div> <div class="v">$9e</div>
+
+<div class="n">MESSAGEID_SEARCH_CASTLE_FOR_GURU</div> <div class="i">EQU</div> <div class="v">$9f</div>
+
+<div class="n">MESSAGEID_EVIL_IMMUNE_TO_MAGIC</div> <div class="i">EQU</div> <div class="v">$a0</div>
+
+<div class="n">MESSAGEID_METEORITE_EXPOSITION_2</div> <div class="i">EQU</div> <div class="v">$a1</div>
+
+<div class="n">MESSAGEID_DEFEATED_KING_GRIEVE</div> <div class="i">EQU</div> <div class="v">$a2</div>
+
+<div class="n">MESSAGEID_ILL_MEDITATE_FOR_YOU</div> <div class="i">EQU</div> <div class="v">$a3</div>
+
+<div class="n">MESSAGEID_GLAD_YOURE_BACK</div> <div class="i">EQU</div> <div class="v">$a4</div>
+
+<div class="n">MESSAGEID_MARK_OF_QUEEN</div> <div class="i">EQU</div> <div class="v">$a5</div>
+
+<div class="n">MESSAGEID_MARK_OF_KING</div> <div class="i">EQU</div> <div class="v">$a6</div>
+
+<div class="n">MESSAGEID_MARK_OF_ACE</div> <div class="i">EQU</div> <div class="v">$a7</div>
+
+<div class="n">MESSAGEID_MARK_OF_JOKER</div> <div class="i">EQU</div> <div class="v">$a8</div>
+
+<div class="n">MESSAGEID_NEED_RING_FOR_DOOR</div> <div class="i">EQU</div> <div class="v">$a9</div>
+
+<div class="n">MESSAGEID_USED_RED_POTION</div> <div class="i">EQU</div> <div class="v">$aa</div>
+
+<div class="n">MESSAGEID_USED_MATTOCK</div> <div class="i">EQU</div> <div class="v">$ab</div>
+
+<div class="n">MESSAGEID_USED_HOURGLASS</div> <div class="i">EQU</div> <div class="v">$ac</div>
+
+<div class="n">MESSAGEID_USED_WINGBOOTS</div> <div class="i">EQU</div> <div class="v">$ad</div>
+
+<div class="n">MESSAGEID_USED_KEY</div> <div class="i">EQU</div> <div class="v">$ae</div>
+
+<div class="n">MESSAGEID_USED_ELIXIR</div> <div class="i">EQU</div> <div class="v">$af</div>
+
+<div class="n">MESSAGEID_HOLDING_ELIXIR</div> <div class="i">EQU</div> <div class="v">$b0</div>
+
+<div class="n">MESSAGEID_HOLDING_RED_POTION</div> <div class="i">EQU</div> <div class="v">$b1</div>
+
+<div class="n">MESSAGEID_HOLDING_MATTOCK</div> <div class="i">EQU</div> <div class="v">$b2</div>
+
+<div class="n">MESSAGEID_HOLDING_WINGBOOTS</div> <div class="i">EQU</div> <div class="v">$b3</div>
+
+<div class="n">MESSAGEID_HOLDING_HOURGLASS</div> <div class="i">EQU</div> <div class="v">$b4</div>
+
+<div class="n">MESSAGEID_GOT_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$b5</div>
+
+<div class="n">MESSAGEID_GOT_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$b6</div>
+
+<div class="n">MESSAGEID_GOT_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$b7</div>
+
+<div class="n">MESSAGEID_GOT_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$b8</div>
+
+<div class="n">MESSAGEID_GOT_PENDANT</div> <div class="i">EQU</div> <div class="v">$b9</div>
+
+<div class="n">MESSAGEID_GOT_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$ba</div>
+
+<div class="n">MESSAGEID_TOUCHED_POISON</div> <div class="i">EQU</div> <div class="v">$bb</div>
+
+<div class="n">MESSAGEID_GLOVE_INCREASES_POWER</div> <div class="i">EQU</div> <div class="v">$bc</div>
+
+<div class="n">MESSAGEID_POWER_GLOVE_IS_GONE</div> <div class="i">EQU</div> <div class="v">$bd</div>
+
+<div class="n">MESSAGEID_USED_OINTMENT</div> <div class="i">EQU</div> <div class="v">$be</div>
+
+<div class="n">MESSAGEID_OINTMENT_GONE</div> <div class="i">EQU</div> <div class="v">$bf</div>
+
+<div class="n">MESSAGEID_WINGBOOTS_GONE</div> <div class="i">EQU</div> <div class="v">$c0</div>
+
+<div class="n">MESSAGEID_HOURGLASS_GONE</div> <div class="i">EQU</div> <div class="v">$c1</div>
+
+<div class="n">MESSAGEID_CHAR_PLAYER_TITLE</div> <div class="i">EQU</div> <div class="v">$fb</div>
+
+<div class="n">MESSAGEID_CHAR_PAUSE</div> <div class="i">EQU</div> <div class="v">$fc</div>
+
+<div class="n">MESSAGEID_CHAR_SPACE</div> <div class="i">EQU</div> <div class="v">$fd</div>
+
+<div class="n">MESSAGEID_CHAR_NEWLINE</div> <div class="i">EQU</div> <div class="v">$fe</div>
+
+<div class="n">MESSAGEID_CHAR_END</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; MovingSpriteVisibility
+;============================================================================
+</div><div class="equs"><div class="n">MOVING_SPRITE_FULLY_VISIBLE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">MOVING_SPRITE_TRAILING_OBSCURED</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">MOVING_SPRITE_LEADING_OBSCURED</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">MOVING_SPRITE_FULLY_OBSCURED</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Music
+;============================================================================
+</div><div class="equs"><div class="n">MUSIC_START_THEME</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">MUSIC_MAYBE_LAST_WORLD</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">MUSIC_MAYBE_BETWEEN_FIRST_TOWN_FOG</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">MUSIC_MAYBE_TREE_WORLD</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">MUSIC_MAYBE_FOG</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">MUSIC_MAYBE_TOWER</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">MUSIC_EOLIS</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">MUSIC_MAYBE_TITLESCREEN</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">MUSIC_MAYBE_TOWN_BUILDING</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">MUSIC_0x0A</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">MUSIC_0x0B</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">MUSIC_MAYBE_ENDING</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">MUSIC_MAYBE_TEMPLE_1</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">MUSIC_TEMPLE</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">MUSIC_SHOP</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">MUSIC_MAYBE_FINAL_MAZE</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Palette
+;============================================================================
+</div><div class="equs"><div class="n">PALETTE_EOLIS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PALETTE_OUTSIDE</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">PALETTE_TOWER</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">PALETTE_BRANCH</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">PALETTE_LEFT_TRUNK</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">PALETTE_MIST</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">PALETTE_SUFFER</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">PALETTE_DARTMOOR</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">PALETTE_FRATERNAL</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">PALETTE_KING_GRIEVES_ROOM</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">PALETTE_EVIL_FORTRESS</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">PALETTE_START_SCREEN</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">PALETTTE_KINGS_ROOM</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">PALETTE_TEMPLE</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">PALETTE_HOSPITAL</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">PALETTE_TAVERN</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">PALETTE_TOOL_SHOP</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">PALETTE_KEY_SHOP</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">PALETTE_HOUSE</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">PALETTE_MEAT_SHOP</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">PALETTE_MARTIAL_ARTS</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">PALETTE_MAGIC_SHOP</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">PALETTE_TOWN</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PlayerFlags
+;============================================================================
+</div><div class="equs"><div class="n">PLAYER_FLAGS_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PLAYER_JUMPING</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">PLAYER_UNKNOWN1</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">PLAYER_UNKNOWN2</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">PLAYER_CAN_CLIMB</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">PLAYER_UNKNOWN3</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">PLAYER_WALKING</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">PLAYER_FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">PLAYER_ATTACKING</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">PLAYER_CLEAR_FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$bf</div>
+
+<div class="n">PLAYER_CLEAR_WALKING</div> <div class="i">EQU</div> <div class="v">$df</div>
+
+<div class="n">PLAYER_CLEAR_BIT_5</div> <div class="i">EQU</div> <div class="v">$ef</div>
+
+<div class="n">PLAYER_CLEAR_CAN_CLIMB</div> <div class="i">EQU</div> <div class="v">$f7</div>
+
+<div class="n">PLAYER_FLAGS_ALL</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PlayerStatusFlags
+;============================================================================
+</div><div class="equs"><div class="n">PLAYER_STATUS_ATTACKING</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">PLAYER_STATUS_KNOCKBACK</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">PLAYER_STATUS_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PlayerTitle
+;============================================================================
+</div><div class="equs"><div class="n">RANK_NOVICE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">RANK_ASPIRANT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">RANK_BATTLER</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">RANK_FIGHTER</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">RANK_ADEPT</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">RANK_CHEVALIER</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">RANK_VETERAN</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">RANK_WARRIOR</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">RANK_SWORDMAN</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">RANK_HERO</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">RANK_SOLDIER</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">RANK_MYRMIDON</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">RANK_CHAMPION</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">RANK_SUPERHERO</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">RANK_PALADIN</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">RANK_LORD</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PPUCtrlFlags
+;============================================================================
+</div><div class="equs"><div class="n">PPUCTRL_NAMETABLE_2000</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PPUCTRL_NAMETABLE_2400</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">PPUCTRL_NAMETABLE_2800</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">PPUCTRL_NAMETABLE_2C00</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">PPUCTRL_VRAM_INC_ADD32_DOWN</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">PPUCTRL_SPRITE_PATTERN_1000</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">PPUCTRL_BGTABLE_ADDR_1000</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">PPUCTRL_SPRITE_SIZE_8x16</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">PPUCTRL_PPU_OUTPUT_COLOR_ON_EXT</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">PPUCTRL_VBLANK_DISABLE</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+<div class="n">PPUCTRL_VBLANK_ENABLE</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">PPUCTRL_VRAM_INC_ADD1_ACROSS</div> <div class="i">EQU</div> <div class="v">$fb</div>
+
+<div class="n">PPUCTRL_CLEAR_NAMETABLE_2400</div> <div class="i">EQU</div> <div class="v">$fe</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PPUMaskFlags
+;============================================================================
+</div><div class="equs"><div class="n">PPUMASK_CLEAR</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PPUMASK_GREYSCALE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">PPUMASK_SHOW_BG_LEFTMOST_8</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">PPUMASK_SHOW_SPRITES_LEFTMOST_8</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">PPUMASK_ENABLE_BG</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">PPUMASK_ENABLE_SPRITES</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">PPUMASK_EMPHASIZE_RED</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">PPUMASK_EMPHASIZE_GREEN</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">PPUMASK_EMPHASIZE_BLUE</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">PPUMASK_CLEAR_GREYSCALE</div> <div class="i">EQU</div> <div class="v">$fe</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; PPUStatusFlags
+;============================================================================
+</div><div class="equs"><div class="n">PPUSTATUS_SPRITE_OVERFLOW</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">PPUSTATUS_SPRITE_0_HIT</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">PPUSTATUS_VBLANK</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Quests
+;============================================================================
+</div><div class="equs"><div class="n">QUEST_NONE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">QUEST_SPRING_OF_TRUNK</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">QUEST_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">QUEST_SOMETHING_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">QUEST_MATTOCK</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">QUEST_MASCON_OPENED</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ROMBank
+;============================================================================
+</div><div class="equs"><div class="n">BANK_0</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">BANK_1_SPRITES</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">BANK_2_SPRITES</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">BANK_3_LEVEL_DATA</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">BANK_5_AUDIO_LOGIC</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">BANK_6</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">BANK_7_PRG</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">BANK_8_PRG</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">BANK_9_UNUSED</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">BANK_10_CHRRAM</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">BANK_11_SPRITEINFO_PALETTES</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">BANK_12_LOGIC</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">BANK_13_STRINGS</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">BANK_14_LOGIC</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">BANK_15_LOGIC</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ScreenEventID
+;============================================================================
+</div><div class="equs"><div class="n">SCREEN_EVENT_PATH_TO_MASCON</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SCREEN_EVENT_BOSS</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SCREEN_EVENT_FINAL_BOSS</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SCREEN_EVENT_UNSET</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ScreenExtraInfo
+;============================================================================
+</div><div class="equs"><div class="n">SCREEN_HAS_SPECIAL_EVENT</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ScreenScrollDirection
+;============================================================================
+</div><div class="equs"><div class="n">SCREEN_SCROLL_LEFT</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SCREEN_SCROLL_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SCREEN_SCROLL_UP</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SCREEN_SCROLL_DOWN</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SCREEN_SCROLL_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SelectedMagic
+;============================================================================
+</div><div class="equs"><div class="n">SELECTEDMAGIC_DELUGE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SELECTEDMAGIC_THUNDER</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SELECTEDMAGIC_FIRE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SELECTEDMAGIC_DEATH</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SELECTEDMAGIC_TILTE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SELECTEDMAGIC_THUNDER_EXPLOSION</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SELECTEDMAGIC_FIRE_EXPLOSION</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">SELECTEDMAGIC_TILTE_EXPLOSION</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">SELECTEDMAGIC_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ShieldInventory
+;============================================================================
+</div><div class="equs"><div class="n">SHIELDINVENTORY_SMALL</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SHIELDINVENTORY_LARGE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SHIELDINVENTORY_MAGIC</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SHIELDINVENTORY_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SHIELDINVENTORY_UNSET</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ShopItem
+;============================================================================
+</div><div class="equs"><div class="n">SHOP_ITEM_HAND_DAGGER</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SHOP_ITEM_LONG_SWORD</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SHOP_ITEM_GIANT_BLADE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SHOP_ITEM_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SHOP_ITEM_LEATHER_ARMOR</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">SHOP_ITEM_STUDDEDMAIL</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">SHOP_ITEM_FULL_PLATE</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">SHOP_ITEM_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">SHOP_ITEM_SMALL_SHIELD</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">SHOP_ITEM_LARGE_SHIELD</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">SHOP_ITEM_MAGIC_SHIELD</div> <div class="i">EQU</div> <div class="v">$42</div>
+
+<div class="n">SHOP_ITEM_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$43</div>
+
+<div class="n">SHOP_ITEM_DELUGE</div> <div class="i">EQU</div> <div class="v">$60</div>
+
+<div class="n">SHOP_ITEM_THUNDER</div> <div class="i">EQU</div> <div class="v">$61</div>
+
+<div class="n">SHOP_ITEM_FIRE</div> <div class="i">EQU</div> <div class="v">$62</div>
+
+<div class="n">SHOP_ITEM_DEATH</div> <div class="i">EQU</div> <div class="v">$63</div>
+
+<div class="n">SHOP_ITEM_TILTE</div> <div class="i">EQU</div> <div class="v">$64</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SoundChannels
+;============================================================================
+</div><div class="equs"><div class="n">SNDCHN_PULSE_1</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SNDCHN_PULSE_2</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SNDCHN_TRIANGLE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SNDCHAN_NOISE</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">SNDCHN_DMC</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SoundID
+;============================================================================
+</div><div class="equs"><div class="n">SOUND_MESSAGE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SOUND_HIT_ENEMY</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SOUND_ENEMY_DEAD</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SOUND_PLAYER_HIT</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SOUND_MAGIC</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">SOUND_OPEN_DOOR</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SOUND_TYPING</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">SOUND_ITEM_PICK_UP</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">SOUND_TOUCH_COIN</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">SOUND_MAGIC_HIT_OBSTACLE</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">SOUND_MAYBE_MOVE_CURSOR</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">SOUND_0x0C</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">SOUND_INPUT</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">SOUND_MAYBE_ENTER_PASSWORD_CHAR</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">SOUND_PUSHING</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">SOUND_MAYBE_DROP_COIN</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">SOUND_FILL_HP_OR_MANA</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">SOUND_TILTE_MAGIC</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">SOUND_MAYBE_STEP_SOUND</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">SOUND_PLAYER_DEATH</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">SOUND_MAYBE_PATH_TO_MASCON_OPENED</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">SOUND_0x18</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">SOUND_MAYBE_GOLD_CHANGE</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">SOUND_USE_SPECIAL_ITEM_2</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">SOUND_TOUCH_BREAD</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">SOUND_MAX_IDS</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpecialItemsBits
+;============================================================================
+</div><div class="equs"><div class="n">BIT_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">BIT_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">BIT_PENDANT</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">BIT_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">BIT_ELIXIR</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">BIT_DEMONS_RING</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">BIT_RING_OF_DWORF</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">BIT_RING_OF_RUBY</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">BIT_RING_OF_ELF</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">BIT_CLEAR_ELIXIR</div> <div class="i">EQU</div> <div class="v">$f7</div>
+
+<div class="n">BIT_ALL</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteCategory
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_ENEMY</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_DROPPED</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_NPC</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_EFFECT</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_TRIGGER</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_ITEM</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">SPRITE_MAGIC</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SPRITE_BOSS</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteEntity
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_DROPPED_BREAD</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_DROPPED_COIN</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_GARBLED_03</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_ENEMY_RAIDEN</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_ENEMY_NECRON_AIDES</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">SPRITE_ENEMY_ZOMBIE</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SPRITE_ENEMY_HORNET</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">SPRITE_ENEMY_BIHORUDA</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">SPRITE_ENEMY_LILITH</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">SPRITE_MAGIC_GARBLED_10</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">SPRITE_ENEMY_YUINARU</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">SPRITE_ENEMY_SNOWMAN</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">SPRITE_ENEMY_NASH</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">SPRITE_ENEMY_FIRE_GIANT</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">SPRITE_ENEMY_ISHIISU</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">SPRITE_ENEMY_EXECUTION_HOOD</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">SPRITE_BOSS_ROKUSUTAHN</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">SPRITE_BOSS_UNUSED_18</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">SPRITE_EFFECT_ENEMY_DEATH</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">SPRITE_EFFECT_LIGHTNING_BALL_20</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">SPRITE_ENEMY_CHARRON</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_22</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">SPRITE_ENEMY_GERIBUTA</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">SPRITE_ENEMY_SUGATA</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">SPRITE_ENEMY_GRIMLOCK</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">SPRITE_ENEMY_GIANT_BEES</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">SPRITE_ENEMY_MYCONID</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">SPRITE_ENEMY_NAGA</div> <div class="i">EQU</div> <div class="v">$1c</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_29</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+<div class="n">SPRITE_ENEMY_GIANT_STRIDER</div> <div class="i">EQU</div> <div class="v">$1e</div>
+
+<div class="n">SPRITE_ENEMY_SIR_GAWAINE</div> <div class="i">EQU</div> <div class="v">$1f</div>
+
+<div class="n">SPRITE_ENEMY_MASKMAN</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">SPRITE_ENEMY_WOLFMAN</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">SPRITE_ENEMY_YAREEKA</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">SPRITE_ENEMY_MAGMAN</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_36</div> <div class="i">EQU</div> <div class="v">$24</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_37</div> <div class="i">EQU</div> <div class="v">$25</div>
+
+<div class="n">SPRITE_ENEMY_IKEDA</div> <div class="i">EQU</div> <div class="v">$26</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_39</div> <div class="i">EQU</div> <div class="v">$27</div>
+
+<div class="n">SPRITE_ENEMY_LAMPREY</div> <div class="i">EQU</div> <div class="v">$28</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_41</div> <div class="i">EQU</div> <div class="v">$29</div>
+
+<div class="n">SPRITE_ENEMY_MONODRON</div> <div class="i">EQU</div> <div class="v">$2a</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_43</div> <div class="i">EQU</div> <div class="v">$2b</div>
+
+<div class="n">SPRITE_ENEMY_TAMAZUTSU</div> <div class="i">EQU</div> <div class="v">$2c</div>
+
+<div class="n">SPRITE_BOSS_RIPASHEIKU</div> <div class="i">EQU</div> <div class="v">$2d</div>
+
+<div class="n">SPRITE_BOSS_ZORADOHNA</div> <div class="i">EQU</div> <div class="v">$2e</div>
+
+<div class="n">SPRITE_BOSS_BORABOHRA</div> <div class="i">EQU</div> <div class="v">$2f</div>
+
+<div class="n">SPRITE_BOSS_PAKUKAME</div> <div class="i">EQU</div> <div class="v">$30</div>
+
+<div class="n">SPRITE_BOSS_ZORUGERIRU</div> <div class="i">EQU</div> <div class="v">$31</div>
+
+<div class="n">SPRITE_BOSS_KING_GRIEVE</div> <div class="i">EQU</div> <div class="v">$32</div>
+
+<div class="n">SPRITE_BOSS_SHADOW_EURA</div> <div class="i">EQU</div> <div class="v">$33</div>
+
+<div class="n">SPRITE_NPC_WALKING_MAN_1</div> <div class="i">EQU</div> <div class="v">$34</div>
+
+<div class="n">SPRITE_NPC_UNUSED_BLUE_LADY</div> <div class="i">EQU</div> <div class="v">$35</div>
+
+<div class="n">SPRITE_NPC_UNUSED_CHILD</div> <div class="i">EQU</div> <div class="v">$36</div>
+
+<div class="n">SPRITE_NPC_ARMOR_SALESMAN</div> <div class="i">EQU</div> <div class="v">$37</div>
+
+<div class="n">SPRITE_NPC_MARTIAL_ARTS</div> <div class="i">EQU</div> <div class="v">$38</div>
+
+<div class="n">SPRITE_NPC_PRIEST</div> <div class="i">EQU</div> <div class="v">$39</div>
+
+<div class="n">SPRITE_NPC_KING</div> <div class="i">EQU</div> <div class="v">$3a</div>
+
+<div class="n">SPRITE_NPC_MAGIC_TEACHER</div> <div class="i">EQU</div> <div class="v">$3b</div>
+
+<div class="n">SPRITE_NPC_KEY_SALESMAN</div> <div class="i">EQU</div> <div class="v">$3c</div>
+
+<div class="n">SPRITE_NPC_SMOKING_MAN</div> <div class="i">EQU</div> <div class="v">$3d</div>
+
+<div class="n">SPRITE_NPC_MAN_IN_CHAIR</div> <div class="i">EQU</div> <div class="v">$3e</div>
+
+<div class="n">SPRITE_NPC_SITTING_MAN_1</div> <div class="i">EQU</div> <div class="v">$3f</div>
+
+<div class="n">SPRITE_NPC_MEAT_SALESMAN</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">SPRITE_NPC_LADY_BLUE_DRESS_WITH_CUP</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">SPRITE_NPC_GUARD_1</div> <div class="i">EQU</div> <div class="v">$42</div>
+
+<div class="n">SPRITE_NPC_DOCTOR</div> <div class="i">EQU</div> <div class="v">$43</div>
+
+<div class="n">SPRITE_NPC_WALKING_WOMAN_1</div> <div class="i">EQU</div> <div class="v">$44</div>
+
+<div class="n">SPRITE_NPC_WALKING_WOMAN_2</div> <div class="i">EQU</div> <div class="v">$45</div>
+
+<div class="n">SPRITE_ENEMY_UNUSED_EYEBALL</div> <div class="i">EQU</div> <div class="v">$46</div>
+
+<div class="n">SPRITE_ENEMY_ZOZURA</div> <div class="i">EQU</div> <div class="v">$47</div>
+
+<div class="n">SPRITE_OBJ_GLOVE_2</div> <div class="i">EQU</div> <div class="v">$48</div>
+
+<div class="n">SPRITE_OBJ_BLACK_ONYX</div> <div class="i">EQU</div> <div class="v">$49</div>
+
+<div class="n">SPRITE_OBJ_PENDANT</div> <div class="i">EQU</div> <div class="v">$4a</div>
+
+<div class="n">SPRITE_OBJ_RED_POTION_2</div> <div class="i">EQU</div> <div class="v">$4b</div>
+
+<div class="n">SPRITE_OBJ_POISON_2</div> <div class="i">EQU</div> <div class="v">$4c</div>
+
+<div class="n">SPRITE_OBJ_ELIXIR</div> <div class="i">EQU</div> <div class="v">$4d</div>
+
+<div class="n">SPRITE_OBJ_OINTMENT_2</div> <div class="i">EQU</div> <div class="v">$4e</div>
+
+<div class="n">SPRITE_TRIGGER_INTRO</div> <div class="i">EQU</div> <div class="v">$4f</div>
+
+<div class="n">SPRITE_OBJ_MATTOCK1</div> <div class="i">EQU</div> <div class="v">$50</div>
+
+<div class="n">SPRITE_MAGIC_GARBLED_81</div> <div class="i">EQU</div> <div class="v">$51</div>
+
+<div class="n">SPRITE_EFFECT_FOUNTAIN</div> <div class="i">EQU</div> <div class="v">$52</div>
+
+<div class="n">SPRITE_MAGIC_83</div> <div class="i">EQU</div> <div class="v">$53</div>
+
+<div class="n">SPRITE_MAGIC_84</div> <div class="i">EQU</div> <div class="v">$54</div>
+
+<div class="n">SPRITE_OBJ_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$55</div>
+
+<div class="n">SPRITE_OBJ_HOUR_GLASS</div> <div class="i">EQU</div> <div class="v">$56</div>
+
+<div class="n">SPRITE_OBJ_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$57</div>
+
+<div class="n">SPRITE_OBJ_BATTLE_SUIT</div> <div class="i">EQU</div> <div class="v">$58</div>
+
+<div class="n">SPRITE_OBJ_BATTLE_HELMET</div> <div class="i">EQU</div> <div class="v">$59</div>
+
+<div class="n">SPRITE_OBJ_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$5a</div>
+
+<div class="n">SPRITE_OBJ_MATTOCK2</div> <div class="i">EQU</div> <div class="v">$5b</div>
+
+<div class="n">SPRITE_OBJ_WING_BOOTS_QUEST</div> <div class="i">EQU</div> <div class="v">$5c</div>
+
+<div class="n">SPRITE_OBJ_RED_POTION</div> <div class="i">EQU</div> <div class="v">$5d</div>
+
+<div class="n">SPRITE_OBJ_POISON</div> <div class="i">EQU</div> <div class="v">$5e</div>
+
+<div class="n">SPRITE_OBJ_GLOVE</div> <div class="i">EQU</div> <div class="v">$5f</div>
+
+<div class="n">SPRITE_OBJ_OINTMENT</div> <div class="i">EQU</div> <div class="v">$60</div>
+
+<div class="n">SPRITE_EFFECT_97</div> <div class="i">EQU</div> <div class="v">$61</div>
+
+<div class="n">SPRITE_EFFECT_98</div> <div class="i">EQU</div> <div class="v">$62</div>
+
+<div class="n">SPRITE_EFFECT_99</div> <div class="i">EQU</div> <div class="v">$63</div>
+
+<div class="n">SPRITE_EFFECT_BOSS_DEATH</div> <div class="i">EQU</div> <div class="v">$64</div>
+
+<div class="n">SPRITE_OBJ_UNSET</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteFlags
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_FLAGS_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_FLAGS_MOVE_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_FLAGS_UNKNOWN_2</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_FLAGS_MAYBE_MOVE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_FLAGS_UNKNOWN_3</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">SPRITE_FLAGS_MAYBE_HIDDEN</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">SPRITE_FLAGS_UNKNOWN_5</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">SPRITE_FLAGS_BEHAVIOR_READY</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_FALLING</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+<div class="n">SPRITE_FLAGS_FALLING</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_BEHAVIOR_READY</div> <div class="i">EQU</div> <div class="v">$bf</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_MAYBE_HIDDEN</div> <div class="i">EQU</div> <div class="v">$ef</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_MAYBE_MOVE</div> <div class="i">EQU</div> <div class="v">$fb</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_UNKNOWN_2</div> <div class="i">EQU</div> <div class="v">$fd</div>
+
+<div class="n">SPRITE_FLAGS_CLEAR_MOVE_RIGHT</div> <div class="i">EQU</div> <div class="v">$fe</div>
+
+<div class="n">New_Name</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteHitboxTypes
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_HITBOX_0</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_HITBOX_1</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_HITBOX_2</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_HITBOX_3</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_HITBOX_4</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteSubtype
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_SUBTYPE_CLEAR_BIT_7</div> <div class="i">EQU</div> <div class="v">$7f</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Temple
+;============================================================================
+</div><div class="equs"><div class="n">TEMPLE_EOLIS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">TEMPLE_APOLUNE</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">TEMPLE_FOREPAW</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">TEMPLE_MASCON</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">TEMPLE_VICTIM</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">TEMPLE_CONFLATE</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">TEMPLE_DAYBREAK</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">TEMPLE_FINAL</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; WeaponInventory
+;============================================================================
+</div><div class="equs"><div class="n">WEAPONINVENTORY_HAND_DAGGER</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">WEAPONINVENTORY_LONG_SWORD</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">WEAPONINVENTORY_GIANT_BLADE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">WEAPONINVENTORY_DRAGON_SLAYER</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">WEAPONINVENTORY_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div></pre>
+ </body>
+</html>

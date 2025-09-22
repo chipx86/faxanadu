@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+  <title>PPU - Faxanadu (U).nes</title>
+  <style>
+
+body {
+  background: #1c212d;
+  color: white;
+  font-family: Roboto Mono;
+  font-size: 9.5pt;
+  padding: 0.5em;
+}
+
+a:link,
+a:visited {
+  color: #9bdeff;
+}
+
+pre {
+  display: grid;
+  grid-template-columns: minmax(70ch, max-content) 1fr;
+  gap: 0 4ch;
+  margin: 0;
+  padding: 0;
+}
+
+.equs {
+  display: grid;
+  grid-template-columns: minmax(50ch, max-content) min-content auto;
+  gap: 0 1ch;
+}
+
+.l {
+    min-height: 1lh;
+}
+
+.l {
+  display: grid;
+  grid-template-columns: subgrid;
+}
+
+.c,
+.cp,
+.equs,
+.l {
+  grid-column: 1 / -1;
+}
+
+.cp {
+  color: #6fafb5;
+}
+
+.c, .ce {
+  color: #8aa9ac;
+}
+
+.ce {
+  text-wrap: wrap;
+  text-indent: 2ch hanging;
+}
+
+.lla {
+  margin-left: 2ch;
+}
+
+.la,
+.lla {
+  font-weight: bold;
+}
+
+.la {
+  color: #e8e801;
+}
+
+.lla {
+  color: #caca00;
+}
+
+.i {
+  color: #f26969;
+  display: inline-block;
+  margin-left: 4ch;
+  min-width: 3ch;
+}
+
+.o {
+  color: #e3e3e3;
+  margin-left: 1ch;
+}
+
+  </style>
+ </head>
+ <body>
+  <pre>
+<div class="cp">;============================================================================
+; Faxanadu (U).nes
+;
+; PPU ($2000 - $2007)
+;============================================================================
+</div><span class="l"></span>
+<span class="l">BASE $2000</span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
+;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
+;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
+;     <a href="PRG15_MIRROR.html#PPU_InitVBlank">PPU_InitVBlank</a>
+;     <a href="PRG15_MIRROR.html#PPU_SetVRAMIncrementAdd1Across">PPU_SetVRAMIncrementAdd1Across</a>
+;
+</div><span class="l"><a name="PPUCTRL" class="la">PPUCTRL:</a><span class="ce">; [$2000]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2000] PPUCtrlFlags</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
+;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
+;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
+;
+</div><span class="l"><a name="PPUMASK" class="la">PPUMASK:</a><span class="ce">; [$2001]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2001] PPUMaskFlags</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__cb0c">LAB_PRG15_MIRROR__cb0c</a>
+;     [$PRG15_MIRROR::cb0c]
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__cb11">LAB_PRG15_MIRROR__cb11</a>
+;     [$PRG15_MIRROR::cb11]
+;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
+;
+</div><span class="l"><a name="PPUSTATUS" class="la">PPUSTATUS:</a><span class="ce">; [$2002]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2002] PPUStatusFlags</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
+;
+</div><span class="l"><a name="OAMADDR" class="la">OAMADDR:</a><span class="ce">; [$2003]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2003] byte</span></span>
+<span class="l"></span>
+<span class="l"><a name="OAMDATA" class="la">OAMDATA:</a><span class="ce">; [$2004]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2004] byte</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
+;
+</div><span class="l"><a name="PPUSCROLL" class="la">PPUSCROLL:</a><span class="ce">; [$2005]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2005] byte</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
+;     <a href="PRG15_MIRROR.html#CHR_LoadTilesetPages">CHR_LoadTilesetPages</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_WritePalette">PPUBuffer_DrawCommand_WritePalette</a>
+;     <a href="PRG15_MIRROR.html#PPU_ClearAllTilemaps">PPU_ClearAllTilemaps</a>
+;     <a href="PRG15_MIRROR.html#PPU_LoadGlyphsForStrings">PPU_LoadGlyphsForStrings</a>
+;     <a href="PRG15_MIRROR.html#PPU_SetAddr">PPU_SetAddr</a>
+;     <a href="PRG15_MIRROR.html#PPU_WriteTilesFromCHRRAM">PPU_WriteTilesFromCHRRAM</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a>
+;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
+;
+</div><span class="l"><a name="PPUADDR" class="la">PPUADDR:</a><span class="ce">; [$2006]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2006] byte</span></span>
+<span class="l"></span>
+<div class="c">;
+; XREFS:
+;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
+;     <a href="PRG12.html#UI_DrawText">UI_DrawText</a>
+;     <a href="PRG15_MIRROR.html#CHR_LoadTilesetPages">CHR_LoadTilesetPages</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
+;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_WritePalette">PPUBuffer_DrawCommand_WritePalette</a>
+;     <a href="PRG15_MIRROR.html#PPU_FillData">PPU_FillData</a>
+;     <a href="PRG15_MIRROR.html#PPU_FillGrid">PPU_FillGrid</a>
+;     <a href="PRG15_MIRROR.html#PPU_WriteGlyphTile">PPU_WriteGlyphTile</a>
+;     <a href="PRG15_MIRROR.html#PPU_WriteTilesFromCHRRAM">PPU_WriteTilesFromCHRRAM</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a>
+;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
+;
+</div><span class="l"><a name="PPUDATA" class="la">PPUDATA:</a><span class="ce">; [$2007]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2007] byte</span></span>
+</pre>
+ </body>
+</html>
