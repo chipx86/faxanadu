@@ -380,7 +380,7 @@ SPRITE_INFO_APOLUNE_SCREEN_21:              ; [$8367]
     db $4b,$ff,$ff                          ; [$836a] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_APOLUNE_SCREEN_22:              ; [$836f]
     db SPRITE_ENEMY_MONODRON                ; [$836f] SpriteEntity
@@ -535,7 +535,7 @@ SPRITE_INFO_APOLUNE_SCREEN_40:              ; [$83f0]
     db $55,$ff,$ff                          ; [$83f1] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_PATH_TO_MASCON          ; {@symbol 042e}
+    db SCREEN_EVENT_PATH_TO_MASCON          ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_APOLUNE_SCREEN_41:              ; [$83f6]
     db SPRITE_OBJ_POISON_2                  ; [$83f6] SpriteEntity
@@ -683,7 +683,7 @@ SPRITE_INFO_APOLUNE_SCREEN_59:              ; [$846a]
     db $2c,$ff,$ff                          ; [$846d] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_APOLUNE_SCREEN_60:              ; [$8472]
     db SPRITE_OBJ_ELIXIR                    ; [$8472] SpriteEntity
@@ -1151,7 +1151,7 @@ SPRITE_INFO_FOREPAW_SCREEN_53:              ; [$867e]
     db $48,$ff,$ff                          ; [$8681] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_FOREPAW_SCREEN_54:              ; [$8686]
     db SPRITE_ENEMY_CHARRON                 ; [$8686] SpriteEntity
@@ -1340,7 +1340,7 @@ SPRITE_INFO_FOREPAW_SCREEN_77:              ; [$871c]
     db $49,$ff,$ff                          ; [$871f] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_FOREPAW_SCREEN_78:              ; [$8724]
     db SPRITE_OBJ_RED_POTION_2              ; [$8724] SpriteEntity
@@ -1625,7 +1625,7 @@ SPRITE_INFO_CONFLATE_SCREEN_29:             ; [$8850]
     db $59,$ff,$ff                          ; [$8853] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_CONFLATE_SCREEN_30:             ; [$8858]
     db SPRITE_OBJ_MAGICAL_ROD               ; [$8858] SpriteEntity
@@ -1923,7 +1923,7 @@ SPRITE_INFO_DAYBREAK_SCREEN_21:             ; [$8978]
     db $49,$ff,$ff                          ; [$897b] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT
-    db SCREEN_EVENT_BOSS                    ; {@symbol 042e}
+    db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
 SPRITE_INFO_DAYBREAK_SCREEN_22:             ; [$8980]
     db SPRITE_BOSS_KING_GRIEVE              ; [$8980] SpriteEntity

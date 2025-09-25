@@ -669,12 +669,10 @@ IScriptAction_SpendGold:                    ; [$835b]
                                             ; amount.
     STA a:Temp_0203                         ; Store it
     LDA a:Temp_0202                         ; Load the lower byte again.
-    STA Temp_Int24                          ; Store it in {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} for
+    STA Temp_Int24                          ; Store it in Temp_Int24 for
                                             ; comparison.
     LDA a:Temp_0203                         ; Lower the upper byte again.
-    STA Temp_Int24.M                        ; And store it in {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} for
+    STA Temp_Int24.M                        ; And store it in Temp_Int24 for
                                             ; comparison.
 
     ;
@@ -5833,12 +5831,9 @@ Password_EncodeValueList:                   ; [$982a]
     ;
     ; Store A, X, and Y so we can work with these variables.
     ;
-    STA a:Password_Temp3                    ; {{@SYMBOL:
-                                            ; RAM::Password_Temp3@}} = A
-    STY a:Password_Temp1                    ; {{@SYMBOL:
-                                            ; RAM::Password_Temp1@}} = Y
-    STX a:Password_Temp2                    ; {{@SYMBOL:
-                                            ; RAM::Password_Temp2@}} = X
+    STA a:Password_Temp3                    ; Password_Temp3 = A
+    STY a:Password_Temp1                    ; Password_Temp1 = Y
+    STX a:Password_Temp2                    ; Password_Temp2 = X
 
     ;
     ; Encode the number of entries as a value. Roughly:
@@ -5866,9 +5861,7 @@ Password_EncodeValueList:                   ; [$982a]
     ; Password_EncodeValue(entryList[Y], X, numBits)
     ;
     LDA (#$ee),Y                            ; A = value at bits offset
-    LDY a:Password_Temp2                    ; Y = {{@SYMBOL:
-                                            ; RAM::Password_Temp2@}} (num
-                                            ; bits)
+    LDY a:Password_Temp2                    ; Y = Password_Temp2 (num bits)
     JSR Password_EncodeValue                ; Encode this value.
 
     ;
@@ -5878,8 +5871,7 @@ Password_EncodeValueList:                   ; [$982a]
     PLA                                     ; Pop A from stack
     TAY                                     ; Y = A
     INY                                     ; Y++
-    CPY a:Password_Temp3                    ; If Y != {{@SYMBOL:
-                                            ; RAM::Password_Temp3@}} ...
+    CPY a:Password_Temp3                    ; If Y != Password_Temp3 ...
     BNE @_loop                              ; ... Loop.
     RTS
 
@@ -5968,8 +5960,8 @@ Password_Maybe_CheckPasswordLength:         ; [$9850]
 ;     Password_Maybe_CheckPasswordLength
 ;============================================================================
 Password_EncodeValue:                       ; [$98a7]
-    STA Temp_Int24                          ; Temp_Int24 =
-                                            ; A (character code value)
+    STA Temp_Int24                          ; Temp_Int24 = A (character code
+                                            ; value)
     TXA                                     ; A = X (character code offset)
     PHA                                     ; Push A to stack, saving it.
 
@@ -6013,8 +6005,8 @@ Password_EncodeValue:                       ; [$98a7]
     ; encoding (for example) will be 8 - 6 = 2.
     ;
   @_loop1:                                  ; [$98b6]
-    ASL Temp_Int24                          ; Temp_Int24
-                                            ; *= 2 If overflow, C = 1
+    ASL Temp_Int24                          ; Temp_Int24 *= 2 If overflow, C
+                                            ; = 1
     DEC Temp_Int24.M                        ; 0xed--
     BNE @_loop1                             ; If 0xed != 0, loop.
 
@@ -6029,9 +6021,8 @@ Password_EncodeValue:                       ; [$98a7]
     ; Advance our source bit position, multipying by 2 and
     ; OR'ing the carry flag from above.
     ;
-    ROL Temp_Int24                          ; Temp_Int24 =
-                                            ; Temp_Int24 *
-                                            ; 2 | C If overflow, C = 1
+    ROL Temp_Int24                          ; Temp_Int24 = Temp_Int24 * 2 | C
+                                            ; If overflow, C = 1
 
     ;
     ; Store a new computed value at the dest offset (X, or
@@ -6048,10 +6039,8 @@ Password_EncodeValue:                       ; [$98a7]
     ; If we're at the end of the byte, jump to advance
     ; the destination byte position and reset the bit counter.
     ;
-    INC a:Password_BitCounter               ; {{@SYMBOL:
-                                            ; RAM::Password_BitCounter@}}++
-    LDX a:Password_BitCounter               ; X = {{@SYMBOL:
-                                            ; RAM::Password_BitCounter@}}
+    INC a:Password_BitCounter               ; Password_BitCounter++
+    LDX a:Password_BitCounter               ; X = Password_BitCounter
     CPX #$08                                ; If X != 8...
     BNE @_nextLoop                          ; ... Jump
 
@@ -6069,9 +6058,8 @@ Password_EncodeValue:                       ; [$98a7]
     ; The checksum is the sum of the character values computed.
     ;
     CLC                                     ; C = 0
-    ADC a:Password_Checksum                 ; {{@SYMBOL:
-                                            ; RAM::Password_Checksum@}} += A
-                                            ; (dest value) If overflow, C = 1
+    ADC a:Password_Checksum                 ; Password_Checksum += A (dest
+                                            ; value) If overflow, C = 1
     STA a:Password_Checksum
 
     ;
@@ -7667,7 +7655,8 @@ ISCRIPT_ADDRS_u_31_:                        ; [$a022]
 ;
 ISCRIPT_REMEMBER_YOUR_MANTRA:               ; [$a09b]
     db ISCRIPT_ENTITY_GENERIC               ; Show a generic text box.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::87a5}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_REMEMBER_YOUR_M
+                                               ; ANTRA.
     db MESSAGEID_REMEMBER_YOUR_MANTRA       ; [$a09d] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7704,7 +7693,7 @@ ISCRIPT_REMEMBER_YOUR_MANTRA:               ; [$a09b]
 ;
 ISCRIPT_INTRO:                              ; [$a09f]
     db ISCRIPT_ENTITY_GENERIC               ; Show a generic textbox.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::87fb}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_INTRO.
     db MESSAGEID_INTRO                      ; [$a0a1] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7726,14 +7715,13 @@ ISCRIPT_EOLIS_WALKING_MAN_1:                ; [$a0a3]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0aa                                ; If yes, then jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::88ad}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_GO_SEE_KING.
     db MESSAGEID_GO_SEE_KING                ; [$a0a8] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_NPC_FIRST_WALKING_MAN_GO_TO_APOLUNE: ; [$a0aa]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol
-                                            ; MESSAGE_DIRECTIONS_APOLUNE}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DIRECTIONS_APOLUNE.
     db MESSAGEID_DIRECTIONS_APOLUNE         ; [$a0ab] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7748,7 +7736,7 @@ ISCRIPT_EOLIS_WALKING_MAN_1:                ; [$a0a3]
 ;
 ISCRIPT_MARK_OF_JACK:                       ; [$a0ad]
     db ISCRIPT_ENTITY_GENERIC               ; Show a generic textbox.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8926}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_MARK_OF_JACK.
     db MESSAGEID_MARK_OF_JACK               ; [$a0af] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7767,12 +7755,12 @@ ISCRIPT_EOLIS_WALKING_WOMAN_1:              ; [$a0b1]
                                             ; Ring of Elf.
     db SPECIAL_RING_OF_ELF                  ; [$a0b3] InventoryItem
     dw $a0b9                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8951}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_THIS_IS_EOLIS.
     db MESSAGEID_THIS_IS_EOLIS              ; [$a0b7] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A081_HAS_RING:                  ; [$a0b9]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::89e2}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_LOOK_FOR_RINGS.
     db MESSAGEID_LOOK_FOR_RINGS             ; [$a0ba] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7798,8 +7786,8 @@ ISCRIPT_EOLIS_GURU:                         ; [$a0bc]
                                             ; Ring of Elf.
     db SPECIAL_RING_OF_ELF                  ; [$a0be] InventoryItem
     dw $a0c6                                ; If yes, then jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::8a27}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
+                                               ; MESSAGE_TAKE_RING_TO_KING.
     db MESSAGEID_TAKE_RING_TO_KING          ; [$a0c2] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the Ring of Elf to the
                                             ; inventory.
@@ -7807,7 +7795,8 @@ ISCRIPT_EOLIS_GURU:                         ; [$a0bc]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_GURU_EOLIS_HAS_RING:            ; [$a0c6]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8a83}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_VISIT_GURUS_GET_TITLE.
     db MESSAGEID_VISIT_GURUS_GET_TITLE      ; [$a0c7] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7825,13 +7814,13 @@ ISCRIPT_EOLIS_WALKING_WOMAN_2:              ; [$a0c9]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0d0                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8ad1}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_LAST_WELL_ALMOST_DRY.
     db MESSAGEID_LAST_WELL_ALMOST_DRY       ; [$a0ce] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A0C9_HAS_GOLD:                  ; [$a0d0]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8aed}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_THIS_IS_FOREPAW.
     db MESSAGEID_THIS_IS_FOREPAW            ; [$a0d1] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7855,13 +7844,14 @@ ISCRIPT_EOLIS_SMOKING_MAN:                  ; [$a0d3]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0da                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8b19}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DWARVES_ARE_HERE.
     db MESSAGEID_DWARVES_ARE_HERE           ; [$a0d8] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_NPC_SMOKING_MAN_HAS_GOLD:       ; [$a0da]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8b57}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_HAVE_WEAPON.
     db MESSAGEID_DO_YOU_HAVE_WEAPON         ; [$a0db] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7889,8 +7879,8 @@ ISCRIPT_EOLIS_KINGS_GUARD:                  ; [$a0dd]
                                             ; Ring of Elf.
     db SPECIAL_RING_OF_ELF                  ; [$a0df] InventoryItem
     dw $a0e5                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8b7a}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_CANT_LET_YOU_GO.
     db MESSAGEID_CANT_LET_YOU_GO            ; [$a0e3] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7898,13 +7888,13 @@ ISCRIPT_EOLIS_KINGS_GUARD:                  ; [$a0dd]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0eb                                ; If yes, then jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8b8e}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_KING_IS_WAITING.
     db MESSAGEID_KING_IS_WAITING            ; [$a0e9] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_KINGS_GUARD_HAS_GOLD:           ; [$a0eb]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8bab}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_GOOD_LUCK.
     db MESSAGEID_GOOD_LUCK                  ; [$a0ec] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7922,13 +7912,14 @@ ISCRIPT_A0EE:                               ; [$a0ee]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0f5                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8d35}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DWARVES_ROBBING_ELVES.
     db MESSAGEID_DWARVES_ROBBING_ELVES      ; [$a0f3] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A0EE_HAS_GOLD:                  ; [$a0f5]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8d69}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_METEORITE_EXPOSITION.
     db MESSAGEID_METEORITE_EXPOSITION       ; [$a0f6] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7946,13 +7937,14 @@ ISCRIPT_A0F8:                               ; [$a0f8]
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has any
                                             ; gold.
     dw $a0ff                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8e13}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_LISTEN_TO_PEOPLE.
     db MESSAGEID_LISTEN_TO_PEOPLE           ; [$a0fd] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A0F8_HAS_GOLD:                  ; [$a0ff]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8e58}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DONT_TRY_TOO_HARD_2.
     db MESSAGEID_DONT_TRY_TOO_HARD_2        ; [$a100] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -7970,8 +7962,8 @@ ISCRIPT_A0F8:                               ; [$a0f8]
 ISCRIPT_EOLIS_MARTIAL_ARTIST:               ; [$a102]
     db ISCRIPT_ENTITY_MARTIAL_ARTIST        ; Show a Martial Artist portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::8646}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_MARTIAL_ARTS_200G.
     db MESSAGEID_MARTIAL_ARTS_200G          ; [$a104] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 200G.
     dw $00c8                                ; [$a106] ushort
@@ -7996,13 +7988,14 @@ ISCRIPT_A10B:                               ; [$a10b]
                                             ; Small Shield.
     db SHIELD_SMALL                         ; [$a10d] InventoryItem
     dw $a113                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8e6c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_APOLUNE.
     db MESSAGEID_WELCOME_TO_APOLUNE         ; [$a111] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A10B_HAS_SMALL_SHIELD:          ; [$a113]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8e8c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DIRECTIONS_FOREPAW.
     db MESSAGEID_DIRECTIONS_FOREPAW         ; [$a114] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8021,13 +8014,13 @@ ISCRIPT_A116:                               ; [$a116]
                                             ; Small Shield.
     db SHIELD_SMALL                         ; [$a118] InventoryItem
     dw $a11e                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8eb7}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DIRECTIONS_TO_TRUNK.
     db MESSAGEID_DIRECTIONS_TO_TRUNK        ; [$a11c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A116_HAS_SMALL_SHIELD:          ; [$a11e]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8f37}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_GOOD_LUCK_2.
     db MESSAGEID_GOOD_LUCK_2                ; [$a11f] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8046,13 +8039,13 @@ ISCRIPT_A121:                               ; [$a121]
                                             ; Small Shield.
     db SHIELD_SMALL                         ; [$a123] InventoryItem
     dw $a129                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8f42}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_SHOULD_HAVE_SHIELD.
     db MESSAGEID_SHOULD_HAVE_SHIELD         ; [$a127] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A121_HAS_SMALL_SHIELD:          ; [$a129]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8f81}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_MATTOCK_IN_TOWER.
     db MESSAGEID_MATTOCK_IN_TOWER           ; [$a12a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8071,13 +8064,14 @@ ISCRIPT_A12C:                               ; [$a12c]
                                             ; Small Shield.
     db SHIELD_SMALL                         ; [$a12e] InventoryItem
     dw $a134                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::8fc9}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_BLOCKED_PASSAGE.
     db MESSAGEID_BLOCKED_PASSAGE            ; [$a132] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A12C_HAS_SMALL_SHIELD:          ; [$a134]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9021}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_MATTOCK_BREAKS_WALL.
     db MESSAGEID_MATTOCK_BREAKS_WALL        ; [$a135] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8092,7 +8086,7 @@ ISCRIPT_A12C:                               ; [$a12c]
 ;
 ISCRIPT_A137:                               ; [$a137]
     db ISCRIPT_ENTITY_GENERIC               ; Show a generic text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::906c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_YOU_NEED_KEY.
     db MESSAGEID_YOU_NEED_KEY               ; [$a139] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8111,12 +8105,12 @@ ISCRIPT_A13B:                               ; [$a13b]
                                             ; Small Shield.
     db SHIELD_SMALL                         ; [$a13d] InventoryItem
     dw $a143                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9096}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DOCTOR_CAN_HELP.
     db MESSAGEID_DOCTOR_CAN_HELP            ; [$a141] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A13B_HAS_SMALL_SHIELD:          ; [$a143]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::90b9}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_POISON_IS_BAD.
     db MESSAGEID_POISON_IS_BAD              ; [$a144] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8135,13 +8129,14 @@ ISCRIPT_A146:                               ; [$a146]
                                             ; Aspirant yet.
     db RANK_ASPIRANT                        ; [$a148] PlayerTitle
     dw $a14e                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9100}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_LEARN_MANTRAS.
     db MESSAGEID_LEARN_MANTRAS              ; [$a14c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A146_HAS_ASPIRANT:              ; [$a14e]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9162}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_SECRET_GURU_IN_TOWER.
     db MESSAGEID_SECRET_GURU_IN_TOWER       ; [$a14f] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8156,7 +8151,7 @@ ISCRIPT_A146:                               ; [$a146]
 ;
 ISCRIPT_A151:                               ; [$a151]
     db ISCRIPT_ENTITY_GENERIC               ; Show a generic text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::91c7}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_CARRY_ITEMS.
     db MESSAGEID_CARRY_ITEMS                ; [$a153] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8191,13 +8186,14 @@ ISCRIPT_FOREPAW_GREETER:                    ; [$a157]
                                             ; quest.
     db QUEST_SPRING_OF_TRUNK                ; [$a159] Quests
     dw $a15f                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9203}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_FOREPAW.
     db MESSAGEID_WELCOME_TO_FOREPAW         ; [$a15d] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_FOREPAW_GREETER_SPRING_OF_TRUNK_COMPLETE: ; [$a15f]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::921f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_FOUNTAIN_WILL_FLOW
+                                            ; _TO_TOWN.
     db MESSAGEID_FOUNTAIN_WILL_FLOW_TO_TOWN ; [$a160] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8216,13 +8212,13 @@ ISCRIPT_A162:                               ; [$a162]
                                             ; Ring of Ruby.
     db SPECIAL_RING_OF_RUBY                 ; [$a164] InventoryItem
     dw $a16a                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9255}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_FIND_3_SPRINGS.
     db MESSAGEID_FIND_3_SPRINGS             ; [$a168] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A162_HAS_RING_OF_RUBY:          ; [$a16a]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::92bb}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_WATER_IS_FLOWING.
     db MESSAGEID_WATER_IS_FLOWING           ; [$a16b] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8242,13 +8238,14 @@ ISCRIPT_A16D:                               ; [$a16d]
                                             ; quest.
     db QUEST_SPRING_OF_TRUNK                ; [$a16f] Quests
     dw $a175                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::92f0}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_FOUNTAIN_IN_SKY.
     db MESSAGEID_FOUNTAIN_IN_SKY            ; [$a173] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A175:                           ; [$a175]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::93b0}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_PUSH_FOUNTAIN_ROCK.
     db MESSAGEID_PUSH_FOUNTAIN_ROCK         ; [$a176] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8268,8 +8265,8 @@ ISCRIPT_A178:                               ; [$a178]
                                             ; quest.
     db QUEST_SPRING_OF_TRUNK                ; [$a17a] Quests
     dw $a180                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9462}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_SPRING_IN_TOWER.
     db MESSAGEID_SPRING_IN_TOWER            ; [$a17e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8279,13 +8276,14 @@ ISCRIPT_A178:                               ; [$a178]
                                             ; quest.
     db QUEST_SPRING_OF_SKY                  ; [$a181] Quests
     dw $a187                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::94ed}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WINGBOOTS_IN_TOWER.
     db MESSAGEID_WINGBOOTS_IN_TOWER         ; [$a185] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A178_SPRING_OF_SKY_COMPLETED:   ; [$a187]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9551}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DIRECTIONS_TO_MASCON.
     db MESSAGEID_DIRECTIONS_TO_MASCON       ; [$a188] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8304,8 +8302,8 @@ ISCRIPT_A18A:                               ; [$a18a]
                                             ; quest is complete.
     db QUEST_SPRING_OF_SKY                  ; [$a18c] Quests
     dw $a192                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::95d7}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_FOUNTAIN_IN_SKY_HINT.
     db MESSAGEID_FOUNTAIN_IN_SKY_HINT       ; [$a190] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8314,8 +8312,8 @@ ISCRIPT_A18A:                               ; [$a18a]
                                             ; Joker key.
     db KEY_JO                               ; [$a193] InventoryItem
     dw $a19b                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::9610}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show MESSAGE_USE_THIS_
+                                               ; KEY_FOR_FIRST_SPRING.
     db MESSAGEID_USE_THIS_KEY_FOR_FIRST_SPRING ; [$a197] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the Joker key to the
                                             ; inventory.
@@ -8323,7 +8321,8 @@ ISCRIPT_A18A:                               ; [$a18a]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A192_HAS_JOKER:                 ; [$a19b]
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::9652}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_GET_JOKER_OR_CO
+                                               ; ME_BACK.
     db MESSAGEID_GET_JOKER_OR_COME_BACK     ; [$a19c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8348,8 +8347,8 @@ ISCRIPT_SPRING_OF_SKY:                      ; [$a19e]
                                             ; quest is complete.
     db QUEST_SPRING_OF_SKY                  ; [$a1a0] Quests
     dw $a1a8                                ; If it has, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::9682}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
+                                               ; MESSAGE_HO_HO_HO_ZZZ.
     db MESSAGEID_HO_HO_HO_ZZZ               ; [$a1a4] Message
     db ISCRIPT_ACTION_SET_QUEST_COMPLETE    ; Mark the Springs man as woken
                                             ; up.
@@ -8357,7 +8356,8 @@ ISCRIPT_SPRING_OF_SKY:                      ; [$a19e]
     db ISCRIPT_ACTION_END                   ; End
 
   @_ISCRIPT_SPRING_OF_SKY_IS_COMPLETE:      ; [$a1a8]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9761}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_GET_KEY_FIND_FOUNTAIN.
     db MESSAGEID_GET_KEY_FIND_FOUNTAIN      ; [$a1a9] Message
     db ISCRIPT_ACTION_END                   ; End
 
@@ -8384,20 +8384,20 @@ ISCRIPT_SPRING_OF_TRUNK:                    ; [$a1ab]
                                             ; quest is complete.
     db QUEST_SPRING_OF_TRUNK                ; [$a1ad] Quests
     dw $a1c0                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Else, show {@symbol
-                                            ; PRG13::97c3}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Else, show MESSAGE_THIS_IS_SPRI
+                                            ; NG_OF_TRUNK_GET_ELIXIR.
     db MESSAGEID_THIS_IS_SPRING_OF_TRUNK_GET_ELIXIR ; [$a1b1] Message
     db ISCRIPT_ACTION_CHECK_FOR_ITEM        ; Check if the player has the
                                             ; Elixir.
     db SPECIAL_ELIXIR                       ; [$a1b3] InventoryItem
     dw $a1b9                                ; If yes, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9891}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_COME_BACK_WI
+                                            ; TH_MEDICINE.
     db MESSAGEID_COME_BACK_WITH_MEDICINE    ; [$a1b7] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_SPRING_OF_TRUNK_HAS_ELIXIR:     ; [$a1b9]
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::9842}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_2_MORE_SPRINGS.
     db MESSAGEID_2_MORE_SPRINGS             ; [$a1ba] Message
     db ISCRIPT_ACTION_CONSUME_ITEM          ; Consume the player's Elixir.
     db SPECIAL_ELIXIR                       ; [$a1bc] InventoryItem
@@ -8407,7 +8407,8 @@ ISCRIPT_SPRING_OF_TRUNK:                    ; [$a1ab]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_SPRING_OF_TRUNK_IS_COMPLETE:    ; [$a1c0]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::98ae}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_FIND_POISON_IN_MASCON.
     db MESSAGEID_FIND_POISON_IN_MASCON      ; [$a1c1] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8426,8 +8427,8 @@ ISCRIPT_A1C3:                               ; [$a1c3]
                                             ; complete.
     db $03                                  ; [$a1c5] Quests
     dw $a1cd                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::992d}
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
+                                               ; MESSAGE_WILL_REVIVE_SPRING
     db MESSAGEID_WILL_REVIVE_SPRING         ; [$a1c9] Message
     db ISCRIPT_ACTION_SET_QUEST_COMPLETE    ; Mark all spring quests as
                                             ; complete.
@@ -8439,8 +8440,8 @@ ISCRIPT_A1C3:                               ; [$a1c3]
                                             ; Ring of Ruby.
     db SPECIAL_RING_OF_RUBY                 ; [$a1ce] InventoryItem
     dw $a1d6                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::9968}
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
+                                               ; MESSAGE_GIVING_RING_OF_RUBY
     db MESSAGEID_GIVING_RING_OF_RUBY        ; [$a1d2] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Give the player the Ring of
                                             ; Ruby.
@@ -8448,7 +8449,7 @@ ISCRIPT_A1C3:                               ; [$a1c3]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A1CD_HAS_RING_OF_RUBY:          ; [$a1d6]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::99b3}
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_TRUST_YOUR_POWER
     db MESSAGEID_TRUST_YOUR_POWER           ; [$a1d7] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8467,13 +8468,14 @@ ISCRIPT_A1D9:                               ; [$a1d9]
                                             ; Large Shield.
     db SHIELD_LARGE                         ; [$a1db] InventoryItem
     dw $a1e1                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::99f6}
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_MASCON
     db MESSAGEID_WELCOME_TO_MASCON          ; [$a1df] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A1D9_HAS_LARGE_SHIELD:          ; [$a1e1]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9a37}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_PREPARE_BEFORE_FOREPAW.
     db MESSAGEID_PREPARE_BEFORE_FOREPAW     ; [$a1e2] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8492,13 +8494,14 @@ ISCRIPT_A1E4:                               ; [$a1e4]
                                             ; Pendant.
     db SPECIAL_PENDANT                      ; [$a1e6] InventoryItem
     dw $a1ec                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9a73}
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_METEORITE_BE
+                                            ; COMES_POISON
     db MESSAGEID_METEORITE_BECOMES_POISON   ; [$a1ea] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A1E4_HAS_PENDANT:               ; [$a1ec]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9b05}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DID_YOU_GET_PENDANT.
     db MESSAGEID_DID_YOU_GET_PENDANT        ; [$a1ed] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8517,13 +8520,14 @@ ISCRIPT_A1EF:                               ; [$a1ef]
                                             ; Large Shield.
     db SHIELD_LARGE                         ; [$a1f1] InventoryItem
     dw $a1f7                                ; If so, branch.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9b44}
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_STORES_OUTSIDE_TOWN
     db MESSAGEID_STORES_OUTSIDE_TOWN        ; [$a1f5] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A1EF_HAS_SHIELD:                ; [$a1f7]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9bd8}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THIS_IS_LARGE_SHIELD.
     db MESSAGEID_THIS_IS_LARGE_SHIELD       ; [$a1f8] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8542,13 +8546,14 @@ ISCRIPT_A1FA:                               ; [$a1fa]
                                             ; Fire magic.
     db MAGIC_FIRE                           ; [$a1fc] InventoryItem
     dw $a202                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9bfc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DIRECTIONS_TO_SUFFER.
     db MESSAGEID_DIRECTIONS_TO_SUFFER       ; [$a200] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A1FA_HAS_FIRE:                  ; [$a202]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9c61}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_NEED_WING_BOOTS_FO
+                                            ; R_MIST.
     db MESSAGEID_NEED_WING_BOOTS_FOR_MIST   ; [$a203] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8567,13 +8572,14 @@ ISCRIPT_A205:                               ; [$a205]
                                             ; Fire magic.
     db MAGIC_FIRE                           ; [$a207] InventoryItem
     dw $a20d                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9cc7}
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_MIST
     db MESSAGEID_WELCOME_TO_MIST            ; [$a20b] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A205_HAS_FIRE:                  ; [$a20d]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9d3a}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_HOUSE_OUTSIDE_ABAN
+                                            ; DONED.
     db MESSAGEID_HOUSE_OUTSIDE_ABANDONED    ; [$a20e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8600,13 +8606,13 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_MAN:           ; [$a210]
                                             ; Pendant.
     db SPECIAL_PENDANT                      ; [$a212] InventoryItem
     dw $a218                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9d93}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_TOWER_OF_SUFFER_SOON.
     db MESSAGEID_TOWER_OF_SUFFER_SOON       ; [$a216] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_OVERWORLD_MIST_HOUSE_MAN_HAS_PENDANT: ; [$a218]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9dbb}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_KEEP_PENDANT.
     db MESSAGEID_KEEP_PENDANT               ; [$a219] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8633,13 +8639,14 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN:         ; [$a21b]
                                             ; Pendant.
     db SPECIAL_PENDANT                      ; [$a21d] InventoryItem
     dw $a223                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9e14}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DWARVES_CHANTING.
     db MESSAGEID_DWARVES_CHANTING           ; [$a221] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN_HAS_PENDANT: ; [$a223]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9e83}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_METEORITE_WAS_MOVED.
     db MESSAGEID_METEORITE_WAS_MOVED        ; [$a224] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8658,13 +8665,13 @@ ISCRIPT_A226:                               ; [$a226]
                                             ; Hour Glass.
     db ITEM_HOUR_GLASS                      ; [$a228] InventoryItem
     dw $a22e                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9f03}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_HOUR_GLASS.
     db MESSAGEID_HOUR_GLASS                 ; [$a22c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A226_HAS_HOURGLASS:             ; [$a22e]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9f50}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_HOUR_GLASS_USES_ENERGY.
     db MESSAGEID_HOUR_GLASS_USES_ENERGY     ; [$a22f] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8683,13 +8690,14 @@ ISCRIPT_A231:                               ; [$a231]
                                             ; Thunder magic.
     db MAGIC_THUNDER                        ; [$a233] InventoryItem
     dw $a239                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::9f98}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_VICTIM.
     db MESSAGEID_WELCOME_TO_VICTIM          ; [$a237] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A231_HAS_THUNDER:               ; [$a239]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::9fd9}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DANGEROUS_WITHOUT_
+                                            ; MAGIC.
     db MESSAGEID_DANGEROUS_WITHOUT_MAGIC    ; [$a23a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8708,13 +8716,14 @@ ISCRIPT_A23C:                               ; [$a23c]
                                             ; Thunder magic.
     db MAGIC_THUNDER                        ; [$a23e] InventoryItem
     dw $a244                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a1e8}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_MAGIC_CONSUMES_POWER.
     db MESSAGEID_MAGIC_CONSUMES_POWER       ; [$a242] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A23C_HAS_THUNDER:               ; [$a244]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a21d}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_METEORITE_BECOMES_
+                                            ; BLACK_ONYX.
     db MESSAGEID_METEORITE_BECOMES_BLACK_ONYX ; [$a245] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8733,13 +8742,13 @@ ISCRIPT_A247:                               ; [$a247]
                                             ; Thunder magic.
     db MAGIC_THUNDER                        ; [$a249] InventoryItem
     dw $a24f                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a017}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_MAGIC_HALL_O
+                                            ; UTSIDE_TOWN.
     db MESSAGEID_MAGIC_HALL_OUTSIDE_TOWN    ; [$a24d] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A247_HAS_THUNDER:               ; [$a24f]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a03a}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_MAGIC_CANE.
     db MESSAGEID_MAGIC_CANE                 ; [$a250] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8758,8 +8767,8 @@ ISCRIPT_A252:                               ; [$a252]
                                             ; least the Soldier rank.
     db RANK_SOLDIER                         ; [$a254] PlayerTitle
     dw $a25a                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a070}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_GO_TO_CAPITAL.
     db MESSAGEID_GO_TO_CAPITAL              ; [$a258] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8768,8 +8777,8 @@ ISCRIPT_A252:                               ; [$a252]
                                             ; Full Plate armor.
     db ARMOR_FULL_PLATE                     ; [$a25b] InventoryItem
     dw $a263                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::a0aa}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show MESSAGE_GOT_ARMOR
+                                               ; _FOR_BOTTLE.
     db MESSAGEID_GOT_ARMOR_FOR_BOTTLE       ; [$a25f] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the full plate to the
                                             ; inventory.
@@ -8777,7 +8786,7 @@ ISCRIPT_A252:                               ; [$a252]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A252_HAS_ARMOR:                 ; [$a263]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a119}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_ILL_HAVE_DRINK.
     db MESSAGEID_ILL_HAVE_DRINK             ; [$a264] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8796,13 +8805,13 @@ ISCRIPT_A266:                               ; [$a266]
                                             ; Thunder magic.
     db MAGIC_THUNDER                        ; [$a268] InventoryItem
     dw $a26e                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a13d}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_IM_LOST.
     db MESSAGEID_IM_LOST                    ; [$a26c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A266_HAS_THUNDER:               ; [$a26e]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a152}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_IM_LOST_MAGIC_DOES
+                                            ; _NOT_WORK.
     db MESSAGEID_IM_LOST_MAGIC_DOES_NOT_WORK ; [$a26f] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8821,13 +8830,14 @@ ISCRIPT_A271:                               ; [$a271]
                                             ; Thunder magic.
     db MAGIC_THUNDER                        ; [$a273] InventoryItem
     dw $a279                                ; If so, branch.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a174}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_MAGIC_OF_JUS
+                                            ; TICE_OR_DESTRUCTION.
     db MESSAGEID_MAGIC_OF_JUSTICE_OR_DESTRUCTION ; [$a277] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A271_HAS_THUNDER:               ; [$a279]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a1c9}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_MAGIC_INDIVIDUAL_P
+                                            ; OWERS.
     db MESSAGEID_MAGIC_INDIVIDUAL_POWERS    ; [$a27a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8846,8 +8856,8 @@ ISCRIPT_A27C:                               ; [$a27c]
                                             ; Black Onyx.
     db SPECIAL_BLACK_ONYX                   ; [$a27e] InventoryItem
     dw $a284                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a27c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_DIRECTIONS_T
+                                            ; O_TOWER_OF_MIST.
     db MESSAGEID_DIRECTIONS_TO_TOWER_OF_MIST ; [$a282] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8856,8 +8866,8 @@ ISCRIPT_A27C:                               ; [$a27c]
                                             ; key.
     db KEY_A                                ; [$a285] InventoryItem
     dw $a28d                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::a30f}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show MESSAGE_USE_KEY_F
+                                               ; OR_CONFLATE.
     db MESSAGEID_USE_KEY_FOR_CONFLATE       ; [$a289] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the "A" key to the
                                             ; inventory.
@@ -8865,7 +8875,7 @@ ISCRIPT_A27C:                               ; [$a27c]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A27C_HAS_KEY:                   ; [$a28d]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a3bb}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_YOU_NEED_KEY_ACE.
     db MESSAGEID_YOU_NEED_KEY_ACE           ; [$a28e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8884,13 +8894,14 @@ ISCRIPT_A290:                               ; [$a290]
                                             ; Giant Blade.
     db WEAPON_GIANT_BLADE                   ; [$a292] InventoryItem
     dw $a298                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show  {@symbol
-                                            ; PRG13::a405}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WELCOME_TO_CONFLATE.
     db MESSAGEID_WELCOME_TO_CONFLATE        ; [$a296] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A290_HAS_GIANT_BLADE:           ; [$a298]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a42d}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_LEGENDARY_SHIELD_H
+                                            ; ELMET.
     db MESSAGEID_LEGENDARY_SHIELD_HELMET    ; [$a299] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8909,13 +8920,14 @@ ISCRIPT_A29B:                               ; [$a29b]
                                             ; Giant Blade.
     db WEAPON_GIANT_BLADE                   ; [$a29d] InventoryItem
     dw $a2a3                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a470}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_TOWN_SURROUN
+                                            ; DED_BY_DOORS.
     db MESSAGEID_TOWN_SURROUNDED_BY_DOORS   ; [$a2a1] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A29B_HAS_GIANT_BLADE:           ; [$a2a3]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a4a0}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_SEE_GURU_AFTER_SHI
+                                            ; ELD_HELMET.
     db MESSAGEID_SEE_GURU_AFTER_SHIELD_HELMET ; [$a2a4] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8934,8 +8946,8 @@ ISCRIPT_A2A6:                               ; [$a2a6]
                                             ; Ring of Dworf.
     db SPECIAL_RING_OF_DWORF                ; [$a2a8] InventoryItem
     dw $a2ae                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a4d7}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_GUARDIAN_OF_GURU.
     db MESSAGEID_GUARDIAN_OF_GURU           ; [$a2ac] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8944,13 +8956,14 @@ ISCRIPT_A2A6:                               ; [$a2a6]
                                             ; Magical Rod.
     db SPECIAL_MAGICAL_ROD                  ; [$a2af] InventoryItem
     dw $a2b5                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a511}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_SOMETHING_YOU_CAN_GET.
     db MESSAGEID_SOMETHING_YOU_CAN_GET      ; [$a2b3] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2A6_HAS_MAGICAL_ROD:           ; [$a2b5]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a538}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_RELY_ON_MAGIC
+                                            ; _FINAL_BATTLE.
     db MESSAGEID_DONT_RELY_ON_MAGIC_FINAL_BATTLE ; [$a2b6] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8969,13 +8982,14 @@ ISCRIPT_A2B8:                               ; [$a2b8]
                                             ; Battle Helmet.
     db SHIELD_BATTLE_HELMET                 ; [$a2ba] InventoryItem
     dw $a2c0                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a57f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_USED_TO_TRAD
+                                            ; E_WITH_DWARVES.
     db MESSAGEID_USED_TO_TRADE_WITH_DWARVES ; [$a2be] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2B8_HAS_BATTLE_HELMET:         ; [$a2c0]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a5b4}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_USED_TO_BE_SKILLED.
     db MESSAGEID_USED_TO_BE_SKILLED         ; [$a2c1] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -8994,13 +9008,13 @@ ISCRIPT_A2C3:                               ; [$a2c3]
                                             ; Battle Helmet.
     db SHIELD_BATTLE_HELMET                 ; [$a2c5] InventoryItem
     dw $a2cb                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a5f1}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_USED_TO_VISIT_DWARVES.
     db MESSAGEID_USED_TO_VISIT_DWARVES      ; [$a2c9] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2C3_HAS_BATTLE_HELMET:         ; [$a2cb]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a640}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_AM_PICKPOCKET.
     db MESSAGEID_I_AM_PICKPOCKET            ; [$a2cc] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9019,13 +9033,14 @@ ISCRIPT_A2CE:                               ; [$a2ce]
                                             ; Tilte magic.
     db MAGIC_TILTE                          ; [$a2d0] InventoryItem
     dw $a2d6                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a8c4}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_DIRECTIONS_DAYBREAK.
     db MESSAGEID_DIRECTIONS_DAYBREAK        ; [$a2d4] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2CE_HAS_TILTE:                 ; [$a2d6]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a8e6}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_FRIENDS_IN_DARTMOOR.
     db MESSAGEID_FRIENDS_IN_DARTMOOR        ; [$a2d7] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9044,13 +9059,13 @@ ISCRIPT_A2D9:                               ; [$a2d9]
                                             ; Battle Suit.
     db ARMOR_BATTLE_SUIT                    ; [$a2db] InventoryItem
     dw $a2e1                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a922}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_LOOK_FOR_BATTLE_SUIT.
     db MESSAGEID_LOOK_FOR_BATTLE_SUIT       ; [$a2df] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2D9_HAS_BATTLE_SUIT:           ; [$a2e1]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a93c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_FIND_MAGIC_CANE.
     db MESSAGEID_FIND_MAGIC_CANE            ; [$a2e2] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9071,13 +9086,13 @@ ISCRIPT_A2E4:                               ; [$a2e4]
                                             ; Ring of Dworf.
     db SPECIAL_RING_OF_DWORF                ; [$a2e6] InventoryItem
     dw $a2ec                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::a958}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_YOU_ARE_FAMO
+                                            ; US_GOOD_LOOKING.
     db MESSAGEID_YOU_ARE_FAMOUS_GOOD_LOOKING ; [$a2ea] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2E4_HAS_RING_OF_DWORF:         ; [$a2ec]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::a99b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_AUTOGRAPH.
     db MESSAGEID_AUTOGRAPH                  ; [$a2ed] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9096,13 +9111,14 @@ ISCRIPT_A2EF:                               ; [$a2ef]
                                             ; Battle Suit.
     db ARMOR_BATTLE_SUIT                    ; [$a2f1] InventoryItem
     dw $a2f7                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::aa3e}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_WHEN_TAKE_BATH.
     db MESSAGEID_WHEN_TAKE_BATH             ; [$a2f5] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2EF_HAS_BATTLE_SUIT:           ; [$a2f7]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::aa6a}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_GURU_CONFLATE_HAS_
+                                            ; RING_DWARVES.
     db MESSAGEID_GURU_CONFLATE_HAS_RING_DWARVES ; [$a2f8] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9121,13 +9137,13 @@ ISCRIPT_A2FA:                               ; [$a2fa]
                                             ; Battle Suit.
     db ARMOR_BATTLE_SUIT                    ; [$a2fc] InventoryItem
     dw $a302                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::aa96}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_DID_YOU_GET_
+                                            ; BATTLE_SUIT.
     db MESSAGEID_DID_YOU_GET_BATTLE_SUIT    ; [$a300] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A2FA_HAS_BATTLE_SUIT:           ; [$a302]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show, {@symbol PRG13::aab3}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show, MESSAGE_DARTMORE_IS_MAZE.
     db MESSAGEID_DARTMORE_IS_MAZE           ; [$a303] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9146,13 +9162,14 @@ ISCRIPT_A305:                               ; [$a305]
                                             ; Battle Suit.
     db ARMOR_BATTLE_SUIT                    ; [$a307] InventoryItem
     dw $a30d                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::aadd}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_IS_FIRST_VIS
+                                            ; IT_TO_STORE.
     db MESSAGEID_IS_FIRST_VISIT_TO_STORE    ; [$a30b] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A305_HAS_BATTLE_SUIT:           ; [$a30d]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::ab15}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_MAGIC_CANE_ABOVE_TOWER.
     db MESSAGEID_MAGIC_CANE_ABOVE_TOWER     ; [$a30e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9171,13 +9188,14 @@ ISCRIPT_A310:                               ; [$a310]
                                             ; Dragon Slayer.
     db WEAPON_DRAGON_SLAYER                 ; [$a312] InventoryItem
     dw $a318                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::ab74}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_DIRECTIONS_T
+                                            ; O_FRATERNAL.
     db MESSAGEID_DIRECTIONS_TO_FRATERNAL    ; [$a316] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A310_HAS_DRAGON_SLAYER:         ; [$a318]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::abb6}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_YOU_NEED_DEMONS_RING.
     db MESSAGEID_YOU_NEED_DEMONS_RING       ; [$a319] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9203,13 +9221,14 @@ ISCRIPT_OVERWORLD_HOUSE_MAN:                ; [$a31b]
                                             ; Dragon Slayer.
     db WEAPON_DRAGON_SLAYER                 ; [$a31d] InventoryItem
     dw $a323                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::abf3}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show MESSAGE_KING_GRIEVE_
+                                            ; HAS_DRAGON_SLAYER.
     db MESSAGEID_KING_GRIEVE_HAS_DRAGON_SLAYER ; [$a321] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_OVERWORLD_HOUSE_MAN_HAS_DRAGON_SLAYER: ; [$a323]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::ac27}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DEFEAT_EVIL_WITH_D
+                                            ; RAGON_SLAYER.
     db MESSAGEID_DEFEAT_EVIL_WITH_DRAGON_SLAYER ; [$a324] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9236,13 +9255,14 @@ ISCRIPT_OVERWORLD_HOUSE_WOMAN:              ; [$a326]
                                             ; Dragon Slayer.
     db WEAPON_DRAGON_SLAYER                 ; [$a328] InventoryItem
     dw $a32e                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::ac4f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_GO_TO_FRATERNAL_GURU.
     db MESSAGEID_GO_TO_FRATERNAL_GURU       ; [$a32c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_OVERWORLD_HOUSE_WOMAN_HAS_DRAGON_SLAYER: ; [$a32e]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::ac7e}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_GURU_HAS_DEMONS_RING.
     db MESSAGEID_GURU_HAS_DEMONS_RING       ; [$a32f] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9261,13 +9281,14 @@ ISCRIPT_A331:                               ; [$a331]
                                             ; Dragon Slayer.
     db WEAPON_DRAGON_SLAYER                 ; [$a333] InventoryItem
     dw $a339                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::acb3}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_SEARCH_CASTLE_FOR_GURU.
     db MESSAGEID_SEARCH_CASTLE_FOR_GURU     ; [$a337] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A331_HAS_DRAGON_SLAYER:         ; [$a339]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::ace5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_EVIL_IMMUNE_TO_MAGIC.
     db MESSAGEID_EVIL_IMMUNE_TO_MAGIC       ; [$a33a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9299,8 +9320,8 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
                                             ; Dragon Slayer.
     db WEAPON_DRAGON_SLAYER                 ; [$a33e] InventoryItem
     dw $a344                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show {@symbol
-                                            ; PRG13::ad1c}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Else, show
+                                            ; MESSAGE_METEORITE_EXPOSITION_2.
     db MESSAGEID_METEORITE_EXPOSITION_2     ; [$a342] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9309,8 +9330,8 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
                                             ; Demon's Ring.
     db SPECIAL_DEMONS_RING                  ; [$a345] InventoryItem
     dw $a34d                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::ae54}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show MESSAGE_DEFEATED_
+                                               ; KING_GRIEVE.
     db MESSAGEID_DEFEATED_KING_GRIEVE       ; [$a349] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the Demon's Ring to the
                                             ; inventory.
@@ -9318,7 +9339,8 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_A33C_HAS_DEMONS_RING:           ; [$a34d]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::af73}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_ILL_MEDITATE_FOR_YOU.
     db MESSAGEID_ILL_MEDITATE_FOR_YOU       ; [$a34e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9342,8 +9364,8 @@ ISCRIPT_EOLIS_KING:                         ; [$a350]
                                             ; box.
     db ISCRIPT_ACTION_CHECK_GOLD            ; Check if the player has gold.
     dw $a35a                                ; If so, jump.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show {@symbol
-                                               ; PRG13::8bb6}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
+                                               ; MESSAGE_KING_EXPOSITION.
     db MESSAGEID_KING_EXPOSITION            ; [$a355] Message
     db ISCRIPT_ACTION_ADD_GOLD              ; Add 1500 gold.
     dw $05dc                                ; [$a357] ushort
@@ -9351,7 +9373,8 @@ ISCRIPT_EOLIS_KING:                         ; [$a350]
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_NPC_KING_FOLLOW_UP_HAS_GOLD:    ; [$a35a]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8ced}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_NOTHING_MORE_TO_HELP.
     db MESSAGEID_NOTHING_MORE_TO_HELP       ; [$a35b] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9369,8 +9392,8 @@ ISCRIPT_EOLIS_KING:                         ; [$a350]
 ISCRIPT_EOLIS_MARTIAL_ARTS_MAGIC_SHOP:      ; [$a35d]
     db ISCRIPT_ENTITY_MAGICIAN              ; Show the Magician portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::85a6}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_MAGIC_200G.
     db MESSAGEID_MAGIC_200G                 ; [$a35f] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 200G.
     dw $00c8                                ; [$a361] ushort
@@ -9378,7 +9401,8 @@ ISCRIPT_EOLIS_MARTIAL_ARTS_MAGIC_SHOP:      ; [$a35d]
     db ISCRIPT_ACTION_ADD_MP                ; Add 40MP.
     db $28                                  ; [$a364] byte
 
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::85c8}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show
+                                               ; MESSAGE_WATCH_POWER_LEVEL.
     db MESSAGEID_WATCH_POWER_LEVEL          ; [$a366] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9405,7 +9429,7 @@ ISCRIPT_AFTER_VICTIM_MAGIC_SHOP:            ; [$a368]
     db MAGIC_FIRE                           ; [$a36a] InventoryItem
     dw $a377                                ; If so, jump.
     db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Else, show a dismissible
-                                            ; {@symbol PRG13::85ea}.
+                                            ; MESSAGE_MAGIC_FIRE_3000G.
     db MESSAGEID_MAGIC_FIRE_3000G           ; [$a36e] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 3000G.
     dw $0bb8                                ; [$a370] ushort
@@ -9413,12 +9437,14 @@ ISCRIPT_AFTER_VICTIM_MAGIC_SHOP:            ; [$a368]
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the Fire magic to the
                                             ; inventory.
     db MAGIC_FIRE                           ; [$a373] InventoryItem
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::a174}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_MAGIC_OF_JUSTIC
+                                               ; E_OR_DESTRUCTION.
     db MESSAGEID_MAGIC_OF_JUSTICE_OR_DESTRUCTION ; [$a375] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_AFTER_VICTIM_MAGIC_SHOP_HAS_FIRE: ; [$a377]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8628}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DONT_RELY_ON_MAGIC.
     db MESSAGEID_DONT_RELY_ON_MAGIC         ; [$a378] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9434,14 +9460,15 @@ ISCRIPT_AFTER_VICTIM_MAGIC_SHOP:            ; [$a368]
 ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a37c] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a386                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a42e                                ; [$a381] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a384] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9449,7 +9476,8 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a42e                                ; [$a387] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a38a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9465,21 +9493,23 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
 ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a38e] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a398                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a43b                                ; [$a393] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a396] Message
     db ISCRIPT_ACTION_END                   ; End.
 
   @_ISCRIPT_APOLUNE_TOOL_SHOP_BUY:          ; [$a398]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a43b                                ; Choose Buy
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a39c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9495,14 +9525,15 @@ ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
 ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3a0] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3aa                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a448                                ; [$a3a5] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3a8] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9510,7 +9541,8 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a448                                ; [$a3ab] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3ae] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9526,14 +9558,15 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
 ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3b2] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3bc                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a44f                                ; [$a3b7] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3ba] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9541,7 +9574,8 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a44f                                ; [$a3bd] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3c0] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9557,14 +9591,15 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
 ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3c4] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3ce                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a45f                                ; [$a3c9] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3cc] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9572,7 +9607,8 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a45f                                ; [$a3cf] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3d2] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9588,14 +9624,15 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
 ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3d6] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3e0                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a46c                                ; [$a3db] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3de] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9603,7 +9640,8 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a46c                                ; [$a3e1] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3e4] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9619,14 +9657,15 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
 ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3e8] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3f2                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a479                                ; [$a3ed] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3f0] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9634,7 +9673,8 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a479                                ; [$a3f3] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3f6] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9650,14 +9690,15 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
 ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a3fa] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a404                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a483                                ; [$a3ff] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a402] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9665,7 +9706,8 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a483                                ; [$a405] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a408] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9681,14 +9723,15 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
 ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a40c] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a416                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a490                                ; [$a411] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a414] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9696,7 +9739,8 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a490                                ; [$a417] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a41a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9712,14 +9756,15 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
 ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
     db ISCRIPT_ENTITY_TOOLS_SALESMAN        ; Show the tools salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84f5}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_TOOLS.
     db MESSAGEID_I_SELL_TOOLS               ; [$a41e] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a428                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
     dw $a49a                                ; [$a423] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a426] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9727,7 +9772,8 @@ ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a49a                                ; [$a429] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a42c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9965,7 +10011,7 @@ DARTMOOR_TOOL_SHOP_ITEMS:                   ; [$a49a]
 ISCRIPT_EOLIS_MEAT_SHOP:                    ; [$a4a1]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::83a7}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_50G.
     db MESSAGEID_DRIED_MEAT_50G             ; [$a4a3] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 50G.
     dw $0032                                ; [$a4a5] ushort
@@ -9976,7 +10022,8 @@ ISCRIPT_EOLIS_MEAT_SHOP:                    ; [$a4a1]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4aa] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4ac] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -9994,7 +10041,7 @@ ISCRIPT_EOLIS_MEAT_SHOP:                    ; [$a4a1]
 ISCRIPT_FOREPAW_MEAT_SHOP:                  ; [$a4ae]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::83d0}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_150G.
     db MESSAGEID_DRIED_MEAT_150G            ; [$a4b0] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 150G.
     dw $0096                                ; [$a4b2] ushort
@@ -10005,7 +10052,8 @@ ISCRIPT_FOREPAW_MEAT_SHOP:                  ; [$a4ae]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4b7] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4b9] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10023,7 +10071,7 @@ ISCRIPT_FOREPAW_MEAT_SHOP:                  ; [$a4ae]
 ISCRIPT_MASCON_MEAT_SHOP:                   ; [$a4bb]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::83fa}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_180G.
     db MESSAGEID_DRIED_MEAT_180G            ; [$a4bd] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 180G.
     dw $00b4                                ; [$a4bf] ushort
@@ -10034,7 +10082,8 @@ ISCRIPT_MASCON_MEAT_SHOP:                   ; [$a4bb]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4c4] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4c6] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10052,7 +10101,7 @@ ISCRIPT_MASCON_MEAT_SHOP:                   ; [$a4bb]
 ISCRIPT_VICTIM_MEAT_SHOP:                   ; [$a4c8]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::8424}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_250G.
     db MESSAGEID_DRIED_MEAT_250G            ; [$a4ca] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 250G.
     dw $00fa                                ; [$a4cc] ushort
@@ -10063,7 +10112,8 @@ ISCRIPT_VICTIM_MEAT_SHOP:                   ; [$a4c8]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4d1] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4d3] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10081,7 +10131,7 @@ ISCRIPT_VICTIM_MEAT_SHOP:                   ; [$a4c8]
 ISCRIPT_CONFLATE_MEAT_SHOP:                 ; [$a4d5]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::844e}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_350G.
     db MESSAGEID_DRIED_MEAT_350G            ; [$a4d7] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 350G.
     dw $015e                                ; [$a4d9] ushort
@@ -10092,7 +10142,8 @@ ISCRIPT_CONFLATE_MEAT_SHOP:                 ; [$a4d5]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4de] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4e0] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10110,7 +10161,7 @@ ISCRIPT_CONFLATE_MEAT_SHOP:                 ; [$a4d5]
 ISCRIPT_DAYBREAK_MEAT_SHOP:                 ; [$a4e2]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::8478}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_500G.
     db MESSAGEID_DRIED_MEAT_500G            ; [$a4e4] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 500G.
     dw $01f4                                ; [$a4e6] ushort
@@ -10121,7 +10172,8 @@ ISCRIPT_DAYBREAK_MEAT_SHOP:                 ; [$a4e2]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4eb] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4ed] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10139,7 +10191,7 @@ ISCRIPT_DAYBREAK_MEAT_SHOP:                 ; [$a4e2]
 ISCRIPT_DARTMOOR_MEAT_SHOP:                 ; [$a4ef]
     db ISCRIPT_ENTITY_MEAT_SALESMAN         ; Show the meat shop salesman
                                             ; portrait text box.
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show {@symbol PRG13::84a2}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show MESSAGE_DRIED_MEAT_800G.
     db MESSAGEID_DRIED_MEAT_800G            ; [$a4f1] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay 800G.
     dw $0320                                ; [$a4f3] ushort
@@ -10150,7 +10202,8 @@ ISCRIPT_DARTMOOR_MEAT_SHOP:                 ; [$a4ef]
     db ISCRIPT_ACTION_ADD_MP                ; Add 30MP.
     db $1e                                  ; [$a4f8] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a4fa] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10166,7 +10219,7 @@ ISCRIPT_DARTMOOR_MEAT_SHOP:                 ; [$a4ef]
 ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a4fe] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a508                                ; If Buy was chosen, jump.
@@ -10174,7 +10227,8 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
                                             ; sell menu.
     dw $a57a                                ; [$a503] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a506] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10182,7 +10236,8 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a57a                                ; [$a509] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a50c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10198,7 +10253,7 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
 ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a510] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a51a                                ; If Buy was chosen, jump.
@@ -10206,7 +10261,8 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
                                             ; sell menu.
     dw $a57e                                ; [$a515] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a518] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10214,7 +10270,8 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a57e                                ; [$a51b] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a51e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10230,7 +10287,7 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
 ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a522] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a52c                                ; If Buy was chosen, jump.
@@ -10238,7 +10295,8 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
                                             ; sell menu.
     dw $a582                                ; [$a527] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a52a] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10246,7 +10304,8 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a582                                ; [$a52d] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a530] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10262,7 +10321,7 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
 ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a534] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a53e                                ; If Buy was chosen, jump.
@@ -10270,7 +10329,8 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
                                             ; sell menu.
     dw $a589                                ; [$a539] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a53c] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10278,7 +10338,8 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a589                                ; [$a53f] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a542] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10294,7 +10355,7 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
 ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a546] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a550                                ; If Buy was chosen, jump.
@@ -10302,7 +10363,8 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
                                             ; sell menu.
     dw $a590                                ; [$a54b] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a54e] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10310,7 +10372,8 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a590                                ; [$a551] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a554] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10326,7 +10389,7 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
 ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a558] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a562                                ; If Buy was chosen, jump.
@@ -10334,7 +10397,8 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
                                             ; sell menu.
     dw $a597                                ; [$a55d] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a560] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10342,7 +10406,8 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a597                                ; [$a563] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a566] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10358,7 +10423,7 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
 ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
     db ISCRIPT_ENTITY_KEY_SALESMAN          ; Show the key salesman portrait
                                             ; text box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::84cc}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_I_SELL_KEYS.
     db MESSAGEID_I_SELL_KEYS                ; [$a56a] Message
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a574                                ; If Buy was chosen, jump.
@@ -10366,7 +10431,8 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
                                             ; sell menu.
     dw $a59e                                ; [$a56f] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a572] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10374,7 +10440,8 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
     dw $a59e                                ; [$a575] pointer
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::833b}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a578] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10490,10 +10557,11 @@ DARTMOOR_KEY_SHOP_ITEMS:                    ; [$a59e]
 ISCRIPT_APOLUNE_DOCTOR:                     ; [$a5a2]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5a4] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::86a3}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_250G_PLEASE.
     db MESSAGEID_250G_PLEASE                ; [$a5a6] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $00fa                                ; [$a5a8] ushort
@@ -10504,7 +10572,7 @@ ISCRIPT_APOLUNE_DOCTOR:                     ; [$a5a2]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5ad] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5af] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10520,10 +10588,11 @@ ISCRIPT_APOLUNE_DOCTOR:                     ; [$a5a2]
 ISCRIPT_FOREPAW_DOCTOR:                     ; [$a5b1]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5b3] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::86bc}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_500G_PLEASE.
     db MESSAGEID_500G_PLEASE                ; [$a5b5] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $01f4                                ; [$a5b7] ushort
@@ -10534,7 +10603,7 @@ ISCRIPT_FOREPAW_DOCTOR:                     ; [$a5b1]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5bc] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5be] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10550,10 +10619,11 @@ ISCRIPT_FOREPAW_DOCTOR:                     ; [$a5b1]
 ISCRIPT_MASCON_DOCTOR:                      ; [$a5c0]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5c2] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::86d5}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_1000G_PLEASE.
     db MESSAGEID_1000G_PLEASE               ; [$a5c4] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $03e8                                ; [$a5c6] ushort
@@ -10564,7 +10634,7 @@ ISCRIPT_MASCON_DOCTOR:                      ; [$a5c0]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5cb] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5cd] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10580,10 +10650,11 @@ ISCRIPT_MASCON_DOCTOR:                      ; [$a5c0]
 ISCRIPT_VICTIM_DOCTOR:                      ; [$a5cf]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5d1] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::86ee}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_2500G_PLEASE.
     db MESSAGEID_2500G_PLEASE               ; [$a5d3] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $09c4                                ; [$a5d5] ushort
@@ -10594,7 +10665,7 @@ ISCRIPT_VICTIM_DOCTOR:                      ; [$a5cf]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5da] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5dc] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10610,10 +10681,11 @@ ISCRIPT_VICTIM_DOCTOR:                      ; [$a5cf]
 ISCRIPT_CONFLATE_DOCTOR:                    ; [$a5de]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5e0] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::8707}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_1800G_PLEASE.
     db MESSAGEID_1800G_PLEASE               ; [$a5e2] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $0708                                ; [$a5e4] ushort
@@ -10624,7 +10696,7 @@ ISCRIPT_CONFLATE_DOCTOR:                    ; [$a5de]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5e9] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5eb] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10640,10 +10712,11 @@ ISCRIPT_CONFLATE_DOCTOR:                    ; [$a5de]
 ISCRIPT_DARTMOOR_DOCTOR:                    ; [$a5ed]
     db ISCRIPT_ENTITY_DOCTOR                ; Show the Doctor portrait text
                                             ; box.
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8676}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
+                                            ; MESSAGE_DO_YOU_WANT_TREATMENT.
     db MESSAGEID_DO_YOU_WANT_TREATMENT      ; [$a5ef] Message
-    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible {@symbol
-                                            ; PRG13::8720}.
+    db ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Show a dismissible
+                                            ; MESSAGE_3000G_PLEASE.
     db MESSAGEID_3000G_PLEASE               ; [$a5f1] Message
     db ISCRIPT_ACTION_PAY_GOLD              ; If not dismissed, pay gold.
     dw $0bb8                                ; [$a5f3] ushort
@@ -10654,7 +10727,7 @@ ISCRIPT_DARTMOOR_DOCTOR:                    ; [$a5ed]
     db ISCRIPT_ACTION_ADD_MP                ; Add 80MP.
     db $50                                  ; [$a5f8] byte
 
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::868f}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_DONT_TRY_TOO_HARD.
     db MESSAGEID_DONT_TRY_TOO_HARD          ; [$a5fa] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10663,7 +10736,7 @@ ISCRIPT_DARTMOOR_DOCTOR:                    ; [$a5ed]
 ; Common script for a player's new password at a temple.
 ;============================================================================
 ISCRIPT_COMMON_GURU_PASSWORD:               ; [$a5fc]
-    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show {@symbol PRG13::8739}.
+    db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show MESSAGE_MEDITATE_WITH_YOU.
     db MESSAGEID_MEDITATE_WITH_YOU          ; [$a5fd] Message
     db ISCRIPT_ACTION_SHOW_PASSWORD         ; Generate and show a new
                                             ; password.
@@ -10674,7 +10747,7 @@ ISCRIPT_COMMON_GURU_PASSWORD:               ; [$a5fc]
 ; Common script for a player's new rank at a temple.
 ;============================================================================
 ISCRIPT_COMMON_GURU_NEW_RANK:               ; [$a600]
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::876b}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show MESSAGE_NEW_TITLE.
     db MESSAGEID_NEW_TITLE                  ; [$a601] Message
     db ISCRIPT_ACTION_END                   ; End.
 
@@ -10814,7 +10887,8 @@ ISCRIPT_CONFLATE_GURU:                      ; [$a627]
     db SPECIAL_RING_OF_DWORF                ; [$a635] InventoryItem
     dw $a62c                                ; If so, jump to normal guru
                                             ; behavior.
-    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show {@symbol PRG13::a794}.
+    db ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show
+                                               ; MESSAGE_DIRECTIONS_DARTMORE.
     db MESSAGEID_DIRECTIONS_DARTMORE        ; [$a639] Message
     db ISCRIPT_ACTION_ADD_ITEM              ; Add the Ring of Dworf to the
                                             ; inventory.

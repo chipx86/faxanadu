@@ -1033,8 +1033,7 @@ Sprites_LoadSpriteValue:                    ; [$c25b]
     LDY #$00                                ; Y = 0
     LDA (Screen_ExtraInfoAddr),Y            ; A = Extra information for the
                                             ; sprite.
-    STA CurrentSprites_Values,X             ; Store in {{@SYMBOL:
-                                            ; RAM::CurrentSprites_Values@}}.
+    STA CurrentSprites_Values,X             ; Store in CurrentSprites_Values.
     CMP #$ff                                ; Is it 0xFF (unset)?
     BEQ @_restoreBankAndReturn              ; If so, we're done. Jump.
 
@@ -1987,8 +1986,8 @@ Player_UseElixir:                           ; [$c4ca]
     ;
     LDA #$85                                ; 0x85 == Use Elixir.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c                                  ; Bank = 12 Address = {@symbol
-                                            ; PRG12::8242}
+    db $0c                                  ; Bank = 12 Address =
+                                            ; IScripts_Begin
     db $41,$82                              ; [$c4d8] byte
 
 
@@ -2135,8 +2134,8 @@ Player_UseRedPotion:                        ; [$c533]
     ;
     LDA #$80                                ; 0x80 == Use Red Potion IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     JSR Player_ClearSelectedItem            ; Clear the selected item.
 
     ;
@@ -2241,8 +2240,8 @@ Player_UseWingBoots:                        ; [$c579]
     LDA #$83                                ; 0x83 == Wing Boots used
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Remove the item.
@@ -2366,8 +2365,8 @@ Game_DecWingBootsDuration:                  ; [$c59d]
     LDA #$96                                ; 0x96 == Wing Boots are gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; It will resume here.
@@ -2420,8 +2419,8 @@ Player_UseHourGlass:                        ; [$c5c8]
     ;
     LDA #$82                                ; Set the IScript to run to 0x82.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Remove the item.
@@ -2516,8 +2515,8 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
     LDA #$97                                ; 0x97 == Hour Glass is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Load the area's default music.
@@ -2677,8 +2676,8 @@ Player_UseMattock:                          ; [$c616]
     ;
     LDA #$81
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c                                  ; Bank = 12 Address = {@symbol
-                                            ; PRG12::8242}
+    db $0c                                  ; Bank = 12 Address =
+                                            ; IScripts_Begin
     db $41,$82                              ; [$c64a] byte
 
     ;
@@ -2885,8 +2884,8 @@ Player_PickUpHourGlass:                     ; [$c6be]
     LDA #$8a                                ; 0x8A == Hour Glass picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -2962,8 +2961,8 @@ Player_PickUpWingBoots:                     ; [$c6d8]
     LDA #$89                                ; 0x89 == Wing boots picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3021,8 +3020,8 @@ Player_PickUpBattleSuit:                    ; [$c6ea]
     LDA #$8b                                ; 0x8B == Battle Suit picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3093,8 +3092,8 @@ Player_PickUpBattleHelmet:                  ; [$c70a]
     LDA #$8c                                ; 0x8C == Battle Helmet picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3166,8 +3165,8 @@ Player_PickUpDragonSlayer:                  ; [$c72a]
     LDA #$8d                                ; 0x8D == Dragon Slayer picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3263,8 +3262,8 @@ Player_PickUpMattock:                       ; [$c752]
     LDA #$88                                ; 0x88 == Mattock picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3500,8 +3499,8 @@ Maybe_Player_PickUpGlove:                   ; [$c7cf]
     LDA #$92                                ; 0x92 == Glove picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3548,8 +3547,8 @@ Player_PickUpBlackOnyx:                     ; [$c7e4]
     LDA #$8e                                ; 0x8E == Black Onyx picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3597,8 +3596,8 @@ Player_PickUpPendant:                       ; [$c7fa]
     LDA #$8f                                ; 0x8F = Pendant picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3646,8 +3645,8 @@ Player_PickUpMagicalRod:                    ; [$c810]
     LDA #$90                                ; 0x90 == Pendant picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3699,8 +3698,8 @@ Player_PickUpRedPotion:                     ; [$c826]
     ;
     ; \
     ;
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3748,8 +3747,8 @@ Player_PickUpPoison:                        ; [$c83c]
     LDA #$91                                ; 0x91 = Poison picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for the player taking damage.
@@ -3816,8 +3815,8 @@ Player_PickUpElixir:                        ; [$c864]
     LDA #$86                                ; 0x86 == Elixir picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3864,8 +3863,8 @@ Player_PickUpOintment:                      ; [$c87a]
     LDA #$94                                ; 0x94 == Ointment picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
@@ -3967,8 +3966,8 @@ Game_DecGloveDuration:                      ; [$c89b]
     ;
     LDA #$93                                ; 0x93 == Glove is gone IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
   @_return:                                 ; [$c8b3]
     RTS
@@ -4028,8 +4027,8 @@ Game_DecOintmentDuration:                   ; [$c8b4]
     LDA #$95                                ; 0x95 == Ointment is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
 
   @_return:                                 ; [$c8cc]
     RTS
@@ -5179,18 +5178,14 @@ Something_FrameAltToggleWithPausePPU:       ; [$cb4f]
 ;============================================================================
 Something_FrameAltToggle:                   ; [$cb53]
     LDY #$00                                ; Y = 0
-    STY Maybe_CurrentSprite_PPUOffset       ; {{@SYMBOL: RAM::Maybe_CurrentSp
-                                            ; rite_PPUOffset@}} = 0
-    STY Maybe_Unused_0034                   ; {{@SYMBOL:
-                                            ; RAM::Maybe_Unused_0034@}} = 0
-    STY Maybe_Unused_0035                   ; {{@SYMBOL:
-                                            ; RAM::Maybe_Unused_0035@}} = 0
-    STY Maybe_Unused_0038                   ; {{@SYMBOL:
-                                            ; RAM::Maybe_Unused_0038@}} = 0
-    STY Maybe_Unused_0037                   ; {{@SYMBOL:
-                                            ; RAM::Maybe_Unused_0037@}} = 0
-    STY Something_Sprites_ResetAtFrame      ; {{@SYMBOL: RAM::Something_Sprit
-                                            ; es_ResetAtFrame@}} = 0
+    STY Maybe_CurrentSprite_PPUOffset       ; Maybe_CurrentSprite_PPUOffset =
+                                            ; 0
+    STY Maybe_Unused_0034                   ; Maybe_Unused_0034 = 0
+    STY Maybe_Unused_0035                   ; Maybe_Unused_0035 = 0
+    STY Maybe_Unused_0038                   ; Maybe_Unused_0038 = 0
+    STY Maybe_Unused_0037                   ; Maybe_Unused_0037 = 0
+    STY Something_Sprites_ResetAtFrame      ; Something_Sprites_ResetAtFrame
+                                            ; = 0
     STY BYTE_0025                           ; BYTE_0025 = 0
     LDA PPU_Something_DontUpdate            ; Load our byte from before.
     BMI @LAB_PRG15_MIRROR__cb82             ; If 0xFF, then jump.
@@ -9565,8 +9560,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ; Run IScript 0xFF via jump to IScripts_Begin.
     ;
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     LDA #$00
     STA CurrentMusic
 
@@ -9575,9 +9570,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ; to Player_SetInitialExpAndGold.
     ;
     JSR MMC1_LoadBankAndJump                ; Run:
-    db $0c,$b0,$95                          ; Bank = 12 Address = {{@SYMBOL: 
-                                            ; PRG12::Player_SetInitialExpAndG
-                                            ; old@}}
+    db $0c,$b0,$95                          ; Bank = 12 Address =
+                                            ; Player_SetInitialExpAndGold
     JSR Screen_FadeToBlack
     JSR Something_InitOrResetState
     JMP Player_Spawn
@@ -11770,8 +11764,8 @@ GameLoop_CheckShowPlayerMenu:               ; [$e016]
     ; Open the inventory via jump to UI_ShowPlayerMenu.
     ;
     JSR MMC1_LoadBankAndJump                ; Open the Player Menu.
-    db $0c                                  ; Bank = 12 Address = {@symbol
-                                            ; PRG12::8a93}
+    db $0c                                  ; Bank = 12 Address =
+                                            ; UI_ShowPlayerMenu
     db $92,$8a                              ; [$e028] byte
 
     ;
@@ -15525,8 +15519,8 @@ Game_OpenDoorWithAKey:                      ; [$eb51]
     LDA #$7d                                ; 0x7D == "A" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15564,8 +15558,8 @@ Game_OpenDoorWithKKey:                      ; [$eb61]
     LDA #$7c                                ; 0x7C == "K" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15603,8 +15597,8 @@ Game_OpenDoorWithQKey:                      ; [$eb71]
     LDA #$7b                                ; 0x7B == "Q" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15642,8 +15636,8 @@ Game_OpenDoorWithJKey:                      ; [$eb81]
     LDA #$02                                ; 0x02 == "J" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15681,8 +15675,8 @@ Game_OpenDoorWithJoKey:                     ; [$eb91]
     LDA #$7e                                ; 0x7E == "Jo" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15719,8 +15713,8 @@ Game_OpenDoorWithRingOfElf:                 ; [$eba1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15757,8 +15751,8 @@ Game_OpenDoorWithRingOfDworf:               ; [$ebb1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15795,8 +15789,8 @@ Game_OpenDoorWithDemonsRing:                ; [$ebc1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     RTS
 
 
@@ -15822,8 +15816,8 @@ Game_UnlockDoorWithUsableItem:              ; [$ebd1]
     ;
     LDA #$84                                ; 0x84 == Used key IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::IScripts_Begin@}}
+    db $0c,$41,$82                          ; Bank = 12 Address =
+                                            ; IScripts_Begin
     LDA #$ff
     STA a:SelectedItem
     JSR UI_ClearSelectedItemPic
@@ -17311,8 +17305,7 @@ Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
   @LAB_PRG15_MIRROR__f09a:                  ; [$f09a]
     CLC
     ADC Maybe_Arg_CurrentSprite_PosX        ; Add the loaded value to
-                                            ; {{@SYMBOL: RAM::Maybe_Arg_Curre
-                                            ; ntSprite_PosX@}}.
+                                            ; Maybe_Arg_CurrentSprite_PosX.
     STA Temp_Sprites_NormXPos               ; Store it.
 
     ;
@@ -17778,8 +17771,8 @@ IScripts_ClearPortrait:                     ; [$f281]
     ; PRG15_MIRROR::GameLoop_LoadSpriteImages@}}.
     ;
     JSR MMC1_LoadBankAndJump
-    db $0e                                  ; Bank = 14 Address = {@symbol
-                                            ; PRG15_MIRROR::c28d}
+    db $0e                                  ; Bank = 14 Address =
+                                            ; GameLoop_LoadSpriteImages
     db $8c,$c2                              ; [$f296] byte
 
   @LAB_PRG15_MIRROR__f298:                  ; [$f298]
@@ -19087,8 +19080,7 @@ TextBox_ShowMessage_Fill4Lines:             ; [$f571]
     ;
     ; Increase the Y position to draw to by 3, after these lines.
     ;
-    INC TextBox_TextY                       ; {{@SYMBOL:
-                                            ; RAM::TextBox_TextY@}} += 3
+    INC TextBox_TextY                       ; TextBox_TextY += 3
     INC TextBox_TextY
     INC TextBox_TextY
 
@@ -19751,8 +19743,7 @@ PPU_SetAddrForTextPos:                      ; [$f804]
 PPU_IncrementAddrBy16:                      ; [$f81e]
     LDA #$10                                ; A = 16
     BNE PPU_IncrementAddrBy                 ; Unconditionally jump to
-                                            ; {{@SYMBOL: PRG15_MIRROR::PPU_In
-                                            ; crementAddrBy@}}.
+                                            ; PPU_IncrementAddrBy.
 
 
 ;============================================================================
@@ -19774,8 +19765,7 @@ PPU_IncrementAddrBy16:                      ; [$f81e]
 PPU_IncrementAddrBy8:                       ; [$f822]
     LDA #$08                                ; A = 8
     BNE PPU_IncrementAddrBy                 ; Unconditionally jump to
-                                            ; {{@SYMBOL: PRG15_MIRROR::PPU_In
-                                            ; crementAddrBy@}}.
+                                            ; PPU_IncrementAddrBy.
 
 
 ;============================================================================
@@ -19911,8 +19901,8 @@ TextBox_SomethingPPUBuffer_Set:             ; [$f839]
 ;     TextBox_Write8BytesFromTemp
 ;============================================================================
 PPUBuffer_WriteFromTemp:                    ; [$f842]
-    LDA (Temp_Int24),Y                      ; Load the value from {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} at offset Y.
+    LDA (Temp_Int24),Y                      ; Load the value from Temp_Int24
+                                            ; at offset Y.
     INY                                     ; Y++
 
     ;
@@ -20076,26 +20066,18 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Save out the X, Y, and Z values to temporary variables.
     ;
-    STA BankedCallSetup_SavedA              ; Set {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedA@}}
-                                            ; = A
-    STX BankedCallSetup_SavedX              ; Set {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedX@}}
-                                            ; = X
-    STY BankedCallSetup_SavedY              ; Set {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedY@}}
-                                            ; = Y
+    STA BankedCallSetup_SavedA              ; Set BankedCallSetup_SavedA = A
+    STX BankedCallSetup_SavedX              ; Set BankedCallSetup_SavedX = X
+    STY BankedCallSetup_SavedY              ; Set BankedCallSetup_SavedY = Y
 
     ;
     ; Pop two bytes of A from the stack and transfer to the lower
     ; and middle bytes (in order) of Temp_Int24.
     ;
     PLA                                     ; Pop A from the stack.
-    STA Temp_Int24                          ; Lower byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} = A
+    STA Temp_Int24                          ; Lower byte of Temp_Int24 = A
     PLA                                     ; Pull A from the stack.
-    STA Temp_Int24.M                        ; Middle byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} = A
+    STA Temp_Int24.M                        ; Middle byte of Temp_Int24 = A
 
     ;
     ; Save A to X. We'll increment this below if we overflow
@@ -20106,12 +20088,10 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Compute a new return low = Temp_Int24.L + 3.
     ;
-    LDA Temp_Int24                          ; A = lower byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}.
+    LDA Temp_Int24                          ; A = lower byte of Temp_Int24.
     CLC                                     ; C = 0
     ADC #$03                                ; A = A + 3
-    STA Temp_Int24.U                        ; Upper byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} = A
+    STA Temp_Int24.U                        ; Upper byte of Temp_Int24 = A
 
     ;
     ; If the upper byte overflowed, increment X.
@@ -20128,24 +20108,18 @@ MMC1_LoadBankAndJump:                       ; [$f859]
   @LAB_PRG15_MIRROR__f870:                  ; [$f870]
     TXA                                     ; A = X (our adjusted offset)
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}
+    LDA Temp_Int24.U                        ; A = upper byte of Temp_Int24
     PHA                                     ; Push A to stack
     LDA a:CurrentROMBank2                   ; A = CurrentROMBank
     PHA                                     ; Push A to stack
     LDY #$03                                ; Y = 3
-    LDA (Temp_Int24),Y                      ; A = upper byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}
-    STA Maybe_Temp4                         ; Maybe_Temp4
-                                            ; = A
+    LDA (Temp_Int24),Y                      ; A = upper byte of Temp_Int24
+    STA Maybe_Temp4                         ; Maybe_Temp4 = A
     DEY                                     ; Y-- (2)
-    LDA (Temp_Int24),Y                      ; A = middle byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}
-    STA Temp_Int24.U                        ; Upper byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}} = A
+    LDA (Temp_Int24),Y                      ; A = middle byte of Temp_Int24
+    STA Temp_Int24.U                        ; Upper byte of Temp_Int24 = A
     DEY                                     ; Y-- (1)
-    LDA (Temp_Int24),Y                      ; A = lower byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}
+    LDA (Temp_Int24),Y                      ; A = lower byte of Temp_Int24
     TAX                                     ; X = A
     JSR MMC1_UpdatePRGBank                  ; Update the ROM bank to X.
 
@@ -20160,22 +20134,17 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Push the target address for the trampoline.
     ;
-    LDA Maybe_Temp4                         ; A = {{@SYMBOL:
-                                            ; RAM::Maybe_Temp4@}}
+    LDA Maybe_Temp4                         ; A = Maybe_Temp4
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}.
+    LDA Temp_Int24.U                        ; A = upper byte of Temp_Int24.
     PHA                                     ; Push A to stack
 
     ;
     ; Restore the original values for A, X, and Y.
     ;
-    LDA BankedCallSetup_SavedA              ; A = {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedA@}}
-    LDX BankedCallSetup_SavedX              ; X = {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedX@}}
-    LDY BankedCallSetup_SavedY              ; Y = {{@SYMBOL:
-                                            ; RAM::BankedCallSetup_SavedY@}}
+    LDA BankedCallSetup_SavedA              ; A = BankedCallSetup_SavedA
+    LDX BankedCallSetup_SavedX              ; X = BankedCallSetup_SavedX
+    LDY BankedCallSetup_SavedY              ; Y = BankedCallSetup_SavedY
     RTS
 
 
@@ -20369,11 +20338,9 @@ UI_DrawStatusSymbols:                       ; [$f8eb]
     ;    time we place a tile.
     ;
     LDX #$00                                ; Set X = 0 (start index in
-                                            ; {{@SYMBOL: PRG15_MIRROR::UI_STA
-                                            ; TUS_SYMBOL_PPU_ADDR_L@}}.
+                                            ; UI_STATUS_SYMBOL_PPU_ADDR_L.
     LDY #$00                                ; Set Y = 0 (start index at
-                                            ; {{@SYMBOL: PRG15_MIRROR::UI_STA
-                                            ; TUS_TILES@}}.
+                                            ; UI_STATUS_TILES.
 
     ;
     ; Set the PPUADDR to $20XX, where XX comes from the
@@ -20606,8 +20573,7 @@ UI_DrawPlayerExperience:                    ; [$f975]
     ;
     LDA a:Experience                        ; Load the lower byte of the
                                             ; experience.
-    STA Temp_Int24                          ; Save to {{@SYMBOL:
-                                            ; RAM::Temp_Int24@}}.
+    STA Temp_Int24                          ; Save to Temp_Int24.
     LDA a:Experience_U                      ; Load the upper byte of the
                                             ; experience.
     STA Temp_Int24.M                        ; Save to #$ed.
@@ -21625,8 +21591,8 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
     ; Switch to bank 12 and run StartScreen_Draw.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$20,$9e                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::StartScreen_Draw@}}
+    db $0c,$20,$9e                          ; Bank = 12 Address =
+                                            ; StartScreen_Draw
 
     ;
     ; Wait for a choice at the game's start screen.
@@ -21639,8 +21605,8 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
     ; Switch to bank 12 and run FUN_PRG12__9f44.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$43,$9f                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::FUN_PRG12__9f44@}}
+    db $0c,$43,$9f                          ; Bank = 12 Address =
+                                            ; FUN_PRG12__9f44
     LDA Joy1_ChangedButtonMask
     AND #$10
     BEQ @LAB_PRG15_MIRROR__fc6e
@@ -21653,17 +21619,16 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
     ; Switch to bank 12 and run FUN_PRG12__909d.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$9c,$90                          ; Bank = 12 Address = {{@SYMBOL:
-                                            ; PRG12::FUN_PRG12__909d@}}
+    db $0c,$9c,$90                          ; Bank = 12 Address =
+                                            ; FUN_PRG12__909d
 
     ;
     ; Switch to bank 12 and run {{@SYMBOL:
     ; PRG12::Player_SetInitialExpAndGold@}}.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$b0,$95                          ; Bank = 12 Address = {{@SYMBOL: 
-                                            ; PRG12::Player_SetInitialExpAndG
-                                            ; old@}}
+    db $0c,$b0,$95                          ; Bank = 12 Address =
+                                            ; Player_SetInitialExpAndGold
     JMP Player_Spawn
 
     ;
@@ -21672,18 +21637,16 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
     ;
   @LAB_PRG15_MIRROR__fc98:                  ; [$fc98]
     JSR MMC1_LoadBankAndJump
-    db $0c,$99,$a7                          ; Bank = 12 Address = {{@SYMBOL: 
-                                            ; PRG12::SplashAnimation_RunIntro
-                                            ; @}}
+    db $0c,$99,$a7                          ; Bank = 12 Address =
+                                            ; SplashAnimation_RunIntro
 
     ;
     ; Switch to bank 12 and run {{@SYMBOL:
     ; PRG12::Player_SetStartGameState@}}.
     ;
     JSR MMC1_LoadBankAndJump
-    db $0c,$6f,$95                          ; Bank = 12 Address = {{@SYMBOL: 
-                                            ; PRG12::Player_SetStartGameState
-                                            ; @}}
+    db $0c,$6f,$95                          ; Bank = 12 Address =
+                                            ; Player_SetStartGameState
     JMP Game_Start
 
 
