@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+
+<html>
+ <head>
+  <title>Faxanadu (U).nes</title>
+  <style>
+
+body {
+  background: #1c212d;
+  color: white;
+  font-family: Roboto Mono;
+  font-size: 10pt;
+  padding: 0.5em;
+}
+
+a:link,
+a:visited {
+  color: #9bdeff;
+}
+
+.c,
+.cp,
+.l {
+  grid-column: 1 / -1;
+}
+
+.cp {
+  color: #6fafb5;
+  margin-bottom: 1em;
+}
+
+.l {
+  display: grid;
+  grid-template-columns: subgrid;
+  min-height: 1.5lh;
+}
+
+pre {
+  display: grid;
+  grid-template-columns: minmax(70ch, max-content) 1fr;
+  margin: 0;
+  padding: 0;
+}
+  </style>
+ </head>
+ <body>
+  <pre>
+<div class="cp">
+;
+; Annotated Faxanadu Source
+;
+; By Christian Hammond
+;
+; Website:   <a href="https://chipx86.com">https://chipx86.com</a>
+; Blog:      <a href="https://chipx86.blog">https://chipx86.blog</a>
+; BlueSky:   <a href="https://bsky.app/profile/chipx86.com">https://bsky.app/profile/chipx86.com</a>
+; Mastodon:  <a href="https://mastodon.online/@chipx86">https://mastodon.online/@chipx86</a>
+; Twitter/X: <a href="https://x.com/chipx86">https://x.com/chipx86</a>
+;
+</div>
+
+<span class="l"><a href="DEFS.html">DEFS</a>
+<span class="ce">; Enum definitions</span></span>
+
+<span class="l"><a href="RAM.html">RAM</a>
+<span class="ce">; RAM/Memory addresses</span></span>
+
+<span class="l"><a href="PRG0.html">PRG0</a>
+<span class="ce">; Bank 0</span></span>
+
+<span class="l"><a href="PRG1.html">PRG1</a>
+<span class="ce">; Bank 1 (Sprites)</span></span>
+
+<span class="l"><a href="PRG2.html">PRG2</a>
+<span class="ce">; Bank 2 (Sprites)</span></span>
+
+<span class="l"><a href="PRG3.html">PRG3</a>
+<span class="ce">; Bank 3 (Level data)</span></span>
+
+<span class="l"><a href="PRG4.html">PRG4</a>
+<span class="ce">; Bank 4</span></span>
+
+<span class="l"><a href="PRG5.html">PRG5</a>
+<span class="ce">; Bank 5 (Sound logic and data)</span></span>
+
+<span class="l"><a href="PRG6.html">PRG6</a>
+<span class="ce">; Bank 6</span></span>
+
+<span class="l"><a href="PRG7.html">PRG7</a>
+<span class="ce">; Bank 7 (PRG)</span></span>
+
+<span class="l"><a href="PRG8.html">PRG8</a>
+<span class="ce">; Bank 8 (PRG)</span></span>
+
+<span class="l"><a href="PRG9.html">PRG9</a>
+<span class="ce">; Bank 9 (Unused)</span></span>
+
+<span class="l"><a href="PRG10.html">PRG10</a>
+<span class="ce">; Bank 10 (CHR RAM)</span></span>
+
+<span class="l"><a href="PRG11.html">PRG11</a>
+<span class="ce">; Bank 11 (Sprite information, palettes)</span></span>
+
+<span class="l"><a href="PRG12.html">PRG12</a>
+<span class="ce">; Bank 12 (Interaction scripts)</span></span>
+
+<span class="l"><a href="PRG13.html">PRG13</a>
+<span class="ce">; Bank 13 (Text strings and glyphs)</span></span>
+
+<span class="l"><a href="PRG14.html">PRG14</a>
+<span class="ce">; Bank 14 (Sprite logic, player interactions)</span></span>
+
+<span class="l"><a href="PRG15_MIRROR.html">PRG15_MIRROR</a>
+<span class="ce">; Bank 15 (Main logic)</span></span>
+  </pre>
+ </body>
+</html>
