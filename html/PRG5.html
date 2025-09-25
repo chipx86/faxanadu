@@ -33,12 +33,9 @@ pre {
 }
 
 .l {
-    min-height: 1lh;
-}
-
-.l {
   display: grid;
   grid-template-columns: subgrid;
+  min-height: 1lh;
 }
 
 .c,
@@ -70,11 +67,15 @@ pre {
   font-weight: bold;
 }
 
-.la {
+.la,
+.la:link,
+.la:visited {
   color: #e8e801;
 }
 
-.lla {
+.lla,
+.lla:link,
+.lla:visited {
   color: #caca00;
 }
 
@@ -115,7 +116,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
 ;============================================================================
-</div><span class="l"><a name="thunk_Sound_Init" class="la">thunk_Sound_Init:</a><span class="ce">; [$8000]</span></span>
+</div><span class="l"><a name="thunk_Sound_Init" href="#thunk_Sound_Init" class="la">thunk_Sound_Init:</a><span class="ce">; [$8000]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sound_Init">Sound_Init</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -131,7 +132,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="thunk_Sound_HandleOnInterrupt" class="la">thunk_Sound_HandleOnInterrupt:</a><span class="ce">; [$8003]</span></span>
+</div><span class="l"><a name="thunk_Sound_HandleOnInterrupt" href="#thunk_Sound_HandleOnInterrupt" class="la">thunk_Sound_HandleOnInterrupt:</a><span class="ce">; [$8003]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sound_HandleOnInterrupt">Sound_HandleOnInterrupt</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -147,7 +148,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
 ;============================================================================
-</div><span class="l"><a name="thunk_Sound_InitPlayingState" class="la">thunk_Sound_InitPlayingState:</a><span class="ce">; [$8006]</span></span>
+</div><span class="l"><a name="thunk_Sound_InitPlayingState" href="#thunk_Sound_InitPlayingState" class="la">thunk_Sound_InitPlayingState:</a><span class="ce">; [$8006]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sound_InitPlayingState">Sound_InitPlayingState</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -163,7 +164,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="thunk_Audio_HandleOnInterrupt" class="la">thunk_Audio_HandleOnInterrupt:</a><span class="ce">; [$8009]</span></span>
+</div><span class="l"><a name="thunk_Audio_HandleOnInterrupt" href="#thunk_Audio_HandleOnInterrupt" class="la">thunk_Audio_HandleOnInterrupt:</a><span class="ce">; [$8009]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a></span></span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [$800c] undefined</span></span>
 </pre><pre><span class="l"></span>
@@ -180,7 +181,7 @@ pre {
 ; XREFS:
 ;     <a href="#thunk_Audio_HandleOnInterrupt">thunk_Audio_HandleOnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="Audio_HandleOnInterrupt" class="la">Audio_HandleOnInterrupt:</a><span class="ce">; [$800d]</span></span>
+</div><span class="l"><a name="Audio_HandleOnInterrupt" href="#Audio_HandleOnInterrupt" class="la">Audio_HandleOnInterrupt:</a><span class="ce">; [$800d]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#PauseFlag">PauseFlag</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Audio_HandleIsPaused">Audio_HandleIsPaused</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
@@ -201,7 +202,7 @@ pre {
 ; XREFS:
 ;     <a href="#thunk_Sound_InitPlayingState">thunk_Sound_InitPlayingState</a>
 ;============================================================================
-</div><span class="l"><a name="Sound_InitPlayingState" class="la">Sound_InitPlayingState:</a><span class="ce">; [$801b]</span></span>
+</div><span class="l"><a name="Sound_InitPlayingState" href="#Sound_InitPlayingState" class="la">Sound_InitPlayingState:</a><span class="ce">; [$801b]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#NextSoundEffect">NextSoundEffect</a></span></span></span>
@@ -215,7 +216,7 @@ pre {
     ; XREFS:
     ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
     ;
-</div><span class="l"><a name="Audio_HandleIsPaused" class="la">Audio_HandleIsPaused:</a><span class="ce">; [$802e]</span></span>
+</div><span class="l"><a name="Audio_HandleIsPaused" href="#Audio_HandleIsPaused" class="la">Audio_HandleIsPaused:</a><span class="ce">; [$802e]</span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#Audio_HandleNoMusic">Audio_HandleNoMusic</a></span></span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o">#$80</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#PauseFlag">PauseFlag</a></span></span></span>
@@ -225,19 +226,19 @@ pre {
     ; XREFS:
     ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
     ;
-</div><span class="l"><a name="Audio_HandleNoMusic" class="la">Audio_HandleNoMusic:</a><span class="ce">; [$8038]</span></span>
+</div><span class="l"><a name="Audio_HandleNoMusic" href="#Audio_HandleNoMusic" class="la">Audio_HandleNoMusic:</a><span class="ce">; [$8038]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_loop" class="lla">@_loop:</a><span class="ce">; [$803e]</span></span>
+<span class="l"><a name="@_loop" href="#@_loop" class="lla">@_loop:</a><span class="ce">; [$803e]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@_loop">@_loop</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#ResetAudio">ResetAudio</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return" class="lla">@_return:</a><span class="ce">; [$8049]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$8049]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -254,7 +255,7 @@ pre {
 ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
 ;     <a href="#Sound_Init">Sound_Init</a>
 ;============================================================================
-</div><span class="l"><a name="ResetAudio" class="la">ResetAudio:</a><span class="ce">; [$804a]</span></span>
+</div><span class="l"><a name="ResetAudio" href="#ResetAudio" class="la">ResetAudio:</a><span class="ce">; [$804a]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$10</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SQ1_VOL">SQ1_VOL</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SQ2_VOL">SQ2_VOL</a></span></span></span>
@@ -277,7 +278,7 @@ pre {
     ; XREFS:
     ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
     ;
-</div><span class="l"><a name="Audio_HandleMusicIsFF" class="la">Audio_HandleMusicIsFF:</a><span class="ce">; [$8079]</span></span>
+</div><span class="l"><a name="Audio_HandleMusicIsFF" href="#Audio_HandleMusicIsFF" class="la">Audio_HandleMusicIsFF:</a><span class="ce">; [$8079]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o">#$80</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
@@ -287,7 +288,7 @@ pre {
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$07</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_musicLoop" class="lla">@_musicLoop:</a><span class="ce">; [$8085]</span></span>
+<span class="l"><a name="@_musicLoop" href="#@_musicLoop" class="lla">@_musicLoop:</a><span class="ce">; [$8085]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8efa,Y</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusicInfo1">CurrentMusicInfo1</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_0150">DAT_0150</a></span></span></span>
@@ -349,18 +350,18 @@ pre {
 ; XREFS:
 ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8106" class="la">FUN_PRG5__8106:</a><span class="ce">; [$8106]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8106" href="#FUN_PRG5__8106" class="la">FUN_PRG5__8106:</a><span class="ce">; [$8106]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_Something_MusicCounter">Maybe_Something_MusicCounter</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__810e" class="lla">@LAB_PRG5__810e:</a><span class="ce">; [$810e]</span></span>
+<span class="l"><a name="@LAB_PRG5__810e" href="#@LAB_PRG5__810e" class="lla">@LAB_PRG5__810e:</a><span class="ce">; [$810e]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Something_Music_0130">Something_Music_0130</a>,X</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__8119">@LAB_PRG5__8119</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8119" class="lla">@LAB_PRG5__8119:</a><span class="ce">; [$8119]</span></span>
+<span class="l"><a name="@LAB_PRG5__8119" href="#@LAB_PRG5__8119" class="lla">@LAB_PRG5__8119:</a><span class="ce">; [$8119]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8132">FUN_PRG5__8132</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
@@ -372,7 +373,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return" class="lla">@_return:</a><span class="ce">; [$8131]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$8131]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -388,7 +389,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__8106">FUN_PRG5__8106</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8132" class="la">FUN_PRG5__8132:</a><span class="ce">; [$8132]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8132" href="#FUN_PRG5__8132" class="la">FUN_PRG5__8132:</a><span class="ce">; [$8132]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8160">@LAB_PRG5__8160</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
@@ -397,14 +398,14 @@ pre {
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__813e">@LAB_PRG5__813e</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__813e" class="lla">@LAB_PRG5__813e:</a><span class="ce">; [$813e]</span></span>
+<span class="l"><a name="@LAB_PRG5__813e" href="#@LAB_PRG5__813e" class="lla">@LAB_PRG5__813e:</a><span class="ce">; [$813e]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Music_017e">Something_Music_017e</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__814b">@LAB_PRG5__814b</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o">a:<a href="RAM.html#Something_Music_017e">Something_Music_017e</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$c0</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__814b" class="lla">@LAB_PRG5__814b:</a><span class="ce">; [$814b]</span></span>
+<span class="l"><a name="@LAB_PRG5__814b" href="#@LAB_PRG5__814b" class="lla">@LAB_PRG5__814b:</a><span class="ce">; [$814b]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__815a">@LAB_PRG5__815a</a></span></span></span>
@@ -412,12 +413,12 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TRI_LINEAR">TRI_LINEAR</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__815a" class="lla">@LAB_PRG5__815a:</a><span class="ce">; [$815a]</span></span>
+<span class="l"><a name="@LAB_PRG5__815a" href="#@LAB_PRG5__815a" class="lla">@LAB_PRG5__815a:</a><span class="ce">; [$815a]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TRI_LINEAR">TRI_LINEAR</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8160" class="lla">@LAB_PRG5__8160:</a><span class="ce">; [$8160]</span></span>
+<span class="l"><a name="@LAB_PRG5__8160" href="#@LAB_PRG5__8160" class="lla">@LAB_PRG5__8160:</a><span class="ce">; [$8160]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o"><a href="RAM.html#Something_Music_0176">Something_Music_0176</a>,X</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__816f">@LAB_PRG5__816f</a></span></span></span>
@@ -427,7 +428,7 @@ pre {
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__81bc">@LAB_PRG5__81bc</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__816f" class="lla">@LAB_PRG5__816f:</a><span class="ce">; [$816f]</span></span>
+<span class="l"><a name="@LAB_PRG5__816f" href="#@LAB_PRG5__816f" class="lla">@LAB_PRG5__816f:</a><span class="ce">; [$816f]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__817d">@LAB_PRG5__817d</a></span></span></span>
@@ -435,7 +436,7 @@ pre {
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__817d" class="lla">@LAB_PRG5__817d:</a><span class="ce">; [$817d]</span></span>
+<span class="l"><a name="@LAB_PRG5__817d" href="#@LAB_PRG5__817d" class="lla">@LAB_PRG5__817d:</a><span class="ce">; [$817d]</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
@@ -447,10 +448,10 @@ pre {
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__81f1">FUN_PRG5__81f1</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__820d">FUN_PRG5__820d</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return1" class="lla">@_return1:</a><span class="ce">; [$8191]</span></span>
+<span class="l"><a name="@_return1" href="#@_return1" class="lla">@_return1:</a><span class="ce">; [$8191]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8192" class="lla">@LAB_PRG5__8192:</a><span class="ce">; [$8192]</span></span>
+<span class="l"><a name="@LAB_PRG5__8192" href="#@LAB_PRG5__8192" class="lla">@LAB_PRG5__8192:</a><span class="ce">; [$8192]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
@@ -460,7 +461,7 @@ pre {
 <span class="l"><span><span class="i">DEC</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__81a7" class="lla">@LAB_PRG5__81a7:</a><span class="ce">; [$81a7]</span></span>
+<span class="l"><a name="@LAB_PRG5__81a7" href="#@LAB_PRG5__81a7" class="lla">@LAB_PRG5__81a7:</a><span class="ce">; [$81a7]</span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Music_0179">Something_Music_0179</a>,X</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0170,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
@@ -469,10 +470,10 @@ pre {
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__81f1">FUN_PRG5__81f1</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__820d">FUN_PRG5__820d</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return2" class="lla">@_return2:</a><span class="ce">; [$81bb]</span></span>
+<span class="l"><a name="@_return2" href="#@_return2" class="lla">@_return2:</a><span class="ce">; [$81bb]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__81bc" class="lla">@LAB_PRG5__81bc:</a><span class="ce">; [$81bc]</span></span>
+<span class="l"><a name="@LAB_PRG5__81bc" href="#@LAB_PRG5__81bc" class="lla">@LAB_PRG5__81bc:</a><span class="ce">; [$81bc]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Music_0179">Something_Music_0179</a>,X</span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
@@ -482,21 +483,21 @@ pre {
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__81cd">@LAB_PRG5__81cd</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Music_0179">Something_Music_0179</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__81cd" class="lla">@LAB_PRG5__81cd:</a><span class="ce">; [$81cd]</span></span>
+<span class="l"><a name="@LAB_PRG5__81cd" href="#@LAB_PRG5__81cd" class="lla">@LAB_PRG5__81cd:</a><span class="ce">; [$81cd]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return3">@_return3</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__81f1">FUN_PRG5__81f1</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__820d">FUN_PRG5__820d</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return3" class="lla">@_return3:</a><span class="ce">; [$81db]</span></span>
+<span class="l"><a name="@_return3" href="#@_return3" class="lla">@_return3:</a><span class="ce">; [$81db]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__8132">FUN_PRG5__8132</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_PRG5__81dc" class="la">BYTE_ARRAY_PRG5__81dc:</a><span class="ce">; [$81dc]</span></span>
+</div><span class="l"><a name="BYTE_ARRAY_PRG5__81dc" href="#BYTE_ARRAY_PRG5__81dc" class="la">BYTE_ARRAY_PRG5__81dc:</a><span class="ce">; [$81dc]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$07</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$0a</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$0d</span></span><span class="ce">; [2]:</span></span>
@@ -532,7 +533,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__8132">FUN_PRG5__8132</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__81f1" class="la">FUN_PRG5__81f1:</a><span class="ce">; [$81f1]</span></span>
+</div><span class="l"><a name="FUN_PRG5__81f1" href="#FUN_PRG5__81f1" class="la">FUN_PRG5__81f1:</a><span class="ce">; [$81f1]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">TXA</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
@@ -544,7 +545,7 @@ pre {
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG5__8203">@LAB_PRG5__8203</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8203" class="lla">@LAB_PRG5__8203:</a><span class="ce">; [$8203]</span></span>
+<span class="l"><a name="@LAB_PRG5__8203" href="#@LAB_PRG5__8203" class="lla">@LAB_PRG5__8203:</a><span class="ce">; [$8203]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Something_Music_0172">Something_Music_0172</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#SQ1_VOL">SQ1_VOL</a>,Y</span></span></span>
@@ -563,7 +564,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__8132">FUN_PRG5__8132</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__820d" class="la">FUN_PRG5__820d:</a><span class="ce">; [$820d]</span></span>
+</div><span class="l"><a name="FUN_PRG5__820d" href="#FUN_PRG5__820d" class="la">FUN_PRG5__820d:</a><span class="ce">; [$820d]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Music_0179">Something_Music_0179</a>,X</span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$12</span></span></span>
@@ -585,7 +586,7 @@ pre {
 <span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#Something_Music_0178">Something_Music_0178</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#SQ1_LO">SQ1_LO</a>,Y</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return" class="lla">@_return:</a><span class="ce">; [$8239]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$8239]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -618,7 +619,7 @@ pre {
 ;     <a href="#FUN_PRG5__853b">FUN_PRG5__853b</a>
 ;     <a href="#thunk_FUN_PRG5__823a">thunk_FUN_PRG5__823a</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__823a" class="la">FUN_PRG5__823a:</a><span class="ce">; [$823a]</span></span>
+</div><span class="l"><a name="FUN_PRG5__823a" href="#FUN_PRG5__823a" class="la">FUN_PRG5__823a:</a><span class="ce">; [$823a]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__8249">@LAB_PRG5__8249</a></span></span></span>
@@ -626,14 +627,14 @@ pre {
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8249">@LAB_PRG5__8249</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__82ff">FUN_PRG5__82ff</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8249" class="lla">@LAB_PRG5__8249:</a><span class="ce">; [$8249]</span></span>
+<span class="l"><a name="@LAB_PRG5__8249" href="#@LAB_PRG5__8249" class="lla">@LAB_PRG5__8249:</a><span class="ce">; [$8249]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#@LAB_PRG5__8255">@LAB_PRG5__8255</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__82e3">FUN_PRG5__82e3</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8255" class="lla">@LAB_PRG5__8255:</a><span class="ce">; [$8255]</span></span>
+<span class="l"><a name="@LAB_PRG5__8255" href="#@LAB_PRG5__8255" class="lla">@LAB_PRG5__8255:</a><span class="ce">; [$8255]</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$ee</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#FUN_PRG5__828e">FUN_PRG5__828e</a></span></span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
@@ -651,7 +652,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__823a">FUN_PRG5__823a</a>
 ;
-</div><span class="l"><a name="USHORT_PRG5__826a" class="la">USHORT_PRG5__826a:</a><span class="ce">; [$826a]</span></span>
+</div><span class="l"><a name="USHORT_PRG5__826a" href="#USHORT_PRG5__826a" class="la">USHORT_PRG5__826a:</a><span class="ce">; [$826a]</span></span>
 <span class="l">  dw FUN_PRG5__8408-1</span>
 <span class="l">  dw FUN_PRG5__84a5-1</span>
 <span class="l">  dw FUN_PRG5__841f-1</span>
@@ -684,7 +685,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__823a">FUN_PRG5__823a</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__828e" class="la">FUN_PRG5__828e:</a><span class="ce">; [$828e]</span></span>
+</div><span class="l"><a name="FUN_PRG5__828e" href="#FUN_PRG5__828e" class="la">FUN_PRG5__828e:</a><span class="ce">; [$828e]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$7f</span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#FUN_PRG5__8298">FUN_PRG5__8298</a></span></span></span>
@@ -703,7 +704,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8295" class="la">FUN_PRG5__8295:</a><span class="ce">; [$8295]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8295" href="#FUN_PRG5__8295" class="la">FUN_PRG5__8295:</a><span class="ce">; [$8295]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"></span>
 <div class="c">    ;
@@ -723,7 +724,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__828e">FUN_PRG5__828e</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8298" class="la">FUN_PRG5__8298:</a><span class="ce">; [$8298]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8298" href="#FUN_PRG5__8298" class="la">FUN_PRG5__8298:</a><span class="ce">; [$8298]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">#$012c,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
@@ -752,23 +753,23 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$18</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__82da">@LAB_PRG5__82da</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82cc" class="lla">@LAB_PRG5__82cc:</a><span class="ce">; [$82cc]</span></span>
+<span class="l"><a name="@LAB_PRG5__82cc" href="#@LAB_PRG5__82cc" class="lla">@LAB_PRG5__82cc:</a><span class="ce">; [$82cc]</span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82ce" class="lla">@LAB_PRG5__82ce:</a><span class="ce">; [$82ce]</span></span>
+<span class="l"><a name="@LAB_PRG5__82ce" href="#@LAB_PRG5__82ce" class="lla">@LAB_PRG5__82ce:</a><span class="ce">; [$82ce]</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$856f,Y</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG5__82d7">@LAB_PRG5__82d7</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__82ce">@LAB_PRG5__82ce</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82d7" class="lla">@LAB_PRG5__82d7:</a><span class="ce">; [$82d7]</span></span>
+<span class="l"><a name="@LAB_PRG5__82d7" href="#@LAB_PRG5__82d7" class="lla">@LAB_PRG5__82d7:</a><span class="ce">; [$82d7]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8570,Y</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82da" class="lla">@LAB_PRG5__82da:</a><span class="ce">; [$82da]</span></span>
+<span class="l"><a name="@LAB_PRG5__82da" href="#@LAB_PRG5__82da" class="lla">@LAB_PRG5__82da:</a><span class="ce">; [$82da]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0164">Something_Music_0164</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82dd" class="lla">@LAB_PRG5__82dd:</a><span class="ce">; [$82dd]</span></span>
+<span class="l"><a name="@LAB_PRG5__82dd" href="#@LAB_PRG5__82dd" class="lla">@LAB_PRG5__82dd:</a><span class="ce">; [$82dd]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span><span class="ce">; Unreachable?</span></span>
 </pre><pre><span class="l"></span>
@@ -785,12 +786,12 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__823a">FUN_PRG5__823a</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__82e3" class="la">FUN_PRG5__82e3:</a><span class="ce">; [$82e3]</span></span>
+</div><span class="l"><a name="FUN_PRG5__82e3" href="#FUN_PRG5__82e3" class="la">FUN_PRG5__82e3:</a><span class="ce">; [$82e3]</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__82ea">@LAB_PRG5__82ea</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__83ad">FUN_PRG5__83ad</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__82ea" class="lla">@LAB_PRG5__82ea:</a><span class="ce">; [$82ea]</span></span>
+<span class="l"><a name="@LAB_PRG5__82ea" href="#@LAB_PRG5__82ea" class="lla">@LAB_PRG5__82ea:</a><span class="ce">; [$82ea]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#FUN_PRG5__8326">FUN_PRG5__8326</a></span></span></span>
@@ -817,24 +818,24 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__823a">FUN_PRG5__823a</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__82ff" class="la">FUN_PRG5__82ff:</a><span class="ce">; [$82ff]</span></span>
+</div><span class="l"><a name="FUN_PRG5__82ff" href="#FUN_PRG5__82ff" class="la">FUN_PRG5__82ff:</a><span class="ce">; [$82ff]</span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o">a:<a href="RAM.html#Something_Music_0169">Something_Music_0169</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0126">SOUND_DAT_0126</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__830a">@LAB_PRG5__830a</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__83ad">FUN_PRG5__83ad</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__830a" class="lla">@LAB_PRG5__830a:</a><span class="ce">; [$830a]</span></span>
+<span class="l"><a name="@LAB_PRG5__830a" href="#@LAB_PRG5__830a" class="lla">@LAB_PRG5__830a:</a><span class="ce">; [$830a]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#BYTE_0168">BYTE_0168</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__8312">@LAB_PRG5__8312</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__83ad">FUN_PRG5__83ad</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8312" class="lla">@LAB_PRG5__8312:</a><span class="ce">; [$8312]</span></span>
+<span class="l"><a name="@LAB_PRG5__8312" href="#@LAB_PRG5__8312" class="lla">@LAB_PRG5__8312:</a><span class="ce">; [$8312]</span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8317" class="lla">@LAB_PRG5__8317:</a><span class="ce">; [$8317]</span></span>
+<span class="l"><a name="@LAB_PRG5__8317" href="#@LAB_PRG5__8317" class="lla">@LAB_PRG5__8317:</a><span class="ce">; [$8317]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$857f,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#NOISE_VOL">NOISE_VOL</a>,Y</span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
@@ -856,13 +857,13 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__82e3">FUN_PRG5__82e3</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8326" class="la">FUN_PRG5__8326:</a><span class="ce">; [$8326]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8326" href="#FUN_PRG5__8326" class="la">FUN_PRG5__8326:</a><span class="ce">; [$8326]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8331">@LAB_PRG5__8331</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__83ad">FUN_PRG5__83ad</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8331" class="lla">@LAB_PRG5__8331:</a><span class="ce">; [$8331]</span></span>
+<span class="l"><a name="@LAB_PRG5__8331" href="#@LAB_PRG5__8331" class="lla">@LAB_PRG5__8331:</a><span class="ce">; [$8331]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8355">@LAB_PRG5__8355</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
@@ -878,7 +879,7 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TRI_HI">TRI_HI</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__83b7">FUN_PRG5__83b7</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8355" class="lla">@LAB_PRG5__8355:</a><span class="ce">; [$8355]</span></span>
+<span class="l"><a name="@LAB_PRG5__8355" href="#@LAB_PRG5__8355" class="lla">@LAB_PRG5__8355:</a><span class="ce">; [$8355]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__83cd">FUN_PRG5__83cd</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SQ1_SWEEP">SQ1_SWEEP</a></span></span></span>
@@ -892,7 +893,7 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_0179">Something_Music_0179</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__83a1">@LAB_PRG5__83a1</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8376" class="lla">@LAB_PRG5__8376:</a><span class="ce">; [$8376]</span></span>
+<span class="l"><a name="@LAB_PRG5__8376" href="#@LAB_PRG5__8376" class="lla">@LAB_PRG5__8376:</a><span class="ce">; [$8376]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__83cd">FUN_PRG5__83cd</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SQ2_SWEEP">SQ2_SWEEP</a></span></span></span>
@@ -903,7 +904,7 @@ pre {
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#Something_Music_0181">Something_Music_0181</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__838d" class="lla">@LAB_PRG5__838d:</a><span class="ce">; [$838d]</span></span>
+<span class="l"><a name="@LAB_PRG5__838d" href="#@LAB_PRG5__838d" class="lla">@LAB_PRG5__838d:</a><span class="ce">; [$838d]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SQ2_LO">SQ2_LO</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_017d">Something_Music_017d</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Music_016e">Something_Music_016e</a></span></span></span>
@@ -912,7 +913,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_017a">Something_Music_017a</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__83a1" class="lla">@LAB_PRG5__83a1:</a><span class="ce">; [$83a1]</span></span>
+<span class="l"><a name="@LAB_PRG5__83a1" href="#@LAB_PRG5__83a1" class="lla">@LAB_PRG5__83a1:</a><span class="ce">; [$83a1]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">#$0170,X</span></span></span>
@@ -935,7 +936,7 @@ pre {
 ;     <a href="#FUN_PRG5__8326">FUN_PRG5__8326</a>
 ;     <a href="#FUN_PRG5__83b7">FUN_PRG5__83b7</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__83ad" class="la">FUN_PRG5__83ad:</a><span class="ce">; [$83ad]</span></span>
+</div><span class="l"><a name="FUN_PRG5__83ad" href="#FUN_PRG5__83ad" class="la">FUN_PRG5__83ad:</a><span class="ce">; [$83ad]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$012c,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0130">Something_Music_0130</a>,X</span></span></span>
@@ -954,7 +955,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__8326">FUN_PRG5__8326</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__83b7" class="la">FUN_PRG5__83b7:</a><span class="ce">; [$83b7]</span></span>
+</div><span class="l"><a name="FUN_PRG5__83b7" href="#FUN_PRG5__83b7" class="la">FUN_PRG5__83b7:</a><span class="ce">; [$83b7]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__83ad">FUN_PRG5__83ad</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
@@ -979,7 +980,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__8326">FUN_PRG5__8326</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__83cd" class="la">FUN_PRG5__83cd:</a><span class="ce">; [$83cd]</span></span>
+</div><span class="l"><a name="FUN_PRG5__83cd" href="#FUN_PRG5__83cd" class="la">FUN_PRG5__83cd:</a><span class="ce">; [$83cd]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Music_016c">Something_Music_016c</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
@@ -992,7 +993,7 @@ pre {
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__83e5" class="lla">@LAB_PRG5__83e5:</a><span class="ce">; [$83e5]</span></span>
+<span class="l"><a name="@LAB_PRG5__83e5" href="#@LAB_PRG5__83e5" class="lla">@LAB_PRG5__83e5:</a><span class="ce">; [$83e5]</span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$0c</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG5__83e5">@LAB_PRG5__83e5</a></span></span></span>
@@ -1005,14 +1006,14 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8553,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_016e">Something_Music_016e</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__83fb" class="lla">@LAB_PRG5__83fb:</a><span class="ce">; [$83fb]</span></span>
+<span class="l"><a name="@LAB_PRG5__83fb" href="#@LAB_PRG5__83fb" class="lla">@LAB_PRG5__83fb:</a><span class="ce">; [$83fb]</span></span>
 <span class="l"><span><span class="i">DEY</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8407">@LAB_PRG5__8407</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">a:<a href="RAM.html#Something_Music_016e">Something_Music_016e</a></span></span></span>
 <span class="l"><span><span class="i">ROR</span> <span class="o">a:<a href="RAM.html#Something_Music_016d">Something_Music_016d</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#@LAB_PRG5__83fb">@LAB_PRG5__83fb</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8407" class="lla">@LAB_PRG5__8407:</a><span class="ce">; [$8407]</span></span>
+<span class="l"><a name="@LAB_PRG5__8407" href="#@LAB_PRG5__8407" class="lla">@LAB_PRG5__8407:</a><span class="ce">; [$8407]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -1028,7 +1029,7 @@ pre {
 ; XREFS:
 ;     <a href="#USHORT_PRG5__826a">USHORT_PRG5__826a</a> [$PRG5::826a]
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8408" class="la">FUN_PRG5__8408:</a><span class="ce">; [$8408]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8408" href="#FUN_PRG5__8408" class="la">FUN_PRG5__8408:</a><span class="ce">; [$8408]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0130">Something_Music_0130</a>,X</span></span></span>
@@ -1039,7 +1040,7 @@ pre {
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__8419">@LAB_PRG5__8419</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#CurrentMusicInfo2">CurrentMusicInfo2</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8419" class="lla">@LAB_PRG5__8419:</a><span class="ce">; [$8419]</span></span>
+<span class="l"><a name="@LAB_PRG5__8419" href="#@LAB_PRG5__8419" class="lla">@LAB_PRG5__8419:</a><span class="ce">; [$8419]</span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#CurrentMusicInfo1">CurrentMusicInfo1</a>,X</span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o">a:<a href="RAM.html#Maybe_Something_MusicCounter">Maybe_Something_MusicCounter</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
@@ -1054,7 +1055,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__841f" class="la">FUN_PRG5__841f:</a><span class="ce">; [$841f]</span></span>
+</div><span class="l"><a name="FUN_PRG5__841f" href="#FUN_PRG5__841f" class="la">FUN_PRG5__841f:</a><span class="ce">; [$841f]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">#$0148,X</span></span></span>
@@ -1079,7 +1080,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__843d" class="la">FUN_PRG5__843d:</a><span class="ce">; [$843d]</span></span>
+</div><span class="l"><a name="FUN_PRG5__843d" href="#FUN_PRG5__843d" class="la">FUN_PRG5__843d:</a><span class="ce">; [$843d]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$014c,X</span></span></span>
@@ -1092,7 +1093,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0141,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusicInfo2">CurrentMusicInfo2</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8455" class="lla">@LAB_PRG5__8455:</a><span class="ce">; [$8455]</span></span>
+<span class="l"><a name="@LAB_PRG5__8455" href="#@LAB_PRG5__8455" class="lla">@LAB_PRG5__8455:</a><span class="ce">; [$8455]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -1105,7 +1106,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8458" class="la">FUN_PRG5__8458:</a><span class="ce">; [$8458]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8458" href="#FUN_PRG5__8458" class="la">FUN_PRG5__8458:</a><span class="ce">; [$8458]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$014c,X</span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$0148,X</span></span></span>
@@ -1123,7 +1124,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0139,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusicInfo2">CurrentMusicInfo2</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__847d" class="lla">@LAB_PRG5__847d:</a><span class="ce">; [$847d]</span></span>
+<span class="l"><a name="@LAB_PRG5__847d" href="#@LAB_PRG5__847d" class="lla">@LAB_PRG5__847d:</a><span class="ce">; [$847d]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -1136,7 +1137,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="thunk_FUN_PRG5__823a" class="la">thunk_FUN_PRG5__823a:</a><span class="ce">; [$8480]</span></span>
+</div><span class="l"><a name="thunk_FUN_PRG5__823a" href="#thunk_FUN_PRG5__823a" class="la">thunk_FUN_PRG5__823a:</a><span class="ce">; [$8480]</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span><span class="ce">; Unreachable?</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -1149,7 +1150,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8483" class="la">FUN_PRG5__8483:</a><span class="ce">; [$8483]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8483" href="#FUN_PRG5__8483" class="la">FUN_PRG5__8483:</a><span class="ce">; [$8483]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0172">Something_Music_0172</a>,X</span></span></span>
@@ -1165,7 +1166,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__848f" class="la">FUN_PRG5__848f:</a><span class="ce">; [$848f]</span></span>
+</div><span class="l"><a name="FUN_PRG5__848f" href="#FUN_PRG5__848f" class="la">FUN_PRG5__848f:</a><span class="ce">; [$848f]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8495">FUN_PRG5__8495</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
 </pre><pre><span class="l"></span>
@@ -1182,7 +1183,7 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__848f">FUN_PRG5__848f</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8495" class="la">FUN_PRG5__8495:</a><span class="ce">; [$8495]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8495" href="#FUN_PRG5__8495" class="la">FUN_PRG5__8495:</a><span class="ce">; [$8495]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -1202,7 +1203,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__84a5" class="la">FUN_PRG5__84a5:</a><span class="ce">; [$84a5]</span></span>
+</div><span class="l"><a name="FUN_PRG5__84a5" href="#FUN_PRG5__84a5" class="la">FUN_PRG5__84a5:</a><span class="ce">; [$84a5]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -1222,7 +1223,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__84b7" class="la">FUN_PRG5__84b7:</a><span class="ce">; [$84b7]</span></span>
+</div><span class="l"><a name="FUN_PRG5__84b7" href="#FUN_PRG5__84b7" class="la">FUN_PRG5__84b7:</a><span class="ce">; [$84b7]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
@@ -1232,7 +1233,7 @@ pre {
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__84c2" class="lla">@LAB_PRG5__84c2:</a><span class="ce">; [$84c2]</span></span>
+<span class="l"><a name="@LAB_PRG5__84c2" href="#@LAB_PRG5__84c2" class="lla">@LAB_PRG5__84c2:</a><span class="ce">; [$84c2]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8efb,Y</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentMusicInfo1">CurrentMusicInfo1</a>,X</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
@@ -1251,7 +1252,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__84d0" class="la">FUN_PRG5__84d0:</a><span class="ce">; [$84d0]</span></span>
+</div><span class="l"><a name="FUN_PRG5__84d0" href="#FUN_PRG5__84d0" class="la">FUN_PRG5__84d0:</a><span class="ce">; [$84d0]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
@@ -1279,7 +1280,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__84f0" class="la">FUN_PRG5__84f0:</a><span class="ce">; [$84f0]</span></span>
+</div><span class="l"><a name="FUN_PRG5__84f0" href="#FUN_PRG5__84f0" class="la">FUN_PRG5__84f0:</a><span class="ce">; [$84f0]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -1299,7 +1300,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8502" class="la">FUN_PRG5__8502:</a><span class="ce">; [$8502]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8502" href="#FUN_PRG5__8502" class="la">FUN_PRG5__8502:</a><span class="ce">; [$8502]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0161">Something_Music_0161</a>,X</span></span></span>
@@ -1315,7 +1316,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__850e" class="la">FUN_PRG5__850e:</a><span class="ce">; [$850e]</span></span>
+</div><span class="l"><a name="FUN_PRG5__850e" href="#FUN_PRG5__850e" class="la">FUN_PRG5__850e:</a><span class="ce">; [$850e]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Music_Something_8Counter">Music_Something_8Counter</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
@@ -1330,7 +1331,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8517" class="la">FUN_PRG5__8517:</a><span class="ce">; [$8517]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8517" href="#FUN_PRG5__8517" class="la">FUN_PRG5__8517:</a><span class="ce">; [$8517]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0174">Something_Music_0174</a>,X</span></span></span>
@@ -1346,7 +1347,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8523" class="la">FUN_PRG5__8523:</a><span class="ce">; [$8523]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8523" href="#FUN_PRG5__8523" class="la">FUN_PRG5__8523:</a><span class="ce">; [$8523]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_0176">Something_Music_0176</a>,X</span></span></span>
@@ -1362,7 +1363,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__852f" class="la">FUN_PRG5__852f:</a><span class="ce">; [$852f]</span></span>
+</div><span class="l"><a name="FUN_PRG5__852f" href="#FUN_PRG5__852f" class="la">FUN_PRG5__852f:</a><span class="ce">; [$852f]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Music_017f">Something_Music_017f</a>,X</span></span></span>
@@ -1378,7 +1379,7 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__853b" class="la">FUN_PRG5__853b:</a><span class="ce">; [$853b]</span></span>
+</div><span class="l"><a name="FUN_PRG5__853b" href="#FUN_PRG5__853b" class="la">FUN_PRG5__853b:</a><span class="ce">; [$853b]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Music_0181">Something_Music_0181</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG5__823a">FUN_PRG5__823a</a></span></span></span>
@@ -1407,7 +1408,7 @@ pre {
 ;     <a href="#FUN_PRG5__852f">FUN_PRG5__852f</a>
 ;     <a href="#FUN_PRG5__853b">FUN_PRG5__853b</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8544" class="la">FUN_PRG5__8544:</a><span class="ce">; [$8544]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8544" href="#FUN_PRG5__8544" class="la">FUN_PRG5__8544:</a><span class="ce">; [$8544]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_SomethingMusicDestOffset">Maybe_SomethingMusicDestOffset</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -1416,7 +1417,7 @@ pre {
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#CurrentMusicInfo2">CurrentMusicInfo2</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return" class="lla">@_return:</a><span class="ce">; [$8551]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$8551]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -1424,7 +1425,7 @@ pre {
 ;     <a href="#FUN_PRG5__83cd">FUN_PRG5__83cd</a>
 ;     <a href="#FUN_PRG5__8ed1">FUN_PRG5__8ed1</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8552" class="la">BYTE_PRG5__8552:</a><span class="ce">; [$8552]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8552" href="#BYTE_PRG5__8552" class="la">BYTE_PRG5__8552:</a><span class="ce">; [$8552]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$8552] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -1432,7 +1433,7 @@ pre {
 ;     <a href="#FUN_PRG5__83cd">FUN_PRG5__83cd</a>
 ;     <a href="#FUN_PRG5__8ed1">FUN_PRG5__8ed1</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8553" class="la">BYTE_PRG5__8553:</a><span class="ce">; [$8553]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8553" href="#BYTE_PRG5__8553" class="la">BYTE_PRG5__8553:</a><span class="ce">; [$8553]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00,$ae,$06,$4e,$06,$f3,$05,$9f,$05,$4d,$05,$01,$05,$b9,$04,$75</span></span><span class="ce">; [$8553] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$04,$35,$04,$f8,$03,$bf,$03,$89,$03</span></span><span class="ce">; [$8563] byte</span></span>
 <span class="l"></span>
@@ -1440,42 +1441,42 @@ pre {
 ; XREFS:
 ;     <a href="#FUN_PRG5__83cd">FUN_PRG5__83cd</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__856c" class="la">BYTE_PRG5__856c:</a><span class="ce">; [$856c]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__856c" href="#BYTE_PRG5__856c" class="la">BYTE_PRG5__856c:</a><span class="ce">; [$856c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$f4,$f4,$0c</span></span><span class="ce">; [$856c] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__8298">FUN_PRG5__8298</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__856f" class="la">BYTE_PRG5__856f:</a><span class="ce">; [$856f]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__856f" href="#BYTE_PRG5__856f" class="la">BYTE_PRG5__856f:</a><span class="ce">; [$856f]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$7f</span></span><span class="ce">; [$856f] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__8298">FUN_PRG5__8298</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8570" class="la">BYTE_PRG5__8570:</a><span class="ce">; [$8570]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8570" href="#BYTE_PRG5__8570" class="la">BYTE_PRG5__8570:</a><span class="ce">; [$8570]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$08</span></span><span class="ce">; [$8570] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__8298">FUN_PRG5__8298</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8571" class="la">BYTE_PRG5__8571:</a><span class="ce">; [$8571]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8571" href="#BYTE_PRG5__8571" class="la">BYTE_PRG5__8571:</a><span class="ce">; [$8571]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$60</span></span><span class="ce">; [$8571] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__8298">FUN_PRG5__8298</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8572" class="la">BYTE_PRG5__8572:</a><span class="ce">; [$8572]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8572" href="#BYTE_PRG5__8572" class="la">BYTE_PRG5__8572:</a><span class="ce">; [$8572]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$c0,$50,$40,$30,$b0,$28,$30,$24,$d0,$1e,$50,$18,$a0</span></span><span class="ce">; [$8572] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__82ff">FUN_PRG5__82ff</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__857f" class="la">BYTE_PRG5__857f:</a><span class="ce">; [$857f]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__857f" href="#BYTE_PRG5__857f" class="la">BYTE_PRG5__857f:</a><span class="ce">; [$857f]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$14,$20,$00,$f0,$00,$00,$0f,$20,$00,$00,$0a,$10,$00,$00,$05,$00</span></span><span class="ce">; [$857f] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [$858f] byte</span></span>
 <span class="l"></span>
@@ -1483,7 +1484,7 @@ pre {
 ; XREFS:
 ;     <a href="#Sound_HandleOnInterrupt">Sound_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="SOMETHING_NEXT_SOUND_EFFECT_MAP" class="la">SOMETHING_NEXT_SOUND_EFFECT_MAP:</a><span class="ce">; [$8590]</span></span>
+</div><span class="l"><a name="SOMETHING_NEXT_SOUND_EFFECT_MAP" href="#SOMETHING_NEXT_SOUND_EFFECT_MAP" class="la">SOMETHING_NEXT_SOUND_EFFECT_MAP:</a><span class="ce">; [$8590]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$2c</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$60</span></span><span class="ce">; [2]:</span></span>
@@ -1518,14 +1519,14 @@ pre {
 ; XREFS:
 ;     <a href="#Sound_HandleOnInterrupt">Sound_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__85ad" class="la">BYTE_PRG5__85ad:</a><span class="ce">; [$85ad]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__85ad" href="#BYTE_PRG5__85ad" class="la">BYTE_PRG5__85ad:</a><span class="ce">; [$85ad]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$80</span></span><span class="ce">; [$85ad] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#Sound_HandleOnInterrupt">Sound_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__85ae" class="la">BYTE_PRG5__85ae:</a><span class="ce">; [$85ae]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__85ae" href="#BYTE_PRG5__85ae" class="la">BYTE_PRG5__85ae:</a><span class="ce">; [$85ae]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$86,$7f,$86,$ca,$8e,$cd,$8e,$75,$8e,$87,$8e,$d7,$8d,$ea,$8d,$9b</span></span><span class="ce">; [$85ae] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$8c,$b3,$8c,$2b,$8d,$35,$8d,$5e,$8d,$70,$8d,$68,$8c,$72,$8c,$b8</span></span><span class="ce">; [$85be] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$8d,$20,$86,$b2,$8b,$c4,$8b,$7d,$8a,$20,$86,$9d,$86,$a7,$86,$a7</span></span><span class="ce">; [$85ce] byte</span></span>
@@ -1548,7 +1549,7 @@ pre {
 ; XREFS:
 ;     <a href="#Sound_HandleOnInterrupt">Sound_HandleOnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="Sound_ResetCurrentSound" class="la">Sound_ResetCurrentSound:</a><span class="ce">; [$8626]</span></span>
+</div><span class="l"><a name="Sound_ResetCurrentSound" href="#Sound_ResetCurrentSound" class="la">Sound_ResetCurrentSound:</a><span class="ce">; [$8626]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0122">SOUND_DAT_0122</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#CurrentSoundIndex">CurrentSoundIndex</a></span></span></span>
@@ -1567,15 +1568,15 @@ pre {
 ; XREFS:
 ;     <a href="#thunk_Sound_HandleOnInterrupt">thunk_Sound_HandleOnInterrupt</a>
 ;============================================================================
-</div><span class="l"><a name="Sound_HandleOnInterrupt" class="la">Sound_HandleOnInterrupt:</a><span class="ce">; [$862f]</span></span>
+</div><span class="l"><a name="Sound_HandleOnInterrupt" href="#Sound_HandleOnInterrupt" class="la">Sound_HandleOnInterrupt:</a><span class="ce">; [$862f]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8631" class="lla">@LAB_PRG5__8631:</a><span class="ce">; [$8631]</span></span>
+<span class="l"><a name="@LAB_PRG5__8631" href="#@LAB_PRG5__8631" class="lla">@LAB_PRG5__8631:</a><span class="ce">; [$8631]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8639">@LAB_PRG5__8639</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a>,X</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8639" class="lla">@LAB_PRG5__8639:</a><span class="ce">; [$8639]</span></span>
+<span class="l"><a name="@LAB_PRG5__8639" href="#@LAB_PRG5__8639" class="lla">@LAB_PRG5__8639:</a><span class="ce">; [$8639]</span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@LAB_PRG5__8631">@LAB_PRG5__8631</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#NextSoundEffect">NextSoundEffect</a></span></span></span>
@@ -1592,7 +1593,7 @@ pre {
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG5__8658">@LAB_PRG5__8658</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG5__866f">@LAB_PRG5__866f</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8658" class="lla">@LAB_PRG5__8658:</a><span class="ce">; [$8658]</span></span>
+<span class="l"><a name="@LAB_PRG5__8658" href="#@LAB_PRG5__8658" class="lla">@LAB_PRG5__8658:</a><span class="ce">; [$8658]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8590,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0122">SOUND_DAT_0122</a></span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -1603,12 +1604,12 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0126">SOUND_DAT_0126</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG5__8674">@LAB_PRG5__8674</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__866f" class="lla">@LAB_PRG5__866f:</a><span class="ce">; [$866f]</span></span>
+<span class="l"><a name="@LAB_PRG5__866f" href="#@LAB_PRG5__866f" class="lla">@LAB_PRG5__866f:</a><span class="ce">; [$866f]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0122">SOUND_DAT_0122</a></span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8674" class="lla">@LAB_PRG5__8674:</a><span class="ce">; [$8674]</span></span>
+<span class="l"><a name="@LAB_PRG5__8674" href="#@LAB_PRG5__8674" class="lla">@LAB_PRG5__8674:</a><span class="ce">; [$8674]</span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$74</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#Sound_ResetCurrentSound">Sound_ResetCurrentSound</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$85ae,X</span></span></span>
@@ -1630,7 +1631,7 @@ pre {
 ; XREFS:
 ;     <a href="#thunk_Sound_Init">thunk_Sound_Init</a>
 ;============================================================================
-</div><span class="l"><a name="Sound_Init" class="la">Sound_Init:</a><span class="ce">; [$8681]</span></span>
+</div><span class="l"><a name="Sound_Init" href="#Sound_Init" class="la">Sound_Init:</a><span class="ce">; [$8681]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DMC_RAW">DMC_RAW</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#SOUND_DAT_0123">SOUND_DAT_0123</a></span></span></span>
@@ -1786,13 +1787,13 @@ pre {
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG5__8ed1" class="la">FUN_PRG5__8ed1:</a><span class="ce">; [$8ed1]</span></span>
+</div><span class="l"><a name="FUN_PRG5__8ed1" href="#FUN_PRG5__8ed1" class="la">FUN_PRG5__8ed1:</a><span class="ce">; [$8ed1]</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$18</span></span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8ed7" class="lla">@LAB_PRG5__8ed7:</a><span class="ce">; [$8ed7]</span></span>
+<span class="l"><a name="@LAB_PRG5__8ed7" href="#@LAB_PRG5__8ed7" class="lla">@LAB_PRG5__8ed7:</a><span class="ce">; [$8ed7]</span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$0c</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG5__8ed7">@LAB_PRG5__8ed7</a></span></span></span>
@@ -1805,14 +1806,14 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$8553,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_012b">DAT_012b</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG5__8eed" class="lla">@LAB_PRG5__8eed:</a><span class="ce">; [$8eed]</span></span>
+<span class="l"><a name="@LAB_PRG5__8eed" href="#@LAB_PRG5__8eed" class="lla">@LAB_PRG5__8eed:</a><span class="ce">; [$8eed]</span></span>
 <span class="l"><span><span class="i">DEY</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">a:<a href="RAM.html#DAT_012b">DAT_012b</a></span></span></span>
 <span class="l"><span><span class="i">ROR</span> <span class="o">a:<a href="RAM.html#DAT_012a">DAT_012a</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#@LAB_PRG5__8eed">@LAB_PRG5__8eed</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@_return" class="lla">@_return:</a><span class="ce">; [$8ef9]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$8ef9]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -1826,14 +1827,14 @@ pre {
 ; XREFS:
 ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="MUSIC_LOOKUP" class="la">MUSIC_LOOKUP:</a><span class="ce">; [$8efa]</span></span>
+</div><span class="l"><a name="MUSIC_LOOKUP" href="#MUSIC_LOOKUP" class="la">MUSIC_LOOKUP:</a><span class="ce">; [$8efa]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [$8efa] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#FUN_PRG5__84b7">FUN_PRG5__84b7</a>
 ;
-</div><span class="l"><a name="BYTE_PRG5__8efb" class="la">BYTE_PRG5__8efb:</a><span class="ce">; [$8efb]</span></span>
+</div><span class="l"><a name="BYTE_PRG5__8efb" href="#BYTE_PRG5__8efb" class="la">BYTE_PRG5__8efb:</a><span class="ce">; [$8efb]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$7c,$8f,$20,$90,$61,$91,$8e,$92,$b9,$93,$58,$94,$40,$95,$60,$96</span></span><span class="ce">; [$8efb] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$62,$96,$1c,$97,$7a,$98,$48,$9a,$92,$9a,$15,$9b,$bd,$9b,$5f,$9c</span></span><span class="ce">; [$8f0b] byte</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$38,$9d,$af,$9d,$73,$9e,$e0,$9e,$e2,$9e,$67,$9f,$fa,$9f,$b1,$a0</span></span><span class="ce">; [$8f1b] byte</span></span>
