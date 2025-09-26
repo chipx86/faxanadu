@@ -7035,7 +7035,7 @@ TEXT_TILES_LICENSED_TO_NINTENDO:            ; [$9df9]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     FUN_PRG12__909d

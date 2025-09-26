@@ -6,307 +6,309 @@
 
 BASE $8000
 
-    db $0c,$00,$00,$00,$00,$00              ; [$8000] undefined
+    db $0c,$00,$00,$00,$00,$00              ; [$8000] byte
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
-DAT_PRG7__8006:                             ; [$8006]
-    db $36                                  ; [$8006] undefined
+PPUTile16_PRG7__8000.row6_0:                ; [$8006]
+    db $36                                  ; [$8006] byte
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
-DAT_PRG7__8007:                             ; [$8007]
-    db $10                                  ; [$8007] undefined
+PPUTile16_PRG7__8000.row7_0:                ; [$8007]
+    db $10                                  ; [$8007] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f039
 ;
-DAT_PRG7__8008:                             ; [$8008]
-    db $f1                                  ; [$8008] undefined
+PPUTile16_PRG7__8000.row0_1:                ; [$8008]
+    db $f1                                  ; [$8008] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f039
 ;
-DAT_PRG7__8009:                             ; [$8009]
-    db $29                                  ; [$8009] undefined
+PPUTile16_PRG7__8000.row1_1:                ; [$8009]
+    db $29                                  ; [$8009] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f01b
 ;
-DAT_PRG7__800a:                             ; [$800a]
-    db $d5                                  ; [$800a] undefined
+PPUTile16_PRG7__8000.row2_1:                ; [$800a]
+    db $d5                                  ; [$800a] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f01b
 ;
-DAT_PRG7__800b:                             ; [$800b]
-    hex 2f 66 00 e6 00 96 01 46 02 86 03 46 04 c6 04 66 ; [$800b] undefined
-    hex 05 46 06 e6 06 b6 07 b6 08 b6 09 66 0a 46 0b 96 ; [$801b] undefined
-    hex 0c 16 0c 16 0d 36 0d 56 0d 96 0d 96 0d b6 0d f6 ; [$802b] undefined
-    hex 0d 66 00 16 0e 66 00 36 0e 66 00 66 00 f6 0e 36 ; [$803b] undefined
-    hex 0f 56 0f 96 0f b6 0f f6 0f 16 0e f6 0e 96 0d 96 ; [$804b] undefined
-    hex 0d 16 0d f6 0d 36 0e 36 0e 36 0e 02 05 06 0e 0a ; [$805b] undefined
-    hex 06 06 01 01 03 01 01 05 05 01 0e 80 80 10 90 80 ; [$806b] undefined
-    hex 20 b8 78 c0 e0 e0 f0 a8 f8 f0 80 3d 5f 2c af cf ; [$807b] undefined
-    hex ce 81 ff 1a 2d 77 72 70 7f 7f 00 f8 f4 f6 f4 35 ; [$808b] undefined
-    hex f4 fc fc 00 08 88 0a ca 0b 83 03 02 05 04 0d 05 ; [$809b] undefined
-    hex 00 05 06 01 03 03 03 0b 0f 03 09 80 80 10 20 10 ; [$80ab] undefined
-    hex 40 68 e8 c0 e0 e0 f0 50 f0 f0 10 3b 5b 2f af cf ; [$80bb] undefined
-    hex cc 81 ff 1c 2d 74 71 73 7f 7e 00 98 f4 f6 b4 15 ; [$80cb] undefined
-    hex 74 fc fc 60 08 08 ca ea 8b 03 03 03 04 06 06 05 ; [$80db] undefined
-    hex 07 03 04 00 03 03 01 03 00 07 03 e0 30 d8 e8 08 ; [$80eb] undefined
-    hex b8 30 40 00 c0 e0 50 f0 40 c0 bc 27 71 2c cd 9f ; [$80fb] undefined
-    hex 5f 2b 17 18 0e 77 72 60 30 1c 09 ac 5a 98 34 f8 ; [$810b] undefined
-    hex f4 e8 50 70 ec ee cf 07 0e 1c b8 0f 0f 07 06 08 ; [$811b] undefined
-    hex 07 0f 19 00 05 0d 0d 07 08 0c 0e f0 f8 e8 68 f0 ; [$812b] undefined
-    hex f0 d0 50 00 a0 b0 b0 00 c0 e0 e0 12 1c 14 10 10 ; [$813b] undefined
-    hex 04 14 2c 0c 00 08 1c 1c 18 38 78 50 58 78 38 38 ; [$814b] undefined
-    hex 38 28 04 e0 60 00 20 20 00 70 78 23 0c 7e 6e 55 ; [$815b] undefined
-    hex 54 27 28 10 33 33 31 63 63 73 73 e0 30 d8 e8 08 ; [$816b] undefined
-    hex 38 30 40 00 c0 e0 50 f0 c0 c0 bc 27 19 1c 09 07 ; [$817b] undefined
-    hex 07 07 07 78 36 37 16 08 00 00 03 03 03 03 07 05 ; [$818b] undefined
-    hex 07 01 01 05 06 07 00 06 0a 06 02 80 40 c0 e0 a0 ; [$819b] undefined
-    hex e0 40 c0 80 80 80 00 c0 c0 e0 60 03 06 0a 1d 17 ; [$81ab] undefined
-    hex 05 07 07 05 03 07 12 18 1e 0f 07 20 d0 d0 d0 d0 ; [$81bb] undefined
-    hex d0 d0 90 c0 e0 e0 e0 e0 e0 e0 e0 06 0d 07 07 07 ; [$81cb] undefined
-    hex 0f 06 02 07 07 0e 0d 0d 05 0b 0f 20 e0 60 a0 20 ; [$81db] undefined
-    hex 20 a0 a0 c0 00 80 c0 c0 c0 c0 c0 05 0d 01 04 06 ; [$81eb] undefined
-    hex 0f 1f 14 0f 07 0f 0b 09 00 0d 1b 20 a0 20 a0 10 ; [$81fb] undefined
-    hex 90 90 70 c0 c0 c0 c0 e0 e0 60 80 03 03 03 07 05 ; [$820b] undefined
-    hex 07 01 01 05 06 07 00 06 0a 06 06 03 06 0a 0d 1f ; [$821b] undefined
-    hex 1b 07 07 05 03 07 02 10 34 1f 07 06 0d 0f 0f 0f ; [$822b] undefined
-    hex 0f 0c 06 07 07 06 05 05 05 07 0b 05 07 03 03 06 ; [$823b] undefined
-    hex 06 06 00 05 07 04 07 01 07 03 0f 50 e0 f0 f0 f8 ; [$824b] undefined
-    hex f8 dc b4 50 f0 00 e0 f0 70 78 f8 07 07 0f 1f 1f ; [$825b] undefined
-    hex 6c b3 57 07 07 0e 1d 03 13 6f af b8 e8 68 68 68 ; [$826b] undefined
-    hex e8 c8 98 48 70 f0 f0 f0 f0 f0 e0 01 06 1f 1e 1d ; [$827b] undefined
-    hex 1d 12 0e 07 0f 0c 0d 0e 0e 0d 01 03 09 1c 06 00 ; [$828b] undefined
-    hex 00 00 00 0c 0e 1e 38 00 00 00 00 05 07 03 03 06 ; [$829b] undefined
-    hex 06 06 00 05 07 04 07 01 07 03 0f 07 07 0f 1f 1f ; [$82ab] undefined
-    hex 0c 73 f7 07 03 0e 1d 03 33 0f 6f 0a 0f 07 07 0f ; [$82bb] undefined
-    hex 0d 0d 01 0a 0f 08 0f 01 0e 06 1f 20 20 e0 e0 f0 ; [$82cb] undefined
-    hex f0 b0 60 80 c0 00 c0 e0 e0 f0 f0 0f 1f 3e fe f2 ; [$82db] undefined
-    hex 5e bd 3f 0f 0e 1d 39 8d bd 73 6b f0 d0 d0 d0 d0 ; [$82eb] undefined
-    hex d0 90 30 10 e0 e0 e0 e0 e0 e0 c0 3f 52 3f 39 3c ; [$82fb] undefined
-    hex 21 1e 16 6d 2d 00 1e 1f 1e 01 0f 70 f0 e0 e0 40 ; [$830b] undefined
-    hex c0 40 40 80 00 00 00 80 00 80 80 16 14 14 1c 1f ; [$831b] undefined
-    hex 0d 14 2e 0f 0f 0f 0f 00 02 0f 1f 40 c0 c0 c0 80 ; [$832b] undefined
-    hex 00 80 80 80 00 00 00 00 00 00 00 0f 1f 3e 3e f2 ; [$833b] undefined
-    hex 5f bf ba 0f 06 1d 39 0d b3 6d 6d f0 d0 d0 d0 90 ; [$834b] undefined
-    hex 90 30 70 10 e0 e0 e0 e0 e0 c0 80 32 5f 3f 39 3c ; [$835b] undefined
-    hex 21 1e 16 6d 20 00 1e 1f 1e 01 0f f0 f0 e0 e0 40 ; [$836b] undefined
-    hex c0 40 40 00 00 00 00 80 00 80 80 63 d6 f4 b0 96 ; [$837b] undefined
-    hex 56 f0 67 03 67 67 67 67 e3 47 40 c0 e0 f0 10 f0 ; [$838b] undefined
-    hex f8 18 3c e0 f0 f0 f0 d0 58 f8 ec 6d 6f 7f ed f2 ; [$839b] undefined
-    hex f7 7f 3e 47 57 57 16 cd 48 03 43 e4 5a bd 7f 3f ; [$83ab] undefined
-    hex fe 3a 75 d8 bc 7e ee cf 3f ff be 77 39 74 3f 7f ; [$83bb] undefined
-    hex 39 7b 1f 48 4e 4f 4f 4f 4f 4f 4f ca f4 e8 48 d8 ; [$83cb] undefined
-    hex f8 b8 b0 3c 38 30 b0 a0 c0 c0 e8 1f 1f 1f 1f 1f ; [$83db] undefined
-    hex 0e 16 2e 5f 5f 5f 5f 5e 10 38 78 b8 90 54 b4 34 ; [$83eb] undefined
-    hex 38 28 04 f0 f8 b8 78 38 00 70 78 03 66 d4 f0 b6 ; [$83fb] undefined
-    hex 16 d0 f7 03 07 67 67 67 e3 67 40 6b 6f 6f 3d e2 ; [$840b] undefined
-    hex f7 7f 7e 44 47 57 56 1d c8 43 03 77 39 74 3f 7f ; [$841b] undefined
-    hex 39 7b 1f 48 4e 4f 4f 4f 4f 4f 4f 1f 1f 1f 1f 1f ; [$842b] undefined
-    hex 0e 56 2e 5f 5f 5f 5f 5e 50 38 78 87 03 9b 9b 80 ; [$843b] undefined
-    hex 03 f8 03 08 1c 1c 8d 3f 1e e7 5c 80 c0 c0 e0 d8 ; [$844b] undefined
-    hex bc f8 7c 00 00 00 00 20 78 7c fe 3d 11 6b 33 3f ; [$845b] undefined
-    hex 1c 17 2c 40 60 10 0c 00 03 0f 1f 6c 67 77 f5 17 ; [$846b] undefined
-    hex cf 39 fb fe fe ee 0e ee fe ce 0c 2f 24 1b 16 15 ; [$847b] undefined
-    hex 15 1f 0c 18 1b 07 0f 0e 0e 00 03 7f c6 9e f8 00 ; [$848b] undefined
-    hex 00 00 00 f0 f8 e0 00 00 00 00 00 0a 0a 0a 0c 13 ; [$849b] undefined
-    hex 21 2e 30 07 07 07 03 0e 1e 10 00 87 03 13 9b 80 ; [$84ab] undefined
-    hex 03 f0 03 88 1c 9c 0d 3f 1e ef 5c 11 02 12 03 03 ; [$84bb] undefined
-    hex 02 11 03 00 01 01 11 10 01 01 06 f0 b8 0c 6c 68 ; [$84cb] undefined
-    hex 88 2c c4 00 40 f0 f0 b4 f4 f0 38 01 02 01 03 05 ; [$84db] undefined
-    hex 07 00 07 00 01 02 04 0f 0f 0f 00 1e fa f5 f5 f5 ; [$84eb] undefined
-    hex 2d f9 82 e0 04 0e 0e ce de 3e 7c 01 02 01 07 00 ; [$84fb] undefined
-    hex 07 05 05 00 01 03 03 07 00 0e 0e f8 a8 68 68 40 ; [$850b] undefined
-    hex f0 b0 20 00 d0 b0 b0 b0 00 40 c0 03 04 02 03 01 ; [$851b] undefined
-    hex 03 07 03 0c 0f 07 03 01 00 04 0f 60 c0 40 40 40 ; [$852b] undefined
-    hex a0 a0 40 80 00 80 80 80 c0 c0 80 01 02 02 13 03 ; [$853b] undefined
-    hex 12 01 06 10 11 01 01 00 01 01 07 f0 b8 0c 6c 68 ; [$854b] undefined
-    hex 88 2c 84 00 40 f0 f0 b4 f4 f0 78 00 00 00 01 03 ; [$855b] undefined
-    hex 03 03 00 00 00 00 00 00 03 01 07 00 00 00 e0 f0 ; [$856b] undefined
-    hex 38 38 58 00 00 00 00 00 c0 c0 a0 06 01 00 01 03 ; [$857b] undefined
-    hex 03 0e 0f 01 02 03 06 03 07 07 00 1c 7a fe de ea ; [$858b] undefined
-    hex ea fa ca e0 84 04 e4 f4 74 04 74 01 03 05 02 0d ; [$859b] undefined
-    hex 09 23 55 03 07 03 05 06 0e 1c 38 df f8 df 3f fc ; [$85ab] undefined
-    hex f9 fb f2 ff bf a0 c3 07 0e 0c 0d ca 1a f2 a6 0a ; [$85bb] undefined
-    hex 5a fa 06 f4 e4 0c d8 f4 ac 04 f8 a0 79 01 01 00 ; [$85cb] undefined
-    hex 00 03 04 79 00 01 01 01 01 03 03 fb 4a ca ca 4a ; [$85db] undefined
-    hex 4a 02 4e 0c 8c 0c 0c 8c 8c cc 80 f2 02 0a 0a 0a ; [$85eb] undefined
-    hex 0a 02 0e 0c 0c 0c 0c 0c 0c 0c 00 00 00 00 01 03 ; [$85fb] undefined
-    hex 03 03 00 00 00 00 00 00 03 01 07 00 00 00 e0 f0 ; [$860b] undefined
-    hex 38 38 58 00 00 00 00 00 c0 c0 a0 06 01 00 03 03 ; [$861b] undefined
-    hex 03 0e 0f 01 02 07 00 03 07 07 00 ff f8 f7 2f fc ; [$862b] undefined
-    hex f9 fb f2 ef df d8 d3 07 0e 0c 0d 07 0f 09 0c 2e ; [$863b] undefined
-    hex 2c 19 13 00 00 06 03 17 15 0f 0c c0 e0 20 60 e8 ; [$864b] undefined
-    hex 48 30 90 00 00 c0 80 d0 70 e0 60 11 38 7f 7f dc ; [$865b] undefined
-    hex e4 7b 01 0f 37 78 0c e3 fb fc 7e 10 58 fc fa 8a ; [$866b] undefined
-    hex 76 06 8c e0 b8 7c 04 f4 f8 f8 70 1f 21 3e 3f 3f ; [$867b] undefined
-    hex 24 17 0c 00 1e 1d 1b 1b 1b 08 03 f8 f8 98 58 38 ; [$868b] undefined
-    hex d8 48 88 00 00 60 a0 c0 e0 f0 70 07 04 06 06 04 ; [$869b] undefined
-    hex 04 02 06 03 03 03 03 03 03 07 0f cc 7a 5a 46 84 ; [$86ab] undefined
-    hex 80 80 80 30 84 84 88 00 00 00 00 13 39 7f 7f dc ; [$86bb] undefined
-    hex e4 7b 01 0c 37 78 0c e3 fb fc 7e 90 58 fc fa 8a ; [$86cb] undefined
-    hex 76 06 8c 60 b8 7c 04 f4 f8 f8 70 02 04 01 0d 00 ; [$86db] undefined
-    hex 06 0e 07 01 03 07 07 0a 0f 01 0e a0 f0 30 f8 a8 ; [$86eb] undefined
-    hex 28 98 18 c0 80 c0 80 d0 d0 e0 e0 01 18 37 2c 7f ; [$86fb] undefined
-    hex 4f 5f 5f 0e 07 08 1b 18 3f 3f 3c 38 ee dc bb 65 ; [$870b] undefined
-    hex f3 f5 bb c0 1c 3a 76 fe ee 2e c6 5d 5c 0e 3f 33 ; [$871b] undefined
-    hex 21 31 3d 3a 3b 39 00 0f 1f 0f 02 c5 7c 0a f8 f0 ; [$872b] undefined
-    hex d0 70 f0 7e fe f4 00 00 e0 e0 60 3f 3f 3d 1d 1d ; [$873b] undefined
-    hex 1d 05 06 00 00 00 00 00 00 38 79 70 00 60 c0 20 ; [$874b] undefined
-    hex 20 00 20 80 e0 80 60 e0 e0 e0 c0 02 04 01 0d 00 ; [$875b] undefined
-    hex 06 04 0f 01 03 07 07 0a 0f 0b 00 01 18 37 2c 7f ; [$876b] undefined
-    hex 4f 5f 5f 0e 07 08 1b 18 3f 3f 3c 5e 5e 07 3f 33 ; [$877b] undefined
-    hex 21 11 1d 3d 3d 38 00 0f 1f 0f 02 0f 0e 06 03 02 ; [$878b] undefined
-    hex 06 04 08 00 01 01 00 01 01 03 07 70 20 20 20 60 ; [$879b] undefined
-    hex 60 00 40 80 c0 c0 c0 c0 c0 c0 80 00 00 00 00 01 ; [$87ab] undefined
-    hex 03 02 02 00 00 00 00 01 02 01 03 00 00 00 00 e0 ; [$87bb] undefined
-    hex e0 e0 f0 00 00 00 00 c0 e0 70 b0 02 00 01 00 02 ; [$87cb] undefined
-    hex 04 03 04 01 03 02 01 03 07 07 03 b0 10 30 60 c4 ; [$87db] undefined
-    hex 58 98 38 78 f8 d8 98 38 fc fc dc 1f 3f 1b 0d 0f ; [$87eb] undefined
-    hex 03 07 07 0e 33 36 1e 00 0f 0f 0f dc f4 f4 04 fc ; [$87fb] undefined
-    hex 3e be fe 00 18 f8 f8 00 c0 c0 c0 07 03 0c 09 02 ; [$880b] undefined
-    hex 0a 0e 1d 0f 0f 0b 0e 0f 07 03 00 f6 b2 22 d2 42 ; [$881b] undefined
-    hex 42 48 fa d8 dc dc 3c fc fc f6 00 00 00 00 00 03 ; [$882b] undefined
-    hex 07 05 05 00 00 00 00 03 05 02 07 00 00 00 00 c0 ; [$883b] undefined
-    hex c0 c0 e0 00 00 00 00 80 c0 e0 60 05 00 02 00 05 ; [$884b] undefined
-    hex 08 07 08 02 07 05 03 06 0f 0f 07 60 20 60 c0 88 ; [$885b] undefined
-    hex a0 30 50 f0 f0 b0 30 70 f8 f8 b8 1e 3f 36 0d 0f ; [$886b] undefined
-    hex 03 07 03 1f 33 1b 1e 00 0f 0f 0f f8 70 f4 0c fc ; [$887b] undefined
-    hex 3e be f6 00 98 78 f0 00 c0 c0 c8 0b 09 0a 0a 0a ; [$888b] undefined
-    hex 0c 04 06 07 07 05 07 07 03 03 00 fa da 12 ea 92 ; [$889b] undefined
-    hex 92 90 f8 ec ec ec 1c fc fc fe 04 00 00 00 1c 0c ; [$88ab] undefined
-    hex 0c 0c 1c 00 00 08 08 18 18 18 08 10 78 f4 62 fe ; [$88bb] undefined
-    hex 7a bf 5f 10 10 f8 fc 00 0e ea 6a 08 0c 0c 0c 14 ; [$88cb] undefined
-    hex 18 0d 1d 08 00 08 08 08 1c 1a 02 1e 78 b6 fe 5d ; [$88db] undefined
-    hex fd 5d 5d 60 06 6f 69 e6 06 e2 ee 0f 08 08 08 08 ; [$88eb] undefined
-    hex 08 00 08 08 08 08 08 08 08 08 08 39 ba f6 fc f4 ; [$88fb] undefined
-    hex f0 a8 a8 de 5c 88 a2 aa 08 70 70 08 00 08 08 08 ; [$890b] undefined
-    hex 08 08 00 08 08 08 08 08 08 08 09 08 78 28 28 08 ; [$891b] undefined
-    hex 78 c8 80 70 00 70 70 70 00 70 f8 00 00 1c 0c 0c ; [$892b] undefined
-    hex 0c 0c 1c 00 08 08 18 18 18 18 08 00 10 78 e4 62 ; [$893b] undefined
-    hex fe 7a bf 00 10 10 f8 fc 00 0e ea 08 0c 0c 0c 0a ; [$894b] undefined
-    hex 09 17 0f 00 08 08 00 1c 1e 08 00 5f 1e 78 b6 fc ; [$895b] undefined
-    hex 56 fb 2a 6a 60 06 6f 63 ed 0c dc 09 08 08 09 09 ; [$896b] undefined
-    hex 08 00 08 08 08 08 08 08 08 08 08 76 e4 4e f4 fc ; [$897b] undefined
-    hex f2 2a aa b8 78 b0 8a aa 24 dc dc 08 00 08 08 00 ; [$898b] undefined
-    hex 00 01 03 08 08 08 08 08 08 09 03 36 fd a5 a4 22 ; [$899b] undefined
-    hex 26 4d d2 c8 06 c6 c7 c3 c7 86 8c 01 07 07 0c 03 ; [$89ab] undefined
-    hex 04 02 01 07 0f 0f 03 04 03 05 00 80 d0 f0 f8 ac ; [$89bb] undefined
-    hex 62 b2 d9 e0 e0 e0 70 50 fc 5c ee 39 5e 00 31 0e ; [$89cb] undefined
-    hex 00 00 00 07 3f 3f 0e 00 00 00 00 99 31 35 c9 f1 ; [$89db] undefined
-    hex f3 9f 19 ee ce da 36 0e 0c 60 fe 06 0a 17 1d 19 ; [$89eb] undefined
-    hex 1d 0d 0d 01 05 0e 0e 0e 0e 0e 0e 79 c1 03 fe 00 ; [$89fb] undefined
-    hex 00 00 00 fe fe fc 00 00 00 00 00 0a 0a 1a 22 7c ; [$8a0b] undefined
-    hex 00 00 00 0c 0c 3c 7c 00 00 00 00 01 07 07 0c 03 ; [$8a1b] undefined
-    hex 04 02 21 07 0f 0f 03 04 03 05 19 2f 10 18 0f 00 ; [$8a2b] undefined
-    hex 00 00 01 1f 0f 07 00 00 00 00 00 06 0a 17 1d 1d ; [$8a3b] undefined
-    hex 05 05 0d 01 05 0e 0e 0e 0e 0e 06 0d 0d 19 13 3c ; [$8a4b] undefined
-    hex 00 00 00 06 06 0e 3c 00 00 00 00 00 00 08 0f 0f ; [$8a5b] undefined
-    hex 09 0b 0b 00 00 0f 0f 0f 06 0f 05 00 00 00 c0 c0 ; [$8a6b] undefined
-    hex e0 a0 a0 00 00 80 00 c0 00 40 40 00 04 03 0f 0f ; [$8a7b] undefined
-    hex 0e 10 0e 0f 0b 04 09 1b 1f 0f 07 60 f0 38 e0 70 ; [$8a8b] undefined
-    hex 70 e0 e0 80 00 c0 e0 f0 e0 10 30 07 0a 0c 3c 07 ; [$8a9b] undefined
-    hex 15 1e 15 08 17 37 07 0e 0f 0f 0f e0 60 d0 d0 30 ; [$8aab] undefined
-    hex f0 30 10 30 b0 60 e0 c0 00 c0 e0 1e 15 16 19 07 ; [$8abb] undefined
-    hex 00 08 16 0f 0f 0f 06 00 06 06 0c 90 00 00 e0 a0 ; [$8acb] undefined
-    hex 80 40 80 e0 f0 f0 00 40 60 40 c0 00 04 03 0f 0f ; [$8adb] undefined
-    hex 0e 10 0e 0f 0b 04 09 1b 1f 0f 07 60 f0 38 e0 70 ; [$8aeb] undefined
-    hex 70 f0 d0 80 00 c0 e0 f0 e0 00 60 0f 0b 1f 17 17 ; [$8afb] undefined
-    hex 15 1e 15 00 06 05 0d 0e 0f 0f 0f c0 40 a0 70 f0 ; [$8b0b] undefined
-    hex f0 30 10 60 e0 c0 80 00 00 c0 e0 1e 15 16 19 03 ; [$8b1b] undefined
-    hex 03 01 07 0f 0f 0f 06 00 00 02 05 90 00 00 c0 40 ; [$8b2b] undefined
-    hex 40 80 80 e0 f0 f0 00 80 80 c0 c0 00 00 07 0f 0b ; [$8b3b] undefined
-    hex 09 0b 0b 00 00 00 00 04 06 0f 05 00 00 80 c0 c0 ; [$8b4b] undefined
-    hex e0 a0 20 00 00 00 00 00 00 40 c0 00 04 03 0f 1f ; [$8b5b] undefined
-    hex 0e 00 0f 0f 0b 04 09 1b 1f 0f 07 60 f0 38 e0 70 ; [$8b6b] undefined
-    hex 70 e0 e0 80 00 c0 e0 f0 e0 10 30 17 6e 75 0d 0d ; [$8b7b] undefined
-    hex 2e 38 2a 18 37 0e 1e 1e 1f 1f 1f f0 f0 d0 b8 f8 ; [$8b8b] undefined
-    hex a8 14 ac 20 60 e0 c0 00 50 e8 d0 14 19 14 0a 14 ; [$8b9b] undefined
-    hex 05 18 2f 3f 3f 3f 3f 3f 3f 27 10 14 3c 1c ac 34 ; [$8bab] undefined
-    hex 1c 6c ec e8 c0 e0 d0 c8 e0 90 00 60 f0 38 e0 70 ; [$8bbb] undefined
-    hex 70 e0 c0 80 00 c0 e0 f0 e0 10 70 0f 0f 17 0f 0e ; [$8bcb] undefined
-    hex 2f 38 2a 08 16 0e 1d 1d 1e 1f 1f d0 d0 b0 78 f8 ; [$8bdb] undefined
-    hex a8 14 ac 60 e0 c0 80 00 50 e8 d0 14 19 14 0a 3c ; [$8beb] undefined
-    hex 35 2f 35 3f 3f 3f 3f 1f 1f 10 0e 14 2c 14 ac 14 ; [$8bfb] undefined
-    hex 0c 24 ee e8 d0 e8 d0 e8 f0 d8 00 83 fe fd 3b 5b ; [$8c0b] undefined
-    hex 3b 2f b2 80 c3 76 75 25 0c 12 cd 98 b8 e0 d0 d0 ; [$8c1b] undefined
-    hex 3b de af 18 70 f0 e0 e0 c1 23 56 e9 f5 fe b6 cd ; [$8c2b] undefined
-    hex 7f 66 3c f6 7a 79 79 32 00 18 00 1d 3c fa f2 66 ; [$8c3b] undefined
-    hex ba c4 78 ee de 3c 3c 98 44 38 00 19 1d 07 0b 0b ; [$8c4b] undefined
-    hex dc fb 75 18 0e 0f 07 07 83 c4 ea c1 7f bf dc da ; [$8c5b] undefined
-    hex dc f6 4e 01 c3 6e ae a4 30 48 b0 f8 3c 7f 5f 66 ; [$8c6b] undefined
-    hex 5d 23 1e 77 7b 3c 3c 19 22 1c 00 9b af 6c 62 b6 ; [$8c7b] undefined
-    hex fe e4 3c 67 5e 9e 9c 48 00 18 00 07 18 30 60 4f ; [$8c8b] undefined
-    hex df 5f df 0f 3f 7f 7f fc e0 e8 e0 a0 c8 74 3a 1a ; [$8c9b] undefined
-    hex 99 9d 9b e0 f0 b8 d4 fc 6e 6e 6c cf 60 60 3f 1d ; [$8cab] undefined
-    hex 2b 12 0f f0 ff ff 78 7f 1f 0f 00 3d 2d f3 f6 ce ; [$8cbb] undefined
-    hex bc 78 e0 da de 3c e8 f0 60 80 00 01 0f 37 3c 58 ; [$8ccb] undefined
-    hex 70 f1 71 0f 3b 5f 77 ff df 2e fe c0 68 f4 12 1a ; [$8cdb] undefined
-    hex cd ed ec 60 f0 f8 fc ec 36 96 17 f0 28 d8 2e 4f ; [$8ceb] undefined
-    hex 37 15 0b 5f ff 3f 7b 37 1a 0b 04 c9 17 2f fe ca ; [$8cfb] undefined
-    hex 9c 78 a0 36 ee dc 38 f4 f0 80 40 00 04 1e 3f 3f ; [$8d0b] undefined
-    hex 7f fd f1 00 08 28 2a 2a aa aa be f1 61 e3 62 2e ; [$8d1b] undefined
-    hex 02 35 3f fe fe 7c 3c 30 3c 1a 10 00 02 03 0f 07 ; [$8d2b] undefined
-    hex 07 0f 07 00 01 04 01 08 08 00 08 17 2b 14 03 09 ; [$8d3b] undefined
-    hex 07 05 0b 18 24 23 10 0b 08 03 07 01 04 00 12 04 ; [$8d4b] undefined
-    hex 1c 3a 7d 01 06 08 13 14 18 26 43 40 10 00 84 00 ; [$8d5b] undefined
-    hex 22 00 11 c0 30 08 84 42 22 21 11 7d 7d 7d 7d 7c ; [$8d6b] undefined
-    hex 3a 1c 00 53 53 43 43 43 26 1c 00 00 11 00 0a 00 ; [$8d7b] undefined
-    hex 00 00 00 11 11 12 0a 04 00 00 00 18 3c 3c 18 2c ; [$8d8b] undefined
-    hex 18 08 08 00 10 00 00 10 00 10 10 3c 7e ff ff e1 ; [$8d9b] undefined
-    hex e1 c3 7e 00 20 40 40 5e 1e 3c 00 01 03 23 51 48 ; [$8dab] undefined
-    hex 4b 49 47 00 01 30 40 40 41 00 40 c0 e0 e2 c5 89 ; [$8dbb] undefined
-    hex e9 89 c1 00 80 02 05 08 89 00 31 2b 1f 1f 1f 0f ; [$8dcb] undefined
-    hex 07 01 05 26 04 04 00 00 00 00 03 e2 f0 f0 f0 e0 ; [$8ddb] undefined
-    hex c0 c0 60 1a 0c 0c 0c 18 30 00 90 07 0f 0b 05 03 ; [$8deb] undefined
-    hex 02 07 08 03 04 04 03 00 01 01 07 10 31 23 23 31 ; [$8dfb] undefined
-    hex 18 07 00 0f 0f 1f 1f 0f 07 08 07 01 0e 7f f5 43 ; [$8e0b] undefined
-    hex 81 01 01 01 1f 3f 7b e0 c1 80 01 01 01 01 01 01 ; [$8e1b] undefined
-    hex 01 01 01 01 01 01 01 01 01 01 00 00 00 05 0b 0c ; [$8e2b] undefined
-    hex 36 73 7b 00 00 00 04 07 0f 3f 3f 61 92 69 71 2b ; [$8e3b] undefined
-    hex 7f ff bf 00 61 f3 ff ff ff ff ff c7 9d 7e 52 48 ; [$8e4b] undefined
-    hex 35 06 05 7f 6f 1f 3f 37 02 01 03 fb bb 99 0a ad ; [$8e5b] undefined
-    hex b1 c9 2d ff ff ff fd 5b 4f 7f ff 01 04 07 02 05 ; [$8e6b] undefined
-    hex 02 05 05 03 03 03 07 07 07 07 03 58 5e 6a 6a 37 ; [$8e7b] undefined
-    hex 5a 55 b5 ff ff ff ff ff ff ff ff 00 00 00 00 00 ; [$8e8b] undefined
-    hex 00 05 0a 00 00 00 00 00 00 02 07 00 00 00 00 31 ; [$8e9b] undefined
-    hex 7b b5 83 00 00 00 00 00 31 7b 7f 13 20 58 4d 39 ; [$8eab] undefined
-    hex 2d 2a 1b 0f 1f 3f 3f 0f 1f 1d 04 37 37 89 f4 b3 ; [$8ebb] undefined
-    hex 5c 72 82 ff ff 77 bb fc bf 9f 7f 02 05 04 05 04 ; [$8ecb] undefined
-    hex 01 02 02 01 03 03 03 03 03 01 01 a7 a1 95 95 c8 ; [$8edb] undefined
-    hex a5 aa 4a ff ff ff ff ff ff ff ff 00 03 01 03 01 ; [$8eeb] undefined
-    hex 01 01 01 01 02 03 03 03 03 03 03 20 e0 10 b0 30 ; [$8efb] undefined
-    hex b1 7f 70 c0 10 e0 c0 c0 c1 8f 9f 00 00 00 02 0c ; [$8f0b] undefined
-    hex 29 43 1f 03 07 07 0f 3f 7e fc e0 7e e0 fc f0 f0 ; [$8f1b] undefined
-    hex f0 f0 30 fe 3e fc 00 00 00 00 00 68 68 7f 38 29 ; [$8f2b] undefined
-    hex 08 24 02 17 17 00 00 01 20 20 20 22 04 29 08 38 ; [$8f3b] undefined
-    hex 61 6a 7f 20 20 21 20 00 1f 15 00 00 00 00 00 01 ; [$8f4b] undefined
-    hex 00 01 03 00 00 00 00 00 01 03 00 3c 1e 2e 7a e8 ; [$8f5b] undefined
-    hex f0 e0 f8 68 3c 1c 3c f0 90 f0 08 02 07 0e 1c 38 ; [$8f6b] undefined
-    hex 70 e0 c0 03 06 0c 18 30 60 40 80 10 00 00 00 00 ; [$8f7b] undefined
-    hex 00 00 00 b0 00 00 00 00 00 00 00 93 77 ff f1 7d ; [$8f8b] undefined
-    hex fe ed db b7 fc f3 0e df 9f 5e c5 ce c6 8f 83 87 ; [$8f9b] undefined
-    hex cf cf 83 0f cf c8 cf c8 0a ea c2 03 17 3b 3f 3f ; [$8fab] undefined
-    hex 3f 3f 3f 03 16 17 28 37 27 3c 10 c0 f0 f8 fc fc ; [$8fbb] undefined
-    hex fe be be e0 f0 d8 28 ec 9c 7c 4c 1f 1f 1f 2f 3f ; [$8fcb] undefined
-    hex 3e 3c 30 00 08 10 33 3f 3e 3c 30 da f8 f8 f4 80 ; [$8fdb] undefined
-    hex 00 00 00 2c 2c ec cc 80 00 00 00 c0 e0 70 78 3c ; [$8feb] undefined
-    hex 1a 0f 06 c0 f0 78 3c 1e 0f 07 03 00 00 00 00 00 ; [$8ffb] undefined
-    hex 00 00 80 00 00 00 00 00 00 80 c0 03 01 00 00 00 ; [$900b] undefined
-    hex 00 00 00 01 00 00 00 00 00 00 00 44 b2 de 7c 30 ; [$901b] undefined
-    hex 3c 5e 33 e4 e2 62 16 0c 16 53 21    ; [$902b] undefined
+PPUTile16_PRG7__8000.row3_1:                ; [$800b]
+    db $2f,$66,$00,$e6,$00                  ; [$800b] byte
+
+    hex 96 01 46 02 86 03 46 04 c6 04 66 05 46 06 e6 06 ; [$8011] undefined
+    hex b6 07 b6 08 b6 09 66 0a 46 0b 96 0c 16 0c 16 0d ; [$8020] undefined
+    hex 36 0d 56 0d 96 0d 96 0d b6 0d f6 0d 66 00 16 0e ; [$8030] undefined
+    hex 66 00 36 0e 66 00 66 00 f6 0e 36 0f 56 0f 96 0f ; [$8040] undefined
+    hex b6 0f f6 0f 16 0e f6 0e 96 0d 96 0d 16 0d f6 0d ; [$8050] undefined
+    hex 36 0e 36 0e 36 0e 02 05 06 0e 0a 06 06 01 01 03 ; [$8060] undefined
+    hex 01 01 05 05 01 0e 80 80 10 90 80 20 b8 78 c0 e0 ; [$8070] undefined
+    hex e0 f0 a8 f8 f0 80 3d 5f 2c af cf ce 81 ff 1a 2d ; [$8080] undefined
+    hex 77 72 70 7f 7f 00 f8 f4 f6 f4 35 f4 fc fc 00 08 ; [$8090] undefined
+    hex 88 0a ca 0b 83 03 02 05 04 0d 05 00 05 06 01 03 ; [$80a0] undefined
+    hex 03 03 0b 0f 03 09 80 80 10 20 10 40 68 e8 c0 e0 ; [$80b0] undefined
+    hex e0 f0 50 f0 f0 10 3b 5b 2f af cf cc 81 ff 1c 2d ; [$80c0] undefined
+    hex 74 71 73 7f 7e 00 98 f4 f6 b4 15 74 fc fc 60 08 ; [$80d0] undefined
+    hex 08 ca ea 8b 03 03 03 04 06 06 05 07 03 04 00 03 ; [$80e0] undefined
+    hex 03 01 03 00 07 03 e0 30 d8 e8 08 b8 30 40 00 c0 ; [$80f0] undefined
+    hex e0 50 f0 40 c0 bc 27 71 2c cd 9f 5f 2b 17 18 0e ; [$8100] undefined
+    hex 77 72 60 30 1c 09 ac 5a 98 34 f8 f4 e8 50 70 ec ; [$8110] undefined
+    hex ee cf 07 0e 1c b8 0f 0f 07 06 08 07 0f 19 00 05 ; [$8120] undefined
+    hex 0d 0d 07 08 0c 0e f0 f8 e8 68 f0 f0 d0 50 00 a0 ; [$8130] undefined
+    hex b0 b0 00 c0 e0 e0 12 1c 14 10 10 04 14 2c 0c 00 ; [$8140] undefined
+    hex 08 1c 1c 18 38 78 50 58 78 38 38 38 28 04 e0 60 ; [$8150] undefined
+    hex 00 20 20 00 70 78 23 0c 7e 6e 55 54 27 28 10 33 ; [$8160] undefined
+    hex 33 31 63 63 73 73 e0 30 d8 e8 08 38 30 40 00 c0 ; [$8170] undefined
+    hex e0 50 f0 c0 c0 bc 27 19 1c 09 07 07 07 07 78 36 ; [$8180] undefined
+    hex 37 16 08 00 00 03 03 03 03 07 05 07 01 01 05 06 ; [$8190] undefined
+    hex 07 00 06 0a 06 02 80 40 c0 e0 a0 e0 40 c0 80 80 ; [$81a0] undefined
+    hex 80 00 c0 c0 e0 60 03 06 0a 1d 17 05 07 07 05 03 ; [$81b0] undefined
+    hex 07 12 18 1e 0f 07 20 d0 d0 d0 d0 d0 d0 90 c0 e0 ; [$81c0] undefined
+    hex e0 e0 e0 e0 e0 e0 06 0d 07 07 07 0f 06 02 07 07 ; [$81d0] undefined
+    hex 0e 0d 0d 05 0b 0f 20 e0 60 a0 20 20 a0 a0 c0 00 ; [$81e0] undefined
+    hex 80 c0 c0 c0 c0 c0 05 0d 01 04 06 0f 1f 14 0f 07 ; [$81f0] undefined
+    hex 0f 0b 09 00 0d 1b 20 a0 20 a0 10 90 90 70 c0 c0 ; [$8200] undefined
+    hex c0 c0 e0 e0 60 80 03 03 03 07 05 07 01 01 05 06 ; [$8210] undefined
+    hex 07 00 06 0a 06 06 03 06 0a 0d 1f 1b 07 07 05 03 ; [$8220] undefined
+    hex 07 02 10 34 1f 07 06 0d 0f 0f 0f 0f 0c 06 07 07 ; [$8230] undefined
+    hex 06 05 05 05 07 0b 05 07 03 03 06 06 06 00 05 07 ; [$8240] undefined
+    hex 04 07 01 07 03 0f 50 e0 f0 f0 f8 f8 dc b4 50 f0 ; [$8250] undefined
+    hex 00 e0 f0 70 78 f8 07 07 0f 1f 1f 6c b3 57 07 07 ; [$8260] undefined
+    hex 0e 1d 03 13 6f af b8 e8 68 68 68 e8 c8 98 48 70 ; [$8270] undefined
+    hex f0 f0 f0 f0 f0 e0 01 06 1f 1e 1d 1d 12 0e 07 0f ; [$8280] undefined
+    hex 0c 0d 0e 0e 0d 01 03 09 1c 06 00 00 00 00 0c 0e ; [$8290] undefined
+    hex 1e 38 00 00 00 00 05 07 03 03 06 06 06 00 05 07 ; [$82a0] undefined
+    hex 04 07 01 07 03 0f 07 07 0f 1f 1f 0c 73 f7 07 03 ; [$82b0] undefined
+    hex 0e 1d 03 33 0f 6f 0a 0f 07 07 0f 0d 0d 01 0a 0f ; [$82c0] undefined
+    hex 08 0f 01 0e 06 1f 20 20 e0 e0 f0 f0 b0 60 80 c0 ; [$82d0] undefined
+    hex 00 c0 e0 e0 f0 f0 0f 1f 3e fe f2 5e bd 3f 0f 0e ; [$82e0] undefined
+    hex 1d 39 8d bd 73 6b f0 d0 d0 d0 d0 d0 90 30 10 e0 ; [$82f0] undefined
+    hex e0 e0 e0 e0 e0 c0 3f 52 3f 39 3c 21 1e 16 6d 2d ; [$8300] undefined
+    hex 00 1e 1f 1e 01 0f 70 f0 e0 e0 40 c0 40 40 80 00 ; [$8310] undefined
+    hex 00 00 80 00 80 80 16 14 14 1c 1f 0d 14 2e 0f 0f ; [$8320] undefined
+    hex 0f 0f 00 02 0f 1f 40 c0 c0 c0 80 00 80 80 80 00 ; [$8330] undefined
+    hex 00 00 00 00 00 00 0f 1f 3e 3e f2 5f bf ba 0f 06 ; [$8340] undefined
+    hex 1d 39 0d b3 6d 6d f0 d0 d0 d0 90 90 30 70 10 e0 ; [$8350] undefined
+    hex e0 e0 e0 e0 c0 80 32 5f 3f 39 3c 21 1e 16 6d 20 ; [$8360] undefined
+    hex 00 1e 1f 1e 01 0f f0 f0 e0 e0 40 c0 40 40 00 00 ; [$8370] undefined
+    hex 00 00 80 00 80 80 63 d6 f4 b0 96 56 f0 67 03 67 ; [$8380] undefined
+    hex 67 67 67 e3 47 40 c0 e0 f0 10 f0 f8 18 3c e0 f0 ; [$8390] undefined
+    hex f0 f0 d0 58 f8 ec 6d 6f 7f ed f2 f7 7f 3e 47 57 ; [$83a0] undefined
+    hex 57 16 cd 48 03 43 e4 5a bd 7f 3f fe 3a 75 d8 bc ; [$83b0] undefined
+    hex 7e ee cf 3f ff be 77 39 74 3f 7f 39 7b 1f 48 4e ; [$83c0] undefined
+    hex 4f 4f 4f 4f 4f 4f ca f4 e8 48 d8 f8 b8 b0 3c 38 ; [$83d0] undefined
+    hex 30 b0 a0 c0 c0 e8 1f 1f 1f 1f 1f 0e 16 2e 5f 5f ; [$83e0] undefined
+    hex 5f 5f 5e 10 38 78 b8 90 54 b4 34 38 28 04 f0 f8 ; [$83f0] undefined
+    hex b8 78 38 00 70 78 03 66 d4 f0 b6 16 d0 f7 03 07 ; [$8400] undefined
+    hex 67 67 67 e3 67 40 6b 6f 6f 3d e2 f7 7f 7e 44 47 ; [$8410] undefined
+    hex 57 56 1d c8 43 03 77 39 74 3f 7f 39 7b 1f 48 4e ; [$8420] undefined
+    hex 4f 4f 4f 4f 4f 4f 1f 1f 1f 1f 1f 0e 56 2e 5f 5f ; [$8430] undefined
+    hex 5f 5f 5e 50 38 78 87 03 9b 9b 80 03 f8 03 08 1c ; [$8440] undefined
+    hex 1c 8d 3f 1e e7 5c 80 c0 c0 e0 d8 bc f8 7c 00 00 ; [$8450] undefined
+    hex 00 00 20 78 7c fe 3d 11 6b 33 3f 1c 17 2c 40 60 ; [$8460] undefined
+    hex 10 0c 00 03 0f 1f 6c 67 77 f5 17 cf 39 fb fe fe ; [$8470] undefined
+    hex ee 0e ee fe ce 0c 2f 24 1b 16 15 15 1f 0c 18 1b ; [$8480] undefined
+    hex 07 0f 0e 0e 00 03 7f c6 9e f8 00 00 00 00 f0 f8 ; [$8490] undefined
+    hex e0 00 00 00 00 00 0a 0a 0a 0c 13 21 2e 30 07 07 ; [$84a0] undefined
+    hex 07 03 0e 1e 10 00 87 03 13 9b 80 03 f0 03 88 1c ; [$84b0] undefined
+    hex 9c 0d 3f 1e ef 5c 11 02 12 03 03 02 11 03 00 01 ; [$84c0] undefined
+    hex 01 11 10 01 01 06 f0 b8 0c 6c 68 88 2c c4 00 40 ; [$84d0] undefined
+    hex f0 f0 b4 f4 f0 38 01 02 01 03 05 07 00 07 00 01 ; [$84e0] undefined
+    hex 02 04 0f 0f 0f 00 1e fa f5 f5 f5 2d f9 82 e0 04 ; [$84f0] undefined
+    hex 0e 0e ce de 3e 7c 01 02 01 07 00 07 05 05 00 01 ; [$8500] undefined
+    hex 03 03 07 00 0e 0e f8 a8 68 68 40 f0 b0 20 00 d0 ; [$8510] undefined
+    hex b0 b0 b0 00 40 c0 03 04 02 03 01 03 07 03 0c 0f ; [$8520] undefined
+    hex 07 03 01 00 04 0f 60 c0 40 40 40 a0 a0 40 80 00 ; [$8530] undefined
+    hex 80 80 80 c0 c0 80 01 02 02 13 03 12 01 06 10 11 ; [$8540] undefined
+    hex 01 01 00 01 01 07 f0 b8 0c 6c 68 88 2c 84 00 40 ; [$8550] undefined
+    hex f0 f0 b4 f4 f0 78 00 00 00 01 03 03 03 00 00 00 ; [$8560] undefined
+    hex 00 00 00 03 01 07 00 00 00 e0 f0 38 38 58 00 00 ; [$8570] undefined
+    hex 00 00 00 c0 c0 a0 06 01 00 01 03 03 0e 0f 01 02 ; [$8580] undefined
+    hex 03 06 03 07 07 00 1c 7a fe de ea ea fa ca e0 84 ; [$8590] undefined
+    hex 04 e4 f4 74 04 74 01 03 05 02 0d 09 23 55 03 07 ; [$85a0] undefined
+    hex 03 05 06 0e 1c 38 df f8 df 3f fc f9 fb f2 ff bf ; [$85b0] undefined
+    hex a0 c3 07 0e 0c 0d ca 1a f2 a6 0a 5a fa 06 f4 e4 ; [$85c0] undefined
+    hex 0c d8 f4 ac 04 f8 a0 79 01 01 00 00 03 04 79 00 ; [$85d0] undefined
+    hex 01 01 01 01 03 03 fb 4a ca ca 4a 4a 02 4e 0c 8c ; [$85e0] undefined
+    hex 0c 0c 8c 8c cc 80 f2 02 0a 0a 0a 0a 02 0e 0c 0c ; [$85f0] undefined
+    hex 0c 0c 0c 0c 0c 00 00 00 00 01 03 03 03 00 00 00 ; [$8600] undefined
+    hex 00 00 00 03 01 07 00 00 00 e0 f0 38 38 58 00 00 ; [$8610] undefined
+    hex 00 00 00 c0 c0 a0 06 01 00 03 03 03 0e 0f 01 02 ; [$8620] undefined
+    hex 07 00 03 07 07 00 ff f8 f7 2f fc f9 fb f2 ef df ; [$8630] undefined
+    hex d8 d3 07 0e 0c 0d 07 0f 09 0c 2e 2c 19 13 00 00 ; [$8640] undefined
+    hex 06 03 17 15 0f 0c c0 e0 20 60 e8 48 30 90 00 00 ; [$8650] undefined
+    hex c0 80 d0 70 e0 60 11 38 7f 7f dc e4 7b 01 0f 37 ; [$8660] undefined
+    hex 78 0c e3 fb fc 7e 10 58 fc fa 8a 76 06 8c e0 b8 ; [$8670] undefined
+    hex 7c 04 f4 f8 f8 70 1f 21 3e 3f 3f 24 17 0c 00 1e ; [$8680] undefined
+    hex 1d 1b 1b 1b 08 03 f8 f8 98 58 38 d8 48 88 00 00 ; [$8690] undefined
+    hex 60 a0 c0 e0 f0 70 07 04 06 06 04 04 02 06 03 03 ; [$86a0] undefined
+    hex 03 03 03 03 07 0f cc 7a 5a 46 84 80 80 80 30 84 ; [$86b0] undefined
+    hex 84 88 00 00 00 00 13 39 7f 7f dc e4 7b 01 0c 37 ; [$86c0] undefined
+    hex 78 0c e3 fb fc 7e 90 58 fc fa 8a 76 06 8c 60 b8 ; [$86d0] undefined
+    hex 7c 04 f4 f8 f8 70 02 04 01 0d 00 06 0e 07 01 03 ; [$86e0] undefined
+    hex 07 07 0a 0f 01 0e a0 f0 30 f8 a8 28 98 18 c0 80 ; [$86f0] undefined
+    hex c0 80 d0 d0 e0 e0 01 18 37 2c 7f 4f 5f 5f 0e 07 ; [$8700] undefined
+    hex 08 1b 18 3f 3f 3c 38 ee dc bb 65 f3 f5 bb c0 1c ; [$8710] undefined
+    hex 3a 76 fe ee 2e c6 5d 5c 0e 3f 33 21 31 3d 3a 3b ; [$8720] undefined
+    hex 39 00 0f 1f 0f 02 c5 7c 0a f8 f0 d0 70 f0 7e fe ; [$8730] undefined
+    hex f4 00 00 e0 e0 60 3f 3f 3d 1d 1d 1d 05 06 00 00 ; [$8740] undefined
+    hex 00 00 00 00 38 79 70 00 60 c0 20 20 00 20 80 e0 ; [$8750] undefined
+    hex 80 60 e0 e0 e0 c0 02 04 01 0d 00 06 04 0f 01 03 ; [$8760] undefined
+    hex 07 07 0a 0f 0b 00 01 18 37 2c 7f 4f 5f 5f 0e 07 ; [$8770] undefined
+    hex 08 1b 18 3f 3f 3c 5e 5e 07 3f 33 21 11 1d 3d 3d ; [$8780] undefined
+    hex 38 00 0f 1f 0f 02 0f 0e 06 03 02 06 04 08 00 01 ; [$8790] undefined
+    hex 01 00 01 01 03 07 70 20 20 20 60 60 00 40 80 c0 ; [$87a0] undefined
+    hex c0 c0 c0 c0 c0 80 00 00 00 00 01 03 02 02 00 00 ; [$87b0] undefined
+    hex 00 00 01 02 01 03 00 00 00 00 e0 e0 e0 f0 00 00 ; [$87c0] undefined
+    hex 00 00 c0 e0 70 b0 02 00 01 00 02 04 03 04 01 03 ; [$87d0] undefined
+    hex 02 01 03 07 07 03 b0 10 30 60 c4 58 98 38 78 f8 ; [$87e0] undefined
+    hex d8 98 38 fc fc dc 1f 3f 1b 0d 0f 03 07 07 0e 33 ; [$87f0] undefined
+    hex 36 1e 00 0f 0f 0f dc f4 f4 04 fc 3e be fe 00 18 ; [$8800] undefined
+    hex f8 f8 00 c0 c0 c0 07 03 0c 09 02 0a 0e 1d 0f 0f ; [$8810] undefined
+    hex 0b 0e 0f 07 03 00 f6 b2 22 d2 42 42 48 fa d8 dc ; [$8820] undefined
+    hex dc 3c fc fc f6 00 00 00 00 00 03 07 05 05 00 00 ; [$8830] undefined
+    hex 00 00 03 05 02 07 00 00 00 00 c0 c0 c0 e0 00 00 ; [$8840] undefined
+    hex 00 00 80 c0 e0 60 05 00 02 00 05 08 07 08 02 07 ; [$8850] undefined
+    hex 05 03 06 0f 0f 07 60 20 60 c0 88 a0 30 50 f0 f0 ; [$8860] undefined
+    hex b0 30 70 f8 f8 b8 1e 3f 36 0d 0f 03 07 03 1f 33 ; [$8870] undefined
+    hex 1b 1e 00 0f 0f 0f f8 70 f4 0c fc 3e be f6 00 98 ; [$8880] undefined
+    hex 78 f0 00 c0 c0 c8 0b 09 0a 0a 0a 0c 04 06 07 07 ; [$8890] undefined
+    hex 05 07 07 03 03 00 fa da 12 ea 92 92 90 f8 ec ec ; [$88a0] undefined
+    hex ec 1c fc fc fe 04 00 00 00 1c 0c 0c 0c 1c 00 00 ; [$88b0] undefined
+    hex 08 08 18 18 18 08 10 78 f4 62 fe 7a bf 5f 10 10 ; [$88c0] undefined
+    hex f8 fc 00 0e ea 6a 08 0c 0c 0c 14 18 0d 1d 08 00 ; [$88d0] undefined
+    hex 08 08 08 1c 1a 02 1e 78 b6 fe 5d fd 5d 5d 60 06 ; [$88e0] undefined
+    hex 6f 69 e6 06 e2 ee 0f 08 08 08 08 08 00 08 08 08 ; [$88f0] undefined
+    hex 08 08 08 08 08 08 39 ba f6 fc f4 f0 a8 a8 de 5c ; [$8900] undefined
+    hex 88 a2 aa 08 70 70 08 00 08 08 08 08 08 00 08 08 ; [$8910] undefined
+    hex 08 08 08 08 08 09 08 78 28 28 08 78 c8 80 70 00 ; [$8920] undefined
+    hex 70 70 70 00 70 f8 00 00 1c 0c 0c 0c 0c 1c 00 08 ; [$8930] undefined
+    hex 08 18 18 18 18 08 00 10 78 e4 62 fe 7a bf 00 10 ; [$8940] undefined
+    hex 10 f8 fc 00 0e ea 08 0c 0c 0c 0a 09 17 0f 00 08 ; [$8950] undefined
+    hex 08 00 1c 1e 08 00 5f 1e 78 b6 fc 56 fb 2a 6a 60 ; [$8960] undefined
+    hex 06 6f 63 ed 0c dc 09 08 08 09 09 08 00 08 08 08 ; [$8970] undefined
+    hex 08 08 08 08 08 08 76 e4 4e f4 fc f2 2a aa b8 78 ; [$8980] undefined
+    hex b0 8a aa 24 dc dc 08 00 08 08 00 00 01 03 08 08 ; [$8990] undefined
+    hex 08 08 08 08 09 03 36 fd a5 a4 22 26 4d d2 c8 06 ; [$89a0] undefined
+    hex c6 c7 c3 c7 86 8c 01 07 07 0c 03 04 02 01 07 0f ; [$89b0] undefined
+    hex 0f 03 04 03 05 00 80 d0 f0 f8 ac 62 b2 d9 e0 e0 ; [$89c0] undefined
+    hex e0 70 50 fc 5c ee 39 5e 00 31 0e 00 00 00 07 3f ; [$89d0] undefined
+    hex 3f 0e 00 00 00 00 99 31 35 c9 f1 f3 9f 19 ee ce ; [$89e0] undefined
+    hex da 36 0e 0c 60 fe 06 0a 17 1d 19 1d 0d 0d 01 05 ; [$89f0] undefined
+    hex 0e 0e 0e 0e 0e 0e 79 c1 03 fe 00 00 00 00 fe fe ; [$8a00] undefined
+    hex fc 00 00 00 00 00 0a 0a 1a 22 7c 00 00 00 0c 0c ; [$8a10] undefined
+    hex 3c 7c 00 00 00 00 01 07 07 0c 03 04 02 21 07 0f ; [$8a20] undefined
+    hex 0f 03 04 03 05 19 2f 10 18 0f 00 00 00 01 1f 0f ; [$8a30] undefined
+    hex 07 00 00 00 00 00 06 0a 17 1d 1d 05 05 0d 01 05 ; [$8a40] undefined
+    hex 0e 0e 0e 0e 0e 06 0d 0d 19 13 3c 00 00 00 06 06 ; [$8a50] undefined
+    hex 0e 3c 00 00 00 00 00 00 08 0f 0f 09 0b 0b 00 00 ; [$8a60] undefined
+    hex 0f 0f 0f 06 0f 05 00 00 00 c0 c0 e0 a0 a0 00 00 ; [$8a70] undefined
+    hex 80 00 c0 00 40 40 00 04 03 0f 0f 0e 10 0e 0f 0b ; [$8a80] undefined
+    hex 04 09 1b 1f 0f 07 60 f0 38 e0 70 70 e0 e0 80 00 ; [$8a90] undefined
+    hex c0 e0 f0 e0 10 30 07 0a 0c 3c 07 15 1e 15 08 17 ; [$8aa0] undefined
+    hex 37 07 0e 0f 0f 0f e0 60 d0 d0 30 f0 30 10 30 b0 ; [$8ab0] undefined
+    hex 60 e0 c0 00 c0 e0 1e 15 16 19 07 00 08 16 0f 0f ; [$8ac0] undefined
+    hex 0f 06 00 06 06 0c 90 00 00 e0 a0 80 40 80 e0 f0 ; [$8ad0] undefined
+    hex f0 00 40 60 40 c0 00 04 03 0f 0f 0e 10 0e 0f 0b ; [$8ae0] undefined
+    hex 04 09 1b 1f 0f 07 60 f0 38 e0 70 70 f0 d0 80 00 ; [$8af0] undefined
+    hex c0 e0 f0 e0 00 60 0f 0b 1f 17 17 15 1e 15 00 06 ; [$8b00] undefined
+    hex 05 0d 0e 0f 0f 0f c0 40 a0 70 f0 f0 30 10 60 e0 ; [$8b10] undefined
+    hex c0 80 00 00 c0 e0 1e 15 16 19 03 03 01 07 0f 0f ; [$8b20] undefined
+    hex 0f 06 00 00 02 05 90 00 00 c0 40 40 80 80 e0 f0 ; [$8b30] undefined
+    hex f0 00 80 80 c0 c0 00 00 07 0f 0b 09 0b 0b 00 00 ; [$8b40] undefined
+    hex 00 00 04 06 0f 05 00 00 80 c0 c0 e0 a0 20 00 00 ; [$8b50] undefined
+    hex 00 00 00 00 40 c0 00 04 03 0f 1f 0e 00 0f 0f 0b ; [$8b60] undefined
+    hex 04 09 1b 1f 0f 07 60 f0 38 e0 70 70 e0 e0 80 00 ; [$8b70] undefined
+    hex c0 e0 f0 e0 10 30 17 6e 75 0d 0d 2e 38 2a 18 37 ; [$8b80] undefined
+    hex 0e 1e 1e 1f 1f 1f f0 f0 d0 b8 f8 a8 14 ac 20 60 ; [$8b90] undefined
+    hex e0 c0 00 50 e8 d0 14 19 14 0a 14 05 18 2f 3f 3f ; [$8ba0] undefined
+    hex 3f 3f 3f 3f 27 10 14 3c 1c ac 34 1c 6c ec e8 c0 ; [$8bb0] undefined
+    hex e0 d0 c8 e0 90 00 60 f0 38 e0 70 70 e0 c0 80 00 ; [$8bc0] undefined
+    hex c0 e0 f0 e0 10 70 0f 0f 17 0f 0e 2f 38 2a 08 16 ; [$8bd0] undefined
+    hex 0e 1d 1d 1e 1f 1f d0 d0 b0 78 f8 a8 14 ac 60 e0 ; [$8be0] undefined
+    hex c0 80 00 50 e8 d0 14 19 14 0a 3c 35 2f 35 3f 3f ; [$8bf0] undefined
+    hex 3f 3f 1f 1f 10 0e 14 2c 14 ac 14 0c 24 ee e8 d0 ; [$8c00] undefined
+    hex e8 d0 e8 f0 d8 00 83 fe fd 3b 5b 3b 2f b2 80 c3 ; [$8c10] undefined
+    hex 76 75 25 0c 12 cd 98 b8 e0 d0 d0 3b de af 18 70 ; [$8c20] undefined
+    hex f0 e0 e0 c1 23 56 e9 f5 fe b6 cd 7f 66 3c f6 7a ; [$8c30] undefined
+    hex 79 79 32 00 18 00 1d 3c fa f2 66 ba c4 78 ee de ; [$8c40] undefined
+    hex 3c 3c 98 44 38 00 19 1d 07 0b 0b dc fb 75 18 0e ; [$8c50] undefined
+    hex 0f 07 07 83 c4 ea c1 7f bf dc da dc f6 4e 01 c3 ; [$8c60] undefined
+    hex 6e ae a4 30 48 b0 f8 3c 7f 5f 66 5d 23 1e 77 7b ; [$8c70] undefined
+    hex 3c 3c 19 22 1c 00 9b af 6c 62 b6 fe e4 3c 67 5e ; [$8c80] undefined
+    hex 9e 9c 48 00 18 00 07 18 30 60 4f df 5f df 0f 3f ; [$8c90] undefined
+    hex 7f 7f fc e0 e8 e0 a0 c8 74 3a 1a 99 9d 9b e0 f0 ; [$8ca0] undefined
+    hex b8 d4 fc 6e 6e 6c cf 60 60 3f 1d 2b 12 0f f0 ff ; [$8cb0] undefined
+    hex ff 78 7f 1f 0f 00 3d 2d f3 f6 ce bc 78 e0 da de ; [$8cc0] undefined
+    hex 3c e8 f0 60 80 00 01 0f 37 3c 58 70 f1 71 0f 3b ; [$8cd0] undefined
+    hex 5f 77 ff df 2e fe c0 68 f4 12 1a cd ed ec 60 f0 ; [$8ce0] undefined
+    hex f8 fc ec 36 96 17 f0 28 d8 2e 4f 37 15 0b 5f ff ; [$8cf0] undefined
+    hex 3f 7b 37 1a 0b 04 c9 17 2f fe ca 9c 78 a0 36 ee ; [$8d00] undefined
+    hex dc 38 f4 f0 80 40 00 04 1e 3f 3f 7f fd f1 00 08 ; [$8d10] undefined
+    hex 28 2a 2a aa aa be f1 61 e3 62 2e 02 35 3f fe fe ; [$8d20] undefined
+    hex 7c 3c 30 3c 1a 10 00 02 03 0f 07 07 0f 07 00 01 ; [$8d30] undefined
+    hex 04 01 08 08 00 08 17 2b 14 03 09 07 05 0b 18 24 ; [$8d40] undefined
+    hex 23 10 0b 08 03 07 01 04 00 12 04 1c 3a 7d 01 06 ; [$8d50] undefined
+    hex 08 13 14 18 26 43 40 10 00 84 00 22 00 11 c0 30 ; [$8d60] undefined
+    hex 08 84 42 22 21 11 7d 7d 7d 7d 7c 3a 1c 00 53 53 ; [$8d70] undefined
+    hex 43 43 43 26 1c 00 00 11 00 0a 00 00 00 00 11 11 ; [$8d80] undefined
+    hex 12 0a 04 00 00 00 18 3c 3c 18 2c 18 08 08 00 10 ; [$8d90] undefined
+    hex 00 00 10 00 10 10 3c 7e ff ff e1 e1 c3 7e 00 20 ; [$8da0] undefined
+    hex 40 40 5e 1e 3c 00 01 03 23 51 48 4b 49 47 00 01 ; [$8db0] undefined
+    hex 30 40 40 41 00 40 c0 e0 e2 c5 89 e9 89 c1 00 80 ; [$8dc0] undefined
+    hex 02 05 08 89 00 31 2b 1f 1f 1f 0f 07 01 05 26 04 ; [$8dd0] undefined
+    hex 04 00 00 00 00 03 e2 f0 f0 f0 e0 c0 c0 60 1a 0c ; [$8de0] undefined
+    hex 0c 0c 18 30 00 90 07 0f 0b 05 03 02 07 08 03 04 ; [$8df0] undefined
+    hex 04 03 00 01 01 07 10 31 23 23 31 18 07 00 0f 0f ; [$8e00] undefined
+    hex 1f 1f 0f 07 08 07 01 0e 7f f5 43 81 01 01 01 1f ; [$8e10] undefined
+    hex 3f 7b e0 c1 80 01 01 01 01 01 01 01 01 01 01 01 ; [$8e20] undefined
+    hex 01 01 01 01 01 00 00 00 05 0b 0c 36 73 7b 00 00 ; [$8e30] undefined
+    hex 00 04 07 0f 3f 3f 61 92 69 71 2b 7f ff bf 00 61 ; [$8e40] undefined
+    hex f3 ff ff ff ff ff c7 9d 7e 52 48 35 06 05 7f 6f ; [$8e50] undefined
+    hex 1f 3f 37 02 01 03 fb bb 99 0a ad b1 c9 2d ff ff ; [$8e60] undefined
+    hex ff fd 5b 4f 7f ff 01 04 07 02 05 02 05 05 03 03 ; [$8e70] undefined
+    hex 03 07 07 07 07 03 58 5e 6a 6a 37 5a 55 b5 ff ff ; [$8e80] undefined
+    hex ff ff ff ff ff ff 00 00 00 00 00 00 05 0a 00 00 ; [$8e90] undefined
+    hex 00 00 00 00 02 07 00 00 00 00 31 7b b5 83 00 00 ; [$8ea0] undefined
+    hex 00 00 00 31 7b 7f 13 20 58 4d 39 2d 2a 1b 0f 1f ; [$8eb0] undefined
+    hex 3f 3f 0f 1f 1d 04 37 37 89 f4 b3 5c 72 82 ff ff ; [$8ec0] undefined
+    hex 77 bb fc bf 9f 7f 02 05 04 05 04 01 02 02 01 03 ; [$8ed0] undefined
+    hex 03 03 03 03 01 01 a7 a1 95 95 c8 a5 aa 4a ff ff ; [$8ee0] undefined
+    hex ff ff ff ff ff ff 00 03 01 03 01 01 01 01 01 02 ; [$8ef0] undefined
+    hex 03 03 03 03 03 03 20 e0 10 b0 30 b1 7f 70 c0 10 ; [$8f00] undefined
+    hex e0 c0 c0 c1 8f 9f 00 00 00 02 0c 29 43 1f 03 07 ; [$8f10] undefined
+    hex 07 0f 3f 7e fc e0 7e e0 fc f0 f0 f0 f0 30 fe 3e ; [$8f20] undefined
+    hex fc 00 00 00 00 00 68 68 7f 38 29 08 24 02 17 17 ; [$8f30] undefined
+    hex 00 00 01 20 20 20 22 04 29 08 38 61 6a 7f 20 20 ; [$8f40] undefined
+    hex 21 20 00 1f 15 00 00 00 00 00 01 00 01 03 00 00 ; [$8f50] undefined
+    hex 00 00 00 01 03 00 3c 1e 2e 7a e8 f0 e0 f8 68 3c ; [$8f60] undefined
+    hex 1c 3c f0 90 f0 08 02 07 0e 1c 38 70 e0 c0 03 06 ; [$8f70] undefined
+    hex 0c 18 30 60 40 80 10 00 00 00 00 00 00 00 b0 00 ; [$8f80] undefined
+    hex 00 00 00 00 00 00 93 77 ff f1 7d fe ed db b7 fc ; [$8f90] undefined
+    hex f3 0e df 9f 5e c5 ce c6 8f 83 87 cf cf 83 0f cf ; [$8fa0] undefined
+    hex c8 cf c8 0a ea c2 03 17 3b 3f 3f 3f 3f 3f 03 16 ; [$8fb0] undefined
+    hex 17 28 37 27 3c 10 c0 f0 f8 fc fc fe be be e0 f0 ; [$8fc0] undefined
+    hex d8 28 ec 9c 7c 4c 1f 1f 1f 2f 3f 3e 3c 30 00 08 ; [$8fd0] undefined
+    hex 10 33 3f 3e 3c 30 da f8 f8 f4 80 00 00 00 2c 2c ; [$8fe0] undefined
+    hex ec cc 80 00 00 00 c0 e0 70 78 3c 1a 0f 06 c0 f0 ; [$8ff0] undefined
+    hex 78 3c 1e 0f 07 03 00 00 00 00 00 00 00 80 00 00 ; [$9000] undefined
+    hex 00 00 00 00 80 c0 03 01 00 00 00 00 00 00 01 00 ; [$9010] undefined
+    hex 00 00 00 00 00 00 44 b2 de 7c 30 3c 5e 33 e4 e2 ; [$9020] undefined
+    db $62,$16,$0c,$16,$53,$21              ; [$9030] undefined
 
 SPRITE_IMAGE_OFFSETS_START:                 ; [$9036]
     hex 52 12 57 12 6b 12 7f 12 93 12 a7 12 bb 12 cf 12 ; [$9036] undefined

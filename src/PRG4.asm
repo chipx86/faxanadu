@@ -6,1027 +6,14338 @@
 
 BASE $8000
 
-    hex 80 3e 9e 00 a0 0b 51 00 7e 00 00 00 07 00 00 00 ; [$8000] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$8010] undefined
-    hex ff 01 7f fe 00 00 e7 ef 00 fe 80 00 00 ef 08 00 ; [$8020] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$8030] undefined
-    hex d8 99 a5 5b d2 29 d3 22 37 6e 5e 3c 2d 5e 2c 5d ; [$8040] undefined
-    hex dd ed 7a d5 bc db ec d9 00 00 80 00 40 00 00 00 ; [$8050] undefined
-    hex ff 22 ff 88 ff 22 ff 55 00 dd 00 77 00 dd 00 00 ; [$8060] undefined
-    hex eb bd ef 5a 7f 15 8b 21 00 00 00 00 00 00 00 00 ; [$8070] undefined
-    hex 00 00 00 00 00 00 00 00 ff ff ff ff ff ff ff ff ; [$8080] undefined
-    hex ff 22 ff 88 cf 3a ff 88 00 dd 00 57 08 d5 00 77 ; [$8090] undefined
-    hex a1 b2 61 42 65 82 00 ff 9e 8d 1e 3d 1a 7d 00 00 ; [$80a0] undefined
-    hex eb 75 ea 74 ea 7f 00 50 01 81 00 80 00 80 00 00 ; [$80b0] undefined
-    hex d9 a7 b6 a9 ed a6 96 e7 26 19 09 46 02 11 09 00 ; [$80c0] undefined
-    hex cc cc 66 fe 55 a9 55 ff 77 77 bb 01 fe fe fe 00 ; [$80d0] undefined
-    hex 04 7c 7c 00 00 e9 e1 00 f8 80 80 00 e9 00 0a 00 ; [$80e0] undefined
-    hex ff 22 ff 88 ff 22 ff 88 00 dd 00 77 00 dd 00 77 ; [$80f0] undefined
-    hex a5 42 99 3c 76 3e 6a 1a 5a a5 52 a1 48 40 54 64 ; [$8100] undefined
-    hex 01 c2 83 e1 c1 f0 e0 ff 00 7c 7c 3e 3e 1f 1f 00 ; [$8110] undefined
-    hex cc ee 66 7f 33 bb 99 fd 77 77 bb 83 dd dd ee 0e ; [$8120] undefined
-    hex 9d b4 95 de 96 a7 85 7f 7e 7f 7e 20 7f 7f 7f 00 ; [$8130] undefined
-    hex 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 00 ; [$8140] undefined
-    hex 54 fe d4 00 45 ef 4d 00 aa 00 00 00 aa 00 00 00 ; [$8150] undefined
-    hex ff ff ff ad ff a9 56 ff ff ff ff 53 fc fe fc 00 ; [$8160] undefined
-    hex ff ff ff ff ff a3 55 ff ff ff ff ff 03 fd fe 00 ; [$8170] undefined
-    hex d7 00 00 ff 55 a9 55 ff 00 00 00 00 fe fe fe 00 ; [$8180] undefined
-    hex 55 ff 55 aa d7 20 ff 88 00 00 00 00 00 dd 00 77 ; [$8190] undefined
-    hex c8 c2 c6 a8 ea c4 e8 ef 3e 3c 38 00 0f 2f 0f 00 ; [$81a0] undefined
-    hex fe fe c6 a8 ea c4 e8 ef 00 00 38 00 0f 2f 0f 00 ; [$81b0] undefined
-    hex c3 41 c3 41 c1 43 c1 41 02 82 02 82 02 82 02 82 ; [$81c0] undefined
-    hex 2c 20 90 27 a3 11 44 11 00 00 00 00 00 ee bb ee ; [$81d0] undefined
-    hex ff ed bf ff fe c5 aa ff ff ff ff fc c3 bf 7f 00 ; [$81e0] undefined
-    hex d0 aa d0 00 cc 40 ce 00 00 00 00 00 00 00 00 00 ; [$81f0] undefined
-    hex 0e 6e 22 62 36 06 2a 4a 10 48 4c 5c 48 78 54 74 ; [$8200] undefined
-    hex 00 6a 6b 7f 00 51 04 a0 00 3f 14 00 00 ae fb 5f ; [$8210] undefined
-    hex 00 7e 7c 00 13 e7 cd 19 fe 80 80 00 e0 00 02 06 ; [$8220] undefined
-    hex 02 3e 1e 00 c0 e3 31 19 fc 40 20 00 0f 04 c6 e2 ; [$8230] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$8240] undefined
-    hex ff e7 53 09 01 e5 e6 00 1f 67 a3 01 ed 08 08 00 ; [$8250] undefined
-    hex aa 98 bc a8 9a ac 90 88 7f 7f 7f 7f 7f 7f 7f 7f ; [$8260] undefined
-    hex 88 36 38 00 62 e7 67 00 f4 c0 c0 00 8d 08 88 00 ; [$8270] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$8280] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$8290] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$82a0] undefined
-    hex 92 49 92 a5 50 a5 52 ca 6d b6 6d 5a af 5a ad 35 ; [$82b0] undefined
-    hex f7 bd ff ad 7f ff df fd 00 00 00 52 00 00 20 02 ; [$82c0] undefined
-    hex d8 99 a5 5b d2 29 33 6e 37 6e 5e 3c 2d 5e 8c 71 ; [$82d0] undefined
-    hex ef ff f6 a3 27 90 20 2c 10 00 09 00 00 00 00 00 ; [$82e0] undefined
-    hex 2b 14 0b 05 47 15 0a 27 00 00 00 00 00 00 00 00 ; [$82f0] undefined
-    hex 26 76 2a 1e 40 cc 13 56 58 48 54 60 80 33 ec a9 ; [$8300] undefined
-    hex 0a 20 55 aa 12 a8 42 ad f5 df 00 00 ed 57 bd 52 ; [$8310] undefined
-    hex b9 b7 b1 31 be b0 a0 00 00 08 0e 0e 00 0f 1f 00 ; [$8320] undefined
-    hex 09 c9 09 09 f9 01 01 00 32 32 f2 f2 02 fa fa 00 ; [$8330] undefined
-    hex 47 06 45 07 05 47 3d 00 67 67 67 67 67 67 7f 00 ; [$8340] undefined
-    hex ef b7 7e eb bf 6d bf fb 00 00 00 00 00 00 00 00 ; [$8350] undefined
-    hex 6b 75 77 71 6e 75 7f 00 14 0a 0e 0e 10 0a 00 00 ; [$8360] undefined
-    hex 4f 4c 4c c0 4a 44 48 00 8f 8f 8f 00 8f 8f ff 00 ; [$8370] undefined
-    hex 80 80 f0 08 78 80 fe 00 fe fe fe f6 86 fe 00 00 ; [$8380] undefined
-    hex 02 0a 0d 1a 2b 7e 6d bb fc f2 ec de b8 da 68 e0 ; [$8390] undefined
-    hex 82 39 e1 41 c3 41 c3 41 7d c6 02 82 02 82 02 82 ; [$83a0] undefined
-    hex 80 80 c0 c0 c0 80 c0 c0 3f 3f 1f 1f 1f 3f 1f 1f ; [$83b0] undefined
-    hex df 26 c1 c2 c3 00 db 88 20 c1 02 03 02 c3 3e 77 ; [$83c0] undefined
-    hex 55 ff 55 88 ff 22 ff 88 00 00 00 77 00 dd 00 77 ; [$83d0] undefined
-    hex fc fc fc fc fa fa fa f6 fd fd fd fd f9 f9 f9 f1 ; [$83e0] undefined
-    hex bf bf bf bf df bf df 5f 3f 3f 3f 3f 1f 1f 1f 8f ; [$83f0] undefined
-    hex ff ff ff ff fd fe ff ff ff ff ff fe fb f7 ef dd ; [$8400] undefined
-    hex 00 7e 70 06 1e 3e 3f 7f fe 80 80 00 80 00 00 00 ; [$8410] undefined
-    hex 01 7f 0f e0 f9 fd 5e aa fe 80 00 00 00 00 a0 54 ; [$8420] undefined
-    hex 00 c0 f0 00 02 ce ce 00 0e 00 00 00 dc 10 10 00 ; [$8430] undefined
-    hex dd b6 7e d5 69 a9 f9 1c 00 00 01 01 07 0f 0e e7 ; [$8440] undefined
-    hex fb 2f d7 fd ff a9 56 ff 04 d1 2b 03 fc fe fc 00 ; [$8450] undefined
-    hex ef 2f 6c 2f 6c ee 1d ff 87 c7 87 c7 87 87 ff 00 ; [$8460] undefined
-    hex f4 f5 ec e9 ec d1 d8 b2 f3 f2 e3 e6 e3 ce c7 8d ; [$8470] undefined
-    hex ef 5f ef 57 e7 7b eb 75 0f 8f 07 87 07 83 03 81 ; [$8480] undefined
-    hex d4 fc ea fe f5 ff fa fe ff ff ff ff ff ff ff ff ; [$8490] undefined
-    hex c0 47 47 0d c2 c7 47 00 8f 88 88 00 8d 08 b8 00 ; [$84a0] undefined
-    hex 99 99 99 00 99 99 ff 00 00 00 00 00 00 00 00 00 ; [$84b0] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$84c0] undefined
-    hex 4c 4c a6 de 53 f3 a9 f9 f7 f7 fb e3 fd fd fe fe ; [$84d0] undefined
-    hex 07 22 f9 88 fc 20 fc 88 08 d5 02 75 01 dd 01 75 ; [$84e0] undefined
-    hex f9 40 f1 01 e7 44 e3 01 02 bb 02 ee 08 ab 14 f6 ; [$84f0] undefined
-    hex aa de be 60 40 27 e7 00 fc b0 60 e0 ef c8 88 00 ; [$8500] undefined
-    hex 4c fa d4 00 4e ea 4c 01 a0 00 00 00 a0 00 00 00 ; [$8510] undefined
-    hex bd ef fe 7f db e0 0a 57 42 10 01 00 00 00 9d 7f ; [$8520] undefined
-    hex 7f 1f 0f 07 9b 21 fe 88 7f 9f ef e7 63 dd 00 76 ; [$8530] undefined
-    hex 7d 77 6a 74 7f 75 6b 75 02 08 17 0b 00 0a 14 0a ; [$8540] undefined
-    hex b1 b1 b1 b1 b1 b1 b1 b7 0e 0e 0e 0e 0e 0e 0e 0e ; [$8550] undefined
-    hex 54 aa f0 08 78 80 80 80 aa 54 fe f6 86 fe fe fe ; [$8560] undefined
-    hex 00 24 7e 00 00 e7 e7 00 00 00 80 00 ef 08 08 00 ; [$8570] undefined
-    hex bd bd bc 8e b7 b4 b4 81 7e 7e 7f 71 7f 7f 7f 7e ; [$8580] undefined
-    hex fd 81 81 ff ff 18 18 ff fe fe fe 00 ef ef ef 00 ; [$8590] undefined
-    hex 96 96 16 fe da 96 9e ea e8 e8 e8 00 64 68 60 14 ; [$85a0] undefined
-    hex 92 e8 96 29 56 aa b5 4b 6d 17 69 d6 a9 55 4a b4 ; [$85b0] undefined
-    hex 3f 07 20 20 30 00 3c 3f bf 87 98 9f 8e 83 bc bf ; [$85c0] undefined
-    hex 9d b4 95 de 96 a7 fd e7 7e 7f 7e 20 7f 7f 87 f8 ; [$85d0] undefined
-    hex fc f8 f9 f0 c7 81 1e 01 fd fb fa f7 c8 be 60 fe ; [$85e0] undefined
-    hex 5e b0 40 80 80 80 80 80 a0 40 80 00 00 00 00 00 ; [$85f0] undefined
-    hex eb 05 03 03 01 01 01 00 14 0a 04 00 00 00 00 01 ; [$8600] undefined
-    hex 54 06 04 00 d0 21 c3 03 fe f8 f8 00 e0 c0 00 00 ; [$8610] undefined
-    hex 52 02 02 00 04 21 31 31 fc 7c 3c 00 0f 46 46 42 ; [$8620] undefined
-    hex 87 84 84 07 87 80 80 00 00 02 00 00 00 00 1f 00 ; [$8630] undefined
-    hex 39 21 21 39 39 01 01 00 42 52 42 42 42 02 fa 00 ; [$8640] undefined
-    hex 77 df 75 df fb ef ff ff ff ff ff ff ff ff ff ff ; [$8650] undefined
-    hex ff ff e7 f7 c5 eb ff ff ff ff ff fb fb f5 ff ff ; [$8660] undefined
-    hex d5 91 c5 d5 e1 e5 f5 f5 7e 7e be be de de ee ee ; [$8670] undefined
-    hex f9 f9 fd fd ff ff ff ff f6 f6 fa fa fc fc fe fe ; [$8680] undefined
-    hex 94 90 d4 d0 f4 f0 f4 f0 6f 6f af af cf cf ef ef ; [$8690] undefined
-    hex 54 10 54 10 54 10 54 10 ef ef ef ef ef ef ef ef ; [$86a0] undefined
-    hex ab d3 a5 93 a5 97 a1 93 7c 3c 7a 7c 7a 78 7e 7c ; [$86b0] undefined
-    hex a7 42 8f 40 a7 02 6f 80 78 fd 70 ff 78 fd f0 7f ; [$86c0] undefined
-    hex 28 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$86d0] undefined
-    hex b9 b7 b1 31 b1 b7 b1 31 00 08 0e 0e 08 08 0e 0e ; [$86e0] undefined
-    hex 09 c9 09 09 09 c9 09 09 32 32 f2 f2 32 32 f2 f2 ; [$86f0] undefined
-    hex f1 f1 f1 f1 f1 f3 f1 f1 f6 f6 f6 f6 f6 f4 f6 f6 ; [$8700] undefined
-    hex 6f 6f 2f 6f af ef af ef 8f 8f cf 8f 4f 0f 4f 0f ; [$8710] undefined
-    hex 54 06 04 01 d3 27 ce 0c fe f8 f8 01 e3 c7 0e 0d ; [$8720] undefined
-    hex 52 02 02 80 44 61 b1 51 fc 7c 3c 80 4f 66 36 92 ; [$8730] undefined
-    hex 9e 98 98 18 98 98 9f 00 1d 1b 1b 1b 1b 18 1f 00 ; [$8740] undefined
-    hex d9 e9 e9 e9 69 09 f9 00 1a 0a 0a 0a 8a 0a fa 00 ; [$8750] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$8760] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$8770] undefined
-    hex b9 56 ef 88 ff 22 ff 88 38 91 00 77 00 dd 00 77 ; [$8780] undefined
-    hex 6f 6b 2f 6f ab e8 a5 ea 80 80 c0 80 44 00 40 00 ; [$8790] undefined
-    hex ff bb ff ff 5e 15 48 53 00 00 00 00 a1 00 00 00 ; [$87a0] undefined
-    hex 54 fe d5 00 4f c8 85 00 aa 04 09 00 a7 2f 48 00 ; [$87b0] undefined
-    hex c9 ef 65 7d 33 bb 99 fd 76 70 ba 82 dc dc ee 0e ; [$87c0] undefined
-    hex 94 90 54 50 34 b0 94 f0 6f 6f af af cf cf ef 0f ; [$87d0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$87e0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$87f0] undefined
-    hex ff ff ff ff ff ff ff ff 00 00 00 00 00 00 00 00 ; [$8800] undefined
-    hex 9c 96 8c 9c 96 9c 8d aa 7f 7f 7f 7f 7f 7f 7f 7f ; [$8810] undefined
-    hex 21 4a 45 04 80 02 40 02 fe f5 fa fb ff fd ff fd ; [$8820] undefined
-    hex 5e 0e de ae 5e 1e be 5e a0 f0 20 50 a0 e0 40 a0 ; [$8830] undefined
-    hex 02 20 89 20 0a 3c ab 2e 00 00 00 00 00 00 00 00 ; [$8840] undefined
-    hex 80 10 01 44 00 81 10 00 00 00 00 00 00 00 00 00 ; [$8850] undefined
-    hex 52 14 ca b7 5c 00 c8 01 ff ff ff ff ff ff ff fe ; [$8860] undefined
-    hex 07 3f e0 00 1f f3 c1 88 f8 c0 00 00 00 0c 3e 7f ; [$8870] undefined
-    hex f0 1c 4c ef e3 f9 fe e3 0f 03 03 00 00 00 00 1c ; [$8880] undefined
-    hex d1 45 03 04 c8 f3 07 9f fe fa fc f8 30 00 00 00 ; [$8890] undefined
-    hex 00 46 01 10 80 08 00 00 ff ff ff ff ff ff ff ff ; [$88a0] undefined
-    hex aa 54 ad 12 ac 55 7a bd 55 ab 52 ed 53 aa 85 42 ; [$88b0] undefined
-    hex 01 04 04 0a 00 11 64 c9 00 03 03 07 0f 0f 1f 3f ; [$88c0] undefined
-    hex 9c 96 0d 5d 56 1c 4d 2a 7f ff ff ff ff ff ff ff ; [$88d0] undefined
-    hex a2 c8 a3 4d aa 00 e2 a8 40 00 40 82 44 c0 00 40 ; [$88e0] undefined
-    hex a9 0a f5 52 ad 0a 57 8a 04 04 08 ac 00 04 00 04 ; [$88f0] undefined
-    hex 0a 20 88 22 04 50 0a a0 f5 df 77 dd fb af f5 5f ; [$8900] undefined
-    hex ff ff ff ff f8 c2 04 30 00 00 00 00 00 05 3f ff ; [$8910] undefined
-    hex 55 e7 19 47 e0 7f 92 4c 00 00 e0 f8 ff ff ff ff ; [$8920] undefined
-    hex fc f8 e1 03 0d 7f 92 4c 01 03 07 1f ff ff ff ff ; [$8930] undefined
-    hex e0 38 81 7b ff 7f 92 4c 01 c7 ff ff ff ff ff ff ; [$8940] undefined
-    hex 10 46 01 00 02 0c a2 85 ff ff ff ff fd f3 5d 7a ; [$8950] undefined
-    hex a8 f3 dd 6f d5 bb 57 ab 57 0c 20 00 00 40 00 00 ; [$8960] undefined
-    hex 7f af 72 8d 72 55 a2 55 00 00 00 00 00 00 00 00 ; [$8970] undefined
-    hex df b5 ef a3 15 43 20 0c 00 00 00 00 00 a0 fc ff ; [$8980] undefined
-    hex 80 20 20 50 00 88 26 93 00 c0 c0 e0 f0 f0 f8 fc ; [$8990] undefined
-    hex 05 20 89 20 15 40 20 0c 00 00 00 00 00 a0 fc ff ; [$89a0] undefined
-    hex 12 80 d1 78 fc eb 5d f7 00 00 20 00 02 14 a2 08 ; [$89b0] undefined
-    hex 2b 2f 5e 5f 7f 2f 15 00 14 10 20 20 00 10 00 00 ; [$89c0] undefined
-    hex d5 37 a9 56 19 8b 15 03 00 00 00 00 00 00 00 00 ; [$89d0] undefined
-    hex 41 7a 85 c5 88 4e 14 22 be c5 fa fa f7 f1 eb dd ; [$89e0] undefined
-    hex dc 9c 6e 1f 7e bc 95 00 61 61 00 00 03 43 40 00 ; [$89f0] undefined
-    hex a3 6b 6b 31 80 ff ff e3 5c dc dc ee 7f 00 00 1c ; [$8a00] undefined
-    hex af cf cf 9f 3e fe fe fe 70 70 70 e0 c0 00 00 00 ; [$8a10] undefined
-    hex 80 34 45 10 5e 2b 9e ff 7f ff fa ef e1 d4 61 00 ; [$8a20] undefined
-    hex 02 a3 c7 39 93 f3 0f fe fc fc 38 c6 6c 0c f0 00 ; [$8a30] undefined
-    hex 07 80 2a 60 4d 40 44 4f 18 7f ff ff f7 ff fb f0 ; [$8a40] undefined
-    hex 83 00 5b 80 0f 3c 75 a8 3c ff ff ff f0 c3 8b 77 ; [$8a50] undefined
-    hex 34 22 ea 03 06 7f 82 27 00 dc fc fc f8 80 7c d8 ; [$8a60] undefined
-    hex 2a ff ff ff ff ff 55 00 55 00 00 00 00 00 00 00 ; [$8a70] undefined
-    hex aa fe ff fe ff fe 55 00 54 00 00 00 00 00 00 00 ; [$8a80] undefined
-    hex 48 f0 f4 f8 f8 fa 78 00 a0 00 00 00 00 00 00 00 ; [$8a90] undefined
-    hex 21 00 e7 1e cc e8 09 e9 1e ff ff ff 3f 1f de 1e ; [$8aa0] undefined
-    hex 51 33 e3 07 0e bd 7b d8 3e fc fc f8 f0 40 00 00 ; [$8ab0] undefined
-    hex 2a ff 9b cb 8a e8 cd 41 55 00 60 61 61 00 00 01 ; [$8ac0] undefined
-    hex 80 38 83 6c 39 93 c7 ef 00 c7 ff ff fe 7c 38 10 ; [$8ad0] undefined
-    hex aa fe a3 5a 57 c7 55 40 54 00 00 80 98 18 00 80 ; [$8ae0] undefined
-    hex af 6e dc 39 f3 e7 cd 80 00 00 00 00 00 00 00 00 ; [$8af0] undefined
-    hex be a8 ff db b2 e7 bf a2 77 77 08 7d 5d 18 61 7f ; [$8b00] undefined
-    hex fe ce ce 2e 3e d6 b6 5e 20 30 30 d0 c0 28 48 a0 ; [$8b10] undefined
-    hex 00 8a 05 02 55 ff d5 00 00 00 00 00 00 00 00 00 ; [$8b20] undefined
-    hex cc 8e 06 02 57 ff aa 55 33 71 f9 54 a8 00 00 00 ; [$8b30] undefined
-    hex 1b 54 68 48 4a 0c 3d 7c ec ef f7 f7 f5 f3 c2 00 ; [$8b40] undefined
-    hex 48 d0 bc 27 20 6a 30 ef f7 27 c0 d8 df 97 8f 00 ; [$8b50] undefined
-    hex a2 87 5e 06 a2 06 8e 7c 5c 38 00 f8 fc f8 70 00 ; [$8b60] undefined
-    hex 7e aa b2 b2 bb a3 30 79 00 55 4d 4d 44 7c ff fe ; [$8b70] undefined
-    hex 2a ff 88 49 1a 78 c7 15 55 00 73 f3 e1 80 00 63 ; [$8b80] undefined
-    hex aa fe 63 06 53 c3 1f 55 54 00 80 d8 9c 1c 00 80 ; [$8b90] undefined
-    hex 7f df aa d3 53 52 ef ff 00 60 dd bd bd bd 10 00 ; [$8ba0] undefined
-    hex fc ff b3 39 39 79 fb ff 00 00 cc c6 c6 86 04 00 ; [$8bb0] undefined
-    hex 54 92 79 07 70 90 b7 e7 e3 61 00 00 47 67 40 00 ; [$8bc0] undefined
-    hex 7c b8 43 41 0c 9a 77 5d 00 47 ff ff f3 61 00 00 ; [$8bd0] undefined
-    hex 4a 42 7a 4c b0 8c 84 2c 9c 9c 04 00 00 30 38 10 ; [$8be0] undefined
-    hex a0 50 e1 d4 20 d5 38 d6 00 00 00 00 00 00 00 00 ; [$8bf0] undefined
-    hex 83 0f 0c 2b 16 14 14 54 7c f2 ef cc d8 d8 d8 98 ; [$8c00] undefined
-    hex d0 c1 e1 ed 07 16 06 06 87 b6 ba 14 00 04 74 f4 ; [$8c10] undefined
-    hex 14 22 13 59 14 3b 78 00 d8 dc cc a7 e3 c0 00 00 ; [$8c20] undefined
-    hex d6 2c d5 ec 10 e7 3e 00 24 c8 18 f1 e3 00 00 00 ; [$8c30] undefined
-    hex 55 09 03 01 00 00 00 00 fe 3e 04 00 00 00 00 00 ; [$8c40] undefined
-    hex 73 a3 48 57 11 2a 09 0d 8f cf e7 e0 60 0c 1e 0e ; [$8c50] undefined
-    hex 6e bb f9 bc be df e5 fd 1d 7f 47 43 59 3c 1b 03 ; [$8c60] undefined
-    hex 76 dd 9f 3d 7d fb a6 bf b8 fe e2 c2 9a 3c d9 c0 ; [$8c70] undefined
-    hex 2a 8a 0d 95 15 55 15 96 ff 7f ff 7f ff bf ff 7f ; [$8c80] undefined
-    hex d7 d2 56 cc e8 b8 b0 b0 38 3c b8 30 10 40 40 40 ; [$8c90] undefined
-    hex 70 60 60 c0 c0 00 80 80 80 80 80 00 00 80 00 00 ; [$8ca0] undefined
-    hex c8 30 cb 38 8f 2e dc ca 3f ff 74 c0 60 d1 63 37 ; [$8cb0] undefined
-    hex 32 09 f8 0c f2 bd a0 a6 ec fe 0f 07 07 46 d7 f9 ; [$8cc0] undefined
-    hex 3d 46 47 46 46 46 42 7e c2 81 82 9b 9b 9b 83 81 ; [$8cd0] undefined
-    hex 5f 2c db 6e db fa 2f fd 00 00 00 00 00 00 00 00 ; [$8ce0] undefined
-    hex 35 4e 59 15 ad 5d dc 5d fa f0 e0 e1 c1 80 80 81 ; [$8cf0] undefined
-    hex 70 76 4c 18 30 20 20 4e fe f8 f0 e0 c0 c2 c6 80 ; [$8d00] undefined
-    hex 0c cc 60 3c 04 80 80 84 ff 3f 1f 02 d8 ef ef f7 ; [$8d10] undefined
-    hex d7 d7 db cb 4b 49 6d 6d 7f 7f 7f 7f 7f 3f 3f 3f ; [$8d20] undefined
-    hex eb eb db d3 f2 b2 b6 b6 fe fe fe fe fe fc fc fc ; [$8d30] undefined
-    hex 05 03 06 03 01 01 00 01 0e 04 01 00 03 01 01 00 ; [$8d40] undefined
-    hex 7c 18 74 58 7c 58 7c 58 ef ef ef ef ef ef ef ef ; [$8d50] undefined
-    hex fe 3f bb b9 bf ff fc 7b 91 fc 5e 47 40 08 0b 08 ; [$8d60] undefined
-    hex 7e fd dd 9d fd ff 3f de 89 3e 7a e2 02 10 d0 10 ; [$8d70] undefined
-    hex b9 9d 8d 9d 96 9c 8d aa 71 71 71 71 7f 7f 7f 7f ; [$8d80] undefined
-    hex f7 16 16 16 9e 02 40 02 e3 e3 e3 e3 ff fd ff fd ; [$8d90] undefined
-    hex c2 06 c6 86 5e 1e be 5e 9c d8 18 58 a0 e0 40 a0 ; [$8da0] undefined
-    hex ba 6a 08 ea 4a 1a aa 1a 47 d7 e7 15 e7 e7 d7 e7 ; [$8db0] undefined
-    hex a3 a6 03 a4 a1 a2 a4 a4 f6 ff f6 5f f6 ff f7 ff ; [$8dc0] undefined
-    hex 20 43 4c 10 a7 4f d9 55 ff fc f0 e0 c0 80 86 8e ; [$8dd0] undefined
-    hex 21 e2 19 06 32 39 0d 34 fe 1d 06 03 41 41 71 79 ; [$8de0] undefined
-    hex 5d 5d 5d 50 c8 47 50 58 81 81 81 99 9c 8f 87 81 ; [$8df0] undefined
-    hex 40 5e 5e 9e 80 9c 9e 84 80 9c 80 00 00 1e 00 1c ; [$8e00] undefined
-    hex 04 e4 8a 8a 02 72 02 12 07 f7 f3 f3 03 fb fb f3 ; [$8e10] undefined
-    hex 75 f6 3b b3 39 9f 4f a2 3f 3f 17 1f 1f 08 02 00 ; [$8e20] undefined
-    hex ae 6e ed ec bd d9 f0 cb fc fc f8 f8 d8 30 40 00 ; [$8e30] undefined
-    hex b6 a2 b2 b2 bb d3 d3 db ff ff ff ff ff ff ff ff ; [$8e40] undefined
-    hex 6c bc 59 59 08 cd a4 86 10 43 e7 e7 f7 73 73 79 ; [$8e50] undefined
-    hex 11 35 91 03 4e 1d 9b 99 0e ce ee fc f0 e0 e0 e2 ; [$8e60] undefined
-    hex f4 a6 ee fa ba fe ce 84 3a dc 58 34 74 48 b4 7a ; [$8e70] undefined
-    hex a5 b2 a9 a2 ac d1 c4 ca fa ed f6 fd f3 fe fb f5 ; [$8e80] undefined
-    hex ff aa ff 55 00 aa ff 00 00 ff ff ff ff 55 00 00 ; [$8e90] undefined
-    hex b6 e2 b6 e2 b6 e2 b6 e2 78 7c 78 7c 78 7c 78 7c ; [$8ea0] undefined
-    hex fe fe ae e6 b6 e6 b6 e6 00 00 70 78 78 78 78 78 ; [$8eb0] undefined
-    hex ff ea ff d5 c0 ea ff 00 00 1f 3f 3f 3f 15 00 00 ; [$8ec0] undefined
-    hex 55 51 53 57 df 40 51 55 8e 8e 8c 88 80 80 8e 8e ; [$8ed0] undefined
-    hex 35 24 0d 1c 7c 01 04 34 79 79 71 61 01 01 79 79 ; [$8ee0] undefined
-    hex e9 a2 99 86 92 59 1d 54 3e 9d 86 c3 c1 81 01 89 ; [$8ef0] undefined
-    hex 90 98 90 80 9c 9c 9c 1c 10 00 1e 00 1e 12 12 92 ; [$8f00] undefined
-    hex 42 62 02 02 f2 f2 f2 f2 83 83 fb 03 fb 8b 8b 8b ; [$8f10] undefined
-    hex 90 20 20 40 c0 c0 c0 80 e0 c0 c0 80 00 00 00 00 ; [$8f20] undefined
-    hex c9 1a 70 e3 0a 0c c8 d0 f3 e3 87 04 10 f0 f0 e0 ; [$8f30] undefined
-    hex e7 5c a0 80 00 00 00 00 38 a0 00 00 00 00 00 00 ; [$8f40] undefined
-    hex 6e 46 4b 29 11 11 00 00 31 39 30 10 00 00 00 00 ; [$8f50] undefined
-    hex b1 29 ab ae 26 24 a0 00 c6 c6 c4 c0 c0 c0 40 40 ; [$8f60] undefined
-    hex 20 43 4c 10 a0 40 c0 40 ff fc f0 e0 c0 80 80 80 ; [$8f70] undefined
-    hex 21 e2 19 06 02 01 01 00 fe 1d 06 03 01 01 01 01 ; [$8f80] undefined
-    hex 40 40 40 40 c0 40 40 40 80 80 80 80 80 80 80 80 ; [$8f90] undefined
-    hex 49 5c 5d dc 18 f1 0c 5c 9d 95 85 05 0d f9 f1 81 ; [$8fa0] undefined
-    hex b6 e2 b6 ee be e2 b6 e2 78 7c 78 10 40 7c 78 7c ; [$8fb0] undefined
-    hex ff ba ff 5d 18 ba f7 00 00 ef e7 e7 e7 45 00 00 ; [$8fc0] undefined
-    hex 39 35 78 7c b7 07 42 00 86 8c 04 00 00 30 38 00 ; [$8fd0] undefined
-    hex f6 c6 0a 08 04 16 7c f8 20 30 30 d0 c0 88 00 00 ; [$8fe0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$8ff0] undefined
-    hex 20 00 80 12 00 01 40 04 00 00 00 00 00 00 00 00 ; [$9000] undefined
-    hex 24 01 80 12 40 09 40 14 00 00 00 00 00 00 00 00 ; [$9010] undefined
-    hex a4 09 a0 12 44 09 50 85 00 00 00 00 00 00 00 00 ; [$9020] undefined
-    hex 24 08 80 12 04 29 00 85 80 01 24 00 40 00 50 00 ; [$9030] undefined
-    hex 24 08 80 12 04 29 00 85 90 01 24 09 40 04 52 00 ; [$9040] undefined
-    hex 25 00 00 03 04 29 00 85 92 49 a4 58 42 84 53 28 ; [$9050] undefined
-    hex 05 00 00 03 04 28 00 85 b2 5b a6 58 6a 95 53 68 ; [$9060] undefined
-    hex 01 24 02 81 94 0a 04 00 f6 5b ac 5a 6a b5 53 ed ; [$9070] undefined
-    hex 45 24 02 81 94 0a 04 00 f6 5b ac 5a 6a b5 53 ed ; [$9080] undefined
-    hex 00 08 00 21 00 00 08 01 00 00 00 00 00 00 00 00 ; [$9090] undefined
-    hex 1f 37 60 43 a4 48 10 10 99 2e 70 43 84 48 88 91 ; [$90a0] undefined
-    hex e4 68 08 c0 64 00 0c 10 94 fa 05 d2 20 02 81 42 ; [$90b0] undefined
-    hex e0 d0 d0 98 ab ee cc 88 00 e0 e0 e0 54 f7 f7 f7 ; [$90c0] undefined
-    hex 0f 0b 0b 19 d5 77 33 11 00 07 07 07 2a ef ef ef ; [$90d0] undefined
-    hex 00 00 01 01 03 02 07 07 a1 09 23 03 87 07 2f 0f ; [$90e0] undefined
-    hex 80 80 40 40 20 e0 90 90 12 00 88 80 c1 00 e4 e0 ; [$90f0] undefined
-    hex 1e 37 60 43 a6 00 10 00 19 2e 70 4b 84 08 80 80 ; [$9100] undefined
-    hex f7 6b 00 8f 2b 38 20 00 97 ec 20 87 4c 00 40 48 ; [$9110] undefined
-    hex 78 ec 0c c2 65 00 08 00 98 7e 06 d2 21 32 01 01 ; [$9120] undefined
-    hex 24 01 20 00 00 43 0d 02 01 90 0a 51 e4 18 22 1d ; [$9130] undefined
-    hex 24 80 04 00 00 c2 b0 40 80 09 50 8a 27 18 44 b8 ; [$9140] undefined
-    hex 64 80 2a 40 c8 d0 94 a0 40 80 0a 40 c8 90 90 80 ; [$9150] undefined
-    hex 24 00 06 00 20 10 51 00 02 2a 51 0e 05 09 02 01 ; [$9160] undefined
-    hex 00 08 00 00 01 00 08 00 00 00 00 00 00 00 00 00 ; [$9170] undefined
-    hex a0 a0 c1 a9 3e e9 3e 63 40 40 00 40 40 06 c1 80 ; [$9180] undefined
-    hex 05 06 75 b5 07 1b 8b fd 02 00 02 02 00 c4 74 02 ; [$9190] undefined
-    hex 64 00 20 00 00 42 09 00 48 90 0b 51 e4 19 06 a0 ; [$91a0] undefined
-    hex 24 00 06 00 00 40 90 00 02 6a 51 8e 25 98 42 00 ; [$91b0] undefined
-    hex c0 f6 8b c5 9c c7 9c 46 00 00 74 3e 7f 3f 7f bf ; [$91c0] undefined
-    hex 42 b0 6c da f4 1d 1e 4b 00 00 00 00 00 c0 e0 80 ; [$91d0] undefined
-    hex 0a 0e 1e 20 1b 3f be ae 9f 1f 3f 1f 7c 77 77 77 ; [$91e0] undefined
-    hex b8 80 e4 28 fe ea c7 c3 41 f8 d8 d4 00 74 78 7c ; [$91f0] undefined
-    hex fd bb b7 6c 95 5a a5 11 00 00 00 00 00 00 00 00 ; [$9200] undefined
-    hex f9 a3 f9 79 f9 62 b3 f1 02 00 02 00 02 00 04 04 ; [$9210] undefined
-    hex e1 a7 cf 4d df 4a 8f c5 04 08 00 10 00 10 10 10 ; [$9220] undefined
-    hex 8a 7e fe 00 14 f3 f7 00 74 80 00 00 e3 04 00 00 ; [$9230] undefined
-    hex a2 5a 84 00 fe 72 95 e0 5d ff ff ff 01 00 00 00 ; [$9240] undefined
-    hex 02 ad 44 00 bf ad 54 00 fd ff ff ff 40 00 00 00 ; [$9250] undefined
-    hex 02 29 91 03 b5 aa 00 84 fc fe fe fc 48 00 00 00 ; [$9260] undefined
-    hex f0 fa f4 6d dd 6a bf f5 00 00 00 00 00 00 00 00 ; [$9270] undefined
-    hex 50 82 55 08 55 6a bf f5 00 00 00 00 00 00 00 00 ; [$9280] undefined
-    hex fd 2b 3f 0d 47 02 8b 01 00 00 00 00 00 00 00 00 ; [$9290] undefined
-    hex 84 2b 7f 6d 5f 6a 3f 75 79 80 80 00 80 00 80 80 ; [$92a0] undefined
-    hex 44 aa fe 6c de 6a be f4 b8 00 00 00 00 00 00 00 ; [$92b0] undefined
-    hex fd 2b ff 6d 5f 6a bb 00 00 80 00 00 80 00 00 00 ; [$92c0] undefined
-    hex fc aa fe 6d de 6a ba 00 00 00 00 00 00 00 00 00 ; [$92d0] undefined
-    hex 00 73 03 a5 fe 63 47 df fe fc fc 58 00 bc b8 20 ; [$92e0] undefined
-    hex 9d 8b 8f 05 c7 6a b7 f5 20 20 10 08 08 00 00 00 ; [$92f0] undefined
-    hex 51 8a 35 3f 32 af 2e be 2e 74 ca c0 cc 50 d0 40 ; [$9300] undefined
-    hex 00 2a 34 3c 7d f9 79 75 fe d4 4a 40 80 02 82 82 ; [$9310] undefined
-    hex 06 aa fc fe fc de cc ce f8 54 00 00 00 00 20 20 ; [$9320] undefined
-    hex 00 2a 34 3c 70 e0 41 47 fe d4 4a 40 80 00 80 80 ; [$9330] undefined
-    hex 6b 80 80 0e 86 81 04 a8 00 00 00 00 00 02 09 10 ; [$9340] undefined
-    hex 5a 00 01 01 02 04 08 70 00 00 02 02 04 08 f0 80 ; [$9350] undefined
-    hex ab 01 00 18 08 04 00 83 00 00 01 01 11 09 07 00 ; [$9360] undefined
-    hex 40 99 b7 fc 87 9e b8 80 3f 7f 7b 03 78 7f 7f 7f ; [$9370] undefined
-    hex f5 a3 c7 41 c7 6a bf f5 00 00 00 04 18 00 00 00 ; [$9380] undefined
-    hex 50 82 55 2a f7 5a bf f5 00 00 00 00 00 00 00 00 ; [$9390] undefined
-    hex f0 a7 df d8 31 b1 b6 b3 07 18 20 20 40 40 40 40 ; [$93a0] undefined
-    hex 67 f3 7d 2c 76 aa f6 d6 80 00 00 10 08 04 08 08 ; [$93b0] undefined
-    hex 88 af df 00 df 6a bf f5 77 00 00 00 00 00 00 00 ; [$93c0] undefined
-    hex fc 6f f4 4a 21 f0 bc 28 03 b7 7b fd de 0f e7 d7 ; [$93d0] undefined
-    hex f0 a7 df d8 30 b0 b0 b0 07 18 20 20 40 40 40 40 ; [$93e0] undefined
-    hex 67 f3 7d 2c 16 0a 16 16 80 00 00 10 08 04 08 08 ; [$93f0] undefined
-    hex 38 bf 33 2d bf eb 55 00 c1 40 cc d2 40 00 00 00 ; [$9400] undefined
-    hex e3 fb fb f9 f9 aa 55 00 04 04 00 02 02 00 00 00 ; [$9410] undefined
-    hex dc fe fe fc fc a8 54 00 00 00 00 00 00 00 00 00 ; [$9420] undefined
-    hex 87 cf 8a c7 8a 97 1f 3d 00 00 00 00 00 00 00 00 ; [$9430] undefined
-    hex b0 00 80 81 86 88 88 78 01 01 01 06 08 10 10 07 ; [$9440] undefined
-    hex 88 84 82 80 c1 25 22 22 10 08 04 03 02 42 44 dd ; [$9450] undefined
-    hex 41 20 27 3c 21 20 20 70 80 47 48 40 40 41 41 8f ; [$9460] undefined
-    hex 5e e6 5c ea 20 fd ff 14 00 00 00 00 df 02 00 00 ; [$9470] undefined
-    hex fd ab ff 6d df 6a bf f5 00 00 00 00 00 00 00 00 ; [$9480] undefined
-    hex fd a3 c3 55 df 6a bf f5 00 00 04 08 00 00 00 00 ; [$9490] undefined
-    hex b7 a2 b7 b5 37 e1 b6 95 40 40 40 00 40 00 40 40 ; [$94a0] undefined
-    hex f6 a6 f6 b4 76 a4 f6 d6 08 08 08 00 08 08 08 00 ; [$94b0] undefined
-    hex f2 cd 0d fd 5a 03 ef ee 00 f0 f0 00 00 ec 00 00 ; [$94c0] undefined
-    hex 59 da e2 75 56 6a 86 29 b6 24 14 00 00 00 00 00 ; [$94d0] undefined
-    hex b0 a0 b0 b0 30 e0 b0 90 40 40 40 00 40 00 40 40 ; [$94e0] undefined
-    hex 16 06 16 14 16 04 16 16 08 08 08 00 08 08 08 00 ; [$94f0] undefined
-    hex 9a c6 8a d2 87 5f ac de 7f 3f 7f 3f 7f bf 7f 27 ; [$9500] undefined
-    hex ad 9b ad 98 b5 4d 0e 48 50 60 50 60 c0 f0 f0 80 ; [$9510] undefined
-    hex 8d d7 8f c5 8f e2 8f d5 70 28 70 38 70 18 70 28 ; [$9520] undefined
-    hex f5 a9 f1 ba f1 e9 b0 f9 00 00 00 00 00 00 00 00 ; [$9530] undefined
-    hex 14 2b 00 2b 00 2b 00 2b 0a 14 1e 14 1e 14 1e 14 ; [$9540] undefined
-    hex 8a 7e fe 00 00 f3 f7 00 74 80 00 00 f7 04 00 00 ; [$9550] undefined
-    hex 00 2a b4 7c 1d 0f c3 65 fe d4 4a 00 00 00 04 02 ; [$9560] undefined
-    hex d1 b1 fa 91 d9 f9 b1 4c 02 02 01 02 02 00 00 00 ; [$9570] undefined
-    hex a0 b0 b0 58 dd ff af f0 40 40 40 20 22 00 00 00 ; [$9580] undefined
-    hex 02 06 06 24 1d f9 e3 0f 0c 08 18 18 e0 00 00 00 ; [$9590] undefined
-    hex d5 bb b2 84 9f 80 ef 7f 2a 7f 7f 7b 60 7f 10 00 ; [$95a0] undefined
-    hex a5 c2 20 a5 07 62 80 c0 40 00 40 02 40 00 00 00 ; [$95b0] undefined
-    hex 74 c5 04 43 6e a3 04 06 02 00 0a b8 80 00 02 00 ; [$95c0] undefined
-    hex 5e e6 5c ea 20 fd ff 14 00 00 00 00 df 02 00 00 ; [$95d0] undefined
-    hex a9 fd 33 32 ef de 6d 6f fe 38 dc d8 f8 d0 d0 a0 ; [$95e0] undefined
-    hex 6f 65 e7 d6 5b d6 bd 2f 90 f0 f8 60 e0 80 c0 80 ; [$95f0] undefined
-    hex 1d 8b 8f c5 c7 62 b4 f2 20 20 10 08 08 01 01 00 ; [$9600] undefined
-    hex ae b5 b7 59 dd ff af f0 40 40 40 20 22 00 00 00 ; [$9610] undefined
-    hex f2 e6 66 a4 1d f9 e3 0f 0c 08 18 18 e0 00 00 00 ; [$9620] undefined
-    hex ff 8f 25 ba 56 28 c1 ea 00 70 fb f7 ef df 3e 15 ; [$9630] undefined
-    hex ff 3e 09 93 26 cc a1 53 00 c1 f7 ef df 3f 5e fc ; [$9640] undefined
-    hex 7c 3a f5 de fb ae 55 aa 83 c5 0a 20 00 00 00 00 ; [$9650] undefined
-    hex 65 18 ce fc fe e2 c1 01 98 ff ff e3 19 fc fe fe ; [$9660] undefined
-    hex cb 86 91 92 84 8a a3 88 3f 7f 7f 7f 7f 7f 7f 7f ; [$9670] undefined
-    hex 0b 85 09 47 15 a7 b4 8f f4 fa f6 f8 ea 78 cb 70 ; [$9680] undefined
-    hex fd d6 79 f6 59 fe ec 7b 00 20 80 00 a0 00 00 80 ; [$9690] undefined
-    hex a0 ca 30 a2 44 94 e0 0a 00 00 00 00 00 00 00 00 ; [$96a0] undefined
-    hex cb 80 49 bf 95 40 af 88 3f 7f 36 00 00 3f 7f 7f ; [$96b0] undefined
-    hex 0b 05 af ff 40 01 b6 8f f4 fa 50 00 00 fe c8 70 ; [$96c0] undefined
-    hex fd d6 79 f6 00 fe ec 7b 00 20 80 00 00 00 00 80 ; [$96d0] undefined
-    hex a0 ca 30 a0 00 94 e0 0a 00 00 00 00 00 00 00 00 ; [$96e0] undefined
-    hex 0b 85 09 ff 40 89 8c 9f f4 fa f6 00 00 ce db 50 ; [$96f0] undefined
-    hex f0 e0 c0 83 0e 19 0c 13 00 00 00 00 00 04 12 00 ; [$9700] undefined
-    hex 0b 05 00 70 38 7c 1c 66 04 02 00 00 40 00 60 00 ; [$9710] undefined
-    hex 1b c5 49 37 35 b7 94 af d4 ba 96 d8 ca 58 8b 30 ; [$9720] undefined
-    hex cb a4 8b aa 86 8a a3 88 3f 7f 73 73 7f 7f 7f 7f ; [$9730] undefined
-    hex 9d 86 09 86 00 de ec 7b 00 10 90 00 00 00 00 80 ; [$9740] undefined
-    hex 9d 96 49 c6 49 ce cc 0b 20 20 90 10 90 10 00 90 ; [$9750] undefined
-    hex 13 f2 32 fd 56 aa 86 21 ec 0c 0c 00 08 00 00 00 ; [$9760] undefined
-    hex 45 9b 9b 83 c0 ae 88 80 3a 7f 7f 7f 3f 7f 7f 7f ; [$9770] undefined
-    hex ff 3d 21 07 ab ee cc 88 00 fe fe f8 54 f7 f7 f7 ; [$9780] undefined
-    hex c0 b4 0c bc 00 23 a7 27 00 e9 f1 41 00 cc 48 c8 ; [$9790] undefined
-    hex 00 da 50 da 00 36 50 76 00 00 00 00 00 40 00 00 ; [$97a0] undefined
-    hex fe b5 81 00 ff ae 0c 08 00 fe fe fe 00 f7 f7 f7 ; [$97b0] undefined
-    hex 12 2d 0c 33 12 2f 0e 33 0c 10 10 00 0c 10 10 00 ; [$97c0] undefined
-    hex 26 7c 3a 64 26 58 3a 64 58 00 40 00 58 20 40 00 ; [$97d0] undefined
-    hex 2a 54 42 54 42 54 42 54 54 28 3c 28 3c 28 3c 28 ; [$97e0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$97f0] undefined
-    hex ff ff ff ff ff ff ff ff 00 00 00 00 00 00 00 00 ; [$9800] undefined
-    hex 48 13 48 9a 31 82 24 aa bf fc f7 ed de 7d db 57 ; [$9810] undefined
-    hex a3 4e 98 6b 9b 3d 40 cc 5c b1 67 9f 7c f3 ff ff ; [$9820] undefined
-    hex 1b 10 68 d3 c7 1c 7e f1 ff ff ff fc f8 e0 80 00 ; [$9830] undefined
-    hex 02 20 89 20 0a 3c ab 2e 00 00 00 00 00 00 00 00 ; [$9840] undefined
-    hex 80 10 01 44 00 81 10 00 00 00 00 00 00 00 00 00 ; [$9850] undefined
-    hex 52 14 ca b7 5c 00 c8 01 ff ff ff ff ff ff ff fe ; [$9860] undefined
-    hex ce 74 11 e2 8d 17 24 d3 00 00 00 01 03 0f 1f 3c ; [$9870] undefined
-    hex 7a bb d6 1f 39 7c ca 9a 6d 6c 69 e0 c6 a7 77 e7 ; [$9880] undefined
-    hex b6 7a eb 28 f2 dc df 87 c8 c4 14 d5 05 61 60 70 ; [$9890] undefined
-    hex e8 14 41 38 06 30 00 fa 00 00 00 00 80 c0 f8 00 ; [$98a0] undefined
-    hex fd f3 e2 c5 8a 97 3d 5b 00 01 0f 1f 3f 3f 7f ff ; [$98b0] undefined
-    hex bf 4f 07 03 01 01 20 00 00 80 e0 e0 d4 e8 d0 e8 ; [$98c0] undefined
-    hex 9c 96 0d 5d 56 1c 4d 2a 7f ff ff ff ff ff ff ff ; [$98d0] undefined
-    hex a2 c8 a3 4d aa 00 e2 a8 40 00 40 82 44 c0 00 40 ; [$98e0] undefined
-    hex a9 0a f5 52 ad 0a 57 8a 04 04 08 ac 00 04 00 04 ; [$98f0] undefined
-    hex 0a 20 88 22 04 50 0a a0 f5 df 77 dd fb af f5 5f ; [$9900] undefined
-    hex ff ff ff ff f8 c2 04 30 00 00 00 00 00 05 3f ff ; [$9910] undefined
-    hex 55 e7 19 47 e0 7f 92 4c 00 00 e0 f8 ff ff ff ff ; [$9920] undefined
-    hex fc f8 e1 03 0d 7f 92 4c 01 03 07 1f ff ff ff ff ; [$9930] undefined
-    hex e0 38 81 7b ff 7f 92 4c 01 c7 ff ff ff ff ff ff ; [$9940] undefined
-    hex 10 46 01 00 00 08 22 01 ff ff ff ff ff f7 dd fe ; [$9950] undefined
-    hex a8 f3 dd 6f d5 bb 57 ab 57 0c 20 00 00 40 00 00 ; [$9960] undefined
-    hex fd f9 f6 e5 ea c6 cc ca 00 01 03 07 0f 1f 1f 1f ; [$9970] undefined
-    hex ec f6 f2 f0 f1 f6 e8 ea 0f 07 07 07 07 07 0f 0f ; [$9980] undefined
-    hex 61 18 c1 f8 ff ff ff ff 8a 02 00 00 00 00 00 00 ; [$9990] undefined
-    hex 40 80 0a 14 00 ff ff ff ae 53 24 00 00 00 00 00 ; [$99a0] undefined
-    hex 00 00 20 00 03 e0 fc ff ff ee 9b 44 08 00 00 00 ; [$99b0] undefined
-    hex 00 08 00 00 02 91 02 f0 ff d7 aa a1 04 00 00 00 ; [$99c0] undefined
-    hex 00 00 00 00 00 07 5f ff ff cc f3 88 00 00 00 00 ; [$99d0] undefined
-    hex 00 01 04 00 00 c7 ff ff ff f4 28 00 00 00 00 00 ; [$99e0] undefined
-    hex 08 00 03 1f ff ff ff ff f0 c0 00 00 00 00 00 00 ; [$99f0] undefined
-    hex 57 d5 4b 6d d2 7a b6 35 3b 3b 3d 1b 2f 27 6b 6b ; [$9a00] undefined
-    hex 6f 67 6f 67 df ae c5 6a b0 b8 b0 98 60 70 38 94 ; [$9a10] undefined
-    hex 63 f4 f5 3d 1c cd ac 86 00 01 03 c3 e3 73 73 79 ; [$9a20] undefined
-    hex e9 7d 99 1b 5e 1d 9b 99 06 86 e6 e4 e0 e0 e0 e2 ; [$9a30] undefined
-    hex ae a6 b7 95 55 55 54 24 71 79 78 78 38 38 38 18 ; [$9a40] undefined
-    hex d5 2a 00 eb 0d e3 b8 0c 2a d5 ff 1f f7 ff ff ff ; [$9a50] undefined
-    hex d5 20 80 23 ca 11 3a c4 2f df ff ff ff ff ff ff ; [$9a60] undefined
-    hex ca cc c6 ea e5 f6 f9 fd 1f 1f 1f 0f 07 03 01 00 ; [$9a70] undefined
-    hex a8 2a ac 14 a9 80 09 4c 13 11 11 09 02 22 22 21 ; [$9a80] undefined
-    hex 90 b4 90 94 24 d0 78 94 20 00 20 00 40 20 00 00 ; [$9a90] undefined
-    hex 05 44 25 24 2a 43 55 2d 68 28 48 48 44 24 22 12 ; [$9aa0] undefined
-    hex 48 84 14 d4 c0 20 10 50 80 40 00 00 00 40 60 20 ; [$9ab0] undefined
-    hex 83 12 07 45 02 81 13 00 00 00 00 00 00 00 00 00 ; [$9ac0] undefined
-    hex 80 38 83 6c 39 93 c7 ef 00 c7 ff ff fe 7c 38 10 ; [$9ad0] undefined
-    hex 21 00 e7 1e cc e8 09 e9 1e ff ff ff 3f 1f de 1e ; [$9ae0] undefined
-    hex 51 33 e3 07 0e bd 7b d8 3e fc fc f8 f0 40 00 00 ; [$9af0] undefined
-    hex ba bb da db d5 bd aa 52 6d 6c 6d 6d 6e 66 77 3f ; [$9b00] undefined
-    hex b6 5b ca 6b b5 55 ce 8e c8 e4 34 94 c8 e8 30 70 ; [$9b10] undefined
-    hex ae a6 57 55 45 25 24 04 71 79 38 38 38 18 18 18 ; [$9b20] undefined
-    hex b1 29 ab ae 26 24 a0 00 c6 c6 c4 c0 c0 c0 40 40 ; [$9b30] undefined
-    hex 34 24 24 14 14 14 0c 04 18 18 18 08 08 08 00 00 ; [$9b40] undefined
-    hex 53 b8 7e cf 17 f0 8e 00 af 47 81 00 00 00 00 00 ; [$9b50] undefined
-    hex f1 07 4b fc f2 07 da 00 fe f8 b4 00 00 00 00 00 ; [$9b60] undefined
-    hex 7e aa b2 b2 bb a3 30 79 00 55 4d 4d 44 7c ff fe ; [$9b70] undefined
-    hex 67 b9 66 59 56 15 95 4d 18 7f ff e6 f9 fb 7b 3b ; [$9b80] undefined
-    hex a4 52 e7 ce 93 2a 72 53 18 bc 38 70 ec dc 9c bc ; [$9b90] undefined
-    hex a6 dd ed ca a2 d4 50 50 59 66 76 77 77 23 23 21 ; [$9ba0] undefined
-    hex 67 6f ab 0f 51 55 20 00 b8 b0 70 74 26 22 12 12 ; [$9bb0] undefined
-    hex 98 a9 94 39 a4 32 88 a8 7f 7e 7f fe 7f ff 7f 7f ; [$9bc0] undefined
-    hex a4 6e 54 32 5a 5c 3a 5e 40 80 a0 c0 a0 a0 c0 a0 ; [$9bd0] undefined
-    hex 1d b4 04 f9 56 0a a5 fa 00 40 02 00 a8 04 02 01 ; [$9be0] undefined
-    hex 1e 20 86 69 00 57 60 af 00 00 00 90 0f 20 10 00 ; [$9bf0] undefined
-    hex 1a b0 02 f4 44 08 a4 fa 04 48 00 00 ba 00 00 04 ; [$9c00] undefined
-    hex 84 11 01 46 11 82 10 80 01 00 00 00 00 01 00 00 ; [$9c10] undefined
-    hex 14 04 04 04 04 00 00 00 08 08 08 00 00 00 00 00 ; [$9c20] undefined
-    hex 23 53 e4 cb 90 2f 50 73 dc bc 3b 77 ef df bf bc ; [$9c30] undefined
-    hex 67 b9 66 59 ae 35 55 cd 18 7f ff e6 d1 db bb 3b ; [$9c40] undefined
-    hex 2a d5 ff 14 f2 1c 47 f3 00 00 00 0b 05 e3 b8 0c ; [$9c50] undefined
-    hex 2a df 7f dc 35 ee c5 3b 05 00 80 23 ca 11 3a c4 ; [$9c60] undefined
-    hex 04 11 41 06 11 f2 08 a4 81 00 80 00 e0 01 f0 08 ; [$9c70] undefined
-    hex f4 4d 6b 16 0d 8a 16 82 01 a0 14 28 10 05 00 00 ; [$9c80] undefined
-    hex ff ff ff ff 1f 43 20 0c 00 00 00 00 00 a0 fc ff ; [$9c90] undefined
-    hex 3f 1f 4f 07 07 03 03 2b 00 00 80 c0 a0 e0 d0 c0 ; [$9ca0] undefined
-    hex 03 0b 1b 07 07 0f 1f bf d0 a0 e0 c0 e0 c0 80 00 ; [$9cb0] undefined
-    hex 3f 1f 87 c0 b0 fe 49 32 80 c0 e0 f8 ff ff ff ff ; [$9cc0] undefined
-    hex 47 0f 2f 0f 0f 2f 07 07 00 80 00 80 80 00 80 40 ; [$9cd0] undefined
-    hex 09 10 ef 9a 40 dd 0a eb 00 e0 10 05 80 00 31 04 ; [$9ce0] undefined
-    hex 50 02 08 eb 07 10 c0 34 8f 71 00 04 00 e0 00 0b ; [$9cf0] undefined
-    hex 9c 26 4c 98 70 c2 04 08 62 18 30 60 80 00 02 06 ; [$9d00] undefined
-    hex 1f c8 24 1f 00 e6 32 79 e0 30 18 00 00 01 c1 80 ; [$9d10] undefined
-    hex c5 36 e3 b8 0c 53 b8 76 fa f9 fc ff ff af 47 89 ; [$9d20] undefined
-    hex 66 0a 3d 41 c0 80 00 00 9d f5 c0 80 00 00 00 00 ; [$9d30] undefined
-    hex d3 d8 6e af 19 32 37 1b ef e7 f1 70 66 0f 0f 07 ; [$9d40] undefined
-    hex ac 47 b1 08 05 00 00 00 03 00 00 00 00 00 00 00 ; [$9d50] undefined
-    hex 0e f8 b5 02 d8 00 00 00 f0 00 00 00 00 00 00 00 ; [$9d60] undefined
-    hex ff ff 7f ea 4d b2 ca 3a 00 00 00 15 3f 7f 77 c7 ; [$9d70] undefined
-    hex fb fd f9 fe 77 5e ad d7 00 00 00 00 80 e0 50 28 ; [$9d80] undefined
-    hex ba bb 5b 6e 9d 2e 7a a9 6d 6c 24 11 6e f7 f7 76 ; [$9d90] undefined
-    hex b6 7a fe 26 d3 eb eb 8f c8 c4 00 d8 ec 74 74 70 ; [$9da0] undefined
-    hex cb 8b 48 27 63 d1 28 04 18 20 26 98 80 1c a2 a9 ; [$9db0] undefined
-    hex a1 70 19 06 d4 c8 e8 41 08 07 c0 30 07 30 27 18 ; [$9dc0] undefined
-    hex ce 6f 79 f2 68 6c c1 19 10 80 0c 14 91 12 2c 02 ; [$9dd0] undefined
-    hex 38 84 fb 30 18 8d c3 e0 87 78 00 04 c3 20 18 07 ; [$9de0] undefined
-    hex 0b 05 03 02 03 01 00 00 07 03 01 01 00 00 00 00 ; [$9df0] undefined
-    hex 80 10 12 1a 40 90 16 5c 00 8e 8c 04 80 0e 08 84 ; [$9e00] undefined
-    hex 00 04 04 7d 00 0d 54 34 00 f9 f8 80 01 f0 a8 d1 ; [$9e10] undefined
-    hex fd 8f 37 80 2a 85 00 00 02 00 00 00 00 00 00 00 ; [$9e20] undefined
-    hex 9a aa 5a 24 5d a2 da 3a 77 77 27 1f 3f 7f 67 c7 ; [$9e30] undefined
-    hex 26 68 d8 6a 96 4e b4 dc d0 90 20 90 e0 f0 48 20 ; [$9e40] undefined
-    hex 4c 1d c5 59 b2 4d 79 a9 97 36 1e fe 7f 33 0f 7f ; [$9e50] undefined
-    hex ac 5a b6 5a 8c 7c 50 5c 50 a0 c0 e4 78 80 a0 a0 ; [$9e60] undefined
-    hex 91 b0 96 94 24 d1 7d 96 22 07 21 03 43 22 02 00 ; [$9e70] undefined
-    hex ff ff 59 24 5d a2 da 3a 00 00 26 1f 3f 7f 67 c7 ; [$9e80] undefined
-    hex fb fd f9 7e 97 4e b5 df 00 00 00 80 e0 f0 48 20 ; [$9e90] undefined
-    hex 10 98 50 80 10 96 1a 16 00 00 0e 00 8e 08 04 08 ; [$9ea0] undefined
-    hex 00 04 14 7d 00 0d 54 34 00 c1 e8 80 01 f0 a8 d1 ; [$9eb0] undefined
-    hex 00 7d 02 80 00 50 10 00 00 fb 3f 43 38 18 52 52 ; [$9ec0] undefined
-    hex 00 cf 00 00 00 80 00 10 00 ff ff e0 00 ca da 58 ; [$9ed0] undefined
-    hex 88 c8 cc fc de ff ff ff 20 20 22 22 20 00 00 00 ; [$9ee0] undefined
-    hex 92 82 c3 e7 ef ef ff ff 58 18 08 00 00 00 00 00 ; [$9ef0] undefined
-    hex 9c 26 4c 98 70 c0 00 00 62 18 30 60 80 00 00 00 ; [$9f00] undefined
-    hex 1f c8 24 1f 00 06 02 01 e0 30 18 00 00 01 01 00 ; [$9f10] undefined
-    hex 80 00 00 00 40 80 00 40 00 80 80 00 80 00 00 80 ; [$9f20] undefined
-    hex 00 00 00 01 00 01 00 00 00 01 00 00 01 00 00 01 ; [$9f30] undefined
-    hex 11 40 55 42 9c 56 91 c5 00 39 3b 39 20 08 3c 38 ; [$9f40] undefined
-    hex 0e 00 00 25 80 57 a2 8d 10 b8 d6 ce 0f 20 d4 e6 ; [$9f50] undefined
-    hex 49 e1 05 2d 01 e1 29 ea 12 06 66 76 b6 36 12 05 ; [$9f60] undefined
-    hex 10 12 24 85 41 82 50 18 ef 61 0e 6e f6 74 24 20 ; [$9f70] undefined
-    hex 1d f5 44 48 a0 54 a5 c5 00 00 33 31 00 08 18 38 ; [$9f80] undefined
-    hex 1e a8 16 61 88 77 76 29 00 10 c0 8e 07 00 80 c6 ; [$9f90] undefined
-    hex 49 e6 51 c8 44 d5 3a ea 10 00 26 37 b3 22 00 05 ; [$9fa0] undefined
-    hex 19 73 2c c9 81 14 64 08 e6 00 00 26 76 62 00 10 ; [$9fb0] undefined
-    hex 60 bb 40 1f 5f b6 ad 6e 1f 7f ff e0 e0 cf df 93 ; [$9fc0] undefined
-    hex a7 b8 27 56 2b 9a 56 51 59 cd c9 e1 f4 67 21 20 ; [$9fd0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$9fe0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$9ff0] undefined
-    hex ff 8c 90 90 81 1f ff 00 7f ff ff ff fe e0 00 00 ; [$a000] undefined
-    hex fa 66 c6 8e 1a fe fe 00 fc fc 78 70 e4 00 00 00 ; [$a010] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a020] undefined
-    hex 45 9b ba 80 c1 ae ac 80 3a 7f 7f 7f 3e 7f 7f 7f ; [$a030] undefined
-    hex fa a8 82 86 f8 fa 14 38 00 fe fc f8 00 cf ef cf ; [$a040] undefined
-    hex 00 04 fc fc 00 23 a7 27 00 f9 01 01 00 cc 48 c8 ; [$a050] undefined
-    hex 00 da 50 da 00 36 50 76 00 00 00 00 00 40 00 00 ; [$a060] undefined
-    hex fa e6 c6 8e 9a 3e 7c 00 7c fc f8 f0 e4 c0 00 00 ; [$a070] undefined
-    hex 26 26 26 26 26 27 e7 e7 38 f8 f8 f8 38 f8 38 38 ; [$a080] undefined
-    hex a6 0d 9a 35 eb d6 ac 58 59 f3 67 ce 9c 38 70 e0 ; [$a090] undefined
-    hex cb 63 35 99 4c a6 53 a9 00 80 c0 e0 f0 78 3c 1e ; [$a0a0] undefined
-    hex 26 32 26 44 26 22 6c 46 f8 fc f8 f8 f8 fc f0 f8 ; [$a0b0] undefined
-    hex 02 60 62 00 00 e2 e0 00 e0 80 80 00 e0 00 00 00 ; [$a0c0] undefined
-    hex 00 0e 1e 00 00 67 e7 00 00 00 00 00 2f 08 08 00 ; [$a0d0] undefined
-    hex 00 00 00 7e 00 00 e7 e7 00 00 00 80 00 ef 08 08 ; [$a0e0] undefined
-    hex cb 44 48 40 56 40 bf 55 34 fb f7 ff ff ff 40 00 ; [$a0f0] undefined
-    hex 25 30 22 4a 2a 24 65 45 fb ff fd fd fd fb fa fa ; [$a100] undefined
-    hex 00 7e 7c 00 13 e7 cd 19 fe 80 80 00 e0 00 02 06 ; [$a110] undefined
-    hex 02 3e 1e 00 c0 e3 31 19 fc 40 20 00 0f 04 c6 e2 ; [$a120] undefined
-    hex b9 b7 b1 31 be b0 a0 00 00 08 0e 0e 00 0f 1f 00 ; [$a130] undefined
-    hex 09 c9 09 09 f9 01 01 00 32 32 f2 f2 02 fa fa 00 ; [$a140] undefined
-    hex a8 82 86 a8 ea 04 28 ef fe fc f8 00 cf ef cf 00 ; [$a150] undefined
-    hex 0a 87 0a 03 d2 03 ff 56 f4 f8 f4 fc fc fc 00 00 ; [$a160] undefined
-    hex 00 2c c4 c4 00 03 87 07 00 c1 01 01 00 cc 48 c8 ; [$a170] undefined
-    hex 00 bf a5 a3 31 bf a5 a3 00 00 1e 1e 1e 00 1e 1e ; [$a180] undefined
-    hex 00 f9 41 21 11 f9 41 21 00 02 fa fa fa 02 fa fa ; [$a190] undefined
-    hex a3 a3 a5 bf 31 a3 a5 bf 1e 1e 1e 00 1e 1e 1e 00 ; [$a1a0] undefined
-    hex 21 21 41 f9 11 21 41 f9 fa fa fa 02 fa fa fa 02 ; [$a1b0] undefined
-    hex 0b 84 08 00 d6 00 ff 55 f4 fb f7 ff ff ff 00 00 ; [$a1c0] undefined
-    hex 20 15 2a 14 2a 10 3f 15 00 00 01 02 07 0f 00 00 ; [$a1d0] undefined
-    hex 00 a9 40 04 00 85 40 89 03 01 01 01 00 00 00 00 ; [$a1e0] undefined
-    hex e2 45 aa 15 ab 56 ac 58 01 03 07 0e 1c 38 70 e0 ; [$a1f0] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a200] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a210] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a220] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a230] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a240] undefined
-    hex 00 00 7e 7e 00 00 e7 e7 00 fe 80 80 00 ef 08 08 ; [$a250] undefined
-    hex 10 4a 00 a2 04 90 22 08 00 00 00 00 00 00 00 00 ; [$a260] undefined
-    hex 10 44 00 20 08 00 22 00 00 00 00 00 00 00 00 00 ; [$a270] undefined
-    hex 00 44 00 80 08 00 20 00 00 00 00 00 00 00 00 00 ; [$a280] undefined
-    hex 00 a0 7e ae 00 e0 67 e7 00 1e 00 00 00 0f 08 08 ; [$a290] undefined
-    hex 00 80 10 ae 00 e0 67 e7 00 00 00 00 00 0f 08 08 ; [$a2a0] undefined
-    hex 81 81 81 81 81 81 81 81 fe fe fe fe fe fe fe fe ; [$a2b0] undefined
-    hex a8 a1 a0 bf bc bf a0 a2 40 40 40 40 43 40 40 40 ; [$a2c0] undefined
-    hex 55 05 25 f9 01 f9 05 25 02 02 02 06 fe 06 02 02 ; [$a2d0] undefined
-    hex 55 af d8 71 a7 4e d8 d0 00 00 00 00 00 00 06 0e ; [$a2e0] undefined
-    hex d4 fb 0e 45 f2 19 9c 15 00 00 00 00 00 e2 e1 e9 ; [$a2f0] undefined
-    hex b0 be ac a4 bc be bc b0 0e 00 1a 1a 02 00 0e 0e ; [$a300] undefined
-    hex 91 fd e9 08 88 7d f8 11 ec 81 f5 f5 f5 81 ed ed ; [$a310] undefined
-    hex b1 a2 ac a8 a4 a0 a4 aa c0 c0 c2 c2 ca ca ca c0 ; [$a320] undefined
-    hex d7 28 12 1a 1a 1a 1a ba 08 87 a7 a7 a7 a7 a7 07 ; [$a330] undefined
-    hex bc 40 01 8d 9f 9f 9f df c3 83 81 01 01 01 01 3f ; [$a340] undefined
-    hex de a5 a4 f4 85 fe ff 17 21 7a 7b 7b 7a 01 00 00 ; [$a350] undefined
-    hex fd 81 81 ff f2 14 18 f0 fe fe fe 00 ec e8 e0 00 ; [$a360] undefined
-    hex fd 8f 70 80 00 00 1f 7f fe f0 80 00 00 00 00 00 ; [$a370] undefined
-    hex e0 a0 a0 e0 c1 41 41 40 c0 c0 c0 00 80 80 80 80 ; [$a380] undefined
-    hex ad 55 ff 95 c0 ae 88 80 00 00 00 7f 3f 7f 7f 7f ; [$a390] undefined
-    hex 00 54 ff 81 2d ee cc 88 00 00 00 fe d0 f7 f7 f7 ; [$a3a0] undefined
-    hex a0 60 c0 c0 40 00 00 00 c0 80 00 00 00 00 60 60 ; [$a3b0] undefined
-    hex ed b2 73 e6 6c d8 70 b0 fb dd bc b8 90 20 80 c0 ; [$a3c0] undefined
-    hex ce 60 80 00 00 00 00 00 f0 80 00 00 00 00 00 00 ; [$a3d0] undefined
-    hex e3 0c 03 00 00 00 00 00 1f 03 00 00 00 00 00 00 ; [$a3e0] undefined
-    hex 73 cc d7 ac 53 23 15 16 8c 37 7b 7b 3d 1d 0b 0d ; [$a3f0] undefined
-    hex 0f 0a 63 67 01 02 e2 e5 04 e7 87 81 03 e9 09 08 ; [$a400] undefined
-    hex 00 fe ad a5 55 83 29 ff 00 00 52 da aa fc d6 00 ; [$a410] undefined
-    hex 00 00 00 2d c0 23 a7 27 00 00 00 d0 00 cc 48 c8 ; [$a420] undefined
-    hex ff 7f 87 97 ae 9e be b0 00 ff f8 eb d3 e3 df df ; [$a430] undefined
-    hex ff fd c5 f3 2b 21 3d 05 00 ff 3a cc d4 de da fa ; [$a440] undefined
-    hex b0 b0 ae 9e ae 86 05 ff df df d1 e3 d3 fb fa 00 ; [$a450] undefined
-    hex 05 05 3f 35 21 21 e5 ff fa fa c0 ca de de 1a 00 ; [$a460] undefined
-    hex ff c7 18 30 e0 40 c0 c0 00 38 e0 c0 00 80 00 00 ; [$a470] undefined
-    hex f8 fc 00 00 03 02 00 01 07 03 0f 07 02 03 01 01 ; [$a480] undefined
-    hex 45 2b 44 48 00 4b 14 41 3e 5c 3c 3c 7c 3f 7f 3e ; [$a490] undefined
-    hex 5c fa 1c 7a 5c ba bc 38 a0 00 60 40 60 c0 40 c0 ; [$a4a0] undefined
-    hex ff 01 00 1f 90 97 94 14 00 fe c0 c0 40 c0 c3 c3 ; [$a4b0] undefined
-    hex ff 03 01 ff 04 fa 8a 8e 00 fc 00 00 03 07 77 37 ; [$a4c0] undefined
-    hex d4 14 14 14 94 95 53 03 03 c2 c2 c3 43 c0 cf df ; [$a4d0] undefined
-    hex 8f 8a 8a 8e 8b 5e 5a fc 36 77 67 67 06 07 ff ff ; [$a4e0] undefined
-    hex 45 28 44 48 00 48 14 41 3e 5f 3f 3f 7f 3f 7f 3e ; [$a4f0] undefined
-    hex 5c ba 5c ba 1c 7a bc 38 a0 40 a0 40 e0 80 40 c0 ; [$a500] undefined
-    hex 02 02 07 07 0d 0c 0b 18 01 01 00 00 02 03 06 07 ; [$a510] undefined
-    hex 80 a0 80 c0 90 c0 a0 c8 00 00 00 00 00 00 00 00 ; [$a520] undefined
-    hex 14 14 31 23 08 6b 58 5c 0f 0f 0e 1c 3f 1c 3f 3f ; [$a530] undefined
-    hex e0 d0 e4 b0 e8 b2 f9 b6 00 00 00 00 00 00 00 00 ; [$a540] undefined
-    hex 9a 4e a7 56 2a 13 ff 24 e4 f0 78 b8 d4 ec 00 00 ; [$a550] undefined
-    hex ff 00 00 00 08 98 98 10 ff ff ff 00 74 20 30 38 ; [$a560] undefined
-    hex ff 00 00 00 00 00 66 00 ff ff ff 00 00 00 00 00 ; [$a570] undefined
-    hex ff 01 01 00 08 98 98 10 fe fe fe 00 74 20 30 38 ; [$a580] undefined
-    hex 10 10 10 10 10 90 90 10 b8 b8 b8 38 b8 38 38 38 ; [$a590] undefined
-    hex 10 10 10 10 10 b8 b4 fe b8 b8 b8 38 b8 00 78 00 ; [$a5a0] undefined
-    hex 66 46 32 30 7c 30 30 30 88 90 b8 7c 00 7c 7c 7c ; [$a5b0] undefined
-    hex 30 00 38 40 60 62 66 66 7c b8 80 80 80 80 88 88 ; [$a5c0] undefined
-    hex 99 99 99 99 99 99 99 99 ee ee ee ee ee ee ee ee ; [$a5d0] undefined
-    hex 96 48 90 a2 4e 9e 1a b2 68 b0 60 40 80 00 84 0c ; [$a5e0] undefined
-    hex 12 26 16 8a e6 33 89 81 ec 18 08 04 01 c0 f2 fa ; [$a5f0] undefined
-    hex 5e b0 40 80 80 80 80 80 a0 40 80 00 00 00 00 00 ; [$a600] undefined
-    hex eb 05 03 03 01 01 01 02 14 0a 04 00 02 02 02 01 ; [$a610] undefined
-    hex 80 80 80 80 80 80 80 80 00 00 00 00 00 00 00 00 ; [$a620] undefined
-    hex 03 01 03 01 03 01 03 01 02 02 02 02 02 02 02 02 ; [$a630] undefined
-    hex 32 32 32 b2 b2 32 32 32 8c 8c 8c 0c 0c 8c 8c 8c ; [$a640] undefined
-    hex 89 09 89 09 89 09 89 09 f2 f2 f2 f2 f2 f2 f2 f2 ; [$a650] undefined
-    hex 87 07 1e 2b 3f 6d bf fb e0 c0 80 00 00 00 00 00 ; [$a660] undefined
-    hex f4 fa fd fe ff ff ff ff 0f 07 03 01 00 00 00 00 ; [$a670] undefined
-    hex a4 0a 50 82 54 94 20 0a 00 00 00 00 00 00 00 00 ; [$a680] undefined
-    hex aa 02 88 25 50 02 29 ff ff fd 77 da af fd d6 00 ; [$a690] undefined
-    hex df e0 f0 ff bf 98 9b 9a bf 5f 6f 30 cf ef ef ef ; [$a6a0] undefined
-    hex ff 07 0f ff ef 15 d1 51 fc fa f6 0c f8 e2 a6 a6 ; [$a6b0] undefined
-    hex 9a 9a ba f9 fc fa ed fe ef ef cf af 93 a9 44 00 ; [$a6c0] undefined
-    hex 51 51 51 97 2f 5f bf 77 a6 a6 a6 62 cc 8c 12 09 ; [$a6d0] undefined
-    hex 00 ff 87 b4 b7 74 8a fd 00 70 fb db d8 fb 7d 06 ; [$a6e0] undefined
-    hex 00 fe fa 04 f4 14 1d 19 00 00 fc f8 18 f9 f0 ec ; [$a6f0] undefined
-    hex de d3 d1 d0 5f 40 3f 00 63 6d 6e 6f 6f 7f 40 00 ; [$a700] undefined
-    hex b5 6f 9d da 6c 34 fd 01 58 b2 e6 6c b0 d9 08 00 ; [$a710] undefined
-    hex fd bf f5 7a dd 2a b3 3a ff c0 b9 bc be df cf d7 ; [$a720] undefined
-    hex f7 f7 f7 37 5b bb 63 a3 da 18 d8 d8 3c 3c bc dc ; [$a730] undefined
-    hex 54 36 e4 f1 a1 d1 22 ff bb ed 7e 7e 7e be dd 00 ; [$a740] undefined
-    hex db af 35 3a 9a 4a 0c fe e4 f0 f8 7c 3c 9c e0 00 ; [$a750] undefined
-    hex 75 88 14 3a ad a6 a3 23 ff f7 fb ed f6 fb fd fd ; [$a760] undefined
-    hex 7b 02 0f 12 03 c2 63 33 fc fc f0 ec fc 3c 9c cc ; [$a770] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a780] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a790] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7a0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7b0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7c0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7d0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7e0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$a7f0] undefined
-    hex a3 6b 6b 31 80 ff ff e3 5c dc dc ee 7f 00 00 1c ; [$a800] undefined
-    hex af cf cf 9f 3e fc fc fc 70 70 70 e0 c0 00 00 00 ; [$a810] undefined
-    hex 2b 30 24 2e 2c 2f 2c 28 14 0f 1f 1f 1f 1f 1f 1f ; [$a820] undefined
-    hex fc bc 7c 9c 3c 5c 1c 2c 00 40 80 60 c0 a0 e0 d0 ; [$a830] undefined
-    hex 00 20 6f 5f 52 4c 59 51 00 1f 1f 3f 3f 3f 3f 3f ; [$a840] undefined
-    hex 00 00 ff 9f 7e fd c1 85 00 ff ff ff ff ff ff fb ; [$a850] undefined
-    hex 00 02 f3 fb c3 8b 8b 0b 00 fc fc fc fc f4 f4 f4 ; [$a860] undefined
-    hex 00 ff ff 00 00 3c be 42 00 00 00 00 00 00 40 9d ; [$a870] undefined
-    hex 80 7f c0 80 80 00 b7 ff 7f ff ff ff ff ff 48 00 ; [$a880] undefined
-    hex 02 fd 01 01 01 03 0f ff fc fe fe fe fe fc f0 00 ; [$a890] undefined
-    hex ff 80 bf a0 af af af af 00 7f 40 40 40 40 40 40 ; [$a8a0] undefined
-    hex ff 05 fd 0d fd f5 f5 f5 00 f8 00 00 00 08 08 08 ; [$a8b0] undefined
-    hex af af af af a8 bf c0 ff 40 40 40 40 47 40 00 00 ; [$a8c0] undefined
-    hex f5 f5 f5 f5 05 fd 01 ff 08 08 08 08 f8 00 00 00 ; [$a8d0] undefined
-    hex 00 9c 9c ce 7f 00 3e 3f 00 40 40 20 00 00 00 00 ; [$a8e0] undefined
-    hex 00 71 70 e1 e6 00 94 28 00 00 00 00 00 00 00 00 ; [$a8f0] undefined
-    hex aa a4 ae a6 ac a7 ae aa 1f 1f 1f 1f 1f 1f 1f 1f ; [$a900] undefined
-    hex 34 98 3c 18 34 18 34 18 c0 e0 c0 e0 c0 e0 c0 e0 ; [$a910] undefined
-    hex 4b 8b 15 23 45 09 a3 57 00 00 00 00 00 00 00 00 ; [$a920] undefined
-    hex 42 91 48 84 23 94 cb ff 00 00 00 00 00 00 00 00 ; [$a930] undefined
-    hex 51 51 51 50 40 63 7f 3f 3f 3f 3f 3f 3f 1c 00 00 ; [$a940] undefined
-    hex 05 05 0c 3f ff e0 ff ff fb fb f3 c0 00 1f 00 00 ; [$a950] undefined
-    hex 0b 0b 1b f3 e3 03 ff fe f4 f4 e4 0c 1c fc 00 00 ; [$a960] undefined
-    hex 8a 8b 95 29 ee 00 ff 00 1d 1d 39 f1 f7 ff 00 00 ; [$a970] undefined
-    hex 3f 3b 35 2b 30 2b 35 20 00 04 0a 14 0f 14 0a 1f ; [$a980] undefined
-    hex d4 e8 d4 e8 f4 e8 f4 e8 00 00 00 00 00 00 00 00 ; [$a990] undefined
-    hex d0 a8 a8 b0 b0 b4 a0 b8 30 70 70 68 68 68 7c 74 ; [$a9a0] undefined
-    hex d8 df df e0 ff fe d3 dd 34 30 3f 1f 00 01 39 3b ; [$a9b0] undefined
-    hex 00 fe fd 07 fb d1 9f bf 00 00 fe ff 07 23 33 16 ; [$a9c0] undefined
-    hex cb cb d5 a9 ae c0 7f 00 1d 1d 39 71 77 3f 00 00 ; [$a9d0] undefined
-    hex 8f 8b 95 2a ec 01 ff 00 18 1d 39 f3 f7 fe 00 00 ; [$a9e0] undefined
-    hex 7d 55 02 7e 7e 66 52 52 aa aa 7c 00 00 18 3c 3c ; [$a9f0] undefined
-    hex 52 52 52 52 52 52 52 52 3c 3c 3c 3c 3c 3c 3c 3c ; [$aa00] undefined
-    hex 52 52 66 7e 7e 02 55 7d 3c 3c 18 00 00 7c aa aa ; [$aa10] undefined
-    hex 00 00 00 b0 a0 bf c0 ff 00 00 00 40 5f 40 00 00 ; [$aa20] undefined
-    hex 00 00 00 00 01 fd 01 ff 00 00 00 00 80 00 00 00 ; [$aa30] undefined
-    hex 00 00 00 00 01 fd 01 ff 00 00 00 00 80 00 00 00 ; [$aa40] undefined
-    hex 04 0d 1d 3d 3d fd 01 ff 00 00 00 00 80 00 00 00 ; [$aa50] undefined
-    hex 1f 0d 0d 05 05 05 05 05 00 00 00 00 00 00 00 00 ; [$aa60] undefined
-    hex ff 80 bf bf bf bf bf bf 00 7f 40 40 40 40 40 40 ; [$aa70] undefined
-    hex ff 05 fd fd fd fd fd fd 00 f8 00 00 00 00 00 00 ; [$aa80] undefined
-    hex bf bf bf bf bf bf c0 ff 40 40 40 40 40 40 00 00 ; [$aa90] undefined
-    hex fd fd fd fd fd fd 01 ff 00 00 00 00 00 00 00 00 ; [$aaa0] undefined
-    hex ff 00 ff ff 00 00 b7 ff 00 ff ff ff ff ff 48 00 ; [$aab0] undefined
-    hex 00 00 00 00 00 00 00 00 02 02 02 02 04 04 04 08 ; [$aac0] undefined
-    hex 80 00 00 00 00 00 00 00 a0 a0 a0 a0 90 90 90 88 ; [$aad0] undefined
-    hex 04 00 46 06 62 6d 26 ce 04 00 44 04 44 4e 40 f0 ; [$aae0] undefined
-    hex 00 01 05 15 05 f7 bf 8f 09 0b 15 05 31 04 74 74 ; [$aaf0] undefined
-    hex 80 e0 68 aa ab e8 cb 1b c8 84 88 c8 c0 0c fc ec ; [$ab00] undefined
-    hex 20 00 62 60 46 b6 64 73 20 00 22 20 22 72 02 0f ; [$ab10] undefined
-    hex 13 33 a8 c9 ef e0 f8 f8 64 00 30 1f 00 00 00 00 ; [$ab20] undefined
-    hex 7b 8c ce f4 39 0b 05 03 04 1f c0 04 04 00 03 00 ; [$ab30] undefined
-    hex 40 1b ff df 7c f0 60 80 8c 3c 03 10 20 00 80 00 ; [$ab40] undefined
-    hex 48 0c 14 10 f0 00 00 00 26 c0 0c f8 00 00 00 00 ; [$ab50] undefined
-    hex 08 1c 08 1c 14 14 14 04 08 08 00 10 18 18 18 18 ; [$ab60] undefined
-    hex 6c 7c 42 3c 2c 34 34 34 3a 3a 3c 00 10 18 18 18 ; [$ab70] undefined
-    hex 34 34 34 34 34 34 34 34 18 18 18 18 18 18 18 18 ; [$ab80] undefined
-    hex fa 02 82 82 02 8a 1a da 83 03 fb fb 73 eb 1b 9b ; [$ab90] undefined
-    hex ef e7 eb ec ed ec ed e1 e1 e1 e1 e0 e1 e0 e1 e1 ; [$aba0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$abb0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$abc0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$abd0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$abe0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$abf0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ac00] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ac10] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ac20] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ac30] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ac40] undefined
-    hex 00 00 00 00 00 80 c0 60 00 00 00 00 00 00 00 80 ; [$ac50] undefined
-    hex 94 aa ff ff ff 80 db db 95 80 ff aa aa 80 80 db ; [$ac60] undefined
-    hex 3d fd ff ff ff 01 6f 6f 01 01 ff a9 a9 01 01 6f ; [$ac70] undefined
-    hex c0 db da 00 d6 00 94 94 80 9b 9a 00 c6 00 95 95 ; [$ac80] undefined
-    hex 08 2d 6d 01 b1 01 7d 7d 00 41 21 01 35 01 01 7d ; [$ac90] undefined
-    hex 05 15 24 41 42 02 01 e1 05 15 34 79 72 4a 1d 8d ; [$aca0] undefined
-    hex 50 50 54 82 d0 58 bb 9b 50 50 5c 8e c7 40 83 83 ; [$acb0] undefined
-    hex f0 f1 ed ed ec 0d 8c 06 80 85 85 8d 8c 0c ec f6 ; [$acc0] undefined
-    hex 23 bb bb 3b b8 63 db 19 23 b3 b3 33 30 61 c1 01 ; [$acd0] undefined
-    hex 82 80 02 82 f2 f9 1b c3 fa f8 38 88 80 80 02 82 ; [$ace0] undefined
-    hex 01 61 e1 e0 ef ec eb e7 e7 ef ef e0 ef ec e9 e1 ; [$acf0] undefined
-    hex 22 00 94 00 20 02 40 04 00 00 00 00 00 00 00 00 ; [$ad00] undefined
-    hex ff e1 c0 80 00 00 00 00 00 02 01 00 00 00 00 00 ; [$ad10] undefined
-    hex ff 83 01 02 00 00 00 00 00 04 02 01 01 01 01 01 ; [$ad20] undefined
-    hex 00 00 00 00 00 00 00 00 01 01 01 01 01 01 01 01 ; [$ad30] undefined
-    hex ff 00 ff 00 00 01 a0 04 00 ff 00 00 00 00 00 00 ; [$ad40] undefined
-    hex e2 43 97 41 42 62 42 00 00 02 02 42 47 c7 e7 e7 ; [$ad50] undefined
-    hex 68 20 9e 15 bf 9f 95 9f 02 00 0a 0a 0a 0a 0a 00 ; [$ad60] undefined
-    hex ff e1 cc 9e 39 35 65 65 00 02 01 00 06 06 06 06 ; [$ad70] undefined
-    hex ff 87 71 f9 0c 24 10 10 00 00 02 02 f1 b9 9d 9d ; [$ad80] undefined
-    hex 7d 61 79 45 55 45 45 55 1e 1e 06 06 06 16 16 06 ; [$ad90] undefined
-    hex 70 00 70 08 28 08 08 28 fd fd 8d 85 8d ad ad 8d ; [$ada0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$adb0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$adc0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$add0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$ade0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$adf0] undefined
-    hex ff 18 18 ff fe 81 81 ff ef ef ef 00 ff fe fe 00 ; [$ae00] undefined
-    hex 00 e7 00 9f 9e 80 ff 00 ef 08 00 7f 7f 7f 00 00 ; [$ae10] undefined
-    hex 00 e7 00 55 a0 00 ff 00 ef 08 00 ff ff ff 00 00 ; [$ae20] undefined
-    hex 00 e6 00 02 56 56 fe 00 ee 08 00 fc a8 a8 00 00 ; [$ae30] undefined
-    hex 00 e7 e7 00 00 78 71 ff ef 08 08 00 fc 83 87 00 ; [$ae40] undefined
-    hex 64 64 64 64 ff 7d c0 ff 38 38 38 38 00 fe ff 00 ; [$ae50] undefined
-    hex 00 e7 e7 00 00 ce 6e f6 ef 08 08 00 1e 00 80 00 ; [$ae60] undefined
-    hex 7c 7c 7c 7c 4c 4c 64 64 00 00 00 00 30 30 38 38 ; [$ae70] undefined
-    hex 00 ff ff 00 ff ff 01 ff ff ff ff ff 00 00 fe 00 ; [$ae80] undefined
-    hex 00 e7 e7 00 00 7e 7e 00 ef 08 08 00 fe 80 80 00 ; [$ae90] undefined
-    hex 00 67 27 00 00 0e 06 00 6f 08 08 00 0e 00 00 00 ; [$aea0] undefined
-    hex 22 88 22 84 51 88 22 00 00 00 00 00 00 00 00 00 ; [$aeb0] undefined
-    hex 00 f7 b9 6c 6c bd 91 56 d7 50 b0 d8 4a 34 48 54 ; [$aec0] undefined
-    hex 56 d1 dc 50 1e d0 e0 00 d3 70 54 70 94 70 40 00 ; [$aed0] undefined
-    hex 00 e7 e0 00 00 80 80 00 ef 08 00 00 c0 00 00 00 ; [$aee0] undefined
-    hex 00 e7 e7 00 12 7c 7c 0c ef 08 08 00 e0 88 88 08 ; [$aef0] undefined
-    hex 0c cc c2 0a 0a 4a 4a 02 c8 08 1c 1c dc 9c 9c 1c ; [$af00] undefined
-    hex a2 aa 10 00 28 2b 29 08 ff 55 00 10 b0 b1 b1 31 ; [$af10] undefined
-    hex 94 ad 00 00 00 50 46 40 f9 50 00 00 00 98 98 98 ; [$af20] undefined
-    hex ea e0 ff 00 00 00 00 00 3f 1f 00 00 00 00 00 00 ; [$af30] undefined
-    hex fc 05 f8 00 00 00 00 00 f9 f8 00 00 00 00 00 00 ; [$af40] undefined
-    hex 00 20 20 20 60 40 60 60 00 00 00 00 10 30 30 30 ; [$af50] undefined
-    hex 00 20 20 20 20 20 20 20 00 20 20 70 70 70 70 70 ; [$af60] undefined
-    hex 18 d9 de 1c 1e d8 fe 00 d3 10 1e 1c de 18 1e 00 ; [$af70] undefined
-    hex ff 80 80 80 80 80 80 ff ff ff ff ff ff ff ff 00 ; [$af80] undefined
-    hex fe 01 01 01 01 01 01 ff ff fe fe fe fe fe fe 00 ; [$af90] undefined
-    hex e0 e0 c3 40 40 e2 62 e0 00 40 60 60 e2 c0 c0 40 ; [$afa0] undefined
-    hex 00 e7 e7 00 00 7f 00 00 ef 08 08 00 ff ff ff 00 ; [$afb0] undefined
-    hex 07 27 23 02 02 37 36 07 00 12 16 06 37 03 03 02 ; [$afc0] undefined
-    hex 0a ca 1e 55 a0 00 ff 00 dc 1c 00 ff ff ff 00 00 ; [$afd0] undefined
-    hex 00 7e 7e 7e 7e 7e 7e 00 fe 80 80 80 80 80 80 00 ; [$afe0] undefined
-    hex 00 e7 e7 e7 e7 e7 e7 00 ef 08 08 08 08 08 08 00 ; [$aff0] undefined
-    hex 00 e0 22 84 51 88 22 00 ef 08 08 00 00 00 00 00 ; [$b000] undefined
-    hex 58 59 41 10 10 d0 c0 7e 93 9a 82 18 db 1b 18 7e ; [$b010] undefined
-    hex 00 80 e0 10 40 10 00 00 7e 00 18 18 98 c0 e0 00 ; [$b020] undefined
-    hex 00 e7 e0 03 1e 8a 8c 16 ef 08 00 00 c0 14 38 39 ; [$b030] undefined
-    hex 00 e7 07 f0 78 11 1d 0c ef 08 00 07 03 3c 3e fe ; [$b040] undefined
-    hex 94 95 94 0e 80 a1 a0 0a 38 38 38 31 34 14 04 25 ; [$b050] undefined
-    hex 05 85 05 0d 07 87 05 1d 2e 2e 26 f6 20 24 2e ee ; [$b060] undefined
-    hex 80 91 90 1a 90 91 90 27 24 34 34 35 34 34 34 00 ; [$b070] undefined
-    hex 0e 8e 0e 0f 0e 8e 0e cf 2d 2d 2d fc 2d 2d 3d 20 ; [$b080] undefined
-    hex ff f5 a0 a0 a0 a0 a0 a0 00 ff ff ff ff ff ff ff ; [$b090] undefined
-    hex fe 06 56 56 56 56 56 56 00 f8 a8 a8 a8 a8 a8 a8 ; [$b0a0] undefined
-    hex 0a c2 00 55 a0 00 ff 00 dc 0c 00 ff ff ff 00 00 ; [$b0b0] undefined
-    hex 00 67 27 00 00 3e 3e 00 6f 08 08 00 3e 00 00 00 ; [$b0c0] undefined
-    hex 00 07 07 00 00 7f 00 00 0f 08 08 00 ff ff ff 00 ; [$b0d0] undefined
-    hex 00 00 e7 00 00 7e 7e 00 00 00 08 00 fe 80 80 00 ; [$b0e0] undefined
-    hex fd ab ff 6d df 6a bf f5 00 00 00 00 00 00 00 00 ; [$b0f0] undefined
-    hex fd a3 c3 55 df 6a bf f5 00 00 04 08 00 00 00 00 ; [$b100] undefined
-    hex 00 e7 07 00 00 01 01 00 ef 08 00 00 03 00 00 00 ; [$b110] undefined
-    hex c5 30 e9 d7 7f dd 76 df 00 00 00 00 00 00 00 00 ; [$b120] undefined
-    hex ff f6 bc af b8 29 aa a8 21 23 3f 3f 3f 3f 3f 3f ; [$b130] undefined
-    hex 72 31 29 a9 29 29 a9 a8 18 98 f0 d0 d0 d0 50 50 ; [$b140] undefined
-    hex a9 b8 d4 90 e9 34 da fa 3e 3f 1f 1f 0e 07 03 01 ; [$b150] undefined
-    hex 28 21 49 88 13 23 47 8a d0 d8 b0 70 e0 c0 80 00 ; [$b160] undefined
-    hex fd ab ef 6e ba 78 1c a5 00 23 34 24 7e f6 62 1e ; [$b170] undefined
-    hex 7f bf fb e0 f8 bc c0 7c 00 90 58 50 bc fe bc c0 ; [$b180] undefined
-    hex d9 99 c3 7e cf 60 af eb 3e 3e 1c 03 0e 0f 00 0d ; [$b190] undefined
-    hex e8 c8 19 71 a3 20 e3 03 f0 f0 60 80 c0 c0 00 e0 ; [$b1a0] undefined
-    hex db 97 ce 63 c5 65 a5 e5 1d 19 11 0c 0e 0e 0e 0a ; [$b1b0] undefined
-    hex 41 41 e3 21 a3 a2 23 21 b0 b0 10 c0 c0 c0 c0 c0 ; [$b1c0] undefined
-    hex bf 19 9b 25 5b 6a b2 bc 04 0e 04 08 0c 0c 04 00 ; [$b1d0] undefined
-    hex e1 83 a7 61 a7 a2 87 05 40 e0 40 80 c0 c0 40 00 ; [$b1e0] undefined
-    hex ee aa ee dd 00 6e ab e3 44 44 00 ee 00 44 44 04 ; [$b1f0] undefined
-    hex a9 ee ee 6c ce 6a ee e0 44 44 44 44 44 44 44 44 ; [$b200] undefined
-    hex f0 a7 de d9 31 b4 b0 b4 07 18 20 20 40 43 41 43 ; [$b210] undefined
-    hex 67 f3 7d ac 96 aa 86 96 80 00 00 10 08 44 08 68 ; [$b220] undefined
-    hex b0 a4 b0 b4 30 e4 b0 98 41 43 41 03 41 03 41 47 ; [$b230] undefined
-    hex 86 96 86 94 86 94 86 16 08 68 08 60 08 68 08 e0 ; [$b240] undefined
-    hex 45 9b 9b 83 c0 ae 88 80 3a 7f 7f 7f 3f 7f 7f 7f ; [$b250] undefined
-    hex ff 3d 21 07 ab ee cc 88 00 fe fe f8 54 f7 f7 f7 ; [$b260] undefined
-    hex ad 9b ad 98 b5 4d 0e 48 50 60 50 60 c0 f0 f0 80 ; [$b270] undefined
-    hex fd 2b 3f 0d 8f 22 0b 01 00 00 00 00 00 00 00 00 ; [$b280] undefined
-    hex ee 7c d8 b1 63 a6 ce de 00 00 00 00 00 01 01 01 ; [$b290] undefined
-    hex 7e 2b 1e cd a7 f3 f9 ed 00 00 00 00 40 40 40 50 ; [$b2a0] undefined
-    hex 9f b6 be b2 ba b2 be b0 00 0f 01 0d 0d 0d 01 0f ; [$b2b0] undefined
-    hex fc fa fe e6 f6 e6 fe 82 00 7c 40 58 58 58 40 7c ; [$b2c0] undefined
-    hex ee 7c d8 b0 60 a0 c0 c0 00 00 00 00 00 00 00 00 ; [$b2d0] undefined
-    hex 7e 2b 1e 0d 07 03 01 01 00 00 00 00 00 00 00 00 ; [$b2e0] undefined
-    hex 80 80 80 80 80 80 80 80 00 00 00 00 00 00 00 00 ; [$b2f0] undefined
-    hex 00 d7 99 64 6c bd d3 10 d7 10 30 54 44 38 00 10 ; [$b300] undefined
-    hex 10 d1 de 10 1e d0 e0 00 d3 10 16 10 d6 10 00 00 ; [$b310] undefined
-    hex ab ff 40 9a 7f 6b 80 df 00 00 00 3f 7f 7f 3f 00 ; [$b320] undefined
-    hex eb ff 01 a5 52 52 06 fc 00 00 00 f8 fc fc f8 00 ; [$b330] undefined
-    hex f6 b6 f0 62 fe 7e fc d6 10 10 10 0a 32 64 60 68 ; [$b340] undefined
-    hex d2 92 d2 52 92 72 9e cc 6c 6c 6c 6c 6c 6c 20 10 ; [$b350] undefined
-    hex ed a3 f7 65 d7 72 a7 f5 10 10 10 10 10 10 10 10 ; [$b360] undefined
-    hex f0 ce 9d e6 36 e4 e4 74 7c 70 76 7a f8 78 78 f8 ; [$b370] undefined
-    hex a4 a4 98 39 d1 54 ad c0 78 38 70 50 38 38 28 24 ; [$b380] undefined
-    hex eb 51 bd 66 46 04 0d 79 30 10 40 f8 f8 f8 70 00 ; [$b390] undefined
-    hex ab ff 73 ed 57 3d 80 ff 00 00 0f 1f 3f 7f 7f 00 ; [$b3a0] undefined
-    hex eb ff d9 78 d8 f0 00 fc 00 00 fc fc fc fc fc 00 ; [$b3b0] undefined
-    hex 01 01 01 01 01 01 01 01 00 00 00 00 00 00 00 00 ; [$b3c0] undefined
-    hex 4f 4b 47 4e 4f 4b 4e 0f b0 b4 b8 b1 b0 b4 b1 30 ; [$b3d0] undefined
-    hex d0 72 f2 d2 f2 b2 f2 f2 22 80 00 20 00 40 00 00 ; [$b3e0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b3f0] undefined
-    hex 00 eb bb d4 1b 24 ff ff ff ff ff ff ec db 00 00 ; [$b400] undefined
-    hex 7f cc 8a 95 a2 89 32 ff ff ff fd fb ff f6 cd 00 ; [$b410] undefined
-    hex fd d8 b1 4d 9b 65 0b ff fe ff fe be 7c fa f4 00 ; [$b420] undefined
-    hex 02 5f f4 2b 55 1a 0f 90 00 00 00 00 00 00 00 00 ; [$b430] undefined
-    hex bf 6c c0 ca 4d f1 4b db 7f ff ff f5 fe ce f6 ff ; [$b440] undefined
-    hex fd d8 31 8d 9b 65 8b 43 fe ff fe 7e fc fa 74 fc ; [$b450] undefined
-    hex 08 fc d5 f9 6a b4 d4 21 00 00 00 00 00 00 00 00 ; [$b460] undefined
-    hex c3 76 f3 72 d9 fa a9 f3 0f 0f 0f 0f 07 07 07 0f ; [$b470] undefined
-    hex 39 78 7a 28 51 70 30 32 c0 80 80 d0 a0 80 c0 c0 ; [$b480] undefined
-    hex fd ab ff 6d df 6a bf f5 00 00 00 00 00 00 00 00 ; [$b490] undefined
-    hex c3 76 f3 78 df de 80 ff 0f 0f 0f 07 00 3f 7f 00 ; [$b4a0] undefined
-    hex 39 78 7a 68 d0 8e 27 ff c0 80 80 90 20 f0 d8 00 ; [$b4b0] undefined
-    hex 53 01 25 03 55 23 95 42 00 00 00 00 00 00 00 00 ; [$b4c0] undefined
-    hex 52 01 24 00 55 20 95 40 00 00 00 00 00 00 00 00 ; [$b4d0] undefined
-    hex 80 00 1e 32 32 32 32 3e 00 00 00 04 04 04 0c 00 ; [$b4e0] undefined
-    hex 03 01 f8 4c 4c 4c 4c 7c 00 00 01 91 91 91 b1 81 ; [$b4f0] undefined
-    hex 0f 2e 8c 5a 0b 2a 09 a3 00 01 03 07 07 07 07 0f ; [$b500] undefined
-    hex d8 f8 6a 38 71 78 30 32 00 00 80 c0 80 80 c0 c0 ; [$b510] undefined
-    hex 15 7f 6a 51 6e 61 46 7f 00 00 1d 3f 17 1e 39 00 ; [$b520] undefined
-    hex 50 ff 93 6d 49 15 cb ff 00 00 fc be fe fa 34 00 ; [$b530] undefined
-    hex 85 80 ca 94 9b 26 a8 ff ff ff f7 ef ec db 57 00 ; [$b540] undefined
-    hex 99 13 45 eb 89 33 4b ff fe fc ba 74 fe cc b4 00 ; [$b550] undefined
-    hex 52 01 24 00 55 aa f7 ff 00 00 00 00 00 00 00 00 ; [$b560] undefined
-    hex 1d ac 6e 2e 24 6c 1c 5c c0 40 40 40 40 40 c0 80 ; [$b570] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b580] undefined
-    hex 84 22 60 60 62 20 23 20 00 40 00 00 00 40 40 40 ; [$b590] undefined
-    hex c1 44 c0 40 c5 40 c6 41 80 80 80 80 80 80 80 80 ; [$b5a0] undefined
-    hex 00 7f 7f 60 6f 68 6b 6a ff 80 80 80 80 80 80 80 ; [$b5b0] undefined
-    hex 00 ff ff 00 ef 28 83 02 ff 00 00 00 00 00 28 28 ; [$b5c0] undefined
-    hex 00 fe fe 06 e6 26 86 06 fe 00 00 08 08 08 28 28 ; [$b5d0] undefined
-    hex 3e 32 32 32 32 32 32 3e 00 04 04 04 04 04 0c 00 ; [$b5e0] undefined
-    hex 7c 4c 4c 4c 4c 4c 4c 7c 81 91 91 91 91 91 b1 81 ; [$b5f0] undefined
-    hex 68 6c 6f 68 6a 6c 6f 68 80 83 80 80 80 83 80 80 ; [$b600] undefined
-    hex 68 6a 68 60 70 7f ff 00 80 80 87 80 8f 80 00 00 ; [$b610] undefined
-    hex 00 82 00 00 00 ff ff 00 28 28 ef 00 ff 00 00 00 ; [$b620] undefined
-    hex 06 86 06 06 06 fe fe 00 28 28 e8 08 f8 00 00 00 ; [$b630] undefined
-    hex 06 06 c6 06 86 06 c6 06 28 e8 28 28 28 e8 28 28 ; [$b640] undefined
-    hex fd ab ff 6d df 55 aa 55 00 00 00 00 00 00 00 00 ; [$b650] undefined
-    hex 00 04 c7 00 82 04 c7 00 28 eb 28 28 28 eb 28 28 ; [$b660] undefined
-    hex 01 01 00 00 00 00 00 00 00 00 01 01 01 01 01 01 ; [$b670] undefined
-    hex c4 67 e9 74 c3 e4 ab e3 0f 0f 07 0b 0c 0f 07 0f ; [$b680] undefined
-    hex 39 58 aa 28 51 f0 30 32 c0 a0 d0 d0 a0 00 c0 c0 ; [$b690] undefined
-    hex fd cb a2 94 cd 1f ad 8e 40 60 7d 3b 3f 7f 73 71 ; [$b6a0] undefined
-    hex bf d3 45 28 a2 f8 a5 51 02 06 be dc fc fe de ae ; [$b6b0] undefined
-    hex d6 9f 9d 25 9e 7f dd e7 2d 71 7b 5b 61 38 66 58 ; [$b6c0] undefined
-    hex 2b 59 39 25 59 fe bb f7 f4 ae de da 86 1c 66 1a ; [$b6d0] undefined
-    hex ac b9 da 41 c2 4d af d2 58 48 29 23 21 24 14 0d ; [$b6e0] undefined
-    hex 35 bd 5b 09 4a ba f6 4c 1a 12 94 c4 84 24 28 b0 ; [$b6f0] undefined
-    hex ed a6 f9 68 dc 6a bf f5 03 01 00 00 00 00 00 00 ; [$b700] undefined
-    hex b0 60 80 01 07 0a bf f5 c0 80 00 00 00 00 00 00 ; [$b710] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b720] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b730] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b740] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b750] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b760] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b770] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b780] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b790] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7a0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7b0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7c0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7d0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7e0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$b7f0] undefined
-    hex f2 f3 03 b2 b5 09 13 4c 01 00 00 01 02 06 2c b0 ; [$b800] undefined
-    hex f0 e0 c0 80 80 80 80 80 00 00 00 00 00 00 00 00 ; [$b810] undefined
-    hex 0f 1b 09 05 02 03 02 02 00 04 06 02 01 00 01 01 ; [$b820] undefined
-    hex f0 e0 c0 86 89 80 94 99 00 00 00 01 06 0e 0b 00 ; [$b830] undefined
-    hex 0f 1b 09 c5 e2 23 12 12 00 04 06 02 01 00 01 01 ; [$b840] undefined
-    hex 0f 21 4c 18 08 10 51 43 f0 fe ff ff ff ff be bc ; [$b850] undefined
-    hex fc 20 ce 92 a5 9c fd 1d 03 df 3f 7f 7b 63 03 e3 ; [$b860] undefined
-    hex ff 01 00 1f 90 97 94 14 00 fe c0 c0 40 c0 c3 c3 ; [$b870] undefined
-    hex ff 03 01 ff 04 fa 8a 8e 00 fc 00 00 03 07 77 37 ; [$b880] undefined
-    hex 00 35 0a 04 03 02 02 00 00 00 00 00 00 01 01 03 ; [$b890] undefined
-    hex 01 44 10 a0 c0 c0 c0 c0 00 00 00 00 00 00 00 00 ; [$b8a0] undefined
-    hex ff c7 1e 3c c9 73 c7 9d 00 38 e0 e0 30 80 00 02 ; [$b8b0] undefined
-    hex f8 fc 60 08 85 80 c4 33 07 03 1f 3f 1e 0f 03 c1 ; [$b8c0] undefined
-    hex ff c7 18 30 e0 40 c0 c0 00 38 e0 c0 00 80 00 00 ; [$b8d0] undefined
-    hex f8 fc 00 00 03 02 00 01 07 03 0f 07 02 03 01 01 ; [$b8e0] undefined
-    hex 8e 1a 2e 2c 5a 2e 1c 2a 70 e0 d0 d0 a0 d0 e0 d0 ; [$b8f0] undefined
-    hex bc 40 01 8d 9f 9f 9f df c3 83 81 01 01 01 01 3f ; [$b900] undefined
-    hex 80 80 80 80 80 c0 60 b0 00 00 00 00 00 00 80 40 ; [$b910] undefined
-    hex 02 03 03 02 05 09 13 6c 01 00 00 01 02 06 0c 10 ; [$b920] undefined
-    hex 98 8c 8e 87 81 c0 60 b0 00 00 00 00 00 00 80 40 ; [$b930] undefined
-    hex 12 33 33 e2 c5 09 13 6c 01 00 00 01 02 06 0c 10 ; [$b940] undefined
-    hex 3e 55 65 0d 66 3d 9a 48 c1 bb bb f3 99 c2 e7 f7 ; [$b950] undefined
-    hex 9d 3c 6c 5d 7a f6 6c 13 e3 c3 93 a3 87 0f 9f fc ; [$b960] undefined
-    hex d4 14 14 14 94 95 53 03 03 c2 c2 c3 43 c0 cf df ; [$b970] undefined
-    hex 8f 8a 8a 8e 8b 5e 5a fc 36 77 67 67 06 07 ff ff ; [$b980] undefined
-    hex 1d 1d 29 39 33 06 4a ac 3e 3e 7e 7e 7d 7b 37 77 ; [$b990] undefined
-    hex e4 e6 06 8e 7a 2e 1e 1e f8 f8 f8 70 84 d0 e0 e0 ; [$b9a0] undefined
-    hex 6c 67 64 6e ec 9c 10 0b f7 f8 fb f7 77 6f 6f 7c ; [$b9b0] undefined
-    hex 24 ec 34 0c 0c 0c 14 fc d8 10 c8 f0 f0 f0 e8 00 ; [$b9c0] undefined
-    hex 39 40 5f 5f 16 da 20 76 00 3b 33 33 03 61 f0 e3 ; [$b9d0] undefined
-    hex 84 c6 26 ae 66 c0 0c 8c 18 88 c8 c0 80 00 10 30 ; [$b9e0] undefined
-    hex 2a 50 68 70 70 34 68 6a ff ff ff ff ff ff ff ff ; [$b9f0] undefined
-    hex 60 8a bf 5d 7e 55 2a 70 1f 7f 7f ff ff ff ff ff ; [$ba00] undefined
-    hex 00 aa ff ed 47 9c 02 80 ff ff ff ff ff ff ff ff ; [$ba10] undefined
-    hex 2c 96 04 8e 1c 8a 5e 3c d0 e8 f8 f0 e0 f0 a0 c0 ; [$ba20] undefined
-    hex 30 70 68 60 07 0f 9f 7d ff ff ff ff f8 f0 60 00 ; [$ba30] undefined
-    hex 00 22 94 ab d5 ff ff fd ff dd 6b 54 2a 00 00 00 ; [$ba40] undefined
-    hex be 7a ee b4 fc d4 78 d0 40 80 00 40 00 00 00 00 ; [$ba50] undefined
-    hex ac 18 48 41 06 00 4e 0c 47 0f 5f de e8 70 20 00 ; [$ba60] undefined
-    hex be ba 8e 50 38 74 78 50 00 00 00 20 40 00 00 00 ; [$ba70] undefined
-    hex ec ca c8 c1 86 71 16 0e 03 07 07 0e 08 20 61 43 ; [$ba80] undefined
-    hex 31 19 ec ff 71 a2 82 4e c0 e0 10 00 00 0c 0c 80 ; [$ba90] undefined
-    hex ff b7 17 00 8d 15 fe 7f 00 00 00 c0 f2 ea 01 80 ; [$baa0] undefined
-    hex f6 e4 e5 4b 09 44 a9 e4 01 03 03 06 07 8b 46 0b ; [$bab0] undefined
-    hex 51 0f 15 3f 7f ff ff ff fe f0 ea c0 80 00 00 00 ; [$bac0] undefined
-    hex 9f c7 c0 a0 c4 ab c0 61 00 00 00 00 03 06 0f 0e ; [$bad0] undefined
-    hex ff 7f ff ff 3f 1f c5 e0 00 80 00 00 00 00 00 00 ; [$bae0] undefined
-    hex e9 e5 cb e7 cb cf 05 07 06 0a 04 08 04 00 02 00 ; [$baf0] undefined
-    hex ff ff ff ff ff ff fd f7 00 00 00 00 00 00 00 00 ; [$bb00] undefined
-    hex cb a5 4b ad e7 44 a0 4f 04 0a 04 02 00 00 00 00 ; [$bb10] undefined
-    hex ec ca c8 c1 c7 9f 9d 8a 03 07 07 0e 08 00 00 00 ; [$bb20] undefined
-    hex 31 19 ec ff ff ff 5f af c0 e0 10 00 00 00 00 00 ; [$bb30] undefined
-    hex fe d4 61 01 e3 fa 52 ea 00 00 00 00 00 01 a9 11 ; [$bb40] undefined
-    hex 10 60 93 47 bf 7f 7f ff 0f 1f 7c f8 c0 80 80 00 ; [$bb50] undefined
-    hex 80 87 18 25 80 36 ff ff 00 00 07 1f 7f c9 00 00 ; [$bb60] undefined
-    hex 17 cb 20 08 98 78 fa e7 00 00 c0 f0 60 80 01 00 ; [$bb70] undefined
-    hex fb f9 71 20 10 00 05 69 00 00 00 00 00 e0 fa fe ; [$bb80] undefined
-    hex 7f ff ff 7f 00 7c 43 9f 80 00 00 00 00 03 3c 00 ; [$bb90] undefined
-    hex f0 de b3 e7 f7 ef ae bc 00 20 4c 18 08 10 10 00 ; [$bba0] undefined
-    hex 03 df 31 6d 5a 63 02 e2 00 00 0e 12 21 00 01 01 ; [$bbb0] undefined
-    hex 02 02 07 07 0d 0c 0b 18 01 01 00 00 02 03 06 07 ; [$bbc0] undefined
-    hex 80 a0 80 c0 90 c0 a0 c8 00 00 00 00 00 00 00 00 ; [$bbd0] undefined
-    hex 14 14 31 23 08 6b 58 5c 0f 0f 0e 1c 3f 1c 3f 3f ; [$bbe0] undefined
-    hex e0 d0 e4 b0 e8 b2 f9 b6 00 00 00 00 00 00 00 00 ; [$bbf0] undefined
-    hex 45 2b 44 48 00 4b 14 41 3e 5c 3c 3c 7c 3f 7f 3e ; [$bc00] undefined
-    hex 5c fa 1c 7a 5c ba bc 38 a0 00 60 40 60 c0 40 c0 ; [$bc10] undefined
-    hex 45 28 44 48 00 48 14 41 3e 5f 3f 3f 7f 3f 7f 3e ; [$bc20] undefined
-    hex 5c ba 5c ba 1c 7a bc 38 a0 40 a0 40 e0 80 40 c0 ; [$bc30] undefined
-    hex c0 30 58 b8 1c 78 bc 38 00 c0 a0 40 e0 80 40 c0 ; [$bc40] undefined
-    hex 45 9b 9b 83 c0 ae 88 80 3a 7f 7f 7f 3f 7f 7f 7f ; [$bc50] undefined
-    hex ff 3d 21 07 ab ee cc 88 00 fe fe f8 54 f7 f7 f7 ; [$bc60] undefined
-    hex c0 b4 0c bc 00 23 a7 27 00 e9 f1 41 00 cc 48 c8 ; [$bc70] undefined
-    hex 00 da 50 da 00 36 50 76 00 00 00 00 00 40 00 00 ; [$bc80] undefined
-    hex ad 55 ff 95 c0 ae 88 80 00 00 00 7f 3f 7f 7f 7f ; [$bc90] undefined
-    hex 00 54 ff 81 2d ee cc 88 00 00 00 fe d0 f7 f7 f7 ; [$bca0] undefined
-    hex 00 00 00 2d c0 23 a7 27 00 00 00 d0 00 cc 48 c8 ; [$bcb0] undefined
-    hex 00 00 00 c0 00 34 50 76 00 00 00 00 00 40 00 00 ; [$bcc0] undefined
-    hex f8 e6 a8 d3 26 4c 59 5a 07 18 70 60 c1 83 86 84 ; [$bcd0] undefined
-    hex 3f cd 01 e3 31 0b 8a 4b c0 3e 0e 04 c2 f3 73 33 ; [$bce0] undefined
-    hex 9c 5c 5c 5c dc 59 58 5f 00 80 80 80 00 87 87 80 ; [$bcf0] undefined
-    hex 3b 2b 0a 2b 0b 6b 0a fb 00 33 33 30 30 f3 f3 03 ; [$bd00] undefined
-    hex cb 86 91 92 84 8a a3 88 3f 7f 7f 7f 7f 7f 7f 7f ; [$bd10] undefined
-    hex 0b 85 09 47 15 a7 b4 8f f4 fa f6 f8 ea 78 cb 70 ; [$bd20] undefined
-    hex fd d6 79 f6 59 fe ec 7b 00 20 80 00 a0 00 00 80 ; [$bd30] undefined
-    hex a0 ca 30 a2 44 94 e0 0a 00 00 00 00 00 00 00 00 ; [$bd40] undefined
-    hex 0b 84 08 00 d6 00 ff 55 f4 fb f7 ff ff ff 00 00 ; [$bd50] undefined
-    hex d5 20 05 a9 16 2b f4 00 fe dc f8 50 e1 c0 00 00 ; [$bd60] undefined
-    hex 60 d5 a8 d0 2a c0 ff 55 00 00 03 06 1f 3f 00 00 ; [$bd70] undefined
-    hex 03 fb da ab 02 de 4b 5b 00 00 01 00 01 01 00 00 ; [$bd80] undefined
-    hex 00 ba 00 ee ec 00 e6 85 00 00 00 00 00 00 18 7a ; [$bd90] undefined
-    hex 9d 26 53 46 6c d8 70 30 e3 d9 bc b8 90 20 80 c0 ; [$bda0] undefined
-    hex 0e 60 80 00 00 00 00 00 f0 80 00 00 00 00 00 00 ; [$bdb0] undefined
-    hex 20 60 c0 c0 c0 80 80 80 c0 80 00 00 00 00 00 00 ; [$bdc0] undefined
-    hex e3 0c 03 00 00 00 00 00 1f 03 00 00 00 00 00 00 ; [$bdd0] undefined
-    hex 73 ca d6 a4 5e 27 16 16 8c 35 7b 7b 31 18 09 0d ; [$bde0] undefined
-    hex 0f 08 03 06 00 02 02 01 04 07 04 01 03 01 01 00 ; [$bdf0] undefined
-    hex 44 88 16 84 00 14 0c 78 80 00 08 18 20 08 30 00 ; [$be00] undefined
-    hex 01 01 01 00 00 01 00 01 00 01 01 01 01 01 01 01 ; [$be10] undefined
-    hex a0 e0 a0 fb b0 ff a0 a0 40 40 40 47 4f 40 40 40 ; [$be20] undefined
-    hex 05 05 07 d3 05 ff 05 05 02 02 02 fe fa 02 02 02 ; [$be30] undefined
-    hex a0 40 0a 84 4a 97 aa 2a 00 00 00 00 00 00 00 00 ; [$be40] undefined
-    hex 00 00 44 aa 11 aa 57 aa 00 00 00 00 00 00 00 00 ; [$be50] undefined
-    hex b3 41 28 a0 10 ad 07 ab 4c 3e 1f 1f 0f 02 00 00 ; [$be60] undefined
-    hex ff c7 18 31 e7 4e d8 d0 00 38 e0 c0 00 80 06 0e ; [$be70] undefined
-    hex f8 fc 00 40 f3 1a 9c 15 07 03 0f 07 02 e3 e1 e9 ; [$be80] undefined
-    hex b0 be ac a4 bc be bc b0 0e 00 1a 1a 02 00 0e 0e ; [$be90] undefined
-    hex 91 fd e9 08 88 7d f8 11 ec 81 f5 f5 f5 81 ed ed ; [$bea0] undefined
-    hex 55 7d 61 07 ee ee cc 88 00 7e 7e 78 11 f7 f7 f7 ; [$beb0] undefined
-    hex 00 7b 3f 00 ee ee cc 88 00 00 00 00 11 7f 7f 7f ; [$bec0] undefined
-    hex 47 f3 e3 e7 1b e9 c9 c9 38 7c 7c 78 e4 76 76 76 ; [$bed0] undefined
-    hex 52 02 a7 47 8d 2c cb 58 a9 f1 50 a0 e2 c3 06 07 ; [$bee0] undefined
-    hex d4 54 b1 23 88 6b 58 5c 0f 8f 0e 9c 3f 1c 3f 3f ; [$bef0] undefined
-    hex c1 aa 9a f2 99 c2 65 b7 00 11 21 01 00 00 82 40 ; [$bf00] undefined
-    hex 62 c3 93 a2 85 09 93 ec 81 00 00 01 02 06 0c 10 ; [$bf10] undefined
-    hex 0f a9 e6 e5 4e 92 26 a4 f0 f3 fb fb f3 e7 cf cf ; [$bf20] undefined
-    hex 20 2a b4 b6 53 fb fb fc cf c5 43 41 a0 00 00 00 ; [$bf30] undefined
-    hex 00 5a ec fe 85 08 52 00 00 00 00 00 fa ff ff ff ; [$bf40] undefined
-    hex 81 03 df ab 5f fa ab 75 7e fc 20 50 00 00 00 00 ; [$bf50] undefined
-    hex 00 22 94 ab d5 ff 57 a1 ff dd 6b 54 2a 00 00 00 ; [$bf60] undefined
-    hex d0 ae fb 88 34 7b 38 75 7f 7f 07 73 f8 fc ff ff ; [$bf70] undefined
-    hex 0e 5e 30 44 3a ce 0e 3e f0 a0 c0 80 00 30 f0 c0 ; [$bf80] undefined
-    hex 26 32 26 4c 66 62 6c 32 f8 fc f8 f0 f8 fc f0 fd ; [$bf90] undefined
-    hex 26 32 26 44 26 22 6c 46 f8 fc f8 f8 f8 fc f0 f8 ; [$bfa0] undefined
-    hex 75 38 7b 34 88 fb ae d0 ff ff fc f8 73 07 7f 7f ; [$bfb0] undefined
-    hex 3e 0e ce 3a 44 30 5e 0e c0 f0 30 00 80 c0 a0 f0 ; [$bfc0] undefined
-    hex 00 78 f7 82 48 fd b7 00 ff ff ff ff b7 02 00 00 ; [$bfd0] undefined
-    hex 44 27 00 08 48 81 50 26 33 70 60 07 e7 66 20 00 ; [$bfe0] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$bff0] undefined
+;
+; ░▒▒▒▒▒▒.
+; ..░░░░░.
+; ░..░░░░.
+; ........
+; ░.░..▒▒▒
+; ....░.░░
+; .░.░...░
+; ........
+;
+    db $80,$3e,$9e,$00,$a0,$0b,$51,$00,$7e,$00,$00,$00,$07,$00,$00,$00 ; [$80
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$80
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒░
+; ▒░░░░░░░
+; ░░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.░░░░
+;
+    db $ff,$01,$7f,$fe,$00,$00,$e7,$ef,$00,$fe,$80,$00,$00,$ef,$08,$00 ; [$80
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$80
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░▒█░▒▒▒
+; ░▒▒░█▒▒░
+; ░▒░▒▒█▒░
+; .░▒██▒░░
+; ░░▒░▒▒░▒
+; .▒░▒█▒▒░
+; ░░▒░▒▒░░
+; .▒░▒▒▒░▒
+;
+    db $d8,$99,$a5,$5b,$d2,$29,$d3,$22,$37,$6e,$5e,$3c,$2d,$5e,$2c,$5d ; [$80
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░.░░░.░
+; ░░░.░░.░
+; ▒░░░░.░.
+; ░░.░.░.░
+; ░▒░░░░..
+; ░░.░░.░░
+; ░░░.░░..
+; ░░.░░..░
+;
+    db $dd,$ed,$7a,$d5,$bc,$db,$ec,$d9,$00,$00,$80,$00,$40,$00,$00,$00 ; [$80
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; .░.░.░.░
+;
+    db $ff,$22,$ff,$88,$ff,$22,$ff,$55,$00,$dd,$00,$77,$00,$dd,$00,$00 ; [$80
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░.░.░░
+; ░.░░░░.░
+; ░░░.░░░░
+; .░.░░.░.
+; .░░░░░░░
+; ...░.░.░
+; ░...░.░░
+; ..░....░
+;
+    db $eb,$bd,$ef,$5a,$7f,$15,$8b,$21,$00,$00,$00,$00,$00,$00,$00,$00 ; [$80
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$80
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒.▒░▒▒▒
+; ░░..█░░░
+; ▒▒░█░▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+;
+    db $ff,$22,$ff,$88,$cf,$3a,$ff,$88,$00,$dd,$00,$57,$08,$d5,$00,$77 ; [$80
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █.░▒▒▒▒░
+; █.░░▒▒░▒
+; .░░▒▒▒▒░
+; .░▒▒▒▒░▒
+; .░░▒▒░▒░
+; ░▒▒▒▒▒░▒
+; ........
+; ░░░░░░░░
+;
+    db $a1,$b2,$61,$42,$65,$82,$00,$ff,$9e,$8d,$1e,$3d,$1a,$7d,$00,$00 ; [$80
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░.░.░█
+; ▒░░░.░.█
+; ░░░.░.░.
+; ▒░░░.░..
+; ░░░.░.░.
+; ▒░░░░░░░
+; ........
+; .░.░....
+;
+    db $eb,$75,$ea,$74,$ea,$7f,$00,$50,$01,$81,$00,$80,$00,$80,$00,$00 ; [$80
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░▒░░▒▒░
+; ░.░▒▒░░█
+; ░.░░▒░░▒
+; ░▒░.░▒▒░
+; ░░░.░░▒░
+; ░.░▒.░░▒
+; ░..░▒░░▒
+; ░░░..░░░
+;
+    db $d9,$a7,$b6,$a9,$ed,$a6,$96,$e7,$26,$19,$09,$46,$02,$11,$09,$00 ; [$80
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░█▒▒░█▒▒
+; ░█▒▒░█▒▒
+; ▒░█▒▒░█▒
+; ░░░░░░░▒
+; ▒█▒█▒█▒░
+; █▒█▒█▒▒░
+; ▒█▒█▒█▒░
+; ░░░░░░░░
+;
+    db $cc,$cc,$66,$fe,$55,$a9,$55,$ff,$77,$77,$bb,$01,$fe,$fe,$fe,$00 ; [$80
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒░..
+; ▒░░░░░..
+; ▒░░░░░..
+; ........
+; ▒▒▒.▒..▒
+; ░░░.░..░
+; ░░░.▒.▒░
+; ........
+;
+    db $04,$7c,$7c,$00,$00,$e9,$e1,$00,$f8,$80,$80,$00,$e9,$00,$0a,$00 ; [$80
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+;
+    db $ff,$22,$ff,$88,$ff,$22,$ff,$88,$00,$dd,$00,$77,$00,$dd,$00,$77 ; [$80
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒░▒▒░▒░
+; ▒░▒..▒░▒
+; ░▒.█░.▒░
+; ▒.█░░░.▒
+; .█░░▒░░.
+; .▒░░░░░.
+; .█░▒░▒░.
+; .▒▒░░▒░.
+;
+    db $a5,$42,$99,$3c,$76,$3e,$6a,$1a,$5a,$a5,$52,$a1,$48,$40,$54,$64 ; [$81
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; .......░
+; ░█▒▒▒▒░.
+; ░▒▒▒▒▒░░
+; ░░█▒▒▒▒░
+; ░░▒▒▒▒▒░
+; ░░░█▒▒▒▒
+; ░░░▒▒▒▒▒
+; ░░░░░░░░
+;
+    db $01,$c2,$83,$e1,$c1,$f0,$e0,$ff,$00,$7c,$7c,$3e,$3e,$1f,$1f,$00 ; [$81
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░█▒▒░█▒▒
+; ░██▒░██▒
+; ▒░█▒▒░█▒
+; ▒░░░░░██
+; ▒▒░█▒▒░█
+; █▒░██▒░█
+; █▒▒░█▒▒░
+; ░░░░██▒░
+;
+    db $cc,$ee,$66,$7f,$33,$bb,$99,$fd,$77,$77,$bb,$83,$dd,$dd,$ee,$0e ; [$81
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░▒▒███▒░
+; ░▒██▒█▒▒
+; ░▒▒█▒█▒░
+; ░░▒░░░░.
+; ░▒▒█▒██▒
+; ░▒█▒▒███
+; ░▒▒▒▒█▒█
+; .░░░░░░░
+;
+    db $9d,$b4,$95,$de,$96,$a7,$85,$7f,$7e,$7f,$7e,$20,$7f,$7f,$7f,$00 ; [$81
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+;
+    db $00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08,$00 ; [$81
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒░▒░▒░▒.
+; ░░░░░░░.
+; ░░.░.░..
+; ........
+; ▒░▒.▒░▒░
+; ░░░.░░░░
+; .░..░░.░
+; ........
+;
+    db $54,$fe,$d4,$00,$45,$ef,$4d,$00,$aa,$00,$00,$00,$aa,$00,$00,$00 ; [$81
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ░▒░▒░░▒█
+; ██████░░
+; █▒█▒█▒▒░
+; ▒█▒█▒█░.
+; ░░░░░░░░
+;
+    db $ff,$ff,$ff,$ad,$ff,$a9,$56,$ff,$ff,$ff,$ff,$53,$fc,$fe,$fc,$00 ; [$81
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ████████
+; ░░░░░░██
+; █▒█▒▒▒░█
+; ▒█▒█▒█▒░
+; ░░░░░░░░
+;
+    db $ff,$ff,$ff,$ff,$ff,$a3,$55,$ff,$ff,$ff,$ff,$ff,$03,$fd,$fe,$00 ; [$81
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░.░.░░░
+; ........
+; ........
+; ░░░░░░░░
+; ▒█▒█▒█▒░
+; █▒█▒█▒▒░
+; ▒█▒█▒█▒░
+; ░░░░░░░░
+;
+    db $d7,$00,$00,$ff,$55,$a9,$55,$ff,$00,$00,$00,$00,$fe,$fe,$fe,$00 ; [$81
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; ░░░░░░░░
+; .░.░.░.░
+; ░.░.░.░.
+; ░░.░.░░░
+; ▒▒░▒▒▒.▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+;
+    db $55,$ff,$55,$aa,$d7,$20,$ff,$88,$00,$00,$00,$00,$00,$dd,$00,$77 ; [$81
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒▒.
+; ░░▒▒▒▒░.
+; ░░▒▒▒░░.
+; ░.░.░...
+; ░░░.█▒█▒
+; ░░▒.▒█▒▒
+; ░░░.█▒▒▒
+; ░░░.░░░░
+;
+    db $c8,$c2,$c6,$a8,$ea,$c4,$e8,$ef,$3e,$3c,$38,$00,$0f,$2f,$0f,$00 ; [$81
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░.
+; ░░░░░░░.
+; ░░▒▒▒░░.
+; ░.░.░...
+; ░░░.█▒█▒
+; ░░▒.▒█▒▒
+; ░░░.█▒▒▒
+; ░░░.░░░░
+;
+    db $fe,$fe,$c6,$a8,$ea,$c4,$e8,$ef,$00,$00,$38,$00,$0f,$2f,$0f,$00 ; [$81
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░....█░
+; ▒░....▒░
+; ░░....█░
+; ▒░....▒░
+; ░░....▒░
+; ▒░....█░
+; ░░....▒░
+; ▒░....▒░
+;
+    db $c3,$41,$c3,$41,$c1,$43,$c1,$41,$02,$82,$02,$82,$02,$82,$02,$82 ; [$81
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ..░.░░..
+; ..░.....
+; ░..░....
+; ..░..░░░
+; ░.░...░░
+; ▒▒▒░▒▒▒░
+; ▒░▒▒▒░▒▒
+; ▒▒▒░▒▒▒░
+;
+    db $2c,$20,$90,$27,$a3,$11,$44,$11,$00,$00,$00,$00,$00,$ee,$bb,$ee ; [$81
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ████████
+; ███▒██▒█
+; █▒██████
+; ██████░░
+; ██░░░░█▒
+; █░▒▒▒█▒█
+; ░▒█▒█▒█▒
+; ░░░░░░░░
+;
+    db $ff,$ed,$bf,$ff,$fe,$c5,$aa,$ff,$ff,$ff,$ff,$fc,$c3,$bf,$7f,$00 ; [$81
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░.░....
+; ░.░.░.░.
+; ░░.░....
+; ........
+; ░░..░░..
+; .░......
+; ░░..░░░.
+; ........
+;
+    db $d0,$aa,$d0,$00,$cc,$40,$ce,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$81
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ...▒░░░.
+; .█░.█░░.
+; .▒░.▒▒░.
+; .█░▒▒▒░.
+; .▒░░▒░░.
+; .▒▒▒▒░░.
+; .▒░▒░▒░.
+; .█▒▒░▒░.
+;
+    db $0e,$6e,$22,$62,$36,$06,$2a,$4a,$10,$48,$4c,$5c,$48,$78,$54,$74 ; [$82
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ........
+; .░█▒█▒█▒
+; .░░▒░▒░░
+; .░░░░░░░
+; ........
+; ▒░▒░▒▒▒░
+; ▒▒▒▒▒░▒▒
+; ░▒░▒▒▒▒▒
+;
+    db $00,$6a,$6b,$7f,$00,$51,$04,$a0,$00,$3f,$14,$00,$00,$ae,$fb,$5f ; [$82
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░..
+; ........
+; ▒▒▒░..░░
+; ░░░..░░░
+; ░░..░░▒░
+; ...░░▒▒░
+;
+    db $00,$7e,$7c,$00,$13,$e7,$cd,$19,$fe,$80,$80,$00,$e0,$00,$02,$06 ; [$82
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; .▒░░░░░.
+; ..▒░░░░.
+; ........
+; ░░..▒▒▒▒
+; ░░░..▒░░
+; ▒▒░░.▒▒░
+; ▒▒▒░░.▒░
+;
+    db $02,$3e,$1e,$00,$c0,$e3,$31,$19,$fc,$40,$20,$00,$0f,$04,$c6,$e2 ; [$82
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$82
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░░█████
+; ░██..███
+; ▒░▒░..██
+; ....░..█
+; ▒▒▒.▒▒.█
+; ░░░.▒░.░
+; ░░░.▒░░.
+; ........
+;
+    db $ff,$e7,$53,$09,$01,$e5,$e6,$00,$1f,$67,$a3,$01,$ed,$08,$08,$00 ; [$82
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒█▒█▒█▒
+; ░▒▒██▒▒▒
+; ░▒████▒▒
+; ░▒█▒█▒▒▒
+; ░▒▒██▒█▒
+; ░▒█▒██▒▒
+; ░▒▒█▒▒▒▒
+; ░▒▒▒█▒▒▒
+;
+    db $aa,$98,$bc,$a8,$9a,$ac,$90,$88,$7f,$7f,$7f,$7f,$7f,$7f,$7f,$7f ; [$82
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; █▒▒▒░▒..
+; ▒▒░░.░░.
+; ▒▒░░░...
+; ........
+; ▒░░.▒▒░▒
+; ░░░.▒░░░
+; ▒░░.▒░░░
+; ........
+;
+    db $88,$36,$38,$00,$62,$e7,$67,$00,$f4,$c0,$c0,$00,$8d,$08,$88,$00 ; [$82
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$82
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$82
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$82
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒▒░▒▒░▒
+; ▒░▒▒░▒▒░
+; ░▒▒░▒▒░▒
+; ░▒░▒▒░▒░
+; ▒░▒░▒▒▒▒
+; ░▒░▒▒░▒░
+; ▒░▒░▒▒░▒
+; ░░▒▒░▒░▒
+;
+    db $92,$49,$92,$a5,$50,$a5,$52,$ca,$6d,$b6,$6d,$5a,$af,$5a,$ad,$35 ; [$82
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░.░░░
+; ░.░░░░.░
+; ░░░░░░░░
+; ░▒░▒░░▒░
+; .░░░░░░░
+; ░░░░░░░░
+; ░░▒░░░░░
+; ░░░░░░▒░
+;
+    db $f7,$bd,$ff,$ad,$7f,$ff,$df,$fd,$00,$00,$00,$52,$00,$00,$20,$02 ; [$82
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░▒█░▒▒▒
+; ░▒▒░█▒▒░
+; ░▒░▒▒█▒░
+; .░▒██▒░░
+; ░░▒░▒▒░▒
+; .▒░▒█▒▒░
+; ▒.░░▒▒░░
+; .██▒░░░▒
+;
+    db $d8,$99,$a5,$5b,$d2,$29,$33,$6e,$37,$6e,$5e,$3c,$2d,$5e,$8c,$71 ; [$82
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░░▒░░░░
+; ░░░░░░░░
+; ░░░░▒░░▒
+; ░.░...░░
+; ..░..░░░
+; ░..░....
+; ..░.....
+; ..░.░░..
+;
+    db $ef,$ff,$f6,$a3,$27,$90,$20,$2c,$10,$00,$09,$00,$00,$00,$00,$00 ; [$82
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ..░.░.░░
+; ...░.░..
+; ....░.░░
+; .....░.░
+; .░...░░░
+; ...░.░.░
+; ....░.░.
+; ..░..░░░
+;
+    db $2b,$14,$0b,$05,$47,$15,$0a,$27,$00,$00,$00,$00,$00,$00,$00,$00 ; [$82
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .▒░▒▒░░.
+; .█░░▒░░.
+; .▒░▒░▒░.
+; .▒▒░░░░.
+; ▒░......
+; ░░▒▒░░▒▒
+; ▒▒▒░▒▒░░
+; ▒░▒░▒░░▒
+;
+    db $26,$76,$2a,$1e,$40,$cc,$13,$56,$58,$48,$54,$60,$80,$33,$ec,$a9 ; [$83
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░▒
+; ▒▒░▒▒▒▒▒
+; .░.░.░.░
+; ░.░.░.░.
+; ▒▒▒░▒▒░▒
+; ░▒░▒░▒▒▒
+; ▒░▒▒▒▒░▒
+; ░▒░▒░░▒░
+;
+    db $0a,$20,$55,$aa,$12,$a8,$42,$ad,$f5,$df,$00,$00,$ed,$57,$bd,$52 ; [$83
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.░░░..░
+; ░.░░▒░░░
+; ░.░░▒▒▒░
+; ..░░▒▒▒░
+; ░.░░░░░.
+; ░.░░▒▒▒▒
+; ░.░▒▒▒▒▒
+; ........
+;
+    db $b9,$b7,$b1,$31,$be,$b0,$a0,$00,$00,$08,$0e,$0e,$00,$0f,$1f,$00 ; [$83
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ..▒▒░.▒░
+; ░░▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ░░░░░.▒░
+; ▒▒▒▒▒.▒░
+; ▒▒▒▒▒.▒░
+; ........
+;
+    db $09,$c9,$09,$09,$f9,$01,$01,$00,$32,$32,$f2,$f2,$02,$fa,$fa,$00 ; [$83
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .█▒..███
+; .▒▒..██▒
+; .█▒..█▒█
+; .▒▒..███
+; .▒▒..█▒█
+; .█▒..███
+; .▒████▒█
+; ........
+;
+    db $47,$06,$45,$07,$05,$47,$3d,$00,$67,$67,$67,$67,$67,$67,$7f,$00 ; [$83
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░░.░░░░
+; ░.░░.░░░
+; .░░░░░░.
+; ░░░.░.░░
+; ░.░░░░░░
+; .░░.░░.░
+; ░.░░░░░░
+; ░░░░░.░░
+;
+    db $ef,$b7,$7e,$eb,$bf,$6d,$bf,$fb,$00,$00,$00,$00,$00,$00,$00,$00 ; [$83
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; .░░▒░▒░░
+; .░░░▒░▒░
+; .░░░▒██░
+; .░░░▒▒▒░
+; .░░▒░░░.
+; .░░░▒░▒░
+; .░░░░░░░
+; ........
+;
+    db $6b,$75,$77,$71,$6e,$75,$7f,$00,$14,$0a,$0e,$0e,$10,$0a,$00,$00 ; [$83
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒░..████
+; ▒░..██▒▒
+; ▒░..██▒▒
+; ░░......
+; ▒░..█▒█▒
+; ▒░..▒█▒▒
+; ▒█▒▒█▒▒▒
+; ........
+;
+    db $4f,$4c,$4c,$c0,$4a,$44,$48,$00,$8f,$8f,$8f,$00,$8f,$8f,$ff,$00 ; [$83
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; █▒▒▒▒▒▒.
+; █▒▒▒▒▒▒.
+; ████▒▒▒.
+; ▒▒▒▒░▒▒.
+; ▒░░░░▒▒.
+; █▒▒▒▒▒▒.
+; ░░░░░░░.
+; ........
+;
+    db $80,$80,$f0,$08,$78,$80,$fe,$00,$fe,$fe,$fe,$f6,$86,$fe,$00,$00 ; [$83
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; ▒▒▒▒░.█.
+; ▒▒▒.██.░
+; ▒▒.██▒█.
+; ▒.█▒█.░░
+; ▒█░██░█.
+; .██.█░.░
+; █▒█░░.░░
+;
+    db $02,$0a,$0d,$1a,$2b,$7e,$6d,$bb,$fc,$f2,$ec,$de,$b8,$da,$68,$e0 ; [$83
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒▒░▒
+; ▒▒░░░▒▒░
+; ░░░...▒░
+; ▒░....▒░
+; ░░....█░
+; ▒░....▒░
+; ░░....█░
+; ▒░....▒░
+;
+    db $82,$39,$e1,$41,$c3,$41,$c3,$41,$7d,$c6,$02,$82,$02,$82,$02,$82 ; [$83
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░.▒▒▒▒▒▒
+; ░.▒▒▒▒▒▒
+; ░░.▒▒▒▒▒
+; ░░.▒▒▒▒▒
+; ░░.▒▒▒▒▒
+; ░.▒▒▒▒▒▒
+; ░░.▒▒▒▒▒
+; ░░.▒▒▒▒▒
+;
+    db $80,$80,$c0,$c0,$c0,$80,$c0,$c0,$3f,$3f,$1f,$1f,$1f,$3f,$1f,$1f ; [$83
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░▒░░░░░
+; ▒▒░..░░▒
+; ░░....▒░
+; ░░....█▒
+; ░░....█░
+; ▒▒....▒▒
+; ░░▒██▒█░
+; ░▒▒▒░▒▒▒
+;
+    db $df,$26,$c1,$c2,$c3,$00,$db,$88,$20,$c1,$02,$03,$02,$c3,$3e,$77 ; [$83
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; ░░░░░░░░
+; .░.░.░.░
+; ░▒▒▒░▒▒▒
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+;
+    db $55,$ff,$55,$88,$ff,$22,$ff,$88,$00,$00,$00,$77,$00,$dd,$00,$77 ; [$83
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ██████.▒
+; ██████.▒
+; ██████.▒
+; ██████.▒
+; █████.░▒
+; █████.░▒
+; █████.░▒
+; ████.░░▒
+;
+    db $fc,$fc,$fc,$fc,$fa,$fa,$fa,$f6,$fd,$fd,$fd,$fd,$f9,$f9,$f9,$f1 ; [$83
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.██████
+; ░.██████
+; ░.██████
+; ░.██████
+; ░░.█████
+; ░.░█████
+; ░░.█████
+; ▒░.░████
+;
+    db $bf,$bf,$bf,$bf,$df,$bf,$df,$5f,$3f,$3f,$3f,$3f,$1f,$1f,$1f,$8f ; [$83
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ███████░
+; █████░▒█
+; ████░██▒
+; ███░████
+; ██░███░█
+;
+    db $ff,$ff,$ff,$ff,$fd,$fe,$ff,$ff,$ff,$ff,$ff,$fe,$fb,$f7,$ef,$dd ; [$84
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░....
+; .....░░.
+; ▒..░░░░.
+; ..░░░░░.
+; ..░░░░░░
+; .░░░░░░░
+;
+    db $00,$7e,$70,$06,$1e,$3e,$3f,$7f,$fe,$80,$80,$00,$80,$00,$00,$00 ; [$84
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒░
+; ▒░░░░░░░
+; ....░░░░
+; ░░░.....
+; ░░░░░..░
+; ░░░░░░.░
+; ▒░▒░░░░.
+; ░▒░▒░▒░.
+;
+    db $01,$7f,$0f,$e0,$f9,$fd,$5e,$aa,$fe,$80,$00,$00,$00,$00,$a0,$54 ; [$84
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ....▒▒▒.
+; ░░......
+; ░░░░....
+; ........
+; ▒▒.▒▒▒░.
+; ░░.▒░░░.
+; ░░.▒░░░.
+; ........
+;
+    db $00,$c0,$f0,$00,$02,$ce,$ce,$00,$0e,$00,$00,$00,$dc,$10,$10,$00 ; [$84
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░.░░░.░
+; ░.░░.░░.
+; .░░░░░░▒
+; ░░.░.░.█
+; .░░.░▒▒█
+; ░.░.█▒▒█
+; ░░░░█▒▒░
+; ▒▒▒░░█▒▒
+;
+    db $dd,$b6,$7e,$d5,$69,$a9,$f9,$1c,$00,$00,$01,$01,$07,$0f,$0e,$e7 ; [$84
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░░░░▒░░
+; ▒▒░▒░░░█
+; ░░▒░▒░██
+; ░░░░░░▒█
+; ██████░░
+; █▒█▒█▒▒░
+; ▒█▒█▒█░.
+; ░░░░░░░░
+;
+    db $fb,$2f,$d7,$fd,$ff,$a9,$56,$ff,$04,$d1,$2b,$03,$fc,$fe,$fc,$00 ; [$84
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █░░.░███
+; ▒▒░.░███
+; ▒░░.░█▒▒
+; ▒▒░.░███
+; ▒░░.░█▒▒
+; █░░.░██▒
+; ▒▒▒███▒█
+; ░░░░░░░░
+;
+    db $ef,$2f,$6c,$2f,$6c,$ee,$1d,$ff,$87,$c7,$87,$c7,$87,$87,$ff,$00 ; [$84
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ████.░▒▒
+; ████.░▒░
+; ███.░░▒▒
+; ███.░▒▒░
+; ███.░░▒▒
+; ██.░▒▒▒░
+; ██.░░▒▒▒
+; █.░░▒▒░▒
+;
+    db $f4,$f5,$ec,$e9,$ec,$d1,$d8,$b2,$f3,$f2,$e3,$e6,$e3,$ce,$c7,$8d ; [$84
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░.████
+; ▒░.░████
+; ░░░.░███
+; ▒░.░.███
+; ░░░..███
+; ▒░░░░.██
+; ░░░.░.██
+; ▒░░░.░.█
+;
+    db $ef,$5f,$ef,$57,$e7,$7b,$eb,$75,$0f,$8f,$07,$87,$07,$83,$03,$81 ; [$84
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ██▒█▒█▒▒
+; ██████▒▒
+; ███▒█▒█▒
+; ███████▒
+; ████▒█▒█
+; ████████
+; █████▒█▒
+; ███████▒
+;
+    db $d4,$fc,$ea,$fe,$f5,$ff,$fa,$fe,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$84
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █░..▒▒▒▒
+; ▒░..▒░░░
+; ▒░..▒░░░
+; ....░░.░
+; █░..▒▒░▒
+; ░░..▒░░░
+; ▒░▒▒▒░░░
+; ........
+;
+    db $c0,$47,$47,$0d,$c2,$c7,$47,$00,$8f,$88,$88,$00,$8d,$08,$b8,$00 ; [$84
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░..░░..░
+; ░..░░..░
+; ░..░░..░
+; ........
+; ░..░░..░
+; ░..░░..░
+; ░░░░░░░░
+; ........
+;
+    db $99,$99,$99,$00,$99,$99,$ff,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$84
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$84
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒█▒▒░█▒▒
+; ▒█▒▒░█▒▒
+; █▒█▒▒░█▒
+; ██▒░░░█▒
+; ▒█▒█▒▒░█
+; ████▒▒░█
+; █▒█▒█▒▒░
+; █████▒▒░
+;
+    db $4c,$4c,$a6,$de,$53,$f3,$a9,$f9,$f7,$f7,$fb,$e3,$fd,$fd,$fe,$fe ; [$84
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ....▒░░░
+; ▒▒░▒.▒░▒
+; ░░░░░.▒░
+; ░▒▒▒░▒.▒
+; ░░░░░░.▒
+; ▒▒░▒▒▒.▒
+; ░░░░░░.▒
+; ░▒▒▒░▒.▒
+;
+    db $07,$22,$f9,$88,$fc,$20,$fc,$88,$08,$d5,$02,$75,$01,$dd,$01,$75 ; [$84
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░░░.▒░
+; ▒░▒▒▒.▒▒
+; ░░░░..▒░
+; ▒▒▒.▒▒▒░
+; ░░░.▒░░░
+; ▒░▒.▒░▒▒
+; ░░░▒.▒░░
+; ▒▒▒▒.▒▒░
+;
+    db $f9,$40,$f1,$01,$e7,$44,$e3,$01,$02,$bb,$02,$ee,$08,$ab,$14,$f6 ; [$84
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; █▒█▒█▒░.
+; █░▒█░░░.
+; ░▒█░░░░.
+; ▒██.....
+; ▒█▒.▒▒▒▒
+; ▒▒░.▒░░░
+; █░░.▒░░░
+; ........
+;
+    db $aa,$de,$be,$60,$40,$27,$e7,$00,$fc,$b0,$60,$e0,$ef,$c8,$88,$00 ; [$85
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░▒.░░..
+; ░░░░░.░.
+; ░░.░.░..
+; ........
+; ▒░▒.░░░.
+; ░░░.░.░.
+; .░..░░..
+; .......░
+;
+    db $4c,$fa,$d4,$00,$4e,$ea,$4c,$01,$a0,$00,$00,$00,$a0,$00,$00,$00 ; [$85
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒░░░░▒░
+; ░░░▒░░░░
+; ░░░░░░░▒
+; .░░░░░░░
+; ░░.░░.░░
+; ░░░.....
+; ▒..▒█▒░▒
+; .█▒█▒███
+;
+    db $bd,$ef,$fe,$7f,$db,$e0,$0a,$57,$42,$10,$01,$00,$00,$00,$9d,$7f ; [$85
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .███████
+; ▒..█████
+; ▒▒▒.████
+; ▒▒▒..███
+; ░▒▒░░.██
+; ▒▒░▒▒▒.█
+; ░░░░░░░.
+; ░▒▒▒░▒▒.
+;
+    db $7f,$1f,$0f,$07,$9b,$21,$fe,$88,$7f,$9f,$ef,$e7,$63,$dd,$00,$76 ; [$85
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .░░░░░▒░
+; .░░░▒░░░
+; .░░▒░▒█▒
+; .░░░▒░▒▒
+; .░░░░░░░
+; .░░░▒░▒░
+; .░░▒░▒░░
+; .░░░▒░▒░
+;
+    db $7d,$77,$6a,$74,$7f,$75,$6b,$75,$02,$08,$17,$0b,$00,$0a,$14,$0a ; [$85
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒▒▒░
+; ░.░░▒██░
+;
+    db $b1,$b1,$b1,$b1,$b1,$b1,$b1,$b7,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e ; [$85
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒░▒░▒░▒.
+; ░▒░▒░▒░.
+; ████▒▒▒.
+; ▒▒▒▒░▒▒.
+; ▒░░░░▒▒.
+; █▒▒▒▒▒▒.
+; █▒▒▒▒▒▒.
+; █▒▒▒▒▒▒.
+;
+    db $54,$aa,$f0,$08,$78,$80,$80,$80,$aa,$54,$fe,$f6,$86,$fe,$fe,$fe ; [$85
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ........
+; ..░..░..
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+;
+    db $00,$24,$7e,$00,$00,$e7,$e7,$00,$00,$00,$80,$00,$ef,$08,$08,$00 ; [$85
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒████▒░
+; ░▒████▒░
+; ░▒████▒▒
+; ░▒▒▒░░░▒
+; ░▒██▒███
+; ░▒██▒█▒▒
+; ░▒██▒█▒▒
+; ░▒▒▒▒▒▒░
+;
+    db $bd,$bd,$bc,$8e,$b7,$b4,$b4,$81,$7e,$7e,$7f,$71,$7f,$7f,$7f,$7e ; [$85
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ██████▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; ░░░░░░░░
+; ███░████
+; ▒▒▒░█▒▒▒
+; ▒▒▒░█▒▒▒
+; ░░░░░░░░
+;
+    db $fd,$81,$81,$ff,$ff,$18,$18,$ff,$fe,$fe,$fe,$00,$ef,$ef,$ef,$00 ; [$85
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █▒▒░▒░░.
+; █▒▒░▒░░.
+; ▒▒▒░▒░░.
+; ░░░░░░░.
+; ░█▒░░▒░.
+; ░▒▒░▒░░.
+; ░▒▒░░░░.
+; ░░░▒░▒░.
+;
+    db $96,$96,$16,$fe,$da,$96,$9e,$ea,$e8,$e8,$e8,$00,$64,$68,$60,$14 ; [$85
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒▒░▒▒░▒
+; ░░░▒░▒▒▒
+; ░▒▒░▒░░▒
+; ▒▒░▒░▒▒░
+; ▒░▒░▒░░▒
+; ░▒░▒░▒░▒
+; ░▒░░▒░▒░
+; ▒░▒▒░▒░░
+;
+    db $92,$e8,$96,$29,$56,$aa,$b5,$4b,$6d,$17,$69,$d6,$a9,$55,$4a,$b4 ; [$85
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒.██████
+; ▒....███
+; ▒.░▒▒...
+; ▒.░▒▒▒▒▒
+; ▒.░░▒▒▒.
+; ▒.....▒▒
+; ▒.████..
+; ▒.██████
+;
+    db $3f,$07,$20,$20,$30,$00,$3c,$3f,$bf,$87,$98,$9f,$8e,$83,$bc,$bf ; [$85
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒▒███▒░
+; ░▒██▒█▒▒
+; ░▒▒█▒█▒░
+; ░░▒░░░░.
+; ░▒▒█▒██▒
+; ░▒█▒▒███
+; █░░░░█▒█
+; ███▒▒░░░
+;
+    db $9d,$b4,$95,$de,$96,$a7,$fd,$e7,$7e,$7f,$7e,$20,$7f,$7f,$87,$f8 ; [$85
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ██████.▒
+; █████.▒▒
+; █████.▒░
+; ████.▒▒▒
+; ██..▒░░░
+; █.▒▒▒▒▒░
+; .▒▒░░░░.
+; ▒▒▒▒▒▒▒░
+;
+    db $fc,$f8,$f9,$f0,$c7,$81,$1e,$01,$fd,$fb,$fa,$f7,$c8,$be,$60,$fe ; [$85
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░▒░░░░.
+; ░▒░░....
+; ▒░......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $5e,$b0,$40,$80,$80,$80,$80,$80,$a0,$40,$80,$00,$00,$00,$00,$00 ; [$85
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░▒░▒░░
+; ....▒░▒░
+; .....▒░░
+; ......░░
+; .......░
+; .......░
+; .......░
+; .......▒
+;
+    db $eb,$05,$03,$03,$01,$01,$01,$00,$14,$0a,$04,$00,$00,$00,$00,$01 ; [$86
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒█▒█▒█▒.
+; ▒▒▒▒▒░░.
+; ▒▒▒▒▒░..
+; ........
+; ██▒░....
+; ▒▒░....░
+; ░░....░░
+; ......░░
+;
+    db $54,$06,$04,$00,$d0,$21,$c3,$03,$fe,$f8,$f8,$00,$e0,$c0,$00,$00 ; [$86
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒█▒█▒▒░.
+; .▒▒▒▒▒░.
+; ..▒▒▒▒░.
+; ........
+; ....▒█▒▒
+; .▒░..▒▒░
+; .▒░░.▒▒░
+; .▒░░..▒░
+;
+    db $52,$02,$02,$00,$04,$21,$31,$31,$fc,$7c,$3c,$00,$0f,$46,$46,$42 ; [$86
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░....░░░
+; ░....░▒.
+; ░....░..
+; .....░░░
+; ░....░░░
+; ░.......
+; ░..▒▒▒▒▒
+; ........
+;
+    db $87,$84,$84,$07,$87,$80,$80,$00,$00,$02,$00,$00,$00,$00,$1f,$00 ; [$86
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .▒░░░.▒░
+; .▒░▒..▒░
+; .▒░...▒░
+; .▒░░░.▒░
+; .▒░░░.▒░
+; ......▒░
+; ▒▒▒▒▒.▒░
+; ........
+;
+    db $39,$21,$21,$39,$39,$01,$01,$00,$42,$52,$42,$42,$42,$02,$fa,$00 ; [$86
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒███▒███
+; ██▒█████
+; ▒███▒█▒█
+; ██▒█████
+; █████▒██
+; ███▒████
+; ████████
+; ████████
+;
+    db $77,$df,$75,$df,$fb,$ef,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$86
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ███▒▒███
+; ████▒░██
+; ██▒▒▒░▒█
+; ███▒░▒░█
+; ████████
+; ████████
+;
+    db $ff,$ff,$e7,$f7,$c5,$eb,$ff,$ff,$ff,$ff,$ff,$fb,$fb,$f5,$ff,$ff ; [$86
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░█▒█▒█▒░
+; ░▒▒█▒▒▒░
+; █░▒▒▒█▒░
+; █░▒█▒█▒░
+; ██░▒▒▒▒░
+; ██░▒▒█▒░
+; ███░▒█▒░
+; ███░▒█▒░
+;
+    db $d5,$91,$c5,$d5,$e1,$e5,$f5,$f5,$7e,$7e,$be,$be,$de,$de,$ee,$ee ; [$86
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ████░▒▒░
+; ████░▒▒░
+; █████░▒░
+; █████░▒░
+; ██████░░
+; ██████░░
+; ███████░
+; ███████░
+;
+    db $f9,$f9,$fd,$fd,$ff,$ff,$ff,$ff,$f6,$f6,$fa,$fa,$fc,$fc,$fe,$fe ; [$86
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░▒▒░▒█▒▒
+; ░▒▒░▒▒▒▒
+; █░▒░▒█▒▒
+; █░▒░▒▒▒▒
+; ██░░▒█▒▒
+; ██░░▒▒▒▒
+; ███░▒█▒▒
+; ███░▒▒▒▒
+;
+    db $94,$90,$d4,$d0,$f4,$f0,$f4,$f0,$6f,$6f,$af,$af,$cf,$cf,$ef,$ef ; [$86
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒█▒░▒█▒▒
+; ▒▒▒░▒▒▒▒
+; ▒█▒░▒█▒▒
+; ▒▒▒░▒▒▒▒
+; ▒█▒░▒█▒▒
+; ▒▒▒░▒▒▒▒
+; ▒█▒░▒█▒▒
+; ▒▒▒░▒▒▒▒
+;
+    db $54,$10,$54,$10,$54,$10,$54,$10,$ef,$ef,$ef,$ef,$ef,$ef,$ef,$ef ; [$86
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒█▒█▒░░
+; ░░▒█▒▒░░
+; ░▒█▒▒░▒░
+; ░▒▒█▒▒░░
+; ░▒█▒▒░▒░
+; ░▒▒█▒░░░
+; ░▒█▒▒▒▒░
+; ░▒▒█▒▒░░
+;
+    db $ab,$d3,$a5,$93,$a5,$97,$a1,$93,$7c,$3c,$7a,$7c,$7a,$78,$7e,$7c ; [$86
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░▒█▒▒░░░
+; ▒█▒▒▒▒░▒
+; ░▒▒▒░░░░
+; ▒█▒▒▒▒▒▒
+; ░▒█▒▒░░░
+; ▒▒▒▒▒▒░▒
+; ▒██▒░░░░
+; ░▒▒▒▒▒▒▒
+;
+    db $a7,$42,$8f,$40,$a7,$02,$6f,$80,$78,$fd,$70,$ff,$78,$fd,$f0,$7f ; [$86
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $28,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$86
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░.░░░..░
+; ░.░░▒░░░
+; ░.░░▒▒▒░
+; ..░░▒▒▒░
+; ░.░░▒..░
+; ░.░░▒░░░
+; ░.░░▒▒▒░
+; ..░░▒▒▒░
+;
+    db $b9,$b7,$b1,$31,$b1,$b7,$b1,$31,$00,$08,$0e,$0e,$08,$08,$0e,$0e ; [$86
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ..▒▒░.▒░
+; ░░▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ..▒▒░.▒░
+; ░░▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+;
+    db $09,$c9,$09,$09,$09,$c9,$09,$09,$32,$32,$f2,$f2,$32,$32,$f2,$f2 ; [$86
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ████.▒▒░
+; ████.▒▒░
+; ████.▒▒░
+; ████.▒▒░
+; ████.▒▒░
+; ████.▒░░
+; ████.▒▒░
+; ████.▒▒░
+;
+    db $f1,$f1,$f1,$f1,$f1,$f3,$f1,$f1,$f6,$f6,$f6,$f6,$f6,$f4,$f6,$f6 ; [$87
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░░.████
+; ▒░░.████
+; ▒▒░.████
+; ▒░░.████
+; ░▒░.████
+; ░░░.████
+; ░▒░.████
+; ░░░.████
+;
+    db $6f,$6f,$2f,$6f,$af,$ef,$af,$ef,$8f,$8f,$cf,$8f,$4f,$0f,$4f,$0f ; [$87
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒█▒█▒█▒.
+; ▒▒▒▒▒░░.
+; ▒▒▒▒▒░..
+; .......█
+; ██▒░..██
+; ▒▒░..███
+; ░░..███.
+; ....██.▒
+;
+    db $54,$06,$04,$01,$d3,$27,$ce,$0c,$fe,$f8,$f8,$01,$e3,$c7,$0e,$0d ; [$87
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒█▒█▒▒░.
+; .▒▒▒▒▒░.
+; ..▒▒▒▒░.
+; █.......
+; .█..▒█▒▒
+; .██..▒▒░
+; ░.██.▒▒░
+; ▒░.█..▒░
+;
+    db $52,$02,$02,$80,$44,$61,$b1,$51,$fc,$7c,$3c,$80,$4f,$66,$36,$92 ; [$87
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░..███░▒
+; ░..██.▒▒
+; ░..██.▒▒
+; ...██.▒▒
+; ░..██.▒▒
+; ░..██...
+; ░..█████
+; ........
+;
+    db $9e,$98,$98,$18,$98,$98,$9f,$00,$1d,$1b,$1b,$1b,$1b,$18,$1f,$00 ; [$87
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░.██.▒░
+; ░░░.█.▒░
+; ░░░.█.▒░
+; ░░░.█.▒░
+; ▒░░.█.▒░
+; ....█.▒░
+; █████.▒░
+; ........
+;
+    db $d9,$e9,$e9,$e9,$69,$09,$f9,$00,$1a,$0a,$0a,$0a,$8a,$0a,$fa,$00 ; [$87
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$87
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+; ████████
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$87
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░.███..░
+; ▒░.█.░░▒
+; ░░░.░░░░
+; ░▒▒▒░▒▒▒
+; ░░░░░░░░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+; ░▒▒▒░▒▒▒
+;
+    db $b9,$56,$ef,$88,$ff,$22,$ff,$88,$38,$91,$00,$77,$00,$dd,$00,$77 ; [$87
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒░░.░░░░
+; ▒░░.░.░░
+; ▒▒░.░░░░
+; ▒░░.░░░░
+; ░▒░.░▒░░
+; ░░░.░...
+; ░▒░..░.░
+; ░░░.░.░.
+;
+    db $6f,$6b,$2f,$6f,$ab,$e8,$a5,$ea,$80,$80,$c0,$80,$44,$00,$40,$00 ; [$87
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░.░░░.░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ▒░▒░░░░▒
+; ...░.░.░
+; .░..░...
+; .░.░..░░
+;
+    db $ff,$bb,$ff,$ff,$5e,$15,$48,$53,$00,$00,$00,$00,$a1,$00,$00,$00 ; [$87
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░▒░▒░▒.
+; ░░░░░█░.
+; ░░.░▒░.█
+; ........
+; ▒░▒.░███
+; ░░▒.█▒▒▒
+; ░▒..▒░.░
+; ........
+;
+    db $54,$fe,$d5,$00,$4f,$c8,$85,$00,$aa,$04,$09,$00,$a7,$2f,$48,$00 ; [$87
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░█▒▒░▒▒░
+; ░██▒░░░░
+; ▒░█▒▒░▒░
+; ▒░░░░░▒░
+; ▒▒░█▒▒░░
+; █▒░██▒░░
+; █▒▒░█▒▒░
+; ░░░░██▒░
+;
+    db $c9,$ef,$65,$7d,$33,$bb,$99,$fd,$76,$70,$ba,$82,$dc,$dc,$ee,$0e ; [$87
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒▒░▒█▒▒
+; ░▒▒░▒▒▒▒
+; ▒░▒░▒█▒▒
+; ▒░▒░▒▒▒▒
+; ▒▒░░▒█▒▒
+; █▒░░▒▒▒▒
+; █▒▒░▒█▒▒
+; ░░░░▒▒▒▒
+;
+    db $94,$90,$54,$50,$34,$b0,$94,$f0,$6f,$6f,$af,$af,$cf,$cf,$ef,$0f ; [$87
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$87
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$87
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$88
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒▒███▒▒
+; ░▒▒█▒██▒
+; ░▒▒▒██▒▒
+; ░▒▒███▒▒
+; ░▒▒█▒██▒
+; ░▒▒███▒▒
+; ░▒▒▒██▒█
+; ░▒█▒█▒█▒
+;
+    db $9c,$96,$8c,$9c,$96,$9c,$8d,$aa,$7f,$7f,$7f,$7f,$7f,$7f,$7f,$7f ; [$88
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒▒▒░
+; ▒█▒▒░▒░▒
+; ▒█▒▒▒░▒░
+; ▒▒▒▒▒░▒▒
+; █▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒░▒
+; ▒█▒▒▒▒▒▒
+; ▒▒▒▒▒▒░▒
+;
+    db $21,$4a,$45,$04,$80,$02,$40,$02,$fe,$f5,$fa,$fb,$ff,$fd,$ff,$fd ; [$88
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒░▒░░░░.
+; ▒▒▒▒░░░.
+; ░░▒░░░░.
+; ░▒░▒░░░.
+; ▒░▒░░░░.
+; ▒▒▒░░░░.
+; ░▒░░░░░.
+; ▒░▒░░░░.
+;
+    db $5e,$0e,$de,$ae,$5e,$1e,$be,$5e,$a0,$f0,$20,$50,$a0,$e0,$40,$a0 ; [$88
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ......░.
+; ..░.....
+; ░...░..░
+; ..░.....
+; ....░.░.
+; ..░░░░..
+; ░.░.░.░░
+; ..░.░░░.
+;
+    db $02,$20,$89,$20,$0a,$3c,$ab,$2e,$00,$00,$00,$00,$00,$00,$00,$00 ; [$88
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.......
+; ...░....
+; .......░
+; .░...░..
+; ........
+; ░......░
+; ...░....
+; ........
+;
+    db $80,$10,$01,$44,$00,$81,$10,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$88
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒█▒█▒▒█▒
+; ▒▒▒█▒█▒▒
+; ██▒▒█▒█▒
+; █▒██▒███
+; ▒█▒███▒▒
+; ▒▒▒▒▒▒▒▒
+; ██▒▒█▒▒▒
+; ▒▒▒▒▒▒▒░
+;
+    db $52,$14,$ca,$b7,$5c,$00,$c8,$01,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$fe ; [$88
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒░░░
+; ▒▒░░░░░░
+; ░░░.....
+; ........
+; ...░░░░░
+; ░░░░▒▒░░
+; ░░▒▒▒▒▒░
+; ░▒▒▒█▒▒▒
+;
+    db $07,$3f,$e0,$00,$1f,$f3,$c1,$88,$f8,$c0,$00,$00,$00,$0c,$3e,$7f ; [$88
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░▒▒▒▒
+; ...░░░▒▒
+; .░..░░▒▒
+; ░░░.░░░░
+; ░░░...░░
+; ░░░░░..░
+; ░░░░░░░.
+; ░░░▒▒▒░░
+;
+    db $f0,$1c,$4c,$ef,$e3,$f9,$fe,$e3,$0f,$03,$03,$00,$00,$00,$00,$1c ; [$88
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ██▒█▒▒▒░
+; ▒█▒▒▒░▒░
+; ▒▒▒▒▒▒░░
+; ▒▒▒▒▒░..
+; ░░▒▒░...
+; ░░░░..░░
+; .....░░░
+; ░..░░░░░
+;
+    db $d1,$45,$03,$04,$c8,$f3,$07,$9f,$fe,$fa,$fc,$f8,$30,$00,$00,$00 ; [$88
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒█▒▒▒██▒
+; ▒▒▒▒▒▒▒█
+; ▒▒▒█▒▒▒▒
+; █▒▒▒▒▒▒▒
+; ▒▒▒▒█▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+;
+    db $00,$46,$01,$10,$80,$08,$00,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$88
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒░▒
+; ▒░▒░▒░▒▒
+; ░▒░▒░░▒░
+; ▒▒▒░▒▒░▒
+; ░▒░▒░░▒▒
+; ▒░▒░▒░▒░
+; ▒░░░░▒░▒
+; ░▒░░░░▒░
+;
+    db $aa,$54,$ad,$12,$ac,$55,$7a,$bd,$55,$ab,$52,$ed,$53,$aa,$85,$42 ; [$88
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .......░
+; .....░▒▒
+; .....░▒▒
+; ....░▒█▒
+; ....▒▒▒▒
+; ...░▒▒▒█
+; .░░▒▒█▒▒
+; ░░▒▒█▒▒█
+;
+    db $01,$04,$04,$0a,$00,$11,$64,$c9,$00,$03,$03,$07,$0f,$0f,$1f,$3f ; [$88
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒▒███▒▒
+; █▒▒█▒██▒
+; ▒▒▒▒██▒█
+; ▒█▒███▒█
+; ▒█▒█▒██▒
+; ▒▒▒███▒▒
+; ▒█▒▒██▒█
+; ▒▒█▒█▒█▒
+;
+    db $9c,$96,$0d,$5d,$56,$1c,$4d,$2a,$7f,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$88
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒░...░.
+; ░░..░...
+; ░▒░...░░
+; ▒░..░░▒░
+; ░▒░.░▒░.
+; ▒▒......
+; ░░░...░.
+; ░▒░.░...
+;
+    db $a2,$c8,$a3,$4d,$aa,$00,$e2,$a8,$40,$00,$40,$82,$44,$c0,$00,$40 ; [$88
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.░.░▒.░
+; ....░▒░.
+; ░░░░▒░.░
+; ▒░▒░▒▒░.
+; ░.░.░░.░
+; ....░▒░.
+; .░.░.░░░
+; ░...░▒░.
+;
+    db $a9,$0a,$f5,$52,$ad,$0a,$57,$8a,$04,$04,$08,$ac,$00,$04,$00,$04 ; [$88
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░▒
+; ▒▒░▒▒▒▒▒
+; ░▒▒▒░▒▒▒
+; ▒▒░▒▒▒░▒
+; ▒▒▒▒▒░▒▒
+; ▒░▒░▒▒▒▒
+; ▒▒▒▒░▒░▒
+; ░▒░▒▒▒▒▒
+;
+    db $0a,$20,$88,$22,$04,$50,$0a,$a0,$f5,$df,$77,$dd,$fb,$af,$f5,$5f ; [$89
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░...
+; ░░...▒░▒
+; ..▒▒▒█▒▒
+; ▒▒██▒▒▒▒
+;
+    db $ff,$ff,$ff,$ff,$f8,$c2,$04,$30,$00,$00,$00,$00,$00,$05,$3f,$ff ; [$89
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; ░░░..░░░
+; ▒▒▒░░..░
+; ▒█▒▒▒░░░
+; ███▒▒▒▒▒
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $55,$e7,$19,$47,$e0,$7f,$92,$4c,$00,$00,$e0,$f8,$ff,$ff,$ff,$ff ; [$89
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░.▒
+; ░░░░░.▒▒
+; ░░░..▒▒█
+; ...▒▒▒██
+; ▒▒▒▒██▒█
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $fc,$f8,$e1,$03,$0d,$7f,$92,$4c,$01,$03,$07,$1f,$ff,$ff,$ff,$ff ; [$89
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░....▒
+; ▒▒░░░▒▒▒
+; █▒▒▒▒▒▒█
+; ▒████▒██
+; ████████
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $e0,$38,$81,$7b,$ff,$7f,$92,$4c,$01,$c7,$ff,$ff,$ff,$ff,$ff,$ff ; [$89
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒█▒▒▒▒
+; ▒█▒▒▒██▒
+; ▒▒▒▒▒▒▒█
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒░▒
+; ▒▒▒▒░░▒▒
+; ░▒░▒▒▒░▒
+; ░▒▒▒▒░▒░
+;
+    db $10,$46,$01,$00,$02,$0c,$a2,$85,$ff,$ff,$ff,$ff,$fd,$f3,$5d,$7a ; [$89
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒▒▒
+; ░░░░▒▒░░
+; ░░▒░░░.░
+; .░░.░░░░
+; ░░.░.░.░
+; ░▒░░░.░░
+; .░.░.░░░
+; ░.░.░.░░
+;
+    db $a8,$f3,$dd,$6f,$d5,$bb,$57,$ab,$57,$0c,$20,$00,$00,$40,$00,$00 ; [$89
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░░░░░░░
+; ░.░.░░░░
+; .░░░..░.
+; ░...░░.░
+; .░░░..░.
+; .░.░.░.░
+; ░.░...░.
+; .░.░.░.░
+;
+    db $7f,$af,$72,$8d,$72,$55,$a2,$55,$00,$00,$00,$00,$00,$00,$00,$00 ; [$89
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░.░░░░░
+; ░.░░.░.░
+; ░░░.░░░░
+; ░.░...░░
+; ...░.░.░
+; ▒░▒...░░
+; ▒▒█▒▒▒..
+; ▒▒▒▒██▒▒
+;
+    db $df,$b5,$ef,$a3,$15,$43,$20,$0c,$00,$00,$00,$00,$00,$a0,$fc,$ff ; [$89
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.......
+; ▒▒░.....
+; ▒▒░.....
+; ▒█▒░....
+; ▒▒▒▒....
+; █▒▒▒░...
+; ▒▒█▒▒░░.
+; █▒▒█▒▒░░
+;
+    db $80,$20,$20,$50,$00,$88,$26,$93,$00,$c0,$c0,$e0,$f0,$f0,$f8,$fc ; [$89
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .....░.░
+; ..░.....
+; ░...░..░
+; ..░.....
+; ...░.░.░
+; ▒░▒.....
+; ▒▒█▒▒▒..
+; ▒▒▒▒██▒▒
+;
+    db $05,$20,$89,$20,$15,$40,$20,$0c,$00,$00,$00,$00,$00,$a0,$fc,$ff ; [$89
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ...░..░.
+; ░.......
+; ░░▒░...░
+; .░░░░...
+; ░░░░░░▒.
+; ░░░▒░▒░░
+; ▒░▒░░░▒░
+; ░░░░▒░░░
+;
+    db $12,$80,$d1,$78,$fc,$eb,$5d,$f7,$00,$00,$20,$00,$02,$14,$a2,$08 ; [$89
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ..░▒░▒░░
+; ..░▒░░░░
+; .░▒░░░░.
+; .░▒░░░░░
+; .░░░░░░░
+; ..░▒░░░░
+; ...░.░.░
+; ........
+;
+    db $2b,$2f,$5e,$5f,$7f,$2f,$15,$00,$14,$10,$20,$20,$00,$10,$00,$00 ; [$89
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░.░.░.░
+; ..░░.░░░
+; ░.░.░..░
+; .░.░.░░.
+; ...░░..░
+; ░...░.░░
+; ...░.░.░
+; ......░░
+;
+    db $d5,$37,$a9,$56,$19,$8b,$15,$03,$00,$00,$00,$00,$00,$00,$00,$00 ; [$89
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒░▒▒▒▒▒░
+; ▒█░░░▒░▒
+; █▒▒▒▒░▒░
+; ██▒▒▒░▒░
+; █▒▒▒░▒▒▒
+; ▒█▒▒░░░▒
+; ▒▒▒░▒░▒▒
+; ▒▒░▒▒▒░▒
+;
+    db $41,$7a,$85,$c5,$88,$4e,$14,$22,$be,$c5,$fa,$fa,$f7,$f1,$eb,$dd ; [$89
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░█▒░░░.▒
+; ░▒▒░░░.▒
+; .░░.░░░.
+; ...░░░░░
+; .░░░░░█▒
+; ░▒░░░░▒▒
+; ░▒.░.░.░
+; ........
+;
+    db $dc,$9c,$6e,$1f,$7e,$bc,$95,$00,$61,$61,$00,$00,$03,$43,$40,$00 ; [$89
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒░▒▒▒░░
+; ▒█░▒█▒░░
+; ▒█░▒█▒░░
+; ▒▒█░▒▒▒░
+; ░▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░▒▒▒░░
+;
+    db $a3,$6b,$6b,$31,$80,$ff,$ff,$e3,$5c,$dc,$dc,$ee,$7f,$00,$00,$1c ; [$8a
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒█▒░░░░
+; ░█▒▒░░░░
+; ░█▒▒░░░░
+; █▒▒░░░░░
+; ▒▒░░░░░.
+; ░░░░░░░.
+; ░░░░░░░.
+; ░░░░░░░.
+;
+    db $af,$cf,$cf,$9f,$3e,$fe,$fe,$fe,$70,$70,$70,$e0,$c0,$00,$00,$00 ; [$8a
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒▒▒▒
+; ▒▒██▒█▒▒
+; ▒█▒▒▒░▒░
+; ▒▒▒░▒▒▒▒
+; ▒█▒░░░░▒
+; ▒▒░▒░▒░░
+; ░▒▒░░░░▒
+; ░░░░░░░░
+;
+    db $80,$34,$45,$10,$5e,$2b,$9e,$ff,$7f,$ff,$fa,$ef,$e1,$d4,$61,$00 ; [$8a
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; █▒█▒▒▒░░
+; ░░▒▒▒░░░
+; ▒▒░░░▒▒░
+; ░▒▒░▒▒░░
+; ░░░░▒▒░░
+; ▒▒▒▒░░░░
+; ░░░░░░░.
+;
+    db $02,$a3,$c7,$39,$93,$f3,$0f,$fe,$fc,$fc,$38,$c6,$6c,$0c,$f0,$00 ; [$8a
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ...▒▒░░░
+; ░▒▒▒▒▒▒▒
+; ▒▒█▒█▒█▒
+; ▒██▒▒▒▒▒
+; ▒█▒▒░█▒█
+; ▒█▒▒▒▒▒▒
+; ▒█▒▒▒░▒▒
+; ▒█▒▒░░░░
+;
+    db $07,$80,$2a,$60,$4d,$40,$44,$4f,$18,$7f,$ff,$ff,$f7,$ff,$fb,$f0 ; [$8a
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.▒▒▒▒░░
+; ▒▒▒▒▒▒▒▒
+; ▒█▒██▒██
+; █▒▒▒▒▒▒▒
+; ▒▒▒▒░░░░
+; ▒▒░░░░▒▒
+; ▒░░░▒░▒█
+; ░▒█▒░▒▒▒
+;
+    db $83,$00,$5b,$80,$0f,$3c,$75,$a8,$3c,$ff,$ff,$ff,$f0,$c3,$8b,$77 ; [$8a
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ..░░.░..
+; ▒▒░▒▒▒░.
+; ███▒█▒░.
+; ▒▒▒▒▒▒░░
+; ▒▒▒▒▒░░.
+; ▒░░░░░░░
+; ░▒▒▒▒▒░.
+; ▒▒░▒▒░░░
+;
+    db $34,$22,$ea,$03,$06,$7f,$82,$27,$00,$dc,$fc,$fc,$f8,$80,$7c,$d8 ; [$8a
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .▒░▒░▒░▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; .░.░.░.░
+; ........
+;
+    db $2a,$ff,$ff,$ff,$ff,$ff,$55,$00,$55,$00,$00,$00,$00,$00,$00,$00 ; [$8a
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒░.
+; ░░░░░░░.
+; ░░░░░░░░
+; ░░░░░░░.
+; ░░░░░░░░
+; ░░░░░░░.
+; .░.░.░.░
+; ........
+;
+    db $aa,$fe,$ff,$fe,$ff,$fe,$55,$00,$54,$00,$00,$00,$00,$00,$00,$00 ; [$8a
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒░▒.░...
+; ░░░░....
+; ░░░░.░..
+; ░░░░░...
+; ░░░░░...
+; ░░░░░.░.
+; .░░░░...
+; ........
+;
+    db $48,$f0,$f4,$f8,$f8,$fa,$78,$00,$a0,$00,$00,$00,$00,$00,$00,$00 ; [$8a
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ..░▒▒▒▒░
+; ▒▒▒▒▒▒▒▒
+; ███▒▒███
+; ▒▒▒████▒
+; ░░▒▒██▒▒
+; ░░░▒█▒▒▒
+; ▒▒.▒█▒▒░
+; ░░░▒█▒▒░
+;
+    db $21,$00,$e7,$1e,$cc,$e8,$09,$e9,$1e,$ff,$ff,$ff,$3f,$1f,$de,$1e ; [$8a
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; .░▒█▒▒▒░
+; ▒▒██▒▒░░
+; ███▒▒▒░░
+; ▒▒▒▒▒░░░
+; ▒▒▒▒░░░.
+; ░▒░░░░.░
+; .░░░░.░░
+; ░░.░░...
+;
+    db $51,$33,$e3,$07,$0e,$bd,$7b,$d8,$3e,$fc,$fc,$f8,$f0,$40,$00,$00 ; [$8a
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .▒░▒░▒░▒
+; ░░░░░░░░
+; ░▒▒░░.░░
+; ░█▒.░.░█
+; ░▒▒.░.░▒
+; ░░░.░...
+; ░░..░░.░
+; .░.....█
+;
+    db $2a,$ff,$9b,$cb,$8a,$e8,$cd,$41,$55,$00,$60,$61,$61,$00,$00,$01 ; [$8a
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░.......
+; ▒▒░░░▒▒▒
+; █▒▒▒▒▒██
+; ▒██▒██▒▒
+; ▒▒███▒▒░
+; ░▒▒█▒▒░░
+; ░░▒▒▒░░░
+; ░░░▒░░░░
+;
+    db $80,$38,$83,$6c,$39,$93,$c7,$ef,$00,$c7,$ff,$ff,$fe,$7c,$38,$10 ; [$8a
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒░.
+; ░░░░░░░.
+; ░.░...░░
+; ▒░.░░.░.
+; ▒░.█▒░░░
+; ░░.▒▒░░░
+; .░.░.░.░
+; ▒░......
+;
+    db $aa,$fe,$a3,$5a,$57,$c7,$55,$40,$54,$00,$00,$80,$98,$18,$00,$80 ; [$8a
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.░.░░░░
+; .░░.░░░.
+; ░░.░░░..
+; ..░░░..░
+; ░░░░..░░
+; ░░░..░░░
+; ░░..░░.░
+; ░.......
+;
+    db $af,$6e,$dc,$39,$f3,$e7,$cd,$80,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8a
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒██░██▒
+; ░▒█▒░▒▒▒
+; ░░░░█░░░
+; ░█▒██▒░█
+; ░▒░█▒▒░▒
+; ░░░▒▒░░░
+; ░▒█░░░░█
+; ░▒█▒▒▒█▒
+;
+    db $be,$a8,$ff,$db,$b2,$e7,$bf,$a2,$77,$77,$08,$7d,$5d,$18,$61,$7f ; [$8b
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░█░░░░.
+; ░░▒▒░░░.
+; ░░▒▒░░░.
+; ▒▒░▒░░░.
+; ▒▒░░░░░.
+; ░░▒░▒░░.
+; ░▒░░▒░░.
+; ▒░▒░░░░.
+;
+    db $fe,$ce,$ce,$2e,$3e,$d6,$b6,$5e,$20,$30,$30,$d0,$c0,$28,$48,$a0 ; [$8b
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ░...░.░.
+; .....░.░
+; ......░.
+; .░.░.░.░
+; ░░░░░░░░
+; ░░.░.░.░
+; ........
+;
+    db $00,$8a,$05,$02,$55,$ff,$d5,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8b
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░▒▒░░▒▒
+; ░▒▒▒░░░▒
+; ▒▒▒▒▒░░▒
+; .▒.▒.▒░.
+; ▒░▒░▒░░░
+; ░░░░░░░░
+; ░.░.░.░.
+; .░.░.░.░
+;
+    db $cc,$8e,$06,$02,$57,$ff,$aa,$55,$33,$71,$f9,$54,$a8,$00,$00,$00 ; [$8b
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒▒░█▒░░
+; ▒█▒░▒█▒▒
+; ▒██▒░▒▒▒
+; ▒█▒▒░▒▒▒
+; ▒█▒▒░▒░▒
+; ▒▒▒▒░░▒▒
+; ▒▒░░░░▒░
+; .░░░░░..
+;
+    db $1b,$54,$68,$48,$4a,$0c,$3d,$7c,$ec,$ef,$f7,$f7,$f5,$f3,$c2,$00 ; [$8b
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒█▒▒░▒▒▒
+; ░░▒░.▒▒▒
+; █▒░░░░..
+; ▒▒░▒▒░░░
+; ▒▒░▒▒▒▒▒
+; ▒░░▒░▒█▒
+; ▒.░░▒▒▒▒
+; ░░░.░░░░
+;
+    db $48,$d0,$bc,$27,$20,$6a,$30,$ef,$f7,$27,$c0,$d8,$df,$97,$8f,$00 ; [$8b
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░▒▒▒░.
+; ░.▒▒▒░░░
+; .░.░░░░.
+; ▒▒▒▒▒░░.
+; █▒█▒▒▒░.
+; ▒▒▒▒▒░░.
+; ░▒▒▒░░░.
+; .░░░░░..
+;
+    db $a2,$87,$5e,$06,$a2,$06,$8e,$7c,$5c,$38,$00,$f8,$fc,$f8,$70,$00 ; [$8b
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░░░░░░.
+; ░▒░▒░▒░▒
+; ░▒░░▒▒░▒
+; ░▒░░▒▒░▒
+; ░▒░░░▒░░
+; ░▒█▒▒▒░░
+; ▒▒██▒▒▒▒
+; ▒████▒▒░
+;
+    db $7e,$aa,$b2,$b2,$bb,$a3,$30,$79,$00,$55,$4d,$4d,$44,$7c,$ff,$fe ; [$8b
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; .▒░▒░▒░▒
+; ░░░░░░░░
+; ░▒▒▒░.▒▒
+; ▒█▒▒░.▒█
+; ▒▒▒░░.░▒
+; ▒░░░░...
+; ░░...░░░
+; .▒▒░.░▒█
+;
+    db $2a,$ff,$88,$49,$1a,$78,$c7,$15,$55,$00,$73,$f3,$e1,$80,$00,$63 ; [$8b
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒░.
+; ░░░░░░░.
+; ▒░░...░░
+; ▒▒.▒▒░░.
+; ▒░.█▒▒░░
+; ░░.▒▒▒░░
+; ...░░░░░
+; ▒░.░.░.░
+;
+    db $aa,$fe,$63,$06,$53,$c3,$1f,$55,$54,$00,$80,$d8,$9c,$1c,$00,$80 ; [$8b
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .░░░░░░░
+; ░█▒░░░░░
+; █▒░▒█▒░▒
+; █░▒█▒▒░█
+; ▒░▒█▒▒░█
+; ▒░▒█▒▒░▒
+; ░░░▒░░░░
+; ░░░░░░░░
+;
+    db $7f,$df,$aa,$d3,$53,$52,$ef,$ff,$00,$60,$dd,$bd,$bd,$bd,$10,$00 ; [$8b
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░..
+; ░░░░░░░░
+; █▒░░▒▒░░
+; ▒▒░░░▒▒░
+; ▒▒░░░▒▒░
+; ▒░░░░▒▒░
+; ░░░░░▒░░
+; ░░░░░░░░
+;
+    db $fc,$ff,$b3,$39,$39,$79,$fb,$ff,$00,$00,$cc,$c6,$c6,$86,$04,$00 ; [$8b
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒█▒░.░▒▒
+; ░▒▒░..░▒
+; .░░░░..░
+; .....░░░
+; .█░░.▒▒▒
+; ░▒▒░.▒▒▒
+; ░▒░░.░░░
+; ░░░..░░░
+;
+    db $54,$92,$79,$07,$70,$90,$b7,$e7,$e3,$61,$00,$00,$47,$67,$40,$00 ; [$8b
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░░░░░..
+; ░▒░░░▒▒▒
+; ▒█▒▒▒▒██
+; ▒█▒▒▒▒▒█
+; ▒▒▒▒░░▒▒
+; ░▒▒░░.░▒
+; .░░░.░░░
+; .░.░░░.░
+;
+    db $7c,$b8,$43,$41,$0c,$9a,$77,$5d,$00,$47,$ff,$ff,$f3,$61,$00,$00 ; [$8b
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒░.▒█▒░.
+; ▒░.▒▒▒░.
+; .░░░░▒░.
+; .░..░░..
+; ░.░░....
+; ░.▒▒░░..
+; ░.▒▒▒░..
+; ..░▒░░..
+;
+    db $4a,$42,$7a,$4c,$b0,$8c,$84,$2c,$9c,$9c,$04,$00,$00,$30,$38,$10 ; [$8b
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.░.....
+; .░.░....
+; ░░░....░
+; ░░.░.░..
+; ..░.....
+; ░░.░.░.░
+; ..░░░...
+; ░░.░.░░.
+;
+    db $a0,$50,$e1,$d4,$20,$d5,$38,$d6,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8b
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒▒░░
+; ▒▒▒▒░░█░
+; ▒▒▒.██▒▒
+; ▒▒░.█▒░░
+; ▒▒.█▒░░.
+; ▒▒.█▒░..
+; ▒▒.█▒░..
+; ▒░.█▒░..
+;
+    db $83,$0f,$0c,$2b,$16,$14,$14,$54,$7c,$f2,$ef,$cc,$d8,$d8,$d8,$98 ; [$8c
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █░.░.▒▒▒
+; █░▒▒.▒▒░
+; █░█▒▒.▒░
+; ░░░▒░█.░
+; .....░░░
+; ...░.█░.
+; .▒▒▒.█░.
+; ▒▒▒▒.█░.
+;
+    db $d0,$c1,$e1,$ed,$07,$16,$06,$06,$87,$b6,$ba,$14,$00,$04,$74,$f4 ; [$8c
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒.█▒░..
+; ▒▒░▒▒▒░.
+; ▒▒.░▒▒░░
+; ▒░▒░░▒▒█
+; ▒▒▒░.░▒▒
+; ▒▒░░░.░░
+; .░░░░...
+; ........
+;
+    db $14,$22,$13,$59,$14,$3b,$78,$00,$d8,$dc,$cc,$a7,$e3,$c0,$00,$00 ; [$8c
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░▒░.█░.
+; ▒▒░.█░..
+; ░░.█▒░.░
+; ███▒░░.▒
+; ▒▒▒░..▒▒
+; ░░░..░░░
+; ..░░░░░.
+; ........
+;
+    db $d6,$2c,$d5,$ec,$10,$e7,$3e,$00,$24,$c8,$18,$f1,$e3,$00,$00,$00 ; [$8c
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒█▒█▒█▒░
+; ..▒▒█▒▒░
+; .....▒░░
+; .......░
+; ........
+; ........
+; ........
+; ........
+;
+    db $55,$09,$03,$01,$00,$00,$00,$00,$fe,$3e,$04,$00,$00,$00,$00,$00 ; [$8c
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒░░░▒▒██
+; █▒░.▒▒██
+; ▒█▒.░▒▒▒
+; ▒█▒░.░░░
+; .▒▒░...░
+; ..░.█▒░.
+; ...▒█▒▒░
+; ....██▒░
+;
+    db $73,$a3,$48,$57,$11,$2a,$09,$0d,$8f,$cf,$e7,$e0,$60,$0c,$1e,$0e ; [$8c
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; .░░▒██░▒
+; ░▒███▒██
+; ░█░░░▒▒█
+; ░▒░░░░▒▒
+; ░▒░██░░▒
+; ░░▒███░░
+; ░░░▒▒░▒█
+; ░░░░░░▒█
+;
+    db $6e,$bb,$f9,$bc,$be,$df,$e5,$fd,$1d,$7f,$47,$43,$59,$3c,$1b,$03 ; [$8c
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒░██▒░░.
+; ██▒███▒░
+; █▒▒░░░█░
+; ▒▒░░░░▒░
+; ▒░░██░▒░
+; ░░███▒░░
+; █▒░▒▒░░▒
+; █▒░░░░░░
+;
+    db $76,$dd,$9f,$3d,$7d,$fb,$a6,$bf,$b8,$fe,$e2,$c2,$9a,$3c,$d9,$c0 ; [$8c
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒█▒
+; ░▒▒▒█▒█▒
+; ▒▒▒▒██▒█
+; ░▒▒█▒█▒█
+; ▒▒▒█▒█▒█
+; ▒░▒█▒█▒█
+; ▒▒▒█▒█▒█
+; ░▒▒█▒██▒
+;
+    db $2a,$8a,$0d,$95,$15,$55,$15,$96,$ff,$7f,$ff,$7f,$ff,$bf,$ff,$7f ; [$8c
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░▒█▒░░░
+; ░░▒█▒▒░.
+; ▒░▒█▒░░.
+; ░░▒▒░░..
+; ░░░▒░...
+; ░▒░░░...
+; ░▒░░....
+; ░▒░░....
+;
+    db $d7,$d2,$56,$cc,$e8,$b8,$b0,$b0,$38,$3c,$b8,$30,$10,$40,$40,$40 ; [$8c
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒░░░....
+; ▒░░.....
+; ▒░░.....
+; ░░......
+; ░░......
+; ▒.......
+; ░.......
+; ░.......
+;
+    db $70,$60,$60,$c0,$c0,$00,$80,$80,$80,$80,$80,$00,$00,$80,$00,$00 ; [$8c
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒▒▒
+; ▒▒██▒▒▒▒
+; ░█▒▒░▒░░
+; ▒▒░░░...
+; ░▒▒.░░░░
+; ▒▒░▒░░░▒
+; ░█▒░░░▒▒
+; ░░▒▒░▒█▒
+;
+    db $c8,$30,$cb,$38,$8f,$2e,$dc,$ca,$3f,$ff,$74,$c0,$60,$d1,$63,$37 ; [$8c
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒█░▒▒░.
+; ▒▒▒▒█▒▒░
+; ░░░░█▒▒▒
+; ....░█▒▒
+; ░░░░.▒█▒
+; ░▒░░░█▒░
+; █▒░▒.▒▒▒
+; █▒█▒▒░░▒
+;
+    db $32,$09,$f8,$0c,$f2,$bd,$a0,$a6,$ec,$fe,$0f,$07,$07,$46,$d7,$f9 ; [$8c
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒░░░░▒░
+; ▒░...░░▒
+; ▒░...░█░
+; ▒░.▒▒░█▒
+; ▒░.▒▒░█▒
+; ▒░.▒▒░█▒
+; ▒░....█▒
+; ▒░░░░░░▒
+;
+    db $3d,$46,$47,$46,$46,$46,$42,$7e,$c2,$81,$82,$9b,$9b,$9b,$83,$81 ; [$8c
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .░.░░░░░
+; ..░.░░..
+; ░░.░░.░░
+; .░░.░░░.
+; ░░.░░.░░
+; ░░░░░.░.
+; ..░.░░░░
+; ░░░░░░.░
+;
+    db $5f,$2c,$db,$6e,$db,$fa,$2f,$fd,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8c
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒██▒░▒░
+; ▒█▒▒░░░.
+; ▒█▒░░..░
+; ▒▒▒░.░.█
+; █▒░.░░.█
+; ▒░.░░░.░
+; █░.░░░..
+; ▒░.░░░.█
+;
+    db $35,$4e,$59,$15,$ad,$5d,$dc,$5d,$fa,$f0,$e0,$e1,$c1,$80,$80,$81 ; [$8c
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒███▒▒▒.
+; ▒███▒░░.
+; ▒█▒▒░░..
+; ▒▒▒░░...
+; ▒▒░░....
+; ▒▒░...▒.
+; ▒▒░..▒▒.
+; ▒░..░░░.
+;
+    db $70,$76,$4c,$18,$30,$20,$20,$4e,$fe,$f8,$f0,$e0,$c0,$c2,$c6,$80 ; [$8d
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒██▒▒
+; ░░▒▒██▒▒
+; .░░▒▒▒▒▒
+; ..░░░░▒.
+; ▒▒.▒▒░..
+; █▒▒.▒▒▒▒
+; █▒▒.▒▒▒▒
+; █▒▒▒.█▒▒
+;
+    db $0c,$cc,$60,$3c,$04,$80,$80,$84,$ff,$3f,$1f,$02,$d8,$ef,$ef,$f7 ; [$8d
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░█▒█▒███
+; ░█▒█▒███
+; ░█▒██▒██
+; ░█▒▒█▒██
+; .█▒▒█▒██
+; .░▒▒█▒▒█
+; .░█▒██▒█
+; .░█▒██▒█
+;
+    db $d7,$d7,$db,$cb,$4b,$49,$6d,$6d,$7f,$7f,$7f,$7f,$7f,$3f,$3f,$3f ; [$8d
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ███▒█▒█░
+; ███▒█▒█░
+; ██▒██▒█░
+; ██▒█▒▒█░
+; ████▒▒█.
+; █▒██▒▒░.
+; █▒██▒█░.
+; █▒██▒█░.
+;
+    db $eb,$eb,$db,$d3,$f2,$b2,$b6,$b6,$fe,$fe,$fe,$fe,$fe,$fc,$fc,$fc ; [$8d
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ....▒█▒░
+; .....▒░░
+; .....░░▒
+; ......░░
+; ......▒█
+; .......█
+; .......▒
+; .......░
+;
+    db $05,$03,$06,$03,$01,$01,$00,$01,$0e,$04,$01,$00,$03,$01,$01,$00 ; [$8d
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒██░██▒▒
+; ▒▒▒░█▒▒▒
+; ▒██░▒█▒▒
+; ▒█▒░█▒▒▒
+; ▒██░██▒▒
+; ▒█▒░█▒▒▒
+; ▒██░██▒▒
+; ▒█▒░█▒▒▒
+;
+    db $7c,$18,$74,$58,$7c,$58,$7c,$58,$ef,$ef,$ef,$ef,$ef,$ef,$ef,$ef ; [$8d
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █░░█░░░▒
+; ▒▒████░░
+; ░▒░██▒█░
+; ░▒░░░▒▒█
+; ░▒░░░░░░
+; ░░░░█░░░
+; ░░░░█░▒▒
+; .░░░█.░░
+;
+    db $fe,$3f,$bb,$b9,$bf,$ff,$fc,$7b,$91,$fc,$5e,$47,$40,$08,$0b,$08 ; [$8d
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒░░░█░░▒
+; ░░████▒░
+; ░█▒██░▒░
+; █▒▒░░░▒░
+; ░░░░░░▒░
+; ░░░█░░░░
+; ▒▒░█░░░░
+; ░░.█░░░.
+;
+    db $7e,$fd,$dd,$9d,$fd,$ff,$3f,$de,$89,$3e,$7a,$e2,$02,$10,$d0,$10 ; [$8d
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒██░..█
+; ░▒▒█░░.█
+; ░▒▒▒░░.█
+; ░▒▒█░░.█
+; ░▒▒█▒██▒
+; ░▒▒███▒▒
+; ░▒▒▒██▒█
+; ░▒█▒█▒█▒
+;
+    db $b9,$9d,$8d,$9d,$96,$9c,$8d,$aa,$71,$71,$71,$71,$7f,$7f,$7f,$7f ; [$8d
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ███░.░██
+; ▒▒▒░.░█▒
+; ▒▒▒░.░█▒
+; ▒▒▒░.░█▒
+; █▒▒████▒
+; ▒▒▒▒▒▒░▒
+; ▒█▒▒▒▒▒▒
+; ▒▒▒▒▒▒░▒
+;
+    db $f7,$16,$16,$16,$9e,$02,$40,$02,$e3,$e3,$e3,$e3,$ff,$fd,$ff,$fd ; [$8d
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █░.▒▒▒░.
+; ▒▒.▒▒░░.
+; ░░.▒▒░░.
+; ░▒.▒▒░░.
+; ▒░▒░░░░.
+; ▒▒▒░░░░.
+; ░▒░░░░░.
+; ▒░▒░░░░.
+;
+    db $c2,$06,$c6,$86,$5e,$1e,$be,$5e,$9c,$d8,$18,$58,$a0,$e0,$40,$a0 ; [$8d
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒░░░▒█▒
+; ▒█░▒░▒█▒
+; ▒▒▒.░▒▒▒
+; ░░░▒░▒░▒
+; ▒█▒.░▒█▒
+; ▒▒▒░░▒█▒
+; █▒░▒░▒█▒
+; ▒▒▒░░▒█▒
+;
+    db $ba,$6a,$08,$ea,$4a,$1a,$aa,$1a,$47,$d7,$e7,$15,$e7,$e7,$d7,$e7 ; [$8d
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; █▒█▒.▒█░
+; █▒█▒▒██▒
+; ▒▒▒▒.▒█░
+; ░▒░▒▒█▒▒
+; █▒█▒.▒▒░
+; █▒█▒▒▒█▒
+; █▒█▒.█▒▒
+; █▒█▒▒█▒▒
+;
+    db $a3,$a6,$03,$a4,$a1,$a2,$a4,$a4,$f6,$ff,$f6,$5f,$f6,$ff,$f7,$ff ; [$8d
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒▒▒▒
+; ▒█▒▒▒▒░░
+; ▒█▒▒░░..
+; ▒▒▒░....
+; █▒░..░░░
+; ▒░..░░░░
+; █░.░░▒▒░
+; ▒░.░▒█▒░
+;
+    db $20,$43,$4c,$10,$a7,$4f,$d9,$55,$ff,$fc,$f0,$e0,$c0,$80,$86,$8e ; [$8d
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒▒▒░
+; ░░░▒▒▒░▒
+; ...░░▒▒░
+; .....░█▒
+; .▒░░..░▒
+; .▒░░░..█
+; .▒▒▒░░.█
+; .▒██▒░.▒
+;
+    db $21,$e2,$19,$06,$32,$39,$0d,$34,$fe,$1d,$06,$03,$41,$41,$71,$79 ; [$8d
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░.░░░.█
+; ▒░.░░░.█
+; ▒░.░░░.█
+; ▒░.█▒..▒
+; █░.▒█▒..
+; ▒░..▒███
+; ▒░.░.▒▒▒
+; ▒░.░░..▒
+;
+    db $5d,$5d,$5d,$50,$c8,$47,$50,$58,$81,$81,$81,$99,$9c,$8f,$87,$81 ; [$8d
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒░......
+; ▒░.███░.
+; ▒░.░░░░.
+; ░..░░░░.
+; ░.......
+; ░..███▒.
+; ░..░░░░.
+; ░..▒▒█..
+;
+    db $40,$5e,$5e,$9e,$80,$9c,$9e,$84,$80,$9c,$80,$00,$00,$1e,$00,$1c ; [$8e
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; .....█▒▒
+; ███▒.█▒▒
+; █▒▒▒░.█▒
+; █▒▒▒░.█▒
+; ......█▒
+; ▒███▒.█▒
+; ▒▒▒▒▒.█▒
+; ▒▒▒█..█▒
+;
+    db $04,$e4,$8a,$8a,$02,$72,$02,$12,$07,$f7,$f3,$f3,$03,$fb,$fb,$f3 ; [$8e
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░██▒█▒█
+; ░░██▒██▒
+; ..░█░▒██
+; ░.░█▒▒██
+; ..░██▒▒█
+; ░..░█░░░
+; .░..░░█░
+; ░.░...░.
+;
+    db $75,$f6,$3b,$b3,$39,$9f,$4f,$a2,$3f,$3f,$17,$1f,$1f,$08,$02,$00 ; [$8e
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; █▒█▒██░.
+; ▒██▒██░.
+; ███▒█░.░
+; ███▒█░..
+; █▒░██░.░
+; ░░▒█░..░
+; ░█░░....
+; ░░..░.░░
+;
+    db $ae,$6e,$ed,$ec,$bd,$d9,$f0,$cb,$fc,$fc,$f8,$f8,$d8,$30,$40,$00 ; [$8e
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; █▒██▒██▒
+; █▒█▒▒▒█▒
+; █▒██▒▒█▒
+; █▒██▒▒█▒
+; █▒███▒██
+; ██▒█▒▒██
+; ██▒█▒▒██
+; ██▒██▒██
+;
+    db $b6,$a2,$b2,$b2,$bb,$d3,$d3,$db,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$8e
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░░▒░░..
+; ░▒░░░░▒▒
+; ▒█▒░░▒▒█
+; ▒█▒░░▒▒█
+; ▒▒▒▒░▒▒▒
+; ░█▒▒░░▒█
+; ░▒█▒.░▒▒
+; ░▒▒▒▒░░▒
+;
+    db $6c,$bc,$59,$59,$08,$cd,$a4,$86,$10,$43,$e7,$e7,$f7,$73,$73,$79 ; [$8e
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ...░▒▒▒░
+; ▒▒░░▒█▒░
+; █▒▒░▒▒▒░
+; ▒▒▒▒▒▒░░
+; ▒█▒▒░░░.
+; ▒▒▒░░░.░
+; █▒▒░░.░░
+; █▒▒░░.▒░
+;
+    db $11,$35,$91,$03,$4e,$1d,$9b,$99,$0e,$ce,$ee,$fc,$f0,$e0,$e0,$e2 ; [$8e
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░██▒░▒.
+; █▒░▒▒█░.
+; ░█░▒█░░.
+; ░░██░▒░.
+; ░▒██░▒░.
+; ░█░░█░░.
+; █░▒▒░█░.
+; ░▒▒▒▒░▒.
+;
+    db $f4,$a6,$ee,$fa,$ba,$fe,$ce,$84,$3a,$dc,$58,$34,$74,$48,$b4,$7a ; [$8e
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; █▒█▒▒░▒░
+; █▒█░▒▒░▒
+; █▒█▒░▒▒░
+; █▒█▒▒▒░▒
+; █▒█▒░░▒▒
+; ██▒█▒▒▒░
+; ██▒▒▒░▒▒
+; ██▒▒░▒░▒
+;
+    db $a5,$b2,$a9,$a2,$ac,$d1,$c4,$ca,$fa,$ed,$f6,$fd,$f3,$fe,$fb,$f5 ; [$8e
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; █▒█▒█▒█▒
+; ████████
+; ▒█▒█▒█▒█
+; ▒▒▒▒▒▒▒▒
+; ░▒░▒░▒░▒
+; ░░░░░░░░
+; ........
+;
+    db $ff,$aa,$ff,$55,$00,$aa,$ff,$00,$00,$ff,$ff,$ff,$ff,$55,$00,$00 ; [$8e
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░▒██▒░░.
+; ░██▒▒▒░.
+; ░▒██▒░░.
+; ░██▒▒▒░.
+; ░▒██▒░░.
+; ░██▒▒▒░.
+; ░▒██▒░░.
+; ░██▒▒▒░.
+;
+    db $b6,$e2,$b6,$e2,$b6,$e2,$b6,$e2,$78,$7c,$78,$7c,$78,$7c,$78,$7c ; [$8e
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░.
+; ░░░░░░░.
+; ░▒█▒░░░.
+; ░██▒▒░░.
+; ░▒██▒░░.
+; ░██▒▒░░.
+; ░▒██▒░░.
+; ░██▒▒░░.
+;
+    db $fe,$fe,$ae,$e6,$b6,$e6,$b6,$e6,$00,$00,$70,$78,$78,$78,$78,$78 ; [$8e
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░▒█▒█▒
+; ░░██████
+; ░░▒█▒█▒█
+; ░░▒▒▒▒▒▒
+; ░░░▒░▒░▒
+; ░░░░░░░░
+; ........
+;
+    db $ff,$ea,$ff,$d5,$c0,$ea,$ff,$00,$00,$1f,$3f,$3f,$3f,$15,$00,$00 ; [$8e
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒░.░▒█▒░
+; ▒░.░▒▒▒░
+; ▒░.░▒▒░░
+; ▒░.░▒░░░
+; █░.░░░░░
+; ▒░......
+; ▒░.░▒▒▒░
+; ▒░.░▒█▒░
+;
+    db $55,$51,$53,$57,$df,$40,$51,$55,$8e,$8e,$8c,$88,$80,$80,$8e,$8e ; [$8e
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .▒██▒░.█
+; .▒█▒▒░.▒
+; .▒▒▒░░.█
+; .▒▒░░░.▒
+; .░░░░░.▒
+; .......█
+; .▒▒▒▒░.▒
+; .▒██▒░.▒
+;
+    db $35,$24,$0d,$1c,$7c,$01,$04,$34,$79,$79,$71,$61,$01,$01,$79,$79 ; [$8e
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░█▒█▒▒░
+; █.░▒▒▒░▒
+; █..░░▒▒░
+; █▒...░█▒
+; █▒.░..░▒
+; ▒░.░░..█
+; ...░░░.█
+; ▒░.░▒░.▒
+;
+    db $e9,$a2,$99,$86,$92,$59,$1d,$54,$3e,$9d,$86,$c3,$c1,$81,$01,$89 ; [$8e
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░..█....
+; ░..░░...
+; ░..█▒▒▒.
+; ░.......
+; ░..███▒.
+; ░..█░░▒.
+; ░..█░░▒.
+; ▒..█░░▒.
+;
+    db $90,$98,$90,$80,$9c,$9c,$9c,$1c,$10,$00,$1e,$00,$1e,$12,$12,$92 ; [$8f
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░....█▒
+; ▒░░...█▒
+; ▒▒▒▒▒.█▒
+; ......█▒
+; ████▒.█▒
+; █░░░▒.█▒
+; █░░░▒.█▒
+; █░░░▒.█▒
+;
+    db $42,$62,$02,$02,$f2,$f2,$f2,$f2,$83,$83,$fb,$03,$fb,$8b,$8b,$8b ; [$8f
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; █▒▒░....
+; ▒▒░.....
+; ▒▒░.....
+; ▒░......
+; ░░......
+; ░░......
+; ░░......
+; ░.......
+;
+    db $90,$20,$20,$40,$c0,$c0,$c0,$80,$e0,$c0,$c0,$80,$00,$00,$00,$00 ; [$8f
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ██▒▒░.▒█
+; ▒▒▒░░.█▒
+; ▒░░░.▒▒▒
+; ░░░..▒░░
+; ...▒░.░.
+; ▒▒▒▒░░..
+; ██▒▒░...
+; ██▒░....
+;
+    db $c9,$1a,$70,$e3,$0a,$0c,$c8,$d0,$f3,$e3,$87,$04,$10,$f0,$f0,$e0 ; [$8f
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░█▒▒░░░
+; ▒░▒░░░..
+; ░.░.....
+; ░.......
+; ........
+; ........
+; ........
+; ........
+;
+    db $e7,$5c,$a0,$80,$00,$00,$00,$00,$38,$a0,$00,$00,$00,$00,$00,$00 ; [$8f
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░█▒░░░▒
+; .░▒▒▒░░▒
+; .░▒▒░.░░
+; ..░▒░..░
+; ...░...░
+; ...░...░
+; ........
+; ........
+;
+    db $6e,$46,$4b,$29,$11,$11,$00,$00,$31,$39,$30,$10,$00,$00,$00,$00 ; [$8f
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █▒░░.▒▒░
+; ▒▒░.░▒▒░
+; █▒░.░▒░░
+; █▒░.░░░.
+; ▒▒░..░░.
+; ▒▒░..░..
+; ░▒░.....
+; .▒......
+;
+    db $b1,$29,$ab,$ae,$26,$24,$a0,$00,$c6,$c6,$c4,$c0,$c0,$c0,$40,$40 ; [$8f
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒▒▒▒
+; ▒█▒▒▒▒░░
+; ▒█▒▒░░..
+; ▒▒▒░....
+; █▒░.....
+; ▒░......
+; █░......
+; ▒░......
+;
+    db $20,$43,$4c,$10,$a0,$40,$c0,$40,$ff,$fc,$f0,$e0,$c0,$80,$80,$80 ; [$8f
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒▒▒░
+; ░░░▒▒▒░▒
+; ...░░▒▒░
+; .....░█▒
+; ......░▒
+; .......█
+; .......█
+; .......▒
+;
+    db $21,$e2,$19,$06,$02,$01,$01,$00,$fe,$1d,$06,$03,$01,$01,$01,$01 ; [$8f
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒░......
+; ▒░......
+; ▒░......
+; ▒░......
+; █░......
+; ▒░......
+; ▒░......
+; ▒░......
+;
+    db $40,$40,$40,$40,$c0,$40,$40,$40,$80,$80,$80,$80,$80,$80,$80,$80 ; [$8f
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒░.▒█▒.█
+; ▒░.█░█.▒
+; ▒░.░░█.█
+; ░░.░░█.▒
+; ...░█▒.▒
+; ████▒..█
+; ▒▒▒▒░░.▒
+; ▒░.░░░.▒
+;
+    db $49,$5c,$5d,$dc,$18,$f1,$0c,$5c,$9d,$95,$85,$05,$0d,$f9,$f1,$81 ; [$8f
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒██▒░░.
+; ░██▒▒▒░.
+; ░▒██▒░░.
+; ░░░▒░░░.
+; ░▒░░░░░.
+; ░██▒▒▒░.
+; ░▒██▒░░.
+; ░██▒▒▒░.
+;
+    db $b6,$e2,$b6,$ee,$be,$e2,$b6,$e2,$78,$7c,$78,$10,$40,$7c,$78,$7c ; [$8f
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; █▒█░█▒█▒
+; ███░░███
+; ▒█▒░░█▒█
+; ▒▒▒░░▒▒▒
+; ░▒░░░▒░▒
+; ░░░░.░░░
+; ........
+;
+    db $ff,$ba,$ff,$5d,$18,$ba,$f7,$00,$00,$ef,$e7,$e7,$e7,$45,$00,$00 ; [$8f
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒.░░░▒▒░
+; ▒.░░▒█.░
+; .░░░░▒..
+; .░░░░░..
+; ░.░░.░░░
+; ..▒▒.░░░
+; .░▒▒▒.░.
+; ........
+;
+    db $39,$35,$78,$7c,$b7,$07,$42,$00,$86,$8c,$04,$00,$00,$30,$38,$00 ; [$8f
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░█░.░░.
+; ░░▒▒.░░.
+; ..▒▒░.░.
+; ▒▒.▒░...
+; ▒▒...░..
+; ▒..░▒░░.
+; .░░░░░..
+; ░░░░░...
+;
+    db $f6,$c6,$0a,$08,$04,$16,$7c,$f8,$20,$30,$30,$d0,$c0,$88,$00,$00 ; [$8f
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8f
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ..░.....
+; ........
+; ░.......
+; ...░..░.
+; ........
+; .......░
+; .░......
+; .....░..
+;
+    db $20,$00,$80,$12,$00,$01,$40,$04,$00,$00,$00,$00,$00,$00,$00,$00 ; [$90
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ..░..░..
+; .......░
+; ░.......
+; ...░..░.
+; .░......
+; ....░..░
+; .░......
+; ...░.░..
+;
+    db $24,$01,$80,$12,$40,$09,$40,$14,$00,$00,$00,$00,$00,$00,$00,$00 ; [$90
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.░..░..
+; ....░..░
+; ░.░.....
+; ...░..░.
+; .░...░..
+; ....░..░
+; .░.░....
+; ░....░.░
+;
+    db $a4,$09,$a0,$12,$44,$09,$50,$85,$00,$00,$00,$00,$00,$00,$00,$00 ; [$90
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒.░..░..
+; ....░..▒
+; ░.▒..▒..
+; ...░..░.
+; .▒...░..
+; ..░.░..░
+; .▒.▒....
+; ░....░.░
+;
+    db $24,$08,$80,$12,$04,$29,$00,$85,$80,$01,$24,$00,$40,$00,$50,$00 ; [$90
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒.░▒.░..
+; ....░..▒
+; ░.▒..▒..
+; ...░▒.░▒
+; .▒...░..
+; ..░.░▒.░
+; .▒.▒..▒.
+; ░....░.░
+;
+    db $24,$08,$80,$12,$04,$29,$00,$85,$90,$01,$24,$09,$40,$04,$52,$00 ; [$90
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒.░▒.░▒░
+; .▒..▒..▒
+; ▒.▒..▒..
+; .▒.▒▒.░░
+; .▒...░▒.
+; ▒.░.░▒.░
+; .▒.▒..▒▒
+; ░.▒.▒░.░
+;
+    db $25,$00,$00,$03,$04,$29,$00,$85,$92,$49,$a4,$58,$42,$84,$53,$28 ; [$90
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒.▒▒.░▒░
+; .▒.▒▒.▒▒
+; ▒.▒..▒▒.
+; .▒.▒▒.░░
+; .▒▒.▒░▒.
+; ▒.░▒░▒.▒
+; .▒.▒..▒▒
+; ░▒▒.▒░.░
+;
+    db $05,$00,$00,$03,$04,$28,$00,$85,$b2,$5b,$a6,$58,$6a,$95,$53,$68 ; [$90
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒▒▒.▒▒░
+; .▒░▒▒░▒▒
+; ▒.▒.▒▒░.
+; ░▒.▒▒.▒░
+; ░▒▒░▒░▒.
+; ▒.▒▒░▒░▒
+; .▒.▒.░▒▒
+; ▒▒▒.▒▒.▒
+;
+    db $01,$24,$02,$81,$94,$0a,$04,$00,$f6,$5b,$ac,$5a,$6a,$b5,$53,$ed ; [$90
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒█▒▒.█▒░
+; .▒░▒▒░▒▒
+; ▒.▒.▒▒░.
+; ░▒.▒▒.▒░
+; ░▒▒░▒░▒.
+; ▒.▒▒░▒░▒
+; .▒.▒.░▒▒
+; ▒▒▒.▒▒.▒
+;
+    db $45,$24,$02,$81,$94,$0a,$04,$00,$f6,$5b,$ac,$5a,$6a,$b5,$53,$ed ; [$90
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ....░...
+; ........
+; ..░....░
+; ........
+; ........
+; ....░...
+; .......░
+;
+    db $00,$08,$00,$21,$00,$00,$08,$01,$00,$00,$00,$00,$00,$00,$00,$00 ; [$90
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒..██░░█
+; ..█░▒██░
+; .██▒....
+; .█....██
+; █.░..█..
+; .█..█...
+; ▒..░▒...
+; ▒..█...▒
+;
+    db $1f,$37,$60,$43,$a4,$48,$10,$10,$99,$2e,$70,$43,$84,$48,$88,$91 ; [$90
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; █░░▒.█..
+; ▒██▒█.▒.
+; ....░▒.▒
+; ██.▒..▒.
+; .░█..░..
+; ......▒.
+; ▒...░░.▒
+; .▒.░..▒.
+;
+    db $e4,$68,$08,$c0,$64,$00,$0c,$10,$94,$fa,$05,$d2,$20,$02,$81,$42 ; [$90
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░.....
+; ██▒░....
+; ██▒░....
+; █▒▒░░...
+; ░▒░▒░▒░░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $e0,$d0,$d0,$98,$ab,$ee,$cc,$88,$00,$e0,$e0,$e0,$54,$f7,$f7,$f7 ; [$90
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ....░░░░
+; ....░▒██
+; ....░▒██
+; ...░░▒▒█
+; ░░▒░▒░▒░
+; ▒██░▒███
+; ▒▒█░▒▒██
+; ▒▒▒░▒▒▒█
+;
+    db $0f,$0b,$0b,$19,$d5,$77,$33,$11,$00,$07,$07,$07,$2a,$ef,$ef,$ef ; [$90
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒.▒....▒
+; ....▒..▒
+; ..▒...▒█
+; ......▒█
+; ▒....▒██
+; .....▒█▒
+; ..▒.▒███
+; ....▒███
+;
+    db $00,$00,$01,$01,$03,$02,$07,$07,$a1,$09,$23,$03,$87,$07,$2f,$0f ; [$90
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░..▒..▒.
+; ░.......
+; ▒░..▒...
+; ▒░......
+; ▒▒░....▒
+; ░░░.....
+; █▒▒░.▒..
+; █▒▒░....
+;
+    db $80,$80,$40,$40,$20,$e0,$90,$90,$12,$00,$88,$80,$c1,$00,$e4,$e0 ; [$90
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ...██░░▒
+; ..█░▒██░
+; .██▒....
+; .█..▒.██
+; █.░..█░.
+; ....▒...
+; ▒..░....
+; ▒.......
+;
+    db $1e,$37,$60,$43,$a6,$00,$10,$00,$19,$2e,$70,$4b,$84,$08,$80,$80 ; [$91
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █░░█.███
+; ▒██.█▒░░
+; ..▒.....
+; █...░███
+; .▒░.█▒░░
+; ..░░░...
+; .▒░.....
+; .▒..▒...
+;
+    db $f7,$6b,$00,$8f,$2b,$38,$20,$00,$97,$ec,$20,$87,$4c,$00,$40,$48 ; [$91
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒░░██...
+; ░██▒██▒.
+; ....░█▒.
+; ██.▒..█.
+; .░█..░.█
+; ..▒▒..▒.
+; ....░..▒
+; .......▒
+;
+    db $78,$ec,$0c,$c2,$65,$00,$08,$00,$98,$7e,$06,$d2,$21,$32,$01,$01 ; [$91
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ..░..░.▒
+; ▒..▒...░
+; ..░.▒.▒.
+; .▒.▒...▒
+; ▒▒▒..▒..
+; .░.▒▒.░░
+; ..▒.░░▒░
+; ...▒▒▒░▒
+;
+    db $24,$01,$20,$00,$00,$43,$0d,$02,$01,$90,$0a,$51,$e4,$18,$22,$1d ; [$91
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒.░..░..
+; ░...▒..▒
+; .▒.▒.░..
+; ▒...▒.▒.
+; ..▒..▒▒▒
+; ░░.▒▒.░.
+; ░▒░░.▒..
+; ▒░▒▒▒...
+;
+    db $24,$80,$04,$00,$00,$c2,$b0,$40,$80,$09,$50,$8a,$27,$18,$44,$b8 ; [$91
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .█░..░..
+; █.......
+; ..░.█.█.
+; .█......
+; ██..█...
+; █░.█....
+; █..█.░..
+; █.░.....
+;
+    db $64,$80,$2a,$40,$c8,$d0,$94,$a0,$40,$80,$0a,$40,$c8,$90,$90,$80 ; [$91
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ..░..░▒.
+; ..▒.▒.▒.
+; .▒.▒.░░▒
+; ....▒▒▒.
+; ..░..▒.▒
+; ...░▒..▒
+; .░.░..▒░
+; .......▒
+;
+    db $24,$00,$06,$00,$20,$10,$51,$00,$02,$2a,$51,$0e,$05,$09,$02,$01 ; [$91
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ........
+; ....░...
+; ........
+; ........
+; .......░
+; ........
+; ....░...
+; ........
+;
+    db $00,$08,$00,$00,$01,$00,$08,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$91
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒░.....
+; ░▒░.....
+; ░░.....░
+; ░▒░.░..░
+; .▒░░░░░.
+; ░░░.░▒▒░
+; ▒▒░░░░░▒
+; ▒░░...░░
+;
+    db $a0,$a0,$c1,$a9,$3e,$e9,$3e,$63,$40,$40,$00,$40,$40,$06,$c1,$80 ; [$91
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; .....░▒░
+; .....░░.
+; .░░░.░▒░
+; ░.░░.░▒░
+; .....░░░
+; ▒▒.░░▒░░
+; ░▒▒▒░▒░░
+; ░░░░░░▒░
+;
+    db $05,$06,$75,$b5,$07,$1b,$8b,$fd,$02,$00,$02,$02,$00,$c4,$74,$02 ; [$91
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .█░.▒░..
+; ▒..▒....
+; ..░.▒.▒▒
+; .▒.▒...▒
+; ▒▒▒..▒..
+; .░.▒▒.░▒
+; ....░▒▒░
+; ▒.▒.....
+;
+    db $64,$00,$20,$00,$00,$42,$09,$00,$48,$90,$0b,$51,$e4,$19,$06,$a0 ; [$91
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ..░..░▒.
+; .▒▒.▒.▒.
+; .▒.▒.░░▒
+; ▒...▒▒▒.
+; ..▒..▒.▒
+; ▒░.▒▒...
+; ░▒.░..▒.
+; ........
+;
+    db $24,$00,$06,$00,$00,$40,$90,$00,$02,$6a,$51,$8e,$25,$98,$42,$00 ; [$91
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░......
+; ░░░░.░░.
+; ░▒▒▒░▒░░
+; ░░▒▒▒█▒░
+; ░▒▒███▒▒
+; ░░▒▒▒███
+; ░▒▒███▒▒
+; ▒░▒▒▒██▒
+;
+    db $c0,$f6,$8b,$c5,$9c,$c7,$9c,$46,$00,$00,$74,$3e,$7f,$3f,$7f,$bf ; [$91
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░....░.
+; ░.░░....
+; .░░.░░..
+; ░░.░░.░.
+; ░░░░.░..
+; ▒▒.░░░.░
+; ▒▒▒░░░░.
+; ▒░..░.░░
+;
+    db $42,$b0,$6c,$da,$f4,$1d,$1e,$4b,$00,$00,$00,$00,$00,$c0,$e0,$80 ; [$91
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒..▒█▒█▒
+; ...▒███▒
+; ..▒████▒
+; ..░▒▒▒▒▒
+; .▒▒██▒░░
+; .▒██░███
+; ░▒██░██▒
+; ░▒█▒░██▒
+;
+    db $0a,$0e,$1e,$20,$1b,$3f,$be,$ae,$9f,$1f,$3f,$1f,$7c,$77,$77,$77 ; [$91
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░▒░░░..▒
+; █▒▒▒▒...
+; ██░▒▒░..
+; ▒▒░▒░▒..
+; ░░░░░░░.
+; ░██▒░▒░.
+; ░█▒▒▒░░░
+; ░█▒▒▒▒░░
+;
+    db $b8,$80,$e4,$28,$fe,$ea,$c7,$c3,$41,$f8,$d8,$d4,$00,$74,$78,$7c ; [$91
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░░░.░░
+; ░.░░.░░░
+; .░░.░░..
+; ░..░.░.░
+; .░.░░.░.
+; ░.░..░.░
+; ...░...░
+;
+    db $fd,$bb,$b7,$6c,$95,$5a,$a5,$11,$00,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░░.▒░
+; ░.░...░░
+; ░░░░░.▒░
+; .░░░░..░
+; ░░░░░.▒░
+; .░░...░.
+; ░.░░.▒░░
+; ░░░░.▒.░
+;
+    db $f9,$a3,$f9,$79,$f9,$62,$b3,$f1,$02,$00,$02,$00,$02,$00,$04,$04 ; [$92
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░..▒.░
+; ░.░.▒░░░
+; ░░..░░░░
+; .░.▒░░.░
+; ░░.░░░░░
+; .░.▒░.░.
+; ░..▒░░░░
+; ░░.▒.░.░
+;
+    db $e1,$a7,$cf,$4d,$df,$4a,$8f,$c5,$04,$08,$00,$10,$00,$10,$10,$10 ; [$92
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░▒▒▒░▒░.
+; ▒░░░░░░.
+; ░░░░░░░.
+; ........
+; ▒▒▒░.░▒▒
+; ░░░░.▒░░
+; ░░░░.░░░
+; ........
+;
+    db $8a,$7e,$fe,$00,$14,$f3,$f7,$00,$74,$80,$00,$00,$e3,$04,$00,$00 ; [$92
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░▒░▒▒▒░▒
+; ▒█▒██▒█▒
+; █▒▒▒▒█▒▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░▒
+; .░░░..░.
+; ░..░.░.░
+; ░░░.....
+;
+    db $a2,$5a,$84,$00,$fe,$72,$95,$e0,$5d,$ff,$ff,$ff,$01,$00,$00,$00 ; [$92
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░▒
+; █▒█▒██▒█
+; ▒█▒▒▒█▒▒
+; ▒▒▒▒▒▒▒▒
+; ░▒░░░░░░
+; ░.░.░░.░
+; .░.░.░..
+; ........
+;
+    db $02,$ad,$44,$00,$bf,$ad,$54,$00,$fd,$ff,$ff,$ff,$40,$00,$00,$00 ; [$92
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; ▒▒█▒█▒▒░
+; █▒▒█▒▒▒░
+; ▒▒▒▒▒▒░░
+; ░▒░░▒░.░
+; ░.░.░.░.
+; ........
+; ░....░..
+;
+    db $02,$29,$91,$03,$b5,$aa,$00,$84,$fc,$fe,$fe,$fc,$48,$00,$00,$00 ; [$92
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░....
+; ░░░░░.░.
+; ░░░░.░..
+; .░░.░░.░
+; ░░.░░░.░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $f0,$fa,$f4,$6d,$dd,$6a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; .░.░....
+; ░.....░.
+; .░.░.░.░
+; ....░...
+; .░.░.░.░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $50,$82,$55,$08,$55,$6a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ..░.░.░░
+; ..░░░░░░
+; ....░░.░
+; .░...░░░
+; ......░.
+; ░...░.░░
+; .......░
+;
+    db $fd,$2b,$3f,$0d,$47,$02,$8b,$01,$00,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒░.▒
+; ▒.░.░.░░
+; ▒░░░░░░░
+; .░░.░░.░
+; ▒░.░░░░░
+; .░░.░.░.
+; ▒.░░░░░░
+; ▒░░░.░.░
+;
+    db $84,$2b,$7f,$6d,$5f,$6a,$3f,$75,$79,$80,$80,$00,$80,$00,$80,$80 ; [$92
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░▒▒▒░..
+; ░.░.░.░.
+; ░░░░░░░.
+; .░░.░░..
+; ░░.░░░░.
+; .░░.░.░.
+; ░.░░░░░.
+; ░░░░.░..
+;
+    db $44,$aa,$fe,$6c,$de,$6a,$be,$f4,$b8,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ▒.░.░.░░
+; ░░░░░░░░
+; .░░.░░.░
+; ▒░.░░░░░
+; .░░.░.░.
+; ░.░░░.░░
+; ........
+;
+    db $fd,$2b,$ff,$6d,$5f,$6a,$bb,$00,$00,$80,$00,$00,$80,$00,$00,$00 ; [$92
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░░░..
+; ░.░.░.░.
+; ░░░░░░░.
+; .░░.░░.░
+; ░░.░░░░.
+; .░░.░.░.
+; ░.░░░.░.
+; ........
+;
+    db $fc,$aa,$fe,$6d,$de,$6a,$ba,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$92
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒███▒▒░░
+; ▒▒▒▒▒▒░░
+; ░▒░▒▒░.░
+; ░░░░░░░.
+; ▒░█▒▒▒░░
+; ▒░▒▒▒░░░
+; ░░▒░░░░░
+;
+    db $00,$73,$03,$a5,$fe,$63,$47,$df,$fe,$fc,$fc,$58,$00,$bc,$b8,$20 ; [$92
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.▒░░░.░
+; ░.▒.░.░░
+; ░..▒░░░░
+; ....▒░.░
+; ░░..▒░░░
+; .░░.░.░.
+; ░.░░.░░░
+; ░░░░.░.░
+;
+    db $9d,$8b,$8f,$05,$c7,$6a,$b7,$f5,$20,$20,$10,$08,$08,$00,$00,$00 ; [$92
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .░▒░▒▒▒░
+; ░▒▒▒░▒░.
+; ▒▒░░▒░▒░
+; ▒▒░░░░░░
+; ▒▒░░▒▒░.
+; ░▒░▒░░░░
+; ▒▒░▒░░░.
+; ░▒░░░░░.
+;
+    db $51,$8a,$35,$3f,$32,$af,$2e,$be,$2e,$74,$ca,$c0,$cc,$50,$d0,$40 ; [$93
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒▒░▒░▒░.
+; .▒░░▒░▒.
+; .▒░░░░..
+; ▒░░░░░.░
+; ░░░░░.▒░
+; ▒░░░░.▒░
+; ▒░░░.░▒░
+;
+    db $00,$2a,$34,$3c,$7d,$f9,$79,$75,$fe,$d4,$4a,$40,$80,$02,$82,$82 ; [$93
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒░░.
+; ░▒░▒░▒░.
+; ░░░░░░..
+; ░░░░░░░.
+; ░░░░░░..
+; ░░.░░░░.
+; ░░▒.░░..
+; ░░▒.░░░.
+;
+    db $06,$aa,$fc,$fe,$fc,$de,$cc,$ce,$f8,$54,$00,$00,$00,$00,$20,$20 ; [$93
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒▒░▒░▒░.
+; .▒░░▒░▒.
+; .▒░░░░..
+; ▒░░░....
+; ░░░.....
+; ▒░.....░
+; ▒░...░░░
+;
+    db $00,$2a,$34,$3c,$70,$e0,$41,$47,$fe,$d4,$4a,$40,$80,$00,$80,$80 ; [$93
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .░░.░.░░
+; ░.......
+; ░.......
+; ....░░░.
+; ░....░░.
+; ░.....▒░
+; ....▒░.▒
+; ░.░▒░...
+;
+    db $6b,$80,$80,$0e,$86,$81,$04,$a8,$00,$00,$00,$00,$00,$02,$09,$10 ; [$93
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░.░░.░.
+; ........
+; ......▒░
+; ......▒░
+; .....▒░.
+; ....▒░..
+; ▒▒▒▒░...
+; ▒░░░....
+;
+    db $5a,$00,$01,$01,$02,$04,$08,$70,$00,$00,$02,$02,$04,$08,$f0,$80 ; [$93
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░.░.░.░░
+; .......░
+; .......▒
+; ...░░..▒
+; ...▒░..▒
+; ....▒░.▒
+; .....▒▒▒
+; ░.....░░
+;
+    db $ab,$01,$00,$18,$08,$04,$00,$83,$00,$00,$01,$01,$11,$09,$07,$00 ; [$93
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░▒▒▒▒▒▒
+; ░▒▒██▒▒█
+; ░▒██▒░██
+; ░░░░░░▒▒
+; ░▒▒▒▒░░░
+; ░▒▒████▒
+; ░▒███▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $40,$99,$b7,$fc,$87,$9e,$b8,$80,$3f,$7f,$7b,$03,$78,$7f,$7f,$7f ; [$93
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░.░.░
+; ░.░...░░
+; ░░...░░░
+; .░...▒.░
+; ░░.▒▒░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $f5,$a3,$c7,$41,$c7,$6a,$bf,$f5,$00,$00,$00,$04,$18,$00,$00,$00 ; [$93
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; .░.░....
+; ░.....░.
+; .░.░.░.░
+; ..░.░.░.
+; ░░░░.░░░
+; .░.░░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $50,$82,$55,$2a,$f7,$5a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$93
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░.▒▒▒
+; ░.░▒▒░░░
+; ░░▒░░░░░
+; ░░▒░░...
+; .▒░░...░
+; ░▒░░...░
+; ░▒░░.░░.
+; ░▒░░..░░
+;
+    db $f0,$a7,$df,$d8,$31,$b1,$b6,$b3,$07,$18,$20,$20,$40,$40,$40,$40 ; [$93
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░░..░░░
+; ░░░░..░░
+; .░░░░░.░
+; ..░▒░░..
+; .░░░▒░░.
+; ░.░.░▒░.
+; ░░░░▒░░.
+; ░░.░▒░░.
+;
+    db $67,$f3,$7d,$2c,$76,$aa,$f6,$d6,$80,$00,$00,$10,$08,$04,$08,$08 ; [$93
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░▒▒▒░▒▒▒
+; ░.░.░░░░
+; ░░.░░░░░
+; ........
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $88,$af,$df,$00,$df,$6a,$bf,$f5,$77,$00,$00,$00,$00,$00,$00,$00 ; [$93
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░░░▒▒
+; ▒░█▒░███
+; ░███▒░▒▒
+; ▒█▒▒█▒░▒
+; ▒▒░▒▒▒▒░
+; ░░░░▒▒▒▒
+; █▒█░░█▒▒
+; ▒▒░▒░▒▒▒
+;
+    db $fc,$6f,$f4,$4a,$21,$f0,$bc,$28,$03,$b7,$7b,$fd,$de,$0f,$e7,$d7 ; [$93
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░░░.▒▒▒
+; ░.░▒▒░░░
+; ░░▒░░░░░
+; ░░▒░░...
+; .▒░░....
+; ░▒░░....
+; ░▒░░....
+; ░▒░░....
+;
+    db $f0,$a7,$df,$d8,$30,$b0,$b0,$b0,$07,$18,$20,$20,$40,$40,$40,$40 ; [$93
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░░..░░░
+; ░░░░..░░
+; .░░░░░.░
+; ..░▒░░..
+; ...░▒░░.
+; ....░▒░.
+; ...░▒░░.
+; ...░▒░░.
+;
+    db $67,$f3,$7d,$2c,$16,$0a,$16,$16,$80,$00,$00,$10,$08,$04,$08,$08 ; [$93
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒░░░..▒
+; ░▒░░░░░░
+; ▒▒░░▒▒░░
+; ▒▒░▒░░▒░
+; ░▒░░░░░░
+; ░░░.░.░░
+; .░.░.░.░
+; ........
+;
+    db $38,$bf,$33,$2d,$bf,$eb,$55,$00,$c1,$40,$cc,$d2,$40,$00,$00,$00 ; [$94
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░..▒░░
+; ░░░░░▒░░
+; ░░░░░.░░
+; ░░░░░.▒░
+; ░░░░░.▒░
+; ░.░.░.░.
+; .░.░.░.░
+; ........
+;
+    db $e3,$fb,$fb,$f9,$f9,$aa,$55,$00,$04,$04,$00,$02,$02,$00,$00,$00 ; [$94
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░.░░░..
+; ░░░░░░░.
+; ░░░░░░░.
+; ░░░░░░..
+; ░░░░░░..
+; ░.░.░...
+; .░.░.░..
+; ........
+;
+    db $dc,$fe,$fe,$fc,$fc,$a8,$54,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$94
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░....░░░
+; ░░..░░░░
+; ░...░.░.
+; ░░...░░░
+; ░...░.░.
+; ░..░.░░░
+; ...░░░░░
+; ..░░░░.░
+;
+    db $87,$cf,$8a,$c7,$8a,$97,$1f,$3d,$00,$00,$00,$00,$00,$00,$00,$00 ; [$94
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░.░░...▒
+; .......▒
+; ░......▒
+; ░....▒▒░
+; ░...▒░░.
+; ░..▒░...
+; ░..▒░...
+; .░░░░▒▒▒
+;
+    db $b0,$00,$80,$81,$86,$88,$88,$78,$01,$01,$01,$06,$08,$10,$10,$07 ; [$94
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░..▒░...
+; ░...▒░..
+; ░....▒░.
+; ░.....▒▒
+; ░░....▒░
+; .▒░..░▒░
+; .▒░..▒░.
+; ▒▒░▒▒▒░▒
+;
+    db $88,$84,$82,$80,$c1,$25,$22,$22,$10,$08,$04,$03,$02,$42,$44,$dd ; [$94
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒░.....░
+; .▒░..▒▒▒
+; .▒░.▒░░░
+; .▒░░░░..
+; .▒░....░
+; .▒░....▒
+; .▒░....▒
+; ▒░░░▒▒▒▒
+;
+    db $41,$20,$27,$3c,$21,$20,$20,$70,$80,$47,$48,$40,$40,$41,$41,$8f ; [$94
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░.░░░░.
+; ░░░..░░.
+; .░.░░░..
+; ░░░.░.░.
+; ▒▒░▒▒▒▒▒
+; ░░░░░░▒░
+; ░░░░░░░░
+; ...░.░..
+;
+    db $5e,$e6,$5c,$ea,$20,$fd,$ff,$14,$00,$00,$00,$00,$df,$02,$00,$00 ; [$94
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░.░.░░
+; ░░░░░░░░
+; .░░.░░.░
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $fd,$ab,$ff,$6d,$df,$6a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$94
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░...░░
+; ░░...▒░░
+; .░.░▒░.░
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $fd,$a3,$c3,$55,$df,$6a,$bf,$f5,$00,$00,$04,$08,$00,$00,$00,$00 ; [$94
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░▒░░.░░░
+; ░▒░...░.
+; ░▒░░.░░░
+; ░.░░.░.░
+; .▒░░.░░░
+; ░░░....░
+; ░▒░░.░░.
+; ░▒.░.░.░
+;
+    db $b7,$a2,$b7,$b5,$37,$e1,$b6,$95,$40,$40,$40,$00,$40,$00,$40,$40 ; [$94
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░▒░░.
+; ░.░.▒░░.
+; ░░░░▒░░.
+; ░.░░.░..
+; .░░░▒░░.
+; ░.░.▒░..
+; ░░░░▒░░.
+; ░░.░.░░.
+;
+    db $f6,$a6,$f6,$b4,$76,$a4,$f6,$d6,$08,$08,$08,$00,$08,$08,$08,$00 ; [$94
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░..░.
+; ██▒▒░░.░
+; ▒▒▒▒░░.░
+; ░░░░░░.░
+; .░.░░.░.
+; ▒▒▒.▒▒░░
+; ░░░.░░░░
+; ░░░.░░░.
+;
+    db $f2,$cd,$0d,$fd,$5a,$03,$ef,$ee,$00,$f0,$f0,$00,$00,$ec,$00,$00 ; [$94
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒░▒█░▒▒░
+; ░░▒░░▒░.
+; ░░░▒.▒░.
+; .░░░.░.░
+; .░.░.░░.
+; .░░.░.░.
+; ░....░░.
+; ..░.░..░
+;
+    db $59,$da,$e2,$75,$56,$6a,$86,$29,$b6,$24,$14,$00,$00,$00,$00,$00 ; [$94
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒░░....
+; ░▒░.....
+; ░▒░░....
+; ░.░░....
+; .▒░░....
+; ░░░.....
+; ░▒░░....
+; ░▒.░....
+;
+    db $b0,$a0,$b0,$b0,$30,$e0,$b0,$90,$40,$40,$40,$00,$40,$00,$40,$40 ; [$94
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ...░▒░░.
+; ....▒░░.
+; ...░▒░░.
+; ...░.░..
+; ...░▒░░.
+; ....▒░..
+; ...░▒░░.
+; ...░.░░.
+;
+    db $16,$06,$16,$14,$16,$04,$16,$16,$08,$08,$08,$00,$08,$08,$08,$00 ; [$94
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒▒██▒█▒
+; ░░▒▒▒██▒
+; ░▒▒▒█▒█▒
+; ░░▒█▒▒█▒
+; ░▒▒▒▒███
+; ▒░▒█████
+; ░▒█▒██▒▒
+; ░░▒░░██▒
+;
+    db $9a,$c6,$8a,$d2,$87,$5f,$ac,$de,$7f,$3f,$7f,$3f,$7f,$bf,$7f,$27 ; [$95
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒░▒░░.░
+; ░▒▒░░.░░
+; ░▒░▒░░.░
+; ░▒▒░░...
+; █▒░░.░.░
+; ▒█▒▒░░.░
+; ▒▒▒▒░░░.
+; ▒░..░...
+;
+    db $ad,$9b,$ad,$98,$b5,$4d,$0e,$48,$50,$60,$50,$60,$c0,$f0,$f0,$80 ; [$95
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒▒▒░░.░
+; ░░▒░▒░░░
+; ░▒▒▒░░░░
+; ░░▒▒▒░.░
+; ░▒▒▒░░░░
+; ░░░▒▒.░.
+; ░▒▒▒░░░░
+; ░░▒░▒░.░
+;
+    db $8d,$d7,$8f,$c5,$8f,$e2,$8f,$d5,$70,$28,$70,$38,$70,$18,$70,$28 ; [$95
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░.░.░
+; ░.░.░..░
+; ░░░░...░
+; ░.░░░.░.
+; ░░░░...░
+; ░░░.░..░
+; ░.░░....
+; ░░░░░..░
+;
+    db $f5,$a9,$f1,$ba,$f1,$e9,$b0,$f9,$00,$00,$00,$00,$00,$00,$00,$00 ; [$95
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ...░▒░▒.
+; ..░▒░▒░░
+; ...▒▒▒▒.
+; ..░▒░▒░░
+; ...▒▒▒▒.
+; ..░▒░▒░░
+; ...▒▒▒▒.
+; ..░▒░▒░░
+;
+    db $14,$2b,$00,$2b,$00,$2b,$00,$2b,$0a,$14,$1e,$14,$1e,$14,$1e,$14 ; [$95
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░▒▒▒░▒░.
+; ▒░░░░░░.
+; ░░░░░░░.
+; ........
+; ▒▒▒▒.▒▒▒
+; ░░░░.▒░░
+; ░░░░.░░░
+; ........
+;
+    db $8a,$7e,$fe,$00,$00,$f3,$f7,$00,$74,$80,$00,$00,$f7,$04,$00,$00 ; [$95
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒▒░▒░▒░.
+; ░▒░░▒░▒.
+; .░░░░░..
+; ...░░░.░
+; ....░░░░
+; ░░...▒░░
+; .░░..░▒░
+;
+    db $00,$2a,$b4,$7c,$1d,$0f,$c3,$65,$fe,$d4,$4a,$00,$00,$00,$04,$02 ; [$95
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░.░..▒░
+; ░.░░..▒░
+; ░░░░░.░▒
+; ░..░..▒░
+; ░░.░░.▒░
+; ░░░░░..░
+; ░.░░...░
+; .░..░░..
+;
+    db $d1,$b1,$fa,$91,$d9,$f9,$b1,$4c,$02,$02,$01,$02,$02,$00,$00,$00 ; [$95
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒░.....
+; ░▒░░....
+; ░▒░░....
+; .░▒░░...
+; ░░▒░░░▒░
+; ░░░░░░░░
+; ░.░.░░░░
+; ░░░░....
+;
+    db $a0,$b0,$b0,$58,$dd,$ff,$af,$f0,$40,$40,$40,$20,$22,$00,$00,$00 ; [$95
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ....▒▒░.
+; ....▒░░.
+; ...▒▒░░.
+; ..░▒▒░..
+; ▒▒▒░░░.░
+; ░░░░░..░
+; ░░░...░░
+; ....░░░░
+;
+    db $02,$06,$06,$24,$1d,$f9,$e3,$0f,$0c,$08,$18,$18,$e0,$00,$00,$00 ; [$95
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░▒░▒░▒░
+; ░▒███▒██
+; ░▒██▒▒█▒
+; ░▒▒▒▒░▒▒
+; ░▒▒░░░░░
+; ░▒▒▒▒▒▒▒
+; ░░░▒░░░░
+; .░░░░░░░
+;
+    db $d5,$bb,$b2,$84,$9f,$80,$ef,$7f,$2a,$7f,$7f,$7b,$60,$7f,$10,$00 ; [$95
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░▒░..░.░
+; ░░....░.
+; .▒░.....
+; ░.░..░▒░
+; .▒...░░░
+; .░░...░.
+; ░.......
+; ░░......
+;
+    db $a5,$c2,$20,$a5,$07,$62,$80,$c0,$40,$00,$40,$02,$40,$00,$00,$00 ; [$95
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .░░░.░▒.
+; ░░...░.░
+; ....▒░▒.
+; ▒░▒▒▒.░░
+; ▒░░.░░░.
+; ░.░...░░
+; .....░▒.
+; .....░░.
+;
+    db $74,$c5,$04,$43,$6e,$a3,$04,$06,$02,$00,$0a,$b8,$80,$00,$02,$00 ; [$95
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░.░░░░.
+; ░░░..░░.
+; .░.░░░..
+; ░░░.░.░.
+; ▒▒░▒▒▒▒▒
+; ░░░░░░▒░
+; ░░░░░░░░
+; ...░.░..
+;
+    db $5e,$e6,$5c,$ea,$20,$fd,$ff,$14,$00,$00,$00,$00,$df,$02,$00,$00 ; [$95
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; █▒█▒█▒▒░
+; ░░███░.░
+; ▒▒░█▒▒░░
+; ▒▒░█▒.░.
+; ███▒█░░░
+; ██.█░░░.
+; ▒█░▒░░.░
+; ▒░█.░░░░
+;
+    db $a9,$fd,$33,$32,$ef,$de,$6d,$6f,$fe,$38,$dc,$d8,$f8,$d0,$d0,$a0 ; [$95
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░░▒░░░░
+; ▒██▒.░.░
+; ███▒▒░░░
+; ░█▒░.░░.
+; ▒█▒░░.░░
+; █░.░.░░.
+; █▒░░░░.░
+; ▒.░.░░░░
+;
+    db $6f,$65,$e7,$d6,$5b,$d6,$bd,$2f,$90,$f0,$f8,$60,$e0,$80,$c0,$80 ; [$95
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ..▒░░░.░
+; ░.▒.░.░░
+; ░..▒░░░░
+; ░░..▒░.░
+; ░░..▒░░░
+; .░░...░▒
+; ░.░░.░.▒
+; ░░░░..░.
+;
+    db $1d,$8b,$8f,$c5,$c7,$62,$b4,$f2,$20,$20,$10,$08,$08,$01,$01,$00 ; [$96
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒░.░░░.
+; ░▒░░.░.░
+; ░▒░░.░░░
+; .░▒░░..░
+; ░░▒░░░▒░
+; ░░░░░░░░
+; ░.░.░░░░
+; ░░░░....
+;
+    db $ae,$b5,$b7,$59,$dd,$ff,$af,$f0,$40,$40,$40,$20,$22,$00,$00,$00 ; [$96
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░░▒▒░.
+; ░░░.▒░░.
+; .░░▒▒░░.
+; ░.░▒▒░..
+; ▒▒▒░░░.░
+; ░░░░░..░
+; ░░░...░░
+; ....░░░░
+;
+    db $f2,$e6,$66,$a4,$1d,$f9,$e3,$0f,$0c,$08,$18,$18,$e0,$00,$00,$00 ; [$96
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░▒▒▒░░░░
+; ▒▒█▒▒░▒█
+; █▒██░▒█▒
+; ▒█▒░▒██▒
+; ▒▒░▒█▒▒▒
+; ░░▒▒▒▒▒░
+; ░░░▒░▒░▒
+;
+    db $ff,$8f,$25,$ba,$56,$28,$c1,$ea,$00,$70,$fb,$f7,$ef,$df,$3e,$15 ; [$96
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒░░░░░▒
+; ▒▒▒▒░▒▒█
+; █▒▒░▒▒██
+; ▒▒░▒▒██▒
+; ░░▒▒██▒▒
+; ░▒░▒▒▒▒░
+; ▒█▒█▒▒░░
+;
+    db $ff,$3e,$09,$93,$26,$cc,$a1,$53,$00,$c1,$f7,$ef,$df,$3f,$5e,$fc ; [$96
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒░░░░░▒▒
+; ▒▒░░░▒░▒
+; ░░░░▒░▒░
+; ░░▒░░░░.
+; ░░░░░.░░
+; ░.░.░░░.
+; .░.░.░.░
+; ░.░.░.░.
+;
+    db $7c,$3a,$f5,$de,$fb,$ae,$55,$aa,$83,$c5,$0a,$20,$00,$00,$00,$00 ; [$96
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒░░▒▒░.░
+; ▒▒▒██▒▒▒
+; ██▒▒███▒
+; ███░░░▒▒
+; ░░░██░░▒
+; ███▒▒▒░.
+; ██▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+;
+    db $65,$18,$ce,$fc,$fe,$e2,$c1,$01,$98,$ff,$ff,$e3,$19,$fc,$fe,$fe ; [$96
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒██
+; ░▒▒▒▒██▒
+; ░▒▒█▒▒▒█
+; ░▒▒█▒▒█▒
+; ░▒▒▒▒█▒▒
+; ░▒▒▒█▒█▒
+; ░▒█▒▒▒██
+; ░▒▒▒█▒▒▒
+;
+    db $cb,$86,$91,$92,$84,$8a,$a3,$88,$3f,$7f,$7f,$7f,$7f,$7f,$7f,$7f ; [$96
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; █▒▒▒▒░▒░
+; ▒▒▒▒░▒▒░
+; ▒█▒▒▒░░░
+; ▒▒▒░▒░▒░
+; ░▒█▒▒░░░
+; █▒░░▒░▒▒
+; ░▒▒▒░░░░
+;
+    db $0b,$85,$09,$47,$15,$a7,$b4,$8f,$f4,$fa,$f6,$f8,$ea,$78,$cb,$70 ; [$96
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░▒░.░░.
+; ▒░░░░..░
+; ░░░░.░░.
+; ▒░▒░░..░
+; ░░░░░░░.
+; ░░░.░░..
+; ▒░░░░.░░
+;
+    db $fd,$d6,$79,$f6,$59,$fe,$ec,$7b,$00,$20,$80,$00,$a0,$00,$00,$80 ; [$96
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░.░.....
+; ░░..░.░.
+; ..░░....
+; ░.░...░.
+; .░...░..
+; ░..░.░..
+; ░░░.....
+; ....░.░.
+;
+    db $a0,$ca,$30,$a2,$44,$94,$e0,$0a,$00,$00,$00,$00,$00,$00,$00,$00 ; [$96
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒██
+; ░▒▒▒▒▒▒▒
+; .░▒▒░▒▒░
+; ░.░░░░░░
+; ░..░.░.░
+; .░▒▒▒▒▒▒
+; ░▒█▒████
+; ░▒▒▒█▒▒▒
+;
+    db $cb,$80,$49,$bf,$95,$40,$af,$88,$3f,$7f,$36,$00,$00,$3f,$7f,$7f ; [$96
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; ▒▒▒▒▒░▒░
+; ░▒░▒░░░░
+; ░░░░░░░░
+; .░......
+; ▒▒▒▒▒▒▒░
+; █▒░░▒░░.
+; ░▒▒▒░░░░
+;
+    db $0b,$05,$af,$ff,$40,$01,$b6,$8f,$f4,$fa,$50,$00,$00,$fe,$c8,$70 ; [$96
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░▒░.░░.
+; ▒░░░░..░
+; ░░░░.░░.
+; ........
+; ░░░░░░░.
+; ░░░.░░..
+; ▒░░░░.░░
+;
+    db $fd,$d6,$79,$f6,$00,$fe,$ec,$7b,$00,$20,$80,$00,$00,$00,$00,$80 ; [$96
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░.░.....
+; ░░..░.░.
+; ..░░....
+; ░.░.....
+; ........
+; ░..░.░..
+; ░░░.....
+; ....░.░.
+;
+    db $a0,$ca,$30,$a0,$00,$94,$e0,$0a,$00,$00,$00,$00,$00,$00,$00,$00 ; [$96
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; █▒▒▒▒░▒░
+; ▒▒▒▒░▒▒░
+; ░░░░░░░░
+; .░......
+; █▒..█▒▒░
+; █▒.▒█░▒▒
+; ░▒.█░░░░
+;
+    db $0b,$85,$09,$ff,$40,$89,$8c,$9f,$f4,$fa,$f6,$00,$00,$ce,$db,$50 ; [$96
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░....
+; ░░░.....
+; ░░......
+; ░.....░░
+; ....░░░.
+; ...░░▒.░
+; ...▒░░▒.
+; ...░..░░
+;
+    db $f0,$e0,$c0,$83,$0e,$19,$0c,$13,$00,$00,$00,$00,$00,$04,$12,$00 ; [$97
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ....░▒░░
+; .....░▒░
+; ........
+; .░░░....
+; .▒░░░...
+; .░░░░░..
+; .▒▒░░░..
+; .░░..░░.
+;
+    db $0b,$05,$00,$70,$38,$7c,$1c,$66,$04,$02,$00,$00,$40,$00,$60,$00 ; [$97
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒.█░▒░░
+; █░▒▒▒░▒░
+; ▒░.▒░▒▒░
+; ▒▒░█▒░░░
+; ▒▒░░▒░▒░
+; ░▒░█▒░░░
+; █..░▒░▒▒
+; ░.█▒░░░░
+;
+    db $1b,$c5,$49,$37,$35,$b7,$94,$af,$d4,$ba,$96,$d8,$ca,$58,$8b,$30 ; [$97
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒██
+; ░▒█▒▒█▒▒
+; ░▒▒▒░.██
+; ░▒█▒░.█▒
+; ░▒▒▒▒██▒
+; ░▒▒▒█▒█▒
+; ░▒█▒▒▒██
+; ░▒▒▒█▒▒▒
+;
+    db $cb,$a4,$8b,$aa,$86,$8a,$a3,$88,$3f,$7f,$73,$73,$7f,$7f,$7f,$7f ; [$97
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░..░░░.░
+; ░..▒.░░.
+; ▒..▒░..░
+; ░....░░.
+; ........
+; ░░.░░░░.
+; ░░░.░░..
+; ▒░░░░.░░
+;
+    db $9d,$86,$09,$86,$00,$de,$ec,$7b,$00,$10,$90,$00,$00,$00,$00,$80 ; [$97
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.▒░░░.░
+; ░.▒░.░░.
+; ▒░.▒░..░
+; ░░.▒.░░.
+; ▒░.▒░..░
+; ░░.▒░░░.
+; ░░..░░..
+; ▒..▒░.░░
+;
+    db $9d,$96,$49,$c6,$49,$ce,$cc,$0b,$20,$20,$90,$10,$90,$10,$00,$90 ; [$97
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒░▒▒░░
+; ░░░░▒▒░.
+; ..░░▒▒░.
+; ░░░░░░.░
+; .░.░▒░░.
+; ░.░.░.░.
+; ░....░░.
+; ..░....░
+;
+    db $13,$f2,$32,$fd,$56,$aa,$86,$21,$ec,$0c,$0c,$00,$08,$00,$00,$00 ; [$97
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░▒▒▒░▒░
+; ░▒▒██▒██
+; ░▒▒██▒██
+; ░▒▒▒▒▒██
+; ░░▒▒▒▒▒▒
+; ░▒█▒███▒
+; ░▒▒▒█▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $45,$9b,$9b,$83,$c0,$ae,$88,$80,$3a,$7f,$7f,$7f,$3f,$7f,$7f,$7f ; [$97
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒████▒░
+; ▒▒█▒▒▒▒░
+; ▒▒▒▒▒░░░
+; ░▒░▒░▒░░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $ff,$3d,$21,$07,$ab,$ee,$cc,$88,$00,$fe,$fe,$f8,$54,$f7,$f7,$f7 ; [$97
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░......
+; █▒█░▒░.▒
+; ▒▒▒▒░░.▒
+; ░▒░░░░.▒
+; ........
+; ▒▒░.▒▒░░
+; ░▒░.▒░░░
+; ▒▒░.▒░░░
+;
+    db $c0,$b4,$0c,$bc,$00,$23,$a7,$27,$00,$e9,$f1,$41,$00,$cc,$48,$c8 ; [$97
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; ░░.░░.░.
+; .░.░....
+; ░░.░░.░.
+; ........
+; .▒░░.░░.
+; .░.░....
+; .░░░.░░.
+;
+    db $00,$da,$50,$da,$00,$36,$50,$76,$00,$00,$00,$00,$00,$40,$00,$00 ; [$97
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░.
+; █▒██▒█▒░
+; █▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒.
+; ░░░░░░░░
+; █▒█▒░██▒
+; ▒▒▒▒░█▒▒
+; ▒▒▒▒░▒▒▒
+;
+    db $fe,$b5,$81,$00,$ff,$ae,$0c,$08,$00,$fe,$fe,$fe,$00,$f7,$f7,$f7 ; [$97
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ...░▒▒░.
+; ..░▒░░.░
+; ...▒░░..
+; ..░░..░░
+; ...░▒▒░.
+; ..░▒░░░░
+; ...▒░░░.
+; ..░░..░░
+;
+    db $12,$2d,$0c,$33,$12,$2f,$0e,$33,$0c,$10,$10,$00,$0c,$10,$10,$00 ; [$97
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .▒░▒▒░░.
+; .░░░░░..
+; .▒░░░.░.
+; .░░..░..
+; .▒░▒▒░░.
+; .░▒░░...
+; .▒░░░.░.
+; .░░..░..
+;
+    db $26,$7c,$3a,$64,$26,$58,$3a,$64,$58,$00,$40,$00,$58,$20,$40,$00 ; [$97
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .▒░▒░▒░.
+; .░▒░▒░..
+; .░▒▒▒▒░.
+; .░▒░▒░..
+; .░▒▒▒▒░.
+; .░▒░▒░..
+; .░▒▒▒▒░.
+; .░▒░▒░..
+;
+    db $2a,$54,$42,$54,$42,$54,$42,$54,$54,$28,$3c,$28,$3c,$28,$3c,$28 ; [$97
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$97
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$98
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░▒▒█▒▒▒
+; ▒▒▒█▒▒░░
+; ▒█▒▒░▒▒▒
+; █▒▒░█▒░▒
+; ▒▒░█▒▒▒░
+; ░▒▒▒▒▒░▒
+; ▒▒░▒▒░▒▒
+; ░▒░▒░▒█▒
+;
+    db $48,$13,$48,$9a,$31,$82,$24,$aa,$bf,$fc,$f7,$ed,$de,$7d,$db,$57 ; [$98
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒░▒▒▒░░
+; ▒░▒▒░░░▒
+; ░▒▒░░▒▒▒
+; ▒░░▒█▒██
+; ░▒▒██▒░░
+; ▒▒██░░▒█
+; ▒█▒▒▒▒▒▒
+; ██▒▒██▒▒
+;
+    db $a3,$4e,$98,$6b,$9b,$3d,$40,$cc,$5c,$b1,$67,$9f,$7c,$f3,$ff,$ff ; [$98
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒██▒██
+; ▒▒▒█▒▒▒▒
+; ▒██▒█▒▒▒
+; ██▒█▒▒░░
+; ██▒▒▒░░░
+; ▒▒▒░░░..
+; ▒░░░░░░.
+; ░░░░...░
+;
+    db $1b,$10,$68,$d3,$c7,$1c,$7e,$f1,$ff,$ff,$ff,$fc,$f8,$e0,$80,$00 ; [$98
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ......░.
+; ..░.....
+; ░...░..░
+; ..░.....
+; ....░.░.
+; ..░░░░..
+; ░.░.░.░░
+; ..░.░░░.
+;
+    db $02,$20,$89,$20,$0a,$3c,$ab,$2e,$00,$00,$00,$00,$00,$00,$00,$00 ; [$98
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.......
+; ...░....
+; .......░
+; .░...░..
+; ........
+; ░......░
+; ...░....
+; ........
+;
+    db $80,$10,$01,$44,$00,$81,$10,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$98
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒█▒█▒▒█▒
+; ▒▒▒█▒█▒▒
+; ██▒▒█▒█▒
+; █▒██▒███
+; ▒█▒███▒▒
+; ▒▒▒▒▒▒▒▒
+; ██▒▒█▒▒▒
+; ▒▒▒▒▒▒▒░
+;
+    db $52,$14,$ca,$b7,$5c,$00,$c8,$01,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$fe ; [$98
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░..░░░.
+; .░░░.░..
+; ...░...░
+; ░░░...░▒
+; ░...░░▒█
+; ...░▒███
+; ..░▒▒█▒▒
+; ░░▒█▒▒░░
+;
+    db $ce,$74,$11,$e2,$8d,$17,$24,$d3,$00,$00,$00,$01,$03,$0f,$1f,$3c ; [$98
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; .██░█▒░▒
+; ░▒█░█▒░░
+; ░█▒░▒░░▒
+; ▒▒▒░░░░░
+; ▒▒░░░▒▒░
+; ▒░█░░█▒▒
+; ░█▒▒░▒█▒
+; █▒▒░░▒█▒
+;
+    db $7a,$bb,$d6,$1f,$39,$7c,$ca,$9a,$6d,$6c,$69,$e0,$c6,$a7,$77,$e7 ; [$98
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; █▒░░▒░░.
+; ▒█░░░▒░.
+; ░░░▒░▒░░
+; ▒▒░▒░▒.▒
+; ░░░░.▒░▒
+; ░█▒░░░.▒
+; ░█▒░░░░░
+; ░▒▒▒.░░░
+;
+    db $b6,$7a,$eb,$28,$f2,$dc,$df,$87,$c8,$c4,$14,$d5,$05,$61,$60,$70 ; [$98
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░.░...
+; ...░.░..
+; .░.....░
+; ..░░░...
+; ▒....░░.
+; ▒▒░░....
+; ▒▒▒▒▒...
+; ░░░░░.░.
+;
+    db $e8,$14,$41,$38,$06,$30,$00,$fa,$00,$00,$00,$00,$80,$c0,$f8,$00 ; [$98
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░░░..░█
+; ░░░.▒▒█▒
+; ░░.▒▒█▒█
+; ░.▒▒█▒█▒
+; ░.▒█▒███
+; .▒████▒█
+; ▒█▒██▒██
+;
+    db $fd,$f3,$e2,$c5,$8a,$97,$3d,$5b,$00,$01,$0f,$1f,$3f,$3f,$7f,$ff ; [$98
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░.░░░░░░
+; ▒░..░░░░
+; ▒▒▒..░░░
+; ▒▒▒...░░
+; ▒▒.▒.▒.░
+; ▒▒▒.▒..░
+; ▒▒░▒....
+; ▒▒▒.▒...
+;
+    db $bf,$4f,$07,$03,$01,$01,$20,$00,$00,$80,$e0,$e0,$d4,$e8,$d0,$e8 ; [$98
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒▒███▒▒
+; █▒▒█▒██▒
+; ▒▒▒▒██▒█
+; ▒█▒███▒█
+; ▒█▒█▒██▒
+; ▒▒▒███▒▒
+; ▒█▒▒██▒█
+; ▒▒█▒█▒█▒
+;
+    db $9c,$96,$0d,$5d,$56,$1c,$4d,$2a,$7f,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$98
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒░...░.
+; ░░..░...
+; ░▒░...░░
+; ▒░..░░▒░
+; ░▒░.░▒░.
+; ▒▒......
+; ░░░...░.
+; ░▒░.░...
+;
+    db $a2,$c8,$a3,$4d,$aa,$00,$e2,$a8,$40,$00,$40,$82,$44,$c0,$00,$40 ; [$98
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.░.░▒.░
+; ....░▒░.
+; ░░░░▒░.░
+; ▒░▒░▒▒░.
+; ░.░.░░.░
+; ....░▒░.
+; .░.░.░░░
+; ░...░▒░.
+;
+    db $a9,$0a,$f5,$52,$ad,$0a,$57,$8a,$04,$04,$08,$ac,$00,$04,$00,$04 ; [$98
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░▒
+; ▒▒░▒▒▒▒▒
+; ░▒▒▒░▒▒▒
+; ▒▒░▒▒▒░▒
+; ▒▒▒▒▒░▒▒
+; ▒░▒░▒▒▒▒
+; ▒▒▒▒░▒░▒
+; ░▒░▒▒▒▒▒
+;
+    db $0a,$20,$88,$22,$04,$50,$0a,$a0,$f5,$df,$77,$dd,$fb,$af,$f5,$5f ; [$99
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░...
+; ░░...▒░▒
+; ..▒▒▒█▒▒
+; ▒▒██▒▒▒▒
+;
+    db $ff,$ff,$ff,$ff,$f8,$c2,$04,$30,$00,$00,$00,$00,$00,$05,$3f,$ff ; [$99
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; ░░░..░░░
+; ▒▒▒░░..░
+; ▒█▒▒▒░░░
+; ███▒▒▒▒▒
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $55,$e7,$19,$47,$e0,$7f,$92,$4c,$00,$00,$e0,$f8,$ff,$ff,$ff,$ff ; [$99
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░.▒
+; ░░░░░.▒▒
+; ░░░..▒▒█
+; ...▒▒▒██
+; ▒▒▒▒██▒█
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $fc,$f8,$e1,$03,$0d,$7f,$92,$4c,$01,$03,$07,$1f,$ff,$ff,$ff,$ff ; [$99
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░....▒
+; ▒▒░░░▒▒▒
+; █▒▒▒▒▒▒█
+; ▒████▒██
+; ████████
+; ▒███████
+; █▒▒█▒▒█▒
+; ▒█▒▒██▒▒
+;
+    db $e0,$38,$81,$7b,$ff,$7f,$92,$4c,$01,$c7,$ff,$ff,$ff,$ff,$ff,$ff ; [$99
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒█▒▒▒▒
+; ▒█▒▒▒██▒
+; ▒▒▒▒▒▒▒█
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒░▒▒▒
+; ▒▒░▒▒▒░▒
+; ▒▒▒▒▒▒▒░
+;
+    db $10,$46,$01,$00,$00,$08,$22,$01,$ff,$ff,$ff,$ff,$ff,$f7,$dd,$fe ; [$99
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░▒░▒▒▒
+; ░░░░▒▒░░
+; ░░▒░░░.░
+; .░░.░░░░
+; ░░.░.░.░
+; ░▒░░░.░░
+; .░.░.░░░
+; ░.░.░.░░
+;
+    db $a8,$f3,$dd,$6f,$d5,$bb,$57,$ab,$57,$0c,$20,$00,$00,$40,$00,$00 ; [$99
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░░░░..█
+; ░░░░.░█▒
+; ░░░..█▒█
+; ░░░.█▒█▒
+; ░░.▒▒██▒
+; ░░.▒██▒▒
+; ░░.▒█▒█▒
+;
+    db $fd,$f9,$f6,$e5,$ea,$c6,$cc,$ca,$00,$01,$03,$07,$0f,$1f,$1f,$1f ; [$99
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░.██▒▒
+; ░░░░.██▒
+; ░░░░.▒█▒
+; ░░░░.▒▒▒
+; ░░░░.▒▒█
+; ░░░░.██▒
+; ░░░.█▒▒▒
+; ░░░.█▒█▒
+;
+    db $ec,$f6,$f2,$f0,$f1,$f6,$e8,$ea,$0f,$07,$07,$07,$07,$07,$0f,$0f ; [$99
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒░░.▒.▒░
+; ...░░.▒.
+; ░░.....░
+; ░░░░░...
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $61,$18,$c1,$f8,$ff,$ff,$ff,$ff,$8a,$02,$00,$00,$00,$00,$00,$00 ; [$99
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒░▒.▒▒▒.
+; ░▒.▒..▒▒
+; ..▒.░▒░.
+; ...░.░..
+; ........
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $40,$80,$0a,$14,$00,$ff,$ff,$ff,$ae,$53,$24,$00,$00,$00,$00,$00 ; [$99
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒.▒▒▒.
+; ▒.░▒▒.▒▒
+; .▒...▒..
+; ....▒.░░
+; ░░░.....
+; ░░░░░░..
+; ░░░░░░░░
+;
+    db $00,$00,$20,$00,$03,$e0,$fc,$ff,$ff,$ee,$9b,$44,$08,$00,$00,$00 ; [$99
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒.▒░▒▒▒
+; ▒.▒.▒.▒.
+; ▒.▒....▒
+; .....▒░.
+; ░..░...░
+; ......░.
+; ░░░░....
+;
+    db $00,$08,$00,$00,$02,$91,$02,$f0,$ff,$d7,$aa,$a1,$04,$00,$00,$00 ; [$99
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒..▒▒..
+; ▒▒▒▒..▒▒
+; ▒...▒...
+; ........
+; .....░░░
+; .░.░░░░░
+; ░░░░░░░░
+;
+    db $00,$00,$00,$00,$00,$07,$5f,$ff,$ff,$cc,$f3,$88,$00,$00,$00,$00 ; [$99
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒.▒.░
+; ..▒.▒░..
+; ........
+; ........
+; ░░...░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $00,$01,$04,$00,$00,$c7,$ff,$ff,$ff,$f4,$28,$00,$00,$00,$00,$00 ; [$99
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░...
+; ▒▒......
+; ......░░
+; ...░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $08,$00,$03,$1f,$ff,$ff,$ff,$ff,$f0,$c0,$00,$00,$00,$00,$00,$00 ; [$99
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .░▒█▒░██
+; ░░▒█▒░▒█
+; .░▒▒█▒░█
+; .░░▒█░▒█
+; ░░▒░▒▒█▒
+; .░█░░▒█▒
+; ░▒█░▒░█▒
+; .▒█░▒░▒█
+;
+    db $57,$d5,$4b,$6d,$d2,$7a,$b6,$35,$3b,$3b,$3d,$1b,$2f,$27,$6b,$6b ; [$9a
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░█▒░░░░
+; ▒░█▒▒░░░
+; ▒░█▒░░░░
+; ▒░░▒▒░░░
+; ░█▒░░░░░
+; ░▒█▒░░░.
+; ░░▒▒▒░.░
+; ▒░░▒░▒░.
+;
+    db $6f,$67,$6f,$67,$df,$ae,$c5,$6a,$b0,$b8,$b0,$98,$60,$70,$38,$94 ; [$9a
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░░...░░
+; ░░░░.░.▒
+; ░░░░.░▒█
+; ▒▒░░░░▒█
+; ▒▒▒░░░▒▒
+; ░█▒▒░░▒█
+; ░▒█▒░░▒▒
+; ░▒▒▒▒░░▒
+;
+    db $63,$f4,$f5,$3d,$1c,$cd,$ac,$86,$00,$01,$03,$c3,$e3,$73,$73,$79 ; [$9a
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░.░▒▒░
+; ▒░░░░█▒░
+; █▒▒░░▒▒░
+; ▒▒▒░░▒░░
+; ▒█▒░░░░.
+; ▒▒▒░░░.░
+; █▒▒░░.░░
+; █▒▒░░.▒░
+;
+    db $e9,$7d,$99,$1b,$5e,$1d,$9b,$99,$06,$86,$e6,$e4,$e0,$e0,$e0,$e2 ; [$9a
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░▒█▒░░░▒
+; ░▒█▒▒░░▒
+; ░▒██▒░░░
+; ░▒▒█▒░.░
+; .░▒█▒░.░
+; .░▒█▒░.░
+; .░▒█▒░..
+; ..░▒▒░..
+;
+    db $ae,$a6,$b7,$95,$55,$55,$54,$24,$71,$79,$78,$78,$38,$38,$38,$18 ; [$9a
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░▒░▒░▒░
+; ▒▒░▒░▒░▒
+; ▒▒▒▒▒▒▒▒
+; ░░░▒█▒██
+; ▒▒▒▒░█▒█
+; ███▒▒▒██
+; █▒███▒▒▒
+; ▒▒▒▒██▒▒
+;
+    db $d5,$2a,$00,$eb,$0d,$e3,$b8,$0c,$2a,$d5,$ff,$1f,$f7,$ff,$ff,$ff ; [$9a
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░▒░▒█▒█
+; ▒▒░▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; ▒▒█▒▒▒██
+; ██▒▒█▒█▒
+; ▒▒▒█▒▒▒█
+; ▒▒███▒█▒
+; ██▒▒▒█▒▒
+;
+    db $d5,$20,$80,$23,$ca,$11,$3a,$c4,$2f,$df,$ff,$ff,$ff,$ff,$ff,$ff ; [$9a
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░.▒█▒█▒
+; ░░.▒██▒▒
+; ░░.▒▒██▒
+; ░░░.█▒█▒
+; ░░░..█▒█
+; ░░░░.░█▒
+; ░░░░░..█
+; ░░░░░░.░
+;
+    db $ca,$cc,$c6,$ea,$e5,$f6,$f9,$fd,$1f,$1f,$1f,$0f,$07,$03,$01,$00 ; [$9a
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░.░▒░.▒▒
+; ..░▒░.░▒
+; ░.░▒░░.▒
+; ...░▒░.▒
+; ░.░.░.▒░
+; ░.▒...▒.
+; ..▒.░.▒░
+; .░▒.░░.▒
+;
+    db $a8,$2a,$ac,$14,$a9,$80,$09,$4c,$13,$11,$11,$09,$02,$22,$22,$21 ; [$9a
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.▒░....
+; ░.░░.░..
+; ░.▒░....
+; ░..░.░..
+; .▒░..░..
+; ░░▒░....
+; .░░░░...
+; ░..░.░..
+;
+    db $90,$b4,$90,$94,$24,$d0,$78,$94,$20,$00,$20,$00,$40,$20,$00,$00 ; [$9a
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .▒▒.▒░.░
+; .░▒.▒░..
+; .▒░.▒░.░
+; .▒░.▒░..
+; .▒░.░▒░.
+; .░▒..▒░░
+; .░▒░.░▒░
+; ..░▒░░▒░
+;
+    db $05,$44,$25,$24,$2a,$43,$55,$2d,$68,$28,$48,$48,$44,$24,$22,$12 ; [$9a
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░..░...
+; ░▒...░..
+; ...░.░..
+; ░░.░.░..
+; ░░......
+; .▒░.....
+; .▒▒░....
+; .░▒░....
+;
+    db $48,$84,$14,$d4,$c0,$20,$10,$50,$80,$40,$00,$00,$00,$40,$60,$20 ; [$9a
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░.....░░
+; ...░..░.
+; .....░░░
+; .░...░.░
+; ......░.
+; ░......░
+; ...░..░░
+; ........
+;
+    db $83,$12,$07,$45,$02,$81,$13,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9a
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░.......
+; ▒▒░░░▒▒▒
+; █▒▒▒▒▒██
+; ▒██▒██▒▒
+; ▒▒███▒▒░
+; ░▒▒█▒▒░░
+; ░░▒▒▒░░░
+; ░░░▒░░░░
+;
+    db $80,$38,$83,$6c,$39,$93,$c7,$ef,$00,$c7,$ff,$ff,$fe,$7c,$38,$10 ; [$9a
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ..░▒▒▒▒░
+; ▒▒▒▒▒▒▒▒
+; ███▒▒███
+; ▒▒▒████▒
+; ░░▒▒██▒▒
+; ░░░▒█▒▒▒
+; ▒▒.▒█▒▒░
+; ░░░▒█▒▒░
+;
+    db $21,$00,$e7,$1e,$cc,$e8,$09,$e9,$1e,$ff,$ff,$ff,$3f,$1f,$de,$1e ; [$9a
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; .░▒█▒▒▒░
+; ▒▒██▒▒░░
+; ███▒▒▒░░
+; ▒▒▒▒▒░░░
+; ▒▒▒▒░░░.
+; ░▒░░░░.░
+; .░░░░.░░
+; ░░.░░...
+;
+    db $51,$33,$e3,$07,$0e,$bd,$7b,$d8,$3e,$fc,$fc,$f8,$f0,$40,$00,$00 ; [$9a
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒█░█▒░▒
+; ░▒█░█▒░░
+; ░█▒░█▒░▒
+; ░█▒░█▒░█
+; ░█▒░▒█▒░
+; ░▒█░░█▒░
+; ░▒█▒░▒█▒
+; .░▒█▒▒█▒
+;
+    db $ba,$bb,$da,$db,$d5,$bd,$aa,$52,$6d,$6c,$6d,$6d,$6e,$66,$77,$3f ; [$9b
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █▒░░▒░░.
+; ▒█▒░░▒░░
+; ░░▒▒░▒░.
+; ▒░░▒░▒░░
+; █▒░░▒░.░
+; ▒█▒░▒░.░
+; ░░▒▒░░░.
+; ░▒▒▒░░░.
+;
+    db $b6,$5b,$ca,$6b,$b5,$55,$ce,$8e,$c8,$e4,$34,$94,$c8,$e8,$30,$70 ; [$9b
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒█▒░░░▒
+; ░▒█▒▒░░▒
+; .░▒█▒░░░
+; .░▒█▒░.░
+; .░▒▒▒░.░
+; ..░▒▒░.░
+; ..░▒▒░..
+; ...▒▒░..
+;
+    db $ae,$a6,$57,$55,$45,$25,$24,$04,$71,$79,$38,$38,$38,$18,$18,$18 ; [$9b
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; █▒░░.▒▒░
+; ▒▒░.░▒▒░
+; █▒░.░▒░░
+; █▒░.░░░.
+; ▒▒░..░░.
+; ▒▒░..░..
+; ░▒░.....
+; .▒......
+;
+    db $b1,$29,$ab,$ae,$26,$24,$a0,$00,$c6,$c6,$c4,$c0,$c0,$c0,$40,$40 ; [$9b
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ..░█▒░..
+; ..░▒▒░..
+; ..░▒▒░..
+; ...░▒░..
+; ...░▒░..
+; ...░▒░..
+; ....░░..
+; .....░..
+;
+    db $34,$24,$24,$14,$14,$14,$0c,$04,$18,$18,$18,$08,$08,$08,$00,$00 ; [$9b
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒░▒░▒▒██
+; ░▒░░░▒▒▒
+; ▒░░░░░░▒
+; ░░..░░░░
+; ...░.░░░
+; ░░░░....
+; ░...░░░.
+; ........
+;
+    db $53,$b8,$7e,$cf,$17,$f0,$8e,$00,$af,$47,$81,$00,$00,$00,$00,$00 ; [$9b
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ████▒▒▒░
+; ▒▒▒▒▒░░░
+; ▒░▒▒░▒░░
+; ░░░░░░..
+; ░░░░..░.
+; .....░░░
+; ░░.░░.░.
+; ........
+;
+    db $f1,$07,$4b,$fc,$f2,$07,$da,$00,$fe,$f8,$b4,$00,$00,$00,$00,$00 ; [$9b
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░░░░░░.
+; ░▒░▒░▒░▒
+; ░▒░░▒▒░▒
+; ░▒░░▒▒░▒
+; ░▒░░░▒░░
+; ░▒█▒▒▒░░
+; ▒▒██▒▒▒▒
+; ▒████▒▒░
+;
+    db $7e,$aa,$b2,$b2,$bb,$a3,$30,$79,$00,$55,$4d,$4d,$44,$7c,$ff,$fe ; [$9b
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; .░░▒▒░░░
+; ░▒███▒▒█
+; ▒██▒▒██▒
+; ▒█▒░░▒▒░
+; ▒█▒█▒░░▒
+; ▒▒▒█▒░▒█
+; ░▒▒█▒░▒█
+; .░▒▒█░▒█
+;
+    db $67,$b9,$66,$59,$56,$15,$95,$4d,$18,$7f,$ff,$e6,$f9,$fb,$7b,$3b ; [$9b
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.░▒▒░..
+; ▒░▒█▒▒░.
+; ░░█▒▒░░░
+; ░█▒▒░░░.
+; █▒▒░▒▒░░
+; ▒▒░▒█▒░.
+; ▒░░█▒▒░.
+; ▒░▒█▒▒░░
+;
+    db $a4,$52,$e7,$ce,$93,$2a,$72,$53,$18,$bc,$38,$70,$ec,$dc,$9c,$bc ; [$9b
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░▒░▒▒░░▒
+; ░█▒░░█▒░
+; ░██▒░█▒░
+; ░█▒▒░▒█▒
+; ░▒█▒.▒█▒
+; ░░▒░.░▒▒
+; .░▒░..▒▒
+; .░▒░...▒
+;
+    db $a6,$dd,$ed,$ca,$a2,$d4,$50,$50,$59,$66,$76,$77,$77,$23,$23,$21 ; [$9b
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░█▒▒░░░
+; ▒░█▒░░░░
+; ░▒█▒░.░░
+; .▒▒▒░█░░
+; .░▒░.▒▒░
+; .░▒░.░▒░
+; ..░▒..▒.
+; ...▒..▒.
+;
+    db $67,$6f,$ab,$0f,$51,$55,$20,$00,$b8,$b0,$70,$74,$26,$22,$12,$12 ; [$9b
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░▒▒██▒▒▒
+; ░▒█▒█▒▒░
+; ░▒▒█▒█▒▒
+; ▒▒███▒▒░
+; ░▒█▒▒█▒▒
+; ▒▒██▒▒█▒
+; ░▒▒▒█▒▒▒
+; ░▒█▒█▒▒▒
+;
+    db $98,$a9,$94,$39,$a4,$32,$88,$a8,$7f,$7e,$7f,$fe,$7f,$ff,$7f,$7f ; [$9b
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒░..░..
+; ▒░░.░░░.
+; ▒░▒░.░..
+; ▒▒░░..░.
+; ▒░▒░░.░.
+; ▒░▒░░░..
+; ▒▒░░░.░.
+; ▒░▒░░░░.
+;
+    db $a4,$6e,$54,$32,$5a,$5c,$3a,$5e,$40,$80,$a0,$c0,$a0,$a0,$c0,$a0 ; [$9b
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ...░░░.░
+; ░▒░░.░..
+; .....░▒.
+; ░░░░░..░
+; ▒░▒░▒░░.
+; ....░▒░.
+; ░.░..░▒░
+; ░░░░░.░▒
+;
+    db $1d,$b4,$04,$f9,$56,$0a,$a5,$fa,$00,$40,$02,$00,$a8,$04,$02,$01 ; [$9b
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ...░░░░.
+; ..░.....
+; ░....░░.
+; ▒░░▒░..░
+; ....▒▒▒▒
+; .░▒░.░░░
+; .░░▒....
+; ░.░.░░░░
+;
+    db $1e,$20,$86,$69,$00,$57,$60,$af,$00,$00,$00,$90,$0f,$20,$10,$00 ; [$9b
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ...░░▒░.
+; ░▒░░▒...
+; ......░.
+; ░░░░.░..
+; ▒░▒▒▒░▒.
+; ....░...
+; ░.░..░..
+; ░░░░░▒░.
+;
+    db $1a,$b0,$02,$f4,$44,$08,$a4,$fa,$04,$48,$00,$00,$ba,$00,$00,$04 ; [$9c
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░....░.▒
+; ...░...░
+; .......░
+; .░...░░.
+; ...░...░
+; ░.....░▒
+; ...░....
+; ░.......
+;
+    db $84,$11,$01,$46,$11,$82,$10,$80,$01,$00,$00,$00,$00,$01,$00,$00 ; [$9c
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ...░▒░..
+; ....▒░..
+; ....▒░..
+; .....░..
+; .....░..
+; ........
+; ........
+; ........
+;
+    db $14,$04,$04,$04,$04,$00,$00,$00,$08,$08,$08,$00,$00,$00,$00,$00 ; [$9c
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒░▒▒▒░░
+; ▒░▒█▒▒░░
+; ░░█▒▒░▒▒
+; ░█▒▒░▒██
+; █▒▒░▒▒▒▒
+; ▒▒░▒████
+; ▒░▒█▒▒▒▒
+; ▒░██▒▒░░
+;
+    db $23,$53,$e4,$cb,$90,$2f,$50,$73,$dc,$bc,$3b,$77,$ef,$df,$bf,$bc ; [$9c
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .░░▒▒░░░
+; ░▒███▒▒█
+; ▒██▒▒██▒
+; ▒█▒░░▒▒░
+; █▒░▒░░░▒
+; ▒▒░█▒░▒█
+; ▒░▒█▒░▒█
+; ░░▒▒█░▒█
+;
+    db $67,$b9,$66,$59,$ae,$35,$55,$cd,$18,$7f,$ff,$e6,$d1,$db,$bb,$3b ; [$9c
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ..░.░.░.
+; ░░.░.░.░
+; ░░░░░░░░
+; ...░▒░▒▒
+; ░░░░.▒░▒
+; ▒▒▒░░░▒▒
+; ▒░▒▒▒░░░
+; ░░░░▒▒░░
+;
+    db $2a,$d5,$ff,$14,$f2,$1c,$47,$f3,$00,$00,$00,$0b,$05,$e3,$b8,$0c ; [$9c
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ..░.░▒░▒
+; ░░.░░░░░
+; ▒░░░░░░░
+; ░░▒░░░▒▒
+; ▒▒░░▒░▒░
+; ░░░▒░░░▒
+; ░░▒▒▒░▒░
+; ▒▒░░░▒░░
+;
+    db $2a,$df,$7f,$dc,$35,$ee,$c5,$3b,$05,$00,$80,$23,$ca,$11,$3a,$c4 ; [$9c
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒....░.▒
+; ...░...░
+; ▒░.....░
+; .....░░.
+; ▒▒▒░...░
+; ░░░░..░▒
+; ▒▒▒▒░...
+; ░.░.▒░..
+;
+    db $04,$11,$41,$06,$11,$f2,$08,$a4,$81,$00,$80,$00,$e0,$01,$f0,$08 ; [$9c
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░.░.▒
+; ▒░▒.░░.░
+; .░░▒░▒░░
+; ..▒░▒░░.
+; ...▒░░.░
+; ░...░▒░▒
+; ...░.░░.
+; ░.....░.
+;
+    db $f4,$4d,$6b,$16,$0d,$8a,$16,$82,$01,$a0,$14,$28,$10,$05,$00,$00 ; [$9c
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ...░░░░░
+; ▒░▒...░░
+; ▒▒█▒▒▒..
+; ▒▒▒▒██▒▒
+;
+    db $ff,$ff,$ff,$ff,$1f,$43,$20,$0c,$00,$00,$00,$00,$00,$a0,$fc,$ff ; [$9c
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ..░░░░░░
+; ...░░░░░
+; ▒░..░░░░
+; ▒▒...░░░
+; ▒.▒..░░░
+; ▒▒▒...░░
+; ▒▒.▒..░░
+; ▒▒░.░.░░
+;
+    db $3f,$1f,$4f,$07,$07,$03,$03,$2b,$00,$00,$80,$c0,$a0,$e0,$d0,$c0 ; [$9c
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒.▒..░░
+; ▒.▒.░.░░
+; ▒▒▒░░.░░
+; ▒▒...░░░
+; ▒▒▒..░░░
+; ▒▒..░░░░
+; ▒..░░░░░
+; ░.░░░░░░
+;
+    db $03,$0b,$1b,$07,$07,$0f,$1f,$bf,$d0,$a0,$e0,$c0,$e0,$c0,$80,$00 ; [$9c
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒.░░░░░░
+; ▒▒.░░░░░
+; █▒▒..░░░
+; ██▒▒▒...
+; █▒██▒▒▒▒
+; ███████▒
+; ▒█▒▒█▒▒█
+; ▒▒██▒▒█▒
+;
+    db $3f,$1f,$87,$c0,$b0,$fe,$49,$32,$80,$c0,$e0,$f8,$ff,$ff,$ff,$ff ; [$9c
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░...░░░
+; ▒...░░░░
+; ..░.░░░░
+; ▒...░░░░
+; ▒...░░░░
+; ..░.░░░░
+; ▒....░░░
+; .▒...░░░
+;
+    db $47,$0f,$2f,$0f,$0f,$2f,$07,$07,$00,$80,$00,$80,$80,$00,$80,$40 ; [$9c
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ....░..░
+; ▒▒▒░....
+; ░░░▒░░░░
+; ░..░░▒░▒
+; ▒░......
+; ░░.░░░.░
+; ..▒▒░.░▒
+; ░░░.░▒░░
+;
+    db $09,$10,$ef,$9a,$40,$dd,$0a,$eb,$00,$e0,$10,$05,$80,$00,$31,$04 ; [$9c
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░.░▒▒▒▒
+; .▒▒▒..░▒
+; ....░...
+; ░░░.░▒░░
+; .....░░░
+; ▒▒▒░....
+; ░░......
+; ..░░▒░▒▒
+;
+    db $50,$02,$08,$eb,$07,$10,$c0,$34,$8f,$71,$00,$04,$00,$e0,$00,$0b ; [$9c
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒▒░░░▒.
+; ..░▒▒░░.
+; .░▒▒░░..
+; ░▒▒░░...
+; ▒░░░....
+; ░░....░.
+; .....░▒.
+; ....░▒▒.
+;
+    db $9c,$26,$4c,$98,$70,$c2,$04,$08,$62,$18,$30,$60,$80,$00,$02,$06 ; [$9d
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒░░░░░
+; ░░▒▒░...
+; ..░▒▒░..
+; ...░░░░░
+; ........
+; ░░░..░░▒
+; ▒▒░░..░▒
+; ▒░░░░..░
+;
+    db $1f,$c8,$24,$1f,$00,$e6,$32,$79,$e0,$30,$18,$00,$00,$01,$c1,$80 ; [$9d
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ██▒▒▒░▒░
+; ▒▒██▒░░▒
+; ███▒▒▒░░
+; █▒███▒▒▒
+; ▒▒▒▒██▒▒
+; ▒░▒░▒▒██
+; ░▒░░░▒▒▒
+; ▒░░░▒░░▒
+;
+    db $c5,$36,$e3,$b8,$0c,$53,$b8,$76,$fa,$f9,$fc,$ff,$ff,$af,$47,$89 ; [$9d
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒░░▒▒█░▒
+; ▒▒▒▒░▒░▒
+; ▒▒░░░░.░
+; ▒░.....░
+; ░░......
+; ░.......
+; ........
+; ........
+;
+    db $66,$0a,$3d,$41,$c0,$80,$00,$00,$9d,$f5,$c0,$80,$00,$00,$00,$00 ; [$9d
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ██▒░▒▒██
+; ██▒░░▒▒▒
+; ▒██▒░░░▒
+; ░▒█▒░░░░
+; .▒▒░░▒▒░
+; ..░░▒▒█▒
+; ..░░▒███
+; ...░░▒██
+;
+    db $d3,$d8,$6e,$af,$19,$32,$37,$1b,$ef,$e7,$f1,$70,$66,$0f,$0f,$07 ; [$9d
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.░.░░▒▒
+; .░...░░░
+; ░.░░...░
+; ....░...
+; .....░.░
+; ........
+; ........
+; ........
+;
+    db $ac,$47,$b1,$08,$05,$00,$00,$00,$03,$00,$00,$00,$00,$00,$00,$00 ; [$9d
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░░░.
+; ░░░░░...
+; ░.░░.░.░
+; ......░.
+; ░░.░░...
+; ........
+; ........
+; ........
+;
+    db $0e,$f8,$b5,$02,$d8,$00,$00,$00,$f0,$00,$00,$00,$00,$00,$00,$00 ; [$9d
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; .░░░░░░░
+; ░░░▒░▒░▒
+; .░▒▒██▒█
+; ░▒██▒▒█▒
+; ░█▒▒░▒█▒
+; ▒▒░░░▒█▒
+;
+    db $ff,$ff,$7f,$ea,$4d,$b2,$ca,$3a,$00,$00,$00,$15,$3f,$7f,$77,$c7 ; [$9d
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░.░░
+; ░░░░░░.░
+; ░░░░░..░
+; ░░░░░░░.
+; ▒░░░.░░░
+; ▒█▒░░░░.
+; ░▒░▒░░.░
+; ░░▒░▒░░░
+;
+    db $fb,$fd,$f9,$fe,$77,$5e,$ad,$d7,$00,$00,$00,$00,$80,$e0,$50,$28 ; [$9d
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░▒█░█▒░▒
+; ░▒█░█▒░░
+; .░▒░░▒░░
+; .░░▒░░░▒
+; ░▒▒░██▒░
+; ▒▒█▒░██▒
+; ▒███░▒█▒
+; ░▒█▒░▒▒░
+;
+    db $ba,$bb,$5b,$6e,$9d,$2e,$7a,$a9,$6d,$6c,$24,$11,$6e,$f7,$f7,$76 ; [$9d
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █▒░░▒░░.
+; ▒█░░░▒░.
+; ░░░░░░░.
+; ▒▒░▒▒░░.
+; ██▒░▒▒░░
+; ░██▒░▒░░
+; ░██▒░▒░░
+; ░▒▒▒░░░░
+;
+    db $b6,$7a,$fe,$26,$d3,$eb,$eb,$8f,$c8,$c4,$00,$d8,$ec,$74,$74,$70 ; [$9d
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░.▒█.░░
+; ░.▒.░.░░
+; .░▒.░▒▒.
+; ▒.░▒▒░░░
+; ▒░░...░░
+; ░░.█▒▒.░
+; ▒.█.░.▒.
+; ▒.▒.▒░.▒
+;
+    db $cb,$8b,$48,$27,$63,$d1,$28,$04,$18,$20,$26,$98,$80,$1c,$a2,$a9 ; [$9d
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░.░.▒..░
+; .░░░.▒▒▒
+; ▒▒.░░..░
+; ..▒▒.░░.
+; ░░.░.█▒▒
+; ░░▒▒░...
+; ░░█.░▒▒▒
+; .░.▒▒..░
+;
+    db $a1,$70,$19,$06,$d4,$c8,$e8,$41,$08,$07,$c0,$30,$07,$30,$27,$18 ; [$9d
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░.▒░░░.
+; ▒░░.░░░░
+; .░░░█▒.░
+; ░░░█.▒░.
+; ▒░░▒░..▒
+; .░░▒░░▒.
+; ░░▒.▒▒.░
+; ...░░.▒░
+;
+    db $ce,$6f,$79,$f2,$68,$6c,$c1,$19,$10,$80,$0c,$14,$91,$12,$2c,$02 ; [$9d
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒.░░░▒▒▒
+; ░▒▒▒▒░..
+; ░░░░░.░░
+; ..░░.▒..
+; ▒▒.░░.▒▒
+; ░.▒.░░.░
+; ░░.▒▒.░░
+; ░░░..▒▒▒
+;
+    db $38,$84,$fb,$30,$18,$8d,$c3,$e0,$87,$78,$00,$04,$c3,$20,$18,$07 ; [$9d
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ....░▒██
+; .....░▒█
+; ......░█
+; ......░▒
+; ......░░
+; .......░
+; ........
+; ........
+;
+    db $0b,$05,$03,$02,$03,$01,$00,$00,$07,$03,$01,$01,$00,$00,$00,$00 ; [$9d
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░.......
+; ▒..░▒▒▒.
+; ▒..░▒▒░.
+; ...░░▒░.
+; ▒░......
+; ░..░▒▒▒.
+; ...░▒░░.
+; ▒░.░░█..
+;
+    db $80,$10,$12,$1a,$40,$90,$16,$5c,$00,$8e,$8c,$04,$80,$0e,$08,$84 ; [$9e
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒░.▒
+; ▒▒▒▒▒░..
+; ▒░░░░░.░
+; .......▒
+; ▒▒▒▒░░.░
+; ▒░▒░▒░..
+; ▒▒░█.░.▒
+;
+    db $00,$04,$04,$7d,$00,$0d,$54,$34,$00,$f9,$f8,$80,$01,$f0,$a8,$d1 ; [$9e
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░░░░▒░
+; ░...░░░░
+; ..░░.░░░
+; ░.......
+; ..░.░.░.
+; ░....░.░
+; ........
+; ........
+;
+    db $fd,$8f,$37,$80,$2a,$85,$00,$00,$02,$00,$00,$00,$00,$00,$00,$00 ; [$9e
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░▒▒█░▒█▒
+; ░▒█▒░▒█▒
+; .░▒░░▒█▒
+; ..░▒▒█▒▒
+; .░▒███▒█
+; ░▒█▒▒▒█▒
+; ░█▒░░▒█▒
+; ▒▒░░░▒█▒
+;
+    db $9a,$aa,$5a,$24,$5d,$a2,$da,$3a,$77,$77,$27,$1f,$3f,$7f,$67,$c7 ; [$9e
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒░▒.░░.
+; ▒░░▒░...
+; ░░▒░░...
+; ▒░░▒░.░.
+; █▒▒░.░░.
+; ▒█▒▒░░░.
+; ░▒░░▒░..
+; ░░▒░░░..
+;
+    db $26,$68,$d8,$6a,$96,$4e,$b4,$dc,$d0,$90,$20,$90,$e0,$f0,$48,$20 ; [$9e
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒░.▒░█▒▒
+; ..▒█░█▒░
+; ░░.▒▒█▒░
+; ▒█▒██▒▒░
+; ░▒██▒▒█▒
+; .░▒▒░░▒█
+; .░░░█▒▒█
+; ░▒█▒█▒▒█
+;
+    db $4c,$1d,$c5,$59,$b2,$4d,$79,$a9,$97,$36,$1e,$fe,$7f,$33,$0f,$7f ; [$9e
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░▒░░..
+; ▒░▒░░.░.
+; █▒░░.░░.
+; ▒█▒░░▒░.
+; ░▒▒▒█░..
+; ▒░░░░░..
+; ▒░▒░....
+; ▒░▒░░░..
+;
+    db $ac,$5a,$b6,$5a,$8c,$7c,$50,$5c,$50,$a0,$c0,$e4,$78,$80,$a0,$a0 ; [$9e
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░.▒░..▒░
+; ░.░░.▒▒▒
+; ░.▒░.░░▒
+; ░..░.░▒▒
+; .▒░..░▒▒
+; ░░▒░..▒░
+; .░░░░░▒░
+; ░..░.░░.
+;
+    db $91,$b0,$96,$94,$24,$d1,$7d,$96,$22,$07,$21,$03,$43,$22,$02,$00 ; [$9e
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; .░▒░░▒▒░
+; ..░▒▒█▒▒
+; .░▒███▒█
+; ░▒█▒▒▒█▒
+; ░█▒░░▒█▒
+; ▒▒░░░▒█▒
+;
+    db $ff,$ff,$59,$24,$5d,$a2,$da,$3a,$00,$00,$26,$1f,$3f,$7f,$67,$c7 ; [$9e
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░.░░
+; ░░░░░░.░
+; ░░░░░..░
+; ▒░░░░░░.
+; █▒▒░.░░░
+; ▒█▒▒░░░.
+; ░▒░░▒░.░
+; ░░▒░░░░░
+;
+    db $fb,$fd,$f9,$7e,$97,$4e,$b5,$df,$00,$00,$00,$80,$e0,$f0,$48,$20 ; [$9e
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ...░....
+; ░..░░...
+; .░.░▒▒▒.
+; ░.......
+; ▒..░▒▒▒.
+; ░..░▒░░.
+; ...░░▒░.
+; ...░▒░░.
+;
+    db $10,$98,$50,$80,$10,$96,$1a,$16,$00,$00,$0e,$00,$8e,$08,$04,$08 ; [$9e
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒...░.▒
+; ▒▒▒░▒░..
+; ▒░░░░░.░
+; .......▒
+; ▒▒▒▒░░.░
+; ▒░▒░▒░..
+; ▒▒░█.░.▒
+;
+    db $00,$04,$14,$7d,$00,$0d,$54,$34,$00,$c1,$e8,$80,$01,$f0,$a8,$d1 ; [$9e
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ▒████░▒█
+; ..▒▒▒▒█▒
+; ░▒....▒▒
+; ..▒▒▒...
+; .░.█▒...
+; .▒.█..▒.
+; .▒.▒..▒.
+;
+    db $00,$7d,$02,$80,$00,$50,$10,$00,$00,$fb,$3f,$43,$38,$18,$52,$52 ; [$9e
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ██▒▒████
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒.....
+; ........
+; █▒..▒.▒.
+; ▒▒.▒▒.▒.
+; .▒.█▒...
+;
+    db $00,$cf,$00,$00,$00,$80,$00,$10,$00,$ff,$ff,$e0,$00,$ca,$da,$58 ; [$9e
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░.▒.░...
+; ░░▒.░...
+; ░░▒.░░▒.
+; ░░█░░░▒.
+; ░░▒░░░░.
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $88,$c8,$cc,$fc,$de,$ff,$ff,$ff,$20,$20,$22,$22,$20,$00,$00,$00 ; [$9e
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░▒.█▒.░.
+; ░..▒▒.░.
+; ░░..▒.░░
+; ░░░..░░░
+; ░░░.░░░░
+; ░░░.░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $92,$82,$c3,$e7,$ef,$ef,$ff,$ff,$58,$18,$08,$00,$00,$00,$00,$00 ; [$9e
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒▒░░░▒.
+; ..░▒▒░░.
+; .░▒▒░░..
+; ░▒▒░░...
+; ▒░░░....
+; ░░......
+; ........
+; ........
+;
+    db $9c,$26,$4c,$98,$70,$c0,$00,$00,$62,$18,$30,$60,$80,$00,$00,$00 ; [$9f
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒░░░░░
+; ░░▒▒░...
+; ..░▒▒░..
+; ...░░░░░
+; ........
+; .....░░▒
+; ......░▒
+; .......░
+;
+    db $1f,$c8,$24,$1f,$00,$06,$02,$01,$e0,$30,$18,$00,$00,$01,$01,$00 ; [$9f
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.......
+; ▒.......
+; ▒.......
+; ........
+; ▒░......
+; ░.......
+; ........
+; ▒░......
+;
+    db $80,$00,$00,$00,$40,$80,$00,$40,$00,$80,$80,$00,$80,$00,$00,$80 ; [$9f
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ........
+; .......▒
+; ........
+; .......░
+; .......▒
+; .......░
+; ........
+; .......▒
+;
+    db $00,$00,$00,$01,$00,$01,$00,$00,$00,$01,$00,$00,$01,$00,$00,$01 ; [$9f
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ...░...░
+; .░▒▒▒..▒
+; .░▒█▒░▒█
+; .░▒▒▒.░▒
+; ░.▒░░░..
+; .░.░▒░░.
+; ░.▒█▒▒.░
+; ░░▒▒▒░.░
+;
+    db $11,$40,$55,$42,$9c,$56,$91,$c5,$00,$39,$3b,$39,$20,$08,$3c,$38 ; [$9f
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ...▒░░░.
+; ▒.▒▒▒...
+; ▒▒.▒.▒▒.
+; ▒▒░.▒█▒░
+; ░...▒▒▒▒
+; .░▒░.░░░
+; █▒░▒.▒░.
+; █▒▒.░█▒░
+;
+    db $0e,$00,$00,$25,$80,$57,$a2,$8d,$10,$b8,$d6,$ce,$0f,$20,$d4,$e6 ; [$9f
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; .░.▒░.▒░
+; ░░░..▒▒░
+; .▒▒..█▒░
+; .▒█▒░█▒░
+; ▒.▒▒.▒▒░
+; ░░█▒.▒▒░
+; ..░▒░.▒░
+; ░░░.░▒░▒
+;
+    db $49,$e1,$05,$2d,$01,$e1,$29,$ea,$12,$06,$66,$76,$b6,$36,$12,$05 ; [$9f
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒▒░▒▒▒▒
+; .▒▒░..░▒
+; ..░.▒█▒.
+; ░▒▒.▒█▒░
+; ▒█▒▒.▒▒░
+; ░▒▒▒.▒░.
+; .░▒░.▒..
+; ..▒░░...
+;
+    db $10,$12,$24,$85,$41,$82,$50,$18,$ef,$61,$0e,$6e,$f6,$74,$24,$20 ; [$9f
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ...░░░.░
+; ░░░░.░.░
+; .░▒▒.░▒▒
+; .░▒▒░..▒
+; ░.░.....
+; .░.░▒░..
+; ░.░▒▒░.░
+; ░░▒▒▒░.░
+;
+    db $1d,$f5,$44,$48,$a0,$54,$a5,$c5,$00,$00,$33,$31,$00,$08,$18,$38 ; [$9f
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ...░░░░.
+; ░.░▒░...
+; ▒▒.░.░░.
+; ▒░░.▒▒▒░
+; ░...░▒▒▒
+; .░░░.░░░
+; ▒░░░.░░.
+; ▒▒░.░▒▒░
+;
+    db $1e,$a8,$16,$61,$88,$77,$76,$29,$00,$10,$c0,$8e,$07,$00,$80,$c6 ; [$9f
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .░.▒░..░
+; ░░░..░░.
+; .░▒░.▒▒░
+; ░░▒▒░▒▒▒
+; ▒░▒▒.░▒▒
+; ░░▒░.░▒░
+; ..░░░.░.
+; ░░░.░▒░▒
+;
+    db $49,$e6,$51,$c8,$44,$d5,$3a,$ea,$10,$00,$26,$37,$b3,$22,$00,$05 ; [$9f
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒▒░░▒▒░
+; .░░░..░░
+; ..░.░░..
+; ░░▒.░▒▒░
+; ░▒▒▒.▒▒░
+; .▒▒░.░▒.
+; .░░..░..
+; ...▒░...
+;
+    db $19,$73,$2c,$c9,$81,$14,$64,$08,$e6,$00,$00,$26,$76,$62,$00,$10 ; [$9f
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .░░▒▒▒▒▒
+; ░▒███▒██
+; ▒█▒▒▒▒▒▒
+; ▒▒▒░░░░░
+; ▒█▒░░░░░
+; █▒░░▒██▒
+; █▒░▒██▒█
+; ▒░░▒░░█▒
+;
+    db $60,$bb,$40,$1f,$5f,$b6,$ad,$6e,$1f,$7f,$ff,$e0,$e0,$cf,$df,$93 ; [$9f
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░▒░▒▒░░█
+; █▒░░█▒.▒
+; ▒▒░.▒░░█
+; ▒█▒░.░░▒
+; ▒▒█▒░▒░░
+; ░▒▒░░▒█▒
+; .░▒░.░░▒
+; .░▒░...░
+;
+    db $a7,$b8,$27,$56,$2b,$9a,$56,$51,$59,$cd,$c9,$e1,$f4,$67,$21,$20 ; [$9f
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9f
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9f
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░███████
+; █▒▒▒██▒▒
+; █▒▒█▒▒▒▒
+; █▒▒█▒▒▒▒
+; █▒▒▒▒▒▒░
+; ▒▒▒░░░░░
+; ░░░░░░░░
+; ........
+;
+    db $ff,$8c,$90,$90,$81,$1f,$ff,$00,$7f,$ff,$ff,$ff,$fe,$e0,$00,$00 ; [$a0
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █████▒░.
+; ▒██▒▒█░.
+; ░█▒▒▒░░.
+; ░▒▒▒░░░.
+; ▒▒▒░░▒░.
+; ░░░░░░░.
+; ░░░░░░░.
+; ........
+;
+    db $fa,$66,$c6,$8e,$1a,$fe,$fe,$00,$fc,$fc,$78,$70,$e4,$00,$00,$00 ; [$a0
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a0
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .░▒▒▒░▒░
+; ░▒▒██▒██
+; ░▒███▒█▒
+; ░▒▒▒▒▒▒▒
+; ░░▒▒▒▒▒░
+; ░▒█▒███▒
+; ░▒█▒██▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $45,$9b,$ba,$80,$c1,$ae,$ac,$80,$3a,$7f,$7f,$7f,$3e,$7f,$7f,$7f ; [$a0
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░░░.░.
+; █▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░░░░░...
+; ██░░█▒█▒
+; ▒▒▒░▒█▒▒
+; ▒▒░░█▒▒▒
+;
+    db $fa,$a8,$82,$86,$f8,$fa,$14,$38,$00,$fe,$fc,$f8,$00,$cf,$ef,$cf ; [$a0
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒░.▒
+; ░░░░░░.▒
+; ░░░░░░.▒
+; ........
+; ▒▒░.▒▒░░
+; ░▒░.▒░░░
+; ▒▒░.▒░░░
+;
+    db $00,$04,$fc,$fc,$00,$23,$a7,$27,$00,$f9,$01,$01,$00,$cc,$48,$c8 ; [$a0
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ........
+; ░░.░░.░.
+; .░.░....
+; ░░.░░.░.
+; ........
+; .▒░░.░░.
+; .░.░....
+; .░░░.░░.
+;
+    db $00,$da,$50,$da,$00,$36,$50,$76,$00,$00,$00,$00,$00,$40,$00,$00 ; [$a0
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░████▒░.
+; ███▒▒█░.
+; ██▒▒▒░░.
+; █▒▒▒░░░.
+; █▒▒░░▒░.
+; ▒▒░░░░░.
+; .░░░░░..
+; ........
+;
+    db $fa,$e6,$c6,$8e,$9a,$3e,$7c,$00,$7c,$fc,$f8,$f0,$e4,$c0,$00,$00 ; [$a0
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ..█▒▒░░.
+; ▒▒█▒▒░░.
+; ▒▒█▒▒░░.
+; ▒▒█▒▒░░.
+; ..█▒▒░░.
+; ▒▒█▒▒░░░
+; ░░█▒▒░░░
+; ░░█▒▒░░░
+;
+    db $26,$26,$26,$26,$26,$27,$e7,$e7,$38,$f8,$f8,$f8,$38,$f8,$38,$38 ; [$a0
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░▒░▒▒░░▒
+; ▒▒▒▒░░▒█
+; ░▒▒░░▒█▒
+; ▒▒░░▒█▒░
+; █░░▒█▒░░
+; ░░▒█▒░░.
+; ░▒█▒░░..
+; ▒█▒░░...
+;
+    db $a6,$0d,$9a,$35,$eb,$d6,$ac,$58,$59,$f3,$67,$ce,$9c,$38,$70,$e0 ; [$a0
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░..░.░░
+; ▒░░...░░
+; ▒▒░░.░.░
+; █▒▒░░..░
+; ▒█▒▒░░..
+; ░▒█▒▒░░.
+; .░▒█▒▒░░
+; ░.░▒█▒▒░
+;
+    db $cb,$63,$35,$99,$4c,$a6,$53,$a9,$00,$80,$c0,$e0,$f0,$78,$3c,$1e ; [$a0
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒░░.
+; ▒▒██▒▒░.
+; ▒▒█▒▒░░.
+; ▒█▒▒▒░..
+; ▒▒█▒▒░░.
+; ▒▒█▒▒▒░.
+; ▒██▒░░..
+; ▒█▒▒▒░░.
+;
+    db $26,$32,$26,$44,$26,$22,$6c,$46,$f8,$fc,$f8,$f8,$f8,$fc,$f0,$f8 ; [$a0
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒▒...░.
+; ▒░░.....
+; ▒░░...░.
+; ........
+; ▒▒▒.....
+; ░░░...░.
+; ░░░.....
+; ........
+;
+    db $02,$60,$62,$00,$00,$e2,$e0,$00,$e0,$80,$80,$00,$e0,$00,$00,$00 ; [$a0
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ....░░░.
+; ...░░░░.
+; ........
+; ..▒.▒▒▒▒
+; .░░.▒░░░
+; ░░░.▒░░░
+; ........
+;
+    db $00,$0e,$1e,$00,$00,$67,$e7,$00,$00,$00,$00,$00,$2f,$08,$08,$00 ; [$a0
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$00,$7e,$00,$00,$e7,$e7,$00,$00,$00,$80,$00,$ef,$08,$08 ; [$a0
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░▒▒░▒░░
+; ▒█▒▒▒░▒▒
+; ▒█▒▒░▒▒▒
+; ▒█▒▒▒▒▒▒
+; ▒█▒█▒██▒
+; ▒█▒▒▒▒▒▒
+; ░▒░░░░░░
+; .░.░.░.░
+;
+    db $cb,$44,$48,$40,$56,$40,$bf,$55,$34,$fb,$f7,$ff,$ff,$ff,$40,$00 ; [$a0
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒░▒█
+; ▒▒██▒▒▒▒
+; ▒▒█▒▒▒░▒
+; ▒█▒▒█▒░▒
+; ▒▒█▒█▒░▒
+; ▒▒█▒▒░▒▒
+; ▒██▒▒░▒░
+; ▒█▒▒▒░▒░
+;
+    db $25,$30,$22,$4a,$2a,$24,$65,$45,$fb,$ff,$fd,$fd,$fd,$fb,$fa,$fa ; [$a1
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░..
+; ........
+; ▒▒▒░..░░
+; ░░░..░░░
+; ░░..░░▒░
+; ...░░▒▒░
+;
+    db $00,$7e,$7c,$00,$13,$e7,$cd,$19,$fe,$80,$80,$00,$e0,$00,$02,$06 ; [$a1
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; .▒░░░░░.
+; ..▒░░░░.
+; ........
+; ░░..▒▒▒▒
+; ░░░..▒░░
+; ▒▒░░.▒▒░
+; ▒▒▒░░.▒░
+;
+    db $02,$3e,$1e,$00,$c0,$e3,$31,$19,$fc,$40,$20,$00,$0f,$04,$c6,$e2 ; [$a1
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░.░░░..░
+; ░.░░▒░░░
+; ░.░░▒▒▒░
+; ..░░▒▒▒░
+; ░.░░░░░.
+; ░.░░▒▒▒▒
+; ░.░▒▒▒▒▒
+; ........
+;
+    db $b9,$b7,$b1,$31,$be,$b0,$a0,$00,$00,$08,$0e,$0e,$00,$0f,$1f,$00 ; [$a1
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ..▒▒░.▒░
+; ░░▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; ░░░░░.▒░
+; ▒▒▒▒▒.▒░
+; ▒▒▒▒▒.▒░
+; ........
+;
+    db $09,$c9,$09,$09,$f9,$01,$01,$00,$32,$32,$f2,$f2,$02,$fa,$fa,$00 ; [$a1
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; █▒█▒█▒▒.
+; █▒▒▒▒▒░.
+; █▒▒▒▒░░.
+; ░.░.░...
+; ██░.█▒█▒
+; ▒▒▒.▒█▒▒
+; ▒▒░.█▒▒▒
+; ░░░.░░░░
+;
+    db $a8,$82,$86,$a8,$ea,$04,$28,$ef,$fe,$fc,$f8,$00,$cf,$ef,$cf,$00 ; [$a1
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░.
+; █▒▒▒▒░░░
+; ▒▒▒▒░▒░.
+; ▒▒▒▒▒▒░░
+; ██▒█▒▒░.
+; ▒▒▒▒▒▒░░
+; ░░░░░░░░
+; .░.░.░░.
+;
+    db $0a,$87,$0a,$03,$d2,$03,$ff,$56,$f4,$f8,$f4,$fc,$fc,$fc,$00,$00 ; [$a1
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒░.░░.▒
+; ░░...░.▒
+; ░░...░.▒
+; ........
+; ▒▒..▒▒░░
+; ░▒..▒░░░
+; ▒▒..▒░░░
+;
+    db $00,$2c,$c4,$c4,$00,$03,$87,$07,$00,$c1,$01,$01,$00,$cc,$48,$c8 ; [$a1
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; ░.░░░░░░
+; ░.░▒▒█▒░
+; ░.░▒▒▒█░
+; ..░█▒▒▒░
+; ░.░░░░░░
+; ░.░▒▒█▒░
+; ░.░▒▒▒█░
+;
+    db $00,$bf,$a5,$a3,$31,$bf,$a5,$a3,$00,$00,$1e,$1e,$1e,$00,$1e,$1e ; [$a1
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ░░░░░.▒░
+; ▒█▒▒▒.▒░
+; ▒▒█▒▒.▒░
+; ▒▒▒█▒.▒░
+; ░░░░░.▒░
+; ▒█▒▒▒.▒░
+; ▒▒█▒▒.▒░
+;
+    db $00,$f9,$41,$21,$11,$f9,$41,$21,$00,$02,$fa,$fa,$fa,$02,$fa,$fa ; [$a1
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░.░▒▒▒█░
+; ░.░▒▒▒█░
+; ░.░▒▒█▒░
+; ░.░░░░░░
+; ..░█▒▒▒░
+; ░.░▒▒▒█░
+; ░.░▒▒█▒░
+; ░.░░░░░░
+;
+    db $a3,$a3,$a5,$bf,$31,$a3,$a5,$bf,$1e,$1e,$1e,$00,$1e,$1e,$1e,$00 ; [$a1
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒.▒░
+; ▒▒█▒▒.▒░
+; ▒█▒▒▒.▒░
+; ░░░░░.▒░
+; ▒▒▒█▒.▒░
+; ▒▒█▒▒.▒░
+; ▒█▒▒▒.▒░
+; ░░░░░.▒░
+;
+    db $21,$21,$41,$f9,$11,$21,$41,$f9,$fa,$fa,$fa,$02,$fa,$fa,$fa,$02 ; [$a1
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; █▒▒▒▒░▒▒
+; ▒▒▒▒░▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ██▒█▒██▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; .░.░.░.░
+;
+    db $0b,$84,$08,$00,$d6,$00,$ff,$55,$f4,$fb,$f7,$ff,$ff,$ff,$00,$00 ; [$a1
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ..░.....
+; ...░.░.░
+; ..░.░.░▒
+; ...░.░▒.
+; ..░.░▒█▒
+; ...░▒▒▒▒
+; ..░░░░░░
+; ...░.░.░
+;
+    db $20,$15,$2a,$14,$2a,$10,$3f,$15,$00,$00,$01,$02,$07,$0f,$00,$00 ; [$a1
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ......▒▒
+; ░.░.░..█
+; .░.....▒
+; .....░.▒
+; ........
+; ░....░.░
+; .░......
+; ░...░..░
+;
+    db $00,$a9,$40,$04,$00,$85,$40,$89,$03,$01,$01,$01,$00,$00,$00,$00 ; [$a1
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░...░▒
+; .░...░▒█
+; ░.░.░▒█▒
+; ...░▒█▒░
+; ░.░▒█▒░░
+; .░▒█▒░░.
+; ░▒█▒░░..
+; ▒█▒░░...
+;
+    db $e2,$45,$aa,$15,$ab,$56,$ac,$58,$01,$03,$07,$0e,$1c,$38,$70,$e0 ; [$a1
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$00,$7e,$7e,$00,$00,$e7,$e7,$00,$fe,$80,$80,$00,$ef,$08,$08 ; [$a2
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ...░....
+; .░..░.░.
+; ........
+; ░.░...░.
+; .....░..
+; ░..░....
+; ..░...░.
+; ....░...
+;
+    db $10,$4a,$00,$a2,$04,$90,$22,$08,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a2
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ...░....
+; .░...░..
+; ........
+; ..░.....
+; ....░...
+; ........
+; ..░...░.
+; ........
+;
+    db $10,$44,$00,$20,$08,$00,$22,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a2
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; .░...░..
+; ........
+; ░.......
+; ....░...
+; ........
+; ..░.....
+; ........
+;
+    db $00,$44,$00,$80,$08,$00,$20,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a2
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ░.░▒▒▒▒.
+; .░░░░░░.
+; ░.░.░░░.
+; ........
+; ░░░.▒▒▒▒
+; .░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$a0,$7e,$ae,$00,$e0,$67,$e7,$00,$1e,$00,$00,$00,$0f,$08,$08 ; [$a2
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; ░.......
+; ...░....
+; ░.░.░░░.
+; ........
+; ░░░.▒▒▒▒
+; .░░.▒░░░
+; ░░░.▒░░░
+;
+    db $00,$80,$10,$ae,$00,$e0,$67,$e7,$00,$00,$00,$00,$00,$0f,$08,$08 ; [$a2
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+;
+    db $81,$81,$81,$81,$81,$81,$81,$81,$fe,$fe,$fe,$fe,$fe,$fe,$fe,$fe ; [$a2
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░▒░.░...
+; ░▒░....░
+; ░▒░.....
+; ░▒░░░░░░
+; ░▒░░░░▒▒
+; ░▒░░░░░░
+; ░▒░.....
+; ░▒░...░.
+;
+    db $a8,$a1,$a0,$bf,$bc,$bf,$a0,$a2,$40,$40,$40,$40,$43,$40,$40,$40 ; [$a2
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░.░.░▒░
+; .....░▒░
+; ..░..░▒░
+; ░░░░░▒▒░
+; ▒▒▒▒▒▒▒░
+; ░░░░░▒▒░
+; .....░▒░
+; ..░..░▒░
+;
+    db $55,$05,$25,$f9,$01,$f9,$05,$25,$02,$02,$02,$06,$fe,$06,$02,$02 ; [$a2
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; ░.░.░░░░
+; ░░.░░...
+; .░░░...░
+; ░.░..░░░
+; .░..░░░.
+; ░░.░░▒▒.
+; ░░.░▒▒▒.
+;
+    db $55,$af,$d8,$71,$a7,$4e,$d8,$d0,$00,$00,$00,$00,$00,$00,$06,$0e ; [$a2
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░.░.░..
+; ░░░░░.░░
+; ....░░░.
+; .░...░.░
+; ░░░░..░.
+; ▒▒▒░░.▒░
+; █▒▒░░░.▒
+; ▒▒▒░▒░.█
+;
+    db $d4,$fb,$0e,$45,$f2,$19,$9c,$15,$00,$00,$00,$00,$00,$e2,$e1,$e9 ; [$a2
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░.░░▒▒▒.
+; ░.░░░░░.
+; ░.░▒█░▒.
+; ░.░▒▒░▒.
+; ░.░░░░▒.
+; ░.░░░░░.
+; ░.░░██▒.
+; ░.░░▒▒▒.
+;
+    db $b0,$be,$ac,$a4,$bc,$be,$bc,$b0,$0e,$00,$1a,$1a,$02,$00,$0e,$0e ; [$a3
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █▒▒░▒▒.░
+; █░░░░░.█
+; ███▒░▒.█
+; ▒▒▒▒░▒.▒
+; █▒▒▒░▒.▒
+; ▒░░░░░.█
+; ███░█▒.▒
+; ▒▒▒░▒▒.█
+;
+    db $91,$fd,$e9,$08,$88,$7d,$f8,$11,$ec,$81,$f5,$f5,$f5,$81,$ed,$ed ; [$a3
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; █▒░░...░
+; █▒░...░.
+; █▒░.░░▒.
+; █▒░.░.▒.
+; █▒░.▒░▒.
+; █▒░.▒.▒.
+; █▒░.▒░▒.
+; █▒░.░.░.
+;
+    db $b1,$a2,$ac,$a8,$a4,$a0,$a4,$aa,$c0,$c0,$c2,$c2,$ca,$ca,$ca,$c0 ; [$a3
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░.░▒░░░
+; ▒.░.░▒▒▒
+; ▒.▒░.▒█▒
+; ▒.▒░░▒█▒
+; ▒.▒░░▒█▒
+; ▒.▒░░▒█▒
+; ▒.▒░░▒█▒
+; ░.░░░▒█▒
+;
+    db $d7,$28,$12,$1a,$1a,$1a,$1a,$ba,$08,$87,$a7,$a7,$a7,$a7,$a7,$07 ; [$a3
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; █▒░░░░▒▒
+; ▒░....▒▒
+; ▒......█
+; ░...░░.█
+; ░..░░░░█
+; ░..░░░░█
+; ░..░░░░█
+; ░░▒█████
+;
+    db $bc,$40,$01,$8d,$9f,$9f,$9f,$df,$c3,$83,$81,$01,$01,$01,$01,$3f ; [$a3
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░▒░░░░▒
+; ░▒█▒▒░▒░
+; ░▒█▒▒░▒▒
+; ░███▒░▒▒
+; ░▒▒▒▒░▒░
+; ░░░░░░░▒
+; ░░░░░░░░
+; ...░.░░░
+;
+    db $de,$a5,$a4,$f4,$85,$fe,$ff,$17,$21,$7a,$7b,$7b,$7a,$01,$00,$00 ; [$a3
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ██████▒░
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; ░░░░░░░░
+; ███░▒▒░.
+; ▒▒▒░▒░..
+; ▒▒▒░░...
+; ░░░░....
+;
+    db $fd,$81,$81,$ff,$f2,$14,$18,$f0,$fe,$fe,$fe,$00,$ec,$e8,$e0,$00 ; [$a3
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ██████▒░
+; █▒▒▒░░░░
+; ▒░░░....
+; ░.......
+; ........
+; ........
+; ...░░░░░
+; .░░░░░░░
+;
+    db $fd,$8f,$70,$80,$00,$00,$1f,$7f,$fe,$f0,$80,$00,$00,$00,$00,$00 ; [$a3
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ██░.....
+; █▒░.....
+; █▒░.....
+; ░░░.....
+; █░.....░
+; ▒░.....░
+; ▒░.....░
+; ▒░......
+;
+    db $e0,$a0,$a0,$e0,$c1,$41,$41,$40,$c0,$c0,$c0,$00,$80,$80,$80,$80 ; [$a3
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.░.░░.░
+; .░.░.░.░
+; ░░░░░░░░
+; ░▒▒█▒█▒█
+; ░░▒▒▒▒▒▒
+; ░▒█▒███▒
+; ░▒▒▒█▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $ad,$55,$ff,$95,$c0,$ae,$88,$80,$00,$00,$00,$7f,$3f,$7f,$7f,$7f ; [$a3
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; .░.░.░..
+; ░░░░░░░░
+; █▒▒▒▒▒▒░
+; ▒▒░▒░░.░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $00,$54,$ff,$81,$2d,$ee,$cc,$88,$00,$00,$00,$fe,$d0,$f7,$f7,$f7 ; [$a3
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; █▒░.....
+; ▒░░.....
+; ░░......
+; ░░......
+; .░......
+; ........
+; .▒▒.....
+; .▒▒.....
+;
+    db $a0,$60,$c0,$c0,$40,$00,$00,$00,$c0,$80,$00,$00,$00,$00,$60,$60 ; [$a3
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ███▒█░▒█
+; █▒░█▒▒░▒
+; ▒░██▒▒░░
+; █░█▒▒░░.
+; ▒░░▒░░..
+; ░░▒░░...
+; ▒░░░....
+; █▒░░....
+;
+    db $ed,$b2,$73,$e6,$6c,$d8,$70,$b0,$fb,$dd,$bc,$b8,$90,$20,$80,$c0 ; [$a3
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ██▒▒░░░.
+; ▒░░.....
+; ░.......
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $ce,$60,$80,$00,$00,$00,$00,$00,$f0,$80,$00,$00,$00,$00,$00,$00 ; [$a3
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░░▒▒▒██
+; ....░░▒▒
+; ......░░
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $e3,$0c,$03,$00,$00,$00,$00,$00,$1f,$03,$00,$00,$00,$00,$00,$00 ; [$a3
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░░░▒▒░░
+; ░░▒▒░█▒▒
+; ░█▒█▒░██
+; ░▒█▒█░▒▒
+; .░▒█▒▒░█
+; ..░▒▒▒░█
+; ...░▒░▒█
+; ...░▒█░▒
+;
+    db $73,$cc,$d7,$ac,$53,$23,$15,$16,$8c,$37,$7b,$7b,$3d,$1d,$0b,$0d ; [$a3
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ....░█░░
+; ▒▒▒.░▒█▒
+; ▒░░..▒██
+; ▒░░..░░█
+; ......▒█
+; ▒▒▒.▒.░▒
+; ░░░.▒.░▒
+; ░░░.▒░.░
+;
+    db $0f,$0a,$63,$67,$01,$02,$e2,$e5,$04,$e7,$87,$81,$03,$e9,$09,$08 ; [$a4
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ........
+; ░░░░░░░.
+; ░▒░▒░░▒░
+; █▒░▒▒░▒░
+; ▒░▒░▒░▒░
+; █▒▒▒▒▒░░
+; ▒▒░▒░▒▒░
+; ░░░░░░░░
+;
+    db $00,$fe,$ad,$a5,$55,$83,$29,$ff,$00,$00,$52,$da,$aa,$fc,$d6,$00 ; [$a4
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ▒▒░▒░░.░
+; ░░......
+; ▒▒░.▒▒░░
+; ░▒░.▒░░░
+; ▒▒░.▒░░░
+;
+    db $00,$00,$00,$2d,$c0,$23,$a7,$27,$00,$00,$00,$d0,$00,$cc,$48,$c8 ; [$a4
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒███████
+; █▒▒▒▒░░░
+; █▒▒░▒░██
+; █▒░▒░░█▒
+; █▒▒░░░█▒
+; █▒░████▒
+; █▒░█▒▒▒▒
+;
+    db $ff,$7f,$87,$97,$ae,$9e,$be,$b0,$00,$ff,$f8,$eb,$d3,$e3,$df,$df ; [$a4
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ██████▒█
+; ░░▒▒▒░▒░
+; ██░░▒▒░░
+; ▒▒░▒░▒░░
+; ▒▒░▒▒▒▒░
+; ▒▒░██░▒░
+; ▒▒▒▒▒░▒░
+;
+    db $ff,$fd,$c5,$f3,$2b,$21,$3d,$05,$00,$ff,$3a,$cc,$d4,$de,$da,$fa ; [$a4
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; █▒░█▒▒▒▒
+; █▒░█▒▒▒▒
+; █▒░▒░░░▒
+; █▒▒░░░█▒
+; █▒░▒░░█▒
+; █▒▒▒▒░█▒
+; ▒▒▒▒▒░▒░
+; ░░░░░░░░
+;
+    db $b0,$b0,$ae,$9e,$ae,$86,$05,$ff,$df,$df,$d1,$e3,$d3,$fb,$fa,$00 ; [$a4
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒░▒░
+; ▒▒▒▒▒░▒░
+; ▒▒░░░░░░
+; ▒▒░░▒░▒░
+; ▒▒░▒▒▒▒░
+; ▒▒░▒▒▒▒░
+; ░░░▒▒░▒░
+; ░░░░░░░░
+;
+    db $05,$05,$3f,$35,$21,$21,$e5,$ff,$fa,$fa,$c0,$ca,$de,$de,$1a,$00 ; [$a4
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░▒▒▒░░░
+; ▒▒▒░░...
+; ▒▒░░....
+; ░░░.....
+; ▒░......
+; ░░......
+; ░░......
+;
+    db $ff,$c7,$18,$30,$e0,$40,$c0,$c0,$00,$38,$e0,$c0,$00,$80,$00,$00 ; [$a4
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░▒▒▒
+; ░░░░░░▒▒
+; ....▒▒▒▒
+; .....▒▒▒
+; ......█░
+; ......█▒
+; .......▒
+; .......█
+;
+    db $f8,$fc,$00,$00,$03,$02,$00,$01,$07,$03,$0f,$07,$02,$03,$01,$01 ; [$a4
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; .░▒▒▒█▒░
+; .▒░▒█▒░░
+; .░▒▒▒█..
+; .░▒▒█▒..
+; .▒▒▒▒▒..
+; .░▒▒█▒██
+; .▒▒█▒█▒▒
+; .░▒▒▒▒▒░
+;
+    db $45,$2b,$44,$48,$00,$4b,$14,$41,$3e,$5c,$3c,$3c,$7c,$3f,$7f,$3e ; [$a4
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒░▒░░░..
+; ░░░░░.░.
+; .▒▒░░░..
+; .█░░░.░.
+; .█▒░░░..
+; █▒░░░.░.
+; ░▒░░░░..
+; ▒▒░░░...
+;
+    db $5c,$fa,$1c,$7a,$5c,$ba,$bc,$38,$a0,$00,$60,$40,$60,$c0,$40,$c0 ; [$a4
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒░
+; ▒▒......
+; ▒▒.░░░░░
+; ░▒.░....
+; █▒.░.░░░
+; █▒.░.░▒▒
+; ▒▒.░.░▒▒
+;
+    db $ff,$01,$00,$1f,$90,$97,$94,$14,$00,$fe,$c0,$c0,$40,$c0,$c3,$c3 ; [$a4
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒░░
+; .......░
+; ░░░░░░░░
+; .....░▒▒
+; ░░░░░▒█▒
+; ░▒▒▒░▒█▒
+; ░.▒▒░██▒
+;
+    db $ff,$03,$01,$ff,$04,$fa,$8a,$8e,$00,$fc,$00,$00,$03,$07,$77,$37 ; [$a4
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░.░.░▒▒
+; ▒▒.░.░▒.
+; ▒▒.░.░▒.
+; ▒▒.░.░▒▒
+; ░▒.░.░▒▒
+; █▒.░.░.░
+; ▒█.░▒▒██
+; ▒▒.▒▒▒██
+;
+    db $d4,$14,$14,$14,$94,$95,$53,$03,$03,$c2,$c2,$c3,$43,$c0,$cf,$df ; [$a4
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░.▒▒░██░
+; ░▒▒▒░▒█▒
+; ░▒▒.░▒█▒
+; ░▒▒.░██▒
+; ░...░▒█░
+; .░.░░██▒
+; ▒█▒██▒█▒
+; ██████▒▒
+;
+    db $8f,$8a,$8a,$8e,$8b,$5e,$5a,$fc,$36,$77,$67,$67,$06,$07,$ff,$ff ; [$a4
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; .░▒▒▒█▒░
+; .▒░▒█▒▒▒
+; .░▒▒▒█▒▒
+; .░▒▒█▒▒▒
+; .▒▒▒▒▒▒▒
+; .░▒▒█▒▒▒
+; .▒▒█▒█▒▒
+; .░▒▒▒▒▒░
+;
+    db $45,$28,$44,$48,$00,$48,$14,$41,$3e,$5f,$3f,$3f,$7f,$3f,$7f,$3e ; [$a4
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒░▒░░░..
+; ░▒░░░.░.
+; ▒░▒░░░..
+; ░▒░░░.░.
+; ▒▒▒░░░..
+; ▒░░░░.░.
+; ░▒░░░░..
+; ▒▒░░░...
+;
+    db $5c,$ba,$5c,$ba,$1c,$7a,$bc,$38,$a0,$40,$a0,$40,$e0,$80,$40,$c0 ; [$a5
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ......░▒
+; ......░▒
+; .....░░░
+; .....░░░
+; ....░░▒░
+; ....░░▒▒
+; ....░▒█░
+; ...░░▒▒▒
+;
+    db $02,$02,$07,$07,$0d,$0c,$0b,$18,$01,$01,$00,$00,$02,$03,$06,$07 ; [$a5
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.......
+; ░.░.....
+; ░.......
+; ░░......
+; ░..░....
+; ░░......
+; ░.░.....
+; ░░..░...
+;
+    db $80,$a0,$80,$c0,$90,$c0,$a0,$c8,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a5
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ...░▒█▒▒
+; ...░▒█▒▒
+; ..░░▒▒▒░
+; ..░▒▒▒░░
+; ..▒▒█▒▒▒
+; .░░▒█▒░░
+; .░▒██▒▒▒
+; .░▒███▒▒
+;
+    db $14,$14,$31,$23,$08,$6b,$58,$5c,$0f,$0f,$0e,$1c,$3f,$1c,$3f,$3f ; [$a5
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░.....
+; ░░.░....
+; ░░░..░..
+; ░.░░....
+; ░░░.░...
+; ░.░░..░.
+; ░░░░░..░
+; ░.░░.░░.
+;
+    db $e0,$d0,$e4,$b0,$e8,$b2,$f9,$b6,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a5
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; █▒▒░░▒░.
+; ▒█▒▒░░░.
+; ░▒█▒▒░░░
+; ▒░▒█▒░░.
+; ▒▒░▒░▒░.
+; ▒▒▒░▒▒░░
+; ░░░░░░░░
+; ..░..░..
+;
+    db $9a,$4e,$a7,$56,$2a,$13,$ff,$24,$e4,$f0,$78,$b8,$d4,$ec,$00,$00 ; [$a5
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ████████
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ........
+; .▒▒▒░▒..
+; ░.▒░░...
+; ░.▒█░...
+; ..▒█▒...
+;
+    db $ff,$00,$00,$00,$08,$98,$98,$10,$ff,$ff,$ff,$00,$74,$20,$30,$38 ; [$a5
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ████████
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ........
+; ........
+; ........
+; .░░..░░.
+; ........
+;
+    db $ff,$00,$00,$00,$00,$00,$66,$00,$ff,$ff,$ff,$00,$00,$00,$00,$00 ; [$a5
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ███████░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ........
+; .▒▒▒░▒..
+; ░.▒░░...
+; ░.▒█░...
+; ..▒█▒...
+;
+    db $ff,$01,$01,$00,$08,$98,$98,$10,$fe,$fe,$fe,$00,$74,$20,$30,$38 ; [$a5
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒.▒█▒...
+; ▒.▒█▒...
+; ▒.▒█▒...
+; ..▒█▒...
+; ▒.▒█▒...
+; ░.▒█▒...
+; ░.▒█▒...
+; ..▒█▒...
+;
+    db $10,$10,$10,$10,$10,$90,$90,$10,$b8,$b8,$b8,$38,$b8,$38,$38,$38 ; [$a5
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒.▒█▒...
+; ▒.▒█▒...
+; ▒.▒█▒...
+; ..▒█▒...
+; ▒.▒█▒...
+; ░.░░░...
+; ░▒██▒░..
+; ░░░░░░░.
+;
+    db $10,$10,$10,$10,$10,$b8,$b4,$fe,$b8,$b8,$b8,$38,$b8,$00,$78,$00 ; [$a5
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒░░.▒░░.
+; ▒░.▒.░░.
+; ▒.██▒.░.
+; .▒██▒▒..
+; .░░░░░..
+; .▒██▒▒..
+; .▒██▒▒..
+; .▒██▒▒..
+;
+    db $66,$46,$32,$30,$7c,$30,$30,$30,$88,$90,$b8,$7c,$00,$7c,$7c,$7c ; [$a5
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .▒██▒▒..
+; ▒.▒▒▒...
+; ▒.░░░...
+; ▒░......
+; ▒░░.....
+; ▒░░...░.
+; ▒░░.▒░░.
+; ▒░░.▒░░.
+;
+    db $30,$00,$38,$40,$60,$62,$66,$66,$7c,$b8,$80,$80,$80,$80,$88,$88 ; [$a5
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+; █▒▒░█▒▒░
+;
+    db $99,$99,$99,$99,$99,$99,$99,$99,$ee,$ee,$ee,$ee,$ee,$ee,$ee,$ee ; [$a5
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒▒░▒░░.
+; ▒░▒▒░...
+; ░▒▒░....
+; ░▒░...░.
+; ▒░..░░░.
+; ░..░░░░.
+; ▒..░░▒░.
+; ░.░░▒▒░.
+;
+    db $96,$48,$90,$a2,$4e,$9e,$1a,$b2,$68,$b0,$60,$40,$80,$00,$84,$0c ; [$a5
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒░▒▒░.
+; ..░▒▒░░.
+; ...░▒░░.
+; ░...░▒░.
+; ░░░..░░▒
+; ▒▒░░..░░
+; █▒▒▒░.▒░
+; █▒▒▒▒.▒░
+;
+    db $12,$26,$16,$8a,$e6,$33,$89,$81,$ec,$18,$08,$04,$01,$c0,$f2,$fa ; [$a5
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒░▒░░░░.
+; ░▒░░....
+; ▒░......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $5e,$b0,$40,$80,$80,$80,$80,$80,$a0,$40,$80,$00,$00,$00,$00,$00 ; [$a6
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░▒░▒░░
+; ....▒░▒░
+; .....▒░░
+; ......░░
+; ......▒░
+; ......▒░
+; ......▒░
+; ......░▒
+;
+    db $eb,$05,$03,$03,$01,$01,$01,$02,$14,$0a,$04,$00,$02,$02,$02,$01 ; [$a6
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $80,$80,$80,$80,$80,$80,$80,$80,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a6
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ......█░
+; ......▒░
+; ......█░
+; ......▒░
+; ......█░
+; ......▒░
+; ......█░
+; ......▒░
+;
+    db $03,$01,$03,$01,$03,$01,$03,$01,$02,$02,$02,$02,$02,$02,$02,$02 ; [$a6
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒.░░▒▒░.
+; ▒.░░▒▒░.
+; ▒.░░▒▒░.
+; ░.░░▒▒░.
+; ░.░░▒▒░.
+; ▒.░░▒▒░.
+; ▒.░░▒▒░.
+; ▒.░░▒▒░.
+;
+    db $32,$32,$32,$b2,$b2,$32,$32,$32,$8c,$8c,$8c,$0c,$0c,$8c,$8c,$8c ; [$a6
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; █▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; █▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; █▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+; █▒▒▒░.▒░
+; ▒▒▒▒░.▒░
+;
+    db $89,$09,$89,$09,$89,$09,$89,$09,$f2,$f2,$f2,$f2,$f2,$f2,$f2,$f2 ; [$a6
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █▒▒..░░░
+; ▒▒...░░░
+; ▒..░░░░.
+; ..░.░.░░
+; ..░░░░░░
+; .░░.░░.░
+; ░.░░░░░░
+; ░░░░░.░░
+;
+    db $87,$07,$1e,$2b,$3f,$6d,$bf,$fb,$e0,$c0,$80,$00,$00,$00,$00,$00 ; [$a6
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░▒█▒▒
+; ░░░░░▒█▒
+; ░░░░░░▒█
+; ░░░░░░░▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $f4,$fa,$fd,$fe,$ff,$ff,$ff,$ff,$0f,$07,$03,$01,$00,$00,$00,$00 ; [$a6
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░.░..░..
+; ....░.░.
+; .░.░....
+; ░.....░.
+; .░.░.░..
+; ░..░.░..
+; ..░.....
+; ....░.░.
+;
+    db $a4,$0a,$50,$82,$54,$94,$20,$0a,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a6
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; █▒█▒█▒█▒
+; ▒▒▒▒▒▒░▒
+; ░▒▒▒░▒▒▒
+; ▒▒░▒▒░▒░
+; ▒░▒░▒▒▒▒
+; ▒▒▒▒▒▒░▒
+; ▒▒░▒░▒▒░
+; ░░░░░░░░
+;
+    db $aa,$02,$88,$25,$50,$02,$29,$ff,$ff,$fd,$77,$da,$af,$fd,$d6,$00 ; [$a6
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █░▒█████
+; ░█░▒▒▒▒▒
+; ░██░▒▒▒▒
+; ░░██░░░░
+; █▒░░████
+; █▒▒░█▒▒▒
+; █▒▒░█▒██
+; █▒▒░█▒█▒
+;
+    db $df,$e0,$f0,$ff,$bf,$98,$9b,$9a,$bf,$5f,$6f,$30,$cf,$ef,$ef,$ef ; [$a6
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ██████░░
+; ▒▒▒▒▒░█░
+; ▒▒▒▒░██░
+; ░░░░██░░
+; ███▒█░░░
+; ▒▒▒░.░▒░
+; █░▒░.▒▒░
+; ▒░▒░.▒▒░
+;
+    db $ff,$07,$0f,$ff,$ef,$15,$d1,$51,$fc,$fa,$f6,$0c,$f8,$e2,$a6,$a6 ; [$a6
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; █▒▒░█▒█▒
+; █▒▒░█▒█▒
+; █▒░░█▒█▒
+; █░█░█▒▒█
+; █░░█░░▒▒
+; █░█░█.░▒
+; ░█░.░█.░
+; ░░░░░░░.
+;
+    db $9a,$9a,$ba,$f9,$fc,$fa,$ed,$fe,$ef,$ef,$cf,$af,$93,$a9,$44,$00 ; [$a6
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒░▒░.▒▒░
+; ▒░▒░.▒▒░
+; ▒░▒░.▒▒░
+; ░▒▒░.░█░
+; ▒▒░.██░░
+; ▒░.░██░░
+; ░.░█░░█░
+; .░░░▒░░█
+;
+    db $51,$51,$51,$97,$2f,$5f,$bf,$77,$a6,$a6,$a6,$62,$cc,$8c,$12,$09 ; [$a6
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ░███░░░░
+; █▒▒▒▒░██
+; █▒░█▒░▒▒
+; █▒░█▒░░░
+; ▒███▒░▒▒
+; ░▒▒▒█▒░▒
+; ░░░░░█▒░
+;
+    db $00,$ff,$87,$b4,$b7,$74,$8a,$fd,$00,$70,$fb,$db,$d8,$fb,$7d,$06 ; [$a6
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ░░░░░░░.
+; █████▒░.
+; ▒▒▒▒▒░..
+; ░░░█▒░..
+; ▒▒▒█▒░.▒
+; ▒▒▒█░░.░
+; ▒▒▒░█▒.░
+;
+    db $00,$fe,$fa,$04,$f4,$14,$1d,$19,$00,$00,$fc,$f8,$18,$f9,$f0,$ec ; [$a6
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░█▒░░░█▒
+; ░█▒░▒▒░█
+; ░█▒░▒▒▒░
+; ░█▒░▒▒▒▒
+; .█▒░████
+; .█▒▒▒▒▒▒
+; .▒░░░░░░
+; ........
+;
+    db $de,$d3,$d1,$d0,$5f,$40,$3f,$00,$63,$6d,$6e,$6f,$6f,$7f,$40,$00 ; [$a7
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒░█▒░.░
+; ▒░█▒░░█░
+; █▒▒░░█▒░
+; ░█▒░█▒░.
+; ▒░█▒░░..
+; ▒▒░█▒░.▒
+; ░░░░█░.░
+; .......░
+;
+    db $b5,$6f,$9d,$da,$6c,$34,$fd,$01,$58,$b2,$e6,$6c,$b0,$d9,$08,$00 ; [$a7
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ██████▒█
+; █▒░░░░░░
+; █░██▒░.█
+; ▒░███▒░.
+; █░▒███▒░
+; ▒▒░▒█▒█▒
+; █▒░░▒▒██
+; ▒▒░█░▒█▒
+;
+    db $fd,$bf,$f5,$7a,$dd,$2a,$b3,$3a,$ff,$c0,$b9,$bc,$be,$df,$cf,$d7 ; [$a7
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ██░█▒░█░
+; ░░░█▒░░░
+; ██░█▒░░░
+; ▒▒░█▒░░░
+; .░▒██▒░░
+; ░.███▒░░
+; ▒░█▒▒▒░░
+; █▒░▒▒▒░░
+;
+    db $f7,$f7,$f7,$37,$5b,$bb,$63,$a3,$da,$18,$d8,$d8,$3c,$3c,$bc,$dc ; [$a7
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒░▒█▒░▒▒
+; ▒▒█░▒█░▒
+; ░██▒▒█▒.
+; ░███▒▒▒░
+; ░▒█▒▒▒▒░
+; █░▒█▒▒▒░
+; ▒▒░▒▒▒░▒
+; ░░░░░░░░
+;
+    db $54,$36,$e4,$f1,$a1,$d1,$22,$ff,$bb,$ed,$7e,$7e,$7e,$be,$dd,$00 ; [$a7
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ██▒░░▒░░
+; █▒█▒░░░░
+; ▒▒██▒░.░
+; .▒███▒░.
+; ░.▒██▒░.
+; ▒░.▒█▒░.
+; ▒▒▒.░░..
+; ░░░░░░░.
+;
+    db $db,$af,$35,$3a,$9a,$4a,$0c,$fe,$e4,$f0,$f8,$7c,$3c,$9c,$e0,$00 ; [$a7
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒███▒█▒█
+; █▒▒▒░▒▒▒
+; ▒▒▒█▒░▒▒
+; ▒▒█░█▒░▒
+; █▒█▒░█▒░
+; █▒█▒▒░█▒
+; █▒█▒▒▒░█
+; ▒▒█▒▒▒░█
+;
+    db $75,$88,$14,$3a,$ad,$a6,$a3,$23,$ff,$f7,$fb,$ed,$f6,$fb,$fd,$fd ; [$a7
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒████▒░░
+; ▒▒▒▒▒▒░.
+; ▒▒▒▒░░░░
+; ▒▒▒░▒▒░.
+; ▒▒▒▒▒▒░░
+; ░░▒▒▒▒░.
+; ▒░░▒▒▒░░
+; ▒▒░░▒▒░░
+;
+    db $7b,$02,$0f,$12,$03,$c2,$63,$33,$fc,$fc,$f0,$ec,$fc,$3c,$9c,$cc ; [$a7
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a7
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒░▒▒▒░░
+; ▒█░▒█▒░░
+; ▒█░▒█▒░░
+; ▒▒█░▒▒▒░
+; ░▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░▒▒▒░░
+;
+    db $a3,$6b,$6b,$31,$80,$ff,$ff,$e3,$5c,$dc,$dc,$ee,$7f,$00,$00,$1c ; [$a8
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░▒█▒░░░░
+; ░█▒▒░░░░
+; ░█▒▒░░░░
+; █▒▒░░░░░
+; ▒▒░░░░░.
+; ░░░░░░..
+; ░░░░░░..
+; ░░░░░░..
+;
+    db $af,$cf,$cf,$9f,$3e,$fc,$fc,$fc,$70,$70,$70,$e0,$c0,$00,$00,$00 ; [$a8
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ..░▒░▒░░
+; ..░░▒▒▒▒
+; ..░▒▒█▒▒
+; ..░▒███▒
+; ..░▒██▒▒
+; ..░▒████
+; ..░▒██▒▒
+; ..░▒█▒▒▒
+;
+    db $2b,$30,$24,$2e,$2c,$2f,$2c,$28,$14,$0f,$1f,$1f,$1f,$1f,$1f,$1f ; [$a8
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░..
+; ░▒░░░░..
+; ▒░░░░░..
+; ░▒▒░░░..
+; ▒▒░░░░..
+; ▒░▒░░░..
+; ▒▒▒░░░..
+; ▒▒░▒░░..
+;
+    db $fc,$bc,$7c,$9c,$3c,$5c,$1c,$2c,$00,$40,$80,$60,$c0,$a0,$e0,$d0 ; [$a8
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; ..░▒▒▒▒▒
+; .░░▒████
+; .░▒█████
+; .░▒█▒▒█▒
+; .░▒▒██▒▒
+; .░▒██▒▒█
+; .░▒█▒▒▒█
+;
+    db $00,$20,$6f,$5f,$52,$4c,$59,$51,$00,$1f,$1f,$3f,$3f,$3f,$3f,$3f ; [$a8
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒▒▒
+; ████████
+; █▒▒█████
+; ▒██████▒
+; ██████▒█
+; ██▒▒▒▒▒█
+; █▒▒▒▒░▒█
+;
+    db $00,$00,$ff,$9f,$7e,$fd,$c1,$85,$00,$ff,$ff,$ff,$ff,$ff,$ff,$fb ; [$a8
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ........
+; ▒▒▒▒▒▒░.
+; ████▒▒░░
+; █████▒░░
+; ██▒▒▒▒░░
+; █▒▒▒░▒░░
+; █▒▒▒░▒░░
+; ▒▒▒▒░▒░░
+;
+    db $00,$02,$f3,$fb,$c3,$8b,$8b,$0b,$00,$fc,$fc,$fc,$fc,$f4,$f4,$f4 ; [$a8
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ........
+; ░░░░░░░░
+; ░░░░░░░░
+; ........
+; ........
+; ..░░░░..
+; ░▒░░░░░.
+; ▒░.▒▒▒░▒
+;
+    db $00,$ff,$ff,$00,$00,$3c,$be,$42,$00,$00,$00,$00,$00,$00,$40,$9d ; [$a8
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒▒▒▒
+; ▒███████
+; ██▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ░▒░░▒░░░
+; ░░░░░░░░
+;
+    db $80,$7f,$c0,$80,$80,$00,$b7,$ff,$7f,$ff,$ff,$ff,$ff,$ff,$48,$00 ; [$a8
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒░.
+; ██████▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒░░
+; ▒▒▒▒░░░░
+; ░░░░░░░░
+;
+    db $02,$fd,$01,$01,$01,$03,$0f,$ff,$fc,$fe,$fe,$fe,$fe,$fc,$f0,$00 ; [$a8
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░▒▒▒▒▒▒▒
+; ░▒░░░░░░
+; ░▒░.....
+; ░▒░.░░░░
+; ░▒░.░░░░
+; ░▒░.░░░░
+; ░▒░.░░░░
+;
+    db $ff,$80,$bf,$a0,$af,$af,$af,$af,$00,$7f,$40,$40,$40,$40,$40,$40 ; [$a8
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒░.░
+; ░░░░░░.░
+; ....░░.░
+; ░░░░░░.░
+; ░░░░▒░.░
+; ░░░░▒░.░
+; ░░░░▒░.░
+;
+    db $ff,$05,$fd,$0d,$fd,$f5,$f5,$f5,$00,$f8,$00,$00,$00,$08,$08,$08 ; [$a8
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░▒░.░░░░
+; ░▒░.░░░░
+; ░▒░.░░░░
+; ░▒░.░░░░
+; ░▒░.░▒▒▒
+; ░▒░░░░░░
+; ░░......
+; ░░░░░░░░
+;
+    db $af,$af,$af,$af,$a8,$bf,$c0,$ff,$40,$40,$40,$40,$47,$40,$00,$00 ; [$a8
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░▒░.░
+; ░░░░▒░.░
+; ░░░░▒░.░
+; ░░░░▒░.░
+; ▒▒▒▒▒░.░
+; ░░░░░░.░
+; .......░
+; ░░░░░░░░
+;
+    db $f5,$f5,$f5,$f5,$05,$fd,$01,$ff,$08,$08,$08,$08,$f8,$00,$00,$00 ; [$a8
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ░▒.░░░..
+; ░▒.░░░..
+; ░░▒.░░░.
+; .░░░░░░░
+; ........
+; ..░░░░░.
+; ..░░░░░░
+;
+    db $00,$9c,$9c,$ce,$7f,$00,$3e,$3f,$00,$40,$40,$20,$00,$00,$00,$00 ; [$a8
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; .░░░...░
+; .░░░....
+; ░░░....░
+; ░░░..░░.
+; ........
+; ░..░.░..
+; ..░.░...
+;
+    db $00,$71,$70,$e1,$e6,$00,$94,$28,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a8
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░.░▒█▒█▒
+; ░.░▒▒█▒▒
+; ░.░▒███▒
+; ░.░▒▒██▒
+; ░.░▒██▒▒
+; ░.░▒▒███
+; ░.░▒███▒
+; ░.░▒█▒█▒
+;
+    db $aa,$a4,$ae,$a6,$ac,$a7,$ae,$aa,$1f,$1f,$1f,$1f,$1f,$1f,$1f,$1f ; [$a9
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒░░.░..
+; █▒▒░░...
+; ▒▒░░░░..
+; ▒▒▒░░...
+; ▒▒░░.░..
+; ▒▒▒░░...
+; ▒▒░░.░..
+; ▒▒▒░░...
+;
+    db $34,$98,$3c,$18,$34,$18,$34,$18,$c0,$e0,$c0,$e0,$c0,$e0,$c0,$e0 ; [$a9
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░..░.░░
+; ░...░.░░
+; ...░.░.░
+; ..░...░░
+; .░...░.░
+; ....░..░
+; ░.░...░░
+; .░.░.░░░
+;
+    db $4b,$8b,$15,$23,$45,$09,$a3,$57,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a9
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .░....░.
+; ░..░...░
+; .░..░...
+; ░....░..
+; ..░...░░
+; ░..░.░..
+; ░░..░.░░
+; ░░░░░░░░
+;
+    db $42,$91,$48,$84,$23,$94,$cb,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a9
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .░▒█▒▒▒█
+; .░▒█▒▒▒█
+; .░▒█▒▒▒█
+; .░▒█▒▒▒▒
+; .░▒▒▒▒▒▒
+; .░░▒▒▒░░
+; .░░░░░░░
+; ..░░░░░░
+;
+    db $51,$51,$51,$50,$40,$63,$7f,$3f,$3f,$3f,$3f,$3f,$3f,$1c,$00,$00 ; [$a9
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒░▒█
+; ▒▒▒▒▒░▒█
+; ▒▒▒▒░░▒▒
+; ▒▒░░░░░░
+; ░░░░░░░░
+; ░░░▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $05,$05,$0c,$3f,$ff,$e0,$ff,$ff,$fb,$fb,$f3,$c0,$00,$1f,$00,$00 ; [$a9
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; ▒▒▒▒░▒░░
+; ▒▒▒░░▒░░
+; ░░░░▒▒░░
+; ░░░▒▒▒░░
+; ▒▒▒▒▒▒░░
+; ░░░░░░░░
+; ░░░░░░░.
+;
+    db $0b,$0b,$1b,$f3,$e3,$03,$ff,$fe,$f4,$f4,$e4,$0c,$1c,$fc,$00,$00 ; [$a9
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░..▒█▒░▒
+; ░..▒█▒░█
+; ░.▒█▒░.█
+; ▒▒█▒░..█
+; ███▒░██▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+;
+    db $8a,$8b,$95,$29,$ee,$00,$ff,$00,$1d,$1d,$39,$f1,$f7,$ff,$00,$00 ; [$a9
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ..░░░░░░
+; ..░░░▒░░
+; ..░░▒░▒░
+; ..░▒░▒░░
+; ..░░▒▒▒▒
+; ..░▒░▒░░
+; ..░░▒░▒░
+; ..░▒▒▒▒▒
+;
+    db $3f,$3b,$35,$2b,$30,$2b,$35,$20,$00,$04,$0a,$14,$0f,$14,$0a,$1f ; [$a9
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░.░.░..
+; ░░░.░...
+; ░░.░.░..
+; ░░░.░...
+; ░░░░.░..
+; ░░░.░...
+; ░░░░.░..
+; ░░░.░...
+;
+    db $d4,$e8,$d4,$e8,$f4,$e8,$f4,$e8,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a9
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░▒█....
+; ░▒█▒░...
+; ░▒█▒░...
+; ░▒█░▒...
+; ░▒█░▒...
+; ░▒█░▒░..
+; ░▒█▒▒▒..
+; ░▒██░▒..
+;
+    db $d0,$a8,$a8,$b0,$b0,$b4,$a0,$b8,$30,$70,$70,$68,$68,$68,$7c,$74 ; [$a9
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░▒█░▒..
+; ░░▒█░░░░
+; ░░▒█████
+; ░░░▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░▒
+; ░░▒█▒.░█
+; ░░▒██░▒█
+;
+    db $d8,$df,$df,$e0,$ff,$fe,$d3,$dd,$34,$30,$3f,$1f,$00,$01,$39,$3b ; [$a9
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ░░░░░░░.
+; ██████▒░
+; ▒▒▒▒▒███
+; ░░░░░▒██
+; ░░▒░..▒█
+; ░.▒█░░██
+; ░.░█░██░
+;
+    db $00,$fe,$fd,$07,$fb,$d1,$9f,$bf,$00,$00,$fe,$ff,$07,$23,$33,$16 ; [$a9
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░.▒█▒░█
+; ░░.▒█▒░█
+; ░░▒█▒░.█
+; ░▒█▒░..█
+; ░▒█▒░██▒
+; ░░▒▒▒▒▒▒
+; .░░░░░░░
+; ........
+;
+    db $cb,$cb,$d5,$a9,$ae,$c0,$7f,$00,$1d,$1d,$39,$71,$77,$3f,$00,$00 ; [$a9
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░..▒█░░░
+; ░..▒█▒░█
+; ░.▒█▒░.█
+; ▒▒█▒░.█▒
+; ███▒░█▒▒
+; ▒▒▒▒▒▒▒░
+; ░░░░░░░░
+; ........
+;
+    db $8f,$8b,$95,$2a,$ec,$01,$ff,$00,$18,$1d,$39,$f3,$f7,$fe,$00,$00 ; [$a9
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░█░█░▒░
+; ▒░▒░▒░▒░
+; .▒▒▒▒▒░.
+; .░░░░░░.
+; .░░░░░░.
+; .░░▒▒░░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+;
+    db $7d,$55,$02,$7e,$7e,$66,$52,$52,$aa,$aa,$7c,$00,$00,$18,$3c,$3c ; [$a9
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+;
+    db $52,$52,$52,$52,$52,$52,$52,$52,$3c,$3c,$3c,$3c,$3c,$3c,$3c,$3c ; [$aa
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; .░▒█▒▒░.
+; .░▒█▒▒░.
+; .░░▒▒░░.
+; .░░░░░░.
+; .░░░░░░.
+; .▒▒▒▒▒░.
+; ▒░▒░▒░▒░
+; ▒░█░█░▒░
+;
+    db $52,$52,$66,$7e,$7e,$02,$55,$7d,$3c,$3c,$18,$00,$00,$7c,$aa,$aa ; [$aa
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ░▒░░....
+; ░▒░▒▒▒▒▒
+; ░▒░░░░░░
+; ░░......
+; ░░░░░░░░
+;
+    db $00,$00,$00,$b0,$a0,$bf,$c0,$ff,$00,$00,$00,$40,$5f,$40,$00,$00 ; [$aa
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ▒......░
+; ░░░░░░.░
+; .......░
+; ░░░░░░░░
+;
+    db $00,$00,$00,$00,$01,$fd,$01,$ff,$00,$00,$00,$00,$80,$00,$00,$00 ; [$aa
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ▒......░
+; ░░░░░░.░
+; .......░
+; ░░░░░░░░
+;
+    db $00,$00,$00,$00,$01,$fd,$01,$ff,$00,$00,$00,$00,$80,$00,$00,$00 ; [$aa
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .....░..
+; ....░░.░
+; ...░░░.░
+; ..░░░░.░
+; ▒.░░░░.░
+; ░░░░░░.░
+; .......░
+; ░░░░░░░░
+;
+    db $04,$0d,$1d,$3d,$3d,$fd,$01,$ff,$00,$00,$00,$00,$80,$00,$00,$00 ; [$aa
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ...░░░░░
+; ....░░.░
+; ....░░.░
+; .....░.░
+; .....░.░
+; .....░.░
+; .....░.░
+; .....░.░
+;
+    db $1f,$0d,$0d,$05,$05,$05,$05,$05,$00,$00,$00,$00,$00,$00,$00,$00 ; [$aa
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░▒▒▒▒▒▒▒
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+;
+    db $ff,$80,$bf,$bf,$bf,$bf,$bf,$bf,$00,$7f,$40,$40,$40,$40,$40,$40 ; [$aa
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+;
+    db $ff,$05,$fd,$fd,$fd,$fd,$fd,$fd,$00,$f8,$00,$00,$00,$00,$00,$00 ; [$aa
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░▒░░░░░░
+; ░░......
+; ░░░░░░░░
+;
+    db $bf,$bf,$bf,$bf,$bf,$bf,$c0,$ff,$40,$40,$40,$40,$40,$40,$00,$00 ; [$aa
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; ░░░░░░.░
+; .......░
+; ░░░░░░░░
+;
+    db $fd,$fd,$fd,$fd,$fd,$fd,$01,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$aa
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒▒
+; ████████
+; ████████
+; ▒▒▒▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ░▒░░▒░░░
+; ░░░░░░░░
+;
+    db $ff,$00,$ff,$ff,$00,$00,$b7,$ff,$00,$ff,$ff,$ff,$ff,$ff,$48,$00 ; [$aa
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ......▒.
+; ......▒.
+; ......▒.
+; ......▒.
+; .....▒..
+; .....▒..
+; .....▒..
+; ....▒...
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$02,$02,$02,$02,$04,$04,$04,$08 ; [$aa
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; █.▒.....
+; ▒.▒.....
+; ▒.▒.....
+; ▒.▒.....
+; ▒..▒....
+; ▒..▒....
+; ▒..▒....
+; ▒...▒...
+;
+    db $80,$00,$00,$00,$00,$00,$00,$00,$a0,$a0,$a0,$a0,$90,$90,$90,$88 ; [$aa
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .....█..
+; ........
+; .█...█░.
+; .....█░.
+; .█░..▒░.
+; .█░.██▒░
+; .▒░..░░.
+; ██▒▒░░░.
+;
+    db $04,$00,$46,$06,$62,$6d,$26,$ce,$04,$00,$44,$04,$44,$4e,$40,$f0 ; [$aa
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ....▒..▒
+; ....▒.▒█
+; ...▒.█.█
+; ...░.█.█
+; ..▒▒.░.█
+; ░░░░.█░░
+; ░▒██░█░░
+; ░▒▒▒░█░░
+;
+    db $00,$01,$05,$15,$05,$f7,$bf,$8f,$09,$0b,$15,$05,$31,$04,$74,$74 ; [$aa
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; █▒..▒...
+; █░░..▒..
+; ▒░░.█...
+; █▒░.█.░.
+; █▒░.░.░░
+; ░░░.█▒..
+; ██▒▒█▒░░
+; ▒▒▒░█▒░░
+;
+    db $80,$e0,$68,$aa,$ab,$e8,$cb,$1b,$c8,$84,$88,$c8,$c0,$0c,$fc,$ec ; [$ab
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ..█.....
+; ........
+; .░█...█.
+; .░█.....
+; .░▒..░█.
+; ░▒██.░█.
+; .░░..░▒.
+; .░░░▒▒██
+;
+    db $20,$00,$62,$60,$46,$b6,$64,$73,$20,$00,$22,$20,$22,$72,$02,$0f ; [$ab
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .▒▒░.▒░░
+; ..░░..░░
+; ░.█▒░...
+; ░░.▒█▒▒█
+; ░░░.░░░░
+; ░░░.....
+; ░░░░░...
+; ░░░░░...
+;
+    db $13,$33,$a8,$c9,$ef,$e0,$f8,$f8,$64,$00,$30,$1f,$00,$00,$00,$00 ; [$ab
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .░░░░▒░░
+; ░..▒██▒▒
+; ██..░░░.
+; ░░░░.█..
+; ..░░░▒.░
+; ....░.░░
+; .....░▒█
+; ......░░
+;
+    db $7b,$8c,$ce,$f4,$39,$0b,$05,$03,$04,$1f,$c0,$04,$04,$00,$03,$00 ; [$ab
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒░..▒▒..
+; ..▒██▒░░
+; ░░░░░░██
+; ░░.█░░░░
+; .░█░░░..
+; ░░░░....
+; ▒░░.....
+; ░.......
+;
+    db $40,$1b,$ff,$df,$7c,$f0,$60,$80,$8c,$3c,$03,$10,$20,$00,$80,$00 ; [$ab
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░▒.░▒▒.
+; ▒▒..░░..
+; ...░▒█..
+; ▒▒▒█▒...
+; ░░░░....
+; ........
+; ........
+; ........
+;
+    db $48,$0c,$14,$10,$f0,$00,$00,$00,$26,$c0,$0c,$f8,$00,$00,$00,$00 ; [$ab
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ....█...
+; ...░█░..
+; ....░...
+; ...█░░..
+; ...█▒░..
+; ...█▒░..
+; ...█▒░..
+; ...▒▒░..
+;
+    db $08,$1c,$08,$1c,$14,$14,$14,$04,$08,$08,$00,$10,$18,$18,$18,$18 ; [$ab
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░█▒█░▒.
+; .░███░▒.
+; .░▒▒▒▒░.
+; ..░░░░..
+; ..░▒░░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+;
+    db $6c,$7c,$42,$3c,$2c,$34,$34,$34,$3a,$3a,$3c,$00,$10,$18,$18,$18 ; [$ab
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+; ..░█▒░..
+;
+    db $34,$34,$34,$34,$34,$34,$34,$34,$18,$18,$18,$18,$18,$18,$18,$18 ; [$ab
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; █░░░░.█▒
+; ......█▒
+; █▒▒▒▒.█▒
+; █▒▒▒▒.█▒
+; .▒▒▒..█▒
+; █▒▒.█.█▒
+; ...██.█▒
+; █░.██.█▒
+;
+    db $fa,$02,$82,$82,$02,$8a,$1a,$da,$83,$03,$fb,$fb,$73,$eb,$1b,$9b ; [$ab
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ███.░░░█
+; ███..░░█
+; ███.░.░█
+; ███.░░..
+; ███.░░.█
+; ███.░░..
+; ███.░░.█
+; ███....█
+;
+    db $ef,$e7,$eb,$ec,$ed,$ec,$ed,$e1,$e1,$e1,$e1,$e0,$e1,$e0,$e1,$e1 ; [$ab
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ab
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ab
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ab
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ab
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ab
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ac
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ac
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ac
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ac
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ac
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ░.......
+; ░░......
+; ▒░░.....
+;
+    db $00,$00,$00,$00,$00,$80,$c0,$60,$00,$00,$00,$00,$00,$00,$00,$80 ; [$ac
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █..█.█.▒
+; █.░.░.░.
+; ████████
+; █░█░█░█░
+; █░█░█░█░
+; █.......
+; █░.░░.░░
+; ██.██.██
+;
+    db $94,$aa,$ff,$ff,$ff,$80,$db,$db,$95,$80,$ff,$aa,$aa,$80,$80,$db ; [$ac
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ..░░░░.█
+; ░░░░░░.█
+; ████████
+; █░█░█░░█
+; █░█░█░░█
+; .......█
+; .░░.░░░█
+; .██.████
+;
+    db $3d,$fd,$ff,$ff,$ff,$01,$6f,$6f,$01,$01,$ff,$a9,$a9,$01,$01,$6f ; [$ac
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; █░......
+; █░.██.██
+; █░.██.█.
+; ........
+; ██.░.██.
+; ........
+; █..█.█.▒
+; █..█.█.▒
+;
+    db $c0,$db,$da,$00,$d6,$00,$94,$94,$80,$9b,$9a,$00,$c6,$00,$95,$95 ; [$ac
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ....░...
+; .▒░.░░.█
+; .░█.░░.█
+; .......█
+; ░.██.▒.█
+; .......█
+; .░░░░░.█
+; .█████.█
+;
+    db $08,$2d,$6d,$01,$b1,$01,$7d,$7d,$00,$41,$21,$01,$35,$01,$01,$7d ; [$ac
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .....█.█
+; ...█.█.█
+; ..█▒.█..
+; .█▒▒▒..█
+; .█▒▒..█.
+; .▒..▒.█.
+; ...▒▒▒.█
+; █░░.▒▒.█
+;
+    db $05,$15,$24,$41,$42,$02,$01,$e1,$05,$15,$34,$79,$72,$4a,$1d,$8d ; [$ac
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; .█.█....
+; .█.█....
+; .█.█▒█..
+; █...▒▒█.
+; ██.░.▒▒▒
+; .█.░░...
+; █.░░░.██
+; █..░░.██
+;
+    db $50,$50,$54,$82,$d0,$58,$bb,$9b,$50,$50,$5c,$8e,$c7,$40,$83,$83 ; [$ac
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; █░░░....
+; █░░░.▒.█
+; █░░.░█.█
+; █░░.██.█
+; █░░.██..
+; ....██.░
+; █▒▒.██..
+; ▒▒▒▒.██.
+;
+    db $f0,$f1,$ed,$ed,$ec,$0d,$8c,$06,$80,$85,$85,$8d,$8c,$0c,$ec,$f6 ; [$ac
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ..█...██
+; █.██░.██
+; █.██░.██
+; ..██░.██
+; ░.██░...
+; .██...░█
+; ██.░░.░█
+; ...░░..█
+;
+    db $23,$bb,$bb,$3b,$b8,$63,$db,$19,$23,$b3,$b3,$33,$30,$61,$c1,$01 ; [$ac
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; █▒▒▒▒.█.
+; █▒▒▒▒...
+; ..▒▒▒.░.
+; █...▒.░.
+; █░░░..░.
+; █░░░░..░
+; ...░░.█░
+; █░....█░
+;
+    db $82,$80,$02,$82,$f2,$f9,$1b,$c3,$fa,$f8,$38,$88,$80,$80,$02,$82 ; [$ac
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒..▒▒█
+; ▒██.▒▒▒█
+; ███.▒▒▒█
+; ███.....
+; ███.████
+; ███.██..
+; ███.█.░█
+; ███..░░█
+;
+    db $01,$61,$e1,$e0,$ef,$ec,$eb,$e7,$e7,$ef,$ef,$e0,$ef,$ec,$e9,$e1 ; [$ac
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ..░...░.
+; ........
+; ░..░.░..
+; ........
+; ..░.....
+; ......░.
+; .░......
+; .....░..
+;
+    db $22,$00,$94,$00,$20,$02,$40,$04,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░...▒░
+; ░░.....▒
+; ░.......
+; ........
+; ........
+; ........
+; ........
+;
+    db $ff,$e1,$c0,$80,$00,$00,$00,$00,$00,$02,$01,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░....▒░░
+; ......▒░
+; ......░▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+;
+    db $ff,$83,$01,$02,$00,$00,$00,$00,$00,$04,$02,$01,$01,$01,$01,$01 ; [$ad
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$01,$01,$01,$01,$01,$01,$01,$01 ; [$ad
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+; ........
+; .......░
+; ░.░.....
+; .....░..
+;
+    db $ff,$00,$ff,$00,$00,$01,$a0,$04,$00,$ff,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░░...░.
+; .░....█░
+; ░..░.░█░
+; .█....▒░
+; .█...▒█▒
+; ▒█░..▒█▒
+; ▒█▒..▒█▒
+; ▒▒▒..▒▒▒
+;
+    db $e2,$43,$97,$41,$42,$62,$42,$00,$00,$02,$02,$42,$47,$c7,$e7,$e7 ; [$ad
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; .░░.░.▒.
+; ..░.....
+; ░..░█░█.
+; ...░▒░▒░
+; ░.░░█░█░
+; ░..░█░█░
+; ░..░▒░▒░
+; ░..░░░░░
+;
+    db $68,$20,$9e,$15,$bf,$9f,$95,$9f,$02,$00,$0a,$0a,$0a,$0a,$0a,$00 ; [$ad
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░...▒░
+; ░░..░░.▒
+; ░..░░░░.
+; ..░░░▒▒░
+; ..░░.█▒░
+; .░░..█▒░
+; .░░..█▒░
+;
+    db $ff,$e1,$cc,$9e,$39,$35,$65,$65,$00,$02,$01,$00,$06,$06,$06,$06 ; [$ad
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░....░░░
+; .░░░..▒░
+; ░░░░░.▒░
+; ▒▒▒▒░░.▒
+; ▒.█▒▒░.▒
+; ▒..█▒▒.▒
+; ▒..█▒▒.▒
+;
+    db $ff,$87,$71,$f9,$0c,$24,$10,$10,$00,$00,$02,$02,$f1,$b9,$9d,$9d ; [$ad
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; .░░███▒░
+; .░░▒▒▒▒░
+; .░░░░▒▒░
+; .░...█▒░
+; .░.░.█▒░
+; .░.▒.█▒░
+; .░.▒.█▒░
+; .░.░.█▒░
+;
+    db $7d,$61,$79,$45,$55,$45,$45,$55,$1e,$1e,$06,$06,$06,$16,$16,$06 ; [$ad
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒███▒▒.▒
+; ▒▒▒▒▒▒.▒
+; ▒░░░▒▒.▒
+; ▒...░▒.▒
+; ▒.░.█▒.▒
+; ▒.▒.█▒.▒
+; ▒.▒.█▒.▒
+; ▒.░.█▒.▒
+;
+    db $70,$00,$70,$08,$28,$08,$08,$28,$fd,$fd,$8d,$85,$8d,$ad,$ad,$8d ; [$ad
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ad
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ███░████
+; ▒▒▒░█▒▒▒
+; ▒▒▒░█▒▒▒
+; ░░░░░░░░
+; ███████▒
+; █▒▒▒▒▒▒░
+; █▒▒▒▒▒▒░
+; ░░░░░░░░
+;
+    db $ff,$18,$18,$ff,$fe,$81,$81,$ff,$ef,$ef,$ef,$00,$ff,$fe,$fe,$00 ; [$ae
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ........
+; ░▒▒█████
+; ░▒▒████▒
+; ░▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+;
+    db $00,$e7,$00,$9f,$9e,$80,$ff,$00,$ef,$08,$00,$7f,$7f,$7f,$00,$00 ; [$ae
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ........
+; ▒█▒█▒█▒█
+; █▒█▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+;
+    db $00,$e7,$00,$55,$a0,$00,$ff,$00,$ef,$08,$00,$ff,$ff,$ff,$00,$00 ; [$ae
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒.
+; ░░░.▒░░.
+; ........
+; ▒▒▒▒▒▒░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+; ░░░░░░░.
+; ........
+;
+    db $00,$e6,$00,$02,$56,$56,$fe,$00,$ee,$08,$00,$fc,$a8,$a8,$00,$00 ; [$ae
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+; ▒▒▒▒▒▒..
+; ▒░░░░.▒▒
+; ▒░░░.▒▒█
+; ░░░░░░░░
+;
+    db $00,$e7,$e7,$00,$00,$78,$71,$ff,$ef,$08,$08,$00,$fc,$83,$87,$00 ; [$ae
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░█▒▒░..
+; .░█▒▒░..
+; .░█▒▒░..
+; .░█▒▒░..
+; ░░░░░░░░
+; ▒█████▒░
+; ██▒▒▒▒▒▒
+; ░░░░░░░░
+;
+    db $64,$64,$64,$64,$ff,$7d,$c0,$ff,$38,$38,$38,$38,$00,$fe,$ff,$00 ; [$ae
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+; ...▒▒▒▒.
+; ░░..░░░.
+; ▒░░.░░░.
+; ░░░░.░░.
+;
+    db $00,$e7,$e7,$00,$00,$ce,$6e,$f6,$ef,$08,$08,$00,$1e,$00,$80,$00 ; [$ae
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░░░░░..
+; .░░░░░..
+; .░░░░░..
+; .░░░░░..
+; .░▒▒░░..
+; .░▒▒░░..
+; .░█▒▒░..
+; .░█▒▒░..
+;
+    db $7c,$7c,$7c,$7c,$4c,$4c,$64,$64,$00,$00,$00,$00,$30,$30,$38,$38 ; [$ae
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ████████
+; ████████
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒░
+; ░░░░░░░░
+;
+    db $00,$ff,$ff,$00,$ff,$ff,$01,$ff,$ff,$ff,$ff,$ff,$00,$00,$fe,$00 ; [$ae
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+;
+    db $00,$e7,$e7,$00,$00,$7e,$7e,$00,$ef,$08,$08,$00,$fe,$80,$80,$00 ; [$ae
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .▒▒.▒▒▒▒
+; .░░.▒░░░
+; ..░.▒░░░
+; ........
+; ....▒▒▒.
+; ....░░░.
+; .....░░.
+; ........
+;
+    db $00,$67,$27,$00,$00,$0e,$06,$00,$6f,$08,$08,$00,$0e,$00,$00,$00 ; [$ae
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ..░...░.
+; ░...░...
+; ..░...░.
+; ░....░..
+; .░.░...░
+; ░...░...
+; ..░...░.
+; ........
+;
+    db $22,$88,$22,$84,$51,$88,$22,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$ae
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒.▒.▒▒▒
+; ░█░█.░░░
+; █.██░..░
+; ▒█░▒█░..
+; .█░.█░▒.
+; ░.██░█.░
+; ░▒.░▒..░
+; .█.█.█░.
+;
+    db $00,$f7,$b9,$6c,$6c,$bd,$91,$56,$d7,$50,$b0,$d8,$4a,$34,$48,$54 ; [$ae
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒█.█.░█▒
+; ░█▒█...░
+; ░█.█░█..
+; .█▒█....
+; ▒..█░█░.
+; ░█▒█....
+; ░█░.....
+; ........
+;
+    db $56,$d1,$dc,$50,$1e,$d0,$e0,$00,$d3,$70,$54,$70,$94,$70,$40,$00 ; [$ae
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.....
+; ........
+; ▒▒......
+; ░.......
+; ░.......
+; ........
+;
+    db $00,$e7,$e0,$00,$00,$80,$80,$00,$ef,$08,$00,$00,$c0,$00,$00,$00 ; [$ae
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+; ▒▒▒░..░.
+; ▒░░░█░..
+; ▒░░░█░..
+; ....█░..
+;
+    db $00,$e7,$e7,$00,$12,$7c,$7c,$0c,$ef,$08,$08,$00,$e0,$88,$88,$08 ; [$ae
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒..█░..
+; ░░..█░..
+; ░░.▒▒▒░.
+; ...▒█▒░.
+; ▒▒.▒█▒░.
+; ▒░.▒█▒░.
+; ▒░.▒█▒░.
+; ...▒▒▒░.
+;
+    db $0c,$cc,$c2,$0a,$0a,$4a,$4a,$02,$c8,$08,$1c,$1c,$dc,$9c,$9c,$1c ; [$af
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █▒█▒▒▒█▒
+; ░▒░▒░▒░▒
+; ...░....
+; ...▒....
+; ▒.█▒░...
+; ▒.█▒░.░█
+; ▒.█▒░..█
+; ..▒▒░..▒
+;
+    db $a2,$aa,$10,$00,$28,$2b,$29,$08,$ff,$55,$00,$10,$b0,$b1,$b1,$31 ; [$af
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; █▒▒█▒░.▒
+; ░▒░▒░░.░
+; ........
+; ........
+; ........
+; ▒░.█▒...
+; ▒░.▒▒░░.
+; ▒░.▒▒...
+;
+    db $94,$ad,$00,$00,$00,$50,$46,$40,$f9,$50,$00,$00,$00,$98,$98,$98 ; [$af
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░█▒█▒█▒
+; ░░░▒▒▒▒▒
+; ░░░░░░░░
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $ea,$e0,$ff,$00,$00,$00,$00,$00,$3f,$1f,$00,$00,$00,$00,$00,$00 ; [$af
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; █████░.▒
+; ▒▒▒▒▒░.░
+; ░░░░░...
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $fc,$05,$f8,$00,$00,$00,$00,$00,$f9,$f8,$00,$00,$00,$00,$00,$00 ; [$af
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ..░.....
+; ..░.....
+; ..░.....
+; .░░▒....
+; .░▒▒....
+; .░█▒....
+; .░█▒....
+;
+    db $00,$20,$20,$20,$60,$40,$60,$60,$00,$00,$00,$00,$10,$30,$30,$30 ; [$af
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ........
+; ..█.....
+; ..█.....
+; .▒█▒....
+; .▒█▒....
+; .▒█▒....
+; .▒█▒....
+; .▒█▒....
+;
+    db $00,$20,$20,$20,$20,$20,$20,$20,$00,$20,$20,$70,$70,$70,$70,$70 ; [$af
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒.█░.▒▒
+; ░░.█░..░
+; ░░.████.
+; ...███..
+; ▒▒.████.
+; ░░.██...
+; ░░░████.
+; ........
+;
+    db $18,$d9,$de,$1c,$1e,$d8,$fe,$00,$d3,$10,$1e,$1c,$de,$18,$1e,$00 ; [$af
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ████████
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; █▒▒▒▒▒▒▒
+; ░░░░░░░░
+;
+    db $ff,$80,$80,$80,$80,$80,$80,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00 ; [$af
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ███████▒
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ▒▒▒▒▒▒▒░
+; ░░░░░░░░
+;
+    db $fe,$01,$01,$01,$01,$01,$01,$ff,$ff,$fe,$fe,$fe,$fe,$fe,$fe,$00 ; [$af
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░.....
+; ░█░.....
+; ░█▒...░░
+; .█▒.....
+; ▒█▒...▒.
+; ██░...░.
+; ▒█░...░.
+; ░█░.....
+;
+    db $e0,$e0,$c3,$40,$40,$e2,$62,$e0,$00,$40,$60,$60,$e2,$c0,$c0,$40 ; [$af
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+; ▒▒▒▒▒▒▒▒
+; ▒███████
+; ▒▒▒▒▒▒▒▒
+; ........
+;
+    db $00,$e7,$e7,$00,$00,$7f,$00,$00,$ef,$08,$08,$00,$ff,$ff,$ff,$00 ; [$af
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .....░░░
+; ..░▒.░█░
+; ..░▒.▒█░
+; .....▒█.
+; ..▒▒.▒█▒
+; ..░░.░██
+; ..░░.░█▒
+; .....░█░
+;
+    db $07,$27,$23,$02,$02,$37,$36,$07,$00,$12,$16,$06,$37,$03,$03,$02 ; [$af
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒.▒█▒░.
+; ░░.▒█▒░.
+; ...░░░░.
+; ▒█▒█▒█▒█
+; █▒█▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+;
+    db $0a,$ca,$1e,$55,$a0,$00,$ff,$00,$dc,$1c,$00,$ff,$ff,$ff,$00,$00 ; [$af
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+;
+    db $00,$7e,$7e,$7e,$7e,$7e,$7e,$00,$fe,$80,$80,$80,$80,$80,$80,$00 ; [$af
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ░░░.▒░░░
+; ........
+;
+    db $00,$e7,$e7,$e7,$e7,$e7,$e7,$00,$ef,$08,$08,$08,$08,$08,$08,$00 ; [$af
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒...
+; ..░.▒.░.
+; ░....░..
+; .░.░...░
+; ░...░...
+; ..░...░.
+; ........
+;
+    db $00,$e0,$22,$84,$51,$88,$22,$00,$ef,$08,$08,$00,$00,$00,$00,$00 ; [$b0
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░.█░.▒▒
+; ▒░.██.▒░
+; ▒░....▒░
+; ...█▒...
+; ▒▒.█▒.▒▒
+; ░░.█▒.▒▒
+; ░░.▒▒...
+; .██████.
+;
+    db $58,$59,$41,$10,$10,$d0,$c0,$7e,$93,$9a,$82,$18,$db,$1b,$18,$7e ; [$b0
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .▒▒▒▒▒▒.
+; ░.......
+; ░░░▒▒...
+; ...█▒...
+; ▒░.▒▒...
+; ▒▒.░....
+; ▒▒▒.....
+; ........
+;
+    db $00,$80,$e0,$10,$40,$10,$00,$00,$7e,$00,$18,$18,$98,$c0,$e0,$00 ; [$b0
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; ░░░.....
+; ......░░
+; ▒▒.░░░░.
+; ░..▒░▒░.
+; ░.▒▒█░..
+; ..▒█▒░░▒
+;
+    db $00,$e7,$e0,$03,$1e,$8a,$8c,$16,$ef,$08,$00,$00,$c0,$14,$38,$39 ; [$b0
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; .....░░░
+; ░░░░.▒▒▒
+; .░░░░.▒▒
+; ..▒█▒▒.░
+; ..▒███▒░
+; ▒▒▒▒██▒.
+;
+    db $00,$e7,$07,$f0,$78,$11,$1d,$0c,$ef,$08,$00,$07,$03,$3c,$3e,$fe ; [$b0
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.▒█▒░..
+; ░.▒█▒░.░
+; ░.▒█▒░..
+; ..▒▒░░░▒
+; ░.▒▒.▒..
+; ░.░▒.▒.░
+; ░.░..▒..
+; ..▒.░▒░▒
+;
+    db $94,$95,$94,$0e,$80,$a1,$a0,$0a,$38,$38,$38,$31,$34,$14,$04,$25 ; [$b0
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ..▒.▒█▒░
+; ░.▒.▒█▒░
+; ..▒..█▒░
+; ▒▒▒▒░█▒░
+; ..▒..░░░
+; ░.▒..█░░
+; ..▒.▒█▒░
+; ▒▒▒░██▒░
+;
+    db $05,$85,$05,$0d,$07,$87,$05,$1d,$2e,$2e,$26,$f6,$20,$24,$2e,$ee ; [$b0
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░.▒..▒..
+; ░.▒█.▒.░
+; ░.▒█.▒..
+; ..▒█░▒░▒
+; ░.▒█.▒..
+; ░.▒█.▒.░
+; ░.▒█.▒..
+; ..░..░░░
+;
+    db $80,$91,$90,$1a,$90,$91,$90,$27,$24,$34,$34,$35,$34,$34,$34,$00 ; [$b0
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ..▒.██░▒
+; ░.▒.██░▒
+; ..▒.██░▒
+; ▒▒▒▒██░░
+; ..▒.██░▒
+; ░.▒.██░▒
+; ..▒▒██░▒
+; ░░▒.░░░░
+;
+    db $0e,$8e,$0e,$0f,$0e,$8e,$0e,$cf,$2d,$2d,$2d,$fc,$2d,$2d,$3d,$20 ; [$b0
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ████▒█▒█
+; █▒█▒▒▒▒▒
+; █▒█▒▒▒▒▒
+; █▒█▒▒▒▒▒
+; █▒█▒▒▒▒▒
+; █▒█▒▒▒▒▒
+; █▒█▒▒▒▒▒
+;
+    db $ff,$f5,$a0,$a0,$a0,$a0,$a0,$a0,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$b0
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░░░░.
+; ▒▒▒▒▒░░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+; ▒░▒░▒░░.
+;
+    db $fe,$06,$56,$56,$56,$56,$56,$56,$00,$f8,$a8,$a8,$a8,$a8,$a8,$a8 ; [$b0
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒.▒█▒░.
+; ░░..▒▒░.
+; ........
+; ▒█▒█▒█▒█
+; █▒█▒▒▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ........
+;
+    db $0a,$c2,$00,$55,$a0,$00,$ff,$00,$dc,$0c,$00,$ff,$ff,$ff,$00,$00 ; [$b0
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .▒▒.▒▒▒▒
+; .░░.▒░░░
+; ..░.▒░░░
+; ........
+; ..▒▒▒▒▒.
+; ..░░░░░.
+; ..░░░░░.
+; ........
+;
+    db $00,$67,$27,$00,$00,$3e,$3e,$00,$6f,$08,$08,$00,$3e,$00,$00,$00 ; [$b0
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ....▒▒▒▒
+; ....▒░░░
+; ....▒░░░
+; ........
+; ▒▒▒▒▒▒▒▒
+; ▒███████
+; ▒▒▒▒▒▒▒▒
+; ........
+;
+    db $00,$07,$07,$00,$00,$7f,$00,$00,$0f,$08,$08,$00,$ff,$ff,$ff,$00 ; [$b0
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ░░░.▒░░░
+; ........
+; ▒▒▒▒▒▒▒.
+; ▒░░░░░░.
+; ▒░░░░░░.
+; ........
+;
+    db $00,$00,$e7,$00,$00,$7e,$7e,$00,$00,$00,$08,$00,$fe,$80,$80,$00 ; [$b0
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░.░.░░
+; ░░░░░░░░
+; .░░.░░.░
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $fd,$ab,$ff,$6d,$df,$6a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b0
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░...░░
+; ░░...▒░░
+; .░.░▒░.░
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $fd,$a3,$c3,$55,$df,$6a,$bf,$f5,$00,$00,$04,$08,$00,$00,$00,$00 ; [$b1
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒.▒▒▒▒
+; ░░░.▒░░░
+; .....░░░
+; ........
+; ......▒▒
+; .......░
+; .......░
+; ........
+;
+    db $00,$e7,$07,$00,$00,$01,$01,$00,$ef,$08,$00,$00,$03,$00,$00,$00 ; [$b1
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░...░.░
+; ..░░....
+; ░░░.░..░
+; ░░.░.░░░
+; .░░░░░░░
+; ░░.░░░.░
+; .░░░.░░.
+; ░░.░░░░░
+;
+    db $c5,$30,$e9,$d7,$7f,$dd,$76,$df,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b1
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░█░░░░█
+; ░░█░.░█▒
+; ░.████▒▒
+; ░.█▒████
+; ░.███▒▒▒
+; ..█▒█▒▒█
+; ░.█▒█▒█▒
+; ░.█▒█▒▒▒
+;
+    db $ff,$f6,$bc,$af,$b8,$29,$aa,$a8,$21,$23,$3f,$3f,$3f,$3f,$3f,$3f ; [$b1
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; .░░█▒.░.
+; ▒.░█▒..░
+; ▒▒█▒░..░
+; █▒░▒░..░
+; ▒▒░▒░..░
+; ▒▒░▒░..░
+; ░▒░▒░..░
+; ░▒░▒░...
+;
+    db $72,$31,$29,$a9,$29,$29,$a9,$a8,$18,$98,$f0,$d0,$d0,$d0,$50,$50 ; [$b1
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░.█▒█▒▒░
+; ░.███▒▒▒
+; ░░.█▒█▒▒
+; ░..█▒▒▒▒
+; ░░░.█▒▒░
+; ..░░.█▒▒
+; ░░.░░.█▒
+; ░░░░░.░▒
+;
+    db $a9,$b8,$d4,$90,$e9,$34,$da,$fa,$3e,$3f,$1f,$1f,$0e,$07,$03,$01 ; [$b1
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒░▒░...
+; ▒▒░▒▒..░
+; ▒░▒▒░..░
+; ░▒▒▒░...
+; ▒▒▒░..░░
+; ▒▒░...░░
+; ▒░...░░░
+; ░...░.░.
+;
+    db $28,$21,$49,$88,$13,$23,$47,$8a,$d0,$d8,$b0,$70,$e0,$c0,$80,$00 ; [$b1
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.█.░.██
+; ░░█▒░█░░
+; .░█.░█░.
+; ░▒███▒█.
+; ▒███░▒▒.
+; .▒▒░░░▒.
+; ░.░▒▒█▒░
+;
+    db $fd,$ab,$ef,$6e,$ba,$78,$1c,$a5,$00,$23,$34,$24,$7e,$f6,$62,$1e ; [$b1
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; .░░░░░░░
+; █.░█░░░░
+; ░█░██.░░
+; ░█░▒....
+; █░███▒..
+; █▒████▒.
+; █░▒▒▒▒..
+; ▒█░░░░..
+;
+    db $7f,$bf,$fb,$e0,$f8,$bc,$c0,$7c,$00,$90,$58,$50,$bc,$fe,$bc,$c0 ; [$b1
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░▒██▒▒░
+; ░.▒██▒▒░
+; ░░.▒▒▒░░
+; .░░░░░█▒
+; ░░..███░
+; .░░.▒▒▒▒
+; ░.░.░░░░
+; ░░░.█▒░█
+;
+    db $d9,$99,$c3,$7e,$cf,$60,$af,$eb,$3e,$3e,$1c,$03,$0e,$0f,$00,$0d ; [$b1
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ███▒░...
+; ██▒▒░...
+; .▒▒░░..░
+; ▒░░░...░
+; █▒░...░░
+; ▒▒░.....
+; ░░░...░░
+; ▒▒▒...░░
+;
+    db $e8,$c8,$19,$71,$a3,$20,$e3,$03,$f0,$f0,$60,$80,$c0,$c0,$00,$e0 ; [$b1
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░.██▒░█
+; ░..█▒░░█
+; ░░.▒░░░▒
+; .░░.▒▒░░
+; ░░..▒█▒░
+; .░░.▒█▒░
+; ░.░.▒█▒░
+; ░░░.▒░▒░
+;
+    db $db,$97,$ce,$63,$c5,$65,$a5,$e5,$1d,$19,$11,$0c,$0e,$0e,$0e,$0a ; [$b1
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒░▒▒...░
+; ▒░▒▒...░
+; ░░░▒..░░
+; ▒▒░....░
+; █▒░...░░
+; █▒░...░.
+; ▒▒░...░░
+; ▒▒░....░
+;
+    db $41,$41,$e3,$21,$a3,$a2,$23,$21,$b0,$b0,$10,$c0,$c0,$c0,$c0,$c0 ; [$b1
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░.░░░█░░
+; ...░█▒▒░
+; ░..░░▒░░
+; ..░.▒░.░
+; .░.░█▒░░
+; .░░.█▒░.
+; ░.░░.▒░.
+; ░.░░░░..
+;
+    db $bf,$19,$9b,$25,$5b,$6a,$b2,$bc,$04,$0e,$04,$08,$0c,$0c,$04,$00 ; [$b1
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░█░....░
+; █▒▒...░░
+; ░▒░..░░░
+; ▒░░....░
+; █▒░..░░░
+; █▒░...░.
+; ░▒...░░░
+; .....░.░
+;
+    db $e1,$83,$a7,$61,$a7,$a2,$87,$05,$40,$e0,$40,$80,$c0,$c0,$40,$00 ; [$b1
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░█░.░█░.
+; ░▒░.░▒░.
+; ░░░.░░░.
+; ██▒░██▒░
+; ........
+; .█░.░█░.
+; ░▒░.░▒░░
+; ░░░..▒░░
+;
+    db $ee,$aa,$ee,$dd,$00,$6e,$ab,$e3,$44,$44,$00,$ee,$00,$44,$44,$04 ; [$b1
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░▒░.░▒.░
+; ░█░.░█░.
+; ░█░.░█░.
+; .█░.░█..
+; ░█..░█░.
+; .█░.░▒░.
+; ░█░.░█░.
+; ░█░..▒..
+;
+    db $a9,$ee,$ee,$6c,$ce,$6a,$ee,$e0,$44,$44,$44,$44,$44,$44,$44,$44 ; [$b2
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░.▒▒▒
+; ░.░▒▒░░░
+; ░░▒░░░░.
+; ░░▒░░..░
+; .▒░░...░
+; ░▒░░.░▒▒
+; ░▒░░...▒
+; ░▒░░.░▒▒
+;
+    db $f0,$a7,$de,$d9,$31,$b4,$b0,$b4,$07,$18,$20,$20,$40,$43,$41,$43 ; [$b2
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒░░..░░░
+; ░░░░..░░
+; .░░░░░.░
+; ░.░▒░░..
+; ░..░▒░░.
+; ░▒░.░▒░.
+; ░...▒░░.
+; ░▒▒░▒░░.
+;
+    db $67,$f3,$7d,$ac,$96,$aa,$86,$96,$80,$00,$00,$10,$08,$44,$08,$68 ; [$b2
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░▒░░...▒
+; ░▒░..░▒▒
+; ░▒░░...▒
+; ░.░░.░▒▒
+; .▒░░...▒
+; ░░░..░▒▒
+; ░▒░░...▒
+; ░▒.░░▒▒▒
+;
+    db $b0,$a4,$b0,$b4,$30,$e4,$b0,$98,$41,$43,$41,$03,$41,$03,$41,$47 ; [$b2
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░...▒░░.
+; ░▒▒░▒░░.
+; ░...▒░░.
+; ░▒▒░.░..
+; ░...▒░░.
+; ░▒▒░▒░..
+; ░...▒░░.
+; ▒▒▒░.░░.
+;
+    db $86,$96,$86,$94,$86,$94,$86,$16,$08,$68,$08,$60,$08,$68,$08,$e0 ; [$b2
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░▒▒▒░▒░
+; ░▒▒██▒██
+; ░▒▒██▒██
+; ░▒▒▒▒▒██
+; ░░▒▒▒▒▒▒
+; ░▒█▒███▒
+; ░▒▒▒█▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $45,$9b,$9b,$83,$c0,$ae,$88,$80,$3a,$7f,$7f,$7f,$3f,$7f,$7f,$7f ; [$b2
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒████▒░
+; ▒▒█▒▒▒▒░
+; ▒▒▒▒▒░░░
+; ░▒░▒░▒░░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $ff,$3d,$21,$07,$ab,$ee,$cc,$88,$00,$fe,$fe,$f8,$54,$f7,$f7,$f7 ; [$b2
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░▒░▒░░.░
+; ░▒▒░░.░░
+; ░▒░▒░░.░
+; ░▒▒░░...
+; █▒░░.░.░
+; ▒█▒▒░░.░
+; ▒▒▒▒░░░.
+; ▒░..░...
+;
+    db $ad,$9b,$ad,$98,$b5,$4d,$0e,$48,$50,$60,$50,$60,$c0,$f0,$f0,$80 ; [$b2
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ..░.░.░░
+; ..░░░░░░
+; ....░░.░
+; ░...░░░░
+; ..░...░.
+; ....░.░░
+; .......░
+;
+    db $fd,$2b,$3f,$0d,$8f,$22,$0b,$01,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b2
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░.░░░.
+; .░░░░░..
+; ░░.░░...
+; ░.░░...░
+; .░░...░░
+; ░.░..░░▒
+; ░░..░░░▒
+; ░░.░░░░▒
+;
+    db $ee,$7c,$d8,$b1,$63,$a6,$ce,$de,$00,$00,$00,$00,$00,$01,$01,$01 ; [$b2
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .░░░░░░.
+; ..░.░.░░
+; ...░░░░.
+; ░░..░░.░
+; ░▒░..░░░
+; ░█░░..░░
+; ░█░░░..░
+; ░█░▒░░.░
+;
+    db $7e,$2b,$1e,$cd,$a7,$f3,$f9,$ed,$00,$00,$00,$00,$40,$40,$40,$50 ; [$b2
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░..░░░░░
+; ░.░░▒██▒
+; ░.░░░░░▒
+; ░.░░▒▒░▒
+; ░.░░█▒░▒
+; ░.░░▒▒░▒
+; ░.░░░░░▒
+; ░.░░▒▒▒▒
+;
+    db $9f,$b6,$be,$b2,$ba,$b2,$be,$b0,$00,$0f,$01,$0d,$0d,$0d,$01,$0f ; [$b2
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░░..
+; ░████▒░.
+; ░█░░░░░.
+; ░█░▒▒░░.
+; ░█░█▒░░.
+; ░█░▒▒░░.
+; ░█░░░░░.
+; ░▒▒▒▒▒░.
+;
+    db $fc,$fa,$fe,$e6,$f6,$e6,$fe,$82,$00,$7c,$40,$58,$58,$58,$40,$7c ; [$b2
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░.░░░.
+; .░░░░░..
+; ░░.░░...
+; ░.░░....
+; .░░.....
+; ░.░.....
+; ░░......
+; ░░......
+;
+    db $ee,$7c,$d8,$b0,$60,$a0,$c0,$c0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b2
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .░░░░░░.
+; ..░.░.░░
+; ...░░░░.
+; ....░░.░
+; .....░░░
+; ......░░
+; .......░
+; .......░
+;
+    db $7e,$2b,$1e,$0d,$07,$03,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b2
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $80,$80,$80,$80,$80,$80,$80,$80,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b2
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒.▒.▒▒▒
+; ░░.█.░░░
+; ░.▒█░..░
+; .█░▒.█..
+; .█░.░█..
+; ░.███░.░
+; ░░.░..░░
+; ...█....
+;
+    db $00,$d7,$99,$64,$6c,$bd,$d3,$10,$d7,$10,$30,$54,$44,$38,$00,$10 ; [$b3
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒.█..▒▒
+; ░░.█...░
+; ░░.█░██.
+; ...█....
+; ▒▒.█░██.
+; ░░.█....
+; ░░░.....
+; ........
+;
+    db $10,$d1,$de,$10,$1e,$d0,$e0,$00,$d3,$10,$16,$10,$d6,$10,$00,$00 ; [$b3
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░.░.░.░░
+; ░░░░░░░░
+; .░......
+; ░.▒██▒█▒
+; .███████
+; .██▒█▒██
+; ░.▒▒▒▒▒▒
+; ░░.░░░░░
+;
+    db $ab,$ff,$40,$9a,$7f,$6b,$80,$df,$00,$00,$00,$3f,$7f,$7f,$3f,$00 ; [$b3
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░.░.░░
+; ░░░░░░░░
+; .......░
+; █▒█▒▒░.░
+; ▒█▒█▒▒░.
+; ▒█▒█▒▒░.
+; ▒▒▒▒▒░░.
+; ░░░░░░..
+;
+    db $eb,$ff,$01,$a5,$52,$52,$06,$fc,$00,$00,$00,$f8,$fc,$fc,$f8,$00 ; [$b3
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░█.░░.
+; ░.░█.░░.
+; ░░░█....
+; .░░.▒.█.
+; ░░██░░█.
+; .██░░█░.
+; ░██░░░..
+; ░█▒░▒░░.
+;
+    db $f6,$b6,$f0,$62,$fe,$7e,$fc,$d6,$10,$10,$10,$0a,$32,$64,$60,$68 ; [$b3
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░█▒░▒▒░.
+; ░▒▒░▒▒░.
+; ░█▒░▒▒░.
+; .█▒░▒▒░.
+; ░▒▒░▒▒░.
+; .██░▒▒░.
+; ░.▒░░░░.
+; ░░.▒░░..
+;
+    db $d2,$92,$d2,$52,$92,$72,$9e,$cc,$6c,$6c,$6c,$6c,$6c,$6c,$20,$10 ; [$b3
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░░▒░░.░
+; ░.░▒..░░
+; ░░░█.░░░
+; .░░▒.░.░
+; ░░.█.░░░
+; .░░█..░.
+; ░.░▒.░░░
+; ░░░█.░.░
+;
+    db $ed,$a3,$f7,$65,$d7,$72,$a7,$f5,$10,$10,$10,$10,$10,$10,$10,$10 ; [$b3
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░███▒▒..
+; ░█▒▒░░░.
+; ░▒▒█░█▒░
+; ░██▒▒░█.
+; ▒▒██▒░░.
+; ░██▒▒░..
+; ░██▒▒░..
+; ▒███▒░..
+;
+    db $f0,$ce,$9d,$e6,$36,$e4,$e4,$74,$7c,$70,$76,$7a,$f8,$78,$78,$f8 ; [$b3
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░▒█▒▒░..
+; ░.█▒▒░..
+; ░▒▒█░...
+; .▒░█░..░
+; ░░▒█▒..░
+; .░▒█▒░..
+; ░.█.█░.░
+; ░░▒..▒..
+;
+    db $a4,$a4,$98,$39,$d1,$54,$ad,$c0,$78,$38,$70,$50,$38,$38,$28,$24 ; [$b3
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░█▒░.░░
+; .░.█...░
+; ░▒░░░░.░
+; ▒██▒▒░░.
+; ▒█▒▒▒░░.
+; ▒▒▒▒▒░..
+; .▒▒▒░░.░
+; .░░░░..░
+;
+    db $eb,$51,$bd,$66,$46,$04,$0d,$79,$30,$10,$40,$f8,$f8,$f8,$70,$00 ; [$b3
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░.░.░.░░
+; ░░░░░░░░
+; .░░░▒▒██
+; ░░░▒██▒█
+; .░▒█▒███
+; .▒████▒█
+; ░▒▒▒▒▒▒▒
+; ░░░░░░░░
+;
+    db $ab,$ff,$73,$ed,$57,$3d,$80,$ff,$00,$00,$0f,$1f,$3f,$7f,$7f,$00 ; [$b3
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░.░.░░
+; ░░░░░░░░
+; ██▒██▒.░
+; ▒████▒..
+; ██▒██▒..
+; ████▒▒..
+; ▒▒▒▒▒▒..
+; ░░░░░░..
+;
+    db $eb,$ff,$d9,$78,$d8,$f0,$00,$fc,$00,$00,$fc,$fc,$fc,$fc,$fc,$00 ; [$b3
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .......░
+; .......░
+; .......░
+; .......░
+; .......░
+; .......░
+; .......░
+; .......░
+;
+    db $01,$01,$01,$01,$01,$01,$01,$01,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b3
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒░▒▒░░░░
+; ▒░▒▒░▒░░
+; ▒░▒▒▒░░░
+; ▒░▒▒░░░▒
+; ▒░▒▒░░░░
+; ▒░▒▒░▒░░
+; ▒░▒▒░░░▒
+; ..▒▒░░░░
+;
+    db $4f,$4b,$47,$4e,$4f,$4b,$4e,$0f,$b0,$b4,$b8,$b1,$b0,$b4,$b1,$30 ; [$b3
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░▒░..▒.
+; ▒░░░..░.
+; ░░░░..░.
+; ░░▒░..░.
+; ░░░░..░.
+; ░▒░░..░.
+; ░░░░..░.
+; ░░░░..░.
+;
+    db $d0,$72,$f2,$d2,$f2,$b2,$f2,$f2,$22,$80,$00,$20,$00,$40,$00,$00 ; [$b3
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b3
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ███▒█▒██
+; █▒███▒██
+; ██▒█▒█▒▒
+; ▒▒▒░█▒░░
+; ▒▒░▒▒░▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $00,$eb,$bb,$d4,$1b,$24,$ff,$ff,$ff,$ff,$ff,$ff,$ec,$db,$00,$00 ; [$b4
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒███████
+; ██▒▒██▒▒
+; █▒▒▒█▒░▒
+; █▒▒█▒░▒█
+; █▒█▒▒▒█▒
+; █▒▒▒░▒▒░
+; ▒▒░░▒▒░▒
+; ░░░░░░░░
+;
+    db $7f,$cc,$8a,$95,$a2,$89,$32,$ff,$ff,$ff,$fd,$fb,$ff,$f6,$cd,$00 ; [$b4
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ██████▒░
+; ██▒██▒▒▒
+; █▒██▒▒▒░
+; ▒░▒▒██▒░
+; ░▒▒██▒░░
+; ▒██▒▒░▒░
+; ▒▒▒▒░▒░░
+; ░░░░░░░░
+;
+    db $fd,$d8,$b1,$4d,$9b,$65,$0b,$ff,$fe,$ff,$fe,$be,$7c,$fa,$f4,$00 ; [$b4
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ......░.
+; .░.░░░░░
+; ░░░░.░..
+; ..░.░.░░
+; .░.░.░.░
+; ...░░.░.
+; ....░░░░
+; ░..░....
+;
+    db $02,$5f,$f4,$2b,$55,$1a,$0f,$90,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b4
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░▒██████
+; ▒██▒██▒▒
+; ██▒▒▒▒▒▒
+; ██▒▒░▒░▒
+; ▒█▒▒██▒░
+; ██░░▒▒▒░
+; ▒█▒▒░▒█░
+; ██▒██▒██
+;
+    db $bf,$6c,$c0,$ca,$4d,$f1,$4b,$db,$7f,$ff,$ff,$f5,$fe,$ce,$f6,$ff ; [$b4
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ██████▒░
+; ██▒██▒▒▒
+; ▒▒██▒▒▒░
+; ░▒▒▒██▒░
+; █▒▒██▒░░
+; ▒██▒▒░▒░
+; ░▒▒▒░▒░░
+; ▒█▒▒▒▒░░
+;
+    db $fd,$d8,$31,$8d,$9b,$65,$8b,$43,$fe,$ff,$fe,$7e,$fc,$fa,$74,$fc ; [$b4
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ....░...
+; ░░░░░░..
+; ░░.░.░.░
+; ░░░░░..░
+; .░░.░.░.
+; ░.░░.░..
+; ░░.░.░..
+; ..░....░
+;
+    db $08,$fc,$d5,$f9,$6a,$b4,$d4,$21,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b4
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░..▒▒██
+; .░░░▒██▒
+; ░░░░▒▒██
+; .░░░▒▒█▒
+; ░░.░░▒▒█
+; ░░░░░▒█▒
+; ░.░.░▒▒█
+; ░░░░▒▒██
+;
+    db $c3,$76,$f3,$72,$d9,$fa,$a9,$f3,$0f,$0f,$0f,$0f,$07,$07,$07,$0f ; [$b4
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒░░░..░
+; ▒░░░░...
+; ▒░░░░.░.
+; ▒▒░▒░...
+; ▒░▒░...░
+; ▒░░░....
+; ▒▒░░....
+; ▒▒░░..░.
+;
+    db $39,$78,$7a,$28,$51,$70,$30,$32,$c0,$80,$80,$d0,$a0,$80,$c0,$c0 ; [$b4
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░.░.░░
+; ░░░░░░░░
+; .░░.░░.░
+; ░░.░░░░░
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $fd,$ab,$ff,$6d,$df,$6a,$bf,$f5,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b4
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░..▒▒██
+; .░░░▒██▒
+; ░░░░▒▒██
+; .░░░░▒▒▒
+; ░░.░░░░░
+; ░░▒████▒
+; ░▒▒▒▒▒▒▒
+; ░░░░░░░░
+;
+    db $c3,$76,$f3,$78,$df,$de,$80,$ff,$0f,$0f,$0f,$07,$00,$3f,$7f,$00 ; [$b4
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒░░░..░
+; ▒░░░░...
+; ▒░░░░.░.
+; ▒░░▒░...
+; ░░▒░....
+; █▒▒▒░░░.
+; ▒▒░▒▒░░░
+; ░░░░░░░░
+;
+    db $39,$78,$7a,$68,$d0,$8e,$27,$ff,$c0,$80,$80,$90,$20,$f0,$d8,$00 ; [$b4
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; .░.░..░░
+; .......░
+; ..░..░.░
+; ......░░
+; .░.░.░.░
+; ..░...░░
+; ░..░.░.░
+; .░....░.
+;
+    db $53,$01,$25,$03,$55,$23,$95,$42,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b4
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░.░..░.
+; .......░
+; ..░..░..
+; ........
+; .░.░.░.░
+; ..░.....
+; ░..░.░.░
+; .░......
+;
+    db $52,$01,$24,$00,$55,$20,$95,$40,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b4
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░.......
+; ........
+; ...░░░░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░▒▒░.
+; ..░░░░░.
+;
+    db $80,$00,$1e,$32,$32,$32,$32,$3e,$00,$00,$00,$04,$04,$04,$0c,$00 ; [$b4
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ......░░
+; .......░
+; ░░░░░..▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░▒▒░░.▒
+; ▒░░░░░.▒
+;
+    db $03,$01,$f8,$4c,$4c,$4c,$4c,$7c,$00,$00,$01,$91,$91,$91,$b1,$81 ; [$b4
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ....░░░░
+; ..░.░░░▒
+; ░...░░▒▒
+; .░.░░▒█▒
+; ....░▒██
+; ..░.░▒█▒
+; ....░▒▒█
+; ░.░.▒▒██
+;
+    db $0f,$2e,$8c,$5a,$0b,$2a,$09,$a3,$00,$01,$03,$07,$07,$07,$07,$0f ; [$b5
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░.░░...
+; ░░░░░...
+; ▒░░.░.░.
+; ▒▒░░░...
+; ▒░░░...░
+; ▒░░░░...
+; ▒▒░░....
+; ▒▒░░..░.
+;
+    db $d8,$f8,$6a,$38,$71,$78,$30,$32,$00,$00,$80,$c0,$80,$80,$c0,$c0 ; [$b5
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ...░.░.░
+; .░░░░░░░
+; .░░▒█▒░▒
+; .░▒█▒▒▒█
+; .░░▒░██▒
+; .░░▒▒▒▒░
+; .░▒▒▒░░▒
+; .░░░░░░░
+;
+    db $15,$7f,$6a,$51,$6e,$61,$46,$7f,$00,$00,$1d,$3f,$17,$1e,$39,$00 ; [$b5
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .░.░....
+; ░░░░░░░░
+; █▒▒█▒▒░░
+; ▒░█▒██▒░
+; ▒█▒▒█▒▒░
+; ▒▒▒█▒░▒░
+; ░░▒▒░▒░░
+; ░░░░░░░░
+;
+    db $50,$ff,$93,$6d,$49,$15,$cb,$ff,$00,$00,$fc,$be,$fe,$fa,$34,$00 ; [$b5
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; █▒▒▒▒█▒█
+; █▒▒▒▒▒▒▒
+; ██▒▒░▒█▒
+; █▒▒░▒█▒▒
+; █▒▒░█▒░░
+; ▒▒░▒▒░█▒
+; ░▒░▒░▒▒▒
+; ░░░░░░░░
+;
+    db $85,$80,$ca,$94,$9b,$26,$a8,$ff,$ff,$ff,$f7,$ef,$ec,$db,$57,$00 ; [$b5
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; █▒▒██▒▒░
+; ▒▒▒█▒▒░░
+; ▒░▒▒▒░▒░
+; ░██▒░▒░░
+; █▒▒▒█▒▒░
+; ▒▒░░▒▒░░
+; ▒░▒▒░▒░░
+; ░░░░░░░░
+;
+    db $99,$13,$45,$eb,$89,$33,$4b,$ff,$fe,$fc,$ba,$74,$fe,$cc,$b4,$00 ; [$b5
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; .░.░..░.
+; .......░
+; ..░..░..
+; ........
+; .░.░.░.░
+; ░.░.░.░.
+; ░░░░.░░░
+; ░░░░░░░░
+;
+    db $52,$01,$24,$00,$55,$aa,$f7,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b5
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ▒▒.░░░.░
+; ░▒░.░░..
+; .█░.░░░.
+; .▒░.░░░.
+; .▒░..░..
+; .█░.░░..
+; ▒▒.░░░..
+; ▒░.░░░..
+;
+    db $1d,$ac,$6e,$2e,$24,$6c,$1c,$5c,$c0,$40,$40,$40,$40,$40,$c0,$80 ; [$b5
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b5
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░....░..
+; .▒░...░.
+; .░░.....
+; .░░.....
+; .░░...░.
+; .▒░.....
+; .▒░...░░
+; .▒░.....
+;
+    db $84,$22,$60,$60,$62,$20,$23,$20,$00,$40,$00,$00,$00,$40,$40,$40 ; [$b5
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █░.....░
+; ▒░...░..
+; █░......
+; ▒░......
+; █░...░.░
+; ▒░......
+; █░...░░.
+; ▒░.....░
+;
+    db $c1,$44,$c0,$40,$c5,$40,$c6,$41,$80,$80,$80,$80,$80,$80,$80,$80 ; [$b5
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒░░░░░░░
+; ▒░░░░░░░
+; ▒░░.....
+; ▒░░.░░░░
+; ▒░░.░...
+; ▒░░.░.░░
+; ▒░░.░.░.
+;
+    db $00,$7f,$7f,$60,$6f,$68,$6b,$6a,$ff,$80,$80,$80,$80,$80,$80,$80 ; [$b5
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ........
+; ░░░.░░░░
+; ..░.░...
+; ░.▒.▒.░░
+; ..▒.▒.░.
+;
+    db $00,$ff,$ff,$00,$ef,$28,$83,$02,$ff,$00,$00,$00,$00,$00,$28,$28 ; [$b5
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒.
+; ░░░░░░░.
+; ░░░░░░░.
+; ....▒░░.
+; ░░░.▒░░.
+; ..░.▒░░.
+; ░.▒.▒░░.
+; ..▒.▒░░.
+;
+    db $00,$fe,$fe,$06,$e6,$26,$86,$06,$fe,$00,$00,$08,$08,$08,$28,$28 ; [$b5
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ..░░░░░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░.▒░.
+; ..░░▒▒░.
+; ..░░░░░.
+;
+    db $3e,$32,$32,$32,$32,$32,$32,$3e,$00,$04,$04,$04,$04,$04,$0c,$00 ; [$b5
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒░░░░░.▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░.▒░░.▒
+; ▒░▒▒░░.▒
+; ▒░░░░░.▒
+;
+    db $7c,$4c,$4c,$4c,$4c,$4c,$4c,$7c,$81,$91,$91,$91,$91,$91,$b1,$81 ; [$b5
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒░░.░...
+; ▒░░.░░▒▒
+; ▒░░.░░░░
+; ▒░░.░...
+; ▒░░.░.░.
+; ▒░░.░░▒▒
+; ▒░░.░░░░
+; ▒░░.░...
+;
+    db $68,$6c,$6f,$68,$6a,$6c,$6f,$68,$80,$83,$80,$80,$80,$83,$80,$80 ; [$b6
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░░.░...
+; ▒░░.░.░.
+; ▒░░.░▒▒▒
+; ▒░░.....
+; ▒░░░▒▒▒▒
+; ▒░░░░░░░
+; ░░░░░░░░
+; ........
+;
+    db $68,$6a,$68,$60,$70,$7f,$ff,$00,$80,$80,$87,$80,$8f,$80,$00,$00 ; [$b6
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ..▒.▒...
+; ░.▒.▒.░.
+; ▒▒▒.▒▒▒▒
+; ........
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; ░░░░░░░░
+; ........
+;
+    db $00,$82,$00,$00,$00,$ff,$ff,$00,$28,$28,$ef,$00,$ff,$00,$00,$00 ; [$b6
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ..▒.▒░░.
+; ░.▒.▒░░.
+; ▒▒▒.▒░░.
+; ....▒░░.
+; ▒▒▒▒▒░░.
+; ░░░░░░░.
+; ░░░░░░░.
+; ........
+;
+    db $06,$86,$06,$06,$06,$fe,$fe,$00,$28,$28,$e8,$08,$f8,$00,$00,$00 ; [$b6
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ..▒.▒░░.
+; ▒▒▒.▒░░.
+; ░░▒.▒░░.
+; ..▒.▒░░.
+; ░.▒.▒░░.
+; ▒▒▒.▒░░.
+; ░░▒.▒░░.
+; ..▒.▒░░.
+;
+    db $06,$06,$c6,$06,$86,$06,$c6,$06,$28,$e8,$28,$28,$28,$e8,$28,$28 ; [$b6
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░.░.░.░░
+; ░░░░░░░░
+; .░░.░░.░
+; ░░.░░░░░
+; .░.░.░.░
+; ░.░.░.░.
+; .░.░.░.░
+;
+    db $fd,$ab,$ff,$6d,$df,$55,$aa,$55,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b6
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ..▒.▒...
+; ▒▒▒.▒░▒▒
+; ░░▒.▒░░░
+; ..▒.▒...
+; ░.▒.▒.░.
+; ▒▒▒.▒░▒▒
+; ░░▒.▒░░░
+; ..▒.▒...
+;
+    db $00,$04,$c7,$00,$82,$04,$c7,$00,$28,$eb,$28,$28,$28,$eb,$28,$28 ; [$b6
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .......░
+; .......░
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+; .......▒
+;
+    db $01,$01,$00,$00,$00,$00,$00,$00,$00,$00,$01,$01,$01,$01,$01,$01 ; [$b6
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░..▒█▒▒
+; .░░.▒███
+; ░░░.░▒▒█
+; .░░░▒░▒▒
+; ░░..▒▒░░
+; ░░░.▒█▒▒
+; ░.░.░▒██
+; ░░░.▒▒██
+;
+    db $c4,$67,$e9,$74,$c3,$e4,$ab,$e3,$0f,$0f,$07,$0b,$0c,$0f,$07,$0f ; [$b6
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒░░░..░
+; ▒░▒░░...
+; █▒░▒░.░.
+; ▒▒░▒░...
+; ▒░▒░...░
+; ░░░░....
+; ▒▒░░....
+; ▒▒░░..░.
+;
+    db $39,$58,$aa,$28,$51,$f0,$30,$32,$c0,$a0,$d0,$d0,$a0,$00,$c0,$c0 ; [$b6
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░█░░░░.░
+; ░█▒.░.░░
+; ░▒█▒▒▒░▒
+; ░.▒█▒░▒▒
+; ░░▒▒██▒█
+; .▒▒█████
+; ░▒█▒░░▒█
+; ░▒▒▒░░░▒
+;
+    db $fd,$cb,$a2,$94,$cd,$1f,$ad,$8e,$40,$60,$7d,$3b,$3f,$7f,$73,$71 ; [$b6
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░.░░░░█░
+; ░░.░.▒█░
+; ▒░▒▒▒█▒░
+; ▒▒░▒█▒..
+; █▒█▒▒▒░.
+; █████▒▒.
+; █▒░▒▒█▒░
+; ▒░▒░▒▒▒░
+;
+    db $bf,$d3,$45,$28,$a2,$f8,$a5,$51,$02,$06,$be,$dc,$fc,$fe,$de,$ae ; [$b6
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░▒░▒█░▒
+; ░▒▒█░░░█
+; ░▒▒██░▒█
+; .▒░▒▒░▒█
+; ░▒▒░░░░▒
+; .░███░░░
+; ░█▒░░█▒░
+; ░█░▒▒░░░
+;
+    db $d6,$9f,$9d,$25,$9e,$7f,$dd,$e7,$2d,$71,$7b,$5b,$61,$38,$66,$58 ; [$b6
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒█▒░▒░░
+; ▒░▒░█▒▒░
+; ▒▒░██▒▒░
+; ▒▒░▒▒░▒░
+; ▒░.░░▒▒░
+; ░░░███░.
+; ░▒█░░▒█░
+; ░░░█▒░█░
+;
+    db $2b,$59,$39,$25,$59,$fe,$bb,$f7,$f4,$ae,$de,$da,$86,$1c,$66,$1a ; [$b6
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░▒░▒█░..
+; ░▒░░█..░
+; ░░▒░█.░▒
+; .░▒...▒█
+; ░░▒...░▒
+; .░▒.░█.░
+; ░.░▒░█░░
+; ░░.░▒▒░▒
+;
+    db $ac,$b9,$da,$41,$c2,$4d,$af,$d2,$58,$48,$29,$23,$21,$24,$14,$0d ; [$b6
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ..░█▒░▒░
+; ░.░█░░▒░
+; ▒░.█░▒░░
+; ▒▒..░▒.░
+; ▒░..░▒░.
+; ░.█░░▒░.
+; ░░█░▒░░.
+; ▒░▒▒░░..
+;
+    db $35,$bd,$5b,$09,$4a,$ba,$f6,$4c,$1a,$12,$94,$c4,$84,$24,$28,$b0 ; [$b6
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░.░░▒█
+; ░.░..░░▒
+; ░░░░░..░
+; .░░.░...
+; ░░.░░░..
+; .░░.░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $ed,$a6,$f9,$68,$dc,$6a,$bf,$f5,$03,$01,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; █▒░░....
+; ▒░░.....
+; ░.......
+; .......░
+; .....░░░
+; ....░.░.
+; ░.░░░░░░
+; ░░░░.░.░
+;
+    db $b0,$60,$80,$01,$07,$0a,$bf,$f5,$c0,$80,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b7
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░..░▒
+; ░░░░..░░
+; ......░░
+; ░.░░..░▒
+; ░.░░.░▒░
+; ....░▒▒░
+; ..▒░▒▒░░
+; ▒░▒▒░░..
+;
+    db $f2,$f3,$03,$b2,$b5,$09,$13,$4c,$01,$00,$00,$01,$02,$06,$2c,$b0 ; [$b8
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░░░....
+; ░░░.....
+; ░░......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $f0,$e0,$c0,$80,$80,$80,$80,$80,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b8
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ....░░░░
+; ...░░▒░░
+; ....░▒▒░
+; .....░▒░
+; ......░▒
+; ......░░
+; ......░▒
+; ......░▒
+;
+    db $0f,$1b,$09,$05,$02,$03,$02,$02,$00,$04,$06,$02,$01,$00,$01,$01 ; [$b8
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░....
+; ░░░.....
+; ░░......
+; ░....░░▒
+; ░...░▒▒░
+; ░...▒▒▒.
+; ░..░▒░▒▒
+; ░..░░..░
+;
+    db $f0,$e0,$c0,$86,$89,$80,$94,$99,$00,$00,$00,$01,$06,$0e,$0b,$00 ; [$b8
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ....░░░░
+; ...░░▒░░
+; ....░▒▒░
+; ░░...░▒░
+; ░░░...░▒
+; ..░...░░
+; ...░..░▒
+; ...░..░▒
+;
+    db $0f,$1b,$09,$c5,$e2,$23,$12,$12,$00,$04,$06,$02,$01,$00,$01,$01 ; [$b8
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░░░░
+; ▒▒█▒▒▒▒░
+; ▒█▒▒██▒▒
+; ▒▒▒██▒▒▒
+; ▒▒▒▒█▒▒▒
+; ▒▒▒█▒▒▒▒
+; ▒░▒█▒▒▒░
+; ▒░▒▒▒▒░░
+;
+    db $0f,$21,$4c,$18,$08,$10,$51,$43,$f0,$fe,$ff,$ff,$ff,$ff,$be,$bc ; [$b8
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░░░░░▒▒
+; ▒▒░▒▒▒▒▒
+; ░░▒▒███▒
+; ░▒▒█▒▒█▒
+; ░▒█▒▒░▒█
+; ░▒▒░░░▒▒
+; ░░░░░░▒█
+; ▒▒▒░░░▒█
+;
+    db $fc,$20,$ce,$92,$a5,$9c,$fd,$1d,$03,$df,$3f,$7f,$7b,$63,$03,$e3 ; [$b8
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒▒░
+; ▒▒......
+; ▒▒.░░░░░
+; ░▒.░....
+; █▒.░.░░░
+; █▒.░.░▒▒
+; ▒▒.░.░▒▒
+;
+    db $ff,$01,$00,$1f,$90,$97,$94,$14,$00,$fe,$c0,$c0,$40,$c0,$c3,$c3 ; [$b8
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒▒▒▒▒░░
+; .......░
+; ░░░░░░░░
+; .....░▒▒
+; ░░░░░▒█▒
+; ░▒▒▒░▒█▒
+; ░.▒▒░██▒
+;
+    db $ff,$03,$01,$ff,$04,$fa,$8a,$8e,$00,$fc,$00,$00,$03,$07,$77,$37 ; [$b8
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ..░░.░.░
+; ....░.░.
+; .....░..
+; ......░░
+; ......░▒
+; ......░▒
+; ......▒▒
+;
+    db $00,$35,$0a,$04,$03,$02,$02,$00,$00,$00,$00,$00,$00,$01,$01,$03 ; [$b8
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; .......░
+; .░...░..
+; ...░....
+; ░.░.....
+; ░░......
+; ░░......
+; ░░......
+; ░░......
+;
+    db $01,$44,$10,$a0,$c0,$c0,$c0,$c0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b8
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░▒▒▒░░░
+; ▒▒▒░░░░.
+; ▒▒█░░░..
+; ░░▒▒░..░
+; ▒░░░..░░
+; ░░...░░░
+; ░..░░░▒░
+;
+    db $ff,$c7,$1e,$3c,$c9,$73,$c7,$9d,$00,$38,$e0,$e0,$30,$80,$00,$02 ; [$b8
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ░░░░░▒▒▒
+; ░░░░░░▒▒
+; .░░▒▒▒▒▒
+; ..▒▒█▒▒▒
+; ░..▒▒█▒░
+; ░...▒▒▒▒
+; ░░...░▒▒
+; ▒▒░░..░█
+;
+    db $f8,$fc,$60,$08,$85,$80,$c4,$33,$07,$03,$1f,$3f,$1e,$0f,$03,$c1 ; [$b8
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░▒▒▒░░░
+; ▒▒▒░░...
+; ▒▒░░....
+; ░░░.....
+; ▒░......
+; ░░......
+; ░░......
+;
+    db $ff,$c7,$18,$30,$e0,$40,$c0,$c0,$00,$38,$e0,$c0,$00,$80,$00,$00 ; [$b8
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░░░░▒▒▒
+; ░░░░░░▒▒
+; ....▒▒▒▒
+; .....▒▒▒
+; ......█░
+; ......█▒
+; .......▒
+; .......█
+;
+    db $f8,$fc,$00,$00,$03,$02,$00,$01,$07,$03,$0f,$07,$02,$03,$01,$01 ; [$b8
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░▒▒▒░░░.
+; ▒▒▒░░.░.
+; ▒▒░▒░░░.
+; ▒▒░▒░░..
+; ▒░▒░░.░.
+; ▒▒░▒░░░.
+; ▒▒▒░░░..
+; ▒▒░▒░.░.
+;
+    db $8e,$1a,$2e,$2c,$5a,$2e,$1c,$2a,$70,$e0,$d0,$d0,$a0,$d0,$e0,$d0 ; [$b8
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; █▒░░░░▒▒
+; ▒░....▒▒
+; ▒......█
+; ░...░░.█
+; ░..░░░░█
+; ░..░░░░█
+; ░..░░░░█
+; ░░▒█████
+;
+    db $bc,$40,$01,$8d,$9f,$9f,$9f,$df,$c3,$83,$81,$01,$01,$01,$01,$3f ; [$b9
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░.......
+; ░░......
+; ▒░░.....
+; ░▒░░....
+;
+    db $80,$80,$80,$80,$80,$c0,$60,$b0,$00,$00,$00,$00,$00,$00,$80,$40 ; [$b9
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ......░▒
+; ......░░
+; ......░░
+; ......░▒
+; .....░▒░
+; ....░▒▒░
+; ...░▒▒░░
+; .░░▒░░..
+;
+    db $02,$03,$03,$02,$05,$09,$13,$6c,$01,$00,$00,$01,$02,$06,$0c,$10 ; [$b9
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░..░░...
+; ░...░░..
+; ░...░░░.
+; ░....░░░
+; ░......░
+; ░░......
+; ▒░░.....
+; ░▒░░....
+;
+    db $98,$8c,$8e,$87,$81,$c0,$60,$b0,$00,$00,$00,$00,$00,$00,$80,$40 ; [$b9
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ...░..░▒
+; ..░░..░░
+; ..░░..░░
+; ░░░...░▒
+; ░░...░▒░
+; ....░▒▒░
+; ...░▒▒░░
+; .░░▒░░..
+;
+    db $12,$33,$33,$e2,$c5,$09,$13,$6c,$01,$00,$00,$01,$02,$06,$0c,$10 ; [$b9
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒░░░░░▒
+; ▒░▒█▒░▒█
+; ▒░█▒▒░▒█
+; ▒▒▒▒░░▒█
+; ▒░░▒▒░░▒
+; ▒▒░░░░▒░
+; █▒▒░░▒█▒
+; ▒█▒▒░▒▒▒
+;
+    db $3e,$55,$65,$0d,$66,$3d,$9a,$48,$c1,$bb,$bb,$f3,$99,$c2,$e7,$f7 ; [$b9
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; █▒▒░░░▒█
+; ▒▒░░░░▒▒
+; ▒░░▒░░▒▒
+; ▒░▒░░░▒█
+; ▒░░░░▒█▒
+; ░░░░▒██▒
+; ▒░░▒██▒▒
+; ▒▒▒█▒▒░░
+;
+    db $9d,$3c,$6c,$5d,$7a,$f6,$6c,$13,$e3,$c3,$93,$a3,$87,$0f,$9f,$fc ; [$b9
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░.░.░▒▒
+; ▒▒.░.░▒.
+; ▒▒.░.░▒.
+; ▒▒.░.░▒▒
+; ░▒.░.░▒▒
+; █▒.░.░.░
+; ▒█.░▒▒██
+; ▒▒.▒▒▒██
+;
+    db $d4,$14,$14,$14,$94,$95,$53,$03,$03,$c2,$c2,$c3,$43,$c0,$cf,$df ; [$b9
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░.▒▒░██░
+; ░▒▒▒░▒█▒
+; ░▒▒.░▒█▒
+; ░▒▒.░██▒
+; ░...░▒█░
+; .░.░░██▒
+; ▒█▒██▒█▒
+; ██████▒▒
+;
+    db $8f,$8a,$8a,$8e,$8b,$5e,$5a,$fc,$36,$77,$67,$67,$06,$07,$ff,$ff ; [$b9
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ..▒███▒░
+; ..▒███▒░
+; .▒█▒█▒▒░
+; .▒███▒▒░
+; .▒██▒▒░█
+; .▒▒▒▒░█▒
+; .░▒▒░▒█▒
+; ░▒█▒░█▒▒
+;
+    db $1d,$1d,$29,$39,$33,$06,$4a,$ac,$3e,$3e,$7e,$7e,$7d,$7b,$37,$77 ; [$b9
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ███▒▒░..
+; ███▒▒░░.
+; ▒▒▒▒▒░░.
+; ░▒▒▒░░░.
+; ▒░░░░▒░.
+; ▒▒░▒░░░.
+; ▒▒▒░░░░.
+; ▒▒▒░░░░.
+;
+    db $e4,$e6,$06,$8e,$7a,$2e,$1e,$1e,$f8,$f8,$f8,$70,$84,$d0,$e0,$e0 ; [$b9
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒██▒░█▒▒
+; ▒██▒▒░░░
+; ▒██▒▒░▒▒
+; ▒██▒░██▒
+; ░██▒░█▒▒
+; ░▒▒░██▒▒
+; .▒▒░▒▒▒▒
+; .▒▒▒█▒░░
+;
+    db $6c,$67,$64,$6e,$ec,$9c,$10,$0b,$f7,$f8,$fb,$f7,$77,$6f,$6f,$7c ; [$b9
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒░▒▒░..
+; ░░░▒░░..
+; ▒▒░░▒░..
+; ▒▒▒▒░░..
+; ▒▒▒▒░░..
+; ▒▒▒▒░░..
+; ▒▒▒░▒░..
+; ░░░░░░..
+;
+    db $24,$ec,$34,$0c,$0c,$0c,$14,$fc,$d8,$10,$c8,$f0,$f0,$f0,$e8,$00 ; [$b9
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ..░░░..░
+; .░▒▒▒.▒▒
+; .░▒█░░██
+; .░▒█░░██
+; ...░.░█▒
+; ░█▒░░.░▒
+; ▒▒█▒....
+; ▒██░.░█▒
+;
+    db $39,$40,$5f,$5f,$16,$da,$20,$76,$00,$3b,$33,$33,$03,$61,$f0,$e3 ; [$b9
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░..▒▒░..
+; █░..▒░░.
+; ▒▒░.▒░░.
+; █▒░.░░░.
+; ▒░░..░░.
+; ░░......
+; ...▒░░..
+; ░.▒▒░░..
+;
+    db $84,$c6,$26,$ae,$66,$c0,$0c,$8c,$18,$88,$c8,$c0,$80,$00,$10,$30 ; [$b9
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ▒▒█▒█▒█▒
+; ▒█▒█▒▒▒▒
+; ▒██▒█▒▒▒
+; ▒███▒▒▒▒
+; ▒███▒▒▒▒
+; ▒▒██▒█▒▒
+; ▒██▒█▒▒▒
+; ▒██▒█▒█▒
+;
+    db $2a,$50,$68,$70,$70,$34,$68,$6a,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$b9
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .░░▒▒▒▒▒
+; ░▒▒▒█▒█▒
+; ░▒██████
+; ▒█▒███▒█
+; ▒██████▒
+; ▒█▒█▒█▒█
+; ▒▒█▒█▒█▒
+; ▒███▒▒▒▒
+;
+    db $60,$8a,$bf,$5d,$7e,$55,$2a,$70,$1f,$7f,$7f,$ff,$ff,$ff,$ff,$ff ; [$ba
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; █▒█▒█▒█▒
+; ████████
+; ███▒██▒█
+; ▒█▒▒▒███
+; █▒▒███▒▒
+; ▒▒▒▒▒▒█▒
+; █▒▒▒▒▒▒▒
+;
+    db $00,$aa,$ff,$ed,$47,$9c,$02,$80,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$ba
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒░▒░░..
+; █▒▒░▒░░.
+; ▒▒▒▒▒░..
+; █▒▒▒░░░.
+; ▒▒▒░░░..
+; █▒▒▒░.░.
+; ▒░▒░░░░.
+; ▒▒░░░░..
+;
+    db $2c,$96,$04,$8e,$1c,$8a,$5e,$3c,$d0,$e8,$f8,$f0,$e0,$f0,$a0,$c0 ; [$ba
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒██▒▒▒▒
+; ▒███▒▒▒▒
+; ▒██▒█▒▒▒
+; ▒██▒▒▒▒▒
+; ▒▒▒▒▒░░░
+; ▒▒▒▒░░░░
+; ░▒▒░░░░░
+; .░░░░░.░
+;
+    db $30,$70,$68,$60,$07,$0f,$9f,$7d,$ff,$ff,$ff,$ff,$f8,$f0,$60,$00 ; [$ba
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒░▒▒▒░▒
+; ░▒▒░▒░▒▒
+; ░▒░▒░▒░░
+; ░░▒░▒░▒░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░.░
+;
+    db $00,$22,$94,$ab,$d5,$ff,$ff,$fd,$ff,$dd,$6b,$54,$2a,$00,$00,$00 ; [$ba
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░▒░░░░░.
+; ▒░░░░.░.
+; ░░░.░░░.
+; ░▒░░.░..
+; ░░░░░░..
+; ░░.░.░..
+; .░░░░...
+; ░░.░....
+;
+    db $be,$7a,$ee,$b4,$fc,$d4,$78,$d0,$40,$80,$00,$40,$00,$00,$00,$00 ; [$ba
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░.░█▒▒
+; ...░█▒▒▒
+; .█.▒█▒▒▒
+; ▒█.▒▒▒▒░
+; ▒▒▒.▒░░.
+; .▒▒▒....
+; .░▒.░░░.
+; ....░░..
+;
+    db $ac,$18,$48,$41,$06,$00,$4e,$0c,$47,$0f,$5f,$de,$e8,$70,$20,$00 ; [$ba
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░.░░░░░.
+; ░.░░░.░.
+; ░...░░░.
+; .░▒░....
+; .▒░░░...
+; .░░░.░..
+; .░░░░...
+; .░.░....
+;
+    db $be,$ba,$8e,$50,$38,$74,$78,$50,$00,$00,$00,$20,$40,$00,$00,$00 ; [$ba
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░.░░▒▒
+; ░░..░▒█▒
+; ░░..░▒▒▒
+; ░░..▒▒▒░
+; ░...▒░░.
+; .░█░...░
+; .▒▒░.░░▒
+; .▒..░░█▒
+;
+    db $ec,$ca,$c8,$c1,$86,$71,$16,$0e,$03,$07,$07,$0e,$08,$20,$61,$43 ; [$ba
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒░░...░
+; ▒▒▒░░..░
+; ░░░▒░░..
+; ░░░░░░░░
+; .░░░...░
+; ░.░.▒▒░.
+; ░...▒▒░.
+; ▒░..░░░.
+;
+    db $31,$19,$ec,$ff,$71,$a2,$82,$4e,$c0,$e0,$10,$00,$00,$0c,$0c,$80 ; [$ba
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░.░░.░░░
+; ...░.░░░
+; ▒▒......
+; █▒▒▒░░▒░
+; ▒▒▒░▒░▒░
+; ░░░░░░░▒
+; ▒░░░░░░░
+;
+    db $ff,$b7,$17,$00,$8d,$15,$fe,$7f,$00,$00,$00,$c0,$f2,$ea,$01,$80 ; [$ba
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ░░░░.░░▒
+; ░░░..░▒▒
+; ░░░..░▒█
+; .░..░▒█░
+; ....░▒▒█
+; ▒░..▒░▒▒
+; ░▒░.░▒▒░
+; ░░░.▒░▒▒
+;
+    db $f6,$e4,$e5,$4b,$09,$44,$a9,$e4,$01,$03,$03,$06,$07,$8b,$46,$0b ; [$ba
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒█▒█▒▒▒░
+; ▒▒▒▒░░░░
+; ▒▒▒░▒░▒░
+; ▒▒░░░░░░
+; ▒░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $51,$0f,$15,$3f,$7f,$ff,$ff,$ff,$fe,$f0,$ea,$c0,$80,$00,$00,$00 ; [$ba
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░..░░░░░
+; ░░...░░░
+; ░░......
+; ░.░.....
+; ░░...░▒▒
+; ░.░.░▒█░
+; ░░..▒▒▒▒
+; .░░.▒▒▒░
+;
+    db $9f,$c7,$c0,$a0,$c4,$ab,$c0,$61,$00,$00,$00,$00,$03,$06,$0f,$0e ; [$ba
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ..░░░░░░
+; ...░░░░░
+; ░░...░.░
+; ░░░.....
+;
+    db $ff,$7f,$ff,$ff,$3f,$1f,$c5,$e0,$00,$80,$00,$00,$00,$00,$00,$00 ; [$ba
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░.░▒▒░
+; ░░░.▒░▒░
+; ░░..░▒░░
+; ░░░.▒░░░
+; ░░..░▒░░
+; ░░..░░░░
+; .....░▒░
+; .....░░░
+;
+    db $e9,$e5,$cb,$e7,$cb,$cf,$05,$07,$06,$0a,$04,$08,$04,$00,$02,$00 ; [$ba
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░.░
+; ░░░░.░░░
+;
+    db $ff,$ff,$ff,$ff,$ff,$ff,$fd,$f7,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bb
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░..░▒░░
+; ░.░.▒░▒░
+; .░..░▒░░
+; ░.░.░░▒░
+; ░░░..░░░
+; .░...░..
+; ░.░.....
+; .░..░░░░
+;
+    db $cb,$a5,$4b,$ad,$e7,$44,$a0,$4f,$04,$0a,$04,$02,$00,$00,$00,$00 ; [$bb
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░░░.░░▒▒
+; ░░..░▒█▒
+; ░░..░▒▒▒
+; ░░..▒▒▒░
+; ░░..▒░░░
+; ░..░░░░░
+; ░..░░░.░
+; ░...░.░.
+;
+    db $ec,$ca,$c8,$c1,$c7,$9f,$9d,$8a,$03,$07,$07,$0e,$08,$00,$00,$00 ; [$bb
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒░░...░
+; ▒▒▒░░..░
+; ░░░▒░░..
+; ░░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; .░.░░░░░
+; ░.░.░░░░
+;
+    db $31,$19,$ec,$ff,$ff,$ff,$5f,$af,$c0,$e0,$10,$00,$00,$00,$00,$00 ; [$bb
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░░░░░░.
+; ░░.░.░..
+; .░░....░
+; .......░
+; ░░░...░░
+; ░░░░░.░▒
+; ▒░▒░▒.░▒
+; ░░░▒░.░▒
+;
+    db $fe,$d4,$61,$01,$e3,$fa,$52,$ea,$00,$00,$00,$00,$00,$01,$a9,$11 ; [$bb
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ...░▒▒▒▒
+; .░░▒▒▒▒▒
+; ░▒▒█▒▒░░
+; ▒█▒▒▒░░░
+; █▒░░░░░░
+; ▒░░░░░░░
+; ▒░░░░░░░
+; ░░░░░░░░
+;
+    db $10,$60,$93,$47,$bf,$7f,$7f,$ff,$0f,$1f,$7c,$f8,$c0,$80,$80,$00 ; [$bb
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░.......
+; ░....░░░
+; ...░░▒▒▒
+; ..░▒▒█▒█
+; ░▒▒▒▒▒▒▒
+; ▒▒░░▒░░▒
+; ░░░░░░░░
+; ░░░░░░░░
+;
+    db $80,$87,$18,$25,$80,$36,$ff,$ff,$00,$00,$07,$1f,$7f,$c9,$00,$00 ; [$bb
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ...░.░░░
+; ░░..░.░░
+; ▒▒░.....
+; ▒▒▒▒░...
+; ░▒▒░░...
+; ▒░░░░...
+; ░░░░░.░▒
+; ░░░..░░░
+;
+    db $17,$cb,$20,$08,$98,$78,$fa,$e7,$00,$00,$c0,$f0,$60,$80,$01,$00 ; [$bb
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░.░░
+; ░░░░░..░
+; .░░░...░
+; ..░.....
+; ...░....
+; ▒▒▒.....
+; ▒▒▒▒▒░▒░
+; ▒██▒█▒▒░
+;
+    db $fb,$f9,$71,$20,$10,$00,$05,$69,$00,$00,$00,$00,$00,$e0,$fa,$fe ; [$bb
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒░░░░░░░
+; ░░░░░░░░
+; ░░░░░░░░
+; .░░░░░░░
+; ........
+; .░░░░░▒▒
+; .░▒▒▒▒░░
+; ░..░░░░░
+;
+    db $7f,$ff,$ff,$7f,$00,$7c,$43,$9f,$80,$00,$00,$00,$00,$03,$3c,$00 ; [$bb
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ░░░░....
+; ░░▒░░░░.
+; ░▒░░▒▒░░
+; ░░░▒▒░░░
+; ░░░░▒░░░
+; ░░░▒░░░░
+; ░.░▒░░░.
+; ░.░░░░..
+;
+    db $f0,$de,$b3,$e7,$f7,$ef,$ae,$bc,$00,$20,$4c,$18,$08,$10,$10,$00 ; [$bb
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ......░░
+; ░░.░░░░░
+; ..░░▒▒▒░
+; .░░▒░░▒░
+; .░▒░░.░▒
+; .░░...░░
+; ......░▒
+; ░░░...░▒
+;
+    db $03,$df,$31,$6d,$5a,$63,$02,$e2,$00,$00,$0e,$12,$21,$00,$01,$01 ; [$bb
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ......░▒
+; ......░▒
+; .....░░░
+; .....░░░
+; ....░░▒░
+; ....░░▒▒
+; ....░▒█░
+; ...░░▒▒▒
+;
+    db $02,$02,$07,$07,$0d,$0c,$0b,$18,$01,$01,$00,$00,$02,$03,$06,$07 ; [$bb
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░.......
+; ░.░.....
+; ░.......
+; ░░......
+; ░..░....
+; ░░......
+; ░.░.....
+; ░░..░...
+;
+    db $80,$a0,$80,$c0,$90,$c0,$a0,$c8,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bb
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ...░▒█▒▒
+; ...░▒█▒▒
+; ..░░▒▒▒░
+; ..░▒▒▒░░
+; ..▒▒█▒▒▒
+; .░░▒█▒░░
+; .░▒██▒▒▒
+; .░▒███▒▒
+;
+    db $14,$14,$31,$23,$08,$6b,$58,$5c,$0f,$0f,$0e,$1c,$3f,$1c,$3f,$3f ; [$bb
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░░.....
+; ░░.░....
+; ░░░..░..
+; ░.░░....
+; ░░░.░...
+; ░.░░..░.
+; ░░░░░..░
+; ░.░░.░░.
+;
+    db $e0,$d0,$e4,$b0,$e8,$b2,$f9,$b6,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bb
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; .░▒▒▒█▒░
+; .▒░▒█▒░░
+; .░▒▒▒█..
+; .░▒▒█▒..
+; .▒▒▒▒▒..
+; .░▒▒█▒██
+; .▒▒█▒█▒▒
+; .░▒▒▒▒▒░
+;
+    db $45,$2b,$44,$48,$00,$4b,$14,$41,$3e,$5c,$3c,$3c,$7c,$3f,$7f,$3e ; [$bc
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░▒░░░..
+; ░░░░░.░.
+; .▒▒░░░..
+; .█░░░.░.
+; .█▒░░░..
+; █▒░░░.░.
+; ░▒░░░░..
+; ▒▒░░░...
+;
+    db $5c,$fa,$1c,$7a,$5c,$ba,$bc,$38,$a0,$00,$60,$40,$60,$c0,$40,$c0 ; [$bc
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; .░▒▒▒█▒░
+; .▒░▒█▒▒▒
+; .░▒▒▒█▒▒
+; .░▒▒█▒▒▒
+; .▒▒▒▒▒▒▒
+; .░▒▒█▒▒▒
+; .▒▒█▒█▒▒
+; .░▒▒▒▒▒░
+;
+    db $45,$28,$44,$48,$00,$48,$14,$41,$3e,$5f,$3f,$3f,$7f,$3f,$7f,$3e ; [$bc
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒░▒░░░..
+; ░▒░░░.░.
+; ▒░▒░░░..
+; ░▒░░░.░.
+; ▒▒▒░░░..
+; ▒░░░░.░.
+; ░▒░░░░..
+; ▒▒░░░...
+;
+    db $5c,$ba,$5c,$ba,$1c,$7a,$bc,$38,$a0,$40,$a0,$40,$e0,$80,$40,$c0 ; [$bc
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░░......
+; ▒▒░░....
+; ▒░▒░░...
+; ░▒░░░...
+; ▒▒▒░░░..
+; ▒░░░░...
+; ░▒░░░░..
+; ▒▒░░░...
+;
+    db $c0,$30,$58,$b8,$1c,$78,$bc,$38,$00,$c0,$a0,$40,$e0,$80,$40,$c0 ; [$bc
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; .░▒▒▒░▒░
+; ░▒▒██▒██
+; ░▒▒██▒██
+; ░▒▒▒▒▒██
+; ░░▒▒▒▒▒▒
+; ░▒█▒███▒
+; ░▒▒▒█▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $45,$9b,$9b,$83,$c0,$ae,$88,$80,$3a,$7f,$7f,$7f,$3f,$7f,$7f,$7f ; [$bc
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ▒▒████▒░
+; ▒▒█▒▒▒▒░
+; ▒▒▒▒▒░░░
+; ░▒░▒░▒░░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $ff,$3d,$21,$07,$ab,$ee,$cc,$88,$00,$fe,$fe,$f8,$54,$f7,$f7,$f7 ; [$bc
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░......
+; █▒█░▒░.▒
+; ▒▒▒▒░░.▒
+; ░▒░░░░.▒
+; ........
+; ▒▒░.▒▒░░
+; ░▒░.▒░░░
+; ▒▒░.▒░░░
+;
+    db $c0,$b4,$0c,$bc,$00,$23,$a7,$27,$00,$e9,$f1,$41,$00,$cc,$48,$c8 ; [$bc
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ........
+; ░░.░░.░.
+; .░.░....
+; ░░.░░.░.
+; ........
+; .▒░░.░░.
+; .░.░....
+; .░░░.░░.
+;
+    db $00,$da,$50,$da,$00,$36,$50,$76,$00,$00,$00,$00,$00,$40,$00,$00 ; [$bc
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.░.░░.░
+; .░.░.░.░
+; ░░░░░░░░
+; ░▒▒█▒█▒█
+; ░░▒▒▒▒▒▒
+; ░▒█▒███▒
+; ░▒▒▒█▒▒▒
+; ░▒▒▒▒▒▒▒
+;
+    db $ad,$55,$ff,$95,$c0,$ae,$88,$80,$00,$00,$00,$7f,$3f,$7f,$7f,$7f ; [$bc
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ........
+; .░.░.░..
+; ░░░░░░░░
+; █▒▒▒▒▒▒░
+; ▒▒░▒░░.░
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $00,$54,$ff,$81,$2d,$ee,$cc,$88,$00,$00,$00,$fe,$d0,$f7,$f7,$f7 ; [$bc
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ▒▒░▒░░.░
+; ░░......
+; ▒▒░.▒▒░░
+; ░▒░.▒░░░
+; ▒▒░.▒░░░
+;
+    db $00,$00,$00,$2d,$c0,$23,$a7,$27,$00,$00,$00,$d0,$00,$cc,$48,$c8 ; [$bc
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ░░......
+; ........
+; .▒░░.░..
+; .░.░....
+; .░░░.░░.
+;
+    db $00,$00,$00,$c0,$00,$34,$50,$76,$00,$00,$00,$00,$00,$40,$00,$00 ; [$bc
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░░░▒▒▒
+; ░░░▒▒░░.
+; ░▒█▒░...
+; ░█▒░..░░
+; ▒▒░..░░▒
+; ▒░..░░▒▒
+; ▒░.░░▒▒░
+; ▒░.░░▒░.
+;
+    db $f8,$e6,$a8,$d3,$26,$4c,$59,$5a,$07,$18,$70,$60,$c1,$83,$86,$84 ; [$bc
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒▒░░░░░░
+; ░░▒▒██▒░
+; ....▒▒▒░
+; ░░░..▒░░
+; ▒▒░░..▒░
+; ▒▒▒▒░.██
+; ░▒▒▒░.█▒
+; .░▒▒░.██
+;
+    db $3f,$cd,$01,$e3,$31,$0b,$8a,$4b,$c0,$3e,$0e,$04,$c2,$f3,$73,$33 ; [$bc
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░..░░░..
+; ▒░.░░░..
+; ▒░.░░░..
+; ▒░.░░░..
+; ░░.░░░..
+; ▒░.░░▒▒█
+; ▒░.░░▒▒▒
+; ▒░.░░░░░
+;
+    db $9c,$5c,$5c,$5c,$dc,$59,$58,$5f,$00,$80,$80,$80,$00,$87,$87,$80 ; [$bc
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ..░░░.░░
+; ..█▒░.██
+; ..▒▒░.█▒
+; ..█▒░.░░
+; ..▒▒░.░░
+; ▒██▒░.██
+; ▒▒▒▒░.█▒
+; ░░░░░.██
+;
+    db $3b,$2b,$0a,$2b,$0b,$6b,$0a,$fb,$00,$33,$33,$30,$30,$f3,$f3,$03 ; [$bd
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ░░▒▒█▒██
+; ░▒▒▒▒██▒
+; ░▒▒█▒▒▒█
+; ░▒▒█▒▒█▒
+; ░▒▒▒▒█▒▒
+; ░▒▒▒█▒█▒
+; ░▒█▒▒▒██
+; ░▒▒▒█▒▒▒
+;
+    db $cb,$86,$91,$92,$84,$8a,$a3,$88,$3f,$7f,$7f,$7f,$7f,$7f,$7f,$7f ; [$bd
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; █▒▒▒▒░▒░
+; ▒▒▒▒░▒▒░
+; ▒█▒▒▒░░░
+; ▒▒▒░▒░▒░
+; ░▒█▒▒░░░
+; █▒░░▒░▒▒
+; ░▒▒▒░░░░
+;
+    db $0b,$85,$09,$47,$15,$a7,$b4,$8f,$f4,$fa,$f6,$f8,$ea,$78,$cb,$70 ; [$bd
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ░░░░░░.░
+; ░░▒░.░░.
+; ▒░░░░..░
+; ░░░░.░░.
+; ▒░▒░░..░
+; ░░░░░░░.
+; ░░░.░░..
+; ▒░░░░.░░
+;
+    db $fd,$d6,$79,$f6,$59,$fe,$ec,$7b,$00,$20,$80,$00,$a0,$00,$00,$80 ; [$bd
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░.░.....
+; ░░..░.░.
+; ..░░....
+; ░.░...░.
+; .░...░..
+; ░..░.░..
+; ░░░.....
+; ....░.░.
+;
+    db $a0,$ca,$30,$a2,$44,$94,$e0,$0a,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bd
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░▒░░
+; █▒▒▒▒░▒▒
+; ▒▒▒▒░▒▒▒
+; ▒▒▒▒▒▒▒▒
+; ██▒█▒██▒
+; ▒▒▒▒▒▒▒▒
+; ░░░░░░░░
+; .░.░.░.░
+;
+    db $0b,$84,$08,$00,$d6,$00,$ff,$55,$f4,$fb,$f7,$ff,$ff,$ff,$00,$00 ; [$bd
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ██▒█▒█▒░
+; ▒▒░▒▒▒..
+; ▒▒▒▒▒░.░
+; ░▒░▒░..░
+; ▒▒▒░.░░▒
+; ▒▒░.░.░░
+; ░░░░.░..
+; ........
+;
+    db $d5,$20,$05,$a9,$16,$2b,$f4,$00,$fe,$dc,$f8,$50,$e1,$c0,$00,$00 ; [$bd
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; .░░.....
+; ░░.░.░.░
+; ░.░.░.▒▒
+; ░░.░.▒▒.
+; ..░▒█▒█▒
+; ░░▒▒▒▒▒▒
+; ░░░░░░░░
+; .░.░.░.░
+;
+    db $60,$d5,$a8,$d0,$2a,$c0,$ff,$55,$00,$00,$03,$06,$1f,$3f,$00,$00 ; [$bd
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ......░░
+; ░░░░░.░░
+; ░░.░░.░▒
+; ░.░.░.░░
+; ......░▒
+; ░░.░░░░▒
+; .░..░.░░
+; .░.░░.░░
+;
+    db $03,$fb,$da,$ab,$02,$de,$4b,$5b,$00,$00,$01,$00,$01,$01,$00,$00 ; [$bd
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ........
+; ░.░░░.░.
+; ........
+; ░░░.░░░.
+; ░░░.░░..
+; ........
+; ░░░▒▒░░.
+; ░▒▒▒▒░▒░
+;
+    db $00,$ba,$00,$ee,$ec,$00,$e6,$85,$00,$00,$00,$00,$00,$00,$18,$7a ; [$bd
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █▒▒░░░▒█
+; ▒▒░▒▒░░▒
+; ▒░▒█▒▒░░
+; ▒░▒▒▒░░.
+; ▒░░▒░░..
+; ░░▒░░...
+; ▒░░░....
+; ▒▒░░....
+;
+    db $9d,$26,$53,$46,$6c,$d8,$70,$30,$e3,$d9,$bc,$b8,$90,$20,$80,$c0 ; [$bd
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░░░.
+; ▒░░.....
+; ░.......
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $0e,$60,$80,$00,$00,$00,$00,$00,$f0,$80,$00,$00,$00,$00,$00,$00 ; [$bd
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒░.....
+; ▒░░.....
+; ░░......
+; ░░......
+; ░░......
+; ░.......
+; ░.......
+; ░.......
+;
+    db $20,$60,$c0,$c0,$c0,$80,$80,$80,$c0,$80,$00,$00,$00,$00,$00,$00 ; [$bd
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ░░░▒▒▒██
+; ....░░▒▒
+; ......░░
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $e3,$0c,$03,$00,$00,$00,$00,$00,$1f,$03,$00,$00,$00,$00,$00,$00 ; [$bd
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒░░░▒▒░░
+; ░░▒▒░▒░▒
+; ░█▒█▒░█▒
+; ░▒█▒▒░▒▒
+; .░▒█░░░▒
+; ..░▒▒░░░
+; ...░▒░░▒
+; ...░▒█░▒
+;
+    db $73,$ca,$d6,$a4,$5e,$27,$16,$16,$8c,$35,$7b,$7b,$31,$18,$09,$0d ; [$bd
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ....░█░░
+; ....░▒▒▒
+; .....▒░░
+; .....░░▒
+; ......▒▒
+; ......░▒
+; ......░▒
+; .......░
+;
+    db $0f,$08,$03,$06,$00,$02,$02,$01,$04,$07,$04,$01,$03,$01,$01,$00 ; [$bd
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ▒░...░..
+; ░...░...
+; ...░▒░░.
+; ░..▒▒░..
+; ..▒.....
+; ...░▒░..
+; ..▒▒░░..
+; .░░░░...
+;
+    db $44,$88,$16,$84,$00,$14,$0c,$78,$80,$00,$08,$18,$20,$08,$30,$00 ; [$be
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; .......░
+; .......█
+; .......█
+; .......▒
+; .......▒
+; .......█
+; .......▒
+; .......█
+;
+    db $01,$01,$01,$00,$00,$01,$00,$01,$00,$01,$01,$01,$01,$01,$01,$01 ; [$be
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ░▒░.....
+; ░█░.....
+; ░▒░.....
+; ░█░░░▒██
+; ░▒░░▒▒▒▒
+; ░█░░░░░░
+; ░▒░.....
+; ░▒░.....
+;
+    db $a0,$e0,$a0,$fb,$b0,$ff,$a0,$a0,$40,$40,$40,$47,$4f,$40,$40,$40 ; [$be
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; .....░▒░
+; .....░▒░
+; .....░█░
+; ██▒█▒▒█░
+; ▒▒▒▒▒░▒░
+; ░░░░░░█░
+; .....░▒░
+; .....░▒░
+;
+    db $05,$05,$07,$d3,$05,$ff,$05,$05,$02,$02,$02,$fe,$fa,$02,$02,$02 ; [$be
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ░.░.....
+; .░......
+; ....░.░.
+; ░....░..
+; .░..░.░.
+; ░..░.░░░
+; ░.░.░.░.
+; ..░.░.░.
+;
+    db $a0,$40,$0a,$84,$4a,$97,$aa,$2a,$00,$00,$00,$00,$00,$00,$00,$00 ; [$be
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; .░...░..
+; ░.░.░.░.
+; ...░...░
+; ░.░.░.░.
+; .░.░.░░░
+; ░.░.░.░.
+;
+    db $00,$00,$44,$aa,$11,$aa,$57,$aa,$00,$00,$00,$00,$00,$00,$00,$00 ; [$be
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ░▒░░▒▒░░
+; .░▒▒▒▒▒░
+; ..░▒█▒▒▒
+; ░.░▒▒▒▒▒
+; ...░▒▒▒▒
+; ░.░.░░▒░
+; .....░░░
+; ░.░.░.░░
+;
+    db $b3,$41,$28,$a0,$10,$ad,$07,$ab,$4c,$3e,$1f,$1f,$0f,$02,$00,$00 ; [$be
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░░░░░░░░
+; ░░▒▒▒░░░
+; ▒▒▒░░...
+; ▒▒░░...░
+; ░░░..░░░
+; ▒░..░░░.
+; ░░.░░▒▒.
+; ░░.░▒▒▒.
+;
+    db $ff,$c7,$18,$31,$e7,$4e,$d8,$d0,$00,$38,$e0,$c0,$00,$80,$06,$0e ; [$be
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ░░░░░▒▒▒
+; ░░░░░░▒▒
+; ....▒▒▒▒
+; .░...▒▒▒
+; ░░░░..█░
+; ▒▒▒░░.█▒
+; █▒▒░░░.▒
+; ▒▒▒░▒░.█
+;
+    db $f8,$fc,$00,$40,$f3,$1a,$9c,$15,$07,$03,$0f,$07,$02,$e3,$e1,$e9 ; [$be
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ░.░░▒▒▒.
+; ░.░░░░░.
+; ░.░▒█░▒.
+; ░.░▒▒░▒.
+; ░.░░░░▒.
+; ░.░░░░░.
+; ░.░░██▒.
+; ░.░░▒▒▒.
+;
+    db $b0,$be,$ac,$a4,$bc,$be,$bc,$b0,$0e,$00,$1a,$1a,$02,$00,$0e,$0e ; [$be
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; █▒▒░▒▒.░
+; █░░░░░.█
+; ███▒░▒.█
+; ▒▒▒▒░▒.▒
+; █▒▒▒░▒.▒
+; ▒░░░░░.█
+; ███░█▒.▒
+; ▒▒▒░▒▒.█
+;
+    db $91,$fd,$e9,$08,$88,$7d,$f8,$11,$ec,$81,$f5,$f5,$f5,$81,$ed,$ed ; [$be
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; .░.░.░.░
+; .█████▒░
+; .██▒▒▒▒░
+; .▒▒▒▒░░░
+; ░░░▒░░░▒
+; ███▒░██▒
+; ██▒▒░█▒▒
+; █▒▒▒░▒▒▒
+;
+    db $55,$7d,$61,$07,$ee,$ee,$cc,$88,$00,$7e,$7e,$78,$11,$f7,$f7,$f7 ; [$be
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ........
+; .░░░░.░░
+; ..░░░░░░
+; ........
+; ░░░▒░░░▒
+; ░██▒███▒
+; ░█▒▒██▒▒
+; ░▒▒▒█▒▒▒
+;
+    db $00,$7b,$3f,$00,$ee,$ee,$cc,$88,$00,$00,$00,$00,$11,$7f,$7f,$7f ; [$be
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; .░▒▒▒░░░
+; ░███▒▒░░
+; ░██▒▒▒░░
+; ░██▒▒░░░
+; ▒▒▒░░▒░░
+; ░██▒░▒▒░
+; ░█▒▒░▒▒░
+; ░█▒▒░▒▒░
+;
+    db $47,$f3,$e3,$e7,$1b,$e9,$c9,$c9,$38,$7c,$7c,$78,$e4,$76,$76,$76 ; [$be
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; ▒░▒░▒.░▒
+; ▒▒▒▒..░▒
+; ░▒░▒.░░░
+; ▒░▒..░░░
+; █▒▒.░░▒░
+; ▒▒░.░░▒▒
+; ░░..░▒█░
+; .░.░░▒▒▒
+;
+    db $52,$02,$a7,$47,$8d,$2c,$cb,$58,$a9,$f1,$50,$a0,$e2,$c3,$06,$07 ; [$be
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ░░.░▒█▒▒
+; ▒░.░▒█▒▒
+; ░.░░▒▒▒░
+; ▒.░▒▒▒░░
+; ░.▒▒█▒▒▒
+; .░░▒█▒░░
+; .░▒██▒▒▒
+; .░▒███▒▒
+;
+    db $d4,$54,$b1,$23,$88,$6b,$58,$5c,$0f,$8f,$0e,$9c,$3f,$1c,$3f,$3f ; [$be
+                                                                       ; f0]
+                                                                       ; byte
+
+;
+; ░░.....░
+; ░.░▒░.░▒
+; ░.▒░░.░▒
+; ░░░░..░▒
+; ░..░░..░
+; ░░....░.
+; ▒░░..░▒░
+; ░▒░░.░░░
+;
+    db $c1,$aa,$9a,$f2,$99,$c2,$65,$b7,$00,$11,$21,$01,$00,$00,$82,$40 ; [$bf
+                                                                       ; 00]
+                                                                       ; byte
+
+;
+; ▒░░...░▒
+; ░░....░░
+; ░..░..░░
+; ░.░...░▒
+; ░....░▒░
+; ....░▒▒░
+; ░..░▒▒░░
+; ░░░▒░░..
+;
+    db $62,$c3,$93,$a2,$85,$09,$93,$ec,$81,$00,$00,$01,$02,$06,$0c,$10 ; [$bf
+                                                                       ; 10]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░░░░
+; █▒█▒░.▒█
+; ███▒▒░█▒
+; ███▒▒░▒█
+; ▒█▒▒░░█▒
+; █▒▒░.▒█▒
+; ▒▒░.▒██▒
+; █▒░.▒█▒▒
+;
+    db $0f,$a9,$e6,$e5,$4e,$92,$26,$a4,$f0,$f3,$fb,$fb,$f3,$e7,$cf,$cf ; [$bf
+                                                                       ; 20]
+                                                                       ; byte
+
+;
+; ▒▒░.▒▒▒▒
+; ▒▒░.░▒░▒
+; ░▒░░.░▒▒
+; ░▒░░.░░▒
+; ▒░▒░..░░
+; ░░░░░.░░
+; ░░░░░.░░
+; ░░░░░░..
+;
+    db $20,$2a,$b4,$b6,$53,$fb,$fb,$fc,$cf,$c5,$43,$41,$a0,$00,$00,$00 ; [$bf
+                                                                       ; 30]
+                                                                       ; byte
+
+;
+; ........
+; .░.░░.░.
+; ░░░.░░..
+; ░░░░░░░.
+; █▒▒▒▒░▒░
+; ▒▒▒▒█▒▒▒
+; ▒█▒█▒▒█▒
+; ▒▒▒▒▒▒▒▒
+;
+    db $00,$5a,$ec,$fe,$85,$08,$52,$00,$00,$00,$00,$00,$fa,$ff,$ff,$ff ; [$bf
+                                                                       ; 40]
+                                                                       ; byte
+
+;
+; ░▒▒▒▒▒▒░
+; ▒▒▒▒▒▒░░
+; ░░▒░░░░░
+; ░▒░▒░.░░
+; .░.░░░░░
+; ░░░░░.░.
+; ░.░.░.░░
+; .░░░.░.░
+;
+    db $81,$03,$df,$ab,$5f,$fa,$ab,$75,$7e,$fc,$20,$50,$00,$00,$00,$00 ; [$bf
+                                                                       ; 50]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒▒░▒▒▒░▒
+; ░▒▒░▒░▒▒
+; ░▒░▒░▒░░
+; ░░▒░▒░▒░
+; ░░░░░░░░
+; .░.░.░░░
+; ░.░....░
+;
+    db $00,$22,$94,$ab,$d5,$ff,$57,$a1,$ff,$dd,$6b,$54,$2a,$00,$00,$00 ; [$bf
+                                                                       ; 60]
+                                                                       ; byte
+
+;
+; ░█▒█▒▒▒▒
+; ░▒█▒███▒
+; ░░░░░▒██
+; ░▒▒▒░.▒▒
+; ▒▒██▒░..
+; ▒████▒░░
+; ▒▒███▒▒▒
+; ▒███▒█▒█
+;
+    db $d0,$ae,$fb,$88,$34,$7b,$38,$75,$7f,$7f,$07,$73,$f8,$fc,$ff,$ff ; [$bf
+                                                                       ; 70]
+                                                                       ; byte
+
+;
+; ▒▒▒▒░░░.
+; ▒░▒░░░░.
+; ▒▒░░....
+; ▒░...░..
+; ..░░░.░.
+; ░░▒▒░░░.
+; ▒▒▒▒░░░.
+; ▒▒░░░░░.
+;
+    db $0e,$5e,$30,$44,$3a,$ce,$0e,$3e,$f0,$a0,$c0,$80,$00,$30,$f0,$c0 ; [$bf
+                                                                       ; 80]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒░░.
+; ▒▒██▒▒░.
+; ▒▒█▒▒░░.
+; ▒█▒▒░░..
+; ▒██▒▒░░.
+; ▒██▒▒▒░.
+; ▒██▒░░..
+; ▒▒██▒▒░▒
+;
+    db $26,$32,$26,$4c,$66,$62,$6c,$32,$f8,$fc,$f8,$f0,$f8,$fc,$f0,$fd ; [$bf
+                                                                       ; 90]
+                                                                       ; byte
+
+;
+; ▒▒█▒▒░░.
+; ▒▒██▒▒░.
+; ▒▒█▒▒░░.
+; ▒█▒▒▒░..
+; ▒▒█▒▒░░.
+; ▒▒█▒▒▒░.
+; ▒██▒░░..
+; ▒█▒▒▒░░.
+;
+    db $26,$32,$26,$44,$26,$22,$6c,$46,$f8,$fc,$f8,$f8,$f8,$fc,$f0,$f8 ; [$bf
+                                                                       ; a0]
+                                                                       ; byte
+
+;
+; ▒███▒█▒█
+; ▒▒███▒▒▒
+; ▒████▒░░
+; ▒▒██▒░..
+; ░▒▒▒░.▒▒
+; ░░░░░▒██
+; ░▒█▒███▒
+; ░█▒█▒▒▒▒
+;
+    db $75,$38,$7b,$34,$88,$fb,$ae,$d0,$ff,$ff,$fc,$f8,$73,$07,$7f,$7f ; [$bf
+                                                                       ; b0]
+                                                                       ; byte
+
+;
+; ▒▒░░░░░.
+; ▒▒▒▒░░░.
+; ░░▒▒░░░.
+; ..░░░.░.
+; ▒░...░..
+; ▒▒░░....
+; ▒░▒░░░░.
+; ▒▒▒▒░░░.
+;
+    db $3e,$0e,$ce,$3a,$44,$30,$5e,$0e,$c0,$f0,$30,$00,$80,$c0,$a0,$f0 ; [$bf
+                                                                       ; c0]
+                                                                       ; byte
+
+;
+; ▒▒▒▒▒▒▒▒
+; ▒████▒▒▒
+; ████▒███
+; █▒▒▒▒▒█▒
+; ▒░▒▒░▒▒▒
+; ░░░░░░▒░
+; ░.░░.░░░
+; ........
+;
+    db $00,$78,$f7,$82,$48,$fd,$b7,$00,$ff,$ff,$ff,$ff,$b7,$02,$00,$00 ; [$bf
+                                                                       ; d0]
+                                                                       ; byte
+
+;
+; .░▒▒.░▒▒
+; .▒█▒.░░░
+; .▒▒.....
+; ....░▒▒▒
+; ▒█▒.░▒▒▒
+; ░▒▒..▒▒░
+; .░▒░....
+; ..░..░░.
+;
+    db $44,$27,$00,$08,$48,$81,$50,$26,$33,$70,$60,$07,$e7,$66,$20,$00 ; [$bf
+                                                                       ; e0]
+                                                                       ; byte
+
+;
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+; ........
+;
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bf
+                                                                       ; f0]
+                                                                       ; byte
