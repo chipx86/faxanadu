@@ -16,7 +16,6 @@ DAT_PRG8__8000:                             ; [$8000]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__ee15
-;     LookupSpriteDataPointer
 ;
 DAT_PRG8__8001:                             ; [$8001]
     db $00                                  ; [$8001] undefined

@@ -7,8 +7,7 @@
 BASE $8000
 
 OpeningToTownBackgroundPalette:             ; [$8000]
-    db $0f,$0f,$0c,$1b,$0f,$0f,$08,$17,$0f,$0f,$07,$0b,$0f,$15,$19,$30 ; [$80
-                                                                       ; 00]
+    db $0f,$0f,$0c,$1b,$0f,$0f,$08,$17,$0f,$0f,$07,$0b,$0f,$15,$19,$30 ; [$8000]
                                                                        ; byte
     hex 0f 05 17 26 0f 0f 06 17 0f 06 18 28 0f 15 19 30 ; [$8010] undefined
     hex 0f 0b 1b 21 0f 0f 0b 1b 0f 0b 1b 2b 0f 15 19 30 ; [$8020] undefined
@@ -29,8 +28,7 @@ OpeningToTownBackgroundPalette:             ; [$8000]
     hex 0f 07 17 27 0f 0b 00 10 0f 15 19 30 0f 00 10 20 ; [$8110] undefined
 
 TempleBackgroundPalette:                    ; [$8120]
-    db $0f,$08,$18,$28,$0f,$0a,$00,$29,$0f,$15,$19,$30,$0f,$0b,$1b,$2b ; [$81
-                                                                       ; 20]
+    db $0f,$08,$18,$28,$0f,$0a,$00,$29,$0f,$15,$19,$30,$0f,$0b,$1b,$2b ; [$8120]
                                                                        ; byte
     hex 0f 0b 17 10 0f 08 00 2b 0f 15 19 30 0f 0c 1b 24 ; [$8130] undefined
     hex 0f 08 1b 2c 0f 08 1b 30 0f 15 19 30 0f 07 00 10 ; [$8140] undefined
@@ -44,16 +42,20 @@ TempleBackgroundPalette:                    ; [$8120]
     hex 0f 18 26 30 0f 00 25 30 0f 0f 1c 33 0f 0f 27 30 ; [$81c0] undefined
 
 TempleSpritePalette:                        ; [$81d0]
-    db $0f,$18,$26,$30,$0f,$00,$25,$30,$0f,$16,$2c,$30,$0f,$17,$25,$30 ; [$81
-                                                                       ; d0]
+    db $0f,$18,$26,$30,$0f,$00,$25,$30,$0f,$16,$2c,$30,$0f,$17,$25,$30 ; [$81d0]
                                                                        ; byte
     hex 0f 18 26 30 0f 00 25 30 0f 18 26 2b 0f 0c 1c 30 ; [$81e0] undefined
+
+
+;============================================================================
+; Mapping of palette indexes to HUD attribute data lookup indexes.
+;============================================================================
 
 ;
 ; XREFS:
 ;     LoadPalette2
 ;
-PALETTE_INDEX_TO_SOMETHING:                 ; [$81f0]
+PALETTE_INDEX_TO_HUD_ATTRIBUTE_INDEX:       ; [$81f0]
     db $03                                  ; [0]: Eolis
     db $03                                  ; [1]:
     db $03                                  ; [2]:
@@ -96,7 +98,7 @@ PALETTE_INDEX_TO_SOMETHING:                 ; [$81f0]
 
 ;
 ; XREFS:
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;
 AREA_SPRITE_ADDRESSES:                      ; [$8210]
     dw $8220                                ; Eolis

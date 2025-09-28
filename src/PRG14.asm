@@ -147,121 +147,125 @@ Sprites_UpdateAllStates:                    ; [$8070]
 ;     CurrentSprite_UpdateState
 ;
 SPRITE_UPDATE_HANDLERS:                     ; [$8087]
-  dw SpriteUpdateHandler_Invisible-1        ; [0]:
-  dw SpriteUpdateHandler_Bread-1            ; [1]: Dropped bread
-  dw SpriteUpdateHandler_Coin-1             ; [2]: Dropped coin
-  dw SpriteUpdateHandler_Garbled03-1        ; [3]: TODO: Garbled 3
-  dw SpriteUpdateHandler_Enemy_Raiden-1     ; [4]: Enemy: Raiden
-  dw SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
-  dw SpriteUpdateHandler_Enemy_Zombie-1     ; [6]: Enemy: Zombie
-  dw SpriteUpdateHandler_Enemy_Hornet-1     ; [7]: Enemy: Hornet
-  dw SpriteUpdateHandler_Enemy_Bihoruda-1   ; [8]: Enemy: Bihoruda
-  dw SpriteUpdateHandler_Enemy_Lilith-1     ; [9]: Enemy: Lilith
+    dw SpriteUpdateHandler_Invisible-1      ; [0]:
+    dw SpriteUpdateHandler_Bread-1          ; [1]: Dropped bread
+    dw SpriteUpdateHandler_Coin-1           ; [2]: Dropped coin
+    dw SpriteUpdateHandler_Garbled03-1      ; [3]: TODO: Garbled 3
+    dw SpriteUpdateHandler_Enemy_Raiden-1   ; [4]: Enemy: Raiden
+    dw SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
+    dw SpriteUpdateHandler_Enemy_Zombie-1   ; [6]: Enemy: Zombie
+    dw SpriteUpdateHandler_Enemy_Hornet-1   ; [7]: Enemy: Hornet
+    dw SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
+    dw SpriteUpdateHandler_Enemy_Lilith-1   ; [9]: Enemy: Lilith
 
 
 ;============================================================================
 ; SpriteUpdateHandler_Enemy_Garbled_10
 ;============================================================================
-  dw SpriteUpdateHandler_TODO_Garbled10-1   ; [10]: TODO: Garbled 10
-  dw SpriteUpdateHandler_Enemy_Yuinaru-1    ; [11]: Enemy: Yuinaru
-  dw SpriteUpdateHandler_Enemy_Snowman-1    ; [12]: Enemy: Snowman
-  dw SpriteUpdateHandler_Enemy_Nash-1       ; [13]: Enemy: Nash
-  dw SpriteUpdateHandler_Enemy_FireGiant-1  ; [14]: Enemy: Fire Giant
-  dw SpriteUpdateHandler_Enemy_Ishiisu-1    ; [15]: Enemy: Ishiisu
-  dw SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution Hood
-  dw SpriteUpdateHandler_Boss_Rokusutahn-1  ; [17]: Boss: Rokusutahn
-  dw SpriteUpdateHandler_Enemy_Unused18-1   ; [18]: Enemy: Unused #18
-  dw SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy Death
-  dw SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect: Lightning
-                                                  ; Ball
-  dw SpriteUpdateHandler_Enemy_Charron-1    ; [21]: Enemy: Charron
-  dw SpriteUpdateHandler_Invisible-1        ; [22]: Enemy: Unused 22
-  dw SpriteUpdateHandler_Enemy_Geributa-1   ; [23]: Enemy: Geributa
-  dw SpriteUpdateHandler_Enemy_Sugata-1     ; [24]: Enemy: Sugata
-  dw SpriteUpdateHandler_Enemy_Grimlock-1   ; [25]: Enemy: Grimlock
-  dw SpriteUpdateHandler_Enemy_GiantBees-1  ; [26]: Enemy: Giant Bees
-  dw SpriteUpdateHandler_Enemy_Myconid-1    ; [27]: Enemy: Myconid
-  dw SpriteUpdateHandler_Enemy_Naga-1       ; [28]: Enemy: Naga
-  dw SpriteUpdateHandler_Enemy_Unused29-1   ; [29]: Enemy: Unused #29
-  dw SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant Strider
-  dw SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
-                                                    ; Gawaine
-  dw SpriteUpdateHandler_Enemy_Maskman-1    ; [32]: Enemy: Maskman
-  dw thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]: Enemy:
-                                                          ; Wolfman
-  dw SpriteUpdateHandler_Enemy_Yareeka-1    ; [34]: Enemy: Yareeka
-  dw SpriteUpdateHandler_Enemy_Magman-1     ; [35]: Enemy: Magman
-  dw SpriteUpdateHandler_Enemy_Unused36-1   ; [36]: Enemy: Unused #36
-  dw SpriteUpdateHandler_Invisible-1        ; [37]: Enemy: Unused #37
-  dw SpriteUpdateHandler_Enemy_Ikeda-1      ; [38]: Enemy: Ikeda
-  dw SpriteUpdateHandler_Enemy_Unused39-1   ; [39]: Enemy: Unused #39
-  dw SpriteUpdateHandler_Enemy_Lamprey-1    ; [40]: Enemy: Lamprey
-  dw SpriteUpdateHandler_Invisible-1        ; [41]: Enemy: Unused #41
-  dw SpriteUpdateHandler_Enemy_Monodron-1   ; [42]: Enemy: Monodron
-  dw SpriteUpdateHandler_Enemy_Unused43-1   ; [43]: Unused #43
-  dw SpriteUpdateHandler_Enemy_Tamazutsu-1  ; [44]: Enemy: Tamazutsu
-  dw SpriteUpdateHandler_Boss_Ripasheiku-1  ; [45]: Boss: Ripasheiku
-  dw SpriteUpdateHandler_Boss_Zoradohna-1   ; [46]: Boss: Zoradohna
-  dw SpriteUpdateHandler_Boss_Borabohra-1   ; [47]: Boss: Borabohra
-  dw SpriteUpdateHandler_Boss_Pakukame-1    ; [48]: Boss: Pakukame
-  dw SpriteUpdateHandler_Boss_Zorugeriru-1  ; [49]: Boss: Zorugeriru
-  dw SpriteUpdateHandler_Boss_KingGrieve-1  ; [50]: Boss: King Grieve
-  dw SpriteUpdateHandler_Boss_ShadowEura-1  ; [51]: Boss: Shadow Eura
-  dw SpriteUpdateHandler_NPC_Walking-1      ; [52]: NPC: Walking man 1
-  dw thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Unused Blue Lady
-  dw thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Unused Child
-  dw SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
-  dw SpriteUpdateHandler_NPC_MartialArts-1  ; [56]: NPC: Martial Arts
-  dw SpriteUpdateHandler_NPC_Priest-1       ; [57]: NPC: Priest
-  dw SpriteUpdateHandler_NPC_King-1         ; [58]: NPC: King
-  dw SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
-  dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key Salesman
-  dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking Man
-  dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in Chair
-  dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting Man 1
-  dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat Salesman
-  dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in blue
-                                                   ; dress with cup
-  dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: King's Guard
-  dw SpriteUpdateHandler_NPC_Doctor-1       ; [67]: NPC: Doctor
-  dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking Woman
-                                                   ; 1
-  dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking Woman
-                                                   ; 2
-  dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy: Unused
-                                                      ; eyeball
-  dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy: Zozura
-  dw SpriteUpdateHandler_Item_Standard-1    ; [72]: Item: Glove
-  dw SpriteUpdateHandler_Item_Special-1     ; [73]: Item: Black Onyx
-  dw SpriteUpdateHandler_Item_Special-1     ; [74]: Item: Pendant
-  dw SpriteUpdateHandler_Item_Standard-1    ; [75]: Item: Red Potion
-  dw SpriteUpdateHandler_Item_Standard-1    ; [76]: Item: Poison
-  dw SpriteUpdateHandler_Item_Standard-1    ; [77]: Item: Elixir
-  dw SpriteUpdateHandler_Item_Standard-1    ; [78]: Item: Ointment
-  dw SpriteUpdateHandler_Invisible-1        ; [79]: Item: Intro trigger start
+    dw SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: TODO: Garbled 10
+    dw SpriteUpdateHandler_Enemy_Yuinaru-1  ; [11]: Enemy: Yuinaru
+    dw SpriteUpdateHandler_Enemy_Snowman-1  ; [12]: Enemy: Snowman
+    dw SpriteUpdateHandler_Enemy_Nash-1     ; [13]: Enemy: Nash
+    dw SpriteUpdateHandler_Enemy_FireGiant-1 ; [14]: Enemy: Fire Giant
+    dw SpriteUpdateHandler_Enemy_Ishiisu-1  ; [15]: Enemy: Ishiisu
+    dw SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution
+                                                 ; Hood
+    dw SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
+    dw SpriteUpdateHandler_Enemy_Unused18-1 ; [18]: Enemy: Unused #18
+    dw SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy Death
+    dw SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect: Lightning
+                                                    ; Ball
+    dw SpriteUpdateHandler_Enemy_Charron-1  ; [21]: Enemy: Charron
+    dw SpriteUpdateHandler_Invisible-1      ; [22]: Enemy: Unused 22
+    dw SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
+    dw SpriteUpdateHandler_Enemy_Sugata-1   ; [24]: Enemy: Sugata
+    dw SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
+    dw SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
+    dw SpriteUpdateHandler_Enemy_Myconid-1  ; [27]: Enemy: Myconid
+    dw SpriteUpdateHandler_Enemy_Naga-1     ; [28]: Enemy: Naga
+    dw SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Unused #29
+    dw SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant Strider
+    dw SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
+                                                      ; Gawaine
+    dw SpriteUpdateHandler_Enemy_Maskman-1  ; [32]: Enemy: Maskman
+    dw thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]: Enemy:
+                                                            ; Wolfman
+    dw SpriteUpdateHandler_Enemy_Yareeka-1  ; [34]: Enemy: Yareeka
+    dw SpriteUpdateHandler_Enemy_Magman-1   ; [35]: Enemy: Magman
+    dw SpriteUpdateHandler_Enemy_Unused36-1 ; [36]: Enemy: Unused #36
+    dw SpriteUpdateHandler_Invisible-1      ; [37]: Enemy: Unused #37
+    dw SpriteUpdateHandler_Enemy_Ikeda-1    ; [38]: Enemy: Ikeda
+    dw SpriteUpdateHandler_Enemy_Unused39-1 ; [39]: Enemy: Unused #39
+    dw SpriteUpdateHandler_Enemy_Lamprey-1  ; [40]: Enemy: Lamprey
+    dw SpriteUpdateHandler_Invisible-1      ; [41]: Enemy: Unused #41
+    dw SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
+    dw SpriteUpdateHandler_Enemy_Unused43-1 ; [43]: Unused #43
+    dw SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
+    dw SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
+    dw SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
+    dw SpriteUpdateHandler_Boss_Borabohra-1 ; [47]: Boss: Borabohra
+    dw SpriteUpdateHandler_Boss_Pakukame-1  ; [48]: Boss: Pakukame
+    dw SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
+    dw SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
+    dw SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
+    dw SpriteUpdateHandler_NPC_Walking-1    ; [52]: NPC: Walking man 1
+    dw thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Unused Blue Lady
+    dw thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Unused Child
+    dw SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
+    dw SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Arts
+    dw SpriteUpdateHandler_NPC_Priest-1     ; [57]: NPC: Priest
+    dw SpriteUpdateHandler_NPC_King-1       ; [58]: NPC: King
+    dw SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
+    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key Salesman
+    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking Man
+    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in Chair
+    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting Man
+                                                    ; 1
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
+                                                     ; Salesman
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in
+                                                     ; blue dress with cup
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: King's
+                                                     ; Guard
+    dw SpriteUpdateHandler_NPC_Doctor-1     ; [67]: NPC: Doctor
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking
+                                                     ; Woman 1
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking
+                                                     ; Woman 2
+    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy: Unused
+                                                        ; eyeball
+    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy: Zozura
+    dw SpriteUpdateHandler_Item_Standard-1  ; [72]: Item: Glove
+    dw SpriteUpdateHandler_Item_Special-1   ; [73]: Item: Black Onyx
+    dw SpriteUpdateHandler_Item_Special-1   ; [74]: Item: Pendant
+    dw SpriteUpdateHandler_Item_Standard-1  ; [75]: Item: Red Potion
+    dw SpriteUpdateHandler_Item_Standard-1  ; [76]: Item: Poison
+    dw SpriteUpdateHandler_Item_Standard-1  ; [77]: Item: Elixir
+    dw SpriteUpdateHandler_Item_Standard-1  ; [78]: Item: Ointment
+    dw SpriteUpdateHandler_Invisible-1      ; [79]: Item: Intro trigger start
                                             ; point
-  dw SpriteUpdateHandler_Item_Standard-1    ; [80]: Item: Mattock
-  dw SpriteUpdateHandler_TODO_Garbled_81-1  ; [81]: TODO: Garbled #81
-  dw SpriteUpdateHandler_Deco_Fountain-1    ; [82]: Deco: Fountain
-  dw SpriteUpdateHandler_TODO_Unknown_83-1  ; [83]: TODO: Unknown #83
-  dw SpriteUpdateHandler_TODO_Unknown84-1   ; [84]: TODO: Unknown #84
-  dw SpriteUpdateHandler_Item_Standard-1    ; [85]: Item: Wing Boots
-  dw SpriteUpdateHandler_Item_Standard-1    ; [86]: Item: Hour Glass
-  dw SpriteUpdateHandler_Item_Special-1     ; [87]: Item: Magical Rod
-  dw SpriteUpdateHandler_Item_Special-1     ; [88]: Item: Battle Suit
-  dw SpriteUpdateHandler_Item_Special-1     ; [89]: Item: Battle Helmet
-  dw SpriteUpdateHandler_Item_Special-1     ; [90]: Item: Dragon Slayer
-  dw SpriteUpdateHandler_Item_Standard-1    ; [91]: Item: Mattock #2
-  dw SpriteUpdateHandler_Item_Standard-1    ; [92]: Item: Wing Boots (for
+    dw SpriteUpdateHandler_Item_Standard-1  ; [80]: Item: Mattock
+    dw SpriteUpdateHandler_TODO_Garbled_81-1 ; [81]: TODO: Garbled #81
+    dw SpriteUpdateHandler_Deco_Fountain-1  ; [82]: Deco: Fountain
+    dw SpriteUpdateHandler_TODO_Unknown_83-1 ; [83]: TODO: Unknown #83
+    dw SpriteUpdateHandler_TODO_Unknown84-1 ; [84]: TODO: Unknown #84
+    dw SpriteUpdateHandler_Item_Standard-1  ; [85]: Item: Wing Boots
+    dw SpriteUpdateHandler_Item_Standard-1  ; [86]: Item: Hour Glass
+    dw SpriteUpdateHandler_Item_Special-1   ; [87]: Item: Magical Rod
+    dw SpriteUpdateHandler_Item_Special-1   ; [88]: Item: Battle Suit
+    dw SpriteUpdateHandler_Item_Special-1   ; [89]: Item: Battle Helmet
+    dw SpriteUpdateHandler_Item_Special-1   ; [90]: Item: Dragon Slayer
+    dw SpriteUpdateHandler_Item_Standard-1  ; [91]: Item: Mattock #2
+    dw SpriteUpdateHandler_Item_Standard-1  ; [92]: Item: Wing Boots (for
                                             ; quest)
-  dw SpriteUpdateHandler_Item_Standard-1    ; [93]: Item: Red Potion #2
-  dw SpriteUpdateHandler_Item_Standard-1    ; [94]: Item: Poison #2
-  dw SpriteUpdateHandler_Item_Standard-1    ; [95]: Item: Glove #2
-  dw SpriteUpdateHandler_Item_Standard-1    ; [96]: Item: Ointment #2
-  dw SpriteUpdateHandler__a5d2-1            ; [97]:
-  dw SpriteUpdateHandler__a5d2-1            ; [98]:
-  dw SpriteUpdateHandler__a5d2-1            ; [99]:
-  dw SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
+    dw SpriteUpdateHandler_Item_Standard-1  ; [93]: Item: Red Potion #2
+    dw SpriteUpdateHandler_Item_Standard-1  ; [94]: Item: Poison #2
+    dw SpriteUpdateHandler_Item_Standard-1  ; [95]: Item: Glove #2
+    dw SpriteUpdateHandler_Item_Standard-1  ; [96]: Item: Ointment #2
+    dw SpriteUpdateHandler__a5d2-1          ; [97]:
+    dw SpriteUpdateHandler__a5d2-1          ; [98]:
+    dw SpriteUpdateHandler__a5d2-1          ; [99]:
+    dw SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -2594,14 +2598,14 @@ CurrentSprite_CheckHitPlayer:               ; [$890a]
 ;     CurrentSprite_CheckHitPlayer
 ;
 SPRITE_COLLISION_HANDLERS:                  ; [$8958]
-  dw Player_HandleTouchEnemy-1
-  dw Player_HandleTouchBreadOrCoin-1        ; Coin/meat touched
-  dw Player_CheckHandlePressUpOnNPC-1       ; Press Up on NPC
+    dw Player_HandleTouchEnemy-1
+    dw Player_HandleTouchBreadOrCoin-1      ; Coin/meat touched
+    dw Player_CheckHandlePressUpOnNPC-1     ; Press Up on NPC
     dw $8956                                ; Large animation. Just return.
-  dw Player_HandleTouchNPC-1                ; Collide with NPC
-  dw Player_HandleTouchItem-1               ; Item touched
-  dw Player_HandleTouchEnemyMagic-1         ; Enemy magic touched
-  dw Player_HandleTouchEnemy-1              ; Enemy touched
+    dw Player_HandleTouchNPC-1              ; Collide with NPC
+    dw Player_HandleTouchItem-1             ; Item touched
+    dw Player_HandleTouchEnemyMagic-1       ; Enemy magic touched
+    dw Player_HandleTouchEnemy-1            ; Enemy touched
 
 
 ;============================================================================
@@ -2689,15 +2693,11 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_8998                         ; If so, return.
     JSR #$f859                              ; Execute the handler.
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
+                                            ; IScripts_Begin
 
-;
-; NOTE: MMC1_LoadBankAndJump will skip 3 bytes.
-;
-    db $0c                                  ; Ignore
-    db $41                                  ; Ignore
-    db $82                                  ; [$8994] byte
-
-  @LAB_PRG14__8995:                         ; [$8995]
+  @_afterFarJump:                           ; [$8995]
     LDX a:CurrentSpriteIndex                ; X = current sprite index
 
     ;
@@ -2933,18 +2933,14 @@ Player_HandleTouchNPC:                      ; [$89ef]
     BEQ RETURN_8998                         ; If so, return.
     JSR #$f859                              ; Else, execute the IScript at
                                             ; that value.
-
-;
-; NOTE: MMC1_LoadBankAndJump will skip 3 bytes.
-;
-    db $0c                                  ; Ignore
-    db $41                                  ; Ignore
-    db $82                                  ; [$89fe] byte
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
+                                            ; IScripts_Begin
 
     ;
     ; Clear this sprite.
     ;
-  @LAB_PRG14__89ff:                         ; [$89ff]
+  @_afterFarJump:                           ; [$89ff]
     LDX a:CurrentSpriteIndex                ; X = current sprite index.
     LDA #$ff                                ; A = 0xFF
     STA CurrentSprites_Entities,X           ; Set the entity at that index to
@@ -10246,76 +10242,76 @@ SpriteUpdateHandler__a5d2:                  ; [$a5d2]
 ;     FUN_PRG14__a66b
 ;
 SPRITE_BEHAVIOR_ADDRS:                      ; [$a5e7]
-  dw SpriteBehavior_WalkBackAndForth-1      ; [0]: NPC - Blue dress lady NPC
+    dw SpriteBehavior_WalkBackAndForth-1    ; [0]: NPC - Blue dress lady NPC
                                             ; - Blue nurse lady MPC - Knight
-  dw Sprite_Something_SetReadyIfIdleAndSomething-1 ; [1]:
-  dw SpriteBehavior_MaybeFallingRocks-1     ; [2]:
-  dw SpriteBehavior__9e6d-1                 ; [3]:
-  dw SpriteBehavior_Walking-1               ; [4]: NPC - Start-Stop Walking
+    dw Sprite_Something_SetReadyIfIdleAndSomething-1 ; [1]:
+    dw SpriteBehavior_MaybeFallingRocks-1   ; [2]:
+    dw SpriteBehavior__9e6d-1               ; [3]:
+    dw SpriteBehavior_Walking-1             ; [4]: NPC - Start-Stop Walking
                                             ; Man Enemy - Zozura
     dw $a6ad                                ; [5]:
-  dw SpriteBehavior__9a32-1                 ; [6]:
-  dw SpriteBehavior__abcc-1                 ; [7]:
-  dw SpriteBehavior__abcc-1                 ; [8]:
-  dw SpriteBehavior_Hopper-1                ; [9]: Enemy - Monodron
-  dw SpriteBehavior__9b83-1                 ; [10]: Boss - Dragon boss guy
+    dw SpriteBehavior__9a32-1               ; [6]:
+    dw SpriteBehavior__abcc-1               ; [7]:
+    dw SpriteBehavior__abcc-1               ; [8]:
+    dw SpriteBehavior_Hopper-1              ; [9]: Enemy - Monodron
+    dw SpriteBehavior__9b83-1               ; [10]: Boss - Dragon boss guy
     dw $a6ad                                ; [11]:
-  dw SpriteBehavior__9c89-1                 ; [12]:
-  dw SpriteBehavior__9cf2-1                 ; [13]:
-  dw SpriteBehavior__9da9-1                 ; [14]:
-  dw SpriteBehavior__9f03-1                 ; [15]:
-  dw SpriteBehavior__9fe3-1                 ; [16]:
-  dw SpriteBehavior__a997-1                 ; [17]:
-  dw SpriteBehavior__aa86-1                 ; [18]:
-  dw SpriteBehavior__aafa-1                 ; [19]:
-  dw SpriteBehavior__a8d7-1                 ; [20]:
-  dw SpriteBehavior_StandingStill-1         ; [21]: NPC - Smoking Man NPC -
+    dw SpriteBehavior__9c89-1               ; [12]:
+    dw SpriteBehavior__9cf2-1               ; [13]:
+    dw SpriteBehavior__9da9-1               ; [14]:
+    dw SpriteBehavior__9f03-1               ; [15]:
+    dw SpriteBehavior__9fe3-1               ; [16]:
+    dw SpriteBehavior__a997-1               ; [17]:
+    dw SpriteBehavior__aa86-1               ; [18]:
+    dw SpriteBehavior__aafa-1               ; [19]:
+    dw SpriteBehavior__a8d7-1               ; [20]:
+    dw SpriteBehavior_StandingStill-1       ; [21]: NPC - Smoking Man NPC -
                                             ; Invisible screen 1 event marker
                                             ; NPC - Shop keepers
-  dw SpriteBehavior_MaybeFlyingSomething-1  ; [22]:
-  dw SpriteBehavior__8ecf-1                 ; [23]:
-  dw SpriteBehavior__8f2e-1                 ; [24]:
-  dw SpriteBehavior__8fe7-1                 ; [25]:
-  dw SpriteBehavior__9060-1                 ; [26]:
-  dw SpriteBehavior__a0cb-1                 ; [27]:
-  dw _thunk_SpriteBehavior__a0cb-1          ; [28]:
-  dw SpriteBehavior__a154-1                 ; [29]:
-  dw _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
-  dw SpriteBehavior__MaybeSugata-1          ; [31]:
-  dw SpriteBehavior__92e0-1                 ; [32]:
-  dw SpriteBehavior__93e5-1                 ; [33]:
-  dw SpriteBehavior__9538-1                 ; [34]:
-  dw SpriteBehavior__95c0-1                 ; [35]:
-  dw SpriteBehavior__9632-1                 ; [36]:
-  dw SpriteBehavior__971d-1                 ; [37]:
-  dw SpriteBehavior__97ae-1                 ; [38]:
-  dw SpriteBehavior__9865-1                 ; [39]:
-  dw SpriteBehavior__9497-1                 ; [40]:
-  dw SpriteBehavior__a246-1                 ; [41]:
-  dw SpriteBehavior__a25f-1                 ; [42]:
-  dw SpriteBehavior__a354-1                 ; [43]:
-  dw SpriteBehavior__a384-1                 ; [44]:
-  dw SpriteBehavior__a3bf-1                 ; [45]:
-  dw SpriteBehavior__a3ef-1                 ; [46]:
-  dw SpriteBehavior__a413-1                 ; [47]:
-  dw SpriteBehavior__a437-1                 ; [48]:
-  dw SpriteBehavior__a45b-1                 ; [49]:
-  dw SpriteBehavior__a48a-1                 ; [50]:
-  dw SpriteBehavior__a49d-1                 ; [51]:
-  dw SpriteBehavior__a4b0-1                 ; [52]:
-  dw SpriteBehavior__a4c3-1                 ; [53]:
-  dw SpriteBehavior__a4d6-1                 ; [54]:
-  dw SpriteBehavior__a4fc-1                 ; [55]:
-  dw SpriteBehavior__a4e9-1                 ; [56]:
-  dw SpriteBehavior__a31e-1                 ; [57]:
-  dw SpriteBehavior__a558-1                 ; [58]:
-  dw SpriteBehavior__a56f-1                 ; [59]:
-  dw SpriteBehavior__a586-1                 ; [60]:
-  dw SpriteBehavior__a47f-1                 ; [61]:
-  dw SpriteBehavior__ab67-1                 ; [62]:
-  dw SpriteBehavior__8e77-1                 ; [63]:
-  dw SpriteBehavior__9129-1                 ; [64]:
-  dw SpriteBehavior__91b3-1                 ; [65]:
+    dw SpriteBehavior_MaybeFlyingSomething-1 ; [22]:
+    dw SpriteBehavior__8ecf-1               ; [23]:
+    dw SpriteBehavior__8f2e-1               ; [24]:
+    dw SpriteBehavior__8fe7-1               ; [25]:
+    dw SpriteBehavior__9060-1               ; [26]:
+    dw SpriteBehavior__a0cb-1               ; [27]:
+    dw _thunk_SpriteBehavior__a0cb-1        ; [28]:
+    dw SpriteBehavior__a154-1               ; [29]:
+    dw _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
+    dw SpriteBehavior__MaybeSugata-1        ; [31]:
+    dw SpriteBehavior__92e0-1               ; [32]:
+    dw SpriteBehavior__93e5-1               ; [33]:
+    dw SpriteBehavior__9538-1               ; [34]:
+    dw SpriteBehavior__95c0-1               ; [35]:
+    dw SpriteBehavior__9632-1               ; [36]:
+    dw SpriteBehavior__971d-1               ; [37]:
+    dw SpriteBehavior__97ae-1               ; [38]:
+    dw SpriteBehavior__9865-1               ; [39]:
+    dw SpriteBehavior__9497-1               ; [40]:
+    dw SpriteBehavior__a246-1               ; [41]:
+    dw SpriteBehavior__a25f-1               ; [42]:
+    dw SpriteBehavior__a354-1               ; [43]:
+    dw SpriteBehavior__a384-1               ; [44]:
+    dw SpriteBehavior__a3bf-1               ; [45]:
+    dw SpriteBehavior__a3ef-1               ; [46]:
+    dw SpriteBehavior__a413-1               ; [47]:
+    dw SpriteBehavior__a437-1               ; [48]:
+    dw SpriteBehavior__a45b-1               ; [49]:
+    dw SpriteBehavior__a48a-1               ; [50]:
+    dw SpriteBehavior__a49d-1               ; [51]:
+    dw SpriteBehavior__a4b0-1               ; [52]:
+    dw SpriteBehavior__a4c3-1               ; [53]:
+    dw SpriteBehavior__a4d6-1               ; [54]:
+    dw SpriteBehavior__a4fc-1               ; [55]:
+    dw SpriteBehavior__a4e9-1               ; [56]:
+    dw SpriteBehavior__a31e-1               ; [57]:
+    dw SpriteBehavior__a558-1               ; [58]:
+    dw SpriteBehavior__a56f-1               ; [59]:
+    dw SpriteBehavior__a586-1               ; [60]:
+    dw SpriteBehavior__a47f-1               ; [61]:
+    dw SpriteBehavior__ab67-1               ; [62]:
+    dw SpriteBehavior__8e77-1               ; [63]:
+    dw SpriteBehavior__9129-1               ; [64]:
+    dw SpriteBehavior__91b3-1               ; [65]:
 
 
 ;============================================================================
@@ -10455,14 +10451,14 @@ FUN_PRG14__a6bc:                            ; [$a6bc]
 ;     FUN_PRG14__a6bc
 ;
 SOMETHING_SOMETHING_FUNCS:                  ; [$a6d8]
-  dw Sprite_SomethingFunc__a6ff-1           ; [0]:
-  dw Sprite_SomethingFunc__a72c-1           ; [1]:
-  dw Sprite_SomethingFunc__a772-1           ; [2]:
-  dw Sprite_SomethingFunc__a7e5-1           ; [3]:
-  dw Sprite_SomethingFunc__a86e-1           ; [4]:
-  dw Sprite_SomethingFunc__a74c-1           ; [5]:
-  dw Sprite_SomethingFunc__a84f-1           ; [6]:
-  dw Sprite_SomethingFunc__a6e8-1           ; [7]:
+    dw Sprite_SomethingFunc__a6ff-1         ; [0]:
+    dw Sprite_SomethingFunc__a72c-1         ; [1]:
+    dw Sprite_SomethingFunc__a772-1         ; [2]:
+    dw Sprite_SomethingFunc__a7e5-1         ; [3]:
+    dw Sprite_SomethingFunc__a86e-1         ; [4]:
+    dw Sprite_SomethingFunc__a74c-1         ; [5]:
+    dw Sprite_SomethingFunc__a84f-1         ; [6]:
+    dw Sprite_SomethingFunc__a6e8-1         ; [7]:
 
 
 ;============================================================================
@@ -10681,14 +10677,14 @@ FUN_PRG14__a78c:                            ; [$a78c]
 ;     Sprite_SomethingFunc__a772
 ;
 SPRITE_SOMETHING_ACTIONS:                   ; [$a794]
-  dw Sprite_MoveTowardsPlayerX-1            ; [0]:
-  dw Sprite_ToggleMoveRight-1               ; [1]:
-  dw Sprite_MoveTowardsPlayerY-1            ; [2]:
-  dw Sprite_ChangeYDirection-1              ; [3]:
-  dw CurrentSprite_RandomlyChangeHorizDirection-1 ; [4]:
-  dw CurrentSprite_RandomlyChangeVertDirection-1 ; [5]:
-  dw Sprite_UnsetFalling-1                  ; [6]:
-  dw Sprite_SomethingSpawnMagic-1           ; [7]:
+    dw Sprite_MoveTowardsPlayerX-1          ; [0]:
+    dw Sprite_ToggleMoveRight-1             ; [1]:
+    dw Sprite_MoveTowardsPlayerY-1          ; [2]:
+    dw Sprite_ChangeYDirection-1            ; [3]:
+    dw CurrentSprite_RandomlyChangeHorizDirection-1 ; [4]:
+    dw CurrentSprite_RandomlyChangeVertDirection-1 ; [5]:
+    dw Sprite_UnsetFalling-1                ; [6]:
+    dw Sprite_SomethingSpawnMagic-1         ; [7]:
 
 
 ;============================================================================
@@ -10797,8 +10793,8 @@ Sprite_SomethingFunc__a7e5:                 ; [$a7e5]
 ;     Sprite_SomethingFunc__a7e5
 ;
 USHORT_ARRAY_PRG14__a7f4:                   ; [$a7f4]
-  dw FUN_PRG14__a7f8-1                      ; [0]:
-  dw Sprite_Something__a82a-1               ; [1]:
+    dw FUN_PRG14__a7f8-1                    ; [0]:
+    dw Sprite_Something__a82a-1             ; [1]:
 
 
 ;============================================================================
@@ -12167,14 +12163,14 @@ Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS:                       ; [$ac71]
-  dw Sprites_ReplaceWithCoinDrop-1
+    dw Sprites_ReplaceWithCoinDrop-1
 
 ;
 ; XREFS:
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 USHORT_PRG14__ac73:                         ; [$ac73]
-  dw Sprite_ReplaceWithBreadDrop-1
+    dw Sprite_ReplaceWithBreadDrop-1
 
 
 ;============================================================================
@@ -12700,11 +12696,9 @@ SPRITE_BEHAVIORS_ENEMY_LILITH:              ; [$ae12]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad35]
 ;
 SPRITE_BEHAVIORS_ENEMY_RAIDEN:              ; [$ae16]
-    db $02,$04,$00,$04,$14,$00,$01,$00,$09,$00,$00,$02,$02,$00,$04,$00 ; [$ae
-                                                                       ; 16]
+    db $02,$04,$00,$04,$14,$00,$01,$00,$09,$00,$00,$02,$02,$00,$04,$00 ; [$ae16]
                                                                        ; byte
-    db $00,$01,$03,$00,$30,$2f,$ae,$28,$ae,$04,$00,$15,$07,$02,$00,$00 ; [$ae
-                                                                       ; 26]
+    db $00,$01,$03,$00,$30,$2f,$ae,$28,$ae,$04,$00,$15,$07,$02,$00,$00 ; [$ae26]
                                                                        ; byte
     db $09,$00,$40,$00,$00,$00,$04,$14,$e0,$00,$05,$16,$ae ; [$ae36] byte
 
@@ -12713,17 +12707,13 @@ SPRITE_BEHAVIORS_ENEMY_RAIDEN:              ; [$ae16]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::adb9]
 ;
 SPRITE_BEHAVIORS_ENEMY_UNUSED_EYEBALL:      ; [$ae43]
-    db $02,$04,$00,$11,$00,$00,$01,$00,$00,$03,$00,$30,$53,$ae,$4c,$ae ; [$ae
-                                                                       ; 43]
+    db $02,$04,$00,$11,$00,$00,$01,$00,$00,$03,$00,$30,$53,$ae,$4c,$ae ; [$ae43]
                                                                        ; byte
-    db $04,$00,$01,$0a,$02,$02,$00,$11,$00,$00,$00,$00,$01,$03,$01,$08 ; [$ae
-                                                                       ; 53]
+    db $04,$00,$01,$0a,$02,$02,$00,$11,$00,$00,$00,$00,$01,$03,$01,$08 ; [$ae53]
                                                                        ; byte
-    db $67,$ae,$60,$ae,$04,$00,$01,$0a,$02,$00,$00,$11,$32,$00,$01,$00 ; [$ae
-                                                                       ; 63]
+    db $67,$ae,$60,$ae,$04,$00,$01,$0a,$02,$00,$00,$11,$32,$00,$01,$00 ; [$ae63]
                                                                        ; byte
-    db $00,$02,$03,$00,$11,$32,$00,$00,$00,$01,$00,$01,$0a,$02,$05,$00 ; [$ae
-                                                                       ; 73]
+    db $00,$02,$03,$00,$11,$32,$00,$00,$00,$01,$00,$01,$0a,$02,$05,$00 ; [$ae73]
                                                                        ; byte
     db $11,$0a,$00,$00,$00,$01,$05,$43,$ae  ; [$ae83] byte
 
@@ -12732,11 +12722,9 @@ SPRITE_BEHAVIORS_ENEMY_UNUSED_EYEBALL:      ; [$ae43]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad79]
 ;
 SPRITE_BEHAVIORS_ENEMY_IKEDA:               ; [$ae8c]
-    db $02,$00,$00,$04,$00,$00,$01,$03,$00,$40,$9a,$ae,$93,$ae,$04,$00 ; [$ae
-                                                                       ; 8c]
+    db $02,$00,$00,$04,$00,$00,$01,$03,$00,$40,$9a,$ae,$93,$ae,$04,$00 ; [$ae8c]
                                                                        ; byte
-    db $09,$00,$00,$01,$01,$00,$00,$0a,$08,$00,$02,$04,$00,$09,$00,$c0 ; [$ae
-                                                                       ; 9c]
+    db $09,$00,$00,$01,$01,$00,$00,$0a,$08,$00,$02,$04,$00,$09,$00,$c0 ; [$ae9c]
                                                                        ; byte
     db $00,$02,$05,$8c,$ae                  ; [$aeac] byte
 
@@ -12745,8 +12733,7 @@ SPRITE_BEHAVIORS_ENEMY_IKEDA:               ; [$ae8c]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::adbb]
 ;
 SPRITE_BEHAVIORS_ENEMY_ZOZURA:              ; [$aeb1]
-    db $02,$00,$00,$04,$3c,$60,$00,$05,$b1,$ae,$02,$00,$00,$04,$3c,$60 ; [$ae
-                                                                       ; b1]
+    db $02,$00,$00,$04,$3c,$60,$00,$05,$b1,$ae,$02,$00,$00,$04,$3c,$60 ; [$aeb1]
                                                                        ; byte
     db $00,$02,$04,$00,$04,$14,$60,$00,$05,$b1,$ae ; [$aec1] byte
 
@@ -12755,8 +12742,7 @@ SPRITE_BEHAVIORS_ENEMY_ZOZURA:              ; [$aeb1]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad81]
 ;
 SPRITE_BEHAVIORS_ENEMY_MONODRON:            ; [$aecc]
-    db $02,$04,$00,$15,$05,$00,$09,$00,$00,$01,$02,$02,$00,$00,$15,$14 ; [$ae
-                                                                       ; cc]
+    db $02,$04,$00,$15,$05,$00,$09,$00,$00,$01,$02,$02,$00,$00,$15,$14 ; [$aecc]
                                                                        ; byte
     db $00,$09,$00,$80,$01,$02,$05,$cc,$ae  ; [$aedc] byte
 
@@ -12765,8 +12751,7 @@ SPRITE_BEHAVIORS_ENEMY_MONODRON:            ; [$aecc]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad45]
 ;
 SPRITE_BEHAVIORS_ENEMY_SNOWMAN:             ; [$aee5]
-    db $02,$04,$00,$15,$1e,$02,$00,$00,$04,$00,$00,$02,$03,$00,$20,$f8 ; [$ae
-                                                                       ; e5]
+    db $02,$04,$00,$15,$1e,$02,$00,$00,$04,$00,$00,$02,$03,$00,$20,$f8 ; [$aee5]
                                                                        ; byte
     db $ae,$f1,$ae,$04,$00,$09,$00,$00,$02,$04,$05,$e5,$ae ; [$aef5] byte
 
@@ -12782,11 +12767,9 @@ SPRITE_BEHAVIORS_OBJ_COIN_APPEAR:           ; [$af02]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad39]
 ;
 SPRITE_BEHAVIORS_ENEMY_ZOMBIE:              ; [$af06]
-    db $00,$00,$14,$80,$00,$00,$15,$0a,$02,$04,$00,$00,$28,$80,$00,$00 ; [$af
-                                                                       ; 06]
+    db $00,$00,$14,$80,$00,$00,$15,$0a,$02,$04,$00,$00,$28,$80,$00,$00 ; [$af06]
                                                                        ; byte
-    db $15,$0a,$02,$00,$00,$00,$14,$80,$00,$00,$15,$0a,$02,$01,$00,$00 ; [$af
-                                                                       ; 16]
+    db $15,$0a,$02,$00,$00,$00,$14,$80,$00,$00,$15,$0a,$02,$01,$00,$00 ; [$af16]
                                                                        ; byte
     db $28,$80,$00,$00,$15,$3c,$02,$00,$05,$06,$af ; [$af26] byte
 
@@ -12816,8 +12799,7 @@ SPRITE_BEHAVIORS_ENEMY_NASH:                ; [$af39]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad49]
 ;
 SPRITE_BEHAVIORS_ENEMY_FIRE_GIANT:          ; [$af3d]
-    db $02,$00,$00,$15,$00,$03,$00,$20,$49,$af,$42,$af,$04,$02,$00,$00 ; [$af
-                                                                       ; 3d]
+    db $02,$00,$00,$15,$00,$03,$00,$20,$49,$af,$42,$af,$04,$02,$00,$00 ; [$af3d]
                                                                        ; byte
     db $04,$28,$80,$01,$05,$3d,$af          ; [$af4d] byte
 
@@ -12861,11 +12843,9 @@ SPRITE_BEHAVIORS_EFFECT_BOSS_DEATH:         ; [$af64]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad57]
 ;
 SPRITE_BEHAVIORS_ENEMY_UNUSED_21:           ; [$af68]
-    db $02,$00,$00,$15,$10,$00,$00,$1e,$c0,$00,$02,$00,$00,$15,$10,$00 ; [$af
-                                                                       ; 68]
+    db $02,$00,$00,$15,$10,$00,$00,$1e,$c0,$00,$02,$00,$00,$15,$10,$00 ; [$af68]
                                                                        ; byte
-    db $00,$1e,$00,$01,$02,$00,$00,$01,$08,$02,$07,$00,$01,$08,$05,$68 ; [$af
-                                                                       ; 78]
+    db $00,$1e,$00,$01,$02,$00,$00,$01,$08,$02,$07,$00,$01,$08,$05,$68 ; [$af78]
                                                                        ; byte
     db $af                                  ; [$af88] byte
 
@@ -12882,8 +12862,7 @@ SPRITE_BEHAVIORS_ENEMY_GERIBUTA:            ; [$af89]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad5d]
 ;
 SPRITE_BEHAVIORS_ENEMY_SUGATA:              ; [$af98]
-    db $02,$00,$00,$00,$1e,$00,$01,$00,$15,$1e,$00,$00,$28,$00,$01,$00 ; [$af
-                                                                       ; 98]
+    db $02,$00,$00,$00,$1e,$00,$01,$00,$15,$1e,$00,$00,$28,$00,$01,$00 ; [$af98]
                                                                        ; byte
     db $15,$0a,$00,$00,$14,$80,$00,$00,$1f,$00,$05,$98,$af ; [$afa8] byte
 
@@ -12892,23 +12871,17 @@ SPRITE_BEHAVIORS_ENEMY_SUGATA:              ; [$af98]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad5f]
 ;
 SPRITE_BEHAVIORS_ENEMY_GRIMLOCK:            ; [$afb5]
-    db $02,$00,$00,$15,$10,$02,$00,$02,$01,$00,$15,$14,$02,$00,$00,$15 ; [$af
-                                                                       ; b5]
+    db $02,$00,$00,$15,$10,$02,$00,$02,$01,$00,$15,$14,$02,$00,$00,$15 ; [$afb5]
                                                                        ; byte
-    db $0a,$02,$00,$02,$01,$00,$15,$0e,$02,$00,$00,$15,$10,$02,$00,$02 ; [$af
-                                                                       ; c5]
+    db $0a,$02,$00,$02,$01,$00,$15,$0e,$02,$00,$00,$15,$10,$02,$00,$02 ; [$afc5]
                                                                        ; byte
-    db $01,$00,$15,$12,$02,$00,$00,$15,$00,$03,$01,$10,$ff,$af,$e5,$af ; [$af
-                                                                       ; d5]
+    db $01,$00,$15,$12,$02,$00,$00,$15,$00,$03,$01,$10,$ff,$af,$e5,$af ; [$afd5]
                                                                        ; byte
-    db $04,$00,$00,$28,$80,$00,$03,$00,$10,$f5,$af,$eb,$af,$05,$b5,$af ; [$af
-                                                                       ; e5]
+    db $04,$00,$00,$28,$80,$00,$03,$00,$10,$f5,$af,$eb,$af,$05,$b5,$af ; [$afe5]
                                                                        ; byte
-    db $04,$00,$09,$00,$00,$01,$02,$05,$b5,$af,$04,$07,$09,$00,$00,$28 ; [$af
-                                                                       ; f5]
+    db $04,$00,$09,$00,$00,$01,$02,$05,$b5,$af,$04,$07,$09,$00,$00,$28 ; [$aff5]
                                                                        ; byte
-    db $00,$02,$03,$00,$10,$11,$b0,$07,$b0,$05,$b5,$af,$04,$00,$09,$00 ; [$b0
-                                                                       ; 05]
+    db $00,$02,$03,$00,$10,$11,$b0,$07,$b0,$05,$b5,$af,$04,$00,$09,$00 ; [$b005]
                                                                        ; byte
     db $00,$02,$02,$05,$b5,$af              ; [$b015] byte
 
@@ -12924,11 +12897,9 @@ SPRITE_BEHAVIORS_ENEMY_GIANT_BEES:          ; [$b01b]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad63]
 ;
 SPRITE_BEHAVIORS_ENEMY_MYCONID:             ; [$b01f]
-    db $02,$00,$00,$00,$3c,$40,$00,$00,$15,$1e,$02,$00,$00,$00,$3c,$40 ; [$b0
-                                                                       ; 1f]
+    db $02,$00,$00,$00,$3c,$40,$00,$00,$15,$1e,$02,$00,$00,$00,$3c,$40 ; [$b01f]
                                                                        ; byte
-    db $00,$00,$15,$1e,$00,$00,$28,$80,$00,$00,$09,$00,$80,$00,$02,$00 ; [$b0
-                                                                       ; 2f]
+    db $00,$00,$15,$1e,$00,$00,$28,$80,$00,$00,$09,$00,$80,$00,$02,$00 ; [$b02f]
                                                                        ; byte
     db $15,$1e,$05,$1f,$b0                  ; [$b03f] byte
 
@@ -12944,8 +12915,7 @@ SPRITE_BEHAVIORS_ENEMY_NAGA:                ; [$b044]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad69]
 ;
 SPRITE_BEHAVIORS_ENEMY_GIANT_STRIDER:       ; [$b048]
-    db $02,$00,$00,$00,$3c,$00,$01,$00,$09,$00,$00,$01,$02,$05,$48,$b0 ; [$b0
-                                                                       ; 48]
+    db $02,$00,$00,$00,$3c,$00,$01,$00,$09,$00,$00,$01,$02,$05,$48,$b0 ; [$b048]
                                                                        ; byte
 
 ;
@@ -13010,11 +12980,9 @@ SPRITE_BEHAVIORS_ENEMY_SIR_GAWAINE_WOLFMAN: ; [$b07a]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad6d]
 ;
 SPRITE_BEHAVIORS_ENEMY_MASKMAN:             ; [$b07e]
-    db $02,$00,$00,$00,$14,$00,$01,$00,$09,$00,$00,$01,$02,$02,$00,$00 ; [$b0
-                                                                       ; 7e]
+    db $02,$00,$00,$00,$14,$00,$01,$00,$09,$00,$00,$01,$02,$02,$00,$00 ; [$b07e]
                                                                        ; byte
-    db $00,$14,$00,$01,$00,$09,$00,$00,$01,$02,$02,$00,$00,$00,$14,$00 ; [$b0
-                                                                       ; 8e]
+    db $00,$14,$00,$01,$00,$09,$00,$00,$01,$02,$02,$00,$00,$00,$14,$00 ; [$b08e]
                                                                        ; byte
     db $01,$00,$09,$00,$00,$01,$01,$05,$7e,$b0 ; [$b09e] byte
 
@@ -13030,11 +12998,9 @@ SPRITE_BEHAVIORS_ENEMY_UNUSED_29:           ; [$b0a8]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad4f]
 ;
 SPRITE_BEHAVIORS_BOSS_ROKUSUTAHN:           ; [$b0ac]
-    db $02,$00,$00,$00,$14,$00,$01,$02,$00,$02,$01,$00,$00,$14,$80,$00 ; [$b0
-                                                                       ; ac]
+    db $02,$00,$00,$00,$14,$00,$01,$02,$00,$02,$01,$00,$00,$14,$80,$00 ; [$b0ac]
                                                                        ; byte
-    db $02,$00,$00,$00,$08,$00,$01,$03,$00,$10,$ca,$b0,$d0,$b0,$00,$09 ; [$b0
-                                                                       ; bc]
+    db $02,$00,$00,$00,$08,$00,$01,$03,$00,$10,$ca,$b0,$d0,$b0,$00,$09 ; [$b0bc]
                                                                        ; byte
     db $00,$00,$00,$02,$05,$ac,$b0          ; [$b0cc] byte
 
@@ -13057,11 +13023,9 @@ SPRITE_BEHAVIORS_BOSS_RIPASHEIKU:           ; [$b0d7]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad89]
 ;
 SPRITE_BEHAVIORS_BOSS_ZORADOHNA:            ; [$b0db]
-    db $02,$00,$00,$01,$3c,$00,$09,$00,$00,$00,$02,$02,$06,$00,$13,$08 ; [$b0
-                                                                       ; db]
+    db $02,$00,$00,$01,$3c,$00,$09,$00,$00,$00,$02,$02,$06,$00,$13,$08 ; [$b0db]
                                                                        ; byte
-    db $00,$02,$02,$00,$00,$12,$00,$00,$01,$02,$03,$00,$20,$fc,$b0,$f5 ; [$b0
-                                                                       ; eb]
+    db $00,$02,$02,$00,$00,$12,$00,$00,$01,$02,$03,$00,$20,$fc,$b0,$f5 ; [$b0eb]
                                                                        ; byte
     db $b0,$04,$02,$00,$00,$09,$00,$00,$02,$01,$05,$ed,$b0 ; [$b0fb] byte
 
@@ -13127,8 +13091,7 @@ SPRITE_BEHAVIORS_NPC_WALKING_MAN_1:         ; [$b124]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad97]
 ;
 SPRITE_BEHAVIORS_NPC_UNUSED_BLUE_LADY:      ; [$b131]
-    db $00,$04,$50,$80,$00,$02,$01,$00,$04,$14,$80,$00,$02,$01,$00,$04 ; [$b1
-                                                                       ; 31]
+    db $00,$04,$50,$80,$00,$02,$01,$00,$04,$14,$80,$00,$02,$01,$00,$04 ; [$b131]
                                                                        ; byte
     db $50,$80,$00,$02,$01,$05,$31,$b1      ; [$b141] byte
 
@@ -13137,8 +13100,7 @@ SPRITE_BEHAVIORS_NPC_UNUSED_BLUE_LADY:      ; [$b131]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ad99]
 ;
 SPRITE_BEHAVIORS_NPC_UNUSED_CHILD:          ; [$b149]
-    db $00,$04,$3c,$c0,$00,$00,$09,$00,$00,$01,$03,$00,$09,$00,$00,$01 ; [$b1
-                                                                       ; 49]
+    db $00,$04,$3c,$c0,$00,$00,$09,$00,$00,$01,$03,$00,$09,$00,$00,$01 ; [$b149]
                                                                        ; byte
     db $03,$00,$04,$0a,$c0,$00,$00,$15,$05,$02,$01,$05,$49,$b1 ; [$b159] byte
 
@@ -13168,11 +13130,9 @@ SPRITE_BEHAVIORS_NPC_PRIEST:                ; [$b173]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::ada1]
 ;
 SPRITE_BEHAVIORS_NPC_KING:                  ; [$b17d]
-    db $00,$15,$00,$03,$00,$40,$87,$b1,$80,$b1,$04,$06,$ba,$00,$08,$00 ; [$b1
-                                                                       ; 7d]
+    db $00,$15,$00,$03,$00,$40,$87,$b1,$80,$b1,$04,$06,$ba,$00,$08,$00 ; [$b17d]
                                                                        ; byte
-    db $15,$00,$03,$00,$48,$8f,$b1,$96,$b1,$04,$06,$ba,$00,$f8,$05,$7d ; [$b1
-                                                                       ; 8d]
+    db $15,$00,$03,$00,$48,$8f,$b1,$96,$b1,$04,$06,$ba,$00,$f8,$05,$7d ; [$b18d]
                                                                        ; byte
     db $b1                                  ; [$b19d] byte
 
@@ -13230,8 +13190,7 @@ SPRITE_BEHAVIORS_NPC_MEAT_SALESMAN:         ; [$b1c6]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::adaf]
 ;
 SPRITE_BEHAVIORS_NPC_LADY_BLUE_DRESS_WITH_CUP: ; [$b1cc]
-    db $00,$00,$c0,$80,$00,$00,$15,$05,$00,$00,$28,$80,$00,$02,$01,$05 ; [$b1
-                                                                       ; cc]
+    db $00,$00,$c0,$80,$00,$00,$15,$05,$00,$00,$28,$80,$00,$02,$01,$05 ; [$b1cc]
                                                                        ; byte
     db $cc,$b1                              ; [$b1dc] byte
 
@@ -13255,8 +13214,7 @@ SPRITE_BEHAVIORS_NPC_WALKING_WOMAN_1:       ; [$b1eb]
 ;     SPRITE_BEHAVIOR_STATE_ADDRS [$PRG14::adb7]
 ;
 SPRITE_BEHAVIORS_NPC_WALKING_WOMAN_2:       ; [$b1fa]
-    db $00,$00,$3c,$80,$00,$02,$01,$00,$00,$50,$80,$00,$02,$01,$05,$fa ; [$b1
-                                                                       ; fa]
+    db $00,$00,$3c,$80,$00,$02,$01,$00,$00,$50,$80,$00,$02,$01,$05,$fa ; [$b1fa]
                                                                        ; byte
     db $b1                                  ; [$b20a] byte
 
@@ -13636,6 +13594,17 @@ SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
 
 ;============================================================================
 ; The category of a sprite entity.
+;
+; This is used to categorize a sprite entity into the following:
+;
+; 0 = Enemy
+; 1 = Dropped item
+; 2 = NPC
+; 3 = Special effect
+; 4 = Game trigger
+; 5 = Item
+; 6 = Magic effect
+; 7 = Boss
 ;============================================================================
 
 ;
@@ -13647,7 +13616,7 @@ SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
 ;     Player_HitSpriteWithWeapon
 ;     Sprite_CheckHitByCastMagic
 ;     WasPlayerHitByMagic
-;     Sprites_HasBigEnemy
+;     Sprites_HasBoss
 ;
 SPRITE_CATEGORIES_BY_ENTITY:                ; [$b544]
     db SPRITE_ENEMY                         ; [0]:
@@ -14137,12 +14106,12 @@ SPRITE_ENTITY_DAMAGES:                      ; [$b6d7]
     db $11                                  ; [33]: Wolfman
     db $12                                  ; [34]: Yareeka
     db $09                                  ; [35]: Magman
-    db $10                                  ; [36]: Unused enemy (curly-
-                                            ; tailed guy with spear)
+    db $10                                  ; [36]: Unused enemy
+                                            ; (curly-tailed guy with spear)
     db $0b                                  ; [37]: Unused enemy
     db $07                                  ; [38]: Ikeda
-    db $0a                                  ; [39]: Unused (blue muppet-
-                                            ; looking guy)
+    db $0a                                  ; [39]: Unused (blue
+                                            ; muppet-looking guy)
     db $10                                  ; [40]: Lamprey
     db $0c                                  ; [41]: Unused enemy
     db $05                                  ; [42]: Monodron
@@ -14370,7 +14339,7 @@ MAGIC_COSTS:                                ; [$b7a9]
 ;     TODO
 ;
 ; XREFS:
-;     Game_Something_InitState
+;     Game_InitStateForStartScreen
 ;============================================================================
 Init_PlayerInventoryState:                  ; [$b7ae]
     LDA #$00
@@ -14866,7 +14835,7 @@ SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     FUN_PRG15_MIRROR__ec58
-;     Player_DrawArmor
+;     Player_DrawBody
 ;============================================================================
 CurrentSprite_CalculateVisibility_MaybeWithArg: ; [$b9ed]
     LDA #$00
@@ -14971,7 +14940,7 @@ Player_GetNormalizedWeaponID:               ; [$ba4b]
 ;         The magic, unset.
 ;
 ; XREFS:
-;     Something_InitOrResetState
+;     Game_InitStateForSpawn
 ;============================================================================
 Player_ClearVisibleMagic:                   ; [$ba55]
     LDA #$ff
@@ -15220,29 +15189,29 @@ CAST_MAGIC_START_X:                         ; [$baf2]
 ;     CastMagic_HandleSpell
 ;
 CAST_MAGIC_HANDLERS:                        ; [$baf7]
-  dw CastMagic_HandleDeluge-1               ; [0]: Deluge
-  dw CastMagic_HandleThunderOrDeath-1       ; [1]: Thunder
-  dw CastMagic_HandleFire-1                 ; [2]: Fire
-  dw _thunk_CastMagic_HandleThunderOrDeath-1 ; [3]: Death
-  dw CastMagic_HandleTilte-1                ; [4]: Tilte
-  dw CastMagic__bc66-1                      ; [5]:
-  dw CastMagic_HandleThunderExplosion-1     ; [6]:
-  dw CastMagic_HandleFireExplosion-1        ; [7]:
-  dw CastMagic__bc90-1                      ; [8]:
+    dw CastMagic_HandleDeluge-1             ; [0]: Deluge
+    dw CastMagic_HandleThunderOrDeath-1     ; [1]: Thunder
+    dw CastMagic_HandleFire-1               ; [2]: Fire
+    dw _thunk_CastMagic_HandleThunderOrDeath-1 ; [3]: Death
+    dw CastMagic_HandleTilte-1              ; [4]: Tilte
+    dw CastMagic__bc66-1                    ; [5]:
+    dw CastMagic_HandleThunderExplosion-1   ; [6]:
+    dw CastMagic_HandleFireExplosion-1      ; [7]:
+    dw CastMagic__bc90-1                    ; [8]:
     dw $baeb                                ; [9]:
-  dw CastMagic__bc99-1                      ; [10]:
-  dw CastMagic_HandleTilteExplosion-1       ; [11]:
+    dw CastMagic__bc99-1                    ; [10]:
+    dw CastMagic_HandleTilteExplosion-1     ; [11]:
 
 ;
 ; XREFS:
 ;     Sprite_CheckHitByCastMagic
 ;
 MagicHitsHandler:                           ; [$bb0f]
-  dw CastMagic_HitHandler_Deluge-1          ; [0]: Deluge
-  dw CastMagic_HitHandler_Thunder-1         ; [1]: Thunder
-  dw CastMagic_HitHandler_Fire-1            ; [2]: Fire
-  dw CastMagic_HitHandler_Death-1           ; [3]: Death
-  dw CastMagic_HitHandler_Tilte-1           ; [4]: Tilte
+    dw CastMagic_HitHandler_Deluge-1        ; [0]: Deluge
+    dw CastMagic_HitHandler_Thunder-1       ; [1]: Thunder
+    dw CastMagic_HitHandler_Fire-1          ; [2]: Fire
+    dw CastMagic_HitHandler_Death-1         ; [3]: Death
+    dw CastMagic_HitHandler_Tilte-1         ; [4]: Tilte
     dw $8b71                                ; [5]:
     dw $8b71                                ; [6]:
     dw $8b71                                ; [7]:
@@ -15256,18 +15225,18 @@ MagicHitsHandler:                           ; [$bb0f]
 ;     CastMagic_Maybe_FinishHandler
 ;
 MagicHitsHandler_12_:                       ; [$bb27]
-  dw MagicHitHandler__c39b-1                ; [12]:
-  dw MagicHitHandler__c3a7-1                ; [13]:
-  dw MagicHitHandler__c3b6-1                ; [14]:
-  dw MagicHitHandler__c3c9-1                ; [15]:
-  dw MagicHitHandler__c3d6-1                ; [16]:
-  dw MagicHitHandler__c3fb-1                ; [17]:
-  dw MagicHitHandler__c3a7-1                ; [18]:
-  dw MagicHitHandler__c3b6-1                ; [19]:
-  dw MagicHitHandler__c3fb-1                ; [20]:
+    dw MagicHitHandler__c39b-1              ; [12]:
+    dw MagicHitHandler__c3a7-1              ; [13]:
+    dw MagicHitHandler__c3b6-1              ; [14]:
+    dw MagicHitHandler__c3c9-1              ; [15]:
+    dw MagicHitHandler__c3d6-1              ; [16]:
+    dw MagicHitHandler__c3fb-1              ; [17]:
+    dw MagicHitHandler__c3a7-1              ; [18]:
+    dw MagicHitHandler__c3b6-1              ; [19]:
+    dw MagicHitHandler__c3fb-1              ; [20]:
     dw $baeb                                ; [21]:
-  dw MagicHitHandler__c403-1                ; [22]:
-  dw MagicHitHandler__c42c-1                ; [23]:
+    dw MagicHitHandler__c403-1              ; [22]:
+    dw MagicHitHandler__c42c-1              ; [23]:
 
 
 ;============================================================================

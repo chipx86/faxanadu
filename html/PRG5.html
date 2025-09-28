@@ -6,12 +6,18 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <style>
 
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 body {
   background: #1c212d;
   color: white;
-  font-family: Roboto Mono;
-  font-size: 9.5pt;
   padding: 0.5em;
+}
+
+body, * {
+  font-family: "Roboto Mono", monospace;
+  font-size: 9.5pt;
+  font-style: normal;
 }
 
 a:link,
@@ -22,7 +28,7 @@ a:visited {
 pre {
   display: grid;
   grid-template-columns: minmax(70ch, max-content) 1fr;
-  gap: 0 4ch;
+  gap: 0 4em;
   margin: 0;
   padding: 0;
 }
@@ -30,7 +36,7 @@ pre {
 .equs {
   display: grid;
   grid-template-columns: minmax(50ch, max-content) min-content auto;
-  gap: 0 1ch;
+  gap: 0 1em;
 }
 
 .l {
@@ -50,6 +56,10 @@ pre {
   color: #6fafb5;
 }
 
+.c {
+  margin-left: 4em;
+}
+
 .c, .ce {
   color: #8aa9ac;
 }
@@ -60,7 +70,7 @@ pre {
 }
 
 .lla {
-  margin-left: 2ch;
+  margin-left: 2em;
 }
 
 .la,
@@ -82,9 +92,8 @@ pre {
 
 .i {
   color: #f26969;
-  display: inline-block;
-  margin-left: 4ch;
-  min-width: 3ch;
+  margin-left: 4em;
+  min-width: 3em;
 }
 
 .o {
@@ -213,20 +222,20 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#CurrentSoundIndex">CurrentSoundIndex</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<div class="c">    ;
-    ; XREFS:
-    ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
-    ;
+<div class="c">;
+; XREFS:
+;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
+;
 </div><span class="l"><a name="Audio_HandleIsPaused" href="#Audio_HandleIsPaused" class="la">Audio_HandleIsPaused:</a><span class="ce">; [$802e]</span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#Audio_HandleNoMusic">Audio_HandleNoMusic</a></span></span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o">#$80</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#PauseFlag">PauseFlag</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#ResetAudio">ResetAudio</a></span></span></span>
 <span class="l"></span>
-<div class="c">    ;
-    ; XREFS:
-    ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
-    ;
+<div class="c">;
+; XREFS:
+;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
+;
 </div><span class="l"><a name="Audio_HandleNoMusic" href="#Audio_HandleNoMusic" class="la">Audio_HandleNoMusic:</a><span class="ce">; [$8038]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
@@ -275,10 +284,10 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#NOISE_HI">NOISE_HI</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<div class="c">    ;
-    ; XREFS:
-    ;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
-    ;
+<div class="c">;
+; XREFS:
+;     <a href="#Audio_HandleOnInterrupt">Audio_HandleOnInterrupt</a>
+;
 </div><span class="l"><a name="Audio_HandleMusicIsFF" href="#Audio_HandleMusicIsFF" class="la">Audio_HandleMusicIsFF:</a><span class="ce">; [$8079]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentMusic">CurrentMusic</a></span></span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o">#$80</span></span></span>
@@ -654,24 +663,24 @@ pre {
 ;     <a href="#FUN_PRG5__823a">FUN_PRG5__823a</a>
 ;
 </div><span class="l"><a name="USHORT_PRG5__826a" href="#USHORT_PRG5__826a" class="la">USHORT_PRG5__826a:</a><span class="ce">; [$826a]</span></span>
-<span class="l">  dw FUN_PRG5__8408-1</span>
-<span class="l">  dw FUN_PRG5__84a5-1</span>
-<span class="l">  dw FUN_PRG5__841f-1</span>
-<span class="l">  dw FUN_PRG5__8458-1</span>
-<span class="l">  dw FUN_PRG5__843d-1</span>
-<span class="l">  dw thunk_FUN_PRG5__823a-1</span>
-<span class="l">  dw FUN_PRG5__848f-1</span>
-<span class="l">  dw FUN_PRG5__84d0-1</span>
-<span class="l">  dw FUN_PRG5__850e-1</span>
-<span class="l">  dw FUN_PRG5__8502-1</span>
-<span class="l">  dw FUN_PRG5__84f0-1</span>
-<span class="l">  dw FUN_PRG5__84b7-1</span>
-<span class="l">  dw FUN_PRG5__8295-1</span>
-<span class="l">  dw FUN_PRG5__8483-1</span>
-<span class="l">  dw FUN_PRG5__8517-1</span>
-<span class="l">  dw FUN_PRG5__8523-1</span>
-<span class="l">  dw FUN_PRG5__852f-1</span>
-<span class="l">  dw FUN_PRG5__853b-1</span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8408-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__84a5-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__841f-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8458-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__843d-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">thunk_FUN_PRG5__823a-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__848f-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__84d0-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__850e-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8502-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__84f0-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__84b7-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8295-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8483-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8517-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__8523-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__852f-1</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">FUN_PRG5__853b-1</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -691,9 +700,9 @@ pre {
 <span class="l"><span><span class="i">AND</span> <span class="o">#$7f</span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#FUN_PRG5__8298">FUN_PRG5__8298</a></span></span></span>
 <span class="l"></span>
-<div class="c">    ;
-    ; v-- Fall through --v
-    ;
+<div class="c">;
+; v-- Fall through --v
+;
 </div></pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -708,9 +717,9 @@ pre {
 </div><span class="l"><a name="FUN_PRG5__8295" href="#FUN_PRG5__8295" class="la">FUN_PRG5__8295:</a><span class="ce">; [$8295]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG5__8544">FUN_PRG5__8544</a></span></span></span>
 <span class="l"></span>
-<div class="c">    ;
-    ; v-- Fall through --v
-    ;
+<div class="c">;
+; v-- Fall through --v
+;
 </div></pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================

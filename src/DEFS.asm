@@ -584,9 +584,9 @@ MUSIC_MAYBE_TREE_WORLD                             EQU $04
 MUSIC_MAYBE_FOG                                    EQU $05
 MUSIC_MAYBE_TOWER                                  EQU $06
 MUSIC_EOLIS                                        EQU $07
-MUSIC_MAYBE_TITLESCREEN                            EQU $08
+MUSIC_DEATH                                        EQU $08
 MUSIC_MAYBE_TOWN_BUILDING                          EQU $09
-MUSIC_0x0A                                         EQU $0a
+MUSIC_BOSS                                         EQU $0a
 MUSIC_0x0B                                         EQU $0b
 MUSIC_MAYBE_ENDING                                 EQU $0c
 MUSIC_MAYBE_TEMPLE_1                               EQU $0d
@@ -830,7 +830,7 @@ SOUND_FILL_HP_OR_MANA                              EQU $13
 SOUND_TILTE_MAGIC                                  EQU $14
 SOUND_MAYBE_STEP_SOUND                             EQU $15
 SOUND_PLAYER_DEATH                                 EQU $16
-SOUND_MAYBE_PATH_TO_MASCON_OPENED                  EQU $17
+SOUND_DROP_LADDER                                  EQU $17
 SOUND_0x18                                         EQU $18
 SOUND_MAYBE_GOLD_CHANGE                            EQU $19
 SOUND_USE_SPECIAL_ITEM_2                           EQU $1a

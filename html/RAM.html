@@ -6,12 +6,18 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <style>
 
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 body {
   background: #1c212d;
   color: white;
-  font-family: Roboto Mono;
-  font-size: 9.5pt;
   padding: 0.5em;
+}
+
+body, * {
+  font-family: "Roboto Mono", monospace;
+  font-size: 9.5pt;
+  font-style: normal;
 }
 
 a:link,
@@ -22,7 +28,7 @@ a:visited {
 pre {
   display: grid;
   grid-template-columns: minmax(70ch, max-content) 1fr;
-  gap: 0 4ch;
+  gap: 0 4em;
   margin: 0;
   padding: 0;
 }
@@ -30,7 +36,7 @@ pre {
 .equs {
   display: grid;
   grid-template-columns: minmax(50ch, max-content) min-content auto;
-  gap: 0 1ch;
+  gap: 0 1em;
 }
 
 .l {
@@ -50,6 +56,10 @@ pre {
   color: #6fafb5;
 }
 
+.c {
+  margin-left: 4em;
+}
+
 .c, .ce {
   color: #8aa9ac;
 }
@@ -60,7 +70,7 @@ pre {
 }
 
 .lla {
-  margin-left: 2ch;
+  margin-left: 2em;
 }
 
 .la,
@@ -82,9 +92,8 @@ pre {
 
 .i {
   color: #f26969;
-  display: inline-block;
-  margin-left: 4ch;
-  min-width: 3ch;
+  margin-left: 4em;
+  min-width: 3em;
 }
 
 .o {
@@ -149,11 +158,11 @@ pre {
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
-;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteNotOnScreen">Maybe_IsSpriteNotOnScreen</a>
+;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleKnockback">Player_HandleKnockback</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ShieldState">Player_Something_ShieldState</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
@@ -200,13 +209,12 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
-;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e852">LAB_PRG15_MIRROR__e852</a>
-;     [$PRG15_MIRROR::e852]
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e852">LAB_PRG15_MIRROR__e852</a> [$PRG15_MIRROR::e852]
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
 ;
 </div><span class="l"><a name="Temp_Addr" href="#Temp_Addr" class="la">Temp_Addr:</a><span class="ce">; [$0002]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0002] byte</span></span>
@@ -231,8 +239,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
 ;
 </div><span class="l"><a name="Temp_Addr.U" href="#Temp_Addr.U" class="la">Temp_Addr.U:</a><span class="ce">; [$0003]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0003] byte</span></span>
@@ -364,9 +372,9 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d2ce">FUN_PRG15_MIRROR__d2ce</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;
 </div><span class="l"><a name="ScrollHelp_Pixel" href="#ScrollHelp_Pixel" class="la">ScrollHelp_Pixel:</a><span class="ce">; [$000c]</span></span>
@@ -384,10 +392,10 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d82d">FUN_PRG15_MIRROR__d82d</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#PPU_SetAddrForTextPos">PPU_SetAddrForTextPos</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetPPUAddrForXYTransformed">Something_SetPPUAddrForXYTransformed</a>
 ;
 </div><span class="l"><a name="ScrollHelp_Screen" href="#ScrollHelp_Screen" class="la">ScrollHelp_Screen:</a><span class="ce">; [$000d]</span></span>
@@ -409,10 +417,10 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Screen_SetupSprites">Screen_SetupSprites</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;
 </div><span class="l"><a name="Maybe_SpritesLoadedState" href="#Maybe_SpritesLoadedState" class="la">Maybe_SpritesLoadedState:</a><span class="ce">; [$000e]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$000e] LoadedState</span></span>
@@ -427,33 +435,52 @@ pre {
 </div><span class="l"><a name="Game_FrameToggle" href="#Game_FrameToggle" class="la">Game_FrameToggle:</a><span class="ce">; [$0010]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0010] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; The previous ROM bank saved before switching to a new bank.
+;
+; This allows for pushing to a new bank and then popping
+; back to this bank.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#MMC1_LoadBank15">MMC1_LoadBank15</a>
+;     <a href="PRG15_MIRROR.html#Game_InitMMCAndBank">Game_InitMMCAndBank</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_RestorePrevPRGBank">MMC1_RestorePrevPRGBank</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_SavePRGBankAndUpdateTo">MMC1_SavePRGBankAndUpdateTo</a>
 ;
-</div><span class="l"><a name="PrevROMBank" href="#PrevROMBank" class="la">PrevROMBank:</a><span class="ce">; [$0011]</span></span>
+</div><span class="l"><a name="SavedROMBank" href="#SavedROMBank" class="la">SavedROMBank:</a><span class="ce">; [$0011]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0011] ROMBank</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; State used to help synchronize MMC1 operations.
+;
+;   0 = Idle
+;   1 = Writing to MMC1 (switching banks).
+; &gt; 1 = MMC1 is re-initializing.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_InitMMCAndBank">Game_InitMMCAndBank</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_EnsurePRG">MMC1_EnsurePRG</a>
-;     <a href="PRG15_MIRROR.html#MMC1_LoadBank15">MMC1_LoadBank15</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a>
 ;
-</div><span class="l"><a name="BYTE_0012" href="#BYTE_0012" class="la">BYTE_0012:</a><span class="ce">; [$0012]</span></span>
+</div><span class="l"><a name="MMC1_ShiftSync" href="#MMC1_ShiftSync" class="la">MMC1_ShiftSync:</a><span class="ce">; [$0012]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0012] byte</span></span>
 <span class="l"></span>
-<div class="c">;
+<span class="l"></span>
+<div class="cp">;============================================================================
 ; Whether to process standard behavior on interrupts.
 ;
 ; If 1, then the interrupt handler will manage game
 ; state, audio, and read button inputs.
 ;
 ; If 0, this will all be paused.
-;
-;
+;============================================================================
+</div><span class="l"></span>
+<div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb17">FUN_PRG15_MIRROR__cb17</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb1f">FUN_PRG15_MIRROR__cb1f</a>
@@ -471,7 +498,10 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_WaitUntilFlushed">PPU_WaitUntilFlushed</a>
 ;
 </div><span class="l"><a name="PauseInterruptCounter" href="#PauseInterruptCounter" class="la">PauseInterruptCounter:</a><span class="ce">; [$0014]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0014] byte</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0014] byte</span></span>
+<span class="l"></span>
+<span class="l"><a name="UNUSED_0015" href="#UNUSED_0015" class="la">UNUSED_0015:</a><span class="ce">; [$0015]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0015] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -571,7 +601,6 @@ pre {
 ;     <a href="PRG12.html#FUN_PRG12__84ed">FUN_PRG12__84ed</a>
 ;     <a href="PRG12.html#FUN_PRG12__8b71">FUN_PRG12__8b71</a>
 ;     <a href="PRG12.html#FUN_PRG12__9969">FUN_PRG12__9969</a>
-;     <a href="PRG12.html#FUN_PRG12__9f44">FUN_PRG12__9f44</a>
 ;     <a href="PRG12.html#IScriptAction_AddInventoryItem">IScriptAction_AddInventoryItem</a>
 ;     <a href="PRG12.html#IScriptAction_ShowBuySellMenu">IScriptAction_ShowBuySellMenu</a>
 ;     <a href="PRG12.html#IScriptAction_ShowPassword">IScriptAction_ShowPassword</a>
@@ -583,15 +612,16 @@ pre {
 ;     <a href="PRG12.html#PasswordScreen_GetDPadBits">PasswordScreen_GetDPadBits</a>
 ;     <a href="PRG12.html#Shop_Something_9956">Shop_Something_9956</a>
 ;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_CheckHandlePressUpOnNPC">Player_CheckHandlePressUpOnNPC</a>
 ;     <a href="PRG15_MIRROR.html#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a>
 ;     <a href="PRG15_MIRROR.html#EndGame_MovePlayerTowardKing">EndGame_MovePlayerTowardKing</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fc65">FUN_PRG15_MIRROR__fc65</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckPauseGame">GameLoop_CheckPauseGame</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
+;     <a href="PRG15_MIRROR.html#Game_ShowStartScreen">Game_ShowStartScreen</a>
 ;     <a href="PRG15_MIRROR.html#Input_HandleOnInterrupt">Input_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleAttack">Player_CheckHandleAttack</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
@@ -613,12 +643,12 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#SplashAnimation_SomethingOutroUpdate">SplashAnimation_SomethingOutroUpdate</a>
 ;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb9a">FUN_PRG15_MIRROR__cb9a</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecGloveDuration">Game_DecGloveDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecHourGlassDuration">Game_DecHourGlassDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecOintmentDuration">Game_DecOintmentDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecWingBootsDuration">Game_DecWingBootsDuration</a>
+;     <a href="PRG15_MIRROR.html#Game_WaitForOAMReset">Game_WaitForOAMReset</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c39b">MagicHitHandler__c39b</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3a7">MagicHitHandler__c3a7</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3b6">MagicHitHandler__c3b6</a>
@@ -637,7 +667,7 @@ pre {
 ;
 ;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb9a">FUN_PRG15_MIRROR__cb9a</a>
+;     <a href="PRG15_MIRROR.html#Game_WaitForOAMReset">Game_WaitForOAMReset</a>
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;
 </div><span class="l"><a name="Game_NeedOAMReset" href="#Game_NeedOAMReset" class="la">Game_NeedOAMReset:</a><span class="ce">; [$001b]</span></span>
@@ -674,6 +704,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Clear">PPUBuffer_Clear</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
@@ -682,7 +713,6 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_SomethingCompareTo24">PPUBuffer_SomethingCompareTo24</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_WaitUntilClear">PPUBuffer_WaitUntilClear</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WaitUntilFlushed">PPU_WaitUntilFlushed</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;
 </div><span class="l"><a name="PPUBuffer_Offset" href="#PPUBuffer_Offset" class="la">PPUBuffer_Offset:</a><span class="ce">; [$001f]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$001f] byte</span></span>
@@ -705,6 +735,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
 ;     <a href="PRG15_MIRROR.html#Game_AnimateFog_UpdatePPU">Game_AnimateFog_UpdatePPU</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Append0">PPUBuffer_Append0</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Clear">PPUBuffer_Clear</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
@@ -716,9 +747,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_WaitUntilFlushed">PPU_WaitUntilFlushed</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawDeathAnimation">Player_DrawDeathAnimation</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawItemInternal">Player_DrawItemInternal</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
-;     {{@SYMBOL:
-;     PRG15_MIRROR::TextBox_FillPlaceholderTextAtLineWithStartChar@}}
+;     <a href="PRG15_MIRROR.html#TextBox_FillPlaceholderTextAtLineWithStartChar">TextBox_FillPlaceholderTextAtLineWithStartChar</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_WriteLineOfChars">TextBox_Maybe_WriteLineOfChars</a>
 ;     <a href="PRG15_MIRROR.html#UI_ClearSelectedItemPic">UI_ClearSelectedItemPic</a>
 ;     <a href="PRG15_MIRROR.html#UI_DrawDigitsZeroPadded">UI_DrawDigitsZeroPadded</a>
@@ -772,17 +801,17 @@ pre {
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_ExitBuilding">Game_ExitBuilding</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForStartScreen">Game_InitStateForStartScreen</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadFirstLevel">Game_LoadFirstLevel</a>
 ;     <a href="PRG15_MIRROR.html#Game_SetupAndLoadArea">Game_SetupAndLoadArea</a>
-;     <a href="PRG15_MIRROR.html#Game_Something_InitState">Game_Something_InitState</a>
 ;     <a href="PRG15_MIRROR.html#Game_SpawnInTemple">Game_SpawnInTemple</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_EnterDoorToInside">Player_EnterDoorToInside</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetWeapon">Player_SetWeapon</a>
 ;     <a href="PRG15_MIRROR.html#Player_UseMattock">Player_UseMattock</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;
 </div><span class="l"><a name="Area_CurrentArea" href="#Area_CurrentArea" class="la">Area_CurrentArea:</a><span class="ce">; [$0024]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0024] Area</span></span>
@@ -819,7 +848,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetXYAndAnimOffset">Something_SetXYAndAnimOffset</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;
@@ -840,7 +869,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetXYAndAnimOffset">Something_SetXYAndAnimOffset</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;
@@ -883,7 +912,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;
 </div><span class="l"><a name="MaybeUnused_Something_ScrollPosY" href="#MaybeUnused_Something_ScrollPosY" class="la">MaybeUnused_Something_ScrollPosY:</a><span class="ce">; [$002a]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$002a] byte</span></span>
@@ -892,7 +921,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;
 </div><span class="l"><a name="MaybeUnused_Something_ScrollPosX" href="#MaybeUnused_Something_ScrollPosX" class="la">MaybeUnused_Something_ScrollPosX:</a><span class="ce">; [$002b]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$002b] byte</span></span>
@@ -1196,7 +1225,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Screen_Scroll_D2A6">Maybe_Screen_Scroll_D2A6</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
 ;
@@ -1209,7 +1238,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
 ;
@@ -1311,7 +1340,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__df64">FUN_PRG15_MIRROR__df64</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a>
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadFirstLevel">Game_LoadFirstLevel</a>
@@ -1322,8 +1351,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_MoveDownScreen">Player_MoveDownScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveRight">Player_TryMoveRight</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
 ;
 </div><span class="l"><a name="Area_CurrentScreen" href="#Area_CurrentScreen" class="la">Area_CurrentScreen:</a><span class="ce">; [$0063]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0063] byte</span></span>
@@ -1750,9 +1779,9 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
-;     <a href="PRG15_MIRROR.html#_CopySpriteImage">_CopySpriteImage</a> [$PRG15_MIRROR::cdea]
+;     <a href="PRG15_MIRROR.html#_copySpriteImage">_copySpriteImage</a> [$PRG15_MIRROR::cdea]
 ;
-</div><span class="l"><a name="SpriteImage_L" href="#SpriteImage_L" class="la">SpriteImage_L:</a><span class="ce">; [$0096]</span></span>
+</div><span class="l"><a name="CurrentSprite_Image_L" href="#CurrentSprite_Image_L" class="la">CurrentSprite_Image_L:</a><span class="ce">; [$0096]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0096] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -1762,7 +1791,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
 ;
-</div><span class="l"><a name="SpriteImage_U" href="#SpriteImage_U" class="la">SpriteImage_U:</a><span class="ce">; [$0097]</span></span>
+</div><span class="l"><a name="CurrentSprite_Image_U" href="#CurrentSprite_Image_U" class="la">CurrentSprite_Image_U:</a><span class="ce">; [$0097]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0097] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -1805,7 +1834,7 @@ pre {
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; Number of PPU tiles the current sprite needs
+; Number of PPU tiles the current sprite needs.
 ;============================================================================
 </div><span class="l"></span>
 <div class="c">;
@@ -1813,10 +1842,11 @@ pre {
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadImageForCurrentSprite">Sprites_LoadImageForCurrentSprite</a>
 ;
-</div><span class="l"><a name="SpritePPUTiles" href="#SpritePPUTiles" class="la">SpritePPUTiles:</a><span class="ce">; [$009b]</span></span>
+</div><span class="l"><a name="CurrentSprite_PPUTileCount" href="#CurrentSprite_PPUTileCount" class="la">CurrentSprite_PPUTileCount:</a><span class="ce">; [$009b]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$009b] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+<span class="l"><a name="UNUSED_009C" href="#UNUSED_009C" class="la">UNUSED_009C:</a><span class="ce">; [$009c]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$009c] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -1870,7 +1900,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
 ;     <a href="PRG15_MIRROR.html#Player_IsCastMagicBlocked">Player_IsCastMagicBlocked</a>
 ;     <a href="PRG15_MIRROR.html#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
@@ -1899,7 +1929,7 @@ pre {
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveRight">Player_TryMoveRight</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
@@ -1944,10 +1974,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_SpawnInTemple">Game_SpawnInTemple</a>
-;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e49a">LAB_PRG15_MIRROR__e49a</a>
-;     [$PRG15_MIRROR::e49a]
-;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e4a2">LAB_PRG15_MIRROR__e4a2</a>
-;     [$PRG15_MIRROR::e4a2]
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e49a">LAB_PRG15_MIRROR__e49a</a> [$PRG15_MIRROR::e49a]
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e4a2">LAB_PRG15_MIRROR__e4a2</a> [$PRG15_MIRROR::e4a2]
 ;     <a href="PRG15_MIRROR.html#Maybe_MoveDownOneScreen">Maybe_MoveDownOneScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbDown">Player_CheckHandleClimbDown</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
@@ -1956,7 +1984,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
 ;     <a href="PRG15_MIRROR.html#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
 ;     <a href="PRG15_MIRROR.html#Player_MoveDownScreen">Player_MoveDownScreen</a>
@@ -1975,7 +2003,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_MoveDownOneScreen">Maybe_MoveDownOneScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbUp">Player_CheckHandleClimbUp</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_MoveDownScreen">Player_MoveDownScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
@@ -2033,8 +2061,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ecac">FUN_PRG15_MIRROR__ecac</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
 ;     <a href="PRG15_MIRROR.html#Game_SpawnInTemple">Game_SpawnInTemple</a>
-;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e42c">LAB_PRG15_MIRROR__e42c</a>
-;     [$PRG15_MIRROR::e42c]
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e42c">LAB_PRG15_MIRROR__e42c</a> [$PRG15_MIRROR::e42c]
 ;     <a href="PRG15_MIRROR.html#Maybe_Game_MainExitBuildingHandler">Maybe_Game_MainExitBuildingHandler</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleAttack">Player_CheckHandleAttack</a>
@@ -2220,7 +2247,7 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#_Game_MovePlayerOnScroll">_Game_MovePlayerOnScroll</a>
 ;
 </div><span class="l"><a name="MaybeUnused_PlayerX_ForScroll" href="#MaybeUnused_PlayerX_ForScroll" class="la">MaybeUnused_PlayerX_ForScroll:</a><span class="ce">; [$00b2]</span></span>
@@ -2236,7 +2263,7 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#_Game_MovePlayerOnScroll">_Game_MovePlayerOnScroll</a>
 ;
 </div><span class="l"><a name="MaybeUnused_PlayerY_ForScroll" href="#MaybeUnused_PlayerY_ForScroll" class="la">MaybeUnused_PlayerY_ForScroll:</a><span class="ce">; [$00b3]</span></span>
@@ -2265,8 +2292,8 @@ pre {
 ;============================================================================
 </div><span class="l"></span>
 <div class="c">;
-; X coordinates of an object (see {{@SYMBOL:
-; PRG15_MIRROR::Area_ConvertPixelsToBlockPos@}}).
+; X coordinates of an object (see
+; <a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a>).
 ;
 ;
 ; XREFS:
@@ -2296,8 +2323,8 @@ pre {
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00b5] byte</span></span>
 <span class="l"></span>
 <div class="c">;
-; Y coordinates of an object (see {{@SYMBOL:
-; PRG15_MIRROR::Area_ConvertPixelsToBlockPos@}}).
+; Y coordinates of an object (see
+; <a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a>).
 ;
 ;
 ; XREFS:
@@ -2479,7 +2506,7 @@ pre {
 ;     <a href="PRG14.html#Sprite_SomethingFunc__a84f">Sprite_SomethingFunc__a84f</a>
 ;     <a href="PRG14.html#Sprite_Something__a82a">Sprite_Something__a82a</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;
 </div><span class="l"><a name="Sprites_ReadInfoAddr" href="#Sprites_ReadInfoAddr" class="la">Sprites_ReadInfoAddr:</a><span class="ce">; [$00ca]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00ca] byte</span></span>
@@ -2493,15 +2520,15 @@ pre {
 ;     <a href="PRG14.html#Screen_IncSpriteInfoAddr">Screen_IncSpriteInfoAddr</a>
 ;     <a href="PRG14.html#Sprite_Something__a82a">Sprite_Something__a82a</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;
 </div><span class="l"><a name="Sprites_ReadInfoAddr.U" href="#Sprites_ReadInfoAddr.U" class="la">Sprites_ReadInfoAddr.U:</a><span class="ce">; [$00cb]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00cb] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#Maybe_LoadExtraScreenInfo">Maybe_LoadExtraScreenInfo</a>
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadSpecialEventID">Screen_LoadSpecialEventID</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
 ;
 </div><span class="l"><a name="Screen_ExtraInfoAddr" href="#Screen_ExtraInfoAddr" class="la">Screen_ExtraInfoAddr:</a><span class="ce">; [$00cc]</span></span>
@@ -2509,7 +2536,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#Sprites_LoadScreenInfo">Sprites_LoadScreenInfo</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
 ;
 </div><span class="l"><a name="Screen_ExtraInfoAddr.U" href="#Screen_ExtraInfoAddr.U" class="la">Screen_ExtraInfoAddr.U:</a><span class="ce">; [$00cd]</span></span>
@@ -2566,23 +2593,43 @@ pre {
 </div><span class="l"><a name="Maybe_WeaponRange_Y" href="#Maybe_WeaponRange_Y" class="la">Maybe_WeaponRange_Y:</a><span class="ce">; [$00d3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d3] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; State for the blocked path to Mascon.
+;
+; This is normally completed by opening all fountains
+; and clearing the final block, dropping down a ladder
+; to Mascon.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
+; Whether the path to Mascon is currently being opened.
+;
+; This is set when opening the path. It's never read or
+; otherwise used.
+;
+;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>
 ;
-</div><span class="l"><a name="Maybe_PathToMasconOpened" href="#Maybe_PathToMasconOpened" class="la">Maybe_PathToMasconOpened:</a><span class="ce">; [$00d4]</span></span>
+</div><span class="l"><a name="PathToMascon_Opening" href="#PathToMascon_Opening" class="la">PathToMascon_Opening:</a><span class="ce">; [$00d4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d4] bool</span></span>
 <span class="l"></span>
 <div class="c">;
+; The position of the fountain covering block before Mascon.
+;
+; This is in $YX byte form.
+;
+;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#Game_ManagePathToMascon">Game_ManagePathToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>
 ;
-</div><span class="l"><a name="Maybe_PushableBlockPos" href="#Maybe_PushableBlockPos" class="la">Maybe_PushableBlockPos:</a><span class="ce">; [$00d5]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d5] undefined1</span></span>
+</div><span class="l"><a name="PathToMascon_FountainCoverPos" href="#PathToMascon_FountainCoverPos" class="la">PathToMascon_FountainCoverPos:</a><span class="ce">; [$00d5]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d5] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
 <span class="l"></span>
@@ -2598,20 +2645,33 @@ pre {
 </div><span class="l"><a name="BlockPushCounter" href="#BlockPushCounter" class="la">BlockPushCounter:</a><span class="ce">; [$00d7]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d7] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; State for animating the ladder on the path to Mascon.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
-; XREFS:
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
-;     <a href="PRG15_MIRROR.html#Game_ManagePathToMascon">Game_ManagePathToMascon</a>
+; The current block position for the ladder on the path to
+; Mascon.
 ;
-</div><span class="l"><a name="BYTE_00d8" href="#BYTE_00d8" class="la">BYTE_00d8:</a><span class="ce">; [$00d8]</span></span>
+;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
+;
+</div><span class="l"><a name="PathToMascon_LadderPos" href="#PathToMascon_LadderPos" class="la">PathToMascon_LadderPos:</a><span class="ce">; [$00d8]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d8] byte</span></span>
 <span class="l"></span>
 <div class="c">;
-; XREFS:
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
-;     <a href="PRG15_MIRROR.html#Game_ManagePathToMascon">Game_ManagePathToMascon</a>
+; The number of ladder blocks remaining to place when dropping
+; down the ladder to Mascon.
 ;
-</div><span class="l"><a name="Something_PathToMasonQuestCounter" href="#Something_PathToMasonQuestCounter" class="la">Something_PathToMasonQuestCounter:</a><span class="ce">; [$00d9]</span></span>
+;
+; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
+;
+</div><span class="l"><a name="PathToMascon_LadderBlocksRemaining" href="#PathToMascon_LadderBlocksRemaining" class="la">PathToMascon_LadderBlocksRemaining:</a><span class="ce">; [$00d9]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d9] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -2860,7 +2920,6 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__880e">FUN_PRG12__880e</a>
 ;     <a href="PRG12.html#FUN_PRG12__9075">FUN_PRG12__9075</a>
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#FUN_PRG12__aa20">FUN_PRG12__aa20</a>
 ;     <a href="PRG12.html#FUN_PRG12__aa46">FUN_PRG12__aa46</a>
 ;     <a href="PRG12.html#IScriptAction_OpenShop">IScriptAction_OpenShop</a>
@@ -2873,6 +2932,7 @@ pre {
 ;     <a href="PRG12.html#Maybe_DrawItemName">Maybe_DrawItemName</a>
 ;     <a href="PRG12.html#Maybe_DrawItemTitle">Maybe_DrawItemTitle</a>
 ;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8F51">Maybe_Draw_Textbox_Something8F51</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#Password_DecodeValue">Password_DecodeValue</a>
 ;     <a href="PRG12.html#Password_EncodeValue">Password_EncodeValue</a>
 ;     <a href="PRG12.html#PasswrodScreen_DrawMessage">PasswrodScreen_DrawMessage</a>
@@ -2926,7 +2986,6 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__87fe">FUN_PRG12__87fe</a>
 ;     <a href="PRG12.html#FUN_PRG12__880e">FUN_PRG12__880e</a>
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#FUN_PRG12__aa20">FUN_PRG12__aa20</a>
 ;     <a href="PRG12.html#FUN_PRG12__aa46">FUN_PRG12__aa46</a>
 ;     <a href="PRG12.html#IScriptAction_OpenShop">IScriptAction_OpenShop</a>
@@ -2936,6 +2995,7 @@ pre {
 ;     <a href="PRG12.html#IScripts_ProgressivelyAddGold">IScripts_ProgressivelyAddGold</a>
 ;     <a href="PRG12.html#IScripts_ProgressivelySubtractGold">IScripts_ProgressivelySubtractGold</a>
 ;     <a href="PRG12.html#Maybe_DrawItemTitle">Maybe_DrawItemTitle</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#Password_EncodeValue">Password_EncodeValue</a>
 ;     <a href="PRG12.html#PasswrodScreen_DrawMessage">PasswrodScreen_DrawMessage</a>
 ;     <a href="PRG12.html#Player_AddToInventory">Player_AddToInventory</a>
@@ -3061,11 +3121,11 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__df64">FUN_PRG15_MIRROR__df64</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fc65">FUN_PRG15_MIRROR__fc65</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_ExitBuilding">Game_ExitBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadFirstLevel">Game_LoadFirstLevel</a>
+;     <a href="PRG15_MIRROR.html#Game_ShowStartScreen">Game_ShowStartScreen</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_UseHourGlass">Player_UseHourGlass</a>
@@ -3121,13 +3181,13 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
 ;     <a href="PRG15_MIRROR.html#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a>
+;     <a href="PRG15_MIRROR.html#Game_InitMMCAndBank">Game_InitMMCAndBank</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
 ;     <a href="PRG15_MIRROR.html#LoadPalette2">LoadPalette2</a>
 ;     <a href="PRG15_MIRROR.html#LoadPalette">LoadPalette</a>
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_EnsurePRG">MMC1_EnsurePRG</a>
-;     <a href="PRG15_MIRROR.html#MMC1_LoadBank15">MMC1_LoadBank15</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_SavePRGBankAndUpdateTo">MMC1_SavePRGBankAndUpdateTo</a>
 ;     <a href="PRG15_MIRROR.html#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a>
@@ -3144,8 +3204,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_ShowNextCharFromBank">TextBox_Maybe_ShowNextCharFromBank</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_WriteLineOfChars">TextBox_Maybe_WriteLineOfChars</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowNextChar">TextBox_ShowNextChar</a>
-;     <a href="PRG15_MIRROR.html#_loadSpriteToPPUBuffer">_loadSpriteToPPUBuffer</a>
-;     [$PRG15_MIRROR::cdd1]
+;     <a href="PRG15_MIRROR.html#_loadSpriteToPPUBuffer">_loadSpriteToPPUBuffer</a> [$PRG15_MIRROR::cdd1]
 ;
 </div><span class="l"><a name="CurrentROMBank2" href="#CurrentROMBank2" class="la">CurrentROMBank2:</a><span class="ce">; [$0100]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0100] ROMBank</span></span>
@@ -4372,7 +4431,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#SplashAnimation_DrawScenery">SplashAnimation_DrawScenery</a>
 ;     <a href="PRG12.html#SplashAnimation_SomethingA708">SplashAnimation_SomethingA708</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
@@ -4383,7 +4442,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#SplashAnimation_DrawScenery">SplashAnimation_DrawScenery</a>
 ;     <a href="PRG12.html#SplashAnimation_SomethingA708">SplashAnimation_SomethingA708</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
@@ -4629,8 +4688,8 @@ pre {
 ;     <a href="PRG14.html#_Sprites_ReplaceWithMattock_HasMaxOnScreen">_Sprites_ReplaceWithMattock_HasMaxOnScreen</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a>
-;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteNotOnScreen">Maybe_IsSpriteNotOnScreen</a>
-;     <a href="PRG15_MIRROR.html#Sprites_HasBigEnemy">Sprites_HasBigEnemy</a>
+;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a>
+;     <a href="PRG15_MIRROR.html#Sprites_HasBoss">Sprites_HasBoss</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_HasCurrentSprites">Sprites_HasCurrentSprites</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_HasSpritesNotOfType">Sprites_HasSpritesNotOfType</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_PopulateNextAvailableSprite">Sprites_PopulateNextAvailableSprite</a>
@@ -4648,8 +4707,8 @@ pre {
 ;     <a href="PRG14.html#_Sprites_ReplaceWithMattock_HasMaxOnScreen">_Sprites_ReplaceWithMattock_HasMaxOnScreen</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a>
-;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteNotOnScreen">Maybe_IsSpriteNotOnScreen</a>
-;     <a href="PRG15_MIRROR.html#Sprites_HasBigEnemy">Sprites_HasBigEnemy</a>
+;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a>
+;     <a href="PRG15_MIRROR.html#Sprites_HasBoss">Sprites_HasBoss</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_HasCurrentSprites">Sprites_HasCurrentSprites</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_HasSpritesNotOfType">Sprites_HasSpritesNotOfType</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_PopulateNextAvailableSprite">Sprites_PopulateNextAvailableSprite</a>
@@ -5586,7 +5645,6 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__ac21">FUN_PRG14__ac21</a>
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#LAB_PRG14__8043">LAB_PRG14__8043</a> [$PRG14::8043]
-;     <a href="PRG14.html#LAB_PRG14__89ff">LAB_PRG14__89ff</a> [$PRG14::89ff]
 ;     <a href="PRG14.html#Maybe_Sprites_HasAnyEnemyOnScreen">Maybe_Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#MoveSpriteHorizIfPossible">MoveSpriteHorizIfPossible</a>
 ;     <a href="PRG14.html#MoveSpriteVerticalIfPossible">MoveSpriteVerticalIfPossible</a>
@@ -5609,6 +5667,7 @@ pre {
 ;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanWalk">Sprites_SetCurrentSpriteCanWalk</a>
 ;     <a href="PRG14.html#Sprites_UpdateAllStates">Sprites_UpdateAllStates</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
+;     <a href="PRG14.html#_afterFarJump">_afterFarJump</a> [$PRG14::89ff]
 ;     <a href="PRG14.html#_updateSprite">_updateSprite</a> [$PRG14::8011]
 ;     <a href="PRG15_MIRROR.html#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a>
@@ -5780,7 +5839,7 @@ pre {
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; ROM bank where images of the current sprite can be found
+; ROM bank where images of the current sprite can be found.
 ;============================================================================
 </div><span class="l"></span>
 <div class="c">;
@@ -5791,7 +5850,8 @@ pre {
 </div><span class="l"><a name="CurrentSprite_ImagesBank" href="#CurrentSprite_ImagesBank" class="la">CurrentSprite_ImagesBank:</a><span class="ce">; [$0386]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0386] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0388] undefined</span></span>
+<span class="l"><a name="UNUSED_0387" href="#UNUSED_0387" class="la">UNUSED_0387:</a><span class="ce">; [$0387]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0387] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -5854,13 +5914,19 @@ pre {
 </div><span class="l"><a name="CurrentSprite_Value" href="#CurrentSprite_Value" class="la">CurrentSprite_Value:</a><span class="ce">; [$038c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$038c] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Index into <a href="PRG15_MIRROR.html#HUD_ATTRIBUTE_DATA_BY_INDEX">HUD_ATTRIBUTE_DATA_BY_INDEX</a> where the
+; HUD palette can be found.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8FF6">Maybe_Draw_Textbox_Something8FF6</a>
 ;     <a href="PRG15_MIRROR.html#LoadPalette2">LoadPalette2</a>
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
-</div><span class="l"><a name="Something_FromPaletteIndexLookup" href="#Something_FromPaletteIndexLookup" class="la">Something_FromPaletteIndexLookup:</a><span class="ce">; [$038d]</span></span>
+</div><span class="l"><a name="HUD_AttributeDataIndex" href="#HUD_AttributeDataIndex" class="la">HUD_AttributeDataIndex:</a><span class="ce">; [$038d]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$038d] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$038f] undefined</span></span>
@@ -6175,7 +6241,7 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetArmor">Player_SetArmor</a>
 ;
@@ -6204,7 +6270,7 @@ pre {
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetShield">Player_SetShield</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ShieldState">Player_Something_ShieldState</a>
@@ -6391,7 +6457,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_ClearPortrait">IScripts_ClearPortrait</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_DrawPortraitAnimationFrame">IScripts_DrawPortraitAnimationFrame</a>
-;     <a href="PRG15_MIRROR.html#Player_DrawArmor">Player_DrawArmor</a>
+;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Something_Temp03C7Times5">Something_Temp03C7Times5</a>
 ;
 </div><span class="l"><a name="Temp_03C7" href="#Temp_03C7" class="la">Temp_03C7:</a><span class="ce">; [$03c7]</span></span>
@@ -6469,6 +6535,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
 ;     <a href="PRG15_MIRROR.html#Player_EnterDoorToInside">Player_EnterDoorToInside</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>
+;     <a href="PRG15_MIRROR.html#_afterFarJump">_afterFarJump</a> [$PRG15_MIRROR::c603]
 ;
 </div><span class="l"><a name="Areas_DefaultMusic" href="#Areas_DefaultMusic" class="la">Areas_DefaultMusic:</a><span class="ce">; [$03d1]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03d1] Music</span></span>
@@ -6482,22 +6549,44 @@ pre {
 </div><span class="l"><a name="Area_Music_Outside" href="#Area_Music_Outside" class="la">Area_Music_Outside:</a><span class="ce">; [$03d2]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03d2] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Palette index data.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
+; The saved palette index, when temporarily switching to a new one.
+;
+; This is used in IScripts.
+;
+;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f24d">FUN_PRG15_MIRROR__f24d</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_ClearPortrait">IScripts_ClearPortrait</a>
 ;
-</div><span class="l"><a name="Something_PaletteIndex" href="#Something_PaletteIndex" class="la">Something_PaletteIndex:</a><span class="ce">; [$03d3]</span></span>
+</div><span class="l"><a name="Palette_SavedIndex" href="#Palette_SavedIndex" class="la">Palette_SavedIndex:</a><span class="ce">; [$03d3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03d3] byte</span></span>
 <span class="l"></span>
 <div class="c">;
+; The current palette index.
+;
+; This is set when loading a new palette, and used
+; exclusively for the process of restoring palette state
+; after showing portraits in IScripts.
+;
+;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f24d">FUN_PRG15_MIRROR__f24d</a>
 ;     <a href="PRG15_MIRROR.html#Palette_LoadFromIndex">Palette_LoadFromIndex</a>
 ;
-</div><span class="l"><a name="CurrentPalette" href="#CurrentPalette" class="la">CurrentPalette:</a><span class="ce">; [$03d4]</span></span>
+</div><span class="l"><a name="Palette_CurrentIndex" href="#Palette_CurrentIndex" class="la">Palette_CurrentIndex:</a><span class="ce">; [$03d4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03d4] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Region and screen information.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
@@ -6920,8 +7009,8 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__a558">SpriteBehavior__a558</a>
 ;     <a href="PRG14.html#SpriteBehavior__a56f">SpriteBehavior__a56f</a>
 ;     <a href="PRG14.html#SpriteBehavior__a586">SpriteBehavior__a586</a>
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
-;     <a href="PRG15_MIRROR.html#Game_ManagePathToMascon">Game_ManagePathToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpMattockWithQuest">Player_PickUpMattockWithQuest</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpWingBootsWithQuest">Player_PickUpWingBootsWithQuest</a>
@@ -6931,34 +7020,51 @@ pre {
 </div><span class="l"><a name="Quests" href="#Quests" class="la">Quests:</a><span class="ce">; [$042d]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042d] Quests</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; The loaded special event ID for the current screen.
+;
+; This controls which custom logic is run for a screen,
+; and the state around that logic.
+;
+; Bits 0-2 define the handler in a lookup table (count of
+; 0-2), but in theory could be extended for more handlers.
+;
+; Bit 7 is reserved for the handler's use.
+;
+; If 0xFF, this is unset. Handlers may set this after
+; use.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#DEAD_FUN_PRG15_MIRROR__ef45">DEAD_FUN_PRG15_MIRROR__ef45</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
-;     <a href="PRG15_MIRROR.html#Maybe_LoadExtraScreenInfo">Maybe_LoadExtraScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>
+;     <a href="PRG15_MIRROR.html#Screen_LoadSpecialEventID">Screen_LoadSpecialEventID</a>
 ;     <a href="PRG15_MIRROR.html#Screen_SetNoSpecialEventID">Screen_SetNoSpecialEventID</a>
 ;
 </div><span class="l"><a name="CurrentScreen_SpecialEventID" href="#CurrentScreen_SpecialEventID" class="la">CurrentScreen_SpecialEventID:</a><span class="ce">; [$042e]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042e] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042e] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#Game_MainLoop">Game_MainLoop</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;
 </div><span class="l"><a name="DAT_042f" href="#DAT_042f" class="la">DAT_042f:</a><span class="ce">; [$042f]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042f] undefined1</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__da29">FUN_PRG15_MIRROR__da29</a>
 ;     <a href="PRG15_MIRROR.html#LoadPalette">LoadPalette</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Screen_FadeToBlack">Screen_FadeToBlack</a>
 ;     <a href="PRG15_MIRROR.html#Screen_NextTransitionState">Screen_NextTransitionState</a>
+;     <a href="PRG15_MIRROR.html#UNUSED_FUN_PRG15_MIRROR__da29">UNUSED_FUN_PRG15_MIRROR__da29</a>
 ;
 </div><span class="l"><a name="PaletteIndex" href="#PaletteIndex" class="la">PaletteIndex:</a><span class="ce">; [$0430]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0430] byte</span></span>
@@ -7004,9 +7110,9 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Debug_ChooseArea">Debug_ChooseArea</a>
 ;     <a href="PRG15_MIRROR.html#EndGame_MoveToKingsRoom">EndGame_MoveToKingsRoom</a>
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_InitStateForStartScreen">Game_InitStateForStartScreen</a>
 ;     <a href="PRG15_MIRROR.html#Game_SetupAndLoadArea">Game_SetupAndLoadArea</a>
-;     <a href="PRG15_MIRROR.html#Game_Something_InitState">Game_Something_InitState</a>
 ;     <a href="PRG15_MIRROR.html#Game_SpawnInTemple">Game_SpawnInTemple</a>
 ;     <a href="PRG15_MIRROR.html#Player_EnterDoorToOutside">Player_EnterDoorToOutside</a>
 ;
@@ -7062,10 +7168,10 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#Game_MainLoop">Game_MainLoop</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a>
-;     <a href="PRG15_MIRROR.html#Something_InitOrResetState">Something_InitOrResetState</a>
 ;
 </div><span class="l"><a name="PlayerIsDead" href="#PlayerIsDead" class="la">PlayerIsDead:</a><span class="ce">; [$0438]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0438] bool</span></span>
@@ -7297,8 +7403,8 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#PasswordScreen_GetDPadBits">PasswordScreen_GetDPadBits</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;
 </div><span class="l"><a name="Password_DPadBits" href="#Password_DPadBits" class="la">Password_DPadBits:</a><span class="ce">; [$04c2]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04c2] ButtonBitmask</span></span>
@@ -7313,8 +7419,8 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#PasswordScreen_GetDPadBits">PasswordScreen_GetDPadBits</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;
 </div><span class="l"><a name="Password_CounterBeforeAutoRepeatMove" href="#Password_CounterBeforeAutoRepeatMove" class="la">Password_CounterBeforeAutoRepeatMove:</a><span class="ce">; [$04c3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00</span></span><span class="ce">; [$04c3] byte</span></span>
@@ -7803,7 +7909,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
-;     <a href="PRG15_MIRROR.html#Game_ManagePathToMascon">Game_ManagePathToMascon</a>
+;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
@@ -7885,14 +7991,14 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;
 </div><span class="l"><a name="ScreenBuffer_30_" href="#ScreenBuffer_30_" class="la">ScreenBuffer_30_:</a><span class="ce">; [$061e]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [30]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
 ;
 </div><span class="l"><a name="ScreenBuffer_31_" href="#ScreenBuffer_31_" class="la">ScreenBuffer_31_:</a><span class="ce">; [$061f]</span></span>
@@ -7902,7 +8008,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#Game_CheckPathToMasconOpen">Game_CheckPathToMasconOpen</a>
+;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;
 </div><span class="l"><a name="ScreenBuffer_34_" href="#ScreenBuffer_34_" class="la">ScreenBuffer_34_:</a><span class="ce">; [$0622]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [34]:</span></span>
@@ -7972,11 +8078,11 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#Maybe_Password_CursorHandler">Maybe_Password_CursorHandler</a>
 ;     <a href="PRG12.html#Maybe_Password_CursorHandler_Something9545">Maybe_Password_CursorHandler_Something9545</a>
 ;     <a href="PRG12.html#Menu_Something_954F">Menu_Something_954F</a>
 ;     <a href="PRG12.html#PasswordScreen_SetCusorCol">PasswordScreen_SetCusorCol</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#Password_IsCursorWrapping">Password_IsCursorWrapping</a>
 ;     <a href="PRG12.html#Password_NormalizeCursorColForBottomRow">Password_NormalizeCursorColForBottomRow</a>
 ;
@@ -7985,9 +8091,9 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#Maybe_Password_CursorHandler">Maybe_Password_CursorHandler</a>
 ;     <a href="PRG12.html#Menu_Something_954F">Menu_Something_954F</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#Password_IsCursorWrapping">Password_IsCursorWrapping</a>
 ;
 </div><span class="l"><a name="Password_CursorRow" href="#Password_CursorRow" class="la">Password_CursorRow:</a><span class="ce">; [$0663]</span></span>
@@ -7995,7 +8101,6 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#FUN_PRG12__92ed">FUN_PRG12__92ed</a>
 ;     <a href="PRG12.html#LAB_PRG12__93bd">LAB_PRG12__93bd</a> [$PRG12::93bd]
 ;     <a href="PRG12.html#LAB_PRG12__93d7">LAB_PRG12__93d7</a> [$PRG12::93d7]
@@ -8005,27 +8110,28 @@ pre {
 ;     <a href="PRG12.html#Menu_Draw_Something93B4">Menu_Draw_Something93B4</a> [$PRG12::93b4]
 ;     <a href="PRG12.html#Menu_Something_93EC">Menu_Something_93EC</a>
 ;     <a href="PRG12.html#PasswordScreen_Maybe_WriteCharAtCursor">PasswordScreen_Maybe_WriteCharAtCursor</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;
 </div><span class="l"><a name="Password_FieldCursorPos" href="#Password_FieldCursorPos" class="la">Password_FieldCursorPos:</a><span class="ce">; [$0664]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [100]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9312">Menu_Draw_Something9312</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9351">Menu_Draw_Something9351</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9386">Menu_Draw_Something9386</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;
 </div><span class="l"><a name="Password_MaxChars" href="#Password_MaxChars" class="la">Password_MaxChars:</a><span class="ce">; [$0665]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [101]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__909d">FUN_PRG12__909d</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9312">Menu_Draw_Something9312</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9351">Menu_Draw_Something9351</a>
 ;     <a href="PRG12.html#Menu_Draw_Something9386">Menu_Draw_Something9386</a>
 ;     <a href="PRG12.html#Menu_Something_93EC">Menu_Something_93EC</a>
+;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#Password_Maybe_CheckPasswordLength">Password_Maybe_CheckPasswordLength</a>
 ;
 </div><span class="l"><a name="Password_EnteredCharsLength" href="#Password_EnteredCharsLength" class="la">Password_EnteredCharsLength:</a><span class="ce">; [$0666]</span></span>
@@ -8065,9 +8171,9 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#FUN_PRG12__9f44">FUN_PRG12__9f44</a>
+;     <a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fc65">FUN_PRG15_MIRROR__fc65</a>
+;     <a href="PRG15_MIRROR.html#Game_ShowStartScreen">Game_ShowStartScreen</a>
 ;
 </div><span class="l"><a name="ScreenBuffer_135_" href="#ScreenBuffer_135_" class="la">ScreenBuffer_135_:</a><span class="ce">; [$0687]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [135]:</span></span>

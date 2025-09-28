@@ -6,12 +6,18 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
   <style>
 
+ @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
 body {
   background: #1c212d;
   color: white;
-  font-family: Roboto Mono;
-  font-size: 9.5pt;
   padding: 0.5em;
+}
+
+body, * {
+  font-family: "Roboto Mono", monospace;
+  font-size: 9.5pt;
+  font-style: normal;
 }
 
 a:link,
@@ -22,7 +28,7 @@ a:visited {
 pre {
   display: grid;
   grid-template-columns: minmax(70ch, max-content) 1fr;
-  gap: 0 4ch;
+  gap: 0 4em;
   margin: 0;
   padding: 0;
 }
@@ -30,7 +36,7 @@ pre {
 .equs {
   display: grid;
   grid-template-columns: minmax(50ch, max-content) min-content auto;
-  gap: 0 1ch;
+  gap: 0 1em;
 }
 
 .l {
@@ -50,6 +56,10 @@ pre {
   color: #6fafb5;
 }
 
+.c {
+  margin-left: 4em;
+}
+
 .c, .ce {
   color: #8aa9ac;
 }
@@ -60,7 +70,7 @@ pre {
 }
 
 .lla {
-  margin-left: 2ch;
+  margin-left: 2em;
 }
 
 .la,
@@ -82,9 +92,8 @@ pre {
 
 .i {
   color: #f26969;
-  display: inline-block;
-  margin-left: 4ch;
-  min-width: 3ch;
+  margin-left: 4em;
+  min-width: 3em;
 }
 
 .o {
@@ -1200,11 +1209,11 @@ pre {
 
 <div class="n">MUSIC_EOLIS</div> <div class="i">EQU</div> <div class="v">$07</div>
 
-<div class="n">MUSIC_MAYBE_TITLESCREEN</div> <div class="i">EQU</div> <div class="v">$08</div>
+<div class="n">MUSIC_DEATH</div> <div class="i">EQU</div> <div class="v">$08</div>
 
 <div class="n">MUSIC_MAYBE_TOWN_BUILDING</div> <div class="i">EQU</div> <div class="v">$09</div>
 
-<div class="n">MUSIC_0x0A</div> <div class="i">EQU</div> <div class="v">$0a</div>
+<div class="n">MUSIC_BOSS</div> <div class="i">EQU</div> <div class="v">$0a</div>
 
 <div class="n">MUSIC_0x0B</div> <div class="i">EQU</div> <div class="v">$0b</div>
 
@@ -1624,7 +1633,7 @@ pre {
 
 <div class="n">SOUND_PLAYER_DEATH</div> <div class="i">EQU</div> <div class="v">$16</div>
 
-<div class="n">SOUND_MAYBE_PATH_TO_MASCON_OPENED</div> <div class="i">EQU</div> <div class="v">$17</div>
+<div class="n">SOUND_DROP_LADDER</div> <div class="i">EQU</div> <div class="v">$17</div>
 
 <div class="n">SOUND_0x18</div> <div class="i">EQU</div> <div class="v">$18</div>
 

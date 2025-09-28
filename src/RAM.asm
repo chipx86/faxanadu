@@ -51,11 +51,11 @@ BASE $0000
 ;     MagicHitHandler__c403
 ;     MagicHitHandler__c42c
 ;     Maybe_Area_LoadBlocks
-;     Maybe_IsSpriteNotOnScreen
+;     Maybe_IsSpriteEntityNotOnScreen
 ;     Maybe_Player_UpdateArmorState
 ;     Maybe_Player_UpdateVisibleItemStates
 ;     Maybe_Player_UpdateWeaponSprite
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_HandleKnockback
 ;     Player_Something_ShieldState
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -102,13 +102,12 @@ Temp_01:                                    ; [$0001]
 ;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
-;     LAB_PRG15_MIRROR__e852
-;     [$PRG15_MIRROR::e852]
+;     LAB_PRG15_MIRROR__e852 [$PRG15_MIRROR::e852]
 ;     LookupSpriteDataPointer
 ;     Player_CheckSwitchScreen
+;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
-;     Sprites_LoadScreenInfo
 ;
 Temp_Addr:                                  ; [$0002]
     db $00                                  ; [$0002] byte
@@ -133,8 +132,8 @@ Temp_Addr:                                  ; [$0002]
 ;     Game_LoadAreaTable
 ;     LookupSpriteDataPointer
 ;     Player_CheckSwitchScreen
+;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
-;     Sprites_LoadScreenInfo
 ;
 Temp_Addr.U:                                ; [$0003]
     db $00                                  ; [$0003] byte
@@ -266,9 +265,9 @@ ScreenColorMode:                            ; [$000b]
 ;     Area_ScrollToNextRoom
 ;     FUN_PRG15_MIRROR__d2ce
 ;     Game_InitScreenAndMusic
+;     Game_InitStateForSpawn
 ;     Maybe_Screen_Scroll
 ;     PPU_HandleOnInterrupt
-;     Something_InitOrResetState
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 ScrollHelp_Pixel:                           ; [$000c]
@@ -286,10 +285,10 @@ ScrollHelp_Pixel:                           ; [$000c]
 ;     Area_ScrollToNextRoom
 ;     FUN_PRG15_MIRROR__d82d
 ;     Game_InitScreenAndMusic
+;     Game_InitStateForSpawn
 ;     Maybe_Screen_Scroll
 ;     PPU_HandleOnInterrupt
 ;     PPU_SetAddrForTextPos
-;     Something_InitOrResetState
 ;     Something_SetPPUAddrForXYTransformed
 ;
 ScrollHelp_Screen:                          ; [$000d]
@@ -311,10 +310,10 @@ ScrollHelp_Screen:                          ; [$000d]
 ;
 ; XREFS:
 ;     Game_DrawScreenInFrozenState
-;     Player_DrawArmor
+;     Game_InitStateForSpawn
+;     Player_DrawBody
 ;     Player_HandleDeath
 ;     Screen_SetupSprites
-;     Something_InitOrResetState
 ;
 Maybe_SpritesLoadedState:                   ; [$000e]
     db $00                                  ; [$000e] LoadedState
@@ -329,32 +328,51 @@ Maybe_SpritesLoadedState:                   ; [$000e]
 Game_FrameToggle:                           ; [$0010]
     db $00                                  ; [$0010] byte
 
+
+;============================================================================
+; The previous ROM bank saved before switching to a new bank.
+;
+; This allows for pushing to a new bank and then popping
+; back to this bank.
+;============================================================================
+
 ;
 ; XREFS:
-;     MMC1_LoadBank15
+;     Game_InitMMCAndBank
 ;     MMC1_RestorePrevPRGBank
 ;     MMC1_SavePRGBankAndUpdateTo
 ;
-PrevROMBank:                                ; [$0011]
+SavedROMBank:                               ; [$0011]
     db $00                                  ; [$0011] ROMBank
+
+
+;============================================================================
+; State used to help synchronize MMC1 operations.
+;
+;   0 = Idle
+;   1 = Writing to MMC1 (switching banks).
+; > 1 = MMC1 is re-initializing.
+;============================================================================
 
 ;
 ; XREFS:
+;     Game_InitMMCAndBank
 ;     MMC1_EnsurePRG
-;     MMC1_LoadBank15
 ;     MMC1_UpdatePRGBank
 ;
-BYTE_0012:                                  ; [$0012]
+MMC1_ShiftSync:                             ; [$0012]
     db $00                                  ; [$0012] byte
 
-;
+
+;============================================================================
 ; Whether to process standard behavior on interrupts.
 ;
 ; If 1, then the interrupt handler will manage game
 ; state, audio, and read button inputs.
 ;
 ; If 0, this will all be paused.
-;
+;============================================================================
+
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb17
@@ -373,7 +391,10 @@ Game_EnableInterruptHandlers:               ; [$0013]
 ;     PPU_WaitUntilFlushed
 ;
 PauseInterruptCounter:                      ; [$0014]
-    db $00,$00                              ; [$0014] byte
+    db $00                                  ; [$0014] byte
+
+UNUSED_0015:                                ; [$0015]
+    db $00                                  ; [$0015] byte
 
 
 ;============================================================================
@@ -473,7 +494,6 @@ Joy1_PrevButtonMask:                        ; [$0018]
 ;     FUN_PRG12__84ed
 ;     FUN_PRG12__8b71
 ;     FUN_PRG12__9969
-;     FUN_PRG12__9f44
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_ShowBuySellMenu
 ;     IScriptAction_ShowPassword
@@ -485,15 +505,16 @@ Joy1_PrevButtonMask:                        ; [$0018]
 ;     PasswordScreen_GetDPadBits
 ;     Shop_Something_9956
 ;     Shop_Something__8d5a
+;     StartScreen_CheckHandleInput
 ;     UI_ShowPlayerMenu
 ;     Player_CastMagic
 ;     Player_CheckHandlePressUpOnNPC
 ;     Area_CheckCanClimbAdjacent
 ;     EndGame_MovePlayerTowardKing
-;     FUN_PRG15_MIRROR__fc65
 ;     GameLoop_CheckPauseGame
 ;     GameLoop_CheckShowPlayerMenu
 ;     GameLoop_CheckUseCurrentItem
+;     Game_ShowStartScreen
 ;     Input_HandleOnInterrupt
 ;     Player_CheckHandleAttack
 ;     Player_CheckHandleEnterDoor
@@ -515,12 +536,12 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     SplashAnimation_RunOutro
 ;     SplashAnimation_SomethingOutroUpdate
 ;     FUN_PRG14__850d
-;     FUN_PRG15_MIRROR__cb9a
 ;     FUN_PRG15_MIRROR__e8e9
 ;     Game_DecGloveDuration
 ;     Game_DecHourGlassDuration
 ;     Game_DecOintmentDuration
 ;     Game_DecWingBootsDuration
+;     Game_WaitForOAMReset
 ;     MagicHitHandler__c39b
 ;     MagicHitHandler__c3a7
 ;     MagicHitHandler__c3b6
@@ -539,7 +560,7 @@ InterruptCounter:                           ; [$001a]
 ;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__cb9a
+;     Game_WaitForOAMReset
 ;     OnInterrupt
 ;
 Game_NeedOAMReset:                          ; [$001b]
@@ -576,6 +597,7 @@ Fog_Index:                                  ; [$001e]
 
 ;
 ; XREFS:
+;     Game_InitStateForSpawn
 ;     PPUBuffer_Clear
 ;     PPUBuffer_Command_RotateTilesRight1Pixel
 ;     PPUBuffer_Draw
@@ -584,7 +606,6 @@ Fog_Index:                                  ; [$001e]
 ;     PPUBuffer_SomethingCompareTo24
 ;     PPUBuffer_WaitUntilClear
 ;     PPU_WaitUntilFlushed
-;     Something_InitOrResetState
 ;
 PPUBuffer_Offset:                           ; [$001f]
     db $00                                  ; [$001f] byte
@@ -607,6 +628,7 @@ PPUBuffer_Offset:                           ; [$001f]
 ;     FUN_PRG15_MIRROR__eebf
 ;     FUN_PRG15_MIRROR__f316
 ;     Game_AnimateFog_UpdatePPU
+;     Game_InitStateForSpawn
 ;     PPUBuffer_Append0
 ;     PPUBuffer_Clear
 ;     PPUBuffer_Draw
@@ -618,9 +640,7 @@ PPUBuffer_Offset:                           ; [$001f]
 ;     PPU_WaitUntilFlushed
 ;     Player_DrawDeathAnimation
 ;     Player_DrawItemInternal
-;     Something_InitOrResetState
-;     {{@SYMBOL:
-;     PRG15_MIRROR::TextBox_FillPlaceholderTextAtLineWithStartChar@}}
+;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_Maybe_WriteLineOfChars
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawDigitsZeroPadded
@@ -674,17 +694,17 @@ XXX_PPU_NAMETABLE0_VALUE:                   ; [$0023]
 ;     GameLoop_CheckShowPlayerMenu
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
+;     Game_InitStateForStartScreen
 ;     Game_LoadAreaTable
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SetupAndLoadArea
-;     Game_Something_InitState
 ;     Game_SpawnInTemple
 ;     Player_CheckSwitchScreen
 ;     Player_EnterDoorToInside
 ;     Player_SetWeapon
 ;     Player_UseMattock
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;
 Area_CurrentArea:                           ; [$0024]
     db $00                                  ; [$0024] Area
@@ -721,7 +741,7 @@ MovingSpriteVisibility:                     ; [$0026]
 ;     CastMagic_Maybe_FinishHandler
 ;     FUN_PRG15_MIRROR__ec58
 ;     MagicHitHandler__c42c
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Something_SetXYAndAnimOffset
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
@@ -742,7 +762,7 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;     FUN_PRG15_MIRROR__ec58
 ;     MagicHitHandler__c403
 ;     MagicHitHandler__c42c
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Something_SetXYAndAnimOffset
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
@@ -785,7 +805,7 @@ CurrentSprite_FlipMask:                     ; [$0029]
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     CastMagic_Maybe_FinishHandler
-;     Player_DrawArmor
+;     Player_DrawBody
 ;
 MaybeUnused_Something_ScrollPosY:           ; [$002a]
     db $00                                  ; [$002a] byte
@@ -794,7 +814,7 @@ MaybeUnused_Something_ScrollPosY:           ; [$002a]
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     CastMagic_Maybe_FinishHandler
-;     Player_DrawArmor
+;     Player_DrawBody
 ;
 MaybeUnused_Something_ScrollPosX:           ; [$002b]
     db $00                                  ; [$002b] byte
@@ -1098,7 +1118,7 @@ BYTE_0057:                                  ; [$0057]
 ;     Maybe_Area_LoadBlocks
 ;     Maybe_Screen_Scroll
 ;     Maybe_Screen_Scroll_D2A6
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Something_SetupNewScreen
 ;
@@ -1111,7 +1131,7 @@ Maybe_Player_DAT_0058:                      ; [$0058]
 ;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
 ;     Maybe_Screen_Scroll
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Something_SetupNewScreen
 ;
@@ -1213,7 +1233,7 @@ Something_ROMBank_1:                        ; [$0062]
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__df64
 ;     GameLoop_CheckShowPlayerMenu
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
 ;     Game_EnterBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
@@ -1224,8 +1244,8 @@ Something_ROMBank_1:                        ; [$0062]
 ;     Player_MoveDownScreen
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
+;     Screen_LoadAllScreenInfo
 ;     Something_SetupNewScreen
-;     Sprites_LoadScreenInfo
 ;
 Area_CurrentScreen:                         ; [$0063]
     db $00                                  ; [$0063] byte
@@ -1652,9 +1672,9 @@ TilesIndex:                                 ; [$0095]
 ;
 ; XREFS:
 ;     LookupSpriteDataPointer
-;     _CopySpriteImage [$PRG15_MIRROR::cdea]
+;     _copySpriteImage [$PRG15_MIRROR::cdea]
 ;
-SpriteImage_L:                              ; [$0096]
+CurrentSprite_Image_L:                      ; [$0096]
     db $00                                  ; [$0096] byte
 
 ;
@@ -1664,7 +1684,7 @@ SpriteImage_L:                              ; [$0096]
 ; XREFS:
 ;     LookupSpriteDataPointer
 ;
-SpriteImage_U:                              ; [$0097]
+CurrentSprite_Image_U:                      ; [$0097]
     db $00                                  ; [$0097] byte
 
 
@@ -1707,7 +1727,7 @@ PPUOffset_Index:                            ; [$009a]
 
 
 ;============================================================================
-; Number of PPU tiles the current sprite needs
+; Number of PPU tiles the current sprite needs.
 ;============================================================================
 
 ;
@@ -1715,10 +1735,11 @@ PPUOffset_Index:                            ; [$009a]
 ;     LookupSpriteDataPointer
 ;     Sprites_LoadImageForCurrentSprite
 ;
-SpritePPUTiles:                             ; [$009b]
+CurrentSprite_PPUTileCount:                 ; [$009b]
     db $00                                  ; [$009b] byte
 
-    db $00
+UNUSED_009C:                                ; [$009c]
+    db $00                                  ; [$009c] undefined
 
 
 ;============================================================================
@@ -1772,7 +1793,7 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     Player_CheckIfOnLadder
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_FallToGround
 ;     Player_IsCastMagicBlocked
 ;     Player_Maybe_MoveIfPassable
@@ -1801,7 +1822,7 @@ PlayerPosX_Full:                            ; [$009e]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawWeapon
 ;     CastMagic_Maybe_FinishHandler
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Player_TryMoveRight
 ;     Something_SetupNewScreen
@@ -1846,10 +1867,8 @@ BYTE_00a0:                                  ; [$00a0]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Game_EnterBuilding
 ;     Game_SpawnInTemple
-;     LAB_PRG15_MIRROR__e49a
-;     [$PRG15_MIRROR::e49a]
-;     LAB_PRG15_MIRROR__e4a2
-;     [$PRG15_MIRROR::e4a2]
+;     LAB_PRG15_MIRROR__e49a [$PRG15_MIRROR::e49a]
+;     LAB_PRG15_MIRROR__e4a2 [$PRG15_MIRROR::e4a2]
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbMaybeSide
@@ -1858,7 +1877,7 @@ BYTE_00a0:                                  ; [$00a0]
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
 ;     Player_ContinueHandleJump
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_FallToGround
 ;     Player_Maybe_MoveIfPassable
 ;     Player_MoveDownScreen
@@ -1877,7 +1896,7 @@ PlayerPosY:                                 ; [$00a1]
 ;     CastMagic_Maybe_FinishHandler
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_MoveDownScreen
 ;     Player_SetInitialState
 ;     Something_SetupNewScreen
@@ -1935,8 +1954,7 @@ Player_MovementTick:                        ; [$00a3]
 ;     FUN_PRG15_MIRROR__ecac
 ;     GameLoop_CheckUseCurrentItem
 ;     Game_SpawnInTemple
-;     LAB_PRG15_MIRROR__e42c
-;     [$PRG15_MIRROR::e42c]
+;     LAB_PRG15_MIRROR__e42c [$PRG15_MIRROR::e42c]
 ;     Maybe_Game_MainExitBuildingHandler
 ;     Maybe_Player_CalcSpeed
 ;     Player_CheckHandleAttack
@@ -2122,7 +2140,7 @@ DAT_00b1:                                   ; [$00b1]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     _Game_MovePlayerOnScroll
 ;
 MaybeUnused_PlayerX_ForScroll:              ; [$00b2]
@@ -2138,7 +2156,7 @@ MaybeUnused_PlayerX_ForScroll:              ; [$00b2]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     _Game_MovePlayerOnScroll
 ;
 MaybeUnused_PlayerY_ForScroll:              ; [$00b3]
@@ -2167,8 +2185,8 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 ;============================================================================
 
 ;
-; X coordinates of an object (see {{@SYMBOL:
-; PRG15_MIRROR::Area_ConvertPixelsToBlockPos@}}).
+; X coordinates of an object (see
+; Area_ConvertPixelsToBlockPos).
 ;
 ;
 ; XREFS:
@@ -2198,8 +2216,8 @@ Arg_PixelPosX:                              ; [$00b5]
     db $00                                  ; [$00b5] byte
 
 ;
-; Y coordinates of an object (see {{@SYMBOL:
-; PRG15_MIRROR::Area_ConvertPixelsToBlockPos@}}).
+; Y coordinates of an object (see
+; Area_ConvertPixelsToBlockPos).
 ;
 ;
 ; XREFS:
@@ -2381,7 +2399,7 @@ CurrentSprites_YPos_7_:                     ; [$00c9]
 ;     Sprite_SomethingFunc__a84f
 ;     Sprite_Something__a82a
 ;     GameLoop_LoadSpriteInfo
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;
 Sprites_ReadInfoAddr:                       ; [$00ca]
     db $00                                  ; [$00ca] byte
@@ -2395,15 +2413,15 @@ Sprites_ReadInfoAddr:                       ; [$00ca]
 ;     Screen_IncSpriteInfoAddr
 ;     Sprite_Something__a82a
 ;     GameLoop_LoadSpriteInfo
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;
 Sprites_ReadInfoAddr.U:                     ; [$00cb]
     db $00                                  ; [$00cb] byte
 
 ;
 ; XREFS:
-;     Maybe_LoadExtraScreenInfo
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
+;     Screen_LoadSpecialEventID
 ;     Sprites_LoadSpriteValue
 ;
 Screen_ExtraInfoAddr:                       ; [$00cc]
@@ -2411,7 +2429,7 @@ Screen_ExtraInfoAddr:                       ; [$00cc]
 
 ;
 ; XREFS:
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;     Sprites_LoadSpriteValue
 ;
 Screen_ExtraInfoAddr.U:                     ; [$00cd]
@@ -2468,23 +2486,43 @@ Maybe_WeaponRange_X:                        ; [$00d2]
 Maybe_WeaponRange_Y:                        ; [$00d3]
     db $00                                  ; [$00d3] byte
 
+
+;============================================================================
+; State for the blocked path to Mascon.
+;
+; This is normally completed by opening all fountains
+; and clearing the final block, dropping down a ladder
+; to Mascon.
+;============================================================================
+
+;
+; Whether the path to Mascon is currently being opened.
+;
+; This is set when opening the path. It's never read or
+; otherwise used.
+;
 ;
 ; XREFS:
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
 ;     Player_CheckPushingBlock
 ;     ScreenEvents_HandlePathToMasconEvent
 ;
-Maybe_PathToMasconOpened:                   ; [$00d4]
+PathToMascon_Opening:                       ; [$00d4]
     db $00                                  ; [$00d4] bool
 
 ;
+; The position of the fountain covering block before Mascon.
+;
+; This is in $YX byte form.
+;
+;
 ; XREFS:
-;     Game_ManagePathToMascon
+;     Game_OpenPathToMascon
 ;     Player_CheckPushingBlock
 ;     ScreenEvents_HandlePathToMasconEvent
 ;
-Maybe_PushableBlockPos:                     ; [$00d5]
-    db $00                                  ; [$00d5] undefined1
+PathToMascon_FountainCoverPos:              ; [$00d5]
+    db $00                                  ; [$00d5] byte
 
     db $00
 
@@ -2500,20 +2538,33 @@ Maybe_PushableBlockPos:                     ; [$00d5]
 BlockPushCounter:                           ; [$00d7]
     db $00                                  ; [$00d7] byte
 
+
+;============================================================================
+; State for animating the ladder on the path to Mascon.
+;============================================================================
+
+;
+; The current block position for the ladder on the path to
+; Mascon.
+;
 ;
 ; XREFS:
-;     Game_CheckPathToMasconOpen
-;     Game_ManagePathToMascon
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
 ;
-BYTE_00d8:                                  ; [$00d8]
+PathToMascon_LadderPos:                     ; [$00d8]
     db $00                                  ; [$00d8] byte
 
 ;
-; XREFS:
-;     Game_CheckPathToMasconOpen
-;     Game_ManagePathToMascon
+; The number of ladder blocks remaining to place when dropping
+; down the ladder to Mascon.
 ;
-Something_PathToMasonQuestCounter:          ; [$00d9]
+;
+; XREFS:
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
+;
+PathToMascon_LadderBlocksRemaining:         ; [$00d9]
     db $00                                  ; [$00d9] byte
 
 
@@ -2762,7 +2813,6 @@ TextBox_TextY:                              ; [$00eb]
 ; XREFS:
 ;     FUN_PRG12__880e
 ;     FUN_PRG12__9075
-;     FUN_PRG12__909d
 ;     FUN_PRG12__aa20
 ;     FUN_PRG12__aa46
 ;     IScriptAction_OpenShop
@@ -2775,6 +2825,7 @@ TextBox_TextY:                              ; [$00eb]
 ;     Maybe_DrawItemName
 ;     Maybe_DrawItemTitle
 ;     Maybe_Draw_Textbox_Something8F51
+;     PasswordScreen_Show
 ;     Password_DecodeValue
 ;     Password_EncodeValue
 ;     PasswrodScreen_DrawMessage
@@ -2828,7 +2879,6 @@ Temp_Int24:                                 ; [$00ec]
 ; XREFS:
 ;     FUN_PRG12__87fe
 ;     FUN_PRG12__880e
-;     FUN_PRG12__909d
 ;     FUN_PRG12__aa20
 ;     FUN_PRG12__aa46
 ;     IScriptAction_OpenShop
@@ -2838,6 +2888,7 @@ Temp_Int24:                                 ; [$00ec]
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
 ;     Maybe_DrawItemTitle
+;     PasswordScreen_Show
 ;     Password_EncodeValue
 ;     PasswrodScreen_DrawMessage
 ;     Player_AddToInventory
@@ -2963,11 +3014,11 @@ CurrentMusicInfo8:                          ; [$00f9]
 ;     SpriteBehavior__9fe3
 ;     FUN_PRG15_MIRROR__df64
 ;     FUN_PRG15_MIRROR__e8e9
-;     FUN_PRG15_MIRROR__fc65
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
+;     Game_ShowStartScreen
 ;     Player_CheckHandleEnterDoor
 ;     Player_HandleDeath
 ;     Player_UseHourGlass
@@ -3023,13 +3074,13 @@ irq:                                        ; [$00ff]
 ;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_LoadSpriteInfo
 ;     Game_DrawScreenInFrozenState
+;     Game_InitMMCAndBank
 ;     Game_InitScreenAndMusic
 ;     Game_LoadAreaTable
 ;     LoadPalette2
 ;     LoadPalette
 ;     LookupSpriteDataPointer
 ;     MMC1_EnsurePRG
-;     MMC1_LoadBank15
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SavePRGBankAndUpdateTo
 ;     MMC1_UpdatePRGBank
@@ -3046,8 +3097,7 @@ irq:                                        ; [$00ff]
 ;     TextBox_Maybe_ShowNextCharFromBank
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
-;     _loadSpriteToPPUBuffer
-;     [$PRG15_MIRROR::cdd1]
+;     _loadSpriteToPPUBuffer [$PRG15_MIRROR::cdd1]
 ;
 CurrentROMBank2:                            ; [$0100]
     db $00                                  ; [$0100] ROMBank
@@ -4274,7 +4324,7 @@ CurrentPaletteData_15_:                     ; [$02a2]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_SomethingA708
 ;     StartScreen_Draw
@@ -4285,7 +4335,7 @@ CurrentPaletteData_30_:                     ; [$02b1]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_SomethingA708
 ;     StartScreen_Draw
@@ -4531,8 +4581,8 @@ CurrentSprites_Entities:                    ; [$02cc]
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
 ;     GameLoop_ClearSprites
 ;     GameLoop_LoadSpriteImages
-;     Maybe_IsSpriteNotOnScreen
-;     Sprites_HasBigEnemy
+;     Maybe_IsSpriteEntityNotOnScreen
+;     Sprites_HasBoss
 ;     Sprites_HasCurrentSprites
 ;     Sprites_HasSpritesNotOfType
 ;     Sprites_PopulateNextAvailableSprite
@@ -4550,8 +4600,8 @@ CurrentSprites_Entities_6_:                 ; [$02d2]
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
 ;     GameLoop_ClearSprites
 ;     GameLoop_LoadSpriteImages
-;     Maybe_IsSpriteNotOnScreen
-;     Sprites_HasBigEnemy
+;     Maybe_IsSpriteEntityNotOnScreen
+;     Sprites_HasBoss
 ;     Sprites_HasCurrentSprites
 ;     Sprites_HasSpritesNotOfType
 ;     Sprites_PopulateNextAvailableSprite
@@ -5488,7 +5538,6 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     FUN_PRG14__ac21
 ;     HandlePlayerHitByMagic
 ;     LAB_PRG14__8043 [$PRG14::8043]
-;     LAB_PRG14__89ff [$PRG14::89ff]
 ;     Maybe_Sprites_HasAnyEnemyOnScreen
 ;     MoveSpriteHorizIfPossible
 ;     MoveSpriteVerticalIfPossible
@@ -5511,6 +5560,7 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     Sprites_SetCurrentSpriteCanWalk
 ;     Sprites_UpdateAllStates
 ;     WasPlayerHitByMagic
+;     _afterFarJump [$PRG14::89ff]
 ;     _updateSprite [$PRG14::8011]
 ;     CastMagic_CalculateVisibility
 ;     GameLoop_LoadSpriteImages
@@ -5682,7 +5732,7 @@ DAT_0385:                                   ; [$0385]
 
 
 ;============================================================================
-; ROM bank where images of the current sprite can be found
+; ROM bank where images of the current sprite can be found.
 ;============================================================================
 
 ;
@@ -5693,7 +5743,8 @@ DAT_0385:                                   ; [$0385]
 CurrentSprite_ImagesBank:                   ; [$0386]
     db $00                                  ; [$0386] byte
 
-    db $00,$00                              ; [$0388] undefined
+UNUSED_0387:                                ; [$0387]
+    db $00,$00                              ; [$0387] undefined
 
 
 ;============================================================================
@@ -5756,13 +5807,19 @@ CurrentSprite_Entity:                       ; [$038b]
 CurrentSprite_Value:                        ; [$038c]
     db $00                                  ; [$038c] byte
 
+
+;============================================================================
+; Index into HUD_ATTRIBUTE_DATA_BY_INDEX where the
+; HUD palette can be found.
+;============================================================================
+
 ;
 ; XREFS:
 ;     Maybe_Draw_Textbox_Something8FF6
 ;     LoadPalette2
 ;     UI_SetHUDPPUAttributes
 ;
-Something_FromPaletteIndexLookup:           ; [$038d]
+HUD_AttributeDataIndex:                     ; [$038d]
     db $00                                  ; [$038d] byte
 
     db $00                                  ; [$038f] undefined
@@ -6077,7 +6134,7 @@ SelectedWeapon:
 ;     SpriteBehavior__a354
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_Player_UpdateArmorState
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_HandleDeath
 ;     Player_SetArmor
 ;
@@ -6106,7 +6163,7 @@ SelectedArmor:                              ; [$03be]
 ;     WasPlayerHitByMagic
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_Player_UpdateArmorState
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_HandleDeath
 ;     Player_SetShield
 ;     Player_Something_ShieldState
@@ -6293,7 +6350,7 @@ NumberOfItems:                              ; [$03c6]
 ;     GameLoop_ClearSprites
 ;     IScripts_ClearPortrait
 ;     IScripts_DrawPortraitAnimationFrame
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Something_Temp03C7Times5
 ;
 Temp_03C7:                                  ; [$03c7]
@@ -6371,6 +6428,7 @@ Something_Maybe_PaletteIndex:               ; [$03d0]
 ;     Player_CheckHandleEnterDoor
 ;     Player_EnterDoorToInside
 ;     ScreenEvents_HandleBoss
+;     _afterFarJump [$PRG15_MIRROR::c603]
 ;
 Areas_DefaultMusic:                         ; [$03d1]
     db $00                                  ; [$03d1] Music
@@ -6384,21 +6442,43 @@ Areas_DefaultMusic:                         ; [$03d1]
 Area_Music_Outside:                         ; [$03d2]
     db $00                                  ; [$03d2] byte
 
+
+;============================================================================
+; Palette index data.
+;============================================================================
+
+;
+; The saved palette index, when temporarily switching to a new one.
+;
+; This is used in IScripts.
+;
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f24d
 ;     IScripts_ClearPortrait
 ;
-Something_PaletteIndex:                     ; [$03d3]
+Palette_SavedIndex:                         ; [$03d3]
     db $00                                  ; [$03d3] byte
 
+;
+; The current palette index.
+;
+; This is set when loading a new palette, and used
+; exclusively for the process of restoring palette state
+; after showing portraits in IScripts.
+;
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f24d
 ;     Palette_LoadFromIndex
 ;
-CurrentPalette:                             ; [$03d4]
+Palette_CurrentIndex:                       ; [$03d4]
     db $00                                  ; [$03d4] byte
+
+
+;============================================================================
+; Region and screen information.
+;============================================================================
 
 ;
 ; XREFS:
@@ -6822,8 +6902,8 @@ SpecialItems:                               ; [$042c]
 ;     SpriteBehavior__a558
 ;     SpriteBehavior__a56f
 ;     SpriteBehavior__a586
-;     Game_CheckPathToMasconOpen
-;     Game_ManagePathToMascon
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
 ;     Player_CheckPushingBlock
 ;     Player_PickUpMattockWithQuest
 ;     Player_PickUpWingBootsWithQuest
@@ -6833,34 +6913,51 @@ SpecialItems:                               ; [$042c]
 Quests:                                     ; [$042d]
     db $00                                  ; [$042d] Quests
 
+
+;============================================================================
+; The loaded special event ID for the current screen.
+;
+; This controls which custom logic is run for a screen,
+; and the state around that logic.
+;
+; Bits 0-2 define the handler in a lookup table (count of
+; 0-2), but in theory could be extended for more handlers.
+;
+; Bit 7 is reserved for the handler's use.
+;
+; If 0xFF, this is unset. Handlers may set this after
+; use.
+;============================================================================
+
 ;
 ; XREFS:
+;     DEAD_FUN_PRG15_MIRROR__ef45
 ;     FUN_PRG15_MIRROR__e8e9
 ;     GameLoop_RunScreenEventHandlers
-;     Maybe_LoadExtraScreenInfo
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandlePathToMasconEvent
+;     Screen_LoadSpecialEventID
 ;     Screen_SetNoSpecialEventID
 ;
 CurrentScreen_SpecialEventID:               ; [$042e]
-    db $00                                  ; [$042e] undefined1
+    db $00                                  ; [$042e] byte
 
 ;
 ; XREFS:
 ;     Game_InitScreenAndMusic
+;     Game_InitStateForSpawn
 ;     Game_MainLoop
-;     Something_InitOrResetState
 ;
 DAT_042f:                                   ; [$042f]
     db $00                                  ; [$042f] undefined1
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__da29
 ;     LoadPalette
 ;     Player_HandleDeath
 ;     Screen_FadeToBlack
 ;     Screen_NextTransitionState
+;     UNUSED_FUN_PRG15_MIRROR__da29
 ;
 PaletteIndex:                               ; [$0430]
     db $00                                  ; [$0430] byte
@@ -6906,9 +7003,9 @@ Player_HP_L:                                ; [$0432]
 ; XREFS:
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
+;     Game_InitStateForStartScreen
 ;     Game_SetupAndLoadArea
-;     Game_Something_InitState
 ;     Game_SpawnInTemple
 ;     Player_EnterDoorToOutside
 ;
@@ -6964,10 +7061,10 @@ PlayerTitle:                                ; [$0437]
 
 ;
 ; XREFS:
+;     Game_InitStateForSpawn
 ;     Game_MainLoop
 ;     Player_HandleDeath
 ;     Player_ReduceHP
-;     Something_InitOrResetState
 ;
 PlayerIsDead:                               ; [$0438]
     db $00                                  ; [$0438] bool
@@ -7199,8 +7296,8 @@ Temp2_SomethingChangedHP:                   ; [$04c1]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     PasswordScreen_GetDPadBits
+;     PasswordScreen_Show
 ;
 Password_DPadBits:                          ; [$04c2]
     db $00                                  ; [$04c2] ButtonBitmask
@@ -7215,8 +7312,8 @@ Password_DPadBits:                          ; [$04c2]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     PasswordScreen_GetDPadBits
+;     PasswordScreen_Show
 ;
 Password_CounterBeforeAutoRepeatMove:       ; [$04c3]
     db $00,$00,$00                          ; [$04c3] byte
@@ -7705,7 +7802,7 @@ PPUBuffer_9_:                               ; [$0509]
 ;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     Game_Init
-;     Game_ManagePathToMascon
+;     Game_OpenPathToMascon
 ;     Player_CheckIfOnLadder
 ;     Player_CheckPushingBlock
 ;     Player_FallToGround
@@ -7787,14 +7884,14 @@ ScreenBuffer_16_:                           ; [$0610]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;
 ScreenBuffer_30_:                           ; [$061e]
     db $00                                  ; [30]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     Area_ScrollToNextRoom
 ;
 ScreenBuffer_31_:                           ; [$061f]
@@ -7804,7 +7901,7 @@ ScreenBuffer_31_:                           ; [$061f]
 
 ;
 ; XREFS:
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
 ;
 ScreenBuffer_34_:                           ; [$0622]
     db $00                                  ; [34]:
@@ -7874,11 +7971,11 @@ ScreenBuffer_34_:                           ; [$0622]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     Maybe_Password_CursorHandler
 ;     Maybe_Password_CursorHandler_Something9545
 ;     Menu_Something_954F
 ;     PasswordScreen_SetCusorCol
+;     PasswordScreen_Show
 ;     Password_IsCursorWrapping
 ;     Password_NormalizeCursorColForBottomRow
 ;
@@ -7887,9 +7984,9 @@ Password_CursorCol:                         ; [$0662]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     Maybe_Password_CursorHandler
 ;     Menu_Something_954F
+;     PasswordScreen_Show
 ;     Password_IsCursorWrapping
 ;
 Password_CursorRow:                         ; [$0663]
@@ -7897,7 +7994,6 @@ Password_CursorRow:                         ; [$0663]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     FUN_PRG12__92ed
 ;     LAB_PRG12__93bd [$PRG12::93bd]
 ;     LAB_PRG12__93d7 [$PRG12::93d7]
@@ -7907,27 +8003,28 @@ Password_CursorRow:                         ; [$0663]
 ;     Menu_Draw_Something93B4 [$PRG12::93b4]
 ;     Menu_Something_93EC
 ;     PasswordScreen_Maybe_WriteCharAtCursor
+;     PasswordScreen_Show
 ;
 Password_FieldCursorPos:                    ; [$0664]
     db $00                                  ; [100]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     Menu_Draw_Something9312
 ;     Menu_Draw_Something9351
 ;     Menu_Draw_Something9386
+;     PasswordScreen_Show
 ;
 Password_MaxChars:                          ; [$0665]
     db $00                                  ; [101]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
 ;     Menu_Draw_Something9312
 ;     Menu_Draw_Something9351
 ;     Menu_Draw_Something9386
 ;     Menu_Something_93EC
+;     PasswordScreen_Show
 ;     Password_Maybe_CheckPasswordLength
 ;
 Password_EnteredCharsLength:                ; [$0666]
@@ -7967,9 +8064,9 @@ Password_EnteredCharsLength:                ; [$0666]
 
 ;
 ; XREFS:
-;     FUN_PRG12__9f44
+;     StartScreen_CheckHandleInput
 ;     StartScreen_Draw
-;     FUN_PRG15_MIRROR__fc65
+;     Game_ShowStartScreen
 ;
 ScreenBuffer_135_:                          ; [$0687]
     db $00                                  ; [135]:

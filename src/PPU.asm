@@ -31,10 +31,8 @@ PPUMASK:                                    ; [$2001]
 ;
 ; XREFS:
 ;     Game_Init
-;     LAB_PRG15_MIRROR__cb0c
-;     [$PRG15_MIRROR::cb0c]
-;     LAB_PRG15_MIRROR__cb11
-;     [$PRG15_MIRROR::cb11]
+;     LAB_PRG15_MIRROR__cb0c [$PRG15_MIRROR::cb0c]
+;     LAB_PRG15_MIRROR__cb11 [$PRG15_MIRROR::cb11]
 ;     PPU_HandleOnInterrupt
 ;
 PPUSTATUS:                                  ; [$2002]
@@ -59,7 +57,7 @@ PPUSCROLL:                                  ; [$2005]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     StartScreen_Draw
 ;     CHR_LoadTilesetPages
 ;     FUN_PRG15_MIRROR__ce80
@@ -84,7 +82,7 @@ PPUADDR:                                    ; [$2006]
 
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     StartScreen_Draw
 ;     UI_DrawText
 ;     CHR_LoadTilesetPages

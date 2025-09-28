@@ -8,13 +8,30 @@ BASE $c000
 
 
 ;============================================================================
-; TODO: Document UI_SetHUDPPUAttributes
+; Write attribute data for the HUD to the PPU.
+;
+; The attribute data will be written from
+; HUD_ATTRIBUTE_DATA_BY_INDEX based on the
+; HUD_AttributeDataIndex set when loading the
+; screen.
 ;
 ; INPUTS:
-;     None.
+;     HUD_AttributeDataIndex:
+;         The index into the lookup table for the current
+;         screen.
+;
+;     HUD_ATTRIBUTE_DATA_BY_INDEX:
+;         The lookup table of attribute data to write.
 ;
 ; OUTPUTS:
-;     TODO
+;     PPUADDR:
+;         The updated PPU address.
+;
+;     PPUDATA:
+;         The written data.
+;
+; CALLS:
+;     UI_DrawHUD
 ;
 ; XREFS:
 ;     Something_SetupNewScreen
@@ -28,54 +45,77 @@ UI_SetHUDPPUAttributes:                     ; [$c000]
     STA a:PPUADDR                           ; Set upper PPUADDR as 0x23.
     LDA #$c0
     STA a:PPUADDR                           ; Set upper PPUADDR as 0xC0.
-    LDX a:Something_FromPaletteIndexLookup
-    LDA #$c01b,X
+    LDX a:HUD_AttributeDataIndex            ; X = HUD attribute data index,
+                                            ; computed when setting up the
+                                            ; screen.
+    LDA #$c01b,X                            ; Load the value for the
+                                            ; attribute data.
 
     ;
-    ; Write 8 bytes at a time based on data from the
-    ; lookup table PRG15_MIRROR::c01b at index
-    ; Something_FromPaletteIndexLookup.
+    ; Write 8 bytes based on data from the lookup table
+    ; HUD_ATTRIBUTE_DATA_BY_INDEX at index
+    ; HUD_AttributeDataIndex.
     ;
-    LDX #$08
+    LDX #$08                                ; X = 8 (loop counter).
 
   @_writeLoop:                              ; [$c012]
-    STA a:PPUDATA
-    DEX
-    BNE @_writeLoop
-    JMP UI_DrawHUD
+    STA a:PPUDATA                           ; Write to the PPU.
+    DEX                                     ; X--
+    BNE @_writeLoop                         ; If X > 0, loop.
 
+    ;
+    ; Draw the HUD.
+    ;
+    JMP UI_DrawHUD                          ; Jump to draw the HUD.
+
+
+;============================================================================
+; Attribute data used for the HUD.
 ;
-; Group 1
+; These are indexed by values from lookup table
+; PALETTE_INDEX_TO_HUD_ATTRIBUTE_INDEX (stored in
+; HUD_AttributeDataIndex.
 ;
+; Only values 0, 1, 2, and 3 are used.
+;
+; The rest seem to be unused, but many end up styled to
+; better match regions of the game.
+;============================================================================
+
 ;
 ; XREFS:
 ;     UI_SetHUDPPUAttributes
 ;
-BYTE_PRG15_MIRROR__c01b:                    ; [$c01b]
-    db $00,$55,$aa,$ff,$41,$20,$04,$07      ; [$c01b] byte
-
-;
-; Group 2
-;
-    db $08,$09                              ; [$c023] byte
-
-    db $0a                                  ; Start Screen
-    db $61,$20,$04,$0b,$0c                  ; [$c026] byte
-
-;
-; Group 3
-;
-    db $0d,$0e,$56,$20,$03,$0f,$10,$11      ; [$c02b] byte
+HUD_ATTRIBUTE_DATA_BY_INDEX:                ; [$c01b]
+    db $00                                  ; [0]: Dartmoor, Castle of
+                                            ; Fraternal, King Grieve's Room
+    db $55                                  ; [1]: Start Screen
+    db $aa                                  ; [2]: Most exterior areas.
+    db $ff                                  ; [3]: Most interior areas.
+    db $41                                  ; [4]: Here and below are unused.
+    db $20                                  ; [5]:
+    db $04                                  ; [6]:
+    db $07                                  ; [7]:
+    db $08                                  ; [8]:
+    db $09                                  ; [9]:
+    db $0a                                  ; [10]:
+    db $61                                  ; [11]:
+    db $20                                  ; [12]:
+    db $04                                  ; [13]:
+    db $0b                                  ; [14]:
+    db $0c                                  ; [15]:
+    db $0d                                  ; [16]:
+    db $0e                                  ; [17]:
+    db $56                                  ; [18]:
+    db $20                                  ; [19]:
+    db $03                                  ; [20]:
+    db $0f                                  ; [21]:
+    db $10                                  ; [22]:
+    db $11                                  ; [23]:
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__c033
-;
-; INPUTS:
-;     X
-;
-; OUTPUTS:
-;     TODO
+; XXX Maybe unused?
 ;============================================================================
 FUN_PRG15_MIRROR__c033:                     ; [$c033]
     LDY #$00
@@ -523,75 +563,132 @@ GameLoop_ClearSprites:                      ; [$c130]
 
 
 ;============================================================================
-; MAYBE: Load information on the sprites on the current screen.
+; Load extra information about the contents of the screen.
 ;
-; TODO: Lots to figure out
+; This may include data such as sprite values, NPC IScript
+; entrypoints, and special screen events (such as boss kill
+; triggers).
 ;
 ; INPUTS:
-;     None
+;     Area_CurrentArea:
+;         The area being loaded.
+;
+;     Area_CurrentScreen:
+;         The screen being loaded within the area.
+;
+;     AREA_SPRITE_ADDRESSES:
+;         The table of areas to screen lists.
 ;
 ; OUTPUTS:
-;     None
+;     Sprites_ReadInfoAddr:
+;         The starting read address for the screen info.
+;
+;     CurrentScreen_SpecialEventID:
+;         The screen's loaded special event ID (0xFF if
+;         there is none).
+;
+;     Screen_ExtraInfoAddr:
+;     Temp_Addr:
+;         Used internally and clobbered.
+;
+; CALLS:
+;     Screen_LoadSpecialEventID
 ;
 ; XREFS:
 ;     GameLoop_LoadSpriteInfo
 ;============================================================================
-Sprites_LoadScreenInfo:                     ; [$c154]
+Screen_LoadAllScreenInfo:                   ; [$c154]
     ;
     ; Set the address of the sprites-for-screen lookup table
     ; for the area.
     ;
-    LDA Area_CurrentArea                    ; Load the current level.
-    ASL A
-    TAY
-    LDA #$8210,Y
-    STA Temp_Addr
-    LDA #$8211,Y
-    STA Temp_Addr.U
-    LDY #$01
-    LDA (Temp_Addr),Y
-    CMP #$ff
-    BEQ RETURN_C1B3
+    LDA Area_CurrentArea                    ; A = Current area index.
+    ASL A                                   ; Convert to a word offset for
+                                            ; the lookup table.
 
     ;
-    ; Set the start address for a screen's sprite information.
+    ; Set the starting address of the screen data.
     ;
-    LDA Area_CurrentScreen
-    ASL A
-    TAY
-    LDA (Temp_Addr),Y
-    STA Sprites_ReadInfoAddr
-    INY
-    LDA (Temp_Addr),Y
-    STA Sprites_ReadInfoAddr.U
+    TAY                                     ; Y = A
+    LDA #$8210,Y                            ; Load the upper byte of the
+                                            ; address.
+    STA Temp_Addr                           ; Store for reading.
+    LDA #$8211,Y                            ; Load the lower byte of thea
+                                            ; ddress.
+    STA Temp_Addr.U                         ; Store it.
 
     ;
-    ; Load information for all the sprites on the screen.
+    ; Check the first byte of the address. If 0xFF,
+    ; nothing will be loaded.
     ;
-    LDY #$00
+    LDY #$01                                ; Y = 1
+    LDA (Temp_Addr),Y                       ; Load the address for the
+                                            ; screens list.
+    CMP #$ff                                ; Is it 0xFF?
+    BEQ RETURN_C1B3                         ; If so, there's nothing to load.
+                                            ; Return.
 
-  @LAB_PRG15_MIRROR__c179:                  ; [$c179]
-    LDA (Sprites_ReadInfoAddr),Y
-    CMP #$ff
-    BNE @LAB_PRG15_MIRROR__c18f
+    ;
+    ; Set the start address for a screen's sprite and metadata
+    ; information.
+    ;
+    LDA Area_CurrentScreen                  ; A = Current screen index.
+    ASL A                                   ; Convert to a word offset for
+                                            ; the lookup table.
+    TAY                                     ; Y = A
+
+    ;
+    ; Read the address for the screen information.
+    ;
+    LDA (Temp_Addr),Y                       ; Load the lower byte of the
+                                            ; screen address.
+    STA Sprites_ReadInfoAddr                ; Store it as the lower byte of
+                                            ; the of the sprites read
+                                            ; address.
+    INY                                     ; Y++
+    LDA (Temp_Addr),Y                       ; Load the upper byte.
+    STA Sprites_ReadInfoAddr.U              ; And store it.
+
+    ;
+    ; Find the end of the sprites list for the screen.
+    ;
+    ; Sprites are in 2-byte pairs of (Entity ID, Sprite Value).
+    ; This will skip those bytes until the end of the list is
+    ; hit.
+    ;
+    LDY #$00                                ; Y = 0
+
+  @_readLoop:                               ; [$c179]
+    LDA (Sprites_ReadInfoAddr),Y            ; Load the next byte from the
+                                            ; screen data.
+    CMP #$ff                                ; Is it 0xFF?
+    BNE @_prepareNextLoopIter               ; If not, jump to prepare for the
+                                            ; next loop
 
     ;
     ; The sprite information is 0xFF, so we're done looping.
+    ; Read the screen information.
     ;
-    INY
-    TYA
+    INY                                     ; Y++
+    TYA                                     ; A = Y
     CLC
-    ADC Sprites_ReadInfoAddr
+    ADC Sprites_ReadInfoAddr                ; Increment the read address by 2
+                                            ; bytes.
     STA Screen_ExtraInfoAddr
-    LDA Sprites_ReadInfoAddr.U
-    ADC #$00
-    STA Screen_ExtraInfoAddr.U
-    JMP Maybe_LoadExtraScreenInfo
+    LDA Sprites_ReadInfoAddr.U              ; Load the upper byte.
+    ADC #$00                                ; Add carry, if lower byte
+                                            ; overflowed.
+    STA Screen_ExtraInfoAddr.U              ; Store as the new upper byte.
+    JMP Screen_LoadSpecialEventID           ; Read the extra screen
+                                            ; information.
 
-  @LAB_PRG15_MIRROR__c18f:                  ; [$c18f]
+    ;
+    ; Increment by 2 (the sprite entity and value).
+    ;
+  @_prepareNextLoopIter:                    ; [$c18f]
     INY                                     ; Y++
     INY                                     ; Y++
-    BNE @LAB_PRG15_MIRROR__c179
+    BNE @_readLoop                          ; If Y > 0, loop.
 
     ;
     ; v-- Fall through --v
@@ -599,16 +696,19 @@ Sprites_LoadScreenInfo:                     ; [$c154]
 
 
 ;============================================================================
-; TODO: Document Screen_SetNoSpecialEventID
+; Clear the special event ID for the current screen.
+;
+; This disables any custom logic specific to certain screens.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentScreen_SpecialEventID:
+;         Set to 0xFF (unset).
 ;
 ; XREFS:
-;     Maybe_LoadExtraScreenInfo
+;     Screen_LoadSpecialEventID
 ;============================================================================
 Screen_SetNoSpecialEventID:                 ; [$c193]
     ;
@@ -622,18 +722,32 @@ Screen_SetNoSpecialEventID:                 ; [$c193]
 
 
 ;============================================================================
-; TODO: Document Maybe_LoadExtraScreenInfo
+; Load extra information about the current screen.
+;
+; Screens may contain a special event ID, which adds custom
+; logic to perform on each tick on a screen. This is used
+; for three things:
+;
+; 1. Managing the pushable block status on the path to
+;    Mascon.
+; 2. Boss battle logic.
+; 3. Final boss logic.
 ;
 ; INPUTS:
-;     None.
+;     Screen_ExtraInfoAddr:
+;     #$cd:
+;         The address containing the extra screen
+;         information.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentScreen_SpecialEventID:
+;         The special event ID loaded from the screen info,
+;         or 0xFF (unset) if not found.
 ;
 ; XREFS:
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;============================================================================
-Maybe_LoadExtraScreenInfo:                  ; [$c199]
+Screen_LoadSpecialEventID:                  ; [$c199]
     ;
     ; Begin scanning for a 0xFF in the screen information. This
     ; will indicate the start of extra information for the screen
@@ -686,7 +800,7 @@ Maybe_LoadExtraScreenInfo:                  ; [$c199]
 
     ;
     ; XREFS:
-    ;     Sprites_LoadScreenInfo
+    ;     Screen_LoadAllScreenInfo
     ;
 RETURN_C1B3:                                ; [$c1b3]
     RTS
@@ -700,7 +814,7 @@ RETURN_C1B3:                                ; [$c1b3]
 ; the sprite should be placed.
 ;
 ; INPUTS:
-;     CurrentROMBank:
+;     CurrentROMBank2:
 ;         The current ROM bank.
 ;
 ;     Sprites_ReadInfoAddr:
@@ -723,7 +837,7 @@ RETURN_C1B3:                                ; [$c1b3]
 ;         from.
 ;
 ; CALLS:
-;     Sprites_LoadScreenInfo
+;     Screen_LoadAllScreenInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;     MMC1_UpdatePRGBank
 ;     MMC1_UpdatePRGBankToStackA
@@ -744,7 +858,7 @@ GameLoop_LoadSpriteInfo:                    ; [$c1b4]
     ;
     ; Load all the sprites for this screen.
     ;
-    JSR Sprites_LoadScreenInfo              ; Load the sprite information for
+    JSR Screen_LoadAllScreenInfo            ; Load the sprite information for
                                             ; the screen.
 
     ;
@@ -1033,7 +1147,8 @@ Sprites_LoadSpriteValue:                    ; [$c25b]
     LDY #$00                                ; Y = 0
     LDA (Screen_ExtraInfoAddr),Y            ; A = Extra information for the
                                             ; sprite.
-    STA CurrentSprites_Values,X             ; Store in CurrentSprites_Values.
+    STA CurrentSprites_Values,X             ; Store in
+                                            ; CurrentSprites_Values.
     CMP #$ff                                ; Is it 0xFF (unset)?
     BEQ @_restoreBankAndReturn              ; If so, we're done. Jump.
 
@@ -1144,6 +1259,7 @@ Sprites_StoreBankForCurrentSprite:          ; [$c27c]
 ;     Game_MainLoop
 ;     Game_SetupAndLoadArea
 ;     Game_Start
+;     IScripts_ClearPortrait
 ;     Maybe_Game_EnterBuildingHandler
 ;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
@@ -1169,8 +1285,9 @@ GameLoop_LoadSpriteImages:                  ; [$c28d]
     ; We'll only process if the entity is not unset.
     ;
   @_loop:                                   ; [$c296]
-    STX a:CurrentSpriteIndex                ; Store it as the currently-
-                                            ; processed sprite index.
+    STX a:CurrentSpriteIndex                ; Store it as the
+                                            ; currently-processed sprite
+                                            ; index.
     LDA CurrentSprites_Entities,X           ; Load the associated sprite
                                             ; entity ID.
     CMP #$ff                                ; Is it 0xFF (unset)?
@@ -1894,14 +2011,14 @@ USE_ITEM_JUMP_TABLE:                        ; [$c49d]
     dw $c49b                                ; [6]: "Q" Key
     dw $c49b                                ; [7]: "J" Key
     dw $c49b                                ; [8]: "Jo" Key
-  dw Player_UseMattock-1                    ; [9]: Mattock
+    dw Player_UseMattock-1                  ; [9]: Mattock
     dw $c49b                                ; [10]: Magical Rod
     dw $c49b                                ; [11]: Crystal
     dw $c49b                                ; [12]: Lamp
-  dw Player_UseHourGlass-1                  ; [13]: Hour Glass
+    dw Player_UseHourGlass-1                ; [13]: Hour Glass
     dw $c49b                                ; [14]: Book
-  dw Player_UseWingBoots-1                  ; [15]: Wing Boots
-  dw Player_UseRedPotion-1                  ; [16]: Red Potion
+    dw Player_UseWingBoots-1                ; [15]: Wing Boots
+    dw Player_UseRedPotion-1                ; [16]: Red Potion
 
 
 ;============================================================================
@@ -1986,9 +2103,9 @@ Player_UseElixir:                           ; [$c4ca]
     ;
     LDA #$85                                ; 0x85 == Use Elixir.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c                                  ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
-    db $41,$82                              ; [$c4d8] byte
 
 
 ;============================================================================
@@ -2134,8 +2251,11 @@ Player_UseRedPotion:                        ; [$c533]
     ;
     LDA #$80                                ; 0x80 == Use Red Potion IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$c53b]
     JSR Player_ClearSelectedItem            ; Clear the selected item.
 
     ;
@@ -2240,12 +2360,14 @@ Player_UseWingBoots:                        ; [$c579]
     LDA #$83                                ; 0x83 == Wing Boots used
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Remove the item.
     ;
+  @_afterFarJump:                           ; [$c581]
     JSR Player_ClearSelectedItem            ; Clear the selected item.
 
     ;
@@ -2365,7 +2487,8 @@ Game_DecWingBootsDuration:                  ; [$c59d]
     LDA #$96                                ; 0x96 == Wing Boots are gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
@@ -2419,12 +2542,14 @@ Player_UseHourGlass:                        ; [$c5c8]
     ;
     LDA #$82                                ; Set the IScript to run to 0x82.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Remove the item.
     ;
+  @_afterFarJump:                           ; [$c5d0]
     JSR Player_ClearSelectedItem            ; Clear the selected item.
 
     ;
@@ -2515,12 +2640,14 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
     LDA #$97                                ; 0x97 == Hour Glass is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Load the area's default music.
     ;
+  @_afterFarJump:                           ; [$c603]
     LDA a:Areas_DefaultMusic                ; Load the music for the area.
     STA CurrentMusic                        ; Store it.
 
@@ -2676,14 +2803,14 @@ Player_UseMattock:                          ; [$c616]
     ;
     LDA #$81
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c                                  ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
-    db $41,$82                              ; [$c64a] byte
 
     ;
     ; Remove the Mattock.
     ;
-  @LAB_PRG15_MIRROR__c64c:                  ; [$c64c]
+  @_afterFarJump:                           ; [$c64c]
     JSR Player_ClearSelectedItem            ; Clear the selected item.
 
     ;
@@ -2884,12 +3011,14 @@ Player_PickUpHourGlass:                     ; [$c6be]
     LDA #$8a                                ; 0x8A == Hour Glass picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c6c6]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -2961,12 +3090,14 @@ Player_PickUpWingBoots:                     ; [$c6d8]
     LDA #$89                                ; 0x89 == Wing boots picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c6e0]
     LDA #$08                                ; 0x8 == Item pick-up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3020,12 +3151,14 @@ Player_PickUpBattleSuit:                    ; [$c6ea]
     LDA #$8b                                ; 0x8B == Battle Suit picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c6f2]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3092,12 +3225,14 @@ Player_PickUpBattleHelmet:                  ; [$c70a]
     LDA #$8c                                ; 0x8C == Battle Helmet picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c712]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3165,12 +3300,14 @@ Player_PickUpDragonSlayer:                  ; [$c72a]
     LDA #$8d                                ; 0x8D == Dragon Slayer picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c732]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3262,12 +3399,14 @@ Player_PickUpMattock:                       ; [$c752]
     LDA #$88                                ; 0x88 == Mattock picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c75a]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3499,12 +3638,14 @@ Maybe_Player_PickUpGlove:                   ; [$c7cf]
     LDA #$92                                ; 0x92 == Glove picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c7d7]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3547,12 +3688,14 @@ Player_PickUpBlackOnyx:                     ; [$c7e4]
     LDA #$8e                                ; 0x8E == Black Onyx picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c7ec]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3596,12 +3739,14 @@ Player_PickUpPendant:                       ; [$c7fa]
     LDA #$8f                                ; 0x8F = Pendant picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c802]
     LDA #$08                                ; 0x08 = Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3645,12 +3790,14 @@ Player_PickUpMagicalRod:                    ; [$c810]
     LDA #$90                                ; 0x90 == Pendant picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c818]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3694,16 +3841,14 @@ Player_PickUpRedPotion:                     ; [$c826]
     LDA #$87                                ; 0x87 == Red Potion picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-
-    ;
-    ; \
-    ;
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c82e]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3747,12 +3892,14 @@ Player_PickUpPoison:                        ; [$c83c]
     LDA #$91                                ; 0x91 = Poison picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for the player taking damage.
     ;
+  @_afterFarJump:                           ; [$c844]
     LDA #$04                                ; 0x084 = Player took damage
                                             ; sound.
     JSR Sound_PlayEffect                    ; Play it.
@@ -3815,12 +3962,14 @@ Player_PickUpElixir:                        ; [$c864]
     LDA #$86                                ; 0x86 == Elixir picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c86c]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3863,12 +4012,14 @@ Player_PickUpOintment:                      ; [$c87a]
     LDA #$94                                ; 0x94 == Ointment picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
     ;
     ; Play the sound effect for picking up an item.
     ;
+  @_afterFarJump:                           ; [$c882]
     LDA #$08                                ; 0x08 == Item picked up sound.
     JSR Sound_PlayEffect                    ; Play it.
 
@@ -3966,7 +4117,8 @@ Game_DecGloveDuration:                      ; [$c89b]
     ;
     LDA #$93                                ; 0x93 == Glove is gone IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8b3]
@@ -4027,7 +4179,8 @@ Game_DecOintmentDuration:                   ; [$c8b4]
     LDA #$95                                ; 0x95 == Ointment is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8cc]
@@ -4248,9 +4401,9 @@ Game_Init:                                  ; [$c913]
     STA #$0700,X
     INX
     BNE @_loop
-    JSR MMC1_LoadBank15
+    JSR Game_InitMMCAndBank
     JSR Game_InitScreenAndMusic
-    JMP Game_Something_InitState
+    JMP Game_InitStateForStartScreen
 
     ;
     ; Check whether the OAM needs to be reset.
@@ -4333,8 +4486,8 @@ OnInterrupt__noProcessInterrupts:           ; [$c989]
 ;
 ; Processing of these can be enabled or disabled
 ; by other code as needed by other code by setting
-; Game_EnableInterruptHandlers and {{@SYMBOL:
-; RAM::Game_NeedOAMReset@}}.
+; Game_EnableInterruptHandlers and
+; Game_NeedOAMReset.
 ;
 ; Even if main input handlers are disabled, this will
 ; generally write to the PPU and play audio (so music
@@ -4559,8 +4712,8 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ;
 ; XREFS:
 ;     FUN_PRG12__8b71
-;     FUN_PRG12__909d
 ;     IScripts_UpdatePortraitAnimation
+;     PasswordScreen_Show
 ;     Shop_Something__8d5a
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
@@ -4569,10 +4722,10 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ;     EndGame_Begin
 ;     EndGame_MainLoop
 ;     FUN_PRG15_MIRROR__dacd
-;     FUN_PRG15_MIRROR__fc65
 ;     GameLoop_CheckPauseGame
 ;     Game_MainLoop
 ;     Game_SetupAndLoadArea
+;     Game_ShowStartScreen
 ;     Game_Start
 ;     Maybe_Game_EnterBuildingHandler
 ;     Maybe_Game_EnterScreenHandler
@@ -4606,8 +4759,8 @@ WaitForNextFrame:                           ; [$ca25]
 ;     None
 ;
 ; XREFS:
-;     Game_CheckPathToMasconOpen
-;     Game_ManagePathToMascon
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
 ;     Player_HandleDeath
 ;     Screen_FadeToBlack
 ;============================================================================
@@ -4926,10 +5079,11 @@ PPU_FillGrid:                               ; [$caed]
 ;     None
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
 ;     FUN_PRG15_MIRROR__dacd
+;     Game_InitStateForSpawn
 ;     Game_MainLoop
 ;     Game_SetupAndLoadArea
 ;     Game_Start
@@ -4937,7 +5091,6 @@ PPU_FillGrid:                               ; [$caed]
 ;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
 ;     PPU_WaitUntilFlushed
-;     Something_InitOrResetState
 ;============================================================================
 PPU_WaitUntilFlushed:                       ; [$caf7]
     ;
@@ -5032,7 +5185,7 @@ FUN_PRG15_MIRROR__cb1f:                     ; [$cb1f]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
@@ -5122,8 +5275,8 @@ FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
 ;     EndGame_Begin
 ;     EndGame_MainLoop
 ;     FUN_PRG15_MIRROR__cb17
-;     FUN_PRG15_MIRROR__cb9a
 ;     Game_MainLoop
+;     Game_WaitForOAMReset
 ;     Player_HandleDeath
 ;============================================================================
 Maybe_GameLoop_ResetAnimation:              ; [$cb47]
@@ -5147,12 +5300,12 @@ Maybe_GameLoop_ResetAnimation:              ; [$cb47]
 ;     A
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
 ;     FUN_PRG15_MIRROR__cb27
-;     FUN_PRG15_MIRROR__fc65
 ;     Game_InitScreenAndMusic
+;     Game_ShowStartScreen
 ;============================================================================
 Something_FrameAltToggleWithPausePPU:       ; [$cb4f]
     LDA #$ff                                ; A = 0xFF
@@ -5178,12 +5331,16 @@ Something_FrameAltToggleWithPausePPU:       ; [$cb4f]
 ;============================================================================
 Something_FrameAltToggle:                   ; [$cb53]
     LDY #$00                                ; Y = 0
-    STY Maybe_CurrentSprite_PPUOffset       ; Maybe_CurrentSprite_PPUOffset =
-                                            ; 0
-    STY Maybe_Unused_0034                   ; Maybe_Unused_0034 = 0
-    STY Maybe_Unused_0035                   ; Maybe_Unused_0035 = 0
-    STY Maybe_Unused_0038                   ; Maybe_Unused_0038 = 0
-    STY Maybe_Unused_0037                   ; Maybe_Unused_0037 = 0
+    STY Maybe_CurrentSprite_PPUOffset       ; Maybe_CurrentSprite_PPUOffset
+                                            ; = 0
+    STY Maybe_Unused_0034                   ; Maybe_Unused_0034
+                                            ; = 0
+    STY Maybe_Unused_0035                   ; Maybe_Unused_0035
+                                            ; = 0
+    STY Maybe_Unused_0038                   ; Maybe_Unused_0038
+                                            ; = 0
+    STY Maybe_Unused_0037                   ; Maybe_Unused_0037
+                                            ; = 0
     STY Something_Sprites_ResetAtFrame      ; Something_Sprites_ResetAtFrame
                                             ; = 0
     STY BYTE_0025                           ; BYTE_0025 = 0
@@ -5227,19 +5384,24 @@ Something_FrameAltToggle:                   ; [$cb53]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__cb9a
+; Request a reset of the OAM and wait for the next interrupt.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     Game_NeedOAMReset:
+;         Set to 1 to request a reset.
+;
+; CALLS:
+;     Maybe_GameLoop_ResetAnimation
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f24d
 ;     IScripts_ClearPortrait
 ;============================================================================
-FUN_PRG15_MIRROR__cb9a:                     ; [$cb9a]
+Game_WaitForOAMReset:                       ; [$cb9a]
     JSR Maybe_GameLoop_ResetAnimation
     LDA #$01
     STA Game_NeedOAMReset
@@ -5283,40 +5445,52 @@ Wait3969Cycles:                             ; [$cba8]
 
 
 ;============================================================================
-; TODO: Document MMC1_LoadBank15
+; Initialize the MMC1 chip and switch to bank 14.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     MMC1_ShiftSync:
+;         Set to 0.
+;
+;     CurrentROMBank2:
+;         Set to bank 14.
+;
+;     SavedROMBank:
+;         Set to bank 14.
+;
+; CALLS:
+;     MMC1_Init
+;     MMC1_UpdatePRGBank
 ;
 ; XREFS:
 ;     Game_Init
 ;============================================================================
-MMC1_LoadBank15:                            ; [$cbbf]
+Game_InitMMCAndBank:                        ; [$cbbf]
     LDA #$00
-    STA BYTE_0012
-    JSR InitMMC1
+    STA MMC1_ShiftSync
+    JSR MMC1_Init                           ; Initialize the MMC1 chipset.
     LDX #$0e
-    STX a:CurrentROMBank2
-    STX PrevROMBank
-    JMP MMC1_UpdatePRGBank                  ; Load bank 0x0E to 0x8000
+    STX a:CurrentROMBank2                   ; Set the previous and current
+                                            ; ROM banks to 14.
+    STX SavedROMBank
+    JMP MMC1_UpdatePRGBank                  ; Switch to the bank.
 
 
 ;============================================================================
-; TODO: Document InitMMC1
+; Initialize the MMC1 chip.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
 ;
 ; XREFS:
-;     MMC1_LoadBank15
+;     Game_InitMMCAndBank
 ;============================================================================
-InitMMC1:                                   ; [$cbd0]
+MMC1_Init:                                  ; [$cbd0]
     LDA #$ff
     STA a:#$ffff
     LDA #$0e                                ; Horizontal Mirroring Regular
@@ -5358,13 +5532,21 @@ InitMMC1:                                   ; [$cbd0]
 
 
 ;============================================================================
-; TODO: Document MMC1_SavePRGBankAndUpdateTo
+; Save the current ROM bank and switch to a new one.
 ;
 ; INPUTS:
-;     X
+;     X:
+;         The new bank to switch to.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentROMBank2:
+;         The new ROM bank.
+;
+;     SavedROMBank:
+;         The previously-saved ROM bank.
+;
+;     MMC1_ShiftSync:
+;         Flag used to manage/reinitialize MMC1 state.
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -5377,7 +5559,7 @@ InitMMC1:                                   ; [$cbd0]
 MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
     LDA a:CurrentROMBank2                   ; Get the currently-loaded ROM
                                             ; bank
-    STA PrevROMBank
+    STA SavedROMBank
 
     ;
     ; v-- Fall through --v
@@ -5385,13 +5567,18 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 
 
 ;============================================================================
-; TODO: Document MMC1_UpdatePRGBank
+; Switch the active PRG ROM bank.
 ;
 ; INPUTS:
-;     X
+;     X:
+;         The new bank to switch to.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentROMBank2:
+;         The new ROM bank.
+;
+;     MMC1_ShiftSync:
+;         Flag used to manage/reinitialize MMC1 state.
 ;
 ; XREFS:
 ;     Area_LoadBlockProperties
@@ -5416,13 +5603,13 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_LoadSpriteInfo
 ;     Game_DrawScreenInFrozenState
+;     Game_InitMMCAndBank
 ;     Game_InitScreenAndMusic
 ;     Game_LoadAreaTable
 ;     Game_MainLoop
 ;     LoadPalette2
 ;     LoadPalette
 ;     LookupSpriteDataPointer
-;     MMC1_LoadBank15
 ;     MMC1_LoadBankAndJump
 ;     MMC1_RestorePrevPRGBank
 ;     MMC1_UpdatePRGBankToStackA
@@ -5445,9 +5632,13 @@ MMC1_UpdatePRGBank:                         ; [$cc1a]
     STX a:CurrentROMBank2                   ; Set the bank we're switching
                                             ; to.
 
-  @LAB_PRG15_MIRROR__cc1d:                  ; [$cc1d]
+  @_setupMMC1:                              ; [$cc1d]
     LDA #$01
-    STA BYTE_0012
+    STA MMC1_ShiftSync
+
+    ;
+    ; Write 5 LSBs of A to $FFFF, one bit per write (MMC1 serial protocol):
+    ;
     TXA                                     ; ROM_PAGE_SELECT parameter in X
     STA a:#$ffff
     LSR A
@@ -5458,15 +5649,33 @@ MMC1_UpdatePRGBank:                         ; [$cc1a]
     STA a:#$ffff
     LSR A
     STA a:#$ffff
-    LDA BYTE_0012
+
+    ;
+    ; Check the MMC1 synchronization state.
+    ;
+    ; If 0, this will re-initialize the MMC1 and switch banks.
+    ;
+    ; If 1, the interrupt handler is already switching banks.
+    ; This can then return.
+    ;
+    LDA MMC1_ShiftSync
     CMP #$01
-    BEQ @LAB_PRG15_MIRROR__cc82
+    BEQ @_finish
+
+    ;
+    ; Slow path. Re-initialize the MMC1.
+    ;
     LDA #$ff
-    STA a:#$ffff
+    STA a:#$ffff                            ; Reset the MMC1
+                                            ; shifter/controler.
     LDA #$0e                                ; Horizontal Mirroring Regular
                                             ; Mirroring Swap ROM bank at
                                             ; 0x8000 Swap 8K of VROM at PPU
                                             ; 0x000 Don't reset
+
+    ;
+    ; Set the CHR banking mode.
+    ;
     STA a:#$9fff
     LSR A
     STA a:#$9fff
@@ -5476,6 +5685,10 @@ MMC1_UpdatePRGBank:                         ; [$cc1a]
     STA a:#$9fff
     LSR A
     STA a:#$9fff
+
+    ;
+    ; Set CHR bank 0 = 0.
+    ;
     LDA #$00                                ; Select VROM bank at 0x000
                                             ; Switch 4K only Don't reset
     STA a:#$bfff
@@ -5487,6 +5700,10 @@ MMC1_UpdatePRGBank:                         ; [$cc1a]
     STA a:#$bfff
     LSR A
     STA a:#$bfff
+
+    ;
+    ; Set CHR bank 1 = 0.
+    ;
     LDA #$00                                ; Select VROM bank at 0x1000
                                             ; Switch 4K only Don't reset
     STA a:#$dfff
@@ -5498,35 +5715,73 @@ MMC1_UpdatePRGBank:                         ; [$cc1a]
     STA a:#$dfff
     LSR A
     STA a:#$dfff
-    JMP @LAB_PRG15_MIRROR__cc1d
+    JMP @_setupMMC1
 
-  @LAB_PRG15_MIRROR__cc82:                  ; [$cc82]
-    DEC BYTE_0012
+  @_finish:                                 ; [$cc82]
+    DEC MMC1_ShiftSync
     RTS
 
 
 ;============================================================================
-; TODO: Document MMC1_EnsurePRG
+; Watchdog handler to ensure the correct ROM bank is set.
+;
+; This is called by the interrupt handler to keep the MMC1
+; in a known configuration and keep the desired ROM bank
+; set.
+;
+; If other code is in the middle of switching ROM banks,
+; this will notice and perform a full MMC1 re-initialization
+; before setting the bank.
 ;
 ; INPUTS:
-;     X
+;     X:
+;         The ROM bank to ensure is set.
+;
+;     MMC1_ShiftSync:
+;         Flag indicating if a ROM bank is currently being
+;         set.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentROMBank2:
+;         The new ROM bank.
+;
+;     MMC1_ShiftSync:
+;         Flag used to manage/reinitialize MMC1 state.
 ;
 ; XREFS:
 ;     OnInterrupt
 ;============================================================================
 MMC1_EnsurePRG:                             ; [$cc85]
     STX a:CurrentROMBank2
-    LDA BYTE_0012
-    BEQ @LAB_PRG15_MIRROR__ccd2
-    INC BYTE_0012
+
+    ;
+    ; Check if any code was in the process of switching banks.
+    ;
+    ; If 0, we can exit.
+    ;
+    ; If 1, MMC1_UpdatePRGBank was in the process of
+    ; switching banks.
+    ;
+    LDA MMC1_ShiftSync
+    BEQ @_fastPath
+
+    ;
+    ; The sync state was set, so something is switching banks.
+    ; Increment the sync state and reset the MMC1 chip.
+    ;
+    INC MMC1_ShiftSync
+
+    ;
+    ; Reset MMC1.
+    ;
     LDA #$ff
     STA a:#$ffff
-    LDA #$0e
+    LDA #$0e                                ; Horizontal Mirroring Regular
+                                            ; Mirroring Swap ROM bank at
+                                            ; 0x8000 Swap 8K of VROM at PPU
+                                            ; 0x000 Don't reset
 
-  @LAB_PRG15_MIRROR__cc95:                  ; [$cc95]
+  @_setMMC1State:                           ; [$cc95]
     STA a:#$9fff
     LSR A
     STA a:#$9fff
@@ -5536,6 +5791,10 @@ MMC1_EnsurePRG:                             ; [$cc85]
     STA a:#$9fff
     LSR A
     STA a:#$9fff
+
+    ;
+    ; Set CHR bank 0 = 0
+    ;
     LDA #$00
     STA a:#$bfff
     LSR A
@@ -5546,6 +5805,10 @@ MMC1_EnsurePRG:                             ; [$cc85]
     STA a:#$bfff
     LSR A
     STA a:#$bfff
+
+    ;
+    ; Set CHR bank 1 = 0.
+    ;
     LDA #$00
     STA a:#$dfff
     LSR A
@@ -5557,7 +5820,10 @@ MMC1_EnsurePRG:                             ; [$cc85]
     LSR A
     STA a:#$dfff
 
-  @LAB_PRG15_MIRROR__ccd2:                  ; [$ccd2]
+    ;
+    ; Set the bank.
+    ;
+  @_fastPath:                               ; [$ccd2]
     TXA
     STA a:#$ffff
     LSR A
@@ -5572,13 +5838,20 @@ MMC1_EnsurePRG:                             ; [$cc85]
 
 
 ;============================================================================
-; TODO: Document MMC1_RestorePrevPRGBank
+; Restore the previously-saved ROM bank.
+;
+; This will switch to the bank stored in
+; SavedROMBank.
 ;
 ; INPUTS:
-;     None.
+;     SavedROMBank:
+;         The saved ROM bank to switch back to.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     MMC1_UpdatePRGBank
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -5589,7 +5862,7 @@ MMC1_EnsurePRG:                             ; [$cc85]
 ;     Game_LoadFirstLevel
 ;============================================================================
 MMC1_RestorePrevPRGBank:                    ; [$cce7]
-    LDX PrevROMBank
+    LDX SavedROMBank
     JMP MMC1_UpdatePRGBank
 
 
@@ -5669,8 +5942,8 @@ PPUBuffer_DrawCommand_RemoveVerticalLines:  ; [$ccec]
     LDA Temp_06                             ; Load the loop index.
     CLC
     ADC Temp_08                             ; Add the phase byte to it.
-    AND #$07                                ; Retain only the 3 least-
-                                            ; significant bits.
+    AND #$07                                ; Retain only the 3
+                                            ; least-significant bits.
     TAX                                     ; Store in X.
     PLA
 
@@ -5857,43 +6130,81 @@ PPUResetOffset:                             ; [$cd6f]
 ;     Sprites_LoadImageForCurrentSprite
 ;============================================================================
 LookupSpriteDataPointer:                    ; [$cd78]
+    ;
+    ; Save the current ROM bank to the stack.
+    ;
     LDA a:CurrentROMBank2
     PHA
+
+    ;
+    ; Switch to the bank for the current sprite's images.
+    ;
     LDX a:CurrentSprite_ImagesBank          ; Load the bank where the images
                                             ; for the current sprite are
                                             ; found
     JSR MMC1_UpdatePRGBank
+
+    ;
+    ; Read the first byte of the ROM bank and store as the start of
+    ; the lower byte of the sprite images address.
+    ;
     LDA a:ROMBankStart
     STA Temp_Addr
+
+    ;
+    ; Read the second byte as the upper address, and add 0x80 to it.
+    ;
     LDA a:#$8001
     CLC
     ADC #$80
     STA Temp_Addr.U
+
+    ;
+    ; Compute the starting index for the sprite based on the
+    ; entity ID.
+    ;
+    ; Entities 0-55 are in the first sprite bank. 56+
+    ; are in the second.
+    ;
     LDA a:CurrentSprite_Entity              ; Load the current sprite ID
     CMP #$37                                ; Each bank has 0x37 sprites.
                                             ; Check if we're on the next
                                             ; bank.
-    BCC @LAB_PRG15_MIRROR__cd98
+    BCC @_loadImages
     SBC #$37                                ; We are, so subtract 0x37 for
                                             ; the new sprite ID.
 
-  @LAB_PRG15_MIRROR__cd98:                  ; [$cd98]
-    ASL A
-    TAY
+    ;
+    ; Compute the address for the sprite image.
+    ;
+  @_loadImages:                             ; [$cd98]
+    ASL A                                   ; Convert the sprite ID to a word
+                                            ; boundary.
+    TAY                                     ; Y = A
     LDA (Temp_Addr),Y                       ; Get the pointer to the sprite
-                                            ; data
-    STA SpriteImage_L                       ; Lower byte of pointer to the
-                                            ; sprite bitmap
+                                            ; data from the bank address
+                                            ; computed above.
+    STA CurrentSprite_Image_L               ; A = Lower byte of the image
+                                            ; data address.
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr),Y                       ; A = Upper byte of the address.
     CLC
-    ADC #$80
-    STA SpriteImage_U                       ; Upper byte of pointer to the
+    ADC #$80                                ; Add 0x80 to the upper address.
+    STA CurrentSprite_Image_U               ; Upper byte of pointer to the
                                             ; sprite bitmap
+
+    ;
+    ; Get the PPU tile numbers for the sprite entity and store
+    ; it for lookup.
+    ;
     LDA a:CurrentSprite_Entity              ; Load the current sprite ID
     TAY
     LDA #$ce1b,Y                            ; Get the number of tiles needed
-    STA SpritePPUTiles                      ; Store that for the render
+    STA CurrentSprite_PPUTileCount          ; Store that for the render
+
+    ;
+    ; Restore the previous bank.
+    ;
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
@@ -5926,7 +6237,7 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
     ROL A
     STA PPUOffset_Index
     JSR LookupSpriteDataPointer
-    LDA SpritePPUTiles
+    LDA CurrentSprite_PPUTileCount
     BNE @_loadSpriteToPPUBuffer
     RTS
 
@@ -5944,26 +6255,30 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
     STA PPU_TargetAddr
     LDA #$10
     JSR PPUBuffer_QueueCommandOrLength
+
+    ;
+    ; Copy the sprite data for this tile to the PPU buffer.
+    ;
     LDY #$00
 
-  @_CopySpriteImage:                        ; [$cdea]
-    LDA (SpriteImage_L),Y
+  @_copySpriteImage:                        ; [$cdea]
+    LDA (CurrentSprite_Image_L),Y
     STA PPUBuffer,X
     INX
     INY
     CPY #$10
-    BCC @_CopySpriteImage
+    BCC @_copySpriteImage
     STX PPUBuffer_UpperBounds
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
-    LDA SpriteImage_L
+    LDA CurrentSprite_Image_L
     CLC
     ADC #$10
-    STA SpriteImage_L
-    LDA SpriteImage_U
+    STA CurrentSprite_Image_L
+    LDA CurrentSprite_Image_U
     ADC #$00
-    STA SpriteImage_U
+    STA CurrentSprite_Image_U
     LDA PPUOffset_Col
     CLC
     ADC #$10
@@ -5971,7 +6286,7 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
     LDA PPUOffset_Row
     ADC #$00
     STA PPUOffset_Row
-    DEC SpritePPUTiles
+    DEC CurrentSprite_PPUTileCount
     BNE @_loadSpriteToPPUBuffer
     RTS
 
@@ -5984,108 +6299,111 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
 ; XREFS:
 ;     LookupSpriteDataPointer
 ;
-SPRITES_PPU_TILE_NUMBERS:                   ; [$ce1b]
+SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
     db $01                                  ; [0]:
-    db $01                                  ; [1]:
-    db $01                                  ; [2]:
-    db $01                                  ; [3]:
-    db $10                                  ; [4]:
-    db $10                                  ; [5]:
-    db $10                                  ; [6]:
-    db $08                                  ; [7]:
-    db $06                                  ; [8]:
-    db $06                                  ; [9]:
-    db $07                                  ; [10]:
-    db $06                                  ; [11]:
-    db $0c                                  ; [12]:
-    db $10                                  ; [13]:
-    db $10                                  ; [14]:
-    db $12                                  ; [15]:
-    db $0d                                  ; [16]:
-    db $26                                  ; [17]:
-    db $10                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $16                                  ; [21]:
-    db $17                                  ; [22]:
-    db $10                                  ; [23]:
-    db $0e                                  ; [24]:
-    db $12                                  ; [25]:
-    db $0c                                  ; [26]:
-    db $0e                                  ; [27]:
-    db $10                                  ; [28]:
-    db $10                                  ; [29]:
-    db $12                                  ; [30]:
-    db $12                                  ; [31]:
-    db $1f                                  ; [32]:
-    db $16                                  ; [33]:
-    db $0f                                  ; [34]:
-    db $10                                  ; [35]:
-    db $13                                  ; [36]:
-    db $10                                  ; [37]:
-    db $11                                  ; [38]:
-    db $10                                  ; [39]:
-    db $10                                  ; [40]:
-    db $10                                  ; [41]:
-    db $13                                  ; [42]:
-    db $0c                                  ; [43]:
-    db $12                                  ; [44]:
-    db $3e                                  ; [45]:
-    db $33                                  ; [46]:
-    db $1c                                  ; [47]:
-    db $0e                                  ; [48]:
-    db $25                                  ; [49]:
-    db $54                                  ; [50]:
-    db $69                                  ; [51]:
-    db $10                                  ; [52]:
-    db $10                                  ; [53]:
-    db $09                                  ; [54]:
-    db $08                                  ; [55]:
-    db $0b                                  ; [56]:
-    db $0b                                  ; [57]:
-    db $14                                  ; [58]:
-    db $0c                                  ; [59]:
-    db $08                                  ; [60]:
-    db $0a                                  ; [61]:
-    db $0e                                  ; [62]:
-    db $0a                                  ; [63]:
-    db $0d                                  ; [64]:
-    db $10                                  ; [65]:
-    db $10                                  ; [66]:
-    db $0b                                  ; [67]:
-    db $0e                                  ; [68]:
-    db $0d                                  ; [69]:
-    db $09                                  ; [70]:
-    db $08                                  ; [71]:
-    db $02                                  ; [72]:
-    db $02                                  ; [73]:
-    db $04                                  ; [74]:
-    db $02                                  ; [75]:
-    db $02                                  ; [76]:
-    db $04                                  ; [77]:
-    db $02                                  ; [78]:
-    db $00                                  ; [79]:
-    db $02                                  ; [80]:
-    db $00                                  ; [81]:
-    db $0c                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $04                                  ; [85]:
-    db $02                                  ; [86]:
-    db $04                                  ; [87]:
-    db $02                                  ; [88]:
-    db $04                                  ; [89]:
-    db $04                                  ; [90]:
-    db $02                                  ; [91]:
-    db $04                                  ; [92]:
-    db $02                                  ; [93]:
-    db $02                                  ; [94]:
-    db $02                                  ; [95]:
-    db $02                                  ; [96]:
+    db $01                                  ; [1]: Dropped bread
+    db $01                                  ; [2]: Dropped coin
+    db $01                                  ; [3]: TODO: Garbled 3
+    db $10                                  ; [4]: Enemy: Raiden
+    db $10                                  ; [5]: Enemy: Necron Aides
+    db $10                                  ; [6]: Enemy: Zombie
+    db $08                                  ; [7]: Enemy: Hornet
+    db $06                                  ; [8]: Enemy: Bihoruda
+    db $06                                  ; [9]: Enemy: Lilith
+    db $07                                  ; [10]: TODO: Garbled 10
+    db $06                                  ; [11]: Enemy: Yuinaru
+    db $0c                                  ; [12]: Enemy: Snowman
+    db $10                                  ; [13]: Enemy: Nash
+    db $10                                  ; [14]: Enemy: Fire Giant
+    db $12                                  ; [15]: Enemy: Ishiisu
+    db $0d                                  ; [16]: Enemy: Execution Hood
+    db $26                                  ; [17]: Boss: Rokusutahn
+    db $10                                  ; [18]: Enemy: Unused #18
+    db $00                                  ; [19]: Effect: Enemy Death
+    db $00                                  ; [20]: Effect: Lightning Ball
+    db $16                                  ; [21]: Enemy: Charron
+    db $17                                  ; [22]: Enemy: Unused 22
+    db $10                                  ; [23]: Enemy: Geributa
+    db $0e                                  ; [24]: Enemy: Sugata
+    db $12                                  ; [25]: Enemy: Grimlock
+    db $0c                                  ; [26]: Enemy: Giant Bees
+    db $0e                                  ; [27]: Enemy: Myconid
+    db $10                                  ; [28]: Enemy: Naga
+    db $10                                  ; [29]: Enemy: Unused #29
+    db $12                                  ; [30]: Enemy: Giant Strider
+    db $12                                  ; [31]: Enemy: Sir Gawaine
+    db $1f                                  ; [32]: Enemy: Maskman
+    db $16                                  ; [33]: Enemy: Wolfman
+    db $0f                                  ; [34]: Enemy: Yareeka
+    db $10                                  ; [35]: Enemy: Magman
+    db $13                                  ; [36]: Enemy: Unused #36
+    db $10                                  ; [37]: Enemy: Unused #37
+    db $11                                  ; [38]: Enemy: Ikeda
+    db $10                                  ; [39]: Enemy: Unused #39
+    db $10                                  ; [40]: Enemy: Lamprey
+    db $10                                  ; [41]: Enemy: Unused #41
+    db $13                                  ; [42]: Enemy: Monodron
+    db $0c                                  ; [43]: Unused #43
+    db $12                                  ; [44]: Enemy: Tamazutsu
+    db $3e                                  ; [45]: Boss: Ripasheiku
+    db $33                                  ; [46]: Boss: Zoradohna
+    db $1c                                  ; [47]: Boss: Borabohra
+    db $0e                                  ; [48]: Boss: Pakukame
+    db $25                                  ; [49]: Boss: Zorugeriru
+    db $54                                  ; [50]: Boss: King Grieve
+    db $69                                  ; [51]: Boss: Shadow Eura
+    db $10                                  ; [52]: NPC: Walking man 1
+    db $10                                  ; [53]: NPC: Unused Blue Lady
+    db $09                                  ; [54]: NPC: Unused Child
+    db $08                                  ; [55]: NPC: Armor Salesman
+    db $0b                                  ; [56]: NPC: Martial Arts
+    db $0b                                  ; [57]: NPC: Priest
+    db $14                                  ; [58]: NPC: King
+    db $0c                                  ; [59]: NPC: Magic Teacher
+    db $08                                  ; [60]: NPC: Key Salesman
+    db $0a                                  ; [61]: NPC: Smoking Man
+    db $0e                                  ; [62]: NPC: Man in Chair
+    db $0a                                  ; [63]: NPC: Sitting Man 1
+    db $0d                                  ; [64]: NPC: Meat Salesman
+    db $10                                  ; [65]: NPC: Lady in blue dress
+                                            ; with cup
+    db $10                                  ; [66]: NPC: King's Guard
+    db $0b                                  ; [67]: NPC: Doctor
+    db $0e                                  ; [68]: NPC: Walking Woman 1
+    db $0d                                  ; [69]: NPC: Walking Woman 2
+    db $09                                  ; [70]: Enemy: Unused eyeball
+    db $08                                  ; [71]: Enemy: Zozura
+    db $02                                  ; [72]: Item: Glove
+    db $02                                  ; [73]: Item: Black Onyx
+    db $04                                  ; [74]: Item: Pendant
+    db $02                                  ; [75]: Item: Red Potion
+    db $02                                  ; [76]: Item: Poison
+    db $04                                  ; [77]: Item: Elixir
+    db $02                                  ; [78]: Item: Ointment
+    db $00                                  ; [79]: Item: Intro trigger start
+                                            ; point
+    db $02                                  ; [80]: Item: Mattock
+    db $00                                  ; [81]: TODO: Garbled #81
+    db $0c                                  ; [82]: Deco: Fountain
+    db $00                                  ; [83]: TODO: Unknown #83
+    db $00                                  ; [84]: TODO: Unknown #84
+    db $04                                  ; [85]: Item: Wing Boots
+    db $02                                  ; [86]: Item: Hour Glass
+    db $04                                  ; [87]: Item: Magical Rod
+    db $02                                  ; [88]: Item: Battle Suit
+    db $04                                  ; [89]: Item: Battle Helmet
+    db $04                                  ; [90]: Item: Dragon Slayer
+    db $02                                  ; [91]: Item: Mattock #2
+    db $04                                  ; [92]: Item: Wing Boots (for
+                                            ; quest)
+    db $02                                  ; [93]: Item: Red Potion #2
+    db $02                                  ; [94]: Item: Poison #2
+    db $02                                  ; [95]: Item: Glove #2
+    db $02                                  ; [96]: Item: Ointment #2
     db $0c                                  ; [97]:
     db $0c                                  ; [98]:
     db $0c                                  ; [99]:
-    db $00                                  ; [100]:
+    db $00                                  ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -6098,7 +6416,7 @@ SPRITES_PPU_TILE_NUMBERS:                   ; [$ce1b]
 ;     TODO
 ;
 ; XREFS:
-;     Something_InitOrResetState
+;     Game_InitStateForSpawn
 ;     Something_SetupNewScreen
 ;============================================================================
 FUN_PRG15_MIRROR__ce80:                     ; [$ce80]
@@ -6361,12 +6679,12 @@ PPUBuffer_Clear:                            ; [$cf35]
     STA PPUBuffer_Offset                    ; Set offset = 0
     STA PPUBuffer_UpperBounds               ; Set upper bounds = 0
 
-    ;
-    ; XREFS:
-    ;     PPUBuffer_Draw
-    ;
+;
+; XREFS:
+;     PPUBuffer_Draw
+;
 RETURN_CF3B:                                ; [$cf3b]
-    RTS
+    db $60                                  ; [$cf3b] undefined
 
 
 ;============================================================================
@@ -6382,8 +6700,8 @@ RETURN_CF3B:                                ; [$cf3b]
 ;
 ;    If the first byte to process in the buffer is a value
 ;    decreasing from 0x00 to 0xFA, it will be treated as a
-;    command, and the entry in {{@SYMBOL:
-;    PRG15_MIRROR::PPUBUFFER_DRAW_COMMANDS@}} will
+;    command, and the entry in
+;    PPUBUFFER_DRAW_COMMANDS will
 ;    process the remaining bytes (or just return).
 ;
 ;    The following commands are supported:
@@ -6396,11 +6714,10 @@ RETURN_CF3B:                                ; [$cf3b]
 ;          a given address (at the next two bytes from
 ;          the buffer).
 ;
-;          {{@SYMBOL:
-;          PRG15_MIRROR::PPUBuffer_Command_RotateTilesRight1Pixel@}}
+;          PPUBuffer_Command_RotateTilesRight1Pixel
 ;
-;    0xFA: TODO {{@SYMBOL:
-;    PRG15_MIRROR::PPUBuffer_DrawCommand_RemoveVerticalLines@}}
+;    0xFA: TODO
+;    PPUBuffer_DrawCommand_RemoveVerticalLines
 ;
 ;    Commands 0xFF, 0xFE, 0xFD, and 0xFB just return.
 ;
@@ -6655,13 +6972,13 @@ PPUBuffer_DrawCommand_Noop:                 ; [$cfbb]
 ;     PPUBuffer_Draw
 ;
 PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
-  dw PPUBuffer_DrawCommand_WritePalette-1   ; [0]: Command 0x00
-  dw PPUBuffer_DrawCommand_Noop-1           ; [1]: Command 0xFF
-  dw PPUBuffer_DrawCommand_Noop-1           ; [2]: Command 0xFE
-  dw PPUBuffer_DrawCommand_Noop-1           ; [3]: Command 0xFD
-  dw PPUBuffer_Command_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC
-  dw PPUBuffer_DrawCommand_Noop-1           ; [5]: Command 0xFB
-  dw PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA
+    dw PPUBuffer_DrawCommand_WritePalette-1 ; [0]: Command 0x00
+    dw PPUBuffer_DrawCommand_Noop-1         ; [1]: Command 0xFF
+    dw PPUBuffer_DrawCommand_Noop-1         ; [2]: Command 0xFE
+    dw PPUBuffer_DrawCommand_Noop-1         ; [3]: Command 0xFD
+    dw PPUBuffer_Command_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC
+    dw PPUBuffer_DrawCommand_Noop-1         ; [5]: Command 0xFB
+    dw PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA
 
 
 ;============================================================================
@@ -6733,8 +7050,7 @@ PPUBuffer_SomethingCompareTo24:             ; [$cfd0]
 ;     FUN_PRG15_MIRROR__f316
 ;     PPUBuffer_WriteValueMany
 ;     Player_DrawItemInternal
-;     {{@SYMBOL:
-;     PRG15_MIRROR::TextBox_FillPlaceholderTextAtLineWithStartChar@}}
+;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_QueueRightCoordInPPUBuffer
 ;     UI_ClearSelectedItemPic
@@ -6781,9 +7097,10 @@ PPUBuffer_QueueCommandOrLength:             ; [$cfdc]
 ;     PPUBuffer_WaitUntilClear
 ;============================================================================
 PPUBuffer_WaitUntilClear:                   ; [$cff4]
-    LDA PPUBuffer_UpperBounds
-    CMP PPUBuffer_Offset
-    BNE PPUBuffer_WaitUntilClear
+    LDA PPUBuffer_UpperBounds               ; Load the upper bounds of the
+                                            ; buffer.
+    CMP PPUBuffer_Offset                    ; Does it == the offset?
+    BNE PPUBuffer_WaitUntilClear            ; If not, loop.
     RTS
 
 
@@ -6914,30 +7231,35 @@ PPUBuffer_DrawCommand_WritePalette:         ; [$d016]
 ;     Something_SetupNewScreen
 ;============================================================================
 LoadPalette2:                               ; [$d03b]
-    TAY
+    TAY                                     ; Y = A
 
     ;
     ; Save the current bank and load bank 11 (palette data).
     ;
-    LDA a:CurrentROMBank2
-    PHA
+    LDA a:CurrentROMBank2                   ; Load the current ROM bank.
+    PHA                                     ; Push it to the stack.
     LDX #$0b
-    JSR MMC1_UpdatePRGBank
+    JSR MMC1_UpdatePRGBank                  ; Switch to bank 11.
 
     ;
-    ; Load the <something> from the array based on the
-    ; palette index.
+    ; Set the attribute data index for the HUD.
     ;
-    LDA #$81f0,Y
-    STA a:Something_FromPaletteIndexLookup
-    PLA
-    TAX
+    LDA #$81f0,Y                            ; Load the HUD attribute data for
+                                            ; this index.
+    STA a:HUD_AttributeDataIndex            ; Set it for the HUD.
 
     ;
     ; Restore our current bank.
     ;
-    JSR MMC1_UpdatePRGBank
-    TYA
+    PLA                                     ; Pop A (previous bank) from the
+                                            ; stack.
+    TAX                                     ; X = A
+    JSR MMC1_UpdatePRGBank                  ; Switch back to the bank.
+
+    ;
+    ; Get the offset into the bank.
+    ;
+    TYA                                     ; A = Y
     JSR Palette_IndexToROMOffset16
     ADC #$00
     STA Temp_08
@@ -6979,7 +7301,7 @@ LoadPalette2:                               ; [$d03b]
 ;     RAM ${@address 0x0293}..${@address 0x02B2}:
 ;         The loaded 16-byte palette.
 ;
-;     CurrentPalette:
+;     Palette_CurrentIndex:
 ;         The new palette index.
 ;
 ;     A, X, Y, processor flags:
@@ -6995,7 +7317,7 @@ LoadPalette2:                               ; [$d03b]
 ;     Screen_Load
 ;============================================================================
 Palette_LoadFromIndex:                      ; [$d062]
-    STA a:CurrentPalette                    ; Store the selected palette
+    STA a:Palette_CurrentIndex              ; Store the selected palette
                                             ; index
 
     ;
@@ -7021,43 +7343,62 @@ Palette_LoadFromIndex:                      ; [$d062]
 
 
 ;============================================================================
-; TODO: Document Palette_PopulateData
+; Populate palette data for the screen.
+;
+; This will load the palette data from the data stored
+; in bank 11 at the address stored in Temp_08 and
+; populate CurrentPaletteData.
 ;
 ; INPUTS:
-;     Y
+;     Y:
+;         The index into the data to load.
+;
+;     Temp_08:
+;         The address to load data from in bank 11.
+;
+;     CurrentROMBank2:
+;         The current ROM bank.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentPaletteData:
+;         The resulting palette data.
+;
+; CALLS:
+;     MMC1_UpdatePRGBank
 ;
 ; XREFS:
 ;     LoadPalette2
 ;============================================================================
 Palette_PopulateData:                       ; [$d074]
-    LDA a:CurrentROMBank2
-    PHA
+    ;
+    ; Save the current bank.
+    ;
+    LDA a:CurrentROMBank2                   ; Load the current ROM bank.
+    PHA                                     ; Push it to the stack.
     LDX #$0b
-    JSR MMC1_UpdatePRGBank
+    JSR MMC1_UpdatePRGBank                  ; Switch to bank 11.
 
     ;
     ; Copy 16 bytes into ROM.
     ;
-    TYA
-    TAX
-    LDY #$0f
+    TYA                                     ; A = Y (palette data index)
+    TAX                                     ; X = A
+    LDY #$0f                                ; Y = 15 (loop counter)
 
-  @LAB_PRG15_MIRROR__d081:                  ; [$d081]
-    LDA (Temp_08),Y
-    STA CurrentPaletteData,X
-    DEX
-    DEY
-    BPL @LAB_PRG15_MIRROR__d081
-    PLA
-    TAX
+  @_loop:                                   ; [$d081]
+    LDA (Temp_08),Y                         ; Load the byte to copy.
+    STA CurrentPaletteData,X                ; Store as the palette data at
+                                            ; the index.
+    DEX                                     ; X--
+    DEY                                     ; Y--
+    BPL @_loop                              ; If >= 0, loop.
 
     ;
     ; Switch bank to the previous bank.
     ;
-    JSR MMC1_UpdatePRGBank
+    PLA                                     ; Pop the previous bank.
+    TAX                                     ; X = A
+    JSR MMC1_UpdatePRGBank                  ; Switch to the bank.
     RTS
 
 
@@ -7079,7 +7420,7 @@ Palette_PopulateData:                       ; [$d074]
 ;         The new size of the buffer.
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_SomethingA708
 ;     StartScreen_Draw
@@ -7225,13 +7566,13 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     FUN_PRG12__8bce
 ;     FUN_PRG12__8be5
 ;     FUN_PRG12__906d
-;     FUN_PRG12__9f44
 ;     IScripts_PlayFillingSound
 ;     IScripts_PlayGoldChangeSound
 ;     Menu_Something_9405
 ;     Sound_PlayInputSound
 ;     Sound_PlayMoveCursorSound
 ;     SplashAnimation_Maybe_AnimPlayerStep
+;     StartScreen_CheckHandleInput
 ;     UI_ShowPlayerMenu
 ;     CastMagic_HandleDeluge
 ;     CastMagic_HandleFire
@@ -7247,7 +7588,7 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     SpriteBehavior__MaybeSugata
 ;     SpriteBehavior__ab67
 ;     Sprites_ReplaceWithCoinDrop
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
 ;     Game_UnlockDoor
 ;     Maybe_Player_PickUpGlove
 ;     Player_CheckPushingBlock
@@ -8705,7 +9046,7 @@ BYTE_ARRAY_PRG15_MIRROR__d650:              ; [$d650]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     BYTE_ARRAY_PRG15_MIRROR__d64c
@@ -8772,7 +9113,7 @@ FUN_PRG15_MIRROR__d673:                     ; [$d673]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     BYTE_ARRAY_PRG15_MIRROR__d64c
@@ -8801,7 +9142,7 @@ FUN_PRG15_MIRROR__d699:                     ; [$d699]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     BYTE_ARRAY_PRG15_MIRROR__d64c
@@ -8889,66 +9230,124 @@ BYTE_ARRAY_PRG15_MIRROR__d6ef_2_:           ; [$d6f1]
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d82d
 ;
-BYTE_ARRAY_ARRAY_PRG15_MIRROR__d6f3:        ; [$d6f3]
-    db $20                                  ; [0]: [0]:
-    db $24                                  ; [0]: [1]:
+BYTE_ARRAY_PRG15_MIRROR__d6f3:              ; [$d6f3]
+    db $20                                  ; [0]: Ladder
+    db $24                                  ; [1]:
 
 
 ;============================================================================
-; TODO: Document Game_ManagePathToMascon
+; Open the path to Mascon.
+;
+; This will animate the removal of the stone coverings on
+; the fountain and then drop down the ladder so it can be
+; climbed to Mascon.
 ;
 ; INPUTS:
-;     X
+;     PathToMascon_FountainCoverPos:
+;         The block position of the top of the fountain
+;         cover.
+;
+;     GAME_LADDER_TO_MASCON_BLOCK_OFFSETS:
+;         The offsets for animating the fountain cover.
 ;
 ; OUTPUTS:
-;     TODO
+;     PathToMascon_LadderBlocksRemaining:
+;         The number of ladder blocks remaining to place.
+;
+;     PathToMascon_LadderPos:
+;         The position of the next ladder block to place.
+;
+;     ScreenBuffer:
+;         The updated screen buffer.
+;
+; CALLS:
+;     Area_SetBlocks
+;     Game_DropLadderToMascon
+;     WaitForInterrupt
 ;
 ; XREFS:
 ;     Player_CheckPushingBlock
 ;     ScreenEvents_HandlePathToMasconEvent
 ;============================================================================
-Game_ManagePathToMascon:                    ; [$d6f5]
-    TXA
-    PHA
-    LDX Maybe_PushableBlockPos
-    LDA a:BYTE_PRG15_MIRROR__d768
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
-    LDA Maybe_PushableBlockPos
+Game_OpenPathToMascon:                      ; [$d6f5]
+    ;
+    ; Push the stone covering block offset to the stack for later.
+    ;
+    TXA                                     ; A = X
+    PHA                                     ; Push A to the stack.
+
+    ;
+    ; Clear the top stone covering.
+    ;
+    LDX PathToMascon_FountainCoverPos       ; X = Block position (in $YX
+                                            ; form).
+    LDA a:MASCON_FOUNTAIN_BLOCK_1_AIR       ; A = Block ID to place.
+    STA ScreenBuffer,X                      ; Store it in the screen buffer
+                                            ; at the target location.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
+
+    ;
+    ; Clear the bottom stone covering.
+    ;
+    LDA PathToMascon_FountainCoverPos       ; X = Block position (in $YX
+                                            ; form).
     CLC
-    ADC #$10
-    TAX
-    LDA a:BYTE_PRG15_MIRROR__d769
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
-    PLA
-    TAX
-    LDA #$d76c,X
+    ADC #$10                                ; X += 16 (next row down; YPos +=
+                                            ; 1).
+    TAX                                     ; X = A
+    LDA a:MASCON_FOUNTAIN_BLOCK_2_AIR       ; A = Block ID to place.
+    STA ScreenBuffer,X                      ; Store it in the screen buffer
+                                            ; at the target location.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
+
+    ;
+    ; Pop the original stone covering block offset.
+    ;
+    PLA                                     ; Pull A from the stack (original
+                                            ; block position)
+    TAX                                     ; X = A
+    LDA #$d76c,X                            ; A = Block position offset,
+                                            ; based on the arguments.
     CLC
-    ADC Maybe_PushableBlockPos
-    TAX
-    STX Maybe_PushableBlockPos
-    LDA a:BYTE_PRG15_MIRROR__d76a
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
-    LDA Maybe_PushableBlockPos
+    ADC PathToMascon_FountainCoverPos       ; A += Target block position.
+    TAX                                     ; X = A
+    STX PathToMascon_FountainCoverPos       ; Update the block position.
+
+    ;
+    ; Place the top stone covering.
+    ;
+    LDA a:MASCON_FOUNTAIN_BLOCK_1_STONE     ; A = Stone block.
+    STA ScreenBuffer,X                      ; Place it in the screen buffer
+                                            ; at the offset.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
+
+    ;
+    ; Place the bottom stone covering.
+    ;
+    LDA PathToMascon_FountainCoverPos       ; A = Block position.
     CLC
-    ADC #$10
-    TAX
-    LDA a:BYTE_PRG15_MIRROR__d76b
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
+    ADC #$10                                ; A += 16 (next row).
+    TAX                                     ; X = A
+    LDA a:MASCON_FOUNTAIN_BLOCK_2_STONE     ; A = Stone block.
+    STA ScreenBuffer,X                      ; Place it in the screen buffer.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
+
+    ;
+    ; Prepare to animate the dropping of the ladder.
+    ;
     LDA #$07
-    STA Something_PathToMasonQuestCounter
+    STA PathToMascon_LadderBlocksRemaining  ; Set the ladder block count to
+                                            ; 7.
     LDA #$22
-    STA BYTE_00d8
+    STA PathToMascon_LadderPos              ; Set the position of the top of
+                                            ; the ladder to X=2, Y=2.
 
     ;
     ; Check if the Path to Mascon quest is not yet complete.
     ;
     LDA a:Quests                            ; Load the completed quests.
     AND #$20                                ; Is Path to Mascon completed?
-    BNE @LAB_PRG15_MIRROR__d74b             ; If it is, jump.
+    BNE @_clearCoverings                    ; If it is, jump.
 
     ;
     ; Path to Mascon is not complete. Wait for 30 interrupts.
@@ -8960,115 +9359,207 @@ Game_ManagePathToMascon:                    ; [$d6f5]
     DEX                                     ; X--;
     BNE @_waitforInterruptLoop              ; If not 0, loop.
 
-  @LAB_PRG15_MIRROR__d74b:                  ; [$d74b]
-    LDX Maybe_PushableBlockPos              ; X = pushable block position
-    LDA a:BYTE_PRG15_MIRROR__d768
-    STA ScreenBuffer,X                      ; Store in the screenbuffer.
-    JSR Area_SetBlocks
-    LDA Maybe_PushableBlockPos              ; A = pushable block position
+    ;
+    ; Clear the top stone block on the fountain.
+    ;
+  @_clearCoverings:                         ; [$d74b]
+    LDX PathToMascon_FountainCoverPos       ; X = Fountain cover block
+                                            ; position.
+    LDA a:MASCON_FOUNTAIN_BLOCK_1_AIR       ; A = Air block.
+    STA ScreenBuffer,X                      ; Set in the screen buffer at the
+                                            ; cover position.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
+
+    ;
+    ; Clear the bottom stone block on the fountain.
+    ;
+    LDA PathToMascon_FountainCoverPos       ; A = Fountain cover block
+                                            ; position.
     CLC
-    ADC #$10                                ; A += 16
+    ADC #$10                                ; A += 16 (next row).
     TAX                                     ; X = A
-    LDA a:BYTE_PRG15_MIRROR__d769
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
-    JMP Game_CheckPathToMasconOpen
+    LDA a:MASCON_FOUNTAIN_BLOCK_2_AIR       ; A = Air block.
+    STA ScreenBuffer,X                      ; Set in the screen buffer at the
+                                            ; cover position.
+    JSR Area_SetBlocks                      ; Update the block on the screen.
 
-;
-; XREFS:
-;     Game_ManagePathToMascon
-;
-BYTE_PRG15_MIRROR__d768:                    ; [$d768]
-    db $42                                  ; [$d768] byte
-
-;
-; XREFS:
-;     Game_ManagePathToMascon
-;
-BYTE_PRG15_MIRROR__d769:                    ; [$d769]
-    db $42                                  ; [$d769] byte
-
-;
-; XREFS:
-;     Game_ManagePathToMascon
-;
-BYTE_PRG15_MIRROR__d76a:                    ; [$d76a]
-    db $88                                  ; [$d76a] byte
-
-;
-; XREFS:
-;     Game_ManagePathToMascon
-;
-BYTE_PRG15_MIRROR__d76b:                    ; [$d76b]
-    db $88                                  ; [$d76b] byte
-
-;
-; XREFS:
-;     Game_ManagePathToMascon
-;
-BYTE_ARRAY_PRG15_MIRROR__d76c:              ; [$d76c]
-    db $01                                  ; [0]:
-    db $ff                                  ; [1]:
+    ;
+    ; Drop the ladder to the path to Mascon.
+    ;
+    JMP Game_DropLadderToMascon             ; Drop the ladder.
 
 
 ;============================================================================
-; TODO: Document Game_CheckPathToMasconOpen
+; Two cleared fountain stone block coverings.
+;============================================================================
+
+;
+; XREFS:
+;     Game_OpenPathToMascon
+;
+MASCON_FOUNTAIN_BLOCK_1_AIR:                ; [$d768]
+    db $42                                  ; Air
+
+;
+; XREFS:
+;     Game_OpenPathToMascon
+;
+MASCON_FOUNTAIN_BLOCK_2_AIR:                ; [$d769]
+    db $42                                  ; Air
+
+
+;============================================================================
+; Two set fountain stone block coverings.
+;============================================================================
+
+;
+; XREFS:
+;     Game_OpenPathToMascon
+;
+MASCON_FOUNTAIN_BLOCK_1_STONE:              ; [$d76a]
+    db $88                                  ; Stone cover
+
+;
+; XREFS:
+;     Game_OpenPathToMascon
+;
+MASCON_FOUNTAIN_BLOCK_2_STONE:              ; [$d76b]
+    db $88                                  ; Stone cover
+
+
+;============================================================================
+; Lookup table for quickly calculating a relative X or Y position for placing
+; a block.
+;
+; At index 0, X will be incremented by 1.
+;
+; At index 1, Y will be incremented by 1 (screen wrap-around).
+;============================================================================
+
+;
+; XREFS:
+;     Game_OpenPathToMascon
+;
+GAME_LADDER_TO_MASCON_BLOCK_OFFSETS:        ; [$d76c]
+    db $01                                  ; [0]: X + 1
+    db $ff                                  ; [1]: Y + 1
+
+
+;============================================================================
+; Drop the ladder down to open the path to Mascon.
+;
+; This will animate placing all the ladder blocks, clearing
+; a path up to the door to Mascon.
+;
+; Despite this only ever being called from the screen leading
+; to Mascon, this will first check if it's on that screen.
+; This appears to be code from some older design.
 ;
 ; INPUTS:
-;     None.
+;     Area_Region:
+;         The current region.
+;
+;     Area_CurrentScreen:
+;         The current screen.
+;
+;     PathToMascon_LadderPos:
+;         The starting ladder position to place.
+;
+;     PathToMascon_LadderBlocksRemaining:
+;         The total number of ladder blocks to place.
 ;
 ; OUTPUTS:
-;     TODO
+;     ScreenBuffer:
+;         The updated screen buffer.
+;
+;     PathToMascon_LadderPos:
+;     PathToMascon_LadderBlocksRemaining:
+;         Clobbered.
+;
+;     PathToMascon_Opening:
+;         Cleared (0).
+;
+; CALLS:
+;     Area_SetBlocks
+;     Sound_PlayEffect
+;     WaitForInterrupt
 ;
 ; XREFS:
-;     Game_ManagePathToMascon
+;     Game_OpenPathToMascon
 ;============================================================================
-Game_CheckPathToMasconOpen:                 ; [$d76e]
+Game_DropLadderToMascon:                    ; [$d76e]
     ;
-    ; Check if the path to Mascon quest is complete.
+    ; Check if we're on the screen with the path to Mascon.
+    ;
+    ; NOTE: This is only ever called from this screen,
+    ;       so it's interesting that this check exists.
     ;
     LDA a:Area_Region                       ; Load the current region.
     CMP #$01                                ; Are we in Trunk?
-    BNE @LAB_PRG15_MIRROR__d783             ; If not, jump.
+    BNE @_dropLadderLoop                    ; If not, jump.
     LDA Area_CurrentScreen                  ; Load the current screen.
     CMP #$28                                ; Is it the screen with the
                                             ; blocked path?
-    BNE @LAB_PRG15_MIRROR__d783             ; If not, jump.
+    BNE @_dropLadderLoop                    ; If not, jump.
 
     ;
-    ; The path to Mascon is now opened. Flag it.
+    ; We're on the right screen. Mark the path as opened.
     ;
     LDA a:Quests                            ; Load the quests.
     ORA #$20                                ; Mark the path to Mascon opened.
     STA a:Quests                            ; Store it.
 
-  @LAB_PRG15_MIRROR__d783:                  ; [$d783]
+    ;
+    ; Wait for 4 interrupts.
+    ;
+  @_dropLadderLoop:                         ; [$d783]
     JSR WaitForInterrupt
     JSR WaitForInterrupt
     JSR WaitForInterrupt
     JSR WaitForInterrupt
-    LDA #$17
-    JSR Sound_PlayEffect
-    LDX BYTE_00d8
-    LDA a:BYTE_PRG15_MIRROR__d7af
-    STA ScreenBuffer,X
-    JSR Area_SetBlocks
-    LDA BYTE_00d8
+
+    ;
+    ; Play the Drop Ladder sound effect.
+    ;
+    LDA #$17                                ; 0x17 == Drop ladder sound
+                                            ; effect.
+    JSR Sound_PlayEffect                    ; Play the sound effect.
+
+    ;
+    ; Place the ladder block.
+    ;
+    LDX PathToMascon_LadderPos              ; X = Next ladder block position.
+    LDA a:DROP_LADDER_TO_MASCON_LADDER_BLOCK ; A = Ladder block.
+    STA ScreenBuffer,X                      ; Store in the screen buffer at
+                                            ; X.
+    JSR Area_SetBlocks                      ; Update blocks on the screen.
+
+    ;
+    ; Increment the ladder position, decrement the number of blocks
+    ; to place, and loop.
+    ;
+    LDA PathToMascon_LadderPos              ; A = Ladder position.
     CLC
-    ADC #$10
-    STA BYTE_00d8
-    DEC Something_PathToMasonQuestCounter
-    BNE @LAB_PRG15_MIRROR__d783
+    ADC #$10                                ; A += 16 (next row)
+    STA PathToMascon_LadderPos              ; Store as the new position.
+    DEC PathToMascon_LadderBlocksRemaining  ; Decrement the number of ladder
+                                            ; blocks to place.
+    BNE @_dropLadderLoop                    ; If there are still blocks
+                                            ; remaining, loop.
+
+    ;
+    ; Clear the "Opening Path" flag.
+    ;
     LDA #$00
-    STA Maybe_PathToMasconOpened
+    STA PathToMascon_Opening                ; Set opening to 0.
     RTS
 
 ;
 ; XREFS:
-;     Game_CheckPathToMasconOpen
+;     Game_DropLadderToMascon
 ;
-BYTE_PRG15_MIRROR__d7af:                    ; [$d7af]
-    db $20                                  ; [$d7af] byte
+DROP_LADDER_TO_MASCON_LADDER_BLOCK:         ; [$d7af]
+    db $20                                  ; Ladder block
 
 
 ;============================================================================
@@ -9112,8 +9603,8 @@ FUN_PRG15_MIRROR__d7b0:                     ; [$d7b0]
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d6ce
 ;     FUN_PRG15_MIRROR__d7b0
-;     Game_CheckPathToMasconOpen
-;     Game_ManagePathToMascon
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
 ;     Player_UseMattock
 ;============================================================================
 Area_SetBlocks:                             ; [$d7c5]
@@ -9438,9 +9929,30 @@ BYTE_ARRAY_PRG15_MIRROR__d8ea:              ; [$d8ea]
 ;
 ; INPUTS:
 ;     Player_Flags:
-;         The current player flags.
+;         The player's current flags.
 ;
+; OUTPUTS:
+;     Player_InvincibilityPhase:
+;     Player_MovementTick:
+;     Player_StatusFlag:
+;         Cleared.
 ;
+; CALLS:
+;     GameLoop_ClearSprites
+;     LoadPalette2
+;     MMC1_LoadBankAndJump
+;     Maybe_GameLoop_ResetAnimation
+;     Maybe_Player_UpdateVisibleItemStates
+;     PPUBuffer_Append0
+;     PlayerDeath_ResetSelectedItemState
+;     Player_DrawBody
+;     Player_DrawDeathAnimation
+;     Player_Spawn
+;     Screen_FadeToBlack
+;     Screen_NextTransitionState
+;     Game_InitStateForSpawn
+;     WaitForInterrupt
+;     WaitForNextFrame
 ;
 ; XREFS:
 ;     Game_MainLoop
@@ -9498,70 +10010,117 @@ Player_HandleDeath:                         ; [$d8ec]
     ; Prepare state for screen transitions.
     ;
     LDA #$00
-    STA a:Screen_TransitionCounter
-    STA a:PlayerIsDead
+    STA a:Screen_TransitionCounter          ; Clear the screen transition
+                                            ; counter.
+
+    ;
+    ; Reset the player death state.
+    ;
+    STA a:PlayerIsDead                      ; Clear the dead flag.
     LDA #$ff
-    STA a:Player_DeathAnimationPhase
-    STA a:Player_DeathAnimationCounter
-    STA a:PaletteIndex
-    JSR GameLoop_ClearSprites
+    STA a:Player_DeathAnimationPhase        ; Clear the death animation
+                                            ; phase.
+    STA a:Player_DeathAnimationCounter      ; Clear the death animation
+                                            ; counter.
+    STA a:PaletteIndex                      ; Clear the palette index.
+
+    ;
+    ; Clear the sprites and music.
+    ;
+    JSR GameLoop_ClearSprites               ; Clear sprites from the screen.
     LDA #$00
-    STA CurrentMusic
+    STA CurrentMusic                        ; Clear the music.
 
     ;
     ; Play the death sound effect.
     ;
-    LDA #$16
-    JSR Sound_PlayEffect
+    LDA #$16                                ; 0x16 == Player death sound.
+    JSR Sound_PlayEffect                    ; Play the sound effect.
 
     ;
     ; Begin our death animation loop.
     ;
     ; This will dissolve the user's sprite.
     ;
-  @LAB_PRG15_MIRROR__d941:                  ; [$d941]
-    JSR WaitForNextFrame
-    JSR Maybe_GameLoop_ResetAnimation
-    JSR Screen_NextTransitionState
-    JSR Player_DrawArmor
-    JSR Player_DrawDeathAnimation
-    LDA a:Player_DeathAnimationPhase
-    CMP #$ff
-    BNE @LAB_PRG15_MIRROR__d966
-    LDA a:Screen_TransitionCounter
-    CMP #$10
-    BCC @LAB_PRG15_MIRROR__d966
-    LDA #$00
-    STA a:Player_DeathAnimationPhase
-    STA a:Player_DeathAnimationCounter
+  @_dissolvePlayerLoop:                     ; [$d941]
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JSR Maybe_GameLoop_ResetAnimation       ; Reset animations.
+    JSR Screen_NextTransitionState          ; Prepare for the next screen
+                                            ; state.
+    JSR Player_DrawBody                     ; Draw the player.
+    JSR Player_DrawDeathAnimation           ; Draw the next cycle of the
+                                            ; death animation.
 
-  @LAB_PRG15_MIRROR__d966:                  ; [$d966]
-    INC a:Screen_TransitionCounter
-    BNE @LAB_PRG15_MIRROR__d9a9
+    ;
+    ; Check whether to reset the animation state.
+    ;
+    LDA a:Player_DeathAnimationPhase        ; Load the animation phase.
+    CMP #$ff                                ; Is it 0xFF (complete)?
+    BNE @_prepareNextLoop                   ; If not, prepare for the next
+                                            ; loop.
+    LDA a:Screen_TransitionCounter          ; Load the screen transition
+                                            ; counter.
+    CMP #$10                                ; Is it >= 16?
+    BCC @_prepareNextLoop                   ; If so, prepare for next loop.
+
+    ;
+    ; Clear animation state.
+    ;
+    LDA #$00
+    STA a:Player_DeathAnimationPhase        ; Clear the animation phase.
+    STA a:Player_DeathAnimationCounter      ; Clear the animation counter.
+
+  @_prepareNextLoop:                        ; [$d966]
+    INC a:Screen_TransitionCounter          ; Increment the screen transition
+                                            ; counter.
+    BNE @_continueDissolvePlayerLoop        ; If transition counter != 0,
+                                            ; loop.
+
+    ;
+    ; We're past the player death animation.
+    ;
+    ; Load the palette and update the screen.
+    ;
     LDA a:Something_Maybe_PaletteIndex
-    JSR LoadPalette2
-    JSR PPUBuffer_Append0
-    PLA
-    STA a:SelectedItem
-    PLA
-    STA a:SelectedMagic
-    PLA
-    STA a:SelectedShield
-    PLA
-    STA a:SelectedArmor
-    PLA
-    STA a:SelectedWeapon
-    LDA #$08
-    STA CurrentMusic
+    JSR LoadPalette2                        ; Load the palette.
+    JSR PPUBuffer_Append0                   ; Append 0 to the PPU buffer.
+
+    ;
+    ; Restore the player's inventory.
+    ;
+    PLA                                     ; Pop the selected item from the
+                                            ; stack.
+    STA a:SelectedItem                      ; Set it.
+    PLA                                     ; Pop the magic from the stack.
+    STA a:SelectedMagic                     ; Set it.
+    PLA                                     ; Pop the shield from the stack.
+    STA a:SelectedShield                    ; Set it.
+    PLA                                     ; Pop the armor from the stack.
+    STA a:SelectedArmor                     ; Set it.
+    PLA                                     ; Pop the weapon from the stack.
+    STA a:SelectedWeapon                    ; Set it.
+
+    ;
+    ; Set the death music.
+    ;
+    LDA #$08                                ; 0x08 == Death music.
+    STA CurrentMusic                        ; Set as the current music.
+
+    ;
+    ; Clear the sprite loaded state.
+    ;
     LDA #$ff
-    STA Maybe_SpritesLoadedState
+    STA Maybe_SpritesLoadedState            ; Set loaded state to 0xFF.
 
     ;
     ; Run IScript 0xFF via jump to IScripts_Begin.
     ;
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterIScriptFarJump:                    ; [$d996]
     LDA #$00
     STA CurrentMusic
 
@@ -9570,14 +10129,17 @@ Player_HandleDeath:                         ; [$d8ec]
     ; to Player_SetInitialExpAndGold.
     ;
     JSR MMC1_LoadBankAndJump                ; Run:
-    db $0c,$b0,$95                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw Player_SetInitialExpAndGold-1        ; Address =
                                             ; Player_SetInitialExpAndGold
-    JSR Screen_FadeToBlack
-    JSR Something_InitOrResetState
-    JMP Player_Spawn
 
-  @LAB_PRG15_MIRROR__d9a9:                  ; [$d9a9]
-    JMP @LAB_PRG15_MIRROR__d941
+  @_afterSetExpGoldFarJump:                 ; [$d9a0]
+    JSR Screen_FadeToBlack                  ; Fade the screen to black.
+    JSR Game_InitStateForSpawn              ; Reset state for spawn.
+    JMP Player_Spawn                        ; Spawn the player.
+
+  @_continueDissolvePlayerLoop:             ; [$d9a9]
+    JMP @_dissolvePlayerLoop
 
 
 ;============================================================================
@@ -9668,43 +10230,89 @@ EndGame_Begin:                              ; [$d9ac]
 ;     Player_HandleDeath
 ;============================================================================
 Player_DrawDeathAnimation:                  ; [$d9d6]
-    LDA a:Player_DeathAnimationPhase
-    CMP #$08
-    BCS @_return
-    LDA a:Player_DeathAnimationCounter
-    BPL @LAB_PRG15_MIRROR__d9ed
-    LDA InterruptCounter
-    AND #$03
-    BNE @_return
+    LDA a:Player_DeathAnimationPhase        ; Load the death animation phase.
+    CMP #$08                                ; Is it >= 8?
+    BCS @_return                            ; If so, return.
+    LDA a:Player_DeathAnimationCounter      ; Load the animation death
+                                            ; counter.
+    BPL @_dissolveSprite                    ; If >= 0, jump to dissolve the
+                                            ; sprite.
+    LDA InterruptCounter                    ; Else, load the interrupt
+                                            ; counter.
+    AND #$03                                ; Every 3 out of 4 ticks...
+    BNE @_return                            ; Return.
     LDA #$00
-    STA a:Player_DeathAnimationCounter
+    STA a:Player_DeathAnimationCounter      ; Clear the death counter.
 
     ;
-    ; Queue draw command 0xFA, dissolving the character's sprite.
+    ; Queue draw command 0xFA, dissolving the character's sprite
+    ; by removal of vertical lines.
     ;
-  @LAB_PRG15_MIRROR__d9ed:                  ; [$d9ed]
-    LDX PPUBuffer_UpperBounds
-    LDA #$fa
-    STA PPUBuffer,X
-    INX
-    LDA a:Player_DeathAnimationPhase
-    STA PPUBuffer,X
-    INX
+    ; This is
+    ; PPUBuffer_DrawCommand_RemoveVerticalLines.
+    ;
+    ; Draw 250 frames.
+    ;
+  @_dissolveSprite:                         ; [$d9ed]
+    LDX PPUBuffer_UpperBounds               ; X = PPU buffer upper bounds.
+    LDA #$fa                                ; A = 0xFA (Remove Vertical Lines
+                                            ; draw command).
+    STA PPUBuffer,X                         ; Set that as the command to
+                                            ; execute.
+
+    ;
+    ; Set the current player phase for the draw.
+    ;
+    INX                                     ; X++
+    LDA a:Player_DeathAnimationPhase        ; Load the animation phase.
+    STA PPUBuffer,X                         ; Set that as the phase
+                                            ; parameter.
+
+    ;
+    ; Set the upper byte of the address to 0.
+    ;
+    INX                                     ; X++
     LDA #$00
-    STA PPUBuffer,X
-    INX
-    LDY a:Player_DeathAnimationCounter
-    LDA #$da21,Y
-    STA PPUBuffer,X
-    INX
-    STX PPUBuffer_UpperBounds
-    INC a:Player_DeathAnimationCounter
-    LDA a:Player_DeathAnimationCounter
-    CMP #$08
-    BCC @_return
+    STA PPUBuffer,X                         ; Set 0 as the upper address.
+
+    ;
+    ; Set the lower byte of the address based on the counter.
+    ;
+    INX                                     ; X++
+    LDY a:Player_DeathAnimationCounter      ; Load the animation counter.
+    LDA #$da21,Y                            ; Load the lower address for Y.
+    STA PPUBuffer,X                         ; Set it as the lower address.
+
+    ;
+    ; Store the new upper bounds of the PPU buffer.
+    ;
+    INX                                     ; X++
+    STX PPUBuffer_UpperBounds               ; Set as the new upper bounds for
+                                            ; the PPU buffer.
+
+    ;
+    ; Update the animation counter.
+    ;
+    INC a:Player_DeathAnimationCounter      ; Increment the animation
+                                            ; counter.
+
+    ;
+    ; If >= 8, reset the counter and increment the phase.
+    ;
+    LDA a:Player_DeathAnimationCounter      ; Load the new animation counter.
+    CMP #$08                                ; Is it < 8?
+    BCC @_return                            ; If so, return.
+
+    ;
+    ; Reset the animation counter and increment the phase.
+    ; Player_HandleDeath will see this and prepare the
+    ; next
+    ; round of vertical line removals.
+    ;
     LDA #$ff
-    STA a:Player_DeathAnimationCounter
-    INC a:Player_DeathAnimationPhase
+    STA a:Player_DeathAnimationCounter      ; Set the animation counter to
+                                            ; 0xFF.
+    INC a:Player_DeathAnimationPhase        ; Increment the animation phase.
 
   @_return:                                 ; [$da20]
     RTS
@@ -9725,15 +10333,9 @@ DEATH_ANIMATION_DRAW_ADDR_LOWER:            ; [$da21]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__da29
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; UNUSED: Set palette index to 0xFF.
 ;============================================================================
-FUN_PRG15_MIRROR__da29:                     ; [$da29]
+UNUSED_FUN_PRG15_MIRROR__da29:              ; [$da29]
     LDA #$ff
     STA a:PaletteIndex
     RTS
@@ -9761,6 +10363,8 @@ FUN_PRG15_MIRROR__da29:                     ; [$da29]
 ;     Player_CheckHandleEnterDoor
 ;     Player_EnterDoorToInside
 ;     Player_EnterDoorToOutside
+;     _afterSetExpGoldFarJump
+;     [$PRG15_MIRROR::d9a0]
 ;============================================================================
 Screen_FadeToBlack:                         ; [$da2f]
     LDA #$00                                ; X = 0 (loop counter)
@@ -9842,7 +10446,7 @@ Screen_NextTransitionState:                 ; [$da42]
 
 
 ;============================================================================
-; TODO: Document Game_Something_InitState
+; TODO: Document Game_InitStateForStartScreen
 ;
 ; INPUTS:
 ;     None.
@@ -9853,19 +10457,19 @@ Screen_NextTransitionState:                 ; [$da42]
 ; XREFS:
 ;     Game_Init
 ;============================================================================
-Game_Something_InitState:                   ; [$da6a]
+Game_InitStateForStartScreen:               ; [$da6a]
     LDX #$ff
     TXS
     LDA #$00
     STA Area_CurrentArea
     STA a:Area_Region
     JSR #$b7ae
-    JSR Something_InitOrResetState
-    JMP FUN_PRG15_MIRROR__fc65
+    JSR Game_InitStateForSpawn
+    JMP Game_ShowStartScreen
 
 
 ;============================================================================
-; TODO: Document Something_InitOrResetState
+; TODO: Document Game_InitStateForSpawn
 ;
 ; INPUTS:
 ;     None.
@@ -9874,9 +10478,9 @@ Game_Something_InitState:                   ; [$da6a]
 ;     TODO
 ;
 ; XREFS:
-;     Game_Something_InitState
+;     Game_InitStateForStartScreen
 ;============================================================================
-Something_InitOrResetState:                 ; [$da7d]
+Game_InitStateForSpawn:                     ; [$da7d]
     JSR PPU_WaitUntilFlushed
     LDA #$00
     STA a:PlayerIsDead
@@ -10077,7 +10681,7 @@ EndGame_BeginKingsRoomSequence:             ; [$db04]
 ;     Game_MainLoop
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__fc65
+;     Game_ShowStartScreen
 ;============================================================================
 Player_Spawn:                               ; [$db0a]
     LDA #$50
@@ -10127,7 +10731,7 @@ Player_Spawn:                               ; [$db0a]
 ;     Game_MainLoop
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__fc65
+;     Game_ShowStartScreen
 ;============================================================================
 Game_Start:                                 ; [$db26]
     JSR Game_ClearTimedItems                ; Clear all timed items.
@@ -10186,7 +10790,7 @@ Game_MainLoop:                              ; [$db45]
     JSR Maybe_GameLoop_ResetAnimation
     JSR GameLoop_UpdatePlayer
     JSR #$b982                              ; Draw shield
-    JSR Player_DrawArmor                    ; Draw weapon?
+    JSR Player_DrawBody                     ; Draw weapon?
     JSR #$b7d6                              ; Draw weapon?
     JSR #$ba5b                              ; Draw magic?
     JSR GameLoop_CheckUseCurrentItem        ; Active selected item?
@@ -10226,7 +10830,7 @@ Game_MainLoop:                              ; [$db45]
     JSR WaitForNextFrame
     JSR Maybe_GameLoop_ResetAnimation
     JSR #$b982
-    JSR Player_DrawArmor
+    JSR Player_DrawBody
     JSR #$b7d6
     JSR GameLoop_ClearSprites
     JSR GameLoop_LoadSpriteInfo
@@ -10238,7 +10842,7 @@ Game_MainLoop:                              ; [$db45]
     JSR Maybe_GameLoop_ResetAnimation
     JSR Game_UpdatePlayerOnScroll
     JSR #$b982
-    JSR Player_DrawArmor
+    JSR Player_DrawBody
     JSR #$b7d6
     JSR Maybe_Screen_Scroll
     JSR Maybe_Screen_Scroll
@@ -10276,7 +10880,7 @@ Game_MainLoop:                              ; [$db45]
 ;     GameLoop_RunScreenEventHandlers
 ;     Maybe_GameLoop_ResetAnimation
 ;     Player_CastMagic
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     Sprites_UpdateAll
@@ -10314,7 +10918,7 @@ EndGame_MainLoop:                           ; [$dbef]
     ; Perform all the standard mainloop operations.
     ;
     JSR #$b982                              ; Draw the shield.
-    JSR Player_DrawArmor                    ; Draw the armor.
+    JSR Player_DrawBody                     ; Draw the armor.
     JSR #$b7d6                              ; Draw the weapon.
     JSR #$ba5b                              ; No-op
     JSR GameLoop_CheckUseCurrentItem        ; No-op
@@ -10421,7 +11025,7 @@ RETURN_DC45:                                ; [$dc45]
 ;     None.
 ;
 ; CALLS:
-;     Player_DrawArmor
+;     Player_DrawBody
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     Sprites_UpdateAll
@@ -10461,7 +11065,7 @@ Game_DrawScreenInFrozenState:               ; [$dc46]
     ; Draw the player.
     ;
     JSR #$b982                              ; Draw the shield.
-    JSR Player_DrawArmor                    ; Draw the armor.
+    JSR Player_DrawBody                     ; Draw the armor.
     JSR #$b7d6                              ; Draw the weapon.
 
     ;
@@ -11764,9 +12368,9 @@ GameLoop_CheckShowPlayerMenu:               ; [$e016]
     ; Open the inventory via jump to UI_ShowPlayerMenu.
     ;
     JSR MMC1_LoadBankAndJump                ; Open the Player Menu.
-    db $0c                                  ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw UI_ShowPlayerMenu-1                  ; Address =
                                             ; UI_ShowPlayerMenu
-    db $92,$8a                              ; [$e028] byte
 
     ;
     ; XREFS:
@@ -12115,9 +12719,9 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;         TODO (set to 2).
 ;
 ; XREFS:
+;     Game_InitStateForSpawn
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
-;     Something_InitOrResetState
 ;============================================================================
 Player_SetInitialState:                     ; [$e0aa]
     LDA #$00
@@ -14260,8 +14864,7 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     ;
     ; That was a match too.
     ;
-    ; Load the next byte referenced in Temp_Addr and store
-    ; that
+    ; Load the next byte referenced in Temp_Addr and store that
     ; as a block position in Temp_BlockPos2.
     ;
     INY                                     ; Y++
@@ -14650,8 +15253,8 @@ Area_IsBlockClimbable:                      ; [$e8b2]
 ; Return the block property referenced at the given screen buffer index.
 ;
 ; This will load the block property referenced in the screen
-; buffer and then fall through to {{@SYMBOL:
-; PRG15_MIRROR::Area_GetBlockProperty@}}.
+; buffer and then fall through to
+; Area_GetBlockProperty.
 ;
 ; Block properties are stored with upper and lower nibbles
 ; representing different blocks. This will look up the
@@ -14975,13 +15578,13 @@ Player_CheckPushingBlock:                   ; [$e95d]
     CMP #$60
     BCC @_return
     LDA #$01
-    STA Maybe_PathToMasconOpened
-    STX Maybe_PushableBlockPos
+    STA PathToMascon_Opening
+    STX PathToMascon_FountainCoverPos
     LDA Joy1_ButtonMask
     LSR A
     AND #$01
     TAX
-    JMP Game_ManagePathToMascon
+    JMP Game_OpenPathToMascon
 
   @_return:                                 ; [$e9b8]
     RTS
@@ -15519,8 +16122,11 @@ Game_OpenDoorWithAKey:                      ; [$eb51]
     LDA #$7d                                ; 0x7D == "A" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$eb60]
     RTS
 
 
@@ -15558,8 +16164,11 @@ Game_OpenDoorWithKKey:                      ; [$eb61]
     LDA #$7c                                ; 0x7C == "K" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$eb70]
     RTS
 
 
@@ -15597,8 +16206,11 @@ Game_OpenDoorWithQKey:                      ; [$eb71]
     LDA #$7b                                ; 0x7B == "Q" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$eb80]
     RTS
 
 
@@ -15636,8 +16248,11 @@ Game_OpenDoorWithJKey:                      ; [$eb81]
     LDA #$02                                ; 0x02 == "J" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$eb90]
     RTS
 
 
@@ -15675,8 +16290,11 @@ Game_OpenDoorWithJoKey:                     ; [$eb91]
     LDA #$7e                                ; 0x7E == "Jo" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$eba0]
     RTS
 
 
@@ -15713,8 +16331,11 @@ Game_OpenDoorWithRingOfElf:                 ; [$eba1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$ebb0]
     RTS
 
 
@@ -15751,8 +16372,11 @@ Game_OpenDoorWithRingOfDworf:               ; [$ebb1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$ebc0]
     RTS
 
 
@@ -15789,8 +16413,11 @@ Game_OpenDoorWithDemonsRing:                ; [$ebc1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$ebd0]
     RTS
 
 
@@ -15816,8 +16443,11 @@ Game_UnlockDoorWithUsableItem:              ; [$ebd1]
     ;
     LDA #$84                                ; 0x84 == Used key IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db $0c,$41,$82                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
+
+  @_afterFarJump:                           ; [$ebd9]
     LDA #$ff
     STA a:SelectedItem
     JSR UI_ClearSelectedItemPic
@@ -15847,7 +16477,7 @@ Game_UnlockDoor:                            ; [$ebe1]
 
 
 ;============================================================================
-; TODO: Document Player_DrawArmor
+; TODO: Document Player_DrawBody
 ;
 ; INPUTS:
 ;     None.
@@ -15861,7 +16491,7 @@ Game_UnlockDoor:                            ; [$ebe1]
 ;     Game_MainLoop
 ;     Player_HandleDeath
 ;============================================================================
-Player_DrawArmor:                           ; [$ebee]
+Player_DrawBody:                            ; [$ebee]
     LDA a:Temp_03C7
     BMI @LAB_PRG15_MIRROR__ebf4
     RTS
@@ -15871,8 +16501,7 @@ Player_DrawArmor:                           ; [$ebee]
     ; the arguments to use.
     ;
     ; NOTE: This seems to be old code. Nothing sets
-    ; Maybe_SpritesLoadedState to anything but 0x00 or
-    ; 0xFF.
+    ; Maybe_SpritesLoadedState to anything but 0x00 or 0xFF.
     ; It appears that at some point they simplified this, which
     ; makes all of this dead code.
     ;
@@ -15898,8 +16527,8 @@ Player_DrawArmor:                           ; [$ebee]
     JMP @LAB_PRG15_MIRROR__ec21
 
     ;
-    ; This whole section seems unreachable. {{@SYMBOL:
-    ; RAM::Maybe_SpritesLoadedState@}}
+    ; This whole section seems unreachable.
+    ; Maybe_SpritesLoadedState
     ; should never reach these values. This may be dead code.
     ;
   @LAB_PRG15_MIRROR__ec11:                  ; [$ec11]
@@ -15935,7 +16564,7 @@ Player_DrawArmor:                           ; [$ebee]
 
 ;
 ; XREFS:
-;     Player_DrawArmor
+;     Player_DrawBody
 ;
 BYTE_ARRAY_PRG15_MIRROR__ec49:              ; [$ec49]
     db $00                                  ; [0]:
@@ -15958,7 +16587,7 @@ BYTE_ARRAY_PRG15_MIRROR__ec49:              ; [$ec49]
 ;     TODO
 ;
 ; XREFS:
-;     Player_DrawArmor
+;     Player_DrawBody
 ;============================================================================
 Player_SetFacingLeft:                       ; [$ec51]
     LDA Player_Flags
@@ -15977,7 +16606,7 @@ Player_SetFacingLeft:                       ; [$ec51]
 ;     TODO
 ;
 ; XREFS:
-;     Player_DrawArmor
+;     Player_DrawBody
 ;============================================================================
 FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     LDA Player_Flags
@@ -16063,7 +16692,7 @@ BYTE_ARRAY_PRG15_MIRROR__eca4:              ; [$eca4]
 ;     TODO
 ;
 ; XREFS:
-;     Player_DrawArmor
+;     Player_DrawBody
 ;============================================================================
 FUN_PRG15_MIRROR__ecac:                     ; [$ecac]
     LDA Player_Flags
@@ -16778,35 +17407,76 @@ LABEL_EED2:                                 ; [$eed2]
     ADC #$00
     STA Maybe_Player_AccessorySpriteAddr_L
     RTS
-    db $a9,$ff,$8d,$2e,$04,$60              ; [$ef45] undefined
 
 
 ;============================================================================
-; TODO: Document GameLoop_RunScreenEventHandlers
+; DEAD CODE: Unset the special event ID.
+;
+; This is not used in the game.
+;============================================================================
+DEAD_FUN_PRG15_MIRROR__ef45:                ; [$ef45]
+    LDA #$ff
+    STA a:CurrentScreen_SpecialEventID
+    RTS
+
+
+;============================================================================
+; Run special event handlers for the current screen.
+;
+; This will run code specific to some screens in the game,
+; as indicated by the special event ID stored in a screen's
+; metadata.
+;
+; See Screen_LoadSpecialEventID.
+;
+; If a handler is found, it will be run directly following
+; this function.
 ;
 ; INPUTS:
-;     None.
+;     CurrentScreen_SpecialEventID:
+;         The loaded special event ID for the current
+;         screen.
+;
+;     SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:
+;         Table mapping special event IDs to handler
+;         functions.
 ;
 ; OUTPUTS:
-;     A
+;     Stack (A):
+;         The address of the handler to run, if any.
 ;
 ; XREFS:
 ;     EndGame_MainLoop
 ;     Game_MainLoop
 ;============================================================================
 GameLoop_RunScreenEventHandlers:            ; [$ef4b]
-    LDA a:CurrentScreen_SpecialEventID
-    CMP #$ff
-    BEQ @_return
-    AND #$7f
-    ASL A
-    CMP #$06
-    BCS @_return
-    TAY
-    LDA #$ef64,Y
-    PHA
-    LDA #$ef63,Y
-    PHA
+    ;
+    ; Check if this screen has a special event ID.
+    ;
+    LDA a:CurrentScreen_SpecialEventID      ; Load the screen's special event
+                                            ; ID.
+    CMP #$ff                                ; Is it 0xFF?
+    BEQ @_return                            ; If so, nothing to run. Return.
+
+    ;
+    ; Check if there's an entry in the table.
+    ;
+    AND #$7f                                ; Take the lower 7 bits.
+    ASL A                                   ; Convert to a word boundary for
+                                            ; the lookup table.
+    CMP #$06                                ; Is it >= 6 (out of bounds)?
+    BCS @_return                            ; If so, return.
+
+    ;
+    ; Load the address of the handler and push as the new address
+    ; to run.
+    ;
+    TAY                                     ; Y = A
+    LDA #$ef64,Y                            ; Load the lower byte of the
+                                            ; handler address.
+    PHA                                     ; Push it to the stack.
+    LDA #$ef63,Y                            ; Load the upper byte.
+    PHA                                     ; Push it.
 
   @_return:                                 ; [$ef62]
     RTS
@@ -16814,6 +17484,16 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 
 ;============================================================================
 ; Special screen events lookup table.
+;
+; Each maps a special event ID to a handler that will run
+; on each tick while on the screen.
+;
+; MOD NOTES:
+;     By moving this table later into the bank and updating
+;     both the address in
+;     GameLoop_RunScreenEventHandlers
+;     and the table length in that function (6), you could
+;     likely add new special handlers for screens
 ;============================================================================
 
 ;
@@ -16821,7 +17501,8 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 ;     GameLoop_RunScreenEventHandlers
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
-    db $68                                  ; [0]:
+    db $68                                  ; [0]: Handle pushable block on
+                                            ; path to Mascon.
 
 ;
 ; XREFS:
@@ -16829,56 +17510,93 @@ SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_0__1:     ; [$ef64]
     db $ef                                  ; [0]:
-    db $9d                                  ; [1]:
+    db $9d                                  ; [1]: Handle a standard boss
+                                            ; battle.
     db $ef                                  ; [1]:
-    db $d3                                  ; [2]:
+    db $d3                                  ; [2]: Handle end-game sequence
+                                            ; after killing the final boss.
     db $ef                                  ; [2]:
 
 
 ;============================================================================
-; TODO: Document ScreenEvents_HandlePathToMasconEvent
+; Handle checking the path to Mascon at the final fountain.
+;
+; This is a special screen event handler that checks whether
+; the player has completed the quests to reach Mascon.
+;
+; This is only executed on the first tick for the screen,
+; and disabled immediately after. If the fountains were
+; completed, this will remove the block obscuring the
+; ladder to Mascon and then drop down the ladder.
 ;
 ; INPUTS:
-;     None.
+;     Quests:
+;         The quests completed.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentScreen_SpecialEventID:
+;         The unset special event ID, to prevent this from
+;         running more than once.
+;
+;     PathToMascon_FountainCoverPos:
+;         Set to the block position to clear.
+;
+;     PathToMascon_Opening:
+;         Set to 1.
+;
+; CALLS:
+;     Game_OpenPathToMascon
 ;
 ; XREFS:
 ;     SPECIAL_SCREEN_EVENT_LOOKUP_TABLE
 ;     [$PRG15_MIRROR::ef63]
 ;============================================================================
 ScreenEvents_HandlePathToMasconEvent:       ; [$ef69]
-    LDA a:Quests
-    AND #$20
-    BEQ @LAB_PRG15_MIRROR__ef82
-    LDA #$ff
-    STA a:CurrentScreen_SpecialEventID
-    LDA #$01
-    STA Maybe_PathToMasconOpened
-    LDA #$56
-    STA Maybe_PushableBlockPos
-    LDX #$00
-    JMP Game_ManagePathToMascon
+    ;
+    ; Check if the path to Mascon has been opened.
+    ;
+    LDA a:Quests                            ; Load the list of completed
+                                            ; quests.
+    AND #$20                                ; Is the Mascon path completed?
+    BEQ @_notCompleted                      ; If not, jump to return.
 
-  @LAB_PRG15_MIRROR__ef82:                  ; [$ef82]
+    ;
+    ; The quest has been completed. Turn off this handler (clear
+    ; the event ID) and manage the transition for the path to
+    ; Mascon.
+    ;
     LDA #$ff
-    STA a:CurrentScreen_SpecialEventID
+    STA a:CurrentScreen_SpecialEventID      ; Unset the special event ID.
+    LDA #$01
+    STA PathToMascon_Opening                ; Set the path to Mascon as
+                                            ; opened.
+    LDA #$56
+    STA PathToMascon_FountainCoverPos       ; Set the pushable block to X=6,
+                                            ; Y=5.
+    LDX #$00
+    JMP Game_OpenPathToMascon               ; Drop the ladder down to reach
+                                            ; Mascon.
+
+    ;
+    ; The criteria for the path wasn't set. Clear out this event
+    ; ID so it won't be run until the next time the player is
+    ; on the screen.
+    ;
+  @_notCompleted:                           ; [$ef82]
+    LDA #$ff
+    STA a:CurrentScreen_SpecialEventID      ; Unset the special event ID.
     RTS
 
 
 ;============================================================================
-; TODO: Document Sprites_HasSpritesNotOfType
+; DEAD CODE: Check if there are sprites not of a given entity.
 ;
-; INPUTS:
-;     A
-;
-; OUTPUTS:
-;     C
+; This does not appear to be used anywhere. It only
+; references itself.
 ;============================================================================
 Sprites_HasSpritesNotOfType:                ; [$ef88]
-    STA Temp_00                             ; Unreachable?
-    LDX #$07                                ; Unreachable?
+    STA Temp_00
+    LDX #$07
 
   @LAB_PRG15_MIRROR__ef8c:                  ; [$ef8c]
     LDA CurrentSprites_Entities,X
@@ -16897,34 +17615,78 @@ Sprites_HasSpritesNotOfType:                ; [$ef88]
 
 
 ;============================================================================
-; TODO: Document ScreenEvents_HandleBoss
+; Handle checking for a boss on the screen.
+;
+; This is a special event handler used for boss rooms.
+; It will default the music to boss battle music, and then
+; check for the presence of a boss on every game tick.
+;
+; Once a boss has been defeated, the music will be set back
+; to the default for the area and the handler will be shut
+; down.
 ;
 ; INPUTS:
-;     None.
+;     CurrentScreen_SpecialEventID:
+;         The special event ID for the screen, used to
+;         determine which bits of logic should run.
+;
+;     Areas_DefaultMusic:
+;         The default music for the area.
 ;
 ; OUTPUTS:
-;     TODO
+;     CurrentMusic:
+;         The current music being played.
+;
+;     CurrentScreen_SpecialEventID:
+;         The updated special event ID.
+;
+; CALLS:
+;     Sprites_HasBoss
 ;
 ; XREFS:
 ;     SPECIAL_SCREEN_EVENT_LOOKUP_TABLE
 ;     [$PRG15_MIRROR::ef65]
 ;============================================================================
 ScreenEvents_HandleBoss:                    ; [$ef9e]
+    ;
+    ; Check if bit 7 is set. If not, prepare the boss battle music
+    ; and initial state. This would only be done once on the screen.
+    ;
     LDA a:CurrentScreen_SpecialEventID
-    BMI @LAB_PRG15_MIRROR__efaf
-    ORA #$80
-    STA a:CurrentScreen_SpecialEventID
-    JSR LimitItemDurations
-    LDA #$0a
-    STA CurrentMusic
+    BMI @_checkForBoss
 
-  @LAB_PRG15_MIRROR__efaf:                  ; [$efaf]
-    JSR Sprites_HasBigEnemy
-    BCS @_return
-    LDA a:Areas_DefaultMusic
-    STA CurrentMusic
+    ;
+    ; This is the first tick on a boss battle screen. Take the
+    ; opportunity to cap any item durations, and default the music
+    ; to the boss battle music.
+    ;
+    ORA #$80                                ; Set bit 7 to only run this
+                                            ; conditional on the first game
+                                            ; tick.
+    STA a:CurrentScreen_SpecialEventID      ; Save it.
+    JSR LimitItemDurations                  ; Cap item durations within
+                                            ; bounds.
+    LDA #$0a
+    STA CurrentMusic                        ; Set the music to the boss
+                                            ; battle music.
+
+    ;
+    ; Check if there's a boss on screen.
+    ;
+  @_checkForBoss:                           ; [$efaf]
+    JSR Sprites_HasBoss                     ; Check for a boss.
+    BCS @_return                            ; If there is one, we're done.
+                                            ; Return.
+
+    ;
+    ; The boss has been defeated. Restore the game state.
+    ;
+    LDA a:Areas_DefaultMusic                ; Load the default music for the
+                                            ; area.
+    STA CurrentMusic                        ; Set it as the current music.
     LDA #$ff
-    STA a:CurrentScreen_SpecialEventID
+    STA a:CurrentScreen_SpecialEventID      ; Clear the special event ID so
+                                            ; this doesn't run again.
 
   @_return:                                 ; [$efbe]
     RTS
@@ -16971,7 +17733,10 @@ LimitItemDurations:                         ; [$efbf]
 
 
 ;============================================================================
-; Handle check for the death of the final boss.
+; Handle checking for the death of the final boss.
+;
+; This is a special event handler used for the final boss
+; room.
 ;
 ; If the boss dies (rather, if all sprite entities are
 ; cleared from the screen), this will switch back to the
@@ -17020,13 +17785,25 @@ ScreenEvents_HandleFinalBossKilled:         ; [$efd4]
 
 
 ;============================================================================
-; TODO: Document Maybe_IsSpriteNotOnScreen
+; Return whether the given sprite entity is *not* on the screen.
+;
+; This will loop through the sprites on screen and check if any
+; match the entity type provided.
 ;
 ; INPUTS:
-;     A
+;     A:
+;         The sprite entity to check for.
+;
+;     CurrentSprites_Entities:
+;         The list of current sprite entities on screen.
 ;
 ; OUTPUTS:
-;     C
+;     C:
+;         0 = Sprite entity is on screen.
+;         1 = Sprite entity is not on screen.
+;
+;     Temp_00:
+;         Clobbered.
 ;
 ; XREFS:
 ;     SpriteBehavior__a354
@@ -17037,55 +17814,89 @@ ScreenEvents_HandleFinalBossKilled:         ; [$efd4]
 ;     SpriteBehavior__a437
 ;     SpriteBehavior__a45b
 ;============================================================================
-Maybe_IsSpriteNotOnScreen:                  ; [$efe6]
-    STA Temp_00
-    LDY #$07
+Maybe_IsSpriteEntityNotOnScreen:            ; [$efe6]
+    STA Temp_00                             ; Temp_00 =
+                                            ; Sprite type for comparison.
+    LDY #$07                                ; Y = 7
 
-  @LAB_PRG15_MIRROR__efea:                  ; [$efea]
-    LDA CurrentSprites_Entities,Y
-    CMP Temp_00
-    BNE @LAB_PRG15_MIRROR__eff3
-    CLC
+    ;
+    ; Check the entity for this index in the current sprites list.
+    ;
+  @_spriteLoop:                             ; [$efea]
+    LDA CurrentSprites_Entities,Y           ; Load the entity of the sprite
+                                            ; at loop index.
+    CMP Temp_00                             ; Is it the entity the caller is
+                                            ; checking for?
+    BNE @_prepareNextLoopIter               ; If not, prepare for the next
+                                            ; loop iteration.
+
+    ;
+    ; The sprite entity is on the screen. Clear carry as the result.
+    ;
+    CLC                                     ; Return false.
     RTS
 
-  @LAB_PRG15_MIRROR__eff3:                  ; [$eff3]
-    DEY
-    BPL @LAB_PRG15_MIRROR__efea
-    SEC
+  @_prepareNextLoopIter:                    ; [$eff3]
+    DEY                                     ; Y--
+    BPL @_spriteLoop                        ; If Y >= 0, loop.
+
+    ;
+    ; The sprite entity is not on the screen. Set carry as the
+    ; result.
+    ;
+    SEC                                     ; Return true.
     RTS
 
 
 ;============================================================================
-; Return whether a big enemy is on the screen.
+; Return whether there's a boss on screen.
+;
+; This loops through all the sprite entities on the screen,
+; looks up the category for each, and checks if that
+; category is a boss.
 ;
 ; INPUTS:
 ;     CurrentSprites_Entities:
-;         The types of sprites currently on the screen.
+;         The list of current sprite entities on screen.
+;
+;     SPRITE_CATEGORIES_BY_ENTITY:
+;         Lookup table of entities to categories.
 ;
 ; OUTPUTS:
 ;     C:
-;         1 if a big enemy is on the screen.
-;         0 if not.
+;         0 if there is no boss on screen.
+;         1 if there is a boss on screen.
 ;
 ; XREFS:
 ;     ScreenEvents_HandleBoss
 ;============================================================================
-Sprites_HasBigEnemy:                        ; [$eff8]
-    LDX #$07                                ; Set our loop counter to 7.
+Sprites_HasBoss:                            ; [$eff8]
+    LDX #$07                                ; X = 7 (loop counter).
 
+    ;
+    ; Check if this sprite is a boss.
+    ;
   @_loop:                                   ; [$effa]
-    LDY CurrentSprites_Entities,X           ; Load the sprite type at that
+    LDY CurrentSprites_Entities,X           ; Load the sprite entity at that
                                             ; index.
-    LDA #$b544,Y                            ; Load the value from the map.
-    CMP #$07                                ; Is it 7? This is the Elixir.
-    BNE @_notBigEnemy                       ; If not, jump.
+    LDA #$b544,Y                            ; Load the category for the
+                                            ; entity.
+    CMP #$07                                ; Is it 7 (boss)?
+    BNE @_notBoss                           ; If not, jump.
+
+    ;
+    ; There is a boss on screen. Return true.
+    ;
     SEC                                     ; Return true.
     RTS
 
-  @_notBigEnemy:                            ; [$f006]
-    DEX                                     ; Decrement our loop counter and
-                                            ; loop.
-    BPL @_loop
+  @_notBoss:                                ; [$f006]
+    DEX                                     ; X--
+    BPL @_loop                              ; If X >= 0, loop.
+
+    ;
+    ; There is no boss on screen. Return false.
+    ;
     CLC                                     ; Return false.
     RTS
 
@@ -17106,20 +17917,28 @@ Sprites_HasBigEnemy:                        ; [$eff8]
 ;     ScreenEvents_HandleFinalBossKilled
 ;============================================================================
 Sprites_HasCurrentSprites:                  ; [$f00b]
-    LDY #$07                                ; Set our loop counter to 7.
+    LDY #$07                                ; Y = 7 (loop counter).
 
   @_loop:                                   ; [$f00d]
-    LDA CurrentSprites_Entities,Y           ; Load the sprite type at that
+    LDA CurrentSprites_Entities,Y           ; Load the sprite entity at that
                                             ; index.
     CMP #$ff                                ; Is it unset?
-    BEQ @_next                              ; If yes, jump.
+    BEQ @_prepareNextLoopIter               ; If yes, jump to prepare for the
+                                            ; next loop iteration.
+
+    ;
+    ; A sprite entity was found. Return true.
+    ;
     SEC                                     ; Return true.
     RTS
 
-  @_next:                                   ; [$f016]
-    DEY                                     ; Decrement our loop counter and
-                                            ; loop.
-    BPL @_loop
+  @_prepareNextLoopIter:                    ; [$f016]
+    DEY                                     ; Y--
+    BPL @_loop                              ; If Y >= 0, loop.
+
+    ;
+    ; A sprite entity was not found. Return false.
+    ;
     CLC                                     ; Return false.
     RTS
 
@@ -17168,7 +17987,7 @@ FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     FUN_PRG15_MIRROR__ec58
-;     Player_DrawArmor
+;     Player_DrawBody
 ;============================================================================
 FUN_PRG15_MIRROR__f039:                     ; [$f039]
     TAY
@@ -17270,8 +18089,8 @@ Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
 
     ;
     ; Load a byte from that offset. The upper nibble will be
-    ; stored at Temp_Sprites_RowsRemaining and the lower
-    ; nibble will be in
+    ; stored at Temp_Sprites_RowsRemaining and the lower nibble
+    ; will be in
     ; Temp_Sprites_ColsRemaining.
     ;
     LDY #$00                                ; Y = 0
@@ -17286,8 +18105,8 @@ Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
     STA Temp_Sprites_RowsRemaining          ; Store it.
 
     ;
-    ; Initialize Something_SpriteData_X and {{@SYMBOL:
-    ; RAM::Something_SpriteData_Y@}} to 0.
+    ; Initialize Something_SpriteData_X and
+    ; Something_SpriteData_Y to 0.
     ;
     LDA #$00                                ; A = 0
     STA Something_SpriteData_X              ; Set to 0.
@@ -17705,7 +18524,7 @@ SPRITE_TILE_OFFSETS:                        ; [$f23d]
 ;     A
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     IScripts_Begin
@@ -17715,9 +18534,9 @@ FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
     TAX
     BMI @LAB_PRG15_MIRROR__f27d
     JSR FUN_PRG15_MIRROR__f2e3
-    JSR FUN_PRG15_MIRROR__cb9a
-    LDA a:CurrentPalette
-    STA a:Something_PaletteIndex
+    JSR Game_WaitForOAMReset
+    LDA a:Palette_CurrentIndex
+    STA a:Palette_SavedIndex
     LDA #$02
     JSR Palette_LoadFromIndex
     JSR PPUBuffer_Append0
@@ -17747,13 +18566,22 @@ FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
 
 
 ;============================================================================
-; TODO: Document IScripts_ClearPortrait
+; Clear the portrait from the textbox.
 ;
 ; INPUTS:
-;     None.
+;     Palette_SavedIndex:
+;         The palette index to restore.
 ;
 ; OUTPUTS:
-;     TODO
+;     Temp_03C7:
+;         Set to 0xFF.
+;
+; CALLS:
+;     Game_WaitForOAMReset
+;     Palette_LoadFromIndex
+;     PPUBuffer_Append0
+;     MMC1_LoadBankAndJump
+;     GameLoop_LoadSpriteImages
 ;
 ; XREFS:
 ;     IScriptAction_EndScript
@@ -17761,28 +18589,29 @@ FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
 IScripts_ClearPortrait:                     ; [$f281]
     LDA #$ff
     STA a:Temp_03C7
-    JSR FUN_PRG15_MIRROR__cb9a
-    LDA a:Something_PaletteIndex
+    JSR Game_WaitForOAMReset
+    LDA a:Palette_SavedIndex
     JSR Palette_LoadFromIndex
     JSR PPUBuffer_Append0
 
     ;
-    ; Switch to bank 14 and run {{@SYMBOL:
-    ; PRG15_MIRROR::GameLoop_LoadSpriteImages@}}.
+    ; Switch to bank 14 and run
+    ; GameLoop_LoadSpriteImages
+    ; (from bank 15).
     ;
     JSR MMC1_LoadBankAndJump
-    db $0e                                  ; Bank = 14 Address =
+    db BANK_14_LOGIC                        ; Bank = 14 Address =
                                             ; GameLoop_LoadSpriteImages
-    db $8c,$c2                              ; [$f296] byte
+    dw GameLoop_LoadSpriteImages-1
 
-  @LAB_PRG15_MIRROR__f298:                  ; [$f298]
+  @_afterFarJump:                           ; [$f298]
     RTS
 
     ;
     ; XREFS:
     ;     IScripts_DrawPortraitAnimationFrame
     ;
-LABEL_F299:                                 ; [$f299]
+POP_RETURN_F299:                            ; [$f299]
     PLA
     RTS
 
@@ -17802,7 +18631,7 @@ LABEL_F299:                                 ; [$f299]
 IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     PHA
     LDA a:Temp_03C7
-    BMI LABEL_F299
+    BMI POP_RETURN_F299
     LDA #$00
     STA CurrentSprite_FlipMask
 
@@ -18114,7 +18943,7 @@ SOUND_PRIORITIES:                           ; [$f388]
 ;     PPU_WriteGlyphTile
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;============================================================================
 PPU_LoadGlyphsForStrings:                   ; [$f3a5]
     LDA a:CurrentROMBank2
@@ -18315,8 +19144,7 @@ Messages_Load:                              ; [$f3f5]
     JSR MMC1_UpdatePRGBank
 
     ;
-    ; Set the start of the messages string ({{@SYMBOL:
-    ; PRG13::MESSAGE_STRINGS@}}).
+    ; Set the start of the messages string (MESSAGE_STRINGS).
     ;
     LDX #$00                                ; Set the lower byte of the
                                             ; address for the strings.
@@ -18404,8 +19232,8 @@ Messages_Load:                              ; [$f3f5]
 ;============================================================================
 ; TODO
 ;
-; This falls through to {{@SYMBOL:
-; PRG15_MIRROR::TextBox_ClearShopSizeAtOffset@}}.
+; This falls through to
+; TextBox_ClearShopSizeAtOffset.
 ;
 ; INPUTS:
 ;     X:
@@ -19080,7 +19908,8 @@ TextBox_ShowMessage_Fill4Lines:             ; [$f571]
     ;
     ; Increase the Y position to draw to by 3, after these lines.
     ;
-    INC TextBox_TextY                       ; TextBox_TextY += 3
+    INC TextBox_TextY                       ; TextBox_TextY
+                                            ; += 3
     INC TextBox_TextY
     INC TextBox_TextY
 
@@ -19572,10 +20401,10 @@ Math_MultiplyBy8:                           ; [$f78c]
 ; TODO: Document FUN_PRG15_MIRROR__f791
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     Maybe_Draw_Textbox_Something8FF6
@@ -19787,8 +20616,7 @@ PPU_IncrementAddrBy8:                       ; [$f822]
 ;     Maybe_Draw_Textbox
 ;     TextBox_Maybe_Draw
 ;     TextBox_ClearShopSizeAtOffset
-;     {{@SYMBOL:
-;     PRG15_MIRROR::TextBox_FillPlaceholderTextAtLineWithStartChar@}}
+;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;============================================================================
 PPU_IncrementAddrBy32:                      ; [$f826]
     LDA #$20                                ; Set the offset to 32.
@@ -19901,8 +20729,9 @@ TextBox_SomethingPPUBuffer_Set:             ; [$f839]
 ;     TextBox_Write8BytesFromTemp
 ;============================================================================
 PPUBuffer_WriteFromTemp:                    ; [$f842]
-    LDA (Temp_Int24),Y                      ; Load the value from Temp_Int24
-                                            ; at offset Y.
+    LDA (Temp_Int24),Y                      ; Load the value from
+                                            ; Temp_Int24 at
+                                            ; offset Y.
     INY                                     ; Y++
 
     ;
@@ -19935,8 +20764,7 @@ PPUBuffer_WriteFromTemp:                    ; [$f842]
 ;     Strings_Draw
 ;     TextBox_Maybe_Draw
 ;     PPUBuffer_WriteValueMany
-;     {{@SYMBOL:
-;     PRG15_MIRROR::TextBox_FillPlaceholderTextAtLineWithStartChar@}}
+;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_SomethingPPUBuffer_Set
 ;     UI_DrawDigitsZeroPadded
 ;     UI_DrawManaOrHPBar
@@ -19994,7 +20822,7 @@ PPUBuffer_WriteValueMany:                   ; [$f84a]
 ;
 ; This takes in a bank in a the address within the bank (as
 ; an upper byte and a lower byte) from the next three bytes
-; following this call. It then does the following:
+; following this call. Specifically, it:
 ;
 ; 1. Steals the JSR return address off the stack to locate
 ;    the inline data.
@@ -20025,7 +20853,6 @@ PPUBuffer_WriteValueMany:                   ; [$f84a]
 ; XREFS:
 ;     Player_CheckHandlePressUpOnNPC
 ;     Player_HandleTouchNPC
-;     FUN_PRG15_MIRROR__fc65
 ;     GameLoop_CheckShowPlayerMenu
 ;     Game_DecGloveDuration
 ;     Game_DecHourGlassDuration
@@ -20039,6 +20866,7 @@ PPUBuffer_WriteValueMany:                   ; [$f84a]
 ;     Game_OpenDoorWithQKey
 ;     Game_OpenDoorWithRingOfDworf
 ;     Game_OpenDoorWithRingOfElf
+;     Game_ShowStartScreen
 ;     Game_UnlockDoorWithUsableItem
 ;     IScripts_ClearPortrait
 ;     Maybe_Player_PickUpGlove
@@ -20066,18 +20894,28 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Save out the X, Y, and Z values to temporary variables.
     ;
-    STA BankedCallSetup_SavedA              ; Set BankedCallSetup_SavedA = A
-    STX BankedCallSetup_SavedX              ; Set BankedCallSetup_SavedX = X
-    STY BankedCallSetup_SavedY              ; Set BankedCallSetup_SavedY = Y
+    STA BankedCallSetup_SavedA              ; Set
+                                            ; BankedCallSetup_SavedA
+                                            ; = A
+    STX BankedCallSetup_SavedX              ; Set
+                                            ; BankedCallSetup_SavedX
+                                            ; = X
+    STY BankedCallSetup_SavedY              ; Set
+                                            ; BankedCallSetup_SavedY
+                                            ; = Y
 
     ;
     ; Pop two bytes of A from the stack and transfer to the lower
     ; and middle bytes (in order) of Temp_Int24.
     ;
     PLA                                     ; Pop A from the stack.
-    STA Temp_Int24                          ; Lower byte of Temp_Int24 = A
+    STA Temp_Int24                          ; Lower byte of
+                                            ; Temp_Int24 =
+                                            ; A
     PLA                                     ; Pull A from the stack.
-    STA Temp_Int24.M                        ; Middle byte of Temp_Int24 = A
+    STA Temp_Int24.M                        ; Middle byte of
+                                            ; Temp_Int24 =
+                                            ; A
 
     ;
     ; Save A to X. We'll increment this below if we overflow
@@ -20088,43 +20926,54 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Compute a new return low = Temp_Int24.L + 3.
     ;
-    LDA Temp_Int24                          ; A = lower byte of Temp_Int24.
+    LDA Temp_Int24                          ; A = lower byte of
+                                            ; Temp_Int24.
     CLC                                     ; C = 0
     ADC #$03                                ; A = A + 3
-    STA Temp_Int24.U                        ; Upper byte of Temp_Int24 = A
+    STA Temp_Int24.U                        ; Upper byte of
+                                            ; Temp_Int24 =
+                                            ; A
 
     ;
     ; If the upper byte overflowed, increment X.
     ;
-    BCC @LAB_PRG15_MIRROR__f870             ; If carry is cleared, jump.
+    BCC @_storeCurrentAddress               ; If carry is cleared, jump.
     INX                                     ; X = X + 1
 
     ;
-    ; Begin pushing values for A back to the stack.
+    ; Preserve the target address and ROM bank on the stack.
     ;
-    ; We'll push X (which will be A or A + 1), then the upper byte,
-    ; then the current ROM bank.
-    ;
-  @LAB_PRG15_MIRROR__f870:                  ; [$f870]
+  @_storeCurrentAddress:                    ; [$f870]
     TXA                                     ; A = X (our adjusted offset)
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of Temp_Int24
+    LDA Temp_Int24.U                        ; A = upper byte of
+                                            ; Temp_Int24
     PHA                                     ; Push A to stack
-    LDA a:CurrentROMBank2                   ; A = CurrentROMBank
+    LDA a:CurrentROMBank2                   ; A =
+                                            ; CurrentROMBank2
     PHA                                     ; Push A to stack
+
+    ;
+    ; Store the loaded address and bank to jump to.
+    ;
     LDY #$03                                ; Y = 3
-    LDA (Temp_Int24),Y                      ; A = upper byte of Temp_Int24
-    STA Maybe_Temp4                         ; Maybe_Temp4 = A
+    LDA (Temp_Int24),Y                      ; A = Upper byte of the address
+                                            ; to jump to.
+    STA Maybe_Temp4                         ; Maybe_Temp4 =
+                                            ; A
     DEY                                     ; Y-- (2)
-    LDA (Temp_Int24),Y                      ; A = middle byte of Temp_Int24
-    STA Temp_Int24.U                        ; Upper byte of Temp_Int24 = A
+    LDA (Temp_Int24),Y                      ; A = Lower byte of the address
+                                            ; to jump to.
+    STA Temp_Int24.U                        ; Upper byte of
+                                            ; Temp_Int24 =
+                                            ; A
     DEY                                     ; Y-- (1)
-    LDA (Temp_Int24),Y                      ; A = lower byte of Temp_Int24
+    LDA (Temp_Int24),Y                      ; A = Bank to load
     TAX                                     ; X = A
     JSR MMC1_UpdatePRGBank                  ; Update the ROM bank to X.
 
     ;
-    ; Push the trampoline address $CF58.
+    ; Push the trampoline address $C5F8.
     ;
     LDA #$f8                                ; A = 0xF8
     PHA                                     ; Push A to stack
@@ -20134,17 +20983,22 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     ;
     ; Push the target address for the trampoline.
     ;
-    LDA Maybe_Temp4                         ; A = Maybe_Temp4
+    LDA Maybe_Temp4                         ; A =
+                                            ; Maybe_Temp4
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of Temp_Int24.
+    LDA Temp_Int24.U                        ; A = upper byte of
+                                            ; Temp_Int24.
     PHA                                     ; Push A to stack
 
     ;
     ; Restore the original values for A, X, and Y.
     ;
-    LDA BankedCallSetup_SavedA              ; A = BankedCallSetup_SavedA
-    LDX BankedCallSetup_SavedX              ; X = BankedCallSetup_SavedX
-    LDY BankedCallSetup_SavedY              ; Y = BankedCallSetup_SavedY
+    LDA BankedCallSetup_SavedA              ; A =
+                                            ; BankedCallSetup_SavedA
+    LDX BankedCallSetup_SavedX              ; X =
+                                            ; BankedCallSetup_SavedX
+    LDY BankedCallSetup_SavedY              ; Y =
+                                            ; BankedCallSetup_SavedY
     RTS
 
 
@@ -20330,8 +21184,8 @@ UI_DrawStatusSymbols:                       ; [$f8eb]
     ;    This is incremented by 1 every time we finish placing tiles
     ;    for that area.
     ;
-    ; 2. UI_STATUS_TILES: The tiles to draw at
-    ; the current
+    ; 2. UI_STATUS_TILES: The tiles to draw at the
+    ; current
     ;
     ;    Each run of tiles terminates with a 0x00. The next index would
     ;    then match the next position. This is incremented by 1 every
@@ -20362,8 +21216,8 @@ UI_DrawStatusSymbols:                       ; [$f8eb]
     ; Lay out tiles for UI elements starting at the current symbol
     ; address.
     ;
-    ; This will write data from the {{@SYMBOL:
-    ; PRG15_MIRROR::UI_STATUS_TILES@}} table
+    ; This will write data from the UI_STATUS_TILES
+    ; table
     ; until it hits an end market (0x00).
     ;
     ; This is generally 2-4 tiles per address.
@@ -20573,7 +21427,8 @@ UI_DrawPlayerExperience:                    ; [$f975]
     ;
     LDA a:Experience                        ; Load the lower byte of the
                                             ; experience.
-    STA Temp_Int24                          ; Save to Temp_Int24.
+    STA Temp_Int24                          ; Save to
+                                            ; Temp_Int24.
     LDA a:Experience_U                      ; Load the upper byte of the
                                             ; experience.
     STA Temp_Int24.M                        ; Save to #$ed.
@@ -20641,8 +21496,8 @@ UI_DrawTimeValue:                           ; [$f990]
     ;
     LDY #$02                                ; Set the number of digits to
                                             ; draw.
-    JMP UI_DrawDigitsZeroPadded             ; Draw the digits with zero-
-                                            ; padding.
+    JMP UI_DrawDigitsZeroPadded             ; Draw the digits with
+                                            ; zero-padding.
 
 
 ;============================================================================
@@ -21351,38 +22206,29 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
 
 ;
 ; XREFS:
-;     LAB_PRG15_MIRROR__fb05
-;     [$PRG15_MIRROR::fb05]
+;     LAB_PRG15_MIRROR__fb05 [$PRG15_MIRROR::fb05]
 ;
 BYTE_PRG15_MIRROR__fb2f:                    ; [$fb2f]
     db $00,$ff,$00,$00,$00,$00,$ff,$00      ; [$fb2f] byte
 
 ;
 ; XREFS:
-;     LAB_PRG15_MIRROR__fb14
-;     [$PRG15_MIRROR::fb14]
+;     LAB_PRG15_MIRROR__fb14 [$PRG15_MIRROR::fb14]
 ;
 BYTE_PRG15_MIRROR__fb37:                    ; [$fb37]
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$80,$80,$80,$80,$ff,$00 ; [$fb
-                                                                       ; 37]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$80,$80,$80,$80,$ff,$00 ; [$fb37]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$c0,$c0,$c0,$c0,$ff,$00 ; [$fb
-                                                                       ; 47]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$c0,$c0,$c0,$c0,$ff,$00 ; [$fb47]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$e0,$e0,$e0,$e0,$ff,$00 ; [$fb
-                                                                       ; 57]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$e0,$e0,$e0,$e0,$ff,$00 ; [$fb57]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f0,$f0,$f0,$f0,$ff,$00 ; [$fb
-                                                                       ; 67]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f0,$f0,$f0,$f0,$ff,$00 ; [$fb67]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f8,$f8,$f8,$f8,$ff,$00 ; [$fb
-                                                                       ; 77]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f8,$f8,$f8,$f8,$ff,$00 ; [$fb77]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fc,$fc,$fc,$fc,$ff,$00 ; [$fb
-                                                                       ; 87]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fc,$fc,$fc,$fc,$ff,$00 ; [$fb87]
                                                                        ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fe,$fe,$fe,$fe,$ff,$00 ; [$fb
-                                                                       ; 97]
+    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fe,$fe,$fe,$fe,$ff,$00 ; [$fb97]
                                                                        ; byte
     db $00,$ff,$00,$00,$00,$00,$ff,$00      ; [$fba7] byte
 
@@ -21571,19 +22417,35 @@ FUN_PRG15_MIRROR__fc0b__UPPER_ADDR_TABLE:   ; [$fc60]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__fc65
+; Show the start screen and handle game start or password selection.
+;
+; This is shown just after the game boots. The screen will
+; be drawn and will wait on input from the player, allowing
+; them to start the game or enter the password screen.
 ;
 ; INPUTS:
-;     A
-;     Y
+;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Game_Start
+;     MMC1_LoadBankAndJump
+;     PasswordScreen_Show
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Player_Spawn
+;     Something_FrameAltToggleWithPausePPU
+;     SplashAnimation_RunIntro
+;     StartScreen_CheckHandleInput
+;     StartScreen_Draw
+;     WaitForNextFrame
 ;
 ; XREFS:
-;     Game_Something_InitState
+;     Game_InitStateForStartScreen
 ;============================================================================
-FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
+Game_ShowStartScreen:                       ; [$fc65]
     LDX #$ff                                ; X = 0xFF
     TXS                                     ; Store X in memory.
 
@@ -21591,62 +22453,88 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
     ; Switch to bank 12 and run StartScreen_Draw.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$20,$9e                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw StartScreen_Draw-1                   ; Address =
                                             ; StartScreen_Draw
 
     ;
     ; Wait for a choice at the game's start screen.
     ;
-  @LAB_PRG15_MIRROR__fc6e:                  ; [$fc6e]
-    JSR WaitForNextFrame
+  @_waitForInput:                           ; [$fc6e]
+    JSR WaitForNextFrame                    ; Wait for the next frame.
     JSR Something_FrameAltToggleWithPausePPU
 
     ;
-    ; Switch to bank 12 and run FUN_PRG12__9f44.
+    ; Switch to bank 12 and run StartScreen_CheckHandleInput.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$43,$9f                          ; Bank = 12 Address =
-                                            ; FUN_PRG12__9f44
-    LDA Joy1_ChangedButtonMask
-    AND #$10
-    BEQ @LAB_PRG15_MIRROR__fc6e
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw StartScreen_CheckHandleInput-1       ; Address =
+                                            ; StartScreen_CheckHandleInput
+
+  @_afterCheckHandleInputFarJump:           ; [$fc7a]
+    LDA Joy1_ChangedButtonMask              ; Check the changed controller 1
+                                            ; button mask.
+    AND #$10                                ; Was the Start button pressed?
+    BEQ @_waitForInput                      ; If not, loop.
+
+    ;
+    ; The player pressed Start. Check what they chose.
+    ;
+    ; But first, play the titlescreen music.
+    ;
     LDA #$08
     STA CurrentMusic
-    LDA a:ScreenBuffer_135_
-    BEQ @LAB_PRG15_MIRROR__fc98
+    LDA a:ScreenBuffer_135_                 ; Check the chosen option.
+    BEQ @_startGame                         ; If 0, they chose to start the
+                                            ; game. Else, fall through.
 
     ;
-    ; Switch to bank 12 and run FUN_PRG12__909d.
+    ; The player chose to enter the Password screen.
+    ;
+    ; Switch to bank 12 and run PasswordScreen_Show.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$9c,$90                          ; Bank = 12 Address =
-                                            ; FUN_PRG12__909d
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw PasswordScreen_Show-1                ; Address =
+                                            ; PasswordScreen_Show
 
     ;
-    ; Switch to bank 12 and run {{@SYMBOL:
-    ; PRG12::Player_SetInitialExpAndGold@}}.
+    ; Switch to bank 12 and run Player_SetInitialExpAndGold.
     ;
+  @_afterPasswordScreenShow:                ; [$fc8f]
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db $0c,$b0,$95                          ; Bank = 12 Address =
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw Player_SetInitialExpAndGold-1        ; Address =
                                             ; Player_SetInitialExpAndGold
+
+  @_afterSetExpGoldFarJump:                 ; [$fc95]
     JMP Player_Spawn
 
     ;
-    ; Switch to bank 12 and run {{@SYMBOL:
-    ; PRG12::SplashAnimation_RunIntro@}}.
+    ; The player chose to start the game.
     ;
-  @LAB_PRG15_MIRROR__fc98:                  ; [$fc98]
-    JSR MMC1_LoadBankAndJump
-    db $0c,$99,$a7                          ; Bank = 12 Address =
+    ; Switch to bank 12 and run SplashAnimation_RunIntro.
+    ;
+  @_startGame:                              ; [$fc98]
+    JSR MMC1_LoadBankAndJump                ; Jump to:
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw SplashAnimation_RunIntro-1           ; Address =
                                             ; SplashAnimation_RunIntro
 
     ;
-    ; Switch to bank 12 and run {{@SYMBOL:
-    ; PRG12::Player_SetStartGameState@}}.
+    ; Switch to bank 12 and run Player_SetStartGameState.
     ;
-    JSR MMC1_LoadBankAndJump
-    db $0c,$6f,$95                          ; Bank = 12 Address =
+  @_afterRunIntroFarJump:                   ; [$fc9e]
+    JSR MMC1_LoadBankAndJump                ; Jump to:
+    db BANK_12_LOGIC                        ; Bank = 12
+    dw Player_SetStartGameState-1           ; Address =
                                             ; Player_SetStartGameState
+
+    ;
+    ; Begin the game.
+    ;
+  @_afterSetStartGameStateFarJump:          ; [$fca4]
     JMP Game_Start
 
 
@@ -21663,11 +22551,11 @@ FUN_PRG15_MIRROR__fc65:                     ; [$fc65]
 ;
 ; XREFS:
 ;     FUN_PRG12__9075
-;     FUN_PRG12__9f44
 ;     IScripts_Something_99DB
 ;     IScripts_Something_SetXYAndOffset_99a1
 ;     IScripts_Something_SetXYAndOffset_99be
 ;     Menu_Something_954F
+;     StartScreen_CheckHandleInput
 ;============================================================================
 Something_SetXYAndAnimOffset:               ; [$fca7]
     STX Maybe_Arg_CurrentSprite_PosX
@@ -21698,7 +22586,7 @@ Something_SetXYAndAnimOffset:               ; [$fca7]
 ;         This will be filled with values.
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     FUN_PRG15_MIRROR__fbaf
 ;     PPU_ClearAllTilemaps
 ;     PPU_FillData
@@ -21727,7 +22615,7 @@ PPU_FillData:                               ; [$fcb2]
 ;     PPU_FillData
 ;
 ; XREFS:
-;     FUN_PRG12__909d
+;     PasswordScreen_Show
 ;     StartScreen_Draw
 ;============================================================================
 PPU_ClearAllTilemaps:                       ; [$fcb9]
