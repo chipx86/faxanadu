@@ -475,15 +475,15 @@ Player_Something_ChangeHP:                  ; [$c0ec]
     ROL a:Temp1_SomethingChangedHP
     ROL a:Temp2_SomethingChangedHP
     LDA a:Temp1_SomethingChangedHP
-    CMP a:DAT_04be
+    CMP a:BYTE_04be
     LDA a:Temp2_SomethingChangedHP
-    SBC a:DAT_04bf
+    SBC a:BYTE_04bf
     BCC @LAB_PRG15_MIRROR__c124
     LDA a:Temp1_SomethingChangedHP
-    SBC a:DAT_04be
+    SBC a:BYTE_04be
     STA a:Temp1_SomethingChangedHP
     LDA a:Temp2_SomethingChangedHP
-    SBC a:DAT_04bf
+    SBC a:BYTE_04bf
     STA a:Temp2_SomethingChangedHP
 
   @LAB_PRG15_MIRROR__c124:                  ; [$c124]
@@ -1394,7 +1394,7 @@ CastMagic_Maybe_FinishHandler:              ; [$c2e9]
     JSR CastMagic_CalculateVisibility
     LDA a:CastMagic_XPos_Full
     STA Maybe_Arg_CurrentSprite_PosX
-    LDA Screen_MaybeUseless_ScrollXCounter
+    LDA Screen_Maybe_ScrollXCounter
     STA MaybeUnused_Something_ScrollPosX
     LDA a:CastMagic_YPos_Full
     STA Maybe_Arg_CurrentSprite_PosY
@@ -1803,7 +1803,7 @@ MagicHitHandler__c3fb:                      ; [$c3fb]
 MagicHitHandler__c403:                      ; [$c403]
     LDA #$00
     STA CurrentSprite_FlipMask
-    LDA a:BYTE_02bb
+    LDA a:CastMagic_Something_Appearance
     ASL A
     STA Temp_00
     LDA a:CastMagic_YPos_Full
@@ -1812,7 +1812,7 @@ MagicHitHandler__c403:                      ; [$c403]
     STA Maybe_Arg_CurrentSprite_PosY
     LDA #$02
     JSR CastMagic_Maybe_SetAppearance
-    LDA a:BYTE_02bb
+    LDA a:CastMagic_Something_Appearance
     ASL A
     CLC
     ADC #$10
@@ -4788,7 +4788,7 @@ WaitForInterrupt:                           ; [$ca2e]
 ; INPUTS:
 ;     JOY1:
 ;     JOY2:
-;         The controler inputs.
+;         The controller inputs.
 ;
 ;     Joy1_ButtonMask:
 ;         The previous controller 1 button mask.
@@ -4917,7 +4917,7 @@ Game_InitScreenAndMusic:                    ; [$ca78]
     JSR PPU_InitAttributeAndNameTables
     LDA #$00
     STA Game_EnableInterruptHandlers
-    STA a:DAT_042f
+    STA a:Maybe_GameScreenStart
     LDA a:CurrentROMBank2
 
     ;
@@ -5153,22 +5153,16 @@ PPU_WaitUntilFlushed:                       ; [$caf7]
 ;     Maybe_Game_ExitBuildingHandler
 ;============================================================================
 FUN_PRG15_MIRROR__cb17:                     ; [$cb17]
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     LDA #$01
     STA Game_EnableInterruptHandlers
     RTS
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__cb1f
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
-FUN_PRG15_MIRROR__cb1f:                     ; [$cb1f]
+MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f:        ; [$cb1f]
     JSR FUN_PRG15_MIRROR__cb3f
     LDA #$01
     STA Game_EnableInterruptHandlers
@@ -5236,16 +5230,10 @@ PPU_InitVBlank:                             ; [$cb2f]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__cb3f
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__cb1f
+;     MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f
 ;============================================================================
 FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
     LDA #$01
@@ -5259,7 +5247,7 @@ FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
 
 
 ;============================================================================
-; TODO: Document Maybe_GameLoop_ResetAnimation
+; TODO: Document GameLoop_Maybe_SetupDrawState
 ;
 ; INPUTS:
 ;     None.
@@ -5279,7 +5267,7 @@ FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
 ;     Game_WaitForOAMReset
 ;     Player_HandleDeath
 ;============================================================================
-Maybe_GameLoop_ResetAnimation:              ; [$cb47]
+GameLoop_Maybe_SetupDrawState:              ; [$cb47]
     LDA #$00
     STA PPU_Something_DontUpdate
     STA PPU_ForceLowerPatternTables
@@ -5327,7 +5315,7 @@ Something_FrameAltToggleWithPausePPU:       ; [$cb4f]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb3f
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;============================================================================
 Something_FrameAltToggle:                   ; [$cb53]
     LDY #$00                                ; Y = 0
@@ -5349,7 +5337,7 @@ Something_FrameAltToggle:                   ; [$cb53]
     INC BYTE_0025
     TAY                                     ; Y = A
     LDA #$cb96,Y
-    STA a:DAT_0700
+    STA a:BYTE_0700
     LDA #$7f
     STA a:DAT_0701
     LDA #$23
@@ -5395,14 +5383,14 @@ Something_FrameAltToggle:                   ; [$cb53]
 ;         Set to 1 to request a reset.
 ;
 ; CALLS:
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__f24d
 ;     IScripts_ClearPortrait
 ;============================================================================
 Game_WaitForOAMReset:                       ; [$cb9a]
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     LDA #$01
     STA Game_NeedOAMReset
     LDA InterruptCounter
@@ -5598,7 +5586,6 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     FUN_PRG15_MIRROR__f316
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_LoadSpriteInfo
@@ -5624,6 +5611,7 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;     Sprites_LoadSpriteValue
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_Maybe_ShowNextCharFromBank
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
@@ -7687,8 +7675,8 @@ Area_Maybe_ShowRoomTransition:              ; [$d0f6]
 ;     TODO
 ;
 ; XREFS:
+;     Area_BeginScrollToNextRoom
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__e8e9
 ;============================================================================
 Area_ScrollToNextRoom:                      ; [$d127]
     STX Screen_ScrollDirection
@@ -8606,8 +8594,8 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     LSR A
     TAY
     PLA
-    ORA #$028a,Y
-    STA #$028a,Y
+    ORA Something_BlocksPPUData,Y
+    STA Something_BlocksPPUData,Y
     LDY Temp_06
     INY
     CPY #$10
@@ -8647,9 +8635,9 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
   @LAB_PRG15_MIRROR__d4b4:                  ; [$d4b4]
     LDA (Temp_08),Y
     AND Temp_06
-    ORA #$028a,X
+    ORA Something_BlocksPPUData,X
     STA (Temp_08),Y
-    STA #$028a,X
+    STA Something_BlocksPPUData,X
     INY
     INX
     CPX #$08
@@ -8892,8 +8880,8 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     LSR A
     TAY
     PLA
-    ORA #$0282,Y
-    STA #$0282,Y
+    ORA Something_PPUData,Y
+    STA Something_PPUData,Y
     LDA Temp_08
     CLC
     ADC #$10
@@ -8936,8 +8924,8 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
   @LAB_PRG15_MIRROR__d5fa:                  ; [$d5fa]
     LDA (Temp_08),Y
     AND Temp_06
-    ORA #$0282,X
-    STA #$0282,X
+    ORA Something_PPUData,X
+    STA Something_PPUData,X
     STA (Temp_08),Y
     INX
     TXA
@@ -9127,7 +9115,7 @@ FUN_PRG15_MIRROR__d699:                     ; [$d699]
     LDX #$00
 
   @LAB_PRG15_MIRROR__d6a5:                  ; [$d6a5]
-    LDA #$028a,X
+    LDA Something_BlocksPPUData,X
     STA a:PPUDATA
     INX
     CPX #$08
@@ -9161,7 +9149,7 @@ FUN_PRG15_MIRROR__d6b1:                     ; [$d6b1]
     CLC
     ADC BYTE_0050
     STA a:PPUADDR
-    LDA #$0282,X
+    LDA Something_PPUData,X
     STA a:PPUDATA
     INX
     CPX #$07
@@ -9579,8 +9567,8 @@ FUN_PRG15_MIRROR__d7b0:                     ; [$d7b0]
     PHA
     TYA
     PHA
-    LDX a:DAT_03cf
-    LDA a:DAT_03ce
+    LDX a:BYTE_03cf
+    LDA a:BYTE_03ce
     STA ScreenBuffer,X
     JSR Area_SetBlocks
     PLA
@@ -9941,7 +9929,7 @@ BYTE_ARRAY_PRG15_MIRROR__d8ea:              ; [$d8ea]
 ;     GameLoop_ClearSprites
 ;     LoadPalette2
 ;     MMC1_LoadBankAndJump
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;     Maybe_Player_UpdateVisibleItemStates
 ;     PPUBuffer_Append0
 ;     PlayerDeath_ResetSelectedItemState
@@ -10002,7 +9990,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ; reset state.
     ;
     JSR WaitForInterrupt                    ; Wait for interrupt.
-    JSR Maybe_GameLoop_ResetAnimation       ; Reset animations.
+    JSR GameLoop_Maybe_SetupDrawState       ; Reset animations.
     JSR #$b7bf                              ; Reset selected item state.
     JSR Maybe_Player_UpdateVisibleItemStates ; Update player sprite.
 
@@ -10044,7 +10032,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
   @_dissolvePlayerLoop:                     ; [$d941]
     JSR WaitForNextFrame                    ; Wait for the next frame.
-    JSR Maybe_GameLoop_ResetAnimation       ; Reset animations.
+    JSR GameLoop_Maybe_SetupDrawState       ; Reset animations.
     JSR Screen_NextTransitionState          ; Prepare for the next screen
                                             ; state.
     JSR Player_DrawBody                     ; Draw the player.
@@ -10158,7 +10146,7 @@ Player_HandleDeath:                         ; [$d8ec]
 ; CALLS:
 ;     EndGame_BeginKingsRoomSequence
 ;     GameLoop_ClearSprites
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;     Game_DrawScreenInFrozenState
 ;     Screen_FadeToBlack
 ;     WaitForNextFrame
@@ -10181,7 +10169,7 @@ EndGame_Begin:                              ; [$d9ac]
     TXA                                     ; A = X
     PHA                                     ; Push to the stack.
     JSR WaitForNextFrame                    ; Wait for the next frame.
-    JSR Maybe_GameLoop_ResetAnimation       ; Reset for this frame.
+    JSR GameLoop_Maybe_SetupDrawState       ; Reset for this frame.
     JSR Game_DrawScreenInFrozenState        ; Draw the screen and player in a
                                             ; semi-paused state.
     PLA                                     ; Pop our loop counter.
@@ -10203,7 +10191,7 @@ EndGame_Begin:                              ; [$d9ac]
     TXA                                     ; A = X
     PHA                                     ; Push to the stack.
     JSR WaitForNextFrame                    ; Wait for the next frame.
-    JSR Maybe_GameLoop_ResetAnimation       ; Reset for this frame.
+    JSR GameLoop_Maybe_SetupDrawState       ; Reset for this frame.
     PLA                                     ; Pop our loop counter.
     TAX                                     ; X = A
     DEX                                     ; X--
@@ -10491,7 +10479,7 @@ Game_InitStateForSpawn:                     ; [$da7d]
     JSR #$ba55
     JSR FUN_PRG15_MIRROR__ce80
     LDA #$01
-    STA a:DAT_042f
+    STA a:Maybe_GameScreenStart
     LDA #$00
     STA ScrollHelp_Pixel
     STA ScrollHelp_Screen
@@ -10787,7 +10775,7 @@ Game_MainLoop:                              ; [$db45]
     LDX #$0e
     JSR MMC1_UpdatePRGBank
     JSR WaitForNextFrame
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     JSR GameLoop_UpdatePlayer
     JSR #$b982                              ; Draw shield
     JSR Player_DrawBody                     ; Draw weapon?
@@ -10808,14 +10796,14 @@ Game_MainLoop:                              ; [$db45]
     LDA Screen_ScrollDirection
     BMI Game_MainLoop
     JSR PPUBuffer_WaitUntilClear
-    LDA a:DAT_042f
+    LDA a:Maybe_GameScreenStart
     BEQ @LAB_PRG15_MIRROR__db91
     LDA Screen_ScrollDirection
     CMP #$02
     BCC @LAB_PRG15_MIRROR__dbaf
 
   @LAB_PRG15_MIRROR__db91:                  ; [$db91]
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     JSR WaitForNextFrame
     JSR GameLoop_ClearSprites
     JSR GameLoop_LoadSpriteInfo
@@ -10828,7 +10816,7 @@ Game_MainLoop:                              ; [$db45]
 
   @LAB_PRG15_MIRROR__dbaf:                  ; [$dbaf]
     JSR WaitForNextFrame
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     JSR #$b982
     JSR Player_DrawBody
     JSR #$b7d6
@@ -10839,7 +10827,7 @@ Game_MainLoop:                              ; [$db45]
 
   @_scrolling:                              ; [$dbca]
     JSR WaitForNextFrame
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
     JSR Game_UpdatePlayerOnScroll
     JSR #$b982
     JSR Player_DrawBody
@@ -10878,7 +10866,7 @@ Game_MainLoop:                              ; [$db45]
 ;     GameLoop_CheckUseCurrentItem
 ;     GameLoop_CountdownItems
 ;     GameLoop_RunScreenEventHandlers
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;     Player_CastMagic
 ;     Player_DrawBody
 ;     Player_DrawShield
@@ -10903,7 +10891,7 @@ EndGame_MainLoop:                           ; [$dbef]
     ; Wait for a frame and prepare for renders.
     ;
     JSR WaitForNextFrame                    ; Wait for the next frame.
-    JSR Maybe_GameLoop_ResetAnimation
+    JSR GameLoop_Maybe_SetupDrawState
 
     ;
     ; Move the player a step/jump toward the King, or begin
@@ -11264,7 +11252,7 @@ Something_SetupNewScreen:                   ; [$dd13]
     LDA #$00
     STA Maybe_Player_DAT_0059
     STA Maybe_Player_DAT_0058
-    STA Screen_MaybeUseless_ScrollXCounter
+    STA Screen_Maybe_ScrollXCounter
     STA Player_Something_ScrollPosY
     LDA Area_StartPosXY
     AND #$f0
@@ -12503,9 +12491,9 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     SEC
     SBC #$04                                ; Subtract 4.
     STA PlayerPosX_Full                     ; Store it.
-    LDA Screen_MaybeUseless_ScrollXCounter  ; Load our screen scroll counter.
+    LDA Screen_Maybe_ScrollXCounter         ; Load our screen scroll counter.
     SBC #$00                                ; Subtract carry.
-    STA Screen_MaybeUseless_ScrollXCounter  ; Store it.
+    STA Screen_Maybe_ScrollXCounter         ; Store it.
 
     ;
     ; X-- BEGIN DEADCODE --X
@@ -12564,7 +12552,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;     PlayerPosX_Full:
 ;         The updated player position.
 ;
-;     Screen_MaybeUseless_ScrollXCounter:
+;     Screen_Maybe_ScrollXCounter:
 ;         An updated X value used during screen scroll.
 ;         This is set in the first 4 frames of scrolling
 ;         left or right, but is thought to ultimately be
@@ -12657,9 +12645,9 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     CLC
     ADC #$04                                ; Add 4.
     STA PlayerPosX_Full                     ; Store it.
-    LDA Screen_MaybeUseless_ScrollXCounter  ; Load our screen scroll counter.
+    LDA Screen_Maybe_ScrollXCounter         ; Load our screen scroll counter.
     ADC #$00                                ; Add carry.
-    STA Screen_MaybeUseless_ScrollXCounter  ; Store it.
+    STA Screen_Maybe_ScrollXCounter         ; Store it.
 
     ;
     ; X-- BEGIN DEADCODE --X
@@ -12690,7 +12678,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;     None
 ;
 ; OUTPUTS:
-;     Screen_MaybeUseless_ScrollXCounter:
+;     Screen_Maybe_ScrollXCounter:
 ;         TODO
 ;
 ;     Player_Something_ScrollPosY:
@@ -12725,7 +12713,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;============================================================================
 Player_SetInitialState:                     ; [$e0aa]
     LDA #$00
-    STA Screen_MaybeUseless_ScrollXCounter
+    STA Screen_Maybe_ScrollXCounter
     STA Player_Something_ScrollPosY
     STA Maybe_Player_DAT_0058
     STA Maybe_Player_DAT_0059
@@ -12844,7 +12832,7 @@ GameLoop_UpdatePlayer:                      ; [$e0ca]
 ;         hitting 0x39 or lower.
 ;
 ; CALLS:
-;     Player_SetStandardSpeed
+;     Player_SetStandardAcceleration
 ;
 ; XREFS:
 ;     GameLoop_UpdatePlayer
@@ -12876,13 +12864,13 @@ Player_HandleIFrames:                       ; [$e0e8]
     ; Set the knockback speed and return, leaving the knockback
     ; state intact.
     ;
-    JMP Player_SetStandardSpeed
+    JMP Player_SetStandardAcceleration
 
     ;
     ; Set the knockback speed, but then clear the knockback.
     ;
   @_resetSpeed:                             ; [$e0f9]
-    JSR Player_SetStandardSpeed             ; Reset the player speed.
+    JSR Player_SetStandardAcceleration      ; Reset the player speed.
 
     ;
     ; Clear knockback from the player flags.
@@ -12975,53 +12963,86 @@ BYTE_ARRAY_PRG15_MIRROR__e150:              ; [$e150]
 
 
 ;============================================================================
-; TODO: Document Player_HandleKnockback
+; Handle knockback when getting hit.
+;
+; This will knock the player back in the direction opposite
+; where the player was facing.
+;
+; It will temporarily flip the facing bit and then move in
+; that direction. The original bit will then be restored.
 ;
 ; INPUTS:
-;     None.
+;     Player_Flags:
+;         The player's flags.
 ;
 ; OUTPUTS:
-;     TODO
+;     Player_Flags:
+;         The updated flags, with any new state applied
+;         from the move but the flipped bit retained.
+;
+;     Temp_00:
+;         Clobbered.
+;
+; CALLS:
+;     Player_KnockbackHoriz
 ;
 ; XREFS:
 ;     Player_CheckHandleJump
 ;============================================================================
 Player_HandleKnockback:                     ; [$e153]
-    LDA Player_Flags
-    AND #$40
-    PHA
-    EOR #$40
-    STA Player_Flags
-    JSR Player_HandleMoveHoriz
-    PLA
-    STA Temp_00
-    LDA Player_Flags
-    AND #$bf
-    ORA Temp_00
-    STA Player_Flags
+    ;
+    ; Temporarily store the player's current flags.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$40                                ; Take only the facing bit.
+    PHA                                     ; Push it to the stack.
+
+    ;
+    ; Flip the facing bit and knock back in the flipped direction.
+    ;
+    EOR #$40                                ; Flip the facing bit temporarily
+                                            ; for the purpose of knockback.
+    STA Player_Flags                        ; Store as the new flags.
+    JSR Player_KnockbackHoriz               ; Move based on the facing bit.
+
+    ;
+    ; Restore the original flags, merging with any updated bits
+    ; from the move.
+    ;
+    PLA                                     ; Pop the original flags.
+    STA Temp_00                             ; Store it.
+    LDA Player_Flags                        ; Load the flags set above.
+    AND #$bf                                ; Clear the facing bit.
+    ORA Temp_00                             ; OR with the original facing
+                                            ; bit.
+    STA Player_Flags                        ; Store it.
     RTS
 
 
 ;============================================================================
-; TODO: Document Player_HandleMoveHoriz
+; Move the player left or right due to knockback.
+;
+; The player will be knocked back based on the direction
+; they're facing.
 ;
 ; INPUTS:
-;     None.
+;     Player_Flags:
+;         The player's current flags.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Player_TryMoveLeft
+;     Player_TryMoveRight
 ;
 ; XREFS:
 ;     Player_HandleKnockback
 ;============================================================================
-Player_HandleMoveHoriz:                     ; [$e16b]
-    LDA Player_Flags
-    AND #$40
-    BNE Player_TryMoveRight
-
-    ;
-    ; Attempt to move left at the current speed.
-    ;
+Player_KnockbackHoriz:                      ; [$e16b]
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$40                                ; Is the player facing right?
+    BNE Player_TryMoveRight                 ; If so, move right.
     JMP Player_TryMoveLeft
 
 
@@ -13095,171 +13116,358 @@ Player_CheckHandleJump:                     ; [$e174]
 
 
 ;============================================================================
-; TODO: Document Player_TryMoveRight
+; Try moving the player right.
+;
+; This is used when handling knockback or jumping. It will
+; move based on any existing acceleration, or the default
+; if the player wasn't previously moving, and then try to
+; position the player. That may position up againt a block,
+; at the edge of the screen, or onto the next screen.
 ;
 ; INPUTS:
-;     None.
+;     Player_Flags:
+;         The player's current flags.
+;
+;     PlayerPosX_Full:
+;     PlayerPosX_Frac:
+;         The player's current X position.
+;
+;     Area_ScreenToTheRight:
+;         The ID of the screen to the right.
+;
+;     Screen_Maybe_ScrollXCounter:
+;         The counter used for scrolling.
 ;
 ; OUTPUTS:
-;     TODO
+;     Player_Flags:
+;         The updated flags.
+;
+;     PlayerPosX_Full:
+;     PlayerPosX_Frac:
+;         The updated player X position.
+;
+;     Player_MoveAcceleration:
+;         The updated move acceleration.
+;
+;     Area_CurrentScreen:
+;         The new screen, if switching screens.
+;
+;     Screen_Maybe_ScrollXCounter:
+;         The updated counter used for scrolling.
+;
+;     Screen_ScrollPlayerTransitionCounter:
+;         The transition counter for the player movement,
+;         if scrolling screens.
+;
+; CALLS:
+;     Area_BeginScrollToNextRoom
+;     Maybe_Player_CalcSpeed
+;     Player_SetStandardAcceleration
+;     Player_Maybe_MoveIfPassable
+;     Player_SetPosAtRightEdge
+;     Screen_IsEdge
 ;
 ; XREFS:
 ;     Player_CheckHandleJump
-;     Player_HandleMoveHoriz
+;     Player_KnockbackHoriz
 ;============================================================================
 Player_TryMoveRight:                        ; [$e1cf]
-    LDA Player_Flags
-    AND #$20
-    BNE @LAB_PRG15_MIRROR__e1d8
-    JSR Player_SetStandardSpeed
+    ;
+    ; Check whether the player is moving.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$20                                ; Check the moving bit.
+    BNE @_setMoving                         ; If set, jump to handle
+                                            ; movement.
 
-  @LAB_PRG15_MIRROR__e1d8:                  ; [$e1d8]
-    JSR Maybe_Player_CalcSpeed
-    LDA Player_Flags
-    ORA #$60
-    STA Player_Flags
-    LDA PlayerPosX_Frac
+    ;
+    ; The player is not moving. Reset the movement speed.
+    ;
+    JSR Player_SetStandardAcceleration      ; Start with the standard
+                                            ; acceleration.
+
+    ;
+    ; Calculate movement speed and set the player to move to
+    ; the right.
+    ;
+  @_setMoving:                              ; [$e1d8]
+    JSR Maybe_Player_CalcSpeed              ; Calculate the new walking
+                                            ; speed.
+    LDA Player_Flags                        ; Load the player's flags.
+    ORA #$60                                ; Set moving and to the right.
+    STA Player_Flags                        ; Store as the new flags.
+
+    ;
+    ; Update the player's X position to factor in acceleration.
+    ;
+    LDA PlayerPosX_Frac                     ; Load the fractional X position.
     CLC
-    ADC Player_MoveAcceleration
-    STA PlayerPosX_Frac
-    LDA PlayerPosX_Full
-    ADC Player_MoveAcceleration.U
-    STA PlayerPosX_Full
-    LDX #$01
-    JSR Player_Maybe_MoveIfPassable
-    BEQ @LAB_PRG15_MIRROR__e1fe
-    LDA PlayerPosX_Full
-    AND #$f0
-    STA PlayerPosX_Full
-    JMP RETURN_E21A
+    ADC Player_MoveAcceleration             ; Add the move acceleration.
+    STA PlayerPosX_Frac                     ; Store as the new fractional
+                                            ; position.
+    LDA PlayerPosX_Full                     ; Load the full X position.
+    ADC Player_MoveAcceleration.U           ; Add the move acceleration.
+    STA PlayerPosX_Full                     ; And store it.
 
-  @LAB_PRG15_MIRROR__e1fe:                  ; [$e1fe]
-    LDA PlayerPosX_Full
-    CMP #$f1
-    BCC RETURN_E21A
+    ;
+    ; Check if the block there is passable.
+    ;
+    LDX #$01
+    JSR Player_Maybe_MoveIfPassable         ; Is the block to the right
+                                            ; passable?
+    BEQ @_checkAtRightEdge                  ; If not, jump to check for an
+                                            ; edge or transition boundary.
+
+    ;
+    ; The block is not passable. Cap the position.
+    ;
+    LDA PlayerPosX_Full                     ; Load the player X position.
+    AND #$f0                                ; Cap it.
+    STA PlayerPosX_Full                     ; And store it.
+    JMP @_return
+
+    ;
+    ; Check if the player is far enough to the right for
+    ; any screen transition logic.
+    ;
+  @_checkAtRightEdge:                       ; [$e1fe]
+    LDA PlayerPosX_Full                     ; X = Player X position.
+    CMP #$f1                                ; Is it too far left to perform a
+                                            ; screen transition?
+    BCC @_return                            ; If so, return.
+
+    ;
+    ; Check if the player is at the edge and can scroll.
+    ;
     LDY #$01
-    JSR Screen_IsEdge
-    BCS Player_SetPosAtRightEdge
-    LDA Area_ScreenToTheRight
-    STA Area_CurrentScreen
-    LDX #$01
-    JSR FUN_PRG15_MIRROR__e8e9
-    INC Screen_MaybeUseless_ScrollXCounter
-    LDA #$00
-    STA Screen_ScrollPlayerTransitionCounter
+    JSR Screen_IsEdge                       ; Check if the screen is the
+                                            ; right-most edge.
+    BCS Player_SetPosAtRightEdge            ; If so, jump to set the position
+                                            ; there.
 
     ;
-    ; XREFS:
-    ;     Player_TryMoveRight
+    ; There's a screen to the right. Transition there.
     ;
-RETURN_E21A:                                ; [$e21a]
+    LDA Area_ScreenToTheRight               ; A = Neighboring screen to the
+                                            ; right.
+    STA Area_CurrentScreen                  ; Store as the new current
+                                            ; screen.
+    LDX #$01
+    JSR Area_BeginScrollToNextRoom          ; Begin scrolling to the right.
+    INC Screen_Maybe_ScrollXCounter         ; Increment the scroll counter.
+    LDA #$00
+    STA Screen_ScrollPlayerTransitionCounter ; Clear the transition counter.
+
+  @_return:                                 ; [$e21a]
     RTS
 
 
 ;============================================================================
-; TODO: Document Player_SetPosAtRightEdge
+; Position the player at the right edge of the screen.
+;
+; The player will be positioned at 0xF0.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     PlayerPosX_Full:
+;         The updated X position.
 ;
 ; XREFS:
 ;     Player_TryMoveRight
 ;============================================================================
 Player_SetPosAtRightEdge:                   ; [$e21b]
     LDA #$f0
-    STA PlayerPosX_Full
+    STA PlayerPosX_Full                     ; Set the X position to 0xF0.
     RTS
 
 
 ;============================================================================
-; TODO: Document Player_TryMoveLeft
+; Try moving the player left.
+;
+; This is used when handling knockback or jumping. It will
+; move based on any existing acceleration, or the default
+; if the player wasn't previously moving, and then try to
+; position the player. That may position up againt a block,
+; at the edge of the screen, or onto the next screen.
 ;
 ; INPUTS:
-;     None.
+;     Player_Flags:
+;         The player's current flags.
+;
+;     PlayerPosX_Full:
+;     PlayerPosX_Frac:
+;         The player's current X position.
+;
+;     Area_ScreenToTheLeft:
+;         The ID of the screen to the left.
+;
+;     Screen_Maybe_ScrollXCounter:
+;         The counter used for scrolling.
 ;
 ; OUTPUTS:
-;     TODO
+;     Player_Flags:
+;         The updated flags.
+;
+;     PlayerPosX_Full:
+;     PlayerPosX_Frac:
+;         The updated player X position.
+;
+;     Player_MoveAcceleration:
+;         The updated move acceleration.
+;
+;     Area_CurrentScreen:
+;         The new screen, if switching screens.
+;
+;     Screen_Maybe_ScrollXCounter:
+;         The updated counter used for scrolling.
+;
+;     Screen_ScrollPlayerTransitionCounter:
+;         The transition counter for the player movement,
+;         if scrolling screens.
+;
+; CALLS:
+;     Area_BeginScrollToNextRoom
+;     Maybe_Player_CalcSpeed
+;     Player_SetStandardAcceleration
+;     Player_Maybe_MoveIfPassable
+;     Player_SetPosAtRightEdge
+;     Screen_IsEdge
 ;
 ; XREFS:
 ;     Player_CheckHandleJump
-;     Player_HandleMoveHoriz
+;     Player_KnockbackHoriz
 ;============================================================================
 Player_TryMoveLeft:                         ; [$e220]
-    LDA Player_Flags
-    AND #$20
-    BNE @LAB_PRG15_MIRROR__e229
-    JSR Player_SetStandardSpeed
+    ;
+    ; Check whether the player is moving.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$20                                ; Check the moving bit.
+    BNE @_setMoving                         ; If set, jump to handle
+                                            ; movement.
 
-  @LAB_PRG15_MIRROR__e229:                  ; [$e229]
-    JSR Maybe_Player_CalcSpeed
-    LDA Player_Flags
-    AND #$bf
-    ORA #$20
-    STA Player_Flags
-    LDA PlayerPosX_Frac
+    ;
+    ; The player is not moving. Reset the movement speed.
+    ;
+    JSR Player_SetStandardAcceleration      ; Start with the standard
+                                            ; acceleration.
+
+    ;
+    ; Calculate movement speed and set the player to move to
+    ; the left.
+    ;
+  @_setMoving:                              ; [$e229]
+    JSR Maybe_Player_CalcSpeed              ; Calculate the new walking
+                                            ; speed.
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$bf                                ; Set the player to face left.
+    ORA #$20                                ; Set the player to moving.
+    STA Player_Flags                        ; Store as the new flags.
+
+    ;
+    ; Update the player's X position to factor in acceleration.
+    ;
+    LDA PlayerPosX_Frac                     ; Load the fractional X position.
     SEC
-    SBC Player_MoveAcceleration
-    STA PlayerPosX_Frac
-    LDA PlayerPosX_Full
-    SBC Player_MoveAcceleration.U
-    PHP
-    BCS @LAB_PRG15_MIRROR__e244
-    LDA #$00
+    SBC Player_MoveAcceleration             ; Subtract the move acceleration.
+    STA PlayerPosX_Frac                     ; Store as the new fractional
+                                            ; position.
+    LDA PlayerPosX_Full                     ; Load the full X position.
+    SBC Player_MoveAcceleration.U           ; Subtract the move acceleration.
+    PHP                                     ; Push all flags.
+    BCS @_saveFlags                         ; If >= 0, jump.
+    LDA #$00                                ; Else, cap at 0, so it doesn't
+                                            ; wrap.
 
-  @LAB_PRG15_MIRROR__e244:                  ; [$e244]
-    STA PlayerPosX_Full
+  @_saveFlags:                              ; [$e244]
+    STA PlayerPosX_Full                     ; Store the new X position.
+
+    ;
+    ; Check if the block there is passable.
+    ;
     LDX #$00
-    JSR Player_Maybe_MoveIfPassable
-    BEQ @LAB_PRG15_MIRROR__e25e
-    PLP
-    LDA PlayerPosX_Full
-    AND #$0f
-    BEQ @_return1
-    LDA PlayerPosX_Full
-    AND #$f0
+    JSR Player_Maybe_MoveIfPassable         ; Is the block to the left
+                                            ; passable?
+    BEQ @_checkAtLeftEdge                   ; If not, jump to check for an
+                                            ; edge or transition boundary.
+
+    ;
+    ; The block is not passable. Cap the position.
+    ;
+    PLP                                     ; Pop the flags from the
+                                            ; acceleration calculation.
+    LDA PlayerPosX_Full                     ; Load the player X position.
+    AND #$0f                                ; Is this in the first 16 pixels?
+    BEQ @_return1                           ; If so, we're done.
+    LDA PlayerPosX_Full                     ; Load the player X position.
+    AND #$f0                                ; Keep all but pixels 0-16.
     CLC
-    ADC #$10
-    STA PlayerPosX_Full
+    ADC #$10                                ; Add 16 pixels.
+    STA PlayerPosX_Full                     ; Store as the new position.
 
   @_return1:                                ; [$e25d]
-    RTS
+    RTS                                     ; And we're done.
 
-  @LAB_PRG15_MIRROR__e25e:                  ; [$e25e]
-    PLP
-    BCS @_return2
+    ;
+    ; Check if the player is far enough to the left for
+    ; any screen transition logic.
+    ;
+  @_checkAtLeftEdge:                        ; [$e25e]
+    PLP                                     ; Pop the flags from the
+                                            ; acceleration calculation.
+    BCS @_return2                           ; If it didn't overflow off the
+                                            ; left, return.
+
+    ;
+    ; Check if the player is at the edge and can scroll.
+    ;
     LDY #$00
-    JSR Screen_IsEdge
-    BCS @LAB_PRG15_MIRROR__e278
-    LDA Area_ScreenToTheLeft
-    STA Area_CurrentScreen
+    JSR Screen_IsEdge                       ; Check if the screen is the
+                                            ; left-most edge.
+    BCS @_setAtLeftEdge                     ; If at the edge, jump to cap the
+                                            ; position.
+
+    ;
+    ; There's a screen to the left. Transition there.
+    ;
+    LDA Area_ScreenToTheLeft                ; A = Neighboring screen to the
+                                            ; left.
+    STA Area_CurrentScreen                  ; Store as the new current
+                                            ; screen.
     LDX #$00
-    JSR FUN_PRG15_MIRROR__e8e9
+    JSR Area_BeginScrollToNextRoom          ; Begin scrolling to the left.
     LDA #$00
-    STA PlayerPosX_Full
-    STA Screen_ScrollPlayerTransitionCounter
+    STA PlayerPosX_Full                     ; Set the X position to 0.
+    STA Screen_ScrollPlayerTransitionCounter ; Clear the transition counter.
 
   @_return2:                                ; [$e277]
     RTS
 
-  @LAB_PRG15_MIRROR__e278:                  ; [$e278]
+    ;
+    ; The player is at the left-most edge, but didn't pass it.
+    ;
+  @_setAtLeftEdge:                          ; [$e278]
     LDA #$00
-    STA PlayerPosX_Full
-    RTS
+    STA PlayerPosX_Full                     ; Set the X position to 0.
+    RTS                                     ; And return.
     db $00                                  ; [0]:
     db $0f                                  ; [1]:
 
 
 ;============================================================================
-; TODO: Document Player_SetStandardSpeed
+; Set the standard player acceleration.
+;
+; This will set to the default aceleration of 0xC0.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     Player_MoveAcceleration:
+;     #$aa:
+;         The default acceleration (0xC0).
 ;
 ; XREFS:
 ;     Maybe_Player_CalcSpeed
@@ -13267,22 +13475,28 @@ Player_TryMoveLeft:                         ; [$e220]
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;============================================================================
-Player_SetStandardSpeed:                    ; [$e27f]
+Player_SetStandardAcceleration:             ; [$e27f]
     LDA #$c0
-    STA Player_MoveAcceleration
+    STA Player_MoveAcceleration             ; Set the lower byte of movement
+                                            ; acceleation to 0xC0.
     LDA #$00
-    STA Player_MoveAcceleration.U
+    STA Player_MoveAcceleration.U           ; Set the upper byte to 0.
     RTS
 
 
 ;============================================================================
-; TODO: Document Player_UpdatePosFromKnockback
+; Update the player's position based on knockback.
+;
+; This will accelerate the player by 8 pixels when its
+; position is next updated.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     Player_MoveAcceleration:
+;     #$aa:
+;         The updated acceleration.
 ;
 ; XREFS:
 ;     Maybe_Player_CalcSpeed
@@ -13293,9 +13507,10 @@ Player_UpdatePosFromKnockback:              ; [$e288]
     ; back a bunch.
     ;
     LDA #$00
-    STA Player_MoveAcceleration
+    STA Player_MoveAcceleration             ; Set lower acceleration byte to
+                                            ; 0.
     LDA #$08
-    STA Player_MoveAcceleration.U
+    STA Player_MoveAcceleration.U           ; Set upper to 8.
     RTS
 
 
@@ -13321,7 +13536,7 @@ Maybe_Player_CalcSpeed:                     ; [$e291]
     BEQ @LAB_PRG15_MIRROR__e2a3
     LDA Player_Flags
     AND #$08
-    BNE Player_SetStandardSpeed
+    BNE Player_SetStandardAcceleration
 
   @LAB_PRG15_MIRROR__e2a3:                  ; [$e2a3]
     LDA Player_MoveAcceleration
@@ -13374,7 +13589,7 @@ Player_CheckHandleClimb:                    ; [$e2c8]
     LDA Joy1_ButtonMask
     BPL @LAB_PRG15_MIRROR__e2d6
     JSR Player_CheckIfOnLadder
-    JMP Player_CheckHandleClimb_e2f4
+    JMP @LAB_PRG15_MIRROR__e2f4
 
   @LAB_PRG15_MIRROR__e2d6:                  ; [$e2d6]
     JSR Player_CheckIfOnLadder
@@ -13389,23 +13604,10 @@ Player_CheckHandleClimb:                    ; [$e2c8]
     STA Player_Flags
     LDA PlayerPosX_Full
     AND #$0f
-    BEQ Player_CheckHandleClimb_e2f4
+    BEQ @LAB_PRG15_MIRROR__e2f4
     JMP Player_CheckHandleClimbMaybeSide
 
-
-;============================================================================
-; TODO: Document Player_CheckHandleClimb_e2f4
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Player_CheckHandleClimb
-;============================================================================
-Player_CheckHandleClimb_e2f4:               ; [$e2f4]
+  @LAB_PRG15_MIRROR__e2f4:                  ; [$e2f4]
     LDA Joy1_ButtonMask
     LSR A
     LSR A
@@ -13430,9 +13632,6 @@ SUB_PRG15_MIRROR__e2fe:                     ; [$e2fe]
 ;
 ; OUTPUTS:
 ;     TODO
-;
-; XREFS:
-;     Player_CheckHandleClimb_e2f4
 ;============================================================================
 Player_CheckHandleClimbUp:                  ; [$e301]
     LDA Player_Flags
@@ -13467,7 +13666,7 @@ Player_CheckHandleClimbUp:                  ; [$e301]
     LDA Area_ScreenAbove
     STA Area_CurrentScreen
     LDX #$02
-    JSR FUN_PRG15_MIRROR__e8e9
+    JSR Area_BeginScrollToNextRoom
     DEC Player_Something_ScrollPosY
     LDA #$c0
     STA PlayerPosY
@@ -13489,9 +13688,6 @@ Player_CheckHandleClimbUp:                  ; [$e301]
 ;
 ; OUTPUTS:
 ;     TODO
-;
-; XREFS:
-;     Player_CheckHandleClimb_e2f4
 ;============================================================================
 Player_CheckHandleClimbDown:                ; [$e349]
     LDA Player_Flags
@@ -13543,7 +13739,7 @@ Player_MoveDownScreen:                      ; [$e379]
     LDA Area_ScreenBelow
     STA Area_CurrentScreen
     LDX #$03
-    JSR FUN_PRG15_MIRROR__e8e9
+    JSR Area_BeginScrollToNextRoom
     INC Player_Something_ScrollPosY
     LDA #$00
     STA PlayerPosY
@@ -13586,10 +13782,10 @@ Player_SetPosAtBottomEdge:                  ; [$e394]
 ;
 ; XREFS:
 ;     Player_CheckHandleClimb
-;     Player_CheckHandleClimb_e2f4
+;     SUB_PRG15_MIRROR__e2fe [$PRG15_MIRROR::e2fe]
 ;============================================================================
 Player_CheckHandleClimbMaybeSide:           ; [$e399]
-    LDA DAT_00a6
+    LDA BYTE_00a6
     CMP #$20
     BCC @LAB_PRG15_MIRROR__e3a5
     LDA Player_Flags
@@ -13600,27 +13796,27 @@ Player_CheckHandleClimbMaybeSide:           ; [$e399]
     LDA Player_Flags
     LSR A
     BCC @LAB_PRG15_MIRROR__e3ad
-    JMP Player_ClearUnknown2AndContinue
+    JMP Player_StayOnLadderAndContinue
 
   @LAB_PRG15_MIRROR__e3ad:                  ; [$e3ad]
     LDA #$03
     JSR Player_Maybe_MoveIfPassable
     BEQ @LAB_PRG15_MIRROR__e3b7
-    JMP Player_ClearUnknown2AndContinue
+    JMP Player_StayOnLadderAndContinue
 
   @LAB_PRG15_MIRROR__e3b7:                  ; [$e3b7]
     JSR Area_CheckCanClimbAdjacent
     LDA Blocks_Result
     BEQ @LAB_PRG15_MIRROR__e3cd
-    LDA DAT_00b1
+    LDA Maybe_ClimbLadderOffset
     CMP #$08
     BCS @LAB_PRG15_MIRROR__e3c9
-    INC DAT_00b1
-    JMP Player_ContinueHandleJump
+    INC Maybe_ClimbLadderOffset
+    JMP Player_ContinueHandleClimbOrJump
 
   @LAB_PRG15_MIRROR__e3c9:                  ; [$e3c9]
     LDA #$00
-    STA DAT_00b1
+    STA Maybe_ClimbLadderOffset
 
   @LAB_PRG15_MIRROR__e3cd:                  ; [$e3cd]
     LDA Player_StatusFlag
@@ -13632,7 +13828,7 @@ Player_CheckHandleClimbMaybeSide:           ; [$e399]
     STA Player_Flags
     LDA Player_Flags
     AND #$08
-    BNE Player_ClearUnknown2AndContinue
+    BNE Player_StayOnLadderAndContinue
     LDA Player_StatusFlag
     BPL @LAB_PRG15_MIRROR__e3f5
     LDA Joy1_ButtonMask
@@ -13657,7 +13853,7 @@ Player_CheckHandleClimbMaybeSide:           ; [$e399]
 ; TODO: Document Maybe_MoveDownOneScreen
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -13679,7 +13875,7 @@ Maybe_MoveDownOneScreen:                    ; [$e3fc]
     LDA Area_ScreenBelow
     STA Area_CurrentScreen
     LDX #$03
-    JSR FUN_PRG15_MIRROR__e8e9
+    JSR Area_BeginScrollToNextRoom
     INC Player_Something_ScrollPosY
     LDA #$00
     STA PlayerPosY
@@ -13704,7 +13900,7 @@ Maybe_MoveDownOneScreen:                    ; [$e3fc]
 
 
 ;============================================================================
-; TODO: Document Player_ClearJumpingAndUnknown1
+; TODO: Document Player_ClearJumpingAndHoldingToClimb
 ;
 ; INPUTS:
 ;     None.
@@ -13713,23 +13909,23 @@ Maybe_MoveDownOneScreen:                    ; [$e3fc]
 ;     TODO
 ;
 ; XREFS:
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;============================================================================
-Player_ClearJumpingAndUnknown1:             ; [$e433]
+Player_ClearJumpingAndHoldingToClimb:       ; [$e433]
     LDA Player_Flags
     AND #$fc
     STA Player_Flags
 
     ;
     ; XREFS:
-    ;     Player_ContinueHandleJump
+    ;     Player_ContinueHandleClimbOrJump
     ;
 RETURN_E439:                                ; [$e439]
     RTS
 
 
 ;============================================================================
-; TODO: Document Player_ClearUnknown2AndContinue
+; TODO: Document Player_StayOnLadderAndContinue
 ;
 ; INPUTS:
 ;     None.
@@ -13740,12 +13936,12 @@ RETURN_E439:                                ; [$e439]
 ; XREFS:
 ;     Player_CheckHandleClimbMaybeSide
 ;============================================================================
-Player_ClearUnknown2AndContinue:            ; [$e43a]
+Player_StayOnLadderAndContinue:             ; [$e43a]
     LDA Player_Flags
     AND #$fb
     STA Player_Flags
     LDA #$00
-    STA DAT_00b1
+    STA Maybe_ClimbLadderOffset
 
     ;
     ; v-- Fall through --v
@@ -13753,7 +13949,7 @@ Player_ClearUnknown2AndContinue:            ; [$e43a]
 
 
 ;============================================================================
-; TODO: Document Player_ContinueHandleJump
+; TODO: Document Player_ContinueHandleClimbOrJump
 ;
 ; INPUTS:
 ;     None.
@@ -13764,12 +13960,12 @@ Player_ClearUnknown2AndContinue:            ; [$e43a]
 ; XREFS:
 ;     Player_CheckHandleClimbMaybeSide
 ;============================================================================
-Player_ContinueHandleJump:                  ; [$e444]
+Player_ContinueHandleClimbOrJump:           ; [$e444]
     LDA Player_Flags
     LSR A
     BCS @LAB_PRG15_MIRROR__e463
     LDX Joy1_ChangedButtonMask
-    BPL Player_ClearJumpingAndUnknown1
+    BPL Player_ClearJumpingAndHoldingToClimb
     JSR Player_IsCastMagicBlocked
     BCS RETURN_E439
     LDX #$02
@@ -13779,10 +13975,10 @@ Player_ContinueHandleJump:                  ; [$e444]
     ORA #$03
     STA Player_Flags
     LDA #$00
-    STA DAT_00a6
+    STA BYTE_00a6
 
   @LAB_PRG15_MIRROR__e463:                  ; [$e463]
-    LDX DAT_00a6
+    LDX BYTE_00a6
     CPX #$10
     BCC @LAB_PRG15_MIRROR__e46b
     BCS @LAB_PRG15_MIRROR__e4a2
@@ -13803,7 +13999,7 @@ Player_ContinueHandleJump:                  ; [$e444]
     LDX #$02
     JSR Player_Maybe_MoveIfPassable
     BEQ Area_Something_IncDAT00a6
-    LDX DAT_00a6
+    LDX BYTE_00a6
     LDA PlayerPosY
     AND #$0f
     TAX
@@ -13817,7 +14013,7 @@ Player_ContinueHandleJump:                  ; [$e444]
   @LAB_PRG15_MIRROR__e49a:                  ; [$e49a]
     STA PlayerPosY
     LDA #$0f
-    STA DAT_00a6
+    STA BYTE_00a6
     BNE Area_Something_IncDAT00a6
 
   @LAB_PRG15_MIRROR__e4a2:                  ; [$e4a2]
@@ -13831,16 +14027,16 @@ Player_ContinueHandleJump:                  ; [$e444]
 
     ;
     ; XREFS:
-    ;     Player_ContinueHandleJump
+    ;     Player_ContinueHandleClimbOrJump
     ;
 Area_Something_IncDAT00a6:                  ; [$e4b1]
-    LDX DAT_00a6
+    LDX BYTE_00a6
     INX
-    STX DAT_00a6
+    STX BYTE_00a6
 
     ;
     ; XREFS:
-    ;     Player_ContinueHandleJump
+    ;     Player_ContinueHandleClimbOrJump
     ;
 RETURN_E4B6:                                ; [$e4b6]
     RTS
@@ -13856,13 +14052,13 @@ RETURN_E4B6:                                ; [$e4b6]
 ;     TODO
 ;
 ; XREFS:
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;============================================================================
 Area_ScrollScreenUp:                        ; [$e4b7]
     LDA Area_ScreenAbove
     STA Area_CurrentScreen
     LDX #$02
-    JSR FUN_PRG15_MIRROR__e8e9
+    JSR Area_BeginScrollToNextRoom
     DEC Player_Something_ScrollPosY
     LDA #$c0
     STA PlayerPosY
@@ -13892,13 +14088,41 @@ FUN_PRG15_MIRROR__e4c9:                     ; [$e4c9]
 
 ;
 ; XREFS:
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;
-DAT_PRG15_MIRROR__e4d6:                     ; [$e4d6]
-    db $08                                  ; [$e4d6] undefined1
-
-    hex 04 04 04 04 02 02 01 01 01 01 00 00 00 00 00 00 ; [$e4d8] undefined
-    hex 00 00 00 00 01 01 01 01 02 02 04 04 04 04 08 ; [$e4e7] undefined
+BYTE_ARRAY_PRG15_MIRROR__e4d6:              ; [$e4d6]
+    db $08                                  ; [0]:
+    db $04                                  ; [1]:
+    db $04                                  ; [2]:
+    db $04                                  ; [3]:
+    db $04                                  ; [4]:
+    db $02                                  ; [5]:
+    db $02                                  ; [6]:
+    db $01                                  ; [7]:
+    db $01                                  ; [8]:
+    db $01                                  ; [9]:
+    db $01                                  ; [10]:
+    db $00                                  ; [11]:
+    db $00                                  ; [12]:
+    db $00                                  ; [13]:
+    db $00                                  ; [14]:
+    db $00                                  ; [15]:
+    db $00                                  ; [16]:
+    db $00                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $01                                  ; [21]:
+    db $01                                  ; [22]:
+    db $01                                  ; [23]:
+    db $01                                  ; [24]:
+    db $02                                  ; [25]:
+    db $02                                  ; [26]:
+    db $04                                  ; [27]:
+    db $04                                  ; [28]:
+    db $04                                  ; [29]:
+    db $04                                  ; [30]:
+    db $08                                  ; [31]:
 
 
 ;============================================================================
@@ -14286,7 +14510,7 @@ AREA_START_POSITIONS:                       ; [$e61d]
 ; XREFS:
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;     Player_MoveDownScreen
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
@@ -14346,7 +14570,7 @@ Area_CanMoveUp:                             ; [$e62d]
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     Player_Maybe_MoveIfPassable
@@ -14407,7 +14631,7 @@ Area_CanPlayerMoveAtY:                      ; [$e664]
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     Player_Maybe_MoveIfPassable
@@ -14453,14 +14677,14 @@ Area_CanPlayerMoveLeft:                     ; [$e691]
 ;     X
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleClimbUp
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;============================================================================
@@ -14544,7 +14768,7 @@ Area_CanMoveImmediatelyRight:               ; [$e6ff]
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     Player_Maybe_MoveIfPassable
@@ -15377,7 +15601,7 @@ BLOCK_PROPERTY_IMPASSABLE_MAP:              ; [$e8d9]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__e8e9
+; TODO: Document Area_BeginScrollToNextRoom
 ;
 ; INPUTS:
 ;     X
@@ -15393,7 +15617,7 @@ BLOCK_PROPERTY_IMPASSABLE_MAP:              ; [$e8d9]
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;============================================================================
-FUN_PRG15_MIRROR__e8e9:                     ; [$e8e9]
+Area_BeginScrollToNextRoom:                 ; [$e8e9]
     LDA a:CurrentScreen_SpecialEventID
     AND #$7f
     CMP #$01
@@ -16518,7 +16742,7 @@ Player_DrawBody:                            ; [$ebee]
     ;
     LDA PlayerPosX_Full
     STA Maybe_Arg_CurrentSprite_PosX
-    LDA Screen_MaybeUseless_ScrollXCounter
+    LDA Screen_Maybe_ScrollXCounter
     STA MaybeUnused_Something_ScrollPosX
     LDA PlayerPosY
     STA Maybe_Arg_CurrentSprite_PosY
@@ -16795,7 +17019,7 @@ BYTE_ARRAY_PRG15_MIRROR__ecf3:              ; [$ecf3]
 ;     Player_CastMagic
 ;     FUN_PRG15_MIRROR__ecac
 ;     Player_CheckHandleAttack
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;============================================================================
 Player_IsCastMagicBlocked:                  ; [$ecf6]
     LDA Player_Flags
@@ -18484,14 +18708,14 @@ Sprite_Something_ChangeBitsAndMaybeInc:     ; [$f228]
     EOR #$20
     STA BYTE_0025
     AND #$20
-    BNE @LAB_PRG15_MIRROR__f23c
+    BNE @_return
     INC BYTE_0025
     LDA BYTE_0025
     CMP #$20
-    BCC @LAB_PRG15_MIRROR__f23c
+    BCC @_return
     INC Something_Sprites_ResetAtFrame
 
-  @LAB_PRG15_MIRROR__f23c:                  ; [$f23c]
+  @_return:                                 ; [$f23c]
     RTS
 
 ;
@@ -19328,7 +19552,7 @@ TextBox_ClearShopSizeAtOffset_return:       ; [$f465]
 ;     Maybe_MessageCharPos:
 ;         The incremented position.
 ;
-;     #$0212:
+;     TextBox_PlayTextSound:
 ;         Set to 1.
 ;
 ; CALLS:
@@ -19360,7 +19584,7 @@ TextBox_ShowNextChar:                       ; [$f466]
     INC a:Maybe_MessageCharPos              ; Increment the next character
                                             ; position.
     LDA #$01                                ; A = 1
-    STA a:BYTE_0212                         ; Store it.
+    STA a:TextBox_PlayTextSound             ; Store it.
     JSR Maybe_TextBox_ShowCurrentMessageID  ; Show this character in the
                                             ; message.
 
@@ -19395,7 +19619,7 @@ TextBox_Maybe_ShowNextCharFromBank:         ; [$f47d]
     LDX #$0d
     JSR MMC1_UpdatePRGBank
     LDA #$00
-    STA a:BYTE_0212
+    STA a:TextBox_PlayTextSound
     JSR TextBox_Something_ShowMessage_f4a2
 
     ;
@@ -19527,7 +19751,7 @@ TextBox_ShowMessage_LoadMessage:            ; [$f4c8]
 ;     TextBox_Something_ShowMessage_f4a2
 ;============================================================================
 TextBox_ShowMessageWithSound:               ; [$f4f3]
-    LDX a:BYTE_0212
+    LDX a:TextBox_PlayTextSound
     BEQ TextBox_ShowMessage
 
     ;
@@ -20387,7 +20611,7 @@ BitShiftLeft5:                              ; [$f78b]
 ;     Maybe_DrawItemTitle
 ;     Shop_Something__8d5a
 ;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__f791
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;============================================================================
 Math_MultiplyBy8:                           ; [$f78c]
     ASL A                                   ; Shift left 4.
@@ -20398,7 +20622,7 @@ Math_MultiplyBy8:                           ; [$f78c]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f791
+; TODO: Document TextBox_Maybe_GetPaletteBehindTextbox
 ;
 ; INPUTS:
 ;     Y
@@ -20407,9 +20631,9 @@ Math_MultiplyBy8:                           ; [$f78c]
 ;     A
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox_Something8FF6
+;     TextBox_Maybe_GetPalette
 ;============================================================================
-FUN_PRG15_MIRROR__f791:                     ; [$f791]
+TextBox_Maybe_GetPaletteBehindTextbox:      ; [$f791]
     TYA
     PHA
     TXA
@@ -20482,7 +20706,7 @@ FUN_PRG15_MIRROR__f7b7:                     ; [$f7b7]
 
     ;
     ; XREFS:
-    ;     FUN_PRG15_MIRROR__f791
+    ;     TextBox_Maybe_GetPaletteBehindTextbox
     ;
 SUB_PRG15_MIRROR__f7f6:                     ; [$f7f6]
     STA Temp_Int24

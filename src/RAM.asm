@@ -376,9 +376,9 @@ MMC1_ShiftSync:                             ; [$0012]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb17
-;     FUN_PRG15_MIRROR__cb1f
 ;     FUN_PRG15_MIRROR__cb27
 ;     Game_InitScreenAndMusic
+;     MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f
 ;     OnInterrupt
 ;     PPU_WaitUntilFlushed
 ;
@@ -424,10 +424,10 @@ UNUSED_0015:                                ; [$0015]
 ;     Game_UpdatePlayerOnScroll
 ;     GetRandom
 ;     Input_HandleOnInterrupt
+;     LAB_PRG15_MIRROR__e2f4 [$PRG15_MIRROR::e2f4]
 ;     Maybe_Player_CalcSpeed
 ;     Player_CheckHandleClimb
 ;     Player_CheckHandleClimbMaybeSide
-;     Player_CheckHandleClimb_e2f4
 ;     Player_CheckHandleJump
 ;     Player_CheckPushingBlock
 ;
@@ -518,7 +518,7 @@ Joy1_PrevButtonMask:                        ; [$0018]
 ;     Input_HandleOnInterrupt
 ;     Player_CheckHandleAttack
 ;     Player_CheckHandleEnterDoor
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;
 Joy1_ChangedButtonMask:                     ; [$0019]
     db $00                                  ; [$0019] ButtonBitmask
@@ -536,7 +536,7 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     SplashAnimation_RunOutro
 ;     SplashAnimation_SomethingOutroUpdate
 ;     FUN_PRG14__850d
-;     FUN_PRG15_MIRROR__e8e9
+;     Area_BeginScrollToNextRoom
 ;     Game_DecGloveDuration
 ;     Game_DecHourGlassDuration
 ;     Game_DecOintmentDuration
@@ -1141,7 +1141,7 @@ Maybe_Player_DAT_0059:                      ; [$0059]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb3f
-;     Maybe_GameLoop_ResetAnimation
+;     GameLoop_Maybe_SetupDrawState
 ;     PPU_HandleOnInterrupt
 ;     Something_FrameAltToggle
 ;     Something_FrameAltToggleWithPausePPU
@@ -1152,8 +1152,8 @@ PPU_Something_DontUpdate:                   ; [$005a]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb3f
+;     GameLoop_Maybe_SetupDrawState
 ;     Game_InitScreenAndMusic
-;     Maybe_GameLoop_ResetAnimation
 ;     PPU_HandleOnInterrupt
 ;     PPU_WaitUntilFlushed
 ;
@@ -1502,8 +1502,8 @@ CurrentArea_TableAddr.U:                    ; [$007d]
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__f791
 ;     Maybe_Area_LoadBlocks
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;
 CurrentArea_BlockAttributesAddr:            ; [$007e]
     db $00,$00                              ; [$007e] byte
@@ -1828,7 +1828,7 @@ PlayerPosX_Full:                            ; [$009e]
 ;     Something_SetupNewScreen
 ;     _Game_MovePlayerOnScroll
 ;
-Screen_MaybeUseless_ScrollXCounter:         ; [$009f]
+Screen_Maybe_ScrollXCounter:                ; [$009f]
     db $00                                  ; [$009f] byte
 
 ;
@@ -1876,7 +1876,7 @@ BYTE_00a0:                                  ; [$00a0]
 ;     Player_CheckIfOnLadder
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;     Player_DrawBody
 ;     Player_FallToGround
 ;     Player_Maybe_MoveIfPassable
@@ -1913,7 +1913,7 @@ Player_Something_ScrollPosY:                ; [$00a2]
 ;
 ; XREFS:
 ;     Maybe_Player_CalcAnimFrame
-;     FUN_PRG15_MIRROR__e8e9
+;     Area_BeginScrollToNextRoom
 ;     FUN_PRG15_MIRROR__ecac
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbUp
@@ -1965,17 +1965,17 @@ Player_MovementTick:                        ; [$00a3]
 ;     Player_CheckHandleJump
 ;     Player_CheckIfOnLadder
 ;     Player_CheckPushingBlock
-;     Player_ClearJumpingAndUnknown1
-;     Player_ClearUnknown2AndContinue
-;     Player_ContinueHandleJump
+;     Player_ClearJumpingAndHoldingToClimb
+;     Player_ContinueHandleClimbOrJump
 ;     Player_EnterDoorToInside
 ;     Player_FallToGround
 ;     Player_HandleDeath
 ;     Player_HandleKnockback
-;     Player_HandleMoveHoriz
 ;     Player_IsCastMagicBlocked
+;     Player_KnockbackHoriz
 ;     Player_SetFacingLeft
 ;     Player_SetInitialState
+;     Player_StayOnLadderAndContinue
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Player_UseMattock
@@ -2017,10 +2017,10 @@ Player_StatusFlag:                          ; [$00a5]
 ;     Area_Something_IncDAT00a6
 ;     [$PRG15_MIRROR::e4b1]
 ;     Player_CheckHandleClimbMaybeSide
-;     Player_ContinueHandleJump
+;     Player_ContinueHandleClimbOrJump
 ;
-DAT_00a6:                                   ; [$00a6]
-    db $00                                  ; [$00a6] undefined1
+BYTE_00a6:                                  ; [$00a6]
+    db $00                                  ; [$00a6] byte
 
 ;
 ; XREFS:
@@ -2052,7 +2052,7 @@ Maybe_Player_DAT_00a8:                      ; [$00a8]
 ; XREFS:
 ;     Maybe_Player_CalcSpeed
 ;     Player_SetInitialState
-;     Player_SetStandardSpeed
+;     Player_SetStandardAcceleration
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Player_UpdatePosFromKnockback
@@ -2063,7 +2063,7 @@ Player_MoveAcceleration:                    ; [$00a9]
 ;
 ; XREFS:
 ;     Maybe_Player_CalcSpeed
-;     Player_SetStandardSpeed
+;     Player_SetStandardAcceleration
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Player_UpdatePosFromKnockback
@@ -2118,17 +2118,15 @@ Player_InvincibilityPhase:                  ; [$00ad]
 PlayerHitsPhaseCounter:                     ; [$00ae]
     db $00                                  ; [$00ae] byte
 
-    db $00                                  ; [$00b0] undefined
-
-    db $00
+    db $00,$00                              ; [$00b0] undefined
 
 ;
 ; XREFS:
 ;     Player_CheckHandleClimbMaybeSide
-;     Player_ClearUnknown2AndContinue
+;     Player_StayOnLadderAndContinue
 ;
-DAT_00b1:                                   ; [$00b1]
-    db $00                                  ; [$00b1] undefined1
+Maybe_ClimbLadderOffset:                    ; [$00b1]
+    db $00                                  ; [$00b1] byte
 
 ;
 ; Player X position managed during screen scroll.
@@ -2309,7 +2307,7 @@ Temp_MovingSpriteVisibility:                ; [$00b8]
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__86c6
 ;
-BYTE_00b9:                                  ; [$00b9]
+Temp_HitBoxValue:                           ; [$00b9]
     db $00                                  ; [$00b9] byte
 
 ;
@@ -2462,7 +2460,7 @@ Maybe_Something_PosY:                       ; [$00d0]
 ; XREFS:
 ;     Player_DrawWeapon
 ;
-BYTE_00d1:                                  ; [$00d1]
+DrawWeapon_Unused_00D1:                     ; [$00d1]
     db $00                                  ; [$00d1] byte
 
 
@@ -2639,7 +2637,7 @@ IScriptOffset:                              ; [$00dd]
 ;     MMC1_LoadBankAndJump
 ;
 BankedCallSetup_SavedA:                     ; [$00de]
-    db $00                                  ; [$00de] undefined1
+    db $00                                  ; [$00de] byte
 
 ;
 ; Contents of the "X" register saved before performing a
@@ -2650,7 +2648,7 @@ BankedCallSetup_SavedA:                     ; [$00de]
 ;     MMC1_LoadBankAndJump
 ;
 BankedCallSetup_SavedX:                     ; [$00df]
-    db $00                                  ; [$00df] undefined1
+    db $00                                  ; [$00df] byte
 
 ;
 ; Contents of the "Y" register saved before performing a
@@ -2661,13 +2659,9 @@ BankedCallSetup_SavedX:                     ; [$00df]
 ;     MMC1_LoadBankAndJump
 ;
 BankedCallSetup_SavedY:                     ; [$00e0]
-    db $00                                  ; [$00e0] undefined1
+    db $00                                  ; [$00e0] byte
 
-    db $00,$00,$00                          ; [$00e2] undefined
-
-    db $00,$00                              ; [$00e5] undefined2
-
-    db $00,$00                              ; [$00e7] undefined
+    db $00,$00,$00,$00,$00,$00,$00          ; [$00e2] undefined
 
 
 ;============================================================================
@@ -2763,9 +2757,9 @@ PPU_TargetAddr.U:                           ; [$00e9]
 ;     SplashAnimation_FuncAA94
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     PPU_SetAddrForTextPos
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_ShowMessage_Fill4Lines
 ;
 TextBox_TextX:                              ; [$00ea]
@@ -2790,9 +2784,9 @@ TextBox_TextX:                              ; [$00ea]
 ;     SplashAnimation_FuncAA94
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     PPU_SetAddrForTextPos
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_ShowMessage_Fill4Lines
 ;
 TextBox_TextY:                              ; [$00eb]
@@ -2846,7 +2840,6 @@ TextBox_TextY:                              ; [$00eb]
 ;     UI_DrawText
 ;     UI_ShowPlayerMenu
 ;     Player_AddExperienceFromSprite
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     FUN_PRG15_MIRROR__fbaf
 ;     FUN_PRG15_MIRROR__fbf0
@@ -2860,6 +2853,7 @@ TextBox_TextY:                              ; [$00eb]
 ;     Player_AddGold
 ;     Player_SubtractGold
 ;     Player_UpdateExperience
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_LoadMessage
 ;     TextBox_ShowMessage_Pause
@@ -3012,8 +3006,8 @@ CurrentMusicInfo8:                          ; [$00f9]
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
 ;     SpriteBehavior__9fe3
+;     Area_BeginScrollToNextRoom
 ;     FUN_PRG15_MIRROR__df64
-;     FUN_PRG15_MIRROR__e8e9
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
@@ -3069,7 +3063,6 @@ irq:                                        ; [$00ff]
 ;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     FUN_PRG15_MIRROR__f316
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_LoadSpriteInfo
@@ -3094,6 +3087,7 @@ irq:                                        ; [$00ff]
 ;     Player_DrawItemInternal
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;     Sprites_LoadSpriteValue
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_Maybe_ShowNextCharFromBank
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
@@ -3141,7 +3135,7 @@ CurrentSoundIndex:                          ; [$0121]
 ;     Sound_ResetCurrentSound
 ;
 SOUND_DAT_0122:                             ; [$0122]
-    db $00                                  ; [$0122] undefined1
+    db $00                                  ; [$0122] byte
 
 ;
 ; XREFS:
@@ -3188,15 +3182,15 @@ SOUND_DAT_0126:                             ; [$0126]
 ; XREFS:
 ;     FUN_PRG5__8ed1
 ;
-DAT_012a:                                   ; [$012a]
-    db $00                                  ; [$012a] undefined1
+BYTE_012a:                                  ; [$012a]
+    db $00                                  ; [$012a] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG5__8ed1
 ;
-DAT_012b:                                   ; [$012b]
-    db $00                                  ; [$012b] undefined1
+BYTE_012b:                                  ; [$012b]
+    db $00                                  ; [$012b] byte
 
 ;
 ; XREFS:
@@ -3654,7 +3648,7 @@ Something_Music_0181:                       ; [$0181]
 ;     Game_Init
 ;
 Temp_0200:                                  ; [$0200]
-    db $00                                  ; [$0200] undefined1
+    db $00                                  ; [$0200] byte
 
 ;
 ; XREFS:
@@ -3666,7 +3660,7 @@ Temp_0200:                                  ; [$0200]
 ;     FUN_PRG15_MIRROR__d673
 ;
 IScriptEntity:                              ; [$0201]
-    db $00                                  ; [$0201] undefined1
+    db $00                                  ; [$0201] IScriptEntity
 
 ;
 ; XREFS:
@@ -3700,8 +3694,8 @@ Temp_0203:                                  ; [$0203]
 ; XREFS:
 ;     IScriptAction_ShowSellMenu
 ;
-DAT_0205:                                   ; [$0205]
-    db $00                                  ; [$0205] undefined
+Maybe_Shop_InventoryBitmask:                ; [$0205]
+    db $00                                  ; [$0205] byte
 
 ;
 ; XREFS:
@@ -3709,14 +3703,14 @@ DAT_0205:                                   ; [$0205]
 ;     IScriptAction_AddMP
 ;
 IScript_HPOrMPValueToAdd:                   ; [$0206]
-    db $00                                  ; [$0206] undefined
+    db $00                                  ; [$0206] byte
 
 ;
 ; XREFS:
 ;     IScriptAction_ShowPassword
 ;
-DAT_0207:                                   ; [$0207]
-    db $00                                  ; [$0207] undefined
+IScripts_Unused_207:                        ; [$0207]
+    db $00                                  ; [$0207] byte
 
 
 ;============================================================================
@@ -3827,13 +3821,18 @@ TextBox_Height:                             ; [$020b]
 ;
 ; XREFS:
 ;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8FF6
 ;     TextBox_Maybe_Draw
+;     TextBox_Maybe_GetPalette
 ;
-BYTE_020c:                                  ; [$020c]
+Maybe_TextBox_Dismissed:                    ; [$020c]
     db $00                                  ; [$020c] byte
 
     db $00
+
+
+;============================================================================
+; Inventory corresponding to the Player Menu selection.
+;============================================================================
 
 ;
 ; XREFS:
@@ -3842,8 +3841,8 @@ BYTE_020c:                                  ; [$020c]
 ;     FUN_PRG12__8c04
 ;     UI_ShowPlayerMenu
 ;
-DAT_020e:                                   ; [$020e]
-    db $00                                  ; [$020e] undefined1
+PlayerMenu_SelectedInventory:               ; [$020e]
+    db $00                                  ; [$020e] byte
 
     db $00
 
@@ -3883,8 +3882,8 @@ Temp_PrevInventoryItem:                     ; [$0211]
 ;     TextBox_ShowMessageWithSound
 ;     TextBox_ShowNextChar
 ;
-BYTE_0212:                                  ; [$0212]
-    db $00                                  ; [$0212] byte
+TextBox_PlayTextSound:                      ; [$0212]
+    db $00                                  ; [$0212] bool
 
 
 ;============================================================================
@@ -4222,19 +4221,20 @@ Something_ValuesToDraw:                     ; [$0242]
     db $00                                  ; [7]:
 
 ScreenBlocks:                               ; [$024a]
-    db $00                                  ; [$024a] byte
-
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$024c] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$025b] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$026b] undefined
-    db $00,$00,$00,$00,$00,$00,$00          ; [$027b] undefined
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$024a]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$025a]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$026a]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00      ; [$027a] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
 ;
-BYTE_ARRAY_0282:                            ; [$0282]
+Something_PPUData:                          ; [$0282]
     db $00                                  ; [0]:
 
 ;
@@ -4242,7 +4242,7 @@ BYTE_ARRAY_0282:                            ; [$0282]
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
 ;
-BYTE_ARRAY_0282_1_:                         ; [$0283]
+Something_PPUData_1_:                       ; [$0283]
     db $00                                  ; [1]:
     db $00                                  ; [2]:
     db $00                                  ; [3]:
@@ -4256,7 +4256,7 @@ BYTE_ARRAY_0282_1_:                         ; [$0283]
 ;     FUN_PRG15_MIRROR__d699
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_ARRAY_028a:                            ; [$028a]
+Something_BlocksPPUData:                    ; [$028a]
     db $00                                  ; [0]:
 
 ;
@@ -4264,7 +4264,7 @@ BYTE_ARRAY_028a:                            ; [$028a]
 ;     FUN_PRG15_MIRROR__d699
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_ARRAY_028a_1_:                         ; [$028b]
+Something_BlocksPPUData_1_:                 ; [$028b]
     db $00                                  ; [1]:
     db $00                                  ; [2]:
     db $00                                  ; [3]:
@@ -4367,9 +4367,9 @@ CurrentPaletteData_31_:                     ; [$02b2]
 ;     Player_CastMagic
 ;     Player_ClearVisibleMagic
 ;     Sprite_CheckHitByCastMagic
+;     Area_BeginScrollToNextRoom
 ;     CastMagic_Maybe_FinishHandler
 ;     CastMagic_Maybe_SetAppearance
-;     FUN_PRG15_MIRROR__e8e9
 ;
 CastMagic_Type:                             ; [$02b3]
     db $00                                  ; [$02b3] SelectedMagic
@@ -4484,7 +4484,7 @@ CastMagic_Phase:                            ; [$02ba]
 ;     CastMagic_HandleFire
 ;     MagicHitHandler__c403
 ;
-BYTE_02bb:                                  ; [$02bb]
+CastMagic_Something_Appearance:             ; [$02bb]
     db $00                                  ; [$02bb] byte
 
 ;
@@ -4492,7 +4492,7 @@ BYTE_02bb:                                  ; [$02bb]
 ;     FUN_PRG14__84a0
 ;     FUN_PRG14__84b2
 ;
-BYTE_ARRAY_02bc:                            ; [$02bc]
+CurrentSprites_SomethingX:                  ; [$02bc]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4506,7 +4506,7 @@ BYTE_ARRAY_02bc:                            ; [$02bc]
 ; XREFS:
 ;     CalculateNewVertPos
 ;
-BYTE_ARRAY_02c4:                            ; [$02c4]
+CurrentSprites_SomethingY:                  ; [$02c4]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5378,8 +5378,8 @@ CurrentSprites_Values:                      ; [$036c]
 ; XREFS:
 ;     Sprites_LoadSpriteValue
 ;
-DAT_0373:                                   ; [$0373]
-    db $00                                  ; [$0373] undefined1
+CurrentSprites_Values_7_:                   ; [$0373]
+    db $00                                  ; [7]:
 
 ;
 ; XREFS:
@@ -5418,7 +5418,7 @@ DAT_0373:                                   ; [$0373]
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Frac:                            ; [$0374]
-    db $00                                  ; [$0374] undefined1
+    db $00                                  ; [$0374] byte
 
 ;
 ; XREFS:
@@ -5460,7 +5460,7 @@ Arg_DeltaX_Frac:                            ; [$0374]
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Full:                            ; [$0375]
-    db $00                                  ; [$0375] undefined1
+    db $00                                  ; [$0375] byte
 
 ;
 ; XREFS:
@@ -5483,7 +5483,7 @@ Arg_DeltaX_Full:                            ; [$0375]
 ;     SpriteBehavior__aafa
 ;
 Arg_DeltaY_Frac:                            ; [$0376]
-    db $00                                  ; [$0376] undefined1
+    db $00                                  ; [$0376] byte
 
 ;
 ; XREFS:
@@ -5510,7 +5510,7 @@ Arg_DeltaY_Frac:                            ; [$0376]
 ;     SpriteBehavior__aafa
 ;
 Arg_DeltaY_Full:                            ; [$0377]
-    db $00                                  ; [$0377] undefined1
+    db $00                                  ; [$0377] byte
 
 
 ;============================================================================
@@ -5715,8 +5715,8 @@ SpriteUpdateCounter:                        ; [$0383]
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior__9f03
 ;
-DAT_0384:                                   ; [$0384]
-    db $00                                  ; [$0384] undefined1
+BYTE_0384:                                  ; [$0384]
+    db $00                                  ; [$0384] byte
 
 ;
 ; XREFS:
@@ -5727,8 +5727,8 @@ DAT_0384:                                   ; [$0384]
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior__9f03
 ;
-DAT_0385:                                   ; [$0385]
-    db $00                                  ; [$0385] undefined1
+BYTE_0385:                                  ; [$0385]
+    db $00                                  ; [$0385] byte
 
 
 ;============================================================================
@@ -5743,8 +5743,7 @@ DAT_0385:                                   ; [$0385]
 CurrentSprite_ImagesBank:                   ; [$0386]
     db $00                                  ; [$0386] byte
 
-UNUSED_0387:                                ; [$0387]
-    db $00,$00                              ; [$0387] undefined
+    db $00,$00                              ; [$0388] undefined
 
 
 ;============================================================================
@@ -5815,16 +5814,14 @@ CurrentSprite_Value:                        ; [$038c]
 
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox_Something8FF6
+;     TextBox_Maybe_GetPalette
 ;     LoadPalette2
 ;     UI_SetHUDPPUAttributes
 ;
 HUD_AttributeDataIndex:                     ; [$038d]
     db $00                                  ; [$038d] byte
 
-    db $00                                  ; [$038f] undefined
-
-    db $00
+    db $00,$00                              ; [$038f] undefined
 
 
 ;============================================================================
@@ -5921,11 +5918,7 @@ Gold_M:                                     ; [$0393]
 Gold_U:                                     ; [$0394]
     db $00                                  ; [$0394] byte
 
-    db $00,$00                              ; [$0396] undefined
-
-    db $00                                  ; [$0398] undefined1
-
-    db $00
+    db $00,$00,$00,$00                      ; [$0396] undefined
 
 
 ;============================================================================
@@ -6390,16 +6383,16 @@ Something_Maybe_BlockOffset:                ; [$03c9]
 ;     FUN_PRG14__9991
 ;     FUN_PRG15_MIRROR__d7b0
 ;
-DAT_03ce:                                   ; [$03ce]
-    db $00                                  ; [$03ce] undefined1
+BYTE_03ce:                                  ; [$03ce]
+    db $00                                  ; [$03ce] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG14__9991
 ;     FUN_PRG15_MIRROR__d7b0
 ;
-DAT_03cf:                                   ; [$03cf]
-    db $00                                  ; [$03cf] undefined1
+BYTE_03cf:                                  ; [$03cf]
+    db $00                                  ; [$03cf] byte
 
 ;
 ; XREFS:
@@ -6416,9 +6409,9 @@ Something_Maybe_PaletteIndex:               ; [$03d0]
 
 ;
 ; XREFS:
+;     Area_BeginScrollToNextRoom
 ;     EndGame_MoveToKingsRoom
 ;     FUN_PRG15_MIRROR__df64
-;     FUN_PRG15_MIRROR__e8e9
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
@@ -6561,7 +6554,7 @@ Player_DeathAnimationPhase:                 ; [$03dd]
 ;     Player_HandleDeath
 ;
 Player_DeathAnimationCounter:               ; [$03de]
-    db $00                                  ; [$03de] undefined1
+    db $00                                  ; [$03de] byte
 
     db $00,$00,$00                          ; [$03e0] undefined
 
@@ -6931,8 +6924,8 @@ Quests:                                     ; [$042d]
 
 ;
 ; XREFS:
+;     Area_BeginScrollToNextRoom
 ;     DEAD_FUN_PRG15_MIRROR__ef45
-;     FUN_PRG15_MIRROR__e8e9
 ;     GameLoop_RunScreenEventHandlers
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandlePathToMasconEvent
@@ -6948,8 +6941,8 @@ CurrentScreen_SpecialEventID:               ; [$042e]
 ;     Game_InitStateForSpawn
 ;     Game_MainLoop
 ;
-DAT_042f:                                   ; [$042f]
-    db $00                                  ; [$042f] undefined1
+Maybe_GameScreenStart:                      ; [$042f]
+    db $00                                  ; [$042f] byte
 
 ;
 ; XREFS:
@@ -6995,9 +6988,7 @@ Player_HP_U:                                ; [$0431]
 Player_HP_L:                                ; [$0432]
     db $00                                  ; [$0432] byte
 
-    db $00                                  ; [$0434] undefined1
-
-    db $00
+    db $00,$00                              ; [$0434] undefined
 
 ;
 ; XREFS:
@@ -7089,8 +7080,8 @@ TempleSpawnPoint:                           ; [$0439]
 ; XREFS:
 ;     Something_IncAndCapDAT043a
 ;
-DAT_043a:                                   ; [$043a]
-    db $00                                  ; [$043a] undefined1
+BYTE_043a:                                  ; [$043a]
+    db $00                                  ; [$043a] byte
 
     db $00
 
@@ -7269,30 +7260,30 @@ Arg_PlayerHealthDelta_U:                    ; [$04bd]
 ;     FUN_PRG14__8329
 ;     Player_Something_ChangeHP
 ;
-DAT_04be:                                   ; [$04be]
-    db $00                                  ; [$04be] undefined1
+BYTE_04be:                                  ; [$04be]
+    db $00                                  ; [$04be] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG14__8329
 ;     Player_Something_ChangeHP
 ;
-DAT_04bf:                                   ; [$04bf]
-    db $00                                  ; [$04bf] undefined1
+BYTE_04bf:                                  ; [$04bf]
+    db $00                                  ; [$04bf] byte
 
 ;
 ; XREFS:
 ;     Player_Something_ChangeHP
 ;
 Temp1_SomethingChangedHP:                   ; [$04c0]
-    db $00                                  ; [$04c0] undefined1
+    db $00                                  ; [$04c0] byte
 
 ;
 ; XREFS:
 ;     Player_Something_ChangeHP
 ;
 Temp2_SomethingChangedHP:                   ; [$04c1]
-    db $00                                  ; [$04c1] undefined1
+    db $00                                  ; [$04c1] byte
 
 ;
 ; XREFS:
@@ -7450,7 +7441,7 @@ NextPlayerTitle:                            ; [$04ed]
 ;     UI_DrawStatusSymbols
 ;
 Something_ManaOrHPBar:                      ; [$04ee]
-    db $00                                  ; [$04ee] undefined1
+    db $00                                  ; [$04ee] byte
 
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$04f0] undefined
     db $00                                  ; [$04ff] undefined
@@ -7799,7 +7790,6 @@ PPUBuffer_9_:                               ; [$0509]
 ;     Area_StoreBlockIsAir
 ;     FUN_PRG15_MIRROR__d6ce
 ;     FUN_PRG15_MIRROR__d7b0
-;     FUN_PRG15_MIRROR__f791
 ;     FUN_PRG15_MIRROR__f7b7
 ;     Game_Init
 ;     Game_OpenPathToMascon
@@ -7810,6 +7800,7 @@ PPUBuffer_9_:                               ; [$0509]
 ;     ScreenBuffer_Clear
 ;     ScreenBuffer_IsBlockImpassable
 ;     ScreenBuffer_LoadBlockProperty
+;     TextBox_Maybe_GetPaletteBehindTextbox
 ;
 Password_EnteredChars:                      ; [$0600]
 ScreenBuffer:
@@ -8453,8 +8444,8 @@ ScreenBuffer_241_:                          ; [$06f1]
 ;     Something_FrameAltToggle
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
-DAT_0700:                                   ; [$0700]
-    db $00                                  ; [$0700] undefined1
+BYTE_0700:                                  ; [$0700]
+    db $00                                  ; [$0700] byte
 
 ;
 ; XREFS:
@@ -8486,53 +8477,122 @@ DAT_0703:                                   ; [$0703]
 ;     Something_FrameAltToggle
 ;     Wait3969Cycles
 ;
-Something_CycleCounter_0704:                ; [$0704]
-    db $00                                  ; [$0704] undefined1
+CYCLES_COUNTER_1:                           ; [$0704]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
 ;     Wait3969Cycles
 ;
-DAT_0705:                                   ; [$0705]
-    db $00                                  ; [$0705] undefined1
-
-    db $00,$00                              ; [$0707] undefined
+CYCLES_COUNTER_1_1_:                        ; [$0705]
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
 
 ;
 ; XREFS:
 ;     Something_FrameAltToggle
 ;
-DAT_0708:                                   ; [$0708]
-    db $00                                  ; [$0708] undefined1
-
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$070a] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0719] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0729] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0739] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0749] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0759] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0769] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00    ; [$0779] undefined
+CYCLES_COUNTER_1_4_:                        ; [$0708]
+    db $00                                  ; [4]:
+    db $00                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $00                                  ; [8]:
+    db $00                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $00                                  ; [12]:
+    db $00                                  ; [13]:
+    db $00                                  ; [14]:
+    db $00                                  ; [15]:
+    db $00                                  ; [16]:
+    db $00                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $00                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $00                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $00                                  ; [27]:
+    db $00                                  ; [28]:
+    db $00                                  ; [29]:
+    db $00                                  ; [30]:
+    db $00                                  ; [31]:
+    db $00                                  ; [32]:
+    db $00                                  ; [33]:
+    db $00                                  ; [34]:
+    db $00                                  ; [35]:
+    db $00                                  ; [36]:
+    db $00                                  ; [37]:
+    db $00                                  ; [38]:
+    db $00                                  ; [39]:
+    db $00                                  ; [40]:
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$072d] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$073d] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$074d] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$075d] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$076d] undefined
+    db $00,$00,$00,$00,$00,$00,$00          ; [$077d] undefined
 
 ;
 ; XREFS:
 ;     Wait3969Cycles
 ;
-Something_CycleCounter_0784:                ; [$0784]
-    db $00                                  ; [$0784] undefined1
+CYCLES_COUNTER_2:                           ; [$0784]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
 ;     Wait3969Cycles
 ;
-DAT_0785:                                   ; [$0785]
-    db $00                                  ; [$0785] undefined1
-
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0787] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0796] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07a6] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07b6] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07c6] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07d6] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07e6] undefined
-    hex 00 00 00 00 00 00 00 00 00 00       ; [$07f6] undefined
+CYCLES_COUNTER_2_1_:                        ; [$0785]
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $00                                  ; [4]:
+    db $00                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $00                                  ; [8]:
+    db $00                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $00                                  ; [12]:
+    db $00                                  ; [13]:
+    db $00                                  ; [14]:
+    db $00                                  ; [15]:
+    db $00                                  ; [16]:
+    db $00                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $00                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $00                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $00                                  ; [27]:
+    db $00                                  ; [28]:
+    db $00                                  ; [29]:
+    db $00                                  ; [30]:
+    db $00                                  ; [31]:
+    db $00                                  ; [32]:
+    db $00                                  ; [33]:
+    db $00                                  ; [34]:
+    db $00                                  ; [35]:
+    db $00                                  ; [36]:
+    db $00                                  ; [37]:
+    db $00                                  ; [38]:
+    db $00                                  ; [39]:
+    db $00                                  ; [40]:
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07ad] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07bd] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07cd] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07dd] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07ed] undefined
+    db $00,$00,$00                          ; [$07fd] undefined

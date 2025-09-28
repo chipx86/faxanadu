@@ -1731,7 +1731,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     TXA
     PHA
     JSR #$f78b
-    STA a:DAT_0205
+    STA a:Maybe_Shop_InventoryBitmask
     LDA #$9b29,X
     STA Temp_Int24.U
     LDA #$9b2e,X
@@ -1742,7 +1742,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     TYA
     PHA
     LDA (#$ee),Y
-    ORA a:DAT_0205
+    ORA a:Maybe_Shop_InventoryBitmask
     TAX
     JSR IScripts_SellMenu_Something8704
     BNE @LAB_PRG12__86b0
@@ -1913,7 +1913,7 @@ IScriptAction_ShowPassword:                 ; [$8737]
     JSR Password_GenerateStateAndReset      ; Generate the password state.
     JSR #$f434                              ; Clear the textbox.
     LDA #$00
-    STA a:DAT_0207
+    STA a:IScripts_Unused_207
 
   @_charLoop:                               ; [$8742]
     JSR IScripts_UpdatePortraitAnimation
@@ -2234,7 +2234,7 @@ FUN_PRG12__87fe:                            ; [$87fe]
 ; TODO: Document FUN_PRG12__880e
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -2418,7 +2418,7 @@ UI_ShowPlayerMenu:                          ; [$8a93]
     STA a:TextBox_Height
     JSR TextBox_Maybe_Draw
     LDX a:Menu_CursorPos
-    STX a:DAT_020e
+    STX a:PlayerMenu_SelectedInventory
     LDA NumberOfWeapons,X
     BNE @LAB_PRG12__8b4f
     LDA a:TextBox_X
@@ -2493,7 +2493,7 @@ FUN_PRG12__8b71:                            ; [$8b71]
     LDA a:Area_CurrentArea
     CMP #$04
     BEQ FUN_PRG12__8be5
-    LDA a:DAT_020e
+    LDA a:PlayerMenu_SelectedInventory
     CMP #$03
     BCS FUN_PRG12__8bce
     LDA a:SelectedWeapon
@@ -2539,7 +2539,7 @@ FUN_PRG12__8bce:                            ; [$8bce]
     LDA #$08
     JSR #$d0e4
     LDX a:Menu_CursorPos
-    LDA a:DAT_020e
+    LDA a:PlayerMenu_SelectedInventory
     JSR #$f78b
     ORA ShopItems,X
     JSR Player_Equip
@@ -2615,7 +2615,7 @@ FUN_PRG12__8c04:                            ; [$8c04]
     INY
     INY
     STY TextBox_TextX
-    LDA a:DAT_020e
+    LDA a:PlayerMenu_SelectedInventory
     JSR #$f78b
     ORA ShopItems,X
     PHA
@@ -3449,14 +3449,14 @@ TextBox_Maybe_Draw:                         ; [$8ef1]
     JSR #$f845
     STX PPUBuffer_UpperBounds
     LDA #$00
-    STA a:BYTE_020c
+    STA a:Maybe_TextBox_Dismissed
 
 
 ;============================================================================
 ; TODO: Document Maybe_Draw_Textbox_Something8F51
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -3481,7 +3481,7 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
     LDY a:TextBox_Width
 
   @LAB_PRG12__8f68:                         ; [$8f68]
-    JSR Maybe_Draw_Textbox_Something8FF6
+    JSR TextBox_Maybe_GetPalette
     JSR FUN_PRG12__880e
     INC TextBox_TextX
     DEY
@@ -3568,7 +3568,7 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
 
 
 ;============================================================================
-; TODO: Document Maybe_Draw_Textbox_Something8FF6
+; TODO: Document TextBox_Maybe_GetPalette
 ;
 ; INPUTS:
 ;     None.
@@ -3579,8 +3579,8 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
 ; XREFS:
 ;     Maybe_Draw_Textbox_Something8F51
 ;============================================================================
-Maybe_Draw_Textbox_Something8FF6:           ; [$8ff6]
-    LDA a:BYTE_020c
+TextBox_Maybe_GetPalette:                   ; [$8ff6]
+    LDA a:Maybe_TextBox_Dismissed
     BEQ @LAB_PRG12__8ffe
     JMP #$f791
 
@@ -3609,7 +3609,7 @@ Maybe_Draw_Textbox_Something8FF6:           ; [$8ff6]
 ;============================================================================
 Maybe_Draw_Textbox:                         ; [$9002]
     LDA #$01
-    STA a:BYTE_020c
+    STA a:Maybe_TextBox_Dismissed
     JSR Maybe_Draw_Textbox_Something8F51
     LDA a:TextBox_X
     STA TextBox_TextX
@@ -12509,10 +12509,11 @@ SplashAnimation_SomethingUpdateState:       ; [$aa83]
 ; TODO: Document SplashAnimation_FuncAA94
 ;
 ; INPUTS:
-;     None.
+;     A
+;     X
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     SplashAnimation_Maybe_AnimPlayerStep

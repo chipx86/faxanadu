@@ -483,9 +483,9 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb17">FUN_PRG15_MIRROR__cb17</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb1f">FUN_PRG15_MIRROR__cb1f</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb27">FUN_PRG15_MIRROR__cb27</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
+;     <a href="PRG15_MIRROR.html#MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f">MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f</a>
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WaitUntilFlushed">PPU_WaitUntilFlushed</a>
 ;
@@ -531,10 +531,10 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Game_UpdatePlayerOnScroll">Game_UpdatePlayerOnScroll</a>
 ;     <a href="PRG15_MIRROR.html#GetRandom">GetRandom</a>
 ;     <a href="PRG15_MIRROR.html#Input_HandleOnInterrupt">Input_HandleOnInterrupt</a>
+;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e2f4">LAB_PRG15_MIRROR__e2f4</a> [$PRG15_MIRROR::e2f4]
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimb">Player_CheckHandleClimb</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
-;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleJump">Player_CheckHandleJump</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;
@@ -625,7 +625,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Input_HandleOnInterrupt">Input_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleAttack">Player_CheckHandleAttack</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
-;     <a href="PRG15_MIRROR.html#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="PRG15_MIRROR.html#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
 </div><span class="l"><a name="Joy1_ChangedButtonMask" href="#Joy1_ChangedButtonMask" class="la">Joy1_ChangedButtonMask:</a><span class="ce">; [$0019]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0019] ButtonBitmask</span></span>
@@ -643,7 +643,7 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#SplashAnimation_SomethingOutroUpdate">SplashAnimation_SomethingOutroUpdate</a>
 ;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecGloveDuration">Game_DecGloveDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecHourGlassDuration">Game_DecHourGlassDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecOintmentDuration">Game_DecOintmentDuration</a>
@@ -1248,7 +1248,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb3f">FUN_PRG15_MIRROR__cb3f</a>
-;     <a href="PRG15_MIRROR.html#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="PRG15_MIRROR.html#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#Something_FrameAltToggle">Something_FrameAltToggle</a>
 ;     <a href="PRG15_MIRROR.html#Something_FrameAltToggleWithPausePPU">Something_FrameAltToggleWithPausePPU</a>
@@ -1259,8 +1259,8 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__cb3f">FUN_PRG15_MIRROR__cb3f</a>
+;     <a href="PRG15_MIRROR.html#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
-;     <a href="PRG15_MIRROR.html#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WaitUntilFlushed">PPU_WaitUntilFlushed</a>
 ;
@@ -1609,8 +1609,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d82d">FUN_PRG15_MIRROR__d82d</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;
 </div><span class="l"><a name="CurrentArea_BlockAttributesAddr" href="#CurrentArea_BlockAttributesAddr" class="la">CurrentArea_BlockAttributesAddr:</a><span class="ce">; [$007e]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$007e] byte</span></span>
@@ -1935,7 +1935,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Something_SetupNewScreen">Something_SetupNewScreen</a>
 ;     <a href="PRG15_MIRROR.html#_Game_MovePlayerOnScroll">_Game_MovePlayerOnScroll</a>
 ;
-</div><span class="l"><a name="Screen_MaybeUseless_ScrollXCounter" href="#Screen_MaybeUseless_ScrollXCounter" class="la">Screen_MaybeUseless_ScrollXCounter:</a><span class="ce">; [$009f]</span></span>
+</div><span class="l"><a name="Screen_Maybe_ScrollXCounter" href="#Screen_Maybe_ScrollXCounter" class="la">Screen_Maybe_ScrollXCounter:</a><span class="ce">; [$009f]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$009f] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -1983,7 +1983,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
-;     <a href="PRG15_MIRROR.html#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="PRG15_MIRROR.html#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
 ;     <a href="PRG15_MIRROR.html#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
@@ -2020,7 +2020,7 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG14.html#Maybe_Player_CalcAnimFrame">Maybe_Player_CalcAnimFrame</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ecac">FUN_PRG15_MIRROR__ecac</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbDown">Player_CheckHandleClimbDown</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbUp">Player_CheckHandleClimbUp</a>
@@ -2072,17 +2072,17 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleJump">Player_CheckHandleJump</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
-;     <a href="PRG15_MIRROR.html#Player_ClearJumpingAndUnknown1">Player_ClearJumpingAndUnknown1</a>
-;     <a href="PRG15_MIRROR.html#Player_ClearUnknown2AndContinue">Player_ClearUnknown2AndContinue</a>
-;     <a href="PRG15_MIRROR.html#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="PRG15_MIRROR.html#Player_ClearJumpingAndHoldingToClimb">Player_ClearJumpingAndHoldingToClimb</a>
+;     <a href="PRG15_MIRROR.html#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;     <a href="PRG15_MIRROR.html#Player_EnterDoorToInside">Player_EnterDoorToInside</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleKnockback">Player_HandleKnockback</a>
-;     <a href="PRG15_MIRROR.html#Player_HandleMoveHoriz">Player_HandleMoveHoriz</a>
 ;     <a href="PRG15_MIRROR.html#Player_IsCastMagicBlocked">Player_IsCastMagicBlocked</a>
+;     <a href="PRG15_MIRROR.html#Player_KnockbackHoriz">Player_KnockbackHoriz</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetFacingLeft">Player_SetFacingLeft</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
+;     <a href="PRG15_MIRROR.html#Player_StayOnLadderAndContinue">Player_StayOnLadderAndContinue</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveRight">Player_TryMoveRight</a>
 ;     <a href="PRG15_MIRROR.html#Player_UseMattock">Player_UseMattock</a>
@@ -2124,10 +2124,10 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Area_Something_IncDAT00a6">Area_Something_IncDAT00a6</a>
 ;     [$PRG15_MIRROR::e4b1]
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
-;     <a href="PRG15_MIRROR.html#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="PRG15_MIRROR.html#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
-</div><span class="l"><a name="DAT_00a6" href="#DAT_00a6" class="la">DAT_00a6:</a><span class="ce">; [$00a6]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00a6] undefined1</span></span>
+</div><span class="l"><a name="BYTE_00a6" href="#BYTE_00a6" class="la">BYTE_00a6:</a><span class="ce">; [$00a6]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00a6] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -2159,7 +2159,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
-;     <a href="PRG15_MIRROR.html#Player_SetStandardSpeed">Player_SetStandardSpeed</a>
+;     <a href="PRG15_MIRROR.html#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveRight">Player_TryMoveRight</a>
 ;     <a href="PRG15_MIRROR.html#Player_UpdatePosFromKnockback">Player_UpdatePosFromKnockback</a>
@@ -2170,7 +2170,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
-;     <a href="PRG15_MIRROR.html#Player_SetStandardSpeed">Player_SetStandardSpeed</a>
+;     <a href="PRG15_MIRROR.html#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Player_TryMoveRight">Player_TryMoveRight</a>
 ;     <a href="PRG15_MIRROR.html#Player_UpdatePosFromKnockback">Player_UpdatePosFromKnockback</a>
@@ -2225,17 +2225,15 @@ pre {
 </div><span class="l"><a name="PlayerHitsPhaseCounter" href="#PlayerHitsPhaseCounter" class="la">PlayerHitsPhaseCounter:</a><span class="ce">; [$00ae]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00ae] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00b0] undefined</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$00b0] undefined</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
-;     <a href="PRG15_MIRROR.html#Player_ClearUnknown2AndContinue">Player_ClearUnknown2AndContinue</a>
+;     <a href="PRG15_MIRROR.html#Player_StayOnLadderAndContinue">Player_StayOnLadderAndContinue</a>
 ;
-</div><span class="l"><a name="DAT_00b1" href="#DAT_00b1" class="la">DAT_00b1:</a><span class="ce">; [$00b1]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00b1] undefined1</span></span>
+</div><span class="l"><a name="Maybe_ClimbLadderOffset" href="#Maybe_ClimbLadderOffset" class="la">Maybe_ClimbLadderOffset:</a><span class="ce">; [$00b1]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00b1] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Player X position managed during screen scroll.
@@ -2416,7 +2414,7 @@ pre {
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
 ;
-</div><span class="l"><a name="BYTE_00b9" href="#BYTE_00b9" class="la">BYTE_00b9:</a><span class="ce">; [$00b9]</span></span>
+</div><span class="l"><a name="Temp_HitBoxValue" href="#Temp_HitBoxValue" class="la">Temp_HitBoxValue:</a><span class="ce">; [$00b9]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00b9] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -2569,7 +2567,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;
-</div><span class="l"><a name="BYTE_00d1" href="#BYTE_00d1" class="la">BYTE_00d1:</a><span class="ce">; [$00d1]</span></span>
+</div><span class="l"><a name="DrawWeapon_Unused_00D1" href="#DrawWeapon_Unused_00D1" class="la">DrawWeapon_Unused_00D1:</a><span class="ce">; [$00d1]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d1] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -2746,7 +2744,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
 ;
 </div><span class="l"><a name="BankedCallSetup_SavedA" href="#BankedCallSetup_SavedA" class="la">BankedCallSetup_SavedA:</a><span class="ce">; [$00de]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00de] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00de] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Contents of the "X" register saved before performing a
@@ -2757,7 +2755,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
 ;
 </div><span class="l"><a name="BankedCallSetup_SavedX" href="#BankedCallSetup_SavedX" class="la">BankedCallSetup_SavedX:</a><span class="ce">; [$00df]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00df] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00df] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Contents of the "Y" register saved before performing a
@@ -2768,13 +2766,9 @@ pre {
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
 ;
 </div><span class="l"><a name="BankedCallSetup_SavedY" href="#BankedCallSetup_SavedY" class="la">BankedCallSetup_SavedY:</a><span class="ce">; [$00e0]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00e0] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00e0] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00</span></span><span class="ce">; [$00e2] undefined</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$00e5] undefined2</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$00e7] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$00e2] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -2870,9 +2864,9 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_FuncAA94">SplashAnimation_FuncAA94</a>
 ;     <a href="PRG12.html#TextBox_Maybe_Draw">TextBox_Maybe_Draw</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#PPU_SetAddrForTextPos">PPU_SetAddrForTextPos</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowMessage_Fill4Lines">TextBox_ShowMessage_Fill4Lines</a>
 ;
 </div><span class="l"><a name="TextBox_TextX" href="#TextBox_TextX" class="la">TextBox_TextX:</a><span class="ce">; [$00ea]</span></span>
@@ -2897,9 +2891,9 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_FuncAA94">SplashAnimation_FuncAA94</a>
 ;     <a href="PRG12.html#TextBox_Maybe_Draw">TextBox_Maybe_Draw</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#PPU_SetAddrForTextPos">PPU_SetAddrForTextPos</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowMessage_Fill4Lines">TextBox_ShowMessage_Fill4Lines</a>
 ;
 </div><span class="l"><a name="TextBox_TextY" href="#TextBox_TextY" class="la">TextBox_TextY:</a><span class="ce">; [$00eb]</span></span>
@@ -2953,7 +2947,6 @@ pre {
 ;     <a href="PRG12.html#UI_DrawText">UI_DrawText</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
 ;     <a href="PRG14.html#Player_AddExperienceFromSprite">Player_AddExperienceFromSprite</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbf0">FUN_PRG15_MIRROR__fbf0</a>
@@ -2967,6 +2960,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_AddGold">Player_AddGold</a>
 ;     <a href="PRG15_MIRROR.html#Player_SubtractGold">Player_SubtractGold</a>
 ;     <a href="PRG15_MIRROR.html#Player_UpdateExperience">Player_UpdateExperience</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_WriteLineOfChars">TextBox_Maybe_WriteLineOfChars</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowMessage_LoadMessage">TextBox_ShowMessage_LoadMessage</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowMessage_Pause">TextBox_ShowMessage_Pause</a>
@@ -3119,8 +3113,8 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
 ;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__df64">FUN_PRG15_MIRROR__df64</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_ExitBuilding">Game_ExitBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
@@ -3176,7 +3170,6 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
@@ -3201,6 +3194,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_DrawItemInternal">Player_DrawItemInternal</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_ShowNextCharFromBank">TextBox_Maybe_ShowNextCharFromBank</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_WriteLineOfChars">TextBox_Maybe_WriteLineOfChars</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowNextChar">TextBox_ShowNextChar</a>
@@ -3248,7 +3242,7 @@ pre {
 ;     <a href="PRG5.html#Sound_ResetCurrentSound">Sound_ResetCurrentSound</a>
 ;
 </div><span class="l"><a name="SOUND_DAT_0122" href="#SOUND_DAT_0122" class="la">SOUND_DAT_0122:</a><span class="ce">; [$0122]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0122] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0122] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -3295,15 +3289,15 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#FUN_PRG5__8ed1">FUN_PRG5__8ed1</a>
 ;
-</div><span class="l"><a name="DAT_012a" href="#DAT_012a" class="la">DAT_012a:</a><span class="ce">; [$012a]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$012a] undefined1</span></span>
+</div><span class="l"><a name="BYTE_012a" href="#BYTE_012a" class="la">BYTE_012a:</a><span class="ce">; [$012a]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$012a] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#FUN_PRG5__8ed1">FUN_PRG5__8ed1</a>
 ;
-</div><span class="l"><a name="DAT_012b" href="#DAT_012b" class="la">DAT_012b:</a><span class="ce">; [$012b]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$012b] undefined1</span></span>
+</div><span class="l"><a name="BYTE_012b" href="#BYTE_012b" class="la">BYTE_012b:</a><span class="ce">; [$012b]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$012b] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -3761,7 +3755,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
 ;
 </div><span class="l"><a name="Temp_0200" href="#Temp_0200" class="la">Temp_0200:</a><span class="ce">; [$0200]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0200] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0200] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -3773,7 +3767,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
 ;
 </div><span class="l"><a name="IScriptEntity" href="#IScriptEntity" class="la">IScriptEntity:</a><span class="ce">; [$0201]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0201] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0201] IScriptEntity</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -3807,8 +3801,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#IScriptAction_ShowSellMenu">IScriptAction_ShowSellMenu</a>
 ;
-</div><span class="l"><a name="DAT_0205" href="#DAT_0205" class="la">DAT_0205:</a><span class="ce">; [$0205]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0205] undefined</span></span>
+</div><span class="l"><a name="Maybe_Shop_InventoryBitmask" href="#Maybe_Shop_InventoryBitmask" class="la">Maybe_Shop_InventoryBitmask:</a><span class="ce">; [$0205]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0205] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -3816,14 +3810,14 @@ pre {
 ;     <a href="PRG12.html#IScriptAction_AddMP">IScriptAction_AddMP</a>
 ;
 </div><span class="l"><a name="IScript_HPOrMPValueToAdd" href="#IScript_HPOrMPValueToAdd" class="la">IScript_HPOrMPValueToAdd:</a><span class="ce">; [$0206]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0206] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0206] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#IScriptAction_ShowPassword">IScriptAction_ShowPassword</a>
 ;
-</div><span class="l"><a name="DAT_0207" href="#DAT_0207" class="la">DAT_0207:</a><span class="ce">; [$0207]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0207] undefined</span></span>
+</div><span class="l"><a name="IScripts_Unused_207" href="#IScripts_Unused_207" class="la">IScripts_Unused_207:</a><span class="ce">; [$0207]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0207] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -3934,14 +3928,19 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#Maybe_Draw_Textbox">Maybe_Draw_Textbox</a>
-;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8FF6">Maybe_Draw_Textbox_Something8FF6</a>
 ;     <a href="PRG12.html#TextBox_Maybe_Draw">TextBox_Maybe_Draw</a>
+;     <a href="PRG12.html#TextBox_Maybe_GetPalette">TextBox_Maybe_GetPalette</a>
 ;
-</div><span class="l"><a name="BYTE_020c" href="#BYTE_020c" class="la">BYTE_020c:</a><span class="ce">; [$020c]</span></span>
+</div><span class="l"><a name="Maybe_TextBox_Dismissed" href="#Maybe_TextBox_Dismissed" class="la">Maybe_TextBox_Dismissed:</a><span class="ce">; [$020c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$020c] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Inventory corresponding to the Player Menu selection.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__8b71">FUN_PRG12__8b71</a>
@@ -3949,8 +3948,8 @@ pre {
 ;     <a href="PRG12.html#FUN_PRG12__8c04">FUN_PRG12__8c04</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
 ;
-</div><span class="l"><a name="DAT_020e" href="#DAT_020e" class="la">DAT_020e:</a><span class="ce">; [$020e]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$020e] undefined1</span></span>
+</div><span class="l"><a name="PlayerMenu_SelectedInventory" href="#PlayerMenu_SelectedInventory" class="la">PlayerMenu_SelectedInventory:</a><span class="ce">; [$020e]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$020e] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
 <span class="l"></span>
@@ -3990,8 +3989,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowMessageWithSound">TextBox_ShowMessageWithSound</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_ShowNextChar">TextBox_ShowNextChar</a>
 ;
-</div><span class="l"><a name="BYTE_0212" href="#BYTE_0212" class="la">BYTE_0212:</a><span class="ce">; [$0212]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0212] byte</span></span>
+</div><span class="l"><a name="TextBox_PlayTextSound" href="#TextBox_PlayTextSound" class="la">TextBox_PlayTextSound:</a><span class="ce">; [$0212]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0212] bool</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -4329,19 +4328,17 @@ pre {
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
 <span class="l"></span>
 <span class="l"><a name="ScreenBlocks" href="#ScreenBlocks" class="la">ScreenBlocks:</a><span class="ce">; [$024a]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$024a] byte</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$024c] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$025b] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$026b] undefined</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$027b] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$024a] byte</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$025a] byte</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$026a] byte</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$027a] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_0282" href="#BYTE_ARRAY_0282" class="la">BYTE_ARRAY_0282:</a><span class="ce">; [$0282]</span></span>
+</div><span class="l"><a name="Something_PPUData" href="#Something_PPUData" class="la">Something_PPUData:</a><span class="ce">; [$0282]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -4349,7 +4346,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_0282_1_" href="#BYTE_ARRAY_0282_1_" class="la">BYTE_ARRAY_0282_1_:</a><span class="ce">; [$0283]</span></span>
+</div><span class="l"><a name="Something_PPUData_1_" href="#Something_PPUData_1_" class="la">Something_PPUData_1_:</a><span class="ce">; [$0283]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
@@ -4363,7 +4360,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_028a" href="#BYTE_ARRAY_028a" class="la">BYTE_ARRAY_028a:</a><span class="ce">; [$028a]</span></span>
+</div><span class="l"><a name="Something_BlocksPPUData" href="#Something_BlocksPPUData" class="la">Something_BlocksPPUData:</a><span class="ce">; [$028a]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -4371,7 +4368,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_028a_1_" href="#BYTE_ARRAY_028a_1_" class="la">BYTE_ARRAY_028a_1_:</a><span class="ce">; [$028b]</span></span>
+</div><span class="l"><a name="Something_BlocksPPUData_1_" href="#Something_BlocksPPUData_1_" class="la">Something_BlocksPPUData_1_:</a><span class="ce">; [$028b]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
@@ -4474,9 +4471,9 @@ pre {
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_ClearVisibleMagic">Player_ClearVisibleMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;
 </div><span class="l"><a name="CastMagic_Type" href="#CastMagic_Type" class="la">CastMagic_Type:</a><span class="ce">; [$02b3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b3] SelectedMagic</span></span>
@@ -4591,7 +4588,7 @@ pre {
 ;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
 ;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
 ;
-</div><span class="l"><a name="BYTE_02bb" href="#BYTE_02bb" class="la">BYTE_02bb:</a><span class="ce">; [$02bb]</span></span>
+</div><span class="l"><a name="CastMagic_Something_Appearance" href="#CastMagic_Something_Appearance" class="la">CastMagic_Something_Appearance:</a><span class="ce">; [$02bb]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02bb] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -4599,7 +4596,7 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__84a0">FUN_PRG14__84a0</a>
 ;     <a href="PRG14.html#FUN_PRG14__84b2">FUN_PRG14__84b2</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_02bc" href="#BYTE_ARRAY_02bc" class="la">BYTE_ARRAY_02bc:</a><span class="ce">; [$02bc]</span></span>
+</div><span class="l"><a name="CurrentSprites_SomethingX" href="#CurrentSprites_SomethingX" class="la">CurrentSprites_SomethingX:</a><span class="ce">; [$02bc]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -4613,7 +4610,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_02c4" href="#BYTE_ARRAY_02c4" class="la">BYTE_ARRAY_02c4:</a><span class="ce">; [$02c4]</span></span>
+</div><span class="l"><a name="CurrentSprites_SomethingY" href="#CurrentSprites_SomethingY" class="la">CurrentSprites_SomethingY:</a><span class="ce">; [$02c4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5485,8 +5482,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
 ;
-</div><span class="l"><a name="DAT_0373" href="#DAT_0373" class="la">DAT_0373:</a><span class="ce">; [$0373]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0373] undefined1</span></span>
+</div><span class="l"><a name="CurrentSprites_Values_7_" href="#CurrentSprites_Values_7_" class="la">CurrentSprites_Values_7_:</a><span class="ce">; [$0373]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -5525,7 +5522,7 @@ pre {
 ;     <a href="PRG14.html#Sprites_Maybe_UpdateHitByMagic">Sprites_Maybe_UpdateHitByMagic</a>
 ;
 </div><span class="l"><a name="Arg_DeltaX_Frac" href="#Arg_DeltaX_Frac" class="la">Arg_DeltaX_Frac:</a><span class="ce">; [$0374]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0374] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0374] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -5567,7 +5564,7 @@ pre {
 ;     <a href="PRG14.html#Sprites_Maybe_UpdateHitByMagic">Sprites_Maybe_UpdateHitByMagic</a>
 ;
 </div><span class="l"><a name="Arg_DeltaX_Full" href="#Arg_DeltaX_Full" class="la">Arg_DeltaX_Full:</a><span class="ce">; [$0375]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0375] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0375] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -5590,7 +5587,7 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
 ;
 </div><span class="l"><a name="Arg_DeltaY_Frac" href="#Arg_DeltaY_Frac" class="la">Arg_DeltaY_Frac:</a><span class="ce">; [$0376]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0376] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0376] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -5617,7 +5614,7 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
 ;
 </div><span class="l"><a name="Arg_DeltaY_Full" href="#Arg_DeltaY_Full" class="la">Arg_DeltaY_Full:</a><span class="ce">; [$0377]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0377] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0377] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -5822,8 +5819,8 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
 ;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
 ;
-</div><span class="l"><a name="DAT_0384" href="#DAT_0384" class="la">DAT_0384:</a><span class="ce">; [$0384]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0384] undefined1</span></span>
+</div><span class="l"><a name="BYTE_0384" href="#BYTE_0384" class="la">BYTE_0384:</a><span class="ce">; [$0384]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0384] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -5834,8 +5831,8 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
 ;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
 ;
-</div><span class="l"><a name="DAT_0385" href="#DAT_0385" class="la">DAT_0385:</a><span class="ce">; [$0385]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0385] undefined1</span></span>
+</div><span class="l"><a name="BYTE_0385" href="#BYTE_0385" class="la">BYTE_0385:</a><span class="ce">; [$0385]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0385] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -5850,8 +5847,7 @@ pre {
 </div><span class="l"><a name="CurrentSprite_ImagesBank" href="#CurrentSprite_ImagesBank" class="la">CurrentSprite_ImagesBank:</a><span class="ce">; [$0386]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0386] byte</span></span>
 <span class="l"></span>
-<span class="l"><a name="UNUSED_0387" href="#UNUSED_0387" class="la">UNUSED_0387:</a><span class="ce">; [$0387]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0387] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0388] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -5922,16 +5918,14 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8FF6">Maybe_Draw_Textbox_Something8FF6</a>
+;     <a href="PRG12.html#TextBox_Maybe_GetPalette">TextBox_Maybe_GetPalette</a>
 ;     <a href="PRG15_MIRROR.html#LoadPalette2">LoadPalette2</a>
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
 </div><span class="l"><a name="HUD_AttributeDataIndex" href="#HUD_AttributeDataIndex" class="la">HUD_AttributeDataIndex:</a><span class="ce">; [$038d]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$038d] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$038f] undefined</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$038f] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -6028,11 +6022,7 @@ pre {
 </div><span class="l"><a name="Gold_U" href="#Gold_U" class="la">Gold_U:</a><span class="ce">; [$0394]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0394] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0396] undefined</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0398] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00</span></span><span class="ce">; [$0396] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -6497,16 +6487,16 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d7b0">FUN_PRG15_MIRROR__d7b0</a>
 ;
-</div><span class="l"><a name="DAT_03ce" href="#DAT_03ce" class="la">DAT_03ce:</a><span class="ce">; [$03ce]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03ce] undefined1</span></span>
+</div><span class="l"><a name="BYTE_03ce" href="#BYTE_03ce" class="la">BYTE_03ce:</a><span class="ce">; [$03ce]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03ce] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d7b0">FUN_PRG15_MIRROR__d7b0</a>
 ;
-</div><span class="l"><a name="DAT_03cf" href="#DAT_03cf" class="la">DAT_03cf:</a><span class="ce">; [$03cf]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03cf] undefined1</span></span>
+</div><span class="l"><a name="BYTE_03cf" href="#BYTE_03cf" class="la">BYTE_03cf:</a><span class="ce">; [$03cf]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03cf] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -6523,9 +6513,9 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#EndGame_MoveToKingsRoom">EndGame_MoveToKingsRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__df64">FUN_PRG15_MIRROR__df64</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_ExitBuilding">Game_ExitBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
@@ -6668,7 +6658,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;
 </div><span class="l"><a name="Player_DeathAnimationCounter" href="#Player_DeathAnimationCounter" class="la">Player_DeathAnimationCounter:</a><span class="ce">; [$03de]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03de] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03de] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00</span></span><span class="ce">; [$03e0] undefined</span></span>
 <span class="l"></span>
@@ -7038,8 +7028,8 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#DEAD_FUN_PRG15_MIRROR__ef45">DEAD_FUN_PRG15_MIRROR__ef45</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>
 ;     <a href="PRG15_MIRROR.html#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>
@@ -7055,8 +7045,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="PRG15_MIRROR.html#Game_MainLoop">Game_MainLoop</a>
 ;
-</div><span class="l"><a name="DAT_042f" href="#DAT_042f" class="la">DAT_042f:</a><span class="ce">; [$042f]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042f] undefined1</span></span>
+</div><span class="l"><a name="Maybe_GameScreenStart" href="#Maybe_GameScreenStart" class="la">Maybe_GameScreenStart:</a><span class="ce">; [$042f]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$042f] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -7102,9 +7092,7 @@ pre {
 </div><span class="l"><a name="Player_HP_L" href="#Player_HP_L" class="la">Player_HP_L:</a><span class="ce">; [$0432]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0432] byte</span></span>
 <span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0434] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0434] undefined</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -7196,8 +7184,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Something_IncAndCapDAT043a">Something_IncAndCapDAT043a</a>
 ;
-</div><span class="l"><a name="DAT_043a" href="#DAT_043a" class="la">DAT_043a:</a><span class="ce">; [$043a]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$043a] undefined1</span></span>
+</div><span class="l"><a name="BYTE_043a" href="#BYTE_043a" class="la">BYTE_043a:</a><span class="ce">; [$043a]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$043a] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
 <span class="l"></span>
@@ -7376,30 +7364,30 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;
-</div><span class="l"><a name="DAT_04be" href="#DAT_04be" class="la">DAT_04be:</a><span class="ce">; [$04be]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04be] undefined1</span></span>
+</div><span class="l"><a name="BYTE_04be" href="#BYTE_04be" class="la">BYTE_04be:</a><span class="ce">; [$04be]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04be] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;
-</div><span class="l"><a name="DAT_04bf" href="#DAT_04bf" class="la">DAT_04bf:</a><span class="ce">; [$04bf]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04bf] undefined1</span></span>
+</div><span class="l"><a name="BYTE_04bf" href="#BYTE_04bf" class="la">BYTE_04bf:</a><span class="ce">; [$04bf]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04bf] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;
 </div><span class="l"><a name="Temp1_SomethingChangedHP" href="#Temp1_SomethingChangedHP" class="la">Temp1_SomethingChangedHP:</a><span class="ce">; [$04c0]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04c0] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04c0] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;
 </div><span class="l"><a name="Temp2_SomethingChangedHP" href="#Temp2_SomethingChangedHP" class="la">Temp2_SomethingChangedHP:</a><span class="ce">; [$04c1]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04c1] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04c1] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -7557,7 +7545,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a>
 ;
 </div><span class="l"><a name="Something_ManaOrHPBar" href="#Something_ManaOrHPBar" class="la">Something_ManaOrHPBar:</a><span class="ce">; [$04ee]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04ee] undefined1</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04ee] byte</span></span>
 <span class="l"></span>
 <span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$04f0] undefined</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$04ff] undefined</span></span>
@@ -7906,7 +7894,6 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Area_StoreBlockIsAir">Area_StoreBlockIsAir</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6ce">FUN_PRG15_MIRROR__d6ce</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d7b0">FUN_PRG15_MIRROR__d7b0</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
 ;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
@@ -7917,6 +7904,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#ScreenBuffer_Clear">ScreenBuffer_Clear</a>
 ;     <a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a>
 ;     <a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a>
+;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;
 </div><span class="l"><a name="Password_EnteredChars" href="#Password_EnteredChars" class="la">Password_EnteredChars:</a><span class="ce">; [$0600]</span></span>
 <span class="l"><a name="ScreenBuffer" href="#ScreenBuffer" class="la">ScreenBuffer:</a></span>
@@ -8560,8 +8548,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Something_FrameAltToggle">Something_FrameAltToggle</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;
-</div><span class="l"><a name="DAT_0700" href="#DAT_0700" class="la">DAT_0700:</a><span class="ce">; [$0700]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0700] undefined1</span></span>
+</div><span class="l"><a name="BYTE_0700" href="#BYTE_0700" class="la">BYTE_0700:</a><span class="ce">; [$0700]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0700] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -8593,56 +8581,125 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Something_FrameAltToggle">Something_FrameAltToggle</a>
 ;     <a href="PRG15_MIRROR.html#Wait3969Cycles">Wait3969Cycles</a>
 ;
-</div><span class="l"><a name="Something_CycleCounter_0704" href="#Something_CycleCounter_0704" class="la">Something_CycleCounter_0704:</a><span class="ce">; [$0704]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0704] undefined1</span></span>
+</div><span class="l"><a name="CYCLES_COUNTER_1" href="#CYCLES_COUNTER_1" class="la">CYCLES_COUNTER_1:</a><span class="ce">; [$0704]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Wait3969Cycles">Wait3969Cycles</a>
 ;
-</div><span class="l"><a name="DAT_0705" href="#DAT_0705" class="la">DAT_0705:</a><span class="ce">; [$0705]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0705] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$0707] undefined</span></span>
+</div><span class="l"><a name="CYCLES_COUNTER_1_1_" href="#CYCLES_COUNTER_1_1_" class="la">CYCLES_COUNTER_1_1_:</a><span class="ce">; [$0705]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Something_FrameAltToggle">Something_FrameAltToggle</a>
 ;
-</div><span class="l"><a name="DAT_0708" href="#DAT_0708" class="la">DAT_0708:</a><span class="ce">; [$0708]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0708] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$070a] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0719] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0729] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0739] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0749] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0759] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0769] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0779] undefined</span></span>
+</div><span class="l"><a name="CYCLES_COUNTER_1_4_" href="#CYCLES_COUNTER_1_4_" class="la">CYCLES_COUNTER_1_4_:</a><span class="ce">; [$0708]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [5]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [6]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [9]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [10]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [11]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [12]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [13]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [14]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [15]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [16]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [17]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [18]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [19]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [20]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [21]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [22]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [23]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [24]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [25]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [26]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [27]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [28]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [29]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [30]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [31]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [32]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [33]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [34]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [35]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [36]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [37]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [38]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [39]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [40]:</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$072d] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$073d] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$074d] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$075d] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$076d] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00,$00,$00,$00,$00</span></span><span class="ce">; [$077d] undefined</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Wait3969Cycles">Wait3969Cycles</a>
 ;
-</div><span class="l"><a name="Something_CycleCounter_0784" href="#Something_CycleCounter_0784" class="la">Something_CycleCounter_0784:</a><span class="ce">; [$0784]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0784] undefined1</span></span>
+</div><span class="l"><a name="CYCLES_COUNTER_2" href="#CYCLES_COUNTER_2" class="la">CYCLES_COUNTER_2:</a><span class="ce">; [$0784]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Wait3969Cycles">Wait3969Cycles</a>
 ;
-</div><span class="l"><a name="DAT_0785" href="#DAT_0785" class="la">DAT_0785:</a><span class="ce">; [$0785]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0785] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0787] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$0796] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07a6] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07b6] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07c6] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07d6] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07e6] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07f6] undefined</span></span>
+</div><span class="l"><a name="CYCLES_COUNTER_2_1_" href="#CYCLES_COUNTER_2_1_" class="la">CYCLES_COUNTER_2_1_:</a><span class="ce">; [$0785]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [5]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [6]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [9]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [10]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [11]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [12]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [13]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [14]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [15]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [16]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [17]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [18]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [19]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [20]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [21]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [22]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [23]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [24]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [25]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [26]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [27]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [28]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [29]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [30]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [31]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [32]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [33]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [34]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [35]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [36]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [37]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [38]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [39]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [40]:</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07ad] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07bd] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07cd] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07dd] undefined</span></span>
+<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00</span></span><span class="ce">; [$07ed] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00,$00</span></span><span class="ce">; [$07fd] undefined</span></span>
 </pre>
  </body>
 </html>

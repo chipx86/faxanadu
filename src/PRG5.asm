@@ -1842,15 +1842,15 @@ FUN_PRG5__8ed1:                             ; [$8ed1]
     ASL A
     TAX
     LDA #$8552,X
-    STA a:DAT_012a
+    STA a:BYTE_012a
     LDA #$8553,X
-    STA a:DAT_012b
+    STA a:BYTE_012b
 
   @LAB_PRG5__8eed:                          ; [$8eed]
     DEY
     BEQ @_return
-    LSR a:DAT_012b
-    ROR a:DAT_012a
+    LSR a:BYTE_012b
+    ROR a:BYTE_012a
     JMP @LAB_PRG5__8eed
 
   @_return:                                 ; [$8ef9]

@@ -733,10 +733,10 @@ FUN_PRG14__8329:                            ; [$8329]
     LDA CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314,X
     STA a:Arg_PlayerHealthDelta_U
     LDA CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c,X
-    STA a:DAT_04be
+    STA a:BYTE_04be
     LDA #$00
     STA a:Arg_PlayerHealthDelta_L
-    STA a:DAT_04bf
+    STA a:BYTE_04bf
     STA CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c,X
     JSR #$c0ec
     LDA a:Arg_PlayerHealthDelta_U
@@ -751,10 +751,10 @@ FUN_PRG14__8329:                            ; [$8329]
     LDA CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c,X
     STA a:Arg_PlayerHealthDelta_U
     LDA CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314,X
-    STA a:DAT_04be
+    STA a:BYTE_04be
     LDA #$00
     STA a:Arg_PlayerHealthDelta_L
-    STA a:DAT_04bf
+    STA a:BYTE_04bf
     STA CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324,X
     JSR #$c0ec
     LDA a:Arg_PlayerHealthDelta_U
@@ -1220,10 +1220,10 @@ FUN_PRG14__849a:                            ; [$849a]
 ;     FUN_PRG14__846c
 ;============================================================================
 FUN_PRG14__84a0:                            ; [$84a0]
-    LDA #$02bc,X
+    LDA CurrentSprites_SomethingX,X
     SEC
     SBC a:Arg_DeltaX_Frac
-    STA #$02bc,X
+    STA CurrentSprites_SomethingX,X
     LDA CurrentSprites_XPos,X
     SBC a:Arg_DeltaX_Full
     STA CurrentSprites_XPos,X
@@ -1244,10 +1244,10 @@ FUN_PRG14__84a0:                            ; [$84a0]
 ;     FUN_PRG14__849a
 ;============================================================================
 FUN_PRG14__84b2:                            ; [$84b2]
-    LDA #$02bc,X
+    LDA CurrentSprites_SomethingX,X
     CLC
     ADC a:Arg_DeltaX_Frac
-    STA #$02bc,X
+    STA CurrentSprites_SomethingX,X
     LDA CurrentSprites_XPos,X
     ADC a:Arg_DeltaX_Full
     STA CurrentSprites_XPos,X
@@ -1662,20 +1662,20 @@ Sprite_MoveVertical:                        ; [$85c4]
 CalculateNewVertPos:                        ; [$85ca]
     LDA CurrentSprites_Flags,X
     BMI @LAB_PRG14__85e1
-    LDA #$02c4,X
+    LDA CurrentSprites_SomethingY,X
     SEC
     SBC a:Arg_DeltaY_Frac
-    STA #$02c4,X
+    STA CurrentSprites_SomethingY,X
     LDA CurrentSprites_YPos,X
     SBC a:Arg_DeltaY_Full
     STA CurrentSprites_YPos,X
     RTS
 
   @LAB_PRG14__85e1:                         ; [$85e1]
-    LDA #$02c4,X
+    LDA CurrentSprites_SomethingY,X
     CLC
     ADC a:Arg_DeltaY_Frac
-    STA #$02c4,X
+    STA CurrentSprites_SomethingY,X
     LDA CurrentSprites_YPos,X
     ADC a:Arg_DeltaY_Full
     STA CurrentSprites_YPos,X
@@ -1967,13 +1967,13 @@ FUN_PRG14__86c6:                            ; [$86c6]
     LDA CurrentSprites_HitBoxTypes,Y
     TAY
     LDA #$b4d8,Y
-    STA BYTE_00b9
+    STA Temp_HitBoxValue
 
   @LAB_PRG14__86e1:                         ; [$86e1]
-    LDA BYTE_00b9
+    LDA Temp_HitBoxValue
     SEC
     SBC #$10
-    STA BYTE_00b9
+    STA Temp_HitBoxValue
     BCC @LAB_PRG14__86f8
     TXA
     CLC
@@ -2053,13 +2053,13 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     LDA CurrentSprites_HitBoxTypes,Y
     TAY
     LDA #$b4d1,Y
-    STA BYTE_00b9
+    STA Temp_HitBoxValue
 
   @LAB_PRG14__8755:                         ; [$8755]
-    LDA BYTE_00b9
+    LDA Temp_HitBoxValue
     SEC
     SBC #$10
-    STA BYTE_00b9
+    STA Temp_HitBoxValue
     BCC @LAB_PRG14__8768
     INX
     JSR #$e87c
@@ -3595,7 +3595,7 @@ CurrentSprite_UpdateState:                  ; [$8bd2]
     STA Maybe_Arg_CurrentSprite_PosX
     LDA CurrentSprites_YPos,X
     STA Maybe_Arg_CurrentSprite_PosY
-    LDA Screen_MaybeUseless_ScrollXCounter
+    LDA Screen_Maybe_ScrollXCounter
     STA MaybeUnused_Something_ScrollPosX
     LDA Player_Something_ScrollPosY
     STA MaybeUnused_Something_ScrollPosY
@@ -6863,7 +6863,7 @@ FUN_PRG14__9991:                            ; [$9991]
     LDA CurrentSprites_YPos,X
     AND #$f0
     ORA Temp_00
-    STA a:DAT_03cf
+    STA a:BYTE_03cf
     JMP @LAB_PRG14__99d1
 
   @LAB_PRG14__99b6:                         ; [$99b6]
@@ -6883,12 +6883,12 @@ FUN_PRG14__9991:                            ; [$9991]
     LDA #$037c,Y
     AND #$f0
     ORA Temp_00
-    STA a:DAT_03cf
+    STA a:BYTE_03cf
 
   @LAB_PRG14__99d1:                         ; [$99d1]
     LDY Area_CurrentArea
     LDA #$99ef,Y
-    STA a:DAT_03ce
+    STA a:BYTE_03ce
     JSR #$d7b0
 
   @LAB_PRG14__99dc:                         ; [$99dc]
@@ -7296,11 +7296,11 @@ FUN_PRG14__9b45:                            ; [$9b45]
     LDA CurrentSprites_XPos,X
     CLC
     ADC #$9b81,Y
-    STA a:DAT_0384
+    STA a:BYTE_0384
     LDA CurrentSprites_YPos,X
     CLC
     ADC #$20
-    STA a:DAT_0385
+    STA a:BYTE_0385
     JSR FUN_PRG14__a0f6
 
   @LAB_PRG14__9b68:                         ; [$9b68]
@@ -8130,11 +8130,11 @@ SpriteBehavior__9f03:                       ; [$9f03]
     LDA CurrentSprites_XPos,X
     CLC
     ADC #$9f9c,Y
-    STA a:DAT_0384
+    STA a:BYTE_0384
     LDA CurrentSprites_YPos,X
     CLC
     ADC #$04
-    STA a:DAT_0385
+    STA a:BYTE_0385
     JSR FUN_PRG14__a0f6
 
   @LAB_PRG14__9f86:                         ; [$9f86]
@@ -8376,11 +8376,11 @@ FUN_PRG14__a077:                            ; [$a077]
     LDA CurrentSprites_XPos,X
     CLC
     ADC #$a091,Y
-    STA a:DAT_0384
+    STA a:BYTE_0384
     LDA CurrentSprites_YPos,X
     CLC
     ADC #$10
-    STA a:DAT_0385
+    STA a:BYTE_0385
     JMP FUN_PRG14__a12d
 
 ;
@@ -8550,9 +8550,9 @@ FUN_PRG14__a0f6:                            ; [$a0f6]
     BCS @_return
     LDA #$0a
     STA CurrentSprites_Entities,Y
-    LDA a:DAT_0384
+    LDA a:BYTE_0384
     STA CurrentSprites_XPos,Y
-    LDA a:DAT_0385
+    LDA a:BYTE_0385
     STA CurrentSprites_YPos,Y
     LDA CurrentSprites_Flags,X
     AND #$01
@@ -8620,9 +8620,9 @@ FUN_PRG14__a12d:                            ; [$a12d]
     BCS @_return
     LDA #$53
     STA CurrentSprites_Entities,Y
-    LDA a:DAT_0384
+    LDA a:BYTE_0384
     STA CurrentSprites_XPos,Y
-    LDA a:DAT_0385
+    LDA a:BYTE_0385
     STA CurrentSprites_YPos,Y
     LDA CurrentSprites_Flags,X
     AND #$01
@@ -8735,9 +8735,9 @@ FUN_PRG14__a1cc:                            ; [$a1cc]
     BCS @_return
     LDA #$54
     STA CurrentSprites_Entities,Y
-    LDA a:DAT_0384
+    LDA a:BYTE_0384
     STA CurrentSprites_XPos,Y
-    LDA a:DAT_0385
+    LDA a:BYTE_0385
     STA CurrentSprites_YPos,Y
     LDA CurrentSprites_Flags,X
     AND #$01
@@ -10022,12 +10022,12 @@ Sprites_Remove:                             ; [$a523]
 ;     SpriteBehavior__a4fc
 ;============================================================================
 Something_IncAndCapDAT043a:                 ; [$a529]
-    INC a:DAT_043a
-    LDA a:DAT_043a
+    INC a:BYTE_043a
+    LDA a:BYTE_043a
     CMP #$04
     BCC @_returnTrue
     LDA #$00
-    STA a:DAT_043a
+    STA a:BYTE_043a
     CLC
     RTS
 
@@ -14431,10 +14431,10 @@ Player_DrawWeapon:                          ; [$b7d6]
     CLC
     ADC Temp_04
     STA PlayerPosXPlus10
-    LDA Screen_MaybeUseless_ScrollXCounter
+    LDA Screen_Maybe_ScrollXCounter
     ADC Temp_05
     STA Maybe_Something_PosX
-    CMP Screen_MaybeUseless_ScrollXCounter
+    CMP Screen_Maybe_ScrollXCounter
     BNE RETURN_B7D5
     LDA a:Player_CurWeapon
     ASL A
@@ -14450,7 +14450,7 @@ Player_DrawWeapon:                          ; [$b7d6]
     STA Maybe_Something_PosY
     LDA Player_Something_ScrollPosY
     ADC #$00
-    STA BYTE_00d1
+    STA DrawWeapon_Unused_00D1
     LDA a:Player_CurWeapon
     ASL A
     TAX
@@ -14459,7 +14459,7 @@ Player_DrawWeapon:                          ; [$b7d6]
     LDA #$b898,X
     STA Maybe_WeaponRange_Y
     LDA Maybe_Something_PosX
-    CMP Screen_MaybeUseless_ScrollXCounter
+    CMP Screen_Maybe_ScrollXCounter
     BEQ @LAB_PRG14__b850
     RTS
 
@@ -15271,7 +15271,7 @@ CastMagic_Clear:                            ; [$bb3f]
 ;     None
 ;
 ; OUTPUTS:
-;     #$02bb:
+;     CastMagic_Something_Appearance:
 ;         Set to 4 if the magic hit an obstacle.
 ;
 ;     CastMagic_Type:
@@ -15325,7 +15325,7 @@ CastMagic_HandleDeluge:                     ; [$bb45]
     LDA #$ff
     STA a:CastMagic_Type                    ; Unset the cast magic spell.
     LDA #$04
-    STA a:BYTE_02bb
+    STA a:CastMagic_Something_Appearance
 
   @_return:                                 ; [$bb6a]
     RTS
@@ -15458,7 +15458,7 @@ CastMagic_HitHandler_Thunder:               ; [$bb91]
 ;     None
 ;
 ; OUTPUTS:
-;     #$02bb:
+;     CastMagic_Something_Appearance:
 ;         Set to 0 if the magic hit an obstacle.
 ;
 ;     CastMagic_Flags:
@@ -15515,7 +15515,7 @@ CastMagic_HandleFire:                       ; [$bb9c]
     JSR #$d0e4                              ; Play the Magic Hit Obstacle
                                             ; sound effect.
     LDA #$00
-    STA a:BYTE_02bb
+    STA a:CastMagic_Something_Appearance
 
     ;
     ; Clear out the cast magic.
@@ -15645,7 +15645,7 @@ CastMagic_ClearTilte:                       ; [$bbf0]
 ;     None
 ;
 ; OUTPUTS:
-;     #$02bb:
+;     CastMagic_Something_Appearance:
 ;         Set to 0 if the magic hit an obstacle.
 ;
 ;     CastMagic_Flags:

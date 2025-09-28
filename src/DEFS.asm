@@ -626,17 +626,19 @@ PALETTE_TOWN                                       EQU $1b
 ;============================================================================
 PLAYER_FLAGS_UNSET                                 EQU $00
 PLAYER_JUMPING                                     EQU $01
-PLAYER_UNKNOWN1                                    EQU $02
-PLAYER_UNKNOWN2                                    EQU $04
+PLAYER_HOLDING_TO_CLIMB                            EQU $02
+PLAYER_FALLING_OFF                                 EQU $04
 PLAYER_CAN_CLIMB                                   EQU $08
-PLAYER_UNKNOWN3                                    EQU $10
-PLAYER_WALKING                                     EQU $20
+PLAYER_CLIMBING                                    EQU $10
+PLAYER_MOVING                                      EQU $20
 PLAYER_FACING_RIGHT                                EQU $40
+PLAYER_CLEAR_ATTACKING                             EQU $7f
 PLAYER_ATTACKING                                   EQU $80
 PLAYER_CLEAR_FACING_RIGHT                          EQU $bf
-PLAYER_CLEAR_WALKING                               EQU $df
-PLAYER_CLEAR_BIT_5                                 EQU $ef
+PLAYER_CLEAR_MOVING                                EQU $df
+PLAYER_CLEAR_CLIMBING                              EQU $ef
 PLAYER_CLEAR_CAN_CLIMB                             EQU $f7
+PLAYER_CLEAR_FALLING_OFF                           EQU $fb
 PLAYER_FLAGS_ALL                                   EQU $ff
 
 ;============================================================================
@@ -645,6 +647,7 @@ PLAYER_FLAGS_ALL                                   EQU $ff
 PLAYER_STATUS_ATTACKING                            EQU $01
 PLAYER_STATUS_KNOCKBACK                            EQU $02
 PLAYER_STATUS_WING_BOOTS                           EQU $80
+PLAYER_STATUS_CLEAR_ATTACKING                      EQU $fe
 
 ;============================================================================
 ; PlayerTitle

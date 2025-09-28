@@ -560,15 +560,15 @@ pre {
 <span class="l"><span><span class="i">ROL</span> <span class="o">a:<a href="RAM.html#Temp1_SomethingChangedHP">Temp1_SomethingChangedHP</a></span></span></span>
 <span class="l"><span><span class="i">ROL</span> <span class="o">a:<a href="RAM.html#Temp2_SomethingChangedHP">Temp2_SomethingChangedHP</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp1_SomethingChangedHP">Temp1_SomethingChangedHP</a></span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">a:<a href="RAM.html#DAT_04be">DAT_04be</a></span></span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">a:<a href="RAM.html#BYTE_04be">BYTE_04be</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp2_SomethingChangedHP">Temp2_SomethingChangedHP</a></span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#DAT_04bf">DAT_04bf</a></span></span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#BYTE_04bf">BYTE_04bf</a></span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__c124">@LAB_PRG15_MIRROR__c124</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp1_SomethingChangedHP">Temp1_SomethingChangedHP</a></span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#DAT_04be">DAT_04be</a></span></span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#BYTE_04be">BYTE_04be</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Temp1_SomethingChangedHP">Temp1_SomethingChangedHP</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp2_SomethingChangedHP">Temp2_SomethingChangedHP</a></span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#DAT_04bf">DAT_04bf</a></span></span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o">a:<a href="RAM.html#BYTE_04bf">BYTE_04bf</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Temp2_SomethingChangedHP">Temp2_SomethingChangedHP</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__c124" href="#@LAB_PRG15_MIRROR__c124" class="lla">@LAB_PRG15_MIRROR__c124:</a><span class="ce">; [$c124]</span></span>
@@ -1412,7 +1412,7 @@ pre {
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_XPos_Full">CastMagic_XPos_Full</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosX">Maybe_Arg_CurrentSprite_PosX</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#MaybeUnused_Something_ScrollPosX">MaybeUnused_Something_ScrollPosX</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span></span>
@@ -1802,7 +1802,7 @@ pre {
 </div><span class="l"><a name="MagicHitHandler__c403" href="#MagicHitHandler__c403" class="la">MagicHitHandler__c403:</a><span class="ce">; [$c403]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#BYTE_02bb">BYTE_02bb</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Something_Appearance">CastMagic_Something_Appearance</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span></span>
@@ -1811,7 +1811,7 @@ pre {
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$02</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#BYTE_02bb">BYTE_02bb</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Something_Appearance">CastMagic_Something_Appearance</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span></span>
@@ -4642,7 +4642,7 @@ pre {
 ; INPUTS:
 ;     <a href="RAM.html#JOY1">JOY1</a>:
 ;     <a href="RAM.html#JOY2">JOY2</a>:
-;         The controler inputs.
+;         The controller inputs.
 ;
 ;     <a href="RAM.html#Joy1_ButtonMask">Joy1_ButtonMask</a>:
 ;         The previous controller 1 button mask.
@@ -4768,7 +4768,7 @@ pre {
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPU_InitAttributeAndNameTables">PPU_InitAttributeAndNameTables</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Game_EnableInterruptHandlers">Game_EnableInterruptHandlers</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_042f">DAT_042f</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_GameScreenStart">Maybe_GameScreenStart</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank2">CurrentROMBank2</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -4998,22 +4998,16 @@ pre {
 ;     <a href="#Maybe_Game_ExitBuildingHandler">Maybe_Game_ExitBuildingHandler</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__cb17" href="#FUN_PRG15_MIRROR__cb17" class="la">FUN_PRG15_MIRROR__cb17:</a><span class="ce">; [$cb17]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Game_EnableInterruptHandlers">Game_EnableInterruptHandlers</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__cb1f
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__cb1f" href="#FUN_PRG15_MIRROR__cb1f" class="la">FUN_PRG15_MIRROR__cb1f:</a><span class="ce">; [$cb1f]</span></span>
+</div><span class="l"><a name="MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f" href="#MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f" class="la">MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f:</a><span class="ce">; [$cb1f]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__cb3f">FUN_PRG15_MIRROR__cb3f</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Game_EnableInterruptHandlers">Game_EnableInterruptHandlers</a></span></span></span>
@@ -5082,16 +5076,10 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__cb3f
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__cb1f">FUN_PRG15_MIRROR__cb1f</a>
+;     <a href="#MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f">MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__cb3f" href="#FUN_PRG15_MIRROR__cb3f" class="la">FUN_PRG15_MIRROR__cb3f:</a><span class="ce">; [$cb3f]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
@@ -5105,7 +5093,7 @@ pre {
 </div></pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Maybe_GameLoop_ResetAnimation
+; TODO: Document GameLoop_Maybe_SetupDrawState
 ;
 ; INPUTS:
 ;     None.
@@ -5125,7 +5113,7 @@ pre {
 ;     <a href="#Game_WaitForOAMReset">Game_WaitForOAMReset</a>
 ;     <a href="#Player_HandleDeath">Player_HandleDeath</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_GameLoop_ResetAnimation" href="#Maybe_GameLoop_ResetAnimation" class="la">Maybe_GameLoop_ResetAnimation:</a><span class="ce">; [$cb47]</span></span>
+</div><span class="l"><a name="GameLoop_Maybe_SetupDrawState" href="#GameLoop_Maybe_SetupDrawState" class="la">GameLoop_Maybe_SetupDrawState:</a><span class="ce">; [$cb47]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_Something_DontUpdate">PPU_Something_DontUpdate</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ForceLowerPatternTables">PPU_ForceLowerPatternTables</a></span></span></span>
@@ -5173,7 +5161,7 @@ pre {
 ;
 ; XREFS:
 ;     <a href="#FUN_PRG15_MIRROR__cb3f">FUN_PRG15_MIRROR__cb3f</a>
-;     <a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;============================================================================
 </div><span class="l"><a name="Something_FrameAltToggle" href="#Something_FrameAltToggle" class="la">Something_FrameAltToggle:</a><span class="ce">; [$cb53]</span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span><span class="ce">; Y = 0</span></span>
@@ -5189,7 +5177,7 @@ pre {
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#BYTE_0025">BYTE_0025</a></span></span></span>
 <span class="l"><span><span class="i">TAY</span></span><span class="ce">; Y = A</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$cb96,Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_0700">DAT_0700</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#BYTE_0700">BYTE_0700</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$7f</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_0701">DAT_0701</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$23</span></span></span>
@@ -5235,14 +5223,14 @@ pre {
 ;         Set to 1 to request a reset.
 ;
 ; CALLS:
-;     <a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;
 ; XREFS:
 ;     <a href="#FUN_PRG15_MIRROR__f24d">FUN_PRG15_MIRROR__f24d</a>
 ;     <a href="#IScripts_ClearPortrait">IScripts_ClearPortrait</a>
 ;============================================================================
 </div><span class="l"><a name="Game_WaitForOAMReset" href="#Game_WaitForOAMReset" class="la">Game_WaitForOAMReset:</a><span class="ce">; [$cb9a]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Game_NeedOAMReset">Game_NeedOAMReset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
@@ -5439,7 +5427,6 @@ Don't reset</span></span>
 ;     <a href="#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
-;     <a href="#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
 ;     <a href="#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
 ;     <a href="#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
 ;     <a href="#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
@@ -5465,6 +5452,7 @@ Don't reset</span></span>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
 ;     <a href="#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
+;     <a href="#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="#TextBox_Maybe_ShowNextCharFromBank">TextBox_Maybe_ShowNextCharFromBank</a>
 ;     <a href="#TextBox_Maybe_WriteLineOfChars">TextBox_Maybe_WriteLineOfChars</a>
 ;     <a href="#TextBox_ShowNextChar">TextBox_ShowNextChar</a>
@@ -7459,8 +7447,8 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
+;     <a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="#Area_Maybe_ShowRoomTransition">Area_Maybe_ShowRoomTransition</a>
-;     <a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a>
 ;============================================================================
 </div><span class="l"><a name="Area_ScrollToNextRoom" href="#Area_ScrollToNextRoom" class="la">Area_ScrollToNextRoom:</a><span class="ce">; [$d127]</span></span>
 <span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
@@ -8345,8 +8333,8 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$028a,Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">#$028a,Y</span></span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Something_BlocksPPUData">Something_BlocksPPUData</a>,Y</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_BlocksPPUData">Something_BlocksPPUData</a>,Y</span></span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o"><a href="RAM.html#Temp_06">Temp_06</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">CPY</span> <span class="o">#$10</span></span></span>
@@ -8386,9 +8374,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d4b4" href="#@LAB_PRG15_MIRROR__d4b4" class="lla">@LAB_PRG15_MIRROR__d4b4:</a><span class="ce">; [$d4b4]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o"><a href="RAM.html#Temp_06">Temp_06</a></span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$028a,X</span></span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Something_BlocksPPUData">Something_BlocksPPUData</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">#$028a,X</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_BlocksPPUData">Something_BlocksPPUData</a>,X</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$08</span></span></span>
@@ -8631,8 +8619,8 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$0282,Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">#$0282,Y</span></span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Something_PPUData">Something_PPUData</a>,Y</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_PPUData">Something_PPUData</a>,Y</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_08">Temp_08</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span></span>
@@ -8675,8 +8663,8 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d5fa" href="#@LAB_PRG15_MIRROR__d5fa" class="lla">@LAB_PRG15_MIRROR__d5fa:</a><span class="ce">; [$d5fa]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o"><a href="RAM.html#Temp_06">Temp_06</a></span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$0282,X</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">#$0282,X</span></span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Something_PPUData">Something_PPUData</a>,X</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_PPUData">Something_PPUData</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"><span><span class="i">TXA</span></span></span>
@@ -8866,7 +8854,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d6a5" href="#@LAB_PRG15_MIRROR__d6a5" class="lla">@LAB_PRG15_MIRROR__d6a5:</a><span class="ce">; [$d6a5]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$028a,X</span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_BlocksPPUData">Something_BlocksPPUData</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#PPUDATA">PPUDATA</a></span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$08</span></span></span>
@@ -8900,7 +8888,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o"><a href="RAM.html#BYTE_0050">BYTE_0050</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#PPUADDR">PPUADDR</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$0282,X</span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_PPUData">Something_PPUData</a>,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#PPUDATA">PPUDATA</a></span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$07</span></span></span>
@@ -9299,8 +9287,8 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">TYA</span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#DAT_03cf">DAT_03cf</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#DAT_03ce">DAT_03ce</a></span></span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#BYTE_03cf">BYTE_03cf</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#BYTE_03ce">BYTE_03ce</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScreenBuffer">ScreenBuffer</a>,X</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_SetBlocks">Area_SetBlocks</a></span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
@@ -9655,7 +9643,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="#LoadPalette2">LoadPalette2</a>
 ;     <a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
-;     <a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;     <a href="#PPUBuffer_Append0">PPUBuffer_Append0</a>
 ;     <a href="PRG14.html#PlayerDeath_ResetSelectedItemState">PlayerDeath_ResetSelectedItemState</a>
@@ -9715,7 +9703,7 @@ and address bytes and all the data bytes.</span></span>
 ; reset state.
 ;
 </div><span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForInterrupt">WaitForInterrupt</a></span></span><span class="ce">; Wait for interrupt.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span><span class="ce">; Reset animations.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span><span class="ce">; Reset animations.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b7bf</span></span><span class="ce">; Reset selected item state.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a></span></span><span class="ce">; Update player sprite.</span></span>
 <span class="l"></span>
@@ -9754,7 +9742,7 @@ and address bytes and all the data bytes.</span></span>
 ;
 </div><span class="l"><a name="@_dissolvePlayerLoop" href="#@_dissolvePlayerLoop" class="lla">@_dissolvePlayerLoop:</a><span class="ce">; [$d941]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span><span class="ce">; Wait for the next frame.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span><span class="ce">; Reset animations.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span><span class="ce">; Reset animations.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_NextTransitionState">Screen_NextTransitionState</a></span></span><span class="ce">; Prepare for the next screen state.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span><span class="ce">; Draw the player.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawDeathAnimation">Player_DrawDeathAnimation</a></span></span><span class="ce">; Draw the next cycle of the death animation.</span></span>
@@ -9859,7 +9847,7 @@ and address bytes and all the data bytes.</span></span>
 ; CALLS:
 ;     <a href="#EndGame_BeginKingsRoomSequence">EndGame_BeginKingsRoomSequence</a>
 ;     <a href="#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
-;     <a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;     <a href="#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a>
 ;     <a href="#Screen_FadeToBlack">Screen_FadeToBlack</a>
 ;     <a href="#WaitForNextFrame">WaitForNextFrame</a>
@@ -9882,7 +9870,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">TXA</span></span><span class="ce">; A = X</span></span>
 <span class="l"><span><span class="i">PHA</span></span><span class="ce">; Push to the stack.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span><span class="ce">; Wait for the next frame.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span><span class="ce">; Reset for this frame.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span><span class="ce">; Reset for this frame.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a></span></span><span class="ce">; Draw the screen and player in a semi-paused state.</span></span>
 <span class="l"><span><span class="i">PLA</span></span><span class="ce">; Pop our loop counter.</span></span>
 <span class="l"><span><span class="i">TAX</span></span><span class="ce">; X = A</span></span>
@@ -9903,7 +9891,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">TXA</span></span><span class="ce">; A = X</span></span>
 <span class="l"><span><span class="i">PHA</span></span><span class="ce">; Push to the stack.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span><span class="ce">; Wait for the next frame.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span><span class="ce">; Reset for this frame.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span><span class="ce">; Reset for this frame.</span></span>
 <span class="l"><span><span class="i">PLA</span></span><span class="ce">; Pop our loop counter.</span></span>
 <span class="l"><span><span class="i">TAX</span></span><span class="ce">; X = A</span></span>
 <span class="l"><span><span class="i">DEX</span></span><span class="ce">; X--</span></span>
@@ -10179,7 +10167,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$ba55</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#DAT_042f">DAT_042f</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_GameScreenStart">Maybe_GameScreenStart</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScrollHelp_Screen">ScrollHelp_Screen</a></span></span></span>
@@ -10466,7 +10454,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$0e</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_UpdatePlayer">GameLoop_UpdatePlayer</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span><span class="ce">; Draw shield</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span><span class="ce">; Draw weapon?</span></span>
@@ -10487,14 +10475,14 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#Game_MainLoop">Game_MainLoop</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_WaitUntilClear">PPUBuffer_WaitUntilClear</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#DAT_042f">DAT_042f</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_GameScreenStart">Maybe_GameScreenStart</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__db91">@LAB_PRG15_MIRROR__db91</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__dbaf">@LAB_PRG15_MIRROR__dbaf</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__db91" href="#@LAB_PRG15_MIRROR__db91" class="lla">@LAB_PRG15_MIRROR__db91:</a><span class="ce">; [$db91]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_ClearSprites">GameLoop_ClearSprites</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a></span></span></span>
@@ -10507,7 +10495,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__dbaf" href="#@LAB_PRG15_MIRROR__dbaf" class="lla">@LAB_PRG15_MIRROR__dbaf:</a><span class="ce">; [$dbaf]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b7d6</span></span></span>
@@ -10518,7 +10506,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@_scrolling" href="#@_scrolling" class="lla">@_scrolling:</a><span class="ce">; [$dbca]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_UpdatePlayerOnScroll">Game_UpdatePlayerOnScroll</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span></span>
@@ -10557,7 +10545,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
 ;     <a href="#GameLoop_CountdownItems">GameLoop_CountdownItems</a>
 ;     <a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
-;     <a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a>
+;     <a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
@@ -10582,7 +10570,7 @@ and address bytes and all the data bytes.</span></span>
 ; Wait for a frame and prepare for renders.
 ;
 </div><span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span><span class="ce">; Wait for the next frame.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_GameLoop_ResetAnimation">Maybe_GameLoop_ResetAnimation</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; Move the player a step/jump toward the King, or begin
@@ -10937,7 +10925,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_DAT_0059">Maybe_Player_DAT_0059</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_DAT_0058">Maybe_Player_DAT_0058</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_StartPosXY">Area_StartPosXY</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span></span>
@@ -12146,9 +12134,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$04</span></span><span class="ce">; Subtract 4.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Store it.</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span><span class="ce">; Load our screen scroll counter.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span><span class="ce">; Load our screen scroll counter.</span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$00</span></span><span class="ce">; Subtract carry.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span><span class="ce">; Store it.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; X-- BEGIN DEADCODE --X
@@ -12207,7 +12195,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
 ;         The updated player position.
 ;
-;     <a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a>:
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
 ;         An updated X value used during screen scroll.
 ;         This is set in the first 4 frames of scrolling
 ;         left or right, but is thought to ultimately be
@@ -12296,9 +12284,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$04</span></span><span class="ce">; Add 4.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Store it.</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span><span class="ce">; Load our screen scroll counter.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span><span class="ce">; Load our screen scroll counter.</span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$00</span></span><span class="ce">; Add carry.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span><span class="ce">; Store it.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; X-- BEGIN DEADCODE --X
@@ -12329,7 +12317,7 @@ and address bytes and all the data bytes.</span></span>
 ;     None
 ;
 ; OUTPUTS:
-;     <a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a>:
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
 ;         TODO
 ;
 ;     <a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a>:
@@ -12364,7 +12352,7 @@ and address bytes and all the data bytes.</span></span>
 ;============================================================================
 </div><span class="l"><a name="Player_SetInitialState" href="#Player_SetInitialState" class="la">Player_SetInitialState:</a><span class="ce">; [$e0aa]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_DAT_0058">Maybe_Player_DAT_0058</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_DAT_0059">Maybe_Player_DAT_0059</a></span></span></span>
@@ -12475,7 +12463,7 @@ and address bytes and all the data bytes.</span></span>
 ;         hitting 0x39 or lower.
 ;
 ; CALLS:
-;     <a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a>
+;     <a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a>
 ;
 ; XREFS:
 ;     <a href="#GameLoop_UpdatePlayer">GameLoop_UpdatePlayer</a>
@@ -12502,13 +12490,13 @@ and address bytes and all the data bytes.</span></span>
 ; Set the knockback speed and return, leaving the knockback
 ; state intact.
 ;
-</div><span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a></span></span></span>
+</div><span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; Set the knockback speed, but then clear the knockback.
 ;
 </div><span class="l"><a name="@_resetSpeed" href="#@_resetSpeed" class="lla">@_resetSpeed:</a><span class="ce">; [$e0f9]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a></span></span><span class="ce">; Reset the player speed.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span><span class="ce">; Reset the player speed.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Clear knockback from the player flags.
@@ -12601,54 +12589,85 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_HandleKnockback
+; Handle knockback when getting hit.
+;
+; This will knock the player back in the direction opposite
+; where the player was facing.
+;
+; It will temporarily flip the facing bit and then move in
+; that direction. The original bit will then be restored.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The player's flags.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The updated flags, with any new state applied
+;         from the move but the flipped bit retained.
+;
+;     <a href="RAM.html#Temp_00">Temp_00</a>:
+;         Clobbered.
+;
+; CALLS:
+;     <a href="#Player_KnockbackHoriz">Player_KnockbackHoriz</a>
 ;
 ; XREFS:
 ;     <a href="#Player_CheckHandleJump">Player_CheckHandleJump</a>
 ;============================================================================
 </div><span class="l"><a name="Player_HandleKnockback" href="#Player_HandleKnockback" class="la">Player_HandleKnockback:</a><span class="ce">; [$e153]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$40</span></span></span>
-<span class="l"><span><span class="i">PHA</span></span></span>
-<span class="l"><span><span class="i">EOR</span> <span class="o">#$40</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_HandleMoveHoriz">Player_HandleMoveHoriz</a></span></span></span>
-<span class="l"><span><span class="i">PLA</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$bf</span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
+<div class="c">;
+; Temporarily store the player's current flags.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$40</span></span><span class="ce">; Take only the facing bit.</span></span>
+<span class="l"><span><span class="i">PHA</span></span><span class="ce">; Push it to the stack.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Flip the facing bit and knock back in the flipped direction.
+;
+</div><span class="l"><span><span class="i">EOR</span> <span class="o">#$40</span></span><span class="ce">; Flip the facing bit temporarily for the purpose of knockback.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Store as the new flags.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_KnockbackHoriz">Player_KnockbackHoriz</a></span></span><span class="ce">; Move based on the facing bit.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Restore the original flags, merging with any updated bits
+; from the move.
+;
+</div><span class="l"><span><span class="i">PLA</span></span><span class="ce">; Pop the original flags.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the flags set above.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$bf</span></span><span class="ce">; Clear the facing bit.</span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span><span class="ce">; OR with the original facing bit.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Store it.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_HandleMoveHoriz
+; Move the player left or right due to knockback.
+;
+; The player will be knocked back based on the direction
+; they're facing.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The player's current flags.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     <a href="#Player_TryMoveLeft">Player_TryMoveLeft</a>
+;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
 ;
 ; XREFS:
 ;     <a href="#Player_HandleKnockback">Player_HandleKnockback</a>
 ;============================================================================
-</div><span class="l"><a name="Player_HandleMoveHoriz" href="#Player_HandleMoveHoriz" class="la">Player_HandleMoveHoriz:</a><span class="ce">; [$e16b]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$40</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_TryMoveRight">Player_TryMoveRight</a></span></span></span>
-<span class="l"></span>
-<div class="c">;
-; Attempt to move left at the current speed.
-;
-</div><span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_TryMoveLeft">Player_TryMoveLeft</a></span></span></span>
+</div><span class="l"><a name="Player_KnockbackHoriz" href="#Player_KnockbackHoriz" class="la">Player_KnockbackHoriz:</a><span class="ce">; [$e16b]</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$40</span></span><span class="ce">; Is the player facing right?</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_TryMoveRight">Player_TryMoveRight</a></span></span><span class="ce">; If so, move right.</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_TryMoveLeft">Player_TryMoveLeft</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -12721,171 +12740,333 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_TryMoveRight
+; Try moving the player right.
+;
+; This is used when handling knockback or jumping. It will
+; move based on any existing acceleration, or the default
+; if the player wasn't previously moving, and then try to
+; position the player. That may position up againt a block,
+; at the edge of the screen, or onto the next screen.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The player's current flags.
+;
+;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
+;     <a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a>:
+;         The player's current X position.
+;
+;     <a href="RAM.html#Area_ScreenToTheRight">Area_ScreenToTheRight</a>:
+;         The ID of the screen to the right.
+;
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
+;         The counter used for scrolling.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The updated flags.
+;
+;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
+;     <a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a>:
+;         The updated player X position.
+;
+;     <a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a>:
+;         The updated move acceleration.
+;
+;     <a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a>:
+;         The new screen, if switching screens.
+;
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
+;         The updated counter used for scrolling.
+;
+;     <a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a>:
+;         The transition counter for the player movement,
+;         if scrolling screens.
+;
+; CALLS:
+;     <a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
+;     <a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
+;     <a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a>
+;     <a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
+;     <a href="#Player_SetPosAtRightEdge">Player_SetPosAtRightEdge</a>
+;     <a href="#Screen_IsEdge">Screen_IsEdge</a>
 ;
 ; XREFS:
 ;     <a href="#Player_CheckHandleJump">Player_CheckHandleJump</a>
-;     <a href="#Player_HandleMoveHoriz">Player_HandleMoveHoriz</a>
+;     <a href="#Player_KnockbackHoriz">Player_KnockbackHoriz</a>
 ;============================================================================
 </div><span class="l"><a name="Player_TryMoveRight" href="#Player_TryMoveRight" class="la">Player_TryMoveRight:</a><span class="ce">; [$e1cf]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$20</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e1d8">@LAB_PRG15_MIRROR__e1d8</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a></span></span></span>
-<span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e1d8" href="#@LAB_PRG15_MIRROR__e1d8" class="lla">@LAB_PRG15_MIRROR__e1d8:</a><span class="ce">; [$e1d8]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$60</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span></span>
-<span class="l"><span><span class="i">CLC</span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e1fe">@LAB_PRG15_MIRROR__e1fe</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#RETURN_E21A">RETURN_E21A</a></span></span></span>
-<span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e1fe" href="#@LAB_PRG15_MIRROR__e1fe" class="lla">@LAB_PRG15_MIRROR__e1fe:</a><span class="ce">; [$e1fe]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$f1</span></span></span>
-<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#RETURN_E21A">RETURN_E21A</a></span></span></span>
-<span class="l"><span><span class="i">LDY</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_IsEdge">Screen_IsEdge</a></span></span></span>
-<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#Player_SetPosAtRightEdge">Player_SetPosAtRightEdge</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenToTheRight">Area_ScreenToTheRight</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a></span></span></span>
+<div class="c">;
+; Check whether the player is moving.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$20</span></span><span class="ce">; Check the moving bit.</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_setMoving">@_setMoving</a></span></span><span class="ce">; If set, jump to handle movement.</span></span>
 <span class="l"></span>
 <div class="c">;
-; XREFS:
-;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
+; The player is not moving. Reset the movement speed.
 ;
-</div><span class="l"><a name="RETURN_E21A" href="#RETURN_E21A" class="la">RETURN_E21A:</a><span class="ce">; [$e21a]</span></span>
+</div><span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span><span class="ce">; Start with the standard acceleration.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Calculate movement speed and set the player to move to
+; the right.
+;
+</div><span class="l"><a name="@_setMoving" href="#@_setMoving" class="lla">@_setMoving:</a><span class="ce">; [$e1d8]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a></span></span><span class="ce">; Calculate the new walking speed.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o">#$60</span></span><span class="ce">; Set moving and to the right.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Store as the new flags.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Update the player's X position to factor in acceleration.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span><span class="ce">; Load the fractional X position.</span></span>
+<span class="l"><span><span class="i">CLC</span></span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span><span class="ce">; Add the move acceleration.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span><span class="ce">; Store as the new fractional position.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Load the full X position.</span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span><span class="ce">; Add the move acceleration.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; And store it.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if the block there is passable.
+;
+</div><span class="l"><span><span class="i">LDX</span> <span class="o">#$01</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span><span class="ce">; Is the block to the right passable?</span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_checkAtRightEdge">@_checkAtRightEdge</a></span></span><span class="ce">; If not, jump to check for an edge or transition boundary.</span></span>
+<span class="l"></span>
+<div class="c">;
+; The block is not passable. Cap the position.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Load the player X position.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span><span class="ce">; Cap it.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; And store it.</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if the player is far enough to the right for
+; any screen transition logic.
+;
+</div><span class="l"><a name="@_checkAtRightEdge" href="#@_checkAtRightEdge" class="lla">@_checkAtRightEdge:</a><span class="ce">; [$e1fe]</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; X = Player X position.</span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$f1</span></span><span class="ce">; Is it too far left to perform a screen transition?</span></span>
+<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@_return">@_return</a></span></span><span class="ce">; If so, return.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if the player is at the edge and can scroll.
+;
+</div><span class="l"><span><span class="i">LDY</span> <span class="o">#$01</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_IsEdge">Screen_IsEdge</a></span></span><span class="ce">; Check if the screen is the right-most edge.</span></span>
+<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#Player_SetPosAtRightEdge">Player_SetPosAtRightEdge</a></span></span><span class="ce">; If so, jump to set the position there.</span></span>
+<span class="l"></span>
+<div class="c">;
+; There's a screen to the right. Transition there.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenToTheRight">Area_ScreenToTheRight</a></span></span><span class="ce">; A = Neighboring screen to the right.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span><span class="ce">; Store as the new current screen.</span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">#$01</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span><span class="ce">; Begin scrolling to the right.</span></span>
+<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span><span class="ce">; Increment the scroll counter.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a></span></span><span class="ce">; Clear the transition counter.</span></span>
+<span class="l"></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$e21a]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_SetPosAtRightEdge
+; Position the player at the right edge of the screen.
+;
+; The player will be positioned at 0xF0.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
+;         The updated X position.
 ;
 ; XREFS:
 ;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
 ;============================================================================
 </div><span class="l"><a name="Player_SetPosAtRightEdge" href="#Player_SetPosAtRightEdge" class="la">Player_SetPosAtRightEdge:</a><span class="ce">; [$e21b]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$f0</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Set the X position to 0xF0.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_TryMoveLeft
+; Try moving the player left.
+;
+; This is used when handling knockback or jumping. It will
+; move based on any existing acceleration, or the default
+; if the player wasn't previously moving, and then try to
+; position the player. That may position up againt a block,
+; at the edge of the screen, or onto the next screen.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The player's current flags.
+;
+;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
+;     <a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a>:
+;         The player's current X position.
+;
+;     <a href="RAM.html#Area_ScreenToTheLeft">Area_ScreenToTheLeft</a>:
+;         The ID of the screen to the left.
+;
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
+;         The counter used for scrolling.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Player_Flags">Player_Flags</a>:
+;         The updated flags.
+;
+;     <a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a>:
+;     <a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a>:
+;         The updated player X position.
+;
+;     <a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a>:
+;         The updated move acceleration.
+;
+;     <a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a>:
+;         The new screen, if switching screens.
+;
+;     <a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a>:
+;         The updated counter used for scrolling.
+;
+;     <a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a>:
+;         The transition counter for the player movement,
+;         if scrolling screens.
+;
+; CALLS:
+;     <a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
+;     <a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
+;     <a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a>
+;     <a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
+;     <a href="#Player_SetPosAtRightEdge">Player_SetPosAtRightEdge</a>
+;     <a href="#Screen_IsEdge">Screen_IsEdge</a>
 ;
 ; XREFS:
 ;     <a href="#Player_CheckHandleJump">Player_CheckHandleJump</a>
-;     <a href="#Player_HandleMoveHoriz">Player_HandleMoveHoriz</a>
+;     <a href="#Player_KnockbackHoriz">Player_KnockbackHoriz</a>
 ;============================================================================
 </div><span class="l"><a name="Player_TryMoveLeft" href="#Player_TryMoveLeft" class="la">Player_TryMoveLeft:</a><span class="ce">; [$e220]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$20</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e229">@LAB_PRG15_MIRROR__e229</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a></span></span></span>
+<div class="c">;
+; Check whether the player is moving.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$20</span></span><span class="ce">; Check the moving bit.</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_setMoving">@_setMoving</a></span></span><span class="ce">; If set, jump to handle movement.</span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e229" href="#@LAB_PRG15_MIRROR__e229" class="lla">@LAB_PRG15_MIRROR__e229:</a><span class="ce">; [$e229]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$bf</span></span></span>
-<span class="l"><span><span class="i">ORA</span> <span class="o">#$20</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span></span>
+<div class="c">;
+; The player is not moving. Reset the movement speed.
+;
+</div><span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span><span class="ce">; Start with the standard acceleration.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Calculate movement speed and set the player to move to
+; the left.
+;
+</div><span class="l"><a name="@_setMoving" href="#@_setMoving" class="lla">@_setMoving:</a><span class="ce">; [$e229]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a></span></span><span class="ce">; Calculate the new walking speed.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$bf</span></span><span class="ce">; Set the player to face left.</span></span>
+<span class="l"><span><span class="i">ORA</span> <span class="o">#$20</span></span><span class="ce">; Set the player to moving.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span><span class="ce">; Store as the new flags.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Update the player's X position to factor in acceleration.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span><span class="ce">; Load the fractional X position.</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span></span>
-<span class="l"><span><span class="i">PHP</span></span></span>
-<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e244">@LAB_PRG15_MIRROR__e244</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span><span class="ce">; Subtract the move acceleration.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Frac">PlayerPosX_Frac</a></span></span><span class="ce">; Store as the new fractional position.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Load the full X position.</span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span><span class="ce">; Subtract the move acceleration.</span></span>
+<span class="l"><span><span class="i">PHP</span></span><span class="ce">; Push all flags.</span></span>
+<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_saveFlags">@_saveFlags</a></span></span><span class="ce">; If &gt;= 0, jump.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span><span class="ce">; Else, cap at 0, so it doesn't wrap.</span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e244" href="#@LAB_PRG15_MIRROR__e244" class="lla">@LAB_PRG15_MIRROR__e244:</a><span class="ce">; [$e244]</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e25e">@LAB_PRG15_MIRROR__e25e</a></span></span></span>
-<span class="l"><span><span class="i">PLP</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_return1">@_return1</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span></span>
+<span class="l"><a name="@_saveFlags" href="#@_saveFlags" class="lla">@_saveFlags:</a><span class="ce">; [$e244]</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Store the new X position.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if the block there is passable.
+;
+</div><span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span><span class="ce">; Is the block to the left passable?</span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_checkAtLeftEdge">@_checkAtLeftEdge</a></span></span><span class="ce">; If not, jump to check for an edge or transition boundary.</span></span>
+<span class="l"></span>
+<div class="c">;
+; The block is not passable. Cap the position.
+;
+</div><span class="l"><span><span class="i">PLP</span></span><span class="ce">; Pop the flags from the acceleration calculation.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Load the player X position.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span><span class="ce">; Is this in the first 16 pixels?</span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_return1">@_return1</a></span></span><span class="ce">; If so, we're done.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Load the player X position.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span><span class="ce">; Keep all but pixels 0-16.</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span><span class="ce">; Add 16 pixels.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Store as the new position.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@_return1" href="#@_return1" class="lla">@_return1:</a><span class="ce">; [$e25d]</span></span>
-<span class="l"><span><span class="i">RTS</span></span></span>
+<span class="l"><span><span class="i">RTS</span></span><span class="ce">; And we're done.</span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e25e" href="#@LAB_PRG15_MIRROR__e25e" class="lla">@LAB_PRG15_MIRROR__e25e:</a><span class="ce">; [$e25e]</span></span>
-<span class="l"><span><span class="i">PLP</span></span></span>
-<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_return2">@_return2</a></span></span></span>
-<span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_IsEdge">Screen_IsEdge</a></span></span></span>
-<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e278">@LAB_PRG15_MIRROR__e278</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenToTheLeft">Area_ScreenToTheLeft</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
+<div class="c">;
+; Check if the player is far enough to the left for
+; any screen transition logic.
+;
+</div><span class="l"><a name="@_checkAtLeftEdge" href="#@_checkAtLeftEdge" class="lla">@_checkAtLeftEdge:</a><span class="ce">; [$e25e]</span></span>
+<span class="l"><span><span class="i">PLP</span></span><span class="ce">; Pop the flags from the acceleration calculation.</span></span>
+<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_return2">@_return2</a></span></span><span class="ce">; If it didn't overflow off the left, return.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if the player is at the edge and can scroll.
+;
+</div><span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_IsEdge">Screen_IsEdge</a></span></span><span class="ce">; Check if the screen is the left-most edge.</span></span>
+<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_setAtLeftEdge">@_setAtLeftEdge</a></span></span><span class="ce">; If at the edge, jump to cap the position.</span></span>
+<span class="l"></span>
+<div class="c">;
+; There's a screen to the left. Transition there.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenToTheLeft">Area_ScreenToTheLeft</a></span></span><span class="ce">; A = Neighboring screen to the left.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span><span class="ce">; Store as the new current screen.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span><span class="ce">; Begin scrolling to the left.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Set the X position to 0.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a></span></span><span class="ce">; Clear the transition counter.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@_return2" href="#@_return2" class="lla">@_return2:</a><span class="ce">; [$e277]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__e278" href="#@LAB_PRG15_MIRROR__e278" class="lla">@LAB_PRG15_MIRROR__e278:</a><span class="ce">; [$e278]</span></span>
+<div class="c">;
+; The player is at the left-most edge, but didn't pass it.
+;
+</div><span class="l"><a name="@_setAtLeftEdge" href="#@_setAtLeftEdge" class="lla">@_setAtLeftEdge:</a><span class="ce">; [$e278]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
-<span class="l"><span><span class="i">RTS</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span><span class="ce">; Set the X position to 0.</span></span>
+<span class="l"><span><span class="i">RTS</span></span><span class="ce">; And return.</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$0f</span></span><span class="ce">; [1]:</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_SetStandardSpeed
+; Set the standard player acceleration.
+;
+; This will set to the default aceleration of 0xC0.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a>:
+;     #$aa:
+;         The default acceleration (0xC0).
 ;
 ; XREFS:
 ;     <a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
@@ -12893,22 +13074,27 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
 ;============================================================================
-</div><span class="l"><a name="Player_SetStandardSpeed" href="#Player_SetStandardSpeed" class="la">Player_SetStandardSpeed:</a><span class="ce">; [$e27f]</span></span>
+</div><span class="l"><a name="Player_SetStandardAcceleration" href="#Player_SetStandardAcceleration" class="la">Player_SetStandardAcceleration:</a><span class="ce">; [$e27f]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$c0</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span><span class="ce">; Set the lower byte of movement acceleation to 0xC0.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span><span class="ce">; Set the upper byte to 0.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_UpdatePosFromKnockback
+; Update the player's position based on knockback.
+;
+; This will accelerate the player by 8 pixels when its
+; position is next updated.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a>:
+;     #$aa:
+;         The updated acceleration.
 ;
 ; XREFS:
 ;     <a href="#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
@@ -12919,9 +13105,9 @@ and address bytes and all the data bytes.</span></span>
 ; back a bunch.
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span><span class="ce">; Set lower acceleration byte to 0.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$08</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration.U">Player_MoveAcceleration.U</a></span></span><span class="ce">; Set upper to 8.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -12947,7 +13133,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e2a3">@LAB_PRG15_MIRROR__e2a3</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$08</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_SetStandardSpeed">Player_SetStandardSpeed</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e2a3" href="#@LAB_PRG15_MIRROR__e2a3" class="lla">@LAB_PRG15_MIRROR__e2a3:</a><span class="ce">; [$e2a3]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span></span>
@@ -13000,7 +13186,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Joy1_ButtonMask">Joy1_ButtonMask</a></span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e2d6">@LAB_PRG15_MIRROR__e2d6</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e2f4">@LAB_PRG15_MIRROR__e2f4</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e2d6" href="#@LAB_PRG15_MIRROR__e2d6" class="lla">@LAB_PRG15_MIRROR__e2d6:</a><span class="ce">; [$e2d6]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_CheckIfOnLadder">Player_CheckIfOnLadder</a></span></span></span>
@@ -13015,23 +13201,10 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a></span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e2f4">@LAB_PRG15_MIRROR__e2f4</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a></span></span></span>
-</pre><pre><span class="l"></span>
 <span class="l"></span>
-<div class="cp">;============================================================================
-; TODO: Document Player_CheckHandleClimb_e2f4
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     <a href="#Player_CheckHandleClimb">Player_CheckHandleClimb</a>
-;============================================================================
-</div><span class="l"><a name="Player_CheckHandleClimb_e2f4" href="#Player_CheckHandleClimb_e2f4" class="la">Player_CheckHandleClimb_e2f4:</a><span class="ce">; [$e2f4]</span></span>
+<span class="l"><a name="@LAB_PRG15_MIRROR__e2f4" href="#@LAB_PRG15_MIRROR__e2f4" class="lla">@LAB_PRG15_MIRROR__e2f4:</a><span class="ce">; [$e2f4]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Joy1_ButtonMask">Joy1_ButtonMask</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
@@ -13056,9 +13229,6 @@ and address bytes and all the data bytes.</span></span>
 ;
 ; OUTPUTS:
 ;     TODO
-;
-; XREFS:
-;     <a href="#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a>
 ;============================================================================
 </div><span class="l"><a name="Player_CheckHandleClimbUp" href="#Player_CheckHandleClimbUp" class="la">Player_CheckHandleClimbUp:</a><span class="ce">; [$e301]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
@@ -13093,7 +13263,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenAbove">Area_ScreenAbove</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$c0</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
@@ -13115,9 +13285,6 @@ and address bytes and all the data bytes.</span></span>
 ;
 ; OUTPUTS:
 ;     TODO
-;
-; XREFS:
-;     <a href="#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a>
 ;============================================================================
 </div><span class="l"><a name="Player_CheckHandleClimbDown" href="#Player_CheckHandleClimbDown" class="la">Player_CheckHandleClimbDown:</a><span class="ce">; [$e349]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
@@ -13169,7 +13336,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenBelow">Area_ScreenBelow</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
@@ -13212,10 +13379,10 @@ and address bytes and all the data bytes.</span></span>
 ;
 ; XREFS:
 ;     <a href="#Player_CheckHandleClimb">Player_CheckHandleClimb</a>
-;     <a href="#Player_CheckHandleClimb_e2f4">Player_CheckHandleClimb_e2f4</a>
+;     <a href="#SUB_PRG15_MIRROR__e2fe">SUB_PRG15_MIRROR__e2fe</a> [$PRG15_MIRROR::e2fe]
 ;============================================================================
 </div><span class="l"><a name="Player_CheckHandleClimbMaybeSide" href="#Player_CheckHandleClimbMaybeSide" class="la">Player_CheckHandleClimbMaybeSide:</a><span class="ce">; [$e399]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$20</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3a5">@LAB_PRG15_MIRROR__e3a5</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
@@ -13226,27 +13393,27 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3ad">@LAB_PRG15_MIRROR__e3ad</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_ClearUnknown2AndContinue">Player_ClearUnknown2AndContinue</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_StayOnLadderAndContinue">Player_StayOnLadderAndContinue</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e3ad" href="#@LAB_PRG15_MIRROR__e3ad" class="lla">@LAB_PRG15_MIRROR__e3ad:</a><span class="ce">; [$e3ad]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3b7">@LAB_PRG15_MIRROR__e3b7</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_ClearUnknown2AndContinue">Player_ClearUnknown2AndContinue</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_StayOnLadderAndContinue">Player_StayOnLadderAndContinue</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e3b7" href="#@LAB_PRG15_MIRROR__e3b7" class="lla">@LAB_PRG15_MIRROR__e3b7:</a><span class="ce">; [$e3b7]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3cd">@LAB_PRG15_MIRROR__e3cd</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#DAT_00b1">DAT_00b1</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Maybe_ClimbLadderOffset">Maybe_ClimbLadderOffset</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$08</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3c9">@LAB_PRG15_MIRROR__e3c9</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#DAT_00b1">DAT_00b1</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a></span></span></span>
+<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Maybe_ClimbLadderOffset">Maybe_ClimbLadderOffset</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e3c9" href="#@LAB_PRG15_MIRROR__e3c9" class="lla">@LAB_PRG15_MIRROR__e3c9:</a><span class="ce">; [$e3c9]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#DAT_00b1">DAT_00b1</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_ClimbLadderOffset">Maybe_ClimbLadderOffset</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e3cd" href="#@LAB_PRG15_MIRROR__e3cd" class="lla">@LAB_PRG15_MIRROR__e3cd:</a><span class="ce">; [$e3cd]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span></span>
@@ -13258,7 +13425,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$08</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_ClearUnknown2AndContinue">Player_ClearUnknown2AndContinue</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Player_StayOnLadderAndContinue">Player_StayOnLadderAndContinue</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e3f5">@LAB_PRG15_MIRROR__e3f5</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Joy1_ButtonMask">Joy1_ButtonMask</a></span></span></span>
@@ -13283,7 +13450,7 @@ and address bytes and all the data bytes.</span></span>
 ; TODO: Document Maybe_MoveDownOneScreen
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -13305,7 +13472,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenBelow">Area_ScreenBelow</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
@@ -13330,7 +13497,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_ClearJumpingAndUnknown1
+; TODO: Document Player_ClearJumpingAndHoldingToClimb
 ;
 ; INPUTS:
 ;     None.
@@ -13339,23 +13506,23 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;============================================================================
-</div><span class="l"><a name="Player_ClearJumpingAndUnknown1" href="#Player_ClearJumpingAndUnknown1" class="la">Player_ClearJumpingAndUnknown1:</a><span class="ce">; [$e433]</span></span>
+</div><span class="l"><a name="Player_ClearJumpingAndHoldingToClimb" href="#Player_ClearJumpingAndHoldingToClimb" class="la">Player_ClearJumpingAndHoldingToClimb:</a><span class="ce">; [$e433]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$fc</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
 </div><span class="l"><a name="RETURN_E439" href="#RETURN_E439" class="la">RETURN_E439:</a><span class="ce">; [$e439]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_ClearUnknown2AndContinue
+; TODO: Document Player_StayOnLadderAndContinue
 ;
 ; INPUTS:
 ;     None.
@@ -13366,12 +13533,12 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
 ;============================================================================
-</div><span class="l"><a name="Player_ClearUnknown2AndContinue" href="#Player_ClearUnknown2AndContinue" class="la">Player_ClearUnknown2AndContinue:</a><span class="ce">; [$e43a]</span></span>
+</div><span class="l"><a name="Player_StayOnLadderAndContinue" href="#Player_StayOnLadderAndContinue" class="la">Player_StayOnLadderAndContinue:</a><span class="ce">; [$e43a]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$fb</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#DAT_00b1">DAT_00b1</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_ClimbLadderOffset">Maybe_ClimbLadderOffset</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; v-- Fall through --v
@@ -13379,7 +13546,7 @@ and address bytes and all the data bytes.</span></span>
 </div></pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Player_ContinueHandleJump
+; TODO: Document Player_ContinueHandleClimbOrJump
 ;
 ; INPUTS:
 ;     None.
@@ -13390,12 +13557,12 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
 ;============================================================================
-</div><span class="l"><a name="Player_ContinueHandleJump" href="#Player_ContinueHandleJump" class="la">Player_ContinueHandleJump:</a><span class="ce">; [$e444]</span></span>
+</div><span class="l"><a name="Player_ContinueHandleClimbOrJump" href="#Player_ContinueHandleClimbOrJump" class="la">Player_ContinueHandleClimbOrJump:</a><span class="ce">; [$e444]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e463">@LAB_PRG15_MIRROR__e463</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Joy1_ChangedButtonMask">Joy1_ChangedButtonMask</a></span></span></span>
-<span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#Player_ClearJumpingAndUnknown1">Player_ClearJumpingAndUnknown1</a></span></span></span>
+<span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#Player_ClearJumpingAndHoldingToClimb">Player_ClearJumpingAndHoldingToClimb</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_IsCastMagicBlocked">Player_IsCastMagicBlocked</a></span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#RETURN_E439">RETURN_E439</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$02</span></span></span>
@@ -13405,10 +13572,10 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e463" href="#@LAB_PRG15_MIRROR__e463" class="lla">@LAB_PRG15_MIRROR__e463:</a><span class="ce">; [$e463]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"><span><span class="i">CPX</span> <span class="o">#$10</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e46b">@LAB_PRG15_MIRROR__e46b</a></span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e4a2">@LAB_PRG15_MIRROR__e4a2</a></span></span></span>
@@ -13429,7 +13596,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$02</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Area_Something_IncDAT00a6">Area_Something_IncDAT00a6</a></span></span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
@@ -13443,7 +13610,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e49a" href="#@LAB_PRG15_MIRROR__e49a" class="lla">@LAB_PRG15_MIRROR__e49a:</a><span class="ce">; [$e49a]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Area_Something_IncDAT00a6">Area_Something_IncDAT00a6</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__e4a2" href="#@LAB_PRG15_MIRROR__e4a2" class="lla">@LAB_PRG15_MIRROR__e4a2:</a><span class="ce">; [$e4a2]</span></span>
@@ -13457,16 +13624,16 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
 </div><span class="l"><a name="Area_Something_IncDAT00a6" href="#Area_Something_IncDAT00a6" class="la">Area_Something_IncDAT00a6:</a><span class="ce">; [$e4b1]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"><span><span class="i">INX</span></span></span>
-<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#DAT_00a6">DAT_00a6</a></span></span></span>
+<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#BYTE_00a6">BYTE_00a6</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
 </div><span class="l"><a name="RETURN_E4B6" href="#RETURN_E4B6" class="la">RETURN_E4B6:</a><span class="ce">; [$e4b6]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
@@ -13482,13 +13649,13 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;============================================================================
 </div><span class="l"><a name="Area_ScrollScreenUp" href="#Area_ScrollScreenUp" class="la">Area_ScrollScreenUp:</a><span class="ce">; [$e4b7]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_ScreenAbove">Area_ScreenAbove</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e8e9">FUN_PRG15_MIRROR__e8e9</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$c0</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
@@ -13518,13 +13685,41 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__e4d6" href="#DAT_PRG15_MIRROR__e4d6" class="la">DAT_PRG15_MIRROR__e4d6:</a><span class="ce">; [$e4d6]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$08</span></span><span class="ce">; [$e4d6] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">04 04 04 04 02 02 01 01 01 01 00 00 00 00 00 00</span></span><span class="ce">; [$e4d8] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">00 00 00 00 01 01 01 01 02 02 04 04 04 04 08</span></span><span class="ce">; [$e4e7] undefined</span></span>
+</div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__e4d6" href="#BYTE_ARRAY_PRG15_MIRROR__e4d6" class="la">BYTE_ARRAY_PRG15_MIRROR__e4d6:</a><span class="ce">; [$e4d6]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$08</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [5]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [6]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [7]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [9]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [10]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [11]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [12]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [13]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [14]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [15]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [16]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [17]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [18]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [19]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [20]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [21]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [22]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [23]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [24]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [25]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [26]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [27]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [28]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [29]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; [30]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$08</span></span><span class="ce">; [31]:</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -13911,7 +14106,7 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Maybe_MoveDownOneScreen">Maybe_MoveDownOneScreen</a>
 ;     <a href="#Player_CheckHandleClimbUp">Player_CheckHandleClimbUp</a>
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;     <a href="#Player_MoveDownScreen">Player_MoveDownScreen</a>
 ;     <a href="#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
@@ -13970,7 +14165,7 @@ and address bytes and all the data bytes.</span></span>
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     <a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
@@ -14031,7 +14226,7 @@ and address bytes and all the data bytes.</span></span>
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     <a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
@@ -14077,14 +14272,14 @@ and address bytes and all the data bytes.</span></span>
 ;     X
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     <a href="#Maybe_MoveDownOneScreen">Maybe_MoveDownOneScreen</a>
 ;     <a href="#Player_CheckHandleClimbDown">Player_CheckHandleClimbDown</a>
 ;     <a href="#Player_CheckHandleClimbMaybeSide">Player_CheckHandleClimbMaybeSide</a>
 ;     <a href="#Player_CheckHandleClimbUp">Player_CheckHandleClimbUp</a>
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;     <a href="#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
 ;============================================================================
@@ -14168,7 +14363,7 @@ and address bytes and all the data bytes.</span></span>
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     Z
 ;
 ; XREFS:
 ;     <a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a>
@@ -14946,7 +15141,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__e8e9
+; TODO: Document Area_BeginScrollToNextRoom
 ;
 ; INPUTS:
 ;     X
@@ -14962,7 +15157,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_TryMoveLeft">Player_TryMoveLeft</a>
 ;     <a href="#Player_TryMoveRight">Player_TryMoveRight</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__e8e9" href="#FUN_PRG15_MIRROR__e8e9" class="la">FUN_PRG15_MIRROR__e8e9:</a><span class="ce">; [$e8e9]</span></span>
+</div><span class="l"><a name="Area_BeginScrollToNextRoom" href="#Area_BeginScrollToNextRoom" class="la">Area_BeginScrollToNextRoom:</a><span class="ce">; [$e8e9]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentScreen_SpecialEventID">CurrentScreen_SpecialEventID</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$7f</span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$01</span></span></span>
@@ -16026,7 +16221,7 @@ and address bytes and all the data bytes.</span></span>
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosX_Full">PlayerPosX_Full</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosX">Maybe_Arg_CurrentSprite_PosX</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_MaybeUseless_ScrollXCounter">Screen_MaybeUseless_ScrollXCounter</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#MaybeUnused_Something_ScrollPosX">MaybeUnused_Something_ScrollPosX</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span></span>
@@ -16303,7 +16498,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="#FUN_PRG15_MIRROR__ecac">FUN_PRG15_MIRROR__ecac</a>
 ;     <a href="#Player_CheckHandleAttack">Player_CheckHandleAttack</a>
-;     <a href="#Player_ContinueHandleJump">Player_ContinueHandleJump</a>
+;     <a href="#Player_ContinueHandleClimbOrJump">Player_ContinueHandleClimbOrJump</a>
 ;============================================================================
 </div><span class="l"><a name="Player_IsCastMagicBlocked" href="#Player_IsCastMagicBlocked" class="la">Player_IsCastMagicBlocked:</a><span class="ce">; [$ecf6]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_Flags">Player_Flags</a></span></span></span>
@@ -17938,14 +18133,14 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">EOR</span> <span class="o">#$20</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#BYTE_0025">BYTE_0025</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$20</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__f23c">@LAB_PRG15_MIRROR__f23c</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#BYTE_0025">BYTE_0025</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#BYTE_0025">BYTE_0025</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$20</span></span></span>
-<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__f23c">@LAB_PRG15_MIRROR__f23c</a></span></span></span>
+<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Sprites_ResetAtFrame">Something_Sprites_ResetAtFrame</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__f23c" href="#@LAB_PRG15_MIRROR__f23c" class="lla">@LAB_PRG15_MIRROR__f23c:</a><span class="ce">; [$f23c]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$f23c]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -18765,7 +18960,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ;     <a href="RAM.html#Maybe_MessageCharPos">Maybe_MessageCharPos</a>:
 ;         The incremented position.
 ;
-;     #$0212:
+;     <a href="RAM.html#TextBox_PlayTextSound">TextBox_PlayTextSound</a>:
 ;         Set to 1.
 ;
 ; CALLS:
@@ -18796,7 +18991,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ;
 </div><span class="l"><span><span class="i">INC</span> <span class="o">a:<a href="RAM.html#Maybe_MessageCharPos">Maybe_MessageCharPos</a></span></span><span class="ce">; Increment the next character position.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span><span class="ce">; A = 1</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#BYTE_0212">BYTE_0212</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TextBox_PlayTextSound">TextBox_PlayTextSound</a></span></span><span class="ce">; Store it.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_TextBox_ShowCurrentMessageID">Maybe_TextBox_ShowCurrentMessageID</a></span></span><span class="ce">; Show this character in the message.</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -18830,7 +19025,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 </div><span class="l"><span><span class="i">LDX</span> <span class="o">#$0d</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#BYTE_0212">BYTE_0212</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TextBox_PlayTextSound">TextBox_PlayTextSound</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#TextBox_Something_ShowMessage_f4a2">TextBox_Something_ShowMessage_f4a2</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -18960,7 +19155,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ;     <a href="#TextBox_Something_ShowMessage_f4a2">TextBox_Something_ShowMessage_f4a2</a>
 ;============================================================================
 </div><span class="l"><a name="TextBox_ShowMessageWithSound" href="#TextBox_ShowMessageWithSound" class="la">TextBox_ShowMessageWithSound:</a><span class="ce">; [$f4f3]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#BYTE_0212">BYTE_0212</a></span></span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#TextBox_PlayTextSound">TextBox_PlayTextSound</a></span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#TextBox_ShowMessage">TextBox_ShowMessage</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -19790,7 +19985,7 @@ stack (now 16).</span></span>
 ;     <a href="PRG12.html#Maybe_DrawItemTitle">Maybe_DrawItemTitle</a>
 ;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
+;     <a href="#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;============================================================================
 </div><span class="l"><a name="Math_MultiplyBy8" href="#Math_MultiplyBy8" class="la">Math_MultiplyBy8:</a><span class="ce">; [$f78c]</span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; Shift left 4.</span></span>
@@ -19801,7 +19996,7 @@ stack (now 16).</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f791
+; TODO: Document TextBox_Maybe_GetPaletteBehindTextbox
 ;
 ; INPUTS:
 ;     Y
@@ -19810,9 +20005,9 @@ stack (now 16).</span></span>
 ;     A
 ;
 ; XREFS:
-;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8FF6">Maybe_Draw_Textbox_Something8FF6</a>
+;     <a href="PRG12.html#TextBox_Maybe_GetPalette">TextBox_Maybe_GetPalette</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__f791" href="#FUN_PRG15_MIRROR__f791" class="la">FUN_PRG15_MIRROR__f791:</a><span class="ce">; [$f791]</span></span>
+</div><span class="l"><a name="TextBox_Maybe_GetPaletteBehindTextbox" href="#TextBox_Maybe_GetPaletteBehindTextbox" class="la">TextBox_Maybe_GetPaletteBehindTextbox:</a><span class="ce">; [$f791]</span></span>
 <span class="l"><span><span class="i">TYA</span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">TXA</span></span></span>
@@ -19885,7 +20080,7 @@ stack (now 16).</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__f791">FUN_PRG15_MIRROR__f791</a>
+;     <a href="#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;
 </div><span class="l"><a name="SUB_PRG15_MIRROR__f7f6" href="#SUB_PRG15_MIRROR__f7f6" class="la">SUB_PRG15_MIRROR__f7f6:</a><span class="ce">; [$f7f6]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Int24">Temp_Int24</a></span></span></span>
