@@ -8,28 +8,28 @@ BASE $8000
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee15
+;     Maybe_Player_LoadArmorSprite
 ;
 DAT_PRG8__8000:                             ; [$8000]
     db $12                                  ; [$8000] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee15
+;     Maybe_Player_LoadArmorSprite
 ;
 DAT_PRG8__8001:                             ; [$8001]
     db $00                                  ; [$8001] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee3f
+;     Maybe_Player_LoadWeaponSprite
 ;
 DAT_PRG8__8002:                             ; [$8002]
     db $6b                                  ; [$8002] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee3f
+;     Maybe_Player_LoadWeaponSprite
 ;
 DAT_PRG8__8003:                             ; [$8003]
     db $01                                  ; [$8003] undefined
@@ -92,14 +92,14 @@ DAT_PRG8__800b:                             ; [$800b]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee69
+;     Maybe_Player_LoadShieldSprite
 ;
 DAT_PRG8__800c:                             ; [$800c]
     db $8c                                  ; [$800c] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee69
+;     Maybe_Player_LoadShieldSprite
 ;
 DAT_PRG8__800d:                             ; [$800d]
     db $01                                  ; [$800d] undefined

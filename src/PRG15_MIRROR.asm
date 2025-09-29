@@ -119,13 +119,13 @@ HUD_ATTRIBUTE_DATA_BY_INDEX:                ; [$c01b]
 ;============================================================================
 FUN_PRG15_MIRROR__c033:                     ; [$c033]
     LDY #$00
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA PPU_TargetAddr
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA PPU_TargetAddr.U
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     PHA
     JSR PPUBuffer_QueueCommandOrLength
     PLA
@@ -133,7 +133,7 @@ FUN_PRG15_MIRROR__c033:                     ; [$c033]
     LDY #$03
 
   @LAB_PRG15_MIRROR__c04a:                  ; [$c04a]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA PPUBuffer,X
     INX
     INY
@@ -588,7 +588,7 @@ GameLoop_ClearSprites:                      ; [$c130]
 ;         there is none).
 ;
 ;     Screen_ExtraInfoAddr:
-;     Temp_Addr:
+;     Temp_Addr_L:
 ;         Used internally and clobbered.
 ;
 ; CALLS:
@@ -612,17 +612,17 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
     TAY                                     ; Y = A
     LDA #$8210,Y                            ; Load the upper byte of the
                                             ; address.
-    STA Temp_Addr                           ; Store for reading.
+    STA Temp_Addr_L                         ; Store for reading.
     LDA #$8211,Y                            ; Load the lower byte of thea
                                             ; ddress.
-    STA Temp_Addr.U                         ; Store it.
+    STA Temp_Addr_U                         ; Store it.
 
     ;
     ; Check the first byte of the address. If 0xFF,
     ; nothing will be loaded.
     ;
     LDY #$01                                ; Y = 1
-    LDA (Temp_Addr),Y                       ; Load the address for the
+    LDA (Temp_Addr_L),Y                     ; Load the address for the
                                             ; screens list.
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_C1B3                         ; If so, there's nothing to load.
@@ -640,13 +640,13 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
     ;
     ; Read the address for the screen information.
     ;
-    LDA (Temp_Addr),Y                       ; Load the lower byte of the
+    LDA (Temp_Addr_L),Y                     ; Load the lower byte of the
                                             ; screen address.
     STA Sprites_ReadInfoAddr                ; Store it as the lower byte of
                                             ; the of the sprites read
                                             ; address.
     INY                                     ; Y++
-    LDA (Temp_Addr),Y                       ; Load the upper byte.
+    LDA (Temp_Addr_L),Y                     ; Load the upper byte.
     STA Sprites_ReadInfoAddr.U              ; And store it.
 
     ;
@@ -1395,11 +1395,11 @@ CastMagic_Maybe_FinishHandler:              ; [$c2e9]
     LDA a:CastMagic_XPos_Full
     STA Maybe_Arg_CurrentSprite_PosX
     LDA Screen_Maybe_ScrollXCounter
-    STA MaybeUnused_Something_ScrollPosX
+    STA Unused_Sprite_ScrollPosX
     LDA a:CastMagic_YPos_Full
     STA Maybe_Arg_CurrentSprite_PosY
     LDA Player_Something_ScrollPosY
-    STA MaybeUnused_Something_ScrollPosY
+    STA Unused_Sprite_ScrollPosY
     LDA a:CastMagic_Type
     ASL A
     TAY
@@ -4501,7 +4501,7 @@ OnInterrupt__noProcessInterrupts:           ; [$c989]
 ;         A counter indicating if interrupt handlers have
 ;         been paused (range 0..2).
 ;
-;     Game_FrameToggle:
+;     Game_InterruptsHandledLatch:
 ;         The current frame toggle. Game state interrupt
 ;         handlers will only be run if 0.
 ;
@@ -4515,7 +4515,7 @@ OnInterrupt__noProcessInterrupts:           ; [$c989]
 ;     PPUMASK:
 ;         May be cleared.
 ;
-;     Game_FrameToggle:
+;     Game_InterruptsHandledLatch:
 ;         May be set to 1 to skip the next frame.
 ;
 ;     InterruptCounter:
@@ -4559,7 +4559,7 @@ OnInterrupt:                                ; [$c999]
     ;
     ; Interrupts may be run. See if it's time to run them.
     ;
-    LDA Game_FrameToggle                    ; Check if we're on a frame where
+    LDA Game_InterruptsHandledLatch         ; Check if we're on a frame where
                                             ; we should run interrupts.
     BNE OnInterrupt__updatePPUOAMAndAudio   ; Jump to update the PPU, OAM,
                                             ; and Audio.
@@ -4567,7 +4567,7 @@ OnInterrupt:                                ; [$c999]
     ;
     ; Ready to handle routine operations.
     ;
-    INC Game_FrameToggle                    ; Flip the toggle.
+    INC Game_InterruptsHandledLatch         ; Flip the toggle.
 
     ;
     ; Reset the OAM.
@@ -4642,7 +4642,7 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
     JSR PPUBuffer_Draw
     LDA ScreenColorMode
     STA a:PPUMASK
-    LDA PPU_Something_DontUpdate
+    LDA PPU_Something_PauseUpdates
     BMI @LAB_PRG15_MIRROR__ca11
     LDA PPU_ForceLowerPatternTables
     BEQ @_clearNametable2400
@@ -4704,7 +4704,7 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ; the frame change occurs.
 ;
 ; INPUTS:
-;     Game_FrameToggle:
+;     Game_InterruptsHandledLatch:
 ;         The frame toggle flag.
 ;
 ; OUTPUTS:
@@ -4737,10 +4737,10 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ;============================================================================
 WaitForNextFrame:                           ; [$ca25]
     LDA #$00                                ; A = 0
-    STA Game_FrameToggle                    ; Set as the frame toggle state.
+    STA Game_InterruptsHandledLatch         ; Set as the frame toggle state.
 
   @_loop:                                   ; [$ca29]
-    LDA Game_FrameToggle                    ; Load the frame toggle state
+    LDA Game_InterruptsHandledLatch         ; Load the frame toggle state
                                             ; from the interrupt handler.
     BEQ @_loop                              ; If it's 0, loop.
     RTS                                     ; Else, return.
@@ -4910,7 +4910,7 @@ Game_InitScreenAndMusic:                    ; [$ca78]
     LDA #$00
     STA ScrollHelp_Pixel
     STA ScrollHelp_Screen
-    STA BYTE_0057
+    STA Something_ScrollIndex
     LDA #$1e
     STA ScreenColorMode
     JSR Something_FrameAltToggleWithPausePPU
@@ -4932,7 +4932,7 @@ Game_InitScreenAndMusic:                    ; [$ca78]
     TAX
     JSR MMC1_UpdatePRGBank
     LDA #$00
-    STA Game_FrameToggle
+    STA Game_InterruptsHandledLatch
     STA a:PauseFlag
     STA PPU_ForceLowerPatternTables
     JMP PPU_InitVBlank
@@ -4975,7 +4975,7 @@ PPU_SetAddr:                                ; [$cab5]
 ;============================================================================
 PPU_InitAttributeAndNameTables:             ; [$cabc]
     LDA #$20
-    STA XXX_PPU_NAMETABLE0_VALUE
+    STA Temp_PPU_NametableValue
 
     ;
     ; Set address 0x2000: Name table 0.
@@ -4987,7 +4987,7 @@ PPU_InitAttributeAndNameTables:             ; [$cabc]
     JSR PPU_SetAddr
     LDY #$08
     LDX #$00
-    LDA XXX_PPU_NAMETABLE0_VALUE
+    LDA Temp_PPU_NametableValue
     JSR PPU_FillGrid
 
     ;
@@ -5124,9 +5124,16 @@ PPU_WaitUntilFlushed:                       ; [$caf7]
     BCC @_waitForInterruptLoop              ; If not, loop.
     RTS
 
-  @LAB_PRG15_MIRROR__cb0c:                  ; [$cb0c]
+
+;============================================================================
+; DEADCODE
+;
+; XREFS:
+;     DEADCODE_FUN_PRG15_MIRROR__cb0c
+;============================================================================
+DEADCODE_FUN_PRG15_MIRROR__cb0c:            ; [$cb0c]
     LDA a:PPUSTATUS
-    BMI @LAB_PRG15_MIRROR__cb0c
+    BMI DEADCODE_FUN_PRG15_MIRROR__cb0c
 
   @LAB_PRG15_MIRROR__cb11:                  ; [$cb11]
     LDA a:PPUSTATUS
@@ -5237,7 +5244,7 @@ PPU_InitVBlank:                             ; [$cb2f]
 ;============================================================================
 FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
     LDA #$01
-    STA PPU_Something_DontUpdate
+    STA PPU_Something_PauseUpdates
     STA PPU_ForceLowerPatternTables
     BNE Something_FrameAltToggle
 
@@ -5269,7 +5276,7 @@ FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
 ;============================================================================
 GameLoop_Maybe_SetupDrawState:              ; [$cb47]
     LDA #$00
-    STA PPU_Something_DontUpdate
+    STA PPU_Something_PauseUpdates
     STA PPU_ForceLowerPatternTables
     BEQ Something_FrameAltToggle
 
@@ -5297,7 +5304,7 @@ GameLoop_Maybe_SetupDrawState:              ; [$cb47]
 ;============================================================================
 Something_FrameAltToggleWithPausePPU:       ; [$cb4f]
     LDA #$ff                                ; A = 0xFF
-    STA PPU_Something_DontUpdate            ; Store it.
+    STA PPU_Something_PauseUpdates          ; Store it.
 
     ;
     ; v-- Fall through --v
@@ -5332,7 +5339,7 @@ Something_FrameAltToggle:                   ; [$cb53]
     STY Something_Sprites_ResetAtFrame      ; Something_Sprites_ResetAtFrame
                                             ; = 0
     STY BYTE_0025                           ; BYTE_0025 = 0
-    LDA PPU_Something_DontUpdate            ; Load our byte from before.
+    LDA PPU_Something_PauseUpdates          ; Load our byte from before.
     BMI @LAB_PRG15_MIRROR__cb82             ; If 0xFF, then jump.
     INC BYTE_0025
     TAY                                     ; Y = A
@@ -5576,9 +5583,6 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     CHR_LoadTilesetPages
 ;     EndGame_MainLoop
 ;     FUN_PRG15_MIRROR__ce80
-;     FUN_PRG15_MIRROR__ee15
-;     FUN_PRG15_MIRROR__ee3f
-;     FUN_PRG15_MIRROR__ee69
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
@@ -5600,6 +5604,9 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     MMC1_LoadBankAndJump
 ;     MMC1_RestorePrevPRGBank
 ;     MMC1_UpdatePRGBankToStackA
+;     Maybe_Player_LoadArmorSprite
+;     Maybe_Player_LoadShieldSprite
+;     Maybe_Player_LoadWeaponSprite
 ;     Maybe_Screen_Scroll
 ;     Maybe_Screen_Scroll_D2A6
 ;     Messages_Load
@@ -6137,7 +6144,7 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ; the lower byte of the sprite images address.
     ;
     LDA a:ROMBankStart
-    STA Temp_Addr
+    STA Temp_Addr_L
 
     ;
     ; Read the second byte as the upper address, and add 0x80 to it.
@@ -6145,7 +6152,7 @@ LookupSpriteDataPointer:                    ; [$cd78]
     LDA a:#$8001
     CLC
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
 
     ;
     ; Compute the starting index for the sprite based on the
@@ -6169,13 +6176,13 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ASL A                                   ; Convert the sprite ID to a word
                                             ; boundary.
     TAY                                     ; Y = A
-    LDA (Temp_Addr),Y                       ; Get the pointer to the sprite
+    LDA (Temp_Addr_L),Y                     ; Get the pointer to the sprite
                                             ; data from the bank address
                                             ; computed above.
     STA CurrentSprite_Image_L               ; A = Lower byte of the image
                                             ; data address.
     INY
-    LDA (Temp_Addr),Y                       ; A = Upper byte of the address.
+    LDA (Temp_Addr_L),Y                     ; A = Upper byte of the address.
     CLC
     ADC #$80                                ; Add 0x80 to the upper address.
     STA CurrentSprite_Image_U               ; Upper byte of pointer to the
@@ -6413,11 +6420,11 @@ FUN_PRG15_MIRROR__ce80:                     ; [$ce80]
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$8008
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$8009
     CLC
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA #$05
     STA Temp_00
     LDA #$04
@@ -6426,11 +6433,11 @@ FUN_PRG15_MIRROR__ce80:                     ; [$ce80]
     STY a:PPUADDR
 
   @LAB_PRG15_MIRROR__cea4:                  ; [$cea4]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA a:PPUDATA
     INY
     BNE @LAB_PRG15_MIRROR__cea4
-    INC Temp_Addr.U
+    INC Temp_Addr_U
     DEC Temp_00
     BNE @LAB_PRG15_MIRROR__cea4
     PLA
@@ -7638,18 +7645,18 @@ Sound_PlayEffect:                           ; [$d0e4]
 ;============================================================================
 Area_Maybe_ShowRoomTransition:              ; [$d0f6]
     LDA #$00
-    STA BYTE_0047
-    STA DAT_006d
-    STA BYTE_0047
+    STA Something_Blocks_0047
+    STA MaybeUnused_006d
+    STA Something_Blocks_0047
     LDA #$00
-    STA BYTE_0057
+    STA Something_ScrollIndex
     STA ScrollHelp_Pixel
     STA ScrollHelp_Screen
-    STA BYTE_0077
-    STA DAT_0073
-    STA DAT_0074
-    STA DAT_0075
-    STA DAT_0075+1
+    STA Something_0077
+    STA Something_0073
+    STA Something_0074
+    STA Something_0075
+    STA Something_0076
     LDX #$00
     STX ScrollHelp_Pixel
     INX
@@ -7681,30 +7688,30 @@ Area_Maybe_ShowRoomTransition:              ; [$d0f6]
 Area_ScrollToNextRoom:                      ; [$d127]
     STX Screen_ScrollDirection
     LDA ScrollHelp_Screen
-    STA Maybe_Player_DAT_0059
+    STA Something_Player_ScrollX
     LDA ScrollHelp_Pixel
-    STA DAT_0045
+    STA Something_Blocks_0045
     LDA a:CurrentROMBank2
     PHA
     LDX #$03
     JSR MMC1_UpdatePRGBank
     LDA #$00
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA Area_CurrentScreen
     ASL A
-    ROL Temp_Addr.U
+    ROL Temp_Addr_U
     ASL A
-    ROL Temp_Addr.U
+    ROL Temp_Addr_U
     CLC
     ADC CurrentArea_ScrollingDataAddr
-    STA Temp_Addr
-    LDA Temp_Addr.U
+    STA Temp_Addr_L
+    LDA Temp_Addr_U
     ADC ScrollingData_U
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDY #$00
 
   @_loadScrollData:                         ; [$d153]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA Area_ScreenToTheLeft,Y
     INY
     CPY #$04
@@ -7712,7 +7719,7 @@ Area_ScrollToNextRoom:                      ; [$d127]
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
-    LDX CurrentROMBank1
+    LDX CurrentArea_ROMBank
     JSR MMC1_SavePRGBankAndUpdateTo
 
     ;
@@ -7792,20 +7799,20 @@ Area_ScrollToNextRoom:                      ; [$d127]
     LDA #$00
     STA Screen_ScrollPlayerTransitionCounter
     LDA PlayerPosY
-    STA MaybeUnused_PlayerY_ForScroll
+    STA Maybe_PlayerY_ForScroll
     LDA #$d1e7,X
-    STA MaybeUnused_PlayerX_ForScroll
+    STA Maybe_PlayerX_ForScroll
     RTS
 
   @_VerticalScroll:                         ; [$d1d6]
     AND #$01
     TAX
     LDA PlayerPosX_Full
-    STA MaybeUnused_PlayerX_ForScroll
+    STA Maybe_PlayerX_ForScroll
     LDA #$00
     STA Screen_ScrollPlayerTransitionCounter
     LDA #$d1e9,X
-    STA MaybeUnused_PlayerY_ForScroll
+    STA Maybe_PlayerY_ForScroll
     RTS
 
 ;
@@ -8213,21 +8220,21 @@ Screen_BeginScrollAndLoadBlockProperties:   ; [$d29f]
 ;     Maybe_Screen_Scroll
 ;============================================================================
 Maybe_Screen_Scroll_D2A6:                   ; [$d2a6]
-    LDA BYTE_0057
+    LDA Something_ScrollIndex
     BNE @LAB_PRG15_MIRROR__d2ac
     LDA #$d0
 
   @LAB_PRG15_MIRROR__d2ac:                  ; [$d2ac]
     SEC
     SBC #$01
-    STA BYTE_0057
+    STA Something_ScrollIndex
     BNE @LAB_PRG15_MIRROR__d2b8
-    DEC Maybe_Player_DAT_0058
+    DEC Something_Player_ScrollY
     JSR Screen_BeginScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d2b8:                  ; [$d2b8]
-    LDA BYTE_0057
-    STA DAT_0044
+    LDA Something_ScrollIndex
+    STA Something_Blocks_0044
     LDA a:CurrentROMBank2
     PHA
     LDX #$03
@@ -8264,7 +8271,7 @@ FUN_PRG15_MIRROR__d2ce:                     ; [$d2ce]
     RTS
 
   @LAB_PRG15_MIRROR__d2e2:                  ; [$d2e2]
-    LDA BYTE_0057
+    LDA Something_ScrollIndex
     BNE FUN_PRG15_MIRROR__d2ce
 
     ;
@@ -8302,20 +8309,20 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     BEQ Maybe_Screen_Scroll_D2A6
     DEX
     BNE RETURN_D2E6
-    LDA BYTE_0057
+    LDA Something_ScrollIndex
     CLC
     ADC #$01
-    STA BYTE_0057
+    STA Something_ScrollIndex
     CMP #$d0
     BCC @LAB_PRG15_MIRROR__d308
     LDA #$00
-    STA BYTE_0057
-    INC Maybe_Player_DAT_0058
+    STA Something_ScrollIndex
+    INC Something_Player_ScrollY
     JSR Screen_BeginScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d308:                  ; [$d308]
-    LDA BYTE_0057
-    STA DAT_0044
+    LDA Something_ScrollIndex
+    STA Something_Blocks_0044
     LDA a:CurrentROMBank2
     PHA
     LDX #$03
@@ -8332,9 +8339,9 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     ADC #$01
     STA ScrollHelp_Pixel
     PHP
-    LDA Maybe_Player_DAT_0059
+    LDA Something_Player_ScrollX
     ADC #$00
-    STA Maybe_Player_DAT_0059
+    STA Something_Player_ScrollX
     STA ScrollHelp_Screen
     PLP
     BCC @LAB_PRG15_MIRROR__d334
@@ -8342,7 +8349,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
 
   @LAB_PRG15_MIRROR__d334:                  ; [$d334]
     LDA ScrollHelp_Pixel
-    STA DAT_0045
+    STA Something_Blocks_0045
     LDA a:CurrentROMBank2
     PHA
     LDX #$03
@@ -8357,7 +8364,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     ; The screen is not currently scrolling.
     ;
   @_notScrolling:                           ; [$d34a]
-    LDA DAT_0045
+    LDA Something_Blocks_0045
     CMP #$fc
     BCS @LAB_PRG15_MIRROR__d364
     LDA ScrollHelp_Pixel
@@ -8373,13 +8380,13 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     JSR Screen_BeginScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d364:                  ; [$d364]
-    LDA DAT_0045
+    LDA Something_Blocks_0045
     SEC
     SBC #$01
-    STA DAT_0045
-    LDA Maybe_Player_DAT_0059
+    STA Something_Blocks_0045
+    LDA Something_Player_ScrollX
     SBC #$00
-    STA Maybe_Player_DAT_0059
+    STA Something_Player_ScrollX
     CMP ScrollHelp_Screen
     BNE @LAB_PRG15_MIRROR__d37c
     LDA ScrollHelp_Pixel
@@ -8413,7 +8420,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
 ;     FUN_PRG15_MIRROR__d3a6
 ;============================================================================
 FUN_PRG15_MIRROR__d38e:                     ; [$d38e]
-    INC DAT_006e
+    INC Something_Blocks_Counter_006E
     JMP Maybe_Area_LoadBlocks
 
 
@@ -8431,8 +8438,8 @@ FUN_PRG15_MIRROR__d38e:                     ; [$d38e]
 ;============================================================================
 FUN_PRG15_MIRROR__d393:                     ; [$d393]
     LDX #$00
-    STX DAT_006e
-    LDA DAT_0044
+    STX Something_Blocks_Counter_006E
+    LDA Something_Blocks_0044
     AND #$0f
     CMP #$07
     BEQ FUN_PRG15_MIRROR__d38e
@@ -8456,9 +8463,9 @@ FUN_PRG15_MIRROR__d393:                     ; [$d393]
 ;============================================================================
 FUN_PRG15_MIRROR__d3a6:                     ; [$d3a6]
     LDX #$00
-    STX DAT_006e
+    STX Something_Blocks_Counter_006E
     INX
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     AND #$0f
     CMP #$08
     BEQ FUN_PRG15_MIRROR__d38e
@@ -8483,26 +8490,26 @@ FUN_PRG15_MIRROR__d3a6:                     ; [$d3a6]
 ;     FUN_PRG15_MIRROR__d3a6
 ;============================================================================
 Maybe_Area_LoadBlocks:                      ; [$d3ba]
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     CLC
     ADC #$d4cb,X
     STA Temp_00
-    LDA Maybe_Player_DAT_0058
+    LDA Something_Player_ScrollY
     ADC #$00
-    STA BYTE_0049
+    STA Unused_Blocks_0049
     LDA Area_CurrentScreen
-    STA DAT_006d
+    STA MaybeUnused_006d
     LDA Temp_00
     AND #$f0
-    STA BYTE_0048
+    STA Temp_Blocks_0048
     LDA #$00
     CLC
-    ADC BYTE_0048
+    ADC Temp_Blocks_0048
     STA Temp_08
     LDA #$06
     ADC #$00
     STA Temp_09
-    LDA DAT_006e
+    LDA Something_Blocks_Counter_006E
     BEQ @LAB_PRG15_MIRROR__d3e6
     JMP @LAB_PRG15_MIRROR__d445
 
@@ -8522,7 +8529,7 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     STA CurrentArea_BlockData3CurAddr
     LDA (CurrentArea_BlockData4StartAddr),Y
     STA CurrentArea_BlockData4CurAddr
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     AND #$08
     LSR A
     LSR A
@@ -8538,32 +8545,32 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     CPY #$10
     BCC @LAB_PRG15_MIRROR__d3ea
     LDA #$00
-    STA BYTE_004f
-    LDA DAT_0044
+    STA Something_ShopItem_PPUAddr_U
+    LDA Something_Blocks_0044
     AND #$f8
     ASL A
-    ROL BYTE_004f
+    ROL Something_ShopItem_PPUAddr_U
     ASL A
-    ROL BYTE_004f
+    ROL Something_ShopItem_PPUAddr_U
     CLC
     ADC #$80
-    STA BYTE_004e
-    LDA BYTE_004f
+    STA Something_ShopItem_PPUAddr_L
+    LDA Something_ShopItem_PPUAddr_U
     ADC #$00
-    STA BYTE_004f
-    LDA Maybe_Player_DAT_0059
+    STA Something_ShopItem_PPUAddr_U
+    LDA Something_Player_ScrollX
     AND #$01
     ASL A
     ASL A
     ORA #$20
-    ORA BYTE_004f
-    STA BYTE_004f
+    ORA Something_ShopItem_PPUAddr_U
+    STA Something_ShopItem_PPUAddr_U
     LDA #$01
-    STA DAT_0073
+    STA Something_0073
     RTS
 
   @LAB_PRG15_MIRROR__d445:                  ; [$d445]
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     AND #$16
     LSR A
     LSR A
@@ -8601,14 +8608,14 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     CPY #$10
     BCC @LAB_PRG15_MIRROR__d458
     LDX #$f0
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     AND #$10
     BEQ @LAB_PRG15_MIRROR__d48a
     LDX #$0f
 
   @LAB_PRG15_MIRROR__d48a:                  ; [$d48a]
     STX Temp_06
-    LDA DAT_0044
+    LDA Something_Blocks_0044
     AND #$e0
     LSR A
     LSR A
@@ -8618,14 +8625,14 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     TAY
     CLC
     ADC #$c0
-    STA DAT_0052
-    LDA Maybe_Player_DAT_0059
+    STA Something_Blocks_PPUAddr2_L
+    LDA Something_Player_ScrollX
     AND #$01
     TAX
     ASL A
     ASL A
     ORA #$23
-    STA DAT_0053
+    STA Something_Blocks_PPUAddr2_U
     LDA #$d4cf,X
     STA Temp_08
     LDA #$d4d1,X
@@ -8643,7 +8650,7 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
     CPX #$08
     BCC @LAB_PRG15_MIRROR__d4b4
     LDA #$01
-    STA DAT_0075
+    STA Something_0075
     RTS
     db $00                                  ; [$d4cb] undefined
 
@@ -8651,10 +8658,8 @@ Maybe_Area_LoadBlocks:                      ; [$d3ba]
 ; XREFS:
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_PRG15_MIRROR__d4cc:                     ; [$d4cc]
-    db $00                                  ; [$d4cc] undefined1
-
-    db $00,$08                              ; [$d4ce] undefined
+BYTE_PRG15_MIRROR__d4cc:                    ; [$d4cc]
+    db $00,$00,$08                          ; [$d4cc] byte
 
 ;
 ; XREFS:
@@ -8702,7 +8707,7 @@ BYTE_ARRAY_PRG15_MIRROR__d4d3:              ; [$d4d3]
 ;     FUN_PRG15_MIRROR__d4f0
 ;============================================================================
 FUN_PRG15_MIRROR__d4d7:                     ; [$d4d7]
-    INC DAT_006e
+    INC Something_Blocks_Counter_006E
     JMP FUN_PRG15_MIRROR__d503
 
 
@@ -8720,9 +8725,9 @@ FUN_PRG15_MIRROR__d4d7:                     ; [$d4d7]
 ;============================================================================
 FUN_PRG15_MIRROR__d4dc:                     ; [$d4dc]
     LDX #$00
-    STX DAT_006e
+    STX Something_Blocks_Counter_006E
     INX
-    LDA DAT_0045
+    LDA Something_Blocks_0045
     AND #$0f
     CMP #$02
     BEQ FUN_PRG15_MIRROR__d4d7
@@ -8746,8 +8751,8 @@ FUN_PRG15_MIRROR__d4dc:                     ; [$d4dc]
 ;============================================================================
 FUN_PRG15_MIRROR__d4f0:                     ; [$d4f0]
     LDX #$00
-    STX DAT_006e
-    LDA DAT_0045
+    STX Something_Blocks_Counter_006E
+    LDA Something_Blocks_0045
     AND #$0f
     CMP #$0f
     BEQ FUN_PRG15_MIRROR__d4d7
@@ -8772,31 +8777,31 @@ FUN_PRG15_MIRROR__d4f0:                     ; [$d4f0]
 ;     FUN_PRG15_MIRROR__d4f0
 ;============================================================================
 FUN_PRG15_MIRROR__d503:                     ; [$d503]
-    LDA DAT_0045
+    LDA Something_Blocks_0045
     CLC
     ADC #$d619,X
     STA Temp_00
-    LDA Maybe_Player_DAT_0059
+    LDA Something_Player_ScrollX
     ADC #$d61b,X
-    STA BYTE_0047
+    STA Something_Blocks_0047
     LDA Area_CurrentScreen
-    STA DAT_006d
+    STA MaybeUnused_006d
     LDA Temp_00
     LSR A
     LSR A
     LSR A
     LSR A
-    STA DAT_0046
+    STA Something_Blocks_0046
     LDA #$00
     STA Temp_08
     LDA #$06
     STA Temp_09
-    LDA DAT_006e
+    LDA Something_Blocks_Counter_006E
     BNE @LAB_PRG15_MIRROR__d587
     LDX #$00
 
   @LAB_PRG15_MIRROR__d52c:                  ; [$d52c]
-    LDY DAT_0046
+    LDY Something_Blocks_0046
     LDA (Temp_08),Y
     TAY
     LDA (CurrentArea_BlockData1StartAddr),Y
@@ -8807,7 +8812,7 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     STA CurrentArea_BlockData3CurAddr
     LDA (CurrentArea_BlockData4StartAddr),Y
     STA CurrentArea_BlockData4CurAddr
-    LDA DAT_0045
+    LDA Something_Blocks_0045
     AND #$08
     LSR A
     LSR A
@@ -8828,25 +8833,25 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     CPX #$1e
     BCC @LAB_PRG15_MIRROR__d52c
     LDA #$01
-    STA DAT_0074
+    STA Something_0074
     TYA
     LSR A
     PHA
-    LDA DAT_0046
+    LDA Something_Blocks_0046
     ASL A
-    STA DAT_0046
+    STA Something_Blocks_0046
     PLA
     CLC
-    ADC DAT_0046
+    ADC Something_Blocks_0046
     CLC
     ADC #$80
-    STA BYTE_004c
-    LDA BYTE_0047
+    STA Something_Blocks_PPUAddr_L
+    LDA Something_Blocks_0047
     AND #$01
     ASL A
     ASL A
     ORA #$20
-    STA BYTE_004d
+    STA Something_Blocks_PPUAddr_U
     RTS
 
   @LAB_PRG15_MIRROR__d587:                  ; [$d587]
@@ -8860,12 +8865,12 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     LDX #$00
 
   @LAB_PRG15_MIRROR__d593:                  ; [$d593]
-    LDY DAT_0046
+    LDY Something_Blocks_0046
     LDA (Temp_08),Y
     TAY
     LDA (CurrentArea_BlockAttributesAddr),Y
     STA Temp_00
-    LDA DAT_0046
+    LDA Something_Blocks_0046
     AND #$01
     STA Temp_01
     TXA
@@ -8893,28 +8898,28 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     CPX #$0f
     BCC @LAB_PRG15_MIRROR__d593
     LDX #$cc
-    LDA DAT_0046
+    LDA Something_Blocks_0046
     AND #$01
     BEQ @LAB_PRG15_MIRROR__d5d5
     LDX #$33
 
   @LAB_PRG15_MIRROR__d5d5:                  ; [$d5d5]
     STX Temp_06
-    LDA DAT_0046
+    LDA Something_Blocks_0046
     LSR A
     CLC
     ADC #$08
     TAY
     CLC
     ADC #$c0
-    STA BYTE_0050
-    LDA BYTE_0047
+    STA Something_PPUAddr_L
+    LDA Something_Blocks_0047
     AND #$01
     TAX
     ASL A
     ASL A
     ORA #$23
-    STA DAT_0051
+    STA Something_PPUAddr_U
     LDA #$d4cf,X
     STA Temp_08
     LDA #$d4d1,X
@@ -8938,7 +8943,7 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
     CPY #$40
     BCC @LAB_PRG15_MIRROR__d5fa
     LDA #$01
-    STA DAT_0075+1
+    STA Something_0076
     RTS
 
 ;
@@ -8975,10 +8980,10 @@ BYTE_ARRAY_PRG15_MIRROR__d61b:              ; [$d61b]
 FUN_PRG15_MIRROR__d61d:                     ; [$d61d]
     LDA #$03
     STA Temp_06
-    LDX BYTE_0077
+    LDX Something_0077
 
   @LAB_PRG15_MIRROR__d623:                  ; [$d623]
-    LDA #$73,X
+    LDA Something_0073,X
     BNE @LAB_PRG15_MIRROR__d631
     INX
     TXA
@@ -8990,13 +8995,13 @@ FUN_PRG15_MIRROR__d61d:                     ; [$d61d]
 
   @LAB_PRG15_MIRROR__d631:                  ; [$d631]
     LDA #$00
-    STA #$73,X
+    STA Something_0073,X
     STX Temp_06
     INX
     TXA
     AND #$03
     TAX
-    STX BYTE_0077
+    STX Something_0077
     LDA Temp_06
     AND #$03
     TAX
@@ -9044,9 +9049,9 @@ FUN_PRG15_MIRROR__d654:                     ; [$d654]
     LDA SavedPPUCtrl
     AND #$fb
     STA a:PPUCTRL
-    LDA BYTE_004f
+    LDA Something_ShopItem_PPUAddr_U
     STA a:PPUADDR
-    LDA BYTE_004e
+    LDA Something_ShopItem_PPUAddr_L
     STA a:PPUADDR
     LDX #$00
 
@@ -9066,7 +9071,7 @@ FUN_PRG15_MIRROR__d654:                     ; [$d654]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     BYTE_ARRAY_PRG15_MIRROR__d64c
@@ -9076,9 +9081,9 @@ FUN_PRG15_MIRROR__d673:                     ; [$d673]
     LDA SavedPPUCtrl
     ORA #$04
     STA a:PPUCTRL
-    LDA BYTE_004d
+    LDA Something_Blocks_PPUAddr_U
     STA a:PPUADDR
-    LDA BYTE_004c
+    LDA Something_Blocks_PPUAddr_L
     STA a:PPUADDR
     LDX #$00
 
@@ -9108,9 +9113,9 @@ FUN_PRG15_MIRROR__d673:                     ; [$d673]
 ;     [$PRG15_MIRROR::d64e]
 ;============================================================================
 FUN_PRG15_MIRROR__d699:                     ; [$d699]
-    LDA DAT_0053
+    LDA Something_Blocks_PPUAddr2_U
     STA a:PPUADDR
-    LDA DAT_0052
+    LDA Something_Blocks_PPUAddr2_L
     STA a:PPUADDR
     LDX #$00
 
@@ -9140,14 +9145,14 @@ FUN_PRG15_MIRROR__d6b1:                     ; [$d6b1]
     LDX #$00
 
   @LAB_PRG15_MIRROR__d6b3:                  ; [$d6b3]
-    LDA DAT_0051
+    LDA Something_PPUAddr_U
     STA a:PPUADDR
     TXA
     ASL A
     ASL A
     ASL A
     CLC
-    ADC BYTE_0050
+    ADC Something_PPUAddr_L
     STA a:PPUADDR
     LDA Something_PPUData,X
     STA a:PPUDATA
@@ -9554,10 +9559,10 @@ DROP_LADDER_TO_MASCON_LADDER_BLOCK:         ; [$d7af]
 ; TODO: Document FUN_PRG15_MIRROR__d7b0
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     FUN_PRG14__9991
@@ -9765,7 +9770,7 @@ Area_WriteTwoBlocksFromData34ToPPUBuffer:   ; [$d816]
 ; TODO: Document FUN_PRG15_MIRROR__d82d
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -9805,19 +9810,19 @@ FUN_PRG15_MIRROR__d82d:                     ; [$d82d]
     AND #$01
     TAX
     LDA #$d4cf,X
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$d4d1,X
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA #$d6f3,X
     STA a:PPU_TargetAddr.U
     LDY a:PPU_TargetAddr
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     LDX Temp_06
     AND #$d8a8,X
     STA Temp_06
     PLA
     ORA Temp_06
-    STA (Temp_Addr),Y
+    STA (Temp_Addr_L),Y
     PHA
     LDA a:PPU_TargetAddr.U
     ORA #$03
@@ -10098,7 +10103,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ; Clear the sprite loaded state.
     ;
     LDA #$ff
-    STA Maybe_SpritesLoadedState            ; Set loaded state to 0xFF.
+    STA Maybe_ScreenReadyState              ; Set loaded state to 0xFF.
 
     ;
     ; Run IScript 0xFF via jump to IScripts_Begin.
@@ -10321,7 +10326,7 @@ DEATH_ANIMATION_DRAW_ADDR_LOWER:            ; [$da21]
 
 
 ;============================================================================
-; UNUSED: Set palette index to 0xFF.
+; DEADCODE: Set palette index to 0xFF.
 ;============================================================================
 UNUSED_FUN_PRG15_MIRROR__da29:              ; [$da29]
     LDA #$ff
@@ -10474,7 +10479,7 @@ Game_InitStateForSpawn:                     ; [$da7d]
     STA a:PlayerIsDead
     STA PPUBuffer_UpperBounds
     STA PPUBuffer_Offset
-    STA Maybe_SpritesLoadedState
+    STA Maybe_ScreenReadyState
     JSR Player_SetInitialState
     JSR #$ba55
     JSR FUN_PRG15_MIRROR__ce80
@@ -11001,7 +11006,7 @@ RETURN_DC45:                                ; [$dc45]
 ;     CurrentROMBank2:
 ;         The current ROM bank.
 ;
-;     Maybe_SpritesLoadedState:
+;     Maybe_ScreenReadyState:
 ;         The loaded state for the sprites.
 ;
 ;         If 0xFF, this function will immediately return.
@@ -11027,7 +11032,7 @@ RETURN_DC45:                                ; [$dc45]
 ;     Player_UseRedPotion
 ;============================================================================
 Game_DrawScreenInFrozenState:               ; [$dc46]
-    LDA Maybe_SpritesLoadedState            ; Load the loaded state.
+    LDA Maybe_ScreenReadyState              ; Load the loaded state.
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_DC45                         ; If so, then return.
 
@@ -11120,29 +11125,29 @@ Game_LoadAreaTable:                         ; [$dc78]
     ; Set the start of the area's pointer table in
     ; 0x{@address 007C}.
     ;
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$8001
     CLC
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA Area_CurrentArea
     ASL A
     TAY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA CurrentArea_TableAddr
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CLC
     ADC #$80
     STA CurrentArea_TableAddr.U
     LDY #$00
     LDA (CurrentArea_TableAddr),Y
-    STA Temp_Addr
+    STA Temp_Addr_L
     INY
     LDA (CurrentArea_TableAddr),Y
     CLC
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
 
     ;
     ; Store the addresses of the block attributes and 4 groups of
@@ -11152,10 +11157,10 @@ Game_LoadAreaTable:                         ; [$dc78]
     LDX #$05
 
   @LAB_PRG15_MIRROR__dcbf:                  ; [$dcbf]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA CurrentArea_BlockAttributesAddr,Y
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CLC
     ADC #$80
     STA CurrentArea_BlockAttributesAddr,Y
@@ -11246,18 +11251,18 @@ Something_SetupNewScreen:                   ; [$dd13]
     STA Area_CurrentScreen
     JSR Area_Maybe_ShowRoomTransition
     JSR UI_DrawStatusSymbols
-    LDA Area_Palette
+    LDA Screen_Palette
     STA a:Something_Maybe_PaletteIndex
     JSR LoadPalette2
     LDA #$00
-    STA Maybe_Player_DAT_0059
-    STA Maybe_Player_DAT_0058
+    STA Something_Player_ScrollX
+    STA Something_Player_ScrollY
     STA Screen_Maybe_ScrollXCounter
     STA Player_Something_ScrollPosY
-    LDA Area_StartPosXY
+    LDA Screen_StartPosYX
     AND #$f0
     STA PlayerPosY
-    LDA Area_StartPosXY
+    LDA Screen_StartPosYX
     ASL A
     ASL A
     ASL A
@@ -11274,11 +11279,11 @@ Something_SetupNewScreen:                   ; [$dd13]
 ; events), and prepare for rendering.
 ;
 ; INPUTS:
-;     Maybe_SpritesLoadedState:
+;     Maybe_ScreenReadyState:
 ;         The current loaded state.
 ;
 ; OUTPUTS:
-;     Maybe_SpritesLoadedState:
+;     Maybe_ScreenReadyState:
 ;         The new loaded state (0).
 ;
 ; CALLS:
@@ -11320,7 +11325,7 @@ Screen_Load:                                ; [$dd46]
 ;============================================================================
 Screen_SetupSprites:                        ; [$dd4e]
     JSR GameLoop_ClearSprites               ; Clear current sprite data.
-    LDA Maybe_SpritesLoadedState            ; Get the loaded state.
+    LDA Maybe_ScreenReadyState              ; Get the loaded state.
     CMP #$01                                ; Is it 1?
     BEQ @LAB_PRG15_MIRROR__dd5a             ; If not, finish up.
     JSR GameLoop_LoadSpriteInfo             ; Load information for the
@@ -11328,7 +11333,7 @@ Screen_SetupSprites:                        ; [$dd4e]
 
   @LAB_PRG15_MIRROR__dd5a:                  ; [$dd5a]
     LDA #$00
-    STA Maybe_SpritesLoadedState            ; Set loaded state to 0.
+    STA Maybe_ScreenReadyState              ; Set loaded state to 0.
     JMP PPUBuffer_Append0                   ; Append a 0 to the PPU buffer.
 
 
@@ -11379,7 +11384,7 @@ Screen_SetupSprites:                        ; [$dd4e]
 ;     Something_Maybe_NewTilesIndex:
 ;         TODO
 ;
-;     Area_StartPosXY:
+;     Screen_StartPosYX:
 ;         The start position inside the temple.
 ;
 ;     Areas_DefaultMusic:
@@ -11420,11 +11425,11 @@ Game_SpawnInTemple:                         ; [$dd61]
     LDA #$df5c,Y
     STA a:Area_Music_Outside
     LDA #$12
-    STA Area_Palette
+    STA Screen_Palette
     LDA #$06
     STA a:Something_Maybe_NewTilesIndex
     LDA #$9e
-    STA Area_StartPosXY
+    STA Screen_StartPosYX
     LDA #$0e
     STA a:Areas_DefaultMusic
     LDA #$01
@@ -11575,13 +11580,13 @@ START_SCREEN_FOR_TEMPLE_SPAWN:              ; [$ddd5]
 ;     Area_LoadingScreenIndex:
 ;         The new loading screen index.
 ;
-;     Area_Palette:
+;     Screen_Palette:
 ;         The palette for the room.
 ;
 ;     Area_Region:
 ;         The updated region (Eolis).
 ;
-;     Area_StartPosXY:
+;     Screen_StartPosYX:
 ;         The starting X/Y position (X=13, Y=9).
 ;
 ;     Player_Flags:
@@ -11614,14 +11619,14 @@ EndGame_MoveToKingsRoom:                    ; [$dddd]
     ; Move the player to the right of the room.
     ;
     LDA #$9d
-    STA Area_StartPosXY                     ; Set the start position to X=13,
+    STA Screen_StartPosYX                   ; Set the start position to X=13,
                                             ; Y=9.
 
     ;
     ; Load the palette for the King's room.
     ;
     LDA #$11
-    STA Area_Palette                        ; Set the Palette for the King's
+    STA Screen_Palette                      ; Set the Palette for the King's
                                             ; room.
 
     ;
@@ -11684,8 +11689,8 @@ Game_EnterBuilding:                         ; [$de06]
     LDX #$04
     STX Area_CurrentArea
     LDA #$df34,X
-    STA CurrentROMBank1
-    LDX CurrentROMBank1
+    STA CurrentArea_ROMBank
+    LDX CurrentArea_ROMBank
     JSR MMC1_SavePRGBankAndUpdateTo
     LDX Area_CurrentArea
     LDA #$df3c,X
@@ -11722,8 +11727,8 @@ Game_ExitBuilding:                          ; [$de66]
     LDX a:Area_PrevRegion
     STX Area_CurrentArea
     LDA #$df34,X
-    STA CurrentROMBank1
-    LDX CurrentROMBank1
+    STA CurrentArea_ROMBank
+    LDX CurrentArea_ROMBank
     JSR MMC1_SavePRGBankAndUpdateTo
     LDX Area_CurrentArea
     LDA #$df3c,X
@@ -11736,9 +11741,9 @@ Game_ExitBuilding:                          ; [$de66]
     LDA a:Maybe_PrevScreen
     STA Area_LoadingScreenIndex
     LDA a:Prev_Palette
-    STA Area_Palette
+    STA Screen_Palette
     LDA a:Prev_PlayerPosXY
-    STA Area_StartPosXY
+    STA Screen_StartPosYX
     JMP Screen_Load
 
 
@@ -11770,13 +11775,13 @@ Game_ExitBuilding:                          ; [$de66]
 ;     Area_CurrentScreen:
 ;         The current screen.
 ;
-;     Area_Palette:
+;     Screen_Palette:
 ;         The palette for the area.
 ;
 ;     Area_LoadingScreenIndex:
 ;         The current screen index.
 ;
-;     Area_StartPosXY:
+;     Screen_StartPosYX:
 ;         The starting X/Y position.
 ;
 ;     Areas_DefaultMusic:
@@ -11830,8 +11835,8 @@ Game_LoadFirstLevel:                        ; [$dea7]
     ; be loaded temporarily while fetching the block properties.
     ;
     LDA #$df34,X                            ; A = PRG bank for the area.
-    STA CurrentROMBank1                     ; Store as the current bank.
-    LDX CurrentROMBank1                     ; X = current bank.
+    STA CurrentArea_ROMBank                 ; Store as the current bank.
+    LDX CurrentArea_ROMBank                 ; X = current bank.
     JSR MMC1_SavePRGBankAndUpdateTo         ; Push the current bank and
                                             ; update to this area's bank.
 
@@ -11867,7 +11872,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
                                             ; index.
     LDX Area_CurrentArea                    ; X = current area.
     LDA #$df4c,X                            ; Load the palette.
-    STA Area_Palette                        ; And store it as the current one
+    STA Screen_Palette                      ; And store it as the current one
                                             ; for the area.
 
     ;
@@ -11883,7 +11888,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
     ; Set the start X/Y position for the player as X=1, Y=9.
     ;
     LDA #$91
-    STA Area_StartPosXY                     ; Set start position.
+    STA Screen_StartPosYX                   ; Set start position.
     JMP Screen_Load                         ; Load this screen.
 
 
@@ -11910,7 +11915,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
 ;     Area_CurrentScreen:
 ;         The current screen.
 ;
-;     Area_Palette:
+;     Screen_Palette:
 ;         The palette for the area.
 ;
 ;     Areas_DefaultMusic:
@@ -11944,8 +11949,8 @@ Game_LoadCurrentArea:                       ; [$def5]
     ;
     LDX Area_CurrentArea                    ; X = current area.
     LDA #$df34,X                            ; Load the ROM bank for the area.
-    STA CurrentROMBank1                     ; Store that as the current bank.
-    LDX CurrentROMBank1                     ; X = current bank.
+    STA CurrentArea_ROMBank                 ; Store that as the current bank.
+    LDX CurrentArea_ROMBank                 ; X = current bank.
     JSR MMC1_SavePRGBankAndUpdateTo         ; Save the current bank and
                                             ; switch to it.
 
@@ -11981,7 +11986,7 @@ Game_LoadCurrentArea:                       ; [$def5]
     JSR Palette_LoadFromIndex               ; Load palette 0.
     LDX Area_CurrentArea                    ; X = current area.
     LDA #$df4c,X                            ; Load the palette for the area.
-    STA Area_Palette                        ; Store as the current palette.
+    STA Screen_Palette                      ; Store as the current palette.
 
     ;
     ; Load the music for the area.
@@ -12114,8 +12119,8 @@ AREA_TO_MUSIC_TABLE:                        ; [$df5c]
 FUN_PRG15_MIRROR__df64:                     ; [$df64]
     LDX Area_CurrentArea
     LDA #$df34,X
-    STA CurrentROMBank1
-    LDX CurrentROMBank1
+    STA CurrentArea_ROMBank
+    LDX CurrentArea_ROMBank
     JSR MMC1_SavePRGBankAndUpdateTo
     LDX Area_CurrentArea
     LDA #$df3c,X
@@ -12496,21 +12501,12 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     STA Screen_Maybe_ScrollXCounter         ; Store it.
 
     ;
-    ; X-- BEGIN DEADCODE --X
-    ;
-    ; Update MaybeUnused_PlayerX_ForScroll based on the
+    ; Update Maybe_PlayerX_ForScroll based on the
     ; player's X position.
-    ;
-    ; This variable may be part of old code. It does not appear
-    ; to be used in any active code.
     ;
   @_finishScrollLeft:                       ; [$e065]
     LDA PlayerPosX_Full
-    STA MaybeUnused_PlayerX_ForScroll
-
-    ;
-    ; X-- END DEADCODE --X
-    ;
+    STA Maybe_PlayerX_ForScroll
     RTS
 
 
@@ -12558,8 +12554,8 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;         left or right, but is thought to ultimately be
 ;         useless.
 ;
-;     MaybeUnused_PlayerX_ForScroll:
-;     MaybeUnused_PlayerY_ForScroll
+;     Maybe_PlayerX_ForScroll:
+;     Maybe_PlayerY_ForScroll
 ;         Ultimately unused values. Remnants of dead code.
 ;
 ; XREFS:
@@ -12583,48 +12579,29 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     ;
     ; The screen is scrolling to the screen below.
     ;
-    ; X-- BEGIN DEADCODE --X
-    ;
-    ; There's a lot of useless Y scrolling code here that
-    ; doesn't get used by anything else. Seems part of old
-    ; dead logic.
-    ;
     LDA Screen_ScrollPlayerTransitionCounter ; Load the transition counter.
     CMP #$08                                ; Is it < 8?
     BCC @_return1                           ; If so, return.
-    LDA MaybeUnused_PlayerY_ForScroll
+    LDA Maybe_PlayerY_ForScroll
     SEC
     SBC #$04
-    STA MaybeUnused_PlayerY_ForScroll
+    STA Maybe_PlayerY_ForScroll
     SEC
 
-    ;
-    ; X-- END DEADCODE --X
-    ;
   @_return1:                                ; [$e082]
     RTS
 
     ;
     ; The screen is scrolling to the screen above.
     ;
-    ; X-- BEGIN DEADCODE --X
-    ;
-    ; There's a lot of useless Y scrolling code here that
-    ; doesn't get used by anything else. Seems part of old
-    ; dead logic.
-    ;
   @_scrollUp:                               ; [$e083]
     LDA Screen_ScrollPlayerTransitionCounter ; Load the transition counter.
     CMP #$08                                ; Is it < 8?
     BCC @_return2                           ; If so, return.
-    LDA MaybeUnused_PlayerY_ForScroll       ; Load the player Y position.
+    LDA Maybe_PlayerY_ForScroll             ; Load the player Y position.
     CLC
     ADC #$04                                ; Add 4.
-    STA MaybeUnused_PlayerY_ForScroll       ; Store it.
-
-    ;
-    ; X-- END DEADCODE --X
-    ;
+    STA Maybe_PlayerY_ForScroll             ; Store it.
     SEC
 
   @_return2:                                ; [$e091]
@@ -12650,21 +12627,12 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     STA Screen_Maybe_ScrollXCounter         ; Store it.
 
     ;
-    ; X-- BEGIN DEADCODE --X
-    ;
-    ; Update MaybeUnused_PlayerX_ForScroll based on the
+    ; Update Maybe_PlayerX_ForScroll based on the
     ; player's X position.
-    ;
-    ; This variable may be part of old code. It does not appear to
-    ; be used in any active code.
     ;
   @_finishScrollRight:                      ; [$e0a5]
     LDA PlayerPosX_Full
-    STA MaybeUnused_PlayerX_ForScroll
-
-    ;
-    ; X-- END DEADCODE --X
-    ;
+    STA Maybe_PlayerX_ForScroll
     RTS
 
 
@@ -12684,7 +12652,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ;     Player_Something_ScrollPosY:
 ;         TODO
 ;
-;     Maybe_Player_DAT_0059:
+;     Something_Player_ScrollX:
 ;         TODO
 ;
 ;     Player_MoveAcceleration:
@@ -12715,8 +12683,8 @@ Player_SetInitialState:                     ; [$e0aa]
     LDA #$00
     STA Screen_Maybe_ScrollXCounter
     STA Player_Something_ScrollPosY
-    STA Maybe_Player_DAT_0058
-    STA Maybe_Player_DAT_0059
+    STA Something_Player_ScrollY
+    STA Something_Player_ScrollX
 
     ;
     ; Set the starting speed, status, and iframes.
@@ -12725,7 +12693,7 @@ Player_SetInitialState:                     ; [$e0aa]
     STA Player_StatusFlag                   ; Set the player status to 0.
     STA Player_InvincibilityPhase           ; Set the invincibility phase to
                                             ; 0.
-    STA Maybe_Player_DAT_0058
+    STA Something_Player_ScrollY
 
     ;
     ; Face the player to the right.
@@ -12897,7 +12865,7 @@ Player_HandleIFrames:                       ; [$e0e8]
 Player_CheckHandleAttack:                   ; [$e103]
     LDA Player_Flags
     BMI @LAB_PRG15_MIRROR__e132
-    JSR Player_IsCastMagicBlocked
+    JSR Player_IsClimbing
     BCS @LAB_PRG15_MIRROR__e119
     LDA Joy1_ChangedButtonMask
     AND #$40
@@ -13584,7 +13552,7 @@ BYTE_ARRAY_PRG15_MIRROR__e2c4:              ; [$e2c4]
 ;     GameLoop_UpdatePlayer
 ;============================================================================
 Player_CheckHandleClimb:                    ; [$e2c8]
-    LDA Player_StatusFlag
+    LDA Player_StatusFlag                   ; A = Player status flags.
     BPL @LAB_PRG15_MIRROR__e2d6
     LDA Joy1_ButtonMask
     BPL @LAB_PRG15_MIRROR__e2d6
@@ -13595,10 +13563,10 @@ Player_CheckHandleClimb:                    ; [$e2c8]
     JSR Player_CheckIfOnLadder
     LDA Player_Flags
     AND #$08
-    BEQ SUB_PRG15_MIRROR__e2fe
+    BEQ @LAB_PRG15_MIRROR__e2fe
     LDA Joy1_ButtonMask
     AND #$0c
-    BEQ SUB_PRG15_MIRROR__e2fe
+    BEQ @LAB_PRG15_MIRROR__e2fe
     LDA Player_Flags
     ORA #$10
     STA Player_Flags
@@ -13616,11 +13584,7 @@ Player_CheckHandleClimb:                    ; [$e2c8]
     LSR A
     BCS Player_CheckHandleClimbUp
 
-    ;
-    ; XREFS:
-    ;     Player_CheckHandleClimb
-    ;
-SUB_PRG15_MIRROR__e2fe:                     ; [$e2fe]
+  @LAB_PRG15_MIRROR__e2fe:                  ; [$e2fe]
     JMP Player_CheckHandleClimbMaybeSide
 
 
@@ -13632,6 +13596,9 @@ SUB_PRG15_MIRROR__e2fe:                     ; [$e2fe]
 ;
 ; OUTPUTS:
 ;     TODO
+;
+; XREFS:
+;     Player_CheckHandleClimb
 ;============================================================================
 Player_CheckHandleClimbUp:                  ; [$e301]
     LDA Player_Flags
@@ -13688,6 +13655,9 @@ Player_CheckHandleClimbUp:                  ; [$e301]
 ;
 ; OUTPUTS:
 ;     TODO
+;
+; XREFS:
+;     Player_CheckHandleClimb
 ;============================================================================
 Player_CheckHandleClimbDown:                ; [$e349]
     LDA Player_Flags
@@ -13754,20 +13724,22 @@ RETURN_E393:                                ; [$e393]
 
 
 ;============================================================================
-; TODO: Document Player_SetPosAtBottomEdge
+; Set the player at the bottom-most position of the screen.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     PlayerPosY:
+;         The updated player position (set to 0xC0).
 ;
 ; XREFS:
 ;     Player_MoveDownScreen
 ;============================================================================
 Player_SetPosAtBottomEdge:                  ; [$e394]
     LDA #$c0
-    STA PlayerPosY
+    STA PlayerPosY                          ; Set player Y position to 0xC0
+                                            ; (192).
     RTS
 
 
@@ -13782,15 +13754,18 @@ Player_SetPosAtBottomEdge:                  ; [$e394]
 ;
 ; XREFS:
 ;     Player_CheckHandleClimb
-;     SUB_PRG15_MIRROR__e2fe [$PRG15_MIRROR::e2fe]
 ;============================================================================
 Player_CheckHandleClimbMaybeSide:           ; [$e399]
-    LDA BYTE_00a6
+    LDA Something_Player_ClimbLadderCheckPos
     CMP #$20
     BCC @LAB_PRG15_MIRROR__e3a5
-    LDA Player_Flags
-    AND #$fe
-    STA Player_Flags
+
+    ;
+    ; Clear the player's Jumping state.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$fe                                ; Clear the Jumping bit.
+    STA Player_Flags                        ; Save it back.
 
   @LAB_PRG15_MIRROR__e3a5:                  ; [$e3a5]
     LDA Player_Flags
@@ -13937,9 +13912,12 @@ RETURN_E439:                                ; [$e439]
 ;     Player_CheckHandleClimbMaybeSide
 ;============================================================================
 Player_StayOnLadderAndContinue:             ; [$e43a]
-    LDA Player_Flags
-    AND #$fb
-    STA Player_Flags
+    ;
+    ; Clear the Falling Off state.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$fb                                ; Clear the Falling Off flag.
+    STA Player_Flags                        ; Save it back.
     LDA #$00
     STA Maybe_ClimbLadderOffset
 
@@ -13961,12 +13939,23 @@ Player_StayOnLadderAndContinue:             ; [$e43a]
 ;     Player_CheckHandleClimbMaybeSide
 ;============================================================================
 Player_ContinueHandleClimbOrJump:           ; [$e444]
-    LDA Player_Flags
-    LSR A
-    BCS @LAB_PRG15_MIRROR__e463
-    LDX Joy1_ChangedButtonMask
-    BPL Player_ClearJumpingAndHoldingToClimb
-    JSR Player_IsCastMagicBlocked
+    ;
+    ; Check if the player is jumping.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    LSR A                                   ; Shift the Jump flag into Carry.
+    BCS @_isJumping                         ; If set (player is jumping),
+                                            ; then jump (branch).
+
+    ;
+    ; The player is not jumping.
+    ;
+    LDX Joy1_ChangedButtonMask              ; X = Controller 1 changed button
+                                            ; mask.
+    BPL Player_ClearJumpingAndHoldingToClimb ; If the player is holding down
+                                             ; A, then check grabbing for a
+                                             ; ladder and return.
+    JSR Player_IsClimbing
     BCS RETURN_E439
     LDX #$02
     JSR Player_Maybe_MoveIfPassable
@@ -13975,10 +13964,10 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
     ORA #$03
     STA Player_Flags
     LDA #$00
-    STA BYTE_00a6
+    STA Something_Player_ClimbLadderCheckPos
 
-  @LAB_PRG15_MIRROR__e463:                  ; [$e463]
-    LDX BYTE_00a6
+  @_isJumping:                              ; [$e463]
+    LDX Something_Player_ClimbLadderCheckPos
     CPX #$10
     BCC @LAB_PRG15_MIRROR__e46b
     BCS @LAB_PRG15_MIRROR__e4a2
@@ -13999,7 +13988,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
     LDX #$02
     JSR Player_Maybe_MoveIfPassable
     BEQ Area_Something_IncDAT00a6
-    LDX BYTE_00a6
+    LDX Something_Player_ClimbLadderCheckPos
     LDA PlayerPosY
     AND #$0f
     TAX
@@ -14013,7 +14002,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
   @LAB_PRG15_MIRROR__e49a:                  ; [$e49a]
     STA PlayerPosY
     LDA #$0f
-    STA BYTE_00a6
+    STA Something_Player_ClimbLadderCheckPos
     BNE Area_Something_IncDAT00a6
 
   @LAB_PRG15_MIRROR__e4a2:                  ; [$e4a2]
@@ -14030,9 +14019,9 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
     ;     Player_ContinueHandleClimbOrJump
     ;
 Area_Something_IncDAT00a6:                  ; [$e4b1]
-    LDX BYTE_00a6
+    LDX Something_Player_ClimbLadderCheckPos
     INX
-    STX BYTE_00a6
+    STX Something_Player_ClimbLadderCheckPos
 
     ;
     ; XREFS:
@@ -14223,7 +14212,7 @@ Player_CheckHandleEnterDoor:                ; [$e526]
     LDX #$06
 
   @_paletteCheckLoop:                       ; [$e54c]
-    LDA Area_Palette
+    LDA Screen_Palette
     CMP #$e569,X
     BEQ @_setupArea
     DEX
@@ -14297,15 +14286,15 @@ Music_ARRAY_PRG15_MIRROR__e570_6_:          ; [$e576]
 Player_EnterDoorToInside:                   ; [$e577]
     LDX Area_LoadingScreenIndex
     STX a:Something_Maybe_NewCurrentScreen
-    LDA Area_Palette
+    LDA Screen_Palette
     STA Area_LoadingScreenIndex
     TAX
     LDA #$e609,X
-    STA Area_Palette
+    STA Screen_Palette
     LDA #$e613,X
     STA a:Something_Maybe_NewTilesIndex
     LDA #$e61d,X
-    STA Area_StartPosXY
+    STA Screen_StartPosYX
     LDA a:Areas_DefaultMusic
     STA a:Area_Music_Outside
     LDA #$e5ff,X
@@ -14930,21 +14919,21 @@ Player_CheckIfOnLadder:                     ; [$e752]
 ;         1 if a door could be entered.
 ;         0 if one could not.
 ;
-;     Area_StartPosXY:
+;     Screen_StartPosYX:
 ;         The start position when switching to the new area.
 ;
 ;     Area_LoadingScreenIndex:
 ;         The new screen when switching to the new area.
 ;
-;     Area_Palette:
+;     Screen_Palette:
 ;         The new palette when switching to the new area.
 ;
 ;     CurrentDoor_KeyRequirement:
 ;         The key requirement for the matching doro when
 ;         switching to the new area.
 ;
-;     Temp_Addr
-;     #$03
+;     Temp_Addr_L
+;     Temp_Addr_U
 ;     Arg_PixelPosX:
 ;     Arg_PixelPosX:
 ;     Temp_BlockPos2
@@ -15044,9 +15033,9 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     ;
     LDA CurrentArea_DoorLocationsAddr       ; Load the lower byte of the
                                             ; doors address.
-    STA Temp_Addr                           ; Store it temporarily.
+    STA Temp_Addr_L                         ; Store it temporarily.
     LDA CurrentArea_DoorLocationsAddr.U     ; Load the upper byte.
-    STA Temp_Addr.U                         ; Store it temporarily.
+    STA Temp_Addr_U                         ; Store it temporarily.
 
     ;
     ; Switch to Bank 3 (level data).
@@ -15058,12 +15047,12 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
 
     ;
     ; Check the byte stored in address stored starting at
-    ; Temp_Addr to see if it's an air block or the screen
+    ; Temp_Addr_L to see if it's an air block or the screen
     ; index.
     ;
   @_doorCheckLoop:                          ; [$e815]
     LDY #$00                                ; Y = 0
-    LDA (Temp_Addr),Y                       ; Load the first byte from the
+    LDA (Temp_Addr_L),Y                     ; Load the first byte from the
                                             ; referenced address.
     CMP #$ff                                ; Is it 0xFF?
     BEQ @_returnAirBlock                    ; If so, consider this air and
@@ -15075,11 +15064,11 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     ; That was a match.
     ;
     ; Next, check the next byte in the address referenced by
-    ; Temp_Addr to see if it's the stored block position
+    ; Temp_Addr_L to see if it's the stored block position
     ; from above (Temp_BlockPos).
     ;
     INY                                     ; Y++
-    LDA (Temp_Addr),Y                       ; Load the next byte from the
+    LDA (Temp_Addr_L),Y                     ; Load the next byte from the
                                             ; referenced address.
     CMP Temp_BlockPos                       ; Is it the block position we
                                             ; stored?
@@ -15088,24 +15077,25 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     ;
     ; That was a match too.
     ;
-    ; Load the next byte referenced in Temp_Addr and store that
+    ; Load the next byte referenced in Temp_Addr_L and store
+    ; that
     ; as a block position in Temp_BlockPos2.
     ;
     INY                                     ; Y++
-    LDA (Temp_Addr),Y                       ; Load the next byte from the
+    LDA (Temp_Addr_L),Y                     ; Load the next byte from the
                                             ; referenced address.
     STA Temp_BlockPos2                      ; Store that byte as a temporary
                                             ; block position.
 
     ;
     ; Load the next byte from the address referenced in
-    ; Temp_Addr and store as the area's start X/Y
-    ; location (Area_StartPosXY).
+    ; Temp_Addr_L and store as the area's start X/Y
+    ; location (Screen_StartPosYX).
     ;
     INY                                     ; Y++
-    LDA (Temp_Addr),Y                       ; Load the next byte from the
+    LDA (Temp_Addr_L),Y                     ; Load the next byte from the
                                             ; referenced address.
-    STA Area_StartPosXY                     ; Store as the area's starting
+    STA Screen_StartPosYX                   ; Store as the area's starting
                                             ; X/Y position.
     LDA Temp_BlockPos2                      ; A = Byte we had just stored up
                                             ; above.
@@ -15145,7 +15135,7 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     INY                                     ; Y++
     LDA (CurrentArea_DoorDestinationsAddr),Y ; Load the palette from the door
                                              ; destination.
-    STA Area_Palette                        ; Store it as the new palette.
+    STA Screen_Palette                      ; Store it as the new palette.
     INY                                     ; Y++
     LDA (CurrentArea_DoorDestinationsAddr),Y ; Load the key requirement.
     STA a:CurrentDoor_KeyRequirement        ; Store it.
@@ -15157,18 +15147,18 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     ; of the door destination. We'll set up to process the next one.
     ;
   @LAB_PRG15_MIRROR__e852:                  ; [$e852]
-    LDA Temp_Addr                           ; Load the lower byte of the door
+    LDA Temp_Addr_L                         ; Load the lower byte of the door
                                             ; destination address we stored.
     CLC
     ADC #$04                                ; Add 4 (skip the information
                                             ; found on the other side of that
                                             ; door).
-    STA Temp_Addr                           ; Store it back out.
-    LDA Temp_Addr.U                         ; Load the upper byte of the
+    STA Temp_Addr_L                         ; Store it back out.
+    LDA Temp_Addr_U                         ; Load the upper byte of the
                                             ; address.
     ADC #$00                                ; Add the carry flag, if the
                                             ; lower byte overflowed.
-    STA Temp_Addr.U                         ; Store it.
+    STA Temp_Addr_U                         ; Store it.
     JMP @_doorCheckLoop
 
     ;
@@ -15892,26 +15882,26 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     ASL A
     TAX
     LDA #$ea37,X
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$ea38,X
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDY #$00
 
 SUB_EA13:                                   ; [$ea13]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CMP #$ff
     BEQ RETURN_EA36
     CMP Area_CurrentScreen
     BNE @LAB_PRG15_MIRROR__ea2f
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA Area_LoadingScreenIndex
     INY
-    LDA (Temp_Addr),Y
-    STA Area_StartPosXY
+    LDA (Temp_Addr_L),Y
+    STA Screen_StartPosYX
     INY
-    LDA (Temp_Addr),Y
-    STA Area_Palette
+    LDA (Temp_Addr_L),Y
+    STA Screen_Palette
     JMP Maybe_Game_EnterScreenHandler
 
   @LAB_PRG15_MIRROR__ea2f:                  ; [$ea2f]
@@ -15998,29 +15988,29 @@ Area_ChangeArea:                            ; [$ea5f]
     ASL A
     TAY
     LDA #$ea9c,Y
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$ea9d,Y
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDY #$00
 
   @LAB_PRG15_MIRROR__ea73:                  ; [$ea73]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CMP #$ff
     BEQ @LAB_PRG15_MIRROR__ea9b
     CMP Area_CurrentScreen
     BNE @LAB_PRG15_MIRROR__ea94
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA Area_CurrentArea
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA Area_LoadingScreenIndex
     INY
-    LDA (Temp_Addr),Y
-    STA Area_StartPosXY
+    LDA (Temp_Addr_L),Y
+    STA Screen_StartPosYX
     INY
-    LDA (Temp_Addr),Y
-    STA Area_Palette
+    LDA (Temp_Addr_L),Y
+    STA Screen_Palette
     JMP FUN_PRG15_MIRROR__dacd
 
   @LAB_PRG15_MIRROR__ea94:                  ; [$ea94]
@@ -16725,12 +16715,12 @@ Player_DrawBody:                            ; [$ebee]
     ; the arguments to use.
     ;
     ; NOTE: This seems to be old code. Nothing sets
-    ; Maybe_SpritesLoadedState to anything but 0x00 or 0xFF.
+    ; Maybe_ScreenReadyState to anything but 0x00 or 0xFF.
     ; It appears that at some point they simplified this, which
     ; makes all of this dead code.
     ;
   @LAB_PRG15_MIRROR__ebf4:                  ; [$ebf4]
-    LDA Maybe_SpritesLoadedState
+    LDA Maybe_ScreenReadyState
     CMP #$01
     BEQ @LAB_PRG15_MIRROR__ec11
     CMP #$05
@@ -16743,32 +16733,32 @@ Player_DrawBody:                            ; [$ebee]
     LDA PlayerPosX_Full
     STA Maybe_Arg_CurrentSprite_PosX
     LDA Screen_Maybe_ScrollXCounter
-    STA MaybeUnused_Something_ScrollPosX
+    STA Unused_Sprite_ScrollPosX
     LDA PlayerPosY
     STA Maybe_Arg_CurrentSprite_PosY
     LDA Player_Something_ScrollPosY
-    STA MaybeUnused_Something_ScrollPosY
+    STA Unused_Sprite_ScrollPosY
     JMP @LAB_PRG15_MIRROR__ec21
 
     ;
     ; This whole section seems unreachable.
-    ; Maybe_SpritesLoadedState
+    ; Maybe_ScreenReadyState
     ; should never reach these values. This may be dead code.
     ;
   @LAB_PRG15_MIRROR__ec11:                  ; [$ec11]
-    LDA MaybeUnused_PlayerX_ForScroll
+    LDA Maybe_PlayerX_ForScroll
     STA Maybe_Arg_CurrentSprite_PosX
-    LDA Maybe_Player_DAT_0059
-    STA MaybeUnused_Something_ScrollPosX
-    LDA MaybeUnused_PlayerY_ForScroll
+    LDA Something_Player_ScrollX
+    STA Unused_Sprite_ScrollPosX
+    LDA Maybe_PlayerY_ForScroll
     STA Maybe_Arg_CurrentSprite_PosY
-    LDA Maybe_Player_DAT_0058
-    STA MaybeUnused_Something_ScrollPosY
+    LDA Something_Player_ScrollY
+    STA Unused_Sprite_ScrollPosY
 
   @LAB_PRG15_MIRROR__ec21:                  ; [$ec21]
     JSR #$b9ed
     JSR Player_SetFacingLeft
-    JSR FUN_PRG15_MIRROR__ecac
+    JSR Player_GetBodySpriteFrameOffset
     PHA
     LDA a:SelectedArmor
     ASL A
@@ -16907,18 +16897,18 @@ BYTE_ARRAY_PRG15_MIRROR__eca4:              ; [$eca4]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ecac
+; TODO: Document Player_GetBodySpriteFrameOffset
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     Player_DrawBody
 ;============================================================================
-FUN_PRG15_MIRROR__ecac:                     ; [$ecac]
+Player_GetBodySpriteFrameOffset:            ; [$ecac]
     LDA Player_Flags
     LSR A
     BCC @LAB_PRG15_MIRROR__ecb8
@@ -16928,7 +16918,7 @@ FUN_PRG15_MIRROR__ecac:                     ; [$ecac]
     RTS
 
   @LAB_PRG15_MIRROR__ecb8:                  ; [$ecb8]
-    JSR Player_IsCastMagicBlocked
+    JSR Player_IsClimbing
     BCC @LAB_PRG15_MIRROR__ecc8
     LDA Player_MovementTick
     AND #$10
@@ -16972,7 +16962,7 @@ FUN_PRG15_MIRROR__ecac:                     ; [$ecac]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ecac
+;     Player_GetBodySpriteFrameOffset
 ;
 BYTE_ARRAY_PRG15_MIRROR__ecef:              ; [$ecef]
     db $00                                  ; [0]:
@@ -16982,7 +16972,7 @@ BYTE_ARRAY_PRG15_MIRROR__ecef:              ; [$ecef]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ecac
+;     Player_GetBodySpriteFrameOffset
 ;
 BYTE_ARRAY_PRG15_MIRROR__ecf3:              ; [$ecf3]
     db $04                                  ; [0]:
@@ -16991,17 +16981,19 @@ BYTE_ARRAY_PRG15_MIRROR__ecf3:              ; [$ecf3]
 
 
 ;============================================================================
-; Return whether the player can currently cast magic.
+; Return whether the player is climbing a ladder.
 ;
 ; This will depend on the following conditions:
 ;
-; 1. Whether the player is in front of a ladder (in which
-;    case, they can't).
+; 1. Whether the player is in front of a ladder.
 ;
-; 2. Whether the player has room on the screen to cast
-;    magic.
+; 2. Whether the player is either:
 ;
-; 3. TODO: Some unknown flags (at the time of this writing).
+;    1. Directly on a ladder block, or
+;
+;    2. Not falling off the ladder.
+;
+; 3. Whether the climbing bit is set.
 ;
 ; INPUTS:
 ;     Player_Flags:
@@ -17012,35 +17004,56 @@ BYTE_ARRAY_PRG15_MIRROR__ecf3:              ; [$ecf3]
 ;
 ; OUTPUTS:
 ;     C:
-;         1 if the player cannot cast magic.
-;         0 if the player can cast magic.
+;         1 if the player is climbing.
+;         0 if the player is not.
 ;
 ; XREFS:
 ;     Player_CastMagic
-;     FUN_PRG15_MIRROR__ecac
 ;     Player_CheckHandleAttack
 ;     Player_ContinueHandleClimbOrJump
+;     Player_GetBodySpriteFrameOffset
 ;============================================================================
-Player_IsCastMagicBlocked:                  ; [$ecf6]
-    LDA Player_Flags
-    AND #$08
-    BEQ @_returnFalse
-    LDA PlayerPosX_Full
-    AND #$0f
-    BEQ @LAB_PRG15_MIRROR__ed08
-    LDA Player_Flags
-    AND #$04
-    BNE @_returnFalse
+Player_IsClimbing:                          ; [$ecf6]
+    ;
+    ; Check if the player can currently climb an available ladder.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$08                                ; Can the player currently climb?
+    BEQ @_returnFalse                       ; If not, return false.
 
-  @LAB_PRG15_MIRROR__ed08:                  ; [$ed08]
-    LDA Player_Flags
-    AND #$10
-    BEQ @_returnFalse
-    SEC
+    ;
+    ; A ladder is available to climb.
+    ;
+    ; Check if the player's X position is on an even block boundary.
+    ;
+    LDA PlayerPosX_Full                     ; Load the player's X position.
+    AND #$0f                                ; Is it on a block boundary?
+    BEQ @_checkClimbing                     ; If not, then jump to check if
+                                            ; the player is climbing.
+
+    ;
+    ; The player's X position is on an even byte boundary.
+    ;
+    ; Check if the player is currently falling off a ledge or
+    ; ladder.
+    ;
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$04                                ; Is the player currently
+                                            ; falling?
+    BNE @_returnFalse                       ; If so, return false.
+
+    ;
+    ; Check if the player is currently climbing.
+    ;
+  @_checkClimbing:                          ; [$ed08]
+    LDA Player_Flags                        ; Load the player's flags.
+    AND #$10                                ; Is the player climbing?
+    BEQ @_returnFalse                       ; If not, return false.
+    SEC                                     ; Set C = 1 to return true.
     RTS
 
   @_returnFalse:                            ; [$ed10]
-    CLC
+    CLC                                     ; Set C = 0 to return false.
     RTS
 
 
@@ -17172,7 +17185,7 @@ Maybe_Player_UpdateArmorState:              ; [$ed72]
     TXA
     ASL A
     TAY
-    JMP FUN_PRG15_MIRROR__ee15
+    JMP Maybe_Player_LoadArmorSprite
 
 ;
 ; XREFS:
@@ -17222,7 +17235,7 @@ Maybe_Player_UpdateWeaponSprite:            ; [$ed9d]
     STA Maybe_Player_AccessorySpriteAddr_U
     LDA #$edc6,Y
     STA Maybe_Player_AccessorySpriteAddr_L
-    JMP FUN_PRG15_MIRROR__ee3f
+    JMP Maybe_Player_LoadWeaponSprite
 
 ;
 ; XREFS:
@@ -17280,7 +17293,7 @@ Player_Something_ShieldState:               ; [$edcd]
     STA Maybe_Player_AccessorySpriteAddr_U
     LDA #$03
     STA Maybe_Player_AccessorySpriteAddr_L
-    JMP FUN_PRG15_MIRROR__ee69
+    JMP Maybe_Player_LoadShieldSprite
 
 
 ;============================================================================
@@ -17376,10 +17389,10 @@ Player_SetShield:                           ; [$ee0d]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ee15
+; TODO: Document Maybe_Player_LoadArmorSprite
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -17387,26 +17400,26 @@ Player_SetShield:                           ; [$ee0d]
 ; XREFS:
 ;     Maybe_Player_UpdateArmorState
 ;============================================================================
-FUN_PRG15_MIRROR__ee15:                     ; [$ee15]
+Maybe_Player_LoadArmorSprite:               ; [$ee15]
     LDA a:CurrentROMBank2
     PHA
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:ROMBankStart
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     LDA a:#$8001
     CLC
     ADC #$80
-    STA Something_ROMBank+1
-    LDA (Something_ROMBank),Y
+    STA PlayerSprite_ReadAddr_U
+    LDA (PlayerSprite_ReadAddr_L),Y
     PHA
     INY
-    LDA (Something_ROMBank),Y
+    LDA (PlayerSprite_ReadAddr_L),Y
     CLC
     ADC #$80
-    STA Something_ROMBank+1
+    STA PlayerSprite_ReadAddr_U
     PLA
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
@@ -17414,10 +17427,10 @@ FUN_PRG15_MIRROR__ee15:                     ; [$ee15]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ee3f
+; TODO: Document Maybe_Player_LoadWeaponSprite
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -17425,26 +17438,26 @@ FUN_PRG15_MIRROR__ee15:                     ; [$ee15]
 ; XREFS:
 ;     Maybe_Player_UpdateWeaponSprite
 ;============================================================================
-FUN_PRG15_MIRROR__ee3f:                     ; [$ee3f]
+Maybe_Player_LoadWeaponSprite:              ; [$ee3f]
     LDA a:CurrentROMBank2
     PHA
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$8002
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     LDA a:#$8003
     CLC
     ADC #$80
-    STA Something_ROMBank+1
-    LDA (Something_ROMBank),Y
+    STA PlayerSprite_ReadAddr_U
+    LDA (PlayerSprite_ReadAddr_L),Y
     PHA
     INY
-    LDA (Something_ROMBank),Y
+    LDA (PlayerSprite_ReadAddr_L),Y
     CLC
     ADC #$80
-    STA Something_ROMBank+1
+    STA PlayerSprite_ReadAddr_U
     PLA
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
@@ -17452,10 +17465,10 @@ FUN_PRG15_MIRROR__ee3f:                     ; [$ee3f]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ee69
+; TODO: Document Maybe_Player_LoadShieldSprite
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -17463,26 +17476,26 @@ FUN_PRG15_MIRROR__ee3f:                     ; [$ee3f]
 ; XREFS:
 ;     Player_Something_ShieldState
 ;============================================================================
-FUN_PRG15_MIRROR__ee69:                     ; [$ee69]
+Maybe_Player_LoadShieldSprite:              ; [$ee69]
     LDA a:CurrentROMBank2
     PHA
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$800c
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     LDA a:#$800d
     CLC
     ADC #$80
-    STA Something_ROMBank+1
-    LDA (Something_ROMBank),Y
+    STA PlayerSprite_ReadAddr_U
+    LDA (PlayerSprite_ReadAddr_L),Y
     PHA
     INY
-    LDA (Something_ROMBank),Y
+    LDA (PlayerSprite_ReadAddr_L),Y
     CLC
     ADC #$80
-    STA Something_ROMBank+1
+    STA PlayerSprite_ReadAddr_U
     PLA
-    STA Something_ROMBank
+    STA PlayerSprite_ReadAddr_L
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
@@ -17508,9 +17521,9 @@ FUN_PRG15_MIRROR__ee93:                     ; [$ee93]
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$800a
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$800b
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JMP LABEL_EED2
 
 
@@ -17533,9 +17546,9 @@ FUN_PRG15_MIRROR__eea9:                     ; [$eea9]
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$8004
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$8005
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JMP LABEL_EED2
 
 
@@ -17558,9 +17571,9 @@ FUN_PRG15_MIRROR__eebf:                     ; [$eebf]
     LDX #$08
     JSR MMC1_UpdatePRGBank
     LDA a:#$8006
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$8007
-    STA Temp_Addr.U
+    STA Temp_Addr_U
 
     ;
     ; XREFS:
@@ -17578,7 +17591,7 @@ LABEL_EED2:                                 ; [$eed2]
     LDY Maybe_Player_DAT_00a8
     LDA #$00
     STA Temp_05
-    LDA (Something_ROMBank),Y
+    LDA (PlayerSprite_ReadAddr_L),Y
     ASL A
     ROL Temp_05
     ASL A
@@ -17593,10 +17606,10 @@ LABEL_EED2:                                 ; [$eed2]
     JSR MMC1_UpdatePRGBank
     LDA Temp_04
     CLC
-    ADC Temp_Addr
+    ADC Temp_Addr_L
     STA Temp_04
     LDA Temp_05
-    ADC Temp_Addr.U
+    ADC Temp_Addr_U
     CLC
     ADC #$80
     STA Temp_05
@@ -18190,11 +18203,11 @@ FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
     TAY
     PHP
     LDA a:#$800a
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$800b
     PLP
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JMP Sprite_Maybe_SetAppearanceAddr
 
 
@@ -18224,11 +18237,11 @@ FUN_PRG15_MIRROR__f039:                     ; [$f039]
     TAY
     PHP
     LDA a:#$8008
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$8009
     PLP
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JMP Sprite_Maybe_SetAppearanceAddr
 
 
@@ -18272,13 +18285,13 @@ Sprite_Maybe_SetAppearanceAddrFromOffset:   ; [$f057]
     PHP                                     ; Push flags and stack pointer.
     LDA a:#$8006                            ; Load the lower byte of the
                                             ; address to read from.
-    STA Temp_Addr                           ; Store it for processing.
+    STA Temp_Addr_L                         ; Store it for processing.
     LDA a:#$8007                            ; Load the upper byte.
     PLP                                     ; Pop the flags and stack
                                             ; pointer.
     ADC #$80                                ; Add 0x80 + carry to the upper
                                             ; byte.
-    STA Temp_Addr.U                         ; Store it.
+    STA Temp_Addr_U                         ; Store it.
 
     ;
     ; v-- Fall through --v
@@ -18301,13 +18314,13 @@ Sprite_Maybe_SetAppearanceAddrFromOffset:   ; [$f057]
 Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
     ;
     ; Load the offset within our starting address stored in
-    ; Temp_Addr.
+    ; Temp_Addr_L.
     ;
-    LDA (Temp_Addr),Y                       ; Load the offset for the lower
+    LDA (Temp_Addr_L),Y                     ; Load the offset for the lower
                                             ; byte.
     STA Maybe_Temp_Sprite_L                 ; Store it.
     INY                                     ; Y++ (offset)
-    LDA (Temp_Addr),Y                       ; Load the upper byte.
+    LDA (Temp_Addr_L),Y                     ; Load the upper byte.
     ADC #$80                                ; Add 0x80 + carry to it.
     STA Maybe_Temp_Sprite_U                 ; Store it.
 
@@ -18395,7 +18408,7 @@ Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
     ;
     INY                                     ; Y++
     LDA (Maybe_Temp_Sprite_L),Y             ; Load the next byte.
-    STA Temp_Addr                           ;  and store that as the new
+    STA Temp_Addr_L                         ;  and store that as the new
                                             ; start offset.
 
     ;
@@ -18581,7 +18594,7 @@ Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
     ASL A
     ASL A
     STA Temp_04
-    LDA Temp_Addr
+    LDA Temp_Addr_L
     ASL A
     SEC
     SBC Temp_04
@@ -18954,20 +18967,20 @@ FUN_PRG15_MIRROR__f2e3:                     ; [$f2e3]
     ASL A
     TAY
     LDA a:#$800e
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA a:#$800f
     CLC
     ADC #$80
-    STA Temp_Addr.U
-    LDA (Temp_Addr),Y
+    STA Temp_Addr_U
+    LDA (Temp_Addr_L),Y
     PHA
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CLC
     ADC #$80
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     PLA
-    STA Temp_Addr
+    STA Temp_Addr_L
     JMP MMC1_UpdatePRGBankToStackA
 
     ;
@@ -18999,12 +19012,12 @@ FUN_PRG15_MIRROR__f316:                     ; [$f316]
     PHA
     LDX #$08
     JSR MMC1_UpdatePRGBank
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     CMP #$ff
     BEQ LABEL_F30F
     LDA #$00
     STA Temp_05
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     ASL A
     ROL Temp_05
     ASL A

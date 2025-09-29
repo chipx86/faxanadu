@@ -30,9 +30,8 @@ PPUMASK:                                    ; [$2001]
 
 ;
 ; XREFS:
+;     DEADCODE_FUN_PRG15_MIRROR__cb0c
 ;     Game_Init
-;     LAB_PRG15_MIRROR__cb0c [$PRG15_MIRROR::cb0c]
-;     LAB_PRG15_MIRROR__cb11 [$PRG15_MIRROR::cb11]
 ;     PPU_HandleOnInterrupt
 ;
 PPUSTATUS:                                  ; [$2002]

@@ -226,7 +226,7 @@ Audio_HandleMusicIsFF:                      ; [$8079]
     STX a:Something_Music_0131
     STX a:Something_Music_0132
     STX a:Something_Music_0133
-    STX a:DAT_012c
+    STX a:BYTE_012c
     STX a:Something_Music_012d
     STX a:Something_Music_012e
     STX a:Something_Music_012f

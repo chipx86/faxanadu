@@ -68,7 +68,7 @@ Sprites_UpdateAll:                          ; [$8000]
     JMP @_updateSpriteState
 
   @LAB_PRG14__802e:                         ; [$802e]
-    JSR FUN_PRG14__a66b
+    JSR Sprites_Maybe_UpdateBehavior
     JSR Player_HitSpriteWithWeapon
     JSR Sprite_CheckHitByCastMagic
     JSR GetSpriteBox
@@ -367,7 +367,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
 
   @LAB_PRG14__81cf:                         ; [$81cf]
     LDA #$00
-    STA Temp_Addr
+    STA Temp_Addr_L
     STY Temp_01
     CPY #$00
     BEQ @LAB_PRG14__81fd
@@ -376,12 +376,12 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
 
   @LAB_PRG14__81df:                         ; [$81df]
     ASL A
-    ROL Temp_Addr
+    ROL Temp_Addr_L
     ASL A
-    ROL Temp_Addr
+    ROL Temp_Addr_L
     DEC Temp_01
     BNE @LAB_PRG14__81df
-    LDA Temp_Addr
+    LDA Temp_Addr_L
     AND #$03
     TAY
     BEQ @LAB_PRG14__81fd
@@ -2959,17 +2959,17 @@ Player_HandleTouchNPC:                      ; [$89ef]
 ;============================================================================
 GetSpriteBox:                               ; [$8a08]
     LDA #$00
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA CurrentSprites_Entities,X
     ASL A
-    ROL Temp_Addr.U
+    ROL Temp_Addr_U
     ASL A
-    ROL Temp_Addr.U
+    ROL Temp_Addr_U
     ADC #$73
-    STA Temp_Addr
-    LDA Temp_Addr.U
+    STA Temp_Addr_L
+    LDA Temp_Addr_U
     ADC #$b2
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDA CurrentSprites_Entities,X
     CMP #$1f
     BEQ @LAB_PRG14__8a2e
@@ -2983,9 +2983,9 @@ GetSpriteBox:                               ; [$8a08]
     CMP #$02
     BNE FUN_PRG14__8a51
     LDA #$71
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$8a
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JMP FUN_PRG14__8a51
 
   @LAB_PRG14__8a40:                         ; [$8a40]
@@ -2996,9 +2996,9 @@ GetSpriteBox:                               ; [$8a08]
 
   @LAB_PRG14__8a49:                         ; [$8a49]
     LDA #$75
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$8a
-    STA Temp_Addr.U
+    STA Temp_Addr_U
 
 
 ;============================================================================
@@ -3017,18 +3017,18 @@ FUN_PRG14__8a51:                            ; [$8a51]
     LDY #$00
     LDA CurrentSprites_XPos,X
     CLC
-    ADC (Temp_Addr),Y
+    ADC (Temp_Addr_L),Y
     STA a:SpriteBox_Left
     LDA CurrentSprites_YPos,X
     CLC
     INY
-    ADC (Temp_Addr),Y
+    ADC (Temp_Addr_L),Y
     STA a:SpriteBox_Top
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA a:SpriteBox_Width
     INY
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     STA a:SpriteBox_Height
     RTS
     db $30,$08,$f0,$00,$20,$10,$f8,$00      ; [$8a71] byte
@@ -3049,10 +3049,10 @@ FUN_PRG14__8a51:                            ; [$8a51]
 Player_ApplyDamage:                         ; [$8a79]
     LDY CurrentSprites_Entities,X
     LDA #$b6d7,Y
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     STA Temp_05
     LDA #$00
-    STA Temp_Addr
+    STA Temp_Addr_L
     STA Temp_04
     LSR Temp_05
     ROR Temp_04
@@ -3077,20 +3077,20 @@ Player_ApplyDamage:                         ; [$8a79]
     TAY                                     ; Y = A
 
   @LAB_PRG14__8aa2:                         ; [$8aa2]
-    LDA Temp_Addr
+    LDA Temp_Addr_L
     SEC
     SBC Temp_04
-    STA Temp_Addr
-    LDA Temp_Addr.U
+    STA Temp_Addr_L
+    LDA Temp_Addr_U
     SBC Temp_05
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     DEY
     BNE @LAB_PRG14__8aa2
 
   @_applyDamage:                            ; [$8ab2]
-    LDA Temp_Addr
+    LDA Temp_Addr_L
     STA a:Arg_PlayerHealthDelta_L
-    LDA Temp_Addr.U
+    LDA Temp_Addr_U
     STA a:Arg_PlayerHealthDelta_U
     LDA a:SpecialItems
     AND #$01
@@ -3596,9 +3596,9 @@ CurrentSprite_UpdateState:                  ; [$8bd2]
     LDA CurrentSprites_YPos,X
     STA Maybe_Arg_CurrentSprite_PosY
     LDA Screen_Maybe_ScrollXCounter
-    STA MaybeUnused_Something_ScrollPosX
+    STA Unused_Sprite_ScrollPosX
     LDA Player_Something_ScrollPosY
-    STA MaybeUnused_Something_ScrollPosY
+    STA Unused_Sprite_ScrollPosY
     LDA CurrentSprites_PPUAddrs,X
     STA Maybe_CurrentSprite_PPUOffset
     JSR CurrentSprite_CalculateVisibility
@@ -10239,7 +10239,7 @@ SpriteUpdateHandler__a5d2:                  ; [$a5d2]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
+;     Sprites_Maybe_UpdateBehavior
 ;
 SPRITE_BEHAVIOR_ADDRS:                      ; [$a5e7]
     dw SpriteBehavior_WalkBackAndForth-1    ; [0]: NPC - Blue dress lady NPC
@@ -10315,7 +10315,7 @@ SPRITE_BEHAVIOR_ADDRS:                      ; [$a5e7]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a66b
+; TODO: Document Sprites_Maybe_UpdateBehavior
 ;
 ; INPUTS:
 ;     X
@@ -10326,12 +10326,17 @@ SPRITE_BEHAVIOR_ADDRS:                      ; [$a5e7]
 ; XREFS:
 ;     LAB_PRG14__802e [$PRG14::802e]
 ;============================================================================
-FUN_PRG14__a66b:                            ; [$a66b]
+Sprites_Maybe_UpdateBehavior:               ; [$a66b]
     LDA a:DurationHourGlass
     BMI @LAB_PRG14__a679
     LDY CurrentSprites_Entities,X
     LDA #$b544,Y
     BNE @LAB_PRG14__a679
+
+    ;
+    ; This is an enemy sprite, and the Hour Glass is active.
+    ; Don't run any behavior updates.
+    ;
     RTS
 
     ;
@@ -10417,15 +10422,15 @@ FUN_PRG14__a6af:                            ; [$a6af]
 ;     A
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     FUN_PRG14__a734
-;     FUN_PRG14__a754
 ;     FUN_PRG14__a78c
 ;     FUN_PRG14__a7f8
 ;     Sprite_SomethingFunc__a6e8
+;     Sprite_SomethingFunc__a74c
 ;     Sprite_SomethingFunc__a84f
 ;     Sprite_SomethingFunc__a86e
 ;     Sprite_Something__a82a
+;     Sprites_Maybe_UpdateBehavior
 ;============================================================================
 FUN_PRG14__a6bc:                            ; [$a6bc]
     LDY #$00
@@ -10450,7 +10455,7 @@ FUN_PRG14__a6bc:                            ; [$a6bc]
 ; XREFS:
 ;     FUN_PRG14__a6bc
 ;
-SOMETHING_SOMETHING_FUNCS:                  ; [$a6d8]
+SPRITE_SOMETHING_FUNCS:                     ; [$a6d8]
     dw Sprite_SomethingFunc__a6ff-1         ; [0]:
     dw Sprite_SomethingFunc__a72c-1         ; [1]:
     dw Sprite_SomethingFunc__a772-1         ; [2]:
@@ -10471,7 +10476,7 @@ SOMETHING_SOMETHING_FUNCS:                  ; [$a6d8]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6e6]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6e6]
 ;============================================================================
 Sprite_SomethingFunc__a6e8:                 ; [$a6e8]
     LDA CurrentSprites_Subtypes,X
@@ -10497,7 +10502,7 @@ Sprite_SomethingFunc__a6e8:                 ; [$a6e8]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6d8]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6d8]
 ;============================================================================
 Sprite_SomethingFunc__a6ff:                 ; [$a6ff]
     LDA CurrentSprites_Subtypes,X
@@ -10518,10 +10523,10 @@ Sprite_SomethingFunc__a6ff:                 ; [$a6ff]
     JSR Screen_IncSpriteInfoAddr
     LDA CurrentSprites_Subtypes,X
     CMP #$06
-    BNE @LAB_PRG14__a72b
+    BNE @_return
     JMP FUN_PRG14__9917
 
-  @LAB_PRG14__a72b:                         ; [$a72b]
+  @_return:                                 ; [$a72b]
     RTS
 
 
@@ -10535,7 +10540,7 @@ Sprite_SomethingFunc__a6ff:                 ; [$a6ff]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6da]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6da]
 ;============================================================================
 Sprite_SomethingFunc__a72c:                 ; [$a72c]
     LDA CurrentSprites_Subtypes,X
@@ -10547,7 +10552,7 @@ Sprite_SomethingFunc__a72c:                 ; [$a72c]
 ; TODO: Document FUN_PRG14__a734
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -10580,27 +10585,14 @@ FUN_PRG14__a734:                            ; [$a734]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6e2]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6e2]
 ;============================================================================
 Sprite_SomethingFunc__a74c:                 ; [$a74c]
     LDA CurrentSprites_Subtypes,X
-    BMI FUN_PRG14__a754
+    BMI @LAB_PRG14__a754
     JMP RETURN_A771
 
-
-;============================================================================
-; TODO: Document FUN_PRG14__a754
-;
-; INPUTS:
-;     X
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Sprite_SomethingFunc__a74c
-;============================================================================
-FUN_PRG14__a754:                            ; [$a754]
+  @LAB_PRG14__a754:                         ; [$a754]
     LDA #$01
     JSR Screen_IncSpriteInfoAddr
     LDY #$00
@@ -10638,7 +10630,7 @@ RETURN_A771:                                ; [$a771]
 ;     A
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6dc]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6dc]
 ;============================================================================
 Sprite_SomethingFunc__a772:                 ; [$a772]
     LDA CurrentSprites_Subtypes,X
@@ -10775,7 +10767,7 @@ CurrentSprite_RandomlyChangeVertDirection:  ; [$a7c9]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6de]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6de]
 ;============================================================================
 Sprite_SomethingFunc__a7e5:                 ; [$a7e5]
     LDY #$01
@@ -10892,15 +10884,15 @@ Sprite_Something__a82a:                     ; [$a82a]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6e4]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6e4]
 ;============================================================================
 Sprite_SomethingFunc__a84f:                 ; [$a84f]
     LDY #$01
     LDA (Sprites_ReadInfoAddr),Y
-    STA Temp_Addr
+    STA Temp_Addr_L
     INY
     LDA (Sprites_ReadInfoAddr),Y
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     INY
     LDA (Sprites_ReadInfoAddr),Y
     PHA
@@ -10908,8 +10900,8 @@ Sprite_SomethingFunc__a84f:                 ; [$a84f]
     TAY
     PLA
     CLC
-    ADC (Temp_Addr),Y
-    STA (Temp_Addr),Y
+    ADC (Temp_Addr_L),Y
+    STA (Temp_Addr_L),Y
     LDA #$04
     JSR Screen_IncSpriteInfoAddr
     JMP FUN_PRG14__a6bc
@@ -10925,7 +10917,7 @@ Sprite_SomethingFunc__a84f:                 ; [$a84f]
 ;     TODO
 ;
 ; XREFS:
-;     SOMETHING_SOMETHING_FUNCS [$PRG14::a6e0]
+;     SPRITE_SOMETHING_FUNCS [$PRG14::a6e0]
 ;============================================================================
 Sprite_SomethingFunc__a86e:                 ; [$a86e]
     LDA #$01
@@ -10951,7 +10943,6 @@ Sprite_SomethingFunc__a86e:                 ; [$a86e]
 ;
 ; XREFS:
 ;     FUN_PRG14__a734
-;     FUN_PRG14__a754
 ;     FUN_PRG14__a78c
 ;     FUN_PRG14__a7f8
 ;     SpriteBehavior_Hopper
@@ -10963,6 +10954,7 @@ Sprite_SomethingFunc__a86e:                 ; [$a86e]
 ;     SpriteBehavior__aafa
 ;     Sprite_SomethingFunc__a6e8
 ;     Sprite_SomethingFunc__a6ff
+;     Sprite_SomethingFunc__a74c
 ;     Sprite_SomethingFunc__a84f
 ;     Sprite_SomethingFunc__a86e
 ;     Sprite_Something__a82a
@@ -11209,9 +11201,9 @@ Sprite_ClearFlags:                          ; [$a8a6]
 ; XREFS:
 ;     FUN_PRG14__a6af
 ;     FUN_PRG14__a734
-;     FUN_PRG14__a754
 ;     SpriteBehavior_Hopper
 ;     SpriteBehavior__MaybeSugata
+;     Sprite_SomethingFunc__a74c
 ;     Sprite_SomethingFunc__a86e
 ;     _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7
 ;============================================================================
@@ -13610,11 +13602,11 @@ SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__a66b
 ;     Maybe_Sprites_HasAnyEnemyOnScreen
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
 ;     Sprite_CheckHitByCastMagic
+;     Sprites_Maybe_UpdateBehavior
 ;     WasPlayerHitByMagic
 ;     Sprites_HasBoss
 ;
@@ -14412,9 +14404,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     ASL A
     TAX
     LDA #$b89f,X
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$b8a0,X
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     JSR Maybe_Player_CalcAnimFrame
     STA Temp_00
     ASL A
@@ -14425,7 +14417,7 @@ Player_DrawWeapon:                          ; [$b7d6]
     INY
 
   @LAB_PRG14__b806:                         ; [$b806]
-    LDA (Temp_Addr),Y
+    LDA (Temp_Addr_L),Y
     JSR Something_SetValueAndFFForNeg
     LDA PlayerPosX_Full
     CLC
@@ -14440,13 +14432,13 @@ Player_DrawWeapon:                          ; [$b7d6]
     ASL A
     TAX
     LDA #$b90f,X
-    STA Temp_Addr
+    STA Temp_Addr_L
     LDA #$b910,X
-    STA Temp_Addr.U
+    STA Temp_Addr_U
     LDY Temp_00
     LDA PlayerPosY
     CLC
-    ADC (Temp_Addr),Y
+    ADC (Temp_Addr_L),Y
     STA Maybe_Something_PosY
     LDA Player_Something_ScrollPosY
     ADC #$00
@@ -14958,7 +14950,7 @@ Player_ClearVisibleMagic:                   ; [$ba55]
 ;     TODO
 ;
 ; CALLS:
-;     Player_IsCastMagicBlocked
+;     Player_IsClimbing
 ;     Player_ReduceMP
 ;     Sound_PlayEffect
 ;     PRG14::ba92
@@ -14978,7 +14970,7 @@ Player_CastMagic:                           ; [$ba5b]
                                             ; logic.
 
     ;
-    ; Check if the player can cast magic.
+    ; Check if the player is climbing a ladder.
     ;
     JSR #$ecf6                              ; Check if the player can cast
                                             ; magic.

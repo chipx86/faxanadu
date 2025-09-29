@@ -12,6 +12,10 @@ BASE $0000
 ;
 ; Some of these are used for specific purposes (e.g., addresses), and some
 ; are more generally-used.
+;
+; MOD NOTES:
+;     These should be safe for custom code to use outside
+;     of referenced code paths.
 ;============================================================================
 
 ;
@@ -109,7 +113,7 @@ Temp_01:                                    ; [$0001]
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
-Temp_Addr:                                  ; [$0002]
+Temp_Addr_L:                                ; [$0002]
     db $00                                  ; [$0002] byte
 
 ;
@@ -135,7 +139,7 @@ Temp_Addr:                                  ; [$0002]
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
-Temp_Addr.U:                                ; [$0003]
+Temp_Addr_U:                                ; [$0003]
     db $00                                  ; [$0003] byte
 
 ;
@@ -177,11 +181,20 @@ Temp_06:                                    ; [$0006]
     db $00                                  ; [$0006] byte
 
 ;
+; Temporary variable used only for vertical line removal.
+;
+; This is used by
+; PPUBuffer_DrawCommand_RemoveVerticalLines,
+; which is used during the player death animation.
+;
+; Outside of that, it's unused by Faxanadu.
+;
+;
 ; XREFS:
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;
 Temp_07:                                    ; [$0007]
-    db $00                                  ; [$0007] undefined
+    db $00                                  ; [$0007] byte
 
 ;
 ; XREFS:
@@ -294,19 +307,22 @@ ScrollHelp_Pixel:                           ; [$000c]
 ScrollHelp_Screen:                          ; [$000d]
     db $00                                  ; [$000d] byte
 
-;
-; The loaded state for the screen.
+
+;============================================================================
+; The ready state for the screen.
 ;
 ; This has two states:
 ;
 ;     0 = Ready
 ;     1 = Not Ready (Game not yet playable)
 ;
-; Some code checks against alternative states: 1 and 5.
+; NOTE:
+;     Some code checks against alternative states: 1 and 5.
 ;
-; These do not seem to be used, and appear to be remnants
-; of an older design.
-;
+;     These do not seem to be used, and appear to be remnants
+;     of an older design.
+;============================================================================
+
 ;
 ; XREFS:
 ;     Game_DrawScreenInFrozenState
@@ -315,9 +331,32 @@ ScrollHelp_Screen:                          ; [$000d]
 ;     Player_HandleDeath
 ;     Screen_SetupSprites
 ;
-Maybe_SpritesLoadedState:                   ; [$000e]
+Maybe_ScreenReadyState:                     ; [$000e]
     db $00                                  ; [$000e] LoadedState
+
+
+;============================================================================
+; UNUSED: Fully available for mod purposes.
+;============================================================================
     db $00                                  ; [$000f] undefined
+
+
+;============================================================================
+; A latch managing interrupt handling logic.
+;
+; This is set to 1 when interrupt handlers have been run.
+; That includes:
+;
+; * PPU handling
+; * OAM reset
+; * Audio/sound playback
+; * Input handling.
+; * Advancing InterruptCounter
+;
+; If already 1, PRG15_MIRROR:c999 won't run handlers again.
+;
+; Callers can set to 0 to request running interrupt handlers.
+;============================================================================
 
 ;
 ; XREFS:
@@ -325,8 +364,8 @@ Maybe_SpritesLoadedState:                   ; [$000e]
 ;     OnInterrupt
 ;     WaitForNextFrame
 ;
-Game_FrameToggle:                           ; [$0010]
-    db $00                                  ; [$0010] byte
+Game_InterruptsHandledLatch:                ; [$0010]
+    db $00                                  ; [$0010] bool
 
 
 ;============================================================================
@@ -385,6 +424,19 @@ MMC1_ShiftSync:                             ; [$0012]
 Game_EnableInterruptHandlers:               ; [$0013]
     db $00                                  ; [$0013] bool
 
+
+;============================================================================
+; Counter tracking state for temporary pausing of interrupt handlers.
+;
+; When interrupt handlers are paused (by setting
+; Game_EnableInterruptHandlers to 0), this will be
+; incremented up to a value of 2.
+;
+; PPU_WaitUntilFlushed will wait for this to hit 2
+; before returning, ensuring there's time for the PPU to
+; flush before returning to the caller.
+;============================================================================
+
 ;
 ; XREFS:
 ;     OnInterrupt
@@ -393,7 +445,10 @@ Game_EnableInterruptHandlers:               ; [$0013]
 PauseInterruptCounter:                      ; [$0014]
     db $00                                  ; [$0014] byte
 
-UNUSED_0015:                                ; [$0015]
+
+;============================================================================
+; UNUSED: Fully available for mod purposes.
+;============================================================================
     db $00                                  ; [$0015] byte
 
 
@@ -419,17 +474,16 @@ UNUSED_0015:                                ; [$0015]
 ;     Maybe_Player_CalcAnimFrame
 ;     Player_CastMagic
 ;     EndGame_MovePlayerTowardKing
-;     FUN_PRG15_MIRROR__ecac
 ;     GameLoop_CheckUseCurrentItem
 ;     Game_UpdatePlayerOnScroll
 ;     GetRandom
 ;     Input_HandleOnInterrupt
-;     LAB_PRG15_MIRROR__e2f4 [$PRG15_MIRROR::e2f4]
 ;     Maybe_Player_CalcSpeed
 ;     Player_CheckHandleClimb
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleJump
 ;     Player_CheckPushingBlock
+;     Player_GetBodySpriteFrameOffset
 ;
 Joy1_ButtonMask:                            ; [$0016]
     db $00                                  ; [$0016] ButtonBitmask
@@ -523,6 +577,15 @@ Joy1_PrevButtonMask:                        ; [$0018]
 Joy1_ChangedButtonMask:                     ; [$0019]
     db $00                                  ; [$0019] ButtonBitmask
 
+
+;============================================================================
+; Additional interrupt handling state.
+;============================================================================
+
+;
+; A running counter tracking the number of interrupt handlers
+; run.
+;
 ;
 ; XREFS:
 ;     IScripts_PlayFillingSound
@@ -556,7 +619,8 @@ InterruptCounter:                           ; [$001a]
     db $00                                  ; [$001a] byte
 
 ;
-; Whether the OAM needs to be reset.
+; Whether the OAM needs to be reset at the next
+; interrupt handler.
 ;
 ;
 ; XREFS:
@@ -576,7 +640,7 @@ Maybe_FrameAltToggleFlags:                  ; [$001c]
 
 
 ;============================================================================
-; Used to generate the fog effect in the fog world
+; Used to generate the fog effect in Mist.
 ;============================================================================
 
 ;
@@ -595,6 +659,22 @@ FogGenerator:                               ; [$001d]
 Fog_Index:                                  ; [$001e]
     db $00                                  ; [$001e] byte
 
+
+;============================================================================
+; PPU ring buffer state.
+;
+; This is used to schedule draws, utilizing a ring buffer.
+; Contents may either be a length count and data up to that
+; length to draw, or one or more draw commands up with
+; arguments.
+;
+; See PPUBuffer_Draw.
+;============================================================================
+
+;
+; Current offset within the buffer to begin adding to or
+; drawing from.
+;
 ;
 ; XREFS:
 ;     Game_InitStateForSpawn
@@ -610,6 +690,13 @@ Fog_Index:                                  ; [$001e]
 PPUBuffer_Offset:                           ; [$001f]
     db $00                                  ; [$001f] byte
 
+;
+; Current upper bounds of the ring buffer.
+;
+; This may wrap from 0xFF -> 0.
+;
+; Drawing occurs until the offset meets the upper bounds.
+;
 ;
 ; XREFS:
 ;     FUN_PRG12__9041
@@ -649,6 +736,13 @@ PPUBuffer_UpperBounds:                      ; [$0020]
     db $00                                  ; [$0020] byte
 
 ;
+; Temporary state used when drawing from the PPU buffer.
+;
+; MOD NOTES:
+;     This is clobbered by PPUBuffer_Draw, but is
+;     otherwise unused and can be reused in self-contained code.
+;
+;
 ; XREFS:
 ;     PPUBuffer_Draw
 ;
@@ -656,31 +750,49 @@ PPUBuffer_Temp_PendingEntryCount:           ; [$0021]
     db $00                                  ; [$0021] byte
 
 ;
+; Temporary state used when drawing from the PPU buffer.
+;
+; MOD NOTES:
+;     This is clobbered by PPUBuffer_Draw, but is
+;     otherwise unused and can be reused in self-contained code.
+;
+;
 ; XREFS:
 ;     PPUBuffer_Draw
 ;
 PPUBuffer_Temp_TotalByteLength:             ; [$0022]
     db $00                                  ; [$0022] byte
 
+
+;============================================================================
+; Temporary value used when populating the PPU nametable.
+;
+; MOD NOTES:
+;     This is clobbered by
+;     PPU_InitAttributeAndNameTables,
+;     but is otherwise unused and can be reused in
+;     self-contained code.
+;============================================================================
+
 ;
 ; XREFS:
 ;     PPU_InitAttributeAndNameTables
 ;
-XXX_PPU_NAMETABLE0_VALUE:                   ; [$0023]
+Temp_PPU_NametableValue:                    ; [$0023]
     db $00                                  ; [$0023] byte
 
 
 ;============================================================================
 ; The current area the player is in.
 ;
-; $00 = First town
-; $01 = Between first town and fog
-; $02 = Fog
-; $03 = Town
-; $04 = Building
-; $05 = Tree world
-; $06 = Last world
-; $07 = Final maze
+; $00 = Eolis
+; $01 = Apolune
+; $02 = Forepaw
+; $03 = Mascon
+; $04 = Victim
+; $05 = Conflate
+; $06 = Daybreak
+; $07 = Evil Fortress
 ;============================================================================
 
 ;
@@ -718,6 +830,24 @@ Area_CurrentArea:                           ; [$0024]
 BYTE_0025:                                  ; [$0025]
     db $00                                  ; [$0025] byte
 
+
+;============================================================================
+; Current sprite state.
+;============================================================================
+
+;
+; Visibility state for the current sprite being processed.
+;
+; This tracks whether the current sprite is:
+;
+; $00 = Fully visible by foreground elements
+; $01 = Obscured only on the trailing side of the sprite.
+; $02 = Obscured only on the leading side of the sprite.
+; $03 = Fully obscured
+;
+; The trailing and leading sides have to do with the direction
+; the sprite is facing.
+;
 ;
 ; XREFS:
 ;     SUB_PRG14__ba48 [$PRG14::ba48]
@@ -727,8 +857,13 @@ BYTE_0025:                                  ; [$0025]
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 MovingSpriteVisibility:                     ; [$0026]
-    db $00                                  ; [$0026] undefined1
+    db $00                                  ; [$0026] MovingSpriteVisibility
 
+;
+; An argument to Sprite_EnterNextAppearancePhase.
+;
+; This specifies the X position of the sprite.
+;
 ;
 ; XREFS:
 ;     IScripts_SetPortraitSpriteXY
@@ -748,6 +883,11 @@ MovingSpriteVisibility:                     ; [$0026]
 Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
     db $00                                  ; [$0027] byte
 
+;
+; An argument to Sprite_EnterNextAppearancePhase.
+;
+; This specifies the Y position of the sprite.
+;
 ;
 ; XREFS:
 ;     IScripts_SetPortraitSpriteXY
@@ -770,6 +910,17 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
     db $00                                  ; [$0028] byte
 
 ;
+; The current sprite's flip mask.
+;
+; This indicates if the sprite is flipped horizontally,
+; utilizing only the Facing bit of a sprite or player's flags.
+;
+; The following values are allowed:
+;
+; $00 = Facing right (default)
+; $40 = Facing left (flipped)
+;
+;
 ; XREFS:
 ;     CurrentSprite_UpdateFlipMask
 ;     Maybe_Player_CalcAnimFrame
@@ -790,10 +941,10 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
 ;     SpriteUpdateHandler_TODO_Garbled_81
 ;     SpriteUpdateHandler_TODO_Unknown_83
 ;     CastMagic_UpdateSpriteDirection
-;     FUN_PRG15_MIRROR__ecac
 ;     IScripts_DrawPortraitAnimationFrame
 ;     MagicHitHandler__c403
 ;     MagicHitHandler__c42c
+;     Player_GetBodySpriteFrameOffset
 ;     Player_SetFacingLeft
 ;     Something_SetXYAndAnimOffset
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -802,26 +953,37 @@ CurrentSprite_FlipMask:                     ; [$0029]
     db $00                                  ; [$0029] byte
 
 ;
+; UNUSED: Y scroll position for a sprite.
+;
+; This is written to but never read from.
+;
+;
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     CastMagic_Maybe_FinishHandler
 ;     Player_DrawBody
 ;
-MaybeUnused_Something_ScrollPosY:           ; [$002a]
+Unused_Sprite_ScrollPosY:                   ; [$002a]
     db $00                                  ; [$002a] byte
 
 ;
+; UNUSED: X scroll position for a sprite.
+;
+; This is written to but never read from.
+;
+;
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     CastMagic_Maybe_FinishHandler
 ;     Player_DrawBody
 ;
-MaybeUnused_Something_ScrollPosX:           ; [$002b]
+Unused_Sprite_ScrollPosX:                   ; [$002b]
     db $00                                  ; [$002b] byte
 
-    db $00,$00,$00,$00                      ; [$002d] undefined
-
-    db $00,$00,$00                          ; [$0031] undefined1
+;
+; UNUSED: The following 7 bytes are unused in memory.
+;
+    db $00,$00,$00,$00,$00,$00,$00          ; [$002c] undefined
 
 ;
 ; XREFS:
@@ -841,6 +1003,12 @@ MaybeUnused_Something_ScrollPosX:           ; [$002b]
 Maybe_CurrentSprite_PPUOffset:              ; [$0033]
     db $00                                  ; [$0033] byte
 
+;
+; UNUSED: The following 5 bytes are either unused or only
+;         written to, never read from.
+;
+;         All but $0036 are unsafe to use.
+;
 ;
 ; XREFS:
 ;     Something_FrameAltToggle
@@ -892,12 +1060,20 @@ Something_Sprites_ResetAtFrame:             ; [$0039]
     db $00                                  ; [$0039] byte
 
 ;
+; Temporary variable for the lower byte of a sprite's
+; image data.
+;
+;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Maybe_Temp_Sprite_L:                        ; [$003a]
     db $00                                  ; [$003a] byte
 
+;
+; Temporary variable for the upper byte of a sprite's
+; image data.
+;
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -906,12 +1082,18 @@ Maybe_Temp_Sprite_U:                        ; [$003b]
     db $00                                  ; [$003b] byte
 
 ;
+; Temporary variable for the normalized X position of a sprite.
+;
+;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Temp_Sprites_NormXPos:                      ; [$003c]
     db $00                                  ; [$003c] byte
 
+;
+; Temporary variable for the normalized Y position of a sprite.
+;
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -934,12 +1116,20 @@ Something_SpriteData_Y:                     ; [$003f]
     db $00                                  ; [$003f] byte
 
 ;
+; Temporary variable for the number of sprite tile columns
+; remaining to draw.
+;
+;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Temp_Sprites_ColsRemaining:                 ; [$0040]
     db $00                                  ; [$0040] byte
 
+;
+; Temporary variable for the number of sprite tile rows
+; remaining to draw.
+;
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -948,18 +1138,26 @@ Temp_Sprites_RowsRemaining:                 ; [$0041]
     db $00                                  ; [$0041] byte
 
 ;
+; Temporary variable for the current X tile offset to draw for
+; the sprite.
+;
+;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Temp_Sprites_TileXOffset:                   ; [$0042]
-    db $00                                  ; [$0042] undefined1
+    db $00                                  ; [$0042] byte
 
+;
+; Temporary variable for the current Y tile offset to draw for
+; the sprite.
+;
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Temp_Sprites_TileYOffset:                   ; [$0043]
-    db $00                                  ; [$0043] undefined1
+    db $00                                  ; [$0043] byte
 
 ;
 ; XREFS:
@@ -969,8 +1167,8 @@ Temp_Sprites_TileYOffset:                   ; [$0043]
 ;     Maybe_Screen_Scroll
 ;     Maybe_Screen_Scroll_D2A6
 ;
-DAT_0044:                                   ; [$0044]
-    db $00                                  ; [$0044] undefined1
+Something_Blocks_0044:                      ; [$0044]
+    db $00                                  ; [$0044] byte
 
 ;
 ; XREFS:
@@ -980,44 +1178,49 @@ DAT_0044:                                   ; [$0044]
 ;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Screen_Scroll
 ;
-DAT_0045:                                   ; [$0045]
-    db $00                                  ; [$0045] undefined1
+Something_Blocks_0045:                      ; [$0045]
+    db $00                                  ; [$0045] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d503
 ;
-DAT_0046:                                   ; [$0046]
-    db $00                                  ; [$0046] undefined1
+Something_Blocks_0046:                      ; [$0046]
+    db $00                                  ; [$0046] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     FUN_PRG15_MIRROR__d503
 ;
-BYTE_0047:                                  ; [$0047]
+Something_Blocks_0047:                      ; [$0047]
     db $00                                  ; [$0047] byte
 
 ;
 ; XREFS:
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_0048:                                  ; [$0048]
+Temp_Blocks_0048:                           ; [$0048]
     db $00                                  ; [$0048] byte
 
 ;
 ; XREFS:
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_0049:                                  ; [$0049]
-    db $00,$00,$00                          ; [$0049] byte
+Unused_Blocks_0049:                         ; [$0049]
+    db $00                                  ; [$0049] byte
+
+;
+; UNUSED: The next 2 bytes are unused by Faxanadu.
+;
+    db $00,$00                              ; [$004a] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
 ;
-BYTE_004c:                                  ; [$004c]
+Something_Blocks_PPUAddr_L:                 ; [$004c]
     db $00                                  ; [$004c] byte
 
 ;
@@ -1025,7 +1228,7 @@ BYTE_004c:                                  ; [$004c]
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
 ;
-BYTE_004d:                                  ; [$004d]
+Something_Blocks_PPUAddr_U:                 ; [$004d]
     db $00                                  ; [$004d] byte
 
 ;
@@ -1033,7 +1236,7 @@ BYTE_004d:                                  ; [$004d]
 ;     FUN_PRG15_MIRROR__d654
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_004e:                                  ; [$004e]
+Something_ShopItem_PPUAddr_L:               ; [$004e]
     db $00                                  ; [$004e] byte
 
 ;
@@ -1041,7 +1244,7 @@ BYTE_004e:                                  ; [$004e]
 ;     FUN_PRG15_MIRROR__d654
 ;     Maybe_Area_LoadBlocks
 ;
-BYTE_004f:                                  ; [$004f]
+Something_ShopItem_PPUAddr_U:               ; [$004f]
     db $00                                  ; [$004f] byte
 
 ;
@@ -1049,7 +1252,7 @@ BYTE_004f:                                  ; [$004f]
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
 ;
-BYTE_0050:                                  ; [$0050]
+Something_PPUAddr_L:                        ; [$0050]
     db $00                                  ; [$0050] byte
 
 ;
@@ -1057,24 +1260,24 @@ BYTE_0050:                                  ; [$0050]
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
 ;
-DAT_0051:                                   ; [$0051]
-    db $00                                  ; [$0051] undefined1
+Something_PPUAddr_U:                        ; [$0051]
+    db $00                                  ; [$0051] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d699
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_0052:                                   ; [$0052]
-    db $00                                  ; [$0052] undefined1
+Something_Blocks_PPUAddr2_L:                ; [$0052]
+    db $00                                  ; [$0052] byte
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d699
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_0053:                                   ; [$0053]
-    db $00                                  ; [$0053] undefined1
+Something_Blocks_PPUAddr2_U:                ; [$0053]
+    db $00                                  ; [$0053] byte
 
 
 ;============================================================================
@@ -1100,8 +1303,16 @@ DAT_0053:                                   ; [$0053]
 ;
 Screen_ScrollDirection:                     ; [$0054]
     db $00                                  ; [$0054] ScreenScrollDirection
-    db $00,$00                              ; [$0055] undefined2
 
+;
+; UNUSED: The next 2 bytes are unused by Faxanadu.
+;
+    db $00,$00                              ; [$0055] undefined
+
+;
+; The following are pending a deep-dive. A lot of these
+; variables depend on each other.
+;
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
@@ -1110,7 +1321,7 @@ Screen_ScrollDirection:                     ; [$0054]
 ;     Maybe_Screen_Scroll
 ;     Maybe_Screen_Scroll_D2A6
 ;
-BYTE_0057:                                  ; [$0057]
+Something_ScrollIndex:                      ; [$0057]
     db $00                                  ; [$0057] byte
 
 ;
@@ -1122,7 +1333,7 @@ BYTE_0057:                                  ; [$0057]
 ;     Player_SetInitialState
 ;     Something_SetupNewScreen
 ;
-Maybe_Player_DAT_0058:                      ; [$0058]
+Something_Player_ScrollY:                   ; [$0058]
     db $00                                  ; [$0058] byte
 
 ;
@@ -1135,9 +1346,18 @@ Maybe_Player_DAT_0058:                      ; [$0058]
 ;     Player_SetInitialState
 ;     Something_SetupNewScreen
 ;
-Maybe_Player_DAT_0059:                      ; [$0059]
+Something_Player_ScrollX:                   ; [$0059]
     db $00                                  ; [$0059] byte
 
+
+;============================================================================
+; Additional PPU state.
+;============================================================================
+
+;
+; TODO: Flag that seems to be used to prevent certain kinds of
+;       PPU updates. This needs to be investigated further.
+;
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb3f
@@ -1146,9 +1366,12 @@ Maybe_Player_DAT_0059:                      ; [$0059]
 ;     Something_FrameAltToggle
 ;     Something_FrameAltToggleWithPausePPU
 ;
-PPU_Something_DontUpdate:                   ; [$005a]
+PPU_Something_PauseUpdates:                 ; [$005a]
     db $00                                  ; [$005a] bool
 
+;
+; Whether to force lower pattern tables when updating the PPU.
+;
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__cb3f
@@ -1160,6 +1383,14 @@ PPU_Something_DontUpdate:                   ; [$005a]
 PPU_ForceLowerPatternTables:                ; [$005b]
     db $00                                  ; [$005b] bool
 
+
+;============================================================================
+; Screen block loading state.
+;============================================================================
+
+;
+; Temporary variable used while loading blocks.
+;
 ;
 ; XREFS:
 ;     Area_LoadBlocks
@@ -1168,12 +1399,18 @@ Temp_LoadedBlockValue:                      ; [$005c]
     db $00                                  ; [$005c] byte
 
 ;
+; Temporary variable used to store the loaded blocks count.
+;
+;
 ; XREFS:
 ;     Area_LoadBlocks
 ;
 Temp_LoadedBlocksCount:                     ; [$005d]
     db $00                                  ; [$005d] byte
 
+;
+; Current byte offset into the compressed screen data.
+;
 ;
 ; XREFS:
 ;     Area_LoadBlocks
@@ -1183,6 +1420,9 @@ LoadCompressedScreenData_ByteOffset:        ; [$005e]
     db $00                                  ; [$005e] byte
 
 ;
+; Current bit offset into the current compressed screen byte.
+;
+;
 ; XREFS:
 ;     Area_LoadBlocks
 ;     Area_LoadNextCompressedScreenBit
@@ -1191,38 +1431,55 @@ LoadCompressedScreenData_BitOffset:         ; [$005f]
     db $00                                  ; [$005f] byte
 
 ;
+; Current compressed screen byte being loaded from.
+;
+;
 ; XREFS:
 ;     Area_LoadNextCompressedScreenBit
 ;
 LoadCompressedScreenData_CurByte:           ; [$0060]
     db $00                                  ; [$0060] byte
 
+
+;============================================================================
+; Player/equipment sprite addresses.
+;
+; This is used to store the address of each piece of
+; equipment the player is wearing. That includes the
+; player body/armor, the shield, and the weapon.
+;============================================================================
+
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee15
-;     FUN_PRG15_MIRROR__ee3f
-;     FUN_PRG15_MIRROR__ee69
 ;     FUN_PRG15_MIRROR__eebf
+;     Maybe_Player_LoadArmorSprite
+;     Maybe_Player_LoadShieldSprite
+;     Maybe_Player_LoadWeaponSprite
 ;
-Something_ROMBank:                          ; [$0061]
-    db $00                                  ; [$0061] undefined2
+PlayerSprite_ReadAddr_L:                    ; [$0061]
+    db $00                                  ; [$0061] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ee15
-;     FUN_PRG15_MIRROR__ee3f
-;     FUN_PRG15_MIRROR__ee69
+;     Maybe_Player_LoadArmorSprite
+;     Maybe_Player_LoadShieldSprite
+;     Maybe_Player_LoadWeaponSprite
 ;
-Something_ROMBank_1:                        ; [$0062]
-    db $00                                  ; [$0062] undefined2
+PlayerSprite_ReadAddr_U:                    ; [$0062]
+    db $00                                  ; [$0062] byte
 
 
 ;============================================================================
-; Currently-visible screen
-;
-; MAYBE: Outside only? See Game_SpawnInTemple.
+; Area/screen information.
 ;============================================================================
 
+;
+; The (outside) area the player is in.
+;
+; This is used to reference screens and other information,
+; and to restore the appropriate area when exiting a
+; building.
+;
 ;
 ; XREFS:
 ;     Area_ChangeArea
@@ -1251,6 +1508,9 @@ Area_CurrentScreen:                         ; [$0063]
     db $00                                  ; [$0063] byte
 
 ;
+; The index of the screen being loaded.
+;
+;
 ; XREFS:
 ;     Area_ChangeArea
 ;     EndGame_MoveToKingsRoom
@@ -1264,8 +1524,11 @@ Area_CurrentScreen:                         ; [$0063]
 ;     Something_SetupNewScreen
 ;
 Area_LoadingScreenIndex:                    ; [$0064]
-    db $00                                  ; [$0064] undefined1
+    db $00                                  ; [$0064] byte
 
+;
+; The palette for the current screen.
+;
 ;
 ; XREFS:
 ;     Area_ChangeArea
@@ -1278,14 +1541,12 @@ Area_LoadingScreenIndex:                    ; [$0064]
 ;     Player_EnterDoorToInside
 ;     Something_SetupNewScreen
 ;
-Area_Palette:                               ; [$0065]
+Screen_Palette:                             ; [$0065]
     db $00                                  ; [$0065] Palette
 
-
-;============================================================================
-; Screen to the left of the currently-visible screen
-;============================================================================
-
+;
+; Screen to the left of the currently-visible screen.
+;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -1294,11 +1555,9 @@ Area_Palette:                               ; [$0065]
 Area_ScreenToTheLeft:                       ; [$0066]
     db $00                                  ; [$0066] byte
 
-
-;============================================================================
-; Screen to the right of the currently-visible screen
-;============================================================================
-
+;
+; Screen to the right of the currently-visible screen.
+;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -1307,11 +1566,9 @@ Area_ScreenToTheLeft:                       ; [$0066]
 Area_ScreenToTheRight:                      ; [$0067]
     db $00                                  ; [$0067] byte
 
-
-;============================================================================
-; Screen above the currently-visible screen
-;============================================================================
-
+;
+; Screen above the currently-visible screen.
+;
 ;
 ; XREFS:
 ;     Area_ScrollScreenUp
@@ -1321,11 +1578,9 @@ Area_ScreenToTheRight:                      ; [$0067]
 Area_ScreenAbove:                           ; [$0068]
     db $00                                  ; [$0068] byte
 
-
-;============================================================================
-; Screen below the currently-visible screen
-;============================================================================
-
+;
+; Screen below the currently-visible screen.
+;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -1336,6 +1591,9 @@ Area_ScreenBelow:                           ; [$0069]
     db $00                                  ; [$0069] byte
 
 ;
+; Temporary variable used to store a block position.
+;
+;
 ; XREFS:
 ;     Area_SetStateFromDoorDestination
 ;
@@ -1343,20 +1601,23 @@ Temp_BlockPos:                              ; [$006a]
     db $00                                  ; [$006a] byte
 
 ;
+; Temporary variable used to store a block position.
+;
+;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
 Temp_BlockPos2:                             ; [$006b]
     db $00                                  ; [$006b] byte
 
-
-;============================================================================
+;
 ; Starting position for a player when changing screens.
+;
+; This is in $YX position:
 ;
 ; Upper nibble = Y position
 ; Lower nibble = X position / 16
-;============================================================================
-
+;
 ;
 ; XREFS:
 ;     Area_ChangeArea
@@ -1367,8 +1628,8 @@ Temp_BlockPos2:                             ; [$006b]
 ;     Player_EnterDoorToInside
 ;     Something_SetupNewScreen
 ;
-Area_StartPosXY:                            ; [$006c]
-    db $00                                  ; [$006c] undefined1
+Screen_StartPosYX:                          ; [$006c]
+    db $00                                  ; [$006c] byte
 
 ;
 ; XREFS:
@@ -1376,8 +1637,8 @@ Area_StartPosXY:                            ; [$006c]
 ;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_006d:                                   ; [$006d]
-    db $00                                  ; [$006d] undefined
+MaybeUnused_006d:                           ; [$006d]
+    db $00                                  ; [$006d] byte
 
 ;
 ; XREFS:
@@ -1390,8 +1651,8 @@ DAT_006d:                                   ; [$006d]
 ;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_006e:                                   ; [$006e]
-    db $00                                  ; [$006e] undefined1
+Something_Blocks_Counter_006E:              ; [$006e]
+    db $00                                  ; [$006e] byte
 
 ;
 ; XREFS:
@@ -1399,7 +1660,7 @@ DAT_006e:                                   ; [$006e]
 ;     Maybe_Area_LoadBlocks
 ;
 CurrentArea_BlockData1CurAddr:              ; [$006f]
-    db $00                                  ; [$006f] undefined
+    db $00                                  ; [$006f] byte
 
 ;
 ; XREFS:
@@ -1407,7 +1668,7 @@ CurrentArea_BlockData1CurAddr:              ; [$006f]
 ;     Maybe_Area_LoadBlocks
 ;
 CurrentArea_BlockData2CurAddr:              ; [$0070]
-    db $00                                  ; [$0070] undefined1
+    db $00                                  ; [$0070] byte
 
 ;
 ; XREFS:
@@ -1415,7 +1676,7 @@ CurrentArea_BlockData2CurAddr:              ; [$0070]
 ;     Maybe_Area_LoadBlocks
 ;
 CurrentArea_BlockData3CurAddr:              ; [$0071]
-    db $00                                  ; [$0071] undefined1
+    db $00                                  ; [$0071] byte
 
 ;
 ; XREFS:
@@ -1423,51 +1684,50 @@ CurrentArea_BlockData3CurAddr:              ; [$0071]
 ;     Maybe_Area_LoadBlocks
 ;
 CurrentArea_BlockData4CurAddr:              ; [$0072]
-    db $00                                  ; [$0072] undefined1
+    db $00                                  ; [$0072] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
+;     FUN_PRG15_MIRROR__d61d
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_0073:                                   ; [$0073]
-    db $00                                  ; [$0073] undefined
+Something_0073:                             ; [$0073]
+    db $00                                  ; [$0073] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     FUN_PRG15_MIRROR__d503
 ;
-DAT_0074:                                   ; [$0074]
-    db $00                                  ; [$0074] undefined1
+Something_0074:                             ; [$0074]
+    db $00                                  ; [$0074] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     Maybe_Area_LoadBlocks
 ;
-DAT_0075:                                   ; [$0075]
-    db $00                                  ; [$0075] undefined2
+Something_0075:                             ; [$0075]
+    db $00                                  ; [$0075] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     FUN_PRG15_MIRROR__d503
 ;
-DAT_0075_1:                                 ; [$0076]
-    db $00                                  ; [$0076] undefined2
+Something_0076:                             ; [$0076]
+    db $00                                  ; [$0076] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     FUN_PRG15_MIRROR__d61d
 ;
-BYTE_0077:                                  ; [$0077]
+Something_0077:                             ; [$0077]
     db $00                                  ; [$0077] byte
 
-    db $00                                  ; [$0079] undefined1
-
-    db $00
+    db $00,$00                              ; [$0079] undefined
 
 ;
 ; XREFS:
@@ -1575,11 +1835,9 @@ CurrentArea_ScrollingDataAddr:              ; [$008a]
 ScrollingData_U:                            ; [$008b]
     db $00                                  ; [$008b] byte
 
-
-;============================================================================
-; Current active ROM bank
-;============================================================================
-
+;
+; Current area's ROM bank.
+;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
@@ -1589,7 +1847,7 @@ ScrollingData_U:                            ; [$008b]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;
-CurrentROMBank1:                            ; [$008c]
+CurrentArea_ROMBank:                        ; [$008c]
     db $00                                  ; [$008c] ROMBank
 
 ;
@@ -1630,7 +1888,7 @@ CurrentArea_DoorDestinationsAddr.U:         ; [$0090]
 ;     Player_Something_ShieldState
 ;
 Maybe_Player_AccessorySpriteAddr_U:         ; [$0091]
-    db $00                                  ; [$0091] undefined1
+    db $00                                  ; [$0091] byte
 
 ;
 ; XREFS:
@@ -1640,7 +1898,7 @@ Maybe_Player_AccessorySpriteAddr_U:         ; [$0091]
 ;     Player_Something_ShieldState
 ;
 Maybe_Player_AccessorySpriteAddr_L:         ; [$0092]
-    db $00                                  ; [$0092] undefined1
+    db $00                                  ; [$0092] byte
 
 ;
 ; XREFS:
@@ -1795,7 +2053,7 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     Player_CheckSwitchScreen
 ;     Player_DrawBody
 ;     Player_FallToGround
-;     Player_IsCastMagicBlocked
+;     Player_IsClimbing
 ;     Player_Maybe_MoveIfPassable
 ;     Player_SetPosAtRightEdge
 ;     Player_TryMoveLeft
@@ -1914,10 +2172,10 @@ Player_Something_ScrollPosY:                ; [$00a2]
 ; XREFS:
 ;     Maybe_Player_CalcAnimFrame
 ;     Area_BeginScrollToNextRoom
-;     FUN_PRG15_MIRROR__ecac
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckHandleJump
+;     Player_GetBodySpriteFrameOffset
 ;     Player_HandleDeath
 ;
 Player_MovementTick:                        ; [$00a3]
@@ -1927,11 +2185,11 @@ Player_MovementTick:                        ; [$00a3]
 ; Current player flags.
 ;
 ; Bit 0: Jumping
-; Bit 1: ?
-; Bit 2: ?
+; Bit 1: Holding to Climb (from jump/move)
+; Bit 2: Falling off ledge/ladder
 ; Bit 3: Can climb
-; Bit 4: ?
-; Bit 5: Walking
+; Bit 4: Climbing
+; Bit 5: Moving (actively walking or climbing)
 ; Bit 6: Facing right (1) or left (0)
 ; Bit 7: Attacking
 ;
@@ -1951,7 +2209,6 @@ Player_MovementTick:                        ; [$00a3]
 ;     EndGame_MoveToKingsRoom
 ;     FUN_PRG15_MIRROR__e4c9
 ;     FUN_PRG15_MIRROR__ec58
-;     FUN_PRG15_MIRROR__ecac
 ;     GameLoop_CheckUseCurrentItem
 ;     Game_SpawnInTemple
 ;     LAB_PRG15_MIRROR__e42c [$PRG15_MIRROR::e42c]
@@ -1969,9 +2226,10 @@ Player_MovementTick:                        ; [$00a3]
 ;     Player_ContinueHandleClimbOrJump
 ;     Player_EnterDoorToInside
 ;     Player_FallToGround
+;     Player_GetBodySpriteFrameOffset
 ;     Player_HandleDeath
 ;     Player_HandleKnockback
-;     Player_IsCastMagicBlocked
+;     Player_IsClimbing
 ;     Player_KnockbackHoriz
 ;     Player_SetFacingLeft
 ;     Player_SetInitialState
@@ -1995,7 +2253,6 @@ Player_Flags:                               ; [$00a4]
 ;     Maybe_Player_CalcAnimFrame
 ;     Player_SetDamagedBySprite
 ;     SpriteBehavior__MaybeSugata
-;     FUN_PRG15_MIRROR__ecac
 ;     Game_DecWingBootsDuration
 ;     Game_DrawScreenInFrozenState
 ;     Maybe_Player_CalcSpeed
@@ -2005,6 +2262,7 @@ Player_Flags:                               ; [$00a4]
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckHandleJump
+;     Player_GetBodySpriteFrameOffset
 ;     Player_HandleDeath
 ;     Player_HandleIFrames
 ;     Player_SetInitialState
@@ -2019,7 +2277,7 @@ Player_StatusFlag:                          ; [$00a5]
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_ContinueHandleClimbOrJump
 ;
-BYTE_00a6:                                  ; [$00a6]
+Something_Player_ClimbLadderCheckPos:       ; [$00a6]
     db $00                                  ; [$00a6] byte
 
 ;
@@ -2112,8 +2370,8 @@ Player_InvincibilityPhase:                  ; [$00ad]
 ;     Maybe_Player_CalcAnimFrame
 ;     Player_HitSpriteWithWeapon
 ;     FUN_PRG15_MIRROR__ec58
-;     FUN_PRG15_MIRROR__ecac
 ;     Player_CheckHandleAttack
+;     Player_GetBodySpriteFrameOffset
 ;
 PlayerHitsPhaseCounter:                     ; [$00ae]
     db $00                                  ; [$00ae] byte
@@ -2131,33 +2389,25 @@ Maybe_ClimbLadderOffset:                    ; [$00b1]
 ;
 ; Player X position managed during screen scroll.
 ;
-; NOTE: This appears to be unused. It's written to but never
-;       read in any reachable code. It may be a remnant of an
-;       older design.
-;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;     Player_DrawBody
 ;     _Game_MovePlayerOnScroll
 ;
-MaybeUnused_PlayerX_ForScroll:              ; [$00b2]
+Maybe_PlayerX_ForScroll:                    ; [$00b2]
     db $00                                  ; [$00b2] byte
 
 ;
 ; Player Y position managed during screen scroll.
 ;
-; NOTE: This appears to be unused. It's written to but never
-;       read in any reachable code. It may be a remnant of an
-;       older design.
-;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;     Player_DrawBody
 ;     _Game_MovePlayerOnScroll
 ;
-MaybeUnused_PlayerY_ForScroll:              ; [$00b3]
+Maybe_PlayerY_ForScroll:                    ; [$00b3]
     db $00                                  ; [$00b3] byte
 
 ;
@@ -2377,10 +2627,8 @@ CurrentSprites_YPos_7_:                     ; [$00c9]
 ;
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     FUN_PRG14__a6bc
 ;     FUN_PRG14__a734
-;     FUN_PRG14__a754
 ;     FUN_PRG14__a7f8
 ;     Screen_IncSpriteInfoAddr
 ;     SpriteBehavior_Hopper
@@ -2392,10 +2640,12 @@ CurrentSprites_YPos_7_:                     ; [$00c9]
 ;     SpriteBehavior__aafa
 ;     Sprite_SomethingFunc__a6e8
 ;     Sprite_SomethingFunc__a6ff
+;     Sprite_SomethingFunc__a74c
 ;     Sprite_SomethingFunc__a772
 ;     Sprite_SomethingFunc__a7e5
 ;     Sprite_SomethingFunc__a84f
 ;     Sprite_Something__a82a
+;     Sprites_Maybe_UpdateBehavior
 ;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
 ;
@@ -2404,12 +2654,12 @@ Sprites_ReadInfoAddr:                       ; [$00ca]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     FUN_PRG14__a734
-;     FUN_PRG14__a754
 ;     FUN_PRG14__a7f8
 ;     Screen_IncSpriteInfoAddr
+;     Sprite_SomethingFunc__a74c
 ;     Sprite_Something__a82a
+;     Sprites_Maybe_UpdateBehavior
 ;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
 ;
@@ -2522,7 +2772,7 @@ PathToMascon_Opening:                       ; [$00d4]
 PathToMascon_FountainCoverPos:              ; [$00d5]
     db $00                                  ; [$00d5] byte
 
-    db $00
+    db $00                                  ; Unused
 
 
 ;============================================================================
@@ -2661,7 +2911,11 @@ BankedCallSetup_SavedX:                     ; [$00df]
 BankedCallSetup_SavedY:                     ; [$00e0]
     db $00                                  ; [$00e0] byte
 
-    db $00,$00,$00,$00,$00,$00,$00          ; [$00e2] undefined
+
+;============================================================================
+; UNUSED: The following 7 bytes are unused by Faxanadu.
+;============================================================================
+    db $00,$00,$00,$00,$00,$00,$00          ; [$00e1] undefined
 
 
 ;============================================================================
@@ -2957,7 +3211,11 @@ Temp_Int24.U:                               ; [$00ee]
 Maybe_Temp4:                                ; [$00ef]
     db $00                                  ; [$00ef] byte
 
-    db $00,$00                              ; [$00f1] undefined
+
+;============================================================================
+; UNUSED: The following 2 bytes are unused by Faxanadu.
+;============================================================================
+    db $00,$00                              ; [$00f0] undefined
 
 
 ;============================================================================
@@ -3053,9 +3311,6 @@ irq:                                        ; [$00ff]
 ;     Area_SetStateFromDoorDestination
 ;     CHR_LoadTilesetPages
 ;     FUN_PRG15_MIRROR__ce80
-;     FUN_PRG15_MIRROR__ee15
-;     FUN_PRG15_MIRROR__ee3f
-;     FUN_PRG15_MIRROR__ee69
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
@@ -3077,6 +3332,9 @@ irq:                                        ; [$00ff]
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SavePRGBankAndUpdateTo
 ;     MMC1_UpdatePRGBank
+;     Maybe_Player_LoadArmorSprite
+;     Maybe_Player_LoadShieldSprite
+;     Maybe_Player_LoadWeaponSprite
 ;     Maybe_Screen_Scroll
 ;     Maybe_Screen_Scroll_D2A6
 ;     Messages_Load
@@ -3198,29 +3456,29 @@ BYTE_012b:                                  ; [$012b]
 ;     FUN_PRG5__8298
 ;     FUN_PRG5__83ad
 ;
-DAT_012c:                                   ; [$012c]
-    db $00                                  ; [$012c] undefined
+BYTE_012c:                                  ; [$012c]
+    db $00                                  ; [$012c] byte
 
 ;
 ; XREFS:
 ;     Audio_HandleOnInterrupt
 ;
 Something_Music_012d:                       ; [$012d]
-    db $00                                  ; [$012d] undefined
+    db $00                                  ; [$012d] byte
 
 ;
 ; XREFS:
 ;     Audio_HandleOnInterrupt
 ;
 Something_Music_012e:                       ; [$012e]
-    db $00                                  ; [$012e] undefined
+    db $00                                  ; [$012e] byte
 
 ;
 ; XREFS:
 ;     Audio_HandleOnInterrupt
 ;
 Something_Music_012f:                       ; [$012f]
-    db $00                                  ; [$012f] undefined
+    db $00                                  ; [$012f] byte
 
 ;
 ; XREFS:
@@ -3631,14 +3889,21 @@ Something_Music_0180:                       ; [$0180]
 Something_Music_0181:                       ; [$0181]
     db $00                                  ; [$0181] byte
 
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0183] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0192] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01a2] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01b2] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01c2] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01d2] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01e2] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01f2] undefined
+    hex 00 00 00 00 00 00 00 00             ; [$0183] undefined
+
+;
+; XREFS:
+;     FUN_PRG15_MIRROR__d503
+;
+DAT_018a:                                   ; [$018a]
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$018a] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$019a] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01aa] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ba] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ca] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01da] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ea] undefined
+    db $00,$00,$00,$00,$00,$00              ; [$01fa] undefined
 
 ;
 ; XREFS:
@@ -3827,7 +4092,7 @@ TextBox_Height:                             ; [$020b]
 Maybe_TextBox_Dismissed:                    ; [$020c]
     db $00                                  ; [$020c] byte
 
-    db $00
+    db $00                                  ; Unused
 
 
 ;============================================================================
@@ -3844,7 +4109,7 @@ Maybe_TextBox_Dismissed:                    ; [$020c]
 PlayerMenu_SelectedInventory:               ; [$020e]
     db $00                                  ; [$020e] byte
 
-    db $00
+    db $00                                  ; Unused
 
 
 ;============================================================================
@@ -4533,7 +4798,6 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 ;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     FUN_PRG14__a66b
 ;     GetSpriteBox
 ;     HandlePlayerHitByMagic
 ;     Player_AddExperienceFromSprite
@@ -4560,6 +4824,7 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 ;     Sprite_SetDeathEntity
 ;     Sprite_SomethingSpawnMagic
 ;     Sprites_IsSpriteOutOfWeaponRange
+;     Sprites_Maybe_UpdateBehavior
 ;     Sprites_Remove
 ;     WasPlayerHitByMagic
 ;
@@ -4616,7 +4881,6 @@ CurrentSprites_Entities_7_:                 ; [$02d3]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     FUN_PRG14__a6bc
 ;     FUN_PRG14__a7f8
 ;     Sprite_ClearBehaviorReadyAndSetSubtypeBit7
@@ -4630,6 +4894,7 @@ CurrentSprites_Entities_7_:                 ; [$02d3]
 ;     Sprite_SomethingFunc__a74c
 ;     Sprite_SomethingFunc__a772
 ;     Sprite_Something__a82a
+;     Sprites_Maybe_UpdateBehavior
 ;
 CurrentSprites_Subtypes:                    ; [$02d4]
     db $00                                  ; [0]:
@@ -4749,7 +5014,6 @@ CurrentSprites_Flags_7_:                    ; [$02e3]
 ;     FUN_PRG14__9e13
 ;     FUN_PRG14__a51b
 ;     FUN_PRG14__a59d
-;     FUN_PRG14__a754
 ;     GetSpriteBox
 ;     Player_HandleTouchEnemy
 ;     Player_HitEnemyWithMagic
@@ -4823,6 +5087,7 @@ CurrentSprites_Flags_7_:                    ; [$02e3]
 ;     Sprite_SetPhase2
 ;     Sprite_SomethingFunc__a6e8
 ;     Sprite_SomethingFunc__a6ff
+;     Sprite_SomethingFunc__a74c
 ;
 CurrentSprites_Phases:                      ; [$02e4]
     db $00                                  ; [0]:
@@ -5263,6 +5528,7 @@ CurrentSprites_HP_7_:                       ; [$034b]
 ;     CurrentSprite_UpdateState
 ;     Maybe_Sprite_HandleDeathDrop
 ;     Player_HitSpriteWithWeapon
+;     _handleHit [$PRG14::804e]
 ;
 CurrentSprites_HitCounter:                  ; [$034c]
     db $00                                  ; [0]:
@@ -5289,11 +5555,11 @@ CurrentSprites_HitCounter_7_:               ; [$0353]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     Sprite_Maybe_ResetState
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
+;     Sprites_Maybe_UpdateBehavior
 ;
 CurrentSprites_BehaviorAddrs_L:             ; [$0354]
     db $00                                  ; [0]:
@@ -5313,11 +5579,11 @@ CurrentSprites_BehaviorAddrs_L_7_:          ; [$035b]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
 ;     Sprite_Maybe_ResetState
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
+;     Sprites_Maybe_UpdateBehavior
 ;
 CurrentSprites_BehaviorAddrs_U:             ; [$035c]
     db $00                                  ; [0]:
@@ -5534,7 +5800,6 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     FUN_PRG14__87cb
 ;     FUN_PRG14__9991
 ;     FUN_PRG14__9a61
-;     FUN_PRG14__a66b
 ;     FUN_PRG14__ac21
 ;     HandlePlayerHitByMagic
 ;     LAB_PRG14__8043 [$PRG14::8043]
@@ -5556,6 +5821,7 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;     Sprite_CheckHitByCastMagic
+;     Sprites_Maybe_UpdateBehavior
 ;     Sprites_SetBlockIsMovingResult
 ;     Sprites_SetCurrentSpriteCanWalk
 ;     Sprites_UpdateAllStates
@@ -6062,21 +6328,33 @@ MagicInventory:                             ; [$03a9]
     db $00                                  ; [2]:
     db $00                                  ; [3]:
 
+
+;============================================================================
+; Inventory of the player's items.
+;============================================================================
+
 ;
 ; XREFS:
 ;     INVENTORY_CATEGORY_L [$PRG12::9b2d]
 ;     Player_PickUpItem
 ;
 ItemInventory:                              ; [$03ad]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    hex 00 00 00 00 00 00 00 00             ; [$03b5] undefined
+    db $00                                  ; [0]: [0]:
+    db $00                                  ; [0]: [1]:
+    db $00                                  ; [0]: [2]:
+    db $00                                  ; [0]: [3]:
+    db $00                                  ; [0]: [4]:
+    db $00                                  ; [0]: [5]:
+    db $00                                  ; [0]: [6]:
+    db $00                                  ; [0]: [7]:
+    db $00                                  ; [1]: [0]:
+    db $00                                  ; [1]: [1]:
+    db $00                                  ; [1]: [2]:
+    db $00                                  ; [1]: [3]:
+    db $00                                  ; [1]: [4]:
+    db $00                                  ; [1]: [5]:
+    db $00                                  ; [1]: [6]:
+    db $00                                  ; [1]: [7]:
 
 
 ;============================================================================
@@ -6807,7 +7085,7 @@ DurationWingBoots:                          ; [$0429]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a66b
+;     Sprites_Maybe_UpdateBehavior
 ;     Sprites_UpdateAll
 ;     Game_ClearTimedItems
 ;     Game_DecHourGlassDuration

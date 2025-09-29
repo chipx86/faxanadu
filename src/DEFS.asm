@@ -639,6 +639,7 @@ PLAYER_CLEAR_MOVING                                EQU $df
 PLAYER_CLEAR_CLIMBING                              EQU $ef
 PLAYER_CLEAR_CAN_CLIMB                             EQU $f7
 PLAYER_CLEAR_FALLING_OFF                           EQU $fb
+PLAYER_CLEAR_JUMPING                               EQU $fe
 PLAYER_FLAGS_ALL                                   EQU $ff
 
 ;============================================================================
