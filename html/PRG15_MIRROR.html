@@ -1561,30 +1561,46 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document CastMagic_Maybe_SetAppearance
+; Set the appearance of the magic sprite.
+;
+; This will take in an offset into the magic's list of
+; frames and set that as the new appearance.
 ;
 ; INPUTS:
-;     A
+;     A:
+;         The offset into the list of frames.
 ;
-; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#CastMagic_Type">CastMagic_Type</a>:
+;         The type of cast magic.
+;
+;     <a href="#SPRITE_MAGIC_IMAGE_ADDRS_U">SPRITE_MAGIC_IMAGE_ADDRS_U</a>:
+;         The lookup table of upper addresses of magic
+;         sprite images.
+;
+; CALLS:
+;     <a href="#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
 ;
 ; XREFS:
-;     <a href="#MagicHitHandler__c39b">MagicHitHandler__c39b</a>
-;     <a href="#MagicHitHandler__c3a7">MagicHitHandler__c3a7</a>
-;     <a href="#MagicHitHandler__c3b6">MagicHitHandler__c3b6</a>
-;     <a href="#MagicHitHandler__c3c9">MagicHitHandler__c3c9</a>
-;     <a href="#MagicHitHandler__c3d6">MagicHitHandler__c3d6</a>
-;     <a href="#MagicHitHandler__c3fb">MagicHitHandler__c3fb</a>
-;     <a href="#MagicHitHandler__c403">MagicHitHandler__c403</a>
-;     <a href="#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="#CastMagic_FinishHandler_Death">CastMagic_FinishHandler_Death</a>
+;     <a href="#CastMagic_FinishHandler_Deluge">CastMagic_FinishHandler_Deluge</a>
+;     <a href="#CastMagic_FinishHandler_DelugeOrDeathAfterHit">CastMagic_FinishHandler_DelugeOrDeathAfterHit</a>
+;     <a href="#CastMagic_FinishHandler_Fire">CastMagic_FinishHandler_Fire</a>
+;     <a href="#CastMagic_FinishHandler_Thunder">CastMagic_FinishHandler_Thunder</a>
+;     <a href="#CastMagic_FinishHandler_Tilte">CastMagic_FinishHandler_Tilte</a>
+;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
+;     <a href="#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;============================================================================
 </div><span class="l"><a name="CastMagic_Maybe_SetAppearance" href="#CastMagic_Maybe_SetAppearance" class="la">CastMagic_Maybe_SetAppearance:</a><span class="ce">; [$c37d]</span></span>
-<span class="l"><span><span class="i">LDY</span> <span class="o">a:<a href="RAM.html#CastMagic_Type">CastMagic_Type</a></span></span><span class="ce">; Y = cast magic</span></span>
+<span class="l"><span><span class="i">LDY</span> <span class="o">a:<a href="RAM.html#CastMagic_Type">CastMagic_Type</a></span></span><span class="ce">; Y = cast magic type</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$c387,Y</span></span><span class="ce">; Add the value from the lookup table.</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a></span></span><span class="ce">; Set the sprite appearance.</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Table of upper address bytes for magic sprite images.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
@@ -1595,13 +1611,13 @@ pre {
 <span class="l"><span><span class="i">db</span> <span class="o">$9b</span></span><span class="ce">; [2]: Fire</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$9d</span></span><span class="ce">; [3]: Death</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$a1</span></span><span class="ce">; [4]: Tilte</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [5]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$99</span></span><span class="ce">; [6]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$9b</span></span><span class="ce">; [7]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [8]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [9]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [10]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [11]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [5]: UNUSED: Deluge after first hit</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$99</span></span><span class="ce">; [6]: Thunder after first hit</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$9b</span></span><span class="ce">; [7]: Fire after first hit</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [8]: UNUSED: Death after first hit</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [9]: UNUSED</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [10]: UNUSED</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$a5</span></span><span class="ce">; [11]: Tilte after first hit</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -1616,12 +1632,12 @@ pre {
 ;         The sprite's flip state.
 ;
 ; XREFS:
-;     <a href="#MagicHitHandler__c39b">MagicHitHandler__c39b</a>
-;     <a href="#MagicHitHandler__c3a7">MagicHitHandler__c3a7</a>
-;     <a href="#MagicHitHandler__c3b6">MagicHitHandler__c3b6</a>
-;     <a href="#MagicHitHandler__c3c9">MagicHitHandler__c3c9</a>
-;     <a href="#MagicHitHandler__c3d6">MagicHitHandler__c3d6</a>
-;     <a href="#MagicHitHandler__c3fb">MagicHitHandler__c3fb</a>
+;     <a href="#CastMagic_FinishHandler_Death">CastMagic_FinishHandler_Death</a>
+;     <a href="#CastMagic_FinishHandler_Deluge">CastMagic_FinishHandler_Deluge</a>
+;     <a href="#CastMagic_FinishHandler_DelugeOrDeathAfterHit">CastMagic_FinishHandler_DelugeOrDeathAfterHit</a>
+;     <a href="#CastMagic_FinishHandler_Fire">CastMagic_FinishHandler_Fire</a>
+;     <a href="#CastMagic_FinishHandler_Thunder">CastMagic_FinishHandler_Thunder</a>
+;     <a href="#CastMagic_FinishHandler_Tilte">CastMagic_FinishHandler_Tilte</a>
 ;============================================================================
 </div><span class="l"><a name="CastMagic_UpdateSpriteDirection" href="#CastMagic_UpdateSpriteDirection" class="la">CastMagic_UpdateSpriteDirection:</a><span class="ce">; [$c393]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Flags">CastMagic_Flags</a></span></span><span class="ce">; Load the cast magic's flags.</span></span>
@@ -1631,82 +1647,142 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c39b
+; Finish updating the Deluge spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#InterruptCounter">InterruptCounter</a>:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     <a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb27]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb27]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c39b" href="#MagicHitHandler__c39b" class="la">MagicHitHandler__c39b:</a><span class="ce">; [$c39b]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_Deluge" href="#CastMagic_FinishHandler_Deluge" class="la">CastMagic_FinishHandler_Deluge:</a><span class="ce">; [$c39b]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span><span class="ce">; Set the sprite's direction.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span><span class="ce">; Load the interrupt counter.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Shift the interrupt counter to generate an appearance index.</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span><span class="ce">; Keep the 2 right-most bits (effectively, bits 3 and 4 of the interrupt counter).</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Set that as the appearance index.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c3a7
+; Finish updating the Thunder spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; It will update the appearance for 2 frames at a time,
+; and wait 2 frames in-between.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#InterruptCounter">InterruptCounter</a>:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     <a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb29]
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb33]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb29]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb33]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c3a7" href="#MagicHitHandler__c3a7" class="la">MagicHitHandler__c3a7:</a><span class="ce">; [$c3a7]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_Thunder" href="#CastMagic_FinishHandler_Thunder" class="la">CastMagic_FinishHandler_Thunder:</a><span class="ce">; [$c3a7]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span><span class="ce">; Set the sprite's direction.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span><span class="ce">; Load the interrupt counter.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Shift the interrupt counter to generate a value to check against.</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
+<span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@_return">@_return</a></span></span><span class="ce">; If this should not update the appearance, return.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span><span class="ce">; Keep the right-most bit (effectively, bit 2 of the interrupt counter).</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Set that as the appearance index.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$c3b5]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c3b6
+; Finish updating the Fire spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; It will run for 2 frames, skip 2 frames, run for 2 frames,
+; etc.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#InterruptCounter">InterruptCounter</a>:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     <a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb2b]
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb35]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb2b]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb35]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c3b6" href="#MagicHitHandler__c3b6" class="la">MagicHitHandler__c3b6:</a><span class="ce">; [$c3b6]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__c3bd">@LAB_PRG15_MIRROR__c3bd</a></span></span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_Fire" href="#CastMagic_FinishHandler_Fire" class="la">CastMagic_FinishHandler_Fire:</a><span class="ce">; [$c3b6]</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span><span class="ce">; Load the interrupt counter.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$02</span></span><span class="ce">; Is bit 1 set?</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_updateFire">@_updateFire</a></span></span><span class="ce">; If so, jump to update.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__c3bd" href="#@LAB_PRG15_MIRROR__c3bd" class="lla">@LAB_PRG15_MIRROR__c3bd:</a><span class="ce">; [$c3bd]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
+<span class="l"><a name="@_updateFire" href="#@_updateFire" class="lla">@_updateFire:</a><span class="ce">; [$c3bd]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span><span class="ce">; Set the sprite's direction.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span><span class="ce">; Load the interrupt counter.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Shift the interrupt counter to generate an appearance index.</span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span><span class="ce">; Keep the right-most bit (effectively, bit 2 of the interrupt counter).</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Set that as the appearance index.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c3c9
+; Finish updating the Death spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; INPUTS:
+;     <a href="RAM.html#InterruptCounter">InterruptCounter</a>:
+;         The current interrupt counter.
+;
+; OUTPUTS:
+;     None.
+;
+; CALLS:
+;     <a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
+;
+; XREFS:
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb2d]
+;============================================================================
+</div><span class="l"><a name="CastMagic_FinishHandler_Death" href="#CastMagic_FinishHandler_Death" class="la">CastMagic_FinishHandler_Death:</a><span class="ce">; [$c3c9]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span><span class="ce">; Update the sprite's direction.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span><span class="ce">; Load the interrupt counter.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Shift the interrupt counter to generate an appearance index.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span><span class="ce">; Keep the 2 right-most bits (effectively, bits 3 and 4 of the interrupt counter).</span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Set that as the appearance index.</span></span>
+</pre><pre><span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; TODO: Document CastMagic_FinishHandler_Tilte
 ;
 ; INPUTS:
 ;     None.
@@ -1715,31 +1791,9 @@ pre {
 ;     TODO
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb2d]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb2f]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c3c9" href="#MagicHitHandler__c3c9" class="la">MagicHitHandler__c3c9:</a><span class="ce">; [$c3c9]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#InterruptCounter">InterruptCounter</a></span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
-</pre><pre><span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c3d6
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb2f]
-;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c3d6" href="#MagicHitHandler__c3d6" class="la">MagicHitHandler__c3d6:</a><span class="ce">; [$c3d6]</span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_Tilte" href="#CastMagic_FinishHandler_Tilte" class="la">CastMagic_FinishHandler_Tilte:</a><span class="ce">; [$c3d6]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Phase">CastMagic_Phase</a></span></span></span>
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
@@ -1769,37 +1823,41 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c3fb
+; UNUSED: Finish handling updates to Deluge and Death spells that have
+; collided at least once.
+;
+; This would maintain the sprite's direction and appearance.
+;
+; It's never actually run, due to both these spells clearing
+; immediately when colliding.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     <a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb31]
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb37]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb31]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb37]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c3fb" href="#MagicHitHandler__c3fb" class="la">MagicHitHandler__c3fb:</a><span class="ce">; [$c3fb]</span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_DelugeOrDeathAfterHit" href="#CastMagic_FinishHandler_DelugeOrDeathAfterHit" class="la">CastMagic_FinishHandler_DelugeOrDeathAfterHit:</a><span class="ce">; [$c3fb]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c403
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; UNUSED
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb3b]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb3b]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c403" href="#MagicHitHandler__c403" class="la">MagicHitHandler__c403:</a><span class="ce">; [$c403]</span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_Unknown10" href="#CastMagic_FinishHandler_Unknown10" class="la">CastMagic_FinishHandler_Unknown10:</a><span class="ce">; [$c403]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Something_Appearance">CastMagic_Something_Appearance</a></span></span></span>
@@ -1823,7 +1881,7 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document MagicHitHandler__c42c
+; TODO: Document CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 ; INPUTS:
 ;     None.
@@ -1832,9 +1890,9 @@ pre {
 ;     TODO
 ;
 ; XREFS:
-;     <a href="PRG14.html#MagicHitsHandler">MagicHitsHandler</a> [$PRG14::bb3d]
+;     <a href="PRG14.html#PTR_ARRAY_PRG14__bb27">PTR_ARRAY_PRG14__bb27</a> [$PRG14::bb3d]
 ;============================================================================
-</div><span class="l"><a name="MagicHitHandler__c42c" href="#MagicHitHandler__c42c" class="la">MagicHitHandler__c42c:</a><span class="ce">; [$c42c]</span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_TilteAfterFirstHit" href="#CastMagic_FinishHandler_TilteAfterFirstHit" class="la">CastMagic_FinishHandler_TilteAfterFirstHit:</a><span class="ce">; [$c42c]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
@@ -1882,35 +1940,37 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__c46e" href="#DAT_PRG15_MIRROR__c46e" class="la">DAT_PRG15_MIRROR__c46e:</a><span class="ce">; [$c46e]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [$c46e] undefined1</span></span>
+</div><span class="l"><a name="MAGICHITHANDLER_c42c_ARRAY1_2_" href="#MAGICHITHANDLER_c42c_ARRAY1_2_" class="la">MAGICHITHANDLER_c42c_ARRAY1_2_:</a><span class="ce">; [$c46e]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [2]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__c46f" href="#DAT_PRG15_MIRROR__c46f" class="la">DAT_PRG15_MIRROR__c46f:</a><span class="ce">; [$c46f]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$c46f] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$ff,$ff,$00</span></span><span class="ce">; [$c471] undefined</span></span>
+</div><span class="l"><a name="MAGICHITHANDLER_c42c_ARRAY1_3_" href="#MAGICHITHANDLER_c42c_ARRAY1_3_" class="la">MAGICHITHANDLER_c42c_ARRAY1_3_:</a><span class="ce">; [$c46f]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$ff</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__c473" href="#DAT_PRG15_MIRROR__c473" class="la">DAT_PRG15_MIRROR__c473:</a><span class="ce">; [$c473]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$c473] undefined1</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00,$02,$01</span></span><span class="ce">; [$c475] undefined</span></span>
+</div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__c470_3_" href="#BYTE_ARRAY_PRG15_MIRROR__c470_3_" class="la">BYTE_ARRAY_PRG15_MIRROR__c470_3_:</a><span class="ce">; [$c473]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; [2]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__c477" href="#DAT_PRG15_MIRROR__c477" class="la">DAT_PRG15_MIRROR__c477:</a><span class="ce">; [$c477]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$03</span></span><span class="ce">; [$c477] undefined1</span></span>
+</div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__c474_3_" href="#BYTE_ARRAY_PRG15_MIRROR__c474_3_" class="la">BYTE_ARRAY_PRG15_MIRROR__c474_3_:</a><span class="ce">; [$c477]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$03</span></span><span class="ce">; [3]:</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -6570,7 +6630,7 @@ Check if we're on the next bank.</span></span>
 ;     <a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#PPUBuffer_DrawAll">PPUBuffer_DrawAll</a>
 ;     <a href="#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;============================================================================
@@ -7342,8 +7402,8 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG12.html#SplashAnimation_Maybe_AnimPlayerStep">SplashAnimation_Maybe_AnimPlayerStep</a>
 ;     <a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
 ;     <a href="PRG14.html#FUN_PRG14__87cb">FUN_PRG14__87cb</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_HandleTouchBread">Player_HandleTouchBread</a>
@@ -10461,12 +10521,12 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_Maybe_SetupDrawState">GameLoop_Maybe_SetupDrawState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_UpdatePlayer">GameLoop_UpdatePlayer</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span><span class="ce">; Draw shield</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span><span class="ce">; Draw weapon?</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o">#$b7d6</span></span><span class="ce">; Draw weapon?</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o">#$ba5b</span></span><span class="ce">; Draw magic?</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span><span class="ce">; Draw the player's shield sprite.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span><span class="ce">; Draw the player's body sprite.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o">#$b7d6</span></span><span class="ce">; Draw the player's weapon sprite.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o">#$ba5b</span></span><span class="ce">; Check and handle casting magic.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a></span></span><span class="ce">; Active selected item?</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="RAM.html#ROMBankStart">ROMBankStart</a></span></span><span class="ce">; Sprites</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="RAM.html#ROMBankStart">ROMBankStart</a></span></span><span class="ce">; Update all sprites.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CountdownItems">GameLoop_CountdownItems</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a></span></span></span>
@@ -10918,7 +10978,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Screen_Load">Screen_Load</a>
 ;============================================================================
 </div><span class="l"><a name="Something_SetupNewScreen" href="#Something_SetupNewScreen" class="la">Something_SetupNewScreen:</a><span class="ce">; [$dd13]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
@@ -16530,7 +16590,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ed12
+; TODO: Document Maybe_Player_DrawSprite
 ;
 ; INPUTS:
 ;     None.
@@ -16541,8 +16601,8 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Something_SetupNewScreen">Something_SetupNewScreen</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__ed12" href="#FUN_PRG15_MIRROR__ed12" class="la">FUN_PRG15_MIRROR__ed12:</a><span class="ce">; [$ed12]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a></span></span></span>
+</div><span class="l"><a name="Maybe_Player_DrawSprite" href="#Maybe_Player_DrawSprite" class="la">Maybe_Player_DrawSprite:</a><span class="ce">; [$ed12]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ed15" href="#@LAB_PRG15_MIRROR__ed15" class="lla">@LAB_PRG15_MIRROR__ed15:</a><span class="ce">; [$ed15]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a></span></span></span>
@@ -16592,7 +16652,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_SetWeapon">Player_SetWeapon</a>
 ;============================================================================
 </div><span class="l"><a name="Maybe_Player_UpdateVisibleItemStates" href="#Maybe_Player_UpdateVisibleItemStates" class="la">Maybe_Player_UpdateVisibleItemStates:</a><span class="ce">; [$ed45]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ed48" href="#@LAB_PRG15_MIRROR__ed48" class="lla">@LAB_PRG15_MIRROR__ed48:</a><span class="ce">; [$ed48]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a></span></span></span>
@@ -16625,7 +16685,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Maybe_Player_UpdateArmorState
+; TODO: Document Maybe_Player_UpdateArmorSprite
 ;
 ; INPUTS:
 ;     None.
@@ -16634,10 +16694,10 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_Player_UpdateArmorState" href="#Maybe_Player_UpdateArmorState" class="la">Maybe_Player_UpdateArmorState:</a><span class="ce">; [$ed72]</span></span>
+</div><span class="l"><a name="Maybe_Player_UpdateArmorSprite" href="#Maybe_Player_UpdateArmorSprite" class="la">Maybe_Player_UpdateArmorSprite:</a><span class="ce">; [$ed72]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_DAT_00a8">Maybe_Player_DAT_00a8</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Player_AccessorySpriteAddr_U">Maybe_Player_AccessorySpriteAddr_U</a></span></span></span>
@@ -16661,7 +16721,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__ed95" href="#BYTE_ARRAY_PRG15_MIRROR__ed95" class="la">BYTE_ARRAY_PRG15_MIRROR__ed95:</a><span class="ce">; [$ed95]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$33</span></span><span class="ce">; [0]: Leather armor</span></span>
@@ -16684,7 +16744,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
 </div><span class="l"><a name="Maybe_Player_UpdateWeaponSprite" href="#Maybe_Player_UpdateWeaponSprite" class="la">Maybe_Player_UpdateWeaponSprite:</a><span class="ce">; [$ed9d]</span></span>
@@ -16744,7 +16804,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
 </div><span class="l"><a name="Player_Something_ShieldState" href="#Player_Something_ShieldState" class="la">Player_Something_ShieldState:</a><span class="ce">; [$edcd]</span></span>
@@ -16869,7 +16929,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;============================================================================
 </div><span class="l"><a name="Maybe_Player_LoadArmorSprite" href="#Maybe_Player_LoadArmorSprite" class="la">Maybe_Player_LoadArmorSprite:</a><span class="ce">; [$ee15]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank2">CurrentROMBank2</a></span></span></span>
@@ -16983,7 +17043,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__ee93" href="#FUN_PRG15_MIRROR__ee93" class="la">FUN_PRG15_MIRROR__ee93:</a><span class="ce">; [$ee93]</span></span>
@@ -17008,7 +17068,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__eea9" href="#FUN_PRG15_MIRROR__eea9" class="la">FUN_PRG15_MIRROR__eea9:</a><span class="ce">; [$eea9]</span></span>
@@ -17033,7 +17093,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
+;     <a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
 ;     <a href="#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__eebf" href="#FUN_PRG15_MIRROR__eebf" class="la">FUN_PRG15_MIRROR__eebf:</a><span class="ce">; [$eebf]</span></span>

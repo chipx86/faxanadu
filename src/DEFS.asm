@@ -767,9 +767,13 @@ SELECTEDMAGIC_THUNDER                              EQU $01
 SELECTEDMAGIC_FIRE                                 EQU $02
 SELECTEDMAGIC_DEATH                                EQU $03
 SELECTEDMAGIC_TILTE                                EQU $04
-SELECTEDMAGIC_THUNDER_EXPLOSION                    EQU $06
-SELECTEDMAGIC_FIRE_EXPLOSION                       EQU $07
-SELECTEDMAGIC_TILTE_EXPLOSION                      EQU $0b
+SELECTEDMAGIC_DELUGE_AFTER_HIT                     EQU $05
+SELECTEDMAGIC_THUNDER_AFTER_HIT                    EQU $06
+SELECTEDMAGIC_FIRE_AFTER_HIT                       EQU $07
+SELECTEDMAGIC_DEATH_AFTER_HIT                      EQU $08
+SELECTEDMAGIC_UNKNOWN_9                            EQU $09
+SELECTEDMAGIC_UNKNOWN_10                           EQU $0a
+SELECTEDMAGIC_TILTE_AFTER_HIT                      EQU $0b
 SELECTEDMAGIC_NONE                                 EQU $ff
 
 ;============================================================================

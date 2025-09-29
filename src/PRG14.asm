@@ -849,7 +849,7 @@ FUN_PRG14__83c1:                            ; [$83c1]
 ;     TODO
 ;
 ; XREFS:
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateTilte
 ;     SpriteBehavior_Hopper
 ;     SpriteBehavior_MaybeFallingRocks
 ;     SpriteBehavior__8ecf
@@ -889,7 +889,7 @@ CalcVerticalSpriteMovement:                 ; [$83d1]
 ;     TODO
 ;
 ; XREFS:
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateTilte
 ;     FUN_PRG14__9593
 ;     SpriteBehavior_Hopper
 ;     SpriteBehavior_MaybeFallingRocks
@@ -3316,8 +3316,8 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ; Load the magic hit sprite handler for this magic type.
     ;
     LDA a:CastMagic_Type                    ; A = Cast magic type.
-    ASL A                                   ; Normalize to an index in the
-                                            ; lookup table.
+    ASL A                                   ; Update to a word boundary for
+                                            ; the lookup table.
     TAY                                     ; Y = A
     LDA #$bb10,Y                            ; Load the next address from the
                                             ; lookup table.
@@ -14912,12 +14912,13 @@ SUB_PRG14__ba48:                            ; [$ba48]
 ;     Player_DrawWeapon
 ;============================================================================
 Player_GetNormalizedWeaponID:               ; [$ba4b]
-    LDA a:Player_CurWeapon
-    CMP #$ff
-    BNE @LAB_PRG14__ba54
-    LDA #$00
+    LDA a:Player_CurWeapon                  ; Load the player's current
+                                            ; weapon.
+    CMP #$ff                                ; Is it unset?
+    BNE @_return                            ; If not, return.
+    LDA #$00                                ; Else, return the Hand Dagger.
 
-  @LAB_PRG14__ba54:                         ; [$ba54]
+  @_return:                                 ; [$ba54]
     RTS
 
 
@@ -14936,7 +14937,7 @@ Player_GetNormalizedWeaponID:               ; [$ba4b]
 ;============================================================================
 Player_ClearVisibleMagic:                   ; [$ba55]
     LDA #$ff
-    STA a:CastMagic_Type
+    STA a:CastMagic_Type                    ; Unset the cast magic type.
     RTS
 
 
@@ -14944,17 +14945,66 @@ Player_ClearVisibleMagic:                   ; [$ba55]
 ; Draw the magic effect on the screen.
 ;
 ; INPUTS:
-;     TODO
+;     CastMagic_Type:
+;         Any current visible magic on the screen.
+;
+;     Joy1_ButtonMask:
+;         The current button mask.
+;
+;     Joy1_ChangedButtonMask:
+;         The newly-pressed buttons.
+;
+;     SelectedMagic:
+;         The selected magic spell.
+;
+;     PlayerPosX_Full:
+;         The player's X position.
+;
+;     PlayerPosY:
+;         The player's Y position.
+;
+;     Player_Flags:
+;         The player's current flags.
+;
+;     CAST_MAGIC_START_X:
+;         The X offsets for each magic type.
+;
+;     CAST_MAGIC_START_Y:
+;         The Y offsets for each magic type.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Type:
+;         The newly-cast magic spell.
+;
+;     CastMagic_XPos_Full:
+;     CastMagic_XPos_Frac:
+;         The starting X position of the new magic.
+;
+;     CastMagic_YPos_Full:
+;     CastMagic_YPos_Frac:
+;         The starting Y position of the new magic.
+;
+;     CastMagic_Phase:
+;         The magic spell's current phase. This is
+;         dependent on the magic spell.
+;
+;     CastMagic_Counter:
+;         The cast magic's counter.
+;
+;         This is 0 for Tilte and 33 for all others.
+;
+;     CastMagic_Flags:
+;         The flags for the magic spell.
+;
+;         This will match the facing direction of the
+;         player. For Tilte, it will also start falling.
 ;
 ; CALLS:
 ;     Player_IsClimbing
 ;     Player_ReduceMP
 ;     Sound_PlayEffect
-;     PRG14::ba92
-;     CastMagic_HandleSpell
+;     @_placeMagic
+;     CastMagic_RunSpellHandler
 ;
 ; XREFS:
 ;     EndGame_MainLoop
@@ -14964,8 +15014,10 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     ; Check if there's any visible magic on the screen.
     ;
+    ; If so, run its handler and return.
+    ;
     LDA a:CastMagic_Type                    ; Load the visible magic.
-    BPL CastMagic_HandleSpell               ; If unset, jump to the next
+    BPL CastMagic_RunSpellHandler           ; If unset, jump to the next
                                             ; function in the spell cast
                                             ; logic.
 
@@ -14989,6 +15041,9 @@ Player_CastMagic:                           ; [$ba5b]
 
     ;
     ; Load the currently-selected magic spell.
+    ;
+    ; Only the primary spells (not extra stages of the spells)
+    ; are supported.
     ;
     LDA a:SelectedMagic                     ; Load the magic spell.
     CMP #$05                                ; Compare against 5 (Tilte --
@@ -15021,7 +15076,7 @@ Player_CastMagic:                           ; [$ba5b]
     LDA #$05
     JSR #$d0e4                              ; Play the standard magic sound
                                             ; effect.
-    JMP @LAB_PRG14__ba92
+    JMP @_placeMagic
 
     ;
     ; This is Tilte magic. Play its sound effect.
@@ -15034,7 +15089,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     ; Begin placing the magic spell on the screen.
     ;
-  @LAB_PRG14__ba92:                         ; [$ba92]
+  @_placeMagic:                             ; [$ba92]
     LDA a:SelectedMagic                     ; Load the magic spell.
     STA a:CastMagic_Type                    ; Set it as the visible magic.
 
@@ -15080,24 +15135,24 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     LDA a:CastMagic_Type                    ; Load the magic spell.
     CMP #$04                                ; Compare against Tilte.
-    BNE CastMagic_HandleSpell               ; If Tilte, jump to the next
+    BNE CastMagic_RunSpellHandler           ; If Tilte, jump to the next
                                             ; function in the spell cast
                                             ; logic.
 
     ;
-    ; This is anything but Tilte. Mark the magic as attacking and
-    ; facing the player's direction.
+    ; This is Tilte. Set the flags as initially falling for the
+    ; downward arc.
     ;
     LDA a:CastMagic_Flags                   ; Load the magic's flags.
     ORA #$80                                ; Set the Falling bit.
     STA a:CastMagic_Flags                   ; Store it back out.
 
     ;
-    ; Set the magic counter to a default of 0x21.
+    ; Set the magic counter to a default of 33.
     ;
     LDA #$21                                ; A = 0x21
     STA a:CastMagic_Counter                 ; Store as the magic's counter.
-    JMP CastMagic_HandleSpell               ; Jump to the next function in
+    JMP CastMagic_RunSpellHandler           ; Jump to the next function in
                                             ; the spell cast logic.
 
   @_return2:                                ; [$bad8]
@@ -15105,8 +15160,11 @@ Player_CastMagic:                           ; [$ba5b]
 
 
 ;============================================================================
-; Fetch the address of the method used to handle a spell.
-; The address will be pushed to the A register.
+; Run the handler for spawning or updating the current spell.
+;
+; This will fetch the address of the method used to handle
+; a spell and put it on the stack, running it once this
+; function has finished.
 ;
 ; NOTES:
 ;     This is pushing two addresses onto the stack for A:
@@ -15128,7 +15186,7 @@ Player_CastMagic:                           ; [$ba5b]
 ; XREFS:
 ;     Player_CastMagic
 ;============================================================================
-CastMagic_HandleSpell:                      ; [$bad9]
+CastMagic_RunSpellHandler:                  ; [$bad9]
     ;
     ; Push PRG15_MIRROR:C2E9 to the stack as the result
     ; after our magic function.
@@ -15157,11 +15215,15 @@ CastMagic_HandleSpell:                      ; [$bad9]
     ;
     ; XREFS:
     ;     CAST_MAGIC_HANDLERS [$PRG14::bb09]
-    ;     MagicHitsHandler [$PRG14::bb39]
+    ;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb39]
     ;
 CastMagic_Noop:                             ; [$baec]
     RTS
 
+;
+; XREFS:
+;     Player_CastMagic
+;
 CAST_MAGIC_START_Y:                         ; [$baed]
     db $08                                  ; [0]: Deluge
     db $00                                  ; [1]: Thunder
@@ -15169,6 +15231,10 @@ CAST_MAGIC_START_Y:                         ; [$baed]
     db $08                                  ; [3]: Death
     db $08                                  ; [4]: Tilte
 
+;
+; XREFS:
+;     Player_CastMagic
+;
 CAST_MAGIC_START_X:                         ; [$baf2]
     db $00                                  ; [0]: Deluge
     db $00                                  ; [1]: Thunder
@@ -15178,21 +15244,23 @@ CAST_MAGIC_START_X:                         ; [$baf2]
 
 ;
 ; XREFS:
-;     CastMagic_HandleSpell
+;     CastMagic_RunSpellHandler
 ;
 CAST_MAGIC_HANDLERS:                        ; [$baf7]
-    dw CastMagic_HandleDeluge-1             ; [0]: Deluge
-    dw CastMagic_HandleThunderOrDeath-1     ; [1]: Thunder
-    dw CastMagic_HandleFire-1               ; [2]: Fire
-    dw _thunk_CastMagic_HandleThunderOrDeath-1 ; [3]: Death
-    dw CastMagic_HandleTilte-1              ; [4]: Tilte
-    dw CastMagic__bc66-1                    ; [5]:
-    dw CastMagic_HandleThunderExplosion-1   ; [6]:
-    dw CastMagic_HandleFireExplosion-1      ; [7]:
-    dw CastMagic__bc90-1                    ; [8]:
-    dw $baeb                                ; [9]:
-    dw CastMagic__bc99-1                    ; [10]:
-    dw CastMagic_HandleTilteExplosion-1     ; [11]:
+    dw CastMagic_UpdateDeluge-1             ; [0]: Deluge
+    dw CastMagic_UpdateThunderOrDeath-1     ; [1]: Thunder
+    dw CastMagic_UpdateFire-1               ; [2]: Fire
+    dw CastMagic_HandleDeath-1              ; [3]: Death
+    dw CastMagic_UpdateTilte-1              ; [4]: Tilte
+    dw CastMagic_Unused_UpdateDelugeAfterFirstHit-1 ; [5]: Deluge after first
+                                                    ; hit
+    dw CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first hit
+    dw CastMagic_UpdateFireAfterFirstHit-1  ; [7]: Fire after first hit
+    dw CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
+    dw $baeb                                ; [9]: Unused (no-op)
+    dw CastMagic_Unused_HandleUnknown10-1   ; [10]: Unused (would clear)
+    dw CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after first
+                                            ; hit
 
 ;
 ; XREFS:
@@ -15204,31 +15272,34 @@ MagicHitsHandler:                           ; [$bb0f]
     dw CastMagic_HitHandler_Fire-1          ; [2]: Fire
     dw CastMagic_HitHandler_Death-1         ; [3]: Death
     dw CastMagic_HitHandler_Tilte-1         ; [4]: Tilte
-    dw $8b71                                ; [5]:
-    dw $8b71                                ; [6]:
-    dw $8b71                                ; [7]:
-    dw $8b71                                ; [8]:
-    dw $8b71                                ; [9]:
-    dw $8b71                                ; [10]:
-    dw $8b71                                ; [11]:
+    dw $8b71                                ; [5]: Deluge after first hit
+    dw $8b71                                ; [6]: Thunder after first hit
+    dw $8b71                                ; [7]: Fire after first hit
+    dw $8b71                                ; [8]: Death after first hit
+    dw $8b71                                ; [9]: Unused
+    dw $8b71                                ; [10]: Unused
+    dw $8b71                                ; [11]: Tilte after first hit
 
 ;
 ; XREFS:
 ;     CastMagic_Maybe_FinishHandler
 ;
-MagicHitsHandler_12_:                       ; [$bb27]
-    dw MagicHitHandler__c39b-1              ; [12]:
-    dw MagicHitHandler__c3a7-1              ; [13]:
-    dw MagicHitHandler__c3b6-1              ; [14]:
-    dw MagicHitHandler__c3c9-1              ; [15]:
-    dw MagicHitHandler__c3d6-1              ; [16]:
-    dw MagicHitHandler__c3fb-1              ; [17]:
-    dw MagicHitHandler__c3a7-1              ; [18]:
-    dw MagicHitHandler__c3b6-1              ; [19]:
-    dw MagicHitHandler__c3fb-1              ; [20]:
-    dw $baeb                                ; [21]:
-    dw MagicHitHandler__c403-1              ; [22]:
-    dw MagicHitHandler__c42c-1              ; [23]:
+PTR_ARRAY_PRG14__bb27:                      ; [$bb27]
+    dw CastMagic_FinishHandler_Deluge-1     ; [0]: Deluge
+    dw CastMagic_FinishHandler_Thunder-1    ; [1]: Thunder
+    dw CastMagic_FinishHandler_Fire-1       ; [2]: Fire
+    dw CastMagic_FinishHandler_Death-1      ; [3]: Death
+    dw CastMagic_FinishHandler_Tilte-1      ; [4]: Tilte
+    dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [5]: Deluge after
+                                                       ; first hit
+    dw CastMagic_FinishHandler_Thunder-1    ; [6]: Thunder after first hit
+    dw CastMagic_FinishHandler_Fire-1       ; [7]: Fire after first hit
+    dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
+                                                       ; first hit
+    dw $baeb                                ; [9]: Unused
+    dw CastMagic_FinishHandler_Unknown10-1  ; [10]: Unused
+    dw CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after first
+                                                    ; hit
 
 
 ;============================================================================
@@ -15242,10 +15313,10 @@ MagicHitsHandler_12_:                       ; [$bb27]
 ;         The cast magic type to clear.
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     CastMagic_HandleThunderOrDeath
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateThunderOrDeath
+;     CastMagic_UpdateTilte
 ;============================================================================
 CastMagic_Clear:                            ; [$bb3f]
     LDA #$ff
@@ -15280,9 +15351,9 @@ CastMagic_Clear:                            ; [$bb3f]
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::baf7]
-;     CastMagic__bc66
+;     CastMagic_Unused_UpdateDelugeAfterFirstHit
 ;============================================================================
-CastMagic_HandleDeluge:                     ; [$bb45]
+CastMagic_UpdateDeluge:                     ; [$bb45]
     ;
     ; Update the position by X +/- 3 and check if the
     ; magic flew off-screen.
@@ -15384,10 +15455,10 @@ CastMagic_HitHandler_Deluge:                ; [$bb6b]
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::baf9]
-;     CastMagic_HandleThunderExplosion
-;     _thunk_CastMagic_HandleThunderOrDeath
+;     CastMagic_HandleDeath
+;     CastMagic_UpdateThunderAfterFirstHit
 ;============================================================================
-CastMagic_HandleThunderOrDeath:             ; [$bb7e]
+CastMagic_UpdateThunderOrDeath:             ; [$bb7e]
     ;
     ; Update the position by X +/- 2 and check if the
     ; magic flew off-screen.
@@ -15473,9 +15544,9 @@ CastMagic_HitHandler_Thunder:               ; [$bb91]
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bafb]
-;     CastMagic_HandleFireExplosion
+;     CastMagic_UpdateFireAfterFirstHit
 ;============================================================================
-CastMagic_HandleFire:                       ; [$bb9c]
+CastMagic_UpdateFire:                       ; [$bb9c]
     ;
     ; Update X +/- 4 and check if the magic flew off-screen.
     ;
@@ -15545,7 +15616,8 @@ CastMagic_HandleFire:                       ; [$bb9c]
 ; Handle the Fire magic hitting something.
 ;
 ; This will clear out the animation counter and then
-; set the type to the Fire Explosion effect.
+; set the type to a Fire magic that will disappear
+; after hitting 255 enemies (which won't happen).
 ;
 ; INPUTS:
 ;     CurrentSpriteIndex:
@@ -15557,7 +15629,7 @@ CastMagic_HandleFire:                       ; [$bb9c]
 ;         Set to 0xFF.
 ;
 ;     CastMagic_Type:
-;         Set to the Fire Explosion state.
+;         Set to the next type of Fire spell.
 ;
 ; XREFS:
 ;     MagicHitsHandler [$PRG14::bb13]
@@ -15576,13 +15648,13 @@ CastMagic_HitHandler_Fire:                  ; [$bbd9]
 ; Handle casting Thunder or Death magic.
 ;
 ; This is a thunking function that forwards to
-; CastMagic_HandleThunderOrDeath.
+; CastMagic_UpdateThunderOrDeath.
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bafd]
 ;============================================================================
-_thunk_CastMagic_HandleThunderOrDeath:      ; [$bbe7]
-    JMP CastMagic_HandleThunderOrDeath
+CastMagic_HandleDeath:                      ; [$bbe7]
+    JMP CastMagic_UpdateThunderOrDeath
 
 
 ;============================================================================
@@ -15608,7 +15680,7 @@ CastMagic_HitHandler_Death:                 ; [$bbea]
 
     ;
     ; XREFS:
-    ;     CastMagic_HandleTilte
+    ;     CastMagic_UpdateTilte
     ;
 CastMagic_ClearTilte:                       ; [$bbf0]
     JMP CastMagic_Clear
@@ -15661,7 +15733,7 @@ CastMagic_ClearTilte:                       ; [$bbf0]
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::baff]
 ;============================================================================
-CastMagic_HandleTilte:                      ; [$bbf3]
+CastMagic_UpdateTilte:                      ; [$bbf3]
     ;
     ; Update based on the phase of this magic.
     ;
@@ -15788,138 +15860,217 @@ CastMagic_HitHandler_Tilte:                 ; [$bc5b]
     LDA #$00
     STA a:CastMagic_Counter                 ; Set the counter to 0.
     LDA #$0b
-    STA a:CastMagic_Type                    ; Set the type to the Tilte
-                                            ; Explosion.
+    STA a:CastMagic_Type                    ; Set the type to the
+                                            ; post-collision Tilte type.
     RTS
 
 
 ;============================================================================
-; TODO: Document CastMagic__bc66
+; UNUSED: Handle updating a Deluge spell that has collided at least once.
+;
+; This would update the Deluge spell as normal, and then
+; decrement a tick counter. Once that counter hits 0, the
+; spell will clear.
+;
+; However, this never actually gets run. Instead, the spell
+; is cleared as soon as the first hit occurs.
 ;
 ; INPUTS:
-;     None.
+;     CastMagic_Counter:
+;         The counter indicating the max number of ticks
+;         before disappearing.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Counter:
+;         The decremented counter value.
+;
+;     CastMagic_Type:
+;         The cleared magic type, if the counter reaches 0.
+;
+; CALLS:
+;     CastMagic_UpdateDeluge
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb01]
 ;============================================================================
-CastMagic__bc66:                            ; [$bc66]
-    JSR CastMagic_HandleDeluge
-    DEC a:CastMagic_Counter
-    BNE @_return
+CastMagic_Unused_UpdateDelugeAfterFirstHit: ; [$bc66]
+    JSR CastMagic_UpdateDeluge              ; Run standard Deluge behavior.
+    DEC a:CastMagic_Counter                 ; Decrement the tick counter.
+    BNE @_return                            ; If > 0, return.
+
+    ;
+    ; The magic spell has dissipated. Clear it.
+    ;
     LDA #$ff
-    STA a:CastMagic_Type
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
 
   @_return:                                 ; [$bc73]
     RTS
 
 
 ;============================================================================
-; TODO: Document CastMagic_HandleThunderExplosion
+; Handle updating a Thunder spell that has collided at least once.
+;
+; This will update the Thunder spell as normal, and then
+; decrement a tick counter. Once that counter hits 0, the
+; spell will clear.
 ;
 ; INPUTS:
-;     None.
+;     CastMagic_Counter:
+;         The counter indicating the max number of ticks
+;         before disappearing.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Counter:
+;         The decremented counter value.
+;
+;     CastMagic_Type:
+;         The cleared magic type, if the counter reaches 0.
+;
+; CALLS:
+;     CastMagic_UpdateThunderOrDeath
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb03]
 ;============================================================================
-CastMagic_HandleThunderExplosion:           ; [$bc74]
-    JSR CastMagic_HandleThunderOrDeath
-    DEC a:CastMagic_Counter
-    BNE @LAB_PRG14__bc81
-    LDA #$ff
-    STA a:CastMagic_Type
+CastMagic_UpdateThunderAfterFirstHit:       ; [$bc74]
+    JSR CastMagic_UpdateThunderOrDeath      ; Run standard Thunder behavior.
+    DEC a:CastMagic_Counter                 ; Decrement the tick counter.
+    BNE @_return                            ; If > 0, return.
 
-  @LAB_PRG14__bc81:                         ; [$bc81]
+    ;
+    ; The magic spell has dissipated. Clear it.
+    ;
+    LDA #$ff
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
+
+  @_return:                                 ; [$bc81]
     RTS
 
 
 ;============================================================================
-; TODO: Document CastMagic_HandleFireExplosion
+; Handle updating a Fire spell that has collided at least once.
+;
+; This will update the Fire spell as normal, and then
+; decrement a tick counter. Once that counter hits 0, the
+; spell will clear.
 ;
 ; INPUTS:
-;     None.
+;     CastMagic_Counter:
+;         The counter indicating the max number of ticks
+;         before disappearing.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Counter:
+;         The decremented counter value.
+;
+;     CastMagic_Type:
+;         The cleared magic type, if the counter reaches 0.
+;
+; CALLS:
+;     CastMagic_UpdateFire
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb05]
 ;============================================================================
-CastMagic_HandleFireExplosion:              ; [$bc82]
-    JSR CastMagic_HandleFire
-    DEC a:CastMagic_Counter
-    BNE @LAB_PRG14__bc8f
-    LDA #$ff
-    STA a:CastMagic_Type
+CastMagic_UpdateFireAfterFirstHit:          ; [$bc82]
+    JSR CastMagic_UpdateFire                ; Run standard Fire behavior.
+    DEC a:CastMagic_Counter                 ; Decrement the tick counter.
+    BNE @_return                            ; If > 0, return.
 
-  @LAB_PRG14__bc8f:                         ; [$bc8f]
+    ;
+    ; The magic spell has dissipated. Clear it.
+    ;
+    LDA #$ff
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
+
+  @_return:                                 ; [$bc8f]
     RTS
 
 
 ;============================================================================
-; TODO: Document CastMagic__bc90
+; Handle updating a Death spell that has collided at least once.
+;
+; This will immediately clear the current magic type.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb07]
 ;============================================================================
-CastMagic__bc90:                            ; [$bc90]
+CastMagic_UpdateDeathAfterFirstHit:         ; [$bc90]
     LDA #$ff
-    STA a:CastMagic_Type
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
     RTS
+
+
+;============================================================================
+; UNUSED
+;============================================================================
     JMP CastMagic_Clear
 
 
 ;============================================================================
-; TODO: Document CastMagic__bc99
+; UNUSED: Handle updating magic type 10.
+;
+; This isn't a type used in the game. If called, this
+; would clear the current magic type.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Type:
+;         Unset.
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb0b]
 ;============================================================================
-CastMagic__bc99:                            ; [$bc99]
+CastMagic_Unused_HandleUnknown10:           ; [$bc99]
     LDA #$ff
-    STA a:CastMagic_Type
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
     RTS
 
 
 ;============================================================================
-; TODO: Document CastMagic_HandleTilteExplosion
+; Handle updating a Tilte spell that has collided at least once.
+;
+; This will simply increment the tick counter. Once that is >= 16,
+; the spell will clear.
 ;
 ; INPUTS:
-;     None.
+;     CastMagic_Counter:
+;         The counter indicating the max number of ticks
+;         before disappearing.
 ;
 ; OUTPUTS:
-;     TODO
+;     CastMagic_Counter:
+;         The incremented counter value.
+;
+;     CastMagic_Type:
+;         The cleared magic type, if the counter reaches 16 or
+;         higher.
 ;
 ; XREFS:
 ;     CAST_MAGIC_HANDLERS [$PRG14::bb0d]
 ;============================================================================
-CastMagic_HandleTilteExplosion:             ; [$bc9f]
-    INC a:CastMagic_Counter
-    LDA a:CastMagic_Counter
-    CMP #$10
-    BCC @LAB_PRG14__bcae
-    LDA #$ff
-    STA a:CastMagic_Type
+CastMagic_UpdateTilteAfterFirstHit:         ; [$bc9f]
+    INC a:CastMagic_Counter                 ; Increment the tick counter.
+    LDA a:CastMagic_Counter                 ; Load the counter value.
+    CMP #$10                                ; Is it < 16?
+    BCC @_return                            ; If so, return.
 
-  @LAB_PRG14__bcae:                         ; [$bcae]
+    ;
+    ; The magic spell has dissipated. Clear it.
+    ;
+    LDA #$ff
+    STA a:CastMagic_Type                    ; Clear the active magic spell.
+
+  @_return:                                 ; [$bcae]
     RTS
 
 
@@ -15933,10 +16084,10 @@ CastMagic_HandleTilteExplosion:             ; [$bc9f]
 ;     C
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     CastMagic_HandleThunderOrDeath
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateThunderOrDeath
+;     CastMagic_UpdateTilte
 ;============================================================================
 CastMagic_UpdateXPosition:                  ; [$bcaf]
     LDA a:CastMagic_Flags
@@ -15992,7 +16143,7 @@ BYTE_ARRAY_PRG14__bcf6:                     ; [$bcf6]
 ;     C
 ;
 ; XREFS:
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateTilte
 ;============================================================================
 CastMagic_UpdateYPosition:                  ; [$bcfb]
     LDA a:CastMagic_Flags

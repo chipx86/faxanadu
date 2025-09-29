@@ -45,18 +45,18 @@ BASE $0000
 ;     Area_ConvertPixelsToBlockPos
 ;     Area_LoadBlockProperties
 ;     Area_SetBlocks
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_FinishHandler_Unknown10
 ;     FUN_PRG15_MIRROR__c033
 ;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6ce
 ;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__ec58
-;     FUN_PRG15_MIRROR__ed12
-;     MagicHitHandler__c403
-;     MagicHitHandler__c42c
 ;     Maybe_Area_LoadBlocks
 ;     Maybe_IsSpriteEntityNotOnScreen
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_DrawSprite
+;     Maybe_Player_UpdateArmorSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;     Maybe_Player_UpdateWeaponSprite
 ;     Player_DrawBody
@@ -600,16 +600,16 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     SplashAnimation_SomethingOutroUpdate
 ;     FUN_PRG14__850d
 ;     Area_BeginScrollToNextRoom
+;     CastMagic_FinishHandler_Death
+;     CastMagic_FinishHandler_Deluge
+;     CastMagic_FinishHandler_Fire
+;     CastMagic_FinishHandler_Thunder
+;     CastMagic_FinishHandler_Tilte
 ;     Game_DecGloveDuration
 ;     Game_DecHourGlassDuration
 ;     Game_DecOintmentDuration
 ;     Game_DecWingBootsDuration
 ;     Game_WaitForOAMReset
-;     MagicHitHandler__c39b
-;     MagicHitHandler__c3a7
-;     MagicHitHandler__c3b6
-;     MagicHitHandler__c3c9
-;     MagicHitHandler__c3d6
 ;     OnInterrupt
 ;     Player_DrawDeathAnimation
 ;     Player_FallToGround
@@ -873,9 +873,9 @@ MovingSpriteVisibility:                     ; [$0026]
 ;     Player_DrawWeapon
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;     CastMagic_Maybe_FinishHandler
 ;     FUN_PRG15_MIRROR__ec58
-;     MagicHitHandler__c42c
 ;     Player_DrawBody
 ;     Something_SetXYAndAnimOffset
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -898,10 +898,10 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_Maybe_FinishHandler
 ;     FUN_PRG15_MIRROR__ec58
-;     MagicHitHandler__c403
-;     MagicHitHandler__c42c
 ;     Player_DrawBody
 ;     Something_SetXYAndAnimOffset
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -940,10 +940,10 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
 ;     SpriteUpdateHandler_NPC_King
 ;     SpriteUpdateHandler_TODO_Garbled_81
 ;     SpriteUpdateHandler_TODO_Unknown_83
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_UpdateSpriteDirection
 ;     IScripts_DrawPortraitAnimationFrame
-;     MagicHitHandler__c403
-;     MagicHitHandler__c42c
 ;     Player_GetBodySpriteFrameOffset
 ;     Player_SetFacingLeft
 ;     Something_SetXYAndAnimOffset
@@ -1883,7 +1883,7 @@ CurrentArea_DoorDestinationsAddr.U:         ; [$0090]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;     Maybe_Player_UpdateWeaponSprite
 ;     Player_Something_ShieldState
 ;
@@ -1893,7 +1893,7 @@ Maybe_Player_AccessorySpriteAddr_U:         ; [$0091]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;     Maybe_Player_UpdateWeaponSprite
 ;     Player_Something_ShieldState
 ;
@@ -2028,6 +2028,7 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     FUN_PRG14__9aa1
 ;     FUN_PRG14__9e13
 ;     Maybe_Player_CalcAnimFrame
+;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     SpriteBehavior__9060
@@ -2108,6 +2109,7 @@ BYTE_00a0:                                  ; [$00a0]
 ;     GetTextBoxCoordinates
 ;     CurrentSprite_CheckHitPlayer
 ;     FUN_PRG14__831b
+;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     SpriteBehavior__95c0
@@ -2197,6 +2199,7 @@ Player_MovementTick:                        ; [$00a3]
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     Maybe_Player_CalcAnimFrame
+;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     Player_HitSpriteWithWeapon
@@ -2283,16 +2286,16 @@ Something_Player_ClimbLadderCheckPos:       ; [$00a6]
 ;
 ; XREFS:
 ;     Player_DrawWeapon
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;
 Maybe_Player_NormArmorState:                ; [$00a7]
     db $00                                  ; [$00a7] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
 ;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_DrawSprite
+;     Maybe_Player_UpdateArmorSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;     Maybe_Player_UpdateWeaponSprite
 ;     Player_SetInitialState
@@ -2499,10 +2502,10 @@ Arg_PixelPosY:                              ; [$00b6]
 ;
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
 ;     CastMagic_Maybe_CheckImpassableY
 ;     CastMagic_SetShouldDisperse
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__864a
 ;     FUN_PRG14__86c6
@@ -4609,15 +4612,20 @@ CurrentPaletteData_30_:                     ; [$02b1]
 CurrentPaletteData_31_:                     ; [$02b2]
     db $00                                  ; [31]:
 
+
+;============================================================================
+; Magic-related variables.
+;============================================================================
+
+;
+; The type of magic currently on screen.
+;
+; This may also contain results of a spell, including
+; explosion effects.
+;
 ;
 ; XREFS:
 ;     CastMagic_Clear
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     CastMagic_HandleFireExplosion
-;     CastMagic_HandleSpell
-;     CastMagic_HandleThunderExplosion
-;     CastMagic_HandleTilteExplosion
 ;     CastMagic_HitHandler_Death
 ;     CastMagic_HitHandler_Deluge
 ;     CastMagic_HitHandler_Fire
@@ -4625,10 +4633,16 @@ CurrentPaletteData_31_:                     ; [$02b2]
 ;     CastMagic_HitHandler_Tilte
 ;     CastMagic_Maybe_CheckImpassableY
 ;     CastMagic_Maybe_CheckXOrImpassable
+;     CastMagic_RunSpellHandler
+;     CastMagic_Unused_HandleUnknown10
+;     CastMagic_Unused_UpdateDelugeAfterFirstHit
+;     CastMagic_UpdateDeathAfterFirstHit
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateFireAfterFirstHit
+;     CastMagic_UpdateThunderAfterFirstHit
+;     CastMagic_UpdateTilteAfterFirstHit
 ;     CastMagic_UpdateXPosition
-;     CastMagic__bc66
-;     CastMagic__bc90
-;     CastMagic__bc99
 ;     Player_CastMagic
 ;     Player_ClearVisibleMagic
 ;     Sprite_CheckHitByCastMagic
@@ -4639,17 +4653,16 @@ CurrentPaletteData_31_:                     ; [$02b2]
 CastMagic_Type:                             ; [$02b3]
     db $00                                  ; [$02b3] SelectedMagic
 
-
-;============================================================================
+;
 ; Flags dictating direction and movement for a cast magic spell.
-;============================================================================
-
+;
 ;
 ; XREFS:
-;     CastMagic_HandleFire
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateXPosition
 ;     CastMagic_UpdateYPosition
+;     Player_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     CastMagic_CalculateVisibility
 ;     CastMagic_UpdateSpriteDirection
@@ -4657,97 +4670,100 @@ CastMagic_Type:                             ; [$02b3]
 CastMagic_Flags:                            ; [$02b4]
     db $00                                  ; [$02b4] CastMagicFlags
 
-
-;============================================================================
+;
 ; The fractional X position of any visible magic.
-;============================================================================
-
+;
 ;
 ; XREFS:
 ;     CastMagic_UpdateXPosition
+;     Player_CastMagic
 ;
 CastMagic_XPos_Frac:                        ; [$02b5]
     db $00                                  ; [$02b5] byte
 
-
-;============================================================================
+;
 ; The full X position of any visible magic.
-;============================================================================
-
+;
 ;
 ; XREFS:
-;     CastMagic_HandleFire
 ;     CastMagic_HitHandler_Deluge
 ;     CastMagic_Maybe_CheckRightEdgeOrImpassable
 ;     CastMagic_Maybe_CheckXOrImpassable
+;     CastMagic_UpdateFire
 ;     CastMagic_UpdateXPosition
+;     Player_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     CastMagic_CalculateVisibility
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;     CastMagic_Maybe_FinishHandler
-;     MagicHitHandler__c42c
 ;
 CastMagic_XPos_Full:                        ; [$02b6]
     db $00                                  ; [$02b6] byte
 
-
-;============================================================================
+;
 ; The fractional Y position of any visible magic.
-;============================================================================
-
+;
 ;
 ; XREFS:
 ;     CastMagic_UpdateYPosition
+;     Player_CastMagic
 ;
 CastMagic_YPos_Frac:                        ; [$02b7]
     db $00                                  ; [$02b7] byte
 
-
-;============================================================================
+;
 ; The full Y position of any visible magic.
-;============================================================================
-
+;
 ;
 ; XREFS:
 ;     CastMagic_Maybe_CheckImpassableY
 ;     CastMagic_UpdateYPosition
+;     Player_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     CastMagic_CalculateVisibility
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_Maybe_FinishHandler
-;     MagicHitHandler__c403
-;     MagicHitHandler__c42c
 ;
 CastMagic_YPos_Full:                        ; [$02b8]
     db $00                                  ; [$02b8] byte
 
 ;
 ; XREFS:
-;     CastMagic_HandleFireExplosion
-;     CastMagic_HandleThunderExplosion
-;     CastMagic_HandleTilte
-;     CastMagic_HandleTilteExplosion
 ;     CastMagic_HitHandler_Deluge
 ;     CastMagic_HitHandler_Fire
 ;     CastMagic_HitHandler_Thunder
 ;     CastMagic_HitHandler_Tilte
-;     CastMagic__bc66
-;     MagicHitHandler__c42c
+;     CastMagic_Unused_UpdateDelugeAfterFirstHit
+;     CastMagic_UpdateFireAfterFirstHit
+;     CastMagic_UpdateThunderAfterFirstHit
+;     CastMagic_UpdateTilte
+;     CastMagic_UpdateTilteAfterFirstHit
+;     Player_CastMagic
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 CastMagic_Counter:                          ; [$02b9]
     db $00                                  ; [$02b9] byte
 
 ;
+; The phase of the current spell.
+;
+; This is spell-dependent.
+;
+;
 ; XREFS:
-;     CastMagic_HandleTilte
-;     MagicHitHandler__c3d6
+;     CastMagic_UpdateTilte
+;     Player_CastMagic
+;     CastMagic_FinishHandler_Tilte
 ;
 CastMagic_Phase:                            ; [$02ba]
     db $00                                  ; [$02ba] byte
 
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     MagicHitHandler__c403
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_FinishHandler_Unknown10
 ;
 CastMagic_Something_Appearance:             ; [$02bb]
     db $00                                  ; [$02bb] byte
@@ -5649,10 +5665,10 @@ CurrentSprites_Values_7_:                   ; [$0373]
 
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     CastMagic_HandleThunderOrDeath
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateThunderOrDeath
+;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateXPosition
 ;     FUN_PRG14__83a8
 ;     FUN_PRG14__83c1
@@ -5688,10 +5704,10 @@ Arg_DeltaX_Frac:                            ; [$0374]
 
 ;
 ; XREFS:
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
-;     CastMagic_HandleThunderOrDeath
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateThunderOrDeath
+;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateXPosition
 ;     FUN_PRG14__83a8
 ;     FUN_PRG14__83c1
@@ -5732,7 +5748,7 @@ Arg_DeltaX_Full:                            ; [$0375]
 ; XREFS:
 ;     CalcVerticalSpriteMovement
 ;     CalculateNewVertPos
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateYPosition
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_MaybeFallingRocks
@@ -5755,7 +5771,7 @@ Arg_DeltaY_Frac:                            ; [$0376]
 ; XREFS:
 ;     CalcVerticalSpriteMovement
 ;     CalculateNewVertPos
-;     CastMagic_HandleTilte
+;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateYPosition
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_MaybeFallingRocks
@@ -6404,7 +6420,7 @@ SelectedWeapon:
 ;     Player_ApplyDamage
 ;     SpriteBehavior__a354
 ;     FUN_PRG15_MIRROR__ec58
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;     Player_DrawBody
 ;     Player_HandleDeath
 ;     Player_SetArmor
@@ -6433,7 +6449,7 @@ SelectedArmor:                              ; [$03be]
 ;     SpriteBehavior__a384
 ;     WasPlayerHitByMagic
 ;     FUN_PRG15_MIRROR__ec58
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;     Player_DrawBody
 ;     Player_HandleDeath
 ;     Player_SetShield
@@ -6460,7 +6476,6 @@ SelectedShield:                             ; [$03bf]
 ;     Password_Load
 ;     Player_SetMagic
 ;     Player_SetStartGameState
-;     LAB_PRG14__ba92 [$PRG14::ba92]
 ;     PlayerDeath_ResetSelectedItemState
 ;     Player_CastMagic
 ;     Player_HandleDeath

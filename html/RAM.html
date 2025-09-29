@@ -152,18 +152,18 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a>
 ;     <a href="PRG15_MIRROR.html#Area_LoadBlockProperties">Area_LoadBlockProperties</a>
 ;     <a href="PRG15_MIRROR.html#Area_SetBlocks">Area_SetBlocks</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__c033">FUN_PRG15_MIRROR__c033</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6ce">FUN_PRG15_MIRROR__d6ce</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d82d">FUN_PRG15_MIRROR__d82d</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
@@ -707,16 +707,16 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_SomethingOutroUpdate">SplashAnimation_SomethingOutroUpdate</a>
 ;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
 ;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Death">CastMagic_FinishHandler_Death</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Deluge">CastMagic_FinishHandler_Deluge</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Fire">CastMagic_FinishHandler_Fire</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Thunder">CastMagic_FinishHandler_Thunder</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Tilte">CastMagic_FinishHandler_Tilte</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecGloveDuration">Game_DecGloveDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecHourGlassDuration">Game_DecHourGlassDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecOintmentDuration">Game_DecOintmentDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecWingBootsDuration">Game_DecWingBootsDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_WaitForOAMReset">Game_WaitForOAMReset</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c39b">MagicHitHandler__c39b</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3a7">MagicHitHandler__c3a7</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3b6">MagicHitHandler__c3b6</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3c9">MagicHitHandler__c3c9</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3d6">MagicHitHandler__c3d6</a>
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawDeathAnimation">Player_DrawDeathAnimation</a>
 ;     <a href="PRG15_MIRROR.html#Player_FallToGround">Player_FallToGround</a>
@@ -980,9 +980,9 @@ pre {
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Enemy_Unused18">SpriteUpdateHandler_Enemy_Unused18</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetXYAndAnimOffset">Something_SetXYAndAnimOffset</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
@@ -1005,10 +1005,10 @@ pre {
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_EnemyDeath">SpriteUpdateHandler_Effect_EnemyDeath</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Enemy_Unused18">SpriteUpdateHandler_Enemy_Unused18</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetXYAndAnimOffset">Something_SetXYAndAnimOffset</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
@@ -1047,10 +1047,10 @@ pre {
 ;     <a href="PRG14.html#SpriteUpdateHandler_NPC_King">SpriteUpdateHandler_NPC_King</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_TODO_Garbled_81">SpriteUpdateHandler_TODO_Garbled_81</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_TODO_Unknown_83">SpriteUpdateHandler_TODO_Unknown_83</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_DrawPortraitAnimationFrame">IScripts_DrawPortraitAnimationFrame</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;     <a href="PRG15_MIRROR.html#Player_GetBodySpriteFrameOffset">Player_GetBodySpriteFrameOffset</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetFacingLeft">Player_SetFacingLeft</a>
 ;     <a href="PRG15_MIRROR.html#Something_SetXYAndAnimOffset">Something_SetXYAndAnimOffset</a>
@@ -1990,7 +1990,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ShieldState">Player_Something_ShieldState</a>
 ;
@@ -2000,7 +2000,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ShieldState">Player_Something_ShieldState</a>
 ;
@@ -2135,6 +2135,7 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
 ;     <a href="PRG14.html#Maybe_Player_CalcAnimFrame">Maybe_Player_CalcAnimFrame</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#SpriteBehavior__9060">SpriteBehavior__9060</a>
@@ -2215,6 +2216,7 @@ pre {
 ;     <a href="PRG12.html#GetTextBoxCoordinates">GetTextBoxCoordinates</a>
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
 ;     <a href="PRG14.html#FUN_PRG14__831b">FUN_PRG14__831b</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
@@ -2304,6 +2306,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility_MaybeWithArg">CurrentSprite_CalculateVisibility_MaybeWithArg</a>
 ;     <a href="PRG14.html#Maybe_Player_CalcAnimFrame">Maybe_Player_CalcAnimFrame</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
@@ -2390,16 +2393,16 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;
 </div><span class="l"><a name="Maybe_Player_NormArmorState" href="#Maybe_Player_NormArmorState" class="la">Maybe_Player_NormArmorState:</a><span class="ce">; [$00a7]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00a7] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ed12">FUN_PRG15_MIRROR__ed12</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateVisibleItemStates">Maybe_Player_UpdateVisibleItemStates</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
@@ -2606,10 +2609,10 @@ pre {
 ;
 ;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckImpassableY">CastMagic_Maybe_CheckImpassableY</a>
 ;     <a href="PRG14.html#CastMagic_SetShouldDisperse">CastMagic_SetShouldDisperse</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
 ;     <a href="PRG14.html#FUN_PRG14__864a">FUN_PRG14__864a</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
@@ -4713,15 +4716,20 @@ pre {
 </div><span class="l"><a name="CurrentPaletteData_31_" href="#CurrentPaletteData_31_" class="la">CurrentPaletteData_31_:</a><span class="ce">; [$02b2]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [31]:</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; Magic-related variables.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
+; The type of magic currently on screen.
+;
+; This may also contain results of a spell, including
+; explosion effects.
+;
+;
 ; XREFS:
 ;     <a href="PRG14.html#CastMagic_Clear">CastMagic_Clear</a>
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
-;     <a href="PRG14.html#CastMagic_HandleFireExplosion">CastMagic_HandleFireExplosion</a>
-;     <a href="PRG14.html#CastMagic_HandleSpell">CastMagic_HandleSpell</a>
-;     <a href="PRG14.html#CastMagic_HandleThunderExplosion">CastMagic_HandleThunderExplosion</a>
-;     <a href="PRG14.html#CastMagic_HandleTilteExplosion">CastMagic_HandleTilteExplosion</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Death">CastMagic_HitHandler_Death</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Deluge">CastMagic_HitHandler_Deluge</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Fire">CastMagic_HitHandler_Fire</a>
@@ -4729,10 +4737,16 @@ pre {
 ;     <a href="PRG14.html#CastMagic_HitHandler_Tilte">CastMagic_HitHandler_Tilte</a>
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckImpassableY">CastMagic_Maybe_CheckImpassableY</a>
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckXOrImpassable">CastMagic_Maybe_CheckXOrImpassable</a>
+;     <a href="PRG14.html#CastMagic_RunSpellHandler">CastMagic_RunSpellHandler</a>
+;     <a href="PRG14.html#CastMagic_Unused_HandleUnknown10">CastMagic_Unused_HandleUnknown10</a>
+;     <a href="PRG14.html#CastMagic_Unused_UpdateDelugeAfterFirstHit">CastMagic_Unused_UpdateDelugeAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeathAfterFirstHit">CastMagic_UpdateDeathAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
+;     <a href="PRG14.html#CastMagic_UpdateFireAfterFirstHit">CastMagic_UpdateFireAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateThunderAfterFirstHit">CastMagic_UpdateThunderAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilteAfterFirstHit">CastMagic_UpdateTilteAfterFirstHit</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
-;     <a href="PRG14.html#CastMagic__bc66">CastMagic__bc66</a>
-;     <a href="PRG14.html#CastMagic__bc90">CastMagic__bc90</a>
-;     <a href="PRG14.html#CastMagic__bc99">CastMagic__bc99</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_ClearVisibleMagic">Player_ClearVisibleMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
@@ -4743,17 +4757,16 @@ pre {
 </div><span class="l"><a name="CastMagic_Type" href="#CastMagic_Type" class="la">CastMagic_Type:</a><span class="ce">; [$02b3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b3] SelectedMagic</span></span>
 <span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; Flags dictating direction and movement for a cast magic spell.
-;============================================================================
-</div><span class="l"></span>
 <div class="c">;
+; Flags dictating direction and movement for a cast magic spell.
+;
+;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_UpdateSpriteDirection">CastMagic_UpdateSpriteDirection</a>
@@ -4761,97 +4774,100 @@ pre {
 </div><span class="l"><a name="CastMagic_Flags" href="#CastMagic_Flags" class="la">CastMagic_Flags:</a><span class="ce">; [$02b4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b4] CastMagicFlags</span></span>
 <span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; The fractional X position of any visible magic.
-;============================================================================
-</div><span class="l"></span>
 <div class="c">;
+; The fractional X position of any visible magic.
+;
+;
 ; XREFS:
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;
 </div><span class="l"><a name="CastMagic_XPos_Frac" href="#CastMagic_XPos_Frac" class="la">CastMagic_XPos_Frac:</a><span class="ce">; [$02b5]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b5] byte</span></span>
 <span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; The full X position of any visible magic.
-;============================================================================
-</div><span class="l"></span>
 <div class="c">;
+; The full X position of any visible magic.
+;
+;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Deluge">CastMagic_HitHandler_Deluge</a>
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckRightEdgeOrImpassable">CastMagic_Maybe_CheckRightEdgeOrImpassable</a>
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckXOrImpassable">CastMagic_Maybe_CheckXOrImpassable</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;
 </div><span class="l"><a name="CastMagic_XPos_Full" href="#CastMagic_XPos_Full" class="la">CastMagic_XPos_Full:</a><span class="ce">; [$02b6]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b6] byte</span></span>
 <span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; The fractional Y position of any visible magic.
-;============================================================================
-</div><span class="l"></span>
 <div class="c">;
+; The fractional Y position of any visible magic.
+;
+;
 ; XREFS:
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;
 </div><span class="l"><a name="CastMagic_YPos_Frac" href="#CastMagic_YPos_Frac" class="la">CastMagic_YPos_Frac:</a><span class="ce">; [$02b7]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b7] byte</span></span>
 <span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; The full Y position of any visible magic.
-;============================================================================
-</div><span class="l"></span>
 <div class="c">;
+; The full Y position of any visible magic.
+;
+;
 ; XREFS:
 ;     <a href="PRG14.html#CastMagic_Maybe_CheckImpassableY">CastMagic_Maybe_CheckImpassableY</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_Maybe_FinishHandler">CastMagic_Maybe_FinishHandler</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
 ;
 </div><span class="l"><a name="CastMagic_YPos_Full" href="#CastMagic_YPos_Full" class="la">CastMagic_YPos_Full:</a><span class="ce">; [$02b8]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b8] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleFireExplosion">CastMagic_HandleFireExplosion</a>
-;     <a href="PRG14.html#CastMagic_HandleThunderExplosion">CastMagic_HandleThunderExplosion</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
-;     <a href="PRG14.html#CastMagic_HandleTilteExplosion">CastMagic_HandleTilteExplosion</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Deluge">CastMagic_HitHandler_Deluge</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Fire">CastMagic_HitHandler_Fire</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Thunder">CastMagic_HitHandler_Thunder</a>
 ;     <a href="PRG14.html#CastMagic_HitHandler_Tilte">CastMagic_HitHandler_Tilte</a>
-;     <a href="PRG14.html#CastMagic__bc66">CastMagic__bc66</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c42c">MagicHitHandler__c42c</a>
+;     <a href="PRG14.html#CastMagic_Unused_UpdateDelugeAfterFirstHit">CastMagic_Unused_UpdateDelugeAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateFireAfterFirstHit">CastMagic_UpdateFireAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateThunderAfterFirstHit">CastMagic_UpdateThunderAfterFirstHit</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilteAfterFirstHit">CastMagic_UpdateTilteAfterFirstHit</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
 ;
 </div><span class="l"><a name="CastMagic_Counter" href="#CastMagic_Counter" class="la">CastMagic_Counter:</a><span class="ce">; [$02b9]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02b9] byte</span></span>
 <span class="l"></span>
 <div class="c">;
+; The phase of the current spell.
+;
+; This is spell-dependent.
+;
+;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c3d6">MagicHitHandler__c3d6</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
+;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Tilte">CastMagic_FinishHandler_Tilte</a>
 ;
 </div><span class="l"><a name="CastMagic_Phase" href="#CastMagic_Phase" class="la">CastMagic_Phase:</a><span class="ce">; [$02ba]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02ba] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
-;     <a href="PRG15_MIRROR.html#MagicHitHandler__c403">MagicHitHandler__c403</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
+;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;
 </div><span class="l"><a name="CastMagic_Something_Appearance" href="#CastMagic_Something_Appearance" class="la">CastMagic_Something_Appearance:</a><span class="ce">; [$02bb]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$02bb] byte</span></span>
@@ -5753,10 +5769,10 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
-;     <a href="PRG14.html#CastMagic_HandleThunderOrDeath">CastMagic_HandleThunderOrDeath</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
+;     <a href="PRG14.html#CastMagic_UpdateThunderOrDeath">CastMagic_UpdateThunderOrDeath</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
 ;     <a href="PRG14.html#FUN_PRG14__83c1">FUN_PRG14__83c1</a>
@@ -5792,10 +5808,10 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CastMagic_HandleDeluge">CastMagic_HandleDeluge</a>
-;     <a href="PRG14.html#CastMagic_HandleFire">CastMagic_HandleFire</a>
-;     <a href="PRG14.html#CastMagic_HandleThunderOrDeath">CastMagic_HandleThunderOrDeath</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
+;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
+;     <a href="PRG14.html#CastMagic_UpdateThunderOrDeath">CastMagic_UpdateThunderOrDeath</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
 ;     <a href="PRG14.html#FUN_PRG14__83c1">FUN_PRG14__83c1</a>
@@ -5836,7 +5852,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CalcVerticalSpriteMovement">CalcVerticalSpriteMovement</a>
 ;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
 ;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
@@ -5859,7 +5875,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#CalcVerticalSpriteMovement">CalcVerticalSpriteMovement</a>
 ;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
-;     <a href="PRG14.html#CastMagic_HandleTilte">CastMagic_HandleTilte</a>
+;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
 ;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
@@ -6508,7 +6524,7 @@ pre {
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
 ;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetArmor">Player_SetArmor</a>
@@ -6537,7 +6553,7 @@ pre {
 ;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
-;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorState">Maybe_Player_UpdateArmorState</a>
+;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetShield">Player_SetShield</a>
@@ -6564,7 +6580,6 @@ pre {
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetMagic">Player_SetMagic</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#LAB_PRG14__ba92">LAB_PRG14__ba92</a> [$PRG14::ba92]
 ;     <a href="PRG14.html#PlayerDeath_ResetSelectedItemState">PlayerDeath_ResetSelectedItemState</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>

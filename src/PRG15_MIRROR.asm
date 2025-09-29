@@ -1560,30 +1560,46 @@ CastMagic_CalculateVisibility:              ; [$c315]
 
 
 ;============================================================================
-; TODO: Document CastMagic_Maybe_SetAppearance
+; Set the appearance of the magic sprite.
+;
+; This will take in an offset into the magic's list of
+; frames and set that as the new appearance.
 ;
 ; INPUTS:
-;     A
+;     A:
+;         The offset into the list of frames.
 ;
-; OUTPUTS:
-;     TODO
+;     CastMagic_Type:
+;         The type of cast magic.
+;
+;     SPRITE_MAGIC_IMAGE_ADDRS_U:
+;         The lookup table of upper addresses of magic
+;         sprite images.
+;
+; CALLS:
+;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
 ; XREFS:
-;     MagicHitHandler__c39b
-;     MagicHitHandler__c3a7
-;     MagicHitHandler__c3b6
-;     MagicHitHandler__c3c9
-;     MagicHitHandler__c3d6
-;     MagicHitHandler__c3fb
-;     MagicHitHandler__c403
-;     MagicHitHandler__c42c
+;     CastMagic_FinishHandler_Death
+;     CastMagic_FinishHandler_Deluge
+;     CastMagic_FinishHandler_DelugeOrDeathAfterHit
+;     CastMagic_FinishHandler_Fire
+;     CastMagic_FinishHandler_Thunder
+;     CastMagic_FinishHandler_Tilte
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_FinishHandler_Unknown10
 ;============================================================================
 CastMagic_Maybe_SetAppearance:              ; [$c37d]
-    LDY a:CastMagic_Type                    ; Y = cast magic
+    LDY a:CastMagic_Type                    ; Y = cast magic type
     CLC
     ADC #$c387,Y                            ; Add the value from the lookup
                                             ; table.
     JMP Sprite_Maybe_SetAppearanceAddrFromOffset ; Set the sprite appearance.
+
+
+;============================================================================
+; Table of upper address bytes for magic sprite images.
+;============================================================================
 
 ;
 ; XREFS:
@@ -1595,13 +1611,15 @@ SPRITE_MAGIC_IMAGE_ADDRS_U:                 ; [$c387]
     db $9b                                  ; [2]: Fire
     db $9d                                  ; [3]: Death
     db $a1                                  ; [4]: Tilte
-    db $a5                                  ; [5]:
-    db $99                                  ; [6]:
-    db $9b                                  ; [7]:
-    db $a5                                  ; [8]:
-    db $a5                                  ; [9]:
-    db $a5                                  ; [10]:
-    db $a5                                  ; [11]:
+    db $a5                                  ; [5]: UNUSED: Deluge after first
+                                            ; hit
+    db $99                                  ; [6]: Thunder after first hit
+    db $9b                                  ; [7]: Fire after first hit
+    db $a5                                  ; [8]: UNUSED: Death after first
+                                            ; hit
+    db $a5                                  ; [9]: UNUSED
+    db $a5                                  ; [10]: UNUSED
+    db $a5                                  ; [11]: Tilte after first hit
 
 
 ;============================================================================
@@ -1616,12 +1634,12 @@ SPRITE_MAGIC_IMAGE_ADDRS_U:                 ; [$c387]
 ;         The sprite's flip state.
 ;
 ; XREFS:
-;     MagicHitHandler__c39b
-;     MagicHitHandler__c3a7
-;     MagicHitHandler__c3b6
-;     MagicHitHandler__c3c9
-;     MagicHitHandler__c3d6
-;     MagicHitHandler__c3fb
+;     CastMagic_FinishHandler_Death
+;     CastMagic_FinishHandler_Deluge
+;     CastMagic_FinishHandler_DelugeOrDeathAfterHit
+;     CastMagic_FinishHandler_Fire
+;     CastMagic_FinishHandler_Thunder
+;     CastMagic_FinishHandler_Tilte
 ;============================================================================
 CastMagic_UpdateSpriteDirection:            ; [$c393]
     LDA a:CastMagic_Flags                   ; Load the cast magic's flags.
@@ -1632,82 +1650,160 @@ CastMagic_UpdateSpriteDirection:            ; [$c393]
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c39b
+; Finish updating the Deluge spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     CastMagic_UpdateSpriteDirection
+;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb27]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb27]
 ;============================================================================
-MagicHitHandler__c39b:                      ; [$c39b]
-    JSR CastMagic_UpdateSpriteDirection
-    LDA InterruptCounter
+CastMagic_FinishHandler_Deluge:             ; [$c39b]
+    JSR CastMagic_UpdateSpriteDirection     ; Set the sprite's direction.
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    LSR A                                   ; Shift the interrupt counter to
+                                            ; generate an appearance index.
     LSR A
-    LSR A
-    AND #$03
-    JMP CastMagic_Maybe_SetAppearance
+    AND #$03                                ; Keep the 2 right-most bits
+                                            ; (effectively, bits 3 and 4 of
+                                            ; the interrupt counter).
+    JMP CastMagic_Maybe_SetAppearance       ; Set that as the appearance
+                                            ; index.
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c3a7
+; Finish updating the Thunder spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; It will update the appearance for 2 frames at a time,
+; and wait 2 frames in-between.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     CastMagic_UpdateSpriteDirection
+;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb29]
-;     MagicHitsHandler [$PRG14::bb33]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb29]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb33]
 ;============================================================================
-MagicHitHandler__c3a7:                      ; [$c3a7]
-    JSR CastMagic_UpdateSpriteDirection
-    LDA InterruptCounter
+CastMagic_FinishHandler_Thunder:            ; [$c3a7]
+    JSR CastMagic_UpdateSpriteDirection     ; Set the sprite's direction.
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    LSR A                                   ; Shift the interrupt counter to
+                                            ; generate a value to check
+                                            ; against.
     LSR A
-    LSR A
-    BCS @_return
-    AND #$01
-    JMP CastMagic_Maybe_SetAppearance
+    BCS @_return                            ; If this should not update the
+                                            ; appearance, return.
+    AND #$01                                ; Keep the right-most bit
+                                            ; (effectively, bit 2 of the
+                                            ; interrupt counter).
+    JMP CastMagic_Maybe_SetAppearance       ; Set that as the appearance
+                                            ; index.
 
   @_return:                                 ; [$c3b5]
     RTS
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c3b6
+; Finish updating the Fire spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; It will run for 2 frames, skip 2 frames, run for 2 frames,
+; etc.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     CastMagic_UpdateSpriteDirection
+;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb2b]
-;     MagicHitsHandler [$PRG14::bb35]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2b]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb35]
 ;============================================================================
-MagicHitHandler__c3b6:                      ; [$c3b6]
-    LDA InterruptCounter
-    AND #$02
-    BNE @LAB_PRG15_MIRROR__c3bd
+CastMagic_FinishHandler_Fire:               ; [$c3b6]
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$02                                ; Is bit 1 set?
+    BNE @_updateFire                        ; If so, jump to update.
     RTS
 
-  @LAB_PRG15_MIRROR__c3bd:                  ; [$c3bd]
-    JSR CastMagic_UpdateSpriteDirection
-    LDA InterruptCounter
+  @_updateFire:                             ; [$c3bd]
+    JSR CastMagic_UpdateSpriteDirection     ; Set the sprite's direction.
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    LSR A                                   ; Shift the interrupt counter to
+                                            ; generate an appearance index.
     LSR A
-    LSR A
-    AND #$01
-    JMP CastMagic_Maybe_SetAppearance
+    AND #$01                                ; Keep the right-most bit
+                                            ; (effectively, bit 2 of the
+                                            ; interrupt counter).
+    JMP CastMagic_Maybe_SetAppearance       ; Set that as the appearance
+                                            ; index.
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c3c9
+; Finish updating the Death spell.
+;
+; This will maintain the sprite's direction and update
+; the appearance.
+;
+; INPUTS:
+;     InterruptCounter:
+;         The current interrupt counter.
+;
+; OUTPUTS:
+;     None.
+;
+; CALLS:
+;     CastMagic_UpdateSpriteDirection
+;     CastMagic_Maybe_SetAppearance
+;
+; XREFS:
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2d]
+;============================================================================
+CastMagic_FinishHandler_Death:              ; [$c3c9]
+    JSR CastMagic_UpdateSpriteDirection     ; Update the sprite's direction.
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    LSR A                                   ; Shift the interrupt counter to
+                                            ; generate an appearance index.
+    LSR A
+    LSR A
+    AND #$03                                ; Keep the 2 right-most bits
+                                            ; (effectively, bits 3 and 4 of
+                                            ; the interrupt counter).
+    JMP CastMagic_Maybe_SetAppearance       ; Set that as the appearance
+                                            ; index.
+
+
+;============================================================================
+; TODO: Document CastMagic_FinishHandler_Tilte
 ;
 ; INPUTS:
 ;     None.
@@ -1716,31 +1812,9 @@ MagicHitHandler__c3b6:                      ; [$c3b6]
 ;     TODO
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb2d]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2f]
 ;============================================================================
-MagicHitHandler__c3c9:                      ; [$c3c9]
-    JSR CastMagic_UpdateSpriteDirection
-    LDA InterruptCounter
-    LSR A
-    LSR A
-    LSR A
-    AND #$03
-    JMP CastMagic_Maybe_SetAppearance
-
-
-;============================================================================
-; TODO: Document MagicHitHandler__c3d6
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     MagicHitsHandler [$PRG14::bb2f]
-;============================================================================
-MagicHitHandler__c3d6:                      ; [$c3d6]
+CastMagic_FinishHandler_Tilte:              ; [$c3d6]
     JSR CastMagic_UpdateSpriteDirection
     LDA a:CastMagic_Phase
     LSR A
@@ -1770,37 +1844,41 @@ MagicHitHandler__c3d6:                      ; [$c3d6]
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c3fb
+; UNUSED: Finish handling updates to Deluge and Death spells that have
+; collided at least once.
+;
+; This would maintain the sprite's direction and appearance.
+;
+; It's never actually run, due to both these spells clearing
+; immediately when colliding.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     CastMagic_UpdateSpriteDirection
+;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb31]
-;     MagicHitsHandler [$PRG14::bb37]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb31]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb37]
 ;============================================================================
-MagicHitHandler__c3fb:                      ; [$c3fb]
+CastMagic_FinishHandler_DelugeOrDeathAfterHit: ; [$c3fb]
     JSR CastMagic_UpdateSpriteDirection
     LDA #$00
     JMP CastMagic_Maybe_SetAppearance
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c403
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; UNUSED
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb3b]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb3b]
 ;============================================================================
-MagicHitHandler__c403:                      ; [$c403]
+CastMagic_FinishHandler_Unknown10:          ; [$c403]
     LDA #$00
     STA CurrentSprite_FlipMask
     LDA a:CastMagic_Something_Appearance
@@ -1824,7 +1902,7 @@ MagicHitHandler__c403:                      ; [$c403]
 
 
 ;============================================================================
-; TODO: Document MagicHitHandler__c42c
+; TODO: Document CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 ; INPUTS:
 ;     None.
@@ -1833,9 +1911,9 @@ MagicHitHandler__c403:                      ; [$c403]
 ;     TODO
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb3d]
+;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb3d]
 ;============================================================================
-MagicHitHandler__c42c:                      ; [$c42c]
+CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     LDA #$00
     STA CurrentSprite_FlipMask
     LDX #$03
@@ -1883,35 +1961,37 @@ MAGICHITHANDLER_c42c_ARRAY1:                ; [$c46c]
 
 ;
 ; XREFS:
-;     MagicHitHandler__c42c
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
-DAT_PRG15_MIRROR__c46e:                     ; [$c46e]
-    db $ff                                  ; [$c46e] undefined1
+MAGICHITHANDLER_c42c_ARRAY1_2_:             ; [$c46e]
+    db $ff                                  ; [2]:
 
 ;
 ; XREFS:
-;     MagicHitHandler__c42c
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
-DAT_PRG15_MIRROR__c46f:                     ; [$c46f]
-    db $00                                  ; [$c46f] undefined1
-
-    db $ff,$ff,$00                          ; [$c471] undefined
-
-;
-; XREFS:
-;     MagicHitHandler__c42c
-;
-DAT_PRG15_MIRROR__c473:                     ; [$c473]
-    db $00                                  ; [$c473] undefined1
-
-    db $00,$02,$01                          ; [$c475] undefined
+MAGICHITHANDLER_c42c_ARRAY1_3_:             ; [$c46f]
+    db $00                                  ; [3]:
+    db $ff                                  ; [0]:
+    db $ff                                  ; [1]:
+    db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     MagicHitHandler__c42c
+;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
-DAT_PRG15_MIRROR__c477:                     ; [$c477]
-    db $03                                  ; [$c477] undefined1
+BYTE_ARRAY_PRG15_MIRROR__c470_3_:           ; [$c473]
+    db $00                                  ; [3]:
+    db $00                                  ; [0]:
+    db $02                                  ; [1]:
+    db $01                                  ; [2]:
+
+;
+; XREFS:
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;
+BYTE_ARRAY_PRG15_MIRROR__c474_3_:           ; [$c477]
+    db $03                                  ; [3]:
 
 
 ;============================================================================
@@ -6773,7 +6853,7 @@ RETURN_CF3B:                                ; [$cf3b]
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     PPUBuffer_DrawAll
 ;     PPU_HandleOnInterrupt
 ;============================================================================
@@ -7569,8 +7649,8 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     SplashAnimation_Maybe_AnimPlayerStep
 ;     StartScreen_CheckHandleInput
 ;     UI_ShowPlayerMenu
-;     CastMagic_HandleDeluge
-;     CastMagic_HandleFire
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
 ;     FUN_PRG14__87cb
 ;     Player_CastMagic
 ;     Player_HandleTouchBread
@@ -10782,12 +10862,14 @@ Game_MainLoop:                              ; [$db45]
     JSR WaitForNextFrame
     JSR GameLoop_Maybe_SetupDrawState
     JSR GameLoop_UpdatePlayer
-    JSR #$b982                              ; Draw shield
-    JSR Player_DrawBody                     ; Draw weapon?
-    JSR #$b7d6                              ; Draw weapon?
-    JSR #$ba5b                              ; Draw magic?
+    JSR #$b982                              ; Draw the player's shield
+                                            ; sprite.
+    JSR Player_DrawBody                     ; Draw the player's body sprite.
+    JSR #$b7d6                              ; Draw the player's weapon
+                                            ; sprite.
+    JSR #$ba5b                              ; Check and handle casting magic.
     JSR GameLoop_CheckUseCurrentItem        ; Active selected item?
-    JSR ROMBankStart                        ; Sprites
+    JSR ROMBankStart                        ; Update all sprites.
     JSR GameLoop_CountdownItems
     JSR GameLoop_AnimateFog
     JSR GameLoop_CheckShowPlayerMenu
@@ -11245,7 +11327,7 @@ FUN_PRG15_MIRROR__dd0f:                     ; [$dd0f]
 ;     Screen_Load
 ;============================================================================
 Something_SetupNewScreen:                   ; [$dd13]
-    JSR FUN_PRG15_MIRROR__ed12
+    JSR Maybe_Player_DrawSprite
     JSR FUN_PRG15_MIRROR__ce80
     LDA Area_LoadingScreenIndex
     STA Area_CurrentScreen
@@ -17058,7 +17140,7 @@ Player_IsClimbing:                          ; [$ecf6]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ed12
+; TODO: Document Maybe_Player_DrawSprite
 ;
 ; INPUTS:
 ;     None.
@@ -17069,8 +17151,8 @@ Player_IsClimbing:                          ; [$ecf6]
 ; XREFS:
 ;     Something_SetupNewScreen
 ;============================================================================
-FUN_PRG15_MIRROR__ed12:                     ; [$ed12]
-    JSR Maybe_Player_UpdateArmorState
+Maybe_Player_DrawSprite:                    ; [$ed12]
+    JSR Maybe_Player_UpdateArmorSprite
 
   @LAB_PRG15_MIRROR__ed15:                  ; [$ed15]
     JSR FUN_PRG15_MIRROR__eea9
@@ -17120,7 +17202,7 @@ FUN_PRG15_MIRROR__ed12:                     ; [$ed12]
 ;     Player_SetWeapon
 ;============================================================================
 Maybe_Player_UpdateVisibleItemStates:       ; [$ed45]
-    JSR Maybe_Player_UpdateArmorState
+    JSR Maybe_Player_UpdateArmorSprite
 
   @LAB_PRG15_MIRROR__ed48:                  ; [$ed48]
     JSR FUN_PRG15_MIRROR__eea9
@@ -17153,7 +17235,7 @@ Maybe_Player_UpdateVisibleItemStates:       ; [$ed45]
 
 
 ;============================================================================
-; TODO: Document Maybe_Player_UpdateArmorState
+; TODO: Document Maybe_Player_UpdateArmorSprite
 ;
 ; INPUTS:
 ;     None.
@@ -17162,10 +17244,10 @@ Maybe_Player_UpdateVisibleItemStates:       ; [$ed45]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
-Maybe_Player_UpdateArmorState:              ; [$ed72]
+Maybe_Player_UpdateArmorSprite:             ; [$ed72]
     LDA #$00
     STA Maybe_Player_DAT_00a8
     STA Maybe_Player_AccessorySpriteAddr_U
@@ -17189,7 +17271,7 @@ Maybe_Player_UpdateArmorState:              ; [$ed72]
 
 ;
 ; XREFS:
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;
 BYTE_ARRAY_PRG15_MIRROR__ed95:              ; [$ed95]
     db $33                                  ; [0]: Leather armor
@@ -17212,7 +17294,7 @@ BYTE_ARRAY_PRG15_MIRROR__ed95:              ; [$ed95]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
 Maybe_Player_UpdateWeaponSprite:            ; [$ed9d]
@@ -17272,7 +17354,7 @@ MAYBE_WEAPON_SPRITE_ADDRS_L:                ; [$edc6]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
 Player_Something_ShieldState:               ; [$edcd]
@@ -17398,7 +17480,7 @@ Player_SetShield:                           ; [$ee0d]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Player_UpdateArmorState
+;     Maybe_Player_UpdateArmorSprite
 ;============================================================================
 Maybe_Player_LoadArmorSprite:               ; [$ee15]
     LDA a:CurrentROMBank2
@@ -17512,7 +17594,7 @@ Maybe_Player_LoadShieldSprite:              ; [$ee69]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
 FUN_PRG15_MIRROR__ee93:                     ; [$ee93]
@@ -17537,7 +17619,7 @@ FUN_PRG15_MIRROR__ee93:                     ; [$ee93]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
 FUN_PRG15_MIRROR__eea9:                     ; [$eea9]
@@ -17562,7 +17644,7 @@ FUN_PRG15_MIRROR__eea9:                     ; [$eea9]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ed12
+;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateVisibleItemStates
 ;============================================================================
 FUN_PRG15_MIRROR__eebf:                     ; [$eebf]
