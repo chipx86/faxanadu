@@ -1584,10 +1584,10 @@ CastMagic_CalculateVisibility:              ; [$c315]
 ;     CastMagic_FinishHandler_Deluge
 ;     CastMagic_FinishHandler_DelugeOrDeathAfterHit
 ;     CastMagic_FinishHandler_Fire
+;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_Thunder
 ;     CastMagic_FinishHandler_Tilte
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_FinishHandler_Unknown10
 ;============================================================================
 CastMagic_Maybe_SetAppearance:              ; [$c37d]
     LDY a:CastMagic_Type                    ; Y = cast magic type
@@ -1873,32 +1873,91 @@ CastMagic_FinishHandler_DelugeOrDeathAfterHit: ; [$c3fb]
 
 
 ;============================================================================
-; UNUSED
+; UNUSED: Add a Magic Hit Wall effect.
+;
+; This was meant to be used by the Deluge and Fire magic.
+; Upon hitting a wall, it would briefly spawn two explosion
+; sprites (using the diagonal Tilte sprite) up against the
+; collided block, before disappearing.
+;
+; This may have been wired off because there appears to be
+; a race condition in the Fire spell, where it may not
+; always show.
+;
+; This can be reactivated using the following Game Genie
+; codes:
+;
+; ZAVLOUNN
+; ZEUUSUNN
+;
+; INPUTS:
+;     CastMagic_Unused_HitWallDeltaPosY:
+;         The delta Y position for the hit wall sprite.
+;
+;     CastMagic_YPos_Full:
+;         The Y position of the magic sprite.
+;
+; OUTPUTS:
+;     CurrentSprite_FlipMask:
+;         Set to 0.
+;
+;     Maybe_Arg_CurrentSprite_PosY:
+;     Temp_00:
+;         Clobbered.
+;
+; CALLS:
+;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
 ;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb3b]
 ;============================================================================
-CastMagic_FinishHandler_Unknown10:          ; [$c403]
+CastMagic_FinishHandler_HitWallEffect:      ; [$c403]
+    ;
+    ; Set the default flip mask of the sprite to 0 (face right).
+    ;
     LDA #$00
-    STA CurrentSprite_FlipMask
-    LDA a:CastMagic_Something_Appearance
-    ASL A
-    STA Temp_00
-    LDA a:CastMagic_YPos_Full
+    STA CurrentSprite_FlipMask              ; Set flip mask to face right.
+
+    ;
+    ; Calculate a multiplier used to position the explosion
+    ; sprites.
+    ;
+    ; This will be the delta Y position * 2.
+    ;
+    LDA a:CastMagic_Unused_HitWallDeltaPosY ; A = Delta Y position.
+    ASL A                                   ; A *= 2
+    STA Temp_00                             ; Save it temporarily.
+
+    ;
+    ; Position and draw the top explosion sprite.
+    ;
+    ; This will be MagicY - (DeltaY * 2).
+    ;
+    LDA a:CastMagic_YPos_Full               ; A = Magic Y position.
     SEC
-    SBC Temp_00
-    STA Maybe_Arg_CurrentSprite_PosY
+    SBC Temp_00                             ; A -= Effect delta Y position.
+    STA Maybe_Arg_CurrentSprite_PosY        ; Set as the new sprite's Y
+                                            ; position.
     LDA #$02
-    JSR CastMagic_Maybe_SetAppearance
-    LDA a:CastMagic_Something_Appearance
-    ASL A
+    JSR CastMagic_Maybe_SetAppearance       ; Draw the top explosion sprite
+                                            ; at that position.
+
+    ;
+    ; Position and draw the bottom explosion sprite.
+    ;
+    ; This will be MagicY + 16 + (DeltaY * 2).
+    ;
+    LDA a:CastMagic_Unused_HitWallDeltaPosY ; A = Delta Y position.
+    ASL A                                   ; A *= 2
     CLC
-    ADC #$10
+    ADC #$10                                ; A += 16
     CLC
-    ADC a:CastMagic_YPos_Full
-    STA Maybe_Arg_CurrentSprite_PosY
+    ADC a:CastMagic_YPos_Full               ; A += Magic Y position.
+    STA Maybe_Arg_CurrentSprite_PosY        ; Save it as the new sprite's Y
+                                            ; position.
     LDA #$03
-    JMP CastMagic_Maybe_SetAppearance
+    JMP CastMagic_Maybe_SetAppearance       ; Draw the bottom explosion
+                                            ; sprite at that position.
 
 
 ;============================================================================

@@ -15275,8 +15275,8 @@ CAST_MAGIC_UPDATE_HANDLERS:                 ; [$baf7]
     dw CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first hit
     dw CastMagic_UpdateFireAfterFirstHit-1  ; [7]: Fire after first hit
     dw CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
-    dw CastMagic_Noop-1                     ; [9]: Unused (no-op)
-    dw CastMagic_Unused_HandleUnknown10-1   ; [10]: Unused (would clear)
+    dw CastMagic_Noop-1                     ; [9]: UNUSED: No-op
+    dw CastMagic_Unused_UpdateHitWallEffect-1 ; [10]: UNUSED: Hit Wall effect
     dw CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after first
                                             ; hit
 
@@ -15294,8 +15294,8 @@ CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
     dw CastMagic_HitHandler_NoOp-1          ; [6]: Thunder after first hit
     dw CastMagic_HitHandler_NoOp-1          ; [7]: Fire after first hit
     dw CastMagic_HitHandler_NoOp-1          ; [8]: Death after first hit
-    dw CastMagic_HitHandler_NoOp-1          ; [9]: Unused
-    dw CastMagic_HitHandler_NoOp-1          ; [10]: Unused
+    dw CastMagic_HitHandler_NoOp-1          ; [9]: UNUSED
+    dw CastMagic_HitHandler_NoOp-1          ; [10]: UNUSED: Hit Wall effect
     dw CastMagic_HitHandler_NoOp-1          ; [11]: Tilte after first hit
 
 ;
@@ -15314,8 +15314,9 @@ CAST_MAGIC_FINISH_HANDLERS:                 ; [$bb27]
     dw CastMagic_FinishHandler_Fire-1       ; [7]: Fire after first hit
     dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
                                                        ; first hit
-    dw CastMagic_Noop-1                     ; [9]: Unused
-    dw CastMagic_FinishHandler_Unknown10-1  ; [10]: Unused
+    dw CastMagic_Noop-1                     ; [9]: UNUSED
+    dw CastMagic_FinishHandler_HitWallEffect-1 ; [10]: UNUSED: Hit Wall
+                                               ; effect
     dw CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after first
                                                     ; hit
 
@@ -15352,7 +15353,7 @@ CastMagic_Clear:                            ; [$bb3f]
 ;     None
 ;
 ; OUTPUTS:
-;     CastMagic_Something_Appearance:
+;     CastMagic_Unused_HitWallDeltaPosY:
 ;         Set to 4 if the magic hit an obstacle.
 ;
 ;     CastMagic_Type:
@@ -15403,10 +15404,20 @@ CastMagic_UpdateDeluge:                     ; [$bb45]
     LDA #$0a
     JSR #$d0e4                              ; Play the Magic Hit Obstacle
                                             ; sound effect.
+
+    ;
+    ; Clear the magic spell.
+    ;
+    ; NOTE:
+    ;     Originally, it seems this was meant to set a
+    ;     Hit Wall effect instead. This can be re-enabled
+    ;     by changing CastMagic_Type to 10.
+    ;
     LDA #$ff
     STA a:CastMagic_Type                    ; Unset the cast magic spell.
     LDA #$04
-    STA a:CastMagic_Something_Appearance
+    STA a:CastMagic_Unused_HitWallDeltaPosY ; Set the Hit Wall appearance
+                                            ; offset.
 
   @_return:                                 ; [$bb6a]
     RTS
@@ -15539,7 +15550,7 @@ CastMagic_HitHandler_Thunder:               ; [$bb91]
 ;     None
 ;
 ; OUTPUTS:
-;     CastMagic_Something_Appearance:
+;     CastMagic_Unused_HitWallDeltaPosY:
 ;         Set to 0 if the magic hit an obstacle.
 ;
 ;     CastMagic_Flags:
@@ -15595,12 +15606,18 @@ CastMagic_UpdateFire:                       ; [$bb9c]
     LDA #$0a
     JSR #$d0e4                              ; Play the Magic Hit Obstacle
                                             ; sound effect.
-    LDA #$00
-    STA a:CastMagic_Something_Appearance
 
     ;
-    ; Clear out the cast magic.
+    ; Clear the magic spell.
     ;
+    ; NOTE:
+    ;     Originally, it seems this was meant to set a
+    ;     Hit Wall effect instead. This can be re-enabled
+    ;     by changing CastMagic_Type to 10.
+    ;
+    LDA #$00
+    STA a:CastMagic_Unused_HitWallDeltaPosY ; Set the Hit Wall appearance
+                                            ; offset.
     LDA #$ff
     STA a:CastMagic_Type                    ; Unset the cast magic spell.
 
@@ -15656,8 +15673,8 @@ CastMagic_HitHandler_Fire:                  ; [$bbd9]
     LDA #$ff
     STA a:CastMagic_Counter                 ; Set the counter to 0xFF.
     LDA #$07
-    STA a:CastMagic_Type                    ; Set the magic type to the Fire
-                                            ; Explosion.
+    STA a:CastMagic_Type                    ; Set the magic type to the
+                                            ; post-hit handler.
     LDX a:CurrentSpriteIndex                ; X = Current sprite index.
     RTS
 
@@ -15727,7 +15744,7 @@ CastMagic_ClearTilte:                       ; [$bbf0]
 ;     None
 ;
 ; OUTPUTS:
-;     CastMagic_Something_Appearance:
+;     CastMagic_Unused_HitWallDeltaPosY:
 ;         Set to 0 if the magic hit an obstacle.
 ;
 ;     CastMagic_Flags:
@@ -16048,7 +16065,7 @@ CastMagic_UpdateDeathAfterFirstHit:         ; [$bc90]
 ; XREFS:
 ;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb0b]
 ;============================================================================
-CastMagic_Unused_HandleUnknown10:           ; [$bc99]
+CastMagic_Unused_UpdateHitWallEffect:       ; [$bc99]
     LDA #$ff
     STA a:CastMagic_Type                    ; Clear the active magic spell.
     RTS

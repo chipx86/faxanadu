@@ -772,7 +772,7 @@ SELECTEDMAGIC_THUNDER_AFTER_HIT                    EQU $06
 SELECTEDMAGIC_FIRE_AFTER_HIT                       EQU $07
 SELECTEDMAGIC_DEATH_AFTER_HIT                      EQU $08
 SELECTEDMAGIC_UNKNOWN_9                            EQU $09
-SELECTEDMAGIC_UNKNOWN_10                           EQU $0a
+SELECTEDMAGIC_HIT_WALL_EFFECT                      EQU $0a
 SELECTEDMAGIC_TILTE_AFTER_HIT                      EQU $0b
 SELECTEDMAGIC_NONE                                 EQU $ff
 

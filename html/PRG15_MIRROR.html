@@ -1585,10 +1585,10 @@ pre {
 ;     <a href="#CastMagic_FinishHandler_Deluge">CastMagic_FinishHandler_Deluge</a>
 ;     <a href="#CastMagic_FinishHandler_DelugeOrDeathAfterHit">CastMagic_FinishHandler_DelugeOrDeathAfterHit</a>
 ;     <a href="#CastMagic_FinishHandler_Fire">CastMagic_FinishHandler_Fire</a>
+;     <a href="#CastMagic_FinishHandler_HitWallEffect">CastMagic_FinishHandler_HitWallEffect</a>
 ;     <a href="#CastMagic_FinishHandler_Thunder">CastMagic_FinishHandler_Thunder</a>
 ;     <a href="#CastMagic_FinishHandler_Tilte">CastMagic_FinishHandler_Tilte</a>
 ;     <a href="#CastMagic_FinishHandler_TilteAfterFirstHit">CastMagic_FinishHandler_TilteAfterFirstHit</a>
-;     <a href="#CastMagic_FinishHandler_Unknown10">CastMagic_FinishHandler_Unknown10</a>
 ;============================================================================
 </div><span class="l"><a name="CastMagic_Maybe_SetAppearance" href="#CastMagic_Maybe_SetAppearance" class="la">CastMagic_Maybe_SetAppearance:</a><span class="ce">; [$c37d]</span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">a:<a href="RAM.html#CastMagic_Type">CastMagic_Type</a></span></span><span class="ce">; Y = cast magic type</span></span>
@@ -1852,32 +1852,87 @@ pre {
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; UNUSED
+; UNUSED: Add a Magic Hit Wall effect.
+;
+; This was meant to be used by the Deluge and Fire magic.
+; Upon hitting a wall, it would briefly spawn two explosion
+; sprites (using the diagonal Tilte sprite) up against the
+; collided block, before disappearing.
+;
+; This may have been wired off because there appears to be
+; a race condition in the Fire spell, where it may not
+; always show.
+;
+; This can be reactivated using the following Game Genie
+; codes:
+;
+; ZAVLOUNN
+; ZEUUSUNN
+;
+; INPUTS:
+;     <a href="RAM.html#CastMagic_Unused_HitWallDeltaPosY">CastMagic_Unused_HitWallDeltaPosY</a>:
+;         The delta Y position for the hit wall sprite.
+;
+;     <a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a>:
+;         The Y position of the magic sprite.
+;
+; OUTPUTS:
+;     <a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a>:
+;         Set to 0.
+;
+;     <a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a>:
+;     <a href="RAM.html#Temp_00">Temp_00</a>:
+;         Clobbered.
+;
+; CALLS:
+;     <a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a>
 ;
 ; XREFS:
 ;     <a href="PRG14.html#CAST_MAGIC_FINISH_HANDLERS">CAST_MAGIC_FINISH_HANDLERS</a> [$PRG14::bb3b]
 ;============================================================================
-</div><span class="l"><a name="CastMagic_FinishHandler_Unknown10" href="#CastMagic_FinishHandler_Unknown10" class="la">CastMagic_FinishHandler_Unknown10:</a><span class="ce">; [$c403]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Something_Appearance">CastMagic_Something_Appearance</a></span></span></span>
-<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span></span>
+</div><span class="l"><a name="CastMagic_FinishHandler_HitWallEffect" href="#CastMagic_FinishHandler_HitWallEffect" class="la">CastMagic_FinishHandler_HitWallEffect:</a><span class="ce">; [$c403]</span></span>
+<div class="c">;
+; Set the default flip mask of the sprite to 0 (face right).
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span><span class="ce">; Set flip mask to face right.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Calculate a multiplier used to position the explosion
+; sprites.
+;
+; This will be the delta Y position * 2.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Unused_HitWallDeltaPosY">CastMagic_Unused_HitWallDeltaPosY</a></span></span><span class="ce">; A = Delta Y position.</span></span>
+<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; A *= 2</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span><span class="ce">; Save it temporarily.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Position and draw the top explosion sprite.
+;
+; This will be MagicY - (DeltaY * 2).
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span><span class="ce">; A = Magic Y position.</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
-<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span></span>
+<span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span><span class="ce">; A -= Effect delta Y position.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span><span class="ce">; Set as the new sprite's Y position.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Something_Appearance">CastMagic_Something_Appearance</a></span></span></span>
-<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Draw the top explosion sprite at that position.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Position and draw the bottom explosion sprite.
+;
+; This will be MagicY + 16 + (DeltaY * 2).
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Unused_HitWallDeltaPosY">CastMagic_Unused_HitWallDeltaPosY</a></span></span><span class="ce">; A = Delta Y position.</span></span>
+<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; A *= 2</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o">#$10</span></span><span class="ce">; A += 16</span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span><span class="ce">; A += Magic Y position.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Arg_CurrentSprite_PosY">Maybe_Arg_CurrentSprite_PosY</a></span></span><span class="ce">; Save it as the new sprite's Y position.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#CastMagic_Maybe_SetAppearance">CastMagic_Maybe_SetAppearance</a></span></span><span class="ce">; Draw the bottom explosion sprite at that position.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================

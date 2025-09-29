@@ -45,8 +45,8 @@ BASE $0000
 ;     Area_ConvertPixelsToBlockPos
 ;     Area_LoadBlockProperties
 ;     Area_SetBlocks
+;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_FinishHandler_Unknown10
 ;     FUN_PRG15_MIRROR__c033
 ;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__d503
@@ -898,8 +898,8 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
+;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_Maybe_FinishHandler
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
@@ -940,8 +940,8 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
 ;     SpriteUpdateHandler_NPC_King
 ;     SpriteUpdateHandler_TODO_Garbled_81
 ;     SpriteUpdateHandler_TODO_Unknown_83
+;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_UpdateSpriteDirection
 ;     IScripts_DrawPortraitAnimationFrame
 ;     Player_GetBodySpriteFrameOffset
@@ -4634,8 +4634,8 @@ CurrentPaletteData_31_:                     ; [$02b2]
 ;     CastMagic_Maybe_CheckImpassableY
 ;     CastMagic_Maybe_CheckXOrImpassable
 ;     CastMagic_RunSpellHandler
-;     CastMagic_Unused_HandleUnknown10
 ;     CastMagic_Unused_UpdateDelugeAfterFirstHit
+;     CastMagic_Unused_UpdateHitWallEffect
 ;     CastMagic_UpdateDeathAfterFirstHit
 ;     CastMagic_UpdateDeluge
 ;     CastMagic_UpdateFire
@@ -4721,8 +4721,8 @@ CastMagic_YPos_Frac:                        ; [$02b7]
 ;     Player_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     CastMagic_CalculateVisibility
+;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_FinishHandler_Unknown10
 ;     CastMagic_Maybe_FinishHandler
 ;
 CastMagic_YPos_Full:                        ; [$02b8]
@@ -4760,12 +4760,25 @@ CastMagic_Phase:                            ; [$02ba]
     db $00                                  ; [$02ba] byte
 
 ;
+; Relative Y position used for the magic's Hit Wall effect.
+;
+; This is set but never actually used in Faxanadu. The game
+; wired it off, but it was intended for the Deluge and Fire
+; spells. It would be the center Y position of the explosion
+; relative to the magic's Y position.
+;
+; It can be enabled via these Game Genie codes:
+;
+; ZAVLOUNN
+; ZEUUSUNN
+;
+;
 ; XREFS:
 ;     CastMagic_UpdateDeluge
 ;     CastMagic_UpdateFire
-;     CastMagic_FinishHandler_Unknown10
+;     CastMagic_FinishHandler_HitWallEffect
 ;
-CastMagic_Something_Appearance:             ; [$02bb]
+CastMagic_Unused_HitWallDeltaPosY:          ; [$02bb]
     db $00                                  ; [$02bb] byte
 
 ;
