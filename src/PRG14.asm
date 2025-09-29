@@ -3231,7 +3231,7 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
                                             ; sprite
     BEQ @_isEnemy                           ; If it's a standard enemy, jump.
     CMP #$07                                ; Check if it's a big enemy.
-    BNE RETURN_8B72
+    BNE CastMagic_HitHandler_NoOp
 
     ;
     ; Check if the magic overlaps the sprite in the X direction.
@@ -3253,7 +3253,7 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     SEC
     SBC CurrentSprites_XPos,X               ; Subtract the sprite X position.
     CMP Temp_00                             ; Compare to the magic hitbox.
-    BCS RETURN_8B72                         ; If it didn't overlap in the X
+    BCS CastMagic_HitHandler_NoOp           ; If it didn't overlap in the X
                                             ; position, return.
 
     ;
@@ -3275,7 +3275,7 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     SEC
     SBC CurrentSprites_YPos,X               ; Subtract the sprite Y position.
     CMP Temp_00                             ; Compare to the magic hitbox.
-    BCS RETURN_8B72                         ; If it didn't overlap in the Y
+    BCS CastMagic_HitHandler_NoOp           ; If it didn't overlap in the Y
                                             ; position, return.
 
     ;
@@ -3325,18 +3325,27 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     LDA #$bb0f,Y
     PHA
 
-    ;
-    ; XREFS:
-    ;     MagicHitsHandler [$PRG14::bb19]
-    ;     MagicHitsHandler [$PRG14::bb1b]
-    ;     MagicHitsHandler [$PRG14::bb1d]
-    ;     MagicHitsHandler [$PRG14::bb1f]
-    ;     MagicHitsHandler [$PRG14::bb21]
-    ;     MagicHitsHandler [$PRG14::bb23]
-    ;     MagicHitsHandler [$PRG14::bb25]
-    ;     Sprite_CheckHitByCastMagic
-    ;
-RETURN_8B72:                                ; [$8b72]
+
+;============================================================================
+; TODO: Document CastMagic_HitHandler_NoOp
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb19]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb1b]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb1d]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb1f]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb21]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb23]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb25]
+;     Sprite_CheckHitByCastMagic
+;============================================================================
+CastMagic_HitHandler_NoOp:                  ; [$8b72]
     RTS
 
 
@@ -15212,11 +15221,20 @@ CastMagic_RunSpellHandler:                  ; [$bad9]
                                             ; address
     PHA                                     ; Push onto A
 
-    ;
-    ; XREFS:
-    ;     CAST_MAGIC_HANDLERS [$PRG14::bb09]
-    ;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb39]
-    ;
+
+;============================================================================
+; TODO: Document CastMagic_Noop
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb39]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb09]
+;============================================================================
 CastMagic_Noop:                             ; [$baec]
     RTS
 
@@ -15246,7 +15264,7 @@ CAST_MAGIC_START_X:                         ; [$baf2]
 ; XREFS:
 ;     CastMagic_RunSpellHandler
 ;
-CAST_MAGIC_HANDLERS:                        ; [$baf7]
+CAST_MAGIC_UPDATE_HANDLERS:                 ; [$baf7]
     dw CastMagic_UpdateDeluge-1             ; [0]: Deluge
     dw CastMagic_UpdateThunderOrDeath-1     ; [1]: Thunder
     dw CastMagic_UpdateFire-1               ; [2]: Fire
@@ -15257,7 +15275,7 @@ CAST_MAGIC_HANDLERS:                        ; [$baf7]
     dw CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first hit
     dw CastMagic_UpdateFireAfterFirstHit-1  ; [7]: Fire after first hit
     dw CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
-    dw $baeb                                ; [9]: Unused (no-op)
+    dw CastMagic_Noop-1                     ; [9]: Unused (no-op)
     dw CastMagic_Unused_HandleUnknown10-1   ; [10]: Unused (would clear)
     dw CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after first
                                             ; hit
@@ -15266,25 +15284,25 @@ CAST_MAGIC_HANDLERS:                        ; [$baf7]
 ; XREFS:
 ;     Sprite_CheckHitByCastMagic
 ;
-MagicHitsHandler:                           ; [$bb0f]
+CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
     dw CastMagic_HitHandler_Deluge-1        ; [0]: Deluge
     dw CastMagic_HitHandler_Thunder-1       ; [1]: Thunder
     dw CastMagic_HitHandler_Fire-1          ; [2]: Fire
     dw CastMagic_HitHandler_Death-1         ; [3]: Death
     dw CastMagic_HitHandler_Tilte-1         ; [4]: Tilte
-    dw $8b71                                ; [5]: Deluge after first hit
-    dw $8b71                                ; [6]: Thunder after first hit
-    dw $8b71                                ; [7]: Fire after first hit
-    dw $8b71                                ; [8]: Death after first hit
-    dw $8b71                                ; [9]: Unused
-    dw $8b71                                ; [10]: Unused
-    dw $8b71                                ; [11]: Tilte after first hit
+    dw CastMagic_HitHandler_NoOp-1          ; [5]: Deluge after first hit
+    dw CastMagic_HitHandler_NoOp-1          ; [6]: Thunder after first hit
+    dw CastMagic_HitHandler_NoOp-1          ; [7]: Fire after first hit
+    dw CastMagic_HitHandler_NoOp-1          ; [8]: Death after first hit
+    dw CastMagic_HitHandler_NoOp-1          ; [9]: Unused
+    dw CastMagic_HitHandler_NoOp-1          ; [10]: Unused
+    dw CastMagic_HitHandler_NoOp-1          ; [11]: Tilte after first hit
 
 ;
 ; XREFS:
 ;     CastMagic_Maybe_FinishHandler
 ;
-PTR_ARRAY_PRG14__bb27:                      ; [$bb27]
+CAST_MAGIC_FINISH_HANDLERS:                 ; [$bb27]
     dw CastMagic_FinishHandler_Deluge-1     ; [0]: Deluge
     dw CastMagic_FinishHandler_Thunder-1    ; [1]: Thunder
     dw CastMagic_FinishHandler_Fire-1       ; [2]: Fire
@@ -15296,7 +15314,7 @@ PTR_ARRAY_PRG14__bb27:                      ; [$bb27]
     dw CastMagic_FinishHandler_Fire-1       ; [7]: Fire after first hit
     dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
                                                        ; first hit
-    dw $baeb                                ; [9]: Unused
+    dw CastMagic_Noop-1                     ; [9]: Unused
     dw CastMagic_FinishHandler_Unknown10-1  ; [10]: Unused
     dw CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after first
                                                     ; hit
@@ -15350,7 +15368,7 @@ CastMagic_Clear:                            ; [$bb3f]
 ;     Sound_PlayEffect
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::baf7]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::baf7]
 ;     CastMagic_Unused_UpdateDelugeAfterFirstHit
 ;============================================================================
 CastMagic_UpdateDeluge:                     ; [$bb45]
@@ -15417,7 +15435,7 @@ CastMagic_UpdateDeluge:                     ; [$bb45]
 ;         The same position as the sprite that was hit.
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb0f]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb0f]
 ;============================================================================
 CastMagic_HitHandler_Deluge:                ; [$bb6b]
     LDA #$ff
@@ -15454,7 +15472,7 @@ CastMagic_HitHandler_Deluge:                ; [$bb6b]
 ;     CastMagic_UpdateXPosition
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::baf9]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::baf9]
 ;     CastMagic_HandleDeath
 ;     CastMagic_UpdateThunderAfterFirstHit
 ;============================================================================
@@ -15500,7 +15518,7 @@ CastMagic_UpdateThunderOrDeath:             ; [$bb7e]
 ;         Set to the Thunder Explosion state.
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb11]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb11]
 ;============================================================================
 CastMagic_HitHandler_Thunder:               ; [$bb91]
     LDA #$18
@@ -15543,7 +15561,7 @@ CastMagic_HitHandler_Thunder:               ; [$bb91]
 ;     Sound_PlayEffect
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bafb]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bafb]
 ;     CastMagic_UpdateFireAfterFirstHit
 ;============================================================================
 CastMagic_UpdateFire:                       ; [$bb9c]
@@ -15632,7 +15650,7 @@ CastMagic_UpdateFire:                       ; [$bb9c]
 ;         Set to the next type of Fire spell.
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb13]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb13]
 ;============================================================================
 CastMagic_HitHandler_Fire:                  ; [$bbd9]
     LDA #$ff
@@ -15651,7 +15669,7 @@ CastMagic_HitHandler_Fire:                  ; [$bbd9]
 ; CastMagic_UpdateThunderOrDeath.
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bafd]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bafd]
 ;============================================================================
 CastMagic_HandleDeath:                      ; [$bbe7]
     JMP CastMagic_UpdateThunderOrDeath
@@ -15670,7 +15688,7 @@ CastMagic_HandleDeath:                      ; [$bbe7]
 ;         Unset (0xFF).
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb15]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb15]
 ;============================================================================
 CastMagic_HitHandler_Death:                 ; [$bbea]
     LDA #$ff
@@ -15731,7 +15749,7 @@ CastMagic_ClearTilte:                       ; [$bbf0]
 ;     Sound_PlayEffect
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::baff]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::baff]
 ;============================================================================
 CastMagic_UpdateTilte:                      ; [$bbf3]
     ;
@@ -15854,7 +15872,7 @@ CastMagic_UpdateTilte:                      ; [$bbf3]
 ;         Set to the Tilte Explosion type.
 ;
 ; XREFS:
-;     MagicHitsHandler [$PRG14::bb17]
+;     CAST_MAGIC_HIT_HANDLERS [$PRG14::bb17]
 ;============================================================================
 CastMagic_HitHandler_Tilte:                 ; [$bc5b]
     LDA #$00
@@ -15891,7 +15909,7 @@ CastMagic_HitHandler_Tilte:                 ; [$bc5b]
 ;     CastMagic_UpdateDeluge
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb01]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb01]
 ;============================================================================
 CastMagic_Unused_UpdateDelugeAfterFirstHit: ; [$bc66]
     JSR CastMagic_UpdateDeluge              ; Run standard Deluge behavior.
@@ -15931,7 +15949,7 @@ CastMagic_Unused_UpdateDelugeAfterFirstHit: ; [$bc66]
 ;     CastMagic_UpdateThunderOrDeath
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb03]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb03]
 ;============================================================================
 CastMagic_UpdateThunderAfterFirstHit:       ; [$bc74]
     JSR CastMagic_UpdateThunderOrDeath      ; Run standard Thunder behavior.
@@ -15971,7 +15989,7 @@ CastMagic_UpdateThunderAfterFirstHit:       ; [$bc74]
 ;     CastMagic_UpdateFire
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb05]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb05]
 ;============================================================================
 CastMagic_UpdateFireAfterFirstHit:          ; [$bc82]
     JSR CastMagic_UpdateFire                ; Run standard Fire behavior.
@@ -16000,7 +16018,7 @@ CastMagic_UpdateFireAfterFirstHit:          ; [$bc82]
 ;     None.
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb07]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb07]
 ;============================================================================
 CastMagic_UpdateDeathAfterFirstHit:         ; [$bc90]
     LDA #$ff
@@ -16028,7 +16046,7 @@ CastMagic_UpdateDeathAfterFirstHit:         ; [$bc90]
 ;         Unset.
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb0b]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb0b]
 ;============================================================================
 CastMagic_Unused_HandleUnknown10:           ; [$bc99]
     LDA #$ff
@@ -16056,7 +16074,7 @@ CastMagic_Unused_HandleUnknown10:           ; [$bc99]
 ;         higher.
 ;
 ; XREFS:
-;     CAST_MAGIC_HANDLERS [$PRG14::bb0d]
+;     CAST_MAGIC_UPDATE_HANDLERS [$PRG14::bb0d]
 ;============================================================================
 CastMagic_UpdateTilteAfterFirstHit:         ; [$bc9f]
     INC a:CastMagic_Counter                 ; Increment the tick counter.

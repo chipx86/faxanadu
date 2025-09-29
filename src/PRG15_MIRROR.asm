@@ -1667,7 +1667,7 @@ CastMagic_UpdateSpriteDirection:            ; [$c393]
 ;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb27]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb27]
 ;============================================================================
 CastMagic_FinishHandler_Deluge:             ; [$c39b]
     JSR CastMagic_UpdateSpriteDirection     ; Set the sprite's direction.
@@ -1703,8 +1703,8 @@ CastMagic_FinishHandler_Deluge:             ; [$c39b]
 ;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb29]
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb33]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb29]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb33]
 ;============================================================================
 CastMagic_FinishHandler_Thunder:            ; [$c3a7]
     JSR CastMagic_UpdateSpriteDirection     ; Set the sprite's direction.
@@ -1746,8 +1746,8 @@ CastMagic_FinishHandler_Thunder:            ; [$c3a7]
 ;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2b]
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb35]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb2b]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb35]
 ;============================================================================
 CastMagic_FinishHandler_Fire:               ; [$c3b6]
     LDA InterruptCounter                    ; Load the interrupt counter.
@@ -1786,7 +1786,7 @@ CastMagic_FinishHandler_Fire:               ; [$c3b6]
 ;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2d]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb2d]
 ;============================================================================
 CastMagic_FinishHandler_Death:              ; [$c3c9]
     JSR CastMagic_UpdateSpriteDirection     ; Update the sprite's direction.
@@ -1812,7 +1812,7 @@ CastMagic_FinishHandler_Death:              ; [$c3c9]
 ;     TODO
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb2f]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb2f]
 ;============================================================================
 CastMagic_FinishHandler_Tilte:              ; [$c3d6]
     JSR CastMagic_UpdateSpriteDirection
@@ -1863,8 +1863,8 @@ CastMagic_FinishHandler_Tilte:              ; [$c3d6]
 ;     CastMagic_Maybe_SetAppearance
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb31]
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb37]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb31]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb37]
 ;============================================================================
 CastMagic_FinishHandler_DelugeOrDeathAfterHit: ; [$c3fb]
     JSR CastMagic_UpdateSpriteDirection
@@ -1876,7 +1876,7 @@ CastMagic_FinishHandler_DelugeOrDeathAfterHit: ; [$c3fb]
 ; UNUSED
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb3b]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb3b]
 ;============================================================================
 CastMagic_FinishHandler_Unknown10:          ; [$c403]
     LDA #$00
@@ -1911,7 +1911,7 @@ CastMagic_FinishHandler_Unknown10:          ; [$c403]
 ;     TODO
 ;
 ; XREFS:
-;     PTR_ARRAY_PRG14__bb27 [$PRG14::bb3d]
+;     CAST_MAGIC_FINISH_HANDLERS [$PRG14::bb3d]
 ;============================================================================
 CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     LDA #$00
