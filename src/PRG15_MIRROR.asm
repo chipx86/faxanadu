@@ -2334,7 +2334,8 @@ Player_FillHPAndMP:                         ; [$c4da]
     ;
     LDA #$04                                ; Set the MP to 4 units.
     JSR Player_AddMP                        ; Add it to the player.
-    JSR Game_DrawScreenInFrozenState
+    JSR Game_DrawScreenInFrozenState        ; Draw the screen but keep all
+                                            ; sprites frozen.
 
     ;
     ; Wait a short period of time before filling up the
@@ -2809,7 +2810,7 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
 ;     Player_UpdateExperience
 ;
 ; XREFS:
-;     Maybe_Player_PickUpGlove
+;     Player_PickUpGlove
 ;     Player_PickUpOintment
 ;============================================================================
 Player_Add100XP:                            ; [$c609]
@@ -3677,27 +3678,27 @@ Player_PickUp:                              ; [$c764]
     ;
   @_checkPoison:                            ; [$c79e]
     CMP #$5e                                ; 0x5E == Poison
-    BNE @LAB_PRG15_MIRROR__c7a5
+    BNE @_checkGlove1
     JMP Player_PickUpPoison                 ; This is the Poison.  Pick it
                                             ; up.
 
-  @LAB_PRG15_MIRROR__c7a5:                  ; [$c7a5]
+  @_checkGlove1:                            ; [$c7a5]
     CMP #$5f                                ; 0x5F == Glove
-    BEQ Maybe_Player_PickUpGlove            ; This is the Glove.  Pick it up.
+    BEQ Player_PickUpGlove                  ; This is the Glove.  Pick it up.
 
     ;
     ; Check if this is the Ointment.
     ;
     CMP #$60                                ; 0x60 == Ointment
-    BNE @LAB_PRG15_MIRROR__c7b0
+    BNE @_checkGlove2
     JMP Player_PickUpOintment               ; This is the Ointment.  Pick it
                                             ; up.
 
-  @LAB_PRG15_MIRROR__c7b0:                  ; [$c7b0]
+  @_checkGlove2:                            ; [$c7b0]
     SEC
     SBC #$48
     TAY
-    BEQ Maybe_Player_PickUpGlove            ; This is the Glove. Pick it up.
+    BEQ Player_PickUpGlove                  ; This is the Glove. Pick it up.
 
     ;
     ; Check if this is the Black Onyx.
@@ -3754,6 +3755,8 @@ Player_PickUp:                              ; [$c764]
 ; This will invoke the IScript, play the sound, and enable
 ; the Glove state.
 ;
+; Picking up the glove awards 100XP.
+;
 ; INPUTS:
 ;     None
 ;
@@ -3768,7 +3771,7 @@ Player_PickUp:                              ; [$c764]
 ; XREFS:
 ;     Player_PickUp
 ;============================================================================
-Maybe_Player_PickUpGlove:                   ; [$c7cf]
+Player_PickUpGlove:                         ; [$c7cf]
     ;
     ; Run the "Got Glove" IScript.
     ;
@@ -3922,11 +3925,11 @@ Player_PickUpPendant:                       ; [$c7fa]
 ;============================================================================
 Player_PickUpMagicalRod:                    ; [$c810]
     ;
-    ; Run the "Got Pendant" IScript.
+    ; Run the "Got Magical Rod" IScript.
     ;
     ; IScript 0x90 via jump to IScripts_Begin.
     ;
-    LDA #$90                                ; 0x90 == Pendant picked up
+    LDA #$90                                ; 0x90 == Magical Rod picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     db BANK_12_LOGIC                        ; Bank = 12
@@ -4761,6 +4764,8 @@ OnInterrupt__popAndReturn:                  ; [$c9d0]
     PLA                                     ; Pull A from the stack.
     TAX                                     ; Set X = A
     PLA                                     ; Pull A from the satck
+
+OnHardwareInterrupt:                        ; [$c9d5]
     RTI                                     ; Return from interrupt
 
 
@@ -4820,9 +4825,9 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
     BVC @LAB_PRG15_MIRROR__ca07
     LDX #$a0
 
-  @LAB_PRG15_MIRROR__ca0e:                  ; [$ca0e]
+  @_loop160Times:                           ; [$ca0e]
     DEX
-    BNE @LAB_PRG15_MIRROR__ca0e
+    BNE @_loop160Times
 
   @LAB_PRG15_MIRROR__ca11:                  ; [$ca11]
     LDA ScrollHelp_Screen
@@ -4852,12 +4857,12 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ; XREFS:
 ;     FUN_PRG12__8b71
 ;     IScripts_UpdatePortraitAnimation
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;     PasswordScreen_Show
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
 ;     UI_ShowPlayerMenu
-;     _handleWrongPassword [$PRG12::9162]
 ;     EndGame_Begin
 ;     EndGame_MainLoop
 ;     FUN_PRG15_MIRROR__dacd
@@ -5404,7 +5409,7 @@ FUN_PRG15_MIRROR__cb3f:                     ; [$cb3f]
 ; XREFS:
 ;     FUN_PRG12__8b71
 ;     IScripts_UpdatePortraitAnimation
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;     EndGame_Begin
 ;     EndGame_MainLoop
@@ -5434,6 +5439,7 @@ GameLoop_Maybe_SetupDrawState:              ; [$cb47]
 ;     A
 ;
 ; XREFS:
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;     PasswordScreen_Show
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
@@ -5721,7 +5727,6 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Area_SetStateFromDoorDestination
 ;     CHR_LoadTilesetPages
 ;     EndGame_MainLoop
-;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
@@ -5743,17 +5748,20 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     MMC1_LoadBankAndJump
 ;     MMC1_RestorePrevPRGBank
 ;     MMC1_UpdatePRGBankToStackA
+;     Maybe_LoadSpritesFromBank8
 ;     Maybe_Player_LoadArmorSprite
 ;     Maybe_Player_LoadShieldSprite
 ;     Maybe_Player_LoadWeaponSprite
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
 ;     Messages_Load
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_WriteTilesFromCHRRAM
 ;     Palette_PopulateData
 ;     Player_DrawItemInternal
 ;     Player_HandleDeath
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_HandleScrollUp
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;     Sprites_LoadSpriteValue
@@ -6068,7 +6076,7 @@ PPUBuffer_DrawCommand_RemoveVerticalLines:  ; [$ccec]
                                             ; to X.
 
     ;
-    ; Add the phase byte and oop index together and get the three
+    ; Add the phase byte and loop index together and get the three
     ; least-significant bits. This will be our index into the lookup
     ; table.
     ;
@@ -6157,7 +6165,7 @@ PPUBUFFER_DRAWCOMMAND_0xFA_MASKS:           ; [$cd33]
 ;     PPUBUFFER_DRAW_COMMANDS
 ;     [$PRG15_MIRROR::cfc4]
 ;============================================================================
-PPUBuffer_Command_RotateTilesRight1Pixel:   ; [$cd3b]
+PPUBuffer_DrawCommand_RotateTilesRight1Pixel: ; [$cd3b]
     ;
     ; Read the first two bytes from the offset and set as
     ; the PPUADDR.
@@ -6541,7 +6549,7 @@ SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ce80
+; TODO: Document Maybe_LoadSpritesFromBank8
 ;
 ; INPUTS:
 ;     None.
@@ -6553,7 +6561,7 @@ SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
 ;     Game_InitStateForSpawn
 ;     Something_SetupNewScreen
 ;============================================================================
-FUN_PRG15_MIRROR__ce80:                     ; [$ce80]
+Maybe_LoadSpritesFromBank8:                 ; [$ce80]
     LDA a:CurrentROMBank2
     PHA
     LDX #$08
@@ -6794,7 +6802,7 @@ PPU_SetVRAMIncrementAdd1Across:             ; [$cf2b]
 
 
 ;============================================================================
-; Clear the PPU buffer.
+; MAYBE DEADCODE: Clear the PPU buffer.
 ;
 ; Both the offset and upper bounds will be reset back to 0.
 ;
@@ -6813,12 +6821,12 @@ PPUBuffer_Clear:                            ; [$cf35]
     STA PPUBuffer_Offset                    ; Set offset = 0
     STA PPUBuffer_UpperBounds               ; Set upper bounds = 0
 
-;
-; XREFS:
-;     PPUBuffer_Draw
-;
+    ;
+    ; XREFS:
+    ;     PPUBuffer_Draw
+    ;
 RETURN_CF3B:                                ; [$cf3b]
-    db $60                                  ; [$cf3b] undefined
+    RTS
 
 
 ;============================================================================
@@ -6848,7 +6856,7 @@ RETURN_CF3B:                                ; [$cf3b]
 ;          a given address (at the next two bytes from
 ;          the buffer).
 ;
-;          PPUBuffer_Command_RotateTilesRight1Pixel
+;          PPUBuffer_DrawCommand_RotateTilesRight1Pixel
 ;
 ;    0xFA: TODO
 ;    PPUBuffer_DrawCommand_RemoveVerticalLines
@@ -6908,7 +6916,7 @@ RETURN_CF3B:                                ; [$cf3b]
 ;
 ; CALLS:
 ;     PPUBuffer_DrawCommand_WritePalette
-;     PPUBuffer_Command_RotateTilesRight1Pixel
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;
 ; XREFS:
@@ -7110,13 +7118,13 @@ PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
     dw PPUBuffer_DrawCommand_Noop-1         ; [1]: Command 0xFF
     dw PPUBuffer_DrawCommand_Noop-1         ; [2]: Command 0xFE
     dw PPUBuffer_DrawCommand_Noop-1         ; [3]: Command 0xFD
-    dw PPUBuffer_Command_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC
+    dw PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC
     dw PPUBuffer_DrawCommand_Noop-1         ; [5]: Command 0xFB
     dw PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA
 
 
 ;============================================================================
-; TODO: Document PPUBuffer_WaitForSomething
+; TODO: Document PPUBuffer_Maybe_WaitForFlush
 ;
 ; INPUTS:
 ;     None.
@@ -7125,17 +7133,17 @@ PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
 ;     TODO
 ;
 ; XREFS:
+;     PPUBuffer_Maybe_WaitForFlush
 ;     PPUBuffer_QueueCommandOrLength
-;     PPUBuffer_WaitForSomething
 ;============================================================================
-PPUBuffer_WaitForSomething:                 ; [$cfca]
-    JSR PPUBuffer_SomethingCompareTo24
-    BCC PPUBuffer_WaitForSomething
+PPUBuffer_Maybe_WaitForFlush:               ; [$cfca]
+    JSR PPUBuffer_SomethingCompareTo0x24
+    BCC PPUBuffer_Maybe_WaitForFlush
     RTS
 
 
 ;============================================================================
-; TODO: Document PPUBuffer_SomethingCompareTo24
+; TODO: Document PPUBuffer_SomethingCompareTo0x24
 ;
 ; INPUTS:
 ;     None.
@@ -7144,9 +7152,9 @@ PPUBuffer_WaitForSomething:                 ; [$cfca]
 ;     C
 ;
 ; XREFS:
-;     PPUBuffer_WaitForSomething
+;     PPUBuffer_Maybe_WaitForFlush
 ;============================================================================
-PPUBuffer_SomethingCompareTo24:             ; [$cfd0]
+PPUBuffer_SomethingCompareTo0x24:           ; [$cfd0]
     LDA PPUBuffer_Offset                    ; A = PPU buffer offset.
     SEC
     SBC PPUBuffer_UpperBounds               ; Subtract the upper bounds.
@@ -7174,7 +7182,7 @@ PPUBuffer_SomethingCompareTo24:             ; [$cfd0]
 ;     Maybe_DrawItemName
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;     Strings_Draw
 ;     Area_WriteTwoBlocksFromData12ToPPUBuffer
 ;     Area_WriteTwoBlocksFromData34ToPPUBuffer
@@ -7193,7 +7201,7 @@ PPUBuffer_SomethingCompareTo24:             ; [$cfd0]
 ;============================================================================
 PPUBuffer_QueueCommandOrLength:             ; [$cfdc]
     PHA
-    JSR PPUBuffer_WaitForSomething
+    JSR PPUBuffer_Maybe_WaitForFlush
     PLA
     LDX PPUBuffer_UpperBounds               ; Load the upper bounds of the
                                             ; buffer.
@@ -7271,13 +7279,7 @@ PPUBuffer_DrawAll:                          ; [$cffb]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d005
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
 FUN_PRG15_MIRROR__d005:                     ; [$d005]
     LDA #$04
@@ -7286,16 +7288,10 @@ FUN_PRG15_MIRROR__d005:                     ; [$d005]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d00d
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
 FUN_PRG15_MIRROR__d00d:                     ; [$d00d]
-    LDA a:Something_Maybe_PaletteIndex
+    LDA a:Screen_Palette
     JSR LoadPalette2
     JMP PPUBuffer_Append0
 
@@ -7724,7 +7720,6 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     Sprites_ReplaceWithCoinDrop
 ;     Game_DropLadderToMascon
 ;     Game_UnlockDoor
-;     Maybe_Player_PickUpGlove
 ;     Player_CheckPushingBlock
 ;     Player_FillHPAndMP
 ;     Player_HandleDeath
@@ -7733,6 +7728,7 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     Player_PickUpBlackOnyx
 ;     Player_PickUpDragonSlayer
 ;     Player_PickUpElixir
+;     Player_PickUpGlove
 ;     Player_PickUpHourGlass
 ;     Player_PickUpMattock
 ;     Player_PickUpOintment
@@ -7804,7 +7800,7 @@ Area_Maybe_ShowRoomTransition:              ; [$d0f6]
     JSR Area_ScrollToNextRoom
 
   @LAB_PRG15_MIRROR__d11c:                  ; [$d11c]
-    JSR Maybe_Screen_Scroll
+    JSR Screen_HandleScroll
     JSR FUN_PRG15_MIRROR__d61d
     LDA Screen_ScrollDirection
     BPL @LAB_PRG15_MIRROR__d11c
@@ -8265,7 +8261,7 @@ BLOCK_DATA_OFFSETS_FOR_BIT_VALUES:          ; [$d273]
 ;     MMC1_UpdatePRGBank
 ;
 ; XREFS:
-;     Screen_BeginScrollAndLoadBlockProperties
+;     Screen_StopScrollAndLoadBlockProperties
 ;============================================================================
 Area_LoadBlockProperties:                   ; [$d276]
     ;
@@ -8328,7 +8324,7 @@ Area_LoadBlockProperties:                   ; [$d276]
 
 
 ;============================================================================
-; TODO: Document Screen_BeginScrollAndLoadBlockProperties
+; TODO: Document Screen_StopScrollAndLoadBlockProperties
 ;
 ; INPUTS:
 ;     None.
@@ -8337,17 +8333,19 @@ Area_LoadBlockProperties:                   ; [$d276]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_HandleScrollUp
 ;============================================================================
-Screen_BeginScrollAndLoadBlockProperties:   ; [$d29f]
+Screen_StopScrollAndLoadBlockProperties:    ; [$d29f]
     LDA #$ff
     STA Screen_ScrollDirection
     JMP Area_LoadBlockProperties
 
 
 ;============================================================================
-; TODO: Document Maybe_Screen_Scroll_D2A6
+; TODO: Document Screen_HandleScrollUp
 ;
 ; INPUTS:
 ;     None.
@@ -8356,9 +8354,9 @@ Screen_BeginScrollAndLoadBlockProperties:   ; [$d29f]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Screen_Scroll
+;     Screen_HandleScroll
 ;============================================================================
-Maybe_Screen_Scroll_D2A6:                   ; [$d2a6]
+Screen_HandleScrollUp:                      ; [$d2a6]
     LDA Something_ScrollIndex
     BNE @LAB_PRG15_MIRROR__d2ac
     LDA #$d0
@@ -8369,7 +8367,7 @@ Maybe_Screen_Scroll_D2A6:                   ; [$d2a6]
     STA Something_ScrollIndex
     BNE @LAB_PRG15_MIRROR__d2b8
     DEC Something_Player_ScrollY
-    JSR Screen_BeginScrollAndLoadBlockProperties
+    JSR Screen_StopScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d2b8:                  ; [$d2b8]
     LDA Something_ScrollIndex
@@ -8400,7 +8398,7 @@ Maybe_Screen_Scroll_D2A6:                   ; [$d2a6]
 ;============================================================================
 FUN_PRG15_MIRROR__d2ce:                     ; [$d2ce]
     JSR Game_UpdatePlayerOnScroll
-    JSR Maybe_Screen_Scroll
+    JSR Screen_HandleScroll
     JSR FUN_PRG15_MIRROR__d61d
     LDA Screen_ScrollDirection
     CMP #$02
@@ -8415,14 +8413,14 @@ FUN_PRG15_MIRROR__d2ce:                     ; [$d2ce]
 
     ;
     ; XREFS:
-    ;     Maybe_Screen_Scroll
+    ;     Screen_HandleScroll
     ;
 RETURN_D2E6:                                ; [$d2e6]
     RTS
 
 
 ;============================================================================
-; TODO: Document Maybe_Screen_Scroll
+; TODO: Document Screen_HandleScroll
 ;
 ; INPUTS:
 ;     None.
@@ -8435,19 +8433,34 @@ RETURN_D2E6:                                ; [$d2e6]
 ;     FUN_PRG15_MIRROR__d2ce
 ;     Game_MainLoop
 ;============================================================================
-Maybe_Screen_Scroll:                        ; [$d2e7]
+Screen_HandleScroll:                        ; [$d2e7]
     LDX Screen_ScrollDirection
-    BEQ @_notScrolling
-
-    ;
-    ; The screen is currently scrolling.
-    ;
+    BEQ Screen_HandleScrollLeft
     DEX
-    BEQ @LAB_PRG15_MIRROR__d31e
+    BEQ Screen_HandleScrollRight
     DEX
-    BEQ Maybe_Screen_Scroll_D2A6
+    BEQ Screen_HandleScrollUp
     DEX
     BNE RETURN_D2E6
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+
+;============================================================================
+; TODO: Document Screen_HandleScrollDown
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;============================================================================
+Screen_HandleScrollDown:                    ; [$d2f4]
+    ;
+    ; The screen is scrolling down.
+    ;
     LDA Something_ScrollIndex
     CLC
     ADC #$01
@@ -8457,7 +8470,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     LDA #$00
     STA Something_ScrollIndex
     INC Something_Player_ScrollY
-    JSR Screen_BeginScrollAndLoadBlockProperties
+    JSR Screen_StopScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d308:                  ; [$d308]
     LDA Something_ScrollIndex
@@ -8472,7 +8485,23 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     JSR MMC1_UpdatePRGBank
     RTS
 
-  @LAB_PRG15_MIRROR__d31e:                  ; [$d31e]
+
+;============================================================================
+; TODO: Document Screen_HandleScrollRight
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Screen_HandleScroll
+;============================================================================
+Screen_HandleScrollRight:                   ; [$d31e]
+    ;
+    ; The screen is scrolling right.
+    ;
     LDA ScrollHelp_Pixel
     CLC
     ADC #$01
@@ -8484,7 +8513,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     STA ScrollHelp_Screen
     PLP
     BCC @LAB_PRG15_MIRROR__d334
-    JSR Screen_BeginScrollAndLoadBlockProperties
+    JSR Screen_StopScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d334:                  ; [$d334]
     LDA ScrollHelp_Pixel
@@ -8493,16 +8522,29 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     PHA
     LDX #$03
     JSR MMC1_UpdatePRGBank
-    JSR FUN_PRG15_MIRROR__d4dc
+    JSR Screen_Something_ScrollRight
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
     RTS
 
+
+;============================================================================
+; TODO: Document Screen_HandleScrollLeft
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Screen_HandleScroll
+;============================================================================
+Screen_HandleScrollLeft:                    ; [$d34a]
     ;
-    ; The screen is not currently scrolling.
+    ; The screen is scrolling left.
     ;
-  @_notScrolling:                           ; [$d34a]
     LDA Something_Blocks_0045
     CMP #$fc
     BCS @LAB_PRG15_MIRROR__d364
@@ -8516,7 +8558,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     STA ScrollHelp_Screen
     PLP
     BNE @LAB_PRG15_MIRROR__d364
-    JSR Screen_BeginScrollAndLoadBlockProperties
+    JSR Screen_StopScrollAndLoadBlockProperties
 
   @LAB_PRG15_MIRROR__d364:                  ; [$d364]
     LDA Something_Blocks_0045
@@ -8538,7 +8580,7 @@ Maybe_Screen_Scroll:                        ; [$d2e7]
     PHA
     LDX #$03
     JSR MMC1_UpdatePRGBank
-    JSR FUN_PRG15_MIRROR__d4f0
+    JSR Screen_Something_ScrollLeft
     PLA
     TAX
     JSR MMC1_UpdatePRGBank
@@ -8573,7 +8615,7 @@ FUN_PRG15_MIRROR__d38e:                     ; [$d38e]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Screen_Scroll_D2A6
+;     Screen_HandleScrollUp
 ;============================================================================
 FUN_PRG15_MIRROR__d393:                     ; [$d393]
     LDX #$00
@@ -8598,7 +8640,7 @@ FUN_PRG15_MIRROR__d393:                     ; [$d393]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Screen_Scroll
+;     Screen_HandleScrollDown
 ;============================================================================
 FUN_PRG15_MIRROR__d3a6:                     ; [$d3a6]
     LDX #$00
@@ -8802,9 +8844,9 @@ BYTE_PRG15_MIRROR__d4cc:                    ; [$d4cc]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d82d
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 BYTE_ARRAY_PRG15_MIRROR__d4cf:              ; [$d4cf]
     db $42                                  ; [0]:
@@ -8812,9 +8854,9 @@ BYTE_ARRAY_PRG15_MIRROR__d4cf:              ; [$d4cf]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d82d
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 BYTE_ARRAY_PRG15_MIRROR__d4d1:              ; [$d4d1]
     db $02                                  ; [0]:
@@ -8822,8 +8864,8 @@ BYTE_ARRAY_PRG15_MIRROR__d4d1:              ; [$d4d1]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 BYTE_ARRAY_PRG15_MIRROR__d4d3:              ; [$d4d3]
     db $03                                  ; [0]:
@@ -8833,76 +8875,7 @@ BYTE_ARRAY_PRG15_MIRROR__d4d3:              ; [$d4d3]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4d7
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     FUN_PRG15_MIRROR__d4dc
-;     FUN_PRG15_MIRROR__d4f0
-;============================================================================
-FUN_PRG15_MIRROR__d4d7:                     ; [$d4d7]
-    INC Something_Blocks_Counter_006E
-    JMP FUN_PRG15_MIRROR__d503
-
-
-;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4dc
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Maybe_Screen_Scroll
-;============================================================================
-FUN_PRG15_MIRROR__d4dc:                     ; [$d4dc]
-    LDX #$00
-    STX Something_Blocks_Counter_006E
-    INX
-    LDA Something_Blocks_0045
-    AND #$0f
-    CMP #$02
-    BEQ FUN_PRG15_MIRROR__d4d7
-    AND #$07
-    CMP #$01
-    BEQ FUN_PRG15_MIRROR__d503
-    RTS
-
-
-;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4f0
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Maybe_Screen_Scroll
-;============================================================================
-FUN_PRG15_MIRROR__d4f0:                     ; [$d4f0]
-    LDX #$00
-    STX Something_Blocks_Counter_006E
-    LDA Something_Blocks_0045
-    AND #$0f
-    CMP #$0f
-    BEQ FUN_PRG15_MIRROR__d4d7
-    AND #$07
-    CMP #$06
-    BEQ FUN_PRG15_MIRROR__d503
-    RTS
-
-
-;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d503
+; TODO: Document Screen_Something_ScrollHoriz
 ;
 ; INPUTS:
 ;     X
@@ -8911,11 +8884,80 @@ FUN_PRG15_MIRROR__d4f0:                     ; [$d4f0]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d4d7
-;     FUN_PRG15_MIRROR__d4dc
-;     FUN_PRG15_MIRROR__d4f0
+;     Screen_Something_ScrollLeft
+;     Screen_Something_ScrollRight
 ;============================================================================
-FUN_PRG15_MIRROR__d503:                     ; [$d503]
+Screen_Something_ScrollHoriz:               ; [$d4d7]
+    INC Something_Blocks_Counter_006E
+    JMP Screen_Something_ScrollHorizInternal
+
+
+;============================================================================
+; TODO: Document Screen_Something_ScrollRight
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Screen_HandleScrollRight
+;============================================================================
+Screen_Something_ScrollRight:               ; [$d4dc]
+    LDX #$00
+    STX Something_Blocks_Counter_006E
+    INX
+    LDA Something_Blocks_0045
+    AND #$0f
+    CMP #$02
+    BEQ Screen_Something_ScrollHoriz
+    AND #$07
+    CMP #$01
+    BEQ Screen_Something_ScrollHorizInternal
+    RTS
+
+
+;============================================================================
+; TODO: Document Screen_Something_ScrollLeft
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Screen_HandleScrollLeft
+;============================================================================
+Screen_Something_ScrollLeft:                ; [$d4f0]
+    LDX #$00
+    STX Something_Blocks_Counter_006E
+    LDA Something_Blocks_0045
+    AND #$0f
+    CMP #$0f
+    BEQ Screen_Something_ScrollHoriz
+    AND #$07
+    CMP #$06
+    BEQ Screen_Something_ScrollHorizInternal
+    RTS
+
+
+;============================================================================
+; TODO: Document Screen_Something_ScrollHorizInternal
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Screen_Something_ScrollHoriz
+;     Screen_Something_ScrollLeft
+;     Screen_Something_ScrollRight
+;============================================================================
+Screen_Something_ScrollHorizInternal:       ; [$d503]
     LDA Something_Blocks_0045
     CLC
     ADC #$d619,X
@@ -9087,7 +9129,7 @@ FUN_PRG15_MIRROR__d503:                     ; [$d503]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 BYTE_ARRAY_PRG15_MIRROR__d619:              ; [$d619]
     db $00                                  ; [0]:
@@ -9095,7 +9137,7 @@ BYTE_ARRAY_PRG15_MIRROR__d619:              ; [$d619]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 BYTE_ARRAY_PRG15_MIRROR__d61b:              ; [$d61b]
     db $00                                  ; [0]:
@@ -9178,7 +9220,7 @@ BYTE_ARRAY_PRG15_MIRROR__d650:              ; [$d650]
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     TODO
 ;
 ; XREFS:
 ;     BYTE_ARRAY_PRG15_MIRROR__d64c
@@ -10213,7 +10255,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     ; Load the palette and update the screen.
     ;
-    LDA a:Something_Maybe_PaletteIndex
+    LDA a:Screen_Palette
     JSR LoadPalette2                        ; Load the palette.
     JSR PPUBuffer_Append0                   ; Append 0 to the PPU buffer.
 
@@ -10530,7 +10572,7 @@ Screen_FadeToBlack:                         ; [$da2f]
 ;     Screen_FadeOutCounter:
 ;         The counter for this loop.
 ;
-;     Something_Maybe_PaletteIndex:
+;     Screen_Palette:
 ;         The palette index to apply for the transition.
 ;
 ; OUTPUTS:
@@ -10557,7 +10599,7 @@ Screen_NextTransitionState:                 ; [$da42]
     ;
     ; Fade out to the next palette towards black.
     ;
-    LDA a:Something_Maybe_PaletteIndex
+    LDA a:Screen_Palette
     JSR LoadPalette
     INC a:PaletteIndex
 
@@ -10621,7 +10663,7 @@ Game_InitStateForSpawn:                     ; [$da7d]
     STA Maybe_ScreenReadyState
     JSR Player_SetInitialState
     JSR #$ba55
-    JSR FUN_PRG15_MIRROR__ce80
+    JSR Maybe_LoadSpritesFromBank8
     LDA #$01
     STA a:Maybe_GameScreenStart
     LDA #$00
@@ -10738,12 +10780,18 @@ Game_SetupAndLoadArea:                      ; [$dadc]
 
 
 ;============================================================================
-; Dead code that would assign the area based on transitioning from another.
+; DEADCODE
+;
+; Would assign the area based on transitioning from another.
 ;============================================================================
-    hex ae 35 04 bd fe da 85 24             ; [$daf6] undefined
+FUN_PRG15_MIRROR__daf6:                     ; [$daf6]
+    LDX a:Area_Region
+    LDA #$dafe,X
+    STA Area_CurrentArea
 
 ;
 ; XREFS:
+;     FUN_PRG15_MIRROR__daf6
 ;     Game_SetupAndLoadArea
 ;
 MAYBE_OUTSIDE_REGION_INDEXES:               ; [$dafe]
@@ -10930,7 +10978,7 @@ Game_MainLoop:                              ; [$db45]
     JSR GameLoop_CheckUseCurrentItem        ; Active selected item?
     JSR ROMBankStart                        ; Update all sprites.
     JSR GameLoop_CountdownItems
-    JSR GameLoop_AnimateFog
+    JSR Fog_OnTick
     JSR GameLoop_CheckShowPlayerMenu
     JSR GameLoop_RunScreenEventHandlers
     JSR GameLoop_CheckPauseGame
@@ -10978,10 +11026,10 @@ Game_MainLoop:                              ; [$db45]
     JSR #$b982
     JSR Player_DrawBody
     JSR #$b7d6
-    JSR Maybe_Screen_Scroll
-    JSR Maybe_Screen_Scroll
-    JSR Maybe_Screen_Scroll
-    JSR Maybe_Screen_Scroll
+    JSR Screen_HandleScroll
+    JSR Screen_HandleScroll
+    JSR Screen_HandleScroll
+    JSR Screen_HandleScroll
     LDA Screen_ScrollDirection
     BPL @_scrolling
     JMP Game_MainLoop
@@ -11007,7 +11055,7 @@ Game_MainLoop:                              ; [$db45]
 ; CALLS:
 ;     EndGame_MovePlayerTowardKing
 ;     MMC1_UpdatePRGBank
-;     GameLoop_AnimateFog
+;     Fog_OnTick
 ;     GameLoop_CheckShowPlayerMenu
 ;     GameLoop_CheckUseCurrentItem
 ;     GameLoop_CountdownItems
@@ -11058,7 +11106,7 @@ EndGame_MainLoop:                           ; [$dbef]
     JSR GameLoop_CheckUseCurrentItem        ; No-op
     JSR ROMBankStart                        ; Update sprites.
     JSR GameLoop_CountdownItems             ; No-op
-    JSR GameLoop_AnimateFog                 ; No-op
+    JSR Fog_OnTick                          ; No-op
     JSR GameLoop_CheckShowPlayerMenu        ; No-op
     JSR GameLoop_RunScreenEventHandlers     ; No-op
     JMP EndGame_MainLoop                    ; Loop.
@@ -11387,13 +11435,13 @@ FUN_PRG15_MIRROR__dd0f:                     ; [$dd0f]
 ;============================================================================
 Something_SetupNewScreen:                   ; [$dd13]
     JSR Maybe_Player_DrawSprite
-    JSR FUN_PRG15_MIRROR__ce80
+    JSR Maybe_LoadSpritesFromBank8
     LDA Area_LoadingScreenIndex
     STA Area_CurrentScreen
     JSR Area_Maybe_ShowRoomTransition
     JSR UI_DrawStatusSymbols
-    LDA Screen_Palette
-    STA a:Something_Maybe_PaletteIndex
+    LDA Maybe_Screen_Area
+    STA a:Screen_Palette
     JSR LoadPalette2
     LDA #$00
     STA Something_Player_ScrollX
@@ -11513,7 +11561,7 @@ Screen_SetupSprites:                        ; [$dd4e]
 ;     Area_CurrentArea:
 ;         TODO
 ;
-;     Something_Maybe_PaletteIndex:
+;     Screen_Palette:
 ;         TODO: The index of the palette outside the temple?
 ;
 ;     Area_Music_Outside:
@@ -11562,11 +11610,11 @@ Game_SpawnInTemple:                         ; [$dd61]
     LDY #$ddad,X
     STY Area_CurrentArea
     LDA #$df4c,Y
-    STA a:Something_Maybe_PaletteIndex
+    STA a:Screen_Palette
     LDA #$df5c,Y
     STA a:Area_Music_Outside
     LDA #$12
-    STA Screen_Palette
+    STA Maybe_Screen_Area
     LDA #$06
     STA a:Something_Maybe_NewTilesIndex
     LDA #$9e
@@ -11721,7 +11769,7 @@ START_SCREEN_FOR_TEMPLE_SPAWN:              ; [$ddd5]
 ;     Area_LoadingScreenIndex:
 ;         The new loading screen index.
 ;
-;     Screen_Palette:
+;     Maybe_Screen_Area:
 ;         The palette for the room.
 ;
 ;     Area_Region:
@@ -11767,7 +11815,7 @@ EndGame_MoveToKingsRoom:                    ; [$dddd]
     ; Load the palette for the King's room.
     ;
     LDA #$11
-    STA Screen_Palette                      ; Set the Palette for the King's
+    STA Maybe_Screen_Area                   ; Set the Palette for the King's
                                             ; room.
 
     ;
@@ -11814,7 +11862,7 @@ Game_EnterBuilding:                         ; [$de06]
     STA a:Area_PrevRegion
     LDA Area_CurrentScreen
     STA a:Maybe_PrevScreen
-    LDA a:Something_Maybe_PaletteIndex
+    LDA a:Screen_Palette
     STA a:Prev_Palette
     LDA PlayerPosY
     AND #$f0
@@ -11882,7 +11930,7 @@ Game_ExitBuilding:                          ; [$de66]
     LDA a:Maybe_PrevScreen
     STA Area_LoadingScreenIndex
     LDA a:Prev_Palette
-    STA Screen_Palette
+    STA Maybe_Screen_Area
     LDA a:Prev_PlayerPosXY
     STA Screen_StartPosYX
     JMP Screen_Load
@@ -11916,7 +11964,7 @@ Game_ExitBuilding:                          ; [$de66]
 ;     Area_CurrentScreen:
 ;         The current screen.
 ;
-;     Screen_Palette:
+;     Maybe_Screen_Area:
 ;         The palette for the area.
 ;
 ;     Area_LoadingScreenIndex:
@@ -12013,7 +12061,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
                                             ; index.
     LDX Area_CurrentArea                    ; X = current area.
     LDA #$df4c,X                            ; Load the palette.
-    STA Screen_Palette                      ; And store it as the current one
+    STA Maybe_Screen_Area                   ; And store it as the current one
                                             ; for the area.
 
     ;
@@ -12056,7 +12104,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
 ;     Area_CurrentScreen:
 ;         The current screen.
 ;
-;     Screen_Palette:
+;     Maybe_Screen_Area:
 ;         The palette for the area.
 ;
 ;     Areas_DefaultMusic:
@@ -12127,7 +12175,7 @@ Game_LoadCurrentArea:                       ; [$def5]
     JSR Palette_LoadFromIndex               ; Load palette 0.
     LDX Area_CurrentArea                    ; X = current area.
     LDA #$df4c,X                            ; Load the palette for the area.
-    STA Screen_Palette                      ; Store as the current palette.
+    STA Maybe_Screen_Area                   ; Store as the current palette.
 
     ;
     ; Load the music for the area.
@@ -12357,31 +12405,59 @@ Debug_ChooseArea:                           ; [$df99]
 
 
 ;============================================================================
-; TODO: Document GameLoop_AnimateFog
+; Update the fog state on tick.
+;
+; This will first check if the area supports fog (Forepaw
+; area with the Mist palette).
+;
+; If fog is allowed, it will proceed to animate fog
+; every odd tick and update fog state every even tick.
 ;
 ; INPUTS:
-;     None.
+;     Area_CurrentArea:
+;         The current area.
+;
+;     Screen_Palette:
+;         The screen's palette.
+;
+;     Fog_StateIndex:
+;         The current fog index.
+;
+;     Fog_TileIndex:
+;         The current fog generator value.
 ;
 ; OUTPUTS:
-;     A
+;     Fog_StateIndex:
+;         The updated fog index.
+;
+;     Fog_TileIndex:
+;         The updated fog generator value.
+;
+; CALLS:
+;     Fog_UpdateTiles
 ;
 ; XREFS:
 ;     EndGame_MainLoop
 ;     Game_MainLoop
 ;============================================================================
-GameLoop_AnimateFog:                        ; [$dfc5]
-    LDA Area_CurrentArea
-    CMP #$02
-    BNE RETURN_E011
-    LDA a:Something_Maybe_PaletteIndex
-    CMP #$0a
-    BNE RETURN_E011
-    LDA Fog_Index
-    LSR A
-    BCC Game_AnimateFog_UpdatePPU
-    DEC FogGenerator
-    BNE RETURN_E011
-    INC Fog_Index
+Fog_OnTick:                                 ; [$dfc5]
+    LDA Area_CurrentArea                    ; Load the current area.
+    CMP #$02                                ; Is it Forepaw?
+    BNE RETURN_E011                         ; If not, return.
+    LDA a:Screen_Palette                    ; Load the current palette.
+    CMP #$0a                                ; Is it Mist?
+    BNE RETURN_E011                         ; If not, return.
+    LDA Fog_StateIndex                      ; Load the fog index.
+    LSR A                                   ; Is it an odd value?
+    BCC Fog_UpdateTiles                     ; If so, jump to rotate tiles.
+
+    ;
+    ; Decrement the fog generator and check if it reached 0.
+    ; If so, increment the fog index.
+    ;
+    DEC Fog_TileIndex                       ; Decrement the fog generator.
+    BNE RETURN_E011                         ; If != 0, return.
+    INC Fog_StateIndex                      ; Else, increment the fog index.
 
     ;
     ; XREFS:
@@ -12392,60 +12468,131 @@ RETURN_DFDD:                                ; [$dfdd]
 
 
 ;============================================================================
-; TODO: Document Game_AnimateFog_UpdatePPU
+; Animate a fog tile and update fog generation state.
+;
+; This will take a fog tile represented by the current
+; fog generation value and rotate each row of its contents
+; one pixel to the right, wrapping around to the left.
+;
+; The fog generation value is then incremented by 2,
+; wrapping around from 7 to 0. If it hits 0, the fog
+; index is inremented and a new starting fog generation
+; value is chosen based on that index.
 ;
 ; INPUTS:
-;     None.
+;     Fog_TileIndex:
+;         The current fog generator value.
+;
+;     Fog_StateIndex:
+;         The current fog index value.
+;
+;     PPUBuffer_UpperBounds:
+;         The current upper bounds of the PPU buffer.
 ;
 ; OUTPUTS:
-;     TODO
+;     Fog_TileIndex:
+;         The updated fog generator value.
+;
+;     Fog_StateIndex:
+;         The updated fog index value.
+;
+;     PPUBuffer:
+;         The updated PPU buffer, with the rotate-right
+;         command scheduled.
+;
+;     PPUBuffer_UpperBounds:
+;         The updated upper bounds of the PPU buffer.
+;
 ;
 ; XREFS:
-;     GameLoop_AnimateFog
+;     Fog_OnTick
 ;============================================================================
-Game_AnimateFog_UpdatePPU:                  ; [$dfde]
-    LDX PPUBuffer_UpperBounds
-    LDA #$fc
-    STA PPUBuffer,X
-    INX
-    LDA #$18
-    STA PPUBuffer,X
-    INX
-    LDA FogGenerator
-    INC FogGenerator
+Fog_UpdateTiles:                            ; [$dfde]
+    LDX PPUBuffer_UpperBounds               ; Load the upper bounds of the
+                                            ; fog generator.
+
+    ;
+    ; Queue drawing command "Rotate tiles right."
+    ;
+    LDA #$fc                                ; 0xFC == Rotate Tiles Right draw
+                                            ; command.
+    STA PPUBuffer,X                         ; Set as the command.
+
+    ;
+    ; Set the upper byte of the tile address to 0x18.
+    ;
+    INX                                     ; X++
+    LDA #$18                                ; 0x18 == Upper byte of the
+                                            ; sprite tile address.
+    STA PPUBuffer,X                         ; Set it as the upper byte for
+                                            ; the draw command.
+
+    ;
+    ; Calculate a lower byte for the tile based on the
+    ; fog tile index.
+    ;
+    ; This will be the existing value * 16 (tile data size).
+    ;
+    INX                                     ; X++
+    LDA Fog_TileIndex                       ; Load the fog generator value.
+    INC Fog_TileIndex                       ; Increment for later (not
+                                            ; involved in the math).
+    ASL A                                   ; Multiply the value we loaded by
+                                            ; 16.
     ASL A
     ASL A
     ASL A
-    ASL A
-    STA PPUBuffer,X
-    INX
-    STX PPUBuffer_UpperBounds
-    INC FogGenerator
-    LDA FogGenerator
-    AND #$07
-    STA FogGenerator
-    BNE RETURN_E011
-    INC Fog_Index
-    LDA Fog_Index
-    LSR A
-    AND #$03
-    TAX
-    LDA #$e012,X
-    STA FogGenerator
+    STA PPUBuffer,X                         ; Set as the lower byte for the
+                                            ; draw command.
+
+    ;
+    ; Set the new upper bounds for the PPU buffer.
+    ;
+    ; This will increment by 3.
+    ;
+    INX                                     ; X++
+    STX PPUBuffer_UpperBounds               ; Set as the new upper bounds.
+
+    ;
+    ; Update the fog tile index.
+    ;
+    ; It'll increment by 2 (from above and here), keeping and
+    ; wrapping around with a value range of 0..7.
+    ;
+    INC Fog_TileIndex                       ; Increment the fog generator
+                                            ; value.
+    LDA Fog_TileIndex                       ; Load the result.
+    AND #$07                                ; Keep it in range 0..7.
+    STA Fog_TileIndex                       ; Store it back.
+    BNE RETURN_E011                         ; If != 0, we're done.
+
+    ;
+    ; The fog generator value hit 0. Increment the fog
+    ; index and look up a new starting fog generator value.
+    ;
+    INC Fog_StateIndex                      ; Increment the fog index.
+    LDA Fog_StateIndex                      ; Load it.
+    LSR A                                   ; Divide by 2.
+    AND #$03                                ; And convert to an index in the
+                                            ; lookup table.
+    TAX                                     ; X = A
+    LDA #$e012,X                            ; Load a starting fog generator
+                                            ; value at that index.
+    STA Fog_TileIndex                       ; And set it.
 
     ;
     ; XREFS:
-    ;     GameLoop_AnimateFog
-    ;     Game_AnimateFog_UpdatePPU
+    ;     Fog_OnTick
+    ;     Fog_UpdateTiles
     ;
 RETURN_E011:                                ; [$e011]
     RTS
 
 ;
 ; XREFS:
-;     Game_AnimateFog_UpdatePPU
+;     Fog_UpdateTiles
 ;
-FOG_VALUES:                                 ; [$e012]
+FOG_START_TILE_INDEXES:                     ; [$e012]
     db $18                                  ; [0]:
     db $06                                  ; [1]:
     db $30                                  ; [2]:
@@ -12604,7 +12751,7 @@ GameLoop_CheckPauseGame:                    ; [$e02b]
 ;         The updated counter.
 ;
 ; CALLS:
-;     @_Game_MovePlayerOnScroll
+;     Game_MovePlayerOnScroll
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d2ce
@@ -12617,7 +12764,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
     LDA Joy1_PrevButtonMask                 ; Load the previous button mask.
     STA Joy1_ButtonMask                     ; Set it as the current button
                                             ; mask.
-    JSR @_Game_MovePlayerOnScroll           ; Update the player position.
+    JSR Game_MovePlayerOnScroll             ; Update the player position.
     INC Screen_ScrollPlayerTransitionCounter ; Increment the screen scroll
                                              ; transition counter.
     RTS
@@ -12702,7 +12849,7 @@ Game_UpdatePlayerOnScroll:                  ; [$e048]
 ; XREFS:
 ;     Game_UpdatePlayerOnScroll
 ;============================================================================
-  @_Game_MovePlayerOnScroll:                ; [$e06a]
+Game_MovePlayerOnScroll:                    ; [$e06a]
     ;
     ; Check which direction the screen is scrolling.
     ;
@@ -12973,7 +13120,7 @@ Player_HandleIFrames:                       ; [$e0e8]
     ; Set the knockback speed and return, leaving the knockback
     ; state intact.
     ;
-    JMP Player_SetStandardAcceleration
+    JMP Player_SetStandardAcceleration      ; Set standard acceleration.
 
     ;
     ; Set the knockback speed, but then clear the knockback.
@@ -12985,9 +13132,9 @@ Player_HandleIFrames:                       ; [$e0e8]
     ; Clear knockback from the player flags.
     ;
   @_removeIFrames:                          ; [$e0fc]
-    LDA Player_StatusFlag
-    AND #$fd
-    STA Player_StatusFlag
+    LDA Player_StatusFlag                   ; Load the player's flags.
+    AND #$fd                                ; Clear the knockback bit.
+    STA Player_StatusFlag                   ; Save them.
     RTS
 
 
@@ -14153,7 +14300,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
     STA PlayerPosY
     LDX #$03
     JSR Player_Maybe_MoveIfPassable
-    BNE FUN_PRG15_MIRROR__e4c9
+    BNE Maybe_SetPlayerForScrollUp
 
     ;
     ; XREFS:
@@ -14192,11 +14339,11 @@ Area_ScrollScreenUp:                        ; [$e4b7]
     DEC Player_Something_ScrollPosY
     LDA #$c0
     STA PlayerPosY
-    JMP FUN_PRG15_MIRROR__e4c9
+    JMP Maybe_SetPlayerForScrollUp
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__e4c9
+; TODO: Document Maybe_SetPlayerForScrollUp
 ;
 ; INPUTS:
 ;     None.
@@ -14207,7 +14354,7 @@ Area_ScrollScreenUp:                        ; [$e4b7]
 ; XREFS:
 ;     Area_ScrollScreenUp
 ;============================================================================
-FUN_PRG15_MIRROR__e4c9:                     ; [$e4c9]
+Maybe_SetPlayerForScrollUp:                 ; [$e4c9]
     LDA PlayerPosY
     AND #$f0
     STA PlayerPosY
@@ -14301,15 +14448,15 @@ Area_CheckCanClimbAdjacent:                 ; [$e4f6]
 ; XREFS:
 ;     Area_CheckCanClimbAdjacent
 ;
-DAT_PRG15_MIRROR__e524:                     ; [$e524]
-    db $00                                  ; [$e524] undefined1
+BYTE_PRG15_MIRROR__e524:                    ; [$e524]
+    db $00                                  ; [$e524] byte
 
 ;
 ; XREFS:
 ;     Area_CheckCanClimbAdjacent
 ;
-DAT_PRG15_MIRROR__e525:                     ; [$e525]
-    db $0f                                  ; [$e525] undefined1
+BYTE_PRG15_MIRROR__e525:                    ; [$e525]
+    db $0f                                  ; [$e525] byte
 
 
 ;============================================================================
@@ -14353,7 +14500,7 @@ Player_CheckHandleEnterDoor:                ; [$e526]
     LDX #$06
 
   @_paletteCheckLoop:                       ; [$e54c]
-    LDA Screen_Palette
+    LDA Maybe_Screen_Area
     CMP #$e569,X
     BEQ @_setupArea
     DEX
@@ -14372,25 +14519,25 @@ Player_CheckHandleEnterDoor:                ; [$e526]
 
   @_return:                                 ; [$e568]
     RTS
-    db $06                                  ; [0]:
-    db $07                                  ; [1]:
-    db $0a                                  ; [2]:
-    db $0b                                  ; [3]:
-    db $0c                                  ; [4]:
+    db PALETTE_OUTSIDE                      ; [0]:
+    db PALETTE_TOWER                        ; [1]:
+    db PALETTE_MIST                         ; [2]:
+    db PALETTE_SUFFER                       ; [3]:
+    db PALETTE_DARTMOOR                     ; [4]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
-BYTE_ARRAY_PRG15_MIRROR__e569_5_:           ; [$e56e]
-    db $0d                                  ; [5]:
+Palette_ARRAY_PRG15_MIRROR__e569_5_:        ; [$e56e]
+    db PALETTE_FRATERNAL                    ; [5]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
-BYTE_ARRAY_PRG15_MIRROR__e569_6_:           ; [$e56f]
-    db $0e                                  ; [6]:
+Palette_ARRAY_PRG15_MIRROR__e569_6_:        ; [$e56f]
+    db PALETTE_KING_GRIEVES_ROOM            ; [6]:
     db MUSIC_MAYBE_BETWEEN_FIRST_TOWN_FOG   ; [0]:
     db MUSIC_MAYBE_TOWER                    ; [1]:
     db MUSIC_MAYBE_FOG                      ; [2]:
@@ -14427,11 +14574,11 @@ Music_ARRAY_PRG15_MIRROR__e570_6_:          ; [$e576]
 Player_EnterDoorToInside:                   ; [$e577]
     LDX Area_LoadingScreenIndex
     STX a:Something_Maybe_NewCurrentScreen
-    LDA Screen_Palette
+    LDA Maybe_Screen_Area
     STA Area_LoadingScreenIndex
     TAX
     LDA #$e609,X
-    STA Screen_Palette
+    STA Maybe_Screen_Area
     LDA #$e613,X
     STA a:Something_Maybe_NewTilesIndex
     LDA #$e61d,X
@@ -14583,9 +14730,16 @@ AREA_TO_MUSIC:                              ; [$e5ff]
 ;     Player_EnterDoorToInside
 ;
 Maybe_RoomTransitionTable:                  ; [$e609]
-    db $11                                  ; [10]:
-    db $12                                  ; [11]:
-    hex 13 14 15 16 17 18 19 1a             ; [$e60b] undefined
+    db $11                                  ; [0]:
+    db $12                                  ; [1]:
+    db $13                                  ; [2]:
+    db $14                                  ; [3]:
+    db $15                                  ; [4]:
+    db $16                                  ; [5]:
+    db $17                                  ; [6]:
+    db $18                                  ; [7]:
+    db $19                                  ; [8]:
+    db $1a                                  ; [9]:
 
 ;
 ; XREFS:
@@ -15066,7 +15220,7 @@ Player_CheckIfOnLadder:                     ; [$e752]
 ;     Area_LoadingScreenIndex:
 ;         The new screen when switching to the new area.
 ;
-;     Screen_Palette:
+;     Maybe_Screen_Area:
 ;         The new palette when switching to the new area.
 ;
 ;     CurrentDoor_KeyRequirement:
@@ -15276,7 +15430,7 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     INY                                     ; Y++
     LDA (CurrentArea_DoorDestinationsAddr),Y ; Load the palette from the door
                                              ; destination.
-    STA Screen_Palette                      ; Store it as the new palette.
+    STA Maybe_Screen_Area                   ; Store it as the new palette.
     INY                                     ; Y++
     LDA (CurrentArea_DoorDestinationsAddr),Y ; Load the key requirement.
     STA a:CurrentDoor_KeyRequirement        ; Store it.
@@ -15987,7 +16141,7 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     CMP #$0d
     BEQ @LAB_PRG15_MIRROR__e9de
     CMP #$0c
-    BNE RETURN_EA36
+    BNE @_return
 
     ;
     ; Check the next block.
@@ -16006,7 +16160,7 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     CMP #$0d
     BEQ @LAB_PRG15_MIRROR__e9fb
     CMP #$0c
-    BNE RETURN_EA36
+    BNE @_return
 
     ;
     ; TODO:
@@ -16028,10 +16182,10 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     STA Temp_Addr_U
     LDY #$00
 
-SUB_EA13:                                   ; [$ea13]
+  @LAB_PRG15_MIRROR__ea13:                  ; [$ea13]
     LDA (Temp_Addr_L),Y
     CMP #$ff
-    BEQ RETURN_EA36
+    BEQ @_return
     CMP Area_CurrentScreen
     BNE @LAB_PRG15_MIRROR__ea2f
     INY
@@ -16042,7 +16196,7 @@ SUB_EA13:                                   ; [$ea13]
     STA Screen_StartPosYX
     INY
     LDA (Temp_Addr_L),Y
-    STA Screen_Palette
+    STA Maybe_Screen_Area
     JMP Maybe_Game_EnterScreenHandler
 
   @LAB_PRG15_MIRROR__ea2f:                  ; [$ea2f]
@@ -16050,13 +16204,9 @@ SUB_EA13:                                   ; [$ea13]
     INY
     INY
     INY
-    JMP SUB_EA13
+    JMP @LAB_PRG15_MIRROR__ea13
 
-    ;
-    ; XREFS:
-    ;     Player_CheckSwitchScreen
-    ;
-RETURN_EA36:                                ; [$ea36]
+  @_return:                                 ; [$ea36]
     RTS
 
 ;
@@ -16137,7 +16287,7 @@ Area_ChangeArea:                            ; [$ea5f]
   @LAB_PRG15_MIRROR__ea73:                  ; [$ea73]
     LDA (Temp_Addr_L),Y
     CMP #$ff
-    BEQ @LAB_PRG15_MIRROR__ea9b
+    BEQ @_return
     CMP Area_CurrentScreen
     BNE @LAB_PRG15_MIRROR__ea94
     INY
@@ -16151,7 +16301,7 @@ Area_ChangeArea:                            ; [$ea5f]
     STA Screen_StartPosYX
     INY
     LDA (Temp_Addr_L),Y
-    STA Screen_Palette
+    STA Maybe_Screen_Area
     JMP FUN_PRG15_MIRROR__dacd
 
   @LAB_PRG15_MIRROR__ea94:                  ; [$ea94]
@@ -16161,7 +16311,7 @@ Area_ChangeArea:                            ; [$ea5f]
     TAY
     BCC @LAB_PRG15_MIRROR__ea73
 
-  @LAB_PRG15_MIRROR__ea9b:                  ; [$ea9b]
+  @_return:                                 ; [$ea9b]
     RTS
 
 ;
@@ -17967,7 +18117,7 @@ ScreenEvents_HandlePathToMasconEvent:       ; [$ef69]
 
 
 ;============================================================================
-; DEAD CODE: Check if there are sprites not of a given entity.
+; DEADCODE: Check if there are sprites not of a given entity.
 ;
 ; This does not appear to be used anywhere. It only
 ; references itself.
@@ -18325,7 +18475,7 @@ Sprites_HasCurrentSprites:                  ; [$f00b]
 ; TODO: Document FUN_PRG15_MIRROR__f01b
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -18356,7 +18506,7 @@ FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
 ; TODO: Document FUN_PRG15_MIRROR__f039
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -19462,7 +19612,7 @@ Maybe_Menu_ShowMessageID:                   ; [$f3e9]
 ; the message and the length.
 ;
 ; After loading, this will restore the bank and then
-; fall through to TextBox_ClearShopSize.
+; fall through to TextBox_ClearPasswordSize.
 ;
 ; INPUTS:
 ;     A:
@@ -19610,8 +19760,7 @@ Messages_Load:                              ; [$f3f5]
 ;============================================================================
 ; TODO
 ;
-; This falls through to
-; TextBox_ClearShopSizeAtOffset.
+; This falls through to TextBox_ClearSizeAtOffset.
 ;
 ; INPUTS:
 ;     X:
@@ -19635,7 +19784,7 @@ Messages_Load:                              ; [$f3f5]
 ; XREFS:
 ;     IScriptAction_ShowPassword
 ;============================================================================
-TextBox_ClearShopSize:                      ; [$f434]
+TextBox_ClearPasswordSize:                  ; [$f434]
     LDA #$00
     STA a:TextBox_LineScrollOffset
     STA a:TextBox_CharPosForLine
@@ -19651,7 +19800,7 @@ TextBox_ClearShopSize:                      ; [$f434]
 
 
 ;============================================================================
-; TODO: Document TextBox_ClearShopSizeAtOffset
+; TODO: Document TextBox_ClearSizeAtOffset
 ;
 ; INPUTS:
 ;     X
@@ -19662,7 +19811,7 @@ TextBox_ClearShopSize:                      ; [$f434]
 ; XREFS:
 ;     IScripts_Something_9910
 ;============================================================================
-TextBox_ClearShopSizeAtOffset:              ; [$f44a]
+TextBox_ClearSizeAtOffset:                  ; [$f44a]
     LDA #$14
     STA PPU_TargetAddr.U
     LDA #$00
@@ -20634,7 +20783,7 @@ PLAYER_TITLE_EXP_NEEDED:                    ; [$f749]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;
 PLAYER_TITLE_EXP_NEEDED_1_:                 ; [$f74b]
     dw $0898                                ; [1]: Battler (2,200 exp)
@@ -20744,9 +20893,9 @@ GetInventoryIndexForItem:                   ; [$f785]
 ;     FUN_PRG12__8bce
 ;     FUN_PRG12__8c04
 ;     IScriptAction_ShowSellMenu
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;============================================================================
-BitShiftLeft5:                              ; [$f78b]
+GetInventoryBitForIndex:                    ; [$f78b]
     ASL A                                   ; Shift left 5 (here and the next
                                             ; 4 after falling through).
 
@@ -20763,7 +20912,7 @@ BitShiftLeft5:                              ; [$f78b]
 ; XREFS:
 ;     FUN_PRG12__9075
 ;     Maybe_DrawItemTitle
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;     TextBox_Maybe_GetPaletteBehindTextbox
 ;============================================================================
@@ -20899,11 +21048,11 @@ SUB_PRG15_MIRROR__f7f6:                     ; [$f7f6]
 ;     Maybe_DrawItemName
 ;     Maybe_DrawItemTitle
 ;     Maybe_Draw_Textbox
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
-;     Maybe_Shop_DrawPrices
+;     Maybe_Shop_DrawPrice
 ;     TextBox_ShowMessage_Fill4Lines
 ;     UI_DrawDigitsNoLeadingZeroes
 ;============================================================================
@@ -20993,7 +21142,7 @@ PPU_IncrementAddrBy8:                       ; [$f822]
 ;     Maybe_DrawItemName
 ;     Maybe_Draw_Textbox
 ;     TextBox_Maybe_Draw
-;     TextBox_ClearShopSizeAtOffset
+;     TextBox_ClearSizeAtOffset
 ;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;============================================================================
 PPU_IncrementAddrBy32:                      ; [$f826]
@@ -21102,7 +21251,7 @@ TextBox_SomethingPPUBuffer_Set:             ; [$f839]
 ;         The new offset to write to (X + 1).
 ;
 ; XREFS:
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;     Player_DrawItemInternal
 ;     TextBox_Write8BytesFromTemp
 ;============================================================================
@@ -21177,7 +21326,7 @@ PPUBuffer_Set:                              ; [$f845]
 ;         The new offset in the buffer after these values.
 ;
 ; XREFS:
-;     TextBox_ClearShopSizeAtOffset
+;     TextBox_ClearSizeAtOffset
 ;     TextBox_ShowMessage_Fill4Lines
 ;============================================================================
 PPUBuffer_WriteValueMany:                   ; [$f84a]
@@ -21247,13 +21396,13 @@ PPUBuffer_WriteValueMany:                   ; [$f84a]
 ;     Game_ShowStartScreen
 ;     Game_UnlockDoorWithUsableItem
 ;     IScripts_ClearPortrait
-;     Maybe_Player_PickUpGlove
 ;     Player_HandleDeath
 ;     Player_PickUpBattleHelmet
 ;     Player_PickUpBattleSuit
 ;     Player_PickUpBlackOnyx
 ;     Player_PickUpDragonSlayer
 ;     Player_PickUpElixir
+;     Player_PickUpGlove
 ;     Player_PickUpHourGlass
 ;     Player_PickUpMagicalRod
 ;     Player_PickUpMattock
@@ -22097,7 +22246,7 @@ UI_DrawGoldValue:                           ; [$f9e7]
 
 
 ;============================================================================
-; TODO: Document Maybe_Shop_DrawPrices
+; TODO: Document Maybe_Shop_DrawPrice
 ;
 ; INPUTS:
 ;     X
@@ -22107,9 +22256,9 @@ UI_DrawGoldValue:                           ; [$f9e7]
 ;     TODO
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;============================================================================
-Maybe_Shop_DrawPrices:                      ; [$fa03]
+Maybe_Shop_DrawPrice:                       ; [$fa03]
     JSR PPU_SetAddrForTextPos
 
 
@@ -22722,7 +22871,7 @@ Player_SetItem:                             ; [$fc0b]
 ; TODO: Document Player_DrawItemInternal
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -23068,6 +23217,22 @@ PPU_ClearAllTilemaps:                       ; [$fcb9]
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffad] undefined
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffbd] undefined
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffcd] undefined
-    hex ff ff ff 20 20 20 20 20 20 20 20 46 41 58 41 4e ; [$ffdd] undefined
-    hex 41 44 55 27 42 00 00 48 04 01 07 18 94 99 c9 13 ; [$ffed] undefined
-    db $c9,$d5,$c9                          ; [$fffd] undefined
+    db $ff,$ff,$ff                          ; [$ffdd] undefined
+
+    db $20                                  ; Game title
+    db $20,$20,$20,$20,$20,$20,$20,$46,$41,$58,$41,$4e,$41,$44,$55 ; [$ffe1]
+                                                                   ; string
+
+    dw $4227                                ; PRG Checksum
+    dw $0000                                ; CHR CHecksum
+    db $48                                  ; CHR size: 0 = 8KiB CHR type: 0
+                                            ; = CHR ROM PRG size: 5 = 512KiB
+    db $04                                  ; Mapper:    4 = MMC Nametable: 0
+                                            ; = Horizontal arrangement
+    db $01                                  ; Title encoding: 1 = ASCII
+    db $07                                  ; Title length: 8 bytes
+    db $18                                  ; Licensee Code: Hudson Soft
+    db $94                                  ; Header validation byte
+    dw OnInterrupt
+    dw Game_Init
+    db $d5,$c9                              ; [$fffe] undefined

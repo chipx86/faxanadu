@@ -64,14 +64,14 @@ DAT_PRG8__8007:                             ; [$8007]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ce80
+;     Maybe_LoadSpritesFromBank8
 ;
 DAT_PRG8__8008:                             ; [$8008]
     db $04                                  ; [$8008] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__ce80
+;     Maybe_LoadSpritesFromBank8
 ;
 DAT_PRG8__8009:                             ; [$8009]
     db $0c                                  ; [$8009] undefined

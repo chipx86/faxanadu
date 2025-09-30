@@ -6409,7 +6409,7 @@ BYTE_ARRAY_PRG14__9793:                     ; [$9793]
 ; TODO: Document SpriteUpdateHandler_Enemy_Monodron
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -6728,7 +6728,7 @@ BYTE_ARRAY_PRG14__9908:                     ; [$9908]
 ; TODO: Document SpriteUpdateHandler_Boss_Rokusutahn
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO

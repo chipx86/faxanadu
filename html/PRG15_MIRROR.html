@@ -2300,7 +2300,7 @@ pre {
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o">#$04</span></span><span class="ce">; Set the MP to 4 units.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_AddMP">Player_AddMP</a></span></span><span class="ce">; Add it to the player.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a></span></span><span class="ce">; Draw the screen but keep all sprites frozen.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Wait a short period of time before filling up the
@@ -2744,7 +2744,7 @@ pre {
 ;     <a href="#Player_UpdateExperience">Player_UpdateExperience</a>
 ;
 ; XREFS:
-;     <a href="#Maybe_Player_PickUpGlove">Maybe_Player_PickUpGlove</a>
+;     <a href="#Player_PickUpGlove">Player_PickUpGlove</a>
 ;     <a href="#Player_PickUpOintment">Player_PickUpOintment</a>
 ;============================================================================
 </div><span class="l"><a name="Player_Add100XP" href="#Player_Add100XP" class="la">Player_Add100XP:</a><span class="ce">; [$c609]</span></span>
@@ -3572,25 +3572,25 @@ pre {
 ;
 </div><span class="l"><a name="@_checkPoison" href="#@_checkPoison" class="lla">@_checkPoison:</a><span class="ce">; [$c79e]</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$5e</span></span><span class="ce">; 0x5E == Poison</span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__c7a5">@LAB_PRG15_MIRROR__c7a5</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_checkGlove1">@_checkGlove1</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_PickUpPoison">Player_PickUpPoison</a></span></span><span class="ce">; This is the Poison.  Pick it up.</span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__c7a5" href="#@LAB_PRG15_MIRROR__c7a5" class="lla">@LAB_PRG15_MIRROR__c7a5:</a><span class="ce">; [$c7a5]</span></span>
+<span class="l"><a name="@_checkGlove1" href="#@_checkGlove1" class="lla">@_checkGlove1:</a><span class="ce">; [$c7a5]</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$5f</span></span><span class="ce">; 0x5F == Glove</span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Maybe_Player_PickUpGlove">Maybe_Player_PickUpGlove</a></span></span><span class="ce">; This is the Glove.  Pick it up.</span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Player_PickUpGlove">Player_PickUpGlove</a></span></span><span class="ce">; This is the Glove.  Pick it up.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Check if this is the Ointment.
 ;
 </div><span class="l"><span><span class="i">CMP</span> <span class="o">#$60</span></span><span class="ce">; 0x60 == Ointment</span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__c7b0">@LAB_PRG15_MIRROR__c7b0</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_checkGlove2">@_checkGlove2</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_PickUpOintment">Player_PickUpOintment</a></span></span><span class="ce">; This is the Ointment.  Pick it up.</span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__c7b0" href="#@LAB_PRG15_MIRROR__c7b0" class="lla">@LAB_PRG15_MIRROR__c7b0:</a><span class="ce">; [$c7b0]</span></span>
+<span class="l"><a name="@_checkGlove2" href="#@_checkGlove2" class="lla">@_checkGlove2:</a><span class="ce">; [$c7b0]</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o">#$48</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Maybe_Player_PickUpGlove">Maybe_Player_PickUpGlove</a></span></span><span class="ce">; This is the Glove. Pick it up.</span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Player_PickUpGlove">Player_PickUpGlove</a></span></span><span class="ce">; This is the Glove. Pick it up.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Check if this is the Black Onyx.
@@ -3641,6 +3641,8 @@ pre {
 ; This will invoke the IScript, play the sound, and enable
 ; the Glove state.
 ;
+; Picking up the glove awards 100XP.
+;
 ; INPUTS:
 ;     None
 ;
@@ -3655,7 +3657,7 @@ pre {
 ; XREFS:
 ;     <a href="#Player_PickUp">Player_PickUp</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_Player_PickUpGlove" href="#Maybe_Player_PickUpGlove" class="la">Maybe_Player_PickUpGlove:</a><span class="ce">; [$c7cf]</span></span>
+</div><span class="l"><a name="Player_PickUpGlove" href="#Player_PickUpGlove" class="la">Player_PickUpGlove:</a><span class="ce">; [$c7cf]</span></span>
 <div class="c">;
 ; Run the "Got Glove" IScript.
 ;
@@ -3801,11 +3803,11 @@ pre {
 ;============================================================================
 </div><span class="l"><a name="Player_PickUpMagicalRod" href="#Player_PickUpMagicalRod" class="la">Player_PickUpMagicalRod:</a><span class="ce">; [$c810]</span></span>
 <div class="c">;
-; Run the "Got Pendant" IScript.
+; Run the "Got Magical Rod" IScript.
 ;
 ; IScript 0x90 via jump to <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>.
 ;
-</div><span class="l"><span><span class="i">LDA</span> <span class="o">#$90</span></span><span class="ce">; 0x90 == Pendant picked up IScript.</span></span>
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">#$90</span></span><span class="ce">; 0x90 == Magical Rod picked up IScript.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
@@ -4593,6 +4595,8 @@ pre {
 <span class="l"><span><span class="i">PLA</span></span><span class="ce">; Pull A from the stack.</span></span>
 <span class="l"><span><span class="i">TAX</span></span><span class="ce">; Set X = A</span></span>
 <span class="l"><span><span class="i">PLA</span></span><span class="ce">; Pull A from the satck</span></span>
+<span class="l"></span>
+<span class="l"><a name="OnHardwareInterrupt" href="#OnHardwareInterrupt" class="la">OnHardwareInterrupt:</a><span class="ce">; [$c9d5]</span></span>
 <span class="l"><span><span class="i">RTI</span></span><span class="ce">; Return from interrupt</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -4652,9 +4656,9 @@ pre {
 <span class="l"><span><span class="i">BVC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ca07">@LAB_PRG15_MIRROR__ca07</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$a0</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__ca0e" href="#@LAB_PRG15_MIRROR__ca0e" class="lla">@LAB_PRG15_MIRROR__ca0e:</a><span class="ce">; [$ca0e]</span></span>
+<span class="l"><a name="@_loop160Times" href="#@_loop160Times" class="lla">@_loop160Times:</a><span class="ce">; [$ca0e]</span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ca0e">@LAB_PRG15_MIRROR__ca0e</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_loop160Times">@_loop160Times</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ca11" href="#@LAB_PRG15_MIRROR__ca11" class="lla">@LAB_PRG15_MIRROR__ca11:</a><span class="ce">; [$ca11]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScrollHelp_Screen">ScrollHelp_Screen</a></span></span></span>
@@ -4684,12 +4688,12 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__8b71">FUN_PRG12__8b71</a>
 ;     <a href="PRG12.html#IScripts_UpdatePortraitAnimation">IScripts_UpdatePortraitAnimation</a>
+;     <a href="PRG12.html#PasswordScreen_HandleWrongPasswordAndWaitForInput">PasswordScreen_HandleWrongPasswordAndWaitForInput</a>
 ;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;     <a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a>
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="PRG12.html#_handleWrongPassword">_handleWrongPassword</a> [$PRG12::9162]
 ;     <a href="#EndGame_Begin">EndGame_Begin</a>
 ;     <a href="#EndGame_MainLoop">EndGame_MainLoop</a>
 ;     <a href="#FUN_PRG15_MIRROR__dacd">FUN_PRG15_MIRROR__dacd</a>
@@ -5226,7 +5230,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__8b71">FUN_PRG12__8b71</a>
 ;     <a href="PRG12.html#IScripts_UpdatePortraitAnimation">IScripts_UpdatePortraitAnimation</a>
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
 ;     <a href="#EndGame_Begin">EndGame_Begin</a>
 ;     <a href="#EndGame_MainLoop">EndGame_MainLoop</a>
@@ -5256,6 +5260,7 @@ pre {
 ;     A
 ;
 ; XREFS:
+;     <a href="PRG12.html#PasswordScreen_HandleWrongPasswordAndWaitForInput">PasswordScreen_HandleWrongPasswordAndWaitForInput</a>
 ;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a>
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
@@ -5538,7 +5543,6 @@ Don't reset</span></span>
 ;     <a href="#Area_SetStateFromDoorDestination">Area_SetStateFromDoorDestination</a>
 ;     <a href="#CHR_LoadTilesetPages">CHR_LoadTilesetPages</a>
 ;     <a href="#EndGame_MainLoop">EndGame_MainLoop</a>
-;     <a href="#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a>
 ;     <a href="#FUN_PRG15_MIRROR__ee93">FUN_PRG15_MIRROR__ee93</a>
 ;     <a href="#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a>
 ;     <a href="#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
@@ -5560,17 +5564,20 @@ Don't reset</span></span>
 ;     <a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
 ;     <a href="#MMC1_RestorePrevPRGBank">MMC1_RestorePrevPRGBank</a>
 ;     <a href="#MMC1_UpdatePRGBankToStackA">MMC1_UpdatePRGBankToStackA</a>
+;     <a href="#Maybe_LoadSpritesFromBank8">Maybe_LoadSpritesFromBank8</a>
 ;     <a href="#Maybe_Player_LoadArmorSprite">Maybe_Player_LoadArmorSprite</a>
 ;     <a href="#Maybe_Player_LoadShieldSprite">Maybe_Player_LoadShieldSprite</a>
 ;     <a href="#Maybe_Player_LoadWeaponSprite">Maybe_Player_LoadWeaponSprite</a>
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
-;     <a href="#Maybe_Screen_Scroll_D2A6">Maybe_Screen_Scroll_D2A6</a>
 ;     <a href="#Messages_Load">Messages_Load</a>
 ;     <a href="#PPU_LoadGlyphsForStrings">PPU_LoadGlyphsForStrings</a>
 ;     <a href="#PPU_WriteTilesFromCHRRAM">PPU_WriteTilesFromCHRRAM</a>
 ;     <a href="#Palette_PopulateData">Palette_PopulateData</a>
 ;     <a href="#Player_DrawItemInternal">Player_DrawItemInternal</a>
 ;     <a href="#Player_HandleDeath">Player_HandleDeath</a>
+;     <a href="#Screen_HandleScrollDown">Screen_HandleScrollDown</a>
+;     <a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a>
+;     <a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a>
+;     <a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
 ;     <a href="#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
@@ -5876,7 +5883,7 @@ Don't reset</span></span>
 <span class="l"><span><span class="i">STX</span> <span class="o">a:<a href="RAM.html#PPUADDR">PPUADDR</a></span></span><span class="ce">; Set lower byte of PPU address to X.</span></span>
 <span class="l"></span>
 <div class="c">;
-; Add the phase byte and oop index together and get the three
+; Add the phase byte and loop index together and get the three
 ; least-significant bits. This will be our index into the lookup
 ; table.
 ;
@@ -5963,7 +5970,7 @@ Don't reset</span></span>
 ;     <a href="#PPUBUFFER_DRAW_COMMANDS">PPUBUFFER_DRAW_COMMANDS</a>
 ;     [$PRG15_MIRROR::cfc4]
 ;============================================================================
-</div><span class="l"><a name="PPUBuffer_Command_RotateTilesRight1Pixel" href="#PPUBuffer_Command_RotateTilesRight1Pixel" class="la">PPUBuffer_Command_RotateTilesRight1Pixel:</a><span class="ce">; [$cd3b]</span></span>
+</div><span class="l"><a name="PPUBuffer_DrawCommand_RotateTilesRight1Pixel" href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel" class="la">PPUBuffer_DrawCommand_RotateTilesRight1Pixel:</a><span class="ce">; [$cd3b]</span></span>
 <div class="c">;
 ; Read the first two bytes from the offset and set as
 ; the PPUADDR.
@@ -6326,7 +6333,7 @@ Check if we're on the next bank.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__ce80
+; TODO: Document Maybe_LoadSpritesFromBank8
 ;
 ; INPUTS:
 ;     None.
@@ -6338,7 +6345,7 @@ Check if we're on the next bank.</span></span>
 ;     <a href="#Game_InitStateForSpawn">Game_InitStateForSpawn</a>
 ;     <a href="#Something_SetupNewScreen">Something_SetupNewScreen</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__ce80" href="#FUN_PRG15_MIRROR__ce80" class="la">FUN_PRG15_MIRROR__ce80:</a><span class="ce">; [$ce80]</span></span>
+</div><span class="l"><a name="Maybe_LoadSpritesFromBank8" href="#Maybe_LoadSpritesFromBank8" class="la">Maybe_LoadSpritesFromBank8:</a><span class="ce">; [$ce80]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank2">CurrentROMBank2</a></span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$08</span></span></span>
@@ -6567,7 +6574,7 @@ Check if we're on the next bank.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; Clear the PPU buffer.
+; MAYBE DEADCODE: Clear the PPU buffer.
 ;
 ; Both the offset and upper bounds will be reset back to 0.
 ;
@@ -6591,7 +6598,7 @@ Check if we're on the next bank.</span></span>
 ;     <a href="#PPUBuffer_Draw">PPUBuffer_Draw</a>
 ;
 </div><span class="l"><a name="RETURN_CF3B" href="#RETURN_CF3B" class="la">RETURN_CF3B:</a><span class="ce">; [$cf3b]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$60</span></span><span class="ce">; [$cf3b] undefined</span></span>
+<span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -6621,7 +6628,7 @@ Check if we're on the next bank.</span></span>
 ;          a given address (at the next two bytes from
 ;          the buffer).
 ;
-;          <a href="#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>
+;          <a href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>
 ;
 ;    0xFA: TODO
 ;    <a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
@@ -6681,7 +6688,7 @@ Check if we're on the next bank.</span></span>
 ;
 ; CALLS:
 ;     <a href="#PPUBuffer_DrawCommand_WritePalette">PPUBuffer_DrawCommand_WritePalette</a>
-;     <a href="#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>
+;     <a href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>
 ;     <a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
 ;
 ; XREFS:
@@ -6871,13 +6878,13 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [1]: Command 0xFF</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [2]: Command 0xFE</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [3]: Command 0xFD</span></span>
-<span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_Command_RotateTilesRight1Pixel">PPUBuffer_Command_RotateTilesRight1Pixel</a>-1</span></span><span class="ce">; [4]: Command 0xFC</span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>-1</span></span><span class="ce">; [4]: Command 0xFC</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [5]: Command 0xFB</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o"><a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>-1</span></span><span class="ce">; [6]: Command 0xFA</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document PPUBuffer_WaitForSomething
+; TODO: Document PPUBuffer_Maybe_WaitForFlush
 ;
 ; INPUTS:
 ;     None.
@@ -6886,17 +6893,17 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
+;     <a href="#PPUBuffer_Maybe_WaitForFlush">PPUBuffer_Maybe_WaitForFlush</a>
 ;     <a href="#PPUBuffer_QueueCommandOrLength">PPUBuffer_QueueCommandOrLength</a>
-;     <a href="#PPUBuffer_WaitForSomething">PPUBuffer_WaitForSomething</a>
 ;============================================================================
-</div><span class="l"><a name="PPUBuffer_WaitForSomething" href="#PPUBuffer_WaitForSomething" class="la">PPUBuffer_WaitForSomething:</a><span class="ce">; [$cfca]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_SomethingCompareTo24">PPUBuffer_SomethingCompareTo24</a></span></span></span>
-<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#PPUBuffer_WaitForSomething">PPUBuffer_WaitForSomething</a></span></span></span>
+</div><span class="l"><a name="PPUBuffer_Maybe_WaitForFlush" href="#PPUBuffer_Maybe_WaitForFlush" class="la">PPUBuffer_Maybe_WaitForFlush:</a><span class="ce">; [$cfca]</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_SomethingCompareTo0x24">PPUBuffer_SomethingCompareTo0x24</a></span></span></span>
+<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#PPUBuffer_Maybe_WaitForFlush">PPUBuffer_Maybe_WaitForFlush</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document PPUBuffer_SomethingCompareTo24
+; TODO: Document PPUBuffer_SomethingCompareTo0x24
 ;
 ; INPUTS:
 ;     None.
@@ -6905,9 +6912,9 @@ and address bytes and all the data bytes.</span></span>
 ;     C
 ;
 ; XREFS:
-;     <a href="#PPUBuffer_WaitForSomething">PPUBuffer_WaitForSomething</a>
+;     <a href="#PPUBuffer_Maybe_WaitForFlush">PPUBuffer_Maybe_WaitForFlush</a>
 ;============================================================================
-</div><span class="l"><a name="PPUBuffer_SomethingCompareTo24" href="#PPUBuffer_SomethingCompareTo24" class="la">PPUBuffer_SomethingCompareTo24:</a><span class="ce">; [$cfd0]</span></span>
+</div><span class="l"><a name="PPUBuffer_SomethingCompareTo0x24" href="#PPUBuffer_SomethingCompareTo0x24" class="la">PPUBuffer_SomethingCompareTo0x24:</a><span class="ce">; [$cfd0]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPUBuffer_Offset">PPUBuffer_Offset</a></span></span><span class="ce">; A = PPU buffer offset.</span></span>
 <span class="l"><span><span class="i">SEC</span></span></span>
 <span class="l"><span><span class="i">SBC</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span><span class="ce">; Subtract the upper bounds.</span></span>
@@ -6935,7 +6942,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG12.html#Maybe_DrawItemName">Maybe_DrawItemName</a>
 ;     <a href="PRG12.html#Maybe_Draw_Textbox">Maybe_Draw_Textbox</a>
 ;     <a href="PRG12.html#Maybe_Draw_Textbox_Something8F51">Maybe_Draw_Textbox_Something8F51</a>
-;     <a href="PRG12.html#PasswrodScreen_DrawMessage">PasswrodScreen_DrawMessage</a>
+;     <a href="PRG12.html#PasswordScreen_DrawMessage">PasswordScreen_DrawMessage</a>
 ;     <a href="PRG12.html#Strings_Draw">Strings_Draw</a>
 ;     <a href="#Area_WriteTwoBlocksFromData12ToPPUBuffer">Area_WriteTwoBlocksFromData12ToPPUBuffer</a>
 ;     <a href="#Area_WriteTwoBlocksFromData34ToPPUBuffer">Area_WriteTwoBlocksFromData34ToPPUBuffer</a>
@@ -6954,7 +6961,7 @@ and address bytes and all the data bytes.</span></span>
 ;============================================================================
 </div><span class="l"><a name="PPUBuffer_QueueCommandOrLength" href="#PPUBuffer_QueueCommandOrLength" class="la">PPUBuffer_QueueCommandOrLength:</a><span class="ce">; [$cfdc]</span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_WaitForSomething">PPUBuffer_WaitForSomething</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_Maybe_WaitForFlush">PPUBuffer_Maybe_WaitForFlush</a></span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span><span class="ce">; Load the upper bounds of the buffer.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span><span class="ce">; Store the provided value (A) there.</span></span>
@@ -7029,13 +7036,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d005
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__d005" href="#FUN_PRG15_MIRROR__d005" class="la">FUN_PRG15_MIRROR__d005:</a><span class="ce">; [$d005]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$04</span></span></span>
@@ -7044,16 +7045,10 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d00d
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__d00d" href="#FUN_PRG15_MIRROR__d00d" class="la">FUN_PRG15_MIRROR__d00d:</a><span class="ce">; [$d00d]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#LoadPalette2">LoadPalette2</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#PPUBuffer_Append0">PPUBuffer_Append0</a></span></span></span>
 </pre><pre><span class="l"></span>
@@ -7473,7 +7468,6 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG14.html#Sprites_ReplaceWithCoinDrop">Sprites_ReplaceWithCoinDrop</a>
 ;     <a href="#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;     <a href="#Game_UnlockDoor">Game_UnlockDoor</a>
-;     <a href="#Maybe_Player_PickUpGlove">Maybe_Player_PickUpGlove</a>
 ;     <a href="#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
 ;     <a href="#Player_FillHPAndMP">Player_FillHPAndMP</a>
 ;     <a href="#Player_HandleDeath">Player_HandleDeath</a>
@@ -7482,6 +7476,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_PickUpBlackOnyx">Player_PickUpBlackOnyx</a>
 ;     <a href="#Player_PickUpDragonSlayer">Player_PickUpDragonSlayer</a>
 ;     <a href="#Player_PickUpElixir">Player_PickUpElixir</a>
+;     <a href="#Player_PickUpGlove">Player_PickUpGlove</a>
 ;     <a href="#Player_PickUpHourGlass">Player_PickUpHourGlass</a>
 ;     <a href="#Player_PickUpMattock">Player_PickUpMattock</a>
 ;     <a href="#Player_PickUpOintment">Player_PickUpOintment</a>
@@ -7552,7 +7547,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d11c" href="#@LAB_PRG15_MIRROR__d11c" class="lla">@LAB_PRG15_MIRROR__d11c:</a><span class="ce">; [$d11c]</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d61d">FUN_PRG15_MIRROR__d61d</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d11c">@LAB_PRG15_MIRROR__d11c</a></span></span></span>
@@ -7984,7 +7979,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a>
 ;
 ; XREFS:
-;     <a href="#Screen_BeginScrollAndLoadBlockProperties">Screen_BeginScrollAndLoadBlockProperties</a>
+;     <a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a>
 ;============================================================================
 </div><span class="l"><a name="Area_LoadBlockProperties" href="#Area_LoadBlockProperties" class="la">Area_LoadBlockProperties:</a><span class="ce">; [$d276]</span></span>
 <div class="c">;
@@ -8043,7 +8038,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Screen_BeginScrollAndLoadBlockProperties
+; TODO: Document Screen_StopScrollAndLoadBlockProperties
 ;
 ; INPUTS:
 ;     None.
@@ -8052,17 +8047,19 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
-;     <a href="#Maybe_Screen_Scroll_D2A6">Maybe_Screen_Scroll_D2A6</a>
+;     <a href="#Screen_HandleScrollDown">Screen_HandleScrollDown</a>
+;     <a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a>
+;     <a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a>
+;     <a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a>
 ;============================================================================
-</div><span class="l"><a name="Screen_BeginScrollAndLoadBlockProperties" href="#Screen_BeginScrollAndLoadBlockProperties" class="la">Screen_BeginScrollAndLoadBlockProperties:</a><span class="ce">; [$d29f]</span></span>
+</div><span class="l"><a name="Screen_StopScrollAndLoadBlockProperties" href="#Screen_StopScrollAndLoadBlockProperties" class="la">Screen_StopScrollAndLoadBlockProperties:</a><span class="ce">; [$d29f]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Area_LoadBlockProperties">Area_LoadBlockProperties</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Maybe_Screen_Scroll_D2A6
+; TODO: Document Screen_HandleScrollUp
 ;
 ; INPUTS:
 ;     None.
@@ -8071,9 +8068,9 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
+;     <a href="#Screen_HandleScroll">Screen_HandleScroll</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_Screen_Scroll_D2A6" href="#Maybe_Screen_Scroll_D2A6" class="la">Maybe_Screen_Scroll_D2A6:</a><span class="ce">; [$d2a6]</span></span>
+</div><span class="l"><a name="Screen_HandleScrollUp" href="#Screen_HandleScrollUp" class="la">Screen_HandleScrollUp:</a><span class="ce">; [$d2a6]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d2ac">@LAB_PRG15_MIRROR__d2ac</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$d0</span></span></span>
@@ -8084,7 +8081,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d2b8">@LAB_PRG15_MIRROR__d2b8</a></span></span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Something_Player_ScrollY">Something_Player_ScrollY</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_BeginScrollAndLoadBlockProperties">Screen_BeginScrollAndLoadBlockProperties</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d2b8" href="#@LAB_PRG15_MIRROR__d2b8" class="lla">@LAB_PRG15_MIRROR__d2b8:</a><span class="ce">; [$d2b8]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
@@ -8115,7 +8112,7 @@ and address bytes and all the data bytes.</span></span>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__d2ce" href="#FUN_PRG15_MIRROR__d2ce" class="la">FUN_PRG15_MIRROR__d2ce:</a><span class="ce">; [$d2ce]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_UpdatePlayerOnScroll">Game_UpdatePlayerOnScroll</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d61d">FUN_PRG15_MIRROR__d61d</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span></span>
@@ -8130,14 +8127,14 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
+;     <a href="#Screen_HandleScroll">Screen_HandleScroll</a>
 ;
 </div><span class="l"><a name="RETURN_D2E6" href="#RETURN_D2E6" class="la">RETURN_D2E6:</a><span class="ce">; [$d2e6]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Maybe_Screen_Scroll
+; TODO: Document Screen_HandleScroll
 ;
 ; INPUTS:
 ;     None.
@@ -8150,20 +8147,35 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#FUN_PRG15_MIRROR__d2ce">FUN_PRG15_MIRROR__d2ce</a>
 ;     <a href="#Game_MainLoop">Game_MainLoop</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_Screen_Scroll" href="#Maybe_Screen_Scroll" class="la">Maybe_Screen_Scroll:</a><span class="ce">; [$d2e7]</span></span>
+</div><span class="l"><a name="Screen_HandleScroll" href="#Screen_HandleScroll" class="la">Screen_HandleScroll:</a><span class="ce">; [$d2e7]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_notScrolling">@_notScrolling</a></span></span></span>
-<span class="l"></span>
-<div class="c">;
-; The screen is currently scrolling.
-;
-</div><span class="l"><span><span class="i">DEX</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d31e">@LAB_PRG15_MIRROR__d31e</a></span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Maybe_Screen_Scroll_D2A6">Maybe_Screen_Scroll_D2A6</a></span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a></span></span></span>
+<span class="l"><span><span class="i">DEX</span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_D2E6">RETURN_D2E6</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
+<span class="l"></span>
+<div class="c">;
+; v-- Fall through --v
+;
+</div></pre><pre><span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; TODO: Document Screen_HandleScrollDown
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;============================================================================
+</div><span class="l"><a name="Screen_HandleScrollDown" href="#Screen_HandleScrollDown" class="la">Screen_HandleScrollDown:</a><span class="ce">; [$d2f4]</span></span>
+<div class="c">;
+; The screen is scrolling down.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
@@ -8172,7 +8184,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Player_ScrollY">Something_Player_ScrollY</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_BeginScrollAndLoadBlockProperties">Screen_BeginScrollAndLoadBlockProperties</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d308" href="#@LAB_PRG15_MIRROR__d308" class="lla">@LAB_PRG15_MIRROR__d308:</a><span class="ce">; [$d308]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_ScrollIndex">Something_ScrollIndex</a></span></span></span>
@@ -8186,9 +8198,25 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
+</pre><pre><span class="l"></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__d31e" href="#@LAB_PRG15_MIRROR__d31e" class="lla">@LAB_PRG15_MIRROR__d31e:</a><span class="ce">; [$d31e]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
+<div class="cp">;============================================================================
+; TODO: Document Screen_HandleScrollRight
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#Screen_HandleScroll">Screen_HandleScroll</a>
+;============================================================================
+</div><span class="l"><a name="Screen_HandleScrollRight" href="#Screen_HandleScrollRight" class="la">Screen_HandleScrollRight:</a><span class="ce">; [$d31e]</span></span>
+<div class="c">;
+; The screen is scrolling right.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
@@ -8199,7 +8227,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScrollHelp_Screen">ScrollHelp_Screen</a></span></span></span>
 <span class="l"><span><span class="i">PLP</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d334">@LAB_PRG15_MIRROR__d334</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_BeginScrollAndLoadBlockProperties">Screen_BeginScrollAndLoadBlockProperties</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d334" href="#@LAB_PRG15_MIRROR__d334" class="lla">@LAB_PRG15_MIRROR__d334:</a><span class="ce">; [$d334]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
@@ -8208,17 +8236,30 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d4dc">FUN_PRG15_MIRROR__d4dc</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_Something_ScrollRight">Screen_Something_ScrollRight</a></span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
+</pre><pre><span class="l"></span>
 <span class="l"></span>
-<div class="c">;
-; The screen is not currently scrolling.
+<div class="cp">;============================================================================
+; TODO: Document Screen_HandleScrollLeft
 ;
-</div><span class="l"><a name="@_notScrolling" href="#@_notScrolling" class="lla">@_notScrolling:</a><span class="ce">; [$d34a]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#Screen_HandleScroll">Screen_HandleScroll</a>
+;============================================================================
+</div><span class="l"><a name="Screen_HandleScrollLeft" href="#Screen_HandleScrollLeft" class="la">Screen_HandleScrollLeft:</a><span class="ce">; [$d34a]</span></span>
+<div class="c">;
+; The screen is scrolling left.
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$fc</span></span></span>
 <span class="l"><span><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d364">@LAB_PRG15_MIRROR__d364</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScrollHelp_Pixel">ScrollHelp_Pixel</a></span></span></span>
@@ -8231,7 +8272,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScrollHelp_Screen">ScrollHelp_Screen</a></span></span></span>
 <span class="l"><span><span class="i">PLP</span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d364">@LAB_PRG15_MIRROR__d364</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_BeginScrollAndLoadBlockProperties">Screen_BeginScrollAndLoadBlockProperties</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__d364" href="#@LAB_PRG15_MIRROR__d364" class="lla">@LAB_PRG15_MIRROR__d364:</a><span class="ce">; [$d364]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
@@ -8253,7 +8294,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d4f0">FUN_PRG15_MIRROR__d4f0</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_Something_ScrollLeft">Screen_Something_ScrollLeft</a></span></span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
@@ -8288,7 +8329,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Maybe_Screen_Scroll_D2A6">Maybe_Screen_Scroll_D2A6</a>
+;     <a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__d393" href="#FUN_PRG15_MIRROR__d393" class="la">FUN_PRG15_MIRROR__d393:</a><span class="ce">; [$d393]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
@@ -8313,7 +8354,7 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
+;     <a href="#Screen_HandleScrollDown">Screen_HandleScrollDown</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__d3a6" href="#FUN_PRG15_MIRROR__d3a6" class="la">FUN_PRG15_MIRROR__d3a6:</a><span class="ce">; [$d3a6]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
@@ -8517,9 +8558,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="#FUN_PRG15_MIRROR__d82d">FUN_PRG15_MIRROR__d82d</a>
 ;     <a href="#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
+;     <a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__d4cf" href="#BYTE_ARRAY_PRG15_MIRROR__d4cf" class="la">BYTE_ARRAY_PRG15_MIRROR__d4cf:</a><span class="ce">; [$d4cf]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$42</span></span><span class="ce">; [0]:</span></span>
@@ -8527,9 +8568,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="#FUN_PRG15_MIRROR__d82d">FUN_PRG15_MIRROR__d82d</a>
 ;     <a href="#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
+;     <a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__d4d1" href="#BYTE_ARRAY_PRG15_MIRROR__d4d1" class="la">BYTE_ARRAY_PRG15_MIRROR__d4d1:</a><span class="ce">; [$d4d1]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$02</span></span><span class="ce">; [0]:</span></span>
@@ -8537,8 +8578,8 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
 ;     <a href="#Maybe_Area_LoadBlocks">Maybe_Area_LoadBlocks</a>
+;     <a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__d4d3" href="#BYTE_ARRAY_PRG15_MIRROR__d4d3" class="la">BYTE_ARRAY_PRG15_MIRROR__d4d3:</a><span class="ce">; [$d4d3]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$03</span></span><span class="ce">; [0]:</span></span>
@@ -8548,76 +8589,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4d7
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d4dc">FUN_PRG15_MIRROR__d4dc</a>
-;     <a href="#FUN_PRG15_MIRROR__d4f0">FUN_PRG15_MIRROR__d4f0</a>
-;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__d4d7" href="#FUN_PRG15_MIRROR__d4d7" class="la">FUN_PRG15_MIRROR__d4d7:</a><span class="ce">; [$d4d7]</span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a></span></span></span>
-</pre><pre><span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4dc
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
-;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__d4dc" href="#FUN_PRG15_MIRROR__d4dc" class="la">FUN_PRG15_MIRROR__d4dc:</a><span class="ce">; [$d4dc]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
-<span class="l"><span><span class="i">INX</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d4d7">FUN_PRG15_MIRROR__d4d7</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$01</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a></span></span></span>
-<span class="l"><span><span class="i">RTS</span></span></span>
-</pre><pre><span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d4f0
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     <a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a>
-;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__d4f0" href="#FUN_PRG15_MIRROR__d4f0" class="la">FUN_PRG15_MIRROR__d4f0:</a><span class="ce">; [$d4f0]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
-<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$0f</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d4d7">FUN_PRG15_MIRROR__d4d7</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$06</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a></span></span></span>
-<span class="l"><span><span class="i">RTS</span></span></span>
-</pre><pre><span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d503
+; TODO: Document Screen_Something_ScrollHoriz
 ;
 ; INPUTS:
 ;     X
@@ -8626,11 +8598,80 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d4d7">FUN_PRG15_MIRROR__d4d7</a>
-;     <a href="#FUN_PRG15_MIRROR__d4dc">FUN_PRG15_MIRROR__d4dc</a>
-;     <a href="#FUN_PRG15_MIRROR__d4f0">FUN_PRG15_MIRROR__d4f0</a>
+;     <a href="#Screen_Something_ScrollLeft">Screen_Something_ScrollLeft</a>
+;     <a href="#Screen_Something_ScrollRight">Screen_Something_ScrollRight</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__d503" href="#FUN_PRG15_MIRROR__d503" class="la">FUN_PRG15_MIRROR__d503:</a><span class="ce">; [$d503]</span></span>
+</div><span class="l"><a name="Screen_Something_ScrollHoriz" href="#Screen_Something_ScrollHoriz" class="la">Screen_Something_ScrollHoriz:</a><span class="ce">; [$d4d7]</span></span>
+<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a></span></span></span>
+</pre><pre><span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; TODO: Document Screen_Something_ScrollRight
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a>
+;============================================================================
+</div><span class="l"><a name="Screen_Something_ScrollRight" href="#Screen_Something_ScrollRight" class="la">Screen_Something_ScrollRight:</a><span class="ce">; [$d4dc]</span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
+<span class="l"><span><span class="i">INX</span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_Something_ScrollHoriz">Screen_Something_ScrollHoriz</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$01</span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a></span></span></span>
+<span class="l"><span><span class="i">RTS</span></span></span>
+</pre><pre><span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; TODO: Document Screen_Something_ScrollLeft
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a>
+;============================================================================
+</div><span class="l"><a name="Screen_Something_ScrollLeft" href="#Screen_Something_ScrollLeft" class="la">Screen_Something_ScrollLeft:</a><span class="ce">; [$d4f0]</span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">#$00</span></span></span>
+<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#Something_Blocks_Counter_006E">Something_Blocks_Counter_006E</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$0f</span></span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$0f</span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_Something_ScrollHoriz">Screen_Something_ScrollHoriz</a></span></span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$06</span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a></span></span></span>
+<span class="l"><span><span class="i">RTS</span></span></span>
+</pre><pre><span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; TODO: Document Screen_Something_ScrollHorizInternal
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#Screen_Something_ScrollHoriz">Screen_Something_ScrollHoriz</a>
+;     <a href="#Screen_Something_ScrollLeft">Screen_Something_ScrollLeft</a>
+;     <a href="#Screen_Something_ScrollRight">Screen_Something_ScrollRight</a>
+;============================================================================
+</div><span class="l"><a name="Screen_Something_ScrollHorizInternal" href="#Screen_Something_ScrollHorizInternal" class="la">Screen_Something_ScrollHorizInternal:</a><span class="ce">; [$d503]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Something_Blocks_0045">Something_Blocks_0045</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$d619,X</span></span></span>
@@ -8802,7 +8843,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
+;     <a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__d619" href="#BYTE_ARRAY_PRG15_MIRROR__d619" class="la">BYTE_ARRAY_PRG15_MIRROR__d619:</a><span class="ce">; [$d619]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -8810,7 +8851,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__d503">FUN_PRG15_MIRROR__d503</a>
+;     <a href="#Screen_Something_ScrollHorizInternal">Screen_Something_ScrollHorizInternal</a>
 ;
 </div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__d61b" href="#BYTE_ARRAY_PRG15_MIRROR__d61b" class="la">BYTE_ARRAY_PRG15_MIRROR__d61b:</a><span class="ce">; [$d61b]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -8893,7 +8934,7 @@ and address bytes and all the data bytes.</span></span>
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     TODO
 ;
 ; XREFS:
 ;     <a href="#BYTE_ARRAY_PRG15_MIRROR__d64c">BYTE_ARRAY_PRG15_MIRROR__d64c</a>
@@ -9893,7 +9934,7 @@ and address bytes and all the data bytes.</span></span>
 ;
 ; Load the palette and update the screen.
 ;
-</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#LoadPalette2">LoadPalette2</a></span></span><span class="ce">; Load the palette.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUBuffer_Append0">PPUBuffer_Append0</a></span></span><span class="ce">; Append 0 to the PPU buffer.</span></span>
 <span class="l"></span>
@@ -10194,7 +10235,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Screen_FadeOutCounter">Screen_FadeOutCounter</a>:
 ;         The counter for this loop.
 ;
-;     <a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a>:
+;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
 ;         The palette index to apply for the transition.
 ;
 ; OUTPUTS:
@@ -10221,7 +10262,7 @@ and address bytes and all the data bytes.</span></span>
 <div class="c">;
 ; Fade out to the next palette towards black.
 ;
-</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#LoadPalette">LoadPalette</a></span></span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o">a:<a href="RAM.html#PaletteIndex">PaletteIndex</a></span></span></span>
 <span class="l"></span>
@@ -10285,7 +10326,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_ScreenReadyState">Maybe_ScreenReadyState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_SetInitialState">Player_SetInitialState</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$ba55</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_LoadSpritesFromBank8">Maybe_LoadSpritesFromBank8</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_GameScreenStart">Maybe_GameScreenStart</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
@@ -10399,15 +10440,21 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#WaitForNextFrame">WaitForNextFrame</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Game_MainLoop">Game_MainLoop</a></span></span></span>
-<span class="l"></span>
+</pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; Dead code that would assign the area based on transitioning from another.
+; DEADCODE
+;
+; Would assign the area based on transitioning from another.
 ;============================================================================
-</div><span class="l"><span><span class="i">hex</span> <span class="o">ae 35 04 bd fe da 85 24</span></span><span class="ce">; [$daf6] undefined</span></span>
+</div><span class="l"><a name="FUN_PRG15_MIRROR__daf6" href="#FUN_PRG15_MIRROR__daf6" class="la">FUN_PRG15_MIRROR__daf6:</a><span class="ce">; [$daf6]</span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#Area_Region">Area_Region</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">#$dafe,X</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
+;     <a href="#FUN_PRG15_MIRROR__daf6">FUN_PRG15_MIRROR__daf6</a>
 ;     <a href="#Game_SetupAndLoadArea">Game_SetupAndLoadArea</a>
 ;
 </div><span class="l"><a name="MAYBE_OUTSIDE_REGION_INDEXES" href="#MAYBE_OUTSIDE_REGION_INDEXES" class="la">MAYBE_OUTSIDE_REGION_INDEXES:</a><span class="ce">; [$dafe]</span></span>
@@ -10583,7 +10630,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a></span></span><span class="ce">; Active selected item?</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="RAM.html#ROMBankStart">ROMBankStart</a></span></span><span class="ce">; Update all sprites.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CountdownItems">GameLoop_CountdownItems</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Fog_OnTick">Fog_OnTick</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckPauseGame">GameLoop_CheckPauseGame</a></span></span></span>
@@ -10631,10 +10678,10 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b982</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_DrawBody">Player_DrawBody</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o">#$b7d6</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Screen_Scroll">Maybe_Screen_Scroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Screen_HandleScroll">Screen_HandleScroll</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@_scrolling">@_scrolling</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Game_MainLoop">Game_MainLoop</a></span></span></span>
@@ -10660,7 +10707,7 @@ and address bytes and all the data bytes.</span></span>
 ; CALLS:
 ;     <a href="#EndGame_MovePlayerTowardKing">EndGame_MovePlayerTowardKing</a>
 ;     <a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a>
-;     <a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a>
+;     <a href="#Fog_OnTick">Fog_OnTick</a>
 ;     <a href="#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a>
 ;     <a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
 ;     <a href="#GameLoop_CountdownItems">GameLoop_CountdownItems</a>
@@ -10709,7 +10756,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a></span></span><span class="ce">; No-op</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="RAM.html#ROMBankStart">ROMBankStart</a></span></span><span class="ce">; Update sprites.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CountdownItems">GameLoop_CountdownItems</a></span></span><span class="ce">; No-op</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a></span></span><span class="ce">; No-op</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Fog_OnTick">Fog_OnTick</a></span></span><span class="ce">; No-op</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_CheckShowPlayerMenu">GameLoop_CheckShowPlayerMenu</a></span></span><span class="ce">; No-op</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a></span></span><span class="ce">; No-op</span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#EndGame_MainLoop">EndGame_MainLoop</a></span></span><span class="ce">; Loop.</span></span>
@@ -11034,13 +11081,13 @@ and address bytes and all the data bytes.</span></span>
 ;============================================================================
 </div><span class="l"><a name="Something_SetupNewScreen" href="#Something_SetupNewScreen" class="la">Something_SetupNewScreen:</a><span class="ce">; [$dd13]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_Player_DrawSprite">Maybe_Player_DrawSprite</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ce80">FUN_PRG15_MIRROR__ce80</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Maybe_LoadSpritesFromBank8">Maybe_LoadSpritesFromBank8</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Area_Maybe_ShowRoomTransition">Area_Maybe_ShowRoomTransition</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#LoadPalette2">LoadPalette2</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Something_Player_ScrollX">Something_Player_ScrollX</a></span></span></span>
@@ -11158,7 +11205,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a>:
 ;         TODO
 ;
-;     <a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a>:
+;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
 ;         TODO: The index of the palette outside the temple?
 ;
 ;     <a href="RAM.html#Area_Music_Outside">Area_Music_Outside</a>:
@@ -11205,11 +11252,11 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$ddad,X</span></span></span>
 <span class="l"><span><span class="i">STY</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$df4c,Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$df5c,Y</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Area_Music_Outside">Area_Music_Outside</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$12</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$06</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_NewTilesIndex">Something_Maybe_NewTilesIndex</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$9e</span></span></span>
@@ -11364,7 +11411,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a>:
 ;         The new loading screen index.
 ;
-;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
+;     <a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a>:
 ;         The palette for the room.
 ;
 ;     <a href="RAM.html#Area_Region">Area_Region</a>:
@@ -11409,7 +11456,7 @@ and address bytes and all the data bytes.</span></span>
 ; Load the palette for the King's room.
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o">#$11</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span><span class="ce">; Set the Palette for the King's room.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span><span class="ce">; Set the Palette for the King's room.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Set the King's Room screen.
@@ -11454,7 +11501,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Area_PrevRegion">Area_PrevRegion</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Maybe_PrevScreen">Maybe_PrevScreen</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Prev_Palette">Prev_Palette</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span></span>
@@ -11522,7 +11569,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Maybe_PrevScreen">Maybe_PrevScreen</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Prev_Palette">Prev_Palette</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Prev_PlayerPosXY">Prev_PlayerPosXY</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_StartPosYX">Screen_StartPosYX</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Screen_Load">Screen_Load</a></span></span></span>
@@ -11556,7 +11603,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a>:
 ;         The current screen.
 ;
-;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
+;     <a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a>:
 ;         The palette for the area.
 ;
 ;     <a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a>:
@@ -11649,7 +11696,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Palette_LoadFromIndex">Palette_LoadFromIndex</a></span></span><span class="ce">; Load the palette for that index.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span><span class="ce">; X = current area.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$df4c,X</span></span><span class="ce">; Load the palette.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span><span class="ce">; And store it as the current one for the area.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span><span class="ce">; And store it as the current one for the area.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Load the music for this area.
@@ -11689,7 +11736,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a>:
 ;         The current screen.
 ;
-;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
+;     <a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a>:
 ;         The palette for the area.
 ;
 ;     <a href="RAM.html#Areas_DefaultMusic">Areas_DefaultMusic</a>:
@@ -11756,7 +11803,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Palette_LoadFromIndex">Palette_LoadFromIndex</a></span></span><span class="ce">; Load palette 0.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span><span class="ce">; X = current area.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$df4c,X</span></span><span class="ce">; Load the palette for the area.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span><span class="ce">; Store as the current palette.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span><span class="ce">; Store as the current palette.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Load the music for the area.
@@ -11983,31 +12030,59 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document GameLoop_AnimateFog
+; Update the fog state on tick.
+;
+; This will first check if the area supports fog (Forepaw
+; area with the Mist palette).
+;
+; If fog is allowed, it will proceed to animate fog
+; every odd tick and update fog state every even tick.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a>:
+;         The current area.
+;
+;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
+;         The screen's palette.
+;
+;     <a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a>:
+;         The current fog index.
+;
+;     <a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a>:
+;         The current fog generator value.
 ;
 ; OUTPUTS:
-;     A
+;     <a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a>:
+;         The updated fog index.
+;
+;     <a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a>:
+;         The updated fog generator value.
+;
+; CALLS:
+;     <a href="#Fog_UpdateTiles">Fog_UpdateTiles</a>
 ;
 ; XREFS:
 ;     <a href="#EndGame_MainLoop">EndGame_MainLoop</a>
 ;     <a href="#Game_MainLoop">Game_MainLoop</a>
 ;============================================================================
-</div><span class="l"><a name="GameLoop_AnimateFog" href="#GameLoop_AnimateFog" class="la">GameLoop_AnimateFog:</a><span class="ce">; [$dfc5]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_PaletteIndex">Something_Maybe_PaletteIndex</a></span></span></span>
-<span class="l"><span><span class="i">CMP</span> <span class="o">#$0a</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_Index">Fog_Index</a></span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#Game_AnimateFog_UpdatePPU">Game_AnimateFog_UpdatePPU</a></span></span></span>
-<span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_Index">Fog_Index</a></span></span></span>
+</div><span class="l"><a name="Fog_OnTick" href="#Fog_OnTick" class="la">Fog_OnTick:</a><span class="ce">; [$dfc5]</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span><span class="ce">; Load the current area.</span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$02</span></span><span class="ce">; Is it Forepaw?</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span><span class="ce">; If not, return.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span><span class="ce">; Load the current palette.</span></span>
+<span class="l"><span><span class="i">CMP</span> <span class="o">#$0a</span></span><span class="ce">; Is it Mist?</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span><span class="ce">; If not, return.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a></span></span><span class="ce">; Load the fog index.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Is it an odd value?</span></span>
+<span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#Fog_UpdateTiles">Fog_UpdateTiles</a></span></span><span class="ce">; If so, jump to rotate tiles.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Decrement the fog generator and check if it reached 0.
+; If so, increment the fog index.
+;
+</div><span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Decrement the fog generator.</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span><span class="ce">; If != 0, return.</span></span>
+<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a></span></span><span class="ce">; Else, increment the fog index.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -12018,60 +12093,121 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Game_AnimateFog_UpdatePPU
+; Animate a fog tile and update fog generation state.
+;
+; This will take a fog tile represented by the current
+; fog generation value and rotate each row of its contents
+; one pixel to the right, wrapping around to the left.
+;
+; The fog generation value is then incremented by 2,
+; wrapping around from 7 to 0. If it hits 0, the fog
+; index is inremented and a new starting fog generation
+; value is chosen based on that index.
 ;
 ; INPUTS:
-;     None.
+;     <a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a>:
+;         The current fog generator value.
+;
+;     <a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a>:
+;         The current fog index value.
+;
+;     <a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a>:
+;         The current upper bounds of the PPU buffer.
 ;
 ; OUTPUTS:
-;     TODO
+;     <a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a>:
+;         The updated fog generator value.
+;
+;     <a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a>:
+;         The updated fog index value.
+;
+;     <a href="RAM.html#PPUBuffer">PPUBuffer</a>:
+;         The updated PPU buffer, with the rotate-right
+;         command scheduled.
+;
+;     <a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a>:
+;         The updated upper bounds of the PPU buffer.
+;
 ;
 ; XREFS:
-;     <a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a>
+;     <a href="#Fog_OnTick">Fog_OnTick</a>
 ;============================================================================
-</div><span class="l"><a name="Game_AnimateFog_UpdatePPU" href="#Game_AnimateFog_UpdatePPU" class="la">Game_AnimateFog_UpdatePPU:</a><span class="ce">; [$dfde]</span></span>
-<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$fc</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span></span>
-<span class="l"><span><span class="i">INX</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$18</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span></span>
-<span class="l"><span><span class="i">INX</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
+</div><span class="l"><a name="Fog_UpdateTiles" href="#Fog_UpdateTiles" class="la">Fog_UpdateTiles:</a><span class="ce">; [$dfde]</span></span>
+<span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span><span class="ce">; Load the upper bounds of the fog generator.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Queue drawing command "Rotate tiles right."
+;
+</div><span class="l"><span><span class="i">LDA</span> <span class="o">#$fc</span></span><span class="ce">; 0xFC == Rotate Tiles Right draw command.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span><span class="ce">; Set as the command.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Set the upper byte of the tile address to 0x18.
+;
+</div><span class="l"><span><span class="i">INX</span></span><span class="ce">; X++</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">#$18</span></span><span class="ce">; 0x18 == Upper byte of the sprite tile address.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span><span class="ce">; Set it as the upper byte for the draw command.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Calculate a lower byte for the tile based on the
+; fog tile index.
+;
+; This will be the existing value * 16 (tile data size).
+;
+</div><span class="l"><span><span class="i">INX</span></span><span class="ce">; X++</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Load the fog generator value.</span></span>
+<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Increment for later (not involved in the math).</span></span>
+<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; Multiply the value we loaded by 16.</span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span></span>
-<span class="l"><span><span class="i">INX</span></span></span>
-<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span></span>
-<span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_Index">Fog_Index</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_Index">Fog_Index</a></span></span></span>
-<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span></span>
-<span class="l"><span><span class="i">TAX</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">#$e012,X</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#FogGenerator">FogGenerator</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPUBuffer">PPUBuffer</a>,X</span></span><span class="ce">; Set as the lower byte for the draw command.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Set the new upper bounds for the PPU buffer.
+;
+; This will increment by 3.
+;
+</div><span class="l"><span><span class="i">INX</span></span><span class="ce">; X++</span></span>
+<span class="l"><span><span class="i">STX</span> <span class="o"><a href="RAM.html#PPUBuffer_UpperBounds">PPUBuffer_UpperBounds</a></span></span><span class="ce">; Set as the new upper bounds.</span></span>
+<span class="l"></span>
+<div class="c">;
+; Update the fog tile index.
+;
+; It'll increment by 2 (from above and here), keeping and
+; wrapping around with a value range of 0..7.
+;
+</div><span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Increment the fog generator value.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Load the result.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$07</span></span><span class="ce">; Keep it in range 0..7.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; Store it back.</span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_E011">RETURN_E011</a></span></span><span class="ce">; If != 0, we're done.</span></span>
+<span class="l"></span>
+<div class="c">;
+; The fog generator value hit 0. Increment the fog
+; index and look up a new starting fog generator value.
+;
+</div><span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a></span></span><span class="ce">; Increment the fog index.</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Fog_StateIndex">Fog_StateIndex</a></span></span><span class="ce">; Load it.</span></span>
+<span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Divide by 2.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$03</span></span><span class="ce">; And convert to an index in the lookup table.</span></span>
+<span class="l"><span><span class="i">TAX</span></span><span class="ce">; X = A</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">#$e012,X</span></span><span class="ce">; Load a starting fog generator value at that index.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Fog_TileIndex">Fog_TileIndex</a></span></span><span class="ce">; And set it.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#GameLoop_AnimateFog">GameLoop_AnimateFog</a>
-;     <a href="#Game_AnimateFog_UpdatePPU">Game_AnimateFog_UpdatePPU</a>
+;     <a href="#Fog_OnTick">Fog_OnTick</a>
+;     <a href="#Fog_UpdateTiles">Fog_UpdateTiles</a>
 ;
 </div><span class="l"><a name="RETURN_E011" href="#RETURN_E011" class="la">RETURN_E011:</a><span class="ce">; [$e011]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="#Game_AnimateFog_UpdatePPU">Game_AnimateFog_UpdatePPU</a>
+;     <a href="#Fog_UpdateTiles">Fog_UpdateTiles</a>
 ;
-</div><span class="l"><a name="FOG_VALUES" href="#FOG_VALUES" class="la">FOG_VALUES:</a><span class="ce">; [$e012]</span></span>
+</div><span class="l"><a name="FOG_START_TILE_INDEXES" href="#FOG_START_TILE_INDEXES" class="la">FOG_START_TILE_INDEXES:</a><span class="ce">; [$e012]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$18</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$06</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$30</span></span><span class="ce">; [2]:</span></span>
@@ -12223,7 +12359,7 @@ and address bytes and all the data bytes.</span></span>
 ;         The updated counter.
 ;
 ; CALLS:
-;     <a href="#@_Game_MovePlayerOnScroll">@_Game_MovePlayerOnScroll</a>
+;     <a href="#Game_MovePlayerOnScroll">Game_MovePlayerOnScroll</a>
 ;
 ; XREFS:
 ;     <a href="#FUN_PRG15_MIRROR__d2ce">FUN_PRG15_MIRROR__d2ce</a>
@@ -12235,7 +12371,7 @@ and address bytes and all the data bytes.</span></span>
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Joy1_PrevButtonMask">Joy1_PrevButtonMask</a></span></span><span class="ce">; Load the previous button mask.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Joy1_ButtonMask">Joy1_ButtonMask</a></span></span><span class="ce">; Set it as the current button mask.</span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#@_Game_MovePlayerOnScroll">@_Game_MovePlayerOnScroll</a></span></span><span class="ce">; Update the player position.</span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_MovePlayerOnScroll">Game_MovePlayerOnScroll</a></span></span><span class="ce">; Update the player position.</span></span>
 <span class="l"><span><span class="i">INC</span> <span class="o"><a href="RAM.html#Screen_ScrollPlayerTransitionCounter">Screen_ScrollPlayerTransitionCounter</a></span></span><span class="ce">; Increment the screen scroll transition counter.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -12319,7 +12455,7 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Game_UpdatePlayerOnScroll">Game_UpdatePlayerOnScroll</a>
 ;============================================================================
-</div><span class="l"><a name="@_Game_MovePlayerOnScroll" href="#@_Game_MovePlayerOnScroll" class="lla">@_Game_MovePlayerOnScroll:</a><span class="ce">; [$e06a]</span></span>
+</div><span class="l"><a name="Game_MovePlayerOnScroll" href="#Game_MovePlayerOnScroll" class="la">Game_MovePlayerOnScroll:</a><span class="ce">; [$e06a]</span></span>
 <div class="c">;
 ; Check which direction the screen is scrolling.
 ;
@@ -12573,7 +12709,7 @@ and address bytes and all the data bytes.</span></span>
 ; Set the knockback speed and return, leaving the knockback
 ; state intact.
 ;
-</div><span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span></span>
+</div><span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Player_SetStandardAcceleration">Player_SetStandardAcceleration</a></span></span><span class="ce">; Set standard acceleration.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; Set the knockback speed, but then clear the knockback.
@@ -12585,9 +12721,9 @@ and address bytes and all the data bytes.</span></span>
 ; Clear knockback from the player flags.
 ;
 </div><span class="l"><a name="@_removeIFrames" href="#@_removeIFrames" class="lla">@_removeIFrames:</a><span class="ce">; [$e0fc]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span></span>
-<span class="l"><span><span class="i">AND</span> <span class="o">#$fd</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span><span class="ce">; Load the player's flags.</span></span>
+<span class="l"><span><span class="i">AND</span> <span class="o">#$fd</span></span><span class="ce">; Clear the knockback bit.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span><span class="ce">; Save them.</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -13719,7 +13855,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$03</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Player_Maybe_MoveIfPassable">Player_Maybe_MoveIfPassable</a></span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e4c9">FUN_PRG15_MIRROR__e4c9</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#Maybe_SetPlayerForScrollUp">Maybe_SetPlayerForScrollUp</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -13758,11 +13894,11 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">DEC</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$c0</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__e4c9">FUN_PRG15_MIRROR__e4c9</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Maybe_SetPlayerForScrollUp">Maybe_SetPlayerForScrollUp</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__e4c9
+; TODO: Document Maybe_SetPlayerForScrollUp
 ;
 ; INPUTS:
 ;     None.
@@ -13773,7 +13909,7 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Area_ScrollScreenUp">Area_ScrollScreenUp</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__e4c9" href="#FUN_PRG15_MIRROR__e4c9" class="la">FUN_PRG15_MIRROR__e4c9:</a><span class="ce">; [$e4c9]</span></span>
+</div><span class="l"><a name="Maybe_SetPlayerForScrollUp" href="#Maybe_SetPlayerForScrollUp" class="la">Maybe_SetPlayerForScrollUp:</a><span class="ce">; [$e4c9]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$f0</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PlayerPosY">PlayerPosY</a></span></span></span>
@@ -13867,15 +14003,15 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__e524" href="#DAT_PRG15_MIRROR__e524" class="la">DAT_PRG15_MIRROR__e524:</a><span class="ce">; [$e524]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$e524] undefined1</span></span>
+</div><span class="l"><a name="BYTE_PRG15_MIRROR__e524" href="#BYTE_PRG15_MIRROR__e524" class="la">BYTE_PRG15_MIRROR__e524:</a><span class="ce">; [$e524]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$e524] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a>
 ;
-</div><span class="l"><a name="DAT_PRG15_MIRROR__e525" href="#DAT_PRG15_MIRROR__e525" class="la">DAT_PRG15_MIRROR__e525:</a><span class="ce">; [$e525]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0f</span></span><span class="ce">; [$e525] undefined1</span></span>
+</div><span class="l"><a name="BYTE_PRG15_MIRROR__e525" href="#BYTE_PRG15_MIRROR__e525" class="la">BYTE_PRG15_MIRROR__e525:</a><span class="ce">; [$e525]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$0f</span></span><span class="ce">; [$e525] byte</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -13918,7 +14054,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$06</span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@_paletteCheckLoop" href="#@_paletteCheckLoop" class="lla">@_paletteCheckLoop:</a><span class="ce">; [$e54c]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$e569,X</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_setupArea">@_setupArea</a></span></span></span>
 <span class="l"><span><span class="i">DEX</span></span></span>
@@ -13937,25 +14073,25 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"></span>
 <span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$e568]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$06</span></span><span class="ce">; [0]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$07</span></span><span class="ce">; [1]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0a</span></span><span class="ce">; [2]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0b</span></span><span class="ce">; [3]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0c</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_OUTSIDE</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_TOWER</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_MIST</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_SUFFER</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_DARTMOOR</span></span><span class="ce">; [4]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__e569_5_" href="#BYTE_ARRAY_PRG15_MIRROR__e569_5_" class="la">BYTE_ARRAY_PRG15_MIRROR__e569_5_:</a><span class="ce">; [$e56e]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0d</span></span><span class="ce">; [5]:</span></span>
+</div><span class="l"><a name="Palette_ARRAY_PRG15_MIRROR__e569_5_" href="#Palette_ARRAY_PRG15_MIRROR__e569_5_" class="la">Palette_ARRAY_PRG15_MIRROR__e569_5_:</a><span class="ce">; [$e56e]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_FRATERNAL</span></span><span class="ce">; [5]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="#Player_CheckHandleEnterDoor">Player_CheckHandleEnterDoor</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_PRG15_MIRROR__e569_6_" href="#BYTE_ARRAY_PRG15_MIRROR__e569_6_" class="la">BYTE_ARRAY_PRG15_MIRROR__e569_6_:</a><span class="ce">; [$e56f]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$0e</span></span><span class="ce">; [6]:</span></span>
+</div><span class="l"><a name="Palette_ARRAY_PRG15_MIRROR__e569_6_" href="#Palette_ARRAY_PRG15_MIRROR__e569_6_" class="la">Palette_ARRAY_PRG15_MIRROR__e569_6_:</a><span class="ce">; [$e56f]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">PALETTE_KING_GRIEVES_ROOM</span></span><span class="ce">; [6]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">MUSIC_MAYBE_BETWEEN_FIRST_TOWN_FOG</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">MUSIC_MAYBE_TOWER</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">MUSIC_MAYBE_FOG</span></span><span class="ce">; [2]:</span></span>
@@ -13992,11 +14128,11 @@ and address bytes and all the data bytes.</span></span>
 </div><span class="l"><a name="Player_EnterDoorToInside" href="#Player_EnterDoorToInside" class="la">Player_EnterDoorToInside:</a><span class="ce">; [$e577]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span></span>
 <span class="l"><span><span class="i">STX</span> <span class="o">a:<a href="RAM.html#Something_Maybe_NewCurrentScreen">Something_Maybe_NewCurrentScreen</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$e609,X</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$e613,X</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_Maybe_NewTilesIndex">Something_Maybe_NewTilesIndex</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$e61d,X</span></span></span>
@@ -14148,9 +14284,16 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_EnterDoorToInside">Player_EnterDoorToInside</a>
 ;
 </div><span class="l"><a name="Maybe_RoomTransitionTable" href="#Maybe_RoomTransitionTable" class="la">Maybe_RoomTransitionTable:</a><span class="ce">; [$e609]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$11</span></span><span class="ce">; [10]:</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$12</span></span><span class="ce">; [11]:</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">13 14 15 16 17 18 19 1a</span></span><span class="ce">; [$e60b] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$11</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$12</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$13</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$14</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$15</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$16</span></span><span class="ce">; [5]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$17</span></span><span class="ce">; [6]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$18</span></span><span class="ce">; [7]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$19</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$1a</span></span><span class="ce">; [9]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
@@ -14625,7 +14768,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a>:
 ;         The new screen when switching to the new area.
 ;
-;     <a href="RAM.html#Screen_Palette">Screen_Palette</a>:
+;     <a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a>:
 ;         The new palette when switching to the new area.
 ;
 ;     <a href="RAM.html#CurrentDoor_KeyRequirement">CurrentDoor_KeyRequirement</a>:
@@ -14810,7 +14953,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Area_LoadingScreenIndex">Area_LoadingScreenIndex</a></span></span><span class="ce">; Store it as the new screen index.</span></span>
 <span class="l"><span><span class="i">INY</span></span><span class="ce">; Y++</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_DoorDestinationsAddr">CurrentArea_DoorDestinationsAddr</a>),Y</span></span><span class="ce">; Load the palette from the door destination.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span><span class="ce">; Store it as the new palette.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span><span class="ce">; Store it as the new palette.</span></span>
 <span class="l"><span><span class="i">INY</span></span><span class="ce">; Y++</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_DoorDestinationsAddr">CurrentArea_DoorDestinationsAddr</a>),Y</span></span><span class="ce">; Load the key requirement.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#CurrentDoor_KeyRequirement">CurrentDoor_KeyRequirement</a></span></span><span class="ce">; Store it.</span></span>
@@ -15482,7 +15625,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e9de">@LAB_PRG15_MIRROR__e9de</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$0c</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_EA36">RETURN_EA36</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; Check the next block.
@@ -15501,7 +15644,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
 <span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__e9fb">@LAB_PRG15_MIRROR__e9fb</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$0c</span></span></span>
-<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#RETURN_EA36">RETURN_EA36</a></span></span></span>
+<span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; TODO:
@@ -15523,10 +15666,10 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Addr_U">Temp_Addr_U</a></span></span></span>
 <span class="l"><span><span class="i">LDY</span> <span class="o">#$00</span></span></span>
 <span class="l"></span>
-<span class="l"><a name="SUB_EA13" href="#SUB_EA13" class="la">SUB_EA13:</a><span class="ce">; [$ea13]</span></span>
+<span class="l"><a name="@LAB_PRG15_MIRROR__ea13" href="#@LAB_PRG15_MIRROR__ea13" class="lla">@LAB_PRG15_MIRROR__ea13:</a><span class="ce">; [$ea13]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a>),Y</span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$ff</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#RETURN_EA36">RETURN_EA36</a></span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ea2f">@LAB_PRG15_MIRROR__ea2f</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
@@ -15537,7 +15680,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_StartPosYX">Screen_StartPosYX</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a>),Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Maybe_Game_EnterScreenHandler">Maybe_Game_EnterScreenHandler</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ea2f" href="#@LAB_PRG15_MIRROR__ea2f" class="lla">@LAB_PRG15_MIRROR__ea2f:</a><span class="ce">; [$ea2f]</span></span>
@@ -15545,13 +15688,9 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#SUB_EA13">SUB_EA13</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ea13">@LAB_PRG15_MIRROR__ea13</a></span></span></span>
 <span class="l"></span>
-<div class="c">;
-; XREFS:
-;     <a href="#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
-;
-</div><span class="l"><a name="RETURN_EA36" href="#RETURN_EA36" class="la">RETURN_EA36:</a><span class="ce">; [$ea36]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$ea36]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -15632,7 +15771,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ea73" href="#@LAB_PRG15_MIRROR__ea73" class="lla">@LAB_PRG15_MIRROR__ea73:</a><span class="ce">; [$ea73]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a>),Y</span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o">#$ff</span></span></span>
-<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ea9b">@LAB_PRG15_MIRROR__ea9b</a></span></span></span>
+<span class="l"><span><span class="i">BEQ</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
 <span class="l"><span><span class="i">CMP</span> <span class="o"><a href="RAM.html#Area_CurrentScreen">Area_CurrentScreen</a></span></span></span>
 <span class="l"><span><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ea94">@LAB_PRG15_MIRROR__ea94</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
@@ -15646,7 +15785,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_StartPosYX">Screen_StartPosYX</a></span></span></span>
 <span class="l"><span><span class="i">INY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a>),Y</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Palette">Screen_Palette</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_Screen_Area">Maybe_Screen_Area</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__dacd">FUN_PRG15_MIRROR__dacd</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__ea94" href="#@LAB_PRG15_MIRROR__ea94" class="lla">@LAB_PRG15_MIRROR__ea94:</a><span class="ce">; [$ea94]</span></span>
@@ -15656,7 +15795,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ea73">@LAB_PRG15_MIRROR__ea73</a></span></span></span>
 <span class="l"></span>
-<span class="l"><a name="@LAB_PRG15_MIRROR__ea9b" href="#@LAB_PRG15_MIRROR__ea9b" class="lla">@LAB_PRG15_MIRROR__ea9b:</a><span class="ce">; [$ea9b]</span></span>
+<span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$ea9b]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -17402,7 +17541,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; DEAD CODE: Check if there are sprites not of a given entity.
+; DEADCODE: Check if there are sprites not of a given entity.
 ;
 ; This does not appear to be used anywhere. It only
 ; references itself.
@@ -17742,7 +17881,7 @@ and address bytes and all the data bytes.</span></span>
 ; TODO: Document FUN_PRG15_MIRROR__f01b
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -17773,7 +17912,7 @@ and address bytes and all the data bytes.</span></span>
 ; TODO: Document FUN_PRG15_MIRROR__f039
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -18847,7 +18986,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ; the message and the length.
 ;
 ; After loading, this will restore the bank and then
-; fall through to <a href="#TextBox_ClearShopSize">TextBox_ClearShopSize</a>.
+; fall through to <a href="#TextBox_ClearPasswordSize">TextBox_ClearPasswordSize</a>.
 ;
 ; INPUTS:
 ;     A:
@@ -18985,8 +19124,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 <div class="cp">;============================================================================
 ; TODO
 ;
-; This falls through to
-; <a href="#TextBox_ClearShopSizeAtOffset">TextBox_ClearShopSizeAtOffset</a>.
+; This falls through to <a href="#TextBox_ClearSizeAtOffset">TextBox_ClearSizeAtOffset</a>.
 ;
 ; INPUTS:
 ;     X:
@@ -19010,7 +19148,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ; XREFS:
 ;     <a href="PRG12.html#IScriptAction_ShowPassword">IScriptAction_ShowPassword</a>
 ;============================================================================
-</div><span class="l"><a name="TextBox_ClearShopSize" href="#TextBox_ClearShopSize" class="la">TextBox_ClearShopSize:</a><span class="ce">; [$f434]</span></span>
+</div><span class="l"><a name="TextBox_ClearPasswordSize" href="#TextBox_ClearPasswordSize" class="la">TextBox_ClearPasswordSize:</a><span class="ce">; [$f434]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TextBox_LineScrollOffset">TextBox_LineScrollOffset</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#TextBox_CharPosForLine">TextBox_CharPosForLine</a></span></span></span>
@@ -19026,7 +19164,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 </div></pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document TextBox_ClearShopSizeAtOffset
+; TODO: Document TextBox_ClearSizeAtOffset
 ;
 ; INPUTS:
 ;     X
@@ -19037,7 +19175,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ; XREFS:
 ;     <a href="PRG12.html#IScripts_Something_9910">IScripts_Something_9910</a>
 ;============================================================================
-</div><span class="l"><a name="TextBox_ClearShopSizeAtOffset" href="#TextBox_ClearShopSizeAtOffset" class="la">TextBox_ClearShopSizeAtOffset:</a><span class="ce">; [$f44a]</span></span>
+</div><span class="l"><a name="TextBox_ClearSizeAtOffset" href="#TextBox_ClearSizeAtOffset" class="la">TextBox_ClearSizeAtOffset:</a><span class="ce">; [$f44a]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$14</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_TargetAddr.U">PPU_TargetAddr.U</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
@@ -19977,7 +20115,7 @@ stack (now 16).</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;
 </div><span class="l"><a name="PLAYER_TITLE_EXP_NEEDED_1_" href="#PLAYER_TITLE_EXP_NEEDED_1_" class="la">PLAYER_TITLE_EXP_NEEDED_1_:</a><span class="ce">; [$f74b]</span></span>
 <span class="l"><span><span class="i">dw</span> <span class="o">$0898</span></span><span class="ce">; [1]: Battler (2,200 exp)</span></span>
@@ -20086,9 +20224,9 @@ stack (now 16).</span></span>
 ;     <a href="PRG12.html#FUN_PRG12__8bce">FUN_PRG12__8bce</a>
 ;     <a href="PRG12.html#FUN_PRG12__8c04">FUN_PRG12__8c04</a>
 ;     <a href="PRG12.html#IScriptAction_ShowSellMenu">IScriptAction_ShowSellMenu</a>
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;============================================================================
-</div><span class="l"><a name="BitShiftLeft5" href="#BitShiftLeft5" class="la">BitShiftLeft5:</a><span class="ce">; [$f78b]</span></span>
+</div><span class="l"><a name="GetInventoryBitForIndex" href="#GetInventoryBitForIndex" class="la">GetInventoryBitForIndex:</a><span class="ce">; [$f78b]</span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; Shift left 5 (here and the next 4 after falling through).</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -20104,7 +20242,7 @@ stack (now 16).</span></span>
 ; XREFS:
 ;     <a href="PRG12.html#FUN_PRG12__9075">FUN_PRG12__9075</a>
 ;     <a href="PRG12.html#Maybe_DrawItemTitle">Maybe_DrawItemTitle</a>
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
 ;     <a href="#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;============================================================================
@@ -20240,11 +20378,11 @@ stack (now 16).</span></span>
 ;     <a href="PRG12.html#Maybe_DrawItemName">Maybe_DrawItemName</a>
 ;     <a href="PRG12.html#Maybe_DrawItemTitle">Maybe_DrawItemTitle</a>
 ;     <a href="PRG12.html#Maybe_Draw_Textbox">Maybe_Draw_Textbox</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;     <a href="PRG12.html#Shop_DrawItemStrings">Shop_DrawItemStrings</a>
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
 ;     <a href="PRG12.html#TextBox_Maybe_Draw">TextBox_Maybe_Draw</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="#Maybe_Shop_DrawPrices">Maybe_Shop_DrawPrices</a>
+;     <a href="#Maybe_Shop_DrawPrice">Maybe_Shop_DrawPrice</a>
 ;     <a href="#TextBox_ShowMessage_Fill4Lines">TextBox_ShowMessage_Fill4Lines</a>
 ;     <a href="#UI_DrawDigitsNoLeadingZeroes">UI_DrawDigitsNoLeadingZeroes</a>
 ;============================================================================
@@ -20327,7 +20465,7 @@ stack (now 16).</span></span>
 ;     <a href="PRG12.html#Maybe_DrawItemName">Maybe_DrawItemName</a>
 ;     <a href="PRG12.html#Maybe_Draw_Textbox">Maybe_Draw_Textbox</a>
 ;     <a href="PRG12.html#TextBox_Maybe_Draw">TextBox_Maybe_Draw</a>
-;     <a href="#TextBox_ClearShopSizeAtOffset">TextBox_ClearShopSizeAtOffset</a>
+;     <a href="#TextBox_ClearSizeAtOffset">TextBox_ClearSizeAtOffset</a>
 ;     <a href="#TextBox_FillPlaceholderTextAtLineWithStartChar">TextBox_FillPlaceholderTextAtLineWithStartChar</a>
 ;============================================================================
 </div><span class="l"><a name="PPU_IncrementAddrBy32" href="#PPU_IncrementAddrBy32" class="la">PPU_IncrementAddrBy32:</a><span class="ce">; [$f826]</span></span>
@@ -20434,7 +20572,7 @@ stack (now 16).</span></span>
 ;         The new offset to write to (X + 1).
 ;
 ; XREFS:
-;     <a href="PRG12.html#PasswrodScreen_DrawMessage">PasswrodScreen_DrawMessage</a>
+;     <a href="PRG12.html#PasswordScreen_DrawMessage">PasswordScreen_DrawMessage</a>
 ;     <a href="#Player_DrawItemInternal">Player_DrawItemInternal</a>
 ;     <a href="#TextBox_Write8BytesFromTemp">TextBox_Write8BytesFromTemp</a>
 ;============================================================================
@@ -20507,7 +20645,7 @@ stack (now 16).</span></span>
 ;         The new offset in the buffer after these values.
 ;
 ; XREFS:
-;     <a href="#TextBox_ClearShopSizeAtOffset">TextBox_ClearShopSizeAtOffset</a>
+;     <a href="#TextBox_ClearSizeAtOffset">TextBox_ClearSizeAtOffset</a>
 ;     <a href="#TextBox_ShowMessage_Fill4Lines">TextBox_ShowMessage_Fill4Lines</a>
 ;============================================================================
 </div><span class="l"><a name="PPUBuffer_WriteValueMany" href="#PPUBuffer_WriteValueMany" class="la">PPUBuffer_WriteValueMany:</a><span class="ce">; [$f84a]</span></span>
@@ -20576,13 +20714,13 @@ stack (now 16).</span></span>
 ;     <a href="#Game_ShowStartScreen">Game_ShowStartScreen</a>
 ;     <a href="#Game_UnlockDoorWithUsableItem">Game_UnlockDoorWithUsableItem</a>
 ;     <a href="#IScripts_ClearPortrait">IScripts_ClearPortrait</a>
-;     <a href="#Maybe_Player_PickUpGlove">Maybe_Player_PickUpGlove</a>
 ;     <a href="#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="#Player_PickUpBattleHelmet">Player_PickUpBattleHelmet</a>
 ;     <a href="#Player_PickUpBattleSuit">Player_PickUpBattleSuit</a>
 ;     <a href="#Player_PickUpBlackOnyx">Player_PickUpBlackOnyx</a>
 ;     <a href="#Player_PickUpDragonSlayer">Player_PickUpDragonSlayer</a>
 ;     <a href="#Player_PickUpElixir">Player_PickUpElixir</a>
+;     <a href="#Player_PickUpGlove">Player_PickUpGlove</a>
 ;     <a href="#Player_PickUpHourGlass">Player_PickUpHourGlass</a>
 ;     <a href="#Player_PickUpMagicalRod">Player_PickUpMagicalRod</a>
 ;     <a href="#Player_PickUpMattock">Player_PickUpMattock</a>
@@ -21349,7 +21487,7 @@ stack (now 16).</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Maybe_Shop_DrawPrices
+; TODO: Document Maybe_Shop_DrawPrice
 ;
 ; INPUTS:
 ;     X
@@ -21359,9 +21497,9 @@ stack (now 16).</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="PRG12.html#Shop_Something__8d5a">Shop_Something__8d5a</a>
+;     <a href="PRG12.html#PlayerMenu_Maybe_ShowStatus">PlayerMenu_Maybe_ShowStatus</a>
 ;============================================================================
-</div><span class="l"><a name="Maybe_Shop_DrawPrices" href="#Maybe_Shop_DrawPrices" class="la">Maybe_Shop_DrawPrices:</a><span class="ce">; [$fa03]</span></span>
+</div><span class="l"><a name="Maybe_Shop_DrawPrice" href="#Maybe_Shop_DrawPrice" class="la">Maybe_Shop_DrawPrice:</a><span class="ce">; [$fa03]</span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPU_SetAddrForTextPos">PPU_SetAddrForTextPos</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
@@ -21957,7 +22095,7 @@ Set C as the out going bit.</span></span>
 ; TODO: Document Player_DrawItemInternal
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -22296,9 +22434,25 @@ Else, fall through.</span></span>
 <span class="l"><span><span class="i">hex</span> <span class="o">ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff</span></span><span class="ce">; [$ffad] undefined</span></span>
 <span class="l"><span><span class="i">hex</span> <span class="o">ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff</span></span><span class="ce">; [$ffbd] undefined</span></span>
 <span class="l"><span><span class="i">hex</span> <span class="o">ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff</span></span><span class="ce">; [$ffcd] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">ff ff ff 20 20 20 20 20 20 20 20 46 41 58 41 4e</span></span><span class="ce">; [$ffdd] undefined</span></span>
-<span class="l"><span><span class="i">hex</span> <span class="o">41 44 55 27 42 00 00 48 04 01 07 18 94 99 c9 13</span></span><span class="ce">; [$ffed] undefined</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$c9,$d5,$c9</span></span><span class="ce">; [$fffd] undefined</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$ff,$ff,$ff</span></span><span class="ce">; [$ffdd] undefined</span></span>
+<span class="l"></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$20</span></span><span class="ce">; Game title</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$20,$20,$20,$20,$20,$20,$20,$46,$41,$58,$41,$4e,$41,$44,$55</span></span><span class="ce">; [$ffe1] string</span></span>
+<span class="l"></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">$4227</span></span><span class="ce">; PRG Checksum</span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">$0000</span></span><span class="ce">; CHR CHecksum</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$48</span></span><span class="ce">; CHR size: 0 = 8KiB
+CHR type: 0 = CHR ROM
+PRG size: 5 = 512KiB</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$04</span></span><span class="ce">; Mapper:    4 = MMC
+Nametable: 0 = Horizontal arrangement</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$01</span></span><span class="ce">; Title encoding: 1 = ASCII</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$07</span></span><span class="ce">; Title length: 8 bytes</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$18</span></span><span class="ce">; Licensee Code: Hudson Soft</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$94</span></span><span class="ce">; Header validation byte</span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">OnInterrupt</span></span></span>
+<span class="l"><span><span class="i">dw</span> <span class="o">Game_Init</span></span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$d5,$c9</span></span><span class="ce">; [$fffe] undefined</span></span>
 </pre>
  </body>
 </html>

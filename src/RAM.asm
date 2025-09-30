@@ -48,13 +48,12 @@ BASE $0000
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__ce80
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6ce
 ;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_Area_LoadBlocks
 ;     Maybe_IsSpriteEntityNotOnScreen
+;     Maybe_LoadSpritesFromBank8
 ;     Maybe_Player_DrawSprite
 ;     Maybe_Player_UpdateArmorSprite
 ;     Maybe_Player_UpdateVisibleItemStates
@@ -62,6 +61,7 @@ BASE $0000
 ;     Player_DrawBody
 ;     Player_HandleKnockback
 ;     Player_Something_ShieldState
+;     Screen_Something_ScrollHorizInternal
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprites_HasSpritesNotOfType
 ;     Sprites_LoadImageForCurrentSprite
@@ -77,8 +77,8 @@ Temp_00:                                    ; [$0000]
 ;     Maybe_Sprite_HandleDeathDrop
 ;     Player_HitEnemyWithMagic
 ;     Sprite_CheckHitByCastMagic
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 Temp_01:                                    ; [$0001]
@@ -97,7 +97,6 @@ Temp_01:                                    ; [$0001]
 ;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
-;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
@@ -107,7 +106,9 @@ Temp_01:                                    ; [$0001]
 ;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
 ;     LAB_PRG15_MIRROR__e852 [$PRG15_MIRROR::e852]
+;     LAB_PRG15_MIRROR__ea13 [$PRG15_MIRROR::ea13]
 ;     LookupSpriteDataPointer
+;     Maybe_LoadSpritesFromBank8
 ;     Player_CheckSwitchScreen
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddr
@@ -125,7 +126,6 @@ Temp_Addr_L:                                ; [$0002]
 ;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
-;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
@@ -135,6 +135,7 @@ Temp_Addr_L:                                ; [$0002]
 ;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
 ;     LookupSpriteDataPointer
+;     Maybe_LoadSpritesFromBank8
 ;     Player_CheckSwitchScreen
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
@@ -170,12 +171,12 @@ Temp_05:                                    ; [$0005]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d61d
 ;     FUN_PRG15_MIRROR__d82d
 ;     Maybe_Area_LoadBlocks
-;     PPUBuffer_Command_RotateTilesRight1Pixel
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_06:                                    ; [$0006]
     db $00                                  ; [$0006] byte
@@ -201,13 +202,13 @@ Temp_07:                                    ; [$0007]
 ;     Area_LoadBlocks
 ;     Area_LoadNextCompressedScreenBit
 ;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__d503
 ;     LoadPalette2
 ;     LoadPalette
 ;     Maybe_Area_LoadBlocks
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     Palette_LoadFromIndex
 ;     Palette_PopulateData
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_08:                                    ; [$0008]
     db $00                                  ; [$0008] undefined
@@ -216,12 +217,12 @@ Temp_08:                                    ; [$0008]
 ; XREFS:
 ;     Area_LoadBlocks
 ;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__d503
 ;     LoadPalette2
 ;     LoadPalette
 ;     Maybe_Area_LoadBlocks
 ;     Palette_IndexToROMOffset16
 ;     Palette_LoadFromIndex
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_09:                                    ; [$0009]
     db $00                                  ; [$0009] byte
@@ -279,8 +280,9 @@ ScreenColorMode:                            ; [$000b]
 ;     FUN_PRG15_MIRROR__d2ce
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
-;     Maybe_Screen_Scroll
 ;     PPU_HandleOnInterrupt
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
 ;     Sprite_Maybe_SetAppearanceAddr
 ;
 ScrollHelp_Pixel:                           ; [$000c]
@@ -299,9 +301,10 @@ ScrollHelp_Pixel:                           ; [$000c]
 ;     FUN_PRG15_MIRROR__d82d
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
-;     Maybe_Screen_Scroll
 ;     PPU_HandleOnInterrupt
 ;     PPU_SetAddrForTextPos
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
 ;     Something_SetPPUAddrForXYTransformed
 ;
 ScrollHelp_Screen:                          ; [$000d]
@@ -557,8 +560,9 @@ Joy1_PrevButtonMask:                        ; [$0018]
 ;     Menu_Draw
 ;     Menu_Something_9405
 ;     PasswordScreen_GetDPadBits
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Something_9956
-;     Shop_Something__8d5a
 ;     StartScreen_CheckHandleInput
 ;     UI_ShowPlayerMenu
 ;     Player_CastMagic
@@ -640,23 +644,30 @@ Maybe_FrameAltToggleFlags:                  ; [$001c]
 
 
 ;============================================================================
-; Used to generate the fog effect in Mist.
+; State for animating the fog in the area of Mist.
 ;============================================================================
 
 ;
-; XREFS:
-;     GameLoop_AnimateFog
-;     Game_AnimateFog_UpdatePPU
+; Tile offset for a fog tile to animate in Mist.
 ;
-FogGenerator:                               ; [$001d]
+;
+; XREFS:
+;     Fog_OnTick
+;     Fog_UpdateTiles
+;
+Fog_TileIndex:                              ; [$001d]
     db $00                                  ; [$001d] byte
 
 ;
-; XREFS:
-;     GameLoop_AnimateFog
-;     Game_AnimateFog_UpdatePPU
+; State index used to determine when to animate fog tiles
+; and when to compute new starting tile indexes.
 ;
-Fog_Index:                                  ; [$001e]
+;
+; XREFS:
+;     Fog_OnTick
+;     Fog_UpdateTiles
+;
+Fog_StateIndex:                             ; [$001e]
     db $00                                  ; [$001e] byte
 
 
@@ -679,11 +690,11 @@ Fog_Index:                                  ; [$001e]
 ; XREFS:
 ;     Game_InitStateForSpawn
 ;     PPUBuffer_Clear
-;     PPUBuffer_Command_RotateTilesRight1Pixel
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawAll
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
-;     PPUBuffer_SomethingCompareTo24
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
+;     PPUBuffer_SomethingCompareTo0x24
 ;     PPUBuffer_WaitUntilClear
 ;     PPU_WaitUntilFlushed
 ;
@@ -705,7 +716,7 @@ PPUBuffer_Offset:                           ; [$001f]
 ;     Maybe_DrawItemName
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;     Strings_Draw
 ;     TextBox_Maybe_Draw
 ;     Area_WriteTwoBlocksFromData12ToPPUBuffer
@@ -714,14 +725,14 @@ PPUBuffer_Offset:                           ; [$001f]
 ;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__eebf
 ;     FUN_PRG15_MIRROR__f316
-;     Game_AnimateFog_UpdatePPU
+;     Fog_UpdateTiles
 ;     Game_InitStateForSpawn
 ;     PPUBuffer_Append0
 ;     PPUBuffer_Clear
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawAll
 ;     PPUBuffer_QueueCommandOrLength
-;     PPUBuffer_SomethingCompareTo24
+;     PPUBuffer_SomethingCompareTo0x24
 ;     PPUBuffer_WaitUntilClear
 ;     PPUBuffer_WriteValueMany
 ;     PPU_WaitUntilFlushed
@@ -801,8 +812,9 @@ Temp_PPU_NametableValue:                    ; [$0023]
 ;     FUN_PRG14__9991
 ;     Area_ChangeArea
 ;     Area_SetStateFromDoorDestination
+;     FUN_PRG15_MIRROR__daf6
 ;     FUN_PRG15_MIRROR__df64
-;     GameLoop_AnimateFog
+;     Fog_OnTick
 ;     GameLoop_CheckShowPlayerMenu
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
@@ -866,7 +878,7 @@ MovingSpriteVisibility:                     ; [$0026]
 ;
 ;
 ; XREFS:
-;     IScripts_SetPortraitSpriteXY
+;     Portrait_SetInnerSpriteXY
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
@@ -890,7 +902,7 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;
 ;
 ; XREFS:
-;     IScripts_SetPortraitSpriteXY
+;     Portrait_SetInnerSpriteXY
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
@@ -1164,8 +1176,8 @@ Temp_Sprites_TileYOffset:                   ; [$0043]
 ;     FUN_PRG15_MIRROR__d393
 ;     FUN_PRG15_MIRROR__d3a6
 ;     Maybe_Area_LoadBlocks
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollUp
 ;
 Something_Blocks_0044:                      ; [$0044]
     db $00                                  ; [$0044] byte
@@ -1173,17 +1185,18 @@ Something_Blocks_0044:                      ; [$0044]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__d4dc
-;     FUN_PRG15_MIRROR__d4f0
-;     FUN_PRG15_MIRROR__d503
-;     Maybe_Screen_Scroll
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_Something_ScrollHorizInternal
+;     Screen_Something_ScrollLeft
+;     Screen_Something_ScrollRight
 ;
 Something_Blocks_0045:                      ; [$0045]
     db $00                                  ; [$0045] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_Blocks_0046:                      ; [$0046]
     db $00                                  ; [$0046] byte
@@ -1191,7 +1204,7 @@ Something_Blocks_0046:                      ; [$0046]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_Blocks_0047:                      ; [$0047]
     db $00                                  ; [$0047] byte
@@ -1217,16 +1230,16 @@ Unused_Blocks_0049:                         ; [$0049]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_Blocks_PPUAddr_L:                 ; [$004c]
     db $00                                  ; [$004c] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_Blocks_PPUAddr_U:                 ; [$004d]
     db $00                                  ; [$004d] byte
@@ -1249,16 +1262,16 @@ Something_ShopItem_PPUAddr_U:               ; [$004f]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_PPUAddr_L:                        ; [$0050]
     db $00                                  ; [$0050] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_PPUAddr_U:                        ; [$0051]
     db $00                                  ; [$0051] byte
@@ -1296,10 +1309,10 @@ Something_Blocks_PPUAddr2_U:                ; [$0053]
 ;     FUN_PRG15_MIRROR__d2ce
 ;     GameLoop_UpdatePlayer
 ;     Game_MainLoop
-;     Maybe_Screen_Scroll
+;     Game_MovePlayerOnScroll
 ;     Player_CheckHandleJump
-;     Screen_BeginScrollAndLoadBlockProperties
-;     _Game_MovePlayerOnScroll
+;     Screen_HandleScroll
+;     Screen_StopScrollAndLoadBlockProperties
 ;
 Screen_ScrollDirection:                     ; [$0054]
     db $00                                  ; [$0054] ScreenScrollDirection
@@ -1318,8 +1331,8 @@ Screen_ScrollDirection:                     ; [$0054]
 ;     Area_Maybe_ShowRoomTransition
 ;     FUN_PRG15_MIRROR__d2ce
 ;     Game_InitScreenAndMusic
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollUp
 ;
 Something_ScrollIndex:                      ; [$0057]
     db $00                                  ; [$0057] byte
@@ -1327,10 +1340,10 @@ Something_ScrollIndex:                      ; [$0057]
 ;
 ; XREFS:
 ;     Maybe_Area_LoadBlocks
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
 ;     Player_DrawBody
 ;     Player_SetInitialState
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollUp
 ;     Something_SetupNewScreen
 ;
 Something_Player_ScrollY:                   ; [$0058]
@@ -1339,11 +1352,12 @@ Something_Player_ScrollY:                   ; [$0058]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
-;     Maybe_Screen_Scroll
 ;     Player_DrawBody
 ;     Player_SetInitialState
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_Something_ScrollHorizInternal
 ;     Something_SetupNewScreen
 ;
 Something_Player_ScrollX:                   ; [$0059]
@@ -1487,7 +1501,6 @@ PlayerSprite_ReadAddr_U:                    ; [$0062]
 ;     Area_ScrollToNextRoom
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__df64
 ;     GameLoop_CheckShowPlayerMenu
 ;     Game_DropLadderToMascon
@@ -1502,6 +1515,7 @@ PlayerSprite_ReadAddr_U:                    ; [$0062]
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Screen_LoadAllScreenInfo
+;     Screen_Something_ScrollHorizInternal
 ;     Something_SetupNewScreen
 ;
 Area_CurrentScreen:                         ; [$0063]
@@ -1527,7 +1541,9 @@ Area_LoadingScreenIndex:                    ; [$0064]
     db $00                                  ; [$0064] byte
 
 ;
-; The palette for the current screen.
+; TODO: The area for the current screen.
+;
+; This isn't quite it.
 ;
 ;
 ; XREFS:
@@ -1541,8 +1557,8 @@ Area_LoadingScreenIndex:                    ; [$0064]
 ;     Player_EnterDoorToInside
 ;     Something_SetupNewScreen
 ;
-Screen_Palette:                             ; [$0065]
-    db $00                                  ; [$0065] Palette
+Maybe_Screen_Area:                          ; [$0065]
+    db $00                                  ; [$0065] Area
 
 ;
 ; Screen to the left of the currently-visible screen.
@@ -1634,8 +1650,8 @@ Screen_StartPosYX:                          ; [$006c]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 MaybeUnused_006d:                           ; [$006d]
     db $00                                  ; [$006d] byte
@@ -1645,43 +1661,43 @@ MaybeUnused_006d:                           ; [$006d]
 ;     FUN_PRG15_MIRROR__d38e
 ;     FUN_PRG15_MIRROR__d393
 ;     FUN_PRG15_MIRROR__d3a6
-;     FUN_PRG15_MIRROR__d4d7
-;     FUN_PRG15_MIRROR__d4dc
-;     FUN_PRG15_MIRROR__d4f0
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHoriz
+;     Screen_Something_ScrollHorizInternal
+;     Screen_Something_ScrollLeft
+;     Screen_Something_ScrollRight
 ;
 Something_Blocks_Counter_006E:              ; [$006e]
     db $00                                  ; [$006e] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData1CurAddr:              ; [$006f]
     db $00                                  ; [$006f] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData2CurAddr:              ; [$0070]
     db $00                                  ; [$0070] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData3CurAddr:              ; [$0071]
     db $00                                  ; [$0071] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData4CurAddr:              ; [$0072]
     db $00                                  ; [$0072] byte
@@ -1698,7 +1714,7 @@ Something_0073:                             ; [$0073]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_0074:                             ; [$0074]
     db $00                                  ; [$0074] byte
@@ -1714,7 +1730,7 @@ Something_0075:                             ; [$0075]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_0076:                             ; [$0076]
     db $00                                  ; [$0076] byte
@@ -1760,9 +1776,9 @@ CurrentArea_TableAddr.U:                    ; [$007d]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d82d
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;     TextBox_Maybe_GetPaletteBehindTextbox
 ;
 CurrentArea_BlockAttributesAddr:            ; [$007e]
@@ -1771,8 +1787,8 @@ CurrentArea_BlockAttributesAddr:            ; [$007e]
 ;
 ; XREFS:
 ;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData1StartAddr:            ; [$0080]
     db $00,$00                              ; [$0080] byte
@@ -1780,8 +1796,8 @@ CurrentArea_BlockData1StartAddr:            ; [$0080]
 ;
 ; XREFS:
 ;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData2StartAddr:            ; [$0082]
     db $00,$00                              ; [$0082] byte
@@ -1789,8 +1805,8 @@ CurrentArea_BlockData2StartAddr:            ; [$0082]
 ;
 ; XREFS:
 ;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData3StartAddr:            ; [$0084]
     db $00,$00                              ; [$0084] byte
@@ -1798,8 +1814,8 @@ CurrentArea_BlockData3StartAddr:            ; [$0084]
 ;
 ; XREFS:
 ;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     FUN_PRG15_MIRROR__d503
 ;     Maybe_Area_LoadBlocks
+;     Screen_Something_ScrollHorizInternal
 ;
 CurrentArea_BlockData4StartAddr:            ; [$0086]
     db $00,$00                              ; [$0086] byte
@@ -2046,6 +2062,7 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     EndGame_MovePlayerTowardKing
 ;     FUN_PRG15_MIRROR__ec58
 ;     Game_EnterBuilding
+;     Game_MovePlayerOnScroll
 ;     Game_SpawnInTemple
 ;     Player_CheckHandleClimb
 ;     Player_CheckHandleJump
@@ -2061,7 +2078,6 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     Player_TryMoveRight
 ;     Player_UseMattock
 ;     Something_SetupNewScreen
-;     _Game_MovePlayerOnScroll
 ;
 PlayerPosX_Full:                            ; [$009e]
     db $00                                  ; [$009e] byte
@@ -2081,11 +2097,11 @@ PlayerPosX_Full:                            ; [$009e]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawWeapon
 ;     CastMagic_Maybe_FinishHandler
+;     Game_MovePlayerOnScroll
 ;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Player_TryMoveRight
 ;     Something_SetupNewScreen
-;     _Game_MovePlayerOnScroll
 ;
 Screen_Maybe_ScrollXCounter:                ; [$009f]
     db $00                                  ; [$009f] byte
@@ -2123,13 +2139,13 @@ BYTE_00a0:                                  ; [$00a0]
 ;     Area_ScrollScreenUp
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
-;     FUN_PRG15_MIRROR__e4c9
 ;     FUN_PRG15_MIRROR__ec58
 ;     Game_EnterBuilding
 ;     Game_SpawnInTemple
 ;     LAB_PRG15_MIRROR__e49a [$PRG15_MIRROR::e49a]
 ;     LAB_PRG15_MIRROR__e4a2 [$PRG15_MIRROR::e4a2]
 ;     Maybe_MoveDownOneScreen
+;     Maybe_SetPlayerForScrollUp
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleClimbUp
@@ -2210,13 +2226,13 @@ Player_MovementTick:                        ; [$00a3]
 ;     SpriteBehavior__95c0
 ;     SpriteBehavior__97ae
 ;     EndGame_MoveToKingsRoom
-;     FUN_PRG15_MIRROR__e4c9
 ;     FUN_PRG15_MIRROR__ec58
 ;     GameLoop_CheckUseCurrentItem
 ;     Game_SpawnInTemple
 ;     LAB_PRG15_MIRROR__e42c [$PRG15_MIRROR::e42c]
 ;     Maybe_Game_MainExitBuildingHandler
 ;     Maybe_Player_CalcSpeed
+;     Maybe_SetPlayerForScrollUp
 ;     Player_CheckHandleAttack
 ;     Player_CheckHandleClimb
 ;     Player_CheckHandleClimbDown
@@ -2302,7 +2318,7 @@ Maybe_Player_NormArmorState:                ; [$00a7]
 ;     Player_Something_ShieldState
 ;
 Maybe_Player_DAT_00a8:                      ; [$00a8]
-    db $00                                  ; [$00a8] undefined1
+    db $00                                  ; [$00a8] byte
 
 ;
 ; Player's walk/run aceleration.
@@ -2395,8 +2411,8 @@ Maybe_ClimbLadderOffset:                    ; [$00b1]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
+;     Game_MovePlayerOnScroll
 ;     Player_DrawBody
-;     _Game_MovePlayerOnScroll
 ;
 Maybe_PlayerX_ForScroll:                    ; [$00b2]
     db $00                                  ; [$00b2] byte
@@ -2407,8 +2423,8 @@ Maybe_PlayerX_ForScroll:                    ; [$00b2]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
+;     Game_MovePlayerOnScroll
 ;     Player_DrawBody
-;     _Game_MovePlayerOnScroll
 ;
 Maybe_PlayerY_ForScroll:                    ; [$00b3]
     db $00                                  ; [$00b3] byte
@@ -2422,10 +2438,10 @@ Maybe_PlayerY_ForScroll:                    ; [$00b3]
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
+;     Game_MovePlayerOnScroll
 ;     Game_UpdatePlayerOnScroll
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
-;     _Game_MovePlayerOnScroll
 ;
 Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
     db $00                                  ; [$00b4] byte
@@ -2933,7 +2949,7 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     FUN_PRG12__92ed
 ;     Maybe_DrawItemName
 ;     Maybe_Draw_Textbox_Something8F51
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
 ;     Area_SetBlocks
@@ -2948,7 +2964,7 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     PPU_WriteTilesFromCHRRAM
 ;     Player_SetItem
 ;     Something_SetPPUAddrForXYTransformed
-;     TextBox_ClearShopSizeAtOffset
+;     TextBox_ClearSizeAtOffset
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_Fill4Lines
 ;     UI_ClearSelectedItemPic
@@ -2966,7 +2982,7 @@ PPU_TargetAddr:                             ; [$00e8]
 ;     FUN_PRG12__92ed
 ;     Maybe_DrawItemName
 ;     Maybe_Draw_Textbox_Something8F51
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
 ;     Area_SetBlocks
@@ -2981,7 +2997,7 @@ PPU_TargetAddr:                             ; [$00e8]
 ;     PPU_WriteTilesFromCHRRAM
 ;     Player_SetItem
 ;     Something_SetPPUAddrForXYTransformed
-;     TextBox_ClearShopSizeAtOffset
+;     TextBox_ClearSizeAtOffset
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_Fill4Lines
 ;     UI_ClearSelectedItemPic
@@ -3008,9 +3024,9 @@ PPU_TargetAddr.U:                           ; [$00e9]
 ;     IScripts_Something_81E8
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     SplashAnimation_FuncAA94
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
@@ -3035,9 +3051,9 @@ TextBox_TextX:                              ; [$00ea]
 ;     IScripts_Something_81E8
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     SplashAnimation_FuncAA94
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
@@ -3076,16 +3092,16 @@ TextBox_TextY:                              ; [$00eb]
 ;     Maybe_DrawItemName
 ;     Maybe_DrawItemTitle
 ;     Maybe_Draw_Textbox_Something8F51
+;     PasswordScreen_DrawMessage
 ;     PasswordScreen_Show
 ;     Password_DecodeValue
 ;     Password_EncodeValue
-;     PasswrodScreen_DrawMessage
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Shop_Draw
 ;     Shop_Populate
-;     Shop_Something__8d5a
 ;     Something_ShopCursorInventory
 ;     SplashAnimation_A90F
 ;     SplashAnimation_DrawScenery
@@ -3139,14 +3155,14 @@ Temp_Int24:                                 ; [$00ec]
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
 ;     Maybe_DrawItemTitle
+;     PasswordScreen_DrawMessage
 ;     PasswordScreen_Show
 ;     Password_EncodeValue
-;     PasswrodScreen_DrawMessage
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;     Something_ShopCursorInventory
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_FuncAA94
@@ -3183,10 +3199,10 @@ Temp_Int24.M:                               ; [$00ed]
 ;     Password_EncodeGameState
 ;     Password_EncodeValueList
 ;     Password_Load
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_AddToInventory
 ;     Player_RemoveItem
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;     SplashAnimation_FuncAA94
 ;     StartScreen_Draw
 ;     Strings_Draw
@@ -3313,7 +3329,6 @@ irq:                                        ; [$00ff]
 ;     Area_SetBlocks
 ;     Area_SetStateFromDoorDestination
 ;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__ce80
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
@@ -3335,17 +3350,20 @@ irq:                                        ; [$00ff]
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SavePRGBankAndUpdateTo
 ;     MMC1_UpdatePRGBank
+;     Maybe_LoadSpritesFromBank8
 ;     Maybe_Player_LoadArmorSprite
 ;     Maybe_Player_LoadShieldSprite
 ;     Maybe_Player_LoadWeaponSprite
-;     Maybe_Screen_Scroll
-;     Maybe_Screen_Scroll_D2A6
 ;     Messages_Load
 ;     OnInterrupt
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_WriteTilesFromCHRRAM
 ;     Palette_PopulateData
 ;     Player_DrawItemInternal
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_HandleScrollUp
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;     Sprites_LoadSpriteValue
 ;     TextBox_Maybe_GetPaletteBehindTextbox
@@ -3896,7 +3914,7 @@ Something_Music_0181:                       ; [$0181]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 DAT_018a:                                   ; [$018a]
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$018a] undefined
@@ -3911,9 +3929,9 @@ DAT_018a:                                   ; [$018a]
 ;
 ; XREFS:
 ;     IScripts_Begin
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
 ;     Game_Init
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_0200:                                  ; [$0200]
     db $00                                  ; [$0200] byte
@@ -3924,8 +3942,8 @@ Temp_0200:                                  ; [$0200]
 ;     IScriptAction_EndScript
 ;     IScripts_Begin
 ;     IScripts_UpdatePortraitAnimation
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d673
+;     Screen_Something_ScrollHorizInternal
 ;
 IScriptEntity:                              ; [$0201]
     db $00                                  ; [$0201] IScriptEntity
@@ -3938,7 +3956,7 @@ IScriptEntity:                              ; [$0201]
 ;     IScriptAction_SpendGold
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_0202:                                  ; [$0202]
     db $00                                  ; [$0202] byte
@@ -3951,7 +3969,7 @@ Temp_0202:                                  ; [$0202]
 ;     IScriptAction_SpendGold
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
-;     FUN_PRG15_MIRROR__d503
+;     Screen_Something_ScrollHorizInternal
 ;
 Temp_0203:                                  ; [$0203]
     db $00                                  ; [$0203] byte
@@ -3992,17 +4010,17 @@ IScripts_Unused_207:                        ; [$0207]
 ;     GetTextBoxCoordinates
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_AddItem_Something8EC1
-;     IScripts_ClearTextbox
 ;     IScripts_Something_81E8
 ;     IScripts_Something_99DB
 ;     IScripts_Something_SetXYAndOffset_99a1
 ;     IScripts_Something_SetXYAndOffset_99be
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     SetPortraitWindowCoords
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Clear
+;     Portrait_SetCoords
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     TextBox_GetCursorXForTileX1
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
@@ -4023,17 +4041,17 @@ TextBox_X:                                  ; [$0208]
 ;     GetTextBoxCoordinates
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_AddItem_Something8EC1
-;     IScripts_ClearTextbox
 ;     IScripts_Something_81E8
 ;     IScripts_Something_99DB
 ;     IScripts_Something_SetXYAndOffset_99a1
 ;     IScripts_Something_SetXYAndOffset_99be
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     SetPortraitWindowCoords
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Clear
+;     Portrait_SetCoords
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     TextBox_GetCursorYForTileY2
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
@@ -4052,12 +4070,12 @@ TextBox_Y:                                  ; [$0209]
 ;     FUN_PRG12__8bed
 ;     GetTextBoxCoordinates
 ;     IScriptAction_AddItem_Something8EC1
-;     IScripts_ClearTextbox
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     SetPortraitWindowCoords
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Clear
+;     Portrait_SetCoords
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;     UI_ShowPlayerMenu
 ;     TextBox_QueueRightCoordInPPUBuffer
 ;
@@ -4074,12 +4092,12 @@ TextBox_Width:                              ; [$020a]
 ;     FUN_PRG12__8bed
 ;     GetTextBoxCoordinates
 ;     IScriptAction_AddItem_Something8EC1
-;     IScripts_ClearTextbox
 ;     Maybe_Draw_Textbox
 ;     Maybe_Draw_Textbox_Something8F51
-;     SetPortraitWindowCoords
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Clear
+;     Portrait_SetCoords
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;     TextBox_Maybe_Draw
 ;     UI_ShowPlayerMenu
 ;
@@ -4198,7 +4216,7 @@ Maybe_MessageLength:                        ; [$0214]
 ;     IScripts_UpdatePortraitAnimation
 ;     Shops_Something_9949
 ;     Maybe_TextBox_ShowCurrentMessageID
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;     TextBox_ShowMessage_Pause
 ;
 TextBox_MessageEnded:                       ; [$0215]
@@ -4206,7 +4224,7 @@ TextBox_MessageEnded:                       ; [$0215]
 
 ;
 ; XREFS:
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_IncLineAndReset
 ;     TextBox_ShowMessage_Newline
@@ -4223,7 +4241,7 @@ TextBox_CharPosForLine:                     ; [$0216]
 
 ;
 ; XREFS:
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_IncLineAndReset
 ;
@@ -4252,7 +4270,7 @@ LoadedMessageAddr.U:                        ; [$0219]
 
 ;
 ; XREFS:
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_Fill4Lines
 ;
@@ -4262,7 +4280,7 @@ TextBox_LineScrollOffset:                   ; [$021a]
 ;
 ; XREFS:
 ;     Shops_Something_9949
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;
 MaybeUnused_Arg_TextBox_Height:             ; [$021b]
     db $00                                  ; [$021b] byte
@@ -4280,7 +4298,7 @@ MaybeUnused_Arg_TextBox_Height:             ; [$021b]
 ;
 ;
 ; XREFS:
-;     TextBox_ClearShopSize
+;     TextBox_ClearPasswordSize
 ;     TextBox_ShowMessage_ShowPlayerTitle
 ;     TextBox_Something_ShowMessage_f4a2
 ;
@@ -4320,10 +4338,10 @@ Menu_CursorPos:                             ; [$021e]
 ;     IScriptAction_ShowBuySellMenu
 ;     IScriptAction_ShowSellMenu
 ;     Menu_Draw
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
 ;     Shop_Populate
-;     Shop_Something__8d5a
 ;     UI_ShowPlayerMenu
 ;
 Menu_LastPos:                               ; [$021f]
@@ -4341,10 +4359,10 @@ Menu_LastPos:                               ; [$021f]
 ;     FUN_PRG12__8c04
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
 ;     Shop_DrawItemStrings
 ;     Shop_Populate
-;     Shop_Something__8d5a
 ;     Something_ShopCursorInventory
 ;     UI_ShowPlayerMenu
 ;     FUN_PRG15_MIRROR__d654
@@ -4355,7 +4373,7 @@ ShopItems:                                  ; [$0220]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;     FUN_PRG15_MIRROR__d654
 ;     Maybe_Area_LoadBlocks
@@ -4365,7 +4383,7 @@ ShopItems_1_:                               ; [$0221]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;     Maybe_Area_LoadBlocks
 ;
@@ -4374,7 +4392,7 @@ ShopItems_2_:                               ; [$0222]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;     Maybe_Area_LoadBlocks
 ;
@@ -4383,7 +4401,7 @@ ShopItems_3_:                               ; [$0223]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;
 ShopItems_4_:                               ; [$0224]
@@ -4391,7 +4409,7 @@ ShopItems_4_:                               ; [$0224]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;
 ShopItems_5_:                               ; [$0225]
@@ -4399,7 +4417,7 @@ ShopItems_5_:                               ; [$0225]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;
 ShopItems_6_:                               ; [$0226]
     db $00                                  ; [6]:
@@ -4499,16 +4517,16 @@ ScreenBlocks:                               ; [$024a]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_PPUData:                          ; [$0282]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d503
 ;     FUN_PRG15_MIRROR__d6b1
+;     Screen_Something_ScrollHorizInternal
 ;
 Something_PPUData_1_:                       ; [$0283]
     db $00                                  ; [1]:
@@ -6400,10 +6418,10 @@ ItemInventory:                              ; [$03ad]
 ;     FUN_PRG12__8b71
 ;     Password_EncodeGameState
 ;     Password_Load
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_Equip
 ;     Player_LacksItem
 ;     Player_SetStartGameState
-;     Shop_Something__8d5a
 ;     Something_ShopCursorInventory
 ;     PlayerDeath_ResetSelectedItemState
 ;     Game_ExitBuilding
@@ -6554,6 +6572,7 @@ SelectedItem:                               ; [$03c1]
 ;
 ; XREFS:
 ;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_AddToInventory
@@ -6703,14 +6722,14 @@ BYTE_03cf:                                  ; [$03cf]
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__d00d
-;     GameLoop_AnimateFog
+;     Fog_OnTick
 ;     Game_EnterBuilding
 ;     Game_SpawnInTemple
 ;     Player_HandleDeath
 ;     Screen_NextTransitionState
 ;     Something_SetupNewScreen
 ;
-Something_Maybe_PaletteIndex:               ; [$03d0]
+Screen_Palette:                             ; [$03d0]
     db $00                                  ; [$03d0] Palette
 
 ;
@@ -7087,7 +7106,7 @@ DurationOintment:                           ; [$0427]
 ;     SpriteBehavior__a25f
 ;     Game_ClearTimedItems
 ;     Game_DecGloveDuration
-;     Maybe_Player_PickUpGlove
+;     Player_PickUpGlove
 ;
 DurationGlove:                              ; [$0428]
     db $00                                  ; [$0428] byte
@@ -7154,11 +7173,11 @@ CurrentDoor_KeyRequirement:                 ; [$042b]
 ; XREFS:
 ;     Password_EncodeGameState
 ;     Password_Load
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Player_SetSpecialItem
 ;     Player_SetStartGameState
-;     Shop_Something__8d5a
 ;     Something_ShopCursorInventory
 ;     Player_ApplyDamage
 ;     Player_HitEnemyWithMagic
@@ -7300,6 +7319,7 @@ Player_HP_L:                                ; [$0432]
 ; XREFS:
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
+;     FUN_PRG15_MIRROR__daf6
 ;     Game_DropLadderToMascon
 ;     Game_InitStateForStartScreen
 ;     Game_SetupAndLoadArea
@@ -7339,9 +7359,9 @@ Temp_SoundIDToPlay:                         ; [$0436]
 ;     IScriptAction_IfPlayerHasTitle
 ;     Password_EncodeGameState
 ;     Password_Load
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_SetInitialExpAndGold
 ;     Player_SetStartGameState
-;     Shop_Something__8d5a
 ;     Maybe_Player_CalcSpeed
 ;     Player_UseWingBoots
 ;     TextBox_ShowMessage_ShowPlayerTitle
@@ -7733,9 +7753,9 @@ Password_EncodedState_1_:                   ; [$04ce]
 ;
 ; XREFS:
 ;     IScriptAction_CheckUpdatePlayerTitle
+;     PlayerMenu_Maybe_ShowStatus
 ;     Player_SetInitialExpAndGold
 ;     Player_SetStartGameState
-;     Shop_Something__8d5a
 ;     Player_CheckReachedNextTitle
 ;
 NextPlayerTitle:                            ; [$04ed]
@@ -7760,8 +7780,8 @@ Something_ManaOrHPBar:                      ; [$04ee]
 ;
 ; 1. Control + length byte
 ;
-;    Bit 7 controls whether to set PPUCTRL to VRAM_INC_ADD32_DOWN mode (if
-;    set).
+;    Bit 7 controls whether to set PPUCTRL to
+;    VRAM_INC_ADD32_DOWN mode (if set).
 ;
 ;    The rest controls how many bytes to write from the buffer (remaining
 ;    bits).
@@ -7779,12 +7799,12 @@ Something_ManaOrHPBar:                      ; [$04ee]
 ;     Area_WriteTwoBlocksFromData34ToPPUBuffer
 ;     FUN_PRG15_MIRROR__c033
 ;     FUN_PRG15_MIRROR__d82d
-;     Game_AnimateFog_UpdatePPU
+;     Fog_UpdateTiles
 ;     Game_Init
 ;     PPUBuffer_Append0
-;     PPUBuffer_Command_RotateTilesRight1Pixel
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPUBuffer_Set
 ;     Player_DrawDeathAnimation

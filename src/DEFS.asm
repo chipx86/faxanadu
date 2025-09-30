@@ -42,7 +42,7 @@ BLOCK_PUSHABLE                                     EQU $06
 BLOCK_0x07                                         EQU $07
 BLOCK_0x08                                         EQU $08
 BLOCK_FG_0x09                                      EQU $09
-BLOCK_MAYBE_SOMETHING_CLIMBABLE                    EQU $0a
+BLOCK_MAYBE_TRANSITION_LADDER_UP                   EQU $0a
 BLOCK_0x0b                                         EQU $0b
 BLOCK_AREA_TRANSITION_L2R                          EQU $0c
 BLOCK_AREA_TRANSITION_R2L                          EQU $0d

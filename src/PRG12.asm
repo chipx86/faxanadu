@@ -21,23 +21,19 @@ BASE $8000
     hex 00 0b 0c cb cb 00 00 42 43 44 45 46 47 48 49 4a ; [$80c0] undefined
     hex 4b 4c 4d 4e 4f 0d 0e 0f 16 17 18 19 1a 1b 00 cb ; [$80d0] undefined
     hex cb 00 00 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e ; [$80e0] undefined
-    hex 5f 1d 1e 1f 28 29 2c 2d 2e 2f 00 cb cb 00 bc ; [$80f0] undefined
-
-    db $62,$63,$64,$65,$66,$67,$68,$69,$6a,$6b,$6c,$6d,$6e,$6f,$3a,$3b ; [$8100]
-                                                                       ; string
-    db $3c,$3d,$40,$41,$50,$51,$60,$00      ; [$810f] string
-
-    hex cb cb 00 00 72 73 74 75 76 77 78 79 7a 7b 7c 7d ; [$8118] undefined
-    hex 7e 7f 61 70 71 80 90 91 92 93 00 00 cb cb 00 81 ; [$8127] undefined
-    hex 82 83 84 85 86 83 88 89 83 8b 8c 8d 8e 8f 94 95 ; [$8137] undefined
-    hex 96 97 98 83 9a 9b f3 ec cb cb bc 00 00 bc bc bc ; [$8147] undefined
-    hex 00 c1 d3 00 00 00 00 c4 c5 b3 b4 00 00 00 00 00 ; [$8157] undefined
-    hex 00 00 bc 00 cb cb bb d3 d3 c6 c7 cf d0 d1 b7 b8 ; [$8167] undefined
-    hex 00 c8 00 d4 b1 b3 b4 c8 00 c1 d3 00 00 d2 d3 c6 ; [$8177] undefined
-    hex cb cd bf bf bf cf af bf b0 b0 af bf cf c6 c7 99 ; [$8187] undefined
-    hex 8a 87 c3 bb d0 d1 b7 b8 c0 bf bf bf ce 00 00 00 ; [$8197] undefined
-    hex 00 cd bf bf bf bf bf bf bd af b2 b2 b0 bd af bf ; [$81a7] undefined
-    hex b0 bf af bf ce 00 00 00 00          ; [$81b7] undefined
+    hex 5f 1d 1e 1f 28 29 2c 2d 2e 2f 00 cb cb 00 bc 62 ; [$80f0] undefined
+    hex 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 3a 3b 3c ; [$8100] undefined
+    hex 3d 40 41 50 51 60 00 cb cb 00 00 72 73 74 75 76 ; [$8110] undefined
+    hex 77 78 79 7a 7b 7c 7d 7e 7f 61 70 71 80 90 91 92 ; [$8120] undefined
+    hex 93 00 00 cb cb 00 81 82 83 84 85 86 83 88 89 83 ; [$8130] undefined
+    hex 8b 8c 8d 8e 8f 94 95 96 97 98 83 9a 9b f3 ec cb ; [$8140] undefined
+    hex cb bc 00 00 bc bc bc 00 c1 d3 00 00 00 00 c4 c5 ; [$8150] undefined
+    hex b3 b4 00 00 00 00 00 00 00 bc 00 cb cb bb d3 d3 ; [$8160] undefined
+    hex c6 c7 cf d0 d1 b7 b8 00 c8 00 d4 b1 b3 b4 c8 00 ; [$8170] undefined
+    hex c1 d3 00 00 d2 d3 c6 cb cd bf bf bf cf af bf b0 ; [$8180] undefined
+    hex b0 af bf cf c6 c7 99 8a 87 c3 bb d0 d1 b7 b8 c0 ; [$8190] undefined
+    hex bf bf bf ce 00 00 00 00 cd bf bf bf bf bf bf bd ; [$81a0] undefined
+    hex af b2 b2 b0 bd af bf b0 bf af bf ce 00 00 00 00 ; [$81b0] undefined
 
 
 ;============================================================================
@@ -93,6 +89,10 @@ OpenTextWindow:                             ; [$81e2]
     JSR GetTextBoxCoordinates
     JSR TextBox_Maybe_Draw
 
+    ;
+    ; v-- Fall through --v
+    ;
+
 
 ;============================================================================
 ; TODO: Document IScripts_Something_81E8
@@ -137,7 +137,7 @@ FUN_PRG12__81fb:                            ; [$81fb]
 
 
 ;============================================================================
-; TODO: Document SetPortraitWindowCoords
+; TODO: Document Portrait_SetCoords
 ;
 ; INPUTS:
 ;     None.
@@ -146,9 +146,10 @@ FUN_PRG12__81fb:                            ; [$81fb]
 ;     TODO
 ;
 ; XREFS:
-;     ShortPortraitWindow
+;     DEADCODE
+;     Portrait_Show
 ;============================================================================
-SetPortraitWindowCoords:                    ; [$8201]
+Portrait_SetCoords:                         ; [$8201]
     LDA #$02
     STA a:TextBox_X
     LDA #$0e
@@ -179,7 +180,7 @@ SetPortraitWindowCoords:                    ; [$8201]
 ; XREFS:
 ;     IScripts_UpdatePortraitAnimation
 ;============================================================================
-IScripts_SetPortraitSpriteXY:               ; [$8216]
+Portrait_SetInnerSpriteXY:                  ; [$8216]
     LDX #$18
     STX Maybe_Arg_CurrentSprite_PosX
     LDX #$58
@@ -188,7 +189,7 @@ IScripts_SetPortraitSpriteXY:               ; [$8216]
 
 
 ;============================================================================
-; TODO: Document ShortPortraitWindow
+; TODO: Document Portrait_Show
 ;
 ; INPUTS:
 ;     None.
@@ -199,15 +200,27 @@ IScripts_SetPortraitSpriteXY:               ; [$8216]
 ; XREFS:
 ;     IScripts_Begin
 ;============================================================================
-ShortPortraitWindow:                        ; [$821f]
-    JSR SetPortraitWindowCoords
+Portrait_Show:                              ; [$821f]
+    JSR Portrait_SetCoords
     JMP TextBox_Maybe_Draw
-    JSR SetPortraitWindowCoords
+
+
+;============================================================================
+; TODO: Document DEADCODE
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;============================================================================
+DEADCODE:                                   ; [$8225]
+    JSR Portrait_SetCoords
     JMP Maybe_Draw_Textbox
 
 
 ;============================================================================
-; TODO: Document IScripts_ClearTextbox
+; TODO: Document Portrait_Clear
 ;
 ; INPUTS:
 ;     None.
@@ -218,7 +231,7 @@ ShortPortraitWindow:                        ; [$821f]
 ; XREFS:
 ;     IScriptAction_EndScript
 ;============================================================================
-IScripts_ClearTextbox:                      ; [$822b]
+Portrait_Clear:                             ; [$822b]
     LDA #$02
     STA a:TextBox_X
     LDA #$08
@@ -264,19 +277,19 @@ IScripts_ClearTextbox:                      ; [$822b]
 ;
 ; CALLS:
 ;     FUN_PRG15_MIRROR__f24d
-;     ShortPortraitWindow
+;     Portrait_Show
 ;     OpenTextWindow
 ;     IScripts_LoadByte
 ;
 ; XREFS:
 ;     Player_CheckHandlePressUpOnNPC
 ;     Game_UnlockDoorWithUsableItem
-;     Maybe_Player_PickUpGlove
 ;     Player_PickUpBattleHelmet
 ;     Player_PickUpBattleSuit
 ;     Player_PickUpBlackOnyx
 ;     Player_PickUpDragonSlayer
 ;     Player_PickUpElixir
+;     Player_PickUpGlove
 ;     Player_PickUpHourGlass
 ;     Player_PickUpMattock
 ;     Player_PickUpOintment
@@ -305,23 +318,23 @@ IScripts_Begin:                             ; [$8242]
     LDY #$00
     LDA (IScriptOrCHRAddr),Y
     STA a:IScriptEntity
-    BPL NotDoubleWindow
+    BPL @_notDoubleWindow
 
     ;
     ; Begin showing the portrait information.
     ;
     AND #$7f
     JSR #$f24d
-    JSR ShortPortraitWindow
+    JSR Portrait_Show
 
-    ;
-    ; XREFS:
-    ;     IScripts_Begin
-    ;
-NotDoubleWindow:                            ; [$8267]
+  @_notDoubleWindow:                        ; [$8267]
     JSR OpenTextWindow
     LDA #$01
     STA IScriptOffset
+
+    ;
+    ; v-- Fall through --v
+    ;
 
 
 ;============================================================================
@@ -333,8 +346,8 @@ NotDoubleWindow:                            ; [$8267]
 ; advancing the script.
 ;
 ; INPUTS:
-;     @_IScriptActions_U:
-;     @_IScriptActions_L:
+;     IScriptActions_U:
+;     IScriptActions_L:
 ;         Address table for the IScript action handlers.
 ;
 ; OUTPUTS:
@@ -377,10 +390,19 @@ IScripts_InvokeNextAction:                  ; [$826e]
 ;============================================================================
 ; Addresses for the IScript action handlers.
 ;============================================================================
-  @_IScriptActions_L:                       ; [$827b]
+
+;
+; XREFS:
+;     IScripts_InvokeNextAction
+;
+IScriptActions_L:                           ; [$827b]
     db $b3                                  ; [0]:
 
-  @_IScriptActions_L_1_:                    ; [$827c]
+;
+; XREFS:
+;     IScripts_InvokeNextAction
+;
+IScriptActions_L_1_:                        ; [$827c]
     db $c4                                  ; [1]:
     db $ee                                  ; [2]:
     db $d8                                  ; [3]:
@@ -405,10 +427,18 @@ IScripts_InvokeNextAction:                  ; [$826e]
     db $07                                  ; [22]:
     db $aa                                  ; [23]:
 
-  @_IScriptActions_U:                       ; [$8293]
+;
+; XREFS:
+;     IScripts_InvokeNextAction
+;
+IScriptActions_U:                           ; [$8293]
     db $82                                  ; [0]:
 
-  @_IScriptActions_U_1_:                    ; [$8294]
+;
+; XREFS:
+;     IScripts_InvokeNextAction
+;
+IScriptActions_U_1_:                        ; [$8294]
     db $82                                  ; [1]:
     db $82                                  ; [2]:
     db $82                                  ; [3]:
@@ -444,7 +474,7 @@ IScripts_InvokeNextAction:                  ; [$826e]
 ;     1. Jump address (2 bytes)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8292]
+;     IScriptActions_L [$PRG12::8292]
 ;============================================================================
 IScriptAction_Jump:                         ; [$82ab]
     JMP IScripts_JumpToNextAddr
@@ -460,7 +490,7 @@ IScriptAction_Jump:                         ; [$82ab]
 ;     None.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8290]
+;     IScriptActions_L [$PRG12::8290]
 ;============================================================================
 IScriptAction_FinishGame:                   ; [$82ae]
     JSR SplashAnimation_RunOutro
@@ -482,15 +512,15 @@ IScriptAction_FinishGame:                   ; [$82ae]
 ;     IScriptAction_ShowMessage
 ;     IScriptAction_ShowQuestionMessage
 ;     IScriptAction_ShowSellMenu
+;     IScriptActions_L [$PRG12::827b]
 ;     Shop_ShowMessage
-;     _IScriptActions_L [$PRG12::827b]
 ;============================================================================
 IScriptAction_EndScript:                    ; [$82b4]
     JSR IScripts_UpdatePortraitAnimation
     LDA a:IScriptEntity
     BPL @LAB_PRG12__82c2
     JSR #$f281
-    JMP IScripts_ClearTextbox
+    JMP Portrait_Clear
 
   @LAB_PRG12__82c2:                         ; [$82c2]
     JMP FUN_PRG12__81fb
@@ -511,7 +541,7 @@ IScriptAction_EndScript:                    ; [$82b4]
 ;     1. Message ID (1 byte)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::827c]
+;     IScriptActions_L [$PRG12::827c]
 ;============================================================================
 IScriptAction_ShowUnskippableMessage:       ; [$82c5]
     JSR IScripts_LoadByte                   ; Load the next byte as the
@@ -541,7 +571,7 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
 ;     1. Message ID (1 byte)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::827e]
+;     IScriptActions_L [$PRG12::827e]
 ;============================================================================
 IScriptAction_ShowMessage:                  ; [$82d9]
     JSR IScripts_LoadByte
@@ -575,22 +605,18 @@ IScriptAction_ShowMessage:                  ; [$82d9]
 ;     1. Message ID (1 byte)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::827d]
+;     IScriptActions_L [$PRG12::827d]
 ;============================================================================
 IScriptAction_ShowQuestionMessage:          ; [$82ef]
     JSR IScripts_LoadByte
     JSR #$f3f5
 
-    ;
-    ; XREFS:
-    ;     IScriptAction_ShowQuestionMessage
-    ;
-WaitForInput:                               ; [$82f5]
+  @_waitForInput:                           ; [$82f5]
     JSR IScripts_UpdatePortraitAnimation
     JSR #$f466
     JSR IScripts_Something_9980
     BCS IScriptAction_EndScript
-    BNE WaitForInput
+    BNE @_waitForInput
     JSR IScripts_Something_81E8
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
@@ -606,7 +632,7 @@ WaitForInput:                               ; [$82f5]
 ;     TODO
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8291]
+;     IScriptActions_L [$PRG12::8291]
 ;============================================================================
 IScriptAction_22:                           ; [$8308]
     JSR IScripts_LoadByte
@@ -692,7 +718,7 @@ IScripts_ProgressivelySubtractGold:         ; [$8321]
 ;     1. Gold amount (2 bytes)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8280]
+;     IScriptActions_L [$PRG12::8280]
 ;============================================================================
 IScriptAction_SpendGold:                    ; [$835b]
     ;
@@ -805,7 +831,7 @@ Shop_ShowMessage:                           ; [$837e]
 ;     1. Temple ID (1 byte)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8281]
+;     IScriptActions_L [$PRG12::8281]
 ;============================================================================
 IScriptAction_SetSpawnPoint:                ; [$8391]
     JSR IScripts_LoadByte                   ; Load the temple/area ID.
@@ -830,7 +856,7 @@ IScriptAction_SetSpawnPoint:                ; [$8391]
 ;     1. Item ID (1 byte)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8282]
+;     IScriptActions_L [$PRG12::8282]
 ;============================================================================
 IScriptAction_AddInventoryItem:             ; [$839f]
     JSR IScripts_LoadByte                   ; Load the item ID parameter.
@@ -883,7 +909,7 @@ IScriptAction_AddInventoryItem:             ; [$839f]
 ;     1. The address of the shop items (2 bytes)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8283]
+;     IScriptActions_L [$PRG12::8283]
 ;============================================================================
 IScriptAction_OpenShop:                     ; [$83d8]
     LDA #$14                                ; "What would you like?"
@@ -1245,7 +1271,7 @@ Shop_Populate:                              ; [$8501]
 ; It will then invoke the next action in the script.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8284]
+;     IScriptActions_L [$PRG12::8284]
 ;============================================================================
 IScriptAction_AddGold:                      ; [$8525]
     JSR IScripts_LoadByte                   ; Load the lower byte for the
@@ -1343,7 +1369,7 @@ IScripts_PlayGoldChangeSound:               ; [$8574]
 ; the HP.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8285]
+;     IScriptActions_L [$PRG12::8285]
 ;============================================================================
 IScriptAction_AddMP:                        ; [$8580]
     JSR IScripts_LoadByte                   ; Load the MP amount from the
@@ -1431,7 +1457,7 @@ IScripts_PlayFillingSound:                  ; [$85a3]
 ;       ends.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828e]
+;     IScriptActions_L [$PRG12::828e]
 ;============================================================================
 IScriptAction_AddHP:                        ; [$85af]
     JSR IScripts_LoadByte                   ; Load the HP value to add.
@@ -1477,7 +1503,7 @@ IScriptAction_AddHP:                        ; [$85af]
 ;       quests bitmask.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8286]
+;     IScriptActions_L [$PRG12::8286]
 ;============================================================================
 IScriptAction_IfQuestCompleted:             ; [$85d1]
     JSR IScripts_LoadByte                   ; Load the next byte as the
@@ -1492,6 +1518,8 @@ IScriptAction_IfQuestCompleted:             ; [$85d1]
 
   @_hasQuestCompleted:                      ; [$85e0]
     JMP IScripts_JumpToNextAddr
+
+ISCRIPTS_QUEST_BITS:                        ; [$85e3]
     db $01,$02,$04                          ; [$85e3] byte
 
 
@@ -1504,7 +1532,7 @@ IScriptAction_IfQuestCompleted:             ; [$85d1]
 ; It will then invoke the following action.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8289]
+;     IScriptActions_L [$PRG12::8289]
 ;============================================================================
 IScriptAction_SetQuestComplete:             ; [$85e6]
     JSR IScripts_LoadByte
@@ -1528,7 +1556,7 @@ IScriptAction_SetQuestComplete:             ; [$85e6]
 ; following action.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8287]
+;     IScriptActions_L [$PRG12::8287]
 ;============================================================================
 IScriptAction_IfPlayerHasTitle:             ; [$85f6]
     JSR IScripts_LoadByte
@@ -1604,7 +1632,7 @@ IScripts_SkipAddrAndInvoke:                 ; [$8616]
 ; and the following action will be invoked.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::8288]
+;     IScriptActions_L [$PRG12::8288]
 ;============================================================================
 IScriptAction_IfPlayerHasGold:              ; [$861f]
     LDA a:Gold
@@ -1631,7 +1659,7 @@ IScriptAction_IfPlayerHasGold:              ; [$861f]
 ; and execute the next script action.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828a]
+;     IScriptActions_L [$PRG12::828a]
 ;============================================================================
 IScriptAction_ShowBuySellMenu:              ; [$8630]
     ;
@@ -1696,7 +1724,7 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
 ; It will then invoke the next action in the script.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828b]
+;     IScriptActions_L [$PRG12::828b]
 ;============================================================================
 IScriptAction_ConsumeItem:                  ; [$8657]
     JSR IScripts_LoadByte
@@ -1714,7 +1742,7 @@ IScriptAction_ConsumeItem:                  ; [$8657]
 ;     TODO
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828c]
+;     IScriptActions_L [$PRG12::828c]
 ;============================================================================
 IScriptAction_ShowSellMenu:                 ; [$8660]
     JSR IScripts_LoadByte
@@ -1784,11 +1812,11 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     JSR IScripts_UpdatePortraitAnimation
     JSR #$f466
     JSR Shop_Something_9956
-    BCS @LAB_PRG12__8701
+    BCS @_endScript
     BNE @LAB_PRG12__86cb
     JSR Shop_Draw
     JSR FUN_PRG12__84ed
-    BCS @LAB_PRG12__8701
+    BCS @_endScript
     LDX a:Menu_CursorPos
     LDA ShopItemCostsL,X
     STA a:Temp_0202
@@ -1801,7 +1829,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     JSR OpenTextWindow
     JMP IScripts_InvokeNextAction
 
-  @LAB_PRG12__8701:                         ; [$8701]
+  @_endScript:                              ; [$8701]
     JMP IScriptAction_EndScript
 
 
@@ -1809,7 +1837,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
 ; TODO: Document IScripts_SellMenu_Something8704
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -1826,7 +1854,7 @@ IScripts_SellMenu_Something8704:            ; [$8704]
     BEQ @LAB_PRG12__8716
     TXA
     CMP (Temp_Int24),Y
-    BEQ @LAB_PRG12__8717
+    BEQ @_return
     INY
     INY
     INY
@@ -1835,7 +1863,7 @@ IScripts_SellMenu_Something8704:            ; [$8704]
   @LAB_PRG12__8716:                         ; [$8716]
     TAX
 
-  @LAB_PRG12__8717:                         ; [$8717]
+  @_return:                                 ; [$8717]
     RTS
 
 
@@ -1856,15 +1884,15 @@ IScripts_SellMenu_Something8704:            ; [$8704]
 ;     2. Jump address (2 bytes)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828d]
+;     IScriptActions_L [$PRG12::828d]
 ;============================================================================
 IScriptAction_IfPlayerHasItem:              ; [$8718]
     JSR IScripts_LoadByte
     JSR Player_LacksItem
-    BCC @LAB_PRG12__8723
+    BCC @_invokeElse
     JMP IScripts_SkipAddrAndInvoke
 
-  @LAB_PRG12__8723:                         ; [$8723]
+  @_invokeElse:                             ; [$8723]
     JMP IScripts_JumpToNextAddr
 
 
@@ -1883,16 +1911,16 @@ IScriptAction_IfPlayerHasItem:              ; [$8718]
 ;     1. If-Updated Jump Address (2 bytes)
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::827f]
+;     IScriptActions_L [$PRG12::827f]
 ;============================================================================
 IScriptAction_CheckUpdatePlayerTitle:       ; [$8726]
     LDA a:NextPlayerTitle
     CMP a:PlayerTitle
-    BEQ @LAB_PRG12__8734
+    BEQ @_invokeElse
     STA a:PlayerTitle
     JMP IScripts_JumpToNextAddr
 
-  @LAB_PRG12__8734:                         ; [$8734]
+  @_invokeElse:                             ; [$8734]
     JMP IScripts_SkipAddrAndInvoke
 
 
@@ -1907,7 +1935,7 @@ IScriptAction_CheckUpdatePlayerTitle:       ; [$8726]
 ;     None.
 ;
 ; XREFS:
-;     _IScriptActions_L [$PRG12::828f]
+;     IScriptActions_L [$PRG12::828f]
 ;============================================================================
 IScriptAction_ShowPassword:                 ; [$8737]
     JSR Password_GenerateStateAndReset      ; Generate the password state.
@@ -1921,11 +1949,11 @@ IScriptAction_ShowPassword:                 ; [$8737]
                                             ; password.
     BCC @_charLoop                          ; If not done, loop.
 
-  @LAB_PRG12__874a:                         ; [$874a]
+  @_portraitLoop:                           ; [$874a]
     JSR IScripts_UpdatePortraitAnimation
     JSR IScripts_Something_SetXYAndOffset_99be
     LDA Joy1_ChangedButtonMask              ; A = Changed button mask
-    BPL @LAB_PRG12__874a                    ; If not dismissed, loop.
+    BPL @_portraitLoop                      ; If not dismissed, loop.
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
 
@@ -2098,7 +2126,7 @@ IScripts_UpdatePortraitAnimation:           ; [$87b0]
     LDA #$00
 
   @LAB_PRG12__87d6:                         ; [$87d6]
-    JSR IScripts_SetPortraitSpriteXY
+    JSR Portrait_SetInnerSpriteXY
     JMP #$f29b
 
 
@@ -2405,7 +2433,7 @@ UI_ShowPlayerMenu:                          ; [$8a93]
     LDX a:Menu_CursorPos
     CPX #$05
     BNE @LAB_PRG12__8afa
-    JMP Shop_Something__8d5a
+    JMP PlayerMenu_Maybe_ShowStatus
 
   @LAB_PRG12__8afa:                         ; [$8afa]
     LDA #$04
@@ -2637,7 +2665,7 @@ FUN_PRG12__8c04:                            ; [$8c04]
 ; TODO: Document Maybe_DrawItemTitle
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -2645,8 +2673,8 @@ FUN_PRG12__8c04:                            ; [$8c04]
 ; XREFS:
 ;     FUN_PRG12__8c04
 ;     IScriptAction_AddInventoryItem
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;============================================================================
 Maybe_DrawItemTitle:                        ; [$8c36]
     PHA
@@ -2674,16 +2702,18 @@ Maybe_DrawItemTitle:                        ; [$8c36]
 ; TODO: Document Maybe_DrawItemName
 ;
 ; INPUTS:
-;     None.
+;     A
+;     X
+;     Y
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     FUN_PRG12__8c04
 ;     IScriptAction_AddInventoryItem
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_Draw
-;     Shop_Something__8d5a
 ;============================================================================
 Maybe_DrawItemName:                         ; [$8c58]
     STA Temp_Int24
@@ -2842,7 +2872,8 @@ Player_Equip:                               ; [$8ca9]
 ;         The magic spell to set.
 ;
 ; OUTPUTS:
-;     None
+;     SelectedMagic:
+;         The updated magic spell.
 ;
 ; XREFS:
 ;     Player_Equip
@@ -3033,7 +3064,7 @@ SPECIAL_ITEMS_BITMASKS_7_:                  ; [$8d59]
 
 
 ;============================================================================
-; TODO: Document Shop_Something__8d5a
+; TODO: Document PlayerMenu_Maybe_ShowStatus
 ;
 ; INPUTS:
 ;     None.
@@ -3044,7 +3075,7 @@ SPECIAL_ITEMS_BITMASKS_7_:                  ; [$8d59]
 ; XREFS:
 ;     UI_ShowPlayerMenu
 ;============================================================================
-Shop_Something__8d5a:                       ; [$8d5a]
+PlayerMenu_Maybe_ShowStatus:                ; [$8d5a]
     LDA #$04
     STA a:TextBox_X
     LDA #$08
@@ -3198,7 +3229,7 @@ Shop_Something__8d5a:                       ; [$8d5a]
 
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;
 BYTE_ARRAY_PRG12__8e63:                     ; [$8e63]
     db $80                                  ; [0]:
@@ -3221,7 +3252,7 @@ BYTE_ARRAY_PRG12__8e63:                     ; [$8e63]
 ;     TODO
 ;
 ; XREFS:
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
 ;     UI_ShowPlayerMenu
 ;============================================================================
 Shop_DrawItemStrings:                       ; [$8e6b]
@@ -3288,8 +3319,8 @@ Shop_DrawItemStrings:                       ; [$8e6b]
 ;
 ; XREFS:
 ;     Maybe_DrawItemTitle
+;     PlayerMenu_Maybe_ShowStatus
 ;     Shop_DrawItemStrings
-;     Shop_Something__8d5a
 ;     UI_ShowPlayerMenu
 ;============================================================================
 Strings_Draw:                               ; [$8e9b]
@@ -3394,16 +3425,17 @@ IScriptAction_AddItem_Something8EC1:        ; [$8ec1]
 ; TODO: Document TextBox_Maybe_Draw
 ;
 ; INPUTS:
-;     None.
+;     X
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
 ;     OpenTextWindow
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Show
 ;     Shop_Draw
-;     Shop_Something__8d5a
-;     ShortPortraitWindow
 ;     UI_ShowPlayerMenu
 ;============================================================================
 TextBox_Maybe_Draw:                         ; [$8ef1]
@@ -3593,18 +3625,19 @@ TextBox_Maybe_GetPalette:                   ; [$8ff6]
 ; TODO: Document Maybe_Draw_Textbox
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
+;     DEADCODE
 ;     FUN_PRG12__81fb
 ;     FUN_PRG12__8bed
 ;     IScriptAction_ShowSellMenu
-;     IScripts_ClearTextbox
 ;     Maybe_Shop_DrawTextBox
-;     Shop_Something__8d5a
+;     PlayerMenu_Maybe_ShowStatus
+;     Portrait_Clear
 ;     UI_ShowPlayerMenu
 ;============================================================================
 Maybe_Draw_Textbox:                         ; [$9002]
@@ -3646,13 +3679,7 @@ Maybe_Draw_Textbox:                         ; [$9002]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG12__9041
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;============================================================================
 FUN_PRG12__9041:                            ; [$9041]
     LDA #$05
@@ -3911,12 +3938,25 @@ PasswordScreen_Show:                        ; [$909d]
     LDA a:Password_EnteredCharsLength
     BEQ @_playInputSound
     JSR Password_Maybe_CheckPasswordLength
-    BCS @_handleWrongPasswordAndWaitForInput
+    BCS PasswordScreen_HandleWrongPasswordAndWaitForInput
     JSR Password_Load
-    BCS @_handleWrongPasswordAndWaitForInput
+    BCS PasswordScreen_HandleWrongPasswordAndWaitForInput
     RTS
 
-  @_handleWrongPasswordAndWaitForInput:     ; [$915f]
+
+;============================================================================
+; TODO: Document PasswordScreen_HandleWrongPasswordAndWaitForInput
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_Show
+;============================================================================
+PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
     JSR Sound_PlayInputSound
 
   @_handleWrongPassword:                    ; [$9162]
@@ -3964,10 +4004,13 @@ PasswordScreen_Show:                        ; [$909d]
 ; CALLS:
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPUBuffer_WriteFromTemp
+;
+; XREFS:
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 PasswordScreen_WriteEnterYourMantra:        ; [$9181]
     LDY #$02
-    BNE PasswrodScreen_DrawMessage
+    BNE PasswordScreen_DrawMessage
 
     ;
     ; X-- We should never fall through here --X
@@ -4004,6 +4047,9 @@ PasswordScreen_WriteEnterYourMantra:        ; [$9181]
 ; CALLS:
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPUBuffer_WriteFromTemp
+;
+; XREFS:
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 PasswordScreen_WriteWrongPassword:          ; [$9185]
     LDA InterruptCounter                    ; Load the interrupt counter.
@@ -4031,7 +4077,7 @@ PasswordScreen_WriteWrongPassword:          ; [$9185]
 
 
 ;============================================================================
-; TODO: Document PasswrodScreen_DrawMessage
+; TODO: Document PasswordScreen_DrawMessage
 ;
 ; INPUTS:
 ;     X
@@ -4043,7 +4089,7 @@ PasswordScreen_WriteWrongPassword:          ; [$9185]
 ; XREFS:
 ;     PasswordScreen_WriteEnterYourMantra
 ;============================================================================
-PasswrodScreen_DrawMessage:                 ; [$9195]
+PasswordScreen_DrawMessage:                 ; [$9195]
     ;
     ; Load the message string.
     ;
@@ -4096,7 +4142,7 @@ RETURN_91B7:                                ; [$91b7]
 
 ;
 ; XREFS:
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;
 PASSWORD_MESSAGE_STRINGS_L:                 ; [$91b8]
     db $be                                  ; [0]:
@@ -4105,7 +4151,7 @@ PASSWORD_MESSAGE_STRINGS_L:                 ; [$91b8]
 
 ;
 ; XREFS:
-;     PasswrodScreen_DrawMessage
+;     PasswordScreen_DrawMessage
 ;
 PASSWORD_MESSAGE_STRINGS_U:                 ; [$91bb]
     db $91                                  ; [0]:
@@ -4412,7 +4458,7 @@ RETURN_9311:                                ; [$9311]
 ;     TODO
 ;
 ; XREFS:
-;     PasswordScreen_Show
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 Menu_Draw_Something9312:                    ; [$9312]
     TAX
@@ -4454,8 +4500,7 @@ Menu_Draw_Something9312:                    ; [$9312]
 ;
 ; XREFS:
 ;     Menu_Draw_Something9386
-;     PasswordScreen_Show
-;     _handleWrongPasswordAndWaitForInput [$PRG12::915f]
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 Sound_PlayInputSound:                       ; [$9341]
     PHA
@@ -5419,10 +5464,10 @@ Password_Load:                              ; [$95e9]
 ; TODO: Document Password_DecodeValueOrUnset
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     Password_Load
@@ -5435,10 +5480,10 @@ Password_DecodeValueOrUnset:                ; [$96b0]
     LSR A
     PLA
     TAY
-    BCC @LAB_PRG12__96bf
+    BCC @_returnUnset
     JMP Password_DecodeValue
 
-  @LAB_PRG12__96bf:                         ; [$96bf]
+  @_returnUnset:                            ; [$96bf]
     LDA #$ff
     RTS
 
@@ -5460,7 +5505,7 @@ Password_DecodeValueList:                   ; [$96c2]
     STX a:Password_Temp2
     JSR Password_DecodeValue
     STA a:Password_Temp3
-    BEQ @LAB_PRG12__96e4
+    BEQ @_return
     LDY #$00
 
   @LAB_PRG12__96cf:                         ; [$96cf]
@@ -5478,7 +5523,7 @@ Password_DecodeValueList:                   ; [$96c2]
     BNE @LAB_PRG12__96cf
     TYA
 
-  @LAB_PRG12__96e4:                         ; [$96e4]
+  @_return:                                 ; [$96e4]
     RTS
 
 
@@ -5956,7 +6001,7 @@ Password_Maybe_CheckPasswordLength:         ; [$9850]
     LSR A
     LSR A
     CMP a:Password_EnteredCharsLength
-    BNE @LAB_PRG12__98a5
+    BNE @_returnTrue
 
   @LAB_PRG12__9881:                         ; [$9881]
     LDY #$06
@@ -5976,11 +6021,11 @@ Password_Maybe_CheckPasswordLength:         ; [$9850]
 
   @LAB_PRG12__989e:                         ; [$989e]
     LDA a:Password_Checksum
-    BNE @LAB_PRG12__98a5
+    BNE @_returnTrue
     CLC
     RTS
 
-  @LAB_PRG12__98a5:                         ; [$98a5]
+  @_returnTrue:                             ; [$98a5]
     SEC
     RTS
 
@@ -6132,7 +6177,7 @@ Password_EncodeValue:                       ; [$98a7]
 ;     Y
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     Password_DecodeValueList
@@ -6171,7 +6216,7 @@ Password_DecodeValue:                       ; [$98e9]
 ; TODO: Document IScripts_Something_9910
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -6485,7 +6530,8 @@ IScripts_Something_99DB:                    ; [$99db]
 ; TODO: Document Shop_Draw
 ;
 ; INPUTS:
-;     None.
+;     X
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -6599,7 +6645,7 @@ Player_RemoveItem:                          ; [$9a6a]
     JSR #$f785
     TAX
     LDA NumberOfWeapons,X
-    BEQ @LAB_PRG12__9aca
+    BEQ @_return
     STA Maybe_Temp4
     LDA #$9b29,X
     STA Temp_Int24
@@ -6630,7 +6676,7 @@ Player_RemoveItem:                          ; [$9a6a]
   @LAB_PRG12__9ac7:                         ; [$9ac7]
     DEC NumberOfWeapons,X
 
-  @LAB_PRG12__9aca:                         ; [$9aca]
+  @_return:                                 ; [$9aca]
     RTS
 
   @LAB_PRG12__9acb:                         ; [$9acb]
@@ -6828,7 +6874,7 @@ INVENTORY_CATEGORY_L:                       ; [$9b29]
 ;     IScriptAction_ShowSellMenu
 ;
 INVENTORY_CATEGORY_L_4_:                    ; [$9b2d]
-    db $ad                                  ; [4]: Special
+    db $ad                                  ; [4]: Items
 
 
 ;============================================================================
@@ -7090,7 +7136,7 @@ UI_DrawText:                                ; [$9e0e]
 
   @LAB_PRG12__9e10:                         ; [$9e10]
     LDA (Temp_Int24),Y
-    BEQ @LAB_PRG12__9e20
+    BEQ @_return
     CMP #$20
     BNE @LAB_PRG12__9e1a
     LDA #$00
@@ -7100,7 +7146,7 @@ UI_DrawText:                                ; [$9e0e]
     INY
     BNE @LAB_PRG12__9e10
 
-  @LAB_PRG12__9e20:                         ; [$9e20]
+  @_return:                                 ; [$9e20]
     RTS
 
 
@@ -11748,7 +11794,7 @@ SplashAnimation_RunIntro:                   ; [$a79a]
 ; TODO: Document SplashAnimation_Maybe_CalcPlayerAnimState
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12004,7 +12050,7 @@ SplashAnimation_Maybe_NextAnimState2:       ; [$a898]
 ; TODO: Document SplashAnimation_Maybe_AnimPlayerStep
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12060,7 +12106,7 @@ BYTE_ARRAY_PRG12__a8de:                     ; [$a8de]
 ; TODO: Document SplashAnimation_OutroFuncAF82
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12107,7 +12153,7 @@ BYTE_ARRAY_PRG12__a8fb:                     ; [$a8fb]
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;
 ; XREFS:
 ;     SplashAnimation_Maybe_AnimPlayerStep
@@ -12138,7 +12184,7 @@ SplashAnimation_A90F:                       ; [$a90f]
 ; TODO: Document SplashAnimation_RunOutro
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12274,7 +12320,7 @@ SplashAnimation_Something_A99C:             ; [$a99c]
 ; TODO: Document FUN_PRG12__a9a2
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12387,7 +12433,8 @@ BYTE_ARRAY_PRG12__aa18:                     ; [$aa18]
 ; TODO: Document FUN_PRG12__aa20
 ;
 ; INPUTS:
-;     None.
+;     X
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -12536,7 +12583,7 @@ SplashAnimation_FuncAA94:                   ; [$aa94]
     CLC
     ADC (Temp_Int24),Y
     CMP #$f0
-    BCS @LAB_PRG12__ab16
+    BCS @_return
     STA a:ScreenBuffer_138_
     INY
     LDA (Temp_Int24),Y
@@ -12595,7 +12642,7 @@ SplashAnimation_FuncAA94:                   ; [$aa94]
     PLA
     TAX
 
-  @LAB_PRG12__ab16:                         ; [$ab16]
+  @_return:                                 ; [$ab16]
     RTS
 
 ;
