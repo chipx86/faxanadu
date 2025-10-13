@@ -229,6 +229,20 @@ pre {
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
+; Direction
+;============================================================================
+</div><div class="equs"><div class="n">DIRECTION_LEFT</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">DIRECTION_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">DIRECTION_UP</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">DIRECTION_DOWN</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SCREEN_SCROLL_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
 ; FacingDirectionBit
 ;============================================================================
 </div><div class="equs"><div class="n">FACING_LEFT</div> <div class="i">EQU</div> <div class="v">$00</div>
@@ -1437,6 +1451,8 @@ pre {
 
 <div class="n">QUEST_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$02</div>
 
+<div class="n">QUEST_SPRING_OF_TOWER</div> <div class="i">EQU</div> <div class="v">$04</div>
+
 <div class="n">QUEST_SOMETHING_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$08</div>
 
 <div class="n">QUEST_MATTOCK</div> <div class="i">EQU</div> <div class="v">$10</div>
@@ -1494,20 +1510,6 @@ pre {
 ; ScreenExtraInfo
 ;============================================================================
 </div><div class="equs"><div class="n">SCREEN_HAS_SPECIAL_EVENT</div> <div class="i">EQU</div> <div class="v">$80</div>
-
-</div><span class="l"></span>
-<div class="cp">;============================================================================
-; ScreenScrollDirection
-;============================================================================
-</div><div class="equs"><div class="n">SCREEN_SCROLL_LEFT</div> <div class="i">EQU</div> <div class="v">$00</div>
-
-<div class="n">SCREEN_SCROLL_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
-
-<div class="n">SCREEN_SCROLL_UP</div> <div class="i">EQU</div> <div class="v">$02</div>
-
-<div class="n">SCREEN_SCROLL_DOWN</div> <div class="i">EQU</div> <div class="v">$03</div>
-
-<div class="n">SCREEN_SCROLL_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1686,6 +1688,158 @@ pre {
 <div class="n">BIT_CLEAR_ELIXIR</div> <div class="i">EQU</div> <div class="v">$f7</div>
 
 <div class="n">BIT_ALL</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteAction
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_ACTION_FACE_PLAYER_X</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_ACTION_FLIP_X_DIRECTION</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_ACTION_FACE_PLAYER_Y</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_ACTION_FLIP_Y_DIRECTION</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_ACTION_RANDOMLY_FLIP_Y_DIRECTION</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">SPRITE_ACTION_FLY_UP</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SPRITE_ACTION_CAST_MAGIC</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SpriteBehavior
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_BEHAVIOR_WAIT</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_BEHAVIOR_BOUNCE_AND_EXPIRE</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_BEHAVIOR_GARBLED_3</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_BEHAVIOR_WALK_FORWARD</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_BEHAVIOR_ENEMY_UNUSED_18</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SPRITE_BEHAVIOR_MAYBE_LIGHTNINGBALL</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">SPRITE_BEHAVIOR_LIGHTNINBALL_CHARRON</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">SPRITE_BEHAVIOR_HOP</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">SPRITE_BEHAVIOR_RIPASHEIKU</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">SPRITE_BEHAVIOR_BORABOHRA</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">SPRITE_BEHAVIOR_PAKUKAME</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">SPRITE_BEHAVIOR_ZORUGERIRU</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">SPRITE_BEHAVIOR_KING_GRIEVE</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">SPRITE_BEHAVIOR_SHADOW_EURA</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">SPRITE_BEHAVIOR_MAYBE_MOVE_XY</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">SPRITE_BEHAVIOR_SOMETHING_ZORADOHNA_18</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">SPRITE_BEHAVIOR_MOVE_VERT</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">SPRITE_BEHAVIOR_FALL</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">SPRITE_BEHAVIOR_NECRON_AIDES</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">SPRITE_BEHAVIOR_BIHORUDA</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">SPRITE_BEHAVIOR_LILITH</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">SPRITE_BEHAVIOR_YUINARU</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">SPRITE_BEHAVIOR_NASH</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">SPRITE_BEHAVIOR_SOMETHING_GARBLED_81</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">SPRITE_BEHAVIOR_SOMETHING_GARBLED_10</div> <div class="i">EQU</div> <div class="v">$1c</div>
+
+<div class="n">SPRITE_BEHAVIOR_UNKNOWN_29</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+<div class="n">SPRITE_BEHAVIOR_CLEAR_READY_SET_BIT_7</div> <div class="i">EQU</div> <div class="v">$1e</div>
+
+<div class="n">SPRITE_BEHAVIOR_FLASH_DAMAGE_PLAYER</div> <div class="i">EQU</div> <div class="v">$1f</div>
+
+<div class="n">SPRITE_BEHAVIOR_GIANT_BEES</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">SPRITE_BEHAVIOR_NAGA</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">SPRITE_BEHAVIOR_YAREEKA</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">SPRITE_BEHAVIOR_MAGMAN</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">SPRITE_BEHAVIOR_ENEMY_UNUSED_36</div> <div class="i">EQU</div> <div class="v">$24</div>
+
+<div class="n">SPRITE_BEHAVIOR_ENEMY_UNUSED_39</div> <div class="i">EQU</div> <div class="v">$25</div>
+
+<div class="n">SPRITE_BEHAVIOR_ENEMY_UNUSED_43</div> <div class="i">EQU</div> <div class="v">$26</div>
+
+<div class="n">SPRITE_BEHAVIOR_TAMAZUTSU</div> <div class="i">EQU</div> <div class="v">$27</div>
+
+<div class="n">SPRITE_BEHAVIOR_SIR_GAWAINE_WOLFMAN</div> <div class="i">EQU</div> <div class="v">$28</div>
+
+<div class="n">SPRITE_BEHAVIOR_ITEM_OINTMENT</div> <div class="i">EQU</div> <div class="v">$29</div>
+
+<div class="n">SPRITE_BEHAVIOR_ITEM_GLOVE</div> <div class="i">EQU</div> <div class="v">$2a</div>
+
+<div class="n">SPRITE_BEHAVIOR_BATTLE_SUIT_DROPPED_BY_ZORADOHNA</div> <div class="i">EQU</div> <div class="v">$2b</div>
+
+<div class="n">SPRITE_BEHAVIOR_BATTLE_HELMET_DROPPED_BY_ZORADOHNA</div> <div class="i">EQU</div> <div class="v">$2c</div>
+
+<div class="n">SPRITE_BEHAVIOR_DRAGON_SLAYER_DROPPED_BY_KING_GRIEVE</div> <div class="i">EQU</div> <div class="v">$2d</div>
+
+<div class="n">SPRITE_BEHAVIOR_MATTOCK_DROPPED_BY_RPIASHEIKU</div> <div class="i">EQU</div> <div class="v">$2e</div>
+
+<div class="n">SPRITE_BEHAVIOR_WING_BOOTS_DROPPED_BY_ZORUGERIRU</div> <div class="i">EQU</div> <div class="v">$2f</div>
+
+<div class="n">SPRITE_BEHAVIOR_BLACK_ONYX_DROPPED_FROM_ZORADOHNA</div> <div class="i">EQU</div> <div class="v">$30</div>
+
+<div class="n">SPRITE_BEHAVIOR_PENDANT_DROPPED_FROM_RIPASHEIKU</div> <div class="i">EQU</div> <div class="v">$31</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_50</div> <div class="i">EQU</div> <div class="v">$32</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_51</div> <div class="i">EQU</div> <div class="v">$33</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_52</div> <div class="i">EQU</div> <div class="v">$34</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_53</div> <div class="i">EQU</div> <div class="v">$35</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_54</div> <div class="i">EQU</div> <div class="v">$36</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_55</div> <div class="i">EQU</div> <div class="v">$37</div>
+
+<div class="n">SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_56</div> <div class="i">EQU</div> <div class="v">$38</div>
+
+<div class="n">SPRITE_BEHAVIOR_FOUNTAIN</div> <div class="i">EQU</div> <div class="v">$39</div>
+
+<div class="n">SPRITE_BEHAVIOR_SPRING_OF_FORTRESS</div> <div class="i">EQU</div> <div class="v">$3a</div>
+
+<div class="n">SPRITE_BEHAVIOR_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$3b</div>
+
+<div class="n">SPRITE_BEHAVIOR_SPRING_OF_JOKER</div> <div class="i">EQU</div> <div class="v">$3c</div>
+
+<div class="n">SPRITE_BEHAVIOR_SHOW_MAGICAL_ROD</div> <div class="i">EQU</div> <div class="v">$3d</div>
+
+<div class="n">SPRITE_BEHAVIOR_EFFECT_BOSS_DEATH</div> <div class="i">EQU</div> <div class="v">$3e</div>
+
+<div class="n">SPRITE_BEHAVIOR_BUZZ_AROUND</div> <div class="i">EQU</div> <div class="v">$3f</div>
+
+<div class="n">SPRITE_BEHAVIOR_ISHIISU</div> <div class="i">EQU</div> <div class="v">$40</div>
+
+<div class="n">SPRITE_BEHAVIOR_EXECUTION_HOOD</div> <div class="i">EQU</div> <div class="v">$41</div>
+
+<div class="n">SPRITE_BEHAVIOR_CLEAR_BIT_7</div> <div class="i">EQU</div> <div class="v">$7f</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1873,7 +2027,7 @@ pre {
 
 <div class="n">SPRITE_MAGIC_GARBLED_81</div> <div class="i">EQU</div> <div class="v">$51</div>
 
-<div class="n">SPRITE_EFFECT_FOUNTAIN</div> <div class="i">EQU</div> <div class="v">$52</div>
+<div class="n">SPRITE_FOUNTAIN</div> <div class="i">EQU</div> <div class="v">$52</div>
 
 <div class="n">SPRITE_MAGIC_83</div> <div class="i">EQU</div> <div class="v">$53</div>
 
@@ -1903,11 +2057,11 @@ pre {
 
 <div class="n">SPRITE_OBJ_OINTMENT</div> <div class="i">EQU</div> <div class="v">$60</div>
 
-<div class="n">SPRITE_EFFECT_97</div> <div class="i">EQU</div> <div class="v">$61</div>
+<div class="n">SPRITE_SPRING_OF_TRUNK</div> <div class="i">EQU</div> <div class="v">$61</div>
 
-<div class="n">SPRITE_EFFECT_98</div> <div class="i">EQU</div> <div class="v">$62</div>
+<div class="n">SPRITE_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$62</div>
 
-<div class="n">SPRITE_EFFECT_99</div> <div class="i">EQU</div> <div class="v">$63</div>
+<div class="n">SPRITE_SPRING_OF_TOWER</div> <div class="i">EQU</div> <div class="v">$63</div>
 
 <div class="n">SPRITE_EFFECT_BOSS_DEATH</div> <div class="i">EQU</div> <div class="v">$64</div>
 
@@ -1919,15 +2073,15 @@ pre {
 ;============================================================================
 </div><div class="equs"><div class="n">SPRITE_FLAGS_UNSET</div> <div class="i">EQU</div> <div class="v">$00</div>
 
-<div class="n">SPRITE_FLAGS_MOVE_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
+<div class="n">SPRITE_FLAGS_FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$01</div>
 
 <div class="n">SPRITE_FLAGS_UNKNOWN_2</div> <div class="i">EQU</div> <div class="v">$02</div>
 
-<div class="n">SPRITE_FLAGS_MAYBE_MOVE</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">SPRITE_FLAGS_CAN_MOVE</div> <div class="i">EQU</div> <div class="v">$04</div>
 
 <div class="n">SPRITE_FLAGS_UNKNOWN_3</div> <div class="i">EQU</div> <div class="v">$08</div>
 
-<div class="n">SPRITE_FLAGS_MAYBE_HIDDEN</div> <div class="i">EQU</div> <div class="v">$10</div>
+<div class="n">SPRITE_FLAGS_VISIBLE</div> <div class="i">EQU</div> <div class="v">$10</div>
 
 <div class="n">SPRITE_FLAGS_UNKNOWN_5</div> <div class="i">EQU</div> <div class="v">$20</div>
 
@@ -1939,15 +2093,13 @@ pre {
 
 <div class="n">SPRITE_FLAGS_CLEAR_BEHAVIOR_READY</div> <div class="i">EQU</div> <div class="v">$bf</div>
 
-<div class="n">SPRITE_FLAGS_CLEAR_MAYBE_HIDDEN</div> <div class="i">EQU</div> <div class="v">$ef</div>
+<div class="n">SPRITE_FLAGS_CLEAR_VISIBLE</div> <div class="i">EQU</div> <div class="v">$ef</div>
 
-<div class="n">SPRITE_FLAGS_CLEAR_MAYBE_MOVE</div> <div class="i">EQU</div> <div class="v">$fb</div>
+<div class="n">SPRITE_FLAGS_CLEAR_CAN_MOVE</div> <div class="i">EQU</div> <div class="v">$fb</div>
 
 <div class="n">SPRITE_FLAGS_CLEAR_UNKNOWN_2</div> <div class="i">EQU</div> <div class="v">$fd</div>
 
-<div class="n">SPRITE_FLAGS_CLEAR_MOVE_RIGHT</div> <div class="i">EQU</div> <div class="v">$fe</div>
-
-<div class="n">New_Name</div> <div class="i">EQU</div> <div class="v">$ff</div>
+<div class="n">SPRITE_FLAGS_CLEAR_FACING_RIGHT</div> <div class="i">EQU</div> <div class="v">$fe</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1965,9 +2117,25 @@ pre {
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
-; SpriteSubtype
+; SpriteOp
 ;============================================================================
-</div><div class="equs"><div class="n">SPRITE_SUBTYPE_CLEAR_BIT_7</div> <div class="i">EQU</div> <div class="v">$7f</div>
+</div><div class="equs"><div class="n">SPRITE_OP_SWITCH_BEHAVIOR</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE_OP_MAYBE_DISABLE_AND_GOTO</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE_OP_RUN_ACTION</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">SPRITE_OP_CHECK_DISTANCE</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">SPRITE_OP_FINISH_BEHAVIOR</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">SPRITE_OP_GOTO</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">SPRITE_OP_ADD_TO_SPRITE_DATA</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">SPRITE_OP_SET_PHASE</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">SPRITE_OP_END_SCRIPT</div> <div class="i">EQU</div> <div class="v">$ff</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================

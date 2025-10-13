@@ -359,7 +359,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;============================================================================
 </div><span class="l"><a name="Player_ReduceHP" href="#Player_ReduceHP" class="la">Player_ReduceHP:</a><span class="ce">; [$c08e]</span></span>
 <div class="c">;
@@ -601,13 +601,13 @@ pre {
 ;     <a href="RAM.html#CurrentSprites_HitCounter">CurrentSprites_HitCounter</a>:
 ;         The cleared sprite hit counters.
 ;
-;     <a href="RAM.html#CurrentSprites_Subtypes">CurrentSprites_Subtypes</a>:
+;     <a href="RAM.html#CurrentSprites_Behaviors">CurrentSprites_Behaviors</a>:
 ;         The cleared sprite subtypes.
 ;
 ;     <a href="RAM.html#ScreenColorMode">ScreenColorMode</a>:
 ;         The new color mode with greyscale removed.
 ;
-;     <a href="RAM.html#Temp_03C7">Temp_03C7</a>:
+;     <a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a>:
 ;         Set to 0xFF.
 ;
 ; CALLS:
@@ -628,7 +628,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_HP">CurrentSprites_HP</a>,X</span></span><span class="ce">; Set sprite hit points to 0.</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_HitCounter">CurrentSprites_HitCounter</a>,X</span></span><span class="ce">; Set sprite hit counter to 0.</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_Subtypes">CurrentSprites_Subtypes</a>,X</span></span><span class="ce">; Set sprite subtype to 0.</span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_Behaviors">CurrentSprites_Behaviors</a>,X</span></span><span class="ce">; Set sprite subtype to 0.</span></span>
 <span class="l"><span><span class="i">DEX</span></span><span class="ce">; X--</span></span>
 <span class="l"><span><span class="i">BPL</span> <span class="o"><a href="#@_clearSpritesLoop">@_clearSpritesLoop</a></span></span><span class="ce">; If we're not done, loop.</span></span>
 <span class="l"></span>
@@ -638,7 +638,7 @@ pre {
 ;
 </div><span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#PPUResetOffset">PPUResetOffset</a></span></span><span class="ce">; Reset the PPU offset.</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o"><a href="RAM.html#ScreenColorMode">ScreenColorMode</a></span></span><span class="ce">; Load the current screen color mode.</span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$fe</span></span><span class="ce">; Set to color mode (clear bit 1)</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#ScreenColorMode">ScreenColorMode</a></span></span><span class="ce">; Store the new color mode.</span></span>
@@ -1042,7 +1042,7 @@ pre {
 ;     <a href="RAM.html#CurrentSprites_HitByMagicBehavior">CurrentSprites_HitByMagicBehavior</a>:
 ;         The updated behaviors when hit by magic.
 ;
-;     <a href="RAM.html#CurrentSprites_XPos">CurrentSprites_XPos</a>:
+;     <a href="RAM.html#CurrentSprites_XPos_Full">CurrentSprites_XPos_Full</a>:
 ;         The updated sprite X positions.
 ;
 ;     <a href="RAM.html#CurrentSprites_YPos">CurrentSprites_YPos</a>:
@@ -1060,7 +1060,7 @@ pre {
 ;     <a href="RAM.html#CurrentSprites_BehaviorAddrs_U">CurrentSprites_BehaviorAddrs_U</a>:
 ;         The updated sprite behavior address upper bytes.
 ;
-;     <a href="RAM.html#CurrentSprites_Subtypes">CurrentSprites_Subtypes</a>:
+;     <a href="RAM.html#CurrentSprites_Behaviors">CurrentSprites_Behaviors</a>:
 ;         The updated sprite subtypes.
 ;
 ; CALLS:
@@ -1083,7 +1083,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_HitByMagicBehavior">CurrentSprites_HitByMagicBehavior</a>,X</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentSprite_XPos">CurrentSprite_XPos</a></span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_XPos">CurrentSprites_XPos</a>,X</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_XPos_Full">CurrentSprites_XPos_Full</a>,X</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentSprite_YPos">CurrentSprite_YPos</a></span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_YPos">CurrentSprites_YPos</a>,X</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentSprite_Entity">CurrentSprite_Entity</a></span></span></span>
@@ -1101,7 +1101,7 @@ pre {
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ad2e,Y</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorAddrs_U">CurrentSprites_BehaviorAddrs_U</a>,X</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_Subtypes">CurrentSprites_Subtypes</a>,X</span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_Behaviors">CurrentSprites_Behaviors</a>,X</span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@LAB_PRG15_MIRROR__c252" href="#@LAB_PRG15_MIRROR__c252" class="lla">@LAB_PRG15_MIRROR__c252:</a><span class="ce">; [$c252]</span></span>
@@ -4845,8 +4845,8 @@ pre {
 ;         to 0x00).
 ;
 ; XREFS:
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeHorizDirection">CurrentSprite_RandomlyChangeHorizDirection</a>
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeVertDirection">CurrentSprite_RandomlyChangeVertDirection</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipXDirection">SpriteAction_RandomlyFlipXDirection</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipYDirection">SpriteAction_RandomlyFlipYDirection</a>
 ;============================================================================
 </div><span class="l"><a name="GetRandom" href="#GetRandom" class="la">GetRandom:</a><span class="ce">; [$ca6e]</span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o"><a href="RAM.html#Random_Offset">Random_Offset</a></span></span><span class="ce">; Load the current offset into the bank.</span></span>
@@ -5546,8 +5546,6 @@ Don't reset</span></span>
 ;     <a href="#FUN_PRG15_MIRROR__ee93">FUN_PRG15_MIRROR__ee93</a>
 ;     <a href="#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a>
 ;     <a href="#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a>
-;     <a href="#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
 ;     <a href="#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
@@ -5580,6 +5578,8 @@ Don't reset</span></span>
 ;     <a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;     <a href="#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
+;     <a href="#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a>
+;     <a href="#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a>
 ;     <a href="#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
 ;     <a href="#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="#TextBox_Maybe_ShowNextCharFromBank">TextBox_Maybe_ShowNextCharFromBank</a>
@@ -7461,10 +7461,10 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG14.html#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
-;     <a href="PRG14.html#SpriteBehavior__ab67">SpriteBehavior__ab67</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
 ;     <a href="PRG14.html#Sprites_ReplaceWithCoinDrop">Sprites_ReplaceWithCoinDrop</a>
 ;     <a href="#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;     <a href="#Game_UnlockDoor">Game_UnlockDoor</a>
@@ -15013,7 +15013,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
 ;     <a href="PRG14.html#FUN_PRG14__854c">FUN_PRG14__854c</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
 ;     <a href="#Area_CanMoveImmediatelyRight">Area_CanMoveImmediatelyRight</a>
 ;     <a href="#Area_CanPlayerMoveAtY">Area_CanPlayerMoveAtY</a>
 ;     <a href="#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a>
@@ -15289,7 +15289,7 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility">CurrentSprite_CalculateVisibility</a>
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility_MaybeWithArg">CurrentSprite_CalculateVisibility_MaybeWithArg</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
 ;     <a href="#CastMagic_CalculateVisibility">CastMagic_CalculateVisibility</a>
 ;     <a href="#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
 ;============================================================================
@@ -16434,7 +16434,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Player_HandleDeath">Player_HandleDeath</a>
 ;============================================================================
 </div><span class="l"><a name="Player_DrawBody" href="#Player_DrawBody" class="la">Player_DrawBody:</a><span class="ce">; [$ebee]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ebf4">@LAB_PRG15_MIRROR__ebf4</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -16501,7 +16501,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">PLA</span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$ec49,X</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a></span></span></span>
 <span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -16590,7 +16590,7 @@ and address bytes and all the data bytes.</span></span>
 <span class="l"><span><span class="i">ORA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$eca4,Y</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a></span></span></span>
 <span class="l"></span>
 <span class="l"><a name="@_return" href="#@_return" class="lla">@_return:</a><span class="ce">; [$eca1]</span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
@@ -17748,13 +17748,13 @@ and address bytes and all the data bytes.</span></span>
 ;         Clobbered.
 ;
 ; XREFS:
-;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
-;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
-;     <a href="PRG14.html#SpriteBehavior__a3bf">SpriteBehavior__a3bf</a>
-;     <a href="PRG14.html#SpriteBehavior__a3ef">SpriteBehavior__a3ef</a>
-;     <a href="PRG14.html#SpriteBehavior__a413">SpriteBehavior__a413</a>
-;     <a href="PRG14.html#SpriteBehavior__a437">SpriteBehavior__a437</a>
-;     <a href="PRG14.html#SpriteBehavior__a45b">SpriteBehavior__a45b</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleHelmetDroppedByZoradohna">SpriteBehavior_BattleHelmetDroppedByZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleSuitDroppedByZoradohna">SpriteBehavior_BattleSuitDroppedByZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_BlackOnyxDropFromZoradohna">SpriteBehavior_BlackOnyxDropFromZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_DragonSlayerDroppedByKingGrieve">SpriteBehavior_DragonSlayerDroppedByKingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_MattockDroppedFromRipasheiku">SpriteBehavior_MattockDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_PendantDroppedFromRipasheiku">SpriteBehavior_PendantDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_WingBootsDroppedByZorugeriru">SpriteBehavior_WingBootsDroppedByZorugeriru</a>
 ;============================================================================
 </div><span class="l"><a name="Maybe_IsSpriteEntityNotOnScreen" href="#Maybe_IsSpriteEntityNotOnScreen" class="la">Maybe_IsSpriteEntityNotOnScreen:</a><span class="ce">; [$efe6]</span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span><span class="ce">; <a href="RAM.html#Temp_00">Temp_00</a> = Sprite type for comparison.</span></span>
@@ -17878,7 +17878,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f01b
+; TODO: Document Sprite_SetPortraitAppearanceAddr
 ;
 ; INPUTS:
 ;     A
@@ -17889,13 +17889,22 @@ and address bytes and all the data bytes.</span></span>
 ; XREFS:
 ;     <a href="#IScripts_DrawPortraitAnimationFrame">IScripts_DrawPortraitAnimationFrame</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__f01b" href="#FUN_PRG15_MIRROR__f01b" class="la">FUN_PRG15_MIRROR__f01b:</a><span class="ce">; [$f01b]</span></span>
+</div><span class="l"><a name="Sprite_SetPortraitAppearanceAddr" href="#Sprite_SetPortraitAppearanceAddr" class="la">Sprite_SetPortraitAppearanceAddr:</a><span class="ce">; [$f01b]</span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank2">CurrentROMBank2</a></span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$07</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
-<span class="l"><span><span class="i">TYA</span></span></span>
+<span class="l"></span>
+<div class="c">;
+; Load the address to load sprite images from.
+;
+; With the addresses stored in PRG7::800a and
+; PRG7::800b, this should put us at a starting
+; point of {@address PRG7::AFD5}, or {@address PRG7::B0D5} if offset
+; overflowed.
+;
+</div><span class="l"><span><span class="i">TYA</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">PHP</span></span></span>
@@ -17909,7 +17918,7 @@ and address bytes and all the data bytes.</span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f039
+; TODO: Document Sprite_SetPlayerAppearanceAddr
 ;
 ; INPUTS:
 ;     A
@@ -17923,14 +17932,23 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="#Player_DrawBody">Player_DrawBody</a>
 ;============================================================================
-</div><span class="l"><a name="FUN_PRG15_MIRROR__f039" href="#FUN_PRG15_MIRROR__f039" class="la">FUN_PRG15_MIRROR__f039:</a><span class="ce">; [$f039]</span></span>
+</div><span class="l"><a name="Sprite_SetPlayerAppearanceAddr" href="#Sprite_SetPlayerAppearanceAddr" class="la">Sprite_SetPlayerAppearanceAddr:</a><span class="ce">; [$f039]</span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank2">CurrentROMBank2</a></span></span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$07</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
 <span class="l"><span><span class="i">TYA</span></span></span>
-<span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
+<span class="l"></span>
+<div class="c">;
+; Load the address to load sprite images from.
+;
+; With the addresses stored in PRG7::8008 and
+; PRG7::8009, this should put us at a starting
+; point of {@address PRG7::A9F1}, or {@address PRG7::AAF1} if offset
+; overflowed.
+;
+</div><span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">PHP</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:#$8008</span></span></span>
@@ -17970,7 +17988,8 @@ and address bytes and all the data bytes.</span></span>
 <div class="c">;
 ; Load the address to load sprite images from.
 ;
-; With the addresses stored in PRG7::8006 and
+; With the addresses stored in <a href="PRG7.html#SPRITE_APPEARANCES_OFFSET">SPRITE_APPEARANCES_OFFSET</a>
+; and
 ; PRG7::8007, this should put us at a starting
 ; point of {@address PRG7::9036}, or {@address PRG7::9136} if offset
 ; overflowed.
@@ -18000,8 +18019,8 @@ and address bytes and all the data bytes.</span></span>
 ;     TODO
 ;
 ; XREFS:
-;     <a href="#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a>
-;     <a href="#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
+;     <a href="#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a>
+;     <a href="#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a>
 ;============================================================================
 </div><span class="l"><a name="Sprite_Maybe_SetAppearanceAddr" href="#Sprite_Maybe_SetAppearanceAddr" class="la">Sprite_Maybe_SetAppearanceAddr:</a><span class="ce">; [$f072]</span></span>
 <div class="c">;
@@ -18439,7 +18458,7 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>
 ;============================================================================
 </div><span class="l"><a name="FUN_PRG15_MIRROR__f24d" href="#FUN_PRG15_MIRROR__f24d" class="la">FUN_PRG15_MIRROR__f24d:</a><span class="ce">; [$f24d]</span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__f27d">@LAB_PRG15_MIRROR__f27d</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a></span></span></span>
@@ -18482,7 +18501,7 @@ and address bytes and all the data bytes.</span></span>
 ;         The palette index to restore.
 ;
 ; OUTPUTS:
-;     <a href="RAM.html#Temp_03C7">Temp_03C7</a>:
+;     <a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a>:
 ;         Set to 0xFF.
 ;
 ; CALLS:
@@ -18497,7 +18516,7 @@ and address bytes and all the data bytes.</span></span>
 ;============================================================================
 </div><span class="l"><a name="IScripts_ClearPortrait" href="#IScripts_ClearPortrait" class="la">IScripts_ClearPortrait:</a><span class="ce">; [$f281]</span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
-<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">STA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Game_WaitForOAMReset">Game_WaitForOAMReset</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Palette_SavedIndex">Palette_SavedIndex</a></span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Palette_LoadFromIndex">Palette_LoadFromIndex</a></span></span></span>
@@ -18539,7 +18558,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ;============================================================================
 </div><span class="l"><a name="IScripts_DrawPortraitAnimationFrame" href="#IScripts_DrawPortraitAnimationFrame" class="la">IScripts_DrawPortraitAnimationFrame:</a><span class="ce">; [$f29b]</span></span>
 <span class="l"><span><span class="i">PHA</span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">BMI</span> <span class="o"><a href="#POP_RETURN_F299">POP_RETURN_F299</a></span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprite_FlipMask">CurrentSprite_FlipMask</a></span></span></span>
@@ -18549,8 +18568,8 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ;
 </div><span class="l"><span><span class="i">LDA</span> <span class="o">#$90</span></span></span>
 <span class="l"><span><span class="i">STA</span> <span class="o"><a href="RAM.html#Maybe_CurrentSprite_PPUOffset">Maybe_CurrentSprite_PPUOffset</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Something_Temp03C7Times5">Something_Temp03C7Times5</a></span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#IScripts_GetPortraitOffset">IScripts_GetPortraitOffset</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; Update the eye animation.
@@ -18561,10 +18580,10 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Something_Temp03C7Times5">Something_Temp03C7Times5</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#IScripts_GetPortraitOffset">IScripts_GetPortraitOffset</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$f2df,X</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a></span></span></span>
 <span class="l"></span>
 <div class="c">;
 ; Update the mouth animation.
@@ -18575,14 +18594,14 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 <span class="l"><span><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">AND</span> <span class="o">#$01</span></span></span>
 <span class="l"><span><span class="i">TAX</span></span></span>
-<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#Something_Temp03C7Times5">Something_Temp03C7Times5</a></span></span></span>
+<span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#IScripts_GetPortraitOffset">IScripts_GetPortraitOffset</a></span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
 <span class="l"><span><span class="i">ADC</span> <span class="o">#$f2e1,X</span></span></span>
-<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a></span></span></span>
+<span class="l"><span><span class="i">JMP</span> <span class="o"><a href="#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a></span></span></span>
 </pre><pre><span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; TODO: Document Something_Temp03C7Times5
+; TODO: Document IScripts_GetPortraitOffset
 ;
 ; INPUTS:
 ;     None.
@@ -18593,12 +18612,12 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 ; XREFS:
 ;     <a href="#IScripts_DrawPortraitAnimationFrame">IScripts_DrawPortraitAnimationFrame</a>
 ;============================================================================
-</div><span class="l"><a name="Something_Temp03C7Times5" href="#Something_Temp03C7Times5" class="la">Something_Temp03C7Times5:</a><span class="ce">; [$f2d5]</span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+</div><span class="l"><a name="IScripts_GetPortraitOffset" href="#IScripts_GetPortraitOffset" class="la">IScripts_GetPortraitOffset:</a><span class="ce">; [$f2d5]</span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">CLC</span></span></span>
-<span class="l"><span><span class="i">ADC</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">ADC</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <div class="c">;
@@ -18635,7 +18654,7 @@ Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></sp
 <span class="l"><span><span class="i">PHA</span></span></span>
 <span class="l"><span><span class="i">LDX</span> <span class="o">#$08</span></span></span>
 <span class="l"><span><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdatePRGBank">MMC1_UpdatePRGBank</a></span></span></span>
-<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Temp_03C7">Temp_03C7</a></span></span></span>
+<span class="l"><span><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#IScript_PortraitID">IScript_PortraitID</a></span></span></span>
 <span class="l"><span><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><span><span class="i">TAY</span></span></span>
 <span class="l"><span><span class="i">LDA</span> <span class="o">a:#$800e</span></span></span>

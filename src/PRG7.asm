@@ -6,55 +6,32 @@
 
 BASE $8000
 
-    db $0c                                  ; Lower byte of the start of the
-                                            ; sprite entity images.
-    db $00                                  ; Upper byte of the start of the
-                                            ; sprite entity images (relative
-                                            ; to $8000).
-    db $00,$00,$00,$00                      ; [$8002] undefined
+    dw $000c                                ; Start of the sprite entity
+                                            ; images.
+    dw $0000,$0000                          ; [$8002] ushort
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
 ;
-DAT_PRG7__8006:                             ; [$8006]
-    db $36                                  ; [$8006] undefined
+SPRITE_APPEARANCES_OFFSET:                  ; [$8006]
+    dw $1036                                ; [$8006] ushort
 
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
 ;
-DAT_PRG7__8007:                             ; [$8007]
-    db $10                                  ; [$8007] undefined
+USHORT_PRG7__8008:                          ; [$8008]
+    dw $29f1                                ; [$8008] ushort
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__f039
+;     Sprite_SetPortraitAppearanceAddr
 ;
-DAT_PRG7__8008:                             ; [$8008]
-    db $f1                                  ; [$8008] undefined
+USHORT_PRG7__800a:                          ; [$800a]
+    dw $2fd5                                ; [$800a] ushort
 
-;
-; XREFS:
-;     FUN_PRG15_MIRROR__f039
-;
-DAT_PRG7__8009:                             ; [$8009]
-    db $29                                  ; [$8009] undefined
-
-;
-; XREFS:
-;     FUN_PRG15_MIRROR__f01b
-;
-DAT_PRG7__800a:                             ; [$800a]
-    db $d5                                  ; [$800a] undefined
-
-;
-; XREFS:
-;     FUN_PRG15_MIRROR__f01b
-;
-DAT_PRG7__800b:                             ; [$800b]
-    db $2f                                  ; [$800b] undefined
-
+USHORT_ARRAY_PRG7__800c:                    ; [$800c]
     dw $0066                                ; [0]:
                                             ; PRG7_SPRITE_8066
     dw $00e6                                ; [1]:
@@ -3395,152 +3372,172 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ;
     db $03,$01,$00,$00,$00,$00,$00,$00,$01,$00,$00,$00,$00,$00,$00,$00 ; [$9016]
                                                                        ; byte
-    hex 44 b2 de 7c 30 3c 5e 33 e4 e2 62 16 0c 16 53 21 ; [$9026] undefined
-    hex 52 12 57 12 6b 12 7f 12 93 12 a7 12 bb 12 cf 12 ; [$9036] undefined
-    hex e3 12 f7 12 0b 13 17 13 23 13 2f 13 3b 13 47 13 ; [$9046] undefined
-    hex 53 13 5f 13 6b 13 77 13 83 13 8f 13 a3 13 b7 13 ; [$9056] undefined
-    hex cb 13 df 13 f3 13 07 14 1b 14 2f 14 43 14 57 14 ; [$9066] undefined
-    hex 6b 14 7f 14 93 14 a7 14 bb 14 cf 14 e3 14 f7 14 ; [$9076] undefined
-    hex 0b 15 1f 15 33 15 47 15 5b 15 6f 15 83 15 97 15 ; [$9086] undefined
-    hex ab 15 bf 15 d3 15 e7 15 fb 15 0f 16 29 16 43 16 ; [$9096] undefined
-    hex 61 16 75 16 89 16 9d 16 b1 16 c4 16 d7 16 f0 16 ; [$90a6] undefined
-    hex 0f 17 2b 17 3f 17 52 17 71 17 8a 17 a3 17 c1 17 ; [$90b6] undefined
-    hex d4 17 e8 17 fc 17 10 18 24 18 38 18 51 18 6a 18 ; [$90c6] undefined
-    hex 7e 18 92 18 a6 18 ba 18 ce 18 e2 18 f6 18 0a 19 ; [$90d6] undefined
-    hex 1e 19 32 19 46 19 59 19 6d 19 81 19 89 19 91 19 ; [$90e6] undefined
-    hex 99 19 a5 19 b5 19 c9 19 2e 1b 42 1b 5c 1b 7c 1b ; [$90f6] undefined
-    hex a2 1b ce 1b fa 1b 26 1c 52 1c 5e 1c 6a 1c 76 1c ; [$9106] undefined
-    hex 82 1c 8e 1c ba 1c ee 1c 21 1d 55 1d 89 1d bd 1d ; [$9116] undefined
-    hex f1 1d 25 1e 61 1e 9f 1e d5 1e 0a 1f 2e 1f 52 1f ; [$9126] undefined
-    hex 6e 1f cc 1f 3f 20 b6 20 d6 20 f6 20 16 21 22 21 ; [$9136] undefined
-    hex 2e 21 36 21 9e 21 05 22 74 22 e4 22 4c 23 b4 23 ; [$9146] undefined
-    hex 1a 24 89 24 f9 24 dd 19 e3 19 5f 25 6b 25 77 25 ; [$9156] undefined
-    hex 83 25 8f 25 9b 25 af 25 c3 25 d5 25 e1 25 ed 25 ; [$9166] undefined
-    hex f9 25 05 26 0b 26 11 26 1d 26 29 26 35 26 41 26 ; [$9176] undefined
-    hex 4d 26 e9 19 f5 19 01 1a 0d 1a 2e 12 19 1a 2c 1a ; [$9186] undefined
-    hex 40 1a 54 1a 67 1a 7b 1a 8f 1a 99 1a a7 1a 59 26 ; [$9196] undefined
-    hex 65 26 71 26 85 26 99 26 ad 26 c1 26 d7 26 ed 26 ; [$91a6] undefined
-    hex 01 27 15 27 29 27 3d 27 50 27 63 27 77 27 8b 27 ; [$91b6] undefined
-    hex a5 27 bf 27 d3 27 e7 27 fb 27 0f 28 23 28 37 28 ; [$91c6] undefined
-    hex 4b 28 5f 28 72 28 85 28 99 28 ad 28 c1 28 b6 1a ; [$91d6] undefined
-    hex c2 1a ce 1a da 1a d5 28 dd 28 c1 29 cd 29 e5 28 ; [$91e6] undefined
-    hex dd 28 ed 28 f9 28 f9 28 34 12 40 12 46 12 4c 12 ; [$91f6] undefined
-    hex 1d 29 29 29 35 29 49 29 5d 29 79 29 9d 29 e6 1a ; [$9206] undefined
-    hex f2 1a 22 1b 28 1b fe 1a 0a 1b 16 1b 05 29 11 29 ; [$9216] undefined
-    hex d9 29 e5 29 cd 29 cd 29 00 00 00 04 72 00 11 00 ; [$9226] undefined
-    hex 00 08 76 00 77 00 78 00 79 00 00 00 00 04 73 00 ; [$9236] undefined
-    hex 00 00 00 04 74 00 00 00 00 04 75 00 00 00 00 04 ; [$9246] undefined
-    hex ff 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$9256] undefined
-    hex 02 06 02 07 02 31 00 00 08 08 02 09 02 0a 02 0b ; [$9266] undefined
-    hex 02 0c 02 0d 02 0e 02 0f 02 31 00 00 08 00 02 01 ; [$9276] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 0f 02 31 00 00 ; [$9286] undefined
-    hex 08 08 02 09 02 0a 02 03 02 04 02 05 02 06 02 0f ; [$9296] undefined
-    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$92a6] undefined
-    hex 02 06 02 07 02 31 00 00 08 08 02 09 02 0a 02 0b ; [$92b6] undefined
-    hex 02 0c 02 0d 02 0e 02 0f 02 31 00 00 08 00 02 01 ; [$92c6] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$92d6] undefined
-    hex 08 00 02 01 02 08 02 09 02 0a 02 0b 02 0c 02 0d ; [$92e6] undefined
-    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$92f6] undefined
-    hex 02 0e 02 0f 02 11 00 00 08 00 03 01 03 02 03 03 ; [$9306] undefined
-    hex 03 11 00 00 08 04 03 05 03 06 03 07 03 11 00 00 ; [$9316] undefined
-    hex 08 00 02 01 02 02 02 03 02 11 00 00 08 04 02 05 ; [$9326] undefined
-    hex 02 02 02 03 02 11 00 00 08 00 03 01 03 02 03 03 ; [$9336] undefined
-    hex 03 11 00 00 08 00 03 04 03 02 03 05 03 11 00 00 ; [$9346] undefined
-    hex 08 00 03 01 03 02 03 03 03 11 00 00 08 04 03 01 ; [$9356] undefined
-    hex 03 02 03 03 03 11 00 00 08 04 03 01 03 05 03 06 ; [$9366] undefined
-    hex 03 11 00 00 08 00 03 01 03 02 03 03 03 11 00 00 ; [$9376] undefined
-    hex 08 00 03 04 03 02 03 05 03 31 00 00 08 00 02 01 ; [$9386] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$9396] undefined
-    hex 08 00 02 01 02 08 02 09 02 0a 02 0b 02 07 42 06 ; [$93a6] undefined
-    hex 42 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 ; [$93b6] undefined
-    hex 03 06 03 07 03 31 00 00 08 00 03 01 03 08 03 09 ; [$93c6] undefined
-    hex 03 0a 03 0b 03 06 03 07 03 31 00 00 08 00 03 01 ; [$93d6] undefined
-    hex 03 0c 03 0d 03 0e 03 0f 03 06 03 07 03 31 00 00 ; [$93e6] undefined
-    hex 08 00 03 01 03 02 03 03 03 04 03 05 03 06 03 07 ; [$93f6] undefined
-    hex 03 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d ; [$9406] undefined
-    hex 03 0e 03 0f 03 31 00 00 08 00 03 01 03 02 03 03 ; [$9416] undefined
-    hex 03 04 03 05 03 06 03 0f 03 31 00 00 08 00 02 01 ; [$9426] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$9436] undefined
-    hex 08 00 02 01 02 02 02 03 02 04 02 05 02 08 02 09 ; [$9446] undefined
-    hex 02 31 00 00 08 00 02 01 02 0a 02 0b 02 10 02 11 ; [$9456] undefined
-    hex 02 06 02 07 02 31 00 00 08 0c 02 0d 02 0e 02 0f ; [$9466] undefined
-    hex 02 10 02 11 02 08 02 09 02 31 00 00 08 00 02 01 ; [$9476] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$9486] undefined
-    hex 08 08 02 09 02 02 02 03 02 04 02 0a 02 0b 02 0c ; [$9496] undefined
-    hex 02 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 ; [$94a6] undefined
-    hex 03 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 0b ; [$94b6] undefined
-    hex 03 0c 03 0d 03 0e 03 0f 03 31 00 00 08 10 03 11 ; [$94c6] undefined
-    hex 03 12 03 13 03 14 03 15 03 0e 03 07 03 31 00 00 ; [$94d6] undefined
-    hex 08 00 03 01 03 02 03 03 03 04 03 05 03 06 03 07 ; [$94e6] undefined
-    hex 03 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d ; [$94f6] undefined
-    hex 03 0e 03 0f 03 31 00 00 08 08 03 09 03 0a 03 0b ; [$9506] undefined
-    hex 03 0c 03 0d 03 06 03 0f 03 31 00 00 08 00 02 01 ; [$9516] undefined
-    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$9526] undefined
-    hex 08 00 02 01 02 08 02 09 02 0a 02 0b 02 0c 02 0d ; [$9536] undefined
-    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$9546] undefined
-    hex 02 06 02 07 02 31 00 00 08 00 02 01 02 02 02 03 ; [$9556] undefined
-    hex 02 04 02 05 02 08 02 09 02 31 00 00 08 00 02 01 ; [$9566] undefined
-    hex 02 02 02 03 02 04 02 05 02 0a 02 0b 02 31 00 00 ; [$9576] undefined
-    hex 08 00 02 01 02 0c 02 0d 02 0e 02 0f 02 10 02 11 ; [$9586] undefined
-    hex 02 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 ; [$9596] undefined
-    hex 03 00 03 01 03 31 00 00 08 06 03 07 03 08 03 09 ; [$95a6] undefined
-    hex 03 0a 03 0b 03 06 03 07 03 31 00 00 08 00 03 01 ; [$95b6] undefined
-    hex 03 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 ; [$95c6] undefined
-    hex 08 08 03 09 03 0a 03 0b 03 04 03 05 03 0c 03 0d ; [$95d6] undefined
-    hex 02 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 ; [$95e6] undefined
-    hex 03 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 0b ; [$95f6] undefined
-    hex 03 0c 03 0d 03 0e 03 0f 03 32 f8 00 10 0c 01 00 ; [$9606] undefined
-    hex 03 01 03 0d 01 02 02 03 02 ff 04 02 05 02 ff 06 ; [$9616] undefined
-    hex 03 07 03 32 f8 00 10 0c 01 08 03 09 03 0d 01 02 ; [$9626] undefined
-    hex 02 03 02 ff 04 02 05 02 ff 0a 03 0b 03 33 f0 00 ; [$9636] undefined
-    hex 18 ff ff 08 03 09 03 0e 01 0f 01 02 02 03 02 ff ; [$9646] undefined
-    hex ff 04 02 05 02 ff ff 0a 03 0b 03 31 00 00 08 08 ; [$9656] undefined
-    hex 03 09 03 02 02 03 02 04 02 05 02 06 03 07 03 31 ; [$9666] undefined
-    hex 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 06 ; [$9676] undefined
-    hex 02 07 02 31 00 00 08 08 02 09 02 0a 02 0b 02 0c ; [$9686] undefined
-    hex 02 0d 02 0e 02 0f 02 31 00 00 08 08 02 09 02 0a ; [$9696] undefined
-    hex 02 0b 02 0c 02 0d 02 10 02 11 02 31 00 00 08 ff ; [$96a6] undefined
-    hex 00 03 01 03 02 03 03 03 04 03 05 03 06 03 31 00 ; [$96b6] undefined
-    hex 00 08 ff 07 03 01 03 02 03 03 03 04 03 08 03 09 ; [$96c6] undefined
-    hex 03 23 f0 08 18 0f 03 10 03 0a 03 0b 03 ff 11 03 ; [$96d6] undefined
-    hex 0c 03 0d 03 ff ff 0e 03 06 03 33 f0 00 18 18 03 ; [$96e6] undefined
-    hex ff 00 03 01 03 19 03 1a 03 02 03 03 03 ff ff 04 ; [$96f6] undefined
-    hex 03 05 03 ff ff 06 03 07 03 42 00 f8 08 ff 1b 03 ; [$9706] undefined
-    hex 1c 03 00 03 01 03 ff 08 03 09 03 ff 0a 03 0b 03 ; [$9716] undefined
-    hex ff 0c 03 ff ff 31 00 00 08 0d 03 0e 03 0f 03 10 ; [$9726] undefined
-    hex 03 11 03 12 03 13 03 14 03 31 00 00 08 0d 03 0e ; [$9736] undefined
-    hex 03 0f 03 10 03 15 03 16 03 17 03 ff 33 f0 00 18 ; [$9746] undefined
-    hex 18 03 ff 00 03 01 03 19 03 1a 03 02 03 03 03 ff ; [$9756] undefined
-    hex ff 04 03 05 03 ff ff 1d 03 1e 03 32 f8 00 10 ff ; [$9766] undefined
-    hex 00 02 01 02 ff 02 02 03 02 08 02 04 02 05 02 ff ; [$9776] undefined
-    hex 06 02 07 02 32 f8 00 10 ff 00 02 01 02 ff 02 02 ; [$9786] undefined
-    hex 03 02 0d 02 09 02 0a 02 ff 0b 02 0c 02 33 f0 00 ; [$9796] undefined
-    hex 18 ff ff 0e 02 0f 02 14 02 15 02 10 02 11 02 ff ; [$97a6] undefined
-    hex ff 12 02 13 02 ff ff 06 02 07 02 31 00 00 08 ff ; [$97b6] undefined
-    hex 00 00 01 00 02 00 03 00 04 00 05 00 06 00 31 00 ; [$97c6] undefined
-    hex 00 08 07 00 08 00 09 00 0a 00 0b 00 0c 00 0d 00 ; [$97d6] undefined
-    hex 0e 00 31 00 00 08 00 03 01 03 02 03 03 03 04 03 ; [$97e6] undefined
-    hex 05 03 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 ; [$97f6] undefined
-    hex 0b 03 0c 03 0d 03 0e 03 0f 03 31 00 00 08 00 02 ; [$9806] undefined
-    hex 01 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 ; [$9816] undefined
-    hex 00 08 00 02 08 02 02 02 03 02 04 02 05 02 06 02 ; [$9826] undefined
-    hex 09 02 32 f8 00 10 ff 00 02 0a 02 ff 02 02 0b 02 ; [$9836] undefined
-    hex 11 02 0c 02 0d 02 ff 06 02 0e 02 32 f8 00 10 ff ; [$9846] undefined
-    hex 00 02 0a 02 ff 02 02 0b 02 12 02 0f 02 10 02 ff ; [$9856] undefined
-    hex 06 02 0e 02 31 00 00 08 00 02 01 02 02 02 03 02 ; [$9866] undefined
-    hex 04 02 05 02 06 02 07 02 31 00 00 08 00 02 01 02 ; [$9876] undefined
-    hex 08 02 03 02 09 02 0a 02 0b 02 0c 02 31 00 00 08 ; [$9886] undefined
-    hex 00 02 01 02 02 02 03 02 0d 02 0e 02 0f 02 10 02 ; [$9896] undefined
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$98a6] undefined
-    hex 06 02 07 02 31 00 00 08 08 02 09 02 0a 02 0b 02 ; [$98b6] undefined
-    hex 0c 02 0d 02 0e 02 0f 02 31 00 00 08 00 03 01 03 ; [$98c6] undefined
-    hex 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 08 ; [$98d6] undefined
-    hex 08 03 09 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f 03 ; [$98e6] undefined
-    hex 31 00 00 08 01 43 00 43 03 43 02 43 05 43 04 43 ; [$98f6] undefined
-    hex 07 43 06 43 31 00 00 08 09 43 08 43 0b 43 0a 43 ; [$9906] undefined
-    hex 0d 43 0c 43 0f 43 0e 43 31 00 00 08 00 03 01 03 ; [$9916] undefined
-    hex 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 08 ; [$9926] undefined
-    hex 08 03 09 03 0a 03 0b 03 0c 03 0d 03 06 03 0e 03 ; [$9936] undefined
+
+;
+; ▒█▒..█..
+; █▒█░..█.
+; ░█▒░░░█.
+; .░░█░█▒.
+; ..░░▒▒..
+; ..░█░█▒.
+; .█.█░░█▒
+; ..█░..░█
+;
+    db $44,$b2,$de,$7c,$30,$3c,$5e,$33,$e4,$e2,$62,$16,$0c,$16,$53,$21 ; [$9026]
+                                                                       ; byte
+
+;
+; XREFS:
+;     SPRITE_APPEARANCES_OFFSET [$PRG7::8006]
+;
+USHORT_PRG7__9036:                          ; [$9036]
+    dw $1252,$1257,$126b,$127f,$1293,$12a7,$12bb,$12cf ; [$9036] ushort
+    dw $12e3,$12f7,$130b,$1317,$1323,$132f,$133b,$1347 ; [$9046] ushort
+    dw $1353,$135f,$136b,$1377,$1383,$138f,$13a3,$13b7 ; [$9056] ushort
+    dw $13cb,$13df,$13f3,$1407,$141b,$142f,$1443,$1457 ; [$9066] ushort
+    dw $146b,$147f,$1493,$14a7,$14bb,$14cf,$14e3,$14f7 ; [$9076] ushort
+    dw $150b,$151f,$1533,$1547,$155b,$156f,$1583,$1597 ; [$9086] ushort
+    dw $15ab,$15bf,$15d3,$15e7,$15fb,$160f,$1629,$1643 ; [$9096] ushort
+    dw $1661,$1675,$1689,$169d,$16b1,$16c4,$16d7,$16f0 ; [$90a6] ushort
+    dw $170f,$172b,$173f,$1752,$1771,$178a,$17a3,$17c1 ; [$90b6] ushort
+    dw $17d4,$17e8,$17fc,$1810,$1824,$1838,$1851,$186a ; [$90c6] ushort
+    dw $187e,$1892,$18a6,$18ba,$18ce,$18e2,$18f6,$190a ; [$90d6] ushort
+    dw $191e,$1932,$1946,$1959,$196d,$1981,$1989,$1991 ; [$90e6] ushort
+    dw $1999,$19a5,$19b5,$19c9,$1b2e,$1b42,$1b5c,$1b7c ; [$90f6] ushort
+    dw $1ba2,$1bce,$1bfa,$1c26,$1c52,$1c5e,$1c6a,$1c76 ; [$9106] ushort
+    dw $1c82,$1c8e,$1cba,$1cee,$1d21,$1d55,$1d89,$1dbd ; [$9116] ushort
+    dw $1df1,$1e25,$1e61,$1e9f,$1ed5,$1f0a,$1f2e,$1f52 ; [$9126] ushort
+    dw $1f6e,$1fcc,$203f,$20b6,$20d6,$20f6,$2116,$2122 ; [$9136] ushort
+    dw $212e,$2136,$219e,$2205,$2274,$22e4,$234c,$23b4 ; [$9146] ushort
+    dw $241a,$2489,$24f9,$19dd,$19e3,$255f,$256b,$2577 ; [$9156] ushort
+    dw $2583,$258f,$259b,$25af,$25c3,$25d5,$25e1,$25ed ; [$9166] ushort
+    dw $25f9,$2605,$260b,$2611,$261d,$2629,$2635,$2641 ; [$9176] ushort
+    dw $264d,$19e9,$19f5,$1a01,$1a0d,$122e,$1a19,$1a2c ; [$9186] ushort
+    dw $1a40,$1a54,$1a67,$1a7b,$1a8f,$1a99,$1aa7,$2659 ; [$9196] ushort
+    dw $2665,$2671,$2685,$2699,$26ad,$26c1,$26d7,$26ed ; [$91a6] ushort
+    dw $2701,$2715,$2729,$273d,$2750,$2763,$2777,$278b ; [$91b6] ushort
+    dw $27a5,$27bf,$27d3,$27e7,$27fb,$280f,$2823,$2837 ; [$91c6] ushort
+    dw $284b,$285f,$2872,$2885,$2899,$28ad,$28c1,$1ab6 ; [$91d6] ushort
+    dw $1ac2,$1ace,$1ada,$28d5,$28dd,$29c1,$29cd,$28e5 ; [$91e6] ushort
+    dw $28dd,$28ed,$28f9,$28f9,$1234,$1240,$1246,$124c ; [$91f6] ushort
+    dw $291d,$2929,$2935,$2949,$295d,$2979,$299d,$1ae6 ; [$9206] ushort
+    dw $1af2,$1b22,$1b28,$1afe,$1b0a,$1b16,$2905,$2911 ; [$9216] ushort
+    dw $29d9,$29e5,$29cd,$29cd              ; [$9226] ushort
+
+    hex 00 00 00 04 72 00 11 00 00 08 76 00 77 00 78 00 ; [$922f] undefined
+    hex 79 00 00 00 00 04 73 00 00 00 00 04 74 00 00 00 ; [$923e] undefined
+    hex 00 04 75 00 00 00 00 04 ff 31 00 00 08 00 02 01 ; [$924e] undefined
+    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$925e] undefined
+    hex 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 0e 02 0f ; [$926e] undefined
+    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$927e] undefined
+    hex 02 06 02 0f 02 31 00 00 08 08 02 09 02 0a 02 03 ; [$928e] undefined
+    hex 02 04 02 05 02 06 02 0f 02 31 00 00 08 00 02 01 ; [$929e] undefined
+    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$92ae] undefined
+    hex 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 0e 02 0f ; [$92be] undefined
+    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$92ce] undefined
+    hex 02 06 02 07 02 31 00 00 08 00 02 01 02 08 02 09 ; [$92de] undefined
+    hex 02 0a 02 0b 02 0c 02 0d 02 31 00 00 08 00 02 01 ; [$92ee] undefined
+    hex 02 02 02 03 02 04 02 05 02 0e 02 0f 02 11 00 00 ; [$92fe] undefined
+    hex 08 00 03 01 03 02 03 03 03 11 00 00 08 04 03 05 ; [$930e] undefined
+    hex 03 06 03 07 03 11 00 00 08 00 02 01 02 02 02 03 ; [$931e] undefined
+    hex 02 11 00 00 08 04 02 05 02 02 02 03 02 11 00 00 ; [$932e] undefined
+    hex 08 00 03 01 03 02 03 03 03 11 00 00 08 00 03 04 ; [$933e] undefined
+    hex 03 02 03 05 03 11 00 00 08 00 03 01 03 02 03 03 ; [$934e] undefined
+    hex 03 11 00 00 08 04 03 01 03 02 03 03 03 11 00 00 ; [$935e] undefined
+    hex 08 04 03 01 03 05 03 06 03 11 00 00 08 00 03 01 ; [$936e] undefined
+    hex 03 02 03 03 03 11 00 00 08 00 03 04 03 02 03 05 ; [$937e] undefined
+    hex 03 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$938e] undefined
+    hex 02 06 02 07 02 31 00 00 08 00 02 01 02 08 02 09 ; [$939e] undefined
+    hex 02 0a 02 0b 02 07 42 06 42 31 00 00 08 00 03 01 ; [$93ae] undefined
+    hex 03 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 ; [$93be] undefined
+    hex 08 00 03 01 03 08 03 09 03 0a 03 0b 03 06 03 07 ; [$93ce] undefined
+    hex 03 31 00 00 08 00 03 01 03 0c 03 0d 03 0e 03 0f ; [$93de] undefined
+    hex 03 06 03 07 03 31 00 00 08 00 03 01 03 02 03 03 ; [$93ee] undefined
+    hex 03 04 03 05 03 06 03 07 03 31 00 00 08 08 03 09 ; [$93fe] undefined
+    hex 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f 03 31 00 00 ; [$940e] undefined
+    hex 08 00 03 01 03 02 03 03 03 04 03 05 03 06 03 0f ; [$941e] undefined
+    hex 03 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$942e] undefined
+    hex 02 06 02 07 02 31 00 00 08 00 02 01 02 02 02 03 ; [$943e] undefined
+    hex 02 04 02 05 02 08 02 09 02 31 00 00 08 00 02 01 ; [$944e] undefined
+    hex 02 0a 02 0b 02 10 02 11 02 06 02 07 02 31 00 00 ; [$945e] undefined
+    hex 08 0c 02 0d 02 0e 02 0f 02 10 02 11 02 08 02 09 ; [$946e] undefined
+    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$947e] undefined
+    hex 02 06 02 07 02 31 00 00 08 08 02 09 02 02 02 03 ; [$948e] undefined
+    hex 02 04 02 0a 02 0b 02 0c 02 31 00 00 08 00 03 01 ; [$949e] undefined
+    hex 03 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 ; [$94ae] undefined
+    hex 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f ; [$94be] undefined
+    hex 03 31 00 00 08 10 03 11 03 12 03 13 03 14 03 15 ; [$94ce] undefined
+    hex 03 0e 03 07 03 31 00 00 08 00 03 01 03 02 03 03 ; [$94de] undefined
+    hex 03 04 03 05 03 06 03 07 03 31 00 00 08 08 03 09 ; [$94ee] undefined
+    hex 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f 03 31 00 00 ; [$94fe] undefined
+    hex 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 06 03 0f ; [$950e] undefined
+    hex 03 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$951e] undefined
+    hex 02 06 02 07 02 31 00 00 08 00 02 01 02 08 02 09 ; [$952e] undefined
+    hex 02 0a 02 0b 02 0c 02 0d 02 31 00 00 08 00 02 01 ; [$953e] undefined
+    hex 02 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 ; [$954e] undefined
+    hex 08 00 02 01 02 02 02 03 02 04 02 05 02 08 02 09 ; [$955e] undefined
+    hex 02 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 ; [$956e] undefined
+    hex 02 0a 02 0b 02 31 00 00 08 00 02 01 02 0c 02 0d ; [$957e] undefined
+    hex 02 0e 02 0f 02 10 02 11 02 31 00 00 08 00 03 01 ; [$958e] undefined
+    hex 03 02 03 03 03 04 03 05 03 00 03 01 03 31 00 00 ; [$959e] undefined
+    hex 08 06 03 07 03 08 03 09 03 0a 03 0b 03 06 03 07 ; [$95ae] undefined
+    hex 03 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 ; [$95be] undefined
+    hex 03 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 0b ; [$95ce] undefined
+    hex 03 04 03 05 03 0c 03 0d 02 31 00 00 08 00 03 01 ; [$95de] undefined
+    hex 03 02 03 03 03 04 03 05 03 06 03 07 03 31 00 00 ; [$95ee] undefined
+    hex 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f ; [$95fe] undefined
+    hex 03 32 f8 00 10 0c 01 00 03 01 03 0d 01 02 02 03 ; [$960e] undefined
+    hex 02 ff 04 02 05 02 ff 06 03 07 03 32 f8 00 10 0c ; [$961e] undefined
+    hex 01 08 03 09 03 0d 01 02 02 03 02 ff 04 02 05 02 ; [$962e] undefined
+    hex ff 0a 03 0b 03 33 f0 00 18 ff ff 08 03 09 03 0e ; [$963e] undefined
+    hex 01 0f 01 02 02 03 02 ff ff 04 02 05 02 ff ff 0a ; [$964e] undefined
+    hex 03 0b 03 31 00 00 08 08 03 09 03 02 02 03 02 04 ; [$965e] undefined
+    hex 02 05 02 06 03 07 03 31 00 00 08 00 02 01 02 02 ; [$966e] undefined
+    hex 02 03 02 04 02 05 02 06 02 07 02 31 00 00 08 08 ; [$967e] undefined
+    hex 02 09 02 0a 02 0b 02 0c 02 0d 02 0e 02 0f 02 31 ; [$968e] undefined
+    hex 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 10 ; [$969e] undefined
+    hex 02 11 02 31 00 00 08 ff 00 03 01 03 02 03 03 03 ; [$96ae] undefined
+    hex 04 03 05 03 06 03 31 00 00 08 ff 07 03 01 03 02 ; [$96be] undefined
+    hex 03 03 03 04 03 08 03 09 03 23 f0 08 18 0f 03 10 ; [$96ce] undefined
+    hex 03 0a 03 0b 03 ff 11 03 0c 03 0d 03 ff ff 0e 03 ; [$96de] undefined
+    hex 06 03 33 f0 00 18 18 03 ff 00 03 01 03 19 03 1a ; [$96ee] undefined
+    hex 03 02 03 03 03 ff ff 04 03 05 03 ff ff 06 03 07 ; [$96fe] undefined
+    hex 03 42 00 f8 08 ff 1b 03 1c 03 00 03 01 03 ff 08 ; [$970e] undefined
+    hex 03 09 03 ff 0a 03 0b 03 ff 0c 03 ff ff 31 00 00 ; [$971e] undefined
+    hex 08 0d 03 0e 03 0f 03 10 03 11 03 12 03 13 03 14 ; [$972e] undefined
+    hex 03 31 00 00 08 0d 03 0e 03 0f 03 10 03 15 03 16 ; [$973e] undefined
+    hex 03 17 03 ff 33 f0 00 18 18 03 ff 00 03 01 03 19 ; [$974e] undefined
+    hex 03 1a 03 02 03 03 03 ff ff 04 03 05 03 ff ff 1d ; [$975e] undefined
+    hex 03 1e 03 32 f8 00 10 ff 00 02 01 02 ff 02 02 03 ; [$976e] undefined
+    hex 02 08 02 04 02 05 02 ff 06 02 07 02 32 f8 00 10 ; [$977e] undefined
+    hex ff 00 02 01 02 ff 02 02 03 02 0d 02 09 02 0a 02 ; [$978e] undefined
+    hex ff 0b 02 0c 02 33 f0 00 18 ff ff 0e 02 0f 02 14 ; [$979e] undefined
+    hex 02 15 02 10 02 11 02 ff ff 12 02 13 02 ff ff 06 ; [$97ae] undefined
+    hex 02 07 02 31 00 00 08 ff 00 00 01 00 02 00 03 00 ; [$97be] undefined
+    hex 04 00 05 00 06 00 31 00 00 08 07 00 08 00 09 00 ; [$97ce] undefined
+    hex 0a 00 0b 00 0c 00 0d 00 0e 00 31 00 00 08 00 03 ; [$97de] undefined
+    hex 01 03 02 03 03 03 04 03 05 03 06 03 07 03 31 00 ; [$97ee] undefined
+    hex 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 0e 03 ; [$97fe] undefined
+    hex 0f 03 31 00 00 08 00 02 01 02 02 02 03 02 04 02 ; [$980e] undefined
+    hex 05 02 06 02 07 02 31 00 00 08 00 02 08 02 02 02 ; [$981e] undefined
+    hex 03 02 04 02 05 02 06 02 09 02 32 f8 00 10 ff 00 ; [$982e] undefined
+    hex 02 0a 02 ff 02 02 0b 02 11 02 0c 02 0d 02 ff 06 ; [$983e] undefined
+    hex 02 0e 02 32 f8 00 10 ff 00 02 0a 02 ff 02 02 0b ; [$984e] undefined
+    hex 02 12 02 0f 02 10 02 ff 06 02 0e 02 31 00 00 08 ; [$985e] undefined
+    hex 00 02 01 02 02 02 03 02 04 02 05 02 06 02 07 02 ; [$986e] undefined
+    hex 31 00 00 08 00 02 01 02 08 02 03 02 09 02 0a 02 ; [$987e] undefined
+    hex 0b 02 0c 02 31 00 00 08 00 02 01 02 02 02 03 02 ; [$988e] undefined
+    hex 0d 02 0e 02 0f 02 10 02 31 00 00 08 00 02 01 02 ; [$989e] undefined
+    hex 02 02 03 02 04 02 05 02 06 02 07 02 31 00 00 08 ; [$98ae] undefined
+    hex 08 02 09 02 0a 02 0b 02 0c 02 0d 02 0e 02 0f 02 ; [$98be] undefined
+    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$98ce] undefined
+    hex 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 0b 03 ; [$98de] undefined
+    hex 0c 03 0d 03 0e 03 0f 03 31 00 00 08 01 43 00 43 ; [$98ee] undefined
+    hex 03 43 02 43 05 43 04 43 07 43 06 43 31 00 00 08 ; [$98fe] undefined
+    hex 09 43 08 43 0b 43 0a 43 0d 43 0c 43 0f 43 0e 43 ; [$990e] undefined
+    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$991e] undefined
+    hex 06 03 07 03 31 00 00 08 08 03 09 03 0a 03 0b 03 ; [$992e] undefined
+    hex 0c 03 0d 03 06 03 0e 03             ; [$993e] undefined
 
 SOME_SPRITE_DATA:                           ; [$9946]
     db $31,$00,$00,$08                      ; [$9946] byte
@@ -3811,363 +3808,375 @@ SOME_SPRITE_DATA:                           ; [$9946]
     hex 02 05 02 05 42 04 42 11 00 00 08 00 02 00 42 01 ; [$a9ba] undefined
     hex 02 01 42 11 00 00 08 00 01 01 01 02 01 03 01 11 ; [$a9ca] undefined
     hex 00 00 08 00 00 01 00 02 00 03 00 11 00 00 08 00 ; [$a9da] undefined
-    hex 01 00 41 01 01 01 41 c7 2a db 2a ee 2a 02 2b 16 ; [$a9ea] undefined
-    hex 2b 2a 2b 3e 2b 52 2b 44 2d 58 2d 6b 2d 7f 2d 93 ; [$a9fa] undefined
-    hex 2d a7 2d bb 2d cf 2d 66 2b 7a 2b 8d 2b a1 2b b5 ; [$aa0a] undefined
-    hex 2b c9 2b dd 2b f1 2b e3 2d f7 2d 0a 2e 1e 2e 32 ; [$aa1a] undefined
-    hex 2e 46 2e 5a 2e 6e 2e 05 2c 19 2c 2d 2c 41 2c 55 ; [$aa2a] undefined
-    hex 2c 69 2c 7d 2c 91 2c 82 2e 96 2e aa 2e be 2e d2 ; [$aa3a] undefined
-    hex 2e e6 2e fa 2e 0e 2f a5             ; [$aa4a] undefined
+    db $01,$00,$41,$01,$01,$01,$41          ; [$a9ea] undefined
 
-    dw $b92c                                ; [$aa54] pointer
+;
+; XREFS:
+;     USHORT_PRG7__8008 [$PRG7::8008]
+;
+MAYBE_PLAYER_SPRITES_INFO:                  ; [$a9f1]
+    dw $2ac7,$2adb,$2aee,$2b02,$2b16,$2b2a,$2b3e,$2b52 ; [$a9f1] ushort
+    dw $2d44,$2d58,$2d6b,$2d7f,$2d93,$2da7,$2dbb,$2dcf ; [$aa01] ushort
+    dw $2b66,$2b7a,$2b8d,$2ba1,$2bb5,$2bc9,$2bdd,$2bf1 ; [$aa11] ushort
+    dw $2de3,$2df7,$2e0a,$2e1e,$2e32,$2e46,$2e5a,$2e6e ; [$aa21] ushort
+    dw $2c05,$2c19,$2c2d,$2c41,$2c55,$2c69,$2c7d,$2c91 ; [$aa31] ushort
+    dw $2e82,$2e96,$2eaa,$2ebe,$2ed2,$2ee6,$2efa,$2f0e ; [$aa41] ushort
+    dw $2ca5,$2cb9,$2ccd,$2ce1,$2cf5,$2d09,$2d1d,$2d30 ; [$aa51] ushort
+    dw $2ca5,$2cb9,$2ccd,$2ce1,$2cf5,$2d09,$2d1d,$2d30 ; [$aa61] ushort
+    dw $2f51,$2f57,$2f4c,$2f51,$2f4c,$2f5d,$2f5d,$2f4c ; [$aa71] ushort
+    dw $2f63,$2f6b,$2f71,$2f63,$2f4c,$2f77,$2f77,$2f4c ; [$aa81] ushort
+    dw $2f7f,$2f8a,$2f90,$2f7f,$2f4c,$2f77,$2f77,$2f4c ; [$aa91] ushort
+    dw $2f96,$2fa1,$2fa7,$2f96,$2fa7,$2fad,$2fb5,$2f4c ; [$aaa1] ushort
+    dw $2fbd,$2fc5,$2fcd,$2f22,$2f28,$2f2e,$2f34,$2f3a ; [$aab1] ushort
+    dw $2f40,$2f46,$2f34                    ; [$aac1] ushort
 
-    hex 2c cd 2c e1 2c f5 2c 09 2d 1d 2d 30 2d a5 2c b9 ; [$aa55] undefined
-    hex 2c cd 2c e1 2c f5 2c 09 2d 1d 2d 30 2d 51 2f 57 ; [$aa64] undefined
-    hex 2f 4c 2f 51 2f 4c 2f 5d 2f 5d 2f 4c 2f 63 2f 6b ; [$aa74] undefined
-    hex 2f 71 2f 63 2f 4c 2f 77 2f 77 2f 4c 2f 7f 2f 8a ; [$aa84] undefined
-    hex 2f 90 2f 7f 2f 4c 2f 77 2f 77 2f 4c 2f 96 2f a1 ; [$aa94] undefined
-    hex 2f a7 2f 96 2f a7 2f ad 2f b5 2f 4c 2f bd 2f c5 ; [$aaa4] undefined
-    hex 2f cd 2f 22 2f 28 2f 2e 2f 34 2f 3a 2f 40 2f 46 ; [$aab4] undefined
-    hex 2f 34 2f 31 00 00 08 00 00 01 00 02 00 03 00 04 ; [$aac4] undefined
-    hex 00 05 00 06 00 07 00 31 00 00 08 08 00 09 00 0a ; [$aad4] undefined
-    hex 00 0b 00 0c 00 0d 00 0e 00 ff 31 00 00 08 00 00 ; [$aae4] undefined
-    hex 01 00 0f 00 10 00 11 00 12 00 13 00 14 00 31 00 ; [$aaf4] undefined
-    hex 00 08 00 00 01 00 15 00 16 00 17 00 18 00 19 00 ; [$ab04] undefined
-    hex 1a 00 31 00 00 08 1b 00 1c 00 1d 00 1e 00 1f 00 ; [$ab14] undefined
-    hex 20 00 21 00 22 00 31 00 00 08 00 00 01 00 02 00 ; [$ab24] undefined
-    hex 03 00 04 00 05 00 06 00 07 00 31 00 00 08 23 00 ; [$ab34] undefined
-    hex 24 00 26 00 27 00 28 00 29 00 2a 00 2b 00 31 00 ; [$ab44] undefined
-    hex 00 08 2c 00 2d 00 2e 00 2f 00 30 00 31 00 32 00 ; [$ab54] undefined
-    hex 33 00 31 00 00 08 00 00 01 00 09 01 0a 01 0b 01 ; [$ab64] undefined
-    hex 0c 01 02 00 03 00 31 00 00 08 04 00 05 00 0d 01 ; [$ab74] undefined
-    hex 0e 01 0f 01 10 01 06 00 ff 31 00 00 08 00 00 01 ; [$ab84] undefined
-    hex 00 11 01 12 01 13 01 14 01 07 00 08 00 31 00 00 ; [$ab94] undefined
-    hex 08 00 00 01 00 19 01 1a 01 15 01 16 01 17 00 18 ; [$aba4] undefined
-    hex 00 31 00 00 08 1b 00 1c 00 1f 01 20 01 21 01 22 ; [$abb4] undefined
-    hex 01 1d 00 1e 00 31 00 00 08 00 00 01 00 09 01 0a ; [$abc4] undefined
-    hex 01 0b 01 0c 01 02 00 03 00 31 00 00 08 23 00 24 ; [$abd4] undefined
-    hex 00 28 01 29 01 2a 01 2b 01 26 00 27 00 31 00 00 ; [$abe4] undefined
-    hex 08 2c 00 2d 00 34 01 31 01 32 01 33 01 2e 00 2f ; [$abf4] undefined
-    hex 00 31 00 00 08 00 00 01 00 02 01 03 01 04 01 05 ; [$ac04] undefined
-    hex 01 06 01 07 01 31 00 00 08 08 00 09 00 0a 01 0b ; [$ac14] undefined
-    hex 01 0c 01 0d 01 0e 01 0f 01 31 00 00 08 00 00 01 ; [$ac24] undefined
-    hex 00 10 01 11 01 12 01 13 01 14 01 15 01 31 00 00 ; [$ac34] undefined
-    hex 08 00 00 01 00 16 01 17 01 18 01 19 01 1a 01 1b ; [$ac44] undefined
-    hex 01 31 00 00 08 1c 00 1d 00 1e 01 1f 01 20 01 21 ; [$ac54] undefined
-    hex 01 22 01 23 01 31 00 00 08 00 00 01 00 02 01 03 ; [$ac64] undefined
-    hex 01 04 01 05 01 06 01 07 01 31 00 00 08 24 00 25 ; [$ac74] undefined
-    hex 00 27 01 28 01 29 01 2a 01 2b 01 2c 01 31 00 00 ; [$ac84] undefined
-    hex 08 2d 00 2e 00 2f 01 30 01 31 01 32 01 33 01 34 ; [$ac94] undefined
-    hex 01 31 00 00 08 00 01 01 01 02 01 03 01 04 01 05 ; [$aca4] undefined
-    hex 01 06 01 07 01 31 00 00 08 08 01 09 01 0a 01 0b ; [$acb4] undefined
-    hex 01 0c 01 0d 01 0e 01 0f 01 31 00 00 08 00 01 01 ; [$acc4] undefined
-    hex 01 10 01 11 01 12 01 13 01 14 01 15 01 31 00 00 ; [$acd4] undefined
-    hex 08 00 01 01 01 02 01 03 01 16 01 17 01 18 01 19 ; [$ace4] undefined
-    hex 01 31 00 00 08 1a 01 1b 01 1c 01 1d 01 1e 01 1f ; [$acf4] undefined
-    hex 01 20 01 21 01 31 00 00 08 00 01 01 01 22 01 03 ; [$ad04] undefined
-    hex 01 04 01 05 01 06 01 07 01 31 00 00 08 23 01 ff ; [$ad14] undefined
-    hex 25 01 26 01 27 01 28 01 29 01 2a 01 31 00 00 08 ; [$ad24] undefined
-    hex 2b 01 2c 01 2d 01 2e 01 2f 01 30 01 31 01 32 01 ; [$ad34] undefined
-    hex 31 00 00 08 00 00 01 00 02 00 03 00 04 00 05 00 ; [$ad44] undefined
-    hex 06 00 07 00 31 00 00 08 08 00 09 00 02 00 03 00 ; [$ad54] undefined
-    hex 04 00 05 00 0a 00 ff 31 00 00 08 00 00 01 00 02 ; [$ad64] undefined
-    hex 00 03 00 04 00 05 00 0b 00 0c 00 31 00 00 08 00 ; [$ad74] undefined
-    hex 00 01 00 02 00 03 00 04 00 05 00 0d 00 0e 00 31 ; [$ad84] undefined
-    hex 00 00 08 0f 00 10 00 11 00 12 00 13 00 14 00 15 ; [$ad94] undefined
-    hex 00 16 00 31 00 00 08 00 00 01 00 02 00 03 00 04 ; [$ada4] undefined
-    hex 00 05 00 06 00 07 00 31 00 00 08 17 00 18 00 1a ; [$adb4] undefined
-    hex 00 1b 00 1c 00 1d 00 1e 00 1f 00 31 00 00 08 20 ; [$adc4] undefined
-    hex 00 21 00 22 00 23 00 24 00 25 00 26 00 27 00 31 ; [$add4] undefined
-    hex 00 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 ; [$ade4] undefined
-    hex 00 07 00 31 00 00 08 08 00 09 00 02 01 03 01 04 ; [$adf4] undefined
-    hex 01 05 01 0a 00 ff 31 00 00 08 00 00 01 00 02 01 ; [$ae04] undefined
-    hex 03 01 04 01 05 01 0b 00 0c 00 31 00 00 08 00 00 ; [$ae14] undefined
-    hex 01 00 02 01 03 01 04 01 05 01 0d 00 0e 00 31 00 ; [$ae24] undefined
-    hex 00 08 0f 00 10 00 11 01 12 01 13 01 14 01 15 00 ; [$ae34] undefined
-    hex 16 00 31 00 00 08 00 00 01 00 02 01 03 01 04 01 ; [$ae44] undefined
-    hex 05 01 06 00 07 00 31 00 00 08 17 00 18 00 1a 01 ; [$ae54] undefined
-    hex 1b 01 1c 01 1d 01 1e 00 1f 00 31 00 00 08 20 00 ; [$ae64] undefined
-    hex 21 00 22 01 23 01 24 01 25 01 26 00 27 00 31 00 ; [$ae74] undefined
-    hex 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 01 ; [$ae84] undefined
-    hex 07 01 31 00 00 08 08 00 09 00 02 01 03 01 04 01 ; [$ae94] undefined
-    hex 05 01 0a 01 0b 01 31 00 00 08 00 00 01 00 02 01 ; [$aea4] undefined
-    hex 03 01 04 01 05 01 0c 01 0d 01 31 00 00 08 00 00 ; [$aeb4] undefined
-    hex 01 00 02 01 03 01 04 01 05 01 0e 01 0f 01 31 00 ; [$aec4] undefined
-    hex 00 08 10 00 11 00 12 01 13 01 14 01 15 01 16 01 ; [$aed4] undefined
-    hex 17 01 31 00 00 08 00 00 01 00 02 01 03 01 04 01 ; [$aee4] undefined
-    hex 05 01 06 01 07 01 31 00 00 08 18 00 19 00 1b 01 ; [$aef4] undefined
-    hex 1c 01 1d 01 1e 01 1f 01 20 01 31 00 00 08 21 00 ; [$af04] undefined
-    hex 22 00 23 01 24 01 25 01 26 01 27 01 28 01 00 00 ; [$af14] undefined
-    hex 08 04 25 00 00 00 08 04 25 01 00 00 08 04 26 01 ; [$af24] undefined
-    hex 00 00 08 04 24 01 00 00 08 04 19 00 00 00 08 04 ; [$af34] undefined
-    hex 19 01 00 00 08 04 1a 01 00 00 00 04 ff 00 00 00 ; [$af44] undefined
-    hex 04 01 01 00 00 00 04 02 01 00 00 00 04 00 01 10 ; [$af54] undefined
-    hex 00 00 04 02 01 03 01 00 00 00 04 04 01 00 00 00 ; [$af64] undefined
-    hex 04 05 01 01 00 00 08 00 01 01 01 11 00 00 08 02 ; [$af74] undefined
-    hex 01 03 01 ff 04 01 00 00 00 04 05 01 00 00 00 04 ; [$af84] undefined
-    hex 06 01 11 00 00 08 05 01 06 01 ff 07 01 00 00 00 ; [$af94] undefined
-    hex 04 08 01 00 00 00 04 00 01 01 00 00 08 01 01 02 ; [$afa4] undefined
-    hex 01 01 00 00 08 03 01 04 01 10 00 00 04 00 01 01 ; [$afb4] undefined
-    hex 01 10 00 00 04 02 01 03 01 10 00 00 04 04 01 05 ; [$afc4] undefined
-    hex 01 43 30 9b 30 a3 30 ab 30 b3 30 bb 30 13 31 1b ; [$afd4] undefined
-    hex 31 23 31 2b 31 33 31 8b 31 93 31 9b 31 a3 31 ab ; [$afe4] undefined
-    hex 31 03 32 0b 32 13 32 1b 32 23 32 77 32 7f 32 87 ; [$aff4] undefined
-    hex 32 8f 32 97 32 eb 32 f3 32 fb 32 01 33 07 33 5d ; [$b004] undefined
-    hex 33 65 33 6d 33 79 33 85 33 d9 33 e1 33 e9 33 f1 ; [$b014] undefined
-    hex 33 f9 33 4f 34 59 34 63 34 6b 34 73 34 cb 34 d3 ; [$b024] undefined
-    hex 34 db 34 e3 34 eb 34 43 35 4b 35 53 35 5b 35 75 ; [$b034] undefined
-    hex 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 00 ; [$b044] undefined
-    hex 03 00 03 40 02 40 ff ff 04 00 ff ff 07 00 ff ff ; [$b054] undefined
-    hex 08 00 ff ff 08 40 ff 0a 00 0b 00 0c 00 0c 40 0b ; [$b064] undefined
-    hex 40 0a 40 0d 00 0e 00 0f 00 0f 40 0e 40 0d 40 10 ; [$b074] undefined
-    hex 00 11 00 12 00 12 40 11 40 10 40 10 00 11 00 13 ; [$b084] undefined
-    hex 00 13 40 11 40 10 40 01 10 10 08 05 00 06 00 01 ; [$b094] undefined
-    hex 10 10 08 14 00 15 00 01 10 18 08 09 00 09 40 01 ; [$b0a4] undefined
-    hex 10 18 08 16 00 16 40 75 00 00 18 ff 00 00 01 00 ; [$b0b4] undefined
-    hex 01 40 00 40 ff ff 02 00 ff ff 02 40 ff ff 04 00 ; [$b0c4] undefined
-    hex 05 00 05 40 04 40 ff ff 06 00 ff ff 06 40 ff 08 ; [$b0d4] undefined
-    hex 00 09 00 0a 00 0a 40 09 40 08 40 0b 00 0c 00 0d ; [$b0e4] undefined
-    hex 00 0d 40 0c 40 0b 00 0b 00 0b 00 0e 00 0e 40 0b ; [$b0f4] undefined
-    hex 00 0b 00 0b 00 0b 00 0f 00 0f 40 0b 00 0b 00 01 ; [$b104] undefined
-    hex 10 08 08 03 00 03 40 01 10 08 08 10 00 10 40 01 ; [$b114] undefined
-    hex 10 18 08 07 00 07 40 01 10 18 08 11 00 11 40 75 ; [$b124] undefined
-    hex 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff 04 00 ; [$b134] undefined
-    hex ff ff 07 00 ff ff 08 00 09 00 0a 00 0b 00 ff ff ; [$b144] undefined
-    hex 0c 00 ff ff 0f 00 ff 10 01 11 01 12 00 12 40 11 ; [$b154] undefined
-    hex 41 10 41 13 01 14 01 15 01 15 41 14 41 13 41 16 ; [$b164] undefined
-    hex 01 17 01 18 01 18 41 17 41 16 41 19 01 1a 01 18 ; [$b174] undefined
-    hex 01 18 41 1a 41 19 41 01 10 08 08 05 00 06 00 01 ; [$b184] undefined
-    hex 10 08 08 1b 00 1c 00 01 10 18 08 0d 00 0e 00 01 ; [$b194] undefined
-    hex 10 18 08 1d 00 1e 00 75 00 00 18 ff 00 00 01 00 ; [$b1a4] undefined
-    hex 01 40 00 40 ff ff 02 00 ff ff 02 40 ff ff 04 00 ; [$b1b4] undefined
-    hex 05 00 05 40 04 40 ff ff 06 00 ff ff 06 40 ff 08 ; [$b1c4] undefined
-    hex 00 09 00 0a 00 0a 40 09 40 08 40 0b 00 0c 00 0d ; [$b1d4] undefined
-    hex 00 0d 40 0c 40 0b 40 0b 00 0e 00 0e 00 0e 00 0e ; [$b1e4] undefined
-    hex 00 0b 40 0b 00 0f 00 0e 00 0e 00 0f 40 0b 40 01 ; [$b1f4] undefined
-    hex 10 08 08 03 00 03 40 01 10 08 08 10 00 10 40 01 ; [$b204] undefined
-    hex 10 18 08 07 00 07 40 01 10 18 08 11 00 11 40 75 ; [$b214] undefined
-    hex 00 00 18 ff ff ff ff ff ff ff 00 00 01 00 02 00 ; [$b224] undefined
-    hex 03 00 ff ff 04 00 05 00 06 00 07 00 ff ff 08 00 ; [$b234] undefined
-    hex ff ff 0a 00 ff 0b 00 0c 00 ff ff 0c 40 0b 40 0e ; [$b244] undefined
-    hex 00 0f 00 10 00 10 40 0f 40 0e 40 11 00 12 00 13 ; [$b254] undefined
-    hex 00 13 00 12 40 11 40 14 00 15 00 13 00 13 00 15 ; [$b264] undefined
-    hex 40 14 40 01 10 18 08 09 00 09 40 01 10 18 08 16 ; [$b274] undefined
-    hex 00 16 40 01 10 20 08 0d 00 0d 40 01 10 20 08 17 ; [$b284] undefined
-    hex 00 17 40 75 00 00 18 ff ff 00 00 00 40 ff ff ff ; [$b294] undefined
-    hex 01 00 02 00 03 00 04 00 ff ff 05 00 ff ff 08 00 ; [$b2a4] undefined
-    hex ff ff 09 00 0a 00 ff ff ff ff 0c 00 0d 00 0e 00 ; [$b2b4] undefined
-    hex 0c 40 ff 0f 00 10 00 11 00 11 40 10 40 0f 40 12 ; [$b2c4] undefined
-    hex 00 13 00 14 00 14 40 13 40 12 40 15 00 16 00 17 ; [$b2d4] undefined
-    hex 00 17 00 16 40 15 40 01 10 10 08 06 00 07 00 01 ; [$b2e4] undefined
-    hex 10 10 08 18 00 19 00 00 18 18 00 0b 00 00 18 18 ; [$b2f4] undefined
-    hex 00 1a 00 75 00 00 18 ff 00 00 01 00 01 40 00 40 ; [$b304] undefined
-    hex ff ff 02 00 ff ff 05 00 ff ff 06 00 ff ff 09 00 ; [$b314] undefined
-    hex ff ff 0a 00 ff ff 0d 00 ff 0e 01 0f 01 10 00 11 ; [$b324] undefined
-    hex 00 0f 41 0e 41 12 01 12 01 13 01 13 41 12 01 12 ; [$b334] undefined
-    hex 01 12 01 12 01 14 01 14 41 12 01 12 01 12 01 12 ; [$b344] undefined
-    hex 01 12 01 12 01 12 01 12 01 01 10 08 08 03 00 04 ; [$b354] undefined
-    hex 00 01 10 08 08 15 00 16 00 11 10 10 08 07 00 08 ; [$b364] undefined
-    hex 00 0b 00 0c 00 11 10 10 08 17 00 18 00 19 00 1a ; [$b374] undefined
-    hex 00 75 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff ; [$b384] undefined
-    hex 04 00 ff ff 07 00 ff ff 08 00 09 00 0a 00 0b 00 ; [$b394] undefined
-    hex ff ff 0c 00 0d 00 ff ff ff ff ff 10 00 11 00 ff ; [$b3a4] undefined
-    hex ff 12 03 13 03 14 00 15 00 13 43 12 43 16 03 16 ; [$b3b4] undefined
-    hex 03 17 03 17 43 16 03 16 03 16 03 16 03 18 03 18 ; [$b3c4] undefined
-    hex 43 16 03 16 03 01 10 08 08 05 00 06 00 01 10 08 ; [$b3d4] undefined
-    hex 08 19 00 1a 00 01 18 18 00 0e 00 0f 00 01 18 18 ; [$b3e4] undefined
-    hex 00 1b 00 1c 00 75 00 00 20 ff 00 00 01 00 02 00 ; [$b3f4] undefined
-    hex 03 00 ff ff ff ff ff 07 00 ff ff ff ff 0a 00 0b ; [$b404] undefined
-    hex 00 ff ff 0c 00 0d 00 0e 00 ff ff 0f 02 10 02 11 ; [$b414] undefined
-    hex 02 12 02 13 02 14 02 15 02 16 02 17 02 18 02 19 ; [$b424] undefined
-    hex 02 1a 00 18 02 1b 02 1c 02 1d 02 1e 02 1f 00 18 ; [$b434] undefined
-    hex 02 1b 02 1b 02 1b 02 1e 02 0a 00 02 08 08 10 04 ; [$b444] undefined
-    hex 00 05 00 06 00 02 08 08 10 20 00 21 00 22 00 01 ; [$b454] undefined
-    hex 08 10 10 08 00 09 00 01 08 10 10 23 00 24 00 75 ; [$b464] undefined
-    hex 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 00 ; [$b474] undefined
-    hex 03 00 03 40 02 40 ff ff 04 00 ff ff 04 40 ff ff ; [$b484] undefined
-    hex 06 00 ff ff 06 40 ff 08 02 09 02 0a 02 0a 42 09 ; [$b494] undefined
-    hex 42 08 42 0b 02 0c 02 0d 02 0d 02 0c 42 0b 42 0e ; [$b4a4] undefined
-    hex 02 0f 02 0d 02 0d 02 0f 42 0e 42 10 02 11 02 12 ; [$b4b4] undefined
-    hex 02 12 42 11 42 10 42 01 10 10 08 05 00 05 40 01 ; [$b4c4] undefined
-    hex 10 10 08 13 00 13 40 01 10 18 08 07 00 07 40 01 ; [$b4d4] undefined
-    hex 10 18 08 14 00 14 40 75 00 00 18 ff 00 00 01 00 ; [$b4e4] undefined
-    hex 02 00 03 00 ff ff 04 00 05 00 06 00 07 00 ff ff ; [$b4f4] undefined
-    hex 08 00 ff ff 0b 00 ff ff 0c 00 0d 00 ff ff ff 10 ; [$b504] undefined
-    hex 00 11 00 12 00 13 00 14 00 15 00 16 00 17 00 18 ; [$b514] undefined
-    hex 00 19 00 1a 00 1b 00 1c 00 1d 00 1e 00 1e 00 1f ; [$b524] undefined
-    hex 00 20 00 21 00 22 00 1e 00 1e 00 22 40 21 40 01 ; [$b534] undefined
-    hex 10 10 08 09 00 0a 00 01 10 10 08 23 00 24 00 01 ; [$b544] undefined
-    hex 18 18 00 0e 00 0f 00 01 18 18 00 25 00 26 00 ff ; [$b554] undefined
-    hex bf ff ff 77 00 ff f6 ff ff ff b7 ff 00 ff ef ff ; [$b564] undefined
-    hex ff ff ff 1d 00 ff ff ff ff f7 df c2 00 ff e7 ff ; [$b574] undefined
-    hex bd ff ff bd 00 ff bf ff ef ff ff 6f 00 ff 7f ff ; [$b584] undefined
-    hex df ff ff e6 00 ff f5 ff bf ff ff 52 00 ff 3d ff ; [$b594] undefined
-    hex 7f ff bf 7f 00 ff b7 ff ef ff ff cd 00 ff 7f ff ; [$b5a4] undefined
-    hex ff ef ff 96 00 ff f9 ff ff ff fa 3c 00 00 00 ea ; [$b5b4] undefined
-    hex 00 00 00 00 00 00 00 01 00 00 00 00 00 00 00 00 ; [$b5c4] undefined
-    hex 00 40 00 00 00 00 00 26 00 00 00 00 00 ff 45 ff ; [$b5d4] undefined
-    hex fb ff dc 20 00 ff fd ff fb ff ff 87 00 ff bf ff ; [$b5e4] undefined
-    hex ff fb ff e0 00 ff 7f ff ff ff ff 1f 00 ff ff ff ; [$b5f4] undefined
-    hex eb ff ad 7d 00 ff b4 ff ff ff ff ff 00 ff ff ff ; [$b604] undefined
-    hex fb ff 7f a7 00 ff 77 ff fe ff ff 82 00 ff f5 ff ; [$b614] undefined
-    hex ff ff df ff 00 ff da ff ff ff ff ee 00 ff ce ff ; [$b624] undefined
-    hex ff ff ff 53 00 ff ff ff bf ff fe 17 00 ff 89 ff ; [$b634] undefined
-    hex 7a ff f6 ff 00 ff df ff ff ff fb ff 00 ff d2 ff ; [$b644] undefined
-    hex ff 7f ff da 00 ff 1d ff ff ff ff 54 00 ff 6b ff ; [$b654] undefined
-    hex ff ff bf d0 00 ff ff ff ff ff ff bf 00 ff 6f ff ; [$b664] undefined
-    hex ff ff bf ea 00 ff f5 ff ff ff ff 91 00 ff 85 ff ; [$b674] undefined
-    hex 7f ff f5 a5 00 ff ff ff ff ff ff 27 00 ff fd ff ; [$b684] undefined
-    hex ff ff fa d9 00 ff f7 ff ff ff ff 8d 00 ff 6f ff ; [$b694] undefined
-    hex df ff fb ef 00 ff ef ff ff ff fd b5 00 ff 9c ff ; [$b6a4] undefined
-    hex cf ff bf 06 00 ff fe ff ef bf ff 13 00 ff da ff ; [$b6b4] undefined
-    hex ff ff fb 5e 00 ff df ff ff ff ff f3 00 ff 7f ff ; [$b6c4] undefined
-    hex 77 fe ff dc 00 ff bf ff ff ff fd 69 00 ff 11 ff ; [$b6d4] undefined
-    hex 7f ff 27 fb 00 ff 88 ff fb ff f6 97 00 ff 75 ff ; [$b6e4] undefined
-    hex 9f ff 7e 47 00 ef b7 ff ff ff df 3f 00 ff b1 ff ; [$b6f4] undefined
-    hex fd ff b7 ff 00 ff 5f ff ff ff ff ef 00 ff fe ff ; [$b704] undefined
-    hex ff ff ff bf 00 ff 17 ff fb ff ff 39 00 ff a3 ff ; [$b714] undefined
-    hex 56 ff eb bf 00 ff df ff fb ff fe 5f 00 ff ef ff ; [$b724] undefined
-    hex bf ff ff 5a 00 ff 7f ff ff ff ff 1d 00 ff c8 ff ; [$b734] undefined
-    hex 7f ff bb f3 00 ff c5 ff ff ff 37 bf 00 ff 5c ff ; [$b744] undefined
-    hex ff ff ff 2e 00 ff 7f ff ff ff ff 78 00 ff 6f ff ; [$b754] undefined
-    hex fe ff ff fb 00 ff 7d ff ff ff ff 5e 00 ff f7 ff ; [$b764] undefined
-    hex fe ff 7d 0b 00 ff fd ff ff ff ff 89 00 ff 75 ff ; [$b774] undefined
-    hex fe ff 5c df 00 ff de ff f3 ff ff 0f 00 ff 77 ff ; [$b784] undefined
-    hex 77 ff ff ef 00 ff 76 ff fd ef ff 4d 00 ff 5c ff ; [$b794] undefined
-    hex fd ff fa 47 00 ff ef ff df df ff 90 80 ff cd ff ; [$b7a4] undefined
-    hex ff ff cd cd 00 ff be ff ff ff fd 43 00 ff 4a ff ; [$b7b4] undefined
-    hex ff ff 3f f7 00 ff f4 ff ff ff df ba 00 ff fe ff ; [$b7c4] undefined
-    hex df ff fe 03 00 ff fe ff ff ff f7 30 00 ff 11 ff ; [$b7d4] undefined
-    hex ff ff fd b7 00 ff 7d ff 77 fb 7f be 00 ff ae ff ; [$b7e4] undefined
-    hex ff ff fb 72 00 ff 7f ff ff ff ff dc 00 ff 5c ff ; [$b7f4] undefined
-    hex fd ff f7 df 00 ff 7e ff ff ff ff cf 00 ff fb ff ; [$b804] undefined
-    hex ff ff ff 86 00 ff fe ff ff ff ff cb 00 ff 3f ff ; [$b814] undefined
-    hex ec ff ef 7d 00 ff fa ff ff ff ff df 00 ff ed ff ; [$b824] undefined
-    hex fd ff ff 56 00 ff ff ff ff ff ff 44 00 ff dd ff ; [$b834] undefined
-    hex 9f ff ff ff 00 ff ca ff ff ff ff af 00 ff 5f ff ; [$b844] undefined
-    hex ff ff ff 33 00 ff ff ff ff ff ff 01 00 ff 68 ff ; [$b854] undefined
-    hex f7 ff 6e fa 00 ff ef ff ff ff fb 7e 00 ff fb ff ; [$b864] undefined
-    hex ff ff fe 42 00 ff ff ff ff ff 5f 9b 00 ff e7 bf ; [$b874] undefined
-    hex ff ff 77 f5 00 ff fa ff ff ff ff fa 00 ff f7 ff ; [$b884] undefined
-    hex ff ff df e5 00 ff df ff ff ff ff 5b 00 ff f4 ff ; [$b894] undefined
-    hex 97 ff ff ef 00 ff fb ff 7f ff fb de 00 ff db ff ; [$b8a4] undefined
-    hex fe ff ff 18 00 ff fc f7 fa ff ef b4 00 ff 7f ff ; [$b8b4] undefined
-    hex 79 ff b7 fe 00 ff db ff fb ff af 5f 00 ff be ff ; [$b8c4] undefined
-    hex ff ff ff 58 00 ff ff ff ff ff bb 56 00 ff 88 ff ; [$b8d4] undefined
-    hex 9c ff af ff 00 ff b7 ff ff ff fe af 00 ff fa ff ; [$b8e4] undefined
-    hex ff bf ff 69 00 ff ce ff ff df f7 0e 00 ff cb ff ; [$b8f4] undefined
-    hex ef ff ff 7f 00 ff ff ff ff ff 5e ff 00 ff ec ff ; [$b904] undefined
-    hex ff ff ff ef 00 ff fd ff ff ff ff 33 00 ff 83 ff ; [$b914] undefined
-    hex 7f ff e9 ff 00 ff b6 ff             ; [$b924] undefined
+    hex 31 00 00 08 00 00 01 00 02 00 03 00 04 00 05 00 ; [$aac8] undefined
+    hex 06 00 07 00 31 00 00 08 08 00 09 00 0a 00 0b 00 ; [$aad7] undefined
+    hex 0c 00 0d 00 0e 00 ff 31 00 00 08 00 00 01 00 0f ; [$aae7] undefined
+    hex 00 10 00 11 00 12 00 13 00 14 00 31 00 00 08 00 ; [$aaf7] undefined
+    hex 00 01 00 15 00 16 00 17 00 18 00 19 00 1a 00 31 ; [$ab07] undefined
+    hex 00 00 08 1b 00 1c 00 1d 00 1e 00 1f 00 20 00 21 ; [$ab17] undefined
+    hex 00 22 00 31 00 00 08 00 00 01 00 02 00 03 00 04 ; [$ab27] undefined
+    hex 00 05 00 06 00 07 00 31 00 00 08 23 00 24 00 26 ; [$ab37] undefined
+    hex 00 27 00 28 00 29 00 2a 00 2b 00 31 00 00 08 2c ; [$ab47] undefined
+    hex 00 2d 00 2e 00 2f 00 30 00 31 00 32 00 33 00 31 ; [$ab57] undefined
+    hex 00 00 08 00 00 01 00 09 01 0a 01 0b 01 0c 01 02 ; [$ab67] undefined
+    hex 00 03 00 31 00 00 08 04 00 05 00 0d 01 0e 01 0f ; [$ab77] undefined
+    hex 01 10 01 06 00 ff 31 00 00 08 00 00 01 00 11 01 ; [$ab87] undefined
+    hex 12 01 13 01 14 01 07 00 08 00 31 00 00 08 00 00 ; [$ab97] undefined
+    hex 01 00 19 01 1a 01 15 01 16 01 17 00 18 00 31 00 ; [$aba7] undefined
+    hex 00 08 1b 00 1c 00 1f 01 20 01 21 01 22 01 1d 00 ; [$abb7] undefined
+    hex 1e 00 31 00 00 08 00 00 01 00 09 01 0a 01 0b 01 ; [$abc7] undefined
+    hex 0c 01 02 00 03 00 31 00 00 08 23 00 24 00 28 01 ; [$abd7] undefined
+    hex 29 01 2a 01 2b 01 26 00 27 00 31 00 00 08 2c 00 ; [$abe7] undefined
+    hex 2d 00 34 01 31 01 32 01 33 01 2e 00 2f 00 31 00 ; [$abf7] undefined
+    hex 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 01 ; [$ac07] undefined
+    hex 07 01 31 00 00 08 08 00 09 00 0a 01 0b 01 0c 01 ; [$ac17] undefined
+    hex 0d 01 0e 01 0f 01 31 00 00 08 00 00 01 00 10 01 ; [$ac27] undefined
+    hex 11 01 12 01 13 01 14 01 15 01 31 00 00 08 00 00 ; [$ac37] undefined
+    hex 01 00 16 01 17 01 18 01 19 01 1a 01 1b 01 31 00 ; [$ac47] undefined
+    hex 00 08 1c 00 1d 00 1e 01 1f 01 20 01 21 01 22 01 ; [$ac57] undefined
+    hex 23 01 31 00 00 08 00 00 01 00 02 01 03 01 04 01 ; [$ac67] undefined
+    hex 05 01 06 01 07 01 31 00 00 08 24 00 25 00 27 01 ; [$ac77] undefined
+    hex 28 01 29 01 2a 01 2b 01 2c 01 31 00 00 08 2d 00 ; [$ac87] undefined
+    hex 2e 00 2f 01 30 01 31 01 32 01 33 01 34 01 31 00 ; [$ac97] undefined
+    hex 00 08 00 01 01 01 02 01 03 01 04 01 05 01 06 01 ; [$aca7] undefined
+    hex 07 01 31 00 00 08 08 01 09 01 0a 01 0b 01 0c 01 ; [$acb7] undefined
+    hex 0d 01 0e 01 0f 01 31 00 00 08 00 01 01 01 10 01 ; [$acc7] undefined
+    hex 11 01 12 01 13 01 14 01 15 01 31 00 00 08 00 01 ; [$acd7] undefined
+    hex 01 01 02 01 03 01 16 01 17 01 18 01 19 01 31 00 ; [$ace7] undefined
+    hex 00 08 1a 01 1b 01 1c 01 1d 01 1e 01 1f 01 20 01 ; [$acf7] undefined
+    hex 21 01 31 00 00 08 00 01 01 01 22 01 03 01 04 01 ; [$ad07] undefined
+    hex 05 01 06 01 07 01 31 00 00 08 23 01 ff 25 01 26 ; [$ad17] undefined
+    hex 01 27 01 28 01 29 01 2a 01 31 00 00 08 2b 01 2c ; [$ad27] undefined
+    hex 01 2d 01 2e 01 2f 01 30 01 31 01 32 01 31 00 00 ; [$ad37] undefined
+    hex 08 00 00 01 00 02 00 03 00 04 00 05 00 06 00 07 ; [$ad47] undefined
+    hex 00 31 00 00 08 08 00 09 00 02 00 03 00 04 00 05 ; [$ad57] undefined
+    hex 00 0a 00 ff 31 00 00 08 00 00 01 00 02 00 03 00 ; [$ad67] undefined
+    hex 04 00 05 00 0b 00 0c 00 31 00 00 08 00 00 01 00 ; [$ad77] undefined
+    hex 02 00 03 00 04 00 05 00 0d 00 0e 00 31 00 00 08 ; [$ad87] undefined
+    hex 0f 00 10 00 11 00 12 00 13 00 14 00 15 00 16 00 ; [$ad97] undefined
+    hex 31 00 00 08 00 00 01 00 02 00 03 00 04 00 05 00 ; [$ada7] undefined
+    hex 06 00 07 00 31 00 00 08 17 00 18 00 1a 00 1b 00 ; [$adb7] undefined
+    hex 1c 00 1d 00 1e 00 1f 00 31 00 00 08 20 00 21 00 ; [$adc7] undefined
+    hex 22 00 23 00 24 00 25 00 26 00 27 00 31 00 00 08 ; [$add7] undefined
+    hex 00 00 01 00 02 01 03 01 04 01 05 01 06 00 07 00 ; [$ade7] undefined
+    hex 31 00 00 08 08 00 09 00 02 01 03 01 04 01 05 01 ; [$adf7] undefined
+    hex 0a 00 ff 31 00 00 08 00 00 01 00 02 01 03 01 04 ; [$ae07] undefined
+    hex 01 05 01 0b 00 0c 00 31 00 00 08 00 00 01 00 02 ; [$ae17] undefined
+    hex 01 03 01 04 01 05 01 0d 00 0e 00 31 00 00 08 0f ; [$ae27] undefined
+    hex 00 10 00 11 01 12 01 13 01 14 01 15 00 16 00 31 ; [$ae37] undefined
+    hex 00 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 ; [$ae47] undefined
+    hex 00 07 00 31 00 00 08 17 00 18 00 1a 01 1b 01 1c ; [$ae57] undefined
+    hex 01 1d 01 1e 00 1f 00 31 00 00 08 20 00 21 00 22 ; [$ae67] undefined
+    hex 01 23 01 24 01 25 01 26 00 27 00 31 00 00 08 00 ; [$ae77] undefined
+    hex 00 01 00 02 01 03 01 04 01 05 01 06 01 07 01 31 ; [$ae87] undefined
+    hex 00 00 08 08 00 09 00 02 01 03 01 04 01 05 01 0a ; [$ae97] undefined
+    hex 01 0b 01 31 00 00 08 00 00 01 00 02 01 03 01 04 ; [$aea7] undefined
+    hex 01 05 01 0c 01 0d 01 31 00 00 08 00 00 01 00 02 ; [$aeb7] undefined
+    hex 01 03 01 04 01 05 01 0e 01 0f 01 31 00 00 08 10 ; [$aec7] undefined
+    hex 00 11 00 12 01 13 01 14 01 15 01 16 01 17 01 31 ; [$aed7] undefined
+    hex 00 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 ; [$aee7] undefined
+    hex 01 07 01 31 00 00 08 18 00 19 00 1b 01 1c 01 1d ; [$aef7] undefined
+    hex 01 1e 01 1f 01 20 01 31 00 00 08 21 00 22 00 23 ; [$af07] undefined
+    hex 01 24 01 25 01 26 01 27 01 28 01 00 00 08 04 25 ; [$af17] undefined
+    hex 00 00 00 08 04 25 01 00 00 08 04 26 01 00 00 08 ; [$af27] undefined
+    hex 04 24 01 00 00 08 04 19 00 00 00 08 04 19 01 00 ; [$af37] undefined
+    hex 00 08 04 1a 01 00 00 00 04 ff 00 00 00 04 01 01 ; [$af47] undefined
+    hex 00 00 00 04 02 01 00 00 00 04 00 01 10 00 00 04 ; [$af57] undefined
+    hex 02 01 03 01 00 00 00 04 04 01 00 00 00 04 05 01 ; [$af67] undefined
+    hex 01 00 00 08 00 01 01 01 11 00 00 08 02 01 03 01 ; [$af77] undefined
+    hex ff 04 01 00 00 00 04 05 01 00 00 00 04 06 01 11 ; [$af87] undefined
+    hex 00 00 08 05 01 06 01 ff 07 01 00 00 00 04 08 01 ; [$af97] undefined
+    hex 00 00 00 04 00 01 01 00 00 08 01 01 02 01 01 00 ; [$afa7] undefined
+    hex 00 08 03 01 04 01 10 00 00 04 00 01 01 01 10 00 ; [$afb7] undefined
+    hex 00 04 02 01 03 01 10 00 00 04 04 01 05 01 ; [$afc7] undefined
 
-DAT_PRG7__b92c:                             ; [$b92c]
-    hex fd ff ff 5f 00 ff af ff fb ff ff 8f 80 ff ff ff ; [$b92c] undefined
-    hex ff ff bf 1b 00 ff be ff 7f ff fd d7 00 ff cf ff ; [$b93c] undefined
-    hex ff ff fe 1f 00 ff 7d ff f5 ff ff 4e 00 ff 3f ff ; [$b94c] undefined
-    hex ff ff ff 24 00 ff b5 ff 7f ff ff 9b 00 ff f4 ff ; [$b95c] undefined
-    hex ff ff ef 3d 00 ff bf ff ff ff ff f8 00 ff ff ff ; [$b96c] undefined
-    hex ff ff ff f0 00 ff a7 ff ff ff ff f7 00 ff ef ff ; [$b97c] undefined
-    hex fd ff bf 7f 00 f7 2d ff ef ff ff 97 00 ff f3 ff ; [$b98c] undefined
-    hex ff ff df fd 00 ff 9b ff fd ff ff ff 00 ff bf ff ; [$b99c] undefined
-    hex ff ff fb 5f 00 ff 6f ff ff bf bf a8 00 ff ff ff ; [$b9ac] undefined
-    hex f7 ff ff 41 00 ff a1 ff f2 ff 7e da 00 ff fc ff ; [$b9bc] undefined
-    hex ff ff ef ae 00 ff 97 ff f9 ff fd 82 00 ff f9 ff ; [$b9cc] undefined
-    hex ff ff ff a9 00 ff 1e ff 7f ff 6f fe 00 ff af ff ; [$b9dc] undefined
-    hex 7f ff ff 76 00 ff de ff df ff df 31 00 f7 ff ff ; [$b9ec] undefined
-    hex df ff ff 06 00 ff 77 ff ff ff f7 bf 00 ff e9 ff ; [$b9fc] undefined
-    hex fe ff ff fe 00 ff f6 ff b7 ff ff dd 00 ff fb ff ; [$ba0c] undefined
-    hex ff ff ef 18 00 ff b7 ff d6 ff 76 ff 00 ff d9 ff ; [$ba1c] undefined
-    hex 7f ff ff f7 00 ff bb ff ff ff ff f0 00 ff ff ff ; [$ba2c] undefined
-    hex ff 7f ff 08 00 ff ab ff ff ff fd ff 00 ff d1 ff ; [$ba3c] undefined
-    hex ff ff ff ef 00 ff ce ff df ff ff 2e 00 ff bf ff ; [$ba4c] undefined
-    hex ff ff ff 98 00 ff ff ff ff ff ff fa 00 ff 8e ff ; [$ba5c] undefined
-    hex cf ff fe 97 00 ff 2e ff ff ff ff ce 00 ff ff ff ; [$ba6c] undefined
-    hex ff ff ff 31 00 ff 8d ff eb ff f7 9d 00 ff 6b ff ; [$ba7c] undefined
-    hex f2 df 77 72 00 ff ff ff dd ff ef 5e 00 ff 7b ff ; [$ba8c] undefined
-    hex ff ef fe 24 00 ff ef ff e8 ff f3 7f 00 ff d7 ff ; [$ba9c] undefined
-    hex df ff fd 3e 00 ff fb ff f7 ff ff ce 00 ff 7f ff ; [$baac] undefined
-    hex ff fd ff 36 00 ff bf ff db ff ff 3f 00 ff 5a ff ; [$babc] undefined
-    hex 7f ff df 5b 00 ff 73 ff fc df f6 9c 00 ff b2 ff ; [$bacc] undefined
-    hex ff f7 ff 03 00 ff cb ff fa ff ff ae 00 ff d3 ff ; [$badc] undefined
-    hex ff ff ff 3c 00 ff fe ff ff ff f7 14 00 ff bf ff ; [$baec] undefined
-    hex ff bf ff 01 00 ff 86 ff ef ff b5 ff 00 ff 59 ff ; [$bafc] undefined
-    hex ff ff ff 96 00 ff 7e ff ff 7f ff da 00 ff ff ff ; [$bb0c] undefined
-    hex ff ff ff 14 00 ff 21 ff db ff fb 7f 00 ff b7 ff ; [$bb1c] undefined
-    hex ef ff b3 fb 00 ff ff ff df ff f3 7f 00 ff f7 ff ; [$bb2c] undefined
-    hex ff ff ff 60 00 ff d4 ff ff ff bd 7f 00 ff be ff ; [$bb3c] undefined
-    hex ff ff ff df 00 ff 7b ff ef ff ff cf 00 ff f7 ff ; [$bb4c] undefined
-    hex ff ff ff 5f 00 ff a9 ff f7 ff f7 fe 00 ff 44 ff ; [$bb5c] undefined
-    hex ff ff ef 6f 00 ff 6b ff fd ff ff be 00 ff ff ff ; [$bb6c] undefined
-    hex ff 3f ff 56 00 ff c2 ff ff ff fb fb 00 ff 26 ff ; [$bb7c] undefined
-    hex ff ff fb c1 00 ff 5f ff f3 ff ff e0 00 ff fe ff ; [$bb8c] undefined
-    hex ef ff 7f c0 00 ff e8 ff ed ff ff 9f 00 ff 6e ff ; [$bb9c] undefined
-    hex f7 ff df 47 00 ff ea ff fd ff ff 6d 00 ff ff ff ; [$bbac] undefined
-    hex bf ff ef a8 00 ff c4 ff ed ff fb ef 00 ff 3a ff ; [$bbbc] undefined
-    hex ff ff fd 72 00 ff 93 ff fd fd bd 45 00 ff ef ff ; [$bbcc] undefined
-    hex ff ff ff f0 00 ff 25 ff fb ff fa 57 00 ff cf ff ; [$bbdc] undefined
-    hex ff ff e3 4c 00 ff a7 ff f7 ff fe 8e 00 ff e0 ff ; [$bbec] undefined
-    hex ff ff f7 47 00 ff bf ff bf ff ff ff 00 ff fe ff ; [$bbfc] undefined
-    hex ff ff ee f7 00 ff ff ff fb ff ff ce 00 ff bf ff ; [$bc0c] undefined
-    hex fe ff ff f6 00 ff 1a ff ef ff f5 ff 00 ff df ff ; [$bc1c] undefined
-    hex f7 ff fd bf 00 ff f7 ff af fd ff 6f 00 ff ff ff ; [$bc2c] undefined
-    hex ff fb ff 93 00 ff 97 ff ff ff ef ff 00 ff fe ff ; [$bc3c] undefined
-    hex ef ff df fb 00 ff f4 ff f7 ff fe d1 00 ff f6 ff ; [$bc4c] undefined
-    hex ff ff bf 73 00 ff 5d ff fa ff ff ff 00 ff ff fd ; [$bc5c] undefined
-    hex ff ff ff ff 00 ff ff ff ff ef fd 1e 00 ff bf ff ; [$bc6c] undefined
-    hex ff ff ff 2d 00 ff 0b ff de ff d7 bf 00 ff 3f ff ; [$bc7c] undefined
-    hex ff ff fd fd 00 ff 7f ff ef ff ff ac 00 ff fb ff ; [$bc8c] undefined
-    hex ff df f7 d7 00 ff a4 ff bf ff fd 60 00 ff f7 ff ; [$bc9c] undefined
-    hex ff ff bf ff 00 ff 5f ff ff ff ff ac 00 ff ef ff ; [$bcac] undefined
-    hex ff ff ff ae 00 ff 20 ff ff ff ef d6 00 ff ec ff ; [$bcbc] undefined
-    hex bf ff ff de 00 ff e7 ff df ff ff 16 00 ff df ff ; [$bccc] undefined
-    hex ff ff ff 51 00 ff ed ff bf ff 3f 67 00 ff de ff ; [$bcdc] undefined
-    hex ff ff cf 2d 00 ff b5 ff df ff ff 17 00 ff fd ff ; [$bcec] undefined
-    hex b7 bf bf 85 00 ff d0 ff ff ff f7 fd 00 ff fb ff ; [$bcfc] undefined
-    hex e6 ff c5 af 00 ff d5 ff 7f ff ff 4f 00 ff fb ff ; [$bd0c] undefined
-    hex ff ff ff 2f 00 ff da ff f7 ff ef fd 00 ff ae ff ; [$bd1c] undefined
-    hex ff ff db e6 00 ff fe ff ff ff ff 0c 00 ff ff ff ; [$bd2c] undefined
-    hex f7 ff bf dd 00 ff 1b ff ad ff fe ff 00 ff ff ff ; [$bd3c] undefined
-    hex ff ff ef fe 00 ff cf ff ff ff ff 77 00 ff ff ff ; [$bd4c] undefined
-    hex ff ff ff 70 00 ff f9 ff f7 ff fd 7f 00 ff bf ff ; [$bd5c] undefined
-    hex ff ff ff a4 00 ff 7f ff fb ff ff 49 00 ff 5f ff ; [$bd6c] undefined
-    hex ff ff ff ad 00 ff 8a ff e7 ff ff ff 00 ff f9 ff ; [$bd7c] undefined
-    hex fb ff ff fb 00 ff de ff ff ff df 01 00 ff ef bf ; [$bd8c] undefined
-    hex fe ff ef 3e 00 ff f3 ff ff ff bf ef 00 ff 39 ff ; [$bd9c] undefined
-    hex 7f ff df 2b 00 ff fe ff ff ff ff a2 00 ff fb ff ; [$bdac] undefined
-    hex ff ff ff fb 00 ff ff ff ff ff 3b 0d 00 ff af ff ; [$bdbc] undefined
-    hex ff ff ef 37 00 ff fc ff bf fe ff 48 00 ff bf ff ; [$bdcc] undefined
-    hex ff ff ff 10 00 ff e7 ff ff ff 3d 5f 00 ff 6e ff ; [$bddc] undefined
-    hex fd ff ff 96 00 ff 59 ff fa ff fb ea 00 ff 7e ff ; [$bdec] undefined
-    hex ff fb fd 00 00 ff 70 ff fb ff ad ff 00 ff 7c ff ; [$bdfc] undefined
-    hex fe ff ff ff 00 ff bf ff ff ff ff 5f 00 ff fb ff ; [$be0c] undefined
-    hex ff ff ff c8 00 ff 1d ff fb ff 6f ff 00 ff 12 ff ; [$be1c] undefined
-    hex ff ff fb ff 00 ff ff ff ff ff 7e bf 00 ff ff ff ; [$be2c] undefined
-    hex ff ff ff f9 00 ff dc ff ff ff ff 3f 00 ff b3 ff ; [$be3c] undefined
-    hex f7 ff ff fe 00 ff 7e ff ff ff ff 3a 00 ff f7 ff ; [$be4c] undefined
-    hex bf ff ff 09 00 ff d8 ff bd ff 15 af 00 ff e3 ff ; [$be5c] undefined
-    hex ff ff f7 dd 00 ff 79 ff ff ff bf 68 00 ff ef ff ; [$be6c] undefined
-    hex ff ff ff 02 00 ff 57 ff 7f ff f3 ff 00 ff 23 ff ; [$be7c] undefined
-    hex f7 ff ff f3 00 ff 7b ff ff ff ff a4 00 ff fe ff ; [$be8c] undefined
-    hex ff ff ff 08 00 ff f8 ff ff ff df 9e 00 ff f2 ff ; [$be9c] undefined
-    hex ff ff fe 3e 00 ff fb ff ff ff ff 22 00 ff ed ff ; [$beac] undefined
-    hex ff ff ff d9 00 ff 1f ff af ff f7 fc 00 ff dd ff ; [$bebc] undefined
-    hex ff ff fe 8b 00 ff ff ff ff ff fd ed 00 ff df ff ; [$becc] undefined
-    hex ff ff ff 40 00 ff f7 ff fd ff 4e 1d 00 ff f9 ff ; [$bedc] undefined
-    hex fd ff cf f6 00 ff 7f ff bf ff 7b 61 00 ff f7 ff ; [$beec] undefined
-    hex df ff ff 21 00 ff 6f ff ff ff fb 7f 00 ff df ff ; [$befc] undefined
-    hex f7 ff ff 9f 00 ff bf ff f7 ff ff b7 00 ff ff ff ; [$bf0c] undefined
-    hex fe ff ff 91 00 ff 83 ff 7f ff 6d ff 00 ff b5 ff ; [$bf1c] undefined
-    hex ff ff ff eb 00 ff fd ff ff ff ef b5 00 ff bf ff ; [$bf2c] undefined
-    hex ff ff ff 7a 00 ff d0 ff bc ff ed ff 00 ff dd ff ; [$bf3c] undefined
-    hex fb ff ff b3 00 ff ff ff ff ff fd 6a 00 ff f7 ff ; [$bf4c] undefined
-    hex df ff ff 34 00 ff 67 ff ff ff b5 fd 00 ff da ff ; [$bf5c] undefined
-    hex ff ff ff fa 00 ff 7e ff df ff ff 49 00 ff de ff ; [$bf6c] undefined
-    hex ff ff ef 27 00 ff e7 ff 3d ff fb 39 00 ff fa ff ; [$bf7c] undefined
-    hex fb ff fd fb 00 ff ff ff ff ff ef 26 00 ff ff ff ; [$bf8c] undefined
-    hex ff ff df 89 00 ff 98 ff 7f ff fd da 00 ff f1 ff ; [$bf9c] undefined
-    hex ef ff ff 5f 00 ff b2 ff ef ff ff 4e 00 ff ff ff ; [$bfac] undefined
-    hex ff ff 3f 1a 00 ff 18 ff eb ff df 4b 00 ff fb ff ; [$bfbc] undefined
-    hex ef ff fd 58 00 ff f3 fe ff ff ff 02 00 ff ff ff ; [$bfcc] undefined
-    hex ff ff ef 60 00 ff 72 ff ef ff fe 0a 00 ff cd ff ; [$bfdc] undefined
-    hex ff ff 6e fc 00 fe ed ff ff ff df d7 00 ff f3 ff ; [$bfec] undefined
-    db $fe,$ff,$ff,$09                      ; [$bffc] undefined
+;
+; XREFS:
+;     USHORT_PRG7__800a [$PRG7::800a]
+;
+MAYBE_PORTRAITS_INFO:                       ; [$afd5]
+    dw $3043,$309b,$30a3,$30ab,$30b3,$30bb,$3113,$311b ; [$afd5] ushort
+    dw $3123,$312b,$3133,$318b,$3193,$319b,$31a3,$31ab ; [$afe5] ushort
+    dw $3203,$320b,$3213,$321b,$3223,$3277,$327f,$3287 ; [$aff5] ushort
+    dw $328f,$3297,$32eb,$32f3,$32fb,$3301,$3307,$335d ; [$b005] ushort
+    dw $3365,$336d,$3379,$3385,$33d9,$33e1,$33e9,$33f1 ; [$b015] ushort
+    dw $33f9,$344f,$3459,$3463,$346b,$3473,$34cb,$34d3 ; [$b025] ushort
+    dw $34db,$34e3,$34eb,$3543,$354b,$3553,$355b ; [$b035] ushort
+
+    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b044] undefined
+    hex 00 03 00 03 40 02 40 ff ff 04 00 ff ff 07 00 ff ; [$b053] undefined
+    hex ff 08 00 ff ff 08 40 ff 0a 00 0b 00 0c 00 0c 40 ; [$b063] undefined
+    hex 0b 40 0a 40 0d 00 0e 00 0f 00 0f 40 0e 40 0d 40 ; [$b073] undefined
+    hex 10 00 11 00 12 00 12 40 11 40 10 40 10 00 11 00 ; [$b083] undefined
+    hex 13 00 13 40 11 40 10 40             ; [$b093] undefined
+
+PRG7_B09B:                                  ; [$b09b]
+    hex 01 10 10 08 05 00 06 00 01 10 10 08 14 00 15 00 ; [$b09b] undefined
+    hex 01 10 18 08 09 00 09 40 01 10 18 08 16 00 16 40 ; [$b0ab] undefined
+    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b0bb] undefined
+    hex 00 ff ff 02 40 ff ff 04 00 05 00 05 40 04 40 ff ; [$b0cb] undefined
+    hex ff 06 00 ff ff 06 40 ff 08 00 09 00 0a 00 0a 40 ; [$b0db] undefined
+    hex 09 40 08 40 0b 00 0c 00 0d 00 0d 40 0c 40 0b 00 ; [$b0eb] undefined
+    hex 0b 00 0b 00 0e 00 0e 40 0b 00 0b 00 0b 00 0b 00 ; [$b0fb] undefined
+    hex 0f 00 0f 40 0b 00 0b 00 01 10 08 08 03 00 03 40 ; [$b10b] undefined
+    hex 01 10 08 08 10 00 10 40 01 10 18 08 07 00 07 40 ; [$b11b] undefined
+    hex 01 10 18 08 11 00 11 40 75 00 00 18 ff 00 00 01 ; [$b12b] undefined
+    hex 00 02 00 03 00 ff ff 04 00 ff ff 07 00 ff ff 08 ; [$b13b] undefined
+    hex 00 09 00 0a 00 0b 00 ff ff 0c 00 ff ff 0f 00 ff ; [$b14b] undefined
+    hex 10 01 11 01 12 00 12 40 11 41 10 41 13 01 14 01 ; [$b15b] undefined
+    hex 15 01 15 41 14 41 13 41 16 01 17 01 18 01 18 41 ; [$b16b] undefined
+    hex 17 41 16 41 19 01 1a 01 18 01 18 41 1a 41 19 41 ; [$b17b] undefined
+    hex 01 10 08 08 05 00 06 00 01 10 08 08 1b 00 1c 00 ; [$b18b] undefined
+    hex 01 10 18 08 0d 00 0e 00 01 10 18 08 1d 00 1e 00 ; [$b19b] undefined
+    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b1ab] undefined
+    hex 00 ff ff 02 40 ff ff 04 00 05 00 05 40 04 40 ff ; [$b1bb] undefined
+    hex ff 06 00 ff ff 06 40 ff 08 00 09 00 0a 00 0a 40 ; [$b1cb] undefined
+    hex 09 40 08 40 0b 00 0c 00 0d 00 0d 40 0c 40 0b 40 ; [$b1db] undefined
+    hex 0b 00 0e 00 0e 00 0e 00 0e 00 0b 40 0b 00 0f 00 ; [$b1eb] undefined
+    hex 0e 00 0e 00 0f 40 0b 40 01 10 08 08 03 00 03 40 ; [$b1fb] undefined
+    hex 01 10 08 08 10 00 10 40 01 10 18 08 07 00 07 40 ; [$b20b] undefined
+    hex 01 10 18 08 11 00 11 40 75 00 00 18 ff ff ff ff ; [$b21b] undefined
+    hex ff ff ff 00 00 01 00 02 00 03 00 ff ff 04 00 05 ; [$b22b] undefined
+    hex 00 06 00 07 00 ff ff 08 00 ff ff 0a 00 ff 0b 00 ; [$b23b] undefined
+    hex 0c 00 ff ff 0c 40 0b 40 0e 00 0f 00 10 00 10 40 ; [$b24b] undefined
+    hex 0f 40 0e 40 11 00 12 00 13 00 13 00 12 40 11 40 ; [$b25b] undefined
+    hex 14 00 15 00 13 00 13 00 15 40 14 40 01 10 18 08 ; [$b26b] undefined
+    hex 09 00 09 40 01 10 18 08 16 00 16 40 01 10 20 08 ; [$b27b] undefined
+    hex 0d 00 0d 40 01 10 20 08 17 00 17 40 75 00 00 18 ; [$b28b] undefined
+    hex ff ff 00 00 00 40 ff ff ff 01 00 02 00 03 00 04 ; [$b29b] undefined
+    hex 00 ff ff 05 00 ff ff 08 00 ff ff 09 00 0a 00 ff ; [$b2ab] undefined
+    hex ff ff ff 0c 00 0d 00 0e 00 0c 40 ff 0f 00 10 00 ; [$b2bb] undefined
+    hex 11 00 11 40 10 40 0f 40 12 00 13 00 14 00 14 40 ; [$b2cb] undefined
+    hex 13 40 12 40 15 00 16 00 17 00 17 00 16 40 15 40 ; [$b2db] undefined
+    hex 01 10 10 08 06 00 07 00 01 10 10 08 18 00 19 00 ; [$b2eb] undefined
+    hex 00 18 18 00 0b 00 00 18 18 00 1a 00 75 00 00 18 ; [$b2fb] undefined
+    hex ff 00 00 01 00 01 40 00 40 ff ff 02 00 ff ff 05 ; [$b30b] undefined
+    hex 00 ff ff 06 00 ff ff 09 00 ff ff 0a 00 ff ff 0d ; [$b31b] undefined
+    hex 00 ff 0e 01 0f 01 10 00 11 00 0f 41 0e 41 12 01 ; [$b32b] undefined
+    hex 12 01 13 01 13 41 12 01 12 01 12 01 12 01 14 01 ; [$b33b] undefined
+    hex 14 41 12 01 12 01 12 01 12 01 12 01 12 01 12 01 ; [$b34b] undefined
+    hex 12 01 01 10 08 08 03 00 04 00 01 10 08 08 15 00 ; [$b35b] undefined
+    hex 16 00 11 10 10 08 07 00 08 00 0b 00 0c 00 11 10 ; [$b36b] undefined
+    hex 10 08 17 00 18 00 19 00 1a 00 75 00 00 18 ff 00 ; [$b37b] undefined
+    hex 00 01 00 02 00 03 00 ff ff 04 00 ff ff 07 00 ff ; [$b38b] undefined
+    hex ff 08 00 09 00 0a 00 0b 00 ff ff 0c 00 0d 00 ff ; [$b39b] undefined
+    hex ff ff ff ff 10 00 11 00 ff ff 12 03 13 03 14 00 ; [$b3ab] undefined
+    hex 15 00 13 43 12 43 16 03 16 03 17 03 17 43 16 03 ; [$b3bb] undefined
+    hex 16 03 16 03 16 03 18 03 18 43 16 03 16 03 01 10 ; [$b3cb] undefined
+    hex 08 08 05 00 06 00 01 10 08 08 19 00 1a 00 01 18 ; [$b3db] undefined
+    hex 18 00 0e 00 0f 00 01 18 18 00 1b 00 1c 00 75 00 ; [$b3eb] undefined
+    hex 00 20 ff 00 00 01 00 02 00 03 00 ff ff ff ff ff ; [$b3fb] undefined
+    hex 07 00 ff ff ff ff 0a 00 0b 00 ff ff 0c 00 0d 00 ; [$b40b] undefined
+    hex 0e 00 ff ff 0f 02 10 02 11 02 12 02 13 02 14 02 ; [$b41b] undefined
+    hex 15 02 16 02 17 02 18 02 19 02 1a 00 18 02 1b 02 ; [$b42b] undefined
+    hex 1c 02 1d 02 1e 02 1f 00 18 02 1b 02 1b 02 1b 02 ; [$b43b] undefined
+    hex 1e 02 0a 00 02 08 08 10 04 00 05 00 06 00 02 08 ; [$b44b] undefined
+    hex 08 10 20 00 21 00 22 00 01 08 10 10 08 00 09 00 ; [$b45b] undefined
+    hex 01 08 10 10 23 00 24 00 75 00 00 18 ff 00 00 01 ; [$b46b] undefined
+    hex 00 01 40 00 40 ff ff 02 00 03 00 03 40 02 40 ff ; [$b47b] undefined
+    hex ff 04 00 ff ff 04 40 ff ff 06 00 ff ff 06 40 ff ; [$b48b] undefined
+    hex 08 02 09 02 0a 02 0a 42 09 42 08 42 0b 02 0c 02 ; [$b49b] undefined
+    hex 0d 02 0d 02 0c 42 0b 42 0e 02 0f 02 0d 02 0d 02 ; [$b4ab] undefined
+    hex 0f 42 0e 42 10 02 11 02 12 02 12 42 11 42 10 42 ; [$b4bb] undefined
+    hex 01 10 10 08 05 00 05 40 01 10 10 08 13 00 13 40 ; [$b4cb] undefined
+    hex 01 10 18 08 07 00 07 40 01 10 18 08 14 00 14 40 ; [$b4db] undefined
+    hex 75 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff 04 ; [$b4eb] undefined
+    hex 00 05 00 06 00 07 00 ff ff 08 00 ff ff 0b 00 ff ; [$b4fb] undefined
+    hex ff 0c 00 0d 00 ff ff ff 10 00 11 00 12 00 13 00 ; [$b50b] undefined
+    hex 14 00 15 00 16 00 17 00 18 00 19 00 1a 00 1b 00 ; [$b51b] undefined
+    hex 1c 00 1d 00 1e 00 1e 00 1f 00 20 00 21 00 22 00 ; [$b52b] undefined
+    hex 1e 00 1e 00 22 40 21 40 01 10 10 08 09 00 0a 00 ; [$b53b] undefined
+    hex 01 10 10 08 23 00 24 00 01 18 18 00 0e 00 0f 00 ; [$b54b] undefined
+    hex 01 18 18 00 25 00 26 00 ff bf ff ff 77 00 ff f6 ; [$b55b] undefined
+    hex ff ff ff b7 ff 00 ff ef ff ff ff ff 1d 00 ff ff ; [$b56b] undefined
+    hex ff ff f7 df c2 00 ff e7 ff bd ff ff bd 00 ff bf ; [$b57b] undefined
+    hex ff ef ff ff 6f 00 ff 7f ff df ff ff e6 00 ff f5 ; [$b58b] undefined
+    hex ff bf ff ff 52 00 ff 3d ff 7f ff bf 7f 00 ff b7 ; [$b59b] undefined
+    hex ff ef ff ff cd 00 ff 7f ff ff ef ff 96 00 ff f9 ; [$b5ab] undefined
+    hex ff ff ff fa 3c 00 00 00 ea 00 00 00 00 00 00 00 ; [$b5bb] undefined
+    hex 01 00 00 00 00 00 00 00 00 00 40 00 00 00 00 00 ; [$b5cb] undefined
+    hex 26 00 00 00 00 00 ff 45 ff fb ff dc 20 00 ff fd ; [$b5db] undefined
+    hex ff fb ff ff 87 00 ff bf ff ff fb ff e0 00 ff 7f ; [$b5eb] undefined
+    hex ff ff ff ff 1f 00 ff ff ff eb ff ad 7d 00 ff b4 ; [$b5fb] undefined
+    hex ff ff ff ff ff 00 ff ff ff fb ff 7f a7 00 ff 77 ; [$b60b] undefined
+    hex ff fe ff ff 82 00 ff f5 ff ff ff df ff 00 ff da ; [$b61b] undefined
+    hex ff ff ff ff ee 00 ff ce ff ff ff ff 53 00 ff ff ; [$b62b] undefined
+    hex ff bf ff fe 17 00 ff 89 ff 7a ff f6 ff 00 ff df ; [$b63b] undefined
+    hex ff ff ff fb ff 00 ff d2 ff ff 7f ff da 00 ff 1d ; [$b64b] undefined
+    hex ff ff ff ff 54 00 ff 6b ff ff ff bf d0 00 ff ff ; [$b65b] undefined
+    hex ff ff ff ff bf 00 ff 6f ff ff ff bf ea 00 ff f5 ; [$b66b] undefined
+    hex ff ff ff ff 91 00 ff 85 ff 7f ff f5 a5 00 ff ff ; [$b67b] undefined
+    hex ff ff ff ff 27 00 ff fd ff ff ff fa d9 00 ff f7 ; [$b68b] undefined
+    hex ff ff ff ff 8d 00 ff 6f ff df ff fb ef 00 ff ef ; [$b69b] undefined
+    hex ff ff ff fd b5 00 ff 9c ff cf ff bf 06 00 ff fe ; [$b6ab] undefined
+    hex ff ef bf ff 13 00 ff da ff ff ff fb 5e 00 ff df ; [$b6bb] undefined
+    hex ff ff ff ff f3 00 ff 7f ff 77 fe ff dc 00 ff bf ; [$b6cb] undefined
+    hex ff ff ff fd 69 00 ff 11 ff 7f ff 27 fb 00 ff 88 ; [$b6db] undefined
+    hex ff fb ff f6 97 00 ff 75 ff 9f ff 7e 47 00 ef b7 ; [$b6eb] undefined
+    hex ff ff ff df 3f 00 ff b1 ff fd ff b7 ff 00 ff 5f ; [$b6fb] undefined
+    hex ff ff ff ff ef 00 ff fe ff ff ff ff bf 00 ff 17 ; [$b70b] undefined
+    hex ff fb ff ff 39 00 ff a3 ff 56 ff eb bf 00 ff df ; [$b71b] undefined
+    hex ff fb ff fe 5f 00 ff ef ff bf ff ff 5a 00 ff 7f ; [$b72b] undefined
+    hex ff ff ff ff 1d 00 ff c8 ff 7f ff bb f3 00 ff c5 ; [$b73b] undefined
+    hex ff ff ff 37 bf 00 ff 5c ff ff ff ff 2e 00 ff 7f ; [$b74b] undefined
+    hex ff ff ff ff 78 00 ff 6f ff fe ff ff fb 00 ff 7d ; [$b75b] undefined
+    hex ff ff ff ff 5e 00 ff f7 ff fe ff 7d 0b 00 ff fd ; [$b76b] undefined
+    hex ff ff ff ff 89 00 ff 75 ff fe ff 5c df 00 ff de ; [$b77b] undefined
+    hex ff f3 ff ff 0f 00 ff 77 ff 77 ff ff ef 00 ff 76 ; [$b78b] undefined
+    hex ff fd ef ff 4d 00 ff 5c ff fd ff fa 47 00 ff ef ; [$b79b] undefined
+    hex ff df df ff 90 80 ff cd ff ff ff cd cd 00 ff be ; [$b7ab] undefined
+    hex ff ff ff fd 43 00 ff 4a ff ff ff 3f f7 00 ff f4 ; [$b7bb] undefined
+    hex ff ff ff df ba 00 ff fe ff df ff fe 03 00 ff fe ; [$b7cb] undefined
+    hex ff ff ff f7 30 00 ff 11 ff ff ff fd b7 00 ff 7d ; [$b7db] undefined
+    hex ff 77 fb 7f be 00 ff ae ff ff ff fb 72 00 ff 7f ; [$b7eb] undefined
+    hex ff ff ff ff dc 00 ff 5c ff fd ff f7 df 00 ff 7e ; [$b7fb] undefined
+    hex ff ff ff ff cf 00 ff fb ff ff ff ff 86 00 ff fe ; [$b80b] undefined
+    hex ff ff ff ff cb 00 ff 3f ff ec ff ef 7d 00 ff fa ; [$b81b] undefined
+    hex ff ff ff ff df 00 ff ed ff fd ff ff 56 00 ff ff ; [$b82b] undefined
+    hex ff ff ff ff 44 00 ff dd ff 9f ff ff ff 00 ff ca ; [$b83b] undefined
+    hex ff ff ff ff af 00 ff 5f ff ff ff ff 33 00 ff ff ; [$b84b] undefined
+    hex ff ff ff ff 01 00 ff 68 ff f7 ff 6e fa 00 ff ef ; [$b85b] undefined
+    hex ff ff ff fb 7e 00 ff fb ff ff ff fe 42 00 ff ff ; [$b86b] undefined
+    hex ff ff ff 5f 9b 00 ff e7 bf ff ff 77 f5 00 ff fa ; [$b87b] undefined
+    hex ff ff ff ff fa 00 ff f7 ff ff ff df e5 00 ff df ; [$b88b] undefined
+    hex ff ff ff ff 5b 00 ff f4 ff 97 ff ff ef 00 ff fb ; [$b89b] undefined
+    hex ff 7f ff fb de 00 ff db ff fe ff ff 18 00 ff fc ; [$b8ab] undefined
+    hex f7 fa ff ef b4 00 ff 7f ff 79 ff b7 fe 00 ff db ; [$b8bb] undefined
+    hex ff fb ff af 5f 00 ff be ff ff ff ff 58 00 ff ff ; [$b8cb] undefined
+    hex ff ff ff bb 56 00 ff 88 ff 9c ff af ff 00 ff b7 ; [$b8db] undefined
+    hex ff ff ff fe af 00 ff fa ff ff bf ff 69 00 ff ce ; [$b8eb] undefined
+    hex ff ff df f7 0e 00 ff cb ff ef ff ff 7f 00 ff ff ; [$b8fb] undefined
+    hex ff ff ff 5e ff 00 ff ec ff ff ff ff ef 00 ff fd ; [$b90b] undefined
+    hex ff ff ff ff 33 00 ff 83 ff 7f ff e9 ff 00 ff b6 ; [$b91b] undefined
+    hex ff fd ff ff 5f 00 ff af ff fb ff ff 8f 80 ff ff ; [$b92b] undefined
+    hex ff ff ff bf 1b 00 ff be ff 7f ff fd d7 00 ff cf ; [$b93b] undefined
+    hex ff ff ff fe 1f 00 ff 7d ff f5 ff ff 4e 00 ff 3f ; [$b94b] undefined
+    hex ff ff ff ff 24 00 ff b5 ff 7f ff ff 9b 00 ff f4 ; [$b95b] undefined
+    hex ff ff ff ef 3d 00 ff bf ff ff ff ff f8 00 ff ff ; [$b96b] undefined
+    hex ff ff ff ff f0 00 ff a7 ff ff ff ff f7 00 ff ef ; [$b97b] undefined
+    hex ff fd ff bf 7f 00 f7 2d ff ef ff ff 97 00 ff f3 ; [$b98b] undefined
+    hex ff ff ff df fd 00 ff 9b ff fd ff ff ff 00 ff bf ; [$b99b] undefined
+    hex ff ff ff fb 5f 00 ff 6f ff ff bf bf a8 00 ff ff ; [$b9ab] undefined
+    hex ff f7 ff ff 41 00 ff a1 ff f2 ff 7e da 00 ff fc ; [$b9bb] undefined
+    hex ff ff ff ef ae 00 ff 97 ff f9 ff fd 82 00 ff f9 ; [$b9cb] undefined
+    hex ff ff ff ff a9 00 ff 1e ff 7f ff 6f fe 00 ff af ; [$b9db] undefined
+    hex ff 7f ff ff 76 00 ff de ff df ff df 31 00 f7 ff ; [$b9eb] undefined
+    hex ff df ff ff 06 00 ff 77 ff ff ff f7 bf 00 ff e9 ; [$b9fb] undefined
+    hex ff fe ff ff fe 00 ff f6 ff b7 ff ff dd 00 ff fb ; [$ba0b] undefined
+    hex ff ff ff ef 18 00 ff b7 ff d6 ff 76 ff 00 ff d9 ; [$ba1b] undefined
+    hex ff 7f ff ff f7 00 ff bb ff ff ff ff f0 00 ff ff ; [$ba2b] undefined
+    hex ff ff 7f ff 08 00 ff ab ff ff ff fd ff 00 ff d1 ; [$ba3b] undefined
+    hex ff ff ff ff ef 00 ff ce ff df ff ff 2e 00 ff bf ; [$ba4b] undefined
+    hex ff ff ff ff 98 00 ff ff ff ff ff ff fa 00 ff 8e ; [$ba5b] undefined
+    hex ff cf ff fe 97 00 ff 2e ff ff ff ff ce 00 ff ff ; [$ba6b] undefined
+    hex ff ff ff ff 31 00 ff 8d ff eb ff f7 9d 00 ff 6b ; [$ba7b] undefined
+    hex ff f2 df 77 72 00 ff ff ff dd ff ef 5e 00 ff 7b ; [$ba8b] undefined
+    hex ff ff ef fe 24 00 ff ef ff e8 ff f3 7f 00 ff d7 ; [$ba9b] undefined
+    hex ff df ff fd 3e 00 ff fb ff f7 ff ff ce 00 ff 7f ; [$baab] undefined
+    hex ff ff fd ff 36 00 ff bf ff db ff ff 3f 00 ff 5a ; [$babb] undefined
+    hex ff 7f ff df 5b 00 ff 73 ff fc df f6 9c 00 ff b2 ; [$bacb] undefined
+    hex ff ff f7 ff 03 00 ff cb ff fa ff ff ae 00 ff d3 ; [$badb] undefined
+    hex ff ff ff ff 3c 00 ff fe ff ff ff f7 14 00 ff bf ; [$baeb] undefined
+    hex ff ff bf ff 01 00 ff 86 ff ef ff b5 ff 00 ff 59 ; [$bafb] undefined
+    hex ff ff ff ff 96 00 ff 7e ff ff 7f ff da 00 ff ff ; [$bb0b] undefined
+    hex ff ff ff ff 14 00 ff 21 ff db ff fb 7f 00 ff b7 ; [$bb1b] undefined
+    hex ff ef ff b3 fb 00 ff ff ff df ff f3 7f 00 ff f7 ; [$bb2b] undefined
+    hex ff ff ff ff 60 00 ff d4 ff ff ff bd 7f 00 ff be ; [$bb3b] undefined
+    hex ff ff ff ff df 00 ff 7b ff ef ff ff cf 00 ff f7 ; [$bb4b] undefined
+    hex ff ff ff ff 5f 00 ff a9 ff f7 ff f7 fe 00 ff 44 ; [$bb5b] undefined
+    hex ff ff ff ef 6f 00 ff 6b ff fd ff ff be 00 ff ff ; [$bb6b] undefined
+    hex ff ff 3f ff 56 00 ff c2 ff ff ff fb fb 00 ff 26 ; [$bb7b] undefined
+    hex ff ff ff fb c1 00 ff 5f ff f3 ff ff e0 00 ff fe ; [$bb8b] undefined
+    hex ff ef ff 7f c0 00 ff e8 ff ed ff ff 9f 00 ff 6e ; [$bb9b] undefined
+    hex ff f7 ff df 47 00 ff ea ff fd ff ff 6d 00 ff ff ; [$bbab] undefined
+    hex ff bf ff ef a8 00 ff c4 ff ed ff fb ef 00 ff 3a ; [$bbbb] undefined
+    hex ff ff ff fd 72 00 ff 93 ff fd fd bd 45 00 ff ef ; [$bbcb] undefined
+    hex ff ff ff ff f0 00 ff 25 ff fb ff fa 57 00 ff cf ; [$bbdb] undefined
+    hex ff ff ff e3 4c 00 ff a7 ff f7 ff fe 8e 00 ff e0 ; [$bbeb] undefined
+    hex ff ff ff f7 47 00 ff bf ff bf ff ff ff 00 ff fe ; [$bbfb] undefined
+    hex ff ff ff ee f7 00 ff ff ff fb ff ff ce 00 ff bf ; [$bc0b] undefined
+    hex ff fe ff ff f6 00 ff 1a ff ef ff f5 ff 00 ff df ; [$bc1b] undefined
+    hex ff f7 ff fd bf 00 ff f7 ff af fd ff 6f 00 ff ff ; [$bc2b] undefined
+    hex ff ff fb ff 93 00 ff 97 ff ff ff ef ff 00 ff fe ; [$bc3b] undefined
+    hex ff ef ff df fb 00 ff f4 ff f7 ff fe d1 00 ff f6 ; [$bc4b] undefined
+    hex ff ff ff bf 73 00 ff 5d ff fa ff ff ff 00 ff ff ; [$bc5b] undefined
+    hex fd ff ff ff ff 00 ff ff ff ff ef fd 1e 00 ff bf ; [$bc6b] undefined
+    hex ff ff ff ff 2d 00 ff 0b ff de ff d7 bf 00 ff 3f ; [$bc7b] undefined
+    hex ff ff ff fd fd 00 ff 7f ff ef ff ff ac 00 ff fb ; [$bc8b] undefined
+    hex ff ff df f7 d7 00 ff a4 ff bf ff fd 60 00 ff f7 ; [$bc9b] undefined
+    hex ff ff ff bf ff 00 ff 5f ff ff ff ff ac 00 ff ef ; [$bcab] undefined
+    hex ff ff ff ff ae 00 ff 20 ff ff ff ef d6 00 ff ec ; [$bcbb] undefined
+    hex ff bf ff ff de 00 ff e7 ff df ff ff 16 00 ff df ; [$bccb] undefined
+    hex ff ff ff ff 51 00 ff ed ff bf ff 3f 67 00 ff de ; [$bcdb] undefined
+    hex ff ff ff cf 2d 00 ff b5 ff df ff ff 17 00 ff fd ; [$bceb] undefined
+    hex ff b7 bf bf 85 00 ff d0 ff ff ff f7 fd 00 ff fb ; [$bcfb] undefined
+    hex ff e6 ff c5 af 00 ff d5 ff 7f ff ff 4f 00 ff fb ; [$bd0b] undefined
+    hex ff ff ff ff 2f 00 ff da ff f7 ff ef fd 00 ff ae ; [$bd1b] undefined
+    hex ff ff ff db e6 00 ff fe ff ff ff ff 0c 00 ff ff ; [$bd2b] undefined
+    hex ff f7 ff bf dd 00 ff 1b ff ad ff fe ff 00 ff ff ; [$bd3b] undefined
+    hex ff ff ff ef fe 00 ff cf ff ff ff ff 77 00 ff ff ; [$bd4b] undefined
+    hex ff ff ff ff 70 00 ff f9 ff f7 ff fd 7f 00 ff bf ; [$bd5b] undefined
+    hex ff ff ff ff a4 00 ff 7f ff fb ff ff 49 00 ff 5f ; [$bd6b] undefined
+    hex ff ff ff ff ad 00 ff 8a ff e7 ff ff ff 00 ff f9 ; [$bd7b] undefined
+    hex ff fb ff ff fb 00 ff de ff ff ff df 01 00 ff ef ; [$bd8b] undefined
+    hex bf fe ff ef 3e 00 ff f3 ff ff ff bf ef 00 ff 39 ; [$bd9b] undefined
+    hex ff 7f ff df 2b 00 ff fe ff ff ff ff a2 00 ff fb ; [$bdab] undefined
+    hex ff ff ff ff fb 00 ff ff ff ff ff 3b 0d 00 ff af ; [$bdbb] undefined
+    hex ff ff ff ef 37 00 ff fc ff bf fe ff 48 00 ff bf ; [$bdcb] undefined
+    hex ff ff ff ff 10 00 ff e7 ff ff ff 3d 5f 00 ff 6e ; [$bddb] undefined
+    hex ff fd ff ff 96 00 ff 59 ff fa ff fb ea 00 ff 7e ; [$bdeb] undefined
+    hex ff ff fb fd 00 00 ff 70 ff fb ff ad ff 00 ff 7c ; [$bdfb] undefined
+    hex ff fe ff ff ff 00 ff bf ff ff ff ff 5f 00 ff fb ; [$be0b] undefined
+    hex ff ff ff ff c8 00 ff 1d ff fb ff 6f ff 00 ff 12 ; [$be1b] undefined
+    hex ff ff ff fb ff 00 ff ff ff ff ff 7e bf 00 ff ff ; [$be2b] undefined
+    hex ff ff ff ff f9 00 ff dc ff ff ff ff 3f 00 ff b3 ; [$be3b] undefined
+    hex ff f7 ff ff fe 00 ff 7e ff ff ff ff 3a 00 ff f7 ; [$be4b] undefined
+    hex ff bf ff ff 09 00 ff d8 ff bd ff 15 af 00 ff e3 ; [$be5b] undefined
+    hex ff ff ff f7 dd 00 ff 79 ff ff ff bf 68 00 ff ef ; [$be6b] undefined
+    hex ff ff ff ff 02 00 ff 57 ff 7f ff f3 ff 00 ff 23 ; [$be7b] undefined
+    hex ff f7 ff ff f3 00 ff 7b ff ff ff ff a4 00 ff fe ; [$be8b] undefined
+    hex ff ff ff ff 08 00 ff f8 ff ff ff df 9e 00 ff f2 ; [$be9b] undefined
+    hex ff ff ff fe 3e 00 ff fb ff ff ff ff 22 00 ff ed ; [$beab] undefined
+    hex ff ff ff ff d9 00 ff 1f ff af ff f7 fc 00 ff dd ; [$bebb] undefined
+    hex ff ff ff fe 8b 00 ff ff ff ff ff fd ed 00 ff df ; [$becb] undefined
+    hex ff ff ff ff 40 00 ff f7 ff fd ff 4e 1d 00 ff f9 ; [$bedb] undefined
+    hex ff fd ff cf f6 00 ff 7f ff bf ff 7b 61 00 ff f7 ; [$beeb] undefined
+    hex ff df ff ff 21 00 ff 6f ff ff ff fb 7f 00 ff df ; [$befb] undefined
+    hex ff f7 ff ff 9f 00 ff bf ff f7 ff ff b7 00 ff ff ; [$bf0b] undefined
+    hex ff fe ff ff 91 00 ff 83 ff 7f ff 6d ff 00 ff b5 ; [$bf1b] undefined
+    hex ff ff ff ff eb 00 ff fd ff ff ff ef b5 00 ff bf ; [$bf2b] undefined
+    hex ff ff ff ff 7a 00 ff d0 ff bc ff ed ff 00 ff dd ; [$bf3b] undefined
+    hex ff fb ff ff b3 00 ff ff ff ff ff fd 6a 00 ff f7 ; [$bf4b] undefined
+    hex ff df ff ff 34 00 ff 67 ff ff ff b5 fd 00 ff da ; [$bf5b] undefined
+    hex ff ff ff ff fa 00 ff 7e ff df ff ff 49 00 ff de ; [$bf6b] undefined
+    hex ff ff ff ef 27 00 ff e7 ff 3d ff fb 39 00 ff fa ; [$bf7b] undefined
+    hex ff fb ff fd fb 00 ff ff ff ff ff ef 26 00 ff ff ; [$bf8b] undefined
+    hex ff ff ff df 89 00 ff 98 ff 7f ff fd da 00 ff f1 ; [$bf9b] undefined
+    hex ff ef ff ff 5f 00 ff b2 ff ef ff ff 4e 00 ff ff ; [$bfab] undefined
+    hex ff ff ff 3f 1a 00 ff 18 ff eb ff df 4b 00 ff fb ; [$bfbb] undefined
+    hex ff ef ff fd 58 00 ff f3 fe ff ff ff 02 00 ff ff ; [$bfcb] undefined
+    hex ff ff ff ef 60 00 ff 72 ff ef ff fe 0a 00 ff cd ; [$bfdb] undefined
+    hex ff ff ff 6e fc 00 fe ed ff ff ff df d7 00 ff f3 ; [$bfeb] undefined
+    db $ff,$fe,$ff,$ff,$09                  ; [$bffb] undefined

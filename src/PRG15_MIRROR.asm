@@ -258,7 +258,7 @@ Player_AddHP:                               ; [$c07b]
 ; XREFS:
 ;     HandlePlayerHitByMagic
 ;     Player_ApplyDamage
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;============================================================================
 Player_ReduceHP:                            ; [$c08e]
     ;
@@ -516,13 +516,13 @@ Player_Something_ChangeHP:                  ; [$c0ec]
 ;     CurrentSprites_HitCounter:
 ;         The cleared sprite hit counters.
 ;
-;     CurrentSprites_Subtypes:
+;     CurrentSprites_Behaviors:
 ;         The cleared sprite subtypes.
 ;
 ;     ScreenColorMode:
 ;         The new color mode with greyscale removed.
 ;
-;     Temp_03C7:
+;     IScript_PortraitID:
 ;         Set to 0xFF.
 ;
 ; CALLS:
@@ -544,7 +544,7 @@ GameLoop_ClearSprites:                      ; [$c130]
     LDA #$00
     STA CurrentSprites_HP,X                 ; Set sprite hit points to 0.
     STA CurrentSprites_HitCounter,X         ; Set sprite hit counter to 0.
-    STA CurrentSprites_Subtypes,X           ; Set sprite subtype to 0.
+    STA CurrentSprites_Behaviors,X          ; Set sprite subtype to 0.
     DEX                                     ; X--
     BPL @_clearSpritesLoop                  ; If we're not done, loop.
 
@@ -554,7 +554,7 @@ GameLoop_ClearSprites:                      ; [$c130]
     ;
     JSR PPUResetOffset                      ; Reset the PPU offset.
     LDA #$ff
-    STA a:Temp_03C7
+    STA a:IScript_PortraitID
     LDA ScreenColorMode                     ; Load the current screen color
                                             ; mode.
     AND #$fe                                ; Set to color mode (clear bit 1)
@@ -998,7 +998,7 @@ GameLoop_LoadSpriteInfo:                    ; [$c1b4]
 ;     CurrentSprites_HitByMagicBehavior:
 ;         The updated behaviors when hit by magic.
 ;
-;     CurrentSprites_XPos:
+;     CurrentSprites_XPos_Full:
 ;         The updated sprite X positions.
 ;
 ;     CurrentSprites_YPos:
@@ -1016,7 +1016,7 @@ GameLoop_LoadSpriteInfo:                    ; [$c1b4]
 ;     CurrentSprites_BehaviorAddrs_U:
 ;         The updated sprite behavior address upper bytes.
 ;
-;     CurrentSprites_Subtypes:
+;     CurrentSprites_Behaviors:
 ;         The updated sprite subtypes.
 ;
 ; CALLS:
@@ -1039,7 +1039,7 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     LDA #$ff
     STA CurrentSprites_HitByMagicBehavior,X
     LDA a:CurrentSprite_XPos
-    STA CurrentSprites_XPos,X
+    STA CurrentSprites_XPos_Full,X
     LDA a:CurrentSprite_YPos
     STA CurrentSprites_YPos,X
     LDA a:CurrentSprite_Entity
@@ -1057,7 +1057,7 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     LDA #$ad2e,Y
     STA CurrentSprites_BehaviorAddrs_U,X
     LDA #$ff
-    STA CurrentSprites_Subtypes,X
+    STA CurrentSprites_Behaviors,X
     JMP Sprites_LoadSpriteValue
 
   @LAB_PRG15_MIRROR__c252:                  ; [$c252]
@@ -5016,8 +5016,8 @@ Input_HandleOnInterrupt:                    ; [$ca35]
 ;         to 0x00).
 ;
 ; XREFS:
-;     CurrentSprite_RandomlyChangeHorizDirection
-;     CurrentSprite_RandomlyChangeVertDirection
+;     SpriteAction_RandomlyFlipXDirection
+;     SpriteAction_RandomlyFlipYDirection
 ;============================================================================
 GetRandom:                                  ; [$ca6e]
     LDX Random_Offset                       ; Load the current offset into
@@ -5730,8 +5730,6 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f01b
-;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     FUN_PRG15_MIRROR__f316
 ;     FUN_PRG15_MIRROR__f7b7
@@ -5764,6 +5762,8 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Screen_HandleScrollUp
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadSpriteValue
 ;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_Maybe_ShowNextCharFromBank
@@ -7713,10 +7713,10 @@ BYTE_ARRAY_PRG15_MIRROR__d0e0:              ; [$d0e0]
 ;     Player_HandleTouchEnemy
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__MaybeSugata
-;     SpriteBehavior__ab67
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_Pakukame
 ;     Sprites_ReplaceWithCoinDrop
 ;     Game_DropLadderToMascon
 ;     Game_UnlockDoor
@@ -15498,7 +15498,7 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__86c6
-;     SpriteBehavior_MaybeFlyingSomething
+;     SpriteBehavior_NecronAides
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanPlayerMoveAtY
 ;     Area_CheckCanClimbAdjacent
@@ -15785,7 +15785,7 @@ Area_IsBlockClimbable:                      ; [$e8b2]
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
-;     SpriteBehavior_MaybeFlyingSomething
+;     SpriteBehavior_NecronAides
 ;     CastMagic_CalculateVisibility
 ;     Player_CheckSwitchScreen
 ;============================================================================
@@ -16997,7 +16997,7 @@ Game_UnlockDoor:                            ; [$ebe1]
 ;     Player_HandleDeath
 ;============================================================================
 Player_DrawBody:                            ; [$ebee]
-    LDA a:Temp_03C7
+    LDA a:IScript_PortraitID
     BMI @LAB_PRG15_MIRROR__ebf4
     RTS
 
@@ -17064,7 +17064,7 @@ Player_DrawBody:                            ; [$ebee]
     PLA
     CLC
     ADC #$ec49,X
-    JSR FUN_PRG15_MIRROR__f039
+    JSR Sprite_SetPlayerAppearanceAddr
     JMP FUN_PRG15_MIRROR__ec58
 
 ;
@@ -17153,7 +17153,7 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     ORA Temp_00
     TAY
     LDA #$eca4,Y
-    JMP FUN_PRG15_MIRROR__f039
+    JMP Sprite_SetPlayerAppearanceAddr
 
   @_return:                                 ; [$eca1]
     RTS
@@ -18334,13 +18334,13 @@ ScreenEvents_HandleFinalBossKilled:         ; [$efd4]
 ;         Clobbered.
 ;
 ; XREFS:
-;     SpriteBehavior__a354
-;     SpriteBehavior__a384
-;     SpriteBehavior__a3bf
-;     SpriteBehavior__a3ef
-;     SpriteBehavior__a413
-;     SpriteBehavior__a437
-;     SpriteBehavior__a45b
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
+;     SpriteBehavior_BlackOnyxDropFromZoradohna
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
+;     SpriteBehavior_MattockDroppedFromRipasheiku
+;     SpriteBehavior_PendantDroppedFromRipasheiku
+;     SpriteBehavior_WingBootsDroppedByZorugeriru
 ;============================================================================
 Maybe_IsSpriteEntityNotOnScreen:            ; [$efe6]
     STA Temp_00                             ; Temp_00 =
@@ -18472,7 +18472,7 @@ Sprites_HasCurrentSprites:                  ; [$f00b]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f01b
+; TODO: Document Sprite_SetPortraitAppearanceAddr
 ;
 ; INPUTS:
 ;     A
@@ -18483,12 +18483,21 @@ Sprites_HasCurrentSprites:                  ; [$f00b]
 ; XREFS:
 ;     IScripts_DrawPortraitAnimationFrame
 ;============================================================================
-FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
+Sprite_SetPortraitAppearanceAddr:           ; [$f01b]
     TAY
     LDA a:CurrentROMBank2
     PHA
     LDX #$07
     JSR MMC1_UpdatePRGBank
+
+    ;
+    ; Load the address to load sprite images from.
+    ;
+    ; With the addresses stored in PRG7::800a and
+    ; PRG7::800b, this should put us at a starting
+    ; point of {@address PRG7::AFD5}, or {@address PRG7::B0D5} if offset
+    ; overflowed.
+    ;
     TYA
     ASL A
     TAY
@@ -18503,7 +18512,7 @@ FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__f039
+; TODO: Document Sprite_SetPlayerAppearanceAddr
 ;
 ; INPUTS:
 ;     A
@@ -18517,13 +18526,22 @@ FUN_PRG15_MIRROR__f01b:                     ; [$f01b]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;============================================================================
-FUN_PRG15_MIRROR__f039:                     ; [$f039]
+Sprite_SetPlayerAppearanceAddr:             ; [$f039]
     TAY
     LDA a:CurrentROMBank2
     PHA
     LDX #$07
     JSR MMC1_UpdatePRGBank
     TYA
+
+    ;
+    ; Load the address to load sprite images from.
+    ;
+    ; With the addresses stored in PRG7::8008 and
+    ; PRG7::8009, this should put us at a starting
+    ; point of {@address PRG7::A9F1}, or {@address PRG7::AAF1} if offset
+    ; overflowed.
+    ;
     ASL A
     TAY
     PHP
@@ -18564,7 +18582,8 @@ Sprite_Maybe_SetAppearanceAddrFromOffset:   ; [$f057]
     ;
     ; Load the address to load sprite images from.
     ;
-    ; With the addresses stored in PRG7::8006 and
+    ; With the addresses stored in SPRITE_APPEARANCES_OFFSET
+    ; and
     ; PRG7::8007, this should put us at a starting
     ; point of {@address PRG7::9036}, or {@address PRG7::9136} if offset
     ; overflowed.
@@ -18599,8 +18618,8 @@ Sprite_Maybe_SetAppearanceAddrFromOffset:   ; [$f057]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__f01b
-;     FUN_PRG15_MIRROR__f039
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
 ;============================================================================
 Sprite_Maybe_SetAppearanceAddr:             ; [$f072]
     ;
@@ -19058,7 +19077,7 @@ SPRITE_TILE_OFFSETS:                        ; [$f23d]
 ;     IScripts_Begin
 ;============================================================================
 FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
-    STA a:Temp_03C7
+    STA a:IScript_PortraitID
     TAX
     BMI @LAB_PRG15_MIRROR__f27d
     JSR FUN_PRG15_MIRROR__f2e3
@@ -19101,7 +19120,7 @@ FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
 ;         The palette index to restore.
 ;
 ; OUTPUTS:
-;     Temp_03C7:
+;     IScript_PortraitID:
 ;         Set to 0xFF.
 ;
 ; CALLS:
@@ -19116,7 +19135,7 @@ FUN_PRG15_MIRROR__f24d:                     ; [$f24d]
 ;============================================================================
 IScripts_ClearPortrait:                     ; [$f281]
     LDA #$ff
-    STA a:Temp_03C7
+    STA a:IScript_PortraitID
     JSR Game_WaitForOAMReset
     LDA a:Palette_SavedIndex
     JSR Palette_LoadFromIndex
@@ -19158,7 +19177,7 @@ POP_RETURN_F299:                            ; [$f299]
 ;============================================================================
 IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     PHA
-    LDA a:Temp_03C7
+    LDA a:IScript_PortraitID
     BMI POP_RETURN_F299
     LDA #$00
     STA CurrentSprite_FlipMask
@@ -19168,8 +19187,8 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     ;
     LDA #$90
     STA Maybe_CurrentSprite_PPUOffset
-    JSR Something_Temp03C7Times5
-    JSR FUN_PRG15_MIRROR__f01b
+    JSR IScripts_GetPortraitOffset
+    JSR Sprite_SetPortraitAppearanceAddr
 
     ;
     ; Update the eye animation.
@@ -19180,10 +19199,10 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     PHA
     AND #$01
     TAX
-    JSR Something_Temp03C7Times5
+    JSR IScripts_GetPortraitOffset
     CLC
     ADC #$f2df,X
-    JSR FUN_PRG15_MIRROR__f01b
+    JSR Sprite_SetPortraitAppearanceAddr
 
     ;
     ; Update the mouth animation.
@@ -19194,14 +19213,14 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     LSR A
     AND #$01
     TAX
-    JSR Something_Temp03C7Times5
+    JSR IScripts_GetPortraitOffset
     CLC
     ADC #$f2e1,X
-    JMP FUN_PRG15_MIRROR__f01b
+    JMP Sprite_SetPortraitAppearanceAddr
 
 
 ;============================================================================
-; TODO: Document Something_Temp03C7Times5
+; TODO: Document IScripts_GetPortraitOffset
 ;
 ; INPUTS:
 ;     None.
@@ -19212,12 +19231,12 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
 ; XREFS:
 ;     IScripts_DrawPortraitAnimationFrame
 ;============================================================================
-Something_Temp03C7Times5:                   ; [$f2d5]
-    LDA a:Temp_03C7
+IScripts_GetPortraitOffset:                 ; [$f2d5]
+    LDA a:IScript_PortraitID
     ASL A
     ASL A
     CLC
-    ADC a:Temp_03C7
+    ADC a:IScript_PortraitID
     RTS
 
 ;
@@ -19254,7 +19273,7 @@ FUN_PRG15_MIRROR__f2e3:                     ; [$f2e3]
     PHA
     LDX #$08
     JSR MMC1_UpdatePRGBank
-    LDA a:Temp_03C7
+    LDA a:IScript_PortraitID
     ASL A
     TAY
     LDA a:#$800e

@@ -140,12 +140,13 @@ pre {
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerX">SpriteAction_FacePlayerX</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerY">SpriteAction_FacePlayerY</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_EnemyDeath">SpriteUpdateHandler_Effect_EnemyDeath</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
-;     <a href="PRG14.html#Sprite_MoveTowardsPlayerX">Sprite_MoveTowardsPlayerX</a>
 ;     <a href="PRG14.html#Sprites_CalcYFromGravity">Sprites_CalcYFromGravity</a>
 ;     <a href="PRG14.html#Sprites_IsSpriteOutOfWeaponRange">Sprites_IsSpriteOutOfWeaponRange</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
@@ -196,11 +197,11 @@ pre {
 ;
 ;
 ; XREFS:
-;     <a href="PRG14.html#GetSpriteBox">GetSpriteBox</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a84f">Sprite_SomethingFunc__a84f</a>
+;     <a href="PRG14.html#SpriteOp_AddToSpriteData">SpriteOp_AddToSpriteData</a>
+;     <a href="PRG14.html#Sprite_GetBounds">Sprite_GetBounds</a>
 ;     <a href="PRG15_MIRROR.html#Area_ChangeArea">Area_ChangeArea</a>
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#Area_SetStateFromDoorDestination">Area_SetStateFromDoorDestination</a>
@@ -208,9 +209,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ee93">FUN_PRG15_MIRROR__ee93</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
+;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
 ;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__e852">LAB_PRG15_MIRROR__e852</a> [$PRG15_MIRROR::e852]
 ;     <a href="PRG15_MIRROR.html#LAB_PRG15_MIRROR__ea13">LAB_PRG15_MIRROR__ea13</a> [$PRG15_MIRROR::ea13]
@@ -220,16 +220,18 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddr">Sprite_Maybe_SetAppearanceAddr</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a>
 ;
 </div><span class="l"><a name="Temp_Addr_L" href="#Temp_Addr_L" class="la">Temp_Addr_L:</a><span class="ce">; [$0002]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0002] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#GetSpriteBox">GetSpriteBox</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a84f">Sprite_SomethingFunc__a84f</a>
+;     <a href="PRG14.html#SpriteOp_AddToSpriteData">SpriteOp_AddToSpriteData</a>
+;     <a href="PRG14.html#Sprite_GetBounds">Sprite_GetBounds</a>
 ;     <a href="PRG15_MIRROR.html#Area_ChangeArea">Area_ChangeArea</a>
 ;     <a href="PRG15_MIRROR.html#Area_ScrollToNextRoom">Area_ScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#Area_SetStateFromDoorDestination">Area_SetStateFromDoorDestination</a>
@@ -237,8 +239,6 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ee93">FUN_PRG15_MIRROR__ee93</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="PRG15_MIRROR.html#Game_LoadAreaTable">Game_LoadAreaTable</a>
 ;     <a href="PRG15_MIRROR.html#LookupSpriteDataPointer">LookupSpriteDataPointer</a>
@@ -246,6 +246,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Player_CheckSwitchScreen">Player_CheckSwitchScreen</a>
 ;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a>
 ;
 </div><span class="l"><a name="Temp_Addr_U" href="#Temp_Addr_U" class="la">Temp_Addr_U:</a><span class="ce">; [$0003]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0003] byte</span></span>
@@ -367,7 +369,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#Game_InitScreenAndMusic">Game_InitScreenAndMusic</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
@@ -709,7 +711,6 @@ pre {
 ;     <a href="PRG12.html#PasswordScreen_WriteWrongPassword">PasswordScreen_WriteWrongPassword</a>
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#SplashAnimation_SomethingOutroUpdate">SplashAnimation_SomethingOutroUpdate</a>
-;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
 ;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Death">CastMagic_FinishHandler_Death</a>
 ;     <a href="PRG15_MIRROR.html#CastMagic_FinishHandler_Deluge">CastMagic_FinishHandler_Deluge</a>
@@ -1422,7 +1423,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a>
 ;
 </div><span class="l"><a name="Screen_ScrollDirection" href="#Screen_ScrollDirection" class="la">Screen_ScrollDirection:</a><span class="ce">; [$0054]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0054] ScreenScrollDirection</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0054] Direction</span></span>
 <span class="l"></span>
 <div class="c">;
 ; UNUSED: The next 2 bytes are unused by Faxanadu.
@@ -2146,19 +2147,19 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__82f8">FUN_PRG14__82f8</a>
-;     <a href="PRG14.html#FUN_PRG14__846c">FUN_PRG14__846c</a>
 ;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
 ;     <a href="PRG14.html#Maybe_Player_CalcAnimFrame">Maybe_Player_CalcAnimFrame</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__9060">SpriteBehavior__9060</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#Sprite_MoveTowardsPlayerX">Sprite_MoveTowardsPlayerX</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerX">SpriteAction_FacePlayerX</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_Nash">SpriteBehavior_Nash</a>
+;     <a href="PRG14.html#Sprite_CalcDistanceXToPlayer">Sprite_CalcDistanceXToPlayer</a>
+;     <a href="PRG14.html#Sprite_Maybe_AddFacingPosX">Sprite_Maybe_AddFacingPosX</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanMoveImmediatelyRight">Area_CanMoveImmediatelyRight</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveLeft">Area_CanPlayerMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveRight">Area_CanPlayerMoveRight</a>
@@ -2231,13 +2232,13 @@ pre {
 ; XREFS:
 ;     <a href="PRG12.html#GetTextBoxCoordinates">GetTextBoxCoordinates</a>
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__831b">FUN_PRG14__831b</a>
 ;     <a href="PRG14.html#Player_CastMagic">Player_CastMagic</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#Sprite_MoveTowardsPlayerY">Sprite_MoveTowardsPlayerY</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerY">SpriteAction_FacePlayerY</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#Sprite_CalcDistanceYToPlayer">Sprite_CalcDistanceYToPlayer</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanMoveUp">Area_CanMoveUp</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveAtY">Area_CanPlayerMoveAtY</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveLeft">Area_CanPlayerMoveLeft</a>
@@ -2327,11 +2328,11 @@ pre {
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
 ;     <a href="PRG14.html#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a>
-;     <a href="PRG14.html#SpriteBehavior__9060">SpriteBehavior__9060</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__9497">SpriteBehavior__9497</a>
-;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_Nash">SpriteBehavior_Nash</a>
+;     <a href="PRG14.html#SpriteBehavior_SirGawaineWolfman">SpriteBehavior_SirGawaineWolfman</a>
 ;     <a href="PRG15_MIRROR.html#EndGame_MoveToKingsRoom">EndGame_MoveToKingsRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
@@ -2378,7 +2379,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Maybe_Player_CalcAnimFrame">Maybe_Player_CalcAnimFrame</a>
 ;     <a href="PRG14.html#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecWingBootsDuration">Game_DecWingBootsDuration</a>
 ;     <a href="PRG15_MIRROR.html#Game_DrawScreenInFrozenState">Game_DrawScreenInFrozenState</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_CalcSpeed">Maybe_Player_CalcSpeed</a>
@@ -2480,7 +2481,7 @@ pre {
 ;     <a href="PRG14.html#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>
 ;     <a href="PRG14.html#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>
 ;     <a href="PRG14.html#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleDeath">Player_HandleDeath</a>
 ;     <a href="PRG15_MIRROR.html#Player_HandleIFrames">Player_HandleIFrames</a>
 ;     <a href="PRG15_MIRROR.html#Player_SetInitialState">Player_SetInitialState</a>
@@ -2572,7 +2573,7 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__854c">FUN_PRG14__854c</a>
 ;     <a href="PRG14.html#FUN_PRG14__86bd">FUN_PRG14__86bd</a>
 ;     <a href="PRG14.html#MoveRight">MoveRight</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanMoveImmediatelyRight">Area_CanMoveImmediatelyRight</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveLeft">Area_CanPlayerMoveLeft</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveRight">Area_CanPlayerMoveRight</a>
@@ -2601,7 +2602,7 @@ pre {
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
 ;     <a href="PRG14.html#FUN_PRG14__854c">FUN_PRG14__854c</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveAtY">Area_CanPlayerMoveAtY</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveUp">Area_CanPlayerMoveUp</a>
 ;     <a href="PRG15_MIRROR.html#Area_CheckCanClimbAdjacent">Area_CheckCanClimbAdjacent</a>
@@ -2630,13 +2631,13 @@ pre {
 ;     <a href="PRG14.html#CastMagic_UpdateDeluge">CastMagic_UpdateDeluge</a>
 ;     <a href="PRG14.html#CastMagic_UpdateFire">CastMagic_UpdateFire</a>
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
-;     <a href="PRG14.html#FUN_PRG14__864a">FUN_PRG14__864a</a>
+;     <a href="PRG14.html#CurrentSprite_HandleFall">CurrentSprite_HandleFall</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
 ;     <a href="PRG14.html#FUN_PRG14__bd8f">FUN_PRG14__bd8f</a>
 ;     <a href="PRG14.html#MoveSpriteHorizIfPossible">MoveSpriteHorizIfPossible</a>
 ;     <a href="PRG14.html#MoveSpriteVerticalIfPossible">MoveSpriteVerticalIfPossible</a>
 ;     <a href="PRG14.html#Sprites_SetBlockIsMovingResult">Sprites_SetBlockIsMovingResult</a>
-;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanWalk">Sprites_SetCurrentSpriteCanWalk</a>
+;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanMove">Sprites_SetCurrentSpriteCanMove</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanMoveImmediatelyRight">Area_CanMoveImmediatelyRight</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanMoveUp">Area_CanMoveUp</a>
 ;     <a href="PRG15_MIRROR.html#Area_CanPlayerMoveAtY">Area_CanPlayerMoveAtY</a>
@@ -2691,13 +2692,43 @@ pre {
 ;
 ;
 ; XREFS:
+;     <a href="PRG14.html#CastMagic_HitHandler_Deluge">CastMagic_HitHandler_Deluge</a>
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility">CurrentSprite_CalculateVisibility</a>
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
+;     <a href="PRG14.html#FUN_PRG14__844b">FUN_PRG14__844b</a>
 ;     <a href="PRG14.html#FUN_PRG14__854c">FUN_PRG14__854c</a>
+;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
+;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
+;     <a href="PRG14.html#FUN_PRG14__99f3">FUN_PRG14__99f3</a>
+;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
+;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
+;     <a href="PRG14.html#FUN_PRG14__a077">FUN_PRG14__a077</a>
+;     <a href="PRG14.html#FUN_PRG14__a0ad">FUN_PRG14__a0ad</a>
+;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
+;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
+;     <a href="PRG14.html#LAB_PRG14__851e">LAB_PRG14__851e</a> [$PRG14::851e]
+;     <a href="PRG14.html#Maybe_Sprite_HandleDeathDrop">Maybe_Sprite_HandleDeathDrop</a>
 ;     <a href="PRG14.html#MoveSpriteHorizIfPossible">MoveSpriteHorizIfPossible</a>
+;     <a href="PRG14.html#SpriteAction_CastMagic">SpriteAction_CastMagic</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerX">SpriteAction_FacePlayerX</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_Nash">SpriteBehavior_Nash</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
+;     <a href="PRG14.html#Sprite_AddPosX">Sprite_AddPosX</a>
+;     <a href="PRG14.html#Sprite_CalcDistanceXToPlayer">Sprite_CalcDistanceXToPlayer</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
+;     <a href="PRG14.html#Sprite_Maybe_AddFacingPosX">Sprite_Maybe_AddFacingPosX</a>
+;     <a href="PRG14.html#Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz">Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz</a>
+;     <a href="PRG14.html#Sprite_SubtractPosX">Sprite_SubtractPosX</a>
 ;
-</div><span class="l"><a name="CurrentSprites_XPos" href="#CurrentSprites_XPos" class="la">CurrentSprites_XPos:</a><span class="ce">; [$00ba]</span></span>
+</div><span class="l"><a name="CurrentSprites_XPos_Full" href="#CurrentSprites_XPos_Full" class="la">CurrentSprites_XPos_Full:</a><span class="ce">; [$00ba]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -2710,7 +2741,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Sprites_PopulateNextAvailableSprite">Sprites_PopulateNextAvailableSprite</a>
 ;
-</div><span class="l"><a name="CurrentSprites_XPos_7_" href="#CurrentSprites_XPos_7_" class="la">CurrentSprites_XPos_7_:</a><span class="ce">; [$00c1]</span></span>
+</div><span class="l"><a name="CurrentSprites_XPos_Full_7_" href="#CurrentSprites_XPos_Full_7_" class="la">CurrentSprites_XPos_Full_7_:</a><span class="ce">; [$00c1]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -2719,7 +2750,38 @@ pre {
 ;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility">CurrentSprite_CalculateVisibility</a>
+;     <a href="PRG14.html#CurrentSprite_HandleFall">CurrentSprite_HandleFall</a>
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
+;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
+;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
+;     <a href="PRG14.html#FUN_PRG14__9ac6">FUN_PRG14__9ac6</a>
+;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
+;     <a href="PRG14.html#FUN_PRG14__a077">FUN_PRG14__a077</a>
+;     <a href="PRG14.html#FUN_PRG14__a093">FUN_PRG14__a093</a>
+;     <a href="PRG14.html#FUN_PRG14__a0a0">FUN_PRG14__a0a0</a>
+;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
+;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
+;     <a href="PRG14.html#Maybe_Sprite_HandleDeathDrop">Maybe_Sprite_HandleDeathDrop</a>
+;     <a href="PRG14.html#MoveSpriteVerticalIfPossible">MoveSpriteVerticalIfPossible</a>
+;     <a href="PRG14.html#SpriteAction_CastMagic">SpriteAction_CastMagic</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerY">SpriteAction_FacePlayerY</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteUpdateHandler_Effect_EnemyDeath">SpriteUpdateHandler_Effect_EnemyDeath</a>
+;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
+;     <a href="PRG14.html#Sprite_CalcDistanceYToPlayer">Sprite_CalcDistanceYToPlayer</a>
+;     <a href="PRG14.html#Sprite_CalculateNewVertPos">Sprite_CalculateNewVertPos</a>
+;     <a href="PRG14.html#Sprite_CanClimb">Sprite_CanClimb</a>
+;     <a href="PRG14.html#Sprite_CapToBlockOppositeFalling">Sprite_CapToBlockOppositeFalling</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG14.html#Sprites_CanSpriteWalk">Sprites_CanSpriteWalk</a>
 ;
@@ -2753,25 +2815,25 @@ pre {
 ;
 ;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__a6bc">FUN_PRG14__a6bc</a>
-;     <a href="PRG14.html#FUN_PRG14__a734">FUN_PRG14__a734</a>
-;     <a href="PRG14.html#FUN_PRG14__a7f8">FUN_PRG14__a7f8</a>
-;     <a href="PRG14.html#Screen_IncSpriteInfoAddr">Screen_IncSpriteInfoAddr</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_WalkBackAndForth">SpriteBehavior_WalkBackAndForth</a>
-;     <a href="PRG14.html#SpriteBehavior_Walking">SpriteBehavior_Walking</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveTowardPlayer">SpriteBehavior_MoveTowardPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveVertically">SpriteBehavior_MoveVertically</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_WalkForward">SpriteBehavior_WalkForward</a>
 ;     <a href="PRG14.html#SpriteBehavior__a8d7">SpriteBehavior__a8d7</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
-;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6e8">Sprite_SomethingFunc__a6e8</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6ff">Sprite_SomethingFunc__a6ff</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a74c">Sprite_SomethingFunc__a74c</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a772">Sprite_SomethingFunc__a772</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a7e5">Sprite_SomethingFunc__a7e5</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a84f">Sprite_SomethingFunc__a84f</a>
-;     <a href="PRG14.html#Sprite_Something__a82a">Sprite_Something__a82a</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#SpriteOp_AddToSpriteData">SpriteOp_AddToSpriteData</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer">SpriteOp_CheckDistanceToPlayer</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_X">SpriteOp_CheckDistanceToPlayer_X</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_Y">SpriteOp_CheckDistanceToPlayer_Y</a>
+;     <a href="PRG14.html#SpriteOp_GoTo">SpriteOp_GoTo</a>
+;     <a href="PRG14.html#SpriteOp_RunAction">SpriteOp_RunAction</a>
+;     <a href="PRG14.html#SpriteOp_SetPhase">SpriteOp_SetPhase</a>
+;     <a href="PRG14.html#SpriteOp_SwitchBehavior">SpriteOp_SwitchBehavior</a>
+;     <a href="PRG14.html#Sprites_IncrementScriptAddr">Sprites_IncrementScriptAddr</a>
+;     <a href="PRG14.html#Sprites_LoadNextOp">Sprites_LoadNextOp</a>
+;     <a href="PRG14.html#Sprites_MaybeDisableAndGoTo">Sprites_MaybeDisableAndGoTo</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
 ;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;
@@ -2780,12 +2842,12 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__a734">FUN_PRG14__a734</a>
-;     <a href="PRG14.html#FUN_PRG14__a7f8">FUN_PRG14__a7f8</a>
-;     <a href="PRG14.html#Screen_IncSpriteInfoAddr">Screen_IncSpriteInfoAddr</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a74c">Sprite_SomethingFunc__a74c</a>
-;     <a href="PRG14.html#Sprite_Something__a82a">Sprite_Something__a82a</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_X">SpriteOp_CheckDistanceToPlayer_X</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_Y">SpriteOp_CheckDistanceToPlayer_Y</a>
+;     <a href="PRG14.html#SpriteOp_GoTo">SpriteOp_GoTo</a>
+;     <a href="PRG14.html#Sprites_IncrementScriptAddr">Sprites_IncrementScriptAddr</a>
+;     <a href="PRG14.html#Sprites_MaybeDisableAndGoTo">Sprites_MaybeDisableAndGoTo</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_LoadSpriteInfo">GameLoop_LoadSpriteInfo</a>
 ;     <a href="PRG15_MIRROR.html#Screen_LoadAllScreenInfo">Screen_LoadAllScreenInfo</a>
 ;
@@ -2821,7 +2883,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;
-</div><span class="l"><a name="Maybe_Something_PosX" href="#Maybe_Something_PosX" class="la">Maybe_Something_PosX:</a><span class="ce">; [$00cf]</span></span>
+</div><span class="l"><a name="Maybe_Something_WeaponPosX" href="#Maybe_Something_WeaponPosX" class="la">Maybe_Something_WeaponPosX:</a><span class="ce">; [$00cf]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00cf] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -2829,7 +2891,7 @@ pre {
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Sprites_IsSpriteOutOfWeaponRange">Sprites_IsSpriteOutOfWeaponRange</a>
 ;
-</div><span class="l"><a name="Maybe_Something_PosY" href="#Maybe_Something_PosY" class="la">Maybe_Something_PosY:</a><span class="ce">; [$00d0]</span></span>
+</div><span class="l"><a name="Maybe_Something_WeaponPosY" href="#Maybe_Something_WeaponPosY" class="la">Maybe_Something_WeaponPosY:</a><span class="ce">; [$00d0]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$00d0] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -3389,7 +3451,7 @@ pre {
 ;     <a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a>
 ;     <a href="PRG12.html#SplashAnimation_RunOutro">SplashAnimation_RunOutro</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
 ;     <a href="PRG15_MIRROR.html#Area_BeginScrollToNextRoom">Area_BeginScrollToNextRoom</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__df64">FUN_PRG15_MIRROR__df64</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
@@ -3439,8 +3501,6 @@ pre {
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ee93">FUN_PRG15_MIRROR__ee93</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eea9">FUN_PRG15_MIRROR__eea9</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__eebf">FUN_PRG15_MIRROR__eebf</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f01b">FUN_PRG15_MIRROR__f01b</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f039">FUN_PRG15_MIRROR__f039</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f2e3">FUN_PRG15_MIRROR__f2e3</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f316">FUN_PRG15_MIRROR__f316</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__f7b7">FUN_PRG15_MIRROR__f7b7</a>
@@ -3472,6 +3532,8 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Screen_HandleScrollRight">Screen_HandleScrollRight</a>
 ;     <a href="PRG15_MIRROR.html#Screen_HandleScrollUp">Screen_HandleScrollUp</a>
 ;     <a href="PRG15_MIRROR.html#Sprite_Maybe_SetAppearanceAddrFromOffset">Sprite_Maybe_SetAppearanceAddrFromOffset</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a>
+;     <a href="PRG15_MIRROR.html#Sprite_SetPortraitAppearanceAddr">Sprite_SetPortraitAppearanceAddr</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_LoadSpriteValue">Sprites_LoadSpriteValue</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_GetPaletteBehindTextbox">TextBox_Maybe_GetPaletteBehindTextbox</a>
 ;     <a href="PRG15_MIRROR.html#TextBox_Maybe_ShowNextCharFromBank">TextBox_Maybe_ShowNextCharFromBank</a>
@@ -4905,10 +4967,10 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__84a0">FUN_PRG14__84a0</a>
-;     <a href="PRG14.html#FUN_PRG14__84b2">FUN_PRG14__84b2</a>
+;     <a href="PRG14.html#Sprite_AddPosX">Sprite_AddPosX</a>
+;     <a href="PRG14.html#Sprite_SubtractPosX">Sprite_SubtractPosX</a>
 ;
-</div><span class="l"><a name="CurrentSprites_SomethingX" href="#CurrentSprites_SomethingX" class="la">CurrentSprites_SomethingX:</a><span class="ce">; [$02bc]</span></span>
+</div><span class="l"><a name="CurrentSprites_Maybe_XPos_Frac" href="#CurrentSprites_Maybe_XPos_Frac" class="la">CurrentSprites_Maybe_XPos_Frac:</a><span class="ce">; [$02bc]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -4920,7 +4982,7 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
+;     <a href="PRG14.html#Sprite_CalculateNewVertPos">Sprite_CalculateNewVertPos</a>
 ;
 </div><span class="l"><a name="CurrentSprites_SomethingY" href="#CurrentSprites_SomethingY" class="la">CurrentSprites_SomethingY:</a><span class="ce">; [$02c4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -4940,16 +5002,14 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
+;     <a href="PRG14.html#CurrentSprite_HandleFall">CurrentSprite_HandleFall</a>
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
-;     <a href="PRG14.html#FUN_PRG14__864a">FUN_PRG14__864a</a>
 ;     <a href="PRG14.html#FUN_PRG14__87cb">FUN_PRG14__87cb</a>
 ;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
 ;     <a href="PRG14.html#FUN_PRG14__a0ad">FUN_PRG14__a0ad</a>
-;     <a href="PRG14.html#FUN_PRG14__a0f6">FUN_PRG14__a0f6</a>
 ;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
-;     <a href="PRG14.html#GetSpriteBox">GetSpriteBox</a>
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#Player_AddExperienceFromSprite">Player_AddExperienceFromSprite</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
@@ -4959,24 +5019,27 @@ pre {
 ;     <a href="PRG14.html#Player_HandleTouchItem">Player_HandleTouchItem</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
+;     <a href="PRG14.html#SpriteAction_CastMagic">SpriteAction_CastMagic</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_LightningBallOrCharron">SpriteBehavior_LightningBallOrCharron</a>
 ;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks__ClearEntity">SpriteBehavior_MaybeFallingRocks__ClearEntity</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__a0cb">SpriteBehavior__a0cb</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__ab67">SpriteBehavior__ab67</a>
-;     <a href="PRG14.html#SpriteBehavior__abcc">SpriteBehavior__abcc</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingGarbled81">SpriteBehavior_SomethingGarbled81</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;     <a href="PRG14.html#SpriteBehavior_a25f_ClearEntity">SpriteBehavior_a25f_ClearEntity</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG14.html#Sprite_EnterNextAppearancePhase">Sprite_EnterNextAppearancePhase</a>
+;     <a href="PRG14.html#Sprite_GetBounds">Sprite_GetBounds</a>
 ;     <a href="PRG14.html#Sprite_Maybe_ResetState">Sprite_Maybe_ResetState</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithDroppedItem">Sprite_ReplaceWithDroppedItem</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithMattock">Sprite_ReplaceWithMattock</a>
 ;     <a href="PRG14.html#Sprite_SetDeathEntity">Sprite_SetDeathEntity</a>
-;     <a href="PRG14.html#Sprite_SomethingSpawnMagic">Sprite_SomethingSpawnMagic</a>
+;     <a href="PRG14.html#Sprites_HasAnyEnemyOnScreen">Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_IsSpriteOutOfWeaponRange">Sprites_IsSpriteOutOfWeaponRange</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
 ;     <a href="PRG14.html#Sprites_Remove">Sprites_Remove</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;
 </div><span class="l"><a name="CurrentSprites_Entities" href="#CurrentSprites_Entities" class="la">CurrentSprites_Entities:</a><span class="ce">; [$02cc]</span></span>
@@ -4991,8 +5054,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__9d78">FUN_PRG14__9d78</a>
 ;     <a href="PRG14.html#FUN_PRG14__9df7">FUN_PRG14__9df7</a>
-;     <a href="PRG14.html#Maybe_Sprites_HasAnyEnemyOnScreen">Maybe_Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_ClearAllEntities">Sprites_ClearAllEntities</a>
+;     <a href="PRG14.html#Sprites_HasAnyEnemyOnScreen">Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_HasMaxOnScreen">Sprites_HasMaxOnScreen</a>
 ;     <a href="PRG14.html#_Sprites_ReplaceWithMattock_HasMaxOnScreen">_Sprites_ReplaceWithMattock_HasMaxOnScreen</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
@@ -5010,8 +5073,8 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__9d78">FUN_PRG14__9d78</a>
 ;     <a href="PRG14.html#FUN_PRG14__9df7">FUN_PRG14__9df7</a>
-;     <a href="PRG14.html#Maybe_Sprites_HasAnyEnemyOnScreen">Maybe_Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_ClearAllEntities">Sprites_ClearAllEntities</a>
+;     <a href="PRG14.html#Sprites_HasAnyEnemyOnScreen">Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_HasMaxOnScreen">Sprites_HasMaxOnScreen</a>
 ;     <a href="PRG14.html#_Sprites_ReplaceWithMattock_HasMaxOnScreen">_Sprites_ReplaceWithMattock_HasMaxOnScreen</a>
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
@@ -5032,22 +5095,22 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__a6bc">FUN_PRG14__a6bc</a>
-;     <a href="PRG14.html#FUN_PRG14__a7f8">FUN_PRG14__a7f8</a>
-;     <a href="PRG14.html#Sprite_ClearBehaviorReadyAndSetSubtypeBit7">Sprite_ClearBehaviorReadyAndSetSubtypeBit7</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_X">SpriteOp_CheckDistanceToPlayer_X</a>
+;     <a href="PRG14.html#SpriteOp_CheckDistanceToPlayer_Y">SpriteOp_CheckDistanceToPlayer_Y</a>
+;     <a href="PRG14.html#SpriteOp_GoTo">SpriteOp_GoTo</a>
+;     <a href="PRG14.html#SpriteOp_MaybeDisableAndGoTo">SpriteOp_MaybeDisableAndGoTo</a>
+;     <a href="PRG14.html#SpriteOp_RunAction">SpriteOp_RunAction</a>
+;     <a href="PRG14.html#SpriteOp_SetPhase">SpriteOp_SetPhase</a>
+;     <a href="PRG14.html#SpriteOp_SwitchBehavior">SpriteOp_SwitchBehavior</a>
+;     <a href="PRG14.html#Sprite_FinishBehavior">Sprite_FinishBehavior</a>
 ;     <a href="PRG14.html#Sprite_Maybe_ResetState">Sprite_Maybe_ResetState</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithDroppedItem">Sprite_ReplaceWithDroppedItem</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithMattock">Sprite_ReplaceWithMattock</a>
 ;     <a href="PRG14.html#Sprite_SetDeathEntity">Sprite_SetDeathEntity</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6e8">Sprite_SomethingFunc__a6e8</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6ff">Sprite_SomethingFunc__a6ff</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a72c">Sprite_SomethingFunc__a72c</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a74c">Sprite_SomethingFunc__a74c</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a772">Sprite_SomethingFunc__a772</a>
-;     <a href="PRG14.html#Sprite_Something__a82a">Sprite_Something__a82a</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#Sprites_LoadNextOp">Sprites_LoadNextOp</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;
-</div><span class="l"><a name="CurrentSprites_Subtypes" href="#CurrentSprites_Subtypes" class="la">CurrentSprites_Subtypes:</a><span class="ce">; [$02d4]</span></span>
+</div><span class="l"><a name="CurrentSprites_Behaviors" href="#CurrentSprites_Behaviors" class="la">CurrentSprites_Behaviors:</a><span class="ce">; [$02d4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5059,7 +5122,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;
-</div><span class="l"><a name="CurrentSprites_Subtypes_6_" href="#CurrentSprites_Subtypes_6_" class="la">CurrentSprites_Subtypes_6_:</a><span class="ce">; [$02da]</span></span>
+</div><span class="l"><a name="CurrentSprites_Behaviors_6_" href="#CurrentSprites_Behaviors_6_" class="la">CurrentSprites_Behaviors_6_:</a><span class="ce">; [$02da]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [6]:</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -5067,72 +5130,73 @@ pre {
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#Sprites_PopulateNextAvailableSprite">Sprites_PopulateNextAvailableSprite</a>
 ;
-</div><span class="l"><a name="CurrentSprites_Subtypes_7_" href="#CurrentSprites_Subtypes_7_" class="la">CurrentSprites_Subtypes_7_:</a><span class="ce">; [$02db]</span></span>
+</div><span class="l"><a name="CurrentSprites_Behaviors_7_" href="#CurrentSprites_Behaviors_7_" class="la">CurrentSprites_Behaviors_7_:</a><span class="ce">; [$02db]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [7]:</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
 ;     <a href="PRG14.html#CurrentSpriteFlags_SetBit5">CurrentSpriteFlags_SetBit5</a>
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility">CurrentSprite_CalculateVisibility</a>
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeHorizDirection">CurrentSprite_RandomlyChangeHorizDirection</a>
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeVertDirection">CurrentSprite_RandomlyChangeVertDirection</a>
+;     <a href="PRG14.html#CurrentSprite_HandleFall">CurrentSprite_HandleFall</a>
 ;     <a href="PRG14.html#CurrentSprite_UpdateFlipMask">CurrentSprite_UpdateFlipMask</a>
-;     <a href="PRG14.html#FUN_PRG14__8427">FUN_PRG14__8427</a>
 ;     <a href="PRG14.html#FUN_PRG14__844b">FUN_PRG14__844b</a>
-;     <a href="PRG14.html#FUN_PRG14__846c">FUN_PRG14__846c</a>
 ;     <a href="PRG14.html#FUN_PRG14__849a">FUN_PRG14__849a</a>
-;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
 ;     <a href="PRG14.html#FUN_PRG14__854c">FUN_PRG14__854c</a>
-;     <a href="PRG14.html#FUN_PRG14__859c">FUN_PRG14__859c</a>
-;     <a href="PRG14.html#FUN_PRG14__864a">FUN_PRG14__864a</a>
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
 ;     <a href="PRG14.html#FUN_PRG14__a077">FUN_PRG14__a077</a>
 ;     <a href="PRG14.html#FUN_PRG14__a0ad">FUN_PRG14__a0ad</a>
-;     <a href="PRG14.html#FUN_PRG14__a0f6">FUN_PRG14__a0f6</a>
 ;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
 ;     <a href="PRG14.html#FUN_PRG14__a91e">FUN_PRG14__a91e</a>
 ;     <a href="PRG14.html#MoveSpriteHorizIfPossible">MoveSpriteHorizIfPossible</a>
-;     <a href="PRG14.html#MoveSpriteVertBorder">MoveSpriteVertBorder</a>
 ;     <a href="PRG14.html#MoveSpriteVerticalIfPossible">MoveSpriteVerticalIfPossible</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
 ;     <a href="PRG14.html#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior_WalkBackAndForth">SpriteBehavior_WalkBackAndForth</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__93e5">SpriteBehavior__93e5</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03__MoveDown">SpriteBehavior__9f03__MoveDown</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
+;     <a href="PRG14.html#SpriteAction_CastMagic">SpriteAction_CastMagic</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerX">SpriteAction_FacePlayerX</a>
+;     <a href="PRG14.html#SpriteAction_FacePlayerY">SpriteAction_FacePlayerY</a>
+;     <a href="PRG14.html#SpriteAction_FlipXDirection">SpriteAction_FlipXDirection</a>
+;     <a href="PRG14.html#SpriteAction_FlipYDirection">SpriteAction_FlipYDirection</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipXDirection">SpriteAction_RandomlyFlipXDirection</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipYDirection">SpriteAction_RandomlyFlipYDirection</a>
+;     <a href="PRG14.html#SpriteAction_RiseUp">SpriteAction_RiseUp</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveTowardPlayer">SpriteBehavior_MoveTowardPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_Naga">SpriteBehavior_Naga</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;     <a href="PRG14.html#SpriteBehavior__a8d7">SpriteBehavior__a8d7</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
-;     <a href="PRG14.html#Sprite_ChangeYDirection">Sprite_ChangeYDirection</a>
+;     <a href="PRG14.html#Sprite_CalculateNewVertPos">Sprite_CalculateNewVertPos</a>
+;     <a href="PRG14.html#Sprite_CapToBlockOppositeFalling">Sprite_CapToBlockOppositeFalling</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG14.html#Sprite_ClearFlags">Sprite_ClearFlags</a>
-;     <a href="PRG14.html#Sprite_DisableBehavior">Sprite_DisableBehavior</a>
-;     <a href="PRG14.html#Sprite_EnableBehavior">Sprite_EnableBehavior</a>
-;     <a href="PRG14.html#Sprite_IsSpriteBehaviorDisabled">Sprite_IsSpriteBehaviorDisabled</a>
+;     <a href="PRG14.html#Sprite_IsBehaviorNotReady">Sprite_IsBehaviorNotReady</a>
+;     <a href="PRG14.html#Sprite_Maybe_AddFacingPosX">Sprite_Maybe_AddFacingPosX</a>
 ;     <a href="PRG14.html#Sprite_Maybe_ResetState">Sprite_Maybe_ResetState</a>
-;     <a href="PRG14.html#Sprite_MoveAndTurnAroundIfNeeded">Sprite_MoveAndTurnAroundIfNeeded</a>
-;     <a href="PRG14.html#Sprite_MoveTowardsPlayerX">Sprite_MoveTowardsPlayerX</a>
-;     <a href="PRG14.html#Sprite_SetMaybeHidden">Sprite_SetMaybeHidden</a>
-;     <a href="PRG14.html#Sprite_SomethingSpawnMagic">Sprite_SomethingSpawnMagic</a>
-;     <a href="PRG14.html#Sprite_ToggleMoveRight">Sprite_ToggleMoveRight</a>
-;     <a href="PRG14.html#Sprite_UnsetFalling">Sprite_UnsetFalling</a>
-;     <a href="PRG14.html#Sprites_HasSpriteHitRightScreen">Sprites_HasSpriteHitRightScreen</a>
+;     <a href="PRG14.html#Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz">Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz</a>
+;     <a href="PRG14.html#Sprite_Maybe_TurnAroundIfAtScreenEdgeVert">Sprite_Maybe_TurnAroundIfAtScreenEdgeVert</a>
+;     <a href="PRG14.html#Sprite_MoveHorizAndTurnAroundIfNeeded">Sprite_MoveHorizAndTurnAroundIfNeeded</a>
+;     <a href="PRG14.html#Sprite_MoveVertAndFlipIfNeeded">Sprite_MoveVertAndFlipIfNeeded</a>
+;     <a href="PRG14.html#Sprite_SetBehaviorNotReady">Sprite_SetBehaviorNotReady</a>
+;     <a href="PRG14.html#Sprite_SetBehaviorReady">Sprite_SetBehaviorReady</a>
+;     <a href="PRG14.html#Sprite_SetVisible">Sprite_SetVisible</a>
 ;     <a href="PRG14.html#Sprites_HideSprite">Sprites_HideSprite</a>
-;     <a href="PRG14.html#Sprites_IsSpriteVisible">Sprites_IsSpriteVisible</a>
-;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanWalk">Sprites_SetCurrentSpriteCanWalk</a>
+;     <a href="PRG14.html#Sprites_IsSpriteHidden">Sprites_IsSpriteHidden</a>
+;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanMove">Sprites_SetCurrentSpriteCanMove</a>
 ;
 </div><span class="l"><a name="CurrentSprites_Flags" href="#CurrentSprites_Flags" class="la">CurrentSprites_Flags:</a><span class="ce">; [$02dc]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5154,57 +5218,57 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__9693">FUN_PRG14__9693</a>
 ;     <a href="PRG14.html#FUN_PRG14__9699">FUN_PRG14__9699</a>
-;     <a href="PRG14.html#FUN_PRG14__96b8">FUN_PRG14__96b8</a>
-;     <a href="PRG14.html#FUN_PRG14__96d5">FUN_PRG14__96d5</a>
 ;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
 ;     <a href="PRG14.html#FUN_PRG14__994a">FUN_PRG14__994a</a>
 ;     <a href="PRG14.html#FUN_PRG14__9a3c">FUN_PRG14__9a3c</a>
 ;     <a href="PRG14.html#FUN_PRG14__9a61">FUN_PRG14__9a61</a>
 ;     <a href="PRG14.html#FUN_PRG14__9ac6">FUN_PRG14__9ac6</a>
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
-;     <a href="PRG14.html#FUN_PRG14__a51b">FUN_PRG14__a51b</a>
 ;     <a href="PRG14.html#FUN_PRG14__a59d">FUN_PRG14__a59d</a>
-;     <a href="PRG14.html#GetSpriteBox">GetSpriteBox</a>
 ;     <a href="PRG14.html#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__9060">SpriteBehavior__9060</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__93e5">SpriteBehavior__93e5</a>
-;     <a href="PRG14.html#SpriteBehavior__9497">SpriteBehavior__9497</a>
-;     <a href="PRG14.html#SpriteBehavior__9538">SpriteBehavior__9538</a>
-;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__971d">SpriteBehavior__971d</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9865">SpriteBehavior__9865</a>
-;     <a href="PRG14.html#SpriteBehavior__9a32">SpriteBehavior__9a32</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9c89">SpriteBehavior__9c89</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9da9">SpriteBehavior__9da9</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03__MoveDown">SpriteBehavior__9f03__MoveDown</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
-;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
-;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
-;     <a href="PRG14.html#SpriteBehavior__a3bf">SpriteBehavior__a3bf</a>
-;     <a href="PRG14.html#SpriteBehavior__a3ef">SpriteBehavior__a3ef</a>
-;     <a href="PRG14.html#SpriteBehavior__a413">SpriteBehavior__a413</a>
-;     <a href="PRG14.html#SpriteBehavior__a437">SpriteBehavior__a437</a>
-;     <a href="PRG14.html#SpriteBehavior__a45b">SpriteBehavior__a45b</a>
-;     <a href="PRG14.html#SpriteBehavior__a558">SpriteBehavior__a558</a>
-;     <a href="PRG14.html#SpriteBehavior__a56f">SpriteBehavior__a56f</a>
-;     <a href="PRG14.html#SpriteBehavior__a586">SpriteBehavior__a586</a>
-;     <a href="PRG14.html#SpriteBehavior__ab67">SpriteBehavior__ab67</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleHelmetDroppedByZoradohna">SpriteBehavior_BattleHelmetDroppedByZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleSuitDroppedByZoradohna">SpriteBehavior_BattleSuitDroppedByZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_BlackOnyxDropFromZoradohna">SpriteBehavior_BlackOnyxDropFromZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_Borabohra">SpriteBehavior_Borabohra</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_DragonSlayerDroppedByKingGrieve">SpriteBehavior_DragonSlayerDroppedByKingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused18">SpriteBehavior_EnemyUnused18</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused39">SpriteBehavior_EnemyUnused39</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_MattockDroppedFromRipasheiku">SpriteBehavior_MattockDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Naga">SpriteBehavior_Naga</a>
+;     <a href="PRG14.html#SpriteBehavior_Nash">SpriteBehavior_Nash</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_PendantDroppedFromRipasheiku">SpriteBehavior_PendantDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_SirGawaineWolfman">SpriteBehavior_SirGawaineWolfman</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfFortress">SpriteBehavior_SpringOfFortress</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfJoker">SpriteBehavior_SpringOfJoker</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfSky">SpriteBehavior_SpringOfSky</a>
+;     <a href="PRG14.html#SpriteBehavior_Tamazutsu">SpriteBehavior_Tamazutsu</a>
+;     <a href="PRG14.html#SpriteBehavior_WingBootsDroppedByZorugeriru">SpriteBehavior_WingBootsDroppedByZorugeriru</a>
+;     <a href="PRG14.html#SpriteBehavior_Yareeka">SpriteBehavior_Yareeka</a>
+;     <a href="PRG14.html#SpriteBehavior_Zorugeriru">SpriteBehavior_Zorugeriru</a>
+;     <a href="PRG14.html#SpriteOp_GoTo">SpriteOp_GoTo</a>
+;     <a href="PRG14.html#SpriteOp_SetPhase">SpriteOp_SetPhase</a>
+;     <a href="PRG14.html#SpriteOp_SwitchBehavior">SpriteOp_SwitchBehavior</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_Borabohra">SpriteUpdateHandler_Boss_Borabohra</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_KingGrieve">SpriteUpdateHandler_Boss_KingGrieve</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_Pakukame">SpriteUpdateHandler_Boss_Pakukame</a>
@@ -5233,12 +5297,11 @@ pre {
 ;     <a href="PRG14.html#SpriteUpdateHandler_NPC_King">SpriteUpdateHandler_NPC_King</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_NPC_Walking">SpriteUpdateHandler_NPC_Walking</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler__a5d2">SpriteUpdateHandler__a5d2</a>
+;     <a href="PRG14.html#Sprite_GetBounds">Sprite_GetBounds</a>
 ;     <a href="PRG14.html#Sprite_GetPreviousSpritePhase">Sprite_GetPreviousSpritePhase</a>
 ;     <a href="PRG14.html#Sprite_Maybe_ResetState">Sprite_Maybe_ResetState</a>
 ;     <a href="PRG14.html#Sprite_SetPhase2">Sprite_SetPhase2</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6e8">Sprite_SomethingFunc__a6e8</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6ff">Sprite_SomethingFunc__a6ff</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a74c">Sprite_SomethingFunc__a74c</a>
+;     <a href="PRG14.html#Sprites_MaybeResetPhaseAndEnable">Sprites_MaybeResetPhaseAndEnable</a>
 ;
 </div><span class="l"><a name="CurrentSprites_Phases" href="#CurrentSprites_Phases" class="la">CurrentSprites_Phases:</a><span class="ce">; [$02e4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5260,9 +5323,6 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#FUN_PRG14__9593">FUN_PRG14__9593</a>
 ;     <a href="PRG14.html#FUN_PRG14__9699">FUN_PRG14__9699</a>
-;     <a href="PRG14.html#FUN_PRG14__96b8">FUN_PRG14__96b8</a>
-;     <a href="PRG14.html#FUN_PRG14__96d5">FUN_PRG14__96d5</a>
-;     <a href="PRG14.html#FUN_PRG14__9735">FUN_PRG14__9735</a>
 ;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
 ;     <a href="PRG14.html#FUN_PRG14__994a">FUN_PRG14__994a</a>
 ;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
@@ -5271,38 +5331,40 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__9a87">FUN_PRG14__9a87</a>
 ;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
 ;     <a href="PRG14.html#FUN_PRG14__9ac6">FUN_PRG14__9ac6</a>
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__a59d">FUN_PRG14__a59d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a91e">FUN_PRG14__a91e</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior_WalkBackAndForth">SpriteBehavior_WalkBackAndForth</a>
-;     <a href="PRG14.html#SpriteBehavior_Walking">SpriteBehavior_Walking</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8ecf">SpriteBehavior__8ecf</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__8f9a">SpriteBehavior__8f9a</a>
-;     <a href="PRG14.html#SpriteBehavior__8fe7">SpriteBehavior__8fe7</a>
-;     <a href="PRG14.html#SpriteBehavior__9060">SpriteBehavior__9060</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__9538">SpriteBehavior__9538</a>
-;     <a href="PRG14.html#SpriteBehavior__95c0">SpriteBehavior__95c0</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__971d">SpriteBehavior__971d</a>
-;     <a href="PRG14.html#SpriteBehavior__9865">SpriteBehavior__9865</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9c89">SpriteBehavior__9c89</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9da9">SpriteBehavior__9da9</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03__MoveDown">SpriteBehavior__9f03__MoveDown</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#LAB_PRG14__9735">LAB_PRG14__9735</a> [$PRG14::9735]
+;     <a href="PRG14.html#SpriteBehavior_Bihoruda">SpriteBehavior_Bihoruda</a>
+;     <a href="PRG14.html#SpriteBehavior_Borabohra">SpriteBehavior_Borabohra</a>
+;     <a href="PRG14.html#SpriteBehavior_BossDeath">SpriteBehavior_BossDeath</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused39">SpriteBehavior_EnemyUnused39</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_LightningBallOrCharron">SpriteBehavior_LightningBallOrCharron</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_Magman">SpriteBehavior_Magman</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveTowardPlayer">SpriteBehavior_MoveTowardPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_Nash">SpriteBehavior_Nash</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_Tamazutsu">SpriteBehavior_Tamazutsu</a>
+;     <a href="PRG14.html#SpriteBehavior_WalkForward">SpriteBehavior_WalkForward</a>
+;     <a href="PRG14.html#SpriteBehavior_Yareeka">SpriteBehavior_Yareeka</a>
+;     <a href="PRG14.html#SpriteBehavior_Yuinaru">SpriteBehavior_Yuinaru</a>
+;     <a href="PRG14.html#SpriteBehavior_Zorugeriru">SpriteBehavior_Zorugeriru</a>
+;     <a href="PRG14.html#SpriteBehavior__8f9a">SpriteBehavior__8f9a</a> [$PRG14::8f9a]
 ;     <a href="PRG14.html#SpriteBehavior__a8d7">SpriteBehavior__a8d7</a>
-;     <a href="PRG14.html#SpriteBehavior__ab67">SpriteBehavior__ab67</a>
-;     <a href="PRG14.html#SpriteBehavior__abcc">SpriteBehavior__abcc</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_Borabohra">SpriteUpdateHandler_Boss_Borabohra</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_EnemyDeath">SpriteUpdateHandler_Effect_EnemyDeath</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
@@ -5315,7 +5377,7 @@ pre {
 ;     <a href="PRG14.html#SpriteUpdateHandler__a5d2">SpriteUpdateHandler__a5d2</a>
 ;     <a href="PRG14.html#Sprite_SetDeathEntity">Sprite_SetDeathEntity</a>
 ;
-</div><span class="l"><a name="CurrentSprites_TickCounters" href="#CurrentSprites_TickCounters" class="la">CurrentSprites_TickCounters:</a><span class="ce">; [$02ec]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorData2" href="#CurrentSprites_BehaviorData2" class="la">CurrentSprites_BehaviorData2:</a><span class="ce">; [$02ec]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5327,7 +5389,7 @@ pre {
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
-; XXX Some lookup map.
+; Tick counter used for some behaviors.
 ;============================================================================
 </div><span class="l"></span>
 <div class="c">;
@@ -5335,33 +5397,34 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
 ;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
 ;     <a href="PRG14.html#FUN_PRG14__9ac6">FUN_PRG14__9ac6</a>
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__a59d">FUN_PRG14__a59d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a91e">FUN_PRG14__a91e</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior_WalkBackAndForth">SpriteBehavior_WalkBackAndForth</a>
-;     <a href="PRG14.html#SpriteBehavior_Walking">SpriteBehavior_Walking</a>
-;     <a href="PRG14.html#SpriteBehavior__8ecf">SpriteBehavior__8ecf</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__8f9a">SpriteBehavior__8f9a</a>
-;     <a href="PRG14.html#SpriteBehavior__8fe7">SpriteBehavior__8fe7</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__93e5">SpriteBehavior__93e5</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9a32">SpriteBehavior__9a32</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
+;     <a href="PRG14.html#LAB_PRG14__8fb7">LAB_PRG14__8fb7</a> [$PRG14::8fb7]
+;     <a href="PRG14.html#SpriteBehavior_Bihoruda">SpriteBehavior_Bihoruda</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused18">SpriteBehavior_EnemyUnused18</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveTowardPlayer">SpriteBehavior_MoveTowardPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_Naga">SpriteBehavior_Naga</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_WalkForward">SpriteBehavior_WalkForward</a>
+;     <a href="PRG14.html#SpriteBehavior_Yuinaru">SpriteBehavior_Yuinaru</a>
 ;     <a href="PRG14.html#SpriteBehavior__a8d7">SpriteBehavior__a8d7</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Enemy_Unused18">SpriteUpdateHandler_Enemy_Unused18</a>
 ;
-</div><span class="l"><a name="CurrentSprites_StateCounter" href="#CurrentSprites_StateCounter" class="la">CurrentSprites_StateCounter:</a><span class="ce">; [$02f4]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorData3" href="#CurrentSprites_BehaviorData3" class="la">CurrentSprites_BehaviorData3:</a><span class="ce">; [$02f4]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5383,13 +5446,13 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__99f3">FUN_PRG14__99f3</a>
 ;     <a href="PRG14.html#FUN_PRG14__9aa1">FUN_PRG14__9aa1</a>
 ;     <a href="PRG14.html#Maybe_Sprite_HandleDeathDrop">Maybe_Sprite_HandleDeathDrop</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_ShadowEura">SpriteUpdateHandler_Boss_ShadowEura</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Coin">SpriteUpdateHandler_Coin</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_TODO_Unknown_83">SpriteUpdateHandler_TODO_Unknown_83</a>
@@ -5414,17 +5477,17 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
-;     <a href="PRG14.html#FUN_PRG14__82f8">FUN_PRG14__82f8</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
 ;     <a href="PRG14.html#FUN_PRG14__9917">FUN_PRG14__9917</a>
 ;     <a href="PRG14.html#MoveRight">MoveRight</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9c89">SpriteBehavior__9c89</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9da9">SpriteBehavior__9da9</a>
-;     <a href="PRG14.html#SpriteBehavior__9e6d">SpriteBehavior__9e6d</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
+;     <a href="PRG14.html#SpriteBehavior_Borabohra">SpriteBehavior_Borabohra</a>
+;     <a href="PRG14.html#SpriteBehavior_Garbled3">SpriteBehavior_Garbled3</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_Zorugeriru">SpriteBehavior_Zorugeriru</a>
+;     <a href="PRG14.html#Sprite_CalcDistanceXToPlayer">Sprite_CalcDistanceXToPlayer</a>
 ;     <a href="PRG14.html#Sprite_CanClimb">Sprite_CanClimb</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
 ;     <a href="PRG14.html#Sprite_Maybe_ResetState">Sprite_Maybe_ResetState</a>
@@ -5470,12 +5533,12 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#FUN_PRG14__8398">FUN_PRG14__8398</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;
-</div><span class="l"><a name="CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c" href="#CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c" class="la">CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c:</a><span class="ce">; [$030c]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorState_XFull" href="#CurrentSprites_BehaviorState_XFull" class="la">CurrentSprites_BehaviorState_XFull:</a><span class="ce">; [$030c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5495,11 +5558,11 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#FUN_PRG14__8398">FUN_PRG14__8398</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveVertically">SpriteBehavior_MoveVertically</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;
-</div><span class="l"><a name="CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314" href="#CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314" class="la">CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314:</a><span class="ce">; [$0314]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorState_YFull" href="#CurrentSprites_BehaviorState_YFull" class="la">CurrentSprites_BehaviorState_YFull:</a><span class="ce">; [$0314]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5519,12 +5582,12 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#FUN_PRG14__8398">FUN_PRG14__8398</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;
-</div><span class="l"><a name="CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c" href="#CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c" class="la">CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c:</a><span class="ce">; [$031c]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorState_XFrac" href="#CurrentSprites_BehaviorState_XFrac" class="la">CurrentSprites_BehaviorState_XFrac:</a><span class="ce">; [$031c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5544,11 +5607,11 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#FUN_PRG14__8398">FUN_PRG14__8398</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveVertically">SpriteBehavior_MoveVertically</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;
-</div><span class="l"><a name="CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324" href="#CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324" class="la">CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324:</a><span class="ce">; [$0324]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorState_YFrac" href="#CurrentSprites_BehaviorState_YFrac" class="la">CurrentSprites_BehaviorState_YFrac:</a><span class="ce">; [$0324]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5568,14 +5631,14 @@ pre {
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
 ;     <a href="PRG14.html#FUN_PRG14__9e13">FUN_PRG14__9e13</a>
 ;     <a href="PRG14.html#FUN_PRG14__a0ad">FUN_PRG14__a0ad</a>
-;     <a href="PRG14.html#FUN_PRG14__a0f6">FUN_PRG14__a0f6</a>
 ;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
+;     <a href="PRG14.html#SpriteAction_CastMagic">SpriteAction_CastMagic</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Enemy_Unused18">SpriteUpdateHandler_Enemy_Unused18</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithMattock">Sprite_ReplaceWithMattock</a>
-;     <a href="PRG14.html#Sprite_SomethingSpawnMagic">Sprite_SomethingSpawnMagic</a>
 ;
 </div><span class="l"><a name="CurrentSprites_PPUAddrs" href="#CurrentSprites_PPUAddrs" class="la">CurrentSprites_PPUAddrs:</a><span class="ce">; [$032c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5644,7 +5707,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
 ;
 </div><span class="l"><a name="CurrentSprites_HP" href="#CurrentSprites_HP" class="la">CurrentSprites_HP:</a><span class="ce">; [$0344]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5710,7 +5773,7 @@ pre {
 ;     <a href="PRG14.html#Sprite_ReplaceWithDroppedItem">Sprite_ReplaceWithDroppedItem</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithMattock">Sprite_ReplaceWithMattock</a>
 ;     <a href="PRG14.html#Sprite_SetDeathEntity">Sprite_SetDeathEntity</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;
 </div><span class="l"><a name="CurrentSprites_BehaviorAddrs_L" href="#CurrentSprites_BehaviorAddrs_L" class="la">CurrentSprites_BehaviorAddrs_L:</a><span class="ce">; [$0354]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5734,7 +5797,7 @@ pre {
 ;     <a href="PRG14.html#Sprite_ReplaceWithDroppedItem">Sprite_ReplaceWithDroppedItem</a>
 ;     <a href="PRG14.html#Sprite_ReplaceWithMattock">Sprite_ReplaceWithMattock</a>
 ;     <a href="PRG14.html#Sprite_SetDeathEntity">Sprite_SetDeathEntity</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;
 </div><span class="l"><a name="CurrentSprites_BehaviorAddrs_U" href="#CurrentSprites_BehaviorAddrs_U" class="la">CurrentSprites_BehaviorAddrs_U:</a><span class="ce">; [$035c]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
@@ -5754,11 +5817,11 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__a6af">FUN_PRG14__a6af</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#Sprite_SomethingFunc__a6ff">Sprite_SomethingFunc__a6ff</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteOp_SwitchBehavior">SpriteOp_SwitchBehavior</a>
+;     <a href="PRG14.html#Sprites_CountdownBehavior">Sprites_CountdownBehavior</a>
 ;
-</div><span class="l"><a name="BYTE_ARRAY_0364" href="#BYTE_ARRAY_0364" class="la">BYTE_ARRAY_0364:</a><span class="ce">; [$0364]</span></span>
+</div><span class="l"><a name="CurrentSprites_BehaviorArg1" href="#CurrentSprites_BehaviorArg1" class="la">CurrentSprites_BehaviorArg1:</a><span class="ce">; [$0364]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [0]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [1]:</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [2]:</span></span>
@@ -5806,32 +5869,30 @@ pre {
 ;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#FUN_PRG14__83c1">FUN_PRG14__83c1</a>
 ;     <a href="PRG14.html#FUN_PRG14__848a">FUN_PRG14__848a</a>
-;     <a href="PRG14.html#FUN_PRG14__84a0">FUN_PRG14__84a0</a>
-;     <a href="PRG14.html#FUN_PRG14__84b2">FUN_PRG14__84b2</a>
-;     <a href="PRG14.html#FUN_PRG14__96b8">FUN_PRG14__96b8</a>
-;     <a href="PRG14.html#FUN_PRG14__9735">FUN_PRG14__9735</a>
-;     <a href="PRG14.html#FUN_PRG14__9c43">FUN_PRG14__9c43</a>
 ;     <a href="PRG14.html#FUN_PRG14__a91e">FUN_PRG14__a91e</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior_Walking">SpriteBehavior_Walking</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__9497">SpriteBehavior__9497</a>
-;     <a href="PRG14.html#SpriteBehavior__9538">SpriteBehavior__9538</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
-;     <a href="PRG14.html#SpriteBehavior__a0cb">SpriteBehavior__a0cb</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_SirGawaineWolfman">SpriteBehavior_SirGawaineWolfman</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingGarbled81">SpriteBehavior_SomethingGarbled81</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
+;     <a href="PRG14.html#SpriteBehavior_WalkForward">SpriteBehavior_WalkForward</a>
+;     <a href="PRG14.html#SpriteBehavior_Yareeka">SpriteBehavior_Yareeka</a>
+;     <a href="PRG14.html#Sprite_AddPosX">Sprite_AddPosX</a>
+;     <a href="PRG14.html#Sprite_MoveHorizOneBlockOrTurnAround">Sprite_MoveHorizOneBlockOrTurnAround</a>
+;     <a href="PRG14.html#Sprite_SubtractPosX">Sprite_SubtractPosX</a>
+;     <a href="PRG14.html#Sprites_CalcVertSpriteMovement">Sprites_CalcVertSpriteMovement</a>
 ;     <a href="PRG14.html#Sprites_Maybe_UpdateHitByMagic">Sprites_Maybe_UpdateHitByMagic</a>
 ;
 </div><span class="l"><a name="Arg_DeltaX_Frac" href="#Arg_DeltaX_Frac" class="la">Arg_DeltaX_Frac:</a><span class="ce">; [$0374]</span></span>
@@ -5845,35 +5906,33 @@ pre {
 ;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateXPosition">CastMagic_UpdateXPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#FUN_PRG14__83c1">FUN_PRG14__83c1</a>
 ;     <a href="PRG14.html#FUN_PRG14__848a">FUN_PRG14__848a</a>
-;     <a href="PRG14.html#FUN_PRG14__84a0">FUN_PRG14__84a0</a>
-;     <a href="PRG14.html#FUN_PRG14__84b2">FUN_PRG14__84b2</a>
 ;     <a href="PRG14.html#FUN_PRG14__9593">FUN_PRG14__9593</a>
-;     <a href="PRG14.html#FUN_PRG14__96b8">FUN_PRG14__96b8</a>
-;     <a href="PRG14.html#FUN_PRG14__9735">FUN_PRG14__9735</a>
-;     <a href="PRG14.html#FUN_PRG14__9c43">FUN_PRG14__9c43</a>
 ;     <a href="PRG14.html#FUN_PRG14__a91e">FUN_PRG14__a91e</a>
-;     <a href="PRG14.html#SpriteBehavior_Hopper">SpriteBehavior_Hopper</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior_Walking">SpriteBehavior_Walking</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8ecf">SpriteBehavior__8ecf</a>
-;     <a href="PRG14.html#SpriteBehavior__8f2e">SpriteBehavior__8f2e</a>
-;     <a href="PRG14.html#SpriteBehavior__8fe7">SpriteBehavior__8fe7</a>
-;     <a href="PRG14.html#SpriteBehavior__9129">SpriteBehavior__9129</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__9497">SpriteBehavior__9497</a>
-;     <a href="PRG14.html#SpriteBehavior__9538">SpriteBehavior__9538</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__9fe3">SpriteBehavior__9fe3</a>
-;     <a href="PRG14.html#SpriteBehavior__a0cb">SpriteBehavior__a0cb</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aa86">SpriteBehavior__aa86</a>
+;     <a href="PRG14.html#SpriteBehavior_Bihoruda">SpriteBehavior_Bihoruda</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_Hop">SpriteBehavior_Hop</a>
+;     <a href="PRG14.html#SpriteBehavior_Ishiisu">SpriteBehavior_Ishiisu</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve">SpriteBehavior_KingGrieve</a>
+;     <a href="PRG14.html#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_ShadowEura">SpriteBehavior_ShadowEura</a>
+;     <a href="PRG14.html#SpriteBehavior_SirGawaineWolfman">SpriteBehavior_SirGawaineWolfman</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingGarbled81">SpriteBehavior_SomethingGarbled81</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingZoradohna_18">SpriteBehavior_SomethingZoradohna_18</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
+;     <a href="PRG14.html#SpriteBehavior_WalkForward">SpriteBehavior_WalkForward</a>
+;     <a href="PRG14.html#SpriteBehavior_Yareeka">SpriteBehavior_Yareeka</a>
+;     <a href="PRG14.html#SpriteBehavior_Yuinaru">SpriteBehavior_Yuinaru</a>
+;     <a href="PRG14.html#Sprite_AddPosX">Sprite_AddPosX</a>
+;     <a href="PRG14.html#Sprite_MoveHorizOneBlockOrTurnAround">Sprite_MoveHorizOneBlockOrTurnAround</a>
+;     <a href="PRG14.html#Sprite_SubtractPosX">Sprite_SubtractPosX</a>
+;     <a href="PRG14.html#Sprites_CalcVertSpriteMovement">Sprites_CalcVertSpriteMovement</a>
 ;     <a href="PRG14.html#Sprites_Maybe_UpdateHitByMagic">Sprites_Maybe_UpdateHitByMagic</a>
 ;
 </div><span class="l"><a name="Arg_DeltaX_Full" href="#Arg_DeltaX_Full" class="la">Arg_DeltaX_Full:</a><span class="ce">; [$0375]</span></span>
@@ -5881,50 +5940,48 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CalcVerticalSpriteMovement">CalcVerticalSpriteMovement</a>
-;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
 ;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8f9a">SpriteBehavior__8f9a</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__93e5">SpriteBehavior__93e5</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03__MoveDown">SpriteBehavior__9f03__MoveDown</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveVertically">SpriteBehavior_MoveVertically</a>
+;     <a href="PRG14.html#SpriteBehavior_Naga">SpriteBehavior_Naga</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
+;     <a href="PRG14.html#Sprite_CalculateNewVertPos">Sprite_CalculateNewVertPos</a>
+;     <a href="PRG14.html#Sprites_CalcVerticalSpriteMovement">Sprites_CalcVerticalSpriteMovement</a>
 ;
 </div><span class="l"><a name="Arg_DeltaY_Frac" href="#Arg_DeltaY_Frac" class="la">Arg_DeltaY_Frac:</a><span class="ce">; [$0376]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0376] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#CalcVerticalSpriteMovement">CalcVerticalSpriteMovement</a>
-;     <a href="PRG14.html#CalculateNewVertPos">CalculateNewVertPos</a>
 ;     <a href="PRG14.html#CastMagic_UpdateTilte">CastMagic_UpdateTilte</a>
 ;     <a href="PRG14.html#CastMagic_UpdateYPosition">CastMagic_UpdateYPosition</a>
 ;     <a href="PRG14.html#FUN_PRG14__83a8">FUN_PRG14__83a8</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFallingRocks">SpriteBehavior_MaybeFallingRocks</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior__8e77">SpriteBehavior__8e77</a>
-;     <a href="PRG14.html#SpriteBehavior__8ecf">SpriteBehavior__8ecf</a>
-;     <a href="PRG14.html#SpriteBehavior__8f9a">SpriteBehavior__8f9a</a>
-;     <a href="PRG14.html#SpriteBehavior__8fe7">SpriteBehavior__8fe7</a>
-;     <a href="PRG14.html#SpriteBehavior__91b3">SpriteBehavior__91b3</a>
-;     <a href="PRG14.html#SpriteBehavior__92e0">SpriteBehavior__92e0</a>
-;     <a href="PRG14.html#SpriteBehavior__93e5">SpriteBehavior__93e5</a>
-;     <a href="PRG14.html#SpriteBehavior__9632">SpriteBehavior__9632</a>
-;     <a href="PRG14.html#SpriteBehavior__97ae">SpriteBehavior__97ae</a>
-;     <a href="PRG14.html#SpriteBehavior__9b83">SpriteBehavior__9b83</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03__MoveDown">SpriteBehavior__9f03__MoveDown</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
-;     <a href="PRG14.html#SpriteBehavior__a997">SpriteBehavior__a997</a>
-;     <a href="PRG14.html#SpriteBehavior__aafa">SpriteBehavior__aafa</a>
+;     <a href="PRG14.html#SpriteBehavior_Bihoruda">SpriteBehavior_Bihoruda</a>
+;     <a href="PRG14.html#SpriteBehavior_BounceAndExpire">SpriteBehavior_BounceAndExpire</a>
+;     <a href="PRG14.html#SpriteBehavior_BuzzAround">SpriteBehavior_BuzzAround</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused36">SpriteBehavior_EnemyUnused36</a>
+;     <a href="PRG14.html#SpriteBehavior_EnemyUnused43">SpriteBehavior_EnemyUnused43</a>
+;     <a href="PRG14.html#SpriteBehavior_ExecutionHood">SpriteBehavior_ExecutionHood</a>
+;     <a href="PRG14.html#SpriteBehavior_GiantBees">SpriteBehavior_GiantBees</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_MoveDown">SpriteBehavior_KingGrieve_MoveDown</a>
+;     <a href="PRG14.html#SpriteBehavior_MoveVertically">SpriteBehavior_MoveVertically</a>
+;     <a href="PRG14.html#SpriteBehavior_Naga">SpriteBehavior_Naga</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku">SpriteBehavior_Ripasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_SomethingEyeball_17">SpriteBehavior_SomethingEyeball_17</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
+;     <a href="PRG14.html#SpriteBehavior_Yuinaru">SpriteBehavior_Yuinaru</a>
+;     <a href="PRG14.html#Sprite_CalculateNewVertPos">Sprite_CalculateNewVertPos</a>
+;     <a href="PRG14.html#Sprites_CalcVerticalSpriteMovement">Sprites_CalcVerticalSpriteMovement</a>
 ;
 </div><span class="l"><a name="Arg_DeltaY_Full" href="#Arg_DeltaY_Full" class="la">Arg_DeltaY_Full:</a><span class="ce">; [$0377]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0377] byte</span></span>
@@ -5941,20 +5998,16 @@ pre {
 ;     <a href="PRG14.html#CurrentSprite_CalculateVisibility">CurrentSprite_CalculateVisibility</a>
 ;     <a href="PRG14.html#CurrentSprite_CanMoveInDirection">CurrentSprite_CanMoveInDirection</a>
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeHorizDirection">CurrentSprite_RandomlyChangeHorizDirection</a>
-;     <a href="PRG14.html#CurrentSprite_RandomlyChangeVertDirection">CurrentSprite_RandomlyChangeVertDirection</a>
+;     <a href="PRG14.html#CurrentSprite_HandleFall">CurrentSprite_HandleFall</a>
 ;     <a href="PRG14.html#CurrentSprite_UpdateState">CurrentSprite_UpdateState</a>
 ;     <a href="PRG14.html#FUN_PRG14__84f4">FUN_PRG14__84f4</a>
-;     <a href="PRG14.html#FUN_PRG14__850d">FUN_PRG14__850d</a>
-;     <a href="PRG14.html#FUN_PRG14__864a">FUN_PRG14__864a</a>
 ;     <a href="PRG14.html#FUN_PRG14__86c6">FUN_PRG14__86c6</a>
 ;     <a href="PRG14.html#FUN_PRG14__87cb">FUN_PRG14__87cb</a>
 ;     <a href="PRG14.html#FUN_PRG14__9991">FUN_PRG14__9991</a>
 ;     <a href="PRG14.html#FUN_PRG14__9a61">FUN_PRG14__9a61</a>
-;     <a href="PRG14.html#FUN_PRG14__ac21">FUN_PRG14__ac21</a>
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#LAB_PRG14__8043">LAB_PRG14__8043</a> [$PRG14::8043]
-;     <a href="PRG14.html#Maybe_Sprites_HasAnyEnemyOnScreen">Maybe_Sprites_HasAnyEnemyOnScreen</a>
+;     <a href="PRG14.html#LAB_PRG14__850d">LAB_PRG14__850d</a> [$PRG14::850d]
 ;     <a href="PRG14.html#MoveSpriteHorizIfPossible">MoveSpriteHorizIfPossible</a>
 ;     <a href="PRG14.html#MoveSpriteVerticalIfPossible">MoveSpriteVerticalIfPossible</a>
 ;     <a href="PRG14.html#Player_AddExperienceFromSprite">Player_AddExperienceFromSprite</a>
@@ -5964,18 +6017,22 @@ pre {
 ;     <a href="PRG14.html#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>
 ;     <a href="PRG14.html#Player_HandleTouchItem">Player_HandleTouchItem</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipXDirection">SpriteAction_RandomlyFlipXDirection</a>
+;     <a href="PRG14.html#SpriteAction_RandomlyFlipYDirection">SpriteAction_RandomlyFlipYDirection</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
 ;     <a href="PRG14.html#SpriteBehavior_RestoreXRegister">SpriteBehavior_RestoreXRegister</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_EnemyDeath">SpriteUpdateHandler_Effect_EnemyDeath</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Effect_LightningBall20">SpriteUpdateHandler_Effect_LightningBall20</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Enemy_Unused18">SpriteUpdateHandler_Enemy_Unused18</a>
 ;     <a href="PRG14.html#Sprite_CheckHitByCastMagic">Sprite_CheckHitByCastMagic</a>
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
+;     <a href="PRG14.html#Sprite_HandleDeathDropIfPossible">Sprite_HandleDeathDropIfPossible</a>
+;     <a href="PRG14.html#Sprites_HasAnyEnemyOnScreen">Sprites_HasAnyEnemyOnScreen</a>
 ;     <a href="PRG14.html#Sprites_SetBlockIsMovingResult">Sprites_SetBlockIsMovingResult</a>
-;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanWalk">Sprites_SetCurrentSpriteCanWalk</a>
+;     <a href="PRG14.html#Sprites_SetCurrentSpriteCanMove">Sprites_SetCurrentSpriteCanMove</a>
 ;     <a href="PRG14.html#Sprites_UpdateAllStates">Sprites_UpdateAllStates</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;     <a href="PRG14.html#_afterFarJump">_afterFarJump</a> [$PRG14::89ff]
 ;     <a href="PRG14.html#_updateSprite">_updateSprite</a> [$PRG14::8011]
@@ -6065,13 +6122,13 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__a2eb">FUN_PRG14__a2eb</a>
-;     <a href="PRG14.html#SpriteBehavior_MaybeFlyingSomething">SpriteBehavior_MaybeFlyingSomething</a>
-;     <a href="PRG14.html#SpriteBehavior__9497">SpriteBehavior__9497</a>
-;     <a href="PRG14.html#SpriteBehavior__9cf2">SpriteBehavior__9cf2</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
-;     <a href="PRG14.html#SpriteBehavior__a154">SpriteBehavior__a154</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_NecronAides">SpriteBehavior_NecronAides</a>
+;     <a href="PRG14.html#SpriteBehavior_Pakukame">SpriteBehavior_Pakukame</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#SpriteBehavior_SirGawaineWolfman">SpriteBehavior_SirGawaineWolfman</a>
+;     <a href="PRG14.html#SpriteBehavior_Unknown_29">SpriteBehavior_Unknown_29</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_Borabohra">SpriteUpdateHandler_Boss_Borabohra</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_KingGrieve">SpriteUpdateHandler_Boss_KingGrieve</a>
 ;     <a href="PRG14.html#SpriteUpdateHandler_Boss_Ripasheiku">SpriteUpdateHandler_Boss_Ripasheiku</a>
@@ -6125,26 +6182,26 @@ pre {
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__a077">FUN_PRG14__a077</a>
-;     <a href="PRG14.html#FUN_PRG14__a0f6">FUN_PRG14__a0f6</a>
 ;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;
-</div><span class="l"><a name="BYTE_0384" href="#BYTE_0384" class="la">BYTE_0384:</a><span class="ce">; [$0384]</span></span>
+</div><span class="l"><a name="CurrentSprite_Arg_CastMagicX" href="#CurrentSprite_Arg_CastMagicX" class="la">CurrentSprite_Arg_CastMagicX:</a><span class="ce">; [$0384]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0384] byte</span></span>
 <span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#FUN_PRG14__9b45">FUN_PRG14__9b45</a>
 ;     <a href="PRG14.html#FUN_PRG14__a077">FUN_PRG14__a077</a>
-;     <a href="PRG14.html#FUN_PRG14__a0f6">FUN_PRG14__a0f6</a>
 ;     <a href="PRG14.html#FUN_PRG14__a12d">FUN_PRG14__a12d</a>
 ;     <a href="PRG14.html#FUN_PRG14__a1cc">FUN_PRG14__a1cc</a>
-;     <a href="PRG14.html#SpriteBehavior__9f03">SpriteBehavior__9f03</a>
+;     <a href="PRG14.html#SpriteBehavior_KingGrieve_9f65">SpriteBehavior_KingGrieve_9f65</a>
+;     <a href="PRG14.html#SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos">SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos</a>
+;     <a href="PRG14.html#Sprite_CastMagic">Sprite_CastMagic</a>
 ;
-</div><span class="l"><a name="BYTE_0385" href="#BYTE_0385" class="la">BYTE_0385:</a><span class="ce">; [$0385]</span></span>
+</div><span class="l"><a name="CurrentSprite_Arg_CastMagicY" href="#CurrentSprite_Arg_CastMagicY" class="la">CurrentSprite_Arg_CastMagicY:</a><span class="ce">; [$0385]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0385] byte</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -6395,7 +6452,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#INVENTORY_CATEGORY_L">INVENTORY_CATEGORY_L</a> [$PRG12::9b29]
-;     <a href="PRG14.html#SpriteBehavior__a3bf">SpriteBehavior__a3bf</a>
+;     <a href="PRG14.html#SpriteBehavior_DragonSlayerDroppedByKingGrieve">SpriteBehavior_DragonSlayerDroppedByKingGrieve</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpDragonSlayer">Player_PickUpDragonSlayer</a>
 ;
 </div><span class="l"><a name="WeaponInventory" href="#WeaponInventory" class="la">WeaponInventory:</a><span class="ce">; [$039d]</span></span>
@@ -6420,7 +6477,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#INVENTORY_CATEGORY_L">INVENTORY_CATEGORY_L</a> [$PRG12::9b2a]
-;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleSuitDroppedByZoradohna">SpriteBehavior_BattleSuitDroppedByZoradohna</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpBattleSuit">Player_PickUpBattleSuit</a>
 ;
 </div><span class="l"><a name="ArmorInventory" href="#ArmorInventory" class="la">ArmorInventory:</a><span class="ce">; [$03a1]</span></span>
@@ -6445,7 +6502,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#INVENTORY_CATEGORY_L">INVENTORY_CATEGORY_L</a> [$PRG12::9b2b]
-;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleHelmetDroppedByZoradohna">SpriteBehavior_BattleHelmetDroppedByZoradohna</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpBattleHelmet">Player_PickUpBattleHelmet</a>
 ;
 </div><span class="l"><a name="ShieldInventory" href="#ShieldInventory" class="la">ShieldInventory:</a><span class="ce">; [$03a5]</span></span>
@@ -6553,7 +6610,7 @@ pre {
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
 ;     <a href="PRG14.html#PlayerDeath_ResetSelectedItemState">PlayerDeath_ResetSelectedItemState</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
-;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleSuitDroppedByZoradohna">SpriteBehavior_BattleSuitDroppedByZoradohna</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
@@ -6581,7 +6638,7 @@ pre {
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#PlayerDeath_ResetSelectedItemState">PlayerDeath_ResetSelectedItemState</a>
 ;     <a href="PRG14.html#Player_DrawShield">Player_DrawShield</a>
-;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleHelmetDroppedByZoradohna">SpriteBehavior_BattleHelmetDroppedByZoradohna</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__ec58">FUN_PRG15_MIRROR__ec58</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateArmorSprite">Maybe_Player_UpdateArmorSprite</a>
@@ -6685,8 +6742,8 @@ pre {
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
 ;     <a href="PRG12.html#Something_ShopCursorInventory">Something_ShopCursorInventory</a>
 ;     <a href="PRG12.html#UI_ShowPlayerMenu">UI_ShowPlayerMenu</a>
-;     <a href="PRG14.html#Init_PlayerInventoryState">Init_PlayerInventoryState</a>
-;     <a href="PRG14.html#SpriteBehavior__a3bf">SpriteBehavior__a3bf</a>
+;     <a href="PRG14.html#Player_InitInventoryState">Player_InitInventoryState</a>
+;     <a href="PRG14.html#SpriteBehavior_DragonSlayerDroppedByKingGrieve">SpriteBehavior_DragonSlayerDroppedByKingGrieve</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpBattleSuit">Player_PickUpBattleSuit</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpDragonSlayer">Player_PickUpDragonSlayer</a>
 ;
@@ -6704,8 +6761,8 @@ pre {
 ;     <a href="PRG12.html#Password_EncodeGameState">Password_EncodeGameState</a>
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#Init_PlayerInventoryState">Init_PlayerInventoryState</a>
-;     <a href="PRG14.html#SpriteBehavior__a354">SpriteBehavior__a354</a>
+;     <a href="PRG14.html#Player_InitInventoryState">Player_InitInventoryState</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleSuitDroppedByZoradohna">SpriteBehavior_BattleSuitDroppedByZoradohna</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpBattleSuit">Player_PickUpBattleSuit</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpDragonSlayer">Player_PickUpDragonSlayer</a>
 ;
@@ -6722,8 +6779,8 @@ pre {
 ;     <a href="PRG12.html#Password_EncodeGameState">Password_EncodeGameState</a>
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#Init_PlayerInventoryState">Init_PlayerInventoryState</a>
-;     <a href="PRG14.html#SpriteBehavior__a384">SpriteBehavior__a384</a>
+;     <a href="PRG14.html#Player_InitInventoryState">Player_InitInventoryState</a>
+;     <a href="PRG14.html#SpriteBehavior_BattleHelmetDroppedByZoradohna">SpriteBehavior_BattleHelmetDroppedByZoradohna</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpBattleHelmet">Player_PickUpBattleHelmet</a>
 ;
 </div><span class="l"><a name="NumberOfShields" href="#NumberOfShields" class="la">NumberOfShields:</a><span class="ce">; [$03c4]</span></span>
@@ -6739,7 +6796,7 @@ pre {
 ;     <a href="PRG12.html#Password_EncodeGameState">Password_EncodeGameState</a>
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#Init_PlayerInventoryState">Init_PlayerInventoryState</a>
+;     <a href="PRG14.html#Player_InitInventoryState">Player_InitInventoryState</a>
 ;
 </div><span class="l"><a name="NumberOfMagicSpells" href="#NumberOfMagicSpells" class="la">NumberOfMagicSpells:</a><span class="ce">; [$03c5]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03c5] byte</span></span>
@@ -6755,12 +6812,22 @@ pre {
 ;     <a href="PRG12.html#Password_EncodeGameState">Password_EncodeGameState</a>
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#Init_PlayerInventoryState">Init_PlayerInventoryState</a>
+;     <a href="PRG14.html#Player_InitInventoryState">Player_InitInventoryState</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpItem">Player_PickUpItem</a>
 ;
 </div><span class="l"><a name="NumberOfItems" href="#NumberOfItems" class="la">NumberOfItems:</a><span class="ce">; [$03c6]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03c6] byte</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; The loaded portrait ID from an IScript.
+;
+; This will be 0xFF if unset.
+;
+; If set, the player won't be drawn, and instead portrait
+; data will be loaded, displayed, and animated.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#IScriptAction_ShowSellMenu">IScriptAction_ShowSellMenu</a>
@@ -6772,10 +6839,10 @@ pre {
 ;     <a href="PRG15_MIRROR.html#GameLoop_ClearSprites">GameLoop_ClearSprites</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_ClearPortrait">IScripts_ClearPortrait</a>
 ;     <a href="PRG15_MIRROR.html#IScripts_DrawPortraitAnimationFrame">IScripts_DrawPortraitAnimationFrame</a>
+;     <a href="PRG15_MIRROR.html#IScripts_GetPortraitOffset">IScripts_GetPortraitOffset</a>
 ;     <a href="PRG15_MIRROR.html#Player_DrawBody">Player_DrawBody</a>
-;     <a href="PRG15_MIRROR.html#Something_Temp03C7Times5">Something_Temp03C7Times5</a>
 ;
-</div><span class="l"><a name="Temp_03C7" href="#Temp_03C7" class="la">Temp_03C7:</a><span class="ce">; [$03c7]</span></span>
+</div><span class="l"><a name="IScript_PortraitID" href="#IScript_PortraitID" class="la">IScript_PortraitID:</a><span class="ce">; [$03c7]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$03c7] byte</span></span>
 <span class="l"></span>
 <div class="c">;
@@ -6784,7 +6851,7 @@ pre {
 ;     <a href="PRG14.html#Player_DrawWeapon">Player_DrawWeapon</a>
 ;     <a href="PRG14.html#Player_GetNormalizedWeaponID">Player_GetNormalizedWeaponID</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__a3bf">SpriteBehavior__a3bf</a>
+;     <a href="PRG14.html#SpriteBehavior_DragonSlayerDroppedByKingGrieve">SpriteBehavior_DragonSlayerDroppedByKingGrieve</a>
 ;     <a href="PRG15_MIRROR.html#Game_EnterBuilding">Game_EnterBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Game_ExitBuilding">Game_ExitBuilding</a>
 ;     <a href="PRG15_MIRROR.html#Maybe_Player_UpdateWeaponSprite">Maybe_Player_UpdateWeaponSprite</a>
@@ -6990,7 +7057,6 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__8a51">FUN_PRG14__8a51</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;
 </div><span class="l"><a name="SpriteBox_Left" href="#SpriteBox_Left" class="la">SpriteBox_Left:</a><span class="ce">; [$03e2]</span></span>
@@ -6999,7 +7065,6 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__8a51">FUN_PRG14__8a51</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;
 </div><span class="l"><a name="SpriteBox_Top" href="#SpriteBox_Top" class="la">SpriteBox_Top:</a><span class="ce">; [$03e3]</span></span>
@@ -7008,7 +7073,6 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__8a51">FUN_PRG14__8a51</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;
 </div><span class="l"><a name="SpriteBox_Width" href="#SpriteBox_Width" class="la">SpriteBox_Width:</a><span class="ce">; [$03e4]</span></span>
@@ -7017,7 +7081,6 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
-;     <a href="PRG14.html#FUN_PRG14__8a51">FUN_PRG14__8a51</a>
 ;     <a href="PRG14.html#WasPlayerHitByMagic">WasPlayerHitByMagic</a>
 ;
 </div><span class="l"><a name="SpriteBox_Height" href="#SpriteBox_Height" class="la">SpriteBox_Height:</a><span class="ce">; [$03e5]</span></span>
@@ -7190,7 +7253,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG14.html#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>
 ;     <a href="PRG14.html#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>
-;     <a href="PRG14.html#SpriteBehavior__a246">SpriteBehavior__a246</a>
+;     <a href="PRG14.html#SpriteBehavior_Ointment">SpriteBehavior_Ointment</a>
 ;     <a href="PRG15_MIRROR.html#Game_ClearTimedItems">Game_ClearTimedItems</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecOintmentDuration">Game_DecOintmentDuration</a>
 ;     <a href="PRG15_MIRROR.html#LimitItemDurations">LimitItemDurations</a>
@@ -7207,7 +7270,7 @@ pre {
 <div class="c">;
 ; XREFS:
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__a25f">SpriteBehavior__a25f</a>
+;     <a href="PRG14.html#SpriteBehavior_Glove">SpriteBehavior_Glove</a>
 ;     <a href="PRG15_MIRROR.html#Game_ClearTimedItems">Game_ClearTimedItems</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecGloveDuration">Game_DecGloveDuration</a>
 ;     <a href="PRG15_MIRROR.html#Player_PickUpGlove">Player_PickUpGlove</a>
@@ -7236,8 +7299,8 @@ pre {
 </div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#Sprites_Maybe_UpdateBehavior">Sprites_Maybe_UpdateBehavior</a>
 ;     <a href="PRG14.html#Sprites_UpdateAll">Sprites_UpdateAll</a>
+;     <a href="PRG14.html#Sprites_UpdateBehavior">Sprites_UpdateBehavior</a>
 ;     <a href="PRG15_MIRROR.html#Game_ClearTimedItems">Game_ClearTimedItems</a>
 ;     <a href="PRG15_MIRROR.html#Game_DecHourGlassDuration">Game_DecHourGlassDuration</a>
 ;     <a href="PRG15_MIRROR.html#LimitItemDurations">LimitItemDurations</a>
@@ -7286,9 +7349,9 @@ pre {
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
 ;     <a href="PRG14.html#Player_HitEnemyWithMagic">Player_HitEnemyWithMagic</a>
 ;     <a href="PRG14.html#Player_HitSpriteWithWeapon">Player_HitSpriteWithWeapon</a>
-;     <a href="PRG14.html#SpriteBehavior__a437">SpriteBehavior__a437</a>
-;     <a href="PRG14.html#SpriteBehavior__a45b">SpriteBehavior__a45b</a>
-;     <a href="PRG14.html#SpriteBehavior__a47f">SpriteBehavior__a47f</a>
+;     <a href="PRG14.html#SpriteBehavior_BlackOnyxDropFromZoradohna">SpriteBehavior_BlackOnyxDropFromZoradohna</a>
+;     <a href="PRG14.html#SpriteBehavior_PendantDroppedFromRipasheiku">SpriteBehavior_PendantDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_ShowMagicalRod">SpriteBehavior_ShowMagicalRod</a>
 ;     <a href="PRG15_MIRROR.html#Game_OpenDoorWithDemonsRing">Game_OpenDoorWithDemonsRing</a>
 ;     <a href="PRG15_MIRROR.html#Game_OpenDoorWithRingOfDworf">Game_OpenDoorWithRingOfDworf</a>
 ;     <a href="PRG15_MIRROR.html#Game_OpenDoorWithRingOfElf">Game_OpenDoorWithRingOfElf</a>
@@ -7318,12 +7381,12 @@ pre {
 ;     <a href="PRG12.html#Password_EncodeGameState">Password_EncodeGameState</a>
 ;     <a href="PRG12.html#Password_Load">Password_Load</a>
 ;     <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>
-;     <a href="PRG14.html#SpriteBehavior__a31e">SpriteBehavior__a31e</a>
-;     <a href="PRG14.html#SpriteBehavior__a3ef">SpriteBehavior__a3ef</a>
-;     <a href="PRG14.html#SpriteBehavior__a413">SpriteBehavior__a413</a>
-;     <a href="PRG14.html#SpriteBehavior__a558">SpriteBehavior__a558</a>
-;     <a href="PRG14.html#SpriteBehavior__a56f">SpriteBehavior__a56f</a>
-;     <a href="PRG14.html#SpriteBehavior__a586">SpriteBehavior__a586</a>
+;     <a href="PRG14.html#SpriteBehavior_Fountain">SpriteBehavior_Fountain</a>
+;     <a href="PRG14.html#SpriteBehavior_MattockDroppedFromRipasheiku">SpriteBehavior_MattockDroppedFromRipasheiku</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfFortress">SpriteBehavior_SpringOfFortress</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfJoker">SpriteBehavior_SpringOfJoker</a>
+;     <a href="PRG14.html#SpriteBehavior_SpringOfSky">SpriteBehavior_SpringOfSky</a>
+;     <a href="PRG14.html#SpriteBehavior_WingBootsDroppedByZorugeriru">SpriteBehavior_WingBootsDroppedByZorugeriru</a>
 ;     <a href="PRG15_MIRROR.html#Game_DropLadderToMascon">Game_DropLadderToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Game_OpenPathToMascon">Game_OpenPathToMascon</a>
 ;     <a href="PRG15_MIRROR.html#Player_CheckPushingBlock">Player_CheckPushingBlock</a>
@@ -7506,14 +7569,22 @@ pre {
 </div><span class="l"><a name="TempleSpawnPoint" href="#TempleSpawnPoint" class="la">TempleSpawnPoint:</a><span class="ce">; [$0439]</span></span>
 <span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$0439] Temple</span></span>
 <span class="l"></span>
+<span class="l"></span>
+<div class="cp">;============================================================================
+; A rotating counter tracking a visits to certain screens.
+;
+; This is used for screens that only show an item once out
+; of every 4 visits. It's incremented and then checked by
+; <a href="PRG14.html#Screen_Is3Of4Visits">Screen_Is3Of4Visits</a>, which is called by some
+; item BScripts, to determine whether to hide or show items.
+;============================================================================
+</div><span class="l"></span>
 <div class="c">;
 ; XREFS:
-;     <a href="PRG14.html#Something_IncAndCapDAT043a">Something_IncAndCapDAT043a</a>
+;     <a href="PRG14.html#Screen_Is3Of4Visits">Screen_Is3Of4Visits</a>
 ;
-</div><span class="l"><a name="BYTE_043a" href="#BYTE_043a" class="la">BYTE_043a:</a><span class="ce">; [$043a]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$043a] byte</span></span>
-<span class="l"></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span></span>
+</div><span class="l"><a name="Screen_TrackedVisitCount" href="#Screen_TrackedVisitCount" class="la">Screen_TrackedVisitCount:</a><span class="ce">; [$043a]</span></span>
+<span class="l"><span><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$043a] undefined</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="cp">;============================================================================
@@ -7666,7 +7737,7 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;     <a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;
@@ -7678,7 +7749,7 @@ pre {
 ;     <a href="PRG14.html#FUN_PRG14__8329">FUN_PRG14__8329</a>
 ;     <a href="PRG14.html#HandlePlayerHitByMagic">HandlePlayerHitByMagic</a>
 ;     <a href="PRG14.html#Player_ApplyDamage">Player_ApplyDamage</a>
-;     <a href="PRG14.html#SpriteBehavior__MaybeSugata">SpriteBehavior__MaybeSugata</a>
+;     <a href="PRG14.html#SpriteBehavior_FlashScreenHitPlayer">SpriteBehavior_FlashScreenHitPlayer</a>
 ;     <a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a>
 ;     <a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a>
 ;

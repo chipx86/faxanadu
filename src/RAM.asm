@@ -33,12 +33,13 @@ BASE $0000
 ;     Player_DrawWeapon
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__97ae
-;     SpriteBehavior__a154
+;     SpriteAction_FacePlayerX
+;     SpriteAction_FacePlayerY
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Unknown_29
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     Sprite_CheckHitByCastMagic
-;     Sprite_MoveTowardsPlayerX
 ;     Sprites_CalcYFromGravity
 ;     Sprites_IsSpriteOutOfWeaponRange
 ;     WasPlayerHitByMagic
@@ -89,11 +90,11 @@ Temp_01:                                    ; [$0001]
 ;
 ;
 ; XREFS:
-;     GetSpriteBox
 ;     Player_ApplyDamage
 ;     Player_DrawWeapon
 ;     Player_HitEnemyWithMagic
-;     Sprite_SomethingFunc__a84f
+;     SpriteOp_AddToSpriteData
+;     Sprite_GetBounds
 ;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
@@ -101,9 +102,8 @@ Temp_01:                                    ; [$0001]
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f01b
-;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
+;     FUN_PRG15_MIRROR__f316
 ;     Game_LoadAreaTable
 ;     LAB_PRG15_MIRROR__e852 [$PRG15_MIRROR::e852]
 ;     LAB_PRG15_MIRROR__ea13 [$PRG15_MIRROR::ea13]
@@ -113,16 +113,18 @@ Temp_01:                                    ; [$0001]
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddr
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
 ;
 Temp_Addr_L:                                ; [$0002]
     db $00                                  ; [$0002] byte
 
 ;
 ; XREFS:
-;     GetSpriteBox
 ;     Player_ApplyDamage
 ;     Player_DrawWeapon
-;     Sprite_SomethingFunc__a84f
+;     SpriteOp_AddToSpriteData
+;     Sprite_GetBounds
 ;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
@@ -130,8 +132,6 @@ Temp_Addr_L:                                ; [$0002]
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f01b
-;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
 ;     LookupSpriteDataPointer
@@ -139,6 +139,8 @@ Temp_Addr_L:                                ; [$0002]
 ;     Player_CheckSwitchScreen
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
 ;
 Temp_Addr_U:                                ; [$0003]
     db $00                                  ; [$0003] byte
@@ -260,7 +262,7 @@ SavedPPUCtrl:                               ; [$000a]
 ; XREFS:
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;     GameLoop_ClearSprites
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
@@ -602,7 +604,6 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     PasswordScreen_WriteWrongPassword
 ;     SplashAnimation_RunOutro
 ;     SplashAnimation_SomethingOutroUpdate
-;     FUN_PRG14__850d
 ;     Area_BeginScrollToNextRoom
 ;     CastMagic_FinishHandler_Death
 ;     CastMagic_FinishHandler_Deluge
@@ -1315,7 +1316,7 @@ Something_Blocks_PPUAddr2_U:                ; [$0053]
 ;     Screen_StopScrollAndLoadBlockProperties
 ;
 Screen_ScrollDirection:                     ; [$0054]
-    db $00                                  ; [$0054] ScreenScrollDirection
+    db $00                                  ; [$0054] Direction
 
 ;
 ; UNUSED: The next 2 bytes are unused by Faxanadu.
@@ -2039,19 +2040,19 @@ PlayerPosX_Frac:                            ; [$009d]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__82f8
-;     FUN_PRG14__846c
 ;     FUN_PRG14__9aa1
 ;     FUN_PRG14__9e13
 ;     Maybe_Player_CalcAnimFrame
 ;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     SpriteBehavior__9060
-;     SpriteBehavior__9129
-;     SpriteBehavior__95c0
-;     SpriteBehavior__97ae
-;     Sprite_MoveTowardsPlayerX
+;     SpriteAction_FacePlayerX
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_Magman
+;     SpriteBehavior_Nash
+;     Sprite_CalcDistanceXToPlayer
+;     Sprite_Maybe_AddFacingPosX
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanPlayerMoveLeft
 ;     Area_CanPlayerMoveRight
@@ -2124,13 +2125,13 @@ BYTE_00a0:                                  ; [$00a0]
 ; XREFS:
 ;     GetTextBoxCoordinates
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__831b
 ;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     SpriteBehavior__95c0
-;     SpriteBehavior__97ae
-;     Sprite_MoveTowardsPlayerY
+;     SpriteAction_FacePlayerY
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Magman
+;     Sprite_CalcDistanceYToPlayer
 ;     Area_CanMoveUp
 ;     Area_CanPlayerMoveAtY
 ;     Area_CanPlayerMoveLeft
@@ -2220,11 +2221,11 @@ Player_MovementTick:                        ; [$00a3]
 ;     Player_DrawWeapon
 ;     Player_HitSpriteWithWeapon
 ;     Player_SetDamagedBySprite
-;     SpriteBehavior__9060
-;     SpriteBehavior__9129
-;     SpriteBehavior__9497
-;     SpriteBehavior__95c0
-;     SpriteBehavior__97ae
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_Magman
+;     SpriteBehavior_Nash
+;     SpriteBehavior_SirGawaineWolfman
 ;     EndGame_MoveToKingsRoom
 ;     FUN_PRG15_MIRROR__ec58
 ;     GameLoop_CheckUseCurrentItem
@@ -2271,7 +2272,7 @@ Player_Flags:                               ; [$00a4]
 ; XREFS:
 ;     Maybe_Player_CalcAnimFrame
 ;     Player_SetDamagedBySprite
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;     Game_DecWingBootsDuration
 ;     Game_DrawScreenInFrozenState
 ;     Maybe_Player_CalcSpeed
@@ -2373,7 +2374,7 @@ PlayerHitsPhaseTimer:                       ; [$00ac]
 ;     Player_HandleTouchEnemy
 ;     Player_HandleTouchEnemyMagic
 ;     Player_SetDamagedBySprite
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;     Player_HandleDeath
 ;     Player_HandleIFrames
 ;     Player_SetInitialState
@@ -2465,7 +2466,7 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__86bd
 ;     MoveRight
-;     SpriteBehavior_MaybeFlyingSomething
+;     SpriteBehavior_NecronAides
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanPlayerMoveLeft
 ;     Area_CanPlayerMoveRight
@@ -2494,7 +2495,7 @@ Arg_PixelPosX:                              ; [$00b5]
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__86c6
-;     SpriteBehavior_MaybeFlyingSomething
+;     SpriteBehavior_NecronAides
 ;     Area_CanPlayerMoveAtY
 ;     Area_CanPlayerMoveUp
 ;     Area_CheckCanClimbAdjacent
@@ -2523,13 +2524,13 @@ Arg_PixelPosY:                              ; [$00b6]
 ;     CastMagic_UpdateDeluge
 ;     CastMagic_UpdateFire
 ;     CurrentSprite_CanMoveInDirection
-;     FUN_PRG14__864a
+;     CurrentSprite_HandleFall
 ;     FUN_PRG14__86c6
 ;     FUN_PRG14__bd8f
 ;     MoveSpriteHorizIfPossible
 ;     MoveSpriteVerticalIfPossible
 ;     Sprites_SetBlockIsMovingResult
-;     Sprites_SetCurrentSpriteCanWalk
+;     Sprites_SetCurrentSpriteCanMove
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanMoveUp
 ;     Area_CanPlayerMoveAtY
@@ -2584,13 +2585,43 @@ Temp_HitBoxValue:                           ; [$00b9]
 ;
 ;
 ; XREFS:
+;     CastMagic_HitHandler_Deluge
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_UpdateState
+;     FUN_PRG14__844b
 ;     FUN_PRG14__854c
+;     FUN_PRG14__9917
+;     FUN_PRG14__9991
+;     FUN_PRG14__99f3
+;     FUN_PRG14__9aa1
+;     FUN_PRG14__9e13
+;     FUN_PRG14__a077
+;     FUN_PRG14__a0ad
+;     FUN_PRG14__a12d
+;     FUN_PRG14__a1cc
+;     LAB_PRG14__851e [$PRG14::851e]
+;     Maybe_Sprite_HandleDeathDrop
 ;     MoveSpriteHorizIfPossible
+;     SpriteAction_CastMagic
+;     SpriteAction_FacePlayerX
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_Magman
+;     SpriteBehavior_Nash
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteUpdateHandler_Effect_LightningBall20
+;     Sprite_AddPosX
+;     Sprite_CalcDistanceXToPlayer
+;     Sprite_CastMagic
 ;     Sprite_CheckHitByCastMagic
+;     Sprite_Maybe_AddFacingPosX
+;     Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz
+;     Sprite_SubtractPosX
 ;
-CurrentSprites_XPos:                        ; [$00ba]
+CurrentSprites_XPos_Full:                   ; [$00ba]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -2603,7 +2634,7 @@ CurrentSprites_XPos:                        ; [$00ba]
 ; XREFS:
 ;     Sprites_PopulateNextAvailableSprite
 ;
-CurrentSprites_XPos_7_:                     ; [$00c1]
+CurrentSprites_XPos_Full_7_:                ; [$00c1]
     db $00                                  ; [7]:
 
 ;
@@ -2612,7 +2643,38 @@ CurrentSprites_XPos_7_:                     ; [$00c1]
 ;
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility
+;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
+;     FUN_PRG14__9917
+;     FUN_PRG14__9991
+;     FUN_PRG14__9ac6
+;     FUN_PRG14__9e13
+;     FUN_PRG14__a077
+;     FUN_PRG14__a093
+;     FUN_PRG14__a0a0
+;     FUN_PRG14__a12d
+;     FUN_PRG14__a1cc
+;     Maybe_Sprite_HandleDeathDrop
+;     MoveSpriteVerticalIfPossible
+;     SpriteAction_CastMagic
+;     SpriteAction_FacePlayerY
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_Magman
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteUpdateHandler_Effect_EnemyDeath
+;     SpriteUpdateHandler_Effect_LightningBall20
+;     Sprite_CalcDistanceYToPlayer
+;     Sprite_CalculateNewVertPos
+;     Sprite_CanClimb
+;     Sprite_CapToBlockOppositeFalling
+;     Sprite_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     Sprites_CanSpriteWalk
 ;
@@ -2646,25 +2708,25 @@ CurrentSprites_YPos_7_:                     ; [$00c9]
 ;
 ;
 ; XREFS:
-;     FUN_PRG14__a6bc
-;     FUN_PRG14__a734
-;     FUN_PRG14__a7f8
-;     Screen_IncSpriteInfoAddr
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_WalkBackAndForth
-;     SpriteBehavior_Walking
+;     SpriteBehavior_Hop
+;     SpriteBehavior_MoveTowardPlayer
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_WalkForward
 ;     SpriteBehavior__a8d7
-;     SpriteBehavior__a997
-;     SpriteBehavior__aa86
-;     SpriteBehavior__aafa
-;     Sprite_SomethingFunc__a6e8
-;     Sprite_SomethingFunc__a6ff
-;     Sprite_SomethingFunc__a74c
-;     Sprite_SomethingFunc__a772
-;     Sprite_SomethingFunc__a7e5
-;     Sprite_SomethingFunc__a84f
-;     Sprite_Something__a82a
-;     Sprites_Maybe_UpdateBehavior
+;     SpriteOp_AddToSpriteData
+;     SpriteOp_CheckDistanceToPlayer
+;     SpriteOp_CheckDistanceToPlayer_X
+;     SpriteOp_CheckDistanceToPlayer_Y
+;     SpriteOp_GoTo
+;     SpriteOp_RunAction
+;     SpriteOp_SetPhase
+;     SpriteOp_SwitchBehavior
+;     Sprites_IncrementScriptAddr
+;     Sprites_LoadNextOp
+;     Sprites_MaybeDisableAndGoTo
+;     Sprites_UpdateBehavior
 ;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
 ;
@@ -2673,12 +2735,12 @@ Sprites_ReadInfoAddr:                       ; [$00ca]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a734
-;     FUN_PRG14__a7f8
-;     Screen_IncSpriteInfoAddr
-;     Sprite_SomethingFunc__a74c
-;     Sprite_Something__a82a
-;     Sprites_Maybe_UpdateBehavior
+;     SpriteOp_CheckDistanceToPlayer_X
+;     SpriteOp_CheckDistanceToPlayer_Y
+;     SpriteOp_GoTo
+;     Sprites_IncrementScriptAddr
+;     Sprites_MaybeDisableAndGoTo
+;     Sprites_UpdateBehavior
 ;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
 ;
@@ -2714,7 +2776,7 @@ PlayerPosXPlus10:                           ; [$00ce]
 ; XREFS:
 ;     Player_DrawWeapon
 ;
-Maybe_Something_PosX:                       ; [$00cf]
+Maybe_Something_WeaponPosX:                 ; [$00cf]
     db $00                                  ; [$00cf] byte
 
 ;
@@ -2722,7 +2784,7 @@ Maybe_Something_PosX:                       ; [$00cf]
 ;     Player_DrawWeapon
 ;     Sprites_IsSpriteOutOfWeaponRange
 ;
-Maybe_Something_PosY:                       ; [$00d0]
+Maybe_Something_WeaponPosY:                 ; [$00d0]
     db $00                                  ; [$00d0] byte
 
 ;
@@ -3282,7 +3344,7 @@ CurrentMusicInfo8:                          ; [$00f9]
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
-;     SpriteBehavior__9fe3
+;     SpriteBehavior_ShadowEura
 ;     Area_BeginScrollToNextRoom
 ;     FUN_PRG15_MIRROR__df64
 ;     Game_EnterBuilding
@@ -3332,8 +3394,6 @@ irq:                                        ; [$00ff]
 ;     FUN_PRG15_MIRROR__ee93
 ;     FUN_PRG15_MIRROR__eea9
 ;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f01b
-;     FUN_PRG15_MIRROR__f039
 ;     FUN_PRG15_MIRROR__f2e3
 ;     FUN_PRG15_MIRROR__f316
 ;     FUN_PRG15_MIRROR__f7b7
@@ -3365,6 +3425,8 @@ irq:                                        ; [$00ff]
 ;     Screen_HandleScrollRight
 ;     Screen_HandleScrollUp
 ;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadSpriteValue
 ;     TextBox_Maybe_GetPaletteBehindTextbox
 ;     TextBox_Maybe_ShowNextCharFromBank
@@ -4801,10 +4863,10 @@ CastMagic_Unused_HitWallDeltaPosY:          ; [$02bb]
 
 ;
 ; XREFS:
-;     FUN_PRG14__84a0
-;     FUN_PRG14__84b2
+;     Sprite_AddPosX
+;     Sprite_SubtractPosX
 ;
-CurrentSprites_SomethingX:                  ; [$02bc]
+CurrentSprites_Maybe_XPos_Frac:             ; [$02bc]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4816,7 +4878,7 @@ CurrentSprites_SomethingX:                  ; [$02bc]
 
 ;
 ; XREFS:
-;     CalculateNewVertPos
+;     Sprite_CalculateNewVertPos
 ;
 CurrentSprites_SomethingY:                  ; [$02c4]
     db $00                                  ; [0]:
@@ -4836,16 +4898,14 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
+;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
-;     FUN_PRG14__864a
 ;     FUN_PRG14__87cb
 ;     FUN_PRG14__9991
 ;     FUN_PRG14__9e13
 ;     FUN_PRG14__a0ad
-;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     GetSpriteBox
 ;     HandlePlayerHitByMagic
 ;     Player_AddExperienceFromSprite
 ;     Player_ApplyDamage
@@ -4855,24 +4915,27 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 ;     Player_HandleTouchItem
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
+;     SpriteAction_CastMagic
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_LightningBallOrCharron
 ;     SpriteBehavior_MaybeFallingRocks__ClearEntity
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__a0cb
-;     SpriteBehavior__a154
-;     SpriteBehavior__ab67
-;     SpriteBehavior__abcc
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_SomethingGarbled81
+;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_a25f_ClearEntity
+;     Sprite_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     Sprite_EnterNextAppearancePhase
+;     Sprite_GetBounds
 ;     Sprite_Maybe_ResetState
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
-;     Sprite_SomethingSpawnMagic
+;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_IsSpriteOutOfWeaponRange
-;     Sprites_Maybe_UpdateBehavior
 ;     Sprites_Remove
+;     Sprites_UpdateBehavior
 ;     WasPlayerHitByMagic
 ;
 CurrentSprites_Entities:                    ; [$02cc]
@@ -4887,8 +4950,8 @@ CurrentSprites_Entities:                    ; [$02cc]
 ; XREFS:
 ;     FUN_PRG14__9d78
 ;     FUN_PRG14__9df7
-;     Maybe_Sprites_HasAnyEnemyOnScreen
 ;     Sprites_ClearAllEntities
+;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_HasMaxOnScreen
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
 ;     GameLoop_ClearSprites
@@ -4906,8 +4969,8 @@ CurrentSprites_Entities_6_:                 ; [$02d2]
 ; XREFS:
 ;     FUN_PRG14__9d78
 ;     FUN_PRG14__9df7
-;     Maybe_Sprites_HasAnyEnemyOnScreen
 ;     Sprites_ClearAllEntities
+;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_HasMaxOnScreen
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
 ;     GameLoop_ClearSprites
@@ -4928,22 +4991,22 @@ CurrentSprites_Entities_7_:                 ; [$02d3]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a6bc
-;     FUN_PRG14__a7f8
-;     Sprite_ClearBehaviorReadyAndSetSubtypeBit7
+;     SpriteOp_CheckDistanceToPlayer_X
+;     SpriteOp_CheckDistanceToPlayer_Y
+;     SpriteOp_GoTo
+;     SpriteOp_MaybeDisableAndGoTo
+;     SpriteOp_RunAction
+;     SpriteOp_SetPhase
+;     SpriteOp_SwitchBehavior
+;     Sprite_FinishBehavior
 ;     Sprite_Maybe_ResetState
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
-;     Sprite_SomethingFunc__a6e8
-;     Sprite_SomethingFunc__a6ff
-;     Sprite_SomethingFunc__a72c
-;     Sprite_SomethingFunc__a74c
-;     Sprite_SomethingFunc__a772
-;     Sprite_Something__a82a
-;     Sprites_Maybe_UpdateBehavior
+;     Sprites_LoadNextOp
+;     Sprites_UpdateBehavior
 ;
-CurrentSprites_Subtypes:                    ; [$02d4]
+CurrentSprites_Behaviors:                   ; [$02d4]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4955,7 +5018,7 @@ CurrentSprites_Subtypes:                    ; [$02d4]
 ; XREFS:
 ;     GameLoop_ClearSprites
 ;
-CurrentSprites_Subtypes_6_:                 ; [$02da]
+CurrentSprites_Behaviors_6_:                ; [$02da]
     db $00                                  ; [6]:
 
 ;
@@ -4963,72 +5026,73 @@ CurrentSprites_Subtypes_6_:                 ; [$02da]
 ;     GameLoop_ClearSprites
 ;     Sprites_PopulateNextAvailableSprite
 ;
-CurrentSprites_Subtypes_7_:                 ; [$02db]
+CurrentSprites_Behaviors_7_:                ; [$02db]
     db $00                                  ; [7]:
 
 ;
 ; XREFS:
-;     CalculateNewVertPos
 ;     CurrentSpriteFlags_SetBit5
 ;     CurrentSprite_CalculateVisibility
-;     CurrentSprite_RandomlyChangeHorizDirection
-;     CurrentSprite_RandomlyChangeVertDirection
+;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateFlipMask
-;     FUN_PRG14__8427
 ;     FUN_PRG14__844b
-;     FUN_PRG14__846c
 ;     FUN_PRG14__849a
-;     FUN_PRG14__850d
 ;     FUN_PRG14__854c
-;     FUN_PRG14__859c
-;     FUN_PRG14__864a
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__9e13
 ;     FUN_PRG14__a077
 ;     FUN_PRG14__a0ad
-;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     FUN_PRG14__a91e
 ;     MoveSpriteHorizIfPossible
-;     MoveSpriteVertBorder
 ;     MoveSpriteVerticalIfPossible
 ;     Player_HitSpriteWithWeapon
 ;     Player_SetDamagedBySprite
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior_WalkBackAndForth
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__9129
-;     SpriteBehavior__92e0
-;     SpriteBehavior__93e5
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9f03__MoveDown
-;     SpriteBehavior__a154
+;     SpriteAction_CastMagic
+;     SpriteAction_FacePlayerX
+;     SpriteAction_FacePlayerY
+;     SpriteAction_FlipXDirection
+;     SpriteAction_FlipYDirection
+;     SpriteAction_RandomlyFlipXDirection
+;     SpriteAction_RandomlyFlipYDirection
+;     SpriteAction_RiseUp
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Hop
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_MoveTowardPlayer
+;     SpriteBehavior_Naga
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior__a8d7
-;     SpriteBehavior__aa86
-;     Sprite_ChangeYDirection
+;     Sprite_CalculateNewVertPos
+;     Sprite_CapToBlockOppositeFalling
+;     Sprite_CastMagic
 ;     Sprite_CheckHitByCastMagic
 ;     Sprite_ClearFlags
-;     Sprite_DisableBehavior
-;     Sprite_EnableBehavior
-;     Sprite_IsSpriteBehaviorDisabled
+;     Sprite_IsBehaviorNotReady
+;     Sprite_Maybe_AddFacingPosX
 ;     Sprite_Maybe_ResetState
-;     Sprite_MoveAndTurnAroundIfNeeded
-;     Sprite_MoveTowardsPlayerX
-;     Sprite_SetMaybeHidden
-;     Sprite_SomethingSpawnMagic
-;     Sprite_ToggleMoveRight
-;     Sprite_UnsetFalling
-;     Sprites_HasSpriteHitRightScreen
+;     Sprite_Maybe_TurnAroundIfAtScreenEdgeHoriz
+;     Sprite_Maybe_TurnAroundIfAtScreenEdgeVert
+;     Sprite_MoveHorizAndTurnAroundIfNeeded
+;     Sprite_MoveVertAndFlipIfNeeded
+;     Sprite_SetBehaviorNotReady
+;     Sprite_SetBehaviorReady
+;     Sprite_SetVisible
 ;     Sprites_HideSprite
-;     Sprites_IsSpriteVisible
-;     Sprites_SetCurrentSpriteCanWalk
+;     Sprites_IsSpriteHidden
+;     Sprites_SetCurrentSpriteCanMove
 ;
 CurrentSprites_Flags:                       ; [$02dc]
     db $00                                  ; [0]:
@@ -5050,57 +5114,57 @@ CurrentSprites_Flags_7_:                    ; [$02e3]
 ; XREFS:
 ;     FUN_PRG14__9693
 ;     FUN_PRG14__9699
-;     FUN_PRG14__96b8
-;     FUN_PRG14__96d5
 ;     FUN_PRG14__9917
 ;     FUN_PRG14__994a
 ;     FUN_PRG14__9a3c
 ;     FUN_PRG14__9a61
 ;     FUN_PRG14__9ac6
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__9e13
-;     FUN_PRG14__a51b
 ;     FUN_PRG14__a59d
-;     GetSpriteBox
 ;     Player_HandleTouchEnemy
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__9060
-;     SpriteBehavior__9129
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__93e5
-;     SpriteBehavior__9497
-;     SpriteBehavior__9538
-;     SpriteBehavior__95c0
-;     SpriteBehavior__9632
-;     SpriteBehavior__971d
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9865
-;     SpriteBehavior__9a32
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9c89
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9da9
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9f03__MoveDown
-;     SpriteBehavior__9fe3
-;     SpriteBehavior__a354
-;     SpriteBehavior__a384
-;     SpriteBehavior__a3bf
-;     SpriteBehavior__a3ef
-;     SpriteBehavior__a413
-;     SpriteBehavior__a437
-;     SpriteBehavior__a45b
-;     SpriteBehavior__a558
-;     SpriteBehavior__a56f
-;     SpriteBehavior__a586
-;     SpriteBehavior__ab67
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
+;     SpriteBehavior_BlackOnyxDropFromZoradohna
+;     SpriteBehavior_Borabohra
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
+;     SpriteBehavior_EnemyUnused18
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused39
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_Magman
+;     SpriteBehavior_MattockDroppedFromRipasheiku
+;     SpriteBehavior_Naga
+;     SpriteBehavior_Nash
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_PendantDroppedFromRipasheiku
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SirGawaineWolfman
+;     SpriteBehavior_SpringOfFortress
+;     SpriteBehavior_SpringOfJoker
+;     SpriteBehavior_SpringOfSky
+;     SpriteBehavior_Tamazutsu
+;     SpriteBehavior_WingBootsDroppedByZorugeriru
+;     SpriteBehavior_Yareeka
+;     SpriteBehavior_Zorugeriru
+;     SpriteOp_GoTo
+;     SpriteOp_SetPhase
+;     SpriteOp_SwitchBehavior
 ;     SpriteUpdateHandler_Boss_Borabohra
 ;     SpriteUpdateHandler_Boss_KingGrieve
 ;     SpriteUpdateHandler_Boss_Pakukame
@@ -5129,12 +5193,11 @@ CurrentSprites_Flags_7_:                    ; [$02e3]
 ;     SpriteUpdateHandler_NPC_King
 ;     SpriteUpdateHandler_NPC_Walking
 ;     SpriteUpdateHandler__a5d2
+;     Sprite_GetBounds
 ;     Sprite_GetPreviousSpritePhase
 ;     Sprite_Maybe_ResetState
 ;     Sprite_SetPhase2
-;     Sprite_SomethingFunc__a6e8
-;     Sprite_SomethingFunc__a6ff
-;     Sprite_SomethingFunc__a74c
+;     Sprites_MaybeResetPhaseAndEnable
 ;
 CurrentSprites_Phases:                      ; [$02e4]
     db $00                                  ; [0]:
@@ -5156,9 +5219,6 @@ CurrentSprites_Phases_7_:                   ; [$02eb]
 ; XREFS:
 ;     FUN_PRG14__9593
 ;     FUN_PRG14__9699
-;     FUN_PRG14__96b8
-;     FUN_PRG14__96d5
-;     FUN_PRG14__9735
 ;     FUN_PRG14__9917
 ;     FUN_PRG14__994a
 ;     FUN_PRG14__9991
@@ -5167,38 +5227,40 @@ CurrentSprites_Phases_7_:                   ; [$02eb]
 ;     FUN_PRG14__9a87
 ;     FUN_PRG14__9aa1
 ;     FUN_PRG14__9ac6
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__a59d
 ;     FUN_PRG14__a91e
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior_WalkBackAndForth
-;     SpriteBehavior_Walking
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8ecf
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__8f9a
-;     SpriteBehavior__8fe7
-;     SpriteBehavior__9060
-;     SpriteBehavior__9129
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__9538
-;     SpriteBehavior__95c0
-;     SpriteBehavior__9632
-;     SpriteBehavior__971d
-;     SpriteBehavior__9865
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9c89
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9da9
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9f03__MoveDown
-;     SpriteBehavior__9fe3
-;     SpriteBehavior__MaybeSugata
+;     LAB_PRG14__9735 [$PRG14::9735]
+;     SpriteBehavior_Bihoruda
+;     SpriteBehavior_Borabohra
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused39
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_LightningBallOrCharron
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_Magman
+;     SpriteBehavior_MoveTowardPlayer
+;     SpriteBehavior_Nash
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_Tamazutsu
+;     SpriteBehavior_WalkForward
+;     SpriteBehavior_Yareeka
+;     SpriteBehavior_Yuinaru
+;     SpriteBehavior_Zorugeriru
+;     SpriteBehavior__8f9a [$PRG14::8f9a]
 ;     SpriteBehavior__a8d7
-;     SpriteBehavior__ab67
-;     SpriteBehavior__abcc
 ;     SpriteUpdateHandler_Boss_Borabohra
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
@@ -5211,7 +5273,7 @@ CurrentSprites_Phases_7_:                   ; [$02eb]
 ;     SpriteUpdateHandler__a5d2
 ;     Sprite_SetDeathEntity
 ;
-CurrentSprites_TickCounters:                ; [$02ec]
+CurrentSprites_BehaviorData2:               ; [$02ec]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5223,7 +5285,7 @@ CurrentSprites_TickCounters:                ; [$02ec]
 
 
 ;============================================================================
-; XXX Some lookup map.
+; Tick counter used for some behaviors.
 ;============================================================================
 
 ;
@@ -5231,33 +5293,34 @@ CurrentSprites_TickCounters:                ; [$02ec]
 ;     FUN_PRG14__9917
 ;     FUN_PRG14__9aa1
 ;     FUN_PRG14__9ac6
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__a59d
 ;     FUN_PRG14__a91e
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior_WalkBackAndForth
-;     SpriteBehavior_Walking
-;     SpriteBehavior__8ecf
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__8f9a
-;     SpriteBehavior__8fe7
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__93e5
-;     SpriteBehavior__9632
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9a32
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9fe3
+;     LAB_PRG14__8fb7 [$PRG14::8fb7]
+;     SpriteBehavior_Bihoruda
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_EnemyUnused18
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Hop
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_MoveTowardPlayer
+;     SpriteBehavior_Naga
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_WalkForward
+;     SpriteBehavior_Yuinaru
 ;     SpriteBehavior__a8d7
-;     SpriteBehavior__aa86
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;
-CurrentSprites_StateCounter:                ; [$02f4]
+CurrentSprites_BehaviorData3:               ; [$02f4]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5279,13 +5342,13 @@ CurrentSprites_StateCounter:                ; [$02f4]
 ;     FUN_PRG14__99f3
 ;     FUN_PRG14__9aa1
 ;     Maybe_Sprite_HandleDeathDrop
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9fe3
-;     SpriteBehavior__a154
-;     SpriteBehavior__aa86
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_Hop
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
 ;     SpriteUpdateHandler_Boss_ShadowEura
 ;     SpriteUpdateHandler_Coin
 ;     SpriteUpdateHandler_TODO_Unknown_83
@@ -5310,17 +5373,17 @@ CurrentSprites_InternalBehaviorStates_4_:   ; [$0300]
 ;
 ; XREFS:
 ;     CurrentSprite_CanMoveInDirection
-;     FUN_PRG14__82f8
 ;     FUN_PRG14__86c6
 ;     FUN_PRG14__9917
 ;     MoveRight
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9c89
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9da9
-;     SpriteBehavior__9e6d
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9fe3
+;     SpriteBehavior_Borabohra
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_Zorugeriru
+;     Sprite_CalcDistanceXToPlayer
 ;     Sprite_CanClimb
 ;     Sprite_CheckHitByCastMagic
 ;     Sprite_Maybe_ResetState
@@ -5366,12 +5429,12 @@ CurrentSprites_HitBoxTypes_7_:              ; [$030b]
 ;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
-;     SpriteBehavior_Hopper
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aa86
+;     SpriteBehavior_Hop
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
 ;
-CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c: ; [$030c]
+CurrentSprites_BehaviorState_XFull:         ; [$030c]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5391,11 +5454,11 @@ CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_030c: ; [$030c]
 ;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aafa
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
 ;
-CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314: ; [$0314]
+CurrentSprites_BehaviorState_YFull:         ; [$0314]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5415,12 +5478,12 @@ CurrentSprites_MaybeBehaviorAddr_U_BYTE_ARRAY_0314: ; [$0314]
 ;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
-;     SpriteBehavior_Hopper
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aa86
+;     SpriteBehavior_Hop
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
 ;
-CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c: ; [$031c]
+CurrentSprites_BehaviorState_XFrac:         ; [$031c]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5440,11 +5503,11 @@ CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_031c: ; [$031c]
 ;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aafa
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
 ;
-CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324: ; [$0324]
+CurrentSprites_BehaviorState_YFrac:         ; [$0324]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5464,14 +5527,14 @@ CurrentSprites_MaybeBehaviorAddr_L_BYTE_ARRAY_0324: ; [$0324]
 ;     CurrentSprite_UpdateState
 ;     FUN_PRG14__9e13
 ;     FUN_PRG14__a0ad
-;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior__9cf2
+;     SpriteAction_CastMagic
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_Pakukame
 ;     SpriteUpdateHandler_Enemy_Unused18
+;     Sprite_CastMagic
 ;     Sprite_ReplaceWithMattock
-;     Sprite_SomethingSpawnMagic
 ;
 CurrentSprites_PPUAddrs:                    ; [$032c]
     db $00                                  ; [0]:
@@ -5540,7 +5603,7 @@ CurrentSprites_HitByMagicIFrames:           ; [$033c]
 ; XREFS:
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__9cf2
+;     SpriteBehavior_Pakukame
 ;
 CurrentSprites_HP:                          ; [$0344]
     db $00                                  ; [0]:
@@ -5606,7 +5669,7 @@ CurrentSprites_HitCounter_7_:               ; [$0353]
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
-;     Sprites_Maybe_UpdateBehavior
+;     Sprites_UpdateBehavior
 ;
 CurrentSprites_BehaviorAddrs_L:             ; [$0354]
     db $00                                  ; [0]:
@@ -5630,7 +5693,7 @@ CurrentSprites_BehaviorAddrs_L_7_:          ; [$035b]
 ;     Sprite_ReplaceWithDroppedItem
 ;     Sprite_ReplaceWithMattock
 ;     Sprite_SetDeathEntity
-;     Sprites_Maybe_UpdateBehavior
+;     Sprites_UpdateBehavior
 ;
 CurrentSprites_BehaviorAddrs_U:             ; [$035c]
     db $00                                  ; [0]:
@@ -5650,11 +5713,11 @@ CurrentSprites_BehaviorAddrs_U_7_:          ; [$0363]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a6af
-;     SpriteBehavior_Hopper
-;     Sprite_SomethingFunc__a6ff
+;     SpriteBehavior_Hop
+;     SpriteOp_SwitchBehavior
+;     Sprites_CountdownBehavior
 ;
-BYTE_ARRAY_0364:                            ; [$0364]
+CurrentSprites_BehaviorArg1:                ; [$0364]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -5702,32 +5765,30 @@ CurrentSprites_Values_7_:                   ; [$0373]
 ;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateXPosition
 ;     FUN_PRG14__83a8
-;     FUN_PRG14__83c1
 ;     FUN_PRG14__848a
-;     FUN_PRG14__84a0
-;     FUN_PRG14__84b2
-;     FUN_PRG14__96b8
-;     FUN_PRG14__9735
-;     FUN_PRG14__9c43
 ;     FUN_PRG14__a91e
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior_Walking
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__9129
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__9497
-;     SpriteBehavior__9538
-;     SpriteBehavior__9632
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9fe3
-;     SpriteBehavior__a0cb
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aa86
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Hop
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SirGawaineWolfman
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingGarbled81
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_WalkForward
+;     SpriteBehavior_Yareeka
+;     Sprite_AddPosX
+;     Sprite_MoveHorizOneBlockOrTurnAround
+;     Sprite_SubtractPosX
+;     Sprites_CalcVertSpriteMovement
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Frac:                            ; [$0374]
@@ -5741,35 +5802,33 @@ Arg_DeltaX_Frac:                            ; [$0374]
 ;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateXPosition
 ;     FUN_PRG14__83a8
-;     FUN_PRG14__83c1
 ;     FUN_PRG14__848a
-;     FUN_PRG14__84a0
-;     FUN_PRG14__84b2
 ;     FUN_PRG14__9593
-;     FUN_PRG14__96b8
-;     FUN_PRG14__9735
-;     FUN_PRG14__9c43
 ;     FUN_PRG14__a91e
-;     SpriteBehavior_Hopper
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior_Walking
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8ecf
-;     SpriteBehavior__8f2e
-;     SpriteBehavior__8fe7
-;     SpriteBehavior__9129
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__9497
-;     SpriteBehavior__9538
-;     SpriteBehavior__9632
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9f03
-;     SpriteBehavior__9fe3
-;     SpriteBehavior__a0cb
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aa86
+;     SpriteBehavior_Bihoruda
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Hop
+;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SirGawaineWolfman
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingGarbled81
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_WalkForward
+;     SpriteBehavior_Yareeka
+;     SpriteBehavior_Yuinaru
+;     Sprite_AddPosX
+;     Sprite_MoveHorizOneBlockOrTurnAround
+;     Sprite_SubtractPosX
+;     Sprites_CalcVertSpriteMovement
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Full:                            ; [$0375]
@@ -5777,50 +5836,48 @@ Arg_DeltaX_Full:                            ; [$0375]
 
 ;
 ; XREFS:
-;     CalcVerticalSpriteMovement
-;     CalculateNewVertPos
 ;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateYPosition
 ;     FUN_PRG14__83a8
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8f9a
-;     SpriteBehavior__92e0
-;     SpriteBehavior__93e5
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9f03__MoveDown
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aafa
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_Naga
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
+;     Sprite_CalculateNewVertPos
+;     Sprites_CalcVerticalSpriteMovement
 ;
 Arg_DeltaY_Frac:                            ; [$0376]
     db $00                                  ; [$0376] byte
 
 ;
 ; XREFS:
-;     CalcVerticalSpriteMovement
-;     CalculateNewVertPos
 ;     CastMagic_UpdateTilte
 ;     CastMagic_UpdateYPosition
 ;     FUN_PRG14__83a8
-;     SpriteBehavior_MaybeFallingRocks
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior__8e77
-;     SpriteBehavior__8ecf
-;     SpriteBehavior__8f9a
-;     SpriteBehavior__8fe7
-;     SpriteBehavior__91b3
-;     SpriteBehavior__92e0
-;     SpriteBehavior__93e5
-;     SpriteBehavior__9632
-;     SpriteBehavior__97ae
-;     SpriteBehavior__9b83
-;     SpriteBehavior__9f03__MoveDown
-;     SpriteBehavior__a154
-;     SpriteBehavior__a997
-;     SpriteBehavior__aafa
+;     SpriteBehavior_Bihoruda
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_KingGrieve_MoveDown
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_Naga
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Yuinaru
+;     Sprite_CalculateNewVertPos
+;     Sprites_CalcVerticalSpriteMovement
 ;
 Arg_DeltaY_Full:                            ; [$0377]
     db $00                                  ; [$0377] byte
@@ -5837,20 +5894,16 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_CanMoveInDirection
 ;     CurrentSprite_CheckHitPlayer
-;     CurrentSprite_RandomlyChangeHorizDirection
-;     CurrentSprite_RandomlyChangeVertDirection
+;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
 ;     FUN_PRG14__84f4
-;     FUN_PRG14__850d
-;     FUN_PRG14__864a
 ;     FUN_PRG14__86c6
 ;     FUN_PRG14__87cb
 ;     FUN_PRG14__9991
 ;     FUN_PRG14__9a61
-;     FUN_PRG14__ac21
 ;     HandlePlayerHitByMagic
 ;     LAB_PRG14__8043 [$PRG14::8043]
-;     Maybe_Sprites_HasAnyEnemyOnScreen
+;     LAB_PRG14__850d [$PRG14::850d]
 ;     MoveSpriteHorizIfPossible
 ;     MoveSpriteVerticalIfPossible
 ;     Player_AddExperienceFromSprite
@@ -5860,18 +5913,22 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     Player_HandleTouchEnemyMagic
 ;     Player_HandleTouchItem
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior_MaybeFlyingSomething
+;     SpriteAction_RandomlyFlipXDirection
+;     SpriteAction_RandomlyFlipYDirection
+;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_RestoreXRegister
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__MaybeSugata
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;     Sprite_CheckHitByCastMagic
-;     Sprites_Maybe_UpdateBehavior
+;     Sprite_HandleDeathDropIfPossible
+;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_SetBlockIsMovingResult
-;     Sprites_SetCurrentSpriteCanWalk
+;     Sprites_SetCurrentSpriteCanMove
 ;     Sprites_UpdateAllStates
+;     Sprites_UpdateBehavior
 ;     WasPlayerHitByMagic
 ;     _afterFarJump [$PRG14::89ff]
 ;     _updateSprite [$PRG14::8011]
@@ -5961,13 +6018,13 @@ Something_Maybe_WeaponDistanceY:            ; [$0380]
 
 ;
 ; XREFS:
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__a2eb
-;     SpriteBehavior_MaybeFlyingSomething
-;     SpriteBehavior__9497
-;     SpriteBehavior__9cf2
-;     SpriteBehavior__9f03
-;     SpriteBehavior__a154
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_SirGawaineWolfman
+;     SpriteBehavior_Unknown_29
 ;     SpriteUpdateHandler_Boss_Borabohra
 ;     SpriteUpdateHandler_Boss_KingGrieve
 ;     SpriteUpdateHandler_Boss_Ripasheiku
@@ -6021,26 +6078,26 @@ SpriteUpdateCounter:                        ; [$0383]
 
 ;
 ; XREFS:
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__a077
-;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     SpriteBehavior__9f03
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     Sprite_CastMagic
 ;
-BYTE_0384:                                  ; [$0384]
+CurrentSprite_Arg_CastMagicX:               ; [$0384]
     db $00                                  ; [$0384] byte
 
 ;
 ; XREFS:
-;     FUN_PRG14__9b45
 ;     FUN_PRG14__a077
-;     FUN_PRG14__a0f6
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     SpriteBehavior__9f03
+;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     Sprite_CastMagic
 ;
-BYTE_0385:                                  ; [$0385]
+CurrentSprite_Arg_CastMagicY:               ; [$0385]
     db $00                                  ; [$0385] byte
 
 
@@ -6291,7 +6348,7 @@ Player_ShieldPositionY:                     ; [$039c]
 ;
 ; XREFS:
 ;     INVENTORY_CATEGORY_L [$PRG12::9b29]
-;     SpriteBehavior__a3bf
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Player_PickUpDragonSlayer
 ;
 WeaponInventory:                            ; [$039d]
@@ -6316,7 +6373,7 @@ WeaponInventory_3_:                         ; [$03a0]
 ;
 ; XREFS:
 ;     INVENTORY_CATEGORY_L [$PRG12::9b2a]
-;     SpriteBehavior__a354
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
 ;     Player_PickUpBattleSuit
 ;
 ArmorInventory:                             ; [$03a1]
@@ -6341,7 +6398,7 @@ ArmorInventory_3_:                          ; [$03a4]
 ;
 ; XREFS:
 ;     INVENTORY_CATEGORY_L [$PRG12::9b2b]
-;     SpriteBehavior__a384
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
 ;     Player_PickUpBattleHelmet
 ;
 ShieldInventory:                            ; [$03a5]
@@ -6449,7 +6506,7 @@ SelectedWeapon:
 ;     Player_SetStartGameState
 ;     PlayerDeath_ResetSelectedItemState
 ;     Player_ApplyDamage
-;     SpriteBehavior__a354
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_Player_UpdateArmorSprite
 ;     Player_DrawBody
@@ -6477,7 +6534,7 @@ SelectedArmor:                              ; [$03be]
 ;     HandlePlayerHitByMagic
 ;     PlayerDeath_ResetSelectedItemState
 ;     Player_DrawShield
-;     SpriteBehavior__a384
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
 ;     WasPlayerHitByMagic
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_Player_UpdateArmorSprite
@@ -6581,8 +6638,8 @@ SelectedItem:                               ; [$03c1]
 ;     Player_SetStartGameState
 ;     Something_ShopCursorInventory
 ;     UI_ShowPlayerMenu
-;     Init_PlayerInventoryState
-;     SpriteBehavior__a3bf
+;     Player_InitInventoryState
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Player_PickUpBattleSuit
 ;     Player_PickUpDragonSlayer
 ;
@@ -6600,8 +6657,8 @@ NumberOfWeapons:
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     Init_PlayerInventoryState
-;     SpriteBehavior__a354
+;     Player_InitInventoryState
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
 ;     Player_PickUpBattleSuit
 ;     Player_PickUpDragonSlayer
 ;
@@ -6618,8 +6675,8 @@ NumberOfArmors:                             ; [$03c3]
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     Init_PlayerInventoryState
-;     SpriteBehavior__a384
+;     Player_InitInventoryState
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
 ;     Player_PickUpBattleHelmet
 ;
 NumberOfShields:                            ; [$03c4]
@@ -6635,7 +6692,7 @@ NumberOfShields:                            ; [$03c4]
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     Init_PlayerInventoryState
+;     Player_InitInventoryState
 ;
 NumberOfMagicSpells:                        ; [$03c5]
     db $00                                  ; [$03c5] byte
@@ -6651,11 +6708,21 @@ NumberOfMagicSpells:                        ; [$03c5]
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     Init_PlayerInventoryState
+;     Player_InitInventoryState
 ;     Player_PickUpItem
 ;
 NumberOfItems:                              ; [$03c6]
     db $00                                  ; [$03c6] byte
+
+
+;============================================================================
+; The loaded portrait ID from an IScript.
+;
+; This will be 0xFF if unset.
+;
+; If set, the player won't be drawn, and instead portrait
+; data will be loaded, displayed, and animated.
+;============================================================================
 
 ;
 ; XREFS:
@@ -6668,10 +6735,10 @@ NumberOfItems:                              ; [$03c6]
 ;     GameLoop_ClearSprites
 ;     IScripts_ClearPortrait
 ;     IScripts_DrawPortraitAnimationFrame
+;     IScripts_GetPortraitOffset
 ;     Player_DrawBody
-;     Something_Temp03C7Times5
 ;
-Temp_03C7:                                  ; [$03c7]
+IScript_PortraitID:                         ; [$03c7]
     db $00                                  ; [$03c7] byte
 
 ;
@@ -6680,7 +6747,7 @@ Temp_03C7:                                  ; [$03c7]
 ;     Player_DrawWeapon
 ;     Player_GetNormalizedWeaponID
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__a3bf
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Maybe_Player_UpdateWeaponSprite
@@ -6886,7 +6953,6 @@ Player_DeathAnimationCounter:               ; [$03de]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__8a51
 ;     WasPlayerHitByMagic
 ;
 SpriteBox_Left:                             ; [$03e2]
@@ -6895,7 +6961,6 @@ SpriteBox_Left:                             ; [$03e2]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__8a51
 ;     WasPlayerHitByMagic
 ;
 SpriteBox_Top:                              ; [$03e3]
@@ -6904,7 +6969,6 @@ SpriteBox_Top:                              ; [$03e3]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__8a51
 ;     WasPlayerHitByMagic
 ;
 SpriteBox_Width:                            ; [$03e4]
@@ -6913,7 +6977,6 @@ SpriteBox_Width:                            ; [$03e4]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
-;     FUN_PRG14__8a51
 ;     WasPlayerHitByMagic
 ;
 SpriteBox_Height:                           ; [$03e5]
@@ -7086,7 +7149,7 @@ Sprites_UpdatesPaused:                      ; [$0426]
 ; XREFS:
 ;     Player_HandleTouchEnemy
 ;     Player_HandleTouchEnemyMagic
-;     SpriteBehavior__a246
+;     SpriteBehavior_Ointment
 ;     Game_ClearTimedItems
 ;     Game_DecOintmentDuration
 ;     LimitItemDurations
@@ -7103,7 +7166,7 @@ DurationOintment:                           ; [$0427]
 ;
 ; XREFS:
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__a25f
+;     SpriteBehavior_Glove
 ;     Game_ClearTimedItems
 ;     Game_DecGloveDuration
 ;     Player_PickUpGlove
@@ -7132,8 +7195,8 @@ DurationWingBoots:                          ; [$0429]
 
 ;
 ; XREFS:
-;     Sprites_Maybe_UpdateBehavior
 ;     Sprites_UpdateAll
+;     Sprites_UpdateBehavior
 ;     Game_ClearTimedItems
 ;     Game_DecHourGlassDuration
 ;     LimitItemDurations
@@ -7182,9 +7245,9 @@ CurrentDoor_KeyRequirement:                 ; [$042b]
 ;     Player_ApplyDamage
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteBehavior__a437
-;     SpriteBehavior__a45b
-;     SpriteBehavior__a47f
+;     SpriteBehavior_BlackOnyxDropFromZoradohna
+;     SpriteBehavior_PendantDroppedFromRipasheiku
+;     SpriteBehavior_ShowMagicalRod
 ;     Game_OpenDoorWithDemonsRing
 ;     Game_OpenDoorWithRingOfDworf
 ;     Game_OpenDoorWithRingOfElf
@@ -7214,12 +7277,12 @@ SpecialItems:                               ; [$042c]
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     SpriteBehavior__a31e
-;     SpriteBehavior__a3ef
-;     SpriteBehavior__a413
-;     SpriteBehavior__a558
-;     SpriteBehavior__a56f
-;     SpriteBehavior__a586
+;     SpriteBehavior_Fountain
+;     SpriteBehavior_MattockDroppedFromRipasheiku
+;     SpriteBehavior_SpringOfFortress
+;     SpriteBehavior_SpringOfJoker
+;     SpriteBehavior_SpringOfSky
+;     SpriteBehavior_WingBootsDroppedByZorugeriru
 ;     Game_DropLadderToMascon
 ;     Game_OpenPathToMascon
 ;     Player_CheckPushingBlock
@@ -7402,14 +7465,22 @@ PlayerIsDead:                               ; [$0438]
 TempleSpawnPoint:                           ; [$0439]
     db $00                                  ; [$0439] Temple
 
+
+;============================================================================
+; A rotating counter tracking a visits to certain screens.
+;
+; This is used for screens that only show an item once out
+; of every 4 visits. It's incremented and then checked by
+; Screen_Is3Of4Visits, which is called by some
+; item BScripts, to determine whether to hide or show items.
+;============================================================================
+
 ;
 ; XREFS:
-;     Something_IncAndCapDAT043a
+;     Screen_Is3Of4Visits
 ;
-BYTE_043a:                                  ; [$043a]
-    db $00                                  ; [$043a] byte
-
-    db $00
+Screen_TrackedVisitCount:                   ; [$043a]
+    db $00,$00                              ; [$043a] undefined
 
 
 ;============================================================================
@@ -7562,7 +7633,7 @@ BlockProperties_1_:                         ; [$043d]
 ;     FUN_PRG14__8329
 ;     HandlePlayerHitByMagic
 ;     Player_ApplyDamage
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;     Player_ReduceHP
 ;     Player_Something_ChangeHP
 ;
@@ -7574,7 +7645,7 @@ Arg_PlayerHealthDelta_L:                    ; [$04bc]
 ;     FUN_PRG14__8329
 ;     HandlePlayerHitByMagic
 ;     Player_ApplyDamage
-;     SpriteBehavior__MaybeSugata
+;     SpriteBehavior_FlashScreenHitPlayer
 ;     Player_ReduceHP
 ;     Player_Something_ChangeHP
 ;

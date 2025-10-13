@@ -73,6 +73,15 @@ CAST_MAGIC_CLEAR_FALLING                           EQU $7f
 CAST_MAGIC_FALLING                                 EQU $80
 
 ;============================================================================
+; Direction
+;============================================================================
+DIRECTION_LEFT                                     EQU $00
+DIRECTION_RIGHT                                    EQU $01
+DIRECTION_UP                                       EQU $02
+DIRECTION_DOWN                                     EQU $03
+SCREEN_SCROLL_NONE                                 EQU $ff
+
+;============================================================================
 ; FacingDirectionBit
 ;============================================================================
 FACING_LEFT                                        EQU $00
@@ -714,6 +723,7 @@ PPUSTATUS_VBLANK                                   EQU $80
 QUEST_NONE                                         EQU $00
 QUEST_SPRING_OF_TRUNK                              EQU $01
 QUEST_SPRING_OF_SKY                                EQU $02
+QUEST_SPRING_OF_TOWER                              EQU $04
 QUEST_SOMETHING_WING_BOOTS                         EQU $08
 QUEST_MATTOCK                                      EQU $10
 QUEST_MASCON_OPENED                                EQU $20
@@ -749,15 +759,6 @@ SCREEN_EVENT_UNSET                                 EQU $ff
 ; ScreenExtraInfo
 ;============================================================================
 SCREEN_HAS_SPECIAL_EVENT                           EQU $80
-
-;============================================================================
-; ScreenScrollDirection
-;============================================================================
-SCREEN_SCROLL_LEFT                                 EQU $00
-SCREEN_SCROLL_RIGHT                                EQU $01
-SCREEN_SCROLL_UP                                   EQU $02
-SCREEN_SCROLL_DOWN                                 EQU $03
-SCREEN_SCROLL_NONE                                 EQU $ff
 
 ;============================================================================
 ; SelectedMagic
@@ -861,6 +862,86 @@ BIT_CLEAR_ELIXIR                                   EQU $f7
 BIT_ALL                                            EQU $ff
 
 ;============================================================================
+; SpriteAction
+;============================================================================
+SPRITE_ACTION_FACE_PLAYER_X                        EQU $00
+SPRITE_ACTION_FLIP_X_DIRECTION                     EQU $01
+SPRITE_ACTION_FACE_PLAYER_Y                        EQU $02
+SPRITE_ACTION_FLIP_Y_DIRECTION                     EQU $03
+SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION            EQU $04
+SPRITE_ACTION_RANDOMLY_FLIP_Y_DIRECTION            EQU $05
+SPRITE_ACTION_FLY_UP                               EQU $06
+SPRITE_ACTION_CAST_MAGIC                           EQU $07
+
+;============================================================================
+; SpriteBehavior
+;============================================================================
+SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER                   EQU $00
+SPRITE_BEHAVIOR_WAIT                                 EQU $01
+SPRITE_BEHAVIOR_BOUNCE_AND_EXPIRE                    EQU $02
+SPRITE_BEHAVIOR_GARBLED_3                            EQU $03
+SPRITE_BEHAVIOR_WALK_FORWARD                         EQU $04
+SPRITE_BEHAVIOR_ENEMY_UNUSED_18                      EQU $06
+SPRITE_BEHAVIOR_MAYBE_LIGHTNINGBALL                  EQU $07
+SPRITE_BEHAVIOR_LIGHTNINBALL_CHARRON                 EQU $08
+SPRITE_BEHAVIOR_HOP                                  EQU $09
+SPRITE_BEHAVIOR_RIPASHEIKU                           EQU $0a
+SPRITE_BEHAVIOR_BORABOHRA                            EQU $0c
+SPRITE_BEHAVIOR_PAKUKAME                             EQU $0d
+SPRITE_BEHAVIOR_ZORUGERIRU                           EQU $0e
+SPRITE_BEHAVIOR_KING_GRIEVE                          EQU $0f
+SPRITE_BEHAVIOR_SHADOW_EURA                          EQU $10
+SPRITE_BEHAVIOR_MAYBE_MOVE_XY                        EQU $11
+SPRITE_BEHAVIOR_SOMETHING_ZORADOHNA_18               EQU $12
+SPRITE_BEHAVIOR_MOVE_VERT                            EQU $13
+SPRITE_BEHAVIOR_FALL                                 EQU $15
+SPRITE_BEHAVIOR_NECRON_AIDES                         EQU $16
+SPRITE_BEHAVIOR_BIHORUDA                             EQU $17
+SPRITE_BEHAVIOR_LILITH                               EQU $18
+SPRITE_BEHAVIOR_YUINARU                              EQU $19
+SPRITE_BEHAVIOR_NASH                                 EQU $1a
+SPRITE_BEHAVIOR_SOMETHING_GARBLED_81                 EQU $1b
+SPRITE_BEHAVIOR_SOMETHING_GARBLED_10                 EQU $1c
+SPRITE_BEHAVIOR_UNKNOWN_29                           EQU $1d
+SPRITE_BEHAVIOR_CLEAR_READY_SET_BIT_7                EQU $1e
+SPRITE_BEHAVIOR_FLASH_DAMAGE_PLAYER                  EQU $1f
+SPRITE_BEHAVIOR_GIANT_BEES                           EQU $20
+SPRITE_BEHAVIOR_NAGA                                 EQU $21
+SPRITE_BEHAVIOR_YAREEKA                              EQU $22
+SPRITE_BEHAVIOR_MAGMAN                               EQU $23
+SPRITE_BEHAVIOR_ENEMY_UNUSED_36                      EQU $24
+SPRITE_BEHAVIOR_ENEMY_UNUSED_39                      EQU $25
+SPRITE_BEHAVIOR_ENEMY_UNUSED_43                      EQU $26
+SPRITE_BEHAVIOR_TAMAZUTSU                            EQU $27
+SPRITE_BEHAVIOR_SIR_GAWAINE_WOLFMAN                  EQU $28
+SPRITE_BEHAVIOR_ITEM_OINTMENT                        EQU $29
+SPRITE_BEHAVIOR_ITEM_GLOVE                           EQU $2a
+SPRITE_BEHAVIOR_BATTLE_SUIT_DROPPED_BY_ZORADOHNA     EQU $2b
+SPRITE_BEHAVIOR_BATTLE_HELMET_DROPPED_BY_ZORADOHNA   EQU $2c
+SPRITE_BEHAVIOR_DRAGON_SLAYER_DROPPED_BY_KING_GRIEVE EQU $2d
+SPRITE_BEHAVIOR_MATTOCK_DROPPED_BY_RPIASHEIKU        EQU $2e
+SPRITE_BEHAVIOR_WING_BOOTS_DROPPED_BY_ZORUGERIRU     EQU $2f
+SPRITE_BEHAVIOR_BLACK_ONYX_DROPPED_FROM_ZORADOHNA    EQU $30
+SPRITE_BEHAVIOR_PENDANT_DROPPED_FROM_RIPASHEIKU      EQU $31
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_50                EQU $32
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_51                EQU $33
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_52                EQU $34
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_53                EQU $35
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_54                EQU $36
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_55                EQU $37
+SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_56                EQU $38
+SPRITE_BEHAVIOR_FOUNTAIN                             EQU $39
+SPRITE_BEHAVIOR_SPRING_OF_FORTRESS                   EQU $3a
+SPRITE_BEHAVIOR_SPRING_OF_SKY                        EQU $3b
+SPRITE_BEHAVIOR_SPRING_OF_JOKER                      EQU $3c
+SPRITE_BEHAVIOR_SHOW_MAGICAL_ROD                     EQU $3d
+SPRITE_BEHAVIOR_EFFECT_BOSS_DEATH                    EQU $3e
+SPRITE_BEHAVIOR_BUZZ_AROUND                          EQU $3f
+SPRITE_BEHAVIOR_ISHIISU                              EQU $40
+SPRITE_BEHAVIOR_EXECUTION_HOOD                       EQU $41
+SPRITE_BEHAVIOR_CLEAR_BIT_7                          EQU $7f
+
+;============================================================================
 ; SpriteCategory
 ;============================================================================
 SPRITE_ENEMY                                       EQU $00
@@ -956,7 +1037,7 @@ SPRITE_OBJ_OINTMENT_2                              EQU $4e
 SPRITE_TRIGGER_INTRO                               EQU $4f
 SPRITE_OBJ_MATTOCK1                                EQU $50
 SPRITE_MAGIC_GARBLED_81                            EQU $51
-SPRITE_EFFECT_FOUNTAIN                             EQU $52
+SPRITE_FOUNTAIN                                    EQU $52
 SPRITE_MAGIC_83                                    EQU $53
 SPRITE_MAGIC_84                                    EQU $54
 SPRITE_OBJ_WING_BOOTS                              EQU $55
@@ -971,9 +1052,9 @@ SPRITE_OBJ_RED_POTION                              EQU $5d
 SPRITE_OBJ_POISON                                  EQU $5e
 SPRITE_OBJ_GLOVE                                   EQU $5f
 SPRITE_OBJ_OINTMENT                                EQU $60
-SPRITE_EFFECT_97                                   EQU $61
-SPRITE_EFFECT_98                                   EQU $62
-SPRITE_EFFECT_99                                   EQU $63
+SPRITE_SPRING_OF_TRUNK                             EQU $61
+SPRITE_SPRING_OF_SKY                               EQU $62
+SPRITE_SPRING_OF_TOWER                             EQU $63
 SPRITE_EFFECT_BOSS_DEATH                           EQU $64
 SPRITE_OBJ_UNSET                                   EQU $ff
 
@@ -981,21 +1062,20 @@ SPRITE_OBJ_UNSET                                   EQU $ff
 ; SpriteFlags
 ;============================================================================
 SPRITE_FLAGS_UNSET                                 EQU $00
-SPRITE_FLAGS_MOVE_RIGHT                            EQU $01
+SPRITE_FLAGS_FACING_RIGHT                          EQU $01
 SPRITE_FLAGS_UNKNOWN_2                             EQU $02
-SPRITE_FLAGS_MAYBE_MOVE                            EQU $04
+SPRITE_FLAGS_CAN_MOVE                              EQU $04
 SPRITE_FLAGS_UNKNOWN_3                             EQU $08
-SPRITE_FLAGS_MAYBE_HIDDEN                          EQU $10
+SPRITE_FLAGS_VISIBLE                               EQU $10
 SPRITE_FLAGS_UNKNOWN_5                             EQU $20
 SPRITE_FLAGS_BEHAVIOR_READY                        EQU $40
 SPRITE_FLAGS_CLEAR_FALLING                         EQU $7f
 SPRITE_FLAGS_FALLING                               EQU $80
 SPRITE_FLAGS_CLEAR_BEHAVIOR_READY                  EQU $bf
-SPRITE_FLAGS_CLEAR_MAYBE_HIDDEN                    EQU $ef
-SPRITE_FLAGS_CLEAR_MAYBE_MOVE                      EQU $fb
+SPRITE_FLAGS_CLEAR_VISIBLE                         EQU $ef
+SPRITE_FLAGS_CLEAR_CAN_MOVE                        EQU $fb
 SPRITE_FLAGS_CLEAR_UNKNOWN_2                       EQU $fd
-SPRITE_FLAGS_CLEAR_MOVE_RIGHT                      EQU $fe
-New_Name                                           EQU $ff
+SPRITE_FLAGS_CLEAR_FACING_RIGHT                    EQU $fe
 
 ;============================================================================
 ; SpriteHitboxTypes
@@ -1007,9 +1087,17 @@ SPRITE_HITBOX_3                                    EQU $03
 SPRITE_HITBOX_4                                    EQU $04
 
 ;============================================================================
-; SpriteSubtype
+; SpriteOp
 ;============================================================================
-SPRITE_SUBTYPE_CLEAR_BIT_7                         EQU $7f
+SPRITE_OP_SWITCH_BEHAVIOR                          EQU $00
+SPRITE_OP_MAYBE_DISABLE_AND_GOTO                   EQU $01
+SPRITE_OP_RUN_ACTION                               EQU $02
+SPRITE_OP_CHECK_DISTANCE                           EQU $03
+SPRITE_OP_FINISH_BEHAVIOR                          EQU $04
+SPRITE_OP_GOTO                                     EQU $05
+SPRITE_OP_ADD_TO_SPRITE_DATA                       EQU $06
+SPRITE_OP_SET_PHASE                                EQU $07
+SPRITE_OP_END_SCRIPT                               EQU $ff
 
 ;============================================================================
 ; Temple

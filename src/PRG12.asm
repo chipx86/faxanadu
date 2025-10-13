@@ -123,7 +123,7 @@ IScripts_Something_81E8:                    ; [$81e8]
 ; TODO: Document FUN_PRG12__81fb
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     TODO
@@ -1519,6 +1519,10 @@ IScriptAction_IfQuestCompleted:             ; [$85d1]
   @_hasQuestCompleted:                      ; [$85e0]
     JMP IScripts_JumpToNextAddr
 
+;
+; XREFS:
+;     IScriptAction_SetQuestComplete
+;
 ISCRIPTS_QUEST_BITS:                        ; [$85e3]
     db $01,$02,$04                          ; [$85e3] byte
 
