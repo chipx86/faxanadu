@@ -4,7 +4,7 @@
 ; PRG9 ($8000 - $bfff)
 ;============================================================================
 
-BASE $8000
+    BASE $8000
 
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$8000] undefined
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$8010] undefined

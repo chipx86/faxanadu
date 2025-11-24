@@ -6,7 +6,7 @@ AREA_EOLIS                                         EQU $00
 AREA_APOLUNE                                       EQU $01
 AREA_FOREPAW                                       EQU $02
 AREA_MASCON                                        EQU $03
-AREA_VICTIM                                        EQU $04
+AREA_VICTIM_OR_INSIDE                              EQU $04
 AREA_CONFLATE                                      EQU $05
 AREA_DAYBREAK                                      EQU $06
 AREA_EVIL_FORTRESS                                 EQU $07
@@ -36,16 +36,16 @@ BLOCK_IS_AIR                                       EQU $00
 BLOCK_IS_SOLID                                     EQU $01
 BLOCK_IS_LADDER                                    EQU $02
 BLOCK_IS_DOOR                                      EQU $03
-BLOCK_FG_0x04                                      EQU $04
-BLOCK_0x05                                         EQU $05
+BLOCK_FOREGROUND                                   EQU $04
+BLOCK_BREAKABLE_FLOOR                              EQU $05
 BLOCK_PUSHABLE                                     EQU $06
 BLOCK_0x07                                         EQU $07
 BLOCK_0x08                                         EQU $08
-BLOCK_FG_0x09                                      EQU $09
-BLOCK_MAYBE_TRANSITION_LADDER_UP                   EQU $0a
-BLOCK_0x0b                                         EQU $0b
-BLOCK_AREA_TRANSITION_L2R                          EQU $0c
-BLOCK_AREA_TRANSITION_R2L                          EQU $0d
+BLOCK_MAYBE_AREA_TRANSITION_UP                     EQU $09
+BLOCK_MAYBE_AREA_TRANSITION_DOWN                   EQU $0a
+BLOCK_MAYBE_BREAKABLE_BY_MATTOCK                   EQU $0b
+BLOCK_AREA_TRANSITION_RIGHT                        EQU $0c
+BLOCK_AREA_TRANSITION_LEFT                         EQU $0d
 BLOCK_0x0e                                         EQU $0e
 BLOCK_LOWER_NIBBLE                                 EQU $0f
 BLOCK_UPPER_NIBBLE                                 EQU $f0
@@ -94,7 +94,7 @@ INVENTORY_WEAPONS                                  EQU $00
 INVENTORY_ARMOR                                    EQU $01
 INVENTORY_SHIELD                                   EQU $02
 INVENTORY_MAGIC                                    EQU $03
-INVENTORY_SPECIAL                                  EQU $04
+INVENTORY_ITEM                                     EQU $04
 
 ;============================================================================
 ; InventoryItem
@@ -584,24 +584,47 @@ MOVING_SPRITE_LEADING_OBSCURED                     EQU $02
 MOVING_SPRITE_FULLY_OBSCURED                       EQU $03
 
 ;============================================================================
+; MScriptOp
+;============================================================================
+MSCRIPT_OP_MAYBE_SET_0181                          EQU $ee
+MSCRIPT_OP_MAYBE_SET_017F                          EQU $ef
+MSCRIPT_OP_SET_SQ_DECAY_MODE                       EQU $f0
+MSCRIPT_OP_SET_SQ_VOL                              EQU $f1
+MSCRIPT_OP_MAYBE_SET_0172                          EQU $f2
+MSCRIPT_OP_SET_REPEATED                            EQU $f3
+MSCRIPT_OP_MAYBE_RESTART_SONG                      EQU $f4
+MSCRIPT_OP_RET                                     EQU $f5
+MSCRIPT_OP_SET_SQ1_HIGH                            EQU $f6
+MSCRIPT_OP_MAYBE_SET_8BITCOUNTER                   EQU $f7
+MSCRIPT_OP_JSR                                     EQU $f8
+MSCRIPT_OP_PUSH_ADDR                               EQU $f9
+MSCRIPT_OP_NOOP                                    EQU $fa
+MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS                EQU $fb
+MSCRIPT_OP_END_LOOP                                EQU $fc
+MSCRIPT_OP_BEGIN_LOOP                              EQU $fd
+MSCRIPT_OP_POP_ADDR                                EQU $fe
+MSCRIPT_OP_MAYBE_END                               EQU $ff
+
+;============================================================================
 ; Music
 ;============================================================================
+MUSIC_NONE                                         EQU $00
 MUSIC_START_THEME                                  EQU $01
-MUSIC_MAYBE_LAST_WORLD                             EQU $02
-MUSIC_MAYBE_BETWEEN_FIRST_TOWN_FOG                 EQU $03
-MUSIC_MAYBE_TREE_WORLD                             EQU $04
-MUSIC_MAYBE_FOG                                    EQU $05
+MUSIC_DAYBREAK                                     EQU $02
+MUSIC_APOLUNE                                      EQU $03
+MUSIC_CONFLATE                                     EQU $04
+MUSIC_FOREPAW                                      EQU $05
 MUSIC_MAYBE_TOWER                                  EQU $06
 MUSIC_EOLIS                                        EQU $07
 MUSIC_DEATH                                        EQU $08
-MUSIC_MAYBE_TOWN_BUILDING                          EQU $09
+MUSIC_MASCON_VICTIM                                EQU $09
 MUSIC_BOSS                                         EQU $0a
-MUSIC_0x0B                                         EQU $0b
+MUSIC_HOURGLASS                                    EQU $0b
 MUSIC_MAYBE_ENDING                                 EQU $0c
-MUSIC_MAYBE_TEMPLE_1                               EQU $0d
+MUSIC_KINGS_ROOM                                   EQU $0d
 MUSIC_TEMPLE                                       EQU $0e
 MUSIC_SHOP                                         EQU $0f
-MUSIC_MAYBE_FINAL_MAZE                             EQU $10
+MUSIC_EVIL_FORTRESS                                EQU $10
 
 ;============================================================================
 ; Palette
@@ -654,6 +677,7 @@ PLAYER_FLAGS_ALL                                   EQU $ff
 ;============================================================================
 ; PlayerStatusFlags
 ;============================================================================
+PLAYER_STATUS_NONE                                 EQU $00
 PLAYER_STATUS_ATTACKING                            EQU $01
 PLAYER_STATUS_KNOCKBACK                            EQU $02
 PLAYER_STATUS_WING_BOOTS                           EQU $80
@@ -723,22 +747,23 @@ PPUSTATUS_VBLANK                                   EQU $80
 QUEST_NONE                                         EQU $00
 QUEST_SPRING_OF_TRUNK                              EQU $01
 QUEST_SPRING_OF_SKY                                EQU $02
-QUEST_SPRING_OF_TOWER                              EQU $04
-QUEST_SOMETHING_WING_BOOTS                         EQU $08
+QUEST_SPRING_OF_JOKER                              EQU $04
+QUEST_ALL_SPRINGS                                  EQU $07
+QUEST_WING_BOOTS_FROM_TOWER                        EQU $08
 QUEST_MATTOCK                                      EQU $10
 QUEST_MASCON_OPENED                                EQU $20
 
 ;============================================================================
 ; ROMBank
 ;============================================================================
-BANK_0                                             EQU $00
-BANK_1_SPRITES                                     EQU $01
-BANK_2_SPRITES                                     EQU $02
-BANK_3_LEVEL_DATA                                  EQU $03
+BANK_0_AREA_DATA                                   EQU $00
+BANK_1_AREA_DATA                                   EQU $01
+BANK_2_AREA_DATA                                   EQU $02
+BANK_3_AREA_METADATA                               EQU $03
 BANK_5_AUDIO_LOGIC                                 EQU $05
-BANK_6                                             EQU $06
-BANK_7_PRG                                         EQU $07
-BANK_8_PRG                                         EQU $08
+BANK_6_SPRITES                                     EQU $06
+BANK_7_SPRITES                                     EQU $07
+BANK_8_SPRITES                                     EQU $08
 BANK_9_UNUSED                                      EQU $09
 BANK_10_CHRRAM                                     EQU $0a
 BANK_11_SPRITEINFO_PALETTES                        EQU $0b
@@ -759,6 +784,12 @@ SCREEN_EVENT_UNSET                                 EQU $ff
 ; ScreenExtraInfo
 ;============================================================================
 SCREEN_HAS_SPECIAL_EVENT                           EQU $80
+
+;============================================================================
+; ScreenScrollLoadMode
+;============================================================================
+SCROLL_LOAD_TILES                                  EQU $00
+SCROLL_LOAD_ATTRS                                  EQU $01
 
 ;============================================================================
 ; SelectedMagic
@@ -830,20 +861,23 @@ SOUND_ITEM_PICK_UP                                 EQU $08
 SOUND_TOUCH_COIN                                   EQU $09
 SOUND_MAGIC_HIT_OBSTACLE                           EQU $0a
 SOUND_MAYBE_MOVE_CURSOR                            EQU $0b
-SOUND_0x0C                                         EQU $0c
-SOUND_INPUT                                        EQU $0d
+SOUND_SHIELD_HIT_BY_MAGIC                          EQU $0c
+SOUND_INVALID_CHOICE                               EQU $0d
 SOUND_MAYBE_ENTER_PASSWORD_CHAR                    EQU $0e
 SOUND_PUSHING                                      EQU $0f
 SOUND_MAYBE_DROP_COIN                              EQU $10
+SOUND_17                                           EQU $11
+SOUND_PAKUKAME                                     EQU $12
 SOUND_FILL_HP_OR_MANA                              EQU $13
 SOUND_TILTE_MAGIC                                  EQU $14
 SOUND_MAYBE_STEP_SOUND                             EQU $15
 SOUND_PLAYER_DEATH                                 EQU $16
 SOUND_DROP_LADDER                                  EQU $17
-SOUND_0x18                                         EQU $18
+SOUND_SHOW_PLAYER_MENU                             EQU $18
 SOUND_MAYBE_GOLD_CHANGE                            EQU $19
 SOUND_USE_SPECIAL_ITEM_2                           EQU $1a
 SOUND_TOUCH_BREAD                                  EQU $1b
+SOUND_28                                           EQU $1c
 SOUND_MAX_IDS                                      EQU $1d
 
 ;============================================================================

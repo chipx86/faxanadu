@@ -4,17 +4,17 @@
 ; PPU ($2000 - $2007)
 ;============================================================================
 
-BASE $2000
+    BASE $2000
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d654
-;     FUN_PRG15_MIRROR__d673
 ;     Game_Init
 ;     PPUBuffer_Draw
 ;     PPU_HandleOnInterrupt
 ;     PPU_InitVBlank
 ;     PPU_SetVRAMIncrementAdd1Across
+;     Screen_WriteScrollHorizPPUTileData
+;     Screen_WriteScrollVertPPUTileData
 ;
 PPUCTRL:                                    ; [$2000]
     db $00                                  ; [$2000] PPUCtrlFlags
@@ -58,13 +58,7 @@ PPUSCROLL:                                  ; [$2005]
 ; XREFS:
 ;     PasswordScreen_Show
 ;     StartScreen_Draw
-;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__d654
-;     FUN_PRG15_MIRROR__d673
-;     FUN_PRG15_MIRROR__d699
-;     FUN_PRG15_MIRROR__d6b1
-;     FUN_PRG15_MIRROR__fbaf
-;     Maybe_LoadSpritesFromBank8
+;     Area_LoadTiles
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
@@ -73,7 +67,13 @@ PPUSCROLL:                                  ; [$2005]
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_SetAddr
 ;     PPU_WriteTilesFromCHRRAM
-;     UI_DrawStatusSymbols
+;     Screen_WriteScrollHorizPPUAttrData
+;     Screen_WriteScrollHorizPPUTileData
+;     Screen_WriteScrollVertPPUAttrData
+;     Screen_WriteScrollVertPPUTileData
+;     Sprites_LoadCommon
+;     UI_DrawHUDSprites
+;     UI_DrawSelectedItem
 ;     UI_SetHUDPPUAttributes
 ;
 PPUADDR:                                    ; [$2006]
@@ -84,13 +84,7 @@ PPUADDR:                                    ; [$2006]
 ;     PasswordScreen_Show
 ;     StartScreen_Draw
 ;     UI_DrawText
-;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__d654
-;     FUN_PRG15_MIRROR__d673
-;     FUN_PRG15_MIRROR__d699
-;     FUN_PRG15_MIRROR__d6b1
-;     FUN_PRG15_MIRROR__fbaf
-;     Maybe_LoadSpritesFromBank8
+;     Area_LoadTiles
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
@@ -99,7 +93,13 @@ PPUADDR:                                    ; [$2006]
 ;     PPU_FillGrid
 ;     PPU_WriteGlyphTile
 ;     PPU_WriteTilesFromCHRRAM
-;     UI_DrawStatusSymbols
+;     Screen_WriteScrollHorizPPUAttrData
+;     Screen_WriteScrollHorizPPUTileData
+;     Screen_WriteScrollVertPPUAttrData
+;     Screen_WriteScrollVertPPUTileData
+;     Sprites_LoadCommon
+;     UI_DrawHUDSprites
+;     UI_DrawSelectedItem
 ;     UI_SetHUDPPUAttributes
 ;
 PPUDATA:                                    ; [$2007]

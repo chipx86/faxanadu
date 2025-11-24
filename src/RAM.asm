@@ -4,7 +4,7 @@
 ; RAM ($0000 - $07ff)
 ;============================================================================
 
-BASE $0000
+    BASE $0000
 
 
 ;============================================================================
@@ -16,6 +16,52 @@ BASE $0000
 ; MOD NOTES:
 ;     These should be safe for custom code to use outside
 ;     of referenced code paths.
+;
+; XREFS:
+;     CurrentSprite_CheckHitPlayer
+;     FUN_PRG14__9991
+;     FUN_PRG14__9d78
+;     FUN_PRG14__9df7
+;     FUN_PRG14__9e13
+;     Maybe_Sprite_HandleDeathDrop
+;     Player_DrawShield
+;     Player_DrawWeapon
+;     Player_HitEnemyWithMagic
+;     Player_HitSpriteWithWeapon
+;     SpriteAction_FacePlayerX
+;     SpriteAction_FacePlayerY
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_Unknown_29
+;     SpriteUpdateHandler_Effect_EnemyDeath
+;     SpriteUpdateHandler_Effect_LightningBall20
+;     Sprite_CheckHitByCastMagic
+;     Sprites_CalcYFromGravity
+;     Sprites_IsSpriteOutOfWeaponRange
+;     WasPlayerHitByMagic
+;     Area_ConvertPixelsToBlockPos
+;     Area_HandleBreakableFloor
+;     Area_LoadBlockProperties
+;     Area_SetBlocks
+;     Area_SetBlocks_SetAttributes
+;     CastMagic_FinishHandler_HitWallEffect
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     FUN_PRG15_MIRROR__ec58
+;     Maybe_IsSpriteEntityNotOnScreen
+;     Player_DrawBody
+;     Player_DrawSprite
+;     Player_DrawSpriteImmediately
+;     Player_HandleKnockback
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_HasSpritesNotOfType
+;     Sprites_LoadCommon
+;     Sprites_LoadImageForCurrentSprite
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;============================================================================
 
 ;
@@ -44,31 +90,33 @@ BASE $0000
 ;     Sprites_IsSpriteOutOfWeaponRange
 ;     WasPlayerHitByMagic
 ;     Area_ConvertPixelsToBlockPos
+;     Area_HandleBreakableFloor
 ;     Area_LoadBlockProperties
 ;     Area_SetBlocks
+;     Area_SetBlocks_SetAttributes
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__d6ce
-;     FUN_PRG15_MIRROR__d82d
 ;     FUN_PRG15_MIRROR__ec58
-;     Maybe_Area_LoadBlocks
 ;     Maybe_IsSpriteEntityNotOnScreen
-;     Maybe_LoadSpritesFromBank8
-;     Maybe_Player_DrawSprite
-;     Maybe_Player_UpdateArmorSprite
-;     Maybe_Player_UpdateVisibleItemStates
-;     Maybe_Player_UpdateWeaponSprite
 ;     Player_DrawBody
+;     Player_DrawSprite
+;     Player_DrawSpriteImmediately
 ;     Player_HandleKnockback
-;     Player_Something_ShieldState
-;     Screen_Something_ScrollHorizInternal
-;     Sprite_Maybe_SetAppearanceAddr
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;     Sprites_HasSpritesNotOfType
+;     Sprites_LoadCommon
 ;     Sprites_LoadImageForCurrentSprite
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 Temp_00:                                    ; [$0000]
     db $00                                  ; [$0000] byte
+
 
 ;
 ; Generic temporary variable for 1-byte values.
@@ -78,12 +126,14 @@ Temp_00:                                    ; [$0000]
 ;     Maybe_Sprite_HandleDeathDrop
 ;     Player_HitEnemyWithMagic
 ;     Sprite_CheckHitByCastMagic
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
-;     Sprite_Maybe_SetAppearanceAddr
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_01:                                    ; [$0001]
     db $00                                  ; [$0001] byte
+
 
 ;
 ; Temporary variable used for address reads.
@@ -95,26 +145,28 @@ Temp_01:                                    ; [$0001]
 ;     Player_HitEnemyWithMagic
 ;     SpriteOp_AddToSpriteData
 ;     Sprite_GetBounds
-;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
+;     Area_SetBlocks_SetAttributes
 ;     Area_SetStateFromDoorDestination
-;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__ee93
-;     FUN_PRG15_MIRROR__eea9
-;     FUN_PRG15_MIRROR__eebf
 ;     FUN_PRG15_MIRROR__f2e3
-;     FUN_PRG15_MIRROR__f316
 ;     Game_LoadAreaTable
+;     IScripts_Maybe_DrawSpriteToPPU
 ;     LAB_PRG15_MIRROR__e852 [$PRG15_MIRROR::e852]
 ;     LAB_PRG15_MIRROR__ea13 [$PRG15_MIRROR::ea13]
 ;     LookupSpriteDataPointer
-;     Maybe_LoadSpritesFromBank8
 ;     Player_CheckSwitchScreen
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
+;     Player_DrawArmorTile
+;     Player_DrawShieldTile
+;     Player_DrawWeaponTile
 ;     Screen_LoadAllScreenInfo
-;     Sprite_Maybe_SetAppearanceAddr
-;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
 ;     Sprite_SetPortraitAppearanceAddr
+;     Sprites_LoadCommon
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 Temp_Addr_L:                                ; [$0002]
     db $00                                  ; [$0002] byte
@@ -125,22 +177,22 @@ Temp_Addr_L:                                ; [$0002]
 ;     Player_DrawWeapon
 ;     SpriteOp_AddToSpriteData
 ;     Sprite_GetBounds
-;     Area_ChangeArea
 ;     Area_ScrollToNextRoom
+;     Area_SetBlocks_SetAttributes
 ;     Area_SetStateFromDoorDestination
-;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__ee93
-;     FUN_PRG15_MIRROR__eea9
-;     FUN_PRG15_MIRROR__eebf
 ;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
 ;     LookupSpriteDataPointer
-;     Maybe_LoadSpritesFromBank8
 ;     Player_CheckSwitchScreen
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
+;     Player_DrawArmorTile
+;     Player_DrawShieldTile
+;     Player_DrawWeaponTile
 ;     Screen_LoadAllScreenInfo
-;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
 ;     Sprite_SetPortraitAppearanceAddr
+;     Sprites_LoadCommon
 ;
 Temp_Addr_U:                                ; [$0003]
     db $00                                  ; [$0003] byte
@@ -148,12 +200,12 @@ Temp_Addr_U:                                ; [$0003]
 ;
 ; XREFS:
 ;     Player_ApplyDamage
+;     Player_CalcValueAndFFForNeg
 ;     Player_DrawWeapon
-;     Something_SetValueAndFFForNeg
 ;     FUN_PRG15_MIRROR__ec58
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f316
-;     Sprite_Maybe_SetAppearanceAddr
+;     IScripts_Maybe_DrawSpriteToPPU
+;     Player_DrawWeaponTile
+;     Sprite_Draw_FlippedHoriz
 ;
 Temp_04:                                    ; [$0004]
     db $00                                  ; [$0004] byte
@@ -161,27 +213,28 @@ Temp_04:                                    ; [$0004]
 ;
 ; XREFS:
 ;     Player_ApplyDamage
+;     Player_CalcValueAndFFForNeg
 ;     Player_DrawWeapon
-;     Something_SetValueAndFFForNeg
 ;     FUN_PRG15_MIRROR__ec58
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f316
-;     Sprite_Maybe_SetAppearanceAddr
+;     IScripts_Maybe_DrawSpriteToPPU
+;     Player_DrawWeaponTile
+;     Sprite_Draw_FlippedHoriz
 ;
 Temp_05:                                    ; [$0005]
     db $00                                  ; [$0005] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d61d
-;     FUN_PRG15_MIRROR__d82d
-;     Maybe_Area_LoadBlocks
+;     Area_SetBlocks_SetAttributes
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_RunWriteScrollDataHandler
 ;
 Temp_06:                                    ; [$0006]
     db $00                                  ; [$0006] byte
+
 
 ;
 ; Temporary variable used only for vertical line removal.
@@ -203,14 +256,14 @@ Temp_07:                                    ; [$0007]
 ; XREFS:
 ;     Area_LoadBlocks
 ;     Area_LoadNextCompressedScreenBit
-;     CHR_LoadTilesetPages
-;     LoadPalette2
-;     LoadPalette
-;     Maybe_Area_LoadBlocks
+;     Area_LoadTiles
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
-;     Palette_LoadFromIndex
-;     Palette_PopulateData
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBackgroundPalette
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_LoadPalette
+;     Screen_LoadSpritePalette
+;     Screen_SetFadeOutPalette
 ;
 Temp_08:                                    ; [$0008]
     db $00                                  ; [$0008] undefined
@@ -218,13 +271,13 @@ Temp_08:                                    ; [$0008]
 ;
 ; XREFS:
 ;     Area_LoadBlocks
-;     CHR_LoadTilesetPages
-;     LoadPalette2
-;     LoadPalette
-;     Maybe_Area_LoadBlocks
+;     Area_LoadTiles
 ;     Palette_IndexToROMOffset16
-;     Palette_LoadFromIndex
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBackgroundPalette
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_LoadSpritePalette
+;     Screen_SetFadeOutPalette
 ;
 Temp_09:                                    ; [$0009]
     db $00                                  ; [$0009] byte
@@ -235,17 +288,26 @@ Temp_09:                                    ; [$0009]
 ;
 ; These are set here so that the intended flags can be applied whenever
 ; necessary.
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d654
-;     FUN_PRG15_MIRROR__d673
 ;     Game_InitScreenAndMusic
 ;     PPUBuffer_Draw
 ;     PPU_HandleOnInterrupt
 ;     PPU_InitVBlank
 ;     PPU_SetVRAMIncrementAdd1Across
+;     Screen_WriteScrollHorizPPUTileData
+;     Screen_WriteScrollVertPPUTileData
+;============================================================================
+
+;
+; XREFS:
+;     Game_InitScreenAndMusic
+;     PPUBuffer_Draw
+;     PPU_HandleOnInterrupt
+;     PPU_InitVBlank
+;     PPU_SetVRAMIncrementAdd1Across
+;     Screen_WriteScrollHorizPPUTileData
+;     Screen_WriteScrollVertPPUTileData
 ;
 SavedPPUCtrl:                               ; [$000a]
     db $00                                  ; [$000a] PPUCtrlFlags
@@ -256,6 +318,14 @@ SavedPPUCtrl:                               ; [$000a]
 ;
 ; 0 = Color
 ; 1 = Grayscale
+;
+; XREFS:
+;     Player_HitEnemyWithMagic
+;     Player_HitSpriteWithWeapon
+;     SpriteBehavior_FlashScreenHitPlayer
+;     GameLoop_ClearSprites
+;     Game_InitScreenAndMusic
+;     PPU_HandleOnInterrupt
 ;============================================================================
 
 ;
@@ -272,44 +342,75 @@ ScreenColorMode:                            ; [$000b]
 
 
 ;============================================================================
-; X delta in pixels used during scrolling
+; X delta in pixels used during scrolling.
+;
+; This controls the PPU scroll overlay when switching
+; between screens 0 and 1.
+;
+; XREFS:
+;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollToNextRoom
+;     Game_InitScreenAndMusic
+;     Game_InitStateForSpawn
+;     PPU_HandleOnInterrupt
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_UpdateForScroll
+;     Sprite_Draw
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__d2ce
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
 ;     PPU_HandleOnInterrupt
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
-;     Sprite_Maybe_SetAppearanceAddr
+;     Screen_UpdateForScroll
+;     Sprite_Draw
 ;
-ScrollHelp_Pixel:                           ; [$000c]
+PPU_ScrollX:                                ; [$000c]
     db $00                                  ; [$000c] byte
 
 
 ;============================================================================
-; X delta in screens used during scrolling
+; X delta in screens used during scrolling.
+;
+; This is used to swap between the PPU scroll screens.
+; The even/odd flag will be used to dictate the current
+; screen.
+;
+; XREFS:
+;     TextBox_FillBackground
+;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollToNextRoom
+;     Area_SetBlocks_SetAttributes
+;     Area_SetPPUAddrForBlockIndex
+;     Game_InitScreenAndMusic
+;     Game_InitStateForSpawn
+;     PPU_HandleOnInterrupt
+;     PPU_SetAddrForTextBoxPos
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
 ;============================================================================
 
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox_Something8F51
+;     TextBox_FillBackground
 ;     Area_Maybe_ShowRoomTransition
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__d82d
+;     Area_SetBlocks_SetAttributes
+;     Area_SetPPUAddrForBlockIndex
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
 ;     PPU_HandleOnInterrupt
-;     PPU_SetAddrForTextPos
+;     PPU_SetAddrForTextBoxPos
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
-;     Something_SetPPUAddrForXYTransformed
 ;
-ScrollHelp_Screen:                          ; [$000d]
+PPU_ScrollScreen:                           ; [$000d]
     db $00                                  ; [$000d] byte
 
 
@@ -324,8 +425,15 @@ ScrollHelp_Screen:                          ; [$000d]
 ; NOTE:
 ;     Some code checks against alternative states: 1 and 5.
 ;
-;     These do not seem to be used, and appear to be remnants
-;     of an older design.
+;     These do not seem to be used, and appear to be
+;     remnants of an older design.
+;
+; XREFS:
+;     Game_DrawScreenInFrozenState
+;     Game_InitStateForSpawn
+;     Player_DrawBody
+;     Player_HandleDeath
+;     Screen_SetupSprites
 ;============================================================================
 
 ;
@@ -361,6 +469,11 @@ Maybe_ScreenReadyState:                     ; [$000e]
 ; If already 1, PRG15_MIRROR:c999 won't run handlers again.
 ;
 ; Callers can set to 0 to request running interrupt handlers.
+;
+; XREFS:
+;     Game_InitScreenAndMusic
+;     OnInterrupt
+;     WaitForNextFrame
 ;============================================================================
 
 ;
@@ -374,10 +487,15 @@ Game_InterruptsHandledLatch:                ; [$0010]
 
 
 ;============================================================================
-; The previous ROM bank saved before switching to a new bank.
+; The previous PRG ROM bank saved before switching to a new bank.
 ;
 ; This allows for pushing to a new bank and then popping
 ; back to this bank.
+;
+; XREFS:
+;     Game_InitMMCAndBank
+;     MMC1_RestorePrevPRGBank
+;     MMC1_SavePRGBankAndUpdateTo
 ;============================================================================
 
 ;
@@ -386,7 +504,7 @@ Game_InterruptsHandledLatch:                ; [$0010]
 ;     MMC1_RestorePrevPRGBank
 ;     MMC1_SavePRGBankAndUpdateTo
 ;
-SavedROMBank:                               ; [$0011]
+SavedPRGBank:                               ; [$0011]
     db $00                                  ; [$0011] ROMBank
 
 
@@ -396,13 +514,18 @@ SavedROMBank:                               ; [$0011]
 ;   0 = Idle
 ;   1 = Writing to MMC1 (switching banks).
 ; > 1 = MMC1 is re-initializing.
+;
+; XREFS:
+;     Game_InitMMCAndBank
+;     MMC1_EnsurePRG
+;     MMC1_UpdateROMBank
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Game_InitMMCAndBank
 ;     MMC1_EnsurePRG
-;     MMC1_UpdatePRGBank
+;     MMC1_UpdateROMBank
 ;
 MMC1_ShiftSync:                             ; [$0012]
     db $00                                  ; [$0012] byte
@@ -415,16 +538,24 @@ MMC1_ShiftSync:                             ; [$0012]
 ; state, audio, and read button inputs.
 ;
 ; If 0, this will all be paused.
+;
+; XREFS:
+;     Game_DrawAndEnableInterrupts
+;     Game_InitScreenAndMusic
+;     OnInterrupt
+;     PPU_WaitUntilFlushed
+;     SplashAnimation_Something_cb27
+;     UNUSED_FUN_PRG15_MIRROR__cb1f
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__cb17
-;     FUN_PRG15_MIRROR__cb27
+;     Game_DrawAndEnableInterrupts
 ;     Game_InitScreenAndMusic
-;     MAYBE_UNUSED_FUN_PRG15_MIRROR__cb1f
 ;     OnInterrupt
 ;     PPU_WaitUntilFlushed
+;     SplashAnimation_Something_cb27
+;     UNUSED_FUN_PRG15_MIRROR__cb1f
 ;
 Game_EnableInterruptHandlers:               ; [$0013]
     db $00                                  ; [$0013] bool
@@ -440,6 +571,10 @@ Game_EnableInterruptHandlers:               ; [$0013]
 ; PPU_WaitUntilFlushed will wait for this to hit 2
 ; before returning, ensuring there's time for the PPU to
 ; flush before returning to the caller.
+;
+; XREFS:
+;     OnInterrupt
+;     PPU_WaitUntilFlushed
 ;============================================================================
 
 ;
@@ -459,6 +594,22 @@ PauseInterruptCounter:                      ; [$0014]
 
 ;============================================================================
 ; Controller port and button state management.
+;
+; XREFS:
+;     PasswordScreen_GetDPadBits
+;     Maybe_Player_CalcAnimFrame
+;     Player_CastMagic
+;     EndGame_MovePlayerTowardKing
+;     GameLoop_CheckUseCurrentItem
+;     Game_UpdatePlayerOnScroll
+;     GetRandom
+;     Input_HandleOnInterrupt
+;     Maybe_Player_CalcSpeed
+;     Player_CheckHandleClimb
+;     Player_CheckHandleClimbMaybeSide
+;     Player_CheckHandleJump
+;     Player_CheckPushingBlock
+;     Player_GetBodySpriteFrameOffset
 ;============================================================================
 
 ;
@@ -493,6 +644,7 @@ PauseInterruptCounter:                      ; [$0014]
 Joy1_ButtonMask:                            ; [$0016]
     db $00                                  ; [$0016] ButtonBitmask
 
+
 ;
 ; Buttons last pressed by the player in controller port 2.
 ;
@@ -512,6 +664,7 @@ Joy1_ButtonMask:                            ; [$0016]
 ;
 Joy2_ButtonMask:                            ; [$0017]
     db $00                                  ; [$0017] ButtonBitmask
+
 
 ;
 ; Buttons previously pressed before the latest button presses.
@@ -536,6 +689,7 @@ Joy2_ButtonMask:                            ; [$0017]
 Joy1_PrevButtonMask:                        ; [$0018]
     db $00                                  ; [$0018] ButtonBitmask
 
+
 ;
 ; Button bits changed since the last interrupt.
 ;
@@ -550,23 +704,24 @@ Joy1_PrevButtonMask:                        ; [$0018]
 ;
 ;
 ; XREFS:
-;     FUN_PRG12__84ed
-;     FUN_PRG12__8b71
-;     FUN_PRG12__9969
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_ShowBuySellMenu
 ;     IScriptAction_ShowPassword
-;     IScripts_IsBPressed
-;     IScripts_Something_992A
-;     IScripts_Something_9980
-;     Menu_Draw
-;     Menu_Something_9405
+;     IScripts_WaitForMenuInput
+;     Menu_UpdateAndDraw
+;     PasswordScreen_DrawAndHandleInputLoop
 ;     PasswordScreen_GetDPadBits
 ;     PasswordScreen_HandleWrongPasswordAndWaitForInput
-;     PlayerMenu_Maybe_ShowStatus
-;     Shop_Something_9956
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     StartScreen_CheckHandleInput
-;     UI_ShowPlayerMenu
+;     TextBox_CheckForDismiss
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissMessage
+;     TextBox_CheckShouldContinueOrDismissQuestion
+;     TextBox_IsBPressed
 ;     Player_CastMagic
 ;     Player_CheckHandlePressUpOnNPC
 ;     Area_CheckCanClimbAdjacent
@@ -586,24 +741,19 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 
 ;============================================================================
 ; Additional interrupt handling state.
-;============================================================================
-
-;
-; A running counter tracking the number of interrupt handlers
-; run.
-;
 ;
 ; XREFS:
 ;     IScripts_PlayFillingSound
 ;     IScripts_PlayGoldChangeSound
-;     IScripts_Something_99DB
-;     IScripts_Something_SetXYAndOffset_99a1
-;     IScripts_Something_SetXYAndOffset_99be
 ;     IScripts_UpdatePortraitAnimation
-;     PasswordScreen_Maybe_DrawChar
+;     PasswordScreen_DrawPasswordFieldCursor
 ;     PasswordScreen_WriteWrongPassword
 ;     SplashAnimation_RunOutro
-;     SplashAnimation_SomethingOutroUpdate
+;     SplashAnimation_UpdateOutro
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     SpriteBehavior_Ishiisu_Something_850d
 ;     Area_BeginScrollToNextRoom
 ;     CastMagic_FinishHandler_Death
 ;     CastMagic_FinishHandler_Deluge
@@ -616,12 +766,47 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     Game_DecWingBootsDuration
 ;     Game_WaitForOAMReset
 ;     OnInterrupt
+;     Player_CheckOnBreakableBlock
 ;     Player_DrawDeathAnimation
-;     Player_FallToGround
+;     WaitForInterrupt
+;============================================================================
+
+;
+; A running counter tracking the number of interrupt handlers
+; run.
+;
+;
+; XREFS:
+;     IScripts_PlayFillingSound
+;     IScripts_PlayGoldChangeSound
+;     IScripts_UpdatePortraitAnimation
+;     PasswordScreen_DrawPasswordFieldCursor
+;     PasswordScreen_WriteWrongPassword
+;     SplashAnimation_RunOutro
+;     SplashAnimation_UpdateOutro
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     SpriteBehavior_Ishiisu_Something_850d
+;     Area_BeginScrollToNextRoom
+;     CastMagic_FinishHandler_Death
+;     CastMagic_FinishHandler_Deluge
+;     CastMagic_FinishHandler_Fire
+;     CastMagic_FinishHandler_Thunder
+;     CastMagic_FinishHandler_Tilte
+;     Game_DecGloveDuration
+;     Game_DecHourGlassDuration
+;     Game_DecOintmentDuration
+;     Game_DecWingBootsDuration
+;     Game_WaitForOAMReset
+;     OnInterrupt
+;     Player_CheckOnBreakableBlock
+;     Player_DrawDeathAnimation
 ;     WaitForInterrupt
 ;
 InterruptCounter:                           ; [$001a]
     db $00                                  ; [$001a] byte
+
 
 ;
 ; Whether the OAM needs to be reset at the next
@@ -637,15 +822,20 @@ Game_NeedOAMReset:                          ; [$001b]
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_Reset
 ;
-Maybe_FrameAltToggleFlags:                  ; [$001c]
-    db $00                                  ; [$001c] undefined1
+Sprites_StartSlotRange:                     ; [$001c]
+    db $00                                  ; [$001c] byte
 
 
 ;============================================================================
 ; State for animating the fog in the area of Mist.
+;
+; XREFS:
+;     Fog_OnTick
+;     Fog_UpdateTiles
 ;============================================================================
 
 ;
@@ -658,6 +848,7 @@ Maybe_FrameAltToggleFlags:                  ; [$001c]
 ;
 Fog_TileIndex:                              ; [$001d]
     db $00                                  ; [$001d] byte
+
 
 ;
 ; State index used to determine when to animate fog tiles
@@ -681,6 +872,17 @@ Fog_StateIndex:                             ; [$001e]
 ; arguments.
 ;
 ; See PPUBuffer_Draw.
+;
+; XREFS:
+;     Game_InitStateForSpawn
+;     PPUBuffer_Clear
+;     PPUBuffer_Draw
+;     PPUBuffer_DrawAll
+;     PPUBuffer_DrawCommand_RemoveVerticalLines
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
+;     PPUBuffer_HasCapacity
+;     PPUBuffer_WaitUntilClear
+;     PPU_WaitUntilFlushed
 ;============================================================================
 
 ;
@@ -695,12 +897,13 @@ Fog_StateIndex:                             ; [$001e]
 ;     PPUBuffer_DrawAll
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
-;     PPUBuffer_SomethingCompareTo0x24
+;     PPUBuffer_HasCapacity
 ;     PPUBuffer_WaitUntilClear
 ;     PPU_WaitUntilFlushed
 ;
-PPUBuffer_Offset:                           ; [$001f]
+PPUBuffer_ReadOffset:                       ; [$001f]
     db $00                                  ; [$001f] byte
+
 
 ;
 ; Current upper bounds of the ring buffer.
@@ -711,41 +914,42 @@ PPUBuffer_Offset:                           ; [$001f]
 ;
 ;
 ; XREFS:
-;     FUN_PRG12__9041
-;     FUN_PRG12__92ed
-;     IScriptAction_AddItem_Something8EC1
-;     Maybe_DrawItemName
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
+;     DEADCODE_FUN_PRG12__9041
+;     IScriptAction_AddInventoryItem_ClearTextBox
 ;     PasswordScreen_DrawMessage
-;     Strings_Draw
-;     TextBox_Maybe_Draw
-;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f316
+;     PasswordScreen_WriteCharTile
+;     TextBox_Close
+;     TextBox_DrawItemImage
+;     TextBox_FillBackground
+;     TextBox_Open
+;     UI_DrawString
+;     Area_SetBlocks_SetAttributes
+;     Area_SetBlocks_WriteBlockData12
+;     Area_SetBlocks_WriteBlockData34
 ;     Fog_UpdateTiles
 ;     Game_InitStateForSpawn
-;     PPUBuffer_Append0
+;     IScripts_Maybe_DrawSpriteToPPU
 ;     PPUBuffer_Clear
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawAll
+;     PPUBuffer_HasCapacity
 ;     PPUBuffer_QueueCommandOrLength
-;     PPUBuffer_SomethingCompareTo0x24
 ;     PPUBuffer_WaitUntilClear
+;     PPUBuffer_WritePalette
 ;     PPUBuffer_WriteValueMany
 ;     PPU_WaitUntilFlushed
 ;     Player_DrawDeathAnimation
-;     Player_DrawItemInternal
+;     Player_DrawWeaponTile
 ;     TextBox_FillPlaceholderTextAtLineWithStartChar
+;     TextBox_LoadItemSourceTiles
 ;     TextBox_Maybe_WriteLineOfChars
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawDigitsZeroPadded
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
-PPUBuffer_UpperBounds:                      ; [$0020]
+PPUBuffer_WriteOffset:                      ; [$0020]
     db $00                                  ; [$0020] byte
+
 
 ;
 ; Temporary state used when drawing from the PPU buffer.
@@ -760,6 +964,7 @@ PPUBuffer_UpperBounds:                      ; [$0020]
 ;
 PPUBuffer_Temp_PendingEntryCount:           ; [$0021]
     db $00                                  ; [$0021] byte
+
 
 ;
 ; Temporary state used when drawing from the PPU buffer.
@@ -784,6 +989,9 @@ PPUBuffer_Temp_TotalByteLength:             ; [$0022]
 ;     PPU_InitAttributeAndNameTables,
 ;     but is otherwise unused and can be reused in
 ;     self-contained code.
+;
+; XREFS:
+;     PPU_InitAttributeAndNameTables
 ;============================================================================
 
 ;
@@ -805,18 +1013,15 @@ Temp_PPU_NametableValue:                    ; [$0023]
 ; $05 = Conflate
 ; $06 = Daybreak
 ; $07 = Evil Fortress
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
+;     PlayerMenu_HandleInventoryMenuInput
 ;     FUN_PRG14__9991
-;     Area_ChangeArea
 ;     Area_SetStateFromDoorDestination
 ;     FUN_PRG15_MIRROR__daf6
-;     FUN_PRG15_MIRROR__df64
 ;     Fog_OnTick
 ;     GameLoop_CheckShowPlayerMenu
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_InitStateForStartScreen
@@ -826,6 +1031,32 @@ Temp_PPU_NametableValue:                    ; [$0023]
 ;     Game_SetupAndLoadArea
 ;     Game_SpawnInTemple
 ;     Player_CheckSwitchScreen
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
+;     Player_EnterDoorToInside
+;     Player_SetWeapon
+;     Player_UseMattock
+;     Screen_LoadAllScreenInfo
+;============================================================================
+
+;
+; XREFS:
+;     PlayerMenu_HandleInventoryMenuInput
+;     FUN_PRG14__9991
+;     Area_SetStateFromDoorDestination
+;     FUN_PRG15_MIRROR__daf6
+;     Fog_OnTick
+;     GameLoop_CheckShowPlayerMenu
+;     Game_EnterAreaHandler
+;     Game_EnterBuilding
+;     Game_ExitBuilding
+;     Game_InitStateForStartScreen
+;     Game_LoadAreaTable
+;     Game_LoadCurrentArea
+;     Game_LoadFirstLevel
+;     Game_SetupAndLoadArea
+;     Game_SpawnInTemple
+;     Player_CheckSwitchScreen
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_EnterDoorToInside
 ;     Player_SetWeapon
 ;     Player_UseMattock
@@ -834,18 +1065,46 @@ Temp_PPU_NametableValue:                    ; [$0023]
 Area_CurrentArea:                           ; [$0024]
     db $00                                  ; [$0024] Area
 
+
+;============================================================================
+; The next sprite slot.
+;
+; This will alternate between putting sprites in ranges 0-31
+; and 32-63.
+;
+; If either range is filled with sprites, Sprites_SlotsFull
+; will be set to 1. No new sprite slots will be allocated.
+; This takes place in Sprites_IncNextSpriteSlot.
 ;
 ; XREFS:
-;     Something_FrameAltToggle
-;     Sprite_Maybe_SetAppearanceAddr
-;     Sprite_Something_ChangeBitsAndMaybeInc
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_IncNextSpriteSlot
+;     Sprites_Reset
+;============================================================================
+
 ;
-BYTE_0025:                                  ; [$0025]
+; XREFS:
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_IncNextSpriteSlot
+;     Sprites_Reset
+;
+Sprites_SpriteSlot:                         ; [$0025]
     db $00                                  ; [$0025] byte
 
 
 ;============================================================================
 ; Current sprite state.
+;
+; XREFS:
+;     SUB_PRG14__ba48 [$PRG14::ba48]
+;     Something_SetDAT26 [$PRG14::8c7f]
+;     SpriteUpdateHandler_Invisible
+;     CastMagic_CalculateVisibility
+;     Sprite_Draw_Finish
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;============================================================================
 
 ;
@@ -867,10 +1126,13 @@ BYTE_0025:                                  ; [$0025]
 ;     Something_SetDAT26 [$PRG14::8c7f]
 ;     SpriteUpdateHandler_Invisible
 ;     CastMagic_CalculateVisibility
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_Finish
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 MovingSpriteVisibility:                     ; [$0026]
     db $00                                  ; [$0026] MovingSpriteVisibility
+
 
 ;
 ; An argument to Sprite_EnterNextAppearancePhase.
@@ -879,7 +1141,7 @@ MovingSpriteVisibility:                     ; [$0026]
 ;
 ;
 ; XREFS:
-;     Portrait_SetInnerSpriteXY
+;     IScripts_SetPortraitSpriteXY
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
@@ -887,14 +1149,15 @@ MovingSpriteVisibility:                     ; [$0026]
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
-;     Something_SetXYAndAnimOffset
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     UI_DrawPromptInputSymbol
 ;
 Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
     db $00                                  ; [$0027] byte
+
 
 ;
 ; An argument to Sprite_EnterNextAppearancePhase.
@@ -903,7 +1166,7 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;
 ;
 ; XREFS:
-;     Portrait_SetInnerSpriteXY
+;     IScripts_SetPortraitSpriteXY
 ;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
@@ -913,14 +1176,15 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
-;     Something_SetXYAndAnimOffset
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     UI_DrawPromptInputSymbol
 ;
 Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
     db $00                                  ; [$0028] byte
+
 
 ;
 ; The current sprite's flip mask.
@@ -959,11 +1223,14 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
 ;     IScripts_DrawPortraitAnimationFrame
 ;     Player_GetBodySpriteFrameOffset
 ;     Player_SetFacingLeft
-;     Something_SetXYAndAnimOffset
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     UI_DrawPromptInputSymbol
 ;
 CurrentSprite_FlipMask:                     ; [$0029]
     db $00                                  ; [$0029] byte
+
 
 ;
 ; UNUSED: Y scroll position for a sprite.
@@ -973,11 +1240,12 @@ CurrentSprite_FlipMask:                     ; [$0029]
 ;
 ; XREFS:
 ;     CurrentSprite_UpdateState
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     Player_DrawBody
 ;
 Unused_Sprite_ScrollPosY:                   ; [$002a]
     db $00                                  ; [$002a] byte
+
 
 ;
 ; UNUSED: X scroll position for a sprite.
@@ -987,11 +1255,12 @@ Unused_Sprite_ScrollPosY:                   ; [$002a]
 ;
 ; XREFS:
 ;     CurrentSprite_UpdateState
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     Player_DrawBody
 ;
 Unused_Sprite_ScrollPosX:                   ; [$002b]
     db $00                                  ; [$002b] byte
+
 
 ;
 ; UNUSED: The following 7 bytes are unused in memory.
@@ -1010,67 +1279,77 @@ Unused_Sprite_ScrollPosX:                   ; [$002b]
 ;     SpriteUpdateHandler_Enemy_Unused18
 ;     SpriteUpdateHandler_Invisible
 ;     IScripts_DrawPortraitAnimationFrame
-;     Something_FrameAltToggle
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_Finish
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_Reset
 ;
-Maybe_CurrentSprite_PPUOffset:              ; [$0033]
+Sprites_PPUOffset:                          ; [$0033]
     db $00                                  ; [$0033] byte
 
-;
+
+;============================================================================
 ; UNUSED: The following 5 bytes are either unused or only
 ;         written to, never read from.
 ;
 ;         All but $0036 are unsafe to use.
 ;
+; XREFS:
+;     Sprites_Reset
+;============================================================================
+
 ;
 ; XREFS:
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-Maybe_Unused_0034:                          ; [$0034]
+Sprites_Unused_0034:                        ; [$0034]
     db $00                                  ; [$0034] byte
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-Maybe_Unused_0035:                          ; [$0035]
+Sprites_Unused_0035:                        ; [$0035]
     db $00,$00                              ; [$0035] byte
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-Maybe_Unused_0037:                          ; [$0037]
+Sprites_Unused_0037:                        ; [$0037]
     db $00                                  ; [$0037] byte
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-Maybe_Unused_0038:                          ; [$0038]
+Sprites_Unused_0038:                        ; [$0038]
     db $00                                  ; [$0038] byte
 
 
 ;============================================================================
-; TODO:
+; Whether sprites can currently be added.
 ;
-; A counter set when adding a sprite and reset at each frame.
+; This is 0 when there's room for sprites, and 1 when the slots
+; are full.
 ;
-; This seems to be used to limit sprite rendering per-frame.
-; Sprite_Maybe_SetAppearanceAddr will only add a
-; sprite
-; to the screen buffer if this is 0, and will then set it
-; to 1 based on some conditions.
+; XREFS:
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_IncNextSpriteSlot
+;     Sprites_Reset
 ;============================================================================
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
-;     Sprite_Maybe_SetAppearanceAddr
-;     Sprite_Something_ChangeBitsAndMaybeInc
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_IncNextSpriteSlot
+;     Sprites_Reset
 ;
-Something_Sprites_ResetAtFrame:             ; [$0039]
-    db $00                                  ; [$0039] byte
+Sprites_SlotsFull:                          ; [$0039]
+    db $00                                  ; [$0039] bool
+
 
 ;
 ; Temporary variable for the lower byte of a sprite's
@@ -1078,10 +1357,13 @@ Something_Sprites_ResetAtFrame:             ; [$0039]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Maybe_Temp_Sprite_L:                        ; [$003a]
     db $00                                  ; [$003a] byte
+
 
 ;
 ; Temporary variable for the upper byte of a sprite's
@@ -1089,44 +1371,55 @@ Maybe_Temp_Sprite_L:                        ; [$003a]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
 ;
 Maybe_Temp_Sprite_U:                        ; [$003b]
     db $00                                  ; [$003b] byte
+
 
 ;
 ; Temporary variable for the normalized X position of a sprite.
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_NormXPos:                      ; [$003c]
     db $00                                  ; [$003c] byte
+
 
 ;
 ; Temporary variable for the normalized Y position of a sprite.
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_NormYPos:                      ; [$003d]
     db $00                                  ; [$003d] byte
 
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Something_SpriteData_X:                     ; [$003e]
     db $00                                  ; [$003e] byte
 
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Something_SpriteData_Y:                     ; [$003f]
     db $00                                  ; [$003f] byte
+
 
 ;
 ; Temporary variable for the number of sprite tile columns
@@ -1134,10 +1427,13 @@ Something_SpriteData_Y:                     ; [$003f]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_ColsRemaining:                 ; [$0040]
     db $00                                  ; [$0040] byte
+
 
 ;
 ; Temporary variable for the number of sprite tile rows
@@ -1145,10 +1441,13 @@ Temp_Sprites_ColsRemaining:                 ; [$0040]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_RowsRemaining:                 ; [$0041]
     db $00                                  ; [$0041] byte
+
 
 ;
 ; Temporary variable for the current X tile offset to draw for
@@ -1156,10 +1455,12 @@ Temp_Sprites_RowsRemaining:                 ; [$0041]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_TileXOffset:                   ; [$0042]
     db $00                                  ; [$0042] byte
+
 
 ;
 ; Temporary variable for the current Y tile offset to draw for
@@ -1167,130 +1468,178 @@ Temp_Sprites_TileXOffset:                   ; [$0042]
 ;
 ;
 ; XREFS:
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
 ;
 Temp_Sprites_TileYOffset:                   ; [$0043]
     db $00                                  ; [$0043] byte
 
+
+;
+; A counter that increments or decrements when scrolling
+; vertically.
+;
+; When scrolling from top to bottom, this will count up
+; from 0 to 0xCF.
+;
+; When scrolling from bottom to top, this will count down
+; from 0xCF to 0.
+;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d393
-;     FUN_PRG15_MIRROR__d3a6
-;     Maybe_Area_LoadBlocks
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollUp
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksDown
+;     Screen_LoadDataUp
 ;
-Something_Blocks_0044:                      ; [$0044]
+Screen_ScrollVertLoadCounter:               ; [$0044]
     db $00                                  ; [$0044] byte
 
+
+;
+; A counter that increments or decrements when scrolling
+; horizontally.
+;
+; When scrolling from left to right, this will count up
+; from 0x01 to 0xF9.
+;
+; When scrolling from right to left, this will count down
+; from 0xFF to 0 and wrapping to 0xFE.
+;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
-;     Screen_Something_ScrollHorizInternal
-;     Screen_Something_ScrollLeft
-;     Screen_Something_ScrollRight
+;     Screen_LoadBlocksHoriz
+;     Screen_LoadDataLeft
+;     Screen_LoadDataRight
 ;
-Something_Blocks_0045:                      ; [$0045]
+Screen_ScrollHorizLoadCounter:              ; [$0045]
     db $00                                  ; [$0045] byte
 
 ;
 ; XREFS:
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
-Something_Blocks_0046:                      ; [$0046]
+Screen_ScrollHorizLoadOffset:               ; [$0046]
     db $00                                  ; [$0046] byte
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
-Something_Blocks_0047:                      ; [$0047]
+Screen_Maybe_ScrollHorizDirection:          ; [$0047]
     db $00                                  ; [$0047] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
 ;
 Temp_Blocks_0048:                           ; [$0048]
     db $00                                  ; [$0048] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
 ;
 Unused_Blocks_0049:                         ; [$0049]
     db $00                                  ; [$0049] byte
+
 
 ;
 ; UNUSED: The next 2 bytes are unused by Faxanadu.
 ;
     db $00,$00                              ; [$004a] byte
 
+
+;============================================================================
+; PPU tilemap and attribute addresses used during screen scroll.
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d673
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUTileData
+;============================================================================
+
 ;
-Something_Blocks_PPUAddr_L:                 ; [$004c]
+; PPU tilemap address used when scrolling horizontally.
+;
+;
+; XREFS:
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUTileData
+;
+Screen_ScrollHorizBlocks_PPUTileMapAddr_L:  ; [$004c]
     db $00                                  ; [$004c] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d673
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUTileData
 ;
-Something_Blocks_PPUAddr_U:                 ; [$004d]
+Screen_ScrollHorizBlocks_PPUTileMapAddr_U:  ; [$004d]
     db $00                                  ; [$004d] byte
 
+
+;
+; PPU tilemap address used when scrolling vertically.
+;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d654
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUTileData
 ;
-Something_ShopItem_PPUAddr_L:               ; [$004e]
+Screen_ScrollVertBlocks_PPUTileMapAddr_L:   ; [$004e]
     db $00                                  ; [$004e] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d654
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUTileData
 ;
-Something_ShopItem_PPUAddr_U:               ; [$004f]
+Screen_ScrollVertBlocks_PPUTileMapAddr_U:   ; [$004f]
     db $00                                  ; [$004f] byte
 
+
+;
+; PPU attribute address used when scrolling horizontally.
+;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d6b1
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUAttrData
 ;
-Something_PPUAddr_L:                        ; [$0050]
+Screen_ScrollHorizBlocks_PPUAttrAddr_L:     ; [$0050]
     db $00                                  ; [$0050] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d6b1
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUAttrData
 ;
-Something_PPUAddr_U:                        ; [$0051]
+Screen_ScrollHorizBlocks_PPUAttrAddr_U:     ; [$0051]
     db $00                                  ; [$0051] byte
 
+
+;
+; PPU attribute address used when scrolling vertically.
+;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d699
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUAttrData
 ;
-Something_Blocks_PPUAddr2_L:                ; [$0052]
+Screen_ScrollVertBlocks_PPUAttrAddr_L:      ; [$0052]
     db $00                                  ; [$0052] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d699
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUAttrData
 ;
-Something_Blocks_PPUAddr2_U:                ; [$0053]
+Screen_ScrollVertBlocks_PPUAttrAddr_U:      ; [$0053]
     db $00                                  ; [$0053] byte
 
 
@@ -1301,27 +1650,40 @@ Something_Blocks_PPUAddr2_U:                ; [$0053]
 ; 1 = Right
 ; 2 = Up
 ; 3 = Down
-;============================================================================
-
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__d2ce
 ;     GameLoop_UpdatePlayer
 ;     Game_MainLoop
 ;     Game_MovePlayerOnScroll
 ;     Player_CheckHandleJump
 ;     Screen_HandleScroll
 ;     Screen_StopScrollAndLoadBlockProperties
+;     Screen_UpdateForScroll
+;============================================================================
+
+;
+; XREFS:
+;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollToNextRoom
+;     GameLoop_UpdatePlayer
+;     Game_MainLoop
+;     Game_MovePlayerOnScroll
+;     Player_CheckHandleJump
+;     Screen_HandleScroll
+;     Screen_StopScrollAndLoadBlockProperties
+;     Screen_UpdateForScroll
 ;
 Screen_ScrollDirection:                     ; [$0054]
     db $00                                  ; [$0054] Direction
+
 
 ;
 ; UNUSED: The next 2 bytes are unused by Faxanadu.
 ;
     db $00,$00                              ; [$0055] undefined
+
 
 ;
 ; The following are pending a deep-dive. A lot of these
@@ -1330,70 +1692,88 @@ Screen_ScrollDirection:                     ; [$0054]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d2ce
 ;     Game_InitScreenAndMusic
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollUp
+;     Screen_UpdateForScroll
 ;
-Something_ScrollIndex:                      ; [$0057]
+PPU_ScrollY:                                ; [$0057]
     db $00                                  ; [$0057] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
 ;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollUp
-;     Something_SetupNewScreen
+;     Screen_LoadBlockDataVert
+;     Screen_SetupNew
 ;
-Something_Player_ScrollY:                   ; [$0058]
+PPU_ScrollScreenVert:                       ; [$0058]
     db $00                                  ; [$0058] byte
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     Maybe_Area_LoadBlocks
 ;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
-;     Screen_Something_ScrollHorizInternal
-;     Something_SetupNewScreen
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_SetupNew
 ;
-Something_Player_ScrollX:                   ; [$0059]
+PPU_ScrollScreenHoriz:                      ; [$0059]
     db $00                                  ; [$0059] byte
 
 
 ;============================================================================
-; Additional PPU state.
+; Default mode for the initial sprite when resetting sprite slots.
+;
+; This supports the following values:
+;
+; 0xFF = Don't add a default sprite 0.
+; 0x00 = Add a default sprite 0 at X=8, Y=23 (used in game)
+; 0x01 = Add a default sprite 0 at X=0, Y=72 (not used)
+;
+; XREFS:
+;     PPU_HandleOnInterrupt
+;     Sprites_Reset
+;     Sprites_ResetForGameScreen
+;     Sprites_ResetWithNoSprite0
+;     UNUSED_Sprites_ResetForDefaultsMode1
 ;============================================================================
 
 ;
-; TODO: Flag that seems to be used to prevent certain kinds of
-;       PPU updates. This needs to be investigated further.
-;
-;
 ; XREFS:
-;     FUN_PRG15_MIRROR__cb3f
-;     GameLoop_Maybe_SetupDrawState
 ;     PPU_HandleOnInterrupt
-;     Something_FrameAltToggle
-;     Something_FrameAltToggleWithPausePPU
+;     Sprites_Reset
+;     Sprites_ResetForGameScreen
+;     Sprites_ResetWithNoSprite0
+;     UNUSED_Sprites_ResetForDefaultsMode1
 ;
-PPU_Something_PauseUpdates:                 ; [$005a]
-    db $00                                  ; [$005a] bool
+Sprites_Sprite0Mode:                        ; [$005a]
+    db $00                                  ; [$005a] byte
 
-;
+
+;============================================================================
 ; Whether to force lower pattern tables when updating the PPU.
 ;
-;
 ; XREFS:
-;     FUN_PRG15_MIRROR__cb3f
-;     GameLoop_Maybe_SetupDrawState
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
 ;     PPU_WaitUntilFlushed
+;     Sprites_ResetForGameScreen
+;     UNUSED_Sprites_ResetForDefaultsMode1
+;============================================================================
+
+;
+; XREFS:
+;     Game_InitScreenAndMusic
+;     PPU_HandleOnInterrupt
+;     PPU_WaitUntilFlushed
+;     Sprites_ResetForGameScreen
+;     UNUSED_Sprites_ResetForDefaultsMode1
 ;
 PPU_ForceLowerPatternTables:                ; [$005b]
     db $00                                  ; [$005b] bool
@@ -1401,6 +1781,9 @@ PPU_ForceLowerPatternTables:                ; [$005b]
 
 ;============================================================================
 ; Screen block loading state.
+;
+; XREFS:
+;     Area_LoadBlocks
 ;============================================================================
 
 ;
@@ -1413,6 +1796,7 @@ PPU_ForceLowerPatternTables:                ; [$005b]
 Temp_LoadedBlockValue:                      ; [$005c]
     db $00                                  ; [$005c] byte
 
+
 ;
 ; Temporary variable used to store the loaded blocks count.
 ;
@@ -1422,6 +1806,7 @@ Temp_LoadedBlockValue:                      ; [$005c]
 ;
 Temp_LoadedBlocksCount:                     ; [$005d]
     db $00                                  ; [$005d] byte
+
 
 ;
 ; Current byte offset into the compressed screen data.
@@ -1434,6 +1819,7 @@ Temp_LoadedBlocksCount:                     ; [$005d]
 LoadCompressedScreenData_ByteOffset:        ; [$005e]
     db $00                                  ; [$005e] byte
 
+
 ;
 ; Current bit offset into the current compressed screen byte.
 ;
@@ -1444,6 +1830,7 @@ LoadCompressedScreenData_ByteOffset:        ; [$005e]
 ;
 LoadCompressedScreenData_BitOffset:         ; [$005f]
     db $00                                  ; [$005f] byte
+
 
 ;
 ; Current compressed screen byte being loaded from.
@@ -1462,30 +1849,59 @@ LoadCompressedScreenData_CurByte:           ; [$0060]
 ; This is used to store the address of each piece of
 ; equipment the player is wearing. That includes the
 ; player body/armor, the shield, and the weapon.
+;
+; XREFS:
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadWeaponSpriteTileAddrs
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_LoadArmorSprite
-;     Maybe_Player_LoadShieldSprite
-;     Maybe_Player_LoadWeaponSprite
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadWeaponSpriteTileAddrs
 ;
-PlayerSprite_ReadAddr_L:                    ; [$0061]
+Player_SpriteTileReadAddr_L:                ; [$0061]
     db $00                                  ; [$0061] byte
 
 ;
 ; XREFS:
-;     Maybe_Player_LoadArmorSprite
-;     Maybe_Player_LoadShieldSprite
-;     Maybe_Player_LoadWeaponSprite
+;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadWeaponSpriteTileAddrs
 ;
-PlayerSprite_ReadAddr_U:                    ; [$0062]
+Player_SpriteTileReadAddr_U:                ; [$0062]
     db $00                                  ; [$0062] byte
 
 
 ;============================================================================
 ; Area/screen information.
+;
+; XREFS:
+;     Area_ScrollScreenUp
+;     Area_ScrollToNextRoom
+;     Debug_ChooseArea
+;     EndGame_MoveToKingsRoom
+;     GameLoop_CheckShowPlayerMenu
+;     Game_DropLadderToMascon
+;     Game_EnterAreaHandler
+;     Game_EnterBuilding
+;     Game_LoadCurrentArea
+;     Game_LoadFirstLevel
+;     Game_SpawnInTemple
+;     Maybe_MoveDownOneScreen
+;     Player_CheckHandleClimbUp
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
+;     Player_MoveDownScreen
+;     Player_TryMoveLeft
+;     Player_TryMoveRight
+;     Screen_LoadAllScreenInfo
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_SetupNew
 ;============================================================================
 
 ;
@@ -1497,69 +1913,73 @@ PlayerSprite_ReadAddr_U:                    ; [$0062]
 ;
 ;
 ; XREFS:
-;     Area_ChangeArea
 ;     Area_ScrollScreenUp
 ;     Area_ScrollToNextRoom
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
-;     FUN_PRG15_MIRROR__df64
 ;     GameLoop_CheckShowPlayerMenu
 ;     Game_DropLadderToMascon
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
-;     Maybe_Area_LoadBlocks
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_MoveDownScreen
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Screen_LoadAllScreenInfo
-;     Screen_Something_ScrollHorizInternal
-;     Something_SetupNewScreen
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     Screen_SetupNew
 ;
 Area_CurrentScreen:                         ; [$0063]
     db $00                                  ; [$0063] byte
+
 
 ;
 ; The index of the screen being loaded.
 ;
 ;
 ; XREFS:
-;     Area_ChangeArea
 ;     EndGame_MoveToKingsRoom
-;     FUN_PRG15_MIRROR__df64
+;     Game_EnterAreaHandler
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_EnterDoorToInside
 ;     Player_EnterDoorToOutside
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
 Area_LoadingScreenIndex:                    ; [$0064]
     db $00                                  ; [$0064] byte
 
+
 ;
-; TODO: The area for the current screen.
+; TODO: The pallete for the current screen?
 ;
-; This isn't quite it.
+; Seems there's more to it than this. It might double as
+; a building type in places. (Seems this is the case.)
 ;
 ;
 ; XREFS:
-;     Area_ChangeArea
 ;     EndGame_MoveToKingsRoom
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
 ;     Player_CheckHandleEnterDoor
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_EnterDoorToInside
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
-Maybe_Screen_Area:                          ; [$0065]
-    db $00                                  ; [$0065] Area
+Screen_DestPaletteOrIndex:                  ; [$0065]
+    db $00                                  ; [$0065] Palette
+
 
 ;
 ; Screen to the left of the currently-visible screen.
@@ -1572,6 +1992,7 @@ Maybe_Screen_Area:                          ; [$0065]
 Area_ScreenToTheLeft:                       ; [$0066]
     db $00                                  ; [$0066] byte
 
+
 ;
 ; Screen to the right of the currently-visible screen.
 ;
@@ -1582,6 +2003,7 @@ Area_ScreenToTheLeft:                       ; [$0066]
 ;
 Area_ScreenToTheRight:                      ; [$0067]
     db $00                                  ; [$0067] byte
+
 
 ;
 ; Screen above the currently-visible screen.
@@ -1595,6 +2017,7 @@ Area_ScreenToTheRight:                      ; [$0067]
 Area_ScreenAbove:                           ; [$0068]
     db $00                                  ; [$0068] byte
 
+
 ;
 ; Screen below the currently-visible screen.
 ;
@@ -1607,6 +2030,7 @@ Area_ScreenAbove:                           ; [$0068]
 Area_ScreenBelow:                           ; [$0069]
     db $00                                  ; [$0069] byte
 
+
 ;
 ; Temporary variable used to store a block position.
 ;
@@ -1616,6 +2040,7 @@ Area_ScreenBelow:                           ; [$0069]
 ;
 Temp_BlockPos:                              ; [$006a]
     db $00                                  ; [$006a] byte
+
 
 ;
 ; Temporary variable used to store a block position.
@@ -1627,6 +2052,7 @@ Temp_BlockPos:                              ; [$006a]
 Temp_BlockPos2:                             ; [$006b]
     db $00                                  ; [$006b] byte
 
+
 ;
 ; Starting position for a player when changing screens.
 ;
@@ -1637,13 +2063,13 @@ Temp_BlockPos2:                             ; [$006b]
 ;
 ;
 ; XREFS:
-;     Area_ChangeArea
 ;     EndGame_MoveToKingsRoom
 ;     Game_ExitBuilding
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
+;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_EnterDoorToInside
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
 Screen_StartPosYX:                          ; [$006c]
     db $00                                  ; [$006c] byte
@@ -1651,54 +2077,65 @@ Screen_StartPosYX:                          ; [$006c]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 MaybeUnused_006d:                           ; [$006d]
     db $00                                  ; [$006d] byte
 
+
+;
+; The current operational mode during the scrolling process.
+;
+; This is managed when scrolling the screen horizontally or
+; vertically. It has the following supported values:
+;
+; 0x00: Load blocks from the area blocks data.
+;
+; 0x01: Draw blocks to the screen.
+;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d38e
-;     FUN_PRG15_MIRROR__d393
-;     FUN_PRG15_MIRROR__d3a6
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHoriz
-;     Screen_Something_ScrollHorizInternal
-;     Screen_Something_ScrollLeft
-;     Screen_Something_ScrollRight
+;     Screen_LoadAttrsHoriz
+;     Screen_LoadAttrsVert
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksDown
+;     Screen_LoadBlocksHoriz
+;     Screen_LoadDataLeft
+;     Screen_LoadDataRight
+;     Screen_LoadDataUp
 ;
-Something_Blocks_Counter_006E:              ; [$006e]
-    db $00                                  ; [$006e] byte
+Screen_ScrollLoadMode:                      ; [$006e]
+    db $00                                  ; [$006e] ScreenScrollLoadMode
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData1CurAddr:              ; [$006f]
     db $00                                  ; [$006f] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData2CurAddr:              ; [$0070]
     db $00                                  ; [$0070] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData3CurAddr:              ; [$0071]
     db $00                                  ; [$0071] byte
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData4CurAddr:              ; [$0072]
     db $00                                  ; [$0072] byte
@@ -1706,43 +2143,43 @@ CurrentArea_BlockData4CurAddr:              ; [$0072]
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d61d
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_RunWriteScrollDataHandler
 ;
-Something_0073:                             ; [$0073]
-    db $00                                  ; [$0073] byte
+Screen_ScrollVertBlocksLoaded:              ; [$0073]
+    db $00                                  ; [$0073] bool
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
-Something_0074:                             ; [$0074]
-    db $00                                  ; [$0074] byte
+Screen_ScrollHorizBlocksLoaded:             ; [$0074]
+    db $00                                  ; [$0074] bool
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
 ;
-Something_0075:                             ; [$0075]
-    db $00                                  ; [$0075] byte
+Screen_MaybeUnused_0075:                    ; [$0075]
+    db $00                                  ; [$0075] bool
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
-Something_0076:                             ; [$0076]
-    db $00                                  ; [$0076] byte
+Screen_ScrollHorizAttrsLoaded:              ; [$0076]
+    db $00                                  ; [$0076] bool
 
 ;
 ; XREFS:
 ;     Area_Maybe_ShowRoomTransition
-;     FUN_PRG15_MIRROR__d61d
+;     Screen_RunWriteScrollDataHandler
 ;
-Something_0077:                             ; [$0077]
-    db $00                                  ; [$0077] byte
+SomethingScroll_0077:                       ; [$0077]
+    db $00                                  ; [$0077] bool
 
     db $00,$00                              ; [$0079] undefined
 
@@ -1777,46 +2214,47 @@ CurrentArea_TableAddr.U:                    ; [$007d]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d82d
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
-;     TextBox_Maybe_GetPaletteBehindTextbox
+;     Area_SetBlocks_SetAttributes
+;     Game_LoadAreaTable
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;     TextBox_GetBackingAttributeData
 ;
 CurrentArea_BlockAttributesAddr:            ; [$007e]
     db $00,$00                              ; [$007e] byte
 
 ;
 ; XREFS:
-;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Area_SetBlocks_WriteBlockData12
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData1StartAddr:            ; [$0080]
     db $00,$00                              ; [$0080] byte
 
 ;
 ; XREFS:
-;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Area_SetBlocks_WriteBlockData12
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData2StartAddr:            ; [$0082]
     db $00,$00                              ; [$0082] byte
 
 ;
 ; XREFS:
-;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Area_SetBlocks_WriteBlockData34
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData3StartAddr:            ; [$0084]
     db $00,$00                              ; [$0084] byte
 
 ;
 ; XREFS:
-;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     Maybe_Area_LoadBlocks
-;     Screen_Something_ScrollHorizInternal
+;     Area_SetBlocks_WriteBlockData34
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
 ;
 CurrentArea_BlockData4StartAddr:            ; [$0086]
     db $00,$00                              ; [$0086] byte
@@ -1852,13 +2290,14 @@ CurrentArea_ScrollingDataAddr:              ; [$008a]
 ScrollingData_U:                            ; [$008b]
     db $00                                  ; [$008b] byte
 
+
 ;
 ; Current area's ROM bank.
 ;
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     FUN_PRG15_MIRROR__df64
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
@@ -1897,48 +2336,67 @@ CurrentArea_DoorDestinationsAddr:           ; [$008f]
 CurrentArea_DoorDestinationsAddr.U:         ; [$0090]
     db $00                                  ; [$0090] byte
 
+
+;============================================================================
+; Upper and lower bytes of a PPU address for player sprite rendering.
+;
+; This is used during sprite loading and drawing. These form
+; the address in the PPU where the player body, armor,
+; shield, or weapon tiles will be loaded.
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_UpdateArmorSprite
-;     Maybe_Player_UpdateWeaponSprite
-;     Player_Something_ShieldState
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
+;============================================================================
+
 ;
-Maybe_Player_AccessorySpriteAddr_U:         ; [$0091]
+; XREFS:
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
+;
+Player_SpriteSegmentPPUAddr_L:              ; [$0091]
     db $00                                  ; [$0091] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_UpdateArmorSprite
-;     Maybe_Player_UpdateWeaponSprite
-;     Player_Something_ShieldState
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
 ;
-Maybe_Player_AccessorySpriteAddr_L:         ; [$0092]
+Player_SpriteSegmentPPUAddr_U:              ; [$0092]
     db $00                                  ; [$0092] byte
 
 ;
 ; XREFS:
-;     CHR_LoadTilesetPages
+;     Area_LoadTiles
 ;
-TilesAddress:                               ; [$0093]
+Area_TilesReadAddress:                      ; [$0093]
     dw $0000                                ; [$0093] ushort
 
 ;
 ; XREFS:
-;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__df64
+;     Area_LoadTiles
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;
-TilesIndex:                                 ; [$0095]
+Area_TilesIndex:                            ; [$0095]
     db $00                                  ; [$0095] byte
 
 
 ;============================================================================
 ; Image data addresses for the sprite being drawn.
+;
+; XREFS:
+;     LookupSpriteDataPointer
+;     _copySpriteImage [$PRG15_MIRROR::cdea]
 ;============================================================================
 
 ;
@@ -1951,6 +2409,7 @@ TilesIndex:                                 ; [$0095]
 ;
 CurrentSprite_Image_L:                      ; [$0096]
     db $00                                  ; [$0096] byte
+
 
 ;
 ; Upper byte of pointer to bitmap data of current sprite.
@@ -1965,6 +2424,10 @@ CurrentSprite_Image_U:                      ; [$0097]
 
 ;============================================================================
 ; PPU row/column information for pending draws.
+;
+; XREFS:
+;     PPU_ResetOffset
+;     Sprites_LoadImageForCurrentSprite
 ;============================================================================
 
 ;
@@ -1972,22 +2435,24 @@ CurrentSprite_Image_U:                      ; [$0097]
 ;
 ;
 ; XREFS:
-;     PPUResetOffset
+;     PPU_ResetOffset
 ;     Sprites_LoadImageForCurrentSprite
 ;
 PPUOffset_Col:                              ; [$0098]
     db $00                                  ; [$0098] byte
+
 
 ;
 ; The PPU row of the next tile
 ;
 ;
 ; XREFS:
-;     PPUResetOffset
+;     PPU_ResetOffset
 ;     Sprites_LoadImageForCurrentSprite
 ;
 PPUOffset_Row:                              ; [$0099]
     db $00                                  ; [$0099] byte
+
 
 ;
 ; The PPU index of the next tile.
@@ -2003,6 +2468,10 @@ PPUOffset_Index:                            ; [$009a]
 
 ;============================================================================
 ; Number of PPU tiles the current sprite needs.
+;
+; XREFS:
+;     LookupSpriteDataPointer
+;     Sprites_LoadImageForCurrentSprite
 ;============================================================================
 
 ;
@@ -2019,6 +2488,10 @@ UNUSED_009C:                                ; [$009c]
 
 ;============================================================================
 ; Player information.
+;
+; XREFS:
+;     Player_TryMoveLeft
+;     Player_TryMoveRight
 ;============================================================================
 
 ;
@@ -2029,8 +2502,9 @@ UNUSED_009C:                                ; [$009c]
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;
-PlayerPosX_Frac:                            ; [$009d]
+Player_PosX_Frac:                           ; [$009d]
     db $00                                  ; [$009d] byte
+
 
 ;
 ; X position of the player (full points).
@@ -2064,24 +2538,26 @@ PlayerPosX_Frac:                            ; [$009d]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Game_EnterBuilding
 ;     Game_MovePlayerOnScroll
+;     Game_MovePlayerOnScrollLeft
 ;     Game_SpawnInTemple
 ;     Player_CheckHandleClimb
 ;     Player_CheckHandleJump
 ;     Player_CheckIfOnLadder
+;     Player_CheckIfPassable
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
 ;     Player_DrawBody
-;     Player_FallToGround
 ;     Player_IsClimbing
-;     Player_Maybe_MoveIfPassable
 ;     Player_SetPosAtRightEdge
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;     Player_UseMattock
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
-PlayerPosX_Full:                            ; [$009e]
+Player_PosX_Block:                          ; [$009e]
     db $00                                  ; [$009e] byte
+
 
 ;
 ; MAYBE: Some kind of counter used when scrolling a screen.
@@ -2097,12 +2573,13 @@ PlayerPosX_Full:                            ; [$009e]
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     Player_DrawWeapon
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     Game_MovePlayerOnScroll
+;     Game_MovePlayerOnScrollLeft
 ;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Player_TryMoveRight
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
 Screen_Maybe_ScrollXCounter:                ; [$009f]
     db $00                                  ; [$009f] byte
@@ -2116,6 +2593,7 @@ Screen_Maybe_ScrollXCounter:                ; [$009f]
 BYTE_00a0:                                  ; [$00a0]
     db $00                                  ; [$00a0] byte
 
+
 ;
 ; Y position of the player
 ;
@@ -2123,7 +2601,7 @@ BYTE_00a0:                                  ; [$00a0]
 ;
 ;
 ; XREFS:
-;     GetTextBoxCoordinates
+;     TextBox_SetCoordsForNPC
 ;     CurrentSprite_CheckHitPlayer
 ;     Player_CastMagic
 ;     Player_DrawShield
@@ -2151,18 +2629,18 @@ BYTE_00a0:                                  ; [$00a0]
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckIfOnLadder
+;     Player_CheckIfPassable
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
 ;     Player_ContinueHandleClimbOrJump
 ;     Player_DrawBody
-;     Player_FallToGround
-;     Player_Maybe_MoveIfPassable
 ;     Player_MoveDownScreen
 ;     Player_SetPosAtBottomEdge
 ;     Player_UseMattock
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
-PlayerPosY:                                 ; [$00a1]
+Player_PosY:                                ; [$00a1]
     db $00                                  ; [$00a1] byte
 
 ;
@@ -2170,16 +2648,17 @@ PlayerPosY:                                 ; [$00a1]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawWeapon
 ;     Area_ScrollScreenUp
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
 ;     Player_DrawBody
 ;     Player_MoveDownScreen
 ;     Player_SetInitialState
-;     Something_SetupNewScreen
+;     Screen_SetupNew
 ;
 Player_Something_ScrollPosY:                ; [$00a2]
-    db $00                                  ; [$00a2] undefined1
+    db $00                                  ; [$00a2] byte
+
 
 ;
 ; Tick counter that updates only while moving horizontally.
@@ -2199,6 +2678,7 @@ Player_Something_ScrollPosY:                ; [$00a2]
 ;
 Player_MovementTick:                        ; [$00a3]
     db $00                                  ; [$00a3] byte
+
 
 ;
 ; Current player flags.
@@ -2241,11 +2721,11 @@ Player_MovementTick:                        ; [$00a3]
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckHandleJump
 ;     Player_CheckIfOnLadder
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
 ;     Player_ClearJumpingAndHoldingToClimb
 ;     Player_ContinueHandleClimbOrJump
 ;     Player_EnterDoorToInside
-;     Player_FallToGround
 ;     Player_GetBodySpriteFrameOffset
 ;     Player_HandleDeath
 ;     Player_HandleKnockback
@@ -2260,6 +2740,7 @@ Player_MovementTick:                        ; [$00a3]
 ;
 Player_Flags:                               ; [$00a4]
     db $00                                  ; [$00a4] PlayerFlags
+
 
 ;
 ; Player status bits.
@@ -2303,23 +2784,24 @@ Something_Player_ClimbLadderCheckPos:       ; [$00a6]
 ;
 ; XREFS:
 ;     Player_DrawWeapon
-;     Maybe_Player_UpdateArmorSprite
+;     Player_LoadArmorSprite
 ;
-Maybe_Player_NormArmorState:                ; [$00a7]
+Player_ArmorLookupIndex:                    ; [$00a7]
     db $00                                  ; [$00a7] byte
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     Maybe_Player_DrawSprite
-;     Maybe_Player_UpdateArmorSprite
-;     Maybe_Player_UpdateVisibleItemStates
-;     Maybe_Player_UpdateWeaponSprite
+;     Player_DrawSprite
+;     Player_DrawSpriteImmediately
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_LoadWeaponSprite
 ;     Player_SetInitialState
-;     Player_Something_ShieldState
 ;
-Maybe_Player_DAT_00a8:                      ; [$00a8]
+Player_DrawTileReadOffset:                  ; [$00a8]
     db $00                                  ; [$00a8] byte
+
 
 ;
 ; Player's walk/run aceleration.
@@ -2353,8 +2835,9 @@ Player_MoveAcceleration.U:                  ; [$00aa]
 ; XREFS:
 ;     Player_SetInitialState
 ;
-Maybe_Player_DAT_00ab:                      ; [$00ab]
+Player_Unused_00ab:                         ; [$00ab]
     db $00                                  ; [$00ab] undefined
+
 
 ;
 ; Time spent in the current attack phase.
@@ -2365,6 +2848,7 @@ Maybe_Player_DAT_00ab:                      ; [$00ab]
 ;
 PlayerHitsPhaseTimer:                       ; [$00ac]
     db $00                                  ; [$00ac] byte
+
 
 ;
 ; Remaining time of invincibility after player was hit by enemy.
@@ -2381,6 +2865,7 @@ PlayerHitsPhaseTimer:                       ; [$00ac]
 ;
 Player_InvincibilityPhase:                  ; [$00ad]
     db $00                                  ; [$00ad] byte
+
 
 ;
 ; Current attack phase of the player.
@@ -2406,6 +2891,7 @@ PlayerHitsPhaseCounter:                     ; [$00ae]
 Maybe_ClimbLadderOffset:                    ; [$00b1]
     db $00                                  ; [$00b1] byte
 
+
 ;
 ; Player X position managed during screen scroll.
 ;
@@ -2413,10 +2899,12 @@ Maybe_ClimbLadderOffset:                    ; [$00b1]
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;     Game_MovePlayerOnScroll
+;     Game_MovePlayerOnScrollLeft
 ;     Player_DrawBody
 ;
 Maybe_PlayerX_ForScroll:                    ; [$00b2]
     db $00                                  ; [$00b2] byte
+
 
 ;
 ; Player Y position managed during screen scroll.
@@ -2430,6 +2918,7 @@ Maybe_PlayerX_ForScroll:                    ; [$00b2]
 Maybe_PlayerY_ForScroll:                    ; [$00b3]
     db $00                                  ; [$00b3] byte
 
+
 ;
 ; Counter incrementing while the screen scrolls.
 ;
@@ -2440,6 +2929,7 @@ Maybe_PlayerY_ForScroll:                    ; [$00b3]
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;     Game_MovePlayerOnScroll
+;     Game_MovePlayerOnScrollLeft
 ;     Game_UpdatePlayerOnScroll
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
@@ -2450,6 +2940,29 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 
 ;============================================================================
 ; Arguments and results for block-related lookups.
+;
+; XREFS:
+;     CastMagic_Maybe_CheckRightEdgeOrImpassable
+;     CastMagic_Maybe_CheckXOrImpassable
+;     CurrentSprite_CalculateVisibility
+;     CurrentSprite_CalculateVisibility_MaybeWithArg
+;     CurrentSprite_CanMoveInDirection
+;     FUN_PRG14__854c
+;     FUN_PRG14__86bd
+;     MoveRight
+;     SpriteBehavior_NecronAides
+;     Area_CanMoveImmediatelyRight
+;     Area_CanPlayerMoveLeft
+;     Area_CanPlayerMoveRight
+;     Area_CheckCanClimbAdjacent
+;     Area_ConvertPixelsToBlockPos
+;     Area_SetStateFromDoorDestination
+;     CastMagic_CalculateVisibility
+;     Player_CheckIfOnLadder
+;     Player_CheckOnBreakableBlock
+;     Player_CheckPushingBlock
+;     Player_CheckSwitchScreen
+;     Player_UseMattock
 ;============================================================================
 
 ;
@@ -2475,13 +2988,14 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 ;     Area_SetStateFromDoorDestination
 ;     CastMagic_CalculateVisibility
 ;     Player_CheckIfOnLadder
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
-;     Player_FallToGround
 ;     Player_UseMattock
 ;
 Arg_PixelPosX:                              ; [$00b5]
     db $00                                  ; [$00b5] byte
+
 
 ;
 ; Y coordinates of an object (see
@@ -2503,14 +3017,15 @@ Arg_PixelPosX:                              ; [$00b5]
 ;     Area_SetStateFromDoorDestination
 ;     CastMagic_CalculateVisibility
 ;     Player_CheckIfOnLadder
+;     Player_CheckIfPassable
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
 ;     Player_CheckSwitchScreen
-;     Player_FallToGround
-;     Player_Maybe_MoveIfPassable
 ;     Player_UseMattock
 ;
 Arg_PixelPosY:                              ; [$00b6]
     db $00                                  ; [$00b6] byte
+
 
 ;
 ; Result from a block-related computation.
@@ -2537,15 +3052,15 @@ Arg_PixelPosY:                              ; [$00b6]
 ;     Area_CanPlayerMoveLeft
 ;     Area_CanPlayerMoveUp
 ;     Area_CheckCanClimbAdjacent
+;     Area_HandleBreakableFloor
 ;     Area_IsBlockClimbable
 ;     Area_SetStateFromDoorDestination
 ;     Area_StoreBlockIsAir
-;     FUN_PRG15_MIRROR__d6ce
 ;     Player_CheckHandleClimbMaybeSide
 ;     Player_CheckHandleEnterDoor
 ;     Player_CheckIfOnLadder
-;     Player_FallToGround
-;     Player_Maybe_MoveIfPassable
+;     Player_CheckIfPassable
+;     Player_CheckOnBreakableBlock
 ;
 Blocks_Result:                              ; [$00b7]
     db $00                                  ; [$00b7] byte
@@ -2553,6 +3068,11 @@ Blocks_Result:                              ; [$00b7]
 
 ;============================================================================
 ; Sprite management.
+;
+; XREFS:
+;     CurrentSprite_CalculateVisibility
+;     CurrentSprite_CalculateVisibility_MaybeWithArg
+;     CastMagic_CalculateVisibility
 ;============================================================================
 
 ;
@@ -2580,11 +3100,13 @@ Temp_MovingSpriteVisibility:                ; [$00b8]
 Temp_HitBoxValue:                           ; [$00b9]
     db $00                                  ; [$00b9] byte
 
+
 ;
 ; X coordinates of the current 8 active sprites.
 ;
 ;
 ; XREFS:
+;     BScript_Action_CastMagic
 ;     CastMagic_HitHandler_Deluge
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_UpdateState
@@ -2599,14 +3121,13 @@ Temp_HitBoxValue:                           ; [$00b9]
 ;     FUN_PRG14__a0ad
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     LAB_PRG14__851e [$PRG14::851e]
 ;     Maybe_Sprite_HandleDeathDrop
 ;     MoveSpriteHorizIfPossible
-;     SpriteAction_CastMagic
 ;     SpriteAction_FacePlayerX
 ;     SpriteBehavior_BossDeath
 ;     SpriteBehavior_EnemyUnused43
 ;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_Ishiisu_Something_850d
 ;     SpriteBehavior_KingGrieve_9f65
 ;     SpriteBehavior_Magman
 ;     SpriteBehavior_Nash
@@ -2637,11 +3158,13 @@ CurrentSprites_XPos_Full:                   ; [$00ba]
 CurrentSprites_XPos_Full_7_:                ; [$00c1]
     db $00                                  ; [7]:
 
+
 ;
 ; Y coordinates of the current 8 active sprites.
 ;
 ;
 ; XREFS:
+;     BScript_Action_CastMagic
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
@@ -2656,7 +3179,6 @@ CurrentSprites_XPos_Full_7_:                ; [$00c1]
 ;     FUN_PRG14__a1cc
 ;     Maybe_Sprite_HandleDeathDrop
 ;     MoveSpriteVerticalIfPossible
-;     SpriteAction_CastMagic
 ;     SpriteAction_FacePlayerY
 ;     SpriteBehavior_BossDeath
 ;     SpriteBehavior_EnemyUnused43
@@ -2694,6 +3216,7 @@ CurrentSprites_YPos:                        ; [$00c2]
 ;
 CurrentSprites_YPos_7_:                     ; [$00c9]
     db $00                                  ; [7]:
+
 
 ;
 ; An address used to read sprite-related information.
@@ -2797,6 +3320,10 @@ DrawWeapon_Unused_00D1:                     ; [$00d1]
 
 ;============================================================================
 ; Range of the currently-selected weapon
+;
+; XREFS:
+;     Player_DrawWeapon
+;     Sprites_IsSpriteOutOfWeaponRange
 ;============================================================================
 
 ;
@@ -2822,6 +3349,11 @@ Maybe_WeaponRange_Y:                        ; [$00d3]
 ; This is normally completed by opening all fountains
 ; and clearing the final block, dropping down a ladder
 ; to Mascon.
+;
+; XREFS:
+;     Game_DropLadderToMascon
+;     Player_CheckPushingBlock
+;     ScreenEvents_HandlePathToMasconEvent
 ;============================================================================
 
 ;
@@ -2838,6 +3370,7 @@ Maybe_WeaponRange_Y:                        ; [$00d3]
 ;
 PathToMascon_Opening:                       ; [$00d4]
     db $00                                  ; [$00d4] bool
+
 
 ;
 ; The position of the fountain covering block before Mascon.
@@ -2858,6 +3391,9 @@ PathToMascon_FountainCoverPos:              ; [$00d5]
 
 ;============================================================================
 ; Counts for how long the player pushed against the block before Mascon
+;
+; XREFS:
+;     Player_CheckPushingBlock
 ;============================================================================
 
 ;
@@ -2870,6 +3406,10 @@ BlockPushCounter:                           ; [$00d7]
 
 ;============================================================================
 ; State for animating the ladder on the path to Mascon.
+;
+; XREFS:
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
 ;============================================================================
 
 ;
@@ -2883,6 +3423,7 @@ BlockPushCounter:                           ; [$00d7]
 ;
 PathToMascon_LadderPos:                     ; [$00d8]
     db $00                                  ; [$00d8] byte
+
 
 ;
 ; The number of ladder blocks remaining to place when dropping
@@ -2903,6 +3444,9 @@ PathToMascon_LadderBlocksRemaining:         ; [$00d9]
 ; This is used by GetRandom to help generate
 ; pseudo-random values based on the first 256 bytes of bank 14
 ; XOR'd with the controller 1 bitmask.
+;
+; XREFS:
+;     GetRandom
 ;============================================================================
 
 ;
@@ -2915,6 +3459,15 @@ Random_Offset:                              ; [$00da]
 
 ;============================================================================
 ; IScript and cross-bank call invocation.
+;
+; XREFS:
+;     IScripts_Begin
+;     IScripts_JumpToNextAddr
+;     IScripts_LoadByte
+;     SplashAnimation_DrawScenery
+;     StartScreen_Draw
+;     PPU_WriteTilesFromCHRRAM
+;     UI_DrawHUDSprites
 ;============================================================================
 
 ;
@@ -2929,7 +3482,7 @@ Random_Offset:                              ; [$00da]
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
 ;     PPU_WriteTilesFromCHRRAM
-;     UI_DrawStatusSymbols
+;     UI_DrawHUDSprites
 ;
 IScriptOrCHRAddr:                           ; [$00db]
     db $00                                  ; [$00db] byte
@@ -2942,10 +3495,11 @@ IScriptOrCHRAddr:                           ; [$00db]
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
 ;     PPU_WriteTilesFromCHRRAM
-;     UI_DrawStatusSymbols
+;     UI_DrawHUDSprites
 ;
 IScriptOrCHRAddr.U:                         ; [$00dc]
     db $00                                  ; [$00dc] byte
+
 
 ;
 ; The current offset into the IScript being executed.
@@ -2959,6 +3513,7 @@ IScriptOrCHRAddr.U:                         ; [$00dc]
 IScriptOffset:                              ; [$00dd]
     db $00                                  ; [$00dd] byte
 
+
 ;
 ; Contents of the "A" register saved before performing a
 ; banked call for an IScript or other operation.
@@ -2970,6 +3525,7 @@ IScriptOffset:                              ; [$00dd]
 BankedCallSetup_SavedA:                     ; [$00de]
     db $00                                  ; [$00de] byte
 
+
 ;
 ; Contents of the "X" register saved before performing a
 ; banked call for an IScript or other operation.
@@ -2980,6 +3536,7 @@ BankedCallSetup_SavedA:                     ; [$00de]
 ;
 BankedCallSetup_SavedX:                     ; [$00df]
     db $00                                  ; [$00df] byte
+
 
 ;
 ; Contents of the "Y" register saved before performing a
@@ -3001,6 +3558,35 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 
 ;============================================================================
 ; PPU drawing-related state.
+;
+; XREFS:
+;     PasswordScreen_DrawMessage
+;     PasswordScreen_WriteCharTile
+;     SplashAnimation_DrawScenery
+;     StartScreen_Draw
+;     TextBox_DrawItemImage
+;     TextBox_FillBackground
+;     Area_SetBlocks
+;     Area_SetBlocks_SetAttributes
+;     Area_SetPPUAddrForBlockIndex
+;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_ShowPortraitImage
+;     PPUBuffer_QueueCommandOrLength
+;     PPU_IncrementAddrBy
+;     PPU_SetAddrForTextBoxPos
+;     PPU_WriteTilesFromCHRRAM
+;     Player_DrawWeaponTile
+;     Player_SetItem
+;     TextBox_ClearTextTiles
+;     TextBox_Maybe_WriteLineOfChars
+;     TextBox_ShowMessage_Fill4Lines
+;     UI_ClearSelectedItemPic
+;     UI_DrawGoldValue
+;     UI_DrawHUDSprites
+;     UI_DrawManaOrHPBar
+;     UI_DrawPlayerExperience
+;     UI_DrawTimeValue
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;============================================================================
 
 ;
@@ -3008,142 +3594,134 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;
 ;
 ; XREFS:
-;     FUN_PRG12__92ed
-;     Maybe_DrawItemName
-;     Maybe_Draw_Textbox_Something8F51
 ;     PasswordScreen_DrawMessage
+;     PasswordScreen_WriteCharTile
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
+;     TextBox_DrawItemImage
+;     TextBox_FillBackground
 ;     Area_SetBlocks
-;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f24d
-;     FUN_PRG15_MIRROR__f316
+;     Area_SetBlocks_SetAttributes
+;     Area_SetPPUAddrForBlockIndex
+;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_ShowPortraitImage
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPU_IncrementAddrBy
-;     PPU_SetAddrForTextPos
+;     PPU_SetAddrForTextBoxPos
 ;     PPU_WriteTilesFromCHRRAM
+;     Player_DrawWeaponTile
 ;     Player_SetItem
-;     Something_SetPPUAddrForXYTransformed
-;     TextBox_ClearSizeAtOffset
+;     TextBox_ClearTextTiles
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_Fill4Lines
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawGoldValue
+;     UI_DrawHUDSprites
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
-;     UI_DrawStatusSymbols
 ;     UI_DrawTimeValue
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPU_TargetAddr:                             ; [$00e8]
     db $00                                  ; [$00e8] byte
 
 ;
 ; XREFS:
-;     FUN_PRG12__92ed
-;     Maybe_DrawItemName
-;     Maybe_Draw_Textbox_Something8F51
 ;     PasswordScreen_DrawMessage
+;     PasswordScreen_WriteCharTile
 ;     SplashAnimation_DrawScenery
 ;     StartScreen_Draw
+;     TextBox_DrawItemImage
+;     TextBox_FillBackground
 ;     Area_SetBlocks
-;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__d82d
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f24d
-;     FUN_PRG15_MIRROR__f316
+;     Area_SetBlocks_SetAttributes
+;     Area_SetPPUAddrForBlockIndex
+;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_ShowPortraitImage
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPU_IncrementAddrBy
-;     PPU_SetAddrForTextPos
+;     PPU_SetAddrForTextBoxPos
 ;     PPU_WriteTilesFromCHRRAM
+;     Player_DrawWeaponTile
 ;     Player_SetItem
-;     Something_SetPPUAddrForXYTransformed
-;     TextBox_ClearSizeAtOffset
+;     TextBox_ClearTextTiles
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_Fill4Lines
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawGoldValue
+;     UI_DrawHUDSprites
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
-;     UI_DrawStatusSymbols
 ;     UI_DrawTimeValue
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPU_TargetAddr.U:                           ; [$00e9]
     db $00                                  ; [$00e9] byte
 
-;
-; Tile X position where text will be drawn in a textbox.
-;
-;
-; XREFS:
-;     FUN_PRG12__87fe
-;     FUN_PRG12__880e
-;     FUN_PRG12__8c04
-;     FUN_PRG12__9041
-;     IScriptAction_AddInventoryItem
-;     IScriptAction_AddItem_Something8EC1
-;     IScripts_Something_81E8
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
-;     Shop_Draw
-;     Shop_DrawItemStrings
-;     SplashAnimation_FuncAA94
-;     TextBox_Maybe_Draw
-;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__f7b7
-;     PPU_SetAddrForTextPos
-;     TextBox_Maybe_GetPaletteBehindTextbox
-;     TextBox_ShowMessage_Fill4Lines
-;
-TextBox_TextX:                              ; [$00ea]
-    db $00                                  ; [$00ea] byte
 
 ;
-; Tile Y position where text will be drawn in a textbox.
+; Tile X position where text or images will be drawn in a
+; textbox.
 ;
 ;
 ; XREFS:
-;     FUN_PRG12__87fe
-;     FUN_PRG12__880e
-;     FUN_PRG12__8c04
+;     DEADCODE_FUN_PRG12__9041
 ;     IScriptAction_AddInventoryItem
-;     IScriptAction_AddItem_Something8EC1
-;     IScripts_Something_81E8
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     Shop_DrawItemStrings
 ;     SplashAnimation_FuncAA94
-;     TextBox_Maybe_Draw
-;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__f7b7
-;     PPU_SetAddrForTextPos
-;     TextBox_Maybe_GetPaletteBehindTextbox
+;     TextBox_Close
+;     TextBox_DrawStringLines
+;     TextBox_FillBackground
+;     TextBox_GetNextAttributeDataOffset
+;     TextBox_Open
+;     TextBox_SetNextAttributeData
+;     PPU_SetAddrForTextBoxPos
+;     TextBox_GetBackingAttributeData
 ;     TextBox_ShowMessage_Fill4Lines
+;     Textbox_Maybe_GetAreaBehindTextbox
 ;
-TextBox_TextY:                              ; [$00eb]
+TextBox_ContentsX:                          ; [$00ea]
+    db $00                                  ; [$00ea] byte
+
+
+;
+; Tile Y position where text or images will be drawn in a
+; textbox.
+;
+;
+; XREFS:
+;     IScriptAction_AddInventoryItem
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Shop_Draw
+;     SplashAnimation_FuncAA94
+;     TextBox_Close
+;     TextBox_DrawStringLines
+;     TextBox_FillBackground
+;     TextBox_GetNextAttributeDataOffset
+;     TextBox_Open
+;     TextBox_SetNextAttributeData
+;     PPU_SetAddrForTextBoxPos
+;     TextBox_GetBackingAttributeData
+;     TextBox_ShowMessage_Fill4Lines
+;     Textbox_Maybe_GetAreaBehindTextbox
+;
+TextBox_ContentsY:                          ; [$00eb]
     db $00                                  ; [$00eb] byte
 
 
 ;============================================================================
 ; Additional temporary variables.
-;============================================================================
-
-;
-; Temporary variable most often used for 24-bit values.
-;
-; This is not exclusive to 24-bit values. In some places, this
-; is used for 16-bit values. In others, 8-bit values.
-;
 ;
 ; XREFS:
-;     FUN_PRG12__880e
-;     FUN_PRG12__9075
-;     FUN_PRG12__aa20
-;     FUN_PRG12__aa46
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
 ;     IScriptAction_SpendGold
@@ -3151,33 +3729,36 @@ TextBox_TextY:                              ; [$00eb]
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
 ;     IScripts_SellMenu_Something8704
-;     Maybe_DrawItemName
-;     Maybe_DrawItemTitle
-;     Maybe_Draw_Textbox_Something8F51
+;     Menu_UpdateAndDraw
 ;     PasswordScreen_DrawMessage
 ;     PasswordScreen_Show
 ;     Password_DecodeValue
 ;     Password_EncodeValue
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Shop_Draw
+;     Shop_GetPlayerHasSelectedItem
 ;     Shop_Populate
-;     Something_ShopCursorInventory
+;     SpashAnimation_SomethingOutro_aa20
+;     SpashAnimation_SomethingOutro_aa46
 ;     SplashAnimation_A90F
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_FuncAA94
 ;     SplashAnimation_Maybe_NextAnimState1
 ;     SplashAnimation_Maybe_NextAnimState2
 ;     StartScreen_Draw
-;     Strings_Draw
+;     TextBox_DrawItemImage
+;     TextBox_DrawItemName
+;     TextBox_FillBackground
+;     TextBox_SetNextAttributeData
+;     UI_DrawString
 ;     UI_DrawText
-;     UI_ShowPlayerMenu
 ;     Player_AddExperienceFromSprite
-;     FUN_PRG15_MIRROR__f7b7
-;     FUN_PRG15_MIRROR__fbaf
-;     FUN_PRG15_MIRROR__fbf0
 ;     MMC1_LoadBankAndJump
 ;     Messages_Load
 ;     PPUBuffer_WriteFromTemp
@@ -3188,53 +3769,128 @@ TextBox_TextY:                              ; [$00eb]
 ;     Player_AddGold
 ;     Player_SubtractGold
 ;     Player_UpdateExperience
-;     TextBox_Maybe_GetPaletteBehindTextbox
+;     TextBox_DisplayMessage
+;     TextBox_GetBackingAttributeData
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowMessage_LoadMessage
 ;     TextBox_ShowMessage_Pause
 ;     TextBox_ShowMessage_Space
-;     TextBox_Something_ShowMessage_f4a2
+;     Textbox_Maybe_GetAreaBehindTextbox
 ;     UI_DrawDigitsZeroPadded
 ;     UI_DrawGoldValue
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
+;     UI_DrawSelectedItem
 ;     UI_DrawTimeValue
 ;     UI_GetValueForDigit
-;
-Temp_Int24:                                 ; [$00ec]
-    db $00                                  ; [$00ec] byte
+;     UI_Maybe_GetItemSpritePPUTileAddr
+;============================================================================
 
 ;
+; Temporary variable most often used for 24-bit values.
+;
+; This is not exclusive to 24-bit values. In some places, this
+; is used for 16-bit values. In others, 8-bit values.
+;
+;
 ; XREFS:
-;     FUN_PRG12__87fe
-;     FUN_PRG12__880e
-;     FUN_PRG12__aa20
-;     FUN_PRG12__aa46
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
 ;     IScriptAction_SpendGold
 ;     IScripts_CheckEnoughMoney
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
-;     Maybe_DrawItemTitle
+;     IScripts_SellMenu_Something8704
+;     Menu_UpdateAndDraw
 ;     PasswordScreen_DrawMessage
 ;     PasswordScreen_Show
+;     Password_DecodeValue
 ;     Password_EncodeValue
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Shop_Draw
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
+;     Shop_Populate
+;     SpashAnimation_SomethingOutro_aa20
+;     SpashAnimation_SomethingOutro_aa46
+;     SplashAnimation_A90F
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_FuncAA94
 ;     SplashAnimation_Maybe_NextAnimState1
 ;     SplashAnimation_Maybe_NextAnimState2
 ;     StartScreen_Draw
-;     UI_ShowPlayerMenu
+;     TextBox_DrawItemImage
+;     TextBox_DrawItemName
+;     TextBox_FillBackground
+;     TextBox_SetNextAttributeData
+;     UI_DrawString
+;     UI_DrawText
 ;     Player_AddExperienceFromSprite
-;     FUN_PRG15_MIRROR__f7b7
-;     FUN_PRG15_MIRROR__fbf0
+;     MMC1_LoadBankAndJump
+;     Messages_Load
+;     PPUBuffer_WriteFromTemp
+;     PPU_LoadGlyphsForStrings
+;     PPU_WriteGlyphTile
+;     PPU_WriteTilesFromCHRRAM
+;     Player_Add100XP
+;     Player_AddGold
+;     Player_SubtractGold
+;     Player_UpdateExperience
+;     TextBox_DisplayMessage
+;     TextBox_GetBackingAttributeData
+;     TextBox_Maybe_WriteLineOfChars
+;     TextBox_ShowMessage_LoadMessage
+;     TextBox_ShowMessage_Pause
+;     TextBox_ShowMessage_Space
+;     Textbox_Maybe_GetAreaBehindTextbox
+;     UI_DrawDigitsZeroPadded
+;     UI_DrawGoldValue
+;     UI_DrawManaOrHPBar
+;     UI_DrawPlayerExperience
+;     UI_DrawSelectedItem
+;     UI_DrawTimeValue
+;     UI_GetValueForDigit
+;     UI_Maybe_GetItemSpritePPUTileAddr
+;
+Temp_Int24:                                 ; [$00ec]
+    db $00                                  ; [$00ec] byte
+
+;
+; XREFS:
+;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
+;     IScriptAction_SpendGold
+;     IScripts_CheckEnoughMoney
+;     IScripts_ProgressivelyAddGold
+;     IScripts_ProgressivelySubtractGold
+;     PasswordScreen_DrawMessage
+;     PasswordScreen_Show
+;     Password_EncodeValue
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Player_AddToInventory
+;     Player_LacksItem
+;     Player_RemoveItem
+;     Shop_Draw
+;     Shop_GetPlayerHasSelectedItem
+;     SpashAnimation_SomethingOutro_aa20
+;     SpashAnimation_SomethingOutro_aa46
+;     SplashAnimation_DrawScenery
+;     SplashAnimation_FuncAA94
+;     SplashAnimation_Maybe_NextAnimState1
+;     SplashAnimation_Maybe_NextAnimState2
+;     StartScreen_Draw
+;     TextBox_DrawItemName
+;     TextBox_GetNextAttributeDataOffset
+;     TextBox_SetNextAttributeData
+;     Player_AddExperienceFromSprite
 ;     MMC1_LoadBankAndJump
 ;     Messages_Load
 ;     PPU_LoadGlyphsForStrings
@@ -3246,10 +3902,12 @@ Temp_Int24:                                 ; [$00ec]
 ;     TextBox_ShowMessage_LoadMessage
 ;     TextBox_ShowMessage_Pause
 ;     TextBox_ShowMessage_Space
+;     Textbox_Maybe_GetAreaBehindTextbox
 ;     UI_DrawGoldValue
 ;     UI_DrawPlayerExperience
 ;     UI_DrawTimeValue
 ;     UI_GetValueForDigit
+;     UI_Maybe_GetItemSpritePPUTileAddr
 ;
 Temp_Int24.M:                               ; [$00ed]
     db $00                                  ; [$00ed] byte
@@ -3261,15 +3919,15 @@ Temp_Int24.M:                               ; [$00ed]
 ;     Password_EncodeGameState
 ;     Password_EncodeValueList
 ;     Password_Load
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
 ;     Player_AddToInventory
 ;     Player_RemoveItem
 ;     Shop_Draw
 ;     SplashAnimation_FuncAA94
 ;     StartScreen_Draw
-;     Strings_Draw
+;     UI_DrawString
 ;     MMC1_LoadBankAndJump
-;     Player_DrawItemInternal
+;     TextBox_LoadItemSourceTiles
 ;     UI_DrawGoldValue
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
@@ -3286,7 +3944,7 @@ Temp_Int24.U:                               ; [$00ee]
 ;     Password_Load
 ;     Player_RemoveItem
 ;     MMC1_LoadBankAndJump
-;     Player_DrawItemInternal
+;     TextBox_LoadItemSourceTiles
 ;     UI_DrawManaOrHPBar
 ;
 Maybe_Temp4:                                ; [$00ef]
@@ -3300,45 +3958,47 @@ Maybe_Temp4:                                ; [$00ef]
 
 
 ;============================================================================
-; All music notes being played.
+; Current msuic script address for all 4 channels.
+;
+; XREFS:
+;     MScript_Op_BeginLoop
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_End
+;     MScript_Op_EndLoop
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_Restart
+;     MScript_Op_RestoreAddr
+;     MScript_Op_Return
+;     MScript_Op_SaveAddr_Inner
 ;============================================================================
-CurrentMusicInfo1:                          ; [$00f2]
-    db $00                                  ; [$00f2] byte
-
-CurrentMusicInfo2:                          ; [$00f3]
-    db $00                                  ; [$00f3] byte
-
-CurrentMusicInfo3:                          ; [$00f4]
-    db $00                                  ; [$00f4] byte
-
-CurrentMusicInfo4:                          ; [$00f5]
-    db $00                                  ; [$00f5] byte
-
-CurrentMusicInfo5:                          ; [$00f6]
-    db $00                                  ; [$00f6] byte
-
-CurrentMusicInfo6:                          ; [$00f7]
-    db $00                                  ; [$00f7] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     MScript_Op_BeginLoop
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_End
+;     MScript_Op_EndLoop
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_Restart
+;     MScript_Op_RestoreAddr
+;     MScript_Op_Return
+;     MScript_Op_SaveAddr_Inner
 ;
-CurrentMusicInfo7:                          ; [$00f8]
-    db $00                                  ; [$00f8] byte
+Music_CurrentScriptAddrs:                   ; [$00f2]
+    dw $0000                                ; [0]:
+    dw $0000                                ; [1]:
+    dw $0000                                ; [2]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
-CurrentMusicInfo8:                          ; [$00f9]
-    db $00                                  ; [$00f9] byte
+Music_CurrentScriptAddrs_3_:                ; [$00f8]
+    dw $0000                                ; [3]:
 
 
 ;============================================================================
 ; XXX Music, but MSB seems to be set when playing?
-;============================================================================
-
 ;
 ; XREFS:
 ;     SplashAnimation_RunIntro
@@ -3346,7 +4006,7 @@ CurrentMusicInfo8:                          ; [$00f9]
 ;     StartScreen_Draw
 ;     SpriteBehavior_ShadowEura
 ;     Area_BeginScrollToNextRoom
-;     FUN_PRG15_MIRROR__df64
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
@@ -3357,9 +4017,37 @@ CurrentMusicInfo8:                          ; [$00f9]
 ;     Player_UseHourGlass
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandleFinalBossKilled
+;     Audio_HandleIsPaused
 ;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8106
-;     FUN_PRG5__84b7
+;     Audio_LoadMusic
+;     Audio_PlayMusic
+;     MScript_Op_Restart
+;     Sound_InitPlayingState
+;============================================================================
+
+;
+; XREFS:
+;     SplashAnimation_RunIntro
+;     SplashAnimation_RunOutro
+;     StartScreen_Draw
+;     SpriteBehavior_ShadowEura
+;     Area_BeginScrollToNextRoom
+;     Game_EnterAreaHandler
+;     Game_EnterBuilding
+;     Game_ExitBuilding
+;     Game_LoadCurrentArea
+;     Game_LoadFirstLevel
+;     Game_ShowStartScreen
+;     Player_CheckHandleEnterDoor
+;     Player_HandleDeath
+;     Player_UseHourGlass
+;     ScreenEvents_HandleBoss
+;     ScreenEvents_HandleFinalBossKilled
+;     Audio_HandleIsPaused
+;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
+;     Audio_PlayMusic
+;     MScript_Op_Restart
 ;     Sound_InitPlayingState
 ;
 CurrentMusic:                               ; [$00fa]
@@ -3381,60 +4069,109 @@ irq:                                        ; [$00ff]
 
 
 ;============================================================================
-; The currently-loaded ROM bank
-;============================================================================
-
+; The currently-loaded ROM bank used for logic.
 ;
 ; XREFS:
 ;     Area_LoadBlockProperties
+;     Area_LoadTiles
 ;     Area_ScrollToNextRoom
 ;     Area_SetBlocks
 ;     Area_SetStateFromDoorDestination
-;     CHR_LoadTilesetPages
-;     FUN_PRG15_MIRROR__ee93
-;     FUN_PRG15_MIRROR__eea9
-;     FUN_PRG15_MIRROR__eebf
 ;     FUN_PRG15_MIRROR__f2e3
-;     FUN_PRG15_MIRROR__f316
-;     FUN_PRG15_MIRROR__f7b7
-;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_LoadSpriteInfo
 ;     Game_DrawScreenInFrozenState
 ;     Game_InitMMCAndBank
 ;     Game_InitScreenAndMusic
 ;     Game_LoadAreaTable
-;     LoadPalette2
-;     LoadPalette
+;     IScripts_Maybe_DrawSpriteToPPU
 ;     LookupSpriteDataPointer
 ;     MMC1_EnsurePRG
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SavePRGBankAndUpdateTo
-;     MMC1_UpdatePRGBank
-;     Maybe_LoadSpritesFromBank8
-;     Maybe_Player_LoadArmorSprite
-;     Maybe_Player_LoadShieldSprite
-;     Maybe_Player_LoadWeaponSprite
+;     MMC1_UpdateROMBank
 ;     Messages_Load
 ;     OnInterrupt
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_WriteTilesFromCHRRAM
-;     Palette_PopulateData
-;     Player_DrawItemInternal
+;     Player_DrawArmorTile
+;     Player_DrawShieldTile
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadWeaponSpriteTileAddrs
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
 ;     Screen_HandleScrollUp
-;     Sprite_Maybe_SetAppearanceAddrFromOffset
+;     Screen_LoadBackgroundPalette
+;     Screen_LoadPalette
+;     Screen_SetFadeOutPalette
+;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
 ;     Sprite_SetPortraitAppearanceAddr
+;     Sprites_LoadCommon
 ;     Sprites_LoadSpriteValue
-;     TextBox_Maybe_GetPaletteBehindTextbox
-;     TextBox_Maybe_ShowNextCharFromBank
+;     TextBox_GetBackingAttributeData
+;     TextBox_LoadAndShowMessage
+;     TextBox_LoadItemSourceTiles
 ;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
+;     Textbox_Maybe_GetAreaBehindTextbox
+;     UI_DrawSelectedItem
+;     _loadSpriteToPPUBuffer [$PRG15_MIRROR::cdd1]
+;============================================================================
+
+;
+; XREFS:
+;     Area_LoadBlockProperties
+;     Area_LoadTiles
+;     Area_ScrollToNextRoom
+;     Area_SetBlocks
+;     Area_SetStateFromDoorDestination
+;     FUN_PRG15_MIRROR__f2e3
+;     GameLoop_LoadSpriteInfo
+;     Game_DrawScreenInFrozenState
+;     Game_InitMMCAndBank
+;     Game_InitScreenAndMusic
+;     Game_LoadAreaTable
+;     IScripts_Maybe_DrawSpriteToPPU
+;     LookupSpriteDataPointer
+;     MMC1_EnsurePRG
+;     MMC1_LoadBankAndJump
+;     MMC1_SavePRGBankAndUpdateTo
+;     MMC1_UpdateROMBank
+;     Messages_Load
+;     OnInterrupt
+;     PPU_LoadGlyphsForStrings
+;     PPU_WriteTilesFromCHRRAM
+;     Player_DrawArmorTile
+;     Player_DrawShieldTile
+;     Player_DrawWeaponTile
+;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadWeaponSpriteTileAddrs
+;     Screen_HandleScrollDown
+;     Screen_HandleScrollLeft
+;     Screen_HandleScrollRight
+;     Screen_HandleScrollUp
+;     Screen_LoadBackgroundPalette
+;     Screen_LoadPalette
+;     Screen_SetFadeOutPalette
+;     Sprite_SetAppearanceAddrFromOffset
+;     Sprite_SetPlayerAppearanceAddr
+;     Sprite_SetPortraitAppearanceAddr
+;     Sprites_LoadCommon
+;     Sprites_LoadSpriteValue
+;     TextBox_GetBackingAttributeData
+;     TextBox_LoadAndShowMessage
+;     TextBox_LoadItemSourceTiles
+;     TextBox_Maybe_WriteLineOfChars
+;     TextBox_ShowNextChar
+;     Textbox_Maybe_GetAreaBehindTextbox
+;     UI_DrawSelectedItem
 ;     _loadSpriteToPPUBuffer [$PRG15_MIRROR::cdd1]
 ;
-CurrentROMBank2:                            ; [$0100]
+CurrentROMBank:                             ; [$0100]
     db $00                                  ; [$0100] ROMBank
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0101] undefined
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0111] undefined
@@ -3442,12 +4179,20 @@ CurrentROMBank2:                            ; [$0100]
 
 ;============================================================================
 ; Whether the game is currently paused.
+;
+; XREFS:
+;     GameLoop_CheckPauseGame
+;     Game_InitScreenAndMusic
+;     Audio_HandleIsPaused
+;     Audio_HandleOnInterrupt
+;     Sound_InitPlayingState
 ;============================================================================
 
 ;
 ; XREFS:
 ;     GameLoop_CheckPauseGame
 ;     Game_InitScreenAndMusic
+;     Audio_HandleIsPaused
 ;     Audio_HandleOnInterrupt
 ;     Sound_InitPlayingState
 ;
@@ -3457,6 +4202,12 @@ PauseFlag:                                  ; [$0120]
 
 ;============================================================================
 ; The ID of the current sound being played.
+;
+; XREFS:
+;     PlaySoundInner
+;     Sound_Init
+;     Sound_InitPlayingState
+;     Sound_ResetCurrentSound
 ;============================================================================
 
 ;
@@ -3480,17 +4231,39 @@ SOUND_DAT_0122:                             ; [$0122]
 
 ;
 ; XREFS:
-;     FUN_PRG5__8132
-;     FUN_PRG5__820d
-;     FUN_PRG5__8326
+;     Music_PlayForChannel
+;     Music_PlayWave
+;     Music_UpdateSQLo
+;     SoundEffect_Handler_PlayerDied
 ;     Sound_HandleOnInterrupt
 ;     Sound_Init
 ;
-SOUND_DAT_0123:                             ; [$0123]
+SoundEffects:                               ; [$0123]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
+;     SoundEffect_Handler_0x48
+;     SoundEffect_Handler_BreadTouched
+;     SoundEffect_Handler_CharacterInput
+;     SoundEffect_Handler_CoinDropped
+;     SoundEffect_Handler_CoinTouchedCommon
+;     SoundEffect_Handler_CursorMoved
+;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_Handler_GoldAmountChanged
+;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_Handler_HitPlayer
+;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_Handler_Magic
+;     SoundEffect_Handler_Maybe_Typing
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_Handler_Pakukame
+;     SoundEffect_Handler_PasswordCharInput
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_ShieldHitByMagic
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_Handler_Tilte
 ;     Sound_HandleOnInterrupt
 ;     Sound_Init
 ;
@@ -3499,7 +4272,8 @@ SOUND_DAT_0124:                             ; [$0124]
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_HandleIsPaused
+;     SoundEffect_Handler_PlayerDied
 ;     Sound_HandleOnInterrupt
 ;     Sound_Init
 ;
@@ -3508,89 +4282,180 @@ SOUND_DAT_0125:                             ; [$0125]
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__82ff
+;     Audio_HandleIsPaused
+;     Music_PlayNoise
+;     SoundEffect_Handler_0x48
+;     SoundEffect_Handler_EnemyDied
+;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_Handler_LadderDropped
+;     SoundEffect_Handler_MagicHitObstacle
+;     SoundEffect_Handler_Maybe_Step
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_Message
+;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_PushBlock
+;     SoundEffect_Handler_Tilte
 ;     Sound_HandleOnInterrupt
 ;     Sound_Init
 ;
 SOUND_DAT_0126:                             ; [$0126]
     db $00                                  ; [3]:
-    db $00                                  ; [$0127] undefined1
-
-    db $00,$00                              ; [$0129] undefined
 
 ;
 ; XREFS:
-;     FUN_PRG5__8ed1
+;     SoundEffect_Handler_0x48
+;     SoundEffect_Handler_BreadTouched
+;     SoundEffect_Handler_CharacterInput
+;     SoundEffect_Handler_CoinDropped
+;     SoundEffect_Handler_CoinTouchedCommon
+;     SoundEffect_Handler_CursorMoved
+;     SoundEffect_Handler_EnemyDied
+;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_Handler_GoldAmountChanged
+;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_Handler_HitPlayer
+;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_Handler_LadderDropped
+;     SoundEffect_Handler_Magic
+;     SoundEffect_Handler_MagicHitObstacle
+;     SoundEffect_Handler_Maybe_Step
+;     SoundEffect_Handler_Maybe_Typing
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_Message
+;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_Handler_Pakukame
+;     SoundEffect_Handler_PasswordCharInput
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_PushBlock
+;     SoundEffect_Handler_ShieldHitByMagic
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_Handler_Tilte
 ;
-BYTE_012a:                                  ; [$012a]
+SoundEffect_MaybeIndex:                     ; [$0127]
+    db $00                                  ; [$0127] byte
+
+;
+; XREFS:
+;     SoundEffect_Handler_0x48
+;     SoundEffect_Handler_BreadTouched
+;     SoundEffect_Handler_CoinTouchedCommon
+;     SoundEffect_Handler_CursorMoved
+;     SoundEffect_Handler_EnemyDied
+;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_Handler_Magic
+;     SoundEffect_Handler_MagicHitObstacle
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_Handler_Tilte
+;
+SoundEffect_State_0128:                     ; [$0128]
+    db $00                                  ; [$0128] byte
+
+;
+; XREFS:
+;     SoundEffect_Handler_0x48
+;     SoundEffect_Handler_BreadTouched
+;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_Handler_Tilte
+;
+SoundEffect_State_0129:                     ; [$0129]
+    db $00                                  ; [$0129] byte
+
+;
+; XREFS:
+;     SoundEffect_Handler_CharacterInput
+;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_Handler_HitPlayer
+;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_Handler_Maybe_Typing
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_SetNote
+;
+SoundEffect_Note_Low:                       ; [$012a]
     db $00                                  ; [$012a] byte
 
 ;
 ; XREFS:
-;     FUN_PRG5__8ed1
+;     SoundEffect_Handler_CharacterInput
+;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_Handler_HitPlayer
+;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_Handler_Maybe_Typing
+;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_SetNote
 ;
-BYTE_012b:                                  ; [$012b]
+SoundEffect_Note_High:                      ; [$012b]
     db $00                                  ; [$012b] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8298
-;     FUN_PRG5__83ad
+;     Audio_LoadMusic
+;     MScripts_InvokeNext_Something_8298
+;     Music_StoreRepeat
 ;
-BYTE_012c:                                  ; [$012c]
-    db $00                                  ; [$012c] byte
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;
-Something_Music_012d:                       ; [$012d]
-    db $00                                  ; [$012d] byte
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;
-Something_Music_012e:                       ; [$012e]
-    db $00                                  ; [$012e] byte
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;
-Something_Music_012f:                       ; [$012f]
-    db $00                                  ; [$012f] byte
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8106
-;     FUN_PRG5__83ad
-;     FUN_PRG5__8408
-;
-Something_Music_0130:                       ; [$0130]
+MScript_RepeatCounts:                       ; [$012c]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8106
+;     Audio_LoadMusic
+;
+Something_Music_012d:                       ; [$012d]
+    db $00                                  ; [1]:
+
+;
+; XREFS:
+;     Audio_LoadMusic
+;
+Something_Music_012e:                       ; [$012e]
+    db $00                                  ; [2]:
+
+;
+; XREFS:
+;     Audio_LoadMusic
+;
+Something_Music_012f:                       ; [$012f]
+    db $00                                  ; [3]:
+
+;
+; XREFS:
+;     Audio_LoadMusic
+;     Audio_PlayMusic
+;     MScript_Op_End
+;     Music_StoreRepeat
+;
+Music_Repeats:                              ; [$0130]
+    db $00                                  ; [0]:
+
+;
+; XREFS:
+;     Audio_LoadMusic
+;     Audio_PlayMusic
 ;
 Something_Music_0131:                       ; [$0131]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0132:                       ; [$0132]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0133:                       ; [$0133]
     db $00                                  ; [3]:
@@ -3598,417 +4463,485 @@ Something_Music_0133:                       ; [$0133]
 
 ;
 ; XREFS:
-;     FUN_PRG5__841f
-;     FUN_PRG5__8458
+;     MScript_Op_BeginLoop
+;     MScript_Op_EndLoop
 ;
-DAT_0138:                                   ; [$0138]
-    db $00                                  ; [$0138] undefined
+MScript_LoopStartAddrs:                     ; [$0138]
+    dw $0000                                ; [0]:
+    dw $0000                                ; [1]:
+    dw $0000                                ; [2]:
+    dw $0000                                ; [3]:
 
 ;
 ; XREFS:
-;     FUN_PRG5__841f
-;     FUN_PRG5__8458
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_EndLoop
 ;
-DAT_0139:                                   ; [$0139]
-    db $00,$00,$00,$00,$00,$00,$00          ; [$0139] undefined
+MScript_LoopEndAddrs:                       ; [$0140]
+    dw $0000                                ; [0]:
+    dw $0000                                ; [1]:
+    dw $0000                                ; [2]:
+    dw $0000                                ; [3]:
 
 ;
 ; XREFS:
-;     FUN_PRG5__843d
-;     FUN_PRG5__8458
+;     MScript_Op_BeginLoop
+;     MScript_Op_EndLoop
 ;
-DAT_0140:                                   ; [$0140]
-    db $00                                  ; [$0140] undefined
+MScript_LoopLength:                         ; [$0148]
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
 
 ;
 ; XREFS:
-;     FUN_PRG5__843d
-;     FUN_PRG5__8458
+;     MScript_Op_BeginLoop
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_EndLoop
 ;
-DAT_0141:                                   ; [$0141]
-    db $00,$00,$00,$00,$00,$00,$00          ; [$0141] undefined
+MScript_LoopCounter:                        ; [$014c]
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
 
 ;
 ; XREFS:
-;     FUN_PRG5__841f
-;     FUN_PRG5__8458
+;     Audio_LoadMusic
+;     MScript_Op_RestoreAddr
+;     MScript_Op_SaveAddr_Inner
 ;
-DAT_0148:                                   ; [$0148]
-    db $00,$00,$00,$00                      ; [$0148] undefined
+MScript_SavedAddr:                          ; [$0150]
+    dw $0000,$0000,$0000,$0000              ; [$0150] ushort
+
+
+;============================================================================
+; Pushed MScript addresses for jumping to/returning from subroutines.
+;
+; There's one per channel.
+;
+; XREFS:
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_Return
+;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG5__841f
-;     FUN_PRG5__843d
-;     FUN_PRG5__8458
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_Return
 ;
-DAT_014c:                                   ; [$014c]
-    db $00,$00,$00,$00                      ; [$014c] undefined
+MScript_PushedAddrs:                        ; [$0158]
+    dw $0000,$0000,$0000,$0000              ; [$0158] ushort
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8495
-;     FUN_PRG5__84a5
+;     Audio_LoadMusic
+;     MScript_Op_0xF7
+;     Music_SetNote
 ;
-DAT_0150:                                   ; [$0150]
-    db $00                                  ; [$0150] undefined
+MScript_Maybe_8BitCounter:                  ; [$0160]
+    db $00                                  ; [$0160] byte
 
 ;
 ; XREFS:
-;     FUN_PRG5__8495
-;     FUN_PRG5__84a5
+;     Audio_LoadMusic
+;     MScript_Op_SetWaveHigh
+;     Music_SetNote
 ;
-DAT_0151:                                   ; [$0151]
-    db $00,$00,$00,$00,$00,$00,$00          ; [$0151] undefined
-
-;
-; XREFS:
-;     FUN_PRG5__84d0
-;     FUN_PRG5__84f0
-;
-DAT_0158:                                   ; [$0158]
-    db $00                                  ; [$0158] undefined
-
-;
-; XREFS:
-;     FUN_PRG5__84d0
-;     FUN_PRG5__84f0
-;
-DAT_0159:                                   ; [$0159]
-    db $00,$00,$00,$00,$00,$00,$00          ; [$0159] undefined
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__83cd
-;     FUN_PRG5__850e
-;
-Music_Something_8Counter:                   ; [$0160]
-    db $00                                  ; [$0160] undefined1
-
-;
-; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__83cd
-;     FUN_PRG5__8502
-;
-Something_Music_0161:                       ; [$0161]
+Music_Wave_Length_Highs:                    ; [$0161]
     db $00                                  ; [$0161] undefined
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0162:                       ; [$0162]
     db $00                                  ; [$0162] undefined
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0163:                       ; [$0163]
     db $00                                  ; [$0163] undefined
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8298
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     MScripts_InvokeNext_Something_8298
+;     Music_PlayWave
 ;
-Something_Music_0164:                       ; [$0164]
+Music_SQ_Note_Lengths:                      ; [$0164]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     Music_PlayWave
 ;
-Something_Music_0165:                       ; [$0165]
+Music_Note_Length_High:                     ; [$0165]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
-Something_Music_0166:                       ; [$0166]
-    db $00                                  ; [2]:
+Music_Unused:                               ; [$0166]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
-Something_Music_0167:                       ; [$0167]
-    db $00                                  ; [3]:
+Music_Unused_1_:                            ; [$0167]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG5__82e3
-;     FUN_PRG5__82ff
+;     Music_PlayNoise
+;     Music_PlayWaveOrNoise
 ;
-BYTE_0168:                                  ; [$0168]
+Music_Noise_Index:                          ; [$0168]
     db $00                                  ; [$0168] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__823a
-;     FUN_PRG5__82e3
-;     FUN_PRG5__82ff
+;     Audio_LoadMusic
+;     MScripts_InvokeNext
+;     Music_PlayNoise
+;     Music_PlayWaveOrNoise
 ;
-Something_Music_0169:                       ; [$0169]
+Music_Noise_Remaining:                      ; [$0169]
     db $00                                  ; [$0169] byte
 
+
+;============================================================================
+; The index into the sound channel data.
+;
+; Sound channels are in the following order:
+;
+; 0 = Square wave 1
+; 1 = Square wave 2
+; 2 = Triangle wave
+; 3 = Noise
 ;
 ; XREFS:
-;     FUN_PRG5__8106
-;     FUN_PRG5__8132
-;     FUN_PRG5__81f1
-;     FUN_PRG5__820d
-;     FUN_PRG5__823a
-;     FUN_PRG5__8298
-;     FUN_PRG5__82e3
-;     FUN_PRG5__8326
-;     FUN_PRG5__83ad
-;     FUN_PRG5__83cd
-;     FUN_PRG5__8408
-;     FUN_PRG5__841f
-;     FUN_PRG5__843d
-;     FUN_PRG5__8458
-;     FUN_PRG5__8483
-;     FUN_PRG5__8495
-;     FUN_PRG5__84a5
-;     FUN_PRG5__84d0
-;     FUN_PRG5__84f0
-;     FUN_PRG5__8502
-;     FUN_PRG5__8517
-;     FUN_PRG5__8523
-;     FUN_PRG5__852f
-;     FUN_PRG5__8544
-;
-Maybe_SomethingMusicDestOffset:             ; [$016a]
-    db $00                                  ; [$016a] byte
+;     Audio_PlayMusic
+;     MScript_Op_0xEF
+;     MScript_Op_0xF0
+;     MScript_Op_0xF2
+;     MScript_Op_BeginLoop
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_End
+;     MScript_Op_EndLoop
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_RestoreAddr
+;     MScript_Op_Return
+;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SetSQVol
+;     MScript_Op_SetWaveHigh
+;     MScripts_GetNextValue
+;     MScripts_InvokeNext
+;     MScripts_InvokeNext_Something_8298
+;     Music_PlayForChannel
+;     Music_PlayWave
+;     Music_PlayWaveOrNoise
+;     Music_SetNote
+;     Music_StoreRepeat
+;     Music_UpdateSQLo
+;     Music_UpdateSQVol
+;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG5__8106
-;     FUN_PRG5__8408
+;     Audio_PlayMusic
+;     MScript_Op_0xEF
+;     MScript_Op_0xF0
+;     MScript_Op_0xF2
+;     MScript_Op_BeginLoop
+;     MScript_Op_ContinueIfNLoops
+;     MScript_Op_End
+;     MScript_Op_EndLoop
+;     MScript_Op_JumpSubroutine
+;     MScript_Op_RestoreAddr
+;     MScript_Op_Return
+;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SetSQVol
+;     MScript_Op_SetWaveHigh
+;     MScripts_GetNextValue
+;     MScripts_InvokeNext
+;     MScripts_InvokeNext_Something_8298
+;     Music_PlayForChannel
+;     Music_PlayWave
+;     Music_PlayWaveOrNoise
+;     Music_SetNote
+;     Music_StoreRepeat
+;     Music_UpdateSQLo
+;     Music_UpdateSQVol
 ;
-Maybe_Something_MusicCounter:               ; [$016b]
+MScript_CurrentChannel:                     ; [$016a]
+    db $00                                  ; [$016a] byte
+
+
+;============================================================================
+; Number of channels completed for the current song.
+;
+; This starts at 0. Once it hits 4, playback finishes and
+; CurrentMusic is cleared.
+;
+; XREFS:
+;     Audio_PlayMusic
+;     MScript_Op_End
+;============================================================================
+
+;
+; XREFS:
+;     Audio_PlayMusic
+;     MScript_Op_End
+;
+Music_NumChannelsCompleted:                 ; [$016b]
     db $00                                  ; [$016b] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8132
-;     FUN_PRG5__81f1
-;     FUN_PRG5__823a
-;     FUN_PRG5__828e
-;     FUN_PRG5__8298
-;     FUN_PRG5__8326
-;     FUN_PRG5__83b7
-;     FUN_PRG5__83cd
+;     Audio_LoadMusic
+;     MScripts_InvokeNext
+;     MScripts_InvokeNext_Something_828e
+;     MScripts_InvokeNext_Something_8298
+;     Music_PlayForChannel
+;     Music_PlayTriangleWave
+;     Music_PlayWave
+;     Music_SetNote
+;     Music_UpdateSQVol
 ;
-Something_Music_016c:                       ; [$016c]
+MScript_CurValue:                           ; [$016c]
     db $00                                  ; [$016c] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
-;     FUN_PRG5__83cd
+;     Audio_LoadMusic
+;     Music_PlayWave
+;     Music_SetNote
 ;
-Something_Music_016d:                       ; [$016d]
+Music_Note_Period_Low:                      ; [$016d]
     db $00                                  ; [$016d] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
-;     FUN_PRG5__83cd
+;     Audio_LoadMusic
+;     Music_PlayWave
+;     Music_SetNote
 ;
-Something_Music_016e:                       ; [$016e]
+Music_Note_Period_High:                     ; [$016e]
     db $00                                  ; [$016e] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__83cd
+;     Audio_LoadMusic
+;     Music_SetNote
 ;
-Something_Music_016f:                       ; [$016f]
+Maybe_Unused_Music_016f:                    ; [$016f]
     db $00                                  ; [$016f] byte
 
 ;
 ; XREFS:
-;     FUN_PRG5__8132
-;     FUN_PRG5__8326
+;     Music_PlayForChannel
+;     Music_PlayWave
 ;
-BYTE_0170:                                  ; [$0170]
-    db $00,$00                              ; [$0170] byte
+Music_SQEffect_CurValue:                    ; [$0170]
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__81f1
-;     FUN_PRG5__8483
+;     Audio_LoadMusic
+;     MScript_Op_0xF2
+;     Music_UpdateSQVol
 ;
-Something_Music_0172:                       ; [$0172]
-    db $00                                  ; [$0172] byte
+Something_Music_SQ_0172:                    ; [$0172]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0173:                       ; [$0173]
-    db $00                                  ; [$0173] byte
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__81f1
-;     FUN_PRG5__8517
+;     Audio_LoadMusic
+;     MScript_Op_SetSQVol
+;     Music_UpdateSQVol
 ;
-Something_Music_0174:                       ; [$0174]
-    db $00                                  ; [$0174] byte
+Music_SQ_Vol:                               ; [$0174]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0175:                       ; [$0175]
-    db $00                                  ; [$0175] byte
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8132
-;     FUN_PRG5__8523
+;     Audio_LoadMusic
+;     MScript_Op_0xF0
+;     Music_PlayForChannel
 ;
-Something_Music_0176:                       ; [$0176]
-    db $00                                  ; [$0176] byte
+Music_SQEffect_Mode:                        ; [$0176]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0177:                       ; [$0177]
-    db $00                                  ; [$0177] byte
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__820d
-;     FUN_PRG5__83b7
+;     Audio_LoadMusic
+;     Music_PlayTriangleWave
+;     Music_UpdateSQLo
 ;
 Something_Music_0178:                       ; [$0178]
-    db $00                                  ; [$0178] byte
+    db $00                                  ; [$0178] undefined1
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8132
-;     FUN_PRG5__820d
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     Music_PlayForChannel
+;     Music_PlayWave
+;     Music_UpdateSQLo
 ;
-Something_Music_0179:                       ; [$0179]
-    db $00                                  ; [$0179] byte
+Music_SQEffect_Counter:                     ; [$0179]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     Music_PlayWave
 ;
 Something_Music_017a:                       ; [$017a]
-    db $00,$00                              ; [$017a] byte
+    db $00                                  ; [1]:
+    db $00                                  ; [$017b] undefined
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__820d
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     Music_PlayWave
+;     Music_UpdateSQLo
 ;
-Something_Music_017c:                       ; [$017c]
-    db $00                                  ; [$017c] byte
+Music_Current_SQ_Low:                       ; [$017c]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
+;     Audio_LoadMusic
+;     Music_PlayWave
 ;
-Something_Music_017d:                       ; [$017d]
-    db $00                                  ; [$017d] byte
+Music_SQ2_Low:                              ; [$017d]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8132
-;     FUN_PRG5__83b7
+;     Audio_LoadMusic
+;     Music_PlayForChannel
+;     Music_PlayTriangleWave
 ;
-Something_Music_017e:                       ; [$017e]
+Something_Music_Triangle_017e:              ; [$017e]
     db $00                                  ; [$017e] byte
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__820d
-;     FUN_PRG5__852f
+;     Audio_LoadMusic
+;     MScript_Op_0xEF
+;     Music_UpdateSQLo
 ;
-Something_Music_017f:                       ; [$017f]
-    db $00                                  ; [$017f] byte
+Music_Something_SQ_017f:                    ; [$017f]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Audio_LoadMusic
 ;
 Something_Music_0180:                       ; [$0180]
-    db $00                                  ; [$0180] byte
+    db $00                                  ; [1]:
+
+
+;============================================================================
+; A reduction in the length of the SQ2 wave note lengths.
+;
+; XREFS:
+;     Audio_LoadMusic
+;     MScript_Op_0xEE
+;     Music_PlayWave
+;============================================================================
 
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
-;     FUN_PRG5__8326
-;     FUN_PRG5__853b
+;     Audio_LoadMusic
+;     MScript_Op_0xEE
+;     Music_PlayWave
 ;
-Something_Music_0181:                       ; [$0181]
-    db $00                                  ; [$0181] byte
+Music_SQ2_Length_Reduction:                 ; [$0181]
+    hex 00 00 00 00 00 00 00 00 00          ; [$0181] undefined
 
-    hex 00 00 00 00 00 00 00 00             ; [$0183] undefined
+
+;============================================================================
+; Data zero'd out during horizontal screen scroll.
+;
+; This is written to but never read or otherwise used.
+;
+; XREFS:
+;     Screen_LoadBlocksHoriz
+;============================================================================
 
 ;
 ; XREFS:
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
-DAT_018a:                                   ; [$018a]
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$018a] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$019a] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01aa] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ba] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ca] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01da] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01ea] undefined
-    db $00,$00,$00,$00,$00,$00              ; [$01fa] undefined
+Screen_ScrollHoriz_ZeroData:                ; [$018a]
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $00                                  ; [4]:
+    db $00                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0192] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01a2] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01b2] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01c2] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01d2] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01e2] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$01f2] undefined
 
 ;
 ; XREFS:
 ;     IScripts_Begin
-;     FUN_PRG15_MIRROR__d673
 ;     Game_Init
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUTileData
 ;
 Temp_0200:                                  ; [$0200]
     db $00                                  ; [$0200] byte
 
 ;
 ; XREFS:
-;     GetTextBoxCoordinates
 ;     IScriptAction_EndScript
 ;     IScripts_Begin
 ;     IScripts_UpdatePortraitAnimation
-;     FUN_PRG15_MIRROR__d673
-;     Screen_Something_ScrollHorizInternal
+;     TextBox_SetCoordsForNPC
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUTileData
 ;
-IScriptEntity:                              ; [$0201]
-    db $00                                  ; [$0201] IScriptEntity
+Temp_0201:                                  ; [$0201]
+    db $00                                  ; [$0201] byte
 
 ;
 ; XREFS:
@@ -4018,7 +4951,7 @@ IScriptEntity:                              ; [$0201]
 ;     IScriptAction_SpendGold
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
 Temp_0202:                                  ; [$0202]
     db $00                                  ; [$0202] byte
@@ -4031,7 +4964,7 @@ Temp_0202:                                  ; [$0202]
 ;     IScriptAction_SpendGold
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
 ;
 Temp_0203:                                  ; [$0203]
     db $00                                  ; [$0203] byte
@@ -4063,29 +4996,53 @@ IScripts_Unused_207:                        ; [$0207]
 
 ;============================================================================
 ; X tile position of a displayed textbox.
+;
+; XREFS:
+;     IScriptAction_AddInventoryItem
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_Close
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Shop_Draw
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawStringLines
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     TextBox_FillBackground
+;     TextBox_GetXPixelCoord
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
+;     TextBox_ShowMessage_Fill4Lines
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8bed
-;     FUN_PRG12__8c04
-;     GetTextBoxCoordinates
 ;     IScriptAction_AddInventoryItem
-;     IScriptAction_AddItem_Something8EC1
-;     IScripts_Something_81E8
-;     IScripts_Something_99DB
-;     IScripts_Something_SetXYAndOffset_99a1
-;     IScripts_Something_SetXYAndOffset_99be
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Clear
-;     Portrait_SetCoords
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_Close
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     Shop_DrawItemStrings
-;     TextBox_GetCursorXForTileX1
-;     TextBox_Maybe_Draw
-;     UI_ShowPlayerMenu
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawStringLines
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     TextBox_FillBackground
+;     TextBox_GetXPixelCoord
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
 ;     TextBox_ShowMessage_Fill4Lines
 ;
 TextBox_X:                                  ; [$0208]
@@ -4094,29 +5051,53 @@ TextBox_X:                                  ; [$0208]
 
 ;============================================================================
 ; Y tile position of a displayed textbox.
+;
+; XREFS:
+;     IScriptAction_AddInventoryItem
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_Close
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Shop_Draw
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawStringLines
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     TextBox_FillBackground
+;     TextBox_GetYPixelCoord
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
+;     TextBox_ShowMessage_Fill4Lines
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8bed
-;     FUN_PRG12__8c04
-;     GetTextBoxCoordinates
 ;     IScriptAction_AddInventoryItem
-;     IScriptAction_AddItem_Something8EC1
-;     IScripts_Something_81E8
-;     IScripts_Something_99DB
-;     IScripts_Something_SetXYAndOffset_99a1
-;     IScripts_Something_SetXYAndOffset_99be
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Clear
-;     Portrait_SetCoords
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     IScripts_PositionAndFillPlaceholderText
+;     PlayerMenu_Close
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     Shop_DrawItemStrings
-;     TextBox_GetCursorYForTileY2
-;     TextBox_Maybe_Draw
-;     UI_ShowPlayerMenu
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_DrawDownArrowTerminatorSymbol
+;     TextBox_DrawQuestionMarkTerminatorSymbol
+;     TextBox_DrawStringLines
+;     TextBox_DrawUpArrowTerminatorSymbol
+;     TextBox_FillBackground
+;     TextBox_GetYPixelCoord
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
 ;     TextBox_ShowMessage_Fill4Lines
 ;
 TextBox_Y:                                  ; [$0209]
@@ -4125,21 +5106,36 @@ TextBox_Y:                                  ; [$0209]
 
 ;============================================================================
 ; Width of a displayed textbox.
+;
+; XREFS:
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     PlayerMenu_Close
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Shop_Draw
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_FillBackground
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
+;     TextBox_QueuePPUBufferTextBoxLength
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8bed
-;     GetTextBoxCoordinates
-;     IScriptAction_AddItem_Something8EC1
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Clear
-;     Portrait_SetCoords
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     PlayerMenu_Close
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     UI_ShowPlayerMenu
-;     TextBox_QueueRightCoordInPPUBuffer
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_FillBackground
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
+;     TextBox_QueuePPUBufferTextBoxLength
 ;
 TextBox_Width:                              ; [$020a]
     db $00                                  ; [$020a] byte
@@ -4147,47 +5143,83 @@ TextBox_Width:                              ; [$020a]
 
 ;============================================================================
 ; Height of a displayed textbox.
+;
+; XREFS:
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     PlayerMenu_Close
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     Shop_Draw
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_FillBackground
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8bed
-;     GetTextBoxCoordinates
-;     IScriptAction_AddItem_Something8EC1
-;     Maybe_Draw_Textbox
-;     Maybe_Draw_Textbox_Something8F51
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Clear
-;     Portrait_SetCoords
+;     IScriptAction_AddInventoryItem_ClearTextBox
+;     PlayerMenu_Close
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     TextBox_Maybe_Draw
-;     UI_ShowPlayerMenu
+;     TextBox_ClearForPortraitAndText
+;     TextBox_Close
+;     TextBox_FillBackground
+;     TextBox_Open
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
 ;
 TextBox_Height:                             ; [$020b]
     db $00                                  ; [$020b] byte
 
+
+;============================================================================
+; Whether the textbox is closed.
+;
+; 0 = Open
+; 1 = Closed
+;
+; Note that at game startup, this may be a garbage value.
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox
-;     TextBox_Maybe_Draw
-;     TextBox_Maybe_GetPalette
+;     TextBox_Close
+;     TextBox_GetBackgroundAttributeData
+;     TextBox_Open
+;============================================================================
+
 ;
-Maybe_TextBox_Dismissed:                    ; [$020c]
-    db $00                                  ; [$020c] byte
+; XREFS:
+;     TextBox_Close
+;     TextBox_GetBackgroundAttributeData
+;     TextBox_Open
+;
+TextBox_Closed:                             ; [$020c]
+    db $00                                  ; [$020c] bool
 
     db $00                                  ; Unused
 
 
 ;============================================================================
 ; Inventory corresponding to the Player Menu selection.
+;
+; XREFS:
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_ShowSubmenu
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8bce
-;     FUN_PRG12__8c04
-;     UI_ShowPlayerMenu
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_ShowSubmenu
 ;
 PlayerMenu_SelectedInventory:               ; [$020e]
     db $00                                  ; [$020e] byte
@@ -4200,6 +5232,9 @@ PlayerMenu_SelectedInventory:               ; [$020e]
 ;
 ; This is used when equipping an item in Player_Equip
 ; to store the new item for the purpose of equipping it.
+;
+; XREFS:
+;     Player_Equip
 ;============================================================================
 
 ;
@@ -4215,6 +5250,9 @@ Temp_EquipingItem:                          ; [$0210]
 ;
 ; This is used when equipping an item in Player_Equip
 ; to store the previous item for the purpose of unequipping it.
+;
+; XREFS:
+;     Player_Equip
 ;============================================================================
 
 ;
@@ -4226,7 +5264,7 @@ Temp_PrevInventoryItem:                     ; [$0211]
 
 ;
 ; XREFS:
-;     TextBox_Maybe_ShowNextCharFromBank
+;     TextBox_LoadAndShowMessage
 ;     TextBox_ShowMessageWithSound
 ;     TextBox_ShowNextChar
 ;
@@ -4238,21 +5276,42 @@ TextBox_PlayTextSound:                      ; [$0212]
 ; ID of the message to show in a textbox.
 ;
 ; This would be a 1-based index into MESSAGE_STRINGS.
+;
+; XREFS:
+;     IScripts_UpdatePortraitAnimation
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissMessage
+;     TextBox_CheckShouldContinueOrDismissQuestion
+;     IScripts_LoadAndShowMessage
+;     Maybe_TextBox_ShowCurrentMessageID
+;     Messages_Load
+;     TextBox_ShowMessage_Pause
 ;============================================================================
 
 ;
 ; XREFS:
-;     IScripts_Something_992A
-;     IScripts_Something_9980
 ;     IScripts_UpdatePortraitAnimation
-;     Shop_Something_9956
-;     Maybe_Menu_ShowMessageID
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissMessage
+;     TextBox_CheckShouldContinueOrDismissQuestion
+;     IScripts_LoadAndShowMessage
 ;     Maybe_TextBox_ShowCurrentMessageID
 ;     Messages_Load
 ;     TextBox_ShowMessage_Pause
 ;
 MessageID:                                  ; [$0213]
     db $00                                  ; [$0213] Message
+
+
+;============================================================================
+; The number of bytes processed in a message string.
+;
+; XREFS:
+;     Messages_Load
+;     TextBox_ShowMessage_LoadMessage
+;     TextBox_ShowMessage_Pause
+;     TextBox_ShowMessage_Space
+;============================================================================
 
 ;
 ; XREFS:
@@ -4261,27 +5320,28 @@ MessageID:                                  ; [$0213]
 ;     TextBox_ShowMessage_Pause
 ;     TextBox_ShowMessage_Space
 ;
-Maybe_MessageLength:                        ; [$0214]
+Message_ProcessedLength:                    ; [$0214]
     db $00                                  ; [$0214] byte
 
+
 ;
-; Flag indicating if a message has finished displaying.
+; Flag indicating if a message display is paused.
 ;
-; 0x00 = Message has not finished.
-; 0xFF = Message has finished.
+; 0x00 = Message is not paused.
+; 0xFF = Message is paused.
 ;
 ;
 ; XREFS:
-;     FUN_PRG12__9969
-;     IScripts_Something_992A
-;     IScripts_Something_9980
 ;     IScripts_UpdatePortraitAnimation
-;     Shops_Something_9949
+;     TextBox_CheckForDismiss
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissQuestion
+;     TextBox_PrepareContinueMessage
 ;     Maybe_TextBox_ShowCurrentMessageID
 ;     TextBox_ClearPasswordSize
 ;     TextBox_ShowMessage_Pause
 ;
-TextBox_MessageEnded:                       ; [$0215]
+TextBox_MessagePaused:                      ; [$0215]
     db $00                                  ; [$0215] byte
 
 ;
@@ -4299,6 +5359,11 @@ TextBox_CharPosForLine:                     ; [$0216]
 
 ;============================================================================
 ; Last drawn line number (0-based).
+;
+; XREFS:
+;     TextBox_ClearPasswordSize
+;     TextBox_Maybe_WriteLineOfChars
+;     TextBox_ShowMessage_IncLineAndReset
 ;============================================================================
 
 ;
@@ -4317,7 +5382,7 @@ TextBox_DrawnLineNum:                       ; [$0217]
 ;     TextBox_ShowMessage_Pause
 ;     TextBox_ShowMessage_Space
 ;
-LoadedMessageAddr:                          ; [$0218]
+Message_StartAddr:                          ; [$0218]
     db $00                                  ; [$0218] byte
 
 ;
@@ -4327,7 +5392,7 @@ LoadedMessageAddr:                          ; [$0218]
 ;     TextBox_ShowMessage_Pause
 ;     TextBox_ShowMessage_Space
 ;
-LoadedMessageAddr.U:                        ; [$0219]
+Message_StartAddr.U:                        ; [$0219]
     db $00                                  ; [$0219] byte
 
 ;
@@ -4341,28 +5406,30 @@ TextBox_LineScrollOffset:                   ; [$021a]
 
 ;
 ; XREFS:
-;     Shops_Something_9949
+;     TextBox_PrepareContinueMessage
 ;     TextBox_ClearPasswordSize
 ;
-MaybeUnused_Arg_TextBox_Height:             ; [$021b]
+Unused_Arg_Text_NumLines:                   ; [$021b]
     db $00                                  ; [$021b] byte
 
+
 ;
-; Offset into the process of writing a player title in a textbox.
+; Offset into the process of writing a player title in a
+; textbox.
 ;
 ; This is a value from 0x81 to 0x90 that is incremented with
 ; every character of the player title written in a textbox. It's
 ; used for IScripts that list the player title using code 0xFB
 ; (namely, Guru title rank scripts).
 ;
-; The values are indexes 1 through 16 (length of the player title
-; strings), with the MSB set.
+; The values are indexes 1 through 16 (length of the player
+; title strings), with the MSB set.
 ;
 ;
 ; XREFS:
 ;     TextBox_ClearPasswordSize
+;     TextBox_DisplayMessage
 ;     TextBox_ShowMessage_ShowPlayerTitle
-;     TextBox_Something_ShowMessage_f4a2
 ;
 Textbox_TitleCharOffset:                    ; [$021c]
     db $00                                  ; [$021c] byte
@@ -4378,116 +5445,147 @@ Maybe_MessageCharPos:                       ; [$021d]
 
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8bce
-;     FUN_PRG12__906d
-;     FUN_PRG12__9075
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowBuySellMenu
 ;     IScriptAction_ShowSellMenu
-;     Menu_Draw
+;     Menu_UpdateAndDraw
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
+;     Shop_GetPlayerHasSelectedItem
 ;     Shop_Populate
-;     Something_ShopCursorInventory
-;     UI_ShowPlayerMenu
 ;
 Menu_CursorPos:                             ; [$021e]
     db $00                                  ; [$021e] byte
 
 ;
 ; XREFS:
-;     FUN_PRG12__8c04
 ;     IScriptAction_ShowBuySellMenu
 ;     IScriptAction_ShowSellMenu
-;     Menu_Draw
-;     PlayerMenu_Maybe_ShowStatus
+;     Menu_UpdateAndDraw
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
 ;     Shop_Draw
-;     Shop_DrawItemStrings
 ;     Shop_Populate
-;     UI_ShowPlayerMenu
+;     TextBox_DrawStringLines
 ;
-Menu_LastPos:                               ; [$021f]
+Arg_StringsCount:                           ; [$021f]
     db $00                                  ; [$021f] byte
 
 
 ;============================================================================
-; A list of items shown in the shop.
+; Temporary data used for multiple purposes:
+;
+; 1. Shop items
+; 2. Player menu items
+; 3. Vertical screen scroll PPU tile data
+;
+; For #3, the data will overflow through $0240.
+;
+; XREFS:
+;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
+;     Shop_Draw
+;     Shop_GetPlayerHasSelectedItem
+;     Shop_Populate
+;     TextBox_DrawStringLines
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUTileData
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8bce
-;     FUN_PRG12__8c04
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
 ;     Shop_Draw
-;     Shop_DrawItemStrings
+;     Shop_GetPlayerHasSelectedItem
 ;     Shop_Populate
-;     Something_ShopCursorInventory
-;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__d654
-;     Maybe_Area_LoadBlocks
+;     TextBox_DrawStringLines
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUTileData
 ;
-ShopItems:                                  ; [$0220]
+UI_Menu_IDs:                                ; [$0220]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
-;     FUN_PRG15_MIRROR__d654
-;     Maybe_Area_LoadBlocks
+;     PlayerMenu_Show
+;     PlayerMenu_ShowInventoryMenu
+;     PlayerMenu_ShowStatusMenu
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUTileData
 ;
-ShopItems_1_:                               ; [$0221]
+UI_Menu_IDs_1_:                             ; [$0221]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
-;     Maybe_Area_LoadBlocks
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     Screen_LoadBlockDataVert
 ;
-ShopItems_2_:                               ; [$0222]
+UI_Menu_IDs_2_:                             ; [$0222]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
-;     Maybe_Area_LoadBlocks
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     Screen_LoadBlockDataVert
 ;
-ShopItems_3_:                               ; [$0223]
+UI_Menu_IDs_3_:                             ; [$0223]
     db $00                                  ; [3]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
 ;
-ShopItems_4_:                               ; [$0224]
+UI_Menu_IDs_4_:                             ; [$0224]
     db $00                                  ; [4]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
 ;
-ShopItems_5_:                               ; [$0225]
+UI_Menu_IDs_5_:                             ; [$0225]
     db $00                                  ; [5]:
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
 ;
-ShopItems_6_:                               ; [$0226]
+UI_Menu_IDs_6_:                             ; [$0226]
     db $00                                  ; [6]:
     db $00                                  ; [7]:
 
 
 ;============================================================================
 ; Lower byte of costs of items currently shown in the shop.
+;
+; XREFS:
+;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
+;     Shop_Draw
+;     Shop_Populate
 ;============================================================================
 
 ;
@@ -4510,6 +5608,12 @@ ShopItemCostsL:                             ; [$0228]
 
 ;============================================================================
 ; Upper byte of costs of items currently shown in the shop.
+;
+; XREFS:
+;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
+;     Shop_Draw
+;     Shop_Populate
 ;============================================================================
 
 ;
@@ -4535,6 +5639,10 @@ ShopItemCostsU:                             ; [$0230]
 ;
 ; Each digit corresponds to a single digit, populating based
 ; on the gold or experience.
+;
+; XREFS:
+;     UI_DrawDigitsZeroPadded
+;     UI_PopulateDigitsNoLeadingZeroes
 ;============================================================================
 
 ;
@@ -4552,13 +5660,16 @@ UI_DigitsToRender:                          ; [$0238]
 CHAR_ARRAY_023e:                            ; [$023e]
     db $00,$00,$00,$00                      ; [$023e] char
 
+
+;
+; PPU Attribute Data for a textbox.
 ;
 ; XREFS:
-;     FUN_PRG12__880e
-;     FUN_PRG12__9041
-;     Maybe_Draw_Textbox_Something8F51
+;     DEADCODE_FUN_PRG12__9041
+;     TextBox_FillBackground
+;     TextBox_SetNextAttributeData
 ;
-Something_ValuesToDraw:                     ; [$0242]
+TextBox_AttributeData:                      ; [$0242]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4579,18 +5690,18 @@ ScreenBlocks:                               ; [$024a]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d6b1
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUAttrData
 ;
-Something_PPUData:                          ; [$0282]
+Screen_ScrollHorizPPUAttrData:              ; [$0282]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d6b1
-;     Screen_Something_ScrollHorizInternal
+;     Screen_LoadBlocksHoriz
+;     Screen_WriteScrollHorizPPUAttrData
 ;
-Something_PPUData_1_:                       ; [$0283]
+Screen_ScrollHorizPPUAttrData_1_:           ; [$0283]
     db $00                                  ; [1]:
     db $00                                  ; [2]:
     db $00                                  ; [3]:
@@ -4601,18 +5712,18 @@ Something_PPUData_1_:                       ; [$0283]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d699
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUAttrData
 ;
-Something_BlocksPPUData:                    ; [$028a]
+Screen_ScrollVertPPUAttrData:               ; [$028a]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d699
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
+;     Screen_WriteScrollVertPPUAttrData
 ;
-Something_BlocksPPUData_1_:                 ; [$028b]
+Screen_ScrollVertPPUAttrData_1_:            ; [$028b]
     db $00                                  ; [1]:
     db $00                                  ; [2]:
     db $00                                  ; [3]:
@@ -4626,14 +5737,14 @@ Something_BlocksPPUData_1_:                 ; [$028b]
 ; XREFS:
 ;     PPUBuffer_DrawCommand_WritePalette
 ;
-CurrentPaletteData:                         ; [$0293]
+Screen_PaletteData:                         ; [$0293]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
 ;     PPUBuffer_DrawCommand_WritePalette
 ;
-CurrentPaletteData_1_:                      ; [$0294]
+Screen_PaletteData_1_:                      ; [$0294]
     db $00                                  ; [1]:
     db $00                                  ; [2]:
     db $00                                  ; [3]:
@@ -4651,9 +5762,9 @@ CurrentPaletteData_1_:                      ; [$0294]
 
 ;
 ; XREFS:
-;     LoadPalette
+;     Screen_SetFadeOutPalette
 ;
-CurrentPaletteData_15_:                     ; [$02a2]
+Screen_PaletteData_15_:                     ; [$02a2]
     db $00                                  ; [15]:
     db $00                                  ; [16]:
     db $00                                  ; [17]:
@@ -4674,27 +5785,53 @@ CurrentPaletteData_15_:                     ; [$02a2]
 ; XREFS:
 ;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
-;     SplashAnimation_SomethingA708
+;     SplashAnimation_Intro_SomethingA708
 ;     StartScreen_Draw
-;     Palette_PopulateData
+;     Screen_LoadPalette
 ;
-CurrentPaletteData_30_:                     ; [$02b1]
+Screen_PaletteData_30_:                     ; [$02b1]
     db $00                                  ; [30]:
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;     SplashAnimation_DrawScenery
-;     SplashAnimation_SomethingA708
+;     SplashAnimation_Intro_SomethingA708
 ;     StartScreen_Draw
-;     Palette_PopulateData
+;     Screen_LoadPalette
 ;
-CurrentPaletteData_31_:                     ; [$02b2]
+Screen_PaletteData_31_:                     ; [$02b2]
     db $00                                  ; [31]:
 
 
 ;============================================================================
 ; Magic-related variables.
+;
+; XREFS:
+;     CastMagic_Clear
+;     CastMagic_HitHandler_Death
+;     CastMagic_HitHandler_Deluge
+;     CastMagic_HitHandler_Fire
+;     CastMagic_HitHandler_Thunder
+;     CastMagic_HitHandler_Tilte
+;     CastMagic_Maybe_CheckImpassableY
+;     CastMagic_Maybe_CheckXOrImpassable
+;     CastMagic_RunSpellHandler
+;     CastMagic_Unused_UpdateDelugeAfterFirstHit
+;     CastMagic_Unused_UpdateHitWallEffect
+;     CastMagic_UpdateDeathAfterFirstHit
+;     CastMagic_UpdateDeluge
+;     CastMagic_UpdateFire
+;     CastMagic_UpdateFireAfterFirstHit
+;     CastMagic_UpdateThunderAfterFirstHit
+;     CastMagic_UpdateTilteAfterFirstHit
+;     CastMagic_UpdateXPosition
+;     Player_CastMagic
+;     Player_ClearVisibleMagic
+;     Sprite_CheckHitByCastMagic
+;     Area_BeginScrollToNextRoom
+;     CastMagic_RunUpdateSpellHandler
+;     CastMagic_SetAppearance
 ;============================================================================
 
 ;
@@ -4727,11 +5864,12 @@ CurrentPaletteData_31_:                     ; [$02b2]
 ;     Player_ClearVisibleMagic
 ;     Sprite_CheckHitByCastMagic
 ;     Area_BeginScrollToNextRoom
-;     CastMagic_Maybe_FinishHandler
-;     CastMagic_Maybe_SetAppearance
+;     CastMagic_RunUpdateSpellHandler
+;     CastMagic_SetAppearance
 ;
 CastMagic_Type:                             ; [$02b3]
     db $00                                  ; [$02b3] SelectedMagic
+
 
 ;
 ; Flags dictating direction and movement for a cast magic spell.
@@ -4750,6 +5888,7 @@ CastMagic_Type:                             ; [$02b3]
 CastMagic_Flags:                            ; [$02b4]
     db $00                                  ; [$02b4] CastMagicFlags
 
+
 ;
 ; The fractional X position of any visible magic.
 ;
@@ -4760,6 +5899,7 @@ CastMagic_Flags:                            ; [$02b4]
 ;
 CastMagic_XPos_Frac:                        ; [$02b5]
     db $00                                  ; [$02b5] byte
+
 
 ;
 ; The full X position of any visible magic.
@@ -4775,10 +5915,11 @@ CastMagic_XPos_Frac:                        ; [$02b5]
 ;     Sprite_CheckHitByCastMagic
 ;     CastMagic_CalculateVisibility
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;
 CastMagic_XPos_Full:                        ; [$02b6]
     db $00                                  ; [$02b6] byte
+
 
 ;
 ; The fractional Y position of any visible magic.
@@ -4790,6 +5931,7 @@ CastMagic_XPos_Full:                        ; [$02b6]
 ;
 CastMagic_YPos_Frac:                        ; [$02b7]
     db $00                                  ; [$02b7] byte
+
 
 ;
 ; The full Y position of any visible magic.
@@ -4803,7 +5945,7 @@ CastMagic_YPos_Frac:                        ; [$02b7]
 ;     CastMagic_CalculateVisibility
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
-;     CastMagic_Maybe_FinishHandler
+;     CastMagic_RunUpdateSpellHandler
 ;
 CastMagic_YPos_Full:                        ; [$02b8]
     db $00                                  ; [$02b8] byte
@@ -4825,6 +5967,7 @@ CastMagic_YPos_Full:                        ; [$02b8]
 CastMagic_Counter:                          ; [$02b9]
     db $00                                  ; [$02b9] byte
 
+
 ;
 ; The phase of the current spell.
 ;
@@ -4838,6 +5981,7 @@ CastMagic_Counter:                          ; [$02b9]
 ;
 CastMagic_Phase:                            ; [$02ba]
     db $00                                  ; [$02ba] byte
+
 
 ;
 ; Relative Y position used for the magic's Hit Wall effect.
@@ -4866,7 +6010,7 @@ CastMagic_Unused_HitWallDeltaPosY:          ; [$02bb]
 ;     Sprite_AddPosX
 ;     Sprite_SubtractPosX
 ;
-CurrentSprites_Maybe_XPos_Frac:             ; [$02bc]
+CurrentSprites_XPos_Frac:                   ; [$02bc]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4880,7 +6024,7 @@ CurrentSprites_Maybe_XPos_Frac:             ; [$02bc]
 ; XREFS:
 ;     Sprite_CalculateNewVertPos
 ;
-CurrentSprites_SomethingY:                  ; [$02c4]
+CurrentSprites_YPos_Frac:                   ; [$02c4]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
     db $00                                  ; [2]:
@@ -4893,10 +6037,9 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 
 ;============================================================================
 ; Sprite IDs of the 8 active sprites
-;============================================================================
-
 ;
 ; XREFS:
+;     BScript_Action_CastMagic
 ;     CurrentSprite_CheckHitPlayer
 ;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
@@ -4906,22 +6049,65 @@ CurrentSprites_SomethingY:                  ; [$02c4]
 ;     FUN_PRG14__a0ad
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     HandlePlayerHitByMagic
 ;     Player_AddExperienceFromSprite
 ;     Player_ApplyDamage
+;     Player_HandleHitByMagic
 ;     Player_HandleTouchBreadOrCoin
 ;     Player_HandleTouchEnemy
 ;     Player_HandleTouchEnemyMagic
 ;     Player_HandleTouchItem
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
-;     SpriteAction_CastMagic
 ;     SpriteBehavior_BossDeath
+;     SpriteBehavior_EnemyMagic
 ;     SpriteBehavior_Garbled3
 ;     SpriteBehavior_LightningBallOrCharron
 ;     SpriteBehavior_MaybeFallingRocks__ClearEntity
 ;     SpriteBehavior_Pakukame
-;     SpriteBehavior_SomethingGarbled81
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_a25f_ClearEntity
+;     Sprite_CastMagic
+;     Sprite_CheckHitByCastMagic
+;     Sprite_EnterNextAppearancePhase
+;     Sprite_GetBounds
+;     Sprite_Maybe_ResetState
+;     Sprite_ReplaceWithDroppedItem
+;     Sprite_ReplaceWithMattock
+;     Sprite_SetDeathEntity
+;     Sprites_HasAnyEnemyOnScreen
+;     Sprites_IsSpriteOutOfWeaponRange
+;     Sprites_Remove
+;     Sprites_UpdateBehavior
+;     WasPlayerHitByMagic
+;============================================================================
+
+;
+; XREFS:
+;     BScript_Action_CastMagic
+;     CurrentSprite_CheckHitPlayer
+;     CurrentSprite_HandleFall
+;     CurrentSprite_UpdateState
+;     FUN_PRG14__87cb
+;     FUN_PRG14__9991
+;     FUN_PRG14__9e13
+;     FUN_PRG14__a0ad
+;     FUN_PRG14__a12d
+;     FUN_PRG14__a1cc
+;     Player_AddExperienceFromSprite
+;     Player_ApplyDamage
+;     Player_HandleHitByMagic
+;     Player_HandleTouchBreadOrCoin
+;     Player_HandleTouchEnemy
+;     Player_HandleTouchEnemyMagic
+;     Player_HandleTouchItem
+;     Player_HitEnemyWithMagic
+;     Player_HitSpriteWithWeapon
+;     SpriteBehavior_BossDeath
+;     SpriteBehavior_EnemyMagic
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_LightningBallOrCharron
+;     SpriteBehavior_MaybeFallingRocks__ClearEntity
+;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_a25f_ClearEntity
 ;     Sprite_CastMagic
@@ -4987,6 +6173,22 @@ CurrentSprites_Entities_7_:                 ; [$02d3]
 
 ;============================================================================
 ; Subtype of the currently-active sprites
+;
+; XREFS:
+;     SpriteOp_CheckDistanceToPlayer_X
+;     SpriteOp_CheckDistanceToPlayer_Y
+;     SpriteOp_GoTo
+;     SpriteOp_MaybeDisableAndGoTo
+;     SpriteOp_RunAction
+;     SpriteOp_SetPhase
+;     SpriteOp_SwitchBehavior
+;     Sprite_FinishBehavior
+;     Sprite_Maybe_ResetState
+;     Sprite_ReplaceWithDroppedItem
+;     Sprite_ReplaceWithMattock
+;     Sprite_SetDeathEntity
+;     Sprites_LoadNextOp
+;     Sprites_UpdateBehavior
 ;============================================================================
 
 ;
@@ -5031,6 +6233,7 @@ CurrentSprites_Behaviors_7_:                ; [$02db]
 
 ;
 ; XREFS:
+;     BScript_Action_CastMagic
 ;     CurrentSpriteFlags_SetBit5
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_HandleFall
@@ -5048,7 +6251,6 @@ CurrentSprites_Behaviors_7_:                ; [$02db]
 ;     MoveSpriteVerticalIfPossible
 ;     Player_HitSpriteWithWeapon
 ;     Player_SetDamagedBySprite
-;     SpriteAction_CastMagic
 ;     SpriteAction_FacePlayerX
 ;     SpriteAction_FacePlayerY
 ;     SpriteAction_FlipXDirection
@@ -5062,6 +6264,7 @@ CurrentSprites_Behaviors_7_:                ; [$02db]
 ;     SpriteBehavior_GiantBees
 ;     SpriteBehavior_Hop
 ;     SpriteBehavior_Ishiisu
+;     SpriteBehavior_Ishiisu_Something_850d
 ;     SpriteBehavior_KingGrieve
 ;     SpriteBehavior_KingGrieve_9f65
 ;     SpriteBehavior_KingGrieve_MoveDown
@@ -5141,7 +6344,7 @@ CurrentSprites_Flags_7_:                    ; [$02e3]
 ;     SpriteBehavior_GiantBees
 ;     SpriteBehavior_Ishiisu
 ;     SpriteBehavior_KingGrieve
-;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_9f86
 ;     SpriteBehavior_KingGrieve_MoveDown
 ;     SpriteBehavior_Lilith
 ;     SpriteBehavior_Magman
@@ -5242,7 +6445,7 @@ CurrentSprites_Phases_7_:                   ; [$02eb]
 ;     SpriteBehavior_GiantBees
 ;     SpriteBehavior_Ishiisu
 ;     SpriteBehavior_KingGrieve
-;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_9f86
 ;     SpriteBehavior_KingGrieve_MoveDown
 ;     SpriteBehavior_LightningBallOrCharron
 ;     SpriteBehavior_Lilith
@@ -5286,6 +6489,37 @@ CurrentSprites_BehaviorData2:               ; [$02ec]
 
 ;============================================================================
 ; Tick counter used for some behaviors.
+;
+; XREFS:
+;     FUN_PRG14__9917
+;     FUN_PRG14__9aa1
+;     FUN_PRG14__9ac6
+;     FUN_PRG14__a59d
+;     FUN_PRG14__a91e
+;     LAB_PRG14__8fb7 [$PRG14::8fb7]
+;     SpriteBehavior_Bihoruda
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_EnemyUnused18
+;     SpriteBehavior_EnemyUnused36
+;     SpriteBehavior_EnemyUnused43
+;     SpriteBehavior_ExecutionHood
+;     SpriteBehavior_Garbled3
+;     SpriteBehavior_GiantBees
+;     SpriteBehavior_Hop
+;     SpriteBehavior_KingGrieve
+;     SpriteBehavior_KingGrieve_9f86
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_MoveTowardPlayer
+;     SpriteBehavior_Naga
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_WalkForward
+;     SpriteBehavior_Yuinaru
+;     SpriteBehavior__a8d7
+;     SpriteUpdateHandler_Enemy_Unused18
 ;============================================================================
 
 ;
@@ -5306,7 +6540,7 @@ CurrentSprites_BehaviorData2:               ; [$02ec]
 ;     SpriteBehavior_GiantBees
 ;     SpriteBehavior_Hop
 ;     SpriteBehavior_KingGrieve
-;     SpriteBehavior_KingGrieve_9f65
+;     SpriteBehavior_KingGrieve_9f86
 ;     SpriteBehavior_Lilith
 ;     SpriteBehavior_MoveTowardPlayer
 ;     SpriteBehavior_Naga
@@ -5333,6 +6567,24 @@ CurrentSprites_BehaviorData3:               ; [$02f4]
 
 ;============================================================================
 ; XXX Some lookup map.
+;
+; XREFS:
+;     FUN_PRG14__994a
+;     FUN_PRG14__9991
+;     FUN_PRG14__99f3
+;     FUN_PRG14__9aa1
+;     Maybe_Sprite_HandleDeathDrop
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_Hop
+;     SpriteBehavior_Lilith
+;     SpriteBehavior_Ripasheiku
+;     SpriteBehavior_ShadowEura
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
+;     SpriteUpdateHandler_Boss_ShadowEura
+;     SpriteUpdateHandler_Coin
+;     SpriteUpdateHandler_TODO_Unknown_83
+;     Sprite_SetDeathEntity
 ;============================================================================
 
 ;
@@ -5397,14 +6649,14 @@ CurrentSprites_HitBoxTypes:                 ; [$0304]
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
 ;
 CurrentSprites_HitBoxTypes_2_:              ; [$0306]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Maybe_Area_LoadBlocks
+;     Screen_LoadBlockDataVert
 ;
 CurrentSprites_HitBoxTypes_3_:              ; [$0307]
     db $00                                  ; [3]:
@@ -5422,17 +6674,26 @@ CurrentSprites_HitBoxTypes_7_:              ; [$030b]
 
 ;============================================================================
 ; XXX Some lookup map.
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_Hop
 ;     SpriteBehavior_SomethingEyeball_17
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
+;============================================================================
+
+;
+; XREFS:
+;     FUN_PRG14__8398
+;     FUN_PRG14__83a8
+;     SpriteBehavior_Hop
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;
 CurrentSprites_BehaviorState_XFull:         ; [$030c]
     db $00                                  ; [0]:
@@ -5447,16 +6708,24 @@ CurrentSprites_BehaviorState_XFull:         ; [$030c]
 
 ;============================================================================
 ; XXX Some lookup map.
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_MoveVertically
 ;     SpriteBehavior_SomethingEyeball_17
 ;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
+;============================================================================
+
+;
+; XREFS:
+;     FUN_PRG14__8398
+;     FUN_PRG14__83a8
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;
 CurrentSprites_BehaviorState_YFull:         ; [$0314]
     db $00                                  ; [0]:
@@ -5471,17 +6740,26 @@ CurrentSprites_BehaviorState_YFull:         ; [$0314]
 
 ;============================================================================
 ; XXX Some sprites lookup map.
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_Hop
 ;     SpriteBehavior_SomethingEyeball_17
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
+;============================================================================
+
+;
+; XREFS:
+;     FUN_PRG14__8398
+;     FUN_PRG14__83a8
+;     SpriteBehavior_Hop
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_SomethingZoradohna_18
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;
 CurrentSprites_BehaviorState_XFrac:         ; [$031c]
     db $00                                  ; [0]:
@@ -5496,16 +6774,24 @@ CurrentSprites_BehaviorState_XFrac:         ; [$031c]
 
 ;============================================================================
 ; XXX Some lookup map.
-;============================================================================
-
 ;
 ; XREFS:
-;     FUN_PRG14__8329
 ;     FUN_PRG14__8398
 ;     FUN_PRG14__83a8
 ;     SpriteBehavior_MoveVertically
 ;     SpriteBehavior_SomethingEyeball_17
 ;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
+;============================================================================
+
+;
+; XREFS:
+;     FUN_PRG14__8398
+;     FUN_PRG14__83a8
+;     SpriteBehavior_MoveVertically
+;     SpriteBehavior_SomethingEyeball_17
+;     SpriteBehavior_Unknown_29
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;
 CurrentSprites_BehaviorState_YFrac:         ; [$0324]
     db $00                                  ; [0]:
@@ -5520,16 +6806,29 @@ CurrentSprites_BehaviorState_YFrac:         ; [$0324]
 
 ;============================================================================
 ; PPU address where the first tile of the sprite is stored
-;============================================================================
-
 ;
 ; XREFS:
+;     BScript_Action_CastMagic
 ;     CurrentSprite_UpdateState
 ;     FUN_PRG14__9e13
 ;     FUN_PRG14__a0ad
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
-;     SpriteAction_CastMagic
+;     SpriteBehavior_BounceAndExpire
+;     SpriteBehavior_Pakukame
+;     SpriteUpdateHandler_Enemy_Unused18
+;     Sprite_CastMagic
+;     Sprite_ReplaceWithMattock
+;============================================================================
+
+;
+; XREFS:
+;     BScript_Action_CastMagic
+;     CurrentSprite_UpdateState
+;     FUN_PRG14__9e13
+;     FUN_PRG14__a0ad
+;     FUN_PRG14__a12d
+;     FUN_PRG14__a1cc
 ;     SpriteBehavior_BounceAndExpire
 ;     SpriteBehavior_Pakukame
 ;     SpriteUpdateHandler_Enemy_Unused18
@@ -5557,6 +6856,14 @@ CurrentSprites_PPUAddrs_7_:                 ; [$0333]
 ; Magic type the sprite was hit by
 ;
 ; $FF = Not hit by magic
+;
+; XREFS:
+;     FUN_PRG14__9e13
+;     Maybe_Sprite_HandleDeathDrop
+;     Sprite_CheckHitByCastMagic
+;     Sprite_Maybe_ResetState
+;     Sprite_SetDeathEntity
+;     Sprites_Maybe_UpdateHitByMagic
 ;============================================================================
 
 ;
@@ -5631,6 +6938,12 @@ CurrentSprites_HP_7_:                       ; [$034b]
 
 ;============================================================================
 ; Counter used after sprite was hit
+;
+; XREFS:
+;     CurrentSprite_UpdateState
+;     Maybe_Sprite_HandleDeathDrop
+;     Player_HitSpriteWithWeapon
+;     _handleHit [$PRG14::804e]
 ;============================================================================
 
 ;
@@ -5730,6 +7043,14 @@ CurrentSprites_BehaviorArg1:                ; [$0364]
 
 ;============================================================================
 ; Message IDs of the NPC messages
+;
+; XREFS:
+;     Maybe_Sprite_HandleDeathDrop
+;     Player_CheckHandlePressUpOnNPC
+;     Player_HandleTouchBread
+;     Player_HandleTouchCoin
+;     Player_HandleTouchNPC
+;     Sprites_LoadSpriteValue
 ;============================================================================
 
 ;
@@ -5768,6 +7089,7 @@ CurrentSprites_Values_7_:                   ; [$0373]
 ;     FUN_PRG14__848a
 ;     FUN_PRG14__a91e
 ;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyMagic
 ;     SpriteBehavior_EnemyUnused36
 ;     SpriteBehavior_EnemyUnused43
 ;     SpriteBehavior_ExecutionHood
@@ -5780,7 +7102,6 @@ CurrentSprites_Values_7_:                   ; [$0373]
 ;     SpriteBehavior_ShadowEura
 ;     SpriteBehavior_SirGawaineWolfman
 ;     SpriteBehavior_SomethingEyeball_17
-;     SpriteBehavior_SomethingGarbled81
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_WalkForward
@@ -5788,7 +7109,7 @@ CurrentSprites_Values_7_:                   ; [$0373]
 ;     Sprite_AddPosX
 ;     Sprite_MoveHorizOneBlockOrTurnAround
 ;     Sprite_SubtractPosX
-;     Sprites_CalcVertSpriteMovement
+;     Sprites_CalcHorizSpriteMovement
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Frac:                            ; [$0374]
@@ -5807,6 +7128,7 @@ Arg_DeltaX_Frac:                            ; [$0374]
 ;     FUN_PRG14__a91e
 ;     SpriteBehavior_Bihoruda
 ;     SpriteBehavior_BuzzAround
+;     SpriteBehavior_EnemyMagic
 ;     SpriteBehavior_EnemyUnused36
 ;     SpriteBehavior_EnemyUnused43
 ;     SpriteBehavior_ExecutionHood
@@ -5819,7 +7141,6 @@ Arg_DeltaX_Frac:                            ; [$0374]
 ;     SpriteBehavior_ShadowEura
 ;     SpriteBehavior_SirGawaineWolfman
 ;     SpriteBehavior_SomethingEyeball_17
-;     SpriteBehavior_SomethingGarbled81
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_WalkForward
@@ -5828,7 +7149,7 @@ Arg_DeltaX_Frac:                            ; [$0374]
 ;     Sprite_AddPosX
 ;     Sprite_MoveHorizOneBlockOrTurnAround
 ;     Sprite_SubtractPosX
-;     Sprites_CalcVertSpriteMovement
+;     Sprites_CalcHorizSpriteMovement
 ;     Sprites_Maybe_UpdateHitByMagic
 ;
 Arg_DeltaX_Full:                            ; [$0375]
@@ -5885,6 +7206,55 @@ Arg_DeltaY_Full:                            ; [$0377]
 
 ;============================================================================
 ; Currently-active sprite
+;
+; XREFS:
+;     CastMagic_HitHandler_Deluge
+;     CastMagic_HitHandler_Fire
+;     CurrentSprite_CalculateVisibility
+;     CurrentSprite_CanMoveInDirection
+;     CurrentSprite_CheckHitPlayer
+;     CurrentSprite_HandleFall
+;     CurrentSprite_UpdateState
+;     FUN_PRG14__84f4
+;     FUN_PRG14__86c6
+;     FUN_PRG14__87cb
+;     FUN_PRG14__9991
+;     FUN_PRG14__9a61
+;     LAB_PRG14__8043 [$PRG14::8043]
+;     MoveSpriteHorizIfPossible
+;     MoveSpriteVerticalIfPossible
+;     Player_AddExperienceFromSprite
+;     Player_CheckHandlePressUpOnNPC
+;     Player_HandleHitByMagic
+;     Player_HandleTouchBread
+;     Player_HandleTouchCoin
+;     Player_HandleTouchEnemyMagic
+;     Player_HandleTouchItem
+;     Player_HitSpriteWithWeapon
+;     SpriteAction_RandomlyFlipXDirection
+;     SpriteAction_RandomlyFlipYDirection
+;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Ishiisu_Something_850d
+;     SpriteBehavior_NecronAides
+;     SpriteBehavior_Pakukame
+;     SpriteBehavior_RestoreXRegister
+;     SpriteUpdateHandler_Effect_EnemyDeath
+;     SpriteUpdateHandler_Effect_LightningBall20
+;     SpriteUpdateHandler_Enemy_Unused18
+;     Sprite_CheckHitByCastMagic
+;     Sprite_HandleDeathDropIfPossible
+;     Sprites_HasAnyEnemyOnScreen
+;     Sprites_SetBlockIsMovingResult
+;     Sprites_SetCurrentSpriteCanMove
+;     Sprites_UpdateAllStates
+;     Sprites_UpdateBehavior
+;     WasPlayerHitByMagic
+;     _afterFarJump [$PRG14::89ff]
+;     _updateSprite [$PRG14::8011]
+;     CastMagic_CalculateVisibility
+;     GameLoop_LoadSpriteImages
+;     Player_PickUpRedPotion
+;     Sprites_PopulateNextAvailableSprite
 ;============================================================================
 
 ;
@@ -5901,13 +7271,12 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     FUN_PRG14__87cb
 ;     FUN_PRG14__9991
 ;     FUN_PRG14__9a61
-;     HandlePlayerHitByMagic
 ;     LAB_PRG14__8043 [$PRG14::8043]
-;     LAB_PRG14__850d [$PRG14::850d]
 ;     MoveSpriteHorizIfPossible
 ;     MoveSpriteVerticalIfPossible
 ;     Player_AddExperienceFromSprite
 ;     Player_CheckHandlePressUpOnNPC
+;     Player_HandleHitByMagic
 ;     Player_HandleTouchBread
 ;     Player_HandleTouchCoin
 ;     Player_HandleTouchEnemyMagic
@@ -5916,6 +7285,7 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     SpriteAction_RandomlyFlipXDirection
 ;     SpriteAction_RandomlyFlipYDirection
 ;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Ishiisu_Something_850d
 ;     SpriteBehavior_NecronAides
 ;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_RestoreXRegister
@@ -6034,6 +7404,7 @@ Something_Maybe_WeaponDistanceY:            ; [$0380]
 ;     SpriteUpdateHandler_Deco_Fountain
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
+;     SpriteUpdateHandler_EnemyMagic
 ;     SpriteUpdateHandler_Enemy_Charron
 ;     SpriteUpdateHandler_Enemy_ExecutionHood
 ;     SpriteUpdateHandler_Enemy_FireGiant
@@ -6070,7 +7441,6 @@ Something_Maybe_WeaponDistanceY:            ; [$0380]
 ;     SpriteUpdateHandler_NPC_Walking
 ;     SpriteUpdateHandler_TODO_Garbled10
 ;     SpriteUpdateHandler_TODO_Garbled_81
-;     SpriteUpdateHandler_TODO_Unknown84
 ;     Sprites_UpdateAll
 ;
 SpriteUpdateCounter:                        ; [$0383]
@@ -6103,6 +7473,10 @@ CurrentSprite_Arg_CastMagicY:               ; [$0385]
 
 ;============================================================================
 ; ROM bank where images of the current sprite can be found.
+;
+; XREFS:
+;     LookupSpriteDataPointer
+;     Sprites_StoreBankForCurrentSprite
 ;============================================================================
 
 ;
@@ -6118,6 +7492,10 @@ CurrentSprite_ImagesBank:                   ; [$0386]
 
 ;============================================================================
 ; X coordinate of the sprite being processed.
+;
+; XREFS:
+;     GameLoop_LoadSpriteInfo
+;     Sprites_PopulateNextAvailableSprite
 ;============================================================================
 
 ;
@@ -6131,6 +7509,10 @@ CurrentSprite_XPos:                         ; [$0389]
 
 ;============================================================================
 ; Y coordinate of the sprite being processed.
+;
+; XREFS:
+;     GameLoop_LoadSpriteInfo
+;     Sprites_PopulateNextAvailableSprite
 ;============================================================================
 
 ;
@@ -6144,6 +7526,13 @@ CurrentSprite_YPos:                         ; [$038a]
 
 ;============================================================================
 ; Entity ID of the sprite being processed.
+;
+; XREFS:
+;     GameLoop_LoadSpriteImages
+;     GameLoop_LoadSpriteInfo
+;     LookupSpriteDataPointer
+;     Sprites_PopulateNextAvailableSprite
+;     Sprites_StoreBankForCurrentSprite
 ;============================================================================
 
 ;
@@ -6166,6 +7555,10 @@ CurrentSprite_Entity:                       ; [$038b]
 ;
 ; For NPCs, this will be the IScript entrypoint index to
 ; activate upon interaction.
+;
+; XREFS:
+;     Player_CheckHandlePressUpOnNPC
+;     Player_HandleTouchNPC
 ;============================================================================
 
 ;
@@ -6180,15 +7573,20 @@ CurrentSprite_Value:                        ; [$038c]
 ;============================================================================
 ; Index into HUD_ATTRIBUTE_DATA_BY_INDEX where the
 ; HUD palette can be found.
+;
+; XREFS:
+;     TextBox_GetBackgroundAttributeData
+;     Screen_LoadBackgroundPalette
+;     UI_SetHUDPPUAttributes
 ;============================================================================
 
 ;
 ; XREFS:
-;     TextBox_Maybe_GetPalette
-;     LoadPalette2
+;     TextBox_GetBackgroundAttributeData
+;     Screen_LoadBackgroundPalette
 ;     UI_SetHUDPPUAttributes
 ;
-HUD_AttributeDataIndex:                     ; [$038d]
+UI_AttributeDataIndex:                      ; [$038d]
     db $00                                  ; [$038d] byte
 
     db $00,$00                              ; [$038f] undefined
@@ -6198,6 +7596,14 @@ HUD_AttributeDataIndex:                     ; [$038d]
 ; The player's experience as a 16-bit value.
 ;
 ; This is in Lower, Upper byte order.
+;
+; XREFS:
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Game_Start
+;     Player_CheckReachedNextTitle
+;     Player_UpdateExperience
+;     UI_DrawPlayerExperience
 ;============================================================================
 
 ;
@@ -6215,6 +7621,14 @@ Experience:                                 ; [$0390]
 
 ;============================================================================
 ; Upper byte of player's experience
+;
+; XREFS:
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Game_Start
+;     Player_CheckReachedNextTitle
+;     Player_UpdateExperience
+;     UI_DrawPlayerExperience
 ;============================================================================
 
 ;
@@ -6234,6 +7648,16 @@ Experience_U:                               ; [$0391]
 ; The player's gold as a 24-bit value.
 ;
 ; This is in Lower, Middle, Upper byte order.
+;
+; XREFS:
+;     IScriptAction_IfPlayerHasGold
+;     IScripts_CheckEnoughMoney
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Player_HandleTouchCoin
+;     Player_AddGold
+;     Player_SubtractGold
+;     UI_DrawGoldValue
 ;============================================================================
 
 ;
@@ -6253,6 +7677,16 @@ Gold:                                       ; [$0392]
 
 ;============================================================================
 ; Middle byte of player's gold
+;
+; XREFS:
+;     IScriptAction_IfPlayerHasGold
+;     IScripts_CheckEnoughMoney
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Player_HandleTouchCoin
+;     Player_AddGold
+;     Player_SubtractGold
+;     UI_DrawGoldValue
 ;============================================================================
 
 ;
@@ -6272,6 +7706,16 @@ Gold_M:                                     ; [$0393]
 
 ;============================================================================
 ; Upper byte of player's gold
+;
+; XREFS:
+;     IScriptAction_IfPlayerHasGold
+;     IScripts_CheckEnoughMoney
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Player_HandleTouchCoin
+;     Player_AddGold
+;     Player_SubtractGold
+;     UI_DrawGoldValue
 ;============================================================================
 
 ;
@@ -6293,6 +7737,10 @@ Gold_U:                                     ; [$0394]
 
 ;============================================================================
 ; Temporary variable used when adding or showing player HP.
+;
+; XREFS:
+;     IScriptAction_AddHP
+;     UI_DrawPlayerHPValue
 ;============================================================================
 
 ;
@@ -6306,6 +7754,16 @@ Temp_AddedHPValue:                          ; [$0399]
 
 ;============================================================================
 ; The player's available MP.
+;
+; XREFS:
+;     IScriptAction_AddMP
+;     Game_Start
+;     Player_AddMP
+;     Player_FillHPAndMP
+;     Player_ReduceMP
+;     Player_SetMP
+;     Player_Spawn
+;     UI_DrawHUD
 ;============================================================================
 
 ;
@@ -6343,6 +7801,11 @@ Player_ShieldPositionY:                     ; [$039c]
 ; Inventory of the player's weapons.
 ;
 ; They can have up to 4 weapons in the inventory.
+;
+; XREFS:
+;     INVENTORY_CATEGORY_L [$PRG12::9b29]
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
+;     Player_PickUpDragonSlayer
 ;============================================================================
 
 ;
@@ -6368,6 +7831,11 @@ WeaponInventory_3_:                         ; [$03a0]
 ; Inventory of the player's armor.
 ;
 ; They can have up to 4 armors in the inventory.
+;
+; XREFS:
+;     INVENTORY_CATEGORY_L [$PRG12::9b2a]
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
+;     Player_PickUpBattleSuit
 ;============================================================================
 
 ;
@@ -6393,6 +7861,11 @@ ArmorInventory_3_:                          ; [$03a4]
 ; Inventory of the player's shields.
 ;
 ; They can have up to 4 shields in the inventory.
+;
+; XREFS:
+;     INVENTORY_CATEGORY_L [$PRG12::9b2b]
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
+;     Player_PickUpBattleHelmet
 ;============================================================================
 
 ;
@@ -6420,6 +7893,9 @@ ShieldInventory_3_:                         ; [$03a8]
 ; They can have up to 5 magic spells in the inventory.
 ;
 ; XXX It seems there's only room for 4 though? Check on this.
+;
+; XREFS:
+;     INVENTORY_CATEGORY_L [$PRG12::9b2c]
 ;============================================================================
 
 ;
@@ -6435,6 +7911,10 @@ MagicInventory:                             ; [$03a9]
 
 ;============================================================================
 ; Inventory of the player's items.
+;
+; XREFS:
+;     INVENTORY_CATEGORY_L [$PRG12::9b2d]
+;     Player_PickUpItem
 ;============================================================================
 
 ;
@@ -6468,18 +7948,32 @@ ItemInventory:                              ; [$03ad]
 ; 1 = Long Sword
 ; 2 = Giant Blade
 ; 3 = Dragon Slayer
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_ShowStatusMenu
+;     Player_Equip
+;     Player_LacksItem
+;     Player_SetStartGameState
+;     Shop_GetPlayerHasSelectedItem
+;     PlayerDeath_ResetSelectedItemState
+;     Game_ExitBuilding
+;     Player_HandleDeath
+;     Player_SetWeapon
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
 ;     Password_EncodeGameState
 ;     Password_Load
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_ShowStatusMenu
 ;     Player_Equip
 ;     Player_LacksItem
 ;     Player_SetStartGameState
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;     PlayerDeath_ResetSelectedItemState
 ;     Game_ExitBuilding
 ;     Player_HandleDeath
@@ -6497,6 +7991,19 @@ SelectedWeapon:
 ; 1 = Studded Mail
 ; 2 = Full Plate
 ; 3 = Battle Suit
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     PlayerDeath_ResetSelectedItemState
+;     Player_ApplyDamage
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
+;     FUN_PRG15_MIRROR__ec58
+;     Player_DrawBody
+;     Player_HandleDeath
+;     Player_LoadArmorSprite
+;     Player_SetArmor
 ;============================================================================
 
 ;
@@ -6508,9 +8015,9 @@ SelectedWeapon:
 ;     Player_ApplyDamage
 ;     SpriteBehavior_BattleSuitDroppedByZoradohna
 ;     FUN_PRG15_MIRROR__ec58
-;     Maybe_Player_UpdateArmorSprite
 ;     Player_DrawBody
 ;     Player_HandleDeath
+;     Player_LoadArmorSprite
 ;     Player_SetArmor
 ;
 SelectedArmor:                              ; [$03be]
@@ -6524,6 +8031,22 @@ SelectedArmor:                              ; [$03be]
 ; 1 = Large Shield
 ; 2 = Magic Shield
 ; 3 = Battle Helmet
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     PlayerDeath_ResetSelectedItemState
+;     Player_DrawShield
+;     Player_HandleHitByMagic
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
+;     WasPlayerHitByMagic
+;     FUN_PRG15_MIRROR__ec58
+;     Player_DrawBody
+;     Player_HandleDeath
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
+;     Player_SetShield
 ;============================================================================
 
 ;
@@ -6531,17 +8054,17 @@ SelectedArmor:                              ; [$03be]
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
-;     HandlePlayerHitByMagic
 ;     PlayerDeath_ResetSelectedItemState
 ;     Player_DrawShield
+;     Player_HandleHitByMagic
 ;     SpriteBehavior_BattleHelmetDroppedByZoradohna
 ;     WasPlayerHitByMagic
 ;     FUN_PRG15_MIRROR__ec58
-;     Maybe_Player_UpdateArmorSprite
 ;     Player_DrawBody
 ;     Player_HandleDeath
+;     Player_LoadArmorSprite
+;     Player_LoadShieldSprite
 ;     Player_SetShield
-;     Player_Something_ShieldState
 ;
 SelectedShield:                             ; [$03bf]
     db $00                                  ; [$03bf] ShieldInventory
@@ -6556,6 +8079,16 @@ SelectedShield:                             ; [$03bf]
 ; 0x03 = Death
 ; 0x04 = Tilte
 ; 0xFF = None
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetMagic
+;     Player_SetStartGameState
+;     PlayerDeath_ResetSelectedItemState
+;     Player_CastMagic
+;     Player_HandleDeath
+;     Player_ReduceMP
 ;============================================================================
 
 ;
@@ -6598,15 +8131,12 @@ SelectedMagic:                              ; [$03c0]
 ; 0x13 = Pendant
 ; 0x14 = Black Onyx
 ; 0x15 = Fire Crystal
-;============================================================================
-
 ;
 ; XREFS:
 ;     Password_EncodeGameState
 ;     Password_Load
 ;     Player_SetStartGameState
 ;     PlayerDeath_ResetSelectedItemState
-;     FUN_PRG15_MIRROR__fbaf
 ;     GameLoop_CheckUseCurrentItem
 ;     Game_OpenDoorWithAKey
 ;     Game_OpenDoorWithJKey
@@ -6617,6 +8147,26 @@ SelectedMagic:                              ; [$03c0]
 ;     Player_ClearSelectedItem
 ;     Player_HandleDeath
 ;     Player_SetItem
+;     UI_DrawSelectedItem
+;============================================================================
+
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     PlayerDeath_ResetSelectedItemState
+;     GameLoop_CheckUseCurrentItem
+;     Game_OpenDoorWithAKey
+;     Game_OpenDoorWithJKey
+;     Game_OpenDoorWithJoKey
+;     Game_OpenDoorWithKKey
+;     Game_OpenDoorWithQKey
+;     Game_UnlockDoorWithUsableItem
+;     Player_ClearSelectedItem
+;     Player_HandleDeath
+;     Player_SetItem
+;     UI_DrawSelectedItem
 ;
 SelectedItem:                               ; [$03c1]
     db $00                                  ; [$03c1] ItemInventory
@@ -6624,6 +8174,22 @@ SelectedItem:                               ; [$03c1]
 
 ;============================================================================
 ; Number of weapons in the player's inventory
+;
+; XREFS:
+;     IScriptAction_OpenShop
+;     IScriptAction_ShowSellMenu
+;     Password_EncodeGameState
+;     Password_Load
+;     PlayerMenu_ShowSubmenu
+;     Player_AddToInventory
+;     Player_LacksItem
+;     Player_RemoveItem
+;     Player_SetStartGameState
+;     Shop_GetPlayerHasSelectedItem
+;     Player_InitInventoryState
+;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
+;     Player_PickUpBattleSuit
+;     Player_PickUpDragonSlayer
 ;============================================================================
 
 ;
@@ -6632,12 +8198,12 @@ SelectedItem:                               ; [$03c1]
 ;     IScriptAction_ShowSellMenu
 ;     Password_EncodeGameState
 ;     Password_Load
+;     PlayerMenu_ShowSubmenu
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
 ;     Player_SetStartGameState
-;     Something_ShopCursorInventory
-;     UI_ShowPlayerMenu
+;     Shop_GetPlayerHasSelectedItem
 ;     Player_InitInventoryState
 ;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Player_PickUpBattleSuit
@@ -6650,6 +8216,15 @@ NumberOfWeapons:
 
 ;============================================================================
 ; Number of armors in the player's inventory
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     Player_InitInventoryState
+;     SpriteBehavior_BattleSuitDroppedByZoradohna
+;     Player_PickUpBattleSuit
+;     Player_PickUpDragonSlayer
 ;============================================================================
 
 ;
@@ -6668,6 +8243,14 @@ NumberOfArmors:                             ; [$03c3]
 
 ;============================================================================
 ; Number of shields in the player's inventory
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     Player_InitInventoryState
+;     SpriteBehavior_BattleHelmetDroppedByZoradohna
+;     Player_PickUpBattleHelmet
 ;============================================================================
 
 ;
@@ -6685,6 +8268,12 @@ NumberOfShields:                            ; [$03c4]
 
 ;============================================================================
 ; Number of magic spells in the player's inventory
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     Player_InitInventoryState
 ;============================================================================
 
 ;
@@ -6700,6 +8289,14 @@ NumberOfMagicSpells:                        ; [$03c5]
 
 ;============================================================================
 ; Number of items in the player's inventory
+;
+; XREFS:
+;     IScriptAction_ShowSellMenu
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     Player_InitInventoryState
+;     Player_PickUpItem
 ;============================================================================
 
 ;
@@ -6722,6 +8319,19 @@ NumberOfItems:                              ; [$03c6]
 ;
 ; If set, the player won't be drawn, and instead portrait
 ; data will be loaded, displayed, and animated.
+;
+; XREFS:
+;     IScriptAction_ShowSellMenu
+;     CurrentSprite_UpdateState
+;     Player_DrawShield
+;     Player_DrawWeapon
+;     FUN_PRG15_MIRROR__f2e3
+;     GameLoop_ClearSprites
+;     IScripts_ClearPortraitImage
+;     IScripts_DrawPortraitAnimationFrame
+;     IScripts_GetPortraitOffset
+;     IScripts_ShowPortraitImage
+;     Player_DrawBody
 ;============================================================================
 
 ;
@@ -6730,12 +8340,12 @@ NumberOfItems:                              ; [$03c6]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     FUN_PRG15_MIRROR__f24d
 ;     FUN_PRG15_MIRROR__f2e3
 ;     GameLoop_ClearSprites
-;     IScripts_ClearPortrait
+;     IScripts_ClearPortraitImage
 ;     IScripts_DrawPortraitAnimationFrame
 ;     IScripts_GetPortraitOffset
+;     IScripts_ShowPortraitImage
 ;     Player_DrawBody
 ;
 IScript_PortraitID:                         ; [$03c7]
@@ -6750,7 +8360,7 @@ IScript_PortraitID:                         ; [$03c7]
 ;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
-;     Maybe_Player_UpdateWeaponSprite
+;     Player_LoadWeaponSprite
 ;     Player_SetWeapon
 ;
 Player_CurWeapon:                           ; [$03c8]
@@ -6758,14 +8368,14 @@ Player_CurWeapon:                           ; [$03c8]
 
 ;
 ; XREFS:
+;     Area_HandleBreakableFloor
 ;     Area_SetBlocks
-;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     FUN_PRG15_MIRROR__d6ce
-;     FUN_PRG15_MIRROR__d82d
+;     Area_SetBlocks_SetAttributes
+;     Area_SetBlocks_WriteBlockData12
+;     Area_SetBlocks_WriteBlockData34
 ;     Player_UseMattock
 ;
-Something_Maybe_BlockOffset:                ; [$03c9]
+Arg_BlockAttributesIndex:                   ; [$03c9]
     db $00                                  ; [$03c9] byte
 
     db $00,$00,$00,$00                      ; [$03cb] undefined
@@ -6788,22 +8398,22 @@ BYTE_03cf:                                  ; [$03cf]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__d00d
 ;     Fog_OnTick
 ;     Game_EnterBuilding
 ;     Game_SpawnInTemple
 ;     Player_HandleDeath
 ;     Screen_NextTransitionState
-;     Something_SetupNewScreen
+;     Screen_SetupNew
+;     UNUSED_WriteCurrentBackgroundPalette
 ;
-Screen_Palette:                             ; [$03d0]
+Screen_Paletteindex:                        ; [$03d0]
     db $00                                  ; [$03d0] Palette
 
 ;
 ; XREFS:
 ;     Area_BeginScrollToNextRoom
 ;     EndGame_MoveToKingsRoom
-;     FUN_PRG15_MIRROR__df64
+;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
@@ -6830,6 +8440,10 @@ Area_Music_Outside:                         ; [$03d2]
 
 ;============================================================================
 ; Palette index data.
+;
+; XREFS:
+;     IScripts_ClearPortraitImage
+;     IScripts_ShowPortraitImage
 ;============================================================================
 
 ;
@@ -6839,11 +8453,12 @@ Area_Music_Outside:                         ; [$03d2]
 ;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__f24d
-;     IScripts_ClearPortrait
+;     IScripts_ClearPortraitImage
+;     IScripts_ShowPortraitImage
 ;
 Palette_SavedIndex:                         ; [$03d3]
     db $00                                  ; [$03d3] byte
+
 
 ;
 ; The current palette index.
@@ -6854,15 +8469,19 @@ Palette_SavedIndex:                         ; [$03d3]
 ;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__f24d
-;     Palette_LoadFromIndex
+;     IScripts_ShowPortraitImage
+;     Screen_LoadSpritePalette
 ;
-Palette_CurrentIndex:                       ; [$03d4]
+Palette_SpritePaletteIndex:                 ; [$03d4]
     db $00                                  ; [$03d4] byte
 
 
 ;============================================================================
 ; Region and screen information.
+;
+; XREFS:
+;     Game_EnterBuilding
+;     Game_ExitBuilding
 ;============================================================================
 
 ;
@@ -6870,7 +8489,7 @@ Palette_CurrentIndex:                       ; [$03d4]
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;
-Area_PrevRegion:                            ; [$03d5]
+Area_SavedArea:                             ; [$03d5]
     db $00                                  ; [$03d5] byte
 
 ;
@@ -6878,7 +8497,7 @@ Area_PrevRegion:                            ; [$03d5]
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;
-Maybe_PrevScreen:                           ; [$03d6]
+Area_SavedScreen:                           ; [$03d6]
     db $00                                  ; [$03d6] byte
 
 ;
@@ -6886,7 +8505,7 @@ Maybe_PrevScreen:                           ; [$03d6]
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;
-Prev_Palette:                               ; [$03d7]
+Screen_SavedPalette:                        ; [$03d7]
     db $00                                  ; [$03d7] byte
 
 ;
@@ -6894,7 +8513,7 @@ Prev_Palette:                               ; [$03d7]
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;
-Prev_PlayerPosXY:                           ; [$03d8]
+Player_SavedPosXY:                          ; [$03d8]
     db $00                                  ; [$03d8] byte
 
 ;
@@ -6904,7 +8523,7 @@ Prev_PlayerPosXY:                           ; [$03d8]
 ;     Game_SpawnInTemple
 ;     Player_EnterDoorToInside
 ;
-Something_Maybe_NewTilesIndex:              ; [$03d9]
+Building_TilesIndex:                        ; [$03d9]
     db $00                                  ; [$03d9] byte
 
 ;
@@ -6985,6 +8604,10 @@ SpriteBox_Height:                           ; [$03e5]
 
 ;============================================================================
 ; IDs of blocks in the last column of screen to the left
+;
+; XREFS:
+;     Area_CanPlayerMoveLeft
+;     Area_ScrollToNextRoom
 ;============================================================================
 
 ;
@@ -7019,6 +8642,10 @@ LastColumnLeftScreen_1_:                    ; [$03e7]
 
 ;============================================================================
 ; IDs of blocks in the first column of screen to the right
+;
+; XREFS:
+;     Area_CanMoveUp
+;     Area_ScrollToNextRoom
 ;============================================================================
 
 ;
@@ -7059,6 +8686,10 @@ FirstColumnInRightScreen_10_:               ; [$0400]
 
 ;============================================================================
 ; IDs of blocks in the last row of screen above
+;
+; XREFS:
+;     Area_CanPlayerMoveUp
+;     Area_ScrollToNextRoom
 ;============================================================================
 
 ;
@@ -7093,12 +8724,16 @@ LastRowAboveScreen_1_:                      ; [$0407]
 
 ;============================================================================
 ; IDs of blocks in the first row of screen below
+;
+; XREFS:
+;     Area_ScrollToNextRoom
+;     Player_CheckIfPassable
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
-;     Player_Maybe_MoveIfPassable
+;     Player_CheckIfPassable
 ;
 FirstRowBelowScreen:                        ; [$0416]
     db $00                                  ; [0]:
@@ -7130,6 +8765,10 @@ FirstRowBelowScreen_1_:                     ; [$0417]
 ;
 ; This prevents sprite movement or collision handling when
 ; set.
+;
+; XREFS:
+;     Sprites_UpdateAll
+;     Game_DrawScreenInFrozenState
 ;============================================================================
 
 ;
@@ -7143,6 +8782,15 @@ Sprites_UpdatesPaused:                      ; [$0426]
 
 ;============================================================================
 ; Duration of the pointment
+;
+; XREFS:
+;     Player_HandleTouchEnemy
+;     Player_HandleTouchEnemyMagic
+;     SpriteBehavior_Ointment
+;     Game_ClearTimedItems
+;     Game_DecOintmentDuration
+;     LimitItemDurations
+;     Player_PickUpOintment
 ;============================================================================
 
 ;
@@ -7161,6 +8809,13 @@ DurationOintment:                           ; [$0427]
 
 ;============================================================================
 ; Duration of the gloves
+;
+; XREFS:
+;     Player_HitSpriteWithWeapon
+;     SpriteBehavior_Glove
+;     Game_ClearTimedItems
+;     Game_DecGloveDuration
+;     Player_PickUpGlove
 ;============================================================================
 
 ;
@@ -7177,6 +8832,11 @@ DurationGlove:                              ; [$0428]
 
 ;============================================================================
 ; Duration of the wing boots
+;
+; XREFS:
+;     Game_ClearTimedItems
+;     Game_DecWingBootsDuration
+;     Player_UseWingBoots
 ;============================================================================
 
 ;
@@ -7191,6 +8851,14 @@ DurationWingBoots:                          ; [$0429]
 
 ;============================================================================
 ; Duration of the active hour glass
+;
+; XREFS:
+;     Sprites_UpdateAll
+;     Sprites_UpdateBehavior
+;     Game_ClearTimedItems
+;     Game_DecHourGlassDuration
+;     LimitItemDurations
+;     Player_UseHourGlass
 ;============================================================================
 
 ;
@@ -7208,11 +8876,17 @@ DurationHourGlass:                          ; [$042a]
 
 ;============================================================================
 ; Key requirement for the current door
+;
+; XREFS:
+;     Game_RunDoorRequirementHandler
+;     Game_UnlockDoor
+;     Player_CheckHandleEnterDoor
+;     Player_EnterDoorToOutside
 ;============================================================================
 
 ;
 ; XREFS:
-;     Game_CheckDoorRequirement
+;     Game_RunDoorRequirementHandler
 ;     Game_UnlockDoor
 ;     Player_CheckHandleEnterDoor
 ;     Player_EnterDoorToOutside
@@ -7230,18 +8904,42 @@ CurrentDoor_KeyRequirement:                 ; [$042b]
 ; 0x20 = Ring of Dworf
 ; 0x40 = Ring of Ruby
 ; 0x80 = Ring of Elf
+;
+; XREFS:
+;     Password_EncodeGameState
+;     Password_Load
+;     PlayerMenu_ShowStatusMenu
+;     Player_AddSpecialItem
+;     Player_LacksItem
+;     Player_RemoveItem
+;     Player_SetStartGameState
+;     Shop_GetPlayerHasSelectedItem
+;     Player_ApplyDamage
+;     Player_HitEnemyWithMagic
+;     Player_HitSpriteWithWeapon
+;     SpriteBehavior_BlackOnyxDropFromZoradohna
+;     SpriteBehavior_PendantDroppedFromRipasheiku
+;     SpriteBehavior_ShowMagicalRod
+;     Game_OpenDoorWithDemonsRing
+;     Game_OpenDoorWithRingOfDworf
+;     Game_OpenDoorWithRingOfElf
+;     Player_CheckPushingBlock
+;     Player_PickUpBlackOnyx
+;     Player_PickUpElixir
+;     Player_ReduceHP
+;     Player_UseElixir
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Password_EncodeGameState
 ;     Password_Load
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
+;     Player_AddSpecialItem
 ;     Player_LacksItem
 ;     Player_RemoveItem
-;     Player_SetSpecialItem
 ;     Player_SetStartGameState
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;     Player_ApplyDamage
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
@@ -7268,6 +8966,26 @@ SpecialItems:                               ; [$042c]
 ; 0x02 = Spring of Trunk quest has started (maybe?)
 ; 0x10 = Mattock collected
 ; 0x20 = Path to Mascon was opened
+;
+; XREFS:
+;     IScriptAction_IfQuestCompleted
+;     IScriptAction_SetQuestComplete
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     SpriteBehavior_Fountain
+;     SpriteBehavior_MattockDroppedFromRipasheiku
+;     SpriteBehavior_SpringOfFortress
+;     SpriteBehavior_SpringOfJoker
+;     SpriteBehavior_SpringOfSky
+;     SpriteBehavior_WingBootsDroppedByZorugeriru
+;     Game_DropLadderToMascon
+;     Game_OpenPathToMascon
+;     Player_CheckPushingBlock
+;     Player_PickUpMattockWithQuest
+;     Player_PickUpWingBootsWithQuest
+;     Player_Spawn
+;     ScreenEvents_HandlePathToMasconEvent
 ;============================================================================
 
 ;
@@ -7308,17 +9026,26 @@ Quests:                                     ; [$042d]
 ;
 ; If 0xFF, this is unset. Handlers may set this after
 ; use.
-;============================================================================
-
 ;
 ; XREFS:
 ;     Area_BeginScrollToNextRoom
-;     DEAD_FUN_PRG15_MIRROR__ef45
 ;     GameLoop_RunScreenEventHandlers
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandlePathToMasconEvent
 ;     Screen_LoadSpecialEventID
 ;     Screen_SetNoSpecialEventID
+;     UNUSED_ClearScreenSpecialEventID
+;============================================================================
+
+;
+; XREFS:
+;     Area_BeginScrollToNextRoom
+;     GameLoop_RunScreenEventHandlers
+;     ScreenEvents_HandleBoss
+;     ScreenEvents_HandlePathToMasconEvent
+;     Screen_LoadSpecialEventID
+;     Screen_SetNoSpecialEventID
+;     UNUSED_ClearScreenSpecialEventID
 ;
 CurrentScreen_SpecialEventID:               ; [$042e]
     db $00                                  ; [$042e] byte
@@ -7329,23 +9056,52 @@ CurrentScreen_SpecialEventID:               ; [$042e]
 ;     Game_InitStateForSpawn
 ;     Game_MainLoop
 ;
-Maybe_GameScreenStart:                      ; [$042f]
-    db $00                                  ; [$042f] byte
+Maybe_Game_Ready:                           ; [$042f]
+    db $00                                  ; [$042f] bool
 
+
+;============================================================================
+; The current phase of the screen fade-out.
+;
+; This is a value between 0 and 3 (inclusive) that indicates
+; the phase when fading out the screen (used during screen
+; transitions or death). This is used as a counter as an index
+; into a palette delta table,
+; FADE_OUT_DELTA_TABLE.
 ;
 ; XREFS:
-;     LoadPalette
 ;     Player_HandleDeath
 ;     Screen_FadeToBlack
 ;     Screen_NextTransitionState
-;     UNUSED_FUN_PRG15_MIRROR__da29
+;     Screen_SetFadeOutPalette
+;     UNUSED_SetPalette0xFF
+;============================================================================
+
 ;
-PaletteIndex:                               ; [$0430]
+; XREFS:
+;     Player_HandleDeath
+;     Screen_FadeToBlack
+;     Screen_NextTransitionState
+;     Screen_SetFadeOutPalette
+;     UNUSED_SetPalette0xFF
+;
+Screen_FadeOutStage:                        ; [$0430]
     db $00                                  ; [$0430] byte
 
 
 ;============================================================================
 ; Player's health (full)
+;
+; XREFS:
+;     Game_LoadFirstLevel
+;     Player_AddHP
+;     Player_FillHPAndMP
+;     Player_ReduceHP
+;     Player_Spawn
+;     Player_UseHourGlass
+;     Player_UseRedPotion
+;     UI_DrawPlayerHP
+;     UI_DrawPlayerHPValue
 ;============================================================================
 
 ;
@@ -7366,6 +9122,10 @@ Player_HP_U:                                ; [$0431]
 
 ;============================================================================
 ; Player's health (fraction)
+;
+; XREFS:
+;     Player_ReduceHP
+;     Player_UseHourGlass
 ;============================================================================
 
 ;
@@ -7402,6 +9162,9 @@ Area_Region:                                ; [$0435]
 ; PlaySoundInner().
 ;
 ; This is not used outside of this.
+;
+; XREFS:
+;     Sound_PlayEffect
 ;============================================================================
 
 ;
@@ -7414,6 +9177,19 @@ Temp_SoundIDToPlay:                         ; [$0436]
 
 ;============================================================================
 ; Player's current title
+;
+; XREFS:
+;     IScriptAction_CheckUpdatePlayerTitle
+;     IScriptAction_IfPlayerHasTitle
+;     Password_EncodeGameState
+;     Password_Load
+;     PlayerMenu_ShowStatusMenu
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Maybe_Player_CalcSpeed
+;     Player_UseWingBoots
+;     TextBox_DisplayMessage
+;     TextBox_ShowMessage_ShowPlayerTitle
 ;============================================================================
 
 ;
@@ -7422,13 +9198,13 @@ Temp_SoundIDToPlay:                         ; [$0436]
 ;     IScriptAction_IfPlayerHasTitle
 ;     Password_EncodeGameState
 ;     Password_Load
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
 ;     Player_SetInitialExpAndGold
 ;     Player_SetStartGameState
 ;     Maybe_Player_CalcSpeed
 ;     Player_UseWingBoots
+;     TextBox_DisplayMessage
 ;     TextBox_ShowMessage_ShowPlayerTitle
-;     TextBox_Something_ShowMessage_f4a2
 ;
 PlayerTitle:                                ; [$0437]
     db $00                                  ; [$0437] byte
@@ -7437,6 +9213,12 @@ PlayerTitle:                                ; [$0437]
 ;============================================================================
 ; 0x00 = Player is alive
 ; 0x01 = Player is dead
+;
+; XREFS:
+;     Game_InitStateForSpawn
+;     Game_MainLoop
+;     Player_HandleDeath
+;     Player_ReduceHP
 ;============================================================================
 
 ;
@@ -7452,6 +9234,13 @@ PlayerIsDead:                               ; [$0438]
 
 ;============================================================================
 ; The temple in which the player will be spawned upon death.
+;
+; XREFS:
+;     IScriptAction_SetSpawnPoint
+;     Password_EncodeGameState
+;     Password_Load
+;     Player_SetStartGameState
+;     Game_SpawnInTemple
 ;============================================================================
 
 ;
@@ -7473,6 +9262,9 @@ TempleSpawnPoint:                           ; [$0439]
 ; of every 4 visits. It's incremented and then checked by
 ; Screen_Is3Of4Visits, which is called by some
 ; item BScripts, to determine whether to hide or show items.
+;
+; XREFS:
+;     Screen_Is3Of4Visits
 ;============================================================================
 
 ;
@@ -7485,6 +9277,10 @@ Screen_TrackedVisitCount:                   ; [$043a]
 
 ;============================================================================
 ; Block properties of the currently-active screen
+;
+; XREFS:
+;     Area_GetBlockProperty
+;     Area_LoadBlockProperties
 ;============================================================================
 
 ;
@@ -7630,10 +9426,10 @@ BlockProperties_1_:                         ; [$043d]
 
 ;
 ; XREFS:
-;     FUN_PRG14__8329
-;     HandlePlayerHitByMagic
 ;     Player_ApplyDamage
+;     Player_HandleHitByMagic
 ;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;     Player_ReduceHP
 ;     Player_Something_ChangeHP
 ;
@@ -7642,10 +9438,10 @@ Arg_PlayerHealthDelta_L:                    ; [$04bc]
 
 ;
 ; XREFS:
-;     FUN_PRG14__8329
-;     HandlePlayerHitByMagic
 ;     Player_ApplyDamage
+;     Player_HandleHitByMagic
 ;     SpriteBehavior_FlashScreenHitPlayer
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;     Player_ReduceHP
 ;     Player_Something_ChangeHP
 ;
@@ -7654,15 +9450,15 @@ Arg_PlayerHealthDelta_U:                    ; [$04bd]
 
 ;
 ; XREFS:
-;     FUN_PRG14__8329
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;     Player_Something_ChangeHP
 ;
-BYTE_04be:                                  ; [$04be]
+SpriteBehaviorUnknown20_SomethingXOrY:      ; [$04be]
     db $00                                  ; [$04be] byte
 
 ;
 ; XREFS:
-;     FUN_PRG14__8329
+;     SpriteBehavior_Unknown_29_SomeSetup
 ;     Player_Something_ChangeHP
 ;
 BYTE_04bf:                                  ; [$04bf]
@@ -7696,6 +9492,10 @@ Password_DPadBits:                          ; [$04c2]
 ; the cursor movement.
 ;
 ; See PasswordScreen_GetDPadBits for usage.
+;
+; XREFS:
+;     PasswordScreen_GetDPadBits
+;     PasswordScreen_Show
 ;============================================================================
 
 ;
@@ -7710,7 +9510,7 @@ Password_CounterBeforeAutoRepeatMove:       ; [$04c3]
 ; XREFS:
 ;     Password_EncodeValueList
 ;
-Password_Temp1:                             ; [$04c6]
+Password_TempY:                             ; [$04c6]
     db $00                                  ; [$04c6] byte
 
 ;
@@ -7718,7 +9518,7 @@ Password_Temp1:                             ; [$04c6]
 ;     Password_DecodeValueList
 ;     Password_EncodeValueList
 ;
-Password_Temp2:                             ; [$04c7]
+Password_TempX:                             ; [$04c7]
     db $00                                  ; [$04c7] byte
 
 ;
@@ -7726,7 +9526,7 @@ Password_Temp2:                             ; [$04c7]
 ;     Password_DecodeValueList
 ;     Password_EncodeValueList
 ;
-Password_Temp3:                             ; [$04c8]
+Password_TempA:                             ; [$04c8]
     db $00                                  ; [$04c8] byte
 
 ;
@@ -7818,13 +9618,20 @@ Password_EncodedState_1_:                   ; [$04ce]
 
 
 ;============================================================================
-; Title the player will get in the next guru visit
+; Title the player will get in the next guru visit.
+;
+; XREFS:
+;     IScriptAction_CheckUpdatePlayerTitle
+;     PlayerMenu_ShowStatusMenu
+;     Player_SetInitialExpAndGold
+;     Player_SetStartGameState
+;     Player_CheckReachedNextTitle
 ;============================================================================
 
 ;
 ; XREFS:
 ;     IScriptAction_CheckUpdatePlayerTitle
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
 ;     Player_SetInitialExpAndGold
 ;     Player_SetStartGameState
 ;     Player_CheckReachedNextTitle
@@ -7832,12 +9639,28 @@ Password_EncodedState_1_:                   ; [$04ce]
 NextPlayerTitle:                            ; [$04ed]
     db $00                                  ; [$04ed] byte
 
+
+;============================================================================
+; Width of the HP/MP bar.
+;
+; This gets set when loading a screen, and is used to draw
+; the screen width.
+;
+; It's possible that this was at one point meant to be
+; updated based on progression or some other state. Pure
+; speculation.
 ;
 ; XREFS:
+;     UI_DrawHUDSprites
 ;     UI_DrawManaOrHPBar
-;     UI_DrawStatusSymbols
+;============================================================================
+
 ;
-Something_ManaOrHPBar:                      ; [$04ee]
+; XREFS:
+;     UI_DrawHUDSprites
+;     UI_DrawManaOrHPBar
+;
+UI_MPAndHPBarWidth:                         ; [$04ee]
     db $00                                  ; [$04ee] byte
 
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$04f0] undefined
@@ -7862,23 +9685,38 @@ Something_ManaOrHPBar:                      ; [$04ee]
 ; 3. Lower byte of PPUADDR to write.
 ;
 ; 4...N. Up to <length> bytes of PPUDATA to write.
-;============================================================================
-
 ;
 ; XREFS:
-;     Area_WriteTwoBlocksFromData12ToPPUBuffer
-;     Area_WriteTwoBlocksFromData34ToPPUBuffer
-;     FUN_PRG15_MIRROR__c033
-;     FUN_PRG15_MIRROR__d82d
+;     Area_SetBlocks_SetAttributes
+;     Area_SetBlocks_WriteBlockData12
+;     Area_SetBlocks_WriteBlockData34
 ;     Fog_UpdateTiles
 ;     Game_Init
-;     PPUBuffer_Append0
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPUBuffer_Set
+;     PPUBuffer_WritePalette
 ;     Player_DrawDeathAnimation
+;     UNUSED_FUN_PRG15_MIRROR__c033
+;============================================================================
+
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;     Area_SetBlocks_WriteBlockData12
+;     Area_SetBlocks_WriteBlockData34
+;     Fog_UpdateTiles
+;     Game_Init
+;     PPUBuffer_Draw
+;     PPUBuffer_DrawCommand_RemoveVerticalLines
+;     PPUBuffer_DrawCommand_RotateTilesRight1Pixel
+;     PPUBuffer_QueueCommandOrLength
+;     PPUBuffer_Set
+;     PPUBuffer_WritePalette
+;     Player_DrawDeathAnimation
+;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPUBuffer:                                  ; [$0500]
     db $00                                  ; [0]:
@@ -7904,16 +9742,16 @@ PPUBuffer_5_:                               ; [$0505]
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f316
+;     IScripts_Maybe_DrawSpriteToPPU
+;     Player_DrawWeaponTile
 ;
 PPUBuffer_8_:                               ; [$0508]
     db $00                                  ; [8]:
 
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__eebf
-;     FUN_PRG15_MIRROR__f316
+;     IScripts_Maybe_DrawSpriteToPPU
+;     Player_DrawWeaponTile
 ;
 PPUBuffer_9_:                               ; [$0509]
     db $00                                  ; [9]:
@@ -8166,289 +10004,236 @@ PPUBuffer_9_:                               ; [$0509]
 
 
 ;============================================================================
-; Uncompressed block data of the current screen
+; Uncompressed block data of the current screen.
 ;
-; This also overlaps with various other bits of state,
-; depending on the screen. The password screen and the
-; intro/outro animations also store state within this
-; range.
-;============================================================================
-
+; The screen data can be up to 256 bytes.
+;
+; This section is also used for other places of the game,
+; such as the password screen management and intro/outro
+; animatinos.
 ;
 ; XREFS:
-;     Menu_Draw_Something9312
-;     Menu_Something_93EC
-;     PasswordScreen_Maybe_WriteCharAtCursor
+;     PasswordScreen_DrawAtCursorPosition
+;     PasswordScreen_HandleDeleteAtCursor
+;     PasswordScreen_HandleDeleteLastChar
+;     PasswordScreen_HandleInputChar
 ;     Password_Maybe_CheckPasswordLength
+;     Area_HandleBreakableFloor
 ;     Area_IsBlockImpassableOrLadder
 ;     Area_LoadBlocks
 ;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
 ;     Area_StoreBlockIsAir
-;     FUN_PRG15_MIRROR__d6ce
 ;     FUN_PRG15_MIRROR__d7b0
-;     FUN_PRG15_MIRROR__f7b7
 ;     Game_Init
 ;     Game_OpenPathToMascon
 ;     Player_CheckIfOnLadder
+;     Player_CheckOnBreakableBlock
 ;     Player_CheckPushingBlock
-;     Player_FallToGround
 ;     Player_UseMattock
 ;     ScreenBuffer_Clear
 ;     ScreenBuffer_IsBlockImpassable
 ;     ScreenBuffer_LoadBlockProperty
-;     TextBox_Maybe_GetPaletteBehindTextbox
-;
-Password_EnteredChars:                      ; [$0600]
-ScreenBuffer:
-    db $00                                  ; [0]:
+;     TextBox_GetBackingAttributeData
+;     Textbox_Maybe_GetAreaBehindTextbox
+;============================================================================
 
 ;
 ; XREFS:
+;     PasswordScreen_DrawAtCursorPosition
+;     PasswordScreen_HandleDeleteAtCursor
+;     PasswordScreen_HandleDeleteLastChar
+;     PasswordScreen_HandleInputChar
+;     Password_Maybe_CheckPasswordLength
+;     Area_HandleBreakableFloor
+;     Area_IsBlockImpassableOrLadder
+;     Area_LoadBlocks
+;     Area_ScrollToNextRoom
+;     Area_SetStateFromDoorDestination
+;     Area_StoreBlockIsAir
+;     FUN_PRG15_MIRROR__d7b0
+;     Game_Init
+;     Game_OpenPathToMascon
+;     Player_CheckIfOnLadder
+;     Player_CheckOnBreakableBlock
+;     Player_CheckPushingBlock
+;     Player_UseMattock
+;     ScreenBuffer_Clear
+;     ScreenBuffer_IsBlockImpassable
+;     ScreenBuffer_LoadBlockProperty
+;     TextBox_GetBackingAttributeData
+;     Textbox_Maybe_GetAreaBehindTextbox
+;
+Password_EnteredChars:                      ; [$0600]
+ScreenBuffer:
+    db $00                                  ; [$0600] byte
+
+;
+; XREFS:
+;     PasswordScreen_HandleDeleteAtCursor
 ;     Password_Maybe_CheckPasswordLength
 ;     Area_ScrollToNextRoom
 ;     ScreenBuffer_Clear
 ;
-ScreenBuffer_1_:                            ; [$0601]
-    db $00                                  ; [1]:
+DAT_0601:                                   ; [$0601]
+    db $00                                  ; [$0601] undefined
 
 ;
 ; XREFS:
 ;     Password_Maybe_CheckPasswordLength
 ;
-ScreenBuffer_2_:                            ; [$0602]
-    db $00                                  ; [2]:
+DAT_0602:                                   ; [$0602]
+    db $00                                  ; [$0602] undefined
 
 ;
 ; XREFS:
 ;     Password_Maybe_CheckPasswordLength
 ;
-ScreenBuffer_3_:                            ; [$0603]
-    db $00                                  ; [3]:
+DAT_0603:                                   ; [$0603]
+    db $00                                  ; [$0603] undefined
 
 ;
 ; XREFS:
 ;     Password_Maybe_CheckPasswordLength
 ;
-ScreenBuffer_4_:                            ; [$0604]
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
+DAT_0604:                                   ; [$0604]
+    hex 00 00 00 00 00 00 00 00 00 00 00    ; [$0604] undefined
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;
-ScreenBuffer_15_:                           ; [$060f]
-    db $00                                  ; [15]:
+DAT_060f:                                   ; [$060f]
+    db $00                                  ; [$060f] undefined
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;
-ScreenBuffer_16_:                           ; [$0610]
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
+DAT_0610:                                   ; [$0610]
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0610] undefined
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-ScreenBuffer_30_:                           ; [$061e]
-    db $00                                  ; [30]:
+DAT_061e:                                   ; [$061e]
+    db $00                                  ; [$061e] undefined
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;     Area_ScrollToNextRoom
 ;
-ScreenBuffer_31_:                           ; [$061f]
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
+DAT_061f:                                   ; [$061f]
+    db $00,$00,$00                          ; [$061f] undefined
 
 ;
 ; XREFS:
 ;     Game_DropLadderToMascon
 ;
-ScreenBuffer_34_:                           ; [$0622]
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
+DAT_0622:                                   ; [$0622]
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0622] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0632] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0642] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0652] undefined
 
+
+;============================================================================
+; Password screen state.
 ;
 ; XREFS:
-;     Maybe_Password_CursorHandler
-;     Maybe_Password_CursorHandler_Something9545
-;     Menu_Something_954F
-;     PasswordScreen_SetCusorCol
+;     PasswordScreen_DrawSelectionCursor
+;     PasswordScreen_IsCursorSpotInvalid
+;     PasswordScreen_SetCursorCol
 ;     PasswordScreen_Show
-;     Password_IsCursorWrapping
-;     Password_NormalizeCursorColForBottomRow
+;     PasswordScreen_UpdateCursorMovedFromLastRow
+;     PasswordScreen_UpdateCursorMovedToLastRow
+;     Password_HandleDPadInput
+;============================================================================
+
+;
+; The input cursor column in the password screen.
+;
+;
+; XREFS:
+;     PasswordScreen_DrawSelectionCursor
+;     PasswordScreen_IsCursorSpotInvalid
+;     PasswordScreen_SetCursorCol
+;     PasswordScreen_Show
+;     PasswordScreen_UpdateCursorMovedFromLastRow
+;     PasswordScreen_UpdateCursorMovedToLastRow
+;     Password_HandleDPadInput
 ;
 Password_CursorCol:                         ; [$0662]
-    db $00                                  ; [98]:
+    db $00                                  ; [$0662] byte
+
 
 ;
+; The input cursor row in the password screen.
+;
+;
 ; XREFS:
-;     Maybe_Password_CursorHandler
-;     Menu_Something_954F
+;     PasswordScreen_DrawSelectionCursor
+;     PasswordScreen_IsCursorSpotInvalid
 ;     PasswordScreen_Show
-;     Password_IsCursorWrapping
+;     Password_HandleDPadInput
 ;
 Password_CursorRow:                         ; [$0663]
-    db $00                                  ; [99]:
+    db $00                                  ; [$0663] byte
+
 
 ;
+; The position of the selection cursor in the password field.
+;
+;
 ; XREFS:
-;     FUN_PRG12__92ed
-;     LAB_PRG12__93bd [$PRG12::93bd]
-;     LAB_PRG12__93d7 [$PRG12::93d7]
-;     Menu_Draw_Something9312
-;     Menu_Draw_Something9351
-;     Menu_Draw_Something9386
-;     Menu_Draw_Something93B4 [$PRG12::93b4]
-;     Menu_Something_93EC
-;     PasswordScreen_Maybe_WriteCharAtCursor
+;     PasswordScreen_DrawAtCursorPosition
+;     PasswordScreen_HandleDeleteAtCursor
+;     PasswordScreen_HandleDeleteLastChar
+;     PasswordScreen_HandleInputChar
+;     PasswordScreen_HandleMoveCursorLeft
+;     PasswordScreen_HandleMoveCursorRight
 ;     PasswordScreen_Show
+;     PasswordScreen_WriteCharTile
 ;
 Password_FieldCursorPos:                    ; [$0664]
-    db $00                                  ; [100]:
+    db $00                                  ; [$0664] byte
+
 
 ;
+; Maximum number of characters allowed for the password.
+;
+;
 ; XREFS:
-;     Menu_Draw_Something9312
-;     Menu_Draw_Something9351
-;     Menu_Draw_Something9386
+;     PasswordScreen_HandleInputChar
+;     PasswordScreen_HandleMoveCursorLeft
+;     PasswordScreen_HandleMoveCursorRight
 ;     PasswordScreen_Show
 ;
 Password_MaxChars:                          ; [$0665]
-    db $00                                  ; [101]:
+    db $00                                  ; [$0665] byte
+
 
 ;
+; The number of password characters entered.
+;
+;
 ; XREFS:
-;     Menu_Draw_Something9312
-;     Menu_Draw_Something9351
-;     Menu_Draw_Something9386
-;     Menu_Something_93EC
+;     PasswordScreen_HandleDeleteAtCursor
+;     PasswordScreen_HandleDeleteLastChar
+;     PasswordScreen_HandleInputChar
+;     PasswordScreen_HandleMoveCursorLeft
+;     PasswordScreen_HandleMoveCursorRight
 ;     PasswordScreen_Show
+;     PasswordScreen_WaitForInput
 ;     Password_Maybe_CheckPasswordLength
 ;
 Password_EnteredCharsLength:                ; [$0666]
-    db $00                                  ; [102]:
-    db $00                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $00                                  ; [107]:
-    db $00                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $00                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $00                                  ; [114]:
-    db $00                                  ; [115]:
-    db $00                                  ; [116]:
-    db $00                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $00                                  ; [120]:
-    db $00                                  ; [121]:
-    db $00                                  ; [122]:
-    db $00                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
-    db $00                                  ; [128]:
-    db $00                                  ; [129]:
-    db $00                                  ; [130]:
-    db $00                                  ; [131]:
-    db $00                                  ; [132]:
-    db $00                                  ; [133]:
-    db $00                                  ; [134]:
+    db $00                                  ; [$0666] byte
+
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0668] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0677] undefined
 
 ;
 ; XREFS:
@@ -8456,41 +10241,41 @@ Password_EnteredCharsLength:                ; [$0666]
 ;     StartScreen_Draw
 ;     Game_ShowStartScreen
 ;
-ScreenBuffer_135_:                          ; [$0687]
-    db $00                                  ; [135]:
+DAT_0687:                                   ; [$0687]
+    db $00                                  ; [$0687] undefined
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
 ;     SplashAnimation_SomethingUpdateState
 ;
-ScreenBuffer_136_:                          ; [$0688]
-    db $00                                  ; [136]:
+SplashAnimation_0688:                       ; [$0688]
+    db $00                                  ; [$0688] undefined
 
 ;
 ; XREFS:
 ;     SplashAnimation_A90F
 ;     SplashAnimation_FuncAA94
-;     SplashAnimation_SomethingOutroUpdate
+;     SplashAnimation_UpdateOutro
 ;
-ScreenBuffer_137_:                          ; [$0689]
-    db $00                                  ; [137]:
+SplashAnimation_0689:                       ; [$0689]
+    db $00                                  ; [$0689] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_A90F
 ;     SplashAnimation_FuncAA94
-;     SplashAnimation_SomethingOutroUpdate
+;     SplashAnimation_UpdateOutro
 ;
-ScreenBuffer_138_:                          ; [$068a]
-    db $00                                  ; [138]:
+SplashAnimation_068a:                       ; [$068a]
+    db $00                                  ; [$068a] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
 ;
-ScreenBuffer_139_:                          ; [$068b]
-    db $00                                  ; [139]:
+DAT_068b:                                   ; [$068b]
+    db $00                                  ; [$068b] undefined
 
 ;
 ; XREFS:
@@ -8499,8 +10284,8 @@ ScreenBuffer_139_:                          ; [$068b]
 ;     SplashAnimation_A90F
 ;     SplashAnimation_Maybe_AnimPlayerStep
 ;
-ScreenBuffer_140_:                          ; [$068c]
-    db $00                                  ; [140]:
+SplashAnimation_068c:                       ; [$068c]
+    db $00                                  ; [$068c] undefined
 
 
 ;============================================================================
@@ -8508,6 +10293,15 @@ ScreenBuffer_140_:                          ; [$068c]
 ;
 ; This goes from 0 to 4. The larger the number, the smaller
 ; the player.
+;
+; XREFS:
+;     Maybe_SplashAnimation_InitIntroState
+;     Maybe_SplashAnimation_InitOutroState
+;     SplashAnimation_A90F
+;     SplashAnimation_Maybe_AnimPlayerStep
+;     SplashAnimation_Maybe_CalcPlayerAnimSize
+;     SplashAnimation_Maybe_CalcPlayerAnimState
+;     SplashAnimation_RunIntro
 ;============================================================================
 
 ;
@@ -8521,7 +10315,7 @@ ScreenBuffer_140_:                          ; [$068c]
 ;     SplashAnimation_RunIntro
 ;
 IntroAnimation_PlayerSizeCounter:           ; [$068d]
-    db $00                                  ; [141]:
+    db $00                                  ; [$068d] byte
 
 ;
 ; XREFS:
@@ -8530,8 +10324,8 @@ IntroAnimation_PlayerSizeCounter:           ; [$068d]
 ;     SplashAnimation_A90F
 ;     SplashAnimation_Maybe_NextAnimState1
 ;
-ScreenBuffer_142_:                          ; [$068e]
-    db $00                                  ; [142]:
+SplashAnimation_068e:                       ; [$068e]
+    db $00                                  ; [$068e] byte
 
 ;
 ; XREFS:
@@ -8541,8 +10335,8 @@ ScreenBuffer_142_:                          ; [$068e]
 ;     SplashAnimation_Maybe_NextAnimState2
 ;     SplashAnimation_RunOutro
 ;
-ScreenBuffer_143_:                          ; [$068f]
-    db $00                                  ; [143]:
+SplashAnimation_068f:                       ; [$068f]
+    db $00                                  ; [$068f] byte
 
 ;
 ; XREFS:
@@ -8550,8 +10344,8 @@ ScreenBuffer_143_:                          ; [$068f]
 ;     Maybe_SplashAnimation_InitOutroState
 ;     SplashAnimation_Maybe_NextAnimState1
 ;
-ScreenBuffer_144_:                          ; [$0690]
-    db $00                                  ; [144]:
+SplashAnimation_0690:                       ; [$0690]
+    db $00                                  ; [$0690] byte
 
 ;
 ; XREFS:
@@ -8559,8 +10353,8 @@ ScreenBuffer_144_:                          ; [$0690]
 ;     Maybe_SplashAnimation_InitOutroState
 ;     SplashAnimation_Maybe_NextAnimState2
 ;
-ScreenBuffer_145_:                          ; [$0691]
-    db $00                                  ; [145]:
+SplashAnimation_0691:                       ; [$0691]
+    db $00                                  ; [$0691] byte
 
 ;
 ; XREFS:
@@ -8570,8 +10364,8 @@ ScreenBuffer_145_:                          ; [$0691]
 ;     SplashAnimation_Maybe_CalcPlayerAnimState
 ;     SplashAnimation_Maybe_NextAnimState1
 ;
-ScreenBuffer_146_:                          ; [$0692]
-    db $00                                  ; [146]:
+SplashAnimation_0692:                       ; [$0692]
+    db $00                                  ; [$0692] byte
 
 ;
 ; XREFS:
@@ -8581,415 +10375,278 @@ ScreenBuffer_146_:                          ; [$0692]
 ;     SplashAnimation_Maybe_CalcPlayerAnimState
 ;     SplashAnimation_Maybe_NextAnimState2
 ;
-ScreenBuffer_147_:                          ; [$0693]
-    db $00                                  ; [147]:
+SplashAnimation_0693:                       ; [$0693]
+    db $00                                  ; [$0693] byte
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
 ;     LAB_PRG12__a9f8 [$PRG12::a9f8]
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_148_:                          ; [$0694]
-    db $00                                  ; [148]:
+SplashAnimation_0694:                       ; [$0694]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
 ;     LAB_PRG12__a9f8 [$PRG12::a9f8]
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_149_:                          ; [$0695]
-    db $00                                  ; [149]:
+SplashAnimation_0695:                       ; [$0695]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_150_:                          ; [$0696]
-    db $00                                  ; [150]:
+SplashAnimation_0696:                       ; [$0696]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_151_:                          ; [$0697]
-    db $00                                  ; [151]:
+SplashAnimation_0697:                       ; [$0697]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa20
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa20
 ;
-ScreenBuffer_152_:                          ; [$0698]
-    db $00                                  ; [152]:
+SplashAnimation_0698:                       ; [$0698]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_153_:                          ; [$0699]
-    db $00                                  ; [153]:
+SplashAnimation_0698_1_:                    ; [$0699]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa46
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa46
 ;
-ScreenBuffer_154_:                          ; [$069a]
-    db $00                                  ; [154]:
+SplashAnimation_069a:                       ; [$069a]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_155_:                          ; [$069b]
-    db $00                                  ; [155]:
+SplashAnimation_069a_1_:                    ; [$069b]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa20
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa20
 ;
-ScreenBuffer_156_:                          ; [$069c]
-    db $00                                  ; [156]:
+SplashAnimation_069c:                       ; [$069c]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_157_:                          ; [$069d]
-    db $00                                  ; [157]:
+SplashAnimation_069c_1_:                    ; [$069d]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa46
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa46
 ;
-ScreenBuffer_158_:                          ; [$069e]
-    db $00                                  ; [158]:
+SplashAnimation_069e:                       ; [$069e]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_159_:                          ; [$069f]
-    db $00                                  ; [159]:
+SplashAnimation_069e_1_:                    ; [$069f]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa20
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa20
 ;
-ScreenBuffer_160_:                          ; [$06a0]
-    db $00                                  ; [160]:
+SplashAnimation_06a0:                       ; [$06a0]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_161_:                          ; [$06a1]
-    db $00                                  ; [161]:
+SplashAnimation_06a0_1_:                    ; [$06a1]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
-;     FUN_PRG12__aa46
+;     SpashAnimation_SomethingOutro_a9a2
+;     SpashAnimation_SomethingOutro_aa46
 ;
-ScreenBuffer_162_:                          ; [$06a2]
-    db $00                                  ; [162]:
+SplashAnimation_06a2:                       ; [$06a2]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
-ScreenBuffer_163_:                          ; [$06a3]
-    db $00                                  ; [163]:
+SplashAnimation_06a2_1_:                    ; [$06a3]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
+;     SplashAnimation_Intro_SomethingA708
 ;     SplashAnimation_RunIntro
-;     SplashAnimation_SomethingA708
 ;
-ScreenBuffer_164_:                          ; [$06a4]
-    db $00                                  ; [164]:
+SplashAnimation_PaletteStage:               ; [$06a4]
+    db $00                                  ; [$06a4] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_DrawScenery
 ;
-SplashAnimScene:                            ; [$06a5]
-    db $00                                  ; [165]:
-    db $00                                  ; [166]:
-    db $00                                  ; [167]:
-    db $00                                  ; [168]:
-    db $00                                  ; [169]:
-    db $00                                  ; [170]:
-    db $00                                  ; [171]:
-    db $00                                  ; [172]:
-    db $00                                  ; [173]:
-    db $00                                  ; [174]:
-    db $00                                  ; [175]:
-    db $00                                  ; [176]:
-    db $00                                  ; [177]:
-    db $00                                  ; [178]:
-    db $00                                  ; [179]:
-    db $00                                  ; [180]:
-    db $00                                  ; [181]:
-    db $00                                  ; [182]:
-    db $00                                  ; [183]:
-    db $00                                  ; [184]:
-    db $00                                  ; [185]:
-    db $00                                  ; [186]:
-    db $00                                  ; [187]:
-    db $00                                  ; [188]:
-    db $00                                  ; [189]:
-    db $00                                  ; [190]:
-    db $00                                  ; [191]:
+SplashAnimation_SceneIndex:                 ; [$06a5]
+    db $00                                  ; [$06a5] byte
+
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06a7] undefined
+    hex 00 00 00 00 00 00 00 00 00 00       ; [$06b6] undefined
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;
-ScreenBuffer_192_:                          ; [$06c0]
-    db $00                                  ; [192]:
+DAT_06c0:                                   ; [$06c0]
+    db $00                                  ; [$06c0] undefined
 
 ;
 ; XREFS:
 ;     Area_ScrollToNextRoom
 ;
-ScreenBuffer_193_:                          ; [$06c1]
-    db $00                                  ; [193]:
-    db $00                                  ; [194]:
-    db $00                                  ; [195]:
-    db $00                                  ; [196]:
-    db $00                                  ; [197]:
-    db $00                                  ; [198]:
-    db $00                                  ; [199]:
-    db $00                                  ; [200]:
-    db $00                                  ; [201]:
-    db $00                                  ; [202]:
-    db $00                                  ; [203]:
-    db $00                                  ; [204]:
-    db $00                                  ; [205]:
-    db $00                                  ; [206]:
-    db $00                                  ; [207]:
-    db $00                                  ; [208]:
-    db $00                                  ; [209]:
-    db $00                                  ; [210]:
-    db $00                                  ; [211]:
-    db $00                                  ; [212]:
-    db $00                                  ; [213]:
-    db $00                                  ; [214]:
-    db $00                                  ; [215]:
-    db $00                                  ; [216]:
-    db $00                                  ; [217]:
-    db $00                                  ; [218]:
-    db $00                                  ; [219]:
-    db $00                                  ; [220]:
-    db $00                                  ; [221]:
-    db $00                                  ; [222]:
-    db $00                                  ; [223]:
-    db $00                                  ; [224]:
-    db $00                                  ; [225]:
-    db $00                                  ; [226]:
-    db $00                                  ; [227]:
-    db $00                                  ; [228]:
-    db $00                                  ; [229]:
-    db $00                                  ; [230]:
-    db $00                                  ; [231]:
-    db $00                                  ; [232]:
-    db $00                                  ; [233]:
-    db $00                                  ; [234]:
-    db $00                                  ; [235]:
-    db $00                                  ; [236]:
-    db $00                                  ; [237]:
-    db $00                                  ; [238]:
-    db $00                                  ; [239]:
+DAT_06c1:                                   ; [$06c1]
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06c1] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06d1] undefined
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06e1] undefined
 
 ;
 ; XREFS:
 ;     Area_LoadBlocks
 ;
-ScreenBuffer_240_:                          ; [$06f0]
-    db $00                                  ; [240]:
+DAT_06f0:                                   ; [$06f0]
+    db $00                                  ; [$06f0] undefined
 
 ;
 ; XREFS:
 ;     Area_LoadBlocks
 ;
-ScreenBuffer_241_:                          ; [$06f1]
-    db $00                                  ; [241]:
-    db $00                                  ; [242]:
-    db $00                                  ; [243]:
-    db $00                                  ; [244]:
-    db $00                                  ; [245]:
-    db $00                                  ; [246]:
-    db $00                                  ; [247]:
-    db $00                                  ; [248]:
-    db $00                                  ; [249]:
-    db $00                                  ; [250]:
-    db $00                                  ; [251]:
-    db $00                                  ; [252]:
-    db $00                                  ; [253]:
-    db $00                                  ; [254]:
-    db $00                                  ; [255]:
+DAT_06f1:                                   ; [$06f1]
+    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06f1] undefined
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
 ;     SplashAnimation_SomethingUpdateState
 ;     Game_Init
-;     Something_FrameAltToggle
-;     Sprite_Maybe_SetAppearanceAddr
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     Sprites_Reset
 ;
-BYTE_0700:                                  ; [$0700]
+SPRITE0_Y:                                  ; [$0700]
+SPRITE_0_RANGE_1_START:
     db $00                                  ; [$0700] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-DAT_0701:                                   ; [$0701]
-    db $00                                  ; [$0701] undefined
+SPRITE0_TILE:                               ; [$0701]
+    db $00                                  ; [$0701] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-DAT_0702:                                   ; [$0702]
-    db $00                                  ; [$0702] undefined
+SPRITE0_ATTRS:                              ; [$0702]
+    db $00                                  ; [$0702] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_FuncAA94
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-DAT_0703:                                   ; [$0703]
-    db $00                                  ; [$0703] undefined
+SPRITE0_X:                                  ; [$0703]
+    db $00                                  ; [$0703] byte
 
 ;
 ; XREFS:
 ;     SplashAnimation_SomethingUpdateState
-;     Something_FrameAltToggle
-;     Wait3969Cycles
+;     Sprites_FlipRanges
+;     Sprites_Reset
 ;
-CYCLES_COUNTER_1:                           ; [$0704]
-    db $00                                  ; [0]:
+SPRITE_1_RANGE_1_START:                     ; [$0704]
+    db $00                                  ; [$0704] byte
 
 ;
 ; XREFS:
-;     Wait3969Cycles
+;     Sprites_FlipRanges
 ;
-CYCLES_COUNTER_1_1_:                        ; [$0705]
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
+BYTE_0705:                                  ; [$0705]
+    db $00,$00,$00                          ; [$0705] byte
 
 ;
 ; XREFS:
-;     Something_FrameAltToggle
+;     Sprites_Reset
 ;
-CYCLES_COUNTER_1_4_:                        ; [$0708]
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$072d] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$073d] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$074d] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$075d] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$076d] undefined
-    db $00,$00,$00,$00,$00,$00,$00          ; [$077d] undefined
+BYTE_0708:                                  ; [$0708]
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0708]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0718]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0728]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0738]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0748]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0758]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0768]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00      ; [$0778] byte
+
+SPRITE_0_RANGE_2_START:                     ; [$0780]
+    db $00,$00,$00,$00                      ; [$0780] byte
 
 ;
 ; XREFS:
-;     Wait3969Cycles
+;     Sprites_FlipRanges
 ;
-CYCLES_COUNTER_2:                           ; [$0784]
-    db $00                                  ; [0]:
+SPRITE_1_RANGE_2_START:                     ; [$0784]
+    db $00                                  ; [$0784] byte
 
 ;
 ; XREFS:
-;     Wait3969Cycles
+;     Sprites_FlipRanges
 ;
-CYCLES_COUNTER_2_1_:                        ; [$0785]
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07ad] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07bd] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07cd] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07dd] undefined
-    hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$07ed] undefined
-    db $00,$00,$00                          ; [$07fd] undefined
+BYTE_0785:                                  ; [$0785]
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0785]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$0795]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07a5]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07b5]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07c5]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07d5]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07e5]
+                                                                       ; byte
+    db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$07f5] byte

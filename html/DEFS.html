@@ -12,6 +12,7 @@ body {
   background: #1c212d;
   color: white;
   padding: 0.5em;
+  line-height: 1.5;
 }
 
 body, * {
@@ -27,10 +28,28 @@ a:visited {
 
 pre {
   display: grid;
-  grid-template-columns: minmax(70ch, max-content) 1fr;
-  gap: 0 4em;
+  grid-template-columns: minmax(6ch, min-content)
+                         minmax(70ch, max-content)
+                         1fr;
+  gap: 0 3em;
   margin: 0;
   padding: 0;
+}
+
+.anc {
+  grid-area: addr;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.anc:link,
+.anc:visited {
+  color: #666677;
+  text-decoration: none;
+}
+
+.anc:link:hover {
+  color: #9bdeff;
 }
 
 .equs {
@@ -42,14 +61,14 @@ pre {
 .l {
   display: grid;
   grid-template-columns: subgrid;
+  grid-column: 1 / -1;
   min-height: 1lh;
 }
 
 .c,
 .cp,
-.equs,
-.l {
-  grid-column: 1 / -1;
+.equs {
+  grid-column: 2;
 }
 
 .cp {
@@ -64,7 +83,12 @@ pre {
   color: #8aa9ac;
 }
 
+.cd {
+  grid-column: 2 / 3;
+}
+
 .ce {
+  grid-column: -1;
   text-wrap: wrap;
   text-indent: 2ch hanging;
 }
@@ -76,6 +100,7 @@ pre {
 .la,
 .lla {
   font-weight: bold;
+  grid-column: 2 / 3;
 }
 
 .la,
@@ -117,7 +142,7 @@ pre {
 
 <div class="n">AREA_MASCON</div> <div class="i">EQU</div> <div class="v">$03</div>
 
-<div class="n">AREA_VICTIM</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">AREA_VICTIM_OR_INSIDE</div> <div class="i">EQU</div> <div class="v">$04</div>
 
 <div class="n">AREA_CONFLATE</div> <div class="i">EQU</div> <div class="v">$05</div>
 
@@ -165,9 +190,9 @@ pre {
 
 <div class="n">BLOCK_IS_DOOR</div> <div class="i">EQU</div> <div class="v">$03</div>
 
-<div class="n">BLOCK_FG_0x04</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">BLOCK_FOREGROUND</div> <div class="i">EQU</div> <div class="v">$04</div>
 
-<div class="n">BLOCK_0x05</div> <div class="i">EQU</div> <div class="v">$05</div>
+<div class="n">BLOCK_BREAKABLE_FLOOR</div> <div class="i">EQU</div> <div class="v">$05</div>
 
 <div class="n">BLOCK_PUSHABLE</div> <div class="i">EQU</div> <div class="v">$06</div>
 
@@ -175,15 +200,15 @@ pre {
 
 <div class="n">BLOCK_0x08</div> <div class="i">EQU</div> <div class="v">$08</div>
 
-<div class="n">BLOCK_FG_0x09</div> <div class="i">EQU</div> <div class="v">$09</div>
+<div class="n">BLOCK_MAYBE_AREA_TRANSITION_UP</div> <div class="i">EQU</div> <div class="v">$09</div>
 
-<div class="n">BLOCK_MAYBE_TRANSITION_LADDER_UP</div> <div class="i">EQU</div> <div class="v">$0a</div>
+<div class="n">BLOCK_MAYBE_AREA_TRANSITION_DOWN</div> <div class="i">EQU</div> <div class="v">$0a</div>
 
-<div class="n">BLOCK_0x0b</div> <div class="i">EQU</div> <div class="v">$0b</div>
+<div class="n">BLOCK_MAYBE_BREAKABLE_BY_MATTOCK</div> <div class="i">EQU</div> <div class="v">$0b</div>
 
-<div class="n">BLOCK_AREA_TRANSITION_L2R</div> <div class="i">EQU</div> <div class="v">$0c</div>
+<div class="n">BLOCK_AREA_TRANSITION_RIGHT</div> <div class="i">EQU</div> <div class="v">$0c</div>
 
-<div class="n">BLOCK_AREA_TRANSITION_R2L</div> <div class="i">EQU</div> <div class="v">$0d</div>
+<div class="n">BLOCK_AREA_TRANSITION_LEFT</div> <div class="i">EQU</div> <div class="v">$0d</div>
 
 <div class="n">BLOCK_0x0e</div> <div class="i">EQU</div> <div class="v">$0e</div>
 
@@ -261,7 +286,7 @@ pre {
 
 <div class="n">INVENTORY_MAGIC</div> <div class="i">EQU</div> <div class="v">$03</div>
 
-<div class="n">INVENTORY_SPECIAL</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">INVENTORY_ITEM</div> <div class="i">EQU</div> <div class="v">$04</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1207,17 +1232,59 @@ pre {
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
+; MScriptOp
+;============================================================================
+</div><div class="equs"><div class="n">MSCRIPT_OP_MAYBE_SET_0181</div> <div class="i">EQU</div> <div class="v">$ee</div>
+
+<div class="n">MSCRIPT_OP_MAYBE_SET_017F</div> <div class="i">EQU</div> <div class="v">$ef</div>
+
+<div class="n">MSCRIPT_OP_SET_SQ_DECAY_MODE</div> <div class="i">EQU</div> <div class="v">$f0</div>
+
+<div class="n">MSCRIPT_OP_SET_SQ_VOL</div> <div class="i">EQU</div> <div class="v">$f1</div>
+
+<div class="n">MSCRIPT_OP_MAYBE_SET_0172</div> <div class="i">EQU</div> <div class="v">$f2</div>
+
+<div class="n">MSCRIPT_OP_SET_REPEATED</div> <div class="i">EQU</div> <div class="v">$f3</div>
+
+<div class="n">MSCRIPT_OP_MAYBE_RESTART_SONG</div> <div class="i">EQU</div> <div class="v">$f4</div>
+
+<div class="n">MSCRIPT_OP_RET</div> <div class="i">EQU</div> <div class="v">$f5</div>
+
+<div class="n">MSCRIPT_OP_SET_SQ1_HIGH</div> <div class="i">EQU</div> <div class="v">$f6</div>
+
+<div class="n">MSCRIPT_OP_MAYBE_SET_8BITCOUNTER</div> <div class="i">EQU</div> <div class="v">$f7</div>
+
+<div class="n">MSCRIPT_OP_JSR</div> <div class="i">EQU</div> <div class="v">$f8</div>
+
+<div class="n">MSCRIPT_OP_PUSH_ADDR</div> <div class="i">EQU</div> <div class="v">$f9</div>
+
+<div class="n">MSCRIPT_OP_NOOP</div> <div class="i">EQU</div> <div class="v">$fa</div>
+
+<div class="n">MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS</div> <div class="i">EQU</div> <div class="v">$fb</div>
+
+<div class="n">MSCRIPT_OP_END_LOOP</div> <div class="i">EQU</div> <div class="v">$fc</div>
+
+<div class="n">MSCRIPT_OP_BEGIN_LOOP</div> <div class="i">EQU</div> <div class="v">$fd</div>
+
+<div class="n">MSCRIPT_OP_POP_ADDR</div> <div class="i">EQU</div> <div class="v">$fe</div>
+
+<div class="n">MSCRIPT_OP_MAYBE_END</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
 ; Music
 ;============================================================================
-</div><div class="equs"><div class="n">MUSIC_START_THEME</div> <div class="i">EQU</div> <div class="v">$01</div>
+</div><div class="equs"><div class="n">MUSIC_NONE</div> <div class="i">EQU</div> <div class="v">$00</div>
 
-<div class="n">MUSIC_MAYBE_LAST_WORLD</div> <div class="i">EQU</div> <div class="v">$02</div>
+<div class="n">MUSIC_START_THEME</div> <div class="i">EQU</div> <div class="v">$01</div>
 
-<div class="n">MUSIC_MAYBE_BETWEEN_FIRST_TOWN_FOG</div> <div class="i">EQU</div> <div class="v">$03</div>
+<div class="n">MUSIC_DAYBREAK</div> <div class="i">EQU</div> <div class="v">$02</div>
 
-<div class="n">MUSIC_MAYBE_TREE_WORLD</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">MUSIC_APOLUNE</div> <div class="i">EQU</div> <div class="v">$03</div>
 
-<div class="n">MUSIC_MAYBE_FOG</div> <div class="i">EQU</div> <div class="v">$05</div>
+<div class="n">MUSIC_CONFLATE</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">MUSIC_FOREPAW</div> <div class="i">EQU</div> <div class="v">$05</div>
 
 <div class="n">MUSIC_MAYBE_TOWER</div> <div class="i">EQU</div> <div class="v">$06</div>
 
@@ -1225,21 +1292,21 @@ pre {
 
 <div class="n">MUSIC_DEATH</div> <div class="i">EQU</div> <div class="v">$08</div>
 
-<div class="n">MUSIC_MAYBE_TOWN_BUILDING</div> <div class="i">EQU</div> <div class="v">$09</div>
+<div class="n">MUSIC_MASCON_VICTIM</div> <div class="i">EQU</div> <div class="v">$09</div>
 
 <div class="n">MUSIC_BOSS</div> <div class="i">EQU</div> <div class="v">$0a</div>
 
-<div class="n">MUSIC_0x0B</div> <div class="i">EQU</div> <div class="v">$0b</div>
+<div class="n">MUSIC_HOURGLASS</div> <div class="i">EQU</div> <div class="v">$0b</div>
 
 <div class="n">MUSIC_MAYBE_ENDING</div> <div class="i">EQU</div> <div class="v">$0c</div>
 
-<div class="n">MUSIC_MAYBE_TEMPLE_1</div> <div class="i">EQU</div> <div class="v">$0d</div>
+<div class="n">MUSIC_KINGS_ROOM</div> <div class="i">EQU</div> <div class="v">$0d</div>
 
 <div class="n">MUSIC_TEMPLE</div> <div class="i">EQU</div> <div class="v">$0e</div>
 
 <div class="n">MUSIC_SHOP</div> <div class="i">EQU</div> <div class="v">$0f</div>
 
-<div class="n">MUSIC_MAYBE_FINAL_MAZE</div> <div class="i">EQU</div> <div class="v">$10</div>
+<div class="n">MUSIC_EVIL_FORTRESS</div> <div class="i">EQU</div> <div class="v">$10</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1333,7 +1400,9 @@ pre {
 <div class="cp">;============================================================================
 ; PlayerStatusFlags
 ;============================================================================
-</div><div class="equs"><div class="n">PLAYER_STATUS_ATTACKING</div> <div class="i">EQU</div> <div class="v">$01</div>
+</div><div class="equs"><div class="n">PLAYER_STATUS_NONE</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PLAYER_STATUS_ATTACKING</div> <div class="i">EQU</div> <div class="v">$01</div>
 
 <div class="n">PLAYER_STATUS_KNOCKBACK</div> <div class="i">EQU</div> <div class="v">$02</div>
 
@@ -1451,9 +1520,11 @@ pre {
 
 <div class="n">QUEST_SPRING_OF_SKY</div> <div class="i">EQU</div> <div class="v">$02</div>
 
-<div class="n">QUEST_SPRING_OF_TOWER</div> <div class="i">EQU</div> <div class="v">$04</div>
+<div class="n">QUEST_SPRING_OF_JOKER</div> <div class="i">EQU</div> <div class="v">$04</div>
 
-<div class="n">QUEST_SOMETHING_WING_BOOTS</div> <div class="i">EQU</div> <div class="v">$08</div>
+<div class="n">QUEST_ALL_SPRINGS</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">QUEST_WING_BOOTS_FROM_TOWER</div> <div class="i">EQU</div> <div class="v">$08</div>
 
 <div class="n">QUEST_MATTOCK</div> <div class="i">EQU</div> <div class="v">$10</div>
 
@@ -1463,21 +1534,21 @@ pre {
 <div class="cp">;============================================================================
 ; ROMBank
 ;============================================================================
-</div><div class="equs"><div class="n">BANK_0</div> <div class="i">EQU</div> <div class="v">$00</div>
+</div><div class="equs"><div class="n">BANK_0_AREA_DATA</div> <div class="i">EQU</div> <div class="v">$00</div>
 
-<div class="n">BANK_1_SPRITES</div> <div class="i">EQU</div> <div class="v">$01</div>
+<div class="n">BANK_1_AREA_DATA</div> <div class="i">EQU</div> <div class="v">$01</div>
 
-<div class="n">BANK_2_SPRITES</div> <div class="i">EQU</div> <div class="v">$02</div>
+<div class="n">BANK_2_AREA_DATA</div> <div class="i">EQU</div> <div class="v">$02</div>
 
-<div class="n">BANK_3_LEVEL_DATA</div> <div class="i">EQU</div> <div class="v">$03</div>
+<div class="n">BANK_3_AREA_METADATA</div> <div class="i">EQU</div> <div class="v">$03</div>
 
 <div class="n">BANK_5_AUDIO_LOGIC</div> <div class="i">EQU</div> <div class="v">$05</div>
 
-<div class="n">BANK_6</div> <div class="i">EQU</div> <div class="v">$06</div>
+<div class="n">BANK_6_SPRITES</div> <div class="i">EQU</div> <div class="v">$06</div>
 
-<div class="n">BANK_7_PRG</div> <div class="i">EQU</div> <div class="v">$07</div>
+<div class="n">BANK_7_SPRITES</div> <div class="i">EQU</div> <div class="v">$07</div>
 
-<div class="n">BANK_8_PRG</div> <div class="i">EQU</div> <div class="v">$08</div>
+<div class="n">BANK_8_SPRITES</div> <div class="i">EQU</div> <div class="v">$08</div>
 
 <div class="n">BANK_9_UNUSED</div> <div class="i">EQU</div> <div class="v">$09</div>
 
@@ -1510,6 +1581,14 @@ pre {
 ; ScreenExtraInfo
 ;============================================================================
 </div><div class="equs"><div class="n">SCREEN_HAS_SPECIAL_EVENT</div> <div class="i">EQU</div> <div class="v">$80</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; ScreenScrollLoadMode
+;============================================================================
+</div><div class="equs"><div class="n">SCROLL_LOAD_TILES</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SCROLL_LOAD_ATTRS</div> <div class="i">EQU</div> <div class="v">$01</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1633,15 +1712,19 @@ pre {
 
 <div class="n">SOUND_MAYBE_MOVE_CURSOR</div> <div class="i">EQU</div> <div class="v">$0b</div>
 
-<div class="n">SOUND_0x0C</div> <div class="i">EQU</div> <div class="v">$0c</div>
+<div class="n">SOUND_SHIELD_HIT_BY_MAGIC</div> <div class="i">EQU</div> <div class="v">$0c</div>
 
-<div class="n">SOUND_INPUT</div> <div class="i">EQU</div> <div class="v">$0d</div>
+<div class="n">SOUND_INVALID_CHOICE</div> <div class="i">EQU</div> <div class="v">$0d</div>
 
 <div class="n">SOUND_MAYBE_ENTER_PASSWORD_CHAR</div> <div class="i">EQU</div> <div class="v">$0e</div>
 
 <div class="n">SOUND_PUSHING</div> <div class="i">EQU</div> <div class="v">$0f</div>
 
 <div class="n">SOUND_MAYBE_DROP_COIN</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">SOUND_17</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">SOUND_PAKUKAME</div> <div class="i">EQU</div> <div class="v">$12</div>
 
 <div class="n">SOUND_FILL_HP_OR_MANA</div> <div class="i">EQU</div> <div class="v">$13</div>
 
@@ -1653,13 +1736,15 @@ pre {
 
 <div class="n">SOUND_DROP_LADDER</div> <div class="i">EQU</div> <div class="v">$17</div>
 
-<div class="n">SOUND_0x18</div> <div class="i">EQU</div> <div class="v">$18</div>
+<div class="n">SOUND_SHOW_PLAYER_MENU</div> <div class="i">EQU</div> <div class="v">$18</div>
 
 <div class="n">SOUND_MAYBE_GOLD_CHANGE</div> <div class="i">EQU</div> <div class="v">$19</div>
 
 <div class="n">SOUND_USE_SPECIAL_ITEM_2</div> <div class="i">EQU</div> <div class="v">$1a</div>
 
 <div class="n">SOUND_TOUCH_BREAD</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">SOUND_28</div> <div class="i">EQU</div> <div class="v">$1c</div>
 
 <div class="n">SOUND_MAX_IDS</div> <div class="i">EQU</div> <div class="v">$1d</div>
 

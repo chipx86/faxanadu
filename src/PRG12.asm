@@ -4,90 +4,566 @@
 ; PRG12 ($8000 - $bfff)
 ;============================================================================
 
-BASE $8000
+    BASE $8000
 
-    hex 00 00 00 00 00 c0 bf bf bf bf bf bf bf bf bf bf ; [$8000] undefined
-    hex bf bf bf bf bf bf cf 00 00 00 00 00 c0 bf bf bf ; [$8010] undefined
-    hex bf ce 00 00 00 c8 00 00 00 be b9 ac b3 b4 00 00 ; [$8020] undefined
-    hex bc 00 cd bf bf bf bf cf cb 00 c8 00 00 00 00 bc ; [$8030] undefined
-    hex cc 00 00 c1 c2 00 ab ac b3 b4 bc 00 00 00 00 00 ; [$8040] undefined
-    hex 00 00 00 cb cb 00 01 02 03 00 00 00 00 00 d0 d1 ; [$8050] undefined
-    hex d2 d0 ab ac b3 b4 c8 00 00 c8 00 00 9d 9e 9f cb ; [$8060] undefined
-    hex cb 10 11 12 13 14 15 bc 00 d0 b5 b6 b7 b8 b6 b8 ; [$8070] undefined
-    hex b3 b4 00 c8 00 9c a0 a1 a2 a3 a4 cb cb 20 21 22 ; [$8080] undefined
-    hex 23 24 25 26 27 c9 ca c9 ca ca ca ca b3 b4 bc 2a ; [$8090] undefined
-    hex 2b a5 a6 a7 a8 a9 aa cb cb 30 31 32 33 34 35 36 ; [$80a0] undefined
-    hex 37 38 39 ad ad ae ad 3e 3f 04 05 06 07 08 09 0a ; [$80b0] undefined
-    hex 00 0b 0c cb cb 00 00 42 43 44 45 46 47 48 49 4a ; [$80c0] undefined
-    hex 4b 4c 4d 4e 4f 0d 0e 0f 16 17 18 19 1a 1b 00 cb ; [$80d0] undefined
-    hex cb 00 00 52 53 54 55 56 57 58 59 5a 5b 5c 5d 5e ; [$80e0] undefined
-    hex 5f 1d 1e 1f 28 29 2c 2d 2e 2f 00 cb cb 00 bc 62 ; [$80f0] undefined
-    hex 63 64 65 66 67 68 69 6a 6b 6c 6d 6e 6f 3a 3b 3c ; [$8100] undefined
-    hex 3d 40 41 50 51 60 00 cb cb 00 00 72 73 74 75 76 ; [$8110] undefined
-    hex 77 78 79 7a 7b 7c 7d 7e 7f 61 70 71 80 90 91 92 ; [$8120] undefined
-    hex 93 00 00 cb cb 00 81 82 83 84 85 86 83 88 89 83 ; [$8130] undefined
-    hex 8b 8c 8d 8e 8f 94 95 96 97 98 83 9a 9b f3 ec cb ; [$8140] undefined
-    hex cb bc 00 00 bc bc bc 00 c1 d3 00 00 00 00 c4 c5 ; [$8150] undefined
-    hex b3 b4 00 00 00 00 00 00 00 bc 00 cb cb bb d3 d3 ; [$8160] undefined
-    hex c6 c7 cf d0 d1 b7 b8 00 c8 00 d4 b1 b3 b4 c8 00 ; [$8170] undefined
-    hex c1 d3 00 00 d2 d3 c6 cb cd bf bf bf cf af bf b0 ; [$8180] undefined
-    hex b0 af bf cf c6 c7 99 8a 87 c3 bb d0 d1 b7 b8 c0 ; [$8190] undefined
-    hex bf bf bf ce 00 00 00 00 cd bf bf bf bf bf bf bd ; [$81a0] undefined
-    hex af b2 b2 b0 bd af bf b0 bf af bf ce 00 00 00 00 ; [$81b0] undefined
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $00                                  ; [4]:
+    db $c0                                  ; [5]:
+    db $bf                                  ; [6]:
+    db $bf                                  ; [7]:
+    db $bf                                  ; [8]:
+    db $bf                                  ; [9]:
+    db $bf                                  ; [10]:
+    db $bf                                  ; [11]:
+    db $bf                                  ; [12]:
+    db $bf                                  ; [13]:
+    db $bf                                  ; [14]:
+    db $bf                                  ; [15]:
+    db $bf                                  ; [16]:
+    db $bf                                  ; [17]:
+    db $bf                                  ; [18]:
+    db $bf                                  ; [19]:
+    db $bf                                  ; [20]:
+    db $bf                                  ; [21]:
+    db $cf                                  ; [22]:
+    db $00                                  ; [23]:
+    db $00                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $00                                  ; [27]:
+    db $c0                                  ; [0]:
+    db $bf                                  ; [1]:
+    db $bf                                  ; [2]:
+    db $bf                                  ; [3]:
+    db $bf                                  ; [4]:
+    db $ce                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $00                                  ; [8]:
+    db $c8                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $00                                  ; [12]:
+    db $be                                  ; [13]:
+    db $b9                                  ; [14]:
+    db $ac                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $bc                                  ; [20]:
+    db $00                                  ; [21]:
+    db $cd                                  ; [22]:
+    db $bf                                  ; [23]:
+    db $bf                                  ; [24]:
+    db $bf                                  ; [25]:
+    db $bf                                  ; [26]:
+    db $cf                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $c8                                  ; [2]:
+    db $00                                  ; [3]:
+    db $00                                  ; [4]:
+    db $00                                  ; [5]:
+    db $00                                  ; [6]:
+    db $bc                                  ; [7]:
+    db $cc                                  ; [8]:
+    db $00                                  ; [9]:
+    db $00                                  ; [10]:
+    db $c1                                  ; [11]:
+    db $c2                                  ; [12]:
+    db $00                                  ; [13]:
+    db $ab                                  ; [14]:
+    db $ac                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $bc                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $00                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $00                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $01                                  ; [2]:
+    db $02                                  ; [3]:
+    db $03                                  ; [4]:
+    db $00                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $00                                  ; [8]:
+    db $00                                  ; [9]:
+    db $d0                                  ; [10]:
+    db $d1                                  ; [11]:
+    db $d2                                  ; [12]:
+    db $d0                                  ; [13]:
+    db $ab                                  ; [14]:
+    db $ac                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $c8                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $c8                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $9d                                  ; [24]:
+    db $9e                                  ; [25]:
+    db $9f                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $10                                  ; [1]:
+    db $11                                  ; [2]:
+    db $12                                  ; [3]:
+    db $13                                  ; [4]:
+    db $14                                  ; [5]:
+    db $15                                  ; [6]:
+    db $bc                                  ; [7]:
+    db $00                                  ; [8]:
+    db $d0                                  ; [9]:
+    db $b5                                  ; [10]:
+    db $b6                                  ; [11]:
+    db $b7                                  ; [12]:
+    db $b8                                  ; [13]:
+    db $b6                                  ; [14]:
+    db $b8                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $00                                  ; [18]:
+    db $c8                                  ; [19]:
+    db $00                                  ; [20]:
+    db $9c                                  ; [21]:
+    db $a0                                  ; [22]:
+    db $a1                                  ; [23]:
+    db $a2                                  ; [24]:
+    db $a3                                  ; [25]:
+    db $a4                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $20                                  ; [1]:
+    db $21                                  ; [2]:
+    db $22                                  ; [3]:
+    db $23                                  ; [4]:
+    db $24                                  ; [5]:
+    db $25                                  ; [6]:
+    db $26                                  ; [7]:
+    db $27                                  ; [8]:
+    db $c9                                  ; [9]:
+    db $ca                                  ; [10]:
+    db $c9                                  ; [11]:
+    db $ca                                  ; [12]:
+    db $ca                                  ; [13]:
+    db $ca                                  ; [14]:
+    db $ca                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $bc                                  ; [18]:
+    db $2a                                  ; [19]:
+    db $2b                                  ; [20]:
+    db $a5                                  ; [21]:
+    db $a6                                  ; [22]:
+    db $a7                                  ; [23]:
+    db $a8                                  ; [24]:
+    db $a9                                  ; [25]:
+    db $aa                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $30                                  ; [1]:
+    db $31                                  ; [2]:
+    db $32                                  ; [3]:
+    db $33                                  ; [4]:
+    db $34                                  ; [5]:
+    db $35                                  ; [6]:
+    db $36                                  ; [7]:
+    db $37                                  ; [8]:
+    db $38                                  ; [9]:
+    db $39                                  ; [10]:
+    db $ad                                  ; [11]:
+    db $ad                                  ; [12]:
+    db $ae                                  ; [13]:
+    db $ad                                  ; [14]:
+    db $3e                                  ; [15]:
+    db $3f                                  ; [16]:
+    db $04                                  ; [17]:
+    db $05                                  ; [18]:
+    db $06                                  ; [19]:
+    db $07                                  ; [20]:
+    db $08                                  ; [21]:
+    db $09                                  ; [22]:
+    db $0a                                  ; [23]:
+    db $00                                  ; [24]:
+    db $0b                                  ; [25]:
+    db $0c                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $42                                  ; [3]:
+    db $43                                  ; [4]:
+    db $44                                  ; [5]:
+    db $45                                  ; [6]:
+    db $46                                  ; [7]:
+    db $47                                  ; [8]:
+    db $48                                  ; [9]:
+    db $49                                  ; [10]:
+    db $4a                                  ; [11]:
+    db $4b                                  ; [12]:
+    db $4c                                  ; [13]:
+    db $4d                                  ; [14]:
+    db $4e                                  ; [15]:
+    db $4f                                  ; [16]:
+    db $0d                                  ; [17]:
+    db $0e                                  ; [18]:
+    db $0f                                  ; [19]:
+    db $16                                  ; [20]:
+    db $17                                  ; [21]:
+    db $18                                  ; [22]:
+    db $19                                  ; [23]:
+    db $1a                                  ; [24]:
+    db $1b                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $52                                  ; [3]:
+    db $53                                  ; [4]:
+    db $54                                  ; [5]:
+    db $55                                  ; [6]:
+    db $56                                  ; [7]:
+    db $57                                  ; [8]:
+    db $58                                  ; [9]:
+    db $59                                  ; [10]:
+    db $5a                                  ; [11]:
+    db $5b                                  ; [12]:
+    db $5c                                  ; [13]:
+    db $5d                                  ; [14]:
+    db $5e                                  ; [15]:
+    db $5f                                  ; [16]:
+    db $1d                                  ; [17]:
+    db $1e                                  ; [18]:
+    db $1f                                  ; [19]:
+    db $28                                  ; [20]:
+    db $29                                  ; [21]:
+    db $2c                                  ; [22]:
+    db $2d                                  ; [23]:
+    db $2e                                  ; [24]:
+    db $2f                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $bc                                  ; [2]:
+    db $62                                  ; [3]:
+    db $63                                  ; [4]:
+    db $64                                  ; [5]:
+    db $65                                  ; [6]:
+    db $66                                  ; [7]:
+    db $67                                  ; [8]:
+    db $68                                  ; [9]:
+    db $69                                  ; [10]:
+    db $6a                                  ; [11]:
+    db $6b                                  ; [12]:
+    db $6c                                  ; [13]:
+    db $6d                                  ; [14]:
+    db $6e                                  ; [15]:
+    db $6f                                  ; [16]:
+    db $3a                                  ; [17]:
+    db $3b                                  ; [18]:
+    db $3c                                  ; [19]:
+    db $3d                                  ; [20]:
+    db $40                                  ; [21]:
+    db $41                                  ; [22]:
+    db $50                                  ; [23]:
+    db $51                                  ; [24]:
+    db $60                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $72                                  ; [3]:
+    db $73                                  ; [4]:
+    db $74                                  ; [5]:
+    db $75                                  ; [6]:
+    db $76                                  ; [7]:
+    db $77                                  ; [8]:
+    db $78                                  ; [9]:
+    db $79                                  ; [10]:
+    db $7a                                  ; [11]:
+    db $7b                                  ; [12]:
+    db $7c                                  ; [13]:
+    db $7d                                  ; [14]:
+    db $7e                                  ; [15]:
+    db $7f                                  ; [16]:
+    db $61                                  ; [17]:
+    db $70                                  ; [18]:
+    db $71                                  ; [19]:
+    db $80                                  ; [20]:
+    db $90                                  ; [21]:
+    db $91                                  ; [22]:
+    db $92                                  ; [23]:
+    db $93                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $00                                  ; [1]:
+    db $81                                  ; [2]:
+    db $82                                  ; [3]:
+    db $83                                  ; [4]:
+    db $84                                  ; [5]:
+    db $85                                  ; [6]:
+    db $86                                  ; [7]:
+    db $83                                  ; [8]:
+    db $88                                  ; [9]:
+    db $89                                  ; [10]:
+    db $83                                  ; [11]:
+    db $8b                                  ; [12]:
+    db $8c                                  ; [13]:
+    db $8d                                  ; [14]:
+    db $8e                                  ; [15]:
+    db $8f                                  ; [16]:
+    db $94                                  ; [17]:
+    db $95                                  ; [18]:
+    db $96                                  ; [19]:
+    db $97                                  ; [20]:
+    db $98                                  ; [21]:
+    db $83                                  ; [22]:
+    db $9a                                  ; [23]:
+    db $9b                                  ; [24]:
+    db $f3                                  ; [25]:
+    db $ec                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $bc                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $bc                                  ; [4]:
+    db $bc                                  ; [5]:
+    db $bc                                  ; [6]:
+    db $00                                  ; [7]:
+    db $c1                                  ; [8]:
+    db $d3                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $00                                  ; [12]:
+    db $00                                  ; [13]:
+    db $c4                                  ; [14]:
+    db $c5                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $00                                  ; [20]:
+    db $00                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $00                                  ; [24]:
+    db $bc                                  ; [25]:
+    db $00                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cb                                  ; [0]:
+    db $bb                                  ; [1]:
+    db $d3                                  ; [2]:
+    db $d3                                  ; [3]:
+    db $c6                                  ; [4]:
+    db $c7                                  ; [5]:
+    db $cf                                  ; [6]:
+    db $d0                                  ; [7]:
+    db $d1                                  ; [8]:
+    db $b7                                  ; [9]:
+    db $b8                                  ; [10]:
+    db $00                                  ; [11]:
+    db $c8                                  ; [12]:
+    db $00                                  ; [13]:
+    db $d4                                  ; [14]:
+    db $b1                                  ; [15]:
+    db $b3                                  ; [16]:
+    db $b4                                  ; [17]:
+    db $c8                                  ; [18]:
+    db $00                                  ; [19]:
+    db $c1                                  ; [20]:
+    db $d3                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $d2                                  ; [24]:
+    db $d3                                  ; [25]:
+    db $c6                                  ; [26]:
+    db $cb                                  ; [27]:
+    db $cd                                  ; [0]:
+    db $bf                                  ; [1]:
+    db $bf                                  ; [2]:
+    db $bf                                  ; [3]:
+    db $cf                                  ; [4]:
+    db $af                                  ; [5]:
+    db $bf                                  ; [6]:
+    db $b0                                  ; [7]:
+    db $b0                                  ; [8]:
+    db $af                                  ; [9]:
+    db $bf                                  ; [10]:
+    db $cf                                  ; [11]:
+    db $c6                                  ; [12]:
+    db $c7                                  ; [13]:
+    db $99                                  ; [14]:
+    db $8a                                  ; [15]:
+    db $87                                  ; [16]:
+    db $c3                                  ; [17]:
+    db $bb                                  ; [18]:
+    db $d0                                  ; [19]:
+    db $d1                                  ; [20]:
+    db $b7                                  ; [21]:
+    db $b8                                  ; [22]:
+    db $c0                                  ; [23]:
+    db $bf                                  ; [24]:
+    db $bf                                  ; [25]:
+    db $bf                                  ; [26]:
+    db $ce                                  ; [27]:
+    db $00                                  ; [0]:
+    db $00                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $cd                                  ; [4]:
+    db $bf                                  ; [5]:
+    db $bf                                  ; [6]:
+    db $bf                                  ; [7]:
+    db $bf                                  ; [8]:
+    db $bf                                  ; [9]:
+    db $bf                                  ; [10]:
+    db $bd                                  ; [11]:
+    db $af                                  ; [12]:
+    db $b2                                  ; [13]:
+    db $b2                                  ; [14]:
+    db $b0                                  ; [15]:
+    db $bd                                  ; [16]:
+    db $af                                  ; [17]:
+    db $bf                                  ; [18]:
+    db $b0                                  ; [19]:
+    db $bf                                  ; [20]:
+    db $af                                  ; [21]:
+    db $bf                                  ; [22]:
+    db $ce                                  ; [23]:
+    db $00                                  ; [24]:
+    db $00                                  ; [25]:
+    db $00                                  ; [26]:
+    db $00                                  ; [27]:
 
 
 ;============================================================================
-; TODO: Document GetTextBoxCoordinates
+; Set the textbox coordinates and dimensions for an NPC.
+;
+; The textbox will always be set at:
+;
+;     X = 10
+;     Width = 20
+;     Height = 8
+;
+; If there's a portrait, or the player is high up on the screen:
+;
+;     Y = 16
+;
+; Otherwise, if the player is on the ground:
+;
+;     Y = 6
 ;
 ; INPUTS:
-;     None.
+;     Player_PosY:
+;         The Y position for the player.
+;
+;     Temp_0201:
+;         The loaded IScript portrait ID.
 ;
 ; OUTPUTS:
-;     TODO
+;     TextBox_X:
+;         The new X position of the textbox.
+;
+;     TextBox_Y:
+;         The new Y position of the textbox.
+;
+;     TextBox_Width:
+;         The new width of the textbox.
+;
+;     TextBox_Height:
+;         The new height of the textbox.
 ;
 ; XREFS:
-;     FUN_PRG12__81fb
-;     OpenTextWindow
+;     IScripts_CloseCurrentTextBox
+;     TextBox_OpenForNPC
 ;============================================================================
-GetTextBoxCoordinates:                      ; [$81c0]
+TextBox_SetCoordsForNPC:                    ; [$81c0]
     LDA #$0a
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; Textbox X = 10
     LDA #$14
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Textbox width = 20
     LDA #$08
-    STA a:TextBox_Height
-    LDA a:IScriptEntity
-    BMI @LAB_PRG12__81dc
-    LDY #$06
-    LDA PlayerPosY
-    CMP #$40
-    BCS @LAB_PRG12__81de
+    STA a:TextBox_Height                    ; Textbox height = 8
 
-  @LAB_PRG12__81dc:                         ; [$81dc]
-    LDY #$10
 
-  @LAB_PRG12__81de:                         ; [$81de]
-    STY a:TextBox_Y
+    ;
+    ; Check if there's a portrait shown.
+    ;
+    LDA a:Temp_0201                         ; Load the portrait ID from the
+                                            ; IScript.
+    BMI @_hasPortrait                       ; If set, jump.
+
+
+    ;
+    ; There's no portrait. Set it based on the player's Y position.
+    ;
+    ; If the player is around the ground area, set it at Y = 6.
+    ;
+    ; If the player is higher up on the screen, move it downward to
+    ; Y = 16 (same as the portrait).
+    ;
+    LDY #$06                                ; Textbox Y = 6
+    LDA Player_PosY                         ; Check the player's Y position.
+    CMP #$40                                ; Is it >= 64?
+    BCS @_setYAndReturn                     ; If so, jump to return.
+
+  @_hasPortrait:                            ; [$81dc]
+    LDY #$10                                ; Textbox Y = 16
+
+  @_setYAndReturn:                          ; [$81de]
+    STY a:TextBox_Y                         ; Set the textbox Y position.
     RTS
 
 
 ;============================================================================
-; TODO: Document OpenTextWindow
+; Open a textbox for NPC dialogue.
+;
+; This positions the textbox and fills it with temporary
+; placeholder text in preparation for drawing the NPC's
+; message text.
 ;
 ; INPUTS:
-;     None.
+;     See falls through.
 ;
 ; OUTPUTS:
-;     TODO
+;     See falls through.
+;
+; CALLS:
+;     TextBox_SetCoordsForNPC
+;     TextBox_Open
+;
+; FALLS THROUGH:
+;     IScripts_PositionAndFillPlaceholderText
 ;
 ; XREFS:
 ;     IScriptAction_ShowSellMenu
 ;     IScripts_Begin
 ;     Maybe_Shop_DrawTextBox
 ;============================================================================
-OpenTextWindow:                             ; [$81e2]
-    JSR GetTextBoxCoordinates
-    JSR TextBox_Maybe_Draw
+TextBox_OpenForNPC:                         ; [$81e2]
+    JSR TextBox_SetCoordsForNPC             ; Set textbox coordinates for an
+                                            ; NPC dialogue.
+    JSR TextBox_Open                        ; Open the textbox.
 
     ;
     ; v-- Fall through --v
@@ -95,69 +571,113 @@ OpenTextWindow:                             ; [$81e2]
 
 
 ;============================================================================
-; TODO: Document IScripts_Something_81E8
+; Position the text X/Y position in a textbox and fill with placeholder text.
+;
+; This is done in preparation for clearing out a textbox and
+; removing it from the screen.
 ;
 ; INPUTS:
-;     None.
+;     TextBox_X:
+;         The textbox X position.
+;
+;     TextBox_Y:
+;         The textbox Y position.
 ;
 ; OUTPUTS:
-;     TODO
+;     TextBox_ContentsX:
+;         The text X position.
+;
+;     TextBox_ContentsY:
+;         The text Y position.
+;
+; CALLS:
+;     IScripts_FillPlaceholderText
 ;
 ; XREFS:
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_ShowQuestionMessage
 ;============================================================================
-IScripts_Something_81E8:                    ; [$81e8]
-    LDA a:TextBox_X
+IScripts_PositionAndFillPlaceholderText:    ; [$81e8]
+    ;
+    ; Set the X position for text within the textbox.
+    ;
+    LDA a:TextBox_X                         ; Load the textbox X.
     CLC
-    ADC #$02
-    STA TextBox_TextX
-    LDA a:TextBox_Y
+    ADC #$02                                ; Add 2.
+    STA TextBox_ContentsX                   ; Set as the text draw X
+                                            ; position.
+
+
+    ;
+    ; Set the Y position for text within the textbox.
+    ;
+    LDA a:TextBox_Y                         ; Load the textbox Y.
     CLC
-    ADC #$02
-    STA TextBox_TextY
-    JMP IScripts_Something_9910
+    ADC #$02                                ; Add 2.
+    STA TextBox_ContentsY                   ; Set as the text draw Y
+                                            ; position.
+
+
+    ;
+    ; Fill with placeholder text.
+    ;
+    JMP IScripts_FillPlaceholderText        ; Fill the textbox.
 
 
 ;============================================================================
-; TODO: Document FUN_PRG12__81fb
-;
-; INPUTS:
-;     X
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     IScriptAction_EndScript
-;============================================================================
-FUN_PRG12__81fb:                            ; [$81fb]
-    JSR GetTextBoxCoordinates
-    JMP Maybe_Draw_Textbox
-
-
-;============================================================================
-; TODO: Document Portrait_SetCoords
+; Close the opened textbox for the IScript.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     TextBox_Close
+;     TextBox_SetCoordsForNPC
 ;
 ; XREFS:
-;     DEADCODE
-;     Portrait_Show
+;     IScriptAction_EndScript
 ;============================================================================
-Portrait_SetCoords:                         ; [$8201]
+IScripts_CloseCurrentTextBox:               ; [$81fb]
+    JSR TextBox_SetCoordsForNPC             ; Set textbox coordinates for an
+                                            ; NPC dialogue.
+    JMP TextBox_Close                       ; Close the textbox.
+
+
+;============================================================================
+; Set the textbox coordinates for a portrait.
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TextBox_X:
+;         The new X coordinate.
+;
+;     TextBox_Y:
+;         The new Y coordinate.
+;
+;     TextBox_Width:
+;         The new width.
+;
+;     TextBox_Height:
+;         The new height.
+;
+; XREFS:
+;     DEADCODE_TextBox_ClosePortrait
+;     IScripts_OpenForPortrait
+;============================================================================
+TextBox_SetCoordsForPortrait:               ; [$8201]
     LDA #$02
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; X = 2
     LDA #$0e
-    STA a:TextBox_Y
+    STA a:TextBox_Y                         ; Y = 14
     LDA #$08
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Width = 8
     LDA #$0a
-    STA a:TextBox_Height
+    STA a:TextBox_Height                    ; Height = 10
     RTS
 
 
@@ -180,33 +700,41 @@ Portrait_SetCoords:                         ; [$8201]
 ; XREFS:
 ;     IScripts_UpdatePortraitAnimation
 ;============================================================================
-Portrait_SetInnerSpriteXY:                  ; [$8216]
+IScripts_SetPortraitSpriteXY:               ; [$8216]
     LDX #$18
-    STX Maybe_Arg_CurrentSprite_PosX
+    STX Maybe_Arg_CurrentSprite_PosX        ; Draw X = 24
     LDX #$58
-    STX Maybe_Arg_CurrentSprite_PosY
+    STX Maybe_Arg_CurrentSprite_PosY        ; Draw Y = 88
     RTS
 
 
 ;============================================================================
-; TODO: Document Portrait_Show
+; Open a textbox frame for a portrait.
+;
+; This positions the textbox at the position and size
+; for a portrait in preparation for drawing the portrait
+; picture.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     TextBox_SetCoordsForNPC
+;     TextBox_SetCoordsForPortrait
 ;
 ; XREFS:
 ;     IScripts_Begin
 ;============================================================================
-Portrait_Show:                              ; [$821f]
-    JSR Portrait_SetCoords
-    JMP TextBox_Maybe_Draw
-
+IScripts_OpenForPortrait:                   ; [$821f]
+    JSR TextBox_SetCoordsForPortrait        ; Set textbox coordinates for the
+                                            ; portrait.
+    JMP TextBox_Open                        ; Open the textbox.
 
 ;============================================================================
-; TODO: Document DEADCODE
+; TODO: Document DEADCODE_TextBox_ClosePortrait
 ;
 ; INPUTS:
 ;     None.
@@ -214,33 +742,48 @@ Portrait_Show:                              ; [$821f]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-DEADCODE:                                   ; [$8225]
-    JSR Portrait_SetCoords
-    JMP Maybe_Draw_Textbox
+DEADCODE_TextBox_ClosePortrait:             ; [$8225]
+    JSR TextBox_SetCoordsForPortrait
+    JMP TextBox_Close
 
 
 ;============================================================================
-; TODO: Document Portrait_Clear
+; Close the textbox for both the portrait and textbox.
+;
+; This effectively closes both textboxes on the screen at
+; once by taking the entire dimensions of both and replacing
+; them with the screen's tiles.
+;
+; Based on the DEADCODE function above, this used to be split
+; into portrait-specific and dialogue-specific textbox closing
+; logic, but they likely determined this was faster or cheaper.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     TextBox_X:
+;     TextBox_Y:
+;     TextBox_Width:
+;     TextBox_Height:
+;         Clobbered.
+;
+; CALLS:
+;     TextBox_Close
 ;
 ; XREFS:
 ;     IScriptAction_EndScript
 ;============================================================================
-Portrait_Clear:                             ; [$822b]
+TextBox_ClearForPortraitAndText:            ; [$822b]
     LDA #$02
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; X = 2
     LDA #$08
-    STA a:TextBox_Y
+    STA a:TextBox_Y                         ; Y = 8
     LDA #$1e
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Width = 30
     LDA #$14
-    STA a:TextBox_Height
-    JMP Maybe_Draw_Textbox
+    STA a:TextBox_Height                    ; Height = 20
+    JMP TextBox_Close                       ; Close the textbox.
 
 
 ;============================================================================
@@ -265,7 +808,7 @@ Portrait_Clear:                             ; [$822b]
 ;     #$dc:
 ;         The read address for the IScript.
 ;
-;     IScriptEntity:
+;     Temp_0201:
 ;         The entity ID of the IScript, for portrait
 ;         display.
 ;
@@ -276,9 +819,9 @@ Portrait_Clear:                             ; [$822b]
 ;         The byte offset into the script.
 ;
 ; CALLS:
-;     FUN_PRG15_MIRROR__f24d
-;     Portrait_Show
-;     OpenTextWindow
+;     IScripts_ShowPortraitImage
+;     IScripts_OpenForPortrait
+;     TextBox_OpenForNPC
 ;     IScripts_LoadByte
 ;
 ; XREFS:
@@ -304,33 +847,44 @@ IScripts_Begin:                             ; [$8242]
     ;
     ; If this is 0xFF, map to the "Remember Your Mantra."
     ;
-    CMP #$ff
-    BNE @LAB_PRG12__8248
-    LDA #$1f
+    CMP #$ff                                ; Compare the start offset to
+                                            ; 0xFF.
+    BNE @_loadScript                        ; If equal, jump.
+    LDA #$1f                                ; Set the start offset to 0x1F.
 
-  @LAB_PRG12__8248:                         ; [$8248]
-    STA a:Temp_0200
-    TAX
-    LDA #$9f6b,X
-    STA IScriptOrCHRAddr
-    LDA #$a003,X
-    STA IScriptOrCHRAddr.U
-    LDY #$00
-    LDA (IScriptOrCHRAddr),Y
-    STA a:IScriptEntity
-    BPL @_notDoubleWindow
+
+    ;
+    ; Load the script address from the table.
+    ;
+  @_loadScript:                             ; [$8248]
+    STA a:Temp_0200                         ; Store the index temporarily.
+    TAX                                     ; X = A
+    LDA #$9f6b,X                            ; Load the lower byte of the
+                                            ; IScript address.
+    STA IScriptOrCHRAddr                    ; Store as the lower byte.
+    LDA #$a003,X                            ; Load the upper byte of the
+                                            ; IScript address.
+    STA IScriptOrCHRAddr.U                  ; Store as the upper byte.
+    LDY #$00                                ; Y = 0 (start offset in the
+                                            ; script).
+    LDA (IScriptOrCHRAddr),Y                ; Load the first byte of the
+                                            ; script (portrait ID).
+    STA a:Temp_0201                         ; Store it for the duration of
+                                            ; the script.
+    BPL @_continueScript                    ; If not a portrait ID, jump.
+
 
     ;
     ; Begin showing the portrait information.
     ;
-    AND #$7f
-    JSR #$f24d
-    JSR Portrait_Show
+    AND #$7f                                ; Keep the portrait ID bits.
+    JSR #$f24d                              ; Draw the portrait image.
+    JSR IScripts_OpenForPortrait            ; Draw the portrait frame.
 
-  @_notDoubleWindow:                        ; [$8267]
-    JSR OpenTextWindow
+  @_continueScript:                         ; [$8267]
+    JSR TextBox_OpenForNPC                  ; Open the text window.
     LDA #$01
-    STA IScriptOffset
+    STA IScriptOffset                       ; Set IScript offset to 1.
 
     ;
     ; v-- Fall through --v
@@ -389,6 +943,9 @@ IScripts_InvokeNextAction:                  ; [$826e]
 
 ;============================================================================
 ; Addresses for the IScript action handlers.
+;
+; XREFS:
+;     IScripts_InvokeNextAction
 ;============================================================================
 
 ;
@@ -396,72 +953,84 @@ IScripts_InvokeNextAction:                  ; [$826e]
 ;     IScripts_InvokeNextAction
 ;
 IScriptActions_L:                           ; [$827b]
-    db $b3                                  ; [0]:
+    db $b3                                  ; [0]: End Script action
 
 ;
 ; XREFS:
 ;     IScripts_InvokeNextAction
 ;
 IScriptActions_L_1_:                        ; [$827c]
-    db $c4                                  ; [1]:
-    db $ee                                  ; [2]:
-    db $d8                                  ; [3]:
-    db $25                                  ; [4]:
-    db $5a                                  ; [5]:
-    db $90                                  ; [6]:
-    db $9e                                  ; [7]:
-    db $d7                                  ; [8]:
-    db $24                                  ; [9]:
-    db $7f                                  ; [10]:
-    db $d0                                  ; [11]:
-    db $f5                                  ; [12]:
-    db $1e                                  ; [13]:
-    db $e5                                  ; [14]:
-    db $2f                                  ; [15]:
-    db $56                                  ; [16]:
-    db $5f                                  ; [17]:
-    db $17                                  ; [18]:
-    db $ae                                  ; [19]:
-    db $36                                  ; [20]:
-    db $ad                                  ; [21]:
-    db $07                                  ; [22]:
-    db $aa                                  ; [23]:
+    db $c4                                  ; [1]: Show Unskippable Message
+                                            ; action
+    db $ee                                  ; [2]: Show Question Message
+                                            ; action
+    db $d8                                  ; [3]: Show Message action
+    db $25                                  ; [4]: Check/Update Player Title
+                                            ; action
+    db $5a                                  ; [5]: Spend Gold action
+    db $90                                  ; [6]: Set Spawn Point action
+    db $9e                                  ; [7]: Add Inventory Item action
+    db $d7                                  ; [8]: Open Shop action
+    db $24                                  ; [9]: Add Gold action
+    db $7f                                  ; [10]: Add MP action
+    db $d0                                  ; [11]: If Quest Completed action
+    db $f5                                  ; [12]: If Player Has Title
+                                            ; action
+    db $1e                                  ; [13]: If Player Has Gold action
+    db $e5                                  ; [14]: Set Quest Complete action
+    db $2f                                  ; [15]: Show Buy/Sell Menu action
+    db $56                                  ; [16]: Consume Item action
+    db $5f                                  ; [17]: Show Sell Menu action
+    db $17                                  ; [18]: If Player Has Item action
+    db $ae                                  ; [19]: Add HP action
+    db $36                                  ; [20]: Show Password action
+    db $ad                                  ; [21]: Finish Game action
+    db $07                                  ; [22]: Show Message and If
+                                            ; Dismissed action
+    db $aa                                  ; [23]: Jump To Script Address
+                                            ; action
 
 ;
 ; XREFS:
 ;     IScripts_InvokeNextAction
 ;
 IScriptActions_U:                           ; [$8293]
-    db $82                                  ; [0]:
+    db $82                                  ; [0]: End Script action
 
 ;
 ; XREFS:
 ;     IScripts_InvokeNextAction
 ;
 IScriptActions_U_1_:                        ; [$8294]
-    db $82                                  ; [1]:
-    db $82                                  ; [2]:
-    db $82                                  ; [3]:
-    db $87                                  ; [4]:
-    db $83                                  ; [5]:
-    db $83                                  ; [6]:
-    db $83                                  ; [7]:
-    db $83                                  ; [8]:
-    db $85                                  ; [9]:
-    db $85                                  ; [10]:
-    db $85                                  ; [11]:
-    db $85                                  ; [12]:
-    db $86                                  ; [13]:
-    db $85                                  ; [14]:
-    db $86                                  ; [15]:
-    db $86                                  ; [16]:
-    db $86                                  ; [17]:
-    db $87                                  ; [18]:
-    db $85                                  ; [19]:
-    db $87                                  ; [20]:
-    db $82                                  ; [21]:
-    db $83                                  ; [22]:
-    db $82                                  ; [23]:
+    db $82                                  ; [1]: Show Unskippable Message
+                                            ; action
+    db $82                                  ; [2]: Show Question Message
+                                            ; action
+    db $82                                  ; [3]: Show Message action
+    db $87                                  ; [4]: Check/Update Player Title
+                                            ; action
+    db $83                                  ; [5]: Spend Gold action
+    db $83                                  ; [6]: Set Spawn Point action
+    db $83                                  ; [7]: Add Inventory Item action
+    db $83                                  ; [8]: Open Shop action
+    db $85                                  ; [9]: Add Gold action
+    db $85                                  ; [10]: Add MP action
+    db $85                                  ; [11]: If Quest Completed action
+    db $85                                  ; [12]: If Player Has Title
+                                            ; action
+    db $86                                  ; [13]: If Player Has Gold action
+    db $85                                  ; [14]: Set Quest Complete action
+    db $86                                  ; [15]: Show Buy/Sell Menu action
+    db $86                                  ; [16]: Consume Item action
+    db $86                                  ; [17]: Show Sell Menu action
+    db $87                                  ; [18]: If Player Has Item action
+    db $85                                  ; [19]: Add HP action
+    db $87                                  ; [20]: Show Password action
+    db $82                                  ; [21]: Finish Game action
+    db $83                                  ; [22]: Show Message and If
+                                            ; Dismissed action
+    db $82                                  ; [23]: Jump To Script Address
+                                            ; action
 
 
 ;============================================================================
@@ -477,7 +1046,8 @@ IScriptActions_U_1_:                        ; [$8294]
 ;     IScriptActions_L [$PRG12::8292]
 ;============================================================================
 IScriptAction_Jump:                         ; [$82ab]
-    JMP IScripts_JumpToNextAddr
+    JMP IScripts_JumpToNextAddr             ; Jump to the next address
+                                            ; specified in the script.
 
 
 ;============================================================================
@@ -493,8 +1063,8 @@ IScriptAction_Jump:                         ; [$82ab]
 ;     IScriptActions_L [$PRG12::8290]
 ;============================================================================
 IScriptAction_FinishGame:                   ; [$82ae]
-    JSR SplashAnimation_RunOutro
-    JMP #$c913
+    JSR SplashAnimation_RunOutro            ; Show the outro animation.
+    JMP #$c913                              ; Re-initialize the game.
 
 
 ;============================================================================
@@ -513,17 +1083,18 @@ IScriptAction_FinishGame:                   ; [$82ae]
 ;     IScriptAction_ShowQuestionMessage
 ;     IScriptAction_ShowSellMenu
 ;     IScriptActions_L [$PRG12::827b]
-;     Shop_ShowMessage
+;     IScripts_ShowFinalMessage
 ;============================================================================
 IScriptAction_EndScript:                    ; [$82b4]
-    JSR IScripts_UpdatePortraitAnimation
-    LDA a:IScriptEntity
-    BPL @LAB_PRG12__82c2
-    JSR #$f281
-    JMP Portrait_Clear
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    LDA a:Temp_0201                         ; Load the portrait ID.
+    BPL @_noPortrait                        ; If a portrait ID is not set,
+                                            ; jump.
+    JSR #$f281                              ; Clear the portrait image.
+    JMP TextBox_ClearForPortraitAndText     ; Clear the portrait frame.
 
-  @LAB_PRG12__82c2:                         ; [$82c2]
-    JMP FUN_PRG12__81fb
+  @_noPortrait:                             ; [$82c2]
+    JMP IScripts_CloseCurrentTextBox        ; Clear the current textbox.
 
 
 ;============================================================================
@@ -544,15 +1115,29 @@ IScriptAction_EndScript:                    ; [$82b4]
 ;     IScriptActions_L [$PRG12::827c]
 ;============================================================================
 IScriptAction_ShowUnskippableMessage:       ; [$82c5]
+    ;
+    ; Load the message to display.
+    ;
     JSR IScripts_LoadByte                   ; Load the next byte as the
                                             ; message ID.
     JSR #$f3f5                              ; Load the message.
 
-  @LAB_PRG12__82cb:                         ; [$82cb]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
-    JSR IScripts_Something_992A
-    BCC @LAB_PRG12__82cb
+
+    ;
+    ; Draw the characters one-by-one until the message is done.
+    ;
+  @_loop:                                   ; [$82cb]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR #$f466                              ; Draw the next character in the
+                                            ; textbox.
+    JSR TextBox_CheckShouldContinue         ; Check if the message should
+                                            ; continue.
+    BCC @_loop                              ; If so, loop.
+
+
+    ;
+    ; Done showing the textbox. Invoke the next action.
+    ;
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
 
@@ -574,15 +1159,30 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
 ;     IScriptActions_L [$PRG12::827e]
 ;============================================================================
 IScriptAction_ShowMessage:                  ; [$82d9]
-    JSR IScripts_LoadByte
-    JSR #$f3f5
+    ;
+    ; Load the message to display.
+    ;
+    JSR IScripts_LoadByte                   ; Load the next byte as the
+                                            ; message ID.
+    JSR #$f3f5                              ; Load the message.
 
-  @LAB_PRG12__82df:                         ; [$82df]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
-    JSR Shop_Something_9956
-    BCS IScriptAction_EndScript
-    BNE @LAB_PRG12__82df
+
+    ;
+    ; Draw the characters one-by-one until the message is done.
+    ;
+  @_loop:                                   ; [$82df]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR #$f466                              ; Draw the next character in the
+                                            ; textbox.
+    JSR TextBox_CheckShouldContinueOrDismissMessage ; Check if the message is
+                                                    ; done or continued.
+    BCS IScriptAction_EndScript             ; If dismissed, end the script.
+    BNE @_loop                              ; If not done, loop.
+
+
+    ;
+    ; Done showing the textbox. Invoke the next action.
+    ;
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
 
@@ -608,46 +1208,83 @@ IScriptAction_ShowMessage:                  ; [$82d9]
 ;     IScriptActions_L [$PRG12::827d]
 ;============================================================================
 IScriptAction_ShowQuestionMessage:          ; [$82ef]
-    JSR IScripts_LoadByte
-    JSR #$f3f5
+    JSR IScripts_LoadByte                   ; Load the message ID parameer.
+    JSR #$f3f5                              ; Load the message string.
 
-  @_waitForInput:                           ; [$82f5]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
-    JSR IScripts_Something_9980
-    BCS IScriptAction_EndScript
-    BNE @_waitForInput
-    JSR IScripts_Something_81E8
+  @_messageLoop:                            ; [$82f5]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR #$f466                              ; Show the next character in the
+                                            ; textbox.
+    JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
+                                                     ; continue or dismiss.
+    BCS IScriptAction_EndScript             ; If dismissed, end the script.
+    BNE @_messageLoop                       ; Else, if message text remains,
+                                            ; loop.
+
+
+    ;
+    ; The message finished. Fill up the textbox with hidden
+    ; placeholder text and move on to the next action.
+    ;
+    JSR IScripts_PositionAndFillPlaceholderText
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
 
 
 ;============================================================================
-; TODO: Document IScriptAction_22
+; IScript Action $16: Show Question Message then Check If Completed
 ;
-; INPUTS:
-;     None.
+; Tihs displays a message in a text box, with an
+; optional portrait depending on the script's Entity ID.
 ;
-; OUTPUTS:
-;     TODO
+; This message can be skipped at any point by pressing
+; the B button.
+;
+; If the message is dismissed, continue on with the script.
+;
+; If the message completed, load the next address parameter
+; and jump to it.
+;
+; This is not used in the shipped game.
+;
+; Script Parameters:
+;
+;     1. Message ID (1 byte)
+;     2. Jump Address if Completed (2 bytes)
 ;
 ; XREFS:
 ;     IScriptActions_L [$PRG12::8291]
 ;============================================================================
-IScriptAction_22:                           ; [$8308]
-    JSR IScripts_LoadByte
-    JSR #$f3f5
+IScriptAction_ShowQuestionMessageCheckIfDismissed: ; [$8308]
+    JSR IScripts_LoadByte                   ; Load the message ID parameer.
+    JSR #$f3f5                              ; Load the message string.
 
-  @LAB_PRG12__830e:                         ; [$830e]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
-    JSR IScripts_Something_9980
-    BCS @LAB_PRG12__831e
-    BNE @LAB_PRG12__830e
-    JMP IScripts_JumpToNextAddr             ; Invoke the next action in the
+  @_messageLoop:                            ; [$830e]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR #$f466                              ; Show the next character in the
+                                            ; textbox.
+    JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
+                                                     ; continue or dismiss.
+    BCS @_messageDismissed                  ; If dismissed, jump to continue
+                                            ; this script.
+    BNE @_messageLoop                       ; Else, if message text remains,
+                                            ; loop.
+
+
+    ;
+    ; The message finished. Load the next parameter as an
+    ; address and jump to it.
+    ;
+    JMP IScripts_JumpToNextAddr             ; Else, if completed, jump to the
+                                            ; next address specified in the
                                             ; script.
 
-  @LAB_PRG12__831e:                         ; [$831e]
+
+    ;
+    ; The message was dismissed. Move on to the next action in
+    ; this script.
+    ;
+  @_messageDismissed:                       ; [$831e]
     JMP IScripts_SkipAddrAndInvoke          ; Invoke the next action in the
                                             ; script.
 
@@ -658,8 +1295,16 @@ IScriptAction_22:                           ; [$8308]
 ; This will subtract the code, animating the reduction
 ; of gold from the status screen.
 ;
+; 10 gold will be subtracted at a time from the player.
+; The values passed in will be used as a separate counter
+; for how much gold is remaining to subtract.
+;
 ; INPUTS:
-;     None.
+;     Temp_0203:
+;         Lower byte of the gold amount to subtract.
+;
+;     Temp_0203:
+;         Upper byte of the gold amount to subtract.
 ;
 ; OUTPUTS:
 ;     Temp_Int24:
@@ -678,34 +1323,51 @@ IScriptAction_22:                           ; [$8308]
 ;     IScripts_ProgressivelySubtractGold
 ;============================================================================
 IScripts_ProgressivelySubtractGold:         ; [$8321]
-    JSR IScripts_UpdatePortraitAnimation
-    LDA a:Temp_0203
-    BMI @LAB_PRG12__8355
-    ORA a:Temp_0202
-    BEQ @LAB_PRG12__834d
-    LDA a:Temp_0202
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    LDA a:Temp_0203                         ; Load the upper byte of the gold
+                                            ; amount.
+    BMI @_subtractLowerByte                 ; If the upper byte is 0, jump.
+    ORA a:Temp_0202                         ; OR with the lower byte.
+    BEQ @_subtractUpperByte                 ; If neither has a value, jump.
+
+
+    ;
+    ; Subtract 10 from the counter of gold remaining to take.
+    ; If at any point we underflow the lower byte, subtract 1
+    ; from the upper byte.
+    ;
+    LDA a:Temp_0202                         ; Load the lower byte of gold.
     SEC
-    SBC #$0a
-    STA a:Temp_0202
-    LDA a:Temp_0203
-    SBC #$00
-    STA a:Temp_0203
-    LDA #$0a
-    STA Temp_Int24
-    LDA #$00
-    STA Temp_Int24.M
-    JSR #$f9a5
-    JMP IScripts_ProgressivelySubtractGold
+    SBC #$0a                                ; Subtract 10.
+    STA a:Temp_0202                         ; And store as the lower byte.
+    LDA a:Temp_0203                         ; Load the upper byte of gold.
+    SBC #$00                                ; If the lower is now < 0,
+                                            ; subtract 1 from upper.
+    STA a:Temp_0203                         ; And store it.
 
-  @LAB_PRG12__834d:                         ; [$834d]
-    DEC a:Temp_0203
-    LDA #$3c                                ; '<'
-    STA a:Temp_0202
 
-  @LAB_PRG12__8355:                         ; [$8355]
-    DEC a:Temp_0202
-    BNE IScripts_ProgressivelySubtractGold
-    RTS
+    ;
+    ; Remove 10 gold from the player.
+    ;
+    LDA #$0a                                ; A = 10
+    STA Temp_Int24                          ; Store as the lower byte to
+                                            ; subtract.
+    LDA #$00                                ; A = 0
+    STA Temp_Int24.M                        ; Store as the upper byte to
+                                            ; subtract.
+    JSR #$f9a5                              ; Subtract the gold from the
+                                            ; player.
+    JMP IScripts_ProgressivelySubtractGold  ; And loop.
+
+  @_subtractUpperByte:                      ; [$834d]
+    DEC a:Temp_0203                         ; Subtract 1 from the upper byte.
+    LDA #$3c                                ; Use 60 for the lower byte.
+    STA a:Temp_0202                         ; And store it.
+
+  @_subtractLowerByte:                      ; [$8355]
+    DEC a:Temp_0202                         ; Subtract 1 from the lower byte.
+    BNE IScripts_ProgressivelySubtractGold  ; If not 0, loop.
+    RTS                                     ; Else, we're done. Return.
 
 
 ;============================================================================
@@ -739,13 +1401,14 @@ IScriptAction_SpendGold:                    ; [$835b]
                                             ; Temp_Int24
                                             ; for comparison.
 
+
     ;
     ; Validate that there's enough money. If there is, spend
     ; it. If not, display an error message.
     ;
     JSR IScripts_CheckEnoughMoney           ; Check if there's enough money
                                             ; to pay.
-    BCC Shop_ShowNotEnoughMoney             ; If not, show the Not Enough
+    BCC IScripts_ShowNotEnoughMoney         ; If not, show the Not Enough
                                             ; Money message.
     JSR IScripts_ProgressivelySubtractGold  ; Progressively subtract the
                                             ; gold, animating it.
@@ -760,23 +1423,23 @@ IScriptAction_SpendGold:                    ; [$835b]
 ; then end the script.
 ;
 ; INPUTS:
-;     None
+;     None.
 ;
 ; OUTPUTS:
-;     None
+;     None.
 ;
 ; CALLS:
 ;     Messages_Load
 ;     IScripts_UpdatePortraitAnimation
 ;     TextBox_ShowNextChar
-;     Shop_Something_9956
+;     TextBox_CheckShouldContinueOrDismissMessage
 ;     IScriptAction_EndScript
 ;
 ; XREFS:
 ;     IScriptAction_OpenShop
 ;     IScriptAction_SpendGold
 ;============================================================================
-Shop_ShowNotEnoughMoney:                    ; [$837c]
+IScripts_ShowNotEnoughMoney:                ; [$837c]
     ;
     ; Display the Not Enough Money message.
     ;
@@ -788,32 +1451,48 @@ Shop_ShowNotEnoughMoney:                    ; [$837c]
 
 
 ;============================================================================
-; TODO: Document Shop_ShowMessage
+; Show a message for shop purposes, ending the script once finished.
+;
+; This will show the message and, once dismissed or completed,
+; end the current IScript.
 ;
 ; INPUTS:
-;     A
+;     A:
+;         The ID of the message to show.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     IScriptAction_EndScript
+;     IScripts_UpdatePortraitAnimation
+;     Messages_Load
+;     TextBox_ShowNextChar
+;     TextBox_CheckShouldContinueOrDismissMessage
+;
 ;
 ; XREFS:
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
 ;============================================================================
-Shop_ShowMessage:                           ; [$837e]
-    JSR #$f3f5                              ; And load the message.
+IScripts_ShowFinalMessage:                  ; [$837e]
+    JSR #$f3f5                              ; Load the message string.
+
 
     ;
     ; Progressively write the message.
     ;
-  @LAB_PRG12__8381:                         ; [$8381]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
-    JSR Shop_Something_9956
-    BCS @LAB_PRG12__838e
-    BNE @LAB_PRG12__8381
+  @_messageLoop:                            ; [$8381]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR #$f466                              ; Show the next character in the
+                                            ; textbox.
+    JSR TextBox_CheckShouldContinueOrDismissMessage ; Check whether to
+                                                    ; continue or dismiss.
+    BCS @_endScript                         ; If dismissed, end the script.
+    BNE @_messageLoop                       ; Else, if the message is not
+                                            ; finished, loop.
 
-  @LAB_PRG12__838e:                         ; [$838e]
+  @_endScript:                              ; [$838e]
     JMP IScriptAction_EndScript             ; End processing of the script.
 
 
@@ -851,6 +1530,9 @@ IScriptAction_SetSpawnPoint:                ; [$8391]
 ; IScript Action $07: Adds an item with the specified ID to the player's
 ; inventory.
 ;
+; This will show a textbox with the item's image and name,
+; waiting for the player to press a button to dismiss it.
+;
 ; Script Parameters:
 ;
 ;     1. Item ID (1 byte)
@@ -864,36 +1546,61 @@ IScriptAction_AddInventoryItem:             ; [$839f]
     PHA
     JSR Player_AddToInventory               ; Add the item to the inventory.
 
+
     ;
     ; Begin showing the textbox indicating the added item.
     ;
-    JSR IScriptAction_AddItem_Something8EC1
-    LDX a:TextBox_X
+    ; The text position will be inset 1 from the standard text
+    ; position (2 blocks in from the textbox border), allowing
+    ; room for the item image.
+    ;
+    JSR IScriptAction_AddInventoryItem_ClearTextBox ; Clear the textbox and
+                                                    ; prepare for showing the
+                                                    ; item.
+    LDX a:TextBox_X                         ; X = Textbox X location.
+    INX                                     ; X += 2
     INX
+    STX TextBox_ContentsX                   ; Store as the text X position.
+    LDX a:TextBox_Y                         ; X = Textbox Y position.
+    INX                                     ; X += 2
     INX
-    STX TextBox_TextX
-    LDX a:TextBox_Y
-    INX
-    INX
-    STX TextBox_TextY
-    PLA
-    LDX #$00
-    JSR Maybe_DrawItemName
-    INC TextBox_TextY
-    INC TextBox_TextY
-    INC TextBox_TextY
-    PLA
-    JSR Maybe_DrawItemTitle
+    STX TextBox_ContentsY                   ; Store as the text Y position.
 
-  @LAB_PRG12__83c8:                         ; [$83c8]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR IScripts_Something_SetXYAndOffset_99be
-    LDA Joy1_ChangedButtonMask              ; Key pressed by the player:  Bit
-                                            ; 0: Right Bit 1: Left Bit 2:
-                                            ; Down Bit 3: Up Bit 4: Start Bit
-                                            ; 5: Select Bit 6: B Bit 7: A
-    BPL @LAB_PRG12__83c8
-    JSR IScripts_Something_81E8
+
+    ;
+    ; Draw the item image and name in the textbox.
+    ;
+    PLA                                     ; Pull the item ID from the
+                                            ; stack.
+    LDX #$00                                ; X = 0
+    JSR TextBox_DrawItemImage               ; Draw the item image.
+    INC TextBox_ContentsY                   ; Text Y position += 3
+    INC TextBox_ContentsY
+    INC TextBox_ContentsY
+    PLA                                     ; Pull the item ID from the
+                                            ; stack.
+    JSR TextBox_DrawItemName                ; Draw the item name.
+
+
+    ;
+    ; Update any portrait and textbox terminators until a
+    ; button is pressed.
+    ;
+  @_textboxLoop:                            ; [$83c8]
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR TextBox_DrawUpArrowTerminatorSymbol ; Draw the Up arrow terminator
+                                            ; symbol.
+    LDA Joy1_ChangedButtonMask              ; Load any changed controller
+                                            ; buttons.
+    BPL @_textboxLoop                       ; If not pressed, loop.
+
+
+    ;
+    ; Prepare to clear out the textbox and then invoke the next
+    ; action in the script.
+    ;
+    JSR IScripts_PositionAndFillPlaceholderText ; Fill the textbox with
+                                                ; invisible placeholder text.
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
                                             ; script.
 
@@ -918,7 +1625,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
   @LAB_PRG12__83dd:                         ; [$83dd]
     JSR IScripts_UpdatePortraitAnimation
     JSR #$f466
-    JSR Shop_Something_9956
+    JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__83dd
     JSR IScripts_LoadByte
@@ -927,17 +1634,17 @@ IScriptAction_OpenShop:                     ; [$83d8]
     STA Temp_Int24.M
     JSR Shop_Populate
     JSR Shop_Draw
-    JSR FUN_PRG12__84ed
+    JSR IScripts_WaitForMenuInput
     BCC @LAB_PRG12__8402
 
   @_endScript:                              ; [$83ff]
     JMP IScriptAction_EndScript
 
   @LAB_PRG12__8402:                         ; [$8402]
-    JSR Something_ShopCursorInventory
+    JSR Shop_GetPlayerHasSelectedItem
     BCS @LAB_PRG12__8469
     LDX a:Menu_CursorPos
-    LDA ShopItems,X
+    LDA UI_Menu_IDs,X
     CMP #$80
     BEQ @LAB_PRG12__8439
     CMP #$81
@@ -972,11 +1679,11 @@ IScriptAction_OpenShop:                     ; [$83d8]
     JSR IScripts_CheckEnoughMoney
     BCS @LAB_PRG12__8457
     JSR Maybe_Shop_DrawTextBox
-    JMP Shop_ShowNotEnoughMoney
+    JMP IScripts_ShowNotEnoughMoney
 
   @LAB_PRG12__8457:                         ; [$8457]
     LDX a:Menu_CursorPos
-    LDA ShopItems,X
+    LDA UI_Menu_IDs,X
     JSR Player_AddToInventory
     JSR IScripts_ProgressivelySubtractGold
     JSR Maybe_Shop_DrawTextBox
@@ -985,8 +1692,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
   @LAB_PRG12__8469:                         ; [$8469]
     JSR Maybe_Shop_DrawTextBox
     LDA #$06
-    JMP Shop_ShowMessage
-
+    JMP IScripts_ShowFinalMessage
 
 ;============================================================================
 ; TODO: Document Maybe_Shop_DrawTextBox
@@ -1003,8 +1709,8 @@ IScriptAction_OpenShop:                     ; [$83d8]
 Maybe_Shop_DrawTextBox:                     ; [$8471]
     JSR IScripts_UpdatePortraitAnimation
     JSR IScripts_UpdatePortraitAnimation
-    JSR Maybe_Draw_Textbox
-    JMP OpenTextWindow
+    JSR TextBox_Close
+    JMP TextBox_OpenForNPC
 
 ;
 ; XREFS:
@@ -1018,22 +1724,21 @@ MAX_INVENTORY_SLOTS:                        ; [$847d]
     db $04                                  ; [3]: Max spells
     db $08                                  ; [4]: Max consumable items
 
-
 ;============================================================================
-; TODO: Document Something_ShopCursorInventory
+; TODO: Document Shop_GetPlayerHasSelectedItem
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     A
+;     C
 ;
 ; XREFS:
 ;     IScriptAction_OpenShop
 ;============================================================================
-Something_ShopCursorInventory:              ; [$8482]
+Shop_GetPlayerHasSelectedItem:              ; [$8482]
     LDX a:Menu_CursorPos
-    LDA ShopItems,X
+    LDA UI_Menu_IDs,X
     BPL @LAB_PRG12__84bf
     LDX #$00
     CMP #$80
@@ -1099,63 +1804,62 @@ Something_ShopCursorInventory:              ; [$8482]
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5:                     ; [$84e5]
     db $80                                  ; [0]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_1_:                  ; [$84e6]
     db $40                                  ; [1]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_2_:                  ; [$84e7]
     db $20                                  ; [2]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_3_:                  ; [$84e8]
     db $10                                  ; [3]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_4_:                  ; [$84e9]
     db $08                                  ; [4]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_5_:                  ; [$84ea]
     db $04                                  ; [5]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_6_:                  ; [$84eb]
     db $02                                  ; [6]:
 
 ;
 ; XREFS:
-;     Something_ShopCursorInventory
+;     Shop_GetPlayerHasSelectedItem
 ;
 BYTE_ARRAY_PRG12__84e5_7_:                  ; [$84ec]
     db $01                                  ; [7]:
 
-
 ;============================================================================
-; TODO: Document FUN_PRG12__84ed
+; TODO: Document IScripts_WaitForMenuInput
 ;
 ; INPUTS:
 ;     None.
@@ -1164,18 +1868,18 @@ BYTE_ARRAY_PRG12__84e5_7_:                  ; [$84ec]
 ;     C
 ;
 ; XREFS:
-;     FUN_PRG12__84ed
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowSellMenu
+;     IScripts_WaitForMenuInput
 ;============================================================================
-FUN_PRG12__84ed:                            ; [$84ed]
+IScripts_WaitForMenuInput:                  ; [$84ed]
     JSR IScripts_UpdatePortraitAnimation
-    JSR Menu_Draw
+    JSR Menu_UpdateAndDraw
     LDA Joy1_ChangedButtonMask
     BMI @_returnFalse
     ASL A
     BMI @_returnTrue
-    JMP FUN_PRG12__84ed
+    JMP IScripts_WaitForMenuInput
 
   @_returnFalse:                            ; [$84fd]
     CLC
@@ -1199,13 +1903,13 @@ FUN_PRG12__84ed:                            ; [$84ed]
 ;         The address of the menu items to load.
 ;
 ; OUTPUTS:
-;     Menu_LastPos:
+;     Arg_StringsCount:
 ;         Position of the last menu item.
 ;
 ;     Menu_CursorPos:
 ;         Start position of the cursor (0).
 ;
-;     ShopItems:
+;     UI_Menu_IDs:
 ;         The populated list of items.
 ;
 ;     ShopItemCostsL:
@@ -1220,11 +1924,13 @@ Shop_Populate:                              ; [$8501]
     LDX #$00                                ; X = 0 (menu position counter)
     STX a:Menu_CursorPos                    ; Cusor position = 0
 
+
     ;
     ; Fetch the menu item at this index.
     ;
   @_populateLoop:                           ; [$8508]
     LDA (Temp_Int24),Y                      ; A = Menu item at Y.
+
 
     ;
     ; Check if we're on the last item.
@@ -1233,11 +1939,13 @@ Shop_Populate:                              ; [$8501]
                                             ; terminator).
     BEQ @_finish                            ; If so, we're done.
 
+
     ;
     ; Store the item.
     ;
-    STA ShopItems,X                         ; Store the item in the menu.
+    STA UI_Menu_IDs,X                       ; Store the item in the menu.
     INY                                     ; Y++
+
 
     ;
     ; Store the cost.
@@ -1250,6 +1958,7 @@ Shop_Populate:                              ; [$8501]
                                             ; cost.
     STA ShopItemCostsU,X                    ; Store it.
 
+
     ;
     ; Increment our counters.
     ;
@@ -1258,7 +1967,7 @@ Shop_Populate:                              ; [$8501]
     BNE @_populateLoop                      ; If we're not done, loop.
 
   @_finish:                                 ; [$8521]
-    STX a:Menu_LastPos                      ; Set the last menu position.
+    STX a:Arg_StringsCount                  ; Set the last menu position.
     RTS
 
 
@@ -1282,7 +1991,6 @@ IScriptAction_AddGold:                      ; [$8525]
     STA a:Temp_0203                         ; Store it.
     JSR IScripts_ProgressivelyAddGold       ; Progressively add gold.
     JMP IScripts_InvokeNextAction           ; Invoke the next action.
-
 
 ;============================================================================
 ; TODO: Document IScripts_ProgressivelyAddGold
@@ -1349,11 +2057,13 @@ IScripts_PlayGoldChangeSound:               ; [$8574]
                                             ; sound.
     BNE @_return                            ; If not, return.
 
+
     ;
     ; We're ready to play the sound.
     ;
-    LDA #$19                                ; Play the sound.
-    JSR #$d0e4
+    LDA #$19                                ; 0x19 == Change gold amount
+                                            ; sound
+    JSR #$d0e4                              ; Play the sound.
 
   @_return:                                 ; [$857f]
     RTS
@@ -1430,11 +2140,15 @@ thunk_IScripts_InvokeNextAction:            ; [$85a0]
 IScripts_PlayFillingSound:                  ; [$85a3]
     LDA InterruptCounter
     AND #$03
-    BNE @LAB_PRG12__85ae
+    BNE RETURN_85AE
     LDA #$13
     JSR #$d0e4
 
-  @LAB_PRG12__85ae:                         ; [$85ae]
+    ;
+    ; XREFS:
+    ;     IScripts_PlayFillingSound
+    ;
+RETURN_85AE:                                ; [$85ae]
     RTS
 
 
@@ -1506,9 +2220,9 @@ IScriptAction_AddHP:                        ; [$85af]
 ;     IScriptActions_L [$PRG12::8286]
 ;============================================================================
 IScriptAction_IfQuestCompleted:             ; [$85d1]
-    JSR IScripts_LoadByte                   ; Load the next byte as the
-                                            ; quest.
-    TAX                                     ; X = A
+    JSR IScripts_LoadByte                   ; Load the next byte as the quest
+                                            ; index into our table.
+    TAX                                     ; X = result
     LDA a:Quests                            ; Load the current player quests.
     AND #$85e2,X                            ; AND it to the bitmask at the
                                             ; given index.
@@ -1539,12 +2253,15 @@ ISCRIPTS_QUEST_BITS:                        ; [$85e3]
 ;     IScriptActions_L [$PRG12::8289]
 ;============================================================================
 IScriptAction_SetQuestComplete:             ; [$85e6]
-    JSR IScripts_LoadByte
-    TAX
-    LDA a:Quests
-    ORA #$85e2,X
-    STA a:Quests
-    JMP IScripts_InvokeNextAction
+    JSR IScripts_LoadByte                   ; Load the next byte as the quest
+                                            ; index into our table.
+    TAX                                     ; X = result
+    LDA a:Quests                            ; Load the current player quests.
+    ORA #$85e2,X                            ; OR it with the bit for this
+                                            ; index.
+    STA a:Quests                            ; Store as the new quests
+                                            ; bitmask.
+    JMP IScripts_InvokeNextAction           ; Invoke the next action.
 
 
 ;============================================================================
@@ -1563,11 +2280,15 @@ IScriptAction_SetQuestComplete:             ; [$85e6]
 ;     IScriptActions_L [$PRG12::8287]
 ;============================================================================
 IScriptAction_IfPlayerHasTitle:             ; [$85f6]
-    JSR IScripts_LoadByte
-    CMP a:PlayerTitle
-    BEQ IScripts_JumpToNextAddr
+    JSR IScripts_LoadByte                   ; Load the next byte as the
+                                            ; player title to check.
+    CMP a:PlayerTitle                       ; Compare to the current player
+                                            ; title.
+    BEQ IScripts_JumpToNextAddr             ; If <=, jump to the script
+                                            ; address in the next argument.
     BCC IScripts_JumpToNextAddr
-    JMP IScripts_SkipAddrAndInvoke
+    JMP IScripts_SkipAddrAndInvoke          ; Else, skip the address and
+                                            ; invoke the next action.
 
 
 ;============================================================================
@@ -1583,7 +2304,6 @@ IScriptAction_IfPlayerHasTitle:             ; [$85f6]
 ;     None
 ;
 ; XREFS:
-;     IScriptAction_22
 ;     IScriptAction_CheckUpdatePlayerTitle
 ;     IScriptAction_IfPlayerHasGold
 ;     IScriptAction_IfPlayerHasItem
@@ -1591,39 +2311,48 @@ IScriptAction_IfPlayerHasTitle:             ; [$85f6]
 ;     IScriptAction_IfQuestCompleted
 ;     IScriptAction_Jump
 ;     IScriptAction_ShowBuySellMenu
+;     IScriptAction_ShowQuestionMessageCheckIfDismissed
 ;============================================================================
 IScripts_JumpToNextAddr:                    ; [$8603]
     ;
     ; Load the next two event bytes and use that as the
     ; address for the next event to invoke.
     ;
-    JSR IScripts_LoadByte
-    PHA
-    JSR IScripts_LoadByte
-    STA IScriptOrCHRAddr.U
-    PLA
-    STA IScriptOrCHRAddr
-    LDA #$00
-    STA IScriptOffset
-    JMP IScripts_InvokeNextAction
+    ; The logic here is doing a bit more than it has to.
+    ; It loads the lower byte, push it, then pop it, then
+    ; store it. It should just store it.
+    ;
+    JSR IScripts_LoadByte                   ; Load the next byte as the lower
+                                            ; byte of the script address.
+    PHA                                     ; Push to the stack.
+    JSR IScripts_LoadByte                   ; Load the next byte as the upper
+                                            ; byte of the script address.
+    STA IScriptOrCHRAddr.U                  ; Store it.
+    PLA                                     ; Pop the lower byte.
+    STA IScriptOrCHRAddr                    ; Store it.
+    LDA #$00                                ; A = 0.
+    STA IScriptOffset                       ; Store as the new script offset.
+    JMP IScripts_InvokeNextAction           ; Invoke the action at that
+                                            ; address
 
 
 ;============================================================================
 ; Skip the next 2-byte address and invoke the next IScript action.
 ;
 ; XREFS:
-;     IScriptAction_22
 ;     IScriptAction_CheckUpdatePlayerTitle
 ;     IScriptAction_IfPlayerHasGold
 ;     IScriptAction_IfPlayerHasItem
 ;     IScriptAction_IfPlayerHasTitle
 ;     IScriptAction_IfQuestCompleted
 ;     IScriptAction_ShowBuySellMenu
+;     IScriptAction_ShowQuestionMessageCheckIfDismissed
 ;============================================================================
 IScripts_SkipAddrAndInvoke:                 ; [$8616]
+    JSR IScripts_LoadByte                   ; Load 2 bytes and throw them
+                                            ; out.
     JSR IScripts_LoadByte
-    JSR IScripts_LoadByte
-    JMP IScripts_InvokeNextAction
+    JMP IScripts_InvokeNextAction           ; Invoke the next action.
 
 
 ;============================================================================
@@ -1639,14 +2368,17 @@ IScripts_SkipAddrAndInvoke:                 ; [$8616]
 ;     IScriptActions_L [$PRG12::8288]
 ;============================================================================
 IScriptAction_IfPlayerHasGold:              ; [$861f]
-    LDA a:Gold
-    ORA a:Gold_M
-    ORA a:Gold_U
-    BNE @_hasGold
-    JMP IScripts_SkipAddrAndInvoke
+    LDA a:Gold                              ; Load the lower byte of the
+                                            ; player's gold.
+    ORA a:Gold_M                            ; OR with the medium byte.
+    ORA a:Gold_U                            ; And the upper byte.
+    BNE @_hasGold                           ; If there's any value set, jump.
+    JMP IScripts_SkipAddrAndInvoke          ; Else, skip the next 2 bytes and
+                                            ; invoke the following action.
 
   @_hasGold:                                ; [$862d]
-    JMP IScripts_JumpToNextAddr
+    JMP IScripts_JumpToNextAddr             ; The player has gold, so jump to
+                                            ; the next listed address.
 
 
 ;============================================================================
@@ -1669,14 +2401,18 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
     ;
     ; Display the next "Come here to buy or sell?" message.
     ;
-    LDA #$10
-    JSR #$f3e9
+    LDA #$10                                ; 0x10 == "Did you come here to
+                                            ; buy and sell?"
+    JSR #$f3e9                              ; Load and show that message in
+                                            ; its entirety.
+
 
     ;
-    ; Set the last menu item position to point to Sell.
+    ; Set 2 strings for the menu.
     ;
-    LDA #$02                                ; Set the last position to 2.
-    STA a:Menu_LastPos
+    LDA #$02                                ; Queue 2 strings to draw.
+    STA a:Arg_StringsCount                  ; Set it.
+
 
     ;
     ; Set the start cursor position to Buy.
@@ -1685,15 +2421,17 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
                                             ; to 0.
     STA a:Menu_CursorPos
 
+
     ;
     ; Render the menu and wait for button changes.
     ;
   @_loop:                                   ; [$863f]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR Menu_Draw
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR Menu_UpdateAndDraw                  ; Update and draw the menu.
     LDA Joy1_ChangedButtonMask              ; Load the changed button mask.
     BMI @_choiceMade                        ; If the A button was pressed,
                                             ; jump.
+
 
     ;
     ; Check any button presses since the last iteration.
@@ -1703,10 +2441,12 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
     BPL @_loop                              ; If any other button was
                                             ; pressed, loop.
 
+
     ;
     ; End the script.
     ;
     JMP IScriptAction_EndScript
+
 
     ;
     ; Perform the next action based on the choice.
@@ -1731,10 +2471,11 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
 ;     IScriptActions_L [$PRG12::828b]
 ;============================================================================
 IScriptAction_ConsumeItem:                  ; [$8657]
-    JSR IScripts_LoadByte
-    JSR Player_RemoveItem
-    JMP IScripts_InvokeNextAction
-
+    JSR IScripts_LoadByte                   ; Load the next byte as the item
+                                            ; ID.
+    JSR Player_RemoveItem                   ; Remove the item from the
+                                            ; player's inventory.
+    JMP IScripts_InvokeNextAction           ; Invoke the next action.
 
 ;============================================================================
 ; TODO: Document IScriptAction_ShowSellMenu
@@ -1754,7 +2495,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     JSR IScripts_LoadByte
     STA Temp_Int24.M
     LDA #$00
-    STA a:Menu_LastPos
+    STA a:Arg_StringsCount
     LDX #$04
 
   @LAB_PRG12__8671:                         ; [$8671]
@@ -1778,8 +2519,8 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     TAX
     JSR IScripts_SellMenu_Something8704
     BNE @LAB_PRG12__86b0
-    LDX a:Menu_LastPos
-    STA ShopItems,X
+    LDX a:Arg_StringsCount
+    STA UI_Menu_IDs,X
     INY
     LDA (Temp_Int24),Y
     STA ShopItemCostsL,X
@@ -1789,7 +2530,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     ROR ShopItemCostsL,X
     STA ShopItemCostsU,X
     INX
-    STX a:Menu_LastPos
+    STX a:Arg_StringsCount
 
   @LAB_PRG12__86b0:                         ; [$86b0]
     PLA
@@ -1803,10 +2544,10 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     INX
     CPX #$05
     BNE @LAB_PRG12__8671
-    LDA a:Menu_LastPos
+    LDA a:Arg_StringsCount
     BNE @LAB_PRG12__86c6
     LDA #$12
-    JMP Shop_ShowMessage
+    JMP IScripts_ShowFinalMessage
 
   @LAB_PRG12__86c6:                         ; [$86c6]
     LDA #$13
@@ -1815,27 +2556,26 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
   @LAB_PRG12__86cb:                         ; [$86cb]
     JSR IScripts_UpdatePortraitAnimation
     JSR #$f466
-    JSR Shop_Something_9956
+    JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__86cb
     JSR Shop_Draw
-    JSR FUN_PRG12__84ed
+    JSR IScripts_WaitForMenuInput
     BCS @_endScript
     LDX a:Menu_CursorPos
     LDA ShopItemCostsL,X
     STA a:Temp_0202
     LDA ShopItemCostsU,X
     STA a:Temp_0203
-    LDA ShopItems,X
+    LDA UI_Menu_IDs,X
     JSR Player_RemoveItem
     JSR IScripts_ProgressivelyAddGold
-    JSR Maybe_Draw_Textbox
-    JSR OpenTextWindow
+    JSR TextBox_Close
+    JSR TextBox_OpenForNPC
     JMP IScripts_InvokeNextAction
 
   @_endScript:                              ; [$8701]
     JMP IScriptAction_EndScript
-
 
 ;============================================================================
 ; TODO: Document IScripts_SellMenu_Something8704
@@ -1852,7 +2592,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
 IScripts_SellMenu_Something8704:            ; [$8704]
     LDY #$00
 
-  @LAB_PRG12__8706:                         ; [$8706]
+  @_loop:                                   ; [$8706]
     LDA (Temp_Int24),Y
     CMP #$ff
     BEQ @LAB_PRG12__8716
@@ -1862,7 +2602,7 @@ IScripts_SellMenu_Something8704:            ; [$8704]
     INY
     INY
     INY
-    BNE @LAB_PRG12__8706
+    BNE @_loop
 
   @LAB_PRG12__8716:                         ; [$8716]
     TAX
@@ -1891,13 +2631,26 @@ IScripts_SellMenu_Something8704:            ; [$8704]
 ;     IScriptActions_L [$PRG12::828d]
 ;============================================================================
 IScriptAction_IfPlayerHasItem:              ; [$8718]
-    JSR IScripts_LoadByte
-    JSR Player_LacksItem
-    BCC @_invokeElse
-    JMP IScripts_SkipAddrAndInvoke
+    JSR IScripts_LoadByte                   ; Load the next byte as the item
+                                            ; ID.
+    JSR Player_LacksItem                    ; Check if the player lacks this
+                                            ; item.
+    BCC @_invokeElse                        ; If they have it, jump.
 
+
+    ;
+    ; The player does not have the item.
+    ;
+    JMP IScripts_SkipAddrAndInvoke          ; Skip the next 2 bytes and
+                                            ; invoke the following action.
+
+
+    ;
+    ; The player has the item.
+    ;
   @_invokeElse:                             ; [$8723]
-    JMP IScripts_JumpToNextAddr
+    JMP IScripts_JumpToNextAddr             ; Jump to the next address in the
+                                            ; script.
 
 
 ;============================================================================
@@ -1918,14 +2671,26 @@ IScriptAction_IfPlayerHasItem:              ; [$8718]
 ;     IScriptActions_L [$PRG12::827f]
 ;============================================================================
 IScriptAction_CheckUpdatePlayerTitle:       ; [$8726]
-    LDA a:NextPlayerTitle
-    CMP a:PlayerTitle
-    BEQ @_invokeElse
-    STA a:PlayerTitle
-    JMP IScripts_JumpToNextAddr
+    LDA a:NextPlayerTitle                   ; Load the next player title.
+    CMP a:PlayerTitle                       ; Compare against the current
+                                            ; title.
+    BEQ @_invokeElse                        ; If they're the same, jump.
 
+
+    ;
+    ; The player title is not a match. Update it.
+    ;
+    STA a:PlayerTitle                       ; Advance the player title.
+    JMP IScripts_JumpToNextAddr             ; Read the next 2 bytes as an
+                                            ; address and jump to it.
+
+
+    ;
+    ; The player already has that title.
+    ;
   @_invokeElse:                             ; [$8734]
-    JMP IScripts_SkipAddrAndInvoke
+    JMP IScripts_SkipAddrAndInvoke          ; Skip the next 2 bytes and
+                                            ; invoke the following action.
 
 
 ;============================================================================
@@ -1945,17 +2710,18 @@ IScriptAction_ShowPassword:                 ; [$8737]
     JSR Password_GenerateStateAndReset      ; Generate the password state.
     JSR #$f434                              ; Clear the textbox.
     LDA #$00
-    STA a:IScripts_Unused_207
+    STA a:IScripts_Unused_207               ; DEADCODE: Set to 0.
 
   @_charLoop:                               ; [$8742]
-    JSR IScripts_UpdatePortraitAnimation
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
     JSR PasswordScreen_ShowNextChar         ; Show the next character in the
                                             ; password.
     BCC @_charLoop                          ; If not done, loop.
 
   @_portraitLoop:                           ; [$874a]
-    JSR IScripts_UpdatePortraitAnimation
-    JSR IScripts_Something_SetXYAndOffset_99be
+    JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
+    JSR TextBox_DrawUpArrowTerminatorSymbol ; Draw the Up Arrow in the
+                                            ; textbox.
     LDA Joy1_ChangedButtonMask              ; A = Changed button mask
     BPL @_portraitLoop                      ; If not dismissed, loop.
     JMP IScripts_InvokeNextAction           ; Invoke the next action in the
@@ -1998,11 +2764,15 @@ PasswordScreen_ShowNextChar:                ; [$8757]
 
 ;============================================================================
 ; List of password characters by index.
+;
+; XREFS:
+;     PasswordScreen_DrawAtCursorPosition
+;     PasswordScreen_ShowNextChar
 ;============================================================================
 
 ;
 ; XREFS:
-;     PasswordScreen_Maybe_WriteCharAtCursor
+;     PasswordScreen_DrawAtCursorPosition
 ;     PasswordScreen_ShowNextChar
 ;
 PASSWORD_ENTERED_CHARS:                     ; [$8764]
@@ -2032,7 +2802,6 @@ PASSWORD_ENTERED_CHARS:                     ; [$8764]
 ;         The resulting byte.
 ;
 ; XREFS:
-;     IScriptAction_22
 ;     IScriptAction_AddGold
 ;     IScriptAction_AddHP
 ;     IScriptAction_AddInventoryItem
@@ -2046,6 +2815,7 @@ PASSWORD_ENTERED_CHARS:                     ; [$8764]
 ;     IScriptAction_SetSpawnPoint
 ;     IScriptAction_ShowMessage
 ;     IScriptAction_ShowQuestionMessage
+;     IScriptAction_ShowQuestionMessageCheckIfDismissed
 ;     IScriptAction_ShowSellMenu
 ;     IScriptAction_ShowUnskippableMessage
 ;     IScriptAction_SpendGold
@@ -2060,6 +2830,7 @@ IScripts_LoadByte:                          ; [$87a4]
     INY                                     ; Y++
     BNE @_incOffset                         ; If byte is not 0, update event
                                             ; and return.
+
 
     ;
     ; The offset wrapped from 0xFF to 0. Update the upper byte
@@ -2079,17 +2850,40 @@ RETURN_87AF:                                ; [$87af]
 
 
 ;============================================================================
-; TODO: Document IScripts_UpdatePortraitAnimation
+; Update the portrait animation during message display.
+;
+; This will redraw the screen in a frozen state, and then
+; compute what frame of animation to show for the portrait.
+;
+; If there's no message to display, or the drawing of the
+; message finished, then portrait frame 0 will be shown.
+; Otherwise, the frame will be based on the animation counter,
+; using frames 0..2.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter.
+;
+;     MessageID:
+;         The currently-displaying message ID.
+;
+;     Temp_0201:
+;         The portrait ID.
+;
+;     TextBox_MessagePaused:
+;         The message display ended flag.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Game_DrawScreenInFrozenState
+;     Sprites_ResetForGameScreen
+;     IScripts_DrawPortraitAnimationFrame
+;     IScripts_SetPortraitSpriteXY
+;     WaitForNextFrame
 ;
 ; XREFS:
-;     FUN_PRG12__84ed
-;     IScriptAction_22
 ;     IScriptAction_AddHP
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_AddMP
@@ -2099,39 +2893,58 @@ RETURN_87AF:                                ; [$87af]
 ;     IScriptAction_ShowMessage
 ;     IScriptAction_ShowPassword
 ;     IScriptAction_ShowQuestionMessage
+;     IScriptAction_ShowQuestionMessageCheckIfDismissed
 ;     IScriptAction_ShowSellMenu
 ;     IScriptAction_ShowUnskippableMessage
 ;     IScripts_ProgressivelyAddGold
 ;     IScripts_ProgressivelySubtractGold
+;     IScripts_ShowFinalMessage
+;     IScripts_WaitForMenuInput
 ;     Maybe_Shop_DrawTextBox
-;     Shop_ShowMessage
 ;============================================================================
 IScripts_UpdatePortraitAnimation:           ; [$87b0]
-    JSR #$ca25
-    JSR #$cb47
-    JSR #$dc46
-    LDA a:IScriptEntity
-    BPL RETURN_87AF
-    JMP @LAB_PRG12__87c1
+    JSR #$ca25                              ; Wait for the next frame.
+    JSR #$cb47                              ; Set up state for a screen draw.
+    JSR #$dc46                              ; Draw the screen in a frozen
+                                            ; animation state.
+    LDA a:Temp_0201                         ; Load the portrait ID.
+    BPL RETURN_87AF                         ; If no portrait, return.
+    JMP @_updatePortrait                    ; Else, jump to update portrait
+                                            ; (oddly, since we could fall
+                                            ; through).
 
-  @LAB_PRG12__87c1:                         ; [$87c1]
-    LDA a:MessageID
-    BEQ @LAB_PRG12__87d4
-    LDA a:TextBox_MessageEnded
-    BNE @LAB_PRG12__87d4
-    LDA InterruptCounter
+  @_updatePortrait:                         ; [$87c1]
+    LDA a:MessageID                         ; Load the current message ID.
+    BEQ @_messageIsUnset                    ; If unset, jump.
+    LDA a:TextBox_MessagePaused             ; Load the message-ended flag.
+    BNE @_messageIsUnset                    ; If the message ended, jump.
+
+
+    ;
+    ; The message is still animating, so choose the next
+    ; animation frame.
+    ;
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    LSR A                                   ; Divide by 8.
     LSR A
     LSR A
-    LSR A
-    AND #$03
-    BPL @LAB_PRG12__87d6
+    AND #$03                                ; Keep bits 0-1 as the new
+                                            ; animation frame.
+    BPL @_drawFrame                         ; Jump to finish the update.
 
-  @LAB_PRG12__87d4:                         ; [$87d4]
-    LDA #$00
 
-  @LAB_PRG12__87d6:                         ; [$87d6]
-    JSR Portrait_SetInnerSpriteXY
-    JMP #$f29b
+    ;
+    ; There's no message to continue showing, so freeze the
+    ; animation to frame 0.
+    ;
+  @_messageIsUnset:                         ; [$87d4]
+    LDA #$00                                ; Force animation frame to 0.
+
+  @_drawFrame:                              ; [$87d6]
+    JSR IScripts_SetPortraitSpriteXY        ; Set the X/Y location for the
+                                            ; portrait sprite.
+    JMP #$f29b                              ; Draw the computed animation
+                                            ; frame.
 
 
 ;============================================================================
@@ -2175,6 +2988,7 @@ IScripts_CheckEnoughMoney:                  ; [$87dc]
     BNE @_return                            ; If no, return. CMP set Carry as
                                             ; our result.
 
+
     ;
     ; Check the middle byte of the gold.
     ;
@@ -2183,6 +2997,7 @@ IScripts_CheckEnoughMoney:                  ; [$87dc]
     CMP Temp_Int24.M                        ; Compare to the required amount.
     BNE @_return                            ; If not 0, return. CMP set Carry
                                             ; as our result.
+
 
     ;
     ; Check the lower byte of the gold.
@@ -2197,7 +3012,52 @@ IScripts_CheckEnoughMoney:                  ; [$87dc]
 
 
 ;============================================================================
-; TODO: Document TextBox_GetCursorXForTileX1
+; Return a pixel X position for the current textbox position.
+;
+; INPUTS:
+;     TextBox_X:
+;         The textbox X position.
+;
+; OUTPUTS:
+;     A:
+;         The pixel X position.
+;
+; XREFS:
+;     Menu_UpdateAndDraw
+;============================================================================
+TextBox_GetXPixelCoord:                     ; [$87f0]
+    LDA a:TextBox_X                         ; Load the X tile position.
+    ASL A                                   ; Multiply by 8 to convert to a
+                                            ; pixel position.
+    ASL A
+    ASL A
+    RTS                                     ; Return it.
+
+
+;============================================================================
+; Return a pixel Y position for the current textbox position.
+;
+; INPUTS:
+;     TextBox_Y:
+;         The textbox Y position.
+;
+; OUTPUTS:
+;     A:
+;         The pixel Y position.
+;
+; XREFS:
+;     Menu_UpdateAndDraw
+;============================================================================
+TextBox_GetYPixelCoord:                     ; [$87f7]
+    LDA a:TextBox_Y                         ; Load the Y tile position.
+    ASL A                                   ; Multiply by 8 to convert to a
+                                            ; pixel position.
+    ASL A
+    ASL A
+    RTS                                     ; Return it.
+
+;============================================================================
+; TODO: Document TextBox_GetNextAttributeDataOffset
 ;
 ; INPUTS:
 ;     None.
@@ -2206,64 +3066,23 @@ IScripts_CheckEnoughMoney:                  ; [$87dc]
 ;     A
 ;
 ; XREFS:
-;     FUN_PRG12__9075
+;     TextBox_FillBackground
+;     TextBox_SetNextAttributeData
 ;============================================================================
-TextBox_GetCursorXForTileX1:                ; [$87f0]
-    LDA a:TextBox_X                         ; Load the left coordinate.
-    ASL A                                   ; Multiply by 8.
-    ASL A
-    ASL A
-    RTS
-
-
-;============================================================================
-; TODO: Document TextBox_GetCursorYForTileY2
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     A
-;
-; XREFS:
-;     FUN_PRG12__9075
-;============================================================================
-TextBox_GetCursorYForTileY2:                ; [$87f7]
-    LDA a:TextBox_Y                         ; Load the bottom coordinate.
-    ASL A                                   ; Multiply by 8.
-    ASL A
-    ASL A
-    RTS
-
-
-;============================================================================
-; TODO: Document FUN_PRG12__87fe
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     A
-;
-; XREFS:
-;     FUN_PRG12__880e
-;     Maybe_Draw_Textbox_Something8F51
-;============================================================================
-FUN_PRG12__87fe:                            ; [$87fe]
-    LDA TextBox_TextY
+TextBox_GetNextAttributeDataOffset:         ; [$87fe]
+    LDA TextBox_ContentsY
     ASL A
     ASL A
     AND #$f8
     STA Temp_Int24.M
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     LSR A
     ORA Temp_Int24.M
     STA Temp_Int24.M
     RTS
 
-
 ;============================================================================
-; TODO: Document FUN_PRG12__880e
+; TODO: Document TextBox_SetNextAttributeData
 ;
 ; INPUTS:
 ;     A
@@ -2272,29 +3091,29 @@ FUN_PRG12__87fe:                            ; [$87fe]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox_Something8F51
+;     TextBox_FillBackground
 ;============================================================================
-FUN_PRG12__880e:                            ; [$880e]
+TextBox_SetNextAttributeData:               ; [$880e]
     STA Temp_Int24
-    JSR FUN_PRG12__87fe
+    JSR TextBox_GetNextAttributeDataOffset
     TAX
-    LDA TextBox_TextY
+    LDA TextBox_ContentsY
     LSR A
     BCS @LAB_PRG12__8842
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     LSR A
     BCS @LAB_PRG12__882f
-    LDA Something_ValuesToDraw,X
+    LDA TextBox_AttributeData,X
     AND #$fc
     STA Temp_Int24.M
     LDA Temp_Int24
     AND #$03
     ORA Temp_Int24.M
-    STA Something_ValuesToDraw,X
+    STA TextBox_AttributeData,X
     RTS
 
   @LAB_PRG12__882f:                         ; [$882f]
-    LDA Something_ValuesToDraw,X
+    LDA TextBox_AttributeData,X
     AND #$f3
     STA Temp_Int24.M
     LDA Temp_Int24
@@ -2302,14 +3121,14 @@ FUN_PRG12__880e:                            ; [$880e]
     ASL A
     AND #$0c
     ORA Temp_Int24.M
-    STA Something_ValuesToDraw,X
+    STA TextBox_AttributeData,X
     RTS
 
   @LAB_PRG12__8842:                         ; [$8842]
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     LSR A
     BCS @LAB_PRG12__885c
-    LDA Something_ValuesToDraw,X
+    LDA TextBox_AttributeData,X
     AND #$cf
     STA Temp_Int24.M
     LDA Temp_Int24
@@ -2319,11 +3138,11 @@ FUN_PRG12__880e:                            ; [$880e]
     ASL A
     AND #$30
     ORA Temp_Int24.M
-    STA Something_ValuesToDraw,X
+    STA TextBox_AttributeData,X
     RTS
 
   @LAB_PRG12__885c:                         ; [$885c]
-    LDA Something_ValuesToDraw,X
+    LDA TextBox_AttributeData,X
     AND #$3f
     STA Temp_Int24.M
     LDA Temp_Int24
@@ -2335,7 +3154,7 @@ FUN_PRG12__880e:                            ; [$880e]
     ASL A
     AND #$c0
     ORA Temp_Int24.M
-    STA Something_ValuesToDraw,X
+    STA TextBox_AttributeData,X
     RTS
 
 PLAYER_TOP_MENU_ITEM_STRINGS:               ; [$8873]
@@ -2354,6 +3173,8 @@ PLAYER_STATUS_MENU_STRINGS:                 ; [$88d3]
     db $09,"SHIELD:        "                ; [$8913] char
     db $09," MAGIC:        "                ; [$8923] char
     db $09,"  ITEM:        "                ; [$8933] char
+
+PLAYER_STATUS_MENU_TITLES:                  ; [$8943]
     db $09,"NOVICE         "                ; [$8943] char
     db $09,"ASPIRANT       "                ; [$8953] char
     db $09,"BATTLER        "                ; [$8963] char
@@ -2376,9 +3197,8 @@ PLAYER_STATUS_MENU_STRINGS:                 ; [$88d3]
     db $09,"NO MAGIC       "                ; [$8a73] char
     db $09,"NO ITEM        "                ; [$8a83] char
 
-
 ;============================================================================
-; TODO: Document UI_ShowPlayerMenu
+; TODO: Document PlayerMenu_Show
 ;
 ; INPUTS:
 ;     None.
@@ -2389,9 +3209,9 @@ PLAYER_STATUS_MENU_STRINGS:                 ; [$88d3]
 ; XREFS:
 ;     GameLoop_CheckShowPlayerMenu
 ;============================================================================
-UI_ShowPlayerMenu:                          ; [$8a93]
+PlayerMenu_Show:                            ; [$8a93]
     LDA #$06
-    STA a:Menu_LastPos
+    STA a:Arg_StringsCount
     LDA #$00
     STA a:Menu_CursorPos
     LDA #$02
@@ -2404,42 +3224,54 @@ UI_ShowPlayerMenu:                          ; [$8a93]
     STA a:TextBox_Height
     LDA #$18
     JSR #$d0e4
-    JSR TextBox_Maybe_Draw
+    JSR TextBox_Open
     LDA #$73
     STA Temp_Int24
     LDA #$88
     STA Temp_Int24.M
     LDX #$00
-    STX a:ShopItems
+    STX a:UI_Menu_IDs
     INX
-    STX a:ShopItems_1_
+    STX a:UI_Menu_IDs_1_
     INX
-    STX a:ShopItems_2_
+    STX a:UI_Menu_IDs_2_
     INX
-    STX a:ShopItems_3_
+    STX a:UI_Menu_IDs_3_
     INX
-    STX a:ShopItems_4_
+    STX a:UI_Menu_IDs_4_
     INX
-    STX a:ShopItems_5_
-    JSR Shop_DrawItemStrings
+    STX a:UI_Menu_IDs_5_
+    JSR TextBox_DrawStringLines
 
-  @LAB_PRG12__8add:                         ; [$8add]
+  @_inputLoop:                              ; [$8add]
     JSR #$ca25
     JSR #$cb47
-    JSR Menu_Draw
+    JSR Menu_UpdateAndDraw
     LDA Joy1_ChangedButtonMask
-    BMI @LAB_PRG12__8af0
+    BMI @_loadMenuIDs
     ASL A
-    BPL @LAB_PRG12__8add
-    JMP Maybe_Draw_Textbox
+    BPL @_inputLoop
+    JMP TextBox_Close
 
-  @LAB_PRG12__8af0:                         ; [$8af0]
+  @_loadMenuIDs:                            ; [$8af0]
     LDX a:Menu_CursorPos
     CPX #$05
-    BNE @LAB_PRG12__8afa
-    JMP PlayerMenu_Maybe_ShowStatus
+    BNE PlayerMenu_ShowSubmenu
+    JMP PlayerMenu_ShowStatusMenu
 
-  @LAB_PRG12__8afa:                         ; [$8afa]
+;============================================================================
+; TODO: Document PlayerMenu_ShowSubmenu
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PlayerMenu_Show
+;============================================================================
+PlayerMenu_ShowSubmenu:                     ; [$8afa]
     LDA #$04
     STA a:TextBox_X
     LDA #$08
@@ -2448,19 +3280,19 @@ UI_ShowPlayerMenu:                          ; [$8a93]
     STA a:TextBox_Width
     LDA #$12
     STA a:TextBox_Height
-    JSR TextBox_Maybe_Draw
+    JSR TextBox_Open
     LDX a:Menu_CursorPos
     STX a:PlayerMenu_SelectedInventory
     LDA NumberOfWeapons,X
-    BNE @LAB_PRG12__8b4f
+    BNE PlayerMenu_ShowInventoryMenu
     LDA a:TextBox_X
     CLC
     ADC #$02
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
     CLC
     ADC #$02
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     JSR #$f804
     LDA #$43
     STA Temp_Int24
@@ -2469,37 +3301,53 @@ UI_ShowPlayerMenu:                          ; [$8a93]
     LDA a:Menu_CursorPos
     JSR #$f78c
     TAY
-    JSR Strings_Draw
+    JSR UI_DrawString
 
-  @LAB_PRG12__8b41:                         ; [$8b41]
+  @_inputLoop:                              ; [$8b41]
     JSR #$ca25
     JSR #$cb47
     LDA Joy1_ChangedButtonMask
     ASL A
-    BPL @LAB_PRG12__8b41
-    JMP FUN_PRG12__8bed
+    BPL @_inputLoop
+    JMP PlayerMenu_Close
 
-  @LAB_PRG12__8b4f:                         ; [$8b4f]
-    STA a:Menu_LastPos
+;============================================================================
+; TODO: Document PlayerMenu_ShowInventoryMenu
+;
+; INPUTS:
+;     A
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PlayerMenu_ShowSubmenu
+;============================================================================
+PlayerMenu_ShowInventoryMenu:               ; [$8b4f]
+    STA a:Arg_StringsCount
     LDA #$9b29,X
     STA Temp_Int24
     LDA #$9b2e,X
     STA Temp_Int24.M
     LDY #$00
 
-  @LAB_PRG12__8b5e:                         ; [$8b5e]
+  @_loadMenuIDs:                            ; [$8b5e]
     LDA (Temp_Int24),Y
-    STA ShopItems,Y
+    STA UI_Menu_IDs,Y
     INY
-    CPY a:Menu_LastPos
-    BNE @LAB_PRG12__8b5e
-    JSR FUN_PRG12__8c04
+    CPY a:Arg_StringsCount
+    BNE @_loadMenuIDs
+    JSR PlayerMenu_DrawInventoryItems
     LDA #$00
-    STA a:Menu_CursorPos
+    STA a:Menu_CursorPos                    ; Set the menu cursor position to
+                                            ; 0.
 
-
+    ;
+    ; v-- Fall through --v
+    ;
 ;============================================================================
-; TODO: Document FUN_PRG12__8b71
+; TODO: Document PlayerMenu_HandleInventoryMenuInput
 ;
 ; INPUTS:
 ;     None.
@@ -2508,55 +3356,106 @@ UI_ShowPlayerMenu:                          ; [$8a93]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8be5
+;     PlayerMenu_HandleInvalidChoice
+;     PlayerMenu_HandleInventoryMenuInput
 ;============================================================================
-FUN_PRG12__8b71:                            ; [$8b71]
-    JSR #$ca25
-    JSR #$cb47
-    JSR Menu_Draw
-    LDA Joy1_ChangedButtonMask
-    BMI @LAB_PRG12__8b83
-    ASL A
-    BMI FUN_PRG12__8bed
-    BPL FUN_PRG12__8b71
+PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
+    ;
+    ; Wait for input on the menu.
+    ;
+    JSR #$ca25                              ; Wait for the next frame.
+    JSR #$cb47                              ; Set up draw state.
+    JSR Menu_UpdateAndDraw                  ; Update and draw the menu.
+    LDA Joy1_ChangedButtonMask              ; Check for a changed button.
+    BMI @_hasInput                          ; If the the "A" button is
+                                            ; pressed, jump to handle input.
+    ASL A                                   ; Shift the button mask left.
+    BMI PlayerMenu_Close                    ; If the "B" button is pressed,
+                                            ; close the menu.
+    BPL PlayerMenu_HandleInventoryMenuInput
 
-  @LAB_PRG12__8b83:                         ; [$8b83]
-    LDA a:Area_CurrentArea
-    CMP #$04
-    BEQ FUN_PRG12__8be5
-    LDA a:PlayerMenu_SelectedInventory
-    CMP #$03
-    BCS FUN_PRG12__8bce
-    LDA a:SelectedWeapon
-    CMP #$03
-    BEQ FUN_PRG12__8be5
-    LDX a:Menu_CursorPos
-    LDA ShopItems,X
-    CMP #$03
-    BNE FUN_PRG12__8bce
-    LDA #$03
-    JSR Player_LacksItem
-    BCS FUN_PRG12__8be5
-    LDA #$23
-    JSR Player_LacksItem
-    BCS FUN_PRG12__8be5
-    LDA #$43
-    JSR Player_LacksItem
-    BCS FUN_PRG12__8be5
-    LDA #$08
-    JSR #$d0e4
-    LDA #$03
-    JSR Player_Equip
-    LDA #$23
-    JSR Player_Equip
-    LDA #$43
-    JSR Player_Equip
-    JMP FUN_PRG12__8bed
+  @_hasInput:                               ; [$8b83]
+    LDA a:Area_CurrentArea                  ; Load the current area.
+    CMP #$04                                ; Is the player inside/in a place
+                                            ; where they can't equip?
+    BEQ PlayerMenu_HandleInvalidChoice      ; If so, it's an invalid choice.
 
+
+    ;
+    ; The player is in an area where they can equip. See if
+    ; this inventory allows equipping (only Magic and Item).
+    ;
+    LDA a:PlayerMenu_SelectedInventory      ; Load the selected inventory
+                                            ; index.
+    CMP #$03                                ; Is it the Magic or Item
+                                            ; inventory?
+    BCS PlayerMenu_EquipItem                ; If so, always allow equipping
+                                            ; the item.
+
+
+    ;
+    ; Check the selected weapon and see if it's the Dragon Slayer
+    ; (which also implies the Battle Suit and Battle Helmet).
+    ;
+    ; If they have these, they cannot select a new item. If they
+    ; don't, they can.
+    ;
+    LDA a:SelectedWeapon                    ; Load the selected weapon.
+    CMP #$03                                ; Is it the Dragon Slayer?
+    BEQ PlayerMenu_HandleInvalidChoice      ; If not, it's an invalid choice.
+    LDX a:Menu_CursorPos                    ; X = Menu cursor position.
+    LDA UI_Menu_IDs,X                       ; A = Item ID at the cursor
+                                            ; position.
+    CMP #$03                                ; Is the item ID 3 (Dragon
+                                            ; Slayer)?
+    BNE PlayerMenu_EquipItem                ; If not, proceed to equip the
+                                            ; item normally.
+
+
+    ;
+    ; The player selected a Dragon Slayer, Battle Suit, or Battle
+    ; Helmet. Check if they have all three, and if so, they'll all
+    ; be equipped.
+    ;
+    ; First, check for the Dragon Slayer.
+    ;
+    LDA #$03                                ; 0x03 == Dragon Slayer
+    JSR Player_LacksItem                    ; Does the player have it?
+    BCS PlayerMenu_HandleInvalidChoice      ; If not, it's an invalid choice.
+
+
+    ;
+    ; They have the Dragon Slayer. Check for the Battle Suit.
+    ;
+    LDA #$23                                ; 0x23 == Battle Suit.
+    JSR Player_LacksItem                    ; Does the player have it?
+    BCS PlayerMenu_HandleInvalidChoice      ; If not, it's an invalid choice.
+
+
+    ;
+    ; They have the Dragon Slayer and Battle Suit. Check for the
+    ; Battle Helmet.
+    ;
+    LDA #$43                                ; 0x43 == Battle Helmet.
+    JSR Player_LacksItem                    ; Does the player have it?
+    BCS PlayerMenu_HandleInvalidChoice      ; If not, it's an invalid choice.
+
+
+    ;
+    ; They have all three. Equip them all and close the menu.
+    ;
+    LDA #$08                                ; 0x08 == Item Pick-Up sound.
+    JSR #$d0e4                              ; Play it.
+    LDA #$03                                ; 0x03 == Dragon Slayer.
+    JSR Player_Equip                        ; Equip it.
+    LDA #$23                                ; 0x23 == Battle Suit.
+    JSR Player_Equip                        ; Equip it.
+    LDA #$43                                ; 0x43 == Battle Helmet.
+    JSR Player_Equip                        ; Equip it.
+    JMP PlayerMenu_Close                    ; Close the Player Menu.
 
 ;============================================================================
-; TODO: Document FUN_PRG12__8bce
+; TODO: Document PlayerMenu_EquipItem
 ;
 ; INPUTS:
 ;     None.
@@ -2565,21 +3464,21 @@ FUN_PRG12__8b71:                            ; [$8b71]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
+;     PlayerMenu_HandleInventoryMenuInput
 ;============================================================================
-FUN_PRG12__8bce:                            ; [$8bce]
-    LDA #$08
-    JSR #$d0e4
-    LDX a:Menu_CursorPos
-    LDA a:PlayerMenu_SelectedInventory
-    JSR #$f78b
-    ORA ShopItems,X
-    JSR Player_Equip
-    JMP FUN_PRG12__8bed
-
+PlayerMenu_EquipItem:                       ; [$8bce]
+    LDA #$08                                ; 0x08 == Item pick-up sound.
+    JSR #$d0e4                              ; Play it.
+    LDX a:Menu_CursorPos                    ; X = Menu cursor position.
+    LDA a:PlayerMenu_SelectedInventory      ; A = Selected inventory.
+    JSR #$f78b                              ; Get the inventory bits.
+    ORA UI_Menu_IDs,X                       ; OR it with the selected item
+                                            ; index as an item ID.
+    JSR Player_Equip                        ; Equip the resulting item.
+    JMP PlayerMenu_Close                    ; Close the Player Menu.
 
 ;============================================================================
-; TODO: Document FUN_PRG12__8be5
+; TODO: Document PlayerMenu_HandleInvalidChoice
 ;
 ; INPUTS:
 ;     None.
@@ -2588,42 +3487,50 @@ FUN_PRG12__8bce:                            ; [$8bce]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
+;     PlayerMenu_HandleInventoryMenuInput
 ;============================================================================
-FUN_PRG12__8be5:                            ; [$8be5]
-    LDA #$0d
-    JSR #$d0e4
-    JMP FUN_PRG12__8b71
+PlayerMenu_HandleInvalidChoice:             ; [$8be5]
+    LDA #$0d                                ; 0x0D == Invalid Choice sound
+                                            ; effect.
+    JSR #$d0e4                              ; Play it.
+    JMP PlayerMenu_HandleInventoryMenuInput ; Resume handling of the
+                                            ; inventory menu.
 
 
 ;============================================================================
-; TODO: Document FUN_PRG12__8bed
+; Close the Player Menu.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     TextBox_X:
+;     TextBox_Y:
+;     TextBox_Width:
+;     TextBox_Height:
+;         Clobbered.
+;
+; CALLS:
+;     TextBox_Close
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8bce
-;     UI_ShowPlayerMenu
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_ShowSubmenu
 ;============================================================================
-FUN_PRG12__8bed:                            ; [$8bed]
+PlayerMenu_Close:                           ; [$8bed]
     LDA #$02
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; Set box X coordinate to 2.
     LDA #$06
-    STA a:TextBox_Y
+    STA a:TextBox_Y                         ; Set box Y coordinate to 6.
     LDA #$16
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Set box width to 22.
     LDA #$14
-    STA a:TextBox_Height
-    JMP Maybe_Draw_Textbox
-
+    STA a:TextBox_Height                    ; Set box height to 20.
+    JMP TextBox_Close                       ; Close the Player Menu.
 
 ;============================================================================
-; TODO: Document FUN_PRG12__8c04
+; TODO: Document PlayerMenu_DrawInventoryItems
 ;
 ; INPUTS:
 ;     None.
@@ -2632,41 +3539,40 @@ FUN_PRG12__8bed:                            ; [$8bed]
 ;     TODO
 ;
 ; XREFS:
-;     UI_ShowPlayerMenu
+;     PlayerMenu_ShowInventoryMenu
 ;============================================================================
-FUN_PRG12__8c04:                            ; [$8c04]
+PlayerMenu_DrawInventoryItems:              ; [$8c04]
     LDA a:TextBox_Y
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     LDX #$00
 
   @LAB_PRG12__8c0b:                         ; [$8c0b]
     TXA
     PHA
-    INC TextBox_TextY
+    INC TextBox_ContentsY
     LDY a:TextBox_X
     INY
     INY
-    STY TextBox_TextX
+    STY TextBox_ContentsX
     LDA a:PlayerMenu_SelectedInventory
     JSR #$f78b
-    ORA ShopItems,X
+    ORA UI_Menu_IDs,X
     PHA
-    JSR Maybe_DrawItemName
+    JSR TextBox_DrawItemImage
     PLA
-    INC TextBox_TextY
-    INC TextBox_TextX
-    INC TextBox_TextX
-    JSR Maybe_DrawItemTitle
+    INC TextBox_ContentsY
+    INC TextBox_ContentsX
+    INC TextBox_ContentsX
+    JSR TextBox_DrawItemName
     PLA
     TAX
     INX
-    CPX a:Menu_LastPos
+    CPX a:Arg_StringsCount
     BNE @LAB_PRG12__8c0b
     RTS
 
-
 ;============================================================================
-; TODO: Document Maybe_DrawItemTitle
+; TODO: Document TextBox_DrawItemName
 ;
 ; INPUTS:
 ;     A
@@ -2675,12 +3581,12 @@ FUN_PRG12__8c04:                            ; [$8c04]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__8c04
 ;     IScriptAction_AddInventoryItem
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_ShowStatusMenu
 ;     Shop_Draw
 ;============================================================================
-Maybe_DrawItemTitle:                        ; [$8c36]
+TextBox_DrawItemName:                       ; [$8c36]
     PHA
     PHA
     JSR #$f804
@@ -2699,74 +3605,166 @@ Maybe_DrawItemTitle:                        ; [$8c36]
 
   @LAB_PRG12__8c54:                         ; [$8c54]
     TAY
-    JMP Strings_Draw
+    JMP UI_DrawString
 
 
 ;============================================================================
-; TODO: Document Maybe_DrawItemName
+; Draw the image for an item in a textbox.
+;
+; This is used when acquiring an item. The image's tileset
+; will be queued into the PPU buffer, followed by the
+; indexes of the tiles to draw for the item.
+;
+; These will be positioned within the textbox where the first
+; character of text would normally be.
 ;
 ; INPUTS:
-;     A
-;     X
-;     Y
+;     A:
+;         The ID of the item to draw.
+;
+;     X:
+;         The offset within the loaded PPU tiles containing
+;         the tiles to display. Each value represents a
+;         4-tile span of 64 bytes.
 ;
 ; OUTPUTS:
-;     A
+;     PPU_TargetAddr:
+;         Clobbered.
+;
+; CALLS:
+;     PPU_SetAddrForTextBoxPos
+;     PPU_IncrementAddrBy32
+;     PPUBuffer_QueueCommandOrLength
+;     PPUBuffer_Set
+;     TextBox_LoadItemSourceTiles
 ;
 ; XREFS:
-;     FUN_PRG12__8c04
 ;     IScriptAction_AddInventoryItem
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_DrawInventoryItems
+;     PlayerMenu_ShowStatusMenu
 ;     Shop_Draw
 ;============================================================================
-Maybe_DrawItemName:                         ; [$8c58]
-    STA Temp_Int24
-    TYA
+TextBox_DrawItemImage:                      ; [$8c58]
+    ;
+    ; Save the registers temporarily.
+    ;
+    STA Temp_Int24                          ; Store the item ID temporarily.
+    TYA                                     ; A = Y
+    PHA                                     ; Push to the stack.
+    TXA                                     ; A = X
+    PHA                                     ; Push to the stack.
+
+
+    ;
+    ; Set the target PPU address to load tiles into. The following
+    ; code is equivalent to:
+    ;
+    ;     addr = $1400 + (index * 64)
+    ;
+    ; 64 is the number of bytes for a full item image
+    ; (8 bytes * 4 tiles). This will be used again below.
+    ;
+    LDA #$00                                ; A = 0
+    STA PPU_TargetAddr                      ; Set as the lower byte.
+    TXA                                     ; A = X (item index)
+    PHA                                     ; Push to the stack, twice.
     PHA
-    TXA
-    PHA
-    LDA #$00
-    STA PPU_TargetAddr
-    TXA
-    PHA
-    PHA
-    LSR A
-    ROR PPU_TargetAddr
-    LSR A
-    ROR PPU_TargetAddr
-    ADC #$14
-    STA PPU_TargetAddr.U
-    LDA Temp_Int24
-    JSR #$fc18
-    JSR #$f804
-    LDA #$02
-    JSR #$cfdc
-    PLA
+    LSR A                                   ; C = bit0(index)
+    ROR PPU_TargetAddr                      ; If C == 0, then set to 0. Else,
+                                            ; set to 0x80.
+    LSR A                                   ; A = itemID >> 2 C = bit1(index)
+    ROR PPU_TargetAddr                      ; Set to (bit1(index) << 7) |
+                                            ; (bit0(index) << 6. == (index &
+                                            ; 3) * 64.
+    ADC #$14                                ; A = 0x14 + C.
+    STA PPU_TargetAddr.U                    ; Set as the upper byte.
+
+
+    ;
+    ; Queue the address for the source tiles for the item into the
+    ; PPU at the address above. The indexes following this will be
+    ; relative to that address.
+    ;
+    LDA Temp_Int24                          ; Load the item ID.
+    JSR #$fc18                              ; Load the source tiles address
+                                            ; in the PPU.
+
+
+    ;
+    ; Position the image where the text would normally go.
+    ;
+    JSR #$f804                              ; Set the draw position for the
+                                            ; image.
+
+
+    ;
+    ; Draw the top two tiles of the image in the PPU buffer.
+    ;
+    ; There are:
+    ;
+    ;     Tile1 = 64 + (itemID * 16)
+    ;     Tile2 = Tile1 + 1
+    ;
+    ; (16 == 8 bytes * 2 tiles)
+    ;
+    LDA #$02                                ; A = 2 (tiles)
+    JSR #$cfdc                              ; Write the length to the PPU
+                                            ; buffer.
+    PLA                                     ; Pull the index from the stack.
+    ASL A                                   ; Multiply by 16.
     ASL A
-    ASL A
-    ADC #$40
-    JSR #$f845
+    ADC #$40                                ; Add 64 + C.
+    JSR #$f845                              ; Add to the PPU buffer.
     CLC
-    ADC #$01
-    JSR #$f845
-    STX PPUBuffer_UpperBounds
-    JSR #$f826
-    LDA #$02
-    JSR #$cfdc
-    PLA
+    ADC #$01                                ; Add 1.
+    JSR #$f845                              ; Add to the PPU buffer.
+
+
+    ;
+    ; Advane to the target address to the next position (bottom
+    ; 2 tiles of the image).
+    ;
+    STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
+                                            ; offset.
+    JSR #$f826                              ; Increment the PPU address by
+                                            ; 32.
+
+
+    ;
+    ; Draw the second part of the image in the PPU buffer.
+    ;
+    ; There are:
+    ;
+    ;     Tile3 = 66 + (index * 16)
+    ;     Tile4 = Tile3 + 1
+    ;
+    ; (16 == 8 bytes * 2 tiles)
+    ;
+    LDA #$02                                ; A = 2 (tiles)
+    JSR #$cfdc                              ; Write the length to the PPU
+                                            ; buffer.
+    PLA                                     ; Pull the index from the stack.
+    ASL A                                   ; Multiply by 16.
     ASL A
-    ASL A
-    ADC #$42
-    JSR #$f845
+    ADC #$42                                ; Add 66 + C.
+    JSR #$f845                              ; Add left tile index the PPU
+                                            ; buffer.
     CLC
-    ADC #$01
-    JSR #$f845
-    STX PPUBuffer_UpperBounds
-    PLA
-    TAX
-    PLA
-    TAY
-    RTS
+    ADC #$01                                ; Add 1.
+    JSR #$f845                              ; Add right tile to the PPU
+                                            ; buffer.
+    STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
+                                            ; offset.
+
+
+    ;
+    ; Restore the registers saved at the top of the function.
+    ;
+    PLA                                     ; Pop the X register value.
+    TAX                                     ; Set it back on X.
+    PLA                                     ; Pop the Y register value.
+    TAY                                     ; Set it back on Y.
+    RTS                                     ; And return.
 
 
 ;============================================================================
@@ -2774,14 +3772,31 @@ Maybe_DrawItemName:                         ; [$8c58]
 ;
 ; INPUTS:
 ;     A:
-;         The inventory item, with bits indicating the inventory.
+;         The inventory item, with bits set indicating the
+;         inventory.
+;
+;     SelectedWeapon
+;         The starting range of inventories to look up
+;         items from.
 ;
 ; OUTPUTS:
-;     None
+;     Temp_EquipingItem:
+;     Temp_PrevInventoryItem:
+;         Clobbered.
+;
+; CALLS:
+;     Player_AddToInventory
+;     Player_GetInventoryIndexForItem
+;     Player_RemoveItem
+;     Player_SetArmor
+;     Player_SetItem
+;     Player_SetMagic
+;     Player_SetShield
+;     Player_SetWeapon
 ;
 ; XREFS:
-;     FUN_PRG12__8b71
-;     FUN_PRG12__8bce
+;     PlayerMenu_EquipItem
+;     PlayerMenu_HandleInventoryMenuInput
 ;============================================================================
 Player_Equip:                               ; [$8ca9]
     ;
@@ -2799,12 +3814,14 @@ Player_Equip:                               ; [$8ca9]
     STA a:Temp_PrevInventoryItem            ; Store the old item we're
                                             ; unequipping.
 
+
     ;
     ; Unequip the old item.
     ;
     LDA a:Temp_EquipingItem
     JSR Player_RemoveItem                   ; Unequip the old item.
     LDA a:Temp_PrevInventoryItem            ; Load back the previous item.
+
 
     ;
     ; Only add to the inventory if we didn't already have one.
@@ -2819,6 +3836,7 @@ Player_Equip:                               ; [$8ca9]
 
   @_inInventory:                            ; [$8ccc]
     LDA a:Temp_EquipingItem
+
 
     ;
     ; Set the normalized value within the inventory.
@@ -2838,10 +3856,12 @@ Player_Equip:                               ; [$8ca9]
     DEY
     BEQ @_isItem                            ; Check if it's an item.
 
+
     ;
     ; Inventory 0 (weapons)
     ;
     JMP #$edec                              ; Set the current weapon.
+
 
     ;
     ; Inventory 1 (armor)
@@ -2849,17 +3869,20 @@ Player_Equip:                               ; [$8ca9]
   @_isArmor:                                ; [$8ce7]
     JMP #$ee05                              ; Set the current armor.
 
+
     ;
     ; Inventory 2 (shield)
     ;
   @_isShield:                               ; [$8cea]
     JMP #$ee0d                              ; Set the current shield.
 
+
     ;
     ; Inventory 3 (magic)
     ;
   @_isMagic:                                ; [$8ced]
     JMP Player_SetMagic                     ; Set the current magic.
+
 
     ;
     ; Inventory 4 (normal items)
@@ -2899,14 +3922,41 @@ Player_SetMagic:                            ; [$8cf3]
 ;     A:
 ;         The item index with inventory bits to check.
 ;
+;     NumberOfWeapons:
+;         The starting range of inventory counters,
+;         indexed by inventory IDs.
+;
+;     SelectedWeapon:
+;         The starting range of selected item memory,
+;         indexed by the inventory IDs.
+;
+;     WeaponInventory:
+;         The starting range of inventories, indexed
+;         by the inventory IDs.
+;
+;     INVENTORY_CATEGORY_U:
+;     INVENTORY_CATEGORY_L:
+;         A lookup table of inventory ID to address.
+;
+;     SPECIAL_ITEM_BITMASKS:
+;         A lookup table of item indexes to special items
+;         bitmasks.
+;
 ; OUTPUTS:
 ;     C:
 ;         1 if the item is not in the inventory.
 ;         0 if it is.
 ;
+;     Temp_Int24:
+;     #$ed:
+;         Clobbered.
+;
+; CALLS:
+;     Player_GetInventoryIndexForItem
+;
 ; XREFS:
-;     FUN_PRG12__8b71
 ;     IScriptAction_IfPlayerHasItem
+;     PlayerMenu_HandleInventoryMenuInput
 ;============================================================================
 Player_LacksItem:                           ; [$8cf7]
     ;
@@ -2951,6 +4001,7 @@ Player_LacksItem:                           ; [$8cf7]
     LDA #$9b2e,Y
     STA Temp_Int24.M
 
+
     ;
     ; Check if this item is currently equipped.
     ;
@@ -2963,6 +4014,7 @@ Player_LacksItem:                           ; [$8cf7]
     BEQ @_returnFalse                       ; If this item is currently set,
                                             ; return false.
 
+
     ;
     ; Check the number of items in the target inventory.
     ;
@@ -2971,11 +4023,13 @@ Player_LacksItem:                           ; [$8cf7]
     LDX NumberOfWeapons,Y                   ; Set X = inventory item count.
     BEQ @_returnTrue                        ; If 0, we lack the item.
 
+
     ;
     ; Loop through all items in the inventory to see if
     ; we have this item.
     ;
     LDY #$00                                ; Set Y = 0 for the loop counter
+
 
     ;
     ; Check the item at the address to see if it matches this one.
@@ -2991,6 +4045,7 @@ Player_LacksItem:                           ; [$8cf7]
     DEX                                     ; Reduce the number of items left
                                             ; to check.
     BNE @_checkInventoryLoop                ; Next loop.
+
 
     ;
     ; The item could not be found. The player lacks the item.
@@ -3009,6 +4064,14 @@ Player_LacksItem:                           ; [$8cf7]
   @_returnFalse:                            ; [$8d50]
     CLC                                     ; Clear for a false result.
     RTS
+
+
+;============================================================================
+; A mapping of item IDs to Special Items bitmasks.
+;
+; XREFS:
+;     Player_LacksItem
+;============================================================================
 
 ;
 ; XREFS:
@@ -3068,70 +4131,136 @@ SPECIAL_ITEMS_BITMASKS_7_:                  ; [$8d59]
 
 
 ;============================================================================
-; TODO: Document PlayerMenu_Maybe_ShowStatus
+; Show the player's status in the Player Menu.
 ;
 ; INPUTS:
-;     None.
+;     NextPlayerTitle:
+;         The next title to reach.
+;
+;     SelectedWeapon:
+;         The start of the range of selected items.
+;
+;     SpecialItems:
+;         The player's special items bitmask.
+;
+;     Joy1_ChangedButtonMask:
+;         Changed button bitmask for controller 1.
 ;
 ; OUTPUTS:
-;     TODO
+;     Arg_StringsCount:
+;     UI_Menu_IDs:
+;     Temp_Int24:
+;     #$ed:
+;     #$ee:
+;     TextBox_X:
+;     TextBox_Y:
+;     TextBox_Width:
+;     TextBox_Height:
+;     TextBox_ContentsX:
+;     TextBox_ContentsY:
+;         Clobbered.
+;
+; CALLS:
+;     Sprites_ResetForGameScreen
+;     Player_GetInventoryBitForIndex
+;     PPU_SetAddrForTextBoxPos
+;     TextBox_Close
+;     TextBox_DrawItemImage
+;     TextBox_DrawItemName
+;     TextBox_DrawZeroPaddedNumber
+;     UI_DrawString
+;     TextBox_DrawStringLines
+;     WaitForNextFrame
 ;
 ; XREFS:
-;     UI_ShowPlayerMenu
+;     PlayerMenu_Show
 ;============================================================================
-PlayerMenu_Maybe_ShowStatus:                ; [$8d5a]
+PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
+    ;
+    ; Position and open the textbox for the player status.
+    ;
     LDA #$04
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; Set textbox X coordinate to 4.
     LDA #$08
-    STA a:TextBox_Y
+    STA a:TextBox_Y                         ; Set textbox Y coordinate to 8.
     LDA #$1a
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Set textbox width to 26.
     LDA #$10
-    STA a:TextBox_Height
-    JSR TextBox_Maybe_Draw
+    STA a:TextBox_Height                    ; Set textbox height to 16.
+    JSR TextBox_Open                        ; Open the textbox.
+
+
+    ;
+    ; Prepare to draw 7 strings from
+    ; (PLAYER_STATUS_MENU_STRINGS)
+    ; in the textbox.
+    ;
     LDA #$07
-    STA a:Menu_LastPos
-    LDA #$d3
-    STA Temp_Int24
-    LDA #$88
-    STA Temp_Int24.M
-    LDX #$00
-    STX a:ShopItems
+    STA a:Arg_StringsCount                  ; Prepare to draw 7 rows of
+                                            ; strings.
+    LDA #$d3                                ; 0xD3 = lower byte of text
+                                            ; strings.
+    STA Temp_Int24                          ; Store it.
+    LDA #$88                                ; 0x88 = upper byte of text
+                                            ; strings.
+    STA Temp_Int24.M                        ; Store it.
+    LDX #$00                                ; X = 0 (index counter).
+    STX a:UI_Menu_IDs                       ; Draw string 1 ("RANK:").
     INX
-    STX a:ShopItems_1_
+    STX a:UI_Menu_IDs_1_                    ; Draw string 2 ("NEXT EXP:").
     INX
-    STX a:ShopItems_2_
+    STX a:UI_Menu_IDs_2_                    ; Draw string 3 ("WEAPON:").
     INX
-    STX a:ShopItems_3_
+    STX a:UI_Menu_IDs_3_                    ; Draw string 4 ("ARMOR:").
     INX
-    STX a:ShopItems_4_
+    STX a:UI_Menu_IDs_4_                    ; Draw string 5 ("SHIELD:").
     INX
-    STX a:ShopItems_5_
+    STX a:UI_Menu_IDs_5_                    ; Draw string 6 ("MAGIC:").
     INX
-    STX a:ShopItems_6_
-    JSR Shop_DrawItemStrings
-    LDA a:TextBox_X
+    STX a:UI_Menu_IDs_6_                    ; Draw string 7 ("ITEM:").
+    JSR TextBox_DrawStringLines             ; Draw the strings in the
+                                            ; textbox.
+
+
+    ;
+    ; Prepare to draw the player rank/title.
+    ;
+    ; Strings will be loaded from PLAYER_STATUS_MENU_TITLES.
+    ;
+    LDA a:TextBox_X                         ; Get the textbox X coordinate.
     CLC
-    ADC #$0b
-    STA TextBox_TextX
-    LDA a:TextBox_Y
+    ADC #$0b                                ; Add 11.
+    STA TextBox_ContentsX                   ; Set as the draw X coordinate.
+    LDA a:TextBox_Y                         ; Get the textbox Y coordinate.
     CLC
-    ADC #$02
-    STA TextBox_TextY
-    JSR #$f804
-    LDA a:PlayerTitle
-    JSR #$f78c
-    TAY
-    LDA #$43
-    STA Temp_Int24
-    LDA #$89
-    STA Temp_Int24.M
-    JSR Strings_Draw
-    INC TextBox_TextY
-    INC TextBox_TextY
-    LDA a:NextPlayerTitle
-    CMP #$0f
-    BCS @LAB_PRG12__8de3
+    ADC #$02                                ; Add 2.
+    STA TextBox_ContentsY                   ; Set as the draw Y coordinate.
+    JSR #$f804                              ; Set this as the PPU draw
+                                            ; position.
+    LDA a:PlayerTitle                       ; Load the player title.
+    JSR #$f78c                              ; Multiply by 16 to get an index
+                                            ; into the strings.
+    TAY                                     ; Y = A (result)
+    LDA #$43                                ; 0x43 == lower byte of Player
+                                            ; Title strings.
+    STA Temp_Int24                          ; Store it.
+    LDA #$89                                ; 0x89 == upper byte of Player
+                                            ; Title strings.
+    STA Temp_Int24.M                        ; Store it.
+    JSR UI_DrawString                       ; Draw the string.
+
+
+    ;
+    ; Prepare to draw the player's experience.
+    ;
+    INC TextBox_ContentsY                   ; Go down to 2 rows.
+    INC TextBox_ContentsY
+    LDA a:NextPlayerTitle                   ; Load the next possible title.
+    CMP #$0f                                ; Is it >= 15 (the last available
+                                            ; title))?
+    BCS @_drawSelectedItems                 ; If so, leave this blank and
+                                            ; draw items.
+
 
     ;
     ; Look up the experience in the lookup table in bank 15.
@@ -3141,101 +4270,172 @@ PlayerMenu_Maybe_ShowStatus:                ; [$8d5a]
     ; 1-based index, normalized to 0-based in the lookup table.
     ; Each entry is a word.
     ;
-    ASL A
-    TAX
-    LDA #$f749,X
-    STA Temp_Int24
-    LDA #$f74a,X
-    STA Temp_Int24.M
-    LDA #$00
-    STA Temp_Int24.U
-    LDY #$05
-    JSR #$fa03
+    ASL A                                   ; Convert the title index to a
+                                            ; word boundary.
+    TAX                                     ; X = A (result).
+    LDA #$f749,X                            ; Load the lower byte of the
+                                            ; amount of experience needed for
+                                            ; the next level.
+    STA Temp_Int24                          ; Store it.
+    LDA #$f74a,X                            ; Load the middle byte.
+    STA Temp_Int24.M                        ; Store it.
+    LDA #$00                                ; Upper byte is always 0.
+    STA Temp_Int24.U                        ; Store it.
+    LDY #$05                                ; 5 = Maximum number of digits.
+    JSR #$fa03                              ; Draw the number zero-padded.
 
-  @LAB_PRG12__8de3:                         ; [$8de3]
-    LDX #$00
 
-  @LAB_PRG12__8de5:                         ; [$8de5]
-    TXA
-    PHA
-    INC TextBox_TextY
-    INC TextBox_TextY
-    LDA SelectedWeapon,X
-    BMI @LAB_PRG12__8e0f
-    LDA a:TextBox_X
+    ;
+    ; Draw the selected items.
+    ;
+    ; In order, this will draw images and text for:
+    ;
+    ; 1. Weapon
+    ; 2. Armor
+    ; 3. Shield
+    ; 4. Magic
+    ;
+  @_drawSelectedItems:                      ; [$8de3]
+    LDX #$00                                ; X = 0 (loop counter).
+
+  @_drawSelectedItemsLoop:                  ; [$8de5]
+    TXA                                     ; A = X (loop counter)
+    PHA                                     ; Push it to the stack.
+    INC TextBox_ContentsY                   ; Increment the draw Y coordinate
+                                            ; by 2.
+    INC TextBox_ContentsY
+    LDA SelectedWeapon,X                    ; Load the selected item for this
+                                            ; type.
+    BMI @_nextInventory                     ; If unset, advance to the next.
+
+
+    ;
+    ; There's a selected item of this type. Load the information.
+    ;
+    LDA a:TextBox_X                         ; Load the textbox X coordinate.
     CLC
-    ADC #$09
-    STA TextBox_TextX
-    TXA
-    JSR #$f78b
-    ORA SelectedWeapon,X
-    PHA
-    DEC TextBox_TextY
-    JSR Maybe_DrawItemName
-    INC TextBox_TextY
-    INC TextBox_TextX
-    INC TextBox_TextX
-    PLA
-    JSR Maybe_DrawItemTitle
+    ADC #$09                                ; Add 9 (image X coordinate).
+    STA TextBox_ContentsX                   ; Store as the draw X coordinate.
+    TXA                                     ; A = X (loop counter).
+    JSR #$f78b                              ; Get the inventory bit for this
+                                            ; index.
+    ORA SelectedWeapon,X                    ; OR with the item value,
+                                            ; yielding an inventory-backed
+                                            ; item ID.
+    PHA                                     ; Push it to the stack.
 
-  @LAB_PRG12__8e0f:                         ; [$8e0f]
-    PLA
-    TAX
-    INX
-    CPX #$04
-    BNE @LAB_PRG12__8de5
-    LDA a:TextBox_X
+
+    ;
+    ; Position the image and draw it.
+    ;
+    DEC TextBox_ContentsY                   ; Go up a row for the start of
+                                            ; the image.
+    JSR TextBox_DrawItemImage               ; Draw the image there.
+
+
+    ;
+    ; Position the item name text and draw it.
+    ;
+    INC TextBox_ContentsY                   ; Go down 1 rows.
+    INC TextBox_ContentsX                   ; Go right 2 rows for the text.
+    INC TextBox_ContentsX
+    PLA                                     ; Pop the item ID.
+    JSR TextBox_DrawItemName                ; Draw the name of the item.
+
+  @_nextInventory:                          ; [$8e0f]
+    PLA                                     ; Pop the X coordinate.
+    TAX                                     ; Set it back on X.
+    INX                                     ; X++
+    CPX #$04                                ; Is it 4 (last inventory type)?
+    BNE @_drawSelectedItemsLoop             ; If not, loop.
+
+
+    ;
+    ; Prepare to draw the special items (up to 8 in total).
+    ;
+    LDA a:TextBox_X                         ; Load the textbox's X location.
     CLC
-    ADC #$09
-    STA TextBox_TextX
-    INC TextBox_TextY
-    LDX #$00
-    LDA a:SpecialItems
+    ADC #$09                                ; Add 9 (image X coordinate).
+    STA TextBox_ContentsX                   ; Store it as the draw X
+                                            ; coordinate.
+    INC TextBox_ContentsY                   ; Increment the draw Y
+                                            ; coordinate.
+    LDX #$00                                ; X = 0 (loop counter)
+    LDA a:SpecialItems                      ; A = Special items bitmask
 
-  @LAB_PRG12__8e25:                         ; [$8e25]
-    ASL A
-    BCC @LAB_PRG12__8e38
-    PHA
-    TXA
-    PHA
-    LDA #$8e63,X
-    INX
-    INX
-    INX
-    INX
-    JSR Maybe_DrawItemName
-    PLA
-    TAX
-    PLA
 
-  @LAB_PRG12__8e38:                         ; [$8e38]
-    INC TextBox_TextX
-    INC TextBox_TextX
+    ;
+    ; Draw in a loop.
+    ;
+  @_drawSpecialItemLoop:                    ; [$8e25]
+    ASL A                                   ; Shift the left-most bit into C.
+    BCC @_nextSpecialItem                   ; If not set, skip to the next
+                                            ; item.
+    PHA                                     ; Push the remaining bits to the
+                                            ; stack.
+    TXA                                     ; A = X (loop counter).
+    PHA                                     ; Push the loop counter to the
+                                            ; stack.
+    LDA #$8e63,X                            ; Load the tile start ID for this
+                                            ; item.
+    INX                                     ; X += 4 (number of item image
+                                            ; tiles).
     INX
-    CPX #$08
-    BNE @LAB_PRG12__8e25
+    INX
+    INX
+    JSR TextBox_DrawItemImage               ; Draw the image.
+    PLA                                     ; Pop the loop counter.
+    TAX                                     ; X = A (restore it)
+    PLA                                     ; Pop the remaining bits.
 
-  @LAB_PRG12__8e41:                         ; [$8e41]
-    JSR #$ca25
-    JSR #$cb47
-    LDA Joy1_ChangedButtonMask
-    ASL A
-    BPL @LAB_PRG12__8e41
+  @_nextSpecialItem:                        ; [$8e38]
+    INC TextBox_ContentsX                   ; Advance the X position by 2
+                                            ; tiles.
+    INC TextBox_ContentsX
+    INX                                     ; X++ (loop counter)
+    CPX #$08                                ; Is it 8?
+    BNE @_drawSpecialItemLoop               ; If not, loop.
+
+
+    ;
+    ; Draw the menu, freezing gameplay until dismissed.
+    ;
+  @_waitForInputLoop:                       ; [$8e41]
+    JSR #$ca25                              ; Wait for the next frame.
+    JSR #$cb47                              ; Draw with screen state paused.
+    LDA Joy1_ChangedButtonMask              ; Load the changed button mask.
+    ASL A                                   ; Shift the "A" button state into
+                                            ; N.
+    BPL @_waitForInputLoop                  ; If not pressed/set, loop.
+
+
+    ;
+    ; Close the Status textbox.
+    ;
     LDA #$02
-    STA a:TextBox_X
+    STA a:TextBox_X                         ; Set the textbox X to 2.
     LDA #$06
-    STA a:TextBox_Y
+    STA a:TextBox_Y                         ; Set the textbox Y to 6.
     LDA #$1c
-    STA a:TextBox_Width
+    STA a:TextBox_Width                     ; Set the textbox width to 28.
     LDA #$12
-    STA a:TextBox_Height
-    JMP Maybe_Draw_Textbox
+    STA a:TextBox_Height                    ; Set the textbox height to 18.
+    JMP TextBox_Close                       ; Close the textbox at those
+                                            ; dimensions.
+
+
+;============================================================================
+; Start locations within loaded drawn item tiles in the PPU.
+;
+; XREFS:
+;     PlayerMenu_ShowStatusMenu
+;============================================================================
 
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
+;     PlayerMenu_ShowStatusMenu
 ;
-BYTE_ARRAY_PRG12__8e63:                     ; [$8e63]
+SPECIAL_ITEM_TILE_START_IDS:                ; [$8e63]
     db $80                                  ; [0]:
     db $81                                  ; [1]:
     db $82                                  ; [2]:
@@ -3245,9 +4445,8 @@ BYTE_ARRAY_PRG12__8e63:                     ; [$8e63]
     db $93                                  ; [6]:
     db $94                                  ; [7]:
 
-
 ;============================================================================
-; TODO: Document Shop_DrawItemStrings
+; TODO: Document TextBox_DrawStringLines
 ;
 ; INPUTS:
 ;     None.
@@ -3256,38 +4455,38 @@ BYTE_ARRAY_PRG12__8e63:                     ; [$8e63]
 ;     TODO
 ;
 ; XREFS:
-;     PlayerMenu_Maybe_ShowStatus
-;     UI_ShowPlayerMenu
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
 ;============================================================================
-Shop_DrawItemStrings:                       ; [$8e6b]
+TextBox_DrawStringLines:                    ; [$8e6b]
     LDA a:TextBox_X
     CLC
     ADC #$02
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
     CLC
     ADC #$02
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     JSR #$f804
     LDX #$00
 
-  @LAB_PRG12__8e80:                         ; [$8e80]
+  @_drawLinesLoop:                          ; [$8e80]
     TXA
     PHA
-    LDA ShopItems,X
+    LDA UI_Menu_IDs,X
     ASL A
     ASL A
     ASL A
     ASL A
     TAY
-    JSR Strings_Draw
+    JSR UI_DrawString
     LDA #$40
     JSR #$f828
     PLA
     TAX
     INX
-    CPX a:Menu_LastPos
-    BNE @LAB_PRG12__8e80
+    CPX a:Arg_StringsCount
+    BNE @_drawLinesLoop
     RTS
 
 
@@ -3310,7 +4509,7 @@ Shop_DrawItemStrings:                       ; [$8e6b]
 ;         offset.
 ;
 ; OUTPUTS:
-;     PPUBuffer_UpperBounds:
+;     PPUBuffer_WriteOffset:
 ;         The new upper bounds of the PPU buffer.
 ;
 ;     Temp_Int24:
@@ -3322,12 +4521,12 @@ Shop_DrawItemStrings:                       ; [$8e6b]
 ;     PPUBuffer_QueueCommandOrLength
 ;
 ; XREFS:
-;     Maybe_DrawItemTitle
-;     PlayerMenu_Maybe_ShowStatus
-;     Shop_DrawItemStrings
-;     UI_ShowPlayerMenu
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
+;     TextBox_DrawItemName
+;     TextBox_DrawStringLines
 ;============================================================================
-Strings_Draw:                               ; [$8e9b]
+UI_DrawString:                              ; [$8e9b]
     ;
     ; Load the length of the string and prepare to draw.
     ;
@@ -3336,6 +4535,7 @@ Strings_Draw:                               ; [$8e9b]
     STA Temp_Int24.U                        ; Store it.
     INY                                     ; Y++ (character offset)
     JSR #$cfdc                              ; Queue drawing up to the length.
+
 
     ;
     ; Begin drawing each character.
@@ -3348,7 +4548,7 @@ Strings_Draw:                               ; [$8e9b]
     JSR #$f845                              ; Set that in the PPU buffer.
     DEC Temp_Int24.U                        ; Decrement loop counter.
     BNE @_drawLoop                          ; If we're not done, loop.
-    STX PPUBuffer_UpperBounds               ; Store the new PPU buffer upper
+    STX PPUBuffer_WriteOffset               ; Store the new PPU buffer upper
                                             ; bounds.
     RTS
 
@@ -3365,7 +4565,7 @@ Strings_Draw:                               ; [$8e9b]
 ;         The normalized value.
 ;
 ; XREFS:
-;     Strings_Draw
+;     UI_DrawString
 ;============================================================================
 Strings_ASCIIToIndex:                       ; [$8eb3]
     CMP #$20                                ; Is this a space?
@@ -3382,9 +4582,8 @@ Strings_ASCIIToIndex:                       ; [$8eb3]
   @_return:                                 ; [$8ec0]
     RTS
 
-
 ;============================================================================
-; TODO: Document IScriptAction_AddItem_Something8EC1
+; TODO: Document IScriptAction_AddInventoryItem_ClearTextBox
 ;
 ; INPUTS:
 ;     None.
@@ -3395,17 +4594,17 @@ Strings_ASCIIToIndex:                       ; [$8eb3]
 ; XREFS:
 ;     IScriptAction_AddInventoryItem
 ;============================================================================
-IScriptAction_AddItem_Something8EC1:        ; [$8ec1]
+IScriptAction_AddInventoryItem_ClearTextBox: ; [$8ec1]
     LDX a:TextBox_X
     INX
-    STX TextBox_TextX
+    STX TextBox_ContentsX
     LDX a:TextBox_Y
     INX
-    STX TextBox_TextY
+    STX TextBox_ContentsY
     JSR #$f804
     LDX a:TextBox_Height
 
-  @LAB_PRG12__8ed3:                         ; [$8ed3]
+  @_clearLoop:                              ; [$8ed3]
     TXA
     PHA
     LDA a:TextBox_Width
@@ -3415,38 +4614,39 @@ IScriptAction_AddItem_Something8EC1:        ; [$8ec1]
     JSR #$cfdc
     LDA #$00
     JSR #$f839
-    STX PPUBuffer_UpperBounds
+    STX PPUBuffer_WriteOffset
     JSR #$f826
     PLA
     TAX
     DEX
     CPX #$02
-    BNE @LAB_PRG12__8ed3
+    BNE @_clearLoop
     RTS
-
-
 ;============================================================================
-; TODO: Document TextBox_Maybe_Draw
+; TODO: Document TextBox_Open
 ;
 ; INPUTS:
-;     X
-;     Y
+;     None.
 ;
 ; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
-;     OpenTextWindow
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Show
+;     IScripts_OpenForPortrait
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     PlayerMenu_ShowSubmenu
 ;     Shop_Draw
-;     UI_ShowPlayerMenu
+;     TextBox_OpenForNPC
 ;============================================================================
-TextBox_Maybe_Draw:                         ; [$8ef1]
+TextBox_Open:                               ; [$8ef1]
+    ;
+    ; Draw the top row of the box's frame.
+    ;
     LDA a:TextBox_X
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     JSR #$f804
     JSR #$f832
     LDA #$01
@@ -3455,11 +4655,16 @@ TextBox_Maybe_Draw:                         ; [$8ef1]
     JSR #$f839
     LDA #$03
     JSR #$f845
-    STX PPUBuffer_UpperBounds
+    STX PPUBuffer_WriteOffset
     JSR #$f826
+
+
+    ;
+    ; Draw the sides of the box's frame.
+    ;
     LDY a:TextBox_Height
 
-  @LAB_PRG12__8f18:                         ; [$8f18]
+  @_drawFrameSides:                         ; [$8f18]
     TYA
     PHA
     JSR #$f832
@@ -3469,13 +4674,18 @@ TextBox_Maybe_Draw:                         ; [$8ef1]
     JSR #$f839
     LDA #$04
     JSR #$f845
-    STX PPUBuffer_UpperBounds
+    STX PPUBuffer_WriteOffset
     JSR #$f826
     PLA
     TAY
     DEY
     CPY #$02
-    BNE @LAB_PRG12__8f18
+    BNE @_drawFrameSides
+
+
+    ;
+    ; Draw the bottom of the box's frame.
+    ;
     JSR #$f832
     LDA #$05
     JSR #$f845
@@ -3483,66 +4693,74 @@ TextBox_Maybe_Draw:                         ; [$8ef1]
     JSR #$f839
     LDA #$06
     JSR #$f845
-    STX PPUBuffer_UpperBounds
+    STX PPUBuffer_WriteOffset
     LDA #$00
-    STA a:Maybe_TextBox_Dismissed
 
+
+    ;
+    ; Set state on the box and fill in the background.
+    ;
+    STA a:TextBox_Closed
+
+    ;
+    ; v-- Fall through --v
+    ;
 
 ;============================================================================
-; TODO: Document Maybe_Draw_Textbox_Something8F51
+; TODO: Document TextBox_FillBackground
 ;
 ; INPUTS:
-;     X
+;     None.
 ;
 ; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Draw_Textbox
+;     TextBox_Close
 ;============================================================================
-Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
+TextBox_FillBackground:                     ; [$8f51]
     LDA a:TextBox_X
     LSR A
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
     LSR A
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     LDY a:TextBox_Height
 
-  @LAB_PRG12__8f60:                         ; [$8f60]
+  @_fillYLoop:                              ; [$8f60]
     TYA
     PHA
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     PHA
     LDY a:TextBox_Width
 
-  @LAB_PRG12__8f68:                         ; [$8f68]
-    JSR TextBox_Maybe_GetPalette
-    JSR FUN_PRG12__880e
-    INC TextBox_TextX
+  @_fillXLoop:                              ; [$8f68]
+    JSR TextBox_GetBackgroundAttributeData
+    JSR TextBox_SetNextAttributeData
+    INC TextBox_ContentsX
     DEY
     DEY
-    BNE @LAB_PRG12__8f68
+    BNE @_fillXLoop
     PLA
-    STA TextBox_TextX
-    INC TextBox_TextY
+    STA TextBox_ContentsX
+    INC TextBox_ContentsY
     PLA
     TAY
     DEY
     DEY
-    BNE @LAB_PRG12__8f60
+    BNE @_fillYLoop
     LDA a:TextBox_X
     LSR A
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
     LSR A
-    STA TextBox_TextY
-    JSR FUN_PRG12__87fe
+    STA TextBox_ContentsY
+    JSR TextBox_GetNextAttributeDataOffset
     TAY
     AND #$3f
     ORA #$c0
     STA PPU_TargetAddr
-    LDA ScrollHelp_Screen
+    LDA PPU_ScrollScreen
     AND #$01
     ASL A
     ASL A
@@ -3551,7 +4769,7 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
     LDA a:TextBox_X
     LSR A
     LSR A
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_X
     CLC
     ADC a:TextBox_Width
@@ -3560,13 +4778,13 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
     LSR A
     LSR A
     SEC
-    SBC TextBox_TextX
-    STA TextBox_TextX
-    INC TextBox_TextX
+    SBC TextBox_ContentsX
+    STA TextBox_ContentsX
+    INC TextBox_ContentsX
     LDA a:TextBox_Y
     LSR A
     LSR A
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     LDA a:TextBox_Y
     CLC
     ADC a:TextBox_Height
@@ -3575,133 +4793,168 @@ Maybe_Draw_Textbox_Something8F51:           ; [$8f51]
     LSR A
     LSR A
     SEC
-    SBC TextBox_TextY
-    STA TextBox_TextY
-    INC TextBox_TextY
+    SBC TextBox_ContentsY
+    STA TextBox_ContentsY
+    INC TextBox_ContentsY
 
-  @LAB_PRG12__8fd3:                         ; [$8fd3]
+
+    ;
+    ; Loop through all the rows of text.
+    ;
+  @_drawRowsLoop:                           ; [$8fd3]
     TYA
     PHA
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     STA Temp_Int24
     JSR #$cfdc
 
-  @LAB_PRG12__8fdc:                         ; [$8fdc]
-    LDA Something_ValuesToDraw,Y
+
+    ;
+    ; Loop through all the columns of text.
+    ;
+  @_drawColsLoop:                           ; [$8fdc]
+    LDA TextBox_AttributeData,Y
     INY
     JSR #$f845
     DEC Temp_Int24
-    BNE @LAB_PRG12__8fdc
-    STX PPUBuffer_UpperBounds
+    BNE @_drawColsLoop
+    STX PPUBuffer_WriteOffset
     JSR #$f822
     PLA
     CLC
     ADC #$08
     TAY
-    DEC TextBox_TextY
-    BNE @LAB_PRG12__8fd3
+    DEC TextBox_ContentsY
+    BNE @_drawRowsLoop
     RTS
 
 
 ;============================================================================
-; TODO: Document TextBox_Maybe_GetPalette
+; Return the background PPU attribute data for the textbox at an offset.
+;
+; If the textbox is closed, this will use the tile behind
+; the textbox.
+;
+; If the textbox is open, it will use the HUD background.
+;
+; INPUTS:
+;     Y:
+;         The offset into the screen.
+;
+;     UI_AttributeDataIndex:
+;         The attribute data for the HUD/textbox background.
+;
+;     TextBox_Closed:
+;         Whether the textbox is closed.
+;
+; OUTPUTS:
+;     A:
+;         The attribute data to draw at the offset.
+;
+; CALLS:
+;     TextBox_GetBackingAttributeData
+;
+; XREFS:
+;     TextBox_FillBackground
+;============================================================================
+TextBox_GetBackgroundAttributeData:         ; [$8ff6]
+    LDA a:TextBox_Closed                    ; Is the textbox open or closed?
+    BEQ @_isOpen                            ; If open, jump.
+
+
+    ;
+    ; The textbox is closed. Return the attribute of the background
+    ; area behind it.
+    ;
+    JMP #$f791                              ; Return the attribute data
+                                            ; behind the textbox.
+
+
+    ;
+    ; The textbox is open. Return the attribute for the textbox
+    ; background color.
+    ;
+  @_isOpen:                                 ; [$8ffe]
+    LDA a:UI_AttributeDataIndex             ; Return the attribute data for
+                                            ; the background of the textbox.
+    RTS
+
+;============================================================================
+; TODO: Document TextBox_Close
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     A
-;
-; XREFS:
-;     Maybe_Draw_Textbox_Something8F51
-;============================================================================
-TextBox_Maybe_GetPalette:                   ; [$8ff6]
-    LDA a:Maybe_TextBox_Dismissed
-    BEQ @LAB_PRG12__8ffe
-    JMP #$f791
-
-  @LAB_PRG12__8ffe:                         ; [$8ffe]
-    LDA a:HUD_AttributeDataIndex
-    RTS
-
-
-;============================================================================
-; TODO: Document Maybe_Draw_Textbox
-;
-; INPUTS:
-;     X
-;
-; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
-;     DEADCODE
-;     FUN_PRG12__81fb
-;     FUN_PRG12__8bed
+;     DEADCODE_TextBox_ClosePortrait
 ;     IScriptAction_ShowSellMenu
+;     IScripts_CloseCurrentTextBox
 ;     Maybe_Shop_DrawTextBox
-;     PlayerMenu_Maybe_ShowStatus
-;     Portrait_Clear
-;     UI_ShowPlayerMenu
+;     PlayerMenu_Close
+;     PlayerMenu_Show
+;     PlayerMenu_ShowStatusMenu
+;     TextBox_ClearForPortraitAndText
 ;============================================================================
-Maybe_Draw_Textbox:                         ; [$9002]
+TextBox_Close:                              ; [$9002]
     LDA #$01
-    STA a:Maybe_TextBox_Dismissed
-    JSR Maybe_Draw_Textbox_Something8F51
+    STA a:TextBox_Closed
+    JSR TextBox_FillBackground
     LDA a:TextBox_X
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     LDA a:TextBox_Y
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     JSR #$f804
     LDY a:TextBox_Height
 
-  @LAB_PRG12__901a:                         ; [$901a]
+  @_closeYLoop:                             ; [$901a]
     TYA
     PHA
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     PHA
     LDA a:TextBox_Width
     TAY
     JSR #$cfdc
 
-  @LAB_PRG12__9026:                         ; [$9026]
+  @_closeXLoop:                             ; [$9026]
     JSR #$f7b7
     JSR #$f845
-    INC TextBox_TextX
+    INC TextBox_ContentsX
     DEY
-    BNE @LAB_PRG12__9026
-    STX PPUBuffer_UpperBounds
+    BNE @_closeXLoop
+    STX PPUBuffer_WriteOffset
     PLA
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     PLA
     TAY
-    INC TextBox_TextY
+    INC TextBox_ContentsY
     JSR #$f826
     DEY
-    BNE @LAB_PRG12__901a
+    BNE @_closeYLoop
     RTS
 
 
 ;============================================================================
-; MAYBE DEADCODE
+; DEADCODE
 ;============================================================================
-FUN_PRG12__9041:                            ; [$9041]
+DEADCODE_FUN_PRG12__9041:                   ; [$9041]
     LDA #$05
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     JSR #$cfdc
 
   @LAB_PRG12__9048:                         ; [$9048]
-    LDA Something_ValuesToDraw,Y
+    LDA TextBox_AttributeData,Y
     INY
     JSR #$f845
-    DEC TextBox_TextX
+    DEC TextBox_ContentsX
     BNE @LAB_PRG12__9048
-    STX PPUBuffer_UpperBounds
+    STX PPUBuffer_WriteOffset
     RTS
 
-
 ;============================================================================
-; TODO: Document Menu_Draw
+; TODO: Document Menu_UpdateAndDraw
 ;
 ; INPUTS:
 ;     None.
@@ -3710,95 +4963,118 @@ FUN_PRG12__9041:                            ; [$9041]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__84ed
-;     FUN_PRG12__8b71
 ;     IScriptAction_ShowBuySellMenu
-;     UI_ShowPlayerMenu
+;     IScripts_WaitForMenuInput
+;     PlayerMenu_HandleInventoryMenuInput
+;     PlayerMenu_Show
 ;============================================================================
-Menu_Draw:                                  ; [$9056]
-    LDA Joy1_ChangedButtonMask
-    AND #$08
-    BNE PasswordScreen_Draw
-    LDA Joy1_ChangedButtonMask
-    AND #$04
-    BEQ FUN_PRG12__9075
-    LDX a:Menu_CursorPos
-    INX
-    CPX a:Menu_LastPos
-    BNE FUN_PRG12__906d
-    LDX #$00
+Menu_UpdateAndDraw:                         ; [$9056]
+    LDA Joy1_ChangedButtonMask              ; A = changed button mask.
+    AND #$08                                ; Is Up pressed?
+    BNE @_handleCursorUp                    ; If so, jump.
+
+
+    ;
+    ; Up was not pressed. Check Down.
+    ;
+    LDA Joy1_ChangedButtonMask              ; A = changed button mask.
+    AND #$04                                ; Is Down pressed?
+    BEQ @_showSelectionCursor               ; If so, jump.
+
+
+    ;
+    ; Neither Up nor Down was pressed.
+    ;
+    LDX a:Menu_CursorPos                    ; X = Menu cursor position.
+    INX                                     ; X++
+    CPX a:Arg_StringsCount                  ; Compare to the last available
+                                            ; position.
+    BNE @_moveCursor                        ; If it changed, jump.
+    LDX #$00                                ; Move to the first item.
+
+  @_moveCursor:                             ; [$906d]
+    STX a:Menu_CursorPos                    ; Set the new cursor position.
+    LDA #$0b                                ; 0xB = Cursor movement sound
+                                            ; effect.
+    JSR #$d0e4                              ; Play the sound effect.
+
+
+    ;
+    ; Draw the selection cursor for a shop.
+    ;
+    ; This will draw the selection cursor, pointing to the Buy/Sell
+    ; item or the item in a shop.
+    ;
+    ; First, compute the X position of the cursor.
+    ;
+  @_showSelectionCursor:                    ; [$9075]
+    JSR TextBox_GetXPixelCoord              ; Get the X pixel position of the
+                                            ; textbox.
+    ADC #$08                                ; Add 8 (offset).
+    TAX                                     ; X = result.
+
+
+    ;
+    ; Compute the Y position of the cursor.
+    ;
+    ; This will be:
+    ;
+    ;     TextBox_Y_Pixels + (16 * CursorPos) - 32.
+    ;
+    JSR TextBox_GetYPixelCoord              ; Get the Y pixel position of the
+                                            ; textbox.
+    ADC #$10                                ; Add 16.
+    STA Temp_Int24                          ; Store it temporarily.
+    LDA a:Menu_CursorPos                    ; A = cursor position.
+    JSR #$f78c                              ; A = A * 16 (2 tile height)
+    ADC Temp_Int24                          ; A = A + our Y value.
+    SBC #$20                                ; A = A - 32 (padding and nudging
+                                            ; up a tile).
+    TAY                                     ; Y = result.
+
+
+    ;
+    ; Draw the selection symbol.
+    ;
+    LDA #$ad                                ; A = 0xAD (right arrow symbol).
+    JMP #$fca7                              ; Draw the symbol.
+
+
+    ;
+    ; The player pressed the Up button on the controller.
+    ; Move the cursor up.
+    ;
+  @_handleCursorUp:                         ; [$9092]
+    LDX a:Menu_CursorPos                    ; X = Menu cursor position.
+
+
+    ;
+    ; Set up a loop to move the cursor to a viable spot.
+    ;
+    ; Note that we have two possibilities here, based on
+    ; Arg_StringsCount:
+    ;
+    ; 1. It has a non-0 value, in which case we stay in this
+    ;    cursor loop and handle cursor movement.
+    ;
+    ;    This is the case with textbox menus and shops.
+    ;
+    ; 2. It has a 0 value, in which case we're going to fall
+    ;    through to more advanced input.
+    ;
+    ;    This is only used in the password screen.
+    ;
+  @_cursorLoop:                             ; [$9095]
+    DEX                                     ; X--
+    BPL @_moveCursor                        ; If < 0, jump.
+    LDX a:Arg_StringsCount                  ; X = Last available position.
+    BPL @_cursorLoop                        ; If < 0, loop. Else, fall
+                                            ; through (only for the password
+                                            ; screen).
 
     ;
     ; v-- Fall through --v
     ;
-
-
-;============================================================================
-; TODO: Document FUN_PRG12__906d
-;
-; INPUTS:
-;     X
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Menu_Draw
-;============================================================================
-FUN_PRG12__906d:                            ; [$906d]
-    STX a:Menu_CursorPos
-    LDA #$0b
-    JSR #$d0e4
-
-    ;
-    ; v-- Fall through --v
-    ;
-
-
-;============================================================================
-; TODO: Document FUN_PRG12__9075
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Menu_Draw
-;============================================================================
-FUN_PRG12__9075:                            ; [$9075]
-    JSR TextBox_GetCursorXForTileX1
-    ADC #$08
-    TAX
-    JSR TextBox_GetCursorYForTileY2
-    ADC #$10
-    STA Temp_Int24
-    LDA a:Menu_CursorPos
-    JSR #$f78c
-    ADC Temp_Int24
-    SBC #$20
-    TAY
-    LDA #$ad
-    JMP #$fca7
-
-    ;
-    ; XREFS:
-    ;     Menu_Draw
-    ;
-PasswordScreen_Draw:                        ; [$9092]
-    LDX a:Menu_CursorPos
-
-  @LAB_PRG12__9095:                         ; [$9095]
-    DEX
-    BPL FUN_PRG12__906d
-    LDX a:Menu_LastPos
-    BPL @LAB_PRG12__9095
-
-    ;
-    ; v-- Fall through --v
-    ;
-
 
 ;============================================================================
 ; TODO: Document PasswordScreen_Show
@@ -3822,15 +5098,16 @@ PasswordScreen_Show:                        ; [$909d]
 
   @LAB_PRG12__90b4:                         ; [$90b4]
     LDA #$9204,Y
-    STA CurrentPaletteData,Y
+    STA Screen_PaletteData,Y
     DEY
     BPL @LAB_PRG12__90b4
     JSR #$d090
     JSR #$fcb9
 
+
     ;
     ; Set the position to the first character of the first row of
-    ; the password screen. This starts at 0x2128.
+    ; the password screen. This starts at $2128.
     ;
     ; Then draw the field (16 characters).
     ;
@@ -3842,9 +5119,10 @@ PasswordScreen_Show:                        ; [$909d]
     LDY #$10
     JSR #$fcb2
 
+
     ;
     ; Now do the same for the second row of the password input at
-    ; 0x2148.
+    ; $2148.
     ;
     LDA #$21
     STA a:PPUADDR
@@ -3854,15 +5132,17 @@ PasswordScreen_Show:                        ; [$909d]
     LDY #$10
     JSR #$fcb2
 
+
     ;
     ; Begin drawing all the available password characters.
     ;
     LDY #$00
 
+
     ;
     ; Set the cursor position for the start of the row of
     ; available password characters based on the first two
-    ; bytes of the current offset into PASSWORD_INPUT_CHARS.
+    ; bytes of the current offset into INPUT_CHARS.
     ;
   @_startRow:                               ; [$90e7]
     LDA #$9224,Y
@@ -3871,6 +5151,7 @@ PasswordScreen_Show:                        ; [$909d]
     LDA #$9224,Y
     STA a:PPUADDR
     INY
+
 
     ;
     ; Every row has 25 characters (this includes spaces between
@@ -3888,9 +5169,10 @@ PasswordScreen_Show:                        ; [$909d]
     CPY #$a2
     BNE @_startRow
 
+
     ;
     ; Begin writing the top row: "Enter your mantra."
-    ; This starts at PPU position 0x20A5.
+    ; This starts at PPU position $20A5.
     ;
     ; The string is at STRING_ENTER_YOUR_MANTRA.
     ;
@@ -3903,6 +5185,7 @@ PasswordScreen_Show:                        ; [$909d]
     LDA #$91
     STA Temp_Int24.M
     JSR UI_DrawText
+
 
     ;
     ; Set the initial password to 32 characters of empty (0xFF).
@@ -3927,26 +5210,46 @@ PasswordScreen_Show:                        ; [$909d]
     STA a:Password_DPadBits
     STA a:Password_CounterBeforeAutoRepeatMove
 
+
     ;
     ; Handle password input.
     ;
     JSR #$cb27
 
-  @LAB_PRG12__9140:                         ; [$9140]
+;============================================================================
+; TODO: Document PasswordScreen_WaitForInput
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_9175
+;     PasswordScreen_HandleInput
+;     PasswordScreen_HandleWrongPasswordAndWaitForInput
+;     PasswordScreen_WaitForInput
+;============================================================================
+PasswordScreen_WaitForInput:                ; [$9140]
     JSR #$ca25
     JSR #$cb4f
-    JSR Menu_Something_9405
-    BCC @LAB_PRG12__9140
+    JSR PasswordScreen_DrawAndHandleInputLoop
+    BCC PasswordScreen_WaitForInput
     CMP #$83
-    BNE @LAB_PRG12__917b
+    BNE PasswordScreen_HandleInput
+
+
+    ;
+    ; This is the END code.
+    ;
     LDA a:Password_EnteredCharsLength
-    BEQ @_playInputSound
+    BEQ PasswordScreen_9175
     JSR Password_Maybe_CheckPasswordLength
     BCS PasswordScreen_HandleWrongPasswordAndWaitForInput
     JSR Password_Load
     BCS PasswordScreen_HandleWrongPasswordAndWaitForInput
     RTS
-
 
 ;============================================================================
 ; TODO: Document PasswordScreen_HandleWrongPasswordAndWaitForInput
@@ -3958,7 +5261,7 @@ PasswordScreen_Show:                        ; [$909d]
 ;     TODO
 ;
 ; XREFS:
-;     PasswordScreen_Show
+;     PasswordScreen_WaitForInput
 ;============================================================================
 PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
     JSR Sound_PlayInputSound
@@ -3970,15 +5273,40 @@ PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
     LDA Joy1_ChangedButtonMask
     BPL @_handleWrongPassword
     JSR PasswordScreen_WriteEnterYourMantra
-    JMP @LAB_PRG12__9140
+    JMP PasswordScreen_WaitForInput
 
-  @_playInputSound:                         ; [$9175]
-    JSR Sound_PlayInputSound
-    JMP @LAB_PRG12__9140
+;============================================================================
+; TODO: Document PasswordScreen_9175
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_WaitForInput
+;============================================================================
+PasswordScreen_9175:                        ; [$9175]
+    JSR Sound_PlayInputSound                ; Play the character input sound.
+    JMP PasswordScreen_WaitForInput         ; Wait for input.
 
-  @LAB_PRG12__917b:                         ; [$917b]
-    JSR Menu_Draw_Something9312
-    JMP @LAB_PRG12__9140
+;============================================================================
+; TODO: Document PasswordScreen_HandleInput
+;
+; INPUTS:
+;     A
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_WaitForInput
+;============================================================================
+PasswordScreen_HandleInput:                 ; [$917b]
+    JSR PasswordScreen_HandleInputChar      ; Handle the character.
+    JMP PasswordScreen_WaitForInput         ; Wait again for input.
 
 
 ;============================================================================
@@ -3996,7 +5324,7 @@ PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
 ;         The lookup table of message strings.
 ;
 ; OUTPUTS:
-;     PPUBuffer_UpperBounds:
+;     PPUBuffer_WriteOffset:
 ;         New upper bounds of the PPU buffer.
 ;
 ;     PPU_TargetAddr:
@@ -4013,8 +5341,8 @@ PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
 ;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 PasswordScreen_WriteEnterYourMantra:        ; [$9181]
-    LDY #$02
-    BNE PasswordScreen_DrawMessage
+    LDY #$02                                ; 2 = "Enter your mantra"
+    BNE PasswordScreen_DrawMessage          ; Draw it.
 
     ;
     ; X-- We should never fall through here --X
@@ -4039,9 +5367,6 @@ PasswordScreen_WriteEnterYourMantra:        ; [$9181]
 ;         The lookup table of message strings.
 ;
 ; OUTPUTS:
-;     PPUBuffer_UpperBounds:
-;         New upper bounds of the PPU buffer.
-;
 ;     PPU_TargetAddr:
 ;     #$e9:
 ;     Temp_Int24:
@@ -4060,6 +5385,7 @@ PasswordScreen_WriteWrongPassword:          ; [$9185]
     AND #$1f                                ; Check if we're on an animation
                                             ; frame.
     BNE RETURN_91B7                         ; If not, return.
+
 
     ;
     ; Calculate the string index based on the frame.
@@ -4081,14 +5407,31 @@ PasswordScreen_WriteWrongPassword:          ; [$9185]
 
 
 ;============================================================================
-; TODO: Document PasswordScreen_DrawMessage
+; Draw a message on the password screen.
 ;
 ; INPUTS:
-;     X
-;     Y
+;     Y:
+;         The message ID. This is one of:
+;
+;         0 = "Mantra is in the wrong"
+;         1 = Blank spaces (to blink a message)
+;         2 = "  Enter your mantra.  "
+;
+;     PASSWORD_MESSAGE_STRINGS_L:
+;     PASSWORD_MESSAGE_STRINGS_U:
+;         The available message strings table.
 ;
 ; OUTPUTS:
-;     TODO
+;     PPUBuffer_WriteOffset:
+;         The new write offset for the PPU buffer.
+;
+;     PPU_TargetAddr:
+;     #$e9:
+;         Clobbered.
+;
+; CALLS:
+;     PPUBuffer_QueueCommandOrLength
+;     PPUBuffer_WriteFromTemp
 ;
 ; XREFS:
 ;     PasswordScreen_WriteEnterYourMantra
@@ -4104,6 +5447,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
                                             ; string address.
     STA Temp_Int24.M                        ; Store that.
 
+
     ;
     ; Set the PPU tile address to 0x20A5.
     ;
@@ -4112,11 +5456,13 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     LDA #$a5
     STA PPU_TargetAddr                      ; Lower byte = 0xA5
 
+
     ;
     ; Queue up a string of 23 characters.
     ;
     LDA #$17
     JSR #$cfdc                              ; Queue 23 characters to draw.
+
 
     ;
     ; Begin the draw loop.
@@ -4129,7 +5475,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
                                             ; buffer.
     CPY #$17                                ; Have we written 23 characters?
     BNE @LAB_PRG12__91ae                    ; If not, loop.
-    STX PPUBuffer_UpperBounds               ; Store the new upper bounds of
+    STX PPUBuffer_WriteOffset               ; Store the new upper bounds of
                                             ; the PPU buffer.
 
     ;
@@ -4142,6 +5488,9 @@ RETURN_91B7:                                ; [$91b7]
 
 ;============================================================================
 ; Lookup table for password screen strings.
+;
+; XREFS:
+;     PasswordScreen_DrawMessage
 ;============================================================================
 
 ;
@@ -4167,6 +5516,9 @@ PASSWORD_MESSAGE_STRINGS_U:                 ; [$91bb]
 ; String: "Mantra is in the wrong."
 ;
 ; This is used whenever an incorrect password was entered.
+;
+; XREFS:
+;     PASSWORD_MESSAGE_STRINGS_L [$PRG12::91b8]
 ;============================================================================
 
 ;
@@ -4182,6 +5534,9 @@ STRING_MANTRA_IN_THE_WRONG:                 ; [$91be]
 ; String: Empty spaces
 ;
 ; This is part of the blink animation for the invalid password text.
+;
+; XREFS:
+;     PASSWORD_MESSAGE_STRINGS_L [$PRG12::91b9]
 ;============================================================================
 
 ;
@@ -4197,6 +5552,9 @@ STRING_PASSWORD_SPACES:                     ; [$91d5]
 ; String: "Enter your mantra."
 ;
 ; This is shown at the top of the password screen.
+;
+; XREFS:
+;     PASSWORD_MESSAGE_STRINGS_L [$PRG12::91ba]
 ;============================================================================
 
 ;
@@ -4261,48 +5619,51 @@ PASSWORD_SCREEN_PALETTE_31_:                ; [$9223]
 ;============================================================================
 ; Available list of input characters for the password screen, broken down by
 ; row.
+;
+; XREFS:
+;     PasswordScreen_Show
 ;============================================================================
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS:                       ; [$9224]
+INPUT_CHARS:                                ; [$9224]
     db $21                                  ; [0]: [0]:
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS_0_.ppuAddr_1_:         ; [$9225]
+INPUT_CHARS_0_.ppuAddr_1_:                  ; [$9225]
     db $c4                                  ; [0]: [1]:
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS_0_.chars_0_:           ; [$9226]
+INPUT_CHARS_0_.chars_0_:                    ; [$9226]
     db "A"                                  ; [$9226] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS_0_.chars_1_:           ; [$9227]
+INPUT_CHARS_0_.chars_1_:                    ; [$9227]
     db " "                                  ; [$9227] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS_0_.chars_2_:           ; [$9228]
+INPUT_CHARS_0_.chars_2_:                    ; [$9228]
     db "B"                                  ; [$9228] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-PASSWORD_INPUT_CHARS_0_.chars_3_:           ; [$9229]
+INPUT_CHARS_0_.chars_3_:                    ; [$9229]
     db " C D E F G H I J"                   ; [$9229] char
     db " K L M"                             ; [$9239] char
 
@@ -4334,11 +5695,14 @@ PASSWORD_INPUT_CHARS_0_.chars_3_:           ; [$9229]
 
 ;============================================================================
 ; PPU tile positions for each input character cursor position.
+;
+; XREFS:
+;     PasswordScreen_WriteCharTile
 ;============================================================================
 
 ;
 ; XREFS:
-;     FUN_PRG12__92ed
+;     PasswordScreen_WriteCharTile
 ;
 PASSWORD_CURSOR_START_PPU_ADDRS_L:          ; [$92c6]
     db $28                                  ; [0]:
@@ -4346,15 +5710,13 @@ PASSWORD_CURSOR_START_PPU_ADDRS_L:          ; [$92c6]
 
 ;
 ; XREFS:
-;     FUN_PRG12__92ed
+;     PasswordScreen_WriteCharTile
 ;
 PASSWORD_CURSOR_START_PPU_ADDRS_U:          ; [$92c8]
     db $21                                  ; [0]:
     db $21                                  ; [1]:
-
-
 ;============================================================================
-; TODO: Document PasswordScreen_Maybe_DrawChar
+; TODO: Document PasswordScreen_DrawPasswordFieldCursor
 ;
 ; INPUTS:
 ;     X
@@ -4363,46 +5725,86 @@ PASSWORD_CURSOR_START_PPU_ADDRS_U:          ; [$92c8]
 ;     TODO
 ;
 ; XREFS:
-;     Menu_Something_9405
+;     PasswordScreen_DrawAndHandleInputLoop
 ;============================================================================
-PasswordScreen_Maybe_DrawChar:              ; [$92ca]
-    LDA InterruptCounter
-    AND #$0f
-    BNE RETURN_9311
-    LDA InterruptCounter
-    AND #$10
-    BEQ PasswordScreen_Maybe_WriteCharAtCursor
-    LDA #$60
-    JMP FUN_PRG12__92ed
+PasswordScreen_DrawPasswordFieldCursor:     ; [$92ca]
+    ;
+    ; Only proceed if the interrupt counter's lower nibble is set.
+    ;
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$0f                                ; Keep the lower nibble.
+    BNE RETURN_9311                         ; If > 0, return.
+
+
+    ;
+    ; Check whether to draw the character or the cursor.
+    ;
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$10                                ; Is bit 5 set?
+    BEQ PasswordScreen_DrawAtCursorPosition ; If set, jump to write the
+                                            ; character.
+
+
+    ;
+    ; Draw the cursor.
+    ;
+    LDA #$60                                ; 0x60 == Solid block (cursor)
+    JMP PasswordScreen_WriteCharTile        ; Draw it.
 
 
 ;============================================================================
-; TODO: Document PasswordScreen_Maybe_WriteCharAtCursor
+; Draw the character at the current cursor position.
+;
+; If the cursor's on a position without an inputted
+; character, a "_" will be drawn instead.
+;
+; This jumps/falls through to
+; PasswordScreen_WriteCharTile.
 ;
 ; INPUTS:
-;     None.
+;     Password_FieldCursorPos:
+;         The cursor position.
+;
+;     ScreenBuffer:
+;         The entered characters buffer.
+;
+;     PASSWORD_ENTERED_CHARS:
+;         The lookup table of character codes to display tiles.
 ;
 ; OUTPUTS:
-;     TODO
+;     See fall-through.
+;
+; CALLS:
+;     PasswordScreen_WriteCharTile
 ;
 ; XREFS:
-;     Menu_Draw_Something9312
-;     Menu_Draw_Something9351
-;     Menu_Draw_Something9386
-;     Menu_Something_93EC
-;     PasswordScreen_Maybe_DrawChar
+;     PasswordScreen_DrawPasswordFieldCursor
+;     PasswordScreen_HandleDeleteAtCursor
+;     PasswordScreen_HandleDeleteLastChar
+;     PasswordScreen_HandleInputChar
+;     PasswordScreen_HandleMoveCursorLeft
+;     PasswordScreen_HandleMoveCursorRight
 ;============================================================================
-PasswordScreen_Maybe_WriteCharAtCursor:     ; [$92db]
-    LDX a:Password_FieldCursorPos
-    LDA ScreenBuffer,X
-    CMP #$ff
-    BEQ @LAB_PRG12__92eb
-    TAX
-    LDA #$8764,X
-    BPL FUN_PRG12__92ed
+PasswordScreen_DrawAtCursorPosition:        ; [$92db]
+    ;
+    ; Check the character at the cursor position.
+    ;
+    LDX a:Password_FieldCursorPos           ; X = Cursor position.
+    LDA ScreenBuffer,X                      ; A = Character at that position.
+    CMP #$ff                                ; Is it 0xFF (unset)?
+    BEQ @_writeBlankChar                    ; If not, jump.
 
-  @LAB_PRG12__92eb:                         ; [$92eb]
-    LDA #$5f
+
+    ;
+    ; There's no character at this position.
+    ;
+    TAX                                     ; X = A (character offset)
+    LDA #$8764,X                            ; Get the character value for
+                                            ; that offset.
+    BPL PasswordScreen_WriteCharTile        ; Write it.
+
+  @_writeBlankChar:                         ; [$92eb]
+    LDA #$5f                                ; 0x5F == "_" (blank) character
 
     ;
     ; v-- Fall through --v
@@ -4410,84 +5812,153 @@ PasswordScreen_Maybe_WriteCharAtCursor:     ; [$92db]
 
 
 ;============================================================================
-; TODO: Document FUN_PRG12__92ed
+; Write the tile for the given character to the PPU buffer.
 ;
 ; INPUTS:
-;     A
-;     X
+;     A:
+;         The index of the character in the password tiles
+;         table.
+;
+;     Password_FieldCursorPos:
+;         The 0-based index of the cursor in the password
+;         field.
+;
+;     PASSWORD_CURSOR_START_PPU_ADDRS_U:
+;     PASSWORD_CURSOR_START_PPU_ADDRS_L:
+;         The address lookup tables for the character tiles.
 ;
 ; OUTPUTS:
-;     TODO
+;     PPUBuffer_WriteOffset:
+;         The updated write offset for the PPU buffer.
+;
+;     PPU_TargetAddr:
+;     #$e9:
+;         Clobbered.
+;
+; CALLS:
+;     PPUBuffer_QueueCommandOrLength
+;     PPUBuffer_Set
 ;
 ; XREFS:
-;     PasswordScreen_Maybe_DrawChar
-;     PasswordScreen_Maybe_WriteCharAtCursor
+;     PasswordScreen_DrawAtCursorPosition
+;     PasswordScreen_DrawPasswordFieldCursor
 ;============================================================================
-FUN_PRG12__92ed:                            ; [$92ed]
-    PHA
-    LDA a:Password_FieldCursorPos
+PasswordScreen_WriteCharTile:               ; [$92ed]
+    PHA                                     ; Push the tile value to the
+                                            ; stack.
+
+
+    ;
+    ; Determine the index to draw to for the cursor position.
+    ;
+    LDA a:Password_FieldCursorPos           ; Load the cursor position in the
+                                            ; password field.
+    LSR A                                   ; Divide by 16.
     LSR A
     LSR A
     LSR A
-    LSR A
-    TAY
-    LDA #$92c8,Y
-    STA PPU_TargetAddr.U
-    LDA a:Password_FieldCursorPos
-    AND #$0f
+
+
+    ;
+    ; Look up the PPU address for that index.
+    ;
+    TAY                                     ; Y = A
+    LDA #$92c8,Y                            ; A = Upper byte of the PPU
+                                            ; address for this position.
+    STA PPU_TargetAddr.U                    ; Store it.
+    LDA a:Password_FieldCursorPos           ; Load the cursor position again.
+    AND #$0f                                ; Keep the lower nibble.
     CLC
-    ADC #$92c6,Y
-    STA PPU_TargetAddr
-    LDA #$01
-    JSR #$cfdc
-    PLA
-    JSR #$f845
-    STX PPUBuffer_UpperBounds
+    ADC #$92c6,Y                            ; Add the lower byte of the PPU
+                                            ; address.
+    STA PPU_TargetAddr                      ; Store as the target address to
+                                            ; write to.
+
+
+    ;
+    ; Write to the PPU buffer.
+    ;
+    LDA #$01                                ; A = 1 (write length)
+    JSR #$cfdc                              ; Queue the length.
+    PLA                                     ; Pull the caller-provided tile
+                                            ; value.
+    JSR #$f845                              ; Write the tile to the buffer.
+    STX PPUBuffer_WriteOffset               ; Update the write offset.
 
     ;
     ; XREFS:
-    ;     PasswordScreen_Maybe_DrawChar
+    ;     PasswordScreen_DrawPasswordFieldCursor
     ;
 RETURN_9311:                                ; [$9311]
     RTS
 
-
 ;============================================================================
-; TODO: Document Menu_Draw_Something9312
+; TODO: Document PasswordScreen_HandleInputChar
 ;
 ; INPUTS:
-;     None.
+;     A
 ;
 ; OUTPUTS:
 ;     TODO
 ;
 ; XREFS:
-;     PasswordScreen_HandleWrongPasswordAndWaitForInput
+;     PasswordScreen_HandleInput
 ;============================================================================
-Menu_Draw_Something9312:                    ; [$9312]
-    TAX
-    BMI Menu_Draw_Something9351
-    LDX a:Password_FieldCursorPos
-    STA ScreenBuffer,X
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
-    LDX a:Password_FieldCursorPos
-    INX
-    CPX a:Password_MaxChars
-    BEQ @LAB_PRG12__9336
-    DEX
-    CPX a:Password_EnteredCharsLength
-    BNE @LAB_PRG12__9330
-    INC a:Password_EnteredCharsLength
+PasswordScreen_HandleInputChar:             ; [$9312]
+    TAX                                     ; X = A
+    BMI PasswordScreen_HandleMoveCursorOrDelete ; If a special character,
+                                                ; jump to handle it.
 
-  @LAB_PRG12__9330:                         ; [$9330]
-    INC a:Password_FieldCursorPos
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
 
-  @LAB_PRG12__9336:                         ; [$9336]
-    STX a:Password_EnteredCharsLength
+    ;
+    ; Place the character in the buffer.
+    ;
+    LDX a:Password_FieldCursorPos           ; X = Current cursor position.
+    STA ScreenBuffer,X                      ; Store in the screen buffer.
+    JSR PasswordScreen_DrawAtCursorPosition ; Write the character.
+
+
+    ;
+    ; Advance the cursor position by one.
+    ;
+    LDX a:Password_FieldCursorPos           ; X = Cursor position again.
+    INX                                     ; X++
+
+
+    ;
+    ; Check if the maximum number of characters have been entered.
+    ;
+    CPX a:Password_MaxChars                 ; Has it reached the max number
+                                            ; of characters?
+    BEQ @_maxCharsReached                   ; If so, jump.
+    DEX                                     ; X--
+    CPX a:Password_EnteredCharsLength       ; Was the cursor at the end of
+                                            ; the entered characters?
+    BNE @_advanceCursorPos                  ; If not, jump.
+
+
+    ;
+    ; The cursor was at the end of the password. Advance the
+    ; number of entered characters.
+    ;
+    INC a:Password_EnteredCharsLength       ; Increment the entered chars
+                                            ; length.
+
+  @_advanceCursorPos:                       ; [$9330]
+    INC a:Password_FieldCursorPos           ; Increment the cursor position.
+    JMP PasswordScreen_DrawAtCursorPosition ; Write the character.
+
+
+    ;
+    ; The max number of characters was reached. Move the cursor
+    ; back to the start of the field and write the character.
+    ;
+  @_maxCharsReached:                        ; [$9336]
+    STX a:Password_EnteredCharsLength       ; Store the new entered password
+                                            ; length.
     LDA #$00
-    STA a:Password_FieldCursorPos
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
+    STA a:Password_FieldCursorPos           ; Reset the cursor position to 0.
+    JMP PasswordScreen_DrawAtCursorPosition ; Write the character.
 
 
 ;============================================================================
@@ -4503,14 +5974,15 @@ Menu_Draw_Something9312:                    ; [$9312]
 ;     Sound_PlayEffect
 ;
 ; XREFS:
-;     Menu_Draw_Something9386
+;     PasswordScreen_9175
+;     PasswordScreen_HandleMoveCursorRight
 ;     PasswordScreen_HandleWrongPasswordAndWaitForInput
 ;============================================================================
 Sound_PlayInputSound:                       ; [$9341]
-    PHA
-    LDA #$0d
-    JSR #$d0e4
-    PLA
+    PHA                                     ; Push A to the stack.
+    LDA #$0d                                ; 0xD == Character Input sound
+    JSR #$d0e4                              ; Play the sound effect.
+    PLA                                     ; Pop A from the stack.
     RTS
 
 
@@ -4527,24 +5999,22 @@ Sound_PlayInputSound:                       ; [$9341]
 ;     Sound_PlayEffect
 ;
 ; XREFS:
-;     Maybe_Password_CursorHandler
+;     Password_HandleDPadInput
 ;============================================================================
 Sound_PlayMoveCursorSound:                  ; [$9349]
-    PHA
-    LDA #$0b
-    JSR #$d0e4
-    PLA
+    PHA                                     ; Push A to the stack.
+    LDA #$0b                                ; 0xB == Cursor Movement sound.
+    JSR #$d0e4                              ; Play the sound effect.
+    PLA                                     ; Pop A from the stack.
 
     ;
     ; XREFS:
-    ;     Menu_Draw_Something9351
+    ;     PasswordScreen_HandleMoveCursorOrDelete
     ;
 RETURN_9350:                                ; [$9350]
     RTS
-
-
 ;============================================================================
-; TODO: Document Menu_Draw_Something9351
+; TODO: Document PasswordScreen_HandleMoveCursorOrDelete
 ;
 ; INPUTS:
 ;     A
@@ -4553,40 +6023,33 @@ RETURN_9350:                                ; [$9350]
 ;     TODO
 ;
 ; XREFS:
-;     Menu_Draw_Something9312
+;     PasswordScreen_HandleInputChar
 ;============================================================================
-Menu_Draw_Something9351:                    ; [$9351]
-    CMP #$81
-    BEQ @_is0x81
-    CMP #$80
-    BEQ Menu_Draw_Something9386
-    CMP #$82
-    BNE RETURN_9350
-    JMP Menu_Draw_Something93B4
-
-  @_is0x81:                                 ; [$9360]
-    LDA a:Password_EnteredCharsLength
-    BEQ Call_Sound_PlayInputSound
-    LDX a:Password_FieldCursorPos
-    BNE @_writeFirstChar
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
-    LDA a:Password_EnteredCharsLength
-    STA a:Password_FieldCursorPos
-    CMP a:Password_MaxChars
-    BNE @_writeSecondChar
-    DEC a:Password_FieldCursorPos
-    BNE @_writeSecondChar
-
-  @_writeFirstChar:                         ; [$937d]
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
-    DEC a:Password_FieldCursorPos
-
-  @_writeSecondChar:                        ; [$9383]
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
+PasswordScreen_HandleMoveCursorOrDelete:    ; [$9351]
+    ;
+    ; Check if this is Move Left (0x81).
+    ;
+    CMP #$81                                ; Is this Move Left?
+    BEQ PasswordScreen_HandleMoveCursorLeft ; If so, jump to handle Move
+                                            ; Left.
 
 
+    ;
+    ; Check if this is Move Right (0x80).
+    ;
+    CMP #$80                                ; Is this Move Right?
+    BEQ PasswordScreen_HandleMoveCursorRight ; If so, jump to handle Move
+                                             ; Right.
+
+
+    ;
+    ; Check if this is Delete Character (0x82).
+    ;
+    CMP #$82                                ; Is this DEL?
+    BNE RETURN_9350                         ; If not, return.
+    JMP PasswordScreen_HandleDeleteAtCursor ; Else, jump to handle DEL.
 ;============================================================================
-; TODO: Document Menu_Draw_Something9386
+; TODO: Document PasswordScreen_HandleMoveCursorLeft
 ;
 ; INPUTS:
 ;     None.
@@ -4595,9 +6058,58 @@ Menu_Draw_Something9351:                    ; [$9351]
 ;     TODO
 ;
 ; XREFS:
-;     Menu_Draw_Something9351
+;     PasswordScreen_HandleMoveCursorOrDelete
 ;============================================================================
-Menu_Draw_Something9386:                    ; [$9386]
+PasswordScreen_HandleMoveCursorLeft:        ; [$9360]
+    ;
+    ; Check if there are any entered characters.
+    ;
+    LDA a:Password_EnteredCharsLength       ; Is the password field empty?
+    BEQ Call_Sound_PlayInputSound           ; If so, play the input sound and
+                                            ; return.
+
+
+    ;
+    ; There are entered characters. Check if we're at the
+    ; beginning of the password.
+    ;
+    LDX a:Password_FieldCursorPos           ; Is the cursor position > 0?
+    BNE @LAB_PRG12__937d                    ; If so, jump.
+
+
+    ;
+    ; The cursor is at the beginning of the password.
+    ;
+    JSR PasswordScreen_DrawAtCursorPosition
+    LDA a:Password_EnteredCharsLength       ; Get the number of entered
+                                            ; characters.
+    STA a:Password_FieldCursorPos           ; Set the cursor position to the
+                                            ; end of it.
+    CMP a:Password_MaxChars
+    BNE @LAB_PRG12__9383
+    DEC a:Password_FieldCursorPos
+    BNE @LAB_PRG12__9383
+
+  @LAB_PRG12__937d:                         ; [$937d]
+    JSR PasswordScreen_DrawAtCursorPosition
+    DEC a:Password_FieldCursorPos
+
+  @LAB_PRG12__9383:                         ; [$9383]
+    JMP PasswordScreen_DrawAtCursorPosition
+
+;============================================================================
+; TODO: Document PasswordScreen_HandleMoveCursorRight
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_HandleMoveCursorOrDelete
+;============================================================================
+PasswordScreen_HandleMoveCursorRight:       ; [$9386]
     LDA a:Password_EnteredCharsLength
     BEQ Call_Sound_PlayInputSound
     LDX a:Password_FieldCursorPos
@@ -4605,43 +6117,51 @@ Menu_Draw_Something9386:                    ; [$9386]
     BEQ @LAB_PRG12__939e
     INX
     CPX a:Password_EnteredCharsLength
-    BNE @LAB_PRG12__93a8
+    BNE @_writeAndAdvanceCursor
     CPX a:Password_MaxChars
-    BNE @LAB_PRG12__93a8
+    BNE @_writeAndAdvanceCursor
 
   @LAB_PRG12__939e:                         ; [$939e]
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
+    JSR PasswordScreen_DrawAtCursorPosition
     LDA #$00
     STA a:Password_FieldCursorPos
-    BEQ @LAB_PRG12__93ae
+    BEQ @_writeAtCursor
 
-  @LAB_PRG12__93a8:                         ; [$93a8]
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
+  @_writeAndAdvanceCursor:                  ; [$93a8]
+    JSR PasswordScreen_DrawAtCursorPosition
     INC a:Password_FieldCursorPos
 
-  @LAB_PRG12__93ae:                         ; [$93ae]
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
+  @_writeAtCursor:                          ; [$93ae]
+    JMP PasswordScreen_DrawAtCursorPosition
 
     ;
     ; XREFS:
-    ;     Menu_Draw_Something9351
-    ;     Menu_Draw_Something9386
-    ;     Menu_Something_93EC
+    ;     PasswordScreen_HandleDeleteLastChar
+    ;     PasswordScreen_HandleMoveCursorLeft
+    ;     PasswordScreen_HandleMoveCursorRight
     ;
 Call_Sound_PlayInputSound:                  ; [$93b1]
     JMP Sound_PlayInputSound
 
-    ;
-    ; XREFS:
-    ;     Menu_Draw_Something9351
-    ;
-Menu_Draw_Something93B4:                    ; [$93b4]
+;============================================================================
+; TODO: Document PasswordScreen_HandleDeleteAtCursor
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     PasswordScreen_HandleMoveCursorOrDelete
+;============================================================================
+PasswordScreen_HandleDeleteAtCursor:        ; [$93b4]
     LDA a:Password_FieldCursorPos
     CMP a:Password_EnteredCharsLength
-    BEQ Menu_Something_93EC
+    BEQ PasswordScreen_HandleDeleteLastChar
     PHA
 
-  @LAB_PRG12__93bd:                         ; [$93bd]
+  @_loop:                                   ; [$93bd]
     LDX a:Password_FieldCursorPos
     INX
     CPX a:Password_EnteredCharsLength
@@ -4649,60 +6169,62 @@ Menu_Draw_Something93B4:                    ; [$93b4]
     LDX a:Password_FieldCursorPos
     LDA #$0601,X
     STA ScreenBuffer,X
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
+    JSR PasswordScreen_DrawAtCursorPosition
     INC a:Password_FieldCursorPos
-    BNE @LAB_PRG12__93bd
+    BNE @_loop
 
   @LAB_PRG12__93d7:                         ; [$93d7]
     LDX a:Password_FieldCursorPos
     LDA #$ff
     STA ScreenBuffer,X
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
+    JSR PasswordScreen_DrawAtCursorPosition
     DEC a:Password_EnteredCharsLength
     PLA
     STA a:Password_FieldCursorPos
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
-
+    JMP PasswordScreen_DrawAtCursorPosition
 
 ;============================================================================
-; TODO: Document Menu_Something_93EC
+; TODO: Document PasswordScreen_HandleDeleteLastChar
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
 ;     TODO
+;
+; XREFS:
+;     PasswordScreen_HandleDeleteAtCursor
 ;============================================================================
-Menu_Something_93EC:                        ; [$93ec]
+PasswordScreen_HandleDeleteLastChar:        ; [$93ec]
     LDX a:Password_FieldCursorPos
     BEQ Call_Sound_PlayInputSound
-    JSR PasswordScreen_Maybe_WriteCharAtCursor
+    JSR PasswordScreen_DrawAtCursorPosition
     DEC a:Password_FieldCursorPos
     DEC a:Password_EnteredCharsLength
     LDX a:Password_FieldCursorPos
     LDA #$ff
     STA ScreenBuffer,X
-    JMP PasswordScreen_Maybe_WriteCharAtCursor
-
+    JMP PasswordScreen_DrawAtCursorPosition
 
 ;============================================================================
-; TODO: Document Menu_Something_9405
+; TODO: Document PasswordScreen_DrawAndHandleInputLoop
 ;
 ; INPUTS:
-;     None.
+;     X
 ;
 ; OUTPUTS:
 ;     C
 ;
 ; XREFS:
-;     PasswordScreen_Show
+;     PasswordScreen_WaitForInput
 ;============================================================================
-Menu_Something_9405:                        ; [$9405]
-    JSR PasswordScreen_Maybe_DrawChar
-    JSR Maybe_Password_CursorHandler
-    JSR Menu_Something_954F
+PasswordScreen_DrawAndHandleInputLoop:      ; [$9405]
+    JSR PasswordScreen_DrawPasswordFieldCursor
+    JSR Password_HandleDPadInput
+    JSR PasswordScreen_DrawSelectionCursor
     LDA Joy1_ChangedButtonMask
     BMI @LAB_PRG12__9416
+
 
     ;
     ; Return whether the "A" button was pressed.
@@ -4716,7 +6238,7 @@ Menu_Something_9405:                        ; [$9405]
     LDA #$0e
     JSR #$d0e4
     PLA
-    JSR Password_IsCursorWrapping
+    JSR PasswordScreen_IsCursorSpotInvalid
     SEC
     RTS
 
@@ -4727,36 +6249,63 @@ Menu_Something_9405:                        ; [$9405]
 
 
 ;============================================================================
-; TODO: Document Password_IsCursorWrapping
+; Return whether the cursor position is in an invalid spot.
+;
+; If the cursor is in a spot not containing an input
+; character, this will set Carry to 1.
 ;
 ; INPUTS:
-;     None.
+;     Password_CursorCol:
+;         The current cursor column.
+;
+;     Password_CursorRow:
+;         The current cursor row.
+;
+;     PASSWORD_VALUES_FOR_CURSOR_POS:
+;         The password input values for each cursor
+;         position.
 ;
 ; OUTPUTS:
-;     C
+;     C:
+;         0 = The cursor spot is valid.
+;         1 = The cursor spot is invalid.
 ;
 ; XREFS:
-;     Maybe_Password_CursorHandler
-;     Menu_Something_9405
+;     PasswordScreen_DrawAndHandleInputLoop
+;     Password_HandleDPadInput
 ;============================================================================
-Password_IsCursorWrapping:                  ; [$9426]
+PasswordScreen_IsCursorSpotInvalid:         ; [$9426]
     ;
     ; Calculate an offset into
     ; PASSWORD_VALUES_FOR_CURSOR_POS.
     ;
-    LDA a:Password_CursorRow
-    ASL A
-    ADC a:Password_CursorRow
+    ; This starts with:
+    ;
+    ;     offset = (row * 2) + (row * 4)
+    ;
+    ; There are 13 columns in a row. The above gives us an
+    ; offset into the characters for that row. So:
+    ;
+    ;     0 * 12 == 0
+    ;     1 * 12 == 12
+    ;
+    ; XXX TODO
+    ;
+    LDA a:Password_CursorRow                ; A = Cursor row.
+    ASL A                                   ; A = A * 2
+    ADC a:Password_CursorRow                ; A++
     ASL A
     ASL A
     ADC a:Password_CursorRow
     ADC a:Password_CursorCol
+
 
     ;
     ; Load the value from that entry in the table.
     ;
     TAX
     LDA #$943c,X
+
 
     ;
     ; See if that is 0xFF, which maps to values like DEL, END,
@@ -4767,7 +6316,7 @@ Password_IsCursorWrapping:                  ; [$9426]
 
 ;
 ; XREFS:
-;     Password_IsCursorWrapping
+;     PasswordScreen_IsCursorSpotInvalid
 ;
 PASSWORD_VALUES_FOR_CURSOR_POS:             ; [$943c]
     db $00                                  ; [0]:
@@ -4851,16 +6400,32 @@ PASSWORD_VALUES_FOR_CURSOR_POS:             ; [$943c]
 
 
 ;============================================================================
-; TODO: Document PasswordScreen_GetDPadBits
+; Get the DPad bits for cursor movement, with auto-repeat.
+;
+; This will return a bitmask of the DPad bits from
+; controller 1. If a button is being held down, it
+; will wait a short period of time and then begin
+; auto-repeating input at regular intervals (but not
+; continuously per-call).
 ;
 ; INPUTS:
-;     None.
+;     Joy1_ButtonMask:
+;         All the pressed buttons.
+;
+;     Joy1_ChangedButtonMask:
+;         The newly-pressed buttons.
 ;
 ; OUTPUTS:
-;     A
+;     Password_CounterBeforeAutoRepeatMove:
+;         A counter used to wait before auto-repeating
+;         the next button.
+;
+;     A:
+;     Password_DPadBits:
+;         The current DPad bits.
 ;
 ; XREFS:
-;     Maybe_Password_CursorHandler
+;     Password_HandleDPadInput
 ;============================================================================
 PasswordScreen_GetDPadBits:                 ; [$948a]
     ;
@@ -4869,7 +6434,8 @@ PasswordScreen_GetDPadBits:                 ; [$948a]
     ;
     LDA Joy1_ChangedButtonMask
     AND #$0f
-    BNE @LAB_PRG12__94b9
+    BNE @_handleAutoRepeat
+
 
     ;
     ; There were no new changes to buttons. Check whether any
@@ -4877,9 +6443,10 @@ PasswordScreen_GetDPadBits:                 ; [$948a]
     ;
     LDA Joy1_ButtonMask
     AND #$0f
-    BEQ @LAB_PRG12__94c2
+    BEQ @_stopAutoRepeat
     CMP a:Password_DPadBits
-    BNE @LAB_PRG12__94c2
+    BNE @_stopAutoRepeat
+
 
     ;
     ; A direction key has been held down. We're now going to
@@ -4902,187 +6469,282 @@ PasswordScreen_GetDPadBits:                 ; [$948a]
     ; 4. Once it hits 0x85, it'll drop back to 0x80 and begin again.
     ;
     LDX a:Password_CounterBeforeAutoRepeatMove
-    BPL @LAB_PRG12__94ae
+    BPL @_updateAndCheckAutoRepeatCounter
     INC a:Password_CounterBeforeAutoRepeatMove
     INX
     CPX #$86
     BNE @_incCounter
 
-  @LAB_PRG12__94a8:                         ; [$94a8]
+  @_resetAutoRepeatCounter:                 ; [$94a8]
     LDX #$80
     STX a:Password_CounterBeforeAutoRepeatMove
     RTS
 
-  @LAB_PRG12__94ae:                         ; [$94ae]
+  @_updateAndCheckAutoRepeatCounter:        ; [$94ae]
     INC a:Password_CounterBeforeAutoRepeatMove
     INX
     CPX #$2a
-    BEQ @LAB_PRG12__94a8
+    BEQ @_resetAutoRepeatCounter
 
   @_incCounter:                             ; [$94b6]
     LDA #$00
     RTS
 
+
     ;
     ; A new direction has been held down. Store it and return it,
     ; moving the cursor.
     ;
-  @LAB_PRG12__94b9:                         ; [$94b9]
+  @_handleAutoRepeat:                       ; [$94b9]
     STA a:Password_DPadBits
     LDX #$00
     STX a:Password_CounterBeforeAutoRepeatMove
     RTS
 
+
     ;
     ; No direction buttons are being pressed, or the direction
     ; has changed. Stop moving the cursor.
     ;
-  @LAB_PRG12__94c2:                         ; [$94c2]
+  @_stopAutoRepeat:                         ; [$94c2]
     LDA #$00
     STA a:Password_DPadBits
     RTS
 
 
 ;============================================================================
-; TODO: Document Maybe_Password_CursorHandler
+; Handle DPad input on the password screen.
+;
+; This will listen for Up, Down, Left, or Right button
+; presses, moving the cursor as appropriate.
+;
+; The cursor will be positioned to the correct spot on the
+; new row or column, wrapping or repositioning if needed
+; to ensure it's on a valid input location.
+;
+; There's special handling for the 5th row, which has
+; the directional arrows, DEL, and END, all of which take
+; up 2 tiles. All other rows have an input taking 1 tile and
+; space between.
 ;
 ; INPUTS:
-;     None.
+;     Password_CursorCol:
+;         The current cursor column.
+;
+;     Password_CursorRow:
+;         The current cursor row.
 ;
 ; OUTPUTS:
-;     TODO
+;     Password_CursorCol:
+;         The updated cursor column.
+;
+;     Password_CursorRow:
+;         The updated cursor row.
+;
+; CALLS:
+;     PasswordScreen_GetDPadBits
+;     PasswordScreen_IsCursorSpotInvalid
+;     PasswordScreen_UpdateCursorMovedFromLastRow
+;     PasswordScreen_UpdateCursorMovedToLastRow
+;     Sound_PlayMoveCursorSound
 ;
 ; XREFS:
-;     Menu_Something_9405
+;     PasswordScreen_DrawAndHandleInputLoop
 ;============================================================================
-Maybe_Password_CursorHandler:               ; [$94c8]
-    JSR PasswordScreen_GetDPadBits
+Password_HandleDPadInput:                   ; [$94c8]
+    JSR PasswordScreen_GetDPadBits          ; Get the DPad bits.
+
 
     ;
     ; Only consider the bitmask bits, which shouldn't be
     ; necessary since PasswordScreen_GetDPadBits
     ; already does this.
     ;
-    AND #$0f
-    BEQ @LAB_PRG12__94f7
+    AND #$0f                                ; Keep the lower nibble (DPad
+                                            ; bits -- redundant).
+    BEQ @_return                            ; If nothing is pressed, return.
+
 
     ;
     ; We can move in a direction. Play a sound and figure
     ; out which direction we're moving.
     ;
-    JSR Sound_PlayMoveCursorSound
+    JSR Sound_PlayMoveCursorSound           ; Play the cursor movement sound.
+
 
     ;
     ; Move the cursor right, handling wrapping.
     ;
-    LSR A
-    BCS @_moveRight
-    LSR A
-    BCS @_moveLeft
-    LSR A
-    BCS @LAB_PRG12__94f8
+    LSR A                                   ; Shift the "Right" bit into
+                                            ; Carry.
+    BCS @_moveRight                         ; If set, handle moving right.
+    LSR A                                   ; Shift the "Left" bit into
+                                            ; Carry.
+    BCS @_moveLeft                          ; if set, handle moving left.
+    LSR A                                   ; Shift the "Down" bit into
+                                            ; Carry.
+    BCS @_moveDown                          ; If set, handle moving down.
 
-  @LAB_PRG12__94db:                         ; [$94db]
-    LDX a:Password_CursorRow
-    DEX
-    BPL @LAB_PRG12__94e8
-    JSR Password_NormalizeCursorColForBottomRow
-    LDX #$05
-    BNE @LAB_PRG12__94ef
 
-  @LAB_PRG12__94e8:                         ; [$94e8]
-    CPX #$04
-    BNE @LAB_PRG12__94ef
-    JSR Maybe_Password_CursorHandler_Something9545
+    ;
+    ; We're moving one row up.
+    ;
+  @_moveUp:                                 ; [$94db]
+    LDX a:Password_CursorRow                ; X = Cursor row
+    DEX                                     ; X-- (move up)
+    BPL @_checkRow4                         ; If the new row is <= 4, jump to
+                                            ; handle it.
 
-  @LAB_PRG12__94ef:                         ; [$94ef]
-    STX a:Password_CursorRow
-    JSR Password_IsCursorWrapping
-    BCS @LAB_PRG12__94db
 
-  @LAB_PRG12__94f7:                         ; [$94f7]
+    ;
+    ; The cursor wrapped up to row 5.
+    ;
+    JSR PasswordScreen_UpdateCursorMovedToLastRow ; Handle moving to row 5.
+    LDX #$05                                ; Set the new row as 5.
+    BNE @_updateCursorRow
+
+
+    ;
+    ; Check if this is row 4 (moving from arrows/DEL/END).
+    ;
+  @_checkRow4:                              ; [$94e8]
+    CPX #$04                                ; Is the new row < 4?
+    BNE @_updateCursorRow                   ; If so, move the cursor there.
+
+
+    ;
+    ; Cursor moved from row 5 to 4 (numeric, symbols).
+    ;
+    JSR PasswordScreen_UpdateCursorMovedFromLastRow ; Handle moving away from
+                                                    ; row 5.
+
+
+    ;
+    ; Update the cursor row and check if the new spot is valid.
+    ;
+    ; This handles the case where we move to row 4, which has a
+    ; blank spot in the last column. If we'd be putting the
+    ; cursor there, move up again one more row.
+    ;
+  @_updateCursorRow:                        ; [$94ef]
+    STX a:Password_CursorRow                ; Set the new cursor row.
+    JSR PasswordScreen_IsCursorSpotInvalid  ; Check if the destination spot
+                                            ; is valid.
+    BCS @_moveUp                            ; If not, move up one row.
+
+  @_return:                                 ; [$94f7]
     RTS
 
-  @LAB_PRG12__94f8:                         ; [$94f8]
-    LDX a:Password_CursorRow
-    INX
-    CPX #$05
-    BEQ @LAB_PRG12__9509
-    BCC @LAB_PRG12__950c
+
+    ;
+    ; We're moving one row down.
+    ;
+  @_moveDown:                               ; [$94f8]
+    LDX a:Password_CursorRow                ; X = Cursor row
+    INX                                     ; X++ (move down)
+    CPX #$05                                ; Did we move to row 5?
+    BEQ @_moveDownToRow5                    ; If so, jump to handle it
+                                            ; specially.
+
+
+    ;
+    ; The cursor moved down to row < 5.
+    ;
+    BCC @_updateCursorRowDown               ; Move the cursor down a row.
+
 
     ;
     ; We've moved down past the last row. We'll be wrapping.
     ;
-    JSR Maybe_Password_CursorHandler_Something9545
-    LDX #$00
-    BEQ @LAB_PRG12__950c
+    JSR PasswordScreen_UpdateCursorMovedFromLastRow ; Handle moving from the
+                                                    ; last row.
+    LDX #$00                                ; X = 0 (new row)
+    BEQ @_updateCursorRowDown               ; Move the cursor there.
+
 
     ;
     ; We're on the final row, with the arrows, DEL, and END.
     ; We have to ensure the cursor position is a multiple of 2,
     ; since each of these take 2 character positions.
     ;
-  @LAB_PRG12__9509:                         ; [$9509]
-    JSR Password_NormalizeCursorColForBottomRow
+  @_moveDownToRow5:                         ; [$9509]
+    JSR PasswordScreen_UpdateCursorMovedToLastRow ; Handle moving to the last
+                                                  ; row.
+
 
     ;
     ; Save the new row position.
     ;
-  @LAB_PRG12__950c:                         ; [$950c]
-    STX a:Password_CursorRow
+  @_updateCursorRowDown:                    ; [$950c]
+    STX a:Password_CursorRow                ; Store the new cursor row.
+
 
     ;
     ; Keep running this logic while the cursor is wrapping
     ; vertically so we end up with a proper row and column
     ; offset.
     ;
-    JSR Password_IsCursorWrapping
-    BCS @LAB_PRG12__94f8
-    RTS
+    JSR PasswordScreen_IsCursorSpotInvalid  ; Check if the new position is
+                                            ; invalid.
+    BCS @_moveDown                          ; If so, move down one more row
+                                            ; (looping as necessary).
+    RTS                                     ; And return.
+
 
     ;
-    ; Move the cursor left, handling wrapping.
+    ; Move the cursor left, handling wrapping and repositioning
+    ; if on an invalid spot.
     ;
   @_moveLeft:                               ; [$9515]
-    LDX a:Password_CursorCol
-    DEX
-    BPL @LAB_PRG12__951d
+    LDX a:Password_CursorCol                ; X = Cursor column
+    DEX                                     ; X-- (move left)
+    BPL @_updateCursorColRight              ; If >= 0, jump to move right.
+
 
     ;
     ; We're wrapping from the left to the right.
     ;
-    LDX #$0c
+    LDX #$0c                                ; Set the cursor to column 12.
 
-  @LAB_PRG12__951d:                         ; [$951d]
-    STX a:Password_CursorCol
-    JSR Password_IsCursorWrapping
-    BCS @_moveLeft
-    RTS
+  @_updateCursorColRight:                   ; [$951d]
+    STX a:Password_CursorCol                ; Store the new cursor column.
+    JSR PasswordScreen_IsCursorSpotInvalid  ; Check if the new position is
+                                            ; invalid.
+    BCS @_moveLeft                          ; If so, move left again.
+    RTS                                     ; And return.
 
+
+    ;
+    ; Move the cursor right, handling wrapping and repositioning
+    ; if on an invalid spot.
+    ;
   @_moveRight:                              ; [$9526]
-    LDX a:Password_CursorCol
-    INX
-    CPX #$0d
-    BCC @LAB_PRG12__9530
+    LDX a:Password_CursorCol                ; X = Cursor column.
+    INX                                     ; X++ (move right)
+    CPX #$0d                                ; Is the new position < 13?
+    BCC @_updateCursorColLeft               ; If so, jump to move left.
+
 
     ;
     ; We're wrapping from the right to the left.
     ;
-    LDX #$00
+    LDX #$00                                ; X = 0 (new cursor position).
 
-  @LAB_PRG12__9530:                         ; [$9530]
-    STX a:Password_CursorCol
-    JSR Password_IsCursorWrapping
-    BCS @_moveRight
-    RTS
+  @_updateCursorColLeft:                    ; [$9530]
+    STX a:Password_CursorCol                ; Store the new cursor position.
+    JSR PasswordScreen_IsCursorSpotInvalid  ; Check if the new position is
+                                            ; invalid.
+    BCS @_moveRight                         ; If so, move right again
+                                            ; (looping as needed).
+    RTS                                     ; And return.
 
 
 ;============================================================================
 ; Update the cursor column for the bottom row of the password screen.
 ;
 ; When the cursor is on the bottom row, the cursor doesn't
-; move one step at a time, it moves 2. The reason is that the
-; arrows, DEL, and END are all 2 characters.
+; move one step at a time, it moves 2. The reason is that
+; the arrows, DEL, and END are all 2 characters.
 ;
 ; INPUTS:
 ;     Password_CursorCol:
@@ -5093,57 +6755,14 @@ Maybe_Password_CursorHandler:               ; [$94c8]
 ;         The normalized cursor position.
 ;
 ; XREFS:
-;     Maybe_Password_CursorHandler
+;     Password_HandleDPadInput
 ;============================================================================
-Password_NormalizeCursorColForBottomRow:    ; [$9539]
-    LDA a:Password_CursorCol
-    CMP #$08
-    BCS RETURN_9544
-    LSR A
-
-
-;============================================================================
-; TODO: Document PasswordScreen_SetCusorCol
-;
-; INPUTS:
-;     A
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Maybe_Password_CursorHandler_Something9545
-;============================================================================
-PasswordScreen_SetCusorCol:                 ; [$9541]
-    STA a:Password_CursorCol
-
-    ;
-    ; XREFS:
-    ;     Maybe_Password_CursorHandler_Something9545
-    ;     Password_NormalizeCursorColForBottomRow
-    ;
-RETURN_9544:                                ; [$9544]
-    RTS
-
-
-;============================================================================
-; TODO: Document Maybe_Password_CursorHandler_Something9545
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     Maybe_Password_CursorHandler
-;============================================================================
-Maybe_Password_CursorHandler_Something9545: ; [$9545]
-    LDA a:Password_CursorCol
-    CMP #$04
-    BCS RETURN_9544
-    ASL A
-    BCC PasswordScreen_SetCusorCol
+PasswordScreen_UpdateCursorMovedToLastRow:  ; [$9539]
+    LDA a:Password_CursorCol                ; Load the cursor column.
+    CMP #$08                                ; Is it >= 8? (invalid position)
+    BCS RETURN_9544                         ; If so, return.
+    LSR A                                   ; Else, divide by 2 (each symbol
+                                            ; is 2 tiles).
 
     ;
     ; v-- Fall through --v
@@ -5151,40 +6770,142 @@ Maybe_Password_CursorHandler_Something9545: ; [$9545]
 
 
 ;============================================================================
-; TODO: Document Menu_Something_954F
+; Set the cursor column in the password input grid.
 ;
 ; INPUTS:
-;     None.
+;     A:
+;         The cursor column.
 ;
 ; OUTPUTS:
-;     TODO
+;     Password_CursorCol:
+;         The updated cursor column.
 ;
 ; XREFS:
-;     Menu_Something_9405
+;     PasswordScreen_UpdateCursorMovedFromLastRow
 ;============================================================================
-Menu_Something_954F:                        ; [$954f]
-    LDA a:Password_CursorCol
-    LDX a:Password_CursorRow
-    CPX #$05
-    BNE @LAB_PRG12__955a
-    ASL A
+PasswordScreen_SetCursorCol:                ; [$9541]
+    STA a:Password_CursorCol                ; Set the cursor position.
 
-  @LAB_PRG12__955a:                         ; [$955a]
+    ;
+    ; XREFS:
+    ;     PasswordScreen_UpdateCursorMovedFromLastRow
+    ;     PasswordScreen_UpdateCursorMovedToLastRow
+    ;
+RETURN_9544:                                ; [$9544]
+    RTS
+
+
+;============================================================================
+; Handle moving the cursor away from the last input row.
+;
+; This is called either when moving up from the row or down
+; from the row (wrapping around to the top).
+;
+; The cursor position may be normalized to fit in a matching
+; column on the destination row. The hand will then be
+; redrawn.
+;
+; There's some protection against invalid positions, which
+; in theory should not happen (at least with the US release).
+;
+; INPUTS:
+;     Password_CursorCol:
+;         The current cursor column.
+;
+; OUTPUTS:
+;     Password_CursorCol:
+;         The updated cursor column.
+;
+; CALLS:
+;     UI_DrawPromptInputSymbol
+;
+; XREFS:
+;     Password_HandleDPadInput
+;============================================================================
+PasswordScreen_UpdateCursorMovedFromLastRow: ; [$9545]
+    LDA a:Password_CursorCol                ; Load the cursor column.
+    CMP #$04                                ; Is it >= 4? (invalid position)
+    BCS RETURN_9544                         ; If so, return.
+    ASL A                                   ; Else, multiply by 2 (each
+                                            ; symbol is 2 tiles).
+    BCC PasswordScreen_SetCursorCol         ; If the new position is invalid,
+                                            ; reset the cursor position.
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+
+;============================================================================
+; Draw the selection cursor on the password screen.
+;
+; This will draw the cursor at the given cursor position on
+; the screen. This is drawn every frame.
+;
+; INPUTS:
+;     InterruptCounter:
+;         The current interrupt counter, used to rate limit
+;         updates.
+;
+;     Password_CursorCol:
+;         The tile X position of the cursor.
+;
+;     Password_CursorRow:
+;         The tile Y position of the cursor.
+;
+; OUTPUTS:
+;     None.
+;
+; CALLS:
+;     UI_DrawPromptInputSymbol
+;
+; XREFS:
+;     PasswordScreen_DrawAndHandleInputLoop
+;============================================================================
+PasswordScreen_DrawSelectionCursor:         ; [$954f]
+    LDA a:Password_CursorCol                ; A = cursor column.
+    LDX a:Password_CursorRow                ; X = cursor row.
+    CPX #$05                                ; Is the row 5 (arrows, delete,
+                                            ; end)?
+    BNE @_setSymbolPos                      ; If not, jump.
+
+
+    ;
+    ; This is row 5, containing the back/forward arrows,
+    ; DEL, and END.
+    ;
+    ; Each symbol takes 2 columns, so we'll start by multiplying
+    ; the cursor by 2 so we always jump 2 at a time.
+    ;
+    ASL A                                   ; Multiply the column by 2.
+
+
+    ;
+    ; Compute an X position for the symbol.
+    ;
+  @_setSymbolPos:                           ; [$955a]
+    ASL A                                   ; Convert to pixel position (2
+                                            ; tile width: 16).
     ASL A
     ASL A
     ASL A
+    ADC #$20                                ; Add 32 (left padding).
+    TAX                                     ; X = result.
+
+
+    ;
+    ; Compute a Y position for the symbol.
+    ;
+    LDA a:Password_CursorRow                ; A = cursor row.
+    ASL A                                   ; Convert to pixel position (2
+                                            ; tile height: 16).
     ASL A
-    ADC #$20
-    TAX
-    LDA a:Password_CursorRow
     ASL A
     ASL A
-    ASL A
-    ASL A
-    ADC #$55
-    TAY
-    LDA #$e4
-    JMP #$fca7
+    ADC #$55                                ; Add 85 (start of first row).
+    TAY                                     ; Y = result.
+    LDA #$e4                                ; A = 0xE4 (hand symbol)
+    JMP #$fca7                              ; Draw the symbol.
 
 
 ;============================================================================
@@ -5224,27 +6945,30 @@ Menu_Something_954F:                        ; [$954f]
 ;============================================================================
 Player_SetStartGameState:                   ; [$9570]
     LDA #$00
-    STA a:TempleSpawnPoint
-    STA a:PlayerTitle
-    STA a:SpecialItems
-    STA a:Quests
+    STA a:TempleSpawnPoint                  ; Set the temple spawn to 0.
+    STA a:PlayerTitle                       ; Set the player title to 0
+                                            ; (Novice).
+    STA a:SpecialItems                      ; Clear the special items.
+    STA a:Quests                            ; Clear the quests.
     LDX #$ff
-    STX a:SelectedWeapon
-    STA a:SelectedArmor
-    STX a:SelectedShield
-    STX a:SelectedMagic
-    STX a:SelectedItem
-    STA a:NumberOfWeapons
-    STA a:NumberOfArmors
-    STA a:NumberOfShields
-    STA a:NumberOfMagicSpells
-    STA a:NumberOfItems
-    STA a:Experience
+    STX a:SelectedWeapon                    ; Clear the selected weapon.
+    STA a:SelectedArmor                     ; Clear the selected armor.
+    STX a:SelectedShield                    ; Clear the selected shield.
+    STX a:SelectedMagic                     ; Clear the selected magic.
+    STX a:SelectedItem                      ; Clear the selected item.
+    STA a:NumberOfWeapons                   ; Set the number of weapons to 0.
+    STA a:NumberOfArmors                    ; Set the number of armor to 0.
+    STA a:NumberOfShields                   ; Set the number of shields to 0.
+    STA a:NumberOfMagicSpells               ; Set the number of magic spells
+                                            ; to 0.
+    STA a:NumberOfItems                     ; Set the number of items to 0.
+    STA a:Experience                        ; Set the experience to 0.
     STA a:Experience_U
-    STA a:Gold
+    STA a:Gold                              ; Set the gold to 0.
     STA a:Gold_M
     STA a:Gold_U
-    STA a:NextPlayerTitle
+    STA a:NextPlayerTitle                   ; Set the next player title to 0
+                                            ; (Novice).
     RTS
 
 
@@ -5259,11 +6983,11 @@ Player_SetStartGameState:                   ; [$9570]
 ;     PlayerTitle:
 ;         The player's title.
 ;
-;     #$f747:
+;     PLAYER_TITLE_EXP_NEEDED:
 ;         Lookup table for the experience, based on title
 ;         index.
 ;
-;     #$f765:
+;     PLAYER_TITLE_GOLD:
 ;         Lookup table for the gold, based on title index.
 ;
 ; OUTPUTS:
@@ -5290,12 +7014,14 @@ Player_SetInitialExpAndGold:                ; [$95b1]
     STA a:NextPlayerTitle                   ; Set it as the next.
     BEQ @_isNovice                          ; If it's 0 (Novice), jump.
 
+
     ;
     ; Generate an offset into the gold and experience arrays.
     ;
     ASL A                                   ; Multiply by 2 to generate an
                                             ; offset into the lookup tables.
     TAX                                     ; X = A
+
 
     ;
     ; Set the player's experience.
@@ -5316,6 +7042,7 @@ Player_SetInitialExpAndGold:                ; [$95b1]
     STA a:Experience_U                      ; Set it as the player's
                                             ; experience.
 
+
     ;
     ; Set the player's gold.
     ;
@@ -5328,6 +7055,7 @@ Player_SetInitialExpAndGold:                ; [$95b1]
     LDA #$00                                ; Set the upper byte to 0.
     STA a:Gold_U
     RTS
+
 
     ;
     ; The player is Novice. Set experience and gold to 0.
@@ -5344,10 +7072,21 @@ Player_SetInitialExpAndGold:                ; [$95b1]
 ;============================================================================
 ; Load from the calculated password state.
 ;
+; This will decode all the state stored by the password into
+; memory, performing validation to ensure that there's no
+; corruption.
+;
+; If the state is invalid, C will be set to 1, triggering
+; a Bad Password failure message.
+;
 ; INPUTS:
 ;     None
 ;
 ; OUTPUTS:
+;     C:
+;         0 = Successfully loaded password state.
+;         1 = Error with password state.
+;
 ;     NumberOfArmors:
 ;     NumberOfItems:
 ;     NumberOfMagicSpells:
@@ -5370,165 +7109,365 @@ Player_SetInitialExpAndGold:                ; [$95b1]
 ;     Maybe_Temp4:
 ;         Clobbered.
 ;
+; CALLS:
+;     Password_DecodeValue
+;     Password_DecodeValueList
+;     Password_DecodeValueOrUnset
+;
 ; XREFS:
-;     PasswordScreen_Show
+;     PasswordScreen_WaitForInput
 ;============================================================================
 Password_Load:                              ; [$95e9]
+    ;
+    ; Clear the state counters.
+    ;
     LDX #$00
-    STX a:Password_ByteCounter
-    STX a:Password_BitCounter
-    LDY #$0d
-    JSR Password_DecodeValue
-    LDY #$03
-    JSR Password_DecodeValue
-    STA a:TempleSpawnPoint
-    LDY #$04
-    JSR Password_DecodeValue
-    STA a:PlayerTitle
-    LDY #$08
-    JSR Password_DecodeValue
-    STA a:SpecialItems
-    LDY #$08
-    JSR Password_DecodeValue
-    STA a:Quests
-    LDY #$02
-    JSR Password_DecodeValueOrUnset
-    STA a:SelectedWeapon
-    LDY #$02
-    JSR Password_DecodeValueOrUnset
-    STA a:SelectedArmor
-    LDY #$02
-    JSR Password_DecodeValueOrUnset
-    STA a:SelectedShield
-    LDY #$03
-    JSR Password_DecodeValueOrUnset
-    STA a:SelectedMagic
-    LDY #$05
-    JSR Password_DecodeValueOrUnset
-    STA a:SelectedItem
-    LDA #$9d
-    STA Temp_Int24.U
-    LDA #$03
-    STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    JSR Password_DecodeValueList
-    CMP #$05
-    BCS @_returnTrue
-    STA a:NumberOfWeapons
-    LDA #$a1
-    STA Temp_Int24.U
-    LDA #$03
-    STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    JSR Password_DecodeValueList
-    CMP #$05
-    BCS @_returnTrue
-    STA a:NumberOfArmors
-    LDA #$a5
-    STA Temp_Int24.U
-    LDA #$03
-    STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    JSR Password_DecodeValueList
-    CMP #$05
-    BCS @_returnTrue
-    STA a:NumberOfShields
-    LDA #$a9
-    STA Temp_Int24.U
-    LDA #$03
-    STA Maybe_Temp4
-    LDY #$03
-    LDX #$03
-    JSR Password_DecodeValueList
-    CMP #$05
-    BCS @_returnTrue
-    STA a:NumberOfMagicSpells
-    LDA #$ad
-    STA Temp_Int24.U
-    LDA #$03
-    STA Maybe_Temp4
-    LDY #$04
-    LDX #$05
-    JSR Password_DecodeValueList
-    CMP #$09
-    BCS @_returnTrue
-    STA a:NumberOfItems
-    CLC
-    RTS
+    STX a:Password_ByteCounter              ; Clear the byte counter.
+    STX a:Password_BitCounter               ; Clear the bit counter.
 
+
+    ;
+    ; Decode the start and checksum values (13 bits total) and throw
+    ; them away.
+    ;
+    LDY #$0d                                ; Y = 13 bits
+    JSR Password_DecodeValue                ; Decode the checksum.
+
+
+    ;
+    ; Decode the temple spawn point (3 bits).
+    ;
+    LDY #$03                                ; Y = 3 bits
+    JSR Password_DecodeValue                ; Decode the spawn point.
+    STA a:TempleSpawnPoint                  ; And store it.
+
+
+    ;
+    ; Decode the player title (4 bits).
+    ;
+    LDY #$04                                ; Y = 4 bits
+    JSR Password_DecodeValue                ; Decode the player title.
+    STA a:PlayerTitle                       ; And store it.
+
+
+    ;
+    ; Decode the special items bitmask (8 bits).
+    ;
+    LDY #$08                                ; Y = 8 bits
+    JSR Password_DecodeValue                ; Decode the special items
+                                            ; bitmask.
+    STA a:SpecialItems                      ; And store it.
+
+
+    ;
+    ; Decode the quests bitmask (8 bits).
+    ;
+    LDY #$08                                ; Y = 8 bits
+    JSR Password_DecodeValue                ; Decode the quests bitmask.
+    STA a:Quests                            ; And store it.
+
+
+    ;
+    ; Decode the selected weapon (2 bits).
+    ;
+    LDY #$02                                ; Y = 2 bits
+    JSR Password_DecodeValueOrUnset         ; Decode the selected weapon.
+    STA a:SelectedWeapon                    ; And store it.
+
+
+    ;
+    ; Decode the selected armor (2 bits).
+    ;
+    LDY #$02                                ; Y = 2 bits
+    JSR Password_DecodeValueOrUnset         ; Decode the selected armor.
+    STA a:SelectedArmor                     ; And store it.
+
+
+    ;
+    ; Decode the selected shield (2 bits).
+    ;
+    LDY #$02                                ; Y = 2 bits
+    JSR Password_DecodeValueOrUnset         ; Decode the selected shield.
+    STA a:SelectedShield                    ; And store it.
+
+
+    ;
+    ; Decode the selected magic spell (3 bits).
+    ;
+    LDY #$03                                ; Y = 3 bits
+    JSR Password_DecodeValueOrUnset         ; Decode the selected magic
+                                            ; spell.
+    STA a:SelectedMagic                     ; And store it.
+
+
+    ;
+    ; Decode the selected item (5 bits).
+    ;
+    LDY #$05                                ; Y = 5 bits
+    JSR Password_DecodeValueOrUnset         ; Decode the selected item.
+    STA a:SelectedItem                      ; And store it.
+
+
+    ;
+    ; Decode the weapon inventory into WeaponInventory.
+    ;
+    LDA #$9d                                ; 0x9D == Lower byte of
+                                            ; inventory.
+    STA Temp_Int24.U                        ; Store it.
+    LDA #$03                                ; 0x03 == Upper byte of
+                                            ; inventory.
+    STA Maybe_Temp4                         ; Store it.
+    LDY #$03                                ; Y = 3 bits for items.
+    LDX #$02                                ; X = 2 bits for max count.
+    JSR Password_DecodeValueList            ; Decode the weapon inventory.
+
+
+    ;
+    ; Check if under the allowed number of weapons. If too many,
+    ; bail with error.
+    ;
+    CMP #$05                                ; Has this exceeded the inventory
+                                            ; size?
+    BCS @_returnTrue                        ; If so, return with failure.
+    STA a:NumberOfWeapons                   ; Else, store the weapon count.
+
+
+    ;
+    ; Decode the armor inventory into ArmorInventory.
+    ;
+    LDA #$a1                                ; 0xA1 == Lower byte of
+                                            ; inventory.
+    STA Temp_Int24.U                        ; Store it.
+    LDA #$03                                ; 0x03 == Upper byte of
+                                            ; inventory.
+    STA Maybe_Temp4                         ; Store it.
+    LDY #$03                                ; Y = 3 bits for items.
+    LDX #$02                                ; X = 2 bits for max count.
+    JSR Password_DecodeValueList            ; Decode the armor inventory.
+
+
+    ;
+    ; Check if under the allowed number of armors. If too many,
+    ; bail with error.
+    ;
+    CMP #$05                                ; Has this exceeded the inventory
+                                            ; size?
+    BCS @_returnTrue                        ; If so, return with failure.
+    STA a:NumberOfArmors                    ; Else, store the armor count.
+
+
+    ;
+    ; Decode the shield inventory into ShieldInventory.
+    ;
+    LDA #$a5                                ; 0xA5 == Lower byte of
+                                            ; inventory.
+    STA Temp_Int24.U                        ; Store it.
+    LDA #$03                                ; 0x03 == Upper byte of
+                                            ; inventory.
+    STA Maybe_Temp4                         ; Store it.
+    LDY #$03                                ; Y = 3 bits for items.
+    LDX #$02                                ; X = 2 bits for max count.
+    JSR Password_DecodeValueList            ; Decode the shield inventory.
+
+
+    ;
+    ; Check if under the allowed number of shields. If too many,
+    ; bail with error.
+    ;
+    CMP #$05                                ; Has this exceeded the inventory
+                                            ; size?
+    BCS @_returnTrue                        ; If so, return with failure.
+    STA a:NumberOfShields                   ; Else, store the shield count.
+
+
+    ;
+    ; Decode the magic inventory into MagicInventory.
+    ;
+    LDA #$a9                                ; 0xA9 == Lower byte of
+                                            ; inventory.
+    STA Temp_Int24.U                        ; Store it.
+    LDA #$03                                ; 0x03 == Upper byte of
+                                            ; inventory.
+    STA Maybe_Temp4                         ; Store it.
+    LDY #$03                                ; Y = 3 bits for items.
+    LDX #$03                                ; X = 3 bits for max count.
+    JSR Password_DecodeValueList            ; Decode the magic inventory.
+
+
+    ;
+    ; Check if under the allowed number of magic spells. If too
+    ; many, bail with error.
+    ;
+    CMP #$05                                ; Has this exceeded the inventory
+                                            ; size?
+    BCS @_returnTrue                        ; If so, return with failure.
+    STA a:NumberOfMagicSpells               ; Else, store the magic count.
+
+
+    ;
+    ; Decode the items inventory into ItemInventory.
+    ;
+    LDA #$ad                                ; 0xAD == Lower byte of
+                                            ; inventory.
+    STA Temp_Int24.U                        ; Store it.
+    LDA #$03                                ; 0x03 == Upper byte of
+                                            ; inventory.
+    STA Maybe_Temp4                         ; Store it.
+    LDY #$04                                ; Y = 4 bits for items.
+    LDX #$05                                ; X = 5 bits for max count.
+    JSR Password_DecodeValueList            ; Decode the item inventory.
+
+
+    ;
+    ; Check if under the allowed number of items. If too many,
+    ; bail with error.
+    ;
+    CMP #$09                                ; Has this exceeded the inventory
+                                            ; size?
+    BCS @_returnTrue                        ; If so, return with failure.
+    STA a:NumberOfItems                     ; Else, store the item count.
+    CLC                                     ; Set C = 0 for success.
+    RTS                                     ; And return it.
+
+
+    ;
+    ; The state was corrupted or invalid. Return a fail result.
+    ;
   @_returnTrue:                             ; [$96ae]
-    SEC
-    RTS
+    SEC                                     ; Set C = 0 for failure.
+    RTS                                     ; And return it.
 
 
 ;============================================================================
-; TODO: Document Password_DecodeValueOrUnset
+; Decode an optional value that may be unset.
+;
+; This will decode a 1 bit flag indicating if a value is
+; set.
+;
+; If the flag is 1, a value is set, and will be decoded and
+; returned.
+;
+; If the flag is 0, an unset value (0xFF) will be returned.
 ;
 ; INPUTS:
-;     Y
+;     Y:
+;         The storage size of the value in bits.
 ;
 ; OUTPUTS:
-;     A
+;     A:
+;         The decoded value, or 0xFF if unset.
+;
+; CALLS:
+;     Password_DecodeValue
 ;
 ; XREFS:
 ;     Password_Load
 ;============================================================================
 Password_DecodeValueOrUnset:                ; [$96b0]
-    TYA
-    PHA
-    LDY #$01
-    JSR Password_DecodeValue
-    LSR A
-    PLA
-    TAY
-    BCC @_returnUnset
-    JMP Password_DecodeValue
+    TYA                                     ; A = Y (number of bits)
+    PHA                                     ; Push it to the stack.
+    LDY #$01                                ; Y = 1
+    JSR Password_DecodeValue                ; Decode the set/unset flag.
+    LSR A                                   ; Shift into Carry.
+    PLA                                     ; Pop our saved Y (number of
+                                            ; bits).
+    TAY                                     ; Set back into Y.
+    BCC @_returnUnset                       ; If the flag was 0, jump to
+                                            ; return unset.
 
+
+    ;
+    ; The value is set. Decode it.
+    ;
+    JMP Password_DecodeValue                ; Decode the value and return it.
+
+
+    ;
+    ; The value was not set. Return 0xFF.
+    ;
   @_returnUnset:                            ; [$96bf]
-    LDA #$ff
-    RTS
+    LDA #$ff                                ; A = 0xFF (unset value).
+    RTS                                     ; And return it.
 
 
 ;============================================================================
-; TODO: Document Password_DecodeValueList
+; Decode a list of values from a password.
 ;
 ; INPUTS:
-;     X
-;     Y
+;     X:
+;         The number of bits used to store an item.
+;
+;     Y:
+;         The number of bits used to store the list length.
 ;
 ; OUTPUTS:
-;     A
+;     A:
+;         The number of items read.
+;
+;     #$ee:
+;         The decoded items.
+;
+;     Password_TempA:
+;     Password_TempX:
+;         Clobbered.
+;
+; CALLS:
+;     Password_DecodeValue
 ;
 ; XREFS:
 ;     Password_Load
 ;============================================================================
 Password_DecodeValueList:                   ; [$96c2]
-    STX a:Password_Temp2
-    JSR Password_DecodeValue
-    STA a:Password_Temp3
-    BEQ @_return
-    LDY #$00
+    STX a:Password_TempX                    ; Store X temporarily.
 
-  @LAB_PRG12__96cf:                         ; [$96cf]
-    TYA
-    PHA
-    LDY a:Password_Temp2
-    JSR Password_DecodeValue
-    TAX
-    PLA
-    TAY
-    TXA
-    STA (#$ee),Y
-    INY
-    CPY a:Password_Temp3
-    BNE @LAB_PRG12__96cf
-    TYA
+
+    ;
+    ; Decode the length count.
+    ;
+    JSR Password_DecodeValue                ; Decode the next value.
+    STA a:Password_TempA                    ; Store the result temporarily.
+    BEQ @_return                            ; If it's 0 (no items), return 0.
+
+
+    ;
+    ; The list has at least 1 item. Iterate through the items.
+    ;
+    LDY #$00                                ; Y = 0 (loop counter).
+
+  @_loop:                                   ; [$96cf]
+    TYA                                     ; A = Y
+    PHA                                     ; Push the loop counter to the
+                                            ; stack.
+
+
+    ;
+    ; Read an item from the list.
+    ;
+    LDY a:Password_TempX                    ; Y = number of item bits to
+                                            ; read.
+    JSR Password_DecodeValue                ; Decode the item value.
+    TAX                                     ; X = resulting item value
+    PLA                                     ; Pop the loop counter.
+    TAY                                     ; Y = loop counter
+
+
+    ;
+    ; Store the resulting item in our buffer.
+    ;
+    TXA                                     ; A = item value
+    STA (#$ee),Y                            ; Store in our decode buffer.
+    INY                                     ; Y++
+    CPY a:Password_TempA                    ; Have we read all the items?
+    BNE @_loop                              ; If not, loop.
+
+
+    ;
+    ; We're done! Return the number of items.
+    ;
+    TYA                                     ; A = Y (loop counter, result)
 
   @_return:                                 ; [$96e4]
-    RTS
+    RTS                                     ; And return it.
 
 
 ;============================================================================
@@ -5558,36 +7497,50 @@ Password_DecodeValueList:                   ; [$96c2]
 Password_GenerateStateAndReset:             ; [$96e5]
     JSR Password_GenerateState              ; Generate the password state.
 
+
     ;
     ; Reset the state.
     ;
     LDX #$00
-    STX a:Password_ByteCounter
-    STX a:Password_BitCounter
+    STX a:Password_ByteCounter              ; Reset byte counter to 0.
+    STX a:Password_BitCounter               ; Reset bit counter to 0.
     RTS
 
 
 ;============================================================================
-; TODO: Document Password_GetNext6Bits
+; Return the next 6 bits from the encoded password state.
 ;
 ; INPUTS:
-;     None.
+;     Password_6BitCount:
+;         The number of 6 bit values remaining.
 ;
 ; OUTPUTS:
-;     A
+;     A:
+;         The decoded value.
+;
+;     C:
+;         0 = Data remaining to read.
+;         1 = Data has been read.
+;
+;     Password_6BitCount:
+;         The decremented number of 6 bit values remaining.
+;
+; CALLS:
+;     Password_DecodeValue
 ;
 ; XREFS:
 ;     PasswordScreen_ShowNextChar
 ;============================================================================
 Password_GetNext6Bits:                      ; [$96f1]
     LDY #$06
-    JSR Password_DecodeValue
+    JSR Password_DecodeValue                ; Decode the next 6 bits.
     CLC
-    DEC a:Password_6BitCount
-    BNE @LAB_PRG12__96fd
-    SEC
+    DEC a:Password_6BitCount                ; Decrement the 6 bit counter.
+    BNE @_return                            ; If > 0, set C=0 and jump to
+                                            ; return.
+    SEC                                     ; Set C=1.
 
-  @LAB_PRG12__96fd:                         ; [$96fd]
+  @_return:                                 ; [$96fd]
     RTS
 
 
@@ -5639,29 +7592,35 @@ Password_GenerateState:                     ; [$96fe]
     ; Reset all the encoding state.
     ;
     LDX #$00
-    STX a:Password_ByteCounter
-    STX a:Password_BitCounter
-    STX a:Password_Checksum
-    LDY #$08
+    STX a:Password_ByteCounter              ; Reset byte counter to 0.
+    STX a:Password_BitCounter               ; Reset bit counter to 0.
+    STX a:Password_Checksum                 ; Reset checksum to 0.
+
 
     ;
     ; Place 0x00 in the first byte.
     ;
-    LDA #$00
-    JSR Password_EncodeValue
-    LDY #$05
+    LDY #$08                                ; Y = 8 (value storage size in
+                                            ; bits)
+    LDA #$00                                ; A = 0 (value)
+    JSR Password_EncodeValue                ; Encode it.
+
 
     ;
     ; Place 0x00 in the first 5 bits of the second byte.
     ;
-    LDA #$00
-    JSR Password_EncodeValue
+    LDY #$05                                ; Y = 5 (value storage size in
+                                            ; bits)
+    LDA #$00                                ; A = 0 (value)
+    JSR Password_EncodeValue                ; Encode it.
+
 
     ;
     ; Save all the game state into the remaining bits and
     ; progress the checksum.
     ;
-    JSR Password_EncodeGameState
+    JSR Password_EncodeGameState            ; Encode the game state.
+
 
     ;
     ; Begin resetting state again for another run, but now using
@@ -5683,6 +7642,7 @@ Password_GenerateState:                     ; [$96fe]
                                             ; within the final byte - the
                                             ; carry.
 
+
     ;
     ; Begin our 6-bit count loop.
     ;
@@ -5699,213 +7659,414 @@ Password_GenerateState:                     ; [$96fe]
     BEQ @_resetLoop                         ; If 0, break out of the loop.
     BCS @_6BitCountLoop                     ; Else, loop.
 
+
+    ;
+    ; Store the final expected 6 bit counter for the password state.
+    ;
   @_resetLoop:                              ; [$972d]
     STX a:Password_6BitCount                ; X = 6-bit counter
+
 
     ;
     ; Reset for a new password generation using the counter.
     ;
     LDX #$00
-    STX a:Password_ByteCounter
-    STX a:Password_BitCounter
-    STX a:Password_Checksum
-    LDY #$08
+    STX a:Password_ByteCounter              ; Reset byte counter to 0.
+    STX a:Password_BitCounter               ; Reset bit counter to 0.
+    STX a:Password_Checksum                 ; Reset checksum to 0.
+
 
     ;
     ; Encode the blank checksum.
     ;
-    LDA #$00
-    JSR Password_EncodeValue
+    LDY #$08                                ; Y = 8 (value storage size in
+                                            ; bits)
+    LDA #$00                                ; A = 0 (checksum value)
+    JSR Password_EncodeValue                ; Encode the checksum value.
+
 
     ;
     ; Encode the 6-bit counter.
     ;
-    LDY #$05
-    LDA a:Password_6BitCount
-    JSR Password_EncodeValue
+    LDY #$05                                ; Y = 5 (value storage size in
+                                            ; bits)
+    LDA a:Password_6BitCount                ; A = 6 bit count value
+    JSR Password_EncodeValue                ; Encode the value.
+
 
     ;
     ; Encode the game state again.
     ;
-    JSR Password_EncodeGameState
-    JMP @LAB_PRG12__9757
+    JSR Password_EncodeGameState            ; Encode the game state.
+    JMP @_fillPaddedBits
+
 
     ;
     ; Encode a padding bits for any remaining bits.
     ;
-  @_fillPaddedBits:                         ; [$9750]
-    LDY #$01                                ; Y = 1
-    LDA #$00                                ; A = 0
+  @_fillPaddedBitsLoop:                     ; [$9750]
+    LDY #$01                                ; Y = 1 (value storage size in
+                                            ; bits)
+    LDA #$00                                ; A = 0 (value)
     JSR Password_EncodeValue                ; Encode the padding.
 
-  @LAB_PRG12__9757:                         ; [$9757]
+  @_fillPaddedBits:                         ; [$9757]
     LDA a:Password_BitCounter               ; A = current bit offset
-    BNE @_fillPaddedBits                    ; If not 0, add our padding bit.
+    BNE @_fillPaddedBitsLoop                ; If not 0, add our padding bit.
+
 
     ;
     ; Set the last byte to 0.
     ;
-    LDX a:Password_ByteCounter
-    LDA #$00
-    STA Password_EncodedState,X
+    LDX a:Password_ByteCounter              ; X = byte counter
+    LDA #$00                                ; A = 0
+    STA Password_EncodedState,X             ; Store as the final byte value.
+
 
     ;
     ; Set the checksum.
     ;
     SEC
-    SBC a:Password_Checksum
-    STA a:Password_EncodedState
+    SBC a:Password_Checksum                 ; Negate the checksum.
+    STA a:Password_EncodedState             ; Store as the first byte of the
+                                            ; encoded state.
     RTS
 
 
 ;============================================================================
-; TODO: Document Password_EncodeGameState
+; Encode game state for the new password.
 ;
 ; INPUTS:
-;     X
+;     NumberOfArmors:
+;         The number of armor items to encode.
+;
+;     NumberOfItems:
+;         The number of items to encode.
+;
+;     NumberOfMagicSpells:
+;         The number of magic spells to encode.
+;
+;     NumberOfShields:
+;         The number of shields to encode.
+;
+;     NumberOfWeapons:
+;         The number of weapons to encode.
+;
+;     PlayerTitle:
+;         The player title to encode.
+;
+;     Quests:
+;         The quests to encode.
+;
+;     SelectedArmor:
+;         The selected armor to encode.
+;
+;     SelectedItem:
+;         The selected item to encode.
+;
+;     SelectedMagic:
+;         The selected magic to encode.
+;
+;     SelectedShield:
+;         The selected shield to encode.
+;
+;     SelectedWeapon:
+;         The selected weapon to encode.
+;
+;     SpecialItems:
+;         The special items to encode.
+;
+;     TempleSpawnPoint:
+;         The temple spawn point to encode.
+;
+;     ArmorInventory:
+;         The armor inventory items to encode.
+;
+;     ItemInventory:
+;         The consumable inventory items to encode.
+;
+;     MagicInventory:
+;         The magic inventory items to encode.
+;
+;     ShieldInventory:
+;         The shield inventory items to encode.
+;
+;     WeaponInventory:
+;         The weapon inventory items to encode.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Password_EncodeValue
+;     Password_EncodeValueList
+;     Password_EncodeValueOrUnset
 ;
 ; XREFS:
 ;     Password_GenerateState
 ;============================================================================
 Password_EncodeGameState:                   ; [$976c]
-    LDA a:TempleSpawnPoint
-    LDY #$03
-    JSR Password_EncodeValue
-    LDA a:PlayerTitle
-    LDY #$04
-    JSR Password_EncodeValue
-    LDA a:SpecialItems
-    LDY #$08
-    JSR Password_EncodeValue
-    LDA a:Quests
-    LDY #$08
-    JSR Password_EncodeValue
-    LDA a:SelectedWeapon
-    LDY #$02
-    JSR Password_EncodeValueOrUnset
-    LDA a:SelectedArmor
-    LDY #$02
-    JSR Password_EncodeValueOrUnset
-    LDA a:SelectedShield
-    LDY #$02
-    JSR Password_EncodeValueOrUnset
-    LDA a:SelectedMagic
-    LDY #$03
-    JSR Password_EncodeValueOrUnset
-    LDA a:SelectedItem
-    LDY #$05
-    JSR Password_EncodeValueOrUnset
+    ;
+    ; Encode the temple spawn point.
+    ;
+    LDA a:TempleSpawnPoint                  ; A = Temple spawn point.
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    JSR Password_EncodeValue                ; Encode the spawn point.
+
 
     ;
-    ; Set the value to write to the address of 0x39d.
+    ; Encode the player's title.
+    ;
+    LDA a:PlayerTitle                       ; A = Player title.
+    LDY #$04                                ; Y = 4 (storage size in bits)
+    JSR Password_EncodeValue                ; Encode the title.
+
+
+    ;
+    ; Encode the player's special items bitmask.
+    ;
+    LDA a:SpecialItems                      ; A = Special items bitmask.
+    LDY #$08                                ; Y = 8 (storage size in bits)
+    JSR Password_EncodeValue                ; Encode the special items
+                                            ; bitmask.
+
+
+    ;
+    ; Encode the completed quests.
+    ;
+    LDA a:Quests                            ; A = Quests bitmask.
+    LDY #$08                                ; Y = 8 (storage size in bits)
+    JSR Password_EncodeValue                ; Encode the quests bitmask.
+
+
+    ;
+    ; Encode the selected weapon.
+    ;
+    LDA a:SelectedWeapon                    ; A = Selected weapon.
+    LDY #$02                                ; Y = 2 (storage size in bits)
+    JSR Password_EncodeValueOrUnset         ; Encode the selected weapon.
+
+
+    ;
+    ; Encode the selected armor.
+    ;
+    LDA a:SelectedArmor                     ; A = Selected armor.
+    LDY #$02                                ; Y = 2 (storage size in bits)
+    JSR Password_EncodeValueOrUnset         ; Encode the selected armor.
+
+
+    ;
+    ; Encode the selected shield.
+    ;
+    LDA a:SelectedShield                    ; A = Selected shield.
+    LDY #$02                                ; Y = 2 (storage size in bits)
+    JSR Password_EncodeValueOrUnset         ; Encode the selected shield.
+
+
+    ;
+    ; Encode the selected magic spell.
+    ;
+    LDA a:SelectedMagic                     ; A = Selected magic.
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    JSR Password_EncodeValueOrUnset         ; Encode the selected magic.
+
+
+    ;
+    ; Encode the selected item.
+    ;
+    LDA a:SelectedItem                      ; A = Selected item.
+    LDY #$05                                ; Y = 5 (storage size in bits)
+    JSR Password_EncodeValueOrUnset         ; Encode the selected item.
+
+
+    ;
+    ; Set the value to write to the address of 0x39d
+    ;
+    ; This hard-codes $039D.
     ;
     LDA #$9d
     STA Temp_Int24.U
     LDA #$03
     STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    LDA a:NumberOfWeapons
-    JSR Password_EncodeValueList
+
+
+    ;
+    ; Encode the weapon inventory.
+    ;
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    LDX #$02                                ; X = 2 (start offset)
+    LDA a:NumberOfWeapons                   ; A = Number of weapons.
+    JSR Password_EncodeValueList            ; Encode the weapon inventory.
+
 
     ;
     ; Set the value to write to the address of 0x3a1.
+    ;
+    ; This hard-codes $03A1.
     ;
     LDA #$a1
     STA Temp_Int24.U
     LDA #$03
     STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    LDA a:NumberOfArmors
-    JSR Password_EncodeValueList
+
+
+    ;
+    ; Encode the armor inventory.
+    ;
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    LDX #$02                                ; X = 2 (start offset)
+    LDA a:NumberOfArmors                    ; A = Number of armors.
+    JSR Password_EncodeValueList            ; Encode the armor inventory.
+
 
     ;
     ; Set the value to write to the address of 0x3a5.
+    ;
+    ; This hard-codes $03A5.
     ;
     LDA #$a5
     STA Temp_Int24.U
     LDA #$03
     STA Maybe_Temp4
-    LDY #$03
-    LDX #$02
-    LDA a:NumberOfShields
-    JSR Password_EncodeValueList
+
+
+    ;
+    ; Encode the shield inventory.
+    ;
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    LDX #$02                                ; X = 2 (start offset)
+    LDA a:NumberOfShields                   ; A = Number of shields.
+    JSR Password_EncodeValueList            ; Encode the shield inventory.
+
 
     ;
     ; Set the value to write to the address of 0x3a9.
+    ;
+    ; This hard-codes $03A9.
     ;
     LDA #$a9
     STA Temp_Int24.U
     LDA #$03
     STA Maybe_Temp4
-    LDY #$03
-    LDX #$03
-    LDA a:NumberOfMagicSpells
-    JSR Password_EncodeValueList
+
+
+    ;
+    ; Encode the magic inventory.
+    ;
+    LDY #$03                                ; Y = 3 (storage size in bits)
+    LDX #$03                                ; X = 3 (start offset)
+    LDA a:NumberOfMagicSpells               ; A = Number of magic spells.
+    JSR Password_EncodeValueList            ; Encode the magic inventory.
+
 
     ;
     ; Set the value to write to the address of 0x3ad.
+    ;
+    ; This hard-codes $03AD.
     ;
     LDA #$ad
     STA Temp_Int24.U
     LDA #$03
     STA Maybe_Temp4
-    LDY #$04
-    LDX #$05
-    LDA a:NumberOfItems
-    JSR Password_EncodeValueList
+
+
+    ;
+    ; Encode the item inventory.
+    ;
+    LDY #$04                                ; Y = 4 (storage size in bits)
+    LDX #$05                                ; X = 5 (start offset)
+    LDA a:NumberOfItems                     ; A = Number of items.
+    JSR Password_EncodeValueList            ; Encode the item inventory.
     RTS
 
 
 ;============================================================================
-; TODO: Document Password_EncodeValueOrUnset
+; Encode a Set/Unset state and a value if set.
+;
+; If the value is 0xFF, this will encode just 1 bit, an Unset
+; value (0).
+;
+; Otherwise, this will encode a Set bit (1) and the value.
 ;
 ; INPUTS:
-;     A
-;     X
-;     Y
+;     A:
+;         The value to encode (or 0xFF).
+;
+;     X:
+;         The start offset.
+;
+;     Y:
+;         The storage size of the value in bits.
 ;
 ; OUTPUTS:
-;     X
+;     X:
+;         The new offset.
+;
+; CALLS:
+;     Password_EncodeValue
 ;
 ; XREFS:
 ;     Password_EncodeGameState
 ;============================================================================
 Password_EncodeValueOrUnset:                ; [$980f]
-    CMP #$ff
-    BEQ @LAB_PRG12__9823
-    PHA
-    TYA
-    PHA
-    LDY #$01
-    LDA #$01
-    JSR Password_EncodeValue
-    PLA
-    TAY
-    PLA
-    JMP Password_EncodeValue
+    CMP #$ff                                ; Is the value to encode 0xFF?
+    BEQ @_isUnset                           ; If so, then jump.
 
-  @LAB_PRG12__9823:                         ; [$9823]
-    LDY #$01
-    LDA #$00
-    JMP Password_EncodeValue
+
+    ;
+    ; The value is set. First, push our value and storage size
+    ; to the stack.
+    ;
+    PHA                                     ; Push the value to the stack.
+    TYA                                     ; A = Y (storage size in bits)
+    PHA                                     ; Push the value to the stack.
+
+
+    ;
+    ; Encode the Set flag.
+    ;
+    LDY #$01                                ; Y = 1 (storage size in bits)
+    LDA #$01                                ; A = 1 (set)
+    JSR Password_EncodeValue                ; Encode the value.
+
+
+    ;
+    ; Encode the value.
+    ;
+    PLA                                     ; Pop the storage size in bits.
+    TAY                                     ; Y = result
+    PLA                                     ; Pop the value.
+    JMP Password_EncodeValue                ; Encode the value.
+
+
+    ;
+    ; The value is unset. Encode only the unset state.
+    ;
+  @_isUnset:                                ; [$9823]
+    LDY #$01                                ; Y = 1 (storage size in bits)
+    LDA #$00                                ; A = 0 (unset)
+    JMP Password_EncodeValue                ; Encode the value.
 
 
 ;============================================================================
-; TODO: Document Password_EncodeValueList
+; Encode a list of values for state in the password.
 ;
 ; INPUTS:
-;     A
-;     X
-;     Y
-;     Z
+;     A:
+;         The number of values to encode.
+;
+;     Y:
+;         The number of bits of storage used to encode
+;         the state.
 ;
 ; OUTPUTS:
-;     X
+;     Password_TempA:
+;     Password_TempX:
+;     Password_TempY:
+;         Clobbered.
+;
+; CALLS:
+;     Password_EncodeValue
 ;
 ; XREFS:
 ;     Password_EncodeGameState
@@ -5914,15 +8075,17 @@ Password_EncodeValueList:                   ; [$982a]
     BEQ @_encodeValue                       ; If empty, just encode the value
                                             ; directly.
 
+
     ;
     ; Store A, X, and Y so we can work with these variables.
     ;
-    STA a:Password_Temp3                    ; Password_Temp3
+    STA a:Password_TempA                    ; Password_TempA
                                             ; = A
-    STY a:Password_Temp1                    ; Password_Temp1
+    STY a:Password_TempY                    ; Password_TempY
                                             ; = Y
-    STX a:Password_Temp2                    ; Password_Temp2
+    STX a:Password_TempX                    ; Password_TempX
                                             ; = X
+
 
     ;
     ; Encode the number of entries as a value. Roughly:
@@ -5931,11 +8094,12 @@ Password_EncodeValueList:                   ; [$982a]
     ;
     JSR Password_EncodeValue                ; Encode that value.
 
+
     ;
     ; Prepare for the loop.
     ;
     ; Y is our counter.
-    ; Password_Temp3 is our upper bounds.
+    ; Password_TempA is our upper bounds.
     ;
     LDY #$00                                ; Y = 0 (loop counter)
 
@@ -5943,16 +8107,18 @@ Password_EncodeValueList:                   ; [$982a]
     TYA                                     ; A = Y
     PHA                                     ; Push A to stack
 
+
     ;
     ; Encode a value from the list. Roughly:
     ;
     ; Password_EncodeValue(entryList[Y], X, numBits)
     ;
     LDA (#$ee),Y                            ; A = value at bits offset
-    LDY a:Password_Temp2                    ; Y =
-                                            ; Password_Temp2
+    LDY a:Password_TempX                    ; Y =
+                                            ; Password_TempX
                                             ; (num bits)
     JSR Password_EncodeValue                ; Encode this value.
+
 
     ;
     ; We're done encoding. See if we've reached the end
@@ -5961,15 +8127,14 @@ Password_EncodeValueList:                   ; [$982a]
     PLA                                     ; Pop A from stack
     TAY                                     ; Y = A
     INY                                     ; Y++
-    CPY a:Password_Temp3                    ; If Y !=
-                                            ; Password_Temp3
+    CPY a:Password_TempA                    ; If Y !=
+                                            ; Password_TempA
                                             ; ...
     BNE @_loop                              ; ... Loop.
     RTS
 
   @_encodeValue:                            ; [$984d]
     JMP Password_EncodeValue
-
 
 ;============================================================================
 ; TODO: Document Password_Maybe_CheckPasswordLength
@@ -5981,7 +8146,7 @@ Password_EncodeValueList:                   ; [$982a]
 ;     C
 ;
 ; XREFS:
-;     PasswordScreen_Show
+;     PasswordScreen_WaitForInput
 ;============================================================================
 Password_Maybe_CheckPasswordLength:         ; [$9850]
     LDX #$00
@@ -6033,7 +8198,6 @@ Password_Maybe_CheckPasswordLength:         ; [$9850]
     SEC
     RTS
 
-
 ;============================================================================
 ; TODO: Document Password_EncodeValue
 ;
@@ -6056,6 +8220,7 @@ Password_EncodeValue:                       ; [$98a7]
                                             ; A (character code value)
     TXA                                     ; A = X (character code offset)
     PHA                                     ; Push A to stack, saving it.
+
 
     ;
     ; Determine the number of bits we'll be using as an
@@ -6080,6 +8245,7 @@ Password_EncodeValue:                       ; [$98a7]
     STA Temp_Int24.M                        ; 0xed = A (our loop counter;
                                             ; remaining bits)
 
+
     ;
     ; Do:
     ;
@@ -6101,12 +8267,14 @@ Password_EncodeValue:                       ; [$98a7]
     DEC Temp_Int24.M                        ; 0xed--
     BNE @_loop1                             ; If 0xed != 0, loop.
 
+
     ;
     ; Encode the character.
     ;
   @_loop2:                                  ; [$98bc]
     LDX a:Password_ByteCounter              ; X = index of the character to
                                             ; encode
+
 
     ;
     ; Advance our source bit position, multipying by 2 and
@@ -6116,6 +8284,7 @@ Password_EncodeValue:                       ; [$98a7]
                                             ; Temp_Int24 *
                                             ; 2 | C If overflow, C = 1
 
+
     ;
     ; Store a new computed value at the dest offset (X, or
     ; Password_ByteCounter). This will be the stored value * 2,
@@ -6123,6 +8292,7 @@ Password_EncodeValue:                       ; [$98a7]
     ;
     ROL Password_EncodedState,X             ; Dest value = Dest value * 2 | C
                                             ; If overflow, C = 1
+
 
     ;
     ; Advance the bit position.
@@ -6136,6 +8306,7 @@ Password_EncodeValue:                       ; [$98a7]
     CPX #$08                                ; If X != 8...
     BNE @_nextLoop                          ; ... Jump
 
+
     ;
     ; We finished processing the byte. We can now update the
     ; checksum, reset the destination byte, and reset the dest
@@ -6143,6 +8314,7 @@ Password_EncodeValue:                       ; [$98a7]
     ;
     LDX a:Password_ByteCounter              ; X = Computed byte index
     LDA Password_EncodedState,X             ; A = Dest value
+
 
     ;
     ; Update the checksum value.
@@ -6155,6 +8327,7 @@ Password_EncodeValue:                       ; [$98a7]
                                             ; C = 1
     STA a:Password_Checksum
 
+
     ;
     ; Increment the destination index and reset the bit counter.
     ;
@@ -6166,13 +8339,13 @@ Password_EncodeValue:                       ; [$98a7]
     DEY                                     ; Y--
     BNE @_loop2                             ; If not 0, loop.
 
+
     ;
     ; Restore the original value for X. This won't be modified.
     ;
     PLA                                     ; Pull A from stack.
     TAX                                     ; X = A. This is our result.
     RTS
-
 
 ;============================================================================
 ; TODO: Document Password_DecodeValue
@@ -6217,32 +8390,51 @@ Password_DecodeValue:                       ; [$98e9]
 
 
 ;============================================================================
-; TODO: Document IScripts_Something_9910
+; Fill a textbox with 4 lines of placeholder text.
+;
+; This will first clear any existing text tiles and then
+; place 4 rows of placeholder text (letters and characters),
+; ensuring the size and coordinates of the finished textbox.
+;
+; The text will not be displayed.
 ;
 ; INPUTS:
-;     X
+;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     TextBox_ClearTextTiles
+;     TextBox_FillPlaceholderTextAtLineWithStartChar
+;     PPU_SetAddrForTextBoxPos
 ;
 ; XREFS:
-;     IScripts_Something_81E8
+;     IScripts_PositionAndFillPlaceholderText
 ;============================================================================
-IScripts_Something_9910:                    ; [$9910]
-    JSR #$f44a
-    JSR #$f804
+IScripts_FillPlaceholderText:               ; [$9910]
+    ;
+    ; Clear the textbox and prepare to write to it.
+    ;
+    JSR #$f44a                              ; Clear the existing text tiles.
+    JSR #$f804                              ; Set the PPU address for the
+                                            ; text position to write to.
+
+
+    ;
+    ; Write 4 lines of arbitrary characters.
+    ;
     LDY #$40
-    JSR #$f5d9
+    JSR #$f5d9                              ; Write "@ABCDEFGHIJKLMNO"
     LDY #$50
-    JSR #$f5d9
+    JSR #$f5d9                              ; Write "PQRSTUVWXYZ[\]^_"
     LDY #$60
-    JSR #$f5d9
+    JSR #$f5d9                              ; Write "`abcdefghijklmno"
     LDY #$70
-    JMP #$f5d9
-
+    JMP #$f5d9                              ; Write "pqrstuvwxyz{|}~."
 
 ;============================================================================
-; TODO: Document IScripts_Something_992A
+; TODO: Document TextBox_CheckShouldContinue
 ;
 ; INPUTS:
 ;     None.
@@ -6253,30 +8445,39 @@ IScripts_Something_9910:                    ; [$9910]
 ; XREFS:
 ;     IScriptAction_ShowUnskippableMessage
 ;============================================================================
-IScripts_Something_992A:                    ; [$992a]
+TextBox_CheckShouldContinue:                ; [$992a]
     LDA a:MessageID
     BNE @LAB_PRG12__9938
-    JSR IScripts_Something_SetXYAndOffset_99be
+
+
+    ;
+    ; There is no message ID set.
+    ;
+    JSR TextBox_DrawUpArrowTerminatorSymbol
     LDA Joy1_ChangedButtonMask
     BPL @LAB_PRG12__9947
     SEC
     RTS
 
   @LAB_PRG12__9938:                         ; [$9938]
-    LDA a:TextBox_MessageEnded
+    LDA a:TextBox_MessagePaused
     BEQ @LAB_PRG12__9947
-    JSR IScripts_Something_SetXYAndOffset_99a1
+
+
+    ;
+    ; An existing message has ended.
+    ;
+    JSR TextBox_DrawDownArrowTerminatorSymbol
     LDA Joy1_ChangedButtonMask
     BPL @LAB_PRG12__9947
-    JSR Shops_Something_9949
+    JSR TextBox_PrepareContinueMessage
 
   @LAB_PRG12__9947:                         ; [$9947]
     CLC
     RTS
 
-
 ;============================================================================
-; TODO: Document Shops_Something_9949
+; TODO: Document TextBox_PrepareContinueMessage
 ;
 ; INPUTS:
 ;     None.
@@ -6285,20 +8486,19 @@ IScripts_Something_992A:                    ; [$992a]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG12__9969
-;     IScripts_Something_992A
-;     IScripts_Something_9980
+;     TextBox_CheckForDismiss
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissQuestion
 ;============================================================================
-Shops_Something_9949:                       ; [$9949]
+TextBox_PrepareContinueMessage:             ; [$9949]
     LDA #$00
-    STA a:TextBox_MessageEnded
+    STA a:TextBox_MessagePaused
     LDA #$04
-    STA a:MaybeUnused_Arg_TextBox_Height
+    STA a:Unused_Arg_Text_NumLines
     JMP #$f539
 
-
 ;============================================================================
-; TODO: Document Shop_Something_9956
+; TODO: Document TextBox_CheckShouldContinueOrDismissMessage
 ;
 ; INPUTS:
 ;     None.
@@ -6310,14 +8510,14 @@ Shops_Something_9949:                       ; [$9949]
 ;     IScriptAction_OpenShop
 ;     IScriptAction_ShowMessage
 ;     IScriptAction_ShowSellMenu
-;     Shop_ShowMessage
+;     IScripts_ShowFinalMessage
 ;============================================================================
-Shop_Something_9956:                        ; [$9956]
+TextBox_CheckShouldContinueOrDismissMessage: ; [$9956]
     LDA a:MessageID
-    BNE FUN_PRG12__9969
-    JSR IScripts_Something_SetXYAndOffset_99be
+    BNE TextBox_CheckForDismiss
+    JSR TextBox_DrawUpArrowTerminatorSymbol
     LDA Joy1_ChangedButtonMask
-    BMI IScripts_Something_ReturnFalse
+    BMI IScripts_ReturnFalse
 
     ;
     ; v-- Fall through --v
@@ -6325,7 +8525,35 @@ Shop_Something_9956:                        ; [$9956]
 
 
 ;============================================================================
-; TODO: Document IScripts_IsBPressed
+; Return whether the B button was pressed.
+;
+; This is used to dismiss textboxes.
+;
+; INPUTS:
+;     Joy1_ChangedButtonMask:
+;         The changed buttons on controller 1.
+;
+; OUTPUTS:
+;     A:
+;         Set to 1.
+;
+;     C:
+;         0 = Not pressed.
+;         1 = Pressed.
+;
+; XREFS:
+;     TextBox_CheckForDismiss
+;     TextBox_CheckShouldContinueOrDismissQuestion
+;============================================================================
+TextBox_IsBPressed:                         ; [$9962]
+    LDA Joy1_ChangedButtonMask              ; Load the changed button mask.
+    ASL A                                   ; Shift B into Carry.
+    ASL A
+    LDA #$01                                ; A = 1
+    RTS                                     ; Return.
+
+;============================================================================
+; TODO: Document TextBox_CheckForDismiss
 ;
 ; INPUTS:
 ;     None.
@@ -6334,43 +8562,21 @@ Shop_Something_9956:                        ; [$9956]
 ;     C
 ;
 ; XREFS:
-;     FUN_PRG12__9969
-;     IScripts_Something_9980
+;     TextBox_CheckShouldContinueOrDismissMessage
 ;============================================================================
-IScripts_IsBPressed:                        ; [$9962]
+TextBox_CheckForDismiss:                    ; [$9969]
+    LDA a:TextBox_MessagePaused
+    BEQ TextBox_IsBPressed
+    JSR TextBox_DrawDownArrowTerminatorSymbol
     LDA Joy1_ChangedButtonMask
-    ASL A
-    ASL A
-    LDA #$01
-    RTS
-
-
-;============================================================================
-; TODO: Document FUN_PRG12__9969
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     C
-;
-; XREFS:
-;     Shop_Something_9956
-;============================================================================
-FUN_PRG12__9969:                            ; [$9969]
-    LDA a:TextBox_MessageEnded
-    BEQ IScripts_IsBPressed
-    JSR IScripts_Something_SetXYAndOffset_99a1
-    LDA Joy1_ChangedButtonMask
-    BPL IScripts_IsBPressed
-    JSR Shops_Something_9949
+    BPL TextBox_IsBPressed
+    JSR TextBox_PrepareContinueMessage
     CLC
     LDA #$01
     RTS
 
-
 ;============================================================================
-; TODO: Document IScripts_Something_ReturnFalse
+; TODO: Document IScripts_ReturnFalse
 ;
 ; INPUTS:
 ;     None.
@@ -6379,17 +8585,16 @@ FUN_PRG12__9969:                            ; [$9969]
 ;     C
 ;
 ; XREFS:
-;     IScripts_Something_9980
-;     Shop_Something_9956
+;     TextBox_CheckShouldContinueOrDismissMessage
+;     TextBox_CheckShouldContinueOrDismissQuestion
 ;============================================================================
-IScripts_Something_ReturnFalse:             ; [$997c]
+IScripts_ReturnFalse:                       ; [$997c]
     CLC
     LDA #$00
     RTS
 
-
 ;============================================================================
-; TODO: Document IScripts_Something_9980
+; TODO: Document TextBox_CheckShouldContinueOrDismissQuestion
 ;
 ; INPUTS:
 ;     None.
@@ -6398,143 +8603,243 @@ IScripts_Something_ReturnFalse:             ; [$997c]
 ;     C
 ;
 ; XREFS:
-;     IScriptAction_22
 ;     IScriptAction_ShowQuestionMessage
+;     IScriptAction_ShowQuestionMessageCheckIfDismissed
 ;============================================================================
-IScripts_Something_9980:                    ; [$9980]
+TextBox_CheckShouldContinueOrDismissQuestion: ; [$9980]
     LDA a:MessageID
     BNE @LAB_PRG12__998e
-    JSR IScripts_Something_99DB
+    JSR TextBox_DrawQuestionMarkTerminatorSymbol
     LDA Joy1_ChangedButtonMask
-    BMI IScripts_Something_ReturnFalse
-    BPL IScripts_IsBPressed
+    BMI IScripts_ReturnFalse
+    BPL TextBox_IsBPressed
 
   @LAB_PRG12__998e:                         ; [$998e]
-    LDA a:TextBox_MessageEnded
-    BEQ IScripts_IsBPressed
-    JSR IScripts_Something_SetXYAndOffset_99a1
+    LDA a:TextBox_MessagePaused
+    BEQ TextBox_IsBPressed
+    JSR TextBox_DrawDownArrowTerminatorSymbol
     LDA Joy1_ChangedButtonMask
-    BPL IScripts_IsBPressed
-    JSR Shops_Something_9949
+    BPL TextBox_IsBPressed
+    JSR TextBox_PrepareContinueMessage
     CLC
     LDA #$01
 
     ;
     ; XREFS:
-    ;     IScripts_Something_99DB
-    ;     IScripts_Something_SetXYAndOffset_99a1
-    ;     IScripts_Something_SetXYAndOffset_99be
+    ;     TextBox_DrawDownArrowTerminatorSymbol
+    ;     TextBox_DrawQuestionMarkTerminatorSymbol
+    ;     TextBox_DrawUpArrowTerminatorSymbol
     ;
 RETURN_99A0:                                ; [$99a0]
     RTS
 
 
 ;============================================================================
-; TODO: Document IScripts_Something_SetXYAndOffset_99a1
+; Draw the down arrow terminator symbol.
+;
+; This will draw the down arrow symbol at the bottom of the
+; textbox.
+;
+; The symbol will appear to flash due to the textbox being
+; redrawn in-between viable interrupt-based updates.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter, used to rate limit
+;         updates.
+;
+;     TextBox_X:
+;         The tile X position of the textbox.
+;
+;     TextBox_Y:
+;         The tile Y position of the textbox.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     UI_DrawPromptInputSymbol
 ;
 ; XREFS:
-;     FUN_PRG12__9969
-;     IScripts_Something_992A
-;     IScripts_Something_9980
+;     TextBox_CheckForDismiss
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissQuestion
 ;============================================================================
-IScripts_Something_SetXYAndOffset_99a1:     ; [$99a1]
-    LDA InterruptCounter
-    AND #$10
-    BEQ RETURN_99A0
-    LDA a:TextBox_X
+TextBox_DrawDownArrowTerminatorSymbol:      ; [$99a1]
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$10                                ; Is bit 5 set?
+    BEQ RETURN_99A0                         ; If not, return (allowing it to
+                                            ; clear).
+
+
+    ;
+    ; Compute an X position for the symbol.
+    ;
+    LDA a:TextBox_X                         ; Load the textbox X coordinate.
+    ASL A                                   ; Convert to a pixel position.
     ASL A
     ASL A
+    ADC #$4c                                ; Add 76.
+    TAX                                     ; X = result.
+
+
+    ;
+    ; Compute a Y position for the symbol.
+    ;
+    LDA a:TextBox_Y                         ; Load the textbox Y coordinate.
+    ASL A                                   ; Convert to a pixel position.
     ASL A
-    ADC #$4c
-    TAX
-    LDA a:TextBox_Y
     ASL A
-    ASL A
-    ASL A
-    ADC #$10
-    TAY
-    LDA #$e5
-    JMP #$fca7
+    ADC #$10                                ; Add 16.
+    TAY                                     ; Y = result.
+
+
+    ;
+    ; Draw the symbol.
+    ;
+    LDA #$e5                                ; A = 0xE5 (animation frame
+                                            ; offset).
+    JMP #$fca7                              ; Draw the symbol.
 
 
 ;============================================================================
-; TODO: Document IScripts_Something_SetXYAndOffset_99be
+; Draw the up arrow terminator symbol.
+;
+; This will draw the up arrow symbol at the bottom-right of
+; the textbox. This is used for the Guru, Add Inventory Item,
+; and other textboxes.
+;
+; The symbol will appear to flash due to the textbox being
+; redrawn in-between viable interrupt-based updates.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter, used to rate limit
+;         updates.
+;
+;     TextBox_X:
+;         The tile X position of the textbox.
+;
+;     TextBox_Y:
+;         The tile Y position of the textbox.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     UI_DrawPromptInputSymbol
 ;
 ; XREFS:
 ;     IScriptAction_AddInventoryItem
 ;     IScriptAction_ShowPassword
-;     IScripts_Something_992A
-;     Shop_Something_9956
+;     TextBox_CheckShouldContinue
+;     TextBox_CheckShouldContinueOrDismissMessage
 ;============================================================================
-IScripts_Something_SetXYAndOffset_99be:     ; [$99be]
-    LDA InterruptCounter
-    AND #$10
-    BEQ RETURN_99A0
-    LDA a:TextBox_X
+TextBox_DrawUpArrowTerminatorSymbol:        ; [$99be]
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$10                                ; Is bit 5 set?
+    BEQ RETURN_99A0                         ; If not, return (allowing it to
+                                            ; clear).
+
+
+    ;
+    ; Compute an X position for the symbol.
+    ;
+    LDA a:TextBox_X                         ; Load the textbox X coordinate.
+    ASL A                                   ; Convert to a pixel position.
     ASL A
     ASL A
+    ADC #$8e                                ; Add 142.
+    TAX                                     ; X = result.
+
+
+    ;
+    ; Compute a Y position for the symbol.
+    ;
+    LDA a:TextBox_Y                         ; Load the textbox Y coordinate.
+    ASL A                                   ; Convert to a pixel position.
     ASL A
-    ADC #$8e
-    TAX
-    LDA a:TextBox_Y
     ASL A
-    ASL A
-    ASL A
-    ADC #$0e
-    TAY
-    LDA #$e6
-    JMP #$fca7
+    ADC #$0e                                ; Add 14.
+    TAY                                     ; Y = result.
+
+
+    ;
+    ; Draw the symbol.
+    ;
+    LDA #$e6                                ; A = 0xE6 (up arrow symbol).
+    JMP #$fca7                              ; Draw the symbol.
 
 
 ;============================================================================
-; TODO: Document IScripts_Something_99DB
+; Draw the question mark terminator symbol.
+;
+; This will draw the question mark symbol at the
+; bottom-right of the textbox. This is used for the Guru,
+; Add Inventory Item, and other textboxes.
+;
+; The symbol will appear to flash due to the textbox being
+; redrawn in-between viable interrupt-based updates.
 ;
 ; INPUTS:
-;     None.
+;     InterruptCounter:
+;         The current interrupt counter, used to rate limit
+;         updates.
+;
+;     TextBox_X:
+;         The tile X position of the textbox.
+;
+;     TextBox_Y:
+;         The tile Y position of the textbox.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     UI_DrawPromptInputSymbol
 ;
 ; XREFS:
-;     IScripts_Something_9980
+;     TextBox_CheckShouldContinueOrDismissQuestion
 ;============================================================================
-IScripts_Something_99DB:                    ; [$99db]
-    LDA InterruptCounter
-    AND #$10
-    BEQ RETURN_99A0
-    LDA a:TextBox_X
-    ASL A
-    ASL A
-    ASL A
-    ADC #$4c
-    TAX
-    LDA a:TextBox_Y
-    ASL A
-    ASL A
-    ASL A
-    ADC #$10
-    TAY
-    LDA #$e7
-    JMP #$fca7
+TextBox_DrawQuestionMarkTerminatorSymbol:   ; [$99db]
+    LDA InterruptCounter                    ; Load the interrupt counter.
+    AND #$10                                ; Is bit 5 set?
+    BEQ RETURN_99A0                         ; If not, return (allowing it to
+                                            ; clear).
 
+
+    ;
+    ; Compute an X position for the symbol.
+    ;
+    LDA a:TextBox_X                         ; Load the textbox X coordinate.
+    ASL A                                   ; Convert to a pixel position.
+    ASL A
+    ASL A
+    ADC #$4c                                ; Add 76.
+    TAX                                     ; X = result.
+
+
+    ;
+    ; Compute a Y position for the symbol.
+    ;
+    LDA a:TextBox_Y                         ; Load the textbox Y coordinate.
+    ASL A                                   ; Convert to a pixel position.
+    ASL A
+    ASL A
+    ADC #$10                                ; Add 16.
+    TAY                                     ; Y = result.
+
+
+    ;
+    ; Draw the symbol.
+    ;
+    LDA #$e7                                ; A = 0xE7 (question mark symbol)
+    JMP #$fca7                              ; Draw the symbol.
 
 ;============================================================================
 ; TODO: Document Shop_Draw
 ;
 ; INPUTS:
-;     X
 ;     Y
 ;
 ; OUTPUTS:
@@ -6553,11 +8858,11 @@ Shop_Draw:                                  ; [$99f8]
     STA a:TextBox_Width
     LDA #$14
     STA a:TextBox_Height
-    JSR TextBox_Maybe_Draw
+    JSR TextBox_Open
     LDA a:TextBox_Y
     CLC
     ADC #$02
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     LDX #$00
     STX a:Menu_CursorPos
 
@@ -6567,11 +8872,11 @@ Shop_Draw:                                  ; [$99f8]
     LDA a:TextBox_X
     CLC
     ADC #$02
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     TXA
     PHA
-    LDA ShopItems,X
-    JSR Maybe_DrawItemName
+    LDA UI_Menu_IDs,X
+    JSR TextBox_DrawItemImage
     PLA
     TAX
     LDA ShopItemCostsU,X
@@ -6581,9 +8886,9 @@ Shop_Draw:                                  ; [$99f8]
     LDA a:TextBox_X
     CLC
     ADC #$05
-    STA TextBox_TextX
-    LDA ShopItems,X
-    JSR Maybe_DrawItemTitle
+    STA TextBox_ContentsX
+    LDA UI_Menu_IDs,X
+    JSR TextBox_DrawItemName
     PLA
     STA Temp_Int24
     PLA
@@ -6593,18 +8898,17 @@ Shop_Draw:                                  ; [$99f8]
     LDA a:TextBox_X
     CLC
     ADC #$0d
-    STA TextBox_TextX
-    INC TextBox_TextY
+    STA TextBox_ContentsX
+    INC TextBox_ContentsY
     LDY #$05
     JSR #$fa26
-    INC TextBox_TextY
+    INC TextBox_ContentsY
     PLA
     TAX
     INX
-    CPX a:Menu_LastPos
+    CPX a:Arg_StringsCount
     BNE @LAB_PRG12__9a1c
     RTS
-
 
 ;============================================================================
 ; TODO: Document Player_RemoveItem
@@ -6623,28 +8927,28 @@ Shop_Draw:                                  ; [$99f8]
 Player_RemoveItem:                          ; [$9a6a]
     LDX #$00
     CMP #$80
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$81
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$82
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$83
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$92
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$8a
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$93
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     INX
     CMP #$94
-    BEQ @LAB_PRG12__9acb
+    BEQ @_isSpecialItem
     STA Temp_Int24.U
     JSR #$f785
     TAX
@@ -6659,31 +8963,31 @@ Player_RemoveItem:                          ; [$9a6a]
     LDA Temp_Int24.U
     AND #$1f
 
-  @LAB_PRG12__9ab0:                         ; [$9ab0]
+  @_inventoryCheckLoop:                     ; [$9ab0]
     CMP (Temp_Int24),Y
-    BEQ @LAB_PRG12__9aba
+    BEQ @_moveInventoryLoop
     INY
     CPY Maybe_Temp4
-    BNE @LAB_PRG12__9ab0
+    BNE @_inventoryCheckLoop
     RTS
 
-  @LAB_PRG12__9aba:                         ; [$9aba]
+  @_moveInventoryLoop:                      ; [$9aba]
     INY
     CPY Maybe_Temp4
-    BEQ @LAB_PRG12__9ac7
+    BEQ @_updateCountAndReturn
     LDA (Temp_Int24),Y
     DEY
     STA (Temp_Int24),Y
     INY
-    BNE @LAB_PRG12__9aba
+    BNE @_moveInventoryLoop
 
-  @LAB_PRG12__9ac7:                         ; [$9ac7]
+  @_updateCountAndReturn:                   ; [$9ac7]
     DEC NumberOfWeapons,X
 
   @_return:                                 ; [$9aca]
     RTS
 
-  @LAB_PRG12__9acb:                         ; [$9acb]
+  @_isSpecialItem:                          ; [$9acb]
     LDA a:SpecialItems
     AND #$9ad5,X
     STA a:SpecialItems
@@ -6778,14 +9082,13 @@ SPECIAL_ITEM_BITMASKS:                      ; [$9ae5]
 
 ;
 ; XREFS:
-;     Player_SetSpecialItem
+;     Player_AddSpecialItem
 ;
 BYTE_PRG12__9aec:                           ; [$9aec]
     db $01                                  ; [$9aec] byte
 
-
 ;============================================================================
-; TODO: Document Player_SetSpecialItem
+; TODO: Document Player_AddSpecialItem
 ;
 ; INPUTS:
 ;     X
@@ -6796,12 +9099,11 @@ BYTE_PRG12__9aec:                           ; [$9aec]
 ; XREFS:
 ;     Player_AddToInventory
 ;============================================================================
-Player_SetSpecialItem:                      ; [$9aed]
+Player_AddSpecialItem:                      ; [$9aed]
     LDA a:SpecialItems
     ORA #$9ae5,X
     STA a:SpecialItems
     RTS
-
 
 ;============================================================================
 ; TODO: Document Player_AddToInventory
@@ -6823,7 +9125,7 @@ Player_AddToInventory:                      ; [$9af7]
   @_checkSpecialItems:                      ; [$9af9]
     CMP #$9add,X                            ; Check if this is a special,
                                             ; non-consumable item
-    BEQ Player_SetSpecialItem               ; If this is a special item...
+    BEQ Player_AddSpecialItem               ; If this is a special item...
     DEX                                     ; Next i
     BPL @_checkSpecialItems
     STA Temp_Int24.U
@@ -6835,17 +9137,18 @@ Player_AddToInventory:                      ; [$9af7]
     LDA #$9b2e,X
     STA Temp_Int24.M
 
+
     ;
     ; Check if the maximum has been reached for the inventory category.
     ;
     LDA NumberOfWeapons,X                   ; Load the number of items in the
                                             ; inventory category
     CMP #$847d,X                            ; Check if the max has been hit
-    BNE @LAB_PRG12__9b1c
+    BNE @_addItem
     DEC NumberOfWeapons,X                   ; The max has been hit. Remove
                                             ; one.
 
-  @LAB_PRG12__9b1c:                         ; [$9b1c]
+  @_addItem:                                ; [$9b1c]
     LDY NumberOfWeapons,X
     LDA Temp_Int24.U
     AND #$1f
@@ -6857,15 +9160,22 @@ Player_AddToInventory:                      ; [$9af7]
 
 ;============================================================================
 ; Lower nibble lookup table for inventory category addresses
+;
+; XREFS:
+;     PlayerMenu_ShowInventoryMenu
+;     Player_AddToInventory
+;     Player_LacksItem
+;     Player_RemoveItem
+;     Shop_GetPlayerHasSelectedItem
 ;============================================================================
 
 ;
 ; XREFS:
+;     PlayerMenu_ShowInventoryMenu
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
-;     Something_ShopCursorInventory
-;     UI_ShowPlayerMenu
+;     Shop_GetPlayerHasSelectedItem
 ;
 INVENTORY_CATEGORY_L:                       ; [$9b29]
     db $9d                                  ; [0]: Weapons
@@ -6883,15 +9193,22 @@ INVENTORY_CATEGORY_L_4_:                    ; [$9b2d]
 
 ;============================================================================
 ; Upper nibble lookup table for inventory category addresses
+;
+; XREFS:
+;     PlayerMenu_ShowInventoryMenu
+;     Player_AddToInventory
+;     Player_LacksItem
+;     Player_RemoveItem
+;     Shop_GetPlayerHasSelectedItem
 ;============================================================================
 
 ;
 ; XREFS:
+;     PlayerMenu_ShowInventoryMenu
 ;     Player_AddToInventory
 ;     Player_LacksItem
 ;     Player_RemoveItem
-;     Something_ShopCursorInventory
-;     UI_ShowPlayerMenu
+;     Shop_GetPlayerHasSelectedItem
 ;
 INVENTORY_CATEGORY_U:                       ; [$9b2e]
     db $03                                  ; [0]: Weapons
@@ -6908,7 +9225,7 @@ INVENTORY_CATEGORY_U_4_:                    ; [$9b32]
 
 ;
 ; XREFS:
-;     Maybe_DrawItemTitle
+;     TextBox_DrawItemName
 ;
 ITEM_NAME_CATEGORIES_L:                     ; [$9b33]
     db $3d                                  ; [0]:
@@ -6919,7 +9236,7 @@ ITEM_NAME_CATEGORIES_L:                     ; [$9b33]
 
 ;
 ; XREFS:
-;     Maybe_DrawItemTitle
+;     TextBox_DrawItemName
 ;
 ITEM_NAME_CATEGORIES_U:                     ; [$9b38]
     db $9b                                  ; [0]:
@@ -7121,7 +9438,6 @@ TEXT_TILES_LICENSED_TO_NINTENDO:            ; [$9df9]
     db $ee                                  ; [19]: O
     db $00                                  ; [20]: \0
 
-
 ;============================================================================
 ; TODO: Document UI_DrawText
 ;
@@ -7138,21 +9454,20 @@ TEXT_TILES_LICENSED_TO_NINTENDO:            ; [$9df9]
 UI_DrawText:                                ; [$9e0e]
     LDY #$00
 
-  @LAB_PRG12__9e10:                         ; [$9e10]
+  @_loop:                                   ; [$9e10]
     LDA (Temp_Int24),Y
     BEQ @_return
     CMP #$20
-    BNE @LAB_PRG12__9e1a
+    BNE @_writePPUData
     LDA #$00
 
-  @LAB_PRG12__9e1a:                         ; [$9e1a]
+  @_writePPUData:                           ; [$9e1a]
     STA a:PPUDATA
     INY
-    BNE @LAB_PRG12__9e10
+    BNE @_loop
 
   @_return:                                 ; [$9e20]
     RTS
-
 
 ;============================================================================
 ; TODO: Document StartScreen_Draw
@@ -7165,6 +9480,7 @@ UI_DrawText:                                ; [$9e0e]
 ;============================================================================
 StartScreen_Draw:                           ; [$9e21]
     JSR #$caf7
+
 
     ;
     ; Write 224 Faxanadu logo tiles
@@ -7184,6 +9500,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDY #$e0
     JSR #$f89e
 
+
     ;
     ; Write 27 letter tiles:
     ;
@@ -7201,6 +9518,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDX #$0a
     LDY #$1b
     JSR #$f89e
+
 
     ;
     ; Write 10 number tiles:
@@ -7221,6 +9539,7 @@ StartScreen_Draw:                           ; [$9e21]
     JSR #$f89e
     JSR #$fcb9
 
+
     ;
     ; Write 4 attribute values
     ;
@@ -7238,6 +9557,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDX #$0a
     LDY #$04
     JSR #$f89e
+
 
     ;
     ; Set to top-left of bordered Faxanadu logo (0x2042) and draw
@@ -7279,7 +9599,8 @@ StartScreen_Draw:                           ; [$9e21]
     DEC Temp_Int24.U
     BNE @LAB_PRG12__9e9b
     LDA #$00
-    STA a:ScreenBuffer_135_
+    STA a:DAT_0687
+
 
     ;
     ; Set position to the start of "START" (0x2288) and
@@ -7295,6 +9616,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA Temp_Int24.M
     JSR UI_DrawText
 
+
     ;
     ; Set position to the start of "CONTINUE" (0x2290) and
     ; draw the text tiles.
@@ -7308,6 +9630,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$9d
     STA Temp_Int24.M
     JSR UI_DrawText
+
 
     ;
     ; Set position to the start of "(C) 1988 Hudson Soft" (0x22E7)
@@ -7323,6 +9646,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA Temp_Int24.M
     JSR UI_DrawText
 
+
     ;
     ; Set position to the start of "Under license from Falcom" (0x2423)
     ; and draw the text tiles.
@@ -7336,6 +9660,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$9d
     STA Temp_Int24.M
     JSR UI_DrawText
+
 
     ;
     ; Set position to the start of "Licensed to Nintendo" (0x2366)
@@ -7364,7 +9689,6 @@ StartScreen_Draw:                           ; [$9e21]
     STA CurrentMusic
     JMP #$cb27
 
-
 ;============================================================================
 ; TODO: Document StartScreen_CheckHandleInput
 ;
@@ -7378,23 +9702,27 @@ StartScreen_CheckHandleInput:               ; [$9f44]
     LDA Joy1_ChangedButtonMask
     AND #$20
     BEQ @LAB_PRG12__9f57
-    LDA a:ScreenBuffer_135_
+    LDA a:DAT_0687
     EOR #$01
-    STA a:ScreenBuffer_135_
+    STA a:DAT_0687
     LDA #$0b
     JSR #$d0e4
 
   @LAB_PRG12__9f57:                         ; [$9f57]
     LDY #$00
-    LDA a:ScreenBuffer_135_
-    BEQ @LAB_PRG12__9f5f
+    LDA a:DAT_0687
+    BEQ @_drawCurrentItemSymbol
     INY
 
-  @LAB_PRG12__9f5f:                         ; [$9f5f]
-    LDX #$9f69,Y
-    LDY #$7e
-    LDA #$ad
-    JMP #$fca7
+
+    ;
+    ; Draw the symbol used to show the current menu item selection.
+    ;
+  @_drawCurrentItemSymbol:                  ; [$9f5f]
+    LDX #$9f69,Y                            ; X = menu item X position.
+    LDY #$7e                                ; Y = 126.
+    LDA #$ad                                ; A = 0xAD (right arrow symbol)
+    JMP #$fca7                              ; Draw the symbol.
 
 ;
 ; XREFS:
@@ -7743,6 +10071,9 @@ ISCRIPT_ADDRS_U_31_:                        ; [$a022]
 ; Death screen.
 ;
 ; "Don't have negative thoughts. Remember your mantra."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8a]
 ;============================================================================
 
 ;
@@ -7759,6 +10090,31 @@ ISCRIPT_REMEMBER_YOUR_MANTRA:               ; [$a09b]
 
 ;============================================================================
 ; The intro message at the start of the game.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f6b]
+;     ISCRIPT_ADDRS_L [$PRG12::9f89]
+;     ISCRIPT_ADDRS_L [$PRG12::9f98]
+;     ISCRIPT_ADDRS_L [$PRG12::9f99]
+;     ISCRIPT_ADDRS_L [$PRG12::9f9a]
+;     ISCRIPT_ADDRS_L [$PRG12::9fa9]
+;     ISCRIPT_ADDRS_L [$PRG12::9faa]
+;     ISCRIPT_ADDRS_L [$PRG12::9fb8]
+;     ISCRIPT_ADDRS_L [$PRG12::9fb9]
+;     ISCRIPT_ADDRS_L [$PRG12::9fba]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc4]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc5]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc6]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc7]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc8]
+;     ISCRIPT_ADDRS_L [$PRG12::9fc9]
+;     ISCRIPT_ADDRS_L [$PRG12::9fca]
+;     ISCRIPT_ADDRS_L [$PRG12::9fd5]
+;     ISCRIPT_ADDRS_L [$PRG12::9fd6]
+;     ISCRIPT_ADDRS_L [$PRG12::9fd7]
+;     ISCRIPT_ADDRS_L [$PRG12::9fd8]
+;     ISCRIPT_ADDRS_L [$PRG12::9fd9]
+;     ISCRIPT_ADDRS_L [$PRG12::9fda]
 ;============================================================================
 
 ;
@@ -7801,6 +10157,9 @@ ISCRIPT_INTRO:                              ; [$a09f]
 ; If the player has no gold, they'll be told to see
 ; the king. Otherwise, they're given directions to
 ; Apolune.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f6c]
 ;============================================================================
 
 ;
@@ -7826,6 +10185,9 @@ ISCRIPT_EOLIS_WALKING_MAN_1:                ; [$a0a3]
 
 ;============================================================================
 ; "There is a mark of Jack by the key hole."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f6d]
 ;============================================================================
 
 ;
@@ -7842,6 +10204,9 @@ ISCRIPT_MARK_OF_JACK:                       ; [$a0ad]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f6e]
 ;============================================================================
 
 ;
@@ -7874,6 +10239,9 @@ ISCRIPT_EOLIS_WALKING_WOMAN_1:              ; [$a0b1]
 ;
 ; If they do have it, they will be told to talk to gurus
 ; to get a title.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f6f]
 ;============================================================================
 
 ;
@@ -7904,6 +10272,9 @@ ISCRIPT_EOLIS_GURU:                         ; [$a0bc]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f70]
 ;============================================================================
 
 ;
@@ -7935,6 +10306,9 @@ ISCRIPT_EOLIS_WALKING_WOMAN_2:              ; [$a0c9]
 ;
 ; If they don't have gold, they'll be told that there
 ; are dwarves here in town.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f71]
 ;============================================================================
 
 ;
@@ -7969,6 +10343,9 @@ ISCRIPT_EOLIS_SMOKING_MAN:                  ; [$a0d3]
 ;
 ; If they have the ring and gold, he'll wish the player
 ; luck.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f72]
 ;============================================================================
 
 ;
@@ -8004,6 +10381,9 @@ ISCRIPT_EOLIS_KINGS_GUARD:                  ; [$a0dd]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f74]
 ;============================================================================
 
 ;
@@ -8029,6 +10409,9 @@ ISCRIPT_A0EE:                               ; [$a0ee]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f75]
 ;============================================================================
 
 ;
@@ -8056,6 +10439,9 @@ ISCRIPT_A0F8:                               ; [$a0f8]
 ; Interaction with the Eolis Martial Artist.
 ;
 ; The player will be offered 40HP for 200G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7a]
 ;============================================================================
 
 ;
@@ -8079,6 +10465,9 @@ ISCRIPT_EOLIS_MARTIAL_ARTIST:               ; [$a102]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7b]
 ;============================================================================
 
 ;
@@ -8105,6 +10494,9 @@ ISCRIPT_A10B:                               ; [$a10b]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7c]
 ;============================================================================
 
 ;
@@ -8131,6 +10523,9 @@ ISCRIPT_A116:                               ; [$a116]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7d]
 ;============================================================================
 
 ;
@@ -8157,6 +10552,9 @@ ISCRIPT_A121:                               ; [$a121]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7e]
 ;============================================================================
 
 ;
@@ -8183,6 +10581,9 @@ ISCRIPT_A12C:                               ; [$a12c]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f7f]
 ;============================================================================
 
 ;
@@ -8199,6 +10600,9 @@ ISCRIPT_A137:                               ; [$a137]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f81]
 ;============================================================================
 
 ;
@@ -8225,6 +10629,9 @@ ISCRIPT_A13B:                               ; [$a13b]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f82]
 ;============================================================================
 
 ;
@@ -8251,6 +10658,9 @@ ISCRIPT_A146:                               ; [$a146]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f83]
 ;============================================================================
 
 ;
@@ -8269,6 +10679,9 @@ ISCRIPT_A151:                               ; [$a151]
 ; An empty interaction.
 ;
 ; This immediately terminates.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f86]
 ;============================================================================
 
 ;
@@ -8282,6 +10695,9 @@ ISCRIPT_A155:                               ; [$a155]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8b]
 ;============================================================================
 
 ;
@@ -8309,6 +10725,9 @@ ISCRIPT_FOREPAW_GREETER:                    ; [$a157]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8c]
 ;============================================================================
 
 ;
@@ -8335,6 +10754,9 @@ ISCRIPT_A162:                               ; [$a162]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8d]
 ;============================================================================
 
 ;
@@ -8362,6 +10784,9 @@ ISCRIPT_A16D:                               ; [$a16d]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8e]
 ;============================================================================
 
 ;
@@ -8400,6 +10825,9 @@ ISCRIPT_A178:                               ; [$a178]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f8f]
 ;============================================================================
 
 ;
@@ -8445,6 +10873,9 @@ ISCRIPT_A18A:                               ; [$a18a]
 ;
 ; With a second interaction, he'll tell you to find a key
 ; and reach the fountain.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f90]
 ;============================================================================
 
 ;
@@ -8482,6 +10913,9 @@ ISCRIPT_SPRING_OF_SKY:                      ; [$a19e]
 ;
 ; If the quest was already complete, he'll say to find the
 ; poison in Mascon.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f91]
 ;============================================================================
 
 ;
@@ -8526,6 +10960,9 @@ ISCRIPT_SPRING_OF_TRUNK:                    ; [$a1ab]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f92]
 ;============================================================================
 
 ;
@@ -8568,6 +11005,9 @@ ISCRIPT_A1C3:                               ; [$a1c3]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f9b]
 ;============================================================================
 
 ;
@@ -8594,6 +11034,9 @@ ISCRIPT_A1D9:                               ; [$a1d9]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f9c]
 ;============================================================================
 
 ;
@@ -8620,6 +11063,9 @@ ISCRIPT_A1E4:                               ; [$a1e4]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f9d]
 ;============================================================================
 
 ;
@@ -8646,6 +11092,9 @@ ISCRIPT_A1EF:                               ; [$a1ef]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f9e]
 ;============================================================================
 
 ;
@@ -8672,6 +11121,9 @@ ISCRIPT_A1FA:                               ; [$a1fa]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f9f]
 ;============================================================================
 
 ;
@@ -8706,6 +11158,9 @@ ISCRIPT_A205:                               ; [$a205]
 ; If the player has the Fire magic, he'll say that it's
 ; best you keep the pendant. Otherwise, he'll say you'll
 ; reach the town of Suffer soon.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa0]
 ;============================================================================
 
 ;
@@ -8740,6 +11195,9 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_MAN:           ; [$a210]
 ; If the player has the Pendant, she'll say that the
 ; Meteorite has moved. Otherwise, she'll say that the
 ; dwarves are chanting to the meteorite.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa1]
 ;============================================================================
 
 ;
@@ -8766,6 +11224,9 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN:         ; [$a21b]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa2]
 ;============================================================================
 
 ;
@@ -8792,6 +11253,9 @@ ISCRIPT_A226:                               ; [$a226]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fab]
 ;============================================================================
 
 ;
@@ -8818,6 +11282,9 @@ ISCRIPT_A231:                               ; [$a231]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fac]
 ;============================================================================
 
 ;
@@ -8844,6 +11311,9 @@ ISCRIPT_A23C:                               ; [$a23c]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fad]
 ;============================================================================
 
 ;
@@ -8870,6 +11340,9 @@ ISCRIPT_A247:                               ; [$a247]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fae]
 ;============================================================================
 
 ;
@@ -8909,6 +11382,9 @@ ISCRIPT_A252:                               ; [$a252]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9faf]
 ;============================================================================
 
 ;
@@ -8935,6 +11411,9 @@ ISCRIPT_A266:                               ; [$a266]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb0]
 ;============================================================================
 
 ;
@@ -8961,6 +11440,9 @@ ISCRIPT_A271:                               ; [$a271]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb1]
 ;============================================================================
 
 ;
@@ -9000,6 +11482,9 @@ ISCRIPT_A27C:                               ; [$a27c]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fbb]
 ;============================================================================
 
 ;
@@ -9026,6 +11511,9 @@ ISCRIPT_A290:                               ; [$a290]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fbc]
 ;============================================================================
 
 ;
@@ -9052,6 +11540,9 @@ ISCRIPT_A29B:                               ; [$a29b]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fbd]
 ;============================================================================
 
 ;
@@ -9088,6 +11579,9 @@ ISCRIPT_A2A6:                               ; [$a2a6]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fbe]
 ;============================================================================
 
 ;
@@ -9114,6 +11608,9 @@ ISCRIPT_A2B8:                               ; [$a2b8]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fbf]
 ;============================================================================
 
 ;
@@ -9140,6 +11637,9 @@ ISCRIPT_A2C3:                               ; [$a2c3]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fcb]
 ;============================================================================
 
 ;
@@ -9166,6 +11666,9 @@ ISCRIPT_A2CE:                               ; [$a2ce]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fcc]
 ;============================================================================
 
 ;
@@ -9194,6 +11697,9 @@ ISCRIPT_A2D9:                               ; [$a2d9]
 ; TODO
 ;
 ; XXX Check if easter egg?
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fcd]
 ;============================================================================
 
 ;
@@ -9220,6 +11726,9 @@ ISCRIPT_A2E4:                               ; [$a2e4]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fce]
 ;============================================================================
 
 ;
@@ -9246,6 +11755,9 @@ ISCRIPT_A2EF:                               ; [$a2ef]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fcf]
 ;============================================================================
 
 ;
@@ -9272,6 +11784,9 @@ ISCRIPT_A2FA:                               ; [$a2fa]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fd0]
 ;============================================================================
 
 ;
@@ -9298,6 +11813,9 @@ ISCRIPT_A305:                               ; [$a305]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fdb]
 ;============================================================================
 
 ;
@@ -9331,6 +11849,9 @@ ISCRIPT_A310:                               ; [$a310]
 ;
 ; If the player has the Dragon Slayer, he'll say to defeat
 ; evil with it. If not, he'll say that King Grieve has it.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fdc]
 ;============================================================================
 
 ;
@@ -9365,6 +11886,9 @@ ISCRIPT_OVERWORLD_HOUSE_MAN:                ; [$a31b]
 ; If the player has the Dragon Slayer, she'll say that the
 ; Guru has the Demon's Ring. Otherwise, she'll say to find
 ; the Guru in Castle Fraternal.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fdd]
 ;============================================================================
 
 ;
@@ -9391,6 +11915,9 @@ ISCRIPT_OVERWORLD_HOUSE_WOMAN:              ; [$a326]
 
 ;============================================================================
 ; TODO
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fde]
 ;============================================================================
 
 ;
@@ -9429,6 +11956,9 @@ ISCRIPT_A331:                               ; [$a331]
 ;
 ; If the player doesn't have the Dragon Slayer, the
 ; Guru will give exposition on the meteorite.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fdf]
 ;============================================================================
 
 ;
@@ -9475,6 +12005,9 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
 ;
 ; If the player already has gold, the King will say there's
 ; nothing more he can do to help.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f73]
 ;============================================================================
 
 ;
@@ -9505,6 +12038,9 @@ ISCRIPT_EOLIS_KING:                         ; [$a350]
 ; Interaction for Eolis Martial Arts / Magic Shop.
 ;
 ; The Martial Artist/Magician will give 40MP for 200G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f79]
 ;============================================================================
 
 ;
@@ -9537,6 +12073,9 @@ ISCRIPT_EOLIS_MARTIAL_ARTS_MAGIC_SHOP:      ; [$a35d]
 ; If the player already has Fire, he will say magic
 ; can be used for justice or destruction depending on
 ; who uses it.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb6]
 ;============================================================================
 
 ;
@@ -9573,6 +12112,9 @@ ISCRIPT_AFTER_VICTIM_MAGIC_SHOP:            ; [$a368]
 
 ;============================================================================
 ; Interaction with the Eolis Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f78]
 ;============================================================================
 
 ;
@@ -9588,8 +12130,8 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a386                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a42e                                ; [$a381] pointer
-
+    dw $a42e                                ; EOLIS_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a381]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a384] Message
@@ -9597,8 +12139,8 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
 
   @_ISCRIPT_EOLIS_TOOL_SHOP_BUY:            ; [$a386]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a42e                                ; [$a387] pointer
-
+    dw $a42e                                ; EOLIS_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a387]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a38a] Message
@@ -9607,6 +12149,9 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
 
 ;============================================================================
 ; Interaction with the Apolune Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f84]
 ;============================================================================
 
 ;
@@ -9622,8 +12167,8 @@ ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a398                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a43b                                ; [$a393] pointer
-
+    dw $a43b                                ; APOLUNE_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a393]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a396] Message
@@ -9640,6 +12185,9 @@ ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
 
 ;============================================================================
 ; Interaction with the Before-Apolune Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f88]
 ;============================================================================
 
 ;
@@ -9655,8 +12203,8 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3aa                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a448                                ; [$a3a5] pointer
-
+    dw $a448                                ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3a5]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3a8] Message
@@ -9664,8 +12212,8 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
 
   @_ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP_BUY:   ; [$a3aa]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a448                                ; [$a3ab] pointer
-
+    dw $a448                                ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3ab]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3ae] Message
@@ -9674,6 +12222,9 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
 
 ;============================================================================
 ; Interaction with the Forepaw Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f93]
 ;============================================================================
 
 ;
@@ -9689,8 +12240,8 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3bc                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a44f                                ; [$a3b7] pointer
-
+    dw $a44f                                ; FOREPAW_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3b7]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3ba] Message
@@ -9698,8 +12249,8 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
 
   @_ISCRIPT_FOREPAW_TOOL_SHOP_BUY:          ; [$a3bc]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a44f                                ; [$a3bd] pointer
-
+    dw $a44f                                ; FOREPAW_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3bd]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3c0] Message
@@ -9708,6 +12259,9 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
 
 ;============================================================================
 ; Interaction with the Mascon Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa4]
 ;============================================================================
 
 ;
@@ -9723,8 +12277,8 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3ce                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a45f                                ; [$a3c9] pointer
-
+    dw $a45f                                ; MASCON_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3c9]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3cc] Message
@@ -9732,8 +12286,8 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
 
   @_ISCRIPT_MASCON_TOOL_SHOP_BUY:           ; [$a3ce]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a45f                                ; [$a3cf] pointer
-
+    dw $a45f                                ; MASCON_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3cf]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3d2] Message
@@ -9742,6 +12296,9 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
 
 ;============================================================================
 ; Interaction with the After-Mascon Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa7]
 ;============================================================================
 
 ;
@@ -9757,8 +12314,8 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3e0                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a46c                                ; [$a3db] pointer
-
+    dw $a46c                                ; AFTER_MASCON_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3db]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3de] Message
@@ -9766,8 +12323,8 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
 
   @_ISCRIPT_AFTER_MASCON_TOOL_SHOP_BUY:     ; [$a3e0]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a46c                                ; [$a3e1] pointer
-
+    dw $a46c                                ; AFTER_MASCON_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3e1]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3e4] Message
@@ -9776,6 +12333,9 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
 
 ;============================================================================
 ; Interaction with the Victim Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb3]
 ;============================================================================
 
 ;
@@ -9791,8 +12351,8 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a3f2                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a479                                ; [$a3ed] pointer
-
+    dw $a479                                ; VICTIM_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3ed]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3f0] Message
@@ -9800,8 +12360,8 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
 
   @_ISCRIPT_VICTIM_TOOL_SHOP_BUY:           ; [$a3f2]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a479                                ; [$a3f3] pointer
-
+    dw $a479                                ; VICTIM_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3f3]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a3f6] Message
@@ -9810,6 +12370,9 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
 
 ;============================================================================
 ; Interaction with the Conflate Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fc2]
 ;============================================================================
 
 ;
@@ -9825,8 +12388,8 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a404                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a483                                ; [$a3ff] pointer
-
+    dw $a483                                ; CONFLATE_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a3ff]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a402] Message
@@ -9834,8 +12397,8 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
 
   @_ISCRIPT_CONFLATE_TOOL_SHOP_BUY:         ; [$a404]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a483                                ; [$a405] pointer
-
+    dw $a483                                ; CONFLATE_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a405]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a408] Message
@@ -9844,6 +12407,9 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
 
 ;============================================================================
 ; Interaction with the Daybreak Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fd1]
 ;============================================================================
 
 ;
@@ -9859,8 +12425,8 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a416                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a490                                ; [$a411] pointer
-
+    dw $a490                                ; DAYBREAK_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a411]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a414] Message
@@ -9868,8 +12434,8 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
 
   @_ISCRIPT_DAYBREAK_TOOL_SHOP_BUY:         ; [$a416]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a490                                ; [$a417] pointer
-
+    dw $a490                                ; DAYBREAK_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a417]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a41a] Message
@@ -9878,6 +12444,9 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
 
 ;============================================================================
 ; Interaction with the Dartmoor Tool Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe0]
 ;============================================================================
 
 ;
@@ -9893,8 +12462,8 @@ ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
     db ISCRIPT_ACTION_SHOW_BUY_SELL_MENU    ; Show the Buy/Sell menu.
     dw $a428                                ; If Buy, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell, show the sell menu.
-    dw $a49a                                ; [$a423] pointer
-
+    dw $a49a                                ; DARTMOOR_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a423]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a426] Message
@@ -9902,8 +12471,8 @@ ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
 
   @_ISCRIPT_DARTMOOR_TOOL_SHOP_BUY:         ; [$a428]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a49a                                ; [$a429] pointer
-
+    dw $a49a                                ; DARTMOOR_TOOL_SHOP_ITEMS
+                                            ; [$PRG12::a429]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a42c] Message
@@ -10134,6 +12703,9 @@ DARTMOOR_TOOL_SHOP_ITEMS:                   ; [$a49a]
 ; Interaction with the Eolis Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 50G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f76]
 ;============================================================================
 
 ;
@@ -10165,6 +12737,9 @@ ISCRIPT_EOLIS_MEAT_SHOP:                    ; [$a4a1]
 ; Interaction with the Forepaw Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 150G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f97]
 ;============================================================================
 
 ;
@@ -10196,6 +12771,9 @@ ISCRIPT_FOREPAW_MEAT_SHOP:                  ; [$a4ae]
 ; Interaction with the Mascon Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 180G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa5]
 ;============================================================================
 
 ;
@@ -10227,6 +12805,9 @@ ISCRIPT_MASCON_MEAT_SHOP:                   ; [$a4bb]
 ; Interaction with the Victim Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 250G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb4]
 ;============================================================================
 
 ;
@@ -10258,6 +12839,9 @@ ISCRIPT_VICTIM_MEAT_SHOP:                   ; [$a4c8]
 ; Interaction with the Conflate Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 350G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fc3]
 ;============================================================================
 
 ;
@@ -10289,6 +12873,9 @@ ISCRIPT_CONFLATE_MEAT_SHOP:                 ; [$a4d5]
 ; Interaction with the Daybreak Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 500G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fd2]
 ;============================================================================
 
 ;
@@ -10320,6 +12907,9 @@ ISCRIPT_DAYBREAK_MEAT_SHOP:                 ; [$a4e2]
 ; Interaction with the Dartmoor Meat Shop.
 ;
 ; The shop keeper will offer 30HP and 30MP for 800G.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe1]
 ;============================================================================
 
 ;
@@ -10349,6 +12939,9 @@ ISCRIPT_DARTMOOR_MEAT_SHOP:                 ; [$a4ef]
 
 ;============================================================================
 ; Interaction with the Eolis Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f77]
 ;============================================================================
 
 ;
@@ -10365,8 +12958,8 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
     dw $a508                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a57a                                ; [$a503] pointer
-
+    dw $a57a                                ; EOLIS_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a503]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a506] Message
@@ -10374,8 +12967,8 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
 
   @_ISCRIPT_EOLIS_KEY_SHOP_BUY:             ; [$a508]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a57a                                ; [$a509] pointer
-
+    dw $a57a                                ; EOLIS_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a509]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a50c] Message
@@ -10384,6 +12977,9 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
 
 ;============================================================================
 ; Interaction with the Apolune Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f85]
 ;============================================================================
 
 ;
@@ -10400,8 +12996,8 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
     dw $a51a                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a57e                                ; [$a515] pointer
-
+    dw $a57e                                ; APOLUNE_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a515]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a518] Message
@@ -10409,8 +13005,8 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
 
   @_ISCRIPT_APOLUNE_KEY_SHOP_BUY:           ; [$a51a]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a57e                                ; [$a51b] pointer
-
+    dw $a57e                                ; APOLUNE_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a51b]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a51e] Message
@@ -10419,6 +13015,9 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
 
 ;============================================================================
 ; Interaction with the Forepaw Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f96]
 ;============================================================================
 
 ;
@@ -10435,8 +13034,8 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
     dw $a52c                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a582                                ; [$a527] pointer
-
+    dw $a582                                ; FOREPAW_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a527]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a52a] Message
@@ -10444,8 +13043,8 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
 
   @_ISCRIPT_FOREPAW_KEY_SHOP_BUY:           ; [$a52c]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a582                                ; [$a52d] pointer
-
+    dw $a582                                ; FOREPAW_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a52d]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a530] Message
@@ -10454,6 +13053,9 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
 
 ;============================================================================
 ; Interaction with the Mascon Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa6]
 ;============================================================================
 
 ;
@@ -10470,8 +13072,8 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
     dw $a53e                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a589                                ; [$a539] pointer
-
+    dw $a589                                ; MACONE_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a539]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a53c] Message
@@ -10479,8 +13081,8 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
 
   @_ISCRIPT_MASCONE_KEY_SHOP_BUY:           ; [$a53e]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a589                                ; [$a53f] pointer
-
+    dw $a589                                ; MACONE_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a53f]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a542] Message
@@ -10489,6 +13091,9 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
 
 ;============================================================================
 ; Interaction with the Victim Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb5]
 ;============================================================================
 
 ;
@@ -10505,8 +13110,8 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
     dw $a550                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a590                                ; [$a54b] pointer
-
+    dw $a590                                ; VICTIM_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a54b]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a54e] Message
@@ -10514,8 +13119,8 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
 
   @_ISCRIPT_VICTIM_KEY_SHOP_BUY:            ; [$a550]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a590                                ; [$a551] pointer
-
+    dw $a590                                ; VICTIM_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a551]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a554] Message
@@ -10524,6 +13129,9 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
 
 ;============================================================================
 ; Interaction with the Daybreak Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fd3]
 ;============================================================================
 
 ;
@@ -10540,8 +13148,8 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
     dw $a562                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a597                                ; [$a55d] pointer
-
+    dw $a597                                ; DAYBREAK_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a55d]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a560] Message
@@ -10549,8 +13157,8 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
 
   @_ISCRIPT_DAYBREAK_KEY_SHOP_BUY:          ; [$a562]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a597                                ; [$a563] pointer
-
+    dw $a597                                ; DAYBREAK_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a563]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a566] Message
@@ -10559,6 +13167,9 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
 
 ;============================================================================
 ; Interaction with the Dartmoor Key Shop.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe2]
 ;============================================================================
 
 ;
@@ -10575,8 +13186,8 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
     dw $a574                                ; If Buy was chosen, jump.
     db ISCRIPT_ACTION_SHOW_SELL_MENU        ; If Sell was chosen, show the
                                             ; sell menu.
-    dw $a59e                                ; [$a56f] pointer
-
+    dw $a59e                                ; DARTMOOR_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a56f]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a572] Message
@@ -10584,8 +13195,8 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
 
   @_ISCRIPT_DARTMOOR_KEY_SHOP_BUY:          ; [$a574]
     db ISCRIPT_ACTION_OPEN_SHOP             ; Open the Buy shop menu.
-    dw $a59e                                ; [$a575] pointer
-
+    dw $a59e                                ; DARTMOOR_KEY_SHOP_ITEMS
+                                            ; [$PRG12::a575]
     db ISCRIPT_ACTION_SHOW_MESSAGE          ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     db MESSAGEID_THANK_YOU_FOR_SHOPPING     ; [$a578] Message
@@ -10694,6 +13305,9 @@ DARTMOOR_KEY_SHOP_ITEMS:                    ; [$a59e]
 
 ;============================================================================
 ; Interaction with the doctor of Apolune.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f80]
 ;============================================================================
 
 ;
@@ -10726,6 +13340,9 @@ ISCRIPT_APOLUNE_DOCTOR:                     ; [$a5a2]
 
 ;============================================================================
 ; Interaction with the doctor of Forepaw.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f95]
 ;============================================================================
 
 ;
@@ -10758,6 +13375,9 @@ ISCRIPT_FOREPAW_DOCTOR:                     ; [$a5b1]
 
 ;============================================================================
 ; Interaction with the doctor of Mascon.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa3]
 ;============================================================================
 
 ;
@@ -10790,6 +13410,9 @@ ISCRIPT_MASCON_DOCTOR:                      ; [$a5c0]
 
 ;============================================================================
 ; Interaction with the doctor of Victim.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb2]
 ;============================================================================
 
 ;
@@ -10822,6 +13445,9 @@ ISCRIPT_VICTIM_DOCTOR:                      ; [$a5cf]
 
 ;============================================================================
 ; Interaction with the doctor of Conflate.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fc1]
 ;============================================================================
 
 ;
@@ -10854,6 +13480,9 @@ ISCRIPT_CONFLATE_DOCTOR:                    ; [$a5de]
 
 ;============================================================================
 ; Interaction with the doctor of Dartmoor.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe5]
 ;============================================================================
 
 ;
@@ -10908,6 +13537,9 @@ ISCRIPT_COMMON_GURU_NEW_RANK:               ; [$a600]
 
 ;============================================================================
 ; Interaction with the guru of Apolune.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f87]
 ;============================================================================
 
 ;
@@ -10926,11 +13558,15 @@ ISCRIPT_APOLUNE_GURU:                       ; [$a603]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a60a] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a60a]
 
 
 ;============================================================================
 ; Interaction with the guru of Forepaw.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9f94]
 ;============================================================================
 
 ;
@@ -10949,11 +13585,15 @@ ISCRIPT_FOREPAW_GURU:                       ; [$a60c]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a613] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a613]
 
 
 ;============================================================================
 ; Interaction with the guru of Mascon.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fa8]
 ;============================================================================
 
 ;
@@ -10972,11 +13612,15 @@ ISCRIPT_MASCON_GURU:                        ; [$a615]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a61c] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a61c]
 
 
 ;============================================================================
 ; Interaction with the guru of Victim.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fb7]
 ;============================================================================
 
 ;
@@ -10995,7 +13639,8 @@ ISCRIPT_VICTIM_GURU:                        ; [$a61e]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a625] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a625]
 
 
 ;============================================================================
@@ -11009,6 +13654,9 @@ ISCRIPT_VICTIM_GURU:                        ; [$a61e]
 ; to Dartmore.
 ;
 ; Otherwise, they'll get the normal Guru behavior.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fc0]
 ;============================================================================
 
 ;
@@ -11033,7 +13681,8 @@ ISCRIPT_CONFLATE_GURU:                      ; [$a627]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a632] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a632]
 
   @_ISCRIPT_GURU_CONFLATE_HAS_BATTLE_SUIT:  ; [$a634]
     db ISCRIPT_ACTION_CHECK_FOR_ITEM        ; Check if the player has the
@@ -11052,6 +13701,9 @@ ISCRIPT_CONFLATE_GURU:                      ; [$a627]
 
 ;============================================================================
 ; Interaction with the guru of Daybreak.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fd4]
 ;============================================================================
 
 ;
@@ -11070,11 +13722,15 @@ ISCRIPT_DAYBREAK_GURU:                      ; [$a63d]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a644] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a644]
 
 
 ;============================================================================
 ; Interaction with the guru of the final temple.
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe3]
 ;============================================================================
 
 ;
@@ -11093,11 +13749,15 @@ ISCRIPT_GURU_FINAL:                         ; [$a646]
                                             ; rank.
     db ISCRIPT_ACTION_JUMP                  ; Else, jump to show the new
                                             ; password.
-    dw $a5fc                                ; [$a64d] pointer
+    dw $a5fc                                ; ISCRIPT_COMMON_GURU_PASSWORD
+                                            ; [$PRG12::a64d]
 
 
 ;============================================================================
 ; "Glad you're back."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe4]
 ;============================================================================
 
 ;
@@ -11114,6 +13774,9 @@ ISCRIPT_KING_END_GAME:                      ; [$a64f]
 
 ;============================================================================
 ; "There is the mark of Queen by the key hole."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe6]
 ;============================================================================
 
 ;
@@ -11129,6 +13792,9 @@ ISCRIPT_MARK_OF_QUEEN:                      ; [$a654]
 
 ;============================================================================
 ; "There is the mark of King by the key hole."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe7]
 ;============================================================================
 
 ;
@@ -11144,6 +13810,9 @@ ISCRIPT_MARK_OF_KING:                       ; [$a658]
 
 ;============================================================================
 ; "There is the mark of Ace by the key hole."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe8]
 ;============================================================================
 
 ;
@@ -11159,6 +13828,9 @@ ISCRIPT_MARK_OF_ACE:                        ; [$a65c]
 
 ;============================================================================
 ; "There is the mark of Joker by the key hole."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fe9]
 ;============================================================================
 
 ;
@@ -11174,6 +13846,9 @@ ISCRIPT_MARK_OF_JOKER:                      ; [$a660]
 
 ;============================================================================
 ; "Do you need a ring to open a door?"
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fea]
 ;============================================================================
 
 ;
@@ -11189,6 +13864,9 @@ ISCRIPT_NEED_RING_FOR_DOOR:                 ; [$a664]
 
 ;============================================================================
 ; "I've used Red Potion."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9feb]
 ;============================================================================
 
 ;
@@ -11204,6 +13882,9 @@ ISCRIPT_USED_RED_POTION:                    ; [$a668]
 
 ;============================================================================
 ; "I've used Mattock."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fec]
 ;============================================================================
 
 ;
@@ -11219,6 +13900,9 @@ ISCRIPT_USED_MATTOCK:                       ; [$a66c]
 
 ;============================================================================
 ; "I've used Hour Glass."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fed]
 ;============================================================================
 
 ;
@@ -11234,6 +13918,9 @@ ISCRIPT_USED_HOURGLASS:                     ; [$a670]
 
 ;============================================================================
 ; "I've used Wing Boots."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fee]
 ;============================================================================
 
 ;
@@ -11249,6 +13936,9 @@ ISCRIPT_USED_WINGBOOTS:                     ; [$a674]
 
 ;============================================================================
 ; "I've used key."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fef]
 ;============================================================================
 
 ;
@@ -11264,6 +13954,9 @@ ISCRIPT_USED_KEY:                           ; [$a678]
 
 ;============================================================================
 ; "I've used Elixir."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff0]
 ;============================================================================
 
 ;
@@ -11279,6 +13972,9 @@ ISCRIPT_USED_ELIXIR:                        ; [$a67c]
 
 ;============================================================================
 ; "I'm holding Elixir."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff1]
 ;============================================================================
 
 ;
@@ -11294,6 +13990,9 @@ ISCRIPT_GOT_ELIXIR:                         ; [$a680]
 
 ;============================================================================
 ; "I'm holding Red Potion."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff2]
 ;============================================================================
 
 ;
@@ -11309,6 +14008,9 @@ ISCRIPT_GOT_RED_POTION:                     ; [$a684]
 
 ;============================================================================
 ; "I'm holding Mattock."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff3]
 ;============================================================================
 
 ;
@@ -11324,6 +14026,9 @@ ISCRIPT_GOT_MATTOCK:                        ; [$a688]
 
 ;============================================================================
 ; "I'm holding Wing Boots."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff4]
 ;============================================================================
 
 ;
@@ -11339,6 +14044,9 @@ ISCRIPT_GOT_WINGBOOTS:                      ; [$a68c]
 
 ;============================================================================
 ; "I'm holding Hour Glass."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff5]
 ;============================================================================
 
 ;
@@ -11354,6 +14062,9 @@ ISCRIPT_GOT_HOURGLASS:                      ; [$a690]
 
 ;============================================================================
 ; "I've got the Battle Suit."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff6]
 ;============================================================================
 
 ;
@@ -11369,6 +14080,9 @@ ISCRIPT_GOT_BATTLE_SUIT:                    ; [$a694]
 
 ;============================================================================
 ; "I've got the Battle Helmet."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff7]
 ;============================================================================
 
 ;
@@ -11384,6 +14098,9 @@ ISCRIPT_GOT_BATTLE_HELMET:                  ; [$a698]
 
 ;============================================================================
 ; "I've got the Dragon Slayer."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff8]
 ;============================================================================
 
 ;
@@ -11399,6 +14116,9 @@ ISCRIPT_GOT_DRAGON_SLAYER:                  ; [$a69c]
 
 ;============================================================================
 ; "I've got the Black Onyx."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ff9]
 ;============================================================================
 
 ;
@@ -11414,6 +14134,9 @@ ISCRIPT_GOT_BLACK_ONYX:                     ; [$a6a0]
 
 ;============================================================================
 ; "I've got the Pendant."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ffa]
 ;============================================================================
 
 ;
@@ -11429,6 +14152,9 @@ ISCRIPT_GOT_PENDANT:                        ; [$a6a4]
 
 ;============================================================================
 ; "I've got the Magical Rod."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ffb]
 ;============================================================================
 
 ;
@@ -11444,6 +14170,9 @@ ISCRIPT_GOT_MAGICAL_ROD:                    ; [$a6a8]
 
 ;============================================================================
 ; "I've touched Poison."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ffc]
 ;============================================================================
 
 ;
@@ -11459,6 +14188,9 @@ ISCRIPT_TOUCHED_POISON:                     ; [$a6ac]
 
 ;============================================================================
 ; "The glove increases offensive power."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ffd]
 ;============================================================================
 
 ;
@@ -11474,6 +14206,9 @@ ISCRIPT_GOT_POWER_GLOVE:                    ; [$a6b0]
 
 ;============================================================================
 ; "The power of the Glove is gone."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9ffe]
 ;============================================================================
 
 ;
@@ -11489,6 +14224,9 @@ ISCRIPT_POWER_GLOVE_GONE:                   ; [$a6b4]
 
 ;============================================================================
 ; "I am free from injury because of the Ointment."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::9fff]
 ;============================================================================
 
 ;
@@ -11504,6 +14242,9 @@ ISCRIPT_OINTMENT_USED:                      ; [$a6b8]
 
 ;============================================================================
 ; "The power of the Ointment is gone."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::a000]
 ;============================================================================
 
 ;
@@ -11519,6 +14260,9 @@ ISCRIPT_OINTMENT_GONE:                      ; [$a6bc]
 
 ;============================================================================
 ; "The power of the Wing Boots is gone."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::a001]
 ;============================================================================
 
 ;
@@ -11534,6 +14278,9 @@ ISCRIPT_WINGBOOTS_GONE:                     ; [$a6c0]
 
 ;============================================================================
 ; "The power of the Hour Glass is gone."
+;
+; XREFS:
+;     ISCRIPT_ADDRS_L [$PRG12::a002]
 ;============================================================================
 
 ;
@@ -11622,9 +14369,8 @@ SPLASHANIM_OUTRO_PALETTE:                   ; [$a6e8]
     db $26                                  ; [30]:
     db $30                                  ; [31]:
 
-
 ;============================================================================
-; TODO: Document SplashAnimation_SomethingA708
+; TODO: Document SplashAnimation_Intro_SomethingA708
 ;
 ; INPUTS:
 ;     None.
@@ -11635,22 +14381,22 @@ SPLASHANIM_OUTRO_PALETTE:                   ; [$a6e8]
 ; XREFS:
 ;     SplashAnimation_RunIntro
 ;============================================================================
-SplashAnimation_SomethingA708:              ; [$a708]
-    INC a:ScreenBuffer_164_
-    LDA a:ScreenBuffer_164_
+SplashAnimation_Intro_SomethingA708:        ; [$a708]
+    INC a:SplashAnimation_PaletteStage
+    LDA a:SplashAnimation_PaletteStage
     AND #$07
     BNE @LAB_PRG12__a727
     LDY #$1f
 
   @LAB_PRG12__a714:                         ; [$a714]
-    LDA CurrentPaletteData,Y
+    LDA Screen_PaletteData,Y
     SEC
     SBC #$10
     BPL @LAB_PRG12__a71e
     LDA #$0f
 
   @LAB_PRG12__a71e:                         ; [$a71e]
-    STA CurrentPaletteData,Y
+    STA Screen_PaletteData,Y
     DEY
     BPL @LAB_PRG12__a714
     JMP #$d090
@@ -11690,7 +14436,6 @@ SPLASHANIM_PALETTE_U:                       ; [$a72e]
     db $a6                                  ; [0]: Intro
     db $a6                                  ; [1]: Outro
 
-
 ;============================================================================
 ; TODO: Document SplashAnimation_DrawScenery
 ;
@@ -11705,7 +14450,7 @@ SPLASHANIM_PALETTE_U:                       ; [$a72e]
 ;     SplashAnimation_RunOutro
 ;============================================================================
 SplashAnimation_DrawScenery:                ; [$a730]
-    STA a:SplashAnimScene
+    STA a:SplashAnimation_SceneIndex
     JSR #$caf7
     LDA #$a0
     STA IScriptOrCHRAddr
@@ -11729,7 +14474,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     LDX #$0a
     LDY #$80
     JSR #$f89e
-    LDX a:SplashAnimScene
+    LDX a:SplashAnimation_SceneIndex
     LDA #$a728,X
     STA IScriptOrCHRAddr
     LDA #$a72a,X
@@ -11741,7 +14486,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     LDX #$0a
     LDY #$40
     JSR #$f89e
-    LDX a:SplashAnimScene
+    LDX a:SplashAnimation_SceneIndex
     LDA #$a72c,X
     STA Temp_Int24
     LDA #$a72e,X
@@ -11750,11 +14495,10 @@ SplashAnimation_DrawScenery:                ; [$a730]
 
   @_paletteLoop:                            ; [$a78f]
     LDA (Temp_Int24),Y
-    STA CurrentPaletteData,Y
+    STA Screen_PaletteData,Y
     DEY
     BPL @_paletteLoop
     JMP #$d090
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_RunIntro
@@ -11773,7 +14517,7 @@ SplashAnimation_RunIntro:                   ; [$a79a]
     JSR SplashAnimation_DrawScenery
     JSR Maybe_SplashAnimation_InitIntroState
     LDA #$00
-    STA a:ScreenBuffer_164_
+    STA a:SplashAnimation_PaletteStage
     LDA #$00
     STA CurrentMusic
     JSR #$cb27
@@ -11787,12 +14531,11 @@ SplashAnimation_RunIntro:                   ; [$a79a]
     LDX a:IntroAnimation_PlayerSizeCounter
     CPX #$04
     BNE @LAB_PRG12__a7ae
-    JSR SplashAnimation_SomethingA708
-    LDA a:ScreenBuffer_164_
+    JSR SplashAnimation_Intro_SomethingA708
+    LDA a:SplashAnimation_PaletteStage
     CMP #$20
     BNE @LAB_PRG12__a7ae
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_Maybe_CalcPlayerAnimState
@@ -11816,9 +14559,9 @@ SplashAnimation_Maybe_CalcPlayerAnimState:  ; [$a7cf]
     BCS RETURN_A7F0
     INC a:IntroAnimation_PlayerSizeCounter
     LDA #$a85e,X
-    STA a:ScreenBuffer_146_
+    STA a:SplashAnimation_0692
     LDA #$a862,X
-    STA a:ScreenBuffer_147_
+    STA a:SplashAnimation_0693
 
     ;
     ; XREFS:
@@ -11827,7 +14570,6 @@ SplashAnimation_Maybe_CalcPlayerAnimState:  ; [$a7cf]
     ;
 RETURN_A7F0:                                ; [$a7f0]
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_Maybe_CalcPlayerAnimSize
@@ -11851,11 +14593,10 @@ SplashAnimation_Maybe_CalcPlayerAnimSize:   ; [$a7f1]
     BCC RETURN_A7F0
     INC a:IntroAnimation_PlayerSizeCounter
     LDA #$a86a,X
-    STA a:ScreenBuffer_146_
+    STA a:SplashAnimation_0692
     LDA #$a86e,X
-    STA a:ScreenBuffer_147_
+    STA a:SplashAnimation_0693
     RTS
-
 
 ;============================================================================
 ; TODO: Document Maybe_SplashAnimation_InitIntroState
@@ -11871,20 +14612,19 @@ SplashAnimation_Maybe_CalcPlayerAnimSize:   ; [$a7f1]
 ;============================================================================
 Maybe_SplashAnimation_InitIntroState:       ; [$a813]
     LDA #$18
-    STA a:ScreenBuffer_142_
+    STA a:SplashAnimation_068e
     LDA #$ff
-    STA a:ScreenBuffer_143_
+    STA a:SplashAnimation_068f
     LDA #$00
-    STA a:ScreenBuffer_140_
+    STA a:SplashAnimation_068c
     STA a:IntroAnimation_PlayerSizeCounter
-    STA a:ScreenBuffer_144_
-    STA a:ScreenBuffer_145_
+    STA a:SplashAnimation_0690
+    STA a:SplashAnimation_0691
     LDA #$20
-    STA a:ScreenBuffer_146_
+    STA a:SplashAnimation_0692
     LDA #$e0
-    STA a:ScreenBuffer_147_
+    STA a:SplashAnimation_0693
     RTS
-
 
 ;============================================================================
 ; TODO: Document Maybe_SplashAnimation_InitOutroState
@@ -11900,18 +14640,18 @@ Maybe_SplashAnimation_InitIntroState:       ; [$a813]
 ;============================================================================
 Maybe_SplashAnimation_InitOutroState:       ; [$a836]
     LDA #$70
-    STA a:ScreenBuffer_142_
+    STA a:SplashAnimation_068e
     LDA #$ae
-    STA a:ScreenBuffer_143_
+    STA a:SplashAnimation_068f
     LDA #$00
-    STA a:ScreenBuffer_140_
+    STA a:SplashAnimation_068c
     STA a:IntroAnimation_PlayerSizeCounter
-    STA a:ScreenBuffer_144_
-    STA a:ScreenBuffer_145_
+    STA a:SplashAnimation_0690
+    STA a:SplashAnimation_0691
     LDA #$fd
-    STA a:ScreenBuffer_146_
+    STA a:SplashAnimation_0692
     LDA #$01
-    STA a:ScreenBuffer_147_
+    STA a:SplashAnimation_0693
     RTS
 
 ;
@@ -11975,7 +14715,6 @@ BYTE_ARRAY_PRG12__a86e:                     ; [$a86e]
     db $10                                  ; [2]:
     db $20                                  ; [3]:
 
-
 ;============================================================================
 ; TODO: Document SplashAnimation_Maybe_NextAnimState1
 ;
@@ -11992,7 +14731,7 @@ BYTE_ARRAY_PRG12__a86e:                     ; [$a86e]
 SplashAnimation_Maybe_NextAnimState1:       ; [$a872]
     LDA #$00
     STA Temp_Int24
-    LDA a:ScreenBuffer_146_
+    LDA a:SplashAnimation_0692
 
   @LAB_PRG12__a879:                         ; [$a879]
     STA Temp_Int24.M
@@ -12005,13 +14744,12 @@ SplashAnimation_Maybe_NextAnimState1:       ; [$a872]
     STA Temp_Int24.M
     LDA Temp_Int24
     CLC
-    ADC a:ScreenBuffer_144_
-    STA a:ScreenBuffer_144_
+    ADC a:SplashAnimation_0690
+    STA a:SplashAnimation_0690
     LDA Temp_Int24.M
-    ADC a:ScreenBuffer_142_
-    STA a:ScreenBuffer_142_
+    ADC a:SplashAnimation_068e
+    STA a:SplashAnimation_068e
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_Maybe_NextAnimState2
@@ -12029,7 +14767,7 @@ SplashAnimation_Maybe_NextAnimState1:       ; [$a872]
 SplashAnimation_Maybe_NextAnimState2:       ; [$a898]
     LDA #$00
     STA Temp_Int24
-    LDA a:ScreenBuffer_147_
+    LDA a:SplashAnimation_0693
 
   @LAB_PRG12__a89f:                         ; [$a89f]
     STA Temp_Int24.M
@@ -12042,13 +14780,12 @@ SplashAnimation_Maybe_NextAnimState2:       ; [$a898]
     STA Temp_Int24.M
     LDA Temp_Int24
     CLC
-    ADC a:ScreenBuffer_145_
-    STA a:ScreenBuffer_145_
+    ADC a:SplashAnimation_0691
+    STA a:SplashAnimation_0691
     LDA Temp_Int24.M
-    ADC a:ScreenBuffer_143_
-    STA a:ScreenBuffer_143_
+    ADC a:SplashAnimation_068f
+    STA a:SplashAnimation_068f
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_Maybe_AnimPlayerStep
@@ -12069,7 +14806,7 @@ SplashAnimation_Maybe_AnimPlayerStep:       ; [$a8be]
     BCS @LAB_PRG12__a8d8
     AND #$01
     BNE @LAB_PRG12__a8d8
-    LDA a:ScreenBuffer_140_
+    LDA a:SplashAnimation_068c
     AND #$0f
     BNE @LAB_PRG12__a8d8
     LDA #$15
@@ -12104,7 +14841,6 @@ BYTE_ARRAY_PRG12__a8de:                     ; [$a8de]
     db $0a                                  ; [17]:
     db $0b                                  ; [18]:
     db $0b                                  ; [19]:
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_OutroFuncAF82
@@ -12149,7 +14885,6 @@ BYTE_ARRAY_PRG12__a8fb:                     ; [$a8fb]
     db $17                                  ; [18]:
     db $16                                  ; [19]:
 
-
 ;============================================================================
 ; TODO: Document SplashAnimation_A90F
 ;
@@ -12164,12 +14899,12 @@ BYTE_ARRAY_PRG12__a8fb:                     ; [$a8fb]
 ;     SplashAnimation_OutroFuncAF82
 ;============================================================================
 SplashAnimation_A90F:                       ; [$a90f]
-    LDA a:ScreenBuffer_142_
-    STA a:ScreenBuffer_137_
-    LDA a:ScreenBuffer_143_
-    STA a:ScreenBuffer_138_
-    LDA a:ScreenBuffer_140_
-    INC a:ScreenBuffer_140_
+    LDA a:SplashAnimation_068e
+    STA a:SplashAnimation_0689
+    LDA a:SplashAnimation_068f
+    STA a:SplashAnimation_068a
+    LDA a:SplashAnimation_068c
+    INC a:SplashAnimation_068c
     LSR A
     LSR A
     LSR A
@@ -12182,7 +14917,6 @@ SplashAnimation_A90F:                       ; [$a90f]
     ORA Temp_Int24
     TAX
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_RunOutro
@@ -12200,7 +14934,7 @@ SplashAnimation_RunOutro:                   ; [$a932]
     LDA #$01
     JSR SplashAnimation_DrawScenery
     JSR Maybe_SplashAnimation_InitOutroState
-    JSR SplashAnimation_Something_A99C
+    JSR SplashAnimation_SomethingOutro_A99C
     LDA #$0c
     STA CurrentMusic
     JSR #$cb27
@@ -12213,8 +14947,8 @@ SplashAnimation_RunOutro:                   ; [$a932]
     JSR SplashAnimation_OutroFuncAF82
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
-    JSR SplashAnimation_SomethingOutroUpdate
-    LDA a:ScreenBuffer_143_
+    JSR SplashAnimation_UpdateOutro
+    LDA a:SplashAnimation_068f
     CMP #$fa
     BCC @LAB_PRG12__a944
 
@@ -12224,7 +14958,7 @@ SplashAnimation_RunOutro:                   ; [$a932]
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
-    JSR SplashAnimation_SomethingOutroUpdate
+    JSR SplashAnimation_UpdateOutro
     LDA CurrentMusic
     BNE @LAB_PRG12__a963
     LDA #$10
@@ -12236,70 +14970,69 @@ SplashAnimation_RunOutro:                   ; [$a932]
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
-    JSR SplashAnimation_SomethingOutroUpdate
+    JSR SplashAnimation_UpdateOutro
     LDA InterruptCounter
     BNE @LAB_PRG12__a97d
     RTS
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a994:                     ; [$a994]
     db $d8                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a994_1_:                  ; [$a995]
     db $e0                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a996:                     ; [$a996]
     db $c2                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a996_1_:                  ; [$a997]
     db $d0                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a998:                     ; [$a998]
     db $ff                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a998_1_:                  ; [$a999]
     db $ff                                  ; [1]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a99a:                     ; [$a99a]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     FUN_PRG12__a9a2
+;     SpashAnimation_SomethingOutro_a9a2
 ;
 BYTE_ARRAY_PRG12__a99a_1_:                  ; [$a99b]
     db $01                                  ; [1]:
 
-
 ;============================================================================
-; TODO: Document SplashAnimation_Something_A99C
+; TODO: Document SplashAnimation_SomethingOutro_A99C
 ;
 ; INPUTS:
 ;     None.
@@ -12310,18 +15043,17 @@ BYTE_ARRAY_PRG12__a99a_1_:                  ; [$a99b]
 ; XREFS:
 ;     SplashAnimation_RunOutro
 ;============================================================================
-SplashAnimation_Something_A99C:             ; [$a99c]
+SplashAnimation_SomethingOutro_A99C:        ; [$a99c]
     LDX #$00
-    JSR FUN_PRG12__a9a2
+    JSR SpashAnimation_SomethingOutro_a9a2
     INX
 
     ;
     ; v-- Fall through --v
     ;
 
-
 ;============================================================================
-; TODO: Document FUN_PRG12__a9a2
+; TODO: Document SpashAnimation_SomethingOutro_a9a2
 ;
 ; INPUTS:
 ;     X
@@ -12330,24 +15062,23 @@ SplashAnimation_Something_A99C:             ; [$a99c]
 ;     TODO
 ;
 ; XREFS:
-;     SplashAnimation_Something_A99C
+;     SplashAnimation_SomethingOutro_A99C
 ;============================================================================
-FUN_PRG12__a9a2:                            ; [$a9a2]
+SpashAnimation_SomethingOutro_a9a2:         ; [$a9a2]
     LDA #$00
-    STA #$0694,X
-    STA #$0696,X
-    STA #$069c,X
-    STA #$069e,X
+    STA SplashAnimation_0694,X
+    STA SplashAnimation_0696,X
+    STA SplashAnimation_069c,X
+    STA SplashAnimation_069e,X
     LDA #$a994,X
-    STA #$0698,X
+    STA SplashAnimation_0698,X
     LDA #$a996,X
-    STA #$069a,X
+    STA SplashAnimation_069a,X
     LDA #$a998,X
-    STA #$06a0,X
+    STA SplashAnimation_06a0,X
     LDA #$a99a,X
-    STA #$06a2,X
+    STA SplashAnimation_06a2,X
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_SomethingOutroA9C9
@@ -12368,26 +15099,25 @@ SplashAnimation_SomethingOutroA9C9:         ; [$a9c9]
 
   @LAB_PRG12__a9cf:                         ; [$a9cf]
     LDY #$01
-    JSR FUN_PRG12__aa20
+    JSR SpashAnimation_SomethingOutro_aa20
     LDY #$01
-    JSR FUN_PRG12__aa46
-    LDY #$0696,X
+    JSR SpashAnimation_SomethingOutro_aa46
+    LDY SplashAnimation_0696,X
     INY
     CPY #$08
     BNE @LAB_PRG12__a9ed
-    INC #$0694,X
-    LDA #$0694,X
+    INC SplashAnimation_0694,X
+    LDA SplashAnimation_0694,X
     CMP #$0a
-    BEQ FUN_PRG12__a9a2
+    BEQ SpashAnimation_SomethingOutro_a9a2
     LDY #$00
 
   @LAB_PRG12__a9ed:                         ; [$a9ed]
     TYA
-    STA #$0696,X
+    STA SplashAnimation_0696,X
 
 RETURN_A9F1:                                ; [$a9f1]
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_SomethingA9F2
@@ -12407,17 +15137,17 @@ SplashAnimation_SomethingA9F2:              ; [$a9f2]
     INX
 
   @LAB_PRG12__a9f8:                         ; [$a9f8]
-    LDA #$0694,X
+    LDA SplashAnimation_0694,X
     CMP #$03
     BCS RETURN_A9F1
-    LDA #$0698,X
-    STA a:ScreenBuffer_137_
-    LDA #$069a,X
-    STA a:ScreenBuffer_138_
+    LDA SplashAnimation_0698,X
+    STA a:SplashAnimation_0689
+    LDA SplashAnimation_069a,X
+    STA a:SplashAnimation_068a
     TXA
     ASL A
     ASL A
-    ORA #$0694,X
+    ORA SplashAnimation_0694,X
     TAY
     LDA #$aa18,Y
     JMP SplashAnimation_FuncAA94
@@ -12432,9 +15162,8 @@ BYTE_ARRAY_PRG12__aa18:                     ; [$aa18]
     db $1f                                  ; [6]:
     db $00                                  ; [7]:
 
-
 ;============================================================================
-; TODO: Document FUN_PRG12__aa20
+; TODO: Document SpashAnimation_SomethingOutro_aa20
 ;
 ; INPUTS:
 ;     X
@@ -12443,10 +15172,10 @@ BYTE_ARRAY_PRG12__aa18:                     ; [$aa18]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-FUN_PRG12__aa20:                            ; [$aa20]
+SpashAnimation_SomethingOutro_aa20:         ; [$aa20]
     LDA #$00
     STA Temp_Int24
-    LDA #$06a0,X
+    LDA SplashAnimation_06a0,X
 
   @LAB_PRG12__aa27:                         ; [$aa27]
     STA Temp_Int24.M
@@ -12459,16 +15188,15 @@ FUN_PRG12__aa20:                            ; [$aa20]
     STA Temp_Int24.M
     LDA Temp_Int24
     CLC
-    ADC #$069c,X
-    STA #$069c,X
+    ADC SplashAnimation_069c,X
+    STA SplashAnimation_069c,X
     LDA Temp_Int24.M
-    ADC #$0698,X
-    STA #$0698,X
+    ADC SplashAnimation_0698,X
+    STA SplashAnimation_0698,X
     RTS
 
-
 ;============================================================================
-; TODO: Document FUN_PRG12__aa46
+; TODO: Document SpashAnimation_SomethingOutro_aa46
 ;
 ; INPUTS:
 ;     X
@@ -12477,10 +15205,10 @@ FUN_PRG12__aa20:                            ; [$aa20]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-FUN_PRG12__aa46:                            ; [$aa46]
+SpashAnimation_SomethingOutro_aa46:         ; [$aa46]
     LDA #$00
     STA Temp_Int24
-    LDA #$06a2,X
+    LDA SplashAnimation_06a2,X
 
   @LAB_PRG12__aa4d:                         ; [$aa4d]
     STA Temp_Int24.M
@@ -12493,16 +15221,15 @@ FUN_PRG12__aa46:                            ; [$aa46]
     STA Temp_Int24.M
     LDA Temp_Int24
     CLC
-    ADC #$069e,X
-    STA #$069e,X
+    ADC SplashAnimation_069e,X
+    STA SplashAnimation_069e,X
     LDA Temp_Int24.M
-    ADC #$069a,X
-    STA #$069a,X
+    ADC SplashAnimation_069a,X
+    STA SplashAnimation_069a,X
     RTS
 
-
 ;============================================================================
-; TODO: Document SplashAnimation_SomethingOutroUpdate
+; TODO: Document SplashAnimation_UpdateOutro
 ;
 ; INPUTS:
 ;     None.
@@ -12513,11 +15240,11 @@ FUN_PRG12__aa46:                            ; [$aa46]
 ; XREFS:
 ;     SplashAnimation_RunOutro
 ;============================================================================
-SplashAnimation_SomethingOutroUpdate:       ; [$aa6c]
+SplashAnimation_UpdateOutro:                ; [$aa6c]
     LDA #$e0
-    STA a:ScreenBuffer_137_
+    STA a:SplashAnimation_0689
     LDA #$78
-    STA a:ScreenBuffer_138_
+    STA a:SplashAnimation_068a
     LDA InterruptCounter
     AND #$10
     LSR A
@@ -12526,7 +15253,6 @@ SplashAnimation_SomethingOutroUpdate:       ; [$aa6c]
     LSR A
     ADC #$18
     JMP SplashAnimation_FuncAA94
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_SomethingUpdateState
@@ -12546,15 +15272,14 @@ SplashAnimation_SomethingUpdateState:       ; [$aa83]
     LDA #$f0
 
   @LAB_PRG12__aa87:                         ; [$aa87]
-    STA #$0700,X
+    STA SPRITE_0_RANGE_1_START,X
     INX
     INX
     INX
     INX
     BNE @LAB_PRG12__aa87
-    STX a:ScreenBuffer_136_
+    STX a:SplashAnimation_0688
     RTS
-
 
 ;============================================================================
 ; TODO: Document SplashAnimation_FuncAA94
@@ -12569,7 +15294,7 @@ SplashAnimation_SomethingUpdateState:       ; [$aa83]
 ; XREFS:
 ;     SplashAnimation_Maybe_AnimPlayerStep
 ;     SplashAnimation_OutroFuncAF82
-;     SplashAnimation_SomethingOutroUpdate
+;     SplashAnimation_UpdateOutro
 ;============================================================================
 SplashAnimation_FuncAA94:                   ; [$aa94]
     TAY
@@ -12578,71 +15303,71 @@ SplashAnimation_FuncAA94:                   ; [$aa94]
     LDA #$ab37,Y
     STA Temp_Int24.M
     LDY #$00
-    LDA a:ScreenBuffer_137_
+    LDA a:SplashAnimation_0689
     CLC
     ADC (Temp_Int24),Y
-    STA a:ScreenBuffer_137_
+    STA a:SplashAnimation_0689
     INY
-    LDA a:ScreenBuffer_138_
+    LDA a:SplashAnimation_068a
     CLC
     ADC (Temp_Int24),Y
     CMP #$f0
     BCS @_return
-    STA a:ScreenBuffer_138_
+    STA a:SplashAnimation_068a
     INY
     LDA (Temp_Int24),Y
-    STA a:ScreenBuffer_139_
+    STA a:DAT_068b
     INY
     LDA (Temp_Int24),Y
-    STA TextBox_TextY
+    STA TextBox_ContentsY
     INY
     TXA
     PHA
-    LDX a:ScreenBuffer_136_
+    LDX a:SplashAnimation_0688
 
   @LAB_PRG12__aac9:                         ; [$aac9]
-    LDA a:ScreenBuffer_139_
+    LDA a:DAT_068b
     STA Temp_Int24.U
-    LDA a:ScreenBuffer_137_
-    STA TextBox_TextX
+    LDA a:SplashAnimation_0689
+    STA TextBox_ContentsX
 
   @LAB_PRG12__aad3:                         ; [$aad3]
     LDA (Temp_Int24),Y
     INY
     CMP #$ff
     BEQ @LAB_PRG12__aaf9
-    STA #$0701,X
-    LDA a:ScreenBuffer_138_
+    STA SPRITE0_TILE,X
+    LDA a:SplashAnimation_068a
     CMP #$f0
     BCS @LAB_PRG12__ab11
-    LDA a:ScreenBuffer_138_
-    STA #$0700,X
+    LDA a:SplashAnimation_068a
+    STA SPRITE_0_RANGE_1_START,X
     LDA (Temp_Int24),Y
     INY
-    STA #$0702,X
-    LDA TextBox_TextX
-    STA #$0703,X
+    STA SPRITE0_ATTRS,X
+    LDA TextBox_ContentsX
+    STA SPRITE0_X,X
     INX
     INX
     INX
     INX
 
   @LAB_PRG12__aaf9:                         ; [$aaf9]
-    LDA TextBox_TextX
+    LDA TextBox_ContentsX
     CLC
     ADC #$08
-    STA TextBox_TextX
+    STA TextBox_ContentsX
     DEC Temp_Int24.U
     BNE @LAB_PRG12__aad3
-    LDA a:ScreenBuffer_138_
+    LDA a:SplashAnimation_068a
     CLC
     ADC #$08
-    STA a:ScreenBuffer_138_
-    DEC TextBox_TextY
+    STA a:SplashAnimation_068a
+    DEC TextBox_ContentsY
     BNE @LAB_PRG12__aac9
 
   @LAB_PRG12__ab11:                         ; [$ab11]
-    STX a:ScreenBuffer_136_
+    STX a:SplashAnimation_0688
     PLA
     TAX
 

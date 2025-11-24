@@ -12,6 +12,7 @@ body {
   background: #1c212d;
   color: white;
   padding: 0.5em;
+  line-height: 1.5;
 }
 
 body, * {
@@ -27,10 +28,28 @@ a:visited {
 
 pre {
   display: grid;
-  grid-template-columns: minmax(70ch, max-content) 1fr;
-  gap: 0 4em;
+  grid-template-columns: minmax(6ch, min-content)
+                         minmax(70ch, max-content)
+                         1fr;
+  gap: 0 3em;
   margin: 0;
   padding: 0;
+}
+
+.anc {
+  grid-area: addr;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.anc:link,
+.anc:visited {
+  color: #666677;
+  text-decoration: none;
+}
+
+.anc:link:hover {
+  color: #9bdeff;
 }
 
 .equs {
@@ -42,14 +61,14 @@ pre {
 .l {
   display: grid;
   grid-template-columns: subgrid;
+  grid-column: 1 / -1;
   min-height: 1lh;
 }
 
 .c,
 .cp,
-.equs,
-.l {
-  grid-column: 1 / -1;
+.equs {
+  grid-column: 2;
 }
 
 .cp {
@@ -64,7 +83,12 @@ pre {
   color: #8aa9ac;
 }
 
+.cd {
+  grid-column: 2 / 3;
+}
+
 .ce {
+  grid-column: -1;
   text-wrap: wrap;
   text-indent: 2ch hanging;
 }
@@ -76,6 +100,7 @@ pre {
 .la,
 .lla {
   font-weight: bold;
+  grid-column: 2 / 3;
 }
 
 .la,
@@ -111,67 +136,61 @@ pre {
 ; PPU ($2000 - $2007)
 ;============================================================================
 </div><span class="l"></span>
-<span class="l">BASE $2000</span>
+<span class="l"><span class="cd"><span class="i">BASE $2000</span></span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUCTRL"></a><div class="c">;
 ; XREFS:
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#PPU_InitVBlank">PPU_InitVBlank</a>
 ;     <a href="PRG15_MIRROR.html#PPU_SetVRAMIncrementAdd1Across">PPU_SetVRAMIncrementAdd1Across</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>
 ;
-</div><span class="l"><a name="PPUCTRL" href="#PPUCTRL" class="la">PPUCTRL:</a><span class="ce">; [$2000]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2000] PPUCtrlFlags</span></span>
+</div><span class="l"><a class="anc" name="2000" href="#2000">[2000]</a><a href="#PPUCTRL" class="la">PPUCTRL:</a><span class="ce">; [$2000]</span></span>
+<span class="l"><a class="anc" name="2000" href="#2000">[2000]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2000] PPUCtrlFlags</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUMASK"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="PPUMASK" href="#PPUMASK" class="la">PPUMASK:</a><span class="ce">; [$2001]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2001] PPUMaskFlags</span></span>
+</div><span class="l"><a class="anc" name="2001" href="#2001">[2001]</a><a href="#PPUMASK" class="la">PPUMASK:</a><span class="ce">; [$2001]</span></span>
+<span class="l"><a class="anc" name="2001" href="#2001">[2001]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2001] PPUMaskFlags</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUSTATUS"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#DEADCODE_FUN_PRG15_MIRROR__cb0c">DEADCODE_FUN_PRG15_MIRROR__cb0c</a>
 ;     <a href="PRG15_MIRROR.html#Game_Init">Game_Init</a>
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="PPUSTATUS" href="#PPUSTATUS" class="la">PPUSTATUS:</a><span class="ce">; [$2002]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2002] PPUStatusFlags</span></span>
+</div><span class="l"><a class="anc" name="2002" href="#2002">[2002]</a><a href="#PPUSTATUS" class="la">PPUSTATUS:</a><span class="ce">; [$2002]</span></span>
+<span class="l"><a class="anc" name="2002" href="#2002">[2002]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2002] PPUStatusFlags</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="OAMADDR"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;
-</div><span class="l"><a name="OAMADDR" href="#OAMADDR" class="la">OAMADDR:</a><span class="ce">; [$2003]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2003] byte</span></span>
+</div><span class="l"><a class="anc" name="2003" href="#2003">[2003]</a><a href="#OAMADDR" class="la">OAMADDR:</a><span class="ce">; [$2003]</span></span>
+<span class="l"><a class="anc" name="2003" href="#2003">[2003]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2003] byte</span></span>
 <span class="l"></span>
-<span class="l"><a name="OAMDATA" href="#OAMDATA" class="la">OAMDATA:</a><span class="ce">; [$2004]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2004] byte</span></span>
+<a name="OAMDATA"></a><span class="l"><a class="anc" name="2004" href="#2004">[2004]</a><a href="#OAMDATA" class="la">OAMDATA:</a><span class="ce">; [$2004]</span></span>
+<span class="l"><a class="anc" name="2004" href="#2004">[2004]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2004] byte</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUSCROLL"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
-</div><span class="l"><a name="PPUSCROLL" href="#PPUSCROLL" class="la">PPUSCROLL:</a><span class="ce">; [$2005]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2005] byte</span></span>
+</div><span class="l"><a class="anc" name="2005" href="#2005">[2005]</a><a href="#PPUSCROLL" class="la">PPUSCROLL:</a><span class="ce">; [$2005]</span></span>
+<span class="l"><a class="anc" name="2005" href="#2005">[2005]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2005] byte</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUADDR"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
-;     <a href="PRG15_MIRROR.html#CHR_LoadTilesetPages">CHR_LoadTilesetPages</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
-;     <a href="PRG15_MIRROR.html#Maybe_LoadSpritesFromBank8">Maybe_LoadSpritesFromBank8</a>
+;     <a href="PRG15_MIRROR.html#Area_LoadTiles">Area_LoadTiles</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>
@@ -180,24 +199,24 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_LoadGlyphsForStrings">PPU_LoadGlyphsForStrings</a>
 ;     <a href="PRG15_MIRROR.html#PPU_SetAddr">PPU_SetAddr</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WriteTilesFromCHRRAM">PPU_WriteTilesFromCHRRAM</a>
-;     <a href="PRG15_MIRROR.html#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>
+;     <a href="PRG15_MIRROR.html#Sprites_LoadCommon">Sprites_LoadCommon</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawHUDSprites">UI_DrawHUDSprites</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawSelectedItem">UI_DrawSelectedItem</a>
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
-</div><span class="l"><a name="PPUADDR" href="#PPUADDR" class="la">PPUADDR:</a><span class="ce">; [$2006]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2006] byte</span></span>
+</div><span class="l"><a class="anc" name="2006" href="#2006">[2006]</a><a href="#PPUADDR" class="la">PPUADDR:</a><span class="ce">; [$2006]</span></span>
+<span class="l"><a class="anc" name="2006" href="#2006">[2006]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2006] byte</span></span>
 <span class="l"></span>
-<div class="c">;
+<a name="PPUDATA"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>
 ;     <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>
 ;     <a href="PRG12.html#UI_DrawText">UI_DrawText</a>
-;     <a href="PRG15_MIRROR.html#CHR_LoadTilesetPages">CHR_LoadTilesetPages</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d654">FUN_PRG15_MIRROR__d654</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d673">FUN_PRG15_MIRROR__d673</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d699">FUN_PRG15_MIRROR__d699</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__d6b1">FUN_PRG15_MIRROR__d6b1</a>
-;     <a href="PRG15_MIRROR.html#FUN_PRG15_MIRROR__fbaf">FUN_PRG15_MIRROR__fbaf</a>
-;     <a href="PRG15_MIRROR.html#Maybe_LoadSpritesFromBank8">Maybe_LoadSpritesFromBank8</a>
+;     <a href="PRG15_MIRROR.html#Area_LoadTiles">Area_LoadTiles</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_Draw">PPUBuffer_Draw</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>
 ;     <a href="PRG15_MIRROR.html#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>
@@ -206,11 +225,17 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_FillGrid">PPU_FillGrid</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WriteGlyphTile">PPU_WriteGlyphTile</a>
 ;     <a href="PRG15_MIRROR.html#PPU_WriteTilesFromCHRRAM">PPU_WriteTilesFromCHRRAM</a>
-;     <a href="PRG15_MIRROR.html#UI_DrawStatusSymbols">UI_DrawStatusSymbols</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>
+;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>
+;     <a href="PRG15_MIRROR.html#Sprites_LoadCommon">Sprites_LoadCommon</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawHUDSprites">UI_DrawHUDSprites</a>
+;     <a href="PRG15_MIRROR.html#UI_DrawSelectedItem">UI_DrawSelectedItem</a>
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
-</div><span class="l"><a name="PPUDATA" href="#PPUDATA" class="la">PPUDATA:</a><span class="ce">; [$2007]</span></span>
-<span class="l"><span><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2007] byte</span></span>
+</div><span class="l"><a class="anc" name="2007" href="#2007">[2007]</a><a href="#PPUDATA" class="la">PPUDATA:</a><span class="ce">; [$2007]</span></span>
+<span class="l"><a class="anc" name="2007" href="#2007">[2007]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2007] byte</span></span>
 </pre>
  </body>
 </html>

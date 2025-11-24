@@ -4,62 +4,107 @@
 ; PRG3 ($8000 - $bfff)
 ;============================================================================
 
-BASE $8000
+    BASE $8000
+
+
+;============================================================================
+; Relative offset to the area tables.
+;
+; XREFS:
+;     Game_LoadAreaTable
+;============================================================================
 
 ;
 ; XREFS:
 ;     Game_LoadAreaTable
 ;
-AREAS_TABLE:                                ; [$8000]
-    dw $0002                                ; [$8000] ushort
+AREAS_TABLE_PTR:                            ; [$8000]
+    dw $0002                                ; AREA_TABLES
+                                            ; [$PRG3::8000]
+
+
+;============================================================================
+; Table of area indexes to metadata tables.
+;
+; XREFS:
+;     AREAS_TABLE_PTR [$PRG3::8000]
+;============================================================================
 
 ;
 ; XREFS:
-;     AREAS_TABLE [$PRG3::8000]
+;     AREAS_TABLE_PTR [$PRG3::8000]
 ;
-LEVEL_0_START_REL_PTR:                      ; [$8002]
-    dw $0012                                ; [$8002] ushort
+AREA_TABLES:                                ; [$8002]
+    dw $0012                                ; EOLIS_AREA_DATA
+                                            ; [$PRG3::8002]
+    dw $0413                                ; APOLUNE_AREA_DATA
+                                            ; [$PRG3::8004]
+    dw $090a                                ; FOREPAW_AREA_DATA
+                                            ; [$PRG3::8006]
+    dw $1829                                ; MASCON_AREA_DATA
+                                            ; [$PRG3::8008]
+    dw $11ac                                ; VICTIM_AREA_DATA
+                                            ; [$PRG3::800a]
+    dw $0e7b                                ; CONFLATE_AREA_DATA
+                                            ; [$PRG3::800c]
+    dw $1c7e                                ; DAYBREAK_AREA_DATA
+                                            ; [$PRG3::800e]
+    dw $2049                                ; EVIL_FORTRESS_AREA_DATA
+                                            ; [$PRG3::8010]
 
-LEVEL_3_DATA_START_REL_PTR:                 ; [$8004]
-    dw $0413                                ; [$8004] ushort
 
-LEVEL_1_DATA_START_REL_OFFSET:              ; [$8006]
-    dw $090a                                ; [$8006] ushort
-
-LEVEL_2_DATA_START_REL_OFFSET:              ; [$8008]
-    dw $1829                                ; [$8008] ushort
-
-LEVEL_6_DATA_START_REL_OFFSET:              ; [$800a]
-    dw $11ac                                ; [$800a] ushort
-
-LEVEL_4_DATA_START_REL_OFFSET:              ; [$800c]
-    dw $0e7b                                ; [$800c] ushort
-
-LEVEL_5_DATA_START_REL_OFFSET:              ; [$800e]
-    dw $1c7e                                ; [$800e] ushort
-
-LEVEL_FINAL_BOSS_START_REL_PTR:             ; [$8010]
-    dw $2049                                ; [$8010] ushort
+;============================================================================
+; Table of relative pointers from 0x8000 for the Eolis area.
+;
+; XREFS:
+;     AREA_TABLES [$PRG3::8002]
+;============================================================================
 
 ;
 ; XREFS:
-;     LEVEL_0_START_REL_PTR [$PRG3::8002]
+;     AREA_TABLES [$PRG3::8002]
 ;
-AREA_0_DATA_START:                          ; [$8012]
-    dw $001c,$02a6,$0326,$034a,$0373        ; [$8012] ushort
+EOLIS_AREA_DATA:                            ; [$8012]
+    dw $001c                                ; EOLIS_AREA_DATA.blockAttrsRelPtr
+                                            ; [$PRG3::8012]
+    dw $02a6                                ; EOLIS_BLOCK_PROPERTIES
+                                            ; [$PRG3::8014]
+    dw $0326                                ; EOLIS_SCROLL_DATA
+                                            ; [$PRG3::8016]
+    dw $034a                                ; EOLIS_DOOR_LOCATIONS
+                                            ; [$PRG3::8018]
+    dw $0373                                ; EOLIS_DOOR_DESTINATIONS
+                                            ; [$PRG3::801a]
 
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8012]
+;     EOLIS_AREA_DATA [$PRG3::8012]
 ;
-AREA_0_DATA_START.blockAttrsRelPtr:         ; [$801c]
-    dw $0026,$00a6,$0126,$01a6,$0226        ; [$801c] ushort
+EOLIS_AREA_DATA.blockAttrsRelPtr:           ; [$801c]
+    dw $0026                                ; EOLIS_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::801c]
+    dw $00a6                                ; EOLIS_BLOCK_DATA+1
+                                            ; [$PRG3::801e]
+    dw $0126                                ; EOLIS_BLOCK_DATA_2
+                                            ; [$PRG3::8020]
+    dw $01a6                                ; EOLIS_BLOCK_DATA_3
+                                            ; [$PRG3::8022]
+    dw $0226                                ; EOLIS_BLOCK_DATA_4
+                                            ; [$PRG3::8024]
+
+
+;============================================================================
+; Eolis block attributes
+;
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::801c]
+;============================================================================
 
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::801c]
+;     EOLIS_AREA_DATA [$PRG3::801c]
 ;
-BYTE_ARRAY_PRG3__8026:                      ; [$8026]
+EOLIS_BLOCK_ATTRIBUTES:                     ; [$8026]
     db $00                                  ; [0]:
     db $aa                                  ; [1]:
     db $55                                  ; [2]:
@@ -189,11 +234,19 @@ BYTE_ARRAY_PRG3__8026:                      ; [$8026]
     db $aa                                  ; [126]:
     db $aa                                  ; [127]:
 
+
+;============================================================================
+; Eolis block data (1)
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::801e]
+;     EOLIS_AREA_DATA [$PRG3::801e]
+;============================================================================
+
 ;
-BYTE_ARRAY_PRG3__80a6:                      ; [$80a6]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::801e]
+;
+EOLIS_BLOCK_DATA_1:                         ; [$80a6]
     db $00                                  ; [0]:
     db $83                                  ; [1]:
     db $95                                  ; [2]:
@@ -323,11 +376,19 @@ BYTE_ARRAY_PRG3__80a6:                      ; [$80a6]
     db $bf                                  ; [126]:
     db $af                                  ; [127]:
 
+
+;============================================================================
+; Eolis block data (2)
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8020]
+;     EOLIS_AREA_DATA [$PRG3::8020]
+;============================================================================
+
 ;
-BYTE_ARRAY_PRG3__8126:                      ; [$8126]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8020]
+;
+EOLIS_BLOCK_DATA_2:                         ; [$8126]
     db $00                                  ; [0]:
     db $83                                  ; [1]:
     db $8e                                  ; [2]:
@@ -457,11 +518,19 @@ BYTE_ARRAY_PRG3__8126:                      ; [$8126]
     db $83                                  ; [126]:
     db $ba                                  ; [127]:
 
+
+;============================================================================
+; Eolis block data (3)
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8022]
+;     EOLIS_AREA_DATA [$PRG3::8022]
+;============================================================================
+
 ;
-BYTE_ARRAY_PRG3__81a6:                      ; [$81a6]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8022]
+;
+EOLIS_BLOCK_DATA_3:                         ; [$81a6]
     db $00                                  ; [0]:
     db $83                                  ; [1]:
     db $ab                                  ; [2]:
@@ -591,11 +660,19 @@ BYTE_ARRAY_PRG3__81a6:                      ; [$81a6]
     db $c8                                  ; [126]:
     db $af                                  ; [127]:
 
+
+;============================================================================
+; Eolis block data (4)
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8024]
+;     EOLIS_AREA_DATA [$PRG3::8024]
+;============================================================================
+
 ;
-BYTE_ARRAY_PRG3__8226:                      ; [$8226]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8024]
+;
+EOLIS_BLOCK_DATA_4:                         ; [$8226]
     db $00                                  ; [0]:
     db $83                                  ; [1]:
     db $ab                                  ; [2]:
@@ -725,145 +802,161 @@ BYTE_ARRAY_PRG3__8226:                      ; [$8226]
     db $83                                  ; [126]:
     db $9c                                  ; [127]:
 
+
+;============================================================================
+; Eolis block properties
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8014]
-;
-BYTE_ARRAY_PRG3__82a6:                      ; [$82a6]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $01                                  ; [3]:
-    db $01                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $01                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $01                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $01                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $01                                  ; [41]:
-    db $01                                  ; [42]:
-    db $01                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $01                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $01                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $01                                  ; [61]:
-    db $03                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $03                                  ; [78]:
-    db $03                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $04                                  ; [92]:
-    db $04                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
-    db $00                                  ; [100]:
-    db $00                                  ; [101]:
-    db $00                                  ; [102]:
-    db $01                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $00                                  ; [107]:
-    db $00                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $03                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $00                                  ; [114]:
-    db $00                                  ; [115]:
-    db $00                                  ; [116]:
-    db $00                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $00                                  ; [120]:
-    db $00                                  ; [121]:
-    db $00                                  ; [122]:
-    db $00                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
+;     EOLIS_AREA_DATA [$PRG3::8014]
+;============================================================================
 
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8016]
+;     EOLIS_AREA_DATA [$PRG3::8014]
 ;
-BYTE_ARRAY_PRG3__8326:                      ; [$8326]
+EOLIS_BLOCK_PROPERTIES:                     ; [$82a6]
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_AIR                         ; [1]:
+    db BLOCK_IS_AIR                         ; [2]:
+    db BLOCK_IS_SOLID                       ; [3]:
+    db BLOCK_IS_SOLID                       ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_IS_AIR                         ; [7]:
+    db BLOCK_IS_SOLID                       ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_SOLID                       ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_IS_AIR                         ; [16]:
+    db BLOCK_IS_AIR                         ; [17]:
+    db BLOCK_IS_AIR                         ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_AIR                         ; [21]:
+    db BLOCK_IS_AIR                         ; [22]:
+    db BLOCK_IS_SOLID                       ; [23]:
+    db BLOCK_IS_AIR                         ; [24]:
+    db BLOCK_IS_AIR                         ; [25]:
+    db BLOCK_IS_AIR                         ; [26]:
+    db BLOCK_IS_AIR                         ; [27]:
+    db BLOCK_IS_AIR                         ; [28]:
+    db BLOCK_IS_AIR                         ; [29]:
+    db BLOCK_IS_AIR                         ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_AIR                         ; [32]:
+    db BLOCK_IS_AIR                         ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_AIR                         ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_AIR                         ; [40]:
+    db BLOCK_IS_SOLID                       ; [41]:
+    db BLOCK_IS_SOLID                       ; [42]:
+    db BLOCK_IS_SOLID                       ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_IS_AIR                         ; [46]:
+    db BLOCK_IS_AIR                         ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_AIR                         ; [49]:
+    db BLOCK_IS_AIR                         ; [50]:
+    db BLOCK_IS_AIR                         ; [51]:
+    db BLOCK_IS_AIR                         ; [52]:
+    db BLOCK_IS_SOLID                       ; [53]:
+    db BLOCK_IS_AIR                         ; [54]:
+    db BLOCK_IS_AIR                         ; [55]:
+    db BLOCK_IS_SOLID                       ; [56]:
+    db BLOCK_IS_AIR                         ; [57]:
+    db BLOCK_IS_AIR                         ; [58]:
+    db BLOCK_IS_AIR                         ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_SOLID                       ; [61]:
+    db BLOCK_IS_DOOR                        ; [62]:
+    db BLOCK_IS_AIR                         ; [63]:
+    db BLOCK_IS_AIR                         ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_AIR                         ; [70]:
+    db BLOCK_IS_AIR                         ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_AIR                         ; [73]:
+    db BLOCK_IS_AIR                         ; [74]:
+    db BLOCK_IS_AIR                         ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_DOOR                        ; [78]:
+    db BLOCK_IS_DOOR                        ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_AIR                         ; [83]:
+    db BLOCK_IS_AIR                         ; [84]:
+    db BLOCK_IS_AIR                         ; [85]:
+    db BLOCK_IS_AIR                         ; [86]:
+    db BLOCK_IS_AIR                         ; [87]:
+    db BLOCK_IS_AIR                         ; [88]:
+    db BLOCK_IS_AIR                         ; [89]:
+    db BLOCK_IS_AIR                         ; [90]:
+    db BLOCK_IS_AIR                         ; [91]:
+    db BLOCK_FOREGROUND                     ; [92]:
+    db BLOCK_FOREGROUND                     ; [93]:
+    db BLOCK_IS_AIR                         ; [94]:
+    db BLOCK_IS_AIR                         ; [95]:
+    db BLOCK_IS_AIR                         ; [96]:
+    db BLOCK_IS_AIR                         ; [97]:
+    db BLOCK_IS_AIR                         ; [98]:
+    db BLOCK_IS_AIR                         ; [99]:
+    db BLOCK_IS_AIR                         ; [100]:
+    db BLOCK_IS_AIR                         ; [101]:
+    db BLOCK_IS_AIR                         ; [102]:
+    db BLOCK_IS_SOLID                       ; [103]:
+    db BLOCK_IS_AIR                         ; [104]:
+    db BLOCK_IS_AIR                         ; [105]:
+    db BLOCK_IS_AIR                         ; [106]:
+    db BLOCK_IS_AIR                         ; [107]:
+    db BLOCK_IS_AIR                         ; [108]:
+    db BLOCK_IS_AIR                         ; [109]:
+    db BLOCK_IS_AIR                         ; [110]:
+    db BLOCK_IS_DOOR                        ; [111]:
+    db BLOCK_IS_AIR                         ; [112]:
+    db BLOCK_IS_AIR                         ; [113]:
+    db BLOCK_IS_AIR                         ; [114]:
+    db BLOCK_IS_AIR                         ; [115]:
+    db BLOCK_IS_AIR                         ; [116]:
+    db BLOCK_IS_AIR                         ; [117]:
+    db BLOCK_IS_AIR                         ; [118]:
+    db BLOCK_IS_AIR                         ; [119]:
+    db BLOCK_IS_AIR                         ; [120]:
+    db BLOCK_IS_AIR                         ; [121]:
+    db BLOCK_IS_AIR                         ; [122]:
+    db BLOCK_IS_AIR                         ; [123]:
+    db BLOCK_IS_AIR                         ; [124]:
+    db BLOCK_IS_AIR                         ; [125]:
+    db BLOCK_IS_AIR                         ; [126]:
+    db BLOCK_IS_AIR                         ; [127]:
+
+
+;============================================================================
+; Eolis scroll data
+;
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8016]
+;============================================================================
+
+;
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8016]
+;
+EOLIS_SCROLL_DATA:                          ; [$8326]
     db $ff                                  ; [0]:
     db $ff                                  ; [1]:
     db $ff                                  ; [2]:
@@ -901,11 +994,19 @@ BYTE_ARRAY_PRG3__8326:                      ; [$8326]
     db $ff                                  ; [34]:
     db $ff                                  ; [35]:
 
+
+;============================================================================
+; Eolis door locations
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::8018]
+;     EOLIS_AREA_DATA [$PRG3::8018]
+;============================================================================
+
 ;
-BYTE_ARRAY_PRG3__834a:                      ; [$834a]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::8018]
+;
+EOLIS_DOOR_LOCATIONS:                       ; [$834a]
     db $00                                  ; [0]:
     db $9c                                  ; [1]:
     db $00                                  ; [2]:
@@ -948,11 +1049,19 @@ BYTE_ARRAY_PRG3__834a:                      ; [$834a]
     db $a1                                  ; [39]:
     db $ff                                  ; [40]:
 
+
+;============================================================================
+; Eolis door destinations
 ;
 ; XREFS:
-;     AREA_0_DATA_START [$PRG3::801a]
+;     EOLIS_AREA_DATA [$PRG3::801a]
+;============================================================================
+
 ;
-DAT_PRG3__8373:                             ; [$8373]
+; XREFS:
+;     EOLIS_AREA_DATA [$PRG3::801a]
+;
+EOLIS_DOOR_DESTINATIONS:                    ; [$8373]
     hex 01 00 00 00 00 00 00 00 41 00 a2 00 00 00 00 00 ; [$8373] undefined
     hex a7 00 0f 00 00 00 00 00 4a 00 0f 00 00 00 00 00 ; [$8383] undefined
     hex 34 00 00 00 00 00 00 00 f6 00 00 00 00 00 00 00 ; [$8393] undefined
@@ -964,25 +1073,39 @@ DAT_PRG3__8373:                             ; [$8373]
     hex 00 07 00 00 01 06 00 00 02 01 00 00 03 05 00 00 ; [$83f3] undefined
     hex 04 04 00 00 05 09 06 00 06 08 06 00 07 00 06 00 ; [$8403] undefined
 
-;
-; XREFS:
-;     LEVEL_3_DATA_START_REL_PTR [$PRG3::8004]
-;
-AREA_3_DATA:                                ; [$8413]
-    dw $041d,$06d4,$075d,$085d,$0882        ; [$8413] ushort
+APOLUNE_AREA_DATA:                          ; [$8413]
+    dw $041d                                ; APOLUNE_AREA_DATA.blockAttrsRelPtr
+                                            ; [$PRG3::8413]
+    dw $06d4                                ; AREA_3_BLOCK_PROPERTIES
+                                            ; [$PRG3::8415]
+    dw $075d                                ; AREA_3_SCROLL_DATA
+                                            ; [$PRG3::8417]
+    dw $085d                                ; AREA_3_DOOR_LOCATIONS
+                                            ; [$PRG3::8419]
+    dw $0882                                ; AREA_3_DOOR_DESTINATIONS
+                                            ; [$PRG3::841b]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8413]
+;     APOLUNE_AREA_DATA [$PRG3::8413]
 ;
-AREA_3_DATA.blockAttrsRelPtr:               ; [$841d]
-    dw $0427,$04b0,$0539,$05c2,$064b        ; [$841d] ushort
+APOLUNE_AREA_DATA.blockAttrsRelPtr:         ; [$841d]
+    dw $0427                                ; AREA_3_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::841d]
+    dw $04b0                                ; AREA_3_BLOCK_DATA+1
+                                            ; [$PRG3::841f]
+    dw $0539                                ; AREA_3_BLOCK_DATA_2
+                                            ; [$PRG3::8421]
+    dw $05c2                                ; AREA_3_BLOCK_DATA_3
+                                            ; [$PRG3::8423]
+    dw $064b                                ; AREA_3_BLOCK_DATA_4
+                                            ; [$PRG3::8425]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::841d]
+;     APOLUNE_AREA_DATA [$PRG3::841d]
 ;
-BYTE_ARRAY_PRG3__8427:                      ; [$8427]
+AREA_3_BLOCK_ATTRIBUTES:                    ; [$8427]
     db $00                                  ; [0]:
     db $55                                  ; [1]:
     db $55                                  ; [2]:
@@ -1123,9 +1246,9 @@ BYTE_ARRAY_PRG3__8427:                      ; [$8427]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::841f]
+;     APOLUNE_AREA_DATA [$PRG3::841f]
 ;
-BYTE_ARRAY_PRG3__84b0:                      ; [$84b0]
+AREA_3_BLOCK_DATA_1:                        ; [$84b0]
     db $00                                  ; [0]:
     db $80                                  ; [1]:
     db $80                                  ; [2]:
@@ -1266,9 +1389,9 @@ BYTE_ARRAY_PRG3__84b0:                      ; [$84b0]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8421]
+;     APOLUNE_AREA_DATA [$PRG3::8421]
 ;
-BYTE_ARRAY_PRG3__8539:                      ; [$8539]
+AREA_3_BLOCK_DATA_2:                        ; [$8539]
     db $00                                  ; [0]:
     db $80                                  ; [1]:
     db $80                                  ; [2]:
@@ -1409,9 +1532,9 @@ BYTE_ARRAY_PRG3__8539:                      ; [$8539]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8423]
+;     APOLUNE_AREA_DATA [$PRG3::8423]
 ;
-BYTE_ARRAY_PRG3__85c2:                      ; [$85c2]
+AREA_3_BLOCK_DATA_3:                        ; [$85c2]
     db $00                                  ; [0]:
     db $80                                  ; [1]:
     db $91                                  ; [2]:
@@ -1552,9 +1675,9 @@ BYTE_ARRAY_PRG3__85c2:                      ; [$85c2]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8425]
+;     APOLUNE_AREA_DATA [$PRG3::8425]
 ;
-BYTE_ARRAY_PRG3__864b:                      ; [$864b]
+AREA_3_BLOCK_DATA_4:                        ; [$864b]
     db $00                                  ; [0]:
     db $80                                  ; [1]:
     db $93                                  ; [2]:
@@ -1695,152 +1818,152 @@ BYTE_ARRAY_PRG3__864b:                      ; [$864b]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8415]
+;     APOLUNE_AREA_DATA [$PRG3::8415]
 ;
-BYTE_ARRAY_PRG3__86d4:                      ; [$86d4]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $01                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $01                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $01                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $02                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $01                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $01                                  ; [53]:
-    db $01                                  ; [54]:
-    db $01                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $01                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $01                                  ; [68]:
-    db $00                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $01                                  ; [83]:
-    db $03                                  ; [84]:
-    db $03                                  ; [85]:
-    db $01                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $0b                                  ; [99]:
-    db $00                                  ; [100]:
-    db $00                                  ; [101]:
-    db $00                                  ; [102]:
-    db $00                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $00                                  ; [107]:
-    db $00                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $00                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $00                                  ; [114]:
-    db $00                                  ; [115]:
-    db $00                                  ; [116]:
-    db $00                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $00                                  ; [120]:
-    db $03                                  ; [121]:
-    db $03                                  ; [122]:
-    db $00                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
-    db $0a                                  ; [128]:
-    db $0c                                  ; [129]:
-    db $04                                  ; [130]:
-    db $0d                                  ; [131]:
-    db $00                                  ; [132]:
-    db $00                                  ; [133]:
-    db $00                                  ; [134]:
-    db $00                                  ; [135]:
-    db $06                                  ; [136]:
+AREA_3_BLOCK_PROPERTIES:                    ; [$86d4]
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_AIR                         ; [1]:
+    db BLOCK_IS_AIR                         ; [2]:
+    db BLOCK_IS_AIR                         ; [3]:
+    db BLOCK_IS_AIR                         ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_IS_AIR                         ; [7]:
+    db BLOCK_IS_SOLID                       ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_AIR                         ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_IS_AIR                         ; [16]:
+    db BLOCK_IS_AIR                         ; [17]:
+    db BLOCK_IS_AIR                         ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_AIR                         ; [21]:
+    db BLOCK_IS_AIR                         ; [22]:
+    db BLOCK_IS_AIR                         ; [23]:
+    db BLOCK_IS_SOLID                       ; [24]:
+    db BLOCK_IS_AIR                         ; [25]:
+    db BLOCK_IS_AIR                         ; [26]:
+    db BLOCK_IS_SOLID                       ; [27]:
+    db BLOCK_IS_AIR                         ; [28]:
+    db BLOCK_IS_AIR                         ; [29]:
+    db BLOCK_IS_AIR                         ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_LADDER                      ; [32]:
+    db BLOCK_IS_AIR                         ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_AIR                         ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_AIR                         ; [40]:
+    db BLOCK_IS_AIR                         ; [41]:
+    db BLOCK_IS_AIR                         ; [42]:
+    db BLOCK_IS_SOLID                       ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_IS_AIR                         ; [46]:
+    db BLOCK_IS_AIR                         ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_AIR                         ; [49]:
+    db BLOCK_IS_AIR                         ; [50]:
+    db BLOCK_IS_AIR                         ; [51]:
+    db BLOCK_IS_AIR                         ; [52]:
+    db BLOCK_IS_SOLID                       ; [53]:
+    db BLOCK_IS_SOLID                       ; [54]:
+    db BLOCK_IS_SOLID                       ; [55]:
+    db BLOCK_IS_AIR                         ; [56]:
+    db BLOCK_IS_AIR                         ; [57]:
+    db BLOCK_IS_AIR                         ; [58]:
+    db BLOCK_IS_AIR                         ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_SOLID                       ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_IS_AIR                         ; [63]:
+    db BLOCK_IS_AIR                         ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_SOLID                       ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_AIR                         ; [70]:
+    db BLOCK_IS_AIR                         ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_AIR                         ; [73]:
+    db BLOCK_IS_AIR                         ; [74]:
+    db BLOCK_IS_AIR                         ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_SOLID                       ; [83]:
+    db BLOCK_IS_DOOR                        ; [84]:
+    db BLOCK_IS_DOOR                        ; [85]:
+    db BLOCK_IS_SOLID                       ; [86]:
+    db BLOCK_IS_AIR                         ; [87]:
+    db BLOCK_IS_AIR                         ; [88]:
+    db BLOCK_IS_AIR                         ; [89]:
+    db BLOCK_IS_AIR                         ; [90]:
+    db BLOCK_IS_AIR                         ; [91]:
+    db BLOCK_IS_AIR                         ; [92]:
+    db BLOCK_IS_AIR                         ; [93]:
+    db BLOCK_IS_AIR                         ; [94]:
+    db BLOCK_IS_AIR                         ; [95]:
+    db BLOCK_IS_AIR                         ; [96]:
+    db BLOCK_IS_AIR                         ; [97]:
+    db BLOCK_IS_AIR                         ; [98]:
+    db BLOCK_MAYBE_BREAKABLE_BY_MATTOCK     ; [99]:
+    db BLOCK_IS_AIR                         ; [100]:
+    db BLOCK_IS_AIR                         ; [101]:
+    db BLOCK_IS_AIR                         ; [102]:
+    db BLOCK_IS_AIR                         ; [103]:
+    db BLOCK_IS_AIR                         ; [104]:
+    db BLOCK_IS_AIR                         ; [105]:
+    db BLOCK_IS_AIR                         ; [106]:
+    db BLOCK_IS_AIR                         ; [107]:
+    db BLOCK_IS_AIR                         ; [108]:
+    db BLOCK_IS_AIR                         ; [109]:
+    db BLOCK_IS_AIR                         ; [110]:
+    db BLOCK_IS_AIR                         ; [111]:
+    db BLOCK_IS_AIR                         ; [112]:
+    db BLOCK_IS_AIR                         ; [113]:
+    db BLOCK_IS_AIR                         ; [114]:
+    db BLOCK_IS_AIR                         ; [115]:
+    db BLOCK_IS_AIR                         ; [116]:
+    db BLOCK_IS_AIR                         ; [117]:
+    db BLOCK_IS_AIR                         ; [118]:
+    db BLOCK_IS_AIR                         ; [119]:
+    db BLOCK_IS_AIR                         ; [120]:
+    db BLOCK_IS_DOOR                        ; [121]:
+    db BLOCK_IS_DOOR                        ; [122]:
+    db BLOCK_IS_AIR                         ; [123]:
+    db BLOCK_IS_AIR                         ; [124]:
+    db BLOCK_IS_AIR                         ; [125]:
+    db BLOCK_IS_AIR                         ; [126]:
+    db BLOCK_IS_AIR                         ; [127]:
+    db BLOCK_MAYBE_AREA_TRANSITION_DOWN     ; [128]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [129]:
+    db BLOCK_FOREGROUND                     ; [130]:
+    db BLOCK_AREA_TRANSITION_LEFT           ; [131]:
+    db BLOCK_IS_AIR                         ; [132]:
+    db BLOCK_IS_AIR                         ; [133]:
+    db BLOCK_IS_AIR                         ; [134]:
+    db BLOCK_IS_AIR                         ; [135]:
+    db BLOCK_PUSHABLE                       ; [136]:
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8417]
+;     APOLUNE_AREA_DATA [$PRG3::8417]
 ;
-BYTE_ARRAY_PRG3__875d:                      ; [$875d]
+AREA_3_SCROLL_DATA:                         ; [$875d]
     db $ff                                  ; [0]:
     db $01                                  ; [1]:
     db $ff                                  ; [2]:
@@ -2100,9 +2223,9 @@ BYTE_ARRAY_PRG3__875d:                      ; [$875d]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::8419]
+;     APOLUNE_AREA_DATA [$PRG3::8419]
 ;
-BYTE_ARRAY_PRG3__885d:                      ; [$885d]
+AREA_3_DOOR_LOCATIONS:                      ; [$885d]
     db $28                                  ; [0]:
     db $10                                  ; [1]:
     db $ff                                  ; [2]:
@@ -2143,9 +2266,9 @@ BYTE_ARRAY_PRG3__885d:                      ; [$885d]
 
 ;
 ; XREFS:
-;     AREA_3_DATA [$PRG3::841b]
+;     APOLUNE_AREA_DATA [$PRG3::841b]
 ;
-BYTE_ARRAY_PRG3__8882:                      ; [$8882]
+AREA_3_DOOR_DESTINATIONS:                   ; [$8882]
     db $0d                                  ; [0]:
     db $07                                  ; [1]:
     db $04                                  ; [2]:
@@ -2290,12 +2413,7 @@ BYTE_ARRAY_PRG3__8882:                      ; [$8882]
 ; 68 doors (0x8DDF - 0x8D9A - 1)
 ; 136 tiles (0x8A2E - 0x89A6)
 ;============================================================================
-
-;
-; XREFS:
-;     LEVEL_1_DATA_START_REL_OFFSET [$PRG3::8006]
-;
-AREA_1_DATA:                                ; [$890a]
+FOREPAW_AREA_DATA:                          ; [$890a]
     dw $0914                                ; Block attributes pointer
     dw $0bc6                                ; Block properties
     dw $0c4e                                ; Scroll data
@@ -2304,9 +2422,9 @@ AREA_1_DATA:                                ; [$890a]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::890a]
+;     FOREPAW_AREA_DATA [$PRG3::890a]
 ;
-AREA_1_DATA.blockAttrsRelPtr:               ; [$8914]
+FOREPAW_AREA_DATA.blockAttrsRelPtr:         ; [$8914]
     dw $091e                                ; Block attributes
     dw $09a6                                ; Block data 1
     dw $0a2e                                ; Block data 2
@@ -2315,7 +2433,7 @@ AREA_1_DATA.blockAttrsRelPtr:               ; [$8914]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::8914]
+;     FOREPAW_AREA_DATA [$PRG3::8914]
 ;
 AREA_1_BLOCK_ATTRIBUTES:                    ; [$891e]
     db $00                                  ; [0]:
@@ -2457,7 +2575,7 @@ AREA_1_BLOCK_ATTRIBUTES:                    ; [$891e]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::8916]
+;     FOREPAW_AREA_DATA [$PRG3::8916]
 ;
 AREA_1_BLOCK_DATA_1:                        ; [$89a6]
     db $00                                  ; [0]:
@@ -2599,7 +2717,7 @@ AREA_1_BLOCK_DATA_1:                        ; [$89a6]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::8918]
+;     FOREPAW_AREA_DATA [$PRG3::8918]
 ;
 AREA_1_BLOCK_DATA_2:                        ; [$8a2e]
     db $00                                  ; [0]:
@@ -2741,7 +2859,7 @@ AREA_1_BLOCK_DATA_2:                        ; [$8a2e]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::891a]
+;     FOREPAW_AREA_DATA [$PRG3::891a]
 ;
 AREA_1_BLOCK_DATA_3:                        ; [$8ab6]
     db $00                                  ; [0]:
@@ -2883,7 +3001,7 @@ AREA_1_BLOCK_DATA_3:                        ; [$8ab6]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::891c]
+;     FOREPAW_AREA_DATA [$PRG3::891c]
 ;
 AREA_1_BLOCK_DATA_4:                        ; [$8b3e]
     db $00                                  ; [0]:
@@ -3025,149 +3143,149 @@ AREA_1_BLOCK_DATA_4:                        ; [$8b3e]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::890c]
+;     FOREPAW_AREA_DATA [$PRG3::890c]
 ;
 AREA_1_BLOCK_PROPERTIES:                    ; [$8bc6]
-    db $00                                  ; [0]:
-    db $04                                  ; [1]:
-    db $04                                  ; [2]:
-    db $04                                  ; [3]:
-    db $01                                  ; [4]:
-    db $01                                  ; [5]:
-    db $01                                  ; [6]:
-    db $02                                  ; [7]:
-    db $04                                  ; [8]:
-    db $00                                  ; [9]:
-    db $04                                  ; [10]:
-    db $04                                  ; [11]:
-    db $04                                  ; [12]:
-    db $00                                  ; [13]:
-    db $04                                  ; [14]:
-    db $00                                  ; [15]:
-    db $04                                  ; [16]:
-    db $04                                  ; [17]:
-    db $04                                  ; [18]:
-    db $04                                  ; [19]:
-    db $04                                  ; [20]:
-    db $04                                  ; [21]:
-    db $04                                  ; [22]:
-    db $00                                  ; [23]:
-    db $04                                  ; [24]:
-    db $04                                  ; [25]:
-    db $04                                  ; [26]:
-    db $00                                  ; [27]:
-    db $04                                  ; [28]:
-    db $04                                  ; [29]:
-    db $04                                  ; [30]:
-    db $04                                  ; [31]:
-    db $04                                  ; [32]:
-    db $01                                  ; [33]:
-    db $00                                  ; [34]:
-    db $04                                  ; [35]:
-    db $04                                  ; [36]:
-    db $04                                  ; [37]:
-    db $04                                  ; [38]:
-    db $04                                  ; [39]:
-    db $04                                  ; [40]:
-    db $04                                  ; [41]:
-    db $01                                  ; [42]:
-    db $01                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $04                                  ; [46]:
-    db $01                                  ; [47]:
-    db $04                                  ; [48]:
-    db $04                                  ; [49]:
-    db $04                                  ; [50]:
-    db $04                                  ; [51]:
-    db $00                                  ; [52]:
-    db $04                                  ; [53]:
-    db $04                                  ; [54]:
-    db $04                                  ; [55]:
-    db $04                                  ; [56]:
-    db $04                                  ; [57]:
-    db $01                                  ; [58]:
-    db $01                                  ; [59]:
-    db $00                                  ; [60]:
-    db $01                                  ; [61]:
-    db $00                                  ; [62]:
-    db $01                                  ; [63]:
-    db $01                                  ; [64]:
-    db $01                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $03                                  ; [70]:
-    db $03                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $00                                  ; [85]:
-    db $01                                  ; [86]:
-    db $00                                  ; [87]:
-    db $05                                  ; [88]:
-    db $01                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $01                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
-    db $00                                  ; [100]:
-    db $03                                  ; [101]:
-    db $01                                  ; [102]:
-    db $01                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $03                                  ; [107]:
-    db $03                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $00                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $00                                  ; [114]:
-    db $00                                  ; [115]:
-    db $00                                  ; [116]:
-    db $00                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $00                                  ; [120]:
-    db $01                                  ; [121]:
-    db $01                                  ; [122]:
-    db $02                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
-    db $0d                                  ; [128]:
-    db $00                                  ; [129]:
-    db $00                                  ; [130]:
-    db $00                                  ; [131]:
-    db $0b                                  ; [132]:
-    db $0b                                  ; [133]:
-    db $05                                  ; [134]:
-    db $06                                  ; [135]:
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_FOREGROUND                     ; [1]:
+    db BLOCK_FOREGROUND                     ; [2]:
+    db BLOCK_FOREGROUND                     ; [3]:
+    db BLOCK_IS_SOLID                       ; [4]:
+    db BLOCK_IS_SOLID                       ; [5]:
+    db BLOCK_IS_SOLID                       ; [6]:
+    db BLOCK_IS_LADDER                      ; [7]:
+    db BLOCK_FOREGROUND                     ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_FOREGROUND                     ; [10]:
+    db BLOCK_FOREGROUND                     ; [11]:
+    db BLOCK_FOREGROUND                     ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_FOREGROUND                     ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_FOREGROUND                     ; [16]:
+    db BLOCK_FOREGROUND                     ; [17]:
+    db BLOCK_FOREGROUND                     ; [18]:
+    db BLOCK_FOREGROUND                     ; [19]:
+    db BLOCK_FOREGROUND                     ; [20]:
+    db BLOCK_FOREGROUND                     ; [21]:
+    db BLOCK_FOREGROUND                     ; [22]:
+    db BLOCK_IS_AIR                         ; [23]:
+    db BLOCK_FOREGROUND                     ; [24]:
+    db BLOCK_FOREGROUND                     ; [25]:
+    db BLOCK_FOREGROUND                     ; [26]:
+    db BLOCK_IS_AIR                         ; [27]:
+    db BLOCK_FOREGROUND                     ; [28]:
+    db BLOCK_FOREGROUND                     ; [29]:
+    db BLOCK_FOREGROUND                     ; [30]:
+    db BLOCK_FOREGROUND                     ; [31]:
+    db BLOCK_FOREGROUND                     ; [32]:
+    db BLOCK_IS_SOLID                       ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_FOREGROUND                     ; [35]:
+    db BLOCK_FOREGROUND                     ; [36]:
+    db BLOCK_FOREGROUND                     ; [37]:
+    db BLOCK_FOREGROUND                     ; [38]:
+    db BLOCK_FOREGROUND                     ; [39]:
+    db BLOCK_FOREGROUND                     ; [40]:
+    db BLOCK_FOREGROUND                     ; [41]:
+    db BLOCK_IS_SOLID                       ; [42]:
+    db BLOCK_IS_SOLID                       ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_FOREGROUND                     ; [46]:
+    db BLOCK_IS_SOLID                       ; [47]:
+    db BLOCK_FOREGROUND                     ; [48]:
+    db BLOCK_FOREGROUND                     ; [49]:
+    db BLOCK_FOREGROUND                     ; [50]:
+    db BLOCK_FOREGROUND                     ; [51]:
+    db BLOCK_IS_AIR                         ; [52]:
+    db BLOCK_FOREGROUND                     ; [53]:
+    db BLOCK_FOREGROUND                     ; [54]:
+    db BLOCK_FOREGROUND                     ; [55]:
+    db BLOCK_FOREGROUND                     ; [56]:
+    db BLOCK_FOREGROUND                     ; [57]:
+    db BLOCK_IS_SOLID                       ; [58]:
+    db BLOCK_IS_SOLID                       ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_SOLID                       ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_IS_SOLID                       ; [63]:
+    db BLOCK_IS_SOLID                       ; [64]:
+    db BLOCK_IS_SOLID                       ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_DOOR                        ; [70]:
+    db BLOCK_IS_DOOR                        ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_AIR                         ; [73]:
+    db BLOCK_IS_AIR                         ; [74]:
+    db BLOCK_IS_AIR                         ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_AIR                         ; [83]:
+    db BLOCK_IS_AIR                         ; [84]:
+    db BLOCK_IS_AIR                         ; [85]:
+    db BLOCK_IS_SOLID                       ; [86]:
+    db BLOCK_IS_AIR                         ; [87]:
+    db BLOCK_BREAKABLE_FLOOR                ; [88]:
+    db BLOCK_IS_SOLID                       ; [89]:
+    db BLOCK_IS_AIR                         ; [90]:
+    db BLOCK_IS_AIR                         ; [91]:
+    db BLOCK_IS_AIR                         ; [92]:
+    db BLOCK_IS_AIR                         ; [93]:
+    db BLOCK_IS_AIR                         ; [94]:
+    db BLOCK_IS_AIR                         ; [95]:
+    db BLOCK_IS_SOLID                       ; [96]:
+    db BLOCK_IS_AIR                         ; [97]:
+    db BLOCK_IS_AIR                         ; [98]:
+    db BLOCK_IS_AIR                         ; [99]:
+    db BLOCK_IS_AIR                         ; [100]:
+    db BLOCK_IS_DOOR                        ; [101]:
+    db BLOCK_IS_SOLID                       ; [102]:
+    db BLOCK_IS_SOLID                       ; [103]:
+    db BLOCK_IS_AIR                         ; [104]:
+    db BLOCK_IS_AIR                         ; [105]:
+    db BLOCK_IS_AIR                         ; [106]:
+    db BLOCK_IS_DOOR                        ; [107]:
+    db BLOCK_IS_DOOR                        ; [108]:
+    db BLOCK_IS_AIR                         ; [109]:
+    db BLOCK_IS_AIR                         ; [110]:
+    db BLOCK_IS_AIR                         ; [111]:
+    db BLOCK_IS_AIR                         ; [112]:
+    db BLOCK_IS_AIR                         ; [113]:
+    db BLOCK_IS_AIR                         ; [114]:
+    db BLOCK_IS_AIR                         ; [115]:
+    db BLOCK_IS_AIR                         ; [116]:
+    db BLOCK_IS_AIR                         ; [117]:
+    db BLOCK_IS_AIR                         ; [118]:
+    db BLOCK_IS_AIR                         ; [119]:
+    db BLOCK_IS_AIR                         ; [120]:
+    db BLOCK_IS_SOLID                       ; [121]:
+    db BLOCK_IS_SOLID                       ; [122]:
+    db BLOCK_IS_LADDER                      ; [123]:
+    db BLOCK_IS_AIR                         ; [124]:
+    db BLOCK_IS_AIR                         ; [125]:
+    db BLOCK_IS_AIR                         ; [126]:
+    db BLOCK_IS_AIR                         ; [127]:
+    db BLOCK_AREA_TRANSITION_LEFT           ; [128]:
+    db BLOCK_IS_AIR                         ; [129]:
+    db BLOCK_IS_AIR                         ; [130]:
+    db BLOCK_IS_AIR                         ; [131]:
+    db BLOCK_MAYBE_BREAKABLE_BY_MATTOCK     ; [132]:
+    db BLOCK_MAYBE_BREAKABLE_BY_MATTOCK     ; [133]:
+    db BLOCK_BREAKABLE_FLOOR                ; [134]:
+    db BLOCK_PUSHABLE                       ; [135]:
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::890e]
+;     FOREPAW_AREA_DATA [$PRG3::890e]
 ;
 AREA_1_SCROLL_DATA:                         ; [$8c4e]
     db $ff                                  ; [0]:
@@ -3505,7 +3623,7 @@ AREA_1_SCROLL_DATA:                         ; [$8c4e]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::8910]
+;     FOREPAW_AREA_DATA [$PRG3::8910]
 ;
 AREA_1_DOOR_LOCATIONS:                      ; [$8d9a]
     db $00                                  ; [0]:
@@ -3580,7 +3698,7 @@ AREA_1_DOOR_LOCATIONS:                      ; [$8d9a]
 
 ;
 ; XREFS:
-;     AREA_1_DATA [$PRG3::8912]
+;     FOREPAW_AREA_DATA [$PRG3::8912]
 ;
 AREA_1_DOOR_DESTINATIONS:                   ; [$8ddf]
     dw $0b3e,$0003,$0b45,$0002,$0b50,$0002,$0b4f,$0003 ; [$8ddf] ushort
@@ -3601,12 +3719,7 @@ AREA_1_DOOR_DESTINATIONS:                   ; [$8ddf]
 ; 40 doors
 ; 94 tiles
 ;============================================================================
-
-;
-; XREFS:
-;     LEVEL_4_DATA_START_REL_OFFSET [$PRG3::800c]
-;
-AREA_4_DATA:                                ; [$8e7b]
+CONFLATE_AREA_DATA:                         ; [$8e7b]
     dw $0e85                                ; Block attributes pointer
     dw $1065                                ; Block properties
     dw $10c3                                ; Scroll data
@@ -3615,9 +3728,9 @@ AREA_4_DATA:                                ; [$8e7b]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e7b]
+;     CONFLATE_AREA_DATA [$PRG3::8e7b]
 ;
-AREA_4_DATA.blockAttrsRelPtr:               ; [$8e85]
+CONFLATE_AREA_DATA.blockAttrsRelPtr:        ; [$8e85]
     dw $0e8f                                ; Block attributes
     dw $0eed                                ; Block data 1
     dw $0f4b                                ; Block data 2
@@ -3626,7 +3739,7 @@ AREA_4_DATA.blockAttrsRelPtr:               ; [$8e85]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e85]
+;     CONFLATE_AREA_DATA [$PRG3::8e85]
 ;
 AREA_4_BLOCK_ATTRIBUTES:                    ; [$8e8f]
     db $00                                  ; [0]:
@@ -3726,7 +3839,7 @@ AREA_4_BLOCK_ATTRIBUTES:                    ; [$8e8f]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e87]
+;     CONFLATE_AREA_DATA [$PRG3::8e87]
 ;
 AREA_4_BLOCK_DATA_1:                        ; [$8eed]
     db $00                                  ; [0]:
@@ -3826,7 +3939,7 @@ AREA_4_BLOCK_DATA_1:                        ; [$8eed]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e89]
+;     CONFLATE_AREA_DATA [$PRG3::8e89]
 ;
 AREA_4_BLOCK_DATA_2:                        ; [$8f4b]
     db $00                                  ; [0]:
@@ -3926,7 +4039,7 @@ AREA_4_BLOCK_DATA_2:                        ; [$8f4b]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e8b]
+;     CONFLATE_AREA_DATA [$PRG3::8e8b]
 ;
 AREA_4_BLOCK_DATA_3:                        ; [$8fa9]
     db $00                                  ; [0]:
@@ -4026,7 +4139,7 @@ AREA_4_BLOCK_DATA_3:                        ; [$8fa9]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e8d]
+;     CONFLATE_AREA_DATA [$PRG3::8e8d]
 ;
 AREA_4_BLOCK_DATA_4:                        ; [$9007]
     db $00                                  ; [0]:
@@ -4126,107 +4239,107 @@ AREA_4_BLOCK_DATA_4:                        ; [$9007]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e7d]
+;     CONFLATE_AREA_DATA [$PRG3::8e7d]
 ;
 AREA_4_BLOCK_PROPERTIES:                    ; [$9065]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $04                                  ; [7]:
-    db $00                                  ; [8]:
-    db $04                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $01                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $04                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $01                                  ; [21]:
-    db $01                                  ; [22]:
-    db $01                                  ; [23]:
-    db $00                                  ; [24]:
-    db $01                                  ; [25]:
-    db $01                                  ; [26]:
-    db $00                                  ; [27]:
-    db $01                                  ; [28]:
-    db $01                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $01                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $01                                  ; [38]:
-    db $00                                  ; [39]:
-    db $01                                  ; [40]:
-    db $03                                  ; [41]:
-    db $03                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $00                                  ; [48]:
-    db $01                                  ; [49]:
-    db $01                                  ; [50]:
-    db $01                                  ; [51]:
-    db $01                                  ; [52]:
-    db $01                                  ; [53]:
-    db $01                                  ; [54]:
-    db $01                                  ; [55]:
-    db $01                                  ; [56]:
-    db $01                                  ; [57]:
-    db $04                                  ; [58]:
-    db $01                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $04                                  ; [63]:
-    db $02                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $01                                  ; [70]:
-    db $01                                  ; [71]:
-    db $00                                  ; [72]:
-    db $01                                  ; [73]:
-    db $01                                  ; [74]:
-    db $01                                  ; [75]:
-    db $00                                  ; [76]:
-    db $01                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $04                                  ; [80]:
-    db $00                                  ; [81]:
-    db $01                                  ; [82]:
-    db $00                                  ; [83]:
-    db $04                                  ; [84]:
-    db $01                                  ; [85]:
-    db $03                                  ; [86]:
-    db $03                                  ; [87]:
-    db $0d                                  ; [88]:
-    db $0e                                  ; [89]:
-    db $01                                  ; [90]:
-    db $01                                  ; [91]:
-    db $0b                                  ; [92]:
-    db $05                                  ; [93]:
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_AIR                         ; [1]:
+    db BLOCK_IS_AIR                         ; [2]:
+    db BLOCK_IS_AIR                         ; [3]:
+    db BLOCK_IS_AIR                         ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_FOREGROUND                     ; [7]:
+    db BLOCK_IS_AIR                         ; [8]:
+    db BLOCK_FOREGROUND                     ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_AIR                         ; [14]:
+    db BLOCK_IS_SOLID                       ; [15]:
+    db BLOCK_IS_AIR                         ; [16]:
+    db BLOCK_IS_AIR                         ; [17]:
+    db BLOCK_FOREGROUND                     ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_SOLID                       ; [21]:
+    db BLOCK_IS_SOLID                       ; [22]:
+    db BLOCK_IS_SOLID                       ; [23]:
+    db BLOCK_IS_AIR                         ; [24]:
+    db BLOCK_IS_SOLID                       ; [25]:
+    db BLOCK_IS_SOLID                       ; [26]:
+    db BLOCK_IS_AIR                         ; [27]:
+    db BLOCK_IS_SOLID                       ; [28]:
+    db BLOCK_IS_SOLID                       ; [29]:
+    db BLOCK_IS_AIR                         ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_AIR                         ; [32]:
+    db BLOCK_IS_SOLID                       ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_SOLID                       ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_SOLID                       ; [40]:
+    db BLOCK_IS_DOOR                        ; [41]:
+    db BLOCK_IS_DOOR                        ; [42]:
+    db BLOCK_IS_AIR                         ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_IS_AIR                         ; [46]:
+    db BLOCK_IS_AIR                         ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_SOLID                       ; [49]:
+    db BLOCK_IS_SOLID                       ; [50]:
+    db BLOCK_IS_SOLID                       ; [51]:
+    db BLOCK_IS_SOLID                       ; [52]:
+    db BLOCK_IS_SOLID                       ; [53]:
+    db BLOCK_IS_SOLID                       ; [54]:
+    db BLOCK_IS_SOLID                       ; [55]:
+    db BLOCK_IS_SOLID                       ; [56]:
+    db BLOCK_IS_SOLID                       ; [57]:
+    db BLOCK_FOREGROUND                     ; [58]:
+    db BLOCK_IS_SOLID                       ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_AIR                         ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_FOREGROUND                     ; [63]:
+    db BLOCK_IS_LADDER                      ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_SOLID                       ; [70]:
+    db BLOCK_IS_SOLID                       ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_SOLID                       ; [73]:
+    db BLOCK_IS_SOLID                       ; [74]:
+    db BLOCK_IS_SOLID                       ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_SOLID                       ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_FOREGROUND                     ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_SOLID                       ; [82]:
+    db BLOCK_IS_AIR                         ; [83]:
+    db BLOCK_FOREGROUND                     ; [84]:
+    db BLOCK_IS_SOLID                       ; [85]:
+    db BLOCK_IS_DOOR                        ; [86]:
+    db BLOCK_IS_DOOR                        ; [87]:
+    db BLOCK_AREA_TRANSITION_LEFT           ; [88]:
+    db BLOCK_0x0e                           ; [89]:
+    db BLOCK_IS_SOLID                       ; [90]:
+    db BLOCK_IS_SOLID                       ; [91]:
+    db BLOCK_MAYBE_BREAKABLE_BY_MATTOCK     ; [92]:
+    db BLOCK_BREAKABLE_FLOOR                ; [93]:
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e7f]
+;     CONFLATE_AREA_DATA [$PRG3::8e7f]
 ;
 AREA_4_SCROLL_DATA:                         ; [$90c3]
     db $ff                                  ; [0]:
@@ -4392,7 +4505,7 @@ AREA_4_SCROLL_DATA:                         ; [$90c3]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e81]
+;     CONFLATE_AREA_DATA [$PRG3::8e81]
 ;
 AREA_4_DOOR_LOCATIONS:                      ; [$9163]
     db $0a                                  ; [0]:
@@ -4439,7 +4552,7 @@ AREA_4_DOOR_LOCATIONS:                      ; [$9163]
 
 ;
 ; XREFS:
-;     AREA_4_DATA [$PRG3::8e83]
+;     CONFLATE_AREA_DATA [$PRG3::8e83]
 ;
 AREA_4_DOOR_DESTINATIONS:                   ; [$918c]
     hex 09 09 02 00 0a 08 00 00 0f 09 02 00 0e 08 00 00 ; [$918c] undefined
@@ -4452,12 +4565,7 @@ AREA_4_DOOR_DESTINATIONS:                   ; [$918c]
 ; 0 doors
 ; 256 tiles
 ;============================================================================
-
-;
-; XREFS:
-;     LEVEL_6_DATA_START_REL_OFFSET [$PRG3::800a]
-;
-AREA_6_DATA:                                ; [$91ac]
+VICTIM_AREA_DATA:                           ; [$91ac]
     dw $11b6                                ; Block attributes pointer
     dw $16c0                                ; Block properties
     dw $17c0                                ; Scroll data
@@ -4466,9 +4574,9 @@ AREA_6_DATA:                                ; [$91ac]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91ac]
+;     VICTIM_AREA_DATA [$PRG3::91ac]
 ;
-AREA_6_DATA.blockAttrsRelPtr:               ; [$91b6]
+VICTIM_AREA_DATA.blockAttrsRelPtr:          ; [$91b6]
     dw $11c0                                ; Block attributes
     dw $12c0                                ; Block data 1
     dw $13c0                                ; Block data 2
@@ -4477,7 +4585,7 @@ AREA_6_DATA.blockAttrsRelPtr:               ; [$91b6]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91b6]
+;     VICTIM_AREA_DATA [$PRG3::91b6]
 ;
 AREA_6_BLOCK_ATTRIBUTES:                    ; [$91c0]
     db $00                                  ; [0]:
@@ -4739,7 +4847,7 @@ AREA_6_BLOCK_ATTRIBUTES:                    ; [$91c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91b8]
+;     VICTIM_AREA_DATA [$PRG3::91b8]
 ;
 AREA_6_BLOCK_DATA_1:                        ; [$92c0]
     db $00                                  ; [0]:
@@ -5001,7 +5109,7 @@ AREA_6_BLOCK_DATA_1:                        ; [$92c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91ba]
+;     VICTIM_AREA_DATA [$PRG3::91ba]
 ;
 AREA_6_BLOCK_DATA_2:                        ; [$93c0]
     db $00                                  ; [0]:
@@ -5263,7 +5371,7 @@ AREA_6_BLOCK_DATA_2:                        ; [$93c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91bc]
+;     VICTIM_AREA_DATA [$PRG3::91bc]
 ;
 AREA_6_BLOCK_DATA_3:                        ; [$94c0]
     db $00                                  ; [0]:
@@ -5525,7 +5633,7 @@ AREA_6_BLOCK_DATA_3:                        ; [$94c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91be]
+;     VICTIM_AREA_DATA [$PRG3::91be]
 ;
 AREA_6_BLOCK_DATA_4:                        ; [$95c0]
     db $00                                  ; [0]:
@@ -5787,269 +5895,269 @@ AREA_6_BLOCK_DATA_4:                        ; [$95c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91ae]
+;     VICTIM_AREA_DATA [$PRG3::91ae]
 ;
 AREA_6_BLOCK_PROPERTIES:                    ; [$96c0]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $01                                  ; [21]:
-    db $01                                  ; [22]:
-    db $01                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $01                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $0c                                  ; [46]:
-    db $0c                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $0c                                  ; [50]:
-    db $0c                                  ; [51]:
-    db $03                                  ; [52]:
-    db $03                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $01                                  ; [66]:
-    db $01                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $01                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $01                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $01                                  ; [99]:
-    db $00                                  ; [100]:
-    db $00                                  ; [101]:
-    db $00                                  ; [102]:
-    db $00                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $00                                  ; [107]:
-    db $00                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $00                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $0c                                  ; [114]:
-    db $01                                  ; [115]:
-    db $01                                  ; [116]:
-    db $01                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $0c                                  ; [120]:
-    db $00                                  ; [121]:
-    db $00                                  ; [122]:
-    db $00                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
-    db $00                                  ; [128]:
-    db $00                                  ; [129]:
-    db $00                                  ; [130]:
-    db $00                                  ; [131]:
-    db $00                                  ; [132]:
-    db $00                                  ; [133]:
-    db $00                                  ; [134]:
-    db $00                                  ; [135]:
-    db $00                                  ; [136]:
-    db $00                                  ; [137]:
-    db $00                                  ; [138]:
-    db $00                                  ; [139]:
-    db $00                                  ; [140]:
-    db $00                                  ; [141]:
-    db $00                                  ; [142]:
-    db $00                                  ; [143]:
-    db $0c                                  ; [144]:
-    db $0c                                  ; [145]:
-    db $00                                  ; [146]:
-    db $00                                  ; [147]:
-    db $0c                                  ; [148]:
-    db $00                                  ; [149]:
-    db $00                                  ; [150]:
-    db $00                                  ; [151]:
-    db $00                                  ; [152]:
-    db $00                                  ; [153]:
-    db $00                                  ; [154]:
-    db $00                                  ; [155]:
-    db $00                                  ; [156]:
-    db $00                                  ; [157]:
-    db $00                                  ; [158]:
-    db $00                                  ; [159]:
-    db $00                                  ; [160]:
-    db $00                                  ; [161]:
-    db $00                                  ; [162]:
-    db $00                                  ; [163]:
-    db $00                                  ; [164]:
-    db $00                                  ; [165]:
-    db $00                                  ; [166]:
-    db $00                                  ; [167]:
-    db $00                                  ; [168]:
-    db $00                                  ; [169]:
-    db $00                                  ; [170]:
-    db $00                                  ; [171]:
-    db $00                                  ; [172]:
-    db $00                                  ; [173]:
-    db $00                                  ; [174]:
-    db $00                                  ; [175]:
-    db $00                                  ; [176]:
-    db $00                                  ; [177]:
-    db $00                                  ; [178]:
-    db $00                                  ; [179]:
-    db $00                                  ; [180]:
-    db $00                                  ; [181]:
-    db $00                                  ; [182]:
-    db $00                                  ; [183]:
-    db $00                                  ; [184]:
-    db $00                                  ; [185]:
-    db $00                                  ; [186]:
-    db $00                                  ; [187]:
-    db $00                                  ; [188]:
-    db $00                                  ; [189]:
-    db $00                                  ; [190]:
-    db $00                                  ; [191]:
-    db $00                                  ; [192]:
-    db $01                                  ; [193]:
-    db $00                                  ; [194]:
-    db $00                                  ; [195]:
-    db $00                                  ; [196]:
-    db $01                                  ; [197]:
-    db $00                                  ; [198]:
-    db $00                                  ; [199]:
-    db $01                                  ; [200]:
-    db $00                                  ; [201]:
-    db $00                                  ; [202]:
-    db $00                                  ; [203]:
-    db $00                                  ; [204]:
-    db $00                                  ; [205]:
-    db $00                                  ; [206]:
-    db $00                                  ; [207]:
-    db $00                                  ; [208]:
-    db $00                                  ; [209]:
-    db $00                                  ; [210]:
-    db $00                                  ; [211]:
-    db $00                                  ; [212]:
-    db $00                                  ; [213]:
-    db $00                                  ; [214]:
-    db $00                                  ; [215]:
-    db $0c                                  ; [216]:
-    db $0c                                  ; [217]:
-    db $01                                  ; [218]:
-    db $00                                  ; [219]:
-    db $00                                  ; [220]:
-    db $00                                  ; [221]:
-    db $00                                  ; [222]:
-    db $00                                  ; [223]:
-    db $01                                  ; [224]:
-    db $00                                  ; [225]:
-    db $00                                  ; [226]:
-    db $00                                  ; [227]:
-    db $00                                  ; [228]:
-    db $00                                  ; [229]:
-    db $00                                  ; [230]:
-    db $00                                  ; [231]:
-    db $00                                  ; [232]:
-    db $00                                  ; [233]:
-    db $00                                  ; [234]:
-    db $00                                  ; [235]:
-    db $00                                  ; [236]:
-    db $00                                  ; [237]:
-    db $00                                  ; [238]:
-    db $00                                  ; [239]:
-    db $00                                  ; [240]:
-    db $00                                  ; [241]:
-    db $00                                  ; [242]:
-    db $00                                  ; [243]:
-    db $00                                  ; [244]:
-    db $00                                  ; [245]:
-    db $00                                  ; [246]:
-    db $00                                  ; [247]:
-    db $00                                  ; [248]:
-    db $00                                  ; [249]:
-    db $00                                  ; [250]:
-    db $00                                  ; [251]:
-    db $00                                  ; [252]:
-    db $00                                  ; [253]:
-    db $00                                  ; [254]:
-    db $00                                  ; [255]:
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_AIR                         ; [1]:
+    db BLOCK_IS_AIR                         ; [2]:
+    db BLOCK_IS_AIR                         ; [3]:
+    db BLOCK_IS_AIR                         ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_IS_AIR                         ; [7]:
+    db BLOCK_IS_AIR                         ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_AIR                         ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_IS_AIR                         ; [16]:
+    db BLOCK_IS_AIR                         ; [17]:
+    db BLOCK_IS_AIR                         ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_SOLID                       ; [21]:
+    db BLOCK_IS_SOLID                       ; [22]:
+    db BLOCK_IS_SOLID                       ; [23]:
+    db BLOCK_IS_AIR                         ; [24]:
+    db BLOCK_IS_AIR                         ; [25]:
+    db BLOCK_IS_AIR                         ; [26]:
+    db BLOCK_IS_AIR                         ; [27]:
+    db BLOCK_IS_AIR                         ; [28]:
+    db BLOCK_IS_AIR                         ; [29]:
+    db BLOCK_IS_SOLID                       ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_AIR                         ; [32]:
+    db BLOCK_IS_AIR                         ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_AIR                         ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_AIR                         ; [40]:
+    db BLOCK_IS_AIR                         ; [41]:
+    db BLOCK_IS_AIR                         ; [42]:
+    db BLOCK_IS_AIR                         ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [46]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_AIR                         ; [49]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [50]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [51]:
+    db BLOCK_IS_DOOR                        ; [52]:
+    db BLOCK_IS_DOOR                        ; [53]:
+    db BLOCK_IS_AIR                         ; [54]:
+    db BLOCK_IS_AIR                         ; [55]:
+    db BLOCK_IS_AIR                         ; [56]:
+    db BLOCK_IS_AIR                         ; [57]:
+    db BLOCK_IS_AIR                         ; [58]:
+    db BLOCK_IS_AIR                         ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_AIR                         ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_IS_AIR                         ; [63]:
+    db BLOCK_IS_AIR                         ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_SOLID                       ; [66]:
+    db BLOCK_IS_SOLID                       ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_SOLID                       ; [70]:
+    db BLOCK_IS_AIR                         ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_AIR                         ; [73]:
+    db BLOCK_IS_AIR                         ; [74]:
+    db BLOCK_IS_AIR                         ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_AIR                         ; [83]:
+    db BLOCK_IS_AIR                         ; [84]:
+    db BLOCK_IS_AIR                         ; [85]:
+    db BLOCK_IS_AIR                         ; [86]:
+    db BLOCK_IS_AIR                         ; [87]:
+    db BLOCK_IS_AIR                         ; [88]:
+    db BLOCK_IS_AIR                         ; [89]:
+    db BLOCK_IS_AIR                         ; [90]:
+    db BLOCK_IS_AIR                         ; [91]:
+    db BLOCK_IS_AIR                         ; [92]:
+    db BLOCK_IS_AIR                         ; [93]:
+    db BLOCK_IS_AIR                         ; [94]:
+    db BLOCK_IS_AIR                         ; [95]:
+    db BLOCK_IS_SOLID                       ; [96]:
+    db BLOCK_IS_AIR                         ; [97]:
+    db BLOCK_IS_AIR                         ; [98]:
+    db BLOCK_IS_SOLID                       ; [99]:
+    db BLOCK_IS_AIR                         ; [100]:
+    db BLOCK_IS_AIR                         ; [101]:
+    db BLOCK_IS_AIR                         ; [102]:
+    db BLOCK_IS_AIR                         ; [103]:
+    db BLOCK_IS_AIR                         ; [104]:
+    db BLOCK_IS_AIR                         ; [105]:
+    db BLOCK_IS_AIR                         ; [106]:
+    db BLOCK_IS_AIR                         ; [107]:
+    db BLOCK_IS_AIR                         ; [108]:
+    db BLOCK_IS_AIR                         ; [109]:
+    db BLOCK_IS_AIR                         ; [110]:
+    db BLOCK_IS_AIR                         ; [111]:
+    db BLOCK_IS_AIR                         ; [112]:
+    db BLOCK_IS_AIR                         ; [113]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [114]:
+    db BLOCK_IS_SOLID                       ; [115]:
+    db BLOCK_IS_SOLID                       ; [116]:
+    db BLOCK_IS_SOLID                       ; [117]:
+    db BLOCK_IS_AIR                         ; [118]:
+    db BLOCK_IS_AIR                         ; [119]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [120]:
+    db BLOCK_IS_AIR                         ; [121]:
+    db BLOCK_IS_AIR                         ; [122]:
+    db BLOCK_IS_AIR                         ; [123]:
+    db BLOCK_IS_AIR                         ; [124]:
+    db BLOCK_IS_AIR                         ; [125]:
+    db BLOCK_IS_AIR                         ; [126]:
+    db BLOCK_IS_AIR                         ; [127]:
+    db BLOCK_IS_AIR                         ; [128]:
+    db BLOCK_IS_AIR                         ; [129]:
+    db BLOCK_IS_AIR                         ; [130]:
+    db BLOCK_IS_AIR                         ; [131]:
+    db BLOCK_IS_AIR                         ; [132]:
+    db BLOCK_IS_AIR                         ; [133]:
+    db BLOCK_IS_AIR                         ; [134]:
+    db BLOCK_IS_AIR                         ; [135]:
+    db BLOCK_IS_AIR                         ; [136]:
+    db BLOCK_IS_AIR                         ; [137]:
+    db BLOCK_IS_AIR                         ; [138]:
+    db BLOCK_IS_AIR                         ; [139]:
+    db BLOCK_IS_AIR                         ; [140]:
+    db BLOCK_IS_AIR                         ; [141]:
+    db BLOCK_IS_AIR                         ; [142]:
+    db BLOCK_IS_AIR                         ; [143]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [144]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [145]:
+    db BLOCK_IS_AIR                         ; [146]:
+    db BLOCK_IS_AIR                         ; [147]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [148]:
+    db BLOCK_IS_AIR                         ; [149]:
+    db BLOCK_IS_AIR                         ; [150]:
+    db BLOCK_IS_AIR                         ; [151]:
+    db BLOCK_IS_AIR                         ; [152]:
+    db BLOCK_IS_AIR                         ; [153]:
+    db BLOCK_IS_AIR                         ; [154]:
+    db BLOCK_IS_AIR                         ; [155]:
+    db BLOCK_IS_AIR                         ; [156]:
+    db BLOCK_IS_AIR                         ; [157]:
+    db BLOCK_IS_AIR                         ; [158]:
+    db BLOCK_IS_AIR                         ; [159]:
+    db BLOCK_IS_AIR                         ; [160]:
+    db BLOCK_IS_AIR                         ; [161]:
+    db BLOCK_IS_AIR                         ; [162]:
+    db BLOCK_IS_AIR                         ; [163]:
+    db BLOCK_IS_AIR                         ; [164]:
+    db BLOCK_IS_AIR                         ; [165]:
+    db BLOCK_IS_AIR                         ; [166]:
+    db BLOCK_IS_AIR                         ; [167]:
+    db BLOCK_IS_AIR                         ; [168]:
+    db BLOCK_IS_AIR                         ; [169]:
+    db BLOCK_IS_AIR                         ; [170]:
+    db BLOCK_IS_AIR                         ; [171]:
+    db BLOCK_IS_AIR                         ; [172]:
+    db BLOCK_IS_AIR                         ; [173]:
+    db BLOCK_IS_AIR                         ; [174]:
+    db BLOCK_IS_AIR                         ; [175]:
+    db BLOCK_IS_AIR                         ; [176]:
+    db BLOCK_IS_AIR                         ; [177]:
+    db BLOCK_IS_AIR                         ; [178]:
+    db BLOCK_IS_AIR                         ; [179]:
+    db BLOCK_IS_AIR                         ; [180]:
+    db BLOCK_IS_AIR                         ; [181]:
+    db BLOCK_IS_AIR                         ; [182]:
+    db BLOCK_IS_AIR                         ; [183]:
+    db BLOCK_IS_AIR                         ; [184]:
+    db BLOCK_IS_AIR                         ; [185]:
+    db BLOCK_IS_AIR                         ; [186]:
+    db BLOCK_IS_AIR                         ; [187]:
+    db BLOCK_IS_AIR                         ; [188]:
+    db BLOCK_IS_AIR                         ; [189]:
+    db BLOCK_IS_AIR                         ; [190]:
+    db BLOCK_IS_AIR                         ; [191]:
+    db BLOCK_IS_AIR                         ; [192]:
+    db BLOCK_IS_SOLID                       ; [193]:
+    db BLOCK_IS_AIR                         ; [194]:
+    db BLOCK_IS_AIR                         ; [195]:
+    db BLOCK_IS_AIR                         ; [196]:
+    db BLOCK_IS_SOLID                       ; [197]:
+    db BLOCK_IS_AIR                         ; [198]:
+    db BLOCK_IS_AIR                         ; [199]:
+    db BLOCK_IS_SOLID                       ; [200]:
+    db BLOCK_IS_AIR                         ; [201]:
+    db BLOCK_IS_AIR                         ; [202]:
+    db BLOCK_IS_AIR                         ; [203]:
+    db BLOCK_IS_AIR                         ; [204]:
+    db BLOCK_IS_AIR                         ; [205]:
+    db BLOCK_IS_AIR                         ; [206]:
+    db BLOCK_IS_AIR                         ; [207]:
+    db BLOCK_IS_AIR                         ; [208]:
+    db BLOCK_IS_AIR                         ; [209]:
+    db BLOCK_IS_AIR                         ; [210]:
+    db BLOCK_IS_AIR                         ; [211]:
+    db BLOCK_IS_AIR                         ; [212]:
+    db BLOCK_IS_AIR                         ; [213]:
+    db BLOCK_IS_AIR                         ; [214]:
+    db BLOCK_IS_AIR                         ; [215]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [216]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [217]:
+    db BLOCK_IS_SOLID                       ; [218]:
+    db BLOCK_IS_AIR                         ; [219]:
+    db BLOCK_IS_AIR                         ; [220]:
+    db BLOCK_IS_AIR                         ; [221]:
+    db BLOCK_IS_AIR                         ; [222]:
+    db BLOCK_IS_AIR                         ; [223]:
+    db BLOCK_IS_SOLID                       ; [224]:
+    db BLOCK_IS_AIR                         ; [225]:
+    db BLOCK_IS_AIR                         ; [226]:
+    db BLOCK_IS_AIR                         ; [227]:
+    db BLOCK_IS_AIR                         ; [228]:
+    db BLOCK_IS_AIR                         ; [229]:
+    db BLOCK_IS_AIR                         ; [230]:
+    db BLOCK_IS_AIR                         ; [231]:
+    db BLOCK_IS_AIR                         ; [232]:
+    db BLOCK_IS_AIR                         ; [233]:
+    db BLOCK_IS_AIR                         ; [234]:
+    db BLOCK_IS_AIR                         ; [235]:
+    db BLOCK_IS_AIR                         ; [236]:
+    db BLOCK_IS_AIR                         ; [237]:
+    db BLOCK_IS_AIR                         ; [238]:
+    db BLOCK_IS_AIR                         ; [239]:
+    db BLOCK_IS_AIR                         ; [240]:
+    db BLOCK_IS_AIR                         ; [241]:
+    db BLOCK_IS_AIR                         ; [242]:
+    db BLOCK_IS_AIR                         ; [243]:
+    db BLOCK_IS_AIR                         ; [244]:
+    db BLOCK_IS_AIR                         ; [245]:
+    db BLOCK_IS_AIR                         ; [246]:
+    db BLOCK_IS_AIR                         ; [247]:
+    db BLOCK_IS_AIR                         ; [248]:
+    db BLOCK_IS_AIR                         ; [249]:
+    db BLOCK_IS_AIR                         ; [250]:
+    db BLOCK_IS_AIR                         ; [251]:
+    db BLOCK_IS_AIR                         ; [252]:
+    db BLOCK_IS_AIR                         ; [253]:
+    db BLOCK_IS_AIR                         ; [254]:
+    db BLOCK_IS_AIR                         ; [255]:
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91b0]
+;     VICTIM_AREA_DATA [$PRG3::91b0]
 ;
 AREA_6_SCROLL_DATA:                         ; [$97c0]
     db $ff                                  ; [0]:
@@ -6095,14 +6203,14 @@ AREA_6_SCROLL_DATA:                         ; [$97c0]
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91b2]
+;     VICTIM_AREA_DATA [$PRG3::91b2]
 ;
 AREA_6_DOOR_LOCATIONS:                      ; [$97e8]
     db $ff                                  ; [$97e8] byte
 
 ;
 ; XREFS:
-;     AREA_6_DATA [$PRG3::91b4]
+;     VICTIM_AREA_DATA [$PRG3::91b4]
 ;
 AREA_6_DOOR_DESTINATIONS:                   ; [$97e9]
     hex ff ba ff ff ff ff 48 00 ff e7 ff ff ff ff c1 00 ; [$97e9] undefined
@@ -6117,12 +6225,7 @@ AREA_6_DOOR_DESTINATIONS:                   ; [$97e9]
 ; 172 doors
 ; 112 tiles
 ;============================================================================
-
-;
-; XREFS:
-;     LEVEL_2_DATA_START_REL_OFFSET [$PRG3::8008]
-;
-AREA_2_DATA:                                ; [$9829]
+MASCON_AREA_DATA:                           ; [$9829]
     dw $1833                                ; Block attributes pointer
     dw $1a6d                                ; Block properties
     dw $1aed                                ; Scroll data
@@ -6131,9 +6234,9 @@ AREA_2_DATA:                                ; [$9829]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9829]
+;     MASCON_AREA_DATA [$PRG3::9829]
 ;
-AREA_2_DATA.blockAttrsRelPtr:               ; [$9833]
+MASCON_AREA_DATA.blockAttrsRelPtr:          ; [$9833]
     dw $183d                                ; Block attributes
     dw $18ad                                ; Block data 1
     dw $191d                                ; Block data 2
@@ -6142,7 +6245,7 @@ AREA_2_DATA.blockAttrsRelPtr:               ; [$9833]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9833]
+;     MASCON_AREA_DATA [$PRG3::9833]
 ;
 AREA_2_BLOCK_ATTRIBUTES:                    ; [$983d]
     db $00                                  ; [0]:
@@ -6260,7 +6363,7 @@ AREA_2_BLOCK_ATTRIBUTES:                    ; [$983d]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9835]
+;     MASCON_AREA_DATA [$PRG3::9835]
 ;
 AREA_2_BLOCK_DATA_1:                        ; [$98ad]
     db $00                                  ; [0]:
@@ -6378,7 +6481,7 @@ AREA_2_BLOCK_DATA_1:                        ; [$98ad]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9837]
+;     MASCON_AREA_DATA [$PRG3::9837]
 ;
 AREA_2_BLOCK_DATA_2:                        ; [$991d]
     db $00                                  ; [0]:
@@ -6496,7 +6599,7 @@ AREA_2_BLOCK_DATA_2:                        ; [$991d]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9839]
+;     MASCON_AREA_DATA [$PRG3::9839]
 ;
 AREA_2_BLOCK_DATA_3:                        ; [$998d]
     db $00                                  ; [0]:
@@ -6614,7 +6717,7 @@ AREA_2_BLOCK_DATA_3:                        ; [$998d]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::983b]
+;     MASCON_AREA_DATA [$PRG3::983b]
 ;
 AREA_2_BLOCK_DATA_4:                        ; [$99fd]
     db $00                                  ; [0]:
@@ -6732,141 +6835,141 @@ AREA_2_BLOCK_DATA_4:                        ; [$99fd]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::982b]
+;     MASCON_AREA_DATA [$PRG3::982b]
 ;
 AREA_2_BLOCK_PROPERTIES:                    ; [$9a6d]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $01                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $03                                  ; [28]:
-    db $03                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $03                                  ; [58]:
-    db $03                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $03                                  ; [73]:
-    db $03                                  ; [74]:
-    db $0c                                  ; [75]:
-    db $0c                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $01                                  ; [81]:
-    db $00                                  ; [82]:
-    db $03                                  ; [83]:
-    db $03                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
-    db $00                                  ; [100]:
-    db $00                                  ; [101]:
-    db $00                                  ; [102]:
-    db $00                                  ; [103]:
-    db $00                                  ; [104]:
-    db $00                                  ; [105]:
-    db $00                                  ; [106]:
-    db $00                                  ; [107]:
-    db $03                                  ; [108]:
-    db $00                                  ; [109]:
-    db $00                                  ; [110]:
-    db $00                                  ; [111]:
-    db $00                                  ; [112]:
-    db $00                                  ; [113]:
-    db $00                                  ; [114]:
-    db $00                                  ; [115]:
-    db $00                                  ; [116]:
-    db $00                                  ; [117]:
-    db $00                                  ; [118]:
-    db $00                                  ; [119]:
-    db $00                                  ; [120]:
-    db $00                                  ; [121]:
-    db $00                                  ; [122]:
-    db $00                                  ; [123]:
-    db $00                                  ; [124]:
-    db $00                                  ; [125]:
-    db $00                                  ; [126]:
-    db $00                                  ; [127]:
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_AIR                         ; [1]:
+    db BLOCK_IS_SOLID                       ; [2]:
+    db BLOCK_IS_AIR                         ; [3]:
+    db BLOCK_IS_AIR                         ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_IS_AIR                         ; [7]:
+    db BLOCK_IS_AIR                         ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_AIR                         ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_IS_AIR                         ; [16]:
+    db BLOCK_IS_AIR                         ; [17]:
+    db BLOCK_IS_AIR                         ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_AIR                         ; [21]:
+    db BLOCK_IS_AIR                         ; [22]:
+    db BLOCK_IS_AIR                         ; [23]:
+    db BLOCK_IS_AIR                         ; [24]:
+    db BLOCK_IS_AIR                         ; [25]:
+    db BLOCK_IS_AIR                         ; [26]:
+    db BLOCK_IS_AIR                         ; [27]:
+    db BLOCK_IS_DOOR                        ; [28]:
+    db BLOCK_IS_DOOR                        ; [29]:
+    db BLOCK_IS_AIR                         ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_AIR                         ; [32]:
+    db BLOCK_IS_AIR                         ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_AIR                         ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_AIR                         ; [40]:
+    db BLOCK_IS_AIR                         ; [41]:
+    db BLOCK_IS_AIR                         ; [42]:
+    db BLOCK_IS_AIR                         ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_IS_AIR                         ; [46]:
+    db BLOCK_IS_AIR                         ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_AIR                         ; [49]:
+    db BLOCK_IS_AIR                         ; [50]:
+    db BLOCK_IS_AIR                         ; [51]:
+    db BLOCK_IS_AIR                         ; [52]:
+    db BLOCK_IS_AIR                         ; [53]:
+    db BLOCK_IS_AIR                         ; [54]:
+    db BLOCK_IS_AIR                         ; [55]:
+    db BLOCK_IS_AIR                         ; [56]:
+    db BLOCK_IS_AIR                         ; [57]:
+    db BLOCK_IS_DOOR                        ; [58]:
+    db BLOCK_IS_DOOR                        ; [59]:
+    db BLOCK_IS_AIR                         ; [60]:
+    db BLOCK_IS_AIR                         ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_IS_AIR                         ; [63]:
+    db BLOCK_IS_AIR                         ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_AIR                         ; [70]:
+    db BLOCK_IS_AIR                         ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_DOOR                        ; [73]:
+    db BLOCK_IS_DOOR                        ; [74]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [75]:
+    db BLOCK_AREA_TRANSITION_RIGHT          ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_SOLID                       ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_DOOR                        ; [83]:
+    db BLOCK_IS_DOOR                        ; [84]:
+    db BLOCK_IS_AIR                         ; [85]:
+    db BLOCK_IS_AIR                         ; [86]:
+    db BLOCK_IS_AIR                         ; [87]:
+    db BLOCK_IS_AIR                         ; [88]:
+    db BLOCK_IS_AIR                         ; [89]:
+    db BLOCK_IS_AIR                         ; [90]:
+    db BLOCK_IS_AIR                         ; [91]:
+    db BLOCK_IS_AIR                         ; [92]:
+    db BLOCK_IS_AIR                         ; [93]:
+    db BLOCK_IS_AIR                         ; [94]:
+    db BLOCK_IS_AIR                         ; [95]:
+    db BLOCK_IS_AIR                         ; [96]:
+    db BLOCK_IS_AIR                         ; [97]:
+    db BLOCK_IS_AIR                         ; [98]:
+    db BLOCK_IS_AIR                         ; [99]:
+    db BLOCK_IS_AIR                         ; [100]:
+    db BLOCK_IS_AIR                         ; [101]:
+    db BLOCK_IS_AIR                         ; [102]:
+    db BLOCK_IS_AIR                         ; [103]:
+    db BLOCK_IS_AIR                         ; [104]:
+    db BLOCK_IS_AIR                         ; [105]:
+    db BLOCK_IS_AIR                         ; [106]:
+    db BLOCK_IS_AIR                         ; [107]:
+    db BLOCK_IS_DOOR                        ; [108]:
+    db BLOCK_IS_AIR                         ; [109]:
+    db BLOCK_IS_AIR                         ; [110]:
+    db BLOCK_IS_AIR                         ; [111]:
+    db BLOCK_IS_AIR                         ; [112]:
+    db BLOCK_IS_AIR                         ; [113]:
+    db BLOCK_IS_AIR                         ; [114]:
+    db BLOCK_IS_AIR                         ; [115]:
+    db BLOCK_IS_AIR                         ; [116]:
+    db BLOCK_IS_AIR                         ; [117]:
+    db BLOCK_IS_AIR                         ; [118]:
+    db BLOCK_IS_AIR                         ; [119]:
+    db BLOCK_IS_AIR                         ; [120]:
+    db BLOCK_IS_AIR                         ; [121]:
+    db BLOCK_IS_AIR                         ; [122]:
+    db BLOCK_IS_AIR                         ; [123]:
+    db BLOCK_IS_AIR                         ; [124]:
+    db BLOCK_IS_AIR                         ; [125]:
+    db BLOCK_IS_AIR                         ; [126]:
+    db BLOCK_IS_AIR                         ; [127]:
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::982d]
+;     MASCON_AREA_DATA [$PRG3::982d]
 ;
 AREA_2_SCROLL_DATA:                         ; [$9aed]
     db $ff                                  ; [0]:
@@ -6928,7 +7031,7 @@ AREA_2_SCROLL_DATA:                         ; [$9aed]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::982f]
+;     MASCON_AREA_DATA [$PRG3::982f]
 ;
 AREA_2_DOOR_LOCATIONS:                      ; [$9b25]
     db $00                                  ; [0]:
@@ -7107,20 +7210,181 @@ AREA_2_DOOR_LOCATIONS:                      ; [$9b25]
 
 ;
 ; XREFS:
-;     AREA_2_DATA [$PRG3::9831]
+;     MASCON_AREA_DATA [$PRG3::9831]
 ;
 AREA_2_DOOR_DESTINATIONS:                   ; [$9bd2]
-    hex 08 04 00 00 09 05 00 00 0a 03 00 00 0b 01 00 00 ; [$9bd2] undefined
-    hex 0c 02 00 00 0d 06 00 00 0e 07 00 00 0f 04 00 00 ; [$9be2] undefined
-    hex 10 01 00 00 11 02 00 00 12 06 00 00 13 05 00 00 ; [$9bf2] undefined
-    hex 16 03 00 00 17 07 00 00 18 04 00 00 19 05 00 00 ; [$9c02] undefined
-    hex 1a 06 00 00 1b 02 00 00 23 01 00 00 24 02 00 00 ; [$9c12] undefined
-    hex 25 06 00 00 26 07 00 00 27 05 00 00 28 03 00 00 ; [$9c22] undefined
-    hex 29 06 00 00 2a 07 00 00 2b 01 00 00 2c 02 00 00 ; [$9c32] undefined
-    hex 2d 04 00 00 2e 03 00 00 2f 05 00 00 30 04 00 00 ; [$9c42] undefined
-    hex 31 07 00 00 32 03 00 00 33 01 00 00 34 06 00 00 ; [$9c52] undefined
-    hex 3c 01 00 00 3d 03 00 00 3e 07 00 00 3f 02 00 00 ; [$9c62] undefined
-    hex 40 05 00 00 41 04 00 00 45 04 00 00 ; [$9c72] undefined
+    db $08                                  ; [0]:
+    db $04                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $09                                  ; [4]:
+    db $05                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $0a                                  ; [8]:
+    db $03                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $0b                                  ; [12]:
+    db $01                                  ; [13]:
+    db $00                                  ; [14]:
+    db $00                                  ; [15]:
+    db $0c                                  ; [16]:
+    db $02                                  ; [17]:
+    db $00                                  ; [18]:
+    db $00                                  ; [19]:
+    db $0d                                  ; [20]:
+    db $06                                  ; [21]:
+    db $00                                  ; [22]:
+    db $00                                  ; [23]:
+    db $0e                                  ; [24]:
+    db $07                                  ; [25]:
+    db $00                                  ; [26]:
+    db $00                                  ; [27]:
+    db $0f                                  ; [28]:
+    db $04                                  ; [29]:
+    db $00                                  ; [30]:
+    db $00                                  ; [31]:
+    db $10                                  ; [32]:
+    db $01                                  ; [33]:
+    db $00                                  ; [34]:
+    db $00                                  ; [35]:
+    db $11                                  ; [36]:
+    db $02                                  ; [37]:
+    db $00                                  ; [38]:
+    db $00                                  ; [39]:
+    db $12                                  ; [40]:
+    db $06                                  ; [41]:
+    db $00                                  ; [42]:
+    db $00                                  ; [43]:
+    db $13                                  ; [44]:
+    db $05                                  ; [45]:
+    db $00                                  ; [46]:
+    db $00                                  ; [47]:
+    db $16                                  ; [48]:
+    db $03                                  ; [49]:
+    db $00                                  ; [50]:
+    db $00                                  ; [51]:
+    db $17                                  ; [52]:
+    db $07                                  ; [53]:
+    db $00                                  ; [54]:
+    db $00                                  ; [55]:
+    db $18                                  ; [56]:
+    db $04                                  ; [57]:
+    db $00                                  ; [58]:
+    db $00                                  ; [59]:
+    db $19                                  ; [60]:
+    db $05                                  ; [61]:
+    db $00                                  ; [62]:
+    db $00                                  ; [63]:
+    db $1a                                  ; [64]:
+    db $06                                  ; [65]:
+    db $00                                  ; [66]:
+    db $00                                  ; [67]:
+    db $1b                                  ; [68]:
+    db $02                                  ; [69]:
+    db $00                                  ; [70]:
+    db $00                                  ; [71]:
+    db $23                                  ; [72]:
+    db $01                                  ; [73]:
+    db $00                                  ; [74]:
+    db $00                                  ; [75]:
+    db $24                                  ; [76]:
+    db $02                                  ; [77]:
+    db $00                                  ; [78]:
+    db $00                                  ; [79]:
+    db $25                                  ; [80]:
+    db $06                                  ; [81]:
+    db $00                                  ; [82]:
+    db $00                                  ; [83]:
+    db $26                                  ; [84]:
+    db $07                                  ; [85]:
+    db $00                                  ; [86]:
+    db $00                                  ; [87]:
+    db $27                                  ; [88]:
+    db $05                                  ; [89]:
+    db $00                                  ; [90]:
+    db $00                                  ; [91]:
+    db $28                                  ; [92]:
+    db $03                                  ; [93]:
+    db $00                                  ; [94]:
+    db $00                                  ; [95]:
+    db $29                                  ; [96]:
+    db $06                                  ; [97]:
+    db $00                                  ; [98]:
+    db $00                                  ; [99]:
+    db $2a                                  ; [100]:
+    db $07                                  ; [101]:
+    db $00                                  ; [102]:
+    db $00                                  ; [103]:
+    db $2b                                  ; [104]:
+    db $01                                  ; [105]:
+    db $00                                  ; [106]:
+    db $00                                  ; [107]:
+    db $2c                                  ; [108]:
+    db $02                                  ; [109]:
+    db $00                                  ; [110]:
+    db $00                                  ; [111]:
+    db $2d                                  ; [112]:
+    db $04                                  ; [113]:
+    db $00                                  ; [114]:
+    db $00                                  ; [115]:
+    db $2e                                  ; [116]:
+    db $03                                  ; [117]:
+    db $00                                  ; [118]:
+    db $00                                  ; [119]:
+    db $2f                                  ; [120]:
+    db $05                                  ; [121]:
+    db $00                                  ; [122]:
+    db $00                                  ; [123]:
+    db $30                                  ; [124]:
+    db $04                                  ; [125]:
+    db $00                                  ; [126]:
+    db $00                                  ; [127]:
+    db $31                                  ; [128]:
+    db $07                                  ; [129]:
+    db $00                                  ; [130]:
+    db $00                                  ; [131]:
+    db $32                                  ; [132]:
+    db $03                                  ; [133]:
+    db $00                                  ; [134]:
+    db $00                                  ; [135]:
+    db $33                                  ; [136]:
+    db $01                                  ; [137]:
+    db $00                                  ; [138]:
+    db $00                                  ; [139]:
+    db $34                                  ; [140]:
+    db $06                                  ; [141]:
+    db $00                                  ; [142]:
+    db $00                                  ; [143]:
+    db $3c                                  ; [144]:
+    db $01                                  ; [145]:
+    db $00                                  ; [146]:
+    db $00                                  ; [147]:
+    db $3d                                  ; [148]:
+    db $03                                  ; [149]:
+    db $00                                  ; [150]:
+    db $00                                  ; [151]:
+    db $3e                                  ; [152]:
+    db $07                                  ; [153]:
+    db $00                                  ; [154]:
+    db $00                                  ; [155]:
+    db $3f                                  ; [156]:
+    db $02                                  ; [157]:
+    db $00                                  ; [158]:
+    db $00                                  ; [159]:
+    db $40                                  ; [160]:
+    db $05                                  ; [161]:
+    db $00                                  ; [162]:
+    db $00                                  ; [163]:
+    db $41                                  ; [164]:
+    db $04                                  ; [165]:
+    db $00                                  ; [166]:
+    db $00                                  ; [167]:
+    db $45                                  ; [168]:
+    db $04                                  ; [169]:
+    db $00                                  ; [170]:
+    db $00                                  ; [171]:
 
 
 ;============================================================================
@@ -7129,26 +7393,39 @@ AREA_2_DOOR_DESTINATIONS:                   ; [$9bd2]
 ; 64 doors
 ; 99 tiles
 ;============================================================================
+DAYBREAK_AREA_DATA:                         ; [$9c7e]
+    dw $1c88                                ; DAYBREAK_AREA_DATA.blockAttrsRelPtr
+                                            ; [$PRG3::9c7e]
+    dw $1e81                                ; AREA_5_BLOCK_PROPERTIES
+                                            ; [$PRG3::9c80]
+    dw $1ee4                                ; AREA_5_SCROLL_DATA
+                                            ; [$PRG3::9c82]
+    dw $1f64                                ; AREA_5_DOOR_LOCATIONS
+                                            ; [$PRG3::9c84]
+    dw $1fa5                                ; AREA_5_DOOR_DESTINATIONS
+                                            ; [$PRG3::9c86]
 
 ;
 ; XREFS:
-;     LEVEL_5_DATA_START_REL_OFFSET [$PRG3::800e]
+;     DAYBREAK_AREA_DATA [$PRG3::9c7e]
 ;
-AREA_5_DATA:                                ; [$9c7e]
-    dw $1c88,$1e81,$1ee4,$1f64,$1fa5        ; [$9c7e] ushort
+DAYBREAK_AREA_DATA.blockAttrsRelPtr:        ; [$9c88]
+    dw $1c92                                ; AREA_5_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::9c88]
+    dw $1cf5                                ; AREA_5_BLOCK_DATA+1
+                                            ; [$PRG3::9c8a]
+    dw $1d58                                ; AREA_5_BLOCK_DATA_2
+                                            ; [$PRG3::9c8c]
+    dw $1dbb                                ; AREA_5_BLOCK_DATA_3
+                                            ; [$PRG3::9c8e]
+    dw $1e1e                                ; AREA_5_BLOCK_DATA_4
+                                            ; [$PRG3::9c90]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c7e]
+;     DAYBREAK_AREA_DATA [$PRG3::9c88]
 ;
-AREA_5_DATA.blockAttrsRelPtr:               ; [$9c88]
-    dw $1c92,$1cf5,$1d58,$1dbb,$1e1e        ; [$9c88] ushort
-
-;
-; XREFS:
-;     AREA_5_DATA [$PRG3::9c88]
-;
-BYTE_ARRAY_PRG3__9c92:                      ; [$9c92]
+AREA_5_BLOCK_ATTRIBUTES:                    ; [$9c92]
     db $00                                  ; [0]:
     db $55                                  ; [1]:
     db $55                                  ; [2]:
@@ -7251,9 +7528,9 @@ BYTE_ARRAY_PRG3__9c92:                      ; [$9c92]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c8a]
+;     DAYBREAK_AREA_DATA [$PRG3::9c8a]
 ;
-BYTE_ARRAY_PRG3__9cf5:                      ; [$9cf5]
+AREA_5_BLOCK_DATA_1:                        ; [$9cf5]
     db $00                                  ; [0]:
     db $a0                                  ; [1]:
     db $a1                                  ; [2]:
@@ -7356,9 +7633,9 @@ BYTE_ARRAY_PRG3__9cf5:                      ; [$9cf5]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c8c]
+;     DAYBREAK_AREA_DATA [$PRG3::9c8c]
 ;
-BYTE_ARRAY_PRG3__9d58:                      ; [$9d58]
+AREA_5_BLOCK_DATA_2:                        ; [$9d58]
     db $00                                  ; [0]:
     db $a1                                  ; [1]:
     db $a2                                  ; [2]:
@@ -7461,9 +7738,9 @@ BYTE_ARRAY_PRG3__9d58:                      ; [$9d58]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c8e]
+;     DAYBREAK_AREA_DATA [$PRG3::9c8e]
 ;
-BYTE_ARRAY_PRG3__9dbb:                      ; [$9dbb]
+AREA_5_BLOCK_DATA_3:                        ; [$9dbb]
     db $00                                  ; [0]:
     db $9f                                  ; [1]:
     db $86                                  ; [2]:
@@ -7566,9 +7843,9 @@ BYTE_ARRAY_PRG3__9dbb:                      ; [$9dbb]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c90]
+;     DAYBREAK_AREA_DATA [$PRG3::9c90]
 ;
-BYTE_ARRAY_PRG3__9e1e:                      ; [$9e1e]
+AREA_5_BLOCK_DATA_4:                        ; [$9e1e]
     db $00                                  ; [0]:
     db $85                                  ; [1]:
     db $8f                                  ; [2]:
@@ -7671,114 +7948,114 @@ BYTE_ARRAY_PRG3__9e1e:                      ; [$9e1e]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c80]
+;     DAYBREAK_AREA_DATA [$PRG3::9c80]
 ;
-BYTE_ARRAY_PRG3__9e81:                      ; [$9e81]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $01                                  ; [2]:
-    db $01                                  ; [3]:
-    db $01                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $01                                  ; [16]:
-    db $01                                  ; [17]:
-    db $01                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $02                                  ; [21]:
-    db $01                                  ; [22]:
-    db $01                                  ; [23]:
-    db $00                                  ; [24]:
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $01                                  ; [27]:
-    db $01                                  ; [28]:
-    db $01                                  ; [29]:
-    db $01                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $03                                  ; [46]:
-    db $03                                  ; [47]:
-    db $00                                  ; [48]:
-    db $00                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $05                                  ; [56]:
-    db $03                                  ; [57]:
-    db $03                                  ; [58]:
-    db $03                                  ; [59]:
-    db $01                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $00                                  ; [81]:
-    db $00                                  ; [82]:
-    db $00                                  ; [83]:
-    db $01                                  ; [84]:
-    db $01                                  ; [85]:
-    db $03                                  ; [86]:
-    db $03                                  ; [87]:
-    db $01                                  ; [88]:
-    db $01                                  ; [89]:
-    db $01                                  ; [90]:
-    db $01                                  ; [91]:
-    db $01                                  ; [92]:
-    db $01                                  ; [93]:
-    db $01                                  ; [94]:
-    db $0a                                  ; [95]:
-    db $01                                  ; [96]:
-    db $0b                                  ; [97]:
-    db $0d                                  ; [98]:
+AREA_5_BLOCK_PROPERTIES:                    ; [$9e81]
+    db BLOCK_IS_AIR                         ; [0]:
+    db BLOCK_IS_SOLID                       ; [1]:
+    db BLOCK_IS_SOLID                       ; [2]:
+    db BLOCK_IS_SOLID                       ; [3]:
+    db BLOCK_IS_SOLID                       ; [4]:
+    db BLOCK_IS_AIR                         ; [5]:
+    db BLOCK_IS_AIR                         ; [6]:
+    db BLOCK_IS_AIR                         ; [7]:
+    db BLOCK_IS_AIR                         ; [8]:
+    db BLOCK_IS_AIR                         ; [9]:
+    db BLOCK_IS_AIR                         ; [10]:
+    db BLOCK_IS_AIR                         ; [11]:
+    db BLOCK_IS_AIR                         ; [12]:
+    db BLOCK_IS_AIR                         ; [13]:
+    db BLOCK_IS_AIR                         ; [14]:
+    db BLOCK_IS_AIR                         ; [15]:
+    db BLOCK_IS_SOLID                       ; [16]:
+    db BLOCK_IS_SOLID                       ; [17]:
+    db BLOCK_IS_SOLID                       ; [18]:
+    db BLOCK_IS_AIR                         ; [19]:
+    db BLOCK_IS_AIR                         ; [20]:
+    db BLOCK_IS_LADDER                      ; [21]:
+    db BLOCK_IS_SOLID                       ; [22]:
+    db BLOCK_IS_SOLID                       ; [23]:
+    db BLOCK_IS_AIR                         ; [24]:
+    db BLOCK_IS_AIR                         ; [25]:
+    db BLOCK_IS_AIR                         ; [26]:
+    db BLOCK_IS_SOLID                       ; [27]:
+    db BLOCK_IS_SOLID                       ; [28]:
+    db BLOCK_IS_SOLID                       ; [29]:
+    db BLOCK_IS_SOLID                       ; [30]:
+    db BLOCK_IS_AIR                         ; [31]:
+    db BLOCK_IS_AIR                         ; [32]:
+    db BLOCK_IS_AIR                         ; [33]:
+    db BLOCK_IS_AIR                         ; [34]:
+    db BLOCK_IS_AIR                         ; [35]:
+    db BLOCK_IS_AIR                         ; [36]:
+    db BLOCK_IS_AIR                         ; [37]:
+    db BLOCK_IS_AIR                         ; [38]:
+    db BLOCK_IS_AIR                         ; [39]:
+    db BLOCK_IS_AIR                         ; [40]:
+    db BLOCK_IS_AIR                         ; [41]:
+    db BLOCK_IS_AIR                         ; [42]:
+    db BLOCK_IS_AIR                         ; [43]:
+    db BLOCK_IS_AIR                         ; [44]:
+    db BLOCK_IS_AIR                         ; [45]:
+    db BLOCK_IS_DOOR                        ; [46]:
+    db BLOCK_IS_DOOR                        ; [47]:
+    db BLOCK_IS_AIR                         ; [48]:
+    db BLOCK_IS_AIR                         ; [49]:
+    db BLOCK_IS_AIR                         ; [50]:
+    db BLOCK_IS_AIR                         ; [51]:
+    db BLOCK_IS_AIR                         ; [52]:
+    db BLOCK_IS_AIR                         ; [53]:
+    db BLOCK_IS_AIR                         ; [54]:
+    db BLOCK_IS_AIR                         ; [55]:
+    db BLOCK_BREAKABLE_FLOOR                ; [56]:
+    db BLOCK_IS_DOOR                        ; [57]:
+    db BLOCK_IS_DOOR                        ; [58]:
+    db BLOCK_IS_DOOR                        ; [59]:
+    db BLOCK_IS_SOLID                       ; [60]:
+    db BLOCK_IS_AIR                         ; [61]:
+    db BLOCK_IS_AIR                         ; [62]:
+    db BLOCK_IS_AIR                         ; [63]:
+    db BLOCK_IS_AIR                         ; [64]:
+    db BLOCK_IS_AIR                         ; [65]:
+    db BLOCK_IS_AIR                         ; [66]:
+    db BLOCK_IS_AIR                         ; [67]:
+    db BLOCK_IS_AIR                         ; [68]:
+    db BLOCK_IS_AIR                         ; [69]:
+    db BLOCK_IS_AIR                         ; [70]:
+    db BLOCK_IS_AIR                         ; [71]:
+    db BLOCK_IS_AIR                         ; [72]:
+    db BLOCK_IS_AIR                         ; [73]:
+    db BLOCK_IS_AIR                         ; [74]:
+    db BLOCK_IS_AIR                         ; [75]:
+    db BLOCK_IS_AIR                         ; [76]:
+    db BLOCK_IS_AIR                         ; [77]:
+    db BLOCK_IS_AIR                         ; [78]:
+    db BLOCK_IS_AIR                         ; [79]:
+    db BLOCK_IS_AIR                         ; [80]:
+    db BLOCK_IS_AIR                         ; [81]:
+    db BLOCK_IS_AIR                         ; [82]:
+    db BLOCK_IS_AIR                         ; [83]:
+    db BLOCK_IS_SOLID                       ; [84]:
+    db BLOCK_IS_SOLID                       ; [85]:
+    db BLOCK_IS_DOOR                        ; [86]:
+    db BLOCK_IS_DOOR                        ; [87]:
+    db BLOCK_IS_SOLID                       ; [88]:
+    db BLOCK_IS_SOLID                       ; [89]:
+    db BLOCK_IS_SOLID                       ; [90]:
+    db BLOCK_IS_SOLID                       ; [91]:
+    db BLOCK_IS_SOLID                       ; [92]:
+    db BLOCK_IS_SOLID                       ; [93]:
+    db BLOCK_IS_SOLID                       ; [94]:
+    db BLOCK_MAYBE_AREA_TRANSITION_DOWN     ; [95]:
+    db BLOCK_IS_SOLID                       ; [96]:
+    db BLOCK_MAYBE_BREAKABLE_BY_MATTOCK     ; [97]:
+    db BLOCK_AREA_TRANSITION_LEFT           ; [98]:
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c82]
+;     DAYBREAK_AREA_DATA [$PRG3::9c82]
 ;
-BYTE_ARRAY_PRG3__9ee4:                      ; [$9ee4]
+AREA_5_SCROLL_DATA:                         ; [$9ee4]
     db $01                                  ; [0]:
     db $ff                                  ; [1]:
     db $ff                                  ; [2]:
@@ -7910,9 +8187,9 @@ BYTE_ARRAY_PRG3__9ee4:                      ; [$9ee4]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c84]
+;     DAYBREAK_AREA_DATA [$PRG3::9c84]
 ;
-BYTE_ARRAY_PRG3__9f64:                      ; [$9f64]
+AREA_5_DOOR_LOCATIONS:                      ; [$9f64]
     db $0c                                  ; [0]:
     db $48                                  ; [1]:
     db $00                                  ; [2]:
@@ -7981,38 +8258,113 @@ BYTE_ARRAY_PRG3__9f64:                      ; [$9f64]
 
 ;
 ; XREFS:
-;     AREA_5_DATA [$PRG3::9c86]
+;     DAYBREAK_AREA_DATA [$PRG3::9c86]
 ;
 AREA_5_DOOR_DESTINATIONS:                   ; [$9fa5]
-    hex 10 0d 00 00 0c 0c 00 00 15 0e 00 00 14 0d 00 00 ; [$9fa5] undefined
-    hex 0e 0c 08 00 0e 0c 08 00 ff ff 2d 00 ff 6a ff f7 ; [$9fb5] undefined
-    hex ff 7f 78 00 ff ba ff fb ff e7 1a 00 ff 0f ff ff ; [$9fc5] undefined
-    hex ff fe 8e 00 ff ff ff ff ff ff 36 00 ff 04 ff dd ; [$9fd5] undefined
-    hex ff f9 cf 04 ff 7b ff d3 ff af 00 00 ff f5 ff fd ; [$9fe5] undefined
-    hex ff fb c0 00 ff e6 ff ff ff fb 83 00 00 00 fd 00 ; [$9ff5] undefined
-    hex 0a 00 00 00 00 00 7a 00 88 00 00 00 00 00 8f 00 ; [$a005] undefined
-    hex 1c 00 00 00 00 00 f3 00 25 00 00 00 00 00 7b 02 ; [$a015] undefined
-    hex 35 07 00 00 36 05 00 00 37 04 00 00 38 06 00 00 ; [$a025] undefined
-    hex 39 03 00 00 3a 06 00 00 3b 01 00 00 42 01 00 00 ; [$a035] undefined
-    db $43,$04,$00,$00                      ; [$a045] undefined
+    db $10                                  ; [0]:
+    db $0d                                  ; [1]:
+    db $00                                  ; [2]:
+    db $00                                  ; [3]:
+    db $0c                                  ; [4]:
+    db $0c                                  ; [5]:
+    db $00                                  ; [6]:
+    db $00                                  ; [7]:
+    db $15                                  ; [8]:
+    db $0e                                  ; [9]:
+    db $00                                  ; [10]:
+    db $00                                  ; [11]:
+    db $14                                  ; [12]:
+    db $0d                                  ; [13]:
+    db $00                                  ; [14]:
+    db $00                                  ; [15]:
+    db $0e                                  ; [16]:
+    db $0c                                  ; [17]:
+    db $08                                  ; [18]:
+    db $00                                  ; [19]:
+    db $0e                                  ; [20]:
+    db $0c                                  ; [21]:
+    db $08                                  ; [22]:
+    db $00                                  ; [23]:
+    db $ff                                  ; [24]:
+    db $ff                                  ; [25]:
+    db $2d                                  ; [26]:
+    db $00                                  ; [27]:
+    db $ff                                  ; [28]:
+    db $6a                                  ; [29]:
+    db $ff                                  ; [30]:
+    db $f7                                  ; [31]:
+    db $ff                                  ; [32]:
+    db $7f                                  ; [33]:
+    db $78                                  ; [34]:
+    db $00                                  ; [35]:
+    db $ff                                  ; [36]:
+    db $ba                                  ; [37]:
+    db $ff                                  ; [38]:
+    db $fb                                  ; [39]:
+    db $ff                                  ; [40]:
+    db $e7                                  ; [41]:
+    db $1a                                  ; [42]:
+    db $00                                  ; [43]:
+    db $ff                                  ; [44]:
+    db $0f                                  ; [45]:
+    db $ff                                  ; [46]:
+    db $ff                                  ; [47]:
+    db $ff                                  ; [48]:
+    db $fe                                  ; [49]:
+    db $8e                                  ; [50]:
+    db $00                                  ; [51]:
+    db $ff                                  ; [52]:
+    db $ff                                  ; [53]:
+    db $ff                                  ; [54]:
+    db $ff                                  ; [55]:
+    db $ff                                  ; [56]:
+    db $ff                                  ; [57]:
+    db $36                                  ; [58]:
+    db $00                                  ; [59]:
+    db $ff                                  ; [60]:
+    db $04                                  ; [61]:
+    db $ff                                  ; [62]:
+    db $dd                                  ; [63]:
+    db $ff                                  ; [64]:
+    hex f9 cf 04 ff 7b ff d3 ff af 00 00 ff f5 ff fd ff ; [$9fe6] undefined
+    hex fb c0 00 ff e6 ff ff ff fb 83 00 00 00 fd 00 0a ; [$9ff6] undefined
+    hex 00 00 00 00 00 7a 00 88 00 00 00 00 00 8f 00 1c ; [$a006] undefined
+    hex 00 00 00 00 00 f3 00 25 00 00 00 00 00 7b 02 35 ; [$a016] undefined
+    hex 07 00 00 36 05 00 00 37 04 00 00 38 06 00 00 39 ; [$a026] undefined
+    hex 03 00 00 3a 06 00 00 3b 01 00 00 42 01 00 00 43 ; [$a036] undefined
+    db $04,$00,$00                          ; [$a046] undefined
+
+EVIL_FORTRESS_AREA_DATA:                    ; [$a049]
+    dw $2053                                ; EVIL_FORTRESS_AREA_DATA.blockAttrsRelPtr
+                                            ; [$PRG3::a049]
+    dw $219d                                ; BYTE_ARRAY_PRG3__a19d
+                                            ; [$PRG3::a04b]
+    dw $21dd                                ; BYTE_ARRAY_PRG3__a1dd
+                                            ; [$PRG3::a04d]
+    dw $222d                                ; BYTE_ARRAY_PRG3__a22d
+                                            ; [$PRG3::a04f]
+    dw $2236                                ; DAT_PRG3__a236
+                                            ; [$PRG3::a051]
 
 ;
 ; XREFS:
-;     LEVEL_FINAL_BOSS_START_REL_PTR [$PRG3::8010]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a049]
 ;
-AreaRelPointers_PRG3__a049:                 ; [$a049]
-    dw $2053,$219d,$21dd,$222d,$2236        ; [$a049] ushort
+EVIL_FORTRESS_AREA_DATA.blockAttrsRelPtr:   ; [$a053]
+    dw $205d                                ; BYTE_ARRAY_PRG3__a05d
+                                            ; [$PRG3::a053]
+    dw $209d                                ; BYTE_ARRAY_PRG3__a09d
+                                            ; [$PRG3::a055]
+    dw $20dd                                ; BYTE_ARRAY_PRG3__a0dd
+                                            ; [$PRG3::a057]
+    dw $211d                                ; BYTE_ARRAY_PRG3__a11d
+                                            ; [$PRG3::a059]
+    dw $215d                                ; BYTE_ARRAY_PRG3__a15d
+                                            ; [$PRG3::a05b]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a049]
-;
-AreaRelPointers_PRG3__a049.blockAttrsRelPtr: ; [$a053]
-    dw $205d,$209d,$20dd,$211d,$215d        ; [$a053] ushort
-
-;
-; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a053]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a053]
 ;
 BYTE_ARRAY_PRG3__a05d:                      ; [$a05d]
     db $00                                  ; [0]:
@@ -8082,7 +8434,7 @@ BYTE_ARRAY_PRG3__a05d:                      ; [$a05d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a055]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a055]
 ;
 BYTE_ARRAY_PRG3__a09d:                      ; [$a09d]
     db $00                                  ; [0]:
@@ -8152,7 +8504,7 @@ BYTE_ARRAY_PRG3__a09d:                      ; [$a09d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a057]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a057]
 ;
 BYTE_ARRAY_PRG3__a0dd:                      ; [$a0dd]
     db $00                                  ; [0]:
@@ -8222,7 +8574,7 @@ BYTE_ARRAY_PRG3__a0dd:                      ; [$a0dd]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a059]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a059]
 ;
 BYTE_ARRAY_PRG3__a11d:                      ; [$a11d]
     db $00                                  ; [0]:
@@ -8292,7 +8644,7 @@ BYTE_ARRAY_PRG3__a11d:                      ; [$a11d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a05b]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a05b]
 ;
 BYTE_ARRAY_PRG3__a15d:                      ; [$a15d]
     db $00                                  ; [0]:
@@ -8362,7 +8714,7 @@ BYTE_ARRAY_PRG3__a15d:                      ; [$a15d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a04b]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a04b]
 ;
 BYTE_ARRAY_PRG3__a19d:                      ; [$a19d]
     db $00                                  ; [0]:
@@ -8432,7 +8784,7 @@ BYTE_ARRAY_PRG3__a19d:                      ; [$a19d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a04d]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a04d]
 ;
 BYTE_ARRAY_PRG3__a1dd:                      ; [$a1dd]
     db $ff                                  ; [0]:
@@ -8518,7 +8870,7 @@ BYTE_ARRAY_PRG3__a1dd:                      ; [$a1dd]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a04f]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a04f]
 ;
 BYTE_ARRAY_PRG3__a22d:                      ; [$a22d]
     db $01                                  ; [0]:
@@ -8533,7 +8885,7 @@ BYTE_ARRAY_PRG3__a22d:                      ; [$a22d]
 
 ;
 ; XREFS:
-;     AreaRelPointers_PRG3__a049 [$PRG3::a051]
+;     EVIL_FORTRESS_AREA_DATA [$PRG3::a051]
 ;
 DAT_PRG3__a236:                             ; [$a236]
     hex 00 0f 00 00 00 3f 00 90 00 00 00 00 00 57 00 e1 ; [$a236] undefined
