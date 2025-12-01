@@ -15,7 +15,7 @@
 ;     Sprite_SetAppearanceAddrFromOffset
 ;
 SPRITE_APPEARANCES_OFFSET:                  ; [$8006]
-    dw $1036                                ; USHORT_ARRAY_PRG7__9036
+    dw $1036                                ; TILES_SPRITES_ADDRS
                                             ; [$PRG7::8006]
 
 ;
@@ -34,7 +34,7 @@ PORTRAIT_APPEARANCES_OFFSET:                ; [$800a]
     dw $2fd5                                ; TILES_PORTRAITS_ADDRS
                                             ; [$PRG7::800a]
 
-USHORT_ARRAY_PRG7__800c:                    ; [$800c]
+BANK7_SPRITEADDRS_START:                    ; [$800c]
     dw $0066                                ; [0]:
                                             ; PRG7_SPRITE_8066
     dw $00e6                                ; [1]:
@@ -92,6 +92,13 @@ USHORT_ARRAY_PRG7__800c:                    ; [$800c]
 ; .....█░▒
 ; .....░░▒
 ; ....▒▒▒░
+;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::800c]
+;     BANK7_SPRITEADDRS_START [$PRG7::803c]
+;     BANK7_SPRITEADDRS_START [$PRG7::8040]
+;     BANK7_SPRITEADDRS_START [$PRG7::8044]
+;     BANK7_SPRITEADDRS_START [$PRG7::8046]
 ;
 PRG7_SPRITE_8066:                           ; [$8066]
     db $02,$05,$06,$0e,$0a,$06,$06,$01,$01,$03,$01,$01,$05,$05,$01,$0e ; [$8066]
@@ -212,6 +219,9 @@ PRG7_SPRITE_80D6:                           ; [$80d6]
 ; .....░░░
 ; .....▒██
 ; .....░▒▒
+;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::800e]
 ;
 PRG7_SPRITE_80E6:                           ; [$80e6]
     db $03,$04,$06,$06,$05,$07,$03,$04,$00,$03,$03,$01,$03,$00,$07,$03 ; [$80e6]
@@ -377,6 +387,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .....▒▒░
 ; ......▒░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8010]
+;
+PPUTile16_PRG7__8196:                       ; [$8196]
     db $03,$03,$03,$07,$05,$07,$01,$01,$05,$06,$07,$00,$06,$0a,$06,$02 ; [$8196]
                                                                        ; byte
 
@@ -531,6 +545,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .....░█▒
 ; ....▒▒▒▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8012]
+;
+PPUTile16_PRG7__8246:                       ; [$8246]
     db $05,$07,$03,$03,$06,$06,$06,$00,$05,$07,$04,$07,$01,$07,$03,$0f ; [$8246]
                                                                        ; byte
 
@@ -811,6 +829,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ░█░░.▒▒▒
 ; .█░..░░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8014]
+;
+PPUTile16_PRG7__8386:                       ; [$8386]
     db $63,$d6,$f4,$b0,$96,$56,$f0,$67,$03,$67,$67,$67,$67,$e3,$47,$40 ; [$8386]
                                                                        ; byte
 
@@ -979,6 +1001,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ███░░▒▒▒
 ; .▒.▒▒▒░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8016]
+;
+PPUTile16_PRG7__8446:                       ; [$8446]
     db $87,$03,$9b,$9b,$80,$03,$f8,$03,$08,$1c,$1c,$8d,$3f,$1e,$e7,$5c ; [$8446]
                                                                        ; byte
 
@@ -1091,6 +1117,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ...░...█
 ; .....▒█░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8018]
+;
+PPUTile16_PRG7__84c6:                       ; [$84c6]
     db $11,$02,$12,$03,$03,$02,$11,$03,$00,$01,$01,$11,$10,$01,$01,$06 ; [$84c6]
                                                                        ; byte
 
@@ -1231,6 +1261,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ......░█
 ; .....▒▒▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::801a]
+;
+PPUTile16_PRG7__8566:                       ; [$8566]
     db $00,$00,$00,$01,$03,$03,$03,$00,$00,$00,$00,$00,$00,$03,$01,$07 ; [$8566]
                                                                        ; byte
 
@@ -1427,6 +1461,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ...░█▒▒█
 ; ...░▒▒░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::801c]
+;
+PPUTile16_PRG7__8646:                       ; [$8646]
     db $07,$0f,$09,$0c,$2e,$2c,$19,$13,$00,$00,$06,$03,$17,$15,$0f,$0c ; [$8646]
                                                                        ; byte
 
@@ -1567,6 +1605,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ....░░░▒
 ; ....▒██░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::801e]
+;
+PPUTile16_PRG7__86e6:                       ; [$86e6]
     db $02,$04,$01,$0d,$00,$06,$0e,$07,$01,$03,$07,$07,$0a,$0f,$01,$0e ; [$86e6]
                                                                        ; byte
 
@@ -1749,6 +1791,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ......░▒
 ; ......█▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8020]
+;
+PPUTile16_PRG7__87b6:                       ; [$87b6]
     db $00,$00,$00,$00,$01,$03,$02,$02,$00,$00,$00,$00,$01,$02,$01,$03 ; [$87b6]
                                                                        ; byte
 
@@ -1973,6 +2019,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ...▒█░..
 ; ...░█░..
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8022]
+;
+PPUTile16_PRG7__88b6:                       ; [$88b6]
     db $00,$00,$00,$1c,$0c,$0c,$0c,$1c,$00,$00,$08,$08,$18,$18,$18,$08 ; [$88b6]
                                                                        ; byte
 
@@ -2197,6 +2247,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .....▒░▒
 ; .......░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8024]
+;
+PPUTile16_PRG7__89b6:                       ; [$89b6]
     db $01,$07,$07,$0c,$03,$04,$02,$01,$07,$0f,$0f,$03,$04,$03,$05,$00 ; [$89b6]
                                                                        ; byte
 
@@ -2351,6 +2405,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ....█▒██
 ; ....░▒░█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8026]
+;
+PPUTile16_PRG7__8a66:                       ; [$8a66]
     db $00,$00,$08,$0f,$0f,$09,$0b,$0b,$00,$00,$0f,$0f,$0f,$06,$0f,$05 ; [$8a66]
                                                                        ; byte
 
@@ -2547,6 +2605,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ....█▒██
 ; ....░▒░█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8028]
+;
+PPUTile16_PRG7__8b46:                       ; [$8b46]
     db $00,$00,$07,$0f,$0b,$09,$0b,$0b,$00,$00,$00,$00,$04,$06,$0f,$05 ; [$8b46]
                                                                        ; byte
 
@@ -2729,6 +2791,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ..░▒░░█░
 ; █▒░░▒▒░▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::802c]
+;
+PPUTile16_PRG7__8c16:                       ; [$8c16]
     db $83,$fe,$fd,$3b,$5b,$3b,$2f,$b2,$80,$c3,$76,$75,$25,$0c,$12,$cd ; [$8c16]
                                                                        ; byte
 
@@ -2841,6 +2907,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ▒█▒░█░░░
 ; ██▒░░░░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::802a]
+;
+PPUTile16_PRG7__8c96:                       ; [$8c96]
     db $07,$18,$30,$60,$4f,$df,$5f,$df,$0f,$3f,$7f,$7f,$fc,$e0,$e8,$e0 ; [$8c96]
                                                                        ; byte
 
@@ -2953,6 +3023,11 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; █░█░█░▒░
 ; █░██▒▒▒░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::802e]
+;     BANK7_SPRITEADDRS_START [$PRG7::805c]
+;
+PPUTile16_PRG7__8d16:                       ; [$8d16]
     db $00,$04,$1e,$3f,$3f,$7f,$fd,$f1,$00,$08,$28,$2a,$2a,$aa,$aa,$be ; [$8d16]
                                                                        ; byte
 
@@ -2981,6 +3056,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ....░░░░
 ; ....▒░░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8030]
+;
+PPUTile16_PRG7__8d36:                       ; [$8d36]
     db $00,$02,$03,$0f,$07,$07,$0f,$07,$00,$01,$04,$01,$08,$08,$00,$08 ; [$8d36]
                                                                        ; byte
 
@@ -3009,6 +3088,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ..█░░▒█.
 ; .█░░░░▒█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8032]
+;
+PPUTile16_PRG7__8d56:                       ; [$8d56]
     db $01,$04,$00,$12,$04,$1c,$3a,$7d,$01,$06,$08,$13,$14,$18,$26,$43 ; [$8d56]
                                                                        ; byte
 
@@ -3065,6 +3148,13 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ...▒░...
 ; ...▒░...
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8034]
+;     BANK7_SPRITEADDRS_START [$PRG7::8036]
+;     BANK7_SPRITEADDRS_START [$PRG7::8058]
+;     BANK7_SPRITEADDRS_START [$PRG7::805a]
+;
+PPUTile16_PRG7__8d96:                       ; [$8d96]
     db $18,$3c,$3c,$18,$2c,$18,$08,$08,$00,$10,$00,$00,$10,$00,$10,$10 ; [$8d96]
                                                                        ; byte
 
@@ -3093,6 +3183,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .░..░..░
 ; .█...░░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8038]
+;
+PPUTile16_PRG7__8db6:                       ; [$8db6]
     db $01,$03,$23,$51,$48,$4b,$49,$47,$00,$01,$30,$40,$40,$41,$00,$40 ; [$8db6]
                                                                        ; byte
 
@@ -3149,6 +3243,11 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .....░░█
 ; ....░▒▒▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::803a]
+;     BANK7_SPRITEADDRS_START [$PRG7::805e]
+;
+PPUTile16_PRG7__8df6:                       ; [$8df6]
     db $07,$0f,$0b,$05,$03,$02,$07,$08,$03,$04,$04,$03,$00,$01,$01,$07 ; [$8df6]
                                                                        ; byte
 
@@ -3177,6 +3276,11 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ▒......░
 ; .......█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::803e]
+;     BANK7_SPRITEADDRS_START [$PRG7::8054]
+;
+PPUTile16_PRG7__8e16:                       ; [$8e16]
     db $01,$0e,$7f,$f5,$43,$81,$01,$01,$01,$1f,$3f,$7b,$e0,$c1,$80,$01 ; [$8e16]
                                                                        ; byte
 
@@ -3205,6 +3309,12 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; .░██▒▒██
 ; .░███▒██
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8042]
+;     BANK7_SPRITEADDRS_START [$PRG7::8062]
+;     BANK7_SPRITEADDRS_START [$PRG7::8064]
+;
+PPUTile16_PRG7__8e36:                       ; [$8e36]
     db $00,$00,$05,$0b,$0c,$36,$73,$7b,$00,$00,$00,$04,$07,$0f,$3f,$3f ; [$8e36]
                                                                        ; byte
 
@@ -3373,6 +3483,11 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ......▒█
 ; ......▒█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8048]
+;     BANK7_SPRITEADDRS_START [$PRG7::8056]
+;
+PPUTile16_PRG7__8ef6:                       ; [$8ef6]
     db $00,$03,$01,$03,$01,$01,$01,$01,$01,$02,$03,$03,$03,$03,$03,$03 ; [$8ef6]
                                                                        ; byte
 
@@ -3429,6 +3544,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ..█..░..
 ; ..▒...░.
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::804a]
+;
+PPUTile16_PRG7__8f36:                       ; [$8f36]
     db $68,$68,$7f,$38,$29,$08,$24,$02,$17,$17,$00,$00,$01,$20,$20,$20 ; [$8f36]
                                                                        ; byte
 
@@ -3457,6 +3576,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ......▒█
 ; ......░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::804c]
+;
+PPUTile16_PRG7__8f56:                       ; [$8f56]
     db $00,$00,$00,$00,$01,$00,$01,$03,$00,$00,$00,$00,$00,$01,$03,$00 ; [$8f56]
                                                                        ; byte
 
@@ -3513,6 +3636,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ░█░▒██▒░
 ; ██.░░▒░█
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::804e]
+;
+PPUTile16_PRG7__8f96:                       ; [$8f96]
     db $93,$77,$ff,$f1,$7d,$fe,$ed,$db,$b7,$fc,$f3,$0e,$df,$9f,$5e,$c5 ; [$8f96]
                                                                        ; byte
 
@@ -3541,6 +3668,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ..████░░
 ; ..░█░░░░
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8050]
+;
+PPUTile16_PRG7__8fb6:                       ; [$8fb6]
     db $03,$17,$3b,$3f,$3f,$3f,$3f,$3f,$03,$16,$17,$28,$37,$27,$3c,$10 ; [$8fb6]
                                                                        ; byte
 
@@ -3597,6 +3728,10 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; ....░███
 ; .....░█▒
 ;
+; XREFS:
+;     BANK7_SPRITEADDRS_START [$PRG7::8052]
+;
+PPUTile16_PRG7__8ff6:                       ; [$8ff6]
     db $c0,$e0,$70,$78,$3c,$1a,$0f,$06,$c0,$f0,$78,$3c,$1e,$0f,$07,$03 ; [$8ff6]
                                                                        ; byte
 
@@ -3646,7 +3781,7 @@ PRG7_SPRITE_8176:                           ; [$8176]
 ; XREFS:
 ;     SPRITE_APPEARANCES_OFFSET [$PRG7::8006]
 ;
-USHORT_ARRAY_PRG7__9036:                    ; [$9036]
+TILES_SPRITES_ADDRS:                        ; [$9036]
     dw $1252                                ; [0]:
     dw $1257                                ; [1]:
     dw $126b                                ; [2]:
@@ -3878,8 +4013,6 @@ USHORT_ARRAY_PRG7__9036:                    ; [$9036]
     dw $1234                                ; [228]:
     dw $1240                                ; [229]:
     dw $1246                                ; [230]:
-
-USHORT_ARRAY_PRG7__9036_231_:               ; [$9204]
     dw $124c                                ; [231]:
     dw $291d                                ; [232]:
     dw $2929                                ; [233]:
@@ -3904,59 +4037,53 @@ USHORT_ARRAY_PRG7__9036_231_:               ; [$9204]
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9190]
+;     TILES_SPRITES_ADDRS [$PRG7::9190]
 ;
-DAT_PRG7__922e:                             ; [$922e]
-    db $00,$00,$00,$04,$72,$00              ; [$922e] undefined
+BYTE_PRG7__922e:                            ; [$922e]
+    db $00,$00,$00,$04,$72,$00              ; [$922e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91fe]
+;     TILES_SPRITES_ADDRS [$PRG7::91fe]
 ;
-DAT_PRG7__9234:                             ; [$9234]
-    hex 11 00 00 08 76 00 77 00 78 00 79 00 ; [$9234] undefined
+BYTE_PRG7__9234:                            ; [$9234]
+    db $11,$00,$00,$08,$76,$00,$77,$00,$78,$00,$79,$00 ; [$9234] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9200]
+;     TILES_SPRITES_ADDRS [$PRG7::9200]
 ;
-DAT_PRG7__9240:                             ; [$9240]
-    db $00,$00,$00,$04                      ; [$9240] undefined
-
-    db $73,$00                              ; [$9245] byte
+BYTE_PRG7__9240:                            ; [$9240]
+    db $00,$00,$00,$04,$73,$00              ; [$9240] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9202]
+;     TILES_SPRITES_ADDRS [$PRG7::9202]
 ;
-DAT_PRG7__9246:                             ; [$9246]
-    db $00,$00,$00,$04                      ; [$9246] undefined
-
-    db $74,$00                              ; [$924b] byte
+BYTE_PRG7__9246:                            ; [$9246]
+    db $00,$00,$00,$04,$74,$00              ; [$9246] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9204]
+;     TILES_SPRITES_ADDRS [$PRG7::9204]
 ;
-DAT_PRG7__924c:                             ; [$924c]
-    db $00,$00,$00,$04                      ; [$924c] undefined
-
-    db $75,$00                              ; [$9251] byte
+BYTE_PRG7__924c:                            ; [$924c]
+    db $00,$00,$00,$04,$75,$00              ; [$924c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9036]
+;     TILES_SPRITES_ADDRS [$PRG7::9036]
 ;
-DAT_PRG7__9252:                             ; [$9252]
+BYTE_PRG7__9252:                            ; [$9252]
     db $00                                  ; Rows, cols remaining
     db $00                                  ; X
     db $00                                  ; Y
     db $04                                  ; Next read address
-    db $ff                                  ; [$9256] undefined
+    db $ff                                  ; [$9256] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9038]
+;     TILES_SPRITES_ADDRS [$PRG7::9038]
 ;
 BYTE_PRG7__9257:                            ; [$9257]
     db $31                                  ; 4 rows, 2 cols
@@ -3968,732 +4095,812 @@ BYTE_PRG7__9257:                            ; [$9257]
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::903a]
+;     TILES_SPRITES_ADDRS [$PRG7::903a]
 ;
-DAT_PRG7__926b:                             ; [$926b]
-    hex 31 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 ; [$926b] undefined
-    db $0e,$02,$0f,$02                      ; [$927b] undefined
+BYTE_PRG7__926b:                            ; [$926b]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$0b,$02,$0c,$02,$0d,$02 ; [$926b]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$927b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::903c]
+;     TILES_SPRITES_ADDRS [$PRG7::903c]
 ;
-DAT_PRG7__927f:                             ; [$927f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$927f] undefined
-    db $06,$02,$0f,$02                      ; [$928f] undefined
+BYTE_PRG7__927f:                            ; [$927f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$927f]
+                                                                       ; byte
+    db $06,$02,$0f,$02                      ; [$928f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::903e]
+;     TILES_SPRITES_ADDRS [$PRG7::903e]
 ;
-DAT_PRG7__9293:                             ; [$9293]
-    hex 31 00 00 08 08 02 09 02 0a 02 03 02 04 02 05 02 ; [$9293] undefined
-    db $06,$02,$0f,$02                      ; [$92a3] undefined
+BYTE_PRG7__9293:                            ; [$9293]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$03,$02,$04,$02,$05,$02 ; [$9293]
+                                                                       ; byte
+    db $06,$02,$0f,$02                      ; [$92a3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9040]
+;     TILES_SPRITES_ADDRS [$PRG7::9040]
 ;
-DAT_PRG7__92a7:                             ; [$92a7]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$92a7] undefined
-    db $06,$02,$07,$02                      ; [$92b7] undefined
+BYTE_PRG7__92a7:                            ; [$92a7]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$92a7]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$92b7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9042]
+;     TILES_SPRITES_ADDRS [$PRG7::9042]
 ;
-DAT_PRG7__92bb:                             ; [$92bb]
-    hex 31 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 ; [$92bb] undefined
-    db $0e,$02,$0f,$02                      ; [$92cb] undefined
+BYTE_PRG7__92bb:                            ; [$92bb]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$0b,$02,$0c,$02,$0d,$02 ; [$92bb]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$92cb] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9044]
+;     TILES_SPRITES_ADDRS [$PRG7::9044]
 ;
-DAT_PRG7__92cf:                             ; [$92cf]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$92cf] undefined
-    db $06,$02,$07,$02                      ; [$92df] undefined
+BYTE_PRG7__92cf:                            ; [$92cf]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$92cf]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$92df] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9046]
+;     TILES_SPRITES_ADDRS [$PRG7::9046]
 ;
-DAT_PRG7__92e3:                             ; [$92e3]
-    hex 31 00 00 08 00 02 01 02 08 02 09 02 0a 02 0b 02 ; [$92e3] undefined
-    db $0c,$02,$0d,$02                      ; [$92f3] undefined
+BYTE_PRG7__92e3:                            ; [$92e3]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$08,$02,$09,$02,$0a,$02,$0b,$02 ; [$92e3]
+                                                                       ; byte
+    db $0c,$02,$0d,$02                      ; [$92f3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9048]
+;     TILES_SPRITES_ADDRS [$PRG7::9048]
 ;
-DAT_PRG7__92f7:                             ; [$92f7]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$92f7] undefined
-    db $0e,$02,$0f,$02                      ; [$9307] undefined
+BYTE_PRG7__92f7:                            ; [$92f7]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$92f7]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$9307] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::904a]
+;     TILES_SPRITES_ADDRS [$PRG7::904a]
 ;
-DAT_PRG7__930b:                             ; [$930b]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$930b] undefined
+BYTE_PRG7__930b:                            ; [$930b]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$930b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::904c]
+;     TILES_SPRITES_ADDRS [$PRG7::904c]
 ;
-DAT_PRG7__9317:                             ; [$9317]
-    hex 11 00 00 08 04 03 05 03 06 03 07 03 ; [$9317] undefined
+BYTE_PRG7__9317:                            ; [$9317]
+    db $11,$00,$00,$08,$04,$03,$05,$03,$06,$03,$07,$03 ; [$9317] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::904e]
+;     TILES_SPRITES_ADDRS [$PRG7::904e]
 ;
-DAT_PRG7__9323:                             ; [$9323]
-    hex 11 00 00 08 00 02 01 02 02 02 03 02 ; [$9323] undefined
+BYTE_PRG7__9323:                            ; [$9323]
+    db $11,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02 ; [$9323] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9050]
+;     TILES_SPRITES_ADDRS [$PRG7::9050]
 ;
-DAT_PRG7__932f:                             ; [$932f]
-    hex 11 00 00 08 04 02 05 02 02 02 03 02 ; [$932f] undefined
+BYTE_PRG7__932f:                            ; [$932f]
+    db $11,$00,$00,$08,$04,$02,$05,$02,$02,$02,$03,$02 ; [$932f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9052]
+;     TILES_SPRITES_ADDRS [$PRG7::9052]
 ;
-DAT_PRG7__933b:                             ; [$933b]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$933b] undefined
+BYTE_PRG7__933b:                            ; [$933b]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$933b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9054]
+;     TILES_SPRITES_ADDRS [$PRG7::9054]
 ;
-DAT_PRG7__9347:                             ; [$9347]
-    hex 11 00 00 08 00 03 04 03 02 03 05 03 ; [$9347] undefined
+BYTE_PRG7__9347:                            ; [$9347]
+    db $11,$00,$00,$08,$00,$03,$04,$03,$02,$03,$05,$03 ; [$9347] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9056]
+;     TILES_SPRITES_ADDRS [$PRG7::9056]
 ;
-DAT_PRG7__9353:                             ; [$9353]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$9353] undefined
+BYTE_PRG7__9353:                            ; [$9353]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$9353] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9058]
+;     TILES_SPRITES_ADDRS [$PRG7::9058]
 ;
-DAT_PRG7__935f:                             ; [$935f]
-    hex 11 00 00 08 04 03 01 03 02 03 03 03 ; [$935f] undefined
+BYTE_PRG7__935f:                            ; [$935f]
+    db $11,$00,$00,$08,$04,$03,$01,$03,$02,$03,$03,$03 ; [$935f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::905a]
+;     TILES_SPRITES_ADDRS [$PRG7::905a]
 ;
-DAT_PRG7__936b:                             ; [$936b]
-    hex 11 00 00 08 04 03 01 03 05 03 06 03 ; [$936b] undefined
+BYTE_PRG7__936b:                            ; [$936b]
+    db $11,$00,$00,$08,$04,$03,$01,$03,$05,$03,$06,$03 ; [$936b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::905c]
+;     TILES_SPRITES_ADDRS [$PRG7::905c]
 ;
-DAT_PRG7__9377:                             ; [$9377]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$9377] undefined
+BYTE_PRG7__9377:                            ; [$9377]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$9377] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::905e]
+;     TILES_SPRITES_ADDRS [$PRG7::905e]
 ;
-DAT_PRG7__9383:                             ; [$9383]
-    hex 11 00 00 08 00 03 04 03 02 03 05 03 ; [$9383] undefined
+BYTE_PRG7__9383:                            ; [$9383]
+    db $11,$00,$00,$08,$00,$03,$04,$03,$02,$03,$05,$03 ; [$9383] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9060]
+;     TILES_SPRITES_ADDRS [$PRG7::9060]
 ;
-DAT_PRG7__938f:                             ; [$938f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$938f] undefined
-    db $06,$02,$07,$02                      ; [$939f] undefined
+BYTE_PRG7__938f:                            ; [$938f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$938f]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$939f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9062]
+;     TILES_SPRITES_ADDRS [$PRG7::9062]
 ;
-DAT_PRG7__93a3:                             ; [$93a3]
-    hex 31 00 00 08 00 02 01 02 08 02 09 02 0a 02 0b 02 ; [$93a3] undefined
-    db $07,$42,$06,$42                      ; [$93b3] undefined
+BYTE_PRG7__93a3:                            ; [$93a3]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$08,$02,$09,$02,$0a,$02,$0b,$02 ; [$93a3]
+                                                                       ; byte
+    db $07,$42,$06,$42                      ; [$93b3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9064]
+;     TILES_SPRITES_ADDRS [$PRG7::9064]
 ;
-DAT_PRG7__93b7:                             ; [$93b7]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$93b7] undefined
-    db $06,$03,$07,$03                      ; [$93c7] undefined
+BYTE_PRG7__93b7:                            ; [$93b7]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$93b7]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$93c7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9066]
+;     TILES_SPRITES_ADDRS [$PRG7::9066]
 ;
-DAT_PRG7__93cb:                             ; [$93cb]
-    hex 31 00 00 08 00 03 01 03 08 03 09 03 0a 03 0b 03 ; [$93cb] undefined
-    db $06,$03,$07,$03                      ; [$93db] undefined
+BYTE_PRG7__93cb:                            ; [$93cb]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$08,$03,$09,$03,$0a,$03,$0b,$03 ; [$93cb]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$93db] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9068]
+;     TILES_SPRITES_ADDRS [$PRG7::9068]
 ;
-DAT_PRG7__93df:                             ; [$93df]
-    hex 31 00 00 08 00 03 01 03 0c 03 0d 03 0e 03 0f 03 ; [$93df] undefined
-    db $06,$03,$07,$03                      ; [$93ef] undefined
+BYTE_PRG7__93df:                            ; [$93df]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$0c,$03,$0d,$03,$0e,$03,$0f,$03 ; [$93df]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$93ef] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::906a]
+;     TILES_SPRITES_ADDRS [$PRG7::906a]
 ;
-DAT_PRG7__93f3:                             ; [$93f3]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$93f3] undefined
-    db $06,$03,$07,$03                      ; [$9403] undefined
+BYTE_PRG7__93f3:                            ; [$93f3]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$93f3]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$9403] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::906c]
+;     TILES_SPRITES_ADDRS [$PRG7::906c]
 ;
-DAT_PRG7__9407:                             ; [$9407]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9407] undefined
-    db $0e,$03,$0f,$03                      ; [$9417] undefined
+BYTE_PRG7__9407:                            ; [$9407]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9407]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$9417] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::906e]
+;     TILES_SPRITES_ADDRS [$PRG7::906e]
 ;
-DAT_PRG7__941b:                             ; [$941b]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$941b] undefined
-    db $06,$03,$0f,$03                      ; [$942b] undefined
+BYTE_PRG7__941b:                            ; [$941b]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$941b]
+                                                                       ; byte
+    db $06,$03,$0f,$03                      ; [$942b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9070]
+;     TILES_SPRITES_ADDRS [$PRG7::9070]
 ;
-DAT_PRG7__942f:                             ; [$942f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$942f] undefined
-    db $06,$02,$07,$02                      ; [$943f] undefined
+BYTE_PRG7__942f:                            ; [$942f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$942f]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$943f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9072]
+;     TILES_SPRITES_ADDRS [$PRG7::9072]
 ;
-DAT_PRG7__9443:                             ; [$9443]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9443] undefined
-    db $08,$02,$09,$02                      ; [$9453] undefined
+BYTE_PRG7__9443:                            ; [$9443]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9443]
+                                                                       ; byte
+    db $08,$02,$09,$02                      ; [$9453] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9074]
+;     TILES_SPRITES_ADDRS [$PRG7::9074]
 ;
-DAT_PRG7__9457:                             ; [$9457]
-    hex 31 00 00 08 00 02 01 02 0a 02 0b 02 10 02 11 02 ; [$9457] undefined
-    db $06,$02,$07,$02                      ; [$9467] undefined
+BYTE_PRG7__9457:                            ; [$9457]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$0a,$02,$0b,$02,$10,$02,$11,$02 ; [$9457]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$9467] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9076]
+;     TILES_SPRITES_ADDRS [$PRG7::9076]
 ;
-DAT_PRG7__946b:                             ; [$946b]
-    hex 31 00 00 08 0c 02 0d 02 0e 02 0f 02 10 02 11 02 ; [$946b] undefined
-    db $08,$02,$09,$02                      ; [$947b] undefined
+BYTE_PRG7__946b:                            ; [$946b]
+    db $31,$00,$00,$08,$0c,$02,$0d,$02,$0e,$02,$0f,$02,$10,$02,$11,$02 ; [$946b]
+                                                                       ; byte
+    db $08,$02,$09,$02                      ; [$947b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9078]
+;     TILES_SPRITES_ADDRS [$PRG7::9078]
 ;
-DAT_PRG7__947f:                             ; [$947f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$947f] undefined
-    db $06,$02,$07,$02                      ; [$948f] undefined
+BYTE_PRG7__947f:                            ; [$947f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$947f]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$948f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::907a]
+;     TILES_SPRITES_ADDRS [$PRG7::907a]
 ;
-DAT_PRG7__9493:                             ; [$9493]
-    hex 31 00 00 08 08 02 09 02 02 02 03 02 04 02 0a 02 ; [$9493] undefined
-    db $0b,$02,$0c,$02                      ; [$94a3] undefined
+BYTE_PRG7__9493:                            ; [$9493]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$02,$02,$03,$02,$04,$02,$0a,$02 ; [$9493]
+                                                                       ; byte
+    db $0b,$02,$0c,$02                      ; [$94a3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::907c]
+;     TILES_SPRITES_ADDRS [$PRG7::907c]
 ;
-DAT_PRG7__94a7:                             ; [$94a7]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$94a7] undefined
-    db $06,$03,$07,$03                      ; [$94b7] undefined
+BYTE_PRG7__94a7:                            ; [$94a7]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$94a7]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$94b7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::907e]
+;     TILES_SPRITES_ADDRS [$PRG7::907e]
 ;
-DAT_PRG7__94bb:                             ; [$94bb]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$94bb] undefined
-    db $0e,$03,$0f,$03                      ; [$94cb] undefined
+BYTE_PRG7__94bb:                            ; [$94bb]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$94bb]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$94cb] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9080]
+;     TILES_SPRITES_ADDRS [$PRG7::9080]
 ;
-DAT_PRG7__94cf:                             ; [$94cf]
-    hex 31 00 00 08 10 03 11 03 12 03 13 03 14 03 15 03 ; [$94cf] undefined
-    db $0e,$03,$07,$03                      ; [$94df] undefined
+BYTE_PRG7__94cf:                            ; [$94cf]
+    db $31,$00,$00,$08,$10,$03,$11,$03,$12,$03,$13,$03,$14,$03,$15,$03 ; [$94cf]
+                                                                       ; byte
+    db $0e,$03,$07,$03                      ; [$94df] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9082]
+;     TILES_SPRITES_ADDRS [$PRG7::9082]
 ;
-DAT_PRG7__94e3:                             ; [$94e3]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$94e3] undefined
-    db $06,$03,$07,$03                      ; [$94f3] undefined
+BYTE_PRG7__94e3:                            ; [$94e3]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$94e3]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$94f3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9084]
+;     TILES_SPRITES_ADDRS [$PRG7::9084]
 ;
-DAT_PRG7__94f7:                             ; [$94f7]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$94f7] undefined
-    db $0e,$03,$0f,$03                      ; [$9507] undefined
+BYTE_PRG7__94f7:                            ; [$94f7]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$94f7]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$9507] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9086]
+;     TILES_SPRITES_ADDRS [$PRG7::9086]
 ;
-DAT_PRG7__950b:                             ; [$950b]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$950b] undefined
-    db $06,$03,$0f,$03                      ; [$951b] undefined
+BYTE_PRG7__950b:                            ; [$950b]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$950b]
+                                                                       ; byte
+    db $06,$03,$0f,$03                      ; [$951b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9088]
+;     TILES_SPRITES_ADDRS [$PRG7::9088]
 ;
-DAT_PRG7__951f:                             ; [$951f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$951f] undefined
-    db $06,$02,$07,$02                      ; [$952f] undefined
+BYTE_PRG7__951f:                            ; [$951f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$951f]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$952f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::908a]
+;     TILES_SPRITES_ADDRS [$PRG7::908a]
 ;
-DAT_PRG7__9533:                             ; [$9533]
-    hex 31 00 00 08 00 02 01 02 08 02 09 02 0a 02 0b 02 ; [$9533] undefined
-    db $0c,$02,$0d,$02                      ; [$9543] undefined
+BYTE_PRG7__9533:                            ; [$9533]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$08,$02,$09,$02,$0a,$02,$0b,$02 ; [$9533]
+                                                                       ; byte
+    db $0c,$02,$0d,$02                      ; [$9543] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::908c]
+;     TILES_SPRITES_ADDRS [$PRG7::908c]
 ;
-DAT_PRG7__9547:                             ; [$9547]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9547] undefined
-    db $06,$02,$07,$02                      ; [$9557] undefined
+BYTE_PRG7__9547:                            ; [$9547]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9547]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$9557] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::908e]
+;     TILES_SPRITES_ADDRS [$PRG7::908e]
 ;
-DAT_PRG7__955b:                             ; [$955b]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$955b] undefined
-    db $08,$02,$09,$02                      ; [$956b] undefined
+BYTE_PRG7__955b:                            ; [$955b]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$955b]
+                                                                       ; byte
+    db $08,$02,$09,$02                      ; [$956b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9090]
+;     TILES_SPRITES_ADDRS [$PRG7::9090]
 ;
-DAT_PRG7__956f:                             ; [$956f]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$956f] undefined
-    db $0a,$02,$0b,$02                      ; [$957f] undefined
+BYTE_PRG7__956f:                            ; [$956f]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$956f]
+                                                                       ; byte
+    db $0a,$02,$0b,$02                      ; [$957f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9092]
+;     TILES_SPRITES_ADDRS [$PRG7::9092]
 ;
-DAT_PRG7__9583:                             ; [$9583]
-    hex 31 00 00 08 00 02 01 02 0c 02 0d 02 0e 02 0f 02 ; [$9583] undefined
-    db $10,$02,$11,$02                      ; [$9593] undefined
+BYTE_PRG7__9583:                            ; [$9583]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$0c,$02,$0d,$02,$0e,$02,$0f,$02 ; [$9583]
+                                                                       ; byte
+    db $10,$02,$11,$02                      ; [$9593] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9094]
+;     TILES_SPRITES_ADDRS [$PRG7::9094]
 ;
-DAT_PRG7__9597:                             ; [$9597]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9597] undefined
-    db $00,$03,$01,$03                      ; [$95a7] undefined
+BYTE_PRG7__9597:                            ; [$9597]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9597]
+                                                                       ; byte
+    db $00,$03,$01,$03                      ; [$95a7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9096]
+;     TILES_SPRITES_ADDRS [$PRG7::9096]
 ;
-DAT_PRG7__95ab:                             ; [$95ab]
-    hex 31 00 00 08 06 03 07 03 08 03 09 03 0a 03 0b 03 ; [$95ab] undefined
-    db $06,$03,$07,$03                      ; [$95bb] undefined
+BYTE_PRG7__95ab:                            ; [$95ab]
+    db $31,$00,$00,$08,$06,$03,$07,$03,$08,$03,$09,$03,$0a,$03,$0b,$03 ; [$95ab]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$95bb] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9098]
+;     TILES_SPRITES_ADDRS [$PRG7::9098]
 ;
-DAT_PRG7__95bf:                             ; [$95bf]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$95bf] undefined
-    db $06,$03,$07,$03                      ; [$95cf] undefined
+BYTE_PRG7__95bf:                            ; [$95bf]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$95bf]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$95cf] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::909a]
+;     TILES_SPRITES_ADDRS [$PRG7::909a]
 ;
-DAT_PRG7__95d3:                             ; [$95d3]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 04 03 05 03 ; [$95d3] undefined
-    db $0c,$03,$0d,$02                      ; [$95e3] undefined
+BYTE_PRG7__95d3:                            ; [$95d3]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$04,$03,$05,$03 ; [$95d3]
+                                                                       ; byte
+    db $0c,$03,$0d,$02                      ; [$95e3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::909c]
+;     TILES_SPRITES_ADDRS [$PRG7::909c]
 ;
-DAT_PRG7__95e7:                             ; [$95e7]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$95e7] undefined
-    db $06,$03,$07,$03                      ; [$95f7] undefined
+BYTE_PRG7__95e7:                            ; [$95e7]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$95e7]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$95f7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::909e]
+;     TILES_SPRITES_ADDRS [$PRG7::909e]
 ;
-DAT_PRG7__95fb:                             ; [$95fb]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$95fb] undefined
-    db $0e,$03,$0f,$03                      ; [$960b] undefined
+BYTE_PRG7__95fb:                            ; [$95fb]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$95fb]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$960b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90a0]
+;     TILES_SPRITES_ADDRS [$PRG7::90a0]
 ;
-DAT_PRG7__960f:                             ; [$960f]
-    hex 32 f8 00 10 0c 01 00 03 01 03 0d 01 02 02 03 02 ; [$960f] undefined
-    hex ff 04 02 05 02 ff 06 03 07 03       ; [$961f] undefined
+BYTE_PRG7__960f:                            ; [$960f]
+    db $32,$f8,$00,$10,$0c,$01,$00,$03,$01,$03,$0d,$01,$02,$02,$03,$02 ; [$960f]
+                                                                       ; byte
+    db $ff,$04,$02,$05,$02,$ff,$06,$03,$07,$03 ; [$961f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90a2]
+;     TILES_SPRITES_ADDRS [$PRG7::90a2]
 ;
-DAT_PRG7__9629:                             ; [$9629]
-    hex 32 f8 00 10 0c 01 08 03 09 03 0d 01 02 02 03 02 ; [$9629] undefined
-    hex ff 04 02 05 02 ff 0a 03 0b 03       ; [$9639] undefined
+BYTE_PRG7__9629:                            ; [$9629]
+    db $32,$f8,$00,$10,$0c,$01,$08,$03,$09,$03,$0d,$01,$02,$02,$03,$02 ; [$9629]
+                                                                       ; byte
+    db $ff,$04,$02,$05,$02,$ff,$0a,$03,$0b,$03 ; [$9639] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90a4]
+;     TILES_SPRITES_ADDRS [$PRG7::90a4]
 ;
-DAT_PRG7__9643:                             ; [$9643]
-    hex 33 f0 00 18 ff ff 08 03 09 03 0e 01 0f 01 02 02 ; [$9643] undefined
-    hex 03 02 ff ff 04 02 05 02 ff ff 0a 03 0b 03 ; [$9653] undefined
+BYTE_PRG7__9643:                            ; [$9643]
+    db $33,$f0,$00,$18,$ff,$ff,$08,$03,$09,$03,$0e,$01,$0f,$01,$02,$02 ; [$9643]
+                                                                       ; byte
+    db $03,$02,$ff,$ff,$04,$02,$05,$02,$ff,$ff,$0a,$03,$0b,$03 ; [$9653] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90a6]
+;     TILES_SPRITES_ADDRS [$PRG7::90a6]
 ;
-DAT_PRG7__9661:                             ; [$9661]
-    hex 31 00 00 08 08 03 09 03 02 02 03 02 04 02 05 02 ; [$9661] undefined
-    db $06,$03,$07,$03                      ; [$9671] undefined
+BYTE_PRG7__9661:                            ; [$9661]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9661]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$9671] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90a8]
+;     TILES_SPRITES_ADDRS [$PRG7::90a8]
 ;
-DAT_PRG7__9675:                             ; [$9675]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9675] undefined
-    db $06,$02,$07,$02                      ; [$9685] undefined
+BYTE_PRG7__9675:                            ; [$9675]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9675]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$9685] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90aa]
+;     TILES_SPRITES_ADDRS [$PRG7::90aa]
 ;
-DAT_PRG7__9689:                             ; [$9689]
-    hex 31 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 ; [$9689] undefined
-    db $0e,$02,$0f,$02                      ; [$9699] undefined
+BYTE_PRG7__9689:                            ; [$9689]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$0b,$02,$0c,$02,$0d,$02 ; [$9689]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$9699] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ac]
+;     TILES_SPRITES_ADDRS [$PRG7::90ac]
 ;
-DAT_PRG7__969d:                             ; [$969d]
-    hex 31 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 ; [$969d] undefined
-    db $10,$02,$11,$02                      ; [$96ad] undefined
+BYTE_PRG7__969d:                            ; [$969d]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$0b,$02,$0c,$02,$0d,$02 ; [$969d]
+                                                                       ; byte
+    db $10,$02,$11,$02                      ; [$96ad] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ae]
+;     TILES_SPRITES_ADDRS [$PRG7::90ae]
 ;
-DAT_PRG7__96b1:                             ; [$96b1]
-    hex 31 00 00 08 ff 00 03 01 03 02 03 03 03 04 03 05 ; [$96b1] undefined
-    db $03,$06,$03                          ; [$96c1] undefined
+BYTE_PRG7__96b1:                            ; [$96b1]
+    db $31,$00,$00,$08,$ff,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05 ; [$96b1]
+                                                                       ; byte
+    db $03,$06,$03                          ; [$96c1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90b0]
+;     TILES_SPRITES_ADDRS [$PRG7::90b0]
 ;
-DAT_PRG7__96c4:                             ; [$96c4]
-    hex 31 00 00 08 ff 07 03 01 03 02 03 03 03 04 03 08 ; [$96c4] undefined
-    db $03,$09,$03                          ; [$96d4] undefined
+BYTE_PRG7__96c4:                            ; [$96c4]
+    db $31,$00,$00,$08,$ff,$07,$03,$01,$03,$02,$03,$03,$03,$04,$03,$08 ; [$96c4]
+                                                                       ; byte
+    db $03,$09,$03                          ; [$96d4] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90b2]
+;     TILES_SPRITES_ADDRS [$PRG7::90b2]
 ;
-DAT_PRG7__96d7:                             ; [$96d7]
-    hex 23 f0 08 18 0f 03 10 03 0a 03 0b 03 ff 11 03 0c ; [$96d7] undefined
-    hex 03 0d 03 ff ff 0e 03 06 03          ; [$96e7] undefined
+BYTE_PRG7__96d7:                            ; [$96d7]
+    db $23,$f0,$08,$18,$0f,$03,$10,$03,$0a,$03,$0b,$03,$ff,$11,$03,$0c ; [$96d7]
+                                                                       ; byte
+    db $03,$0d,$03,$ff,$ff,$0e,$03,$06,$03  ; [$96e7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90b4]
+;     TILES_SPRITES_ADDRS [$PRG7::90b4]
 ;
-DAT_PRG7__96f0:                             ; [$96f0]
-    hex 33 f0 00 18 18 03 ff 00 03 01 03 19 03 1a 03 02 ; [$96f0] undefined
-    hex 03 03 03 ff ff 04 03 05 03 ff ff 06 03 07 03 ; [$9700] undefined
+BYTE_PRG7__96f0:                            ; [$96f0]
+    db $33,$f0,$00,$18,$18,$03,$ff,$00,$03,$01,$03,$19,$03,$1a,$03,$02 ; [$96f0]
+                                                                       ; byte
+    db $03,$03,$03,$ff,$ff,$04,$03,$05,$03,$ff,$ff,$06,$03,$07,$03 ; [$9700]
+                                                                   ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90b6]
+;     TILES_SPRITES_ADDRS [$PRG7::90b6]
 ;
-DAT_PRG7__970f:                             ; [$970f]
-    hex 42 00 f8 08 ff 1b 03 1c 03 00 03 01 03 ff 08 03 ; [$970f] undefined
-    hex 09 03 ff 0a 03 0b 03 ff 0c 03 ff ff ; [$971f] undefined
+BYTE_PRG7__970f:                            ; [$970f]
+    db $42,$00,$f8,$08,$ff,$1b,$03,$1c,$03,$00,$03,$01,$03,$ff,$08,$03 ; [$970f]
+                                                                       ; byte
+    db $09,$03,$ff,$0a,$03,$0b,$03,$ff,$0c,$03,$ff,$ff ; [$971f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90b8]
+;     TILES_SPRITES_ADDRS [$PRG7::90b8]
 ;
-DAT_PRG7__972b:                             ; [$972b]
-    hex 31 00 00 08 0d 03 0e 03 0f 03 10 03 11 03 12 03 ; [$972b] undefined
-    db $13,$03,$14,$03                      ; [$973b] undefined
+BYTE_PRG7__972b:                            ; [$972b]
+    db $31,$00,$00,$08,$0d,$03,$0e,$03,$0f,$03,$10,$03,$11,$03,$12,$03 ; [$972b]
+                                                                       ; byte
+    db $13,$03,$14,$03                      ; [$973b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ba]
+;     TILES_SPRITES_ADDRS [$PRG7::90ba]
 ;
-DAT_PRG7__973f:                             ; [$973f]
-    hex 31 00 00 08 0d 03 0e 03 0f 03 10 03 15 03 16 03 ; [$973f] undefined
-    db $17,$03,$ff                          ; [$974f] undefined
+BYTE_PRG7__973f:                            ; [$973f]
+    db $31,$00,$00,$08,$0d,$03,$0e,$03,$0f,$03,$10,$03,$15,$03,$16,$03 ; [$973f]
+                                                                       ; byte
+    db $17,$03,$ff                          ; [$974f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90bc]
+;     TILES_SPRITES_ADDRS [$PRG7::90bc]
 ;
-DAT_PRG7__9752:                             ; [$9752]
-    hex 33 f0 00 18 18 03 ff 00 03 01 03 19 03 1a 03 02 ; [$9752] undefined
-    hex 03 03 03 ff ff 04 03 05 03 ff ff 1d 03 1e 03 ; [$9762] undefined
+BYTE_PRG7__9752:                            ; [$9752]
+    db $33,$f0,$00,$18,$18,$03,$ff,$00,$03,$01,$03,$19,$03,$1a,$03,$02 ; [$9752]
+                                                                       ; byte
+    db $03,$03,$03,$ff,$ff,$04,$03,$05,$03,$ff,$ff,$1d,$03,$1e,$03 ; [$9762]
+                                                                   ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90be]
+;     TILES_SPRITES_ADDRS [$PRG7::90be]
 ;
-DAT_PRG7__9771:                             ; [$9771]
-    hex 32 f8 00 10 ff 00 02 01 02 ff 02 02 03 02 08 02 ; [$9771] undefined
-    hex 04 02 05 02 ff 06 02 07 02          ; [$9781] undefined
+BYTE_PRG7__9771:                            ; [$9771]
+    db $32,$f8,$00,$10,$ff,$00,$02,$01,$02,$ff,$02,$02,$03,$02,$08,$02 ; [$9771]
+                                                                       ; byte
+    db $04,$02,$05,$02,$ff,$06,$02,$07,$02  ; [$9781] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90c0]
+;     TILES_SPRITES_ADDRS [$PRG7::90c0]
 ;
-DAT_PRG7__978a:                             ; [$978a]
-    hex 32 f8 00 10 ff 00 02 01 02 ff 02 02 03 02 0d 02 ; [$978a] undefined
-    hex 09 02 0a 02 ff 0b 02 0c 02          ; [$979a] undefined
+BYTE_PRG7__978a:                            ; [$978a]
+    db $32,$f8,$00,$10,$ff,$00,$02,$01,$02,$ff,$02,$02,$03,$02,$0d,$02 ; [$978a]
+                                                                       ; byte
+    db $09,$02,$0a,$02,$ff,$0b,$02,$0c,$02  ; [$979a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90c2]
+;     TILES_SPRITES_ADDRS [$PRG7::90c2]
 ;
-DAT_PRG7__97a3:                             ; [$97a3]
-    hex 33 f0 00 18 ff ff 0e 02 0f 02 14 02 15 02 10 02 ; [$97a3] undefined
-    hex 11 02 ff ff 12 02 13 02 ff ff 06 02 07 02 ; [$97b3] undefined
+BYTE_PRG7__97a3:                            ; [$97a3]
+    db $33,$f0,$00,$18,$ff,$ff,$0e,$02,$0f,$02,$14,$02,$15,$02,$10,$02 ; [$97a3]
+                                                                       ; byte
+    db $11,$02,$ff,$ff,$12,$02,$13,$02,$ff,$ff,$06,$02,$07,$02 ; [$97b3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90c4]
+;     TILES_SPRITES_ADDRS [$PRG7::90c4]
 ;
-DAT_PRG7__97c1:                             ; [$97c1]
-    hex 31 00 00 08 ff 00 00 01 00 02 00 03 00 04 00 05 ; [$97c1] undefined
-    db $00,$06,$00                          ; [$97d1] undefined
+BYTE_PRG7__97c1:                            ; [$97c1]
+    db $31,$00,$00,$08,$ff,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05 ; [$97c1]
+                                                                       ; byte
+    db $00,$06,$00                          ; [$97d1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90c6]
+;     TILES_SPRITES_ADDRS [$PRG7::90c6]
 ;
-DAT_PRG7__97d4:                             ; [$97d4]
-    hex 31 00 00 08 07 00 08 00 09 00 0a 00 0b 00 0c 00 ; [$97d4] undefined
-    db $0d,$00,$0e,$00                      ; [$97e4] undefined
+BYTE_PRG7__97d4:                            ; [$97d4]
+    db $31,$00,$00,$08,$07,$00,$08,$00,$09,$00,$0a,$00,$0b,$00,$0c,$00 ; [$97d4]
+                                                                       ; byte
+    db $0d,$00,$0e,$00                      ; [$97e4] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90c8]
+;     TILES_SPRITES_ADDRS [$PRG7::90c8]
 ;
-DAT_PRG7__97e8:                             ; [$97e8]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$97e8] undefined
-    db $06,$03,$07,$03                      ; [$97f8] undefined
+BYTE_PRG7__97e8:                            ; [$97e8]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$97e8]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$97f8] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ca]
+;     TILES_SPRITES_ADDRS [$PRG7::90ca]
 ;
-DAT_PRG7__97fc:                             ; [$97fc]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$97fc] undefined
-    db $0e,$03,$0f,$03                      ; [$980c] undefined
+BYTE_PRG7__97fc:                            ; [$97fc]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$97fc]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$980c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90cc]
+;     TILES_SPRITES_ADDRS [$PRG7::90cc]
 ;
-DAT_PRG7__9810:                             ; [$9810]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9810] undefined
-    db $06,$02,$07,$02                      ; [$9820] undefined
+BYTE_PRG7__9810:                            ; [$9810]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9810]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$9820] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ce]
+;     TILES_SPRITES_ADDRS [$PRG7::90ce]
 ;
-DAT_PRG7__9824:                             ; [$9824]
-    hex 31 00 00 08 00 02 08 02 02 02 03 02 04 02 05 02 ; [$9824] undefined
-    db $06,$02,$09,$02                      ; [$9834] undefined
+BYTE_PRG7__9824:                            ; [$9824]
+    db $31,$00,$00,$08,$00,$02,$08,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9824]
+                                                                       ; byte
+    db $06,$02,$09,$02                      ; [$9834] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90d0]
+;     TILES_SPRITES_ADDRS [$PRG7::90d0]
 ;
-DAT_PRG7__9838:                             ; [$9838]
-    hex 32 f8 00 10 ff 00 02 0a 02 ff 02 02 0b 02 11 02 ; [$9838] undefined
-    hex 0c 02 0d 02 ff 06 02 0e 02          ; [$9848] undefined
+BYTE_PRG7__9838:                            ; [$9838]
+    db $32,$f8,$00,$10,$ff,$00,$02,$0a,$02,$ff,$02,$02,$0b,$02,$11,$02 ; [$9838]
+                                                                       ; byte
+    db $0c,$02,$0d,$02,$ff,$06,$02,$0e,$02  ; [$9848] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90d2]
+;     TILES_SPRITES_ADDRS [$PRG7::90d2]
 ;
-DAT_PRG7__9851:                             ; [$9851]
-    hex 32 f8 00 10 ff 00 02 0a 02 ff 02 02 0b 02 12 02 ; [$9851] undefined
-    hex 0f 02 10 02 ff 06 02 0e 02          ; [$9861] undefined
+BYTE_PRG7__9851:                            ; [$9851]
+    db $32,$f8,$00,$10,$ff,$00,$02,$0a,$02,$ff,$02,$02,$0b,$02,$12,$02 ; [$9851]
+                                                                       ; byte
+    db $0f,$02,$10,$02,$ff,$06,$02,$0e,$02  ; [$9861] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90d4]
+;     TILES_SPRITES_ADDRS [$PRG7::90d4]
 ;
-DAT_PRG7__986a:                             ; [$986a]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$986a] undefined
-    db $06,$02,$07,$02                      ; [$987a] undefined
+BYTE_PRG7__986a:                            ; [$986a]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$986a]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$987a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90d6]
+;     TILES_SPRITES_ADDRS [$PRG7::90d6]
 ;
-DAT_PRG7__987e:                             ; [$987e]
-    hex 31 00 00 08 00 02 01 02 08 02 03 02 09 02 0a 02 ; [$987e] undefined
-    db $0b,$02,$0c,$02                      ; [$988e] undefined
+BYTE_PRG7__987e:                            ; [$987e]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$08,$02,$03,$02,$09,$02,$0a,$02 ; [$987e]
+                                                                       ; byte
+    db $0b,$02,$0c,$02                      ; [$988e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90d8]
+;     TILES_SPRITES_ADDRS [$PRG7::90d8]
 ;
-DAT_PRG7__9892:                             ; [$9892]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 0d 02 0e 02 ; [$9892] undefined
-    db $0f,$02,$10,$02                      ; [$98a2] undefined
+BYTE_PRG7__9892:                            ; [$9892]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$0d,$02,$0e,$02 ; [$9892]
+                                                                       ; byte
+    db $0f,$02,$10,$02                      ; [$98a2] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90da]
+;     TILES_SPRITES_ADDRS [$PRG7::90da]
 ;
-DAT_PRG7__98a6:                             ; [$98a6]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$98a6] undefined
-    db $06,$02,$07,$02                      ; [$98b6] undefined
+BYTE_PRG7__98a6:                            ; [$98a6]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$98a6]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$98b6] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90dc]
+;     TILES_SPRITES_ADDRS [$PRG7::90dc]
 ;
-DAT_PRG7__98ba:                             ; [$98ba]
-    hex 31 00 00 08 08 02 09 02 0a 02 0b 02 0c 02 0d 02 ; [$98ba] undefined
-    db $0e,$02,$0f,$02                      ; [$98ca] undefined
+BYTE_PRG7__98ba:                            ; [$98ba]
+    db $31,$00,$00,$08,$08,$02,$09,$02,$0a,$02,$0b,$02,$0c,$02,$0d,$02 ; [$98ba]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$98ca] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90de]
+;     TILES_SPRITES_ADDRS [$PRG7::90de]
 ;
-DAT_PRG7__98ce:                             ; [$98ce]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$98ce] undefined
-    db $06,$03,$07,$03                      ; [$98de] undefined
+BYTE_PRG7__98ce:                            ; [$98ce]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$98ce]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$98de] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90e0]
+;     TILES_SPRITES_ADDRS [$PRG7::90e0]
 ;
-DAT_PRG7__98e2:                             ; [$98e2]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$98e2] undefined
-    db $0e,$03,$0f,$03                      ; [$98f2] undefined
+BYTE_PRG7__98e2:                            ; [$98e2]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$98e2]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$98f2] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90e2]
+;     TILES_SPRITES_ADDRS [$PRG7::90e2]
 ;
-DAT_PRG7__98f6:                             ; [$98f6]
-    hex 31 00 00 08 01 43 00 43 03 43 02 43 05 43 04 43 ; [$98f6] undefined
-    db $07,$43,$06,$43                      ; [$9906] undefined
+BYTE_PRG7__98f6:                            ; [$98f6]
+    db $31,$00,$00,$08,$01,$43,$00,$43,$03,$43,$02,$43,$05,$43,$04,$43 ; [$98f6]
+                                                                       ; byte
+    db $07,$43,$06,$43                      ; [$9906] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90e4]
+;     TILES_SPRITES_ADDRS [$PRG7::90e4]
 ;
-DAT_PRG7__990a:                             ; [$990a]
-    hex 31 00 00 08 09 43 08 43 0b 43 0a 43 0d 43 0c 43 ; [$990a] undefined
-    db $0f,$43,$0e,$43                      ; [$991a] undefined
+BYTE_PRG7__990a:                            ; [$990a]
+    db $31,$00,$00,$08,$09,$43,$08,$43,$0b,$43,$0a,$43,$0d,$43,$0c,$43 ; [$990a]
+                                                                       ; byte
+    db $0f,$43,$0e,$43                      ; [$991a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90e6]
+;     TILES_SPRITES_ADDRS [$PRG7::90e6]
 ;
-DAT_PRG7__991e:                             ; [$991e]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$991e] undefined
-    db $06,$03,$07,$03                      ; [$992e] undefined
+BYTE_PRG7__991e:                            ; [$991e]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$991e]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$992e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90e8]
+;     TILES_SPRITES_ADDRS [$PRG7::90e8]
 ;
-DAT_PRG7__9932:                             ; [$9932]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9932] undefined
-    db $06,$03,$0e,$03                      ; [$9942] undefined
+BYTE_PRG7__9932:                            ; [$9932]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9932]
+                                                                       ; byte
+    db $06,$03,$0e,$03                      ; [$9942] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ea]
+;     TILES_SPRITES_ADDRS [$PRG7::90ea]
 ;
 SOME_SPRITE_DATA:                           ; [$9946]
-    db $31,$00,$00,$08                      ; [$9946] byte
-
-    hex 08 03 09 03 0a 03 0f 03 10 03 11 03 ff 12 03 ; [$994b] undefined
-
-;
-; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ec]
-;
-DAT_PRG7__9959:                             ; [$9959]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9959] undefined
-    db $06,$03,$07,$03                      ; [$9969] undefined
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0f,$03,$10,$03,$11,$03 ; [$9946]
+                                                                       ; byte
+    db $ff,$12,$03                          ; [$9956] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90ee]
+;     TILES_SPRITES_ADDRS [$PRG7::90ec]
 ;
-DAT_PRG7__996d:                             ; [$996d]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 04 03 05 03 ; [$996d] undefined
-    db $06,$03,$07,$03                      ; [$997d] undefined
+BYTE_PRG7__9959:                            ; [$9959]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9959]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$9969] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90f0]
+;     TILES_SPRITES_ADDRS [$PRG7::90ee]
 ;
-SPRITE_INFO_COINS:                          ; [$9981]
+BYTE_PRG7__996d:                            ; [$996d]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$04,$03,$05,$03 ; [$996d]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$997d] byte
+
+;
+; XREFS:
+;     TILES_SPRITES_ADDRS [$PRG7::90f0]
+;
+BYTE_PRG7__9981:                            ; [$9981]
     db $01                                  ; 1 row, 2 columns to read
     db $00                                  ; X = 0
     db $18                                  ; Y = 24
-    db $08                                  ; ?? Something for sprite
-                                            ; flipping.
+    db $08                                  ; Next frame offset
     db $11                                  ; Row 0, column 0:   PPU offset
                                             ; 11
     db $03                                  ;   Flags
@@ -4703,1241 +4910,1437 @@ SPRITE_INFO_COINS:                          ; [$9981]
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90f2]
+;     TILES_SPRITES_ADDRS [$PRG7::90f2]
 ;
-DAT_PRG7__9989:                             ; [$9989]
-    hex 01 00 18 08 10 03 10 43             ; [$9989] undefined
+BYTE_PRG7__9989:                            ; [$9989]
+    db $01                                  ; 1 row, 2 columns to read
+    db $00                                  ; X = 0
+    db $18                                  ; Y = 24
+    db $08,$10,$03,$10,$43                  ; [$998c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90f4]
+;     TILES_SPRITES_ADDRS [$PRG7::90f4]
 ;
-DAT_PRG7__9991:                             ; [$9991]
-    hex 01 00 18 08 00 03 01 03             ; [$9991] undefined
+BYTE_PRG7__9991:                            ; [$9991]
+    db $01,$00,$18,$08,$00,$03,$01,$03      ; [$9991] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90f6]
+;     TILES_SPRITES_ADDRS [$PRG7::90f6]
 ;
-DAT_PRG7__9999:                             ; [$9999]
-    hex 11 00 10 08 08 03 09 03 0a 03 0b 03 ; [$9999] undefined
+BYTE_PRG7__9999:                            ; [$9999]
+    db $11,$00,$10,$08,$08,$03,$09,$03,$0a,$03,$0b,$03 ; [$9999] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90f8]
+;     TILES_SPRITES_ADDRS [$PRG7::90f8]
 ;
-DAT_PRG7__99a5:                             ; [$99a5]
-    hex 21 00 08 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$99a5] undefined
+BYTE_PRG7__99a5:                            ; [$99a5]
+    db $21,$00,$08,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$99a5]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90fa]
+;     TILES_SPRITES_ADDRS [$PRG7::90fa]
 ;
-DAT_PRG7__99b5:                             ; [$99b5]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$99b5] undefined
-    db $0e,$03,$0f,$03                      ; [$99c5] undefined
+BYTE_PRG7__99b5:                            ; [$99b5]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$99b5]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$99c5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90fc]
+;     TILES_SPRITES_ADDRS [$PRG7::90fc]
 ;
-DAT_PRG7__99c9:                             ; [$99c9]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$99c9] undefined
-    db $06,$03,$07,$03                      ; [$99d9] undefined
+BYTE_PRG7__99c9:                            ; [$99c9]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$99c9]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$99d9] byte
 
 
 ;============================================================================
-; Maybe: Coin
+; Coins
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::915c]
+;     TILES_SPRITES_ADDRS [$PRG7::915c]
 ;============================================================================
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::915c]
+;     TILES_SPRITES_ADDRS [$PRG7::915c]
 ;
-DAT_PRG7__99dd:                             ; [$99dd]
-    db $00,$04,$08,$04,$40,$00              ; [$99dd] undefined
+BYTE_PRG7__99dd:                            ; [$99dd]
+    db $00,$04,$08,$04,$40,$00              ; [$99dd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::915e]
+;     TILES_SPRITES_ADDRS [$PRG7::915e]
 ;
-DAT_PRG7__99e3:                             ; [$99e3]
-    db $00,$04,$08,$04,$41,$00              ; [$99e3] undefined
+BYTE_PRG7__99e3:                            ; [$99e3]
+    db $00,$04,$08,$04,$41,$00              ; [$99e3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9188]
+;     TILES_SPRITES_ADDRS [$PRG7::9188]
 ;
-DAT_PRG7__99e9:                             ; [$99e9]
-    hex 11 00 00 08 44 00 44 40 44 80 44 c0 ; [$99e9] undefined
+BYTE_PRG7__99e9:                            ; [$99e9]
+    db $11,$00,$00,$08,$44,$00,$44,$40,$44,$80,$44,$c0 ; [$99e9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::918a]
+;     TILES_SPRITES_ADDRS [$PRG7::918a]
 ;
-DAT_PRG7__99f5:                             ; [$99f5]
-    hex 11 00 00 08 4b 00 4b 40 4c 00 4c 40 ; [$99f5] undefined
+BYTE_PRG7__99f5:                            ; [$99f5]
+    db $11,$00,$00,$08,$4b,$00,$4b,$40,$4c,$00,$4c,$40 ; [$99f5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::918c]
+;     TILES_SPRITES_ADDRS [$PRG7::918c]
 ;
-DAT_PRG7__9a01:                             ; [$9a01]
-    hex 11 00 00 08 4c 80 4c c0 4b 80 4b c0 ; [$9a01] undefined
+BYTE_PRG7__9a01:                            ; [$9a01]
+    db $11,$00,$00,$08,$4c,$80,$4c,$c0,$4b,$80,$4b,$c0 ; [$9a01] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::918e]
+;     TILES_SPRITES_ADDRS [$PRG7::918e]
 ;
-DAT_PRG7__9a0d:                             ; [$9a0d]
-    hex 11 00 00 08 5c 00 4c 00 5c 80 4c 80 ; [$9a0d] undefined
+BYTE_PRG7__9a0d:                            ; [$9a0d]
+    db $11,$00,$00,$08,$5c,$00,$4c,$00,$5c,$80,$4c,$80 ; [$9a0d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9192]
+;     TILES_SPRITES_ADDRS [$PRG7::9192]
 ;
-DAT_PRG7__9a19:                             ; [$9a19]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9a19] undefined
-    db $ff,$06,$03                          ; [$9a29] undefined
+BYTE_PRG7__9a19:                            ; [$9a19]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9a19]
+                                                                       ; byte
+    db $ff,$06,$03                          ; [$9a29] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9194]
+;     TILES_SPRITES_ADDRS [$PRG7::9194]
 ;
-DAT_PRG7__9a2c:                             ; [$9a2c]
-    hex 31 00 00 08 00 03 01 03 02 03 07 03 08 03 09 03 ; [$9a2c] undefined
-    db $0a,$03,$0b,$03                      ; [$9a3c] undefined
+BYTE_PRG7__9a2c:                            ; [$9a2c]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$07,$03,$08,$03,$09,$03 ; [$9a2c]
+                                                                       ; byte
+    db $0a,$03,$0b,$03                      ; [$9a3c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9196]
+;     TILES_SPRITES_ADDRS [$PRG7::9196]
 ;
-DAT_PRG7__9a40:                             ; [$9a40]
-    hex 31 00 00 08 00 03 01 03 0c 03 0d 03 0e 03 0f 03 ; [$9a40] undefined
-    db $0a,$03,$0b,$03                      ; [$9a50] undefined
+BYTE_PRG7__9a40:                            ; [$9a40]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$0c,$03,$0d,$03,$0e,$03,$0f,$03 ; [$9a40]
+                                                                       ; byte
+    db $0a,$03,$0b,$03                      ; [$9a50] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9198]
+;     TILES_SPRITES_ADDRS [$PRG7::9198]
 ;
-DAT_PRG7__9a54:                             ; [$9a54]
-    hex 31 00 00 08 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9a54] undefined
-    db $ff,$06,$02                          ; [$9a64] undefined
+BYTE_PRG7__9a54:                            ; [$9a54]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9a54]
+                                                                       ; byte
+    db $ff,$06,$02                          ; [$9a64] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::919a]
+;     TILES_SPRITES_ADDRS [$PRG7::919a]
 ;
-DAT_PRG7__9a67:                             ; [$9a67]
-    hex 31 00 00 08 00 02 01 02 02 02 07 02 08 02 09 02 ; [$9a67] undefined
-    db $0a,$02,$0b,$02                      ; [$9a77] undefined
+BYTE_PRG7__9a67:                            ; [$9a67]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$02,$07,$02,$08,$02,$09,$02 ; [$9a67]
+                                                                       ; byte
+    db $0a,$02,$0b,$02                      ; [$9a77] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::919c]
+;     TILES_SPRITES_ADDRS [$PRG7::919c]
 ;
-DAT_PRG7__9a7b:                             ; [$9a7b]
-    hex 31 00 00 08 00 02 01 02 0c 02 0d 02 0e 02 0f 02 ; [$9a7b] undefined
-    db $0a,$02,$0b,$02                      ; [$9a8b] undefined
+BYTE_PRG7__9a7b:                            ; [$9a7b]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$0c,$02,$0d,$02,$0e,$02,$0f,$02 ; [$9a7b]
+                                                                       ; byte
+    db $0a,$02,$0b,$02                      ; [$9a8b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::919e]
+;     TILES_SPRITES_ADDRS [$PRG7::919e]
 ;
-DAT_PRG7__9a8f:                             ; [$9a8f]
-    hex 20 00 08 04 00 01 01 01 02 01       ; [$9a8f] undefined
+BYTE_PRG7__9a8f:                            ; [$9a8f]
+    db $20,$00,$08,$04,$00,$01,$01,$01,$02,$01 ; [$9a8f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91a0]
+;     TILES_SPRITES_ADDRS [$PRG7::91a0]
 ;
-DAT_PRG7__9a99:                             ; [$9a99]
-    hex 21 f8 08 0c ff 00 01 ff 03 01 04 01 05 01 ; [$9a99] undefined
+BYTE_PRG7__9a99:                            ; [$9a99]
+    db $21,$f8,$08,$0c,$ff,$00,$01,$ff,$03,$01,$04,$01,$05,$01 ; [$9a99] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91a2]
+;     TILES_SPRITES_ADDRS [$PRG7::91a2]
 ;
-DAT_PRG7__9aa7:                             ; [$9aa7]
-    hex 21 f8 08 0c ff 00 01 06 01 07 01 04 01 08 01 ; [$9aa7] undefined
+BYTE_PRG7__9aa7:                            ; [$9aa7]
+    db $21,$f8,$08,$0c,$ff,$00,$01,$06,$01,$07,$01,$04,$01,$08,$01 ; [$9aa7]
+                                                                   ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91e4]
+;     TILES_SPRITES_ADDRS [$PRG7::91e4]
 ;
-DAT_PRG7__9ab6:                             ; [$9ab6]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$9ab6] undefined
+BYTE_PRG7__9ab6:                            ; [$9ab6]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$9ab6] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91e6]
+;     TILES_SPRITES_ADDRS [$PRG7::91e6]
 ;
-DAT_PRG7__9ac2:                             ; [$9ac2]
-    hex 11 00 00 08 04 03 05 03 06 03 07 03 ; [$9ac2] undefined
+BYTE_PRG7__9ac2:                            ; [$9ac2]
+    db $11,$00,$00,$08,$04,$03,$05,$03,$06,$03,$07,$03 ; [$9ac2] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91e8]
+;     TILES_SPRITES_ADDRS [$PRG7::91e8]
 ;
-DAT_PRG7__9ace:                             ; [$9ace]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$9ace] undefined
+BYTE_PRG7__9ace:                            ; [$9ace]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$9ace] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ea]
+;     TILES_SPRITES_ADDRS [$PRG7::91ea]
 ;
-DAT_PRG7__9ada:                             ; [$9ada]
-    hex 11 00 00 08 04 03 05 03 06 03 07 03 ; [$9ada] undefined
+BYTE_PRG7__9ada:                            ; [$9ada]
+    db $11,$00,$00,$08,$04,$03,$05,$03,$06,$03,$07,$03 ; [$9ada] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9214]
+;     TILES_SPRITES_ADDRS [$PRG7::9214]
 ;
-DAT_PRG7__9ae6:                             ; [$9ae6]
-    hex 11 00 00 08 00 00 01 00 02 00 03 00 ; [$9ae6] undefined
+BYTE_PRG7__9ae6:                            ; [$9ae6]
+    db $11,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00 ; [$9ae6] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9216]
+;     TILES_SPRITES_ADDRS [$PRG7::9216]
 ;
-DAT_PRG7__9af2:                             ; [$9af2]
-    hex 11 00 00 08 04 00 05 00 04 80 05 80 ; [$9af2] undefined
+BYTE_PRG7__9af2:                            ; [$9af2]
+    db $11,$00,$00,$08,$04,$00,$05,$00,$04,$80,$05,$80 ; [$9af2] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::921c]
+;     TILES_SPRITES_ADDRS [$PRG7::921c]
 ;
-DAT_PRG7__9afe:                             ; [$9afe]
-    hex 11 00 00 08 86 00 86 40 86 80 86 c0 ; [$9afe] undefined
+BYTE_PRG7__9afe:                            ; [$9afe]
+    db $11,$00,$00,$08,$86,$00,$86,$40,$86,$80,$86,$c0 ; [$9afe] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::921e]
+;     TILES_SPRITES_ADDRS [$PRG7::921e]
 ;
-DAT_PRG7__9b0a:                             ; [$9b0a]
-    hex 11 00 00 08 87 00 87 40 87 80 87 c0 ; [$9b0a] undefined
+BYTE_PRG7__9b0a:                            ; [$9b0a]
+    db $11,$00,$00,$08,$87,$00,$87,$40,$87,$80,$87,$c0 ; [$9b0a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9220]
+;     TILES_SPRITES_ADDRS [$PRG7::9220]
 ;
-DAT_PRG7__9b16:                             ; [$9b16]
-    hex 11 00 00 08 88 00 88 40 88 80 88 c0 ; [$9b16] undefined
+BYTE_PRG7__9b16:                            ; [$9b16]
+    db $11,$00,$00,$08,$88,$00,$88,$40,$88,$80,$88,$c0 ; [$9b16] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9218]
+;     TILES_SPRITES_ADDRS [$PRG7::9218]
 ;
-DAT_PRG7__9b22:                             ; [$9b22]
-    db $00,$00,$00,$04,$42,$00              ; [$9b22] undefined
+BYTE_PRG7__9b22:                            ; [$9b22]
+    db $00,$00,$00,$04,$42,$00              ; [$9b22] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::921a]
+;     TILES_SPRITES_ADDRS [$PRG7::921a]
 ;
-DAT_PRG7__9b28:                             ; [$9b28]
-    db $00,$00,$00,$04,$43,$00              ; [$9b28] undefined
+BYTE_PRG7__9b28:                            ; [$9b28]
+    db $00,$00,$00,$04,$43,$00              ; [$9b28] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::90fe]
+;     TILES_SPRITES_ADDRS [$PRG7::90fe]
 ;
-DAT_PRG7__9b2e:                             ; [$9b2e]
-    hex 13 00 20 10 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9b2e] undefined
-    db $06,$03,$07,$03                      ; [$9b3e] undefined
+BYTE_PRG7__9b2e:                            ; [$9b2e]
+    db $13,$00,$20,$10,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9b2e]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$9b3e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9100]
+;     TILES_SPRITES_ADDRS [$PRG7::9100]
 ;
-DAT_PRG7__9b42:                             ; [$9b42]
-    hex 23 00 18 10 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9b42] undefined
-    hex 0e 03 0f 03 ff 11 43 10 43 ff       ; [$9b52] undefined
+BYTE_PRG7__9b42:                            ; [$9b42]
+    db $23,$00,$18,$10,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9b42]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$ff,$11,$43,$10,$43,$ff ; [$9b52] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9102]
+;     TILES_SPRITES_ADDRS [$PRG7::9102]
 ;
-DAT_PRG7__9b5c:                             ; [$9b5c]
-    hex 33 00 10 10 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9b5c] undefined
-    hex 0e 03 0f 03 ff 11 43 10 43 ff ff 13 43 12 43 ff ; [$9b6c] undefined
+BYTE_PRG7__9b5c:                            ; [$9b5c]
+    db $33,$00,$10,$10,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9b5c]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$ff,$11,$43,$10,$43,$ff,$ff,$13,$43,$12,$43,$ff ; [$9b6c]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9104]
+;     TILES_SPRITES_ADDRS [$PRG7::9104]
 ;
-DAT_PRG7__9b7c:                             ; [$9b7c]
-    hex 43 00 08 10 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9b7c] undefined
-    hex 06 03 07 03 ff 10 03 11 03 ff ff 12 03 13 03 ff ; [$9b8c] undefined
-    db $ff,$19,$43,$18,$43,$ff              ; [$9b9c] undefined
+BYTE_PRG7__9b7c:                            ; [$9b7c]
+    db $43,$00,$08,$10,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9b7c]
+                                                                       ; byte
+    db $06,$03,$07,$03,$ff,$10,$03,$11,$03,$ff,$ff,$12,$03,$13,$03,$ff ; [$9b8c]
+                                                                       ; byte
+    db $ff,$19,$43,$18,$43,$ff              ; [$9b9c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9106]
+;     TILES_SPRITES_ADDRS [$PRG7::9106]
 ;
-DAT_PRG7__9ba2:                             ; [$9ba2]
-    hex 53 00 00 10 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9ba2] undefined
-    hex 0e 03 0f 03 ff 11 43 10 43 ff ff 13 43 12 43 ff ; [$9bb2] undefined
-    hex ff 18 03 19 03 ff ff 1a 03 1b 03 ff ; [$9bc2] undefined
+BYTE_PRG7__9ba2:                            ; [$9ba2]
+    db $53,$00,$00,$10,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9ba2]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$ff,$11,$43,$10,$43,$ff,$ff,$13,$43,$12,$43,$ff ; [$9bb2]
+                                                                       ; byte
+    db $ff,$18,$03,$19,$03,$ff,$ff,$1a,$03,$1b,$03,$ff ; [$9bc2] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9108]
+;     TILES_SPRITES_ADDRS [$PRG7::9108]
 ;
-DAT_PRG7__9bce:                             ; [$9bce]
-    hex 53 00 00 10 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9bce] undefined
-    hex 06 03 07 03 ff 11 43 10 43 ff ff 13 43 12 43 ff ; [$9bde] undefined
-    hex ff 15 43 14 43 ff ff 17 43 16 43 ff ; [$9bee] undefined
+BYTE_PRG7__9bce:                            ; [$9bce]
+    db $53,$00,$00,$10,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9bce]
+                                                                       ; byte
+    db $06,$03,$07,$03,$ff,$11,$43,$10,$43,$ff,$ff,$13,$43,$12,$43,$ff ; [$9bde]
+                                                                       ; byte
+    db $ff,$15,$43,$14,$43,$ff,$ff,$17,$43,$16,$43,$ff ; [$9bee] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::910a]
+;     TILES_SPRITES_ADDRS [$PRG7::910a]
 ;
-DAT_PRG7__9bfa:                             ; [$9bfa]
-    hex 53 00 00 10 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9bfa] undefined
-    hex 0e 03 0f 03 ff 10 03 11 03 ff ff 12 03 13 03 ff ; [$9c0a] undefined
-    hex ff 19 43 18 43 ff ff 1b 43 1a 43 ff ; [$9c1a] undefined
+BYTE_PRG7__9bfa:                            ; [$9bfa]
+    db $53,$00,$00,$10,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9bfa]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$ff,$10,$03,$11,$03,$ff,$ff,$12,$03,$13,$03,$ff ; [$9c0a]
+                                                                       ; byte
+    db $ff,$19,$43,$18,$43,$ff,$ff,$1b,$43,$1a,$43,$ff ; [$9c1a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::910c]
+;     TILES_SPRITES_ADDRS [$PRG7::910c]
 ;
-DAT_PRG7__9c26:                             ; [$9c26]
-    hex 53 00 00 10 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9c26] undefined
-    hex 06 03 07 03 ff 10 03 11 03 ff ff 12 03 13 03 ff ; [$9c36] undefined
-    hex ff 14 03 15 03 ff ff 16 03 17 03 ff ; [$9c46] undefined
+BYTE_PRG7__9c26:                            ; [$9c26]
+    db $53,$00,$00,$10,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9c26]
+                                                                       ; byte
+    db $06,$03,$07,$03,$ff,$10,$03,$11,$03,$ff,$ff,$12,$03,$13,$03,$ff ; [$9c36]
+                                                                       ; byte
+    db $ff,$14,$03,$15,$03,$ff,$ff,$16,$03,$17,$03,$ff ; [$9c46] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::910e]
+;     TILES_SPRITES_ADDRS [$PRG7::910e]
 ;
-DAT_PRG7__9c52:                             ; [$9c52]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$9c52] undefined
+BYTE_PRG7__9c52:                            ; [$9c52]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$9c52] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9110]
+;     TILES_SPRITES_ADDRS [$PRG7::9110]
 ;
-DAT_PRG7__9c5e:                             ; [$9c5e]
-    hex 11 00 00 08 00 03 01 03 04 03 05 03 ; [$9c5e] undefined
+BYTE_PRG7__9c5e:                            ; [$9c5e]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$04,$03,$05,$03 ; [$9c5e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9112]
+;     TILES_SPRITES_ADDRS [$PRG7::9112]
 ;
-DAT_PRG7__9c6a:                             ; [$9c6a]
-    hex 11 00 00 08 06 03 07 03 08 03 09 03 ; [$9c6a] undefined
+BYTE_PRG7__9c6a:                            ; [$9c6a]
+    db $11,$00,$00,$08,$06,$03,$07,$03,$08,$03,$09,$03 ; [$9c6a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9114]
+;     TILES_SPRITES_ADDRS [$PRG7::9114]
 ;
-DAT_PRG7__9c76:                             ; [$9c76]
-    hex 11 00 00 08 06 03 07 03 0a 03 0b 03 ; [$9c76] undefined
+BYTE_PRG7__9c76:                            ; [$9c76]
+    db $11,$00,$00,$08,$06,$03,$07,$03,$0a,$03,$0b,$03 ; [$9c76] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9116]
+;     TILES_SPRITES_ADDRS [$PRG7::9116]
 ;
-DAT_PRG7__9c82:                             ; [$9c82]
-    hex 11 00 00 08 0c 03 0d 03 0e 03 0f 03 ; [$9c82] undefined
+BYTE_PRG7__9c82:                            ; [$9c82]
+    db $11,$00,$00,$08,$0c,$03,$0d,$03,$0e,$03,$0f,$03 ; [$9c82] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9118]
+;     TILES_SPRITES_ADDRS [$PRG7::9118]
 ;
-DAT_PRG7__9c8e:                             ; [$9c8e]
-    hex 53 00 00 10 00 02 01 02 02 02 03 02 04 02 05 02 ; [$9c8e] undefined
-    hex 06 02 07 02 ff 08 02 08 42 ff ff 09 02 09 42 ff ; [$9c9e] undefined
-    hex ff 0a 02 0b 02 ff ff 0c 02 0d 02 ff ; [$9cae] undefined
+BYTE_PRG7__9c8e:                            ; [$9c8e]
+    db $53,$00,$00,$10,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$05,$02 ; [$9c8e]
+                                                                       ; byte
+    db $06,$02,$07,$02,$ff,$08,$02,$08,$42,$ff,$ff,$09,$02,$09,$42,$ff ; [$9c9e]
+                                                                       ; byte
+    db $ff,$0a,$02,$0b,$02,$ff,$ff,$0c,$02,$0d,$02,$ff ; [$9cae] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::911a]
+;     TILES_SPRITES_ADDRS [$PRG7::911a]
 ;
-DAT_PRG7__9cba:                             ; [$9cba]
-    hex 53 00 00 10 00 02 01 02 02 02 03 02 04 02 0e 02 ; [$9cba] undefined
-    hex 0e 42 07 02 0f 02 10 02 10 42 0f 42 11 02 12 02 ; [$9cca] undefined
-    hex 12 42 11 42 11 02 12 02 12 42 11 42 13 02 14 02 ; [$9cda] undefined
-    db $14,$42,$13,$42                      ; [$9cea] undefined
+BYTE_PRG7__9cba:                            ; [$9cba]
+    db $53,$00,$00,$10,$00,$02,$01,$02,$02,$02,$03,$02,$04,$02,$0e,$02 ; [$9cba]
+                                                                       ; byte
+    db $0e,$42,$07,$02,$0f,$02,$10,$02,$10,$42,$0f,$42,$11,$02,$12,$02 ; [$9cca]
+                                                                       ; byte
+    db $12,$42,$11,$42,$11,$02,$12,$02,$12,$42,$11,$42,$13,$02,$14,$02 ; [$9cda]
+                                                                       ; byte
+    db $14,$42,$13,$42                      ; [$9cea] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::911c]
+;     TILES_SPRITES_ADDRS [$PRG7::911c]
 ;
-DAT_PRG7__9cee:                             ; [$9cee]
-    hex 53 00 00 10 03 42 02 42 01 42 00 42 07 42 06 42 ; [$9cee] undefined
-    hex 05 42 04 42 15 02 16 02 17 02 15 42 18 02 19 02 ; [$9cfe] undefined
-    hex 19 42 18 42 1a 02 19 02 1b 02 18 42 ff 1c 02 1d ; [$9d0e] undefined
-    db $02,$1e,$02                          ; [$9d1e] undefined
+BYTE_PRG7__9cee:                            ; [$9cee]
+    db $53,$00,$00,$10,$03,$42,$02,$42,$01,$42,$00,$42,$07,$42,$06,$42 ; [$9cee]
+                                                                       ; byte
+    db $05,$42,$04,$42,$15,$02,$16,$02,$17,$02,$15,$42,$18,$02,$19,$02 ; [$9cfe]
+                                                                       ; byte
+    db $19,$42,$18,$42,$1a,$02,$19,$02,$1b,$02,$18,$42,$ff,$1c,$02,$1d ; [$9d0e]
+                                                                       ; byte
+    db $02,$1e,$02                          ; [$9d1e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::911e]
+;     TILES_SPRITES_ADDRS [$PRG7::911e]
 ;
-DAT_PRG7__9d21:                             ; [$9d21]
-    hex 53 00 00 10 03 42 02 42 01 42 00 42 07 42 1f 02 ; [$9d21] undefined
-    hex 1f 42 04 42 20 02 21 02 21 42 20 42 22 02 23 02 ; [$9d31] undefined
-    hex 23 42 22 42 22 02 23 02 23 42 22 42 24 02 25 02 ; [$9d41] undefined
-    db $25,$42,$24,$42                      ; [$9d51] undefined
+BYTE_PRG7__9d21:                            ; [$9d21]
+    db $53,$00,$00,$10,$03,$42,$02,$42,$01,$42,$00,$42,$07,$42,$1f,$02 ; [$9d21]
+                                                                       ; byte
+    db $1f,$42,$04,$42,$20,$02,$21,$02,$21,$42,$20,$42,$22,$02,$23,$02 ; [$9d31]
+                                                                       ; byte
+    db $23,$42,$22,$42,$22,$02,$23,$02,$23,$42,$22,$42,$24,$02,$25,$02 ; [$9d41]
+                                                                       ; byte
+    db $25,$42,$24,$42                      ; [$9d51] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9120]
+;     TILES_SPRITES_ADDRS [$PRG7::9120]
 ;
-DAT_PRG7__9d55:                             ; [$9d55]
-    hex 53 00 00 10 00 03 01 03 02 03 03 03 04 03 05 03 ; [$9d55] undefined
-    hex 06 03 07 03 08 03 09 03 0a 03 0b 03 0c 03 0d 03 ; [$9d65] undefined
-    hex 0e 03 0f 03 10 03 11 03 12 03 13 03 14 03 15 03 ; [$9d75] undefined
-    db $16,$03,$17,$03                      ; [$9d85] undefined
+BYTE_PRG7__9d55:                            ; [$9d55]
+    db $53,$00,$00,$10,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$9d55]
+                                                                       ; byte
+    db $06,$03,$07,$03,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03 ; [$9d65]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$10,$03,$11,$03,$12,$03,$13,$03,$14,$03,$15,$03 ; [$9d75]
+                                                                       ; byte
+    db $16,$03,$17,$03                      ; [$9d85] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9122]
+;     TILES_SPRITES_ADDRS [$PRG7::9122]
 ;
-DAT_PRG7__9d89:                             ; [$9d89]
-    hex 53 00 00 10 00 03 18 03 19 03 1a 03 1b 03 05 03 ; [$9d89] undefined
-    hex 1c 03 1d 03 1e 03 09 03 0a 03 1f 03 20 03 21 03 ; [$9d99] undefined
-    hex 0e 03 22 03 23 03 11 03 12 03 13 03 24 03 25 03 ; [$9da9] undefined
-    db $16,$03,$17,$03                      ; [$9db9] undefined
+BYTE_PRG7__9d89:                            ; [$9d89]
+    db $53,$00,$00,$10,$00,$03,$18,$03,$19,$03,$1a,$03,$1b,$03,$05,$03 ; [$9d89]
+                                                                       ; byte
+    db $1c,$03,$1d,$03,$1e,$03,$09,$03,$0a,$03,$1f,$03,$20,$03,$21,$03 ; [$9d99]
+                                                                       ; byte
+    db $0e,$03,$22,$03,$23,$03,$11,$03,$12,$03,$13,$03,$24,$03,$25,$03 ; [$9da9]
+                                                                       ; byte
+    db $16,$03,$17,$03                      ; [$9db9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9124]
+;     TILES_SPRITES_ADDRS [$PRG7::9124]
 ;
-DAT_PRG7__9dbd:                             ; [$9dbd]
-    hex 53 00 00 10 00 03 26 03 02 03 03 03 27 03 05 03 ; [$9dbd] undefined
-    hex 06 03 07 03 28 03 29 03 0a 03 0b 03 2a 03 2b 03 ; [$9dcd] undefined
-    hex 0e 03 0f 03 23 03 11 03 12 03 2c 03 24 03 25 03 ; [$9ddd] undefined
-    db $2d,$03,$2e,$03                      ; [$9ded] undefined
+BYTE_PRG7__9dbd:                            ; [$9dbd]
+    db $53,$00,$00,$10,$00,$03,$26,$03,$02,$03,$03,$03,$27,$03,$05,$03 ; [$9dbd]
+                                                                       ; byte
+    db $06,$03,$07,$03,$28,$03,$29,$03,$0a,$03,$0b,$03,$2a,$03,$2b,$03 ; [$9dcd]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$23,$03,$11,$03,$12,$03,$2c,$03,$24,$03,$25,$03 ; [$9ddd]
+                                                                       ; byte
+    db $2d,$03,$2e,$03                      ; [$9ded] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9126]
+;     TILES_SPRITES_ADDRS [$PRG7::9126]
 ;
-DAT_PRG7__9df1:                             ; [$9df1]
-    hex 53 00 00 10 00 03 18 03 02 03 03 03 1b 03 05 03 ; [$9df1] undefined
-    hex 06 03 07 03 1e 03 09 03 0a 03 0b 03 20 03 21 03 ; [$9e01] undefined
-    hex 0e 03 0f 03 23 03 2f 03 30 03 13 03 24 03 31 03 ; [$9e11] undefined
-    db $32,$03,$17,$03                      ; [$9e21] undefined
+BYTE_PRG7__9df1:                            ; [$9df1]
+    db $53,$00,$00,$10,$00,$03,$18,$03,$02,$03,$03,$03,$1b,$03,$05,$03 ; [$9df1]
+                                                                       ; byte
+    db $06,$03,$07,$03,$1e,$03,$09,$03,$0a,$03,$0b,$03,$20,$03,$21,$03 ; [$9e01]
+                                                                       ; byte
+    db $0e,$03,$0f,$03,$23,$03,$2f,$03,$30,$03,$13,$03,$24,$03,$31,$03 ; [$9e11]
+                                                                       ; byte
+    db $32,$03,$17,$03                      ; [$9e21] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9128]
+;     TILES_SPRITES_ADDRS [$PRG7::9128]
 ;
-DAT_PRG7__9e25:                             ; [$9e25]
-    hex 73 00 00 10 ff 08 02 09 02 0a 02 ff 0b 02 0c 02 ; [$9e25] undefined
-    hex 0d 02 00 02 01 02 04 02 05 02 02 02 03 02 06 02 ; [$9e35] undefined
-    hex 07 02 1a 02 1b 02 10 02 11 02 1c 02 1d 02 ff ff ; [$9e45] undefined
-    hex 1e 02 1f 02 ff ff 20 02 21 02 ff ff ; [$9e55] undefined
+BYTE_PRG7__9e25:                            ; [$9e25]
+    db $73,$00,$00,$10,$ff,$08,$02,$09,$02,$0a,$02,$ff,$0b,$02,$0c,$02 ; [$9e25]
+                                                                       ; byte
+    db $0d,$02,$00,$02,$01,$02,$04,$02,$05,$02,$02,$02,$03,$02,$06,$02 ; [$9e35]
+                                                                       ; byte
+    db $07,$02,$1a,$02,$1b,$02,$10,$02,$11,$02,$1c,$02,$1d,$02,$ff,$ff ; [$9e45]
+                                                                       ; byte
+    db $1e,$02,$1f,$02,$ff,$ff,$20,$02,$21,$02,$ff,$ff ; [$9e55] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::912a]
+;     TILES_SPRITES_ADDRS [$PRG7::912a]
 ;
-DAT_PRG7__9e61:                             ; [$9e61]
-    hex 73 00 00 10 ff 08 02 09 02 0a 02 ff 0b 02 0c 02 ; [$9e61] undefined
-    hex 0d 02 00 02 01 02 04 02 05 02 02 02 03 02 06 02 ; [$9e71] undefined
-    hex 07 02 0e 02 0f 02 10 02 11 02 12 02 13 02 14 02 ; [$9e81] undefined
-    hex ff ff 15 02 16 02 17 02 ff ff 18 02 19 02 ; [$9e91] undefined
+BYTE_PRG7__9e61:                            ; [$9e61]
+    db $73,$00,$00,$10,$ff,$08,$02,$09,$02,$0a,$02,$ff,$0b,$02,$0c,$02 ; [$9e61]
+                                                                       ; byte
+    db $0d,$02,$00,$02,$01,$02,$04,$02,$05,$02,$02,$02,$03,$02,$06,$02 ; [$9e71]
+                                                                       ; byte
+    db $07,$02,$0e,$02,$0f,$02,$10,$02,$11,$02,$12,$02,$13,$02,$14,$02 ; [$9e81]
+                                                                       ; byte
+    db $ff,$ff,$15,$02,$16,$02,$17,$02,$ff,$ff,$18,$02,$19,$02 ; [$9e91] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::912c]
+;     TILES_SPRITES_ADDRS [$PRG7::912c]
 ;
-DAT_PRG7__9e9f:                             ; [$9e9f]
-    hex 73 00 00 10 ff ff ff ff ff ff ff ff 00 02 01 02 ; [$9e9f] undefined
-    hex ff ff 02 02 03 02 25 02 ff 0e 02 22 02 23 02 24 ; [$9eaf] undefined
-    hex 02 12 02 13 02 26 02 27 02 ff 15 02 28 02 29 02 ; [$9ebf] undefined
-    db $ff,$ff,$2a,$02,$2b,$02              ; [$9ecf] undefined
+BYTE_PRG7__9e9f:                            ; [$9e9f]
+    db $73,$00,$00,$10,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$02,$01,$02 ; [$9e9f]
+                                                                       ; byte
+    db $ff,$ff,$02,$02,$03,$02,$25,$02,$ff,$0e,$02,$22,$02,$23,$02,$24 ; [$9eaf]
+                                                                       ; byte
+    db $02,$12,$02,$13,$02,$26,$02,$27,$02,$ff,$15,$02,$28,$02,$29,$02 ; [$9ebf]
+                                                                       ; byte
+    db $ff,$ff,$2a,$02,$2b,$02              ; [$9ecf] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::912e]
+;     TILES_SPRITES_ADDRS [$PRG7::912e]
 ;
-DAT_PRG7__9ed5:                             ; [$9ed5]
-    hex 73 00 00 10 ff ff ff ff ff ff ff ff ff ff 2c 02 ; [$9ed5] undefined
-    hex 2d 02 ff ff 2e 02 2f 02 31 02 32 02 30 02 34 02 ; [$9ee5] undefined
-    hex 35 02 36 02 37 02 38 02 ff 39 02 3a 02 3b 02 ff ; [$9ef5] undefined
-    db $3c,$02,$3d,$02,$ff                  ; [$9f05] undefined
+BYTE_PRG7__9ed5:                            ; [$9ed5]
+    db $73,$00,$00,$10,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$2c,$02 ; [$9ed5]
+                                                                       ; byte
+    db $2d,$02,$ff,$ff,$2e,$02,$2f,$02,$31,$02,$32,$02,$30,$02,$34,$02 ; [$9ee5]
+                                                                       ; byte
+    db $35,$02,$36,$02,$37,$02,$38,$02,$ff,$39,$02,$3a,$02,$3b,$02,$ff ; [$9ef5]
+                                                                       ; byte
+    db $3c,$02,$3d,$02,$ff                  ; [$9f05] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9130]
+;     TILES_SPRITES_ADDRS [$PRG7::9130]
 ;
-DAT_PRG7__9f0a:                             ; [$9f0a]
-    hex 33 00 00 10 06 83 07 83 07 c3 06 c3 04 83 05 83 ; [$9f0a] undefined
-    hex 05 c3 04 c3 02 83 03 83 03 c3 02 c3 00 83 01 83 ; [$9f1a] undefined
-    db $01,$c3,$00,$c3                      ; [$9f2a] undefined
+BYTE_PRG7__9f0a:                            ; [$9f0a]
+    db $33,$00,$00,$10,$06,$83,$07,$83,$07,$c3,$06,$c3,$04,$83,$05,$83 ; [$9f0a]
+                                                                       ; byte
+    db $05,$c3,$04,$c3,$02,$83,$03,$83,$03,$c3,$02,$c3,$00,$83,$01,$83 ; [$9f1a]
+                                                                       ; byte
+    db $01,$c3,$00,$c3                      ; [$9f2a] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9132]
+;     TILES_SPRITES_ADDRS [$PRG7::9132]
 ;
-DAT_PRG7__9f2e:                             ; [$9f2e]
-    hex 33 00 00 10 06 83 07 83 07 c3 06 c3 04 83 05 83 ; [$9f2e] undefined
-    hex 05 c3 04 c3 0a 83 0b 83 0b c3 0a c3 08 83 09 83 ; [$9f3e] undefined
-    db $09,$c3,$08,$c3                      ; [$9f4e] undefined
+BYTE_PRG7__9f2e:                            ; [$9f2e]
+    db $33,$00,$00,$10,$06,$83,$07,$83,$07,$c3,$06,$c3,$04,$83,$05,$83 ; [$9f2e]
+                                                                       ; byte
+    db $05,$c3,$04,$c3,$0a,$83,$0b,$83,$0b,$c3,$0a,$c3,$08,$83,$09,$83 ; [$9f3e]
+                                                                       ; byte
+    db $09,$c3,$08,$c3                      ; [$9f4e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9134]
+;     TILES_SPRITES_ADDRS [$PRG7::9134]
 ;
-DAT_PRG7__9f52:                             ; [$9f52]
-    hex 23 00 00 10 06 83 07 83 07 c3 06 c3 04 83 05 83 ; [$9f52] undefined
-    hex 05 c3 04 c3 0c 83 0d 83 0d c3 0c c3 ; [$9f62] undefined
+BYTE_PRG7__9f52:                            ; [$9f52]
+    db $23,$00,$00,$10,$06,$83,$07,$83,$07,$c3,$06,$c3,$04,$83,$05,$83 ; [$9f52]
+                                                                       ; byte
+    db $05,$c3,$04,$c3,$0c,$83,$0d,$83,$0d,$c3,$0c,$c3 ; [$9f62] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9136]
+;     TILES_SPRITES_ADDRS [$PRG7::9136]
 ;
-DAT_PRG7__9f6e:                             ; [$9f6e]
-    hex 58 00 f8 20 ff 1f 03 20 03 21 03 22 03 23 03 ff ; [$9f6e] undefined
-    hex ff ff 00 03 01 03 02 03 03 03 04 03 05 03 06 03 ; [$9f7e] undefined
-    hex 07 03 ff 09 03 0a 03 0b 03 0c 03 0d 03 0e 03 0f ; [$9f8e] undefined
-    hex 03 08 03 ff 10 03 11 03 12 03 13 03 14 03 15 03 ; [$9f9e] undefined
-    hex 16 03 17 03 ff 18 03 19 03 ff ff ff ff 1a 03 1b ; [$9fae] undefined
-    hex 03 ff ff 1c 03 ff ff ff ff ff 1d 03 1e 03 ; [$9fbe] undefined
+BYTE_PRG7__9f6e:                            ; [$9f6e]
+    db $58,$00,$f8,$20,$ff,$1f,$03,$20,$03,$21,$03,$22,$03,$23,$03,$ff ; [$9f6e]
+                                                                       ; byte
+    db $ff,$ff,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03,$06,$03 ; [$9f7e]
+                                                                       ; byte
+    db $07,$03,$ff,$09,$03,$0a,$03,$0b,$03,$0c,$03,$0d,$03,$0e,$03,$0f ; [$9f8e]
+                                                                       ; byte
+    db $03,$08,$03,$ff,$10,$03,$11,$03,$12,$03,$13,$03,$14,$03,$15,$03 ; [$9f9e]
+                                                                       ; byte
+    db $16,$03,$17,$03,$ff,$18,$03,$19,$03,$ff,$ff,$ff,$ff,$1a,$03,$1b ; [$9fae]
+                                                                       ; byte
+    db $03,$ff,$ff,$1c,$03,$ff,$ff,$ff,$ff,$ff,$1d,$03,$1e,$03 ; [$9fbe] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9138]
+;     TILES_SPRITES_ADDRS [$PRG7::9138]
 ;
-DAT_PRG7__9fcc:                             ; [$9fcc]
-    hex 5b f8 e8 28 24 03 25 03 26 03 ff ff ff ff ff ff ; [$9fcc] undefined
-    hex ff ff ff ff 27 03 28 03 29 03 ff ff ff 2a 03 2b ; [$9fdc] undefined
-    hex 03 2c 03 2d 03 2e 03 ff ff 2f 03 30 03 21 03 31 ; [$9fec] undefined
-    hex 03 32 03 33 03 34 03 35 03 ff ff ff 00 03 36 03 ; [$9ffc] undefined
-    hex 37 03 03 03 38 03 39 03 3a 03 3b 03 ff ff ff ff ; [$a00c] undefined
-    hex ff 3c 03 3d 03 0c 03 0d 03 3e 03 3f 03 40 03 41 ; [$a01c] undefined
-    hex 03 ff ff ff ff ff 42 03 13 03 14 03 43 03 ff ff ; [$a02c] undefined
-    db $ff,$ff,$ff                          ; [$a03c] undefined
+BYTE_PRG7__9fcc:                            ; [$9fcc]
+    db $5b,$f8,$e8,$28,$24,$03,$25,$03,$26,$03,$ff,$ff,$ff,$ff,$ff,$ff ; [$9fcc]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$27,$03,$28,$03,$29,$03,$ff,$ff,$ff,$2a,$03,$2b ; [$9fdc]
+                                                                       ; byte
+    db $03,$2c,$03,$2d,$03,$2e,$03,$ff,$ff,$2f,$03,$30,$03,$21,$03,$31 ; [$9fec]
+                                                                       ; byte
+    db $03,$32,$03,$33,$03,$34,$03,$35,$03,$ff,$ff,$ff,$00,$03,$36,$03 ; [$9ffc]
+                                                                       ; byte
+    db $37,$03,$03,$03,$38,$03,$39,$03,$3a,$03,$3b,$03,$ff,$ff,$ff,$ff ; [$a00c]
+                                                                       ; byte
+    db $ff,$3c,$03,$3d,$03,$0c,$03,$0d,$03,$3e,$03,$3f,$03,$40,$03,$41 ; [$a01c]
+                                                                       ; byte
+    db $03,$ff,$ff,$ff,$ff,$ff,$42,$03,$13,$03,$14,$03,$43,$03,$ff,$ff ; [$a02c]
+                                                                       ; byte
+    db $ff,$ff,$ff                          ; [$a03c] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::913a]
+;     TILES_SPRITES_ADDRS [$PRG7::913a]
 ;
-DAT_PRG7__a03f:                             ; [$a03f]
-    hex 69 00 e0 20 24 03 25 03 26 03 ff ff 2a 03 2b 03 ; [$a03f] undefined
-    hex 2c 03 2d 03 2e 03 ff 27 03 45 03 ff ff 46 03 34 ; [$a04f] undefined
-    hex 03 35 03 ff ff ff ff 44 03 29 03 48 03 47 03 49 ; [$a05f] undefined
-    hex 03 ff ff ff ff 1f 03 30 03 21 03 4a 03 4b 03 4c ; [$a06f] undefined
-    hex 03 ff ff ff 00 03 4d 03 4e 03 03 03 38 03 39 03 ; [$a07f] undefined
-    hex 06 03 23 03 ff ff ff 4f 03 50 03 0c 03 0d 03 3e ; [$a08f] undefined
-    hex 03 3f 03 51 03 ff ff ff 53 03 42 03 13 03 14 03 ; [$a09f] undefined
-    db $43,$03,$ff,$52,$03,$ff,$ff          ; [$a0af] undefined
+BYTE_PRG7__a03f:                            ; [$a03f]
+    db $69,$00,$e0,$20,$24,$03,$25,$03,$26,$03,$ff,$ff,$2a,$03,$2b,$03 ; [$a03f]
+                                                                       ; byte
+    db $2c,$03,$2d,$03,$2e,$03,$ff,$27,$03,$45,$03,$ff,$ff,$46,$03,$34 ; [$a04f]
+                                                                       ; byte
+    db $03,$35,$03,$ff,$ff,$ff,$ff,$44,$03,$29,$03,$48,$03,$47,$03,$49 ; [$a05f]
+                                                                       ; byte
+    db $03,$ff,$ff,$ff,$ff,$1f,$03,$30,$03,$21,$03,$4a,$03,$4b,$03,$4c ; [$a06f]
+                                                                       ; byte
+    db $03,$ff,$ff,$ff,$00,$03,$4d,$03,$4e,$03,$03,$03,$38,$03,$39,$03 ; [$a07f]
+                                                                       ; byte
+    db $06,$03,$23,$03,$ff,$ff,$ff,$4f,$03,$50,$03,$0c,$03,$0d,$03,$3e ; [$a08f]
+                                                                       ; byte
+    db $03,$3f,$03,$51,$03,$ff,$ff,$ff,$53,$03,$42,$03,$13,$03,$14,$03 ; [$a09f]
+                                                                       ; byte
+    db $43,$03,$ff,$52,$03,$ff,$ff          ; [$a0af] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::913c]
+;     TILES_SPRITES_ADDRS [$PRG7::913c]
 ;
-DAT_PRG7__a0b6:                             ; [$a0b6]
-    hex 33 00 00 10 ff ff 00 00 01 00 ff ff 02 00 03 00 ; [$a0b6] undefined
-    hex 13 00 16 00 04 00 05 00 14 00 15 00 06 00 07 00 ; [$a0c6] undefined
+BYTE_PRG7__a0b6:                            ; [$a0b6]
+    db $33,$00,$00,$10,$ff,$ff,$00,$00,$01,$00,$ff,$ff,$02,$00,$03,$00 ; [$a0b6]
+                                                                       ; byte
+    db $13,$00,$16,$00,$04,$00,$05,$00,$14,$00,$15,$00,$06,$00,$07,$00 ; [$a0c6]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::913e]
+;     TILES_SPRITES_ADDRS [$PRG7::913e]
 ;
-DAT_PRG7__a0d6:                             ; [$a0d6]
-    hex 33 00 00 10 ff ff 08 00 09 00 ff ff 0a 00 0b 00 ; [$a0d6] undefined
-    hex 13 00 18 00 0c 00 0d 00 14 00 19 00 0e 00 0f 00 ; [$a0e6] undefined
+BYTE_PRG7__a0d6:                            ; [$a0d6]
+    db $33,$00,$00,$10,$ff,$ff,$08,$00,$09,$00,$ff,$ff,$0a,$00,$0b,$00 ; [$a0d6]
+                                                                       ; byte
+    db $13,$00,$18,$00,$0c,$00,$0d,$00,$14,$00,$19,$00,$0e,$00,$0f,$00 ; [$a0e6]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9140]
+;     TILES_SPRITES_ADDRS [$PRG7::9140]
 ;
-DAT_PRG7__a0f6:                             ; [$a0f6]
-    hex 33 00 00 10 ff ff 10 00 11 00 ff ff 12 00 03 00 ; [$a0f6] undefined
-    hex 17 00 16 00 04 00 05 00 14 00 15 00 06 00 07 00 ; [$a106] undefined
+BYTE_PRG7__a0f6:                            ; [$a0f6]
+    db $33,$00,$00,$10,$ff,$ff,$10,$00,$11,$00,$ff,$ff,$12,$00,$03,$00 ; [$a0f6]
+                                                                       ; byte
+    db $17,$00,$16,$00,$04,$00,$05,$00,$14,$00,$15,$00,$06,$00,$07,$00 ; [$a106]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9142]
+;     TILES_SPRITES_ADDRS [$PRG7::9142]
 ;
-DAT_PRG7__a116:                             ; [$a116]
-    hex 11 00 00 08 1a 03 1b 03 1c 03 1d 03 ; [$a116] undefined
+BYTE_PRG7__a116:                            ; [$a116]
+    db $11,$00,$00,$08,$1a,$03,$1b,$03,$1c,$03,$1d,$03 ; [$a116] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9144]
+;     TILES_SPRITES_ADDRS [$PRG7::9144]
 ;
-DAT_PRG7__a122:                             ; [$a122]
-    hex 11 00 00 08 1e 03 1f 03 20 03 21 03 ; [$a122] undefined
+BYTE_PRG7__a122:                            ; [$a122]
+    db $11,$00,$00,$08,$1e,$03,$1f,$03,$20,$03,$21,$03 ; [$a122] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9146]
+;     TILES_SPRITES_ADDRS [$PRG7::9146]
 ;
-DAT_PRG7__a12e:                             ; [$a12e]
-    hex 01 00 08 08 1e 03 1f 03             ; [$a12e] undefined
+BYTE_PRG7__a12e:                            ; [$a12e]
+    db $01,$00,$08,$08,$1e,$03,$1f,$03      ; [$a12e] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9148]
+;     TILES_SPRITES_ADDRS [$PRG7::9148]
 ;
-DAT_PRG7__a136:                             ; [$a136]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a136] undefined
-    hex 02 50 02 51 02 52 02 53 02 54 02 55 02 56 02 57 ; [$a146] undefined
-    hex 02 58 02 59 02 5a 02 5b 02 5c 02 5d 02 5e 02 5f ; [$a156] undefined
-    hex 02 60 02 61 02 62 02 63 02 64 02 ff 18 02 ff ff ; [$a166] undefined
-    hex 65 02 ff ff 2a 02 ff ff 3a 02 ff ff 3a 02 ff ff ; [$a176] undefined
-    hex 3a 02 ff ff 3a 02 ff ff 66 02 ff ff 66 02 ff 67 ; [$a186] undefined
-    hex 02 68 02 ff 67 02 68 02             ; [$a196] undefined
+BYTE_PRG7__a136:                            ; [$a136]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a136]
+                                                                       ; byte
+    db $02,$50,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$57 ; [$a146]
+                                                                       ; byte
+    db $02,$58,$02,$59,$02,$5a,$02,$5b,$02,$5c,$02,$5d,$02,$5e,$02,$5f ; [$a156]
+                                                                       ; byte
+    db $02,$60,$02,$61,$02,$62,$02,$63,$02,$64,$02,$ff,$18,$02,$ff,$ff ; [$a166]
+                                                                       ; byte
+    db $65,$02,$ff,$ff,$2a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff ; [$a176]
+                                                                       ; byte
+    db $3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$66,$02,$ff,$ff,$66,$02,$ff,$67 ; [$a186]
+                                                                       ; byte
+    db $02,$68,$02,$ff,$67,$02,$68,$02      ; [$a196] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::914a]
+;     TILES_SPRITES_ADDRS [$PRG7::914a]
 ;
-DAT_PRG7__a19e:                             ; [$a19e]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a19e] undefined
-    hex 02 50 02 51 02 52 02 53 02 54 02 55 02 56 02 57 ; [$a1ae] undefined
-    hex 02 58 02 07 02 08 02 5b 02 5c 02 5d 02 5e 02 17 ; [$a1be] undefined
-    hex 02 18 02 61 02 62 02 63 02 64 02 ff 2a 02 ff ff ; [$a1ce] undefined
-    hex 65 02 ff ff 3a 02 ff ff 3a 02 ff ff 3a 02 ff ff ; [$a1de] undefined
-    hex 3a 02 ff ff 66 02 ff ff 66 02 ff ff 3d 02 ff 67 ; [$a1ee] undefined
-    db $02,$68,$02,$ff,$ff,$40,$02          ; [$a1fe] undefined
+BYTE_PRG7__a19e:                            ; [$a19e]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a19e]
+                                                                       ; byte
+    db $02,$50,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$57 ; [$a1ae]
+                                                                       ; byte
+    db $02,$58,$02,$07,$02,$08,$02,$5b,$02,$5c,$02,$5d,$02,$5e,$02,$17 ; [$a1be]
+                                                                       ; byte
+    db $02,$18,$02,$61,$02,$62,$02,$63,$02,$64,$02,$ff,$2a,$02,$ff,$ff ; [$a1ce]
+                                                                       ; byte
+    db $65,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff ; [$a1de]
+                                                                       ; byte
+    db $3a,$02,$ff,$ff,$66,$02,$ff,$ff,$66,$02,$ff,$ff,$3d,$02,$ff,$67 ; [$a1ee]
+                                                                       ; byte
+    db $02,$68,$02,$ff,$ff,$40,$02          ; [$a1fe] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::914c]
+;     TILES_SPRITES_ADDRS [$PRG7::914c]
 ;
-DAT_PRG7__a205:                             ; [$a205]
-    hex a5 00 f8 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a205] undefined
-    hex 02 02 02 51 02 52 02 53 02 54 02 55 02 56 02 57 ; [$a215] undefined
-    hex 02 58 02 37 02 38 02 10 02 11 02 12 02 5e 02 39 ; [$a225] undefined
-    hex 02 3c 02 20 02 21 02 22 02 32 02 2a 02 ff 23 02 ; [$a235] undefined
-    hex ff ff 33 02 3a 02 ff ff ff ff 2a 02 3a 02 ff ff ; [$a245] undefined
-    hex ff ff 3a 02 66 02 ff ff ff ff 3a 02 3d 02 ff ff ; [$a255] undefined
-    hex ff ff 66 02 40 02 ff ff ff 67 02 68 02 ff ff ; [$a265] undefined
+BYTE_PRG7__a205:                            ; [$a205]
+    db $a5,$00,$f8,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a205]
+                                                                       ; byte
+    db $02,$02,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$57 ; [$a215]
+                                                                       ; byte
+    db $02,$58,$02,$37,$02,$38,$02,$10,$02,$11,$02,$12,$02,$5e,$02,$39 ; [$a225]
+                                                                       ; byte
+    db $02,$3c,$02,$20,$02,$21,$02,$22,$02,$32,$02,$2a,$02,$ff,$23,$02 ; [$a235]
+                                                                       ; byte
+    db $ff,$ff,$33,$02,$3a,$02,$ff,$ff,$ff,$ff,$2a,$02,$3a,$02,$ff,$ff ; [$a245]
+                                                                       ; byte
+    db $ff,$ff,$3a,$02,$66,$02,$ff,$ff,$ff,$ff,$3a,$02,$3d,$02,$ff,$ff ; [$a255]
+                                                                       ; byte
+    db $ff,$ff,$66,$02,$40,$02,$ff,$ff,$ff,$67,$02,$68,$02,$ff,$ff ; [$a265]
+                                                                   ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::914e]
+;     TILES_SPRITES_ADDRS [$PRG7::914e]
 ;
-DAT_PRG7__a274:                             ; [$a274]
-    hex a5 00 f8 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a274] undefined
-    hex 02 03 02 51 02 52 02 53 02 54 02 55 02 13 02 0e ; [$a284] undefined
-    hex 02 0a 02 0b 02 5a 02 24 02 25 02 26 02 1a 02 1b ; [$a294] undefined
-    hex 02 3c 02 27 02 28 02 29 02 2a 02 2b 02 ff 30 02 ; [$a2a4] undefined
-    hex 31 02 ff 3a 02 3b 02 ff ff ff ff 3a 02 2a 02 ff ; [$a2b4] undefined
-    hex ff ff ff 66 02 3a 02 ff ff ff ff 3d 02 3a 02 ff ; [$a2c4] undefined
-    hex ff ff ff 40 02 66 02 ff ff ff ff 67 02 68 02 ff ; [$a2d4] undefined
+BYTE_PRG7__a274:                            ; [$a274]
+    db $a5,$00,$f8,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a274]
+                                                                       ; byte
+    db $02,$03,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$13,$02,$0e ; [$a284]
+                                                                       ; byte
+    db $02,$0a,$02,$0b,$02,$5a,$02,$24,$02,$25,$02,$26,$02,$1a,$02,$1b ; [$a294]
+                                                                       ; byte
+    db $02,$3c,$02,$27,$02,$28,$02,$29,$02,$2a,$02,$2b,$02,$ff,$30,$02 ; [$a2a4]
+                                                                       ; byte
+    db $31,$02,$ff,$3a,$02,$3b,$02,$ff,$ff,$ff,$ff,$3a,$02,$2a,$02,$ff ; [$a2b4]
+                                                                       ; byte
+    db $ff,$ff,$ff,$66,$02,$3a,$02,$ff,$ff,$ff,$ff,$3d,$02,$3a,$02,$ff ; [$a2c4]
+                                                                       ; byte
+    db $ff,$ff,$ff,$40,$02,$66,$02,$ff,$ff,$ff,$ff,$67,$02,$68,$02,$ff ; [$a2d4]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9150]
+;     TILES_SPRITES_ADDRS [$PRG7::9150]
 ;
-DAT_PRG7__a2e4:                             ; [$a2e4]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a2e4] undefined
-    hex 02 04 02 51 02 52 02 53 02 54 02 55 02 14 02 47 ; [$a2f4] undefined
-    hex 02 48 02 0b 02 5a 02 10 02 11 02 49 02 4a 02 43 ; [$a304] undefined
-    hex 02 44 02 20 02 21 02 2a 02 ff 45 02 46 02 23 02 ; [$a314] undefined
-    hex ff 3a 02 ff ff 2a 02 ff ff 3a 02 ff ff 3a 02 ff ; [$a324] undefined
-    hex ff 66 02 ff ff 3a 02 ff ff 3d 02 ff ff 66 02 ff ; [$a334] undefined
-    hex ff 40 02 ff 67 02 68 02             ; [$a344] undefined
+BYTE_PRG7__a2e4:                            ; [$a2e4]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a2e4]
+                                                                       ; byte
+    db $02,$04,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$14,$02,$47 ; [$a2f4]
+                                                                       ; byte
+    db $02,$48,$02,$0b,$02,$5a,$02,$10,$02,$11,$02,$49,$02,$4a,$02,$43 ; [$a304]
+                                                                       ; byte
+    db $02,$44,$02,$20,$02,$21,$02,$2a,$02,$ff,$45,$02,$46,$02,$23,$02 ; [$a314]
+                                                                       ; byte
+    db $ff,$3a,$02,$ff,$ff,$2a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff ; [$a324]
+                                                                       ; byte
+    db $ff,$66,$02,$ff,$ff,$3a,$02,$ff,$ff,$3d,$02,$ff,$ff,$66,$02,$ff ; [$a334]
+                                                                       ; byte
+    db $ff,$40,$02,$ff,$67,$02,$68,$02      ; [$a344] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9152]
+;     TILES_SPRITES_ADDRS [$PRG7::9152]
 ;
-DAT_PRG7__a34c:                             ; [$a34c]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a34c] undefined
-    hex 02 50 02 51 02 52 02 53 02 54 02 55 02 56 02 57 ; [$a35c] undefined
-    hex 02 0f 02 59 02 5a 02 5b 02 5c 02 1e 02 1f 02 43 ; [$a36c] undefined
-    hex 02 44 02 61 02 62 02 2e 02 ff 45 02 46 02 ff ff ; [$a37c] undefined
-    hex 2a 02 ff ff 2a 02 ff ff 3a 02 ff ff 3a 02 ff ff ; [$a38c] undefined
-    hex 3a 02 ff ff 3a 02 ff ff 66 02 ff ff 66 02 ff 67 ; [$a39c] undefined
-    hex 02 68 02 ff 67 02 68 02             ; [$a3ac] undefined
+BYTE_PRG7__a34c:                            ; [$a34c]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a34c]
+                                                                       ; byte
+    db $02,$50,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$57 ; [$a35c]
+                                                                       ; byte
+    db $02,$0f,$02,$59,$02,$5a,$02,$5b,$02,$5c,$02,$1e,$02,$1f,$02,$43 ; [$a36c]
+                                                                       ; byte
+    db $02,$44,$02,$61,$02,$62,$02,$2e,$02,$ff,$45,$02,$46,$02,$ff,$ff ; [$a37c]
+                                                                       ; byte
+    db $2a,$02,$ff,$ff,$2a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff ; [$a38c]
+                                                                       ; byte
+    db $3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$66,$02,$ff,$ff,$66,$02,$ff,$67 ; [$a39c]
+                                                                       ; byte
+    db $02,$68,$02,$ff,$67,$02,$68,$02      ; [$a3ac] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9154]
+;     TILES_SPRITES_ADDRS [$PRG7::9154]
 ;
-DAT_PRG7__a3b4:                             ; [$a3b4]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a3b4] undefined
-    hex 02 50 02 51 02 52 02 53 02 54 02 55 02 56 02 0e ; [$a3c4] undefined
-    hex 02 0f 02 0b 02 42 02 5b 02 5c 02 1e 02 1f 02 4b ; [$a3d4] undefined
-    hex 02 4c 02 61 02 62 02 2e 02 ff ff 4d 02 ff ff 2a ; [$a3e4] undefined
-    hex 02 ff ff 3a 02 ff ff 3a 02 ff ff 3a 02 ff ff 3a ; [$a3f4] undefined
-    hex 02 ff ff 66 02 ff ff 66 02 ff ff 3d 02 ff 67 02 ; [$a404] undefined
-    db $68,$02,$ff,$ff,$40,$02              ; [$a414] undefined
+BYTE_PRG7__a3b4:                            ; [$a3b4]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a3b4]
+                                                                       ; byte
+    db $02,$50,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$0e ; [$a3c4]
+                                                                       ; byte
+    db $02,$0f,$02,$0b,$02,$42,$02,$5b,$02,$5c,$02,$1e,$02,$1f,$02,$4b ; [$a3d4]
+                                                                       ; byte
+    db $02,$4c,$02,$61,$02,$62,$02,$2e,$02,$ff,$ff,$4d,$02,$ff,$ff,$2a ; [$a3e4]
+                                                                       ; byte
+    db $02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a ; [$a3f4]
+                                                                       ; byte
+    db $02,$ff,$ff,$66,$02,$ff,$ff,$66,$02,$ff,$ff,$3d,$02,$ff,$67,$02 ; [$a404]
+                                                                       ; byte
+    db $68,$02,$ff,$ff,$40,$02              ; [$a414] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9156]
+;     TILES_SPRITES_ADDRS [$PRG7::9156]
 ;
-DAT_PRG7__a41a:                             ; [$a41a]
-    hex a5 00 f8 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a41a] undefined
-    hex 02 04 02 51 02 52 02 53 02 54 02 55 02 14 02 57 ; [$a42a] undefined
-    hex 02 0f 02 0d 02 5a 02 10 02 11 02 12 02 1c 02 1d ; [$a43a] undefined
-    hex 02 3c 02 20 02 21 02 22 02 2c 02 2d 02 ff 23 02 ; [$a44a] undefined
-    hex ff ff 18 02 3a 02 ff ff ff ff 2a 02 3a 02 ff ff ; [$a45a] undefined
-    hex ff ff 3a 02 66 02 ff ff ff ff 3a 02 3d 02 ff ff ; [$a46a] undefined
-    hex ff ff 66 02 40 02 ff ff ff 67 02 68 02 ff ff ; [$a47a] undefined
+BYTE_PRG7__a41a:                            ; [$a41a]
+    db $a5,$00,$f8,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a41a]
+                                                                       ; byte
+    db $02,$04,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$14,$02,$57 ; [$a42a]
+                                                                       ; byte
+    db $02,$0f,$02,$0d,$02,$5a,$02,$10,$02,$11,$02,$12,$02,$1c,$02,$1d ; [$a43a]
+                                                                       ; byte
+    db $02,$3c,$02,$20,$02,$21,$02,$22,$02,$2c,$02,$2d,$02,$ff,$23,$02 ; [$a44a]
+                                                                       ; byte
+    db $ff,$ff,$18,$02,$3a,$02,$ff,$ff,$ff,$ff,$2a,$02,$3a,$02,$ff,$ff ; [$a45a]
+                                                                       ; byte
+    db $ff,$ff,$3a,$02,$66,$02,$ff,$ff,$ff,$ff,$3a,$02,$3d,$02,$ff,$ff ; [$a46a]
+                                                                       ; byte
+    db $ff,$ff,$66,$02,$40,$02,$ff,$ff,$ff,$67,$02,$68,$02,$ff,$ff ; [$a47a]
+                                                                   ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9158]
+;     TILES_SPRITES_ADDRS [$PRG7::9158]
 ;
-DAT_PRG7__a489:                             ; [$a489]
-    hex a5 00 f8 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a489] undefined
-    hex 02 03 02 51 02 52 02 53 02 54 02 55 02 13 02 05 ; [$a499] undefined
-    hex 02 06 02 59 02 5a 02 24 02 25 02 15 02 16 02 35 ; [$a4a9] undefined
-    hex 02 3c 02 27 02 28 02 29 02 34 02 36 02 ff 30 02 ; [$a4b9] undefined
-    hex 31 02 ff 3a 02 18 02 ff ff ff ff 3a 02 2a 02 ff ; [$a4c9] undefined
-    hex ff ff ff 66 02 3a 02 ff ff ff ff 3d 02 3a 02 ff ; [$a4d9] undefined
-    hex ff ff ff 40 02 66 02 ff ff ff ff 67 02 68 02 ff ; [$a4e9] undefined
+BYTE_PRG7__a489:                            ; [$a489]
+    db $a5,$00,$f8,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a489]
+                                                                       ; byte
+    db $02,$03,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$13,$02,$05 ; [$a499]
+                                                                       ; byte
+    db $02,$06,$02,$59,$02,$5a,$02,$24,$02,$25,$02,$15,$02,$16,$02,$35 ; [$a4a9]
+                                                                       ; byte
+    db $02,$3c,$02,$27,$02,$28,$02,$29,$02,$34,$02,$36,$02,$ff,$30,$02 ; [$a4b9]
+                                                                       ; byte
+    db $31,$02,$ff,$3a,$02,$18,$02,$ff,$ff,$ff,$ff,$3a,$02,$2a,$02,$ff ; [$a4c9]
+                                                                       ; byte
+    db $ff,$ff,$ff,$66,$02,$3a,$02,$ff,$ff,$ff,$ff,$3d,$02,$3a,$02,$ff ; [$a4d9]
+                                                                       ; byte
+    db $ff,$ff,$ff,$40,$02,$66,$02,$ff,$ff,$ff,$ff,$67,$02,$68,$02,$ff ; [$a4e9]
+                                                                       ; byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::915a]
+;     TILES_SPRITES_ADDRS [$PRG7::915a]
 ;
-DAT_PRG7__a4f9:                             ; [$a4f9]
-    hex 95 00 00 18 ff 00 02 2f 02 3e 02 3f 02 4e 02 4f ; [$a4f9] undefined
-    hex 02 02 02 51 02 52 02 53 02 54 02 55 02 56 02 57 ; [$a509] undefined
-    hex 02 58 02 59 02 5a 02 5b 02 5c 02 5d 02 5e 02 5f ; [$a519] undefined
-    hex 02 60 02 61 02 62 02 01 02 ff ff 18 02 ff ff 3a ; [$a529] undefined
-    hex 02 ff ff 2a 02 ff ff 3a 02 ff ff 3a 02 ff ff 66 ; [$a539] undefined
-    hex 02 ff ff 3a 02 ff ff 3d 02 ff ff 66 02 ff ff 40 ; [$a549] undefined
-    db $02,$ff,$67,$02,$68,$02              ; [$a559] undefined
+BYTE_PRG7__a4f9:                            ; [$a4f9]
+    db $95,$00,$00,$18,$ff,$00,$02,$2f,$02,$3e,$02,$3f,$02,$4e,$02,$4f ; [$a4f9]
+                                                                       ; byte
+    db $02,$02,$02,$51,$02,$52,$02,$53,$02,$54,$02,$55,$02,$56,$02,$57 ; [$a509]
+                                                                       ; byte
+    db $02,$58,$02,$59,$02,$5a,$02,$5b,$02,$5c,$02,$5d,$02,$5e,$02,$5f ; [$a519]
+                                                                       ; byte
+    db $02,$60,$02,$61,$02,$62,$02,$01,$02,$ff,$ff,$18,$02,$ff,$ff,$3a ; [$a529]
+                                                                       ; byte
+    db $02,$ff,$ff,$2a,$02,$ff,$ff,$3a,$02,$ff,$ff,$3a,$02,$ff,$ff,$66 ; [$a539]
+                                                                       ; byte
+    db $02,$ff,$ff,$3a,$02,$ff,$ff,$3d,$02,$ff,$ff,$66,$02,$ff,$ff,$40 ; [$a549]
+                                                                       ; byte
+    db $02,$ff,$67,$02,$68,$02              ; [$a559] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9160]
+;     TILES_SPRITES_ADDRS [$PRG7::9160]
 ;
-DAT_PRG7__a55f:                             ; [$a55f]
-    hex 11 00 00 08 50 00 51 00 50 80 51 80 ; [$a55f] undefined
+BYTE_PRG7__a55f:                            ; [$a55f]
+    db $11,$00,$00,$08,$50,$00,$51,$00,$50,$80,$51,$80 ; [$a55f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9162]
+;     TILES_SPRITES_ADDRS [$PRG7::9162]
 ;
-DAT_PRG7__a56b:                             ; [$a56b]
-    hex 11 00 00 08 52 00 53 00 52 80 53 80 ; [$a56b] undefined
+BYTE_PRG7__a56b:                            ; [$a56b]
+    db $11,$00,$00,$08,$52,$00,$53,$00,$52,$80,$53,$80 ; [$a56b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9164]
+;     TILES_SPRITES_ADDRS [$PRG7::9164]
 ;
-DAT_PRG7__a577:                             ; [$a577]
-    hex 11 00 00 08 54 00 55 00 54 80 55 80 ; [$a577] undefined
+BYTE_PRG7__a577:                            ; [$a577]
+    db $11,$00,$00,$08,$54,$00,$55,$00,$54,$80,$55,$80 ; [$a577] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9166]
+;     TILES_SPRITES_ADDRS [$PRG7::9166]
 ;
-DAT_PRG7__a583:                             ; [$a583]
-    hex 11 00 00 08 56 00 57 00 56 80 57 80 ; [$a583] undefined
+BYTE_PRG7__a583:                            ; [$a583]
+    db $11,$00,$00,$08,$56,$00,$57,$00,$56,$80,$57,$80 ; [$a583] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9168]
+;     TILES_SPRITES_ADDRS [$PRG7::9168]
 ;
-DAT_PRG7__a58f:                             ; [$a58f]
-    hex 11 00 08 08 46 01 47 01 46 81 47 81 ; [$a58f] undefined
+BYTE_PRG7__a58f:                            ; [$a58f]
+    db $11,$00,$08,$08,$46,$01,$47,$01,$46,$81,$47,$81 ; [$a58f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::916a]
+;     TILES_SPRITES_ADDRS [$PRG7::916a]
 ;
-DAT_PRG7__a59b:                             ; [$a59b]
-    hex 31 00 00 08 48 01 49 01 58 01 59 01 58 81 59 81 ; [$a59b] undefined
-    db $48,$81,$49,$81                      ; [$a5ab] undefined
+BYTE_PRG7__a59b:                            ; [$a59b]
+    db $31,$00,$00,$08,$48,$01,$49,$01,$58,$01,$59,$01,$58,$81,$59,$81 ; [$a59b]
+                                                                       ; byte
+    db $48,$81,$49,$81                      ; [$a5ab] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::916c]
+;     TILES_SPRITES_ADDRS [$PRG7::916c]
 ;
-DAT_PRG7__a5af:                             ; [$a5af]
-    hex 31 00 00 08 65 00 66 00 7a 00 7b 00 7a 80 7b 80 ; [$a5af] undefined
-    db $65,$80,$66,$80                      ; [$a5bf] undefined
+BYTE_PRG7__a5af:                            ; [$a5af]
+    db $31,$00,$00,$08,$65,$00,$66,$00,$7a,$00,$7b,$00,$7a,$80,$7b,$80 ; [$a5af]
+                                                                       ; byte
+    db $65,$80,$66,$80                      ; [$a5bf] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::916e]
+;     TILES_SPRITES_ADDRS [$PRG7::916e]
 ;
-DAT_PRG7__a5c3:                             ; [$a5c3]
-    hex 31 00 00 08 ff 7e 00 7c 00 7d 00 7c 80 7d 80 ff ; [$a5c3] undefined
-    db $66,$80                              ; [$a5d3] undefined
+BYTE_PRG7__a5c3:                            ; [$a5c3]
+    db $31,$00,$00,$08,$ff,$7e,$00,$7c,$00,$7d,$00,$7c,$80,$7d,$80,$ff ; [$a5c3]
+                                                                       ; byte
+    db $66,$80                              ; [$a5d3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9170]
+;     TILES_SPRITES_ADDRS [$PRG7::9170]
 ;
-DAT_PRG7__a5d5:                             ; [$a5d5]
-    hex 11 00 00 08 4d 00 4e 00 5d 00 5e 00 ; [$a5d5] undefined
+BYTE_PRG7__a5d5:                            ; [$a5d5]
+    db $11,$00,$00,$08,$4d,$00,$4e,$00,$5d,$00,$5e,$00 ; [$a5d5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9172]
+;     TILES_SPRITES_ADDRS [$PRG7::9172]
 ;
-DAT_PRG7__a5e1:                             ; [$a5e1]
-    hex 11 00 00 08 63 00 64 00 6a 00 6b 00 ; [$a5e1] undefined
+BYTE_PRG7__a5e1:                            ; [$a5e1]
+    db $11,$00,$00,$08,$63,$00,$64,$00,$6a,$00,$6b,$00 ; [$a5e1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9174]
+;     TILES_SPRITES_ADDRS [$PRG7::9174]
 ;
-DAT_PRG7__a5ed:                             ; [$a5ed]
-    hex 11 00 00 08 5e c0 5d c0 4e c0 4d c0 ; [$a5ed] undefined
+BYTE_PRG7__a5ed:                            ; [$a5ed]
+    db $11,$00,$00,$08,$5e,$c0,$5d,$c0,$4e,$c0,$4d,$c0 ; [$a5ed] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9176]
+;     TILES_SPRITES_ADDRS [$PRG7::9176]
 ;
-DAT_PRG7__a5f9:                             ; [$a5f9]
-    hex 11 00 00 08 6b c0 6a c0 64 c0 63 c0 ; [$a5f9] undefined
+BYTE_PRG7__a5f9:                            ; [$a5f9]
+    db $11,$00,$00,$08,$6b,$c0,$6a,$c0,$64,$c0,$63,$c0 ; [$a5f9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9178]
+;     TILES_SPRITES_ADDRS [$PRG7::9178]
 ;
-DAT_PRG7__a605:                             ; [$a605]
-    db $00,$00,$00,$04,$4a,$00              ; [$a605] undefined
+BYTE_PRG7__a605:                            ; [$a605]
+    db $00,$00,$00,$04,$4a,$00              ; [$a605] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::917a]
+;     TILES_SPRITES_ADDRS [$PRG7::917a]
 ;
-DAT_PRG7__a60b:                             ; [$a60b]
-    db $00,$00,$00,$04,$5a,$00              ; [$a60b] undefined
+BYTE_PRG7__a60b:                            ; [$a60b]
+    db $00,$00,$00,$04,$5a,$00              ; [$a60b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::917c]
+;     TILES_SPRITES_ADDRS [$PRG7::917c]
 ;
-DAT_PRG7__a611:                             ; [$a611]
-    hex 11 00 00 08 60 00 61 00 67 00 68 00 ; [$a611] undefined
+BYTE_PRG7__a611:                            ; [$a611]
+    db $11,$00,$00,$08,$60,$00,$61,$00,$67,$00,$68,$00 ; [$a611] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::917e]
+;     TILES_SPRITES_ADDRS [$PRG7::917e]
 ;
-DAT_PRG7__a61d:                             ; [$a61d]
-    hex 11 00 00 08 62 00 6c 00 69 00 6d 00 ; [$a61d] undefined
+BYTE_PRG7__a61d:                            ; [$a61d]
+    db $11,$00,$00,$08,$62,$00,$6c,$00,$69,$00,$6d,$00 ; [$a61d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9180]
+;     TILES_SPRITES_ADDRS [$PRG7::9180]
 ;
-DAT_PRG7__a629:                             ; [$a629]
-    hex 11 00 00 08 6e 00 6f 00 70 00 71 00 ; [$a629] undefined
+BYTE_PRG7__a629:                            ; [$a629]
+    db $11,$00,$00,$08,$6e,$00,$6f,$00,$70,$00,$71,$00 ; [$a629] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9182]
+;     TILES_SPRITES_ADDRS [$PRG7::9182]
 ;
-DAT_PRG7__a635:                             ; [$a635]
-    hex 11 00 00 08 70 80 71 80 6e 80 6f 80 ; [$a635] undefined
+BYTE_PRG7__a635:                            ; [$a635]
+    db $11,$00,$00,$08,$70,$80,$71,$80,$6e,$80,$6f,$80 ; [$a635] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9184]
+;     TILES_SPRITES_ADDRS [$PRG7::9184]
 ;
-DAT_PRG7__a641:                             ; [$a641]
-    hex 11 00 00 08 6f 40 6e 40 71 40 70 40 ; [$a641] undefined
+BYTE_PRG7__a641:                            ; [$a641]
+    db $11,$00,$00,$08,$6f,$40,$6e,$40,$71,$40,$70,$40 ; [$a641] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9186]
+;     TILES_SPRITES_ADDRS [$PRG7::9186]
 ;
-DAT_PRG7__a64d:                             ; [$a64d]
-    hex 11 00 00 08 71 c0 70 c0 6f c0 6e c0 ; [$a64d] undefined
+BYTE_PRG7__a64d:                            ; [$a64d]
+    db $11,$00,$00,$08,$71,$c0,$70,$c0,$6f,$c0,$6e,$c0 ; [$a64d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91a4]
+;     TILES_SPRITES_ADDRS [$PRG7::91a4]
 ;
-DAT_PRG7__a659:                             ; [$a659]
-    hex 11 00 00 08 00 03 01 03 02 03 03 03 ; [$a659] undefined
+BYTE_PRG7__a659:                            ; [$a659]
+    db $11,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03 ; [$a659] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91a6]
+;     TILES_SPRITES_ADDRS [$PRG7::91a6]
 ;
-DAT_PRG7__a665:                             ; [$a665]
-    hex 11 00 00 08 04 03 05 03 06 03 07 03 ; [$a665] undefined
+BYTE_PRG7__a665:                            ; [$a665]
+    db $11,$00,$00,$08,$04,$03,$05,$03,$06,$03,$07,$03 ; [$a665] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91a8]
+;     TILES_SPRITES_ADDRS [$PRG7::91a8]
 ;
-DAT_PRG7__a671:                             ; [$a671]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$a671] undefined
-    db $06,$03,$07,$03                      ; [$a681] undefined
+BYTE_PRG7__a671:                            ; [$a671]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a671]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a681] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91aa]
+;     TILES_SPRITES_ADDRS [$PRG7::91aa]
 ;
-DAT_PRG7__a685:                             ; [$a685]
-    hex 31 00 00 08 08 03 09 03 0a 03 03 03 04 03 05 03 ; [$a685] undefined
-    db $06,$03,$07,$03                      ; [$a695] undefined
+BYTE_PRG7__a685:                            ; [$a685]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$03,$03,$04,$03,$05,$03 ; [$a685]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a695] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ac]
+;     TILES_SPRITES_ADDRS [$PRG7::91ac]
 ;
-DAT_PRG7__a699:                             ; [$a699]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$a699] undefined
-    db $06,$03,$07,$03                      ; [$a6a9] undefined
+BYTE_PRG7__a699:                            ; [$a699]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a699]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a6a9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ae]
+;     TILES_SPRITES_ADDRS [$PRG7::91ae]
 ;
-DAT_PRG7__a6ad:                             ; [$a6ad]
-    hex 31 00 00 08 08 03 01 03 09 03 03 03 0a 03 05 03 ; [$a6ad] undefined
-    db $06,$03,$07,$03                      ; [$a6bd] undefined
+BYTE_PRG7__a6ad:                            ; [$a6ad]
+    db $31,$00,$00,$08,$08,$03,$01,$03,$09,$03,$03,$03,$0a,$03,$05,$03 ; [$a6ad]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a6bd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91b0]
+;     TILES_SPRITES_ADDRS [$PRG7::91b0]
 ;
-DAT_PRG7__a6c1:                             ; [$a6c1]
-    hex 32 f8 00 10 ff 00 00 01 00 ff 02 00 03 00 04 00 ; [$a6c1] undefined
-    db $ff,$ff,$05,$00,$ff,$ff              ; [$a6d1] undefined
+BYTE_PRG7__a6c1:                            ; [$a6c1]
+    db $32,$f8,$00,$10,$ff,$00,$00,$01,$00,$ff,$02,$00,$03,$00,$04,$00 ; [$a6c1]
+                                                                       ; byte
+    db $ff,$ff,$05,$00,$ff,$ff              ; [$a6d1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91b2]
+;     TILES_SPRITES_ADDRS [$PRG7::91b2]
 ;
-DAT_PRG7__a6d7:                             ; [$a6d7]
-    hex 32 f8 00 10 ff 06 00 01 00 ff 07 00 03 00 04 00 ; [$a6d7] undefined
-    db $ff,$ff,$05,$00,$ff,$ff              ; [$a6e7] undefined
+BYTE_PRG7__a6d7:                            ; [$a6d7]
+    db $32,$f8,$00,$10,$ff,$06,$00,$01,$00,$ff,$07,$00,$03,$00,$04,$00 ; [$a6d7]
+                                                                       ; byte
+    db $ff,$ff,$05,$00,$ff,$ff              ; [$a6e7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91b4]
+;     TILES_SPRITES_ADDRS [$PRG7::91b4]
 ;
-DAT_PRG7__a6ed:                             ; [$a6ed]
-    hex 31 00 00 08 08 00 09 00 0a 00 0b 00 0c 00 0d 00 ; [$a6ed] undefined
-    db $0e,$00,$0f,$00                      ; [$a6fd] undefined
+BYTE_PRG7__a6ed:                            ; [$a6ed]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$0a,$00,$0b,$00,$0c,$00,$0d,$00 ; [$a6ed]
+                                                                       ; byte
+    db $0e,$00,$0f,$00                      ; [$a6fd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91b6]
+;     TILES_SPRITES_ADDRS [$PRG7::91b6]
 ;
-DAT_PRG7__a701:                             ; [$a701]
-    hex 31 00 00 08 08 00 09 00 10 00 11 00 12 00 13 00 ; [$a701] undefined
-    db $0e,$00,$0f,$00                      ; [$a711] undefined
+BYTE_PRG7__a701:                            ; [$a701]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$10,$00,$11,$00,$12,$00,$13,$00 ; [$a701]
+                                                                       ; byte
+    db $0e,$00,$0f,$00                      ; [$a711] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91b8]
+;     TILES_SPRITES_ADDRS [$PRG7::91b8]
 ;
-DAT_PRG7__a715:                             ; [$a715]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$a715] undefined
-    db $06,$03,$07,$03                      ; [$a725] undefined
+BYTE_PRG7__a715:                            ; [$a715]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a715]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a725] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ba]
+;     TILES_SPRITES_ADDRS [$PRG7::91ba]
 ;
-DAT_PRG7__a729:                             ; [$a729]
-    hex 31 00 00 08 08 03 01 03 09 03 03 03 0a 03 05 03 ; [$a729] undefined
-    db $0b,$03,$07,$03                      ; [$a739] undefined
+BYTE_PRG7__a729:                            ; [$a729]
+    db $31,$00,$00,$08,$08,$03,$01,$03,$09,$03,$03,$03,$0a,$03,$05,$03 ; [$a729]
+                                                                       ; byte
+    db $0b,$03,$07,$03                      ; [$a739] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91bc]
+;     TILES_SPRITES_ADDRS [$PRG7::91bc]
 ;
-DAT_PRG7__a73d:                             ; [$a73d]
-    hex 31 00 00 08 00 03 01 02 02 03 03 02 04 03 05 02 ; [$a73d] undefined
-    db $06,$03,$ff                          ; [$a74d] undefined
+BYTE_PRG7__a73d:                            ; [$a73d]
+    db $31,$00,$00,$08,$00,$03,$01,$02,$02,$03,$03,$02,$04,$03,$05,$02 ; [$a73d]
+                                                                       ; byte
+    db $06,$03,$ff                          ; [$a74d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91be]
+;     TILES_SPRITES_ADDRS [$PRG7::91be]
 ;
-DAT_PRG7__a750:                             ; [$a750]
-    hex 31 00 00 08 07 03 01 02 02 03 03 02 04 03 05 02 ; [$a750] undefined
-    db $06,$03,$ff                          ; [$a760] undefined
+BYTE_PRG7__a750:                            ; [$a750]
+    db $31,$00,$00,$08,$07,$03,$01,$02,$02,$03,$03,$02,$04,$03,$05,$02 ; [$a750]
+                                                                       ; byte
+    db $06,$03,$ff                          ; [$a760] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91c0]
+;     TILES_SPRITES_ADDRS [$PRG7::91c0]
 ;
-DAT_PRG7__a763:                             ; [$a763]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$a763] undefined
-    db $06,$03,$07,$03                      ; [$a773] undefined
+BYTE_PRG7__a763:                            ; [$a763]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a763]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a773] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91c2]
+;     TILES_SPRITES_ADDRS [$PRG7::91c2]
 ;
-DAT_PRG7__a777:                             ; [$a777]
-    hex 31 00 00 08 08 03 09 03 02 03 03 03 04 03 05 03 ; [$a777] undefined
-    db $06,$03,$07,$03                      ; [$a787] undefined
+BYTE_PRG7__a777:                            ; [$a777]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a777]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a787] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91c4]
+;     TILES_SPRITES_ADDRS [$PRG7::91c4]
 ;
-DAT_PRG7__a78b:                             ; [$a78b]
-    hex 32 f8 00 10 ff 00 03 01 03 ff 02 03 03 03 04 03 ; [$a78b] undefined
-    hex 05 03 06 03 07 03 08 03 09 03       ; [$a79b] undefined
+BYTE_PRG7__a78b:                            ; [$a78b]
+    db $32,$f8,$00,$10,$ff,$00,$03,$01,$03,$ff,$02,$03,$03,$03,$04,$03 ; [$a78b]
+                                                                       ; byte
+    db $05,$03,$06,$03,$07,$03,$08,$03,$09,$03 ; [$a79b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91c6]
+;     TILES_SPRITES_ADDRS [$PRG7::91c6]
 ;
-DAT_PRG7__a7a5:                             ; [$a7a5]
-    hex 32 f8 00 10 ff 0a 03 0b 03 ff 0c 03 03 03 04 03 ; [$a7a5] undefined
-    hex 0d 03 06 03 07 03 08 03 09 03       ; [$a7b5] undefined
+BYTE_PRG7__a7a5:                            ; [$a7a5]
+    db $32,$f8,$00,$10,$ff,$0a,$03,$0b,$03,$ff,$0c,$03,$03,$03,$04,$03 ; [$a7a5]
+                                                                       ; byte
+    db $0d,$03,$06,$03,$07,$03,$08,$03,$09,$03 ; [$a7b5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91c8]
+;     TILES_SPRITES_ADDRS [$PRG7::91c8]
 ;
-DAT_PRG7__a7bf:                             ; [$a7bf]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 03 05 03 ; [$a7bf] undefined
-    db $06,$03,$07,$03                      ; [$a7cf] undefined
+BYTE_PRG7__a7bf:                            ; [$a7bf]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a7bf]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a7cf] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ca]
+;     TILES_SPRITES_ADDRS [$PRG7::91ca]
 ;
-DAT_PRG7__a7d3:                             ; [$a7d3]
-    hex 31 00 00 08 00 03 01 03 08 03 09 03 04 03 05 03 ; [$a7d3] undefined
-    db $06,$03,$07,$03                      ; [$a7e3] undefined
+BYTE_PRG7__a7d3:                            ; [$a7d3]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$08,$03,$09,$03,$04,$03,$05,$03 ; [$a7d3]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a7e3] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91cc]
+;     TILES_SPRITES_ADDRS [$PRG7::91cc]
 ;
-DAT_PRG7__a7e7:                             ; [$a7e7]
-    hex 31 00 00 08 00 03 01 03 02 00 03 00 04 00 05 00 ; [$a7e7] undefined
-    db $06,$03,$07,$03                      ; [$a7f7] undefined
+BYTE_PRG7__a7e7:                            ; [$a7e7]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$00,$03,$00,$04,$00,$05,$00 ; [$a7e7]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a7f7] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ce]
+;     TILES_SPRITES_ADDRS [$PRG7::91ce]
 ;
-DAT_PRG7__a7fb:                             ; [$a7fb]
-    hex 31 00 00 08 08 03 01 03 09 00 03 00 0a 00 05 00 ; [$a7fb] undefined
-    db $0b,$03,$0c,$03                      ; [$a80b] undefined
+BYTE_PRG7__a7fb:                            ; [$a7fb]
+    db $31,$00,$00,$08,$08,$03,$01,$03,$09,$00,$03,$00,$0a,$00,$05,$00 ; [$a7fb]
+                                                                       ; byte
+    db $0b,$03,$0c,$03                      ; [$a80b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91d0]
+;     TILES_SPRITES_ADDRS [$PRG7::91d0]
 ;
-DAT_PRG7__a80f:                             ; [$a80f]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 02 05 02 ; [$a80f] undefined
-    db $06,$02,$07,$02                      ; [$a81f] undefined
+BYTE_PRG7__a80f:                            ; [$a80f]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$02,$05,$02 ; [$a80f]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$a81f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91d2]
+;     TILES_SPRITES_ADDRS [$PRG7::91d2]
 ;
-DAT_PRG7__a823:                             ; [$a823]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 03 0c 02 0d 02 ; [$a823] undefined
-    db $0e,$02,$0f,$02                      ; [$a833] undefined
+BYTE_PRG7__a823:                            ; [$a823]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$03,$0c,$02,$0d,$02 ; [$a823]
+                                                                       ; byte
+    db $0e,$02,$0f,$02                      ; [$a833] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91d4]
+;     TILES_SPRITES_ADDRS [$PRG7::91d4]
 ;
-DAT_PRG7__a837:                             ; [$a837]
-    hex 31 00 00 08 00 03 01 03 02 03 03 02 04 03 05 02 ; [$a837] undefined
-    db $06,$03,$07,$03                      ; [$a847] undefined
+BYTE_PRG7__a837:                            ; [$a837]
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$02,$04,$03,$05,$02 ; [$a837]
+                                                                       ; byte
+    db $06,$03,$07,$03                      ; [$a847] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91d6]
+;     TILES_SPRITES_ADDRS [$PRG7::91d6]
 ;
-DAT_PRG7__a84b:                             ; [$a84b]
-    hex 31 00 00 08 08 03 09 03 0a 03 0b 02 0c 03 0d 02 ; [$a84b] undefined
-    db $0e,$03,$0f,$03                      ; [$a85b] undefined
+BYTE_PRG7__a84b:                            ; [$a84b]
+    db $31,$00,$00,$08,$08,$03,$09,$03,$0a,$03,$0b,$02,$0c,$03,$0d,$02 ; [$a84b]
+                                                                       ; byte
+    db $0e,$03,$0f,$03                      ; [$a85b] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91d8]
+;     TILES_SPRITES_ADDRS [$PRG7::91d8]
 ;
-DAT_PRG7__a85f:                             ; [$a85f]
-    hex 31 00 00 08 00 03 01 02 02 03 03 02 04 03 05 02 ; [$a85f] undefined
-    db $06,$03,$ff                          ; [$a86f] undefined
+BYTE_PRG7__a85f:                            ; [$a85f]
+    db $31,$00,$00,$08,$00,$03,$01,$02,$02,$03,$03,$02,$04,$03,$05,$02 ; [$a85f]
+                                                                       ; byte
+    db $06,$03,$ff                          ; [$a86f] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91da]
+;     TILES_SPRITES_ADDRS [$PRG7::91da]
 ;
-DAT_PRG7__a872:                             ; [$a872]
-    hex 31 00 00 08 07 03 01 02 08 03 03 02 09 03 05 02 ; [$a872] undefined
-    db $0a,$03,$ff                          ; [$a882] undefined
+BYTE_PRG7__a872:                            ; [$a872]
+    db $31,$00,$00,$08,$07,$03,$01,$02,$08,$03,$03,$02,$09,$03,$05,$02 ; [$a872]
+                                                                       ; byte
+    db $0a,$03,$ff                          ; [$a882] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91dc]
+;     TILES_SPRITES_ADDRS [$PRG7::91dc]
 ;
-DAT_PRG7__a885:                             ; [$a885]
-    hex 31 00 00 08 00 02 01 02 02 03 03 03 04 03 05 03 ; [$a885] undefined
-    db $06,$02,$07,$02                      ; [$a895] undefined
+BYTE_PRG7__a885:                            ; [$a885]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$02,$03,$03,$03,$04,$03,$05,$03 ; [$a885]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$a895] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91de]
+;     TILES_SPRITES_ADDRS [$PRG7::91de]
 ;
-DAT_PRG7__a899:                             ; [$a899]
-    hex 31 00 00 08 00 02 01 02 08 03 09 03 0a 03 0b 03 ; [$a899] undefined
-    db $0c,$02,$0d,$02                      ; [$a8a9] undefined
+BYTE_PRG7__a899:                            ; [$a899]
+    db $31,$00,$00,$08,$00,$02,$01,$02,$08,$03,$09,$03,$0a,$03,$0b,$03 ; [$a899]
+                                                                       ; byte
+    db $0c,$02,$0d,$02                      ; [$a8a9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91e0]
+;     TILES_SPRITES_ADDRS [$PRG7::91e0]
 ;
 ANIM_INFO_NPC_BLUE_LADY_WALKING_1:          ; [$a8ad]
-    hex 31 00 00 08 00 03 01 03 02 03 03 03 04 02 05 02 ; [$a8ad] undefined
-    db $06,$02,$07,$02                      ; [$a8bd] undefined
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$03,$03,$04,$02,$05,$02 ; [$a8ad]
+                                                                       ; byte
+    db $06,$02,$07,$02                      ; [$a8bd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91e2]
+;     TILES_SPRITES_ADDRS [$PRG7::91e2]
 ;
 ANIM_INFO_NPC_BLUE_LADY_WALKING_2:          ; [$a8c1]
-    hex 31 00 00 08 00 03 01 03 02 03 08 03 09 02 0a 02 ; [$a8c1] undefined
-    db $0b,$02,$0c,$02                      ; [$a8d1] undefined
+    db $31,$00,$00,$08,$00,$03,$01,$03,$02,$03,$08,$03,$09,$02,$0a,$02 ; [$a8c1]
+                                                                       ; byte
+    db $0b,$02,$0c,$02                      ; [$a8d1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ec]
+;     TILES_SPRITES_ADDRS [$PRG7::91ec]
 ;
-DAT_PRG7__a8d5:                             ; [$a8d5]
-    hex 01 00 08 08 45 00 4f 00             ; [$a8d5] undefined
+BYTE_PRG7__a8d5:                            ; [$a8d5]
+    db $01,$00,$08,$08,$45,$00,$4f,$00      ; [$a8d5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91ee]
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91f6]
+;     TILES_SPRITES_ADDRS [$PRG7::91ee]
+;     TILES_SPRITES_ADDRS [$PRG7::91f6]
 ;
-DAT_PRG7__a8dd:                             ; [$a8dd]
-    hex 10 00 00 04 00 00 01 00             ; [$a8dd] undefined
+BYTE_PRG7__a8dd:                            ; [$a8dd]
+    db $10,$00,$00,$04,$00,$00,$01,$00      ; [$a8dd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91f4]
+;     TILES_SPRITES_ADDRS [$PRG7::91f4]
 ;
-DAT_PRG7__a8e5:                             ; [$a8e5]
-    hex 10 00 00 04 00 01 01 01             ; [$a8e5] undefined
+BYTE_PRG7__a8e5:                            ; [$a8e5]
+    db $10,$00,$00,$04,$00,$01,$01,$01      ; [$a8e5] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91f8]
+;     TILES_SPRITES_ADDRS [$PRG7::91f8]
 ;
-DAT_PRG7__a8ed:                             ; [$a8ed]
-    hex 11 00 00 08 00 00 01 00 02 00 03 00 ; [$a8ed] undefined
+BYTE_PRG7__a8ed:                            ; [$a8ed]
+    db $11,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00 ; [$a8ed] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91fa]
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91fc]
+;     TILES_SPRITES_ADDRS [$PRG7::91fa]
+;     TILES_SPRITES_ADDRS [$PRG7::91fc]
 ;
-DAT_PRG7__a8f9:                             ; [$a8f9]
-    hex 11 00 00 08 00 00 00 40 01 00 01 40 ; [$a8f9] undefined
+BYTE_PRG7__a8f9:                            ; [$a8f9]
+    db $11,$00,$00,$08,$00,$00,$00,$40,$01,$00,$01,$40 ; [$a8f9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9222]
+;     TILES_SPRITES_ADDRS [$PRG7::9222]
 ;
-DAT_PRG7__a905:                             ; [$a905]
-    hex 11 00 00 08 00 02 01 02 02 02 03 02 ; [$a905] undefined
+BYTE_PRG7__a905:                            ; [$a905]
+    db $11,$00,$00,$08,$00,$02,$01,$02,$02,$02,$03,$02 ; [$a905] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9224]
+;     TILES_SPRITES_ADDRS [$PRG7::9224]
 ;
-DAT_PRG7__a911:                             ; [$a911]
-    hex 11 00 00 08 00 03 00 43 01 03 01 43 ; [$a911] undefined
+BYTE_PRG7__a911:                            ; [$a911]
+    db $11,$00,$00,$08,$00,$03,$00,$43,$01,$03,$01,$43 ; [$a911] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9206]
+;     TILES_SPRITES_ADDRS [$PRG7::9206]
 ;
-DAT_PRG7__a91d:                             ; [$a91d]
-    hex 03 00 18 10 06 02 07 02 07 42 06 42 ; [$a91d] undefined
+BYTE_PRG7__a91d:                            ; [$a91d]
+    db $03,$00,$18,$10,$06,$02,$07,$02,$07,$42,$06,$42 ; [$a91d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9208]
+;     TILES_SPRITES_ADDRS [$PRG7::9208]
 ;
-DAT_PRG7__a929:                             ; [$a929]
-    hex 03 00 18 10 00 02 01 02 01 42 00 42 ; [$a929] undefined
+BYTE_PRG7__a929:                            ; [$a929]
+    db $03,$00,$18,$10,$00,$02,$01,$02,$01,$42,$00,$42 ; [$a929] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::920a]
+;     TILES_SPRITES_ADDRS [$PRG7::920a]
 ;
-DAT_PRG7__a935:                             ; [$a935]
-    hex 13 00 10 10 06 02 07 02 07 42 06 42 08 02 09 02 ; [$a935] undefined
-    db $09,$42,$08,$42                      ; [$a945] undefined
+BYTE_PRG7__a935:                            ; [$a935]
+    db $13,$00,$10,$10,$06,$02,$07,$02,$07,$42,$06,$42,$08,$02,$09,$02 ; [$a935]
+                                                                       ; byte
+    db $09,$42,$08,$42                      ; [$a945] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::920c]
+;     TILES_SPRITES_ADDRS [$PRG7::920c]
 ;
-DAT_PRG7__a949:                             ; [$a949]
-    hex 13 00 10 10 00 02 01 02 01 42 00 42 02 02 03 02 ; [$a949] undefined
-    db $03,$42,$02,$42                      ; [$a959] undefined
+BYTE_PRG7__a949:                            ; [$a949]
+    db $13,$00,$10,$10,$00,$02,$01,$02,$01,$42,$00,$42,$02,$02,$03,$02 ; [$a949]
+                                                                       ; byte
+    db $03,$42,$02,$42                      ; [$a959] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::920e]
+;     TILES_SPRITES_ADDRS [$PRG7::920e]
 ;
-DAT_PRG7__a95d:                             ; [$a95d]
-    hex 23 00 08 10 00 02 01 02 01 42 00 42 02 02 03 02 ; [$a95d] undefined
-    hex 03 42 02 42 04 02 05 02 05 42 04 42 ; [$a96d] undefined
+BYTE_PRG7__a95d:                            ; [$a95d]
+    db $23,$00,$08,$10,$00,$02,$01,$02,$01,$42,$00,$42,$02,$02,$03,$02 ; [$a95d]
+                                                                       ; byte
+    db $03,$42,$02,$42,$04,$02,$05,$02,$05,$42,$04,$42 ; [$a96d] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9210]
+;     TILES_SPRITES_ADDRS [$PRG7::9210]
 ;
-DAT_PRG7__a979:                             ; [$a979]
-    hex 33 00 00 10 06 02 07 02 07 42 06 42 08 02 09 02 ; [$a979] undefined
-    hex 09 42 08 42 0a 02 0b 02 0b 42 0a 42 0a 02 0b 02 ; [$a989] undefined
-    db $0b,$42,$0a,$42                      ; [$a999] undefined
+BYTE_PRG7__a979:                            ; [$a979]
+    db $33,$00,$00,$10,$06,$02,$07,$02,$07,$42,$06,$42,$08,$02,$09,$02 ; [$a979]
+                                                                       ; byte
+    db $09,$42,$08,$42,$0a,$02,$0b,$02,$0b,$42,$0a,$42,$0a,$02,$0b,$02 ; [$a989]
+                                                                       ; byte
+    db $0b,$42,$0a,$42                      ; [$a999] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9212]
+;     TILES_SPRITES_ADDRS [$PRG7::9212]
 ;
-DAT_PRG7__a99d:                             ; [$a99d]
-    hex 33 00 00 10 00 02 01 02 01 42 00 42 02 02 03 02 ; [$a99d] undefined
-    hex 03 42 02 42 04 02 05 02 05 42 04 42 04 02 05 02 ; [$a9ad] undefined
-    db $05,$42,$04,$42                      ; [$a9bd] undefined
+BYTE_PRG7__a99d:                            ; [$a99d]
+    db $33,$00,$00,$10,$00,$02,$01,$02,$01,$42,$00,$42,$02,$02,$03,$02 ; [$a99d]
+                                                                       ; byte
+    db $03,$42,$02,$42,$04,$02,$05,$02,$05,$42,$04,$42,$04,$02,$05,$02 ; [$a9ad]
+                                                                       ; byte
+    db $05,$42,$04,$42                      ; [$a9bd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91f0]
+;     TILES_SPRITES_ADDRS [$PRG7::91f0]
 ;
-DAT_PRG7__a9c1:                             ; [$a9c1]
-    hex 11 00 00 08 00 02 00 42 01 02 01 42 ; [$a9c1] undefined
+BYTE_PRG7__a9c1:                            ; [$a9c1]
+    db $11,$00,$00,$08,$00,$02,$00,$42,$01,$02,$01,$42 ; [$a9c1] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::91f2]
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::922a]
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::922c]
+;     TILES_SPRITES_ADDRS [$PRG7::91f2]
+;     TILES_SPRITES_ADDRS [$PRG7::922a]
+;     TILES_SPRITES_ADDRS [$PRG7::922c]
 ;
-DAT_PRG7__a9cd:                             ; [$a9cd]
-    hex 11 00 00 08 00 01 01 01 02 01 03 01 ; [$a9cd] undefined
+BYTE_PRG7__a9cd:                            ; [$a9cd]
+    db $11,$00,$00,$08,$00,$01,$01,$01,$02,$01,$03,$01 ; [$a9cd] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9226]
+;     TILES_SPRITES_ADDRS [$PRG7::9226]
 ;
-DAT_PRG7__a9d9:                             ; [$a9d9]
-    hex 11 00 00 08 00 00 01 00 02 00 03 00 ; [$a9d9] undefined
+BYTE_PRG7__a9d9:                            ; [$a9d9]
+    db $11,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00 ; [$a9d9] byte
 
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG7__9036 [$PRG7::9228]
+;     TILES_SPRITES_ADDRS [$PRG7::9228]
 ;
-DAT_PRG7__a9e5:                             ; [$a9e5]
-    hex 11 00 00 08 00 01 00 41 01 01 01 41 ; [$a9e5] undefined
+BYTE_PRG7__a9e5:                            ; [$a9e5]
+    db $11,$00,$00,$08,$00,$01,$00,$41,$01,$01,$01,$41 ; [$a9e5] byte
 
 ;
 ; XREFS:
@@ -6051,36 +6454,222 @@ TILES_PLAYER_ADDRS:                         ; [$a9f1]
     dw $2f40                                ; [104]:
     dw $2f46                                ; [105]:
     dw $2f34                                ; [106]:
-    hex 31 00 00 08 00 00 01 00 02 00 03 00 04 00 05 00 ; [$aac7] undefined
-    hex 06 00 07 00 31 00 00 08 08 00 09 00 0a 00 0b 00 ; [$aad7] undefined
-    hex 0c 00 0d 00 0e 00 ff 31 00 00 08 00 00 01 00 0f ; [$aae7] undefined
-    hex 00 10 00 11 00 12 00 13 00 14 00 31 00 00 08 00 ; [$aaf7] undefined
-    hex 00 01 00 15 00 16 00 17 00 18 00 19 00 1a 00 31 ; [$ab07] undefined
-    hex 00 00 08 1b 00 1c 00 1d 00 1e 00 1f 00 20 00 21 ; [$ab17] undefined
-    hex 00 22 00 31 00 00 08 00 00 01 00 02 00 03 00 04 ; [$ab27] undefined
-    hex 00 05 00 06 00 07 00 31 00 00 08 23 00 24 00 26 ; [$ab37] undefined
-    hex 00 27 00 28 00 29 00 2a 00 2b 00 31 00 00 08 2c ; [$ab47] undefined
-    hex 00 2d 00 2e 00 2f 00 30 00 31 00 32 00 33 00 31 ; [$ab57] undefined
-    hex 00 00 08 00 00 01 00 09 01 0a 01 0b 01 0c 01 02 ; [$ab67] undefined
-    hex 00 03 00 31 00 00 08 04 00 05 00 0d 01 0e 01 0f ; [$ab77] undefined
-    hex 01 10 01 06 00 ff 31 00 00 08 00 00 01 00 11 01 ; [$ab87] undefined
-    hex 12 01 13 01 14 01 07 00 08 00 31 00 00 08 00 00 ; [$ab97] undefined
-    hex 01 00 19 01 1a 01 15 01 16 01 17 00 18 00 31 00 ; [$aba7] undefined
-    hex 00 08 1b 00 1c 00 1f 01 20 01 21 01 22 01 1d 00 ; [$abb7] undefined
-    hex 1e 00 31 00 00 08 00 00 01 00 09 01 0a 01 0b 01 ; [$abc7] undefined
-    hex 0c 01 02 00 03 00 31 00 00 08 23 00 24 00 28 01 ; [$abd7] undefined
-    hex 29 01 2a 01 2b 01 26 00 27 00 31 00 00 08 2c 00 ; [$abe7] undefined
-    hex 2d 00 34 01 31 01 32 01 33 01 2e 00 2f 00 31 00 ; [$abf7] undefined
-    hex 00 08 00 00 01 00 02 01 03 01 04 01 05 01 06 01 ; [$ac07] undefined
-    hex 07 01 31 00 00 08 08 00 09 00 0a 01 0b 01 0c 01 ; [$ac17] undefined
-    hex 0d 01 0e 01 0f 01 31 00 00 08 00 00 01 00 10 01 ; [$ac27] undefined
-    hex 11 01 12 01 13 01 14 01 15 01 31 00 00 08 00 00 ; [$ac37] undefined
-    hex 01 00 16 01 17 01 18 01 19 01 1a 01 1b 01 31 00 ; [$ac47] undefined
-    hex 00 08 1c 00 1d 00 1e 01 1f 01 20 01 21 01 22 01 ; [$ac57] undefined
-    hex 23 01 31 00 00 08 00 00 01 00 02 01 03 01 04 01 ; [$ac67] undefined
-    hex 05 01 06 01 07 01 31 00 00 08 24 00 25 00 27 01 ; [$ac77] undefined
-    hex 28 01 29 01 2a 01 2b 01 2c 01 31 00 00 08 2d 00 ; [$ac87] undefined
-    hex 2e 00 2f 01 30 01 31 01 32 01 33 01 34 01 ; [$ac97] undefined
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9f1]
+;
+BYTE_PRG7__aac7:                            ; [$aac7]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$aac7]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$aad7] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9f3]
+;
+BYTE_PRG7__aadb:                            ; [$aadb]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$0a,$00,$0b,$00,$0c,$00,$0d,$00 ; [$aadb]
+                                                                       ; byte
+    db $0e,$00,$ff                          ; [$aaeb] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9f5]
+;
+BYTE_PRG7__aaee:                            ; [$aaee]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$0f,$00,$10,$00,$11,$00,$12,$00 ; [$aaee]
+                                                                       ; byte
+    db $13,$00,$14,$00                      ; [$aafe] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9f7]
+;
+BYTE_PRG7__ab02:                            ; [$ab02]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$15,$00,$16,$00,$17,$00,$18,$00 ; [$ab02]
+                                                                       ; byte
+    db $19,$00,$1a,$00                      ; [$ab12] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9f9]
+;
+BYTE_PRG7__ab16:                            ; [$ab16]
+    db $31,$00,$00,$08,$1b,$00,$1c,$00,$1d,$00,$1e,$00,$1f,$00,$20,$00 ; [$ab16]
+                                                                       ; byte
+    db $21,$00,$22,$00                      ; [$ab26] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9fb]
+;
+BYTE_PRG7__ab2a:                            ; [$ab2a]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ab2a]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$ab3a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9fd]
+;
+BYTE_PRG7__ab3e:                            ; [$ab3e]
+    db $31,$00,$00,$08,$23,$00,$24,$00,$26,$00,$27,$00,$28,$00,$29,$00 ; [$ab3e]
+                                                                       ; byte
+    db $2a,$00,$2b,$00                      ; [$ab4e] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::a9ff]
+;
+BYTE_PRG7__ab52:                            ; [$ab52]
+    db $31,$00,$00,$08,$2c,$00,$2d,$00,$2e,$00,$2f,$00,$30,$00,$31,$00 ; [$ab52]
+                                                                       ; byte
+    db $32,$00,$33,$00                      ; [$ab62] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa11]
+;
+BYTE_PRG7__ab66:                            ; [$ab66]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$09,$01,$0a,$01,$0b,$01,$0c,$01 ; [$ab66]
+                                                                       ; byte
+    db $02,$00,$03,$00                      ; [$ab76] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa13]
+;
+BYTE_PRG7__ab7a:                            ; [$ab7a]
+    db $31,$00,$00,$08,$04,$00,$05,$00,$0d,$01,$0e,$01,$0f,$01,$10,$01 ; [$ab7a]
+                                                                       ; byte
+    db $06,$00,$ff                          ; [$ab8a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa15]
+;
+BYTE_PRG7__ab8d:                            ; [$ab8d]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$11,$01,$12,$01,$13,$01,$14,$01 ; [$ab8d]
+                                                                       ; byte
+    db $07,$00,$08,$00                      ; [$ab9d] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa17]
+;
+BYTE_PRG7__aba1:                            ; [$aba1]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$19,$01,$1a,$01,$15,$01,$16,$01 ; [$aba1]
+                                                                       ; byte
+    db $17,$00,$18,$00                      ; [$abb1] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa19]
+;
+BYTE_PRG7__abb5:                            ; [$abb5]
+    db $31,$00,$00,$08,$1b,$00,$1c,$00,$1f,$01,$20,$01,$21,$01,$22,$01 ; [$abb5]
+                                                                       ; byte
+    db $1d,$00,$1e,$00                      ; [$abc5] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa1b]
+;
+BYTE_PRG7__abc9:                            ; [$abc9]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$09,$01,$0a,$01,$0b,$01,$0c,$01 ; [$abc9]
+                                                                       ; byte
+    db $02,$00,$03,$00                      ; [$abd9] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa1d]
+;
+BYTE_PRG7__abdd:                            ; [$abdd]
+    db $31,$00,$00,$08,$23,$00,$24,$00,$28,$01,$29,$01,$2a,$01,$2b,$01 ; [$abdd]
+                                                                       ; byte
+    db $26,$00,$27,$00                      ; [$abed] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa1f]
+;
+BYTE_PRG7__abf1:                            ; [$abf1]
+    db $31,$00,$00,$08,$2c,$00,$2d,$00,$34,$01,$31,$01,$32,$01,$33,$01 ; [$abf1]
+                                                                       ; byte
+    db $2e,$00,$2f,$00                      ; [$ac01] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa31]
+;
+BYTE_PRG7__ac05:                            ; [$ac05]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ac05]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$ac15] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa33]
+;
+BYTE_PRG7__ac19:                            ; [$ac19]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$0a,$01,$0b,$01,$0c,$01,$0d,$01 ; [$ac19]
+                                                                       ; byte
+    db $0e,$01,$0f,$01                      ; [$ac29] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa35]
+;
+BYTE_PRG7__ac2d:                            ; [$ac2d]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$10,$01,$11,$01,$12,$01,$13,$01 ; [$ac2d]
+                                                                       ; byte
+    db $14,$01,$15,$01                      ; [$ac3d] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa37]
+;
+BYTE_PRG7__ac41:                            ; [$ac41]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$16,$01,$17,$01,$18,$01,$19,$01 ; [$ac41]
+                                                                       ; byte
+    db $1a,$01,$1b,$01                      ; [$ac51] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa39]
+;
+BYTE_PRG7__ac55:                            ; [$ac55]
+    db $31,$00,$00,$08,$1c,$00,$1d,$00,$1e,$01,$1f,$01,$20,$01,$21,$01 ; [$ac55]
+                                                                       ; byte
+    db $22,$01,$23,$01                      ; [$ac65] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa3b]
+;
+BYTE_PRG7__ac69:                            ; [$ac69]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ac69]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$ac79] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa3d]
+;
+BYTE_PRG7__ac7d:                            ; [$ac7d]
+    db $31,$00,$00,$08,$24,$00,$25,$00,$27,$01,$28,$01,$29,$01,$2a,$01 ; [$ac7d]
+                                                                       ; byte
+    db $2b,$01,$2c,$01                      ; [$ac8d] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa3f]
+;
+BYTE_PRG7__ac91:                            ; [$ac91]
+    db $31,$00,$00,$08,$2d,$00,$2e,$00,$2f,$01,$30,$01,$31,$01,$32,$01 ; [$ac91]
+                                                                       ; byte
+    db $33,$01,$34,$01                      ; [$aca1] byte
 
 
 ;============================================================================
@@ -6088,78 +6677,503 @@ TILES_PLAYER_ADDRS:                         ; [$a9f1]
 ;
 ; XREFS:
 ;     TILES_PLAYER_ADDRS [$PRG7::aa51]
+;     TILES_PLAYER_ADDRS [$PRG7::aa61]
 ;============================================================================
 
 ;
 ; XREFS:
 ;     TILES_PLAYER_ADDRS [$PRG7::aa51]
+;     TILES_PLAYER_ADDRS [$PRG7::aa61]
 ;
-DAT_PRG7__aca5:                             ; [$aca5]
-    hex 31 00 00 08 00 01 01 01 02 01 03 01 04 01 05 01 ; [$aca5] undefined
-    db $06,$01,$07,$01                      ; [$acb5] undefined
+BYTE_PRG7__aca5:                            ; [$aca5]
+    db $31,$00,$00,$08,$00,$01,$01,$01,$02,$01,$03,$01,$04,$01,$05,$01 ; [$aca5]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$acb5] byte
 
 ;
 ; XREFS:
 ;     TILES_PLAYER_ADDRS [$PRG7::aa53]
+;     TILES_PLAYER_ADDRS [$PRG7::aa63]
 ;
-DAT_PRG7__acb9:                             ; [$acb9]
-    hex 31 00 00 08 08 01 09 01 0a 01 0b 01 0c 01 0d 01 ; [$acb9] undefined
-    hex 0e 01 0f 01 31 00 00 08 00 01 01 01 10 01 11 01 ; [$acc9] undefined
-    hex 12 01 13 01 14 01 15 01 31 00 00 08 00 01 01 01 ; [$acd9] undefined
-    hex 02 01 03 01 16 01 17 01 18 01 19 01 31 00 00 08 ; [$ace9] undefined
-    hex 1a 01 1b 01 1c 01 1d 01 1e 01 1f 01 20 01 21 01 ; [$acf9] undefined
-    hex 31 00 00 08 00 01 01 01 22 01 03 01 04 01 05 01 ; [$ad09] undefined
-    hex 06 01 07 01 31 00 00 08 23 01 ff 25 01 26 01 27 ; [$ad19] undefined
-    hex 01 28 01 29 01 2a 01 31 00 00 08 2b 01 2c 01 2d ; [$ad29] undefined
-    hex 01 2e 01 2f 01 30 01 31 01 32 01 31 00 00 08 00 ; [$ad39] undefined
-    hex 00 01 00 02 00 03 00 04 00 05 00 06 00 07 00 31 ; [$ad49] undefined
-    hex 00 00 08 08 00 09 00 02 00 03 00 04 00 05 00 0a ; [$ad59] undefined
-    hex 00 ff 31 00 00 08 00 00 01 00 02 00 03 00 04 00 ; [$ad69] undefined
-    hex 05 00 0b 00 0c 00 31 00 00 08 00 00 01 00 02 00 ; [$ad79] undefined
-    hex 03 00 04 00 05 00 0d 00 0e 00 31 00 00 08 0f 00 ; [$ad89] undefined
-    hex 10 00 11 00 12 00 13 00 14 00 15 00 16 00 31 00 ; [$ad99] undefined
-    hex 00 08 00 00 01 00 02 00 03 00 04 00 05 00 06 00 ; [$ada9] undefined
-    hex 07 00 31 00 00 08 17 00 18 00 1a 00 1b 00 1c 00 ; [$adb9] undefined
-    hex 1d 00 1e 00 1f 00 31 00 00 08 20 00 21 00 22 00 ; [$adc9] undefined
-    hex 23 00 24 00 25 00 26 00 27 00 31 00 00 08 00 00 ; [$add9] undefined
-    hex 01 00 02 01 03 01 04 01 05 01 06 00 07 00 31 00 ; [$ade9] undefined
-    hex 00 08 08 00 09 00 02 01 03 01 04 01 05 01 0a 00 ; [$adf9] undefined
-    hex ff 31 00 00 08 00 00 01 00 02 01 03 01 04 01 05 ; [$ae09] undefined
-    hex 01 0b 00 0c 00 31 00 00 08 00 00 01 00 02 01 03 ; [$ae19] undefined
-    hex 01 04 01 05 01 0d 00 0e 00 31 00 00 08 0f 00 10 ; [$ae29] undefined
-    hex 00 11 01 12 01 13 01 14 01 15 00 16 00 31 00 00 ; [$ae39] undefined
-    hex 08 00 00 01 00 02 01 03 01 04 01 05 01 06 00 07 ; [$ae49] undefined
-    hex 00 31 00 00 08 17 00 18 00 1a 01 1b 01 1c 01 1d ; [$ae59] undefined
-    hex 01 1e 00 1f 00 31 00 00 08 20 00 21 00 22 01 23 ; [$ae69] undefined
-    hex 01 24 01 25 01 26 00 27 00 31 00 00 08 00 00 01 ; [$ae79] undefined
-    hex 00 02 01 03 01 04 01 05 01 06 01 07 01 31 00 00 ; [$ae89] undefined
-    hex 08 08 00 09 00 02 01 03 01 04 01 05 01 0a 01 0b ; [$ae99] undefined
-    hex 01 31 00 00 08 00 00 01 00 02 01 03 01 04 01 05 ; [$aea9] undefined
-    hex 01 0c 01 0d 01 31 00 00 08 00 00 01 00 02 01 03 ; [$aeb9] undefined
-    hex 01 04 01 05 01 0e 01 0f 01 31 00 00 08 10 00 11 ; [$aec9] undefined
-    hex 00 12 01 13 01 14 01 15 01 16 01 17 01 31 00 00 ; [$aed9] undefined
-    hex 08 00 00 01 00 02 01 03 01 04 01 05 01 06 01 07 ; [$aee9] undefined
-    hex 01 31 00 00 08 18 00 19 00 1b 01 1c 01 1d 01 1e ; [$aef9] undefined
-    db $01,$1f,$01,$20,$01                  ; [$af09] undefined
+BYTE_PRG7__acb9:                            ; [$acb9]
+    db $31,$00,$00,$08,$08,$01,$09,$01,$0a,$01,$0b,$01,$0c,$01,$0d,$01 ; [$acb9]
+                                                                       ; byte
+    db $0e,$01,$0f,$01                      ; [$acc9] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa55]
+;     TILES_PLAYER_ADDRS [$PRG7::aa65]
+;
+BYTE_PRG7__accd:                            ; [$accd]
+    db $31,$00,$00,$08,$00,$01,$01,$01,$10,$01,$11,$01,$12,$01,$13,$01 ; [$accd]
+                                                                       ; byte
+    db $14,$01,$15,$01                      ; [$acdd] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa57]
+;     TILES_PLAYER_ADDRS [$PRG7::aa67]
+;
+BYTE_PRG7__ace1:                            ; [$ace1]
+    db $31,$00,$00,$08,$00,$01,$01,$01,$02,$01,$03,$01,$16,$01,$17,$01 ; [$ace1]
+                                                                       ; byte
+    db $18,$01,$19,$01                      ; [$acf1] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa59]
+;     TILES_PLAYER_ADDRS [$PRG7::aa69]
+;
+BYTE_PRG7__acf5:                            ; [$acf5]
+    db $31,$00,$00,$08,$1a,$01,$1b,$01,$1c,$01,$1d,$01,$1e,$01,$1f,$01 ; [$acf5]
+                                                                       ; byte
+    db $20,$01,$21,$01                      ; [$ad05] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa5b]
+;     TILES_PLAYER_ADDRS [$PRG7::aa6b]
+;
+BYTE_PRG7__ad09:                            ; [$ad09]
+    db $31,$00,$00,$08,$00,$01,$01,$01,$22,$01,$03,$01,$04,$01,$05,$01 ; [$ad09]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$ad19] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa5d]
+;     TILES_PLAYER_ADDRS [$PRG7::aa6d]
+;
+BYTE_PRG7__ad1d:                            ; [$ad1d]
+    db $31,$00,$00,$08,$23,$01,$ff,$25,$01,$26,$01,$27,$01,$28,$01,$29 ; [$ad1d]
+                                                                       ; byte
+    db $01,$2a,$01                          ; [$ad2d] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa5f]
+;     TILES_PLAYER_ADDRS [$PRG7::aa6f]
+;
+BYTE_PRG7__ad30:                            ; [$ad30]
+    db $31,$00,$00,$08,$2b,$01,$2c,$01,$2d,$01,$2e,$01,$2f,$01,$30,$01 ; [$ad30]
+                                                                       ; byte
+    db $31,$01,$32,$01                      ; [$ad40] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa01]
+;
+BYTE_PRG7__ad44:                            ; [$ad44]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ad44]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$ad54] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa03]
+;
+BYTE_PRG7__ad58:                            ; [$ad58]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ad58]
+                                                                       ; byte
+    db $0a,$00,$ff                          ; [$ad68] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa05]
+;
+BYTE_PRG7__ad6b:                            ; [$ad6b]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ad6b]
+                                                                       ; byte
+    db $0b,$00,$0c,$00                      ; [$ad7b] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa07]
+;
+BYTE_PRG7__ad7f:                            ; [$ad7f]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ad7f]
+                                                                       ; byte
+    db $0d,$00,$0e,$00                      ; [$ad8f] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa09]
+;
+BYTE_PRG7__ad93:                            ; [$ad93]
+    db $31,$00,$00,$08,$0f,$00,$10,$00,$11,$00,$12,$00,$13,$00,$14,$00 ; [$ad93]
+                                                                       ; byte
+    db $15,$00,$16,$00                      ; [$ada3] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa0b]
+;
+BYTE_PRG7__ada7:                            ; [$ada7]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$00,$03,$00,$04,$00,$05,$00 ; [$ada7]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$adb7] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa0d]
+;
+BYTE_PRG7__adbb:                            ; [$adbb]
+    db $31,$00,$00,$08,$17,$00,$18,$00,$1a,$00,$1b,$00,$1c,$00,$1d,$00 ; [$adbb]
+                                                                       ; byte
+    db $1e,$00,$1f,$00                      ; [$adcb] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa0f]
+;
+BYTE_PRG7__adcf:                            ; [$adcf]
+    db $31,$00,$00,$08,$20,$00,$21,$00,$22,$00,$23,$00,$24,$00,$25,$00 ; [$adcf]
+                                                                       ; byte
+    db $26,$00,$27,$00                      ; [$addf] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa21]
+;
+BYTE_PRG7__ade3:                            ; [$ade3]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ade3]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$adf3] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa23]
+;
+BYTE_PRG7__adf7:                            ; [$adf7]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$adf7]
+                                                                       ; byte
+    db $0a,$00,$ff                          ; [$ae07] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa25]
+;
+BYTE_PRG7__ae0a:                            ; [$ae0a]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ae0a]
+                                                                       ; byte
+    db $0b,$00,$0c,$00                      ; [$ae1a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa27]
+;
+BYTE_PRG7__ae1e:                            ; [$ae1e]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ae1e]
+                                                                       ; byte
+    db $0d,$00,$0e,$00                      ; [$ae2e] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa29]
+;
+BYTE_PRG7__ae32:                            ; [$ae32]
+    db $31,$00,$00,$08,$0f,$00,$10,$00,$11,$01,$12,$01,$13,$01,$14,$01 ; [$ae32]
+                                                                       ; byte
+    db $15,$00,$16,$00                      ; [$ae42] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa2b]
+;
+BYTE_PRG7__ae46:                            ; [$ae46]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ae46]
+                                                                       ; byte
+    db $06,$00,$07,$00                      ; [$ae56] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa2d]
+;
+BYTE_PRG7__ae5a:                            ; [$ae5a]
+    db $31,$00,$00,$08,$17,$00,$18,$00,$1a,$01,$1b,$01,$1c,$01,$1d,$01 ; [$ae5a]
+                                                                       ; byte
+    db $1e,$00,$1f,$00                      ; [$ae6a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa2f]
+;
+BYTE_PRG7__ae6e:                            ; [$ae6e]
+    db $31,$00,$00,$08,$20,$00,$21,$00,$22,$01,$23,$01,$24,$01,$25,$01 ; [$ae6e]
+                                                                       ; byte
+    db $26,$00,$27,$00                      ; [$ae7e] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa41]
+;
+BYTE_PRG7__ae82:                            ; [$ae82]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ae82]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$ae92] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa43]
+;
+BYTE_PRG7__ae96:                            ; [$ae96]
+    db $31,$00,$00,$08,$08,$00,$09,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$ae96]
+                                                                       ; byte
+    db $0a,$01,$0b,$01                      ; [$aea6] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa45]
+;
+BYTE_PRG7__aeaa:                            ; [$aeaa]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$aeaa]
+                                                                       ; byte
+    db $0c,$01,$0d,$01                      ; [$aeba] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa47]
+;
+BYTE_PRG7__aebe:                            ; [$aebe]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$aebe]
+                                                                       ; byte
+    db $0e,$01,$0f,$01                      ; [$aece] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa49]
+;
+BYTE_PRG7__aed2:                            ; [$aed2]
+    db $31,$00,$00,$08,$10,$00,$11,$00,$12,$01,$13,$01,$14,$01,$15,$01 ; [$aed2]
+                                                                       ; byte
+    db $16,$01,$17,$01                      ; [$aee2] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa4b]
+;
+BYTE_PRG7__aee6:                            ; [$aee6]
+    db $31,$00,$00,$08,$00,$00,$01,$00,$02,$01,$03,$01,$04,$01,$05,$01 ; [$aee6]
+                                                                       ; byte
+    db $06,$01,$07,$01                      ; [$aef6] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa4d]
+;
+BYTE_PRG7__aefa:                            ; [$aefa]
+    db $31,$00,$00,$08,$18,$00,$19,$00,$1b,$01,$1c,$01,$1d,$01,$1e,$01 ; [$aefa]
+                                                                       ; byte
+    db $1f,$01,$20,$01                      ; [$af0a] byte
 
 ;
 ; XREFS:
 ;     TILES_PLAYER_ADDRS [$PRG7::aa4f]
 ;
-DAT_PRG7__af0e:                             ; [$af0e]
-    hex 31 00 00 08 21 00 22 00 23 01 24 01 25 01 26 01 ; [$af0e] undefined
-    hex 27 01 28 01 00 00 08 04 25 00 00 00 08 04 25 01 ; [$af1e] undefined
-    hex 00 00 08 04 26 01 00 00 08 04 24 01 00 00 08 04 ; [$af2e] undefined
-    hex 19 00 00 00 08 04 19 01 00 00 08 04 1a 01 00 00 ; [$af3e] undefined
-    hex 00 04 ff 00 00 00 04 01 01 00 00 00 04 02 01 00 ; [$af4e] undefined
-    hex 00 00 04 00 01 10 00 00 04 02 01 03 01 00 00 00 ; [$af5e] undefined
-    hex 04 04 01 00 00 00 04 05 01 01 00 00 08 00 01 01 ; [$af6e] undefined
-    hex 01 11 00 00 08 02 01 03 01 ff 04 01 00 00 00 04 ; [$af7e] undefined
-    hex 05 01 00 00 00 04 06 01 11 00 00 08 05 01 06 01 ; [$af8e] undefined
-    hex ff 07 01 00 00 00 04 08 01 00 00 00 04 00 01 01 ; [$af9e] undefined
-    hex 00 00 08 01 01 02 01 01 00 00 08 03 01 04 01 10 ; [$afae] undefined
-    hex 00 00 04 00 01 01 01 10 00 00 04 02 01 03 01 10 ; [$afbe] undefined
-    db $00,$00,$04,$04,$01,$05,$01          ; [$afce] undefined
+BYTE_PRG7__af0e:                            ; [$af0e]
+    db $31,$00,$00,$08,$21,$00,$22,$00,$23,$01,$24,$01,$25,$01,$26,$01 ; [$af0e]
+                                                                       ; byte
+    db $27,$01,$28,$01                      ; [$af1e] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aab7]
+;
+BYTE_PRG7__af22:                            ; [$af22]
+    db $00,$00,$08,$04,$25,$00              ; [$af22] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aab9]
+;
+BYTE_PRG7__af28:                            ; [$af28]
+    db $00,$00,$08,$04,$25,$01              ; [$af28] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aabb]
+;
+BYTE_PRG7__af2e:                            ; [$af2e]
+    db $00,$00,$08,$04,$26,$01              ; [$af2e] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aabd]
+;     TILES_PLAYER_ADDRS [$PRG7::aac5]
+;
+BYTE_PRG7__af34:                            ; [$af34]
+    db $00,$00,$08,$04,$24,$01              ; [$af34] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aabf]
+;
+BYTE_PRG7__af3a:                            ; [$af3a]
+    db $00,$00,$08,$04,$19,$00              ; [$af3a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aac1]
+;
+BYTE_PRG7__af40:                            ; [$af40]
+    db $00,$00,$08,$04,$19,$01              ; [$af40] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aac3]
+;
+BYTE_PRG7__af46:                            ; [$af46]
+    db $00,$00,$08,$04,$1a,$01              ; [$af46] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa75]
+;     TILES_PLAYER_ADDRS [$PRG7::aa79]
+;     TILES_PLAYER_ADDRS [$PRG7::aa7f]
+;     TILES_PLAYER_ADDRS [$PRG7::aa89]
+;     TILES_PLAYER_ADDRS [$PRG7::aa8f]
+;     TILES_PLAYER_ADDRS [$PRG7::aa99]
+;     TILES_PLAYER_ADDRS [$PRG7::aa9f]
+;     TILES_PLAYER_ADDRS [$PRG7::aaaf]
+;
+BYTE_PRG7__af4c:                            ; [$af4c]
+    db $00,$00,$00,$04,$ff                  ; [$af4c] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa71]
+;     TILES_PLAYER_ADDRS [$PRG7::aa77]
+;
+BYTE_PRG7__af51:                            ; [$af51]
+    db $00,$00,$00,$04,$01,$01              ; [$af51] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa73]
+;
+BYTE_PRG7__af57:                            ; [$af57]
+    db $00,$00,$00,$04,$02,$01              ; [$af57] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa7b]
+;     TILES_PLAYER_ADDRS [$PRG7::aa7d]
+;
+BYTE_PRG7__af5d:                            ; [$af5d]
+    db $00,$00,$00,$04,$00,$01              ; [$af5d] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa81]
+;     TILES_PLAYER_ADDRS [$PRG7::aa87]
+;
+BYTE_PRG7__af63:                            ; [$af63]
+    db $10,$00,$00,$04,$02,$01,$03,$01      ; [$af63] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa83]
+;
+BYTE_PRG7__af6b:                            ; [$af6b]
+    db $00,$00,$00,$04,$04,$01              ; [$af6b] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa85]
+;
+BYTE_PRG7__af71:                            ; [$af71]
+    db $00,$00,$00,$04,$05,$01              ; [$af71] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa8b]
+;     TILES_PLAYER_ADDRS [$PRG7::aa8d]
+;     TILES_PLAYER_ADDRS [$PRG7::aa9b]
+;     TILES_PLAYER_ADDRS [$PRG7::aa9d]
+;
+BYTE_PRG7__af77:                            ; [$af77]
+    db $01,$00,$00,$08,$00,$01,$01,$01      ; [$af77] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa91]
+;     TILES_PLAYER_ADDRS [$PRG7::aa97]
+;
+BYTE_PRG7__af7f:                            ; [$af7f]
+    db $11,$00,$00,$08,$02,$01,$03,$01,$ff,$04,$01 ; [$af7f] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa93]
+;
+BYTE_PRG7__af8a:                            ; [$af8a]
+    db $00,$00,$00,$04,$05,$01              ; [$af8a] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aa95]
+;
+BYTE_PRG7__af90:                            ; [$af90]
+    db $00,$00,$00,$04,$06,$01              ; [$af90] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aaa1]
+;     TILES_PLAYER_ADDRS [$PRG7::aaa7]
+;
+BYTE_PRG7__af96:                            ; [$af96]
+    db $11,$00,$00,$08,$05,$01,$06,$01,$ff,$07,$01 ; [$af96] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aaa3]
+;
+BYTE_PRG7__afa1:                            ; [$afa1]
+    db $00,$00,$00,$04,$08,$01              ; [$afa1] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aaa5]
+;     TILES_PLAYER_ADDRS [$PRG7::aaa9]
+;
+BYTE_PRG7__afa7:                            ; [$afa7]
+    db $00,$00,$00,$04,$00,$01              ; [$afa7] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aaab]
+;
+BYTE_PRG7__afad:                            ; [$afad]
+    db $01,$00,$00,$08,$01,$01,$02,$01      ; [$afad] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aaad]
+;
+BYTE_PRG7__afb5:                            ; [$afb5]
+    db $01,$00,$00,$08,$03,$01,$04,$01      ; [$afb5] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aab1]
+;
+BYTE_PRG7__afbd:                            ; [$afbd]
+    db $10,$00,$00,$04,$00,$01,$01,$01      ; [$afbd] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aab3]
+;
+BYTE_PRG7__afc5:                            ; [$afc5]
+    db $10,$00,$00,$04,$02,$01,$03,$01      ; [$afc5] byte
+
+;
+; XREFS:
+;     TILES_PLAYER_ADDRS [$PRG7::aab5]
+;
+BYTE_PRG7__afcd:                            ; [$afcd]
+    db $10,$00,$00,$04,$04,$01,$05,$01      ; [$afcd] byte
 
 ;
 ; XREFS:
@@ -6226,608 +7240,833 @@ TILES_PORTRAITS_ADDRS:                      ; [$afd5]
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afd5]
 ;
-DAT_PRG7__b043:                             ; [$b043]
-    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b043] undefined
-    hex 00 03 00 03 40 02 40 ff ff 04 00 ff ff 07 00 ff ; [$b053] undefined
-    hex ff 08 00 ff ff 08 40 ff 0a 00 0b 00 0c 00 0c 40 ; [$b063] undefined
-    hex 0b 40 0a 40 0d 00 0e 00 0f 00 0f 40 0e 40 0d 40 ; [$b073] undefined
-    hex 10 00 11 00 12 00 12 40 11 40 10 40 10 00 11 00 ; [$b083] undefined
-    hex 13 00 13 40 11 40 10 40             ; [$b093] undefined
+BYTE_PRG7__b043:                            ; [$b043]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$01,$40,$00,$40,$ff,$ff,$02 ; [$b043]
+                                                                       ; byte
+    db $00,$03,$00,$03,$40,$02,$40,$ff,$ff,$04,$00,$ff,$ff,$07,$00,$ff ; [$b053]
+                                                                       ; byte
+    db $ff,$08,$00,$ff,$ff,$08,$40,$ff,$0a,$00,$0b,$00,$0c,$00,$0c,$40 ; [$b063]
+                                                                       ; byte
+    db $0b,$40,$0a,$40,$0d,$00,$0e,$00,$0f,$00,$0f,$40,$0e,$40,$0d,$40 ; [$b073]
+                                                                       ; byte
+    db $10,$00,$11,$00,$12,$00,$12,$40,$11,$40,$10,$40,$10,$00,$11,$00 ; [$b083]
+                                                                       ; byte
+    db $13,$00,$13,$40,$11,$40,$10,$40      ; [$b093] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afd7]
 ;
 PRG7_B09B:                                  ; [$b09b]
-    hex 01 10 10 08 05 00 06 00             ; [$b09b] undefined
+    db $01,$10,$10,$08,$05,$00,$06,$00      ; [$b09b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afd9]
 ;
-DAT_PRG7__b0a3:                             ; [$b0a3]
-    hex 01 10 10 08 14 00 15 00             ; [$b0a3] undefined
+BYTE_PRG7__b0a3:                            ; [$b0a3]
+    db $01,$10,$10,$08,$14,$00,$15,$00      ; [$b0a3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afdb]
 ;
-DAT_PRG7__b0ab:                             ; [$b0ab]
-    hex 01 10 18 08 09 00 09 40             ; [$b0ab] undefined
+BYTE_PRG7__b0ab:                            ; [$b0ab]
+    db $01,$10,$18,$08,$09,$00,$09,$40      ; [$b0ab] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afdd]
 ;
-DAT_PRG7__b0b3:                             ; [$b0b3]
-    hex 01 10 18 08 16 00 16 40             ; [$b0b3] undefined
+BYTE_PRG7__b0b3:                            ; [$b0b3]
+    db $01,$10,$18,$08,$16,$00,$16,$40      ; [$b0b3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afdf]
 ;
-DAT_PRG7__b0bb:                             ; [$b0bb]
-    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b0bb] undefined
-    hex 00 ff ff 02 40 ff ff 04 00 05 00 05 40 04 40 ff ; [$b0cb] undefined
-    hex ff 06 00 ff ff 06 40 ff 08 00 09 00 0a 00 0a 40 ; [$b0db] undefined
-    hex 09 40 08 40 0b 00 0c 00 0d 00 0d 40 0c 40 0b 00 ; [$b0eb] undefined
-    hex 0b 00 0b 00 0e 00 0e 40 0b 00 0b 00 0b 00 0b 00 ; [$b0fb] undefined
-    hex 0f 00 0f 40 0b 00 0b 00             ; [$b10b] undefined
+BYTE_PRG7__b0bb:                            ; [$b0bb]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$01,$40,$00,$40,$ff,$ff,$02 ; [$b0bb]
+                                                                       ; byte
+    db $00,$ff,$ff,$02,$40,$ff,$ff,$04,$00,$05,$00,$05,$40,$04,$40,$ff ; [$b0cb]
+                                                                       ; byte
+    db $ff,$06,$00,$ff,$ff,$06,$40,$ff,$08,$00,$09,$00,$0a,$00,$0a,$40 ; [$b0db]
+                                                                       ; byte
+    db $09,$40,$08,$40,$0b,$00,$0c,$00,$0d,$00,$0d,$40,$0c,$40,$0b,$00 ; [$b0eb]
+                                                                       ; byte
+    db $0b,$00,$0b,$00,$0e,$00,$0e,$40,$0b,$00,$0b,$00,$0b,$00,$0b,$00 ; [$b0fb]
+                                                                       ; byte
+    db $0f,$00,$0f,$40,$0b,$00,$0b,$00      ; [$b10b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afe1]
 ;
-DAT_PRG7__b113:                             ; [$b113]
-    hex 01 10 08 08 03 00 03 40             ; [$b113] undefined
+BYTE_PRG7__b113:                            ; [$b113]
+    db $01,$10,$08,$08,$03,$00,$03,$40      ; [$b113] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afe3]
 ;
-DAT_PRG7__b11b:                             ; [$b11b]
-    hex 01 10 08 08 10 00 10 40             ; [$b11b] undefined
+BYTE_PRG7__b11b:                            ; [$b11b]
+    db $01,$10,$08,$08,$10,$00,$10,$40      ; [$b11b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afe5]
 ;
-DAT_PRG7__b123:                             ; [$b123]
-    hex 01 10 18 08 07 00 07 40             ; [$b123] undefined
+BYTE_PRG7__b123:                            ; [$b123]
+    db $01,$10,$18,$08,$07,$00,$07,$40      ; [$b123] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afe7]
 ;
-DAT_PRG7__b12b:                             ; [$b12b]
-    hex 01 10 18 08 11 00 11 40             ; [$b12b] undefined
+BYTE_PRG7__b12b:                            ; [$b12b]
+    db $01,$10,$18,$08,$11,$00,$11,$40      ; [$b12b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afe9]
 ;
-DAT_PRG7__b133:                             ; [$b133]
-    hex 75 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff 04 ; [$b133] undefined
-    hex 00 ff ff 07 00 ff ff 08 00 09 00 0a 00 0b 00 ff ; [$b143] undefined
-    hex ff 0c 00 ff ff 0f 00 ff 10 01 11 01 12 00 12 40 ; [$b153] undefined
-    hex 11 41 10 41 13 01 14 01 15 01 15 41 14 41 13 41 ; [$b163] undefined
-    hex 16 01 17 01 18 01 18 41 17 41 16 41 19 01 1a 01 ; [$b173] undefined
-    hex 18 01 18 41 1a 41 19 41             ; [$b183] undefined
+BYTE_PRG7__b133:                            ; [$b133]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$02,$00,$03,$00,$ff,$ff,$04 ; [$b133]
+                                                                       ; byte
+    db $00,$ff,$ff,$07,$00,$ff,$ff,$08,$00,$09,$00,$0a,$00,$0b,$00,$ff ; [$b143]
+                                                                       ; byte
+    db $ff,$0c,$00,$ff,$ff,$0f,$00,$ff,$10,$01,$11,$01,$12,$00,$12,$40 ; [$b153]
+                                                                       ; byte
+    db $11,$41,$10,$41,$13,$01,$14,$01,$15,$01,$15,$41,$14,$41,$13,$41 ; [$b163]
+                                                                       ; byte
+    db $16,$01,$17,$01,$18,$01,$18,$41,$17,$41,$16,$41,$19,$01,$1a,$01 ; [$b173]
+                                                                       ; byte
+    db $18,$01,$18,$41,$1a,$41,$19,$41      ; [$b183] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afeb]
 ;
-DAT_PRG7__b18b:                             ; [$b18b]
-    hex 01 10 08 08 05 00 06 00             ; [$b18b] undefined
+BYTE_PRG7__b18b:                            ; [$b18b]
+    db $01,$10,$08,$08,$05,$00,$06,$00      ; [$b18b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afed]
 ;
-DAT_PRG7__b193:                             ; [$b193]
-    hex 01 10 08 08 1b 00 1c 00             ; [$b193] undefined
+BYTE_PRG7__b193:                            ; [$b193]
+    db $01,$10,$08,$08,$1b,$00,$1c,$00      ; [$b193] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afef]
 ;
-DAT_PRG7__b19b:                             ; [$b19b]
-    hex 01 10 18 08 0d 00 0e 00             ; [$b19b] undefined
+BYTE_PRG7__b19b:                            ; [$b19b]
+    db $01,$10,$18,$08,$0d,$00,$0e,$00      ; [$b19b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::aff1]
 ;
-DAT_PRG7__b1a3:                             ; [$b1a3]
-    hex 01 10 18 08 1d 00 1e 00             ; [$b1a3] undefined
+BYTE_PRG7__b1a3:                            ; [$b1a3]
+    db $01,$10,$18,$08,$1d,$00,$1e,$00      ; [$b1a3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::aff3]
 ;
-DAT_PRG7__b1ab:                             ; [$b1ab]
-    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b1ab] undefined
-    hex 00 ff ff 02 40 ff ff 04 00 05 00 05 40 04 40 ff ; [$b1bb] undefined
-    hex ff 06 00 ff ff 06 40 ff 08 00 09 00 0a 00 0a 40 ; [$b1cb] undefined
-    hex 09 40 08 40 0b 00 0c 00 0d 00 0d 40 0c 40 0b 40 ; [$b1db] undefined
-    hex 0b 00 0e 00 0e 00 0e 00 0e 00 0b 40 0b 00 0f 00 ; [$b1eb] undefined
-    hex 0e 00 0e 00 0f 40 0b 40             ; [$b1fb] undefined
+BYTE_PRG7__b1ab:                            ; [$b1ab]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$01,$40,$00,$40,$ff,$ff,$02 ; [$b1ab]
+                                                                       ; byte
+    db $00,$ff,$ff,$02,$40,$ff,$ff,$04,$00,$05,$00,$05,$40,$04,$40,$ff ; [$b1bb]
+                                                                       ; byte
+    db $ff,$06,$00,$ff,$ff,$06,$40,$ff,$08,$00,$09,$00,$0a,$00,$0a,$40 ; [$b1cb]
+                                                                       ; byte
+    db $09,$40,$08,$40,$0b,$00,$0c,$00,$0d,$00,$0d,$40,$0c,$40,$0b,$40 ; [$b1db]
+                                                                       ; byte
+    db $0b,$00,$0e,$00,$0e,$00,$0e,$00,$0e,$00,$0b,$40,$0b,$00,$0f,$00 ; [$b1eb]
+                                                                       ; byte
+    db $0e,$00,$0e,$00,$0f,$40,$0b,$40      ; [$b1fb] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::aff5]
 ;
-DAT_PRG7__b203:                             ; [$b203]
-    hex 01 10 08 08 03 00 03 40             ; [$b203] undefined
+BYTE_PRG7__b203:                            ; [$b203]
+    db $01,$10,$08,$08,$03,$00,$03,$40      ; [$b203] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::aff7]
 ;
-DAT_PRG7__b20b:                             ; [$b20b]
-    hex 01 10 08 08 10 00 10 40             ; [$b20b] undefined
+BYTE_PRG7__b20b:                            ; [$b20b]
+    db $01,$10,$08,$08,$10,$00,$10,$40      ; [$b20b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::aff9]
 ;
-DAT_PRG7__b213:                             ; [$b213]
-    hex 01 10 18 08 07 00 07 40             ; [$b213] undefined
+BYTE_PRG7__b213:                            ; [$b213]
+    db $01,$10,$18,$08,$07,$00,$07,$40      ; [$b213] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::affb]
 ;
-DAT_PRG7__b21b:                             ; [$b21b]
-    hex 01 10 18 08 11 00 11 40             ; [$b21b] undefined
+BYTE_PRG7__b21b:                            ; [$b21b]
+    db $01,$10,$18,$08,$11,$00,$11,$40      ; [$b21b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::affd]
 ;
-DAT_PRG7__b223:                             ; [$b223]
-    hex 75 00 00 18 ff ff ff ff ff ff ff 00 00 01 00 02 ; [$b223] undefined
-    hex 00 03 00 ff ff 04 00 05 00 06 00 07 00 ff ff 08 ; [$b233] undefined
-    hex 00 ff ff 0a 00 ff 0b 00 0c 00 ff ff 0c 40 0b 40 ; [$b243] undefined
-    hex 0e 00 0f 00 10 00 10 40 0f 40 0e 40 11 00 12 00 ; [$b253] undefined
-    hex 13 00 13 00 12 40 11 40 14 00 15 00 13 00 13 00 ; [$b263] undefined
-    db $15,$40,$14,$40                      ; [$b273] undefined
+BYTE_PRG7__b223:                            ; [$b223]
+    db $75,$00,$00,$18,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$01,$00,$02 ; [$b223]
+                                                                       ; byte
+    db $00,$03,$00,$ff,$ff,$04,$00,$05,$00,$06,$00,$07,$00,$ff,$ff,$08 ; [$b233]
+                                                                       ; byte
+    db $00,$ff,$ff,$0a,$00,$ff,$0b,$00,$0c,$00,$ff,$ff,$0c,$40,$0b,$40 ; [$b243]
+                                                                       ; byte
+    db $0e,$00,$0f,$00,$10,$00,$10,$40,$0f,$40,$0e,$40,$11,$00,$12,$00 ; [$b253]
+                                                                       ; byte
+    db $13,$00,$13,$00,$12,$40,$11,$40,$14,$00,$15,$00,$13,$00,$13,$00 ; [$b263]
+                                                                       ; byte
+    db $15,$40,$14,$40                      ; [$b273] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::afff]
 ;
-DAT_PRG7__b277:                             ; [$b277]
-    hex 01 10 18 08 09 00 09 40             ; [$b277] undefined
+BYTE_PRG7__b277:                            ; [$b277]
+    db $01,$10,$18,$08,$09,$00,$09,$40      ; [$b277] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b001]
 ;
-DAT_PRG7__b27f:                             ; [$b27f]
-    hex 01 10 18 08 16 00 16 40             ; [$b27f] undefined
+BYTE_PRG7__b27f:                            ; [$b27f]
+    db $01,$10,$18,$08,$16,$00,$16,$40      ; [$b27f] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b003]
 ;
-DAT_PRG7__b287:                             ; [$b287]
-    hex 01 10 20 08 0d 00 0d 40             ; [$b287] undefined
+BYTE_PRG7__b287:                            ; [$b287]
+    db $01,$10,$20,$08,$0d,$00,$0d,$40      ; [$b287] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b005]
 ;
-DAT_PRG7__b28f:                             ; [$b28f]
-    hex 01 10 20 08 17 00 17 40             ; [$b28f] undefined
+BYTE_PRG7__b28f:                            ; [$b28f]
+    db $01,$10,$20,$08,$17,$00,$17,$40      ; [$b28f] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b007]
 ;
-DAT_PRG7__b297:                             ; [$b297]
-    hex 75 00 00 18 ff ff 00 00 00 40 ff ff ff 01 00 02 ; [$b297] undefined
-    hex 00 03 00 04 00 ff ff 05 00 ff ff 08 00 ff ff 09 ; [$b2a7] undefined
-    hex 00 0a 00 ff ff ff ff 0c 00 0d 00 0e 00 0c 40 ff ; [$b2b7] undefined
-    hex 0f 00 10 00 11 00 11 40 10 40 0f 40 12 00 13 00 ; [$b2c7] undefined
-    hex 14 00 14 40 13 40 12 40 15 00 16 00 17 00 17 00 ; [$b2d7] undefined
-    db $16,$40,$15,$40                      ; [$b2e7] undefined
+BYTE_PRG7__b297:                            ; [$b297]
+    db $75,$00,$00,$18,$ff,$ff,$00,$00,$00,$40,$ff,$ff,$ff,$01,$00,$02 ; [$b297]
+                                                                       ; byte
+    db $00,$03,$00,$04,$00,$ff,$ff,$05,$00,$ff,$ff,$08,$00,$ff,$ff,$09 ; [$b2a7]
+                                                                       ; byte
+    db $00,$0a,$00,$ff,$ff,$ff,$ff,$0c,$00,$0d,$00,$0e,$00,$0c,$40,$ff ; [$b2b7]
+                                                                       ; byte
+    db $0f,$00,$10,$00,$11,$00,$11,$40,$10,$40,$0f,$40,$12,$00,$13,$00 ; [$b2c7]
+                                                                       ; byte
+    db $14,$00,$14,$40,$13,$40,$12,$40,$15,$00,$16,$00,$17,$00,$17,$00 ; [$b2d7]
+                                                                       ; byte
+    db $16,$40,$15,$40                      ; [$b2e7] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b009]
 ;
-DAT_PRG7__b2eb:                             ; [$b2eb]
-    hex 01 10 10 08 06 00 07 00             ; [$b2eb] undefined
+BYTE_PRG7__b2eb:                            ; [$b2eb]
+    db $01,$10,$10,$08,$06,$00,$07,$00      ; [$b2eb] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b00b]
 ;
-DAT_PRG7__b2f3:                             ; [$b2f3]
-    hex 01 10 10 08 18 00 19 00             ; [$b2f3] undefined
+BYTE_PRG7__b2f3:                            ; [$b2f3]
+    db $01,$10,$10,$08,$18,$00,$19,$00      ; [$b2f3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b00d]
 ;
-DAT_PRG7__b2fb:                             ; [$b2fb]
-    db $00,$18,$18,$00,$0b,$00              ; [$b2fb] undefined
+BYTE_PRG7__b2fb:                            ; [$b2fb]
+    db $00,$18,$18,$00,$0b,$00              ; [$b2fb] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b00f]
 ;
-DAT_PRG7__b301:                             ; [$b301]
-    db $00,$18,$18,$00,$1a,$00              ; [$b301] undefined
+BYTE_PRG7__b301:                            ; [$b301]
+    db $00,$18,$18,$00,$1a,$00              ; [$b301] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b011]
 ;
-DAT_PRG7__b307:                             ; [$b307]
-    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b307] undefined
-    hex 00 ff ff 05 00 ff ff 06 00 ff ff 09 00 ff ff 0a ; [$b317] undefined
-    hex 00 ff ff 0d 00 ff 0e 01 0f 01 10 00 11 00 0f 41 ; [$b327] undefined
-    hex 0e 41 12 01 12 01 13 01 13 41 12 01 12 01 12 01 ; [$b337] undefined
-    hex 12 01 14 01 14 41 12 01 12 01 12 01 12 01 12 01 ; [$b347] undefined
-    db $12,$01,$12,$01,$12,$01              ; [$b357] undefined
+BYTE_PRG7__b307:                            ; [$b307]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$01,$40,$00,$40,$ff,$ff,$02 ; [$b307]
+                                                                       ; byte
+    db $00,$ff,$ff,$05,$00,$ff,$ff,$06,$00,$ff,$ff,$09,$00,$ff,$ff,$0a ; [$b317]
+                                                                       ; byte
+    db $00,$ff,$ff,$0d,$00,$ff,$0e,$01,$0f,$01,$10,$00,$11,$00,$0f,$41 ; [$b327]
+                                                                       ; byte
+    db $0e,$41,$12,$01,$12,$01,$13,$01,$13,$41,$12,$01,$12,$01,$12,$01 ; [$b337]
+                                                                       ; byte
+    db $12,$01,$14,$01,$14,$41,$12,$01,$12,$01,$12,$01,$12,$01,$12,$01 ; [$b347]
+                                                                       ; byte
+    db $12,$01,$12,$01,$12,$01              ; [$b357] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b013]
 ;
-DAT_PRG7__b35d:                             ; [$b35d]
-    hex 01 10 08 08 03 00 04 00             ; [$b35d] undefined
+BYTE_PRG7__b35d:                            ; [$b35d]
+    db $01,$10,$08,$08,$03,$00,$04,$00      ; [$b35d] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b015]
 ;
-DAT_PRG7__b365:                             ; [$b365]
-    hex 01 10 08 08 15 00 16 00             ; [$b365] undefined
+BYTE_PRG7__b365:                            ; [$b365]
+    db $01,$10,$08,$08,$15,$00,$16,$00      ; [$b365] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b017]
 ;
-DAT_PRG7__b36d:                             ; [$b36d]
-    hex 11 10 10 08 07 00 08 00 0b 00 0c 00 ; [$b36d] undefined
+BYTE_PRG7__b36d:                            ; [$b36d]
+    db $11,$10,$10,$08,$07,$00,$08,$00,$0b,$00,$0c,$00 ; [$b36d] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b019]
 ;
-DAT_PRG7__b379:                             ; [$b379]
-    hex 11 10 10 08 17 00 18 00 19 00 1a 00 ; [$b379] undefined
+BYTE_PRG7__b379:                            ; [$b379]
+    db $11,$10,$10,$08,$17,$00,$18,$00,$19,$00,$1a,$00 ; [$b379] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b01b]
 ;
-DAT_PRG7__b385:                             ; [$b385]
-    hex 75 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff 04 ; [$b385] undefined
-    hex 00 ff ff 07 00 ff ff 08 00 09 00 0a 00 0b 00 ff ; [$b395] undefined
-    hex ff 0c 00 0d 00 ff ff ff ff ff 10 00 11 00 ff ff ; [$b3a5] undefined
-    hex 12 03 13 03 14 00 15 00 13 43 12 43 16 03 16 03 ; [$b3b5] undefined
-    hex 17 03 17 43 16 03 16 03 16 03 16 03 18 03 18 43 ; [$b3c5] undefined
-    db $16,$03,$16,$03                      ; [$b3d5] undefined
+BYTE_PRG7__b385:                            ; [$b385]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$02,$00,$03,$00,$ff,$ff,$04 ; [$b385]
+                                                                       ; byte
+    db $00,$ff,$ff,$07,$00,$ff,$ff,$08,$00,$09,$00,$0a,$00,$0b,$00,$ff ; [$b395]
+                                                                       ; byte
+    db $ff,$0c,$00,$0d,$00,$ff,$ff,$ff,$ff,$ff,$10,$00,$11,$00,$ff,$ff ; [$b3a5]
+                                                                       ; byte
+    db $12,$03,$13,$03,$14,$00,$15,$00,$13,$43,$12,$43,$16,$03,$16,$03 ; [$b3b5]
+                                                                       ; byte
+    db $17,$03,$17,$43,$16,$03,$16,$03,$16,$03,$16,$03,$18,$03,$18,$43 ; [$b3c5]
+                                                                       ; byte
+    db $16,$03,$16,$03                      ; [$b3d5] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b01d]
 ;
-DAT_PRG7__b3d9:                             ; [$b3d9]
-    hex 01 10 08 08 05 00 06 00             ; [$b3d9] undefined
+BYTE_PRG7__b3d9:                            ; [$b3d9]
+    db $01,$10,$08,$08,$05,$00,$06,$00      ; [$b3d9] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b01f]
 ;
-DAT_PRG7__b3e1:                             ; [$b3e1]
-    hex 01 10 08 08 19 00 1a 00             ; [$b3e1] undefined
+BYTE_PRG7__b3e1:                            ; [$b3e1]
+    db $01,$10,$08,$08,$19,$00,$1a,$00      ; [$b3e1] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b021]
 ;
-DAT_PRG7__b3e9:                             ; [$b3e9]
-    hex 01 18 18 00 0e 00 0f 00             ; [$b3e9] undefined
+BYTE_PRG7__b3e9:                            ; [$b3e9]
+    db $01,$18,$18,$00,$0e,$00,$0f,$00      ; [$b3e9] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b023]
 ;
-DAT_PRG7__b3f1:                             ; [$b3f1]
-    hex 01 18 18 00 1b 00 1c 00             ; [$b3f1] undefined
+BYTE_PRG7__b3f1:                            ; [$b3f1]
+    db $01,$18,$18,$00,$1b,$00,$1c,$00      ; [$b3f1] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b025]
 ;
-DAT_PRG7__b3f9:                             ; [$b3f9]
-    hex 75 00 00 20 ff 00 00 01 00 02 00 03 00 ff ff ff ; [$b3f9] undefined
-    hex ff ff 07 00 ff ff ff ff 0a 00 0b 00 ff ff 0c 00 ; [$b409] undefined
-    hex 0d 00 0e 00 ff ff 0f 02 10 02 11 02 12 02 13 02 ; [$b419] undefined
-    hex 14 02 15 02 16 02 17 02 18 02 19 02 1a 00 18 02 ; [$b429] undefined
-    hex 1b 02 1c 02 1d 02 1e 02 1f 00 18 02 1b 02 1b 02 ; [$b439] undefined
-    db $1b,$02,$1e,$02,$0a,$00              ; [$b449] undefined
+BYTE_PRG7__b3f9:                            ; [$b3f9]
+    db $75,$00,$00,$20,$ff,$00,$00,$01,$00,$02,$00,$03,$00,$ff,$ff,$ff ; [$b3f9]
+                                                                       ; byte
+    db $ff,$ff,$07,$00,$ff,$ff,$ff,$ff,$0a,$00,$0b,$00,$ff,$ff,$0c,$00 ; [$b409]
+                                                                       ; byte
+    db $0d,$00,$0e,$00,$ff,$ff,$0f,$02,$10,$02,$11,$02,$12,$02,$13,$02 ; [$b419]
+                                                                       ; byte
+    db $14,$02,$15,$02,$16,$02,$17,$02,$18,$02,$19,$02,$1a,$00,$18,$02 ; [$b429]
+                                                                       ; byte
+    db $1b,$02,$1c,$02,$1d,$02,$1e,$02,$1f,$00,$18,$02,$1b,$02,$1b,$02 ; [$b439]
+                                                                       ; byte
+    db $1b,$02,$1e,$02,$0a,$00              ; [$b449] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b027]
 ;
-DAT_PRG7__b44f:                             ; [$b44f]
-    hex 02 08 08 10 04 00 05 00 06 00       ; [$b44f] undefined
+BYTE_PRG7__b44f:                            ; [$b44f]
+    db $02,$08,$08,$10,$04,$00,$05,$00,$06,$00 ; [$b44f] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b029]
 ;
-DAT_PRG7__b459:                             ; [$b459]
-    hex 02 08 08 10 20 00 21 00 22 00       ; [$b459] undefined
+BYTE_PRG7__b459:                            ; [$b459]
+    db $02,$08,$08,$10,$20,$00,$21,$00,$22,$00 ; [$b459] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b02b]
 ;
-DAT_PRG7__b463:                             ; [$b463]
-    hex 01 08 10 10 08 00 09 00             ; [$b463] undefined
+BYTE_PRG7__b463:                            ; [$b463]
+    db $01,$08,$10,$10,$08,$00,$09,$00      ; [$b463] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b02d]
 ;
-DAT_PRG7__b46b:                             ; [$b46b]
-    hex 01 08 10 10 23 00 24 00             ; [$b46b] undefined
+BYTE_PRG7__b46b:                            ; [$b46b]
+    db $01,$08,$10,$10,$23,$00,$24,$00      ; [$b46b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b02f]
 ;
-DAT_PRG7__b473:                             ; [$b473]
-    hex 75 00 00 18 ff 00 00 01 00 01 40 00 40 ff ff 02 ; [$b473] undefined
-    hex 00 03 00 03 40 02 40 ff ff 04 00 ff ff 04 40 ff ; [$b483] undefined
-    hex ff 06 00 ff ff 06 40 ff 08 02 09 02 0a 02 0a 42 ; [$b493] undefined
-    hex 09 42 08 42 0b 02 0c 02 0d 02 0d 02 0c 42 0b 42 ; [$b4a3] undefined
-    hex 0e 02 0f 02 0d 02 0d 02 0f 42 0e 42 10 02 11 02 ; [$b4b3] undefined
-    hex 12 02 12 42 11 42 10 42             ; [$b4c3] undefined
+BYTE_PRG7__b473:                            ; [$b473]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$01,$40,$00,$40,$ff,$ff,$02 ; [$b473]
+                                                                       ; byte
+    db $00,$03,$00,$03,$40,$02,$40,$ff,$ff,$04,$00,$ff,$ff,$04,$40,$ff ; [$b483]
+                                                                       ; byte
+    db $ff,$06,$00,$ff,$ff,$06,$40,$ff,$08,$02,$09,$02,$0a,$02,$0a,$42 ; [$b493]
+                                                                       ; byte
+    db $09,$42,$08,$42,$0b,$02,$0c,$02,$0d,$02,$0d,$02,$0c,$42,$0b,$42 ; [$b4a3]
+                                                                       ; byte
+    db $0e,$02,$0f,$02,$0d,$02,$0d,$02,$0f,$42,$0e,$42,$10,$02,$11,$02 ; [$b4b3]
+                                                                       ; byte
+    db $12,$02,$12,$42,$11,$42,$10,$42      ; [$b4c3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b031]
 ;
-DAT_PRG7__b4cb:                             ; [$b4cb]
-    hex 01 10 10 08 05 00 05 40             ; [$b4cb] undefined
+BYTE_PRG7__b4cb:                            ; [$b4cb]
+    db $01,$10,$10,$08,$05,$00,$05,$40      ; [$b4cb] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b033]
 ;
-DAT_PRG7__b4d3:                             ; [$b4d3]
-    hex 01 10 10 08 13 00 13 40             ; [$b4d3] undefined
+BYTE_PRG7__b4d3:                            ; [$b4d3]
+    db $01,$10,$10,$08,$13,$00,$13,$40      ; [$b4d3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b035]
 ;
-DAT_PRG7__b4db:                             ; [$b4db]
-    hex 01 10 18 08 07 00 07 40             ; [$b4db] undefined
+BYTE_PRG7__b4db:                            ; [$b4db]
+    db $01,$10,$18,$08,$07,$00,$07,$40      ; [$b4db] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b037]
 ;
-DAT_PRG7__b4e3:                             ; [$b4e3]
-    hex 01 10 18 08 14 00 14 40             ; [$b4e3] undefined
+BYTE_PRG7__b4e3:                            ; [$b4e3]
+    db $01,$10,$18,$08,$14,$00,$14,$40      ; [$b4e3] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b039]
 ;
-DAT_PRG7__b4eb:                             ; [$b4eb]
-    hex 75 00 00 18 ff 00 00 01 00 02 00 03 00 ff ff 04 ; [$b4eb] undefined
-    hex 00 05 00 06 00 07 00 ff ff 08 00 ff ff 0b 00 ff ; [$b4fb] undefined
-    hex ff 0c 00 0d 00 ff ff ff 10 00 11 00 12 00 13 00 ; [$b50b] undefined
-    hex 14 00 15 00 16 00 17 00 18 00 19 00 1a 00 1b 00 ; [$b51b] undefined
-    hex 1c 00 1d 00 1e 00 1e 00 1f 00 20 00 21 00 22 00 ; [$b52b] undefined
-    hex 1e 00 1e 00 22 40 21 40             ; [$b53b] undefined
+BYTE_PRG7__b4eb:                            ; [$b4eb]
+    db $75,$00,$00,$18,$ff,$00,$00,$01,$00,$02,$00,$03,$00,$ff,$ff,$04 ; [$b4eb]
+                                                                       ; byte
+    db $00,$05,$00,$06,$00,$07,$00,$ff,$ff,$08,$00,$ff,$ff,$0b,$00,$ff ; [$b4fb]
+                                                                       ; byte
+    db $ff,$0c,$00,$0d,$00,$ff,$ff,$ff,$10,$00,$11,$00,$12,$00,$13,$00 ; [$b50b]
+                                                                       ; byte
+    db $14,$00,$15,$00,$16,$00,$17,$00,$18,$00,$19,$00,$1a,$00,$1b,$00 ; [$b51b]
+                                                                       ; byte
+    db $1c,$00,$1d,$00,$1e,$00,$1e,$00,$1f,$00,$20,$00,$21,$00,$22,$00 ; [$b52b]
+                                                                       ; byte
+    db $1e,$00,$1e,$00,$22,$40,$21,$40      ; [$b53b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b03b]
 ;
-DAT_PRG7__b543:                             ; [$b543]
-    hex 01 10 10 08 09 00 0a 00             ; [$b543] undefined
+BYTE_PRG7__b543:                            ; [$b543]
+    db $01,$10,$10,$08,$09,$00,$0a,$00      ; [$b543] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b03d]
 ;
-DAT_PRG7__b54b:                             ; [$b54b]
-    hex 01 10 10 08 23 00 24 00             ; [$b54b] undefined
+BYTE_PRG7__b54b:                            ; [$b54b]
+    db $01,$10,$10,$08,$23,$00,$24,$00      ; [$b54b] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b03f]
 ;
-DAT_PRG7__b553:                             ; [$b553]
-    hex 01 18 18 00 0e 00 0f 00             ; [$b553] undefined
+BYTE_PRG7__b553:                            ; [$b553]
+    db $01,$18,$18,$00,$0e,$00,$0f,$00      ; [$b553] byte
 
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS [$PRG7::b041]
 ;
-DAT_PRG7__b55b:                             ; [$b55b]
-    hex 01 18 18 00 25 00 26 00 ff bf ff ff 77 00 ff f6 ; [$b55b] undefined
-    hex ff ff ff b7 ff 00 ff ef ff ff ff ff 1d 00 ff ff ; [$b56b] undefined
-    hex ff ff f7 df c2 00 ff e7 ff bd ff ff bd 00 ff bf ; [$b57b] undefined
-    hex ff ef ff ff 6f 00 ff 7f ff df ff ff e6 00 ff f5 ; [$b58b] undefined
-    hex ff bf ff ff 52 00 ff 3d ff 7f ff bf 7f 00 ff b7 ; [$b59b] undefined
-    hex ff ef ff ff cd 00 ff 7f ff ff ef ff 96 00 ff f9 ; [$b5ab] undefined
-    hex ff ff ff fa 3c 00 00 00 ea 00 00 00 00 00 00 00 ; [$b5bb] undefined
-    hex 01 00 00 00 00 00 00 00 00 00 40 00 00 00 00 00 ; [$b5cb] undefined
-    hex 26 00 00 00 00 00 ff 45 ff fb ff dc 20 00 ff fd ; [$b5db] undefined
-    hex ff fb ff ff 87 00 ff bf ff ff fb ff e0 00 ff 7f ; [$b5eb] undefined
-    hex ff ff ff ff 1f 00 ff ff ff eb ff ad 7d 00 ff b4 ; [$b5fb] undefined
-    hex ff ff ff ff ff 00 ff ff ff fb ff 7f a7 00 ff 77 ; [$b60b] undefined
-    hex ff fe ff ff 82 00 ff f5 ff ff ff df ff 00 ff da ; [$b61b] undefined
-    hex ff ff ff ff ee 00 ff ce ff ff ff ff 53 00 ff ff ; [$b62b] undefined
-    hex ff bf ff fe 17 00 ff 89 ff 7a ff f6 ff 00 ff df ; [$b63b] undefined
-    hex ff ff ff fb ff 00 ff d2 ff ff 7f ff da 00 ff 1d ; [$b64b] undefined
-    hex ff ff ff ff 54 00 ff 6b ff ff ff bf d0 00 ff ff ; [$b65b] undefined
-    hex ff ff ff ff bf 00 ff 6f ff ff ff bf ea 00 ff f5 ; [$b66b] undefined
-    hex ff ff ff ff 91 00 ff 85 ff 7f ff f5 a5 00 ff ff ; [$b67b] undefined
-    hex ff ff ff ff 27 00 ff fd ff ff ff fa d9 00 ff f7 ; [$b68b] undefined
-    hex ff ff ff ff 8d 00 ff 6f ff df ff fb ef 00 ff ef ; [$b69b] undefined
-    hex ff ff ff fd b5 00 ff 9c ff cf ff bf 06 00 ff fe ; [$b6ab] undefined
-    hex ff ef bf ff 13 00 ff da ff ff ff fb 5e 00 ff df ; [$b6bb] undefined
-    hex ff ff ff ff f3 00 ff 7f ff 77 fe ff dc 00 ff bf ; [$b6cb] undefined
-    hex ff ff ff fd 69 00 ff 11 ff 7f ff 27 fb 00 ff 88 ; [$b6db] undefined
-    hex ff fb ff f6 97 00 ff 75 ff 9f ff 7e 47 00 ef b7 ; [$b6eb] undefined
-    hex ff ff ff df 3f 00 ff b1 ff fd ff b7 ff 00 ff 5f ; [$b6fb] undefined
-    hex ff ff ff ff ef 00 ff fe ff ff ff ff bf 00 ff 17 ; [$b70b] undefined
-    hex ff fb ff ff 39 00 ff a3 ff 56 ff eb bf 00 ff df ; [$b71b] undefined
-    hex ff fb ff fe 5f 00 ff ef ff bf ff ff 5a 00 ff 7f ; [$b72b] undefined
-    hex ff ff ff ff 1d 00 ff c8 ff 7f ff bb f3 00 ff c5 ; [$b73b] undefined
-    hex ff ff ff 37 bf 00 ff 5c ff ff ff ff 2e 00 ff 7f ; [$b74b] undefined
-    hex ff ff ff ff 78 00 ff 6f ff fe ff ff fb 00 ff 7d ; [$b75b] undefined
-    hex ff ff ff ff 5e 00 ff f7 ff fe ff 7d 0b 00 ff fd ; [$b76b] undefined
-    hex ff ff ff ff 89 00 ff 75 ff fe ff 5c df 00 ff de ; [$b77b] undefined
-    hex ff f3 ff ff 0f 00 ff 77 ff 77 ff ff ef 00 ff 76 ; [$b78b] undefined
-    hex ff fd ef ff 4d 00 ff 5c ff fd ff fa 47 00 ff ef ; [$b79b] undefined
-    hex ff df df ff 90 80 ff cd ff ff ff cd cd 00 ff be ; [$b7ab] undefined
-    hex ff ff ff fd 43 00 ff 4a ff ff ff 3f f7 00 ff f4 ; [$b7bb] undefined
-    hex ff ff ff df ba 00 ff fe ff df ff fe 03 00 ff fe ; [$b7cb] undefined
-    hex ff ff ff f7 30 00 ff 11 ff ff ff fd b7 00 ff 7d ; [$b7db] undefined
-    hex ff 77 fb 7f be 00 ff ae ff ff ff fb 72 00 ff 7f ; [$b7eb] undefined
-    hex ff ff ff ff dc 00 ff 5c ff fd ff f7 df 00 ff 7e ; [$b7fb] undefined
-    hex ff ff ff ff cf 00 ff fb ff ff ff ff 86 00 ff fe ; [$b80b] undefined
-    hex ff ff ff ff cb 00 ff 3f ff ec ff ef 7d 00 ff fa ; [$b81b] undefined
-    hex ff ff ff ff df 00 ff ed ff fd ff ff 56 00 ff ff ; [$b82b] undefined
-    hex ff ff ff ff 44 00 ff dd ff 9f ff ff ff 00 ff ca ; [$b83b] undefined
-    hex ff ff ff ff af 00 ff 5f ff ff ff ff 33 00 ff ff ; [$b84b] undefined
-    hex ff ff ff ff 01 00 ff 68 ff f7 ff 6e fa 00 ff ef ; [$b85b] undefined
-    hex ff ff ff fb 7e 00 ff fb ff ff ff fe 42 00 ff ff ; [$b86b] undefined
-    hex ff ff ff 5f 9b 00 ff e7 bf ff ff 77 f5 00 ff fa ; [$b87b] undefined
-    hex ff ff ff ff fa 00 ff f7 ff ff ff df e5 00 ff df ; [$b88b] undefined
-    hex ff ff ff ff 5b 00 ff f4 ff 97 ff ff ef 00 ff fb ; [$b89b] undefined
-    hex ff 7f ff fb de 00 ff db ff fe ff ff 18 00 ff fc ; [$b8ab] undefined
-    hex f7 fa ff ef b4 00 ff 7f ff 79 ff b7 fe 00 ff db ; [$b8bb] undefined
-    hex ff fb ff af 5f 00 ff be ff ff ff ff 58 00 ff ff ; [$b8cb] undefined
-    hex ff ff ff bb 56 00 ff 88 ff 9c ff af ff 00 ff b7 ; [$b8db] undefined
-    hex ff ff ff fe af 00 ff fa ff ff bf ff 69 00 ff ce ; [$b8eb] undefined
-    hex ff ff df f7 0e 00 ff cb ff ef ff ff 7f 00 ff ff ; [$b8fb] undefined
-    hex ff ff ff 5e ff 00 ff ec ff ff ff ff ef 00 ff fd ; [$b90b] undefined
-    hex ff ff ff ff 33 00 ff 83 ff 7f ff e9 ff 00 ff b6 ; [$b91b] undefined
-    hex ff fd ff ff 5f 00 ff af ff fb ff ff 8f 80 ff ff ; [$b92b] undefined
-    hex ff ff ff bf 1b 00 ff be ff 7f ff fd d7 00 ff cf ; [$b93b] undefined
-    hex ff ff ff fe 1f 00 ff 7d ff f5 ff ff 4e 00 ff 3f ; [$b94b] undefined
-    hex ff ff ff ff 24 00 ff b5 ff 7f ff ff 9b 00 ff f4 ; [$b95b] undefined
-    hex ff ff ff ef 3d 00 ff bf ff ff ff ff f8 00 ff ff ; [$b96b] undefined
-    hex ff ff ff ff f0 00 ff a7 ff ff ff ff f7 00 ff ef ; [$b97b] undefined
-    hex ff fd ff bf 7f 00 f7 2d ff ef ff ff 97 00 ff f3 ; [$b98b] undefined
-    hex ff ff ff df fd 00 ff 9b ff fd ff ff ff 00 ff bf ; [$b99b] undefined
-    hex ff ff ff fb 5f 00 ff 6f ff ff bf bf a8 00 ff ff ; [$b9ab] undefined
-    hex ff f7 ff ff 41 00 ff a1 ff f2 ff 7e da 00 ff fc ; [$b9bb] undefined
-    hex ff ff ff ef ae 00 ff 97 ff f9 ff fd 82 00 ff f9 ; [$b9cb] undefined
-    hex ff ff ff ff a9 00 ff 1e ff 7f ff 6f fe 00 ff af ; [$b9db] undefined
-    hex ff 7f ff ff 76 00 ff de ff df ff df 31 00 f7 ff ; [$b9eb] undefined
-    hex ff df ff ff 06 00 ff 77 ff ff ff f7 bf 00 ff e9 ; [$b9fb] undefined
-    hex ff fe ff ff fe 00 ff f6 ff b7 ff ff dd 00 ff fb ; [$ba0b] undefined
-    hex ff ff ff ef 18 00 ff b7 ff d6 ff 76 ff 00 ff d9 ; [$ba1b] undefined
-    hex ff 7f ff ff f7 00 ff bb ff ff ff ff f0 00 ff ff ; [$ba2b] undefined
-    hex ff ff 7f ff 08 00 ff ab ff ff ff fd ff 00 ff d1 ; [$ba3b] undefined
-    hex ff ff ff ff ef 00 ff ce ff df ff ff 2e 00 ff bf ; [$ba4b] undefined
-    hex ff ff ff ff 98 00 ff ff ff ff ff ff fa 00 ff 8e ; [$ba5b] undefined
-    hex ff cf ff fe 97 00 ff 2e ff ff ff ff ce 00 ff ff ; [$ba6b] undefined
-    hex ff ff ff ff 31 00 ff 8d ff eb ff f7 9d 00 ff 6b ; [$ba7b] undefined
-    hex ff f2 df 77 72 00 ff ff ff dd ff ef 5e 00 ff 7b ; [$ba8b] undefined
-    hex ff ff ef fe 24 00 ff ef ff e8 ff f3 7f 00 ff d7 ; [$ba9b] undefined
-    hex ff df ff fd 3e 00 ff fb ff f7 ff ff ce 00 ff 7f ; [$baab] undefined
-    hex ff ff fd ff 36 00 ff bf ff db ff ff 3f 00 ff 5a ; [$babb] undefined
-    hex ff 7f ff df 5b 00 ff 73 ff fc df f6 9c 00 ff b2 ; [$bacb] undefined
-    hex ff ff f7 ff 03 00 ff cb ff fa ff ff ae 00 ff d3 ; [$badb] undefined
-    hex ff ff ff ff 3c 00 ff fe ff ff ff f7 14 00 ff bf ; [$baeb] undefined
-    hex ff ff bf ff 01 00 ff 86 ff ef ff b5 ff 00 ff 59 ; [$bafb] undefined
-    hex ff ff ff ff 96 00 ff 7e ff ff 7f ff da 00 ff ff ; [$bb0b] undefined
-    hex ff ff ff ff 14 00 ff 21 ff db ff fb 7f 00 ff b7 ; [$bb1b] undefined
-    hex ff ef ff b3 fb 00 ff ff ff df ff f3 7f 00 ff f7 ; [$bb2b] undefined
-    hex ff ff ff ff 60 00 ff d4 ff ff ff bd 7f 00 ff be ; [$bb3b] undefined
-    hex ff ff ff ff df 00 ff 7b ff ef ff ff cf 00 ff f7 ; [$bb4b] undefined
-    hex ff ff ff ff 5f 00 ff a9 ff f7 ff f7 fe 00 ff 44 ; [$bb5b] undefined
-    hex ff ff ff ef 6f 00 ff 6b ff fd ff ff be 00 ff ff ; [$bb6b] undefined
-    hex ff ff 3f ff 56 00 ff c2 ff ff ff fb fb 00 ff 26 ; [$bb7b] undefined
-    hex ff ff ff fb c1 00 ff 5f ff f3 ff ff e0 00 ff fe ; [$bb8b] undefined
-    hex ff ef ff 7f c0 00 ff e8 ff ed ff ff 9f 00 ff 6e ; [$bb9b] undefined
-    hex ff f7 ff df 47 00 ff ea ff fd ff ff 6d 00 ff ff ; [$bbab] undefined
-    hex ff bf ff ef a8 00 ff c4 ff ed ff fb ef 00 ff 3a ; [$bbbb] undefined
-    hex ff ff ff fd 72 00 ff 93 ff fd fd bd 45 00 ff ef ; [$bbcb] undefined
-    hex ff ff ff ff f0 00 ff 25 ff fb ff fa 57 00 ff cf ; [$bbdb] undefined
-    hex ff ff ff e3 4c 00 ff a7 ff f7 ff fe 8e 00 ff e0 ; [$bbeb] undefined
-    hex ff ff ff f7 47 00 ff bf ff bf ff ff ff 00 ff fe ; [$bbfb] undefined
-    hex ff ff ff ee f7 00 ff ff ff fb ff ff ce 00 ff bf ; [$bc0b] undefined
-    hex ff fe ff ff f6 00 ff 1a ff ef ff f5 ff 00 ff df ; [$bc1b] undefined
-    hex ff f7 ff fd bf 00 ff f7 ff af fd ff 6f 00 ff ff ; [$bc2b] undefined
-    hex ff ff fb ff 93 00 ff 97 ff ff ff ef ff 00 ff fe ; [$bc3b] undefined
-    hex ff ef ff df fb 00 ff f4 ff f7 ff fe d1 00 ff f6 ; [$bc4b] undefined
-    hex ff ff ff bf 73 00 ff 5d ff fa ff ff ff 00 ff ff ; [$bc5b] undefined
-    hex fd ff ff ff ff 00 ff ff ff ff ef fd 1e 00 ff bf ; [$bc6b] undefined
-    hex ff ff ff ff 2d 00 ff 0b ff de ff d7 bf 00 ff 3f ; [$bc7b] undefined
-    hex ff ff ff fd fd 00 ff 7f ff ef ff ff ac 00 ff fb ; [$bc8b] undefined
-    hex ff ff df f7 d7 00 ff a4 ff bf ff fd 60 00 ff f7 ; [$bc9b] undefined
-    hex ff ff ff bf ff 00 ff 5f ff ff ff ff ac 00 ff ef ; [$bcab] undefined
-    hex ff ff ff ff ae 00 ff 20 ff ff ff ef d6 00 ff ec ; [$bcbb] undefined
-    hex ff bf ff ff de 00 ff e7 ff df ff ff 16 00 ff df ; [$bccb] undefined
-    hex ff ff ff ff 51 00 ff ed ff bf ff 3f 67 00 ff de ; [$bcdb] undefined
-    hex ff ff ff cf 2d 00 ff b5 ff df ff ff 17 00 ff fd ; [$bceb] undefined
-    hex ff b7 bf bf 85 00 ff d0 ff ff ff f7 fd 00 ff fb ; [$bcfb] undefined
-    hex ff e6 ff c5 af 00 ff d5 ff 7f ff ff 4f 00 ff fb ; [$bd0b] undefined
-    hex ff ff ff ff 2f 00 ff da ff f7 ff ef fd 00 ff ae ; [$bd1b] undefined
-    hex ff ff ff db e6 00 ff fe ff ff ff ff 0c 00 ff ff ; [$bd2b] undefined
-    hex ff f7 ff bf dd 00 ff 1b ff ad ff fe ff 00 ff ff ; [$bd3b] undefined
-    hex ff ff ff ef fe 00 ff cf ff ff ff ff 77 00 ff ff ; [$bd4b] undefined
-    hex ff ff ff ff 70 00 ff f9 ff f7 ff fd 7f 00 ff bf ; [$bd5b] undefined
-    hex ff ff ff ff a4 00 ff 7f ff fb ff ff 49 00 ff 5f ; [$bd6b] undefined
-    hex ff ff ff ff ad 00 ff 8a ff e7 ff ff ff 00 ff f9 ; [$bd7b] undefined
-    hex ff fb ff ff fb 00 ff de ff ff ff df 01 00 ff ef ; [$bd8b] undefined
-    hex bf fe ff ef 3e 00 ff f3 ff ff ff bf ef 00 ff 39 ; [$bd9b] undefined
-    hex ff 7f ff df 2b 00 ff fe ff ff ff ff a2 00 ff fb ; [$bdab] undefined
-    hex ff ff ff ff fb 00 ff ff ff ff ff 3b 0d 00 ff af ; [$bdbb] undefined
-    hex ff ff ff ef 37 00 ff fc ff bf fe ff 48 00 ff bf ; [$bdcb] undefined
-    hex ff ff ff ff 10 00 ff e7 ff ff ff 3d 5f 00 ff 6e ; [$bddb] undefined
-    hex ff fd ff ff 96 00 ff 59 ff fa ff fb ea 00 ff 7e ; [$bdeb] undefined
-    hex ff ff fb fd 00 00 ff 70 ff fb ff ad ff 00 ff 7c ; [$bdfb] undefined
-    hex ff fe ff ff ff 00 ff bf ff ff ff ff 5f 00 ff fb ; [$be0b] undefined
-    hex ff ff ff ff c8 00 ff 1d ff fb ff 6f ff 00 ff 12 ; [$be1b] undefined
-    hex ff ff ff fb ff 00 ff ff ff ff ff 7e bf 00 ff ff ; [$be2b] undefined
-    hex ff ff ff ff f9 00 ff dc ff ff ff ff 3f 00 ff b3 ; [$be3b] undefined
-    hex ff f7 ff ff fe 00 ff 7e ff ff ff ff 3a 00 ff f7 ; [$be4b] undefined
-    hex ff bf ff ff 09 00 ff d8 ff bd ff 15 af 00 ff e3 ; [$be5b] undefined
-    hex ff ff ff f7 dd 00 ff 79 ff ff ff bf 68 00 ff ef ; [$be6b] undefined
-    hex ff ff ff ff 02 00 ff 57 ff 7f ff f3 ff 00 ff 23 ; [$be7b] undefined
-    hex ff f7 ff ff f3 00 ff 7b ff ff ff ff a4 00 ff fe ; [$be8b] undefined
-    hex ff ff ff ff 08 00 ff f8 ff ff ff df 9e 00 ff f2 ; [$be9b] undefined
-    hex ff ff ff fe 3e 00 ff fb ff ff ff ff 22 00 ff ed ; [$beab] undefined
-    hex ff ff ff ff d9 00 ff 1f ff af ff f7 fc 00 ff dd ; [$bebb] undefined
-    hex ff ff ff fe 8b 00 ff ff ff ff ff fd ed 00 ff df ; [$becb] undefined
-    hex ff ff ff ff 40 00 ff f7 ff fd ff 4e 1d 00 ff f9 ; [$bedb] undefined
-    hex ff fd ff cf f6 00 ff 7f ff bf ff 7b 61 00 ff f7 ; [$beeb] undefined
-    hex ff df ff ff 21 00 ff 6f ff ff ff fb 7f 00 ff df ; [$befb] undefined
-    hex ff f7 ff ff 9f 00 ff bf ff f7 ff ff b7 00 ff ff ; [$bf0b] undefined
-    hex ff fe ff ff 91 00 ff 83 ff 7f ff 6d ff 00 ff b5 ; [$bf1b] undefined
-    hex ff ff ff ff eb 00 ff fd ff ff ff ef b5 00 ff bf ; [$bf2b] undefined
-    hex ff ff ff ff 7a 00 ff d0 ff bc ff ed ff 00 ff dd ; [$bf3b] undefined
-    hex ff fb ff ff b3 00 ff ff ff ff ff fd 6a 00 ff f7 ; [$bf4b] undefined
-    hex ff df ff ff 34 00 ff 67 ff ff ff b5 fd 00 ff da ; [$bf5b] undefined
-    hex ff ff ff ff fa 00 ff 7e ff df ff ff 49 00 ff de ; [$bf6b] undefined
-    hex ff ff ff ef 27 00 ff e7 ff 3d ff fb 39 00 ff fa ; [$bf7b] undefined
-    hex ff fb ff fd fb 00 ff ff ff ff ff ef 26 00 ff ff ; [$bf8b] undefined
-    hex ff ff ff df 89 00 ff 98 ff 7f ff fd da 00 ff f1 ; [$bf9b] undefined
-    hex ff ef ff ff 5f 00 ff b2 ff ef ff ff 4e 00 ff ff ; [$bfab] undefined
-    hex ff ff ff 3f 1a 00 ff 18 ff eb ff df 4b 00 ff fb ; [$bfbb] undefined
-    hex ff ef ff fd 58 00 ff f3 fe ff ff ff 02 00 ff ff ; [$bfcb] undefined
-    hex ff ff ff ef 60 00 ff 72 ff ef ff fe 0a 00 ff cd ; [$bfdb] undefined
-    hex ff ff ff 6e fc 00 fe ed ff ff ff df d7 00 ff f3 ; [$bfeb] undefined
-    db $ff,$fe,$ff,$ff,$09                  ; [$bffb] undefined
+BYTE_PRG7__b55b:                            ; [$b55b]
+    db $01,$18,$18,$00,$25,$00,$26,$00,$ff,$bf,$ff,$ff,$77,$00,$ff,$f6 ; [$b55b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$b7,$ff,$00,$ff,$ef,$ff,$ff,$ff,$ff,$1d,$00,$ff,$ff ; [$b56b]
+                                                                       ; byte
+    db $ff,$ff,$f7,$df,$c2,$00,$ff,$e7,$ff,$bd,$ff,$ff,$bd,$00,$ff,$bf ; [$b57b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$ff,$6f,$00,$ff,$7f,$ff,$df,$ff,$ff,$e6,$00,$ff,$f5 ; [$b58b]
+                                                                       ; byte
+    db $ff,$bf,$ff,$ff,$52,$00,$ff,$3d,$ff,$7f,$ff,$bf,$7f,$00,$ff,$b7 ; [$b59b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$ff,$cd,$00,$ff,$7f,$ff,$ff,$ef,$ff,$96,$00,$ff,$f9 ; [$b5ab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fa,$3c,$00,$00,$00,$ea,$00,$00,$00,$00,$00,$00,$00 ; [$b5bb]
+                                                                       ; byte
+    db $01,$00,$00,$00,$00,$00,$00,$00,$00,$00,$40,$00,$00,$00,$00,$00 ; [$b5cb]
+                                                                       ; byte
+    db $26,$00,$00,$00,$00,$00,$ff,$45,$ff,$fb,$ff,$dc,$20,$00,$ff,$fd ; [$b5db]
+                                                                       ; byte
+    db $ff,$fb,$ff,$ff,$87,$00,$ff,$bf,$ff,$ff,$fb,$ff,$e0,$00,$ff,$7f ; [$b5eb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$1f,$00,$ff,$ff,$ff,$eb,$ff,$ad,$7d,$00,$ff,$b4 ; [$b5fb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ff,$00,$ff,$ff,$ff,$fb,$ff,$7f,$a7,$00,$ff,$77 ; [$b60b]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$82,$00,$ff,$f5,$ff,$ff,$ff,$df,$ff,$00,$ff,$da ; [$b61b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ee,$00,$ff,$ce,$ff,$ff,$ff,$ff,$53,$00,$ff,$ff ; [$b62b]
+                                                                       ; byte
+    db $ff,$bf,$ff,$fe,$17,$00,$ff,$89,$ff,$7a,$ff,$f6,$ff,$00,$ff,$df ; [$b63b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fb,$ff,$00,$ff,$d2,$ff,$ff,$7f,$ff,$da,$00,$ff,$1d ; [$b64b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$54,$00,$ff,$6b,$ff,$ff,$ff,$bf,$d0,$00,$ff,$ff ; [$b65b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$bf,$00,$ff,$6f,$ff,$ff,$ff,$bf,$ea,$00,$ff,$f5 ; [$b66b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$91,$00,$ff,$85,$ff,$7f,$ff,$f5,$a5,$00,$ff,$ff ; [$b67b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$27,$00,$ff,$fd,$ff,$ff,$ff,$fa,$d9,$00,$ff,$f7 ; [$b68b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$8d,$00,$ff,$6f,$ff,$df,$ff,$fb,$ef,$00,$ff,$ef ; [$b69b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fd,$b5,$00,$ff,$9c,$ff,$cf,$ff,$bf,$06,$00,$ff,$fe ; [$b6ab]
+                                                                       ; byte
+    db $ff,$ef,$bf,$ff,$13,$00,$ff,$da,$ff,$ff,$ff,$fb,$5e,$00,$ff,$df ; [$b6bb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$f3,$00,$ff,$7f,$ff,$77,$fe,$ff,$dc,$00,$ff,$bf ; [$b6cb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fd,$69,$00,$ff,$11,$ff,$7f,$ff,$27,$fb,$00,$ff,$88 ; [$b6db]
+                                                                       ; byte
+    db $ff,$fb,$ff,$f6,$97,$00,$ff,$75,$ff,$9f,$ff,$7e,$47,$00,$ef,$b7 ; [$b6eb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$df,$3f,$00,$ff,$b1,$ff,$fd,$ff,$b7,$ff,$00,$ff,$5f ; [$b6fb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ef,$00,$ff,$fe,$ff,$ff,$ff,$ff,$bf,$00,$ff,$17 ; [$b70b]
+                                                                       ; byte
+    db $ff,$fb,$ff,$ff,$39,$00,$ff,$a3,$ff,$56,$ff,$eb,$bf,$00,$ff,$df ; [$b71b]
+                                                                       ; byte
+    db $ff,$fb,$ff,$fe,$5f,$00,$ff,$ef,$ff,$bf,$ff,$ff,$5a,$00,$ff,$7f ; [$b72b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$1d,$00,$ff,$c8,$ff,$7f,$ff,$bb,$f3,$00,$ff,$c5 ; [$b73b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$37,$bf,$00,$ff,$5c,$ff,$ff,$ff,$ff,$2e,$00,$ff,$7f ; [$b74b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$78,$00,$ff,$6f,$ff,$fe,$ff,$ff,$fb,$00,$ff,$7d ; [$b75b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$5e,$00,$ff,$f7,$ff,$fe,$ff,$7d,$0b,$00,$ff,$fd ; [$b76b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$89,$00,$ff,$75,$ff,$fe,$ff,$5c,$df,$00,$ff,$de ; [$b77b]
+                                                                       ; byte
+    db $ff,$f3,$ff,$ff,$0f,$00,$ff,$77,$ff,$77,$ff,$ff,$ef,$00,$ff,$76 ; [$b78b]
+                                                                       ; byte
+    db $ff,$fd,$ef,$ff,$4d,$00,$ff,$5c,$ff,$fd,$ff,$fa,$47,$00,$ff,$ef ; [$b79b]
+                                                                       ; byte
+    db $ff,$df,$df,$ff,$90,$80,$ff,$cd,$ff,$ff,$ff,$cd,$cd,$00,$ff,$be ; [$b7ab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fd,$43,$00,$ff,$4a,$ff,$ff,$ff,$3f,$f7,$00,$ff,$f4 ; [$b7bb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$df,$ba,$00,$ff,$fe,$ff,$df,$ff,$fe,$03,$00,$ff,$fe ; [$b7cb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$f7,$30,$00,$ff,$11,$ff,$ff,$ff,$fd,$b7,$00,$ff,$7d ; [$b7db]
+                                                                       ; byte
+    db $ff,$77,$fb,$7f,$be,$00,$ff,$ae,$ff,$ff,$ff,$fb,$72,$00,$ff,$7f ; [$b7eb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$dc,$00,$ff,$5c,$ff,$fd,$ff,$f7,$df,$00,$ff,$7e ; [$b7fb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$cf,$00,$ff,$fb,$ff,$ff,$ff,$ff,$86,$00,$ff,$fe ; [$b80b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$cb,$00,$ff,$3f,$ff,$ec,$ff,$ef,$7d,$00,$ff,$fa ; [$b81b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$df,$00,$ff,$ed,$ff,$fd,$ff,$ff,$56,$00,$ff,$ff ; [$b82b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$44,$00,$ff,$dd,$ff,$9f,$ff,$ff,$ff,$00,$ff,$ca ; [$b83b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$af,$00,$ff,$5f,$ff,$ff,$ff,$ff,$33,$00,$ff,$ff ; [$b84b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$01,$00,$ff,$68,$ff,$f7,$ff,$6e,$fa,$00,$ff,$ef ; [$b85b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fb,$7e,$00,$ff,$fb,$ff,$ff,$ff,$fe,$42,$00,$ff,$ff ; [$b86b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$5f,$9b,$00,$ff,$e7,$bf,$ff,$ff,$77,$f5,$00,$ff,$fa ; [$b87b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$fa,$00,$ff,$f7,$ff,$ff,$ff,$df,$e5,$00,$ff,$df ; [$b88b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$5b,$00,$ff,$f4,$ff,$97,$ff,$ff,$ef,$00,$ff,$fb ; [$b89b]
+                                                                       ; byte
+    db $ff,$7f,$ff,$fb,$de,$00,$ff,$db,$ff,$fe,$ff,$ff,$18,$00,$ff,$fc ; [$b8ab]
+                                                                       ; byte
+    db $f7,$fa,$ff,$ef,$b4,$00,$ff,$7f,$ff,$79,$ff,$b7,$fe,$00,$ff,$db ; [$b8bb]
+                                                                       ; byte
+    db $ff,$fb,$ff,$af,$5f,$00,$ff,$be,$ff,$ff,$ff,$ff,$58,$00,$ff,$ff ; [$b8cb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$bb,$56,$00,$ff,$88,$ff,$9c,$ff,$af,$ff,$00,$ff,$b7 ; [$b8db]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fe,$af,$00,$ff,$fa,$ff,$ff,$bf,$ff,$69,$00,$ff,$ce ; [$b8eb]
+                                                                       ; byte
+    db $ff,$ff,$df,$f7,$0e,$00,$ff,$cb,$ff,$ef,$ff,$ff,$7f,$00,$ff,$ff ; [$b8fb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$5e,$ff,$00,$ff,$ec,$ff,$ff,$ff,$ff,$ef,$00,$ff,$fd ; [$b90b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$33,$00,$ff,$83,$ff,$7f,$ff,$e9,$ff,$00,$ff,$b6 ; [$b91b]
+                                                                       ; byte
+    db $ff,$fd,$ff,$ff,$5f,$00,$ff,$af,$ff,$fb,$ff,$ff,$8f,$80,$ff,$ff ; [$b92b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$bf,$1b,$00,$ff,$be,$ff,$7f,$ff,$fd,$d7,$00,$ff,$cf ; [$b93b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fe,$1f,$00,$ff,$7d,$ff,$f5,$ff,$ff,$4e,$00,$ff,$3f ; [$b94b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$24,$00,$ff,$b5,$ff,$7f,$ff,$ff,$9b,$00,$ff,$f4 ; [$b95b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$3d,$00,$ff,$bf,$ff,$ff,$ff,$ff,$f8,$00,$ff,$ff ; [$b96b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$f0,$00,$ff,$a7,$ff,$ff,$ff,$ff,$f7,$00,$ff,$ef ; [$b97b]
+                                                                       ; byte
+    db $ff,$fd,$ff,$bf,$7f,$00,$f7,$2d,$ff,$ef,$ff,$ff,$97,$00,$ff,$f3 ; [$b98b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$df,$fd,$00,$ff,$9b,$ff,$fd,$ff,$ff,$ff,$00,$ff,$bf ; [$b99b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fb,$5f,$00,$ff,$6f,$ff,$ff,$bf,$bf,$a8,$00,$ff,$ff ; [$b9ab]
+                                                                       ; byte
+    db $ff,$f7,$ff,$ff,$41,$00,$ff,$a1,$ff,$f2,$ff,$7e,$da,$00,$ff,$fc ; [$b9bb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$ae,$00,$ff,$97,$ff,$f9,$ff,$fd,$82,$00,$ff,$f9 ; [$b9cb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$a9,$00,$ff,$1e,$ff,$7f,$ff,$6f,$fe,$00,$ff,$af ; [$b9db]
+                                                                       ; byte
+    db $ff,$7f,$ff,$ff,$76,$00,$ff,$de,$ff,$df,$ff,$df,$31,$00,$f7,$ff ; [$b9eb]
+                                                                       ; byte
+    db $ff,$df,$ff,$ff,$06,$00,$ff,$77,$ff,$ff,$ff,$f7,$bf,$00,$ff,$e9 ; [$b9fb]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$fe,$00,$ff,$f6,$ff,$b7,$ff,$ff,$dd,$00,$ff,$fb ; [$ba0b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$18,$00,$ff,$b7,$ff,$d6,$ff,$76,$ff,$00,$ff,$d9 ; [$ba1b]
+                                                                       ; byte
+    db $ff,$7f,$ff,$ff,$f7,$00,$ff,$bb,$ff,$ff,$ff,$ff,$f0,$00,$ff,$ff ; [$ba2b]
+                                                                       ; byte
+    db $ff,$ff,$7f,$ff,$08,$00,$ff,$ab,$ff,$ff,$ff,$fd,$ff,$00,$ff,$d1 ; [$ba3b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ef,$00,$ff,$ce,$ff,$df,$ff,$ff,$2e,$00,$ff,$bf ; [$ba4b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$98,$00,$ff,$ff,$ff,$ff,$ff,$ff,$fa,$00,$ff,$8e ; [$ba5b]
+                                                                       ; byte
+    db $ff,$cf,$ff,$fe,$97,$00,$ff,$2e,$ff,$ff,$ff,$ff,$ce,$00,$ff,$ff ; [$ba6b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$31,$00,$ff,$8d,$ff,$eb,$ff,$f7,$9d,$00,$ff,$6b ; [$ba7b]
+                                                                       ; byte
+    db $ff,$f2,$df,$77,$72,$00,$ff,$ff,$ff,$dd,$ff,$ef,$5e,$00,$ff,$7b ; [$ba8b]
+                                                                       ; byte
+    db $ff,$ff,$ef,$fe,$24,$00,$ff,$ef,$ff,$e8,$ff,$f3,$7f,$00,$ff,$d7 ; [$ba9b]
+                                                                       ; byte
+    db $ff,$df,$ff,$fd,$3e,$00,$ff,$fb,$ff,$f7,$ff,$ff,$ce,$00,$ff,$7f ; [$baab]
+                                                                       ; byte
+    db $ff,$ff,$fd,$ff,$36,$00,$ff,$bf,$ff,$db,$ff,$ff,$3f,$00,$ff,$5a ; [$babb]
+                                                                       ; byte
+    db $ff,$7f,$ff,$df,$5b,$00,$ff,$73,$ff,$fc,$df,$f6,$9c,$00,$ff,$b2 ; [$bacb]
+                                                                       ; byte
+    db $ff,$ff,$f7,$ff,$03,$00,$ff,$cb,$ff,$fa,$ff,$ff,$ae,$00,$ff,$d3 ; [$badb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$3c,$00,$ff,$fe,$ff,$ff,$ff,$f7,$14,$00,$ff,$bf ; [$baeb]
+                                                                       ; byte
+    db $ff,$ff,$bf,$ff,$01,$00,$ff,$86,$ff,$ef,$ff,$b5,$ff,$00,$ff,$59 ; [$bafb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$96,$00,$ff,$7e,$ff,$ff,$7f,$ff,$da,$00,$ff,$ff ; [$bb0b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$14,$00,$ff,$21,$ff,$db,$ff,$fb,$7f,$00,$ff,$b7 ; [$bb1b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$b3,$fb,$00,$ff,$ff,$ff,$df,$ff,$f3,$7f,$00,$ff,$f7 ; [$bb2b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$60,$00,$ff,$d4,$ff,$ff,$ff,$bd,$7f,$00,$ff,$be ; [$bb3b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$df,$00,$ff,$7b,$ff,$ef,$ff,$ff,$cf,$00,$ff,$f7 ; [$bb4b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$5f,$00,$ff,$a9,$ff,$f7,$ff,$f7,$fe,$00,$ff,$44 ; [$bb5b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$6f,$00,$ff,$6b,$ff,$fd,$ff,$ff,$be,$00,$ff,$ff ; [$bb6b]
+                                                                       ; byte
+    db $ff,$ff,$3f,$ff,$56,$00,$ff,$c2,$ff,$ff,$ff,$fb,$fb,$00,$ff,$26 ; [$bb7b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fb,$c1,$00,$ff,$5f,$ff,$f3,$ff,$ff,$e0,$00,$ff,$fe ; [$bb8b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$7f,$c0,$00,$ff,$e8,$ff,$ed,$ff,$ff,$9f,$00,$ff,$6e ; [$bb9b]
+                                                                       ; byte
+    db $ff,$f7,$ff,$df,$47,$00,$ff,$ea,$ff,$fd,$ff,$ff,$6d,$00,$ff,$ff ; [$bbab]
+                                                                       ; byte
+    db $ff,$bf,$ff,$ef,$a8,$00,$ff,$c4,$ff,$ed,$ff,$fb,$ef,$00,$ff,$3a ; [$bbbb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fd,$72,$00,$ff,$93,$ff,$fd,$fd,$bd,$45,$00,$ff,$ef ; [$bbcb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$f0,$00,$ff,$25,$ff,$fb,$ff,$fa,$57,$00,$ff,$cf ; [$bbdb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$e3,$4c,$00,$ff,$a7,$ff,$f7,$ff,$fe,$8e,$00,$ff,$e0 ; [$bbeb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$f7,$47,$00,$ff,$bf,$ff,$bf,$ff,$ff,$ff,$00,$ff,$fe ; [$bbfb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ee,$f7,$00,$ff,$ff,$ff,$fb,$ff,$ff,$ce,$00,$ff,$bf ; [$bc0b]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$f6,$00,$ff,$1a,$ff,$ef,$ff,$f5,$ff,$00,$ff,$df ; [$bc1b]
+                                                                       ; byte
+    db $ff,$f7,$ff,$fd,$bf,$00,$ff,$f7,$ff,$af,$fd,$ff,$6f,$00,$ff,$ff ; [$bc2b]
+                                                                       ; byte
+    db $ff,$ff,$fb,$ff,$93,$00,$ff,$97,$ff,$ff,$ff,$ef,$ff,$00,$ff,$fe ; [$bc3b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$df,$fb,$00,$ff,$f4,$ff,$f7,$ff,$fe,$d1,$00,$ff,$f6 ; [$bc4b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$bf,$73,$00,$ff,$5d,$ff,$fa,$ff,$ff,$ff,$00,$ff,$ff ; [$bc5b]
+                                                                       ; byte
+    db $fd,$ff,$ff,$ff,$ff,$00,$ff,$ff,$ff,$ff,$ef,$fd,$1e,$00,$ff,$bf ; [$bc6b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$2d,$00,$ff,$0b,$ff,$de,$ff,$d7,$bf,$00,$ff,$3f ; [$bc7b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fd,$fd,$00,$ff,$7f,$ff,$ef,$ff,$ff,$ac,$00,$ff,$fb ; [$bc8b]
+                                                                       ; byte
+    db $ff,$ff,$df,$f7,$d7,$00,$ff,$a4,$ff,$bf,$ff,$fd,$60,$00,$ff,$f7 ; [$bc9b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$bf,$ff,$00,$ff,$5f,$ff,$ff,$ff,$ff,$ac,$00,$ff,$ef ; [$bcab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ae,$00,$ff,$20,$ff,$ff,$ff,$ef,$d6,$00,$ff,$ec ; [$bcbb]
+                                                                       ; byte
+    db $ff,$bf,$ff,$ff,$de,$00,$ff,$e7,$ff,$df,$ff,$ff,$16,$00,$ff,$df ; [$bccb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$51,$00,$ff,$ed,$ff,$bf,$ff,$3f,$67,$00,$ff,$de ; [$bcdb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$cf,$2d,$00,$ff,$b5,$ff,$df,$ff,$ff,$17,$00,$ff,$fd ; [$bceb]
+                                                                       ; byte
+    db $ff,$b7,$bf,$bf,$85,$00,$ff,$d0,$ff,$ff,$ff,$f7,$fd,$00,$ff,$fb ; [$bcfb]
+                                                                       ; byte
+    db $ff,$e6,$ff,$c5,$af,$00,$ff,$d5,$ff,$7f,$ff,$ff,$4f,$00,$ff,$fb ; [$bd0b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$2f,$00,$ff,$da,$ff,$f7,$ff,$ef,$fd,$00,$ff,$ae ; [$bd1b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$db,$e6,$00,$ff,$fe,$ff,$ff,$ff,$ff,$0c,$00,$ff,$ff ; [$bd2b]
+                                                                       ; byte
+    db $ff,$f7,$ff,$bf,$dd,$00,$ff,$1b,$ff,$ad,$ff,$fe,$ff,$00,$ff,$ff ; [$bd3b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$fe,$00,$ff,$cf,$ff,$ff,$ff,$ff,$77,$00,$ff,$ff ; [$bd4b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$70,$00,$ff,$f9,$ff,$f7,$ff,$fd,$7f,$00,$ff,$bf ; [$bd5b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$a4,$00,$ff,$7f,$ff,$fb,$ff,$ff,$49,$00,$ff,$5f ; [$bd6b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$ad,$00,$ff,$8a,$ff,$e7,$ff,$ff,$ff,$00,$ff,$f9 ; [$bd7b]
+                                                                       ; byte
+    db $ff,$fb,$ff,$ff,$fb,$00,$ff,$de,$ff,$ff,$ff,$df,$01,$00,$ff,$ef ; [$bd8b]
+                                                                       ; byte
+    db $bf,$fe,$ff,$ef,$3e,$00,$ff,$f3,$ff,$ff,$ff,$bf,$ef,$00,$ff,$39 ; [$bd9b]
+                                                                       ; byte
+    db $ff,$7f,$ff,$df,$2b,$00,$ff,$fe,$ff,$ff,$ff,$ff,$a2,$00,$ff,$fb ; [$bdab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$fb,$00,$ff,$ff,$ff,$ff,$ff,$3b,$0d,$00,$ff,$af ; [$bdbb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$37,$00,$ff,$fc,$ff,$bf,$fe,$ff,$48,$00,$ff,$bf ; [$bdcb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$10,$00,$ff,$e7,$ff,$ff,$ff,$3d,$5f,$00,$ff,$6e ; [$bddb]
+                                                                       ; byte
+    db $ff,$fd,$ff,$ff,$96,$00,$ff,$59,$ff,$fa,$ff,$fb,$ea,$00,$ff,$7e ; [$bdeb]
+                                                                       ; byte
+    db $ff,$ff,$fb,$fd,$00,$00,$ff,$70,$ff,$fb,$ff,$ad,$ff,$00,$ff,$7c ; [$bdfb]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$ff,$00,$ff,$bf,$ff,$ff,$ff,$ff,$5f,$00,$ff,$fb ; [$be0b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$c8,$00,$ff,$1d,$ff,$fb,$ff,$6f,$ff,$00,$ff,$12 ; [$be1b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fb,$ff,$00,$ff,$ff,$ff,$ff,$ff,$7e,$bf,$00,$ff,$ff ; [$be2b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$f9,$00,$ff,$dc,$ff,$ff,$ff,$ff,$3f,$00,$ff,$b3 ; [$be3b]
+                                                                       ; byte
+    db $ff,$f7,$ff,$ff,$fe,$00,$ff,$7e,$ff,$ff,$ff,$ff,$3a,$00,$ff,$f7 ; [$be4b]
+                                                                       ; byte
+    db $ff,$bf,$ff,$ff,$09,$00,$ff,$d8,$ff,$bd,$ff,$15,$af,$00,$ff,$e3 ; [$be5b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$f7,$dd,$00,$ff,$79,$ff,$ff,$ff,$bf,$68,$00,$ff,$ef ; [$be6b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$02,$00,$ff,$57,$ff,$7f,$ff,$f3,$ff,$00,$ff,$23 ; [$be7b]
+                                                                       ; byte
+    db $ff,$f7,$ff,$ff,$f3,$00,$ff,$7b,$ff,$ff,$ff,$ff,$a4,$00,$ff,$fe ; [$be8b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$08,$00,$ff,$f8,$ff,$ff,$ff,$df,$9e,$00,$ff,$f2 ; [$be9b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fe,$3e,$00,$ff,$fb,$ff,$ff,$ff,$ff,$22,$00,$ff,$ed ; [$beab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$d9,$00,$ff,$1f,$ff,$af,$ff,$f7,$fc,$00,$ff,$dd ; [$bebb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$fe,$8b,$00,$ff,$ff,$ff,$ff,$ff,$fd,$ed,$00,$ff,$df ; [$becb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$40,$00,$ff,$f7,$ff,$fd,$ff,$4e,$1d,$00,$ff,$f9 ; [$bedb]
+                                                                       ; byte
+    db $ff,$fd,$ff,$cf,$f6,$00,$ff,$7f,$ff,$bf,$ff,$7b,$61,$00,$ff,$f7 ; [$beeb]
+                                                                       ; byte
+    db $ff,$df,$ff,$ff,$21,$00,$ff,$6f,$ff,$ff,$ff,$fb,$7f,$00,$ff,$df ; [$befb]
+                                                                       ; byte
+    db $ff,$f7,$ff,$ff,$9f,$00,$ff,$bf,$ff,$f7,$ff,$ff,$b7,$00,$ff,$ff ; [$bf0b]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$91,$00,$ff,$83,$ff,$7f,$ff,$6d,$ff,$00,$ff,$b5 ; [$bf1b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$eb,$00,$ff,$fd,$ff,$ff,$ff,$ef,$b5,$00,$ff,$bf ; [$bf2b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$7a,$00,$ff,$d0,$ff,$bc,$ff,$ed,$ff,$00,$ff,$dd ; [$bf3b]
+                                                                       ; byte
+    db $ff,$fb,$ff,$ff,$b3,$00,$ff,$ff,$ff,$ff,$ff,$fd,$6a,$00,$ff,$f7 ; [$bf4b]
+                                                                       ; byte
+    db $ff,$df,$ff,$ff,$34,$00,$ff,$67,$ff,$ff,$ff,$b5,$fd,$00,$ff,$da ; [$bf5b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ff,$fa,$00,$ff,$7e,$ff,$df,$ff,$ff,$49,$00,$ff,$de ; [$bf6b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$27,$00,$ff,$e7,$ff,$3d,$ff,$fb,$39,$00,$ff,$fa ; [$bf7b]
+                                                                       ; byte
+    db $ff,$fb,$ff,$fd,$fb,$00,$ff,$ff,$ff,$ff,$ff,$ef,$26,$00,$ff,$ff ; [$bf8b]
+                                                                       ; byte
+    db $ff,$ff,$ff,$df,$89,$00,$ff,$98,$ff,$7f,$ff,$fd,$da,$00,$ff,$f1 ; [$bf9b]
+                                                                       ; byte
+    db $ff,$ef,$ff,$ff,$5f,$00,$ff,$b2,$ff,$ef,$ff,$ff,$4e,$00,$ff,$ff ; [$bfab]
+                                                                       ; byte
+    db $ff,$ff,$ff,$3f,$1a,$00,$ff,$18,$ff,$eb,$ff,$df,$4b,$00,$ff,$fb ; [$bfbb]
+                                                                       ; byte
+    db $ff,$ef,$ff,$fd,$58,$00,$ff,$f3,$fe,$ff,$ff,$ff,$02,$00,$ff,$ff ; [$bfcb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$ef,$60,$00,$ff,$72,$ff,$ef,$ff,$fe,$0a,$00,$ff,$cd ; [$bfdb]
+                                                                       ; byte
+    db $ff,$ff,$ff,$6e,$fc,$00,$fe,$ed,$ff,$ff,$ff,$df,$d7,$00,$ff,$f3 ; [$bfeb]
+                                                                       ; byte
+    db $ff,$fe,$ff,$ff,$09                  ; [$bffb] byte

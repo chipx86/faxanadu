@@ -215,7 +215,7 @@ Audio_LoadMusic:                            ; [$8079]
     LDX #$07                                ; X = 7 (loop counter)
 
   @_loadMusicLoop:                          ; [$8085]
-    LDA #$8efa,Y
+    LDA MUSIC_LOOKUP,Y
     STA Music_CurrentScriptAddrs,X
     STA a:MScript_SavedAddr
     DEY
@@ -454,7 +454,7 @@ Music_PlayForChannel:                       ; [$8132]
     LSR A
     LSR A
     TAY
-    LDA #$81dc,Y
+    LDA @_return3+1,Y
     BEQ @LAB_PRG5__81cd
     INC Music_SQEffect_Counter,X
 
@@ -630,10 +630,10 @@ MScripts_InvokeNext:                        ; [$823a]
     ASL A                                   ; Normalize to a word boundary
                                             ; for the lookup table.
     TAY                                     ; Y = A
-    LDA #$826b,Y                            ; Load the address of the handler
+    LDA MSCRIPT_OP_HANDLERS+1,Y             ; Load the address of the handler
                                             ; and push to the stack.
     PHA
-    LDA #$826a,Y
+    LDA MSCRIPT_OP_HANDLERS,Y
     PHA
     RTS
 
@@ -770,14 +770,14 @@ MScripts_InvokeNext_Something_8298:         ; [$8298]
     LDY #$00
 
   @LAB_PRG5__82ce:                          ; [$82ce]
-    CMP #$856f,Y
+    CMP $856f,Y
     BCS @LAB_PRG5__82d7
     INY
     INY
     BNE @LAB_PRG5__82ce
 
   @LAB_PRG5__82d7:                          ; [$82d7]
-    LDA #$8570,Y
+    LDA $8570,Y
 
   @LAB_PRG5__82da:                          ; [$82da]
     STA Music_SQ_Note_Lengths,X
@@ -870,7 +870,7 @@ Music_PlayNoise:                            ; [$82ff]
     LDY #$00
 
   @LAB_PRG5__8317:                          ; [$8317]
-    LDA #$857f,X
+    LDA MUSIC_NOISE_VALUES,X
     STA NOISE_VOL,Y
     INX
     INY
@@ -1027,7 +1027,7 @@ Music_SetNote:                              ; [$83cd]
     LDX a:MScript_CurrentChannel
     LDA a:MScript_CurValue
     CLC
-    ADC #$856c,X
+    ADC $856c,X
     CLC
     ADC Music_Wave_Length_Highs,X
     CLC
@@ -1058,9 +1058,9 @@ Music_SetNote:                              ; [$83cd]
     ADC #$0d
     ASL A
     TAX
-    LDA #$8552,X
+    LDA AUDIO_NOTES,X
     STA a:Music_Note_Period_Low
-    LDA #$8553,X
+    LDA AUDIO_NOTES+1,X
     STA a:Music_Note_Period_High
 
 
@@ -1113,7 +1113,7 @@ MScript_Op_End:                             ; [$8408]
     ;
     LDA Music_CurrentScriptAddrs,X
     BNE @LAB_PRG5__8419
-    DEC #$f3,X
+    DEC Music_CurrentScriptAddrs+1,X
 
   @LAB_PRG5__8419:                          ; [$8419]
     DEC Music_CurrentScriptAddrs,X
@@ -1145,8 +1145,8 @@ MScript_Op_BeginLoop:                       ; [$841f]
     TAX
     LDA Music_CurrentScriptAddrs,X
     STA MScript_LoopStartAddrs,X
-    LDA #$f3,X
-    STA #$0139,X
+    LDA Music_CurrentScriptAddrs+1,X
+    STA MScript_LoopStartAddrs+1,X
     JMP MScripts_InvokeNext
 
 ;============================================================================
@@ -1168,8 +1168,8 @@ MScript_Op_ContinueIfNLoops:                ; [$843d]
     TAX
     LDA MScript_LoopEndAddrs,X
     STA Music_CurrentScriptAddrs,X
-    LDA #$0141,X
-    STA #$f3,X
+    LDA MScript_LoopEndAddrs+1,X
+    STA Music_CurrentScriptAddrs+1,X
 
   @_invokeNext:                             ; [$8455]
     JMP MScripts_InvokeNext
@@ -1199,8 +1199,8 @@ MScript_Op_EndLoop:                         ; [$8458]
     ;
     LDA Music_CurrentScriptAddrs,X
     STA MScript_LoopEndAddrs,X
-    LDA #$f3,X
-    STA #$0141,X
+    LDA Music_CurrentScriptAddrs+1,X
+    STA MScript_LoopEndAddrs+1,X
 
 
     ;
@@ -1208,8 +1208,8 @@ MScript_Op_EndLoop:                         ; [$8458]
     ;
     LDA MScript_LoopStartAddrs,X
     STA Music_CurrentScriptAddrs,X
-    LDA #$0139,X
-    STA #$f3,X
+    LDA MScript_LoopStartAddrs+1,X
+    STA Music_CurrentScriptAddrs+1,X
 
   @_invokeNext:                             ; [$847d]
     JMP MScripts_InvokeNext
@@ -1272,8 +1272,8 @@ MScript_Op_SaveAddr_Inner:                  ; [$8495]
     TAX
     LDA Music_CurrentScriptAddrs,X
     STA MScript_SavedAddr,X
-    LDA #$f3,X
-    STA #$0151,X
+    LDA Music_CurrentScriptAddrs+1,X
+    STA MScript_SavedAddr+1,X
     RTS
 
 ;============================================================================
@@ -1291,8 +1291,8 @@ MScript_Op_RestoreAddr:                     ; [$84a5]
     TAX
     LDA MScript_SavedAddr,X
     STA Music_CurrentScriptAddrs,X
-    LDA #$0151,X
-    STA #$f3,X
+    LDA MScript_SavedAddr+1,X
+    STA Music_CurrentScriptAddrs+1,X
     JMP MScripts_InvokeNext
 
 ;============================================================================
@@ -1315,7 +1315,7 @@ MScript_Op_Restart:                         ; [$84b7]
     LDX #$00
 
   @_loop:                                   ; [$84c2]
-    LDA #$8efb,Y
+    LDA MUSIC_LOOKUP_START_THEME,Y
     STA Music_CurrentScriptAddrs,X
     INY
     INX
@@ -1342,10 +1342,10 @@ MScript_Op_JumpSubroutine:                  ; [$84d0]
     TAX
     LDA Music_CurrentScriptAddrs,X
     STA MScript_PushedAddrs,X
-    LDA #$f3,X
-    STA #$0159,X
+    LDA Music_CurrentScriptAddrs+1,X
+    STA MScript_PushedAddrs+1,X
     PLA
-    STA #$f3,X
+    STA Music_CurrentScriptAddrs+1,X
     PLA
     STA Music_CurrentScriptAddrs,X
     JMP MScripts_InvokeNext
@@ -1366,8 +1366,8 @@ MScript_Op_Return:                          ; [$84f0]
     LDA MScript_PushedAddrs,X               ; Load the lower byte of the
                                             ; pushed address.
     STA Music_CurrentScriptAddrs,X          ; Set for the script address.
-    LDA #$0159,X                            ; Load the upper byte.
-    STA #$f3,X                              ; And set that.
+    LDA MScript_PushedAddrs+1,X             ; Load the upper byte.
+    STA Music_CurrentScriptAddrs+1,X        ; And set that.
     JMP MScripts_InvokeNext                 ; Invoke the script there.
 
 ;============================================================================
@@ -1488,7 +1488,7 @@ MScripts_GetNextValue:                      ; [$8544]
     LDA (Music_CurrentScriptAddrs,X)
     INC Music_CurrentScriptAddrs,X
     BNE @_return
-    INC #$f3,X
+    INC Music_CurrentScriptAddrs+1,X
 
   @_return:                                 ; [$8551]
     RTS
@@ -1770,13 +1770,13 @@ Sound_HandleOnInterrupt:                    ; [$862f]
     BCS @LAB_PRG5__866f
     LDA a:SOUND_DAT_0122
     BEQ @LAB_PRG5__8658
-    LDA #$8590,X
+    LDA SOUND_EFFECT_HANDLER_INDEXES,X
     CMP a:SOUND_DAT_0122
     BCC @LAB_PRG5__8658
     BNE @LAB_PRG5__866f
 
   @LAB_PRG5__8658:                          ; [$8658]
-    LDA #$8590,X
+    LDA SOUND_EFFECT_HANDLER_INDEXES,X
     STA a:SOUND_DAT_0122
     TAX
     LDA #$00
@@ -1794,9 +1794,9 @@ Sound_HandleOnInterrupt:                    ; [$862f]
   @LAB_PRG5__8674:                          ; [$8674]
     CPX #$74
     BCS Sound_ResetCurrentSound
-    LDA #$85ae,X
+    LDA SOUND_EFFECT_HANDLERS+1,X
     PHA
-    LDA #$85ad,X
+    LDA SOUND_EFFECT_HANDLERS,X
     PHA
 
   @_return:                                 ; [$8680]
@@ -1847,7 +1847,7 @@ SoundEffect_Handler_Message:                ; [$869e]
     LDA a:SoundEffect_MaybeIndex
     AND #$02
     TAX
-    LDA #$86d1,X
+    LDA @_return+1,X
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
@@ -1885,7 +1885,7 @@ SoundEffect_Handler_HitEnemy:               ; [$86d3]
     LDA #$00
     STA a:SoundEffect_MaybeIndex
     LDX a:SoundEffect_MaybeIndex
-    LDA #$8724,X
+    LDA $8724,X
     CMP #$ff
     BNE @LAB_PRG5__86f5
     LDA #$10
@@ -1948,7 +1948,7 @@ SoundEffect_Handler_EnemyDied:              ; [$8734]
     LDX a:SoundEffect_State_0128
     LDA #$1f
     STA a:NOISE_VOL
-    LDA #$8767,X
+    LDA $8767,X
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
@@ -1979,7 +1979,7 @@ SoundEffect_Handler_HitPlayer:              ; [$8771]
     LDA #$00
     STA a:SoundEffect_MaybeIndex
     LDX a:SoundEffect_MaybeIndex
-    LDA #$87aa,X
+    LDA SOUNDEFFECT_HITPLAYER_NOTES,X
     CMP #$ff
     BNE @LAB_PRG5__878d
     LDA #$10
@@ -2022,7 +2022,7 @@ SoundEffect_Handler_Magic:                  ; [$87b5]
     STA a:SoundEffect_MaybeIndex
     STA a:SoundEffect_State_0128
     LDX a:SoundEffect_State_0128
-    LDA #$8800,X
+    LDA @_return+1,X
     BNE @LAB_PRG5__87d2
     LDA #$10
     STA a:SQ2_VOL
@@ -2036,7 +2036,7 @@ SoundEffect_Handler_Magic:                  ; [$87b5]
     LDA a:SoundEffect_MaybeIndex
     AND #$03
     TAX
-    LDA #$8806,X
+    LDA $8806,X
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
@@ -2106,7 +2106,7 @@ SoundEffect_Handler_OpenDoor:               ; [$880a]
     TAY
     LDA #$60
     SEC
-    SBC #$8865,Y
+    SBC $8865,Y
     STA a:SQ2_LO
     AND #$0f
     STA a:NOISE_LO
@@ -2141,7 +2141,7 @@ SoundEffect_Handler_Maybe_Typing:           ; [$886d]
     AND #$01
     BNE @_return
     LDX a:SoundEffect_MaybeIndex
-    LDA #$88b4,X
+    LDA SOUNDEFFECT_MAYBE_TYPING_NOTES,X
     CMP #$ff
     BNE @LAB_PRG5__8890
     LDA #$10
@@ -2191,7 +2191,7 @@ SoundEffect_Handler_ItemPickedUp:           ; [$88c5]
     STA a:SoundEffect_MaybeIndex
     STA a:SoundEffect_State_0128
     LDX a:SoundEffect_MaybeIndex
-    LDA #$8918,X
+    LDA SOUNDEFFECT_ITEMPICKEDUP_NOTES,X
     CMP #$ff
     BNE @LAB_PRG5__88e5
     INC a:SoundEffect_State_0128
@@ -2202,7 +2202,7 @@ SoundEffect_Handler_ItemPickedUp:           ; [$88c5]
   @LAB_PRG5__88e5:                          ; [$88e5]
     JSR SoundEffect_SetNote
     LDX a:SoundEffect_State_0128
-    LDA #$8912,X
+    LDA SOUNDEFFECT_ITEMPICKEDUP_SQ2_VOLS,X
     BNE @LAB_PRG5__88f8
     LDA #$10
     STA a:SQ2_VOL
@@ -2260,7 +2260,7 @@ SoundEffect_Handler_CoinTouchedCommon:      ; [$891f]
     ;
 SoundEffect_Handler_CoinTouchedCommon__Loop: ; [$892e]
     LDX a:SoundEffect_State_0128
-    LDA #$896d,X
+    LDA SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL_SEQUENCE,X
     BNE @LAB_PRG5__893e
     LDA #$10
     STA a:SQ2_VOL
@@ -2370,9 +2370,9 @@ SoundEffect_Handler_CursorMoved:            ; [$89a8]
     CLC
     ADC a:SoundEffect_State_0128
     TAX
-    LDA #$89f9,X
+    LDA SOUNDEFFECT_CURSORMOVED_SQ2_LO,X
     SEC
-    SBC #$89fd,Y
+    SBC SOUNDEFFECT_CURSORMOVED_SQ2_LO_DELTA,Y
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
@@ -2428,7 +2428,7 @@ SoundEffect_Handler_ShieldHitByMagic:       ; [$8a05]
     LDA a:SoundEffect_MaybeIndex
     AND #$01
     TAX
-    LDA #$8a3b,X
+    LDA SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_SEQUENCE,X
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
@@ -2463,7 +2463,7 @@ SoundEffect_Handler_CharacterInput:         ; [$8a3d]
     LSR A
     LSR A
     TAX
-    LDA #$8a79,X
+    LDA SOUNDEFFECT_CHARINPUT_NOTES,X
     CMP #$ff
     BNE @LAB_PRG5__8a5f
     LDA #$10
@@ -2543,7 +2543,7 @@ SoundEffect_Handler_PushBlock:              ; [$8a9d]
     LDA a:SoundEffect_MaybeIndex
     AND #$01
     TAX
-    LDA #$8ace,X
+    LDA SOUNDEFFECT_PUSH_BLOCK_NOISE_LO_SEQUENCE,X
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
@@ -2686,7 +2686,7 @@ SoundEffect_Handler_Pakukame:               ; [$8b65]
     CLC
     ADC #$32
     SEC
-    SBC #$8bab,X
+    SBC SOUNDEFFECT_PAKUKAME_SQ2_LO_SEQUENCE,X
     STA a:SQ2_LO
     INC a:SoundEffect_MaybeIndex
     RTS
@@ -2725,7 +2725,7 @@ SoundEffect_Handler_FillHPOrMP:             ; [$8bb3]
     LDA a:SoundEffect_MaybeIndex
     AND #$03
     TAY
-    LDA #$8c01,Y
+    LDA SOUNDEFFECT_FILLHPORMP_SQ2_VOL_SEQUENCE,Y
     STA a:SQ2_VOL
     LDA #$aa
     STA a:SQ2_SWEEP
@@ -2894,7 +2894,7 @@ SoundEffect_Handler_PlayerDied:             ; [$8c9c]
     LDA a:SoundEffect_MaybeIndex
     AND #$03
     TAX
-    LDA #$8d28,X
+    LDA SOUNDEFFECT_PLAYERDIED_NOTES,X
     JSR SoundEffect_SetNote
     LDA a:SoundEffect_Note_Low
     CLC
@@ -2990,7 +2990,7 @@ SoundEffect_Handler_ShowPlayerMenu:         ; [$8d5f]
     LDA a:SoundEffect_State_0128
     AND #$03
     TAX
-    LDA #$8db5,X
+    LDA SOUNDEFFECT_SHOWPLAYERMENU_NOTES,X
     JSR SoundEffect_SetNote
     LDA a:SoundEffect_Note_Low
     SEC
@@ -3055,7 +3055,7 @@ SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
     LDA a:SoundEffect_State_0129
     LSR A
     TAX
-    LDA #$8e5f,X
+    LDA SOUNDEFFECT_SPECIALITEM2_NOISE_VOL,X
     BNE @LAB_PRG5__8e00
     LDA #$10
     STA a:SQ2_VOL
@@ -3072,7 +3072,7 @@ SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
     ASL A
     STA a:SoundEffect_State_0128
     LDX a:SoundEffect_MaybeIndex
-    LDA #$8e66,X
+    LDA SOUNDEFFECT_SPECIALITEM2_NOTES,X
     CMP #$ff
     BEQ @LAB_PRG5__8e56
     JSR SoundEffect_SetNote
@@ -3085,7 +3085,7 @@ SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
     LDA a:SoundEffect_MaybeIndex
     AND #$01
     TAX
-    LDA #$8e64,X
+    LDA SOUNDEFFECT_SPECIALITEM2_NOISE_LO,X
     CLC
     ADC a:SoundEffect_MaybeIndex
     AND #$0f
@@ -3150,7 +3150,7 @@ SoundEffect_Handler_BreadTouched:           ; [$8e76]
     LSR A
     LSR A
     TAX
-    LDA #$8ec5,X
+    LDA SOUNDEFFECT_BREADTOUCHED_SQ2_HI,X
     STA a:SoundEffect_State_0129
     BNE @LAB_PRG5__8e9e
     LDA #$10
@@ -3170,7 +3170,7 @@ SoundEffect_Handler_BreadTouched:           ; [$8e76]
     TXA
     AND #$03
     TAX
-    LDA #$8ec5,X
+    LDA SOUNDEFFECT_BREADTOUCHED_SQ2_HI,X
     AND #$01
     STA a:SQ2_HI
     INC a:SoundEffect_State_0128
@@ -3249,9 +3249,9 @@ SoundEffect_SetNote:                        ; [$8ed1]
     ADC #$0d
     ASL A
     TAX
-    LDA #$8552,X
+    LDA AUDIO_NOTES,X
     STA a:SoundEffect_Note_Low
-    LDA #$8553,X
+    LDA AUDIO_NOTES+1,X
     STA a:SoundEffect_Note_High
 
 

@@ -1071,9 +1071,9 @@ SPRITE_OBJ_OINTMENT_2                              EQU $4e
 SPRITE_TRIGGER_INTRO                               EQU $4f
 SPRITE_OBJ_MATTOCK1                                EQU $50
 SPRITE_MAGIC_GARBLED_81                            EQU $51
-SPRITE_FOUNTAIN                                    EQU $52
+SPRITE_EFFECT_FOUNTAIN                             EQU $52
 SPRITE_MAGIC_83                                    EQU $53
-SPRITE_MAGIC_84                                    EQU $54
+SPRITE_MAGIC_ENEMY_FIREBALL                        EQU $54
 SPRITE_OBJ_WING_BOOTS                              EQU $55
 SPRITE_OBJ_HOUR_GLASS                              EQU $56
 SPRITE_OBJ_MAGICAL_ROD                             EQU $57

@@ -95,11 +95,17 @@ EOLIS_BLOCKS_SCREEN_3:                      ; [$8165]
 EOLIS_BLOCKS_SCREEN_4:                      ; [$81c9]
     hex c0 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$81c9] undefined
     hex 00 00 03 34 4c 43 5c d7 50 00 33 47 33 4c 45 5d ; [$81d9] undefined
-    hex 0c d8 b6 ed 8b 6e d8 b4 a7 2c cb d5 5c 47 44 d1 ; [$81e9] undefined
-    hex c0 36 0d 85 cb b1 65 70 d7 12 c1 80 00 05 70 75 ; [$81f9] undefined
-    hex c1 40 00 05 73 60 d9 80 00 0c e9 73 70 c0 c0 ca ; [$8209] undefined
-    hex b0 8c a7 03 ca b0 8c d7 0e cf 73 80 c0 80 00 00 ; [$8219] undefined
-    db $33,$c0                              ; [$8229] undefined
+    db $0c,$d8,$b6,$ed,$8b,$6e,$d8          ; [$81e9] undefined
+
+;
+; XREFS:
+;     Screen_LoadBackgroundPalette
+;
+DAT_81f0:                                   ; [$81f0]
+    hex b4 a7 2c cb d5 5c 47 44 d1 c0 36 0d 85 cb b1 65 ; [$81f0] undefined
+    hex 70 d7 12 c1 80 00 05 70 75 c1 40 00 05 73 60 d9 ; [$8200] undefined
+    hex 80 00 0c e9 73 70 c0 c0 ca b0 8c a7 03 ca b0 8c ; [$8210] undefined
+    hex d7 0e cf 73 80 c0 80 00 00 33 c0    ; [$8220] undefined
 
 EOLIS_BLOCKS_SCREEN_5:                      ; [$822b]
     hex c0 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$822b] undefined

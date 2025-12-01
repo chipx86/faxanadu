@@ -805,7 +805,7 @@ TextBox_ClearForPortraitAndText:            ; [$822b]
 ;
 ; OUTPUTS:
 ;     IScriptOrCHRAddr:
-;     #$dc:
+;     IScriptOrCHRAddr+1:
 ;         The read address for the IScript.
 ;
 ;     Temp_0201:
@@ -859,12 +859,12 @@ IScripts_Begin:                             ; [$8242]
   @_loadScript:                             ; [$8248]
     STA a:Temp_0200                         ; Store the index temporarily.
     TAX                                     ; X = A
-    LDA #$9f6b,X                            ; Load the lower byte of the
+    LDA ISCRIPT_ADDRS_L,X                   ; Load the lower byte of the
                                             ; IScript address.
     STA IScriptOrCHRAddr                    ; Store as the lower byte.
-    LDA #$a003,X                            ; Load the upper byte of the
+    LDA ISCRIPT_ADDRS_U,X                   ; Load the upper byte of the
                                             ; IScript address.
-    STA IScriptOrCHRAddr.U                  ; Store as the upper byte.
+    STA IScriptOrCHRAddr_U                  ; Store as the upper byte.
     LDY #$00                                ; Y = 0 (start offset in the
                                             ; script).
     LDA (IScriptOrCHRAddr),Y                ; Load the first byte of the
@@ -878,7 +878,7 @@ IScripts_Begin:                             ; [$8242]
     ; Begin showing the portrait information.
     ;
     AND #$7f                                ; Keep the portrait ID bits.
-    JSR #$f24d                              ; Draw the portrait image.
+    JSR $f24d                               ; Draw the portrait image.
     JSR IScripts_OpenForPortrait            ; Draw the portrait frame.
 
   @_continueScript:                         ; [$8267]
@@ -932,10 +932,10 @@ IScripts_InvokeNextAction:                  ; [$826e]
     JSR IScripts_LoadByte                   ; Load the script ID
     TAX                                     ; Store the byte in X and load
                                             ; from the offset table.
-    LDA #$8293,X                            ; Fetch the upper script offset
+    LDA IScriptActions_U,X                  ; Fetch the upper script offset
     PHA                                     ; Push the upper offset to the
                                             ; stack
-    LDA #$827b,X                            ; Fetch the lower script offset
+    LDA IScriptActions_L,X                  ; Fetch the lower script offset
     PHA                                     ; Push the lower offset to the
                                             ; stack
     RTS
@@ -1064,7 +1064,7 @@ IScriptAction_Jump:                         ; [$82ab]
 ;============================================================================
 IScriptAction_FinishGame:                   ; [$82ae]
     JSR SplashAnimation_RunOutro            ; Show the outro animation.
-    JMP #$c913                              ; Re-initialize the game.
+    JMP $c913                               ; Re-initialize the game.
 
 
 ;============================================================================
@@ -1090,7 +1090,7 @@ IScriptAction_EndScript:                    ; [$82b4]
     LDA a:Temp_0201                         ; Load the portrait ID.
     BPL @_noPortrait                        ; If a portrait ID is not set,
                                             ; jump.
-    JSR #$f281                              ; Clear the portrait image.
+    JSR $f281                               ; Clear the portrait image.
     JMP TextBox_ClearForPortraitAndText     ; Clear the portrait frame.
 
   @_noPortrait:                             ; [$82c2]
@@ -1120,7 +1120,7 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
     ;
     JSR IScripts_LoadByte                   ; Load the next byte as the
                                             ; message ID.
-    JSR #$f3f5                              ; Load the message.
+    JSR $f3f5                               ; Load the message.
 
 
     ;
@@ -1128,7 +1128,7 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
     ;
   @_loop:                                   ; [$82cb]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR #$f466                              ; Draw the next character in the
+    JSR $f466                               ; Draw the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinue         ; Check if the message should
                                             ; continue.
@@ -1164,7 +1164,7 @@ IScriptAction_ShowMessage:                  ; [$82d9]
     ;
     JSR IScripts_LoadByte                   ; Load the next byte as the
                                             ; message ID.
-    JSR #$f3f5                              ; Load the message.
+    JSR $f3f5                               ; Load the message.
 
 
     ;
@@ -1172,7 +1172,7 @@ IScriptAction_ShowMessage:                  ; [$82d9]
     ;
   @_loop:                                   ; [$82df]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR #$f466                              ; Draw the next character in the
+    JSR $f466                               ; Draw the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissMessage ; Check if the message is
                                                     ; done or continued.
@@ -1209,11 +1209,11 @@ IScriptAction_ShowMessage:                  ; [$82d9]
 ;============================================================================
 IScriptAction_ShowQuestionMessage:          ; [$82ef]
     JSR IScripts_LoadByte                   ; Load the message ID parameer.
-    JSR #$f3f5                              ; Load the message string.
+    JSR $f3f5                               ; Load the message string.
 
   @_messageLoop:                            ; [$82f5]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR #$f466                              ; Show the next character in the
+    JSR $f466                               ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
                                                      ; continue or dismiss.
@@ -1257,11 +1257,11 @@ IScriptAction_ShowQuestionMessage:          ; [$82ef]
 ;============================================================================
 IScriptAction_ShowQuestionMessageCheckIfDismissed: ; [$8308]
     JSR IScripts_LoadByte                   ; Load the message ID parameer.
-    JSR #$f3f5                              ; Load the message string.
+    JSR $f3f5                               ; Load the message string.
 
   @_messageLoop:                            ; [$830e]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR #$f466                              ; Show the next character in the
+    JSR $f466                               ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
                                                      ; continue or dismiss.
@@ -1308,7 +1308,7 @@ IScriptAction_ShowQuestionMessageCheckIfDismissed: ; [$8308]
 ;
 ; OUTPUTS:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;     Temp_0202:
 ;     Temp_0203:
 ;         Clobbered.
@@ -1353,9 +1353,9 @@ IScripts_ProgressivelySubtractGold:         ; [$8321]
     STA Temp_Int24                          ; Store as the lower byte to
                                             ; subtract.
     LDA #$00                                ; A = 0
-    STA Temp_Int24.M                        ; Store as the upper byte to
+    STA Temp_Int24_M                        ; Store as the upper byte to
                                             ; subtract.
-    JSR #$f9a5                              ; Subtract the gold from the
+    JSR $f9a5                               ; Subtract the gold from the
                                             ; player.
     JMP IScripts_ProgressivelySubtractGold  ; And loop.
 
@@ -1397,7 +1397,7 @@ IScriptAction_SpendGold:                    ; [$835b]
                                             ; Temp_Int24
                                             ; for comparison.
     LDA a:Temp_0203                         ; Lower the upper byte again.
-    STA Temp_Int24.M                        ; And store it in
+    STA Temp_Int24_M                        ; And store it in
                                             ; Temp_Int24
                                             ; for comparison.
 
@@ -1476,7 +1476,7 @@ IScripts_ShowNotEnoughMoney:                ; [$837c]
 ;     IScriptAction_ShowSellMenu
 ;============================================================================
 IScripts_ShowFinalMessage:                  ; [$837e]
-    JSR #$f3f5                              ; Load the message string.
+    JSR $f3f5                               ; Load the message string.
 
 
     ;
@@ -1484,7 +1484,7 @@ IScripts_ShowFinalMessage:                  ; [$837e]
     ;
   @_messageLoop:                            ; [$8381]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR #$f466                              ; Show the next character in the
+    JSR $f466                               ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissMessage ; Check whether to
                                                     ; continue or dismiss.
@@ -1620,18 +1620,18 @@ IScriptAction_AddInventoryItem:             ; [$839f]
 ;============================================================================
 IScriptAction_OpenShop:                     ; [$83d8]
     LDA #$14                                ; "What would you like?"
-    JSR #$f3f5
+    JSR $f3f5
 
   @LAB_PRG12__83dd:                         ; [$83dd]
     JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
+    JSR $f466
     JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__83dd
     JSR IScripts_LoadByte
     STA Temp_Int24                          ; Probably shop inventory table
     JSR IScripts_LoadByte
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR Shop_Populate
     JSR Shop_Draw
     JSR IScripts_WaitForMenuInput
@@ -1644,7 +1644,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
     JSR Shop_GetPlayerHasSelectedItem
     BCS @LAB_PRG12__8469
     LDX a:Menu_CursorPos
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     CMP #$80
     BEQ @LAB_PRG12__8439
     CMP #$81
@@ -1661,11 +1661,11 @@ IScriptAction_OpenShop:                     ; [$83d8]
     BEQ @LAB_PRG12__8439
     CMP #$94
     BEQ @LAB_PRG12__8439
-    JSR #$f785
+    JSR $f785
     TAX
     LDA NumberOfWeapons,X                   ; Number of weapons in the
                                             ; player's inventory.
-    CMP #$847d,X
+    CMP MAX_INVENTORY_SLOTS,X
     BEQ @LAB_PRG12__8469
 
   @LAB_PRG12__8439:                         ; [$8439]
@@ -1674,7 +1674,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
     STA Temp_Int24
     STA a:Temp_0202
     LDA ShopItemCostsU,X
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     STA a:Temp_0203
     JSR IScripts_CheckEnoughMoney
     BCS @LAB_PRG12__8457
@@ -1683,7 +1683,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
 
   @LAB_PRG12__8457:                         ; [$8457]
     LDX a:Menu_CursorPos
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     JSR Player_AddToInventory
     JSR IScripts_ProgressivelySubtractGold
     JSR Maybe_Shop_DrawTextBox
@@ -1738,7 +1738,7 @@ MAX_INVENTORY_SLOTS:                        ; [$847d]
 ;============================================================================
 Shop_GetPlayerHasSelectedItem:              ; [$8482]
     LDX a:Menu_CursorPos
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     BPL @LAB_PRG12__84bf
     LDX #$00
     CMP #$80
@@ -1771,7 +1771,7 @@ Shop_GetPlayerHasSelectedItem:              ; [$8482]
 
   @LAB_PRG12__84b5:                         ; [$84b5]
     LDA a:SpecialItems
-    AND #$84e5,X
+    AND $84e5,X
     BEQ @LAB_PRG12__84b3
 
   @LAB_PRG12__84bd:                         ; [$84bd]
@@ -1780,12 +1780,12 @@ Shop_GetPlayerHasSelectedItem:              ; [$8482]
 
   @LAB_PRG12__84bf:                         ; [$84bf]
     PHA
-    JSR #$f785
+    JSR $f785
     TAX
-    LDA #$9b29,X
+    LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24
-    LDA #$9b2e,X
-    STA Temp_Int24.M
+    LDA INVENTORY_CATEGORY_U,X
+    STA Temp_Int24_M
     PLA
     AND #$1f
     CMP SelectedWeapon,X
@@ -1894,12 +1894,13 @@ IScripts_WaitForMenuInput:                  ; [$84ed]
 ; Populate the items in the menu.
 ;
 ; This will take the menus stored in the address indicated
-; in Temp_Int24 and #$ed. It will loop through
+; in Temp_Int24 and Temp_Int24+1. It will
+; loop through
 ; these, adding the items and costs to the menu state.
 ;
 ; INPUTS:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         The address of the menu items to load.
 ;
 ; OUTPUTS:
@@ -1909,7 +1910,7 @@ IScripts_WaitForMenuInput:                  ; [$84ed]
 ;     Menu_CursorPos:
 ;         Start position of the cursor (0).
 ;
-;     UI_Menu_IDs:
+;     DataArray:
 ;         The populated list of items.
 ;
 ;     ShopItemCostsL:
@@ -1943,7 +1944,7 @@ Shop_Populate:                              ; [$8501]
     ;
     ; Store the item.
     ;
-    STA UI_Menu_IDs,X                       ; Store the item in the menu.
+    STA DataArray,X                         ; Store the item in the menu.
     INY                                     ; Y++
 
 
@@ -2023,8 +2024,8 @@ IScripts_ProgressivelyAddGold:              ; [$8537]
     LDA #$0a
     STA Temp_Int24
     LDA #$00
-    STA Temp_Int24.M
-    JSR #$f9c1
+    STA Temp_Int24_M
+    JSR $f9c1
     JMP IScripts_ProgressivelyAddGold
 
   @LAB_PRG12__8566:                         ; [$8566]
@@ -2063,7 +2064,7 @@ IScripts_PlayGoldChangeSound:               ; [$8574]
     ;
     LDA #$19                                ; 0x19 == Change gold amount
                                             ; sound
-    JSR #$d0e4                              ; Play the sound.
+    JSR $d0e4                               ; Play the sound.
 
   @_return:                                 ; [$857f]
     RTS
@@ -2099,7 +2100,7 @@ IScriptAction_AddMP:                        ; [$8580]
     LDX a:Player_MP                         ; X = Remaining value to add.
     INX                                     ; X++
     TXA                                     ; A = X
-    JSR #$fa85                              ; Set the current mana points.
+    JSR $fa85                               ; Set the current mana points.
     DEC a:IScript_HPOrMPValueToAdd          ; Decrement the remaining value
                                             ; to add.
     BNE @_fillLoop                          ; If we're not done, loop.
@@ -2142,7 +2143,7 @@ IScripts_PlayFillingSound:                  ; [$85a3]
     AND #$03
     BNE RETURN_85AE
     LDA #$13
-    JSR #$d0e4
+    JSR $d0e4
 
     ;
     ; XREFS:
@@ -2190,7 +2191,7 @@ IScriptAction_AddHP:                        ; [$85af]
     LDX a:Temp_AddedHPValue                 ; X = Remaining value to add
     INX                                     ; X++
     TXA                                     ; A = X
-    JSR #$fa75                              ; Draw the next bit of health.
+    JSR $fa75                               ; Draw the next bit of health.
     DEC a:IScript_HPOrMPValueToAdd          ; Decrement the remaining amount
                                             ; to add.
     BNE @_fillLoop                          ; If there's more to add, loop.
@@ -2224,7 +2225,7 @@ IScriptAction_IfQuestCompleted:             ; [$85d1]
                                             ; index into our table.
     TAX                                     ; X = result
     LDA a:Quests                            ; Load the current player quests.
-    AND #$85e2,X                            ; AND it to the bitmask at the
+    AND $85e2,X                             ; AND it to the bitmask at the
                                             ; given index.
     BNE @_hasQuestCompleted
     JMP IScripts_SkipAddrAndInvoke          ; Skip 2 bytes and invoke the
@@ -2257,7 +2258,7 @@ IScriptAction_SetQuestComplete:             ; [$85e6]
                                             ; index into our table.
     TAX                                     ; X = result
     LDA a:Quests                            ; Load the current player quests.
-    ORA #$85e2,X                            ; OR it with the bit for this
+    ORA $85e2,X                             ; OR it with the bit for this
                                             ; index.
     STA a:Quests                            ; Store as the new quests
                                             ; bitmask.
@@ -2327,7 +2328,7 @@ IScripts_JumpToNextAddr:                    ; [$8603]
     PHA                                     ; Push to the stack.
     JSR IScripts_LoadByte                   ; Load the next byte as the upper
                                             ; byte of the script address.
-    STA IScriptOrCHRAddr.U                  ; Store it.
+    STA IScriptOrCHRAddr_U                  ; Store it.
     PLA                                     ; Pop the lower byte.
     STA IScriptOrCHRAddr                    ; Store it.
     LDA #$00                                ; A = 0.
@@ -2403,7 +2404,7 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
     ;
     LDA #$10                                ; 0x10 == "Did you come here to
                                             ; buy and sell?"
-    JSR #$f3e9                              ; Load and show that message in
+    JSR $f3e9                               ; Load and show that message in
                                             ; its entirety.
 
 
@@ -2493,7 +2494,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     JSR IScripts_LoadByte
     STA Temp_Int24
     JSR IScripts_LoadByte
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA #$00
     STA a:Arg_StringsCount
     LDX #$04
@@ -2503,24 +2504,24 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     BEQ @LAB_PRG12__86b7
     TXA
     PHA
-    JSR #$f78b
+    JSR $f78b
     STA a:Maybe_Shop_InventoryBitmask
-    LDA #$9b29,X
-    STA Temp_Int24.U
-    LDA #$9b2e,X
+    LDA INVENTORY_CATEGORY_L,X
+    STA Temp_Int24_U
+    LDA INVENTORY_CATEGORY_U,X
     STA Maybe_Temp4
     DEY
 
   @LAB_PRG12__8689:                         ; [$8689]
     TYA
     PHA
-    LDA (#$ee),Y
+    LDA ($ee),Y
     ORA a:Maybe_Shop_InventoryBitmask
     TAX
     JSR IScripts_SellMenu_Something8704
     BNE @LAB_PRG12__86b0
     LDX a:Arg_StringsCount
-    STA UI_Menu_IDs,X
+    STA DataArray,X
     INY
     LDA (Temp_Int24),Y
     STA ShopItemCostsL,X
@@ -2551,11 +2552,11 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
 
   @LAB_PRG12__86c6:                         ; [$86c6]
     LDA #$13
-    JSR #$f3f5
+    JSR $f3f5
 
   @LAB_PRG12__86cb:                         ; [$86cb]
     JSR IScripts_UpdatePortraitAnimation
-    JSR #$f466
+    JSR $f466
     JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__86cb
@@ -2567,7 +2568,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     STA a:Temp_0202
     LDA ShopItemCostsU,X
     STA a:Temp_0203
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     JSR Player_RemoveItem
     JSR IScripts_ProgressivelyAddGold
     JSR TextBox_Close
@@ -2708,7 +2709,7 @@ IScriptAction_CheckUpdatePlayerTitle:       ; [$8726]
 ;============================================================================
 IScriptAction_ShowPassword:                 ; [$8737]
     JSR Password_GenerateStateAndReset      ; Generate the password state.
-    JSR #$f434                              ; Clear the textbox.
+    JSR $f434                               ; Clear the textbox.
     LDA #$00
     STA a:IScripts_Unused_207               ; DEADCODE: Set to 0.
 
@@ -2755,8 +2756,8 @@ PasswordScreen_ShowNextChar:                ; [$8757]
                                             ; state for the character offset.
     PHP                                     ; Push flags to stack.
     TAY                                     ; Y = A (index)
-    LDA #$8764,Y                            ; A = character at index Y
-    JSR #$f4ff                              ; Show the character in the
+    LDA PASSWORD_ENTERED_CHARS,Y            ; A = character at index Y
+    JSR $f4ff                               ; Show the character in the
                                             ; textbox.
     PLP                                     ; Pop flags.
     RTS
@@ -2836,7 +2837,7 @@ IScripts_LoadByte:                          ; [$87a4]
     ; The offset wrapped from 0xFF to 0. Update the upper byte
     ; of the script address for the next read.
     ;
-    INC IScriptOrCHRAddr.U                  ; Increment the address
+    INC IScriptOrCHRAddr_U                  ; Increment the address
 
   @_incOffset:                              ; [$87ad]
     STY IScriptOffset                       ; Set new offset
@@ -2903,9 +2904,9 @@ RETURN_87AF:                                ; [$87af]
 ;     Maybe_Shop_DrawTextBox
 ;============================================================================
 IScripts_UpdatePortraitAnimation:           ; [$87b0]
-    JSR #$ca25                              ; Wait for the next frame.
-    JSR #$cb47                              ; Set up state for a screen draw.
-    JSR #$dc46                              ; Draw the screen in a frozen
+    JSR $ca25                               ; Wait for the next frame.
+    JSR $cb47                               ; Set up state for a screen draw.
+    JSR $dc46                               ; Draw the screen in a frozen
                                             ; animation state.
     LDA a:Temp_0201                         ; Load the portrait ID.
     BPL RETURN_87AF                         ; If no portrait, return.
@@ -2943,7 +2944,7 @@ IScripts_UpdatePortraitAnimation:           ; [$87b0]
   @_drawFrame:                              ; [$87d6]
     JSR IScripts_SetPortraitSpriteXY        ; Set the X/Y location for the
                                             ; portrait sprite.
-    JMP #$f29b                              ; Draw the computed animation
+    JMP $f29b                               ; Draw the computed animation
                                             ; frame.
 
 
@@ -2961,7 +2962,7 @@ IScripts_UpdatePortraitAnimation:           ; [$87b0]
 ;
 ; INPUTS:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         The amount of gold required for a true result.
 ;
 ;     Gold:
@@ -2994,7 +2995,7 @@ IScripts_CheckEnoughMoney:                  ; [$87dc]
     ;
     LDA a:Gold_M                            ; Load the middle byte of the
                                             ; player's gold amount.
-    CMP Temp_Int24.M                        ; Compare to the required amount.
+    CMP Temp_Int24_M                        ; Compare to the required amount.
     BNE @_return                            ; If not 0, return. CMP set Carry
                                             ; as our result.
 
@@ -3074,11 +3075,11 @@ TextBox_GetNextAttributeDataOffset:         ; [$87fe]
     ASL A
     ASL A
     AND #$f8
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA TextBox_ContentsX
     LSR A
-    ORA Temp_Int24.M
-    STA Temp_Int24.M
+    ORA Temp_Int24_M
+    STA Temp_Int24_M
     RTS
 
 ;============================================================================
@@ -3105,22 +3106,22 @@ TextBox_SetNextAttributeData:               ; [$880e]
     BCS @LAB_PRG12__882f
     LDA TextBox_AttributeData,X
     AND #$fc
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     AND #$03
-    ORA Temp_Int24.M
+    ORA Temp_Int24_M
     STA TextBox_AttributeData,X
     RTS
 
   @LAB_PRG12__882f:                         ; [$882f]
     LDA TextBox_AttributeData,X
     AND #$f3
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     ASL A
     ASL A
     AND #$0c
-    ORA Temp_Int24.M
+    ORA Temp_Int24_M
     STA TextBox_AttributeData,X
     RTS
 
@@ -3130,21 +3131,21 @@ TextBox_SetNextAttributeData:               ; [$880e]
     BCS @LAB_PRG12__885c
     LDA TextBox_AttributeData,X
     AND #$cf
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     ASL A
     ASL A
     ASL A
     ASL A
     AND #$30
-    ORA Temp_Int24.M
+    ORA Temp_Int24_M
     STA TextBox_AttributeData,X
     RTS
 
   @LAB_PRG12__885c:                         ; [$885c]
     LDA TextBox_AttributeData,X
     AND #$3f
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     ASL A
     ASL A
@@ -3153,7 +3154,7 @@ TextBox_SetNextAttributeData:               ; [$880e]
     ASL A
     ASL A
     AND #$c0
-    ORA Temp_Int24.M
+    ORA Temp_Int24_M
     STA TextBox_AttributeData,X
     RTS
 
@@ -3223,29 +3224,29 @@ PlayerMenu_Show:                            ; [$8a93]
     LDA #$0e
     STA a:TextBox_Height
     LDA #$18
-    JSR #$d0e4
+    JSR $d0e4
     JSR TextBox_Open
     LDA #$73
     STA Temp_Int24
     LDA #$88
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDX #$00
-    STX a:UI_Menu_IDs
+    STX a:DataArray
     INX
-    STX a:UI_Menu_IDs_1_
+    STX a:DataArray_1_
     INX
-    STX a:UI_Menu_IDs_2_
+    STX a:DataArray_2_
     INX
-    STX a:UI_Menu_IDs_3_
+    STX a:DataArray_3_
     INX
-    STX a:UI_Menu_IDs_4_
+    STX a:DataArray_4_
     INX
-    STX a:UI_Menu_IDs_5_
+    STX a:DataArray_5_
     JSR TextBox_DrawStringLines
 
   @_inputLoop:                              ; [$8add]
-    JSR #$ca25
-    JSR #$cb47
+    JSR $ca25
+    JSR $cb47
     JSR Menu_UpdateAndDraw
     LDA Joy1_ChangedButtonMask
     BMI @_loadMenuIDs
@@ -3293,19 +3294,19 @@ PlayerMenu_ShowSubmenu:                     ; [$8afa]
     CLC
     ADC #$02
     STA TextBox_ContentsY
-    JSR #$f804
+    JSR $f804
     LDA #$43
     STA Temp_Int24
     LDA #$8a
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA a:Menu_CursorPos
-    JSR #$f78c
+    JSR $f78c
     TAY
     JSR UI_DrawString
 
   @_inputLoop:                              ; [$8b41]
-    JSR #$ca25
-    JSR #$cb47
+    JSR $ca25
+    JSR $cb47
     LDA Joy1_ChangedButtonMask
     ASL A
     BPL @_inputLoop
@@ -3326,15 +3327,15 @@ PlayerMenu_ShowSubmenu:                     ; [$8afa]
 ;============================================================================
 PlayerMenu_ShowInventoryMenu:               ; [$8b4f]
     STA a:Arg_StringsCount
-    LDA #$9b29,X
+    LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24
-    LDA #$9b2e,X
-    STA Temp_Int24.M
+    LDA INVENTORY_CATEGORY_U,X
+    STA Temp_Int24_M
     LDY #$00
 
   @_loadMenuIDs:                            ; [$8b5e]
     LDA (Temp_Int24),Y
-    STA UI_Menu_IDs,Y
+    STA DataArray,Y
     INY
     CPY a:Arg_StringsCount
     BNE @_loadMenuIDs
@@ -3363,8 +3364,8 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
     ;
     ; Wait for input on the menu.
     ;
-    JSR #$ca25                              ; Wait for the next frame.
-    JSR #$cb47                              ; Set up draw state.
+    JSR $ca25                               ; Wait for the next frame.
+    JSR $cb47                               ; Set up draw state.
     JSR Menu_UpdateAndDraw                  ; Update and draw the menu.
     LDA Joy1_ChangedButtonMask              ; Check for a changed button.
     BMI @_hasInput                          ; If the the "A" button is
@@ -3404,7 +3405,7 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
     CMP #$03                                ; Is it the Dragon Slayer?
     BEQ PlayerMenu_HandleInvalidChoice      ; If not, it's an invalid choice.
     LDX a:Menu_CursorPos                    ; X = Menu cursor position.
-    LDA UI_Menu_IDs,X                       ; A = Item ID at the cursor
+    LDA DataArray,X                         ; A = Item ID at the cursor
                                             ; position.
     CMP #$03                                ; Is the item ID 3 (Dragon
                                             ; Slayer)?
@@ -3445,7 +3446,7 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
     ; They have all three. Equip them all and close the menu.
     ;
     LDA #$08                                ; 0x08 == Item Pick-Up sound.
-    JSR #$d0e4                              ; Play it.
+    JSR $d0e4                               ; Play it.
     LDA #$03                                ; 0x03 == Dragon Slayer.
     JSR Player_Equip                        ; Equip it.
     LDA #$23                                ; 0x23 == Battle Suit.
@@ -3468,11 +3469,11 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
 ;============================================================================
 PlayerMenu_EquipItem:                       ; [$8bce]
     LDA #$08                                ; 0x08 == Item pick-up sound.
-    JSR #$d0e4                              ; Play it.
+    JSR $d0e4                               ; Play it.
     LDX a:Menu_CursorPos                    ; X = Menu cursor position.
     LDA a:PlayerMenu_SelectedInventory      ; A = Selected inventory.
-    JSR #$f78b                              ; Get the inventory bits.
-    ORA UI_Menu_IDs,X                       ; OR it with the selected item
+    JSR $f78b                               ; Get the inventory bits.
+    ORA DataArray,X                         ; OR it with the selected item
                                             ; index as an item ID.
     JSR Player_Equip                        ; Equip the resulting item.
     JMP PlayerMenu_Close                    ; Close the Player Menu.
@@ -3492,7 +3493,7 @@ PlayerMenu_EquipItem:                       ; [$8bce]
 PlayerMenu_HandleInvalidChoice:             ; [$8be5]
     LDA #$0d                                ; 0x0D == Invalid Choice sound
                                             ; effect.
-    JSR #$d0e4                              ; Play it.
+    JSR $d0e4                               ; Play it.
     JMP PlayerMenu_HandleInventoryMenuInput ; Resume handling of the
                                             ; inventory menu.
 
@@ -3555,8 +3556,8 @@ PlayerMenu_DrawInventoryItems:              ; [$8c04]
     INY
     STY TextBox_ContentsX
     LDA a:PlayerMenu_SelectedInventory
-    JSR #$f78b
-    ORA UI_Menu_IDs,X
+    JSR $f78b
+    ORA DataArray,X
     PHA
     JSR TextBox_DrawItemImage
     PLA
@@ -3589,19 +3590,19 @@ PlayerMenu_DrawInventoryItems:              ; [$8c04]
 TextBox_DrawItemName:                       ; [$8c36]
     PHA
     PHA
-    JSR #$f804
+    JSR $f804
     PLA
-    JSR #$f785
+    JSR $f785
     TAX
-    LDA #$9b33,X
+    LDA ITEM_NAME_CATEGORIES_L,X
     STA Temp_Int24
-    LDA #$9b38,X
-    STA Temp_Int24.M
+    LDA ITEM_NAME_CATEGORIES_U,X
+    STA Temp_Int24_M
     PLA
     AND #$1f
-    JSR #$f78c
+    JSR $f78c
     BCC @LAB_PRG12__8c54
-    INC Temp_Int24.M
+    INC Temp_Int24_M
 
   @LAB_PRG12__8c54:                         ; [$8c54]
     TAY
@@ -3677,7 +3678,7 @@ TextBox_DrawItemImage:                      ; [$8c58]
                                             ; (bit0(index) << 6. == (index &
                                             ; 3) * 64.
     ADC #$14                                ; A = 0x14 + C.
-    STA PPU_TargetAddr.U                    ; Set as the upper byte.
+    STA PPU_TargetAddr_U                    ; Set as the upper byte.
 
 
     ;
@@ -3686,14 +3687,14 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; relative to that address.
     ;
     LDA Temp_Int24                          ; Load the item ID.
-    JSR #$fc18                              ; Load the source tiles address
+    JSR $fc18                               ; Load the source tiles address
                                             ; in the PPU.
 
 
     ;
     ; Position the image where the text would normally go.
     ;
-    JSR #$f804                              ; Set the draw position for the
+    JSR $f804                               ; Set the draw position for the
                                             ; image.
 
 
@@ -3708,16 +3709,16 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; (16 == 8 bytes * 2 tiles)
     ;
     LDA #$02                                ; A = 2 (tiles)
-    JSR #$cfdc                              ; Write the length to the PPU
+    JSR $cfdc                               ; Write the length to the PPU
                                             ; buffer.
     PLA                                     ; Pull the index from the stack.
     ASL A                                   ; Multiply by 16.
     ASL A
     ADC #$40                                ; Add 64 + C.
-    JSR #$f845                              ; Add to the PPU buffer.
+    JSR $f845                               ; Add to the PPU buffer.
     CLC
     ADC #$01                                ; Add 1.
-    JSR #$f845                              ; Add to the PPU buffer.
+    JSR $f845                               ; Add to the PPU buffer.
 
 
     ;
@@ -3726,7 +3727,7 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ;
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
                                             ; offset.
-    JSR #$f826                              ; Increment the PPU address by
+    JSR $f826                               ; Increment the PPU address by
                                             ; 32.
 
 
@@ -3741,17 +3742,17 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; (16 == 8 bytes * 2 tiles)
     ;
     LDA #$02                                ; A = 2 (tiles)
-    JSR #$cfdc                              ; Write the length to the PPU
+    JSR $cfdc                               ; Write the length to the PPU
                                             ; buffer.
     PLA                                     ; Pull the index from the stack.
     ASL A                                   ; Multiply by 16.
     ASL A
     ADC #$42                                ; Add 66 + C.
-    JSR #$f845                              ; Add left tile index the PPU
+    JSR $f845                               ; Add left tile index the PPU
                                             ; buffer.
     CLC
     ADC #$01                                ; Add 1.
-    JSR #$f845                              ; Add right tile to the PPU
+    JSR $f845                               ; Add right tile to the PPU
                                             ; buffer.
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
                                             ; offset.
@@ -3805,7 +3806,7 @@ Player_Equip:                               ; [$8ca9]
     ;
     STA a:Temp_EquipingItem                 ; Store the item that we're
                                             ; equipping.
-    JSR #$f785                              ; Compute the inventory index of
+    JSR $f785                               ; Compute the inventory index of
                                             ; the item.
     TAX                                     ; Set X = the inventory index we
                                             ; computed
@@ -3841,7 +3842,7 @@ Player_Equip:                               ; [$8ca9]
     ;
     ; Set the normalized value within the inventory.
     ;
-    JSR #$f785                              ; Calculate the inventory slot
+    JSR $f785                               ; Calculate the inventory slot
                                             ; again.
     TAY                                     ; Set Y = inventory slot
     LDA a:Temp_EquipingItem                 ; Set A = new item
@@ -3860,21 +3861,21 @@ Player_Equip:                               ; [$8ca9]
     ;
     ; Inventory 0 (weapons)
     ;
-    JMP #$edec                              ; Set the current weapon.
+    JMP $edec                               ; Set the current weapon.
 
 
     ;
     ; Inventory 1 (armor)
     ;
   @_isArmor:                                ; [$8ce7]
-    JMP #$ee05                              ; Set the current armor.
+    JMP $ee05                               ; Set the current armor.
 
 
     ;
     ; Inventory 2 (shield)
     ;
   @_isShield:                               ; [$8cea]
-    JMP #$ee0d                              ; Set the current shield.
+    JMP $ee0d                               ; Set the current shield.
 
 
     ;
@@ -3888,7 +3889,7 @@ Player_Equip:                               ; [$8ca9]
     ; Inventory 4 (normal items)
     ;
   @_isItem:                                 ; [$8cf0]
-    JMP #$fc0b                              ; Set the current item.
+    JMP $fc0b                               ; Set the current item.
 
 
 ;============================================================================
@@ -3948,7 +3949,7 @@ Player_SetMagic:                            ; [$8cf3]
 ;         0 if it is.
 ;
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -3994,12 +3995,12 @@ Player_LacksItem:                           ; [$8cf7]
     BEQ @_specialItemMatched
     PHA                                     ; Push the item value on the
                                             ; stack.
-    JSR #$f785                              ; Get the inventory for the item.
+    JSR $f785                               ; Get the inventory for the item.
     TAY                                     ; Set Y = inventory.
-    LDA #$9b29,Y
+    LDA INVENTORY_CATEGORY_L,Y
     STA Temp_Int24
-    LDA #$9b2e,Y
-    STA Temp_Int24.M
+    LDA INVENTORY_CATEGORY_U,Y
+    STA Temp_Int24_M
 
 
     ;
@@ -4057,7 +4058,7 @@ Player_LacksItem:                           ; [$8cf7]
   @_specialItemMatched:                     ; [$8d48]
     LDA a:SpecialItems                      ; Load the player's Special Items
                                             ; bitmask.
-    AND #$8d52,X                            ; Clear the bit for the matched
+    AND SPECIAL_ITEMS_BITMASKS,X            ; Clear the bit for the matched
                                             ; item.
     BEQ @_returnTrue
 
@@ -4148,10 +4149,10 @@ SPECIAL_ITEMS_BITMASKS_7_:                  ; [$8d59]
 ;
 ; OUTPUTS:
 ;     Arg_StringsCount:
-;     UI_Menu_IDs:
+;     DataArray:
 ;     Temp_Int24:
-;     #$ed:
-;     #$ee:
+;     Temp_Int24+1:
+;     $ee:
 ;     TextBox_X:
 ;     TextBox_Y:
 ;     TextBox_Width:
@@ -4203,21 +4204,21 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     STA Temp_Int24                          ; Store it.
     LDA #$88                                ; 0x88 = upper byte of text
                                             ; strings.
-    STA Temp_Int24.M                        ; Store it.
+    STA Temp_Int24_M                        ; Store it.
     LDX #$00                                ; X = 0 (index counter).
-    STX a:UI_Menu_IDs                       ; Draw string 1 ("RANK:").
+    STX a:DataArray                         ; Draw string 1 ("RANK:").
     INX
-    STX a:UI_Menu_IDs_1_                    ; Draw string 2 ("NEXT EXP:").
+    STX a:DataArray_1_                      ; Draw string 2 ("NEXT EXP:").
     INX
-    STX a:UI_Menu_IDs_2_                    ; Draw string 3 ("WEAPON:").
+    STX a:DataArray_2_                      ; Draw string 3 ("WEAPON:").
     INX
-    STX a:UI_Menu_IDs_3_                    ; Draw string 4 ("ARMOR:").
+    STX a:DataArray_3_                      ; Draw string 4 ("ARMOR:").
     INX
-    STX a:UI_Menu_IDs_4_                    ; Draw string 5 ("SHIELD:").
+    STX a:DataArray_4_                      ; Draw string 5 ("SHIELD:").
     INX
-    STX a:UI_Menu_IDs_5_                    ; Draw string 6 ("MAGIC:").
+    STX a:DataArray_5_                      ; Draw string 6 ("MAGIC:").
     INX
-    STX a:UI_Menu_IDs_6_                    ; Draw string 7 ("ITEM:").
+    STX a:DataArray_6_                      ; Draw string 7 ("ITEM:").
     JSR TextBox_DrawStringLines             ; Draw the strings in the
                                             ; textbox.
 
@@ -4235,10 +4236,10 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     CLC
     ADC #$02                                ; Add 2.
     STA TextBox_ContentsY                   ; Set as the draw Y coordinate.
-    JSR #$f804                              ; Set this as the PPU draw
+    JSR $f804                               ; Set this as the PPU draw
                                             ; position.
     LDA a:PlayerTitle                       ; Load the player title.
-    JSR #$f78c                              ; Multiply by 16 to get an index
+    JSR $f78c                               ; Multiply by 16 to get an index
                                             ; into the strings.
     TAY                                     ; Y = A (result)
     LDA #$43                                ; 0x43 == lower byte of Player
@@ -4246,7 +4247,7 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     STA Temp_Int24                          ; Store it.
     LDA #$89                                ; 0x89 == upper byte of Player
                                             ; Title strings.
-    STA Temp_Int24.M                        ; Store it.
+    STA Temp_Int24_M                        ; Store it.
     JSR UI_DrawString                       ; Draw the string.
 
 
@@ -4273,16 +4274,16 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     ASL A                                   ; Convert the title index to a
                                             ; word boundary.
     TAX                                     ; X = A (result).
-    LDA #$f749,X                            ; Load the lower byte of the
+    LDA $f749,X                             ; Load the lower byte of the
                                             ; amount of experience needed for
                                             ; the next level.
     STA Temp_Int24                          ; Store it.
-    LDA #$f74a,X                            ; Load the middle byte.
-    STA Temp_Int24.M                        ; Store it.
+    LDA $f74a,X                             ; Load the middle byte.
+    STA Temp_Int24_M                        ; Store it.
     LDA #$00                                ; Upper byte is always 0.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDY #$05                                ; 5 = Maximum number of digits.
-    JSR #$fa03                              ; Draw the number zero-padded.
+    JSR $fa03                               ; Draw the number zero-padded.
 
 
     ;
@@ -4317,7 +4318,7 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     ADC #$09                                ; Add 9 (image X coordinate).
     STA TextBox_ContentsX                   ; Store as the draw X coordinate.
     TXA                                     ; A = X (loop counter).
-    JSR #$f78b                              ; Get the inventory bit for this
+    JSR $f78b                               ; Get the inventory bit for this
                                             ; index.
     ORA SelectedWeapon,X                    ; OR with the item value,
                                             ; yielding an inventory-backed
@@ -4376,7 +4377,7 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     TXA                                     ; A = X (loop counter).
     PHA                                     ; Push the loop counter to the
                                             ; stack.
-    LDA #$8e63,X                            ; Load the tile start ID for this
+    LDA SPECIAL_ITEM_TILE_START_IDS,X       ; Load the tile start ID for this
                                             ; item.
     INX                                     ; X += 4 (number of item image
                                             ; tiles).
@@ -4401,8 +4402,8 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     ; Draw the menu, freezing gameplay until dismissed.
     ;
   @_waitForInputLoop:                       ; [$8e41]
-    JSR #$ca25                              ; Wait for the next frame.
-    JSR #$cb47                              ; Draw with screen state paused.
+    JSR $ca25                               ; Wait for the next frame.
+    JSR $cb47                               ; Draw with screen state paused.
     LDA Joy1_ChangedButtonMask              ; Load the changed button mask.
     ASL A                                   ; Shift the "A" button state into
                                             ; N.
@@ -4467,13 +4468,13 @@ TextBox_DrawStringLines:                    ; [$8e6b]
     CLC
     ADC #$02
     STA TextBox_ContentsY
-    JSR #$f804
+    JSR $f804
     LDX #$00
 
   @_drawLinesLoop:                          ; [$8e80]
     TXA
     PHA
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     ASL A
     ASL A
     ASL A
@@ -4481,7 +4482,7 @@ TextBox_DrawStringLines:                    ; [$8e6b]
     TAY
     JSR UI_DrawString
     LDA #$40
-    JSR #$f828
+    JSR $f828
     PLA
     TAX
     INX
@@ -4532,9 +4533,9 @@ UI_DrawString:                              ; [$8e9b]
     ;
     LDA (Temp_Int24),Y                      ; Load the length value from the
                                             ; loaded string.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     INY                                     ; Y++ (character offset)
-    JSR #$cfdc                              ; Queue drawing up to the length.
+    JSR $cfdc                               ; Queue drawing up to the length.
 
 
     ;
@@ -4545,8 +4546,8 @@ UI_DrawString:                              ; [$8e9b]
     JSR Strings_ASCIIToIndex                ; Conver the ASCII value to a
                                             ; tile index.
     INY                                     ; Y++ (character offset)
-    JSR #$f845                              ; Set that in the PPU buffer.
-    DEC Temp_Int24.U                        ; Decrement loop counter.
+    JSR $f845                               ; Set that in the PPU buffer.
+    DEC Temp_Int24_U                        ; Decrement loop counter.
     BNE @_drawLoop                          ; If we're not done, loop.
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer upper
                                             ; bounds.
@@ -4601,7 +4602,7 @@ IScriptAction_AddInventoryItem_ClearTextBox: ; [$8ec1]
     LDX a:TextBox_Y
     INX
     STX TextBox_ContentsY
-    JSR #$f804
+    JSR $f804
     LDX a:TextBox_Height
 
   @_clearLoop:                              ; [$8ed3]
@@ -4611,11 +4612,11 @@ IScriptAction_AddInventoryItem_ClearTextBox: ; [$8ec1]
     TAY
     SEC
     SBC #$02
-    JSR #$cfdc
+    JSR $cfdc
     LDA #$00
-    JSR #$f839
+    JSR $f839
     STX PPUBuffer_WriteOffset
-    JSR #$f826
+    JSR $f826
     PLA
     TAX
     DEX
@@ -4647,16 +4648,16 @@ TextBox_Open:                               ; [$8ef1]
     STA TextBox_ContentsX
     LDA a:TextBox_Y
     STA TextBox_ContentsY
-    JSR #$f804
-    JSR #$f832
+    JSR $f804
+    JSR $f832
     LDA #$01
-    JSR #$f845
+    JSR $f845
     LDA #$02
-    JSR #$f839
+    JSR $f839
     LDA #$03
-    JSR #$f845
+    JSR $f845
     STX PPUBuffer_WriteOffset
-    JSR #$f826
+    JSR $f826
 
 
     ;
@@ -4667,15 +4668,15 @@ TextBox_Open:                               ; [$8ef1]
   @_drawFrameSides:                         ; [$8f18]
     TYA
     PHA
-    JSR #$f832
+    JSR $f832
     LDA #$04
-    JSR #$f845
+    JSR $f845
     LDA #$00
-    JSR #$f839
+    JSR $f839
     LDA #$04
-    JSR #$f845
+    JSR $f845
     STX PPUBuffer_WriteOffset
-    JSR #$f826
+    JSR $f826
     PLA
     TAY
     DEY
@@ -4686,13 +4687,13 @@ TextBox_Open:                               ; [$8ef1]
     ;
     ; Draw the bottom of the box's frame.
     ;
-    JSR #$f832
+    JSR $f832
     LDA #$05
-    JSR #$f845
+    JSR $f845
     LDA #$02
-    JSR #$f839
+    JSR $f839
     LDA #$06
-    JSR #$f845
+    JSR $f845
     STX PPUBuffer_WriteOffset
     LDA #$00
 
@@ -4765,7 +4766,7 @@ TextBox_FillBackground:                     ; [$8f51]
     ASL A
     ASL A
     ORA #$23
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDA a:TextBox_X
     LSR A
     LSR A
@@ -4806,7 +4807,7 @@ TextBox_FillBackground:                     ; [$8f51]
     PHA
     LDA TextBox_ContentsX
     STA Temp_Int24
-    JSR #$cfdc
+    JSR $cfdc
 
 
     ;
@@ -4815,11 +4816,11 @@ TextBox_FillBackground:                     ; [$8f51]
   @_drawColsLoop:                           ; [$8fdc]
     LDA TextBox_AttributeData,Y
     INY
-    JSR #$f845
+    JSR $f845
     DEC Temp_Int24
     BNE @_drawColsLoop
     STX PPUBuffer_WriteOffset
-    JSR #$f822
+    JSR $f822
     PLA
     CLC
     ADC #$08
@@ -4866,7 +4867,7 @@ TextBox_GetBackgroundAttributeData:         ; [$8ff6]
     ; The textbox is closed. Return the attribute of the background
     ; area behind it.
     ;
-    JMP #$f791                              ; Return the attribute data
+    JMP $f791                               ; Return the attribute data
                                             ; behind the textbox.
 
 
@@ -4906,7 +4907,7 @@ TextBox_Close:                              ; [$9002]
     STA TextBox_ContentsX
     LDA a:TextBox_Y
     STA TextBox_ContentsY
-    JSR #$f804
+    JSR $f804
     LDY a:TextBox_Height
 
   @_closeYLoop:                             ; [$901a]
@@ -4916,11 +4917,11 @@ TextBox_Close:                              ; [$9002]
     PHA
     LDA a:TextBox_Width
     TAY
-    JSR #$cfdc
+    JSR $cfdc
 
   @_closeXLoop:                             ; [$9026]
-    JSR #$f7b7
-    JSR #$f845
+    JSR $f7b7
+    JSR $f845
     INC TextBox_ContentsX
     DEY
     BNE @_closeXLoop
@@ -4930,7 +4931,7 @@ TextBox_Close:                              ; [$9002]
     PLA
     TAY
     INC TextBox_ContentsY
-    JSR #$f826
+    JSR $f826
     DEY
     BNE @_closeYLoop
     RTS
@@ -4942,12 +4943,12 @@ TextBox_Close:                              ; [$9002]
 DEADCODE_FUN_PRG12__9041:                   ; [$9041]
     LDA #$05
     STA TextBox_ContentsX
-    JSR #$cfdc
+    JSR $cfdc
 
   @LAB_PRG12__9048:                         ; [$9048]
     LDA TextBox_AttributeData,Y
     INY
-    JSR #$f845
+    JSR $f845
     DEC TextBox_ContentsX
     BNE @LAB_PRG12__9048
     STX PPUBuffer_WriteOffset
@@ -4996,7 +4997,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     STX a:Menu_CursorPos                    ; Set the new cursor position.
     LDA #$0b                                ; 0xB = Cursor movement sound
                                             ; effect.
-    JSR #$d0e4                              ; Play the sound effect.
+    JSR $d0e4                               ; Play the sound effect.
 
 
     ;
@@ -5026,7 +5027,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     ADC #$10                                ; Add 16.
     STA Temp_Int24                          ; Store it temporarily.
     LDA a:Menu_CursorPos                    ; A = cursor position.
-    JSR #$f78c                              ; A = A * 16 (2 tile height)
+    JSR $f78c                               ; A = A * 16 (2 tile height)
     ADC Temp_Int24                          ; A = A + our Y value.
     SBC #$20                                ; A = A - 32 (padding and nudging
                                             ; up a tile).
@@ -5037,7 +5038,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     ; Draw the selection symbol.
     ;
     LDA #$ad                                ; A = 0xAD (right arrow symbol).
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 
     ;
@@ -5086,23 +5087,23 @@ Menu_UpdateAndDraw:                         ; [$9056]
 ;     TODO
 ;============================================================================
 PasswordScreen_Show:                        ; [$909d]
-    JSR #$caf7
+    JSR $caf7
     LDA #$10
     STA a:PPUADDR
     LDA #$00
     STA a:PPUADDR
     LDY #$10
-    JSR #$fcb2
-    JSR #$f3a5
+    JSR $fcb2
+    JSR $f3a5
     LDY #$1f
 
   @LAB_PRG12__90b4:                         ; [$90b4]
-    LDA #$9204,Y
+    LDA PASSWORD_SCREEN_PALETTE,Y
     STA Screen_PaletteData,Y
     DEY
     BPL @LAB_PRG12__90b4
-    JSR #$d090
-    JSR #$fcb9
+    JSR $d090
+    JSR $fcb9
 
 
     ;
@@ -5117,7 +5118,7 @@ PasswordScreen_Show:                        ; [$909d]
     STA a:PPUADDR
     LDA #$5f
     LDY #$10
-    JSR #$fcb2
+    JSR $fcb2
 
 
     ;
@@ -5130,7 +5131,7 @@ PasswordScreen_Show:                        ; [$909d]
     STA a:PPUADDR
     LDA #$5f
     LDY #$10
-    JSR #$fcb2
+    JSR $fcb2
 
 
     ;
@@ -5145,10 +5146,10 @@ PasswordScreen_Show:                        ; [$909d]
     ; bytes of the current offset into INPUT_CHARS.
     ;
   @_startRow:                               ; [$90e7]
-    LDA #$9224,Y
+    LDA INPUT_CHARS,Y
     STA a:PPUADDR
     INY
-    LDA #$9224,Y
+    LDA INPUT_CHARS,Y
     STA a:PPUADDR
     INY
 
@@ -5161,7 +5162,7 @@ PasswordScreen_Show:                        ; [$909d]
     LDX #$19
 
   @_writePasswordCharsLoop:                 ; [$90f7]
-    LDA #$9224,Y
+    LDA INPUT_CHARS,Y
     STA a:PPUDATA
     INY
     DEX
@@ -5183,7 +5184,7 @@ PasswordScreen_Show:                        ; [$909d]
     LDA #$ec
     STA Temp_Int24
     LDA #$91
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
 
 
@@ -5214,7 +5215,11 @@ PasswordScreen_Show:                        ; [$909d]
     ;
     ; Handle password input.
     ;
-    JSR #$cb27
+    JSR $cb27
+
+    ;
+    ; v-- Fall through --v
+    ;
 
 ;============================================================================
 ; TODO: Document PasswordScreen_WaitForInput
@@ -5232,8 +5237,8 @@ PasswordScreen_Show:                        ; [$909d]
 ;     PasswordScreen_WaitForInput
 ;============================================================================
 PasswordScreen_WaitForInput:                ; [$9140]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR PasswordScreen_DrawAndHandleInputLoop
     BCC PasswordScreen_WaitForInput
     CMP #$83
@@ -5267,8 +5272,8 @@ PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
     JSR Sound_PlayInputSound
 
   @_handleWrongPassword:                    ; [$9162]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR PasswordScreen_WriteWrongPassword
     LDA Joy1_ChangedButtonMask
     BPL @_handleWrongPassword
@@ -5328,9 +5333,9 @@ PasswordScreen_HandleInput:                 ; [$917b]
 ;         New upper bounds of the PPU buffer.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -5368,9 +5373,9 @@ PasswordScreen_WriteEnterYourMantra:        ; [$9181]
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -5426,7 +5431,7 @@ PasswordScreen_WriteWrongPassword:          ; [$9185]
 ;         The new write offset for the PPU buffer.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -5440,19 +5445,19 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     ;
     ; Load the message string.
     ;
-    LDA #$91b8,Y                            ; Load the lower byte of the
+    LDA PASSWORD_MESSAGE_STRINGS_L,Y        ; Load the lower byte of the
                                             ; string address.
     STA Temp_Int24                          ; Store that.
-    LDA #$91bb,Y                            ; Load the upper byte of the
+    LDA PASSWORD_MESSAGE_STRINGS_U,Y        ; Load the upper byte of the
                                             ; string address.
-    STA Temp_Int24.M                        ; Store that.
+    STA Temp_Int24_M                        ; Store that.
 
 
     ;
     ; Set the PPU tile address to 0x20A5.
     ;
     LDA #$20
-    STA PPU_TargetAddr.U                    ; Upper byte = 0x20
+    STA PPU_TargetAddr_U                    ; Upper byte = 0x20
     LDA #$a5
     STA PPU_TargetAddr                      ; Lower byte = 0xA5
 
@@ -5461,7 +5466,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     ; Queue up a string of 23 characters.
     ;
     LDA #$17
-    JSR #$cfdc                              ; Queue 23 characters to draw.
+    JSR $cfdc                               ; Queue 23 characters to draw.
 
 
     ;
@@ -5470,7 +5475,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     LDY #$00                                ; Y = 0 (loop counter)
 
   @LAB_PRG12__91ae:                         ; [$91ae]
-    JSR #$f842                              ; Put the next character from our
+    JSR $f842                               ; Put the next character from our
                                             ; loaded string into the PPU
                                             ; buffer.
     CPY #$17                                ; Have we written 23 characters?
@@ -5635,35 +5640,35 @@ INPUT_CHARS:                                ; [$9224]
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-INPUT_CHARS_0_.ppuAddr_1_:                  ; [$9225]
+INPUT_CHARS_0__ppuAddr_1_:                  ; [$9225]
     db $c4                                  ; [0]: [1]:
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-INPUT_CHARS_0_.chars_0_:                    ; [$9226]
+INPUT_CHARS_0__chars_0_:                    ; [$9226]
     db "A"                                  ; [$9226] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-INPUT_CHARS_0_.chars_1_:                    ; [$9227]
+INPUT_CHARS_0__chars_1_:                    ; [$9227]
     db " "                                  ; [$9227] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-INPUT_CHARS_0_.chars_2_:                    ; [$9228]
+INPUT_CHARS_0__chars_2_:                    ; [$9228]
     db "B"                                  ; [$9228] char
 
 ;
 ; XREFS:
 ;     PasswordScreen_Show
 ;
-INPUT_CHARS_0_.chars_3_:                    ; [$9229]
+INPUT_CHARS_0__chars_3_:                    ; [$9229]
     db " C D E F G H I J"                   ; [$9229] char
     db " K L M"                             ; [$9239] char
 
@@ -5799,7 +5804,7 @@ PasswordScreen_DrawAtCursorPosition:        ; [$92db]
     ; There's no character at this position.
     ;
     TAX                                     ; X = A (character offset)
-    LDA #$8764,X                            ; Get the character value for
+    LDA PASSWORD_ENTERED_CHARS,X            ; Get the character value for
                                             ; that offset.
     BPL PasswordScreen_WriteCharTile        ; Write it.
 
@@ -5832,7 +5837,7 @@ PasswordScreen_DrawAtCursorPosition:        ; [$92db]
 ;         The updated write offset for the PPU buffer.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -5863,13 +5868,13 @@ PasswordScreen_WriteCharTile:               ; [$92ed]
     ; Look up the PPU address for that index.
     ;
     TAY                                     ; Y = A
-    LDA #$92c8,Y                            ; A = Upper byte of the PPU
+    LDA PASSWORD_CURSOR_START_PPU_ADDRS_U,Y ; A = Upper byte of the PPU
                                             ; address for this position.
-    STA PPU_TargetAddr.U                    ; Store it.
+    STA PPU_TargetAddr_U                    ; Store it.
     LDA a:Password_FieldCursorPos           ; Load the cursor position again.
     AND #$0f                                ; Keep the lower nibble.
     CLC
-    ADC #$92c6,Y                            ; Add the lower byte of the PPU
+    ADC PASSWORD_CURSOR_START_PPU_ADDRS_L,Y ; Add the lower byte of the PPU
                                             ; address.
     STA PPU_TargetAddr                      ; Store as the target address to
                                             ; write to.
@@ -5879,10 +5884,10 @@ PasswordScreen_WriteCharTile:               ; [$92ed]
     ; Write to the PPU buffer.
     ;
     LDA #$01                                ; A = 1 (write length)
-    JSR #$cfdc                              ; Queue the length.
+    JSR $cfdc                               ; Queue the length.
     PLA                                     ; Pull the caller-provided tile
                                             ; value.
-    JSR #$f845                              ; Write the tile to the buffer.
+    JSR $f845                               ; Write the tile to the buffer.
     STX PPUBuffer_WriteOffset               ; Update the write offset.
 
     ;
@@ -5981,7 +5986,7 @@ PasswordScreen_HandleInputChar:             ; [$9312]
 Sound_PlayInputSound:                       ; [$9341]
     PHA                                     ; Push A to the stack.
     LDA #$0d                                ; 0xD == Character Input sound
-    JSR #$d0e4                              ; Play the sound effect.
+    JSR $d0e4                               ; Play the sound effect.
     PLA                                     ; Pop A from the stack.
     RTS
 
@@ -6004,7 +6009,7 @@ Sound_PlayInputSound:                       ; [$9341]
 Sound_PlayMoveCursorSound:                  ; [$9349]
     PHA                                     ; Push A to the stack.
     LDA #$0b                                ; 0xB == Cursor Movement sound.
-    JSR #$d0e4                              ; Play the sound effect.
+    JSR $d0e4                               ; Play the sound effect.
     PLA                                     ; Pop A from the stack.
 
     ;
@@ -6167,7 +6172,7 @@ PasswordScreen_HandleDeleteAtCursor:        ; [$93b4]
     CPX a:Password_EnteredCharsLength
     BEQ @LAB_PRG12__93d7
     LDX a:Password_FieldCursorPos
-    LDA #$0601,X
+    LDA ScreenBuffer+1,X
     STA ScreenBuffer,X
     JSR PasswordScreen_DrawAtCursorPosition
     INC a:Password_FieldCursorPos
@@ -6236,7 +6241,7 @@ PasswordScreen_DrawAndHandleInputLoop:      ; [$9405]
   @LAB_PRG12__9416:                         ; [$9416]
     PHA
     LDA #$0e
-    JSR #$d0e4
+    JSR $d0e4
     PLA
     JSR PasswordScreen_IsCursorSpotInvalid
     SEC
@@ -6304,7 +6309,7 @@ PasswordScreen_IsCursorSpotInvalid:         ; [$9426]
     ; Load the value from that entry in the table.
     ;
     TAX
-    LDA #$943c,X
+    LDA PASSWORD_VALUES_FOR_CURSOR_POS,X
 
 
     ;
@@ -6905,7 +6910,7 @@ PasswordScreen_DrawSelectionCursor:         ; [$954f]
     ADC #$55                                ; Add 85 (start of first row).
     TAY                                     ; Y = result.
     LDA #$e4                                ; A = 0xE4 (hand symbol)
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 
 ;============================================================================
@@ -7033,11 +7038,11 @@ Player_SetInitialExpAndGold:                ; [$95b1]
     ;
     ; These tables are in bank 15.
     ;
-    LDA #$f747,X                            ; Load the lower byte of
+    LDA $f747,X                             ; Load the lower byte of
                                             ; experience for the title.
     STA a:Experience                        ; Set it as the player's
                                             ; experience.
-    LDA #$f748,X                            ; Load the uper byte of
+    LDA $f748,X                             ; Load the uper byte of
                                             ; experience for the title.
     STA a:Experience_U                      ; Set it as the player's
                                             ; experience.
@@ -7048,9 +7053,9 @@ Player_SetInitialExpAndGold:                ; [$95b1]
     ;
     ; The same off-by-2 trick is being used for this lookup table.
     ;
-    LDA #$f765,X                            ; Load the lower byte of gold.
+    LDA $f765,X                             ; Load the lower byte of gold.
     STA a:Gold                              ; Set it.
-    LDA #$f766,X                            ; Load the middle byte of gold.
+    LDA $f766,X                             ; Load the middle byte of gold.
     STA a:Gold_M                            ; Set it.
     LDA #$00                                ; Set the upper byte to 0.
     STA a:Gold_U
@@ -7105,7 +7110,7 @@ Player_SetInitialExpAndGold:                ; [$95b1]
 ;
 ;     Password_ByteCounter:
 ;     Password_BitCounter:
-;     #$ee:
+;     $ee:
 ;     Maybe_Temp4:
 ;         Clobbered.
 ;
@@ -7213,7 +7218,7 @@ Password_Load:                              ; [$95e9]
     ;
     LDA #$9d                                ; 0x9D == Lower byte of
                                             ; inventory.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDA #$03                                ; 0x03 == Upper byte of
                                             ; inventory.
     STA Maybe_Temp4                         ; Store it.
@@ -7237,7 +7242,7 @@ Password_Load:                              ; [$95e9]
     ;
     LDA #$a1                                ; 0xA1 == Lower byte of
                                             ; inventory.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDA #$03                                ; 0x03 == Upper byte of
                                             ; inventory.
     STA Maybe_Temp4                         ; Store it.
@@ -7261,7 +7266,7 @@ Password_Load:                              ; [$95e9]
     ;
     LDA #$a5                                ; 0xA5 == Lower byte of
                                             ; inventory.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDA #$03                                ; 0x03 == Upper byte of
                                             ; inventory.
     STA Maybe_Temp4                         ; Store it.
@@ -7285,7 +7290,7 @@ Password_Load:                              ; [$95e9]
     ;
     LDA #$a9                                ; 0xA9 == Lower byte of
                                             ; inventory.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDA #$03                                ; 0x03 == Upper byte of
                                             ; inventory.
     STA Maybe_Temp4                         ; Store it.
@@ -7309,7 +7314,7 @@ Password_Load:                              ; [$95e9]
     ;
     LDA #$ad                                ; 0xAD == Lower byte of
                                             ; inventory.
-    STA Temp_Int24.U                        ; Store it.
+    STA Temp_Int24_U                        ; Store it.
     LDA #$03                                ; 0x03 == Upper byte of
                                             ; inventory.
     STA Maybe_Temp4                         ; Store it.
@@ -7404,7 +7409,7 @@ Password_DecodeValueOrUnset:                ; [$96b0]
 ;     A:
 ;         The number of items read.
 ;
-;     #$ee:
+;     $ee:
 ;         The decoded items.
 ;
 ;     Password_TempA:
@@ -7455,7 +7460,7 @@ Password_DecodeValueList:                   ; [$96c2]
     ; Store the resulting item in our buffer.
     ;
     TXA                                     ; A = item value
-    STA (#$ee),Y                            ; Store in our decode buffer.
+    STA ($ee),Y                             ; Store in our decode buffer.
     INY                                     ; Y++
     CPY a:Password_TempA                    ; Have we read all the items?
     BNE @_loop                              ; If not, loop.
@@ -7880,12 +7885,13 @@ Password_EncodeGameState:                   ; [$976c]
 
 
     ;
-    ; Set the value to write to the address of 0x39d
+    ; Set the value to write to the address of
+    ; Player_ShieldPositionY+1
     ;
     ; This hard-codes $039D.
     ;
     LDA #$9d
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA #$03
     STA Maybe_Temp4
 
@@ -7905,7 +7911,7 @@ Password_EncodeGameState:                   ; [$976c]
     ; This hard-codes $03A1.
     ;
     LDA #$a1
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA #$03
     STA Maybe_Temp4
 
@@ -7925,7 +7931,7 @@ Password_EncodeGameState:                   ; [$976c]
     ; This hard-codes $03A5.
     ;
     LDA #$a5
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA #$03
     STA Maybe_Temp4
 
@@ -7945,7 +7951,7 @@ Password_EncodeGameState:                   ; [$976c]
     ; This hard-codes $03A9.
     ;
     LDA #$a9
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA #$03
     STA Maybe_Temp4
 
@@ -7965,7 +7971,7 @@ Password_EncodeGameState:                   ; [$976c]
     ; This hard-codes $03AD.
     ;
     LDA #$ad
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA #$03
     STA Maybe_Temp4
 
@@ -8113,7 +8119,7 @@ Password_EncodeValueList:                   ; [$982a]
     ;
     ; Password_EncodeValue(entryList[Y], X, numBits)
     ;
-    LDA (#$ee),Y                            ; A = value at bits offset
+    LDA ($ee),Y                             ; A = value at bits offset
     LDY a:Password_TempX                    ; Y =
                                             ; Password_TempX
                                             ; (num bits)
@@ -8234,15 +8240,19 @@ Password_EncodeValue:                       ; [$98a7]
     ; If it's 0, we'll skip the math and keep
     ; Temp_Int24 = A (the character code value).
     ;
-    STY Temp_Int24.M                        ; 0xed = Y (number of bits)
+    STY Temp_Int24_M                        ; Temp_Int24+1
+                                            ; = Y (number of bits)
     LDA #$08                                ; A = 8 (bits in a byte)
     SEC                                     ; C = 1
-    SBC Temp_Int24.M                        ; A = 8 - 0xed - (1 - C)   = 8 -
-                                            ; 0xed   = 8 - Y  If overflow, C
-                                            ; = 0
+    SBC Temp_Int24_M                        ; A = 8 -
+                                            ; Temp_Int24+1
+                                            ; - (1 - C)   = 8 -
+                                            ; Temp_Int24+1
+                                            ; = 8 - Y  If overflow, C = 0
     BEQ @_loop2                             ; If A == 0, skip the bit offset
                                             ; math.
-    STA Temp_Int24.M                        ; 0xed = A (our loop counter;
+    STA Temp_Int24_M                        ; Temp_Int24+1
+                                            ; = A (our loop counter;
                                             ; remaining bits)
 
 
@@ -8250,7 +8260,7 @@ Password_EncodeValue:                       ; [$98a7]
     ; Do:
     ;
     ; Temp_Int24 = Temp_Int24 * (2 to the
-    ; power of 0xed)
+    ; power of Temp_Int24+1)
     ;
     ; Or, rather:
     ;
@@ -8264,8 +8274,10 @@ Password_EncodeValue:                       ; [$98a7]
   @_loop1:                                  ; [$98b6]
     ASL Temp_Int24                          ; Temp_Int24 *=
                                             ; 2 If overflow, C = 1
-    DEC Temp_Int24.M                        ; 0xed--
-    BNE @_loop1                             ; If 0xed != 0, loop.
+    DEC Temp_Int24_M                        ; Temp_Int24+1--
+    BNE @_loop1                             ; If
+                                            ; Temp_Int24+1
+                                            ; != 0, loop.
 
 
     ;
@@ -8416,8 +8428,8 @@ IScripts_FillPlaceholderText:               ; [$9910]
     ;
     ; Clear the textbox and prepare to write to it.
     ;
-    JSR #$f44a                              ; Clear the existing text tiles.
-    JSR #$f804                              ; Set the PPU address for the
+    JSR $f44a                               ; Clear the existing text tiles.
+    JSR $f804                               ; Set the PPU address for the
                                             ; text position to write to.
 
 
@@ -8425,13 +8437,13 @@ IScripts_FillPlaceholderText:               ; [$9910]
     ; Write 4 lines of arbitrary characters.
     ;
     LDY #$40
-    JSR #$f5d9                              ; Write "@ABCDEFGHIJKLMNO"
+    JSR $f5d9                               ; Write "@ABCDEFGHIJKLMNO"
     LDY #$50
-    JSR #$f5d9                              ; Write "PQRSTUVWXYZ[\]^_"
+    JSR $f5d9                               ; Write "PQRSTUVWXYZ[\]^_"
     LDY #$60
-    JSR #$f5d9                              ; Write "`abcdefghijklmno"
+    JSR $f5d9                               ; Write "`abcdefghijklmno"
     LDY #$70
-    JMP #$f5d9                              ; Write "pqrstuvwxyz{|}~."
+    JMP $f5d9                               ; Write "pqrstuvwxyz{|}~."
 
 ;============================================================================
 ; TODO: Document TextBox_CheckShouldContinue
@@ -8495,7 +8507,7 @@ TextBox_PrepareContinueMessage:             ; [$9949]
     STA a:TextBox_MessagePaused
     LDA #$04
     STA a:Unused_Arg_Text_NumLines
-    JMP #$f539
+    JMP $f539
 
 ;============================================================================
 ; TODO: Document TextBox_CheckShouldContinueOrDismissMessage
@@ -8699,7 +8711,7 @@ TextBox_DrawDownArrowTerminatorSymbol:      ; [$99a1]
     ;
     LDA #$e5                                ; A = 0xE5 (animation frame
                                             ; offset).
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 
 ;============================================================================
@@ -8768,7 +8780,7 @@ TextBox_DrawUpArrowTerminatorSymbol:        ; [$99be]
     ; Draw the symbol.
     ;
     LDA #$e6                                ; A = 0xE6 (up arrow symbol).
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 
 ;============================================================================
@@ -8834,7 +8846,7 @@ TextBox_DrawQuestionMarkTerminatorSymbol:   ; [$99db]
     ; Draw the symbol.
     ;
     LDA #$e7                                ; A = 0xE7 (question mark symbol)
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 ;============================================================================
 ; TODO: Document Shop_Draw
@@ -8875,7 +8887,7 @@ Shop_Draw:                                  ; [$99f8]
     STA TextBox_ContentsX
     TXA
     PHA
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     JSR TextBox_DrawItemImage
     PLA
     TAX
@@ -8887,21 +8899,21 @@ Shop_Draw:                                  ; [$99f8]
     CLC
     ADC #$05
     STA TextBox_ContentsX
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     JSR TextBox_DrawItemName
     PLA
     STA Temp_Int24
     PLA
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA #$00
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA a:TextBox_X
     CLC
     ADC #$0d
     STA TextBox_ContentsX
     INC TextBox_ContentsY
     LDY #$05
-    JSR #$fa26
+    JSR $fa26
     INC TextBox_ContentsY
     PLA
     TAX
@@ -8949,18 +8961,18 @@ Player_RemoveItem:                          ; [$9a6a]
     INX
     CMP #$94
     BEQ @_isSpecialItem
-    STA Temp_Int24.U
-    JSR #$f785
+    STA Temp_Int24_U
+    JSR $f785
     TAX
     LDA NumberOfWeapons,X
     BEQ @_return
     STA Maybe_Temp4
-    LDA #$9b29,X
+    LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24
-    LDA #$9b2e,X
-    STA Temp_Int24.M
+    LDA INVENTORY_CATEGORY_U,X
+    STA Temp_Int24_M
     LDY #$00
-    LDA Temp_Int24.U
+    LDA Temp_Int24_U
     AND #$1f
 
   @_inventoryCheckLoop:                     ; [$9ab0]
@@ -8989,7 +9001,7 @@ Player_RemoveItem:                          ; [$9a6a]
 
   @_isSpecialItem:                          ; [$9acb]
     LDA a:SpecialItems
-    AND #$9ad5,X
+    AND SHOP_ITEM_TO_CLEAR_SPECIAL_ITEM_BITS,X
     STA a:SpecialItems
     RTS
 
@@ -9101,7 +9113,7 @@ BYTE_PRG12__9aec:                           ; [$9aec]
 ;============================================================================
 Player_AddSpecialItem:                      ; [$9aed]
     LDA a:SpecialItems
-    ORA #$9ae5,X
+    ORA SPECIAL_ITEM_BITMASKS,X
     STA a:SpecialItems
     RTS
 
@@ -9123,19 +9135,19 @@ Player_AddToInventory:                      ; [$9af7]
     LDX #$07                                ; i = 7; Loop through item bits.
 
   @_checkSpecialItems:                      ; [$9af9]
-    CMP #$9add,X                            ; Check if this is a special,
+    CMP SPECIAL_ITEM_IDS,X                  ; Check if this is a special,
                                             ; non-consumable item
     BEQ Player_AddSpecialItem               ; If this is a special item...
     DEX                                     ; Next i
     BPL @_checkSpecialItems
-    STA Temp_Int24.U
-    JSR #$f785                              ; Convert the item ID to a
+    STA Temp_Int24_U
+    JSR $f785                               ; Convert the item ID to a
                                             ; category.
     TAX
-    LDA #$9b29,X
+    LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24
-    LDA #$9b2e,X
-    STA Temp_Int24.M
+    LDA INVENTORY_CATEGORY_U,X
+    STA Temp_Int24_M
 
 
     ;
@@ -9143,14 +9155,14 @@ Player_AddToInventory:                      ; [$9af7]
     ;
     LDA NumberOfWeapons,X                   ; Load the number of items in the
                                             ; inventory category
-    CMP #$847d,X                            ; Check if the max has been hit
+    CMP MAX_INVENTORY_SLOTS,X               ; Check if the max has been hit
     BNE @_addItem
     DEC NumberOfWeapons,X                   ; The max has been hit. Remove
                                             ; one.
 
   @_addItem:                                ; [$9b1c]
     LDY NumberOfWeapons,X
-    LDA Temp_Int24.U
+    LDA Temp_Int24_U
     AND #$1f
     STA (Temp_Int24),Y
     INC NumberOfWeapons,X                   ; Increase the length of the
@@ -9479,7 +9491,7 @@ UI_DrawText:                                ; [$9e0e]
 ;     TODO
 ;============================================================================
 StartScreen_Draw:                           ; [$9e21]
-    JSR #$caf7
+    JSR $caf7
 
 
     ;
@@ -9491,14 +9503,14 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$00
     STA IScriptOrCHRAddr
     LDA #$8e
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDA #$10
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$e0
-    JSR #$f89e
+    JSR $f89e
 
 
     ;
@@ -9510,14 +9522,14 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$40
     STA IScriptOrCHRAddr
     LDA #$82
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDA #$1e
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$1b
-    JSR #$f89e
+    JSR $f89e
 
 
     ;
@@ -9529,15 +9541,15 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$40
     STA IScriptOrCHRAddr
     LDA #$84
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$60
     STA PPU_TargetAddr
     LDA #$1d
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$0a
-    JSR #$f89e
-    JSR #$fcb9
+    JSR $f89e
+    JSR $fcb9
 
 
     ;
@@ -9549,14 +9561,14 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$60
     STA IScriptOrCHRAddr
     LDA #$9b
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$c0
     STA PPU_TargetAddr
     LDA #$23
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$04
-    JSR #$f89e
+    JSR $f89e
 
 
     ;
@@ -9573,10 +9585,10 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$00
     STA Temp_Int24
     LDA #$80
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDY #$00
     LDA #$10
-    STA Temp_Int24.U
+    STA Temp_Int24_U
 
   @LAB_PRG12__9e9b:                         ; [$9e9b]
     LDX #$1c
@@ -9586,7 +9598,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA a:PPUDATA
     INY
     BNE @LAB_PRG12__9ea7
-    INC Temp_Int24.M
+    INC Temp_Int24_M
 
   @LAB_PRG12__9ea7:                         ; [$9ea7]
     DEX
@@ -9596,7 +9608,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA a:PPUDATA
     STA a:PPUDATA
     STA a:PPUDATA
-    DEC Temp_Int24.U
+    DEC Temp_Int24_U
     BNE @LAB_PRG12__9e9b
     LDA #$00
     STA a:DAT_0687
@@ -9613,7 +9625,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$bd
     STA Temp_Int24
     LDA #$9d
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
 
 
@@ -9628,7 +9640,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$c3
     STA Temp_Int24
     LDA #$9d
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
 
 
@@ -9643,7 +9655,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$cc
     STA Temp_Int24
     LDA #$9d
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
 
 
@@ -9658,7 +9670,7 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$df
     STA Temp_Int24
     LDA #$9d
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
 
 
@@ -9673,21 +9685,21 @@ StartScreen_Draw:                           ; [$9e21]
     LDA #$f9
     STA Temp_Int24
     LDA #$9d
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     JSR UI_DrawText
     LDA #$10
-    JSR #$d03b
+    JSR $d03b
     LDX #$0f
 
   @LAB_PRG12__9f31:                         ; [$9f31]
-    LDA #$9dad,X
-    STA #$02a3,X
+    LDA $9dad,X
+    STA $02a3,X
     DEX
     BPL @LAB_PRG12__9f31
-    JSR #$d090
+    JSR $d090
     LDA #$01
     STA CurrentMusic
-    JMP #$cb27
+    JMP $cb27
 
 ;============================================================================
 ; TODO: Document StartScreen_CheckHandleInput
@@ -9706,7 +9718,7 @@ StartScreen_CheckHandleInput:               ; [$9f44]
     EOR #$01
     STA a:DAT_0687
     LDA #$0b
-    JSR #$d0e4
+    JSR $d0e4
 
   @LAB_PRG12__9f57:                         ; [$9f57]
     LDY #$00
@@ -9719,10 +9731,10 @@ StartScreen_CheckHandleInput:               ; [$9f44]
     ; Draw the symbol used to show the current menu item selection.
     ;
   @_drawCurrentItemSymbol:                  ; [$9f5f]
-    LDX #$9f69,Y                            ; X = menu item X position.
+    LDX $9f69,Y                             ; X = menu item X position.
     LDY #$7e                                ; Y = 126.
     LDA #$ad                                ; A = 0xAD (right arrow symbol)
-    JMP #$fca7                              ; Draw the symbol.
+    JMP $fca7                               ; Draw the symbol.
 
 ;
 ; XREFS:
@@ -14399,7 +14411,7 @@ SplashAnimation_Intro_SomethingA708:        ; [$a708]
     STA Screen_PaletteData,Y
     DEY
     BPL @LAB_PRG12__a714
-    JMP #$d090
+    JMP $d090
 
   @LAB_PRG12__a727:                         ; [$a727]
     RTS
@@ -14451,46 +14463,46 @@ SPLASHANIM_PALETTE_U:                       ; [$a72e]
 ;============================================================================
 SplashAnimation_DrawScenery:                ; [$a730]
     STA a:SplashAnimation_SceneIndex
-    JSR #$caf7
+    JSR $caf7
     LDA #$a0
     STA IScriptOrCHRAddr
     LDA #$9b
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDA #$00
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$90
-    JSR #$f89e
+    JSR $f89e
     LDA #$a0
     STA IScriptOrCHRAddr
     LDA #$a4
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDA #$18
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$80
-    JSR #$f89e
+    JSR $f89e
     LDX a:SplashAnimation_SceneIndex
-    LDA #$a728,X
+    LDA SPLASHANIM_CHR_L,X
     STA IScriptOrCHRAddr
-    LDA #$a72a,X
-    STA IScriptOrCHRAddr.U
+    LDA SPLASHANIM_CHR_U,X
+    STA IScriptOrCHRAddr_U
     LDA #$20
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDX #$0a
     LDY #$40
-    JSR #$f89e
+    JSR $f89e
     LDX a:SplashAnimation_SceneIndex
-    LDA #$a72c,X
+    LDA SPLASHANIM_PALETTE_L,X
     STA Temp_Int24
-    LDA #$a72e,X
-    STA Temp_Int24.M
+    LDA SPLASHANIM_PALETTE_U,X
+    STA Temp_Int24_M
     LDY #$1f
 
   @_paletteLoop:                            ; [$a78f]
@@ -14498,7 +14510,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     STA Screen_PaletteData,Y
     DEY
     BPL @_paletteLoop
-    JMP #$d090
+    JMP $d090
 
 ;============================================================================
 ; TODO: Document SplashAnimation_RunIntro
@@ -14520,11 +14532,11 @@ SplashAnimation_RunIntro:                   ; [$a79a]
     STA a:SplashAnimation_PaletteStage
     LDA #$00
     STA CurrentMusic
-    JSR #$cb27
+    JSR $cb27
 
   @LAB_PRG12__a7ae:                         ; [$a7ae]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_Maybe_CalcPlayerAnimState
     JSR SplashAnimation_Maybe_AnimPlayerStep
@@ -14555,12 +14567,12 @@ SplashAnimation_Maybe_CalcPlayerAnimState:  ; [$a7cf]
     LDY #$07
     JSR SplashAnimation_Maybe_NextAnimState2
     LDX a:IntroAnimation_PlayerSizeCounter
-    CMP #$a859,X
+    CMP $a859,X
     BCS RETURN_A7F0
     INC a:IntroAnimation_PlayerSizeCounter
-    LDA #$a85e,X
+    LDA $a85e,X
     STA a:SplashAnimation_0692
-    LDA #$a862,X
+    LDA $a862,X
     STA a:SplashAnimation_0693
 
     ;
@@ -14589,12 +14601,12 @@ SplashAnimation_Maybe_CalcPlayerAnimSize:   ; [$a7f1]
     LDY #$07
     JSR SplashAnimation_Maybe_NextAnimState2
     LDX a:IntroAnimation_PlayerSizeCounter
-    CMP #$a866,X
+    CMP $a866,X
     BCC RETURN_A7F0
     INC a:IntroAnimation_PlayerSizeCounter
-    LDA #$a86a,X
+    LDA $a86a,X
     STA a:SplashAnimation_0692
-    LDA #$a86e,X
+    LDA $a86e,X
     STA a:SplashAnimation_0693
     RTS
 
@@ -14734,19 +14746,19 @@ SplashAnimation_Maybe_NextAnimState1:       ; [$a872]
     LDA a:SplashAnimation_0692
 
   @LAB_PRG12__a879:                         ; [$a879]
-    STA Temp_Int24.M
-    ROL Temp_Int24.M
+    STA Temp_Int24_M
+    ROL Temp_Int24_M
     ROR A
     ROR Temp_Int24
     DEY
     BNE @LAB_PRG12__a879
     CLC
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     CLC
     ADC a:SplashAnimation_0690
     STA a:SplashAnimation_0690
-    LDA Temp_Int24.M
+    LDA Temp_Int24_M
     ADC a:SplashAnimation_068e
     STA a:SplashAnimation_068e
     RTS
@@ -14770,19 +14782,19 @@ SplashAnimation_Maybe_NextAnimState2:       ; [$a898]
     LDA a:SplashAnimation_0693
 
   @LAB_PRG12__a89f:                         ; [$a89f]
-    STA Temp_Int24.M
-    ROL Temp_Int24.M
+    STA Temp_Int24_M
+    ROL Temp_Int24_M
     ROR A
     ROR Temp_Int24
     DEY
     BNE @LAB_PRG12__a89f
     CLC
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     CLC
     ADC a:SplashAnimation_0691
     STA a:SplashAnimation_0691
-    LDA Temp_Int24.M
+    LDA Temp_Int24_M
     ADC a:SplashAnimation_068f
     STA a:SplashAnimation_068f
     RTS
@@ -14810,10 +14822,10 @@ SplashAnimation_Maybe_AnimPlayerStep:       ; [$a8be]
     AND #$0f
     BNE @LAB_PRG12__a8d8
     LDA #$15
-    JSR #$d0e4
+    JSR $d0e4
 
   @LAB_PRG12__a8d8:                         ; [$a8d8]
-    LDA #$a8de,X
+    LDA $a8de,X
     JMP SplashAnimation_FuncAA94
 
 ;
@@ -14856,7 +14868,7 @@ BYTE_ARRAY_PRG12__a8de:                     ; [$a8de]
 ;============================================================================
 SplashAnimation_OutroFuncAF82:              ; [$a8f2]
     JSR SplashAnimation_A90F
-    LDA #$a8fb,X
+    LDA $a8fb,X
     JMP SplashAnimation_FuncAA94
 
 ;
@@ -14937,11 +14949,11 @@ SplashAnimation_RunOutro:                   ; [$a932]
     JSR SplashAnimation_SomethingOutro_A99C
     LDA #$0c
     STA CurrentMusic
-    JSR #$cb27
+    JSR $cb27
 
   @LAB_PRG12__a944:                         ; [$a944]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_Maybe_CalcPlayerAnimSize
     JSR SplashAnimation_OutroFuncAF82
@@ -14953,8 +14965,8 @@ SplashAnimation_RunOutro:                   ; [$a932]
     BCC @LAB_PRG12__a944
 
   @LAB_PRG12__a963:                         ; [$a963]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
@@ -14965,8 +14977,8 @@ SplashAnimation_RunOutro:                   ; [$a932]
     STA InterruptCounter
 
   @LAB_PRG12__a97d:                         ; [$a97d]
-    JSR #$ca25
-    JSR #$cb4f
+    JSR $ca25
+    JSR $cb4f
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
@@ -15070,13 +15082,13 @@ SpashAnimation_SomethingOutro_a9a2:         ; [$a9a2]
     STA SplashAnimation_0696,X
     STA SplashAnimation_069c,X
     STA SplashAnimation_069e,X
-    LDA #$a994,X
+    LDA $a994,X
     STA SplashAnimation_0698,X
-    LDA #$a996,X
+    LDA $a996,X
     STA SplashAnimation_069a,X
-    LDA #$a998,X
+    LDA $a998,X
     STA SplashAnimation_06a0,X
-    LDA #$a99a,X
+    LDA $a99a,X
     STA SplashAnimation_06a2,X
     RTS
 
@@ -15149,7 +15161,7 @@ SplashAnimation_SomethingA9F2:              ; [$a9f2]
     ASL A
     ORA SplashAnimation_0694,X
     TAY
-    LDA #$aa18,Y
+    LDA $aa18,Y
     JMP SplashAnimation_FuncAA94
 
 BYTE_ARRAY_PRG12__aa18:                     ; [$aa18]
@@ -15178,19 +15190,19 @@ SpashAnimation_SomethingOutro_aa20:         ; [$aa20]
     LDA SplashAnimation_06a0,X
 
   @LAB_PRG12__aa27:                         ; [$aa27]
-    STA Temp_Int24.M
-    ROL Temp_Int24.M
+    STA Temp_Int24_M
+    ROL Temp_Int24_M
     ROR A
     ROR Temp_Int24
     DEY
     BNE @LAB_PRG12__aa27
     CLC
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     CLC
     ADC SplashAnimation_069c,X
     STA SplashAnimation_069c,X
-    LDA Temp_Int24.M
+    LDA Temp_Int24_M
     ADC SplashAnimation_0698,X
     STA SplashAnimation_0698,X
     RTS
@@ -15211,19 +15223,19 @@ SpashAnimation_SomethingOutro_aa46:         ; [$aa46]
     LDA SplashAnimation_06a2,X
 
   @LAB_PRG12__aa4d:                         ; [$aa4d]
-    STA Temp_Int24.M
-    ROL Temp_Int24.M
+    STA Temp_Int24_M
+    ROL Temp_Int24_M
     ROR A
     ROR Temp_Int24
     DEY
     BNE @LAB_PRG12__aa4d
     CLC
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA Temp_Int24
     CLC
     ADC SplashAnimation_069e,X
     STA SplashAnimation_069e,X
-    LDA Temp_Int24.M
+    LDA Temp_Int24_M
     ADC SplashAnimation_069a,X
     STA SplashAnimation_069a,X
     RTS
@@ -15298,10 +15310,10 @@ SplashAnimation_SomethingUpdateState:       ; [$aa83]
 ;============================================================================
 SplashAnimation_FuncAA94:                   ; [$aa94]
     TAY
-    LDA #$ab17,Y
+    LDA @_return+1,Y
     STA Temp_Int24
-    LDA #$ab37,Y
-    STA Temp_Int24.M
+    LDA $ab37,Y
+    STA Temp_Int24_M
     LDY #$00
     LDA a:SplashAnimation_0689
     CLC
@@ -15327,7 +15339,7 @@ SplashAnimation_FuncAA94:                   ; [$aa94]
 
   @LAB_PRG12__aac9:                         ; [$aac9]
     LDA a:DAT_068b
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA a:SplashAnimation_0689
     STA TextBox_ContentsX
 
@@ -15357,7 +15369,7 @@ SplashAnimation_FuncAA94:                   ; [$aa94]
     CLC
     ADC #$08
     STA TextBox_ContentsX
-    DEC Temp_Int24.U
+    DEC Temp_Int24_U
     BNE @LAB_PRG12__aad3
     LDA a:SplashAnimation_068a
     CLC

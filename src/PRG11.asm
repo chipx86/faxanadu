@@ -663,7 +663,7 @@ SPRITE_INFO_APOLUNE_SCREEN_63:              ; [$83e9]
     db $ff                                  ; [$83ef] undefined
 
 SPRITE_INFO_APOLUNE_SCREEN_40:              ; [$83f0]
-    db SPRITE_FOUNTAIN                      ; [$83f0] SpriteEntity
+    db SPRITE_EFFECT_FOUNTAIN               ; [$83f0] SpriteEntity
     db $55,$ff,$ff                          ; [$83f1] undefined
 
     db SCREEN_HAS_SPECIAL_EVENT

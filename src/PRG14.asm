@@ -76,7 +76,7 @@ Sprites_UpdateAll:                          ; [$8000]
     JSR Player_HitSpriteWithWeapon
     JSR Sprite_CheckHitByCastMagic
     JSR Sprite_GetBounds
-    JSR WasPlayerHitByMagic
+    JSR Player_CheckShieldHitByMagic
     JSR CurrentSprite_CheckHitPlayer
 
   @_updateSpriteState:                      ; [$8040]
@@ -154,9 +154,9 @@ Sprites_UpdateAllStates:                    ; [$8070]
 ;
 SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     dw SpriteUpdateHandler_Invisible-1      ; [0]:
-    dw SpriteUpdateHandler_Bread-1          ; [1]: Dropped bread
-    dw SpriteUpdateHandler_Coin-1           ; [2]: Dropped coin
-    dw SpriteUpdateHandler_Garbled03-1      ; [3]: TODO: Garbled 3
+    dw SpriteUpdateHandler_Bread-1          ; [1]: Dropped: Bread
+    dw SpriteUpdateHandler_Coin-1           ; [2]: Dropped: Coin
+    dw SpriteUpdateHandler_Garbled03-1      ; [3]: Enemy: ?
     dw SpriteUpdateHandler_Enemy_Raiden-1   ; [4]: Enemy: Raiden
     dw SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
     dw SpriteUpdateHandler_Enemy_Zombie-1   ; [6]: Enemy: Zombie
@@ -168,7 +168,7 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
 ;============================================================================
 ; SpriteUpdateHandler_Enemy_Garbled_10
 ;============================================================================
-    dw SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: TODO: Garbled 10
+    dw SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
     dw SpriteUpdateHandler_Enemy_Yuinaru-1  ; [11]: Enemy: Yuinaru
     dw SpriteUpdateHandler_Enemy_Snowman-1  ; [12]: Enemy: Snowman
     dw SpriteUpdateHandler_Enemy_Nash-1     ; [13]: Enemy: Nash
@@ -177,19 +177,22 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     dw SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution
                                                  ; Hood
     dw SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
-    dw SpriteUpdateHandler_Enemy_Unused18-1 ; [18]: Enemy: Unused #18
-    dw SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy Death
+    dw SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1 ; [18]: Boss: unused
+                                                         ; (round body of
+                                                         ; snake boss)
+    dw SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy death
     dw SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect: Lightning
-                                                    ; Ball
+                                                    ; ball
     dw SpriteUpdateHandler_Enemy_Charron-1  ; [21]: Enemy: Charron
-    dw SpriteUpdateHandler_Invisible-1      ; [22]: Enemy: Unused 22
+    dw SpriteUpdateHandler_Invisible-1      ; [22]: Enemy: ? (Unused)
     dw SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
     dw SpriteUpdateHandler_Enemy_Sugata-1   ; [24]: Enemy: Sugata
     dw SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
     dw SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
     dw SpriteUpdateHandler_Enemy_Myconid-1  ; [27]: Enemy: Myconid
     dw SpriteUpdateHandler_Enemy_Naga-1     ; [28]: Enemy: Naga
-    dw SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Unused #29
+    dw SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
     dw SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant Strider
     dw SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
                                                       ; Gawaine
@@ -198,14 +201,19 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
                                                             ; Wolfman
     dw SpriteUpdateHandler_Enemy_Yareeka-1  ; [34]: Enemy: Yareeka
     dw SpriteUpdateHandler_Enemy_Magman-1   ; [35]: Enemy: Magman
-    dw SpriteUpdateHandler_Enemy_Unused36-1 ; [36]: Enemy: Unused #36
-    dw SpriteUpdateHandler_Invisible-1      ; [37]: Enemy: Unused #37
+    dw SpriteUpdateHandler_Enemy_Unused_CurlyTail-1 ; [36]: Enemy:
+                                                    ; Curly-tailed guy with
+                                                    ; spear (unused)
+    dw SpriteUpdateHandler_Invisible-1      ; [37]: Enemy: ? (unused)
     dw SpriteUpdateHandler_Enemy_Ikeda-1    ; [38]: Enemy: Ikeda
-    dw SpriteUpdateHandler_Enemy_Unused39-1 ; [39]: Enemy: Unused #39
+    dw SpriteUpdateHandler_Enemy_MuppetGuy-1 ; [39]: Enemy: Muppet guy
+                                             ; (unused)
     dw SpriteUpdateHandler_Enemy_Lamprey-1  ; [40]: Enemy: Lamprey
-    dw SpriteUpdateHandler_Invisible-1      ; [41]: Enemy: Unused #41
+    dw SpriteUpdateHandler_Invisible-1      ; [41]: Enemy: ? (unused)
     dw SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
-    dw SpriteUpdateHandler_Enemy_Unused43-1 ; [43]: Unused #43
+    dw SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1 ; [43]: Enemy:
+                                                         ; Winged skeleton
+                                                         ; (unused)
     dw SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
     dw SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
     dw SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
@@ -214,11 +222,12 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     dw SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
     dw SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
     dw SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
-    dw SpriteUpdateHandler_NPC_Walking-1    ; [52]: NPC: Walking man 1
-    dw thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Unused Blue Lady
-    dw thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Unused Child
+    dw SpriteUpdateHandler_NPC_Walking-1    ; [52]: NPC: Walking Man 1
+    dw thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Blue lady
+                                                ; (unused)
+    dw thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Child (unused)
     dw SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
-    dw SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Arts
+    dw SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Artist
     dw SpriteUpdateHandler_NPC_Priest-1     ; [57]: NPC: Priest
     dw SpriteUpdateHandler_NPC_King-1       ; [58]: NPC: King
     dw SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
@@ -226,20 +235,18 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking Man
     dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in Chair
     dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting Man
-                                                    ; 1
     dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
                                                      ; Salesman
     dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in
-                                                     ; blue dress with cup
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: King's
-                                                     ; Guard
+                                                     ; Blue Dress with Cup
+    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: Guard
     dw SpriteUpdateHandler_NPC_Doctor-1     ; [67]: NPC: Doctor
     dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking
                                                      ; Woman 1
     dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking
                                                      ; Woman 2
-    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy: Unused
-                                                        ; eyeball
+    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy:
+                                                        ; Eyeball (unused)
     dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy: Zozura
     dw SpriteUpdateHandler_Item_Standard-1  ; [72]: Item: Glove
     dw SpriteUpdateHandler_Item_Special-1   ; [73]: Item: Black Onyx
@@ -248,29 +255,28 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     dw SpriteUpdateHandler_Item_Standard-1  ; [76]: Item: Poison
     dw SpriteUpdateHandler_Item_Standard-1  ; [77]: Item: Elixir
     dw SpriteUpdateHandler_Item_Standard-1  ; [78]: Item: Ointment
-    dw SpriteUpdateHandler_Invisible-1      ; [79]: Item: Intro trigger start
-                                            ; point
+    dw SpriteUpdateHandler_Invisible-1      ; [79]: Trigger: Intro
     dw SpriteUpdateHandler_Item_Standard-1  ; [80]: Item: Mattock
-    dw SpriteUpdateHandler_TODO_Garbled_81-1 ; [81]: TODO: Garbled #81
-    dw SpriteUpdateHandler_Deco_Fountain-1  ; [82]: Deco: Fountain
-    dw SpriteUpdateHandler_TODO_Unknown_83-1 ; [83]: TODO: Unknown #83
-    dw SpriteUpdateHandler_EnemyMagic-1     ; [84]: TODO: Unknown #84
+    dw SpriteUpdateHandler_Magic_81-1       ; [81]: Magic: ?
+    dw SpriteUpdateHandler_Effect_Fountain-1 ; [82]: Effect: Fountain
+    dw SpriteUpdateHandler_Magic_83-1       ; [83]: Magic: ?
+    dw SpriteUpdateHandler_EnemyMagic-1     ; [84]: Magic: Enemy Fireball
     dw SpriteUpdateHandler_Item_Standard-1  ; [85]: Item: Wing Boots
     dw SpriteUpdateHandler_Item_Standard-1  ; [86]: Item: Hour Glass
     dw SpriteUpdateHandler_Item_Special-1   ; [87]: Item: Magical Rod
     dw SpriteUpdateHandler_Item_Special-1   ; [88]: Item: Battle Suit
     dw SpriteUpdateHandler_Item_Special-1   ; [89]: Item: Battle Helmet
     dw SpriteUpdateHandler_Item_Special-1   ; [90]: Item: Dragon Slayer
-    dw SpriteUpdateHandler_Item_Standard-1  ; [91]: Item: Mattock #2
-    dw SpriteUpdateHandler_Item_Standard-1  ; [92]: Item: Wing Boots (for
+    dw SpriteUpdateHandler_Item_Standard-1  ; [91]: Item: Mattock
+    dw SpriteUpdateHandler_Item_Standard-1  ; [92]: Item: Wing Boots (from
                                             ; quest)
-    dw SpriteUpdateHandler_Item_Standard-1  ; [93]: Item: Red Potion #2
-    dw SpriteUpdateHandler_Item_Standard-1  ; [94]: Item: Poison #2
-    dw SpriteUpdateHandler_Item_Standard-1  ; [95]: Item: Glove #2
-    dw SpriteUpdateHandler_Item_Standard-1  ; [96]: Item: Ointment #2
-    dw SpriteUpdateHandler__a5d2-1          ; [97]:
-    dw SpriteUpdateHandler__a5d2-1          ; [98]:
-    dw SpriteUpdateHandler__a5d2-1          ; [99]:
+    dw SpriteUpdateHandler_Item_Standard-1  ; [93]: Item: Red Potion
+    dw SpriteUpdateHandler_Item_Standard-1  ; [94]: Item: Poison
+    dw SpriteUpdateHandler_Item_Standard-1  ; [95]: Item: Glove
+    dw SpriteUpdateHandler_Item_Standard-1  ; [96]: Item: Ointment
+    dw SpriteUpdateHandler_Effect_Spring-1  ; [97]: Effect: Spring of Trunk
+    dw SpriteUpdateHandler_Effect_Spring-1  ; [98]: Effect: Spring of Sky
+    dw SpriteUpdateHandler_Effect_Spring-1  ; [99]: Effect: Spring of Tower
     dw SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
 
 ;============================================================================
@@ -357,8 +363,8 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
 
   @LAB_PRG14__81b6:                         ; [$81b6]
     LDA #$02
-    JSR #$d0e4
-    LDA #$b7a0,Y
+    JSR $d0e4
+    LDA MAGIC_DAMAGE,Y
     STA Temp_00
     LDA a:SpecialItems
     AND #$04
@@ -376,7 +382,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
     CPY #$00
     BEQ @LAB_PRG14__81fd
     LDY CurrentSprites_Entities,X
-    LDA #$b73b,Y
+    LDA SPRITE_ENTITY_MAYBE_MAGIC_DEFENSE,Y
 
   @LAB_PRG14__81df:                         ; [$81df]
     ASL A
@@ -428,7 +434,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
     ; Play the killed enemy sound effect.
     ;
     LDA #$03
-    JSR #$d0e4
+    JSR $d0e4
 
 
     ;
@@ -436,7 +442,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
     ; handled differently.
     ;
     LDY CurrentSprites_Entities,X
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     CMP #$07
     BNE @_isSmallEnemy
 
@@ -567,7 +573,7 @@ SpriteUpdateHandler_Effect_LightningBall20: ; [$828b]
     LDA CurrentSprites_BehaviorData2,X
     ASL A
     ASL A
-    EOR #$82f0,Y
+    EOR $82f0,Y
     STA Temp_00
     BPL @LAB_PRG14__82bb
     INC Temp_00
@@ -589,9 +595,9 @@ SpriteUpdateHandler_Effect_LightningBall20: ; [$828b]
     STA Maybe_Arg_CurrentSprite_PosX
 
   @LAB_PRG14__82d1:                         ; [$82d1]
-    LDA #$82f4,Y
+    LDA $82f4,Y
     STA CurrentSprite_FlipMask
-    LDA #$82ec,Y
+    LDA $82ec,Y
     STA Temp_00
     TYA
     PHA
@@ -666,7 +672,7 @@ Sprite_CalcDistanceXToPlayer:               ; [$82f8]
     CLC
     LDY CurrentSprites_HitBoxTypes,X
     SEC
-    SBC #$b4d1,Y
+    SBC SPRITE_HITBOX_WIDTHS,Y
     BCS @_returnTrue
     LDA #$00
 
@@ -727,8 +733,8 @@ Sprite_CalcDistanceYToPlayer:               ; [$831b]
 ;     SpriteBehavior_Unknown_29
 ;============================================================================
 SpriteBehavior_Unknown_29_SomeSetup:        ; [$8329]
-    JSR SpriteAction_FacePlayerX
-    JSR SpriteAction_FacePlayerY
+    JSR BScript_Action_FacePlayerX
+    JSR BScript_Action_FacePlayerY
     JSR Sprite_CalcDistanceXToPlayer
     STA CurrentSprites_BehaviorState_XFull,X
     JSR Sprite_CalcDistanceYToPlayer
@@ -743,7 +749,7 @@ SpriteBehavior_Unknown_29_SomeSetup:        ; [$8329]
     STA a:Arg_PlayerHealthDelta_L
     STA a:BYTE_04bf
     STA CurrentSprites_BehaviorState_XFrac,X
-    JSR #$c0ec
+    JSR $c0ec
     LDA a:Arg_PlayerHealthDelta_U
     STA CurrentSprites_BehaviorState_YFull,X
     LDA a:Arg_PlayerHealthDelta_L
@@ -761,7 +767,7 @@ SpriteBehavior_Unknown_29_SomeSetup:        ; [$8329]
     STA a:Arg_PlayerHealthDelta_L
     STA a:BYTE_04bf
     STA CurrentSprites_BehaviorState_YFrac,X
-    JSR #$c0ec
+    JSR $c0ec
     LDA a:Arg_PlayerHealthDelta_U
     STA CurrentSprites_BehaviorState_XFull,X
     LDA a:Arg_PlayerHealthDelta_L
@@ -898,12 +904,12 @@ Sprites_CalcVerticalSpriteMovement:         ; [$83d1]
 ;============================================================================
 Sprites_CalcYFromGravity:                   ; [$83e1]
     PHA
-    AND #$83f7,Y
+    AND SPRITE_BEHAVIOR_HOP_PEAK_TICKS,Y
     STA Temp_00
     PLA
-    AND #$83ff,Y
+    AND SPRITES_MAYBE_GRAVITY,Y
     BEQ @LAB_PRG14__83f4
-    LDA #$83f7,Y
+    LDA SPRITE_BEHAVIOR_HOP_PEAK_TICKS,Y
     SEC
     SBC Temp_00
     RTS
@@ -943,7 +949,7 @@ SPRITES_MAYBE_GRAVITY:                      ; [$83ff]
     db $02                                  ; [7]:
 
 ;============================================================================
-; TODO: Document SpriteAction_FlipXDirection
+; TODO: Document BScript_Action_FlipXDirection
 ;
 ; INPUTS:
 ;     X
@@ -955,14 +961,14 @@ SPRITES_MAYBE_GRAVITY:                      ; [$83ff]
 ;     BSCRIPT_ACTIONS [$PRG14::a796]
 ;     SpriteBehavior_WalkForward
 ;============================================================================
-SpriteAction_FlipXDirection:                ; [$8407]
+BScript_Action_FlipXDirection:              ; [$8407]
     LDA CurrentSprites_Flags,X
     EOR #$01
     STA CurrentSprites_Flags,X
     RTS
 
 ;============================================================================
-; TODO: Document SpriteAction_FlipYDirection
+; TODO: Document BScript_Action_FlipYDirection
 ;
 ; INPUTS:
 ;     X
@@ -979,7 +985,7 @@ SpriteAction_FlipXDirection:                ; [$8407]
 ;     SpriteBehavior_Lilith
 ;     SpriteBehavior_SomethingZoradohna_18
 ;============================================================================
-SpriteAction_FlipYDirection:                ; [$8410]
+BScript_Action_FlipYDirection:              ; [$8410]
     LDA CurrentSprites_Flags,X
     EOR #$80
     STA CurrentSprites_Flags,X
@@ -1143,7 +1149,6 @@ FUN_PRG14__848a:                            ; [$848a]
 ;     C
 ;
 ; XREFS:
-;     FUN_PRG14__a91e
 ;     SpriteBehavior_Borabohra
 ;     SpriteBehavior_EnemyUnused43
 ;     SpriteBehavior_Hop
@@ -1153,6 +1158,7 @@ FUN_PRG14__848a:                            ; [$848a]
 ;     SpriteBehavior_ShadowEura
 ;     SpriteBehavior_SirGawaineWolfman
 ;     SpriteBehavior_Unknown_29
+;     SpriteBehavior__a91e
 ;     Sprite_MoveHorizAndTurnAroundIfNeeded
 ;     Sprites_Maybe_UpdateHitByMagic
 ;============================================================================
@@ -1296,7 +1302,7 @@ FUN_PRG14__84f4:                            ; [$84f4]
     LDX a:CurrentSpriteIndex
     JSR Sprite_CanClimb
     TAX
-    BEQ SpriteBehavior_Ishiisu_Something_850d
+    BEQ SpriteBehavior_Something_850d
     LDX a:CurrentSpriteIndex
     RTS
 
@@ -1321,19 +1327,14 @@ SpriteBehavior_Ishiisu_Something_915b:      ; [$8507]
     ; v-- Fall through --v
     ;
 
+
 ;============================================================================
-; TODO: Document SpriteBehavior_Ishiisu_Something_850d
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MAYBE DEADCODE
 ;
 ; XREFS:
 ;     FUN_PRG14__84f4
 ;============================================================================
-SpriteBehavior_Ishiisu_Something_850d:      ; [$850d]
+SpriteBehavior_Something_850d:              ; [$850d]
     LDX a:CurrentSpriteIndex
     LDA CurrentSprites_Flags,X
     LSR A
@@ -1353,6 +1354,10 @@ SpriteBehavior_Ishiisu_Something_850d:      ; [$850d]
     EOR #$01
     STA CurrentSprites_Flags,X
 
+    ;
+    ; v-- Fall through --v
+    ;
+
 ;============================================================================
 ; TODO: Document SpriteBehavior_RestoreXRegister
 ;
@@ -1364,8 +1369,8 @@ SpriteBehavior_Ishiisu_Something_850d:      ; [$850d]
 ;
 ; XREFS:
 ;     FUN_PRG14__84f4
-;     SpriteBehavior_Ishiisu_Something_850d
 ;     SpriteBehavior_Ishiisu_Something_915b
+;     SpriteBehavior_Something_850d
 ;============================================================================
 SpriteBehavior_RestoreXRegister:            ; [$852e]
     LDX a:CurrentSpriteIndex
@@ -1395,7 +1400,7 @@ Sprite_CanClimb:                            ; [$8534]
     LDY CurrentSprites_HitBoxTypes,X
     LDA CurrentSprites_YPos,X
     CLC
-    ADC #$b4d8,Y
+    ADC SPRITE_HITBOX_HEIGHTS,Y
     CLC
     ADC #$10
     JMP FUN_PRG14__854c
@@ -1418,7 +1423,7 @@ Sprites_CanSpriteWalk:                      ; [$8543]
     LDY CurrentSprites_HitBoxTypes,X
     LDA CurrentSprites_YPos,X
     CLC
-    ADC #$b4d8,Y
+    ADC SPRITE_HITBOX_HEIGHTS,Y
 
     ;
     ; v-- Fall through --v
@@ -1445,10 +1450,10 @@ FUN_PRG14__854c:                            ; [$854c]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$8532,Y
+    ADC SPRITE_WALK_PIXEL_MOVEMENT_TABLE,Y
     STA Arg_PixelPosX
-    JSR #$e86c
-    JMP #$e887
+    JSR $e86c
+    JMP $e887
 
 ;============================================================================
 ; TODO: Document Sprite_MoveVertAndFlipIfNeeded
@@ -1684,16 +1689,16 @@ Sprite_CalculateNewVertPos:                 ; [$85ca]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$861d,Y
+    ADC $861d,Y
     STA Arg_PixelPosX
     LDY CurrentSprites_HitBoxTypes,X
     LDA CurrentSprites_YPos,X
     CLC
-    ADC #$b4d8,Y
+    ADC SPRITE_HITBOX_HEIGHTS,Y
     STA Arg_PixelPosY
     INC Arg_PixelPosY
-    JSR #$e86c
-    JSR #$e87c
+    JSR $e86c
+    JSR $e87c
     STA Blocks_Result
     LDX a:CurrentSpriteIndex
     RTS
@@ -1712,12 +1717,12 @@ BYTE_ARRAY_PRG14__861d:                     ; [$861d]
 ;     C
 ;
 ; XREFS:
-;     FUN_PRG14__a91e
 ;     SpriteBehavior_EnemyUnused39
 ;     SpriteBehavior_Fall
 ;     SpriteBehavior_NecronAides
 ;     SpriteBehavior_SirGawaineWolfman
 ;     SpriteBehavior_WalkForward
+;     SpriteBehavior__a91e
 ;     Sprite_FallIfNeeded
 ;============================================================================
 Sprites_SetCurrentSpriteCanMove:            ; [$861f]
@@ -1773,12 +1778,12 @@ Sprites_SetCurrentSpriteCanMove:            ; [$861f]
 ;     CurrentSprite_CanMoveInDirection
 ;
 ; XREFS:
-;     FUN_PRG14__a91e
 ;     SpriteBehavior_EnemyUnused39
 ;     SpriteBehavior_Fall
 ;     SpriteBehavior_NecronAides
 ;     SpriteBehavior_SirGawaineWolfman
 ;     SpriteBehavior_WalkForward
+;     SpriteBehavior__a91e
 ;     Sprite_FallIfNeeded
 ;============================================================================
 CurrentSprite_HandleFall:                   ; [$864a]
@@ -1830,7 +1835,7 @@ CurrentSprite_HandleFall:                   ; [$864a]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteAction_FacePlayerX
+; TODO: Document BScript_Action_FacePlayerX
 ;
 ; INPUTS:
 ;     X
@@ -1858,7 +1863,7 @@ CurrentSprite_HandleFall:                   ; [$864a]
 ;     SpriteBehavior_Tamazutsu
 ;     SpriteBehavior_Unknown_29_SomeSetup
 ;============================================================================
-SpriteAction_FacePlayerX:                   ; [$867b]
+BScript_Action_FacePlayerX:                 ; [$867b]
     LDA Player_PosX_Block                   ; Load the player's X position.
 
 
@@ -1895,7 +1900,7 @@ SpriteAction_FacePlayerX:                   ; [$867b]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteAction_FacePlayerY
+; TODO: Document BScript_Action_FacePlayerY
 ;
 ; INPUTS:
 ;     X
@@ -1910,7 +1915,7 @@ SpriteAction_FacePlayerX:                   ; [$867b]
 ;     SpriteBehavior_Naga
 ;     SpriteBehavior_Unknown_29_SomeSetup
 ;============================================================================
-SpriteAction_FacePlayerY:                   ; [$8691]
+BScript_Action_FacePlayerY:                 ; [$8691]
     LDA Player_PosY
 
 
@@ -1945,10 +1950,10 @@ SpriteAction_FacePlayerY:                   ; [$8691]
     RTS
 
 ;============================================================================
-; TODO: Document MoveRight
+; TODO: Document Sprites_MoveRight
 ;
 ; INPUTS:
-;     None.
+;     Y
 ;
 ; OUTPUTS:
 ;     TODO
@@ -1956,13 +1961,13 @@ SpriteAction_FacePlayerY:                   ; [$8691]
 ; XREFS:
 ;     CurrentSprite_CanMoveInDirection
 ;============================================================================
-MoveRight:                                  ; [$86a7]
+Sprites_MoveRight:                          ; [$86a7]
     LDX CurrentSprites_HitBoxTypes,Y
     LDA CurrentSprites_XPos_Full,Y
     CLC
-    ADC #$b4d1,X
+    ADC SPRITE_HITBOX_WIDTHS,X
     STA Arg_PixelPosX
-    BCC FUN_PRG14__86c6
+    BCC Sprites_MoveRight__86c6
 
     ;
     ; v-- Fall through --v
@@ -2011,7 +2016,7 @@ FUN_PRG14__86bd:                            ; [$86bd]
     ;
 
 ;============================================================================
-; TODO: Document FUN_PRG14__86c6
+; TODO: Document Sprites_MoveRight__86c6
 ;
 ; INPUTS:
 ;     Y
@@ -2020,19 +2025,19 @@ FUN_PRG14__86bd:                            ; [$86bd]
 ;     TODO
 ;
 ; XREFS:
-;     MoveRight
+;     Sprites_MoveRight
 ;============================================================================
-FUN_PRG14__86c6:                            ; [$86c6]
+Sprites_MoveRight__86c6:                    ; [$86c6]
     LDA CurrentSprites_YPos,Y
     STA Arg_PixelPosY
-    JSR #$e86c
-    JSR #$e87c
+    JSR $e86c
+    JSR $e87c
     STA Blocks_Result
     BNE @LAB_PRG14__870c
     LDY a:CurrentSpriteIndex
     LDA CurrentSprites_HitBoxTypes,Y
     TAY
-    LDA #$b4d8,Y
+    LDA SPRITE_HITBOX_HEIGHTS,Y
     STA Temp_HitBoxValue
 
   @LAB_PRG14__86e1:                         ; [$86e1]
@@ -2045,7 +2050,7 @@ FUN_PRG14__86c6:                            ; [$86c6]
     CLC
     ADC #$10
     TAX
-    JSR #$e87c
+    JSR $e87c
     STA Blocks_Result
     BNE @LAB_PRG14__870c
     BEQ @LAB_PRG14__86e1
@@ -2059,7 +2064,7 @@ FUN_PRG14__86c6:                            ; [$86c6]
     CLC
     ADC #$10
     TAX
-    JSR #$e87c
+    JSR $e87c
     STA Blocks_Result
 
   @LAB_PRG14__870c:                         ; [$870c]
@@ -2085,13 +2090,13 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     TXA
     BEQ FUN_PRG14__86bd
     DEX
-    BEQ MoveRight
+    BEQ Sprites_MoveRight
     DEX
     BEQ @LAB_PRG14__8731
     LDX CurrentSprites_HitBoxTypes,Y
     LDA CurrentSprites_YPos,Y
     CLC
-    ADC #$b4d8,X
+    ADC SPRITE_HITBOX_HEIGHTS,X
     STA Arg_PixelPosY
     CMP #$f0
     BCC @LAB_PRG14__873a
@@ -2110,14 +2115,14 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
   @LAB_PRG14__873a:                         ; [$873a]
     LDA CurrentSprites_XPos_Full,Y
     STA Arg_PixelPosX
-    JSR #$e86c
-    JSR #$e87c
+    JSR $e86c
+    JSR $e87c
     STA Blocks_Result
     BNE @LAB_PRG14__8778
     LDY a:CurrentSpriteIndex
     LDA CurrentSprites_HitBoxTypes,Y
     TAY
-    LDA #$b4d1,Y
+    LDA SPRITE_HITBOX_WIDTHS,Y
     STA Temp_HitBoxValue
 
   @LAB_PRG14__8755:                         ; [$8755]
@@ -2127,7 +2132,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     STA Temp_HitBoxValue
     BCC @LAB_PRG14__8768
     INX
-    JSR #$e87c
+    JSR $e87c
     STA Blocks_Result
     BNE @LAB_PRG14__8778
     BEQ @LAB_PRG14__8755
@@ -2138,7 +2143,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     AND #$0f
     BEQ @LAB_PRG14__8778
     INX
-    JSR #$e87c
+    JSR $e87c
     STA Blocks_Result
 
   @LAB_PRG14__8778:                         ; [$8778]
@@ -2146,7 +2151,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     RTS
 
 ;============================================================================
-; TODO: Document WasPlayerHitByMagic
+; TODO: Document Player_CheckShieldHitByMagic
 ;
 ; INPUTS:
 ;     None.
@@ -2154,7 +2159,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-WasPlayerHitByMagic:                        ; [$877c]
+Player_CheckShieldHitByMagic:               ; [$877c]
     LDA a:SelectedShield
     CMP #$03
     BCS RETURN_87CA
@@ -2167,7 +2172,7 @@ WasPlayerHitByMagic:                        ; [$877c]
     LDY CurrentSprites_Entities,X
     CPY #$ff
     BEQ RETURN_87CA
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     CMP #$06
     BNE RETURN_87CA
     LDA a:SpriteBox_Width
@@ -2191,18 +2196,18 @@ WasPlayerHitByMagic:                        ; [$877c]
     SEC
     SBC a:SpriteBox_Top
     CMP Temp_00
-    BCC FUN_PRG14__87cb
+    BCC Player_HandleShieldHitByMagic
 
     ;
     ; XREFS:
+    ;     Player_CheckShieldHitByMagic
     ;     Player_HitSpriteWithWeapon
-    ;     WasPlayerHitByMagic
     ;
 RETURN_87CA:                                ; [$87ca]
     RTS
 
 ;============================================================================
-; TODO: Document FUN_PRG14__87cb
+; TODO: Document Player_HandleShieldHitByMagic
 ;
 ; INPUTS:
 ;     None.
@@ -2211,15 +2216,15 @@ RETURN_87CA:                                ; [$87ca]
 ;     TODO
 ;
 ; XREFS:
-;     WasPlayerHitByMagic
+;     Player_CheckShieldHitByMagic
 ;============================================================================
-FUN_PRG14__87cb:                            ; [$87cb]
+Player_HandleShieldHitByMagic:              ; [$87cb]
     JSR Player_HandleHitByMagic
     LDX a:CurrentSpriteIndex
     LDA #$ff
     STA CurrentSprites_Entities,X
     LDA #$0c
-    JSR #$d0e4
+    JSR $d0e4
     RTS
 
 ;============================================================================
@@ -2232,12 +2237,12 @@ FUN_PRG14__87cb:                            ; [$87cb]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__87cb
+;     Player_HandleShieldHitByMagic
 ;============================================================================
 Player_HandleHitByMagic:                    ; [$87dc]
     LDX a:CurrentSpriteIndex
     LDY CurrentSprites_Entities,X
-    LDA #$b6d7,Y
+    LDA SPRITE_ENTITY_DAMAGES,Y
     LDY a:SelectedShield
 
   @LAB_PRG14__87e8:                         ; [$87e8]
@@ -2253,7 +2258,7 @@ Player_HandleHitByMagic:                    ; [$87dc]
 
   @LAB_PRG14__87fa:                         ; [$87fa]
     JSR Player_SetDamagedBySprite
-    JMP #$c08e
+    JMP $c08e
     DEC CurrentSprites_HitCounter,X
     RTS
 
@@ -2294,7 +2299,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ;
     ; Check if the sprite being hit is an enemy. If not, return.
     ;
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     BEQ @LAB_PRG14__8828
     CMP #$07
     BNE RETURN_87CA
@@ -2333,7 +2338,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ;
     ; Play the Hit Enemy sound.
     ;
-    JSR #$d0e4
+    JSR $d0e4
 
 
     ;
@@ -2366,7 +2371,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ;
     ; Set the base strength of the equipped weapon.
     ;
-    LDA #$b7a5,Y
+    LDA WEAPON_STRENGTHS,Y
     STA Temp_00
     LDA a:SpecialItems
 
@@ -2403,7 +2408,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     LDA Temp_00                             ; Load the calculated weapon
                                             ; strength.
     CLC
-    ADC #$88c7,Y                            ; Add the glove strength for the
+    ADC WEAPON_TO_GLOVE_STRENGTH,Y          ; Add the glove strength for the
                                             ; current weapon.
     STA Temp_00                             ; Store as the new damage
                                             ; counter.
@@ -2460,7 +2465,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ; Play a sound for the enemy kill, reset state, and add
     ; experience.
     ;
-    JSR #$d0e4
+    JSR $d0e4
     LDA #$00
     STA CurrentSprites_HitCounter,X         ; Clear the hit counter for the
                                             ; dead enemy.
@@ -2472,7 +2477,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ; Check if we killed a standard enemy or a boss.
     ;
     LDY CurrentSprites_Entities,X           ; Load the type of this enemy.
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     CMP #$07                                ; Is this a big enemy?
     BNE @LAB_PRG14__88c3                    ; If not, jump.
 
@@ -2542,7 +2547,7 @@ Sprites_IsSpriteOutOfWeaponRange:           ; [$88cb]
     LDA CurrentSprites_Entities,X
     ASL A
     TAY
-    LDA #$b407,Y
+    LDA MAYBE_SPRITE_EXTENTS,Y
     CLC
     ADC Maybe_WeaponRange_X
     STA Temp_00
@@ -2564,7 +2569,7 @@ Sprites_IsSpriteOutOfWeaponRange:           ; [$88cb]
     ; Check the distance in the Y direction between the
     ; weapon and the sprite.
     ;
-    LDA #$b408,Y
+    LDA MAYBE_SPRITE_EXTENTS+1,Y
     CLC
     ADC Maybe_WeaponRange_Y
     STA Temp_00
@@ -2603,7 +2608,7 @@ Sprites_IsSpriteOutOfWeaponRange:           ; [$88cb]
 Player_HandleTouchItem:                     ; [$88fb]
     LDA CurrentSprites_Entities,X           ; Load the entity at the given
                                             ; index.
-    JSR #$c764                              ; Pick up the item.
+    JSR $c764                               ; Pick up the item.
     LDX a:CurrentSpriteIndex                ; X = current sprite index.
 
 
@@ -2660,14 +2665,14 @@ CurrentSprite_CheckHitPlayer:               ; [$890a]
     CMP Temp_00
     BCS RETURN_8998
     LDY CurrentSprites_Entities,X
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     ASL A
     TAY
     CPY #$10
     BCS @_return
-    LDA #$8959,Y
+    LDA SPRITE_COLLISION_HANDLERS+1,Y
     PHA
-    LDA #$8958,Y
+    LDA SPRITE_COLLISION_HANDLERS,Y
     PHA
 
   @_return:                                 ; [$8957]
@@ -2784,7 +2789,7 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     STA a:CurrentSprite_Value               ; Store it as the current value.
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_8998                         ; If so, return.
-    JSR #$f859                              ; Execute the handler.
+    JSR $f859                               ; Execute the handler.
     db BANK_12_LOGIC                        ; Bank = 12
     dw IScripts_Begin-1                     ; Address =
                                             ; IScripts_Begin
@@ -2922,7 +2927,7 @@ Player_HandleTouchEnemy:                    ; [$89ae]
     ;
   @_handleDamage:                           ; [$89c7]
     LDA #$04
-    JSR #$d0e4                              ; Play the Player Hit sound.
+    JSR $d0e4                               ; Play the Player Hit sound.
     JSR Player_SetDamagedBySprite           ; Mark the player as damaged and
                                             ; set state.
     JMP Player_ApplyDamage                  ; Apply damage.
@@ -2985,8 +2990,11 @@ Player_SetDamagedBySprite:                  ; [$89d5]
     TAY                                     ; Set to Y.
     LDA Player_Flags                        ; Load the player's flags.
     AND #$bf                                ; Unset the Facing Right bit.
-    ORA #$89d3,Y                            ; Set facing to the opposite of
-                                            ; the sprite's.
+    ORA SPRITES_FACING_VALUE_TO_OPPOSITE_PLAYER_FACING_BITMASK,Y ; Set facing
+                                                                 ; to the
+                                                                 ; opposite
+                                                                 ; of the
+                                                                 ; sprite's.
     STA Player_Flags                        ; Store it.
 
 
@@ -3029,7 +3037,7 @@ Player_HandleTouchNPC:                      ; [$89ef]
                                             ; value.
     CMP #$ff                                ; Is it 0xFF (unset)?
     BEQ RETURN_8998                         ; If so, return.
-    JSR #$f859                              ; Else, execute the IScript at
+    JSR $f859                               ; Else, execute the IScript at
                                             ; that value.
     db BANK_12_LOGIC                        ; Bank = 12
     dw IScripts_Begin-1                     ; Address =
@@ -3121,13 +3129,13 @@ Sprite_SetBoundsFromTemp:                   ; [$8a51]
     STA a:SpriteBox_Height
     RTS
 
-SPRITE_GETBOUNDS_ADDR1:                     ; [$8a71]
+SPRITE_GETBOUNDS_COMMON:                    ; [$8a71]
     db $30                                  ; [0]:
     db $08                                  ; [1]:
     db $f0                                  ; [2]:
     db $00                                  ; [3]:
 
-SPRITE_GETBOUNDS_ADDR2:                     ; [$8a75]
+SPRITE_GETBOUNDS_MASKMAN:                   ; [$8a75]
     db $20                                  ; [0]:
     db $10                                  ; [1]:
     db $f8                                  ; [2]:
@@ -3147,7 +3155,7 @@ SPRITE_GETBOUNDS_ADDR2:                     ; [$8a75]
 ;============================================================================
 Player_ApplyDamage:                         ; [$8a79]
     LDY CurrentSprites_Entities,X
-    LDA #$b6d7,Y
+    LDA SPRITE_ENTITY_DAMAGES,Y
     STA Temp_Addr_U
     STA Temp_05
     LDA #$00
@@ -3173,7 +3181,7 @@ Player_ApplyDamage:                         ; [$8a79]
     ;
     ; Apply the armor's defense multiplier.
     ;
-    LDA #$8ad8,Y                            ; Load the multiplier for this
+    LDA ARMOR_DEFENSE_MULTIPLIERS,Y         ; Load the multiplier for this
                                             ; armor.
     TAY                                     ; Y = A
 
@@ -3205,7 +3213,7 @@ Player_ApplyDamage:                         ; [$8a79]
     STA a:Arg_PlayerHealthDelta_U
 
   @LAB_PRG14__8ad4:                         ; [$8ad4]
-    JMP #$c08e
+    JMP $c08e
 
     ;
     ; XREFS:
@@ -3334,7 +3342,7 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ; Check if this is either a standard or big enemy.
     ;
     TAY                                     ; Y = A (sprite type)
-    LDA #$b544,Y                            ; A = Category type of this
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y       ; A = Category type of this
                                             ; sprite
     BEQ @_isEnemy                           ; If it's a standard enemy, jump.
     CMP #$07                                ; Check if it's a big enemy.
@@ -3346,12 +3354,12 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ;
   @_isEnemy:                                ; [$8afc]
     LDY a:CastMagic_Type                    ; Load the cast magic type.
-    LDA #$8b73,Y                            ; Load the htbox width for the
+    LDA CAST_MAGIC_HIT_WIDTHS,Y             ; Load the htbox width for the
                                             ; magic.
     STA Temp_01                             ; Store that.
     LDY CurrentSprites_HitBoxTypes,X        ; Load the hitbox type for the
                                             ; sprite.
-    LDA #$b4d1,Y                            ; Get the width of the sprite.
+    LDA SPRITE_HITBOX_WIDTHS,Y              ; Get the width of the sprite.
     CLC
     ADC Temp_01                             ; Add the hitbox width for this.
     STA Temp_00                             ; Store that.
@@ -3369,12 +3377,12 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ; Check if the magic overlaps the sprite in the Y direction.
     ;
     LDY a:CastMagic_Type                    ; Load the cast magic type.
-    LDA #$8b78,Y                            ; Load the hitbox height of the
+    LDA CAST_MAGIC_HIT_HEIGHTS,Y            ; Load the hitbox height of the
                                             ; magic.
     STA Temp_01                             ; Store that.
     LDY CurrentSprites_HitBoxTypes,X        ; Load the hitbox type for the
                                             ; sprite.
-    LDA #$b4d8,Y                            ; Get the height of the sprite.
+    LDA SPRITE_HITBOX_HEIGHTS,Y             ; Get the height of the sprite.
     CLC
     ADC Temp_01                             ; Add the hitbox height for this.
     STA Temp_00                             ; Store that.
@@ -3392,11 +3400,11 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ; The magic hit the sprite. Update state on the sprite.
     ;
     LDY a:CastMagic_Type                    ; Load the cast magic type.
-    LDA #$8b7d,Y                            ; Load the hit behavior for the
+    LDA CAST_MAGIC_HIT_BEHAVIORS,Y          ; Load the hit behavior for the
                                             ; magic.
     STA CurrentSprites_HitByMagicBehavior,X ; Store as the hit behavior for
                                             ; the sprite.
-    LDA #$8b82,Y                            ; Load the hit behavior timeframe
+    LDA CAST_MAGIC_HIT_IFRAMES,Y            ; Load the hit behavior timeframe
                                             ; for the magic.
     STA CurrentSprites_HitByMagicIFrames,X  ; Store for the sprite.
 
@@ -3432,10 +3440,10 @@ Sprite_CheckHitByCastMagic:                 ; [$8adc]
     ASL A                                   ; Update to a word boundary for
                                             ; the lookup table.
     TAY                                     ; Y = A
-    LDA #$bb10,Y                            ; Load the next address from the
+    LDA CAST_MAGIC_HIT_HANDLERS+1,Y         ; Load the next address from the
                                             ; lookup table.
     PHA
-    LDA #$bb0f,Y
+    LDA CAST_MAGIC_HIT_HANDLERS,Y
     PHA
 
 ;============================================================================
@@ -3553,7 +3561,7 @@ CAST_MAGIC_HIT_IFRAMES:                     ; [$8b82]
 ;         The current sprite index.
 ;
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; XREFS:
@@ -3563,13 +3571,13 @@ CAST_MAGIC_HIT_IFRAMES:                     ; [$8b82]
 Player_AddExperienceFromSprite:             ; [$8b87]
     LDY CurrentSprites_Entities,X           ; Load the current enemy sprite
                                             ; type.
-    LDA #$b60e,Y                            ; Load the experience for that
+    LDA ENEMY_EXPERIENCE,Y                  ; Load the experience for that
                                             ; type.
     STA Temp_Int24                          ; Store as the lower byte of the
                                             ; experience.
     LDA #$00
-    STA Temp_Int24.M                        ; Store 0 as the middle byte.
-    JSR #$f957                              ; Update the player's experience.
+    STA Temp_Int24_M                        ; Store 0 as the middle byte.
+    JSR $f957                               ; Update the player's experience.
     LDX a:CurrentSpriteIndex
     RTS
 
@@ -3604,7 +3612,7 @@ Player_AddExperienceFromSprite:             ; [$8b87]
 ;============================================================================
 Player_HandleTouchCoin:                     ; [$8b9a]
     LDA #$09
-    JSR #$d0e4                              ; Play sound 9 (coin touched).
+    JSR $d0e4                               ; Play sound 9 (coin touched).
 
 
     ;
@@ -3641,7 +3649,7 @@ Player_HandleTouchCoin:                     ; [$8b9a]
     ;
     ; Render and prepare to return.
     ;
-    JSR #$f9e7                              ; Render the new gold amount.
+    JSR $f9e7                               ; Render the new gold amount.
     LDX a:CurrentSpriteIndex                ; Set X = current sprite index.
     RTS
 
@@ -3668,11 +3676,11 @@ Player_HandleTouchCoin:                     ; [$8b9a]
 ;============================================================================
 Player_HandleTouchBread:                    ; [$8bc0]
     LDA #$1b
-    JSR #$d0e4                              ; Play sound 0x1B (pick up meat).
+    JSR $d0e4                               ; Play sound 0x1B (pick up meat).
     LDX a:CurrentSpriteIndex                ; Load the current sprite index
                                             ; for meat.
     LDA CurrentSprites_Values,X             ; Load the HP value for it.
-    JSR #$c07b                              ; Add it to the player's HP.
+    JSR $c07b                               ; Add it to the player's HP.
     LDX a:CurrentSpriteIndex
     RTS
 
@@ -3740,16 +3748,16 @@ CurrentSprite_UpdateState:                  ; [$8bd2]
     STA Unused_Sprite_ScrollPosX
     LDA Player_Something_ScrollPosY
     STA Unused_Sprite_ScrollPosY
-    LDA CurrentSprites_PPUAddrs,X
+    LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     JSR CurrentSprite_CalculateVisibility
     LDX a:CurrentSpriteIndex
     LDA CurrentSprites_Entities,X
     ASL A
     TAY
-    LDA #$8088,Y
+    LDA SPRITE_UPDATE_HANDLERS+1,Y
     PHA
-    LDA #$8087,Y
+    LDA SPRITE_UPDATE_HANDLERS,Y
     PHA
 
   @_return:                                 ; [$8c17]
@@ -3814,8 +3822,8 @@ CurrentSprite_CalculateVisibility:          ; [$8c1a]
     ;
     ; Convert to a block position.
     ;
-    JSR #$e86c
-    JSR #$e8c3
+    JSR $e86c
+    JSR $e8c3
     CMP #$04
     BEQ @LAB_PRG14__8c3e
     CMP #$0d
@@ -3834,8 +3842,8 @@ CurrentSprite_CalculateVisibility:          ; [$8c1a]
     CLC
     ADC #$0c
     STA Arg_PixelPosX
-    JSR #$e86c
-    JSR #$e8c3
+    JSR $e86c
+    JSR $e8c3
     CMP #$04
     BEQ @LAB_PRG14__8c60
     CMP #$0d
@@ -3894,6 +3902,7 @@ Something_SetDAT26:                         ; [$8c7f]
 ;     SpriteUpdateHandler_Boss_ShadowEura
 ;     SpriteUpdateHandler_Boss_Zoradohna
 ;     SpriteUpdateHandler_Boss_Zorugeriru
+;     SpriteUpdateHandler_Effect_Spring
 ;     SpriteUpdateHandler_EnemyMagic
 ;     SpriteUpdateHandler_Enemy_Bihoruda
 ;     SpriteUpdateHandler_Enemy_Charron
@@ -3911,6 +3920,7 @@ Something_SetDAT26:                         ; [$8c7f]
 ;     SpriteUpdateHandler_Enemy_Magman
 ;     SpriteUpdateHandler_Enemy_Maskman
 ;     SpriteUpdateHandler_Enemy_Monodron
+;     SpriteUpdateHandler_Enemy_MuppetGuy
 ;     SpriteUpdateHandler_Enemy_Myconid
 ;     SpriteUpdateHandler_Enemy_Naga
 ;     SpriteUpdateHandler_Enemy_Nash
@@ -3920,12 +3930,11 @@ Something_SetDAT26:                         ; [$8c7f]
 ;     SpriteUpdateHandler_Enemy_Snowman
 ;     SpriteUpdateHandler_Enemy_Sugata
 ;     SpriteUpdateHandler_Enemy_Tamazutsu
-;     SpriteUpdateHandler_Enemy_Unused18
 ;     SpriteUpdateHandler_Enemy_Unused29
-;     SpriteUpdateHandler_Enemy_Unused36
-;     SpriteUpdateHandler_Enemy_Unused39
-;     SpriteUpdateHandler_Enemy_Unused43
 ;     SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura
+;     SpriteUpdateHandler_Enemy_Unused_CurlyTail
+;     SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart
+;     SpriteUpdateHandler_Enemy_Unused_WingedSkeleton
 ;     SpriteUpdateHandler_Enemy_Yareeka
 ;     SpriteUpdateHandler_Enemy_Yuinaru
 ;     SpriteUpdateHandler_Enemy_Zombie
@@ -3936,13 +3945,12 @@ Something_SetDAT26:                         ; [$8c7f]
 ;     SpriteUpdateHandler_NPC_Priest
 ;     SpriteUpdateHandler_NPC_Walking
 ;     SpriteUpdateHandler_TODO_Garbled10
-;     SpriteUpdateHandler__a5d2
 ;============================================================================
 CurrentSprite_UpdateFlipMask:               ; [$8c82]
     LDA CurrentSprites_Flags,X              ; Load flags for this sprite.
     AND #$01                                ; AND for the facing bit.
     TAY                                     ; Y = result
-    LDA #$8c18,Y                            ; Load the bitmask from the
+    LDA SPRITES_FACING_TO_FLIPMASK,Y        ; Load the bitmask from the
                                             ; mapping table.
     STA CurrentSprite_FlipMask              ; Store it.
     RTS
@@ -3969,9 +3977,10 @@ CurrentSprite_UpdateFlipMask:               ; [$8c82]
 ;     SpriteUpdateHandler_Boss_Zorugeriru
 ;     SpriteUpdateHandler_Bread
 ;     SpriteUpdateHandler_Coin
-;     SpriteUpdateHandler_Deco_Fountain
 ;     SpriteUpdateHandler_Effect_EnemyDeath
+;     SpriteUpdateHandler_Effect_Fountain
 ;     SpriteUpdateHandler_Effect_LightningBall20
+;     SpriteUpdateHandler_Effect_Spring
 ;     SpriteUpdateHandler_EnemyMagic
 ;     SpriteUpdateHandler_Enemy_Bihoruda
 ;     SpriteUpdateHandler_Enemy_Charron
@@ -3989,6 +3998,7 @@ CurrentSprite_UpdateFlipMask:               ; [$8c82]
 ;     SpriteUpdateHandler_Enemy_Magman
 ;     SpriteUpdateHandler_Enemy_Maskman
 ;     SpriteUpdateHandler_Enemy_Monodron
+;     SpriteUpdateHandler_Enemy_MuppetGuy
 ;     SpriteUpdateHandler_Enemy_Myconid
 ;     SpriteUpdateHandler_Enemy_Naga
 ;     SpriteUpdateHandler_Enemy_Nash
@@ -3998,17 +4008,18 @@ CurrentSprite_UpdateFlipMask:               ; [$8c82]
 ;     SpriteUpdateHandler_Enemy_Snowman
 ;     SpriteUpdateHandler_Enemy_Sugata
 ;     SpriteUpdateHandler_Enemy_Tamazutsu
-;     SpriteUpdateHandler_Enemy_Unused18
 ;     SpriteUpdateHandler_Enemy_Unused29
-;     SpriteUpdateHandler_Enemy_Unused36
-;     SpriteUpdateHandler_Enemy_Unused39
-;     SpriteUpdateHandler_Enemy_Unused43
+;     SpriteUpdateHandler_Enemy_Unused_CurlyTail
+;     SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart
+;     SpriteUpdateHandler_Enemy_Unused_WingedSkeleton
 ;     SpriteUpdateHandler_Enemy_Yareeka
 ;     SpriteUpdateHandler_Enemy_Yuinaru
 ;     SpriteUpdateHandler_Enemy_Zombie
 ;     SpriteUpdateHandler_Garbled03
 ;     SpriteUpdateHandler_Item_Special
 ;     SpriteUpdateHandler_Item_Standard
+;     SpriteUpdateHandler_Magic_81
+;     SpriteUpdateHandler_Magic_83
 ;     SpriteUpdateHandler_NPC_ArmorSalesman
 ;     SpriteUpdateHandler_NPC_King
 ;     SpriteUpdateHandler_NPC_MagicTeacher
@@ -4016,15 +4027,12 @@ CurrentSprite_UpdateFlipMask:               ; [$8c82]
 ;     SpriteUpdateHandler_NPC_Priest
 ;     SpriteUpdateHandler_NPC_Walking
 ;     SpriteUpdateHandler_TODO_Garbled10
-;     SpriteUpdateHandler_TODO_Garbled_81
-;     SpriteUpdateHandler_TODO_Unknown_83
-;     SpriteUpdateHandler__a5d2
 ;============================================================================
 Sprite_EnterNextAppearancePhase:            ; [$8c8e]
     CLC
     LDY CurrentSprites_Entities,X
-    ADC #$8c9f,Y
-    JMP #$f057
+    ADC SPRITE_APPEARANCE_PHASE_OFFSETS,Y
+    JMP $f057
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Invisible
@@ -4190,7 +4198,7 @@ SpriteBehavior_BounceAndExpire:             ; [$8d0a]
     LDA #$00
     STA CurrentSprites_Phases,X
     STA CurrentSprites_InternalBehaviorStates,X
-    STA CurrentSprites_PPUAddrs,X
+    STA CurrentSprites_PPUOffsets,X
     LDA #$80
     STA CurrentSprites_Flags,X
     JSR Sprite_SetBehaviorReady
@@ -4229,7 +4237,7 @@ SpriteBehavior_BounceAndExpire:             ; [$8d0a]
     LDA CurrentSprites_BehaviorData3,X
     AND #$1f
     BNE @_return2
-    JSR SpriteAction_FlipYDirection
+    JSR BScript_Action_FlipYDirection
 
   @_return2:                                ; [$8d6d]
     RTS
@@ -4323,12 +4331,12 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
     TAY
     LDA CurrentSprites_YPos,X
     CLC
-    ADC #$8e3a,Y
+    ADC $8e3a,Y
     STA Arg_PixelPosY
     LDA CurrentSprites_XPos_Full,X
     STA Arg_PixelPosX
-    JSR #$e86c
-    JSR #$e8c3
+    JSR $e86c
+    JSR $e8c3
     LDX a:CurrentSpriteIndex
     CMP #$02
     BEQ @LAB_PRG14__8de4
@@ -4354,9 +4362,9 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
     LSR A
     AND #$03
     TAY
-    LDA #$8e3c,Y
+    LDA $8e3c,Y
     STA a:Arg_DeltaY_Frac
-    LDA #$8e40,Y
+    LDA $8e40,Y
     STA a:Arg_DeltaY_Full
     JMP Sprite_CalculateNewVertPos
 
@@ -4463,7 +4471,7 @@ SpriteUpdateHandler_Enemy_Zombie:           ; [$8e57]
     LSR A
     AND #$03
     TAY
-    LDA #$8e73,Y
+    LDA SPRITEBEHAVIOR_ENEMY_ZOMBIE_PHASES,Y
     TAY
 
   @LAB_PRG14__8e6f:                         ; [$8e6f]
@@ -4512,9 +4520,9 @@ SpriteBehavior_BuzzAround:                  ; [$8e77]
     LSR A
     AND #$07
     TAY
-    LDA #$8eb0,Y
+    LDA SPRITE_BEHAVIOR_BUZZ_AROUND_Y_FRAC,Y
     STA a:Arg_DeltaY_Frac
-    LDA #$8eb8,Y
+    LDA SPRITE_BEHAVIOR_BUZZ_AROUND_X_FRAC,Y
     STA a:Arg_DeltaY_Full
     JSR Sprite_MoveVertAndFlipIfNeeded
     INC CurrentSprites_BehaviorData2,X      ; Increment the sprite's tick
@@ -4666,7 +4674,7 @@ SpriteBehavior_Lilith:                      ; [$8f2e]
     LDA #$3c
     STA CurrentSprites_InternalBehaviorStates,X
     JSR Sprite_SetBehaviorReady
-    JSR SpriteAction_RandomlyFlipXDirection
+    JSR BScript_Action_RandomlyFlipXDirection
 
   @LAB_PRG14__8f51:                         ; [$8f51]
     LDY CurrentSprites_Phases,X
@@ -4689,14 +4697,14 @@ SpriteBehavior_Lilith:                      ; [$8f2e]
     LDA CurrentSprites_BehaviorData3,X
     AND #$0f
     BNE @LAB_PRG14__8f83
-    JSR SpriteAction_FlipYDirection
+    JSR BScript_Action_FlipYDirection
 
   @LAB_PRG14__8f83:                         ; [$8f83]
     DEC CurrentSprites_InternalBehaviorStates,X
     BNE @_return
     INC CurrentSprites_Phases,X
-    JSR SpriteAction_FacePlayerX
-    JSR SpriteAction_FacePlayerY
+    JSR BScript_Action_FacePlayerX
+    JSR BScript_Action_FacePlayerY
     LDA #$00
     STA CurrentSprites_BehaviorData2,X
     STA CurrentSprites_BehaviorData3,X
@@ -4719,7 +4727,7 @@ SpriteBehavior__8f9a:                       ; [$8f9a]
     LDA CurrentSprites_BehaviorData2,X
     AND #$3f
     BNE @LAB_PRG14__8fb7
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
 
   @LAB_PRG14__8fb7:                         ; [$8fb7]
     INC CurrentSprites_BehaviorData3,X
@@ -4728,7 +4736,7 @@ SpriteBehavior__8f9a:                       ; [$8f9a]
     BEQ @LAB_PRG14__8fc9
     LDA #$00
     STA CurrentSprites_BehaviorData3,X
-    JSR SpriteAction_FacePlayerY
+    JSR BScript_Action_FacePlayerY
 
   @LAB_PRG14__8fc9:                         ; [$8fc9]
     LDA #$01
@@ -4955,7 +4963,7 @@ SpriteBehavior_Nash:                        ; [$9060]
     RTS
 
   @LAB_PRG14__90ce:                         ; [$90ce]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return2
     LDA #$3c
@@ -5070,7 +5078,7 @@ SpriteBehavior_Ishiisu:                     ; [$9129]
   @LAB_PRG14__9147:                         ; [$9147]
     CMP #$20
     BCC @LAB_PRG14__915e
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA #$c0
     STA a:Arg_DeltaX_Frac
     LDA #$00
@@ -5084,7 +5092,7 @@ SpriteBehavior_Ishiisu:                     ; [$9129]
     TAY
     LDA Player_Flags
     AND #$40
-    EOR #$918c,Y
+    EOR @_return2+1,Y
     BNE @_return1
     INC CurrentSprites_Phases,X
     LDA #$1e
@@ -5094,7 +5102,7 @@ SpriteBehavior_Ishiisu:                     ; [$9129]
     RTS
 
   @LAB_PRG14__9176:                         ; [$9176]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     LDA CurrentSprites_BehaviorData2,X
     BEQ @LAB_PRG14__9188
@@ -5193,7 +5201,7 @@ SpriteBehavior_ExecutionHood:               ; [$91b3]
     LDA CurrentSprites_BehaviorData3,X
     AND #$07
     BNE @LAB_PRG14__91fb
-    JSR SpriteAction_FlipYDirection
+    JSR BScript_Action_FlipYDirection
 
   @LAB_PRG14__91fb:                         ; [$91fb]
     LDA CurrentSprites_BehaviorData3,X
@@ -5207,13 +5215,13 @@ SpriteBehavior_ExecutionHood:               ; [$91b3]
     RTS
 
   @LAB_PRG14__920b:                         ; [$920b]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return2
     INC CurrentSprites_Phases,X
     LDA #$00
     STA CurrentSprites_BehaviorData3,X
-    JMP FUN_PRG14__a093
+    JMP SpriteBehavior_ExecutionHood__a093
 
   @_return2:                                ; [$921e]
     RTS
@@ -5274,7 +5282,7 @@ BScript_Action_CastMagic:                   ; [$9239]
     LDA #$54
     STA CurrentSprites_Entities,Y
     LDA #$00
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
   @_return:                                 ; [$9260]
@@ -5417,7 +5425,7 @@ SpriteUpdateHandler_Enemy_Grimlock:         ; [$92b0]
     LSR A
     AND #$03
     TAY
-    LDA #$92dc,Y
+    LDA $92dc,Y
     TAY
 
   @LAB_PRG14__92d8:                         ; [$92d8]
@@ -5473,8 +5481,8 @@ SpriteBehavior_GiantBees:                   ; [$92e0]
     LDA #$ff
     STA CurrentSprites_BehaviorData2,X
     STA CurrentSprites_BehaviorData3,X
-    JSR SpriteAction_FacePlayerX
-    JSR SpriteAction_FacePlayerY
+    JSR BScript_Action_FacePlayerX
+    JSR BScript_Action_FacePlayerY
 
   @_return1:                                ; [$931c]
     RTS
@@ -5514,7 +5522,7 @@ SpriteBehavior_GiantBees:                   ; [$92e0]
     RTS
 
   @LAB_PRG14__9360:                         ; [$9360]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA #$c0
     STA a:Arg_DeltaX_Frac
     LDA #$00
@@ -5632,7 +5640,7 @@ SpriteBehavior_Naga:                        ; [$93e5]
     JSR Sprite_SetBehaviorReady
 
   @LAB_PRG14__93f5:                         ; [$93f5]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA CurrentSprites_BehaviorData3,X
     LDY #$04
     JSR Sprites_CalcYFromGravity
@@ -5656,7 +5664,7 @@ SpriteBehavior_Naga:                        ; [$93e5]
     BCC @_return
     LDA CurrentSprites_Flags,X
     PHA
-    JSR SpriteAction_FacePlayerY
+    JSR BScript_Action_FacePlayerY
     LDA #$00
     STA a:Arg_DeltaY_Full
     LDA #$c0
@@ -5788,7 +5796,7 @@ SpriteBehavior_SirGawaineWolfman:           ; [$9497]
     CMP #$18
     BEQ @_return1
     BCC @LAB_PRG14__94d5
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA #$01
     STA a:Arg_DeltaX_Full
     LDA #$00
@@ -5808,7 +5816,7 @@ SpriteBehavior_SirGawaineWolfman:           ; [$9497]
     LDA Player_Flags
     AND #$01
     BNE @LAB_PRG14__94f3
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDY #$00
     LDA a:SpriteUpdateCounter
     AND #$10
@@ -5823,7 +5831,7 @@ SpriteBehavior_SirGawaineWolfman:           ; [$9497]
   @LAB_PRG14__94f3:                         ; [$94f3]
     LDA #$00
     STA CurrentSprites_Phases,X
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA #$02
     STA a:Arg_DeltaX_Full
     LDA #$00
@@ -6064,7 +6072,7 @@ SpriteBehavior_Magman:                      ; [$95c0]
     RTS
 
   @LAB_PRG14__9602:                         ; [$9602]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE RETURN_961A
     INC CurrentSprites_Phases,X
@@ -6148,7 +6156,7 @@ SpriteBehavior_EnemyUnused36:               ; [$9632]
     LDA CurrentSprites_BehaviorData3,X
     AND #$1f
     BNE @LAB_PRG14__9671
-    JSR SpriteAction_FlipYDirection
+    JSR BScript_Action_FlipYDirection
 
   @LAB_PRG14__9671:                         ; [$9671]
     LDA CurrentSprites_Phases,X
@@ -6245,7 +6253,7 @@ FUN_PRG14__9699:                            ; [$9699]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_Enemy_Unused36
+; TODO: Document SpriteUpdateHandler_Enemy_Unused_CurlyTail
 ;
 ; INPUTS:
 ;     X
@@ -6256,7 +6264,7 @@ FUN_PRG14__9699:                            ; [$9699]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::80cf]
 ;============================================================================
-SpriteUpdateHandler_Enemy_Unused36:         ; [$96ea]
+SpriteUpdateHandler_Enemy_Unused_CurlyTail: ; [$96ea]
     JSR CurrentSprite_UpdateFlipMask
     LDA CurrentSprites_Phases,X
     BNE @LAB_PRG14__96f6
@@ -6345,7 +6353,7 @@ SpriteBehavior_EnemyUnused39:               ; [$971d]
     JSR FUN_PRG14__a0a0
 
   @LAB_PRG14__974e:                         ; [$974e]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA #$40
     STA a:Arg_DeltaX_Frac
     LDA #$00
@@ -6353,7 +6361,7 @@ SpriteBehavior_EnemyUnused39:               ; [$971d]
     JMP Sprite_MoveHorizAndTurnAroundIfNeeded
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_Enemy_Unused39
+; TODO: Document SpriteUpdateHandler_Enemy_MuppetGuy
 ;
 ; INPUTS:
 ;     X
@@ -6364,7 +6372,7 @@ SpriteBehavior_EnemyUnused39:               ; [$971d]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::80d5]
 ;============================================================================
-SpriteUpdateHandler_Enemy_Unused39:         ; [$975e]
+SpriteUpdateHandler_Enemy_MuppetGuy:        ; [$975e]
     JSR CurrentSprite_UpdateFlipMask
     LDY #$00
     LDA a:SpriteUpdateCounter
@@ -6397,9 +6405,9 @@ SpriteUpdateHandler_Enemy_Lamprey:          ; [$9770]
     AND #$07
     TAY
     LDA CurrentSprite_FlipMask
-    EOR #$9793,Y
+    EOR LAMPREY_HORIZ_FLIP_BITS,Y
     STA CurrentSprite_FlipMask
-    LDA #$978b,Y
+    LDA $978b,Y
     TAY
     TYA
     JMP Sprite_EnterNextAppearancePhase
@@ -6449,7 +6457,7 @@ SpriteUpdateHandler_Enemy_Monodron:         ; [$979b]
     JSR Sprite_GetPreviousSpritePhase
     AND #$03
     TAY
-    LDA #$97aa,Y
+    LDA SPRITE_MONODRON_APPEARANCE_PHASES,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -6483,7 +6491,7 @@ SpriteBehavior_EnemyUnused43:               ; [$97ae]
     JSR Sprite_SetBehaviorReady
 
   @LAB_PRG14__97be:                         ; [$97be]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA CurrentSprites_BehaviorData3,X
     LDY #$04
     JSR Sprites_CalcYFromGravity
@@ -6511,7 +6519,7 @@ SpriteBehavior_EnemyUnused43:               ; [$97ae]
   @LAB_PRG14__97f4:                         ; [$97f4]
     LDA Player_PosX_Block
     CLC
-    ADC #$9851,Y
+    ADC @_return+1,Y
     SEC
     SBC CurrentSprites_XPos_Full,X
     BEQ @LAB_PRG14__9820
@@ -6575,7 +6583,7 @@ BYTE_ARRAY_PRG14__9851_1_:                  ; [$9852]
     db $e0                                  ; [1]:
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_Enemy_Unused43
+; TODO: Document SpriteUpdateHandler_Enemy_Unused_WingedSkeleton
 ;
 ; INPUTS:
 ;     X
@@ -6586,7 +6594,7 @@ BYTE_ARRAY_PRG14__9851_1_:                  ; [$9852]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::80dd]
 ;============================================================================
-SpriteUpdateHandler_Enemy_Unused43:         ; [$9853]
+SpriteUpdateHandler_Enemy_Unused_WingedSkeleton: ; [$9853]
     JSR CurrentSprite_UpdateFlipMask
     LDY #$00
     LDA a:SpriteUpdateCounter
@@ -6620,7 +6628,7 @@ SpriteBehavior_Tamazutsu:                   ; [$9865]
     JSR Sprite_SetBehaviorReady
 
   @LAB_PRG14__9877:                         ; [$9877]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDY CurrentSprites_Phases,X
     BEQ @LAB_PRG14__9887
     DEY
@@ -6703,7 +6711,7 @@ SpriteUpdateHandler_Enemy_Tamazutsu:        ; [$98b3]
     LSR A
     LSR A
     TAY
-    LDA #$9905,Y
+    LDA $9905,Y
     TAY
     JMP @LAB_PRG14__9900
 
@@ -6720,7 +6728,7 @@ SpriteUpdateHandler_Enemy_Tamazutsu:        ; [$98b3]
     LSR A
     LSR A
     TAY
-    LDA #$9908,Y
+    LDA $9908,Y
     TAY
 
   @LAB_PRG14__9900:                         ; [$9900]
@@ -6777,7 +6785,7 @@ SpriteUpdateHandler_Boss_Rokusutahn:        ; [$990b]
 ;     TODO
 ;
 ; XREFS:
-;     SpriteOp_SwitchBehavior
+;     BScript_Op_SwitchBehavior
 ;============================================================================
 FUN_PRG14__9917:                            ; [$9917]
     LDA #$00
@@ -6801,15 +6809,23 @@ FUN_PRG14__9917:                            ; [$9917]
     STA CurrentSprites_Phases,X
     RTS
 
-    ;
-    ; XREFS:
-    ;     FUN_PRG14__994a
-    ;
-CALL_FUN_PRG14__9a3c:                       ; [$9947]
+;============================================================================
+; TODO: Document thunk_FUN_PRG14__9a3c
+;
+; INPUTS:
+;     X
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     SpriteBehavior_EnemyUnused18__994a
+;============================================================================
+thunk_FUN_PRG14__9a3c:                      ; [$9947]
     JMP FUN_PRG14__9a3c
 
 ;============================================================================
-; TODO: Document FUN_PRG14__994a
+; TODO: Document SpriteBehavior_EnemyUnused18__994a
 ;
 ; INPUTS:
 ;     X
@@ -6820,10 +6836,10 @@ CALL_FUN_PRG14__9a3c:                       ; [$9947]
 ; XREFS:
 ;     CALL_FUN_PRG14__994a [$PRG14::9a2c]
 ;============================================================================
-FUN_PRG14__994a:                            ; [$994a]
+SpriteBehavior_EnemyUnused18__994a:         ; [$994a]
     LDA CurrentSprites_Phases,X
     CMP #$03
-    BNE CALL_FUN_PRG14__9a3c
+    BNE thunk_FUN_PRG14__9a3c
     LDA CurrentSprites_InternalBehaviorStates,X
     AND #$03
     LSR A
@@ -6863,7 +6879,7 @@ FUN_PRG14__994a:                            ; [$994a]
     RTS
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9991
+; TODO: Document SpriteBehavior_EnemyUnused18__9991
 ;
 ; INPUTS:
 ;     X
@@ -6874,9 +6890,9 @@ FUN_PRG14__994a:                            ; [$994a]
 ; XREFS:
 ;     CALL_FUN_PRG14__9a2f [$PRG14::9a2f]
 ;============================================================================
-FUN_PRG14__9991:                            ; [$9991]
+SpriteBehavior_EnemyUnused18__9991:         ; [$9991]
     LDA CurrentSprites_BehaviorData2,X
-    BEQ FUN_PRG14__99f3
+    BEQ Maybe_SpriteBody__99f3
     LDA CurrentSprites_InternalBehaviorStates,X
     AND #$0f
     BNE @LAB_PRG14__99dc
@@ -6891,7 +6907,7 @@ FUN_PRG14__9991:                            ; [$9991]
     LDA CurrentSprites_YPos,X
     AND #$f0
     ORA Temp_00
-    STA a:BYTE_03cf
+    STA a:Something_UnusedSprite_ScreenBufferOffset
     JMP @LAB_PRG14__99d1
 
   @LAB_PRG14__99b6:                         ; [$99b6]
@@ -6908,16 +6924,16 @@ FUN_PRG14__9991:                            ; [$9991]
     LSR A
     LSR A
     STA Temp_00
-    LDA #$037c,Y
+    LDA $037c,Y
     AND #$f0
     ORA Temp_00
-    STA a:BYTE_03cf
+    STA a:Something_UnusedSprite_ScreenBufferOffset
 
   @LAB_PRG14__99d1:                         ; [$99d1]
     LDY Area_CurrentArea
-    LDA #$99ef,Y
-    STA a:BYTE_03ce
-    JSR #$d7b0
+    LDA @_return+1,Y
+    STA a:Something_UnusedSprite_BlockOffset
+    JSR $d7b0
 
   @LAB_PRG14__99dc:                         ; [$99dc]
     LDX a:CurrentSpriteIndex
@@ -6933,7 +6949,7 @@ FUN_PRG14__9991:                            ; [$9991]
 
 ;
 ; XREFS:
-;     FUN_PRG14__9991
+;     SpriteBehavior_EnemyUnused18__9991
 ;
 BYTE_ARRAY_PRG14__99ef:                     ; [$99ef]
     db $00                                  ; [0]:
@@ -6942,7 +6958,7 @@ BYTE_ARRAY_PRG14__99ef:                     ; [$99ef]
     db $00                                  ; [3]:
 
 ;============================================================================
-; TODO: Document FUN_PRG14__99f3
+; TODO: Document Maybe_SpriteBody__99f3
 ;
 ; INPUTS:
 ;     X
@@ -6951,9 +6967,9 @@ BYTE_ARRAY_PRG14__99ef:                     ; [$99ef]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__9991
+;     SpriteBehavior_EnemyUnused18__9991
 ;============================================================================
-FUN_PRG14__99f3:                            ; [$99f3]
+Maybe_SpriteBody__99f3:                     ; [$99f3]
     LDY #$03
     LDA CurrentSprites_XPos_Full,X
     CLC
@@ -6996,14 +7012,14 @@ FUN_PRG14__99f3:                            ; [$99f3]
     ;     SpriteBehavior_EnemyUnused18
     ;
 CALL_FUN_PRG14__994a:                       ; [$9a2c]
-    JMP FUN_PRG14__994a
+    JMP SpriteBehavior_EnemyUnused18__994a
 
     ;
     ; XREFS:
     ;     SpriteBehavior_EnemyUnused18
     ;
 CALL_FUN_PRG14__9a2f:                       ; [$9a2f]
-    JMP FUN_PRG14__9991
+    JMP SpriteBehavior_EnemyUnused18__9991
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_EnemyUnused18
@@ -7037,7 +7053,7 @@ SpriteBehavior_EnemyUnused18:               ; [$9a32]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__994a
+;     thunk_FUN_PRG14__9a3c
 ;============================================================================
 FUN_PRG14__9a3c:                            ; [$9a3c]
     LDA CurrentSprites_Phases,X
@@ -7045,9 +7061,9 @@ FUN_PRG14__9a3c:                            ; [$9a3c]
     STA CurrentSprites_Phases,X
     ASL A
     TAY
-    LDA #$9a50,Y
+    LDA MAYBE_BODY_HANDLERS+1,Y
     PHA
-    LDA #$9a4f,Y
+    LDA MAYBE_BODY_HANDLERS,Y
     PHA
     RTS
 
@@ -7055,14 +7071,14 @@ FUN_PRG14__9a3c:                            ; [$9a3c]
 ; XREFS:
 ;     FUN_PRG14__9a3c
 ;
-USHORT_ARRAY_PRG14__9a4f:                   ; [$9a4f]
-    dw FUN_PRG14__9a57-1                    ; [0]:
-    dw FUN_PRG14__9a7a-1                    ; [1]:
-    dw FUN_PRG14__9a7a-1                    ; [2]:
-    dw FUN_PRG14__9a57-1                    ; [3]:
+MAYBE_BODY_HANDLERS:                        ; [$9a4f]
+    dw Maybe_BodyHandler__9a57-1            ; [0]:
+    dw Maybe_BodyHandler__9a7a-1            ; [1]:
+    dw Maybe_BodyHandler__9a7a-1            ; [2]:
+    dw Maybe_BodyHandler__9a57-1            ; [3]:
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9a57
+; TODO: Document Maybe_BodyHandler__9a57
 ;
 ; INPUTS:
 ;     Y
@@ -7071,12 +7087,12 @@ USHORT_ARRAY_PRG14__9a4f:                   ; [$9a4f]
 ;     TODO
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG14__9a4f [$PRG14::9a4f]
-;     USHORT_ARRAY_PRG14__9a4f [$PRG14::9a55]
+;     MAYBE_BODY_HANDLERS [$PRG14::9a4f]
+;     MAYBE_BODY_HANDLERS [$PRG14::9a55]
 ;============================================================================
-FUN_PRG14__9a57:                            ; [$9a57]
+Maybe_BodyHandler__9a57:                    ; [$9a57]
     JSR FUN_PRG14__9a87
-    LDX #$9a91,Y
+    LDX $9a91,Y
     DEX
     INC Sprite12BodyPartHandler,X
 
@@ -7094,7 +7110,7 @@ FUN_PRG14__9a57:                            ; [$9a57]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__9a7a
+;     Maybe_BodyHandler__9a7a
 ;============================================================================
 FUN_PRG14__9a61:                            ; [$9a61]
     LDX a:CurrentSpriteIndex
@@ -7111,7 +7127,7 @@ FUN_PRG14__9a61:                            ; [$9a61]
     RTS
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9a7a
+; TODO: Document Maybe_BodyHandler__9a7a
 ;
 ; INPUTS:
 ;     Y
@@ -7120,12 +7136,12 @@ FUN_PRG14__9a61:                            ; [$9a61]
 ;     TODO
 ;
 ; XREFS:
-;     USHORT_ARRAY_PRG14__9a4f [$PRG14::9a51]
-;     USHORT_ARRAY_PRG14__9a4f [$PRG14::9a53]
+;     MAYBE_BODY_HANDLERS [$PRG14::9a51]
+;     MAYBE_BODY_HANDLERS [$PRG14::9a53]
 ;============================================================================
-FUN_PRG14__9a7a:                            ; [$9a7a]
+Maybe_BodyHandler__9a7a:                    ; [$9a7a]
     JSR FUN_PRG14__9a87
-    LDX #$9a99,Y
+    LDX $9a99,Y
     DEX
     DEC Sprite12BodyPartHandler,X
     JMP FUN_PRG14__9a61
@@ -7140,8 +7156,8 @@ FUN_PRG14__9a7a:                            ; [$9a7a]
 ;     A
 ;
 ; XREFS:
-;     FUN_PRG14__9a57
-;     FUN_PRG14__9a7a
+;     Maybe_BodyHandler__9a57
+;     Maybe_BodyHandler__9a7a
 ;============================================================================
 FUN_PRG14__9a87:                            ; [$9a87]
     LDA CurrentSprites_BehaviorData2,X
@@ -7154,7 +7170,7 @@ FUN_PRG14__9a87:                            ; [$9a87]
 
 ;
 ; XREFS:
-;     FUN_PRG14__9a57
+;     Maybe_BodyHandler__9a57
 ;
 BYTE_ARRAY_PRG14__9a91:                     ; [$9a91]
     db $00                                  ; [0]:
@@ -7168,7 +7184,7 @@ BYTE_ARRAY_PRG14__9a91:                     ; [$9a91]
 
 ;
 ; XREFS:
-;     FUN_PRG14__9a7a
+;     Maybe_BodyHandler__9a7a
 ;
 BYTE_ARRAY_PRG14__9a99:                     ; [$9a99]
     db $00                                  ; [0]:
@@ -7238,7 +7254,7 @@ FUN_PRG14__9ac6:                            ; [$9ac6]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_Enemy_Unused18
+; TODO: Document SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart
 ;
 ; INPUTS:
 ;     X
@@ -7249,7 +7265,7 @@ FUN_PRG14__9ac6:                            ; [$9ac6]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::80ab]
 ;============================================================================
-SpriteUpdateHandler_Enemy_Unused18:         ; [$9adc]
+SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart: ; [$9adc]
     JSR CurrentSprite_UpdateFlipMask
     LDA #$04
     JSR Sprite_EnterNextAppearancePhase
@@ -7258,7 +7274,7 @@ SpriteUpdateHandler_Enemy_Unused18:         ; [$9adc]
     STA Maybe_Arg_CurrentSprite_PosX
     LDA a:Sprite12BodyPartHandler_3_
     STA Maybe_Arg_CurrentSprite_PosY
-    LDA CurrentSprites_PPUAddrs,X
+    LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA #$04
     JSR Sprite_EnterNextAppearancePhase
@@ -7267,7 +7283,7 @@ SpriteUpdateHandler_Enemy_Unused18:         ; [$9adc]
     STA Maybe_Arg_CurrentSprite_PosX
     LDA a:Sprite12BodyPartHandler_4_
     STA Maybe_Arg_CurrentSprite_PosY
-    LDA CurrentSprites_PPUAddrs,X
+    LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA #$04
     JSR Sprite_EnterNextAppearancePhase
@@ -7276,7 +7292,7 @@ SpriteUpdateHandler_Enemy_Unused18:         ; [$9adc]
     STA Maybe_Arg_CurrentSprite_PosX
     LDA a:Sprite12BodyPartHandler_5_
     STA Maybe_Arg_CurrentSprite_PosY
-    LDA CurrentSprites_PPUAddrs,X
+    LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA CurrentSprites_BehaviorData3,X
     BNE @LAB_PRG14__9b36
@@ -7320,7 +7336,7 @@ SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos: ; [$9b45]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$9b81,Y
+    ADC @_return+1,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -7329,7 +7345,7 @@ SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos: ; [$9b45]
     JSR Sprite_CastMagic
 
   @LAB_PRG14__9b68:                         ; [$9b68]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return
     LDA #$01
@@ -7337,7 +7353,7 @@ SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos: ; [$9b45]
     LDA #$00
     STA CurrentSprites_BehaviorData2,X
     STA CurrentSprites_BehaviorData3,X
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
 
   @_return:                                 ; [$9b80]
     RTS
@@ -7383,7 +7399,7 @@ SpriteBehavior_Ripasheiku:                  ; [$9b83]
     JMP @LAB_PRG14__9c0e
 
   @LAB_PRG14__9ba8:                         ; [$9ba8]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return
     INC CurrentSprites_Phases,X
@@ -7438,7 +7454,7 @@ SpriteBehavior_Ripasheiku:                  ; [$9b83]
     LDA #$ff
     STA CurrentSprites_BehaviorData3,X
     INC CurrentSprites_Phases,X
-    JMP SpriteAction_FacePlayerX
+    JMP BScript_Action_FacePlayerX
 
   @LAB_PRG14__9c0e:                         ; [$9c0e]
     JSR Sprite_MoveHorizOneBlockOrTurnAround
@@ -7462,7 +7478,7 @@ SpriteBehavior_Ripasheiku:                  ; [$9b83]
     STA CurrentSprites_BehaviorData2,X
     STA CurrentSprites_BehaviorData3,X
     STA CurrentSprites_InternalBehaviorStates,X
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
 
   @_return3:                                ; [$9c42]
     RTS
@@ -7576,7 +7592,7 @@ SpriteBehavior_Borabohra:                   ; [$9c89]
     CMP #$14
     BCC @_return1
     INC CurrentSprites_Phases,X
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
 
   @_return1:                                ; [$9cb4]
     RTS
@@ -7591,7 +7607,7 @@ SpriteBehavior_Borabohra:                   ; [$9c89]
     INC CurrentSprites_BehaviorData2,X
     AND #$7f
     BNE @_return2
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
 
   @_return2:                                ; [$9ccf]
     RTS
@@ -7666,11 +7682,11 @@ SpriteBehavior_Pakukame:                    ; [$9cf2]
     BCC @_return1
     JSR Sprites_HasMaxOnScreen
     BCS @_return1
-    JSR FUN_PRG14__9d78
+    JSR SpriteBehavior_Pakukame__9d78
     BCS @_return1
     INC CurrentSprites_Phases,X
     LDA #$12
-    JSR #$d0e4
+    JSR $d0e4
 
   @_return1:                                ; [$9d2a]
     RTS
@@ -7702,19 +7718,19 @@ SpriteBehavior_Pakukame:                    ; [$9cf2]
     ADC #$08
     STA CurrentSprites_XPos_Full,Y
     LDA #$9e
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     LDA #$00
     STA CurrentSprites_Flags,Y
     LDA #$09
     STA CurrentSprites_Entities,Y
     TAX
-    LDA #$b5a9,X
+    LDA SPRITE_ENTITIES_HP,X
     STA CurrentSprites_HP,Y
     LDX a:CurrentSpriteIndex
     JMP Sprite_Maybe_ResetState
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9d78
+; TODO: Document SpriteBehavior_Pakukame__9d78
 ;
 ; INPUTS:
 ;     None.
@@ -7725,7 +7741,7 @@ SpriteBehavior_Pakukame:                    ; [$9cf2]
 ; XREFS:
 ;     SpriteBehavior_Pakukame
 ;============================================================================
-FUN_PRG14__9d78:                            ; [$9d78]
+SpriteBehavior_Pakukame__9d78:              ; [$9d78]
     LDY #$07
     LDA #$00
     STA Temp_00
@@ -7767,7 +7783,7 @@ SpriteUpdateHandler_Boss_Pakukame:          ; [$9d94]
     DEY
 
   @LAB_PRG14__9d9f:                         ; [$9d9f]
-    LDA #$9da5,Y
+    LDA $9da5,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -7813,7 +7829,7 @@ SpriteBehavior_Zorugeriru:                  ; [$9da9]
     BNE @_return1
     JSR Sprites_HasMaxOnScreen
     BCS @_return1
-    JSR FUN_PRG14__9df7
+    JSR SpriteBehavior_Zorugeriru__9df7
     BCS @_return1
     INC CurrentSprites_Phases,X
     LDA #$00
@@ -7830,13 +7846,13 @@ SpriteBehavior_Zorugeriru:                  ; [$9da9]
     INC CurrentSprites_Phases,X
     LDA #$3c
     STA CurrentSprites_BehaviorData2,X
-    JMP FUN_PRG14__9e13
+    JMP SpriteBehavior_Zorugeriru__9e13
 
   @_return2:                                ; [$9df6]
     RTS
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9df7
+; TODO: Document SpriteBehavior_Zorugeriru__9df7
 ;
 ; INPUTS:
 ;     None.
@@ -7847,7 +7863,7 @@ SpriteBehavior_Zorugeriru:                  ; [$9da9]
 ; XREFS:
 ;     SpriteBehavior_Zorugeriru
 ;============================================================================
-FUN_PRG14__9df7:                            ; [$9df7]
+SpriteBehavior_Zorugeriru__9df7:            ; [$9df7]
     LDY #$07
     LDA #$00
     STA Temp_00
@@ -7870,13 +7886,13 @@ FUN_PRG14__9df7:                            ; [$9df7]
 
     ;
     ; XREFS:
-    ;     FUN_PRG14__9e13
+    ;     SpriteBehavior_Zorugeriru__9e13
     ;
 RETURN_9E12:                                ; [$9e12]
     RTS
 
 ;============================================================================
-; TODO: Document FUN_PRG14__9e13
+; TODO: Document SpriteBehavior_Zorugeriru__9e13
 ;
 ; INPUTS:
 ;     X
@@ -7888,7 +7904,7 @@ RETURN_9E12:                                ; [$9e12]
 ; XREFS:
 ;     SpriteBehavior_Zorugeriru
 ;============================================================================
-FUN_PRG14__9e13:                            ; [$9e13]
+SpriteBehavior_Zorugeriru__9e13:            ; [$9e13]
     JSR Sprites_HasMaxOnScreen
     BCS RETURN_9E12
     LDA #$03
@@ -7914,8 +7930,8 @@ FUN_PRG14__9e13:                            ; [$9e13]
     STA CurrentSprites_XPos_Full,Y
     LDA #$20
     STA CurrentSprites_YPos,Y
-    LDA CurrentSprites_PPUAddrs,X
-    STA CurrentSprites_PPUAddrs,Y
+    LDA CurrentSprites_PPUOffsets,X
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
 ;============================================================================
@@ -7944,7 +7960,7 @@ SpriteUpdateHandler_Boss_Zorugeriru:        ; [$9e4f]
     TAY
 
   @LAB_PRG14__9e63:                         ; [$9e63]
-    LDA #$9e69,Y
+    LDA $9e69,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -8005,7 +8021,7 @@ SpriteBehavior_Garbled3:                    ; [$9e6d]
     LDA #$05
     STA CurrentSprites_BehaviorData2,X
     LDA #$07
-    JSR #$d0e4
+    JSR $d0e4
 
   @_return1:                                ; [$9ebb]
     RTS
@@ -8151,7 +8167,7 @@ SpriteBehavior_KingGrieve_9f65:             ; [$9f65]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$9f9c,Y
+    ADC $9f9c,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -8177,7 +8193,7 @@ SpriteBehavior_KingGrieve_9f65:             ; [$9f65]
 ;     SpriteBehavior_KingGrieve_9f65
 ;============================================================================
 SpriteBehavior_KingGrieve_9f86:             ; [$9f86]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @LAB_PRG14__9f9b
     INC CurrentSprites_Phases,X
@@ -8257,7 +8273,7 @@ SpriteUpdateHandler_Boss_KingGrieve:        ; [$9fc4]
     TAY
 
   @LAB_PRG14__9fd9:                         ; [$9fd9]
-    LDA #$9fdf,Y
+    LDA $9fdf,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -8299,13 +8315,13 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
     STA CurrentSprites_Phases,X
     LDA #$14
     STA CurrentSprites_BehaviorData2,X
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     JSR Sprite_SetBehaviorReady
     LDA #$0a
     STA CurrentMusic
 
   @LAB_PRG14__a007:                         ; [$a007]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     LDA CurrentSprites_Phases,X
     LSR A
     BCS @LAB_PRG14__a053
@@ -8333,7 +8349,7 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
   @LAB_PRG14__a035:                         ; [$a035]
     PLA
     TAY
-    LDA #$a064,Y
+    LDA @_return+1,Y
     STA a:Arg_DeltaX_Full
     LDA #$00
     STA a:Arg_DeltaX_Frac
@@ -8348,7 +8364,7 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
     RTS
 
   @LAB_PRG14__a053:                         ; [$a053]
-    JSR SpriteAction_FacePlayerX
+    JSR BScript_Action_FacePlayerX
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return
     INC CurrentSprites_Phases,X
@@ -8409,7 +8425,7 @@ FUN_PRG14__a077:                            ; [$a077]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$a091,Y
+    ADC $a091,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -8426,7 +8442,7 @@ BYTE_ARRAY_PRG14__a091:                     ; [$a091]
     db $20                                  ; [1]:
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a093
+; TODO: Document SpriteBehavior_ExecutionHood__a093
 ;
 ; INPUTS:
 ;     X
@@ -8438,12 +8454,12 @@ BYTE_ARRAY_PRG14__a091:                     ; [$a091]
 ; XREFS:
 ;     SpriteBehavior_ExecutionHood
 ;============================================================================
-FUN_PRG14__a093:                            ; [$a093]
+SpriteBehavior_ExecutionHood__a093:         ; [$a093]
     JSR Sprites_HasMaxOnScreen
     BCS RETURN_A0CA
     LDA CurrentSprites_YPos,X
     STA CurrentSprites_YPos,Y
-    JMP FUN_PRG14__a0ad
+    JMP SpriteBehavior_ExecutionHood__a0ad
 
 ;============================================================================
 ; TODO: Document FUN_PRG14__a0a0
@@ -8473,7 +8489,7 @@ FUN_PRG14__a0a0:                            ; [$a0a0]
     ;
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a0ad
+; TODO: Document SpriteBehavior_ExecutionHood__a0ad
 ;
 ; INPUTS:
 ;     X
@@ -8483,9 +8499,9 @@ FUN_PRG14__a0a0:                            ; [$a0a0]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__a093
+;     SpriteBehavior_ExecutionHood__a093
 ;============================================================================
-FUN_PRG14__a0ad:                            ; [$a0ad]
+SpriteBehavior_ExecutionHood__a0ad:         ; [$a0ad]
     LDA #$51
     STA CurrentSprites_Entities,Y
     LDA CurrentSprites_XPos_Full,X
@@ -8496,13 +8512,13 @@ FUN_PRG14__a0ad:                            ; [$a0ad]
     AND #$01
     STA CurrentSprites_Flags,Y
     LDA #$00
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
     ;
     ; XREFS:
-    ;     FUN_PRG14__a093
     ;     FUN_PRG14__a0a0
+    ;     SpriteBehavior_ExecutionHood__a093
     ;
 RETURN_A0CA:                                ; [$a0ca]
     RTS
@@ -8539,7 +8555,7 @@ SpriteBehavior_EnemyMagic:                  ; [$a0cb]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_TODO_Garbled_81
+; TODO: Document SpriteUpdateHandler_Magic_81
 ;
 ; INPUTS:
 ;     X
@@ -8550,7 +8566,7 @@ SpriteBehavior_EnemyMagic:                  ; [$a0cb]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::8129]
 ;============================================================================
-SpriteUpdateHandler_TODO_Garbled_81:        ; [$a0e8]
+SpriteUpdateHandler_Magic_81:               ; [$a0e8]
     LDA #$00
     STA CurrentSprite_FlipMask
     LDA a:SpriteUpdateCounter
@@ -8586,7 +8602,7 @@ Sprite_CastMagic:                           ; [$a0f6]
     AND #$01
     STA CurrentSprites_Flags,Y
     LDA #$80
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
   @_return:                                 ; [$a11c]
@@ -8653,7 +8669,7 @@ FUN_PRG14__a12d:                            ; [$a12d]
     AND #$01
     STA CurrentSprites_Flags,Y
     LDA #$00
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
   @_return:                                 ; [$a153]
@@ -8724,7 +8740,7 @@ SpriteBehavior_Unknown_29:                  ; [$a154]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_TODO_Unknown_83
+; TODO: Document SpriteUpdateHandler_Magic_83
 ;
 ; INPUTS:
 ;     X
@@ -8735,7 +8751,7 @@ SpriteBehavior_Unknown_29:                  ; [$a154]
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::812d]
 ;============================================================================
-SpriteUpdateHandler_TODO_Unknown_83:        ; [$a1c2]
+SpriteUpdateHandler_Magic_83:               ; [$a1c2]
     LDA #$00
     STA CurrentSprite_FlipMask
     LDA CurrentSprites_InternalBehaviorStates,X
@@ -8765,7 +8781,7 @@ FUN_PRG14__a1cc:                            ; [$a1cc]
     ORA #$80
     STA CurrentSprites_Flags,Y
     LDA #$00
-    STA CurrentSprites_PPUAddrs,Y
+    STA CurrentSprites_PPUOffsets,Y
     JMP Sprite_Maybe_ResetState
 
   @_return:                                 ; [$a1f4]
@@ -8803,10 +8819,10 @@ SpriteUpdateHandler_EnemyMagic:             ; [$a1f5]
 ;
 ; XREFS:
 ;     BScript_Action_CastMagic
-;     FUN_PRG14__9e13
-;     FUN_PRG14__a0ad
 ;     FUN_PRG14__a12d
+;     SpriteBehavior_ExecutionHood__a0ad
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_Zorugeriru__9e13
 ;     Sprite_CastMagic
 ;============================================================================
 Sprite_Maybe_ResetState:                    ; [$a202]
@@ -8815,15 +8831,15 @@ Sprite_Maybe_ResetState:                    ; [$a202]
     LDA CurrentSprites_Entities,Y
     ASL A
     TAX
-    LDA #$ad2d,X
+    LDA SPRITE_BSCRIPTS,X
     STA CurrentSprites_BehaviorAddrs_L,Y
-    LDA #$ad2e,X
+    LDA SPRITE_BSCRIPTS+1,X
     STA CurrentSprites_BehaviorAddrs_U,Y
     LDA #$ff
     STA CurrentSprites_Behaviors,Y
     STA CurrentSprites_HitByMagicBehavior,Y
     LDX CurrentSprites_Entities,Y
-    LDA #$b4df,X
+    LDA SPRITE_ENTITIES_HITBOX_TYPES,X
     STA CurrentSprites_HitBoxTypes,Y
     LDA #$00
     STA CurrentSprites_Phases,Y
@@ -8849,13 +8865,13 @@ Sprite_Maybe_ResetState:                    ; [$a202]
 ;
 ; XREFS:
 ;     BScript_Action_CastMagic
-;     FUN_PRG14__9e13
-;     FUN_PRG14__a093
 ;     FUN_PRG14__a0a0
 ;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
+;     SpriteBehavior_ExecutionHood__a093
 ;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_Zorugeriru
+;     SpriteBehavior_Zorugeriru__9e13
 ;     Sprite_CastMagic
 ;     Sprite_HandleDeathDropIfPossible
 ;============================================================================
@@ -9013,7 +9029,7 @@ SpriteUpdateHandler_NPC_Walking:            ; [$a26b]
     TAY
 
   @LAB_PRG14__a280:                         ; [$a280]
-    LDA #$a286,Y
+    LDA $a286,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -9147,7 +9163,7 @@ SpriteUpdateHandler_NPC_King:               ; [$a2be]
     LSR A
     AND #$01
     CLC
-    ADC #$a2d6,Y
+    ADC $a2d6,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -9344,21 +9360,21 @@ SpriteUpdateHandler_Bread:                  ; [$a313]
 ;============================================================================
 SpriteBehavior_Fountain:                    ; [$a31e]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a326
+    BNE @_checkQuest
     JSR Sprites_MaybeResetPhaseAndEnable
 
-  @LAB_PRG14__a326:                         ; [$a326]
+  @_checkQuest:                             ; [$a326]
     LDA a:Quests
     AND #$07
     CMP #$07
-    BNE @LAB_PRG14__a332
+    BNE @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a332:                         ; [$a332]
+  @_setVisible:                             ; [$a332]
     JMP Sprite_SetVisible
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler_Deco_Fountain
+; TODO: Document SpriteUpdateHandler_Effect_Fountain
 ;
 ; INPUTS:
 ;     X
@@ -9368,9 +9384,9 @@ SpriteBehavior_Fountain:                    ; [$a31e]
 ;
 ; XREFS:
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::812b]
-;     SpriteUpdateHandler__a5d2
+;     SpriteUpdateHandler_Effect_Spring
 ;============================================================================
-SpriteUpdateHandler_Deco_Fountain:          ; [$a335]
+SpriteUpdateHandler_Effect_Fountain:        ; [$a335]
     LDA #$00
     STA CurrentSprite_FlipMask
     LDA a:SpriteUpdateCounter
@@ -9378,14 +9394,14 @@ SpriteUpdateHandler_Deco_Fountain:          ; [$a335]
     LSR A
     AND #$03
     TAY
-    LDA #$a347,Y
+    LDA SPRITE_FOUNTAIN_PHASES,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
 ; XREFS:
-;     SpriteUpdateHandler_Deco_Fountain
+;     SpriteUpdateHandler_Effect_Fountain
 ;
-BYTE_ARRAY_PRG14__a347:                     ; [$a347]
+SPRITE_FOUNTAIN_PHASES:                     ; [$a347]
     db $04                                  ; [0]:
     db $05                                  ; [1]:
     db $06                                  ; [2]:
@@ -9428,32 +9444,32 @@ SpriteUpdateHandler_Item_Special:           ; [$a34b]
 ;============================================================================
 SpriteBehavior_BattleSuitDroppedByZoradohna: ; [$a354]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a377
+    BNE @_checkOnScreen
     LDA a:SelectedArmor
     CMP #$03
     BEQ Sprites_ClearAllEntities
     LDY a:NumberOfArmors
 
-  @LAB_PRG14__a363:                         ; [$a363]
+  @_checkArmorLoop:                         ; [$a363]
     DEY
-    BMI @LAB_PRG14__a36f
+    BMI @_setReady
     LDA ArmorInventory,Y
     CMP #$03
     BEQ Sprites_ClearAllEntities
-    BNE @LAB_PRG14__a363
+    BNE @_checkArmorLoop
 
-  @LAB_PRG14__a36f:                         ; [$a36f]
+  @_setReady:                               ; [$a36f]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a377:                         ; [$a377]
+  @_checkOnScreen:                          ; [$a377]
     LDA #$2e
-    JSR #$efe6
-    BCC @LAB_PRG14__a381
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a381:                         ; [$a381]
+  @_setVisible:                             ; [$a381]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -9470,32 +9486,32 @@ SpriteBehavior_BattleSuitDroppedByZoradohna: ; [$a354]
 ;============================================================================
 SpriteBehavior_BattleHelmetDroppedByZoradohna: ; [$a384]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a3a7
+    BNE @_checkOnScreen
     LDA a:SelectedShield
     CMP #$03
     BEQ Sprites_ClearAllEntities
     LDY a:NumberOfShields
 
-  @LAB_PRG14__a393:                         ; [$a393]
+  @_checkShieldLoop:                        ; [$a393]
     DEY
-    BMI @LAB_PRG14__a39f
+    BMI @_setReady
     LDA ShieldInventory,Y
     CMP #$03
     BEQ Sprites_ClearAllEntities
-    BNE @LAB_PRG14__a393
+    BNE @_checkShieldLoop
 
-  @LAB_PRG14__a39f:                         ; [$a39f]
+  @_setReady:                               ; [$a39f]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a3a7:                         ; [$a3a7]
+  @_checkOnScreen:                          ; [$a3a7]
     LDA #$2e
-    JSR #$efe6
-    BCC @LAB_PRG14__a3b1
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a3b1:                         ; [$a3b1]
+  @_setVisible:                             ; [$a3b1]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -9536,32 +9552,32 @@ Sprites_ClearAllEntities:                   ; [$a3b4]
 ;============================================================================
 SpriteBehavior_DragonSlayerDroppedByKingGrieve: ; [$a3bf]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a3e2
+    BNE @_checkOnScreen
     LDA a:Player_CurWeapon
     CMP #$03
     BEQ Sprites_ClearAllEntities
     LDY a:NumberOfWeapons
 
-  @LAB_PRG14__a3ce:                         ; [$a3ce]
+  @_checkWeaponLoop:                        ; [$a3ce]
     DEY
-    BMI @LAB_PRG14__a3da
+    BMI @_setReady
     LDA WeaponInventory,Y
     CMP #$03
     BEQ Sprites_ClearAllEntities
-    BNE @LAB_PRG14__a3ce
+    BNE @_checkWeaponLoop
 
-  @LAB_PRG14__a3da:                         ; [$a3da]
+  @_setReady:                               ; [$a3da]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a3e2:                         ; [$a3e2]
+  @_checkOnScreen:                          ; [$a3e2]
     LDA #$32
-    JSR #$efe6
-    BCC @LAB_PRG14__a3ec
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a3ec:                         ; [$a3ec]
+  @_setVisible:                             ; [$a3ec]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -9578,24 +9594,24 @@ SpriteBehavior_DragonSlayerDroppedByKingGrieve: ; [$a3bf]
 ;============================================================================
 SpriteBehavior_MattockDroppedFromRipasheiku: ; [$a3ef]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a406
+    BNE @_checkOnScreen
     LDA a:Quests
     AND #$10
-    BEQ @LAB_PRG14__a3fe
+    BEQ @_setReady
     JMP Sprites_Remove
 
-  @LAB_PRG14__a3fe:                         ; [$a3fe]
+  @_setReady:                               ; [$a3fe]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a406:                         ; [$a406]
+  @_checkOnScreen:                          ; [$a406]
     LDA #$2d
-    JSR #$efe6
-    BCC @LAB_PRG14__a410
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a410:                         ; [$a410]
+  @_setVisible:                             ; [$a410]
     JMP Sprite_SetVisible
 
 
@@ -9616,24 +9632,24 @@ SpriteBehavior_MattockDroppedFromRipasheiku: ; [$a3ef]
 SpriteBehavior_WingBootsDroppedByZorugeriru: ; [$a413]
     JSR Sprite_IsBehaviorNotReady           ; Is the sprite behavior
                                             ; disabled?
-    BNE @LAB_PRG14__a42a
+    BNE @_checkOnScreen
     LDA a:Quests
     AND #$08
-    BEQ @LAB_PRG14__a422
+    BEQ @_setReady
     JMP Sprites_Remove
 
-  @LAB_PRG14__a422:                         ; [$a422]
+  @_setReady:                               ; [$a422]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a42a:                         ; [$a42a]
+  @_checkOnScreen:                          ; [$a42a]
     LDA #$31
-    JSR #$efe6
-    BCC @LAB_PRG14__a434
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a434:                         ; [$a434]
+  @_setVisible:                             ; [$a434]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -9650,24 +9666,24 @@ SpriteBehavior_WingBootsDroppedByZorugeriru: ; [$a413]
 ;============================================================================
 SpriteBehavior_BlackOnyxDropFromZoradohna:  ; [$a437]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a44e
+    BNE @_checkOnScreen
     LDA a:SpecialItems
     AND #$01
-    BEQ @LAB_PRG14__a446
+    BEQ @_setReady
     JMP Sprites_Remove
 
-  @LAB_PRG14__a446:                         ; [$a446]
+  @_setReady:                               ; [$a446]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a44e:                         ; [$a44e]
+  @_checkOnScreen:                          ; [$a44e]
     LDA #$2e
-    JSR #$efe6
-    BCC @LAB_PRG14__a458
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a458:                         ; [$a458]
+  @_setVisible:                             ; [$a458]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -9684,24 +9700,24 @@ SpriteBehavior_BlackOnyxDropFromZoradohna:  ; [$a437]
 ;============================================================================
 SpriteBehavior_PendantDroppedFromRipasheiku: ; [$a45b]
     JSR Sprite_IsBehaviorNotReady
-    BNE @LAB_PRG14__a472
+    BNE @_checkOnScreen
     LDA a:SpecialItems
     AND #$02
-    BEQ @LAB_PRG14__a46a
+    BEQ @_setReady
     JMP Sprites_Remove
 
-  @LAB_PRG14__a46a:                         ; [$a46a]
+  @_setReady:                               ; [$a46a]
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_SetBehaviorReady
 
-  @LAB_PRG14__a472:                         ; [$a472]
+  @_checkOnScreen:                          ; [$a472]
     LDA #$2d
-    JSR #$efe6
-    BCC @LAB_PRG14__a47c
+    JSR $efe6
+    BCC @_setVisible
     JMP Sprites_HideSprite
 
-  @LAB_PRG14__a47c:                         ; [$a47c]
+  @_setVisible:                             ; [$a47c]
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -10075,7 +10091,7 @@ Sprites_HasAnyEnemyOnScreen:                ; [$a53c]
     BEQ @_prepareNextLoop                   ; If it's set, jump to prepare
                                             ; for next loop.
     TAX                                     ; X = A
-    LDA #$b544,X                            ; A = Sprite category for entity
+    LDA SPRITE_CATEGORIES_BY_ENTITY,X       ; A = Sprite category for entity
                                             ; X
     BNE @_prepareNextLoop                   ; If not an enemy, jump to
                                             ; prepare for next loop.
@@ -10109,10 +10125,10 @@ SpriteBehavior_SpringOfFortress:            ; [$a558]
 
   @LAB_PRG14__a560:                         ; [$a560]
     LDA CurrentSprites_Phases,X
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     LDA a:Quests
     AND #$01
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -10134,10 +10150,10 @@ SpriteBehavior_SpringOfSky:                 ; [$a56f]
 
   @LAB_PRG14__a577:                         ; [$a577]
     LDA CurrentSprites_Phases,X
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     LDA a:Quests
     AND #$02
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     JMP Sprite_SetVisible
 
 ;============================================================================
@@ -10159,14 +10175,14 @@ SpriteBehavior_SpringOfJoker:               ; [$a586]
 
   @LAB_PRG14__a58e:                         ; [$a58e]
     LDA CurrentSprites_Phases,X
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     LDA a:Quests
     AND #$04
-    BNE FUN_PRG14__a59d
+    BNE SpriteBehavior_Springs_UpdateFlowing
     JMP Sprite_SetVisible
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a59d
+; TODO: Document SpriteBehavior_Springs_UpdateFlowing
 ;
 ; INPUTS:
 ;     X
@@ -10179,7 +10195,7 @@ SpriteBehavior_SpringOfJoker:               ; [$a586]
 ;     SpriteBehavior_SpringOfJoker
 ;     SpriteBehavior_SpringOfSky
 ;============================================================================
-FUN_PRG14__a59d:                            ; [$a59d]
+SpriteBehavior_Springs_UpdateFlowing:       ; [$a59d]
     JSR Sprites_HideSprite
     LDA CurrentSprites_Phases,X
     BNE @LAB_PRG14__a5b0
@@ -10203,8 +10219,8 @@ FUN_PRG14__a59d:                            ; [$a59d]
 
     ;
     ; XREFS:
-    ;     FUN_PRG14__a59d
-    ;     SpriteUpdateHandler__a5d2
+    ;     SpriteBehavior_Springs_UpdateFlowing
+    ;     SpriteUpdateHandler_Effect_Spring
     ;
 RETURN_A5CB:                                ; [$a5cb]
     RTS
@@ -10219,7 +10235,7 @@ RETURN_A5CB:                                ; [$a5cb]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__a59d
+;     SpriteBehavior_Springs_UpdateFlowing
 ;============================================================================
 Sprite_SetPhase2:                           ; [$a5cc]
     LDA #$02
@@ -10227,7 +10243,7 @@ Sprite_SetPhase2:                           ; [$a5cc]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteUpdateHandler__a5d2
+; TODO: Document SpriteUpdateHandler_Effect_Spring
 ;
 ; INPUTS:
 ;     X
@@ -10240,12 +10256,12 @@ Sprite_SetPhase2:                           ; [$a5cc]
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::814b]
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::814d]
 ;============================================================================
-SpriteUpdateHandler__a5d2:                  ; [$a5d2]
+SpriteUpdateHandler_Effect_Spring:          ; [$a5d2]
     LDA CurrentSprites_Phases,X
     BEQ RETURN_A5CB
     CMP #$01
     BEQ @LAB_PRG14__a5de
-    JMP SpriteUpdateHandler_Deco_Fountain
+    JMP SpriteUpdateHandler_Effect_Fountain
 
   @LAB_PRG14__a5de:                         ; [$a5de]
     JSR CurrentSprite_UpdateFlipMask
@@ -10344,7 +10360,7 @@ Sprites_UpdateBehavior:                     ; [$a66b]
     LDA a:DurationHourGlass
     BMI @LAB_PRG14__a679
     LDY CurrentSprites_Entities,X
-    LDA #$b544,Y
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y
     BNE @LAB_PRG14__a679
 
 
@@ -10364,8 +10380,8 @@ Sprites_UpdateBehavior:                     ; [$a66b]
     LDA CurrentSprites_BehaviorAddrs_L,X
     STA Sprites_ReadInfoAddr
     LDA CurrentSprites_BehaviorAddrs_U,X
-    STA Sprites_ReadInfoAddr.U
-    JSR Sprites_LoadNextOp
+    STA Sprites_ReadInfoAddr_U
+    JSR BScripts_LoadNextOp
     LDA CurrentSprites_Behaviors,X
     ASL A
     TAY
@@ -10375,9 +10391,9 @@ Sprites_UpdateBehavior:                     ; [$a66b]
     PHA
     LDA #$a0
     PHA
-    LDA #$a5e8,Y
+    LDA SPRITE_BEHAVIORS+1,Y
     PHA
-    LDA #$a5e7,Y
+    LDA SPRITE_BEHAVIORS,Y
     PHA
     RTS
 
@@ -10390,7 +10406,7 @@ Sprites_UpdateBehavior:                     ; [$a66b]
     LDX a:CurrentSpriteIndex
     LDA Sprites_ReadInfoAddr
     STA CurrentSprites_BehaviorAddrs_L,X
-    LDA Sprites_ReadInfoAddr.U
+    LDA Sprites_ReadInfoAddr_U
     STA CurrentSprites_BehaviorAddrs_U,X
 
     ;
@@ -10412,13 +10428,13 @@ RETURN_A6AE:                                ; [$a6ae]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__a91e
 ;     SpriteBehavior_Fall
 ;     SpriteBehavior_MoveVertically
 ;     SpriteBehavior_SomethingEyeball_17
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Wait
 ;     SpriteBehavior_WalkForward
+;     SpriteBehavior__a91e
 ;============================================================================
 Sprites_CountdownBehavior:                  ; [$a6af]
     LDA CurrentSprites_BehaviorArg1,X
@@ -10428,7 +10444,7 @@ Sprites_CountdownBehavior:                  ; [$a6af]
     JMP Sprite_FinishBehavior
 
 ;============================================================================
-; TODO: Document Sprites_LoadNextOp
+; TODO: Document BScripts_LoadNextOp
 ;
 ; INPUTS:
 ;     X
@@ -10437,26 +10453,26 @@ Sprites_CountdownBehavior:                  ; [$a6af]
 ;     A
 ;
 ; XREFS:
-;     SpriteOp_AddToSpriteData
+;     BScript_Op_AddToSpriteData
+;     BScript_Op_FinishBehavior
+;     BScript_Op_GoTo
+;     BScript_Op_SetPhase
 ;     SpriteOp_CheckDistanceToPlayer_X
 ;     SpriteOp_CheckDistanceToPlayer_Y
-;     SpriteOp_FinishBehavior
-;     SpriteOp_GoTo
-;     SpriteOp_SetPhase
 ;     Sprites_MaybeDisableAndGoTo
 ;     Sprites_Maybe_Skip2AndLoadNextAction
 ;     Sprites_UpdateBehavior
 ;============================================================================
-Sprites_LoadNextOp:                         ; [$a6bc]
+BScripts_LoadNextOp:                        ; [$a6bc]
     LDY #$00
     LDA (Sprites_ReadInfoAddr),Y
     CMP #$ff
     BEQ @LAB_PRG14__a6cf
     ASL A
     TAY
-    LDA #$a6d9,Y
+    LDA BSCRIPT_OP_HANDLERS+1,Y
     PHA
-    LDA #$a6d8,Y
+    LDA BSCRIPT_OP_HANDLERS,Y
     PHA
     RTS
 
@@ -10468,20 +10484,20 @@ Sprites_LoadNextOp:                         ; [$a6bc]
 
 ;
 ; XREFS:
-;     Sprites_LoadNextOp
+;     BScripts_LoadNextOp
 ;
-SPRITE_OPS:                                 ; [$a6d8]
-    dw SpriteOp_SwitchBehavior-1            ; [0]:
-    dw SpriteOp_MaybeDisableAndGoTo-1       ; [1]:
-    dw SpriteOp_RunAction-1                 ; [2]:
-    dw SpriteOp_CheckDistanceToPlayer-1     ; [3]:
-    dw SpriteOp_FinishBehavior-1            ; [4]:
-    dw SpriteOp_GoTo-1                      ; [5]:
-    dw SpriteOp_AddToSpriteData-1           ; [6]:
-    dw SpriteOp_SetPhase-1                  ; [7]:
+BSCRIPT_OP_HANDLERS:                        ; [$a6d8]
+    dw BScript_Op_SwitchBehavior-1          ; [0]:
+    dw BScript_Op_MaybeDisableAndGoTo-1     ; [1]:
+    dw BScript_Op_RunAction-1               ; [2]:
+    dw BScript_Op_CheckDistanceToPlayer-1   ; [3]:
+    dw BScript_Op_FinishBehavior-1          ; [4]:
+    dw BScript_Op_GoTo-1                    ; [5]:
+    dw BScript_Op_AddToSpriteData-1         ; [6]:
+    dw BScript_Op_SetPhase-1                ; [7]:
 
 ;============================================================================
-; TODO: Document SpriteOp_SetPhase
+; TODO: Document BScript_Op_SetPhase
 ;
 ; INPUTS:
 ;     X
@@ -10490,9 +10506,9 @@ SPRITE_OPS:                                 ; [$a6d8]
 ;     TODO
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6e6]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6e6]
 ;============================================================================
-SpriteOp_SetPhase:                          ; [$a6e8]
+BScript_Op_SetPhase:                        ; [$a6e8]
     LDA CurrentSprites_Behaviors,X
     BMI @LAB_PRG14__a6f0
     JMP RETURN_A771
@@ -10503,10 +10519,10 @@ SpriteOp_SetPhase:                          ; [$a6e8]
     STA CurrentSprites_Phases,X
     LDA #$02
     JSR Sprites_IncrementScriptAddr
-    JMP Sprites_LoadNextOp
+    JMP BScripts_LoadNextOp
 
 ;============================================================================
-; TODO: Document SpriteOp_SwitchBehavior
+; TODO: Document BScript_Op_SwitchBehavior
 ;
 ; INPUTS:
 ;     X
@@ -10515,9 +10531,9 @@ SpriteOp_SetPhase:                          ; [$a6e8]
 ;     TODO
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6d8]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6d8]
 ;============================================================================
-SpriteOp_SwitchBehavior:                    ; [$a6ff]
+BScript_Op_SwitchBehavior:                  ; [$a6ff]
     LDA CurrentSprites_Behaviors,X
     BMI @LAB_PRG14__a707
     JMP RETURN_A771
@@ -10543,7 +10559,7 @@ SpriteOp_SwitchBehavior:                    ; [$a6ff]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteOp_MaybeDisableAndGoTo
+; TODO: Document BScript_Op_MaybeDisableAndGoTo
 ;
 ; INPUTS:
 ;     X
@@ -10552,9 +10568,9 @@ SpriteOp_SwitchBehavior:                    ; [$a6ff]
 ;     TODO
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6da]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6da]
 ;============================================================================
-SpriteOp_MaybeDisableAndGoTo:               ; [$a72c]
+BScript_Op_MaybeDisableAndGoTo:             ; [$a72c]
     LDA CurrentSprites_Behaviors,X
     BMI Sprites_MaybeDisableAndGoTo
     JMP RETURN_A771
@@ -10569,7 +10585,7 @@ SpriteOp_MaybeDisableAndGoTo:               ; [$a72c]
 ;     TODO
 ;
 ; XREFS:
-;     SpriteOp_MaybeDisableAndGoTo
+;     BScript_Op_MaybeDisableAndGoTo
 ;============================================================================
 Sprites_MaybeDisableAndGoTo:                ; [$a734]
     LDA #$01
@@ -10579,14 +10595,14 @@ Sprites_MaybeDisableAndGoTo:                ; [$a734]
     PHA
     INY
     LDA (Sprites_ReadInfoAddr),Y
-    STA Sprites_ReadInfoAddr.U
+    STA Sprites_ReadInfoAddr_U
     PLA
     STA Sprites_ReadInfoAddr
     JSR Sprite_FinishBehavior
-    JMP Sprites_LoadNextOp
+    JMP BScripts_LoadNextOp
 
 ;============================================================================
-; TODO: Document SpriteOp_GoTo
+; TODO: Document BScript_Op_GoTo
 ;
 ; INPUTS:
 ;     X
@@ -10595,9 +10611,9 @@ Sprites_MaybeDisableAndGoTo:                ; [$a734]
 ;     TODO
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6e2]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6e2]
 ;============================================================================
-SpriteOp_GoTo:                              ; [$a74c]
+BScript_Op_GoTo:                            ; [$a74c]
     LDA CurrentSprites_Behaviors,X
     BMI @LAB_PRG14__a754
     JMP RETURN_A771
@@ -10610,27 +10626,27 @@ SpriteOp_GoTo:                              ; [$a74c]
     PHA
     INY
     LDA (Sprites_ReadInfoAddr),Y
-    STA Sprites_ReadInfoAddr.U
+    STA Sprites_ReadInfoAddr_U
     PLA
     STA Sprites_ReadInfoAddr
     LDA #$00
     STA CurrentSprites_Phases,X
     JSR Sprite_FinishBehavior
-    JMP Sprites_LoadNextOp
+    JMP BScripts_LoadNextOp
 
     ;
     ; XREFS:
-    ;     SpriteOp_GoTo
-    ;     SpriteOp_MaybeDisableAndGoTo
-    ;     SpriteOp_RunAction
-    ;     SpriteOp_SetPhase
-    ;     SpriteOp_SwitchBehavior
+    ;     BScript_Op_GoTo
+    ;     BScript_Op_MaybeDisableAndGoTo
+    ;     BScript_Op_RunAction
+    ;     BScript_Op_SetPhase
+    ;     BScript_Op_SwitchBehavior
     ;
 RETURN_A771:                                ; [$a771]
     RTS
 
 ;============================================================================
-; TODO: Document SpriteOp_RunAction
+; TODO: Document BScript_Op_RunAction
 ;
 ; INPUTS:
 ;     X
@@ -10639,9 +10655,9 @@ RETURN_A771:                                ; [$a771]
 ;     TODO
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6dc]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6dc]
 ;============================================================================
-SpriteOp_RunAction:                         ; [$a772]
+BScript_Op_RunAction:                       ; [$a772]
     LDA CurrentSprites_Behaviors,X
     BPL RETURN_A771
     LDY #$01
@@ -10652,9 +10668,9 @@ SpriteOp_RunAction:                         ; [$a772]
     PHA
     LDA #$8b
     PHA
-    LDA #$a795,Y
+    LDA BSCRIPT_ACTIONS+1,Y
     PHA
-    LDA #$a794,Y
+    LDA BSCRIPT_ACTIONS,Y
     PHA
     RTS
 
@@ -10670,20 +10686,22 @@ SpriteOp_RunAction:                         ; [$a772]
 Sprites_Maybe_Skip2AndLoadNextAction:       ; [$a78c]
     LDA #$02
     JSR Sprites_IncrementScriptAddr
-    JMP Sprites_LoadNextOp
+    JMP BScripts_LoadNextOp
 
 ;
 ; XREFS:
-;     SpriteOp_RunAction
+;     BScript_Op_RunAction
 ;
 BSCRIPT_ACTIONS:                            ; [$a794]
-    dw SpriteAction_FacePlayerX-1           ; [0]: Face Player (X)
-    dw SpriteAction_FlipXDirection-1        ; [1]: Flip X Direction
-    dw SpriteAction_FacePlayerY-1           ; [2]: Face Player (Y)
-    dw SpriteAction_FlipYDirection-1        ; [3]: Flip Y Direction
-    dw SpriteAction_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X Direction
-    dw SpriteAction_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y Direction
-    dw SpriteAction_RiseUp-1                ; [6]: Rise Up
+    dw BScript_Action_FacePlayerX-1         ; [0]: Face Player (X)
+    dw BScript_Action_FlipXDirection-1      ; [1]: Flip X Direction
+    dw BScript_Action_FacePlayerY-1         ; [2]: Face Player (Y)
+    dw BScript_Action_FlipYDirection-1      ; [3]: Flip Y Direction
+    dw BScript_Action_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X
+                                               ; Direction
+    dw BScript_Action_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y
+                                               ; Direction
+    dw BScript_Action_RiseUp-1              ; [6]: Rise Up
     dw BScript_Action_CastMagic-1           ; [7]: Cast Magic
 
 
@@ -10695,7 +10713,7 @@ BSCRIPT_ACTIONS:                            ; [$a794]
 ; XREFS:
 ;     BSCRIPT_ACTIONS [$PRG14::a7a0]
 ;============================================================================
-SpriteAction_RiseUp:                        ; [$a7a4]
+BScript_Action_RiseUp:                      ; [$a7a4]
     LDA CurrentSprites_Flags,X              ; Load the sprite's flags.
     AND #$7f                                ; Clear the Falling bit.
     STA CurrentSprites_Flags,X              ; Store it.
@@ -10712,8 +10730,8 @@ SpriteAction_RiseUp:                        ; [$a7a4]
 ;     BSCRIPT_ACTIONS [$PRG14::a79c]
 ;     SpriteBehavior_Lilith
 ;============================================================================
-SpriteAction_RandomlyFlipXDirection:        ; [$a7ad]
-    JSR #$ca6e                              ; Load a random value.
+BScript_Action_RandomlyFlipXDirection:      ; [$a7ad]
+    JSR $ca6e                               ; Load a random value.
     LDX a:CurrentSpriteIndex                ; X = Current sprite index.
     CMP #$80                                ; Is the random value < 128?
     BCS @_setFaceRight                      ; If so, jump to set facing
@@ -10739,8 +10757,8 @@ SpriteAction_RandomlyFlipXDirection:        ; [$a7ad]
 ; XREFS:
 ;     BSCRIPT_ACTIONS [$PRG14::a79e]
 ;============================================================================
-SpriteAction_RandomlyFlipYDirection:        ; [$a7c9]
-    JSR #$ca6e                              ; Load a random value.
+BScript_Action_RandomlyFlipYDirection:      ; [$a7c9]
+    JSR $ca6e                               ; Load a random value.
     LDX a:CurrentSpriteIndex                ; X = Current sprite index.
     CMP #$80                                ; Is the random value < 128?
     BCS @_setFalling                        ; If so, jump to set falling.
@@ -10773,19 +10791,21 @@ SpriteAction_RandomlyFlipYDirection:        ; [$a7c9]
 ;     4. Address to jump to if distance >= value (2 bytes)
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6de]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6de]
 ;============================================================================
-SpriteOp_CheckDistanceToPlayer:             ; [$a7e5]
+BScript_Op_CheckDistanceToPlayer:           ; [$a7e5]
     LDY #$01                                ; Y = 1 (op direction argument)
     LDA (Sprites_ReadInfoAddr),Y            ; Read the direction to check.
     ASL A                                   ; Convert to a word boundary for
                                             ; the lookup table.
     TAY                                     ; Y = A
-    LDA #$a7f5,Y                            ; Load the lower byte of the
-                                            ; subcommand address.
+    LDA SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS+1,Y ; Load the lower byte
+                                                       ; of the subcommand
+                                                       ; address.
     PHA                                     ; Push to the stack.
-    LDA #$a7f4,Y                            ; Load the upper byte of the
-                                            ; subcommand address.
+    LDA SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS,Y ; Load the upper byte of
+                                                     ; the subcommand
+                                                     ; address.
     PHA                                     ; Push to the stack.
     RTS
 
@@ -10796,12 +10816,12 @@ SpriteOp_CheckDistanceToPlayer:             ; [$a7e5]
 ; Keys correspond to the first argument to the op.
 ;
 ; XREFS:
-;     SpriteOp_CheckDistanceToPlayer
+;     BScript_Op_CheckDistanceToPlayer
 ;============================================================================
 
 ;
 ; XREFS:
-;     SpriteOp_CheckDistanceToPlayer
+;     BScript_Op_CheckDistanceToPlayer
 ;
 SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS: ; [$a7f4]
     dw SpriteOp_CheckDistanceToPlayer_X-1   ; [0]:
@@ -10833,7 +10853,7 @@ SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS: ; [$a7f4]
 ;
 ; CALLS:
 ;     Sprites_IncrementScriptAddr
-;     Sprites_LoadNextOp
+;     BScripts_LoadNextOp
 ;     Sprite_CalcDistanceXToPlayer
 ;
 ; XREFS:
@@ -10852,7 +10872,7 @@ SpriteOp_CheckDistanceToPlayer_X:           ; [$a7f8]
     ;
     LDA #$07                                ; 7 = bytes to skip.
     JSR Sprites_IncrementScriptAddr         ; Skip them.
-    JMP Sprites_LoadNextOp                  ; Load the next operation.
+    JMP BScripts_LoadNextOp                 ; Load the next operation.
 
 
     ;
@@ -10878,7 +10898,7 @@ SpriteOp_CheckDistanceToPlayer_X:           ; [$a7f8]
     PHA                                     ; Push to the stack.
     INY                                     ; Y++ (6)
     LDA (Sprites_ReadInfoAddr),Y            ; A = upper byte of jump address.
-    STA Sprites_ReadInfoAddr.U              ; Store as the new upper byte of
+    STA Sprites_ReadInfoAddr_U              ; Store as the new upper byte of
                                             ; the read address.
     PLA                                     ; Pop the lower byte.
     STA Sprites_ReadInfoAddr                ; Store as the new lower byte of
@@ -10896,7 +10916,7 @@ SpriteOp_CheckDistanceToPlayer_X:           ; [$a7f8]
     PHA                                     ; Push to the stack.
     INY                                     ; Y++ (4)
     LDA (Sprites_ReadInfoAddr),Y            ; A = upper byte of jump address.
-    STA Sprites_ReadInfoAddr.U              ; Store as the new upper byte of
+    STA Sprites_ReadInfoAddr_U              ; Store as the new upper byte of
                                             ; the read address.
     PLA                                     ; Pop the lower byte.
     STA Sprites_ReadInfoAddr                ; Store as the new lower byte of
@@ -10929,7 +10949,7 @@ SpriteOp_CheckDistanceToPlayer_X:           ; [$a7f8]
 ;
 ; CALLS:
 ;     Sprites_IncrementScriptAddr
-;     Sprites_LoadNextOp
+;     BScripts_LoadNextOp
 ;     Sprite_CalcDistanceYToPlayer
 ;
 ; XREFS:
@@ -10948,7 +10968,7 @@ SpriteOp_CheckDistanceToPlayer_Y:           ; [$a82a]
     ;
     LDA #$07                                ; 7 = bytes to skip.
     JSR Sprites_IncrementScriptAddr         ; Skip them.
-    JMP Sprites_LoadNextOp                  ; Load the next operation.
+    JMP BScripts_LoadNextOp                 ; Load the next operation.
 
 
     ;
@@ -10981,7 +11001,7 @@ SpriteOp_CheckDistanceToPlayer_Y:           ; [$a82a]
     PHA                                     ; Push to the stack.
     INY                                     ; Y++
     LDA (Sprites_ReadInfoAddr),Y            ; A = upper byte of jump address.
-    STA Sprites_ReadInfoAddr.U              ; Store as the new upper byte of
+    STA Sprites_ReadInfoAddr_U              ; Store as the new upper byte of
                                             ; the read address.
     PLA                                     ; Pop the lower byte.
     STA Sprites_ReadInfoAddr                ; Store as the new lower byte of
@@ -11014,9 +11034,9 @@ SpriteOp_CheckDistanceToPlayer_Y:           ; [$a82a]
 ;     2. Value to set (1 byte)
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6e4]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6e4]
 ;============================================================================
-SpriteOp_AddToSpriteData:                   ; [$a84f]
+BScript_Op_AddToSpriteData:                 ; [$a84f]
     ;
     ; Load the address from parameter 1.
     ;
@@ -11057,7 +11077,7 @@ SpriteOp_AddToSpriteData:                   ; [$a84f]
     ;
     LDA #$04                                ; A = 4 (number of bytes to skip)
     JSR Sprites_IncrementScriptAddr         ; Skip over those bytes.
-    JMP Sprites_LoadNextOp                  ; Load the next op.
+    JMP BScripts_LoadNextOp                 ; Load the next op.
 
 
 ;============================================================================
@@ -11070,13 +11090,13 @@ SpriteOp_AddToSpriteData:                   ; [$a84f]
 ; Arguments: None
 ;
 ; XREFS:
-;     SPRITE_OPS [$PRG14::a6e0]
+;     BSCRIPT_OP_HANDLERS [$PRG14::a6e0]
 ;============================================================================
-SpriteOp_FinishBehavior:                    ; [$a86e]
+BScript_Op_FinishBehavior:                  ; [$a86e]
     LDA #$01                                ; A = 1 (number of bytes to skip)
     JSR Sprites_IncrementScriptAddr         ; Skip over the byte.
     JSR Sprite_FinishBehavior               ; Finish the current behavior.
-    JMP Sprites_LoadNextOp                  ; Load the next op.
+    JMP BScripts_LoadNextOp                 ; Load the next op.
 
 
 ;============================================================================
@@ -11087,7 +11107,7 @@ SpriteOp_FinishBehavior:                    ; [$a86e]
 ;         The offset to increment by.
 ;
 ;     Sprites_ReadInfoAddr:
-;     #$cb:
+;     Sprites_ReadInfoAddr+1:
 ;         The current address of behavior information.
 ;
 ; OUTPUTS:
@@ -11095,6 +11115,11 @@ SpriteOp_FinishBehavior:                    ; [$a86e]
 ;         The new address of the behavior information.
 ;
 ; XREFS:
+;     BScript_Op_AddToSpriteData
+;     BScript_Op_FinishBehavior
+;     BScript_Op_GoTo
+;     BScript_Op_SetPhase
+;     BScript_Op_SwitchBehavior
 ;     SpriteBehavior_Hop
 ;     SpriteBehavior_MoveTowardPlayer
 ;     SpriteBehavior_MoveVertically
@@ -11102,13 +11127,8 @@ SpriteOp_FinishBehavior:                    ; [$a86e]
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_WalkForward
 ;     SpriteBehavior__a8d7
-;     SpriteOp_AddToSpriteData
 ;     SpriteOp_CheckDistanceToPlayer_X
 ;     SpriteOp_CheckDistanceToPlayer_Y
-;     SpriteOp_FinishBehavior
-;     SpriteOp_GoTo
-;     SpriteOp_SetPhase
-;     SpriteOp_SwitchBehavior
 ;     Sprites_MaybeDisableAndGoTo
 ;     Sprites_Maybe_Skip2AndLoadNextAction
 ;============================================================================
@@ -11118,10 +11138,10 @@ Sprites_IncrementScriptAddr:                ; [$a879]
                                             ; behavior address If overflow, C
                                             ; = 1
     STA Sprites_ReadInfoAddr                ; Store it.
-    LDA Sprites_ReadInfoAddr.U              ; A = upper byte of the behavior
+    LDA Sprites_ReadInfoAddr_U              ; A = upper byte of the behavior
                                             ; address
     ADC #$00                                ; Add carry, if set.
-    STA Sprites_ReadInfoAddr.U              ; Store it.
+    STA Sprites_ReadInfoAddr_U              ; Store it.
     RTS
 
 
@@ -11339,10 +11359,10 @@ Sprite_ClearFlags:                          ; [$a8a6]
 ;     TODO
 ;
 ; XREFS:
+;     BScript_Op_FinishBehavior
+;     BScript_Op_GoTo
 ;     SpriteBehavior_FlashScreenHitPlayer
 ;     SpriteBehavior_Hop
-;     SpriteOp_FinishBehavior
-;     SpriteOp_GoTo
 ;     Sprites_CountdownBehavior
 ;     Sprites_MaybeDisableAndGoTo
 ;     _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7
@@ -11460,7 +11480,6 @@ Sprites_IsSpriteHidden:                     ; [$a8c8]
 ;         The updated flags.
 ;
 ; XREFS:
-;     FUN_PRG14__a59d
 ;     SpriteBehavior_BattleHelmetDroppedByZoradohna
 ;     SpriteBehavior_BattleSuitDroppedByZoradohna
 ;     SpriteBehavior_BlackOnyxDropFromZoradohna
@@ -11469,6 +11488,7 @@ Sprites_IsSpriteHidden:                     ; [$a8c8]
 ;     SpriteBehavior_MattockDroppedFromRipasheiku
 ;     SpriteBehavior_Nash
 ;     SpriteBehavior_PendantDroppedFromRipasheiku
+;     SpriteBehavior_Springs_UpdateFlowing
 ;     SpriteBehavior_Tamazutsu
 ;     SpriteBehavior_WingBootsDroppedByZorugeriru
 ;     Sprite_ShowIfNoEnemies
@@ -11494,7 +11514,7 @@ Sprites_HideSprite:                         ; [$a8ce]
 ;============================================================================
 SpriteBehavior__a8d7:                       ; [$a8d7]
     JSR Sprite_IsBehaviorNotReady
-    BNE FUN_PRG14__a91e
+    BNE SpriteBehavior__a91e
     LDY #$00
     LDA (Sprites_ReadInfoAddr),Y
     STA CurrentSprites_BehaviorData2,X
@@ -11507,7 +11527,7 @@ SpriteBehavior__a8d7:                       ; [$a8d7]
     LDA CurrentSprites_Flags,X
     ORA #$02
     STA CurrentSprites_Flags,X
-    JMP FUN_PRG14__a91e
+    JMP SpriteBehavior__a91e
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_MoveTowardPlayer
@@ -11523,7 +11543,7 @@ SpriteBehavior__a8d7:                       ; [$a8d7]
 ;============================================================================
 SpriteBehavior_MoveTowardPlayer:            ; [$a8fc]
     JSR Sprite_IsBehaviorNotReady
-    BNE FUN_PRG14__a91e
+    BNE SpriteBehavior__a91e
     LDY #$00
     LDA (Sprites_ReadInfoAddr),Y
     STA CurrentSprites_BehaviorData2,X
@@ -11542,7 +11562,7 @@ SpriteBehavior_MoveTowardPlayer:            ; [$a8fc]
     ;
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a91e
+; TODO: Document SpriteBehavior__a91e
 ;
 ; INPUTS:
 ;     X
@@ -11554,7 +11574,7 @@ SpriteBehavior_MoveTowardPlayer:            ; [$a8fc]
 ;     SpriteBehavior_MoveTowardPlayer
 ;     SpriteBehavior__a8d7
 ;============================================================================
-FUN_PRG14__a91e:                            ; [$a91e]
+SpriteBehavior__a91e:                       ; [$a91e]
     JSR Sprites_SetCurrentSpriteCanMove
     BCC @LAB_PRG14__a92e
     JSR CurrentSprite_HandleFall
@@ -11600,7 +11620,7 @@ SpriteBehavior_WalkForward:                 ; [$a941]
   @LAB_PRG14__a95b:                         ; [$a95b]
     JSR Sprites_SetCurrentSpriteCanMove
     BCC @LAB_PRG14__a966
-    JSR SpriteAction_FlipXDirection
+    JSR BScript_Action_FlipXDirection
     JMP CurrentSprite_HandleFall
 
   @LAB_PRG14__a966:                         ; [$a966]
@@ -11737,7 +11757,7 @@ SpriteBehavior_Hop:                         ; [$a9de]
     AND #$7f
     STA CurrentSprites_Flags,X
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aa72,Y
+    LDA SPRITE_BEHAVIOUR_HOP_START_TICKS,Y
     STA CurrentSprites_BehaviorData3,X
 
   @LAB_PRG14__aa14:                         ; [$aa14]
@@ -11747,13 +11767,13 @@ SpriteBehavior_Hop:                         ; [$a9de]
     STA a:Arg_DeltaX_Frac
     JSR Sprites_Something_SomethingAndMoveHoriz
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aa77,Y
+    LDA SPRITE_BEHAVIOR_HOP_GRAVITY,Y
     TAY
     LDA CurrentSprites_BehaviorData3,X
     JSR Sprites_CalcYFromGravity
     PHA
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aa7c,Y
+    LDA SPRITE_BEHAVIOR_HOP_JUMP_STRENGTH,Y
     TAY
     PLA
     JSR Sprites_CalcVerticalSpriteMovement
@@ -11766,10 +11786,10 @@ SpriteBehavior_Hop:                         ; [$a9de]
   @LAB_PRG14__aa49:                         ; [$aa49]
     INC CurrentSprites_BehaviorData3,X
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aa77,Y
+    LDA SPRITE_BEHAVIOR_HOP_GRAVITY,Y
     TAY
     LDA CurrentSprites_BehaviorData3,X
-    AND #$83f7,Y
+    AND SPRITE_BEHAVIOR_HOP_PEAK_TICKS,Y
     BNE @_return
     LDA CurrentSprites_Flags,X
     BMI @LAB_PRG14__aa63
@@ -11778,12 +11798,12 @@ SpriteBehavior_Hop:                         ; [$a9de]
     ;
     ; Begin falling.
     ;
-    JMP SpriteAction_FlipYDirection
+    JMP BScript_Action_FlipYDirection
 
   @LAB_PRG14__aa63:                         ; [$aa63]
     LDY CurrentSprites_InternalBehaviorStates,X
     LDA CurrentSprites_BehaviorData3,X
-    CMP #$aa81,Y
+    CMP SPRITE_BEHAVIOR_HOP_GROUND_TICKS,Y
     BCC @_return
     DEC CurrentSprites_BehaviorData3,X
 
@@ -11872,26 +11892,26 @@ SpriteBehavior_SomethingZoradohna_18:       ; [$aa86]
     STA a:Arg_DeltaX_Frac
     JSR Sprite_MoveHorizAndTurnAroundIfNeeded
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aaf2,Y
+    LDA $aaf2,Y
     TAY
     LDA CurrentSprites_BehaviorData3,X
     JSR Sprites_CalcYFromGravity
     PHA
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aaf6,Y
+    LDA $aaf6,Y
     TAY
     PLA
     JSR Sprites_CalcVerticalSpriteMovement
     JSR Sprite_MoveVertical
     INC CurrentSprites_BehaviorData3,X
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$aaf2,Y
+    LDA $aaf2,Y
     TAY
     DEY
     LDA CurrentSprites_BehaviorData3,X
-    AND #$83f7,Y
+    AND SPRITE_BEHAVIOR_HOP_PEAK_TICKS,Y
     BNE @LAB_PRG14__aaef
-    JMP SpriteAction_FlipYDirection
+    JMP BScript_Action_FlipYDirection
 
   @LAB_PRG14__aaef:                         ; [$aaef]
     JMP Sprites_CountdownBehavior
@@ -11976,7 +11996,7 @@ SpriteBehavior_FlashScreenHitPlayer:        ; [$ab26]
     AND #$fe
     STA ScreenColorMode
     LDA #$04
-    JSR #$d0e4
+    JSR $d0e4
     LDA #$3c
     STA Player_InvincibilityPhase
     LDA Player_StatusFlag
@@ -11986,7 +12006,7 @@ SpriteBehavior_FlashScreenHitPlayer:        ; [$ab26]
     STA a:Arg_PlayerHealthDelta_L
     LDA #$0a
     STA a:Arg_PlayerHealthDelta_U
-    JSR #$c08e
+    JSR $c08e
     LDX a:CurrentSpriteIndex
     JMP Sprite_FinishBehavior
 
@@ -12024,16 +12044,16 @@ SpriteBehavior_BossDeath:                   ; [$ab67]
     BCS @LAB_PRG14__abb0
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC #$abb6,Y
+    ADC $abb6,Y
     STA CurrentSprites_XPos_Full,X
     LDA CurrentSprites_YPos,X
     CLC
-    ADC #$abc1,Y
+    ADC $abc1,Y
     STA CurrentSprites_YPos,X
     LDA #$00
     STA CurrentSprites_BehaviorData2,X
     LDA #$03
-    JSR #$d0e4
+    JSR $d0e4
     LDA CurrentSprites_Phases,X
     CMP #$05
     BCS @_return
@@ -12200,9 +12220,9 @@ Sprite_SetDeathEntity:                      ; [$abf8]
     STA CurrentSprites_Entities,X
     ASL A
     TAY
-    LDA #$ad2d,Y
+    LDA SPRITE_BSCRIPTS,Y
     STA CurrentSprites_BehaviorAddrs_L,X
-    LDA #$ad2e,Y
+    LDA SPRITE_BSCRIPTS+1,Y
     STA CurrentSprites_BehaviorAddrs_U,X
     LDA #$ff
     STA CurrentSprites_Behaviors,X
@@ -12250,14 +12270,14 @@ Sprite_HandleDeathDropIfPossible:           ; [$ac21]
 Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
     STY Temp_00
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA #$b672,Y
+    LDA $b672,Y
     CMP #$ff
     BEQ @_return
     CMP #$40
     BCS @_return
     STA Temp_01
     TAY
-    LDA #$aced,Y
+    LDA SPRITE_MAYBE_DROP_RANDOM_DATA,Y
     LDY Temp_00
     STA CurrentSprites_Values,Y
     LDA CurrentSprites_XPos_Full,X
@@ -12276,9 +12296,9 @@ Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
     INY
 
   @LAB_PRG14__ac66:                         ; [$ac66]
-    LDA #$ac72,Y
+    LDA SPRITE_DROP_HANDLERS+1,Y
     PHA
-    LDA #$ac71,Y
+    LDA SPRITE_DROP_HANDLERS,Y
     PHA
     LDY Temp_00
 
@@ -12336,7 +12356,7 @@ SPRITE_DROP_HANDLERS_LAST:                  ; [$ac73]
 ;============================================================================
 Sprites_ReplaceWithCoinDrop:                ; [$ac75]
     LDA #$10
-    JSR #$d0e4
+    JSR $d0e4
     TYA
     TAX
     LDA #$02
@@ -12392,12 +12412,12 @@ Sprite_ReplaceWithDroppedItem:              ; [$ac7e]
                                             ; word boundary for the behavior
                                             ; addresses.
     TAY                                     ; Y = A
-    LDA #$ad2d,Y                            ; Load the lower byte of the
+    LDA SPRITE_BSCRIPTS,Y                   ; Load the lower byte of the
                                             ; sprite behavior for this
                                             ; entity.
     STA CurrentSprites_BehaviorAddrs_L,X    ; Set it as the current behavior
                                             ; for this sprite.
-    LDA #$ad2e,Y                            ; Load the upper byte.
+    LDA SPRITE_BSCRIPTS+1,Y                 ; Load the upper byte.
     STA CurrentSprites_BehaviorAddrs_U,X    ; And set that.
 
 
@@ -12412,7 +12432,7 @@ Sprite_ReplaceWithDroppedItem:              ; [$ac7e]
     ; Set the sprite hitbox.
     ;
     LDY #$02                                ; Y = 2
-    LDA #$b4df,Y                            ; A = hitbox type for Y.
+    LDA SPRITE_ENTITIES_HITBOX_TYPES,Y      ; A = hitbox type for Y.
     STA CurrentSprites_HitBoxTypes,X        ; Set as the hitbox.
 
 
@@ -12476,9 +12496,9 @@ Sprite_ReplaceWithMattock:                  ; [$aca6]
     ; Set the behavior address for the Mattock to
     ; BSCRIPTS_OBJ_MATTOCK.
     ;
-    LDA #$ad2d,Y                            ; A = 0x1B.
+    LDA SPRITE_BSCRIPTS,Y                   ; A = 0x1B.
     STA CurrentSprites_BehaviorAddrs_L,X    ; Set as lower byte.
-    LDA #$ad2e,Y                            ; A = 0xB2.
+    LDA SPRITE_BSCRIPTS+1,Y                 ; A = 0xB2.
     STA CurrentSprites_BehaviorAddrs_U,X    ; Set as upper byte.
 
 
@@ -12493,7 +12513,7 @@ Sprite_ReplaceWithMattock:                  ; [$aca6]
     ; Set the hitbox of the sprite.
     ;
     LDY CurrentSprites_Entities,X           ; Y = sprite entity.
-    LDA #$b4df,Y                            ; A = hitbox type for Y.
+    LDA SPRITE_ENTITIES_HITBOX_TYPES,Y      ; A = hitbox type for Y.
     STA CurrentSprites_HitBoxTypes,X        ; Store as the hitbox type.
 
 
@@ -12515,7 +12535,7 @@ Sprite_ReplaceWithMattock:                  ; [$aca6]
     ; Set the PPU address for the sprite.
     ;
     LDA #$90                                ; A = 0x90
-    STA CurrentSprites_PPUAddrs,X           ; Set as the PPU address.
+    STA CurrentSprites_PPUOffsets,X         ; Set as the PPU address.
     JMP Sprite_SetBehaviorNotReady          ; Disable behaviors for the
                                             ; sprite.
 
@@ -12660,136 +12680,143 @@ SPRITE_BSCRIPTS:                            ; [$ad2d]
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_1_:                         ; [$ad2f]
-    dw $adf8                                ; [1]:
+    dw $adf8                                ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_2_:                         ; [$ad31]
-    dw $af02                                ; [2]:
-    dw $ae02                                ; [3]:
-    dw $ae16                                ; [4]:
-    dw $af31                                ; [5]:
-    dw $af06                                ; [6]:
-    dw $ae0a                                ; [7]:
-    dw $ae0e                                ; [8]:
-    dw $ae12                                ; [9]:
-    dw $b120                                ; [10]:
-    dw $af35                                ; [11]:
-    dw $aee5                                ; [12]:
-    dw $af39                                ; [13]:
-    dw $af3d                                ; [14]:
-    dw $af54                                ; [15]:
-    dw $af58                                ; [16]:
-    dw $b0ac                                ; [17]:
-    dw $b0d3                                ; [18]:
+    dw $af02                                ; [2]: Dropped: Coin
+    dw $ae02                                ; [3]: Enemy: ?
+    dw $ae16                                ; [4]: Enemy: Raiden
+    dw $af31                                ; [5]: Enemy: Necron Aides
+    dw $af06                                ; [6]: Enemy: Zombie
+    dw $ae0a                                ; [7]: Enemy: Hornet
+    dw $ae0e                                ; [8]: Enemy: Bihoruda
+    dw $ae12                                ; [9]: Enemy: Lilith
+    dw $b120                                ; [10]: Magic: ?
+    dw $af35                                ; [11]: Enemy: Yuinaru
+    dw $aee5                                ; [12]: Enemy: Snowman
+    dw $af39                                ; [13]: Enemy: Nash
+    dw $af3d                                ; [14]: Enemy: Fire Giant
+    dw $af54                                ; [15]: Enemy: Ishiisu
+    dw $af58                                ; [16]: Enemy: Execution Hood
+    dw $b0ac                                ; [17]: Boss: Rokusutahn
+    dw $b0d3                                ; [18]: Boss: unused (round body
+                                            ; of snake boss)
 
 ;
 ; XREFS:
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_19_:                        ; [$ad53]
-    dw $af5c                                ; [19]:
+    dw $af5c                                ; [19]: Effect: Enemy death
 
 ;
 ; XREFS:
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_20_:                        ; [$ad55]
-    dw $af60                                ; [20]:
-    dw $af68                                ; [21]:
-    dw $adf7                                ; [22]:
-    dw $af89                                ; [23]:
-    dw $af98                                ; [24]:
-    dw $afb5                                ; [25]:
-    dw $b01b                                ; [26]:
-    dw $b01f                                ; [27]:
-    dw $b044                                ; [28]:
-    dw $b0a8                                ; [29]:
-    dw $b048                                ; [30]:
-    dw $b07a                                ; [31]:
-    dw $b07e                                ; [32]:
-    dw $b07a                                ; [33]:
-    dw $b058                                ; [34]:
-    dw $b05c                                ; [35]:
-    dw $b060                                ; [36]:
-    dw $adf7                                ; [37]:
-    dw $ae8c                                ; [38]:
-    dw $b064                                ; [39]:
-    dw $b068                                ; [40]:
-    dw $adf7                                ; [41]:
-    dw $aecc                                ; [42]:
-    dw $b072                                ; [43]:
-    dw $b076                                ; [44]:
-    dw $b0d7                                ; [45]:
-    dw $b0db                                ; [46]:
-    dw $b108                                ; [47]:
-    dw $b10c                                ; [48]:
-    dw $b110                                ; [49]:
-    dw $b114                                ; [50]:
-    dw $b118                                ; [51]:
-    dw $b124                                ; [52]:
-    dw $b131                                ; [53]:
-    dw $b149                                ; [54]:
-    dw $b167                                ; [55]:
-    dw $b16b                                ; [56]:
-    dw $b173                                ; [57]:
-    dw $b17d                                ; [58]:
-    dw $b19e                                ; [59]:
-    dw $b1ae                                ; [60]:
-    dw $b1b2                                ; [61]:
-    dw $b1ba                                ; [62]:
-    dw $b1c2                                ; [63]:
-    dw $b1c6                                ; [64]:
-    dw $b1cc                                ; [65]:
-    dw $b1de                                ; [66]:
-    dw $b1a6                                ; [67]:
-    dw $b1eb                                ; [68]:
-    dw $b1fa                                ; [69]:
-    dw $ae43                                ; [70]:
-    dw $aeb1                                ; [71]:
-    dw $b20f                                ; [72]:
-    dw $b253                                ; [73]:
-    dw $b257                                ; [74]:
-    dw $b217                                ; [75]:
-    dw $b217                                ; [76]:
-    dw $b217                                ; [77]:
-    dw $b20b                                ; [78]:
-    dw $b217                                ; [79]:
+    dw $af60                                ; [20]: Effect: Lightning ball
+    dw $af68                                ; [21]: Enemy: Charron
+    dw $adf7                                ; [22]: Enemy: ? (Unused)
+    dw $af89                                ; [23]: Enemy: Geributa
+    dw $af98                                ; [24]: Enemy: Sugata
+    dw $afb5                                ; [25]: Enemy: Grimlock
+    dw $b01b                                ; [26]: Enemy: Giant Bees
+    dw $b01f                                ; [27]: Enemy: Myconid
+    dw $b044                                ; [28]: Enemy: Naga
+    dw $b0a8                                ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    dw $b048                                ; [30]: Enemy: Giant Strider
+    dw $b07a                                ; [31]: Enemy: Sir Gawaine
+    dw $b07e                                ; [32]: Enemy: Maskman
+    dw $b07a                                ; [33]: Enemy: Wolfman
+    dw $b058                                ; [34]: Enemy: Yareeka
+    dw $b05c                                ; [35]: Enemy: Magman
+    dw $b060                                ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    dw $adf7                                ; [37]: Enemy: ? (unused)
+    dw $ae8c                                ; [38]: Enemy: Ikeda
+    dw $b064                                ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    dw $b068                                ; [40]: Enemy: Lamprey
+    dw $adf7                                ; [41]: Enemy: ? (unused)
+    dw $aecc                                ; [42]: Enemy: Monodron
+    dw $b072                                ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    dw $b076                                ; [44]: Enemy: Tamazutsu
+    dw $b0d7                                ; [45]: Boss: Ripasheiku
+    dw $b0db                                ; [46]: Boss: Zoradohna
+    dw $b108                                ; [47]: Boss: Borabohra
+    dw $b10c                                ; [48]: Boss: Pakukame
+    dw $b110                                ; [49]: Boss: Zorugeriru
+    dw $b114                                ; [50]: Boss: King Grieve
+    dw $b118                                ; [51]: Boss: Shadow Eura
+    dw $b124                                ; [52]: NPC: Walking Man 1
+    dw $b131                                ; [53]: NPC: Blue lady (unused)
+    dw $b149                                ; [54]: NPC: Child (unused)
+    dw $b167                                ; [55]: NPC: Armor Salesman
+    dw $b16b                                ; [56]: NPC: Martial Artist
+    dw $b173                                ; [57]: NPC: Priest
+    dw $b17d                                ; [58]: NPC: King
+    dw $b19e                                ; [59]: NPC: Magic Teacher
+    dw $b1ae                                ; [60]: NPC: Key Salesman
+    dw $b1b2                                ; [61]: NPC: Smoking Man
+    dw $b1ba                                ; [62]: NPC: Man in Chair
+    dw $b1c2                                ; [63]: NPC: Sitting Man
+    dw $b1c6                                ; [64]: NPC: Meat Salesman
+    dw $b1cc                                ; [65]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    dw $b1de                                ; [66]: NPC: Guard
+    dw $b1a6                                ; [67]: NPC: Doctor
+    dw $b1eb                                ; [68]: NPC: Walking Woman 1
+    dw $b1fa                                ; [69]: NPC: Walking Woman 2
+    dw $ae43                                ; [70]: Enemy: Eyeball (unused)
+    dw $aeb1                                ; [71]: Enemy: Zozura
+    dw $b20f                                ; [72]: Item: Glove
+    dw $b253                                ; [73]: Item: Black Onyx
+    dw $b257                                ; [74]: Item: Pendant
+    dw $b217                                ; [75]: Item: Red Potion
+    dw $b217                                ; [76]: Item: Poison
+    dw $b217                                ; [77]: Item: Elixir
+    dw $b20b                                ; [78]: Item: Ointment
+    dw $b217                                ; [79]: Trigger: Intro
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_BSCRIPTS_80_:                        ; [$adcd]
-    dw $b21b                                ; [80]:
+    dw $b21b                                ; [80]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_BSCRIPTS_81_:                        ; [$adcf]
-    dw $b11c                                ; [81]:
-    dw $b223                                ; [82]:
-    dw $ae06                                ; [83]:
-    dw $b11c                                ; [84]:
-    dw $b213                                ; [85]:
-    dw $b21f                                ; [86]:
-    dw $b24f                                ; [87]:
-    dw $b243                                ; [88]:
-    dw $b247                                ; [89]:
-    dw $b24b                                ; [90]:
-    dw $b25b                                ; [91]:
-    dw $b25f                                ; [92]:
-    dw $b263                                ; [93]:
-    dw $b267                                ; [94]:
-    dw $b26b                                ; [95]:
-    dw $b26f                                ; [96]:
-    dw $b22b                                ; [97]:
-    dw $b233                                ; [98]:
-    dw $b23b                                ; [99]:
-    dw $af64                                ; [100]:
+    dw $b11c                                ; [81]: Magic: ?
+    dw $b223                                ; [82]: Effect: Fountain
+    dw $ae06                                ; [83]: Magic: ?
+    dw $b11c                                ; [84]: Magic: Enemy Fireball
+    dw $b213                                ; [85]: Item: Wing Boots
+    dw $b21f                                ; [86]: Item: Hour Glass
+    dw $b24f                                ; [87]: Item: Magical Rod
+    dw $b243                                ; [88]: Item: Battle Suit
+    dw $b247                                ; [89]: Item: Battle Helmet
+    dw $b24b                                ; [90]: Item: Dragon Slayer
+    dw $b25b                                ; [91]: Item: Mattock
+    dw $b25f                                ; [92]: Item: Wing Boots (from
+                                            ; quest)
+    dw $b263                                ; [93]: Item: Red Potion
+    dw $b267                                ; [94]: Item: Poison
+    dw $b26b                                ; [95]: Item: Glove
+    dw $b26f                                ; [96]: Item: Ointment
+    dw $b22b                                ; [97]: Effect: Spring of Trunk
+    dw $b233                                ; [98]: Effect: Spring of Sky
+    dw $b23b                                ; [99]: Effect: Spring of Tower
+    dw $af64                                ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -15334,7 +15361,7 @@ BSCRIPTS_OBJ_WINGSBOOTS_QUEST:              ; [$b25f]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::ade7]
 ;
-BSCRIPTS_OBJ_RED_POTION2:                   ; [$b263]
+BSCRIPTS_OBJ_RED_POTION_RANDOM:             ; [$b263]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b263] SpriteOp
     db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_52 ; [$b264] SpriteBehavior
     db $00                                  ; [$b265] byte
@@ -15372,7 +15399,7 @@ BSCRIPTS_OBJ_POISON:                        ; [$b267]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::adeb]
 ;
-BSCRIPTS_OBJ_GLOVE2:                        ; [$b26b]
+BSCRIPTS_OBJ_GLOVE_RANDOM:                  ; [$b26b]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b26b] SpriteOp
     db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_54 ; [$b26c] SpriteBehavior
     db $00                                  ; [$b26d] byte
@@ -15391,7 +15418,7 @@ BSCRIPTS_OBJ_GLOVE2:                        ; [$b26b]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::aded]
 ;
-BSCRIPTS_OBJ_OINTMENT2:                     ; [$b26f]
+BSCRIPTS_OBJ_OINTMENT_RANDOM:               ; [$b26f]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b26f] SpriteOp
     db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_56 ; [$b270] SpriteBehavior
     db $00,$ff                              ; [$b271] byte
@@ -15641,9 +15668,9 @@ MAYBE_SPRITE_EXTENTS_1_:                    ; [$b408]
 ;
 ; XREFS:
 ;     CurrentSprite_CanMoveInDirection
-;     MoveRight
 ;     Sprite_CalcDistanceXToPlayer
 ;     Sprite_CheckHitByCastMagic
+;     Sprites_MoveRight
 ;
 SPRITE_HITBOX_WIDTHS:                       ; [$b4d1]
     db $0f                                  ; [0]:
@@ -15657,10 +15684,10 @@ SPRITE_HITBOX_WIDTHS:                       ; [$b4d1]
 ;
 ; XREFS:
 ;     CurrentSprite_CanMoveInDirection
-;     FUN_PRG14__86c6
 ;     Sprite_CanClimb
 ;     Sprite_CheckHitByCastMagic
 ;     Sprites_CanSpriteWalk
+;     Sprites_MoveRight__86c6
 ;
 SPRITE_HITBOX_HEIGHTS:                      ; [$b4d8]
     db $0f                                  ; [0]:
@@ -15685,123 +15712,130 @@ SPRITE_HITBOX_HEIGHTS:                      ; [$b4d8]
 ;
 SPRITE_ENTITIES_HITBOX_TYPES:               ; [$b4df]
     db SPRITE_HITBOX_1                      ; [0]:
-    db SPRITE_HITBOX_1                      ; [1]:
+    db SPRITE_HITBOX_1                      ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_2_:            ; [$b4e1]
-    db SPRITE_HITBOX_0                      ; [2]:
-    db SPRITE_HITBOX_1                      ; [3]:
-    db SPRITE_HITBOX_1                      ; [4]:
-    db SPRITE_HITBOX_1                      ; [5]:
-    db SPRITE_HITBOX_1                      ; [6]:
-    db SPRITE_HITBOX_0                      ; [7]:
-    db SPRITE_HITBOX_0                      ; [8]:
-    db SPRITE_HITBOX_0                      ; [9]:
-    db SPRITE_HITBOX_0                      ; [10]:
-    db SPRITE_HITBOX_0                      ; [11]:
-    db SPRITE_HITBOX_1                      ; [12]:
-    db SPRITE_HITBOX_1                      ; [13]:
-    db SPRITE_HITBOX_1                      ; [14]:
-    db SPRITE_HITBOX_1                      ; [15]:
-    db SPRITE_HITBOX_1                      ; [16]:
-    db SPRITE_HITBOX_2                      ; [17]:
-    db SPRITE_HITBOX_1                      ; [18]:
-    db SPRITE_HITBOX_1                      ; [19]:
-    db SPRITE_HITBOX_1                      ; [20]:
-    db SPRITE_HITBOX_1                      ; [21]:
-    db SPRITE_HITBOX_1                      ; [22]:
-    db SPRITE_HITBOX_1                      ; [23]:
-    db SPRITE_HITBOX_1                      ; [24]:
-    db SPRITE_HITBOX_1                      ; [25]:
-    db SPRITE_HITBOX_1                      ; [26]:
-    db SPRITE_HITBOX_1                      ; [27]:
-    db SPRITE_HITBOX_1                      ; [28]:
-    db SPRITE_HITBOX_1                      ; [29]:
-    db SPRITE_HITBOX_1                      ; [30]:
-    db SPRITE_HITBOX_1                      ; [31]:
-    db SPRITE_HITBOX_1                      ; [32]:
-    db SPRITE_HITBOX_1                      ; [33]:
-    db SPRITE_HITBOX_1                      ; [34]:
-    db SPRITE_HITBOX_1                      ; [35]:
-    db SPRITE_HITBOX_1                      ; [36]:
-    db SPRITE_HITBOX_1                      ; [37]:
-    db SPRITE_HITBOX_1                      ; [38]:
-    db SPRITE_HITBOX_1                      ; [39]:
-    db SPRITE_HITBOX_1                      ; [40]:
-    db SPRITE_HITBOX_1                      ; [41]:
-    db SPRITE_HITBOX_1                      ; [42]:
-    db SPRITE_HITBOX_1                      ; [43]:
-    db SPRITE_HITBOX_1                      ; [44]:
-    db SPRITE_HITBOX_3                      ; [45]:
-    db SPRITE_HITBOX_2                      ; [46]:
-    db SPRITE_HITBOX_2                      ; [47]:
-    db SPRITE_HITBOX_1                      ; [48]:
-    db SPRITE_HITBOX_1                      ; [49]:
-    db SPRITE_HITBOX_1                      ; [50]:
-    db SPRITE_HITBOX_1                      ; [51]:
-    db SPRITE_HITBOX_1                      ; [52]:
-    db SPRITE_HITBOX_1                      ; [53]:
-    db SPRITE_HITBOX_1                      ; [54]:
-    db SPRITE_HITBOX_1                      ; [55]:
-    db SPRITE_HITBOX_1                      ; [56]:
-    db SPRITE_HITBOX_1                      ; [57]:
-    db SPRITE_HITBOX_1                      ; [58]:
-    db SPRITE_HITBOX_1                      ; [59]:
-    db SPRITE_HITBOX_1                      ; [60]:
-    db SPRITE_HITBOX_1                      ; [61]:
-    db SPRITE_HITBOX_1                      ; [62]:
-    db SPRITE_HITBOX_1                      ; [63]:
-    db SPRITE_HITBOX_1                      ; [64]:
-    db SPRITE_HITBOX_1                      ; [65]:
-    db SPRITE_HITBOX_1                      ; [66]:
-    db SPRITE_HITBOX_1                      ; [67]:
-    db SPRITE_HITBOX_1                      ; [68]:
-    db SPRITE_HITBOX_1                      ; [69]:
-    db SPRITE_HITBOX_0                      ; [70]:
-    db SPRITE_HITBOX_0                      ; [71]:
-    db SPRITE_HITBOX_0                      ; [72]:
-    db SPRITE_HITBOX_0                      ; [73]:
-    db SPRITE_HITBOX_0                      ; [74]:
-    db SPRITE_HITBOX_0                      ; [75]:
-    db SPRITE_HITBOX_0                      ; [76]:
-    db SPRITE_HITBOX_0                      ; [77]:
-    db SPRITE_HITBOX_0                      ; [78]:
-    db SPRITE_HITBOX_1                      ; [79]:
+    db SPRITE_HITBOX_0                      ; [2]: Dropped: Coin
+    db SPRITE_HITBOX_1                      ; [3]: Enemy: ?
+    db SPRITE_HITBOX_1                      ; [4]: Enemy: Raiden
+    db SPRITE_HITBOX_1                      ; [5]: Enemy: Necron Aides
+    db SPRITE_HITBOX_1                      ; [6]: Enemy: Zombie
+    db SPRITE_HITBOX_0                      ; [7]: Enemy: Hornet
+    db SPRITE_HITBOX_0                      ; [8]: Enemy: Bihoruda
+    db SPRITE_HITBOX_0                      ; [9]: Enemy: Lilith
+    db SPRITE_HITBOX_0                      ; [10]: Magic: ?
+    db SPRITE_HITBOX_0                      ; [11]: Enemy: Yuinaru
+    db SPRITE_HITBOX_1                      ; [12]: Enemy: Snowman
+    db SPRITE_HITBOX_1                      ; [13]: Enemy: Nash
+    db SPRITE_HITBOX_1                      ; [14]: Enemy: Fire Giant
+    db SPRITE_HITBOX_1                      ; [15]: Enemy: Ishiisu
+    db SPRITE_HITBOX_1                      ; [16]: Enemy: Execution Hood
+    db SPRITE_HITBOX_2                      ; [17]: Boss: Rokusutahn
+    db SPRITE_HITBOX_1                      ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db SPRITE_HITBOX_1                      ; [19]: Effect: Enemy death
+    db SPRITE_HITBOX_1                      ; [20]: Effect: Lightning ball
+    db SPRITE_HITBOX_1                      ; [21]: Enemy: Charron
+    db SPRITE_HITBOX_1                      ; [22]: Enemy: ? (Unused)
+    db SPRITE_HITBOX_1                      ; [23]: Enemy: Geributa
+    db SPRITE_HITBOX_1                      ; [24]: Enemy: Sugata
+    db SPRITE_HITBOX_1                      ; [25]: Enemy: Grimlock
+    db SPRITE_HITBOX_1                      ; [26]: Enemy: Giant Bees
+    db SPRITE_HITBOX_1                      ; [27]: Enemy: Myconid
+    db SPRITE_HITBOX_1                      ; [28]: Enemy: Naga
+    db SPRITE_HITBOX_1                      ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db SPRITE_HITBOX_1                      ; [30]: Enemy: Giant Strider
+    db SPRITE_HITBOX_1                      ; [31]: Enemy: Sir Gawaine
+    db SPRITE_HITBOX_1                      ; [32]: Enemy: Maskman
+    db SPRITE_HITBOX_1                      ; [33]: Enemy: Wolfman
+    db SPRITE_HITBOX_1                      ; [34]: Enemy: Yareeka
+    db SPRITE_HITBOX_1                      ; [35]: Enemy: Magman
+    db SPRITE_HITBOX_1                      ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db SPRITE_HITBOX_1                      ; [37]: Enemy: ? (unused)
+    db SPRITE_HITBOX_1                      ; [38]: Enemy: Ikeda
+    db SPRITE_HITBOX_1                      ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db SPRITE_HITBOX_1                      ; [40]: Enemy: Lamprey
+    db SPRITE_HITBOX_1                      ; [41]: Enemy: ? (unused)
+    db SPRITE_HITBOX_1                      ; [42]: Enemy: Monodron
+    db SPRITE_HITBOX_1                      ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db SPRITE_HITBOX_1                      ; [44]: Enemy: Tamazutsu
+    db SPRITE_HITBOX_3                      ; [45]: Boss: Ripasheiku
+    db SPRITE_HITBOX_2                      ; [46]: Boss: Zoradohna
+    db SPRITE_HITBOX_2                      ; [47]: Boss: Borabohra
+    db SPRITE_HITBOX_1                      ; [48]: Boss: Pakukame
+    db SPRITE_HITBOX_1                      ; [49]: Boss: King Grieve
+    db SPRITE_HITBOX_1                      ; [50]: Boss: Shadow Eura
+    db SPRITE_HITBOX_1                      ; [51]: NPC: Walking Man 1
+    db SPRITE_HITBOX_1                      ; [52]: NPC: Blue lady (unused)
+    db SPRITE_HITBOX_1                      ; [53]: NPC: Child (unused)
+    db SPRITE_HITBOX_1                      ; [54]: NPC: Armor Salesman
+    db SPRITE_HITBOX_1                      ; [55]: NPC: Martial Artist
+    db SPRITE_HITBOX_1                      ; [56]: NPC: Priest
+    db SPRITE_HITBOX_1                      ; [57]: NPC: King
+    db SPRITE_HITBOX_1                      ; [58]: NPC: Magic Teacher
+    db SPRITE_HITBOX_1                      ; [59]: NPC: Key Salesman
+    db SPRITE_HITBOX_1                      ; [60]: NPC: Smoking Man
+    db SPRITE_HITBOX_1                      ; [61]: NPC: Man in Chair
+    db SPRITE_HITBOX_1                      ; [62]: NPC: Sitting Man
+    db SPRITE_HITBOX_1                      ; [63]: NPC: Meat Salesman
+    db SPRITE_HITBOX_1                      ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db SPRITE_HITBOX_1                      ; [65]: NPC: Guard
+    db SPRITE_HITBOX_1                      ; [66]: NPC: Doctor
+    db SPRITE_HITBOX_1                      ; [67]: NPC: Walking Woman 1
+    db SPRITE_HITBOX_1                      ; [68]: NPC: Walking Woman 2
+    db SPRITE_HITBOX_1                      ; [69]: Enemy: Eyeball (unused)
+    db SPRITE_HITBOX_0                      ; [70]: Enemy: Zozura
+    db SPRITE_HITBOX_0                      ; [71]: Item: Glove
+    db SPRITE_HITBOX_0                      ; [72]: Item: Black Onyx
+    db SPRITE_HITBOX_0                      ; [73]: Item: Pendant
+    db SPRITE_HITBOX_0                      ; [74]: Item: Red Potion
+    db SPRITE_HITBOX_0                      ; [75]: Item: Poison
+    db SPRITE_HITBOX_0                      ; [76]: Item: Elixir
+    db SPRITE_HITBOX_0                      ; [77]: Item: Ointment
+    db SPRITE_HITBOX_0                      ; [78]: Trigger: Intro
+    db SPRITE_HITBOX_1                      ; [79]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_80_:           ; [$b52f]
-    db SPRITE_HITBOX_0                      ; [80]:
+    db SPRITE_HITBOX_0                      ; [80]: Magic: ?
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
-    db SPRITE_HITBOX_0                      ; [81]:
-    db SPRITE_HITBOX_4                      ; [82]:
-    db SPRITE_HITBOX_0                      ; [83]:
-    db SPRITE_HITBOX_0                      ; [84]:
-    db SPRITE_HITBOX_0                      ; [85]:
-    db SPRITE_HITBOX_0                      ; [86]:
-    db SPRITE_HITBOX_0                      ; [87]:
-    db SPRITE_HITBOX_0                      ; [88]:
-    db SPRITE_HITBOX_0                      ; [89]:
-    db SPRITE_HITBOX_0                      ; [90]:
-    db SPRITE_HITBOX_0                      ; [91]:
-    db SPRITE_HITBOX_0                      ; [92]:
-    db SPRITE_HITBOX_0                      ; [93]:
-    db SPRITE_HITBOX_0                      ; [94]:
-    db SPRITE_HITBOX_0                      ; [95]:
-    db SPRITE_HITBOX_0                      ; [96]:
-    db SPRITE_HITBOX_4                      ; [97]:
-    db SPRITE_HITBOX_4                      ; [98]:
-    db SPRITE_HITBOX_4                      ; [99]:
+    db SPRITE_HITBOX_0                      ; [81]: Effect: Fountain
+    db SPRITE_HITBOX_4                      ; [82]: Magic: ?
+    db SPRITE_HITBOX_0                      ; [83]: Magic: ?
+    db SPRITE_HITBOX_0                      ; [84]: Item: Wing Boots
+    db SPRITE_HITBOX_0                      ; [85]: Item: Hour Glass
+    db SPRITE_HITBOX_0                      ; [86]: Item: Magical Rod
+    db SPRITE_HITBOX_0                      ; [87]: Item: Battle Suit
+    db SPRITE_HITBOX_0                      ; [88]: Item: Battle Helmet
+    db SPRITE_HITBOX_0                      ; [89]: Item: Dragon Slayer
+    db SPRITE_HITBOX_0                      ; [90]: Item: Mattock
+    db SPRITE_HITBOX_0                      ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db SPRITE_HITBOX_0                      ; [92]: Item: Red Potion
+    db SPRITE_HITBOX_0                      ; [93]: Item: Poison
+    db SPRITE_HITBOX_0                      ; [94]: Item: Glove
+    db SPRITE_HITBOX_0                      ; [95]: Item: Ointment
+    db SPRITE_HITBOX_0                      ; [96]: Effect: Spring of Trunk
+    db SPRITE_HITBOX_4                      ; [97]: Effect: Spring of Sky
+    db SPRITE_HITBOX_4                      ; [98]: Effect: Spring of Tower
+    db SPRITE_HITBOX_4                      ; [99]: Effect: Boss Death
     db SPRITE_HITBOX_1                      ; [100]:
 
 
@@ -15821,127 +15855,134 @@ SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
+;     Player_CheckShieldHitByMagic
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
 ;     Sprite_CheckHitByCastMagic
 ;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_UpdateBehavior
-;     WasPlayerHitByMagic
 ;     Sprites_HasBoss
 ;============================================================================
 
 ;
 ; XREFS:
 ;     CurrentSprite_CheckHitPlayer
+;     Player_CheckShieldHitByMagic
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
 ;     Sprite_CheckHitByCastMagic
 ;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_UpdateBehavior
-;     WasPlayerHitByMagic
 ;     Sprites_HasBoss
 ;
 SPRITE_CATEGORIES_BY_ENTITY:                ; [$b544]
     db SPRITE_ENEMY                         ; [0]:
-    db SPRITE_DROPPED                       ; [1]:
-    db SPRITE_DROPPED                       ; [2]:
-    db SPRITE_ENEMY                         ; [3]:
-    db SPRITE_ENEMY                         ; [4]:
-    db SPRITE_ENEMY                         ; [5]:
-    db SPRITE_ENEMY                         ; [6]:
-    db SPRITE_ENEMY                         ; [7]:
-    db SPRITE_ENEMY                         ; [8]:
-    db SPRITE_ENEMY                         ; [9]:
-    db SPRITE_MAGIC                         ; [10]:
-    db SPRITE_ENEMY                         ; [11]:
-    db SPRITE_ENEMY                         ; [12]:
-    db SPRITE_ENEMY                         ; [13]:
-    db SPRITE_ENEMY                         ; [14]:
-    db SPRITE_ENEMY                         ; [15]:
-    db SPRITE_ENEMY                         ; [16]:
-    db SPRITE_BOSS                          ; [17]:
-    db SPRITE_BOSS                          ; [18]:
-    db SPRITE_EFFECT                        ; [19]:
-    db SPRITE_EFFECT                        ; [20]:
-    db SPRITE_ENEMY                         ; [21]:
-    db SPRITE_ENEMY                         ; [22]:
-    db SPRITE_ENEMY                         ; [23]:
-    db SPRITE_ENEMY                         ; [24]:
-    db SPRITE_ENEMY                         ; [25]:
-    db SPRITE_ENEMY                         ; [26]:
-    db SPRITE_ENEMY                         ; [27]:
-    db SPRITE_ENEMY                         ; [28]:
-    db SPRITE_ENEMY                         ; [29]:
-    db SPRITE_ENEMY                         ; [30]:
-    db SPRITE_ENEMY                         ; [31]:
-    db SPRITE_ENEMY                         ; [32]:
-    db SPRITE_ENEMY                         ; [33]:
-    db SPRITE_ENEMY                         ; [34]:
-    db SPRITE_ENEMY                         ; [35]:
-    db SPRITE_ENEMY                         ; [36]:
-    db SPRITE_ENEMY                         ; [37]:
-    db SPRITE_ENEMY                         ; [38]:
-    db SPRITE_ENEMY                         ; [39]:
-    db SPRITE_ENEMY                         ; [40]:
-    db SPRITE_ENEMY                         ; [41]:
-    db SPRITE_ENEMY                         ; [42]:
-    db SPRITE_ENEMY                         ; [43]:
-    db SPRITE_ENEMY                         ; [44]:
-    db SPRITE_BOSS                          ; [45]:
-    db SPRITE_BOSS                          ; [46]:
-    db SPRITE_BOSS                          ; [47]:
-    db SPRITE_BOSS                          ; [48]:
-    db SPRITE_BOSS                          ; [49]:
-    db SPRITE_BOSS                          ; [50]:
-    db SPRITE_BOSS                          ; [51]:
-    db SPRITE_NPC                           ; [52]:
-    db SPRITE_NPC                           ; [53]:
-    db SPRITE_NPC                           ; [54]:
-    db SPRITE_NPC                           ; [55]:
-    db SPRITE_NPC                           ; [56]:
-    db SPRITE_NPC                           ; [57]:
-    db SPRITE_NPC                           ; [58]:
-    db SPRITE_NPC                           ; [59]:
-    db SPRITE_NPC                           ; [60]:
-    db SPRITE_NPC                           ; [61]:
-    db SPRITE_NPC                           ; [62]:
-    db SPRITE_NPC                           ; [63]:
-    db SPRITE_NPC                           ; [64]:
-    db SPRITE_NPC                           ; [65]:
-    db SPRITE_NPC                           ; [66]:
-    db SPRITE_NPC                           ; [67]:
-    db SPRITE_NPC                           ; [68]:
-    db SPRITE_NPC                           ; [69]:
-    db SPRITE_ENEMY                         ; [70]:
-    db SPRITE_ENEMY                         ; [71]:
-    db SPRITE_ITEM                          ; [72]:
-    db SPRITE_ITEM                          ; [73]:
-    db SPRITE_ITEM                          ; [74]:
-    db SPRITE_ITEM                          ; [75]:
-    db SPRITE_ITEM                          ; [76]:
-    db SPRITE_ITEM                          ; [77]:
-    db SPRITE_ITEM                          ; [78]:
-    db SPRITE_TRIGGER                       ; [79]:
-    db SPRITE_ITEM                          ; [80]:
-    db SPRITE_MAGIC                         ; [81]:
-    db SPRITE_EFFECT                        ; [82]:
-    db SPRITE_MAGIC                         ; [83]:
-    db SPRITE_MAGIC                         ; [84]:
-    db SPRITE_ITEM                          ; [85]:
-    db SPRITE_ITEM                          ; [86]:
-    db SPRITE_ITEM                          ; [87]:
-    db SPRITE_ITEM                          ; [88]:
-    db SPRITE_ITEM                          ; [89]:
-    db SPRITE_ITEM                          ; [90]:
-    db SPRITE_ITEM                          ; [91]:
-    db SPRITE_ITEM                          ; [92]:
-    db SPRITE_ITEM                          ; [93]:
-    db SPRITE_ITEM                          ; [94]:
-    db SPRITE_ITEM                          ; [95]:
-    db SPRITE_ITEM                          ; [96]:
-    db SPRITE_EFFECT                        ; [97]:
-    db SPRITE_EFFECT                        ; [98]:
-    db SPRITE_EFFECT                        ; [99]:
+    db SPRITE_DROPPED                       ; [1]: Dropped: Bread
+    db SPRITE_DROPPED                       ; [2]: Dropped: Coin
+    db SPRITE_ENEMY                         ; [3]: Enemy: ?
+    db SPRITE_ENEMY                         ; [4]: Enemy: Raiden
+    db SPRITE_ENEMY                         ; [5]: Enemy: Necron Aides
+    db SPRITE_ENEMY                         ; [6]: Enemy: Zombie
+    db SPRITE_ENEMY                         ; [7]: Enemy: Hornet
+    db SPRITE_ENEMY                         ; [8]: Enemy: Bihoruda
+    db SPRITE_ENEMY                         ; [9]: Enemy: Lilith
+    db SPRITE_MAGIC                         ; [10]: Magic: ?
+    db SPRITE_ENEMY                         ; [11]: Enemy: Yuinaru
+    db SPRITE_ENEMY                         ; [12]: Enemy: Snowman
+    db SPRITE_ENEMY                         ; [13]: Enemy: Nash
+    db SPRITE_ENEMY                         ; [14]: Enemy: Fire Giant
+    db SPRITE_ENEMY                         ; [15]: Enemy: Ishiisu
+    db SPRITE_ENEMY                         ; [16]: Enemy: Execution Hood
+    db SPRITE_BOSS                          ; [17]: Boss: Rokusutahn
+    db SPRITE_BOSS                          ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db SPRITE_EFFECT                        ; [19]: Effect: Enemy death
+    db SPRITE_EFFECT                        ; [20]: Effect: Lightning ball
+    db SPRITE_ENEMY                         ; [21]: Enemy: Charron
+    db SPRITE_ENEMY                         ; [22]: Enemy: ? (Unused)
+    db SPRITE_ENEMY                         ; [23]: Enemy: Geributa
+    db SPRITE_ENEMY                         ; [24]: Enemy: Sugata
+    db SPRITE_ENEMY                         ; [25]: Enemy: Grimlock
+    db SPRITE_ENEMY                         ; [26]: Enemy: Giant Bees
+    db SPRITE_ENEMY                         ; [27]: Enemy: Myconid
+    db SPRITE_ENEMY                         ; [28]: Enemy: Naga
+    db SPRITE_ENEMY                         ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db SPRITE_ENEMY                         ; [30]: Enemy: Giant Strider
+    db SPRITE_ENEMY                         ; [31]: Enemy: Sir Gawaine
+    db SPRITE_ENEMY                         ; [32]: Enemy: Maskman
+    db SPRITE_ENEMY                         ; [33]: Enemy: Wolfman
+    db SPRITE_ENEMY                         ; [34]: Enemy: Yareeka
+    db SPRITE_ENEMY                         ; [35]: Enemy: Magman
+    db SPRITE_ENEMY                         ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db SPRITE_ENEMY                         ; [37]: Enemy: ? (unused)
+    db SPRITE_ENEMY                         ; [38]: Enemy: Ikeda
+    db SPRITE_ENEMY                         ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db SPRITE_ENEMY                         ; [40]: Enemy: Lamprey
+    db SPRITE_ENEMY                         ; [41]: Enemy: ? (unused)
+    db SPRITE_ENEMY                         ; [42]: Enemy: Monodron
+    db SPRITE_ENEMY                         ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db SPRITE_ENEMY                         ; [44]: Enemy: Tamazutsu
+    db SPRITE_BOSS                          ; [45]: Boss: Ripasheiku
+    db SPRITE_BOSS                          ; [46]: Boss: Zoradohna
+    db SPRITE_BOSS                          ; [47]: Boss: Borabohra
+    db SPRITE_BOSS                          ; [48]: Boss: Pakukame
+    db SPRITE_BOSS                          ; [49]: Boss: King Grieve
+    db SPRITE_BOSS                          ; [50]: Boss: Shadow Eura
+    db SPRITE_BOSS                          ; [51]: NPC: Walking Man 1
+    db SPRITE_NPC                           ; [52]: NPC: Blue lady (unused)
+    db SPRITE_NPC                           ; [53]: NPC: Child (unused)
+    db SPRITE_NPC                           ; [54]: NPC: Armor Salesman
+    db SPRITE_NPC                           ; [55]: NPC: Martial Artist
+    db SPRITE_NPC                           ; [56]: NPC: Priest
+    db SPRITE_NPC                           ; [57]: NPC: King
+    db SPRITE_NPC                           ; [58]: NPC: Magic Teacher
+    db SPRITE_NPC                           ; [59]: NPC: Key Salesman
+    db SPRITE_NPC                           ; [60]: NPC: Smoking Man
+    db SPRITE_NPC                           ; [61]: NPC: Man in Chair
+    db SPRITE_NPC                           ; [62]: NPC: Sitting Man
+    db SPRITE_NPC                           ; [63]: NPC: Meat Salesman
+    db SPRITE_NPC                           ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db SPRITE_NPC                           ; [65]: NPC: Guard
+    db SPRITE_NPC                           ; [66]: NPC: Doctor
+    db SPRITE_NPC                           ; [67]: NPC: Walking Woman 1
+    db SPRITE_NPC                           ; [68]: NPC: Walking Woman 2
+    db SPRITE_NPC                           ; [69]: Enemy: Eyeball (unused)
+    db SPRITE_ENEMY                         ; [70]: Enemy: Zozura
+    db SPRITE_ENEMY                         ; [71]: Item: Glove
+    db SPRITE_ITEM                          ; [72]: Item: Black Onyx
+    db SPRITE_ITEM                          ; [73]: Item: Pendant
+    db SPRITE_ITEM                          ; [74]: Item: Red Potion
+    db SPRITE_ITEM                          ; [75]: Item: Poison
+    db SPRITE_ITEM                          ; [76]: Item: Elixir
+    db SPRITE_ITEM                          ; [77]: Item: Ointment
+    db SPRITE_ITEM                          ; [78]: Trigger: Intro
+    db SPRITE_TRIGGER                       ; [79]: Item: Mattock
+    db SPRITE_ITEM                          ; [80]: Magic: ?
+    db SPRITE_MAGIC                         ; [81]: Effect: Fountain
+    db SPRITE_EFFECT                        ; [82]: Magic: ?
+    db SPRITE_MAGIC                         ; [83]: Magic: ?
+    db SPRITE_MAGIC                         ; [84]: Item: Wing Boots
+    db SPRITE_ITEM                          ; [85]: Item: Hour Glass
+    db SPRITE_ITEM                          ; [86]: Item: Magical Rod
+    db SPRITE_ITEM                          ; [87]: Item: Battle Suit
+    db SPRITE_ITEM                          ; [88]: Item: Battle Helmet
+    db SPRITE_ITEM                          ; [89]: Item: Dragon Slayer
+    db SPRITE_ITEM                          ; [90]: Item: Mattock
+    db SPRITE_ITEM                          ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db SPRITE_ITEM                          ; [92]: Item: Red Potion
+    db SPRITE_ITEM                          ; [93]: Item: Poison
+    db SPRITE_ITEM                          ; [94]: Item: Glove
+    db SPRITE_ITEM                          ; [95]: Item: Ointment
+    db SPRITE_ITEM                          ; [96]: Effect: Spring of Trunk
+    db SPRITE_EFFECT                        ; [97]: Effect: Spring of Sky
+    db SPRITE_EFFECT                        ; [98]: Effect: Spring of Tower
+    db SPRITE_EFFECT                        ; [99]: Effect: Boss Death
     db SPRITE_EFFECT                        ; [100]:
 
 
@@ -15958,111 +15999,118 @@ SPRITE_CATEGORIES_BY_ENTITY:                ; [$b544]
 ;
 SPRITE_ENTITIES_HP:                         ; [$b5a9]
     db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $12                                  ; [4]:
-    db $18                                  ; [5]:
-    db $0e                                  ; [6]:
-    db $03                                  ; [7]:
-    db $05                                  ; [8]:
+    db $00                                  ; [1]: Dropped: Bread
+    db $00                                  ; [2]: Dropped: Coin
+    db $00                                  ; [3]: Enemy: ?
+    db $12                                  ; [4]: Enemy: Raiden
+    db $18                                  ; [5]: Enemy: Necron Aides
+    db $0e                                  ; [6]: Enemy: Zombie
+    db $03                                  ; [7]: Enemy: Hornet
+    db $05                                  ; [8]: Enemy: Bihoruda
 
 ;
 ; XREFS:
 ;     SpriteBehavior_Pakukame
 ;
 SPRITE_ENTITIES_HP_9_:                      ; [$b5b2]
-    db $07                                  ; [9]:
-    db $08                                  ; [10]:
-    db $03                                  ; [11]:
-    db $10                                  ; [12]:
-    db $0c                                  ; [13]:
-    db $14                                  ; [14]:
-    db $18                                  ; [15]:
-    db $64                                  ; [16]:
-    db $46                                  ; [17]:
-    db $24                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $1a                                  ; [21]:
-    db $08                                  ; [22]:
-    db $12                                  ; [23]:
-    db $16                                  ; [24]:
-    db $1d                                  ; [25]:
-    db $13                                  ; [26]:
-    db $16                                  ; [27]:
-    db $17                                  ; [28]:
-    db $00                                  ; [29]:
-    db $1d                                  ; [30]:
-    db $23                                  ; [31]:
-    db $20                                  ; [32]:
-    db $26                                  ; [33]:
-    db $30                                  ; [34]:
-    db $17                                  ; [35]:
-    db $24                                  ; [36]:
-    db $1f                                  ; [37]:
-    db $11                                  ; [38]:
-    db $20                                  ; [39]:
-    db $38                                  ; [40]:
-    db $24                                  ; [41]:
-    db $0a                                  ; [42]:
-    db $0b                                  ; [43]:
-    db $1a                                  ; [44]:
-    db $4b                                  ; [45]:
-    db $73                                  ; [46]:
-    db $69                                  ; [47]:
-    db $28                                  ; [48]:
-    db $18                                  ; [49]:
-    db $fa                                  ; [50]:
-    db $fa                                  ; [51]:
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $10                                  ; [70]:
-    db $09                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $08                                  ; [81]:
-    db $00                                  ; [82]:
-    db $08                                  ; [83]:
-    db $08                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
+    db $07                                  ; [9]: Enemy: Lilith
+    db $08                                  ; [10]: Magic: ?
+    db $03                                  ; [11]: Enemy: Yuinaru
+    db $10                                  ; [12]: Enemy: Snowman
+    db $0c                                  ; [13]: Enemy: Nash
+    db $14                                  ; [14]: Enemy: Fire Giant
+    db $18                                  ; [15]: Enemy: Ishiisu
+    db $64                                  ; [16]: Enemy: Execution Hood
+    db $46                                  ; [17]: Boss: Rokusutahn
+    db $24                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $00                                  ; [19]: Effect: Enemy death
+    db $00                                  ; [20]: Effect: Lightning ball
+    db $1a                                  ; [21]: Enemy: Charron
+    db $08                                  ; [22]: Enemy: ? (Unused)
+    db $12                                  ; [23]: Enemy: Geributa
+    db $16                                  ; [24]: Enemy: Sugata
+    db $1d                                  ; [25]: Enemy: Grimlock
+    db $13                                  ; [26]: Enemy: Giant Bees
+    db $16                                  ; [27]: Enemy: Myconid
+    db $17                                  ; [28]: Enemy: Naga
+    db $00                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $1d                                  ; [30]: Enemy: Giant Strider
+    db $23                                  ; [31]: Enemy: Sir Gawaine
+    db $20                                  ; [32]: Enemy: Maskman
+    db $26                                  ; [33]: Enemy: Wolfman
+    db $30                                  ; [34]: Enemy: Yareeka
+    db $17                                  ; [35]: Enemy: Magman
+    db $24                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $1f                                  ; [37]: Enemy: ? (unused)
+    db $11                                  ; [38]: Enemy: Ikeda
+    db $20                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $38                                  ; [40]: Enemy: Lamprey
+    db $24                                  ; [41]: Enemy: ? (unused)
+    db $0a                                  ; [42]: Enemy: Monodron
+    db $0b                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $1a                                  ; [44]: Enemy: Tamazutsu
+    db $4b                                  ; [45]: Boss: Ripasheiku
+    db $73                                  ; [46]: Boss: Zoradohna
+    db $69                                  ; [47]: Boss: Borabohra
+    db $28                                  ; [48]: Boss: Pakukame
+    db $18                                  ; [49]: Boss: King Grieve
+    db $fa                                  ; [50]: Boss: Shadow Eura
+    db $fa                                  ; [51]: NPC: Walking Man 1
+    db $00                                  ; [52]: NPC: Blue lady (unused)
+    db $00                                  ; [53]: NPC: Child (unused)
+    db $00                                  ; [54]: NPC: Armor Salesman
+    db $00                                  ; [55]: NPC: Martial Artist
+    db $00                                  ; [56]: NPC: Priest
+    db $00                                  ; [57]: NPC: King
+    db $00                                  ; [58]: NPC: Magic Teacher
+    db $00                                  ; [59]: NPC: Key Salesman
+    db $00                                  ; [60]: NPC: Smoking Man
+    db $00                                  ; [61]: NPC: Man in Chair
+    db $00                                  ; [62]: NPC: Sitting Man
+    db $00                                  ; [63]: NPC: Meat Salesman
+    db $00                                  ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $00                                  ; [65]: NPC: Guard
+    db $00                                  ; [66]: NPC: Doctor
+    db $00                                  ; [67]: NPC: Walking Woman 1
+    db $00                                  ; [68]: NPC: Walking Woman 2
+    db $00                                  ; [69]: Enemy: Eyeball (unused)
+    db $10                                  ; [70]: Enemy: Zozura
+    db $09                                  ; [71]: Item: Glove
+    db $00                                  ; [72]: Item: Black Onyx
+    db $00                                  ; [73]: Item: Pendant
+    db $00                                  ; [74]: Item: Red Potion
+    db $00                                  ; [75]: Item: Poison
+    db $00                                  ; [76]: Item: Elixir
+    db $00                                  ; [77]: Item: Ointment
+    db $00                                  ; [78]: Trigger: Intro
+    db $00                                  ; [79]: Item: Mattock
+    db $00                                  ; [80]: Magic: ?
+    db $08                                  ; [81]: Effect: Fountain
+    db $00                                  ; [82]: Magic: ?
+    db $08                                  ; [83]: Magic: ?
+    db $08                                  ; [84]: Item: Wing Boots
+    db $00                                  ; [85]: Item: Hour Glass
+    db $00                                  ; [86]: Item: Magical Rod
+    db $00                                  ; [87]: Item: Battle Suit
+    db $00                                  ; [88]: Item: Battle Helmet
+    db $00                                  ; [89]: Item: Dragon Slayer
+    db $00                                  ; [90]: Item: Mattock
+    db $00                                  ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db $00                                  ; [92]: Item: Red Potion
+    db $00                                  ; [93]: Item: Poison
+    db $00                                  ; [94]: Item: Glove
+    db $00                                  ; [95]: Item: Ointment
+    db $00                                  ; [96]: Effect: Spring of Trunk
+    db $00                                  ; [97]: Effect: Spring of Sky
+    db $00                                  ; [98]: Effect: Spring of Tower
+    db $00                                  ; [99]: Effect: Boss Death
     db $00                                  ; [100]:
 
 
@@ -16079,105 +16127,112 @@ SPRITE_ENTITIES_HP_9_:                      ; [$b5b2]
 ;
 ENEMY_EXPERIENCE:                           ; [$b60e]
     db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $23                                  ; [4]:
-    db $37                                  ; [5]:
-    db $19                                  ; [6]:
-    db $19                                  ; [7]:
-    db $23                                  ; [8]:
-    db $19                                  ; [9]:
-    db $00                                  ; [10]:
-    db $19                                  ; [11]:
-    db $37                                  ; [12]:
-    db $3c                                  ; [13]:
-    db $2d                                  ; [14]:
-    db $0a                                  ; [15]:
-    db $32                                  ; [16]:
-    db $78                                  ; [17]:
-    db $5a                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $41                                  ; [21]:
-    db $00                                  ; [22]:
-    db $28                                  ; [23]:
-    db $0d                                  ; [24]:
-    db $3a                                  ; [25]:
-    db $1d                                  ; [26]:
-    db $1a                                  ; [27]:
-    db $23                                  ; [28]:
-    db $00                                  ; [29]:
-    db $30                                  ; [30]:
-    db $3a                                  ; [31]:
-    db $36                                  ; [32]:
-    db $31                                  ; [33]:
-    db $1e                                  ; [34]:
-    db $3e                                  ; [35]:
-    db $26                                  ; [36]:
-    db $19                                  ; [37]:
-    db $21                                  ; [38]:
-    db $1d                                  ; [39]:
-    db $1e                                  ; [40]:
-    db $18                                  ; [41]:
-    db $14                                  ; [42]:
-    db $12                                  ; [43]:
-    db $0f                                  ; [44]:
-    db $5a                                  ; [45]:
-    db $9e                                  ; [46]:
-    db $4b                                  ; [47]:
-    db $55                                  ; [48]:
-    db $50                                  ; [49]:
-    db $00                                  ; [50]:
-    db $00                                  ; [51]:
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $19                                  ; [70]:
-    db $1e                                  ; [71]:
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $08                                  ; [81]:
-    db $00                                  ; [82]:
-    db $08                                  ; [83]:
-    db $08                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
+    db $00                                  ; [1]: Dropped: Bread
+    db $00                                  ; [2]: Dropped: Coin
+    db $00                                  ; [3]: Enemy: ?
+    db $23                                  ; [4]: Enemy: Raiden
+    db $37                                  ; [5]: Enemy: Necron Aides
+    db $19                                  ; [6]: Enemy: Zombie
+    db $19                                  ; [7]: Enemy: Hornet
+    db $23                                  ; [8]: Enemy: Bihoruda
+    db $19                                  ; [9]: Enemy: Lilith
+    db $00                                  ; [10]: Magic: ?
+    db $19                                  ; [11]: Enemy: Yuinaru
+    db $37                                  ; [12]: Enemy: Snowman
+    db $3c                                  ; [13]: Enemy: Nash
+    db $2d                                  ; [14]: Enemy: Fire Giant
+    db $0a                                  ; [15]: Enemy: Ishiisu
+    db $32                                  ; [16]: Enemy: Execution Hood
+    db $78                                  ; [17]: Boss: Rokusutahn
+    db $5a                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $00                                  ; [19]: Effect: Enemy death
+    db $00                                  ; [20]: Effect: Lightning ball
+    db $41                                  ; [21]: Enemy: Charron
+    db $00                                  ; [22]: Enemy: ? (Unused)
+    db $28                                  ; [23]: Enemy: Geributa
+    db $0d                                  ; [24]: Enemy: Sugata
+    db $3a                                  ; [25]: Enemy: Grimlock
+    db $1d                                  ; [26]: Enemy: Giant Bees
+    db $1a                                  ; [27]: Enemy: Myconid
+    db $23                                  ; [28]: Enemy: Naga
+    db $00                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $30                                  ; [30]: Enemy: Giant Strider
+    db $3a                                  ; [31]: Enemy: Sir Gawaine
+    db $36                                  ; [32]: Enemy: Maskman
+    db $31                                  ; [33]: Enemy: Wolfman
+    db $1e                                  ; [34]: Enemy: Yareeka
+    db $3e                                  ; [35]: Enemy: Magman
+    db $26                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $19                                  ; [37]: Enemy: ? (unused)
+    db $21                                  ; [38]: Enemy: Ikeda
+    db $1d                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $1e                                  ; [40]: Enemy: Lamprey
+    db $18                                  ; [41]: Enemy: ? (unused)
+    db $14                                  ; [42]: Enemy: Monodron
+    db $12                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $0f                                  ; [44]: Enemy: Tamazutsu
+    db $5a                                  ; [45]: Boss: Ripasheiku
+    db $9e                                  ; [46]: Boss: Zoradohna
+    db $4b                                  ; [47]: Boss: Borabohra
+    db $55                                  ; [48]: Boss: Pakukame
+    db $50                                  ; [49]: Boss: King Grieve
+    db $00                                  ; [50]: Boss: Shadow Eura
+    db $00                                  ; [51]: NPC: Walking Man 1
+    db $00                                  ; [52]: NPC: Blue lady (unused)
+    db $00                                  ; [53]: NPC: Child (unused)
+    db $00                                  ; [54]: NPC: Armor Salesman
+    db $00                                  ; [55]: NPC: Martial Artist
+    db $00                                  ; [56]: NPC: Priest
+    db $00                                  ; [57]: NPC: King
+    db $00                                  ; [58]: NPC: Magic Teacher
+    db $00                                  ; [59]: NPC: Key Salesman
+    db $00                                  ; [60]: NPC: Smoking Man
+    db $00                                  ; [61]: NPC: Man in Chair
+    db $00                                  ; [62]: NPC: Sitting Man
+    db $00                                  ; [63]: NPC: Meat Salesman
+    db $00                                  ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $00                                  ; [65]: NPC: Guard
+    db $00                                  ; [66]: NPC: Doctor
+    db $00                                  ; [67]: NPC: Walking Woman 1
+    db $00                                  ; [68]: NPC: Walking Woman 2
+    db $00                                  ; [69]: Enemy: Eyeball (unused)
+    db $19                                  ; [70]: Enemy: Zozura
+    db $1e                                  ; [71]: Item: Glove
+    db $00                                  ; [72]: Item: Black Onyx
+    db $00                                  ; [73]: Item: Pendant
+    db $00                                  ; [74]: Item: Red Potion
+    db $00                                  ; [75]: Item: Poison
+    db $00                                  ; [76]: Item: Elixir
+    db $00                                  ; [77]: Item: Ointment
+    db $00                                  ; [78]: Trigger: Intro
+    db $00                                  ; [79]: Item: Mattock
+    db $00                                  ; [80]: Magic: ?
+    db $08                                  ; [81]: Effect: Fountain
+    db $00                                  ; [82]: Magic: ?
+    db $08                                  ; [83]: Magic: ?
+    db $08                                  ; [84]: Item: Wing Boots
+    db $00                                  ; [85]: Item: Hour Glass
+    db $00                                  ; [86]: Item: Magical Rod
+    db $00                                  ; [87]: Item: Battle Suit
+    db $00                                  ; [88]: Item: Battle Helmet
+    db $00                                  ; [89]: Item: Dragon Slayer
+    db $00                                  ; [90]: Item: Mattock
+    db $00                                  ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db $00                                  ; [92]: Item: Red Potion
+    db $00                                  ; [93]: Item: Poison
+    db $00                                  ; [94]: Item: Glove
+    db $00                                  ; [95]: Item: Ointment
+    db $00                                  ; [96]: Effect: Spring of Trunk
+    db $00                                  ; [97]: Effect: Spring of Sky
+    db $00                                  ; [98]: Effect: Spring of Tower
+    db $00                                  ; [99]: Effect: Boss Death
 
 ;
 ; XREFS:
@@ -16185,105 +16240,112 @@ ENEMY_EXPERIENCE:                           ; [$b60e]
 ;
 BYTE_ARRAY_PRG14__b672:                     ; [$b672]
     db $ff                                  ; [0]:
-    db $ff                                  ; [1]:
-    db $ff                                  ; [2]:
-    db $00                                  ; [3]:
-    db $08                                  ; [4]:
-    db $11                                  ; [5]:
-    db $ff                                  ; [6]:
-    db $07                                  ; [7]:
-    db $08                                  ; [8]:
-    db $ff                                  ; [9]:
-    db $00                                  ; [10]:
-    db $32                                  ; [11]:
-    db $13                                  ; [12]:
-    db $12                                  ; [13]:
-    db $11                                  ; [14]:
-    db $15                                  ; [15]:
-    db $1d                                  ; [16]:
-    db $15                                  ; [17]:
-    db $06                                  ; [18]:
-    db $ff                                  ; [19]:
-    db $ff                                  ; [20]:
-    db $14                                  ; [21]:
-    db $00                                  ; [22]:
-    db $0f                                  ; [23]:
-    db $13                                  ; [24]:
-    db $12                                  ; [25]:
-    db $14                                  ; [26]:
-    db $32                                  ; [27]:
-    db $38                                  ; [28]:
-    db $ff                                  ; [29]:
-    db $16                                  ; [30]:
-    db $18                                  ; [31]:
-    db $19                                  ; [32]:
-    db $1a                                  ; [33]:
-    db $33                                  ; [34]:
-    db $1b                                  ; [35]:
-    db $17                                  ; [36]:
-    db $18                                  ; [37]:
-    db $13                                  ; [38]:
-    db $33                                  ; [39]:
-    db $34                                  ; [40]:
-    db $33                                  ; [41]:
-    db $09                                  ; [42]:
-    db $34                                  ; [43]:
-    db $15                                  ; [44]:
-    db $19                                  ; [45]:
-    db $1c                                  ; [46]:
-    db $08                                  ; [47]:
-    db $16                                  ; [48]:
-    db $03                                  ; [49]:
-    db $ff                                  ; [50]:
-    db $ff                                  ; [51]:
-    db $ff                                  ; [52]:
-    db $ff                                  ; [53]:
-    db $ff                                  ; [54]:
-    db $ff                                  ; [55]:
-    db $ff                                  ; [56]:
-    db $ff                                  ; [57]:
-    db $ff                                  ; [58]:
-    db $ff                                  ; [59]:
-    db $ff                                  ; [60]:
-    db $ff                                  ; [61]:
-    db $ff                                  ; [62]:
-    db $ff                                  ; [63]:
-    db $ff                                  ; [64]:
-    db $ff                                  ; [65]:
-    db $ff                                  ; [66]:
-    db $ff                                  ; [67]:
-    db $ff                                  ; [68]:
-    db $ff                                  ; [69]:
-    db $0f                                  ; [70]:
-    db $32                                  ; [71]:
-    db $ff                                  ; [72]:
-    db $ff                                  ; [73]:
-    db $ff                                  ; [74]:
-    db $ff                                  ; [75]:
-    db $ff                                  ; [76]:
-    db $ff                                  ; [77]:
-    db $ff                                  ; [78]:
-    db $ff                                  ; [79]:
-    db $ff                                  ; [80]:
-    db $00                                  ; [81]:
-    db $ff                                  ; [82]:
-    db $00                                  ; [83]:
-    db $00                                  ; [84]:
-    db $ff                                  ; [85]:
-    db $ff                                  ; [86]:
-    db $ff                                  ; [87]:
-    db $ff                                  ; [88]:
-    db $ff                                  ; [89]:
-    db $ff                                  ; [90]:
-    db $ff                                  ; [91]:
-    db $ff                                  ; [92]:
-    db $ff                                  ; [93]:
-    db $ff                                  ; [94]:
-    db $ff                                  ; [95]:
-    db $ff                                  ; [96]:
-    db $ff                                  ; [97]:
-    db $ff                                  ; [98]:
-    db $ff                                  ; [99]:
+    db $ff                                  ; [1]: Dropped: Bread
+    db $ff                                  ; [2]: Dropped: Coin
+    db $00                                  ; [3]: Enemy: ?
+    db $08                                  ; [4]: Enemy: Raiden
+    db $11                                  ; [5]: Enemy: Necron Aides
+    db $ff                                  ; [6]: Enemy: Zombie
+    db $07                                  ; [7]: Enemy: Hornet
+    db $08                                  ; [8]: Enemy: Bihoruda
+    db $ff                                  ; [9]: Enemy: Lilith
+    db $00                                  ; [10]: Magic: ?
+    db $32                                  ; [11]: Enemy: Yuinaru
+    db $13                                  ; [12]: Enemy: Snowman
+    db $12                                  ; [13]: Enemy: Nash
+    db $11                                  ; [14]: Enemy: Fire Giant
+    db $15                                  ; [15]: Enemy: Ishiisu
+    db $1d                                  ; [16]: Enemy: Execution Hood
+    db $15                                  ; [17]: Boss: Rokusutahn
+    db $06                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $ff                                  ; [19]: Effect: Enemy death
+    db $ff                                  ; [20]: Effect: Lightning ball
+    db $14                                  ; [21]: Enemy: Charron
+    db $00                                  ; [22]: Enemy: ? (Unused)
+    db $0f                                  ; [23]: Enemy: Geributa
+    db $13                                  ; [24]: Enemy: Sugata
+    db $12                                  ; [25]: Enemy: Grimlock
+    db $14                                  ; [26]: Enemy: Giant Bees
+    db $32                                  ; [27]: Enemy: Myconid
+    db $38                                  ; [28]: Enemy: Naga
+    db $ff                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $16                                  ; [30]: Enemy: Giant Strider
+    db $18                                  ; [31]: Enemy: Sir Gawaine
+    db $19                                  ; [32]: Enemy: Maskman
+    db $1a                                  ; [33]: Enemy: Wolfman
+    db $33                                  ; [34]: Enemy: Yareeka
+    db $1b                                  ; [35]: Enemy: Magman
+    db $17                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $18                                  ; [37]: Enemy: ? (unused)
+    db $13                                  ; [38]: Enemy: Ikeda
+    db $33                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $34                                  ; [40]: Enemy: Lamprey
+    db $33                                  ; [41]: Enemy: ? (unused)
+    db $09                                  ; [42]: Enemy: Monodron
+    db $34                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $15                                  ; [44]: Enemy: Tamazutsu
+    db $19                                  ; [45]: Boss: Ripasheiku
+    db $1c                                  ; [46]: Boss: Zoradohna
+    db $08                                  ; [47]: Boss: Borabohra
+    db $16                                  ; [48]: Boss: Pakukame
+    db $03                                  ; [49]: Boss: King Grieve
+    db $ff                                  ; [50]: Boss: Shadow Eura
+    db $ff                                  ; [51]: NPC: Walking Man 1
+    db $ff                                  ; [52]: NPC: Blue lady (unused)
+    db $ff                                  ; [53]: NPC: Child (unused)
+    db $ff                                  ; [54]: NPC: Armor Salesman
+    db $ff                                  ; [55]: NPC: Martial Artist
+    db $ff                                  ; [56]: NPC: Priest
+    db $ff                                  ; [57]: NPC: King
+    db $ff                                  ; [58]: NPC: Magic Teacher
+    db $ff                                  ; [59]: NPC: Key Salesman
+    db $ff                                  ; [60]: NPC: Smoking Man
+    db $ff                                  ; [61]: NPC: Man in Chair
+    db $ff                                  ; [62]: NPC: Sitting Man
+    db $ff                                  ; [63]: NPC: Meat Salesman
+    db $ff                                  ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $ff                                  ; [65]: NPC: Guard
+    db $ff                                  ; [66]: NPC: Doctor
+    db $ff                                  ; [67]: NPC: Walking Woman 1
+    db $ff                                  ; [68]: NPC: Walking Woman 2
+    db $ff                                  ; [69]: Enemy: Eyeball (unused)
+    db $0f                                  ; [70]: Enemy: Zozura
+    db $32                                  ; [71]: Item: Glove
+    db $ff                                  ; [72]: Item: Black Onyx
+    db $ff                                  ; [73]: Item: Pendant
+    db $ff                                  ; [74]: Item: Red Potion
+    db $ff                                  ; [75]: Item: Poison
+    db $ff                                  ; [76]: Item: Elixir
+    db $ff                                  ; [77]: Item: Ointment
+    db $ff                                  ; [78]: Trigger: Intro
+    db $ff                                  ; [79]: Item: Mattock
+    db $ff                                  ; [80]: Magic: ?
+    db $00                                  ; [81]: Effect: Fountain
+    db $ff                                  ; [82]: Magic: ?
+    db $00                                  ; [83]: Magic: ?
+    db $00                                  ; [84]: Item: Wing Boots
+    db $ff                                  ; [85]: Item: Hour Glass
+    db $ff                                  ; [86]: Item: Magical Rod
+    db $ff                                  ; [87]: Item: Battle Suit
+    db $ff                                  ; [88]: Item: Battle Helmet
+    db $ff                                  ; [89]: Item: Dragon Slayer
+    db $ff                                  ; [90]: Item: Mattock
+    db $ff                                  ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db $ff                                  ; [92]: Item: Red Potion
+    db $ff                                  ; [93]: Item: Poison
+    db $ff                                  ; [94]: Item: Glove
+    db $ff                                  ; [95]: Item: Ointment
+    db $ff                                  ; [96]: Effect: Spring of Trunk
+    db $ff                                  ; [97]: Effect: Spring of Sky
+    db $ff                                  ; [98]: Effect: Spring of Tower
+    db $ff                                  ; [99]: Effect: Boss Death
     db $ff                                  ; [100]:
 
 
@@ -16302,216 +16364,225 @@ BYTE_ARRAY_PRG14__b672:                     ; [$b672]
 ;
 SPRITE_ENTITY_DAMAGES:                      ; [$b6d7]
     db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $1f                                  ; [3]:
-    db $07                                  ; [4]: Raiden
-    db $09                                  ; [5]: Necron Aides
-    db $06                                  ; [6]: Zombie
-    db $03                                  ; [7]: Hornet
-    db $04                                  ; [8]: Bihoruda
-    db $06                                  ; [9]: Lilith
-    db $1c                                  ; [10]:
-    db $03                                  ; [11]: Yuinaru
-    db $04                                  ; [12]: Snowman
-    db $05                                  ; [13]: Nash
-    db $07                                  ; [14]: Fire Giant
-    db $0d                                  ; [15]: Ishiisu
-    db $0f                                  ; [16]: Execution Hood
-    db $14                                  ; [17]: Rokusutahn
-    db $14                                  ; [18]: Unused enemy (round body
+    db $00                                  ; [1]: Dropped: Bread
+    db $00                                  ; [2]: Dropped: Coin
+    db $1f                                  ; [3]: Enemy: ?
+    db $07                                  ; [4]: Enemy: Raiden
+    db $09                                  ; [5]: Enemy: Necron Aides
+    db $06                                  ; [6]: Enemy: Zombie
+    db $03                                  ; [7]: Enemy: Hornet
+    db $04                                  ; [8]: Enemy: Bihoruda
+    db $06                                  ; [9]: Enemy: Lilith
+    db $1c                                  ; [10]: Magic: ?
+    db $03                                  ; [11]: Enemy: Yuinaru
+    db $04                                  ; [12]: Enemy: Snowman
+    db $05                                  ; [13]: Enemy: Nash
+    db $07                                  ; [14]: Enemy: Fire Giant
+    db $0d                                  ; [15]: Enemy: Ishiisu
+    db $0f                                  ; [16]: Enemy: Execution Hood
+    db $14                                  ; [17]: Boss: Rokusutahn
+    db $14                                  ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $00                                  ; [19]: Enemy death effect
-    db $00                                  ; [20]: Lightning ball effect
-    db $07                                  ; [21]: Charron
-    db $0a                                  ; [22]: Unused
-    db $0a                                  ; [23]: Geributa
-    db $04                                  ; [24]: Sugata
-    db $0d                                  ; [25]: Grimlock
-    db $05                                  ; [26]: Giant Bees
-    db $0e                                  ; [27]: Myconid
-    db $17                                  ; [28]: Naga
-    db $00                                  ; [29]: Unused (skeleton knight
-                                            ; with sword and shield)
-    db $0f                                  ; [30]: Giant Strider
-    db $0c                                  ; [31]: Sir Gawaine
-    db $0b                                  ; [32]: Maskman
-    db $11                                  ; [33]: Wolfman
-    db $12                                  ; [34]: Yareeka
-    db $09                                  ; [35]: Magman
-    db $10                                  ; [36]: Unused enemy
-                                            ; (curly-tailed guy with spear)
-    db $0b                                  ; [37]: Unused enemy
-    db $07                                  ; [38]: Ikeda
-    db $0a                                  ; [39]: Unused (blue
-                                            ; muppet-looking guy)
-    db $10                                  ; [40]: Lamprey
-    db $0c                                  ; [41]: Unused enemy
-    db $05                                  ; [42]: Monodron
-    db $06                                  ; [43]: Unused enemy (winged
-                                            ; skeleton guy)
-    db $0f                                  ; [44]: Tamazutsu
-    db $12                                  ; [45]: Ripasheiku
-    db $1c                                  ; [46]: Zoradohna
-    db $18                                  ; [47]: Borabohra
-    db $0d                                  ; [48]: Pakukame
-    db $0b                                  ; [49]: Zorugeriru
-    db $28                                  ; [50]: King Grieve
-    db $29                                  ; [51]: Shadow Eura
-    db $00                                  ; [52]:
-    db $00                                  ; [53]:
-    db $00                                  ; [54]:
-    db $00                                  ; [55]:
-    db $00                                  ; [56]:
-    db $00                                  ; [57]:
-    db $00                                  ; [58]:
-    db $00                                  ; [59]:
-    db $00                                  ; [60]:
-    db $00                                  ; [61]:
-    db $00                                  ; [62]:
-    db $00                                  ; [63]:
-    db $00                                  ; [64]:
-    db $00                                  ; [65]:
-    db $00                                  ; [66]:
-    db $00                                  ; [67]:
-    db $00                                  ; [68]:
-    db $00                                  ; [69]:
-    db $08                                  ; [70]: Unused enemy (eyeball)
-    db $07                                  ; [71]: Zozura
-    db $00                                  ; [72]:
-    db $00                                  ; [73]:
-    db $00                                  ; [74]:
-    db $00                                  ; [75]:
-    db $00                                  ; [76]:
-    db $00                                  ; [77]:
-    db $00                                  ; [78]:
-    db $00                                  ; [79]:
-    db $00                                  ; [80]:
-    db $08                                  ; [81]: ? Garbled
-    db $00                                  ; [82]:
-    db $1c                                  ; [83]:
-    db $08                                  ; [84]:
-    db $00                                  ; [85]:
-    db $00                                  ; [86]:
-    db $00                                  ; [87]:
-    db $00                                  ; [88]:
-    db $00                                  ; [89]:
-    db $00                                  ; [90]:
-    db $00                                  ; [91]:
-    db $00                                  ; [92]:
-    db $00                                  ; [93]:
-    db $00                                  ; [94]:
-    db $00                                  ; [95]:
-    db $00                                  ; [96]:
-    db $00                                  ; [97]:
-    db $00                                  ; [98]:
-    db $00                                  ; [99]:
+    db $00                                  ; [19]: Effect: Enemy death
+    db $00                                  ; [20]: Effect: Lightning ball
+    db $07                                  ; [21]: Enemy: Charron
+    db $0a                                  ; [22]: Enemy: ? (Unused)
+    db $0a                                  ; [23]: Enemy: Geributa
+    db $04                                  ; [24]: Enemy: Sugata
+    db $0d                                  ; [25]: Enemy: Grimlock
+    db $05                                  ; [26]: Enemy: Giant Bees
+    db $0e                                  ; [27]: Enemy: Myconid
+    db $17                                  ; [28]: Enemy: Naga
+    db $00                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $0f                                  ; [30]: Enemy: Giant Strider
+    db $0c                                  ; [31]: Enemy: Sir Gawaine
+    db $0b                                  ; [32]: Enemy: Maskman
+    db $11                                  ; [33]: Enemy: Wolfman
+    db $12                                  ; [34]: Enemy: Yareeka
+    db $09                                  ; [35]: Enemy: Magman
+    db $10                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $0b                                  ; [37]: Enemy: ? (unused)
+    db $07                                  ; [38]: Enemy: Ikeda
+    db $0a                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $10                                  ; [40]: Enemy: Lamprey
+    db $0c                                  ; [41]: Enemy: ? (unused)
+    db $05                                  ; [42]: Enemy: Monodron
+    db $06                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $0f                                  ; [44]: Enemy: Tamazutsu
+    db $12                                  ; [45]: Boss: Ripasheiku
+    db $1c                                  ; [46]: Boss: Zoradohna
+    db $18                                  ; [47]: Boss: Borabohra
+    db $0d                                  ; [48]: Boss: Pakukame
+    db $0b                                  ; [49]: Boss: King Grieve
+    db $28                                  ; [50]: Boss: Shadow Eura
+    db $29                                  ; [51]: NPC: Walking Man 1
+    db $00                                  ; [52]: NPC: Blue lady (unused)
+    db $00                                  ; [53]: NPC: Child (unused)
+    db $00                                  ; [54]: NPC: Armor Salesman
+    db $00                                  ; [55]: NPC: Martial Artist
+    db $00                                  ; [56]: NPC: Priest
+    db $00                                  ; [57]: NPC: King
+    db $00                                  ; [58]: NPC: Magic Teacher
+    db $00                                  ; [59]: NPC: Key Salesman
+    db $00                                  ; [60]: NPC: Smoking Man
+    db $00                                  ; [61]: NPC: Man in Chair
+    db $00                                  ; [62]: NPC: Sitting Man
+    db $00                                  ; [63]: NPC: Meat Salesman
+    db $00                                  ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $00                                  ; [65]: NPC: Guard
+    db $00                                  ; [66]: NPC: Doctor
+    db $00                                  ; [67]: NPC: Walking Woman 1
+    db $00                                  ; [68]: NPC: Walking Woman 2
+    db $00                                  ; [69]: Enemy: Eyeball (unused)
+    db $08                                  ; [70]: Enemy: Zozura
+    db $07                                  ; [71]: Item: Glove
+    db $00                                  ; [72]: Item: Black Onyx
+    db $00                                  ; [73]: Item: Pendant
+    db $00                                  ; [74]: Item: Red Potion
+    db $00                                  ; [75]: Item: Poison
+    db $00                                  ; [76]: Item: Elixir
+    db $00                                  ; [77]: Item: Ointment
+    db $00                                  ; [78]: Trigger: Intro
+    db $00                                  ; [79]: Item: Mattock
+    db $00                                  ; [80]: Magic: ?
+    db $08                                  ; [81]: Effect: Fountain
+    db $00                                  ; [82]: Magic: ?
+    db $1c                                  ; [83]: Magic: ?
+    db $08                                  ; [84]: Item: Wing Boots
+    db $00                                  ; [85]: Item: Hour Glass
+    db $00                                  ; [86]: Item: Magical Rod
+    db $00                                  ; [87]: Item: Battle Suit
+    db $00                                  ; [88]: Item: Battle Helmet
+    db $00                                  ; [89]: Item: Dragon Slayer
+    db $00                                  ; [90]: Item: Mattock
+    db $00                                  ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db $00                                  ; [92]: Item: Red Potion
+    db $00                                  ; [93]: Item: Poison
+    db $00                                  ; [94]: Item: Glove
+    db $00                                  ; [95]: Item: Ointment
+    db $00                                  ; [96]: Effect: Spring of Trunk
+    db $00                                  ; [97]: Effect: Spring of Sky
+    db $00                                  ; [98]: Effect: Spring of Tower
+    db $00                                  ; [99]: Effect: Boss Death
 
 ;
 ; XREFS:
 ;     Player_HitEnemyWithMagic
 ;
-SOMETHING_SPRITE_ENTITY_ADDR_VALUES:        ; [$b73b]
+SPRITE_ENTITY_MAYBE_MAGIC_DEFENSE:          ; [$b73b]
     db $fc                                  ; [0]:
-    db $fc                                  ; [1]:
-    db $fc                                  ; [2]:
-    db $fc                                  ; [3]:
-    db $10                                  ; [4]:
-    db $50                                  ; [5]:
-    db $0c                                  ; [6]:
-    db $00                                  ; [7]:
-    db $00                                  ; [8]:
-    db $00                                  ; [9]:
-    db $fc                                  ; [10]:
-    db $00                                  ; [11]:
-    db $04                                  ; [12]:
-    db $fc                                  ; [13]:
-    db $40                                  ; [14]:
-    db $14                                  ; [15]:
-    db $c0                                  ; [16]:
-    db $00                                  ; [17]:
-    db $d0                                  ; [18]:
-    db $fc                                  ; [19]:
-    db $fc                                  ; [20]:
-    db $00                                  ; [21]:
-    db $fc                                  ; [22]:
-    db $00                                  ; [23]:
-    db $3c                                  ; [24]:
-    db $00                                  ; [25]:
-    db $0c                                  ; [26]:
-    db $14                                  ; [27]:
-    db $00                                  ; [28]:
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $54                                  ; [37]:
-    db $00                                  ; [38]:
-    db $40                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $14                                  ; [44]:
-    db $40                                  ; [45]:
-    db $f4                                  ; [46]:
-    db $e0                                  ; [47]:
-    db $44                                  ; [48]:
-    db $00                                  ; [49]:
-    db $fc                                  ; [50]:
-    db $fc                                  ; [51]:
-    db $fc                                  ; [52]:
-    db $fc                                  ; [53]:
-    db $fc                                  ; [54]:
-    db $fc                                  ; [55]:
-    db $fc                                  ; [56]:
-    db $fc                                  ; [57]:
-    db $fc                                  ; [58]:
-    db $fc                                  ; [59]:
-    db $fc                                  ; [60]:
-    db $fc                                  ; [61]:
-    db $fc                                  ; [62]:
-    db $fc                                  ; [63]:
-    db $fc                                  ; [64]:
-    db $fc                                  ; [65]:
-    db $fc                                  ; [66]:
-    db $fc                                  ; [67]:
-    db $fc                                  ; [68]:
-    db $fc                                  ; [69]:
-    db $00                                  ; [70]:
-    db $00                                  ; [71]:
-    db $00                                  ; [72]:
-    db $fc                                  ; [73]:
-    db $fc                                  ; [74]:
-    db $00                                  ; [75]:
-    db $fc                                  ; [76]:
-    db $00                                  ; [77]:
-    db $fc                                  ; [78]:
-    db $fc                                  ; [79]:
-    db $00                                  ; [80]:
-    db $fc                                  ; [81]:
-    db $fc                                  ; [82]:
-    db $fc                                  ; [83]:
-    db $fc                                  ; [84]:
-    db $fc                                  ; [85]:
-    db $fc                                  ; [86]:
-    db $fc                                  ; [87]:
-    db $fc                                  ; [88]:
-    db $fc                                  ; [89]:
-    db $fc                                  ; [90]:
-    db $fc                                  ; [91]:
-    db $fc                                  ; [92]:
-    db $fc                                  ; [93]:
-    db $fc                                  ; [94]:
-    db $fc                                  ; [95]:
-    db $fc                                  ; [96]:
-    db $fc                                  ; [97]:
-    db $fc                                  ; [98]:
-    db $fc                                  ; [99]:
+    db $fc                                  ; [1]: Dropped: Bread
+    db $fc                                  ; [2]: Dropped: Coin
+    db $fc                                  ; [3]: Enemy: ?
+    db $10                                  ; [4]: Enemy: Raiden
+    db $50                                  ; [5]: Enemy: Necron Aides
+    db $0c                                  ; [6]: Enemy: Zombie
+    db $00                                  ; [7]: Enemy: Hornet
+    db $00                                  ; [8]: Enemy: Bihoruda
+    db $00                                  ; [9]: Enemy: Lilith
+    db $fc                                  ; [10]: Magic: ?
+    db $00                                  ; [11]: Enemy: Yuinaru
+    db $04                                  ; [12]: Enemy: Snowman
+    db $fc                                  ; [13]: Enemy: Nash
+    db $40                                  ; [14]: Enemy: Fire Giant
+    db $14                                  ; [15]: Enemy: Ishiisu
+    db $c0                                  ; [16]: Enemy: Execution Hood
+    db $00                                  ; [17]: Boss: Rokusutahn
+    db $d0                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $fc                                  ; [19]: Effect: Enemy death
+    db $fc                                  ; [20]: Effect: Lightning ball
+    db $00                                  ; [21]: Enemy: Charron
+    db $fc                                  ; [22]: Enemy: ? (Unused)
+    db $00                                  ; [23]: Enemy: Geributa
+    db $3c                                  ; [24]: Enemy: Sugata
+    db $00                                  ; [25]: Enemy: Grimlock
+    db $0c                                  ; [26]: Enemy: Giant Bees
+    db $14                                  ; [27]: Enemy: Myconid
+    db $00                                  ; [28]: Enemy: Naga
+    db $00                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $00                                  ; [30]: Enemy: Giant Strider
+    db $00                                  ; [31]: Enemy: Sir Gawaine
+    db $00                                  ; [32]: Enemy: Maskman
+    db $00                                  ; [33]: Enemy: Wolfman
+    db $00                                  ; [34]: Enemy: Yareeka
+    db $00                                  ; [35]: Enemy: Magman
+    db $00                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $54                                  ; [37]: Enemy: ? (unused)
+    db $00                                  ; [38]: Enemy: Ikeda
+    db $40                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $00                                  ; [40]: Enemy: Lamprey
+    db $00                                  ; [41]: Enemy: ? (unused)
+    db $00                                  ; [42]: Enemy: Monodron
+    db $00                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $14                                  ; [44]: Enemy: Tamazutsu
+    db $40                                  ; [45]: Boss: Ripasheiku
+    db $f4                                  ; [46]: Boss: Zoradohna
+    db $e0                                  ; [47]: Boss: Borabohra
+    db $44                                  ; [48]: Boss: Pakukame
+    db $00                                  ; [49]: Boss: King Grieve
+    db $fc                                  ; [50]: Boss: Shadow Eura
+    db $fc                                  ; [51]: NPC: Walking Man 1
+    db $fc                                  ; [52]: NPC: Blue lady (unused)
+    db $fc                                  ; [53]: NPC: Child (unused)
+    db $fc                                  ; [54]: NPC: Armor Salesman
+    db $fc                                  ; [55]: NPC: Martial Artist
+    db $fc                                  ; [56]: NPC: Priest
+    db $fc                                  ; [57]: NPC: King
+    db $fc                                  ; [58]: NPC: Magic Teacher
+    db $fc                                  ; [59]: NPC: Key Salesman
+    db $fc                                  ; [60]: NPC: Smoking Man
+    db $fc                                  ; [61]: NPC: Man in Chair
+    db $fc                                  ; [62]: NPC: Sitting Man
+    db $fc                                  ; [63]: NPC: Meat Salesman
+    db $fc                                  ; [64]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $fc                                  ; [65]: NPC: Guard
+    db $fc                                  ; [66]: NPC: Doctor
+    db $fc                                  ; [67]: NPC: Walking Woman 1
+    db $fc                                  ; [68]: NPC: Walking Woman 2
+    db $fc                                  ; [69]: Enemy: Eyeball (unused)
+    db $00                                  ; [70]: Enemy: Zozura
+    db $00                                  ; [71]: Item: Glove
+    db $00                                  ; [72]: Item: Black Onyx
+    db $fc                                  ; [73]: Item: Pendant
+    db $fc                                  ; [74]: Item: Red Potion
+    db $00                                  ; [75]: Item: Poison
+    db $fc                                  ; [76]: Item: Elixir
+    db $00                                  ; [77]: Item: Ointment
+    db $fc                                  ; [78]: Trigger: Intro
+    db $fc                                  ; [79]: Item: Mattock
+    db $00                                  ; [80]: Magic: ?
+    db $fc                                  ; [81]: Effect: Fountain
+    db $fc                                  ; [82]: Magic: ?
+    db $fc                                  ; [83]: Magic: ?
+    db $fc                                  ; [84]: Item: Wing Boots
+    db $fc                                  ; [85]: Item: Hour Glass
+    db $fc                                  ; [86]: Item: Magical Rod
+    db $fc                                  ; [87]: Item: Battle Suit
+    db $fc                                  ; [88]: Item: Battle Helmet
+    db $fc                                  ; [89]: Item: Dragon Slayer
+    db $fc                                  ; [90]: Item: Mattock
+    db $fc                                  ; [91]: Item: Wing Boots (from
+                                            ; quest)
+    db $fc                                  ; [92]: Item: Red Potion
+    db $fc                                  ; [93]: Item: Poison
+    db $fc                                  ; [94]: Item: Glove
+    db $fc                                  ; [95]: Item: Ointment
+    db $fc                                  ; [96]: Effect: Spring of Trunk
+    db $fc                                  ; [97]: Effect: Spring of Sky
+    db $fc                                  ; [98]: Effect: Spring of Tower
+    db $fc                                  ; [99]: Effect: Boss Death
     db $fc                                  ; [$b79f] undefined
 
 
@@ -16570,51 +16641,74 @@ MAGIC_COSTS:                                ; [$b7a9]
     db $0a                                  ; [3]: Death
     db $10                                  ; [4]: Tilte
 
+
 ;============================================================================
-; TODO: Document Player_InitInventoryState
+; Initialize the player's inventory state.
+;
+; This will clear all selected/current items and empty all
+; the inventories.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     NumberOfArmors:
+;     NumberOfItems:
+;     NumberOfMagicSpells:
+;     NumberOfShields:
+;     NumberOfWeapons:
+;     SelectedArmor:
+;     SelectedItem:
+;     SelectedMagic:
+;     SelectedShield:
+;     SelectedWeapon:
+;     Player_CurWeapon:
+;         Cleared.
 ;
 ; XREFS:
 ;     Game_InitStateForStartScreen
 ;============================================================================
 Player_InitInventoryState:                  ; [$b7ae]
     LDA #$00
-    STA a:NumberOfWeapons
-    STA a:NumberOfShields
-    STA a:NumberOfMagicSpells
-    STA a:NumberOfItems
-    STA a:NumberOfArmors
+    STA a:NumberOfWeapons                   ; Set the number of weapons to 0.
+    STA a:NumberOfShields                   ; Set the number of shields to 0.
+    STA a:NumberOfMagicSpells               ; Set the number of magic spells
+                                            ; to 0.
+    STA a:NumberOfItems                     ; Set the number of items to 0.
+    STA a:NumberOfArmors                    ; Set the number of armors to 0.
 
     ;
     ; v-- Fall through --v
     ;
 
+
 ;============================================================================
-; TODO: Document PlayerDeath_ResetSelectedItemState
+; Resets the player's current/selected inventory items.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     SelectedArmor:
+;     SelectedItem:
+;     SelectedMagic:
+;     SelectedShield:
+;     SelectedWeapon:
+;     Player_CurWeapon:
+;         Cleared.
 ;
 ; XREFS:
 ;     Player_HandleDeath
 ;============================================================================
 PlayerDeath_ResetSelectedItemState:         ; [$b7bf]
     LDA #$00
-    STA a:SelectedArmor
+    STA a:SelectedArmor                     ; Set armor to Leather.
     LDA #$ff
-    STA a:SelectedWeapon
-    STA a:Player_CurWeapon
-    STA a:SelectedShield
-    STA a:SelectedMagic
-    STA a:SelectedItem
+    STA a:SelectedWeapon                    ; Set weapon to None.
+    STA a:Player_CurWeapon                  ; Set current weapon to None.
+    STA a:SelectedShield                    ; Set shield to None.
+    STA a:SelectedMagic                     ; Set magic to None.
+    STA a:SelectedItem                      ; Set item to None.
 
     ;
     ; XREFS:
@@ -16650,9 +16744,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     ORA Temp_00
     ASL A
     TAX
-    LDA #$b89f,X
+    LDA $b89f,X
     STA Temp_Addr_L
-    LDA #$b8a0,X
+    LDA $b8a0,X
     STA Temp_Addr_U
     JSR Maybe_Player_CalcAnimFrame
     STA Temp_00
@@ -16678,9 +16772,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     LDA a:Player_CurWeapon
     ASL A
     TAX
-    LDA #$b90f,X
+    LDA $b90f,X
     STA Temp_Addr_L
-    LDA #$b910,X
+    LDA $b910,X
     STA Temp_Addr_U
     LDY Temp_00
     LDA Player_PosY
@@ -16693,9 +16787,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     LDA a:Player_CurWeapon
     ASL A
     TAX
-    LDA #$b897,X
+    LDA MAYBE_WEAPON_RANGES,X
     STA Maybe_WeaponRange_X
-    LDA #$b898,X
+    LDA MAYBE_WEAPON_RANGES+1,X
     STA Maybe_WeaponRange_Y
     LDA Maybe_Something_WeaponPosX
     CMP Screen_Maybe_ScrollXCounter
@@ -16712,16 +16806,16 @@ Player_DrawWeapon:                          ; [$b7d6]
     STA Maybe_Arg_CurrentSprite_PosY
     LDA Temp_00
     PHA
-    JSR CurrentSprite_CalculateVisibility_MaybeWithArg
+    JSR CurrentSprite_CalculateVisibility
     PLA
     STA Temp_00
     LDX a:Player_CurWeapon
-    LDA #$b87c,X
+    LDA WEAPONS_SPRITE_U,X
     STA Sprites_PPUOffset
     LDA Temp_00
     CLC
-    ADC #$b878,X
-    JMP #$f039
+    ADC WEAPONS_SPRITE_L,X
+    JMP $f039
 
 
 ;============================================================================
@@ -16781,7 +16875,7 @@ Player_CalcValueAndFFForNeg:                ; [$b880]
 ; XREFS:
 ;     Player_DrawWeapon
 ;
-MAYBE_WEAPON_RANGES_U:                      ; [$b897]
+MAYBE_WEAPON_RANGES:                        ; [$b897]
     dw $0408,$0810,$0810,$0810              ; [$b897] ushort
 
 ;
@@ -16789,14 +16883,14 @@ MAYBE_WEAPON_RANGES_U:                      ; [$b897]
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b89f:                      ; [$b89f]
-    dw $b8af                                ; [0]:
-    dw $b8bf                                ; [1]:
-    dw $b8cf                                ; [2]:
-    dw $b8df                                ; [3]:
-    dw $b8ef                                ; [4]:
-    dw $b8ff                                ; [5]:
-    dw $b8ff                                ; [6]:
-    dw $b8ff                                ; [7]:
+    dw $b8af                                ; [0]: Dagger
+    dw $b8bf                                ; [1]: Dagger + shield
+    dw $b8cf                                ; [2]: Long Sword
+    dw $b8df                                ; [3]: Long Sword + shield
+    dw $b8ef                                ; [4]: Giant Blade
+    dw $b8ff                                ; [5]: Giant Blade + shield
+    dw $b8ff                                ; [6]: Dragon Slayer
+    dw $b8ff                                ; [7]: Dragon Slayer + shield
 
 ;
 ; XREFS:
@@ -16878,9 +16972,9 @@ DAT_PRG14__b91f:                            ; [$b91f]
 ;     A
 ;
 ; XREFS:
+;     Player_CheckShieldHitByMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     WasPlayerHitByMagic
 ;============================================================================
 Maybe_Player_CalcAnimFrame:                 ; [$b927]
     LDA Player_Flags
@@ -16919,7 +17013,7 @@ Maybe_Player_CalcAnimFrame:                 ; [$b927]
 
   @LAB_PRG14__b958:                         ; [$b958]
     LDX PlayerHitsPhaseCounter
-    LDA #$b97b,X
+    LDA $b97b,X
     RTS
 
   @LAB_PRG14__b95e:                         ; [$b95e]
@@ -16942,7 +17036,7 @@ Maybe_Player_CalcAnimFrame:                 ; [$b927]
 
   @LAB_PRG14__b976:                         ; [$b976]
     TAX
-    LDA #$b97e,X
+    LDA $b97e,X
     RTS
 
 ;
@@ -16997,7 +17091,7 @@ Player_DrawShield:                          ; [$b982]
   @LAB_PRG14__b99e:                         ; [$b99e]
     LDA Player_PosX_Block
     CLC
-    ADC #$b9dd,Y
+    ADC SHIELD_SPRITE_OFFSETS_X,Y
     STA a:Player_ShieldPositionX
     LDA Player_PosY
     CLC
@@ -17014,12 +17108,12 @@ Player_DrawShield:                          ; [$b982]
     STA Maybe_Arg_CurrentSprite_PosY
     LDA Temp_00
     PHA
-    JSR CurrentSprite_CalculateVisibility_MaybeWithArg
+    JSR CurrentSprite_CalculateVisibility
     PLA
     STA Temp_00
     LDY Temp_00
-    LDA #$b9d5,Y
-    JMP #$f039
+    LDA MAYBE_SHIELD_SPRITE_PPU_OFFSETS,Y
+    JMP $f039
 
   @_return:                                 ; [$b9d4]
     RTS
@@ -17061,7 +17155,7 @@ SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
     db $00                                  ; [15]:
 
 ;============================================================================
-; TODO: Document CurrentSprite_CalculateVisibility_MaybeWithArg
+; TODO: Document CurrentSprite_CalculateVisibility
 ;
 ; INPUTS:
 ;     None.
@@ -17075,7 +17169,7 @@ SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;============================================================================
-CurrentSprite_CalculateVisibility_MaybeWithArg: ; [$b9ed]
+CurrentSprite_CalculateVisibility:          ; [$b9ed]
     LDA #$00
     STA Temp_MovingSpriteVisibility
     LDA Maybe_Arg_CurrentSprite_PosY
@@ -17084,8 +17178,8 @@ CurrentSprite_CalculateVisibility_MaybeWithArg: ; [$b9ed]
     CLC
     ADC #$04
     STA Arg_PixelPosX
-    JSR #$e86c
-    JSR #$e8c3
+    JSR $e86c
+    JSR $e8c3
     CMP #$04
     BEQ @LAB_PRG14__ba0e
     CMP #$0d
@@ -17103,8 +17197,8 @@ CurrentSprite_CalculateVisibility_MaybeWithArg: ; [$b9ed]
     CLC
     ADC #$0c
     STA Arg_PixelPosX
-    JSR #$e86c
-    JSR #$e8c3
+    JSR $e86c
+    JSR $e8c3
     CMP #$04
     BEQ @LAB_PRG14__ba2d
     CMP #$0d
@@ -17133,7 +17227,7 @@ CurrentSprite_CalculateVisibility_MaybeWithArg: ; [$b9ed]
 
     ;
     ; XREFS:
-    ;     CurrentSprite_CalculateVisibility_MaybeWithArg
+    ;     CurrentSprite_CalculateVisibility
     ;
 SUB_PRG14__ba48:                            ; [$ba48]
     STA MovingSpriteVisibility
@@ -17271,7 +17365,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     ; Check if the player is climbing a ladder.
     ;
-    JSR #$ecf6                              ; Check if the player can cast
+    JSR $ecf6                               ; Check if the player can cast
                                             ; magic.
     BCS @_return2                           ; If not, we're done.
 
@@ -17308,7 +17402,7 @@ Player_CastMagic:                           ; [$ba5b]
     ; for the spell cost.
     ;
   @LAB_PRG14__ba79:                         ; [$ba79]
-    JSR #$c0c3                              ; Reduce the MP.
+    JSR $c0c3                               ; Reduce the MP.
     BCS @_return1                           ; If there's not enough, we're
                                             ; done.
 
@@ -17326,7 +17420,7 @@ Player_CastMagic:                           ; [$ba5b]
     ; has its own sound.
     ;
     LDA #$05
-    JSR #$d0e4                              ; Play the standard magic sound
+    JSR $d0e4                               ; Play the standard magic sound
                                             ; effect.
     JMP @_placeMagic
 
@@ -17336,7 +17430,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
   @_playTilteSound:                         ; [$ba8d]
     LDA #$14
-    JSR #$d0e4                              ; Play the Tilte magic sound
+    JSR $d0e4                               ; Play the Tilte magic sound
                                             ; effect.
 
 
@@ -17362,7 +17456,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     LDY a:CastMagic_Type                    ; Y = visible magic
     LDA Player_PosX_Block                   ; A = player X position
-    ADC #$baf2,Y                            ; Load the relative starting X
+    ADC CAST_MAGIC_START_X,Y                ; Load the relative starting X
                                             ; position for the spell.
     STA a:CastMagic_XPos_Full               ; Set it as the full X start
                                             ; position.
@@ -17373,7 +17467,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     ; Set the initial Y position of the magic.
     ;
-    ADC #$baed,Y                            ; Load the relative starting Y
+    ADC CAST_MAGIC_START_Y,Y                ; Load the relative starting Y
                                             ; position for the spell.
     STA a:CastMagic_YPos_Full               ; Set it as the full Y start
                                             ; position.
@@ -17467,10 +17561,10 @@ CastMagic_RunSpellHandler:                  ; [$bad9]
     LDA a:CastMagic_Type                    ; A = Current spell
     ASL A                                   ; Multiply by 2.
     TAY                                     ; Y = A
-    LDA #$baf8,Y                            ; Load the upper nibble of the
+    LDA CAST_MAGIC_UPDATE_HANDLERS+1,Y      ; Load the upper nibble of the
                                             ; address
     PHA                                     ; Push onto A
-    LDA #$baf7,Y                            ; Load the lower nibble of the
+    LDA CAST_MAGIC_UPDATE_HANDLERS,Y        ; Load the lower nibble of the
                                             ; address
     PHA                                     ; Push onto A
 
@@ -17667,7 +17761,7 @@ CastMagic_UpdateDeluge:                     ; [$bb45]
     ; It hit a block. Play the sound effect.
     ;
     LDA #$0a
-    JSR #$d0e4                              ; Play the Magic Hit Obstacle
+    JSR $d0e4                               ; Play the Magic Hit Obstacle
                                             ; sound effect.
 
 
@@ -17875,7 +17969,7 @@ CastMagic_UpdateFire:                       ; [$bb9c]
     ; It hit a block. Play the sound effect.
     ;
     LDA #$0a
-    JSR #$d0e4                              ; Play the Magic Hit Obstacle
+    JSR $d0e4                               ; Play the Magic Hit Obstacle
                                             ; sound effect.
 
 
@@ -18393,14 +18487,45 @@ CastMagic_UpdateTilteAfterFirstHit:         ; [$bc9f]
   @_return:                                 ; [$bcae]
     RTS
 
+
 ;============================================================================
-; TODO: Document CastMagic_UpdateXPosition
+; Update magic's position in the X direction.
+;
+; This will take the delta X values and update the position
+; accordingly.
+;
+; If the resulting position is off-screen, the magic will
+; be set to disperse.
 ;
 ; INPUTS:
-;     None.
+;     Arg_DeltaX_Full:
+;         The full delta Y value to add/subtract.
+;
+;     Arg_DeltaX_Frac:
+;         The fractional delta Y value to add/subtract.
+;
+;     CastMagic_XPos_Full:
+;         The current block Y position.
+;
+;     CastMagic_XPos_Frac:
+;         The current fractional Y position.
+;
+;     CastMagic_Flags:
+;         Flag for the magic.
 ;
 ; OUTPUTS:
-;     C
+;     C:
+;         0 = The magic is on-screen
+;         1 = The magic if off-scren.
+;
+;     CastMagic_XPos_Full:
+;         The updated block X position.
+;
+;     CastMagic_XPos_Frac:
+;         The updated fractional X position.
+;
+; CALLS:
+;     CastMagic_CheckDirection
 ;
 ; XREFS:
 ;     CastMagic_UpdateDeluge
@@ -18409,256 +18534,503 @@ CastMagic_UpdateTilteAfterFirstHit:         ; [$bc9f]
 ;     CastMagic_UpdateTilte
 ;============================================================================
 CastMagic_UpdateXPosition:                  ; [$bcaf]
-    LDA a:CastMagic_Flags
-    AND #$40
-    BNE @LAB_PRG14__bcd4
-    LDA a:CastMagic_XPos_Frac
+    LDA a:CastMagic_Flags                   ; Load the magic's flags.
+    AND #$40                                ; Check the Facing Right bit.
+    BNE @_isRight                           ; If it's set, jump.
+
+
+    ;
+    ; The magic is moving left.
+    ;
+    ; Update the fractional X value based on the provided delta.
+    ;
+    LDA a:CastMagic_XPos_Frac               ; Load the fractional X position.
     SEC
-    SBC a:Arg_DeltaX_Frac
-    STA a:CastMagic_XPos_Frac
-    LDA a:CastMagic_XPos_Full
-    SBC a:Arg_DeltaX_Full
-    STA a:CastMagic_XPos_Full
-    LDX #$00
-    JSR FUN_PRG14__bd8f
-    LDA a:CastMagic_XPos_Full
-    CMP #$f0
+    SBC a:Arg_DeltaX_Frac                   ; Subtract the provided delta.
+    STA a:CastMagic_XPos_Frac               ; Store it.
+
+
+    ;
+    ; Now update the full X position.
+    ;
+    LDA a:CastMagic_XPos_Full               ; Load the full X position.
+    SBC a:Arg_DeltaX_Full                   ; Subtract the provided delta.
+    STA a:CastMagic_XPos_Full               ; Store it.
+
+
+    ;
+    ; Check for collision/off-screen in the Left direction.
+    ;
+    LDX #$00                                ; 0 = Left
+    JSR CastMagic_CheckDirection            ; Check for collision/off-screen
+                                            ; in the left direction.
+    LDA a:CastMagic_XPos_Full               ; Load the block X coordinate.
+    CMP #$f0                                ; Set C=0 if on-screen, 1 if
+                                            ; off-screen (wrapped around).
     RTS
 
-  @LAB_PRG14__bcd4:                         ; [$bcd4]
-    LDA a:CastMagic_XPos_Frac
+
+    ;
+    ; The magic is moving right.
+    ;
+    ; Update the fractional X value based on the provided delta.
+    ;
+  @_isRight:                                ; [$bcd4]
+    LDA a:CastMagic_XPos_Frac               ; Load the fractional X
+                                            ; coordinate.
     CLC
-    ADC a:Arg_DeltaX_Frac
-    STA a:CastMagic_XPos_Frac
-    LDA a:CastMagic_XPos_Full
-    ADC a:Arg_DeltaX_Full
-    STA a:CastMagic_XPos_Full
-    LDX #$01
-    JSR FUN_PRG14__bd8f
-    LDX a:CastMagic_Type
-    LDA a:CastMagic_XPos_Full
-    CMP #$bcf6,X
+    ADC a:Arg_DeltaX_Frac                   ; Add the provided delta.
+    STA a:CastMagic_XPos_Frac               ; Store it.
+
+
+    ;
+    ; Now update the full X position.
+    ;
+    LDA a:CastMagic_XPos_Full               ; Load the full X coordinate.
+    ADC a:Arg_DeltaX_Full                   ; Add the delta.
+    STA a:CastMagic_XPos_Full               ; Store it.
+
+
+    ;
+    ; Check for collision/off-screen in the Right direction.
+    ;
+    LDX #$01                                ; X = Right
+    JSR CastMagic_CheckDirection            ; Check for collision/off-screen
+                                            ; in the right direction.
+    LDX a:CastMagic_Type                    ; X = Magic type.
+    LDA a:CastMagic_XPos_Full               ; A = Full X position.
+    CMP CAST_MAGIC_MAX_SCREEN_WIDTHS,X      ; Compare the X position to the
+                                            ; off-screen X position, and set
+                                            ; C as the result.
     RTS
 
 ;
 ; XREFS:
 ;     CastMagic_UpdateXPosition
 ;
-BYTE_ARRAY_PRG14__bcf6:                     ; [$bcf6]
+CAST_MAGIC_MAX_SCREEN_WIDTHS:               ; [$bcf6]
     db $f0                                  ; [0]:
     db $f0                                  ; [1]:
     db $e0                                  ; [2]:
     db $f0                                  ; [3]:
     db $f0                                  ; [4]:
 
+
 ;============================================================================
-; TODO: Document CastMagic_UpdateYPosition
+; Update magic's position in the Y direction.
+;
+; This will take the delta Y values and update the position
+; accordingly.
+;
+; If the resulting position is off-screen or collides with
+; something, the magic will be set to disperse.
 ;
 ; INPUTS:
-;     None.
+;     Arg_DeltaY_Full:
+;         The full delta Y value to add/subtract.
+;
+;     Arg_DeltaY_Frac:
+;         The fractional delta Y value to add/subtract.
+;
+;     CastMagic_YPos_Full:
+;         The current block Y position.
+;
+;     CastMagic_YPos_Frac:
+;         The current fractional Y position.
+;
+;     CastMagic_Flags:
+;         Flag for the magic.
 ;
 ; OUTPUTS:
-;     C
+;     C:
+;         0 = The magic is on-screen
+;         1 = The magic if off-scren.
+;
+;     CastMagic_YPos_Full:
+;         The updated block Y position.
+;
+;     CastMagic_YPos_Frac:
+;         The updated fractional Y position.
+;
+; CALLS:
+;     CastMagic_CheckDirection
 ;
 ; XREFS:
 ;     CastMagic_UpdateTilte
 ;============================================================================
 CastMagic_UpdateYPosition:                  ; [$bcfb]
-    LDA a:CastMagic_Flags
-    BMI @LAB_PRG14__bd1e
-    LDA a:CastMagic_YPos_Frac
+    LDA a:CastMagic_Flags                   ; Load the magic's flags.
+    BMI @_isMovingDown                      ; If it's moving up, jump.
+
+
+    ;
+    ; The magic is moving upward.
+    ;
+    ; Update the fractional Y value based on the provided delta.
+    ;
+    LDA a:CastMagic_YPos_Frac               ; Load the fractional Y
+                                            ; coordinate.
     SEC
-    SBC a:Arg_DeltaY_Frac
-    STA a:CastMagic_YPos_Frac
-    LDA a:CastMagic_YPos_Full
-    SBC a:Arg_DeltaY_Full
-    STA a:CastMagic_YPos_Full
-    LDX #$02
-    JSR FUN_PRG14__bd8f
-    LDA a:CastMagic_YPos_Full
-    CMP #$f0
+    SBC a:Arg_DeltaY_Frac                   ; Subtract the provided delta
+                                            ; value.
+    STA a:CastMagic_YPos_Frac               ; Store as the new fractional Y
+                                            ; coordinate.
+
+
+    ;
+    ; Now update the block Y value.
+    ;
+    LDA a:CastMagic_YPos_Full               ; Load the block Y coordinate.
+    SBC a:Arg_DeltaY_Full                   ; Subtract the provided delta
+                                            ; value.
+    STA a:CastMagic_YPos_Full               ; Store it.
+
+
+    ;
+    ; Check for collision/off-screen in the Up direction.
+    ;
+    LDX #$02                                ; X = 2 (up)
+    JSR CastMagic_CheckDirection            ; Check for collision/off-screen
+                                            ; in the up direction.
+    LDA a:CastMagic_YPos_Full               ; Load the block Y coordiante.
+    CMP #$f0                                ; Set C=0 if on-screen, 1 if
+                                            ; off-screen.
     RTS
 
-  @LAB_PRG14__bd1e:                         ; [$bd1e]
-    LDA a:CastMagic_YPos_Frac
+
+    ;
+    ; The magic is moving downward.
+    ;
+    ; Update the fractional Y value based on the provided delta.
+    ;
+  @_isMovingDown:                           ; [$bd1e]
+    LDA a:CastMagic_YPos_Frac               ; Load the fractional Y
+                                            ; coordinate.
     CLC
-    ADC a:Arg_DeltaY_Frac
-    STA a:CastMagic_YPos_Frac
-    LDA a:CastMagic_YPos_Full
-    ADC a:Arg_DeltaY_Full
-    STA a:CastMagic_YPos_Full
-    LDA a:Arg_DeltaY_Frac
-    PHP
-    LDX #$03
-    JSR FUN_PRG14__bd8f
-    PLP
+    ADC a:Arg_DeltaY_Frac                   ; Add the provided delta value.
+    STA a:CastMagic_YPos_Frac               ; Store as the new fractional Y
+                                            ; coordinate.
+
+
+    ;
+    ; Now update the block Y value.
+    ;
+    LDA a:CastMagic_YPos_Full               ; Load the block Y coordinate.
+    ADC a:Arg_DeltaY_Full                   ; Subtract the provided delta
+                                            ; value.
+    STA a:CastMagic_YPos_Full               ; Store it.
+
+
+    ;
+    ; Check for collision/off-screen in the Up direction.
+    ;
+    LDA a:Arg_DeltaY_Frac                   ; Load the provided fractional Y
+                                            ; delta.
+    PHP                                     ; Push flags to the stack.
+    LDX #$03                                ; X = 3 (down)
+    JSR CastMagic_CheckDirection            ; Check for collision/off-screen
+                                            ; in the down direction.
+    PLP                                     ; Pop flags from the stack.
     RTS
 
-;============================================================================
-; TODO: Document CastMagic_Maybe_CheckRightEdgeOrImpassable
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     FUN_PRG14__bd8f
-;============================================================================
-CastMagic_Maybe_CheckRightEdgeOrImpassable: ; [$bd3c]
-    LDA a:CastMagic_XPos_Full
-    STA Arg_PixelPosX
-    CMP #$f0
-    BCC CastMagic_Maybe_CheckImpassableY
 
 ;============================================================================
-; TODO: Document CastMagic_SetShouldDisperse
+; Check if magic moving left should disperse.
+;
+; If the magic is off the screen, or hits something.
+; magic will be set to disperse.
 ;
 ; INPUTS:
-;     None.
+;     CastMagic_XPos_Full:
+;         The block X position of the magic spell.
 ;
 ; OUTPUTS:
-;     TODO
+;     Blocks_Result:
+;         1 if magic should disperse.
+;         0 if it can remain on screen.
+;
+;     Arg_PixelPosX:
+;         Clobbered.
+;
+; CALLS:
+;     CastMagic_CheckDirection_CheckImpassable
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckXOrImpassable
+;     CastMagic_CheckDirection
 ;============================================================================
-CastMagic_SetShouldDisperse:                ; [$bd45]
-    LDA #$01
-    STA Blocks_Result                       ; Set block result to 1.
-    RTS
-
-;============================================================================
-; TODO: Document CastMagic_Maybe_CheckXOrImpassable
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     FUN_PRG14__bd8f
-;============================================================================
-CastMagic_Maybe_CheckXOrImpassable:         ; [$bd4a]
-    LDY a:CastMagic_Type
-    LDA a:CastMagic_XPos_Full
-    CLC
-    ADC #$bd9d,Y
-    STA Arg_PixelPosX
-    BCS CastMagic_SetShouldDisperse
+CastMagic_CheckDirection_Left:              ; [$bd3c]
+    LDA a:CastMagic_XPos_Full               ; A = Magic X position
+    STA Arg_PixelPosX                       ; Store as the pixel position to
+                                            ; check.
+    CMP #$f0                                ; Is it on-screen?
+    BCC CastMagic_CheckDirection_CheckImpassable ; If so, jump to check in a
+                                                 ; Y direction. Else, fall
+                                                 ; through.
 
     ;
     ; v-- Fall through --v
     ;
 
+
 ;============================================================================
-; TODO: Document CastMagic_Maybe_CheckImpassableY
+; Set a result stating magic should disperse.
+;
+; This is used as a utility by magic position checking
+; functions.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     Blocks_Result:
+;         Set to 1.
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckRightEdgeOrImpassable
+;     CastMagic_CheckDirection_Right
 ;============================================================================
-CastMagic_Maybe_CheckImpassableY:           ; [$bd58]
-    LDA a:CastMagic_YPos_Full
-    STA Arg_PixelPosY
-    JSR #$e86c
-    JSR #$e87c
-    STA Blocks_Result
-    BNE @_return
-    LDY a:CastMagic_Type
-    LDA #$bda9,Y
-    CMP #$10
-    BCC @LAB_PRG14__bd7d
-    TXA
-    CLC
-    ADC #$10
-    TAX
-    JSR #$e87c
-    STA Blocks_Result
-    BNE @_return
+CastMagic_SetShouldDisperse:                ; [$bd45]
+    LDA #$01                                ; A = 1 (true)
+    STA Blocks_Result                       ; Set as the result.
+    RTS
 
-  @LAB_PRG14__bd7d:                         ; [$bd7d]
-    LDA a:CastMagic_YPos_Full
-    AND #$0f
-    BEQ @_return
-    TXA
+
+;============================================================================
+; Check if magic moving right should disperse.
+;
+; If the magic is off the screen, or hits something.
+; magic will be set to disperse.
+;
+; INPUTS:
+;     CastMagic_XPos_Full:
+;         The block X position of the magic spell.
+;
+; OUTPUTS:
+;     Blocks_Result:
+;         1 if magic should disperse.
+;         0 if it can remain on screen.
+;
+;     Arg_PixelPosX:
+;         Clobbered.
+;
+; CALLS:
+;     CastMagic_CheckDirection_CheckImpassable
+;
+; XREFS:
+;     CastMagic_CheckDirection
+;============================================================================
+CastMagic_CheckDirection_Right:             ; [$bd4a]
+    LDY a:CastMagic_Type                    ; Y = Magic type
+    LDA a:CastMagic_XPos_Full               ; A = Block X position.
     CLC
-    ADC #$10
-    TAX
-    JSR #$e87c
-    STA Blocks_Result
+    ADC CAST_MAGIC_WIDTHS,Y                 ; Add a width based on the magic
+                                            ; type.
+    STA Arg_PixelPosX                       ; Store as the X argument.
+    BCS CastMagic_SetShouldDisperse         ; If the value wraps off-screen,
+                                            ; jump to set dispersed. Else,
+                                            ; fall through.
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+
+;============================================================================
+; Check if the magic spell has hit an impassable block.
+;
+; This is called after checking a magic in an X direction.
+; It will check the blocks overlapping the magic's sprite
+; (middle block, then lower block, then upper, as
+; appropriate) and set state if the spell has hit something.
+;
+; INPUTS:
+;     Arg_PixelPosX:
+;         The previously-calculated pixel X position of the
+;         magic spell.
+;
+;     CastMagic_YPos_Full:
+;         The magic's full Y position.
+;
+; OUTPUTS:
+;     Blocks_Result:
+;         1 = The spell hit an impassable block.
+;         0 = The spell did not.
+;
+;     Arg_PixelPosY:
+;         Clobbered.
+;
+; CALLS:
+;     Area_ConvertPixelsToBlockPos
+;     ScreenBuffer_IsBlockImpassable
+;
+; XREFS:
+;     CastMagic_CheckDirection_Left
+;============================================================================
+CastMagic_CheckDirection_CheckImpassable:   ; [$bd58]
+    ;
+    ; First, check if the block at middle Y position (at the
+    ; previously-calculated X) is passable.
+    ;
+    LDA a:CastMagic_YPos_Full               ; A = Magic full Y position
+    STA Arg_PixelPosY                       ; Store as the Y argument.
+    JSR $e86c                               ; Convert the pixels to a screen
+                                            ; block lookup position.
+    JSR $e87c                               ; Check if the block is
+                                            ; impassable.
+    STA Blocks_Result                       ; Set the tentative result
+                                            ; accordingly.
+    BNE @_return                            ; If not passable, return the
+                                            ; result.
+
+
+    ;
+    ; The block was passable. Check the block at the bottom
+    ; of the magic's bounding box.
+    ;
+    LDY a:CastMagic_Type                    ; Load the magic type.
+    LDA CAST_MAGIC_HEIGHTS,Y                ; Load the magic's height.
+    CMP #$10                                ; Is the height >= 16 (more than
+                                            ; one block)?
+    BCC @_checkTop                          ; If so, jump.
+    TXA                                     ; A = X (block position).
+    CLC
+    ADC #$10                                ; Add 16 (next block).
+    TAX                                     ; X = A (result)
+    JSR $e87c                               ; Check if the block is
+                                            ; impassable.
+    STA Blocks_Result                       ; Store the tentative result.
+    BNE @_return                            ; If not passable, return the
+                                            ; result.
+
+
+    ;
+    ; The block was passable. Check the block at the top of
+    ; the magic's bounding box.
+    ;
+  @_checkTop:                               ; [$bd7d]
+    LDA a:CastMagic_YPos_Full               ; Load the full Y position again.
+    AND #$0f                                ; Keep the lower nibble.
+    BEQ @_return                            ; If it's 0, return the existing
+                                            ; result.
+    TXA                                     ; A = X (block position).
+    CLC
+    ADC #$10                                ; Add 16 (next block).
+    TAX                                     ; X = A (result)
+    JSR $e87c                               ; Check if the block is
+                                            ; impassable.
+    STA Blocks_Result                       ; Store the result.
 
   @_return:                                 ; [$bd8e]
     RTS
 
+
 ;============================================================================
-; TODO: Document FUN_PRG14__bd8f
+; Check for magic movement in a given direction.
+;
+; This will check if the magic spell is off-screen or has
+; collided in a given direction.
+;
+; This really only checks left or right. While there is
+; some (potentially left-over) logic for checking up or
+; down, only left/right movement will trigger an off-screen
+; or collide result.
 ;
 ; INPUTS:
-;     X
+;     X:
+;         The direction to check:
+;
+;         0 = Left
+;         1 = Right
+;         2 = Up
+;         3 = Down
 ;
 ; OUTPUTS:
-;     TODO
+;     Blocks_Result:
+;         0 = Magic can remain on-screen.
+;         1 = Magic should disperse.
+;
+; CALLS:
+;     CastMagic_CheckDirection_Left
+;     CastMagic_CheckDirection_Right
 ;
 ; XREFS:
 ;     CastMagic_UpdateXPosition
 ;     CastMagic_UpdateYPosition
 ;============================================================================
-FUN_PRG14__bd8f:                            ; [$bd8f]
-    TXA
-    BEQ CastMagic_Maybe_CheckRightEdgeOrImpassable
-    DEX
-    BEQ CastMagic_Maybe_CheckXOrImpassable
-    DEX
-    BEQ @LAB_PRG14__bd98
+CastMagic_CheckDirection:                   ; [$bd8f]
+    ;
+    ; See if we're checking magic moving left.
+    ;
+    TXA                                     ; A = X (direction)
+    BEQ CastMagic_CheckDirection_Left       ; If moving left, jump to check.
 
-  @LAB_PRG14__bd98:                         ; [$bd98]
-    LDA #$00
-    STA Blocks_Result
+
+    ;
+    ; See if we're checking magic moving right.
+    ;
+    DEX                                     ; X-- (shift the Right direction
+                                            ; into Left for comparison).
+    BEQ CastMagic_CheckDirection_Right      ; If moving right, jump to check.
+
+
+    ;
+    ; See if we're checking magic moving up.
+    ;
+    ; But really, up or down gives the same result. Looks like
+    ; there was intended to be code here handling Up and Down
+    ; differently.
+    ;
+    DEX                                     ; X-- (shift Up into Left).
+    BEQ @_isUpOrDown                        ; If up, jump to the very next
+                                            ; instruction.
+
+
+    ;
+    ; The magic is moving up. Or down.
+    ;
+    ; It will never collide, so return a false result.
+    ;
+  @_isUpOrDown:                             ; [$bd98]
+    LDA #$00                                ; A = 0 (false result)
+    STA Blocks_Result                       ; Store as the result.
     RTS
 
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckXOrImpassable
+;     CastMagic_CheckDirection_Right
 ;
-BYTE_ARRAY_PRG14__bd9d:                     ; [$bd9d]
-    db $0f                                  ; [0]:
-    db $0f                                  ; [1]:
-    db $1f                                  ; [2]:
-    db $0f                                  ; [3]:
-    db $0f                                  ; [4]:
-    db $0f                                  ; [5]:
-    db $0f                                  ; [6]:
-    db $1f                                  ; [7]:
-    db $0f                                  ; [8]:
-    db $0f                                  ; [9]:
-    db $0f                                  ; [10]:
-    db $0f                                  ; [11]:
+CAST_MAGIC_WIDTHS:                          ; [$bd9d]
+    db $0f                                  ; [0]: Deluge
+    db $0f                                  ; [1]: Thunder
+    db $1f                                  ; [2]: Fire
+    db $0f                                  ; [3]: Death
+    db $0f                                  ; [4]: Tilte
+    db $0f                                  ; [5]: Deluge after hit
+    db $0f                                  ; [6]: Thunder after hit
+    db $1f                                  ; [7]: Fire after hit
+    db $0f                                  ; [8]: Death after hit
+    db $0f                                  ; [9]: Unknown
+    db $0f                                  ; [10]: Hit Wall effect (unused)
+    db $0f                                  ; [11]: Tilte after hit
 
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckImpassableY
+;     CastMagic_CheckDirection_CheckImpassable
 ;
-BYTE_ARRAY_PRG14__bda9:                     ; [$bda9]
-    db $0f                                  ; [0]:
-    db $1f                                  ; [1]:
-    db $0f                                  ; [2]:
-    db $0f                                  ; [3]:
-    db $0f                                  ; [4]:
-    db $0f                                  ; [5]:
-    db $1f                                  ; [6]:
-    db $0f                                  ; [7]:
-    db $0f                                  ; [8]:
-    db $0f                                  ; [9]:
-    db $0f                                  ; [10]:
-    db $0f                                  ; [11]:
+CAST_MAGIC_HEIGHTS:                         ; [$bda9]
+    db $0f                                  ; [0]: Deluge
+    db $1f                                  ; [1]: Thunder
+    db $0f                                  ; [2]: Fire
+    db $0f                                  ; [3]: Death
+    db $0f                                  ; [4]: Tilte
+    db $0f                                  ; [5]: Deluge after hit
+    db $1f                                  ; [6]: Thunder after hit
+    db $0f                                  ; [7]: Fire after hit
+    db $0f                                  ; [8]: Death after hit
+    db $0f                                  ; [9]: Unknown
+    db $0f                                  ; [10]: Hit Wall effect (unused)
+    db $0f                                  ; [11]: Tilte after hit
+
+UNUSED_SPACE_PRG14:                         ; [$bdb5]
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdb5] undefined
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdc5] undefined
     hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdd5] undefined

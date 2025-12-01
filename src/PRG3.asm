@@ -9,15 +9,7 @@
 
 ;============================================================================
 ; Relative offset to the area tables.
-;
-; XREFS:
-;     Game_LoadAreaTable
 ;============================================================================
-
-;
-; XREFS:
-;     Game_LoadAreaTable
-;
 AREAS_TABLE_PTR:                            ; [$8000]
     dw $0002                                ; AREA_TABLES
                                             ; [$PRG3::8000]
@@ -80,7 +72,7 @@ EOLIS_AREA_DATA:                            ; [$8012]
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8012]
 ;
-EOLIS_AREA_DATA.blockAttrsRelPtr:           ; [$801c]
+EOLIS_AREA_DATA_blockAttrsRelPtr:           ; [$801c]
     dw $0026                                ; EOLIS_BLOCK_ATTRIBUTES
                                             ; [$PRG3::801c]
     dw $00a6                                ; EOLIS_BLOCK_DATA+1
@@ -1089,7 +1081,7 @@ APOLUNE_AREA_DATA:                          ; [$8413]
 ; XREFS:
 ;     APOLUNE_AREA_DATA [$PRG3::8413]
 ;
-APOLUNE_AREA_DATA.blockAttrsRelPtr:         ; [$841d]
+APOLUNE_AREA_DATA_blockAttrsRelPtr:         ; [$841d]
     dw $0427                                ; AREA_3_BLOCK_ATTRIBUTES
                                             ; [$PRG3::841d]
     dw $04b0                                ; AREA_3_BLOCK_DATA+1
@@ -2424,7 +2416,7 @@ FOREPAW_AREA_DATA:                          ; [$890a]
 ; XREFS:
 ;     FOREPAW_AREA_DATA [$PRG3::890a]
 ;
-FOREPAW_AREA_DATA.blockAttrsRelPtr:         ; [$8914]
+FOREPAW_AREA_DATA_blockAttrsRelPtr:         ; [$8914]
     dw $091e                                ; Block attributes
     dw $09a6                                ; Block data 1
     dw $0a2e                                ; Block data 2
@@ -3730,7 +3722,7 @@ CONFLATE_AREA_DATA:                         ; [$8e7b]
 ; XREFS:
 ;     CONFLATE_AREA_DATA [$PRG3::8e7b]
 ;
-CONFLATE_AREA_DATA.blockAttrsRelPtr:        ; [$8e85]
+CONFLATE_AREA_DATA_blockAttrsRelPtr:        ; [$8e85]
     dw $0e8f                                ; Block attributes
     dw $0eed                                ; Block data 1
     dw $0f4b                                ; Block data 2
@@ -4576,7 +4568,7 @@ VICTIM_AREA_DATA:                           ; [$91ac]
 ; XREFS:
 ;     VICTIM_AREA_DATA [$PRG3::91ac]
 ;
-VICTIM_AREA_DATA.blockAttrsRelPtr:          ; [$91b6]
+VICTIM_AREA_DATA_blockAttrsRelPtr:          ; [$91b6]
     dw $11c0                                ; Block attributes
     dw $12c0                                ; Block data 1
     dw $13c0                                ; Block data 2
@@ -6236,7 +6228,7 @@ MASCON_AREA_DATA:                           ; [$9829]
 ; XREFS:
 ;     MASCON_AREA_DATA [$PRG3::9829]
 ;
-MASCON_AREA_DATA.blockAttrsRelPtr:          ; [$9833]
+MASCON_AREA_DATA_blockAttrsRelPtr:          ; [$9833]
     dw $183d                                ; Block attributes
     dw $18ad                                ; Block data 1
     dw $191d                                ; Block data 2
@@ -7409,7 +7401,7 @@ DAYBREAK_AREA_DATA:                         ; [$9c7e]
 ; XREFS:
 ;     DAYBREAK_AREA_DATA [$PRG3::9c7e]
 ;
-DAYBREAK_AREA_DATA.blockAttrsRelPtr:        ; [$9c88]
+DAYBREAK_AREA_DATA_blockAttrsRelPtr:        ; [$9c88]
     dw $1c92                                ; AREA_5_BLOCK_ATTRIBUTES
                                             ; [$PRG3::9c88]
     dw $1cf5                                ; AREA_5_BLOCK_DATA+1
@@ -8350,7 +8342,7 @@ EVIL_FORTRESS_AREA_DATA:                    ; [$a049]
 ; XREFS:
 ;     EVIL_FORTRESS_AREA_DATA [$PRG3::a049]
 ;
-EVIL_FORTRESS_AREA_DATA.blockAttrsRelPtr:   ; [$a053]
+EVIL_FORTRESS_AREA_DATA_blockAttrsRelPtr:   ; [$a053]
     dw $205d                                ; BYTE_ARRAY_PRG3__a05d
                                             ; [$PRG3::a053]
     dw $209d                                ; BYTE_ARRAY_PRG3__a09d

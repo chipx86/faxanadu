@@ -48,7 +48,7 @@ UI_SetHUDPPUAttributes:                     ; [$c000]
     LDX a:UI_AttributeDataIndex             ; X = HUD attribute data index,
                                             ; computed when setting up the
                                             ; screen.
-    LDA #$c01b,X                            ; Load the value for the
+    LDA HUD_ATTRIBUTE_DATA_BY_INDEX,X       ; Load the value for the
                                             ; attribute data.
 
 
@@ -128,7 +128,7 @@ UNUSED_FUN_PRG15_MIRROR__c033:              ; [$c033]
     STA PPU_TargetAddr
     INY
     LDA (Temp_Addr_L),Y
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     INY
     LDA (Temp_Addr_L),Y
     PHA
@@ -391,7 +391,7 @@ Player_ReduceMP:                            ; [$c0c3]
     LDX a:SelectedMagic                     ; Load the selected magic spell.
     LDA a:Player_MP                         ; Load the player's total MP.
     SEC
-    SBC #$b7a9,X                            ; Look up the cost of this spell.
+    SBC $b7a9,X                             ; Look up the cost of this spell.
     BCC @_notEnoughMP                       ; If there's not enough MP for
                                             ; the spell, then jump.
 
@@ -536,7 +536,7 @@ Player_Something_ChangeHP:                  ; [$c0ec]
 ;         Set to 0xFF.
 ;
 ; CALLS:
-;     PPU_ResetOffset
+;     CurrentSprite_ResetPPUTileOffset
 ;
 ; XREFS:
 ;     EndGame_Begin
@@ -563,7 +563,7 @@ GameLoop_ClearSprites:                      ; [$c130]
     ; We're out of the loop. Reset the PPU draw offset and restore
     ; screen state.
     ;
-    JSR PPU_ResetOffset                     ; Reset the PPU offset.
+    JSR CurrentSprite_ResetPPUTileOffset    ; Reset the PPU offset.
     LDA #$ff
     STA a:IScript_PortraitID                ; Clear any portrait shown on
                                             ; screen.
@@ -623,10 +623,10 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
     ; Set the starting address of the screen data.
     ;
     TAY                                     ; Y = A
-    LDA #$8210,Y                            ; Load the upper byte of the
+    LDA $8210,Y                             ; Load the upper byte of the
                                             ; address.
     STA Temp_Addr_L                         ; Store for reading.
-    LDA #$8211,Y                            ; Load the lower byte of thea
+    LDA $8211,Y                             ; Load the lower byte of thea
                                             ; ddress.
     STA Temp_Addr_U                         ; Store it.
 
@@ -663,7 +663,7 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
                                             ; address.
     INY                                     ; Y++
     LDA (Temp_Addr_L),Y                     ; Load the upper byte.
-    STA Sprites_ReadInfoAddr.U              ; And store it.
+    STA Sprites_ReadInfoAddr_U              ; And store it.
 
 
     ;
@@ -693,10 +693,10 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
     ADC Sprites_ReadInfoAddr                ; Increment the read address by 2
                                             ; bytes.
     STA Screen_ExtraInfoAddr
-    LDA Sprites_ReadInfoAddr.U              ; Load the upper byte.
+    LDA Sprites_ReadInfoAddr_U              ; Load the upper byte.
     ADC #$00                                ; Add carry, if lower byte
                                             ; overflowed.
-    STA Screen_ExtraInfoAddr.U              ; Store as the new upper byte.
+    STA Screen_ExtraInfoAddr_U              ; Store as the new upper byte.
     JMP Screen_LoadSpecialEventID           ; Read the extra screen
                                             ; information.
 
@@ -754,7 +754,7 @@ Screen_SetNoSpecialEventID:                 ; [$c193]
 ;
 ; INPUTS:
 ;     Screen_ExtraInfoAddr:
-;     #$cd:
+;     Screen_ExtraInfoAddr+1:
 ;         The address containing the extra screen
 ;         information.
 ;
@@ -840,7 +840,7 @@ RETURN_C1B3:                                ; [$c1b3]
 ;         The current ROM bank.
 ;
 ;     Sprites_ReadInfoAddr:
-;     #$cb:
+;     Sprites_ReadInfoAddr+1:
 ;         The address in the screens table to read from.
 ;
 ; OUTPUTS:
@@ -854,7 +854,7 @@ RETURN_C1B3:                                ; [$c1b3]
 ;         The loaded block Y position of the sprite.
 ;
 ;     Sprites_ReadInfoAddr:
-;     #$cb:
+;     Sprites_ReadInfoAddr+1:
 ;         The updated address in the screens table to read
 ;         from.
 ;
@@ -986,11 +986,11 @@ GameLoop_LoadSpriteInfo:                    ; [$c1b4]
                                             ; ID and position).
     STA Sprites_ReadInfoAddr                ; Store as the new lower byte of
                                             ; the address.
-    LDA Sprites_ReadInfoAddr.U              ; A = upper byte of the screen
+    LDA Sprites_ReadInfoAddr_U              ; A = upper byte of the screen
                                             ; information address
     ADC #$00                                ; Add carry if the lower byte
                                             ; overflowed.
-    STA Sprites_ReadInfoAddr.U              ; Store it as the new upper byte
+    STA Sprites_ReadInfoAddr_U              ; Store it as the new upper byte
                                             ; of the address.
     JMP @_readSpriteLoop                    ; Loop to read the next sprite.
 
@@ -1095,10 +1095,10 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     LDA a:CurrentSprite_Entity              ; Load the sprite entity.
     STA CurrentSprites_Entities,X           ; Set it.
     TAY                                     ; Y = A (entity)
-    LDA #$b4df,Y                            ; Load the hitbox type for the
+    LDA $b4df,Y                             ; Load the hitbox type for the
                                             ; entity.
     STA CurrentSprites_HitBoxTypes,X        ; Set it.
-    LDA #$b5a9,Y                            ; Load the HP for the entity.
+    LDA $b5a9,Y                             ; Load the HP for the entity.
     STA CurrentSprites_HP,X                 ; Set it.
 
 
@@ -1108,11 +1108,11 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     TYA                                     ; A = Y (entity)
     ASL A                                   ; Convert to a word boundary.
     TAY                                     ; Y = A
-    LDA #$ad2d,Y                            ; Load the lower byte of the
+    LDA $ad2d,Y                             ; Load the lower byte of the
                                             ; behavior script for the entity.
     STA CurrentSprites_BehaviorAddrs_L,X    ; Set the lower byte of the
                                             ; address.
-    LDA #$ad2e,Y                            ; Load the upper byte.
+    LDA $ad2e,Y                             ; Load the upper byte.
     STA CurrentSprites_BehaviorAddrs_U,X    ; Set the upper byte.
     LDA #$ff                                ; A = 0xFF (unset)
     STA CurrentSprites_Behaviors,X          ; Clear the current behavior
@@ -1164,7 +1164,7 @@ SPRITE_IMAGE_BANKS_1_:                      ; [$c25a]
 ;         The currently-loaded ROM bank.
 ;
 ;     Screen_ExtraInfoAddr:
-;     #$cd:
+;     Screen_ExtraInfoAddr+1:
 ;         The current address for the extra sprite values
 ;         on the screen.
 ;
@@ -1173,7 +1173,7 @@ SPRITE_IMAGE_BANKS_1_:                      ; [$c25a]
 ;         The updated sprite values.
 ;
 ;     Screen_ExtraInfoAddr:
-;     #$cd:
+;     Screen_ExtraInfoAddr+1:
 ;         The incremented address for the extra sprite
 ;         values on the screen.
 ;
@@ -1226,7 +1226,7 @@ Sprites_LoadSpriteValue:                    ; [$c25b]
                                             ; offset in the extra info data.
     BNE @_restoreBankAndReturn              ; If this didn't wrap to 0, we're
                                             ; done. Jump.
-    INC Screen_ExtraInfoAddr.U              ; Else, increment the upper byte
+    INC Screen_ExtraInfoAddr_U              ; Else, increment the upper byte
                                             ; as well.
 
   @_restoreBankAndReturn:                   ; [$c279]
@@ -1252,17 +1252,14 @@ Sprites_LoadSpriteValue:                    ; [$c25b]
 ;         The lookup table for sprite entity IDs to banks.
 ;
 ; OUTPUTS:
-;     CurrentSprite_ImagesBank:
+;     CurrentSprite_TilesBank:
 ;         The bank for the images for this sprite.
 ;
 ; XREFS:
 ;     GameLoop_LoadSpriteImages
 ;============================================================================
 Sprites_StoreBankForCurrentSprite:          ; [$c27c]
-    ;
-    ; Y = 0
-    ;
-    LDY #$00
+    LDY #$00                                ; Y = 0
     LDA a:CurrentSprite_Entity              ; A = current sprite entity
     CMP #$37                                ; Is it < sprite 55 (Unused Child
                                             ; sprite)?
@@ -1276,9 +1273,9 @@ Sprites_StoreBankForCurrentSprite:          ; [$c27c]
     ; Load the image for the bank.
     ;
   @_loadBank:                               ; [$c286]
-    LDA #$c259,Y                            ; Load the address for the sprite
+    LDA SPRITE_IMAGE_BANKS,Y                ; Load the address for the sprite
                                             ; entity.
-    STA a:CurrentSprite_ImagesBank          ; Store as the bank for this
+    STA a:CurrentSprite_TilesBank           ; Store as the bank for this
                                             ; sprite.
 
   @_return:                                 ; [$c28c]
@@ -1310,14 +1307,14 @@ Sprites_StoreBankForCurrentSprite:          ; [$c27c]
 ;     CurrentSprites_Entities:
 ;         Updated if sprites are removed or added.
 ;
-;     CurrentSprites_PPUAddrs:
-;         PPU addresses for sprite data.
+;     CurrentSprites_PPUOffsets:
+;         PPU tile offsets for sprite data.
 ;
 ;     CurrentSprite_Entity:
 ;         Clobbered.
 ;
 ; CALLS:
-;     PPU_ResetOffset
+;     CurrentSprite_ResetPPUTileOffset
 ;     PPUBuffer_WaitUntilClear
 ;     Sprites_LoadImageForCurrentSprite
 ;     Sprites_StoreBankForCurrentSprite
@@ -1325,11 +1322,11 @@ Sprites_StoreBankForCurrentSprite:          ; [$c27c]
 ; XREFS:
 ;     FUN_PRG15_MIRROR__dacd
 ;     Game_MainLoop
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
+;     Game_SetupEnterBuilding
+;     Game_SetupEnterScreen
 ;     Game_Start
 ;     IScripts_ClearPortraitImage
-;     Maybe_Game_EnterBuildingHandler
-;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
 ;============================================================================
 GameLoop_LoadSpriteImages:                  ; [$c28d]
@@ -1338,7 +1335,7 @@ GameLoop_LoadSpriteImages:                  ; [$c28d]
     ;
     LDA a:CurrentSpriteIndex                ; A = current sprite index
     PHA                                     ; Push it to the stack.
-    JSR PPU_ResetOffset                     ; Reset the PPU drawing
+    JSR CurrentSprite_ResetPPUTileOffset    ; Reset the PPU drawing
                                             ; coordinates.
 
 
@@ -1389,12 +1386,13 @@ GameLoop_LoadSpriteImages:                  ; [$c28d]
     ; This is the Pakukame. Swap in a Lilith and load the image.
     ;
     ; This will then restore the entity back to Pakukame.
-    ; Effectively, each Lilith on screen seems t be backed by
+    ; Effectively, each Lilith on screen seems to be backed by
     ; a Pakukame.
     ;
     LDA a:CurrentSprite_Entity              ; Load the Pakukame entity ID
     PHA                                     ; Push to the stack.
-    LDA PPUOffset_Index                     ; Load the offset row.
+    LDA CurrentSprite_StartPPUTileOffset    ; Load the sprite's starting PPU
+                                            ; tile offset.
     PHA                                     ; Push it to the stack.
     LDA #$09                                ; A = 9 (Lilith)
     STA a:CurrentSprite_Entity              ; Store as the new entity.
@@ -1402,22 +1400,30 @@ GameLoop_LoadSpriteImages:                  ; [$c28d]
     JSR Sprites_LoadImageForCurrentSprite   ; Load Lilth's image from the
                                             ; bank.
     PLA                                     ; Pop the PPU offset row.
-    STA PPUOffset_Index                     ; Store it again.
+    STA CurrentSprite_StartPPUTileOffset    ; Store it again.
     PLA                                     ; Pop the current sprite entity.
     STA a:CurrentSprite_Entity              ; Store it again.
 
 
     ;
-    ; Load the PPU address and Y posiiton for the sprite.
+    ; Store the starting PPU tile offset for the sprite.
+    ;
+    ; This will be stored in this sprite's slot in the current
+    ; sprites information.
+    ;
+  @_loadSpriteInfo:                         ; [$c2c9]
+    LDX a:CurrentSpriteIndex                ; X = current sprite index
+    LDA CurrentSprite_StartPPUTileOffset    ; A = Start PPU tile offset
+    STA CurrentSprites_PPUOffsets,X         ; Set this in the PPU tile
+                                            ; offsets for this sprite.
+
+
+    ;
+    ; Check if the sprite is on-screen or off-screen.
     ;
     ; If the Y position is off the screen (row 30 or higher),
     ; then the sprite will be unset.
     ;
-  @_loadSpriteInfo:                         ; [$c2c9]
-    LDX a:CurrentSpriteIndex                ; X = current sprite index
-    LDA PPUOffset_Index                     ; A = PPU offset row
-    STA CurrentSprites_PPUAddrs,X           ; Set this in the PPU addresses
-                                            ; for this sprite.
     LDA CurrentSprites_YPos,X               ; Load the Y position for this
                                             ; sprite.
     CMP #$f0                                ; Is it less than 0xF0?
@@ -1557,10 +1563,10 @@ CastMagic_RunUpdateSpellHandler:            ; [$c2e9]
     ASL A                                   ; Convert to a word boundary for
                                             ; the lookup table.
     TAY                                     ; Y = A
-    LDA #$bb28,Y                            ; Load the lower byte of the
+    LDA $bb28,Y                             ; Load the lower byte of the
                                             ; finish handler.
     PHA                                     ; Push to the stack.
-    LDA #$bb27,Y                            ; Load the upper byte.
+    LDA $bb27,Y                             ; Load the upper byte.
     PHA                                     ; Push.
 
   @_return:                                 ; [$c314]
@@ -1756,7 +1762,7 @@ CastMagic_CalculateVisibility:              ; [$c315]
 CastMagic_SetAppearance:                    ; [$c37d]
     LDY a:CastMagic_Type                    ; Y = cast magic type
     CLC
-    ADC #$c387,Y                            ; Add the value from the lookup
+    ADC SPRITE_MAGIC_IMAGE_ADDRS_U,Y        ; Add the value from the lookup
                                             ; table.
     JMP Sprite_SetAppearanceAddrFromOffset  ; Set the sprite appearance.
 
@@ -2203,7 +2209,7 @@ CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     ASL A
     PHA
     STA Temp_00
-    EOR #$c46c,X
+    EOR MAGICHITHANDLER_c42c_ARRAY1,X
     BPL @LAB_PRG15_MIRROR__c442
     STA Temp_00
     INC Temp_00
@@ -2215,7 +2221,7 @@ CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     STA Maybe_Arg_CurrentSprite_PosX
     PLA
     STA Temp_00
-    EOR #$c470,X
+    EOR $c470,X
     BPL @LAB_PRG15_MIRROR__c456
     STA Temp_00
     INC Temp_00
@@ -2227,7 +2233,7 @@ CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     STA Maybe_Arg_CurrentSprite_PosY
     TXA
     PHA
-    LDA #$c474,X
+    LDA $c474,X
     JSR CastMagic_SetAppearance
     PLA
     TAX
@@ -2348,10 +2354,10 @@ GameLoop_CheckUseCurrentItem:               ; [$c478]
     ;
     ; Look up this item in the jump table and run it.
     ;
-    LDA #$c49e,Y                            ; Load the lower byte of the item
+    LDA USE_ITEM_JUMP_TABLE+1,Y             ; Load the lower byte of the item
                                             ; handler address.
     PHA                                     ; Push it.
-    LDA #$c49d,Y                            ; Load the upper byte.
+    LDA USE_ITEM_JUMP_TABLE,Y               ; Load the upper byte.
     PHA                                     ; Push it.
 
   @_return:                                 ; [$c49c]
@@ -2770,7 +2776,7 @@ Player_UseWingBoots:                        ; [$c579]
     LSR A                                   ; Divide by 4.
     LSR A
     TAX                                     ; X = A (index)
-    LDA #$c599,X                            ; Look up in the duration table.
+    LDA TITLE_TO_WINGBOOTS_DURATION,X       ; Look up in the duration table.
     STA a:DurationWingBoots                 ; Set that as the starting
                                             ; duration.
     JSR UI_DrawTimeValue                    ; Draw the time on the HUD.
@@ -3066,7 +3072,7 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
 ;
 ; OUTPUTS:
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -3080,7 +3086,7 @@ Player_Add100XP:                            ; [$c609]
     LDA #$64                                ; A = 100 (lower byte of XP)
     STA a:Temp_Int24                        ; Store it as an argument.
     LDA #$00                                ; A = 0 (upper byte of XP).
-    STA a:Temp_Int24.M                      ; Store it as an argument.
+    STA a:Temp_Int24_M                      ; Store it as an argument.
     JMP Player_UpdateExperience             ; Update the player's experience
                                             ; using those values.
 
@@ -3151,7 +3157,7 @@ Player_UseMattock:                          ; [$c616]
   @LAB_PRG15_MIRROR__c61f:                  ; [$c61f]
     LDA Player_PosX_Block                   ; Get the player's X position.
     CLC
-    ADC #$c68d,Y                            ; Add the block distance for the
+    ADC USE_MATTOCK_BLOCK_DISTANCES,Y       ; Add the block distance for the
                                             ; facing direction.
     CMP #$f0                                ; Is the player too near to the
                                             ; right edge of the screen?
@@ -3186,7 +3192,7 @@ Player_UseMattock:                          ; [$c616]
     TAY                                     ; Y = index
     LDA ScreenBuffer,X                      ; Load the value from the screen
                                             ; buffer.
-    CMP #$c68f,Y                            ; Is this block already cleared
+    CMP USE_MATTOCK_BLOCK_TRANSITIONS,Y     ; Is this block already cleared
                                             ; by the Mattock?
     BEQ @_useMattock                        ; If not, use the Mattock to
                                             ; clear them.
@@ -3261,7 +3267,7 @@ Player_UseMattock:                          ; [$c616]
     PHA                                     ; Push to the stack.
     TXA                                     ; A = X
     PHA                                     ; Push to the stack.
-    LDA #$c68f,Y                            ; Load the block for this
+    LDA USE_MATTOCK_BLOCK_TRANSITIONS,Y     ; Load the block for this
                                             ; position.
     STA ScreenBuffer,X                      ; And store it in the screen
                                             ; buffer.
@@ -3875,7 +3881,7 @@ Player_PickUpMattock:                       ; [$c752]
 ;     Player_PickUpBlackOnyx
 ;     Player_PickUpDragonSlayer
 ;     Player_PickUpElixir
-;     Player_PickUpGlove
+;     PRG15::87cf
 ;     Player_PickUpHourGlass
 ;     Player_PickUpMagicalRod
 ;     Player_PickUpMattock
@@ -4732,7 +4738,7 @@ Player_PickUpItem:                          ; [$c8cd]
 ;         New upper bounds of the PPU buffer.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -4748,7 +4754,7 @@ UI_ClearSelectedItemPic:                    ; [$c8dc]
     ; item tiles).
     ;
     LDA #$13                                ; A = 0x13
-    STA a:PPU_TargetAddr.U                  ; Set as upper byte.
+    STA a:PPU_TargetAddr_U                  ; Set as upper byte.
     LDA #$c0                                ; A = 0xC0
     STA a:PPU_TargetAddr                    ; Set as lower byte.
 
@@ -4790,9 +4796,9 @@ UI_ClearSelectedItemPic:                    ; [$c8dc]
     ADC #$10                                ; Increment by 16 (next tile).
     STA a:PPU_TargetAddr                    ; Store as the new lower byte of
                                             ; the target address.
-    LDA a:PPU_TargetAddr.U                  ; Load the upper byte.
+    LDA a:PPU_TargetAddr_U                  ; Load the upper byte.
     ADC #$00                                ; Add the carry flag, if any.
-    STA a:PPU_TargetAddr.U                  ; And save it.
+    STA a:PPU_TargetAddr_U                  ; And save it.
     PLA                                     ; Pull A from the stack (full
                                             ; 0..4 loop counter).
     TAX                                     ; X = A
@@ -4906,8 +4912,8 @@ Game_Init:                                  ; [$c913]
 
   @_clearState:                             ; [$c93f]
     STA Temp_0200,X                         ; Clear memory at $0200 + X
-    STA #$0300,X                            ; Clear memory at $0300 + X
-    STA #$0400,X                            ; Clear memory at $0400 + X
+    STA $0300,X                             ; Clear memory at $0300 + X
+    STA $0400,X                             ; Clear memory at $0400 + X
     STA PPUBuffer,X                         ; Clear memory at $0500 + X
     STA ScreenBuffer,X                      ; Clear memory at $0600 + X
     STA SPRITE_0_RANGE_1_START,X            ; Clear memory at $0700 + X
@@ -4964,8 +4970,8 @@ OnInterrupt__updateAudio:                   ; [$c970]
     PHA                                     ; Push it to the stack.
     LDX #$05
     JSR MMC1_EnsurePRG                      ; Switch to bank 5.
-    JSR #$8009                              ; Run audio interrupt handlers.
-    JSR #$8003                              ; Run sound playback interrupt
+    JSR $8009                               ; Run audio interrupt handlers.
+    JSR $8003                               ; Run sound playback interrupt
                                             ; handlers.
     PLA                                     ; Pop the bank from the stack.
     TAX
@@ -5119,9 +5125,9 @@ OnInterrupt:                                ; [$c999]
     PHA                                     ; Push it to the stack.
     LDX #$05
     JSR MMC1_EnsurePRG                      ; Switch to bank 5.
-    JSR #$8009                              ; Run audio interrupt handling
+    JSR $8009                               ; Run audio interrupt handling
                                             ; code.
-    JSR #$8003                              ; Run sound playback interrupt
+    JSR $8003                               ; Run sound playback interrupt
                                             ; handling code.
     PLA                                     ; Pop the previous bank from the
                                             ; stack.
@@ -5256,11 +5262,11 @@ PPU_HandleOnInterrupt:                      ; [$c9d6]
 ;     FUN_PRG15_MIRROR__dacd
 ;     GameLoop_CheckPauseGame
 ;     Game_MainLoop
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
+;     Game_SetupEnterBuilding
+;     Game_SetupEnterScreen
 ;     Game_ShowStartScreen
 ;     Game_Start
-;     Maybe_Game_EnterBuildingHandler
-;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
 ;     Player_FillHPAndMP
 ;     Player_HandleDeath
@@ -5441,8 +5447,8 @@ Input_HandleOnInterrupt:                    ; [$ca35]
 ;         to 0x00).
 ;
 ; XREFS:
-;     SpriteAction_RandomlyFlipXDirection
-;     SpriteAction_RandomlyFlipYDirection
+;     BScript_Action_RandomlyFlipXDirection
+;     BScript_Action_RandomlyFlipYDirection
 ;============================================================================
 GetRandom:                                  ; [$ca6e]
     LDX Random_Offset                       ; Load the current offset into
@@ -5658,10 +5664,10 @@ PPU_FillGrid:                               ; [$caed]
 ;     FUN_PRG15_MIRROR__dacd
 ;     Game_InitStateForSpawn
 ;     Game_MainLoop
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
+;     Game_SetupEnterBuilding
+;     Game_SetupEnterScreen
 ;     Game_Start
-;     Maybe_Game_EnterBuildingHandler
-;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
 ;     PPU_WaitUntilFlushed
 ;============================================================================
@@ -5716,7 +5722,7 @@ DEADCODE_FUN_PRG15_MIRROR__cb0c:            ; [$cb0c]
     RTS
 
 ;============================================================================
-; TODO: Document Game_DrawAndEnableInterrupts
+; TODO: Document Game_ResetScreenAndEnableInterrupts
 ;
 ; INPUTS:
 ;     None.
@@ -5727,13 +5733,13 @@ DEADCODE_FUN_PRG15_MIRROR__cb0c:            ; [$cb0c]
 ; XREFS:
 ;     FUN_PRG15_MIRROR__dacd
 ;     Game_MainLoop
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
+;     Game_SetupEnterBuilding
+;     Game_SetupEnterScreen
 ;     Game_Start
-;     Maybe_Game_EnterBuildingHandler
-;     Maybe_Game_EnterScreenHandler
 ;     Maybe_Game_ExitBuildingHandler
 ;============================================================================
-Game_DrawAndEnableInterrupts:               ; [$cb17]
+Game_ResetScreenAndEnableInterrupts:        ; [$cb17]
     JSR Sprites_ResetForGameScreen          ; Set up the draw state.
     LDA #$01
     STA Game_EnableInterruptHandlers        ; Enable interrupt handlers.
@@ -5750,7 +5756,7 @@ UNUSED_FUN_PRG15_MIRROR__cb1f:              ; [$cb1f]
     RTS
 
 ;============================================================================
-; TODO: Document SplashAnimation_Something_cb27
+; TODO: Document Screen_ResetAndEnableInterrupts
 ;
 ; INPUTS:
 ;     None.
@@ -5764,7 +5770,7 @@ UNUSED_FUN_PRG15_MIRROR__cb1f:              ; [$cb1f]
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
 ;============================================================================
-SplashAnimation_Something_cb27:             ; [$cb27]
+Screen_ResetAndEnableInterrupts:            ; [$cb27]
     JSR Sprites_ResetWithNoSprite0
     LDA #$01
     STA Game_EnableInterruptHandlers
@@ -5844,8 +5850,8 @@ UNUSED_Sprites_ResetForDefaultsMode1:       ; [$cb3f]
 ;     PlayerMenu_ShowSubmenu
 ;     EndGame_Begin
 ;     EndGame_MainLoop
-;     Game_DrawAndEnableInterrupts
 ;     Game_MainLoop
+;     Game_ResetScreenAndEnableInterrupts
 ;     Game_WaitForOAMReset
 ;     Player_HandleDeath
 ;============================================================================
@@ -5875,7 +5881,7 @@ Sprites_ResetForGameScreen:                 ; [$cb47]
 ;     SplashAnimation_RunOutro
 ;     Game_InitScreenAndMusic
 ;     Game_ShowStartScreen
-;     SplashAnimation_Something_cb27
+;     Screen_ResetAndEnableInterrupts
 ;============================================================================
 Sprites_ResetWithNoSprite0:                 ; [$cb4f]
     LDA #$ff                                ; A = 0xFF
@@ -5977,7 +5983,7 @@ Sprites_Reset:                              ; [$cb53]
     ; When 0, this will be the location of the "P" symbol for the
     ; HP bar.
     ;
-    LDA #$cb96,Y                            ; Load the Y for the sprite.
+    LDA SPRITES_START_XY,Y                  ; Load the Y for the sprite.
     STA a:SPRITE_0_RANGE_1_START            ; Store for sprite 0's Y.
     LDA #$7f                                ; 0x7F == tile ID
     STA a:SPRITE0_TILE                      ; Store for sprite 0's tile ID.
@@ -5985,7 +5991,7 @@ Sprites_Reset:                              ; [$cb53]
                                             ; background
     STA a:SPRITE0_ATTRS                     ; Store for sprite 0's
                                             ; attributes.
-    LDA #$cb98,Y                            ; Load the X for the sprite.
+    LDA $cb98,Y                             ; Load the X for the sprite.
     STA a:SPRITE0_X                         ; Store for sprite 0's X.
     LDY #$04                                ; Y = 4 (loop counter).
 
@@ -6162,42 +6168,42 @@ Game_InitMMCAndBank:                        ; [$cbbf]
 ;============================================================================
 MMC1_Init:                                  ; [$cbd0]
     LDA #$ff
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LDA #$0e                                ; Horizontal Mirroring Regular
                                             ; Mirroring Swap ROM bank at
                                             ; 0x8000 Swap 8K of VROM at PPU
                                             ; 0x0000 Don't reset
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff                            ; VROM_SIZE_SELECT
+    STA a:$9fff                             ; VROM_SIZE_SELECT
     LDA #$00                                ; Select VROM bank at 0x0000
                                             ; Switch 4KB only Don't reset
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff                            ; VROM_PAGE_SELECT_1
+    STA a:$bfff                             ; VROM_PAGE_SELECT_1
     LDA #$00                                ; Select VROM bank at 0x1000
                                             ; Switch 4KB only Don't reset
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     RTS
 
 
@@ -6226,7 +6232,7 @@ MMC1_Init:                                  ; [$cbd0]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;============================================================================
-MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
+MMC1_SaveROMBankAndUpdateTo:                ; [$cc15]
     LDA a:CurrentROMBank                    ; Get the currently-loaded ROM
                                             ; bank
     STA SavedPRGBank
@@ -6256,6 +6262,7 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Area_ScrollToNextRoom
 ;     Area_SetBlocks
 ;     Area_SetStateFromDoorDestination
+;     CurrentSprite_LoadTilesInfo
 ;     EndGame_MainLoop
 ;     FUN_PRG15_MIRROR__f2e3
 ;     GameLoop_LoadSpriteInfo
@@ -6265,9 +6272,8 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Game_LoadAreaTable
 ;     Game_MainLoop
 ;     IScripts_Maybe_DrawSpriteToPPU
-;     LookupSpriteDataPointer
 ;     MMC1_LoadBankAndJump
-;     MMC1_RestorePrevPRGBank
+;     MMC1_RestorePrevROMBank
 ;     MMC1_UpdatePRGBankToStackA
 ;     Messages_Load
 ;     PPU_LoadGlyphsForStrings
@@ -6291,6 +6297,7 @@ MMC1_SavePRGBankAndUpdateTo:                ; [$cc15]
 ;     Sprite_SetPlayerAppearanceAddr
 ;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadCommon
+;     Sprites_LoadImageForCurrentSprite
 ;     Sprites_LoadSpriteValue
 ;     TextBox_GetBackingAttributeData
 ;     TextBox_LoadAndShowMessage
@@ -6313,15 +6320,15 @@ MMC1_UpdateROMBank:                         ; [$cc1a]
     ; Write 5 LSBs of A to $FFFF, one bit per write (MMC1 serial protocol):
     ;
     TXA                                     ; ROM_PAGE_SELECT parameter in X
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
 
 
     ;
@@ -6341,7 +6348,7 @@ MMC1_UpdateROMBank:                         ; [$cc1a]
     ; Slow path. Re-initialize the MMC1.
     ;
     LDA #$ff
-    STA a:#$ffff                            ; Reset the MMC1
+    STA a:MMC1_SERIAL                       ; Reset the MMC1
                                             ; shifter/controler.
     LDA #$0e                                ; Horizontal Mirroring Regular
                                             ; Mirroring Swap ROM bank at
@@ -6352,15 +6359,15 @@ MMC1_UpdateROMBank:                         ; [$cc1a]
     ;
     ; Set the CHR banking mode.
     ;
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
 
 
     ;
@@ -6368,15 +6375,15 @@ MMC1_UpdateROMBank:                         ; [$cc1a]
     ;
     LDA #$00                                ; Select VROM bank at 0x000
                                             ; Switch 4K only Don't reset
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
 
 
     ;
@@ -6384,15 +6391,15 @@ MMC1_UpdateROMBank:                         ; [$cc1a]
     ;
     LDA #$00                                ; Select VROM bank at 0x1000
                                             ; Switch 4K only Don't reset
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     JMP @_setupMMC1
 
   @_finish:                                 ; [$cc82]
@@ -6456,52 +6463,52 @@ MMC1_EnsurePRG:                             ; [$cc85]
     ; Reset MMC1.
     ;
     LDA #$ff
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LDA #$0e                                ; Horizontal Mirroring Regular
                                             ; Mirroring Swap ROM bank at
                                             ; 0x8000 Swap 8K of VROM at PPU
                                             ; 0x000 Don't reset
 
   @_setMMC1State:                           ; [$cc95]
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
     LSR A
-    STA a:#$9fff
+    STA a:$9fff
 
 
     ;
     ; Set CHR bank 0 = 0
     ;
     LDA #$00
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
     LSR A
-    STA a:#$bfff
+    STA a:$bfff
 
 
     ;
     ; Set CHR bank 1 = 0.
     ;
     LDA #$00
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
     LSR A
-    STA a:#$dfff
+    STA a:$dfff
 
 
     ;
@@ -6509,15 +6516,15 @@ MMC1_EnsurePRG:                             ; [$cc85]
     ;
   @_fastPath:                               ; [$ccd2]
     TXA
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     LSR A
-    STA a:#$ffff
+    STA a:MMC1_SERIAL
     RTS
 
 
@@ -6545,7 +6552,7 @@ MMC1_EnsurePRG:                             ; [$cc85]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;============================================================================
-MMC1_RestorePrevPRGBank:                    ; [$cce7]
+MMC1_RestorePrevROMBank:                    ; [$cce7]
     LDX SavedPRGBank
     JMP MMC1_UpdateROMBank
 ;============================================================================
@@ -6640,7 +6647,7 @@ PPUBuffer_DrawCommand_RemoveVerticalLines:  ; [$ccec]
     ; lookup table. This will be the replacement for the data we
     ; loaded.
     ;
-    AND #$cd33,X
+    AND PPUBUFFER_DRAWCOMMAND_0xFA_MASKS,X
     STA a:PPUDATA                           ; Set as the new PPU data.
 
 
@@ -6783,47 +6790,68 @@ PPUBuffer_DrawCommand_RotateTilesRight1Pixel: ; [$cd3b]
 
 
 ;============================================================================
-; Reset the PPU draw offset.
+; Reset the PPU tile offset for loading sprite tiles.
 ;
-; The row will be set to 9 and the column to 0.
+; This will reset to a value of $0900.
 ;
 ; INPUTS:
 ;     None
 ;
 ; OUTPUTS:
-;     PPUOffset_Col:
-;         The updated column (set to 0).
-;
-;     PPUOffset_Row:
-;         The updated row (set to 9).
+;     CurrentSprite_TargetPPUTileAddr:
+;     CurrentSprite_TargetPPUTileAddr+1:
+;         The updated offset ($0900).
 ;
 ; XREFS:
 ;     GameLoop_ClearSprites
 ;     GameLoop_LoadSpriteImages
 ;============================================================================
-PPU_ResetOffset:                            ; [$cd6f]
+CurrentSprite_ResetPPUTileOffset:           ; [$cd6f]
     LDA #$09
-    STA PPUOffset_Row                       ; Set row to 9.
+    STA CurrentSprite_TargetPPUTileAddr_U   ; Set upper to 0x09.
     LDA #$00
-    STA PPUOffset_Col                       ; Set column to 0.
+    STA CurrentSprite_TargetPPUTileAddr     ; Set lower to 0x00.
     RTS
 
 
 ;============================================================================
-; Look up the offset of the sprite data for a given sprite ID.
+; Look up tile information needed to draw a sprite.
 ;
-; This will also load the number of PPU tiles needed to draw the sprite.
+; This will take the sprite entity ID and look up the starting
+; address for tile data and the number of tiles to draw.
 ;
 ; INPUTS:
-;     None
+;     CurrentROMBank:
+;         The current ROM bank to switch back to after load.
+;
+;     CurrentSprite_Entity:
+;         The current sprite entity being loaded.
+;
+;     CurrentSprite_TilesBank:
+;         The tiles bank for the current sprite.
+;
+;     SPRITES_PPU_TILE_COUNTS:
+;         The lookup table of entity ID to tile count.
 ;
 ; OUTPUTS:
-;     None
+;     CurrentSprite_LoadTileAddr+1:
+;     CurrentSprite_LoadTileAddr:
+;         The address for the tiles to load.
+;
+;     CurrentSprite_LoadTileCount:
+;         The number of tiles to load.
+;
+;     Temp_Addr_U:
+;     Temp_Addr_L:
+;         Clobbered.
+;
+; CALLS:
+;     MMC1_UpdateROMBank
 ;
 ; XREFS:
 ;     Sprites_LoadImageForCurrentSprite
 ;============================================================================
-LookupSpriteDataPointer:                    ; [$cd78]
+CurrentSprite_LoadTilesInfo:                ; [$cd78]
     ;
     ; Save the current ROM bank to the stack.
     ;
@@ -6834,7 +6862,7 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ;
     ; Switch to the bank for the current sprite's images.
     ;
-    LDX a:CurrentSprite_ImagesBank          ; Load the bank where the images
+    LDX a:CurrentSprite_TilesBank           ; Load the bank where the images
                                             ; for the current sprite are
                                             ; found
     JSR MMC1_UpdateROMBank
@@ -6852,7 +6880,7 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ;
     ; Read the second byte as the upper address, and add 0x80 to it.
     ;
-    LDA a:#$8001                            ; Read byte from $8001.
+    LDA a:ROMBankStart+1                    ; Read byte from $8001.
     CLC
     ADC #$80                                ; Add 0x80.
     STA Temp_Addr_U                         ; Store as the upper byte of the
@@ -6863,8 +6891,8 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ; Compute the starting index for the sprite based on the
     ; entity ID.
     ;
-    ; Entities 0-55 are in the first sprite bank. 56+
-    ; are in the second.
+    ; Entities 0-55 are in the first sprite bank. 56+ are in
+    ; the second.
     ;
     LDA a:CurrentSprite_Entity              ; Load the current sprite ID
     CMP #$37                                ; Check if we're on the next
@@ -6884,13 +6912,13 @@ LookupSpriteDataPointer:                    ; [$cd78]
     LDA (Temp_Addr_L),Y                     ; Get the pointer to the sprite
                                             ; data from the bank address
                                             ; computed above.
-    STA CurrentSprite_Image_L               ; A = Lower byte of the image
+    STA CurrentSprite_LoadTileAddr          ; A = Lower byte of the image
                                             ; data address.
     INY
     LDA (Temp_Addr_L),Y                     ; A = Upper byte of the address.
     CLC
     ADC #$80                                ; Add 0x80 to the upper address.
-    STA CurrentSprite_Image_U               ; Upper byte of pointer to the
+    STA CurrentSprite_LoadTileAddr_U        ; Upper byte of pointer to the
                                             ; sprite bitmap
 
 
@@ -6900,8 +6928,8 @@ LookupSpriteDataPointer:                    ; [$cd78]
     ;
     LDA a:CurrentSprite_Entity              ; Load the current sprite ID
     TAY
-    LDA #$ce1b,Y                            ; Get the number of tiles needed
-    STA CurrentSprite_PPUTileCount          ; Store that for the render
+    LDA SPRITES_PPU_TILE_COUNTS,Y           ; Get the number of tiles needed
+    STA CurrentSprite_LoadTileCount         ; Store that for the render
 
 
     ;
@@ -6916,82 +6944,182 @@ LookupSpriteDataPointer:                    ; [$cd78]
 ;============================================================================
 ; Load all tiles required for a sprite into the PPU.
 ;
+; This will load information on the tiles needed for the
+; current sprite entity, and will then iterate through each
+; tile, writing it to the PPU buffer.
+;
 ; INPUTS:
-;     None
+;     CurrentSprite_TargetPPUTileAddr+1:
+;     CurrentSprite_TargetPPUTileAddr:
+;         The target PPU address to begin writing to.
 ;
 ; OUTPUTS:
-;     None
+;     CurrentSprite_TargetPPUTileAddr+1:
+;     CurrentSprite_TargetPPUTileAddr:
+;         The new target PPU address for the next sprite.
+;
+;     PPUBuffer:
+;         The PPU buffer populated with new tile data.
+;
+;     PPUBuffer_WriteOffset:
+;         The new PPU buffer write offset.
+;
+;     CurrentSprite_LoadTileAddr+1:
+;     CurrentSprite_LoadTileAddr:
+;     CurrentSprite_LoadTileCount:
+;     PPU_TargetAddr+1:
+;     PPU_TargetAddr:
+;         Clobbered.
+;
+; CALLS:
+;     CurrentSprite_LoadTilesInfo
+;     MMC1_UpdateROMBank
 ;
 ; XREFS:
 ;     GameLoop_LoadSpriteImages
 ;============================================================================
 Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
-    LDA PPUOffset_Col
-    STA Temp_00
-    LDA PPUOffset_Row
-    ASL Temp_00
+    ;
+    ; Calculate the starting PPU tile offset for this sprite.
+    ;
+    ; This is equivalent to:
+    ;
+    ;     // Lower byte
+    ;     Temp_00 =
+    ;     (byte)(CurrentSprite_TargetPPUTileAddr << 4);
+    ;
+    ;     // Upper byte
+    ;     CurrentSprite_StartPPUTileOffset = (byte)(
+    ;         (CurrentSprite_TargetPPUTileAddr+1 << 4) |
+    ;         (CurrentSprite_TargetPPUTileAddr >> 4)
+    ;     );
+    ;
+    LDA CurrentSprite_TargetPPUTileAddr     ; Load the lower byte of the
+                                            ; current PPU tile address to
+                                            ; read from.
+    STA Temp_00                             ; Store it temporarily.
+    LDA CurrentSprite_TargetPPUTileAddr_U   ; Load the upper byte of the PPU
+                                            ; tile address.
+    ASL Temp_00                             ; Multiply by 16.
     ROL A
     ASL Temp_00
     ROL A
     ASL Temp_00
     ROL A
     ASL Temp_00
-    ROL A
-    STA PPUOffset_Index
-    JSR LookupSpriteDataPointer
-    LDA CurrentSprite_PPUTileCount
-    BNE @_loadSpriteToPPUBuffer
+    ROL A                                   ; A = Lower byte of the offset.
+    STA CurrentSprite_StartPPUTileOffset    ; Store the upper byte as the
+                                            ; starting offset.
+
+
+    ;
+    ; Load the tile information for the sprite, and proceed to
+    ; load into the PPU if the sprite entity has tiles.
+    ;
+    JSR CurrentSprite_LoadTilesInfo         ; Look up the sprite data pointer
+                                            ; for this.
+    LDA CurrentSprite_LoadTileCount         ; A = Tile count.
+    BNE @_loadSpriteToPPUBuffer             ; If count > 0, jump to load tile
+                                            ; data.
     RTS
 
 
     ;
-    ; Transfer all PPU tiles for a sprite to the PPU buffer.
+    ; Switch to the bank containing the tiles to load.
     ;
   @_loadSpriteToPPUBuffer:                  ; [$cdd1]
-    LDA a:CurrentROMBank
-    PHA
-    LDX a:CurrentSprite_ImagesBank
-    JSR MMC1_UpdateROMBank
-    LDA PPUOffset_Row
-    STA PPU_TargetAddr.U
-    LDA PPUOffset_Col
-    STA PPU_TargetAddr
-    LDA #$10
-    JSR PPUBuffer_QueueCommandOrLength
+    LDA a:CurrentROMBank                    ; Load the current ROM bank.
+    PHA                                     ; Push it to the stack.
+    LDX a:CurrentSprite_TilesBank           ; X = Bank for the tiles.
+    JSR MMC1_UpdateROMBank                  ; Switch to that bank.
+
+
+    ;
+    ; Set the PPU address to load tiles into.
+    ;
+    LDA CurrentSprite_TargetPPUTileAddr_U   ; Load the upper byte of the
+                                            ; target PPU address.
+    STA PPU_TargetAddr_U                    ; Set it.
+    LDA CurrentSprite_TargetPPUTileAddr     ; Load the lower byte.
+    STA PPU_TargetAddr                      ; Set it.
+
+
+    ;
+    ; Queue loading 16 bytes for the current tile.
+    ;
+    LDA #$10                                ; A = 16 (bytes)
+    JSR PPUBuffer_QueueCommandOrLength      ; Queue as the length, and set X
+                                            ; as the write index.
 
 
     ;
     ; Copy the sprite data for this tile to the PPU buffer.
     ;
-    LDY #$00
+    LDY #$00                                ; Y = 0 (loop counter)
 
   @_copySpriteImage:                        ; [$cdea]
-    LDA (CurrentSprite_Image_L),Y
-    STA PPUBuffer,X
-    INX
-    INY
-    CPY #$10
-    BCC @_copySpriteImage
-    STX PPUBuffer_WriteOffset
-    PLA
-    TAX
-    JSR MMC1_UpdateROMBank
-    LDA CurrentSprite_Image_L
+    LDA (CurrentSprite_LoadTileAddr),Y      ; Load a byte from the tile.
+    STA PPUBuffer,X                         ; Write to the PPU buffer at X.
+    INX                                     ; X++ (write offset)
+    INY                                     ; Y++ (loop counter)
+    CPY #$10                                ; Is X < 16?
+    BCC @_copySpriteImage                   ; If so, loop.
+
+
+    ;
+    ; 16 bytes of sprite data was written to the PPU buffer.
+    ; Update the new write position for the buffer.
+    ;
+    STX PPUBuffer_WriteOffset               ; Store the resulting PPU buffer
+                                            ; write offset.
+
+
+    ;
+    ; Restore the previous bank.
+    ;
+    PLA                                     ; Pull the previous bank from the
+                                            ; stack.
+    TAX                                     ; Set to X.
+    JSR MMC1_UpdateROMBank                  ; And switch to it.
+
+
+    ;
+    ; Update the source tile address to advance to the next tile.
+    ;
+    LDA CurrentSprite_LoadTileAddr          ; Load the lower byte of the tile
+                                            ; address.
     CLC
-    ADC #$10
-    STA CurrentSprite_Image_L
-    LDA CurrentSprite_Image_U
-    ADC #$00
-    STA CurrentSprite_Image_U
-    LDA PPUOffset_Col
+    ADC #$10                                ; Add 16 (the bytes we just
+                                            ; read).
+    STA CurrentSprite_LoadTileAddr          ; And store it.
+    LDA CurrentSprite_LoadTileAddr_U        ; Load the upper byte.
+    ADC #$00                                ; Add Carry, if the lower byte
+                                            ; wrapped.
+    STA CurrentSprite_LoadTileAddr_U        ; And store it.
+
+
+    ;
+    ; Update the target PPU tile address to advance to the next
+    ; tile.
+    ;
+    LDA CurrentSprite_TargetPPUTileAddr     ; Load the lower byte of the
+                                            ; target address.
     CLC
-    ADC #$10
-    STA PPUOffset_Col
-    LDA PPUOffset_Row
-    ADC #$00
-    STA PPUOffset_Row
-    DEC CurrentSprite_PPUTileCount
-    BNE @_loadSpriteToPPUBuffer
+    ADC #$10                                ; Add 16.
+    STA CurrentSprite_TargetPPUTileAddr     ; And store it.
+    LDA CurrentSprite_TargetPPUTileAddr_U   ; Load the upper byte.
+    ADC #$00                                ; Add Carry, if the lower byte
+                                            ; wrapped.
+    STA CurrentSprite_TargetPPUTileAddr_U   ; And store it.
+
+
+    ;
+    ; Decrement the tile count, and loop if there are tiles
+    ; remaining.
+    ;
+    DEC CurrentSprite_LoadTileCount         ; Decrement the remaining tile
+                                            ; count.
+    BNE @_loadSpriteToPPUBuffer             ; If > 0, loop.
     RTS
 
 
@@ -6999,25 +7127,25 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
 ; The number of PPU tiles each sprite needs.
 ;
 ; XREFS:
-;     LookupSpriteDataPointer
+;     CurrentSprite_LoadTilesInfo
 ;============================================================================
 
 ;
 ; XREFS:
-;     LookupSpriteDataPointer
+;     CurrentSprite_LoadTilesInfo
 ;
 SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
     db $01                                  ; [0]:
-    db $01                                  ; [1]: Dropped bread
-    db $01                                  ; [2]: Dropped coin
-    db $01                                  ; [3]: TODO: Garbled 3
+    db $01                                  ; [1]: Dropped: Bread
+    db $01                                  ; [2]: Dropped: Coin
+    db $01                                  ; [3]: Enemy: ?
     db $10                                  ; [4]: Enemy: Raiden
     db $10                                  ; [5]: Enemy: Necron Aides
     db $10                                  ; [6]: Enemy: Zombie
     db $08                                  ; [7]: Enemy: Hornet
     db $06                                  ; [8]: Enemy: Bihoruda
     db $06                                  ; [9]: Enemy: Lilith
-    db $07                                  ; [10]: TODO: Garbled 10
+    db $07                                  ; [10]: Magic: ?
     db $06                                  ; [11]: Enemy: Yuinaru
     db $0c                                  ; [12]: Enemy: Snowman
     db $10                                  ; [13]: Enemy: Nash
@@ -7025,32 +7153,37 @@ SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
     db $12                                  ; [15]: Enemy: Ishiisu
     db $0d                                  ; [16]: Enemy: Execution Hood
     db $26                                  ; [17]: Boss: Rokusutahn
-    db $10                                  ; [18]: Enemy: Unused #18
-    db $00                                  ; [19]: Effect: Enemy Death
-    db $00                                  ; [20]: Effect: Lightning Ball
+    db $10                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $00                                  ; [19]: Effect: Enemy death
+    db $00                                  ; [20]: Effect: Lightning ball
     db $16                                  ; [21]: Enemy: Charron
-    db $17                                  ; [22]: Enemy: Unused 22
+    db $17                                  ; [22]: Enemy: ? (Unused)
     db $10                                  ; [23]: Enemy: Geributa
     db $0e                                  ; [24]: Enemy: Sugata
     db $12                                  ; [25]: Enemy: Grimlock
     db $0c                                  ; [26]: Enemy: Giant Bees
     db $0e                                  ; [27]: Enemy: Myconid
     db $10                                  ; [28]: Enemy: Naga
-    db $10                                  ; [29]: Enemy: Unused #29
+    db $10                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
     db $12                                  ; [30]: Enemy: Giant Strider
     db $12                                  ; [31]: Enemy: Sir Gawaine
     db $1f                                  ; [32]: Enemy: Maskman
     db $16                                  ; [33]: Enemy: Wolfman
     db $0f                                  ; [34]: Enemy: Yareeka
     db $10                                  ; [35]: Enemy: Magman
-    db $13                                  ; [36]: Enemy: Unused #36
-    db $10                                  ; [37]: Enemy: Unused #37
+    db $13                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $10                                  ; [37]: Enemy: ? (unused)
     db $11                                  ; [38]: Enemy: Ikeda
-    db $10                                  ; [39]: Enemy: Unused #39
+    db $10                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
     db $10                                  ; [40]: Enemy: Lamprey
-    db $10                                  ; [41]: Enemy: Unused #41
+    db $10                                  ; [41]: Enemy: ? (unused)
     db $13                                  ; [42]: Enemy: Monodron
-    db $0c                                  ; [43]: Unused #43
+    db $0c                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
     db $12                                  ; [44]: Enemy: Tamazutsu
     db $3e                                  ; [45]: Boss: Ripasheiku
     db $33                                  ; [46]: Boss: Zoradohna
@@ -7059,26 +7192,26 @@ SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
     db $25                                  ; [49]: Boss: Zorugeriru
     db $54                                  ; [50]: Boss: King Grieve
     db $69                                  ; [51]: Boss: Shadow Eura
-    db $10                                  ; [52]: NPC: Walking man 1
-    db $10                                  ; [53]: NPC: Unused Blue Lady
-    db $09                                  ; [54]: NPC: Unused Child
+    db $10                                  ; [52]: NPC: Walking Man 1
+    db $10                                  ; [53]: NPC: Blue lady (unused)
+    db $09                                  ; [54]: NPC: Child (unused)
     db $08                                  ; [55]: NPC: Armor Salesman
-    db $0b                                  ; [56]: NPC: Martial Arts
+    db $0b                                  ; [56]: NPC: Martial Artist
     db $0b                                  ; [57]: NPC: Priest
     db $14                                  ; [58]: NPC: King
     db $0c                                  ; [59]: NPC: Magic Teacher
     db $08                                  ; [60]: NPC: Key Salesman
     db $0a                                  ; [61]: NPC: Smoking Man
     db $0e                                  ; [62]: NPC: Man in Chair
-    db $0a                                  ; [63]: NPC: Sitting Man 1
+    db $0a                                  ; [63]: NPC: Sitting Man
     db $0d                                  ; [64]: NPC: Meat Salesman
-    db $10                                  ; [65]: NPC: Lady in blue dress
-                                            ; with cup
-    db $10                                  ; [66]: NPC: King's Guard
+    db $10                                  ; [65]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $10                                  ; [66]: NPC: Guard
     db $0b                                  ; [67]: NPC: Doctor
     db $0e                                  ; [68]: NPC: Walking Woman 1
     db $0d                                  ; [69]: NPC: Walking Woman 2
-    db $09                                  ; [70]: Enemy: Unused eyeball
+    db $09                                  ; [70]: Enemy: Eyeball (unused)
     db $08                                  ; [71]: Enemy: Zozura
     db $02                                  ; [72]: Item: Glove
     db $02                                  ; [73]: Item: Black Onyx
@@ -7087,29 +7220,28 @@ SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
     db $02                                  ; [76]: Item: Poison
     db $04                                  ; [77]: Item: Elixir
     db $02                                  ; [78]: Item: Ointment
-    db $00                                  ; [79]: Item: Intro trigger start
-                                            ; point
+    db $00                                  ; [79]: Trigger: Intro
     db $02                                  ; [80]: Item: Mattock
-    db $00                                  ; [81]: TODO: Garbled #81
-    db $0c                                  ; [82]: Deco: Fountain
-    db $00                                  ; [83]: TODO: Unknown #83
-    db $00                                  ; [84]: TODO: Unknown #84
+    db $00                                  ; [81]: Magic: ?
+    db $0c                                  ; [82]: Effect: Fountain
+    db $00                                  ; [83]: Magic: ?
+    db $00                                  ; [84]: Magic: Enemy Fireball
     db $04                                  ; [85]: Item: Wing Boots
     db $02                                  ; [86]: Item: Hour Glass
     db $04                                  ; [87]: Item: Magical Rod
     db $02                                  ; [88]: Item: Battle Suit
     db $04                                  ; [89]: Item: Battle Helmet
     db $04                                  ; [90]: Item: Dragon Slayer
-    db $02                                  ; [91]: Item: Mattock #2
-    db $04                                  ; [92]: Item: Wing Boots (for
+    db $02                                  ; [91]: Item: Mattock
+    db $04                                  ; [92]: Item: Wing Boots (from
                                             ; quest)
-    db $02                                  ; [93]: Item: Red Potion #2
-    db $02                                  ; [94]: Item: Poison #2
-    db $02                                  ; [95]: Item: Glove #2
-    db $02                                  ; [96]: Item: Ointment #2
-    db $0c                                  ; [97]:
-    db $0c                                  ; [98]:
-    db $0c                                  ; [99]:
+    db $02                                  ; [93]: Item: Red Potion
+    db $02                                  ; [94]: Item: Poison
+    db $02                                  ; [95]: Item: Glove
+    db $02                                  ; [96]: Item: Ointment
+    db $0c                                  ; [97]: Effect: Spring of Trunk
+    db $0c                                  ; [98]: Effect: Spring of Sky
+    db $0c                                  ; [99]: Effect: Spring of Tower
     db $00                                  ; [100]: Effect: Boss Death
 
 
@@ -7156,11 +7288,11 @@ Sprites_LoadCommon:                         ; [$ce80]
     ;
     ; Set the start address for the sprites to load.
     ;
-    LDA a:#$8008                            ; Load the lower byte of the
+    LDA a:$8008                             ; Load the lower byte of the
                                             ; address of the first sprite (a
                                             ; coin).
     STA Temp_Addr_L                         ; Store it.
-    LDA a:#$8009                            ; Load the upper byte.
+    LDA a:$8009                             ; Load the upper byte.
     CLC                                     ; Clear Carry.
     ADC #$80                                ; Add 0x80 to the upper byte.
     STA Temp_Addr_U                         ; And store as the upper byte of
@@ -7264,10 +7396,10 @@ Area_LoadTiles:                             ; [$ceb8]
                                             ; offset)
     TAY                                     ; Set Y = word offset into the
                                             ; pointer table
-    LDA #$cf07,Y                            ; Read the low byte from the
+    LDA TILE_INDEX_TO_ADDR,Y                ; Read the low byte from the
                                             ; table
     STA Area_TilesReadAddress               ; Save low byte to TilesAddress
-    LDA #$cf08,Y                            ; Read the high byte from the
+    LDA TILE_INDEX_TO_ADDR+1,Y              ; Read the high byte from the
                                             ; table
     STA Area_TilesReadAddress+1             ; Set high byte to TilesAddress
 
@@ -7287,7 +7419,7 @@ Area_LoadTiles:                             ; [$ceb8]
     ; Upper byte will be 0x18 or 0x1A.
     ;
     LDY Area_TilesIndex                     ; Load the tiles index.
-    LDA #$cf19,Y                            ; Convert to a PPU address via
+    LDA TILE_INDEX_TO_PPU_ADDR_UPPER,Y      ; Convert to a PPU address via
                                             ; lookup table (0x18 or 0x1A).
     STA a:PPUADDR                           ; Write as the upper byte.
     LDA #$00                                ; 0x00 = Lower byte (start of
@@ -7305,7 +7437,7 @@ Area_LoadTiles:                             ; [$ceb8]
     ;
     STA Temp_08                             ; Set lower byte of the remaining
                                             ; tile count to 0.
-    LDA #$cf22,Y                            ; Load the number of pages to
+    LDA TILE_INDEX_TO_NUM_CHR_PAGES,Y       ; Load the number of pages to
                                             ; load.
     STA Temp_09                             ; Set as the upper byte.
 
@@ -7643,10 +7775,10 @@ PPUBuffer_Draw:                             ; [$cf3c]
     INC PPUBuffer_ReadOffset                ; Consume the byte in the buffer.
     ASL A
     TAY                                     ; Begin looking up in the table.
-    LDA #$cfbd,Y                            ; High byte of the command
+    LDA PPUBUFFER_DRAW_COMMANDS+1,Y         ; High byte of the command
                                             ; address.
     PHA                                     ; Push to the stack.
-    LDA #$cfbc,Y                            ; Low byte of the command
+    LDA PPUBUFFER_DRAW_COMMANDS,Y           ; Low byte of the command
                                             ; address.
     PHA                                     ; Push to the stack.
     RTS                                     ; Return. The next address
@@ -7937,6 +8069,7 @@ PPUBuffer_HasCapacity:                      ; [$cfd0]
 ;     IScripts_Maybe_DrawSpriteToPPU
 ;     PPUBuffer_WriteValueMany
 ;     Player_DrawWeaponTile
+;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_LoadItemSourceTiles
 ;     TextBox_Maybe_WriteLineOfChars
@@ -7967,7 +8100,7 @@ PPUBuffer_QueueCommandOrLength:             ; [$cfdc]
     STA PPUBuffer,X                         ; Store the provided value (A)
                                             ; there.
     INX
-    LDA PPU_TargetAddr.U                    ; Load the upper address byte.
+    LDA PPU_TargetAddr_U                    ; Load the upper address byte.
     STA PPUBuffer,X                         ; Write it to the buffer.
     INX
     LDA PPU_TargetAddr                      ; Load the lower address byte.
@@ -8060,7 +8193,7 @@ UNUSED_PPUBuffer_DrawCommand_WriteBackgroundPalette4: ; [$d005]
 ; It's not used in the shipped game.
 ;============================================================================
 UNUSED_WriteCurrentBackgroundPalette:       ; [$d00d]
-    LDA a:Screen_Paletteindex
+    LDA a:Screen_PaletteIndex
     JSR Screen_LoadBackgroundPalette
     JMP PPUBuffer_WritePalette
 
@@ -8181,7 +8314,7 @@ Screen_LoadBackgroundPalette:               ; [$d03b]
     ;
     ; Set the attribute data index for the HUD.
     ;
-    LDA #$81f0,Y                            ; Load the HUD attribute data for
+    LDA $81f0,Y                             ; Load the HUD attribute data for
                                             ; this index.
     STA a:UI_AttributeDataIndex             ; Set it for the HUD/textboxes.
 
@@ -8531,7 +8664,7 @@ Screen_SetFadeOutPalette:                   ; [$d0ad]
     LDA (Temp_08),Y                         ; Load the palette data at Y.
     SEC                                     ; Set C = 1 so SBC won't subtract
                                             ; C.
-    SBC #$d0e0,X                            ; Subtract the value form the
+    SBC FADE_OUT_DELTA_TABLE,X              ; Subtract the value form the
                                             ; lookup table at the transition
                                             ; index.
     BCS @_setPaletteData                    ; If > 0, jump to use this value
@@ -8609,8 +8742,8 @@ FADE_OUT_DELTA_TABLE:                       ; [$d0e0]
 ;     StartScreen_CheckHandleInput
 ;     CastMagic_UpdateDeluge
 ;     CastMagic_UpdateFire
-;     FUN_PRG14__87cb
 ;     Player_CastMagic
+;     Player_HandleShieldHitByMagic
 ;     Player_HandleTouchBread
 ;     Player_HandleTouchCoin
 ;     Player_HandleTouchEnemy
@@ -8691,8 +8824,8 @@ Area_Maybe_ShowRoomTransition:              ; [$d0f6]
     STA PPU_ScrollY
     STA PPU_ScrollX
     STA PPU_ScrollScreen
-    STA SomethingScroll_0077
-    STA Screen_ScrollVertBlocksLoaded
+    STA Screen_LoadBlocksStage
+    STA Screen_NeighborBlocksLoadedByDirection
     STA Screen_ScrollHorizBlocksLoaded
     STA Screen_MaybeUnused_0075
     STA Screen_ScrollHorizAttrsLoaded
@@ -8758,7 +8891,7 @@ Area_ScrollToNextRoom:                      ; [$d127]
     TAX
     JSR MMC1_UpdateROMBank
     LDX CurrentArea_ROMBank
-    JSR MMC1_SavePRGBankAndUpdateTo
+    JSR MMC1_SaveROMBankAndUpdateTo
 
 
     ;
@@ -8809,8 +8942,8 @@ Area_ScrollToNextRoom:                      ; [$d127]
     LDX #$f0                                ; X = 240
 
   @_copyRowScreenBelowLoop:                 ; [$d1a0]
-    LDA #$05d0,X
-    STA #$0316,X
+    LDA $05d0,X
+    STA $0316,X
     INX                                     ; X++
     BNE @_copyRowScreenBelowLoop
 
@@ -8823,8 +8956,8 @@ Area_ScrollToNextRoom:                      ; [$d127]
     LDX #$f0
 
   @LAB_PRG15_MIRROR__d1b0:                  ; [$d1b0]
-    LDA #$0510,X
-    STA #$0326,X
+    LDA $0510,X
+    STA $0326,X
     INX
     BNE @LAB_PRG15_MIRROR__d1b0
 
@@ -8834,7 +8967,7 @@ Area_ScrollToNextRoom:                      ; [$d127]
     ;
     LDA Area_CurrentScreen
     JSR Area_LoadBlocks
-    JSR MMC1_RestorePrevPRGBank
+    JSR MMC1_RestorePrevROMBank
     LDA Screen_ScrollDirection
     CMP #$02
     BCS @_VerticalScroll
@@ -8843,7 +8976,7 @@ Area_ScrollToNextRoom:                      ; [$d127]
     STA Screen_ScrollPlayerTransitionCounter
     LDA Player_PosY
     STA Maybe_PlayerY_ForScroll
-    LDA #$d1e7,X
+    LDA SCREEN_MAYBE_PLAYERX_FOR_SCROLL_MODE,X
     STA Maybe_PlayerX_ForScroll
     RTS
 
@@ -8854,7 +8987,7 @@ Area_ScrollToNextRoom:                      ; [$d127]
     STA Maybe_PlayerX_ForScroll
     LDA #$00
     STA Screen_ScrollPlayerTransitionCounter
-    LDA #$d1e9,X
+    LDA $d1e9,X
     STA Maybe_PlayerY_ForScroll
     RTS
 
@@ -9031,7 +9164,7 @@ Area_LoadBlocks:                            ; [$d1f6]
     ;
     LDA Temp_LoadedBlocksCount              ; Else, load our blocks count.
     CLC
-    ADC #$d273,X                            ; Add that to the value for this
+    ADC BLOCK_DATA_OFFSETS_FOR_BIT_VALUES,X ; Add that to the value for this
                                             ; bit in the lookup table.
     TAX                                     ; Set as X
     LDA ScreenBuffer,X                      ; Load the block value from the
@@ -9109,7 +9242,7 @@ Area_LoadBlocks:                            ; [$d1f6]
 ; to the caller.
 ;
 ; INPUTS:
-;     0x08:
+;     Temp_07+1:
 ;         The address of the table of bytes to load from,
 ;         based on the byte offset.
 ;
@@ -9139,7 +9272,7 @@ Area_LoadNextCompressedScreenBit:           ; [$d258]
 
     ;
     ; We're at the first bit. We need to load the byte we'll be
-    ; working with from RAM as an index into 0x08.
+    ; working with from RAM as an index into Temp_07+1.
     ;
     LDY LoadCompressedScreenData_ByteOffset ; Get the offset of the byte
                                             ; we'll be processing.
@@ -9528,13 +9661,13 @@ Screen_HandleScrollLeft:                    ; [$d34a]
     SBC #$00
     STA PPU_ScrollScreenHoriz
     CMP PPU_ScrollScreen
-    BNE @LAB_PRG15_MIRROR__d37c
+    BNE @_finish
     LDA PPU_ScrollX
     CMP #$04
-    BCS @LAB_PRG15_MIRROR__d37c
+    BCS @_finish
     RTS
 
-  @LAB_PRG15_MIRROR__d37c:                  ; [$d37c]
+  @_finish:                                 ; [$d37c]
     LDA a:CurrentROMBank
     PHA
     LDX #$03
@@ -9667,7 +9800,7 @@ Screen_LoadBlocksDown:                      ; [$d3a6]
 Screen_LoadBlockDataVert:                   ; [$d3ba]
     LDA Screen_ScrollVertLoadCounter
     CLC
-    ADC #$d4cb,X
+    ADC $d4cb,X
     STA Temp_00
     LDA PPU_ScrollScreenVert
     ADC #$00
@@ -9710,9 +9843,9 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     LSR A
     TAY
     LDA CurrentArea_BlockData1CurAddr,Y
-    STA UI_Menu_IDs,X
+    STA DataArray,X
     LDA CurrentArea_BlockData2CurAddr,Y
-    STA #$0221,X
+    STA DataArray+1,X
     INX
     INX
     LDY Temp_06
@@ -9741,7 +9874,7 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     ORA Screen_ScrollVertBlocks_PPUTileMapAddr_U
     STA Screen_ScrollVertBlocks_PPUTileMapAddr_U
     LDA #$01
-    STA Screen_ScrollVertBlocksLoaded
+    STA Screen_NeighborBlocksLoadedByDirection
     RTS
 
   @LAB_PRG15_MIRROR__d445:                  ; [$d445]
@@ -9755,7 +9888,7 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     LDA #$00
 
   @LAB_PRG15_MIRROR__d452:                  ; [$d452]
-    STA #$0192,Y
+    STA $0192,Y
     INY
     BNE @LAB_PRG15_MIRROR__d452
 
@@ -9770,7 +9903,7 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     ORA Temp_01
     TAY
     LDA Temp_00
-    AND #$d4d3,Y
+    AND BLOCK_ATTRS_BITMASKS,Y
     PHA
     LDA Temp_06
     LSR A
@@ -9808,9 +9941,9 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     ASL A
     ORA #$23
     STA Screen_ScrollVertBlocks_PPUAttrAddr_U
-    LDA #$d4cf,X
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_L,X
     STA Temp_08
-    LDA #$d4d1,X
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_U,X
     STA Temp_09
     LDX #$00
 
@@ -9837,11 +9970,23 @@ BYTE_ARRAY_PRG15_MIRROR__d4cb_1_:           ; [$d4cc]
     db $00                                  ; [1]:
     db $00,$08                              ; [$d4cd] byte
 
-  @_SET_BLOCKS_TILEMAP_OFFSETS_L:           ; [$d4cf]
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;
+SET_BLOCKS_TILEMAP_OFFSETS_L:               ; [$d4cf]
     db $42                                  ; [0]:
     db $42                                  ; [1]:
 
-  @_SET_BLOCKS_TILEMAP_OFFSETS_U:           ; [$d4d1]
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;     Screen_LoadBlockDataVert
+;     Screen_LoadBlocksHoriz
+;
+SET_BLOCKS_TILEMAP_OFFSETS_U:               ; [$d4d1]
     db $02                                  ; [0]:
     db $02                                  ; [1]:
 
@@ -9990,10 +10135,10 @@ Screen_LoadDataLeft:                        ; [$d4f0]
 Screen_LoadBlocksHoriz:                     ; [$d503]
     LDA Screen_ScrollHorizLoadCounter
     CLC
-    ADC #$d619,X
+    ADC SCROLL_HORIZ_END_POS,X
     STA Temp_00
     LDA PPU_ScrollScreenHoriz
-    ADC #$d61b,X
+    ADC $d61b,X
     STA Screen_Maybe_ScrollHorizDirection
     LDA Area_CurrentScreen
     STA MaybeUnused_006d
@@ -10151,7 +10296,7 @@ Screen_LoadBlocksHoriz:                     ; [$d503]
     ; Mask 2 bits of the block attributes based on that index.
     ;
     LDA Temp_00                             ; A = Loaded block attribute
-    AND #$d4d3,Y                            ; AND with the bitmask based on
+    AND BLOCK_ATTRS_BITMASKS,Y              ; AND with the bitmask based on
                                             ; our computed index.
     PHA                                     ; Push the result to the stack.
 
@@ -10231,9 +10376,9 @@ Screen_LoadBlocksHoriz:                     ; [$d503]
     ORA #$23
     STA Screen_ScrollHorizBlocks_PPUAttrAddr_U ; Set as the upper byte of the
                                                ; PPU attr address.
-    LDA #$d4cf,X
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_L,X
     STA Temp_08
-    LDA #$d4d1,X
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_U,X
     STA Temp_09
 
 
@@ -10320,34 +10465,34 @@ BYTE_ARRAY_PRG15_MIRROR__d61b:              ; [$d61b]
 Screen_RunWriteScrollDataHandler:           ; [$d61d]
     LDA #$03
     STA Temp_06
-    LDX SomethingScroll_0077
+    LDX Screen_LoadBlocksStage
 
-  @LAB_PRG15_MIRROR__d623:                  ; [$d623]
-    LDA Screen_ScrollVertBlocksLoaded,X
+  @_loop:                                   ; [$d623]
+    LDA Screen_NeighborBlocksLoadedByDirection,X
     BNE @LAB_PRG15_MIRROR__d631
     INX
     TXA
     AND #$03
     TAX
     DEC Temp_06
-    BPL @LAB_PRG15_MIRROR__d623
+    BPL @_loop
     RTS
 
   @LAB_PRG15_MIRROR__d631:                  ; [$d631]
     LDA #$00
-    STA Screen_ScrollVertBlocksLoaded,X
+    STA Screen_NeighborBlocksLoadedByDirection,X
     STX Temp_06
     INX
     TXA
     AND #$03
     TAX
-    STX SomethingScroll_0077
+    STX Screen_LoadBlocksStage
     LDA Temp_06
     AND #$03
     TAX
-    LDA #$d650,X
+    LDA SCREEN_WRITESCROLL_HANDLERS_U,X
     PHA
-    LDA #$d64c,X
+    LDA SCREEN_WRITESCROLL_HANDLERS_L,X
     PHA
     RTS
 
@@ -10395,7 +10540,7 @@ Screen_WriteScrollVertPPUTileData:          ; [$d654]
     LDX #$00
 
   @_loop:                                   ; [$d667]
-    LDA UI_Menu_IDs,X
+    LDA DataArray,X
     STA a:PPUDATA
     INX
     CPX #$20
@@ -10480,7 +10625,7 @@ Screen_WriteScrollVertPPUAttrData:          ; [$d699]
 Screen_WriteScrollHorizPPUAttrData:         ; [$d6b1]
     LDX #$00
 
-  @LAB_PRG15_MIRROR__d6b3:                  ; [$d6b3]
+  @_loop:                                   ; [$d6b3]
     LDA Screen_ScrollHorizBlocks_PPUAttrAddr_U
     STA a:PPUADDR
     TXA
@@ -10494,7 +10639,7 @@ Screen_WriteScrollHorizPPUAttrData:         ; [$d6b1]
     STA a:PPUDATA
     INX
     CPX #$07
-    BCC @LAB_PRG15_MIRROR__d6b3
+    BCC @_loop
     RTS
 
 
@@ -10519,7 +10664,7 @@ Screen_WriteScrollHorizPPUAttrData:         ; [$d6b1]
 ;     Blocks_Result:
 ;         The block type at the offset.
 ;
-;     @_BREAKABLE_FLOOR_TRANSITIONS:
+;     BREAKABLE_FLOOR_TRANSITIONS:
 ;         Sequence of breakable floor block types.
 ;
 ; OUTPUTS:
@@ -10546,7 +10691,7 @@ Area_HandleBreakableFloor:                  ; [$d6ce]
                                             ; for)
 
   @_checkBlockLoop:                         ; [$d6d4]
-    CMP #$d6ef,X                            ; Does the block match the table
+    CMP BREAKABLE_FLOOR_TRANSITIONS,X       ; Does the block match the table
                                             ; at this index?
     BEQ @_finishLoop                        ; If so, jump.
     INX                                     ; Else, X++
@@ -10559,7 +10704,7 @@ Area_HandleBreakableFloor:                  ; [$d6ce]
                                             ; set)
 
   @_updateBlocks:                           ; [$d6e1]
-    LDA #$d6ef,X                            ; Load the block to set to.
+    LDA BREAKABLE_FLOOR_TRANSITIONS,X       ; Load the block to set to.
     STA a:Arg_BlockAttributesIndex          ; DEADCODE: This is overridden in
                                             ; Area_SetBlocks
     LDX Temp_00                             ; X = Block position (stored
@@ -10575,13 +10720,26 @@ Area_HandleBreakableFloor:                  ; [$d6ce]
 ; XREFS:
 ;     Area_HandleBreakableFloor
 ;============================================================================
-  @_BREAKABLE_FLOOR_TRANSITIONS:            ; [$d6ef]
+
+;
+; XREFS:
+;     Area_HandleBreakableFloor
+;
+BREAKABLE_FLOOR_TRANSITIONS:                ; [$d6ef]
     db $34                                  ; [0]:
 
-  @_BREAKABLE_FLOOR_TRANSITIONS_1_:         ; [$d6f0]
+;
+; XREFS:
+;     Area_HandleBreakableFloor
+;
+BREAKABLE_FLOOR_TRANSITIONS_1_:             ; [$d6f0]
     db $2c                                  ; [1]:
 
-  @_BREAKABLE_FLOOR_TRANSITIONS_2_:         ; [$d6f1]
+;
+; XREFS:
+;     Area_HandleBreakableFloor
+;
+BREAKABLE_FLOOR_TRANSITIONS_2_:             ; [$d6f1]
     db $5c                                  ; [2]:
     db $13                                  ; [3]:
 
@@ -10598,7 +10756,12 @@ Area_HandleBreakableFloor:                  ; [$d6ce]
 ; XREFS:
 ;     Area_SetBlocks_SetAttributes
 ;============================================================================
-  @_SET_BLOCKS_SCREEN_TILEMAP_ADDRS_U:      ; [$d6f3]
+
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;
+SET_BLOCKS_SCREEN_TILEMAP_ADDRS_U:          ; [$d6f3]
     db $20                                  ; [0]: Screen 0
     db $24                                  ; [1]: Screen 1
 
@@ -10677,8 +10840,8 @@ Game_OpenPathToMascon:                      ; [$d6f5]
     PLA                                     ; Pull A from the stack (original
                                             ; block position)
     TAX                                     ; X = A
-    LDA #$d76c,X                            ; A = Block position offset,
-                                            ; based on the arguments.
+    LDA GAME_LADDER_TO_MASCON_BLOCK_OFFSETS,X ; A = Block position offset,
+                                              ; based on the arguments.
     CLC
     ADC PathToMascon_FountainCoverPos       ; A += Target block position.
     TAX                                     ; X = A
@@ -10956,7 +11119,7 @@ DROP_LADDER_TO_MASCON_LADDER_BLOCK:         ; [$d7af]
     db $20                                  ; Ladder block
 
 ;============================================================================
-; TODO: Document FUN_PRG15_MIRROR__d7b0
+; TODO: Document SpriteBehavior_EnemyUnused18_SomethingSetBlocks
 ;
 ; INPUTS:
 ;     X
@@ -10965,15 +11128,15 @@ DROP_LADDER_TO_MASCON_LADDER_BLOCK:         ; [$d7af]
 ;     A
 ;
 ; XREFS:
-;     FUN_PRG14__9991
+;     SpriteBehavior_EnemyUnused18__9991
 ;============================================================================
-FUN_PRG15_MIRROR__d7b0:                     ; [$d7b0]
+SpriteBehavior_EnemyUnused18_SomethingSetBlocks: ; [$d7b0]
     TXA
     PHA
     TYA
     PHA
-    LDX a:BYTE_03cf
-    LDA a:BYTE_03ce
+    LDX a:Something_UnusedSprite_ScreenBufferOffset
+    LDA a:Something_UnusedSprite_BlockOffset
     STA ScreenBuffer,X
     JSR Area_SetBlocks
     PLA
@@ -10994,10 +11157,10 @@ FUN_PRG15_MIRROR__d7b0:                     ; [$d7b0]
 ;
 ; XREFS:
 ;     Area_HandleBreakableFloor
-;     FUN_PRG15_MIRROR__d7b0
 ;     Game_DropLadderToMascon
 ;     Game_OpenPathToMascon
 ;     Player_UseMattock
+;     SpriteBehavior_EnemyUnused18_SomethingSetBlocks
 ;============================================================================
 Area_SetBlocks:                             ; [$d7c5]
     STA a:Arg_BlockAttributesIndex
@@ -11017,9 +11180,9 @@ Area_SetBlocks:                             ; [$d7c5]
     CLC
     ADC #$20
     STA a:PPU_TargetAddr
-    LDA a:PPU_TargetAddr.U
+    LDA a:PPU_TargetAddr_U
     ADC #$00
-    STA a:PPU_TargetAddr.U
+    STA a:PPU_TargetAddr_U
     JSR Area_SetBlocks_WriteBlockData34
     PLA
     JSR Area_SetBlocks_SetAttributes
@@ -11257,7 +11420,7 @@ Area_SetBlocks_SetAttributes:               ; [$d82d]
                                             ; index.
     LDX Temp_06                             ; X = corner (0..3 value from
                                             ; above).
-    AND #$d8a4,X                            ; A = block attributes for the
+    AND SET_BLOCKS_TILE_CORNER_MASK,X       ; A = block attributes for the
                                             ; given corner.
     PHA                                     ; Push it to the stack.
 
@@ -11281,31 +11444,31 @@ Area_SetBlocks_SetAttributes:               ; [$d82d]
     ;
     ;       This is code that could be optimized away.
     ;
-    LDA #$d4cf,X                            ; A = lower byte of PPU address
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_L,X      ; A = lower byte of PPU address
     STA Temp_Addr_L                         ; Store it.
-    LDA #$d4d1,X                            ; A = upper byte of PPU address
+    LDA SET_BLOCKS_TILEMAP_OFFSETS_U,X      ; A = upper byte of PPU address
     STA Temp_Addr_U                         ; Store it.
 
 
     ;
     ; Compute the upper starting byte for the PPU address.
     ;
-    LDA #$d6f3,X                            ; A = tilemap address for the
+    LDA SET_BLOCKS_SCREEN_TILEMAP_ADDRS_U,X ; A = tilemap address for the
                                             ; screen.
-    STA a:PPU_TargetAddr.U                  ; Store as the upper byte of the
+    STA a:PPU_TargetAddr_U                  ; Store as the upper byte of the
                                             ; tilemap address.
 
 
     ;
-    ; Combine the new data for this corner with the exising
+    ; Combine the new data for this corner with the existing
     ; data.
     ;
     LDY a:PPU_TargetAddr                    ; Y = lower byte of tilemap
                                             ; address computed above.
     LDA (Temp_Addr_L),Y                     ; Load the data for this block.
     LDX Temp_06                             ; X = corner value (0..3)
-    AND #$d8a8,X                            ; Invert the corner mask (keep
-                                            ; all non-updated corner data).
+    AND SET_BLOCKS_TILE_CORNER_MASK_INVERT,X ; Invert the corner mask (keep
+                                             ; all non-updated corner data).
     STA Temp_06                             ; Store as the new value.
     PLA                                     ; Pull the updated block
                                             ; attributes for the corner.
@@ -11320,14 +11483,14 @@ Area_SetBlocks_SetAttributes:               ; [$d82d]
     ;
     ; This is going to be an address starting at $23C0.
     ;
-    LDA a:PPU_TargetAddr.U                  ; Load the upper byte of the PPU
+    LDA a:PPU_TargetAddr_U                  ; Load the upper byte of the PPU
                                             ; address.
     ORA #$03                                ; Ensure it starts at 0x03
                                             ; (address >= $03XX).
                                             ; Realistically, $23C0 (we
                                             ; guarantee 0x20 or 0x24 above
                                             ; for the screen).
-    STA a:PPU_TargetAddr.U                  ; Store as the new upper byte.
+    STA a:PPU_TargetAddr_U                  ; Store as the new upper byte.
     LDA a:PPU_TargetAddr                    ; Load the lower byte.
     ORA #$c0                                ; Ensure it starts at 0xC0
                                             ; (address >= $XXC0)
@@ -11346,13 +11509,21 @@ Area_SetBlocks_SetAttributes:               ; [$d82d]
     STX PPUBuffer_WriteOffset               ; Store it.
     RTS
 
-  @_SET_BLOCKS_TILE_CORNER_MASK:            ; [$d8a4]
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;
+SET_BLOCKS_TILE_CORNER_MASK:                ; [$d8a4]
     db $03                                  ; [0]:
     db $0c                                  ; [1]:
     db $30                                  ; [2]:
     db $c0                                  ; [3]:
 
-  @_SET_BLOCKS_TILE_CORNER_MASK_INVERT:     ; [$d8a8]
+;
+; XREFS:
+;     Area_SetBlocks_SetAttributes
+;
+SET_BLOCKS_TILE_CORNER_MASK_INVERT:         ; [$d8a8]
     db $fc                                  ; [0]:
     db $f3                                  ; [1]:
     db $cf                                  ; [2]:
@@ -11377,7 +11548,7 @@ Area_SetPPUAddrForBlockIndex:               ; [$d8ac]
     ; Y = Y * 4
     ;
     LDA #$00
-    STA a:PPU_TargetAddr.U
+    STA a:PPU_TargetAddr_U
     TXA
     AND #$0f
     ASL A
@@ -11385,25 +11556,25 @@ Area_SetPPUAddrForBlockIndex:               ; [$d8ac]
     TXA
     AND #$f0
     ASL A
-    ROL a:PPU_TargetAddr.U
+    ROL a:PPU_TargetAddr_U
     ASL A
-    ROL a:PPU_TargetAddr.U
+    ROL a:PPU_TargetAddr_U
     CLC
     ADC a:PPU_TargetAddr
     STA a:PPU_TargetAddr
     LDA PPU_ScrollScreen
     AND #$01
     TAY
-    LDA a:PPU_TargetAddr.U
-    ORA #$d8ea,Y
-    STA a:PPU_TargetAddr.U
+    LDA a:PPU_TargetAddr_U
+    ORA $d8ea,Y
+    STA a:PPU_TargetAddr_U
     LDA a:PPU_TargetAddr
     CLC
     ADC #$80
     STA a:PPU_TargetAddr
-    LDA a:PPU_TargetAddr.U
+    LDA a:PPU_TargetAddr_U
     ADC #$00
-    STA a:PPU_TargetAddr.U
+    STA a:PPU_TargetAddr_U
     RTS
 
 ;
@@ -11499,7 +11670,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     JSR WaitForInterrupt                    ; Wait for interrupt.
     JSR Sprites_ResetForGameScreen          ; Reset animations.
-    JSR #$b7bf                              ; Reset selected item state.
+    JSR $b7bf                               ; Reset selected item state.
     JSR Player_DrawSprite                   ; Update player sprite.
 
 
@@ -11585,7 +11756,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     ; Load the palette and update the screen.
     ;
-    LDA a:Screen_Paletteindex
+    LDA a:Screen_PaletteIndex
     JSR Screen_LoadBackgroundPalette        ; Load the palette.
     JSR PPUBuffer_WritePalette              ; Append 0 to the PPU buffer.
 
@@ -11831,7 +12002,7 @@ Player_DrawDeathAnimation:                  ; [$d9d6]
     ;
     INX                                     ; X++
     LDY a:Player_DeathAnimationCounter      ; Load the animation counter.
-    LDA #$da21,Y                            ; Load the lower address for Y.
+    LDA DEATH_ANIMATION_DRAW_ADDR_LOWER,Y   ; Load the lower address for Y.
     STA PPUBuffer,X                         ; Set it as the lower address.
 
 
@@ -11896,9 +12067,9 @@ DEATH_ANIMATION_DRAW_ADDR_LOWER:            ; [$da21]
 
 
 ;============================================================================
-; DEADCODE: Set palette index to 0xFF.
+; DEADCODE: Clear the fade-out stage for the screen transitions.
 ;============================================================================
-UNUSED_SetPalette0xFF:                      ; [$da29]
+UNUSED_Screen_ClearFadeOutStage:            ; [$da29]
     LDA #$ff
     STA a:Screen_FadeOutStage
     RTS
@@ -11961,7 +12132,7 @@ Screen_FadeToBlack:                         ; [$da2f]
 ;     Screen_FadeOutCounter:
 ;         The counter for this loop.
 ;
-;     Screen_Paletteindex:
+;     Screen_PaletteIndex:
 ;         The palette index to apply for the transition.
 ;
 ; OUTPUTS:
@@ -11989,7 +12160,7 @@ Screen_NextTransitionState:                 ; [$da42]
     ;
     ; Fade out to the next palette towards black.
     ;
-    LDA a:Screen_Paletteindex               ; Load the screen palette index.
+    LDA a:Screen_PaletteIndex               ; Load the screen palette index.
     JSR Screen_SetFadeOutPalette            ; Load the palette into memory.
     INC a:Screen_FadeOutStage               ; Increment the palette index to
                                             ; the next transition state.
@@ -12040,7 +12211,7 @@ Game_InitStateForStartScreen:               ; [$da6a]
     STA Area_CurrentArea                    ; Set as the current area (Eolis)
     STA a:Area_Region                       ; Set as the current region
                                             ; (Eolis)
-    JSR #$b7ae                              ; Initialize the player
+    JSR $b7ae                               ; Initialize the player
                                             ; inventory.
     JSR Game_InitStateForSpawn              ; Initiate the spawn state.
     JMP Game_ShowStartScreen                ; Show the start screen.
@@ -12068,7 +12239,7 @@ Game_InitStateForSpawn:                     ; [$da7d]
                                             ; ready.
     JSR Player_SetInitialState              ; Initialize the player's initial
                                             ; state.
-    JSR #$ba55                              ; Clear any visible magic on
+    JSR $ba55                               ; Clear any visible magic on
                                             ; screen.
     JSR Sprites_LoadCommon                  ; Load sprites from bank 8.
     LDA #$01
@@ -12081,64 +12252,104 @@ Game_InitStateForSpawn:                     ; [$da7d]
                                             ; state.
     RTS
 
+
 ;============================================================================
-; TODO: Document Maybe_Game_EnterScreenHandler
+; Setup state for entering a new screen.
+;
+; This is called when switching screens or entering through
+; a door.
+;
+; This will set up the game and screen state for the
+; destination and load new sprites.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Game_ResetScreenAndEnableInterrupts
+;     GameLoop_LoadSpriteImages
+;     PPU_WaitUntilFlushed
+;     Screen_Load
+;     WaitForNextFrame
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;============================================================================
-Maybe_Game_EnterScreenHandler:              ; [$daa0]
-    JSR PPU_WaitUntilFlushed
-    JSR Screen_Load
-    JSR Game_DrawAndEnableInterrupts
-    JSR WaitForNextFrame
-    JMP GameLoop_LoadSpriteImages
+Game_SetupEnterScreen:                      ; [$daa0]
+    JSR PPU_WaitUntilFlushed                ; Wait until the PPU is flushed.
+    JSR Screen_Load                         ; Load the screen state.
+    JSR Game_ResetScreenAndEnableInterrupts ; Reset the screen and enable
+                                            ; interrupts.
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JMP GameLoop_LoadSpriteImages           ; Load the sprite images.
+
 
 ;============================================================================
-; TODO: Document Maybe_Game_EnterBuildingHandler
+; Setup state for entering a building.
+;
+; This will set up the game and screen state for the
+; destination building and load new sprites.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Game_EnterBuilding
+;     Game_ResetScreenAndEnableInterrupts
+;     GameLoop_LoadSpriteImages
+;     PPU_WaitUntilFlushed
+;     WaitForNextFrame
 ;
 ; XREFS:
 ;     EndGame_MoveToKingsRoom
 ;     Player_EnterDoorToInside
 ;     Player_Spawn
 ;============================================================================
-Maybe_Game_EnterBuildingHandler:            ; [$daaf]
-    JSR PPU_WaitUntilFlushed
-    JSR Game_EnterBuilding
-    JSR Game_DrawAndEnableInterrupts
-    JSR WaitForNextFrame
-    JMP GameLoop_LoadSpriteImages
+Game_SetupEnterBuilding:                    ; [$daaf]
+    JSR PPU_WaitUntilFlushed                ; Wait until the PPU is flushed.
+    JSR Game_EnterBuilding                  ; Load state for the building.
+    JSR Game_ResetScreenAndEnableInterrupts ; Reset the screen and enable
+                                            ; interrupts.
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JMP GameLoop_LoadSpriteImages           ; Load the sprite images.
+
 
 ;============================================================================
-; TODO: Document Maybe_Game_ExitBuildingHandler
+; Setup state for exiting a building.
+;
+; This will set up the game and screen state for the
+; area outside the building and load new sprites.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Game_ExitBuilding
+;     Game_ResetScreenAndEnableInterrupts
+;     GameLoop_LoadSpriteImages
+;     PPU_WaitUntilFlushed
+;     WaitForNextFrame
 ;
 ; XREFS:
 ;     Maybe_Game_MainExitBuildingHandler
 ;============================================================================
 Maybe_Game_ExitBuildingHandler:             ; [$dabe]
-    JSR PPU_WaitUntilFlushed
-    JSR Game_ExitBuilding
-    JSR Game_DrawAndEnableInterrupts
-    JSR WaitForNextFrame
-    JMP GameLoop_LoadSpriteImages
+    JSR PPU_WaitUntilFlushed                ; Wait until the PPU is flushed.
+    JSR Game_ExitBuilding                   ; Load state for the area outside
+                                            ; the building.
+    JSR Game_ResetScreenAndEnableInterrupts ; Reset the screen and enable
+                                            ; interrupts.
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JMP GameLoop_LoadSpriteImages           ; Load the sprite images.
 
 ;============================================================================
 ; TODO: Document FUN_PRG15_MIRROR__dacd
@@ -12155,12 +12366,12 @@ Maybe_Game_ExitBuildingHandler:             ; [$dabe]
 FUN_PRG15_MIRROR__dacd:                     ; [$dacd]
     JSR PPU_WaitUntilFlushed
     JSR Game_EnterAreaHandler
-    JSR Game_DrawAndEnableInterrupts
+    JSR Game_ResetScreenAndEnableInterrupts
     JSR WaitForNextFrame
     JMP GameLoop_LoadSpriteImages
 
 ;============================================================================
-; TODO: Document Game_SetupAndLoadArea
+; TODO: Document Game_SetupAndLoadOutsideArea
 ;
 ; INPUTS:
 ;     None.
@@ -12172,13 +12383,13 @@ FUN_PRG15_MIRROR__dacd:                     ; [$dacd]
 ;     Debug_ChooseArea
 ;     Player_EnterDoorToOutside
 ;============================================================================
-Game_SetupAndLoadArea:                      ; [$dadc]
+Game_SetupAndLoadOutsideArea:               ; [$dadc]
     JSR PPU_WaitUntilFlushed
     LDX a:Area_Region
-    LDA #$dafe,X
+    LDA MAYBE_OUTSIDE_REGION_INDEXES,X
     STA Area_CurrentArea
     JSR Game_LoadCurrentArea
-    JSR Game_DrawAndEnableInterrupts
+    JSR Game_ResetScreenAndEnableInterrupts
     JSR WaitForNextFrame
     JSR GameLoop_LoadSpriteImages
     JMP Game_MainLoop
@@ -12191,13 +12402,13 @@ Game_SetupAndLoadArea:                      ; [$dadc]
 ;============================================================================
 FUN_PRG15_MIRROR__daf6:                     ; [$daf6]
     LDX a:Area_Region
-    LDA #$dafe,X
+    LDA MAYBE_OUTSIDE_REGION_INDEXES,X
     STA Area_CurrentArea
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__daf6
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
 ;
 MAYBE_OUTSIDE_REGION_INDEXES:               ; [$dafe]
     db AREA_EOLIS                           ; [0]: Eolis
@@ -12215,8 +12426,8 @@ MAYBE_OUTSIDE_REGION_INDEXES:               ; [$dafe]
 ; immediately after the final boss is killed and the screen
 ; fades out.
 ;
-; The player will be placed back in the King's room, and will
-; then begin moving automatically toward the King.
+; The player will be placed back in the King's room, and
+; will then begin moving automatically toward the King.
 ;
 ; INPUTS:
 ;     None.
@@ -12262,7 +12473,7 @@ EndGame_BeginKingsRoomSequence:             ; [$db04]
 ; CALLS:
 ;     Game_ClearTimedItems
 ;     Game_SpawnInTemple
-;     Maybe_Game_EnterBuildingHandler
+;     Game_SetupEnterBuilding
 ;     Game_MainLoop
 ;
 ; XREFS:
@@ -12280,7 +12491,7 @@ Player_Spawn:                               ; [$db0a]
     STA a:Quests                            ; Store it.
     JSR Game_ClearTimedItems                ; Cleared all timed items.
     JSR Game_SpawnInTemple                  ; Spawn in the temple.
-    JSR Maybe_Game_EnterBuildingHandler     ; Change the state to be inside a
+    JSR Game_SetupEnterBuilding             ; Change the state to be inside a
                                             ; building.
     JMP Game_MainLoop                       ; Start the mainloop.
 
@@ -12305,7 +12516,7 @@ Player_Spawn:                               ; [$db0a]
 ;     See Fallthrough.
 ;
 ; CALLS:
-;     Game_DrawAndEnableInterrupts
+;     Game_ResetScreenAndEnableInterrupts
 ;     Game_ClearTimedItems
 ;     Game_LoadFirstLevel
 ;     GameLoop_LoadSpriteImages
@@ -12329,22 +12540,24 @@ Game_Start:                                 ; [$db26]
     ; Clear the player's MP.
     ;
     LDA #$00
-    STA a:Player_MP
+    STA a:Player_MP                         ; Set MP to 0.
 
 
     ;
     ; Clear the player's experience.
     ;
     LDA #$00
-    STA a:Experience
-    STA a:Experience_U
+    STA a:Experience                        ; Set lower byte of experience to
+                                            ; 0.
+    STA a:Experience_U                      ; And upper byte.
 
 
     ;
     ; Prepare state for the first screen of Eolis, including the
     ; intro trigger sprite entity.
     ;
-    JSR Game_DrawAndEnableInterrupts
+    JSR Game_ResetScreenAndEnableInterrupts ; Reset the screen and enable
+                                            ; interrupts.
     JSR WaitForNextFrame                    ; Wait for the next frame.
     JSR GameLoop_LoadSpriteImages           ; Load images for the current
                                             ; sprite entities (which will be
@@ -12365,7 +12578,7 @@ Game_Start:                                 ; [$db26]
 ;
 ; XREFS:
 ;     Game_MainLoop
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
 ;     Player_Spawn
 ;============================================================================
 Game_MainLoop:                              ; [$db45]
@@ -12376,12 +12589,12 @@ Game_MainLoop:                              ; [$db45]
     JSR WaitForNextFrame
     JSR Sprites_ResetForGameScreen
     JSR GameLoop_UpdatePlayer
-    JSR #$b982                              ; Draw the player's shield
+    JSR $b982                               ; Draw the player's shield
                                             ; sprite.
     JSR Player_DrawBody                     ; Draw the player's body sprite.
-    JSR #$b7d6                              ; Draw the player's weapon
+    JSR $b7d6                               ; Draw the player's weapon
                                             ; sprite.
-    JSR #$ba5b                              ; Check and handle casting magic.
+    JSR $ba5b                               ; Check and handle casting magic.
     JSR GameLoop_CheckUseCurrentItem        ; Active selected item?
     JSR ROMBankStart                        ; Update all sprites.
     JSR GameLoop_CountdownItems
@@ -12412,15 +12625,15 @@ Game_MainLoop:                              ; [$db45]
     JSR GameLoop_LoadSpriteImages
     JSR PPU_WaitUntilFlushed
     JSR Game_UpdateForScroll
-    JSR Game_DrawAndEnableInterrupts
+    JSR Game_ResetScreenAndEnableInterrupts
     JMP Game_MainLoop
 
   @LAB_PRG15_MIRROR__dbaf:                  ; [$dbaf]
     JSR WaitForNextFrame
     JSR Sprites_ResetForGameScreen
-    JSR #$b982
+    JSR $b982
     JSR Player_DrawBody
-    JSR #$b7d6
+    JSR $b7d6
     JSR GameLoop_ClearSprites
     JSR GameLoop_LoadSpriteInfo
     JSR WaitForNextFrame
@@ -12430,9 +12643,9 @@ Game_MainLoop:                              ; [$db45]
     JSR WaitForNextFrame
     JSR Sprites_ResetForGameScreen
     JSR Game_UpdatePlayerOnScroll
-    JSR #$b982
+    JSR $b982
     JSR Player_DrawBody
-    JSR #$b7d6
+    JSR $b7d6
     JSR Screen_HandleScroll
     JSR Screen_HandleScroll
     JSR Screen_HandleScroll
@@ -12510,10 +12723,10 @@ EndGame_MainLoop:                           ; [$dbef]
     ;
     ; Perform all the standard mainloop operations.
     ;
-    JSR #$b982                              ; Draw the shield.
+    JSR $b982                               ; Draw the shield.
     JSR Player_DrawBody                     ; Draw the armor.
-    JSR #$b7d6                              ; Draw the weapon.
-    JSR #$ba5b                              ; No-op
+    JSR $b7d6                               ; Draw the weapon.
+    JSR $ba5b                               ; No-op
     JSR GameLoop_CheckUseCurrentItem        ; No-op
     JSR ROMBankStart                        ; Update sprites.
     JSR GameLoop_CountdownItems             ; No-op
@@ -12527,8 +12740,8 @@ EndGame_MainLoop:                           ; [$dbef]
 ; Move the player toward the King in the end-game.
 ;
 ; This will move the player by simulating holding down the
-; Left joypad button, pressing the A button when at the stairs,
-; and pressing Up when at the King.
+; Left joypad button, pressing the A button when at the
+; stairs, and pressing Up when at the King.
 ;
 ; This is all done by factoring in the current player position:
 ;
@@ -12663,9 +12876,9 @@ Game_DrawScreenInFrozenState:               ; [$dc46]
     ;
     ; Draw the player.
     ;
-    JSR #$b982                              ; Draw the shield.
+    JSR $b982                               ; Draw the shield.
     JSR Player_DrawBody                     ; Draw the armor.
-    JSR #$b7d6                              ; Draw the weapon.
+    JSR $b7d6                               ; Draw the weapon.
 
 
     ;
@@ -12684,7 +12897,7 @@ Game_DrawScreenInFrozenState:               ; [$dc46]
     LDA #$01                                ; A = 1
     STA a:Sprites_UpdatesPaused             ; Set as the paused state for
                                             ; sprites.
-    JSR #$8070                              ; Update all sprites.
+    JSR $8070                               ; Update all sprites.
     LDA #$00                                ; A = 0
     STA a:Sprites_UpdatesPaused             ; Clear the paused state.
     JMP MMC1_UpdatePRGBankToStackA          ; Restore the previous bank.
@@ -12712,10 +12925,10 @@ Game_LoadAreaTable:                         ; [$dc78]
     TAY
     LDA ROMBankStart,Y
     STA Area_ScreenBlocksOffset
-    LDA #$8001,Y
+    LDA ROMBankStart+1,Y
     CLC
     ADC #$80
-    STA Area_ScreenBlocksOffset.U
+    STA Area_ScreenBlocksOffset_U
 
 
     ;
@@ -12736,7 +12949,7 @@ Game_LoadAreaTable:                         ; [$dc78]
     ; This will be AREAS_TABLE_PTR in Bank 3.
     ;
     STA Temp_Addr_L
-    LDA a:#$8001
+    LDA a:ROMBankStart+1
     CLC
     ADC #$80
     STA Temp_Addr_U
@@ -12749,7 +12962,7 @@ Game_LoadAreaTable:                         ; [$dc78]
     LDA (Temp_Addr_L),Y
     CLC
     ADC #$80
-    STA CurrentArea_TableAddr.U
+    STA CurrentArea_TableAddr_U
     LDY #$00
     LDA (CurrentArea_TableAddr),Y
     STA Temp_Addr_L
@@ -12791,7 +13004,7 @@ Game_LoadAreaTable:                         ; [$dc78]
     LDA (CurrentArea_TableAddr),Y
     CLC
     ADC #$80
-    STA CurrentArea_BlockPropertiesAddr.U
+    STA CurrentArea_BlockPropertiesAddr_U
     LDY #$04
     LDA (CurrentArea_TableAddr),Y
     STA CurrentArea_ScrollingDataAddr
@@ -12807,7 +13020,7 @@ Game_LoadAreaTable:                         ; [$dc78]
     LDA (CurrentArea_TableAddr),Y
     CLC
     ADC #$80
-    STA CurrentArea_DoorLocationsAddr.U
+    STA CurrentArea_DoorLocationsAddr_U
     LDY #$08
     LDA (CurrentArea_TableAddr),Y
     STA CurrentArea_DoorDestinationsAddr
@@ -12815,7 +13028,7 @@ Game_LoadAreaTable:                         ; [$dc78]
     LDA (CurrentArea_TableAddr),Y
     CLC
     ADC #$80
-    STA CurrentArea_DoorDestinationsAddr.U
+    STA CurrentArea_DoorDestinationsAddr_U
 
 
     ;
@@ -12885,7 +13098,7 @@ Game_UpdateForScroll:                       ; [$dd0f]
 ;     PPU_ScrollScreenVert:
 ;         The scroll screen, set to 0.
 ;
-;     Screen_Palette:
+;     Screen_PaletteIndex:
 ;         The loaded palette.
 ;
 ;     Screen_Maybe_ScrollXCounter:
@@ -12911,7 +13124,7 @@ Screen_SetupNew:                            ; [$dd13]
     JSR Area_Maybe_ShowRoomTransition
     JSR UI_DrawHUDSprites
     LDA Screen_DestPaletteOrIndex
-    STA a:Screen_Paletteindex
+    STA a:Screen_PaletteIndex
     JSR Screen_LoadBackgroundPalette
     LDA #$00
     STA PPU_ScrollScreenHoriz
@@ -12957,7 +13170,7 @@ Screen_SetupNew:                            ; [$dd13]
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
-;     Maybe_Game_EnterScreenHandler
+;     Game_SetupEnterScreen
 ;============================================================================
 Screen_Load:                                ; [$dd46]
     JSR Screen_SetupNew                     ; Draw the HUD and prepare setup
@@ -13024,13 +13237,13 @@ Screen_SetupSprites:                        ; [$dd4e]
 ;         The Y position the player will be in outside the
 ;         temple.
 ;
-;     Something_Maybe_NewCurrentScreen:
+;     Area_DestScreen:
 ;         TODO
 ;
 ;     Area_CurrentArea:
 ;         TODO
 ;
-;     Screen_Paletteindex:
+;     Screen_PaletteIndex:
 ;         TODO: The index of the palette outside the temple?
 ;
 ;     Area_Music_Outside:
@@ -13065,22 +13278,22 @@ Game_SpawnInTemple:                         ; [$dd61]
     ;
     LDX a:TempleSpawnPoint                  ; X = index of the temple spawn
                                             ; point.
-    LDA #$ddd5,X                            ; Set the current screen for
+    LDA START_SCREEN_FOR_TEMPLE_SPAWN,X     ; Set the current screen for
                                             ; outside the temple.
     STA Area_CurrentScreen
-    LDA #$ddcd,X
+    LDA START_MAYBE_NEXT_AREA_FOR_TEMPLE_SPAWN,X
     STA a:Area_Region
-    LDA #$ddb5,X
+    LDA START_PLAYERPOSX_FULL_FOR_TEMPLE_SPAWN,X
     STA Player_PosX_Block
-    LDA #$ddbd,X
+    LDA MAYBE_START_PLAYERPOSY_FOR_TEMPLE_SPAWN,X
     STA Player_PosY
-    LDA #$ddc5,X
-    STA a:Something_Maybe_NewCurrentScreen
-    LDY #$ddad,X
+    LDA DEST_SCREEN_FOR_TEMPLE_SPAWN,X
+    STA a:Area_DestScreen
+    LDY CURRENT_REGION_FOR_TEMPLE_SPAWN,X
     STY Area_CurrentArea
-    LDA #$df4c,Y
-    STA a:Screen_Paletteindex
-    LDA #$df5c,Y
+    LDA PALETTES,Y
+    STA a:Screen_PaletteIndex
+    LDA AREA_TO_MUSIC_TABLE,Y
     STA a:Area_Music_Outside
     LDA #$12
     STA Screen_DestPaletteOrIndex
@@ -13180,7 +13393,7 @@ MAYBE_START_PLAYERPOSY_FOR_TEMPLE_SPAWN:    ; [$ddbd]
 ; XREFS:
 ;     Game_SpawnInTemple
 ;
-MAYBE_START_BYTE_03DA_FOR_TEMPLE_SPAWN:     ; [$ddc5]
+DEST_SCREEN_FOR_TEMPLE_SPAWN:               ; [$ddc5]
     db $02                                  ; [0]: First town
     db $0b                                  ; [1]: Apolune
     db $10                                  ; [2]: Forepaw
@@ -13203,14 +13416,14 @@ MAYBE_START_BYTE_03DA_FOR_TEMPLE_SPAWN:     ; [$ddc5]
 ;     Game_SpawnInTemple
 ;
 START_MAYBE_NEXT_AREA_FOR_TEMPLE_SPAWN:     ; [$ddcd]
-    db $00                                  ; [0]: First town
-    db $01                                  ; [1]: Apolune
-    db $01                                  ; [2]: Forepaw
-    db $02                                  ; [3]: Fog
-    db $02                                  ; [4]: Victim
-    db $03                                  ; [5]: Conflate
-    db $03                                  ; [6]: Daybreak
-    db $04                                  ; [7]: Final town
+    db REGION_EOLIS                         ; [0]: First town
+    db REGION_TRUNK                         ; [1]: Apolune
+    db REGION_TRUNK                         ; [2]: Forepaw
+    db REGION_MIST                          ; [3]: Fog
+    db REGION_MIST                          ; [4]: Victim
+    db REGION_BRANCH                        ; [5]: Conflate
+    db REGION_BRANCH                        ; [6]: Daybreak
+    db REGION_DARTMOOR                      ; [7]: Final town
 
 
 ;============================================================================
@@ -13251,7 +13464,7 @@ START_SCREEN_FOR_TEMPLE_SPAWN:              ; [$ddd5]
 ;         The music to play for the area (Temple music).
 ;
 ;     Area_CurrentScreen:
-;     Something_Maybe_NewCurrentScreen:
+;     Area_DestScreen:
 ;         The screen to load (68).
 ;
 ;     Area_LoadingScreenIndex:
@@ -13273,7 +13486,7 @@ START_SCREEN_FOR_TEMPLE_SPAWN:              ; [$ddd5]
 ;         The tiles for the room.
 ;
 ; CALLS:
-;     Maybe_Game_EnterBuildingHandler
+;     Game_SetupEnterBuilding
 ;
 ; XREFS:
 ;     EndGame_BeginKingsRoomSequence
@@ -13315,7 +13528,7 @@ EndGame_MoveToKingsRoom:                    ; [$dddd]
     ;
     LDA #$44
     STA Area_CurrentScreen                  ; Set the screen to 68.
-    STA a:Something_Maybe_NewCurrentScreen
+    STA a:Area_DestScreen
     LDA #$06
     STA a:Building_TilesIndex               ; Set the tiles to 6.
 
@@ -13326,7 +13539,7 @@ EndGame_MoveToKingsRoom:                    ; [$dddd]
     LDA Player_Flags                        ; Load the player flags.
     AND #$bf                                ; Set to facing left.
     STA Player_Flags                        ; Store it.
-    JMP Maybe_Game_EnterBuildingHandler     ; Trigger the Enter Building
+    JMP Game_SetupEnterBuilding             ; Trigger the Enter Building
                                             ; logic.
 ;============================================================================
 ; TODO: Document Game_EnterBuilding
@@ -13338,7 +13551,7 @@ EndGame_MoveToKingsRoom:                    ; [$dddd]
 ;     TODO
 ;
 ; XREFS:
-;     Maybe_Game_EnterBuildingHandler
+;     Game_SetupEnterBuilding
 ;============================================================================
 Game_EnterBuilding:                         ; [$de06]
     ;
@@ -13366,7 +13579,7 @@ Game_EnterBuilding:                         ; [$de06]
     LDA Area_CurrentScreen                  ; Load the current screen in the
                                             ; area.
     STA a:Area_SavedScreen                  ; Save it.
-    LDA a:Screen_Paletteindex               ; Load the current palette.
+    LDA a:Screen_PaletteIndex               ; Load the current palette.
     STA a:Screen_SavedPalette               ; Save it.
 
 
@@ -13395,18 +13608,18 @@ Game_EnterBuilding:                         ; [$de06]
     LDX #$04
     STX Area_CurrentArea                    ; Set the current area to 4
                                             ; (inside buildings)
-    LDA #$df34,X                            ; Load the bank for this area.
+    LDA AREA_TO_SCREEN_DATA_BANKS,X         ; Load the bank for this area.
     STA CurrentArea_ROMBank                 ; Store as the current area ROM
                                             ; bank.
     LDX CurrentArea_ROMBank
-    JSR MMC1_SavePRGBankAndUpdateTo         ; Push the current bank and
+    JSR MMC1_SaveROMBankAndUpdateTo         ; Push the current bank and
                                             ; switch to the new one.
     LDX Area_CurrentArea                    ; Load the current area again.
-    LDA #$df3c,X                            ; Get the index into the screen
+    LDA AREA_TO_BANK_OFFSET,X               ; Get the index into the screen
                                             ; data table in this bank.
     JSR Game_LoadAreaTable                  ; Load the area table for the
                                             ; screen.
-    JSR MMC1_RestorePrevPRGBank             ; Restore the previous bank.
+    JSR MMC1_RestorePrevROMBank             ; Restore the previous bank.
 
 
     ;
@@ -13428,7 +13641,7 @@ Game_EnterBuilding:                         ; [$de06]
     ; Set up the screen and the sprites.
     ;
     JSR Screen_SetupNew
-    LDA a:Something_Maybe_NewCurrentScreen
+    LDA a:Area_DestScreen
     STA Area_CurrentScreen
     JMP Screen_SetupSprites
 
@@ -13451,16 +13664,16 @@ Game_ExitBuilding:                          ; [$de66]
     STA CurrentMusic
     LDX a:Area_SavedArea
     STX Area_CurrentArea
-    LDA #$df34,X
+    LDA AREA_TO_SCREEN_DATA_BANKS,X
     STA CurrentArea_ROMBank
     LDX CurrentArea_ROMBank
-    JSR MMC1_SavePRGBankAndUpdateTo
+    JSR MMC1_SaveROMBankAndUpdateTo
     LDX Area_CurrentArea
-    LDA #$df3c,X
+    LDA AREA_TO_BANK_OFFSET,X
     JSR Game_LoadAreaTable
-    JSR MMC1_RestorePrevPRGBank
+    JSR MMC1_RestorePrevROMBank
     LDX Area_CurrentArea
-    LDA #$df44,X
+    LDA CURRENT_AREA_TO_TILES_INDEX_TABLE,X
     STA Area_TilesIndex
     JSR Area_LoadTiles
     LDA a:Area_SavedScreen
@@ -13484,7 +13697,7 @@ Game_ExitBuilding:                          ; [$de66]
 ;     AREA_TO_SCREEN_DATA_BANKS:
 ;         Mapping of areas to PRG ROM banks.
 ;
-;     AREA_TO_SCREEN_DATA_BANK_INDEX:
+;     AREA_TO_BANK_OFFSET:
 ;         Mapping of areas to sprite banks.
 ;
 ;     CURRENT_AREA_TO_TILES_INDEX_TABLE:
@@ -13527,8 +13740,8 @@ Game_ExitBuilding:                          ; [$de66]
 ; CALLS:
 ;     Area_LoadTiles
 ;     Screen_Load
-;     MMC1_RestorePrevPRGBank
-;     MMC1_SavePRGBankAndUpdateTo
+;     MMC1_RestorePrevROMBank
+;     MMC1_SaveROMBankAndUpdateTo
 ;     Screen_LoadSpritePalette
 ;     Player_SetInitialState
 ;
@@ -13562,19 +13775,25 @@ Game_LoadFirstLevel:                        ; [$dea7]
     ; The bank containing the properties for the area will
     ; be loaded temporarily while fetching the block properties.
     ;
-    LDA #$df34,X                            ; A = PRG bank for the area.
+    LDA AREA_TO_SCREEN_DATA_BANKS,X         ; A = PRG bank for the area.
     STA CurrentArea_ROMBank                 ; Store as the current bank.
     LDX CurrentArea_ROMBank                 ; X = current bank.
-    JSR MMC1_SavePRGBankAndUpdateTo         ; Push the current bank and
+    JSR MMC1_SaveROMBankAndUpdateTo         ; Push the current bank and
                                             ; update to this area's bank.
 
 
     ;
     ; Load the area information.
     ;
-    LDA #$df3c,X                            ; A = sprite bank for the area.
+    ; NOTE: There's a bug here. This *should* be passing in the
+    ;       area index, but it's mistakenly passing in the resulting
+    ;       ROM bank. In the shipped game, this is 0 in both cases,
+    ;       but it means that any shuffling around of banks will do
+    ;       the wrong thing if not starting with area 0, bank 0.
+    ;
+    LDA AREA_TO_BANK_OFFSET,X               ; A = sprite bank for the area.
     JSR Game_LoadAreaTable                  ; Load the area information.
-    JSR MMC1_RestorePrevPRGBank             ; Restore the previous bank.
+    JSR MMC1_RestorePrevROMBank             ; Restore the previous bank.
 
 
     ;
@@ -13590,7 +13809,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
     ; Load the tiles and images for the area.
     ;
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df44,X                            ; A = tiles index.
+    LDA CURRENT_AREA_TO_TILES_INDEX_TABLE,X ; A = tiles index.
     STA Area_TilesIndex                     ; Store that.
     JSR Area_LoadTiles                      ; Load the tileset pages for that
                                             ; index.
@@ -13603,7 +13822,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
     JSR Screen_LoadSpritePalette            ; Load the palette for that
                                             ; index.
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df4c,X                            ; Load the palette.
+    LDA PALETTES,X                          ; Load the palette.
     STA Screen_DestPaletteOrIndex           ; And store it as the current one
                                             ; for the area.
 
@@ -13611,7 +13830,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
     ;
     ; Load the music for this area.
     ;
-    LDA #$df5c,X                            ; Load the music for the area.
+    LDA AREA_TO_MUSIC_TABLE,X               ; Load the music for the area.
     STA CurrentMusic                        ; And store it as the current
                                             ; music.
     STA a:Areas_DefaultMusic                ; And as the default for the
@@ -13636,7 +13855,7 @@ Game_LoadFirstLevel:                        ; [$dea7]
 ;     AREA_TO_SCREEN_DATA_BANKS:
 ;         Mapping of areas to PRG ROM banks.
 ;
-;     AREA_TO_SCREEN_DATA_BANK_INDEX:
+;     AREA_TO_BANK_OFFSET:
 ;         Mapping of areas to sprite banks.
 ;
 ;     CURRENT_AREA_TO_TILES_INDEX_TABLE:
@@ -13667,13 +13886,13 @@ Game_LoadFirstLevel:                        ; [$dea7]
 ; CALLS:
 ;     Area_LoadTiles
 ;     Screen_Load
-;     MMC1_RestorePrevPRGBank
-;     MMC1_SavePRGBankAndUpdateTo
+;     MMC1_RestorePrevROMBank
+;     MMC1_SaveROMBankAndUpdateTo
 ;     Screen_LoadSpritePalette
 ;     Player_SetInitialState
 ;
 ; XREFS:
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
 ;============================================================================
 Game_LoadCurrentArea:                       ; [$def5]
     JSR Player_SetInitialState              ; Set the initial player state.
@@ -13683,10 +13902,10 @@ Game_LoadCurrentArea:                       ; [$def5]
     ; Load the bank for this area.
     ;
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df34,X                            ; Load the ROM bank for the area.
+    LDA AREA_TO_SCREEN_DATA_BANKS,X         ; Load the ROM bank for the area.
     STA CurrentArea_ROMBank                 ; Store that as the current bank.
     LDX CurrentArea_ROMBank                 ; X = current bank.
-    JSR MMC1_SavePRGBankAndUpdateTo         ; Save the current bank and
+    JSR MMC1_SaveROMBankAndUpdateTo         ; Save the current bank and
                                             ; switch to it.
 
 
@@ -13694,7 +13913,7 @@ Game_LoadCurrentArea:                       ; [$def5]
     ; Load the bank for the sprites for this area.
     ;
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df3c,X                            ; A = bank for the sprites.
+    LDA AREA_TO_BANK_OFFSET,X               ; A = bank for the sprites.
 
 
     ;
@@ -13702,7 +13921,7 @@ Game_LoadCurrentArea:                       ; [$def5]
     ;
     JSR Game_LoadAreaTable                  ; Load the table of information
                                             ; on this area.
-    JSR MMC1_RestorePrevPRGBank             ; Restore to the previous bank.
+    JSR MMC1_RestorePrevROMBank             ; Restore to the previous bank.
     LDA Area_LoadingScreenIndex             ; A = current screen index.
     STA Area_CurrentScreen                  ; Store as the current screen.
 
@@ -13711,7 +13930,7 @@ Game_LoadCurrentArea:                       ; [$def5]
     ; Load the tiles for the area.
     ;
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df44,X                            ; A = tiles index for the area.
+    LDA CURRENT_AREA_TO_TILES_INDEX_TABLE,X ; A = tiles index for the area.
     STA Area_TilesIndex                     ; Store as the current tiles
                                             ; index.
     JSR Area_LoadTiles                      ; Load all tileset images for
@@ -13724,14 +13943,14 @@ Game_LoadCurrentArea:                       ; [$def5]
     LDA #$00
     JSR Screen_LoadSpritePalette            ; Load palette 0.
     LDX Area_CurrentArea                    ; X = current area.
-    LDA #$df4c,X                            ; Load the palette for the area.
+    LDA PALETTES,X                          ; Load the palette for the area.
     STA Screen_DestPaletteOrIndex           ; Store as the current palette.
 
 
     ;
     ; Load the music for the area.
     ;
-    LDA #$df5c,X                            ; Load the music for the area.
+    LDA AREA_TO_MUSIC_TABLE,X               ; Load the music for the area.
     STA CurrentMusic                        ; Set as the current music.
     STA a:Areas_DefaultMusic                ; Store as the default.
     JMP Screen_Load                         ; Load this screen.
@@ -13777,21 +13996,21 @@ AREA_TO_SCREEN_DATA_BANKS_4_:               ; [$df38]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;
-AREA_TO_SCREEN_DATA_BANK_INDEX:             ; [$df3c]
-    db $00                                  ; [0]: Eolis
-    db $00                                  ; [1]: Apolune
-    db $01                                  ; [2]: Forepaw
-    db $02                                  ; [3]: Mascon
+AREA_TO_BANK_OFFSET:                        ; [$df3c]
+    db BANK_0_AREA_DATA                     ; [0]: Eolis
+    db BANK_0_AREA_DATA                     ; [1]: Apolune
+    db BANK_1_AREA_DATA                     ; [2]: Forepaw
+    db BANK_2_AREA_DATA                     ; [3]: Mascon
 
 ;
 ; XREFS:
 ;     Game_EnterBuilding
 ;
-AREA_TO_SCREEN_DATA_BANK_INDEX_4_:          ; [$df40]
-    db $01                                  ; [4]: Victim
-    db $01                                  ; [5]: Conflate
-    db $00                                  ; [6]: Daybreak
-    db $02                                  ; [7]: Evil Fortress
+AREA_TO_BANK_OFFSET_4_:                     ; [$df40]
+    db BANK_1_AREA_DATA                     ; [4]: Victim
+    db BANK_1_AREA_DATA                     ; [5]: Conflate
+    db BANK_0_AREA_DATA                     ; [6]: Daybreak
+    db BANK_2_AREA_DATA                     ; [7]: Evil Fortress
 
 
 ;============================================================================
@@ -13869,21 +14088,21 @@ AREA_TO_MUSIC_TABLE:                        ; [$df5c]
 ;============================================================================
 Game_EnterAreaHandler:                      ; [$df64]
     LDX Area_CurrentArea
-    LDA #$df34,X
+    LDA AREA_TO_SCREEN_DATA_BANKS,X
     STA CurrentArea_ROMBank
     LDX CurrentArea_ROMBank
-    JSR MMC1_SavePRGBankAndUpdateTo
+    JSR MMC1_SaveROMBankAndUpdateTo
     LDX Area_CurrentArea
-    LDA #$df3c,X
+    LDA AREA_TO_BANK_OFFSET,X
     JSR Game_LoadAreaTable
-    JSR MMC1_RestorePrevPRGBank
+    JSR MMC1_RestorePrevROMBank
     LDA Area_LoadingScreenIndex
     STA Area_CurrentScreen
     LDX Area_CurrentArea
-    LDA #$df5c,X
+    LDA AREA_TO_MUSIC_TABLE,X
     STA CurrentMusic
     STA a:Areas_DefaultMusic
-    LDA #$df44,X
+    LDA CURRENT_AREA_TO_TILES_INDEX_TABLE,X
     STA Area_TilesIndex
     JSR Area_LoadTiles
     LDA #$00
@@ -13921,7 +14140,7 @@ Game_EnterAreaHandler:                      ; [$df64]
 ;         Set to 0.
 ;
 ; CALLS:
-;     Game_SetupAndLoadArea
+;     Game_SetupAndLoadOutsideArea
 ;============================================================================
 Debug_ChooseArea:                           ; [$df99]
     LDA Joy2_ButtonMask                     ; Load the player 2 controller
@@ -13967,7 +14186,7 @@ Debug_ChooseArea:                           ; [$df99]
   @_switchArea:                             ; [$dfbe]
     LDA #$00
     STA Area_CurrentScreen                  ; Set current screen to 0.
-    JMP Game_SetupAndLoadArea               ; Load the area.
+    JMP Game_SetupAndLoadOutsideArea        ; Load the area.
 
 
 ;============================================================================
@@ -13983,7 +14202,7 @@ Debug_ChooseArea:                           ; [$df99]
 ;     Area_CurrentArea:
 ;         The current area.
 ;
-;     Screen_Paletteindex:
+;     Screen_PaletteIndex:
 ;         The screen's palette.
 ;
 ;     Fog_StateIndex:
@@ -14010,7 +14229,7 @@ Fog_OnTick:                                 ; [$dfc5]
     LDA Area_CurrentArea                    ; Load the current area.
     CMP #$02                                ; Is it Forepaw?
     BNE RETURN_E011                         ; If not, return.
-    LDA a:Screen_Paletteindex               ; Load the current palette.
+    LDA a:Screen_PaletteIndex               ; Load the current palette.
     CMP #$0a                                ; Is it Mist?
     BNE RETURN_E011                         ; If not, return.
     LDA Fog_StateIndex                      ; Load the fog index.
@@ -14149,7 +14368,7 @@ Fog_UpdateTiles:                            ; [$dfde]
     AND #$03                                ; And convert to an index in the
                                             ; lookup table.
     TAX                                     ; X = A
-    LDA #$e012,X                            ; Load a starting fog generator
+    LDA FOG_START_TILE_INDEXES,X            ; Load a starting fog generator
                                             ; value at that index.
     STA Fog_TileIndex                       ; And set it.
 
@@ -14831,7 +15050,7 @@ Player_CheckHandleAttack:                   ; [$e103]
                                             ; timer.
     LDA PlayerHitsPhaseTimer                ; A = updated phase timer.
     LDX PlayerHitsPhaseCounter              ; X = phase counter.
-    CMP #$e150,X                            ; Check against the phase lookup
+    CMP PLAYER_HIT_PHASES,X                 ; Check against the phase lookup
                                             ; table.
     BCC @_return                            ; If we're not transitioning to
                                             ; the next phase count, return.
@@ -15078,7 +15297,7 @@ Player_CheckHandleJump:                     ; [$e174]
 ;
 ; CALLS:
 ;     Area_BeginScrollToNextRoom
-;     Maybe_Player_CalcSpeed
+;     Player_UpdateAcceleration
 ;     Player_SetStandardAcceleration
 ;     Player_CheckIfPassable
 ;     Player_SetPosAtRightEdge
@@ -15110,7 +15329,7 @@ Player_TryMoveRight:                        ; [$e1cf]
     ; the right.
     ;
   @_setMoving:                              ; [$e1d8]
-    JSR Maybe_Player_CalcSpeed              ; Calculate the new walking
+    JSR Player_UpdateAcceleration           ; Calculate the new walking
                                             ; speed.
     LDA Player_Flags                        ; Load the player's flags.
     ORA #$60                                ; Set moving and to the right.
@@ -15126,7 +15345,7 @@ Player_TryMoveRight:                        ; [$e1cf]
     STA Player_PosX_Frac                    ; Store as the new fractional
                                             ; position.
     LDA Player_PosX_Block                   ; Load the full X position.
-    ADC Player_MoveAcceleration.U           ; Add the move acceleration.
+    ADC Player_MoveAcceleration_U           ; Add the move acceleration.
     STA Player_PosX_Block                   ; And store it.
 
 
@@ -15254,7 +15473,7 @@ Player_SetPosAtRightEdge:                   ; [$e21b]
 ;
 ; CALLS:
 ;     Area_BeginScrollToNextRoom
-;     Maybe_Player_CalcSpeed
+;     Player_UpdateAcceleration
 ;     Player_SetStandardAcceleration
 ;     Player_CheckIfPassable
 ;     Player_SetPosAtRightEdge
@@ -15286,7 +15505,7 @@ Player_TryMoveLeft:                         ; [$e220]
     ; the left.
     ;
   @_setMoving:                              ; [$e229]
-    JSR Maybe_Player_CalcSpeed              ; Calculate the new walking
+    JSR Player_UpdateAcceleration           ; Calculate the new walking
                                             ; speed.
     LDA Player_Flags                        ; Load the player's flags.
     AND #$bf                                ; Set the player to face left.
@@ -15303,7 +15522,7 @@ Player_TryMoveLeft:                         ; [$e220]
     STA Player_PosX_Frac                    ; Store as the new fractional
                                             ; position.
     LDA Player_PosX_Block                   ; Load the full X position.
-    SBC Player_MoveAcceleration.U           ; Subtract the move acceleration.
+    SBC Player_MoveAcceleration_U           ; Subtract the move acceleration.
     PHP                                     ; Push all flags.
     BCS @_saveFlags                         ; If >= 0, jump.
     LDA #$00                                ; Else, cap at 0, so it doesn't
@@ -15400,21 +15619,21 @@ Player_TryMoveLeft:                         ; [$e220]
 ;
 ; OUTPUTS:
 ;     Player_MoveAcceleration:
-;     #$aa:
+;     Player_MoveAcceleration+1:
 ;         The default acceleration (0xC0).
 ;
 ; XREFS:
-;     Maybe_Player_CalcSpeed
 ;     Player_HandleIFrames
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
+;     Player_UpdateAcceleration
 ;============================================================================
 Player_SetStandardAcceleration:             ; [$e27f]
     LDA #$c0
     STA Player_MoveAcceleration             ; Set the lower byte of movement
                                             ; acceleation to 0xC0.
     LDA #$00
-    STA Player_MoveAcceleration.U           ; Set the upper byte to 0.
+    STA Player_MoveAcceleration_U           ; Set the upper byte to 0.
     RTS
 
 
@@ -15429,11 +15648,11 @@ Player_SetStandardAcceleration:             ; [$e27f]
 ;
 ; OUTPUTS:
 ;     Player_MoveAcceleration:
-;     #$aa:
+;     Player_MoveAcceleration+1:
 ;         The updated acceleration.
 ;
 ; XREFS:
-;     Maybe_Player_CalcSpeed
+;     Player_UpdateAcceleration
 ;============================================================================
 Player_UpdatePosFromKnockback:              ; [$e288]
     ;
@@ -15444,11 +15663,11 @@ Player_UpdatePosFromKnockback:              ; [$e288]
     STA Player_MoveAcceleration             ; Set lower acceleration byte to
                                             ; 0.
     LDA #$08
-    STA Player_MoveAcceleration.U           ; Set upper to 8.
+    STA Player_MoveAcceleration_U           ; Set upper to 8.
     RTS
 
 ;============================================================================
-; TODO: Document Maybe_Player_CalcSpeed
+; TODO: Document Player_UpdateAcceleration
 ;
 ; INPUTS:
 ;     None.
@@ -15460,7 +15679,7 @@ Player_UpdatePosFromKnockback:              ; [$e288]
 ;     Player_TryMoveLeft
 ;     Player_TryMoveRight
 ;============================================================================
-Maybe_Player_CalcSpeed:                     ; [$e291]
+Player_UpdateAcceleration:                  ; [$e291]
     LDA Player_StatusFlag
     AND #$02
     BNE Player_UpdatePosFromKnockback
@@ -15474,7 +15693,7 @@ Maybe_Player_CalcSpeed:                     ; [$e291]
   @LAB_PRG15_MIRROR__e2a3:                  ; [$e2a3]
     LDA Player_MoveAcceleration
     CMP #$80
-    LDA Player_MoveAcceleration.U
+    LDA Player_MoveAcceleration_U
     SBC #$01
     BCS @_return
     LDA a:PlayerTitle
@@ -15484,18 +15703,18 @@ Maybe_Player_CalcSpeed:                     ; [$e291]
     TAX
     LDA Player_MoveAcceleration
     CLC
-    ADC #$e2c4,X
+    ADC @_return+1,X
     STA Player_MoveAcceleration
-    LDA Player_MoveAcceleration.U
+    LDA Player_MoveAcceleration_U
     ADC #$00
-    STA Player_MoveAcceleration.U
+    STA Player_MoveAcceleration_U
 
   @_return:                                 ; [$e2c3]
     RTS
 
 ;
 ; XREFS:
-;     Maybe_Player_CalcSpeed
+;     Player_UpdateAcceleration
 ;
 BYTE_ARRAY_PRG15_MIRROR__e2c4:              ; [$e2c4]
     db $02                                  ; [0]:
@@ -15931,7 +16150,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
   @LAB_PRG15_MIRROR__e46b:                  ; [$e46b]
     LDA Player_PosY
     SEC
-    SBC #$e4d6,X
+    SBC $e4d6,X
     STA Player_PosY
     BCS @LAB_PRG15_MIRROR__e481
     LDY #$02
@@ -15964,7 +16183,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
   @LAB_PRG15_MIRROR__e4a2:                  ; [$e4a2]
     LDA Player_PosY
     CLC
-    ADC #$e4d6,X
+    ADC $e4d6,X
     STA Player_PosY
     LDX #$03
     JSR Player_CheckIfPassable
@@ -16093,7 +16312,7 @@ Area_CheckCanClimbAdjacent:                 ; [$e4f6]
   @LAB_PRG15_MIRROR__e503:                  ; [$e503]
     LDA Player_PosX_Block
     CLC
-    ADC #$e524,X
+    ADC $e524,X
     STA Arg_PixelPosX
     LDA Player_PosY
     CLC
@@ -16169,21 +16388,21 @@ Player_CheckHandleEnterDoor:                ; [$e526]
 
   @_paletteCheckLoop:                       ; [$e54c]
     LDA Screen_DestPaletteOrIndex
-    CMP #$e569,X
+    CMP @_return+1,X
     BEQ @_setupArea
     DEX
     BPL @_paletteCheckLoop
     BMI @_enterScreen
 
   @_setupArea:                              ; [$e558]
-    LDA #$e570,X
+    LDA $e570,X
     CMP a:Areas_DefaultMusic
     BEQ @_enterScreen
     STA CurrentMusic
     STA a:Areas_DefaultMusic
 
   @_enterScreen:                            ; [$e565]
-    JMP Maybe_Game_EnterScreenHandler
+    JMP Game_SetupEnterScreen
 
   @_return:                                 ; [$e568]
     RTS
@@ -16249,19 +16468,19 @@ Music_ARRAY_PRG15_MIRROR__e570_6_:          ; [$e576]
 ;============================================================================
 Player_EnterDoorToInside:                   ; [$e577]
     LDX Area_LoadingScreenIndex
-    STX a:Something_Maybe_NewCurrentScreen
+    STX a:Area_DestScreen
     LDA Screen_DestPaletteOrIndex
     STA Area_LoadingScreenIndex
     TAX
-    LDA #$e609,X
+    LDA BUILDING_PALETTES,X
     STA Screen_DestPaletteOrIndex
-    LDA #$e613,X
+    LDA BUILDING_MAYBE_TILES_INDEXES,X
     STA a:Building_TilesIndex
-    LDA #$e61d,X
+    LDA BUILDING_START_POSITIONS,X
     STA Screen_StartPosYX
     LDA a:Areas_DefaultMusic
     STA a:Area_Music_Outside
-    LDA #$e5ff,X
+    LDA BUILDING_MUSIC,X
     STA a:Areas_DefaultMusic
     LDA Area_CurrentArea
 
@@ -16278,7 +16497,7 @@ Player_EnterDoorToInside:                   ; [$e577]
     AND #$bf
     STA Player_Flags
     JSR Screen_FadeToBlack
-    JMP Maybe_Game_EnterBuildingHandler
+    JMP Game_SetupEnterBuilding
 ;============================================================================
 ; TODO: Document Player_EnterDoorToOutside
 ;
@@ -16305,7 +16524,7 @@ Player_EnterDoorToOutside:                  ; [$e5b2]
     ;
     ; Check if the door is locked.
     ;
-    LDA #$e5db,Y
+    LDA DOOR_LOOKUP_REQUIREMENTS,Y
     STA a:CurrentDoor_KeyRequirement
     JSR Game_RunDoorRequirementHandler
     PLA
@@ -16317,12 +16536,12 @@ Player_EnterDoorToOutside:                  ; [$e5b2]
     ;
     ; This door is not locked.
     ;
-    LDA #$e5e7,Y
+    LDA MAYBE_REGION_TRANSITION_MAP,Y
     STA a:Area_Region
-    LDA #$e5f3,Y
+    LDA MAYBE_SCREEN_TRANSITION_MAP,Y
     STA Area_LoadingScreenIndex
     JSR Screen_FadeToBlack
-    JMP Game_SetupAndLoadArea
+    JMP Game_SetupAndLoadOutsideArea
 
     ;
     ; XREFS:
@@ -17012,7 +17231,7 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
     LDA CurrentArea_DoorLocationsAddr       ; Load the lower byte of the
                                             ; doors address.
     STA Temp_Addr_L                         ; Store it temporarily.
-    LDA CurrentArea_DoorLocationsAddr.U     ; Load the upper byte.
+    LDA CurrentArea_DoorLocationsAddr_U     ; Load the upper byte.
     STA Temp_Addr_U                         ; Store it temporarily.
 
 
@@ -17186,13 +17405,12 @@ Area_SetStateFromDoorDestination:           ; [$e7c5]
 ;         The new block position.
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckImpassableY
+;     CastMagic_CheckDirection_CheckImpassable
 ;     CurrentSprite_CalculateVisibility
-;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
-;     FUN_PRG14__86c6
 ;     SpriteBehavior_NecronAides
+;     Sprites_MoveRight__86c6
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanPlayerMoveAtY
 ;     Area_CheckCanClimbAdjacent
@@ -17239,9 +17457,9 @@ Area_ConvertPixelsToBlockPos:               ; [$e86c]
 ;     Area_GetBlockProperty
 ;
 ; XREFS:
-;     CastMagic_Maybe_CheckImpassableY
+;     CastMagic_CheckDirection_CheckImpassable
 ;     CurrentSprite_CanMoveInDirection
-;     FUN_PRG14__86c6
+;     Sprites_MoveRight__86c6
 ;     Area_CanMoveImmediatelyRight
 ;     Area_CanPlayerMoveAtY
 ;     Area_CheckCanClimbAdjacent
@@ -17309,7 +17527,7 @@ Area_IsBlockImpassable:                     ; [$e87f]
 ;============================================================================
 Area_GetFromImpassableMap:                  ; [$e882]
     TAY                                     ; Y = A
-    LDA #$e8d9,Y                            ; A = Impassable flag for the
+    LDA BLOCK_PROPERTY_IMPASSABLE_MAP,Y     ; A = Impassable flag for the
                                             ; block property type.
     RTS                                     ; And return it.
 
@@ -17495,7 +17713,6 @@ Area_IsBlockClimbable:                      ; [$e8b2]
 ;
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility
-;     CurrentSprite_CalculateVisibility_MaybeWithArg
 ;     SpriteBehavior_NecronAides
 ;     CastMagic_CalculateVisibility
 ;     Player_CheckSwitchScreen
@@ -17748,7 +17965,7 @@ Player_CheckOnBreakableBlock:               ; [$e905]
     TAX                                     ; X = facing value.
     LDA Player_PosX_Block                   ; A = Player X position.
     CLC
-    ADC #$e95b,X                            ; Load a block offset to round to
+    ADC @_CHECK_BREAKABLE_BLOCK_X_OFFSETS,X ; Load a block offset to round to
                                             ; the nearest overlapping blocks.
     STA Arg_PixelPosX                       ; Store as the X position to
                                             ; check.
@@ -17777,7 +17994,7 @@ Player_CheckOnBreakableBlock:               ; [$e905]
     TAX                                     ; X = A
     LDA Player_PosX_Block                   ; A = Player X position.
     CLC
-    ADC #$e95b,X                            ; Load a block offset to round to
+    ADC @_CHECK_BREAKABLE_BLOCK_X_OFFSETS,X ; Load a block offset to round to
                                             ; the next overlapping blocks.
     STA Arg_PixelPosX                       ; Store as the X position to
                                             ; check.
@@ -17838,7 +18055,7 @@ Player_CheckPushingBlock:                   ; [$e95d]
     STA Arg_PixelPosY
     LDA Player_PosX_Block
     CLC
-    ADC #$e9be,X
+    ADC $e9be,X
     STA Arg_PixelPosX
 
 
@@ -17968,9 +18185,9 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     LDA Area_CurrentArea
     ASL A
     TAX
-    LDA #$ea37,X
+    LDA @_return+1,X
     STA Temp_Addr_L
-    LDA #$ea38,X
+    LDA $ea38,X
     STA Temp_Addr_U
     LDY #$00
 
@@ -17989,7 +18206,7 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     INY
     LDA (Temp_Addr_L),Y
     STA Screen_DestPaletteOrIndex
-    JMP Maybe_Game_EnterScreenHandler
+    JMP Game_SetupEnterScreen
 
   @LAB_PRG15_MIRROR__ea2f:                  ; [$ea2f]
     INY
@@ -18074,9 +18291,9 @@ Player_CheckSwitchScreen_SwitchAreaHoriz:   ; [$ea5f]
     BEQ Maybe_Game_MainExitBuildingHandler
     ASL A
     TAY
-    LDA #$ea9c,Y
+    LDA AREA_TOWN_TRANSITIONS_DATA,Y
     STA Temp_Addr_L
-    LDA #$ea9d,Y
+    LDA AREA_TOWN_TRANSITIONS_DATA+1,Y
     STA Temp_Addr_U
     LDY #$00
 
@@ -18354,9 +18571,9 @@ Game_RunDoorRequirementHandler:             ; [$eb2f]
     BEQ @_return
     ASL A
     TAY
-    LDA #$eb40,Y
+    LDA DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS+1,Y
     PHA
-    LDA #$eb3f,Y
+    LDA DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS,Y
     PHA
 
   @_return:                                 ; [$eb3e]
@@ -18862,7 +19079,7 @@ Player_DrawBody:                            ; [$ebee]
     STA Unused_Sprite_ScrollPosY
 
   @LAB_PRG15_MIRROR__ec21:                  ; [$ec21]
-    JSR #$b9ed
+    JSR $b9ed
     JSR Player_SetFacingLeft
     JSR Player_GetBodySpriteFrameOffset
     PHA
@@ -18878,7 +19095,7 @@ Player_DrawBody:                            ; [$ebee]
     TAX
     PLA
     CLC
-    ADC #$ec49,X
+    ADC PLAYER_BODY_TILES,X
     JSR Sprite_SetPlayerAppearanceAddr
     JMP FUN_PRG15_MIRROR__ec58
 
@@ -18939,8 +19156,8 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     INY
 
   @LAB_PRG15_MIRROR__ec6b:                  ; [$ec6b]
-    LDA #$eca2,Y
-    JSR #$b880
+    LDA @_return+1,Y
+    JSR $b880
     LDA Player_PosX_Block
     CLC
     ADC Temp_04
@@ -18951,7 +19168,7 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     BNE @_return
     LDA Player_PosY
     STA Maybe_Arg_CurrentSprite_PosY
-    JSR #$b9ed
+    JSR $b9ed
     LDA a:SelectedArmor
     ASL A
     STA Temp_00
@@ -18965,7 +19182,7 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     TYA
     ORA Temp_00
     TAY
-    LDA #$eca4,Y
+    LDA $eca4,Y
     JMP Sprite_SetPlayerAppearanceAddr
 
   @_return:                                 ; [$eca1]
@@ -19037,7 +19254,7 @@ Player_GetBodySpriteFrameOffset:            ; [$ecac]
 
   @LAB_PRG15_MIRROR__eccc:                  ; [$eccc]
     LDX PlayerHitsPhaseCounter
-    LDA #$ecf3,X
+    LDA $ecf3,X
     RTS
 
   @LAB_PRG15_MIRROR__ecd2:                  ; [$ecd2]
@@ -19060,7 +19277,7 @@ Player_GetBodySpriteFrameOffset:            ; [$ecac]
 
   @LAB_PRG15_MIRROR__ecea:                  ; [$ecea]
     TAX
-    LDA #$ecef,X
+    LDA $ecef,X
     RTS
 
 ;
@@ -19363,7 +19580,7 @@ Player_LoadArmorSprite:                     ; [$ed72]
   @_loadArmor:                              ; [$ed87]
     STA Player_ArmorLookupIndex
     TAX
-    LDA #$ed95,X
+    LDA PLAYER_ARMOR_TILE_IDS,X
     STA Temp_00
     TXA
     ASL A
@@ -19414,14 +19631,14 @@ Player_LoadWeaponSprite:                    ; [$ed9d]
 
   @LAB_PRG15_MIRROR__edab:                  ; [$edab]
     TAX
-    LDA #$edc1,X
+    LDA PLAYER_WEAPON_TILE_COUNTS,X
     STA Temp_00
     TXA
     ASL A
     TAY
-    LDA #$edc5,Y
+    LDA PLAYER_WEAPON_TILE_PPU_ADDRS,Y
     STA Player_SpriteSegmentPPUAddr_L
-    LDA #$edc6,Y
+    LDA PLAYER_WEAPON_TILE_PPU_ADDRS+1,Y
     STA Player_SpriteSegmentPPUAddr_U
     JMP Player_LoadWeaponSpriteTileAddrs
 
@@ -19651,7 +19868,7 @@ Player_LoadArmorSpriteTilesAddr:            ; [$ee15]
     LDA a:ROMBankStart                      ; Load the lower byte of the
                                             ; address of the armor index.
     STA Player_SpriteTileReadAddr_L         ; Set as the lower byte.
-    LDA a:#$8001                            ; Load the upper byte.
+    LDA a:ROMBankStart+1                    ; Load the upper byte.
     CLC
     ADC #$80                                ; Add 0x80 to the upper byte.
     STA Player_SpriteTileReadAddr_U         ; And set it as the upper byte.
@@ -19722,10 +19939,10 @@ Player_LoadWeaponSpriteTileAddrs:           ; [$ee3f]
     ;
     ; Load the address of the index of weapon types to tile IDs.
     ;
-    LDA a:#$8002                            ; Load the lower byte of the
+    LDA a:$8002                             ; Load the lower byte of the
                                             ; address of the weapon index.
     STA Player_SpriteTileReadAddr_L         ; Set as the lower byte.
-    LDA a:#$8003                            ; Load the upper byte.
+    LDA a:$8003                             ; Load the upper byte.
     CLC
     ADC #$80                                ; Add 0x80 to the upper byte.
     STA Player_SpriteTileReadAddr_U         ; And set it as the upper byte.
@@ -19797,10 +20014,10 @@ Player_LoadShieldSpriteTileAddrs:           ; [$ee69]
     ;
     ; Load the address of the index of shield types to tile IDs.
     ;
-    LDA a:#$800c                            ; Load the lower byte of the
+    LDA a:$800c                             ; Load the lower byte of the
                                             ; address of the shield index.
     STA Player_SpriteTileReadAddr_L         ; Set as the lower byte.
-    LDA a:#$800d                            ; Load the upper byte.
+    LDA a:$800d                             ; Load the upper byte.
     CLC
     ADC #$80                                ; Add 0x80 to the upper byte.
     STA Player_SpriteTileReadAddr_U         ; And set it as the upper byte.
@@ -19871,7 +20088,7 @@ Player_LoadShieldSpriteTileAddrs:           ; [$ee69]
 ;     Temp_Addr_L:
 ;     Temp_Addr_U:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -19948,7 +20165,7 @@ Player_DrawShieldTile:                      ; [$ee93]
 ;     Temp_Addr_L:
 ;     Temp_Addr_U:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -20025,7 +20242,7 @@ Player_DrawArmorTile:                       ; [$eea9]
 ;     Temp_Addr_L:
 ;     Temp_Addr_U:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -20053,7 +20270,7 @@ Player_DrawWeaponTile:                      ; [$eebf]
                                             ; IDs start address.
     STA Temp_Addr_L                         ; Store as the lower byte of the
                                             ; address to read from.
-    LDA a:#$8007                            ; Load the upper byte of the tile
+    LDA a:EOLIS_BLOCKS+1                    ; Load the upper byte of the tile
                                             ; IDs start address.
     STA Temp_Addr_U                         ; Store as the upper byte of the
                                             ; address to read from.
@@ -20179,7 +20396,7 @@ Player_DrawSpriteTile:                      ; [$eed2]
     ;
     LDA Player_SpriteSegmentPPUAddr_U       ; Load the upper byte of the PPU
                                             ; address of the sprite data.
-    STA a:PPU_TargetAddr.U                  ; Store as the upper byte to
+    STA a:PPU_TargetAddr_U                  ; Store as the upper byte to
                                             ; write to for the PPU draw
                                             ; command.
     LDA Player_SpriteSegmentPPUAddr_L       ; Load the lower byte.
@@ -20300,10 +20517,10 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
     ; to run.
     ;
     TAY                                     ; Y = A
-    LDA #$ef64,Y                            ; Load the lower byte of the
-                                            ; handler address.
+    LDA SPECIAL_SCREEN_EVENT_LOOKUP_TABLE+1,Y ; Load the lower byte of the
+                                              ; handler address.
     PHA                                     ; Push it to the stack.
-    LDA #$ef63,Y                            ; Load the upper byte.
+    LDA SPECIAL_SCREEN_EVENT_LOOKUP_TABLE,Y ; Load the upper byte.
     PHA                                     ; Push it.
 
   @_return:                                 ; [$ef62]
@@ -20721,7 +20938,7 @@ Sprites_HasBoss:                            ; [$eff8]
   @_loop:                                   ; [$effa]
     LDY CurrentSprites_Entities,X           ; Load the sprite entity at that
                                             ; index.
-    LDA #$b544,Y                            ; Load the category for the
+    LDA $b544,Y                             ; Load the category for the
                                             ; entity.
     CMP #$07                                ; Is it 7 (boss)?
     BNE @_notBoss                           ; If not, jump.
@@ -20813,7 +21030,8 @@ Sprite_SetPortraitAppearanceAddr:           ; [$f01b]
     ;
     ; With the addresses stored in PORTRAIT_APPEARANCES_OFFSET
     ; and
-    ; PRG7::800b, this should put us at a starting
+    ; PORTRAIT_APPEARANCES_OFFSET+1, this should put us at a
+    ; starting
     ; point of {@address PRG7::AFD5}, or {@address PRG7::B0D5} if offset
     ; overflowed.
     ;
@@ -20858,16 +21076,17 @@ Sprite_SetPlayerAppearanceAddr:             ; [$f039]
     ;
     ; With the addresses stored in PLAYER_APPEARANCES_OFFSET
     ; and
-    ; PRG7::8009, this should put us at a starting
+    ; PLAYER_APPEARANCES_OFFSET+1, this should put us at a
+    ; starting
     ; point of {@address PRG7::A9F1}, or {@address PRG7::AAF1} if offset
     ; overflowed.
     ;
     ASL A
     TAY
     PHP
-    LDA a:#$8008
+    LDA a:$8008
     STA Temp_Addr_L
-    LDA a:#$8009
+    LDA a:$8009
     PLP
     ADC #$80
     STA Temp_Addr_U
@@ -20903,7 +21122,8 @@ Sprite_SetAppearanceAddrFromOffset:         ; [$f057]
     ;
     ; With the addresses stored in SPRITE_APPEARANCES_OFFSET
     ; and
-    ; PRG7::8007, this should put us at a starting
+    ; SPRITE_APPEARANCES_OFFSET+1, this should put us at a
+    ; starting
     ; point of {@address PRG7::9036}, or {@address PRG7::9136} if offset
     ; overflowed.
     ;
@@ -20915,7 +21135,7 @@ Sprite_SetAppearanceAddrFromOffset:         ; [$f057]
     LDA a:EOLIS_BLOCKS                      ; Load the lower byte of the
                                             ; address to read from.
     STA Temp_Addr_L                         ; Store it for processing.
-    LDA a:#$8007                            ; Load the upper byte.
+    LDA a:EOLIS_BLOCKS+1                    ; Load the upper byte.
     PLP                                     ; Pop the flags and stack
                                             ; pointer.
     ADC #$80                                ; Add 0x80 + carry to the upper
@@ -21130,7 +21350,7 @@ Sprite_Draw_Standard:                       ; [$f0ec]
     ;
     LDX Temp_Sprites_TileXOffset            ; X = tile X offset.
     LDA Temp_Sprites_NormXPos               ; A = normalized X position.
-    ADC #$f23d,X                            ; A += the offset from the lookup
+    ADC SPRITE_TILE_OFFSETS,X               ; A += the offset from the lookup
                                             ; table at X.
     STA Temp_00                             ; Store it temporarily.
     LDA Something_SpriteData_X              ; Load the default X position.
@@ -21145,7 +21365,7 @@ Sprite_Draw_Standard:                       ; [$f0ec]
     ;
     LDX Temp_Sprites_TileYOffset            ; X = tile Y offset.
     LDA Temp_Sprites_NormYPos               ; A = normalized Y position.
-    ADC #$f23d,X                            ; A += the offset from the lookup
+    ADC SPRITE_TILE_OFFSETS,X               ; A += the offset from the lookup
                                             ; table at X.
     STA Temp_01                             ; Store it temporarily.
     LDA Something_SpriteData_Y              ; Load the default Y position.
@@ -21200,7 +21420,7 @@ Sprite_Draw_Standard:                       ; [$f0ec]
     AND #$01
     TAY
     LDA MovingSpriteVisibility
-    AND #$f224,Y
+    AND $f224,Y
     BEQ @_setSpritePriority
 
 
@@ -21321,14 +21541,14 @@ Sprite_Draw_FlippedHoriz:                   ; [$f181]
     BNE @LAB_PRG15_MIRROR__f215
     LDX Temp_Sprites_TileXOffset
     LDA Temp_Sprites_NormXPos
-    ADC #$f23d,X
+    ADC SPRITE_TILE_OFFSETS,X
     STA Temp_00
     LDA Something_SpriteData_X
     ADC #$00
     BNE @LAB_PRG15_MIRROR__f215
     LDX Temp_Sprites_TileYOffset
     LDA Temp_Sprites_NormYPos
-    ADC #$f23d,X
+    ADC SPRITE_TILE_OFFSETS,X
     STA Temp_01
     LDA Something_SpriteData_Y
     ADC #$00
@@ -21356,7 +21576,7 @@ Sprite_Draw_FlippedHoriz:                   ; [$f181]
     AND #$01
     TAY
     LDA MovingSpriteVisibility
-    AND #$f226,Y
+    AND $f226,Y
     BEQ @LAB_PRG15_MIRROR__f205
     LDA Temp_01
     ORA #$20
@@ -21508,7 +21728,7 @@ IScripts_ShowPortraitImage:                 ; [$f24d]
     JSR Screen_LoadSpritePalette
     JSR PPUBuffer_WritePalette
     LDA #$09
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDY #$00
@@ -21624,7 +21844,7 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     TAX
     JSR IScripts_GetPortraitOffset
     CLC
-    ADC #$f2df,X
+    ADC $f2df,X
     JSR Sprite_SetPortraitAppearanceAddr
 
 
@@ -21639,7 +21859,7 @@ IScripts_DrawPortraitAnimationFrame:        ; [$f29b]
     TAX
     JSR IScripts_GetPortraitOffset
     CLC
-    ADC #$f2e1,X
+    ADC $f2e1,X
     JMP Sprite_SetPortraitAppearanceAddr
 
 ;============================================================================
@@ -21698,9 +21918,9 @@ FUN_PRG15_MIRROR__f2e3:                     ; [$f2e3]
     LDA a:IScript_PortraitID
     ASL A
     TAY
-    LDA a:#$800e
+    LDA a:$800e
     STA Temp_Addr_L
-    LDA a:#$800f
+    LDA a:$800f
     CLC
     ADC #$80
     STA Temp_Addr_U
@@ -21758,10 +21978,10 @@ IScripts_Maybe_DrawSpriteToPPU:             ; [$f316]
     ASL A
     ROL Temp_05
     CLC
-    ADC a:#$8010
+    ADC a:$8010
     STA Temp_04
     LDA Temp_05
-    ADC a:#$8011
+    ADC a:$8011
     CLC
     ADC #$80
     STA Temp_05
@@ -21781,9 +22001,9 @@ IScripts_Maybe_DrawSpriteToPPU:             ; [$f316]
     CLC
     ADC #$10
     STA PPU_TargetAddr
-    LDA PPU_TargetAddr.U
+    LDA PPU_TargetAddr_U
     ADC #$00
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     PLA
     TAX
     JSR MMC1_UpdateROMBank
@@ -21832,9 +22052,9 @@ PlaySoundInner:                             ; [$f36f]
     ;
     TAX                                     ; X = new sound ID
     LDY a:CurrentSoundIndex                 ; Y = current sound ID
-    LDA #$f388,Y                            ; A = Sound type for current
+    LDA SOUND_PRIORITIES,Y                  ; A = Sound type for current
                                             ; sound from map
-    CMP #$f388,X                            ; Is this already the current
+    CMP SOUND_PRIORITIES,X                  ; Is this already the current
                                             ; sound?
     BEQ @_queueNext                         ; If yes, then jump
     BCC @_queueNext                         ; If less than, then jump.
@@ -21925,7 +22145,7 @@ PPU_LoadGlyphsForStrings:                   ; [$f3a5]
     LDA #$00
     STA Temp_Int24
     LDA #$80
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA #$12
     STA a:PPUADDR
     LDA #$00
@@ -21939,7 +22159,7 @@ PPU_LoadGlyphsForStrings:                   ; [$f3a5]
     CLC
     ADC #$08
     BCC @LAB_PRG15_MIRROR__f3d1
-    INC Temp_Int24.M
+    INC Temp_Int24_M
 
   @LAB_PRG15_MIRROR__f3d1:                  ; [$f3d1]
     STA Temp_Int24
@@ -22072,11 +22292,11 @@ IScripts_LoadAndShowMessage:                ; [$f3e9]
 ;     Maybe_MessageCharPos:
 ;         The starting message character position (0).
 ;
-;     #$0219:
+;     Message_StartAddr+1:
 ;     Message_StartAddr:
 ;         The address of the start of the message string.
 ;
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;     PPU_TargetAddr:
 ;         Set to address $1400.
 ;
@@ -22126,7 +22346,7 @@ Messages_Load:                              ; [$f3f5]
     STX Temp_Int24
     LDX #$83                                ; Set the upper byte of the
                                             ; address for the strings.
-    STX Temp_Int24.M
+    STX Temp_Int24_M
 
 
     ;
@@ -22168,7 +22388,7 @@ Messages_Load:                              ; [$f3f5]
     ; will happen when Y wraps around from 0xFF to 0.
     ;
     BNE @_checkChar                         ; If Y != 0, jump.
-    INC Temp_Int24.M                        ; Y is 0. Increment upper byte
+    INC Temp_Int24_M                        ; Y is 0. Increment upper byte
                                             ; position.
 
 
@@ -22193,9 +22413,9 @@ Messages_Load:                              ; [$f3f5]
     LDA Temp_Int24                          ; Load the new lower byte of the
                                             ; string position.
     STA a:Message_StartAddr                 ; Store it.
-    LDA Temp_Int24.M                        ; Load the new upper byte of the
+    LDA Temp_Int24_M                        ; Load the new upper byte of the
                                             ; string position.
-    STA a:Message_StartAddr.U               ; Store it.
+    STA a:Message_StartAddr_U               ; Store it.
 
 
     ;
@@ -22218,7 +22438,7 @@ Messages_Load:                              ; [$f3f5]
 ;     None.
 ;
 ; OUTPUTS:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;     PPU_TargetAddr:
 ;         Set to address $1400.
 ;
@@ -22283,7 +22503,7 @@ TextBox_ClearTextTiles:                     ; [$f44a]
     ;
     LDA #$14                                ; 0x14 == upper byte of the PPU
                                             ; address.
-    STA PPU_TargetAddr.U                    ; Store it.
+    STA PPU_TargetAddr_U                    ; Store it.
     LDA #$00                                ; 0x00 == lower byte.
     STA PPU_TargetAddr                      ; Store it.
     LDY #$20                                ; Y = 32 (loop counter).
@@ -22465,7 +22685,7 @@ TextBox_DisplayMessage:                     ; [$f4a2]
     ASL A
     ORA Temp_Int24
     TAX                                     ; X = A
-    LDA #$f649,X                            ; Look up the string.
+    LDA PLAYER_TITLE_STRINGS,X              ; Look up the string.
     INC a:Textbox_TitleCharOffset
     CMP #$20
     BNE TextBox_ShowMessageWithSound
@@ -22494,12 +22714,12 @@ TextBox_DisplayMessage:                     ; [$f4a2]
 TextBox_ShowMessage_LoadMessage:            ; [$f4c8]
     LDA a:Message_StartAddr
     STA Temp_Int24
-    LDA a:Message_StartAddr.U
-    STA Temp_Int24.M
+    LDA a:Message_StartAddr_U
+    STA Temp_Int24_M
     LDY a:Message_ProcessedLength
     INC a:Message_ProcessedLength
     BNE @LAB_PRG15_MIRROR__f4dd
-    INC a:Message_StartAddr.U
+    INC a:Message_StartAddr_U
 
   @LAB_PRG15_MIRROR__f4dd:                  ; [$f4dd]
     LDA (Temp_Int24),Y
@@ -22594,8 +22814,8 @@ TextBox_ShowMessage_Space:                  ; [$f502]
     ;
     LDA a:Message_StartAddr
     STA Temp_Int24
-    LDA a:Message_StartAddr.U
-    STA Temp_Int24.M
+    LDA a:Message_StartAddr_U
+    STA Temp_Int24_M
     LDY a:Message_ProcessedLength
     LDA (Temp_Int24),Y
 
@@ -22749,7 +22969,7 @@ TextBox_ShowMessage_Prepare4Lines:          ; [$f539]
 ;          The processed number of bytes of the message.
 ;
 ;     Message_StartAddr:
-;     #$0219:
+;     Message_StartAddr+1:
 ;         The address of the loaded message string.
 ;
 ; OUTPUTS:
@@ -22760,7 +22980,7 @@ TextBox_ShowMessage_Prepare4Lines:          ; [$f539]
 ;         Set to 0xFF if paused.
 ;
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; XREFS:
@@ -22771,8 +22991,8 @@ TextBox_ShowMessage_Pause:                  ; [$f53f]
                                             ; message string address.
     STA Temp_Int24                          ; Store it for length
                                             ; calculation.
-    LDA a:Message_StartAddr.U               ; Load the upper byte.
-    STA Temp_Int24.M                        ; Store it.
+    LDA a:Message_StartAddr_U               ; Load the upper byte.
+    STA Temp_Int24_M                        ; Store it.
 
 
     ;
@@ -22851,7 +23071,7 @@ TextBox_ShowMessage_ShowPlayerTitle:        ; [$f55e]
     ASL A
     ASL A
     TAX                                     ; X = A
-    LDA #$f649,X                            ; Load the title string at X.
+    LDA PLAYER_TITLE_STRINGS,X              ; Load the title string at X.
     JMP TextBox_ShowMessageWithSound        ; Show this title in the textbox.
 ;============================================================================
 ; TODO: Document TextBox_ShowMessage_Fill4Lines
@@ -22921,7 +23141,7 @@ TextBox_ShowMessage_Fill4Lines:             ; [$f571]
     LDA a:TextBox_LineScrollOffset          ; A = scroll-aware line offset.
     CLC
     ADC #$14                                ; A += 20
-    STA PPU_TargetAddr.U                    ; Store as the upper byte of the
+    STA PPU_TargetAddr_U                    ; Store as the upper byte of the
                                             ; PPU target addres.
 
 
@@ -23136,11 +23356,11 @@ TextBox_FillPlaceholderTextAtLineWithStartChar: ; [$f5d9]
 ;         The new upper bounds of the PPU buffer.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The PPU target address to write to.
 ;
 ;     Temp_Int24:
-;     #$ed:
+;     Temp_Int24+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -23169,15 +23389,15 @@ TextBox_Maybe_WriteLineOfChars:             ; [$f5f3]
     ; index to the proper byte offset.
     ;
     LDX #$00                                ; X = 0
-    STX Temp_Int24.M                        ; Set middle byte of string
+    STX Temp_Int24_M                        ; Set middle byte of string
                                             ; address to 0.
     ASL A                                   ; A = A * 8 (each glyph is 8
                                             ; bytes)
     ASL A
-    ROL Temp_Int24.M                        ; Rotate upper byte left and add
+    ROL Temp_Int24_M                        ; Rotate upper byte left and add
                                             ; carry.
     ASL A
-    ROL Temp_Int24.M
+    ROL Temp_Int24_M
     ADC #$00
     STA Temp_Int24
 
@@ -23185,17 +23405,17 @@ TextBox_Maybe_WriteLineOfChars:             ; [$f5f3]
     ;
     ; Make the address relative to $8000.
     ;
-    LDA Temp_Int24.M                        ; Load the upper byte of of the
+    LDA Temp_Int24_M                        ; Load the upper byte of of the
                                             ; address.
     ADC #$80                                ; Add 0x80 to it.
-    STA Temp_Int24.M                        ; Store it back.
+    STA Temp_Int24_M                        ; Store it back.
 
 
     ;
     ; Compute the PPU target address.
     ;
     LDA #$00                                ; A = 0
-    STA PPU_TargetAddr.U                    ; Store as the starting upper
+    STA PPU_TargetAddr_U                    ; Store as the starting upper
                                             ; byte of the PPU target address.
     LDA a:TextBox_CharPosForLine            ; A = character position.
     ASL A                                   ; Convert to a 16 byte address
@@ -23210,7 +23430,7 @@ TextBox_Maybe_WriteLineOfChars:             ; [$f5f3]
     ADC a:TextBox_LineScrollOffset          ; A += line scroll offset
     AND #$03                                ; Cap to a 0..4 line number.
     ADC #$14                                ; A += 20
-    STA PPU_TargetAddr.U                    ; Set as the new upper byte of
+    STA PPU_TargetAddr_U                    ; Set as the new upper byte of
                                             ; the PPU target address.
 
 
@@ -23588,8 +23808,8 @@ Textbox_Maybe_GetAreaBehindTextbox:         ; [$f7b7]
     TAX
     LDA CurrentArea_BlockData1StartAddr,X
     STA Temp_Int24
-    LDA #$81,X
-    STA Temp_Int24.M
+    LDA CurrentArea_BlockData1StartAddr+1,X
+    STA Temp_Int24_M
     LDA (Temp_Int24),Y
 
     ;
@@ -23642,7 +23862,7 @@ textBox_GetAreaBehindTextBox_restoreAndReturn: ; [$f7f6]
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The target address to draw to.
 ;
 ; XREFS:
@@ -23664,17 +23884,17 @@ PPU_SetAddrForTextBoxPos:                   ; [$f804]
                                             ; drawing.
     AND #$01                                ; Convert to 0/1 (even/odd).
     ORA #$08                                ; A += 8
-    STA PPU_TargetAddr.U                    ; Store as the PPU target
+    STA PPU_TargetAddr_U                    ; Store as the PPU target
                                             ; address.
     LDA a:TextBox_ContentsY                 ; Load the text Y position.
     ASL A                                   ; A = A * 16
     ASL A
     ASL A
     ASL A
-    ROL PPU_TargetAddr.U                    ; Rotate the upper byte of the
+    ROL PPU_TargetAddr_U                    ; Rotate the upper byte of the
                                             ; target address left.
     ASL A                                   ; A << 1
-    ROL PPU_TargetAddr.U                    ; Rotate the upper byte of the
+    ROL PPU_TargetAddr_U                    ; Rotate the upper byte of the
                                             ; target address left.
     ORA a:TextBox_ContentsX                 ; OR it with the X position.
     STA PPU_TargetAddr                      ; Store as the lower byte of the
@@ -23687,12 +23907,12 @@ PPU_SetAddrForTextBoxPos:                   ; [$f804]
 ;
 ; INPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The existing PPU target address.
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The updated PPU target address.
 ;
 ; XREFS:
@@ -23710,12 +23930,12 @@ PPU_IncrementAddrBy16:                      ; [$f81e]
 ;
 ; INPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The existing PPU target address.
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The updated PPU target address.
 ;
 ; XREFS:
@@ -23732,12 +23952,12 @@ PPU_IncrementAddrBy8:                       ; [$f822]
 ;
 ; INPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The existing PPU target address.
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The updated PPU target address.
 ;
 ; XREFS:
@@ -23764,12 +23984,12 @@ PPU_IncrementAddrBy32:                      ; [$f826]
 ;         The amount to increment by.
 ;
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The existing PPU target address.
 ;
 ; OUTPUTS:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The updated PPU target address.
 ;
 ; XREFS:
@@ -23782,7 +24002,7 @@ PPU_IncrementAddrBy:                        ; [$f828]
     ADC PPU_TargetAddr                      ; A += PPU_TargetAddr
     BCC @_storeAndReturn                    ; If it overflowed, jump. No need
                                             ; to increment the upper byte.
-    INC PPU_TargetAddr.U                    ; Else, increment the upper byte
+    INC PPU_TargetAddr_U                    ; Else, increment the upper byte
                                             ; by 1.
 
   @_storeAndReturn:                         ; [$f82f]
@@ -24063,7 +24283,7 @@ MMC1_LoadBankAndJump:                       ; [$f859]
                                             ; Temp_Int24 =
                                             ; A
     PLA                                     ; Pull A from the stack.
-    STA Temp_Int24.M                        ; Middle byte of
+    STA Temp_Int24_M                        ; Middle byte of
                                             ; Temp_Int24 =
                                             ; A
 
@@ -24082,7 +24302,7 @@ MMC1_LoadBankAndJump:                       ; [$f859]
                                             ; Temp_Int24.
     CLC                                     ; C = 0
     ADC #$03                                ; A = A + 3
-    STA Temp_Int24.U                        ; Upper byte of
+    STA Temp_Int24_U                        ; Upper byte of
                                             ; Temp_Int24 =
                                             ; A
 
@@ -24100,7 +24320,7 @@ MMC1_LoadBankAndJump:                       ; [$f859]
   @_storeCurrentAddress:                    ; [$f870]
     TXA                                     ; A = X (our adjusted offset)
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of
+    LDA Temp_Int24_U                        ; A = upper byte of
                                             ; Temp_Int24
     PHA                                     ; Push A to stack
     LDA a:CurrentROMBank                    ; A =
@@ -24119,7 +24339,7 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     DEY                                     ; Y-- (2)
     LDA (Temp_Int24),Y                      ; A = Lower byte of the address
                                             ; to jump to.
-    STA Temp_Int24.U                        ; Upper byte of
+    STA Temp_Int24_U                        ; Upper byte of
                                             ; Temp_Int24 =
                                             ; A
     DEY                                     ; Y-- (1)
@@ -24143,7 +24363,7 @@ MMC1_LoadBankAndJump:                       ; [$f859]
     LDA Maybe_Temp4                         ; A =
                                             ; Maybe_Temp4
     PHA                                     ; Push A to stack
-    LDA Temp_Int24.U                        ; A = upper byte of
+    LDA Temp_Int24_U                        ; A = upper byte of
                                             ; Temp_Int24.
     PHA                                     ; Push A to stack
 
@@ -24179,7 +24399,7 @@ PPU_WriteTilesFromCHRRAM:                   ; [$f89e]
     PHA
     JSR MMC1_UpdateROMBank
     STY Temp_Int24
-    LDA PPU_TargetAddr.U
+    LDA PPU_TargetAddr_U
     STA a:PPUADDR
     LDA PPU_TargetAddr
     STA a:PPUADDR
@@ -24193,7 +24413,7 @@ PPU_WriteTilesFromCHRRAM:                   ; [$f89e]
     STA a:PPUDATA
     INY
     BNE @LAB_PRG15_MIRROR__f8bf
-    INC IScriptOrCHRAddr.U
+    INC IScriptOrCHRAddr_U
 
   @LAB_PRG15_MIRROR__f8bf:                  ; [$f8bf]
     DEX
@@ -24375,7 +24595,7 @@ UI_DrawHUDSprites:                          ; [$f8eb]
     LDA #$20
     STA a:PPUADDR                           ; Store the upper draw position
                                             ; byte as 0x20.
-    LDA #$f8cb,X                            ; Load the lower byte from the
+    LDA UI_STATUS_SYMBOL_PPU_ADDR_L,X       ; Load the lower byte from the
                                             ; lookup table based on the
                                             ; index.
     STA a:PPUADDR                           ; Store it as the lower byte.
@@ -24392,7 +24612,7 @@ UI_DrawHUDSprites:                          ; [$f8eb]
     ; This is generally 2-4 tiles per address.
     ;
   @_drawTiles:                              ; [$f910]
-    LDA #$f8d2,Y                            ; Load the tile to draw at the
+    LDA UI_STATUS_TILES,Y                   ; Load the tile to draw at the
                                             ; current tile index.
     BEQ @_advanceIndexes                    ; If this is 0x00, we've reached
                                             ; the end of the run. Advance
@@ -24428,11 +24648,11 @@ UI_DrawHUDSprites:                          ; [$f8eb]
     LDA #$40
     STA IScriptOrCHRAddr
     LDA #$81
-    STA IScriptOrCHRAddr.U
+    STA IScriptOrCHRAddr_U
     LDA #$00
     STA PPU_TargetAddr
     LDA #$10
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$3c
     JSR PPU_WriteTilesFromCHRRAM
@@ -24478,10 +24698,10 @@ Player_CheckReachedNextTitle:               ; [$f93c]
     TAX
     LDA a:Experience                        ; Load the lower byte from the
                                             ; lookup table.
-    CMP #$f749,X                            ; Compare it.
+    CMP PLAYER_TITLE_EXP_NEEDED,X           ; Compare it.
     LDA a:Experience_U                      ; Load the upper byte from the
                                             ; lookup table.
-    SBC #$f74a,X                            ; Compare it.
+    SBC PLAYER_TITLE_EXP_NEEDED+1,X         ; Compare it.
     BCC @_return                            ; If we're under, exit.
 
 
@@ -24504,7 +24724,7 @@ Player_CheckReachedNextTitle:               ; [$f93c]
 ;     Temp_Int24:
 ;         The lower byte of experience to add.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The upper byte of experience to add.
 ;
 ; OUTPUTS:
@@ -24531,7 +24751,7 @@ Player_UpdateExperience:                    ; [$f957]
     ;
     LDA a:Experience_U                      ; Load the current upper byte of
                                             ; experience.
-    ADC Temp_Int24.M
+    ADC Temp_Int24_M
     STA a:Experience_U                      ; Set the new upper byte of
                                             ; experience.
     BCC @LAB_PRG15_MIRROR__f972             ; Can we add to the experience,
@@ -24572,13 +24792,13 @@ Player_UpdateExperience:                    ; [$f957]
 ;         The lower byte of the experience.
 ;
 ; OUTPUTS:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         The upper byte of the location to render to.
 ;
 ;     PPU_TargetAddr:
 ;         The lower byte of the location to render to.
 ;
-;     #$ee:
+;     $ee:
 ;         TODO: Currently unknown.
 ;
 ; CALLS:
@@ -24593,14 +24813,14 @@ UI_DrawPlayerExperience:                    ; [$f975]
     ; (0x2050).
     ;
     LDA #$20
-    STA PPU_TargetAddr.U                    ; Store 0x20 as the upper byte.
+    STA PPU_TargetAddr_U                    ; Store 0x20 as the upper byte.
     LDA #$50
     STA PPU_TargetAddr                      ; Store 0x50 as the upper byte.
 
 
     ;
     ; Store the new experience back out to Temp_Int24 and
-    ; #$ed.
+    ; Temp_Int24+1.
     ;
     LDA a:Experience                        ; Load the lower byte of the
                                             ; experience.
@@ -24608,9 +24828,10 @@ UI_DrawPlayerExperience:                    ; [$f975]
                                             ; Temp_Int24.
     LDA a:Experience_U                      ; Load the upper byte of the
                                             ; experience.
-    STA Temp_Int24.M                        ; Save to #$ed.
+    STA Temp_Int24_M                        ; Save to
+                                            ; Temp_Int24+1.
     LDA #$00
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDY #$05
     JMP UI_DrawDigitsZeroPadded             ; Trigger the render.
 
@@ -24630,10 +24851,10 @@ UI_DrawPlayerExperience:                    ; [$f975]
 ;     None
 ;
 ; SIDE EFFECTS:
-;     #$ee:
-;     #$ed:
+;     $ee:
+;     Temp_Int24+1:
 ;     Temp_Int24:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;     PPU_TargetAddr:
 ;         Clobbered.
 ;
@@ -24654,8 +24875,8 @@ UI_DrawTimeValue:                           ; [$f990]
     STA Temp_Int24                          ; Set number of seconds as the
                                             ; lower byte.
     LDA #$00
-    STA Temp_Int24.M                        ; Set middle byte = 0.
-    STA Temp_Int24.U                        ; Set upper byte = 0.
+    STA Temp_Int24_M                        ; Set middle byte = 0.
+    STA Temp_Int24_U                        ; Set upper byte = 0.
 
 
     ;
@@ -24663,7 +24884,7 @@ UI_DrawTimeValue:                           ; [$f990]
     ; This is 0x2058.
     ;
     LDA #$20
-    STA PPU_TargetAddr.U                    ; Set high byte of position as
+    STA PPU_TargetAddr_U                    ; Set high byte of position as
                                             ; 0x20.
     LDA #$58
     STA PPU_TargetAddr                      ; Set high byte of position as
@@ -24682,16 +24903,17 @@ UI_DrawTimeValue:                           ; [$f990]
 ;============================================================================
 ; Subtract gold from the player.
 ;
-; This takes in gold as the 24-bit #$ee:#$ed:Temp_Int24
+; This takes in gold as the 24-bit
+; $ee:Temp_Int24+1:Temp_Int24
 ; and reduces those values from the player's gold.
 ;
 ; After subtracting, this will be drawn to the screen.
 ;
 ; INPUTS:
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit gold value to subtract.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit gold value to
 ;         subtract.
 ;
@@ -24731,7 +24953,7 @@ Player_SubtractGold:                        ; [$f9a5]
     ;
     LDA a:Gold_M                            ; Load the middle byte of the
                                             ; current amount.
-    SBC Temp_Int24.M                        ; Subtract the provided value and
+    SBC Temp_Int24_M                        ; Subtract the provided value and
                                             ; the carry.
     STA a:Gold_M                            ; Store as the new middle byte.
 
@@ -24754,16 +24976,17 @@ Player_SubtractGold:                        ; [$f9a5]
 ;============================================================================
 ; Add gold to the player.
 ;
-; This takes in gold as the 24-bit #$ee:#$ed:Temp_Int24
+; This takes in gold as the 24-bit
+; $ee:Temp_Int24+1:Temp_Int24
 ; and adds those values from the player's gold.
 ;
 ; After adding, this will be drawn to the screen.
 ;
 ; INPUTS:
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit gold value to add.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit gold value to add.
 ;
 ;     Temp_Int24:
@@ -24801,7 +25024,7 @@ Player_AddGold:                             ; [$f9c1]
     ;
     LDA a:Gold_M                            ; Load the middle byte of the
                                             ; current amount.
-    ADC Temp_Int24.M                        ; Add the new amount + carry.
+    ADC Temp_Int24_M                        ; Add the new amount + carry.
     STA a:Gold_M                            ; Store as the new middle byte.
 
 
@@ -24855,10 +25078,10 @@ Player_AddGold:                             ; [$f9c1]
 ;
 ; OUTPUTS:
 ;     Temp_Int24:
-;     #$ed:
-;     #$ee:
+;     Temp_Int24+1:
+;     $ee:
 ;     PPU_TargetAddr:
-;     #$e9:
+;     PPU_TargetAddr+1:
 ;         Clobbered.
 ;
 ; CALLS:
@@ -24876,7 +25099,7 @@ UI_DrawGoldValue:                           ; [$f9e7]
     ; This is 0x2070.
     ;
     LDA #$20
-    STA PPU_TargetAddr.U                    ; Set the upper byte to 0x20.
+    STA PPU_TargetAddr_U                    ; Set the upper byte to 0x20.
     LDA #$70
     STA PPU_TargetAddr                      ; Set the lower byte to 0x70.
 
@@ -24891,11 +25114,11 @@ UI_DrawGoldValue:                           ; [$f9e7]
                                             ; digits to draw.
     LDA a:Gold_M                            ; Load the middle byte of the
                                             ; gold value.
-    STA Temp_Int24.M                        ; Set a the middle byte for the
+    STA Temp_Int24_M                        ; Set a the middle byte for the
                                             ; digits to draw.
     LDA a:Gold_U                            ; Load the upper byte of the gold
                                             ; value.
-    STA Temp_Int24.U                        ; Set a the upper byte for the
+    STA Temp_Int24_U                        ; Set a the upper byte for the
                                             ; digits to draw.
 
 
@@ -24920,10 +25143,10 @@ UI_DrawGoldValue:                           ; [$f9e7]
 ;     Y:
 ;         The number of digits in total.
 ;
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit value.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit value.
 ;
 ;     Temp_Int24:
@@ -24965,10 +25188,10 @@ TextBox_DrawZeroPaddedNumber:               ; [$fa03]
 ;     Y:
 ;         The number of digits in total.
 ;
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit value.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit value.
 ;
 ;     Temp_Int24:
@@ -25043,10 +25266,10 @@ UI_DrawDigitsZeroPadded_Populated:          ; [$fa0b]
 ;     Y:
 ;         The number of digits in total.
 ;
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit value.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit value.
 ;
 ;     Temp_Int24:
@@ -25129,16 +25352,16 @@ UI_PopulateDigitsNoLeadingZeroes:           ; [$fa31]
 ; Populate RAM with the digits to set based in the status UI.
 ;
 ; This will take the 24-bit value stored in
-; #$ee:#$ed:Temp_Int24.
+; $ee:Temp_Int24+1:Temp_Int24.
 ;
 ; It will loop through every digit, convert to ASCII, and
 ; store in UI_DigitsToRender for render.
 ;
 ; INPUTS:
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit value.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit value.
 ;
 ;     Temp_Int24:
@@ -25185,7 +25408,8 @@ UI_PopulateDigits:                          ; [$fa47]
 ; value between 0 and 9.
 ;
 ; It does this by considering the unsigned integer value
-; (stored as #$ee:#$ed:Temp_Int24).
+; (stored as
+; $ee:Temp_Int24+1:Temp_Int24).
 ;
 ; It loops for each of the 24 bits, left-shifting and
 ; rotating the most-significant bit into A (the resulting
@@ -25201,10 +25425,10 @@ UI_PopulateDigits:                          ; [$fa47]
 ; to get every digit.
 ;
 ; INPUTS:
-;     #$ee:
+;     $ee:
 ;         The upper byte of the 24-bit value.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         The middle byte of the 24-bit value.
 ;
 ;     Temp_Int24:
@@ -25214,10 +25438,10 @@ UI_PopulateDigits:                          ; [$fa47]
 ;     A:
 ;         The resulting digit (between 0 and 9).
 ;
-;     #$ee:
+;     $ee:
 ;         Upper byte of the floor of the value / 10.
 ;
-;     #$ed:
+;     Temp_Int24+1:
 ;         Middle byte of the floor of the value / 10.
 ;
 ;     Temp_Int24:
@@ -25234,8 +25458,8 @@ UI_GetValueForDigit:                        ; [$fa55]
   @_loop:                                   ; [$fa59]
     ASL Temp_Int24                          ; Shift the low byte << 1; Set C
                                             ; as the out going bit.
-    ROL Temp_Int24.M                        ; Set mid byte = (mid << 1) | C
-    ROL Temp_Int24.U                        ; Set high byte = (high << 1) | C
+    ROL Temp_Int24_M                        ; Set mid byte = (mid << 1) | C
+    ROL Temp_Int24_U                        ; Set high byte = (high << 1) | C
     ROL A                                   ; Set A = (A << 1) | outgoing bit
                                             ; of high byte
 
@@ -25371,14 +25595,14 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ;
     ; Set the upper byte of the 24-bit integer of the value to draw.
     ;
-    STA Temp_Int24.U
+    STA Temp_Int24_U
     LDA a:UI_MPAndHPBarWidth
     ASL A
     ASL A
     ASL A
-    CMP Temp_Int24.U
+    CMP Temp_Int24_U
     BCS @LAB_PRG15_MIRROR__fa9e
-    STA Temp_Int24.U
+    STA Temp_Int24_U
 
   @LAB_PRG15_MIRROR__fa9e:                  ; [$fa9e]
     STY Maybe_Temp4
@@ -25393,21 +25617,21 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ; Bar 1 is the Power bar.
     ;
     LDA #$20
-    STA PPU_TargetAddr.U
-    LDA #$fa6c,Y
+    STA PPU_TargetAddr_U
+    LDA STATUS_BAR_PPU_ADDR_L,Y
     STA PPU_TargetAddr
     LDX a:UI_MPAndHPBarWidth
     INX
     TXA
     JSR PPUBuffer_QueueCommandOrLength
-    LDA Temp_Int24.U
+    LDA Temp_Int24_U
     LSR A
     LSR A
     LSR A
     BEQ @LAB_PRG15_MIRROR__fac6
     PHA
     STA Temp_Int24
-    LDA #$fa6e,Y
+    LDA $fa6e,Y
 
   @LAB_PRG15_MIRROR__fabe:                  ; [$fabe]
     JSR PPUBuffer_Set
@@ -25419,7 +25643,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     CMP a:UI_MPAndHPBarWidth
     BEQ @LAB_PRG15_MIRROR__fae2
     PHA
-    LDA #$fa70,Y
+    LDA $fa70,Y
     JSR PPUBuffer_Set
     PLA
     TAY
@@ -25436,14 +25660,14 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     LDA #$0b
     JSR PPUBuffer_Set
     STX PPUBuffer_WriteOffset
-    LDA Temp_Int24.U
+    LDA Temp_Int24_U
     AND #$07
     JSR Math_MultiplyBy16
     TAY
     LDA #$10
-    STA PPU_TargetAddr.U
+    STA PPU_TargetAddr_U
     LDX Maybe_Temp4
-    LDA #$fa72,X
+    LDA $fa72,X
     STA PPU_TargetAddr
     LDA #$10
     JSR PPUBuffer_QueueCommandOrLength
@@ -25459,7 +25683,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ;           program code instead of an array of values.
     ;
   @LAB_PRG15_MIRROR__fb05:                  ; [$fb05]
-    LDA #$fb2f,Y
+    LDA $fb2f,Y
     INY
     JSR PPUBuffer_Set
     TYA
@@ -25469,7 +25693,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     RTS
 
   @LAB_PRG15_MIRROR__fb14:                  ; [$fb14]
-    LDA #$fb37,Y
+    LDA $fb37,Y
     INY
     JSR PPUBuffer_Set
     TYA
@@ -25481,7 +25705,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ; XXX Is this correct? It's reading from program code.
     ;
   @LAB_PRG15_MIRROR__fb20:                  ; [$fb20]
-    LDA #$fb27,Y
+    LDA $fb27,Y
     INY
     JSR PPUBuffer_Set
 
@@ -25553,7 +25777,7 @@ UI_DrawSelectedItem:                        ; [$fbaf]
     JSR MMC1_UpdateROMBank
 
   @LAB_PRG15_MIRROR__fbd1:                  ; [$fbd1]
-    LDA #$b4e4,Y
+    LDA $b4e4,Y
     JSR UI_Maybe_GetItemSpritePPUTileAddr
     TYA
     PHA
@@ -25587,21 +25811,21 @@ UI_DrawSelectedItem:                        ; [$fbaf]
 ;     UI_DrawSelectedItem
 ;============================================================================
 UI_Maybe_GetItemSpritePPUTileAddr:          ; [$fbf0]
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     LDA #$00
-    LSR Temp_Int24.M
+    LSR Temp_Int24_M
     ROR A
-    LSR Temp_Int24.M
+    LSR Temp_Int24_M
     ROR A
-    LSR Temp_Int24.M
+    LSR Temp_Int24_M
     ROR A
-    LSR Temp_Int24.M
+    LSR Temp_Int24_M
     ROR A
     ADC #$00
     STA Temp_Int24
-    LDA Temp_Int24.M
+    LDA Temp_Int24_M
     ADC #$85
-    STA Temp_Int24.M
+    STA Temp_Int24_M
     RTS
 
 ;============================================================================
@@ -25619,7 +25843,7 @@ UI_Maybe_GetItemSpritePPUTileAddr:          ; [$fbf0]
 Player_SetItem:                             ; [$fc0b]
     STA a:SelectedItem
     LDX #$13
-    STX PPU_TargetAddr.U
+    STX PPU_TargetAddr_U
     LDX #$c0
     STX PPU_TargetAddr
     ORA #$80
@@ -25640,9 +25864,9 @@ TextBox_LoadItemSourceTiles:                ; [$fc18]
     PHA
     JSR Player_GetInventoryIndexForItem
     TAX
-    LDA #$fc5b,X
-    STA Temp_Int24.U
-    LDA #$fc60,X
+    LDA FUN_PRG15_MIRROR__fc0b__LOWER_ADDR_TABLE,X
+    STA Temp_Int24_U
+    LDA FUN_PRG15_MIRROR__fc0b__UPPER_ADDR_TABLE,X
     STA Maybe_Temp4
     PLA
     AND #$1f
@@ -25655,7 +25879,7 @@ TextBox_LoadItemSourceTiles:                ; [$fc18]
     JSR MMC1_UpdateROMBank
 
   @LAB_PRG15_MIRROR__fc36:                  ; [$fc36]
-    LDA (#$ee),Y
+    LDA ($ee),Y
     JSR UI_Maybe_GetItemSpritePPUTileAddr
     TYA
     PHA
@@ -26020,4 +26244,11 @@ PPU_ClearAllTilemaps:                       ; [$fcb9]
                                             ; [$PRG15_MIRROR::fffa]
     dw Game_Init                            ; Game_Init
                                             ; [$PRG15_MIRROR::fffc]
-    db $d5,$c9                              ; [$fffe] undefined
+    db $d5                                  ; [$fffe] undefined
+
+;
+; XREFS:
+;     MMC1_Init
+;
+MMC1_SERIAL:                                ; [$ffff]
+    db $c9                                  ; [$ffff] undefined

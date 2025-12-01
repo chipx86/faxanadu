@@ -6,7 +6,8 @@
 
     BASE $8000
 
-    dw $0002                                ; [$8000] ushort
+    dw $0002                                ; BANK6_SPRITEADDRS_START
+                                            ; [$PRG6::8000]
 
 BANK6_SPRITEADDRS_START:                    ; [$8002]
     dw $0072                                ; [0]:
@@ -77,6 +78,14 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..███▒██
 ; ..██▒▒██
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8002]
+;     BANK6_SPRITEADDRS_START [$PRG6::8004]
+;     BANK6_SPRITEADDRS_START [$PRG6::8006]
+;     BANK6_SPRITEADDRS_START [$PRG6::8008]
+;     BANK6_SPRITEADDRS_START [$PRG6::800a]
+;
+PPUTile16_PRG6__8072:                       ; [$8072]
     db $02,$0f,$1f,$1f,$1f,$1f,$3b,$33,$01,$03,$0f,$1f,$18,$04,$3f,$3f ; [$8072]
                                                                        ; byte
 
@@ -301,6 +310,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ...█▒▒▒█
 ; ....░░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::800c]
+;
+PPUTile16_PRG6__8172:                       ; [$8172]
     db $00,$00,$01,$03,$0d,$1f,$11,$0f,$00,$01,$02,$06,$0f,$1e,$1f,$00 ; [$8172]
                                                                        ; byte
 
@@ -525,6 +538,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░███░░██
 ; ░░░░░██░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::800e]
+;
+PPUTile16_PRG6__8272:                       ; [$8272]
     db $3e,$7f,$7f,$7f,$ff,$ff,$ff,$ff,$0f,$3f,$7f,$1f,$67,$b3,$73,$06 ; [$8272]
                                                                        ; byte
 
@@ -749,6 +766,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░░░░░░
 ; .░▒░░▒▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8010]
+;
+PPUTile16_PRG6__8372:                       ; [$8372]
     db $30,$78,$6d,$6d,$37,$1e,$3f,$58,$00,$30,$38,$38,$19,$01,$00,$27 ; [$8372]
                                                                        ; byte
 
@@ -861,6 +882,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░▒░░░░░█
 ; ░░░█░░█▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8012]
+;
+PPUTile16_PRG6__83f2:                       ; [$83f2]
     db $07,$17,$28,$6f,$1f,$fb,$bf,$fe,$00,$0f,$1f,$30,$63,$4d,$41,$13 ; [$83f2]
                                                                        ; byte
 
@@ -945,6 +970,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .█.░░░█▒
 ; .░.░░█▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8014]
+;
+PPUTile16_PRG6__8452:                       ; [$8452]
     db $40,$a7,$89,$d7,$9f,$56,$5e,$5c,$41,$e7,$ef,$99,$c1,$5b,$43,$07 ; [$8452]
                                                                        ; byte
 
@@ -1029,6 +1058,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░░▒▒▒▒▒▒
 ; ░░░▒░▒░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8018]
+;
+PPUTile16_PRG6__84b2:                       ; [$84b2]
     db $0d,$20,$3e,$3e,$3f,$1f,$c0,$eb,$1e,$1f,$01,$29,$00,$61,$3f,$14 ; [$84b2]
                                                                        ; byte
 
@@ -1113,6 +1146,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..████░░
 ; ..█░████
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801a]
+;
+PPUTile16_PRG6__8512:                       ; [$8512]
     db $e4,$ff,$7f,$3f,$1f,$1f,$3f,$3f,$47,$6f,$2f,$1c,$01,$18,$3c,$2f ; [$8512]
                                                                        ; byte
 
@@ -1281,6 +1318,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ...░░██░
 ; ...░░░██
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801c]
+;
+PPUTile16_PRG6__85d2:                       ; [$85d2]
     db $03,$07,$0f,$0f,$1f,$1f,$1f,$1f,$00,$00,$03,$07,$06,$04,$06,$03 ; [$85d2]
                                                                        ; byte
 
@@ -1505,6 +1546,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..██▒▒██
 ; ..▒▒▒█▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801e]
+;
+PPUTile16_PRG6__86d2:                       ; [$86d2]
     db $03,$2f,$18,$30,$27,$1f,$33,$04,$20,$10,$0f,$1f,$18,$04,$3f,$3f ; [$86d2]
                                                                        ; byte
 
@@ -1729,6 +1774,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ....░███
 ; .....░█▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8020]
+;
+PPUTile16_PRG6__87d2:                       ; [$87d2]
     db $03,$07,$0f,$0f,$0c,$0d,$0f,$06,$00,$00,$07,$07,$07,$07,$07,$03 ; [$87d2]
                                                                        ; byte
 
@@ -1981,6 +2030,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ....░░▒.
 ; ...██░..
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8022]
+;
+PPUTile16_PRG6__88f2:                       ; [$88f2]
     db $01,$7b,$ff,$ff,$fe,$5d,$0c,$1c,$00,$01,$7b,$77,$5f,$06,$02,$18 ; [$88f2]
                                                                        ; byte
 
@@ -2163,6 +2216,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .░█▒░░█▒
 ; ░██▒░█▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8024]
+;
+PPUTile16_PRG6__89c2:                       ; [$89c2]
     db $00,$01,$02,$0e,$1c,$36,$6e,$ec,$00,$00,$01,$03,$0f,$19,$33,$77 ; [$89c2]
                                                                        ; byte
 
@@ -2695,6 +2752,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░▒█▒▒▒
 ; .░▒█████
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8026]
+;
+PPUTile16_PRG6__8c22:                       ; [$8c22]
     db $00,$01,$06,$09,$13,$17,$28,$5f,$00,$00,$01,$06,$0c,$08,$1f,$3f ; [$8c22]
                                                                        ; byte
 
@@ -2955,6 +3016,15 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..███▒██
 ; ..██▒▒██
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8016]
+;     BANK6_SPRITEADDRS_START [$PRG6::8028]
+;     BANK6_SPRITEADDRS_START [$PRG6::802a]
+;     BANK6_SPRITEADDRS_START [$PRG6::802e]
+;     BANK6_SPRITEADDRS_START [$PRG6::804c]
+;     BANK6_SPRITEADDRS_START [$PRG6::8054]
+;
+PPUTile16_PRG6__8d22:                       ; [$8d22]
     db $02,$0f,$1f,$1f,$1f,$1f,$3b,$33,$01,$03,$0f,$1f,$18,$04,$3f,$3f ; [$8d22]
                                                                        ; byte
 
@@ -2969,6 +3039,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .░░░░░██
 ; ░░░░░░░█
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::802c]
+;
+PPUTile16_PRG6__8d32:                       ; [$8d32]
     db $00,$00,$0f,$3e,$7f,$7f,$7f,$ff,$00,$00,$00,$1f,$3f,$07,$03,$01 ; [$8d32]
                                                                        ; byte
 
@@ -3289,6 +3363,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .....█▒▒
 ; .....█▒░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8030]
+;
+PPUTile16_PRG6__8e92:                       ; [$8e92]
     db $00,$00,$00,$00,$03,$04,$04,$05,$00,$00,$00,$00,$03,$07,$07,$06 ; [$8e92]
                                                                        ; byte
 
@@ -3513,6 +3591,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .....░██
 ; ░....░██
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8032]
+;
+PPUTile16_PRG6__8f92:                       ; [$8f92]
     db $07,$03,$03,$03,$07,$0f,$07,$87,$02,$01,$00,$00,$02,$07,$03,$03 ; [$8f92]
                                                                        ; byte
 
@@ -3709,6 +3791,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░████░
 ; .░████░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8034]
+;
+PPUTile16_PRG6__9072:                       ; [$9072]
     db $00,$00,$00,$00,$07,$1f,$3f,$7f,$00,$00,$00,$00,$00,$07,$1e,$3c ; [$9072]
                                                                        ; byte
 
@@ -3961,6 +4047,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░█▒░▒░▒░
 ; .█░░░░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8036]
+;
+PPUTile16_PRG6__9192:                       ; [$9192]
     db $10,$09,$19,$6e,$b7,$65,$d5,$7f,$18,$09,$03,$52,$d8,$9a,$6a,$40 ; [$9192]
                                                                        ; byte
 
@@ -4129,6 +4219,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░░█▒▒▒
 ; ...░░░░▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8038]
+;
+PPUTile16_PRG6__9252:                       ; [$9252]
     db $00,$06,$18,$30,$36,$08,$38,$1e,$03,$1f,$7f,$ff,$ff,$7f,$0f,$01 ; [$9252]
                                                                        ; byte
 
@@ -4325,6 +4419,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ....▒▒▒▒
 ; .....▒░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803a]
+;
+PPUTile16_PRG6__9332:                       ; [$9332]
     db $00,$00,$06,$0f,$77,$07,$00,$03,$00,$00,$07,$15,$78,$ff,$0f,$04 ; [$9332]
                                                                        ; byte
 
@@ -4549,6 +4647,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░▒░▒█▒
 ; ...░░░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803c]
+;
+PPUTile16_PRG6__9432:                       ; [$9432]
     db $00,$00,$00,$43,$36,$42,$2a,$1f,$00,$00,$00,$47,$6f,$3f,$17,$00 ; [$9432]
                                                                        ; byte
 
@@ -4773,6 +4875,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░░░█░█
 ; .░██░███
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803e]
+;
+PPUTile16_PRG6__9532:                       ; [$9532]
     db $00,$00,$07,$0b,$1f,$3f,$3f,$7f,$00,$00,$00,$07,$0c,$1b,$05,$37 ; [$9532]
                                                                        ; byte
 
@@ -5025,6 +5131,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░█▒.....
 ; ▒▒......
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8040]
+;
+PPUTile16_PRG6__9652:                       ; [$9652]
     db $01,$03,$06,$1c,$30,$60,$c0,$00,$01,$02,$04,$08,$18,$30,$60,$c0 ; [$9652]
                                                                        ; byte
 
@@ -5277,6 +5387,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; █████▒▒░
 ; ▒████▒░▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8042]
+;
+PPUTile16_PRG6__9772:                       ; [$9772]
     db $19,$3c,$3c,$fc,$7d,$fd,$f9,$7a,$0e,$3f,$7f,$63,$c6,$fe,$fe,$fd ; [$9772]
                                                                        ; byte
 
@@ -5711,6 +5825,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; █░.▒▒.█.
 ; █░..█.▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8044]
+;
+PPUTile16_PRG6__9962:                       ; [$9962]
     db $03,$23,$61,$47,$4e,$d1,$c2,$c8,$61,$c7,$8f,$89,$83,$8e,$9a,$8b ; [$9962]
                                                                        ; byte
 
@@ -6019,6 +6137,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ▒██▒████
 ; ███▒▒▒▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8046]
+;
+PPUTile16_PRG6__9ac2:                       ; [$9ac2]
     db $02,$06,$4c,$9a,$3a,$37,$6f,$e0,$03,$1f,$7f,$ff,$ff,$7f,$ff,$ff ; [$9ac2]
                                                                        ; byte
 
@@ -6229,6 +6351,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░▒░░..
 ; ..█▒░.▒▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8048]
+;
+PPUTile16_PRG6__9bb2:                       ; [$9bb2]
     db $08,$0c,$2c,$0a,$0e,$1c,$2c,$28,$30,$58,$52,$14,$60,$00,$10,$33 ; [$9bb2]
                                                                        ; byte
 
@@ -6453,6 +6579,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .█░█░░██
 ; ██▒░░██▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::804a]
+;
+PPUTile16_PRG6__9cb2:                       ; [$9cb2]
     db $38,$14,$da,$7a,$3d,$1f,$7f,$de,$00,$38,$cc,$2c,$2e,$23,$53,$e7 ; [$9cb2]
                                                                        ; byte
 
@@ -6719,6 +6849,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ██▒░██▒░
 ; ███▒░░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::804e]
+;
+PPUTile16_PRG6__9de2:                       ; [$9de2]
     db $0d,$1f,$3f,$6e,$dd,$df,$dd,$ef,$06,$0e,$0e,$31,$6e,$66,$ee,$f0 ; [$9de2]
                                                                        ; byte
 
@@ -6957,6 +7091,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ...▒█░█▒
 ; ...░██▒░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8050]
+;
+PPUTile16_PRG6__9ef2:                       ; [$9ef2]
     db $39,$ff,$ff,$7b,$3b,$3b,$0e,$1d,$73,$5a,$5a,$31,$11,$11,$1b,$0e ; [$9ef2]
                                                                        ; byte
 
@@ -7181,6 +7319,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░█░░░░▒▒
 ; ░▒░░░▒▒░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8052]
+;
+PPUTile16_PRG6__9ff2:                       ; [$9ff2]
     db $3a,$7d,$bc,$fc,$fc,$fc,$fc,$b9,$1c,$26,$53,$63,$63,$43,$43,$46 ; [$9ff2]
                                                                        ; byte
 
@@ -7405,6 +7547,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ...░░▒▒▒
 ; ..░░▒▒██
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8056]
+;
+PPUTile16_PRG6__a0f2:                       ; [$a0f2]
     db $00,$00,$00,$00,$01,$0e,$18,$33,$00,$00,$00,$00,$00,$01,$07,$0f ; [$a0f2]
                                                                        ; byte
 
@@ -7671,6 +7817,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .....░█░
 ; ..░░.░█░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8058]
+;
+PPUTile16_PRG6__a222:                       ; [$a222]
     db $00,$00,$00,$01,$01,$03,$07,$37,$00,$00,$00,$00,$00,$01,$02,$02 ; [$a222]
                                                                        ; byte
 
@@ -7839,6 +7989,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░█░█▒░░█
 ; ░▒░░░░░█
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805a]
+;
+PPUTile16_PRG6__a2e2:                       ; [$a2e2]
     db $0e,$30,$5f,$3e,$7f,$ff,$f7,$bf,$0f,$2f,$60,$5f,$a3,$59,$59,$41 ; [$a2e2]
                                                                        ; byte
 
@@ -8091,6 +8245,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░░█▒░█
 ; .░▒█░░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805c]
+;
+PPUTile16_PRG6__a402:                       ; [$a402]
     db $c7,$ff,$b3,$46,$3d,$17,$3b,$5f,$03,$c0,$7c,$3b,$06,$0d,$0d,$30 ; [$a402]
                                                                        ; byte
 
@@ -8959,6 +9117,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..▒░██▒░
 ; ..▒░█▒▒░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805e]
+;
+PPUTile16_PRG6__a7e2:                       ; [$a7e2]
     db $00,$00,$00,$00,$13,$09,$1d,$19,$00,$00,$00,$00,$1c,$3e,$2e,$2e ; [$a7e2]
                                                                        ; byte
 
@@ -9673,6 +9835,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .░░░▒▒█▒
 ; .█░█░░▒█
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8060]
+;
+PPUTile16_PRG6__ab12:                       ; [$ab12]
     db $08,$26,$59,$b7,$bb,$cd,$72,$7d,$07,$1f,$3e,$78,$7c,$3e,$0f,$53 ; [$ab12]
                                                                        ; byte
 
@@ -10065,6 +10231,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..░▒▒░░▒
 ; ..░▒▒░░░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8062]
+;
+PPUTile16_PRG6__acd2:                       ; [$acd2]
     db $00,$00,$00,$07,$0e,$16,$26,$27,$00,$00,$00,$00,$01,$09,$19,$18 ; [$acd2]
                                                                        ; byte
 
@@ -10261,6 +10431,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░▒██░░░█
 ; ░██████▒
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8064]
+;
+PPUTile16_PRG6__adb2:                       ; [$adb2]
     db $00,$03,$0d,$17,$2f,$5f,$bf,$fe,$00,$00,$03,$08,$14,$30,$71,$7f ; [$adb2]
                                                                        ; byte
 
@@ -10737,6 +10911,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ...▒▒▒▒▒
 ; ...▒░█░█
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8066]
+;
+PPUTile16_PRG6__afd2:                       ; [$afd2]
     db $03,$05,$0f,$0e,$1c,$1d,$00,$0f,$03,$07,$09,$1f,$1f,$1f,$1f,$15 ; [$afd2]
                                                                        ; byte
 
@@ -11913,6 +12091,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ..▒▒████
 ; .▒▒█████
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8068]
+;
+PPUTile16_PRG6__b512:                       ; [$b512]
     db $00,$00,$00,$00,$00,$03,$0f,$1f,$00,$00,$00,$01,$07,$1f,$3f,$7f ; [$b512]
                                                                        ; byte
 
@@ -13383,6 +13565,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .......▒
 ; .......░
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806a]
+;
+PPUTile16_PRG6__bba2:                       ; [$bba2]
     db $00,$00,$01,$01,$01,$03,$00,$01,$00,$01,$00,$00,$03,$01,$01,$00 ; [$bba2]
                                                                        ; byte
 
@@ -13607,6 +13793,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; .......░
 ; ........
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806c]
+;
+PPUTile16_PRG6__bca2:                       ; [$bca2]
     db $00,$01,$00,$01,$02,$00,$01,$00,$00,$00,$01,$00,$01,$01,$00,$00 ; [$bca2]
                                                                        ; byte
 
@@ -13831,6 +14021,10 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ; ░▒░░░░░.
 ; .░░█▒░░.
 ;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806e]
+;
+PPUTile16_PRG6__bda2:                       ; [$bda2]
     db $78,$bc,$9c,$8c,$5c,$1e,$be,$76,$00,$58,$e0,$70,$e0,$e0,$40,$18 ; [$bda2]
                                                                        ; byte
 
@@ -13945,7 +14139,24 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ;
     db $d4,$54,$24,$e2,$52,$4d,$49,$52,$38,$b8,$d8,$9c,$8c,$86,$86,$8c ; [$be22]
                                                                        ; byte
-    hex bf ff f7 ff ff c5 00 ff f7 ff ff ff ff 4c 00 ff ; [$be32] undefined
+
+
+;
+; █▒██░███
+; ████████
+; ████▒███
+; ████████
+; ████████
+; ░█..▒█.░
+; ........
+; ████████
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8070]
+;
+PPUTile16_PRG6__be32:                       ; [$be32]
+    db $bf,$ff,$f7,$ff,$ff,$c5,$00,$ff,$f7,$ff,$ff,$ff,$ff,$4c,$00,$ff ; [$be32]
+                                                                       ; byte
     hex b1 ff ff ff fb 7f 00 ff 6f ff ff ff ff ad 00 ff ; [$be42] undefined
     hex ff ff ff ff ff fa 00 ff 7d ff ff ff ff 08 00 ff ; [$be52] undefined
     hex cb ff fd ff da 7f 00 ff 5d ff 5f ff 7f e2 00 ff ; [$be62] undefined
