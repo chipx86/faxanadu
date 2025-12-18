@@ -21,6 +21,22 @@ Through this work, I've made some fun discoveries. My favorites:
 * [Debug level select code](https://notes.chipx86.com/Projects/Reverse-Engineering+Projects/Faxanadu+Disassembly/Debug+Level+Switch+Code#Activating+this+code),
   which can be activated using two Game Genie codes
 
+To learn more about all the cool stuff in Faxanadu, see:
+
+* [Faxanadu Disassembly Notes](https://notes.chipx86.com/Projects/Reverse-Engineering+Projects/Faxanadu+Disassembly/-Overview-)
+
+  My collection of notes and full-on documentation of parts of the Faxanadu
+  codebase, incuding password system and interaction scripting language.
+
+* [Annotated HTML Assembly](https://chipx86.com/faxanadu/)
+
+  The in-progress annotated HTML, with hyperlinks and embedded sprites and
+  all.
+
+  (Please note this is generated with a custom exporter for
+  [Ghidra](https://github.com/NationalSecurityAgency/ghidra), which is still
+  very much a work-in-progress.)
+
 
 # What's in this tree
 
@@ -34,22 +50,6 @@ Through this work, I've made some fun discoveries. My favorites:
 * [mesen](https://github.com/chipx86/faxanadu/tree/main/mesen) -
   Labels/symbols files for the [Mesen](https://www.mesen.ca/) emulator's
   debugger
-
-
-# Documentation
-
-There's both annotated assembly and higher-level docs on Faxanadu available.
-
-* [Annotated HTML Assembly](https://chipx86.com/faxanadu/)
-
-  (Please note this is generated with a custom exporter for
-  [Ghidra](https://github.com/NationalSecurityAgency/ghidra), which is still
-  very much a work-in-progress.)
-
-* [Faxanadu Internals Notes](https://notes.chipx86.com/Projects/Reverse-Engineering+Projects/Faxanadu+Disassembly/!+Overview)
-
-  My collection of notes and full-on documentation of parts of the Faxanadu
-  codebase, incuding password system and interaction scripting language.
 
 
 # Compiling Faxanadu
