@@ -6,57 +6,583 @@
 
     BASE $8000
 
-OpeningToTownBackgroundPalette:             ; [$8000]
-    db $0f,$0f,$0c,$1b,$0f,$0f,$08,$17,$0f,$0f,$07,$0b,$0f,$15,$19,$30 ; [$8000]
-                                                                       ; byte
-    hex 0f 05 17 26 0f 0f 06 17 0f 06 18 28 0f 15 19 30 ; [$8010] undefined
-    hex 0f 0b 1b 21 0f 0f 0b 1b 0f 0b 1b 2b 0f 15 19 30 ; [$8020] undefined
-    hex 0f 00 10 20 0f 07 17 10 0f 18 28 38 0f 15 19 30 ; [$8030] undefined
-    hex 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f 0f ; [$8040] undefined
-    hex 0f 0f 00 10 0f 07 17 10 0f 15 27 30 0f 15 19 30 ; [$8050] undefined
-    hex 0f 08 17 27 0f 0c 17 27 0f 15 19 30 0f 0a 1b 38 ; [$8060] undefined
-    hex 0f 0f 08 18 0f 0f 06 18 0f 15 19 30 0f 08 18 25 ; [$8070] undefined
-    hex 0f 08 17 26 0f 0c 17 26 0f 15 19 30 0f 06 16 36 ; [$8080] undefined
-    hex 0f 09 18 36 0f 0c 18 36 0f 15 19 30 0f 09 19 29 ; [$8090] undefined
-    hex 0f 04 00 26 0f 05 16 26 0f 15 19 30 0f 0f 05 16 ; [$80a0] undefined
-    hex 0f 07 18 28 0f 09 1b 27 0f 15 19 30 0f 05 16 26 ; [$80b0] undefined
-    hex 0f 15 19 30 0f 08 18 26 0f 04 00 10 0f 06 16 26 ; [$80c0] undefined
-    hex 0f 15 19 30 0f 0f 00 30 0f 04 00 10 0f 0c 00 21 ; [$80d0] undefined
-    hex 0f 15 1a 30 0f 04 13 24 0f 00 10 20 0f 01 11 21 ; [$80e0] undefined
-    hex 0f 08 00 21 0f 0b 00 23 0f 08 00 10 0f 15 19 30 ; [$80f0] undefined
-    hex 0f 05 18 38 0f 17 27 30 0f 0f 16 28 0f 0f 00 10 ; [$8100] undefined
-    hex 0f 07 17 27 0f 0b 00 10 0f 15 19 30 0f 00 10 20 ; [$8110] undefined
 
-TempleBackgroundPalette:                    ; [$8120]
-    db $0f,$08,$18,$28,$0f,$0a,$00,$29,$0f,$15,$19,$30,$0f,$0b,$1b,$2b ; [$8120]
-                                                                       ; byte
-    hex 0f 0b 17 10 0f 08 00 2b 0f 15 19 30 0f 0c 1b 24 ; [$8130] undefined
-    hex 0f 08 1b 2c 0f 08 1b 30 0f 15 19 30 0f 07 00 10 ; [$8140] undefined
-    hex 1f 07 18 30 0f 07 17 30 0f 15 19 30 0f 07 17 27 ; [$8150] undefined
-    hex 0f 06 17 30 0f 06 17 3b 0f 15 19 30 3f 07 17 28 ; [$8160] undefined
-    hex 0f 07 17 20 0f 07 17 36 0f 15 19 30 3f 08 17 37 ; [$8170] undefined
-    hex 0f 07 18 38 0f 07 1c 37 0f 15 19 30 3f 07 00 28 ; [$8180] undefined
-    hex 0f 08 18 28 0f 07 17 27 0f 15 19 30 3f 08 18 2b ; [$8190] undefined
-    hex 0f 08 18 28 0f 06 00 10 0f 15 19 30 0f 00 10 20 ; [$81a0] undefined
-    hex 0f 08 17 27 0f 06 17 29 0f 0a 1c 38 0f 15 19 30 ; [$81b0] undefined
-    hex 0f 18 26 30 0f 00 25 30 0f 0f 1c 33 0f 0f 27 30 ; [$81c0] undefined
+;============================================================================
+; Palette data comprising background tiles for areas.
+;============================================================================
+PALETTE_TILES_EOLIS:                        ; [$8000]
+    db $0f                                  ; [0]:
+    db $0f                                  ; [1]:
+    db $0c                                  ; [2]:
+    db $1b                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $08                                  ; [6]:
+    db $17                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0f                                  ; [9]:
+    db $07                                  ; [10]:
+    db $0b                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
 
-TempleSpritePalette:                        ; [$81d0]
-    db $0f,$18,$26,$30,$0f,$00,$25,$30,$0f,$16,$2c,$30,$0f,$17,$25,$30 ; [$81d0]
-                                                                       ; byte
-    hex 0f 18 26 30 0f 00 25 30 0f 18 26 2b 0f 0c 1c 30 ; [$81e0] undefined
+PALETTE_TILES_02:                           ; [$8010]
+    db $0f                                  ; [0]:
+    db $05                                  ; [1]:
+    db $17                                  ; [2]:
+    db $26                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $06                                  ; [6]:
+    db $17                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $06                                  ; [9]:
+    db $18                                  ; [10]:
+    db $28                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_TILES_03:                           ; [$8020]
+    db $0f                                  ; [0]:
+    db $0b                                  ; [1]:
+    db $1b                                  ; [2]:
+    db $21                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $0b                                  ; [6]:
+    db $1b                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0b                                  ; [9]:
+    db $1b                                  ; [10]:
+    db $2b                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_TILES_04:                           ; [$8030]
+    db $0f                                  ; [0]:
+    db $00                                  ; [1]:
+    db $10                                  ; [2]:
+    db $20                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $17                                  ; [6]:
+    db $10                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $18                                  ; [9]:
+    db $28                                  ; [10]:
+    db $38                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_TILES_05:                           ; [$8040]
+    db $0f                                  ; [0]:
+    db $0f                                  ; [1]:
+    db $0f                                  ; [2]:
+    db $0f                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $0f                                  ; [6]:
+    db $0f                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0f                                  ; [9]:
+    db $0f                                  ; [10]:
+    db $0f                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0f                                  ; [13]:
+    db $0f                                  ; [14]:
+    db $0f                                  ; [15]:
+
+PALETTE_TILES_06:                           ; [$8050]
+    db $0f                                  ; [0]:
+    db $0f                                  ; [1]:
+    db $00                                  ; [2]:
+    db $10                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $17                                  ; [6]:
+    db $10                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $27                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_TILES_OUTSIDE_APOLUNE:              ; [$8060]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $17                                  ; [2]:
+    db $27                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0c                                  ; [5]:
+    db $17                                  ; [6]:
+    db $27                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0a                                  ; [13]:
+    db $1b                                  ; [14]:
+    db $38                                  ; [15]:
+
+PALETTE_TILES_TOWER:                        ; [$8070]
+    db $0f                                  ; [0]:
+    db $0f                                  ; [1]:
+    db $08                                  ; [2]:
+    db $18                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $06                                  ; [6]:
+    db $18                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $08                                  ; [13]:
+    db $18                                  ; [14]:
+    db $25                                  ; [15]:
+
+PALETTE_TILES_BRANCH:                       ; [$8080]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $17                                  ; [2]:
+    db $26                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0c                                  ; [5]:
+    db $17                                  ; [6]:
+    db $26                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $06                                  ; [13]:
+    db $16                                  ; [14]:
+    db $36                                  ; [15]:
+
+PALETTE_TILES_LEFT_TRUNK:                   ; [$8090]
+    db $0f                                  ; [0]:
+    db $09                                  ; [1]:
+    db $18                                  ; [2]:
+    db $36                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0c                                  ; [5]:
+    db $18                                  ; [6]:
+    db $36                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $09                                  ; [13]:
+    db $19                                  ; [14]:
+    db $29                                  ; [15]:
+
+PALETTE_TILES_MIST:                         ; [$80a0]
+    db $0f                                  ; [0]:
+    db $04                                  ; [1]:
+    db $00                                  ; [2]:
+    db $26                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $05                                  ; [5]:
+    db $16                                  ; [6]:
+    db $26                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0f                                  ; [13]:
+    db $05                                  ; [14]:
+    db $16                                  ; [15]:
+
+PALETTE_TILES_SUFFER:                       ; [$80b0]
+    db $0f                                  ; [0]:
+    db $07                                  ; [1]:
+    db $18                                  ; [2]:
+    db $28                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $09                                  ; [5]:
+    db $1b                                  ; [6]:
+    db $27                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $05                                  ; [13]:
+    db $16                                  ; [14]:
+    db $26                                  ; [15]:
+
+PALETTE_TILES_DARTMOOR:                     ; [$80c0]
+    db $0f                                  ; [0]:
+    db $15                                  ; [1]:
+    db $19                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $08                                  ; [5]:
+    db $18                                  ; [6]:
+    db $26                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $04                                  ; [9]:
+    db $00                                  ; [10]:
+    db $10                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $06                                  ; [13]:
+    db $16                                  ; [14]:
+    db $26                                  ; [15]:
+
+PALETTE_TILES_FRATERNAL:                    ; [$80d0]
+    db $0f                                  ; [0]:
+    db $15                                  ; [1]:
+    db $19                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0f                                  ; [5]:
+    db $00                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $04                                  ; [9]:
+    db $00                                  ; [10]:
+    db $10                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0c                                  ; [13]:
+    db $00                                  ; [14]:
+    db $21                                  ; [15]:
+
+PALETTE_TILES_KING_GRIEVES_ROOM:            ; [$80e0]
+    db $0f                                  ; [0]:
+    db $15                                  ; [1]:
+    db $1a                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $04                                  ; [5]:
+    db $13                                  ; [6]:
+    db $24                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $00                                  ; [9]:
+    db $10                                  ; [10]:
+    db $20                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $01                                  ; [13]:
+    db $11                                  ; [14]:
+    db $21                                  ; [15]:
+
+PALETTE_TILES_EVIL_FORTRESS:                ; [$80f0]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $00                                  ; [2]:
+    db $21                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0b                                  ; [5]:
+    db $00                                  ; [6]:
+    db $23                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $08                                  ; [9]:
+    db $00                                  ; [10]:
+    db $10                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_TILES_START_SCREEN:                 ; [$8100]
+    db $0f                                  ; [0]:
+    db $05                                  ; [1]:
+    db $18                                  ; [2]:
+    db $38                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $17                                  ; [5]:
+    db $27                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0f                                  ; [9]:
+    db $16                                  ; [10]:
+    db $28                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0f                                  ; [13]:
+    db $00                                  ; [14]:
+    db $10                                  ; [15]:
+
+PALETTE_TILES_KINGS_ROOM:                   ; [$8110]
+    db $0f                                  ; [0]:
+    db $07                                  ; [1]:
+    db $17                                  ; [2]:
+    db $27                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0b                                  ; [5]:
+    db $00                                  ; [6]:
+    db $10                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $00                                  ; [13]:
+    db $10                                  ; [14]:
+    db $20                                  ; [15]:
+
+PALETTE_TILES_TEMPLE:                       ; [$8120]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $18                                  ; [2]:
+    db $28                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $0a                                  ; [5]:
+    db $00                                  ; [6]:
+    db $29                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0b                                  ; [13]:
+    db $1b                                  ; [14]:
+    db $2b                                  ; [15]:
+
+PALETTE_TILES_HOSPITAL:                     ; [$8130]
+    db $0f                                  ; [0]:
+    db $0b                                  ; [1]:
+    db $17                                  ; [2]:
+    db $10                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $08                                  ; [5]:
+    db $00                                  ; [6]:
+    db $2b                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0c                                  ; [13]:
+    db $1b                                  ; [14]:
+    db $24                                  ; [15]:
+
+PALETTE_TILES_TAVERN:                       ; [$8140]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $1b                                  ; [2]:
+    db $2c                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $08                                  ; [5]:
+    db $1b                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $07                                  ; [13]:
+    db $00                                  ; [14]:
+    db $10                                  ; [15]:
+
+PALETTE_TILES_TOOL_SHOP:                    ; [$8150]
+    db $1f                                  ; [0]:
+    db $07                                  ; [1]:
+    db $18                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $17                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $07                                  ; [13]:
+    db $17                                  ; [14]:
+    db $27                                  ; [15]:
+
+PALETTE_TILES_KEY_SHOP:                     ; [$8160]
+    db $0f                                  ; [0]:
+    db $06                                  ; [1]:
+    db $17                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $06                                  ; [5]:
+    db $17                                  ; [6]:
+    db $3b                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $3f                                  ; [12]:
+    db $07                                  ; [13]:
+    db $17                                  ; [14]:
+    db $28                                  ; [15]:
+
+PALETTE_TILES_HOUSE:                        ; [$8170]
+    db $0f                                  ; [0]:
+    db $07                                  ; [1]:
+    db $17                                  ; [2]:
+    db $20                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $17                                  ; [6]:
+    db $36                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $3f                                  ; [12]:
+    db $08                                  ; [13]:
+    db $17                                  ; [14]:
+    db $37                                  ; [15]:
+
+PALETTE_TILES_MEAT_SHOP:                    ; [$8180]
+    db $0f                                  ; [0]:
+    db $07                                  ; [1]:
+    db $18                                  ; [2]:
+    db $38                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $1c                                  ; [6]:
+    db $37                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $3f                                  ; [12]:
+    db $07                                  ; [13]:
+    db $00                                  ; [14]:
+    db $28                                  ; [15]:
+
+PALETTE_TILES_MARTIAL_ARTS:                 ; [$8190]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $18                                  ; [2]:
+    db $28                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $07                                  ; [5]:
+    db $17                                  ; [6]:
+    db $27                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $3f                                  ; [12]:
+    db $08                                  ; [13]:
+    db $18                                  ; [14]:
+    db $2b                                  ; [15]:
+
+PALETTE_TILES_MAGIC_SHOP:                   ; [$81a0]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $18                                  ; [2]:
+    db $28                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $06                                  ; [5]:
+    db $00                                  ; [6]:
+    db $10                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $15                                  ; [9]:
+    db $19                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $00                                  ; [13]:
+    db $10                                  ; [14]:
+    db $20                                  ; [15]:
+
+PALETTE_TILES_TOWN:                         ; [$81b0]
+    db $0f                                  ; [0]:
+    db $08                                  ; [1]:
+    db $17                                  ; [2]:
+    db $27                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $06                                  ; [5]:
+    db $17                                  ; [6]:
+    db $29                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0a                                  ; [9]:
+    db $1c                                  ; [10]:
+    db $38                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $15                                  ; [13]:
+    db $19                                  ; [14]:
+    db $30                                  ; [15]:
+
+
+;============================================================================
+; Palette data for sprites.
+;============================================================================
+PALETTE_SPRITES_OUTSIDE:                    ; [$81c0]
+    db $0f                                  ; [0]:
+    db $18                                  ; [1]:
+    db $26                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $00                                  ; [5]:
+    db $25                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $0f                                  ; [9]:
+    db $1c                                  ; [10]:
+    db $33                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0f                                  ; [13]:
+    db $27                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_SPRITES_INSIDE:                     ; [$81d0]
+    db $0f                                  ; [0]:
+    db $18                                  ; [1]:
+    db $26                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $00                                  ; [5]:
+    db $25                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $16                                  ; [9]:
+    db $2c                                  ; [10]:
+    db $30                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $17                                  ; [13]:
+    db $25                                  ; [14]:
+    db $30                                  ; [15]:
+
+PALETTE_SPRITES_PORTRAIT:                   ; [$81e0]
+    db $0f                                  ; [0]:
+    db $18                                  ; [1]:
+    db $26                                  ; [2]:
+    db $30                                  ; [3]:
+    db $0f                                  ; [4]:
+    db $00                                  ; [5]:
+    db $25                                  ; [6]:
+    db $30                                  ; [7]:
+    db $0f                                  ; [8]:
+    db $18                                  ; [9]:
+    db $26                                  ; [10]:
+    db $2b                                  ; [11]:
+    db $0f                                  ; [12]:
+    db $0c                                  ; [13]:
+    db $1c                                  ; [14]:
+    db $30                                  ; [15]:
 
 
 ;============================================================================
 ; Mapping of palette indexes to HUD/textbox attribute data lookup indexes.
 ;
 ; XREFS:
-;     Screen_LoadBackgroundPalette
+;     Screen_LoadUIPalette
 ;============================================================================
 
 ;
 ; XREFS:
-;     Screen_LoadBackgroundPalette
+;     Screen_LoadUIPalette
 ;
 PALETTE_INDEX_TO_UI_BG_ATTRIBUTE_INDEX:     ; [$81f0]
     db $03                                  ; [0]: Eolis
@@ -107,14 +633,14 @@ PALETTE_INDEX_TO_UI_BG_ATTRIBUTE_INDEX:     ; [$81f0]
 ;     Screen_LoadAllScreenInfo
 ;
 AREA_SPRITE_ADDRESSES:                      ; [$8210]
-    dw $8220                                ; Eolis
-    dw $8260                                ; Apolune
-    dw $8482                                ; Forepaw
-    dw $8c8d                                ; Mascon
-    dw $8a76                                ; Victim
-    dw $874a                                ; Conflate
-    dw $88a2                                ; Daybreak
-    dw $89bc                                ; Final
+    dw SPRITE_INFO_EOLIS                    ; Eolis
+    dw SPRITE_INFO_APOLUNE                  ; Apolune
+    dw SPRITE_INFO_FOREPAW                  ; Forepaw
+    dw SPRITE_INFO_MASCON                   ; Mascon
+    dw SPRITE_INFO_VICTIM                   ; Victim
+    dw SPRITE_INFO_CONFLATE                 ; Conflate
+    dw SPRITE_INFO_DAYBREAK                 ; Daybreak
+    dw SPRITE_INFO_ZENIS                    ; Final
 
 
 ;============================================================================
@@ -129,70 +655,70 @@ AREA_SPRITE_ADDRESSES:                      ; [$8210]
 ;     AREA_SPRITE_ADDRESSES [$PRG11::8210]
 ;
 SPRITE_INFO_EOLIS:                          ; [$8220]
-    dw $8232                                ; Screen 0
-    dw $8237                                ; Screen 1
-    dw $823c                                ; Screen 2
-    dw $8241                                ; Screen 3
-    dw $8246                                ; Screen 4
-    dw $824c                                ; Screen 5
-    dw $8252                                ; Screen 6
-    dw $8257                                ; Screen 7
-    dw $825c                                ; Screen 8
+    dw SPRITE_INFO_EOLIS_SCREEN_00          ; Screen 0
+    dw SPRITE_INFO_EOLIS_SCREEN_01          ; Screen 1
+    dw SPRITE_INFO_EOLIS_SCREEN_02          ; Screen 2
+    dw SPRITE_INFO_EOLIS_SCREEN_03          ; Screen 3
+    dw SPRITE_INFO_EOLIS_SCREEN_04          ; Screen 4
+    dw SPRITE_INFO_EOLIS_SCREEN_05          ; Screen 5
+    dw SPRITE_INFO_EOLIS_SCREEN_06          ; Screen 6
+    dw SPRITE_INFO_EOLIS_SCREEN_07          ; Screen 7
+    dw SPRITE_INFO_EOLIS_SCREEN_08          ; Screen 8
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_EOLIS [$PRG11::8220]
 ;
-SPRITE_INFO_EOLIS_SCREEN_0:                 ; [$8232]
+SPRITE_INFO_EOLIS_SCREEN_00:                ; [$8232]
     db SPRITE_TRIGGER_INTRO                 ; [$8232] SpriteEntity
     db $04,$ff                              ; [$8233] byte
 
     db ISCRIPT_ENTRYPOINT_INTRO             ; IScript 0
     db $ff                                  ; [$8236] byte
 
-SPRITE_INFO_EOLIS_SCREEN_1:                 ; [$8237]
+SPRITE_INFO_EOLIS_SCREEN_01:                ; [$8237]
     db SPRITE_NPC_WALKING_MAN_1             ; [$8237] SpriteEntity
     db $9c,$ff                              ; [$8238] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_WALKING_MAN_1 ; IScript 1
     db $ff                                  ; [$823b] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_2:                 ; [$823c]
+SPRITE_INFO_EOLIS_SCREEN_02:                ; [$823c]
     db SPRITE_NPC_WALKING_WOMAN_2           ; [$823c] SpriteEntity
     db $97,$ff                              ; [$823d] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_WALKING_WOMAN_1 ; IScript 3
     db $ff                                  ; [$8240] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_3:                 ; [$8241]
+SPRITE_INFO_EOLIS_SCREEN_03:                ; [$8241]
     db SPRITE_NPC_SMOKING_MAN               ; [$8241] SpriteEntity
     db $84,$ff                              ; [$8242] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_SMOKING_MAN ; IScript 6
     db $ff                                  ; [$8245] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_4:                 ; [$8246]
+SPRITE_INFO_EOLIS_SCREEN_04:                ; [$8246]
     db SPRITE_ENEMY_ZOZURA                  ; [$8246] SpriteEntity
     db $a9                                  ; [$8247] undefined
 
     db SPRITE_ENEMY_ZOZURA
     db $a4,$ff,$ff                          ; [$8249] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_5:                 ; [$824c]
+SPRITE_INFO_EOLIS_SCREEN_05:                ; [$824c]
     db SPRITE_ENEMY_ZOZURA                  ; [$824c] SpriteEntity
     db $ab                                  ; [$824d] undefined
 
     db SPRITE_ENEMY_ZOZURA
     db $a5,$ff,$ff                          ; [$824f] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_6:                 ; [$8252]
-    db SPRITE_NPC_WALKING_WOMAN_1           ; [$8252] SpriteEntity
+SPRITE_INFO_EOLIS_SCREEN_06:                ; [$8252]
+    db SPRITE_NPC_NURSE                     ; [$8252] SpriteEntity
     db $93,$ff                              ; [$8253] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_WALKING_WOMAN_2 ; IScript 5
     db $ff                                  ; [$8256] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_7:                 ; [$8257]
+SPRITE_INFO_EOLIS_SCREEN_07:                ; [$8257]
     db SPRITE_NPC_GUARD_1                   ; [$8257] SpriteEntity
     db $9a,$ff                              ; [$8258] undefined
 
@@ -200,7 +726,7 @@ SPRITE_INFO_EOLIS_SCREEN_7:                 ; [$8257]
                                             ; [$PRG11::825a]
     db $ff                                  ; [$825b] undefined
 
-SPRITE_INFO_EOLIS_SCREEN_8:                 ; [$825c]
+SPRITE_INFO_EOLIS_SCREEN_08:                ; [$825c]
     db SPRITE_ENEMY_MONODRON                ; [$825c] SpriteEntity
     db $9c,$ff,$ff                          ; [$825d] undefined
 
@@ -209,151 +735,151 @@ SPRITE_INFO_EOLIS_SCREEN_8:                 ; [$825c]
 ; Apolune Sprite Information
 ;============================================================================
 SPRITE_INFO_APOLUNE:                        ; [$8260]
-    dw $82e0                                ; SPRITE_INFO_APOLUNE_SCREEN_0
+    dw SPRITE_INFO_APOLUNE_SCREEN_00        ; SPRITE_INFO_APOLUNE_SCREEN_00
                                             ; [$PRG11::8260]
-    dw $82e4                                ; SPRITE_INFO_APOLUNE_SCREEN+1
+    dw SPRITE_INFO_APOLUNE_SCREEN_01        ; SPRITE_INFO_APOLUNE_SCREEN_01
                                             ; [$PRG11::8262]
-    dw $82ea                                ; SPRITE_INFO_APOLUNE_SCREEN_2
+    dw SPRITE_INFO_APOLUNE_SCREEN_02        ; SPRITE_INFO_APOLUNE_SCREEN_02
                                             ; [$PRG11::8264]
-    dw $82f2                                ; SPRITE_INFO_APOLUNE_SCREEN_3
+    dw SPRITE_INFO_APOLUNE_SCREEN_03        ; SPRITE_INFO_APOLUNE_SCREEN_03
                                             ; [$PRG11::8266]
-    dw $82f8                                ; SPRITE_INFO_APOLUNE_SCREEN_4
+    dw SPRITE_INFO_APOLUNE_SCREEN_04        ; SPRITE_INFO_APOLUNE_SCREEN_04
                                             ; [$PRG11::8268]
-    dw $82fe                                ; SPRITE_INFO_APOLUNE_SCREEN_5
+    dw SPRITE_INFO_APOLUNE_SCREEN_05        ; SPRITE_INFO_APOLUNE_SCREEN_05
                                             ; [$PRG11::826a]
-    dw $8304                                ; SPRITE_INFO_APOLUNE_SCREEN_6
+    dw SPRITE_INFO_APOLUNE_SCREEN_06        ; SPRITE_INFO_APOLUNE_SCREEN_06
                                             ; [$PRG11::826c]
-    dw $830a                                ; SPRITE_INFO_APOLUNE_SCREEN_7
+    dw SPRITE_INFO_APOLUNE_SCREEN_07        ; SPRITE_INFO_APOLUNE_SCREEN_07
                                             ; [$PRG11::826e]
-    dw $830f                                ; SPRITE_INFO_APOLUNE_SCREEN_8
+    dw SPRITE_INFO_APOLUNE_SCREEN_08        ; SPRITE_INFO_APOLUNE_SCREEN_08
                                             ; [$PRG11::8270]
-    dw $8315                                ; SPRITE_INFO_APOLUNE_SCREEN_9
+    dw SPRITE_INFO_APOLUNE_SCREEN_09        ; SPRITE_INFO_APOLUNE_SCREEN_09
                                             ; [$PRG11::8272]
-    dw $831b                                ; SPRITE_INFO_APOLUNE_SCREEN_10
+    dw SPRITE_INFO_APOLUNE_SCREEN_10        ; SPRITE_INFO_APOLUNE_SCREEN_10
                                             ; [$PRG11::8274]
-    dw $8321                                ; SPRITE_INFO_APOLUNE_SCREEN_11
+    dw SPRITE_INFO_APOLUNE_SCREEN_11        ; SPRITE_INFO_APOLUNE_SCREEN_11
                                             ; [$PRG11::8276]
-    dw $8327                                ; SPRITE_INFO_APOLUNE_SCREEN_12
+    dw SPRITE_INFO_APOLUNE_SCREEN_12        ; SPRITE_INFO_APOLUNE_SCREEN_12
                                             ; [$PRG11::8278]
-    dw $832f                                ; SPRITE_INFO_APOLUNE_SCREEN_13
+    dw SPRITE_INFO_APOLUNE_SCREEN_13        ; SPRITE_INFO_APOLUNE_SCREEN_13
                                             ; [$PRG11::827a]
-    dw $8337                                ; SPRITE_INFO_APOLUNE_SCREEN_14
+    dw SPRITE_INFO_APOLUNE_SCREEN_14        ; SPRITE_INFO_APOLUNE_SCREEN_14
                                             ; [$PRG11::827c]
-    dw $8341                                ; SPRITE_INFO_APOLUNE_SCREEN_15
+    dw SPRITE_INFO_APOLUNE_SCREEN_15        ; SPRITE_INFO_APOLUNE_SCREEN_15
                                             ; [$PRG11::827e]
-    dw $8347                                ; SPRITE_INFO_APOLUNE_SCREEN_16
+    dw SPRITE_INFO_APOLUNE_SCREEN_16        ; SPRITE_INFO_APOLUNE_SCREEN_16
                                             ; [$PRG11::8280]
-    dw $834b                                ; SPRITE_INFO_APOLUNE_SCREEN_17
+    dw SPRITE_INFO_APOLUNE_SCREEN_17        ; SPRITE_INFO_APOLUNE_SCREEN_17
                                             ; [$PRG11::8282]
-    dw $834f                                ; SPRITE_INFO_APOLUNE_SCREEN_18
+    dw SPRITE_INFO_APOLUNE_SCREEN_18        ; SPRITE_INFO_APOLUNE_SCREEN_18
                                             ; [$PRG11::8284]
-    dw $8355                                ; SPRITE_INFO_APOLUNE_SCREEN_19
+    dw SPRITE_INFO_APOLUNE_SCREEN_19        ; SPRITE_INFO_APOLUNE_SCREEN_19
                                             ; [$PRG11::8286]
-    dw $835f                                ; SPRITE_INFO_APOLUNE_SCREEN_20
+    dw SPRITE_INFO_APOLUNE_SCREEN_20        ; SPRITE_INFO_APOLUNE_SCREEN_20
                                             ; [$PRG11::8288]
-    dw $8367                                ; SPRITE_INFO_APOLUNE_SCREEN_21
+    dw SPRITE_INFO_APOLUNE_SCREEN_21        ; SPRITE_INFO_APOLUNE_SCREEN_21
                                             ; [$PRG11::828a]
-    dw $836f                                ; SPRITE_INFO_APOLUNE_SCREEN_22
+    dw SPRITE_INFO_APOLUNE_SCREEN_22        ; SPRITE_INFO_APOLUNE_SCREEN_22
                                             ; [$PRG11::828c]
-    dw $8375                                ; SPRITE_INFO_APOLUNE_SCREEN_23
+    dw SPRITE_INFO_APOLUNE_SCREEN_23        ; SPRITE_INFO_APOLUNE_SCREEN_23
                                             ; [$PRG11::828e]
-    dw $837d                                ; SPRITE_INFO_APOLUNE_SCREEN_24
+    dw SPRITE_INFO_APOLUNE_SCREEN_24        ; SPRITE_INFO_APOLUNE_SCREEN_24
                                             ; [$PRG11::8290]
-    dw $8385                                ; SPRITE_INFO_APOLUNE_SCREEN_25
+    dw SPRITE_INFO_APOLUNE_SCREEN_25        ; SPRITE_INFO_APOLUNE_SCREEN_25
                                             ; [$PRG11::8292]
-    dw $838b                                ; SPRITE_INFO_APOLUNE_SCREEN_26
+    dw SPRITE_INFO_APOLUNE_SCREEN_26        ; SPRITE_INFO_APOLUNE_SCREEN_26
                                             ; [$PRG11::8294]
-    dw $8480                                ; SPRITE_INFO_APOLUNE_SCREEN_27
+    dw SPRITE_INFO_APOLUNE_SCREEN_27        ; SPRITE_INFO_APOLUNE_SCREEN_27
                                             ; [$PRG11::8296]
-    dw $8391                                ; SPRITE_INFO_APOLUNE_SCREEN_28
+    dw SPRITE_INFO_APOLUNE_SCREEN_28        ; SPRITE_INFO_APOLUNE_SCREEN_28
                                             ; [$PRG11::8298]
-    dw $8397                                ; SPRITE_INFO_APOLUNE_SCREEN_29
+    dw SPRITE_INFO_APOLUNE_SCREEN_29        ; SPRITE_INFO_APOLUNE_SCREEN_29
                                             ; [$PRG11::829a]
-    dw $83a1                                ; SPRITE_INFO_APOLUNE_SCREEN_30
+    dw SPRITE_INFO_APOLUNE_SCREEN_30        ; SPRITE_INFO_APOLUNE_SCREEN_30
                                             ; [$PRG11::829c]
-    dw $83a7                                ; SPRITE_INFO_APOLUNE_SCREEN_31
+    dw SPRITE_INFO_APOLUNE_SCREEN_31        ; SPRITE_INFO_APOLUNE_SCREEN_31
                                             ; [$PRG11::829e]
-    dw $83ad                                ; SPRITE_INFO_APOLUNE_SCREEN_32
+    dw SPRITE_INFO_APOLUNE_SCREEN_32        ; SPRITE_INFO_APOLUNE_SCREEN_32
                                             ; [$PRG11::82a0]
-    dw $83b3                                ; SPRITE_INFO_APOLUNE_SCREEN_33
+    dw SPRITE_INFO_APOLUNE_SCREEN_33        ; SPRITE_INFO_APOLUNE_SCREEN_33
                                             ; [$PRG11::82a2]
-    dw $83b9                                ; SPRITE_INFO_APOLUNE_SCREEN_34
+    dw SPRITE_INFO_APOLUNE_SCREEN_34        ; SPRITE_INFO_APOLUNE_SCREEN_34
                                             ; [$PRG11::82a4]
-    dw $83c7                                ; SPRITE_INFO_APOLUNE_SCREEN_35
+    dw SPRITE_INFO_APOLUNE_SCREEN_35        ; SPRITE_INFO_APOLUNE_SCREEN_35
                                             ; [$PRG11::82a6]
-    dw $83cf                                ; SPRITE_INFO_APOLUNE_SCREEN_36
+    dw SPRITE_INFO_APOLUNE_SCREEN_36        ; SPRITE_INFO_APOLUNE_SCREEN_36
                                             ; [$PRG11::82a8]
-    dw $83db                                ; SPRITE_INFO_APOLUNE_SCREEN_37
+    dw SPRITE_INFO_APOLUNE_SCREEN_37        ; SPRITE_INFO_APOLUNE_SCREEN_37
                                             ; [$PRG11::82aa]
-    dw $83d5                                ; SPRITE_INFO_APOLUNE_SCREEN_38
+    dw SPRITE_INFO_APOLUNE_SCREEN_38        ; SPRITE_INFO_APOLUNE_SCREEN_38
                                             ; [$PRG11::82ac]
-    dw $83c1                                ; SPRITE_INFO_APOLUNE_SCREEN_39
+    dw SPRITE_INFO_APOLUNE_SCREEN_39        ; SPRITE_INFO_APOLUNE_SCREEN_39
                                             ; [$PRG11::82ae]
-    dw $83f0                                ; SPRITE_INFO_APOLUNE_SCREEN_40
+    dw SPRITE_INFO_APOLUNE_SCREEN_40        ; SPRITE_INFO_APOLUNE_SCREEN_40
                                             ; [$PRG11::82b0]
-    dw $83f6                                ; SPRITE_INFO_APOLUNE_SCREEN_41
+    dw SPRITE_INFO_APOLUNE_SCREEN_41        ; SPRITE_INFO_APOLUNE_SCREEN_41
                                             ; [$PRG11::82b2]
-    dw $83fe                                ; SPRITE_INFO_APOLUNE_SCREEN_42
+    dw SPRITE_INFO_APOLUNE_SCREEN_42        ; SPRITE_INFO_APOLUNE_SCREEN_42
                                             ; [$PRG11::82b4]
-    dw $8402                                ; SPRITE_INFO_APOLUNE_SCREEN_43
+    dw SPRITE_INFO_APOLUNE_SCREEN_43        ; SPRITE_INFO_APOLUNE_SCREEN_43
                                             ; [$PRG11::82b6]
-    dw $8408                                ; SPRITE_INFO_APOLUNE_SCREEN_44
+    dw SPRITE_INFO_APOLUNE_SCREEN_44        ; SPRITE_INFO_APOLUNE_SCREEN_44
                                             ; [$PRG11::82b8]
-    dw $8410                                ; SPRITE_INFO_APOLUNE_SCREEN_45
+    dw SPRITE_INFO_APOLUNE_SCREEN_45        ; SPRITE_INFO_APOLUNE_SCREEN_45
                                             ; [$PRG11::82ba]
-    dw $841a                                ; SPRITE_INFO_APOLUNE_SCREEN_46
+    dw SPRITE_INFO_APOLUNE_SCREEN_46        ; SPRITE_INFO_APOLUNE_SCREEN_46
                                             ; [$PRG11::82bc]
-    dw $841e                                ; SPRITE_INFO_APOLUNE_SCREEN_47
+    dw SPRITE_INFO_APOLUNE_SCREEN_47        ; SPRITE_INFO_APOLUNE_SCREEN_47
                                             ; [$PRG11::82be]
-    dw $8424                                ; SPRITE_INFO_APOLUNE_SCREEN_48
+    dw SPRITE_INFO_APOLUNE_SCREEN_48        ; SPRITE_INFO_APOLUNE_SCREEN_48
                                             ; [$PRG11::82c0]
-    dw $842a                                ; SPRITE_INFO_APOLUNE_SCREEN_49
+    dw SPRITE_INFO_APOLUNE_SCREEN_49        ; SPRITE_INFO_APOLUNE_SCREEN_49
                                             ; [$PRG11::82c2]
-    dw $8430                                ; SPRITE_INFO_APOLUNE_SCREEN_50
+    dw SPRITE_INFO_APOLUNE_SCREEN_50        ; SPRITE_INFO_APOLUNE_SCREEN_50
                                             ; [$PRG11::82c4]
-    dw $8436                                ; SPRITE_INFO_APOLUNE_SCREEN_51
+    dw SPRITE_INFO_APOLUNE_SCREEN_51        ; SPRITE_INFO_APOLUNE_SCREEN_51
                                             ; [$PRG11::82c6]
-    dw $843c                                ; SPRITE_INFO_APOLUNE_SCREEN_52
+    dw SPRITE_INFO_APOLUNE_SCREEN_52        ; SPRITE_INFO_APOLUNE_SCREEN_52
                                             ; [$PRG11::82c8]
-    dw $8442                                ; SPRITE_INFO_APOLUNE_SCREEN_53
+    dw SPRITE_INFO_APOLUNE_SCREEN_53        ; SPRITE_INFO_APOLUNE_SCREEN_53
                                             ; [$PRG11::82ca]
-    dw $844a                                ; SPRITE_INFO_APOLUNE_SCREEN_54
+    dw SPRITE_INFO_APOLUNE_SCREEN_54        ; SPRITE_INFO_APOLUNE_SCREEN_54
                                             ; [$PRG11::82cc]
-    dw $8450                                ; SPRITE_INFO_APOLUNE_SCREEN_55
+    dw SPRITE_INFO_APOLUNE_SCREEN_55        ; SPRITE_INFO_APOLUNE_SCREEN_55
                                             ; [$PRG11::82ce]
-    dw $8456                                ; SPRITE_INFO_APOLUNE_SCREEN_56
+    dw SPRITE_INFO_APOLUNE_SCREEN_56        ; SPRITE_INFO_APOLUNE_SCREEN_56
                                             ; [$PRG11::82d0]
-    dw $845c                                ; SPRITE_INFO_APOLUNE_SCREEN_57
+    dw SPRITE_INFO_APOLUNE_SCREEN_57        ; SPRITE_INFO_APOLUNE_SCREEN_57
                                             ; [$PRG11::82d2]
-    dw $8462                                ; SPRITE_INFO_APOLUNE_SCREEN_58
+    dw SPRITE_INFO_APOLUNE_SCREEN_58        ; SPRITE_INFO_APOLUNE_SCREEN_58
                                             ; [$PRG11::82d4]
-    dw $846a                                ; SPRITE_INFO_APOLUNE_SCREEN_59
+    dw SPRITE_INFO_APOLUNE_SCREEN_59        ; SPRITE_INFO_APOLUNE_SCREEN_59
                                             ; [$PRG11::82d6]
-    dw $8472                                ; SPRITE_INFO_APOLUNE_SCREEN_60
+    dw SPRITE_INFO_APOLUNE_SCREEN_60        ; SPRITE_INFO_APOLUNE_SCREEN_60
                                             ; [$PRG11::82d8]
-    dw $83e2                                ; SPRITE_INFO_APOLUNE_SCREEN_61
+    dw SPRITE_INFO_APOLUNE_SCREEN_61        ; SPRITE_INFO_APOLUNE_SCREEN_61
                                             ; [$PRG11::82da]
-    dw $847c                                ; SPRITE_INFO_APOLUNE_SCREEN_62
+    dw SPRITE_INFO_APOLUNE_SCREEN_62        ; SPRITE_INFO_APOLUNE_SCREEN_62
                                             ; [$PRG11::82dc]
-    dw $83e9                                ; SPRITE_INFO_APOLUNE_SCREEN_63
+    dw SPRITE_INFO_APOLUNE_SCREEN_63        ; SPRITE_INFO_APOLUNE_SCREEN_63
                                             ; [$PRG11::82de]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_APOLUNE [$PRG11::8260]
 ;
-SPRITE_INFO_APOLUNE_SCREEN_0:               ; [$82e0]
+SPRITE_INFO_APOLUNE_SCREEN_00:              ; [$82e0]
     db SPRITE_ENEMY_MONODRON                ; [$82e0] SpriteEntity
     db $a8,$ff,$ff                          ; [$82e1] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_1:               ; [$82e4]
+SPRITE_INFO_APOLUNE_SCREEN_01:              ; [$82e4]
     db SPRITE_ENEMY_MONODRON                ; [$82e4] SpriteEntity
     db $14                                  ; [$82e5] byte
 
     db SPRITE_ENEMY_MONODRON
     db $a8,$ff,$ff                          ; [$82e7] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_2:               ; [$82ea]
+SPRITE_INFO_APOLUNE_SCREEN_02:              ; [$82ea]
     db SPRITE_ENEMY_MONODRON                ; [$82ea] SpriteEntity
     db $18                                  ; [$82eb] byte
 
@@ -363,49 +889,49 @@ SPRITE_INFO_APOLUNE_SCREEN_2:               ; [$82ea]
     db SPRITE_ENEMY_ZOZURA
     db $ba,$ff,$ff                          ; [$82ef] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_3:               ; [$82f2]
+SPRITE_INFO_APOLUNE_SCREEN_03:              ; [$82f2]
     db SPRITE_ENEMY_ZOZURA                  ; [$82f2] SpriteEntity
     db $ba                                  ; [$82f3] byte
 
     db SPRITE_ENEMY_MONODRON
     db $a5,$ff,$ff                          ; [$82f5] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_4:               ; [$82f8]
+SPRITE_INFO_APOLUNE_SCREEN_04:              ; [$82f8]
     db SPRITE_ENEMY_MONODRON                ; [$82f8] SpriteEntity
     db $a4                                  ; [$82f9] undefined
 
     db SPRITE_ENEMY_ZOZURA
     db $b4,$ff,$ff                          ; [$82fb] undefined
 
-SPRITE_INFO_APOLUNE_SCREEN_5:               ; [$82fe]
+SPRITE_INFO_APOLUNE_SCREEN_05:              ; [$82fe]
     db SPRITE_ENEMY_MONODRON                ; [$82fe] SpriteEntity
     db $a6                                  ; [$82ff] undefined
 
     db SPRITE_ENEMY_MONODRON
     db $aa,$ff,$ff                          ; [$8301] undefined
 
-SPRITE_INFO_APOLUNE_SCREEN_6:               ; [$8304]
+SPRITE_INFO_APOLUNE_SCREEN_06:              ; [$8304]
     db SPRITE_ENEMY_ZOMBIE                  ; [$8304] SpriteEntity
     db $a6                                  ; [$8305] undefined
 
     db SPRITE_ENEMY_ZOMBIE
     db $5b,$ff,$ff                          ; [$8307] undefined
 
-SPRITE_INFO_APOLUNE_SCREEN_7:               ; [$830a]
+SPRITE_INFO_APOLUNE_SCREEN_07:              ; [$830a]
     db SPRITE_ENEMY_ZOMBIE                  ; [$830a] SpriteEntity
     db $a5                                  ; [$830b] byte
 
     db SPRITE_ENEMY_ZOZURA
     db $ba,$ff                              ; [$830d] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_8:               ; [$830f]
+SPRITE_INFO_APOLUNE_SCREEN_08:              ; [$830f]
     db SPRITE_ENEMY_MONODRON                ; [$830f] SpriteEntity
     db $25                                  ; [$8310] byte
 
     db SPRITE_ENEMY_ZOMBIE
     db $aa,$ff,$ff                          ; [$8312] byte
 
-SPRITE_INFO_APOLUNE_SCREEN_9:               ; [$8315]
+SPRITE_INFO_APOLUNE_SCREEN_09:              ; [$8315]
     db SPRITE_ENEMY_MONODRON                ; [$8315] SpriteEntity
     db $aa                                  ; [$8316] undefined
 
@@ -842,178 +1368,178 @@ SPRITE_INFO_APOLUNE_SCREEN_27:              ; [$8480]
 ; Forepaw Sprite Information
 ;============================================================================
 SPRITE_INFO_FOREPAW:                        ; [$8482]
-    dw $8528                                ; SPRITE_INFO_FOREPAW_SCREEN_0
+    dw SPRITE_INFO_FOREPAW_SCREEN_00        ; SPRITE_INFO_FOREPAW_SCREEN_00
                                             ; [$PRG11::8482]
-    dw $8530                                ; SPRITE_INFO_FOREPAW_SCREEN+1
+    dw SPRITE_INFO_FOREPAW_SCREEN_01        ; SPRITE_INFO_FOREPAW_SCREEN_01
                                             ; [$PRG11::8484]
-    dw $8538                                ; SPRITE_INFO_FOREPAW_SCREEN_2
+    dw SPRITE_INFO_FOREPAW_SCREEN_02        ; SPRITE_INFO_FOREPAW_SCREEN_02
                                             ; [$PRG11::8486]
-    dw $853e                                ; SPRITE_INFO_FOREPAW_SCREEN_3
+    dw SPRITE_INFO_FOREPAW_SCREEN_03        ; SPRITE_INFO_FOREPAW_SCREEN_03
                                             ; [$PRG11::8488]
-    dw $8546                                ; SPRITE_INFO_FOREPAW_SCREEN_4
+    dw SPRITE_INFO_FOREPAW_SCREEN_04        ; SPRITE_INFO_FOREPAW_SCREEN_04
                                             ; [$PRG11::848a]
-    dw $854c                                ; SPRITE_INFO_FOREPAW_SCREEN_5
+    dw SPRITE_INFO_FOREPAW_SCREEN_05        ; SPRITE_INFO_FOREPAW_SCREEN_05
                                             ; [$PRG11::848c]
-    dw $8552                                ; SPRITE_INFO_FOREPAW_SCREEN_6
+    dw SPRITE_INFO_FOREPAW_SCREEN_06        ; SPRITE_INFO_FOREPAW_SCREEN_06
                                             ; [$PRG11::848e]
-    dw $8558                                ; SPRITE_INFO_FOREPAW_SCREEN_7
+    dw SPRITE_INFO_FOREPAW_SCREEN_07        ; SPRITE_INFO_FOREPAW_SCREEN_07
                                             ; [$PRG11::8490]
-    dw $855e                                ; SPRITE_INFO_FOREPAW_SCREEN_8
+    dw SPRITE_INFO_FOREPAW_SCREEN_08        ; SPRITE_INFO_FOREPAW_SCREEN_08
                                             ; [$PRG11::8492]
-    dw $8566                                ; SPRITE_INFO_FOREPAW_SCREEN_9
+    dw SPRITE_INFO_FOREPAW_SCREEN_09        ; SPRITE_INFO_FOREPAW_SCREEN_09
                                             ; [$PRG11::8494]
-    dw $856e                                ; SPRITE_INFO_FOREPAW_SCREEN_11_12
+    dw SPRITE_INFO_FOREPAW_SCREEN_10_11     ; SPRITE_INFO_FOREPAW_SCREEN_10_11
                                             ; [$PRG11::8496]
-    dw $856e                                ; SPRITE_INFO_FOREPAW_SCREEN_11_12
+    dw SPRITE_INFO_FOREPAW_SCREEN_10_11     ; SPRITE_INFO_FOREPAW_SCREEN_10_11
                                             ; [$PRG11::8498]
-    dw $8570                                ; SPRITE_INFO_FOREPAW_SCREEN_13
+    dw SPRITE_INFO_FOREPAW_SCREEN_12        ; SPRITE_INFO_FOREPAW_SCREEN_12
                                             ; [$PRG11::849a]
-    dw $8578                                ; SPRITE_INFO_FOREPAW_SCREEN_14
+    dw SPRITE_INFO_FOREPAW_SCREEN_13        ; SPRITE_INFO_FOREPAW_SCREEN_13
                                             ; [$PRG11::849c]
-    dw $8580                                ; SPRITE_INFO_FOREPAW_SCREEN_15
+    dw SPRITE_INFO_FOREPAW_SCREEN_14        ; SPRITE_INFO_FOREPAW_SCREEN_14
                                             ; [$PRG11::849e]
-    dw $8588                                ; SPRITE_INFO_FOREPAW_SCREEN_16
+    dw SPRITE_INFO_FOREPAW_SCREEN_15        ; SPRITE_INFO_FOREPAW_SCREEN_15
                                             ; [$PRG11::84a0]
-    dw $8590                                ; SPRITE_INFO_FOREPAW_SCREEN_17
+    dw SPRITE_INFO_FOREPAW_SCREEN_16        ; SPRITE_INFO_FOREPAW_SCREEN_16
                                             ; [$PRG11::84a2]
-    dw $8598                                ; SPRITE_INFO_FOREPAW_SCREEN_18
+    dw SPRITE_INFO_FOREPAW_SCREEN_17        ; SPRITE_INFO_FOREPAW_SCREEN_17
                                             ; [$PRG11::84a4]
-    dw $85a2                                ; SPRITE_INFO_FOREPAW_SCREEN_19
+    dw SPRITE_INFO_FOREPAW_SCREEN_18        ; SPRITE_INFO_FOREPAW_SCREEN_18
                                             ; [$PRG11::84a6]
-    dw $85aa                                ; SPRITE_INFO_FOREPAW_SCREEN_20
+    dw SPRITE_INFO_FOREPAW_SCREEN_19        ; SPRITE_INFO_FOREPAW_SCREEN_19
                                             ; [$PRG11::84a8]
-    dw $85b2                                ; SPRITE_INFO_FOREPAW_SCREEN_21
+    dw SPRITE_INFO_FOREPAW_SCREEN_20        ; SPRITE_INFO_FOREPAW_SCREEN_20
                                             ; [$PRG11::84aa]
-    dw $85ba                                ; SPRITE_INFO_FOREPAW_SCREEN_22
+    dw SPRITE_INFO_FOREPAW_SCREEN_21        ; SPRITE_INFO_FOREPAW_SCREEN_21
                                             ; [$PRG11::84ac]
-    dw $85c2                                ; SPRITE_INFO_FOREPAW_SCREEN_23
+    dw SPRITE_INFO_FOREPAW_SCREEN_22        ; SPRITE_INFO_FOREPAW_SCREEN_22
                                             ; [$PRG11::84ae]
-    dw $85c8                                ; SPRITE_INFO_FOREPAW_SCREEN_24
+    dw SPRITE_INFO_FOREPAW_SCREEN_23        ; SPRITE_INFO_FOREPAW_SCREEN_23
                                             ; [$PRG11::84b0]
-    dw $85d0                                ; SPRITE_INFO_FOREPAW_SCREEN_25
+    dw SPRITE_INFO_FOREPAW_SCREEN_24        ; SPRITE_INFO_FOREPAW_SCREEN_24
                                             ; [$PRG11::84b2]
-    dw $85d8                                ; SPRITE_INFO_FOREPAW_SCREEN_26
+    dw SPRITE_INFO_FOREPAW_SCREEN_25        ; SPRITE_INFO_FOREPAW_SCREEN_25
                                             ; [$PRG11::84b4]
-    dw $85de                                ; SPRITE_INFO_FOREPAW_SCREEN_27
+    dw SPRITE_INFO_FOREPAW_SCREEN_26        ; SPRITE_INFO_FOREPAW_SCREEN_26
                                             ; [$PRG11::84b6]
-    dw $85e4                                ; SPRITE_INFO_FOREPAW_SCREEN_28
+    dw SPRITE_INFO_FOREPAW_SCREEN_27        ; SPRITE_INFO_FOREPAW_SCREEN_27
                                             ; [$PRG11::84b8]
-    dw $85ec                                ; SPRITE_INFO_FOREPAW_SCREEN_29
+    dw SPRITE_INFO_FOREPAW_SCREEN_28        ; SPRITE_INFO_FOREPAW_SCREEN_28
                                             ; [$PRG11::84ba]
-    dw $85f2                                ; SPRITE_INFO_FOREPAW_SCREEN_30
+    dw SPRITE_INFO_FOREPAW_SCREEN_29        ; SPRITE_INFO_FOREPAW_SCREEN_29
                                             ; [$PRG11::84bc]
-    dw $85f8                                ; SPRITE_INFO_FOREPAW_SCREEN_31
+    dw SPRITE_INFO_FOREPAW_SCREEN_30        ; SPRITE_INFO_FOREPAW_SCREEN_30
                                             ; [$PRG11::84be]
-    dw $85fe                                ; SPRITE_INFO_FOREPAW_SCREEN_32
+    dw SPRITE_INFO_FOREPAW_SCREEN_31        ; SPRITE_INFO_FOREPAW_SCREEN_31
                                             ; [$PRG11::84c0]
-    dw $8604                                ; SPRITE_INFO_FOREPAW_SCREEN_33
+    dw SPRITE_INFO_FOREPAW_SCREEN_32        ; SPRITE_INFO_FOREPAW_SCREEN_32
                                             ; [$PRG11::84c2]
-    dw $860a                                ; SPRITE_INFO_FOREPAW_SCREEN_34
+    dw SPRITE_INFO_FOREPAW_SCREEN_33        ; SPRITE_INFO_FOREPAW_SCREEN_33
                                             ; [$PRG11::84c4]
-    dw $8612                                ; SPRITE_INFO_FOREPAW_SCREEN_35
+    dw SPRITE_INFO_FOREPAW_SCREEN_34        ; SPRITE_INFO_FOREPAW_SCREEN_34
                                             ; [$PRG11::84c6]
-    dw $861a                                ; SPRITE_INFO_FOREPAW_SCREEN_36_37
+    dw SPRITE_INFO_FOREPAW_SCREEN_35_36     ; SPRITE_INFO_FOREPAW_SCREEN_35_36
                                             ; [$PRG11::84c8]
-    dw $861a                                ; SPRITE_INFO_FOREPAW_SCREEN_36_37
+    dw SPRITE_INFO_FOREPAW_SCREEN_35_36     ; SPRITE_INFO_FOREPAW_SCREEN_35_36
                                             ; [$PRG11::84ca]
-    dw $861c                                ; SPRITE_INFO_FOREPAW_SCREEN_38
+    dw SPRITE_INFO_FOREPAW_SCREEN_37        ; SPRITE_INFO_FOREPAW_SCREEN_37
                                             ; [$PRG11::84cc]
-    dw $8622                                ; SPRITE_INFO_FOREPAW_SCREEN_39
+    dw SPRITE_INFO_FOREPAW_SCREEN_38        ; SPRITE_INFO_FOREPAW_SCREEN_38
                                             ; [$PRG11::84ce]
-    dw $862a                                ; SPRITE_INFO_FOREPAW_SCREEN_40
+    dw SPRITE_INFO_FOREPAW_SCREEN_39        ; SPRITE_INFO_FOREPAW_SCREEN_39
                                             ; [$PRG11::84d0]
-    dw $8630                                ; SPRITE_INFO_FOREPAW_SCREEN_41
+    dw SPRITE_INFO_FOREPAW_SCREEN_40        ; SPRITE_INFO_FOREPAW_SCREEN_40
                                             ; [$PRG11::84d2]
-    dw $8636                                ; SPRITE_INFO_FOREPAW_SCREEN_42
+    dw SPRITE_INFO_FOREPAW_SCREEN_41        ; SPRITE_INFO_FOREPAW_SCREEN_41
                                             ; [$PRG11::84d4]
-    dw $863c                                ; SPRITE_INFO_FOREPAW_SCREEN_43
+    dw SPRITE_INFO_FOREPAW_SCREEN_42        ; SPRITE_INFO_FOREPAW_SCREEN_42
                                             ; [$PRG11::84d6]
-    dw $8642                                ; SPRITE_INFO_FOREPAW_SCREEN_44
+    dw SPRITE_INFO_FOREPAW_SCREEN_43        ; SPRITE_INFO_FOREPAW_SCREEN_43
                                             ; [$PRG11::84d8]
-    dw $8648                                ; SPRITE_INFO_FOREPAW_SCREEN_45
+    dw SPRITE_INFO_FOREPAW_SCREEN_44        ; SPRITE_INFO_FOREPAW_SCREEN_44
                                             ; [$PRG11::84da]
-    dw $864e                                ; SPRITE_INFO_FOREPAW_SCREEN_46
+    dw SPRITE_INFO_FOREPAW_SCREEN_45        ; SPRITE_INFO_FOREPAW_SCREEN_45
                                             ; [$PRG11::84dc]
-    dw $8654                                ; SPRITE_INFO_FOREPAW_SCREEN_47
+    dw SPRITE_INFO_FOREPAW_SCREEN_46        ; SPRITE_INFO_FOREPAW_SCREEN_46
                                             ; [$PRG11::84de]
-    dw $865a                                ; SPRITE_INFO_FOREPAW_SCREEN_48
+    dw SPRITE_INFO_FOREPAW_SCREEN_47        ; SPRITE_INFO_FOREPAW_SCREEN_47
                                             ; [$PRG11::84e0]
-    dw $8660                                ; SPRITE_INFO_FOREPAW_SCREEN_49
+    dw SPRITE_INFO_FOREPAW_SCREEN_48        ; SPRITE_INFO_FOREPAW_SCREEN_48
                                             ; [$PRG11::84e2]
-    dw $8668                                ; SPRITE_INFO_FOREPAW_SCREEN_50
+    dw SPRITE_INFO_FOREPAW_SCREEN_49        ; SPRITE_INFO_FOREPAW_SCREEN_49
                                             ; [$PRG11::84e4]
-    dw $8670                                ; SPRITE_INFO_FOREPAW_SCREEN_51
+    dw SPRITE_INFO_FOREPAW_SCREEN_50        ; SPRITE_INFO_FOREPAW_SCREEN_50
                                             ; [$PRG11::84e6]
-    dw $867a                                ; SPRITE_INFO_FOREPAW_SCREEN_52
+    dw SPRITE_INFO_FOREPAW_SCREEN_51        ; SPRITE_INFO_FOREPAW_SCREEN_51
                                             ; [$PRG11::84e8]
-    dw $867e                                ; SPRITE_INFO_FOREPAW_SCREEN_53
+    dw SPRITE_INFO_FOREPAW_SCREEN_52        ; SPRITE_INFO_FOREPAW_SCREEN_52
                                             ; [$PRG11::84ea]
-    dw $8686                                ; SPRITE_INFO_FOREPAW_SCREEN_54
+    dw SPRITE_INFO_FOREPAW_SCREEN_53        ; SPRITE_INFO_FOREPAW_SCREEN_53
                                             ; [$PRG11::84ec]
-    dw $868c                                ; SPRITE_INFO_FOREPAW_SCREEN_55
+    dw SPRITE_INFO_FOREPAW_SCREEN_54        ; SPRITE_INFO_FOREPAW_SCREEN_54
                                             ; [$PRG11::84ee]
-    dw $8692                                ; SPRITE_INFO_FOREPAW_SCREEN_56
+    dw SPRITE_INFO_FOREPAW_SCREEN_55        ; SPRITE_INFO_FOREPAW_SCREEN_55
                                             ; [$PRG11::84f0]
-    dw $8698                                ; SPRITE_INFO_FOREPAW_SCREEN_57
+    dw SPRITE_INFO_FOREPAW_SCREEN_56        ; SPRITE_INFO_FOREPAW_SCREEN_56
                                             ; [$PRG11::84f2]
-    dw $869e                                ; SPRITE_INFO_FOREPAW_SCREEN_58
+    dw SPRITE_INFO_FOREPAW_SCREEN_57        ; SPRITE_INFO_FOREPAW_SCREEN_57
                                             ; [$PRG11::84f4]
-    dw $86a6                                ; SPRITE_INFO_FOREPAW_SCREEN_59
+    dw SPRITE_INFO_FOREPAW_SCREEN_58        ; SPRITE_INFO_FOREPAW_SCREEN_58
                                             ; [$PRG11::84f6]
-    dw $86ac                                ; SPRITE_INFO_FOREPAW_SCREEN_60
+    dw SPRITE_INFO_FOREPAW_SCREEN_59        ; SPRITE_INFO_FOREPAW_SCREEN_59
                                             ; [$PRG11::84f8]
-    dw $86b2                                ; SPRITE_INFO_FOREPAW_SCREEN_61
+    dw SPRITE_INFO_FOREPAW_SCREEN_60        ; SPRITE_INFO_FOREPAW_SCREEN_60
                                             ; [$PRG11::84fa]
-    dw $86b8                                ; SPRITE_INFO_FOREPAW_SCREEN_62
+    dw SPRITE_INFO_FOREPAW_SCREEN_61        ; SPRITE_INFO_FOREPAW_SCREEN_61
                                             ; [$PRG11::84fc]
-    dw $86be                                ; SPRITE_INFO_FOREPAW_SCREEN_63
+    dw SPRITE_INFO_FOREPAW_SCREEN_62        ; SPRITE_INFO_FOREPAW_SCREEN_62
                                             ; [$PRG11::84fe]
-    dw $86c6                                ; SPRITE_INFO_FOREPAW_SCREEN_64
+    dw SPRITE_INFO_FOREPAW_SCREEN_63        ; SPRITE_INFO_FOREPAW_SCREEN_63
                                             ; [$PRG11::8500]
-    dw $86ca                                ; SPRITE_INFO_FOREPAW_SCREEN_65
+    dw SPRITE_INFO_FOREPAW_SCREEN_64        ; SPRITE_INFO_FOREPAW_SCREEN_64
                                             ; [$PRG11::8502]
-    dw $86ce                                ; SPRITE_INFO_FOREPAW_SCREEN_66
+    dw SPRITE_INFO_FOREPAW_SCREEN_65        ; SPRITE_INFO_FOREPAW_SCREEN_65
                                             ; [$PRG11::8504]
-    dw $86d4                                ; SPRITE_INFO_FOREPAW_SCREEN_67
+    dw SPRITE_INFO_FOREPAW_SCREEN_66        ; SPRITE_INFO_FOREPAW_SCREEN_66
                                             ; [$PRG11::8506]
-    dw $86de                                ; SPRITE_INFO_FOREPAW_SCREEN_68
+    dw SPRITE_INFO_FOREPAW_SCREEN_67        ; SPRITE_INFO_FOREPAW_SCREEN_67
                                             ; [$PRG11::8508]
-    dw $86e8                                ; SPRITE_INFO_FOREPAW_SCREEN_69
+    dw SPRITE_INFO_FOREPAW_SCREEN_68        ; SPRITE_INFO_FOREPAW_SCREEN_68
                                             ; [$PRG11::850a]
-    dw $86f2                                ; SPRITE_INFO_FOREPAW_SCREEN_70
+    dw SPRITE_INFO_FOREPAW_SCREEN_69        ; SPRITE_INFO_FOREPAW_SCREEN_69
                                             ; [$PRG11::850c]
-    dw $86f8                                ; SPRITE_INFO_FOREPAW_SCREEN_71
+    dw SPRITE_INFO_FOREPAW_SCREEN_70        ; SPRITE_INFO_FOREPAW_SCREEN_70
                                             ; [$PRG11::850e]
-    dw $86fe                                ; SPRITE_INFO_FOREPAW_SCREEN_72
+    dw SPRITE_INFO_FOREPAW_SCREEN_71        ; SPRITE_INFO_FOREPAW_SCREEN_71
                                             ; [$PRG11::8510]
-    dw $8706                                ; SPRITE_INFO_FOREPAW_SCREEN_73
+    dw SPRITE_INFO_FOREPAW_SCREEN_72        ; SPRITE_INFO_FOREPAW_SCREEN_72
                                             ; [$PRG11::8512]
-    dw $870a                                ; SPRITE_INFO_FOREPAW_SCREEN_74
+    dw SPRITE_INFO_FOREPAW_SCREEN_73        ; SPRITE_INFO_FOREPAW_SCREEN_73
                                             ; [$PRG11::8514]
-    dw $8710                                ; SPRITE_INFO_FOREPAW_SCREEN_75
+    dw SPRITE_INFO_FOREPAW_SCREEN_74        ; SPRITE_INFO_FOREPAW_SCREEN_74
                                             ; [$PRG11::8516]
-    dw $8716                                ; SPRITE_INFO_FOREPAW_SCREEN_76
+    dw SPRITE_INFO_FOREPAW_SCREEN_75        ; SPRITE_INFO_FOREPAW_SCREEN_75
                                             ; [$PRG11::8518]
-    dw $871c                                ; SPRITE_INFO_FOREPAW_SCREEN_77
+    dw SPRITE_INFO_FOREPAW_SCREEN_76        ; SPRITE_INFO_FOREPAW_SCREEN_76
                                             ; [$PRG11::851a]
-    dw $8724                                ; SPRITE_INFO_FOREPAW_SCREEN_78
+    dw SPRITE_INFO_FOREPAW_SCREEN_77        ; SPRITE_INFO_FOREPAW_SCREEN_77
                                             ; [$PRG11::851c]
-    dw $872a                                ; SPRITE_INFO_FOREPAW_SCREEN_79
+    dw SPRITE_INFO_FOREPAW_SCREEN_78        ; SPRITE_INFO_FOREPAW_SCREEN_78
                                             ; [$PRG11::851e]
-    dw $8730                                ; SPRITE_INFO_FOREPAW_SCREEN_80
+    dw SPRITE_INFO_FOREPAW_SCREEN_79        ; SPRITE_INFO_FOREPAW_SCREEN_79
                                             ; [$PRG11::8520]
-    dw $8736                                ; SPRITE_INFO_FOREPAW_SCREEN_81
+    dw SPRITE_INFO_FOREPAW_SCREEN_80        ; SPRITE_INFO_FOREPAW_SCREEN_80
                                             ; [$PRG11::8522]
-    dw $873e                                ; SPRITE_INFO_FOREPAW_SCREEN_82
+    dw SPRITE_INFO_FOREPAW_SCREEN_81        ; SPRITE_INFO_FOREPAW_SCREEN_81
                                             ; [$PRG11::8524]
-    dw $8744                                ; SPRITE_INFO_FOREPAW_SCREEN_83
+    dw SPRITE_INFO_FOREPAW_SCREEN_82        ; SPRITE_INFO_FOREPAW_SCREEN_82
                                             ; [$PRG11::8526]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_FOREPAW [$PRG11::8482]
 ;
-SPRITE_INFO_FOREPAW_SCREEN_0:               ; [$8528]
+SPRITE_INFO_FOREPAW_SCREEN_00:              ; [$8528]
     db SPRITE_ENEMY_NAGA                    ; [$8528] SpriteEntity
     db $85                                  ; [$8529] undefined
 
@@ -1023,7 +1549,7 @@ SPRITE_INFO_FOREPAW_SCREEN_0:               ; [$8528]
     db SPRITE_ENEMY_BIHORUDA
     db $2c,$ff,$ff                          ; [$852d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_1:               ; [$8530]
+SPRITE_INFO_FOREPAW_SCREEN_01:              ; [$8530]
     db SPRITE_ENEMY_NAGA                    ; [$8530] SpriteEntity
     db $9c                                  ; [$8531] undefined
 
@@ -1033,14 +1559,14 @@ SPRITE_INFO_FOREPAW_SCREEN_1:               ; [$8530]
     db SPRITE_ENEMY_HORNET
     db $81,$ff,$ff                          ; [$8535] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_2:               ; [$8538]
+SPRITE_INFO_FOREPAW_SCREEN_02:              ; [$8538]
     db SPRITE_ENEMY_NAGA                    ; [$8538] SpriteEntity
     db $66                                  ; [$8539] undefined
 
     db SPRITE_ENEMY_NAGA
     db $8c,$ff,$ff                          ; [$853b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_3:               ; [$853e]
+SPRITE_INFO_FOREPAW_SCREEN_03:              ; [$853e]
     db SPRITE_ENEMY_NAGA                    ; [$853e] SpriteEntity
     db $94                                  ; [$853f] undefined
 
@@ -1050,35 +1576,35 @@ SPRITE_INFO_FOREPAW_SCREEN_3:               ; [$853e]
     db SPRITE_ENEMY_HORNET
     db $23,$ff,$ff                          ; [$8543] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_4:               ; [$8546]
+SPRITE_INFO_FOREPAW_SCREEN_04:              ; [$8546]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8546] SpriteEntity
     db $96                                  ; [$8547] undefined
 
     db SPRITE_ENEMY_IKEDA
     db $22,$ff,$ff                          ; [$8549] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_5:               ; [$854c]
+SPRITE_INFO_FOREPAW_SCREEN_05:              ; [$854c]
     db SPRITE_ENEMY_CHARRON                 ; [$854c] SpriteEntity
     db $43                                  ; [$854d] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $98,$ff,$ff                          ; [$854f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_6:               ; [$8552]
+SPRITE_INFO_FOREPAW_SCREEN_06:              ; [$8552]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8552] SpriteEntity
     db $23                                  ; [$8553] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $89,$ff,$ff                          ; [$8555] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_7:               ; [$8558]
+SPRITE_INFO_FOREPAW_SCREEN_07:              ; [$8558]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8558] SpriteEntity
     db $38                                  ; [$8559] undefined
 
     db SPRITE_ENEMY_HORNET
     db $3b,$ff,$ff                          ; [$855b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_8:               ; [$855e]
+SPRITE_INFO_FOREPAW_SCREEN_08:              ; [$855e]
     db SPRITE_ENEMY_HORNET                  ; [$855e] SpriteEntity
     db $28                                  ; [$855f] undefined
 
@@ -1088,7 +1614,7 @@ SPRITE_INFO_FOREPAW_SCREEN_8:               ; [$855e]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $98,$ff,$ff                          ; [$8563] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_9:               ; [$8566]
+SPRITE_INFO_FOREPAW_SCREEN_09:              ; [$8566]
     db SPRITE_ENEMY_HORNET                  ; [$8566] SpriteEntity
     db $38                                  ; [$8567] undefined
 
@@ -1098,10 +1624,10 @@ SPRITE_INFO_FOREPAW_SCREEN_9:               ; [$8566]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $9b,$ff,$ff                          ; [$856b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_11_12:           ; [$856e]
+SPRITE_INFO_FOREPAW_SCREEN_10_11:           ; [$856e]
     db $ff,$ff                              ; [$856e] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_13:              ; [$8570]
+SPRITE_INFO_FOREPAW_SCREEN_12:              ; [$8570]
     db SPRITE_ENEMY_HORNET                  ; [$8570] SpriteEntity
     db $45                                  ; [$8571] undefined
 
@@ -1111,7 +1637,7 @@ SPRITE_INFO_FOREPAW_SCREEN_13:              ; [$8570]
     db SPRITE_ENEMY_HORNET
     db $2b,$ff,$ff                          ; [$8575] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_14:              ; [$8578]
+SPRITE_INFO_FOREPAW_SCREEN_13:              ; [$8578]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8578] SpriteEntity
     db $63                                  ; [$8579] undefined
 
@@ -1121,7 +1647,7 @@ SPRITE_INFO_FOREPAW_SCREEN_14:              ; [$8578]
     db SPRITE_ENEMY_HORNET
     db $5a,$ff,$ff                          ; [$857d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_15:              ; [$8580]
+SPRITE_INFO_FOREPAW_SCREEN_14:              ; [$8580]
     db SPRITE_ENEMY_BIHORUDA                ; [$8580] SpriteEntity
     db $43                                  ; [$8581] undefined
 
@@ -1131,7 +1657,7 @@ SPRITE_INFO_FOREPAW_SCREEN_15:              ; [$8580]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $87,$ff,$ff                          ; [$8585] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_16:              ; [$8588]
+SPRITE_INFO_FOREPAW_SCREEN_15:              ; [$8588]
     db SPRITE_ENEMY_BIHORUDA                ; [$8588] SpriteEntity
     db $27                                  ; [$8589] undefined
 
@@ -1141,7 +1667,7 @@ SPRITE_INFO_FOREPAW_SCREEN_16:              ; [$8588]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $87,$ff,$ff                          ; [$858d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_17:              ; [$8590]
+SPRITE_INFO_FOREPAW_SCREEN_16:              ; [$8590]
     db SPRITE_ENEMY_HORNET                  ; [$8590] SpriteEntity
     db $45                                  ; [$8591] undefined
 
@@ -1151,7 +1677,7 @@ SPRITE_INFO_FOREPAW_SCREEN_17:              ; [$8590]
     db SPRITE_ENEMY_CHARRON
     db $9b,$ff,$ff                          ; [$8595] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_18:              ; [$8598]
+SPRITE_INFO_FOREPAW_SCREEN_17:              ; [$8598]
     db SPRITE_OBJ_WING_BOOTS                ; [$8598] SpriteEntity
     db $5e                                  ; [$8599] undefined
 
@@ -1164,7 +1690,7 @@ SPRITE_INFO_FOREPAW_SCREEN_18:              ; [$8598]
     db SPRITE_ENEMY_CHARRON
     db $24,$ff,$ff                          ; [$859f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_19:              ; [$85a2]
+SPRITE_INFO_FOREPAW_SCREEN_18:              ; [$85a2]
     db SPRITE_ENEMY_HORNET                  ; [$85a2] SpriteEntity
     db $45                                  ; [$85a3] undefined
 
@@ -1174,7 +1700,7 @@ SPRITE_INFO_FOREPAW_SCREEN_19:              ; [$85a2]
     db SPRITE_ENEMY_CHARRON
     db $9b,$ff,$ff                          ; [$85a7] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_20:              ; [$85aa]
+SPRITE_INFO_FOREPAW_SCREEN_19:              ; [$85aa]
     db SPRITE_ENEMY_BIHORUDA                ; [$85aa] SpriteEntity
     db $45                                  ; [$85ab] undefined
 
@@ -1184,7 +1710,7 @@ SPRITE_INFO_FOREPAW_SCREEN_20:              ; [$85aa]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $9b,$ff,$ff                          ; [$85af] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_21:              ; [$85b2]
+SPRITE_INFO_FOREPAW_SCREEN_20:              ; [$85b2]
     db SPRITE_ENEMY_BIHORUDA                ; [$85b2] SpriteEntity
     db $35                                  ; [$85b3] undefined
 
@@ -1194,7 +1720,7 @@ SPRITE_INFO_FOREPAW_SCREEN_21:              ; [$85b2]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $97,$ff,$ff                          ; [$85b7] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_22:              ; [$85ba]
+SPRITE_INFO_FOREPAW_SCREEN_21:              ; [$85ba]
     db SPRITE_ENEMY_BIHORUDA                ; [$85ba] SpriteEntity
     db $45                                  ; [$85bb] undefined
 
@@ -1204,14 +1730,14 @@ SPRITE_INFO_FOREPAW_SCREEN_22:              ; [$85ba]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $98,$ff,$ff                          ; [$85bf] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_23:              ; [$85c2]
+SPRITE_INFO_FOREPAW_SCREEN_22:              ; [$85c2]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$85c2] SpriteEntity
     db $98                                  ; [$85c3] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $77,$ff,$ff                          ; [$85c5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_24:              ; [$85c8]
+SPRITE_INFO_FOREPAW_SCREEN_23:              ; [$85c8]
     db SPRITE_ENEMY_HORNET                  ; [$85c8] SpriteEntity
     db $69                                  ; [$85c9] undefined
 
@@ -1221,7 +1747,7 @@ SPRITE_INFO_FOREPAW_SCREEN_24:              ; [$85c8]
     db SPRITE_ENEMY_RAIDEN
     db $a5,$ff,$ff                          ; [$85cd] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_25:              ; [$85d0]
+SPRITE_INFO_FOREPAW_SCREEN_24:              ; [$85d0]
     db SPRITE_ENEMY_HORNET                  ; [$85d0] SpriteEntity
     db $64                                  ; [$85d1] undefined
 
@@ -1231,21 +1757,21 @@ SPRITE_INFO_FOREPAW_SCREEN_25:              ; [$85d0]
     db SPRITE_ENEMY_RAIDEN
     db $87,$ff,$ff                          ; [$85d5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_26:              ; [$85d8]
+SPRITE_INFO_FOREPAW_SCREEN_25:              ; [$85d8]
     db SPRITE_ENEMY_YAREEKA                 ; [$85d8] SpriteEntity
     db $81                                  ; [$85d9] undefined
 
     db SPRITE_ENEMY_RAIDEN
     db $37,$ff,$ff                          ; [$85db] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_27:              ; [$85de]
+SPRITE_INFO_FOREPAW_SCREEN_26:              ; [$85de]
     db SPRITE_ENEMY_CHARRON                 ; [$85de] SpriteEntity
     db $61                                  ; [$85df] undefined
 
     db SPRITE_ENEMY_RAIDEN
     db $25,$ff,$ff                          ; [$85e1] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_28:              ; [$85e4]
+SPRITE_INFO_FOREPAW_SCREEN_27:              ; [$85e4]
     db SPRITE_OBJ_WING_BOOTS                ; [$85e4] SpriteEntity
     db $35                                  ; [$85e5] undefined
 
@@ -1255,42 +1781,42 @@ SPRITE_INFO_FOREPAW_SCREEN_28:              ; [$85e4]
     db SPRITE_ENEMY_IKEDA
     db $99,$ff,$ff                          ; [$85e9] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_29:              ; [$85ec]
+SPRITE_INFO_FOREPAW_SCREEN_28:              ; [$85ec]
     db SPRITE_ENEMY_IKEDA                   ; [$85ec] SpriteEntity
     db $84                                  ; [$85ed] undefined
 
     db SPRITE_ENEMY_IKEDA
     db $98,$ff,$ff                          ; [$85ef] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_30:              ; [$85f2]
+SPRITE_INFO_FOREPAW_SCREEN_29:              ; [$85f2]
     db SPRITE_ENEMY_CHARRON                 ; [$85f2] SpriteEntity
     db $44                                  ; [$85f3] undefined
 
     db SPRITE_ENEMY_YAREEKA
     db $89,$ff,$ff                          ; [$85f5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_31:              ; [$85f8]
+SPRITE_INFO_FOREPAW_SCREEN_30:              ; [$85f8]
     db SPRITE_OBJ_POISON                    ; [$85f8] SpriteEntity
     db $68                                  ; [$85f9] undefined
 
     db SPRITE_ENEMY_SUGATA
     db $99,$ff,$ff                          ; [$85fb] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_32:              ; [$85fe]
+SPRITE_INFO_FOREPAW_SCREEN_31:              ; [$85fe]
     db SPRITE_OBJ_POISON                    ; [$85fe] SpriteEntity
     db $a1                                  ; [$85ff] undefined
 
     db SPRITE_ENEMY_SUGATA
     db $95,$ff,$ff                          ; [$8601] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_33:              ; [$8604]
+SPRITE_INFO_FOREPAW_SCREEN_32:              ; [$8604]
     db SPRITE_ENEMY_YAREEKA                 ; [$8604] SpriteEntity
     db $39                                  ; [$8605] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $96,$ff,$ff                          ; [$8607] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_34:              ; [$860a]
+SPRITE_INFO_FOREPAW_SCREEN_33:              ; [$860a]
     db SPRITE_ENEMY_YAREEKA                 ; [$860a] SpriteEntity
     db $64                                  ; [$860b] undefined
 
@@ -1300,7 +1826,7 @@ SPRITE_INFO_FOREPAW_SCREEN_34:              ; [$860a]
     db SPRITE_ENEMY_GIANT_BEES
     db $5a,$ff,$ff                          ; [$860f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_35:              ; [$8612]
+SPRITE_INFO_FOREPAW_SCREEN_34:              ; [$8612]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8612] SpriteEntity
     db $4c                                  ; [$8613] undefined
 
@@ -1310,17 +1836,17 @@ SPRITE_INFO_FOREPAW_SCREEN_35:              ; [$8612]
     db SPRITE_ENEMY_HORNET
     db $5c,$ff,$ff                          ; [$8617] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_36_37:           ; [$861a]
+SPRITE_INFO_FOREPAW_SCREEN_35_36:           ; [$861a]
     db $ff,$ff                              ; [$861a] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_38:              ; [$861c]
+SPRITE_INFO_FOREPAW_SCREEN_37:              ; [$861c]
     db SPRITE_ENEMY_YAREEKA                 ; [$861c] SpriteEntity
     db $29                                  ; [$861d] undefined
 
     db SPRITE_ENEMY_YAREEKA
     db $85,$ff,$ff                          ; [$861f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_39:              ; [$8622]
+SPRITE_INFO_FOREPAW_SCREEN_38:              ; [$8622]
     db SPRITE_ENEMY_LAMPREY                 ; [$8622] SpriteEntity
     db $98                                  ; [$8623] undefined
 
@@ -1330,70 +1856,70 @@ SPRITE_INFO_FOREPAW_SCREEN_39:              ; [$8622]
     db SPRITE_ENEMY_GIANT_BEES
     db $5a,$ff,$ff                          ; [$8627] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_40:              ; [$862a]
+SPRITE_INFO_FOREPAW_SCREEN_39:              ; [$862a]
     db SPRITE_ENEMY_LAMPREY                 ; [$862a] SpriteEntity
     db $3a                                  ; [$862b] undefined
 
     db SPRITE_ENEMY_LAMPREY
     db $85,$ff,$ff                          ; [$862d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_41:              ; [$8630]
+SPRITE_INFO_FOREPAW_SCREEN_40:              ; [$8630]
     db SPRITE_ENEMY_CHARRON                 ; [$8630] SpriteEntity
     db $87                                  ; [$8631] undefined
 
     db SPRITE_ENEMY_LAMPREY
     db $2b,$ff,$ff                          ; [$8633] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_42:              ; [$8636]
+SPRITE_INFO_FOREPAW_SCREEN_41:              ; [$8636]
     db SPRITE_ENEMY_IKEDA                   ; [$8636] SpriteEntity
     db $7d                                  ; [$8637] undefined
 
     db SPRITE_ENEMY_IKEDA
     db $75,$ff,$ff                          ; [$8639] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_43:              ; [$863c]
+SPRITE_INFO_FOREPAW_SCREEN_42:              ; [$863c]
     db SPRITE_ENEMY_NASH                    ; [$863c] SpriteEntity
     db $1c                                  ; [$863d] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $7a,$ff,$ff                          ; [$863f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_44:              ; [$8642]
+SPRITE_INFO_FOREPAW_SCREEN_43:              ; [$8642]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8642] SpriteEntity
     db $99                                  ; [$8643] undefined
 
     db SPRITE_ENEMY_CHARRON
     db $4e,$ff,$ff                          ; [$8645] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_45:              ; [$8648]
+SPRITE_INFO_FOREPAW_SCREEN_44:              ; [$8648]
     db SPRITE_ENEMY_IKEDA                   ; [$8648] SpriteEntity
     db $6d                                  ; [$8649] undefined
 
     db SPRITE_ENEMY_IKEDA
     db $85,$ff,$ff                          ; [$864b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_46:              ; [$864e]
+SPRITE_INFO_FOREPAW_SCREEN_45:              ; [$864e]
     db SPRITE_ENEMY_YAREEKA                 ; [$864e] SpriteEntity
     db $82                                  ; [$864f] undefined
 
     db SPRITE_ENEMY_YAREEKA
     db $2b,$ff,$ff                          ; [$8651] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_47:              ; [$8654]
+SPRITE_INFO_FOREPAW_SCREEN_46:              ; [$8654]
     db SPRITE_ENEMY_CHARRON                 ; [$8654] SpriteEntity
     db $39                                  ; [$8655] undefined
 
     db SPRITE_ENEMY_LAMPREY
     db $9a,$ff,$ff                          ; [$8657] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_48:              ; [$865a]
+SPRITE_INFO_FOREPAW_SCREEN_47:              ; [$865a]
     db SPRITE_ENEMY_CHARRON                 ; [$865a] SpriteEntity
     db $25                                  ; [$865b] undefined
 
     db SPRITE_ENEMY_LAMPREY
     db $9a,$ff,$ff                          ; [$865d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_49:              ; [$8660]
+SPRITE_INFO_FOREPAW_SCREEN_48:              ; [$8660]
     db SPRITE_OBJ_HOUR_GLASS                ; [$8660] SpriteEntity
     db $32                                  ; [$8661] undefined
 
@@ -1403,7 +1929,7 @@ SPRITE_INFO_FOREPAW_SCREEN_49:              ; [$8660]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $a7,$ff,$ff                          ; [$8665] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_50:              ; [$8668]
+SPRITE_INFO_FOREPAW_SCREEN_49:              ; [$8668]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$8668] SpriteEntity
     db $97                                  ; [$8669] undefined
 
@@ -1413,7 +1939,7 @@ SPRITE_INFO_FOREPAW_SCREEN_50:              ; [$8668]
     db SPRITE_ENEMY_YUINARU
     db $8d,$ff,$ff                          ; [$866d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_51:              ; [$8670]
+SPRITE_INFO_FOREPAW_SCREEN_50:              ; [$8670]
     db SPRITE_OBJ_WING_BOOTS                ; [$8670] SpriteEntity
     db $48                                  ; [$8671] undefined
 
@@ -1426,11 +1952,11 @@ SPRITE_INFO_FOREPAW_SCREEN_51:              ; [$8670]
     db SPRITE_ENEMY_ZOZURA
     db $be,$ff,$ff                          ; [$8677] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_52:              ; [$867a]
+SPRITE_INFO_FOREPAW_SCREEN_51:              ; [$867a]
     db SPRITE_BOSS_RIPASHEIKU               ; [$867a] SpriteEntity
     db $59,$ff,$ff                          ; [$867b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_53:              ; [$867e]
+SPRITE_INFO_FOREPAW_SCREEN_52:              ; [$867e]
     db SPRITE_OBJ_PENDANT                   ; [$867e] SpriteEntity
     db $9e                                  ; [$867f] undefined
 
@@ -1440,35 +1966,35 @@ SPRITE_INFO_FOREPAW_SCREEN_53:              ; [$867e]
     db SCREEN_HAS_SPECIAL_EVENT
     db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
-SPRITE_INFO_FOREPAW_SCREEN_54:              ; [$8686]
+SPRITE_INFO_FOREPAW_SCREEN_53:              ; [$8686]
     db SPRITE_ENEMY_CHARRON                 ; [$8686] SpriteEntity
     db $ac                                  ; [$8687] undefined
 
     db SPRITE_BOSS_ROKUSUTAHN
     db $67,$ff,$ff                          ; [$8689] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_55:              ; [$868c]
+SPRITE_INFO_FOREPAW_SCREEN_54:              ; [$868c]
     db SPRITE_ENEMY_NECRON_AIDES            ; [$868c] SpriteEntity
     db $28                                  ; [$868d] undefined
 
     db SPRITE_BOSS_ROKUSUTAHN
     db $97,$ff,$ff                          ; [$868f] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_56:              ; [$8692]
+SPRITE_INFO_FOREPAW_SCREEN_55:              ; [$8692]
     db SPRITE_ENEMY_CHARRON                 ; [$8692] SpriteEntity
     db $52                                  ; [$8693] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $a7,$ff,$ff                          ; [$8695] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_57:              ; [$8698]
+SPRITE_INFO_FOREPAW_SCREEN_56:              ; [$8698]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$8698] SpriteEntity
     db $98                                  ; [$8699] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $33,$ff,$ff                          ; [$869b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_58:              ; [$869e]
+SPRITE_INFO_FOREPAW_SCREEN_57:              ; [$869e]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$869e] SpriteEntity
     db $98                                  ; [$869f] undefined
 
@@ -1478,35 +2004,35 @@ SPRITE_INFO_FOREPAW_SCREEN_58:              ; [$869e]
     db SPRITE_ENEMY_SIR_GAWAINE
     db $35,$ff,$ff                          ; [$86a3] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_59:              ; [$86a6]
+SPRITE_INFO_FOREPAW_SCREEN_58:              ; [$86a6]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$86a6] SpriteEntity
     db $98                                  ; [$86a7] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $35,$ff,$ff                          ; [$86a9] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_60:              ; [$86ac]
+SPRITE_INFO_FOREPAW_SCREEN_59:              ; [$86ac]
     db SPRITE_ENEMY_ZOZURA                  ; [$86ac] SpriteEntity
     db $54                                  ; [$86ad] undefined
 
     db SPRITE_BOSS_ROKUSUTAHN
     db $97,$ff,$ff                          ; [$86af] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_61:              ; [$86b2]
+SPRITE_INFO_FOREPAW_SCREEN_60:              ; [$86b2]
     db SPRITE_ENEMY_GRIMLOCK                ; [$86b2] SpriteEntity
     db $a6                                  ; [$86b3] undefined
 
     db SPRITE_ENEMY_ZOZURA
     db $53,$ff,$ff                          ; [$86b5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_62:              ; [$86b8]
+SPRITE_INFO_FOREPAW_SCREEN_61:              ; [$86b8]
     db SPRITE_ENEMY_IKEDA                   ; [$86b8] SpriteEntity
     db $4a                                  ; [$86b9] undefined
 
     db SPRITE_ENEMY_IKEDA
     db $a7,$ff,$ff                          ; [$86bb] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_63:              ; [$86be]
+SPRITE_INFO_FOREPAW_SCREEN_62:              ; [$86be]
     db SPRITE_ENEMY_SNOWMAN                 ; [$86be] SpriteEntity
     db $25                                  ; [$86bf] undefined
 
@@ -1516,22 +2042,22 @@ SPRITE_INFO_FOREPAW_SCREEN_63:              ; [$86be]
     db SPRITE_ENEMY_IKEDA
     db $98,$ff,$ff                          ; [$86c3] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_64:              ; [$86c6]
+SPRITE_INFO_FOREPAW_SCREEN_63:              ; [$86c6]
     db SPRITE_BOSS_RIPASHEIKU               ; [$86c6] SpriteEntity
     db $3a,$ff,$ff                          ; [$86c7] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_65:              ; [$86ca]
+SPRITE_INFO_FOREPAW_SCREEN_64:              ; [$86ca]
     db SPRITE_BOSS_ZORUGERIRU               ; [$86ca] SpriteEntity
     db $4c,$ff,$ff                          ; [$86cb] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_66:              ; [$86ce]
+SPRITE_INFO_FOREPAW_SCREEN_65:              ; [$86ce]
     db SPRITE_BOSS_ZORADOHNA                ; [$86ce] SpriteEntity
     db $67                                  ; [$86cf] undefined
 
     db SPRITE_OBJ_ELIXIR
     db $a1,$ff,$ff                          ; [$86d1] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_67:              ; [$86d4]
+SPRITE_INFO_FOREPAW_SCREEN_66:              ; [$86d4]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$86d4] SpriteEntity
     db $4a                                  ; [$86d5] undefined
 
@@ -1544,7 +2070,7 @@ SPRITE_INFO_FOREPAW_SCREEN_67:              ; [$86d4]
     db SPRITE_ENEMY_HORNET
     db $72,$ff,$ff                          ; [$86db] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_68:              ; [$86de]
+SPRITE_INFO_FOREPAW_SCREEN_67:              ; [$86de]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$86de] SpriteEntity
     db $3a                                  ; [$86df] undefined
 
@@ -1557,7 +2083,7 @@ SPRITE_INFO_FOREPAW_SCREEN_68:              ; [$86de]
     db SPRITE_ENEMY_HORNET
     db $a3,$ff,$ff                          ; [$86e5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_69:              ; [$86e8]
+SPRITE_INFO_FOREPAW_SCREEN_68:              ; [$86e8]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$86e8] SpriteEntity
     db $4a                                  ; [$86e9] undefined
 
@@ -1570,21 +2096,21 @@ SPRITE_INFO_FOREPAW_SCREEN_69:              ; [$86e8]
     db SPRITE_ENEMY_HORNET
     db $8b,$ff,$ff                          ; [$86ef] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_70:              ; [$86f2]
+SPRITE_INFO_FOREPAW_SCREEN_69:              ; [$86f2]
     db SPRITE_ENEMY_MASKMAN                 ; [$86f2] SpriteEntity
     db $a6                                  ; [$86f3] undefined
 
     db SPRITE_ENEMY_MASKMAN
     db $3c,$ff,$ff                          ; [$86f5] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_71:              ; [$86f8]
+SPRITE_INFO_FOREPAW_SCREEN_70:              ; [$86f8]
     db SPRITE_ENEMY_MASKMAN                 ; [$86f8] SpriteEntity
     db $35                                  ; [$86f9] undefined
 
     db SPRITE_ENEMY_MASKMAN
     db $3c,$ff,$ff                          ; [$86fb] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_72:              ; [$86fe]
+SPRITE_INFO_FOREPAW_SCREEN_71:              ; [$86fe]
     db SPRITE_OBJ_OINTMENT                  ; [$86fe] SpriteEntity
     db $42                                  ; [$86ff] undefined
 
@@ -1594,32 +2120,32 @@ SPRITE_INFO_FOREPAW_SCREEN_72:              ; [$86fe]
     db SPRITE_ENEMY_GERIBUTA
     db $ac,$ff,$ff                          ; [$8703] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_73:              ; [$8706]
+SPRITE_INFO_FOREPAW_SCREEN_72:              ; [$8706]
     db SPRITE_BOSS_RIPASHEIKU               ; [$8706] SpriteEntity
     db $3a,$ff,$ff                          ; [$8707] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_74:              ; [$870a]
+SPRITE_INFO_FOREPAW_SCREEN_73:              ; [$870a]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$870a] SpriteEntity
     db $9c                                  ; [$870b] undefined
 
     db SPRITE_ENEMY_RAIDEN
     db $a8,$ff,$ff                          ; [$870d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_75:              ; [$8710]
+SPRITE_INFO_FOREPAW_SCREEN_74:              ; [$8710]
     db SPRITE_ENEMY_GERIBUTA                ; [$8710] SpriteEntity
     db $39                                  ; [$8711] undefined
 
     db SPRITE_ENEMY_WOLFMAN
     db $ac,$ff,$ff                          ; [$8713] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_76:              ; [$8716]
+SPRITE_INFO_FOREPAW_SCREEN_75:              ; [$8716]
     db SPRITE_ENEMY_GERIBUTA                ; [$8716] SpriteEntity
     db $35                                  ; [$8717] undefined
 
     db SPRITE_ENEMY_WOLFMAN
     db $ab,$ff,$ff                          ; [$8719] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_77:              ; [$871c]
+SPRITE_INFO_FOREPAW_SCREEN_76:              ; [$871c]
     db SPRITE_OBJ_BLACK_ONYX                ; [$871c] SpriteEntity
     db $a4                                  ; [$871d] undefined
 
@@ -1629,28 +2155,28 @@ SPRITE_INFO_FOREPAW_SCREEN_77:              ; [$871c]
     db SCREEN_HAS_SPECIAL_EVENT
     db SCREEN_EVENT_BOSS                    ; CurrentScreen_SpecialEventID
 
-SPRITE_INFO_FOREPAW_SCREEN_78:              ; [$8724]
+SPRITE_INFO_FOREPAW_SCREEN_77:              ; [$8724]
     db SPRITE_OBJ_RED_POTION_2              ; [$8724] SpriteEntity
     db $31                                  ; [$8725] undefined
 
     db SPRITE_BOSS_ROKUSUTAHN
     db $9a,$ff,$ff                          ; [$8727] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_79:              ; [$872a]
+SPRITE_INFO_FOREPAW_SCREEN_78:              ; [$872a]
     db SPRITE_ENEMY_SUGATA                  ; [$872a] SpriteEntity
     db $a8                                  ; [$872b] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $a3,$ff,$ff                          ; [$872d] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_80:              ; [$8730]
+SPRITE_INFO_FOREPAW_SCREEN_79:              ; [$8730]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8730] SpriteEntity
     db $a6                                  ; [$8731] undefined
 
     db SPRITE_ENEMY_SUGATA
     db $38,$ff,$ff                          ; [$8733] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_81:              ; [$8736]
+SPRITE_INFO_FOREPAW_SCREEN_80:              ; [$8736]
     db SPRITE_OBJ_RED_POTION                ; [$8736] SpriteEntity
     db $31                                  ; [$8737] undefined
 
@@ -1660,14 +2186,14 @@ SPRITE_INFO_FOREPAW_SCREEN_81:              ; [$8736]
     db SPRITE_ENEMY_ISHIISU
     db $aa,$ff,$ff                          ; [$873b] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_82:              ; [$873e]
+SPRITE_INFO_FOREPAW_SCREEN_81:              ; [$873e]
     db SPRITE_ENEMY_FIRE_GIANT              ; [$873e] SpriteEntity
     db $36                                  ; [$873f] undefined
 
     db SPRITE_ENEMY_ISHIISU
     db $ab,$ff,$ff                          ; [$8741] undefined
 
-SPRITE_INFO_FOREPAW_SCREEN_83:              ; [$8744]
+SPRITE_INFO_FOREPAW_SCREEN_82:              ; [$8744]
     db SPRITE_ENEMY_FIRE_GIANT              ; [$8744] SpriteEntity
     db $37                                  ; [$8745] undefined
 
@@ -1679,124 +2205,124 @@ SPRITE_INFO_FOREPAW_SCREEN_83:              ; [$8744]
 ; Conflate Sprite Information
 ;============================================================================
 SPRITE_INFO_CONFLATE:                       ; [$874a]
-    dw $879a                                ; SPRITE_INFO_CONFLATE_SCREEN_0
+    dw SPRITE_INFO_CONFLATE_SCREEN_00       ; SPRITE_INFO_CONFLATE_SCREEN_00
                                             ; [$PRG11::874a]
-    dw $87a0                                ; SPRITE_INFO_CONFLATE_SCREEN+1
+    dw SPRITE_INFO_CONFLATE_SCREEN_01       ; SPRITE_INFO_CONFLATE_SCREEN_01
                                             ; [$PRG11::874c]
-    dw $87a6                                ; SPRITE_INFO_CONFLATE_SCREEN_2
+    dw SPRITE_INFO_CONFLATE_SCREEN_02       ; SPRITE_INFO_CONFLATE_SCREEN_02
                                             ; [$PRG11::874e]
-    dw $87ac                                ; SPRITE_INFO_CONFLATE_SCREEN_3
+    dw SPRITE_INFO_CONFLATE_SCREEN_03       ; SPRITE_INFO_CONFLATE_SCREEN_03
                                             ; [$PRG11::8750]
-    dw $87b0                                ; SPRITE_INFO_CONFLATE_SCREEN_4
+    dw SPRITE_INFO_CONFLATE_SCREEN_04       ; SPRITE_INFO_CONFLATE_SCREEN_04
                                             ; [$PRG11::8752]
-    dw $87b6                                ; SPRITE_INFO_CONFLATE_SCREEN_5
+    dw SPRITE_INFO_CONFLATE_SCREEN_05       ; SPRITE_INFO_CONFLATE_SCREEN_05
                                             ; [$PRG11::8754]
-    dw $87be                                ; SPRITE_INFO_CONFLATE_SCREEN_6
+    dw SPRITE_INFO_CONFLATE_SCREEN_06       ; SPRITE_INFO_CONFLATE_SCREEN_06
                                             ; [$PRG11::8756]
-    dw $87c2                                ; SPRITE_INFO_CONFLATE_SCREEN_7
+    dw SPRITE_INFO_CONFLATE_SCREEN_07       ; SPRITE_INFO_CONFLATE_SCREEN_07
                                             ; [$PRG11::8758]
-    dw $87ca                                ; SPRITE_INFO_CONFLATE_SCREEN_8
+    dw SPRITE_INFO_CONFLATE_SCREEN_08       ; SPRITE_INFO_CONFLATE_SCREEN_08
                                             ; [$PRG11::875a]
-    dw $87d2                                ; SPRITE_INFO_CONFLATE_SCREEN_9
+    dw SPRITE_INFO_CONFLATE_SCREEN_09       ; SPRITE_INFO_CONFLATE_SCREEN_09
                                             ; [$PRG11::875c]
-    dw $87da                                ; SPRITE_INFO_CONFLATE_SCREEN_10
+    dw SPRITE_INFO_CONFLATE_SCREEN_10       ; SPRITE_INFO_CONFLATE_SCREEN_10
                                             ; [$PRG11::875e]
-    dw $87de                                ; SPRITE_INFO_CONFLATE_SCREEN_11
+    dw SPRITE_INFO_CONFLATE_SCREEN_11       ; SPRITE_INFO_CONFLATE_SCREEN_11
                                             ; [$PRG11::8760]
-    dw $87e6                                ; SPRITE_INFO_CONFLATE_SCREEN_12
+    dw SPRITE_INFO_CONFLATE_SCREEN_12       ; SPRITE_INFO_CONFLATE_SCREEN_12
                                             ; [$PRG11::8762]
-    dw $87ea                                ; SPRITE_INFO_CONFLATE_SCREEN_13
+    dw SPRITE_INFO_CONFLATE_SCREEN_13       ; SPRITE_INFO_CONFLATE_SCREEN_13
                                             ; [$PRG11::8764]
-    dw $87f0                                ; SPRITE_INFO_CONFLATE_SCREEN_14
+    dw SPRITE_INFO_CONFLATE_SCREEN_14       ; SPRITE_INFO_CONFLATE_SCREEN_14
                                             ; [$PRG11::8766]
-    dw $87f4                                ; SPRITE_INFO_CONFLATE_SCREEN_15
+    dw SPRITE_INFO_CONFLATE_SCREEN_15       ; SPRITE_INFO_CONFLATE_SCREEN_15
                                             ; [$PRG11::8768]
-    dw $87f8                                ; SPRITE_INFO_CONFLATE_SCREEN_16
+    dw SPRITE_INFO_CONFLATE_SCREEN_16       ; SPRITE_INFO_CONFLATE_SCREEN_16
                                             ; [$PRG11::876a]
-    dw $8800                                ; SPRITE_INFO_CONFLATE_SCREEN_17
+    dw SPRITE_INFO_CONFLATE_SCREEN_17       ; SPRITE_INFO_CONFLATE_SCREEN_17
                                             ; [$PRG11::876c]
-    dw $8808                                ; SPRITE_INFO_CONFLATE_SCREEN_18
+    dw SPRITE_INFO_CONFLATE_SCREEN_18       ; SPRITE_INFO_CONFLATE_SCREEN_18
                                             ; [$PRG11::876e]
-    dw $880e                                ; SPRITE_INFO_CONFLATE_SCREEN_19
+    dw SPRITE_INFO_CONFLATE_SCREEN_19       ; SPRITE_INFO_CONFLATE_SCREEN_19
                                             ; [$PRG11::8770]
-    dw $8812                                ; SPRITE_INFO_CONFLATE_SCREEN_20
+    dw SPRITE_INFO_CONFLATE_SCREEN_20       ; SPRITE_INFO_CONFLATE_SCREEN_20
                                             ; [$PRG11::8772]
-    dw $881a                                ; SPRITE_INFO_CONFLATE_SCREEN_21
+    dw SPRITE_INFO_CONFLATE_SCREEN_21       ; SPRITE_INFO_CONFLATE_SCREEN_21
                                             ; [$PRG11::8774]
-    dw $8820                                ; SPRITE_INFO_CONFLATE_SCREEN_22
+    dw SPRITE_INFO_CONFLATE_SCREEN_22       ; SPRITE_INFO_CONFLATE_SCREEN_22
                                             ; [$PRG11::8776]
-    dw $8826                                ; SPRITE_INFO_CONFLATE_SCREEN_23
+    dw SPRITE_INFO_CONFLATE_SCREEN_23       ; SPRITE_INFO_CONFLATE_SCREEN_23
                                             ; [$PRG11::8778]
-    dw $882e                                ; SPRITE_INFO_CONFLATE_SCREEN_24
+    dw SPRITE_INFO_CONFLATE_SCREEN_24       ; SPRITE_INFO_CONFLATE_SCREEN_24
                                             ; [$PRG11::877a]
-    dw $8836                                ; SPRITE_INFO_CONFLATE_SCREEN_25
+    dw SPRITE_INFO_CONFLATE_SCREEN_25       ; SPRITE_INFO_CONFLATE_SCREEN_25
                                             ; [$PRG11::877c]
-    dw $883c                                ; SPRITE_INFO_CONFLATE_SCREEN_26
+    dw SPRITE_INFO_CONFLATE_SCREEN_26       ; SPRITE_INFO_CONFLATE_SCREEN_26
                                             ; [$PRG11::877e]
-    dw $8842                                ; SPRITE_INFO_CONFLATE_SCREEN_27
+    dw SPRITE_INFO_CONFLATE_SCREEN_27       ; SPRITE_INFO_CONFLATE_SCREEN_27
                                             ; [$PRG11::8780]
-    dw $8848                                ; SPRITE_INFO_CONFLATE_SCREEN_28
+    dw SPRITE_INFO_CONFLATE_SCREEN_28       ; SPRITE_INFO_CONFLATE_SCREEN_28
                                             ; [$PRG11::8782]
-    dw $8850                                ; SPRITE_INFO_CONFLATE_SCREEN_29
+    dw SPRITE_INFO_CONFLATE_SCREEN_29       ; SPRITE_INFO_CONFLATE_SCREEN_29
                                             ; [$PRG11::8784]
-    dw $8858                                ; SPRITE_INFO_CONFLATE_SCREEN_30
+    dw SPRITE_INFO_CONFLATE_SCREEN_30       ; SPRITE_INFO_CONFLATE_SCREEN_30
                                             ; [$PRG11::8786]
-    dw $8862                                ; SPRITE_INFO_CONFLATE_SCREEN_31
+    dw SPRITE_INFO_CONFLATE_SCREEN_31       ; SPRITE_INFO_CONFLATE_SCREEN_31
                                             ; [$PRG11::8788]
-    dw $8866                                ; SPRITE_INFO_CONFLATE_SCREEN_32
+    dw SPRITE_INFO_CONFLATE_SCREEN_32       ; SPRITE_INFO_CONFLATE_SCREEN_32
                                             ; [$PRG11::878a]
-    dw $886e                                ; SPRITE_INFO_CONFLATE_SCREEN_33
+    dw SPRITE_INFO_CONFLATE_SCREEN_33       ; SPRITE_INFO_CONFLATE_SCREEN_33
                                             ; [$PRG11::878c]
-    dw $8876                                ; SPRITE_INFO_CONFLATE_SCREEN_34
+    dw SPRITE_INFO_CONFLATE_SCREEN_34       ; SPRITE_INFO_CONFLATE_SCREEN_34
                                             ; [$PRG11::878e]
-    dw $887e                                ; SPRITE_INFO_CONFLATE_SCREEN_35
+    dw SPRITE_INFO_CONFLATE_SCREEN_35       ; SPRITE_INFO_CONFLATE_SCREEN_35
                                             ; [$PRG11::8790]
-    dw $8884                                ; SPRITE_INFO_CONFLATE_SCREEN_36
+    dw SPRITE_INFO_CONFLATE_SCREEN_36       ; SPRITE_INFO_CONFLATE_SCREEN_36
                                             ; [$PRG11::8792]
-    dw $888e                                ; SPRITE_INFO_CONFLATE_SCREEN_37
+    dw SPRITE_INFO_CONFLATE_SCREEN_37       ; SPRITE_INFO_CONFLATE_SCREEN_37
                                             ; [$PRG11::8794]
-    dw $8896                                ; SPRITE_INFO_CONFLATE_SCREEN_38
+    dw SPRITE_INFO_CONFLATE_SCREEN_38       ; SPRITE_INFO_CONFLATE_SCREEN_38
                                             ; [$PRG11::8796]
-    dw $889c                                ; SPRITE_INFO_CONFLATE_SCREEN_39
+    dw SPRITE_INFO_CONFLATE_SCREEN_39       ; SPRITE_INFO_CONFLATE_SCREEN_39
                                             ; [$PRG11::8798]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_CONFLATE [$PRG11::874a]
 ;
-SPRITE_INFO_CONFLATE_SCREEN_0:              ; [$879a]
+SPRITE_INFO_CONFLATE_SCREEN_00:             ; [$879a]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$879a] SpriteEntity
     db $aa                                  ; [$879b] undefined
 
     db SPRITE_ENEMY_YUINARU
     db $55,$ff,$ff                          ; [$879d] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_1:              ; [$87a0]
+SPRITE_INFO_CONFLATE_SCREEN_01:             ; [$87a0]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$87a0] SpriteEntity
     db $8d                                  ; [$87a1] undefined
 
     db SPRITE_ENEMY_YUINARU
     db $65,$ff,$ff                          ; [$87a3] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_2:              ; [$87a6]
+SPRITE_INFO_CONFLATE_SCREEN_02:             ; [$87a6]
     db SPRITE_ENEMY_MASKMAN                 ; [$87a6] SpriteEntity
     db $76                                  ; [$87a7] undefined
 
     db SPRITE_ENEMY_MASKMAN
     db $8b,$ff,$ff                          ; [$87a9] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_3:              ; [$87ac]
+SPRITE_INFO_CONFLATE_SCREEN_03:             ; [$87ac]
     db SPRITE_ENEMY_TAMAZUTSU               ; [$87ac] SpriteEntity
     db $58,$ff,$ff                          ; [$87ad] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_4:              ; [$87b0]
+SPRITE_INFO_CONFLATE_SCREEN_04:             ; [$87b0]
     db SPRITE_OBJ_OINTMENT                  ; [$87b0] SpriteEntity
     db $4d                                  ; [$87b1] undefined
 
     db SPRITE_ENEMY_MASKMAN
     db $5a,$ff,$ff                          ; [$87b3] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_5:              ; [$87b6]
+SPRITE_INFO_CONFLATE_SCREEN_05:             ; [$87b6]
     db SPRITE_ENEMY_NECRON_AIDES            ; [$87b6] SpriteEntity
     db $37                                  ; [$87b7] undefined
 
@@ -1806,11 +2332,11 @@ SPRITE_INFO_CONFLATE_SCREEN_5:              ; [$87b6]
     db SPRITE_ENEMY_YUINARU
     db $1d,$ff,$ff                          ; [$87bb] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_6:              ; [$87be]
+SPRITE_INFO_CONFLATE_SCREEN_06:             ; [$87be]
     db SPRITE_ENEMY_LAMPREY                 ; [$87be] SpriteEntity
     db $44,$ff,$ff                          ; [$87bf] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_7:              ; [$87c2]
+SPRITE_INFO_CONFLATE_SCREEN_07:             ; [$87c2]
     db SPRITE_OBJ_BATTLE_HELMET             ; [$87c2] SpriteEntity
     db $a4                                  ; [$87c3] undefined
 
@@ -1820,7 +2346,7 @@ SPRITE_INFO_CONFLATE_SCREEN_7:              ; [$87c2]
     db SCREEN_HAS_SPECIAL_EVENT
     db SCREEN_EVENT_BOSS                    ; [$87c9] ScreenEventID
 
-SPRITE_INFO_CONFLATE_SCREEN_8:              ; [$87ca]
+SPRITE_INFO_CONFLATE_SCREEN_08:             ; [$87ca]
     db SPRITE_OBJ_GLOVE                     ; [$87ca] SpriteEntity
     db $4e                                  ; [$87cb] undefined
 
@@ -1830,7 +2356,7 @@ SPRITE_INFO_CONFLATE_SCREEN_8:              ; [$87ca]
     db SPRITE_ENEMY_GRIMLOCK
     db $3b,$ff,$ff                          ; [$87cf] undefined
 
-SPRITE_INFO_CONFLATE_SCREEN_9:              ; [$87d2]
+SPRITE_INFO_CONFLATE_SCREEN_09:             ; [$87d2]
     db SPRITE_ENEMY_LAMPREY                 ; [$87d2] SpriteEntity
     db $64                                  ; [$87d3] undefined
 
@@ -2085,97 +2611,97 @@ SPRITE_INFO_CONFLATE_SCREEN_39:             ; [$889c]
 ; Daybreak Sprite Information
 ;============================================================================
 SPRITE_INFO_DAYBREAK:                       ; [$88a2]
-    dw $88e2                                ; SPRITE_INFO_DAYBREAK_SCREEN_0
+    dw SPRITE_INFO_DAYBREAK_SCREEN_00       ; SPRITE_INFO_DAYBREAK_SCREEN_00
                                             ; [$PRG11::88a2]
-    dw $88e8                                ; SPRITE_INFO_DAYBREAK_SCREEN+1
+    dw SPRITE_INFO_DAYBREAK_SCREEN_01       ; SPRITE_INFO_DAYBREAK_SCREEN_01
                                             ; [$PRG11::88a4]
-    dw $88ee                                ; SPRITE_INFO_DAYBREAK_SCREEN_2
+    dw SPRITE_INFO_DAYBREAK_SCREEN_02       ; SPRITE_INFO_DAYBREAK_SCREEN_02
                                             ; [$PRG11::88a6]
-    dw $88f4                                ; SPRITE_INFO_DAYBREAK_SCREEN_3
+    dw SPRITE_INFO_DAYBREAK_SCREEN_03       ; SPRITE_INFO_DAYBREAK_SCREEN_03
                                             ; [$PRG11::88a8]
-    dw $88fc                                ; SPRITE_INFO_DAYBREAK_SCREEN_4
+    dw SPRITE_INFO_DAYBREAK_SCREEN_04       ; SPRITE_INFO_DAYBREAK_SCREEN_04
                                             ; [$PRG11::88aa]
-    dw $8904                                ; SPRITE_INFO_DAYBREAK_SCREEN_5
+    dw SPRITE_INFO_DAYBREAK_SCREEN_05       ; SPRITE_INFO_DAYBREAK_SCREEN_05
                                             ; [$PRG11::88ac]
-    dw $890a                                ; SPRITE_INFO_DAYBREAK_SCREEN_6
+    dw SPRITE_INFO_DAYBREAK_SCREEN_06       ; SPRITE_INFO_DAYBREAK_SCREEN_06
                                             ; [$PRG11::88ae]
-    dw $8910                                ; SPRITE_INFO_DAYBREAK_SCREEN_7
+    dw SPRITE_INFO_DAYBREAK_SCREEN_07       ; SPRITE_INFO_DAYBREAK_SCREEN_07
                                             ; [$PRG11::88b0]
-    dw $8918                                ; SPRITE_INFO_DAYBREAK_SCREEN_8
+    dw SPRITE_INFO_DAYBREAK_SCREEN_08       ; SPRITE_INFO_DAYBREAK_SCREEN_08
                                             ; [$PRG11::88b2]
-    dw $8920                                ; SPRITE_INFO_DAYBREAK_SCREEN_9
+    dw SPRITE_INFO_DAYBREAK_SCREEN_09       ; SPRITE_INFO_DAYBREAK_SCREEN_09
                                             ; [$PRG11::88b4]
-    dw $8928                                ; SPRITE_INFO_DAYBREAK_SCREEN_10
+    dw SPRITE_INFO_DAYBREAK_SCREEN_10       ; SPRITE_INFO_DAYBREAK_SCREEN_10
                                             ; [$PRG11::88b6]
-    dw $8930                                ; SPRITE_INFO_DAYBREAK_SCREEN_11
+    dw SPRITE_INFO_DAYBREAK_SCREEN_11       ; SPRITE_INFO_DAYBREAK_SCREEN_11
                                             ; [$PRG11::88b8]
-    dw $8938                                ; SPRITE_INFO_DAYBREAK_SCREEN_12
+    dw SPRITE_INFO_DAYBREAK_SCREEN_12       ; SPRITE_INFO_DAYBREAK_SCREEN_12
                                             ; [$PRG11::88ba]
-    dw $893e                                ; SPRITE_INFO_DAYBREAK_SCREEN_13
+    dw SPRITE_INFO_DAYBREAK_SCREEN_13       ; SPRITE_INFO_DAYBREAK_SCREEN_13
                                             ; [$PRG11::88bc]
-    dw $8944                                ; SPRITE_INFO_DAYBREAK_SCREEN_14
+    dw SPRITE_INFO_DAYBREAK_SCREEN_14       ; SPRITE_INFO_DAYBREAK_SCREEN_14
                                             ; [$PRG11::88be]
-    dw $894c                                ; SPRITE_INFO_DAYBREAK_SCREEN_15
+    dw SPRITE_INFO_DAYBREAK_SCREEN_15       ; SPRITE_INFO_DAYBREAK_SCREEN_15
                                             ; [$PRG11::88c0]
-    dw $8952                                ; SPRITE_INFO_DAYBREAK_SCREEN_16
+    dw SPRITE_INFO_DAYBREAK_SCREEN_16       ; SPRITE_INFO_DAYBREAK_SCREEN_16
                                             ; [$PRG11::88c2]
-    dw $895a                                ; SPRITE_INFO_DAYBREAK_SCREEN_17
+    dw SPRITE_INFO_DAYBREAK_SCREEN_17       ; SPRITE_INFO_DAYBREAK_SCREEN_17
                                             ; [$PRG11::88c4]
-    dw $8964                                ; SPRITE_INFO_DAYBREAK_SCREEN_18
+    dw SPRITE_INFO_DAYBREAK_SCREEN_18       ; SPRITE_INFO_DAYBREAK_SCREEN_18
                                             ; [$PRG11::88c6]
-    dw $896a                                ; SPRITE_INFO_DAYBREAK_SCREEN_19
+    dw SPRITE_INFO_DAYBREAK_SCREEN_19       ; SPRITE_INFO_DAYBREAK_SCREEN_19
                                             ; [$PRG11::88c8]
-    dw $8972                                ; SPRITE_INFO_DAYBREAK_SCREEN_20
+    dw SPRITE_INFO_DAYBREAK_SCREEN_20       ; SPRITE_INFO_DAYBREAK_SCREEN_20
                                             ; [$PRG11::88ca]
-    dw $8978                                ; SPRITE_INFO_DAYBREAK_SCREEN_21
+    dw SPRITE_INFO_DAYBREAK_SCREEN_21       ; SPRITE_INFO_DAYBREAK_SCREEN_21
                                             ; [$PRG11::88cc]
-    dw $8980                                ; SPRITE_INFO_DAYBREAK_SCREEN_22
+    dw SPRITE_INFO_DAYBREAK_SCREEN_22       ; SPRITE_INFO_DAYBREAK_SCREEN_22
                                             ; [$PRG11::88ce]
-    dw $8984                                ; SPRITE_INFO_DAYBREAK_SCREEN_23
+    dw SPRITE_INFO_DAYBREAK_SCREEN_23       ; SPRITE_INFO_DAYBREAK_SCREEN_23
                                             ; [$PRG11::88d0]
-    dw $898a                                ; SPRITE_INFO_DAYBREAK_SCREEN_24
+    dw SPRITE_INFO_DAYBREAK_SCREEN_24       ; SPRITE_INFO_DAYBREAK_SCREEN_24
                                             ; [$PRG11::88d2]
-    dw $8990                                ; SPRITE_INFO_DAYBREAK_SCREEN_25
+    dw SPRITE_INFO_DAYBREAK_SCREEN_25       ; SPRITE_INFO_DAYBREAK_SCREEN_25
                                             ; [$PRG11::88d4]
-    dw $8996                                ; SPRITE_INFO_DAYBREAK_SCREEN_26
+    dw SPRITE_INFO_DAYBREAK_SCREEN_26       ; SPRITE_INFO_DAYBREAK_SCREEN_26
                                             ; [$PRG11::88d6]
-    dw $899c                                ; SPRITE_INFO_DAYBREAK_SCREEN_27
+    dw SPRITE_INFO_DAYBREAK_SCREEN_27       ; SPRITE_INFO_DAYBREAK_SCREEN_27
                                             ; [$PRG11::88d8]
-    dw $89a6                                ; SPRITE_INFO_DAYBREAK_SCREEN_28
+    dw SPRITE_INFO_DAYBREAK_SCREEN_28       ; SPRITE_INFO_DAYBREAK_SCREEN_28
                                             ; [$PRG11::88da]
-    dw $89ac                                ; SPRITE_INFO_DAYBREAK_SCREEN_29
+    dw SPRITE_INFO_DAYBREAK_SCREEN_29       ; SPRITE_INFO_DAYBREAK_SCREEN_29
                                             ; [$PRG11::88dc]
-    dw $89b4                                ; SPRITE_INFO_DAYBREAK_SCREEN_30
+    dw SPRITE_INFO_DAYBREAK_SCREEN_30       ; SPRITE_INFO_DAYBREAK_SCREEN_30
                                             ; [$PRG11::88de]
-    dw $89b8                                ; SPRITE_INFO_DAYBREAK_SCREEN_31
+    dw SPRITE_INFO_DAYBREAK_SCREEN_31       ; SPRITE_INFO_DAYBREAK_SCREEN_31
                                             ; [$PRG11::88e0]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_DAYBREAK [$PRG11::88a2]
 ;
-SPRITE_INFO_DAYBREAK_SCREEN_0:              ; [$88e2]
+SPRITE_INFO_DAYBREAK_SCREEN_00:             ; [$88e2]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$88e2] SpriteEntity
     db $a4                                  ; [$88e3] undefined
 
     db SPRITE_ENEMY_GIANT_STRIDER
     db $47,$ff,$ff                          ; [$88e5] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_1:              ; [$88e8]
+SPRITE_INFO_DAYBREAK_SCREEN_01:             ; [$88e8]
     db SPRITE_ENEMY_SNOWMAN                 ; [$88e8] SpriteEntity
     db $48                                  ; [$88e9] undefined
 
     db SPRITE_ENEMY_GIANT_STRIDER
     db $a4,$ff,$ff                          ; [$88eb] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_2:              ; [$88ee]
+SPRITE_INFO_DAYBREAK_SCREEN_02:             ; [$88ee]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$88ee] SpriteEntity
     db $49                                  ; [$88ef] undefined
 
     db SPRITE_ENEMY_MASKMAN
     db $a5,$ff,$ff                          ; [$88f1] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_3:              ; [$88f4]
+SPRITE_INFO_DAYBREAK_SCREEN_03:             ; [$88f4]
     db SPRITE_ENEMY_LAMPREY                 ; [$88f4] SpriteEntity
     db $aa                                  ; [$88f5] undefined
 
@@ -2185,7 +2711,7 @@ SPRITE_INFO_DAYBREAK_SCREEN_3:              ; [$88f4]
     db SPRITE_ENEMY_YUINARU
     db $58,$ff,$ff                          ; [$88f9] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_4:              ; [$88fc]
+SPRITE_INFO_DAYBREAK_SCREEN_04:             ; [$88fc]
     db SPRITE_OBJ_HOUR_GLASS                ; [$88fc] SpriteEntity
     db $5e                                  ; [$88fd] undefined
 
@@ -2195,21 +2721,21 @@ SPRITE_INFO_DAYBREAK_SCREEN_4:              ; [$88fc]
     db SPRITE_ENEMY_WOLFMAN
     db $43,$ff,$ff                          ; [$8901] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_5:              ; [$8904]
+SPRITE_INFO_DAYBREAK_SCREEN_05:             ; [$8904]
     db SPRITE_ENEMY_WOLFMAN                 ; [$8904] SpriteEntity
     db $45                                  ; [$8905] undefined
 
     db SPRITE_ENEMY_WOLFMAN
     db $99,$ff,$ff                          ; [$8907] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_6:              ; [$890a]
+SPRITE_INFO_DAYBREAK_SCREEN_06:             ; [$890a]
     db SPRITE_ENEMY_GIANT_STRIDER           ; [$890a] SpriteEntity
     db $98                                  ; [$890b] undefined
 
     db SPRITE_ENEMY_SIR_GAWAINE
     db $4c,$ff,$ff                          ; [$890d] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_7:              ; [$8910]
+SPRITE_INFO_DAYBREAK_SCREEN_07:             ; [$8910]
     db SPRITE_ENEMY_HORNET                  ; [$8910] SpriteEntity
     db $48                                  ; [$8911] undefined
 
@@ -2219,7 +2745,7 @@ SPRITE_INFO_DAYBREAK_SCREEN_7:              ; [$8910]
     db SPRITE_BOSS_ROKUSUTAHN
     db $98,$ff,$ff                          ; [$8915] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_8:              ; [$8918]
+SPRITE_INFO_DAYBREAK_SCREEN_08:             ; [$8918]
     db SPRITE_BOSS_ROKUSUTAHN               ; [$8918] SpriteEntity
     db $98                                  ; [$8919] undefined
 
@@ -2229,7 +2755,7 @@ SPRITE_INFO_DAYBREAK_SCREEN_8:              ; [$8918]
     db SPRITE_ENEMY_HORNET
     db $78,$ff,$ff                          ; [$891d] undefined
 
-SPRITE_INFO_DAYBREAK_SCREEN_9:              ; [$8920]
+SPRITE_INFO_DAYBREAK_SCREEN_09:             ; [$8920]
     db SPRITE_ENEMY_SIR_GAWAINE             ; [$8920] SpriteEntity
     db $16                                  ; [$8921] undefined
 
@@ -2422,63 +2948,63 @@ SPRITE_INFO_DAYBREAK_SCREEN_31:             ; [$89b8]
 ; Zenis Sprite Information
 ;============================================================================
 SPRITE_INFO_ZENIS:                          ; [$89bc]
-    dw $89e4                                ; SPRITE_INFO_ZENIS_SCREEN_0
+    dw SPRITE_INFO_ZENIS_SCREEN_00          ; SPRITE_INFO_ZENIS_SCREEN_00
                                             ; [$PRG11::89bc]
-    dw $89ea                                ; SPRITE_INFO_ZENIS_SCREEN+1
+    dw SPRITE_INFO_ZENIS_SCREEN_01          ; SPRITE_INFO_ZENIS_SCREEN_01
                                             ; [$PRG11::89be]
-    dw $89f0                                ; SPRITE_INFO_ZENIS_SCREEN_2
+    dw SPRITE_INFO_ZENIS_SCREEN_02          ; SPRITE_INFO_ZENIS_SCREEN_02
                                             ; [$PRG11::89c0]
-    dw $89f8                                ; SPRITE_INFO_ZENIS_SCREEN_3
+    dw SPRITE_INFO_ZENIS_SCREEN_03          ; SPRITE_INFO_ZENIS_SCREEN_03
                                             ; [$PRG11::89c2]
-    dw $8a00                                ; SPRITE_INFO_ZENIS_SCREEN_4
+    dw SPRITE_INFO_ZENIS_SCREEN_04          ; SPRITE_INFO_ZENIS_SCREEN_04
                                             ; [$PRG11::89c4]
-    dw $8a04                                ; SPRITE_INFO_ZENIS_SCREEN_5
+    dw SPRITE_INFO_ZENIS_SCREEN_05          ; SPRITE_INFO_ZENIS_SCREEN_05
                                             ; [$PRG11::89c6]
-    dw $8a08                                ; SPRITE_INFO_ZENIS_SCREEN_6
+    dw SPRITE_INFO_ZENIS_SCREEN_06          ; SPRITE_INFO_ZENIS_SCREEN_06
                                             ; [$PRG11::89c8]
-    dw $8a14                                ; SPRITE_INFO_ZENIS_SCREEN_7
+    dw SPRITE_INFO_ZENIS_SCREEN_07          ; SPRITE_INFO_ZENIS_SCREEN_07
                                             ; [$PRG11::89ca]
-    dw $8a18                                ; SPRITE_INFO_ZENIS_SCREEN_8
+    dw SPRITE_INFO_ZENIS_SCREEN_08          ; SPRITE_INFO_ZENIS_SCREEN_08
                                             ; [$PRG11::89cc]
-    dw $8a1a                                ; SPRITE_INFO_ZENIS_SCREEN_9
+    dw SPRITE_INFO_ZENIS_SCREEN_09          ; SPRITE_INFO_ZENIS_SCREEN_09
                                             ; [$PRG11::89ce]
-    dw $8a24                                ; SPRITE_INFO_ZENIS_SCREEN_10
+    dw SPRITE_INFO_ZENIS_SCREEN_10          ; SPRITE_INFO_ZENIS_SCREEN_10
                                             ; [$PRG11::89d0]
-    dw $8a30                                ; SPRITE_INFO_ZENIS_SCREEN_11
+    dw SPRITE_INFO_ZENIS_SCREEN_11          ; SPRITE_INFO_ZENIS_SCREEN_11
                                             ; [$PRG11::89d2]
-    dw $8a34                                ; SPRITE_INFO_ZENIS_SCREEN_12
+    dw SPRITE_INFO_ZENIS_SCREEN_12          ; SPRITE_INFO_ZENIS_SCREEN_12
                                             ; [$PRG11::89d4]
-    dw $8a38                                ; SPRITE_INFO_ZENIS_SCREEN_13
+    dw SPRITE_INFO_ZENIS_SCREEN_13          ; SPRITE_INFO_ZENIS_SCREEN_13
                                             ; [$PRG11::89d6]
-    dw $8a42                                ; SPRITE_INFO_ZENIS_SCREEN_14
+    dw SPRITE_INFO_ZENIS_SCREEN_14          ; SPRITE_INFO_ZENIS_SCREEN_14
                                             ; [$PRG11::89d8]
-    dw $8a4a                                ; SPRITE_INFO_ZENIS_SCREEN_15
+    dw SPRITE_INFO_ZENIS_SCREEN_15          ; SPRITE_INFO_ZENIS_SCREEN_15
                                             ; [$PRG11::89da]
-    dw $8a52                                ; SPRITE_INFO_ZENIS_SCREEN_16
+    dw SPRITE_INFO_ZENIS_SCREEN_16          ; SPRITE_INFO_ZENIS_SCREEN_16
                                             ; [$PRG11::89dc]
-    dw $8a5c                                ; SPRITE_INFO_ZENIS_SCREEN_17
+    dw SPRITE_INFO_ZENIS_SCREEN_17          ; SPRITE_INFO_ZENIS_SCREEN_17
                                             ; [$PRG11::89de]
-    dw $8a66                                ; SPRITE_INFO_ZENIS_SCREEN_18
+    dw SPRITE_INFO_ZENIS_SCREEN_18          ; SPRITE_INFO_ZENIS_SCREEN_18
                                             ; [$PRG11::89e0]
-    dw $8a6e                                ; SPRITE_INFO_ZENIS_SCREEN_19
+    dw SPRITE_INFO_ZENIS_SCREEN_19          ; SPRITE_INFO_ZENIS_SCREEN_19
                                             ; [$PRG11::89e2]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_ZENIS [$PRG11::89bc]
 ;
-SPRITE_INFO_ZENIS_SCREEN_0:                 ; [$89e4]
+SPRITE_INFO_ZENIS_SCREEN_00:                ; [$89e4]
     db SPRITE_BOSS_SHADOW_EURA              ; [$89e4] SpriteEntity
     db $73,$ff,$ff,$80,$02                  ; [$89e5] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_1:                 ; [$89ea]
+SPRITE_INFO_ZENIS_SCREEN_01:                ; [$89ea]
     db SPRITE_BOSS_ZORADOHNA                ; [$89ea] SpriteEntity
     db $34                                  ; [$89eb] undefined
 
     db SPRITE_ENEMY_WOLFMAN
     db $a9,$ff,$ff                          ; [$89ed] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_2:                 ; [$89f0]
+SPRITE_INFO_ZENIS_SCREEN_02:                ; [$89f0]
     db SPRITE_ENEMY_WOLFMAN                 ; [$89f0] SpriteEntity
     db $a2                                  ; [$89f1] undefined
 
@@ -2488,7 +3014,7 @@ SPRITE_INFO_ZENIS_SCREEN_2:                 ; [$89f0]
     db SPRITE_ENEMY_HORNET
     db $68,$ff,$ff                          ; [$89f5] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_3:                 ; [$89f8]
+SPRITE_INFO_ZENIS_SCREEN_03:                ; [$89f8]
     db SPRITE_ENEMY_GERIBUTA                ; [$89f8] SpriteEntity
     db $a5                                  ; [$89f9] undefined
 
@@ -2498,15 +3024,15 @@ SPRITE_INFO_ZENIS_SCREEN_3:                 ; [$89f8]
     db SPRITE_ENEMY_GRIMLOCK
     db $48,$ff,$ff                          ; [$89fd] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_4:                 ; [$8a00]
+SPRITE_INFO_ZENIS_SCREEN_04:                ; [$8a00]
     db SPRITE_BOSS_RIPASHEIKU               ; [$8a00] SpriteEntity
     db $66,$ff,$ff                          ; [$8a01] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_5:                 ; [$8a04]
+SPRITE_INFO_ZENIS_SCREEN_05:                ; [$8a04]
     db SPRITE_BOSS_ZORUGERIRU               ; [$8a04] SpriteEntity
     db $4e,$ff,$ff                          ; [$8a05] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_6:                 ; [$8a08]
+SPRITE_INFO_ZENIS_SCREEN_06:                ; [$8a08]
     db SPRITE_OBJ_OINTMENT_2                ; [$8a08] SpriteEntity
     db $b2                                  ; [$8a09] undefined
 
@@ -2522,14 +3048,14 @@ SPRITE_INFO_ZENIS_SCREEN_6:                 ; [$8a08]
     db SPRITE_ENEMY_WOLFMAN
     db $ab,$ff,$ff                          ; [$8a11] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_7:                 ; [$8a14]
+SPRITE_INFO_ZENIS_SCREEN_07:                ; [$8a14]
     db SPRITE_BOSS_PAKUKAME                 ; [$8a14] SpriteEntity
     db $13,$ff,$ff                          ; [$8a15] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_8:                 ; [$8a18]
+SPRITE_INFO_ZENIS_SCREEN_08:                ; [$8a18]
     db $ff,$ff                              ; [$8a18] undefined
 
-SPRITE_INFO_ZENIS_SCREEN_9:                 ; [$8a1a]
+SPRITE_INFO_ZENIS_SCREEN_09:                ; [$8a1a]
     db SPRITE_OBJ_POISON_2                  ; [$8a1a] SpriteEntity
     db $be                                  ; [$8a1b] undefined
 
@@ -2650,159 +3176,159 @@ SPRITE_INFO_ZENIS_SCREEN_19:                ; [$8a6e]
 ; Victim and Indoor Area Sprite Information
 ;============================================================================
 SPRITE_INFO_VICTIM:                         ; [$8a76]
-    dw $8b02                                ; SPRITE_INFO_VICTIM_SCREEN_0
+    dw SPRITE_INFO_VICTIM_SCREEN_00         ; SPRITE_INFO_VICTIM_SCREEN_00
                                             ; [$PRG11::8a76]
-    dw $8b07                                ; SPRITE_INFO_VICTIM_SCREEN+1
+    dw SPRITE_INFO_VICTIM_SCREEN_01         ; SPRITE_INFO_VICTIM_SCREEN_01
                                             ; [$PRG11::8a78]
-    dw $8b0f                                ; SPRITE_INFO_VICTIM_SCREEN_2
+    dw SPRITE_INFO_VICTIM_SCREEN_02         ; SPRITE_INFO_VICTIM_SCREEN_02
                                             ; [$PRG11::8a7a]
-    dw $8b14                                ; SPRITE_INFO_VICTIM_SCREEN_3
+    dw SPRITE_INFO_VICTIM_SCREEN_03         ; SPRITE_INFO_VICTIM_SCREEN_03
                                             ; [$PRG11::8a7c]
-    dw $8b19                                ; SPRITE_INFO_VICTIM_SCREEN_4
+    dw SPRITE_INFO_VICTIM_SCREEN_04         ; SPRITE_INFO_VICTIM_SCREEN_04
                                             ; [$PRG11::8a7e]
-    dw $8b1e                                ; SPRITE_INFO_VICTIM_SCREEN_5
+    dw SPRITE_INFO_VICTIM_SCREEN_05         ; SPRITE_INFO_VICTIM_SCREEN_05
                                             ; [$PRG11::8a80]
-    dw $8b23                                ; SPRITE_INFO_VICTIM_SCREEN_6
+    dw SPRITE_INFO_VICTIM_SCREEN_06         ; SPRITE_INFO_VICTIM_SCREEN_06
                                             ; [$PRG11::8a82]
-    dw $8b28                                ; SPRITE_INFO_VICTIM_SCREEN_7
+    dw SPRITE_INFO_VICTIM_SCREEN_07         ; SPRITE_INFO_VICTIM_SCREEN_07
                                             ; [$PRG11::8a84]
-    dw $8b2d                                ; SPRITE_INFO_VICTIM_SCREEN_8
+    dw SPRITE_INFO_VICTIM_SCREEN_08         ; SPRITE_INFO_VICTIM_SCREEN_08
                                             ; [$PRG11::8a86]
-    dw $8b32                                ; SPRITE_INFO_VICTIM_SCREEN_9
+    dw SPRITE_INFO_VICTIM_SCREEN_09         ; SPRITE_INFO_VICTIM_SCREEN_09
                                             ; [$PRG11::8a88]
-    dw $8b37                                ; SPRITE_INFO_VICTIM_SCREEN_10
+    dw SPRITE_INFO_VICTIM_SCREEN_10         ; SPRITE_INFO_VICTIM_SCREEN_10
                                             ; [$PRG11::8a8a]
-    dw $8b3f                                ; SPRITE_INFO_VICTIM_SCREEN_11
+    dw SPRITE_INFO_VICTIM_SCREEN_11         ; SPRITE_INFO_VICTIM_SCREEN_11
                                             ; [$PRG11::8a8c]
-    dw $8b44                                ; SPRITE_INFO_VICTIM_SCREEN_12
+    dw SPRITE_INFO_VICTIM_SCREEN_12         ; SPRITE_INFO_VICTIM_SCREEN_12
                                             ; [$PRG11::8a8e]
-    dw $8b4c                                ; SPRITE_INFO_VICTIM_SCREEN_13
+    dw SPRITE_INFO_VICTIM_SCREEN_13         ; SPRITE_INFO_VICTIM_SCREEN_13
                                             ; [$PRG11::8a90]
-    dw $8b54                                ; SPRITE_INFO_VICTIM_SCREEN_14
+    dw SPRITE_INFO_VICTIM_SCREEN_14         ; SPRITE_INFO_VICTIM_SCREEN_14
                                             ; [$PRG11::8a92]
-    dw $8b59                                ; SPRITE_INFO_VICTIM_SCREEN_15
+    dw SPRITE_INFO_VICTIM_SCREEN_15         ; SPRITE_INFO_VICTIM_SCREEN_15
                                             ; [$PRG11::8a94]
-    dw $8b5e                                ; SPRITE_INFO_VICTIM_SCREEN_16
+    dw SPRITE_INFO_VICTIM_SCREEN_16         ; SPRITE_INFO_VICTIM_SCREEN_16
                                             ; [$PRG11::8a96]
-    dw $8b63                                ; SPRITE_INFO_VICTIM_SCREEN_17
+    dw SPRITE_INFO_VICTIM_SCREEN_17         ; SPRITE_INFO_VICTIM_SCREEN_17
                                             ; [$PRG11::8a98]
-    dw $8b6b                                ; SPRITE_INFO_VICTIM_SCREEN_18
+    dw SPRITE_INFO_VICTIM_SCREEN_18         ; SPRITE_INFO_VICTIM_SCREEN_18
                                             ; [$PRG11::8a9a]
-    dw $8b70                                ; SPRITE_INFO_VICTIM_SCREEN_19
+    dw SPRITE_INFO_VICTIM_SCREEN_19         ; SPRITE_INFO_VICTIM_SCREEN_19
                                             ; [$PRG11::8a9c]
-    dw $8b75                                ; SPRITE_INFO_VICTIM_SCREEN_20
+    dw SPRITE_INFO_VICTIM_SCREEN_20         ; SPRITE_INFO_VICTIM_SCREEN_20
                                             ; [$PRG11::8a9e]
-    dw $8b7a                                ; SPRITE_INFO_VICTIM_SCREEN_21
+    dw SPRITE_INFO_VICTIM_SCREEN_21         ; SPRITE_INFO_VICTIM_SCREEN_21
                                             ; [$PRG11::8aa0]
-    dw $8b7f                                ; SPRITE_INFO_VICTIM_SCREEN_22
+    dw SPRITE_INFO_VICTIM_SCREEN_22         ; SPRITE_INFO_VICTIM_SCREEN_22
                                             ; [$PRG11::8aa2]
-    dw $8b87                                ; SPRITE_INFO_VICTIM_SCREEN_23
+    dw SPRITE_INFO_VICTIM_SCREEN_23         ; SPRITE_INFO_VICTIM_SCREEN_23
                                             ; [$PRG11::8aa4]
-    dw $8b8c                                ; SPRITE_INFO_VICTIM_SCREEN_24
+    dw SPRITE_INFO_VICTIM_SCREEN_24         ; SPRITE_INFO_VICTIM_SCREEN_24
                                             ; [$PRG11::8aa6]
-    dw $8b91                                ; SPRITE_INFO_VICTIM_SCREEN_25
+    dw SPRITE_INFO_VICTIM_SCREEN_25         ; SPRITE_INFO_VICTIM_SCREEN_25
                                             ; [$PRG11::8aa8]
-    dw $8b96                                ; SPRITE_INFO_VICTIM_SCREEN_26
+    dw SPRITE_INFO_VICTIM_SCREEN_26         ; SPRITE_INFO_VICTIM_SCREEN_26
                                             ; [$PRG11::8aaa]
-    dw $8b9e                                ; SPRITE_INFO_VICTIM_SCREEN_27
+    dw SPRITE_INFO_VICTIM_SCREEN_27         ; SPRITE_INFO_VICTIM_SCREEN_27
                                             ; [$PRG11::8aac]
-    dw $8ba6                                ; SPRITE_INFO_VICTIM_SCREEN_28
+    dw SPRITE_INFO_VICTIM_SCREEN_28         ; SPRITE_INFO_VICTIM_SCREEN_28
                                             ; [$PRG11::8aae]
-    dw $8bab                                ; SPRITE_INFO_VICTIM_SCREEN_29
+    dw SPRITE_INFO_VICTIM_SCREEN_29         ; SPRITE_INFO_VICTIM_SCREEN_29
                                             ; [$PRG11::8ab0]
-    dw $8baf                                ; SPRITE_INFO_VICTIM_SCREEN_30
+    dw SPRITE_INFO_VICTIM_SCREEN_30         ; SPRITE_INFO_VICTIM_SCREEN_30
                                             ; [$PRG11::8ab2]
-    dw $8bb4                                ; SPRITE_INFO_VICTIM_SCREEN_31
+    dw SPRITE_INFO_VICTIM_SCREEN_31         ; SPRITE_INFO_VICTIM_SCREEN_31
                                             ; [$PRG11::8ab4]
-    dw $8bba                                ; SPRITE_INFO_VICTIM_SCREEN_32
+    dw SPRITE_INFO_VICTIM_SCREEN_32         ; SPRITE_INFO_VICTIM_SCREEN_32
                                             ; [$PRG11::8ab6]
-    dw $8bbf                                ; SPRITE_INFO_VICTIM_SCREEN_33
+    dw SPRITE_INFO_VICTIM_SCREEN_33         ; SPRITE_INFO_VICTIM_SCREEN_33
                                             ; [$PRG11::8ab8]
-    dw $8bc7                                ; SPRITE_INFO_VICTIM_SCREEN_34
+    dw SPRITE_INFO_VICTIM_SCREEN_34         ; SPRITE_INFO_VICTIM_SCREEN_34
                                             ; [$PRG11::8aba]
-    dw $8bcc                                ; SPRITE_INFO_VICTIM_SCREEN_35
+    dw SPRITE_INFO_VICTIM_SCREEN_35         ; SPRITE_INFO_VICTIM_SCREEN_35
                                             ; [$PRG11::8abc]
-    dw $8bd1                                ; SPRITE_INFO_VICTIM_SCREEN_36
+    dw SPRITE_INFO_VICTIM_SCREEN_36         ; SPRITE_INFO_VICTIM_SCREEN_36
                                             ; [$PRG11::8abe]
-    dw $8bd6                                ; SPRITE_INFO_VICTIM_SCREEN_37
+    dw SPRITE_INFO_VICTIM_SCREEN_37         ; SPRITE_INFO_VICTIM_SCREEN_37
                                             ; [$PRG11::8ac0]
-    dw $8bde                                ; SPRITE_INFO_VICTIM_SCREEN_38
+    dw SPRITE_INFO_VICTIM_SCREEN_38         ; SPRITE_INFO_VICTIM_SCREEN_38
                                             ; [$PRG11::8ac2]
-    dw $8be3                                ; SPRITE_INFO_VICTIM_SCREEN_39
+    dw SPRITE_INFO_VICTIM_SCREEN_39         ; SPRITE_INFO_VICTIM_SCREEN_39
                                             ; [$PRG11::8ac4]
-    dw $8be8                                ; SPRITE_INFO_VICTIM_SCREEN_40
+    dw SPRITE_INFO_VICTIM_SCREEN_40         ; SPRITE_INFO_VICTIM_SCREEN_40
                                             ; [$PRG11::8ac6]
-    dw $8bf0                                ; SPRITE_INFO_VICTIM_SCREEN_41
+    dw SPRITE_INFO_VICTIM_SCREEN_41         ; SPRITE_INFO_VICTIM_SCREEN_41
                                             ; [$PRG11::8ac8]
-    dw $8bf5                                ; SPRITE_INFO_VICTIM_SCREEN_42
+    dw SPRITE_INFO_VICTIM_SCREEN_42         ; SPRITE_INFO_VICTIM_SCREEN_42
                                             ; [$PRG11::8aca]
-    dw $8bfa                                ; SPRITE_INFO_VICTIM_SCREEN_43
+    dw SPRITE_INFO_VICTIM_SCREEN_43         ; SPRITE_INFO_VICTIM_SCREEN_43
                                             ; [$PRG11::8acc]
-    dw $8bff                                ; SPRITE_INFO_VICTIM_SCREEN_44
+    dw SPRITE_INFO_VICTIM_SCREEN_44         ; SPRITE_INFO_VICTIM_SCREEN_44
                                             ; [$PRG11::8ace]
-    dw $8c04                                ; SPRITE_INFO_VICTIM_SCREEN_45
+    dw SPRITE_INFO_VICTIM_SCREEN_45         ; SPRITE_INFO_VICTIM_SCREEN_45
                                             ; [$PRG11::8ad0]
-    dw $8c09                                ; SPRITE_INFO_VICTIM_SCREEN_46
+    dw SPRITE_INFO_VICTIM_SCREEN_46         ; SPRITE_INFO_VICTIM_SCREEN_46
                                             ; [$PRG11::8ad2]
-    dw $8c11                                ; SPRITE_INFO_VICTIM_SCREEN_47
+    dw SPRITE_INFO_VICTIM_SCREEN_47         ; SPRITE_INFO_VICTIM_SCREEN_47
                                             ; [$PRG11::8ad4]
-    dw $8c16                                ; SPRITE_INFO_VICTIM_SCREEN_48
+    dw SPRITE_INFO_VICTIM_SCREEN_48         ; SPRITE_INFO_VICTIM_SCREEN_48
                                             ; [$PRG11::8ad6]
-    dw $8c1b                                ; SPRITE_INFO_VICTIM_SCREEN_49
+    dw SPRITE_INFO_VICTIM_SCREEN_49         ; SPRITE_INFO_VICTIM_SCREEN_49
                                             ; [$PRG11::8ad8]
-    dw $8c23                                ; SPRITE_INFO_VICTIM_SCREEN_50
+    dw SPRITE_INFO_VICTIM_SCREEN_50         ; SPRITE_INFO_VICTIM_SCREEN_50
                                             ; [$PRG11::8ada]
-    dw $8c2b                                ; SPRITE_INFO_VICTIM_SCREEN_51
+    dw SPRITE_INFO_VICTIM_SCREEN_51         ; SPRITE_INFO_VICTIM_SCREEN_51
                                             ; [$PRG11::8adc]
-    dw $8c30                                ; SPRITE_INFO_VICTIM_SCREEN_52
+    dw SPRITE_INFO_VICTIM_SCREEN_52         ; SPRITE_INFO_VICTIM_SCREEN_52
                                             ; [$PRG11::8ade]
-    dw $8c38                                ; SPRITE_INFO_VICTIM_SCREEN_53
+    dw SPRITE_INFO_VICTIM_SCREEN_53         ; SPRITE_INFO_VICTIM_SCREEN_53
                                             ; [$PRG11::8ae0]
-    dw $8c3c                                ; SPRITE_INFO_VICTIM_SCREEN_54
+    dw SPRITE_INFO_VICTIM_SCREEN_54         ; SPRITE_INFO_VICTIM_SCREEN_54
                                             ; [$PRG11::8ae2]
-    dw $8c40                                ; SPRITE_INFO_VICTIM_SCREEN_55
+    dw SPRITE_INFO_VICTIM_SCREEN_55         ; SPRITE_INFO_VICTIM_SCREEN_55
                                             ; [$PRG11::8ae4]
-    dw $8c46                                ; SPRITE_INFO_VICTIM_SCREEN_56
+    dw SPRITE_INFO_VICTIM_SCREEN_56         ; SPRITE_INFO_VICTIM_SCREEN_56
                                             ; [$PRG11::8ae6]
-    dw $8c4a                                ; SPRITE_INFO_VICTIM_SCREEN_57
+    dw SPRITE_INFO_VICTIM_SCREEN_57         ; SPRITE_INFO_VICTIM_SCREEN_57
                                             ; [$PRG11::8ae8]
-    dw $8c4e                                ; SPRITE_INFO_VICTIM_SCREEN_58
+    dw SPRITE_INFO_VICTIM_SCREEN_58         ; SPRITE_INFO_VICTIM_SCREEN_58
                                             ; [$PRG11::8aea]
-    dw $8c56                                ; SPRITE_INFO_VICTIM_SCREEN_59
+    dw SPRITE_INFO_VICTIM_SCREEN_59         ; SPRITE_INFO_VICTIM_SCREEN_59
                                             ; [$PRG11::8aec]
-    dw $8c5a                                ; SPRITE_INFO_VICTIM_SCREEN_60
+    dw SPRITE_INFO_VICTIM_SCREEN_60         ; SPRITE_INFO_VICTIM_SCREEN_60
                                             ; [$PRG11::8aee]
-    dw $8c5f                                ; SPRITE_INFO_VICTIM_SCREEN_61
+    dw SPRITE_INFO_VICTIM_SCREEN_61         ; SPRITE_INFO_VICTIM_SCREEN_61
                                             ; [$PRG11::8af0]
-    dw $8c64                                ; SPRITE_INFO_VICTIM_SCREEN_62
+    dw SPRITE_INFO_VICTIM_SCREEN_62         ; SPRITE_INFO_VICTIM_SCREEN_62
                                             ; [$PRG11::8af2]
-    dw $8c69                                ; SPRITE_INFO_VICTIM_SCREEN_63
+    dw SPRITE_INFO_VICTIM_SCREEN_63         ; SPRITE_INFO_VICTIM_SCREEN_63
                                             ; [$PRG11::8af4]
-    dw $8c6e                                ; SPRITE_INFO_VICTIM_SCREEN_64
+    dw SPRITE_INFO_VICTIM_SCREEN_64         ; SPRITE_INFO_VICTIM_SCREEN_64
                                             ; [$PRG11::8af6]
-    dw $8c73                                ; SPRITE_INFO_VICTIM_SCREEN_65
+    dw SPRITE_INFO_VICTIM_SCREEN_65         ; SPRITE_INFO_VICTIM_SCREEN_65
                                             ; [$PRG11::8af8]
-    dw $8c78                                ; SPRITE_INFO_VICTIM_SCREEN_66
+    dw SPRITE_INFO_VICTIM_SCREEN_66         ; SPRITE_INFO_VICTIM_SCREEN_66
                                             ; [$PRG11::8afa]
-    dw $8c7d                                ; SPRITE_INFO_VICTIM_SCREEN_67
+    dw SPRITE_INFO_VICTIM_SCREEN_67         ; SPRITE_INFO_VICTIM_SCREEN_67
                                             ; [$PRG11::8afc]
-    dw $8c83                                ; SPRITE_INFO_VICTIM_SCREEN_68
+    dw SPRITE_INFO_VICTIM_SCREEN_68         ; SPRITE_INFO_VICTIM_SCREEN_68
                                             ; [$PRG11::8afe]
-    dw $8c88                                ; SPRITE_INFO_VICTIM_SCREEN_69
+    dw SPRITE_INFO_VICTIM_SCREEN_69         ; SPRITE_INFO_VICTIM_SCREEN_69
                                             ; [$PRG11::8b00]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_VICTIM [$PRG11::8a76]
 ;
-SPRITE_INFO_VICTIM_SCREEN_0:                ; [$8b02]
+SPRITE_INFO_VICTIM_SCREEN_00:               ; [$8b02]
     db SPRITE_NPC_MEAT_SALESMAN             ; [$8b02] SpriteEntity
     db $84,$ff                              ; [$8b03] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_MEAT_SHOP
     db $ff                                  ; [$8b06] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_1:                ; [$8b07]
+SPRITE_INFO_VICTIM_SCREEN_01:               ; [$8b07]
     db SPRITE_NPC_SITTING_MAN_1             ; [$8b07] SpriteEntity
     db $84                                  ; [$8b08] undefined
 
@@ -2813,56 +3339,56 @@ SPRITE_INFO_VICTIM_SCREEN_1:                ; [$8b07]
     db ISCRIPT_ENTRYPOINT_10                ; [$8b0d] IScriptEntrypoint
     db $ff                                  ; [$8b0e] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_2:                ; [$8b0f]
+SPRITE_INFO_VICTIM_SCREEN_02:               ; [$8b0f]
     db SPRITE_NPC_PRIEST                    ; [$8b0f] SpriteEntity
     db $82,$ff                              ; [$8b10] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_GURU
     db $ff                                  ; [$8b13] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_3:                ; [$8b14]
+SPRITE_INFO_VICTIM_SCREEN_03:               ; [$8b14]
     db SPRITE_NPC_KEY_SALESMAN              ; [$8b14] SpriteEntity
     db $84,$ff                              ; [$8b15] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_KEY_SHOP
     db $ff                                  ; [$8b18] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_4:                ; [$8b19]
+SPRITE_INFO_VICTIM_SCREEN_04:               ; [$8b19]
     db SPRITE_NPC_ARMOR_SALESMAN            ; [$8b19] SpriteEntity
     db $73,$ff                              ; [$8b1a] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_TOOL_SHOP
     db $ff                                  ; [$8b1d] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_5:                ; [$8b1e]
+SPRITE_INFO_VICTIM_SCREEN_05:               ; [$8b1e]
     db SPRITE_NPC_MAGIC_TEACHER             ; [$8b1e] SpriteEntity
     db $71,$ff                              ; [$8b1f] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_MARTIAL_ARTS_MAGIC_SHOP
     db $ff                                  ; [$8b22] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_6:                ; [$8b23]
+SPRITE_INFO_VICTIM_SCREEN_06:               ; [$8b23]
     db SPRITE_NPC_MARTIAL_ARTS              ; [$8b23] SpriteEntity
     db $87,$ff                              ; [$8b24] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_MARTIAL_ARTS
     db $ff                                  ; [$8b27] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_7:                ; [$8b28]
+SPRITE_INFO_VICTIM_SCREEN_07:               ; [$8b28]
     db SPRITE_NPC_KING                      ; [$8b28] SpriteEntity
     db $72,$ff                              ; [$8b29] undefined
 
     db ISCRIPT_ENTRYPOINT_EOLIS_KING
     db $ff                                  ; [$8b2c] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_8:                ; [$8b2d]
+SPRITE_INFO_VICTIM_SCREEN_08:               ; [$8b2d]
     db SPRITE_NPC_ARMOR_SALESMAN            ; [$8b2d] SpriteEntity
     db $73,$ff                              ; [$8b2e] undefined
 
     db ISCRIPT_ENTRYPOINT_APOLUNE_TOOL_SHOP
     db $ff                                  ; [$8b31] undefined
 
-SPRITE_INFO_VICTIM_SCREEN_9:                ; [$8b32]
+SPRITE_INFO_VICTIM_SCREEN_09:               ; [$8b32]
     db SPRITE_NPC_KEY_SALESMAN              ; [$8b32] SpriteEntity
     db $84,$ff                              ; [$8b33] undefined
 
@@ -2891,7 +3417,7 @@ SPRITE_INFO_VICTIM_SCREEN_12:               ; [$8b44]
     db SPRITE_NPC_MAN_IN_CHAIR              ; [$8b44] SpriteEntity
     db $82                                  ; [$8b45] undefined
 
-    db SPRITE_NPC_WALKING_WOMAN_1
+    db SPRITE_NPC_NURSE
     db $95,$ff                              ; [$8b47] undefined
 
     db ISCRIPT_ENTRYPOINT_APOLUNE_DOCTOR
@@ -2934,7 +3460,7 @@ SPRITE_INFO_VICTIM_SCREEN_17:               ; [$8b63]
     db SPRITE_NPC_MAN_IN_CHAIR              ; [$8b63] SpriteEntity
     db $82                                  ; [$8b64] undefined
 
-    db SPRITE_NPC_WALKING_WOMAN_1
+    db SPRITE_NPC_NURSE
     db $85,$ff                              ; [$8b66] undefined
 
     db ISCRIPT_ENTRYPOINT_42_FOREPAW_DOCTOR
@@ -3016,7 +3542,7 @@ SPRITE_INFO_VICTIM_SCREEN_27:               ; [$8b9e]
     db SPRITE_NPC_MAN_IN_CHAIR              ; [$8b9e] SpriteEntity
     db $82                                  ; [$8b9f] undefined
 
-    db SPRITE_NPC_WALKING_WOMAN_1
+    db SPRITE_NPC_NURSE
     db $95,$ff                              ; [$8ba1] undefined
 
     db ISCRIPT_ENTRYPOINT_56_MASCON_DOCTOR
@@ -3188,7 +3714,7 @@ SPRITE_INFO_VICTIM_SCREEN_49:               ; [$8c1b]
     db SPRITE_NPC_MEAT_SALESMAN             ; [$8c1b] SpriteEntity
     db $84                                  ; [$8c1c] undefined
 
-    db SPRITE_NPC_WALKING_WOMAN_1
+    db SPRITE_NPC_NURSE
     db $88,$ff                              ; [$8c1e] undefined
 
     db ISCRIPT_ENTRYPOINT_103_DAYBREAK_MEAT_SHOP
@@ -3332,95 +3858,95 @@ SPRITE_INFO_VICTIM_SCREEN_69:               ; [$8c88]
 ; Mascon Sprite Information
 ;============================================================================
 SPRITE_INFO_MASCON:                         ; [$8c8d]
-    dw $8ca9                                ; SPRITE_INFO_MASCON_SCREEN_0
+    dw SPRITE_INFO_MASCON_SCREEN_00         ; SPRITE_INFO_MASCON_SCREEN_00
                                             ; [$PRG11::8c8d]
-    dw $8cae                                ; SPRITE_INFO_MASCON_SCREEN+1
+    dw SPRITE_INFO_MASCON_SCREEN_01         ; SPRITE_INFO_MASCON_SCREEN_01
                                             ; [$PRG11::8c8f]
-    dw $8cb3                                ; SPRITE_INFO_MASCON_SCREEN_2
+    dw SPRITE_INFO_MASCON_SCREEN_02         ; SPRITE_INFO_MASCON_SCREEN_02
                                             ; [$PRG11::8c91]
-    dw $8cb8                                ; SPRITE_INFO_MASCON_SCREEN_3
+    dw SPRITE_INFO_MASCON_SCREEN_03         ; SPRITE_INFO_MASCON_SCREEN_03
                                             ; [$PRG11::8c93]
-    dw $8cbd                                ; SPRITE_INFO_MASCON_SCREEN_4
+    dw SPRITE_INFO_MASCON_SCREEN_04         ; SPRITE_INFO_MASCON_SCREEN_04
                                             ; [$PRG11::8c95]
-    dw $8cc2                                ; SPRITE_INFO_MASCON_SCREEN_5
+    dw SPRITE_INFO_MASCON_SCREEN_05         ; SPRITE_INFO_MASCON_SCREEN_05
                                             ; [$PRG11::8c97]
-    dw $8cc4                                ; SPRITE_INFO_MASCON_SCREEN_6
+    dw SPRITE_INFO_MASCON_SCREEN_06         ; SPRITE_INFO_MASCON_SCREEN_06
                                             ; [$PRG11::8c99]
-    dw $8cc9                                ; SPRITE_INFO_MASCON_SCREEN_7
+    dw SPRITE_INFO_MASCON_SCREEN_07         ; SPRITE_INFO_MASCON_SCREEN_07
                                             ; [$PRG11::8c9b]
-    dw $8ccb                                ; SPRITE_INFO_MASCON_SCREEN_8
+    dw SPRITE_INFO_MASCON_SCREEN_08         ; SPRITE_INFO_MASCON_SCREEN_08
                                             ; [$PRG11::8c9d]
-    dw $8cd0                                ; SPRITE_INFO_MASCON_SCREEN_9
+    dw SPRITE_INFO_MASCON_SCREEN_09         ; SPRITE_INFO_MASCON_SCREEN_09
                                             ; [$PRG11::8c9f]
-    dw $8cd5                                ; SPRITE_INFO_MASCON_SCREEN_10
+    dw SPRITE_INFO_MASCON_SCREEN_10         ; SPRITE_INFO_MASCON_SCREEN_10
                                             ; [$PRG11::8ca1]
-    dw $8cda                                ; SPRITE_INFO_MASCON_SCREEN_11
+    dw SPRITE_INFO_MASCON_SCREEN_11         ; SPRITE_INFO_MASCON_SCREEN_11
                                             ; [$PRG11::8ca3]
-    dw $8cdc                                ; SPRITE_INFO_MASCON_SCREEN_12_13
+    dw SPRITE_INFO_MASCON_SCREEN_12_13      ; SPRITE_INFO_MASCON_SCREEN_12_13
                                             ; [$PRG11::8ca5]
-    dw $8cdc                                ; SPRITE_INFO_MASCON_SCREEN_12_13
+    dw SPRITE_INFO_MASCON_SCREEN_12_13      ; SPRITE_INFO_MASCON_SCREEN_12_13
                                             ; [$PRG11::8ca7]
 
 ;
 ; XREFS:
 ;     SPRITE_INFO_MASCON [$PRG11::8c8d]
 ;
-SPRITE_INFO_MASCON_SCREEN_0:                ; [$8ca9]
+SPRITE_INFO_MASCON_SCREEN_00:               ; [$8ca9]
     db SPRITE_NPC_WALKING_WOMAN_2           ; [$8ca9] SpriteEntity
     db $97,$ff                              ; [$8caa] undefined
 
     db ISCRIPT_ENTRYPOINT_17
     db $ff                                  ; [$8cad] undefined
 
-SPRITE_INFO_MASCON_SCREEN_1:                ; [$8cae]
+SPRITE_INFO_MASCON_SCREEN_01:               ; [$8cae]
     db SPRITE_NPC_WALKING_MAN_1             ; [$8cae] SpriteEntity
     db $97,$ff                              ; [$8caf] undefined
 
     db ISCRIPT_ENTRYPOINT_16
     db $ff                                  ; [$8cb2] undefined
 
-SPRITE_INFO_MASCON_SCREEN_2:                ; [$8cb3]
-    db SPRITE_NPC_WALKING_WOMAN_1           ; [$8cb3] SpriteEntity
+SPRITE_INFO_MASCON_SCREEN_02:               ; [$8cb3]
+    db SPRITE_NPC_NURSE                     ; [$8cb3] SpriteEntity
     db $97,$ff                              ; [$8cb4] undefined
 
     db ISCRIPT_ENTRYPOINT_32_FOREPAW_GREETER
     db $ff                                  ; [$8cb7] undefined
 
-SPRITE_INFO_MASCON_SCREEN_3:                ; [$8cb8]
+SPRITE_INFO_MASCON_SCREEN_03:               ; [$8cb8]
     db SPRITE_NPC_WALKING_MAN_1             ; [$8cb8] SpriteEntity
     db $97,$ff                              ; [$8cb9] undefined
 
     db ISCRIPT_ENTRYPOINT_33
     db $ff                                  ; [$8cbc] undefined
 
-SPRITE_INFO_MASCON_SCREEN_4:                ; [$8cbd]
+SPRITE_INFO_MASCON_SCREEN_04:               ; [$8cbd]
     db SPRITE_NPC_WALKING_MAN_1             ; [$8cbd] SpriteEntity
     db $97,$ff                              ; [$8cbe] undefined
 
     db ISCRIPT_ENTRYPOINT_48
     db $ff                                  ; [$8cc1] undefined
 
-SPRITE_INFO_MASCON_SCREEN_5:                ; [$8cc2]
+SPRITE_INFO_MASCON_SCREEN_05:               ; [$8cc2]
     db $ff,$ff                              ; [$8cc2] undefined
 
-SPRITE_INFO_MASCON_SCREEN_6:                ; [$8cc4]
+SPRITE_INFO_MASCON_SCREEN_06:               ; [$8cc4]
     db SPRITE_NPC_WALKING_WOMAN_2           ; [$8cc4] SpriteEntity
     db $97,$ff                              ; [$8cc5] undefined
 
     db ISCRIPT_ENTRYPOINT_64
     db $ff                                  ; [$8cc8] undefined
 
-SPRITE_INFO_MASCON_SCREEN_7:                ; [$8cc9]
+SPRITE_INFO_MASCON_SCREEN_07:               ; [$8cc9]
     db $ff,$ff                              ; [$8cc9] undefined
 
-SPRITE_INFO_MASCON_SCREEN_8:                ; [$8ccb]
+SPRITE_INFO_MASCON_SCREEN_08:               ; [$8ccb]
     db SPRITE_NPC_GUARD_1                   ; [$8ccb] SpriteEntity
     db $9b,$ff                              ; [$8ccc] undefined
 
     db ISCRIPT_ENTRYPOINT_82
     db $ff                                  ; [$8ccf] undefined
 
-SPRITE_INFO_MASCON_SCREEN_9:                ; [$8cd0]
+SPRITE_INFO_MASCON_SCREEN_09:               ; [$8cd0]
     db SPRITE_NPC_WALKING_MAN_1             ; [$8cd0] SpriteEntity
     db $97,$ff                              ; [$8cd1] undefined
 

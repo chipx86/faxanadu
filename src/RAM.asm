@@ -45,15 +45,16 @@
 ;     Area_SetBlocks_SetAttributes
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_IsSpriteEntityNotOnScreen
 ;     Player_DrawBody
 ;     Player_DrawSprite
 ;     Player_DrawSpriteImmediately
 ;     Player_HandleKnockback
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTilesToPPU
 ;     Screen_LoadBlockDataVert
 ;     Screen_LoadBlocksHoriz
 ;     Sprite_Draw_FlippedHoriz
@@ -61,7 +62,6 @@
 ;     Sprites_HasSpritesNotOfType
 ;     Sprites_LoadCommon
 ;     Sprites_LoadImageForCurrentSprite
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;============================================================================
 
 ;
@@ -96,15 +96,16 @@
 ;     Area_SetBlocks_SetAttributes
 ;     CastMagic_FinishHandler_HitWallEffect
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     FUN_PRG15_MIRROR__ec58
 ;     Maybe_IsSpriteEntityNotOnScreen
 ;     Player_DrawBody
 ;     Player_DrawSprite
 ;     Player_DrawSpriteImmediately
 ;     Player_HandleKnockback
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTilesToPPU
 ;     Screen_LoadBlockDataVert
 ;     Screen_LoadBlocksHoriz
 ;     Sprite_Draw_FlippedHoriz
@@ -112,7 +113,6 @@
 ;     Sprites_HasSpritesNotOfType
 ;     Sprites_LoadCommon
 ;     Sprites_LoadImageForCurrentSprite
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 Temp_00:                                    ; [$0000]
     db $00                                  ; [$0000] byte
@@ -145,28 +145,28 @@ Temp_01:                                    ; [$0001]
 ;     Player_DrawWeapon
 ;     Player_HitEnemyWithMagic
 ;     Sprite_GetBounds
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetStateFromDoorDestination
 ;     CurrentSprite_LoadTilesInfo
-;     FUN_PRG15_MIRROR__f2e3
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     Game_LoadAreaTable
-;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTilesAddress
 ;     LAB_PRG15_MIRROR__e852 [$PRG15_MIRROR::e852]
 ;     LAB_PRG15_MIRROR__ea13 [$PRG15_MIRROR::ea13]
 ;     Player_CheckSwitchScreen
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
-;     Player_DrawArmorTile
-;     Player_DrawShieldTile
-;     Player_DrawWeaponTile
+;     Player_LoadArmorTile
+;     Player_LoadShieldTile
+;     Player_LoadWeaponTile
 ;     Screen_LoadAllScreenInfo
 ;     Sprite_Draw
+;     Sprite_DrawPortraitPartAppearance
 ;     Sprite_Draw_FlippedHoriz
 ;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
-;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadCommon
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 Temp_Addr_L:                                ; [$0002]
     db $00                                  ; [$0002] byte
@@ -177,21 +177,21 @@ Temp_Addr_L:                                ; [$0002]
 ;     Player_ApplyDamage
 ;     Player_DrawWeapon
 ;     Sprite_GetBounds
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetStateFromDoorDestination
 ;     CurrentSprite_LoadTilesInfo
-;     FUN_PRG15_MIRROR__f2e3
 ;     Game_LoadAreaTable
+;     IScripts_LoadPortraitTilesAddress
 ;     Player_CheckSwitchScreen
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
-;     Player_DrawArmorTile
-;     Player_DrawShieldTile
-;     Player_DrawWeaponTile
+;     Player_LoadArmorTile
+;     Player_LoadShieldTile
+;     Player_LoadWeaponTile
 ;     Screen_LoadAllScreenInfo
+;     Sprite_DrawPortraitPartAppearance
 ;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
-;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadCommon
 ;
 Temp_Addr_U:                                ; [$0003]
@@ -203,8 +203,8 @@ Temp_Addr_U:                                ; [$0003]
 ;     Player_CalcValueAndFFForNeg
 ;     Player_DrawWeapon
 ;     FUN_PRG15_MIRROR__ec58
-;     IScripts_Maybe_DrawSpriteToPPU
-;     Player_DrawWeaponTile
+;     IScripts_DrawPortraitTileToPPU
+;     Player_LoadWeaponTile
 ;     Sprite_Draw_FlippedHoriz
 ;
 Temp_04:                                    ; [$0004]
@@ -216,8 +216,8 @@ Temp_04:                                    ; [$0004]
 ;     Player_CalcValueAndFFForNeg
 ;     Player_DrawWeapon
 ;     FUN_PRG15_MIRROR__ec58
-;     IScripts_Maybe_DrawSpriteToPPU
-;     Player_DrawWeaponTile
+;     IScripts_DrawPortraitTileToPPU
+;     Player_LoadWeaponTile
 ;     Sprite_Draw_FlippedHoriz
 ;
 Temp_05:                                    ; [$0005]
@@ -258,25 +258,25 @@ Temp_07:                                    ; [$0007]
 ;     Area_LoadNextCompressedScreenBit
 ;     Area_LoadTiles
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
-;     Screen_LoadBackgroundPalette
 ;     Screen_LoadBlockDataVert
 ;     Screen_LoadBlocksHoriz
-;     Screen_LoadPalette
 ;     Screen_LoadSpritePalette
+;     Screen_LoadUIPalette
 ;     Screen_SetFadeOutPalette
+;     Screen_SetPaletteData
 ;
 Temp_08:                                    ; [$0008]
-    db $00                                  ; [$0008] undefined
+    db $00                                  ; [$0008] byte
 
 ;
 ; XREFS:
 ;     Area_LoadBlocks
 ;     Area_LoadTiles
 ;     Palette_IndexToROMOffset16
-;     Screen_LoadBackgroundPalette
 ;     Screen_LoadBlockDataVert
 ;     Screen_LoadBlocksHoriz
 ;     Screen_LoadSpritePalette
+;     Screen_LoadUIPalette
 ;     Screen_SetFadeOutPalette
 ;
 Temp_09:                                    ; [$0009]
@@ -309,7 +309,7 @@ Temp_09:                                    ; [$0009]
 ;     Screen_WriteScrollHorizPPUTileData
 ;     Screen_WriteScrollVertPPUTileData
 ;
-SavedPPUCtrl:                               ; [$000a]
+PPU_ControlFlags:                           ; [$000a]
     db $00                                  ; [$000a] PPUCtrlFlags
 
 
@@ -323,9 +323,9 @@ SavedPPUCtrl:                               ; [$000a]
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
 ;     SpriteBehavior_FlashScreenHitPlayer
-;     GameLoop_ClearSprites
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
+;     Screen_ClearSprites
 ;============================================================================
 
 ;
@@ -333,11 +333,11 @@ SavedPPUCtrl:                               ; [$000a]
 ;     Player_HitEnemyWithMagic
 ;     Player_HitSpriteWithWeapon
 ;     SpriteBehavior_FlashScreenHitPlayer
-;     GameLoop_ClearSprites
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
+;     Screen_ClearSprites
 ;
-ScreenColorMode:                            ; [$000b]
+PPU_Mask:                                   ; [$000b]
     db $00                                  ; [$000b] PPUMaskFlags
 
 
@@ -348,8 +348,8 @@ ScreenColorMode:                            ; [$000b]
 ; between screens 0 and 1.
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
 ;     PPU_HandleOnInterrupt
@@ -361,8 +361,8 @@ ScreenColorMode:                            ; [$000b]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     Game_InitScreenAndMusic
 ;     Game_InitStateForSpawn
 ;     PPU_HandleOnInterrupt
@@ -384,8 +384,8 @@ PPU_ScrollX:                                ; [$000c]
 ;
 ; XREFS:
 ;     TextBox_FillBackground
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetPPUAddrForBlockIndex
 ;     Game_InitScreenAndMusic
@@ -399,8 +399,8 @@ PPU_ScrollX:                                ; [$000c]
 ;
 ; XREFS:
 ;     TextBox_FillBackground
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetPPUAddrForBlockIndex
 ;     Game_InitScreenAndMusic
@@ -444,12 +444,12 @@ PPU_ScrollScreen:                           ; [$000d]
 ;     Player_HandleDeath
 ;     Screen_SetupSprites
 ;
-Maybe_ScreenReadyState:                     ; [$000e]
-    db $00                                  ; [$000e] LoadedState
+Screen_ReadyState:                          ; [$000e]
+    db $00                                  ; [$000e] ScreenReadyState
 
 
 ;============================================================================
-; UNUSED: Fully available for mod purposes.
+; MOD NOTES: 1 unused byte of RAM.
 ;============================================================================
     db $00                                  ; [$000f] undefined
 
@@ -540,24 +540,24 @@ MMC1_ShiftSync:                             ; [$0012]
 ; If 0, this will all be paused.
 ;
 ; XREFS:
+;     DEADCODE_FUN_PRG15_MIRROR__cb1f
 ;     Game_InitScreenAndMusic
-;     Game_ResetScreenAndEnableInterrupts
 ;     OnInterrupt
 ;     PPU_WaitUntilFlushed
-;     Screen_ResetAndEnableInterrupts
-;     UNUSED_FUN_PRG15_MIRROR__cb1f
+;     Screen_ResetForGamePlay
+;     Screen_ResetForNonGame
 ;============================================================================
 
 ;
 ; XREFS:
+;     DEADCODE_FUN_PRG15_MIRROR__cb1f
 ;     Game_InitScreenAndMusic
-;     Game_ResetScreenAndEnableInterrupts
 ;     OnInterrupt
 ;     PPU_WaitUntilFlushed
-;     Screen_ResetAndEnableInterrupts
-;     UNUSED_FUN_PRG15_MIRROR__cb1f
+;     Screen_ResetForGamePlay
+;     Screen_ResetForNonGame
 ;
-Game_EnableInterruptHandlers:               ; [$0013]
+Game_InterruptHandlersEnabled:              ; [$0013]
     db $00                                  ; [$0013] bool
 
 
@@ -565,7 +565,7 @@ Game_EnableInterruptHandlers:               ; [$0013]
 ; Counter tracking state for temporary pausing of interrupt handlers.
 ;
 ; When interrupt handlers are paused (by setting
-; Game_EnableInterruptHandlers to 0), this will be
+; Game_InterruptHandlersEnabled to 0), this will be
 ; incremented up to a value of 2.
 ;
 ; PPU_WaitUntilFlushed will wait for this to hit 2
@@ -587,7 +587,7 @@ PauseInterruptCounter:                      ; [$0014]
 
 
 ;============================================================================
-; UNUSED: Fully available for mod purposes.
+; MOD NOTES: 1 unused byte of RAM.
 ;============================================================================
     db $00                                  ; [$0015] byte
 
@@ -754,7 +754,7 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     TextBox_DrawQuestionMarkTerminatorSymbol
 ;     TextBox_DrawUpArrowTerminatorSymbol
 ;     SpriteBehavior_Something_850d
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     CastMagic_FinishHandler_Death
 ;     CastMagic_FinishHandler_Deluge
 ;     CastMagic_FinishHandler_Fire
@@ -788,7 +788,7 @@ Joy1_ChangedButtonMask:                     ; [$0019]
 ;     TextBox_DrawQuestionMarkTerminatorSymbol
 ;     TextBox_DrawUpArrowTerminatorSymbol
 ;     SpriteBehavior_Something_850d
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     CastMagic_FinishHandler_Death
 ;     CastMagic_FinishHandler_Deluge
 ;     CastMagic_FinishHandler_Fire
@@ -926,9 +926,10 @@ PPUBuffer_ReadOffset:                       ; [$001f]
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetBlocks_WriteBlockData12
 ;     Area_SetBlocks_WriteBlockData34
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     Fog_UpdateTiles
 ;     Game_InitStateForSpawn
-;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_DrawPortraitTileToPPU
 ;     PPUBuffer_Clear
 ;     PPUBuffer_Draw
 ;     PPUBuffer_DrawAll
@@ -939,14 +940,13 @@ PPUBuffer_ReadOffset:                       ; [$001f]
 ;     PPUBuffer_WriteValueMany
 ;     PPU_WaitUntilFlushed
 ;     Player_DrawDeathAnimation
-;     Player_DrawWeaponTile
+;     Player_LoadWeaponTile
 ;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_LoadItemSourceTiles
 ;     TextBox_Maybe_WriteLineOfChars
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawDigitsZeroPadded
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPUBuffer_WriteOffset:                      ; [$0020]
     db $00                                  ; [$0020] byte
@@ -999,7 +999,7 @@ PPUBuffer_Temp_TotalByteLength:             ; [$0022]
 ; XREFS:
 ;     PPU_InitAttributeAndNameTables
 ;
-Temp_PPU_NametableValue:                    ; [$0023]
+Temp_PPU_NameTableValue:                    ; [$0023]
     db $00                                  ; [$0023] byte
 
 
@@ -1143,8 +1143,8 @@ MovingSpriteVisibility:                     ; [$0026]
 ;
 ; XREFS:
 ;     IScripts_SetPortraitSpriteXY
-;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_UpdateState
+;     Player_CalculateVisibility
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     SpriteUpdateHandler_Effect_LightningBall20
@@ -1156,7 +1156,7 @@ MovingSpriteVisibility:                     ; [$0026]
 ;     Sprite_Draw
 ;     UI_DrawPromptInputSymbol
 ;
-Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
+Arg_DrawSprite_PosX:                        ; [$0027]
     db $00                                  ; [$0027] byte
 
 
@@ -1168,8 +1168,8 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;
 ; XREFS:
 ;     IScripts_SetPortraitSpriteXY
-;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_UpdateState
+;     Player_CalculateVisibility
 ;     Player_DrawShield
 ;     Player_DrawWeapon
 ;     SpriteUpdateHandler_Effect_EnemyDeath
@@ -1183,11 +1183,11 @@ Maybe_Arg_CurrentSprite_PosX:               ; [$0027]
 ;     Sprite_Draw
 ;     UI_DrawPromptInputSymbol
 ;
-Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
+Arg_DrawSprite_PosY:                        ; [$0028]
     db $00                                  ; [$0028] byte
 
 
-;
+;============================================================================
 ; The current sprite's flip mask.
 ;
 ; This indicates if the sprite is flipped horizontally,
@@ -1198,6 +1198,37 @@ Maybe_Arg_CurrentSprite_PosY:               ; [$0028]
 ; $00 = Facing right (default)
 ; $40 = Facing left (flipped)
 ;
+; XREFS:
+;     CurrentSprite_UpdateFlipMask
+;     Maybe_Player_CalcAnimFrame
+;     Player_DrawShield
+;     Player_DrawWeapon
+;     SpriteUpdateHandler_Bread
+;     SpriteUpdateHandler_Coin
+;     SpriteUpdateHandler_Effect_EnemyDeath
+;     SpriteUpdateHandler_Effect_Fountain
+;     SpriteUpdateHandler_Effect_LightningBall20
+;     SpriteUpdateHandler_Enemy_Lamprey
+;     SpriteUpdateHandler_Item_Special
+;     SpriteUpdateHandler_Item_Standard
+;     SpriteUpdateHandler_Magic_81
+;     SpriteUpdateHandler_Magic_83
+;     SpriteUpdateHandler_NPC_ArmorSalesman
+;     SpriteUpdateHandler_NPC_Doctor
+;     SpriteUpdateHandler_NPC_KeySalesman_Others
+;     SpriteUpdateHandler_NPC_King
+;     CastMagic_FinishHandler_HitWallEffect
+;     CastMagic_FinishHandler_TilteAfterFirstHit
+;     CastMagic_UpdateSpriteDirection
+;     IScripts_DrawPortraitAnimationFrame
+;     Player_GetBodySpriteFrameOffset
+;     Player_SetFacingLeft
+;     Sprite_Draw
+;     Sprite_Draw_FlippedHoriz
+;     Sprite_Draw_Standard
+;     UI_DrawPromptInputSymbol
+;============================================================================
+
 ;
 ; XREFS:
 ;     CurrentSprite_UpdateFlipMask
@@ -1263,9 +1294,9 @@ Unused_Sprite_ScrollPosX:                   ; [$002b]
     db $00                                  ; [$002b] byte
 
 
-;
-; UNUSED: The following 7 bytes are unused in memory.
-;
+;============================================================================
+; MOD NOTES: 7 unused bytes of RAM.
+;============================================================================
     db $00,$00,$00,$00,$00,$00,$00          ; [$002c] undefined
 
 ;
@@ -1362,7 +1393,7 @@ Sprites_SlotsFull:                          ; [$0039]
 ;     Sprite_Draw_FlippedHoriz
 ;     Sprite_Draw_Standard
 ;
-Maybe_Temp_Sprite_L:                        ; [$003a]
+Sprite_TileInfo_ReadAddr_L:                 ; [$003a]
     db $00                                  ; [$003a] byte
 
 
@@ -1374,7 +1405,7 @@ Maybe_Temp_Sprite_L:                        ; [$003a]
 ; XREFS:
 ;     Sprite_Draw
 ;
-Maybe_Temp_Sprite_U:                        ; [$003b]
+Sprite_TileInfo_ReadAddr_U:                 ; [$003b]
     db $00                                  ; [$003b] byte
 
 
@@ -1409,7 +1440,7 @@ Temp_Sprites_NormYPos:                      ; [$003d]
 ;     Sprite_Draw_FlippedHoriz
 ;     Sprite_Draw_Standard
 ;
-Something_SpriteData_X:                     ; [$003e]
+Sprite_TileInfo_OffsetX:                    ; [$003e]
     db $00                                  ; [$003e] byte
 
 ;
@@ -1418,7 +1449,7 @@ Something_SpriteData_X:                     ; [$003e]
 ;     Sprite_Draw_FlippedHoriz
 ;     Sprite_Draw_Standard
 ;
-Something_SpriteData_Y:                     ; [$003f]
+Sprite_TileInfo_OffsetY:                    ; [$003f]
     db $00                                  ; [$003f] byte
 
 
@@ -1510,7 +1541,7 @@ Screen_ScrollVertLoadCounter:               ; [$0044]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
 ;     Screen_LoadBlocksHoriz
@@ -1529,7 +1560,7 @@ Screen_ScrollHorizLoadOffset:               ; [$0046]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlocksHoriz
 ;
 Screen_Maybe_ScrollHorizDirection:          ; [$0047]
@@ -1653,8 +1684,8 @@ Screen_ScrollVertBlocks_PPUAttrAddr_U:      ; [$0053]
 ; 3 = Down
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     GameLoop_UpdatePlayer
 ;     Game_MainLoop
 ;     Game_MovePlayerOnScroll
@@ -1666,8 +1697,8 @@ Screen_ScrollVertBlocks_PPUAttrAddr_U:      ; [$0053]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenRight
 ;     GameLoop_UpdatePlayer
 ;     Game_MainLoop
 ;     Game_MovePlayerOnScroll
@@ -1680,9 +1711,9 @@ Screen_ScrollDirection:                     ; [$0054]
     db $00                                  ; [$0054] Direction
 
 
-;
-; UNUSED: The next 2 bytes are unused by Faxanadu.
-;
+;============================================================================
+; MOD NOTES: 2 unused bytes of RAM.
+;============================================================================
     db $00,$00                              ; [$0055] undefined
 
 
@@ -1692,7 +1723,7 @@ Screen_ScrollDirection:                     ; [$0054]
 ;
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Game_InitScreenAndMusic
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollUp
@@ -1715,7 +1746,7 @@ PPU_ScrollScreenVert:                       ; [$0058]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Player_DrawBody
 ;     Player_SetInitialState
 ;     Screen_HandleScrollLeft
@@ -1738,43 +1769,43 @@ PPU_ScrollScreenHoriz:                      ; [$0059]
 ; 0x01 = Add a default sprite 0 at X=0, Y=72 (not used)
 ;
 ; XREFS:
+;     DEADCODE_Sprites_ResetForDefaultsMode1
 ;     PPU_HandleOnInterrupt
+;     Screen_ResetSpritesForGamePlay
+;     Screen_ResetSpritesForNonGame
 ;     Sprites_Reset
-;     Sprites_ResetForGameScreen
-;     Sprites_ResetWithNoSprite0
-;     UNUSED_Sprites_ResetForDefaultsMode1
 ;============================================================================
 
 ;
 ; XREFS:
+;     DEADCODE_Sprites_ResetForDefaultsMode1
 ;     PPU_HandleOnInterrupt
+;     Screen_ResetSpritesForGamePlay
+;     Screen_ResetSpritesForNonGame
 ;     Sprites_Reset
-;     Sprites_ResetForGameScreen
-;     Sprites_ResetWithNoSprite0
-;     UNUSED_Sprites_ResetForDefaultsMode1
 ;
 Sprites_Sprite0Mode:                        ; [$005a]
-    db $00                                  ; [$005a] byte
+    db $00                                  ; [$005a] Sprite0Mode
 
 
 ;============================================================================
 ; Whether to force lower pattern tables when updating the PPU.
 ;
 ; XREFS:
+;     DEADCODE_Sprites_ResetForDefaultsMode1
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
 ;     PPU_WaitUntilFlushed
-;     Sprites_ResetForGameScreen
-;     UNUSED_Sprites_ResetForDefaultsMode1
+;     Screen_ResetSpritesForGamePlay
 ;============================================================================
 
 ;
 ; XREFS:
+;     DEADCODE_Sprites_ResetForDefaultsMode1
 ;     Game_InitScreenAndMusic
 ;     PPU_HandleOnInterrupt
 ;     PPU_WaitUntilFlushed
-;     Sprites_ResetForGameScreen
-;     UNUSED_Sprites_ResetForDefaultsMode1
+;     Screen_ResetSpritesForGamePlay
 ;
 PPU_ForceLowerPatternTables:                ; [$005b]
     db $00                                  ; [$005b] bool
@@ -1852,18 +1883,18 @@ LoadCompressedScreenData_CurByte:           ; [$0060]
 ; player body/armor, the shield, and the weapon.
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
 ;     Player_LoadArmorSpriteTilesAddr
 ;     Player_LoadShieldSpriteTileAddrs
 ;     Player_LoadWeaponSpriteTileAddrs
+;     Player_LoadWeaponTile
 ;============================================================================
 
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
 ;     Player_LoadArmorSpriteTilesAddr
 ;     Player_LoadShieldSpriteTileAddrs
 ;     Player_LoadWeaponSpriteTileAddrs
+;     Player_LoadWeaponTile
 ;
 Player_SpriteTileReadAddr_L:                ; [$0061]
     db $00                                  ; [$0061] byte
@@ -1882,8 +1913,9 @@ Player_SpriteTileReadAddr_U:                ; [$0062]
 ; Area/screen information.
 ;
 ; XREFS:
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenDown
 ;     Area_ScrollScreenUp
-;     Area_ScrollToNextRoom
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
 ;     GameLoop_CheckShowPlayerMenu
@@ -1893,7 +1925,6 @@ Player_SpriteTileReadAddr_U:                ; [$0062]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
-;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_MoveDownScreen
@@ -1914,8 +1945,9 @@ Player_SpriteTileReadAddr_U:                ; [$0062]
 ;
 ;
 ; XREFS:
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenDown
 ;     Area_ScrollScreenUp
-;     Area_ScrollToNextRoom
 ;     Debug_ChooseArea
 ;     EndGame_MoveToKingsRoom
 ;     GameLoop_CheckShowPlayerMenu
@@ -1925,7 +1957,6 @@ Player_SpriteTileReadAddr_U:                ; [$0062]
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
-;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;     Player_MoveDownScreen
@@ -1987,7 +2018,7 @@ Screen_DestPaletteOrIndex:                  ; [$0065]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Player_TryMoveLeft
 ;
 Area_ScreenToTheLeft:                       ; [$0066]
@@ -1999,7 +2030,7 @@ Area_ScreenToTheLeft:                       ; [$0066]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Player_TryMoveRight
 ;
 Area_ScreenToTheRight:                      ; [$0067]
@@ -2011,8 +2042,8 @@ Area_ScreenToTheRight:                      ; [$0067]
 ;
 ;
 ; XREFS:
+;     Area_LoadScrollDataRight
 ;     Area_ScrollScreenUp
-;     Area_ScrollToNextRoom
 ;     Player_CheckHandleClimbUp
 ;
 Area_ScreenAbove:                           ; [$0068]
@@ -2024,8 +2055,8 @@ Area_ScreenAbove:                           ; [$0068]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
-;     Maybe_MoveDownOneScreen
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenDown
 ;     Player_MoveDownScreen
 ;
 Area_ScreenBelow:                           ; [$0069]
@@ -2077,7 +2108,7 @@ Screen_StartPosYX:                          ; [$006c]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlockDataVert
 ;     Screen_LoadBlocksHoriz
 ;
@@ -2143,7 +2174,7 @@ CurrentArea_BlockData4CurAddr:              ; [$0072]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlockDataVert
 ;     Screen_RunWriteScrollDataHandler
 ;
@@ -2152,7 +2183,7 @@ Screen_NeighborBlocksLoadedByDirection:     ; [$0073]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlocksHoriz
 ;
 Screen_ScrollHorizBlocksLoaded:             ; [$0074]
@@ -2160,7 +2191,7 @@ Screen_ScrollHorizBlocksLoaded:             ; [$0074]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlockDataVert
 ;
 Screen_MaybeUnused_0075:                    ; [$0075]
@@ -2168,7 +2199,7 @@ Screen_MaybeUnused_0075:                    ; [$0075]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_LoadBlocksHoriz
 ;
 Screen_ScrollHorizAttrsLoaded:              ; [$0076]
@@ -2176,7 +2207,7 @@ Screen_ScrollHorizAttrsLoaded:              ; [$0076]
 
 ;
 ; XREFS:
-;     Area_Maybe_ShowRoomTransition
+;     Area_ScrollScreenRight
 ;     Screen_RunWriteScrollDataHandler
 ;
 Screen_LoadBlocksStage:                     ; [$0077]
@@ -2277,7 +2308,7 @@ CurrentArea_BlockPropertiesAddr_U:          ; [$0089]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_LoadAreaTable
 ;
 CurrentArea_ScrollingDataAddr:              ; [$008a]
@@ -2285,7 +2316,7 @@ CurrentArea_ScrollingDataAddr:              ; [$008a]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_LoadAreaTable
 ;
 ScrollingData_U:                            ; [$008b]
@@ -2297,7 +2328,7 @@ ScrollingData_U:                            ; [$008b]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
@@ -2346,28 +2377,28 @@ CurrentArea_DoorDestinationsAddr_U:         ; [$0090]
 ; shield, or weapon tiles will be loaded.
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTile
+;     Player_LoadWeaponTilesToPPU
 ;============================================================================
 
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTile
+;     Player_LoadWeaponTilesToPPU
 ;
 Player_SpriteSegmentPPUAddr_L:              ; [$0091]
     db $00                                  ; [$0091] byte
 
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTile
+;     Player_LoadWeaponTilesToPPU
 ;
 Player_SpriteSegmentPPUAddr_U:              ; [$0092]
     db $00                                  ; [$0092] byte
@@ -2481,6 +2512,10 @@ CurrentSprite_StartPPUTileOffset:           ; [$009a]
 CurrentSprite_LoadTileCount:                ; [$009b]
     db $00                                  ; [$009b] byte
 
+
+;============================================================================
+; MOD NOTES: 1 unused byte of RAM.
+;============================================================================
 UNUSED_009C:                                ; [$009c]
     db $00                                  ; [$009c] undefined
 
@@ -2531,7 +2566,7 @@ Player_PosX_Frac:                           ; [$009d]
 ;     Area_CanPlayerMoveRight
 ;     Area_CanPlayerMoveUp
 ;     Area_CheckCanClimbAdjacent
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Area_SetStateFromDoorDestination
 ;     EndGame_MovePlayerTowardKing
 ;     FUN_PRG15_MIRROR__ec58
@@ -2614,15 +2649,15 @@ BYTE_00a0:                                  ; [$00a0]
 ;     Area_CanPlayerMoveLeft
 ;     Area_CanPlayerMoveUp
 ;     Area_CheckCanClimbAdjacent
+;     Area_LoadScrollDataRight
+;     Area_ScrollScreenDown
 ;     Area_ScrollScreenUp
-;     Area_ScrollToNextRoom
 ;     Area_SetStateFromDoorDestination
 ;     FUN_PRG15_MIRROR__ec58
 ;     Game_EnterBuilding
 ;     Game_SpawnInTemple
 ;     LAB_PRG15_MIRROR__e49a [$PRG15_MIRROR::e49a]
 ;     LAB_PRG15_MIRROR__e4a2 [$PRG15_MIRROR::e4a2]
-;     Maybe_MoveDownOneScreen
 ;     Maybe_SetPlayerForScrollUp
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbMaybeSide
@@ -2646,9 +2681,9 @@ Player_PosY:                                ; [$00a1]
 ; XREFS:
 ;     CurrentSprite_UpdateState
 ;     Player_DrawWeapon
+;     Area_ScrollScreenDown
 ;     Area_ScrollScreenUp
 ;     CastMagic_RunUpdateSpellHandler
-;     Maybe_MoveDownOneScreen
 ;     Player_CheckHandleClimbUp
 ;     Player_DrawBody
 ;     Player_MoveDownScreen
@@ -2668,7 +2703,7 @@ Player_Something_ScrollPosY:                ; [$00a2]
 ;
 ; XREFS:
 ;     Maybe_Player_CalcAnimFrame
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     Player_CheckHandleClimbDown
 ;     Player_CheckHandleClimbUp
 ;     Player_CheckHandleJump
@@ -2693,8 +2728,8 @@ Player_MovementTick:                        ; [$00a3]
 ;
 ;
 ; XREFS:
-;     CurrentSprite_CalculateVisibility
 ;     Maybe_Player_CalcAnimFrame
+;     Player_CalculateVisibility
 ;     Player_CastMagic
 ;     Player_DrawShield
 ;     Player_DrawWeapon
@@ -2708,9 +2743,9 @@ Player_MovementTick:                        ; [$00a3]
 ;     EndGame_MoveToKingsRoom
 ;     FUN_PRG15_MIRROR__ec58
 ;     GameLoop_CheckUseCurrentItem
+;     Game_BeginExitBuilding
 ;     Game_SpawnInTemple
 ;     LAB_PRG15_MIRROR__e42c [$PRG15_MIRROR::e42c]
-;     Maybe_Game_MainExitBuildingHandler
 ;     Maybe_SetPlayerForScrollUp
 ;     Player_CheckHandleAttack
 ;     Player_CheckHandleClimb
@@ -2783,7 +2818,7 @@ Something_Player_ClimbLadderCheckPos:       ; [$00a6]
 ;
 ; XREFS:
 ;     Player_DrawWeapon
-;     Player_LoadArmorSprite
+;     Player_LoadArmorTilesToPPU
 ;
 Player_ArmorLookupIndex:                    ; [$00a7]
     db $00                                  ; [$00a7] byte
@@ -2792,10 +2827,10 @@ Player_ArmorLookupIndex:                    ; [$00a7]
 ; XREFS:
 ;     Player_DrawSprite
 ;     Player_DrawSpriteImmediately
-;     Player_DrawWeaponTile
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
-;     Player_LoadWeaponSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
+;     Player_LoadWeaponTile
+;     Player_LoadWeaponTilesToPPU
 ;     Player_SetInitialState
 ;
 Player_DrawTileReadOffset:                  ; [$00a8]
@@ -2880,7 +2915,11 @@ Player_InvincibilityPhase:                  ; [$00ad]
 PlayerHitsPhaseCounter:                     ; [$00ae]
     db $00                                  ; [$00ae] byte
 
-    db $00,$00                              ; [$00b0] undefined
+
+;============================================================================
+; MOD NOTES: 2 unused bytes of RAM.
+;============================================================================
+    db $00,$00                              ; [$00af] undefined
 
 ;
 ; XREFS:
@@ -2896,7 +2935,7 @@ Maybe_ClimbLadderOffset:                    ; [$00b1]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_MovePlayerOnScroll
 ;     Game_MovePlayerOnScrollLeft
 ;     Player_DrawBody
@@ -2910,7 +2949,7 @@ Maybe_PlayerX_ForScroll:                    ; [$00b2]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_MovePlayerOnScroll
 ;     Player_DrawBody
 ;
@@ -2926,7 +2965,7 @@ Maybe_PlayerY_ForScroll:                    ; [$00b3]
 ;
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Game_MovePlayerOnScroll
 ;     Game_MovePlayerOnScrollLeft
 ;     Game_UpdatePlayerOnScroll
@@ -2947,6 +2986,7 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__86bd
+;     Player_CalculateVisibility
 ;     SpriteBehavior_NecronAides
 ;     Sprites_MoveRight
 ;     Area_CanMoveImmediatelyRight
@@ -2975,6 +3015,7 @@ Screen_ScrollPlayerTransitionCounter:       ; [$00b4]
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__86bd
+;     Player_CalculateVisibility
 ;     SpriteBehavior_NecronAides
 ;     Sprites_MoveRight
 ;     Area_CanMoveImmediatelyRight
@@ -3004,6 +3045,7 @@ Arg_PixelPosX:                              ; [$00b5]
 ;     CurrentSprite_CalculateVisibility
 ;     CurrentSprite_CanMoveInDirection
 ;     FUN_PRG14__854c
+;     Player_CalculateVisibility
 ;     SpriteBehavior_NecronAides
 ;     Sprites_MoveRight__86c6
 ;     Area_CanPlayerMoveAtY
@@ -3067,6 +3109,7 @@ Blocks_Result:                              ; [$00b7]
 ;
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility
+;     Player_CalculateVisibility
 ;     CastMagic_CalculateVisibility
 ;============================================================================
 
@@ -3081,6 +3124,7 @@ Blocks_Result:                              ; [$00b7]
 ;
 ; XREFS:
 ;     CurrentSprite_CalculateVisibility
+;     Player_CalculateVisibility
 ;     CastMagic_CalculateVisibility
 ;
 Temp_MovingSpriteVisibility:                ; [$00b8]
@@ -3109,8 +3153,6 @@ Temp_HitBoxValue:                           ; [$00b9]
 ;     FUN_PRG14__854c
 ;     FUN_PRG14__9917
 ;     FUN_PRG14__9aa1
-;     FUN_PRG14__a077
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     Maybe_SpriteBody__99f3
 ;     Maybe_Sprite_HandleDeathDrop
@@ -3125,6 +3167,8 @@ Temp_HitBoxValue:                           ; [$00b9]
 ;     SpriteBehavior_Nash
 ;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura__a077
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Something_850d
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteUpdateHandler_Effect_LightningBall20
@@ -3165,9 +3209,7 @@ CurrentSprites_XPos_Full_7_:                ; [$00c1]
 ;     CurrentSprite_UpdateState
 ;     FUN_PRG14__9917
 ;     FUN_PRG14__9ac6
-;     FUN_PRG14__a077
 ;     FUN_PRG14__a0a0
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     Maybe_Sprite_HandleDeathDrop
 ;     MoveSpriteVerticalIfPossible
@@ -3183,6 +3225,8 @@ CurrentSprites_XPos_Full_7_:                ; [$00c1]
 ;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_Ripasheiku
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura__a077
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteUpdateHandler_Effect_EnemyDeath
 ;     SpriteUpdateHandler_Effect_LightningBall20
@@ -3244,8 +3288,8 @@ CurrentSprites_YPos_7_:                     ; [$00c9]
 ;     Sprites_IncrementScriptAddr
 ;     Sprites_MaybeDisableAndGoTo
 ;     Sprites_UpdateBehavior
-;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
+;     Screen_LoadSpriteInfo
 ;
 Sprites_ReadInfoAddr:                       ; [$00ca]
     db $00                                  ; [$00ca] byte
@@ -3258,8 +3302,8 @@ Sprites_ReadInfoAddr:                       ; [$00ca]
 ;     Sprites_IncrementScriptAddr
 ;     Sprites_MaybeDisableAndGoTo
 ;     Sprites_UpdateBehavior
-;     GameLoop_LoadSpriteInfo
 ;     Screen_LoadAllScreenInfo
+;     Screen_LoadSpriteInfo
 ;
 Sprites_ReadInfoAddr_U:                     ; [$00cb]
     db $00                                  ; [$00cb] byte
@@ -3545,7 +3589,7 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 
 
 ;============================================================================
-; UNUSED: The following 7 bytes are unused by Faxanadu.
+; MOD NOTES: 7 unused bytes of RAM.
 ;============================================================================
     db $00,$00,$00,$00,$00,$00,$00          ; [$00e1] undefined
 
@@ -3563,13 +3607,14 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     Area_SetBlocks
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetPPUAddrForBlockIndex
-;     IScripts_Maybe_DrawSpriteToPPU
-;     IScripts_ShowPortraitImage
+;     DEADCODE_FUN_PRG15_MIRROR__c033
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTiles
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPU_IncrementAddrBy
 ;     PPU_SetAddrForTextBoxPos
 ;     PPU_WriteTilesFromCHRRAM
-;     Player_DrawWeaponTile
+;     Player_LoadWeaponTile
 ;     Player_SetItem
 ;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_ClearTextTiles
@@ -3581,7 +3626,6 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
 ;     UI_DrawTimeValue
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;============================================================================
 
 ;
@@ -3598,13 +3642,14 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     Area_SetBlocks
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetPPUAddrForBlockIndex
-;     IScripts_Maybe_DrawSpriteToPPU
-;     IScripts_ShowPortraitImage
+;     DEADCODE_FUN_PRG15_MIRROR__c033
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTiles
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPU_IncrementAddrBy
 ;     PPU_SetAddrForTextBoxPos
 ;     PPU_WriteTilesFromCHRRAM
-;     Player_DrawWeaponTile
+;     Player_LoadWeaponTile
 ;     Player_SetItem
 ;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_ClearTextTiles
@@ -3616,7 +3661,6 @@ BankedCallSetup_SavedY:                     ; [$00e0]
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
 ;     UI_DrawTimeValue
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPU_TargetAddr:                             ; [$00e8]
     db $00                                  ; [$00e8] byte
@@ -3632,13 +3676,14 @@ PPU_TargetAddr:                             ; [$00e8]
 ;     Area_SetBlocks
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetPPUAddrForBlockIndex
-;     IScripts_Maybe_DrawSpriteToPPU
-;     IScripts_ShowPortraitImage
+;     DEADCODE_FUN_PRG15_MIRROR__c033
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTiles
 ;     PPUBuffer_QueueCommandOrLength
 ;     PPU_IncrementAddrBy
 ;     PPU_SetAddrForTextBoxPos
 ;     PPU_WriteTilesFromCHRRAM
-;     Player_DrawWeaponTile
+;     Player_LoadWeaponTile
 ;     Player_SetItem
 ;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_ClearTextTiles
@@ -3650,7 +3695,6 @@ PPU_TargetAddr:                             ; [$00e8]
 ;     UI_DrawManaOrHPBar
 ;     UI_DrawPlayerExperience
 ;     UI_DrawTimeValue
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPU_TargetAddr_U:                           ; [$00e9]
     db $00                                  ; [$00e9] byte
@@ -3949,7 +3993,7 @@ Maybe_Temp4:                                ; [$00ef]
 
 
 ;============================================================================
-; UNUSED: The following 2 bytes are unused by Faxanadu.
+; MOD NOTES: 2 unused bytes of RAM.
 ;============================================================================
     db $00,$00                              ; [$00f0] undefined
 
@@ -3959,27 +4003,27 @@ Maybe_Temp4:                                ; [$00ef]
 ;
 ; XREFS:
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_End
 ;     MScript_Op_EndLoop
 ;     MScript_Op_JumpSubroutine
-;     MScript_Op_Restart
+;     MScript_Op_NextLoopIfNCompleted
+;     MScript_Op_RestartChannel
 ;     MScript_Op_RestoreAddr
 ;     MScript_Op_Return
-;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SaveAddr_Store
 ;============================================================================
 
 ;
 ; XREFS:
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_End
 ;     MScript_Op_EndLoop
 ;     MScript_Op_JumpSubroutine
-;     MScript_Op_Restart
+;     MScript_Op_NextLoopIfNCompleted
+;     MScript_Op_RestartChannel
 ;     MScript_Op_RestoreAddr
 ;     MScript_Op_Return
-;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SaveAddr_Store
 ;
 Music_CurrentScriptAddrs:                   ; [$00f2]
     dw $0000                                ; [0]:
@@ -3988,21 +4032,24 @@ Music_CurrentScriptAddrs:                   ; [$00f2]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
 Music_CurrentScriptAddrs_3_:                ; [$00f8]
     dw $0000                                ; [3]:
 
 
 ;============================================================================
-; XXX Music, but MSB seems to be set when playing?
+; The ID of the current music.
+;
+; If bit 7 (MSB) is set, then the music is currently
+; playing.
 ;
 ; XREFS:
 ;     SplashAnimation_RunIntro
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
 ;     SpriteBehavior_ShadowEura
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
@@ -4014,12 +4061,12 @@ Music_CurrentScriptAddrs_3_:                ; [$00f8]
 ;     Player_UseHourGlass
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandleFinalBossKilled
-;     Audio_HandleIsPaused
-;     Audio_HandleOnInterrupt
-;     Audio_LoadMusic
-;     Audio_PlayMusic
-;     MScript_Op_Restart
-;     Sound_InitPlayingState
+;     Audio_InitPlayingState
+;     Audio_ResetIfNothingSet
+;     MScript_Op_RestartChannel
+;     Music_HandleOnInterrupt
+;     Music_Load
+;     Music_PlayNext
 ;============================================================================
 
 ;
@@ -4028,7 +4075,7 @@ Music_CurrentScriptAddrs_3_:                ; [$00f8]
 ;     SplashAnimation_RunOutro
 ;     StartScreen_Draw
 ;     SpriteBehavior_ShadowEura
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
@@ -4040,26 +4087,43 @@ Music_CurrentScriptAddrs_3_:                ; [$00f8]
 ;     Player_UseHourGlass
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandleFinalBossKilled
-;     Audio_HandleIsPaused
-;     Audio_HandleOnInterrupt
-;     Audio_LoadMusic
-;     Audio_PlayMusic
-;     MScript_Op_Restart
-;     Sound_InitPlayingState
+;     Audio_InitPlayingState
+;     Audio_ResetIfNothingSet
+;     MScript_Op_RestartChannel
+;     Music_HandleOnInterrupt
+;     Music_Load
+;     Music_PlayNext
 ;
-CurrentMusic:                               ; [$00fa]
+Music_Current:                              ; [$00fa]
     db $00                                  ; [$00fa] Music
+
+
+;============================================================================
+; The ID of the current sound effect.
+;
+; If bit 7 (MSB) is set, then the sound effect is currently
+; playing.
+;
+; XREFS:
+;     SoundEffect_SetCurrent
+;     Audio_InitPlayingState
+;     SoundEffects_HandleOnInterrupt
+;============================================================================
 
 ;
 ; XREFS:
-;     PlaySoundInner
-;     Sound_HandleOnInterrupt
-;     Sound_InitPlayingState
+;     SoundEffect_SetCurrent
+;     Audio_InitPlayingState
+;     SoundEffects_HandleOnInterrupt
 ;
-NextSoundEffect:                            ; [$00fb]
+SoundEffect_Current:                        ; [$00fb]
     db $00                                  ; [$00fb] byte
 
-    db $00,$00,$00                          ; [$00fd] undefined
+
+;============================================================================
+; MOD NOTES: 4 unused bytes of RAM.
+;============================================================================
+    db $00,$00,$00                          ; [$00fc] undefined
 
 irq:                                        ; [$00ff]
     db $00                                  ; [$00ff] undefined
@@ -4070,18 +4134,17 @@ irq:                                        ; [$00ff]
 ;
 ; XREFS:
 ;     Area_LoadBlockProperties
+;     Area_LoadScrollDataRight
 ;     Area_LoadTiles
-;     Area_ScrollToNextRoom
 ;     Area_SetBlocks
 ;     Area_SetStateFromDoorDestination
 ;     CurrentSprite_LoadTilesInfo
-;     FUN_PRG15_MIRROR__f2e3
-;     GameLoop_LoadSpriteInfo
 ;     Game_DrawScreenInFrozenState
 ;     Game_InitMMCAndBank
 ;     Game_InitScreenAndMusic
 ;     Game_LoadAreaTable
-;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTilesAddress
 ;     MMC1_EnsurePRG
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SaveROMBankAndUpdateTo
@@ -4090,22 +4153,23 @@ irq:                                        ; [$00ff]
 ;     OnInterrupt
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_WriteTilesFromCHRRAM
-;     Player_DrawArmorTile
-;     Player_DrawShieldTile
-;     Player_DrawWeaponTile
 ;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadArmorTile
 ;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadShieldTile
 ;     Player_LoadWeaponSpriteTileAddrs
+;     Player_LoadWeaponTile
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
 ;     Screen_HandleScrollUp
-;     Screen_LoadBackgroundPalette
-;     Screen_LoadPalette
+;     Screen_LoadSpriteInfo
+;     Screen_LoadUIPalette
 ;     Screen_SetFadeOutPalette
+;     Screen_SetPaletteData
+;     Sprite_DrawPortraitPartAppearance
 ;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
-;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadCommon
 ;     Sprites_LoadImageForCurrentSprite
 ;     Sprites_LoadSpriteValue
@@ -4121,18 +4185,17 @@ irq:                                        ; [$00ff]
 ;
 ; XREFS:
 ;     Area_LoadBlockProperties
+;     Area_LoadScrollDataRight
 ;     Area_LoadTiles
-;     Area_ScrollToNextRoom
 ;     Area_SetBlocks
 ;     Area_SetStateFromDoorDestination
 ;     CurrentSprite_LoadTilesInfo
-;     FUN_PRG15_MIRROR__f2e3
-;     GameLoop_LoadSpriteInfo
 ;     Game_DrawScreenInFrozenState
 ;     Game_InitMMCAndBank
 ;     Game_InitScreenAndMusic
 ;     Game_LoadAreaTable
-;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_DrawPortraitTileToPPU
+;     IScripts_LoadPortraitTilesAddress
 ;     MMC1_EnsurePRG
 ;     MMC1_LoadBankAndJump
 ;     MMC1_SaveROMBankAndUpdateTo
@@ -4141,22 +4204,23 @@ irq:                                        ; [$00ff]
 ;     OnInterrupt
 ;     PPU_LoadGlyphsForStrings
 ;     PPU_WriteTilesFromCHRRAM
-;     Player_DrawArmorTile
-;     Player_DrawShieldTile
-;     Player_DrawWeaponTile
 ;     Player_LoadArmorSpriteTilesAddr
+;     Player_LoadArmorTile
 ;     Player_LoadShieldSpriteTileAddrs
+;     Player_LoadShieldTile
 ;     Player_LoadWeaponSpriteTileAddrs
+;     Player_LoadWeaponTile
 ;     Screen_HandleScrollDown
 ;     Screen_HandleScrollLeft
 ;     Screen_HandleScrollRight
 ;     Screen_HandleScrollUp
-;     Screen_LoadBackgroundPalette
-;     Screen_LoadPalette
+;     Screen_LoadSpriteInfo
+;     Screen_LoadUIPalette
 ;     Screen_SetFadeOutPalette
+;     Screen_SetPaletteData
+;     Sprite_DrawPortraitPartAppearance
 ;     Sprite_SetAppearanceAddrFromOffset
 ;     Sprite_SetPlayerAppearanceAddr
-;     Sprite_SetPortraitAppearanceAddr
 ;     Sprites_LoadCommon
 ;     Sprites_LoadImageForCurrentSprite
 ;     Sprites_LoadSpriteValue
@@ -4170,291 +4234,380 @@ irq:                                        ; [$00ff]
 ;
 CurrentROMBank:                             ; [$0100]
     db $00                                  ; [$0100] ROMBank
+
+
+;============================================================================
+; MOD NOTES: 31 unused bytes of RAM.
+;============================================================================
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0101] undefined
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0111] undefined
 
 
 ;============================================================================
-; Whether the game is currently paused.
+; Whether audio is playing or paused.
+;
+; If bit 0 is set, the game has been paused.
+; If bit 7 is set, then audio has been paused.
+;
+; Audio will be paused following the game being paused,
+; at the next hardware interrupt.
 ;
 ; XREFS:
 ;     GameLoop_CheckPauseGame
 ;     Game_InitScreenAndMusic
-;     Audio_HandleIsPaused
-;     Audio_HandleOnInterrupt
-;     Sound_InitPlayingState
+;     Audio_HandlePaused
+;     Audio_InitPlayingState
+;     Music_HandleOnInterrupt
 ;============================================================================
 
 ;
 ; XREFS:
 ;     GameLoop_CheckPauseGame
 ;     Game_InitScreenAndMusic
-;     Audio_HandleIsPaused
-;     Audio_HandleOnInterrupt
-;     Sound_InitPlayingState
+;     Audio_HandlePaused
+;     Audio_InitPlayingState
+;     Music_HandleOnInterrupt
 ;
-PauseFlag:                                  ; [$0120]
-    db $00                                  ; [$0120] bool
+Game_PausedState:                           ; [$0120]
+    db $00                                  ; [$0120] byte
 
 
 ;============================================================================
-; The ID of the current sound being played.
+; The ID of the highest-priority sound being played.
+;
+; This is an index into SOUND_PRIORITIES, and
+; helps
+; manage which sound effect should be playing based on
+; its priority level.
 ;
 ; XREFS:
-;     PlaySoundInner
-;     Sound_Init
-;     Sound_InitPlayingState
+;     SoundEffect_SetCurrent
+;     Audio_InitPlayingState
+;     SoundEffects_Init
 ;     Sound_ResetCurrentSound
 ;============================================================================
 
 ;
 ; XREFS:
-;     PlaySoundInner
-;     Sound_Init
-;     Sound_InitPlayingState
+;     SoundEffect_SetCurrent
+;     Audio_InitPlayingState
+;     SoundEffects_Init
 ;     Sound_ResetCurrentSound
 ;
-CurrentSoundIndex:                          ; [$0121]
+SoundEffect_Unused_PriorityID:              ; [$0121]
     db $00                                  ; [$0121] byte
 
 ;
 ; XREFS:
-;     Sound_HandleOnInterrupt
-;     Sound_InitPlayingState
+;     Audio_InitPlayingState
+;     SoundEffects_HandleOnInterrupt
 ;     Sound_ResetCurrentSound
 ;
-SOUND_DAT_0122:                             ; [$0122]
+SoundEffect_HandlerIndex:                   ; [$0122]
     db $00                                  ; [$0122] byte
+
+
+;============================================================================
+; Number of ticks remaining for sound effect playback.
+;
+; Each index corresponds to a channel:
+;
+; 0: SQ1
+; 1: SQ2
+; 2: Triangle
+; 3: Noise
+;
+; XREFS:
+;     Music_ApplySQPitchEffectToLO
+;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
+;     Music_PlayWave
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffects_HandleOnInterrupt
+;     SoundEffects_Init
+;============================================================================
 
 ;
 ; XREFS:
+;     Music_ApplySQPitchEffectToLO
 ;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;     Music_PlayWave
-;     Music_UpdateSQLo
-;     SoundEffect_Handler_PlayerDied
-;     Sound_HandleOnInterrupt
-;     Sound_Init
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffects_HandleOnInterrupt
+;     SoundEffects_Init
 ;
-SoundEffects:                               ; [$0123]
+SoundEffect_TicksRemaining:                 ; [$0123]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
-;     Sound_HandleOnInterrupt
-;     Sound_Init
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_0x48_Setup
+;     SoundEffect_BreadTouched_Setup
+;     SoundEffect_CharacterInput_Setup
+;     SoundEffect_CoinDropped_Setup
+;     SoundEffect_CoinTouchedCommon_Setup
+;     SoundEffect_CursorMoved_Setup
+;     SoundEffect_FillHPOrMP_Setup
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_Setup
+;     SoundEffect_HitPlayer_Setup
+;     SoundEffect_ItemPickedUp_Setup
+;     SoundEffect_Magic_Setup
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_Typing_Setup
+;     SoundEffect_Maybe_UseSpecialItem2_Setup
+;     SoundEffect_OpenDoor_Setup
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_Pakukame_Setup
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffect_ShieldHitByMagic_Setup
+;     SoundEffect_ShowPlayerMenu_Setup
+;     SoundEffect_Tilte_Setup
+;     SoundEffects_HandleOnInterrupt
+;     SoundEffects_Init
 ;
-SOUND_DAT_0124:                             ; [$0124]
+SoundEffect_TicksRemaining_1_:              ; [$0124]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_HandleIsPaused
-;     SoundEffect_Handler_PlayerDied
-;     Sound_HandleOnInterrupt
-;     Sound_Init
+;     Audio_ResetIfNothingSet
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffects_HandleOnInterrupt
+;     SoundEffects_Init
 ;
-SOUND_DAT_0125:                             ; [$0125]
+SoundEffect_TicksRemaining_2_:              ; [$0125]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Audio_HandleIsPaused
+;     Audio_ResetIfNothingSet
 ;     Music_PlayNoise
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_Tilte
-;     Sound_HandleOnInterrupt
-;     Sound_Init
+;     SoundEffect_0x48_Setup
+;     SoundEffect_EnemyDied_Setup
+;     SoundEffect_HitEnemy_Setup
+;     SoundEffect_LadderDropped_Setup
+;     SoundEffect_MagicHitObstacle_Setup
+;     SoundEffect_Maybe_Step_Setup
+;     SoundEffect_Maybe_UseSpecialItem2_Setup
+;     SoundEffect_Message_Setup
+;     SoundEffect_OpenDoor_Setup
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffect_PushBlock_Setup
+;     SoundEffect_Tilte_Setup
+;     SoundEffects_HandleOnInterrupt
+;     SoundEffects_Init
 ;
-SOUND_DAT_0126:                             ; [$0126]
+SoundEffect_TicksRemaining_3_:              ; [$0126]
     db $00                                  ; [3]:
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_0x48_Setup
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_BreadTouched_Setup
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CharacterInput_Setup
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinDropped_Setup
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CoinTouchedCommon_Setup
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_CursorMoved_Setup
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_EnemyDied_Setup
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_FillHPOrMP_Setup
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitEnemy_Setup
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_HitPlayer_Setup
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_ItemPickedUp_Setup
+;     SoundEffect_LadderDropped_OnTick
+;     SoundEffect_LadderDropped_Setup
+;     SoundEffect_MagicHitObstacle_OnTick
+;     SoundEffect_MagicHitObstacle_Setup
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Magic_Setup
+;     SoundEffect_Maybe_Step_OnTick
+;     SoundEffect_Maybe_Step_Setup
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_Typing_Setup
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_Setup
+;     SoundEffect_Message_OnTick
+;     SoundEffect_Message_Setup
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_OpenDoor_Setup
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_Pakukame_Setup
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffect_PushBlock_OnTick
+;     SoundEffect_PushBlock_Setup
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShieldHitByMagic_Setup
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_ShowPlayerMenu_Setup
+;     SoundEffect_Tilte_OnTick
+;     SoundEffect_Tilte_Setup
+;     SoundEffects_DecrementCounter
 ;
-SoundEffect_MaybeIndex:                     ; [$0127]
+SoundEffect_State_Counter:                  ; [$0127]
     db $00                                  ; [$0127] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_0x48_Setup
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_BreadTouched_Setup
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CoinTouchedCommon_Setup
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_EnemyDied_Setup
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_FillHPOrMP_Setup
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_ItemPickedUp_Setup
+;     SoundEffect_MagicHitObstacle_Setup
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Magic_Setup
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_Setup
+;     SoundEffect_OpenDoor_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PlayerDied_Setup
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_ShowPlayerMenu_Setup
+;     SoundEffect_Tilte_OnTick
+;     SoundEffect_Tilte_Setup
 ;
 SoundEffect_State_0128:                     ; [$0128]
     db $00                                  ; [$0128] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_0x48_Setup
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_BreadTouched_Setup
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_FillHPOrMP_Setup
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_Setup
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_OpenDoor_Setup
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_ShowPlayerMenu_Setup
+;     SoundEffect_Tilte_OnTick
+;     SoundEffect_Tilte_Setup
 ;
 SoundEffect_State_0129:                     ; [$0129]
     db $00                                  ; [$0129] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_PlayerDied_OnTick
 ;     SoundEffect_SetNote
+;     SoundEffect_ShowPlayerMenu_OnTick
 ;
 SoundEffect_Note_Low:                       ; [$012a]
     db $00                                  ; [$012a] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_PlayerDied_OnTick
 ;     SoundEffect_SetNote
+;     SoundEffect_ShowPlayerMenu_OnTick
 ;
 SoundEffect_Note_High:                      ; [$012b]
     db $00                                  ; [$012b] byte
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScripts_InvokeNext_Something_8298
-;     Music_StoreRepeat
+;     MScripts_SetNoteLengthFromValue
+;     Music_Load
+;     Music_StoreNoteDuration
 ;
-MScript_RepeatCounts:                       ; [$012c]
+MScript_NoteDurations:                      ; [$012c]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_012d:                       ; [$012d]
+MScript_NoteDurations_1_:                   ; [$012d]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_012e:                       ; [$012e]
+MScript_NoteDurations_2_:                   ; [$012e]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_012f:                       ; [$012f]
+MScript_NoteDurations_3_:                   ; [$012f]
     db $00                                  ; [3]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     Audio_PlayMusic
 ;     MScript_Op_End
-;     Music_StoreRepeat
+;     Music_Load
+;     Music_PlayNext
+;     Music_StoreNoteDuration
 ;
-Music_Repeats:                              ; [$0130]
+Music_NoteTicksRemaining:                   ; [$0130]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     Audio_PlayMusic
+;     Music_Load
+;     Music_PlayNext
 ;
-Something_Music_0131:                       ; [$0131]
+Music_NoteTicksRemaining_1_:                ; [$0131]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0132:                       ; [$0132]
+Music_NoteTicksRemaining_2_:                ; [$0132]
     db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0133:                       ; [$0133]
+Music_NoteTicksRemaining_3_:                ; [$0133]
     db $00                                  ; [3]:
     db $00,$00,$00,$00                      ; [$0134] undefined
 
@@ -4471,8 +4624,8 @@ MScript_LoopStartAddrs:                     ; [$0138]
 
 ;
 ; XREFS:
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_EndLoop
+;     MScript_Op_NextLoopIfNCompleted
 ;
 MScript_LoopEndAddrs:                       ; [$0140]
     dw $0000                                ; [0]:
@@ -4494,8 +4647,8 @@ MScript_LoopLength:                         ; [$0148]
 ;
 ; XREFS:
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_EndLoop
+;     MScript_Op_NextLoopIfNCompleted
 ;
 MScript_LoopCounter:                        ; [$014c]
     db $00                                  ; [0]:
@@ -4503,14 +4656,29 @@ MScript_LoopCounter:                        ; [$014c]
     db $00                                  ; [2]:
     db $00                                  ; [3]:
 
+
+;============================================================================
+; The saved MScript addresses that can be restored back to.
+;
+; There is 1 address per channel.
 ;
 ; XREFS:
-;     Audio_LoadMusic
 ;     MScript_Op_RestoreAddr
-;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SaveAddr_Store
+;     Music_Load
+;============================================================================
+
+;
+; XREFS:
+;     MScript_Op_RestoreAddr
+;     MScript_Op_SaveAddr_Store
+;     Music_Load
 ;
 MScript_SavedAddr:                          ; [$0150]
-    dw $0000,$0000,$0000,$0000              ; [$0150] ushort
+    dw $0000                                ; [0]:
+    dw $0000                                ; [1]:
+    dw $0000                                ; [2]:
+    dw $0000                                ; [3]:
 
 
 ;============================================================================
@@ -4533,40 +4701,40 @@ MScript_PushedAddrs:                        ; [$0158]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xF7
+;     MScript_Op_SetGlobalTranspose
+;     Music_Load
 ;     Music_SetNote
 ;
-MScript_Maybe_8BitCounter:                  ; [$0160]
+Music_Global_Transpose:                     ; [$0160]
     db $00                                  ; [$0160] byte
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_SetWaveHigh
+;     MScript_Op_SetChannelTranspose
+;     Music_Load
 ;     Music_SetNote
 ;
-Music_Wave_Length_Highs:                    ; [$0161]
-    db $00                                  ; [$0161] undefined
+Music_Channel_Transpose:                    ; [$0161]
+    db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0162:                       ; [$0162]
-    db $00                                  ; [$0162] undefined
+Music_Channel_Transpose_1_:                 ; [$0162]
+    db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0163:                       ; [$0163]
-    db $00                                  ; [$0163] undefined
+Music_Channel_Transpose_2_:                 ; [$0163]
+    db $00                                  ; [2]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
+;     Music_Load
 ;     Music_PlayWave
 ;
 Music_SQ_Note_Lengths:                      ; [$0164]
@@ -4574,7 +4742,7 @@ Music_SQ_Note_Lengths:                      ; [$0164]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayWave
 ;
 Music_Note_Length_High:                     ; [$0165]
@@ -4582,16 +4750,16 @@ Music_Note_Length_High:                     ; [$0165]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Music_Unused:                               ; [$0166]
+Music_Unused_0166:                          ; [$0166]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Music_Unused_1_:                            ; [$0167]
+Music_Unused_0166_1_:                       ; [$0167]
     db $00                                  ; [1]:
 
 ;
@@ -4604,8 +4772,8 @@ Music_Noise_Index:                          ; [$0168]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
 ;     MScripts_InvokeNext
+;     Music_Load
 ;     Music_PlayNoise
 ;     Music_PlayWaveOrNoise
 ;
@@ -4624,58 +4792,64 @@ Music_Noise_Remaining:                      ; [$0169]
 ; 3 = Noise
 ;
 ; XREFS:
-;     Audio_PlayMusic
-;     MScript_Op_0xEF
-;     MScript_Op_0xF0
-;     MScript_Op_0xF2
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_End
 ;     MScript_Op_EndLoop
 ;     MScript_Op_JumpSubroutine
+;     MScript_Op_NextLoopIfNCompleted
 ;     MScript_Op_RestoreAddr
 ;     MScript_Op_Return
-;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SaveAddr_Store
+;     MScript_Op_SetChannelTranspose
+;     MScript_Op_SetControlBits
+;     MScript_Op_SetSQEnvelopeMode
+;     MScript_Op_SetSQPitchEffectDepth
 ;     MScript_Op_SetSQVol
-;     MScript_Op_SetWaveHigh
 ;     MScripts_GetNextValue
 ;     MScripts_InvokeNext
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
+;     Music_ApplySQPitchEffectToLO
 ;     Music_PlayForChannel
+;     Music_PlayNext
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;     Music_PlayWave
 ;     Music_PlayWaveOrNoise
 ;     Music_SetNote
-;     Music_StoreRepeat
-;     Music_UpdateSQLo
-;     Music_UpdateSQVol
+;     Music_StoreNoteDuration
+;     Music_UpdateSQVolRegister
 ;============================================================================
 
 ;
 ; XREFS:
-;     Audio_PlayMusic
-;     MScript_Op_0xEF
-;     MScript_Op_0xF0
-;     MScript_Op_0xF2
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_End
 ;     MScript_Op_EndLoop
 ;     MScript_Op_JumpSubroutine
+;     MScript_Op_NextLoopIfNCompleted
 ;     MScript_Op_RestoreAddr
 ;     MScript_Op_Return
-;     MScript_Op_SaveAddr_Inner
+;     MScript_Op_SaveAddr_Store
+;     MScript_Op_SetChannelTranspose
+;     MScript_Op_SetControlBits
+;     MScript_Op_SetSQEnvelopeMode
+;     MScript_Op_SetSQPitchEffectDepth
 ;     MScript_Op_SetSQVol
-;     MScript_Op_SetWaveHigh
 ;     MScripts_GetNextValue
 ;     MScripts_InvokeNext
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
+;     Music_ApplySQPitchEffectToLO
 ;     Music_PlayForChannel
+;     Music_PlayNext
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;     Music_PlayWave
 ;     Music_PlayWaveOrNoise
 ;     Music_SetNote
-;     Music_StoreRepeat
-;     Music_UpdateSQLo
-;     Music_UpdateSQVol
+;     Music_StoreNoteDuration
+;     Music_UpdateSQVolRegister
 ;
 MScript_CurrentChannel:                     ; [$016a]
     db $00                                  ; [$016a] byte
@@ -4685,39 +4859,42 @@ MScript_CurrentChannel:                     ; [$016a]
 ; Number of channels completed for the current song.
 ;
 ; This starts at 0. Once it hits 4, playback finishes and
-; CurrentMusic is cleared.
+; Music_Current is cleared.
 ;
 ; XREFS:
-;     Audio_PlayMusic
 ;     MScript_Op_End
+;     Music_PlayNext
 ;============================================================================
 
 ;
 ; XREFS:
-;     Audio_PlayMusic
 ;     MScript_Op_End
+;     Music_PlayNext
 ;
 Music_NumChannelsCompleted:                 ; [$016b]
     db $00                                  ; [$016b] byte
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
 ;     MScripts_InvokeNext
-;     MScripts_InvokeNext_Something_828e
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromNext
+;     MScripts_SetNoteLengthFromValue
+;     Music_Load
 ;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;     Music_PlayTriangleWave
 ;     Music_PlayWave
 ;     Music_SetNote
-;     Music_UpdateSQVol
+;     Music_UpdateSQVolRegister
 ;
 MScript_CurValue:                           ; [$016c]
     db $00                                  ; [$016c] byte
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayWave
 ;     Music_SetNote
 ;
@@ -4726,7 +4903,7 @@ Music_Note_Period_Low:                      ; [$016d]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayWave
 ;     Music_SetNote
 ;
@@ -4735,117 +4912,159 @@ Music_Note_Period_High:                     ; [$016e]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_SetNote
 ;
-Maybe_Unused_Music_016f:                    ; [$016f]
+MScript_Unused_RawValue:                    ; [$016f]
     db $00                                  ; [$016f] byte
 
+
+;============================================================================
+; Value used for Square Wave envelope modes.
+;
+; This is used differently in the different modes:
+;
+; Mode 0: Fixed-point, with volume in the upper nibble.
+; Mode 1: A volume value between 0-15 (in the lower nibble).
+; Mode 2: A volume from the pre-built table (between 0-15).
 ;
 ; XREFS:
-;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlayWave
+;============================================================================
+
+;
+; XREFS:
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
 ;     Music_PlayWave
 ;
-Music_SQEffect_CurValue:                    ; [$0170]
+Music_SQEnvelope_Value:                     ; [$0170]
     db $00                                  ; [0]:
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xF2
-;     Music_UpdateSQVol
+;     MScript_Op_SetControlBits
+;     Music_Load
+;     Music_UpdateSQVolRegister
 ;
-Something_Music_SQ_0172:                    ; [$0172]
+Music_SQ_ControlBits:                       ; [$0172]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0173:                       ; [$0173]
+Music_SQ_ControlBits_1_:                    ; [$0173]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
 ;     MScript_Op_SetSQVol
-;     Music_UpdateSQVol
+;     Music_Load
+;     Music_UpdateSQVolRegister
 ;
-Music_SQ_Vol:                               ; [$0174]
+Music_SQ_Fades:                             ; [$0174]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0175:                       ; [$0175]
+Music_SQ_Fades_1_:                          ; [$0175]
     db $00                                  ; [1]:
+
+
+;============================================================================
+; The envelope mode for each Square Wave channel.
+;
+; This supports the following values:
+;
+; 0: Volume decay
+;
+;    Ramps down the volume smoothly
+;
+; 1: Curve but held
+;
+;    Clamps the envelope into a range 0..15 and then slows the decay
+;
+; 2: Pre-built attack/decay curve
+;
+;    Pitches up and then down in a set pattern
+;
+; XREFS:
+;     MScript_Op_SetSQEnvelopeMode
+;     Music_Load
+;     Music_PlayForChannel
+;============================================================================
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xF0
+;     MScript_Op_SetSQEnvelopeMode
+;     Music_Load
 ;     Music_PlayForChannel
 ;
-Music_SQEffect_Mode:                        ; [$0176]
+Music_SQEnvelope_Mode:                      ; [$0176]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0177:                       ; [$0177]
+Music_SQEnvelope_Mode_1_:                   ; [$0177]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_ApplySQPitchEffectToLO
+;     Music_Load
 ;     Music_PlayTriangleWave
-;     Music_UpdateSQLo
 ;
-Something_Music_0178:                       ; [$0178]
+Music_SQEffect_Delta:                       ; [$0178]
     db $00                                  ; [$0178] undefined1
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     Music_PlayForChannel
+;     Music_ApplySQPitchEffectToLO
+;     Music_Load
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModePluck
 ;     Music_PlayWave
-;     Music_UpdateSQLo
 ;
-Music_SQEffect_Counter:                     ; [$0179]
+Music_SQEnvelope_Phase:                     ; [$0179]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayWave
 ;
-Something_Music_017a:                       ; [$017a]
+Music_SQEnvelope_Phase_1_:                  ; [$017a]
     db $00                                  ; [1]:
     db $00                                  ; [$017b] undefined
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_ApplySQPitchEffectToLO
+;     Music_Load
 ;     Music_PlayWave
-;     Music_UpdateSQLo
 ;
 Music_Current_SQ_Low:                       ; [$017c]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayWave
 ;
-Music_SQ2_Low:                              ; [$017d]
+Music_Current_SQ_Low_1_:                    ; [$017d]
     db $00                                  ; [1]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;     Music_PlayForChannel
 ;     Music_PlayTriangleWave
 ;
@@ -4854,38 +5073,34 @@ Something_Music_Triangle_017e:              ; [$017e]
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xEF
-;     Music_UpdateSQLo
+;     MScript_Op_SetSQPitchEffectDepth
+;     Music_ApplySQPitchEffectToLO
+;     Music_Load
 ;
-Music_Something_SQ_017f:                    ; [$017f]
+Music_SQPitchDelta_Mask:                    ; [$017f]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-Something_Music_0180:                       ; [$0180]
+Music_SQPitchDelta_Mask_1_:                 ; [$0180]
     db $00                                  ; [1]:
 
-
-;============================================================================
-; A reduction in the length of the SQ2 wave note lengths.
 ;
 ; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xEE
+;     MScript_Op_SetSQ2Detune
+;     Music_Load
 ;     Music_PlayWave
-;============================================================================
+;
+Music_SQ2_TimerLowBias:                     ; [$0181]
+    db $00                                  ; [$0181] undefined
 
-;
-; XREFS:
-;     Audio_LoadMusic
-;     MScript_Op_0xEE
-;     Music_PlayWave
-;
-Music_SQ2_Length_Reduction:                 ; [$0181]
-    hex 00 00 00 00 00 00 00 00 00          ; [$0181] undefined
+
+;============================================================================
+; MOD NOTES: 8 unused bytes of RAM.
+;============================================================================
+    hex 00 00 00 00 00 00 00 00             ; [$0182] undefined
 
 
 ;============================================================================
@@ -5784,7 +5999,7 @@ Screen_PaletteData_15_:                     ; [$02a2]
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_Intro_SomethingA708
 ;     StartScreen_Draw
-;     Screen_LoadPalette
+;     Screen_SetPaletteData
 ;
 Screen_PaletteData_30_:                     ; [$02b1]
     db $00                                  ; [30]:
@@ -5795,7 +6010,7 @@ Screen_PaletteData_30_:                     ; [$02b1]
 ;     SplashAnimation_DrawScenery
 ;     SplashAnimation_Intro_SomethingA708
 ;     StartScreen_Draw
-;     Screen_LoadPalette
+;     Screen_SetPaletteData
 ;
 Screen_PaletteData_31_:                     ; [$02b2]
     db $00                                  ; [31]:
@@ -5826,7 +6041,7 @@ Screen_PaletteData_31_:                     ; [$02b2]
 ;     Player_CastMagic
 ;     Player_ClearVisibleMagic
 ;     Sprite_CheckHitByCastMagic
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     CastMagic_RunUpdateSpellHandler
 ;     CastMagic_SetAppearance
 ;============================================================================
@@ -5860,7 +6075,7 @@ Screen_PaletteData_31_:                     ; [$02b2]
 ;     Player_CastMagic
 ;     Player_ClearVisibleMagic
 ;     Sprite_CheckHitByCastMagic
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     CastMagic_RunUpdateSpellHandler
 ;     CastMagic_SetAppearance
 ;
@@ -6040,7 +6255,6 @@ CurrentSprites_YPos_Frac:                   ; [$02c4]
 ;     CurrentSprite_CheckHitPlayer
 ;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     Player_AddExperienceFromSprite
 ;     Player_ApplyDamage
@@ -6061,6 +6275,7 @@ CurrentSprites_YPos_Frac:                   ; [$02c4]
 ;     SpriteBehavior_LightningBallOrCharron
 ;     SpriteBehavior_MaybeFallingRocks__ClearEntity
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteBehavior_a25f_ClearEntity
@@ -6084,7 +6299,6 @@ CurrentSprites_YPos_Frac:                   ; [$02c4]
 ;     CurrentSprite_CheckHitPlayer
 ;     CurrentSprite_HandleFall
 ;     CurrentSprite_UpdateState
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     Player_AddExperienceFromSprite
 ;     Player_ApplyDamage
@@ -6105,6 +6319,7 @@ CurrentSprites_YPos_Frac:                   ; [$02c4]
 ;     SpriteBehavior_LightningBallOrCharron
 ;     SpriteBehavior_MaybeFallingRocks__ClearEntity
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Unknown_29
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteBehavior_a25f_ClearEntity
@@ -6137,9 +6352,9 @@ CurrentSprites_Entities:                    ; [$02cc]
 ;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_HasMaxOnScreen
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
-;     GameLoop_ClearSprites
 ;     GameLoop_LoadSpriteImages
 ;     Maybe_IsSpriteEntityNotOnScreen
+;     Screen_ClearSprites
 ;     Sprites_HasBoss
 ;     Sprites_HasCurrentSprites
 ;     Sprites_HasSpritesNotOfType
@@ -6156,9 +6371,9 @@ CurrentSprites_Entities_6_:                 ; [$02d2]
 ;     Sprites_HasAnyEnemyOnScreen
 ;     Sprites_HasMaxOnScreen
 ;     _Sprites_ReplaceWithMattock_HasMaxOnScreen
-;     GameLoop_ClearSprites
 ;     GameLoop_LoadSpriteImages
 ;     Maybe_IsSpriteEntityNotOnScreen
+;     Screen_ClearSprites
 ;     Sprites_HasBoss
 ;     Sprites_HasCurrentSprites
 ;     Sprites_HasSpritesNotOfType
@@ -6215,14 +6430,14 @@ CurrentSprites_Behaviors:                   ; [$02d4]
 
 ;
 ; XREFS:
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;
 CurrentSprites_Behaviors_6_:                ; [$02da]
     db $00                                  ; [6]:
 
 ;
 ; XREFS:
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;     Sprites_PopulateNextAvailableSprite
 ;
 CurrentSprites_Behaviors_7_:                ; [$02db]
@@ -6245,8 +6460,6 @@ CurrentSprites_Behaviors_7_:                ; [$02db]
 ;     FUN_PRG14__844b
 ;     FUN_PRG14__849a
 ;     FUN_PRG14__854c
-;     FUN_PRG14__a077
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     MoveSpriteHorizIfPossible
 ;     MoveSpriteVerticalIfPossible
@@ -6269,6 +6482,8 @@ CurrentSprites_Behaviors_7_:                ; [$02db]
 ;     SpriteBehavior_Pakukame
 ;     SpriteBehavior_Ripasheiku
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura__a077
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_SomethingZoradohna_18
 ;     SpriteBehavior_Something_850d
 ;     SpriteBehavior_Unknown_29
@@ -6807,11 +7022,11 @@ CurrentSprites_BehaviorState_YFrac:         ; [$0324]
 ; XREFS:
 ;     BScript_Action_CastMagic
 ;     CurrentSprite_UpdateState
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior_BounceAndExpire
 ;     SpriteBehavior_ExecutionHood__a0ad
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart
 ;     Sprite_CastMagic
@@ -6822,11 +7037,11 @@ CurrentSprites_BehaviorState_YFrac:         ; [$0324]
 ; XREFS:
 ;     BScript_Action_CastMagic
 ;     CurrentSprite_UpdateState
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior_BounceAndExpire
 ;     SpriteBehavior_ExecutionHood__a0ad
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart
 ;     Sprite_CastMagic
@@ -6919,14 +7134,14 @@ CurrentSprites_HP:                          ; [$0344]
 
 ;
 ; XREFS:
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;
 CurrentSprites_HP_6_:                       ; [$034a]
     db $00                                  ; [6]:
 
 ;
 ; XREFS:
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;     Sprites_PopulateNextAvailableSprite
 ;
 CurrentSprites_HP_7_:                       ; [$034b]
@@ -6960,7 +7175,7 @@ CurrentSprites_HitCounter:                  ; [$034c]
 
 ;
 ; XREFS:
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;
 CurrentSprites_HitCounter_6_:               ; [$0352]
     db $00                                  ; [6]:
@@ -6968,7 +7183,7 @@ CurrentSprites_HitCounter_6_:               ; [$0352]
 ;
 ; XREFS:
 ;     _handleHit [$PRG14::804e]
-;     GameLoop_ClearSprites
+;     Screen_ClearSprites
 ;
 CurrentSprites_HitCounter_7_:               ; [$0353]
     db $00                                  ; [7]:
@@ -7247,7 +7462,7 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     Sprites_UpdateAllStates
 ;     Sprites_UpdateBehavior
 ;     _afterFarJump [$PRG14::89ff]
-;     _updateSprite [$PRG14::8011]
+;     _updateSpriteLoop [$PRG14::8011]
 ;     CastMagic_CalculateVisibility
 ;     GameLoop_LoadSpriteImages
 ;     Player_PickUpRedPotion
@@ -7298,7 +7513,7 @@ Arg_DeltaY_Full:                            ; [$0377]
 ;     Sprites_UpdateAllStates
 ;     Sprites_UpdateBehavior
 ;     _afterFarJump [$PRG14::89ff]
-;     _updateSprite [$PRG14::8011]
+;     _updateSpriteLoop [$PRG14::8011]
 ;     CastMagic_CalculateVisibility
 ;     GameLoop_LoadSpriteImages
 ;     Player_PickUpRedPotion
@@ -7445,11 +7660,11 @@ SpriteUpdateCounter:                        ; [$0383]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a077
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior_KingGrieve_9f65
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura__a077
+;     SpriteBehavior_ShadowEura__a12d
 ;     Sprite_CastMagic
 ;
 CurrentSprite_Arg_CastMagicX:               ; [$0384]
@@ -7457,11 +7672,11 @@ CurrentSprite_Arg_CastMagicX:               ; [$0384]
 
 ;
 ; XREFS:
-;     FUN_PRG14__a077
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior_KingGrieve_9f65
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
+;     SpriteBehavior_ShadowEura__a077
+;     SpriteBehavior_ShadowEura__a12d
 ;     Sprite_CastMagic
 ;
 CurrentSprite_Arg_CastMagicY:               ; [$0385]
@@ -7496,13 +7711,13 @@ CurrentSprite_TilesBank:                    ; [$0386]
 ; X coordinate of the sprite being processed.
 ;
 ; XREFS:
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;============================================================================
 
 ;
 ; XREFS:
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;
 CurrentSprite_XPos:                         ; [$0389]
@@ -7513,13 +7728,13 @@ CurrentSprite_XPos:                         ; [$0389]
 ; Y coordinate of the sprite being processed.
 ;
 ; XREFS:
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;============================================================================
 
 ;
 ; XREFS:
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;
 CurrentSprite_YPos:                         ; [$038a]
@@ -7532,7 +7747,7 @@ CurrentSprite_YPos:                         ; [$038a]
 ; XREFS:
 ;     CurrentSprite_LoadTilesInfo
 ;     GameLoop_LoadSpriteImages
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;     Sprites_StoreBankForCurrentSprite
 ;============================================================================
@@ -7541,7 +7756,7 @@ CurrentSprite_YPos:                         ; [$038a]
 ; XREFS:
 ;     CurrentSprite_LoadTilesInfo
 ;     GameLoop_LoadSpriteImages
-;     GameLoop_LoadSpriteInfo
+;     Screen_LoadSpriteInfo
 ;     Sprites_PopulateNextAvailableSprite
 ;     Sprites_StoreBankForCurrentSprite
 ;
@@ -7578,14 +7793,14 @@ CurrentSprite_Value:                        ; [$038c]
 ;
 ; XREFS:
 ;     TextBox_GetBackgroundAttributeData
-;     Screen_LoadBackgroundPalette
+;     Screen_LoadUIPalette
 ;     UI_SetHUDPPUAttributes
 ;============================================================================
 
 ;
 ; XREFS:
 ;     TextBox_GetBackgroundAttributeData
-;     Screen_LoadBackgroundPalette
+;     Screen_LoadUIPalette
 ;     UI_SetHUDPPUAttributes
 ;
 UI_AttributeDataIndex:                      ; [$038d]
@@ -8004,7 +8219,7 @@ SelectedWeapon:
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;     Player_HandleDeath
-;     Player_LoadArmorSprite
+;     Player_LoadArmorTilesToPPU
 ;     Player_SetArmor
 ;============================================================================
 
@@ -8019,7 +8234,7 @@ SelectedWeapon:
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;     Player_HandleDeath
-;     Player_LoadArmorSprite
+;     Player_LoadArmorTilesToPPU
 ;     Player_SetArmor
 ;
 SelectedArmor:                              ; [$03be]
@@ -8046,8 +8261,8 @@ SelectedArmor:                              ; [$03be]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;     Player_HandleDeath
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
 ;     Player_SetShield
 ;============================================================================
 
@@ -8064,8 +8279,8 @@ SelectedArmor:                              ; [$03be]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;     Player_HandleDeath
-;     Player_LoadArmorSprite
-;     Player_LoadShieldSprite
+;     Player_LoadArmorTilesToPPU
+;     Player_LoadShieldTilesToPPU
 ;     Player_SetShield
 ;
 SelectedShield:                             ; [$03bf]
@@ -8327,13 +8542,13 @@ NumberOfItems:                              ; [$03c6]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     FUN_PRG15_MIRROR__f2e3
-;     GameLoop_ClearSprites
 ;     IScripts_ClearPortraitImage
 ;     IScripts_DrawPortraitAnimationFrame
 ;     IScripts_GetPortraitOffset
-;     IScripts_ShowPortraitImage
+;     IScripts_LoadPortraitTiles
+;     IScripts_LoadPortraitTilesAddress
 ;     Player_DrawBody
+;     Screen_ClearSprites
 ;============================================================================
 
 ;
@@ -8342,13 +8557,13 @@ NumberOfItems:                              ; [$03c6]
 ;     CurrentSprite_UpdateState
 ;     Player_DrawShield
 ;     Player_DrawWeapon
-;     FUN_PRG15_MIRROR__f2e3
-;     GameLoop_ClearSprites
 ;     IScripts_ClearPortraitImage
 ;     IScripts_DrawPortraitAnimationFrame
 ;     IScripts_GetPortraitOffset
-;     IScripts_ShowPortraitImage
+;     IScripts_LoadPortraitTiles
+;     IScripts_LoadPortraitTilesAddress
 ;     Player_DrawBody
+;     Screen_ClearSprites
 ;
 IScript_PortraitID:                         ; [$03c7]
     db $00                                  ; [$03c7] byte
@@ -8362,7 +8577,7 @@ IScript_PortraitID:                         ; [$03c7]
 ;     SpriteBehavior_DragonSlayerDroppedByKingGrieve
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
-;     Player_LoadWeaponSprite
+;     Player_LoadWeaponTilesToPPU
 ;     Player_SetWeapon
 ;
 Player_CurWeapon:                           ; [$03c8]
@@ -8413,15 +8628,15 @@ Screen_PaletteIndex:                        ; [$03d0]
 
 ;
 ; XREFS:
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     EndGame_MoveToKingsRoom
+;     Game_BeginExitBuilding
 ;     Game_EnterAreaHandler
 ;     Game_EnterBuilding
 ;     Game_ExitBuilding
 ;     Game_LoadCurrentArea
 ;     Game_LoadFirstLevel
 ;     Game_SpawnInTemple
-;     Maybe_Game_MainExitBuildingHandler
 ;     Player_CheckHandleEnterDoor
 ;     Player_EnterDoorToInside
 ;     ScreenEvents_HandleBoss
@@ -8432,8 +8647,8 @@ Areas_DefaultMusic:                         ; [$03d1]
 
 ;
 ; XREFS:
+;     Game_BeginExitBuilding
 ;     Game_SpawnInTemple
-;     Maybe_Game_MainExitBuildingHandler
 ;     Player_EnterDoorToInside
 ;
 Area_Music_Outside:                         ; [$03d2]
@@ -8445,18 +8660,19 @@ Area_Music_Outside:                         ; [$03d2]
 ;
 ; XREFS:
 ;     IScripts_ClearPortraitImage
-;     IScripts_ShowPortraitImage
+;     IScripts_LoadPortraitTiles
 ;============================================================================
 
 ;
-; The saved palette index, when temporarily switching to a new one.
+; The saved palette index, when temporarily switching to
+; a new one.
 ;
 ; This is used in IScripts.
 ;
 ;
 ; XREFS:
 ;     IScripts_ClearPortraitImage
-;     IScripts_ShowPortraitImage
+;     IScripts_LoadPortraitTiles
 ;
 Palette_SavedIndex:                         ; [$03d3]
     db $00                                  ; [$03d3] byte
@@ -8471,7 +8687,7 @@ Palette_SavedIndex:                         ; [$03d3]
 ;
 ;
 ; XREFS:
-;     IScripts_ShowPortraitImage
+;     IScripts_LoadPortraitTiles
 ;     Screen_LoadSpritePalette
 ;
 Palette_SpritePaletteIndex:                 ; [$03d4]
@@ -8609,20 +8825,20 @@ SpriteBox_Height:                           ; [$03e5]
 ;
 ; XREFS:
 ;     Area_CanPlayerMoveLeft
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Area_CanPlayerMoveLeft
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 LastColumnLeftScreen:                       ; [$03e6]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 LastColumnLeftScreen_1_:                    ; [$03e7]
     db $00                                  ; [1]:
@@ -8647,20 +8863,20 @@ LastColumnLeftScreen_1_:                    ; [$03e7]
 ;
 ; XREFS:
 ;     Area_CanMoveUp
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Area_CanMoveUp
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 FirstColumnInRightScreen:                   ; [$03f6]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 FirstColumnInRightScreen_1_:                ; [$03f7]
     db $00                                  ; [1]:
@@ -8691,20 +8907,20 @@ FirstColumnInRightScreen_10_:               ; [$0400]
 ;
 ; XREFS:
 ;     Area_CanPlayerMoveUp
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;============================================================================
 
 ;
 ; XREFS:
 ;     Area_CanPlayerMoveUp
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 LastRowAboveScreen:                         ; [$0406]
     db $00                                  ; [0]:
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 LastRowAboveScreen_1_:                      ; [$0407]
     db $00                                  ; [1]:
@@ -8728,13 +8944,13 @@ LastRowAboveScreen_1_:                      ; [$0407]
 ; IDs of blocks in the first row of screen below
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Player_CheckIfPassable
 ;============================================================================
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Player_CheckIfPassable
 ;
 FirstRowBelowScreen:                        ; [$0416]
@@ -8742,7 +8958,7 @@ FirstRowBelowScreen:                        ; [$0416]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 FirstRowBelowScreen_1_:                     ; [$0417]
     db $00                                  ; [1]:
@@ -9030,7 +9246,7 @@ Quests:                                     ; [$042d]
 ; use.
 ;
 ; XREFS:
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     GameLoop_RunScreenEventHandlers
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandlePathToMasconEvent
@@ -9041,7 +9257,7 @@ Quests:                                     ; [$042d]
 
 ;
 ; XREFS:
-;     Area_BeginScrollToNextRoom
+;     Area_ScrollTo
 ;     GameLoop_RunScreenEventHandlers
 ;     ScreenEvents_HandleBoss
 ;     ScreenEvents_HandlePathToMasconEvent
@@ -9692,6 +9908,7 @@ UI_MPAndHPBarWidth:                         ; [$04ee]
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetBlocks_WriteBlockData12
 ;     Area_SetBlocks_WriteBlockData34
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     Fog_UpdateTiles
 ;     Game_Init
 ;     PPUBuffer_Draw
@@ -9702,7 +9919,6 @@ UI_MPAndHPBarWidth:                         ; [$04ee]
 ;     PPUBuffer_WritePalette
 ;     Player_DrawDeathAnimation
 ;     Sprites_LoadImageForCurrentSprite
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;============================================================================
 
 ;
@@ -9710,6 +9926,7 @@ UI_MPAndHPBarWidth:                         ; [$04ee]
 ;     Area_SetBlocks_SetAttributes
 ;     Area_SetBlocks_WriteBlockData12
 ;     Area_SetBlocks_WriteBlockData34
+;     DEADCODE_FUN_PRG15_MIRROR__c033
 ;     Fog_UpdateTiles
 ;     Game_Init
 ;     PPUBuffer_Draw
@@ -9720,7 +9937,6 @@ UI_MPAndHPBarWidth:                         ; [$04ee]
 ;     PPUBuffer_WritePalette
 ;     Player_DrawDeathAnimation
 ;     Sprites_LoadImageForCurrentSprite
-;     UNUSED_FUN_PRG15_MIRROR__c033
 ;
 PPUBuffer:                                  ; [$0500]
     db $00                                  ; [0]:
@@ -9746,16 +9962,16 @@ PPUBuffer_5_:                               ; [$0505]
 
 ;
 ; XREFS:
-;     IScripts_Maybe_DrawSpriteToPPU
-;     Player_DrawWeaponTile
+;     IScripts_DrawPortraitTileToPPU
+;     Player_LoadWeaponTile
 ;
 PPUBuffer_8_:                               ; [$0508]
     db $00                                  ; [8]:
 
 ;
 ; XREFS:
-;     IScripts_Maybe_DrawSpriteToPPU
-;     Player_DrawWeaponTile
+;     IScripts_DrawPortraitTileToPPU
+;     Player_LoadWeaponTile
 ;
 PPUBuffer_9_:                               ; [$0509]
     db $00                                  ; [9]:
@@ -10025,7 +10241,7 @@ PPUBuffer_9_:                               ; [$0509]
 ;     Area_HandleBreakableFloor
 ;     Area_IsBlockImpassableOrLadder
 ;     Area_LoadBlocks
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Area_SetStateFromDoorDestination
 ;     Area_StoreBlockIsAir
 ;     Game_Init
@@ -10052,7 +10268,7 @@ PPUBuffer_9_:                               ; [$0509]
 ;     Area_HandleBreakableFloor
 ;     Area_IsBlockImpassableOrLadder
 ;     Area_LoadBlocks
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     Area_SetStateFromDoorDestination
 ;     Area_StoreBlockIsAir
 ;     Game_Init
@@ -10076,7 +10292,7 @@ ScreenBuffer:
 ; XREFS:
 ;     PasswordScreen_HandleDeleteAtCursor
 ;     Password_Maybe_CheckPasswordLength
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;     ScreenBuffer_Clear
 ;
 DAT_0601:                                   ; [$0601]
@@ -10105,14 +10321,14 @@ DAT_0604:                                   ; [$0604]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 DAT_060f:                                   ; [$060f]
     db $00                                  ; [$060f] undefined
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 DAT_0610:                                   ; [$0610]
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$0610] undefined
@@ -10127,7 +10343,7 @@ DAT_061e:                                   ; [$061e]
 ;
 ; XREFS:
 ;     PasswordScreen_Show
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 DAT_061f:                                   ; [$061f]
     db $00,$00,$00                          ; [$061f] undefined
@@ -10522,14 +10738,14 @@ SplashAnimation_SceneIndex:                 ; [$06a5]
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 DAT_06c0:                                   ; [$06c0]
     db $00                                  ; [$06c0] undefined
 
 ;
 ; XREFS:
-;     Area_ScrollToNextRoom
+;     Area_LoadScrollDataRight
 ;
 DAT_06c1:                                   ; [$06c1]
     hex 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 ; [$06c1] undefined

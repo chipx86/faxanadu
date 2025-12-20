@@ -11,62 +11,77 @@
 
 BANK6_SPRITEADDRS_START:                    ; [$8002]
     dw $0072                                ; [0]:
-    dw $0072                                ; [1]:
-    dw $0072                                ; [2]:
-    dw $0072                                ; [3]:
-    dw $0072                                ; [4]:
-    dw $0172                                ; [5]:
-    dw $0272                                ; [6]:
-    dw $0372                                ; [7]:
-    dw $03f2                                ; [8]:
-    dw $0452                                ; [9]:
-    dw $0d22                                ; [10]:
-    dw $04b2                                ; [11]:
-    dw $0512                                ; [12]:
-    dw $05d2                                ; [13]:
-    dw $06d2                                ; [14]:
-    dw $07d2                                ; [15]:
-    dw $08f2                                ; [16]:
-    dw $09c2                                ; [17]:
-    dw $0c22                                ; [18]:
-    dw $0d22                                ; [19]:
-    dw $0d22                                ; [20]:
-    dw $0d32                                ; [21]:
-    dw $0d22                                ; [22]:
-    dw $0e92                                ; [23]:
-    dw $0f92                                ; [24]:
-    dw $1072                                ; [25]:
-    dw $1192                                ; [26]:
-    dw $1252                                ; [27]:
-    dw $1332                                ; [28]:
-    dw $1432                                ; [29]:
-    dw $1532                                ; [30]:
-    dw $1652                                ; [31]:
-    dw $1772                                ; [32]:
-    dw $1962                                ; [33]:
-    dw $1ac2                                ; [34]:
-    dw $1bb2                                ; [35]:
-    dw $1cb2                                ; [36]:
-    dw $0d22                                ; [37]:
-    dw $1de2                                ; [38]:
-    dw $1ef2                                ; [39]:
-    dw $1ff2                                ; [40]:
-    dw $0d22                                ; [41]:
-    dw $20f2                                ; [42]:
-    dw $2222                                ; [43]:
-    dw $22e2                                ; [44]:
-    dw $2402                                ; [45]:
-    dw $27e2                                ; [46]:
-    dw $2b12                                ; [47]:
-    dw $2cd2                                ; [48]:
-    dw $2db2                                ; [49]:
-    dw $2fd2                                ; [50]:
-    dw $3512                                ; [51]:
-    dw $3ba2                                ; [52]:
-    dw $3ca2                                ; [53]:
-    dw $3da2                                ; [54]:
-    dw $3e32                                ; [55]:
+    dw $0072                                ; [1]: Dropped: Bread
+    dw $0072                                ; [2]: Dropped: Coin
+    dw $0072                                ; [3]: Enemy: ?
+    dw $0072                                ; [4]: Enemy: Raiden
+    dw $0172                                ; [5]: Enemy: Necron Aides
+    dw $0272                                ; [6]: Enemy: Zombie
+    dw $0372                                ; [7]: Enemy: Hornet
+    dw $03f2                                ; [8]: Enemy: Bihoruda
+    dw $0452                                ; [9]: Enemy: Lilith
+    dw $0d22                                ; [10]: Magic: ?
+    dw $04b2                                ; [11]: Enemy: Yuinaru
+    dw $0512                                ; [12]: Enemy: Snowman
+    dw $05d2                                ; [13]: Enemy: Nash
+    dw $06d2                                ; [14]: Enemy: Fire Giant
+    dw $07d2                                ; [15]: Enemy: Ishiisu
+    dw $08f2                                ; [16]: Enemy: Execution Hood
+    dw $09c2                                ; [17]: Boss: Rokusutahn
+    dw $0c22                                ; [18]: Boss: Unused Snake
+    dw $0d22                                ; [19]: Effect: Enemy death
+    dw $0d22                                ; [20]: Effect: Lightning ball
+    dw $0d32                                ; [21]: Enemy: Charron
+    dw $0d22                                ; [22]: Enemy: ? (Unused)
+    dw $0e92                                ; [23]: Enemy: Geributa
+    dw $0f92                                ; [24]: Enemy: Sugata
+    dw $1072                                ; [25]: Enemy: Grimlock
+    dw $1192                                ; [26]: Enemy: Giant Bees
+    dw $1252                                ; [27]: Enemy: Myconid
+    dw $1332                                ; [28]: Enemy: Naga
+    dw $1432                                ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    dw $1532                                ; [30]: Enemy: Giant Strider
+    dw $1652                                ; [31]: Enemy: Sir Gawaine
+    dw $1772                                ; [32]: Enemy: Maskman
+    dw $1962                                ; [33]: Enemy: Wolfman
+    dw $1ac2                                ; [34]: Enemy: Yareeka
+    dw $1bb2                                ; [35]: Enemy: Magman
+    dw $1cb2                                ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    dw $0d22                                ; [37]: Enemy: ? (unused)
+    dw $1de2                                ; [38]: Enemy: Ikeda
+    dw $1ef2                                ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    dw $1ff2                                ; [40]: Enemy: Lamprey
+    dw $0d22                                ; [41]: Enemy: ? (unused)
+    dw $20f2                                ; [42]: Enemy: Monodron
+    dw $2222                                ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    dw $22e2                                ; [44]: Enemy: Tamazutsu
+    dw $2402                                ; [45]: Boss: Ripasheiku
+    dw $27e2                                ; [46]: Boss: Zoradohna
+    dw $2b12                                ; [47]: Boss: Borabohra
+    dw $2cd2                                ; [48]: Boss: Pakukame
+    dw $2db2                                ; [49]: Boss: Zorugeriru
+    dw $2fd2                                ; [50]: Boss: King Grieve
+    dw $3512                                ; [51]: Boss: Shadow Eura
+    dw $3ba2                                ; [52]: NPC: Walking Man 1
+    dw $3ca2                                ; [53]: NPC: Blue lady (unused)
+    dw $3da2                                ; [54]: NPC: Child (unused)
+    dw $3e32                                ; [55]: NPC: Armor Salesman
 
+
+;============================================================================
+; Enemy Tiles: Raiden
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8002]
+;     BANK6_SPRITEADDRS_START [$PRG6::8004]
+;     BANK6_SPRITEADDRS_START [$PRG6::8006]
+;     BANK6_SPRITEADDRS_START [$PRG6::8008]
+;     BANK6_SPRITEADDRS_START [$PRG6::800a]
+;============================================================================
 
 ;
 ; ......░▒
@@ -85,7 +100,7 @@ BANK6_SPRITEADDRS_START:                    ; [$8002]
 ;     BANK6_SPRITEADDRS_START [$PRG6::8008]
 ;     BANK6_SPRITEADDRS_START [$PRG6::800a]
 ;
-PPUTile16_PRG6__8072:                       ; [$8072]
+SPRITE_TILES_ENEMY_RAIDEN_00:               ; [$8072]
     db $02,$0f,$1f,$1f,$1f,$1f,$3b,$33,$01,$03,$0f,$1f,$18,$04,$3f,$3f ; [$8072]
                                                                        ; byte
 
@@ -100,6 +115,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; █▒█░....
 ; █░░░....
 ;
+SPRITE_TILES_ENEMY_RAIDEN_01:               ; [$8082]
     db $30,$c8,$e4,$e4,$f4,$d8,$b0,$f0,$c0,$f0,$f8,$f8,$48,$e0,$e0,$80 ; [$8082]
                                                                        ; byte
 
@@ -114,6 +130,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ..░█░░██
 ; .░░▒▒▒░░
 ;
+SPRITE_TILES_ENEMY_RAIDEN_02:               ; [$8092]
     db $1f,$1f,$1f,$0f,$1f,$3f,$3f,$63,$07,$03,$1e,$00,$0b,$1b,$13,$1c ; [$8092]
                                                                        ; byte
 
@@ -128,6 +145,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; █▒░████░
 ; ░░░▒███░
 ;
+SPRITE_TILES_ENEMY_RAIDEN_03:               ; [$80a2]
     db $fc,$e2,$f9,$fd,$fd,$ff,$bf,$ef,$80,$1c,$3e,$fe,$fe,$dc,$de,$1e ; [$80a2]
                                                                        ; byte
 
@@ -142,6 +160,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; .░██▒░░░
 ; ░███▒░░░
 ;
+SPRITE_TILES_ENEMY_RAIDEN_04:               ; [$80b2]
     db $fd,$ff,$ff,$0e,$1f,$2f,$77,$f7,$6e,$6d,$0d,$05,$06,$10,$38,$78 ; [$80b2]
                                                                        ; byte
 
@@ -156,6 +175,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ███▒░...
 ; ██▒░░...
 ;
+SPRITE_TILES_ENEMY_RAIDEN_05:               ; [$80c2]
     db $f7,$fd,$bd,$62,$dc,$e8,$e8,$d8,$8e,$de,$de,$9c,$60,$f0,$f0,$e0 ; [$80c2]
                                                                        ; byte
 
@@ -170,6 +190,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ░███▒░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_RAIDEN_06:               ; [$80d2]
     db $ed,$c8,$48,$29,$4d,$e4,$f4,$fc,$70,$70,$30,$10,$30,$78,$78,$00 ; [$80d2]
                                                                        ; byte
 
@@ -184,6 +205,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_RAIDEN_07:               ; [$80e2]
     db $10,$90,$d0,$d8,$e8,$f8,$00,$00,$e0,$60,$60,$e0,$f0,$00,$00,$00 ; [$80e2]
                                                                        ; byte
 
@@ -198,6 +220,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ...░░█░░
 ; ..███▒██
 ;
+SPRITE_TILES_ENEMY_RAIDEN_08:               ; [$80f2]
     db $00,$02,$0f,$1f,$1f,$1f,$1f,$3b,$00,$01,$03,$0f,$1f,$18,$04,$3f ; [$80f2]
                                                                        ; byte
 
@@ -212,6 +235,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ██▒░░...
 ; █▒█░....
 ;
+SPRITE_TILES_ENEMY_RAIDEN_09:               ; [$8102]
     db $00,$30,$c8,$e4,$e4,$f4,$d8,$b0,$00,$c0,$f0,$f8,$f8,$48,$e0,$e0 ; [$8102]
                                                                        ; byte
 
@@ -226,6 +250,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ..░▒░░█░
 ; ..░█▒▒░█
 ;
+SPRITE_TILES_ENEMY_RAIDEN_10:               ; [$8112]
     db $1f,$1f,$1f,$3f,$1f,$3f,$2f,$33,$07,$03,$03,$1e,$09,$1b,$12,$1d ; [$8112]
                                                                        ; byte
 
@@ -240,6 +265,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; █░░▒███░
 ; ██░░▒██░
 ;
+SPRITE_TILES_ENEMY_RAIDEN_11:               ; [$8122]
     db $fc,$f2,$fd,$fd,$fd,$ef,$ef,$f7,$80,$9c,$3e,$fe,$de,$1c,$9e,$ce ; [$8122]
                                                                        ; byte
 
@@ -254,6 +280,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ███▒░░░░
 ; ██▒░░░..
 ;
+SPRITE_TILES_ENEMY_RAIDEN_12:               ; [$8132]
     db $7b,$fa,$ef,$ff,$df,$ef,$ef,$dc,$1d,$5d,$5c,$0c,$60,$f0,$f0,$e0 ; [$8132]
                                                                        ; byte
 
@@ -268,6 +295,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ░██░░...
 ; ███▒░...
 ;
+SPRITE_TILES_ENEMY_RAIDEN_13:               ; [$8142]
     db $fb,$bf,$dd,$e2,$fc,$f8,$f8,$e8,$e6,$fe,$3e,$1c,$00,$00,$60,$f0 ; [$8142]
                                                                        ; byte
 
@@ -282,6 +310,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_RAIDEN_14:               ; [$8152]
     db $91,$49,$68,$f4,$7c,$00,$01,$01,$60,$30,$10,$78,$00,$00,$00,$00 ; [$8152]
                                                                        ; byte
 
@@ -296,9 +325,17 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; ████░...
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_RAIDEN_15:               ; [$8162]
     db $d8,$d0,$90,$48,$48,$e8,$f8,$f8,$e0,$e0,$60,$30,$30,$70,$f0,$00 ; [$8162]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Necron Aides
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::800c]
+;============================================================================
 
 ;
 ; ........
@@ -313,7 +350,7 @@ PPUTile16_PRG6__8072:                       ; [$8072]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::800c]
 ;
-PPUTile16_PRG6__8172:                       ; [$8172]
+SPRITE_TILES_ENEMY_NECRON_AIDES_00:         ; [$8172]
     db $00,$00,$01,$03,$0d,$1f,$11,$0f,$00,$01,$02,$06,$0f,$1e,$1f,$00 ; [$8172]
                                                                        ; byte
 
@@ -328,6 +365,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ██▒▒▒▒▒░
 ; ▒▒▒▒▒▒░.
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_01:         ; [$8182]
     db $00,$cc,$f2,$f9,$f9,$f1,$c1,$02,$00,$b0,$5c,$5e,$be,$7e,$fe,$fc ; [$8182]
                                                                        ; byte
 
@@ -342,6 +380,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ........
 ; .....▒▒▒
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_02:         ; [$8192]
     db $07,$08,$07,$03,$00,$00,$00,$00,$05,$07,$00,$00,$00,$00,$00,$07 ; [$8192]
                                                                        ; byte
 
@@ -356,6 +395,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ....▒█▒░
 ; ▒▒▒▒█▒░░
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_03:         ; [$81a2]
     db $fe,$be,$fe,$ff,$1b,$09,$05,$0b,$00,$40,$00,$00,$04,$06,$0e,$fc ; [$81a2]
                                                                        ; byte
 
@@ -370,6 +410,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ▒█▒░░...
 ; ▒█▒░░...
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_04:         ; [$81b2]
     db $07,$18,$21,$27,$4f,$4a,$58,$58,$1f,$3f,$7e,$79,$f2,$f0,$e0,$e0 ; [$81b2]
                                                                        ; byte
 
@@ -384,6 +425,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ...░▒▒░.
 ; ....░▒▒░
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_05:         ; [$81c2]
     db $e2,$0c,$f8,$f8,$d4,$2a,$12,$09,$fc,$f0,$00,$e0,$38,$1c,$0c,$06 ; [$81c2]
                                                                        ; byte
 
@@ -398,6 +440,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ....▒▒▒▒
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_06:         ; [$81d2]
     db $48,$0c,$26,$13,$0c,$02,$00,$03,$f0,$f0,$78,$7c,$3f,$1f,$0f,$00 ; [$81d2]
                                                                        ; byte
 
@@ -412,6 +455,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ▒▒▒▒░░░.
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_07:         ; [$81e2]
     db $0d,$09,$0d,$91,$e9,$02,$0e,$f8,$06,$06,$06,$0e,$1e,$fc,$f0,$00 ; [$81e2]
                                                                        ; byte
 
@@ -426,6 +470,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; .█.█.░▒▒
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_08:         ; [$81f2]
     db $0e,$1d,$39,$73,$ff,$9b,$54,$03,$0d,$06,$26,$7d,$ff,$e7,$53,$00 ; [$81f2]
                                                                        ; byte
 
@@ -440,6 +485,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ▒░░░....
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_09:         ; [$8202]
     db $60,$90,$c8,$c8,$88,$18,$70,$f0,$80,$e0,$f0,$f0,$f0,$e0,$80,$00 ; [$8202]
                                                                        ; byte
 
@@ -454,6 +500,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_10:         ; [$8212]
     db $01,$55,$7b,$46,$3c,$00,$00,$00,$02,$56,$54,$38,$00,$00,$00,$00 ; [$8212]
                                                                        ; byte
 
@@ -468,6 +515,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; .▒▒░░...
 ; .█▒░░...
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_11:         ; [$8222]
     db $e0,$f0,$f0,$b0,$98,$58,$18,$58,$00,$00,$00,$40,$60,$60,$60,$60 ; [$8222]
                                                                        ; byte
 
@@ -482,6 +530,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ▒█▒░░...
 ; ▒█▒░....
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_12:         ; [$8232]
     db $00,$00,$07,$18,$27,$2c,$58,$50,$01,$07,$1f,$3f,$78,$70,$e0,$e0 ; [$8232]
                                                                        ; byte
 
@@ -496,6 +545,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ...▒█░..
 ; ░░░.▒█░.
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_13:         ; [$8242]
     db $58,$90,$30,$e0,$00,$18,$0c,$e6,$e0,$e0,$c0,$00,$00,$00,$18,$0c ; [$8242]
                                                                        ; byte
 
@@ -510,6 +560,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ...▒▒▒▒░
 ; ....░░░.
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_14:         ; [$8252]
     db $51,$5a,$4d,$21,$32,$1c,$01,$0e,$e0,$e1,$f3,$7f,$7f,$3f,$1e,$00 ; [$8252]
                                                                        ; byte
 
@@ -524,9 +575,17 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; ..░▒▒▒░.
 ; ...░░░..
 ;
+SPRITE_TILES_ENEMY_NECRON_AIDES_15:         ; [$8262]
     db $15,$d3,$eb,$6b,$ed,$c1,$22,$1c,$e6,$e6,$f6,$b6,$36,$3e,$1c,$00 ; [$8262]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Zombie
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::800e]
+;============================================================================
 
 ;
 ; ..░░███▒
@@ -541,7 +600,7 @@ PPUTile16_PRG6__8172:                       ; [$8172]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::800e]
 ;
-PPUTile16_PRG6__8272:                       ; [$8272]
+SPRITE_TILES_ENEMY_ZOMBIE_00:               ; [$8272]
     db $3e,$7f,$7f,$7f,$ff,$ff,$ff,$ff,$0f,$3f,$7f,$1f,$67,$b3,$73,$06 ; [$8272]
                                                                        ; byte
 
@@ -556,6 +615,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ░█░▒░...
 ; █░▒░....
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_01:               ; [$8282]
     db $c0,$b0,$f8,$ec,$ec,$ec,$e8,$d0,$00,$c0,$e0,$f0,$b0,$d0,$50,$a0 ; [$8282]
                                                                        ; byte
 
@@ -570,6 +630,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ..░█░..░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_02:               ; [$8292]
     db $ff,$bf,$2f,$0f,$0f,$2d,$39,$01,$9f,$aa,$22,$04,$04,$28,$10,$00 ; [$8292]
                                                                        ; byte
 
@@ -584,6 +645,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ▒▒░▒██░.
 ; ▒▒▒░░█▒░
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_03:               ; [$82a2]
     db $f0,$c8,$b4,$f4,$fa,$7a,$2e,$1d,$00,$30,$78,$78,$7c,$bc,$dc,$e6 ; [$82a2]
                                                                        ; byte
 
@@ -598,6 +660,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ...░▒▒▒▒
 ; ...░░░▒░
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_04:               ; [$82b2]
     db $01,$01,$01,$01,$03,$0e,$10,$1d,$00,$00,$00,$00,$01,$01,$0f,$02 ; [$82b2]
                                                                        ; byte
 
@@ -612,6 +675,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ▒▒▒▒░██░
 ; ░░░░▒░░.
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_05:               ; [$82c2]
     db $1d,$1f,$0f,$8f,$f7,$1f,$0f,$f6,$ee,$ee,$f6,$f6,$ee,$ee,$f6,$08 ; [$82c2]
                                                                        ; byte
 
@@ -626,6 +690,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; .░░███▒░
 ; ░███░░░░
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_06:               ; [$82d2]
     db $3f,$7e,$7d,$34,$1a,$1f,$7d,$ff,$1c,$39,$30,$18,$0c,$0c,$1e,$70 ; [$82d2]
                                                                        ; byte
 
@@ -640,6 +705,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; .░███░..
 ; .██░░...
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_07:               ; [$82e2]
     db $7c,$f0,$d0,$ec,$7a,$3e,$7c,$78,$f0,$e0,$e0,$70,$3c,$1c,$38,$60 ; [$82e2]
                                                                        ; byte
 
@@ -654,6 +720,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ......░▒
 ; .....░██
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_08:               ; [$82f2]
     db $ff,$bf,$2f,$7f,$3d,$01,$02,$07,$9e,$aa,$22,$0c,$00,$00,$01,$03 ; [$82f2]
                                                                        ; byte
 
@@ -668,6 +735,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ▒▒░▒██░.
 ; ▒▒░░█▒..
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_09:               ; [$8302]
     db $c8,$b4,$ba,$5a,$3e,$2e,$2e,$38,$30,$78,$7c,$bc,$cc,$dc,$dc,$cc ; [$8302]
                                                                        ; byte
 
@@ -682,6 +750,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; .....░█░
 ; ....░▒██
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_10:               ; [$8312]
     db $07,$05,$0c,$08,$08,$1f,$07,$0b,$03,$02,$03,$07,$07,$00,$02,$07 ; [$8312]
                                                                        ; byte
 
@@ -696,6 +765,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ░░▒░░...
 ; ▒░░░....
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_11:               ; [$8322]
     db $fc,$fc,$3c,$14,$04,$08,$d8,$70,$b8,$38,$d0,$e8,$f8,$f0,$20,$80 ; [$8322]
                                                                        ; byte
 
@@ -710,6 +780,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; .....░░█
 ; ....░███
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_12:               ; [$8332]
     db $0b,$07,$03,$03,$03,$01,$07,$0f,$07,$03,$01,$01,$01,$00,$01,$07 ; [$8332]
                                                                        ; byte
 
@@ -724,6 +795,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; █▒░.....
 ; ▒░░.....
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_13:               ; [$8342]
     db $40,$c0,$40,$c0,$a0,$e0,$a0,$60,$80,$00,$80,$80,$c0,$80,$c0,$80 ; [$8342]
                                                                        ; byte
 
@@ -738,6 +810,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; ..░███▒░
 ; .░█▒░░░░
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_14:               ; [$8352]
     db $3b,$79,$76,$74,$3a,$1f,$3d,$6f,$1c,$3e,$38,$38,$1c,$0c,$1e,$30 ; [$8352]
                                                                        ; byte
 
@@ -752,9 +825,17 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; .░█░....
 ; .░░.....
 ;
+SPRITE_TILES_ENEMY_ZOMBIE_15:               ; [$8362]
     db $f8,$90,$f8,$68,$3c,$3c,$70,$60,$00,$60,$60,$30,$18,$10,$20,$00 ; [$8362]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Hornet
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8010]
+;============================================================================
 
 ;
 ; ..░░....
@@ -769,7 +850,7 @@ PPUTile16_PRG6__8272:                       ; [$8272]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8010]
 ;
-PPUTile16_PRG6__8372:                       ; [$8372]
+SPRITE_TILES_ENEMY_HORNET_00:               ; [$8372]
     db $30,$78,$6d,$6d,$37,$1e,$3f,$58,$00,$30,$38,$38,$19,$01,$00,$27 ; [$8372]
                                                                        ; byte
 
@@ -784,6 +865,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; ░▒▒░▒▒░░
 ; ░░▒░▒▒▒░
 ;
+SPRITE_TILES_ENEMY_HORNET_01:               ; [$8382]
     db $70,$f8,$cc,$bc,$78,$ee,$93,$d1,$00,$70,$f8,$f8,$e0,$90,$6c,$2e ; [$8382]
                                                                        ; byte
 
@@ -798,6 +880,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; ░...░░▒░
 ; ...░...▒
 ;
+SPRITE_TILES_ENEMY_HORNET_02:               ; [$8392]
     db $b6,$b4,$b0,$70,$38,$6f,$8d,$10,$4f,$4f,$4f,$0f,$07,$10,$02,$01 ; [$8392]
                                                                        ; byte
 
@@ -812,6 +895,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; .▒░.▒░..
 ; ░.▒░.▒░.
 ;
+SPRITE_TILES_ENEMY_HORNET_03:               ; [$83a2]
     db $49,$49,$49,$52,$fc,$24,$24,$92,$b6,$b6,$b6,$ac,$00,$48,$48,$24 ; [$83a2]
                                                                        ; byte
 
@@ -826,6 +910,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; .░▒░░▒▒▒
 ; ░▒░░▒██▒
 ;
+SPRITE_TILES_ENEMY_HORNET_04:               ; [$83b2]
     db $00,$00,$01,$03,$07,$3f,$58,$b6,$00,$00,$00,$01,$02,$00,$27,$4f ; [$83b2]
                                                                        ; byte
 
@@ -840,6 +925,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; ░░███░░.
 ; ▒░░░▒░░.
 ;
+SPRITE_TILES_ENEMY_HORNET_05:               ; [$83c2]
     db $00,$00,$d8,$fc,$fe,$86,$fe,$76,$00,$00,$00,$98,$7c,$fc,$38,$88 ; [$83c2]
                                                                        ; byte
 
@@ -854,6 +940,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; ...░...▒
 ; ........
 ;
+SPRITE_TILES_ENEMY_HORNET_06:               ; [$83d2]
     db $b4,$b0,$70,$38,$6f,$8d,$10,$00,$4f,$4f,$0f,$07,$10,$02,$01,$00 ; [$83d2]
                                                                        ; byte
 
@@ -868,9 +955,17 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_ENEMY_HORNET_07:               ; [$83e2]
     db $56,$54,$7c,$a4,$24,$12,$80,$00,$a8,$a8,$80,$48,$48,$24,$00,$00 ; [$83e2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Bihoruda
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8012]
+;============================================================================
 
 ;
 ; .....░░░
@@ -885,7 +980,7 @@ PPUTile16_PRG6__8372:                       ; [$8372]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8012]
 ;
-PPUTile16_PRG6__83f2:                       ; [$83f2]
+SPRITE_TILES_ENEMY_BIHORUDA_00:             ; [$83f2]
     db $07,$17,$28,$6f,$1f,$fb,$bf,$fe,$00,$0f,$1f,$30,$63,$4d,$41,$13 ; [$83f2]
                                                                        ; byte
 
@@ -900,6 +995,7 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; ▒█▒░░░░░
 ; █▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_BIHORUDA_01:             ; [$8402]
     db $e0,$b8,$4c,$a6,$d6,$a3,$5f,$9f,$00,$c0,$f0,$78,$b8,$dc,$e0,$e0 ; [$8402]
                                                                        ; byte
 
@@ -914,6 +1010,7 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; ..█▒░░░░
 ; ...█.▒▒▒
 ;
+SPRITE_TILES_ENEMY_BIHORUDA_02:             ; [$8412]
     db $af,$96,$8f,$1f,$3f,$2f,$2f,$10,$5f,$6f,$70,$7f,$40,$74,$30,$17 ; [$8412]
                                                                        ; byte
 
@@ -928,6 +1025,7 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; ░░█▒░...
 ; ▒░█░....
 ;
+SPRITE_TILES_ENEMY_BIHORUDA_03:             ; [$8422]
     db $33,$67,$d7,$0a,$fa,$e8,$e8,$70,$dc,$b8,$78,$fc,$04,$b4,$30,$a0 ; [$8422]
                                                                        ; byte
 
@@ -942,6 +1040,7 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; ░▒░▒▒██░
 ; ░░░██▒██
 ;
+SPRITE_TILES_ENEMY_BIHORUDA_04:             ; [$8432]
     db $07,$17,$28,$6f,$1f,$fb,$a7,$fb,$00,$0f,$1f,$30,$6e,$5e,$5e,$1f ; [$8432]
                                                                        ; byte
 
@@ -956,9 +1055,17 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; ░░░░░░░░
 ; ░░░▒█▒░░
 ;
+SPRITE_TILES_ENEMY_BIHORUDA_05:             ; [$8442]
     db $e0,$b8,$4c,$a6,$c6,$ff,$ff,$eb,$00,$c0,$f0,$78,$38,$80,$00,$1c ; [$8442]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Lilith
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8014]
+;============================================================================
 
 ;
 ; .█.....▒
@@ -973,7 +1080,7 @@ PPUTile16_PRG6__83f2:                       ; [$83f2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8014]
 ;
-PPUTile16_PRG6__8452:                       ; [$8452]
+SPRITE_TILES_ENEMY_LILITH_00:               ; [$8452]
     db $40,$a7,$89,$d7,$9f,$56,$5e,$5c,$41,$e7,$ef,$99,$c1,$5b,$43,$07 ; [$8452]
                                                                        ; byte
 
@@ -988,6 +1095,7 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; ▒█▒▒▒▒░.
 ; ▒███▒▒░.
 ;
+SPRITE_TILES_ENEMY_LILITH_01:               ; [$8462]
     db $e0,$90,$a0,$98,$e4,$f4,$42,$72,$e0,$f0,$c8,$e0,$f8,$f8,$fc,$fc ; [$8462]
                                                                        ; byte
 
@@ -1002,6 +1110,7 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; .█.▒▒░░░
 ; ..▒▒░░▒▒
 ;
+SPRITE_TILES_ENEMY_LILITH_02:               ; [$8472]
     db $99,$03,$fb,$7f,$0f,$40,$47,$0c,$de,$e4,$fd,$3f,$7f,$5f,$58,$33 ; [$8472]
                                                                        ; byte
 
@@ -1016,6 +1125,7 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; ░█▒░▒▒▒░
 ; ▒▒░░░░▒▒
 ;
+SPRITE_TILES_ENEMY_LILITH_03:               ; [$8482]
     db $3a,$f9,$ed,$fd,$69,$c9,$d1,$3c,$fc,$fe,$fe,$ce,$be,$3e,$6e,$c3 ; [$8482]
                                                                        ; byte
 
@@ -1030,6 +1140,7 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; ██▒▒░...
 ; ███▒▒░░.
 ;
+SPRITE_TILES_ENEMY_LILITH_04:               ; [$8492]
     db $80,$24,$70,$88,$d0,$ea,$c8,$e6,$f0,$c0,$80,$e0,$e0,$f0,$f0,$f8 ; [$8492]
                                                                        ; byte
 
@@ -1044,9 +1155,17 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; ██▒▒█▒░.
 ; ▒▒▒░░█▒▒
 ;
+SPRITE_TILES_ENEMY_LILITH_05:               ; [$84a2]
     db $51,$f6,$fa,$c9,$7a,$f1,$ca,$1c,$fc,$f8,$fc,$fe,$9c,$3e,$fc,$e7 ; [$84a2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Yuinaru
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8018]
+;============================================================================
 
 ;
 ; ...▒██▒░
@@ -1061,7 +1180,7 @@ PPUTile16_PRG6__8452:                       ; [$8452]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8018]
 ;
-PPUTile16_PRG6__84b2:                       ; [$84b2]
+SPRITE_TILES_ENEMY_YUINARU_00:              ; [$84b2]
     db $0d,$20,$3e,$3e,$3f,$1f,$c0,$eb,$1e,$1f,$01,$29,$00,$61,$3f,$14 ; [$84b2]
                                                                        ; byte
 
@@ -1076,6 +1195,7 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; ▒▒▒▒░...
 ; ▒▒▒▒▒...
 ;
+SPRITE_TILES_ENEMY_YUINARU_01:              ; [$84c2]
     db $00,$80,$40,$40,$e0,$c0,$08,$00,$00,$00,$80,$80,$70,$f8,$f0,$f8 ; [$84c2]
                                                                        ; byte
 
@@ -1090,6 +1210,7 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; ....░░░▒
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_YUINARU_02:              ; [$84d2]
     db $2e,$64,$b9,$5f,$3e,$1c,$0e,$03,$db,$df,$66,$38,$05,$03,$01,$00 ; [$84d2]
                                                                        ; byte
 
@@ -1104,6 +1225,7 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; ▒▒░░▒░░.
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_YUINARU_03:              ; [$84e2]
     db $9c,$c2,$fe,$80,$80,$41,$36,$f8,$7c,$3f,$00,$60,$73,$be,$c8,$00 ; [$84e2]
                                                                        ; byte
 
@@ -1118,6 +1240,7 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; ▒▒██▒...
 ; ░░▒███..
 ;
+SPRITE_TILES_ENEMY_YUINARU_04:              ; [$84f2]
     db $00,$80,$40,$f0,$f8,$38,$30,$dc,$00,$00,$80,$60,$f0,$f0,$f8,$3c ; [$84f2]
                                                                        ; byte
 
@@ -1132,9 +1255,17 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; ░░░░░...
 ; ░░░.....
 ;
+SPRITE_TILES_ENEMY_YUINARU_05:              ; [$8502]
     db $e2,$fe,$80,$81,$41,$36,$f8,$e0,$1f,$00,$61,$72,$be,$c8,$00,$00 ; [$8502]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Snowman
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801a]
+;============================================================================
 
 ;
 ; ░█░..█▒▒
@@ -1149,7 +1280,7 @@ PPUTile16_PRG6__84b2:                       ; [$84b2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::801a]
 ;
-PPUTile16_PRG6__8512:                       ; [$8512]
+SPRITE_TILES_ENEMY_SNOWMAN_00:              ; [$8512]
     db $e4,$ff,$7f,$3f,$1f,$1f,$3f,$3f,$47,$6f,$2f,$1c,$01,$18,$3c,$2f ; [$8512]
                                                                        ; byte
 
@@ -1164,6 +1295,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░░█▒░...
 ; ░██▒░░..
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_01:              ; [$8522]
     db $e1,$7f,$7d,$f3,$fe,$e8,$e8,$ec,$01,$9e,$be,$3c,$00,$30,$30,$70 ; [$8522]
                                                                        ; byte
 
@@ -1178,6 +1310,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░░██▒▒░█
 ; ███░▒░██
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_02:              ; [$8532]
     db $7f,$3f,$3f,$3e,$1c,$31,$f3,$f7,$7e,$03,$3e,$3d,$03,$0e,$3d,$eb ; [$8532]
                                                                        ; byte
 
@@ -1192,6 +1325,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; █░░░░██▒
 ; ███████▒
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_03:              ; [$8542]
     db $5e,$f2,$7d,$5d,$3f,$af,$fe,$fe,$e0,$1c,$be,$be,$de,$5e,$87,$ff ; [$8542]
                                                                        ; byte
 
@@ -1206,6 +1340,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; .░███▒░░
 ; ░███▒░░.
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_04:              ; [$8552]
     db $ff,$f7,$05,$0c,$1c,$36,$7b,$f6,$e1,$41,$02,$03,$03,$19,$3c,$78 ; [$8552]
                                                                        ; byte
 
@@ -1220,6 +1355,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░░░▒███░
 ; ..░▒▒██░
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_05:              ; [$8562]
     db $de,$31,$de,$0c,$1c,$3e,$ef,$27,$ef,$ce,$20,$f0,$e0,$cc,$1e,$1e ; [$8562]
                                                                        ; byte
 
@@ -1234,6 +1370,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░▒██░...
 ; ░██░....
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_06:              ; [$8572]
     db $ec,$d0,$90,$48,$2c,$5c,$b8,$f0,$70,$60,$60,$30,$18,$38,$70,$60 ; [$8572]
                                                                        ; byte
 
@@ -1248,6 +1385,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_07:              ; [$8582]
     db $2e,$5c,$b8,$fc,$3e,$0c,$00,$00,$1c,$30,$60,$10,$0c,$00,$00,$00 ; [$8582]
                                                                        ; byte
 
@@ -1262,6 +1400,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ..░█░░██
 ; .███░███
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_08:              ; [$8592]
     db $7f,$3f,$1f,$3f,$1e,$0f,$3f,$7f,$7e,$00,$03,$3e,$1d,$00,$13,$77 ; [$8592]
                                                                        ; byte
 
@@ -1276,6 +1415,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░░░░██░░
 ; ███████░
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_09:              ; [$85a2]
     db $5e,$f2,$fd,$fd,$5d,$2f,$ff,$ff,$e0,$1c,$3e,$3e,$be,$de,$0c,$fe ; [$85a2]
                                                                        ; byte
 
@@ -1290,6 +1430,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; .░███▒▒░
 ; .░██▒▒░.
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_10:              ; [$85b2]
     db $7f,$34,$07,$0c,$1e,$3d,$79,$72,$77,$23,$00,$03,$0d,$1e,$3e,$3c ; [$85b2]
                                                                        ; byte
 
@@ -1304,9 +1445,17 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; ░░░▒███░
 ; ..░░▒██▒
 ;
+SPRITE_TILES_ENEMY_SNOWMAN_11:              ; [$85c2]
     db $7f,$ce,$3c,$04,$1c,$3a,$ef,$36,$be,$3c,$c0,$f8,$e0,$cc,$1e,$0f ; [$85c2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Nash
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801c]
+;============================================================================
 
 ;
 ; ......░░
@@ -1321,7 +1470,7 @@ PPUTile16_PRG6__8512:                       ; [$8512]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::801c]
 ;
-PPUTile16_PRG6__85d2:                       ; [$85d2]
+SPRITE_TILES_ENEMY_NASH_00:                 ; [$85d2]
     db $03,$07,$0f,$0f,$1f,$1f,$1f,$1f,$00,$00,$03,$07,$06,$04,$06,$03 ; [$85d2]
                                                                        ; byte
 
@@ -1336,6 +1485,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; █░░░░...
 ; ░░░░█░..
 ;
+SPRITE_TILES_ENEMY_NASH_01:                 ; [$85e2]
     db $80,$e0,$f0,$f8,$f8,$f8,$f8,$fc,$00,$00,$00,$00,$00,$80,$80,$08 ; [$85e2]
                                                                        ; byte
 
@@ -1350,6 +1500,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ..░█▒▒░░
 ; ..░▒▒█▒█
 ;
+SPRITE_TILES_ENEMY_NASH_02:                 ; [$85f2]
     db $1f,$0f,$1f,$1f,$17,$1f,$33,$25,$00,$00,$08,$04,$0b,$0b,$1c,$1f ; [$85f2]
                                                                        ; byte
 
@@ -1364,6 +1515,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ▒▒░░▒▒░░
 ; ▒▒░░█▒░░
 ;
+SPRITE_TILES_ENEMY_NASH_03:                 ; [$8602]
     db $fc,$fc,$fc,$f6,$b6,$b7,$33,$3b,$08,$10,$60,$88,$48,$48,$cc,$cc ; [$8602]
                                                                        ; byte
 
@@ -1378,6 +1530,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ....░░░░
 ; ....░▒▒░
 ;
+SPRITE_TILES_ENEMY_NASH_04:                 ; [$8612]
     db $2a,$4a,$59,$29,$1b,$0f,$0f,$09,$17,$37,$26,$16,$04,$00,$00,$06 ; [$8612]
                                                                        ; byte
 
@@ -1392,6 +1545,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ░▒░░░...
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_NASH_05:                 ; [$8622]
     db $72,$f6,$86,$5e,$9c,$78,$b8,$f0,$9c,$38,$78,$e0,$e0,$80,$40,$00 ; [$8622]
                                                                        ; byte
 
@@ -1406,6 +1560,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ....░░▒▒
 ; ...░░▒░▒
 ;
+SPRITE_TILES_ENEMY_NASH_06:                 ; [$8632]
     db $0e,$0b,$09,$09,$0a,$0b,$0c,$1a,$01,$04,$06,$06,$07,$07,$03,$05 ; [$8632]
                                                                        ; byte
 
@@ -1420,6 +1575,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ▒▒▒▒░░..
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_ENEMY_NASH_07:                 ; [$8642]
     db $f0,$30,$f8,$f8,$f8,$78,$0c,$7f,$00,$c0,$00,$00,$00,$80,$f0,$80 ; [$8642]
                                                                        ; byte
 
@@ -1434,6 +1590,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ▒░░▒▒▒░░
 ; ▒░▒░▒█▒█
 ;
+SPRITE_TILES_ENEMY_NASH_08:                 ; [$8652]
     db $1f,$0f,$1f,$1f,$77,$8f,$63,$55,$00,$00,$08,$04,$0b,$7b,$9c,$af ; [$8652]
                                                                        ; byte
 
@@ -1448,6 +1605,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ▒▒░░▒▒░▒
 ; ▒▒░▒█▒░▒
 ;
+SPRITE_TILES_ENEMY_NASH_09:                 ; [$8662]
     db $fc,$fc,$fc,$fe,$f1,$ec,$32,$2a,$08,$10,$60,$80,$0e,$13,$cd,$dd ; [$8662]
                                                                        ; byte
 
@@ -1462,6 +1620,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ....░░░░
 ; ....░▒▒░
 ;
+SPRITE_TILES_ENEMY_NASH_10:                 ; [$8672]
     db $f2,$b2,$79,$39,$0b,$0f,$0f,$09,$6f,$6f,$06,$06,$04,$00,$00,$06 ; [$8672]
                                                                        ; byte
 
@@ -1476,6 +1635,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ░░░░....
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_NASH_11:                 ; [$8682]
     db $6e,$f5,$fa,$fc,$f0,$f0,$f0,$f0,$99,$0a,$04,$00,$00,$00,$00,$00 ; [$8682]
                                                                        ; byte
 
@@ -1490,6 +1650,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; .░▒░░▒░░
 ; ..░▒▒░░▒
 ;
+SPRITE_TILES_ENEMY_NASH_12:                 ; [$8692]
     db $47,$b3,$ab,$b6,$bf,$af,$5b,$26,$38,$4c,$54,$59,$59,$59,$24,$19 ; [$8692]
                                                                        ; byte
 
@@ -1504,6 +1665,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ░░▒░░░..
 ; ▒▒░░░░..
 ;
+SPRITE_TILES_ENEMY_NASH_13:                 ; [$86a2]
     db $02,$da,$2a,$a6,$ae,$6c,$dc,$3c,$fc,$3c,$dc,$d8,$d0,$90,$20,$c0 ; [$86a2]
                                                                        ; byte
 
@@ -1518,6 +1680,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ....░░░░
 ; ....░▒▒░
 ;
+SPRITE_TILES_ENEMY_NASH_14:                 ; [$86b2]
     db $12,$12,$09,$09,$0b,$0f,$0f,$09,$0f,$0f,$06,$06,$04,$00,$00,$06 ; [$86b2]
                                                                        ; byte
 
@@ -1532,9 +1695,17 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; ░░░.....
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_NASH_15:                 ; [$86c2]
     db $f8,$f0,$e0,$e0,$e0,$e0,$e0,$f0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$86c2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Fire Giant
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::801e]
+;============================================================================
 
 ;
 ; ..▒...░░
@@ -1549,7 +1720,7 @@ PPUTile16_PRG6__85d2:                       ; [$85d2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::801e]
 ;
-PPUTile16_PRG6__86d2:                       ; [$86d2]
+SPRITE_TILES_ENEMY_FIRE_GIANT_00:           ; [$86d2]
     db $03,$2f,$18,$30,$27,$1f,$33,$04,$20,$10,$0f,$1f,$18,$04,$3f,$3f ; [$86d2]
                                                                        ; byte
 
@@ -1564,6 +1735,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ▒░░░░░░.
 ; ▒░░░░░░.
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_01:           ; [$86e2]
     db $e2,$f4,$d8,$40,$fc,$7e,$7e,$7e,$02,$06,$3e,$bc,$00,$80,$80,$80 ; [$86e2]
                                                                        ; byte
 
@@ -1578,6 +1750,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ..░▒░░▒█
 ; ░░░▒▒▒░░
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_02:           ; [$86f2]
     db $18,$1c,$01,$0f,$14,$35,$2d,$e3,$07,$03,$1e,$00,$0b,$1b,$13,$1c ; [$86f2]
                                                                        ; byte
 
@@ -1592,6 +1765,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ▒▒░▒█▒▒░
 ; ░░░▒█▒▒░
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_03:           ; [$8702]
     db $7c,$e2,$d1,$09,$01,$a7,$29,$e9,$80,$1c,$3e,$fe,$fe,$d8,$de,$1e ; [$8702]
                                                                        ; byte
 
@@ -1606,6 +1780,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; .░▒▒▒░░░
 ; ░▒█▒▒░░.
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_04:           ; [$8712]
     db $d9,$5b,$c3,$22,$11,$2f,$47,$a6,$fe,$bd,$3d,$1d,$0e,$10,$38,$78 ; [$8712]
                                                                        ; byte
 
@@ -1620,6 +1795,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ▒█▒░░...
 ; ▒▒▒░░...
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_05:           ; [$8722]
     db $f1,$39,$21,$62,$9c,$68,$58,$18,$8e,$de,$de,$9c,$60,$f0,$e0,$e0 ; [$8722]
                                                                        ; byte
 
@@ -1634,6 +1810,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ░▒▒▒▒░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_06:           ; [$8732]
     db $cd,$98,$78,$28,$7c,$ac,$84,$fc,$70,$60,$00,$10,$00,$70,$78,$00 ; [$8732]
                                                                        ; byte
 
@@ -1648,6 +1825,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_07:           ; [$8742]
     db $30,$f0,$b0,$d8,$08,$f8,$00,$00,$c0,$00,$40,$e0,$f0,$00,$00,$00 ; [$8742]
                                                                        ; byte
 
@@ -1662,6 +1840,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ...░░█░░
 ; ..██▒▒██
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_08:           ; [$8752]
     db $00,$03,$2f,$18,$30,$27,$1f,$33,$00,$20,$10,$0f,$1f,$18,$04,$3f ; [$8752]
                                                                        ; byte
 
@@ -1676,6 +1855,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ▒░░░░░░.
 ; ▒░░░░░░.
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_09:           ; [$8762]
     db $00,$e2,$f4,$d8,$40,$fc,$7e,$7e,$00,$02,$06,$3e,$bc,$00,$80,$80 ; [$8762]
                                                                        ; byte
 
@@ -1690,6 +1870,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ..░▒░░▒░
 ; ..░▒▒▒░█
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_10:           ; [$8772]
     db $1c,$1c,$1c,$21,$07,$34,$2d,$23,$07,$03,$03,$1e,$19,$1b,$12,$1d ; [$8772]
                                                                        ; byte
 
@@ -1704,6 +1885,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; █░░▒█▒▒░
 ; █▒░░█▒▒░
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_11:           ; [$8782]
     db $7c,$62,$d1,$89,$21,$e7,$e9,$b9,$80,$9c,$3e,$fe,$de,$18,$9e,$ce ; [$8782]
                                                                        ; byte
 
@@ -1718,6 +1900,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ▒▒▒▒░░░░
 ; ▒▒▒░░░.░
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_12:           ; [$8792]
     db $1b,$fa,$e3,$f3,$9f,$6f,$0f,$1d,$3d,$1d,$dc,$0c,$60,$f0,$f0,$e0 ; [$8792]
                                                                        ; byte
 
@@ -1732,6 +1915,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; ░▒▒░░...
 ; ▒██▒░...
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_13:           ; [$87a2]
     db $19,$21,$c1,$e2,$fc,$f8,$98,$68,$e6,$de,$3e,$1c,$00,$00,$60,$f0 ; [$87a2]
                                                                        ; byte
 
@@ -1746,6 +1930,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_14:           ; [$87b2]
     db $b1,$79,$38,$0c,$7c,$00,$01,$01,$40,$00,$00,$70,$00,$00,$00,$00 ; [$87b2]
                                                                        ; byte
 
@@ -1760,9 +1945,17 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; █▒▒▒▒...
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_FIRE_GIANT_15:           ; [$87c2]
     db $58,$10,$b0,$78,$78,$c8,$80,$f8,$e0,$e0,$40,$00,$00,$70,$f8,$00 ; [$87c2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Ishiisu
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8020]
+;============================================================================
 
 ;
 ; ......░░
@@ -1777,7 +1970,7 @@ PPUTile16_PRG6__86d2:                       ; [$86d2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8020]
 ;
-PPUTile16_PRG6__87d2:                       ; [$87d2]
+SPRITE_TILES_ENEMY_ISHIISU_00:              ; [$87d2]
     db $03,$07,$0f,$0f,$0c,$0d,$0f,$06,$00,$00,$07,$07,$07,$07,$07,$03 ; [$87d2]
                                                                        ; byte
 
@@ -1792,6 +1985,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ▒░░░░░░.
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_ISHIISU_01:              ; [$87e2]
     db $80,$c0,$e0,$e0,$f0,$f8,$7e,$fc,$00,$00,$00,$00,$80,$80,$80,$00 ; [$87e2]
                                                                        ; byte
 
@@ -1806,6 +2000,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ...░░░░░
 ; ..░█░▒▒▒
 ;
+SPRITE_TILES_ENEMY_ISHIISU_02:              ; [$87f2]
     db $07,$0c,$1f,$1f,$1d,$0c,$1f,$38,$00,$07,$0f,$0f,$0f,$07,$00,$17 ; [$87f2]
                                                                        ; byte
 
@@ -1820,6 +2015,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ░░░░█▒░.
 ; ▒░░░██░.
 ;
+SPRITE_TILES_ENEMY_ISHIISU_03:              ; [$8802]
     db $bf,$7c,$e7,$dc,$b4,$2a,$fa,$7e,$70,$f8,$f8,$e0,$d8,$dc,$0c,$8c ; [$8802]
                                                                        ; byte
 
@@ -1834,6 +2030,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ....▒███
 ; ....▒███
 ;
+SPRITE_TILES_ENEMY_ISHIISU_04:              ; [$8812]
     db $7b,$77,$37,$07,$07,$07,$07,$07,$37,$2f,$0f,$0f,$0f,$0f,$0f,$0f ; [$8812]
                                                                        ; byte
 
@@ -1848,6 +2045,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; █▒░░....
 ; █▒░░....
 ;
+SPRITE_TILES_ENEMY_ISHIISU_05:              ; [$8822]
     db $36,$be,$be,$de,$be,$70,$b0,$b0,$cc,$c4,$c4,$e4,$c0,$80,$c0,$c0 ; [$8822]
                                                                        ; byte
 
@@ -1862,6 +2060,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ...░▒░▒▒
 ; ..░▒░▒░▒
 ;
+SPRITE_TILES_ENEMY_ISHIISU_06:              ; [$8832]
     db $07,$07,$0b,$0a,$0b,$09,$14,$2a,$0f,$0f,$07,$07,$07,$07,$0b,$15 ; [$8832]
                                                                        ; byte
 
@@ -1876,6 +2075,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; █▒░▒░░..
 ; ▒▒▒░▒▒░.
 ;
+SPRITE_TILES_ENEMY_ISHIISU_07:              ; [$8842]
     db $b0,$70,$70,$f0,$70,$b0,$ac,$12,$c0,$80,$80,$00,$80,$c0,$d0,$ec ; [$8842]
                                                                        ; byte
 
@@ -1890,6 +2090,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ....░░█░
 ; ...░░▒░█
 ;
+SPRITE_TILES_ENEMY_ISHIISU_08:              ; [$8852]
     db $0a,$0a,$0d,$0b,$0a,$0a,$0f,$1b,$07,$07,$03,$07,$07,$07,$02,$05 ; [$8852]
                                                                        ; byte
 
@@ -1904,6 +2105,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; █▒▒░░...
 ; ▒▒░░░░..
 ;
+SPRITE_TILES_ENEMY_ISHIISU_09:              ; [$8862]
     db $60,$e0,$60,$60,$e0,$b0,$98,$3c,$80,$00,$80,$80,$00,$40,$e0,$c0 ; [$8862]
                                                                        ; byte
 
@@ -1918,6 +2120,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; .░░░░░░░
 ; ....░▒▒▒
 ;
+SPRITE_TILES_ENEMY_ISHIISU_10:              ; [$8872]
     db $07,$0f,$1f,$3f,$7d,$fc,$7f,$08,$00,$07,$0f,$0f,$2f,$77,$00,$07 ; [$8872]
                                                                        ; byte
 
@@ -1932,6 +2135,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ░░░░░░..
 ; ▒░░░....
 ;
+SPRITE_TILES_ENEMY_ISHIISU_11:              ; [$8882]
     db $fe,$fc,$fe,$fc,$fe,$7e,$fc,$70,$60,$f0,$c0,$b0,$6c,$8c,$00,$80 ; [$8882]
                                                                        ; byte
 
@@ -1946,6 +2150,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ....░███
 ; .....░██
 ;
+SPRITE_TILES_ENEMY_ISHIISU_12:              ; [$8892]
     db $03,$07,$27,$7f,$fc,$7d,$0f,$07,$00,$00,$07,$27,$77,$07,$07,$03 ; [$8892]
                                                                        ; byte
 
@@ -1960,6 +2165,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; █░░░██░.
 ; ░░░██▒░.
 ;
+SPRITE_TILES_ENEMY_ISHIISU_13:              ; [$88a2]
     db $80,$f0,$f8,$ec,$fe,$f6,$fe,$fa,$00,$00,$30,$78,$0c,$8c,$8c,$1c ; [$88a2]
                                                                        ; byte
 
@@ -1974,6 +2180,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ....░░░░
 ; ....░▒▒▒
 ;
+SPRITE_TILES_ENEMY_ISHIISU_14:              ; [$88b2]
     db $07,$0f,$1f,$1f,$1d,$0c,$0f,$08,$00,$07,$0f,$0f,$0f,$07,$00,$07 ; [$88b2]
                                                                        ; byte
 
@@ -1988,6 +2195,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ░░░.....
 ; ▒░░░....
 ;
+SPRITE_TILES_ENEMY_ISHIISU_15:              ; [$88c2]
     db $dc,$e8,$d0,$d0,$a0,$20,$e0,$70,$68,$f0,$e0,$e0,$c0,$c0,$00,$80 ; [$88c2]
                                                                        ; byte
 
@@ -2002,6 +2210,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ....░▒██
 ; ....░▒██
 ;
+SPRITE_TILES_ENEMY_ISHIISU_16:              ; [$88d2]
     db $0b,$07,$07,$07,$07,$07,$0b,$0b,$07,$0f,$0f,$0f,$0f,$0f,$07,$07 ; [$88d2]
                                                                        ; byte
 
@@ -2016,9 +2225,17 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; ▒░░.....
 ; ▒░░.....
 ;
+SPRITE_TILES_ENEMY_ISHIISU_17:              ; [$88e2]
     db $30,$b0,$a0,$a0,$60,$60,$60,$60,$c0,$c0,$c0,$c0,$80,$80,$80,$80 ; [$88e2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Execution Hood
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8022]
+;============================================================================
 
 ;
 ; .......░
@@ -2033,7 +2250,7 @@ PPUTile16_PRG6__87d2:                       ; [$87d2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8022]
 ;
-PPUTile16_PRG6__88f2:                       ; [$88f2]
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_00:       ; [$88f2]
     db $01,$7b,$ff,$ff,$fe,$5d,$0c,$1c,$00,$01,$7b,$77,$5f,$06,$02,$18 ; [$88f2]
                                                                        ; byte
 
@@ -2048,6 +2265,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ..░▒██░.
 ; .░▒██▒░.
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_01:       ; [$8902]
     db $70,$f8,$fc,$5c,$ae,$2e,$2e,$5a,$c0,$f0,$f8,$b8,$1c,$1c,$1c,$3c ; [$8902]
                                                                        ; byte
 
@@ -2062,6 +2280,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; .░░▒▒▒▒░
 ; .██░▒▒░░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_02:       ; [$8912]
     db $00,$03,$0d,$17,$2c,$58,$61,$73,$00,$00,$03,$0f,$1f,$3f,$1e,$6c ; [$8912]
                                                                        ; byte
 
@@ -2076,6 +2295,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ░░░░░░▒░
 ; ██░░░░░░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_03:       ; [$8922]
     db $ba,$76,$fe,$fb,$bd,$ff,$fd,$ff,$7c,$f8,$e0,$cc,$de,$0c,$02,$c0 ; [$8922]
                                                                        ; byte
 
@@ -2090,6 +2310,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ██░██░░░
 ; ▒██░░░██
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_04:       ; [$8932]
     db $7f,$7b,$7b,$7d,$fe,$fd,$ff,$7f,$31,$6d,$1c,$3e,$bf,$be,$d8,$e3 ; [$8932]
                                                                        ; byte
 
@@ -2104,6 +2325,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ███▒▒░█░
 ; ██▒▒░░█░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_05:       ; [$8942]
     db $ff,$fe,$fe,$e6,$c6,$f3,$e7,$cf,$60,$e0,$c0,$18,$38,$7c,$fa,$f2 ; [$8942]
                                                                        ; byte
 
@@ -2118,6 +2340,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ░░.░▒███
 ; ....░░░░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_06:       ; [$8952]
     db $ff,$fe,$7f,$7f,$df,$ff,$d7,$0f,$77,$3f,$1c,$20,$60,$de,$0f,$00 ; [$8952]
                                                                        ; byte
 
@@ -2132,6 +2355,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; █░░░███░
 ; ░.░███░░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_07:       ; [$8962]
     db $bf,$7b,$fd,$fd,$df,$ef,$ff,$bf,$c0,$84,$0e,$8e,$ae,$46,$8e,$1c ; [$8962]
                                                                        ; byte
 
@@ -2146,6 +2370,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ....░░░█
 ; ....███░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_08:       ; [$8972]
     db $1c,$3f,$3f,$3f,$17,$03,$0f,$0f,$00,$1e,$1d,$17,$01,$00,$01,$0e ; [$8972]
                                                                        ; byte
 
@@ -2160,6 +2385,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ░..░██▒░
 ; ..░███░.
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_09:       ; [$8982]
     db $b4,$fe,$ed,$f7,$cf,$cf,$9d,$3e,$78,$fc,$fe,$ce,$86,$86,$0e,$1c ; [$8982]
                                                                        ; byte
 
@@ -2174,6 +2400,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ▒░░░░▒░░
 ; ░░░░▒▒░.
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_10:       ; [$8992]
     db $fe,$fe,$e6,$92,$e3,$9f,$7b,$f2,$60,$e0,$d8,$7c,$fc,$e0,$84,$0c ; [$8992]
                                                                        ; byte
 
@@ -2188,6 +2415,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; ░█░.████
 ; █░░░.░░░
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_11:       ; [$89a2]
     db $ff,$ff,$ff,$7f,$7f,$7f,$ef,$f7,$1c,$20,$20,$00,$40,$1e,$4f,$80 ; [$89a2]
                                                                        ; byte
 
@@ -2202,9 +2430,17 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; █░.░░░░.
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_EXECUTION_HOOD_12:       ; [$89b2]
     db $f9,$fd,$fd,$ff,$ff,$bf,$de,$80,$0e,$8e,$8e,$04,$0e,$5c,$80,$00 ; [$89b2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Rokusutahn
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8024]
+;============================================================================
 
 ;
 ; ........
@@ -2219,7 +2455,7 @@ PPUTile16_PRG6__88f2:                       ; [$88f2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8024]
 ;
-PPUTile16_PRG6__89c2:                       ; [$89c2]
+SPRITE_TILES_BOSS_ROKUSUTAHN_00:            ; [$89c2]
     db $00,$01,$02,$0e,$1c,$36,$6e,$ec,$00,$00,$01,$03,$0f,$19,$33,$77 ; [$89c2]
                                                                        ; byte
 
@@ -2234,6 +2470,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ▒░░██░░░
 ; ▒▒█▒▒▒░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_01:            ; [$89d2]
     db $7f,$e4,$f2,$fa,$fa,$fd,$7f,$23,$00,$7f,$8f,$45,$05,$02,$98,$fc ; [$89d2]
                                                                        ; byte
 
@@ -2248,6 +2485,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░░░██░░▒
 ; ░░▒▒▒█▒▒
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_02:            ; [$89e2]
     db $fe,$31,$46,$42,$5f,$bf,$fe,$c4,$00,$fe,$ff,$bf,$a2,$40,$19,$3f ; [$89e2]
                                                                        ; byte
 
@@ -2262,6 +2500,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ▒█░░▒█░.
 ; ▒▒█░▒██░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_03:            ; [$89f2]
     db $00,$80,$c0,$f0,$38,$6c,$76,$37,$00,$00,$80,$c0,$f0,$98,$cc,$ee ; [$89f2]
                                                                        ; byte
 
@@ -2276,6 +2515,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░░░██
 ; .....░░█
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_04:            ; [$8a02]
     db $98,$72,$ef,$7e,$5f,$37,$1f,$07,$7f,$8d,$90,$11,$23,$0b,$03,$01 ; [$8a02]
                                                                        ; byte
 
@@ -2290,6 +2530,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░░██▒▒░▒
 ; ░▒██▒░░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_05:            ; [$8a12]
     db $62,$47,$1e,$fd,$e6,$db,$f2,$b7,$fd,$f9,$e1,$02,$19,$3c,$3d,$78 ; [$8a12]
                                                                        ; byte
 
@@ -2304,6 +2545,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ▒░▒▒██░░
 ; ░░░▒▒█░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_06:            ; [$8a22]
     db $46,$e2,$78,$bf,$67,$db,$4f,$e7,$bf,$9f,$87,$40,$98,$3c,$bc,$1c ; [$8a22]
                                                                        ; byte
 
@@ -2318,6 +2560,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ██......
 ; █.......
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_07:            ; [$8a32]
     db $19,$4e,$f7,$fe,$bc,$f0,$c0,$80,$fe,$b1,$09,$08,$c0,$c0,$c0,$80 ; [$8a32]
                                                                        ; byte
 
@@ -2332,6 +2575,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░█▒▒░░..
 ; ░▒▒▒░░..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_08:            ; [$8a42]
     db $e7,$8e,$fe,$fe,$cc,$9c,$cc,$8c,$78,$70,$00,$60,$70,$60,$70,$70 ; [$8a42]
                                                                        ; byte
 
@@ -2346,6 +2590,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░▒▒▒░░..
 ; ░█░░░░..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_09:            ; [$8a52]
     db $dc,$8c,$9c,$fc,$8c,$dc,$8c,$fc,$60,$70,$60,$40,$70,$60,$70,$40 ; [$8a52]
                                                                        ; byte
 
@@ -2360,6 +2605,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; █▒░░░░..
 ; █░░▒░░..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_10:            ; [$8a62]
     db $9c,$fc,$ac,$dc,$7c,$bc,$bc,$ec,$60,$00,$70,$70,$d0,$d0,$c0,$90 ; [$8a62]
                                                                        ; byte
 
@@ -2374,6 +2620,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░▒▒▒░
 ; ...░░░█░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_11:            ; [$8a72]
     db $3b,$31,$39,$7f,$51,$fb,$11,$1f,$06,$0e,$06,$02,$2e,$06,$0e,$02 ; [$8a72]
                                                                        ; byte
 
@@ -2388,6 +2635,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; .▒▒░.░░.
 ; ░▒░...░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_12:            ; [$8a82]
     db $24,$2c,$24,$3c,$24,$4a,$16,$a2,$18,$10,$18,$00,$18,$34,$60,$40 ; [$8a82]
                                                                        ; byte
 
@@ -2402,6 +2650,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; .░▒█░░▒█
 ; ..▒█░░░█
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_13:            ; [$8a92]
     db $1b,$11,$1b,$1f,$1b,$2a,$5d,$1f,$06,$0e,$06,$00,$0c,$1f,$33,$31 ; [$8a92]
                                                                        ; byte
 
@@ -2416,6 +2665,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░▒██▒░░░
 ; ▒█▒▒▒░.░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_14:            ; [$8aa2]
     db $12,$47,$1e,$fc,$c7,$b7,$b7,$45,$fd,$f9,$e1,$03,$38,$78,$78,$f8 ; [$8aa2]
                                                                        ; byte
 
@@ -2430,6 +2680,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░░░░.
 ; ..░░░░..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_15:            ; [$8ab2]
     db $01,$03,$02,$0c,$39,$32,$1e,$3c,$03,$07,$0f,$1f,$1e,$1c,$00,$00 ; [$8ab2]
                                                                        ; byte
 
@@ -2444,6 +2695,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░▒▒▒░
 ; ....░▒▒░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_16:            ; [$8ac2]
     db $9c,$3c,$74,$e2,$32,$13,$11,$09,$e0,$c0,$88,$1c,$0c,$0c,$0e,$06 ; [$8ac2]
                                                                        ; byte
 
@@ -2458,6 +2710,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ..░▒▒▒░.
 ; ..░█▒░░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_17:            ; [$8ad2]
     db $36,$2a,$36,$22,$32,$36,$22,$36,$18,$1c,$18,$1c,$1c,$18,$1c,$18 ; [$8ad2]
                                                                        ; byte
 
@@ -2472,6 +2725,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ....░▒▒░
 ; ....░▒░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_18:            ; [$8ae2]
     db $0b,$09,$0b,$09,$0b,$09,$09,$0b,$04,$06,$04,$06,$04,$06,$06,$04 ; [$8ae2]
                                                                        ; byte
 
@@ -2486,6 +2740,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; .▒█░.░█░
 ; ░█░...▒░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_19:            ; [$8af2]
     db $36,$32,$36,$3e,$3a,$5d,$37,$e1,$18,$1c,$18,$00,$1c,$36,$62,$42 ; [$8af2]
                                                                        ; byte
 
@@ -2500,6 +2755,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...▒▒░.░
 ; ..░▒░...
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_20:            ; [$8b02]
     db $09,$09,$09,$0f,$09,$12,$05,$28,$06,$06,$06,$00,$06,$0d,$18,$10 ; [$8b02]
                                                                        ; byte
 
@@ -2514,6 +2770,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ......░▒
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_21:            ; [$8b12]
     db $01,$01,$01,$01,$02,$03,$02,$02,$00,$00,$00,$00,$01,$00,$01,$01 ; [$8b12]
                                                                        ; byte
 
@@ -2528,6 +2785,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░▒▒░░...
 ; ░░░░░...
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_22:            ; [$8b22]
     db $a7,$ce,$cc,$c8,$48,$48,$98,$f8,$78,$70,$70,$70,$f0,$f0,$60,$00 ; [$8b22]
                                                                        ; byte
 
@@ -2542,6 +2800,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░▒▒█░
 ; ...░▒▒▒░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_23:            ; [$8b32]
     db $27,$31,$1f,$1f,$13,$19,$13,$11,$1e,$0e,$00,$06,$0e,$06,$0e,$0e ; [$8b32]
                                                                        ; byte
 
@@ -2556,6 +2815,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ......░▒
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_24:            ; [$8b42]
     db $02,$03,$02,$02,$03,$02,$02,$02,$01,$00,$01,$01,$00,$01,$01,$01 ; [$8b42]
                                                                        ; byte
 
@@ -2570,6 +2830,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░▒▒▒░...
 ; ░█░░░...
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_25:            ; [$8b52]
     db $d8,$88,$98,$f8,$88,$d8,$88,$f8,$60,$70,$60,$40,$70,$60,$70,$40 ; [$8b52]
                                                                        ; byte
 
@@ -2584,6 +2845,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ....░▒▒░
 ; ....░░░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_26:            ; [$8b62]
     db $02,$02,$02,$03,$02,$04,$09,$0e,$01,$01,$01,$00,$01,$03,$06,$00 ; [$8b62]
                                                                        ; byte
 
@@ -2598,6 +2860,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░░░▒█
 ; ...░░.░█
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_27:            ; [$8b72]
     db $19,$1f,$15,$1b,$1e,$1d,$1d,$1b,$06,$00,$0e,$0e,$0b,$0b,$03,$01 ; [$8b72]
                                                                        ; byte
 
@@ -2612,6 +2875,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; █▒░░█▒..
 ; █░░░█▒..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_28:            ; [$8b82]
     db $d8,$88,$d8,$f8,$d8,$54,$b8,$f8,$60,$70,$60,$00,$30,$f8,$cc,$8c ; [$8b82]
                                                                        ; byte
 
@@ -2626,6 +2890,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; .....░▒░
 ; .....░░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_29:            ; [$8b92]
     db $03,$02,$02,$03,$02,$04,$05,$06,$00,$01,$01,$00,$01,$03,$02,$00 ; [$8b92]
                                                                        ; byte
 
@@ -2640,6 +2905,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░▒▒░....
 ; .░░░....
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_30:            ; [$8ba2]
     db $40,$40,$40,$c0,$40,$20,$90,$70,$80,$80,$80,$00,$80,$c0,$60,$00 ; [$8ba2]
                                                                        ; byte
 
@@ -2654,6 +2920,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ░░▒██▒░▒
 ; ░░▒██▒░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_31:            ; [$8bb2]
     db $12,$47,$1e,$fd,$e6,$db,$da,$db,$fd,$f9,$e1,$02,$19,$3c,$3d,$3c ; [$8bb2]
                                                                        ; byte
 
@@ -2668,6 +2935,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░░░░░
 ; ...░▒▒░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_32:            ; [$8bc2]
     db $00,$01,$02,$04,$09,$10,$1f,$12,$00,$00,$01,$03,$06,$0f,$00,$0c ; [$8bc2]
                                                                        ; byte
 
@@ -2682,6 +2950,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░▒▒░░
 ; ...░░░░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_33:            ; [$8bd2]
     db $cb,$6b,$e9,$ed,$cd,$85,$13,$1f,$3c,$9c,$1e,$1e,$1e,$1e,$0c,$00 ; [$8bd2]
                                                                        ; byte
 
@@ -2696,6 +2965,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ..░▒▒░..
 ; ..░░▒▒..
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_34:            ; [$8be2]
     db $30,$24,$30,$24,$34,$30,$24,$30,$0c,$18,$0c,$18,$08,$0c,$18,$0c ; [$8be2]
                                                                        ; byte
 
@@ -2710,6 +2980,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ...░▒▒▒░
 ; ...░█▒░░
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_35:            ; [$8bf2]
     db $1b,$15,$1b,$11,$19,$1b,$11,$1b,$0c,$0e,$0c,$0e,$0e,$0c,$0e,$0c ; [$8bf2]
                                                                        ; byte
 
@@ -2724,6 +2995,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; .▒▒░.░░.
 ; ░▒░...░.
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_36:            ; [$8c02]
     db $24,$24,$24,$3c,$24,$4a,$16,$a2,$18,$18,$18,$00,$18,$34,$60,$40 ; [$8c02]
                                                                        ; byte
 
@@ -2738,9 +3010,17 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; ..▒█░.░█
 ; .░█░...▒
 ;
+SPRITE_TILES_BOSS_ROKUSUTAHN_37:            ; [$8c12]
     db $1b,$19,$1b,$1f,$1d,$2e,$1b,$70,$0c,$0e,$0c,$00,$0e,$1b,$31,$21 ; [$8c12]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Unused Snake
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8026]
+;============================================================================
 
 ;
 ; ........
@@ -2755,7 +3035,7 @@ PPUTile16_PRG6__89c2:                       ; [$89c2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8026]
 ;
-PPUTile16_PRG6__8c22:                       ; [$8c22]
+SPRITE_TILES_BOSS_UNUSED_SNAKE_00:          ; [$8c22]
     db $00,$01,$06,$09,$13,$17,$28,$5f,$00,$00,$01,$06,$0c,$08,$1f,$3f ; [$8c22]
                                                                        ; byte
 
@@ -2770,6 +3050,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ███▒░█..
 ; ██▒░░█..
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_01:          ; [$8c32]
     db $6c,$8c,$76,$ee,$da,$36,$ec,$dc,$14,$74,$8a,$1c,$3c,$fa,$f4,$e4 ; [$8c32]
                                                                        ; byte
 
@@ -2784,6 +3065,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ░░.░▒██▒
 ; ....░░░░
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_02:          ; [$8c42]
     db $5f,$b1,$ae,$91,$ae,$ef,$d6,$0f,$3f,$7f,$71,$6e,$5f,$1f,$0f,$00 ; [$8c42]
                                                                        ; byte
 
@@ -2798,6 +3080,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ▒░░▒░░..
 ; ░▒▒░░...
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_03:          ; [$8c52]
     db $d6,$d6,$24,$cc,$2c,$9c,$6c,$98,$ea,$ec,$d8,$30,$f0,$e0,$90,$60 ; [$8c52]
                                                                        ; byte
 
@@ -2812,6 +3095,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ░..░░░░▒
 ; ....░▒██
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_04:          ; [$8c62]
     db $5f,$b0,$af,$9f,$bf,$ff,$9e,$0b,$3f,$7f,$72,$6a,$48,$20,$01,$07 ; [$8c62]
                                                                        ; byte
 
@@ -2826,6 +3110,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ▒██▒░░..
 ; ██▒░░...
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_05:          ; [$8c72]
     db $b6,$76,$f4,$ec,$ec,$8c,$6c,$d8,$ca,$8c,$88,$10,$10,$70,$f0,$e0 ; [$8c72]
                                                                        ; byte
 
@@ -2840,6 +3125,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ░▒▒▒▒███
 ; ░░░░░▒██
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_06:          ; [$8c82]
     db $00,$00,$07,$18,$23,$5c,$87,$fb,$00,$00,$00,$07,$1c,$3f,$7f,$07 ; [$8c82]
                                                                        ; byte
 
@@ -2854,6 +3140,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ██▒░░░░█
 ; ██▒░░░█▒
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_07:          ; [$8c92]
     db $07,$fe,$06,$f6                      ; [$8c92] byte
 
 
@@ -2880,6 +3167,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; .....░▒▒
 ; ....░░░░
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_08:          ; [$8ca2]
     db $45,$5a,$2d,$2e                      ; [$8ca2] byte
 
 
@@ -2906,6 +3194,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ███▒░░..
 ; ▒▒░░░...
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_09:          ; [$8cb2]
     db $d6,$2e,$db,$38                      ; [$8cb2] byte
 
 
@@ -2932,6 +3221,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; .░▒███▒▒
 ; ..░▒▒███
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_10:          ; [$8cc2]
     db $7d,$7e,$3f,$3f,$7f,$6f,$5c,$27,$53,$55,$04,$01,$00,$30,$3f,$1f ; [$8cc2]
                                                                        ; byte
 
@@ -2946,6 +3236,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ▒█▒▒░░..
 ; █▒░░░░..
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_11:          ; [$8cd2]
     db $de,$3e,$fb,$f8,$ea,$d6,$4c,$bc,$eb,$cb,$0d,$4f,$1c,$38,$f0,$c0 ; [$8cd2]
                                                                        ; byte
 
@@ -2960,6 +3251,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ░▒██▒░░▒
 ; ░▒██▒▒░░
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_12:          ; [$8ce2]
     db $0f,$35,$4a,$6d,$be,$86,$b6,$b3,$00,$0e,$37,$13,$41,$79,$79,$7c ; [$8ce2]
                                                                        ; byte
 
@@ -2974,6 +3266,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; █▒░░▒▒▒.
 ; ▒▒░░░░░.
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_13:          ; [$8cf2]
     db $f0,$38,$b4,$6c,$76,$aa,$b0,$3e,$00,$c0,$48,$90,$8c,$d4,$ce,$c0 ; [$8cf2]
                                                                        ; byte
 
@@ -2988,6 +3281,7 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; ..░▒▒░░▒
 ; ...░░▒░░
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_14:          ; [$8d02]
     db $1d,$5d,$5b,$66,$7e,$46,$26,$1b,$7e,$3e,$3c,$19,$01,$39,$19,$04 ; [$8d02]
                                                                        ; byte
 
@@ -3002,9 +3296,22 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ; █▒░░░...
 ; ▒▒░.....
 ;
+SPRITE_TILES_BOSS_UNUSED_SNAKE_15:          ; [$8d12]
     db $54,$28,$36,$aa,$f6,$6c,$b8,$20,$ea,$de,$c8,$d4,$88,$90,$c0,$c0 ; [$8d12]
                                                                        ; byte
 
+
+;============================================================================
+; Effect Tiles: Enemy Death
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8016]
+;     BANK6_SPRITEADDRS_START [$PRG6::8028]
+;     BANK6_SPRITEADDRS_START [$PRG6::802a]
+;     BANK6_SPRITEADDRS_START [$PRG6::802e]
+;     BANK6_SPRITEADDRS_START [$PRG6::804c]
+;     BANK6_SPRITEADDRS_START [$PRG6::8054]
+;============================================================================
 
 ;
 ; ......░▒
@@ -3024,10 +3331,17 @@ PPUTile16_PRG6__8c22:                       ; [$8c22]
 ;     BANK6_SPRITEADDRS_START [$PRG6::804c]
 ;     BANK6_SPRITEADDRS_START [$PRG6::8054]
 ;
-PPUTile16_PRG6__8d22:                       ; [$8d22]
+SPRITE_TILES_EFFECT_ENEMY_DEATH_00:         ; [$8d22]
     db $02,$0f,$1f,$1f,$1f,$1f,$3b,$33,$01,$03,$0f,$1f,$18,$04,$3f,$3f ; [$8d22]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Charron
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::802c]
+;============================================================================
 
 ;
 ; ........
@@ -3042,7 +3356,7 @@ PPUTile16_PRG6__8d22:                       ; [$8d22]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::802c]
 ;
-PPUTile16_PRG6__8d32:                       ; [$8d32]
+SPRITE_TILES_ENEMY_CHARRON_00:              ; [$8d32]
     db $00,$00,$0f,$3e,$7f,$7f,$7f,$ff,$00,$00,$00,$1f,$3f,$07,$03,$01 ; [$8d32]
                                                                        ; byte
 
@@ -3057,6 +3371,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ██▒░....
 ; ██▒░░...
 ;
+SPRITE_TILES_ENEMY_CHARRON_01:              ; [$8d42]
     db $00,$00,$00,$c0                      ; [$8d42] byte
 
 
@@ -3083,6 +3398,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ██░█████
 ; ▒▒░▒████
 ;
+SPRITE_TILES_ENEMY_CHARRON_02:              ; [$8d52]
     db $ff,$7f,$fc,$5f,$b1,$6f,$ff,$2f,$01,$83,$7f,$20,$7f,$df,$df,$df ; [$8d52]
                                                                        ; byte
 
@@ -3097,6 +3413,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ███▒▒░..
 ; ▒▒▒▒░...
 ;
+SPRITE_TILES_ENEMY_CHARRON_03:              ; [$8d62]
     db $bc,$74,$fa,$fa,$fa,$f6,$e4,$08,$c0,$b8,$7c,$fc,$fc,$f8,$f8,$f0 ; [$8d62]
                                                                        ; byte
 
@@ -3111,6 +3428,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░░░░░░░░
 ; ░▒░▒░░▒░
 ;
+SPRITE_TILES_ENEMY_CHARRON_04:              ; [$8d72]
     db $a0,$7f,$7f,$fd,$b9,$c3,$ff,$ad,$5f,$00,$00,$7e,$7e,$3c,$00,$52 ; [$8d72]
                                                                        ; byte
 
@@ -3125,6 +3443,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░▒░▒░░░░
 ; ▒░░▒░░░░
 ;
+SPRITE_TILES_ENEMY_CHARRON_05:              ; [$8d82]
     db $38,$fc,$fe,$fe,$ff,$af,$af,$6f,$c0,$00,$00,$00,$00,$50,$50,$90 ; [$8d82]
                                                                        ; byte
 
@@ -3139,6 +3458,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ........
 ; .......░
 ;
+SPRITE_TILES_ENEMY_CHARRON_06:              ; [$8d92]
     db $ae,$7e,$69,$c9,$b8,$c0,$00,$01,$51,$01,$30,$70,$c0,$00,$00,$00 ; [$8d92]
                                                                        ; byte
 
@@ -3153,6 +3473,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░█▒▒░...
 ; ███▒░...
 ;
+SPRITE_TILES_ENEMY_CHARRON_07:              ; [$8da2]
     db $b7,$d7,$56,$76,$ac,$78,$c8,$e8,$48,$28,$a8,$88,$50,$00,$70,$f0 ; [$8da2]
                                                                        ; byte
 
@@ -3167,6 +3488,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ..░░░░░▒
 ; .░░░░░▒█
 ;
+SPRITE_TILES_ENEMY_CHARRON_08:              ; [$8db2]
     db $0f,$16,$3f,$5f,$7f,$3f,$3e,$7d,$00,$0f,$1f,$27,$03,$01,$01,$03 ; [$8db2]
                                                                        ; byte
 
@@ -3181,6 +3503,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ███▒░...
 ; ███▒░...
 ;
+SPRITE_TILES_ENEMY_CHARRON_09:              ; [$8dc2]
     db $80,$40,$a0,$a0,$d0,$e8,$e8,$e8,$00,$80,$c0,$c0,$e0,$f0,$f0,$f0 ; [$8dc2]
                                                                        ; byte
 
@@ -3195,6 +3518,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ██▒▒░▒██
 ; ▒██░████
 ;
+SPRITE_TILES_ENEMY_CHARRON_10:              ; [$8dd2]
     db $bb,$3f,$00,$7e,$d9,$e7,$cb,$7f,$47,$ff,$ff,$bf,$be,$d9,$f7,$ef ; [$8dd2]
                                                                        ; byte
 
@@ -3209,6 +3533,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; █████▒▒░
 ; ████▒▒░.
 ;
+SPRITE_TILES_ENEMY_CHARRON_11:              ; [$8de2]
     db $de,$3a,$79,$fd,$fd,$f9,$f9,$f2,$e0,$dc,$be,$7e,$fe,$fe,$fe,$fc ; [$8de2]
                                                                        ; byte
 
@@ -3223,6 +3548,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░▒░▒▒▒░░
 ; ░▒░░░░▒▒
 ;
+SPRITE_TILES_ENEMY_CHARRON_12:              ; [$8df2]
     db $ff,$95,$60,$ff,$fe,$dc,$a3,$bc,$6f,$6f,$1f,$00,$3f,$3f,$5c,$43 ; [$8df2]
                                                                        ; byte
 
@@ -3237,6 +3563,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ▒▒▒▒░▒░░
 ; ░▒░▒░▒░░
 ;
+SPRITE_TILES_ENEMY_CHARRON_13:              ; [$8e02]
     db $c4,$0e,$3f,$ff,$ff,$a7,$0b,$ab,$f8,$f0,$c0,$00,$00,$58,$f4,$54 ; [$8e02]
                                                                        ; byte
 
@@ -3251,6 +3578,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; .░██▒▒░.
 ; ░██▒▒░..
 ;
+SPRITE_TILES_ENEMY_CHARRON_14:              ; [$8e12]
     db $ac,$b7,$97,$56,$3e,$2d,$72,$e4,$53,$48,$68,$28,$00,$10,$3c,$78 ; [$8e12]
                                                                        ; byte
 
@@ -3265,6 +3593,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░░░░░...
 ; ........
 ;
+SPRITE_TILES_ENEMY_CHARRON_15:              ; [$8e22]
     db $bf,$ff,$fe,$fc,$c8,$c8,$f8,$00,$40,$00,$00,$00,$70,$f0,$00,$00 ; [$8e22]
                                                                        ; byte
 
@@ -3279,6 +3608,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ▒░░░░░░▒
 ; ▒░░░░░░█
 ;
+SPRITE_TILES_ENEMY_CHARRON_16:              ; [$8e32]
     db $4f,$b6,$ff,$5f,$ff,$7d,$7e,$7f,$00,$4f,$9f,$a7,$03,$83,$81,$81 ; [$8e32]
                                                                        ; byte
 
@@ -3293,6 +3623,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; █▒░▒██▒░
 ; █░▒███▒░
 ;
+SPRITE_TILES_ENEMY_CHARRON_17:              ; [$8e42]
     db $98,$5c,$a4,$be,$fa,$e5,$ad,$dd,$00,$88,$d8,$d0,$c4,$de,$de,$be ; [$8e42]
                                                                        ; byte
 
@@ -3307,6 +3638,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░░░▒▒▒▒▒
 ; ░▒▒░▒▒▒▒
 ;
+SPRITE_TILES_ENEMY_CHARRON_18:              ; [$8e52]
     db $bb,$be,$c0,$bc,$8e,$c0,$e0,$90,$47,$7f,$3f,$43,$71,$3f,$1f,$6f ; [$8e52]
                                                                        ; byte
 
@@ -3321,6 +3653,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ▒▒░▒░░..
 ; ▒▒▒░░░..
 ;
+SPRITE_TILES_ENEMY_CHARRON_19:              ; [$8e62]
     db $3d,$7d,$dd,$99,$1a,$06,$2c,$1c,$de,$9e,$3e,$7e,$fc,$f8,$d0,$e0 ; [$8e62]
                                                                        ; byte
 
@@ -3335,6 +3668,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ░▒░▒▒▒░░
 ; ░▒░░░░▒▒
 ;
+SPRITE_TILES_ENEMY_CHARRON_20:              ; [$8e72]
     db $40,$40,$60,$ff,$fe,$dc,$a3,$bc,$3f,$3f,$1f,$00,$3f,$3f,$5c,$43 ; [$8e72]
                                                                        ; byte
 
@@ -3349,9 +3683,17 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; ▒▒▒▒░▒░░
 ; ░▒░▒░▒░░
 ;
+SPRITE_TILES_ENEMY_CHARRON_21:              ; [$8e82]
     db $04,$0e,$7f,$ff,$ff,$a7,$0b,$ab,$f8,$f0,$80,$00,$00,$58,$f4,$54 ; [$8e82]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Geributa
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8030]
+;============================================================================
 
 ;
 ; ........
@@ -3366,7 +3708,7 @@ PPUTile16_PRG6__8d32:                       ; [$8d32]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8030]
 ;
-PPUTile16_PRG6__8e92:                       ; [$8e92]
+SPRITE_TILES_ENEMY_GERIBUTA_00:             ; [$8e92]
     db $00,$00,$00,$00,$03,$04,$04,$05,$00,$00,$00,$00,$03,$07,$07,$06 ; [$8e92]
                                                                        ; byte
 
@@ -3381,6 +3723,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░░░░░░░.
 ; ░▒▒░░░░.
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_01:             ; [$8ea2]
     db $00,$00,$18,$18,$bc,$dc,$fe,$9e,$00,$10,$20,$60,$40,$20,$00,$60 ; [$8ea2]
                                                                        ; byte
 
@@ -3395,6 +3738,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .░░░░░░░
 ; .░░░███░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_02:             ; [$8eb2]
     db $1f,$23,$37,$3f,$3f,$7f,$7f,$7f,$18,$3d,$09,$00,$1d,$38,$00,$0e ; [$8eb2]
                                                                        ; byte
 
@@ -3409,6 +3753,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_03:             ; [$8ec2]
     db $be,$3f,$7f,$ff,$fe,$fe,$ff,$ff,$c0,$c0,$80,$00,$c0,$f0,$00,$00 ; [$8ec2]
                                                                        ; byte
 
@@ -3423,6 +3768,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .░░▒░█▒▒
 ; ░░▒░░█▒▒
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_04:             ; [$8ed2]
     db $7e,$70,$7f,$7b,$67,$67,$6c,$dc,$11,$1f,$00,$1c,$38,$3b,$17,$27 ; [$8ed2]
                                                                        ; byte
 
@@ -3437,6 +3783,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░░░░░░░.
 ; ░▒▒░░░..
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_05:             ; [$8ee2]
     db $ff,$ff,$bf,$36,$66,$ae,$fe,$9c,$00,$00,$40,$c8,$98,$50,$00,$60 ; [$8ee2]
                                                                        ; byte
 
@@ -3451,6 +3798,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░▒▒▒▒░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_06:             ; [$8ef2]
     db $cd,$98,$78,$28,$1c,$2c,$84,$fc,$70,$60,$00,$10,$00,$70,$78,$00 ; [$8ef2]
                                                                        ; byte
 
@@ -3465,6 +3813,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_07:             ; [$8f02]
     db $30,$f0,$b0,$d8,$08,$f8,$00,$00,$c0,$00,$40,$e0,$f0,$00,$00,$00 ; [$8f02]
                                                                        ; byte
 
@@ -3479,6 +3828,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .....█▒░
 ; ...██░░░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_08:             ; [$8f12]
     db $00,$00,$00,$03,$04,$04,$05,$1f,$00,$00,$00,$03,$07,$07,$06,$18 ; [$8f12]
                                                                        ; byte
 
@@ -3493,6 +3843,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░▒▒░░░░.
 ; █▒░░░░░.
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_09:             ; [$8f22]
     db $00,$18,$18,$bc,$dc,$fe,$9e,$be,$10,$20,$60,$40,$20,$00,$60,$c0 ; [$8f22]
                                                                        ; byte
 
@@ -3507,6 +3858,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .░░░████
 ; ░░██░░░░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_10:             ; [$8f32]
     db $23,$37,$3f,$3f,$7f,$7f,$7f,$ff,$3d,$09,$00,$1d,$38,$00,$0f,$30 ; [$8f32]
                                                                        ; byte
 
@@ -3521,6 +3873,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░░░░░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_11:             ; [$8f42]
     db $3f,$7f,$ff,$fe,$fe,$ff,$ff,$3f,$c0,$80,$00,$c0,$f0,$00,$00,$c0 ; [$8f42]
                                                                        ; byte
 
@@ -3535,6 +3888,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .░░░░█▒▒
 ; ░▒▒░░▒▒░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_12:             ; [$8f52]
     db $f0,$ff,$7b,$67,$67,$6c,$7c,$99,$4f,$00,$1c,$38,$3b,$17,$07,$66 ; [$8f52]
                                                                        ; byte
 
@@ -3549,6 +3903,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; ░░░▒░░░.
 ; ░░▒░░░..
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_13:             ; [$8f62]
     db $cf,$bf,$36,$67,$af,$fe,$ee,$dc,$30,$40,$c8,$98,$50,$00,$10,$20 ; [$8f62]
                                                                        ; byte
 
@@ -3563,6 +3918,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_14:             ; [$8f72]
     db $b1,$79,$38,$0c,$7c,$00,$01,$01,$40,$00,$00,$70,$00,$00,$00,$00 ; [$8f72]
                                                                        ; byte
 
@@ -3577,9 +3933,17 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; █▒▒▒▒...
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_GERIBUTA_15:             ; [$8f82]
     db $58,$10,$b0,$78,$78,$c8,$80,$f8,$e0,$e0,$40,$00,$00,$70,$f8,$00 ; [$8f82]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Sugata
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8032]
+;============================================================================
 
 ;
 ; .....░█░
@@ -3594,7 +3958,7 @@ PPUTile16_PRG6__8e92:                       ; [$8e92]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8032]
 ;
-PPUTile16_PRG6__8f92:                       ; [$8f92]
+SPRITE_TILES_ENEMY_SUGATA_00:               ; [$8f92]
     db $07,$03,$03,$03,$07,$0f,$07,$87,$02,$01,$00,$00,$02,$07,$03,$03 ; [$8f92]
                                                                        ; byte
 
@@ -3609,6 +3973,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; █░░░█░..
 ; █▒░░░▒░.
 ;
+SPRITE_TILES_ENEMY_SUGATA_01:               ; [$8fa2]
     db $67,$fc,$fc,$fc,$f8,$f8,$fc,$ba,$60,$58,$80,$40,$20,$d0,$88,$c4 ; [$8fa2]
                                                                        ; byte
 
@@ -3623,6 +3988,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; .▒██.███
 ; .░██░███
 ;
+SPRITE_TILES_ENEMY_SUGATA_02:               ; [$8fb2]
     db $c7,$87,$f1,$fd,$7f,$ff,$37,$7f,$83,$c0,$d0,$d8,$ec,$6e,$77,$37 ; [$8fb2]
                                                                        ; byte
 
@@ -3637,6 +4003,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ░░░███░.
 ; ██░███░.
 ;
+SPRITE_TILES_ENEMY_SUGATA_03:               ; [$8fc2]
     db $76,$98,$14,$38,$5e,$7e,$fe,$fe,$80,$60,$e8,$dc,$bc,$9c,$1c,$dc ; [$8fc2]
                                                                        ; byte
 
@@ -3651,6 +4018,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; .....░▒▒
 ; ...░░░░░
 ;
+SPRITE_TILES_ENEMY_SUGATA_04:               ; [$8fd2]
     db $3f,$1b,$00,$01,$01,$02,$04,$1f,$12,$00,$00,$00,$00,$01,$03,$00 ; [$8fd2]
                                                                        ; byte
 
@@ -3665,6 +4033,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ▒▒▒▒▒░░.
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_SUGATA_05:               ; [$8fe2]
     db $fa,$f6,$ca,$32,$02,$02,$06,$fc,$fc,$78,$34,$cc,$fc,$fc,$f8,$00 ; [$8fe2]
                                                                        ; byte
 
@@ -3679,6 +4048,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ...███░░
 ; .███░░░░
 ;
+SPRITE_TILES_ENEMY_SUGATA_06:               ; [$8ff2]
     db $3e,$7f,$49,$34,$1a,$0d,$1f,$7f,$1d,$31,$30,$18,$0c,$0e,$1c,$70 ; [$8ff2]
                                                                        ; byte
 
@@ -3693,6 +4063,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ..███░..
 ; .██░░...
 ;
+SPRITE_TILES_ENEMY_SUGATA_07:               ; [$9002]
     db $e8,$d0,$d0,$ec,$7a,$1e,$3c,$78,$f0,$e0,$e0,$70,$3c,$1c,$38,$60 ; [$9002]
                                                                        ; byte
 
@@ -3707,6 +4078,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; .▒█░.░░█
 ; .░██░█░▒
 ;
+SPRITE_TILES_ENEMY_SUGATA_08:               ; [$9012]
     db $c7,$87,$e0,$e1,$63,$f7,$37,$7e,$83,$c0,$c0,$c0,$e1,$63,$61,$35 ; [$9012]
                                                                        ; byte
 
@@ -3721,6 +4093,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ██░███░.
 ; ███▒██░.
 ;
+SPRITE_TILES_ENEMY_SUGATA_09:               ; [$9022]
     db $76,$f8,$fc,$f8,$de,$fe,$fe,$ee,$90,$30,$68,$dc,$bc,$9c,$dc,$fc ; [$9022]
                                                                        ; byte
 
@@ -3735,6 +4108,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; .....░▒▒
 ; ...░░░░░
 ;
+SPRITE_TILES_ENEMY_SUGATA_10:               ; [$9032]
     db $3f,$1b,$00,$01,$01,$02,$04,$1f,$12,$00,$00,$00,$00,$01,$03,$00 ; [$9032]
                                                                        ; byte
 
@@ -3749,6 +4123,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; ▒▒▒▒▒░░.
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_SUGATA_11:               ; [$9042]
     db $7a,$f6,$ca,$32,$02,$02,$06,$fc,$fc,$78,$34,$cc,$fc,$fc,$f8,$00 ; [$9042]
                                                                        ; byte
 
@@ -3763,6 +4138,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; .......█
 ; .....██▒
 ;
+SPRITE_TILES_ENEMY_SUGATA_12:               ; [$9052]
     db $02,$02,$01,$00,$00,$01,$01,$06,$03,$03,$01,$01,$01,$00,$01,$07 ; [$9052]
                                                                        ; byte
 
@@ -3777,9 +4153,17 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; █▒░.....
 ; ▒░░.....
 ;
+SPRITE_TILES_ENEMY_SUGATA_13:               ; [$9062]
     db $c0,$40,$c0,$c0,$c0,$c0,$a0,$60,$00,$80,$80,$80,$80,$80,$c0,$80 ; [$9062]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Grimlock
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8034]
+;============================================================================
 
 ;
 ; ........
@@ -3794,7 +4178,7 @@ PPUTile16_PRG6__8f92:                       ; [$8f92]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8034]
 ;
-PPUTile16_PRG6__9072:                       ; [$9072]
+SPRITE_TILES_ENEMY_GRIMLOCK_00:             ; [$9072]
     db $00,$00,$00,$00,$07,$1f,$3f,$7f,$00,$00,$00,$00,$00,$07,$1e,$3c ; [$9072]
                                                                        ; byte
 
@@ -3809,6 +4193,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ░██░....
 ; █░█░....
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_01:             ; [$9082]
     db $00,$00,$00,$00,$98,$78,$f0,$f0,$00,$00,$00,$00,$00,$90,$60,$a0 ; [$9082]
                                                                        ; byte
 
@@ -3823,6 +4208,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ....░░..
 ; ........
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_02:             ; [$9092]
     db $3f,$3f,$7f,$6b,$2f,$1e,$0c,$00,$07,$0d,$38,$6a,$24,$08,$00,$00 ; [$9092]
                                                                        ; byte
 
@@ -3837,6 +4223,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ░▒░███░.
 ; ░▒▒░░█▒░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_03:             ; [$90a2]
     db $f0,$c8,$b4,$f4,$ba,$fa,$be,$9d,$c0,$30,$78,$78,$7c,$3c,$5c,$66 ; [$90a2]
                                                                        ; byte
 
@@ -3851,6 +4238,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; .....░▒▒
 ; ....░░░░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_04:             ; [$90b2]
     db $00,$00,$00,$01,$01,$02,$04,$0f,$00,$00,$00,$00,$01,$01,$03,$00 ; [$90b2]
                                                                        ; byte
 
@@ -3865,6 +4253,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ▒▒▒▒░██░
 ; ░░░░░░░.
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_05:             ; [$90c2]
     db $9f,$97,$8f,$8d,$ed,$1f,$0f,$fe,$6a,$6e,$76,$f6,$f6,$ee,$f6,$00 ; [$90c2]
                                                                        ; byte
 
@@ -3879,6 +4268,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; .░░███░░
 ; ░███░░░░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_06:             ; [$90d2]
     db $3e,$7f,$5b,$2d,$16,$1f,$7f,$ff,$1d,$31,$21,$10,$08,$0c,$1c,$70 ; [$90d2]
                                                                        ; byte
 
@@ -3893,6 +4283,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; .░██▒░..
 ; .██░░...
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_07:             ; [$90e2]
     db $e8,$d0,$d0,$ec,$72,$3a,$74,$78,$f0,$e0,$e0,$70,$3c,$1c,$38,$60 ; [$90e2]
                                                                        ; byte
 
@@ -3907,6 +4298,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; .....░░█
 ; ....░███
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_08:             ; [$90f2]
     db $07,$07,$03,$03,$03,$01,$07,$0f,$03,$03,$01,$01,$01,$00,$01,$07 ; [$90f2]
                                                                        ; byte
 
@@ -3921,6 +4313,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ██░.....
 ; █░░.....
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_09:             ; [$9102]
     db $70,$20,$a0,$c0,$c0,$c0,$e0,$e0,$80,$c0,$c0,$80,$80,$80,$c0,$80 ; [$9102]
                                                                        ; byte
 
@@ -3935,6 +4328,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ..░████░
 ; .░█▒░░░░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_10:             ; [$9112]
     db $3c,$7b,$6c,$74,$3a,$1f,$3f,$6f,$1f,$3c,$30,$38,$1c,$0c,$1e,$30 ; [$9112]
                                                                        ; byte
 
@@ -3949,6 +4343,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; .░█░....
 ; ..░.....
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_11:             ; [$9122]
     db $d8,$b0,$d8,$68,$3c,$3c,$70,$20,$20,$40,$20,$30,$18,$10,$20,$00 ; [$9122]
                                                                        ; byte
 
@@ -3963,6 +4358,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ...██░▒░
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_12:             ; [$9132]
     db $3f,$3f,$7f,$6a,$27,$0e,$1d,$03,$07,$0d,$38,$69,$22,$0d,$1a,$00 ; [$9132]
                                                                        ; byte
 
@@ -3977,6 +4373,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ▒███░░..
 ; ███▒░░..
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_13:             ; [$9142]
     db $f0,$f8,$b8,$4c,$a4,$f4,$7c,$ec,$c0,$00,$40,$b0,$78,$78,$f0,$f0 ; [$9142]
                                                                        ; byte
 
@@ -3991,6 +4388,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ..░███░▒
 ; .░███░█░
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_14:             ; [$9152]
     db $63,$fd,$ff,$ce,$7f,$1c,$3e,$7f,$01,$63,$7f,$7f,$00,$0b,$1d,$3a ; [$9152]
                                                                        ; byte
 
@@ -4005,6 +4403,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ▒▒▒░▒░..
 ; ░▒▒▒░░..
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_15:             ; [$9162]
     db $f4,$e4,$e4,$fc,$fc,$fc,$14,$8c,$e8,$d8,$98,$60,$f0,$18,$e8,$70 ; [$9162]
                                                                        ; byte
 
@@ -4019,6 +4418,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_16:             ; [$9172]
     db $7f,$7f,$3f,$01,$00,$00,$00,$00,$3c,$1f,$01,$00,$00,$00,$00,$00 ; [$9172]
                                                                        ; byte
 
@@ -4033,9 +4433,17 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GRIMLOCK_17:             ; [$9182]
     db $64,$98,$e0,$f8,$fc,$6c,$00,$00,$18,$00,$80,$d0,$48,$00,$00,$00 ; [$9182]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Giant Bees
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8036]
+;============================================================================
 
 ;
 ; ...█▒...
@@ -4050,7 +4458,7 @@ PPUTile16_PRG6__9072:                       ; [$9072]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8036]
 ;
-PPUTile16_PRG6__9192:                       ; [$9192]
+SPRITE_TILES_ENEMY_GIANT_BEES_00:           ; [$9192]
     db $10,$09,$19,$6e,$b7,$65,$d5,$7f,$18,$09,$03,$52,$d8,$9a,$6a,$40 ; [$9192]
                                                                        ; byte
 
@@ -4065,6 +4473,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ▒░......
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_01:           ; [$91a2]
     db $00,$80,$00,$00,$80,$c0,$40,$80,$00,$80,$00,$00,$00,$00,$80,$00 ; [$91a2]
                                                                        ; byte
 
@@ -4079,6 +4488,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ......▒░
 ; .....█▒░
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_02:           ; [$91b2]
     db $04,$00,$00,$00,$00,$01,$01,$05,$14,$00,$00,$00,$00,$01,$02,$06 ; [$91b2]
                                                                        ; byte
 
@@ -4093,6 +4503,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ▒░░███..
 ; █▒░░░░..
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_03:           ; [$91c2]
     db $00,$00,$00,$00,$00,$c0,$7c,$bc,$00,$00,$00,$00,$00,$00,$9c,$c0 ; [$91c2]
                                                                        ; byte
 
@@ -4107,6 +4518,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_04:           ; [$91d2]
     db $03,$04,$07,$02,$00,$00,$00,$00,$04,$03,$02,$02,$00,$00,$00,$00 ; [$91d2]
                                                                        ; byte
 
@@ -4121,6 +4533,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_05:           ; [$91e2]
     db $2a,$aa,$fc,$a0,$00,$00,$00,$00,$d4,$54,$00,$20,$00,$00,$00,$00 ; [$91e2]
                                                                        ; byte
 
@@ -4135,6 +4548,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ░█▒░▒░▒░
 ; .█░░░░░░
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_06:           ; [$91f2]
     db $00,$00,$38,$6f,$b7,$65,$d5,$7f,$00,$00,$20,$53,$d8,$9a,$6a,$40 ; [$91f2]
                                                                        ; byte
 
@@ -4149,6 +4563,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ▒░......
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_07:           ; [$9202]
     db $00,$00,$00,$80,$80,$c0,$40,$80,$00,$00,$00,$80,$00,$00,$80,$00 ; [$9202]
                                                                        ; byte
 
@@ -4163,6 +4578,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ......▒░
 ; .....█▒░
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_08:           ; [$9212]
     db $04,$00,$00,$00,$00,$00,$01,$05,$14,$00,$00,$00,$00,$00,$02,$06 ; [$9212]
                                                                        ; byte
 
@@ -4177,6 +4593,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ▒░░█....
 ; █▒░░░░..
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_09:           ; [$9222]
     db $00,$00,$00,$00,$4c,$c8,$70,$bc,$00,$00,$00,$c0,$4c,$18,$90,$c0 ; [$9222]
                                                                        ; byte
 
@@ -4191,6 +4608,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_10:           ; [$9232]
     db $03,$04,$07,$02,$00,$00,$00,$00,$04,$03,$02,$02,$00,$00,$00,$00 ; [$9232]
                                                                        ; byte
 
@@ -4205,9 +4623,17 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GIANT_BEES_11:           ; [$9242]
     db $2a,$aa,$fc,$a0,$00,$00,$00,$00,$d4,$54,$00,$20,$00,$00,$00,$00 ; [$9242]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Myconid
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8038]
+;============================================================================
 
 ;
 ; ......▒▒
@@ -4222,7 +4648,7 @@ PPUTile16_PRG6__9192:                       ; [$9192]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8038]
 ;
-PPUTile16_PRG6__9252:                       ; [$9252]
+SPRITE_TILES_ENEMY_MYCONID_00:              ; [$9252]
     db $00,$06,$18,$30,$36,$08,$38,$1e,$03,$1f,$7f,$ff,$ff,$7f,$0f,$01 ; [$9252]
                                                                        ; byte
 
@@ -4237,6 +4663,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ▒▒░▒░░░░
 ; ▒▒░░░░░.
 ;
+SPRITE_TILES_ENEMY_MYCONID_01:              ; [$9262]
     db $48,$30,$1a,$8c,$46,$2f,$2f,$3e,$80,$c0,$e0,$70,$b8,$d0,$d0,$c0 ; [$9262]
                                                                        ; byte
 
@@ -4251,6 +4678,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ...▒▒▒░▒
 ; ....░░▒░
 ;
+SPRITE_TILES_ENEMY_MYCONID_02:              ; [$9272]
     db $1f,$0f,$06,$21,$05,$12,$02,$0d,$18,$1c,$39,$2e,$02,$15,$1d,$02 ; [$9272]
                                                                        ; byte
 
@@ -4265,6 +4693,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ░█▒░░░.░
 ; ██▒▒░░░.
 ;
+SPRITE_TILES_ENEMY_MYCONID_03:              ; [$9282]
     db $fa,$f4,$fa,$74,$fd,$fa,$dd,$ce,$00,$00,$00,$80,$00,$00,$60,$f0 ; [$9282]
                                                                        ; byte
 
@@ -4279,6 +4708,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; .░▒.░▒░░
 ; ..░..░░▒
 ;
+SPRITE_TILES_ENEMY_MYCONID_04:              ; [$9292]
     db $07,$1b,$10,$37,$9e,$a9,$4b,$26,$01,$05,$3f,$68,$61,$46,$24,$01 ; [$9292]
                                                                        ; byte
 
@@ -4293,6 +4723,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ░███▒░░.
 ; ███▒▒░░░
 ;
+SPRITE_TILES_ENEMY_MYCONID_05:              ; [$92a2]
     db $cc,$1e,$7d,$ff,$7e,$c5,$f6,$e7,$f0,$e0,$80,$00,$80,$38,$78,$f8 ; [$92a2]
                                                                        ; byte
 
@@ -4307,6 +4738,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ...▒▒░░.
 ; .▒▒▒▒░..
 ;
+SPRITE_TILES_ENEMY_MYCONID_06:              ; [$92b2]
     db $05,$0d,$19,$2f,$27,$3c,$06,$04,$03,$07,$0e,$10,$38,$10,$18,$78 ; [$92b2]
                                                                        ; byte
 
@@ -4321,6 +4753,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ...▒▒░░.
 ; ..▒░░...
 ;
+SPRITE_TILES_ENEMY_MYCONID_07:              ; [$92c2]
     db $8e,$3e,$f8,$78,$5c,$22,$06,$18,$f0,$c0,$00,$00,$20,$1c,$18,$20 ; [$92c2]
                                                                        ; byte
 
@@ -4335,6 +4768,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ..▒▒▒█▒▒
 ; ...░░█▒▒
 ;
+SPRITE_TILES_ENEMY_MYCONID_08:              ; [$92d2]
     db $00,$00,$03,$0c,$18,$1b,$04,$1c,$00,$01,$0f,$3f,$7f,$7f,$3f,$07 ; [$92d2]
                                                                        ; byte
 
@@ -4349,6 +4783,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ▒▒▒░▒░░░
 ; ▒▒▒░▒░░░
 ;
+SPRITE_TILES_ENEMY_MYCONID_09:              ; [$92e2]
     db $00,$20,$18,$0c,$46,$23,$17,$17,$00,$c0,$e0,$f0,$b8,$dc,$e8,$e8 ; [$92e2]
                                                                        ; byte
 
@@ -4363,6 +4798,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ......▒░
 ; ....▒▒▒░
 ;
+SPRITE_TILES_ENEMY_MYCONID_10:              ; [$92f2]
     db $0f,$0f,$07,$13,$00,$02,$01,$01,$00,$0c,$1e,$1c,$07,$01,$02,$0e ; [$92f2]
                                                                        ; byte
 
@@ -4377,6 +4813,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ▒░░░░░..
 ; ▒░█▒░░░.
 ;
+SPRITE_TILES_ENEMY_MYCONID_11:              ; [$9302]
     db $1f,$fc,$f9,$7c,$b8,$fe,$7c,$6e,$e0,$00,$00,$80,$40,$00,$80,$b0 ; [$9302]
                                                                        ; byte
 
@@ -4391,6 +4828,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ........
 ; ......▒▒
 ;
+SPRITE_TILES_ENEMY_MYCONID_12:              ; [$9312]
     db $05,$0a,$0c,$0d,$04,$03,$00,$00,$03,$07,$07,$06,$03,$00,$00,$03 ; [$9312]
                                                                        ; byte
 
@@ -4405,9 +4843,17 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; ▒░░░░...
 ; ▒░░░....
 ;
+SPRITE_TILES_ENEMY_MYCONID_13:              ; [$9322]
     db $8e,$3c,$f0,$c0,$f0,$68,$78,$70,$f0,$c0,$00,$00,$00,$80,$80,$80 ; [$9322]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Naga
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803a]
+;============================================================================
 
 ;
 ; ........
@@ -4422,7 +4868,7 @@ PPUTile16_PRG6__9252:                       ; [$9252]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::803a]
 ;
-PPUTile16_PRG6__9332:                       ; [$9332]
+SPRITE_TILES_ENEMY_NAGA_00:                 ; [$9332]
     db $00,$00,$06,$0f,$77,$07,$00,$03,$00,$00,$07,$15,$78,$ff,$0f,$04 ; [$9332]
                                                                        ; byte
 
@@ -4437,6 +4883,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ▒░░░█▒..
 ; ░▒▒░░...
 ;
+SPRITE_TILES_ENEMY_NAGA_01:                 ; [$9342]
     db $1c,$78,$e0,$b8,$fc,$b8,$78,$98,$1c,$60,$18,$7f,$00,$70,$8c,$60 ; [$9342]
                                                                        ; byte
 
@@ -4451,6 +4898,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ....▒▒▒▒
 ; ..▒▒▒███
 ;
+SPRITE_TILES_ENEMY_NAGA_02:                 ; [$9352]
     db $01,$03,$06,$03,$0e,$00,$00,$07,$00,$01,$03,$1c,$00,$00,$0f,$3f ; [$9352]
                                                                        ; byte
 
@@ -4465,6 +4913,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ▒██▒░░..
 ; █▒▒▒░...
 ;
+SPRITE_TILES_ENEMY_NAGA_03:                 ; [$9362]
     db $e4,$fc,$ec,$14,$54,$14,$6c,$88,$18,$00,$10,$38,$38,$f8,$f0,$f0 ; [$9362]
                                                                        ; byte
 
@@ -4479,6 +4928,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ░▒█▒▒▒▒▒
 ; .░▒█▒▒██
 ;
+SPRITE_TILES_ENEMY_NAGA_04:                 ; [$9372]
     db $18,$63,$4e,$58,$50,$cf,$a0,$53,$7f,$fc,$f0,$e0,$e0,$70,$7f,$3f ; [$9372]
                                                                        ; byte
 
@@ -4493,6 +4943,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ▒▒▒░░...
 ; ███▒▒░..
 ;
+SPRITE_TILES_ENEMY_NAGA_05:                 ; [$9382]
     db $38,$f0,$00,$00,$00,$e0,$18,$e4,$c0,$00,$00,$00,$00,$00,$e0,$f8 ; [$9382]
                                                                        ; byte
 
@@ -4507,6 +4958,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ....░░▒▒
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_NAGA_06:                 ; [$9392]
     db $30,$0f,$00,$7c,$bd,$73,$0c,$03,$0f,$00,$00,$00,$7e,$0f,$03,$00 ; [$9392]
                                                                        ; byte
 
@@ -4521,6 +4973,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ███▒▒░..
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_NAGA_07:                 ; [$93a2]
     db $12,$ca,$2a,$2a,$ca,$f2,$e4,$f8,$fc,$3c,$1c,$1c,$3c,$fc,$f8,$00 ; [$93a2]
                                                                        ; byte
 
@@ -4535,6 +4988,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ..▒█▒░░░
 ; ▒███████
 ;
+SPRITE_TILES_ENEMY_NAGA_08:                 ; [$93b2]
     db $00,$00,$00,$00,$06,$07,$17,$7f,$00,$00,$00,$00,$07,$1d,$38,$ff ; [$93b2]
                                                                        ; byte
 
@@ -4549,6 +5003,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ░░░░....
 ; ░▒████..
 ;
+SPRITE_TILES_ENEMY_NAGA_09:                 ; [$93c2]
     db $00,$00,$00,$78,$70,$b8,$f0,$bc,$00,$00,$00,$7c,$80,$7e,$00,$7c ; [$93c2]
                                                                        ; byte
 
@@ -4563,6 +5018,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ...▒▒███
 ; ..▒▒█▒▒▒
 ;
+SPRITE_TILES_ENEMY_NAGA_10:                 ; [$93d2]
     db $7d,$39,$01,$07,$00,$00,$07,$08,$02,$7c,$3e,$00,$00,$0f,$1f,$3f ; [$93d2]
                                                                        ; byte
 
@@ -4577,6 +5033,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; █▒▒▒▒░░.
 ; ▒▒░░░░..
 ;
+SPRITE_TILES_ENEMY_NAGA_11:                 ; [$93e2]
     db $9c,$e2,$f2,$f5,$19,$73,$86,$3c,$60,$1c,$0c,$0e,$7e,$fc,$f8,$c0 ; [$93e2]
                                                                        ; byte
 
@@ -4591,6 +5048,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_NAGA_12:                 ; [$93f2]
     db $13,$13,$08,$07,$00,$07,$00,$00,$3c,$3c,$3f,$1f,$0f,$00,$00,$00 ; [$93f2]
                                                                        ; byte
 
@@ -4605,6 +5063,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ...░▒▒░░
 ; ..▒▒█▒░░
 ;
+SPRITE_TILES_ENEMY_NAGA_13:                 ; [$9402]
     db $f0,$f8,$0c,$66,$13,$eb,$13,$0b,$00,$00,$f0,$f8,$fc,$1c,$0c,$3c ; [$9402]
                                                                        ; byte
 
@@ -4619,6 +5078,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ....█▒..
 ; .....█▒.
 ;
+SPRITE_TILES_ENEMY_NAGA_14:                 ; [$9412]
     db $08,$0f,$18,$17,$14,$14,$08,$04,$07,$1f,$3f,$38,$38,$18,$0c,$06 ; [$9412]
                                                                        ; byte
 
@@ -4633,9 +5093,17 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_NAGA_15:                 ; [$9422]
     db $16,$e6,$0c,$f0,$00,$00,$00,$00,$f8,$f8,$f0,$00,$00,$00,$00,$00 ; [$9422]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Unused Skeleton Knight
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803c]
+;============================================================================
 
 ;
 ; ........
@@ -4650,7 +5118,7 @@ PPUTile16_PRG6__9332:                       ; [$9332]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::803c]
 ;
-PPUTile16_PRG6__9432:                       ; [$9432]
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_00: ; [$9432]
     db $00,$00,$00,$43,$36,$42,$2a,$1f,$00,$00,$00,$47,$6f,$3f,$17,$00 ; [$9432]
                                                                        ; byte
 
@@ -4665,6 +5133,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ░▒░░░▒░.
 ; ░░▒▒░░..
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_01: ; [$9442]
     db $00,$00,$00,$21,$33,$b1,$ba,$cc,$00,$00,$00,$c1,$c2,$4e,$44,$30 ; [$9442]
                                                                        ; byte
 
@@ -4679,6 +5148,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ▒████░░█
 ; ▒█▒██░░█
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_02: ; [$9452]
     db $1f,$4f,$bf,$7e,$7f,$7f,$7f,$5f,$09,$3f,$79,$f9,$c0,$c0,$f9,$f9 ; [$9452]
                                                                        ; byte
 
@@ -4693,6 +5163,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; █▒▒▒░░░░
 ; ▒▒█▒░░▒░
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_03: ; [$9462]
     db $ec,$fa,$9d,$0d,$cd,$c7,$8f,$2d,$10,$cc,$e6,$f2,$32,$38,$f0,$f2 ; [$9462]
                                                                        ; byte
 
@@ -4707,6 +5178,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; .░██▒░░▒
 ; .▒█▒▒░░▒
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_04: ; [$9472]
     db $4f,$ae,$1c,$5c,$20,$3f,$76,$26,$f9,$79,$7f,$3f,$1f,$00,$39,$79 ; [$9472]
                                                                        ; byte
 
@@ -4721,6 +5193,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ██▒▒░░..
 ; █▒▒░░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_05: ; [$9482]
     db $25,$6f,$ce,$1c,$fc,$4c,$cc,$98,$fa,$f0,$f0,$e0,$00,$f0,$f0,$e0 ; [$9482]
                                                                        ; byte
 
@@ -4735,6 +5208,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ..░█▒▒░░
 ; ..░░░░░█
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_06: ; [$9492]
     db $2e,$66,$33,$13,$09,$19,$33,$3f,$71,$39,$1c,$0c,$06,$0e,$1c,$01 ; [$9492]
                                                                        ; byte
 
@@ -4749,6 +5223,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; █▒▒░....
 ; ▒▒░.....
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_07: ; [$94a2]
     db $b0,$10,$90,$88,$c8,$48,$90,$20,$c0,$e0,$e0,$70,$70,$f0,$e0,$c0 ; [$94a2]
                                                                        ; byte
 
@@ -4763,6 +5238,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ....▒░█▒
 ; ....▒░█▒
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_08: ; [$94b2]
     db $43,$36,$42,$2e,$1f,$0f,$06,$06,$47,$6f,$3f,$13,$00,$04,$0b,$0b ; [$94b2]
                                                                        ; byte
 
@@ -4777,6 +5253,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ░░█░░...
 ; ░░█░░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_09: ; [$94c2]
     db $21,$33,$b1,$ca,$ec,$fc,$f8,$f8,$c1,$c2,$4e,$34,$10,$a0,$20,$20 ; [$94c2]
                                                                        ; byte
 
@@ -4791,6 +5268,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ██▒▒░░..
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_10: ; [$94d2]
     db $e6,$ec,$74,$34,$3a,$72,$cc,$f0,$78,$70,$38,$18,$3c,$7c,$f0,$00 ; [$94d2]
                                                                        ; byte
 
@@ -4805,6 +5283,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ░█▒▒░░..
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_11: ; [$94e2]
     db $58,$c8,$64,$32,$32,$66,$cc,$f0,$e0,$70,$38,$1c,$1c,$38,$70,$00 ; [$94e2]
                                                                        ; byte
 
@@ -4819,6 +5298,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ....░█░.
 ; .....█▒.
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_12: ; [$94f2]
     db $00,$00,$00,$00,$1c,$00,$0e,$04,$00,$00,$10,$18,$08,$0c,$04,$06 ; [$94f2]
                                                                        ; byte
 
@@ -4833,6 +5313,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_13: ; [$9502]
     db $07,$02,$03,$01,$01,$00,$00,$00,$02,$03,$01,$01,$00,$00,$00,$00 ; [$9502]
                                                                        ; byte
 
@@ -4847,6 +5328,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ...░░░▒░
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_14: ; [$9512]
     db $00,$00,$00,$00,$01,$3f,$1d,$00,$00,$00,$00,$00,$00,$ff,$02,$00 ; [$9512]
                                                                        ; byte
 
@@ -4861,9 +5343,17 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; ░░░░░▒▒░
 ; .....░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_SKELETON_KNIGHT_15: ; [$9522]
     db $00,$00,$00,$02,$fd,$5d,$f9,$07,$00,$00,$00,$04,$0e,$ea,$06,$00 ; [$9522]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Giant Strider
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::803e]
+;============================================================================
 
 ;
 ; ........
@@ -4878,7 +5368,7 @@ PPUTile16_PRG6__9432:                       ; [$9432]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::803e]
 ;
-PPUTile16_PRG6__9532:                       ; [$9532]
+SPRITE_TILES_ENEMY_GIANT_STRIDER_00:        ; [$9532]
     db $00,$00,$07,$0b,$1f,$3f,$3f,$7f,$00,$00,$00,$07,$0c,$1b,$05,$37 ; [$9532]
                                                                        ; byte
 
@@ -4893,6 +5383,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; █░░░░...
 ; █░▒░░...
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_01:        ; [$9542]
     db $00,$00,$c0,$a0,$d0,$e8,$f8,$d8,$00,$00,$00,$c0,$60,$30,$80,$a0 ; [$9542]
                                                                        ; byte
 
@@ -4907,6 +5398,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ...░░░░░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_02:        ; [$9552]
     db $ff,$ff,$ff,$81,$bf,$3c,$1f,$01,$5b,$fc,$e0,$81,$bf,$0f,$00,$00 ; [$9552]
                                                                        ; byte
 
@@ -4921,6 +5413,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ░▒░.....
 ; █▒░░░░..
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_03:        ; [$9562]
     db $e8,$e8,$b8,$b0,$60,$e0,$a0,$bc,$30,$30,$c0,$c0,$80,$00,$40,$c0 ; [$9562]
                                                                        ; byte
 
@@ -4935,6 +5428,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ...░▒▒▒▒
 ; ...░░▒▒▒
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_04:        ; [$9572]
     db $03,$07,$07,$0a,$08,$08,$10,$18,$01,$03,$02,$05,$07,$07,$0f,$07 ; [$9572]
                                                                        ; byte
 
@@ -4949,6 +5443,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ▒░░▒░...
 ; ░██▒░...
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_05:        ; [$9582]
     db $7a,$fd,$fd,$ff,$ff,$7a,$68,$e8,$9c,$2e,$66,$d6,$72,$80,$90,$70 ; [$9582]
                                                                        ; byte
 
@@ -4963,6 +5458,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ░██░░...
 ; ░░░░░...
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_06:        ; [$9592]
     db $2f,$3a,$5e,$74,$78,$68,$f8,$f8,$18,$1c,$38,$38,$30,$30,$60,$00 ; [$9592]
                                                                        ; byte
 
@@ -4977,6 +5473,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ██░▒░░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_07:        ; [$95a2]
     db $e8,$d8,$d0,$b0,$90,$48,$ec,$fc,$f0,$e0,$e0,$c0,$60,$30,$d0,$00 ; [$95a2]
                                                                        ; byte
 
@@ -4991,6 +5488,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; █░░░███░
 ; ░...░░░░
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_08:        ; [$95b2]
     db $07,$0f,$7f,$ff,$ff,$ff,$ff,$8f,$03,$06,$0d,$72,$db,$fd,$8e,$00 ; [$95b2]
                                                                        ; byte
 
@@ -5005,6 +5503,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ░░░█▒░..
 ; ░█▒░░...
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_09:        ; [$95c2]
     db $d0,$e8,$f4,$fc,$fc,$f4,$f4,$d8,$e0,$30,$98,$c0,$d0,$98,$18,$60 ; [$95c2]
                                                                        ; byte
 
@@ -5019,6 +5518,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ......░█
 ; ......░█
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_10:        ; [$95d2]
     db $03,$07,$1e,$3f,$1f,$09,$03,$03,$00,$03,$07,$1e,$08,$00,$01,$01 ; [$95d2]
                                                                        ; byte
 
@@ -5033,6 +5533,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ▒░.░██░░
 ; ▒░░██░▒░
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_11:        ; [$95e2]
     db $d8,$b0,$60,$a0,$a7,$af,$5f,$7d,$e0,$c0,$80,$40,$c0,$c7,$8c,$9a ; [$95e2]
                                                                        ; byte
 
@@ -5047,6 +5548,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ....░▒▒▒
 ; ....░▒▒▒
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_12:        ; [$95f2]
     db $07,$06,$07,$0f,$08,$08,$08,$08,$03,$03,$02,$00,$07,$07,$07,$07 ; [$95f2]
                                                                        ; byte
 
@@ -5061,6 +5563,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ▒░▒░░...
 ; ░██▒░...
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_13:        ; [$9602]
     db $79,$fa,$f2,$e4,$cc,$78,$58,$e8,$96,$34,$6c,$d8,$70,$80,$a0,$70 ; [$9602]
                                                                        ; byte
 
@@ -5075,6 +5578,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ....░██▒
 ; ...░██▒░
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_14:        ; [$9612]
     db $09,$07,$07,$06,$06,$06,$0e,$1d,$06,$01,$03,$03,$03,$03,$07,$0e ; [$9612]
                                                                        ; byte
 
@@ -5089,6 +5593,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ░.......
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_15:        ; [$9622]
     db $e8,$d8,$30,$e0,$c0,$80,$80,$80,$f0,$e0,$c0,$00,$00,$00,$00,$00 ; [$9622]
                                                                        ; byte
 
@@ -5103,6 +5608,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_16:        ; [$9632]
     db $8f,$dd,$fe,$f4,$68,$30,$00,$00,$04,$8e,$58,$78,$30,$00,$00,$00 ; [$9632]
                                                                        ; byte
 
@@ -5117,9 +5623,17 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; ..░█░...
 ; ...░....
 ;
+SPRITE_TILES_ENEMY_GIANT_STRIDER_17:        ; [$9642]
     db $f8,$5e,$3d,$09,$1a,$34,$38,$10,$30,$38,$06,$06,$0c,$18,$10,$00 ; [$9642]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Sir Gawaine
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8040]
+;============================================================================
 
 ;
 ; .......█
@@ -5134,7 +5648,7 @@ PPUTile16_PRG6__9532:                       ; [$9532]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8040]
 ;
-PPUTile16_PRG6__9652:                       ; [$9652]
+SPRITE_TILES_ENEMY_SIR_GAWAINE_00:          ; [$9652]
     db $01,$03,$06,$1c,$30,$60,$c0,$00,$01,$02,$04,$08,$18,$30,$60,$c0 ; [$9652]
                                                                        ; byte
 
@@ -5149,6 +5663,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ..▒▒░██▒
 ; ░░.░▒▒▒▒
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_01:          ; [$9662]
     db $3e,$00,$00,$1e,$1f,$1d,$0e,$d0,$3f,$3f,$3f,$01,$08,$22,$37,$0f ; [$9662]
                                                                        ; byte
 
@@ -5163,6 +5678,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ░█▒█▒▒░.
 ; ░█▒▒▒▒▒░
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_02:          ; [$9672]
     db $f8,$e8,$90,$38,$64,$fa,$d2,$c1,$20,$f0,$e0,$c0,$98,$3c,$7c,$7e ; [$9672]
                                                                        ; byte
 
@@ -5177,6 +5693,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ▒█▒░░▒░░
 ; ▒▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_03:          ; [$9682]
     db $a0,$61,$2f,$10,$55,$54,$5b,$1f,$c7,$8e,$c0,$e0,$ef,$eb,$e4,$e0 ; [$9682]
                                                                        ; byte
 
@@ -5191,6 +5708,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ░░░▒▒░░.
 ; ░▒▒▒▒░░.
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_04:          ; [$9692]
     db $f9,$f5,$e5,$cd,$1e,$36,$e6,$86,$06,$3a,$3a,$72,$e0,$c8,$18,$78 ; [$9692]
                                                                        ; byte
 
@@ -5205,6 +5723,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ...░▒▒▒░
 ; ..░▒▒░░░
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_05:          ; [$96a2]
     db $15,$ab,$bc,$56,$0b,$09,$11,$27,$ee,$5c,$40,$08,$04,$06,$0e,$18 ; [$96a2]
                                                                        ; byte
 
@@ -5219,6 +5738,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ░.░█▒▒░.
 ; ░.█▒░░..
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_06:          ; [$96b2]
     db $24,$48,$08,$46,$21,$91,$b2,$ac,$f8,$f0,$f0,$38,$1e,$0e,$1c,$30 ; [$96b2]
                                                                        ; byte
 
@@ -5233,6 +5753,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ...░█░..
 ; ..░█▒...
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_07:          ; [$96c2]
     db $00,$00,$00,$01,$03,$06,$1c,$30,$00,$00,$00,$01,$02,$04,$08,$18 ; [$96c2]
                                                                        ; byte
 
@@ -5247,6 +5768,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ......░░
 ; .....░▒▒
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_08:          ; [$96d2]
     db $19,$a7,$a3,$43,$03,$01,$03,$04,$e6,$40,$41,$01,$01,$00,$00,$03 ; [$96d2]
                                                                        ; byte
 
@@ -5261,6 +5783,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ░▒▒░....
 ; ▒▒▒░....
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_09:          ; [$96e2]
     db $24,$cc,$18,$20,$20,$30,$90,$10,$f8,$f0,$e0,$c0,$c0,$c0,$60,$e0 ; [$96e2]
                                                                        ; byte
 
@@ -5275,6 +5798,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ▒▒░▒▒░██
 ; ▒▒░░░▒▒▒
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_10:          ; [$96f2]
     db $1f,$a0,$20,$2f,$2f,$2e,$27,$38,$5f,$5f,$df,$c0,$c4,$d1,$db,$c7 ; [$96f2]
                                                                        ; byte
 
@@ -5289,6 +5813,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ▒░░███▒.
 ; ▒░░██▒▒░
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_11:          ; [$9702]
     db $78,$70,$40,$00,$a0,$f4,$7c,$79,$90,$f8,$f0,$e0,$40,$08,$9e,$9e ; [$9702]
                                                                        ; byte
 
@@ -5303,6 +5828,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ......░▒
 ; .....░▒▒
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_12:          ; [$9712]
     db $26,$2b,$31,$2c,$87,$04,$02,$04,$d9,$de,$cf,$c3,$40,$43,$01,$03 ; [$9712]
                                                                        ; byte
 
@@ -5317,6 +5843,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ▒▒▒▒▒▒░░
 ; ░▒▒▒▒░░.
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_13:          ; [$9722]
     db $79,$e4,$c4,$06,$1f,$f3,$03,$86,$86,$3b,$fb,$f9,$e0,$0c,$fc,$78 ; [$9722]
                                                                        ; byte
 
@@ -5331,6 +5858,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ...░▒▒▒░
 ; ..░▒▒░░░
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_14:          ; [$9732]
     db $15,$2b,$3c,$16,$0b,$09,$11,$27,$0e,$1c,$00,$08,$04,$06,$0e,$18 ; [$9732]
                                                                        ; byte
 
@@ -5345,6 +5873,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; .....▒██
 ; .......▒
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_15:          ; [$9742]
     db $00,$00,$00,$d0,$74,$1d,$03,$00,$00,$00,$80,$60,$38,$0e,$07,$01 ; [$9742]
                                                                        ; byte
 
@@ -5359,6 +5888,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ▒░..█...
 ; ██▒█....
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_16:          ; [$9752]
     db $00,$00,$00,$00,$00,$00,$48,$d0,$00,$00,$00,$00,$00,$00,$88,$f0 ; [$9752]
                                                                        ; byte
 
@@ -5373,9 +5903,17 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_SIR_GAWAINE_17:          ; [$9762]
     db $1b,$37,$21,$23,$00,$00,$00,$00,$74,$2e,$2e,$20,$00,$00,$00,$00 ; [$9762]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Maskman
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8042]
+;============================================================================
 
 ;
 ; ...░█▒▒░
@@ -5390,7 +5928,7 @@ PPUTile16_PRG6__9652:                       ; [$9652]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8042]
 ;
-PPUTile16_PRG6__9772:                       ; [$9772]
+SPRITE_TILES_ENEMY_MASKMAN_00:              ; [$9772]
     db $19,$3c,$3c,$fc,$7d,$fd,$f9,$7a,$0e,$3f,$7f,$63,$c6,$fe,$fe,$fd ; [$9772]
                                                                        ; byte
 
@@ -5405,6 +5943,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒██▒░...
 ; █▒▒▒▒░..
 ;
+SPRITE_TILES_ENEMY_MASKMAN_01:              ; [$9782]
     db $00,$a0,$c0,$f8,$e0,$f0,$68,$84,$00,$00,$00,$00,$00,$00,$f0,$f8 ; [$9782]
                                                                        ; byte
 
@@ -5419,6 +5958,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒░░▒▒▒░▒
 ; ░░░░░░█▒
 ;
+SPRITE_TILES_ENEMY_MASKMAN_02:              ; [$9792]
     db $66,$7b,$2d,$59,$dd,$59,$62,$fe,$79,$04,$1e,$3e,$3e,$be,$9d,$03 ; [$9792]
                                                                        ; byte
 
@@ -5433,6 +5973,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒░░░▒▒░.
 ; ░░░▒▒▒░.
 ;
+SPRITE_TILES_ENEMY_MASKMAN_03:              ; [$97a2]
     db $fc,$88,$b4,$9c,$ca,$62,$72,$e2,$00,$70,$78,$78,$3c,$9c,$8c,$1c ; [$97a2]
                                                                        ; byte
 
@@ -5447,6 +5988,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒█▒░░░░░
 ; ░█▒▒░░░░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_04:              ; [$97b2]
     db $2d,$3e,$39,$61,$f9,$73,$5f,$cf,$1e,$01,$1e,$3e,$7e,$8c,$e0,$70 ; [$97b2]
                                                                        ; byte
 
@@ -5461,6 +6003,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ░░......
 ; ░░......
 ;
+SPRITE_TILES_ENEMY_MASKMAN_05:              ; [$97c2]
     db $c4,$ec,$c8,$90,$30,$e0,$c0,$c0,$38,$30,$70,$e0,$c0,$00,$00,$00 ; [$97c2]
                                                                        ; byte
 
@@ -5475,6 +6018,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ░███▒░..
 ; █▒▒▒▒░..
 ;
+SPRITE_TILES_ENEMY_MASKMAN_06:              ; [$97d2]
     db $cb,$69,$69,$24,$34,$34,$f4,$84,$70,$70,$30,$38,$38,$18,$78,$f8 ; [$97d2]
                                                                        ; byte
 
@@ -5489,6 +6033,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; .▒▒░░...
 ; ▒▒▒.....
 ;
+SPRITE_TILES_ENEMY_MASKMAN_07:              ; [$97e2]
     db $c0,$20,$30,$98,$44,$0c,$18,$00,$00,$c0,$c0,$60,$38,$30,$60,$e0 ; [$97e2]
                                                                        ; byte
 
@@ -5503,6 +6048,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒░░▒▒░▒█
 ; ░░░░░░▒▒
 ;
+SPRITE_TILES_ENEMY_MASKMAN_08:              ; [$97f2]
     db $66,$7b,$2d,$59,$dd,$5a,$65,$fc,$79,$04,$1e,$3e,$3e,$bd,$9b,$03 ; [$97f2]
                                                                        ; byte
 
@@ -5517,6 +6063,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; █▒▒▒▒▒░.
 ; ▒▒░░░░..
 ;
+SPRITE_TILES_ENEMY_MASKMAN_09:              ; [$9802]
     db $fc,$08,$64,$b6,$fa,$7a,$82,$3c,$00,$f0,$f8,$78,$1c,$fc,$fc,$c0 ; [$9802]
                                                                        ; byte
 
@@ -5531,6 +6078,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ..░░█▒▒░
 ; ..▒░█▒▒░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_10:              ; [$9812]
     db $2b,$3f,$2d,$18,$36,$09,$39,$19,$1c,$00,$1e,$3f,$39,$36,$0e,$2e ; [$9812]
                                                                        ; byte
 
@@ -5545,6 +6093,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MASKMAN_11:              ; [$9822]
     db $e0,$e0,$c0,$c0,$c0,$80,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9822]
                                                                        ; byte
 
@@ -5559,6 +6108,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ..░▒░█▒▒
 ; ..▒░█▒▒░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_12:              ; [$9832]
     db $19,$19,$09,$0d,$0c,$0e,$2c,$19,$2e,$2e,$36,$16,$17,$13,$17,$2e ; [$9832]
                                                                        ; byte
 
@@ -5573,6 +6123,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ..░▒▒▒░░
 ; ..▒▒▒░░░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_13:              ; [$9842]
     db $1e,$7f,$67,$57,$53,$2b,$23,$07,$00,$00,$18,$28,$2c,$7c,$1c,$38 ; [$9842]
                                                                        ; byte
 
@@ -5587,6 +6138,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ░░░.░...
 ; ░░░░....
 ;
+SPRITE_TILES_ENEMY_MASKMAN_14:              ; [$9852]
     db $00,$80,$80,$c0,$c0,$f0,$e8,$f0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9852]
                                                                        ; byte
 
@@ -5601,6 +6153,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ...░▒░▒░
 ; ...░░▒░▒
 ;
+SPRITE_TILES_ENEMY_MASKMAN_15:              ; [$9862]
     db $1e,$1b,$17,$2f,$3c,$21,$15,$1a,$01,$05,$0a,$16,$3f,$1e,$0a,$05 ; [$9862]
                                                                        ; byte
 
@@ -5615,6 +6168,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ░░▒▒░...
 ; ░░█▒░...
 ;
+SPRITE_TILES_ENEMY_MASKMAN_16:              ; [$9872]
     db $f8,$be,$10,$40,$a0,$88,$c8,$e8,$80,$40,$e0,$f0,$70,$70,$30,$30 ; [$9872]
                                                                        ; byte
 
@@ -5629,6 +6183,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ..▒▒▒░▒█
 ; .░█▒▒░██
 ;
+SPRITE_TILES_ENEMY_MASKMAN_17:              ; [$9882]
     db $1f,$38,$3c,$1c,$3b,$0f,$05,$67,$0a,$1f,$1f,$3f,$07,$30,$3b,$3b ; [$9882]
                                                                        ; byte
 
@@ -5643,6 +6198,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ░░░.....
 ; ▒░......
 ;
+SPRITE_TILES_ENEMY_MASKMAN_18:              ; [$9892]
     db $e8,$e0,$80,$50,$90,$f0,$e0,$40,$30,$30,$70,$a0,$60,$00,$00,$80 ; [$9892]
                                                                        ; byte
 
@@ -5657,6 +6213,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; .░█▒░...
 ; ▒█▒▒░...
 ;
+SPRITE_TILES_ENEMY_MASKMAN_19:              ; [$98a2]
     db $69,$59,$49,$28,$28,$28,$68,$48,$33,$31,$30,$10,$10,$10,$30,$f0 ; [$98a2]
                                                                        ; byte
 
@@ -5671,6 +6228,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; .░▒▒░...
 ; ▒▒▒░....
 ;
+SPRITE_TILES_ENEMY_MASKMAN_20:              ; [$98b2]
     db $40,$00,$a0,$90,$48,$20,$48,$10,$80,$c0,$c0,$60,$30,$18,$30,$e0 ; [$98b2]
                                                                        ; byte
 
@@ -5685,6 +6243,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ...░▒░▒█
 ; ....▒░█▒
 ;
+SPRITE_TILES_ENEMY_MASKMAN_21:              ; [$98c2]
     db $1d,$09,$0c,$0d,$1b,$1f,$15,$06,$0a,$1e,$1f,$1e,$06,$00,$0b,$0b ; [$98c2]
                                                                        ; byte
 
@@ -5699,6 +6258,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒░░.....
 ; ▒░......
 ;
+SPRITE_TILES_ENEMY_MASKMAN_22:              ; [$98d2]
     db $88,$d0,$d0,$20,$20,$e0,$60,$40,$70,$60,$60,$c0,$c0,$00,$80,$80 ; [$98d2]
                                                                        ; byte
 
@@ -5713,6 +6273,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ....█▒▒░
 ; ...█▒▒▒░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_23:              ; [$98e2]
     db $0e,$0c,$0d,$09,$09,$09,$09,$11,$07,$07,$06,$06,$06,$06,$0e,$1e ; [$98e2]
                                                                        ; byte
 
@@ -5727,6 +6288,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; █▒▒▒░▒..
 ; .░█▒░░░.
 ;
+SPRITE_TILES_ENEMY_MASKMAN_24:              ; [$98f2]
     db $00,$00,$00,$20,$b8,$68,$88,$6e,$00,$00,$00,$20,$c8,$30,$f4,$30 ; [$98f2]
                                                                        ; byte
 
@@ -5741,6 +6303,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MASKMAN_25:              ; [$9902]
     db $76,$05,$01,$00,$00,$00,$00,$00,$4f,$03,$00,$00,$00,$00,$00,$00 ; [$9902]
                                                                        ; byte
 
@@ -5755,6 +6318,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ......░▒
 ; .......░
 ;
+SPRITE_TILES_ENEMY_MASKMAN_26:              ; [$9912]
     db $80,$a0,$68,$5e,$16,$08,$02,$01,$00,$c0,$f0,$38,$0d,$07,$01,$00 ; [$9912]
                                                                        ; byte
 
@@ -5769,6 +6333,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; .░██▒░░.
 ; ░██░░...
 ;
+SPRITE_TILES_ENEMY_MASKMAN_27:              ; [$9922]
     db $00,$00,$00,$01,$07,$1d,$76,$f8,$00,$00,$00,$00,$03,$0e,$38,$60 ; [$9922]
                                                                        ; byte
 
@@ -5783,6 +6348,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MASKMAN_28:              ; [$9932]
     db $0a,$3b,$67,$db,$6e,$80,$00,$00,$0a,$0d,$3c,$e5,$82,$00,$00,$00 ; [$9932]
                                                                        ; byte
 
@@ -5797,6 +6363,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MASKMAN_29:              ; [$9942]
     db $e3,$51,$10,$04,$03,$00,$00,$00,$7c,$3e,$0f,$03,$01,$01,$00,$00 ; [$9942]
                                                                        ; byte
 
@@ -5811,9 +6378,17 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; ▒▒░..░▒.
 ; .▒▒.....
 ;
+SPRITE_TILES_ENEMY_MASKMAN_30:              ; [$9952]
     db $e0,$9c,$e2,$32,$0a,$0a,$24,$00,$00,$60,$1c,$cc,$c4,$c4,$c2,$60 ; [$9952]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Wolfman
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8044]
+;============================================================================
 
 ;
 ; .▒▒...░█
@@ -5828,7 +6403,7 @@ PPUTile16_PRG6__9772:                       ; [$9772]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8044]
 ;
-PPUTile16_PRG6__9962:                       ; [$9962]
+SPRITE_TILES_ENEMY_WOLFMAN_00:              ; [$9962]
     db $03,$23,$61,$47,$4e,$d1,$c2,$c8,$61,$c7,$8f,$89,$83,$8e,$9a,$8b ; [$9962]
                                                                        ; byte
 
@@ -5843,6 +6418,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░░███▒░.
 ; ░▒▒▒▒▒▒░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_01:              ; [$9972]
     db $8c,$be,$39,$43,$fe,$fc,$fa,$81,$f0,$fc,$fe,$bc,$00,$00,$3c,$7e ; [$9972]
                                                                        ; byte
 
@@ -5857,6 +6433,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ▒▒░░░▒█▒
 ; .▒░..░▒▒
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_02:              ; [$9982]
     db $e1,$ef,$e7,$7a,$29,$2f,$3a,$24,$8e,$80,$81,$87,$d6,$d3,$c7,$43 ; [$9982]
                                                                        ; byte
 
@@ -5871,6 +6448,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░█▒░▒▒█▒
 ; █▒░░░▒▒▒
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_03:              ; [$9992]
     db $dc,$66,$5a,$ce,$65,$67,$d2,$b8,$23,$99,$bd,$3d,$9e,$9e,$6f,$c7 ; [$9992]
                                                                        ; byte
 
@@ -5885,6 +6463,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ....░░░▒
 ; ...░██░░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_04:              ; [$99a2]
     db $03,$07,$ef,$1e,$07,$04,$0e,$1f,$07,$f8,$3d,$01,$00,$03,$01,$0c ; [$99a2]
                                                                        ; byte
 
@@ -5899,6 +6478,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░░░▒▒░░.
 ; ░██░░░..
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_05:              ; [$99b2]
     db $78,$f1,$e7,$df,$ff,$46,$e6,$fc,$8f,$3e,$f8,$e0,$00,$b8,$18,$60 ; [$99b2]
                                                                        ; byte
 
@@ -5913,6 +6493,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; .░█▒▒░..
 ; ▒▒▒▒▒░..
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_06:              ; [$99c2]
     db $29,$27,$24,$12,$12,$34,$64,$04,$1e,$18,$18,$1c,$1c,$18,$38,$f8 ; [$99c2]
                                                                        ; byte
 
@@ -5927,6 +6508,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ...█▒▒░.
 ; ..█▒░░..
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_07:              ; [$99d2]
     db $48,$50,$08,$66,$31,$01,$12,$2c,$f0,$e0,$f0,$38,$1e,$0e,$1c,$30 ; [$99d2]
                                                                        ; byte
 
@@ -5941,6 +6523,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_08:              ; [$99e2]
     db $7c,$10,$01,$00,$00,$00,$00,$00,$ff,$0f,$00,$00,$00,$00,$00,$00 ; [$99e2]
                                                                        ; byte
 
@@ -5955,6 +6538,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_09:              ; [$99f2]
     db $04,$07,$06,$ec,$1e,$01,$01,$01,$03,$00,$f9,$3f,$01,$00,$00,$00 ; [$99f2]
                                                                        ; byte
 
@@ -5969,6 +6553,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░█▒▒░░..
 ; █▒▒░░...
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_10:              ; [$9a02]
     db $f8,$51,$47,$bf,$c6,$a4,$cc,$98,$0f,$be,$f8,$c0,$38,$78,$70,$e0 ; [$9a02]
                                                                        ; byte
 
@@ -5983,6 +6568,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; .......█
 ; .....░▒▒
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_11:              ; [$9a12]
     db $00,$01,$00,$00,$00,$00,$01,$04,$01,$01,$01,$00,$00,$00,$01,$03 ; [$9a12]
                                                                        ; byte
 
@@ -5997,6 +6583,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ▒▒▒░░...
 ; ▒░░░░...
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_12:              ; [$9a22]
     db $30,$60,$30,$a0,$a8,$98,$18,$78,$c0,$80,$c0,$d0,$d0,$e0,$e0,$80 ; [$9a22]
                                                                        ; byte
 
@@ -6011,6 +6598,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_13:              ; [$9a32]
     db $00,$7c,$10,$01,$00,$00,$00,$00,$00,$ff,$0f,$00,$00,$00,$00,$00 ; [$9a32]
                                                                        ; byte
 
@@ -6025,6 +6613,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ....▒░░█
 ; ....░░█▒
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_14:              ; [$9a42]
     db $00,$00,$00,$03,$03,$01,$07,$0e,$00,$00,$00,$01,$07,$0f,$09,$03 ; [$9a42]
                                                                        ; byte
 
@@ -6039,6 +6628,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ▒░▒▒▒▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_15:              ; [$9a52]
     db $00,$00,$00,$ec,$be,$39,$41,$ff,$00,$00,$00,$f0,$fc,$fe,$be,$00 ; [$9a52]
                                                                        ; byte
 
@@ -6053,6 +6643,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░░░░░░░░
 ; ▒█▒██▒▒░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_16:              ; [$9a62]
     db $1d,$02,$48,$21,$e4,$c5,$ff,$59,$0e,$1a,$68,$c1,$84,$81,$00,$fe ; [$9a62]
                                                                        ; byte
 
@@ -6067,6 +6658,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ░▒███▒░▒
 ; ▒██▒▒░░▒
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_17:              ; [$9a72]
     db $fe,$7a,$61,$5c,$66,$5a,$ba,$66,$00,$9c,$3e,$23,$99,$bd,$7d,$f9 ; [$9a72]
                                                                        ; byte
 
@@ -6081,6 +6673,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ▒▒.▒░░▒█
 ; .▒.░▒▒░░
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_18:              ; [$9a82]
     db $ef,$c0,$3c,$7f,$c3,$c9,$0d,$13,$df,$3f,$c3,$80,$8c,$87,$d3,$4c ; [$9a82]
                                                                        ; byte
 
@@ -6095,6 +6688,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ▒░▒▒░░..
 ; ░▒▒▒░...
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_19:              ; [$9a92]
     db $cc,$1a,$3e,$e2,$ca,$fe,$4c,$88,$f2,$e4,$c0,$1c,$74,$80,$b0,$70 ; [$9a92]
                                                                        ; byte
 
@@ -6109,6 +6703,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_20:              ; [$9aa2]
     db $00,$14,$1d,$07,$01,$00,$00,$00,$60,$38,$0e,$03,$00,$00,$00,$00 ; [$9aa2]
                                                                        ; byte
 
@@ -6123,9 +6718,17 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; ...▒██▒░
 ; .....▒██
 ;
+SPRITE_TILES_ENEMY_WOLFMAN_21:              ; [$9ab2]
     db $00,$00,$00,$c0,$f8,$7e,$0d,$03,$00,$00,$00,$80,$e0,$38,$1e,$07 ; [$9ab2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Yareeka
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8046]
+;============================================================================
 
 ;
 ; ......█▒
@@ -6140,7 +6743,7 @@ PPUTile16_PRG6__9962:                       ; [$9962]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8046]
 ;
-PPUTile16_PRG6__9ac2:                       ; [$9ac2]
+SPRITE_TILES_ENEMY_YAREEKA_00:              ; [$9ac2]
     db $02,$06,$4c,$9a,$3a,$37,$6f,$e0,$03,$1f,$7f,$ff,$ff,$7f,$ff,$ff ; [$9ac2]
                                                                        ; byte
 
@@ -6155,6 +6758,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; .███░░██
 ; .█░█░░█░
 ;
+SPRITE_TILES_ENEMY_YAREEKA_01:              ; [$9ad2]
     db $01,$03,$07,$0e,$25,$32,$7f,$7f,$03,$07,$0f,$1f,$1e,$2d,$73,$52 ; [$9ad2]
                                                                        ; byte
 
@@ -6169,6 +6773,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; █░.░▒▒▒░
 ; █░░░▒▒░▒
 ;
+SPRITE_TILES_ENEMY_YAREEKA_02:              ; [$9ae2]
     db $c7,$88,$10,$30,$e0,$4e,$d1,$f2,$f8,$f0,$e0,$c0,$00,$80,$8e,$8d ; [$9ae2]
                                                                        ; byte
 
@@ -6183,6 +6788,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ░▒▒▒░░▒▒
 ; .░▒▒▒░░▒
 ;
+SPRITE_TILES_ENEMY_YAREEKA_03:              ; [$9af2]
     db $37,$7b,$7b,$b9,$bd,$1c,$8c,$46,$29,$0c,$cd,$ce,$c6,$e7,$73,$39 ; [$9af2]
                                                                        ; byte
 
@@ -6197,6 +6803,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_YAREEKA_04:              ; [$9b02]
     db $85,$8f,$f8,$43,$1c,$e3,$00,$1f,$78,$70,$87,$fc,$e0,$1c,$ff,$e0 ; [$9b02]
                                                                        ; byte
 
@@ -6211,6 +6818,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ░██▒▒░..
 ; ▒▒▒░░...
 ;
+SPRITE_TILES_ENEMY_YAREEKA_05:              ; [$9b12]
     db $23,$12,$12,$12,$22,$64,$e4,$18,$1c,$0c,$0c,$0c,$1c,$18,$78,$e0 ; [$9b12]
                                                                        ; byte
 
@@ -6225,6 +6833,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ...░▒▒░.
 ; ....░▒▒░
 ;
+SPRITE_TILES_ENEMY_YAREEKA_06:              ; [$9b22]
     db $f8,$74,$34,$24,$24,$24,$12,$09,$00,$08,$08,$18,$18,$18,$0c,$06 ; [$9b22]
                                                                        ; byte
 
@@ -6239,6 +6848,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; .......▒
 ; ......▒█
 ;
+SPRITE_TILES_ENEMY_YAREEKA_07:              ; [$9b32]
     db $00,$00,$00,$01,$02,$00,$00,$01,$00,$00,$00,$01,$03,$03,$01,$03 ; [$9b32]
                                                                        ; byte
 
@@ -6253,6 +6863,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ██▒███..
 ; █▒████..
 ;
+SPRITE_TILES_ENEMY_YAREEKA_08:              ; [$9b42]
     db $00,$08,$18,$30,$68,$e8,$dc,$bc,$00,$0c,$7c,$fc,$fc,$fc,$fc,$fc ; [$9b42]
                                                                        ; byte
 
@@ -6267,6 +6878,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ░░▒▒░▒▒░
 ; ░██░░███
 ;
+SPRITE_TILES_ENEMY_YAREEKA_09:              ; [$9b52]
     db $03,$07,$0e,$1c,$38,$57,$c9,$ff,$07,$0f,$1f,$3f,$7f,$38,$36,$67 ; [$9b52]
                                                                        ; byte
 
@@ -6281,6 +6893,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ........
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_YAREEKA_10:              ; [$9b62]
     db $80,$1c,$20,$40,$40,$80,$00,$fc,$fc,$e0,$c0,$80,$80,$00,$00,$00 ; [$9b62]
                                                                        ; byte
 
@@ -6295,6 +6908,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ▒▒▒░.░▒▒
 ; ░▒▒░..░▒
 ;
+SPRITE_TILES_ENEMY_YAREEKA_11:              ; [$9b72]
     db $ff,$fb,$ff,$f9,$ed,$ac,$14,$92,$a5,$66,$00,$4e,$c6,$c7,$e3,$61 ; [$9b72]
                                                                        ; byte
 
@@ -6309,6 +6923,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ▒░....░░
 ; ▒░......
 ;
+SPRITE_TILES_ENEMY_YAREEKA_12:              ; [$9b82]
     db $83,$8c,$7f,$03,$9d,$e5,$43,$40,$7c,$73,$80,$fc,$62,$02,$80,$80 ; [$9b82]
                                                                        ; byte
 
@@ -6323,6 +6938,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ░▒▒▒░...
 ; .░░░....
 ;
+SPRITE_TILES_ENEMY_YAREEKA_13:              ; [$9b92]
     db $8a,$45,$22,$92,$62,$44,$88,$70,$71,$38,$1c,$0c,$9c,$f8,$70,$00 ; [$9b92]
                                                                        ; byte
 
@@ -6337,9 +6953,17 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_YAREEKA_14:              ; [$9ba2]
     db $27,$18,$81,$66,$18,$00,$00,$00,$c0,$e7,$7e,$18,$00,$00,$00,$00 ; [$9ba2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Magman
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8048]
+;============================================================================
 
 ;
 ; ..▒▒░...
@@ -6354,7 +6978,7 @@ PPUTile16_PRG6__9ac2:                       ; [$9ac2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8048]
 ;
-PPUTile16_PRG6__9bb2:                       ; [$9bb2]
+SPRITE_TILES_ENEMY_MAGMAN_00:               ; [$9bb2]
     db $08,$0c,$2c,$0a,$0e,$1c,$2c,$28,$30,$58,$52,$14,$60,$00,$10,$33 ; [$9bb2]
                                                                        ; byte
 
@@ -6369,6 +6993,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ...░░░▒.
 ; ▒▒.░░░░.
 ;
+SPRITE_TILES_ENEMY_MAGMAN_01:               ; [$9bc2]
     db $00,$00,$20,$18,$54,$b4,$1c,$1e,$00,$00,$30,$28,$a8,$0a,$02,$c0 ; [$9bc2]
                                                                        ; byte
 
@@ -6383,6 +7008,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ....░░░░
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_02:               ; [$9bd2]
     db $53,$15,$3e,$7f,$1f,$1f,$0f,$03,$67,$63,$41,$04,$21,$00,$00,$00 ; [$9bd2]
                                                                        ; byte
 
@@ -6397,6 +7023,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ░░░░░░░░
 ; ░░░░░░░.
 ;
+SPRITE_TILES_ENEMY_MAGMAN_03:               ; [$9be2]
     db $0e,$1a,$1f,$ad,$99,$f9,$ff,$fe,$e0,$e4,$e4,$56,$66,$06,$00,$00 ; [$9be2]
                                                                        ; byte
 
@@ -6411,6 +7038,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ...░▒▒▒█
 ; ...░▒░▒░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_04:               ; [$9bf2]
     db $01,$01,$04,$09,$0d,$1a,$11,$15,$00,$00,$03,$06,$06,$0d,$0f,$0a ; [$9bf2]
                                                                        ; byte
 
@@ -6425,6 +7053,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ░▒▒░░░░.
 ; ░▒▒░░░░.
 ;
+SPRITE_TILES_ENEMY_MAGMAN_05:               ; [$9c02]
     db $fe,$ff,$ff,$ff,$67,$8f,$9e,$9e,$00,$00,$00,$00,$98,$70,$60,$60 ; [$9c02]
                                                                        ; byte
 
@@ -6439,6 +7068,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ..░░▒░▒▒
 ; ....░▒░░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_06:               ; [$9c12]
     db $15,$15,$2d,$7b,$53,$4e,$34,$0b,$0a,$0a,$16,$0d,$2c,$33,$0b,$04 ; [$9c12]
                                                                        ; byte
 
@@ -6453,6 +7083,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ░▒░▒░░░.
 ; ▒░▒░▒░..
 ;
+SPRITE_TILES_ENEMY_MAGMAN_07:               ; [$9c22]
     db $be,$7f,$7f,$af,$27,$c6,$ae,$54,$40,$80,$80,$d0,$d8,$38,$50,$a8 ; [$9c22]
                                                                        ; byte
 
@@ -6467,6 +7098,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ..░▒░...
 ; ..▒█░...
 ;
+SPRITE_TILES_ENEMY_MAGMAN_08:               ; [$9c32]
     db $10,$18,$58,$14,$1c,$19,$28,$18,$60,$b0,$a4,$28,$c1,$00,$10,$30 ; [$9c32]
                                                                        ; byte
 
@@ -6481,6 +7113,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ..░░░▒..
 ; ..░░░░..
 ;
+SPRITE_TILES_ENEMY_MAGMAN_09:               ; [$9c42]
     db $00,$00,$40,$30,$a8,$68,$38,$3c,$00,$00,$60,$50,$50,$14,$04,$00 ; [$9c42]
                                                                        ; byte
 
@@ -6495,6 +7128,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ...░░░░░
 ; ....░░░░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_10:               ; [$9c52]
     db $68,$0b,$15,$36,$7f,$3f,$1f,$0f,$31,$77,$63,$41,$04,$01,$00,$00 ; [$9c52]
                                                                        ; byte
 
@@ -6509,6 +7143,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_11:               ; [$9c62]
     db $1e,$12,$06,$15,$a9,$99,$ff,$ff,$c0,$ec,$ec,$ee,$56,$66,$00,$00 ; [$9c62]
                                                                        ; byte
 
@@ -6523,6 +7158,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ..░▒█▒▒░
 ; ..░▒░▒▒░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_12:               ; [$9c72]
     db $01,$07,$08,$11,$11,$06,$29,$29,$00,$00,$07,$0e,$0e,$1d,$1e,$16 ; [$9c72]
                                                                        ; byte
 
@@ -6537,6 +7173,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ▒▒░░░░..
 ; █▒░░░░..
 ;
+SPRITE_TILES_ENEMY_MAGMAN_13:               ; [$9c82]
     db $fc,$fe,$fe,$fe,$4e,$9e,$3c,$bc,$00,$00,$00,$00,$b0,$60,$c0,$c0 ; [$9c82]
                                                                        ; byte
 
@@ -6551,6 +7188,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ..░░▒░▒▒
 ; ....░▒░░
 ;
+SPRITE_TILES_ENEMY_MAGMAN_14:               ; [$9c92]
     db $29,$2b,$2e,$3a,$23,$26,$34,$0b,$16,$14,$15,$0d,$1c,$1b,$0b,$04 ; [$9c92]
                                                                        ; byte
 
@@ -6565,9 +7203,17 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; ░▒░▒░░░.
 ; ▒░▒░▒░..
 ;
+SPRITE_TILES_ENEMY_MAGMAN_15:               ; [$9ca2]
     db $3c,$7c,$9e,$47,$0b,$c3,$ae,$54,$c0,$80,$e0,$f8,$fc,$3c,$50,$a8 ; [$9ca2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Unused Curltail
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::804a]
+;============================================================================
 
 ;
 ; ..░░░...
@@ -6582,7 +7228,7 @@ PPUTile16_PRG6__9bb2:                       ; [$9bb2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::804a]
 ;
-PPUTile16_PRG6__9cb2:                       ; [$9cb2]
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_00:      ; [$9cb2]
     db $38,$14,$da,$7a,$3d,$1f,$7f,$de,$00,$38,$cc,$2c,$2e,$23,$53,$e7 ; [$9cb2]
                                                                        ; byte
 
@@ -6597,6 +7243,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; █░░░░░..
 ; ░▒██▒░..
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_01:      ; [$9cc2]
     db $00,$00,$00,$0c,$0c,$cc,$fc,$b4,$00,$00,$00,$08,$08,$08,$80,$78 ; [$9cc2]
                                                                        ; byte
 
@@ -6611,6 +7258,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ....░▒██
 ; ....░███
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_02:      ; [$9cd2]
     db $7d,$1d,$4f,$06,$1e,$25,$0b,$0f,$9e,$4e,$44,$1d,$39,$23,$07,$07 ; [$9cd2]
                                                                        ; byte
 
@@ -6625,6 +7273,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒▒░███░.
 ; ▒░░██▒░.
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_03:      ; [$9ce2]
     db $3a,$79,$7d,$9d,$fd,$3d,$3e,$7a,$fc,$fe,$f6,$66,$0e,$d6,$dc,$9c ; [$9ce2]
                                                                        ; byte
 
@@ -6639,6 +7288,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ░██▒░░░█
 ; ▒█▒░...░
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_04:      ; [$9cf2]
     db $02,$07,$01,$0e,$2f,$7f,$ef,$51,$07,$00,$01,$00,$1e,$3f,$71,$e0 ; [$9cf2]
                                                                        ; byte
 
@@ -6653,6 +7303,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒░.░█░▒░
 ; █░.░▒░▒░
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_05:      ; [$9d02]
     db $fc,$bc,$be,$be,$3f,$9d,$5d,$d5,$00,$c8,$c8,$48,$08,$0a,$8a,$8a ; [$9d02]
                                                                        ; byte
 
@@ -6667,6 +7318,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ..▒▒███▒
 ; ...░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_06:      ; [$9d12]
     db $ed,$ea,$e5,$d0,$e9,$3f,$0e,$1f,$c8,$cd,$c6,$e0,$70,$7f,$3f,$00 ; [$9d12]
                                                                        ; byte
 
@@ -6681,6 +7333,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒░░.█░..
 ; ░...░░..
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_07:      ; [$9d22]
     db $57,$3b,$7a,$fa,$fa,$bc,$6c,$8c,$88,$9c,$1c,$5c,$dc,$c8,$88,$00 ; [$9d22]
                                                                        ; byte
 
@@ -6695,6 +7348,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; █░░░░░..
 ; ░▒██▒░..
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_08:      ; [$9d32]
     db $00,$00,$0c,$0c,$0c,$cc,$fc,$b4,$00,$00,$08,$08,$08,$08,$80,$78 ; [$9d32]
                                                                        ; byte
 
@@ -6709,6 +7363,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒░░.░...
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_09:      ; [$9d42]
     db $7b,$3b,$7a,$fa,$fc,$bc,$68,$80,$9c,$9c,$1c,$5c,$c8,$c8,$80,$00 ; [$9d42]
                                                                        ; byte
 
@@ -6723,6 +7378,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒░░░....
 ; ░█▒▒░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_10:      ; [$9d52]
     db $00,$00,$00,$00,$00,$c0,$70,$c8,$00,$00,$00,$00,$00,$00,$80,$70 ; [$9d52]
                                                                        ; byte
 
@@ -6737,6 +7393,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ████▒▒░.
 ; ██▒▒▒░░.
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_11:      ; [$9d62]
     db $e4,$f4,$f2,$fa,$fa,$fa,$f2,$c6,$f8,$f8,$fc,$3c,$1c,$3c,$fc,$f8 ; [$9d62]
                                                                        ; byte
 
@@ -6751,6 +7408,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ░██▒░░▒█
 ; ░█▒░░░░█
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_12:      ; [$9d72]
     db $07,$ff,$ff,$1f,$26,$7f,$ed,$df,$0b,$fb,$00,$00,$1f,$3f,$73,$61 ; [$9d72]
                                                                        ; byte
 
@@ -6765,6 +7423,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; █░░██▒░.
 ; █░.██▒░.
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_13:      ; [$9d82]
     db $fe,$fe,$fe,$cc,$e4,$76,$fa,$da,$80,$7e,$00,$70,$38,$98,$9c,$9c ; [$9d82]
                                                                        ; byte
 
@@ -6779,6 +7438,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ▒░░░....
 ; ░░......
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_14:      ; [$9d92]
     db $da,$3a,$56,$b4,$6c,$d8,$70,$c0,$9c,$9c,$38,$78,$f0,$e0,$80,$00 ; [$9d92]
                                                                        ; byte
 
@@ -6793,6 +7453,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ░██▒░░▒█
 ; ░█▒░░░░█
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_15:      ; [$9da2]
     db $03,$ff,$ff,$1f,$3e,$7f,$ed,$df,$05,$fd,$00,$00,$0f,$3f,$73,$61 ; [$9da2]
                                                                        ; byte
 
@@ -6807,6 +7468,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; █░░██▒░.
 ; █░.██▒░.
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_16:      ; [$9db2]
     db $ff,$ff,$ff,$cc,$e4,$76,$fa,$da,$80,$7f,$00,$70,$38,$98,$9c,$9c ; [$9db2]
                                                                        ; byte
 
@@ -6821,6 +7483,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_17:      ; [$9dc2]
     db $70,$ef,$0f,$00,$00,$00,$00,$00,$70,$ff,$70,$00,$00,$00,$00,$00 ; [$9dc2]
                                                                        ; byte
 
@@ -6835,9 +7498,17 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_CURLTAIL_18:      ; [$9dd2]
     db $38,$77,$07,$00,$00,$00,$00,$00,$38,$7f,$38,$00,$00,$00,$00,$00 ; [$9dd2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Ikeda
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::804e]
+;============================================================================
 
 ;
 ; ....░█▒░
@@ -6852,7 +7523,7 @@ PPUTile16_PRG6__9cb2:                       ; [$9cb2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::804e]
 ;
-PPUTile16_PRG6__9de2:                       ; [$9de2]
+SPRITE_TILES_ENEMY_IKEDA_00:                ; [$9de2]
     db $0d,$1f,$3f,$6e,$dd,$df,$dd,$ef,$06,$0e,$0e,$31,$6e,$66,$ee,$f0 ; [$9de2]
                                                                        ; byte
 
@@ -6867,6 +7538,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ░▒██▒░..
 ; ░▒███▒░.
 ;
+SPRITE_TILES_ENEMY_IKEDA_01:                ; [$9df2]
     db $00,$80,$80,$f0,$c8,$e4,$b4,$ba,$00,$00,$00,$00,$30,$78,$78,$7c ; [$9df2]
                                                                        ; byte
 
@@ -6881,6 +7553,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; .░███░█░
 ; ░█▒░░░░█
 ;
+SPRITE_TILES_ENEMY_IKEDA_02:                ; [$9e02]
     db $f7,$7e,$5d,$3f,$1e,$3f,$7f,$df,$18,$31,$6f,$03,$03,$02,$3a,$61 ; [$9e02]
                                                                        ; byte
 
@@ -6895,6 +7568,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ░░██▒░..
 ; ░░▒█▒░..
 ;
+SPRITE_TILES_ENEMY_IKEDA_03:                ; [$9e12]
     db $7a,$e6,$be,$7e,$ee,$f4,$f4,$d4,$fc,$f8,$c0,$80,$30,$38,$38,$38 ; [$9e12]
                                                                        ; byte
 
@@ -6909,6 +7583,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ...░█░█▒
 ; ....░░█░
 ;
+SPRITE_TILES_ENEMY_IKEDA_04:                ; [$9e22]
     db $a1,$c3,$87,$0f,$1f,$1f,$1e,$0f,$c0,$80,$03,$04,$08,$09,$0b,$02 ; [$9e22]
                                                                        ; byte
 
@@ -6923,6 +7598,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ░░█▒░...
 ; .░█▒░...
 ;
+SPRITE_TILES_ENEMY_IKEDA_05:                ; [$9e32]
     db $fc,$fa,$fa,$36,$fc,$d8,$e8,$68,$18,$0c,$fc,$f8,$00,$60,$30,$30 ; [$9e32]
                                                                        ; byte
 
@@ -6937,6 +7613,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_IKEDA_06:                ; [$9e42]
     db $07,$07,$06,$1e,$3b,$1c,$00,$00,$02,$02,$03,$07,$1c,$00,$00,$00 ; [$9e42]
                                                                        ; byte
 
@@ -6951,6 +7628,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; .░████▒░
 ; .░░░░░░░
 ;
+SPRITE_TILES_ENEMY_IKEDA_07:                ; [$9e52]
     db $68,$68,$b4,$9a,$0e,$3d,$7d,$7f,$30,$30,$18,$0c,$04,$06,$3e,$00 ; [$9e52]
                                                                        ; byte
 
@@ -6965,6 +7643,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ..░█▒░█░
 ; .░█▒░░░█
 ;
+SPRITE_TILES_ENEMY_IKEDA_08:                ; [$9e62]
     db $f7,$fe,$fd,$3f,$1e,$17,$37,$6f,$18,$f1,$0f,$03,$03,$0a,$1a,$31 ; [$9e62]
                                                                        ; byte
 
@@ -6979,6 +7658,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ░░.....░
 ; ......░▒
 ;
+SPRITE_TILES_ENEMY_IKEDA_09:                ; [$9e72]
     db $69,$3f,$1b,$2d,$6f,$f0,$c1,$02,$30,$10,$07,$1e,$30,$40,$00,$01 ; [$9e72]
                                                                        ; byte
 
@@ -6993,6 +7673,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; █▒░░....
 ; █▒░.....
 ;
+SPRITE_TILES_ENEMY_IKEDA_10:                ; [$9e82]
     db $fc,$fa,$fa,$36,$fc,$58,$b0,$a0,$18,$0c,$fc,$f8,$00,$e0,$c0,$c0 ; [$9e82]
                                                                        ; byte
 
@@ -7007,6 +7688,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; .....░▒█
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_IKEDA_11:                ; [$9e92]
     db $03,$03,$01,$01,$03,$06,$05,$03,$01,$01,$00,$00,$00,$03,$03,$00 ; [$9e92]
                                                                        ; byte
 
@@ -7021,6 +7703,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ██▒░....
 ; ░░░.....
 ;
+SPRITE_TILES_ENEMY_IKEDA_12:                ; [$9ea2]
     db $40,$40,$c0,$a0,$a0,$d0,$d0,$e0,$80,$80,$80,$c0,$40,$60,$e0,$00 ; [$9ea2]
                                                                        ; byte
 
@@ -7035,6 +7718,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ░░..░██░
 ; ...░█▒░█
 ;
+SPRITE_TILES_ENEMY_IKEDA_13:                ; [$9eb2]
     db $69,$3f,$1b,$2d,$6f,$f7,$cf,$1b,$30,$10,$07,$1e,$30,$42,$06,$0d ; [$9eb2]
                                                                        ; byte
 
@@ -7049,6 +7733,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; █▒░░....
 ; █▒░.....
 ;
+SPRITE_TILES_ENEMY_IKEDA_14:                ; [$9ec2]
     db $fc,$fa,$fa,$36,$fc,$58,$b0,$a0,$18,$0c,$fc,$f8,$00,$e0,$c0,$c0 ; [$9ec2]
                                                                        ; byte
 
@@ -7063,6 +7748,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ......░█
 ; ......░░
 ;
+SPRITE_TILES_ENEMY_IKEDA_15:                ; [$9ed2]
     db $37,$6f,$7f,$3f,$1f,$07,$03,$03,$1b,$33,$38,$0e,$01,$00,$01,$00 ; [$9ed2]
                                                                        ; byte
 
@@ -7077,9 +7763,17 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; ▒░..░░..
 ; ░.......
 ;
+SPRITE_TILES_ENEMY_IKEDA_16:                ; [$9ee2]
     db $3f,$fd,$fd,$c5,$ad,$ae,$4c,$80,$c0,$fe,$02,$02,$c6,$c4,$80,$00 ; [$9ee2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Unused Muppet Guy
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8050]
+;============================================================================
 
 ;
 ; .▒██░.▒█
@@ -7094,7 +7788,7 @@ PPUTile16_PRG6__9de2:                       ; [$9de2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8050]
 ;
-PPUTile16_PRG6__9ef2:                       ; [$9ef2]
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_00:    ; [$9ef2]
     db $39,$ff,$ff,$7b,$3b,$3b,$0e,$1d,$73,$5a,$5a,$31,$11,$11,$1b,$0e ; [$9ef2]
                                                                        ; byte
 
@@ -7109,6 +7803,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_01:    ; [$9f02]
     db $c0,$e0,$e0,$c0,$80,$80,$80,$00,$80,$c0,$c0,$80,$00,$00,$00,$00 ; [$9f02]
                                                                        ; byte
 
@@ -7123,6 +7818,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ..░██▒░░
 ; .░░░██▒░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_02:    ; [$9f12]
     db $1d,$0e,$3d,$3f,$3f,$6f,$3b,$7d,$0e,$1f,$13,$11,$00,$f0,$1c,$0e ; [$9f12]
                                                                        ; byte
 
@@ -7137,6 +7833,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; █▒░.....
 ; █▒░.....
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_03:    ; [$9f22]
     db $00,$80,$40,$40,$a0,$a0,$a0,$a0,$00,$00,$80,$80,$c0,$c0,$c0,$c0 ; [$9f22]
                                                                        ; byte
 
@@ -7151,6 +7848,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░██░░░██
 ; ░▒██████
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_04:    ; [$9f32]
     db $7f,$7f,$7f,$7e,$c7,$af,$ff,$bf,$20,$26,$2f,$39,$38,$50,$63,$7f ; [$9f32]
                                                                        ; byte
 
@@ -7165,6 +7863,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; █▒░░....
 ; █▒░░....
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_05:    ; [$9f42]
     db $a0,$e0,$e0,$a0,$20,$f0,$b0,$b0,$c0,$40,$c0,$c0,$c0,$00,$c0,$c0 ; [$9f42]
                                                                        ; byte
 
@@ -7179,6 +7878,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; .░██▒▒▒▒
 ; ░▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_06:    ; [$9f52]
     db $67,$78,$6f,$4f,$3f,$3e,$70,$9f,$1f,$07,$30,$31,$07,$1f,$3f,$60 ; [$9f52]
                                                                        ; byte
 
@@ -7193,6 +7893,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░░░░▒▒▒░
 ; ▒▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_07:    ; [$9f62]
     db $70,$98,$48,$ec,$cc,$1e,$f1,$1f,$80,$60,$f0,$f0,$f0,$e4,$0e,$e0 ; [$9f62]
                                                                        ; byte
 
@@ -7207,6 +7908,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░▒▒░.░▒▒
 ; .░█░.░█░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_08:    ; [$9f72]
     db $00,$00,$63,$94,$ce,$ce,$94,$77,$00,$00,$00,$63,$b5,$b5,$63,$22 ; [$9f72]
                                                                        ; byte
 
@@ -7221,6 +7923,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_09:    ; [$9f82]
     db $00,$00,$00,$80,$40,$40,$80,$00,$00,$00,$00,$00,$80,$80,$00,$00 ; [$9f82]
                                                                        ; byte
 
@@ -7235,6 +7938,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; .░█░░░░▒
 ; ..█░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_10:    ; [$9f92]
     db $5d,$3a,$1a,$3e,$3d,$72,$7e,$3f,$36,$1c,$1c,$1c,$1e,$3f,$21,$20 ; [$9f92]
                                                                        ; byte
 
@@ -7249,6 +7953,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ▒░......
 ; █▒░.....
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_11:    ; [$9fa2]
     db $00,$00,$00,$00,$00,$80,$40,$a0,$00,$00,$00,$00,$00,$00,$80,$c0 ; [$9fa2]
                                                                        ; byte
 
@@ -7263,6 +7968,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ░▒█▒▒▒▒█
 ; .░▒█████
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_12:    ; [$9fb2]
     db $3b,$3d,$3f,$7f,$af,$9f,$a1,$5f,$2c,$26,$20,$10,$5f,$60,$7f,$3f ; [$9fb2]
                                                                        ; byte
 
@@ -7277,6 +7983,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ██▒▒░...
 ; ██▒░░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_13:    ; [$9fc2]
     db $d0,$f0,$f0,$f0,$68,$e8,$c8,$d8,$60,$20,$20,$c0,$90,$30,$f0,$e0 ; [$9fc2]
                                                                        ; byte
 
@@ -7291,6 +7998,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; .░▒█████
 ; ░▒▒▒░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_14:    ; [$9fd2]
     db $70,$58,$77,$47,$3c,$6f,$5f,$8f,$0f,$27,$38,$38,$03,$1f,$3f,$70 ; [$9fd2]
                                                                        ; byte
 
@@ -7305,9 +8013,17 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; ▒▒▒░░░▒▒
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_MUPPET_GUY_15:    ; [$9fe2]
     db $38,$64,$c6,$7a,$f2,$c7,$1c,$ff,$c0,$98,$38,$fc,$fc,$f8,$e3,$00 ; [$9fe2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Lamprey
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8052]
+;============================================================================
 
 ;
 ; ..░██▒░.
@@ -7322,7 +8038,7 @@ PPUTile16_PRG6__9ef2:                       ; [$9ef2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8052]
 ;
-PPUTile16_PRG6__9ff2:                       ; [$9ff2]
+SPRITE_TILES_ENEMY_LAMPREY_00:              ; [$9ff2]
     db $3a,$7d,$bc,$fc,$fc,$fc,$fc,$b9,$1c,$26,$53,$63,$63,$43,$43,$46 ; [$9ff2]
                                                                        ; byte
 
@@ -7337,6 +8053,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ▒███▒░░.
 ; ░▒██▒░░.
 ;
+SPRITE_TILES_ENEMY_LAMPREY_01:              ; [$a002]
     db $00,$00,$e0,$78,$9c,$ec,$76,$b6,$00,$00,$00,$80,$e0,$f0,$f8,$78 ; [$a002]
                                                                        ; byte
 
@@ -7351,6 +8068,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ...░▒███
 ; ...░████
 ;
+SPRITE_TILES_ENEMY_LAMPREY_02:              ; [$a012]
     db $5b,$27,$1b,$06,$05,$0b,$17,$1f,$24,$18,$00,$01,$03,$07,$0f,$0f ; [$a012]
                                                                        ; byte
 
@@ -7365,6 +8083,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; █▒░░░...
 ; ▒░░░░...
 ;
+SPRITE_TILES_ENEMY_LAMPREY_03:              ; [$a022]
     db $b6,$36,$6e,$fc,$dc,$f8,$b8,$78,$78,$f8,$f0,$e0,$e0,$c0,$c0,$80 ; [$a022]
                                                                        ; byte
 
@@ -7379,6 +8098,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; .░▒█████
 ; .░░░████
 ;
+SPRITE_TILES_ENEMY_LAMPREY_04:              ; [$a032]
     db $2f,$3e,$3e,$5e,$7e,$7f,$5f,$7f,$1f,$1f,$1f,$3f,$3f,$3f,$3f,$0f ; [$a032]
                                                                        ; byte
 
@@ -7393,6 +8113,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ▒░░░....
 ; █▒░░....
 ;
+SPRITE_TILES_ENEMY_LAMPREY_05:              ; [$a042]
     db $f8,$f0,$f0,$f0,$70,$70,$70,$b0,$00,$00,$00,$00,$80,$80,$80,$c0 ; [$a042]
                                                                        ; byte
 
@@ -7407,6 +8128,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; .░░█████
 ; ░▒▒▒░░░░
 ;
+SPRITE_TILES_ENEMY_LAMPREY_06:              ; [$a052]
     db $37,$3f,$1e,$0f,$1f,$1f,$7f,$8f,$0f,$01,$07,$00,$03,$0f,$1f,$70 ; [$a052]
                                                                        ; byte
 
@@ -7421,6 +8143,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ▒▒░░░▒▒░
 ; ░░░▒▒▒░░
 ;
+SPRITE_TILES_ENEMY_LAMPREY_07:              ; [$a062]
     db $f8,$7c,$f6,$fa,$fa,$e7,$39,$e3,$c0,$80,$78,$fc,$fc,$f8,$c6,$1c ; [$a062]
                                                                        ; byte
 
@@ -7435,6 +8158,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; .░█░█░░░
 ; .░█░█░░░
 ;
+SPRITE_TILES_ENEMY_LAMPREY_08:              ; [$a072]
     db $00,$0f,$17,$3f,$5f,$7f,$7f,$7f,$00,$00,$0f,$18,$34,$2c,$28,$28 ; [$a072]
                                                                        ; byte
 
@@ -7449,6 +8173,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ░░▒▒░░░.
 ; ░░▒▒░░░.
 ;
+SPRITE_TILES_ENEMY_LAMPREY_09:              ; [$a082]
     db $00,$c0,$a0,$d0,$c8,$cc,$ce,$ce,$00,$00,$c0,$e0,$70,$30,$30,$30 ; [$a082]
                                                                        ; byte
 
@@ -7463,6 +8188,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ......░█
 ; .....░██
 ;
+SPRITE_TILES_ENEMY_LAMPREY_10:              ; [$a092]
     db $7f,$4f,$37,$10,$0f,$03,$03,$07,$20,$30,$18,$0f,$00,$00,$01,$03 ; [$a092]
                                                                        ; byte
 
@@ -7477,6 +8203,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ██▒▒░░░.
 ; █▒░░░░..
 ;
+SPRITE_TILES_ENEMY_LAMPREY_11:              ; [$a0a2]
     db $cf,$9f,$3b,$7b,$d7,$76,$ce,$bc,$30,$60,$c4,$8c,$38,$f8,$f0,$c0 ; [$a0a2]
                                                                        ; byte
 
@@ -7491,6 +8218,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; .░▒█████
 ; .░██████
 ;
+SPRITE_TILES_ENEMY_LAMPREY_12:              ; [$a0b2]
     db $0b,$1e,$16,$3e,$2f,$5f,$5f,$7f,$07,$07,$0f,$0f,$1f,$3f,$3f,$3f ; [$a0b2]
                                                                        ; byte
 
@@ -7505,6 +8233,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ▒░▒░....
 ; █▒░░....
 ;
+SPRITE_TILES_ENEMY_LAMPREY_13:              ; [$a0c2]
     db $78,$f8,$f0,$f0,$70,$70,$50,$b0,$80,$00,$00,$00,$80,$80,$a0,$c0 ; [$a0c2]
                                                                        ; byte
 
@@ -7519,6 +8248,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; .░████▒▒
 ; ░▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_LAMPREY_14:              ; [$a0d2]
     db $7f,$7a,$6f,$7f,$3f,$3f,$7c,$9f,$1f,$27,$30,$01,$07,$1f,$3f,$60 ; [$a0d2]
                                                                        ; byte
 
@@ -7533,9 +8263,17 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; ░░░░░▒░.
 ; ▒▒▒░░░░░
 ;
+SPRITE_TILES_ENEMY_LAMPREY_15:              ; [$a0e2]
     db $f0,$98,$e8,$f4,$f4,$ce,$fa,$1f,$80,$60,$f0,$f8,$f8,$f0,$04,$e0 ; [$a0e2]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Monodron
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8056]
+;============================================================================
 
 ;
 ; ........
@@ -7550,7 +8288,7 @@ PPUTile16_PRG6__9ff2:                       ; [$9ff2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8056]
 ;
-PPUTile16_PRG6__a0f2:                       ; [$a0f2]
+SPRITE_TILES_ENEMY_MONODRON_00:             ; [$a0f2]
     db $00,$00,$00,$00,$01,$0e,$18,$33,$00,$00,$00,$00,$00,$01,$07,$0f ; [$a0f2]
                                                                        ; byte
 
@@ -7565,6 +8303,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ███▒▒░░.
 ; ████▒▒░.
 ;
+SPRITE_TILES_ENEMY_MONODRON_01:             ; [$a102]
     db $00,$00,$00,$00,$f0,$1c,$e6,$f2,$00,$00,$00,$00,$00,$e0,$f8,$fc ; [$a102]
                                                                        ; byte
 
@@ -7579,6 +8318,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ▒░█▒▒░░▒
 ; ░█▒▒░░▒▒
 ;
+SPRITE_TILES_ENEMY_MONODRON_02:             ; [$a112]
     db $67,$67,$e5,$79,$ed,$76,$66,$cc,$1f,$1f,$1f,$07,$73,$b9,$b9,$73 ; [$a112]
                                                                        ; byte
 
@@ -7593,6 +8333,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; █▒░▒░░░░
 ; ▒▒░▒░░░.
 ;
+SPRITE_TILES_ENEMY_MONODRON_03:             ; [$a122]
     db $9b,$e9,$e3,$f3,$f3,$cf,$af,$2e,$fc,$fe,$fc,$fc,$cc,$f0,$d0,$d0 ; [$a122]
                                                                        ; byte
 
@@ -7607,6 +8348,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; .....░░▒
 ; ..█.░░░▒
 ;
+SPRITE_TILES_ENEMY_MONODRON_04:             ; [$a132]
     db $79,$e5,$c9,$7d,$5f,$06,$06,$2e,$06,$1e,$3e,$02,$50,$01,$01,$21 ; [$a132]
                                                                        ; byte
 
@@ -7621,6 +8363,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; █████▒░.
 ; ▒█████▒░
 ;
+SPRITE_TILES_ENEMY_MONODRON_05:             ; [$a142]
     db $9e,$fc,$fc,$fc,$1c,$e4,$fa,$7d,$60,$00,$00,$00,$e0,$f8,$fc,$fe ; [$a142]
                                                                        ; byte
 
@@ -7635,6 +8378,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ..█░█░..
 ; ....█░..
 ;
+SPRITE_TILES_ENEMY_MONODRON_06:             ; [$a152]
     db $18,$24,$11,$36,$ed,$bb,$3c,$0c,$00,$18,$2e,$5b,$97,$ac,$28,$08 ; [$a152]
                                                                        ; byte
 
@@ -7649,6 +8393,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ░▒▒▒▒░░.
 ; .░░░░...
 ;
+SPRITE_TILES_ENEMY_MONODRON_07:             ; [$a162]
     db $9d,$66,$1a,$85,$5a,$29,$86,$78,$7e,$1f,$07,$03,$87,$de,$78,$00 ; [$a162]
                                                                        ; byte
 
@@ -7663,6 +8408,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ░░░▒▒█▒█
 ; .░░░░▒▒█
 ;
+SPRITE_TILES_ENEMY_MONODRON_08:             ; [$a172]
     db $01,$0e,$18,$33,$67,$67,$e5,$79,$00,$01,$07,$0f,$1f,$1f,$1f,$07 ; [$a172]
                                                                        ; byte
 
@@ -7677,6 +8423,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ███▒▒▒░░
 ; ████▒▒░░
 ;
+SPRITE_TILES_ENEMY_MONODRON_09:             ; [$a182]
     db $f0,$1c,$e6,$f2,$9b,$e9,$e3,$f3,$00,$e0,$f8,$fc,$fc,$fe,$fc,$fc ; [$a182]
                                                                        ; byte
 
@@ -7691,6 +8438,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ░░▒▒█▒▒░
 ; .░░░░░▒░
 ;
+SPRITE_TILES_ENEMY_MONODRON_10:             ; [$a192]
     db $ed,$76,$66,$cc,$79,$e5,$c9,$7d,$73,$b9,$b9,$73,$06,$1e,$3e,$02 ; [$a192]
                                                                        ; byte
 
@@ -7705,6 +8453,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ░░░░░░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_ENEMY_MONODRON_11:             ; [$a1a2]
     db $f3,$cf,$af,$2e,$9e,$fc,$fc,$fc,$cc,$f0,$d0,$d0,$60,$00,$00,$00 ; [$a1a2]
                                                                        ; byte
 
@@ -7719,6 +8468,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MONODRON_12:             ; [$a1b2]
     db $5f,$06,$06,$2e,$3b,$1e,$00,$00,$50,$01,$01,$21,$04,$00,$00,$00 ; [$a1b2]
                                                                        ; byte
 
@@ -7733,6 +8483,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ...░░▒█▒
 ; ....░░▒█
 ;
+SPRITE_TILES_ENEMY_MONODRON_13:             ; [$a1c2]
     db $1c,$e4,$fa,$7d,$9d,$e6,$1a,$0d,$e0,$f8,$fc,$fe,$7e,$1f,$07,$03 ; [$a1c2]
                                                                        ; byte
 
@@ -7747,6 +8498,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MONODRON_14:             ; [$a1d2]
     db $19,$67,$8e,$58,$60,$80,$00,$00,$07,$1e,$78,$e0,$80,$00,$00,$00 ; [$a1d2]
                                                                        ; byte
 
@@ -7761,6 +8513,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ░▒▒░░░..
 ; ▒██▒░░..
 ;
+SPRITE_TILES_ENEMY_MONODRON_15:             ; [$a1e2]
     db $f3,$cf,$af,$2e,$9e,$fc,$9c,$6c,$cc,$f0,$d0,$d0,$60,$00,$60,$f0 ; [$a1e2]
                                                                        ; byte
 
@@ -7775,6 +8528,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_ENEMY_MONODRON_16:             ; [$a1f2]
     db $5f,$07,$06,$02,$0f,$06,$00,$00,$50,$00,$05,$01,$08,$00,$00,$00 ; [$a1f2]
                                                                        ; byte
 
@@ -7789,6 +8543,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ...░▒▒░.
 ; ...░█░..
 ;
+SPRITE_TILES_ENEMY_MONODRON_17:             ; [$a202]
     db $68,$f4,$b6,$ba,$5a,$2a,$12,$1c,$f0,$78,$78,$7c,$3c,$1c,$0c,$08 ; [$a202]
                                                                        ; byte
 
@@ -7803,9 +8558,17 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; ....░░▒░
 ; .....░░░
 ;
+SPRITE_TILES_ENEMY_MONODRON_18:             ; [$a212]
     db $34,$24,$3a,$39,$1c,$0b,$0d,$07,$08,$18,$14,$16,$0b,$04,$02,$00 ; [$a212]
                                                                        ; byte
 
+
+;============================================================================
+; Enemy Tiles: Unused Winged Skeleton
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8058]
+;============================================================================
 
 ;
 ; ........
@@ -7820,7 +8583,7 @@ PPUTile16_PRG6__a0f2:                       ; [$a0f2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8058]
 ;
-PPUTile16_PRG6__a222:                       ; [$a222]
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_00: ; [$a222]
     db $00,$00,$00,$01,$01,$03,$07,$37,$00,$00,$00,$00,$00,$01,$02,$02 ; [$a222]
                                                                        ; byte
 
@@ -7835,6 +8598,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ░░█▒░░░.
 ; ░█▒░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_01: ; [$a232]
     db $73,$f3,$e7,$ef,$fe,$f6,$ee,$df,$21,$41,$42,$84,$88,$18,$30,$60 ; [$a232]
                                                                        ; byte
 
@@ -7849,6 +8613,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ██░██▒░█
 ; .░█░█░██
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_02: ; [$a242]
     db $6f,$3f,$3f,$7f,$f7,$fb,$fb,$7f,$32,$12,$12,$12,$78,$cc,$dd,$2b ; [$a242]
                                                                        ; byte
 
@@ -7863,6 +8628,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; █▒░░░░░█
 ; ▒░░░░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_03: ; [$a252]
     db $ff,$df,$fc,$fe,$fe,$ff,$bf,$78,$7f,$60,$50,$48,$44,$c2,$c1,$80 ; [$a252]
                                                                        ; byte
 
@@ -7877,6 +8643,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ......░▒
 ; .......░
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_04: ; [$a262]
     db $3e,$3e,$0f,$0b,$07,$05,$02,$01,$13,$27,$07,$07,$03,$03,$01,$00 ; [$a262]
                                                                        ; byte
 
@@ -7891,6 +8658,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ▒██░░░░.
 ; ▒█▒▒░...
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_05: ; [$a272]
     db $f0,$30,$9a,$d9,$ed,$ef,$7e,$48,$00,$c0,$e0,$e0,$f0,$f0,$e0,$f0 ; [$a272]
                                                                        ; byte
 
@@ -7905,6 +8673,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; .......░
 ; ........
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_06: ; [$a282]
     db $00,$00,$00,$01,$03,$03,$01,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a282]
                                                                        ; byte
 
@@ -7919,6 +8688,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ░█░.....
 ; .░█░....
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_07: ; [$a292]
     db $f8,$fc,$dc,$b8,$70,$e0,$e0,$70,$30,$18,$08,$10,$20,$40,$40,$20 ; [$a292]
                                                                        ; byte
 
@@ -7933,6 +8703,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; .░█▒░░░░
 ; ..░█░▒██
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_08: ; [$a2a2]
     db $00,$00,$00,$00,$00,$70,$6f,$3b,$00,$00,$00,$00,$00,$00,$30,$17 ; [$a2a2]
                                                                        ; byte
 
@@ -7947,6 +8718,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ░.......
 ; █░░░....
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_09: ; [$a2b2]
     db $00,$00,$00,$00,$00,$00,$80,$f0,$00,$00,$00,$00,$00,$00,$00,$80 ; [$a2b2]
                                                                        ; byte
 
@@ -7961,6 +8733,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; .░█░░░█▒
 ; ..░░░░██
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_10: ; [$a2c2]
     db $3b,$7b,$f7,$fb,$fb,$fd,$7e,$3f,$12,$12,$78,$cd,$dd,$26,$23,$03 ; [$a2c2]
                                                                        ; byte
 
@@ -7975,9 +8748,17 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; ▒░░█▒▒░.
 ; █▒░░░░░░
 ;
+SPRITE_TILES_ENEMY_UNUSED_WINGED_SKELETON_11: ; [$a2d2]
     db $dc,$76,$fa,$ff,$fd,$fa,$72,$bf,$30,$f8,$fc,$3c,$3e,$3c,$9c,$c0 ; [$a2d2]
                                                                        ; byte
 
+
+;============================================================================
+; Sprite Tiles: Tamazutsu
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805a]
+;============================================================================
 
 ;
 ; ....███▒
@@ -7992,7 +8773,7 @@ PPUTile16_PRG6__a222:                       ; [$a222]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::805a]
 ;
-PPUTile16_PRG6__a2e2:                       ; [$a2e2]
+SPRITE_TILES_ENEMY_TAMAZUTSU_00:            ; [$a2e2]
     db $0e,$30,$5f,$3e,$7f,$ff,$f7,$bf,$0f,$2f,$60,$5f,$a3,$59,$59,$41 ; [$a2e2]
                                                                        ; byte
 
@@ -8007,6 +8788,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; █▒░░▒▒▒░
 ; █▒░░░░░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_01:            ; [$a2f2]
     db $80,$d0,$68,$8c,$5a,$bc,$b1,$bf,$00,$60,$f0,$70,$a4,$ce,$ce,$c0 ; [$a2f2]
                                                                        ; byte
 
@@ -8021,6 +8803,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; █▒░░░░░░
 ; ██░▒░░▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_02:            ; [$a302]
     db $bf,$c0,$61,$bf,$de,$61,$bf,$ed,$63,$bf,$de,$61,$3f,$9e,$c0,$d2 ; [$a302]
                                                                        ; byte
 
@@ -8035,6 +8818,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ██░░░█▒░
 ; █▒░░░█▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_03:            ; [$a312]
     db $23,$79,$cd,$bb,$7d,$fd,$fd,$bd,$dc,$be,$72,$c4,$96,$56,$c6,$c6 ; [$a312]
                                                                        ; byte
 
@@ -8049,6 +8833,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ▒██▒▒▒█░
 ; ▒█▒▒▒▒▒█
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_04:            ; [$a322]
     db $7f,$7f,$3f,$7f,$7f,$7b,$63,$41,$52,$40,$00,$52,$42,$9c,$fe,$ff ; [$a322]
                                                                        ; byte
 
@@ -8063,6 +8848,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ░░▒██▒░░
 ; ████▒▒░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_05:            ; [$a332]
     db $fd,$fd,$f5,$d5,$f5,$69,$db,$f3,$86,$a6,$2e,$ae,$8e,$9e,$3c,$fc ; [$a332]
                                                                        ; byte
 
@@ -8077,6 +8863,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ▒▒▒▒░░░▒
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_06:            ; [$a342]
     db $9c,$e7,$99,$b8,$c0,$7f,$0e,$ff,$63,$18,$7e,$7f,$3f,$c0,$f1,$00 ; [$a342]
                                                                        ; byte
 
@@ -8091,6 +8878,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ▒▒▒▒░░▒░
 ; ░░░░░▒▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_07:            ; [$a352]
     db $07,$1f,$fb,$33,$cb,$b7,$0d,$f9,$f8,$e0,$04,$cc,$3c,$78,$f2,$06 ; [$a352]
                                                                        ; byte
 
@@ -8105,6 +8893,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ░░░█░░░█
 ; ▒░░░░░░▒
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_08:            ; [$a362]
     db $06,$36,$70,$5f,$3f,$fe,$ff,$7e,$0f,$2f,$6f,$60,$c0,$1b,$11,$81 ; [$a362]
                                                                        ; byte
 
@@ -8119,6 +8908,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ▒░░░░░░░
 ; ▒░█▒▒▒░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_09:            ; [$a372]
     db $80,$d0,$e8,$9c,$9a,$fa,$7f,$63,$00,$60,$70,$60,$6c,$0c,$80,$bc ; [$a372]
                                                                        ; byte
 
@@ -8133,6 +8923,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; .█░█░░█░
 ; .▒░░░░░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_10:            ; [$a382]
     db $af,$df,$fd,$60,$bf,$bd,$7f,$3f,$d2,$61,$3f,$9f,$c0,$d2,$52,$40 ; [$a382]
                                                                        ; byte
 
@@ -8147,6 +8938,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; █▒░░░█▒░
 ; █░░░░█▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_11:            ; [$a392]
     db $c3,$9d,$3d,$fb,$fd,$fd,$bd,$fd,$7c,$e2,$c2,$14,$56,$c6,$c6,$86 ; [$a392]
                                                                        ; byte
 
@@ -8161,6 +8953,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; .█░▒░░█░
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_12:            ; [$a3a2]
     db $1f,$3f,$3f,$1f,$3f,$7f,$6f,$7f,$20,$20,$20,$20,$00,$52,$52,$80 ; [$a3a2]
                                                                        ; byte
 
@@ -8175,6 +8968,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; █░░░▒█▒░
 ; ▒░░▒█▒▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_13:            ; [$a3b2]
     db $fd,$fd,$fd,$fd,$f5,$d5,$f5,$69,$06,$06,$06,$26,$2e,$ae,$8e,$9e ; [$a3b2]
                                                                        ; byte
 
@@ -8189,6 +8983,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ▒░▒▒▒▒▒▒
 ; ░░░░░░░░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_14:            ; [$a3c2]
     db $39,$41,$80,$ff,$99,$b8,$40,$ff,$fe,$ff,$7f,$00,$7e,$7f,$bf,$00 ; [$a3c2]
                                                                        ; byte
 
@@ -8203,6 +8998,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ░░▒▒░░▒░
 ; ░░░░░▒▒░
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_15:            ; [$a3d2]
     db $db,$f3,$07,$1b,$fb,$37,$cd,$f9,$3c,$fc,$f8,$e4,$0c,$d8,$32,$06 ; [$a3d2]
                                                                        ; byte
 
@@ -8217,6 +9013,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; .░░░▒░░▒
 ; ░░▒▒░░░▒
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_16:            ; [$a3e2]
     db $00,$00,$00,$00,$0f,$3a,$76,$ce,$00,$00,$00,$00,$00,$05,$09,$31 ; [$a3e2]
                                                                        ; byte
 
@@ -8231,9 +9028,17 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; ...░▒░░░
 ; .░░▒░░░▒
 ;
+SPRITE_TILES_ENEMY_TAMAZUTSU_17:            ; [$a3f2]
     db $00,$00,$00,$00,$00,$0d,$17,$6e,$00,$00,$00,$00,$00,$00,$08,$11 ; [$a3f2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Ripasheiku
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805c]
+;============================================================================
 
 ;
 ; ░░...░██
@@ -8248,7 +9053,7 @@ PPUTile16_PRG6__a2e2:                       ; [$a2e2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::805c]
 ;
-PPUTile16_PRG6__a402:                       ; [$a402]
+SPRITE_TILES_BOSS_RIPASHEIKU_00:            ; [$a402]
     db $c7,$ff,$b3,$46,$3d,$17,$3b,$5f,$03,$c0,$7c,$3b,$06,$0d,$0d,$30 ; [$a402]
                                                                        ; byte
 
@@ -8263,6 +9068,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░░░░▒▒░
 ; ░▒█▒░▒░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_01:            ; [$a412]
     db $e8,$34,$e6,$7e,$f7,$bd,$79,$ab,$f0,$f8,$18,$88,$18,$c2,$86,$74 ; [$a412]
                                                                        ; byte
 
@@ -8277,6 +9083,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒░█▒░▒░
 ; .░░█▒░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_02:            ; [$a422]
     db $a7,$cc,$79,$b7,$6d,$5e,$35,$77,$7f,$7f,$de,$d8,$b3,$e3,$da,$18 ; [$a422]
                                                                        ; byte
 
@@ -8291,6 +9098,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░░░░▒▒
 ; ░░░▒▒░▒█
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_03:            ; [$a432]
     db $ce,$9f,$db,$fb,$9f,$3f,$fc,$e5,$70,$60,$2c,$04,$e0,$c0,$03,$1b ; [$a432]
                                                                        ; byte
 
@@ -8305,6 +9113,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░▒▒█░░
 ; ░░░▒▒░.░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_04:            ; [$a442]
     db $e9,$eb,$e9,$e1,$eb,$eb,$e7,$e5,$1e,$1c,$1e,$1e,$1c,$1f,$1c,$18 ; [$a442]
                                                                        ; byte
 
@@ -8319,6 +9128,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░▒▒▒▒.
 ; ░█▒█▒█▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_05:            ; [$a452]
     db $9b,$be,$64,$dc,$5c,$78,$e0,$d4,$64,$48,$98,$30,$e0,$84,$1e,$7f ; [$a452]
                                                                        ; byte
 
@@ -8333,6 +9143,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; █▒░░░░▒▒
 ; ▒▒░░▒▒▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_06:            ; [$a462]
     db $f2,$c3,$e4,$86,$5e,$9f,$bc,$30,$1d,$3c,$3f,$7b,$e1,$e0,$c3,$cf ; [$a462]
                                                                        ; byte
 
@@ -8347,6 +9158,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░░░▒▒░░
 ; ▒▒▒░..▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_07:            ; [$a472]
     db $7e,$fc,$cc,$00,$8c,$c6,$73,$11,$80,$00,$30,$f8,$f0,$38,$8c,$e2 ; [$a472]
                                                                        ; byte
 
@@ -8361,6 +9173,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; .....░█▒
 ; .....░█▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_08:            ; [$a482]
     db $00,$01,$01,$02,$01,$00,$06,$06,$00,$00,$00,$01,$03,$03,$03,$03 ; [$a482]
                                                                        ; byte
 
@@ -8375,6 +9188,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░......
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_09:            ; [$a492]
     db $80,$00,$00,$c0,$80,$c0,$c0,$e0,$40,$80,$80,$00,$00,$00,$00,$00 ; [$a492]
                                                                        ; byte
 
@@ -8389,6 +9203,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..░▒▒░..
 ; .░▒▒░░..
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_10:            ; [$a4a2]
     db $01,$01,$07,$0b,$16,$16,$24,$4c,$00,$00,$00,$04,$08,$08,$18,$30 ; [$a4a2]
                                                                        ; byte
 
@@ -8403,6 +9218,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ....█▒░░
 ; ░░░░░█▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_11:            ; [$a4b2]
     db $06,$02,$05,$03,$00,$05,$0b,$fd,$03,$07,$02,$06,$07,$0e,$0c,$06 ; [$a4b2]
                                                                        ; byte
 
@@ -8417,6 +9233,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░░▒█▒░
 ; ░░░▒█▒▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_12:            ; [$a4c2]
     db $e0,$f0,$b1,$62,$75,$f8,$f5,$e9,$00,$00,$40,$81,$83,$07,$0e,$1e ; [$a4c2]
                                                                        ; byte
 
@@ -8431,6 +9248,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░▒░░░.
 ; ░▒░░░▒█░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_13:            ; [$a4d2]
     db $98,$78,$b0,$60,$62,$c2,$ee,$bb,$64,$c4,$cc,$9c,$9c,$3c,$10,$46 ; [$a4d2]
                                                                        ; byte
 
@@ -8445,6 +9263,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ......▒░
 ; ......▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_14:            ; [$a4e2]
     db $61,$28,$21,$03,$03,$01,$01,$01,$58,$48,$20,$00,$00,$02,$02,$02 ; [$a4e2]
                                                                        ; byte
 
@@ -8459,6 +9278,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒██▒▒░▒▒
 ; ▒██▒▒░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_15:            ; [$a4f2]
     db $9b,$32,$f4,$d5,$29,$69,$64,$67,$67,$cf,$0f,$2e,$f6,$f6,$fb,$f8 ; [$a4f2]
                                                                        ; byte
 
@@ -8473,6 +9293,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░░....
 ; ░░░░....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_16:            ; [$a502]
     db $70,$e0,$c0,$c0,$9f,$b0,$f0,$f0,$8f,$1f,$3f,$3f,$60,$40,$00,$00 ; [$a502]
                                                                        ; byte
 
@@ -8487,6 +9308,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..░░....
 ; ...░....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_17:            ; [$a512]
     db $03,$00,$00,$40,$40,$20,$30,$10,$c0,$80,$80,$80,$80,$40,$00,$00 ; [$a512]
                                                                        ; byte
 
@@ -8501,6 +9323,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_18:            ; [$a522]
     db $00,$02,$00,$01,$00,$00,$00,$00,$03,$01,$01,$00,$00,$00,$00,$00 ; [$a522]
                                                                        ; byte
 
@@ -8515,6 +9338,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ...░▒█░░
 ; ....░▒▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_19:            ; [$a532]
     db $af,$8e,$5c,$7d,$24,$2e,$17,$08,$70,$71,$a3,$83,$5b,$19,$0c,$07 ; [$a532]
                                                                        ; byte
 
@@ -8529,6 +9353,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░▒█▒▒░░
 ; ░░▒▒▒▒░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_20:            ; [$a542]
     db $70,$1c,$be,$37,$63,$63,$d3,$c3,$80,$e0,$c0,$c8,$9c,$9c,$3c,$3c ; [$a542]
                                                                        ; byte
 
@@ -8543,6 +9368,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ......░▒
 ; .......░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_21:            ; [$a552]
     db $07,$03,$00,$00,$01,$01,$02,$01,$00,$00,$03,$03,$03,$03,$01,$00 ; [$a552]
                                                                        ; byte
 
@@ -8557,6 +9383,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░░░▒▒▒░
 ; ░░░░░░░▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_22:            ; [$a562]
     db $d3,$d2,$d2,$56,$63,$27,$71,$fe,$3c,$3c,$3c,$b8,$9c,$d8,$8e,$01 ; [$a562]
                                                                        ; byte
 
@@ -8571,6 +9398,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░......
 ; ░░░░....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_23:            ; [$a572]
     db $00,$00,$00,$00,$80,$c0,$c0,$f0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$a572]
                                                                        ; byte
 
@@ -8585,6 +9413,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; .......▒
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_24:            ; [$a582]
     db $7c,$16,$03,$05,$07,$00,$00,$00,$00,$08,$0c,$06,$02,$03,$01,$00 ; [$a582]
                                                                        ; byte
 
@@ -8599,6 +9428,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_25:            ; [$a592]
     db $10,$50,$70,$00,$20,$00,$00,$00,$e0,$e0,$60,$70,$10,$00,$00,$00 ; [$a592]
                                                                        ; byte
 
@@ -8613,6 +9443,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..░▒░▒██
 ; ..▒░▒██▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_26:            ; [$a5a2]
     db $61,$28,$21,$07,$06,$05,$2b,$16,$58,$48,$20,$00,$09,$1b,$17,$2f ; [$a5a2]
                                                                        ; byte
 
@@ -8627,6 +9458,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒▒▒░░▒▒
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_27:            ; [$a5b2]
     db $9b,$32,$f4,$d5,$29,$c9,$0c,$3f,$67,$cf,$0f,$2e,$f6,$f6,$f3,$c0 ; [$a5b2]
                                                                        ; byte
 
@@ -8641,6 +9473,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..▒▒▒░▒▒
 ; ..░▒▒▒░▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_28:            ; [$a5c2]
     db $70,$5f,$27,$0b,$19,$15,$04,$22,$2f,$20,$18,$3c,$3f,$3b,$3b,$1d ; [$a5c2]
                                                                        ; byte
 
@@ -8655,6 +9488,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░▒▒▒░░.
 ; ░░▒█▒▒░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_29:            ; [$a5d2]
     db $ff,$c7,$46,$8c,$1c,$64,$46,$d3,$00,$38,$f8,$f0,$e0,$98,$b8,$3c ; [$a5d2]
                                                                        ; byte
 
@@ -8669,6 +9503,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..▒▒▒░▒▒
 ; ...▒▒░░▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_30:            ; [$a5e2]
     db $03,$17,$0f,$07,$17,$2d,$04,$06,$1c,$08,$00,$19,$39,$33,$3b,$19 ; [$a5e2]
                                                                        ; byte
 
@@ -8683,6 +9518,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; █▒▒░░...
 ; ▒█▒▒░...
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_31:            ; [$a5f2]
     db $e3,$e3,$c6,$0e,$9c,$30,$98,$48,$3c,$7c,$f8,$f0,$e0,$c0,$e0,$f0 ; [$a5f2]
                                                                        ; byte
 
@@ -8697,6 +9533,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ...█▒░░.
 ; ...█▒░..
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_32:            ; [$a602]
     db $03,$01,$00,$03,$07,$0b,$16,$14,$0c,$06,$01,$02,$04,$0c,$18,$18 ; [$a602]
                                                                        ; byte
 
@@ -8711,6 +9548,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; .▒░░....
 ; .░░.....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_33:            ; [$a612]
     db $8c,$c6,$de,$dc,$b8,$58,$30,$60,$70,$38,$10,$10,$20,$60,$40,$00 ; [$a612]
                                                                        ; byte
 
@@ -8725,6 +9563,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒██▒▒░░░
 ; ▒██▒▒░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_34:            ; [$a622]
     db $99,$32,$f4,$d1,$2b,$6b,$67,$67,$67,$cf,$0f,$2e,$f4,$f4,$f8,$f8 ; [$a622]
                                                                        ; byte
 
@@ -8739,6 +9578,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░▒█▒▒▒▒░
 ; ░██▒░░░▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_35:            ; [$a632]
     db $e4,$77,$e9,$e0,$ee,$ef,$a1,$ee,$fb,$f8,$7e,$3f,$31,$30,$7e,$71 ; [$a632]
                                                                        ; byte
 
@@ -8753,6 +9593,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░▒░..░.
 ; ▒░░░....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_36:            ; [$a642]
     db $00,$00,$c0,$70,$38,$9c,$d2,$70,$00,$80,$00,$80,$c0,$60,$20,$80 ; [$a642]
                                                                        ; byte
 
@@ -8767,6 +9608,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░.....
 ; █▒▒▒░░..
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_37:            ; [$a652]
     db $00,$00,$00,$00,$00,$00,$e0,$8c,$00,$00,$00,$00,$00,$00,$00,$f0 ; [$a652]
                                                                        ; byte
 
@@ -8781,6 +9623,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░░░▒░░▒
 ; ░░░▒▒░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_38:            ; [$a662]
     db $a4,$d4,$6a,$75,$78,$7d,$f6,$e7,$7b,$3b,$9d,$8e,$87,$83,$09,$18 ; [$a662]
                                                                        ; byte
 
@@ -8795,6 +9638,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; █░░░░...
 ; ▒▒░░░...
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_39:            ; [$a672]
     db $18,$c0,$32,$00,$88,$c8,$f8,$38,$e0,$38,$cc,$f8,$70,$30,$80,$c0 ; [$a672]
                                                                        ; byte
 
@@ -8809,6 +9653,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░░░░▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_40:            ; [$a682]
     db $e7,$ce,$c6,$4e,$67,$37,$79,$ff,$18,$30,$38,$b0,$98,$c8,$86,$00 ; [$a682]
                                                                        ; byte
 
@@ -8823,6 +9668,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░░....▒.
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_41:            ; [$a692]
     db $38,$04,$04,$00,$00,$80,$c0,$e0,$60,$38,$18,$0c,$06,$02,$02,$00 ; [$a692]
                                                                        ; byte
 
@@ -8837,6 +9683,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; .......░
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_42:            ; [$a6a2]
     db $7c,$1e,$0b,$03,$05,$03,$01,$00,$00,$00,$04,$04,$02,$00,$00,$00 ; [$a6a2]
                                                                        ; byte
 
@@ -8851,6 +9698,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_43:            ; [$a6b2]
     db $b0,$b0,$50,$70,$30,$00,$00,$00,$40,$40,$20,$00,$00,$00,$00,$00 ; [$a6b2]
                                                                        ; byte
 
@@ -8865,6 +9713,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; █░░███░░
 ; ▒██▒▒▒▒█
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_44:            ; [$a6c2]
     db $71,$68,$59,$33,$5e,$e1,$ff,$61,$00,$70,$3e,$0d,$3f,$5e,$9c,$ff ; [$a6c2]
                                                                        ; byte
 
@@ -8879,6 +9728,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░▒▒░▒▒░.
 ; █░░██▒▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_45:            ; [$a6d2]
     db $e4,$98,$fc,$9d,$f9,$de,$92,$f9,$f8,$7e,$0e,$e6,$0e,$e0,$6c,$9e ; [$a6d2]
                                                                        ; byte
 
@@ -8893,6 +9743,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ....░░██
 ; ..▒░░█▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_46:            ; [$a6e2]
     db $fc,$df,$d7,$79,$01,$06,$0f,$1c,$03,$90,$9a,$92,$12,$01,$03,$27 ; [$a6e2]
                                                                        ; byte
 
@@ -8907,6 +9758,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒░░░░..
 ; ░░░░░░..
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_47:            ; [$a6f2]
     db $31,$93,$e7,$26,$ae,$cc,$3c,$fc,$de,$6c,$18,$18,$70,$f0,$c0,$00 ; [$a6f2]
                                                                        ; byte
 
@@ -8921,6 +9773,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░▒█▒▒▒░
 ; ░▒▒█▒░▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_48:            ; [$a702]
     db $59,$e3,$ff,$7b,$fc,$18,$51,$95,$3e,$1c,$00,$87,$ff,$ff,$be,$7a ; [$a702]
                                                                        ; byte
 
@@ -8935,6 +9788,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ..█▒▒░░░
 ; .█▒▒░░▒█
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_49:            ; [$a712]
     db $01,$00,$02,$01,$0b,$03,$27,$4d,$01,$03,$07,$06,$0c,$1c,$38,$73 ; [$a712]
                                                                        ; byte
 
@@ -8949,6 +9803,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; █▒█▒▒█▒▒
 ; ▒█▒███▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_50:            ; [$a722]
     db $8c,$f3,$2f,$ff,$b8,$56,$a4,$5c,$04,$cc,$de,$1f,$7f,$ff,$ff,$ff ; [$a722]
                                                                        ; byte
 
@@ -8963,6 +9818,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒░▒█▒▒▒░
 ; ░▒▒█▒░▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_51:            ; [$a732]
     db $63,$bf,$ff,$7b,$fc,$18,$51,$95,$58,$48,$20,$87,$ff,$ff,$be,$7a ; [$a732]
                                                                        ; byte
 
@@ -8977,6 +9833,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒▒░░░░.
 ; ░▒▒▒░░░.
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_52:            ; [$a742]
     db $8e,$56,$83,$0f,$43,$27,$1e,$8e,$70,$e8,$fc,$f0,$bc,$d8,$e0,$70 ; [$a742]
                                                                        ; byte
 
@@ -8991,6 +9848,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒░.....
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_53:            ; [$a752]
     db $fa,$9d,$08,$11,$26,$48,$20,$00,$87,$27,$0f,$1e,$38,$70,$c0,$00 ; [$a752]
                                                                        ; byte
 
@@ -9005,6 +9863,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; .▒░░░.░░
 ; .....░▒░
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_54:            ; [$a762]
     db $85,$2b,$0a,$94,$18,$36,$3b,$05,$fe,$fc,$fd,$7b,$17,$29,$40,$02 ; [$a762]
                                                                        ; byte
 
@@ -9019,6 +9878,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ▒▒░░░░░░
 ; ░▒░░░░▒▒
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_55:            ; [$a772]
     db $a1,$20,$43,$47,$1f,$5f,$3f,$bc,$7e,$ff,$fc,$f8,$e0,$e0,$c0,$43 ; [$a772]
                                                                        ; byte
 
@@ -9033,6 +9893,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░▒▒▒░░..
 ; ▒█▒▒░░..
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_56:            ; [$a782]
     db $0e,$0e,$e6,$fc,$fc,$dc,$8c,$4c,$f0,$f0,$18,$00,$00,$20,$70,$f0 ; [$a782]
                                                                        ; byte
 
@@ -9047,6 +9908,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ...░▒▒░.
 ; ...░▒▒░.
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_57:            ; [$a792]
     db $0a,$16,$14,$11,$11,$13,$12,$12,$07,$0f,$0f,$0e,$0e,$0c,$0c,$0c ; [$a792]
                                                                        ; byte
 
@@ -9061,6 +9923,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ░█▒░░░..
 ; ░█▒▒░...
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_58:            ; [$a7a2]
     db $f3,$ee,$f8,$b0,$a7,$cf,$dc,$c8,$0f,$1f,$3f,$7f,$78,$70,$60,$70 ; [$a7a2]
                                                                        ; byte
 
@@ -9075,6 +9938,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_59:            ; [$a7b2]
     db $1c,$18,$38,$f0,$c0,$00,$00,$00,$e0,$e0,$c0,$00,$00,$00,$00,$00 ; [$a7b2]
                                                                        ; byte
 
@@ -9089,6 +9953,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_60:            ; [$a7c2]
     db $22,$25,$6f,$de,$b4,$c3,$00,$00,$1c,$18,$31,$63,$43,$00,$00,$00 ; [$a7c2]
                                                                        ; byte
 
@@ -9103,9 +9968,17 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_RIPASHEIKU_61:            ; [$a7d2]
     db $c8,$98,$30,$20,$c0,$00,$00,$00,$70,$e0,$c0,$c0,$00,$00,$00,$00 ; [$a7d2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss: Zoradohna
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::805e]
+;============================================================================
 
 ;
 ; ........
@@ -9120,7 +9993,7 @@ PPUTile16_PRG6__a402:                       ; [$a402]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::805e]
 ;
-PPUTile16_PRG6__a7e2:                       ; [$a7e2]
+SPRITE_TILES_BOSS_ZORADOHNA_00:             ; [$a7e2]
     db $00,$00,$00,$00,$13,$09,$1d,$19,$00,$00,$00,$00,$1c,$3e,$2e,$2e ; [$a7e2]
                                                                        ; byte
 
@@ -9135,6 +10008,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █░█▒░▒░▒
 ; ░░▒░░▒░▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_01:             ; [$a7f2]
     db $01,$3e,$59,$a7,$fb,$f5,$ea,$da,$00,$01,$3e,$7e,$47,$bb,$b5,$25 ; [$a7f2]
                                                                        ; byte
 
@@ -9149,6 +10023,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █░░░░░▒█
 ; █▒░▒▒░░█
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_02:             ; [$a802]
     db $ff,$06,$e4,$4b,$95,$5a,$fd,$a7,$00,$ff,$fb,$fc,$6e,$a7,$83,$d9 ; [$a802]
                                                                        ; byte
 
@@ -9163,6 +10038,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒░░▒▒▒▒░
 ; ▒░▒███▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_03:             ; [$a812]
     db $00,$f0,$08,$e4,$ce,$9b,$61,$5d,$00,$00,$f0,$f8,$f0,$64,$9e,$be ; [$a812]
                                                                        ; byte
 
@@ -9177,6 +10053,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒█▒█▒▒▒▒
 ; █░█░█░██
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_04:             ; [$a822]
     db $15,$7b,$ff,$38,$c7,$35,$50,$ff,$7f,$ff,$ff,$c7,$38,$fe,$ff,$ab ; [$a822]
                                                                        ; byte
 
@@ -9191,6 +10068,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░▒▒▒░▒█░
 ; ░░░█▒░█░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_05:             ; [$a832]
     db $53,$e7,$7c,$1f,$60,$34,$8b,$f7,$ac,$d8,$e3,$ff,$df,$ef,$76,$1a ; [$a832]
                                                                        ; byte
 
@@ -9205,6 +10083,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █▒░▒█▒░░
 ; ▒█▒░▒▒░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_06:             ; [$a842]
     db $dd,$ca,$c9,$ae,$6f,$d6,$ab,$53,$e3,$77,$f6,$f1,$b0,$b9,$dc,$ec ; [$a842]
                                                                        ; byte
 
@@ -9219,6 +10098,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░░...
 ; ░░......
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_07:             ; [$a852]
     db $51,$a7,$4f,$1f,$fe,$fe,$f8,$c0,$be,$78,$f0,$e0,$00,$00,$00,$00 ; [$a852]
                                                                        ; byte
 
@@ -9233,6 +10113,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ....░░▒░
 ; .▒.▒..█.
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_08:             ; [$a862]
     db $af,$01,$00,$00,$67,$23,$0d,$02,$a9,$a9,$01,$00,$18,$1c,$02,$52 ; [$a862]
                                                                        ; byte
 
@@ -9247,6 +10128,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░█▒░░
 ; ..░▒█▒░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_09:             ; [$a872]
     db $f4,$2a,$1b,$1b,$fb,$3b,$fb,$2b,$1b,$1d,$0c,$0c,$0c,$cc,$0c,$1c ; [$a872]
                                                                        ; byte
 
@@ -9261,6 +10143,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █▒▒██▒░▒
 ; ▒████▒░▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_10:             ; [$a882]
     db $4d,$b3,$c4,$fd,$eb,$6b,$9a,$7a,$f3,$7f,$3f,$0e,$1c,$9c,$fd,$fd ; [$a882]
                                                                        ; byte
 
@@ -9275,6 +10158,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒██▒▒░░░
 ; ▒███▒░░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_11:             ; [$a892]
     db $c0,$04,$fa,$9c,$0f,$67,$67,$77,$f0,$f8,$04,$62,$f0,$f8,$f8,$f8 ; [$a892]
                                                                        ; byte
 
@@ -9289,6 +10173,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; .░░░░░░░
 ; ...░░░░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_12:             ; [$a8a2]
     db $52,$5a,$7f,$86,$ba,$c0,$7f,$1f,$53,$73,$52,$79,$7f,$3f,$00,$00 ; [$a8a2]
                                                                        ; byte
 
@@ -9303,6 +10188,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░...░▒
 ; ░.....░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_13:             ; [$a8b2]
     db $2b,$53,$96,$26,$8d,$79,$e2,$83,$1c,$3c,$78,$f8,$f0,$80,$01,$00 ; [$a8b2]
                                                                        ; byte
 
@@ -9317,6 +10203,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █░░░░░░░
 ; ▒█▒███▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_14:             ; [$a8c2]
     db $32,$87,$f9,$f5,$bd,$c3,$ff,$5d,$fd,$78,$06,$0e,$7e,$3c,$80,$fe ; [$a8c2]
                                                                        ; byte
 
@@ -9331,6 +10218,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒▒██▒░▒░
 ; ▒▒██▒░▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_15:             ; [$a8d2]
     db $37,$35,$37,$35,$35,$37,$35,$35,$f8,$fa,$f8,$fa,$fa,$f8,$fa,$fa ; [$a8d2]
                                                                        ; byte
 
@@ -9345,6 +10233,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ██▒█████
 ; .▒▒▒▒█▒▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_16:             ; [$a8e2]
     db $00,$6c,$1f,$1b,$07,$0f,$df,$04,$1c,$7f,$3f,$07,$03,$7f,$ff,$7f ; [$a8e2]
                                                                        ; byte
 
@@ -9359,6 +10248,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒████▒░░
 ; ░██████▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_17:             ; [$a8f2]
     db $06,$1c,$a7,$f7,$f8,$f7,$7b,$fe,$01,$03,$d8,$cf,$e7,$f8,$fc,$7f ; [$a8f2]
                                                                        ; byte
 
@@ -9373,6 +10263,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░▒▒▒▒░█
 ; ▒▒▒██▒▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_18:             ; [$a902]
     db $c1,$bf,$9d,$c3,$7e,$fd,$c3,$19,$3e,$c0,$7e,$3c,$81,$03,$3d,$fe ; [$a902]
                                                                        ; byte
 
@@ -9387,6 +10278,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █▒▒░▒░░.
 ; ██▒░░░░.
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_19:             ; [$a912]
     db $37,$35,$6d,$5f,$b3,$aa,$96,$de,$f8,$fa,$f2,$e4,$cc,$dc,$e8,$e0 ; [$a912]
                                                                        ; byte
 
@@ -9401,6 +10293,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; .▒▒████▒
 ; ..▒▒▒▒▒▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_20:             ; [$a922]
     db $1e,$1f,$df,$00,$07,$5f,$1e,$00,$01,$7f,$fe,$7f,$19,$ff,$7f,$3f ; [$a922]
                                                                        ; byte
 
@@ -9415,6 +10308,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒▒▒.....
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_21:             ; [$a932]
     db $ff,$df,$b1,$7c,$e3,$8f,$00,$00,$ff,$fe,$ff,$ff,$fc,$f0,$e0,$00 ; [$a932]
                                                                        ; byte
 
@@ -9429,6 +10323,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ..░░░░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_22:             ; [$a942]
     db $e4,$9a,$6d,$c2,$fc,$ff,$3f,$00,$ff,$e7,$93,$3d,$03,$00,$00,$00 ; [$a942]
                                                                        ; byte
 
@@ -9443,6 +10338,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░....
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_23:             ; [$a952]
     db $d6,$d6,$94,$3c,$7c,$f8,$f0,$00,$68,$68,$e8,$c0,$80,$00,$00,$00 ; [$a952]
                                                                        ; byte
 
@@ -9457,6 +10353,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒░░░░▒█▒
 ; ░░█▒░░░█
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_24:             ; [$a962]
     db $01,$3e,$42,$bd,$f8,$ee,$7a,$ef,$00,$01,$3d,$7e,$7f,$9f,$87,$31 ; [$a962]
                                                                        ; byte
 
@@ -9471,6 +10368,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █░░░░▒██
 ; █▒░▒░░▒█
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_25:             ; [$a972]
     db $03,$7e,$fb,$4d,$8e,$47,$fb,$ad,$fc,$ff,$fc,$fe,$7f,$bf,$87,$d3 ; [$a972]
                                                                        ; byte
 
@@ -9485,6 +10383,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒░▒▒▒▒▒░
 ; ▒░▒██▒▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_26:             ; [$a982]
     db $f0,$88,$64,$f6,$e7,$4b,$41,$59,$00,$70,$f8,$f8,$78,$b4,$be,$be ; [$a982]
                                                                        ; byte
 
@@ -9499,6 +10398,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░█▒▒░
 ; ▒█▒▒░░░▒
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_27:             ; [$a992]
     db $53,$ae,$7b,$7f,$30,$8f,$f9,$4e,$3c,$71,$ff,$ff,$ff,$70,$0e,$f1 ; [$a992]
                                                                        ; byte
 
@@ -9513,6 +10413,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; █▒░▒██▒▒
 ; ▒█▒░▒█▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_28:             ; [$a9a2]
     db $dd,$cb,$ee,$a5,$52,$d9,$ac,$55,$e3,$77,$f7,$fa,$bd,$be,$df,$ee ; [$a9a2]
                                                                        ; byte
 
@@ -9527,6 +10428,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░░░..
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_29:             ; [$a9b2]
     db $5d,$79,$b3,$47,$0f,$7e,$fc,$e0,$be,$be,$7c,$f8,$f0,$80,$00,$00 ; [$a9b2]
                                                                        ; byte
 
@@ -9541,6 +10443,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; .█.█░░█░
 ; .▒.▒..█.
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_30:             ; [$a9c2]
     db $ff,$ab,$81,$00,$67,$25,$5f,$02,$ab,$a9,$29,$01,$18,$1a,$52,$52 ; [$a9c2]
                                                                        ; byte
 
@@ -9555,6 +10458,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ███▒█▒░░
 ; ██▒█▒▒░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_31:             ; [$a9d2]
     db $c0,$04,$fa,$8c,$77,$fb,$eb,$d3,$f0,$f8,$04,$72,$f8,$fc,$fc,$fc ; [$a9d2]
                                                                        ; byte
 
@@ -9569,6 +10473,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_32:             ; [$a9e2]
     db $7f,$f9,$86,$c1,$76,$3f,$00,$00,$52,$56,$7f,$3f,$09,$00,$00,$00 ; [$a9e2]
                                                                        ; byte
 
@@ -9583,6 +10488,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ......░▒
 ; ......░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_33:             ; [$a9f2]
     db $26,$66,$4e,$1c,$f9,$e1,$02,$03,$18,$38,$f0,$e0,$00,$00,$01,$00 ; [$a9f2]
                                                                        ; byte
 
@@ -9597,6 +10503,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒▒██▒░▒░
 ; ▒▒██▒░▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_34:             ; [$aa02]
     db $b7,$75,$77,$75,$35,$77,$35,$35,$f8,$fa,$f8,$fa,$fa,$f8,$fa,$fa ; [$aa02]
                                                                        ; byte
 
@@ -9611,6 +10518,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ..▒█████
 ; ..░▒▒▒▒█
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_35:             ; [$aa12]
     db $00,$0e,$19,$17,$1d,$20,$1f,$21,$00,$00,$0e,$1f,$03,$1f,$3f,$1f ; [$aa12]
                                                                        ; byte
 
@@ -9625,6 +10533,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ....░░░░
 ; .....░░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_36:             ; [$aa22]
     db $1e,$31,$3e,$20,$33,$1c,$0f,$07,$01,$0f,$1f,$1f,$0f,$03,$00,$00 ; [$aa22]
                                                                        ; byte
 
@@ -9639,6 +10548,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░░░..
 ; ░░░░....
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_37:             ; [$aa32]
     db $c7,$09,$73,$8c,$1b,$3f,$fc,$f0,$ff,$fe,$fd,$f3,$e4,$c0,$00,$00 ; [$aa32]
                                                                        ; byte
 
@@ -9653,6 +10563,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒▒▒█████
 ; ░░░▒▒▒██
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_38:             ; [$aa42]
     db $01,$3e,$42,$99,$bc,$7e,$1f,$e3,$00,$01,$3d,$7e,$7f,$ff,$ff,$1f ; [$aa42]
                                                                        ; byte
 
@@ -9667,6 +10578,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░▒▒▒▒▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_39:             ; [$aa52]
     db $13,$0c,$22,$3f,$7f,$3c,$81,$ff,$3c,$73,$7f,$ff,$ff,$ff,$7e,$00 ; [$aa52]
                                                                        ; byte
 
@@ -9681,6 +10593,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒█░█░░█░
 ; ▒▒▒▒▒▒▒█
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_40:             ; [$aa62]
     db $54,$ab,$ab,$b5,$5b,$7b,$7f,$01,$ab,$ab,$ad,$0b,$56,$56,$d2,$ff ; [$aa62]
                                                                        ; byte
 
@@ -9695,6 +10608,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ▒█▒▒▒░░.
 ; █▒▒▒░░░.
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_41:             ; [$aa72]
     db $ab,$eb,$eb,$ab,$53,$a7,$46,$8e,$1c,$1c,$1c,$1c,$3c,$78,$f8,$f0 ; [$aa72]
                                                                        ; byte
 
@@ -9709,6 +10623,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_42:             ; [$aa82]
     db $be,$40,$3f,$00,$00,$00,$00,$00,$7f,$3f,$00,$00,$00,$00,$00,$00 ; [$aa82]
                                                                        ; byte
 
@@ -9723,6 +10638,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ......░▒
 ; ......░░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_43:             ; [$aa92]
     db $3c,$f0,$80,$00,$01,$01,$02,$03,$c0,$00,$00,$00,$00,$00,$01,$00 ; [$aa92]
                                                                        ; byte
 
@@ -9737,6 +10653,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ███▒░░░.
 ; ███▒░░░.
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_44:             ; [$aaa2]
     db $37,$35,$65,$6f,$eb,$ca,$ee,$ee,$f8,$fa,$fa,$f4,$f4,$f4,$f0,$f0 ; [$aaa2]
                                                                        ; byte
 
@@ -9751,6 +10668,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ..░░░░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_45:             ; [$aab2]
     db $ee,$97,$69,$c0,$fc,$ff,$3f,$00,$ff,$ef,$97,$3f,$03,$00,$00,$00 ; [$aab2]
                                                                        ; byte
 
@@ -9765,6 +10683,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░....
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_46:             ; [$aac2]
     db $e6,$d6,$94,$3c,$7c,$f8,$f0,$00,$f8,$e8,$e8,$c0,$80,$00,$00,$00 ; [$aac2]
                                                                        ; byte
 
@@ -9779,6 +10698,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ███▒▒▒▒▒
 ; █████▒██
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_47:             ; [$aad2]
     db $06,$1c,$a7,$f7,$b8,$ce,$e0,$fb,$01,$03,$18,$0f,$c7,$f1,$ff,$ff ; [$aad2]
                                                                        ; byte
 
@@ -9793,6 +10713,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ███▒▒▒░█
 ; █████▒▒░
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_48:             ; [$aae2]
     db $c1,$bf,$9d,$c3,$fe,$0d,$e3,$f9,$3e,$c0,$7e,$3c,$01,$f3,$fd,$fe ; [$aae2]
                                                                        ; byte
 
@@ -9807,6 +10728,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ░░░░░░..
 ; ░.......
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_49:             ; [$aaf2]
     db $c7,$0e,$1b,$66,$0b,$3f,$fc,$80,$ff,$ff,$fd,$fb,$f4,$c0,$00,$00 ; [$aaf2]
                                                                        ; byte
 
@@ -9821,9 +10743,17 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; ..░░░░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORADOHNA_50:             ; [$ab02]
     db $fc,$c2,$19,$f6,$fc,$ff,$3f,$00,$ff,$ff,$e7,$09,$03,$00,$00,$00 ; [$ab02]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Borabohra
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8060]
+;============================================================================
 
 ;
 ; ....░▒▒▒
@@ -9838,7 +10768,7 @@ PPUTile16_PRG6__a7e2:                       ; [$a7e2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8060]
 ;
-PPUTile16_PRG6__ab12:                       ; [$ab12]
+SPRITE_TILES_BOSS_BORABOHRA_00:             ; [$ab12]
     db $08,$26,$59,$b7,$bb,$cd,$72,$7d,$07,$1f,$3e,$78,$7c,$3e,$0f,$53 ; [$ab12]
                                                                        ; byte
 
@@ -9853,6 +10783,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒▒▒█████
 ; ████▒███
 ;
+SPRITE_TILES_BOSS_BORABOHRA_01:             ; [$ab22]
     db $3f,$03,$f3,$fe,$f9,$e7,$1f,$f7,$c0,$fc,$0c,$81,$07,$1f,$ff,$ff ; [$ab22]
                                                                        ; byte
 
@@ -9867,6 +10798,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ████████
 ; █████▒██
 ;
+SPRITE_TILES_BOSS_BORABOHRA_02:             ; [$ab32]
     db $00,$f0,$1e,$e7,$f9,$ce,$ff,$fb,$00,$00,$e0,$f8,$fe,$ff,$ff,$ff ; [$ab32]
                                                                        ; byte
 
@@ -9881,6 +10813,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; █▒░░░...
 ; ██▒░░░..
 ;
+SPRITE_TILES_BOSS_BORABOHRA_03:             ; [$ab42]
     db $00,$00,$00,$80,$e0,$70,$b8,$dc,$00,$00,$00,$00,$00,$80,$c0,$e0 ; [$ab42]
                                                                        ; byte
 
@@ -9895,6 +10828,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ..░░░░▒▒
 ; ...▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_BORABOHRA_04:             ; [$ab52]
     db $7e,$1f,$1f,$0f,$1f,$1e,$3c,$01,$55,$54,$05,$01,$10,$15,$03,$1e ; [$ab52]
                                                                        ; byte
 
@@ -9909,6 +10843,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒░░▒▒███
 ; ░░░▒▒███
 ;
+SPRITE_TILES_BOSS_BORABOHRA_05:             ; [$ab62]
     db $eb,$6b,$6b,$58,$73,$b0,$67,$e7,$f7,$f7,$f7,$e7,$cc,$cf,$9f,$1f ; [$ab62]
                                                                        ; byte
 
@@ -9923,6 +10858,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░░░░░░▒▒
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_BOSS_BORABOHRA_06:             ; [$ab72]
     db $fb,$fb,$f2,$e6,$39,$87,$fc,$7f,$ff,$ff,$ff,$ff,$fe,$78,$03,$80 ; [$ab72]
                                                                        ; byte
 
@@ -9937,6 +10873,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒░░░░...
 ; ░░......
 ;
+SPRITE_TILES_BOSS_BORABOHRA_07:             ; [$ab82]
     db $ec,$6e,$ae,$ae,$ae,$1c,$78,$c0,$f0,$f0,$70,$70,$70,$e0,$80,$00 ; [$ab82]
                                                                        ; byte
 
@@ -9951,6 +10888,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; .░▒██░░░
 ; .░▒████▒
 ;
+SPRITE_TILES_BOSS_BORABOHRA_08:             ; [$ab92]
     db $04,$13,$2f,$5f,$5c,$5b,$5f,$5e,$03,$0f,$1f,$3f,$3f,$3c,$38,$3f ; [$ab92]
                                                                        ; byte
 
@@ -9965,6 +10903,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░░░░▒▒██
 ; ▒▒▒▒█▒██
 ;
+SPRITE_TILES_BOSS_BORABOHRA_09:             ; [$aba2]
     db $1f,$e1,$f5,$0b,$fe,$fd,$f3,$0b,$e0,$fe,$fe,$f4,$41,$03,$0f,$ff ; [$aba2]
                                                                        ; byte
 
@@ -9979,6 +10918,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ████████
 ; ██████▒█
 ;
+SPRITE_TILES_BOSS_BORABOHRA_10:             ; [$abb2]
     db $80,$f8,$8f,$73,$fc,$e7,$ff,$fd,$00,$00,$70,$fc,$ff,$ff,$ff,$ff ; [$abb2]
                                                                        ; byte
 
@@ -9993,6 +10933,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ██▒░░░..
 ; ███▒░░░.
 ;
+SPRITE_TILES_BOSS_BORABOHRA_11:             ; [$abc2]
     db $00,$00,$00,$c0,$f0,$38,$dc,$ee,$00,$00,$00,$00,$00,$c0,$e0,$f0 ; [$abc2]
                                                                        ; byte
 
@@ -10007,6 +10948,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ....░▒▒▒
 ; .....░░░
 ;
+SPRITE_TILES_BOSS_BORABOHRA_12:             ; [$abd2]
     db $5f,$27,$19,$06,$09,$17,$08,$07,$3f,$1f,$07,$19,$1e,$0f,$07,$00 ; [$abd2]
                                                                        ; byte
 
@@ -10021,6 +10963,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒▒░░▒▒██
 ; ░░░░▒▒██
 ;
+SPRITE_TILES_BOSS_BORABOHRA_13:             ; [$abe2]
     db $f5,$cd,$ad,$6c,$99,$d8,$33,$f3,$fb,$f3,$d3,$93,$66,$e7,$cf,$0f ; [$abe2]
                                                                        ; byte
 
@@ -10035,6 +10978,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒░░░░░░▒
 ; █▒░░░░░░
 ;
+SPRITE_TILES_BOSS_BORABOHRA_14:             ; [$abf2]
     db $fd,$fd,$f9,$73,$1c,$c3,$7e,$bf,$ff,$ff,$ff,$ff,$ff,$3c,$81,$c0 ; [$abf2]
                                                                        ; byte
 
@@ -10049,6 +10993,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒▒░░░░..
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_BORABOHRA_15:             ; [$ac02]
     db $f6,$b7,$57,$57,$d7,$8e,$3c,$e0,$f8,$f8,$b8,$b8,$38,$70,$c0,$00 ; [$ac02]
                                                                        ; byte
 
@@ -10063,6 +11008,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░░▒▒░▒██
 ; ░░▒█▒░▒█
 ;
+SPRITE_TILES_BOSS_BORABOHRA_16:             ; [$ac12]
     db $25,$64,$69,$eb,$d3,$eb,$cb,$d5,$1b,$1b,$17,$17,$2f,$17,$37,$3b ; [$ac12]
                                                                        ; byte
 
@@ -10077,6 +11023,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ██▒▒░░░.
 ; █▒█▒░░..
 ;
+SPRITE_TILES_BOSS_BORABOHRA_17:             ; [$ac22]
     db $0f,$e7,$f7,$e6,$f6,$e6,$ce,$ac,$f0,$f8,$f8,$f8,$f8,$f8,$f0,$f0 ; [$ac22]
                                                                        ; byte
 
@@ -10091,6 +11038,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ...░▒███
 ; ....░▒██
 ;
+SPRITE_TILES_BOSS_BORABOHRA_18:             ; [$ac32]
     db $d6,$db,$dc,$6f,$67,$37,$17,$0b,$39,$3c,$3f,$1f,$1f,$0f,$0f,$07 ; [$ac32]
                                                                        ; byte
 
@@ -10105,6 +11053,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ████▒░..
 ; █████▒░.
 ;
+SPRITE_TILES_BOSS_BORABOHRA_19:             ; [$ac42]
     db $ec,$58,$18,$98,$d8,$ec,$f4,$fa,$f0,$e0,$e0,$e0,$e0,$f0,$f8,$fc ; [$ac42]
                                                                        ; byte
 
@@ -10119,6 +11068,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░▒▒░....
 ; ░▒█▒░...
 ;
+SPRITE_TILES_BOSS_BORABOHRA_20:             ; [$ac52]
     db $2b,$65,$62,$a1,$a0,$80,$90,$a8,$07,$03,$01,$40,$40,$60,$60,$70 ; [$ac52]
                                                                        ; byte
 
@@ -10133,6 +11083,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; .░░▒██▒▒
 ; .░░▒█▒█▒
 ;
+SPRITE_TILES_BOSS_BORABOHRA_21:             ; [$ac62]
     db $ca,$f0,$79,$38,$dc,$5c,$6c,$6a,$fc,$fe,$fe,$ff,$3f,$3f,$1f,$1f ; [$ac62]
                                                                        ; byte
 
@@ -10147,6 +11098,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ...░░▒▒▒
 ; .....░░░
 ;
+SPRITE_TILES_BOSS_BORABOHRA_22:             ; [$ac72]
     db $b4,$33,$59,$5c,$2f,$27,$18,$07,$78,$7c,$3e,$3f,$1f,$1f,$07,$00 ; [$ac72]
                                                                        ; byte
 
@@ -10161,6 +11113,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒▒▒▒░...
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_BORABOHRA_23:             ; [$ac82]
     db $6e,$ee,$dd,$3c,$fa,$f4,$08,$e0,$1f,$1f,$3e,$fe,$fc,$f8,$f0,$00 ; [$ac82]
                                                                        ; byte
 
@@ -10175,6 +11128,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░▒██████
 ; ░▒██████
 ;
+SPRITE_TILES_BOSS_BORABOHRA_24:             ; [$ac92]
     db $5f,$df,$bf,$bf,$bf,$bf,$bf,$bf,$3f,$3f,$7f,$7f,$7f,$7f,$7f,$7f ; [$ac92]
                                                                        ; byte
 
@@ -10189,6 +11143,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ▒░░░░...
 ; █▒░░░...
 ;
+SPRITE_TILES_BOSS_BORABOHRA_25:             ; [$aca2]
     db $b0,$b0,$60,$60,$70,$70,$78,$b8,$c0,$c0,$80,$80,$80,$80,$80,$c0 ; [$aca2]
                                                                        ; byte
 
@@ -10203,6 +11158,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; .....░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_BORABOHRA_26:             ; [$acb2]
     db $bf,$5f,$5f,$6f,$33,$1c,$07,$00,$7f,$3f,$3f,$1f,$0f,$03,$00,$00 ; [$acb2]
                                                                        ; byte
 
@@ -10217,9 +11173,17 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; ░░░░░░░.
 ; ░░░░░...
 ;
+SPRITE_TILES_BOSS_BORABOHRA_27:             ; [$acc2]
     db $dc,$2e,$97,$db,$db,$07,$fe,$f8,$e0,$f0,$f8,$fc,$fc,$f8,$00,$00 ; [$acc2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Pakukame
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8062]
+;============================================================================
 
 ;
 ; ........
@@ -10234,7 +11198,7 @@ PPUTile16_PRG6__ab12:                       ; [$ab12]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8062]
 ;
-PPUTile16_PRG6__acd2:                       ; [$acd2]
+SPRITE_TILES_BOSS_PAKUKAME_00:              ; [$acd2]
     db $00,$00,$00,$07,$0e,$16,$26,$27,$00,$00,$00,$00,$01,$09,$19,$18 ; [$acd2]
                                                                        ; byte
 
@@ -10249,6 +11213,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ▒█░░▒█▒▒
 ; ▒▒░░▒▒▒░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_01:              ; [$ace2]
     db $0e,$32,$4a,$49,$4c,$e5,$74,$31,$00,$4c,$bc,$be,$bf,$9e,$cf,$ce ; [$ace2]
                                                                        ; byte
 
@@ -10263,6 +11228,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ░▒▒░░▒▒░
 ; .░▒▒░▒░░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_02:              ; [$acf2]
     db $6e,$52,$96,$9a,$aa,$a1,$99,$4b,$11,$2d,$6d,$6d,$5d,$5e,$66,$34 ; [$acf2]
                                                                        ; byte
 
@@ -10277,6 +11243,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ░▒▒░▒░░░
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_03:              ; [$ad02]
     db $b8,$65,$ab,$aa,$21,$23,$97,$7f,$47,$9a,$dc,$dd,$de,$dc,$68,$80 ; [$ad02]
                                                                        ; byte
 
@@ -10291,6 +11258,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; .░▒░░▒█░
 ; .░▒░░░▒▒
 ;
+SPRITE_TILES_BOSS_PAKUKAME_04:              ; [$ad12]
     db $07,$1f,$29,$55,$57,$75,$5b,$5c,$00,$00,$16,$2e,$2c,$2e,$26,$23 ; [$ad12]
                                                                        ; byte
 
@@ -10305,6 +11273,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ▒█▒░░█▒░
 ; ░▒▒░░▒▒░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_05:              ; [$ad22]
     db $fe,$ce,$8d,$5d,$5d,$5d,$5d,$99,$01,$33,$72,$e6,$e6,$e6,$e6,$66 ; [$ad22]
                                                                        ; byte
 
@@ -10319,6 +11288,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; .░░█▒▒░▒
 ; ░▒▒▒░░▒█
 ;
+SPRITE_TILES_BOSS_PAKUKAME_06:              ; [$ad32]
     db $46,$22,$42,$02,$44,$1d,$72,$8d,$29,$49,$09,$49,$03,$06,$1d,$73 ; [$ad32]
                                                                        ; byte
 
@@ -10333,6 +11303,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; █▒░░▒▒░▒
 ; ▒░▒▒▒░▒▒
 ;
+SPRITE_TILES_BOSS_PAKUKAME_07:              ; [$ad42]
     db $8d,$a9,$ad,$89,$99,$5b,$b2,$44,$76,$76,$76,$76,$66,$ec,$cd,$bb ; [$ad42]
                                                                        ; byte
 
@@ -10347,6 +11318,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ..░▒░▒░▒
 ; ..▒▒░░▒░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_08:              ; [$ad52]
     db $00,$03,$06,$0a,$12,$16,$2a,$0d,$00,$00,$01,$05,$0d,$0d,$15,$32 ; [$ad52]
                                                                        ; byte
 
@@ -10361,6 +11333,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ▒█░░▒░░░
 ; ▒▒░▒░░..
 ;
+SPRITE_TILES_BOSS_PAKUKAME_09:              ; [$ad62]
     db $80,$c0,$f6,$a8,$d0,$c8,$77,$2c,$00,$00,$08,$70,$a0,$b0,$c8,$d0 ; [$ad62]
                                                                        ; byte
 
@@ -10375,6 +11348,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ..░░▒▒░▒
 ; ....░░▒░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_10:              ; [$ad72]
     db $6e,$52,$d6,$d2,$69,$64,$32,$0d,$11,$2d,$2d,$2d,$16,$1b,$0d,$02 ; [$ad72]
                                                                        ; byte
 
@@ -10389,6 +11363,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ░░░▒▒░░░
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_11:              ; [$ad82]
     db $b8,$67,$aa,$72,$1b,$8e,$e7,$7f,$44,$98,$dc,$cc,$e4,$70,$18,$80 ; [$ad82]
                                                                        ; byte
 
@@ -10403,6 +11378,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; .░░░░▒░░
 ; ....░░░░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_12:              ; [$ad92]
     db $66,$59,$95,$b1,$a9,$e4,$7b,$0f,$11,$26,$6e,$4e,$56,$1b,$04,$00 ; [$ad92]
                                                                        ; byte
 
@@ -10417,9 +11393,17 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; ▒▒▒░░░▒░
 ; ░▒▒▒▒░▒░
 ;
+SPRITE_TILES_BOSS_PAKUKAME_13:              ; [$ada2]
     db $a0,$00,$ea,$b6,$a8,$62,$1d,$85,$40,$00,$15,$c8,$7e,$9d,$e2,$7a ; [$ada2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Zorugeriru
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8064]
+;============================================================================
 
 ;
 ; ........
@@ -10434,7 +11418,7 @@ PPUTile16_PRG6__acd2:                       ; [$acd2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8064]
 ;
-PPUTile16_PRG6__adb2:                       ; [$adb2]
+SPRITE_TILES_BOSS_ZORUGERIRU_00:            ; [$adb2]
     db $00,$03,$0d,$17,$2f,$5f,$bf,$fe,$00,$00,$03,$08,$14,$30,$71,$7f ; [$adb2]
                                                                        ; byte
 
@@ -10449,6 +11433,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; █▒▒░░...
 ; ▒░░░....
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_01:            ; [$adc2]
     db $00,$c0,$a0,$d0,$e8,$e8,$98,$70,$00,$00,$c0,$e0,$f0,$f0,$e0,$80 ; [$adc2]
                                                                        ; byte
 
@@ -10463,6 +11448,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ......░░
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_02:            ; [$add2]
     db $c1,$bf,$41,$3d,$41,$3f,$03,$02,$7e,$40,$02,$7e,$3e,$00,$00,$01 ; [$add2]
                                                                        ; byte
 
@@ -10477,6 +11463,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒██▒░░..
 ; ███▒░░..
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_03:            ; [$ade2]
     db $f8,$cc,$cc,$fc,$6c,$6c,$6c,$ec,$60,$f0,$f0,$00,$f0,$f0,$f0,$f0 ; [$ade2]
                                                                        ; byte
 
@@ -10491,6 +11478,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .....██▒
 ; .....█▒▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_04:            ; [$adf2]
     db $7b,$be,$37,$8d,$7a,$02,$06,$04,$07,$7f,$f8,$73,$07,$07,$07,$07 ; [$adf2]
                                                                        ; byte
 
@@ -10505,6 +11493,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░░░░░░░.
 ; ░░░░░░..
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_05:            ; [$ae02]
     db $cc,$1e,$fa,$f9,$21,$23,$fe,$fc,$f0,$e0,$0c,$be,$de,$dc,$00,$00 ; [$ae02]
                                                                        ; byte
 
@@ -10519,6 +11508,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_06:            ; [$ae12]
     db $74,$bd,$8d,$61,$bf,$60,$80,$00,$07,$7e,$7e,$1e,$c0,$80,$00,$00 ; [$ae12]
                                                                        ; byte
 
@@ -10533,6 +11523,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .░█▒▒▒░.
 ; .░▒▒░░..
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_07:            ; [$ae22]
     db $c4,$e4,$34,$12,$0a,$32,$62,$4c,$38,$38,$18,$1c,$1c,$1c,$3c,$30 ; [$ae22]
                                                                        ; byte
 
@@ -10547,6 +11538,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .▒█▒▒▒██
 ; .░▒░░░▒▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_08:            ; [$ae32]
     db $03,$0f,$1f,$3f,$5f,$3f,$23,$5c,$00,$03,$0c,$1a,$38,$7c,$7f,$23 ; [$ae32]
                                                                        ; byte
 
@@ -10561,6 +11553,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒░▒██░..
 ; ░▒██▒▒░.
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_09:            ; [$ae42]
     db $e0,$d0,$e8,$f4,$74,$fc,$5c,$b2,$00,$e0,$70,$78,$f8,$c0,$b8,$7c ; [$ae42]
                                                                        ; byte
 
@@ -10575,6 +11568,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ...▒▒▒▒▒
 ; ..█▒████
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_10:            ; [$ae52]
     db $03,$0c,$03,$1f,$1f,$1f,$00,$2f,$00,$0f,$03,$1e,$00,$00,$1f,$3f ; [$ae52]
                                                                        ; byte
 
@@ -10589,6 +11583,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ██▒▒░░░░
 ; █▒▒░░▒░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_11:            ; [$ae62]
     db $b2,$fe,$b6,$a6,$a6,$6e,$cf,$9b,$7c,$00,$78,$78,$78,$f0,$f0,$e4 ; [$ae62]
                                                                        ; byte
 
@@ -10603,6 +11598,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .....██▒
 ; .....█▒▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_12:            ; [$ae72]
     db $bc,$01,$ff,$02,$05,$03,$06,$04,$df,$fe,$00,$01,$03,$07,$07,$07 ; [$ae72]
                                                                        ; byte
 
@@ -10617,6 +11613,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒░░░░░..
 ; ░░░▒░░..
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_13:            ; [$ae82]
     db $31,$f9,$f9,$33,$96,$3c,$7c,$ec,$ce,$1e,$3e,$dc,$e8,$c0,$80,$10 ; [$ae82]
                                                                        ; byte
 
@@ -10631,6 +11628,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░░░.....
 ; ........
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_14:            ; [$ae92]
     db $04,$04,$0d,$3d,$81,$de,$e0,$00,$07,$0f,$3e,$7e,$7e,$e0,$00,$00 ; [$ae92]
                                                                        ; byte
 
@@ -10645,6 +11643,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .░█▒▒░..
 ; .░▒▒░...
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_15:            ; [$aea2]
     db $94,$94,$36,$3a,$1a,$32,$64,$48,$38,$38,$18,$1c,$0c,$1c,$38,$30 ; [$aea2]
                                                                        ; byte
 
@@ -10659,6 +11658,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒▒█████
 ; .░░░▒██▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_16:            ; [$aeb2]
     db $00,$0f,$3f,$7f,$ff,$fe,$9f,$76,$00,$00,$0f,$38,$74,$f1,$7f,$0f ; [$aeb2]
                                                                        ; byte
 
@@ -10673,6 +11673,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; █░░░░...
 ; ░▒▒░░...
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_17:            ; [$aec2]
     db $00,$80,$80,$d0,$e8,$c8,$f8,$98,$00,$00,$c0,$e0,$f0,$f0,$80,$60 ; [$aec2]
                                                                        ; byte
 
@@ -10687,6 +11688,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ..░░░░░░
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_18:            ; [$aed2]
     db $09,$37,$c5,$05,$39,$33,$3f,$02,$06,$38,$da,$06,$0e,$7c,$00,$01 ; [$aed2]
                                                                        ; byte
 
@@ -10701,6 +11703,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒███▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_19:            ; [$aee2]
     db $01,$0d,$1e,$3e,$3e,$7c,$b9,$ff,$00,$03,$0b,$13,$03,$07,$7e,$00 ; [$aee2]
                                                                        ; byte
 
@@ -10715,6 +11718,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ...░░░██
 ; .▒▒█████
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_20:            ; [$aef2]
     db $79,$81,$43,$3e,$05,$07,$1f,$1f,$fe,$7e,$3c,$01,$03,$03,$03,$7f ; [$aef2]
                                                                        ; byte
 
@@ -10729,6 +11733,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒▒░░░█▒░
 ; █▒▒▒▒▒░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_21:            ; [$af02]
     db $b1,$a1,$c2,$64,$3d,$22,$3d,$83,$7e,$7e,$3c,$98,$c1,$c3,$c6,$fc ; [$af02]
                                                                        ; byte
 
@@ -10743,6 +11748,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒██▒▒▒░
 ; ░▒██▒▒▒░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_22:            ; [$af12]
     db $90,$dc,$d3,$f8,$ff,$da,$b1,$b1,$60,$6c,$6f,$07,$00,$3c,$7e,$7e ; [$af12]
                                                                        ; byte
 
@@ -10757,6 +11763,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒███▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_23:            ; [$af22]
     db $01,$0d,$1a,$3a,$3a,$44,$b9,$ff,$00,$0f,$1f,$3f,$3f,$3f,$7e,$00 ; [$af22]
                                                                        ; byte
 
@@ -10771,6 +11778,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒██▒▒▒░
 ; ░▒██▒▒▒░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_24:            ; [$af32]
     db $9f,$d0,$df,$f8,$fe,$db,$b1,$b1,$6f,$6f,$60,$00,$00,$3c,$7e,$7e ; [$af32]
                                                                        ; byte
 
@@ -10785,6 +11793,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒▒░░░███
 ; █▒▒▒▒▒░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_25:            ; [$af42]
     db $b1,$a1,$c2,$64,$3c,$20,$3f,$83,$7e,$7e,$3c,$98,$c0,$c1,$c7,$fc ; [$af42]
                                                                        ; byte
 
@@ -10799,6 +11808,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░▒█▒█▒▒█
 ; ░▒▒█▒█▒▒
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_26:            ; [$af52]
     db $00,$15,$2e,$5d,$5e,$be,$a9,$94,$07,$0f,$1f,$3f,$3f,$7f,$7f,$7f ; [$af52]
                                                                        ; byte
 
@@ -10813,6 +11823,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒▒▒░▒░░░
 ; █▒░▒░▒░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_27:            ; [$af62]
     db $00,$88,$44,$0a,$46,$8b,$17,$ab,$e0,$f0,$f8,$f4,$f8,$f4,$e8,$d4 ; [$af62]
                                                                        ; byte
 
@@ -10827,6 +11838,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ...░░░░░
 ; .....░░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_28:            ; [$af72]
     db $a2,$88,$94,$40,$50,$2a,$1f,$07,$7f,$7f,$7f,$3f,$2f,$15,$00,$00 ; [$af72]
                                                                        ; byte
 
@@ -10841,6 +11853,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ▒░░░░...
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_29:            ; [$af82]
     db $17,$0f,$57,$2e,$5e,$bc,$78,$e0,$e8,$f0,$a8,$d0,$a0,$40,$80,$00 ; [$af82]
                                                                        ; byte
 
@@ -10855,6 +11868,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; .░▒▒▒▒░░
 ; .░░░░░░░
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_30:            ; [$af92]
     db $07,$1c,$3d,$34,$29,$11,$43,$7f,$00,$1f,$3e,$7f,$7e,$7e,$3c,$00 ; [$af92]
                                                                        ; byte
 
@@ -10869,6 +11883,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░██░▒░░.
 ; █░░░░░..
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_31:            ; [$afa2]
     db $c0,$68,$d4,$ea,$c6,$ca,$f6,$fc,$20,$f0,$f8,$f4,$78,$f4,$68,$80 ; [$afa2]
                                                                        ; byte
 
@@ -10883,6 +11898,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ...░░▒░░
 ; ....░░░.
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_32:            ; [$afb2]
     db $7f,$cc,$d5,$49,$51,$29,$1b,$0e,$31,$7f,$7e,$3e,$2e,$16,$04,$00 ; [$afb2]
                                                                        ; byte
 
@@ -10897,9 +11913,17 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; ░░▒░░...
 ; .░░.....
 ;
+SPRITE_TILES_BOSS_ZORUGERIRU_33:            ; [$afc2]
     db $76,$36,$d6,$a6,$0e,$3c,$d8,$60,$c8,$f8,$78,$f8,$f0,$c0,$20,$00 ; [$afc2]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: King Grieve
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8066]
+;============================================================================
 
 ;
 ; ......██
@@ -10914,7 +11938,7 @@ PPUTile16_PRG6__adb2:                       ; [$adb2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8066]
 ;
-PPUTile16_PRG6__afd2:                       ; [$afd2]
+SPRITE_TILES_BOSS_KING_GRIEVE_00:           ; [$afd2]
     db $03,$05,$0f,$0e,$1c,$1d,$00,$0f,$03,$07,$09,$1f,$1f,$1f,$1f,$15 ; [$afd2]
                                                                        ; byte
 
@@ -10929,6 +11953,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░█░█▒█▒░
 ; .█░█░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_01:           ; [$afe2]
     db $be,$dd,$a3,$01,$05,$3f,$f5,$7f,$e0,$fc,$ff,$fe,$fa,$c5,$5e,$50 ; [$afe2]
                                                                        ; byte
 
@@ -10943,6 +11968,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░▒█▒▒░░
 ; ▒▒█▒▒▒░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_02:           ; [$aff2]
     db $7c,$c3,$bf,$d2,$2d,$f9,$d3,$22,$3f,$7c,$c1,$2d,$de,$1e,$3c,$fd ; [$aff2]
                                                                        ; byte
 
@@ -10957,6 +11983,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░░░▒▒█
 ; ░░▒▒░░▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_03:           ; [$b002]
     db $f7,$a1,$c9,$14,$f6,$a2,$79,$cc,$38,$7e,$f6,$ef,$0f,$5f,$87,$33 ; [$b002]
                                                                        ; byte
 
@@ -10971,6 +11998,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒░░░▒▒▒
 ; ▒▒░░░░▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_04:           ; [$b012]
     db $34,$b8,$8e,$ed,$e2,$7b,$38,$3c,$ff,$7f,$7f,$1f,$1f,$87,$c7,$c3 ; [$b012]
                                                                        ; byte
 
@@ -10985,6 +12013,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █▒▒▒▒▒▒░
 ; ██▒▒▒▒▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_05:           ; [$b022]
     db $73,$18,$c0,$1a,$07,$02,$81,$c0,$8c,$e7,$3f,$e5,$f8,$fd,$fe,$ff ; [$b022]
                                                                        ; byte
 
@@ -10999,6 +12028,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░▒▒▒▒██
 ; ░░░░▒░▒█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_06:           ; [$b032]
     db $80,$70,$88,$66,$1d,$ce,$c3,$f5,$00,$80,$f0,$f8,$fe,$3f,$3f,$0b ; [$b032]
                                                                        ; byte
 
@@ -11013,6 +12043,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░.░▒█▒░
 ; ▒█▒▒▒█▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_07:           ; [$b042]
     db $00,$0c,$0e,$0a,$09,$8d,$55,$45,$08,$00,$04,$04,$06,$06,$8e,$fe ; [$b042]
                                                                        ; byte
 
@@ -11027,6 +12058,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_08:           ; [$b052]
     db $7b,$72,$96,$ec,$f8,$00,$00,$00,$fc,$bc,$68,$10,$00,$00,$00,$00 ; [$b052]
                                                                        ; byte
 
@@ -11041,6 +12073,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_09:           ; [$b062]
     db $07,$01,$05,$03,$00,$00,$00,$00,$00,$06,$03,$00,$00,$00,$00,$00 ; [$b062]
                                                                        ; byte
 
@@ -11055,6 +12088,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .░▒██▒░░
 ; ░▒█▒▒░▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_10:           ; [$b072]
     db $f1,$6a,$0a,$fd,$36,$3c,$5b,$a5,$0f,$bf,$f5,$02,$0f,$1f,$3c,$7a ; [$b072]
                                                                        ; byte
 
@@ -11069,6 +12103,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░▒▒░░.
 ; ░░▒▒░░..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_11:           ; [$b082]
     db $c3,$47,$3f,$ff,$3f,$ff,$e6,$cc,$fc,$b8,$c0,$00,$c0,$00,$18,$30 ; [$b082]
                                                                        ; byte
 
@@ -11083,6 +12118,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░░░░░░
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_12:           ; [$b092]
     db $b6,$a3,$87,$cd,$fb,$7d,$7f,$7f,$79,$7c,$78,$32,$04,$82,$80,$80 ; [$b092]
                                                                        ; byte
 
@@ -11097,6 +12133,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░█▒▒▒░░░
 ; ░░█▒░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_13:           ; [$b0a2]
     db $bf,$3f,$bf,$bf,$bf,$17,$c7,$ef,$c0,$c0,$c0,$c0,$c0,$e8,$78,$30 ; [$b0a2]
                                                                        ; byte
 
@@ -11111,6 +12148,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░▒█▒▒░▒▒
 ; ░░██▒░▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_14:           ; [$b0b2]
     db $f0,$60,$b8,$ad,$b2,$b0,$a4,$f4,$ff,$ff,$7f,$7f,$7f,$7f,$7b,$3b ; [$b0b2]
                                                                        ; byte
 
@@ -11125,6 +12163,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒▒░..
 ; ▒▒▒▒▒▒░.
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_15:           ; [$b0c2]
     db $f8,$3d,$1f,$0f,$8c,$0c,$04,$02,$07,$c2,$e0,$f0,$f0,$f0,$f8,$fc ; [$b0c2]
                                                                        ; byte
 
@@ -11139,6 +12178,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ....▒█▒▒
 ; ....▒█▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_16:           ; [$b0d2]
     db $00,$01,$00,$04,$02,$06,$04,$05,$00,$00,$01,$03,$07,$0f,$0f,$0e ; [$b0d2]
                                                                        ; byte
 
@@ -11153,6 +12193,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_17:           ; [$b0e2]
     db $4b,$9f,$3f,$7f,$7f,$ff,$ff,$ff,$f4,$e0,$c0,$80,$80,$00,$00,$00 ; [$b0e2]
                                                                        ; byte
 
@@ -11167,6 +12208,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_18:           ; [$b0f2]
     db $e8,$e0,$c0,$90,$80,$00,$00,$00,$30,$30,$30,$00,$00,$00,$00,$00 ; [$b0f2]
                                                                        ; byte
 
@@ -11181,6 +12223,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █░....█▒
 ; .▒...▒▒.
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_19:           ; [$b102]
     db $9b,$17,$46,$6c,$5a,$7f,$c2,$00,$24,$18,$78,$d0,$e4,$a2,$83,$46 ; [$b102]
                                                                        ; byte
 
@@ -11195,6 +12238,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_20:           ; [$b112]
     db $ff,$7c,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b112]
                                                                        ; byte
 
@@ -11209,6 +12253,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░..░▒█▒
 ; .░...░▒█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_21:           ; [$b122]
     db $b4,$f3,$2e,$5c,$2c,$76,$ca,$45,$7b,$7c,$7f,$3f,$df,$8f,$07,$03 ; [$b122]
                                                                        ; byte
 
@@ -11223,6 +12268,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █▒▒░░▒▒▒
 ; ▒▒░░░░░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_22:           ; [$b132]
     db $02,$e8,$c6,$00,$50,$04,$98,$3e,$fc,$16,$f9,$ff,$ff,$ff,$e7,$c1 ; [$b132]
                                                                        ; byte
 
@@ -11237,6 +12283,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒.......
 ; ▒▒......
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_23:           ; [$b142]
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$c0,$80,$80,$80,$c0 ; [$b142]
                                                                        ; byte
 
@@ -11251,6 +12298,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .......▒
 ; .......░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_24:           ; [$b152]
     db $03,$01,$01,$01,$01,$01,$00,$01,$04,$06,$06,$06,$02,$02,$01,$00 ; [$b152]
                                                                        ; byte
 
@@ -11265,6 +12313,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░..
 ; ▒░░░░...
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_25:           ; [$b162]
     db $ff,$fc,$f8,$f8,$fc,$fe,$fc,$78,$00,$00,$00,$00,$00,$00,$00,$80 ; [$b162]
                                                                        ; byte
 
@@ -11279,6 +12328,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ....░▒██
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_26:           ; [$b172]
     db $97,$cc,$66,$aa,$6d,$12,$0b,$02,$e8,$f3,$f9,$7d,$1e,$0f,$07,$01 ; [$b172]
                                                                        ; byte
 
@@ -11293,6 +12343,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░▒....
 ; █▒▒░▒...
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_27:           ; [$b182]
     db $80,$60,$00,$0c,$08,$40,$60,$90,$60,$90,$fc,$f0,$f0,$b0,$90,$e8 ; [$b182]
                                                                        ; byte
 
@@ -11307,6 +12358,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_28:           ; [$b192]
     db $f0,$70,$b8,$58,$3c,$0f,$00,$00,$00,$80,$40,$20,$00,$00,$00,$00 ; [$b192]
                                                                        ; byte
 
@@ -11321,6 +12373,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .......░
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_29:           ; [$b1a2]
     db $48,$90,$4a,$11,$0a,$04,$01,$00,$f0,$7c,$3c,$0e,$07,$03,$00,$00 ; [$b1a2]
                                                                        ; byte
 
@@ -11335,6 +12388,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒......
 ; ░░▒.....
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_30:           ; [$b1b2]
     db $00,$00,$00,$00,$00,$80,$00,$c0,$00,$00,$00,$00,$00,$80,$c0,$20 ; [$b1b2]
                                                                        ; byte
 
@@ -11349,6 +12403,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒██▒██▒.
 ; ██▒▒█▒.█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_31:           ; [$b1c2]
     db $00,$0b,$1f,$3d,$1b,$76,$6c,$c9,$03,$07,$0f,$1f,$3f,$3f,$fe,$fd ; [$b1c2]
                                                                        ; byte
 
@@ -11363,6 +12418,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒░▒░██
 ; ░░▒█████
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_32:           ; [$b1d2]
     db $1f,$f0,$65,$db,$e4,$f9,$17,$df,$e0,$ff,$9f,$e7,$ff,$fe,$eb,$3f ; [$b1d2]
                                                                        ; byte
 
@@ -11377,6 +12433,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░░░▒▒█
 ; ▒▒▒░░░▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_33:           ; [$b1e2]
     db $00,$3f,$f0,$67,$05,$8b,$79,$1c,$7e,$ff,$ff,$f8,$fb,$77,$87,$e3 ; [$b1e2]
                                                                        ; byte
 
@@ -11391,6 +12448,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █████░░▒
 ; ███▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_34:           ; [$b1f2]
     db $00,$00,$e0,$5f,$80,$d8,$fe,$e1,$00,$e0,$f8,$fc,$ff,$e7,$f9,$fe ; [$b1f2]
                                                                        ; byte
 
@@ -11405,6 +12463,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒░....
 ; ░▒▒▒░░..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_35:           ; [$b202]
     db $00,$00,$00,$00,$80,$60,$10,$8c,$00,$00,$00,$00,$00,$80,$e0,$70 ; [$b202]
                                                                        ; byte
 
@@ -11419,6 +12478,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .....███
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_36:           ; [$b212]
     db $68,$1a,$04,$0a,$01,$03,$07,$02,$fe,$7f,$1f,$07,$03,$03,$07,$01 ; [$b212]
                                                                        ; byte
 
@@ -11433,6 +12493,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒░▒░░░░
 ; █▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_37:           ; [$b222]
     db $00,$40,$62,$9f,$2a,$c0,$2f,$80,$00,$e0,$dc,$e0,$df,$ff,$d0,$ff ; [$b222]
                                                                        ; byte
 
@@ -11447,6 +12508,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒▒▒..
 ; ▒░░▒▒▒..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_38:           ; [$b232]
     db $00,$00,$00,$80,$c0,$00,$00,$60,$00,$00,$00,$00,$00,$f0,$fc,$9c ; [$b232]
                                                                        ; byte
 
@@ -11461,6 +12523,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .......░
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_39:           ; [$b242]
     db $a0,$50,$28,$14,$0e,$05,$01,$00,$7f,$3f,$1f,$0f,$07,$03,$00,$00 ; [$b242]
                                                                        ; byte
 
@@ -11475,6 +12538,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ██▒█▒██▒
 ; ░▒████▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_40:           ; [$b252]
     db $0e,$00,$00,$01,$00,$80,$d6,$bd,$f0,$ff,$ff,$fe,$ff,$ff,$ff,$7e ; [$b252]
                                                                        ; byte
 
@@ -11489,6 +12553,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒▒░..
 ; ░░░▒▒▒░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_41:           ; [$b262]
     db $00,$00,$00,$00,$f0,$18,$04,$e3,$00,$00,$80,$c0,$00,$e0,$f8,$1c ; [$b262]
                                                                        ; byte
 
@@ -11503,6 +12568,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ..▒█▒▒░▒
 ; .░█▒▒░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_42:           ; [$b272]
     db $00,$00,$3f,$0c,$11,$01,$12,$67,$00,$0f,$3f,$3f,$1e,$1e,$3d,$38 ; [$b272]
                                                                        ; byte
 
@@ -11517,6 +12583,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░▒░░░░░
 ; ░░░░▒░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_43:           ; [$b282]
     db $81,$e6,$1a,$7f,$ff,$3f,$5f,$f7,$7e,$ff,$e5,$80,$00,$c0,$a0,$08 ; [$b282]
                                                                        ; byte
 
@@ -11531,6 +12598,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_44:           ; [$b292]
     db $fc,$58,$44,$ba,$ff,$ff,$ff,$ff,$00,$ff,$bb,$45,$00,$00,$00,$00 ; [$b292]
                                                                        ; byte
 
@@ -11545,6 +12613,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░░
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_45:           ; [$b2a2]
     db $00,$00,$00,$a0,$d7,$ff,$ff,$e0,$00,$00,$f0,$5f,$28,$00,$00,$00 ; [$b2a2]
                                                                        ; byte
 
@@ -11559,6 +12628,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_46:           ; [$b2b2]
     db $00,$00,$00,$00,$00,$f0,$80,$00,$00,$00,$00,$80,$f0,$0c,$00,$00 ; [$b2b2]
                                                                        ; byte
 
@@ -11573,6 +12643,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒██▒██▒.
 ; ██▒▒█▒.█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_47:           ; [$b2c2]
     db $00,$0b,$1f,$3d,$1b,$76,$6c,$c9,$03,$07,$0f,$1f,$3f,$3f,$fe,$fd ; [$b2c2]
                                                                        ; byte
 
@@ -11587,6 +12658,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░▒░██
 ; ░░██████
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_48:           ; [$b2d2]
     db $1f,$f0,$65,$db,$e4,$19,$f7,$ff,$e0,$ff,$9f,$e7,$ff,$fe,$0b,$3f ; [$b2d2]
                                                                        ; byte
 
@@ -11601,6 +12673,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒░▒░▒
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_49:           ; [$b2e2]
     db $00,$00,$07,$f8,$ff,$e0,$0a,$3f,$00,$e0,$f8,$07,$ff,$ff,$f5,$c0 ; [$b2e2]
                                                                        ; byte
 
@@ -11615,6 +12688,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░▒░░▒░▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_50:           ; [$b2f2]
     db $00,$02,$1f,$ff,$14,$62,$b5,$ff,$00,$03,$fc,$e3,$ff,$9d,$4a,$00 ; [$b2f2]
                                                                        ; byte
 
@@ -11629,6 +12703,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_51:           ; [$b302]
     db $67,$cf,$8f,$1f,$3f,$bf,$7f,$ff,$f8,$70,$f0,$e0,$c0,$40,$80,$00 ; [$b302]
                                                                        ; byte
 
@@ -11643,6 +12718,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░░
 ; ░░░▒░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_52:           ; [$b312]
     db $ff,$be,$ff,$ff,$ff,$ff,$ff,$ef,$00,$41,$00,$00,$00,$00,$00,$10 ; [$b312]
                                                                        ; byte
 
@@ -11657,6 +12733,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░....▒.
 ; ░.......
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_53:           ; [$b322]
     db $7f,$be,$ac,$e8,$f4,$f8,$c0,$80,$80,$40,$50,$14,$08,$04,$02,$00 ; [$b322]
                                                                        ; byte
 
@@ -11671,6 +12748,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░█░█▒█▒░
 ; .█░█░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_54:           ; [$b332]
     db $be,$dd,$a3,$01,$05,$3f,$f5,$7f,$e0,$fc,$ff,$fe,$fa,$c5,$5e,$50 ; [$b332]
                                                                        ; byte
 
@@ -11685,6 +12763,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░█▒▒░░
 ; ░░░█▒▒░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_55:           ; [$b342]
     db $7c,$c3,$bf,$d2,$2d,$f9,$f3,$f2,$3f,$7c,$c1,$2d,$de,$1e,$1c,$1d ; [$b342]
                                                                        ; byte
 
@@ -11699,6 +12778,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒░░░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_56:           ; [$b352]
     db $d7,$fd,$ff,$ff,$ff,$7f,$3f,$3f,$28,$02,$00,$00,$00,$80,$c0,$c0 ; [$b352]
                                                                        ; byte
 
@@ -11713,6 +12793,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░▒▒▒░░
 ; ░▒▒▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_57:           ; [$b362]
     db $ff,$ff,$ff,$ff,$f7,$da,$e3,$81,$00,$00,$00,$00,$08,$25,$1c,$7e ; [$b362]
                                                                        ; byte
 
@@ -11727,6 +12808,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░▒▒▒▒██
 ; ░░░░▒░▒█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_58:           ; [$b372]
     db $ff,$ff,$ff,$fe,$fd,$ce,$c3,$f5,$00,$00,$00,$00,$06,$3f,$3f,$0b ; [$b372]
                                                                        ; byte
 
@@ -11741,6 +12823,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒░░.....
 ; ▒█▒▒░...
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_59:           ; [$b382]
     db $fe,$f5,$fc,$18,$08,$80,$60,$48,$01,$0a,$02,$04,$04,$04,$80,$f0 ; [$b382]
                                                                        ; byte
 
@@ -11755,6 +12838,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒██▒▒▒░░
 ; .█▒█░░..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_60:           ; [$b392]
     db $74,$29,$6b,$5f,$3e,$d8,$63,$5c,$0b,$06,$15,$22,$c9,$af,$fc,$70 ; [$b392]
                                                                        ; byte
 
@@ -11769,6 +12853,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ..░▒▒░.▒
 ; ..█▒░░..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_61:           ; [$b3a2]
     db $b3,$e3,$c7,$9f,$6e,$94,$24,$2c,$5c,$bc,$78,$e0,$80,$09,$19,$30 ; [$b3a2]
                                                                        ; byte
 
@@ -11783,6 +12868,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░▒█▒
 ; ░░░░░█▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_62:           ; [$b3b2]
     db $b0,$61,$76,$b3,$9d,$e4,$fa,$fc,$7f,$ff,$f9,$7c,$7e,$1f,$07,$07 ; [$b3b2]
                                                                        ; byte
 
@@ -11797,6 +12883,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░......
 ; ░.......
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_63:           ; [$b3c2]
     db $78,$3d,$9f,$1f,$bc,$f0,$c0,$80,$87,$c2,$e0,$e0,$40,$00,$00,$00 ; [$b3c2]
                                                                        ; byte
 
@@ -11811,6 +12898,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .....░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_64:           ; [$b3d2]
     db $60,$6a,$90,$ea,$fe,$1f,$07,$00,$fc,$be,$6f,$15,$01,$00,$00,$00 ; [$b3d2]
                                                                        ; byte
 
@@ -11825,6 +12913,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░.....
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_65:           ; [$b3e2]
     db $00,$01,$85,$2a,$ac,$f8,$e0,$00,$01,$02,$8e,$f4,$50,$00,$00,$00 ; [$b3e2]
                                                                        ; byte
 
@@ -11839,6 +12928,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_66:           ; [$b3f2]
     db $20,$08,$18,$00,$00,$00,$00,$00,$30,$30,$00,$00,$00,$00,$00,$00 ; [$b3f2]
                                                                        ; byte
 
@@ -11853,6 +12943,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒...█▒░
 ; .░...░░.
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_67:           ; [$b402]
     db $f5,$ff,$7d,$46,$9e,$e2,$05,$46,$3a,$7c,$4e,$3b,$e3,$83,$c6,$00 ; [$b402]
                                                                        ; byte
 
@@ -11867,6 +12958,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒██▒▒░░▒
 ; ░░▒░▒▒▒▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_68:           ; [$b412]
     db $90,$d0,$c8,$66,$c8,$48,$66,$d0,$ef,$ef,$f7,$f9,$f7,$f7,$f9,$2f ; [$b412]
                                                                        ; byte
 
@@ -11881,6 +12973,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒▒▒▒░
 ; █▒▒▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_69:           ; [$b422]
     db $00,$38,$01,$01,$01,$00,$01,$81,$ff,$c7,$fe,$fe,$fe,$ff,$fe,$fe ; [$b422]
                                                                        ; byte
 
@@ -11895,6 +12988,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ...░██▒░
 ; ...░█▒▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_70:           ; [$b432]
     db $28,$29,$09,$09,$19,$19,$1d,$19,$1f,$1e,$1e,$1e,$0e,$0e,$0e,$0e ; [$b432]
                                                                        ; byte
 
@@ -11909,6 +13003,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █▒▒░░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_71:           ; [$b442]
     db $0b,$29,$13,$27,$47,$8f,$9f,$3f,$1c,$1e,$3c,$78,$f8,$f0,$e0,$c0 ; [$b442]
                                                                        ; byte
 
@@ -11923,6 +13018,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .....░▒▒
 ; ....░▒██
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_72:           ; [$b452]
     db $00,$00,$00,$00,$00,$03,$04,$0b,$00,$00,$00,$00,$00,$00,$03,$07 ; [$b452]
                                                                        ; byte
 
@@ -11937,6 +13033,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░▒
 ; ░░░░░░..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_73:           ; [$b462]
     db $ff,$be,$fc,$ea,$f4,$fb,$fe,$fc,$00,$40,$02,$14,$0a,$04,$01,$00 ; [$b462]
                                                                        ; byte
 
@@ -11951,6 +13048,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ▒▒▒▒░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_74:           ; [$b472]
     db $06,$54,$e9,$f1,$e7,$8f,$0f,$3f,$1f,$bf,$7e,$fe,$f8,$f0,$f0,$c0 ; [$b472]
                                                                        ; byte
 
@@ -11965,6 +13063,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_75:           ; [$b482]
     db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b482]
                                                                        ; byte
 
@@ -11979,6 +13078,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░.....
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_76:           ; [$b492]
     db $fc,$f8,$f8,$f0,$f0,$e0,$e0,$e0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b492]
                                                                        ; byte
 
@@ -11993,6 +13093,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░█░█▒█▒░
 ; .█░█░░░░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_77:           ; [$b4a2]
     db $be,$db,$a0,$01,$05,$3f,$f5,$7f,$e0,$ff,$ff,$fe,$fa,$c5,$5e,$50 ; [$b4a2]
                                                                        ; byte
 
@@ -12007,6 +13108,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ░░░█▒▒░░
 ; ▒░░█▒▒░▒
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_78:           ; [$b4b2]
     db $fc,$83,$3f,$d2,$2d,$f9,$f3,$72,$ff,$fc,$c1,$2d,$de,$1e,$1c,$9d ; [$b4b2]
                                                                        ; byte
 
@@ -12021,6 +13123,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ....█░░░
 ; ....▒░░█
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_79:           ; [$b4c2]
     db $0e,$04,$06,$4d,$7b,$2f,$0f,$07,$01,$0b,$0b,$46,$3c,$11,$08,$09 ; [$b4c2]
                                                                        ; byte
 
@@ -12035,6 +13138,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; █▒░.░▒.▒
 ; ▒▒░.░▒..
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_80:           ; [$b4d2]
     db $73,$e3,$e7,$47,$ce,$9c,$a8,$28,$9c,$3c,$38,$f8,$70,$e1,$c5,$c4 ; [$b4d2]
                                                                        ; byte
 
@@ -12049,6 +13153,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ....░▒▒░
 ; ....░▒▒░
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_81:           ; [$b4e2]
     db $64,$72,$83,$e1,$f5,$11,$09,$09,$f8,$bc,$7c,$1e,$0e,$0e,$06,$06 ; [$b4e2]
                                                                        ; byte
 
@@ -12063,6 +13168,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; .░░░....
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_82:           ; [$b4f2]
     db $0d,$0b,$0e,$1e,$1c,$38,$70,$00,$02,$04,$00,$00,$00,$00,$00,$00 ; [$b4f2]
                                                                        ; byte
 
@@ -12077,9 +13183,17 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_KING_GRIEVE_83:           ; [$b502]
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b502]
                                                                        ; byte
 
+
+;============================================================================
+; Boss Tiles: Shadow Eura
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::8068]
+;============================================================================
 
 ;
 ; ........
@@ -12094,7 +13208,7 @@ PPUTile16_PRG6__afd2:                       ; [$afd2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8068]
 ;
-PPUTile16_PRG6__b512:                       ; [$b512]
+SPRITE_TILES_BOSS_SHADOW_EURA_00:           ; [$b512]
     db $00,$00,$00,$00,$00,$03,$0f,$1f,$00,$00,$00,$01,$07,$1f,$3f,$7f ; [$b512]
                                                                        ; byte
 
@@ -12109,6 +13223,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░█░█░░
 ; ..░▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_01:           ; [$b522]
     db $ff,$ff,$ff,$cf,$47,$5f,$3f,$21,$00,$00,$00,$30,$38,$30,$14,$1e ; [$b522]
                                                                        ; byte
 
@@ -12123,6 +13238,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒█▒▒░░▒
 ; ░▒▒▒▒░░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_02:           ; [$b532]
     db $3f,$78,$e0,$8e,$3e,$76,$a6,$86,$ff,$ff,$ff,$f1,$c1,$b9,$79,$79 ; [$b532]
                                                                        ; byte
 
@@ -12137,6 +13253,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒█▒▒▒░▒
 ; ▒▒▒▒▒▒░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_03:           ; [$b542]
     db $3f,$78,$e0,$8e,$32,$72,$a2,$02,$ff,$ff,$ff,$f1,$cd,$bd,$7d,$fd ; [$b542]
                                                                        ; byte
 
@@ -12151,6 +13268,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒█▒▒▒▒▒
 ; ▒▒▒▒▒▒░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_04:           ; [$b552]
     db $3f,$78,$e0,$8e,$30,$70,$a0,$02,$ff,$ff,$ff,$f1,$cf,$bf,$7f,$fd ; [$b552]
                                                                        ; byte
 
@@ -12165,6 +13283,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░▒█▒
 ; ▒▒░░░▒██
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_05:           ; [$b562]
     db $ff,$fe,$80,$1f,$ff,$fc,$fa,$3b,$ff,$ff,$ff,$e0,$00,$03,$07,$c7 ; [$b562]
                                                                        ; byte
 
@@ -12179,6 +13298,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒░░░░░▒▒
 ; ▒▒░░░░▒█
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_06:           ; [$b572]
     db $fe,$03,$f8,$ff,$ff,$ff,$7c,$3d,$ff,$ff,$07,$00,$00,$00,$83,$c3 ; [$b572]
                                                                        ; byte
 
@@ -12193,6 +13313,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒▒██▒█
 ; ██▒█████
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_07:           ; [$b582]
     db $af,$fe,$03,$fe,$f8,$c1,$0d,$df,$ff,$ff,$fc,$01,$07,$3f,$ff,$ff ; [$b582]
                                                                        ; byte
 
@@ -12207,6 +13328,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ██▒▒▒░░░
 ; █▒█▒▒░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_08:           ; [$b592]
     db $fc,$fc,$fe,$0f,$c7,$e7,$c7,$a6,$e0,$00,$00,$f0,$f8,$f8,$f8,$f8 ; [$b592]
                                                                        ; byte
 
@@ -12221,6 +13343,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_09:           ; [$b5a2]
     db $ff,$fe,$80,$1f,$ff,$ff,$ff,$3f,$ff,$ff,$ff,$e0,$00,$00,$00,$c0 ; [$b5a2]
                                                                        ; byte
 
@@ -12235,6 +13358,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ███▒█▒▒▒
 ; ▒█▒█▒▒░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_10:           ; [$b5b2]
     db $ff,$c2,$7f,$c7,$b3,$61,$e8,$52,$ff,$ff,$80,$38,$7c,$fe,$ff,$fd ; [$b5b2]
                                                                        ; byte
 
@@ -12249,6 +13373,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_11:           ; [$b5c2]
     db $af,$ff,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00 ; [$b5c2]
                                                                        ; byte
 
@@ -12263,6 +13388,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒░░░░▒
 ; █▒▒░░░▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_12:           ; [$b5d2]
     db $fe,$03,$f8,$ff,$3f,$3f,$9e,$9c,$ff,$ff,$07,$00,$c0,$c0,$e1,$e3 ; [$b5d2]
                                                                        ; byte
 
@@ -12277,6 +13403,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒░░░░░░
 ; ██▒░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_13:           ; [$b5e2]
     db $af,$ff,$00,$ff,$ff,$ff,$3f,$df,$ff,$ff,$ff,$00,$00,$00,$c0,$e0 ; [$b5e2]
                                                                        ; byte
 
@@ -12291,6 +13418,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ▒▒░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_14:           ; [$b5f2]
     db $ff,$fe,$80,$1f,$ff,$fe,$ff,$3f,$ff,$ff,$ff,$e0,$00,$01,$00,$c0 ; [$b5f2]
                                                                        ; byte
 
@@ -12305,6 +13433,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒░░░░░░
 ; ░░░░░▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_15:           ; [$b602]
     db $fe,$03,$f8,$ff,$3f,$3f,$bf,$f8,$ff,$ff,$07,$00,$c0,$c0,$40,$07 ; [$b602]
                                                                        ; byte
 
@@ -12319,6 +13448,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; .....░..
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_16:           ; [$b612]
     db $1e,$1f,$0e,$0f,$02,$00,$00,$04,$01,$0b,$1b,$1a,$08,$00,$00,$00 ; [$b612]
                                                                        ; byte
 
@@ -12333,6 +13463,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..█░█░░▒
 ; ░░█▒█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_17:           ; [$b622]
     db $96,$df,$df,$7f,$2b,$3e,$3e,$e9,$69,$69,$61,$01,$11,$01,$29,$3e ; [$b622]
                                                                        ; byte
 
@@ -12347,6 +13478,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █░░▒▒▒▒░
 ; █░░▒▒▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_18:           ; [$b632]
     db $9d,$bb,$b3,$b6,$b4,$e8,$e1,$e3,$e3,$c7,$cf,$cf,$cf,$9f,$9e,$9c ; [$b632]
                                                                        ; byte
 
@@ -12361,6 +13493,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒▒▒░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_19:           ; [$b642]
     db $86,$fd,$fb,$47,$bc,$f0,$07,$ff,$79,$03,$87,$ff,$ff,$ff,$f8,$00 ; [$b642]
                                                                        ; byte
 
@@ -12375,6 +13508,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒▒▒░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_20:           ; [$b652]
     db $02,$85,$cb,$47,$bc,$f0,$07,$ff,$fd,$7b,$b7,$ff,$ff,$ff,$f8,$00 ; [$b652]
                                                                        ; byte
 
@@ -12389,6 +13523,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █░░▒██▒░
 ; █░▒▒█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_21:           ; [$b662]
     db $9b,$bb,$bb,$ba,$b6,$f4,$ed,$c9,$e7,$c7,$c7,$c7,$cf,$8f,$9e,$be ; [$b662]
                                                                        ; byte
 
@@ -12403,6 +13538,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒▒░░░▒▒
 ; ░░░▒▒░░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_22:           ; [$b672]
     db $bd,$39,$3b,$79,$79,$fc,$9c,$e6,$c3,$c7,$c7,$87,$87,$03,$63,$19 ; [$b672]
                                                                        ; byte
 
@@ -12417,6 +13553,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_23:           ; [$b682]
     db $90,$40,$c7,$9f,$3f,$fe,$ff,$00,$ff,$ff,$f8,$e0,$c0,$00,$00,$00 ; [$b682]
                                                                        ; byte
 
@@ -12431,6 +13568,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_24:           ; [$b692]
     db $47,$8e,$fe,$c7,$03,$b3,$6b,$d9,$f8,$70,$00,$38,$fc,$7c,$fc,$6e ; [$b692]
                                                                        ; byte
 
@@ -12445,6 +13583,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █░▒▒▒▒░░
 ; █░▒▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_25:           ; [$b6a2]
     db $9f,$bb,$b1,$a5,$bd,$f1,$c3,$cf,$e0,$c4,$ce,$de,$de,$9e,$bc,$b0 ; [$b6a2]
                                                                        ; byte
 
@@ -12459,6 +13598,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_26:           ; [$b6b2]
     db $a4,$42,$fa,$4d,$b7,$f3,$eb,$d9,$fb,$fd,$85,$b2,$78,$7c,$7c,$6e ; [$b6b2]
                                                                        ; byte
 
@@ -12473,6 +13613,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░......
 ; ░░░.....
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_27:           ; [$b6c2]
     db $f0,$7f,$f0,$ef,$ff,$f8,$c0,$e0,$0f,$80,$0f,$10,$00,$00,$00,$00 ; [$b6c2]
                                                                        ; byte
 
@@ -12487,6 +13628,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒▒░▒█▒▒
 ; ░░░░▒▒█▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_28:           ; [$b6d2]
     db $9d,$99,$1b,$39,$7a,$f0,$94,$f2,$e3,$e7,$e7,$c7,$87,$0f,$6f,$0f ; [$b6d2]
                                                                        ; byte
 
@@ -12501,6 +13643,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒░░░░░░
 ; ▒░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_29:           ; [$b6e2]
     db $8f,$4f,$8e,$8f,$0c,$1b,$3f,$7f,$f0,$f0,$f1,$f0,$f3,$e4,$c0,$80 ; [$b6e2]
                                                                        ; byte
 
@@ -12515,6 +13658,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒█▒█▒▒▒
 ; ░▒███▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_30:           ; [$b6f2]
     db $bf,$f1,$ce,$5a,$fd,$b2,$a8,$b8,$c0,$8e,$bf,$bf,$3f,$7f,$7f,$7f ; [$b6f2]
                                                                        ; byte
 
@@ -12529,6 +13673,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒░░░░░
 ; ░░░░░░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_31:           ; [$b702]
     db $f0,$09,$38,$50,$00,$05,$1f,$fe,$0f,$fe,$ff,$ff,$ff,$fa,$e0,$00 ; [$b702]
                                                                        ; byte
 
@@ -12543,6 +13688,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░▒▒▒▒▒
 ; ..░▒▒▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_32:           ; [$b712]
     db $07,$07,$02,$05,$07,$0f,$20,$20,$05,$05,$05,$0f,$1f,$1f,$1f,$1f ; [$b712]
                                                                        ; byte
 
@@ -12557,6 +13703,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒░░░░.
 ; ░░░░░...
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_33:           ; [$b722]
     db $f9,$e2,$8c,$70,$e1,$07,$1e,$f8,$a7,$1f,$7f,$ff,$fe,$f8,$e0,$00 ; [$b722]
                                                                        ; byte
 
@@ -12571,6 +13718,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_34:           ; [$b732]
     db $e6,$7c,$38,$70,$e0,$80,$00,$00,$18,$80,$c0,$80,$00,$00,$00,$00 ; [$b732]
                                                                        ; byte
 
@@ -12585,6 +13733,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_35:           ; [$b742]
     db $1f,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$b742]
                                                                        ; byte
 
@@ -12599,6 +13748,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_36:           ; [$b752]
     db $1e,$1f,$0e,$0f,$02,$00,$00,$00,$01,$0b,$1b,$1a,$08,$00,$00,$00 ; [$b752]
                                                                        ; byte
 
@@ -12613,6 +13763,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░▒▒░.▒
 ; ...░█░.░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_37:           ; [$b762]
     db $96,$df,$df,$7f,$2f,$26,$24,$1d,$69,$69,$61,$01,$11,$19,$19,$08 ; [$b762]
                                                                        ; byte
 
@@ -12627,6 +13778,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █░░▒█▒▒░
 ; █░▒▒█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_38:           ; [$b772]
     db $9f,$bd,$b9,$b9,$bb,$f5,$e9,$c9,$e0,$c2,$c6,$c6,$c6,$8e,$9e,$be ; [$b772]
                                                                        ; byte
 
@@ -12641,6 +13793,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ......░░
 ; ......░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_39:           ; [$b782]
     db $00,$00,$00,$00,$00,$01,$03,$02,$00,$00,$00,$00,$00,$01,$00,$01 ; [$b782]
                                                                        ; byte
 
@@ -12655,6 +13808,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒░████▒
 ; ▒█▒██▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_40:           ; [$b792]
     db $04,$01,$0f,$1a,$7e,$fb,$be,$58,$08,$00,$0a,$0f,$69,$47,$5f,$ff ; [$b792]
                                                                        ; byte
 
@@ -12669,6 +13823,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒░░....
 ; ▒░░.....
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_41:           ; [$b7a2]
     db $59,$d3,$66,$c4,$9c,$18,$30,$60,$3e,$3c,$b8,$f8,$e0,$e0,$c0,$80 ; [$b7a2]
                                                                        ; byte
 
@@ -12683,6 +13838,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░█▒▒░░
 ; ..░▒█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_42:           ; [$b7b2]
     db $db,$d9,$b3,$7b,$53,$5b,$33,$29,$6c,$6e,$7c,$3c,$3c,$3c,$1c,$1e ; [$b7b2]
                                                                        ; byte
 
@@ -12697,6 +13853,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ██▒▒▒░░.
 ; ▒█▒▒▒░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_43:           ; [$b7c2]
     db $60,$70,$38,$98,$1c,$8e,$c6,$47,$80,$80,$c0,$e0,$e0,$f0,$f8,$f8 ; [$b7c2]
                                                                        ; byte
 
@@ -12711,6 +13868,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒███▒▒▒░
 ; ▒██▒▒▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_44:           ; [$b7d2]
     db $28,$20,$48,$51,$b1,$31,$71,$63,$1f,$1f,$3f,$3e,$7e,$fe,$fe,$fc ; [$b7d2]
                                                                        ; byte
 
@@ -12725,6 +13883,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░.░▒▒▒░░
 ; ░.░█▒░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_45:           ; [$b7e2]
     db $7e,$ff,$ff,$cf,$cf,$97,$a3,$b7,$80,$00,$00,$30,$30,$38,$1c,$18 ; [$b7e2]
                                                                        ; byte
 
@@ -12739,6 +13898,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_46:           ; [$b7f2]
     db $93,$c7,$fe,$c6,$02,$b3,$6b,$d9,$7c,$38,$00,$38,$fc,$7c,$fc,$6e ; [$b7f2]
                                                                        ; byte
 
@@ -12753,6 +13913,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒██▒▒░
 ; ▒▒░██▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_47:           ; [$b802]
     db $00,$07,$07,$3f,$fc,$f8,$99,$3b,$00,$00,$3f,$ff,$ff,$ff,$fe,$dc ; [$b802]
                                                                        ; byte
 
@@ -12767,6 +13928,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_48:           ; [$b812]
     db $03,$07,$07,$06,$00,$03,$00,$00,$01,$03,$03,$03,$03,$00,$00,$00 ; [$b812]
                                                                        ; byte
 
@@ -12781,6 +13943,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_49:           ; [$b822]
     db $e1,$03,$0e,$38,$e0,$80,$00,$00,$fe,$fc,$f0,$c0,$00,$00,$00,$00 ; [$b822]
                                                                        ; byte
 
@@ -12795,6 +13958,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░██▒▒▒░.
 ; ░▒█▒▒░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_50:           ; [$b832]
     db $fe,$fe,$9e,$8e,$e6,$b6,$e2,$a6,$00,$00,$60,$70,$78,$78,$7c,$78 ; [$b832]
                                                                        ; byte
 
@@ -12809,6 +13973,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_51:           ; [$b842]
     db $b6,$8e,$be,$c7,$03,$b3,$6b,$d9,$78,$70,$40,$38,$fc,$7c,$fc,$6e ; [$b842]
                                                                        ; byte
 
@@ -12823,6 +13988,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; .░▒█▒░░░
 ; .░▒█▒░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_52:           ; [$b852]
     db $ff,$ff,$ff,$9f,$8f,$47,$57,$57,$00,$00,$00,$60,$70,$38,$38,$38 ; [$b852]
                                                                        ; byte
 
@@ -12837,6 +14003,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ██▒▒░░░░
 ; ██▒▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_53:           ; [$b862]
     db $8f,$4f,$8e,$8f,$1c,$8f,$cf,$cf,$f0,$f0,$f1,$f0,$e3,$f0,$f0,$f0 ; [$b862]
                                                                        ; byte
 
@@ -12851,6 +14018,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒█▒█▒▒░░
 ; ░▒█░▒░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_54:           ; [$b872]
     db $6e,$67,$67,$57,$37,$33,$53,$b7,$f0,$f8,$f8,$f8,$f8,$fc,$fc,$68 ; [$b872]
                                                                        ; byte
 
@@ -12865,6 +14033,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ███▒█▒▒░
 ; ▒██▒▒▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_55:           ; [$b882]
     db $af,$c2,$7f,$f3,$fb,$61,$e9,$63,$ff,$ff,$80,$3c,$7c,$fe,$fe,$fc ; [$b882]
                                                                        ; byte
 
@@ -12879,6 +14048,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░▒░▒░░░
 ; ░░░░▒░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_56:           ; [$b892]
     db $f0,$08,$7c,$fe,$ff,$ff,$d7,$f6,$f8,$f0,$80,$00,$00,$00,$28,$08 ; [$b892]
                                                                        ; byte
 
@@ -12893,6 +14063,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_57:           ; [$b8a2]
     db $95,$03,$3b,$4f,$b3,$f3,$6b,$d9,$fa,$fc,$c4,$b0,$7c,$7c,$fc,$6e ; [$b8a2]
                                                                        ; byte
 
@@ -12907,6 +14078,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░▒█▒░░
 ; ..░██▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_58:           ; [$b8b2]
     db $3b,$29,$23,$3b,$23,$39,$2b,$39,$1c,$1e,$1c,$1c,$1c,$1e,$1c,$1e ; [$b8b2]
                                                                        ; byte
 
@@ -12921,6 +14093,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_59:           ; [$b8c2]
     db $07,$8f,$7e,$47,$83,$b3,$6b,$d9,$f8,$70,$00,$38,$7c,$7c,$fc,$6e ; [$b8c2]
                                                                        ; byte
 
@@ -12935,6 +14108,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_60:           ; [$b8d2]
     db $ac,$d8,$70,$e0,$80,$00,$00,$00,$50,$20,$80,$00,$00,$00,$00,$00 ; [$b8d2]
                                                                        ; byte
 
@@ -12949,6 +14123,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒█░█▒▒░.
 ; ▒█░░▒░..
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_61:           ; [$b8e2]
     db $f7,$63,$1e,$f2,$52,$72,$72,$74,$78,$fc,$e0,$1c,$fc,$dc,$dc,$c8 ; [$b8e2]
                                                                        ; byte
 
@@ -12963,6 +14138,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒▒▒░▒██
 ; ▒██▒░███
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_62:           ; [$b8f2]
     db $c0,$3f,$f8,$00,$3f,$fc,$8b,$6f,$3f,$ff,$ff,$ff,$c0,$03,$77,$f7 ; [$b8f2]
                                                                        ; byte
 
@@ -12977,6 +14153,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒░▒▒░▒█
 ; █▒░██░▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_63:           ; [$b902]
     db $1f,$e0,$fe,$07,$e3,$79,$a5,$bc,$e0,$ff,$ff,$ff,$1f,$87,$db,$db ; [$b902]
                                                                        ; byte
 
@@ -12991,6 +14168,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_64:           ; [$b912]
     db $d8,$e8,$28,$68,$18,$38,$00,$00,$60,$70,$70,$30,$30,$00,$00,$00 ; [$b912]
                                                                        ; byte
 
@@ -13005,6 +14183,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_65:           ; [$b922]
     db $af,$ff,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00 ; [$b922]
                                                                        ; byte
 
@@ -13019,6 +14198,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒░▒░░░
 ; ▒▒░░▒░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_66:           ; [$b932]
     db $f6,$0c,$7e,$fe,$ff,$3f,$97,$36,$f8,$f0,$80,$00,$00,$c0,$e8,$c8 ; [$b932]
                                                                        ; byte
 
@@ -13033,6 +14213,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ..▒▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_67:           ; [$b942]
     db $70,$3f,$38,$27,$7f,$ff,$ff,$0f,$8f,$c0,$c7,$d8,$80,$00,$00,$30 ; [$b942]
                                                                        ; byte
 
@@ -13047,6 +14228,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░..
 ; ░░░░░░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_68:           ; [$b952]
     db $ac,$d8,$70,$80,$f0,$f8,$fc,$fe,$50,$20,$80,$00,$00,$00,$00,$00 ; [$b952]
                                                                        ; byte
 
@@ -13061,6 +14243,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_69:           ; [$b962]
     db $03,$00,$00,$00,$00,$00,$00,$00,$0c,$03,$00,$00,$00,$00,$00,$00 ; [$b962]
                                                                        ; byte
 
@@ -13075,6 +14258,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒██▒░▒░░
 ; ░█▒░█░▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_70:           ; [$b972]
     db $fe,$fe,$3e,$7f,$0b,$b5,$6b,$dd,$00,$00,$c0,$00,$f4,$6a,$f4,$6a ; [$b972]
                                                                        ; byte
 
@@ -13089,6 +14273,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░█▒██▒▒▒
 ; ░▒█▒▒█▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_71:           ; [$b982]
     db $ff,$c6,$7e,$db,$bc,$f4,$d8,$a4,$ff,$ff,$81,$3c,$7f,$7f,$7f,$7f ; [$b982]
                                                                        ; byte
 
@@ -13103,6 +14288,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒░▒░░░░░
 ; ▒░░▒▒░▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_72:           ; [$b992]
     db $ff,$c2,$7f,$ff,$ff,$7f,$5f,$64,$ff,$ff,$80,$00,$00,$80,$a0,$9b ; [$b992]
                                                                        ; byte
 
@@ -13117,6 +14303,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░██▒█▒░░
 ; ░█▒░█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_73:           ; [$b9a2]
     db $d0,$c2,$f1,$c6,$93,$bb,$eb,$d9,$7f,$3d,$0e,$39,$7c,$7c,$7c,$6e ; [$b9a2]
                                                                        ; byte
 
@@ -13131,6 +14318,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░▒░░▒░░
 ; ░░░░░░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_74:           ; [$b9b2]
     db $62,$80,$51,$aa,$fd,$b7,$db,$fe,$9d,$7f,$ae,$55,$02,$48,$24,$00 ; [$b9b2]
                                                                        ; byte
 
@@ -13145,6 +14333,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░......
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_75:           ; [$b9c2]
     db $70,$3f,$21,$3f,$7f,$f8,$c0,$00,$8f,$c0,$de,$c0,$80,$00,$00,$00 ; [$b9c2]
                                                                        ; byte
 
@@ -13159,6 +14348,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ░▒░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_76:           ; [$b9d2]
     db $ac,$d8,$fc,$fc,$fe,$fe,$ff,$bf,$50,$20,$00,$00,$00,$00,$00,$40 ; [$b9d2]
                                                                        ; byte
 
@@ -13173,6 +14363,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░█▒▒░░
 ; ..░▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_77:           ; [$b9e2]
     db $9f,$97,$ab,$2f,$53,$57,$33,$21,$60,$68,$74,$70,$3c,$38,$1c,$1e ; [$b9e2]
                                                                        ; byte
 
@@ -13187,6 +14378,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ██▒▒▒░░░
 ; █▒█▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_78:           ; [$b9f2]
     db $c0,$38,$0c,$46,$86,$67,$c7,$af,$00,$c0,$f0,$f8,$f8,$f8,$f8,$f0 ; [$b9f2]
                                                                        ; byte
 
@@ -13201,6 +14393,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ......░░
 ; .....██░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_79:           ; [$ba02]
     db $00,$00,$00,$01,$01,$00,$03,$07,$00,$01,$03,$03,$03,$03,$00,$06 ; [$ba02]
                                                                        ; byte
 
@@ -13215,6 +14408,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░█▒░░░▒
 ; ░░░░░░░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_80:           ; [$ba12]
     db $3f,$78,$e0,$8e,$3e,$7e,$ee,$fe,$ff,$ff,$ff,$f1,$c1,$b1,$31,$01 ; [$ba12]
                                                                        ; byte
 
@@ -13229,6 +14423,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒░░░░░
 ; ██▒▒▒▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_81:           ; [$ba22]
     db $3b,$69,$69,$35,$34,$90,$9f,$c0,$dc,$9e,$9e,$ce,$cf,$ef,$e0,$ff ; [$ba22]
                                                                        ; byte
 
@@ -13243,6 +14438,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░░
 ; ▒▒▒▒▒▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_82:           ; [$ba32]
     db $6e,$2e,$86,$86,$d4,$ea,$ff,$01,$f7,$f7,$7b,$7b,$2b,$15,$00,$fe ; [$ba32]
                                                                        ; byte
 
@@ -13257,6 +14453,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒░░░░░░
 ; ░░░░▒▒▒▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_83:           ; [$ba42]
     db $bc,$b0,$30,$30,$33,$5f,$bf,$f0,$df,$df,$df,$df,$cc,$a0,$40,$0f ; [$ba42]
                                                                        ; byte
 
@@ -13271,6 +14468,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒██▒░░
 ; ▒███▒▒░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_84:           ; [$ba52]
     db $cb,$c9,$c9,$99,$19,$e9,$1b,$72,$f4,$f6,$f6,$e6,$ee,$1e,$fc,$fc ; [$ba52]
                                                                        ; byte
 
@@ -13285,6 +14483,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ...▒██▒▒
 ; ...░▒▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_85:           ; [$ba62]
     db $05,$0d,$0c,$0c,$0d,$1f,$0c,$11,$0f,$1f,$17,$17,$17,$1f,$1f,$0e ; [$ba62]
                                                                        ; byte
 
@@ -13299,6 +14498,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒▒▒░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_86:           ; [$ba72]
     db $fe,$fd,$fb,$47,$bc,$f0,$07,$ff,$01,$03,$87,$ff,$ff,$ff,$f8,$00 ; [$ba72]
                                                                        ; byte
 
@@ -13313,6 +14513,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░░░░█
 ; ▒▒░░░░░█
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_87:           ; [$ba82]
     db $ff,$fe,$80,$1f,$fe,$fe,$ff,$3f,$ff,$ff,$ff,$e0,$01,$01,$01,$c1 ; [$ba82]
                                                                        ; byte
 
@@ -13327,6 +14528,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒░░░▒▒
 ; █▒▒░░░▒█
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_88:           ; [$ba92]
     db $fe,$03,$f8,$ff,$3f,$3f,$9c,$9d,$ff,$ff,$07,$00,$c0,$c0,$e3,$e3 ; [$ba92]
                                                                        ; byte
 
@@ -13341,6 +14543,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒▒▒░░░▒░
 ; ██▒▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_89:           ; [$baa2]
     db $af,$ff,$00,$ff,$ff,$fd,$1d,$cf,$ff,$ff,$ff,$00,$00,$02,$e2,$f0 ; [$baa2]
                                                                        ; byte
 
@@ -13355,6 +14558,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █▒▒░▒░░.
 ; ▒▒░░▒░░.
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_90:           ; [$bab2]
     db $f6,$0c,$78,$fc,$fe,$3e,$96,$36,$f8,$f0,$80,$00,$00,$c0,$e8,$c8 ; [$bab2]
                                                                        ; byte
 
@@ -13369,6 +14573,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ....█.██
 ; ...░█░█▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_91:           ; [$bac2]
     db $1e,$1f,$0e,$0f,$02,$03,$0b,$1e,$01,$0b,$1b,$1a,$08,$00,$0b,$0b ; [$bac2]
                                                                        ; byte
 
@@ -13383,6 +14588,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░█▒░░░░▒
 ; ░░░▒▒█░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_92:           ; [$bad2]
     db $96,$df,$df,$7b,$7b,$fa,$de,$e7,$69,$69,$61,$05,$2d,$2d,$61,$1c ; [$bad2]
                                                                        ; byte
 
@@ -13397,6 +14603,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; █░▒▒▒▒░░
 ; █░▒▒░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_93:           ; [$bae2]
     db $9d,$bb,$b3,$a6,$bc,$f0,$c3,$cf,$e3,$c7,$cf,$df,$df,$9f,$bc,$b0 ; [$bae2]
                                                                        ; byte
 
@@ -13411,6 +14618,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░▒▒▒░░░░
 ; ░░░░░...
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_94:           ; [$baf2]
     db $9b,$9b,$1b,$39,$7c,$e7,$8f,$f8,$e7,$e7,$e7,$c7,$83,$18,$70,$00 ; [$baf2]
                                                                        ; byte
 
@@ -13425,6 +14633,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░░▒▒▒▒
 ; ....░░░▒
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_95:           ; [$bb02]
     db $a6,$4f,$80,$a0,$1c,$07,$f0,$0e,$f9,$f0,$ff,$ff,$ff,$ff,$0f,$01 ; [$bb02]
                                                                        ; byte
 
@@ -13439,6 +14648,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ▒███▒▒░░
 ; ▒██▒▒▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_96:           ; [$bb12]
     db $6c,$d8,$70,$08,$0c,$26,$73,$63,$90,$20,$80,$f0,$f0,$f8,$fc,$fc ; [$bb12]
                                                                        ; byte
 
@@ -13453,6 +14663,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░░░░░░
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_97:           ; [$bb22]
     db $05,$0a,$0f,$1e,$40,$63,$3f,$00,$1a,$1f,$3f,$3f,$3f,$1c,$00,$00 ; [$bb22]
                                                                        ; byte
 
@@ -13467,6 +14678,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░.......
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_98:           ; [$bb32]
     db $0e,$f9,$c3,$0f,$3c,$f0,$80,$00,$ff,$fe,$fc,$f0,$c0,$00,$00,$00 ; [$bb32]
                                                                        ; byte
 
@@ -13481,6 +14693,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░▒▒░░░░
 ; ░▒█▒▒░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_99:           ; [$bb42]
     db $ff,$ff,$ff,$3f,$9e,$7f,$cf,$a7,$00,$00,$00,$c0,$e0,$80,$30,$78 ; [$bb42]
                                                                        ; byte
 
@@ -13495,6 +14708,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ........
 ; ........
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_100:          ; [$bb52]
     db $e0,$c0,$80,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$bb52]
                                                                        ; byte
 
@@ -13509,6 +14723,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░█▒▒░░
 ; ..░▒█▒▒░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_101:          ; [$bb62]
     db $d3,$d3,$a3,$73,$53,$53,$33,$29,$6c,$6c,$7c,$3c,$3c,$3c,$1c,$1e ; [$bb62]
                                                                        ; byte
 
@@ -13523,6 +14738,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ..░░█▒▒░
 ; .░░░░▒░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_102:          ; [$bb72]
     db $3b,$29,$37,$39,$37,$39,$39,$7b,$1c,$1e,$1c,$1e,$1c,$1e,$0e,$04 ; [$bb72]
                                                                        ; byte
 
@@ -13537,6 +14753,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░██▒▒▒▒░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_103:          ; [$bb82]
     db $00,$03,$0d,$17,$3c,$78,$e1,$ff,$00,$00,$03,$0f,$1f,$3f,$7e,$00 ; [$bb82]
                                                                        ; byte
 
@@ -13551,9 +14768,17 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; ░░░▒█▒▒░
 ; ░...██░░
 ;
+SPRITE_TILES_BOSS_SHADOW_EURA_104:          ; [$bb92]
     db $f7,$63,$1e,$f2,$53,$d9,$e9,$8f,$78,$fc,$e0,$1c,$bc,$3e,$1e,$0c ; [$bb92]
                                                                        ; byte
 
+
+;============================================================================
+; NPC Tiles: Walking Man
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806a]
+;============================================================================
 
 ;
 ; ........
@@ -13568,7 +14793,7 @@ PPUTile16_PRG6__b512:                       ; [$b512]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::806a]
 ;
-PPUTile16_PRG6__bba2:                       ; [$bba2]
+SPRITE_TILES_NPC_WALKING_MAN_00:            ; [$bba2]
     db $00,$00,$01,$01,$01,$03,$00,$01,$00,$01,$00,$00,$03,$01,$01,$00 ; [$bba2]
                                                                        ; byte
 
@@ -13583,6 +14808,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ▒░░░░...
 ; ░░▒█░...
 ;
+SPRITE_TILES_NPC_WALKING_MAN_01:            ; [$bbb2]
     db $f0,$b8,$98,$68,$b8,$38,$78,$d8,$00,$c0,$60,$90,$c0,$c0,$80,$30 ; [$bbb2]
                                                                        ; byte
 
@@ -13597,6 +14823,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; .......░
 ; .......▒
 ;
+SPRITE_TILES_NPC_WALKING_MAN_02:            ; [$bbc2]
     db $00,$00,$01,$01,$01,$01,$01,$00,$00,$01,$00,$00,$00,$00,$00,$01 ; [$bbc2]
                                                                        ; byte
 
@@ -13611,6 +14838,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ░░▒█▒░..
 ; ░▒▒▒░...
 ;
+SPRITE_TILES_NPC_WALKING_MAN_03:            ; [$bbd2]
     db $74,$f4,$d4,$f4,$b4,$74,$d4,$88,$b8,$38,$b8,$98,$d8,$98,$38,$70 ; [$bbd2]
                                                                        ; byte
 
@@ -13625,6 +14853,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_NPC_WALKING_MAN_04:            ; [$bbe2]
     db $01,$01,$00,$00,$01,$01,$01,$01,$01,$01,$01,$01,$00,$00,$00,$00 ; [$bbe2]
                                                                        ; byte
 
@@ -13639,6 +14868,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; █▒░░░...
 ; █▒▒░....
 ;
+SPRITE_TILES_NPC_WALKING_MAN_05:            ; [$bbf2]
     db $a8,$98,$f8,$08,$88,$c8,$b8,$90,$70,$60,$80,$f0,$70,$b0,$c0,$e0 ; [$bbf2]
                                                                        ; byte
 
@@ -13653,6 +14883,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ░██▒░...
 ; █▒░░░...
 ;
+SPRITE_TILES_NPC_WALKING_MAN_06:            ; [$bc02]
     db $d0,$d0,$c8,$68,$68,$48,$e8,$b8,$60,$60,$70,$30,$30,$30,$70,$c0 ; [$bc02]
                                                                        ; byte
 
@@ -13667,6 +14898,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ░░░░░█▒░
 ; ▒▒▒░░▒▒░
 ;
+SPRITE_TILES_NPC_WALKING_MAN_07:            ; [$bc12]
     db $74,$d2,$b9,$bd,$1d,$1d,$fd,$19,$f8,$bc,$de,$ce,$e6,$e6,$06,$e6 ; [$bc12]
                                                                        ; byte
 
@@ -13681,6 +14913,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ......░█
 ; .....░██
 ;
+SPRITE_TILES_NPC_WALKING_MAN_08:            ; [$bc22]
     db $00,$00,$01,$00,$01,$03,$03,$07,$01,$01,$01,$01,$00,$01,$01,$03 ; [$bc22]
                                                                        ; byte
 
@@ -13695,6 +14928,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; █▒░░░░..
 ; ▒▒░░░...
 ;
+SPRITE_TILES_NPC_WALKING_MAN_09:            ; [$bc32]
     db $ce,$ce,$8d,$06,$c4,$b4,$bc,$38,$f7,$f7,$f2,$f8,$38,$c8,$c0,$c0 ; [$bc32]
                                                                        ; byte
 
@@ -13709,6 +14943,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ....░▒█▒
 ; ...░▒▒▒▒
 ;
+SPRITE_TILES_NPC_WALKING_MAN_10:            ; [$bc42]
     db $07,$07,$06,$06,$06,$04,$0a,$10,$03,$03,$03,$03,$03,$03,$07,$0f ; [$bc42]
                                                                        ; byte
 
@@ -13723,6 +14958,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ░...░█▒░
 ; ░..░█▒░░
 ;
+SPRITE_TILES_NPC_WALKING_MAN_11:            ; [$bc52]
     db $48,$cc,$b2,$9a,$8f,$8d,$8d,$9b,$b0,$30,$1c,$0c,$04,$06,$06,$0c ; [$bc52]
                                                                        ; byte
 
@@ -13737,6 +14973,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; .....▒██
 ; ....░▒█▒
 ;
+SPRITE_TILES_NPC_WALKING_MAN_12:            ; [$bc62]
     db $00,$00,$00,$00,$01,$03,$03,$0a,$00,$00,$01,$01,$00,$01,$07,$07 ; [$bc62]
                                                                        ; byte
 
@@ -13751,6 +14988,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ▒▒░░░░▒▒
 ; ▒░░░░░█▒
 ;
+SPRITE_TILES_NPC_WALKING_MAN_13:            ; [$bc72]
     db $74,$34,$ee,$ce,$8d,$1d,$3c,$7e,$b8,$f8,$70,$70,$f2,$e2,$c3,$83 ; [$bc72]
                                                                        ; byte
 
@@ -13765,6 +15003,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ......░▒
 ; ......▒█
 ;
+SPRITE_TILES_NPC_WALKING_MAN_14:            ; [$bc82]
     db $00,$07,$01,$01,$01,$01,$02,$01,$0f,$00,$00,$00,$00,$00,$01,$03 ; [$bc82]
                                                                        ; byte
 
@@ -13779,9 +15018,17 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; ░██▒░...
 ; ▒▒█▒░...
 ;
+SPRITE_TILES_NPC_WALKING_MAN_15:            ; [$bc92]
     db $ef,$c4,$44,$84,$3c,$c8,$e8,$28,$30,$78,$f8,$f8,$c0,$30,$70,$f0 ; [$bc92]
                                                                        ; byte
 
+
+;============================================================================
+; NPC Tiles: Unused Blue Lady
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806c]
+;============================================================================
 
 ;
 ; ........
@@ -13796,7 +15043,7 @@ PPUTile16_PRG6__bba2:                       ; [$bba2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::806c]
 ;
-PPUTile16_PRG6__bca2:                       ; [$bca2]
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_00:       ; [$bca2]
     db $00,$01,$00,$01,$02,$00,$01,$00,$00,$00,$01,$00,$01,$01,$00,$00 ; [$bca2]
                                                                        ; byte
 
@@ -13811,6 +15058,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ▒░░░░░..
 ; .░█▒░░░.
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_01:       ; [$bcb2]
     db $f0,$f8,$b8,$18,$b8,$3c,$7c,$6e,$20,$b0,$c0,$e0,$c0,$c0,$80,$30 ; [$bcb2]
                                                                        ; byte
 
@@ -13825,6 +15073,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ........
 ; .......░
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_02:       ; [$bcc2]
     db $00,$01,$03,$03,$01,$00,$00,$01,$00,$00,$01,$01,$00,$00,$00,$00 ; [$bcc2]
                                                                        ; byte
 
@@ -13839,6 +15088,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ░░▒█▒░..
 ; █░▒▒░...
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_03:       ; [$bcd2]
     db $74,$c6,$a4,$34,$34,$f4,$d4,$c8,$b8,$b8,$d8,$d8,$d8,$18,$38,$b0 ; [$bcd2]
                                                                        ; byte
 
@@ -13853,6 +15103,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; .......░
 ; .......░
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_04:       ; [$bce2]
     db $01,$01,$00,$00,$01,$01,$01,$01,$00,$00,$01,$01,$00,$00,$00,$00 ; [$bce2]
                                                                        ; byte
 
@@ -13867,6 +15118,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; █▒▒░....
 ; █▒▒░....
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_05:       ; [$bcf2]
     db $e8,$d8,$f8,$c8,$e8,$d8,$90,$90,$b0,$a0,$c0,$f0,$10,$e0,$e0,$e0 ; [$bcf2]
                                                                        ; byte
 
@@ -13881,6 +15133,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ░░█▒░...
 ; █▒▒▒░...
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_06:       ; [$bd02]
     db $d0,$d0,$48,$68,$68,$48,$e8,$88,$60,$60,$30,$30,$30,$30,$30,$f0 ; [$bd02]
                                                                        ; byte
 
@@ -13895,6 +15148,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ░░░░░░▒▒
 ; ▒█▒▒░░▒▒
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_07:       ; [$bd12]
     db $74,$c2,$a1,$39,$18,$9c,$fc,$4c,$b8,$bc,$de,$c6,$e7,$63,$03,$f3 ; [$bd12]
                                                                        ; byte
 
@@ -13909,6 +15163,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ......░█
 ; ......░█
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_08:       ; [$bd22]
     db $01,$00,$00,$01,$01,$00,$03,$03,$00,$01,$01,$00,$00,$01,$01,$01 ; [$bd22]
                                                                        ; byte
 
@@ -13923,6 +15178,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; █▒░░░...
 ; ▒▒░░░...
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_09:       ; [$bd32]
     db $ec,$e5,$c6,$c4,$74,$bc,$b8,$38,$f3,$fa,$f8,$38,$88,$c0,$c0,$c0 ; [$bd32]
                                                                        ; byte
 
@@ -13937,6 +15193,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; .....░█▒
 ; ....░██▒
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_10:       ; [$bd42]
     db $03,$03,$03,$03,$03,$03,$06,$0e,$01,$01,$01,$01,$01,$01,$03,$07 ; [$bd42]
                                                                        ; byte
 
@@ -13951,6 +15208,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ░...░▒█▒
 ; ░..░▒█▒.
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_11:       ; [$bd52]
     db $48,$74,$ba,$9e,$8d,$86,$8a,$94,$b0,$b8,$1c,$0c,$06,$03,$07,$0e ; [$bd52]
                                                                        ; byte
 
@@ -13965,6 +15223,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; .....░██
 ; ....░██▒
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_12:       ; [$bd62]
     db $00,$01,$03,$03,$01,$03,$07,$0e,$00,$00,$01,$00,$00,$01,$03,$07 ; [$bd62]
                                                                        ; byte
 
@@ -13979,6 +15238,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ▒░░░░░█░
 ; ░░▒░░░█░
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_13:       ; [$bd72]
     db $74,$f6,$ec,$ce,$9e,$3d,$7f,$df,$b8,$b8,$70,$f0,$e0,$c2,$82,$22 ; [$bd72]
                                                                        ; byte
 
@@ -13993,6 +15253,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ......░▒
 ; ......▒█
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_14:       ; [$bd82]
     db $09,$07,$02,$02,$03,$02,$02,$01,$06,$00,$01,$01,$00,$01,$01,$03 ; [$bd82]
                                                                        ; byte
 
@@ -14007,9 +15268,17 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; ░██▒░...
 ; ░██▒░...
 ;
+SPRITE_TILES_NPC_UNUSED_BLUE_LADY_15:       ; [$bd92]
     db $6c,$c8,$88,$b8,$f8,$c8,$e8,$e8,$f2,$f0,$f0,$c0,$20,$70,$70,$70 ; [$bd92]
                                                                        ; byte
 
+
+;============================================================================
+; NPC Tiles: Unused Child
+;
+; XREFS:
+;     BANK6_SPRITEADDRS_START [$PRG6::806e]
+;============================================================================
 
 ;
 ; .░░░░...
@@ -14024,7 +15293,7 @@ PPUTile16_PRG6__bca2:                       ; [$bca2]
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::806e]
 ;
-PPUTile16_PRG6__bda2:                       ; [$bda2]
+SPRITE_TILES_NPC_UNUSED_CHILD_00:           ; [$bda2]
     db $78,$bc,$9c,$8c,$5c,$1e,$be,$76,$00,$58,$e0,$70,$e0,$e0,$40,$18 ; [$bda2]
                                                                        ; byte
 
@@ -14039,6 +15308,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ▒█░░░░..
 ; ░░▒▒▒░..
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_01:           ; [$bdb2]
     db $b4,$64,$34,$64,$d4,$2c,$7c,$c4,$58,$d8,$d8,$98,$38,$d0,$c0,$38 ; [$bdb2]
                                                                        ; byte
 
@@ -14053,6 +15323,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; .░█▒▒░..
 ; ░▒▒█▒░..
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_02:           ; [$bdc2]
     db $90,$c8,$c8,$c8,$68,$68,$64,$94,$6c,$70,$70,$70,$30,$30,$38,$78 ; [$bdc2]
                                                                        ; byte
 
@@ -14067,6 +15338,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ▒█▒▒░░..
 ; ░░▒▒▒░..
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_03:           ; [$bdd2]
     db $b2,$79,$0d,$1d,$fc,$0c,$4c,$c4,$5c,$ce,$f6,$e2,$03,$f3,$f0,$38 ; [$bdd2]
                                                                        ; byte
 
@@ -14081,6 +15353,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ......░▒
 ; .......░
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_04:           ; [$bde2]
     db $00,$00,$01,$01,$03,$04,$02,$01,$00,$00,$00,$00,$00,$03,$01,$00 ; [$bde2]
                                                                        ; byte
 
@@ -14095,6 +15368,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ▒░..░█▒░
 ; ▒..░▒▒░.
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_05:           ; [$bdf2]
     db $90,$c8,$4c,$9a,$32,$09,$4d,$12,$6c,$70,$f0,$e4,$cc,$c6,$86,$8c ; [$bdf2]
                                                                        ; byte
 
@@ -14109,6 +15383,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ........
 ; ........
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_06:           ; [$be02]
     db $00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$01,$01,$00,$00,$00,$00 ; [$be02]
                                                                        ; byte
 
@@ -14123,6 +15398,7 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ▒█▒▒▒░..
 ; ▒░░░░▒..
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_07:           ; [$be12]
     db $b4,$e6,$df,$1e,$fc,$8c,$44,$78,$58,$38,$f0,$e1,$01,$70,$f8,$84 ; [$be12]
                                                                        ; byte
 
@@ -14137,26 +15413,16 @@ PPUTile16_PRG6__bda2:                       ; [$bda2]
 ; ▒░..░▒▒░
 ; ▒░.░▒▒░.
 ;
+SPRITE_TILES_NPC_UNUSED_CHILD_08:           ; [$be22]
     db $d4,$54,$24,$e2,$52,$4d,$49,$52,$38,$b8,$d8,$9c,$8c,$86,$86,$8c ; [$be22]
                                                                        ; byte
 
-
-;
-; █▒██░███
-; ████████
-; ████▒███
-; ████████
-; ████████
-; ░█..▒█.░
-; ........
-; ████████
 ;
 ; XREFS:
 ;     BANK6_SPRITEADDRS_START [$PRG6::8070]
 ;
-PPUTile16_PRG6__be32:                       ; [$be32]
-    db $bf,$ff,$f7,$ff,$ff,$c5,$00,$ff,$f7,$ff,$ff,$ff,$ff,$4c,$00,$ff ; [$be32]
-                                                                       ; byte
+DAT_PRG6__be32:                             ; [$be32]
+    hex bf ff f7 ff ff c5 00 ff f7 ff ff ff ff 4c 00 ff ; [$be32] undefined
     hex b1 ff ff ff fb 7f 00 ff 6f ff ff ff ff ad 00 ff ; [$be42] undefined
     hex ff ff ff ff ff fa 00 ff 7d ff ff ff ff 08 00 ff ; [$be52] undefined
     hex cb ff fd ff da 7f 00 ff 5d ff 5f ff 7f e2 00 ff ; [$be62] undefined

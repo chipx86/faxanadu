@@ -239,12 +239,23 @@ APOLUNE_BLOCKS:                             ; [$8004]
     hex 71 c6 f0 8c 6f 08 d3 33 ec 6f 08 d3 33 ec 6f 08 ; [$8e24] undefined
     db $d3,$33                              ; [$8e34] undefined
 
+
+;
+; ░░█▒░░..
+; .██▒░█░░
+; ▒▒▒.█▒..
+; ██..░█▒▒
+; ..▒▒....
+; .███.░▒▒
+; ░░░▒██..
+; ██...░░░
 ;
 ; XREFS:
 ;     BANK7_SPRITEADDRS_START [$PRG7::8060]
 ;
-DAT_PRG1__8e36:                             ; [$8e36]
-    hex ec 6f 08 cc 00 74 ec c7 30 74 ec c7 30 73 1c c0 ; [$8e36] undefined
+PPUTile16_PRG1__8e36:                       ; [$8e36]
+    db $ec,$6f,$08,$cc,$00,$74,$ec,$c7,$30,$74,$ec,$c7,$30,$73,$1c,$c0 ; [$8e36]
+                                                                       ; byte
     hex c6 f0 8c 6f 08 c6 f0 8c 6f 08 c6 f0 8c 6f 08 c6 ; [$8e46] undefined
     hex f0 8c 6f 08 2a aa aa aa c6 f0 8c 6f 08 c6 f0 8c ; [$8e56] undefined
     hex 6f 08 c6 f0 8c 6f 08 c6 f0 83 1b d6 f4 3d 63 7c ; [$8e66] undefined

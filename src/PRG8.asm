@@ -31,7 +31,7 @@
 ;     Player_LoadArmorSpriteTilesAddr
 ;
 TILES_ARMOR_ADDRS_INDEX_REF:                ; [$8000]
-    dw $0012                                ; TILES_ARMOR_ADDRS_INDEX
+    dw $0012                                ; TILES_PLAYER_ARMOR_ADDRS_INDEX
                                             ; [$PRG8::8000]
 
 
@@ -43,7 +43,7 @@ TILES_ARMOR_ADDRS_INDEX_REF:                ; [$8000]
 ;     Player_LoadWeaponSpriteTileAddrs
 ;
 TILES_WEAPON_ADDRS_INDEX_REF:               ; [$8002]
-    dw $016b                                ; TILES_WEAPON_ADDRS_INDEX
+    dw $016b                                ; TILES_PLAYER_WEAPON_ADDRS_INDEX
                                             ; [$PRG8::8002]
 
 
@@ -52,10 +52,10 @@ TILES_WEAPON_ADDRS_INDEX_REF:               ; [$8002]
 ;
 ;
 ; XREFS:
-;     Player_DrawArmorTile
+;     Player_LoadArmorTile
 ;
 TILES_ARMOR_START_REF:                      ; [$8004]
-    dw $01a4                                ; TILES_ARMOR_START
+    dw $01a4                                ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::8004]
 
 
@@ -64,7 +64,7 @@ TILES_ARMOR_START_REF:                      ; [$8004]
 ;
 ;
 ; XREFS:
-;     Player_DrawWeaponTile
+;     Player_LoadWeaponTile
 ;
 TILES_WEAPONS_START_REF:                    ; [$8006]
     dw $0a94                                ; TILES_WEAPONS_START_DAGGER_02
@@ -88,7 +88,7 @@ TILES_COMMON_START_REF:                     ; [$8008]
 ;
 ;
 ; XREFS:
-;     Player_DrawShieldTile
+;     Player_LoadShieldTile
 ;
 TILES_SHIELDS_START_REF:                    ; [$800a]
     dw $1104                                ; TILES_SHIELDS_START_SMALL_SHIELD_01
@@ -112,10 +112,10 @@ TILES_SHIELDS_ADDRS_INDEX_REF:              ; [$800c]
 ;
 ;
 ; XREFS:
-;     FUN_PRG15_MIRROR__f2e3
+;     IScripts_LoadPortraitTilesAddress
 ;
 TILES_PORTRAITS_ADDRS_INDEX_REF:            ; [$800e]
-    dw $1224                                ; TILES_PORTRAITS_ADDRS_INDEX
+    dw $1224                                ; SPRITE_TILES_PORTRAITS_ADDRS_INDEX
                                             ; [$PRG8::800e]
 
 
@@ -124,10 +124,10 @@ TILES_PORTRAITS_ADDRS_INDEX_REF:            ; [$800e]
 ;
 ;
 ; XREFS:
-;     IScripts_Maybe_DrawSpriteToPPU
+;     IScripts_DrawPortraitTileToPPU
 ;
 TILES_PORTRAITS_START_REF:                  ; [$8010]
-    dw $136b                                ; TILES_PORTRAITS_START
+    dw $136b                                ; SPRITE_TILES_PORTRAIT_PINKSHIRT_00
                                             ; [$PRG8::8010]
 
 
@@ -145,698 +145,707 @@ TILES_PORTRAITS_START_REF:                  ; [$8010]
 ; XREFS:
 ;     TILES_ARMOR_ADDRS_INDEX_REF [$PRG8::8000]
 ;
-TILES_ARMOR_ADDRS_INDEX:                    ; [$8012]
-    dw $0022                                ; TILES_ARMOR_LEATHER_START
+TILES_PLAYER_ARMOR_ADDRS_INDEX:             ; [$8012]
+    dw $0022                                ; TILES_PLAYER_ARMOR_LEATHER_START
                                             ; [$PRG8::8012]
-    dw $00f2                                ; TILES_ARMOR_LEATHER_SHIELD_START
+    dw $00f2                                ; TILES_PLAYER_ARMOR_LEATHER_WSHIELD_START
                                             ; [$PRG8::8014]
-    dw $0056                                ; TILES_ARMOR_STUDDED_MAIL_START
+    dw $0056                                ; TILES_PLAYER_ARMOR_STUDDED_MAIL_START
                                             ; [$PRG8::8016]
-    dw $011a                                ; TILES_ARMOR_STUDDED_MAIL_SHIELD_START
+    dw $011a                                ; TILES_PLAYER_ARMOR_STUDDED_MAIL_WSHIELD_START
                                             ; [$PRG8::8018]
-    dw $008a                                ; TILES_ARMOR_FULL_PLATE_START
+    dw $008a                                ; TILES_PLAYER_ARMOR_FULL_PLATE_START
                                             ; [$PRG8::801a]
-    dw $0142                                ; TILES_ARMOR_FULL_PLATE_SHIELD_START
+    dw $0142                                ; TILES_PLAYER_ARMOR_FULL_PLATE_WSHIELD_START
                                             ; [$PRG8::801c]
-    dw $00bf                                ; TILES_ARMOR_BATTLE_SUIT_START
+    dw $00bf                                ; TILES_PLAYER_ARMOR_BATTLE_SUIT_START
                                             ; [$PRG8::801e]
-    dw $00bf                                ; TILES_ARMOR_BATTLE_SUIT_START
+    dw $00bf                                ; TILES_PLAYER_ARMOR_BATTLE_SUIT_START
                                             ; [$PRG8::8020]
 
 ;
 ; XREFS:
-;     TILES_ARMOR_ADDRS_INDEX [$PRG8::8012]
+;     TILES_PLAYER_ARMOR_ADDRS_INDEX [$PRG8::8012]
 ;
-TILES_ARMOR_LEATHER_START:                  ; [$8022]
-    db $00                                  ; TILES_ARMOR_START
+TILES_PLAYER_ARMOR_LEATHER_START:           ; [$8022]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::8022]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::8023]
-    db $02                                  ; TILE_ARMOR_LEATHER_03
+    db $02                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_02
                                             ; [$PRG8::8024]
-    db $03                                  ; TILE_ARMOR_LEATHER_04
+    db $03                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_03
                                             ; [$PRG8::8025]
-    db $04                                  ; TILE_ARMOR_LEATHER_05
+    db $04                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_04
                                             ; [$PRG8::8026]
-    db $05                                  ; TILE_ARMOR_LEATHER_06
+    db $05                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_05
                                             ; [$PRG8::8027]
-    db $06                                  ; TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
+    db $06                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_06_WSHIELD_06__STUDDED_02_WSHIELD_06
                                             ; [$PRG8::8028]
-    db $07                                  ; TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08
+    db $07                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
                                             ; [$PRG8::8029]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::802a]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::802b]
-    db $0a                                  ; TILE_ARMOR_LEATHER_11
+    db $0a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_10
                                             ; [$PRG8::802c]
-    db $0b                                  ; TILE_ARMOR_LEATHER_12
+    db $0b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_11
                                             ; [$PRG8::802d]
-    db $0c                                  ; TILE_ARMOR_LEATHER_13
+    db $0c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_12
                                             ; [$PRG8::802e]
-    db $0d                                  ; TILE_ARMOR_LEATHER_14
+    db $0d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_13
                                             ; [$PRG8::802f]
-    db $0e                                  ; TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11
+    db $0e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_14_WSHIELD_10__STUDDED_06_WSHIELD_10
                                             ; [$PRG8::8030]
-    db $0f                                  ; TILE_ARMOR_LEATHER_16
+    db $0f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_15
                                             ; [$PRG8::8031]
-    db $10                                  ; TILE_ARMOR_LEATHER_17
+    db $10                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_16
                                             ; [$PRG8::8032]
-    db $11                                  ; TILE_ARMOR_LEATHER_18
+    db $11                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_17
                                             ; [$PRG8::8033]
-    db $12                                  ; TILE_ARMOR_LEATHER_19
+    db $12                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_18
                                             ; [$PRG8::8034]
-    db $13                                  ; TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
+    db $13                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_19_WSHIELD_11__STUDDED_07_WSHIELD_11
                                             ; [$PRG8::8035]
-    db $14                                  ; TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13
+    db $14                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
                                             ; [$PRG8::8036]
-    db $29                                  ; TILE_ARMOR_LEATHER_22
+    db $29                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_21
                                             ; [$PRG8::8037]
-    db $2a                                  ; TILE_ARMOR_LEATHER_23
+    db $2a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_22
                                             ; [$PRG8::8038]
-    db $2b                                  ; TILE_ARMOR_LEATHER_24__STUDDED_22__FULL_25
+    db $2b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_23__STUDDED_21__FULL_PLATE_24
                                             ; [$PRG8::8039]
-    db $2c                                  ; TILE_ARMOR_LEATHER_25__STUDDED_23__FULL_26
+    db $2c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_24__STUDDED_22__FULL_PLATE_25
                                             ; [$PRG8::803a]
-    db $2d                                  ; TILE_ARMOR_LEATHER_26__STUDDED_24__FULL_27
+    db $2d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_25__STUDDED_23__FULL_PLATE_26
                                             ; [$PRG8::803b]
-    db $2e                                  ; TILE_ARMOR_LEATHER_27__STUDDED_25__FULL_28
+    db $2e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_26__STUDDED_24__FULL_PLATE_27
                                             ; [$PRG8::803c]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::803d]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::803e]
-    db $4d                                  ; TILE_ARMOR_LEATHER_30_WSHIELD_18
+    db $4d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_29_WSHIELD_17
                                             ; [$PRG8::803f]
-    db $4e                                  ; TILE_ARMOR_LEATHER_31_WSHIELD_19
+    db $4e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_30_WSHIELD_18
                                             ; [$PRG8::8040]
-    db $4f                                  ; TILE_ARMOR_LEATHER_32_WSHIELD_20
+    db $4f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_31_WSHIELD_19
                                             ; [$PRG8::8041]
-    db $50                                  ; TILE_ARMOR_LEATHER_33_WSHIELD_21
+    db $50                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_32_WSHIELD_20
                                             ; [$PRG8::8042]
-    db $51                                  ; TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
+    db $51                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_33_WSHIELD_21__STUDDED_29_WSHIELD_21
                                             ; [$PRG8::8043]
-    db $52                                  ; TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23
+    db $52                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
                                             ; [$PRG8::8044]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::8045]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::8046]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::8047]
-    db $5a                                  ; TILE_ARMOR_LEATHER_39_WSHIELD_27
+    db $5a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_38_WSHIELD_26
                                             ; [$PRG8::8048]
-    db $5b                                  ; TILE_ARMOR_LEATHER_40_WSHIELD_28
+    db $5b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_39_WSHIELD_27
                                             ; [$PRG8::8049]
-    db $5c                                  ; TILE_ARMOR_LEATHER_41_WSHIELD_29
+    db $5c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_40_WSHIELD_28
                                             ; [$PRG8::804a]
-    db $5d                                  ; TILE_ARMOR_LEATHER_42_WSHIELD_30
+    db $5d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_41_WSHIELD_29
                                             ; [$PRG8::804b]
-    db $5e                                  ; TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
+    db $5e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_42_WSHIELD_30__STUDDED_38_WSHIELD_30
                                             ; [$PRG8::804c]
-    db $5f                                  ; TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32
+    db $5f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
                                             ; [$PRG8::804d]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::804e]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::804f]
-    db $77                                  ; TILE_ARMOR_LEATHER_47_WSHIELD_35
+    db $77                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_052
                                             ; [$PRG8::8050]
-    db $78                                  ; TILE_ARMOR_LEATHER_48_WSHIELD_36
+    db $78                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_47_WSHIELD_35
                                             ; [$PRG8::8051]
-    db $79                                  ; TILE_ARMOR_LEATHER_49_WSHIELD_37
+    db $79                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_48_WSHIELD_36
                                             ; [$PRG8::8052]
-    db $7a                                  ; TILE_ARMOR_LEATHER_50_WSHIELD_38
+    db $7a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_49_WSHIELD_37
                                             ; [$PRG8::8053]
-    db $7b                                  ; TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
+    db $7b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_50_WSHIELD_38__STUDDED_46_WSHIELD_38
                                             ; [$PRG8::8054]
-    db $7c                                  ; TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40
+    db $7c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
                                             ; [$PRG8::8055]
 
-TILES_ARMOR_STUDDED_MAIL_START:             ; [$8056]
-    db $00                                  ; TILES_ARMOR_START
+
+;============================================================================
+; The tiles comprising studded mail.
+;
+; BUG:
+; SPRITE_TILES_PLAYER_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_052
+;      is not in this list, but should be. It's loaded via
+;      the Leather armor tiles and referenced.
+;============================================================================
+TILES_PLAYER_ARMOR_STUDDED_MAIL_START:      ; [$8056]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::8056]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::8057]
-    db $06                                  ; TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
+    db $06                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_06_WSHIELD_06__STUDDED_02_WSHIELD_06
                                             ; [$PRG8::8058]
-    db $07                                  ; TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08
+    db $07                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
                                             ; [$PRG8::8059]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::805a]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::805b]
-    db $0e                                  ; TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11
+    db $0e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_14_WSHIELD_10__STUDDED_06_WSHIELD_10
                                             ; [$PRG8::805c]
-    db $13                                  ; TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
+    db $13                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_19_WSHIELD_11__STUDDED_07_WSHIELD_11
                                             ; [$PRG8::805d]
-    db $14                                  ; TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13
+    db $14                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
                                             ; [$PRG8::805e]
-    db $15                                  ; TILE_ARMOR_STUDDED_10__FULL_03
+    db $15                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_09__FULL_PLATE_02
                                             ; [$PRG8::805f]
-    db $16                                  ; TILE_ARMOR_STUDDED_11__FULL_04
+    db $16                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_10__FULL_PLATE_03
                                             ; [$PRG8::8060]
-    db $17                                  ; TILE_ARMOR_STUDDED_12__FULL_05
+    db $17                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_11__FULL_PLATE_04
                                             ; [$PRG8::8061]
-    db $18                                  ; TILE_ARMOR_STUDDED_13__FULL_06
+    db $18                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_12__FULL_PLATE_05
                                             ; [$PRG8::8062]
-    db $19                                  ; TILE_ARMOR_STUDDED_14__FULL_11
+    db $19                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_13__FULL_PLATE_10
                                             ; [$PRG8::8063]
-    db $1a                                  ; TILE_ARMOR_STUDDED_15__FULL_12
+    db $1a                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_14__FULL_PLATE_11
                                             ; [$PRG8::8064]
-    db $1b                                  ; TILE_ARMOR_STUDDED_16__FULL_13
+    db $1b                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_15__FULL_PLATE_12
                                             ; [$PRG8::8065]
-    db $1c                                  ; TILE_ARMOR_STUDDED_17__FULL_14
+    db $1c                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_16__FULL_PLATE_13
                                             ; [$PRG8::8066]
-    db $1d                                  ; TILE_ARMOR_STUDDED_18__FULL_17
+    db $1d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_17__FULL_PLATE_16
                                             ; [$PRG8::8067]
-    db $1e                                  ; TILE_ARMOR_STUDDED_19__FULL_18
+    db $1e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_18__FULL_PLATE_17
                                             ; [$PRG8::8068]
-    db $1f                                  ; TILE_ARMOR_STUDDED_20__FULL_19
+    db $1f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_19__FULL_PLATE_18
                                             ; [$PRG8::8069]
-    db $20                                  ; TILE_ARMOR_STUDDED_21__FULL_20
+    db $20                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_20__FULL_PLATE_19
                                             ; [$PRG8::806a]
-    db $2b                                  ; TILE_ARMOR_LEATHER_24__STUDDED_22__FULL_25
+    db $2b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_23__STUDDED_21__FULL_PLATE_24
                                             ; [$PRG8::806b]
-    db $2c                                  ; TILE_ARMOR_LEATHER_25__STUDDED_23__FULL_26
+    db $2c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_24__STUDDED_22__FULL_PLATE_25
                                             ; [$PRG8::806c]
-    db $2d                                  ; TILE_ARMOR_LEATHER_26__STUDDED_24__FULL_27
+    db $2d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_25__STUDDED_23__FULL_PLATE_26
                                             ; [$PRG8::806d]
-    db $2e                                  ; TILE_ARMOR_LEATHER_27__STUDDED_25__FULL_28
+    db $2e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_26__STUDDED_24__FULL_PLATE_27
                                             ; [$PRG8::806e]
-    db $2f                                  ; TILE_ARMOR_STUDDED_26
+    db $2f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_25
                                             ; [$PRG8::806f]
-    db $30                                  ; TILE_ARMOR_STUDDED_27
+    db $30                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_26
                                             ; [$PRG8::8070]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::8071]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::8072]
-    db $51                                  ; TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
+    db $51                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_33_WSHIELD_21__STUDDED_29_WSHIELD_21
                                             ; [$PRG8::8073]
-    db $52                                  ; TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23
+    db $52                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
                                             ; [$PRG8::8074]
-    db $53                                  ; TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19
+    db $53                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_31_WSHIELD_17__FULL_PLATE_30_WSHIELD_18
                                             ; [$PRG8::8075]
-    db $54                                  ; TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20
+    db $54                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_32_WSHIELD_18__FULL_PLATE_31_WSHIELD_19
                                             ; [$PRG8::8076]
-    db $55                                  ; TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21
+    db $55                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_33_WSHIELD_19__FULL_PLATE_32_WSHIELD_20
                                             ; [$PRG8::8077]
-    db $56                                  ; TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22
+    db $56                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_34_WSHIELD_20__FULL_PLATE_33_WSHIELD_21
                                             ; [$PRG8::8078]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::8079]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::807a]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::807b]
-    db $5e                                  ; TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
+    db $5e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_42_WSHIELD_30__STUDDED_38_WSHIELD_30
                                             ; [$PRG8::807c]
-    db $5f                                  ; TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32
+    db $5f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
                                             ; [$PRG8::807d]
-    db $60                                  ; TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28
+    db $60                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_40_WSHIELD_26__FULL_PLATE_39_WSHIELD_27
                                             ; [$PRG8::807e]
-    db $61                                  ; TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29
+    db $61                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_41_WSHIELD_27__FULL_PLATE_40_WSHIELD_28
                                             ; [$PRG8::807f]
-    db $62                                  ; TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30
+    db $62                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_42_WSHIELD_28__FULL_PLATE_41_WSHIELD_29
                                             ; [$PRG8::8080]
-    db $63                                  ; TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31
+    db $63                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_43_WSHIELD_29__FULL_PLATE_42_WSHIELD_30
                                             ; [$PRG8::8081]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::8082]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::8083]
-    db $7b                                  ; TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
+    db $7b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_50_WSHIELD_38__STUDDED_46_WSHIELD_38
                                             ; [$PRG8::8084]
-    db $7c                                  ; TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40
+    db $7c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
                                             ; [$PRG8::8085]
-    db $7d                                  ; TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36
+    db $7d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_48_WSHIELD_34__FULL_PLATE_47_WSHIELD_35
                                             ; [$PRG8::8086]
-    db $7e                                  ; TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37
+    db $7e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_49_WSHIELD_35__FULL_PLATE_48_WSHIELD_36
                                             ; [$PRG8::8087]
-    db $7f                                  ; TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38
+    db $7f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_50_WSHIELD_36__FULL_PLATE_49_WSHIELD_37
                                             ; [$PRG8::8088]
-    db $80                                  ; TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39
+    db $80                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_51_WSHIELD_37__FULL_PLATE_50_WSHIELD_38
                                             ; [$PRG8::8089]
 
-TILES_ARMOR_FULL_PLATE_START:               ; [$808a]
-    db $00                                  ; TILES_ARMOR_START
+TILES_PLAYER_ARMOR_FULL_PLATE_START:        ; [$808a]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::808a]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::808b]
-    db $15                                  ; TILE_ARMOR_STUDDED_10__FULL_03
+    db $15                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_09__FULL_PLATE_02
                                             ; [$PRG8::808c]
-    db $16                                  ; TILE_ARMOR_STUDDED_11__FULL_04
+    db $16                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_10__FULL_PLATE_03
                                             ; [$PRG8::808d]
-    db $17                                  ; TILE_ARMOR_STUDDED_12__FULL_05
+    db $17                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_11__FULL_PLATE_04
                                             ; [$PRG8::808e]
-    db $18                                  ; TILE_ARMOR_STUDDED_13__FULL_06
+    db $18                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_12__FULL_PLATE_05
                                             ; [$PRG8::808f]
-    db $21                                  ; TILE_ARMOR_FULL_07_WSHIELD_07__BATTLE_SUIT_07
+    db $21                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_06_WSHIELD_06__BATTLE_SUIT_06
                                             ; [$PRG8::8090]
-    db $22                                  ; TILE_ARMOR_FULL_08_WSHIELD_08__BATTLE_SUIT_08
+    db $22                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_07_WSHIELD_07__BATTLE_SUIT_07
                                             ; [$PRG8::8091]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::8092]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::8093]
-    db $19                                  ; TILE_ARMOR_STUDDED_14__FULL_11
+    db $19                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_13__FULL_PLATE_10
                                             ; [$PRG8::8094]
-    db $1a                                  ; TILE_ARMOR_STUDDED_15__FULL_12
+    db $1a                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_14__FULL_PLATE_11
                                             ; [$PRG8::8095]
-    db $1b                                  ; TILE_ARMOR_STUDDED_16__FULL_13
+    db $1b                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_15__FULL_PLATE_12
                                             ; [$PRG8::8096]
-    db $1c                                  ; TILE_ARMOR_STUDDED_17__FULL_14
+    db $1c                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_16__FULL_PLATE_13
                                             ; [$PRG8::8097]
-    db $23                                  ; TILE_ARMOR_FULL_15_WSHIELD_11
+    db $23                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_14_WSHIELD_10
                                             ; [$PRG8::8098]
-    db $24                                  ; TILE_ARMOR_FULL_16_WSHIELD_12
+    db $24                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_15_WSHIELD_11
                                             ; [$PRG8::8099]
-    db $1d                                  ; TILE_ARMOR_STUDDED_18__FULL_17
+    db $1d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_17__FULL_PLATE_16
                                             ; [$PRG8::809a]
-    db $1e                                  ; TILE_ARMOR_STUDDED_19__FULL_18
+    db $1e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_18__FULL_PLATE_17
                                             ; [$PRG8::809b]
-    db $1f                                  ; TILE_ARMOR_STUDDED_20__FULL_19
+    db $1f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_19__FULL_PLATE_18
                                             ; [$PRG8::809c]
-    db $20                                  ; TILE_ARMOR_STUDDED_21__FULL_20
+    db $20                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_20__FULL_PLATE_19
                                             ; [$PRG8::809d]
-    db $25                                  ; TILE_ARMOR_FULL_21_WSHIELD_13
+    db $25                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_20_WSHIELD_12
                                             ; [$PRG8::809e]
-    db $26                                  ; TILE_ARMOR_FULL_22_WSHIELD_14
+    db $26                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_21_WSHIELD_13
                                             ; [$PRG8::809f]
-    db $2f                                  ; TILE_ARMOR_FULL_23
+    db $2f                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_22
                                             ; [$PRG8::80a0]
-    db $30                                  ; TILE_ARMOR_FULL_24
+    db $30                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_23
                                             ; [$PRG8::80a1]
-    db $2b                                  ; TILE_ARMOR_LEATHER_24__STUDDED_22__FULL_25
+    db $2b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_23__STUDDED_21__FULL_PLATE_24
                                             ; [$PRG8::80a2]
-    db $2c                                  ; TILE_ARMOR_LEATHER_25__STUDDED_23__FULL_26
+    db $2c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_24__STUDDED_22__FULL_PLATE_25
                                             ; [$PRG8::80a3]
-    db $2d                                  ; TILE_ARMOR_LEATHER_26__STUDDED_24__FULL_27
+    db $2d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_25__STUDDED_23__FULL_PLATE_26
                                             ; [$PRG8::80a4]
-    db $2e                                  ; TILE_ARMOR_LEATHER_27__STUDDED_25__FULL_28
+    db $2e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_26__STUDDED_24__FULL_PLATE_27
                                             ; [$PRG8::80a5]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::80a6]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::80a7]
-    db $53                                  ; TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19
+    db $53                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_31_WSHIELD_17__FULL_PLATE_30_WSHIELD_18
                                             ; [$PRG8::80a8]
-    db $54                                  ; TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20
+    db $54                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_32_WSHIELD_18__FULL_PLATE_31_WSHIELD_19
                                             ; [$PRG8::80a9]
-    db $55                                  ; TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21
+    db $55                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_33_WSHIELD_19__FULL_PLATE_32_WSHIELD_20
                                             ; [$PRG8::80aa]
-    db $56                                  ; TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22
+    db $56                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_34_WSHIELD_20__FULL_PLATE_33_WSHIELD_21
                                             ; [$PRG8::80ab]
-    db $6a                                  ; TILE_ARMOR_FULL_35_WSHIELD_23__BATTLE_SUIT_33
+    db $6a                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_34_WSHIELD_22__BATTLE_SUIT_32
                                             ; [$PRG8::80ac]
-    db $6b                                  ; TILE_ARMOR_FULL_36_WSHIELD_24__BATTLE_SUIT_34
+    db $6b                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_35_WSHIELD_23__BATTLE_SUIT_33
                                             ; [$PRG8::80ad]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::80ae]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::80af]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::80b0]
-    db $60                                  ; TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28
+    db $60                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_40_WSHIELD_26__FULL_PLATE_39_WSHIELD_27
                                             ; [$PRG8::80b1]
-    db $61                                  ; TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29
+    db $61                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_41_WSHIELD_27__FULL_PLATE_40_WSHIELD_28
                                             ; [$PRG8::80b2]
-    db $62                                  ; TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30
+    db $62                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_42_WSHIELD_28__FULL_PLATE_41_WSHIELD_29
                                             ; [$PRG8::80b3]
-    db $63                                  ; TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31
+    db $63                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_43_WSHIELD_29__FULL_PLATE_42_WSHIELD_30
                                             ; [$PRG8::80b4]
-    db $73                                  ; TILE_ARMOR_FULL_44_WSHIELD_32__BATTLE_SUIT_42
+    db $73                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_43_WSHIELD_31__BATTLE_SUIT_41
                                             ; [$PRG8::80b5]
-    db $74                                  ; TILE_ARMOR_FULL_45_WSHIELD_33__BATTLE_SUIT_43
+    db $74                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_44_WSHIELD_32__BATTLE_SUIT_42
                                             ; [$PRG8::80b6]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::80b7]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::80b8]
-    db $7d                                  ; TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36
+    db $7d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_48_WSHIELD_34__FULL_PLATE_47_WSHIELD_35
                                             ; [$PRG8::80b9]
-    db $7e                                  ; TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37
+    db $7e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_49_WSHIELD_35__FULL_PLATE_48_WSHIELD_36
                                             ; [$PRG8::80ba]
-    db $7f                                  ; TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38
+    db $7f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_50_WSHIELD_36__FULL_PLATE_49_WSHIELD_37
                                             ; [$PRG8::80bb]
-    db $80                                  ; TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39
+    db $80                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_51_WSHIELD_37__FULL_PLATE_50_WSHIELD_38
                                             ; [$PRG8::80bc]
-    db $87                                  ; TILE_ARMOR_FULL_52_WSHIELD_40__BATTLE_SUIT_50
+    db $87                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_51_WSHIELD_39__BATTLE_SUIT_49
                                             ; [$PRG8::80bd]
-    db $88                                  ; TILE_ARMOR_FULL_53_WSHIELD_41__BATTLE_SUIT_51
+    db $88                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_52_WSHIELD_40__BATTLE_SUIT_50
                                             ; [$PRG8::80be]
 
-TILES_ARMOR_BATTLE_SUIT_START:              ; [$80bf]
-    db $31                                  ; TILE_ARMOR_BATTLE_SUIT_01
+TILES_PLAYER_ARMOR_BATTLE_SUIT_START:       ; [$80bf]
+    db $31                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_00
                                             ; [$PRG8::80bf]
-    db $32                                  ; TILE_ARMOR_BATTLE_SUIT_02
+    db $32                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_01
                                             ; [$PRG8::80c0]
-    db $33                                  ; TILE_ARMOR_BATTLE_SUIT_03
+    db $33                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_02
                                             ; [$PRG8::80c1]
-    db $34                                  ; TILE_ARMOR_BATTLE_SUIT_04
+    db $34                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_03
                                             ; [$PRG8::80c2]
-    db $35                                  ; TILE_ARMOR_BATTLE_SUIT_05
+    db $35                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_04
                                             ; [$PRG8::80c3]
-    db $36                                  ; TILE_ARMOR_BATTLE_SUIT_06
+    db $36                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_05
                                             ; [$PRG8::80c4]
-    db $21                                  ; TILE_ARMOR_FULL_07_WSHIELD_07__BATTLE_SUIT_07
+    db $21                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_06_WSHIELD_06__BATTLE_SUIT_06
                                             ; [$PRG8::80c5]
-    db $22                                  ; TILE_ARMOR_FULL_08_WSHIELD_08__BATTLE_SUIT_08
+    db $22                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_07_WSHIELD_07__BATTLE_SUIT_07
                                             ; [$PRG8::80c6]
-    db $37                                  ; TILE_ARMOR_BATTLE_SUIT_09
+    db $37                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_08
                                             ; [$PRG8::80c7]
-    db $38                                  ; TILE_ARMOR_BATTLE_SUIT_10
+    db $38                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_09
                                             ; [$PRG8::80c8]
-    db $39                                  ; TILE_ARMOR_BATTLE_SUIT_11
+    db $39                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_10
                                             ; [$PRG8::80c9]
-    db $3a                                  ; TILE_ARMOR_BATTLE_SUIT_12
+    db $3a                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_11
                                             ; [$PRG8::80ca]
-    db $3b                                  ; TILE_ARMOR_BATTLE_SUIT_13
+    db $3b                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_12
                                             ; [$PRG8::80cb]
-    db $3c                                  ; TILE_ARMOR_BATTLE_SUIT_14
+    db $3c                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_13
                                             ; [$PRG8::80cc]
-    db $3d                                  ; TILE_ARMOR_BATTLE_SUIT_15
+    db $3d                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_14
                                             ; [$PRG8::80cd]
-    db $3e                                  ; TILE_ARMOR_BATTLE_SUIT_16
+    db $3e                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_15
                                             ; [$PRG8::80ce]
-    db $3f                                  ; TILE_ARMOR_BATTLE_SUIT_17
+    db $3f                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_16
                                             ; [$PRG8::80cf]
-    db $40                                  ; TILE_ARMOR_BATTLE_SUIT_18
+    db $40                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_17
                                             ; [$PRG8::80d0]
-    db $41                                  ; TILE_ARMOR_BATTLE_SUIT_19
+    db $41                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_18
                                             ; [$PRG8::80d1]
-    db $42                                  ; TILE_ARMOR_BATTLE_SUIT_20
+    db $42                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_19
                                             ; [$PRG8::80d2]
-    db $43                                  ; TILE_ARMOR_BATTLE_SUIT_21
+    db $43                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_20
                                             ; [$PRG8::80d3]
-    db $44                                  ; TILE_ARMOR_BATTLE_SUIT_22
+    db $44                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_21
                                             ; [$PRG8::80d4]
-    db $45                                  ; TILE_ARMOR_BATTLE_SUIT_23
+    db $45                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_22
                                             ; [$PRG8::80d5]
-    db $46                                  ; TILE_ARMOR_BATTLE_SUIT_24
+    db $46                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_23
                                             ; [$PRG8::80d6]
-    db $47                                  ; TILE_ARMOR_BATTLE_SUIT_25
+    db $47                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_24
                                             ; [$PRG8::80d7]
-    db $48                                  ; TILE_ARMOR_BATTLE_SUIT_26
+    db $48                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_25
                                             ; [$PRG8::80d8]
-    db $64                                  ; TILE_ARMOR_BATTLE_SUIT_27
+    db $64                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_26
                                             ; [$PRG8::80d9]
-    db $65                                  ; TILE_ARMOR_BATTLE_SUIT_28
+    db $65                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_27
                                             ; [$PRG8::80da]
-    db $66                                  ; TILE_ARMOR_BATTLE_SUIT_29
+    db $66                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_28
                                             ; [$PRG8::80db]
-    db $67                                  ; TILE_ARMOR_BATTLE_SUIT_30
+    db $67                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_29
                                             ; [$PRG8::80dc]
-    db $68                                  ; TILE_ARMOR_BATTLE_SUIT_31
+    db $68                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_30
                                             ; [$PRG8::80dd]
-    db $69                                  ; TILE_ARMOR_BATTLE_SUIT_32
+    db $69                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_31
                                             ; [$PRG8::80de]
-    db $6a                                  ; TILE_ARMOR_FULL_35_WSHIELD_23__BATTLE_SUIT_33
+    db $6a                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_34_WSHIELD_22__BATTLE_SUIT_32
                                             ; [$PRG8::80df]
-    db $6b                                  ; TILE_ARMOR_FULL_36_WSHIELD_24__BATTLE_SUIT_34
+    db $6b                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_35_WSHIELD_23__BATTLE_SUIT_33
                                             ; [$PRG8::80e0]
-    db $6c                                  ; TILE_ARMOR_BATTLE_SUIT_35
+    db $6c                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_34
                                             ; [$PRG8::80e1]
-    db $6d                                  ; TILE_ARMOR_BATTLE_SUIT_36
+    db $6d                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_35
                                             ; [$PRG8::80e2]
-    db $6e                                  ; TILE_ARMOR_BATTLE_SUIT_37
+    db $6e                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_36
                                             ; [$PRG8::80e3]
-    db $6f                                  ; TILE_ARMOR_BATTLE_SUIT_38
+    db $6f                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_37
                                             ; [$PRG8::80e4]
-    db $70                                  ; TILE_ARMOR_BATTLE_SUIT_39
+    db $70                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_38
                                             ; [$PRG8::80e5]
-    db $71                                  ; TILE_ARMOR_BATTLE_SUIT_40
+    db $71                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_39
                                             ; [$PRG8::80e6]
-    db $72                                  ; TILE_ARMOR_BATTLE_SUIT_41
+    db $72                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_40
                                             ; [$PRG8::80e7]
-    db $73                                  ; TILE_ARMOR_FULL_44_WSHIELD_32__BATTLE_SUIT_42
+    db $73                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_43_WSHIELD_31__BATTLE_SUIT_41
                                             ; [$PRG8::80e8]
-    db $74                                  ; TILE_ARMOR_FULL_45_WSHIELD_33__BATTLE_SUIT_43
+    db $74                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_44_WSHIELD_32__BATTLE_SUIT_42
                                             ; [$PRG8::80e9]
-    db $81                                  ; TILE_ARMOR_BATTLE_SUIT_44
+    db $81                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_43
                                             ; [$PRG8::80ea]
-    db $82                                  ; TILE_ARMOR_BATTLE_SUIT_45
+    db $82                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_44
                                             ; [$PRG8::80eb]
-    db $83                                  ; TILE_ARMOR_BATTLE_SUIT_46
+    db $83                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_45
                                             ; [$PRG8::80ec]
-    db $84                                  ; TILE_ARMOR_BATTLE_SUIT_47
+    db $84                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_46
                                             ; [$PRG8::80ed]
-    db $85                                  ; TILE_ARMOR_BATTLE_SUIT_48
+    db $85                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_47
                                             ; [$PRG8::80ee]
-    db $86                                  ; TILE_ARMOR_BATTLE_SUIT_49
+    db $86                                  ; SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_48
                                             ; [$PRG8::80ef]
-    db $87                                  ; TILE_ARMOR_FULL_52_WSHIELD_40__BATTLE_SUIT_50
+    db $87                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_51_WSHIELD_39__BATTLE_SUIT_49
                                             ; [$PRG8::80f0]
-    db $88                                  ; TILE_ARMOR_FULL_53_WSHIELD_41__BATTLE_SUIT_51
+    db $88                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_52_WSHIELD_40__BATTLE_SUIT_50
                                             ; [$PRG8::80f1]
 
-TILES_ARMOR_LEATHER_SHIELD_START:           ; [$80f2]
-    db $00                                  ; TILES_ARMOR_START
+TILES_PLAYER_ARMOR_LEATHER_WSHIELD_START:   ; [$80f2]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::80f2]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::80f3]
-    db $89                                  ; TILE_ARMOR_LEATHER_WSHIELD_03
+    db $89                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_02
                                             ; [$PRG8::80f4]
-    db $8a                                  ; TILE_ARMOR_LEATHER_WSHIELD_04__STUDDED_WSHIELD_04__FULL_WSHIELD_04
+    db $8a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_03__STUDDED_WSHIELD_03__FULL_PLATE_WSHIELD_03
                                             ; [$PRG8::80f5]
-    db $8b                                  ; TILE_ARMOR_LEATHER_WSHIELD_05
+    db $8b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_04
                                             ; [$PRG8::80f6]
-    db $8c                                  ; TILE_ARMOR_LEATHER_WSHIELD_06__STUDDED_WSHIELD_06__FULL_WSHIELD_06
+    db $8c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_05__STUDDED_WSHIELD_05__FULL_PLATE_WSHIELD_05
                                             ; [$PRG8::80f7]
-    db $06                                  ; TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
+    db $06                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_06_WSHIELD_06__STUDDED_02_WSHIELD_06
                                             ; [$PRG8::80f8]
-    db $07                                  ; TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08
+    db $07                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
                                             ; [$PRG8::80f9]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::80fa]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::80fb]
-    db $0e                                  ; TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11
+    db $0e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_14_WSHIELD_10__STUDDED_06_WSHIELD_10
                                             ; [$PRG8::80fc]
-    db $13                                  ; TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
+    db $13                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_19_WSHIELD_11__STUDDED_07_WSHIELD_11
                                             ; [$PRG8::80fd]
-    db $14                                  ; TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13
+    db $14                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
                                             ; [$PRG8::80fe]
-    db $49                                  ; TILE_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_WSHIELD_15
+    db $49                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_13__STUDDED_WSHIELD_13__FULL_PLATE_WSHIELD_14
                                             ; [$PRG8::80ff]
-    db $4a                                  ; TILE_ARMOR_LEATHER_WSHIELD_15__STUDDED_WSHIELD_15__FULL_WSHIELD_16
+    db $4a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_PLATE_WSHIELD_15
                                             ; [$PRG8::8100]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::8101]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::8102]
-    db $4d                                  ; TILE_ARMOR_LEATHER_30_WSHIELD_18
+    db $4d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_29_WSHIELD_17
                                             ; [$PRG8::8103]
-    db $4e                                  ; TILE_ARMOR_LEATHER_31_WSHIELD_19
+    db $4e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_30_WSHIELD_18
                                             ; [$PRG8::8104]
-    db $4f                                  ; TILE_ARMOR_LEATHER_32_WSHIELD_20
+    db $4f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_31_WSHIELD_19
                                             ; [$PRG8::8105]
-    db $50                                  ; TILE_ARMOR_LEATHER_33_WSHIELD_21
+    db $50                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_32_WSHIELD_20
                                             ; [$PRG8::8106]
-    db $51                                  ; TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
+    db $51                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_33_WSHIELD_21__STUDDED_29_WSHIELD_21
                                             ; [$PRG8::8107]
-    db $52                                  ; TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23
+    db $52                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
                                             ; [$PRG8::8108]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::8109]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::810a]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::810b]
-    db $5a                                  ; TILE_ARMOR_LEATHER_39_WSHIELD_27
+    db $5a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_38_WSHIELD_26
                                             ; [$PRG8::810c]
-    db $5b                                  ; TILE_ARMOR_LEATHER_40_WSHIELD_28
+    db $5b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_39_WSHIELD_27
                                             ; [$PRG8::810d]
-    db $5c                                  ; TILE_ARMOR_LEATHER_41_WSHIELD_29
+    db $5c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_40_WSHIELD_28
                                             ; [$PRG8::810e]
-    db $5d                                  ; TILE_ARMOR_LEATHER_42_WSHIELD_30
+    db $5d                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_41_WSHIELD_29
                                             ; [$PRG8::810f]
-    db $5e                                  ; TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
+    db $5e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_42_WSHIELD_30__STUDDED_38_WSHIELD_30
                                             ; [$PRG8::8110]
-    db $5f                                  ; TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32
+    db $5f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
                                             ; [$PRG8::8111]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::8112]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::8113]
-    db $77                                  ; TILE_ARMOR_LEATHER_47_WSHIELD_35
+    db $77                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_052
                                             ; [$PRG8::8114]
-    db $78                                  ; TILE_ARMOR_LEATHER_48_WSHIELD_36
+    db $78                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_47_WSHIELD_35
                                             ; [$PRG8::8115]
-    db $79                                  ; TILE_ARMOR_LEATHER_49_WSHIELD_37
+    db $79                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_48_WSHIELD_36
                                             ; [$PRG8::8116]
-    db $7a                                  ; TILE_ARMOR_LEATHER_50_WSHIELD_38
+    db $7a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_49_WSHIELD_37
                                             ; [$PRG8::8117]
-    db $7b                                  ; TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
+    db $7b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_50_WSHIELD_38__STUDDED_46_WSHIELD_38
                                             ; [$PRG8::8118]
-    db $7c                                  ; TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40
+    db $7c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
                                             ; [$PRG8::8119]
 
-TILES_ARMOR_STUDDED_MAIL_SHIELD_START:      ; [$811a]
-    db $00                                  ; TILES_ARMOR_START
+TILES_PLAYER_ARMOR_STUDDED_MAIL_WSHIELD_START: ; [$811a]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::811a]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::811b]
-    db $8d                                  ; TILE_ARMOR_STUDDED_MAIL_WSHIELD_03__FULL_WSHIELD_03
+    db $8d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_02__FULL_PLATE_WSHIELD_02
                                             ; [$PRG8::811c]
-    db $8a                                  ; TILE_ARMOR_LEATHER_WSHIELD_04__STUDDED_WSHIELD_04__FULL_WSHIELD_04
+    db $8a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_03__STUDDED_WSHIELD_03__FULL_PLATE_WSHIELD_03
                                             ; [$PRG8::811d]
-    db $8e                                  ; TILE_ARMOR_STUDDED_MAIL_WSHIELD_05__FULL_WSHIELD_05
+    db $8e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_04__FULL_PLATE_WSHIELD_04
                                             ; [$PRG8::811e]
-    db $8c                                  ; TILE_ARMOR_LEATHER_WSHIELD_06__STUDDED_WSHIELD_06__FULL_WSHIELD_06
+    db $8c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_05__STUDDED_WSHIELD_05__FULL_PLATE_WSHIELD_05
                                             ; [$PRG8::811f]
-    db $06                                  ; TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
+    db $06                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_06_WSHIELD_06__STUDDED_02_WSHIELD_06
                                             ; [$PRG8::8120]
-    db $07                                  ; TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08
+    db $07                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07
                                             ; [$PRG8::8121]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::8122]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::8123]
-    db $0e                                  ; TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11
+    db $0e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_14_WSHIELD_10__STUDDED_06_WSHIELD_10
                                             ; [$PRG8::8124]
-    db $13                                  ; TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
+    db $13                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_19_WSHIELD_11__STUDDED_07_WSHIELD_11
                                             ; [$PRG8::8125]
-    db $14                                  ; TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13
+    db $14                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12
                                             ; [$PRG8::8126]
-    db $49                                  ; TILE_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_WSHIELD_15
+    db $49                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_13__STUDDED_WSHIELD_13__FULL_PLATE_WSHIELD_14
                                             ; [$PRG8::8127]
-    db $4a                                  ; TILE_ARMOR_LEATHER_WSHIELD_15__STUDDED_WSHIELD_15__FULL_WSHIELD_16
+    db $4a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_PLATE_WSHIELD_15
                                             ; [$PRG8::8128]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::8129]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::812a]
-    db $53                                  ; TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19
+    db $53                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_31_WSHIELD_17__FULL_PLATE_30_WSHIELD_18
                                             ; [$PRG8::812b]
-    db $54                                  ; TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20
+    db $54                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_32_WSHIELD_18__FULL_PLATE_31_WSHIELD_19
                                             ; [$PRG8::812c]
-    db $55                                  ; TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21
+    db $55                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_33_WSHIELD_19__FULL_PLATE_32_WSHIELD_20
                                             ; [$PRG8::812d]
-    db $56                                  ; TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22
+    db $56                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_34_WSHIELD_20__FULL_PLATE_33_WSHIELD_21
                                             ; [$PRG8::812e]
-    db $51                                  ; TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
+    db $51                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_33_WSHIELD_21__STUDDED_29_WSHIELD_21
                                             ; [$PRG8::812f]
-    db $52                                  ; TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23
+    db $52                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22
                                             ; [$PRG8::8130]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::8131]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::8132]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::8133]
-    db $60                                  ; TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28
+    db $60                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_40_WSHIELD_26__FULL_PLATE_39_WSHIELD_27
                                             ; [$PRG8::8134]
-    db $61                                  ; TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29
+    db $61                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_41_WSHIELD_27__FULL_PLATE_40_WSHIELD_28
                                             ; [$PRG8::8135]
-    db $62                                  ; TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30
+    db $62                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_42_WSHIELD_28__FULL_PLATE_41_WSHIELD_29
                                             ; [$PRG8::8136]
-    db $63                                  ; TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31
+    db $63                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_43_WSHIELD_29__FULL_PLATE_42_WSHIELD_30
                                             ; [$PRG8::8137]
-    db $5e                                  ; TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
+    db $5e                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_42_WSHIELD_30__STUDDED_38_WSHIELD_30
                                             ; [$PRG8::8138]
-    db $5f                                  ; TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32
+    db $5f                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31
                                             ; [$PRG8::8139]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::813a]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::813b]
-    db $7d                                  ; TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36
+    db $7d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_48_WSHIELD_34__FULL_PLATE_47_WSHIELD_35
                                             ; [$PRG8::813c]
-    db $7e                                  ; TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37
+    db $7e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_49_WSHIELD_35__FULL_PLATE_48_WSHIELD_36
                                             ; [$PRG8::813d]
-    db $7f                                  ; TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38
+    db $7f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_50_WSHIELD_36__FULL_PLATE_49_WSHIELD_37
                                             ; [$PRG8::813e]
-    db $80                                  ; TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39
+    db $80                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_51_WSHIELD_37__FULL_PLATE_50_WSHIELD_38
                                             ; [$PRG8::813f]
-    db $7b                                  ; TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
+    db $7b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_50_WSHIELD_38__STUDDED_46_WSHIELD_38
                                             ; [$PRG8::8140]
-    db $7c                                  ; TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40
+    db $7c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39
                                             ; [$PRG8::8141]
 
-TILES_ARMOR_FULL_PLATE_SHIELD_START:        ; [$8142]
-    db $00                                  ; TILES_ARMOR_START
+TILES_PLAYER_ARMOR_FULL_PLATE_WSHIELD_START: ; [$8142]
+    db $00                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00
                                             ; [$PRG8::8142]
-    db $01                                  ; TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02
+    db $01                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01
                                             ; [$PRG8::8143]
-    db $8d                                  ; TILE_ARMOR_STUDDED_MAIL_WSHIELD_03__FULL_WSHIELD_03
+    db $8d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_02__FULL_PLATE_WSHIELD_02
                                             ; [$PRG8::8144]
-    db $8a                                  ; TILE_ARMOR_LEATHER_WSHIELD_04__STUDDED_WSHIELD_04__FULL_WSHIELD_04
+    db $8a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_03__STUDDED_WSHIELD_03__FULL_PLATE_WSHIELD_03
                                             ; [$PRG8::8145]
-    db $8e                                  ; TILE_ARMOR_STUDDED_MAIL_WSHIELD_05__FULL_WSHIELD_05
+    db $8e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_04__FULL_PLATE_WSHIELD_04
                                             ; [$PRG8::8146]
-    db $8c                                  ; TILE_ARMOR_LEATHER_WSHIELD_06__STUDDED_WSHIELD_06__FULL_WSHIELD_06
+    db $8c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_05__STUDDED_WSHIELD_05__FULL_PLATE_WSHIELD_05
                                             ; [$PRG8::8147]
-    db $21                                  ; TILE_ARMOR_FULL_07_WSHIELD_07__BATTLE_SUIT_07
+    db $21                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_06_WSHIELD_06__BATTLE_SUIT_06
                                             ; [$PRG8::8148]
-    db $22                                  ; TILE_ARMOR_FULL_08_WSHIELD_08__BATTLE_SUIT_08
+    db $22                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_07_WSHIELD_07__BATTLE_SUIT_07
                                             ; [$PRG8::8149]
-    db $08                                  ; TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09
+    db $08                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08
                                             ; [$PRG8::814a]
-    db $09                                  ; TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10
+    db $09                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09
                                             ; [$PRG8::814b]
-    db $23                                  ; TILE_ARMOR_FULL_15_WSHIELD_11
+    db $23                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_14_WSHIELD_10
                                             ; [$PRG8::814c]
-    db $24                                  ; TILE_ARMOR_FULL_16_WSHIELD_12
+    db $24                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_15_WSHIELD_11
                                             ; [$PRG8::814d]
-    db $25                                  ; TILE_ARMOR_FULL_21_WSHIELD_13
+    db $25                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_20_WSHIELD_12
                                             ; [$PRG8::814e]
-    db $26                                  ; TILE_ARMOR_FULL_22_WSHIELD_14
+    db $26                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_21_WSHIELD_13
                                             ; [$PRG8::814f]
-    db $49                                  ; TILE_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_WSHIELD_15
+    db $49                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_13__STUDDED_WSHIELD_13__FULL_PLATE_WSHIELD_14
                                             ; [$PRG8::8150]
-    db $4a                                  ; TILE_ARMOR_LEATHER_WSHIELD_15__STUDDED_WSHIELD_15__FULL_WSHIELD_16
+    db $4a                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_PLATE_WSHIELD_15
                                             ; [$PRG8::8151]
-    db $4b                                  ; TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17
+    db $4b                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16
                                             ; [$PRG8::8152]
-    db $4c                                  ; TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18
+    db $4c                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17
                                             ; [$PRG8::8153]
-    db $53                                  ; TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19
+    db $53                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_31_WSHIELD_17__FULL_PLATE_30_WSHIELD_18
                                             ; [$PRG8::8154]
-    db $54                                  ; TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20
+    db $54                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_32_WSHIELD_18__FULL_PLATE_31_WSHIELD_19
                                             ; [$PRG8::8155]
-    db $55                                  ; TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21
+    db $55                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_33_WSHIELD_19__FULL_PLATE_32_WSHIELD_20
                                             ; [$PRG8::8156]
-    db $56                                  ; TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22
+    db $56                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_34_WSHIELD_20__FULL_PLATE_33_WSHIELD_21
                                             ; [$PRG8::8157]
-    db $6a                                  ; TILE_ARMOR_FULL_35_WSHIELD_23__BATTLE_SUIT_33
+    db $6a                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_34_WSHIELD_22__BATTLE_SUIT_32
                                             ; [$PRG8::8158]
-    db $6b                                  ; TILE_ARMOR_FULL_36_WSHIELD_24__BATTLE_SUIT_34
+    db $6b                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_35_WSHIELD_23__BATTLE_SUIT_33
                                             ; [$PRG8::8159]
-    db $57                                  ; TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25
+    db $57                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24
                                             ; [$PRG8::815a]
-    db $58                                  ; TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26
+    db $58                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25
                                             ; [$PRG8::815b]
-    db $59                                  ; TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27
+    db $59                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26
                                             ; [$PRG8::815c]
-    db $60                                  ; TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28
+    db $60                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_40_WSHIELD_26__FULL_PLATE_39_WSHIELD_27
                                             ; [$PRG8::815d]
-    db $61                                  ; TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29
+    db $61                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_41_WSHIELD_27__FULL_PLATE_40_WSHIELD_28
                                             ; [$PRG8::815e]
-    db $62                                  ; TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30
+    db $62                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_42_WSHIELD_28__FULL_PLATE_41_WSHIELD_29
                                             ; [$PRG8::815f]
-    db $63                                  ; TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31
+    db $63                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_43_WSHIELD_29__FULL_PLATE_42_WSHIELD_30
                                             ; [$PRG8::8160]
-    db $73                                  ; TILE_ARMOR_FULL_44_WSHIELD_32__BATTLE_SUIT_42
+    db $73                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_43_WSHIELD_31__BATTLE_SUIT_41
                                             ; [$PRG8::8161]
-    db $74                                  ; TILE_ARMOR_FULL_45_WSHIELD_33__BATTLE_SUIT_43
+    db $74                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_44_WSHIELD_32__BATTLE_SUIT_42
                                             ; [$PRG8::8162]
-    db $75                                  ; TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34
+    db $75                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33
                                             ; [$PRG8::8163]
-    db $76                                  ; TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35
+    db $76                                  ; SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34
                                             ; [$PRG8::8164]
-    db $7d                                  ; TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36
+    db $7d                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_48_WSHIELD_34__FULL_PLATE_47_WSHIELD_35
                                             ; [$PRG8::8165]
-    db $7e                                  ; TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37
+    db $7e                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_49_WSHIELD_35__FULL_PLATE_48_WSHIELD_36
                                             ; [$PRG8::8166]
-    db $7f                                  ; TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38
+    db $7f                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_50_WSHIELD_36__FULL_PLATE_49_WSHIELD_37
                                             ; [$PRG8::8167]
-    db $80                                  ; TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39
+    db $80                                  ; SPRITE_TILES_PLAYER_ARMOR_STUDDED_51_WSHIELD_37__FULL_PLATE_50_WSHIELD_38
                                             ; [$PRG8::8168]
-    db $87                                  ; TILE_ARMOR_FULL_52_WSHIELD_40__BATTLE_SUIT_50
+    db $87                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_51_WSHIELD_39__BATTLE_SUIT_49
                                             ; [$PRG8::8169]
-    db $88                                  ; TILE_ARMOR_FULL_53_WSHIELD_41__BATTLE_SUIT_51
+    db $88                                  ; SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_52_WSHIELD_40__BATTLE_SUIT_50
                                             ; [$PRG8::816a]
 
 
@@ -854,7 +863,7 @@ TILES_ARMOR_FULL_PLATE_SHIELD_START:        ; [$8142]
 ; XREFS:
 ;     TILES_WEAPON_ADDRS_INDEX_REF [$PRG8::8002]
 ;
-TILES_WEAPON_ADDRS_INDEX:                   ; [$816b]
+TILES_PLAYER_WEAPON_ADDRS_INDEX:            ; [$816b]
     dw $0173                                ; TILES_DAGGER_TILE_IDS
                                             ; [$PRG8::816b]
     dw $0176                                ; TILES_LONG_SWORD_TILE_IDS
@@ -870,7 +879,7 @@ TILES_WEAPON_ADDRS_INDEX:                   ; [$816b]
 ;
 ;
 ; XREFS:
-;     TILES_WEAPON_ADDRS_INDEX [$PRG8::816b]
+;     TILES_PLAYER_WEAPON_ADDRS_INDEX [$PRG8::816b]
 ;
 TILES_DAGGER_TILE_IDS:                      ; [$8173]
     db $12                                  ; TILE_DAGGER_01
@@ -1024,6 +1033,22 @@ TILES_SHIELDS_MAGIC:                        ; [$819e]
                                             ; [$PRG8::81a3]
 
 
+;============================================================================
+; Beginning of the armor/body tiles.
+;
+; XREFS:
+;     TILES_ARMOR_START_REF [$PRG8::8004]
+;     TILES_PLAYER_ARMOR_FULL_PLATE_START [$PRG8::808a]
+;     TILES_PLAYER_ARMOR_FULL_PLATE_WSHIELD_START
+;     [$PRG8::8142]
+;     TILES_PLAYER_ARMOR_LEATHER_START [$PRG8::8022]
+;     TILES_PLAYER_ARMOR_LEATHER_WSHIELD_START
+;     [$PRG8::80f2]
+;     TILES_PLAYER_ARMOR_STUDDED_MAIL_START [$PRG8::8056]
+;     TILES_PLAYER_ARMOR_STUDDED_MAIL_WSHIELD_START
+;     [$PRG8::811a]
+;============================================================================
+
 ;
 ; ........
 ; ..░░░░░.
@@ -1035,15 +1060,18 @@ TILES_SHIELDS_MAGIC:                        ; [$819e]
 ; ..▒▒▒▒░░
 ;
 ; XREFS:
-;     TILES_ARMOR_FULL_PLATE_SHIELD_START [$PRG8::8142]
-;     TILES_ARMOR_FULL_PLATE_START [$PRG8::808a]
-;     TILES_ARMOR_LEATHER_SHIELD_START [$PRG8::80f2]
-;     TILES_ARMOR_LEATHER_START [$PRG8::8022]
 ;     TILES_ARMOR_START_REF [$PRG8::8004]
-;     TILES_ARMOR_STUDDED_MAIL_SHIELD_START [$PRG8::811a]
-;     TILES_ARMOR_STUDDED_MAIL_START [$PRG8::8056]
+;     TILES_PLAYER_ARMOR_FULL_PLATE_START [$PRG8::808a]
+;     TILES_PLAYER_ARMOR_FULL_PLATE_WSHIELD_START
+;     [$PRG8::8142]
+;     TILES_PLAYER_ARMOR_LEATHER_START [$PRG8::8022]
+;     TILES_PLAYER_ARMOR_LEATHER_WSHIELD_START
+;     [$PRG8::80f2]
+;     TILES_PLAYER_ARMOR_STUDDED_MAIL_START [$PRG8::8056]
+;     TILES_PLAYER_ARMOR_STUDDED_MAIL_WSHIELD_START
+;     [$PRG8::811a]
 ;
-TILES_ARMOR_START:                          ; [$81a4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_00_WSHIELD_00__STUDDED_00_WSHIELD_00__FULL_PLATE_00_WSHIELD_00: ; [$81a4]
     db $00,$3e,$5f,$4f,$1f,$1f,$5b,$03,$00,$00,$20,$30,$38,$2a,$7e,$3c ; [$81a4]
                                                                        ; byte
 
@@ -1058,7 +1086,7 @@ TILES_ARMOR_START:                          ; [$81a4]
 ; ░.......
 ; ░░......
 ;
-TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02: ; [$81b4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_01_WSHIELD_01__STUDDED_01_WSHIELD_01__FULL_PLATE_01_WSHIELD_01: ; [$81b4]
     db $00,$00,$00,$00,$80,$c0,$80,$c0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$81b4]
                                                                        ; byte
 
@@ -1073,7 +1101,7 @@ TILE_ARMOR_LEATHER_02_WSHIELD_02__STUDDED_02_WSHIELD_02__FULL_02_WSHIELD_02: ; [
 ; ...▒██▒▒
 ; ▒█▒░░░░░
 ;
-TILE_ARMOR_LEATHER_03:                      ; [$81c4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_02:       ; [$81c4]
     db $07,$3f,$0b,$1f,$1e,$0f,$0c,$5f,$38,$01,$17,$1e,$1d,$1e,$1f,$e0 ; [$81c4]
                                                                        ; byte
 
@@ -1088,7 +1116,7 @@ TILE_ARMOR_LEATHER_03:                      ; [$81c4]
 ; ▒░▒█░...
 ; ░░██░...
 ;
-TILE_ARMOR_LEATHER_04:                      ; [$81d4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_03:       ; [$81d4]
     db $80,$80,$e0,$d0,$70,$a8,$58,$f8,$00,$c0,$00,$e0,$e0,$70,$b0,$30 ; [$81d4]
                                                                        ; byte
 
@@ -1103,7 +1131,7 @@ TILE_ARMOR_LEATHER_04:                      ; [$81d4]
 ; ..░██▒▒░
 ; ..██▒▒░░
 ;
-TILE_ARMOR_LEATHER_05:                      ; [$81e4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_04:       ; [$81e4]
     db $9e,$ff,$1c,$0e,$1f,$0b,$39,$33,$ef,$00,$0f,$1f,$03,$1c,$1e,$3c ; [$81e4]
                                                                        ; byte
 
@@ -1118,7 +1146,7 @@ TILE_ARMOR_LEATHER_05:                      ; [$81e4]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_LEATHER_06:                      ; [$81f4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_05:       ; [$81f4]
     db $f8,$f0,$e0,$40,$40,$c0,$80,$80,$30,$30,$70,$a0,$80,$00,$00,$00 ; [$81f4]
                                                                        ; byte
 
@@ -1133,7 +1161,7 @@ TILE_ARMOR_LEATHER_06:                      ; [$81f4]
 ; .██▒░...
 ; ██▒▒░...
 ;
-TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07: ; [$8204]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_06_WSHIELD_06__STUDDED_02_WSHIELD_06: ; [$8204]
     db $27,$2a,$69,$68,$68,$68,$68,$c8,$78,$71,$31,$30,$30,$30,$70,$f0 ; [$8204]
                                                                        ; byte
 
@@ -1148,7 +1176,7 @@ TILE_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07: ; [$8204]
 ; .█▒░....
 ; █▒░.....
 ;
-TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08: ; [$8214]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_07_WSHIELD_07__STUDDED_03_WSHIELD_07: ; [$8214]
     db $80,$c0,$20,$80,$10,$40,$50,$a0,$00,$00,$c0,$e0,$60,$70,$60,$c0 ; [$8214]
                                                                        ; byte
 
@@ -1163,7 +1191,7 @@ TILE_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08: ; [$8214]
 ; ..▒█▒▒░░
 ; ..▒▒▒░░░
 ;
-TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09: ; [$8224]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_08_WSHIELD_08__STUDDED_04_WSHIELD_08__FULL_PLATE_08_WSHIELD_08: ; [$8224]
     db $3e,$5f,$4f,$1f,$1f,$43,$13,$07,$00,$20,$30,$38,$2a,$7e,$3c,$38 ; [$8224]
                                                                        ; byte
 
@@ -1178,7 +1206,7 @@ TILE_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_09_WSHIELD_09: ; [
 ; ░░......
 ; ........
 ;
-TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10: ; [$8234]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_09_WSHIELD_09__STUDDED_05_WSHIELD_09__FULL_PLATE_09_WSHIELD_09: ; [$8234]
     db $00,$00,$00,$80,$c0,$80,$c0,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8234]
                                                                        ; byte
 
@@ -1193,7 +1221,7 @@ TILE_ARMOR_LEATHER_10_WSHIELD_10__STUDDED_06_WSHIELD_10__FULL_10_WSHIELD_10: ; [
 ; ...▒░██▒
 ; ...░██▒▒
 ;
-TILE_ARMOR_LEATHER_11:                      ; [$8244]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_10:       ; [$8244]
     db $3b,$0f,$10,$0b,$0b,$17,$0e,$1c,$07,$07,$0f,$1f,$1f,$1b,$17,$0f ; [$8244]
                                                                        ; byte
 
@@ -1208,7 +1236,7 @@ TILE_ARMOR_LEATHER_11:                      ; [$8244]
 ; ▒░......
 ; ░░......
 ;
-TILE_ARMOR_LEATHER_12:                      ; [$8254]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_11:       ; [$8254]
     db $80,$c0,$c0,$40,$40,$40,$40,$c0,$00,$80,$00,$80,$80,$80,$80,$00 ; [$8254]
                                                                        ; byte
 
@@ -1223,7 +1251,7 @@ TILE_ARMOR_LEATHER_12:                      ; [$8254]
 ; ...░██▒░
 ; ...░██▒░
 ;
-TILE_ARMOR_LEATHER_13:                      ; [$8264]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_12:       ; [$8264]
     db $39,$22,$1e,$0e,$08,$19,$1d,$1d,$1e,$1d,$03,$1f,$17,$0e,$0e,$0e ; [$8264]
                                                                        ; byte
 
@@ -1238,7 +1266,7 @@ TILE_ARMOR_LEATHER_13:                      ; [$8264]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_14:                      ; [$8274]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_13:       ; [$8274]
     db $80,$80,$80,$80,$80,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8274]
                                                                        ; byte
 
@@ -1253,7 +1281,7 @@ TILE_ARMOR_LEATHER_14:                      ; [$8274]
 ; ...░███▒
 ; ...██▒▒.
 ;
-TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11: ; [$8284]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_14_WSHIELD_10__STUDDED_06_WSHIELD_10: ; [$8284]
     db $18,$0d,$0d,$0d,$0c,$0c,$1e,$18,$0e,$0e,$06,$06,$07,$07,$0f,$1e ; [$8284]
                                                                        ; byte
 
@@ -1268,7 +1296,7 @@ TILE_ARMOR_LEATHER_15_WSHIELD_11__STUDDED_07_WSHIELD_11: ; [$8284]
 ; ..░██▒░░
 ; .▒██▒░▒░
 ;
-TILE_ARMOR_LEATHER_16:                      ; [$8294]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_15:       ; [$8294]
     db $07,$0f,$0e,$0e,$1d,$09,$3b,$35,$38,$06,$03,$0d,$0e,$1e,$1c,$7a ; [$8294]
                                                                        ; byte
 
@@ -1283,7 +1311,7 @@ TILE_ARMOR_LEATHER_16:                      ; [$8294]
 ; ░░░░....
 ; ░░░░....
 ;
-TILE_ARMOR_LEATHER_17:                      ; [$82a4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_16:       ; [$82a4]
     db $80,$c0,$c0,$e0,$e0,$f0,$f0,$f0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$82a4]
                                                                        ; byte
 
@@ -1298,7 +1326,7 @@ TILE_ARMOR_LEATHER_17:                      ; [$82a4]
 ; ...█░██▒
 ; ..▒█░██▒
 ;
-TILE_ARMOR_LEATHER_18:                      ; [$82b4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_17:       ; [$82b4]
     db $49,$9f,$dc,$0e,$1f,$1b,$1e,$1e,$f6,$e0,$0f,$1f,$0f,$04,$17,$37 ; [$82b4]
                                                                        ; byte
 
@@ -1313,7 +1341,7 @@ TILE_ARMOR_LEATHER_18:                      ; [$82b4]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_LEATHER_19:                      ; [$82c4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_18:       ; [$82c4]
     db $90,$d0,$f0,$c0,$40,$c0,$80,$80,$20,$60,$00,$00,$80,$00,$00,$00 ; [$82c4]
                                                                        ; byte
 
@@ -1328,7 +1356,7 @@ TILE_ARMOR_LEATHER_19:                      ; [$82c4]
 ; .██▒░...
 ; ▒▒▒▒░...
 ;
-TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12: ; [$82d4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_19_WSHIELD_11__STUDDED_07_WSHIELD_11: ; [$82d4]
     db $36,$27,$2b,$28,$28,$28,$68,$08,$3b,$7b,$71,$31,$30,$30,$70,$f0 ; [$82d4]
                                                                        ; byte
 
@@ -1343,7 +1371,7 @@ TILE_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12: ; [$82d4]
 ; .█▒░....
 ; ▒▒░.....
 ;
-TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13: ; [$82e4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_20_WSHIELD_12__STUDDED_08_WSHIELD_12: ; [$82e4]
     db $00,$40,$00,$a0,$10,$40,$50,$20,$80,$80,$c0,$c0,$e0,$70,$60,$c0 ; [$82e4]
                                                                        ; byte
 
@@ -1358,7 +1386,7 @@ TILE_ARMOR_LEATHER_21_WSHIELD_13__STUDDED_09_WSHIELD_13: ; [$82e4]
 ; ...░░░░░
 ; ░█░░░░░░
 ;
-TILE_ARMOR_STUDDED_10__FULL_03:             ; [$82f4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_09__FULL_PLATE_02: ; [$82f4]
     db $07,$3f,$0d,$3f,$3d,$09,$1f,$ff,$38,$01,$12,$16,$16,$16,$00,$40 ; [$82f4]
                                                                        ; byte
 
@@ -1373,7 +1401,7 @@ TILE_ARMOR_STUDDED_10__FULL_03:             ; [$82f4]
 ; ░░▒█░...
 ; ░░██░...
 ;
-TILE_ARMOR_STUDDED_11__FULL_04:             ; [$8304]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_10__FULL_PLATE_03: ; [$8304]
     db $c0,$e0,$f0,$f0,$70,$a8,$d8,$f8,$00,$c0,$e0,$00,$e0,$70,$30,$30 ; [$8304]
                                                                        ; byte
 
@@ -1388,7 +1416,7 @@ TILE_ARMOR_STUDDED_11__FULL_04:             ; [$8304]
 ; ..░██▒▒░
 ; ..██▒▒░░
 ;
-TILE_ARMOR_STUDDED_12__FULL_05:             ; [$8314]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_11__FULL_PLATE_04: ; [$8314]
     db $9c,$ff,$1b,$0f,$0f,$17,$39,$33,$ef,$00,$05,$15,$15,$08,$1e,$3c ; [$8314]
                                                                        ; byte
 
@@ -1403,7 +1431,7 @@ TILE_ARMOR_STUDDED_12__FULL_05:             ; [$8314]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_STUDDED_13__FULL_06:             ; [$8324]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_12__FULL_PLATE_05: ; [$8324]
     db $f8,$f0,$e0,$e0,$80,$00,$80,$80,$30,$70,$70,$00,$40,$c0,$00,$00 ; [$8324]
                                                                        ; byte
 
@@ -1418,7 +1446,7 @@ TILE_ARMOR_STUDDED_13__FULL_06:             ; [$8324]
 ; ...░░██▒
 ; ...░██▒▒
 ;
-TILE_ARMOR_STUDDED_14__FULL_11:             ; [$8334]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_13__FULL_PLATE_10: ; [$8334]
     db $3f,$0f,$17,$15,$07,$0f,$1e,$1c,$03,$03,$08,$1b,$1b,$13,$07,$0f ; [$8334]
                                                                        ; byte
 
@@ -1433,7 +1461,7 @@ TILE_ARMOR_STUDDED_14__FULL_11:             ; [$8334]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_STUDDED_15__FULL_12:             ; [$8344]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_14__FULL_PLATE_11: ; [$8344]
     db $40,$c0,$c0,$40,$40,$40,$80,$80,$80,$80,$00,$80,$80,$80,$00,$00 ; [$8344]
                                                                        ; byte
 
@@ -1448,7 +1476,7 @@ TILE_ARMOR_STUDDED_15__FULL_12:             ; [$8344]
 ; ...░██▒░
 ; ...░██▒░
 ;
-TILE_ARMOR_STUDDED_16__FULL_13:             ; [$8354]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_15__FULL_PLATE_12: ; [$8354]
     db $39,$26,$1e,$1e,$1f,$19,$1d,$1d,$1e,$19,$05,$15,$00,$0e,$0e,$0e ; [$8354]
                                                                        ; byte
 
@@ -1463,7 +1491,7 @@ TILE_ARMOR_STUDDED_16__FULL_13:             ; [$8354]
 ; ........
 ; ........
 ;
-TILE_ARMOR_STUDDED_17__FULL_14:             ; [$8364]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_16__FULL_PLATE_13: ; [$8364]
     db $80,$80,$80,$80,$80,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8364]
                                                                        ; byte
 
@@ -1478,7 +1506,7 @@ TILE_ARMOR_STUDDED_17__FULL_14:             ; [$8364]
 ; ..░░▒▒░▒
 ; .▒██░░▒▒
 ;
-TILE_ARMOR_STUDDED_18__FULL_17:             ; [$8374]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_17__FULL_PLATE_16: ; [$8374]
     db $09,$1e,$0e,$0e,$1d,$09,$32,$3c,$36,$0f,$03,$0d,$0e,$1e,$0d,$73 ; [$8374]
                                                                        ; byte
 
@@ -1493,7 +1521,7 @@ TILE_ARMOR_STUDDED_18__FULL_17:             ; [$8374]
 ; ▒░▒░....
 ; ▒░░░....
 ;
-TILE_ARMOR_STUDDED_19__FULL_18:             ; [$8384]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_18__FULL_PLATE_17: ; [$8384]
     db $80,$c0,$80,$e0,$a0,$70,$50,$70,$00,$00,$40,$00,$40,$80,$a0,$80 ; [$8384]
                                                                        ; byte
 
@@ -1508,7 +1536,7 @@ TILE_ARMOR_STUDDED_19__FULL_18:             ; [$8384]
 ; ...█░██▒
 ; ..▒█░██▒
 ;
-TILE_ARMOR_STUDDED_20__FULL_19:             ; [$8394]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_19__FULL_PLATE_18: ; [$8394]
     db $48,$9f,$de,$0f,$0f,$17,$1e,$1e,$f7,$e0,$05,$15,$15,$08,$17,$37 ; [$8394]
                                                                        ; byte
 
@@ -1523,7 +1551,7 @@ TILE_ARMOR_STUDDED_20__FULL_19:             ; [$8394]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_STUDDED_21__FULL_20:             ; [$83a4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_20__FULL_PLATE_19: ; [$83a4]
     db $90,$d0,$f0,$c0,$40,$c0,$80,$80,$20,$60,$00,$00,$80,$00,$00,$00 ; [$83a4]
                                                                        ; byte
 
@@ -1538,7 +1566,7 @@ TILE_ARMOR_STUDDED_21__FULL_20:             ; [$83a4]
 ; ..█▒▒░..
 ; .██▒▒░..
 ;
-TILE_ARMOR_FULL_07_WSHIELD_07__BATTLE_SUIT_07: ; [$83b4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_06_WSHIELD_06__BATTLE_SUIT_06: ; [$83b4]
     db $3f,$3c,$34,$34,$34,$3c,$24,$64,$38,$21,$08,$18,$18,$00,$38,$78 ; [$83b4]
                                                                        ; byte
 
@@ -1553,7 +1581,7 @@ TILE_ARMOR_FULL_07_WSHIELD_07__BATTLE_SUIT_07: ; [$83b4]
 ; ..█▒░...
 ; .█▒░....
 ;
-TILE_ARMOR_FULL_08_WSHIELD_08__BATTLE_SUIT_08: ; [$83c4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_07_WSHIELD_07__BATTLE_SUIT_07: ; [$83c4]
     db $c0,$e0,$f0,$78,$38,$20,$28,$50,$00,$80,$a0,$30,$20,$18,$30,$60 ; [$83c4]
                                                                        ; byte
 
@@ -1568,7 +1596,7 @@ TILE_ARMOR_FULL_08_WSHIELD_08__BATTLE_SUIT_08: ; [$83c4]
 ; ....░███
 ; ....██▒▒
 ;
-TILE_ARMOR_FULL_15_WSHIELD_11:              ; [$83d4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_14_WSHIELD_10: ; [$83d4]
     db $0e,$0e,$04,$06,$06,$07,$0f,$0c,$0d,$09,$03,$03,$03,$00,$07,$0f ; [$83d4]
                                                                        ; byte
 
@@ -1583,7 +1611,7 @@ TILE_ARMOR_FULL_15_WSHIELD_11:              ; [$83d4]
 ; ▒.......
 ; ........
 ;
-TILE_ARMOR_FULL_16_WSHIELD_12:              ; [$83e4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_15_WSHIELD_11: ; [$83e4]
     db $00,$80,$80,$80,$00,$80,$00,$00,$00,$00,$00,$00,$80,$00,$80,$00 ; [$83e4]
                                                                        ; byte
 
@@ -1598,7 +1626,7 @@ TILE_ARMOR_FULL_16_WSHIELD_12:              ; [$83e4]
 ; ..██▒░..
 ; .▒▒▒▒░..
 ;
-TILE_ARMOR_FULL_21_WSHIELD_13:              ; [$83f4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_20_WSHIELD_12: ; [$83f4]
     db $1b,$1f,$1d,$14,$14,$14,$34,$04,$15,$18,$11,$08,$18,$18,$38,$78 ; [$83f4]
                                                                        ; byte
 
@@ -1613,7 +1641,7 @@ TILE_ARMOR_FULL_21_WSHIELD_13:              ; [$83f4]
 ; ..█▒░...
 ; .▒▒░....
 ;
-TILE_ARMOR_FULL_22_WSHIELD_14:              ; [$8404]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_21_WSHIELD_13: ; [$8404]
     db $00,$e0,$c0,$d0,$68,$24,$28,$10,$c0,$00,$a0,$60,$70,$38,$30,$60 ; [$8404]
                                                                        ; byte
 
@@ -1628,7 +1656,7 @@ TILE_ARMOR_FULL_22_WSHIELD_14:              ; [$8404]
 ; █▒░.....
 ; ▒▒░.....
 ;
-TILE_ARMOR_FULL_23:                         ; [$8414]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_22:    ; [$8414]
     db $c0,$a0,$a0,$e0,$a0,$20,$a0,$20,$00,$c0,$c0,$00,$c0,$c0,$c0,$c0 ; [$8414]
                                                                        ; byte
 
@@ -1643,7 +1671,7 @@ TILE_ARMOR_FULL_23:                         ; [$8414]
 ; ........
 ; ........
 ;
-TILE_ARMOR_FULL_24:                         ; [$8424]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_23:    ; [$8424]
     db $40,$80,$80,$00,$00,$00,$00,$00,$80,$00,$00,$80,$80,$00,$00,$00 ; [$8424]
                                                                        ; byte
 
@@ -1658,7 +1686,7 @@ TILE_ARMOR_FULL_24:                         ; [$8424]
 ; █▒.░▒██▒
 ; ▒▒█░░░░░
 ;
-TILE_ARMOR_LEATHER_22:                      ; [$8434]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_21:       ; [$8434]
     db $07,$0f,$1b,$1f,$3e,$0f,$96,$3f,$38,$01,$17,$3e,$1f,$1e,$cf,$e0 ; [$8434]
                                                                        ; byte
 
@@ -1673,7 +1701,7 @@ TILE_ARMOR_LEATHER_22:                      ; [$8434]
 ; ▒░▒█░...
 ; ░░██░...
 ;
-TILE_ARMOR_LEATHER_23:                      ; [$8444]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_22:       ; [$8444]
     db $80,$80,$e0,$d0,$70,$a8,$58,$f8,$00,$c0,$00,$e0,$e0,$70,$b0,$30 ; [$8444]
                                                                        ; byte
 
@@ -1688,7 +1716,7 @@ TILE_ARMOR_LEATHER_23:                      ; [$8444]
 ; ...░▒░░▒
 ; ....░▒░░
 ;
-TILE_ARMOR_LEATHER_24__STUDDED_22__FULL_25: ; [$8454]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_23__STUDDED_21__FULL_PLATE_24: ; [$8454]
     db $77,$5f,$2d,$5c,$19,$28,$16,$0b,$0d,$31,$76,$6f,$6e,$17,$09,$04 ; [$8454]
                                                                        ; byte
 
@@ -1703,7 +1731,7 @@ TILE_ARMOR_LEATHER_24__STUDDED_22__FULL_25: ; [$8454]
 ; ▒▒......
 ; ▒▒......
 ;
-TILE_ARMOR_LEATHER_25__STUDDED_23__FULL_26: ; [$8464]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_24__STUDDED_22__FULL_PLATE_25: ; [$8464]
     db $c8,$10,$e0,$40,$80,$00,$00,$00,$f0,$e0,$00,$80,$00,$80,$c0,$c0 ; [$8464]
                                                                        ; byte
 
@@ -1718,7 +1746,7 @@ TILE_ARMOR_LEATHER_25__STUDDED_23__FULL_26: ; [$8464]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_26__STUDDED_24__FULL_27: ; [$8474]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_25__STUDDED_23__FULL_PLATE_26: ; [$8474]
     db $04,$04,$00,$00,$00,$00,$00,$00,$06,$02,$02,$00,$00,$00,$00,$00 ; [$8474]
                                                                        ; byte
 
@@ -1733,7 +1761,7 @@ TILE_ARMOR_LEATHER_26__STUDDED_24__FULL_27: ; [$8474]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_27__STUDDED_25__FULL_28: ; [$8484]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_26__STUDDED_24__FULL_PLATE_27: ; [$8484]
     db $00,$00,$00,$00,$00,$00,$00,$00,$40,$40,$00,$00,$00,$00,$00,$00 ; [$8484]
                                                                        ; byte
 
@@ -1748,7 +1776,7 @@ TILE_ARMOR_LEATHER_27__STUDDED_25__FULL_28: ; [$8484]
 ; █▒▒░░░░░
 ; ▒▒▒░▒▒░▒
 ;
-TILE_ARMOR_STUDDED_26:                      ; [$8494]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_25:       ; [$8494]
     db $07,$0b,$0d,$3f,$3d,$2c,$9f,$12,$38,$05,$12,$16,$16,$13,$e0,$ed ; [$8494]
                                                                        ; byte
 
@@ -1763,7 +1791,7 @@ TILE_ARMOR_STUDDED_26:                      ; [$8494]
 ; ░░▒█░...
 ; ████░...
 ;
-TILE_ARMOR_STUDDED_27:                      ; [$84a4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_26:       ; [$84a4]
     db $c0,$e0,$f0,$f0,$70,$a8,$d8,$f8,$00,$c0,$e0,$00,$e0,$70,$30,$f0 ; [$84a4]
                                                                        ; byte
 
@@ -1779,9 +1807,9 @@ TILE_ARMOR_STUDDED_27:                      ; [$84a4]
 ; ..████▒░
 ;
 ; XREFS:
-;     TILES_ARMOR_BATTLE_SUIT_START [$PRG8::80bf]
+;     TILES_PLAYER_ARMOR_BATTLE_SUIT_START [$PRG8::80bf]
 ;
-TILE_ARMOR_BATTLE_SUIT_01:                  ; [$84b4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_00:   ; [$84b4]
     db $00,$2f,$3c,$3e,$3d,$1f,$07,$3d,$00,$2e,$37,$39,$3e,$00,$1b,$3e ; [$84b4]
                                                                        ; byte
 
@@ -1796,7 +1824,7 @@ TILE_ARMOR_BATTLE_SUIT_01:                  ; [$84b4]
 ; ░░......
 ; ░░......
 ;
-TILE_ARMOR_BATTLE_SUIT_02:                  ; [$84c4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_01:   ; [$84c4]
     db $00,$00,$80,$40,$40,$c0,$c0,$c0,$00,$00,$00,$80,$80,$00,$00,$00 ; [$84c4]
                                                                        ; byte
 
@@ -1811,7 +1839,7 @@ TILE_ARMOR_BATTLE_SUIT_02:                  ; [$84c4]
 ; █▒.░░█░░
 ; ▒░█▒░███
 ;
-TILE_ARMOR_BATTLE_SUIT_03:                  ; [$84d4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_02:   ; [$84d4]
     db $3f,$3f,$17,$9f,$de,$cd,$9f,$6f,$39,$33,$2a,$8a,$4b,$43,$c4,$b7 ; [$84d4]
                                                                        ; byte
 
@@ -1826,7 +1854,7 @@ TILE_ARMOR_BATTLE_SUIT_03:                  ; [$84d4]
 ; ░░░░░░..
 ; ▒░░██░..
 ;
-TILE_ARMOR_BATTLE_SUIT_04:                  ; [$84e4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_03:   ; [$84e4]
     db $f8,$f8,$f8,$f8,$f0,$74,$fc,$7c,$a8,$78,$c8,$90,$38,$b8,$00,$98 ; [$84e4]
                                                                        ; byte
 
@@ -1841,7 +1869,7 @@ TILE_ARMOR_BATTLE_SUIT_04:                  ; [$84e4]
 ; ...▒█▒▒░
 ; ..█░░▒░░
 ;
-TILE_ARMOR_BATTLE_SUIT_05:                  ; [$84f4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_04:   ; [$84f4]
     db $ee,$7f,$17,$0f,$0f,$05,$09,$3b,$57,$20,$0a,$02,$00,$0e,$1e,$24 ; [$84f4]
                                                                        ; byte
 
@@ -1856,7 +1884,7 @@ TILE_ARMOR_BATTLE_SUIT_05:                  ; [$84f4]
 ; ░░......
 ; ░░......
 ;
-TILE_ARMOR_BATTLE_SUIT_06:                  ; [$8504]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_05:   ; [$8504]
     db $7c,$ec,$c8,$70,$e0,$a0,$c0,$c0,$a8,$70,$70,$80,$80,$40,$00,$00 ; [$8504]
                                                                        ; byte
 
@@ -1871,7 +1899,7 @@ TILE_ARMOR_BATTLE_SUIT_06:                  ; [$8504]
 ; ..████▒░
 ; ..███░░█
 ;
-TILE_ARMOR_BATTLE_SUIT_09:                  ; [$8514]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_08:   ; [$8514]
     db $2f,$3c,$3e,$3d,$1f,$07,$3d,$3f,$2e,$37,$39,$3e,$00,$1b,$3e,$39 ; [$8514]
                                                                        ; byte
 
@@ -1886,7 +1914,7 @@ TILE_ARMOR_BATTLE_SUIT_09:                  ; [$8514]
 ; █░█.....
 ; ██▒.....
 ;
-TILE_ARMOR_BATTLE_SUIT_10:                  ; [$8524]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_09:   ; [$8524]
     db $00,$80,$40,$40,$c0,$c0,$e0,$c0,$00,$00,$80,$80,$00,$00,$a0,$e0 ; [$8524]
                                                                        ; byte
 
@@ -1901,7 +1929,7 @@ TILE_ARMOR_BATTLE_SUIT_10:                  ; [$8524]
 ; ▒██.░░█░
 ; .▒▒░▒███
 ;
-TILE_ARMOR_BATTLE_SUIT_11:                  ; [$8534]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_10:   ; [$8534]
     db $2e,$0f,$0f,$0f,$03,$8f,$6f,$17,$33,$20,$05,$0d,$0d,$81,$e2,$6f ; [$8534]
                                                                        ; byte
 
@@ -1916,7 +1944,7 @@ TILE_ARMOR_BATTLE_SUIT_11:                  ; [$8534]
 ; █░......
 ; ░░......
 ;
-TILE_ARMOR_BATTLE_SUIT_12:                  ; [$8544]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_11:   ; [$8544]
     db $e0,$70,$a0,$a0,$a0,$e0,$c0,$c0,$30,$80,$c0,$c0,$c0,$00,$80,$00 ; [$8544]
                                                                        ; byte
 
@@ -1931,7 +1959,7 @@ TILE_ARMOR_BATTLE_SUIT_12:                  ; [$8544]
 ; ....░██▒
 ; ....█░█▒
 ;
-TILE_ARMOR_BATTLE_SUIT_13:                  ; [$8554]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_12:   ; [$8554]
     db $1c,$13,$0f,$0f,$07,$0e,$0e,$0e,$0f,$0c,$02,$0a,$08,$07,$07,$0b ; [$8554]
                                                                        ; byte
 
@@ -1946,7 +1974,7 @@ TILE_ARMOR_BATTLE_SUIT_13:                  ; [$8554]
 ; ░.......
 ; ░.......
 ;
-TILE_ARMOR_BATTLE_SUIT_14:                  ; [$8564]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_13:   ; [$8564]
     db $c0,$40,$40,$40,$c0,$80,$80,$80,$00,$80,$80,$80,$00,$00,$00,$00 ; [$8564]
                                                                        ; byte
 
@@ -1961,7 +1989,7 @@ TILE_ARMOR_BATTLE_SUIT_14:                  ; [$8564]
 ; ....░███
 ; ....██▒▒
 ;
-TILE_ARMOR_BATTLE_SUIT_15:                  ; [$8574]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_14:   ; [$8574]
     db $0e,$0e,$04,$06,$06,$07,$0f,$0c,$0d,$09,$03,$03,$03,$00,$07,$0f ; [$8574]
                                                                        ; byte
 
@@ -1976,7 +2004,7 @@ TILE_ARMOR_BATTLE_SUIT_15:                  ; [$8574]
 ; ▒.......
 ; ........
 ;
-TILE_ARMOR_BATTLE_SUIT_16:                  ; [$8584]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_15:   ; [$8584]
     db $00,$80,$80,$80,$00,$80,$00,$00,$00,$00,$00,$00,$80,$00,$80,$00 ; [$8584]
                                                                        ; byte
 
@@ -1991,7 +2019,7 @@ TILE_ARMOR_BATTLE_SUIT_16:                  ; [$8584]
 ; ...░█░▒░
 ; ░▒▒▒░█░░
 ;
-TILE_ARMOR_BATTLE_SUIT_17:                  ; [$8594]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_16:   ; [$8594]
     db $3f,$3f,$0f,$06,$07,$0e,$1d,$8f,$3a,$33,$24,$03,$07,$0b,$0a,$74 ; [$8594]
                                                                        ; byte
 
@@ -2006,7 +2034,7 @@ TILE_ARMOR_BATTLE_SUIT_17:                  ; [$8594]
 ; ░▒░░▒▒..
 ; ▒░░.░░..
 ;
-TILE_ARMOR_BATTLE_SUIT_18:                  ; [$85a4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_17:   ; [$85a4]
     db $c0,$e0,$f0,$f0,$f8,$ac,$b0,$6c,$80,$a0,$c0,$40,$00,$50,$4c,$80 ; [$85a4]
                                                                        ; byte
 
@@ -2021,7 +2049,7 @@ TILE_ARMOR_BATTLE_SUIT_18:                  ; [$85a4]
 ; ....█░██
 ; ...░█░██
 ;
-TILE_ARMOR_BATTLE_SUIT_19:                  ; [$85b4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_18:   ; [$85b4]
     db $f6,$8f,$7f,$07,$0f,$0b,$0f,$1f,$79,$70,$02,$0a,$0a,$04,$0b,$0b ; [$85b4]
                                                                        ; byte
 
@@ -2036,7 +2064,7 @@ TILE_ARMOR_BATTLE_SUIT_19:                  ; [$85b4]
 ; ▒░......
 ; ▒░......
 ;
-TILE_ARMOR_BATTLE_SUIT_20:                  ; [$85c4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_19:   ; [$85c4]
     db $f0,$d6,$ec,$e8,$a0,$e0,$40,$40,$0c,$1a,$00,$80,$c0,$00,$80,$80 ; [$85c4]
                                                                        ; byte
 
@@ -2051,7 +2079,7 @@ TILE_ARMOR_BATTLE_SUIT_20:                  ; [$85c4]
 ; ..██▒░..
 ; .▒▒▒▒░..
 ;
-TILE_ARMOR_BATTLE_SUIT_21:                  ; [$85d4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_20:   ; [$85d4]
     db $1b,$1f,$1d,$14,$14,$14,$34,$04,$15,$18,$11,$08,$18,$18,$38,$78 ; [$85d4]
                                                                        ; byte
 
@@ -2066,7 +2094,7 @@ TILE_ARMOR_BATTLE_SUIT_21:                  ; [$85d4]
 ; ..█▒░...
 ; .▒▒░....
 ;
-TILE_ARMOR_BATTLE_SUIT_22:                  ; [$85e4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_21:   ; [$85e4]
     db $40,$c0,$e0,$d0,$68,$28,$28,$10,$80,$00,$80,$60,$70,$30,$30,$60 ; [$85e4]
                                                                        ; byte
 
@@ -2081,7 +2109,7 @@ TILE_ARMOR_BATTLE_SUIT_22:                  ; [$85e4]
 ; .█░▒▒░..
 ; ..░█▒▒░.
 ;
-TILE_ARMOR_BATTLE_SUIT_23:                  ; [$85f4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_22:   ; [$85f4]
     db $ee,$7e,$1f,$39,$73,$7c,$64,$32,$55,$21,$0c,$1e,$5c,$60,$58,$1c ; [$85f4]
                                                                        ; byte
 
@@ -2096,7 +2124,7 @@ TILE_ARMOR_BATTLE_SUIT_23:                  ; [$85f4]
 ; ░░░▒▒░▒.
 ; ██░██▒█░
 ;
-TILE_ARMOR_BATTLE_SUIT_24:                  ; [$8604]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_23:   ; [$8604]
     db $fc,$0c,$f8,$30,$90,$50,$e4,$fb,$e8,$f0,$00,$c0,$e0,$e0,$1a,$de ; [$8604]
                                                                        ; byte
 
@@ -2111,7 +2139,7 @@ TILE_ARMOR_BATTLE_SUIT_24:                  ; [$8604]
 ; ........
 ; ........
 ;
-TILE_ARMOR_BATTLE_SUIT_25:                  ; [$8614]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_24:   ; [$8614]
     db $1b,$0f,$06,$00,$00,$00,$00,$00,$0c,$02,$03,$03,$01,$00,$00,$00 ; [$8614]
                                                                        ; byte
 
@@ -2126,7 +2154,7 @@ TILE_ARMOR_BATTLE_SUIT_25:                  ; [$8614]
 ; ........
 ; ........
 ;
-TILE_ARMOR_BATTLE_SUIT_26:                  ; [$8624]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_25:   ; [$8624]
     db $65,$07,$01,$00,$00,$00,$00,$00,$5a,$02,$02,$01,$00,$00,$00,$00 ; [$8624]
                                                                        ; byte
 
@@ -2141,7 +2169,7 @@ TILE_ARMOR_BATTLE_SUIT_26:                  ; [$8624]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_WSHIELD_15: ; [$8634]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_13__STUDDED_WSHIELD_13__FULL_PLATE_WSHIELD_14: ; [$8634]
     db $1c,$0a,$06,$01,$01,$00,$00,$00,$0f,$07,$01,$02,$02,$00,$00,$00 ; [$8634]
                                                                        ; byte
 
@@ -2156,7 +2184,7 @@ TILE_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_WSHIELD_15: ; [$8634]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_WSHIELD_15__STUDDED_WSHIELD_15__FULL_WSHIELD_16: ; [$8644]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_14__STUDDED_WSHIELD_14__FULL_PLATE_WSHIELD_15: ; [$8644]
     db $80,$40,$40,$40,$00,$00,$00,$00,$00,$80,$80,$80,$80,$00,$00,$00 ; [$8644]
                                                                        ; byte
 
@@ -2171,7 +2199,7 @@ TILE_ARMOR_LEATHER_WSHIELD_15__STUDDED_WSHIELD_15__FULL_WSHIELD_16: ; [$8644]
 ; ....▒██▒
 ; .....▒▒▒
 ;
-TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17: ; [$8654]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_27_WSHIELD_15__STUDDED_27_WSHIELD_15__FULL_PLATE_28_WSHIELD_16: ; [$8654]
     db $00,$07,$0f,$0b,$05,$06,$06,$00,$00,$00,$00,$04,$06,$03,$0f,$07 ; [$8654]
                                                                        ; byte
 
@@ -2186,7 +2214,7 @@ TILE_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_29_WSHIELD_17: ; [
 ; ▒░░░....
 ; ░░░░░...
 ;
-TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18: ; [$8664]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_28_WSHIELD_16__STUDDED_28_WSHIELD_16__FULL_PLATE_29_WSHIELD_17: ; [$8664]
     db $00,$c0,$e0,$e0,$f0,$b8,$70,$f8,$00,$00,$00,$00,$00,$40,$80,$00 ; [$8664]
                                                                        ; byte
 
@@ -2201,7 +2229,7 @@ TILE_ARMOR_LEATHER_29_WSHIELD_17__STUDDED_29_WSHIELD_17__FULL_30_WSHIELD_18: ; [
 ; ▒▒▒░░██▒
 ; .░░░░░░░
 ;
-TILE_ARMOR_LEATHER_30_WSHIELD_18:           ; [$8674]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_29_WSHIELD_17: ; [$8674]
     db $01,$06,$ef,$5b,$f7,$6f,$1e,$7f,$06,$07,$db,$3f,$3b,$f3,$e7,$00 ; [$8674]
                                                                        ; byte
 
@@ -2216,7 +2244,7 @@ TILE_ARMOR_LEATHER_30_WSHIELD_18:           ; [$8674]
 ; ▒▒▒░.▒▒░
 ; ░░░░█░░░
 ;
-TILE_ARMOR_LEATHER_31_WSHIELD_19:           ; [$8684]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_30_WSHIELD_18: ; [$8684]
     db $e0,$60,$18,$08,$0c,$0b,$11,$ff,$00,$80,$e0,$f4,$f6,$f6,$e6,$08 ; [$8684]
                                                                        ; byte
 
@@ -2231,7 +2259,7 @@ TILE_ARMOR_LEATHER_31_WSHIELD_19:           ; [$8684]
 ; ..██▒▒░░
 ; .░█▒▒░░░
 ;
-TILE_ARMOR_LEATHER_32_WSHIELD_20:           ; [$8694]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_31_WSHIELD_19: ; [$8694]
     db $0c,$0f,$1e,$0e,$1d,$1f,$33,$67,$07,$00,$0f,$1f,$03,$18,$3c,$38 ; [$8694]
                                                                        ; byte
 
@@ -2246,7 +2274,7 @@ TILE_ARMOR_LEATHER_32_WSHIELD_20:           ; [$8694]
 ; ░░░.....
 ; ░░░.....
 ;
-TILE_ARMOR_LEATHER_33_WSHIELD_21:           ; [$86a4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_32_WSHIELD_20: ; [$86a4]
     db $6e,$e6,$00,$00,$20,$40,$e0,$e0,$81,$00,$e0,$e0,$c0,$a0,$00,$00 ; [$86a4]
                                                                        ; byte
 
@@ -2261,7 +2289,7 @@ TILE_ARMOR_LEATHER_33_WSHIELD_21:           ; [$86a4]
 ; ▒█▒░....
 ; █▒▒░....
 ;
-TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22: ; [$86b4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_33_WSHIELD_21__STUDDED_29_WSHIELD_21: ; [$86b4]
     db $4d,$59,$69,$68,$48,$50,$50,$90,$70,$60,$70,$70,$70,$60,$e0,$e0 ; [$86b4]
                                                                        ; byte
 
@@ -2276,7 +2304,7 @@ TILE_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22: ; [$86b4]
 ; ..█▒▒░..
 ; .██▒░░..
 ;
-TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23: ; [$86c4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_34_WSHIELD_22__STUDDED_30_WSHIELD_22: ; [$86c4]
     db $e0,$60,$20,$d0,$68,$28,$24,$6c,$00,$80,$c0,$e0,$70,$30,$38,$70 ; [$86c4]
                                                                        ; byte
 
@@ -2291,7 +2319,7 @@ TILE_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_31_WSHIELD_23: ; [$86c4]
 ; ▒▒▒░░██▒
 ; .░░░░░░░
 ;
-TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19: ; [$86d4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_31_WSHIELD_17__FULL_PLATE_30_WSHIELD_18: ; [$86d4]
     db $01,$0e,$ef,$5b,$f7,$6f,$1e,$7f,$06,$0f,$d7,$3d,$3a,$f3,$e7,$00 ; [$86d4]
                                                                        ; byte
 
@@ -2306,7 +2334,7 @@ TILE_ARMOR_STUDDED_32_WSHIELD_18__FULL_31_WSHIELD_19: ; [$86d4]
 ; ▒░▒░.▒▒░
 ; ░░░░█░░░
 ;
-TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20: ; [$86e4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_32_WSHIELD_18__FULL_PLATE_31_WSHIELD_19: ; [$86e4]
     db $e0,$e8,$bc,$ac,$4c,$4b,$51,$ff,$00,$10,$4c,$50,$b6,$b6,$a6,$08 ; [$86e4]
                                                                        ; byte
 
@@ -2321,7 +2349,7 @@ TILE_ARMOR_STUDDED_33_WSHIELD_19__FULL_32_WSHIELD_20: ; [$86e4]
 ; ..██▒▒░░
 ; .░█▒▒░░░
 ;
-TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21: ; [$86f4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_33_WSHIELD_19__FULL_PLATE_32_WSHIELD_20: ; [$86f4]
     db $0c,$0f,$1f,$0f,$1d,$1f,$33,$67,$07,$00,$0a,$1a,$02,$18,$3c,$38 ; [$86f4]
                                                                        ; byte
 
@@ -2336,7 +2364,7 @@ TILE_ARMOR_STUDDED_34_WSHIELD_20__FULL_33_WSHIELD_21: ; [$86f4]
 ; ░░░.....
 ; ░░░.....
 ;
-TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22: ; [$8704]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_34_WSHIELD_20__FULL_PLATE_33_WSHIELD_21: ; [$8704]
     db $6e,$e6,$c0,$c0,$60,$40,$e0,$e0,$81,$00,$a0,$a0,$80,$a0,$00,$00 ; [$8704]
                                                                        ; byte
 
@@ -2351,7 +2379,7 @@ TILE_ARMOR_STUDDED_35_WSHIELD_21__FULL_34_WSHIELD_22: ; [$8704]
 ; .░█▒░▒░░
 ; ███▒▒░░░
 ;
-TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25: ; [$8714]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_35_WSHIELD_23__STUDDED_35_WSHIELD_23__FULL_PLATE_36_WSHIELD_24: ; [$8714]
     db $00,$00,$78,$be,$9f,$4b,$6b,$e7,$00,$00,$00,$40,$60,$74,$34,$f8 ; [$8714]
                                                                        ; byte
 
@@ -2366,7 +2394,7 @@ TILE_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_37_WSHIELD_25: ; [
 ; ░.......
 ; ........
 ;
-TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26: ; [$8724]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_36_WSHIELD_24__STUDDED_36_WSHIELD_24__FULL_PLATE_37_WSHIELD_25: ; [$8724]
     db $00,$00,$00,$00,$80,$00,$80,$00,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8724]
                                                                        ; byte
 
@@ -2381,7 +2409,7 @@ TILE_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_38_WSHIELD_26: ; [
 ; .▒░░▒░▒▒
 ; .░..░░░░
 ;
-TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27: ; [$8734]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_37_WSHIELD_25__STUDDED_37_WSHIELD_25__FULL_PLATE_38_WSHIELD_26: ; [$8734]
     db $00,$00,$00,$20,$b8,$e9,$34,$4f,$00,$00,$00,$20,$20,$5f,$4b,$00 ; [$8734]
                                                                        ; byte
 
@@ -2396,7 +2424,7 @@ TILE_ARMOR_LEATHER_38_WSHIELD_26__STUDDED_38_WSHIELD_26__FULL_39_WSHIELD_27: ; [
 ; ▒▒░███▒▒
 ; ░░░░▒▒▒▒
 ;
-TILE_ARMOR_LEATHER_39_WSHIELD_27:           ; [$8744]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_38_WSHIELD_26: ; [$8744]
     db $07,$0f,$1f,$3f,$7d,$fc,$3c,$f0,$78,$73,$06,$66,$be,$bf,$df,$0f ; [$8744]
                                                                        ; byte
 
@@ -2411,7 +2439,7 @@ TILE_ARMOR_LEATHER_39_WSHIELD_27:           ; [$8744]
 ; ▒░░▒▒░..
 ; ░░░█▒░..
 ;
-TILE_ARMOR_LEATHER_40_WSHIELD_28:           ; [$8754]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_39_WSHIELD_27: ; [$8754]
     db $00,$20,$d8,$34,$84,$f4,$64,$f4,$00,$c0,$e0,$f8,$78,$18,$98,$18 ; [$8754]
                                                                        ; byte
 
@@ -2426,7 +2454,7 @@ TILE_ARMOR_LEATHER_40_WSHIELD_28:           ; [$8754]
 ; ...██▒▒░
 ; ..██▒▒░░
 ;
-TILE_ARMOR_LEATHER_41_WSHIELD_29:           ; [$8764]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_40_WSHIELD_28: ; [$8764]
     db $0f,$0e,$0f,$0c,$1e,$1b,$19,$33,$00,$07,$00,$0f,$03,$0c,$1e,$3c ; [$8764]
                                                                        ; byte
 
@@ -2441,7 +2469,7 @@ TILE_ARMOR_LEATHER_41_WSHIELD_29:           ; [$8764]
 ; ░░░.....
 ; ░░░.....
 ;
-TILE_ARMOR_LEATHER_42_WSHIELD_30:           ; [$8774]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_41_WSHIELD_29: ; [$8774]
     db $d4,$60,$e0,$e0,$60,$60,$e0,$e0,$38,$98,$00,$00,$80,$80,$00,$00 ; [$8774]
                                                                        ; byte
 
@@ -2456,7 +2484,7 @@ TILE_ARMOR_LEATHER_42_WSHIELD_30:           ; [$8774]
 ; ...██▒░.
 ; ..▒▒▒▒░.
 ;
-TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31: ; [$8784]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_42_WSHIELD_30__STUDDED_38_WSHIELD_30: ; [$8784]
     db $2c,$34,$10,$1a,$0a,$0a,$1a,$02,$30,$38,$1c,$1c,$0c,$0c,$1c,$3c ; [$8784]
                                                                        ; byte
 
@@ -2471,7 +2499,7 @@ TILE_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31: ; [$8784]
 ; ...█▒▒░.
 ; ..█▒▒▒░.
 ;
-TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32: ; [$8794]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_43_WSHIELD_31__STUDDED_39_WSHIELD_31: ; [$8794]
     db $e0,$30,$48,$20,$34,$10,$12,$22,$00,$c0,$70,$38,$38,$1c,$1c,$3c ; [$8794]
                                                                        ; byte
 
@@ -2486,7 +2514,7 @@ TILE_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_40_WSHIELD_32: ; [$8794]
 ; ▒▒░▒█░█▒
 ; ░░░░░░░░
 ;
-TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28: ; [$87a4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_40_WSHIELD_26__FULL_PLATE_39_WSHIELD_27: ; [$87a4]
     db $07,$0f,$7f,$1f,$7d,$bf,$2e,$ff,$78,$71,$03,$60,$83,$db,$db,$00 ; [$87a4]
                                                                        ; byte
 
@@ -2501,7 +2529,7 @@ TILE_ARMOR_STUDDED_41_WSHIELD_27__FULL_40_WSHIELD_28: ; [$87a4]
 ; ░░░█▒░..
 ; ░░░░▒░..
 ;
-TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29: ; [$87b4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_41_WSHIELD_27__FULL_PLATE_40_WSHIELD_28: ; [$87b4]
     db $c0,$e0,$c8,$b4,$9c,$f4,$f4,$f4,$00,$c0,$b0,$78,$78,$18,$18,$08 ; [$87b4]
                                                                        ; byte
 
@@ -2516,7 +2544,7 @@ TILE_ARMOR_STUDDED_42_WSHIELD_28__FULL_41_WSHIELD_29: ; [$87b4]
 ; ...██▒▒░
 ; ..█▒▒▒░░
 ;
-TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30: ; [$87c4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_42_WSHIELD_28__FULL_PLATE_41_WSHIELD_29: ; [$87c4]
     db $0e,$0f,$0f,$0f,$0f,$0d,$19,$23,$07,$00,$02,$0a,$00,$0e,$1e,$3c ; [$87c4]
                                                                        ; byte
 
@@ -2531,7 +2559,7 @@ TILE_ARMOR_STUDDED_43_WSHIELD_29__FULL_42_WSHIELD_30: ; [$87c4]
 ; ░░░.....
 ; ░░░.....
 ;
-TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31: ; [$87d4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_43_WSHIELD_29__FULL_PLATE_42_WSHIELD_30: ; [$87d4]
     db $74,$f8,$60,$e0,$60,$e0,$e0,$e0,$98,$00,$80,$80,$80,$00,$00,$00 ; [$87d4]
                                                                        ; byte
 
@@ -2546,7 +2574,7 @@ TILE_ARMOR_STUDDED_44_WSHIELD_30__FULL_43_WSHIELD_31: ; [$87d4]
 ; ....░░░░
 ; ....████
 ;
-TILE_ARMOR_BATTLE_SUIT_27:                  ; [$87e4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_26:   ; [$87e4]
     db $00,$0b,$0f,$0f,$0f,$0f,$0f,$0f,$00,$0b,$0d,$0e,$0f,$00,$00,$0f ; [$87e4]
                                                                        ; byte
 
@@ -2561,7 +2589,7 @@ TILE_ARMOR_BATTLE_SUIT_27:                  ; [$87e4]
 ; █▒░░....
 ; ▒░░.....
 ;
-TILE_ARMOR_BATTLE_SUIT_28:                  ; [$87f4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_27:   ; [$87f4]
     db $00,$c0,$20,$80,$50,$f0,$b0,$60,$00,$80,$c0,$60,$a0,$00,$c0,$80 ; [$87f4]
                                                                        ; byte
 
@@ -2576,7 +2604,7 @@ TILE_ARMOR_BATTLE_SUIT_28:                  ; [$87f4]
 ; ▒▒░░░█▒▒
 ; ░░░.██▒▒
 ;
-TILE_ARMOR_BATTLE_SUIT_29:                  ; [$8804]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_28:   ; [$8804]
     db $1f,$3a,$3d,$7d,$f5,$6e,$3c,$ec,$00,$1d,$0e,$56,$ba,$d1,$c7,$0f ; [$8804]
                                                                        ; byte
 
@@ -2591,7 +2619,7 @@ TILE_ARMOR_BATTLE_SUIT_29:                  ; [$8804]
 ; ░░░░░░░░
 ; ░░░█░▒░▒
 ;
-TILE_ARMOR_BATTLE_SUIT_30:                  ; [$8814]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_29:   ; [$8814]
     db $e0,$5c,$ce,$4d,$4b,$57,$ff,$fa,$18,$ac,$b0,$b6,$b6,$a0,$00,$15 ; [$8814]
                                                                        ; byte
 
@@ -2606,7 +2634,7 @@ TILE_ARMOR_BATTLE_SUIT_30:                  ; [$8814]
 ; .█░▒▒▒░░
 ; .█▒░▒░░░
 ;
-TILE_ARMOR_BATTLE_SUIT_31:                  ; [$8824]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_30:   ; [$8824]
     db $0f,$0e,$0f,$1f,$1f,$37,$63,$57,$08,$07,$08,$1a,$02,$38,$5c,$68 ; [$8824]
                                                                        ; byte
 
@@ -2621,7 +2649,7 @@ TILE_ARMOR_BATTLE_SUIT_31:                  ; [$8824]
 ; ░░░.....
 ; ▒░░.....
 ;
-TILE_ARMOR_BATTLE_SUIT_32:                  ; [$8834]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_31:   ; [$8834]
     db $ae,$a0,$e0,$40,$c0,$60,$e0,$60,$40,$40,$00,$a0,$a0,$80,$00,$80 ; [$8834]
                                                                        ; byte
 
@@ -2636,7 +2664,7 @@ TILE_ARMOR_BATTLE_SUIT_32:                  ; [$8834]
 ; ░█▒▒░...
 ; ██▒▒░...
 ;
-TILE_ARMOR_FULL_35_WSHIELD_23__BATTLE_SUIT_33: ; [$8844]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_34_WSHIELD_22__BATTLE_SUIT_32: ; [$8844]
     db $59,$70,$48,$48,$48,$38,$c8,$c8,$20,$40,$70,$70,$70,$00,$70,$f0 ; [$8844]
                                                                        ; byte
 
@@ -2651,7 +2679,7 @@ TILE_ARMOR_FULL_35_WSHIELD_23__BATTLE_SUIT_33: ; [$8844]
 ; .░█▒▒░..
 ; .██▒▒░..
 ;
-TILE_ARMOR_FULL_36_WSHIELD_24__BATTLE_SUIT_34: ; [$8854]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_35_WSHIELD_23__BATTLE_SUIT_33: ; [$8854]
     db $e0,$e0,$b0,$78,$08,$3c,$64,$64,$80,$00,$c0,$60,$30,$00,$38,$78 ; [$8854]
                                                                        ; byte
 
@@ -2666,7 +2694,7 @@ TILE_ARMOR_FULL_36_WSHIELD_24__BATTLE_SUIT_34: ; [$8854]
 ; ░█░░░█░░
 ; ▒█░▒░███
 ;
-TILE_ARMOR_BATTLE_SUIT_35:                  ; [$8864]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_34:   ; [$8864]
     db $3f,$3f,$17,$1f,$1e,$cd,$ff,$6f,$39,$33,$2a,$0a,$0b,$83,$44,$d7 ; [$8864]
                                                                        ; byte
 
@@ -2681,7 +2709,7 @@ TILE_ARMOR_BATTLE_SUIT_35:                  ; [$8864]
 ; .▒▒░██░░
 ; ████▒░░░
 ;
-TILE_ARMOR_BATTLE_SUIT_36:                  ; [$8874]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_35:   ; [$8874]
     db $00,$bc,$f2,$f9,$f5,$ff,$1f,$f7,$00,$b8,$dc,$e6,$fa,$00,$6c,$f8 ; [$8874]
                                                                        ; byte
 
@@ -2696,7 +2724,7 @@ TILE_ARMOR_BATTLE_SUIT_36:                  ; [$8874]
 ; █░░▒▒░▒░
 ; ....░░░░
 ;
-TILE_ARMOR_BATTLE_SUIT_37:                  ; [$8884]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_36:   ; [$8884]
     db $00,$00,$00,$c0,$ff,$f7,$e5,$0f,$00,$00,$80,$40,$d9,$49,$9a,$00 ; [$8884]
                                                                        ; byte
 
@@ -2711,7 +2739,7 @@ TILE_ARMOR_BATTLE_SUIT_37:                  ; [$8884]
 ; ▒▒░█░░░░
 ; ░░░.░█▒▒
 ;
-TILE_ARMOR_BATTLE_SUIT_38:                  ; [$8894]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_37:   ; [$8894]
     db $ef,$ff,$fb,$7f,$fe,$ec,$3f,$ec,$f0,$c2,$8d,$2c,$af,$b7,$d0,$07 ; [$8894]
                                                                        ; byte
 
@@ -2726,7 +2754,7 @@ TILE_ARMOR_BATTLE_SUIT_38:                  ; [$8894]
 ; ░░░██▒..
 ; ░░░██▒..
 ;
-TILE_ARMOR_BATTLE_SUIT_39:                  ; [$88a4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_38:   ; [$88a4]
     db $d0,$f0,$40,$b8,$fc,$dc,$f8,$f8,$a0,$f0,$b0,$78,$74,$28,$1c,$1c ; [$88a4]
                                                                        ; byte
 
@@ -2741,7 +2769,7 @@ TILE_ARMOR_BATTLE_SUIT_39:                  ; [$88a4]
 ; ...██▒▒▒
 ; ..█░▒▒░░
 ;
-TILE_ARMOR_BATTLE_SUIT_40:                  ; [$88b4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_39:   ; [$88b4]
     db $0a,$07,$0f,$0f,$0f,$0c,$18,$33,$07,$00,$02,$0a,$00,$0f,$1f,$2c ; [$88b4]
                                                                        ; byte
 
@@ -2756,7 +2784,7 @@ TILE_ARMOR_BATTLE_SUIT_40:                  ; [$88b4]
 ; ░░░.....
 ; ░░░.....
 ;
-TILE_ARMOR_BATTLE_SUIT_41:                  ; [$88c4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_40:   ; [$88c4]
     db $7c,$fc,$fc,$f0,$f0,$e0,$e0,$e0,$98,$00,$98,$98,$80,$00,$00,$00 ; [$88c4]
                                                                        ; byte
 
@@ -2771,7 +2799,7 @@ TILE_ARMOR_BATTLE_SUIT_41:                  ; [$88c4]
 ; ...██▒▒░
 ; ..█▒▒▒▒░
 ;
-TILE_ARMOR_FULL_44_WSHIELD_32__BATTLE_SUIT_42: ; [$88d4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_43_WSHIELD_31__BATTLE_SUIT_41: ; [$88d4]
     db $3f,$36,$1a,$1a,$0a,$0e,$19,$21,$30,$08,$1c,$0c,$0c,$00,$1e,$3e ; [$88d4]
                                                                        ; byte
 
@@ -2786,7 +2814,7 @@ TILE_ARMOR_FULL_44_WSHIELD_32__BATTLE_SUIT_42: ; [$88d4]
 ; ...▒█▒░░
 ; ..▒█▒░░░
 ;
-TILE_ARMOR_FULL_45_WSHIELD_33__BATTLE_SUIT_43: ; [$88e4]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_44_WSHIELD_32__BATTLE_SUIT_42: ; [$88e4]
     db $f0,$f8,$78,$2c,$16,$0e,$0b,$17,$00,$00,$40,$10,$18,$00,$1c,$38 ; [$88e4]
                                                                        ; byte
 
@@ -2801,7 +2829,7 @@ TILE_ARMOR_FULL_45_WSHIELD_33__BATTLE_SUIT_43: ; [$88e4]
 ; ░█▒░.░░░
 ; ░▒█▒░░░░
 ;
-TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34: ; [$88f4]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_44_WSHIELD_32__STUDDED_44_WSHIELD_32__FULL_PLATE_45_WSHIELD_33: ; [$88f4]
     db $00,$0b,$2f,$2f,$d7,$d7,$d7,$af,$00,$30,$70,$70,$60,$60,$60,$70 ; [$88f4]
                                                                        ; byte
 
@@ -2816,7 +2844,7 @@ TILE_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_46_WSHIELD_34: ; [
 ; ░░░░....
 ; ░░░.█░..
 ;
-TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35: ; [$8904]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_45_WSHIELD_33__STUDDED_45_WSHIELD_33__FULL_PLATE_46_WSHIELD_34: ; [$8904]
     db $00,$c0,$e0,$e0,$f0,$f0,$f0,$ec,$00,$00,$00,$00,$00,$00,$00,$08 ; [$8904]
                                                                        ; byte
 
@@ -2831,7 +2859,7 @@ TILE_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_46_WSHIELD_34__FULL_47_WSHIELD_35: ; [
 ; ....░░░░
 ; ....░▒██
 ;
-TILE_ARMOR_LEATHER_47_WSHIELD_35:           ; [$8914]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_46_WSHIELD_34__STUDDED_052: ; [$8914]
     db $6b,$4d,$2e,$17,$1b,$08,$0f,$0b,$34,$36,$17,$0f,$07,$07,$00,$07 ; [$8914]
                                                                        ; byte
 
@@ -2846,7 +2874,7 @@ TILE_ARMOR_LEATHER_47_WSHIELD_35:           ; [$8914]
 ; ░░░..░..
 ; █▒░.....
 ;
-TILE_ARMOR_LEATHER_48_WSHIELD_36:           ; [$8924]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_47_WSHIELD_35: ; [$8924]
     db $e6,$de,$7c,$e4,$c8,$1e,$e4,$a0,$0c,$34,$f6,$fe,$f6,$e0,$00,$c0 ; [$8924]
                                                                        ; byte
 
@@ -2861,7 +2889,7 @@ TILE_ARMOR_LEATHER_48_WSHIELD_36:           ; [$8924]
 ; ..░█▒░.░
 ; ...█▒░..
 ;
-TILE_ARMOR_LEATHER_49_WSHIELD_37:           ; [$8934]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_48_WSHIELD_36: ; [$8934]
     db $0f,$3f,$0b,$2c,$3f,$29,$35,$14,$08,$17,$37,$13,$00,$10,$18,$18 ; [$8934]
                                                                        ; byte
 
@@ -2876,7 +2904,7 @@ TILE_ARMOR_LEATHER_49_WSHIELD_37:           ; [$8934]
 ; ▒█░.....
 ; ▒█░.....
 ;
-TILE_ARMOR_LEATHER_50_WSHIELD_38:           ; [$8944]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_49_WSHIELD_37: ; [$8944]
     db $e0,$c0,$a0,$60,$e0,$a0,$60,$60,$20,$e0,$c0,$80,$00,$40,$c0,$c0 ; [$8944]
                                                                        ; byte
 
@@ -2891,7 +2919,7 @@ TILE_ARMOR_LEATHER_50_WSHIELD_38:           ; [$8944]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39: ; [$8954]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_50_WSHIELD_38__STUDDED_46_WSHIELD_38: ; [$8954]
     db $0c,$3c,$24,$18,$00,$00,$00,$00,$18,$28,$18,$00,$00,$00,$00,$00 ; [$8954]
                                                                        ; byte
 
@@ -2906,7 +2934,7 @@ TILE_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39: ; [$8954]
 ; ▒▒░.....
 ; ░░......
 ;
-TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40: ; [$8964]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_51_WSHIELD_39__STUDDED_47_WSHIELD_39: ; [$8964]
     db $20,$60,$20,$60,$70,$30,$20,$c0,$c0,$80,$c0,$c0,$c0,$c0,$c0,$00 ; [$8964]
                                                                        ; byte
 
@@ -2921,7 +2949,7 @@ TILE_ARMOR_LEATHER_52_WSHIELD_40__STUDDED_48_WSHIELD_40: ; [$8964]
 ; ....░░░░
 ; ....░▒██
 ;
-TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36: ; [$8974]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_48_WSHIELD_34__FULL_PLATE_47_WSHIELD_35: ; [$8974]
     db $7b,$5d,$3e,$17,$13,$08,$0f,$0b,$2c,$2e,$01,$0e,$0e,$07,$00,$07 ; [$8974]
                                                                        ; byte
 
@@ -2936,7 +2964,7 @@ TILE_ARMOR_STUDDED_49_WSHIELD_35__FULL_48_WSHIELD_36: ; [$8974]
 ; ░░░..░..
 ; █▒░.....
 ;
-TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37: ; [$8984]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_49_WSHIELD_35__FULL_PLATE_48_WSHIELD_36: ; [$8984]
     db $fe,$fe,$7c,$ec,$c8,$1e,$e4,$a0,$04,$34,$86,$f6,$f6,$e0,$00,$c0 ; [$8984]
                                                                        ; byte
 
@@ -2951,7 +2979,7 @@ TILE_ARMOR_STUDDED_50_WSHIELD_36__FULL_49_WSHIELD_37: ; [$8984]
 ; ..░█▒░.░
 ; ...█▒░..
 ;
-TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38: ; [$8994]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_50_WSHIELD_36__FULL_PLATE_49_WSHIELD_37: ; [$8994]
     db $07,$37,$03,$2b,$3f,$29,$35,$14,$08,$1d,$3d,$15,$00,$10,$18,$18 ; [$8994]
                                                                        ; byte
 
@@ -2966,7 +2994,7 @@ TILE_ARMOR_STUDDED_51_WSHIELD_37__FULL_50_WSHIELD_38: ; [$8994]
 ; ▒█░.....
 ; ▒█░.....
 ;
-TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39: ; [$89a4]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_51_WSHIELD_37__FULL_PLATE_50_WSHIELD_38: ; [$89a4]
     db $e0,$e0,$e0,$a0,$e0,$a0,$60,$60,$00,$40,$40,$40,$00,$40,$c0,$c0 ; [$89a4]
                                                                        ; byte
 
@@ -2981,7 +3009,7 @@ TILE_ARMOR_STUDDED_52_WSHIELD_38__FULL_51_WSHIELD_39: ; [$89a4]
 ; ░█▒░░▒▒▒
 ; ░█▒░░░█▒
 ;
-TILE_ARMOR_BATTLE_SUIT_44:                  ; [$89b4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_43:   ; [$89b4]
     db $00,$0b,$2c,$59,$db,$f9,$d8,$de,$00,$30,$73,$67,$67,$07,$67,$63 ; [$89b4]
                                                                        ; byte
 
@@ -2996,7 +3024,7 @@ TILE_ARMOR_BATTLE_SUIT_44:                  ; [$89b4]
 ; ▒▒▒░....
 ; ▒█░.█░..
 ;
-TILE_ARMOR_BATTLE_SUIT_45:                  ; [$89c4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_44:   ; [$89c4]
     db $00,$c0,$20,$90,$d0,$90,$10,$6c,$00,$00,$c0,$e0,$e0,$e0,$e0,$c8 ; [$89c4]
                                                                        ; byte
 
@@ -3011,7 +3039,7 @@ TILE_ARMOR_BATTLE_SUIT_45:                  ; [$89c4]
 ; ....░░░░
 ; ....░▒██
 ;
-TILE_ARMOR_BATTLE_SUIT_46:                  ; [$89d4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_45:   ; [$89d4]
     db $ab,$7f,$7f,$35,$14,$09,$0f,$0b,$5d,$5c,$21,$0e,$0f,$07,$00,$07 ; [$89d4]
                                                                        ; byte
 
@@ -3026,7 +3054,7 @@ TILE_ARMOR_BATTLE_SUIT_46:                  ; [$89d4]
 ; ░░░.░░..
 ; ▒▒░.....
 ;
-TILE_ARMOR_BATTLE_SUIT_47:                  ; [$89e4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_46:   ; [$89e4]
     db $ce,$fe,$fc,$ae,$28,$9a,$ec,$20,$b0,$38,$82,$74,$f6,$e4,$00,$c0 ; [$89e4]
                                                                        ; byte
 
@@ -3041,7 +3069,7 @@ TILE_ARMOR_BATTLE_SUIT_47:                  ; [$89e4]
 ; ..░█▒░.░
 ; ...█▒░.░
 ;
-TILE_ARMOR_BATTLE_SUIT_48:                  ; [$89f4]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_47:   ; [$89f4]
     db $07,$37,$73,$3b,$7f,$2d,$35,$15,$08,$1d,$0d,$65,$00,$10,$18,$18 ; [$89f4]
                                                                        ; byte
 
@@ -3056,7 +3084,7 @@ TILE_ARMOR_BATTLE_SUIT_48:                  ; [$89f4]
 ; █▒░.....
 ; █▒░.....
 ;
-TILE_ARMOR_BATTLE_SUIT_49:                  ; [$8a04]
+SPRITE_TILES_PLAYER_ARMOR_BATTLE_SUIT_48:   ; [$8a04]
     db $e0,$e0,$e0,$a0,$e0,$a0,$a0,$a0,$00,$40,$40,$40,$00,$40,$c0,$c0 ; [$8a04]
                                                                        ; byte
 
@@ -3071,7 +3099,7 @@ TILE_ARMOR_BATTLE_SUIT_49:                  ; [$8a04]
 ; .......░
 ; ........
 ;
-TILE_ARMOR_FULL_52_WSHIELD_40__BATTLE_SUIT_50: ; [$8a14]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_51_WSHIELD_39__BATTLE_SUIT_49: ; [$8a14]
     db $1d,$3d,$1d,$05,$01,$01,$01,$00,$00,$28,$38,$18,$00,$00,$00,$00 ; [$8a14]
                                                                        ; byte
 
@@ -3086,7 +3114,7 @@ TILE_ARMOR_FULL_52_WSHIELD_40__BATTLE_SUIT_50: ; [$8a14]
 ; █▒░.....
 ; ░░......
 ;
-TILE_ARMOR_FULL_53_WSHIELD_41__BATTLE_SUIT_51: ; [$8a24]
+SPRITE_TILES_PLAYER_ARMOR_FULL_PLATE_52_WSHIELD_40__BATTLE_SUIT_50: ; [$8a24]
     db $c0,$80,$e0,$a0,$b0,$f0,$a0,$c0,$20,$e0,$00,$c0,$c0,$00,$c0,$00 ; [$8a24]
                                                                        ; byte
 
@@ -3101,7 +3129,7 @@ TILE_ARMOR_FULL_53_WSHIELD_41__BATTLE_SUIT_51: ; [$8a24]
 ; .....░░█
 ; .....███
 ;
-TILE_ARMOR_LEATHER_WSHIELD_03:              ; [$8a34]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_02: ; [$8a34]
     db $27,$1f,$0b,$0e,$0f,$07,$07,$07,$18,$01,$06,$05,$05,$05,$01,$07 ; [$8a34]
                                                                        ; byte
 
@@ -3116,7 +3144,7 @@ TILE_ARMOR_LEATHER_WSHIELD_03:              ; [$8a34]
 ; █▒░.....
 ; ▒▒░.....
 ;
-TILE_ARMOR_LEATHER_WSHIELD_04__STUDDED_WSHIELD_04__FULL_WSHIELD_04: ; [$8a44]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_03__STUDDED_WSHIELD_03__FULL_PLATE_WSHIELD_03: ; [$8a44]
     db $c0,$a0,$a0,$e0,$a0,$20,$a0,$20,$00,$c0,$c0,$00,$c0,$c0,$c0,$c0 ; [$8a44]
                                                                        ; byte
 
@@ -3131,7 +3159,7 @@ TILE_ARMOR_LEATHER_WSHIELD_04__STUDDED_WSHIELD_04__FULL_WSHIELD_04: ; [$8a44]
 ; ...▒▒░░░
 ; ...█▒▒░░
 ;
-TILE_ARMOR_LEATHER_WSHIELD_05:              ; [$8a54]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_04: ; [$8a54]
     db $00,$07,$0f,$1e,$1f,$1f,$07,$13,$07,$00,$00,$07,$03,$00,$18,$1c ; [$8a54]
                                                                        ; byte
 
@@ -3146,7 +3174,7 @@ TILE_ARMOR_LEATHER_WSHIELD_05:              ; [$8a54]
 ; ........
 ; ........
 ;
-TILE_ARMOR_LEATHER_WSHIELD_06__STUDDED_WSHIELD_06__FULL_WSHIELD_06: ; [$8a64]
+SPRITE_TILES_PLAYER_ARMOR_LEATHER_WSHIELD_05__STUDDED_WSHIELD_05__FULL_PLATE_WSHIELD_05: ; [$8a64]
     db $40,$80,$80,$00,$00,$00,$00,$00,$80,$00,$00,$80,$80,$00,$00,$00 ; [$8a64]
                                                                        ; byte
 
@@ -3161,7 +3189,7 @@ TILE_ARMOR_LEATHER_WSHIELD_06__STUDDED_WSHIELD_06__FULL_WSHIELD_06: ; [$8a64]
 ; .....░░░
 ; .....███
 ;
-TILE_ARMOR_STUDDED_MAIL_WSHIELD_03__FULL_WSHIELD_03: ; [$8a74]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_02__FULL_PLATE_WSHIELD_02: ; [$8a74]
     db $21,$1f,$1f,$1f,$07,$07,$07,$07,$1e,$03,$01,$0c,$0d,$05,$00,$07 ; [$8a74]
                                                                        ; byte
 
@@ -3176,7 +3204,7 @@ TILE_ARMOR_STUDDED_MAIL_WSHIELD_03__FULL_WSHIELD_03: ; [$8a74]
 ; ..░░░░░░
 ; ..░░▒▒░░
 ;
-TILE_ARMOR_STUDDED_MAIL_WSHIELD_05__FULL_WSHIELD_05: ; [$8a84]
+SPRITE_TILES_PLAYER_ARMOR_STUDDED_WSHIELD_04__FULL_PLATE_WSHIELD_04: ; [$8a84]
     db $00,$07,$0d,$1f,$37,$3f,$3f,$33,$07,$00,$02,$02,$0a,$08,$00,$0c ; [$8a84]
                                                                        ; byte
 
@@ -4776,6 +4804,14 @@ TILES_COMMON_START:                         ; [$8c04]
                                                                        ; byte
 
 
+;============================================================================
+; Beginning of shield tiles.
+;
+; XREFS:
+;     TILES_SHIELDS_SMALL [$PRG8::8192]
+;     TILES_SHIELDS_START_REF [$PRG8::800a]
+;============================================================================
+
 ;
 ; ........
 ; ░█░.....
@@ -5056,98 +5092,690 @@ TILE_MAGIC_SHIELD_06:                       ; [$9214]
     db $f4,$ec,$f8,$f4,$7c,$fc,$ec,$ee,$68,$70,$30,$38,$98,$18,$0c,$06 ; [$9214]
                                                                        ; byte
 
+
+;============================================================================
+; A mapping of portrait IDs (0-based) to tile address lists.
+;
+; Each entry in the tile address lists are single-byte
+; values that are converted into a 16-bit value
+; representing an address in this bank, relative to
+; the start of the list of tiles
+; (SPRITE_TILES_PORTRAIT_PINKSHIRT_00).
+;
+; As an example:
+;
+;     0x8A == $08A0
+;           + $936B
+;          == $9C0B
+;
+; A value of 0xFF means tile drawing is done for that
+; portrait.
+;
+; XREFS:
+;     TILES_PORTRAITS_ADDRS_INDEX_REF [$PRG8::800e]
+;============================================================================
+
 ;
 ; XREFS:
 ;     TILES_PORTRAITS_ADDRS_INDEX_REF [$PRG8::800e]
 ;
-TILES_PORTRAITS_ADDRS_INDEX:                ; [$9224]
-    dw $123a                                ; BYTE_PRG8__923a
+SPRITE_TILES_PORTRAITS_ADDRS_INDEX:         ; [$9224]
+    dw $123a                                ; SPRITE_TILES_PORTRAIT_ADDRS_KING
                                             ; [$PRG8::9224]
-    dw $1252                                ; BYTE_PRG8__9252
+    dw $1252                                ; SPRITE_TILES_PORTRAIT_ADDRS_GURU
                                             ; [$PRG8::9226]
-    dw $1265                                ; BYTE_PRG8__9265
+    dw $1265                                ; SPRITE_TILES_PORTRAIT_ADDRS_MARTIAL_ARTIST
                                             ; [$PRG8::9228]
-    dw $1285                                ; BYTE_PRG8__9285
+    dw $1285                                ; SPRITE_TILES_PORTRAIT_ADDRS_MAGICIAN
                                             ; [$PRG8::922a]
-    dw $1298                                ; BYTE_PRG8__9298
+    dw $1298                                ; SPRITE_TILES_PORTRAIT_ADDRS_DOCTOR
                                             ; [$PRG8::922c]
-    dw $12b1                                ; BYTE_PRG8__92b1
+    dw $12b1                                ; SPRITE_TILES_PORTRAIT_ADDRS_NURSE
                                             ; [$PRG8::922e]
-    dw $12cd                                ; BYTE_PRG8__92cd
+    dw $12cd                                ; SPRITE_TILES_PORTRAIT_ADDRS_PINKSHIRT
                                             ; [$PRG8::9230]
-    dw $12e9                                ; BYTE_PRG8__92e9
+    dw $12e9                                ; SPRITE_TILES_PORTRAIT_ADDRS_SMOKING_GUY
                                             ; [$PRG8::9232]
-    dw $1307                                ; BYTE_PRG8__9307
+    dw $1307                                ; SPRITE_TILES_PORTRAIT_ADDRS_MEAT_SALESMAN
                                             ; [$PRG8::9234]
-    dw $132d                                ; BYTE_PRG8__932d
+    dw $132d                                ; SPRITE_TILES_PORTRAIT_ADDRS_TOOLS_SALESMAN
                                             ; [$PRG8::9236]
-    dw $1343                                ; BYTE_PRG8__9343
+    dw $1343                                ; SPRITE_TILES_PORTRAIT_ADDRS_KEY_SALESMAN
                                             ; [$PRG8::9238]
 
 ;
 ; XREFS:
-;     TILES_PORTRAITS_ADDRS_INDEX [$PRG8::9224]
+;     SPRITE_TILES_PORTRAITS_ADDRS_INDEX [$PRG8::9224]
 ;
-BYTE_PRG8__923a:                            ; [$923a]
-    db $8a,$8b,$8c,$8d,$8e,$8f,$90,$91,$92,$93,$96,$94,$95,$98,$97,$60 ; [$923a]
-                                                                       ; byte
-    db $9a,$99,$63,$65,$9b,$9c,$9d,$ff      ; [$924a] byte
+SPRITE_TILES_PORTRAIT_ADDRS_KING:           ; [$923a]
+    db $8a                                  ; SPRITE_TILES_PORTRAIT_KING_00
+                                            ; [$PRG8::923a]
+    db $8b                                  ; SPRITE_TILES_PORTRAIT_KING_01
+                                            ; [$PRG8::923b]
+    db $8c                                  ; SPRITE_TILES_PORTRAIT_KING_02
+                                            ; [$PRG8::923c]
+    db $8d                                  ; SPRITE_TILES_PORTRAIT_KING_03
+                                            ; [$PRG8::923d]
+    db $8e                                  ; SPRITE_TILES_PORTRAIT_KING_04
+                                            ; [$PRG8::923e]
+    db $8f                                  ; SPRITE_TILES_PORTRAIT_KING_05
+                                            ; [$PRG8::923f]
+    db $90                                  ; SPRITE_TILES_PORTRAIT_KING_06
+                                            ; [$PRG8::9240]
+    db $91                                  ; SPRITE_TILES_PORTRAIT_KING_07
+                                            ; [$PRG8::9241]
+    db $92                                  ; SPRITE_TILES_PORTRAIT_KING_08
+                                            ; [$PRG8::9242]
+    db $93                                  ; SPRITE_TILES_PORTRAIT_KING_09
+                                            ; [$PRG8::9243]
+    db $96                                  ; SPRITE_TILES_PORTRAIT_KING_10
+                                            ; [$PRG8::9244]
+    db $94                                  ; SPRITE_TILES_PORTRAIT_KING_11__MAGICIAN_09
+                                            ; [$PRG8::9245]
+    db $95                                  ; SPRITE_TILES_PORTRAIT_KING_12
+                                            ; [$PRG8::9246]
+    db $98                                  ; SPRITE_TILES_PORTRAIT_KING_13
+                                            ; [$PRG8::9247]
+    db $97                                  ; SPRITE_TILES_PORTRAIT_KING_14
+                                            ; [$PRG8::9248]
+    db $60                                  ; SPRITE_TILES_PORTRAIT_KING_15__MAGICIAN_10
+                                            ; [$PRG8::9249]
+    db $9a                                  ; SPRITE_TILES_PORTRAIT_KING_16
+                                            ; [$PRG8::924a]
+    db $99                                  ; SPRITE_TILES_PORTRAIT_KING_17
+                                            ; [$PRG8::924b]
+    db $63                                  ; SPRITE_TILES_PORTRAIT_KING_18__GURU_10__MAGICIAN_13
+                                            ; [$PRG8::924c]
+    db $65                                  ; SPRITE_TILES_PORTRAIT_KING_19
+                                            ; [$PRG8::924d]
+    db $9b                                  ; SPRITE_TILES_PORTRAIT_KING_20
+                                            ; [$PRG8::924e]
+    db $9c                                  ; SPRITE_TILES_PORTRAIT_KING_21
+                                            ; [$PRG8::924f]
+    db $9d                                  ; SPRITE_TILES_PORTRAIT_KING_22
+                                            ; [$PRG8::9250]
+    db $ff                                  ; [$9251] byte
 
-BYTE_PRG8__9252:                            ; [$9252]
-    db $a8,$a9,$aa,$ab,$ac,$ad,$ae,$af,$29,$f1,$63,$cd,$f2,$f3,$f4,$f5 ; [$9252]
-                                                                       ; byte
-    db $b0,$b1,$ff                          ; [$9262] byte
+SPRITE_TILES_PORTRAIT_ADDRS_GURU:           ; [$9252]
+    db $a8                                  ; SPRITE_TILES_PORTRAIT_GURU_00
+                                            ; [$PRG8::9252]
+    db $a9                                  ; SPRITE_TILES_PORTRAIT_GURU_01
+                                            ; [$PRG8::9253]
+    db $aa                                  ; SPRITE_TILES_PORTRAIT_GURU_02
+                                            ; [$PRG8::9254]
+    db $ab                                  ; SPRITE_TILES_PORTRAIT_GURU_03
+                                            ; [$PRG8::9255]
+    db $ac                                  ; SPRITE_TILES_PORTRAIT_GURU_04
+                                            ; [$PRG8::9256]
+    db $ad                                  ; SPRITE_TILES_PORTRAIT_GURU_05
+                                            ; [$PRG8::9257]
+    db $ae                                  ; SPRITE_TILES_PORTRAIT_GURU_06
+                                            ; [$PRG8::9258]
+    db $af                                  ; SPRITE_TILES_PORTRAIT_GURU_07
+                                            ; [$PRG8::9259]
+    db $29                                  ; SPRITE_TILES_PORTRAIT_GURU_08__NURSE_12
+                                            ; [$PRG8::925a]
+    db $f1                                  ; SPRITE_TILES_PORTRAIT_GURU_09
+                                            ; [$PRG8::925b]
+    db $63                                  ; SPRITE_TILES_PORTRAIT_KING_18__GURU_10__MAGICIAN_13
+                                            ; [$PRG8::925c]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::925d]
+    db $f2                                  ; SPRITE_TILES_PORTRAIT_GURU_12
+                                            ; [$PRG8::925e]
+    db $f3                                  ; SPRITE_TILES_PORTRAIT_GURU_13
+                                            ; [$PRG8::925f]
+    db $f4                                  ; SPRITE_TILES_PORTRAIT_GURU_14
+                                            ; [$PRG8::9260]
+    db $f5                                  ; SPRITE_TILES_PORTRAIT_GURU_15
+                                            ; [$PRG8::9261]
+    db $b0                                  ; SPRITE_TILES_PORTRAIT_GURU_16
+                                            ; [$PRG8::9262]
+    db $b1                                  ; SPRITE_TILES_PORTRAIT_GURU_17
+                                            ; [$PRG8::9263]
+    db $ff                                  ; [$9264] byte
 
-BYTE_PRG8__9265:                            ; [$9265]
-    db $68,$69,$6a,$6b,$6c,$6d,$6e,$6f,$70,$71,$72,$73,$74,$75,$76,$77 ; [$9265]
-                                                                       ; byte
-    db $7b,$7a,$79,$7e,$7c,$7d,$81,$82,$7f,$83,$84,$78,$85,$86,$87,$ff ; [$9275]
-                                                                       ; byte
+SPRITE_TILES_PORTRAIT_ADDRS_MARTIAL_ARTIST: ; [$9265]
+    db $68                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_00
+                                            ; [$PRG8::9265]
+    db $69                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_01
+                                            ; [$PRG8::9266]
+    db $6a                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_02
+                                            ; [$PRG8::9267]
+    db $6b                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_03
+                                            ; [$PRG8::9268]
+    db $6c                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_04
+                                            ; [$PRG8::9269]
+    db $6d                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_05
+                                            ; [$PRG8::926a]
+    db $6e                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_06
+                                            ; [$PRG8::926b]
+    db $6f                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_07
+                                            ; [$PRG8::926c]
+    db $70                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_08
+                                            ; [$PRG8::926d]
+    db $71                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_09
+                                            ; [$PRG8::926e]
+    db $72                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_10
+                                            ; [$PRG8::926f]
+    db $73                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_11
+                                            ; [$PRG8::9270]
+    db $74                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_12
+                                            ; [$PRG8::9271]
+    db $75                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_13
+                                            ; [$PRG8::9272]
+    db $76                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_14
+                                            ; [$PRG8::9273]
+    db $77                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_15
+                                            ; [$PRG8::9274]
+    db $7b                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_16
+                                            ; [$PRG8::9275]
+    db $7a                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_17
+                                            ; [$PRG8::9276]
+    db $79                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_18
+                                            ; [$PRG8::9277]
+    db $7e                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_19
+                                            ; [$PRG8::9278]
+    db $7c                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_20
+                                            ; [$PRG8::9279]
+    db $7d                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_21
+                                            ; [$PRG8::927a]
+    db $81                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_22
+                                            ; [$PRG8::927b]
+    db $82                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_23
+                                            ; [$PRG8::927c]
+    db $7f                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_24
+                                            ; [$PRG8::927d]
+    db $83                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_25
+                                            ; [$PRG8::927e]
+    db $84                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_26
+                                            ; [$PRG8::927f]
+    db $78                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_27
+                                            ; [$PRG8::9280]
+    db $85                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_28
+                                            ; [$PRG8::9281]
+    db $86                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_29
+                                            ; [$PRG8::9282]
+    db $87                                  ; SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_30
+                                            ; [$PRG8::9283]
+    db $ff                                  ; [$9284] byte
 
-BYTE_PRG8__9285:                            ; [$9285]
-    db $51,$52,$53,$54,$55,$56,$57,$58,$ee,$94,$60,$80,$ef,$63,$cd,$2a ; [$9285]
-                                                                       ; byte
-    db $88,$89,$ff                          ; [$9295] byte
+SPRITE_TILES_PORTRAIT_ADDRS_MAGICIAN:       ; [$9285]
+    db $51                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_00
+                                            ; [$PRG8::9285]
+    db $52                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_01
+                                            ; [$PRG8::9286]
+    db $53                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_02
+                                            ; [$PRG8::9287]
+    db $54                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_03
+                                            ; [$PRG8::9288]
+    db $55                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_04
+                                            ; [$PRG8::9289]
+    db $56                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_05
+                                            ; [$PRG8::928a]
+    db $57                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_06
+                                            ; [$PRG8::928b]
+    db $58                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_07
+                                            ; [$PRG8::928c]
+    db $ee                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_08__MEAT_SALESMAN_29
+                                            ; [$PRG8::928d]
+    db $94                                  ; SPRITE_TILES_PORTRAIT_KING_11__MAGICIAN_09
+                                            ; [$PRG8::928e]
+    db $60                                  ; SPRITE_TILES_PORTRAIT_KING_15__MAGICIAN_10
+                                            ; [$PRG8::928f]
+    db $80                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_11
+                                            ; [$PRG8::9290]
+    db $ef                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_12
+                                            ; [$PRG8::9291]
+    db $63                                  ; SPRITE_TILES_PORTRAIT_KING_18__GURU_10__MAGICIAN_13
+                                            ; [$PRG8::9292]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::9293]
+    db $2a                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_15__NURSE_16__KEY_SALESMAN_22
+                                            ; [$PRG8::9294]
+    db $88                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_16
+                                            ; [$PRG8::9295]
+    db $89                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_17
+                                            ; [$PRG8::9296]
+    db $ff                                  ; [$9297] byte
 
-BYTE_PRG8__9298:                            ; [$9298]
-    db $e2,$e3,$b4,$c2,$a0,$e4,$e5,$c6,$a2,$a3,$ca,$ea,$e6,$e7,$eb,$ec ; [$9298]
-                                                                       ; byte
-    db $e9,$ce,$f0,$cd,$db,$dc,$a6,$e8,$ff  ; [$92a8] byte
+SPRITE_TILES_PORTRAIT_ADDRS_DOCTOR:         ; [$9298]
+    db $e2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_00
+                                            ; [$PRG8::9298]
+    db $e3                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_01
+                                            ; [$PRG8::9299]
+    db $b4                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_02__KEY_SALESMAN_02
+                                            ; [$PRG8::929a]
+    db $c2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_03__SMOKING_GUY_03__KEY_SALESMAN_03
+                                            ; [$PRG8::929b]
+    db $a0                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_04__TOOLS_SALESMAN_02
+                                            ; [$PRG8::929c]
+    db $e4                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_05
+                                            ; [$PRG8::929d]
+    db $e5                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_06
+                                            ; [$PRG8::929e]
+    db $c6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_07__SMOKING_GUY_07
+                                            ; [$PRG8::929f]
+    db $a2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_08__TOOLS_SALESMAN_04
+                                            ; [$PRG8::92a0]
+    db $a3                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_09__TOOLS_SALESMAN_05
+                                            ; [$PRG8::92a1]
+    db $ca                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_10__SMOKING_GUY_11
+                                            ; [$PRG8::92a2]
+    db $ea                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_11
+                                            ; [$PRG8::92a3]
+    db $e6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_12__MEAT_SALESMAN_22
+                                            ; [$PRG8::92a4]
+    db $e7                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_13
+                                            ; [$PRG8::92a5]
+    db $eb                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_14
+                                            ; [$PRG8::92a6]
+    db $ec                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_15
+                                            ; [$PRG8::92a7]
+    db $e9                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_16__MEAT_SALESMAN_28
+                                            ; [$PRG8::92a8]
+    db $ce                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_17__PINKSHIRT_18__SMOKING_GUY_22__MEAT_SALESMAN_23
+                                            ; [$PRG8::92a9]
+    db $f0                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_18
+                                            ; [$PRG8::92aa]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::92ab]
+    db $db                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_20__TOOLS_SALESMAN_14__KEY_SALESMAN_33
+                                            ; [$PRG8::92ac]
+    db $dc                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_21__TOOLS_SALESMAN_15__KEY_SALESMAN_34
+                                            ; [$PRG8::92ad]
+    db $a6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_22__TOOLS_SALESMAN_19
+                                            ; [$PRG8::92ae]
+    db $e8                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_23
+                                            ; [$PRG8::92af]
+    db $ff                                  ; [$92b0] byte
 
-BYTE_PRG8__92b1:                            ; [$92b1]
-    db $1a,$1b,$1c,$1d,$1e,$1f,$20,$21,$22,$23,$24,$25,$29,$27,$28,$2c ; [$92b1]
-                                                                       ; byte
-    db $2a,$2b,$2f,$2d,$2e,$30,$31,$cd,$32,$33,$26,$ff ; [$92c1] byte
+SPRITE_TILES_PORTRAIT_ADDRS_NURSE:          ; [$92b1]
+    db $1a                                  ; SPRITE_TILES_PORTRAIT_NURSE_00__KEY_SALESMAN_16
+                                            ; [$PRG8::92b1]
+    db $1b                                  ; SPRITE_TILES_PORTRAIT_NURSE_01
+                                            ; [$PRG8::92b2]
+    db $1c                                  ; SPRITE_TILES_PORTRAIT_NURSE_02
+                                            ; [$PRG8::92b3]
+    db $1d                                  ; SPRITE_TILES_PORTRAIT_NURSE_03
+                                            ; [$PRG8::92b4]
+    db $1e                                  ; SPRITE_TILES_PORTRAIT_NURSE_04
+                                            ; [$PRG8::92b5]
+    db $1f                                  ; SPRITE_TILES_PORTRAIT_NURSE_05
+                                            ; [$PRG8::92b6]
+    db $20                                  ; SPRITE_TILES_PORTRAIT_NURSE_06
+                                            ; [$PRG8::92b7]
+    db $21                                  ; SPRITE_TILES_PORTRAIT_NURSE_07
+                                            ; [$PRG8::92b8]
+    db $22                                  ; SPRITE_TILES_PORTRAIT_NURSE_08
+                                            ; [$PRG8::92b9]
+    db $23                                  ; SPRITE_TILES_PORTRAIT_NURSE_09
+                                            ; [$PRG8::92ba]
+    db $24                                  ; SPRITE_TILES_PORTRAIT_NURSE_10
+                                            ; [$PRG8::92bb]
+    db $25                                  ; SPRITE_TILES_PORTRAIT_NURSE_11
+                                            ; [$PRG8::92bc]
+    db $29                                  ; SPRITE_TILES_PORTRAIT_GURU_08__NURSE_12
+                                            ; [$PRG8::92bd]
+    db $27                                  ; SPRITE_TILES_PORTRAIT_NURSE_13
+                                            ; [$PRG8::92be]
+    db $28                                  ; SPRITE_TILES_PORTRAIT_NURSE_14
+                                            ; [$PRG8::92bf]
+    db $2c                                  ; SPRITE_TILES_PORTRAIT_NURSE_15
+                                            ; [$PRG8::92c0]
+    db $2a                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_15__NURSE_16__KEY_SALESMAN_22
+                                            ; [$PRG8::92c1]
+    db $2b                                  ; SPRITE_TILES_PORTRAIT_NURSE_17
+                                            ; [$PRG8::92c2]
+    db $2f                                  ; SPRITE_TILES_PORTRAIT_NURSE_18
+                                            ; [$PRG8::92c3]
+    db $2d                                  ; SPRITE_TILES_PORTRAIT_NURSE_19
+                                            ; [$PRG8::92c4]
+    db $2e                                  ; SPRITE_TILES_PORTRAIT_NURSE_20
+                                            ; [$PRG8::92c5]
+    db $30                                  ; SPRITE_TILES_PORTRAIT_NURSE_21
+                                            ; [$PRG8::92c6]
+    db $31                                  ; SPRITE_TILES_PORTRAIT_NURSE_22
+                                            ; [$PRG8::92c7]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::92c8]
+    db $32                                  ; SPRITE_TILES_PORTRAIT_NURSE_24
+                                            ; [$PRG8::92c9]
+    db $33                                  ; SPRITE_TILES_PORTRAIT_NURSE_25
+                                            ; [$PRG8::92ca]
+    db $26                                  ; SPRITE_TILES_PORTRAIT_NURSE_26
+                                            ; [$PRG8::92cb]
+    db $ff                                  ; [$92cc] byte
 
-BYTE_PRG8__92cd:                            ; [$92cd]
-    db $00,$01,$02,$03,$04,$05,$06,$07,$08,$09,$0a,$0b,$0c,$0d,$10,$11 ; [$92cd]
-                                                                       ; byte
-    db $0e,$0f,$ce,$12,$13,$14,$15,$16,$17,$18,$19,$ff ; [$92dd] byte
+SPRITE_TILES_PORTRAIT_ADDRS_PINKSHIRT:      ; [$92cd]
+    db $00                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_00
+                                            ; [$PRG8::92cd]
+    db $01                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_01
+                                            ; [$PRG8::92ce]
+    db $02                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_02
+                                            ; [$PRG8::92cf]
+    db $03                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_03
+                                            ; [$PRG8::92d0]
+    db $04                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_04
+                                            ; [$PRG8::92d1]
+    db $05                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_05
+                                            ; [$PRG8::92d2]
+    db $06                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_06
+                                            ; [$PRG8::92d3]
+    db $07                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_07
+                                            ; [$PRG8::92d4]
+    db $08                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_08
+                                            ; [$PRG8::92d5]
+    db $09                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_09
+                                            ; [$PRG8::92d6]
+    db $0a                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_10
+                                            ; [$PRG8::92d7]
+    db $0b                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_11
+                                            ; [$PRG8::92d8]
+    db $0c                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_12
+                                            ; [$PRG8::92d9]
+    db $0d                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_13
+                                            ; [$PRG8::92da]
+    db $10                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_14__SMOKING_GUY_18
+                                            ; [$PRG8::92db]
+    db $11                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_15__SMOKING_GUY_19
+                                            ; [$PRG8::92dc]
+    db $0e                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_16
+                                            ; [$PRG8::92dd]
+    db $0f                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_17
+                                            ; [$PRG8::92de]
+    db $ce                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_17__PINKSHIRT_18__SMOKING_GUY_22__MEAT_SALESMAN_23
+                                            ; [$PRG8::92df]
+    db $12                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_19__SMOKING_GUY_23
+                                            ; [$PRG8::92e0]
+    db $13                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_20__SMOKING_GUY_24
+                                            ; [$PRG8::92e1]
+    db $14                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_21
+                                            ; [$PRG8::92e2]
+    db $15                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_22
+                                            ; [$PRG8::92e3]
+    db $16                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_23
+                                            ; [$PRG8::92e4]
+    db $17                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_24
+                                            ; [$PRG8::92e5]
+    db $18                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_25
+                                            ; [$PRG8::92e6]
+    db $19                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_26
+                                            ; [$PRG8::92e7]
+    db $ff                                  ; [$92e8] byte
 
-BYTE_PRG8__92e9:                            ; [$92e9]
-    db $bf,$c0,$c1,$c2,$c3,$c4,$c5,$c6,$c7,$c8,$c9,$ca,$cb,$cc,$d0,$d1 ; [$92e9]
-                                                                       ; byte
-    db $44,$45,$10,$11,$46,$47,$ce,$12,$13,$d2,$d3,$d4,$d5,$ff ; [$92f9] byte
+SPRITE_TILES_PORTRAIT_ADDRS_SMOKING_GUY:    ; [$92e9]
+    db $bf                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_00
+                                            ; [$PRG8::92e9]
+    db $c0                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_01
+                                            ; [$PRG8::92ea]
+    db $c1                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_02
+                                            ; [$PRG8::92eb]
+    db $c2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_03__SMOKING_GUY_03__KEY_SALESMAN_03
+                                            ; [$PRG8::92ec]
+    db $c3                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_04
+                                            ; [$PRG8::92ed]
+    db $c4                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_05
+                                            ; [$PRG8::92ee]
+    db $c5                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_06
+                                            ; [$PRG8::92ef]
+    db $c6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_07__SMOKING_GUY_07
+                                            ; [$PRG8::92f0]
+    db $c7                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_08
+                                            ; [$PRG8::92f1]
+    db $c8                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_09
+                                            ; [$PRG8::92f2]
+    db $c9                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_10
+                                            ; [$PRG8::92f3]
+    db $ca                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_10__SMOKING_GUY_11
+                                            ; [$PRG8::92f4]
+    db $cb                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_12__KEY_SALESMAN_12
+                                            ; [$PRG8::92f5]
+    db $cc                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_13__KEY_SALESMAN_13
+                                            ; [$PRG8::92f6]
+    db $d0                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_14__KEY_SALESMAN_14
+                                            ; [$PRG8::92f7]
+    db $d1                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_15__KEY_SALESMAN_15
+                                            ; [$PRG8::92f8]
+    db $44                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_16__KEY_SALESMAN_18
+                                            ; [$PRG8::92f9]
+    db $45                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_17
+                                            ; [$PRG8::92fa]
+    db $10                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_14__SMOKING_GUY_18
+                                            ; [$PRG8::92fb]
+    db $11                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_15__SMOKING_GUY_19
+                                            ; [$PRG8::92fc]
+    db $46                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_20__KEY_SALESMAN_24
+                                            ; [$PRG8::92fd]
+    db $47                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_21__KEY_SALESMAN_25
+                                            ; [$PRG8::92fe]
+    db $ce                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_17__PINKSHIRT_18__SMOKING_GUY_22__MEAT_SALESMAN_23
+                                            ; [$PRG8::92ff]
+    db $12                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_19__SMOKING_GUY_23
+                                            ; [$PRG8::9300]
+    db $13                                  ; SPRITE_TILES_PORTRAIT_PINKSHIRT_20__SMOKING_GUY_24
+                                            ; [$PRG8::9301]
+    db $d2                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_25
+                                            ; [$PRG8::9302]
+    db $d3                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_26
+                                            ; [$PRG8::9303]
+    db $d4                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_27__KEY_SALESMAN_37
+                                            ; [$PRG8::9304]
+    db $d5                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_28__KEY_SALESMAN_38
+                                            ; [$PRG8::9305]
+    db $ff                                  ; [$9306] byte
 
-BYTE_PRG8__9307:                            ; [$9307]
-    db $36,$37,$38,$39,$3a,$3b,$3c,$3d,$3e,$3f,$4d,$40,$41,$42,$43,$e1 ; [$9307]
-                                                                       ; byte
-    db $5b,$5c,$5d,$5e,$66,$e0,$e6,$ce,$61,$62,$64,$cd,$e9,$ee,$4c,$67 ; [$9317]
-                                                                       ; byte
-    db $4e,$4f,$50,$59,$5a,$ff              ; [$9327] byte
+SPRITE_TILES_PORTRAIT_ADDRS_MEAT_SALESMAN:  ; [$9307]
+    db $36                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_00
+                                            ; [$PRG8::9307]
+    db $37                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_01
+                                            ; [$PRG8::9308]
+    db $38                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_02
+                                            ; [$PRG8::9309]
+    db $39                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_03
+                                            ; [$PRG8::930a]
+    db $3a                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_04
+                                            ; [$PRG8::930b]
+    db $3b                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_05
+                                            ; [$PRG8::930c]
+    db $3c                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_06
+                                            ; [$PRG8::930d]
+    db $3d                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_07
+                                            ; [$PRG8::930e]
+    db $3e                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_08
+                                            ; [$PRG8::930f]
+    db $3f                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_09
+                                            ; [$PRG8::9310]
+    db $4d                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_10
+                                            ; [$PRG8::9311]
+    db $40                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_11
+                                            ; [$PRG8::9312]
+    db $41                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_12
+                                            ; [$PRG8::9313]
+    db $42                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_13
+                                            ; [$PRG8::9314]
+    db $43                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_14
+                                            ; [$PRG8::9315]
+    db $e1                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_15
+                                            ; [$PRG8::9316]
+    db $5b                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_16
+                                            ; [$PRG8::9317]
+    db $5c                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_17
+                                            ; [$PRG8::9318]
+    db $5d                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_18
+                                            ; [$PRG8::9319]
+    db $5e                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_19
+                                            ; [$PRG8::931a]
+    db $66                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_20
+                                            ; [$PRG8::931b]
+    db $e0                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_21
+                                            ; [$PRG8::931c]
+    db $e6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_12__MEAT_SALESMAN_22
+                                            ; [$PRG8::931d]
+    db $ce                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_17__PINKSHIRT_18__SMOKING_GUY_22__MEAT_SALESMAN_23
+                                            ; [$PRG8::931e]
+    db $61                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_24
+                                            ; [$PRG8::931f]
+    db $62                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_25
+                                            ; [$PRG8::9320]
+    db $64                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_26
+                                            ; [$PRG8::9321]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::9322]
+    db $e9                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_16__MEAT_SALESMAN_28
+                                            ; [$PRG8::9323]
+    db $ee                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_08__MEAT_SALESMAN_29
+                                            ; [$PRG8::9324]
+    db $4c                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_30
+                                            ; [$PRG8::9325]
+    db $67                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_31
+                                            ; [$PRG8::9326]
+    db $4e                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_32
+                                            ; [$PRG8::9327]
+    db $4f                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_33
+                                            ; [$PRG8::9328]
+    db $50                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_34
+                                            ; [$PRG8::9329]
+    db $59                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_35
+                                            ; [$PRG8::932a]
+    db $5a                                  ; SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_36
+                                            ; [$PRG8::932b]
+    db $ff                                  ; [$932c] byte
 
-BYTE_PRG8__932d:                            ; [$932d]
-    db $9e,$9f,$a0,$a1,$a2,$a3,$a4,$a5,$d6,$d7,$d8,$d9,$da,$cd,$db,$dc ; [$932d]
-                                                                       ; byte
-    db $dd,$de,$df,$a6,$a7,$ff              ; [$933d] byte
+SPRITE_TILES_PORTRAIT_ADDRS_TOOLS_SALESMAN: ; [$932d]
+    db $9e                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_00
+                                            ; [$PRG8::932d]
+    db $9f                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_01
+                                            ; [$PRG8::932e]
+    db $a0                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_04__TOOLS_SALESMAN_02
+                                            ; [$PRG8::932f]
+    db $a1                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_03
+                                            ; [$PRG8::9330]
+    db $a2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_08__TOOLS_SALESMAN_04
+                                            ; [$PRG8::9331]
+    db $a3                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_09__TOOLS_SALESMAN_05
+                                            ; [$PRG8::9332]
+    db $a4                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_06
+                                            ; [$PRG8::9333]
+    db $a5                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_07
+                                            ; [$PRG8::9334]
+    db $d6                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_08
+                                            ; [$PRG8::9335]
+    db $d7                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_09
+                                            ; [$PRG8::9336]
+    db $d8                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_10
+                                            ; [$PRG8::9337]
+    db $d9                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_11
+                                            ; [$PRG8::9338]
+    db $da                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_12__KEY_SALESMAN_26
+                                            ; [$PRG8::9339]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::933a]
+    db $db                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_20__TOOLS_SALESMAN_14__KEY_SALESMAN_33
+                                            ; [$PRG8::933b]
+    db $dc                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_21__TOOLS_SALESMAN_15__KEY_SALESMAN_34
+                                            ; [$PRG8::933c]
+    db $dd                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_16
+                                            ; [$PRG8::933d]
+    db $de                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_17
+                                            ; [$PRG8::933e]
+    db $df                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_18
+                                            ; [$PRG8::933f]
+    db $a6                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_22__TOOLS_SALESMAN_19
+                                            ; [$PRG8::9340]
+    db $a7                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_20
+                                            ; [$PRG8::9341]
+    db $ff                                  ; [$9342] byte
 
-BYTE_PRG8__9343:                            ; [$9343]
-    db $b2,$b3,$b4,$c2,$b5,$b6,$b7,$b8,$b9,$ba,$bb,$bc,$cb,$cc,$d0,$d1 ; [$9343]
-                                                                       ; byte
-    db $1a,$48,$44,$fa,$fb,$fc,$2a,$cf,$46,$47,$da,$fd,$49,$4a,$cd,$34 ; [$9353]
-                                                                       ; byte
-    db $fe,$db,$dc,$bd,$be,$d4,$d5,$ff      ; [$9363] byte
+SPRITE_TILES_PORTRAIT_ADDRS_KEY_SALESMAN:   ; [$9343]
+    db $b2                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_00
+                                            ; [$PRG8::9343]
+    db $b3                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_01
+                                            ; [$PRG8::9344]
+    db $b4                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_02__KEY_SALESMAN_02
+                                            ; [$PRG8::9345]
+    db $c2                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_03__SMOKING_GUY_03__KEY_SALESMAN_03
+                                            ; [$PRG8::9346]
+    db $b5                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_04
+                                            ; [$PRG8::9347]
+    db $b6                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_05
+                                            ; [$PRG8::9348]
+    db $b7                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_06
+                                            ; [$PRG8::9349]
+    db $b8                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_07
+                                            ; [$PRG8::934a]
+    db $b9                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_08
+                                            ; [$PRG8::934b]
+    db $ba                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_09
+                                            ; [$PRG8::934c]
+    db $bb                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_10
+                                            ; [$PRG8::934d]
+    db $bc                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_11
+                                            ; [$PRG8::934e]
+    db $cb                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_12__KEY_SALESMAN_12
+                                            ; [$PRG8::934f]
+    db $cc                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_13__KEY_SALESMAN_13
+                                            ; [$PRG8::9350]
+    db $d0                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_14__KEY_SALESMAN_14
+                                            ; [$PRG8::9351]
+    db $d1                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_15__KEY_SALESMAN_15
+                                            ; [$PRG8::9352]
+    db $1a                                  ; SPRITE_TILES_PORTRAIT_NURSE_00__KEY_SALESMAN_16
+                                            ; [$PRG8::9353]
+    db $48                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_17
+                                            ; [$PRG8::9354]
+    db $44                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_16__KEY_SALESMAN_18
+                                            ; [$PRG8::9355]
+    db $fa                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_19
+                                            ; [$PRG8::9356]
+    db $fb                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_20
+                                            ; [$PRG8::9357]
+    db $fc                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_21
+                                            ; [$PRG8::9358]
+    db $2a                                  ; SPRITE_TILES_PORTRAIT_MAGICIAN_15__NURSE_16__KEY_SALESMAN_22
+                                            ; [$PRG8::9359]
+    db $cf                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_23
+                                            ; [$PRG8::935a]
+    db $46                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_20__KEY_SALESMAN_24
+                                            ; [$PRG8::935b]
+    db $47                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_21__KEY_SALESMAN_25
+                                            ; [$PRG8::935c]
+    db $da                                  ; SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_12__KEY_SALESMAN_26
+                                            ; [$PRG8::935d]
+    db $fd                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_27
+                                            ; [$PRG8::935e]
+    db $49                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_28
+                                            ; [$PRG8::935f]
+    db $4a                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_29
+                                            ; [$PRG8::9360]
+    db $cd                                  ; SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30
+                                            ; [$PRG8::9361]
+    db $34                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_31
+                                            ; [$PRG8::9362]
+    db $fe                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_32
+                                            ; [$PRG8::9363]
+    db $db                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_20__TOOLS_SALESMAN_14__KEY_SALESMAN_33
+                                            ; [$PRG8::9364]
+    db $dc                                  ; SPRITE_TILES_PORTRAIT_DOCTOR_21__TOOLS_SALESMAN_15__KEY_SALESMAN_34
+                                            ; [$PRG8::9365]
+    db $bd                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_35
+                                            ; [$PRG8::9366]
+    db $be                                  ; SPRITE_TILES_PORTRAIT_KEY_SALESMAN_36
+                                            ; [$PRG8::9367]
+    db $d4                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_27__KEY_SALESMAN_37
+                                            ; [$PRG8::9368]
+    db $d5                                  ; SPRITE_TILES_PORTRAIT_SMOKING_GUY_28__KEY_SALESMAN_38
+                                            ; [$PRG8::9369]
+    db $ff                                  ; [$936a] byte
 
+
+;============================================================================
+; Beginning of portrait tiles.
+;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_PINKSHIRT [$PRG8::92cd]
+;     TILES_PORTRAITS_START_REF [$PRG8::8010]
+;============================================================================
 
 ;
 ; ........
@@ -5160,9 +5788,10 @@ BYTE_PRG8__9343:                            ; [$9343]
 ; ..▒█▒░.▒
 ;
 ; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_PINKSHIRT [$PRG8::92cd]
 ;     TILES_PORTRAITS_START_REF [$PRG8::8010]
 ;
-TILES_PORTRAITS_START:                      ; [$936b]
+SPRITE_TILES_PORTRAIT_PINKSHIRT_00:         ; [$936b]
     db $00,$01,$03,$0a,$0c,$06,$1c,$14,$00,$00,$01,$07,$07,$0c,$08,$39 ; [$936b]
                                                                        ; byte
 
@@ -5177,6 +5806,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░.░░▒▒▒
 ; ░....░.▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_01:         ; [$937b]
     db $08,$36,$44,$00,$00,$00,$58,$84,$37,$fd,$a3,$98,$7e,$ff,$87,$01 ; [$937b]
                                                                        ; byte
 
@@ -5191,6 +5821,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░█▒░░░
 ; ▒▒░█▒░▒▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_02:         ; [$938b]
     db $19,$01,$38,$69,$d1,$6a,$37,$34,$12,$3a,$13,$12,$7a,$b1,$d8,$db ; [$938b]
                                                                        ; byte
 
@@ -5205,6 +5836,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒░░▒█
 ; ▒░░░▒░██
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_03:         ; [$939b]
     db $b8,$7c,$07,$77,$bc,$4d,$0d,$77,$47,$83,$80,$78,$eb,$cb,$f3,$8b ; [$939b]
                                                                        ; byte
 
@@ -5219,6 +5851,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒▒▒▒░▒
 ; ▒▒░▒▒░░▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_04:         ; [$93ab]
     db $5d,$3c,$e3,$dc,$6a,$43,$42,$26,$80,$02,$00,$1f,$bb,$b2,$bd,$d9 ; [$93ab]
                                                                        ; byte
 
@@ -5233,6 +5866,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░█░▒▒
 ; ▒▒▒░█░▒▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_05:         ; [$93bb]
     db $9c,$84,$04,$0e,$1b,$96,$1c,$1c,$40,$68,$e8,$e0,$e6,$6d,$eb,$eb ; [$93bb]
                                                                        ; byte
 
@@ -5247,6 +5881,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...░░▒░░
 ; ...░░▒▒░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_06:         ; [$93cb]
     db $64,$38,$9b,$9a,$7a,$3c,$1b,$19,$9b,$c7,$e7,$67,$07,$03,$04,$06 ; [$93cb]
                                                                        ; byte
 
@@ -5261,6 +5896,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░░▒███
 ; ▒.░▒▒██▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_07:         ; [$93db]
     db $03,$04,$0b,$0c,$09,$0f,$37,$26,$f7,$f3,$e0,$ec,$de,$b0,$0f,$9f ; [$93db]
                                                                        ; byte
 
@@ -5275,6 +5911,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒░.▒.▒
 ; ▒▒▒▒░..▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_08:         ; [$93eb]
     db $b3,$54,$b4,$48,$8c,$e5,$90,$08,$cc,$8f,$0f,$37,$73,$19,$e5,$f1 ; [$93eb]
                                                                        ; byte
 
@@ -5289,6 +5926,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░▒░...
 ; ▒▒▒▒░...
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_09:         ; [$93fb]
     db $1e,$1c,$19,$1d,$3e,$2c,$28,$08,$e1,$e3,$e7,$e2,$c0,$d0,$d0,$f0 ; [$93fb]
                                                                        ; byte
 
@@ -5303,6 +5941,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ........
 ; ........
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_10:         ; [$940b]
     db $09,$0a,$04,$04,$01,$01,$00,$00,$06,$07,$03,$03,$00,$00,$00,$00 ; [$940b]
                                                                        ; byte
 
@@ -5317,6 +5956,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░░▒▒▒▒
 ; ░░░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_11:         ; [$941b]
     db $00,$03,$41,$0c,$88,$c0,$f0,$ff,$bf,$bc,$be,$ff,$7f,$3f,$0f,$00 ; [$941b]
                                                                        ; byte
 
@@ -5331,6 +5971,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_12:         ; [$942b]
     db $00,$e2,$22,$08,$08,$1b,$7f,$ff,$fd,$1d,$1d,$f7,$f7,$e4,$80,$00 ; [$942b]
                                                                        ; byte
 
@@ -5345,6 +5986,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░.......
 ; ░.......
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_13:         ; [$943b]
     db $18,$10,$30,$60,$c0,$80,$80,$80,$e0,$e0,$c0,$80,$00,$00,$00,$00 ; [$943b]
                                                                        ; byte
 
@@ -5359,6 +6001,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒░▒▒▒▒
 ; ░██▒░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_16:         ; [$944b]
     db $0a,$21,$90,$90,$48,$a0,$d0,$e8,$f5,$fe,$7f,$7f,$bf,$df,$ef,$77 ; [$944b]
                                                                        ; byte
 
@@ -5373,6 +6016,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒░███
 ; ▒▒▒░███░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_17:         ; [$945b]
     db $bf,$7f,$ff,$7f,$1f,$0f,$0f,$1f,$40,$80,$00,$80,$e1,$f3,$f7,$ee ; [$945b]
                                                                        ; byte
 
@@ -5387,6 +6031,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .░▒▒▒▒▒▒
 ; .▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_14__SMOKING_GUY_18: ; [$946b]
     db $00,$00,$01,$04,$10,$20,$40,$00,$00,$00,$00,$03,$0f,$1f,$3f,$7f ; [$946b]
                                                                        ; byte
 
@@ -5401,6 +6046,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒░
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_15__SMOKING_GUY_19: ; [$947b]
     db $00,$47,$0b,$0b,$05,$02,$01,$00,$00,$3a,$f7,$f7,$fb,$fd,$fe,$ff ; [$947b]
                                                                        ; byte
 
@@ -5415,6 +6061,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░..░█░▒.
 ; ▒▒▒░█..▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_19__SMOKING_GUY_23: ; [$948b]
     db $5c,$2c,$9c,$9c,$04,$98,$9c,$18,$bb,$db,$6b,$0b,$e3,$69,$0a,$e9 ; [$948b]
                                                                        ; byte
 
@@ -5429,6 +6076,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒░███
 ; ▒▒▒▒▒░░░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_20__SMOKING_GUY_24: ; [$949b]
     db $84,$9c,$18,$84,$9c,$1f,$0f,$07,$61,$0a,$e9,$63,$0b,$ec,$f7,$f8 ; [$949b]
                                                                        ; byte
 
@@ -5443,6 +6091,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒░░▒█
 ; ▒░░░▒░██
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_21:         ; [$94ab]
     db $b8,$1c,$67,$47,$14,$0d,$0d,$77,$47,$e3,$f8,$f8,$63,$83,$f3,$8b ; [$94ab]
                                                                        ; byte
 
@@ -5457,6 +6106,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒▒▒▒░▒
 ; ▒▒░▒▒░░▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_22:         ; [$94bb]
     db $5d,$3c,$e3,$c8,$40,$50,$42,$26,$80,$02,$1c,$3f,$9e,$a1,$bd,$d9 ; [$94bb]
                                                                        ; byte
 
@@ -5471,6 +6121,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░.░▒█▒
 ; ▒.▒.....
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_23:         ; [$94cb]
     db $03,$04,$0b,$0c,$09,$0f,$2a,$00,$f7,$f3,$e0,$ec,$de,$b0,$07,$a0 ; [$94cb]
                                                                        ; byte
 
@@ -5485,6 +6136,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒█▒.▒.▒
 ; .......▒
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_24:         ; [$94db]
     db $b3,$54,$b4,$48,$8c,$f5,$a0,$00,$cc,$8f,$0f,$37,$73,$09,$f5,$01 ; [$94db]
                                                                        ; byte
 
@@ -5499,6 +6151,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░░▒▒▒▒
 ; ░░░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_25:         ; [$94eb]
     db $17,$07,$40,$0d,$88,$c0,$f0,$ff,$bf,$bf,$bf,$fe,$7f,$3f,$0f,$00 ; [$94eb]
                                                                        ; byte
 
@@ -5513,6 +6166,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░░░░░░
 ; ░░░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_PINKSHIRT_26:         ; [$94fb]
     db $00,$02,$c2,$e8,$08,$1b,$7f,$ff,$fd,$fd,$3d,$17,$f7,$e4,$80,$00 ; [$94fb]
                                                                        ; byte
 
@@ -5527,6 +6181,10 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ░███████
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_NURSE [$PRG8::92b1]
+;
+SPRITE_TILES_PORTRAIT_NURSE_00__KEY_SALESMAN_16: ; [$950b]
     db $01,$03,$7f,$ff,$ff,$ff,$ff,$ff,$03,$0f,$3f,$7f,$ff,$ff,$ff,$7f ; [$950b]
                                                                        ; byte
 
@@ -5541,6 +6199,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒██░
 ; ....██░█
 ;
+SPRITE_TILES_PORTRAIT_NURSE_01:             ; [$951b]
     db $01,$01,$01,$03,$02,$06,$07,$0f,$00,$03,$07,$07,$0f,$0f,$0e,$0d ; [$951b]
                                                                        ; byte
 
@@ -5555,6 +6214,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒░░░░▒
 ; █▒░▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_02:             ; [$952b]
     db $7f,$bf,$fe,$79,$76,$e8,$de,$a0,$80,$ff,$ff,$fe,$f8,$f7,$e1,$df ; [$952b]
                                                                        ; byte
 
@@ -5569,6 +6229,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒░░░
 ;
+SPRITE_TILES_PORTRAIT_NURSE_03:             ; [$953b]
     db $e1,$fc,$68,$74,$ef,$c9,$00,$07,$1b,$ff,$ff,$6f,$d8,$36,$ff,$f8 ; [$953b]
                                                                        ; byte
 
@@ -5583,6 +6244,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒░░....
 ; ░░░░....
 ;
+SPRITE_TILES_PORTRAIT_NURSE_04:             ; [$954b]
     db $80,$c0,$40,$40,$60,$a0,$b0,$f0,$00,$00,$80,$80,$80,$40,$40,$00 ; [$954b]
                                                                        ; byte
 
@@ -5597,6 +6259,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...▒█▒▒░
 ; ...▒█░▒░
 ;
+SPRITE_TILES_PORTRAIT_NURSE_05:             ; [$955b]
     db $0d,$1d,$1d,$0a,$09,$09,$09,$0d,$0a,$0a,$0a,$1d,$1d,$1e,$1e,$1a ; [$955b]
                                                                        ; byte
 
@@ -5611,6 +6274,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒█▒▒▒▒
 ; ░░▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_06:             ; [$956b]
     db $e1,$ed,$cf,$ce,$c0,$98,$50,$c0,$90,$8d,$b9,$bf,$3f,$7f,$bf,$3f ; [$956b]
                                                                        ; byte
 
@@ -5625,6 +6289,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█▒░▒▒▒▒
 ; ▒▒.▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_07:             ; [$957b]
     db $08,$93,$94,$1a,$06,$00,$50,$00,$f7,$60,$65,$eb,$ff,$ff,$ef,$df ; [$957b]
                                                                        ; byte
 
@@ -5639,6 +6304,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░.......
 ; ░.......
 ;
+SPRITE_TILES_PORTRAIT_NURSE_08:             ; [$958b]
     db $e0,$a0,$a0,$a0,$c0,$c0,$80,$80,$00,$40,$40,$40,$00,$00,$00,$00 ; [$958b]
                                                                        ; byte
 
@@ -5653,6 +6319,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ......█▒
 ; .......▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_09:             ; [$959b]
     db $0e,$1f,$1f,$15,$05,$05,$02,$00,$1b,$0b,$09,$0f,$0e,$06,$03,$01 ; [$959b]
                                                                        ; byte
 
@@ -5667,6 +6334,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒█░▒░░▒
 ; ░.░░▒▒░░
 ;
+SPRITE_TILES_PORTRAIT_NURSE_10:             ; [$95ab]
     db $80,$a0,$c0,$a0,$f8,$7c,$36,$b3,$3f,$1f,$1f,$4f,$87,$c3,$69,$0c ; [$95ab]
                                                                        ; byte
 
@@ -5681,6 +6349,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░░..▒
 ; ░░░.▒▒..
 ;
+SPRITE_TILES_PORTRAIT_NURSE_11:             ; [$95bb]
     db $01,$71,$43,$62,$06,$48,$18,$e0,$fe,$0e,$fc,$9c,$f8,$f2,$e1,$0c ; [$95bb]
                                                                        ; byte
 
@@ -5695,6 +6364,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░░..▒
 ; ░░░.▒▒..
 ;
+SPRITE_TILES_PORTRAIT_NURSE_26:             ; [$95cb]
     db $01,$91,$03,$42,$06,$48,$18,$e0,$fe,$0e,$9c,$fc,$f8,$f2,$e1,$0c ; [$95cb]
                                                                        ; byte
 
@@ -5709,6 +6379,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒██████
 ; ██▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_13:             ; [$95db]
     db $f0,$e4,$e4,$b0,$ee,$ff,$3f,$c0,$0f,$1f,$9f,$cf,$f1,$ff,$ff,$ff ; [$95db]
                                                                        ; byte
 
@@ -5723,6 +6394,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒████▒
 ; ▒██████▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_14:             ; [$95eb]
     db $e0,$40,$40,$88,$cd,$de,$9e,$7e,$00,$a0,$b0,$70,$f2,$ef,$ff,$ff ; [$95eb]
                                                                        ; byte
 
@@ -5737,6 +6409,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..██████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_GURU_08__NURSE_12:    ; [$95fb]
     db $00,$00,$00,$00,$00,$07,$3f,$ff,$00,$00,$00,$00,$00,$07,$3f,$ff ; [$95fb]
                                                                        ; byte
 
@@ -5751,6 +6424,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░▒████
 ; ▒▒░▒████
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_15__NURSE_16__KEY_SALESMAN_22: ; [$960b]
     db $ff,$ff,$ff,$7f,$bf,$5f,$6f,$2f,$ff,$ff,$ff,$ff,$7f,$bf,$9f,$df ; [$960b]
                                                                        ; byte
 
@@ -5765,6 +6439,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████▒███
 ; ████░███
 ;
+SPRITE_TILES_PORTRAIT_NURSE_17:             ; [$961b]
     db $be,$ff,$df,$ff,$ef,$ef,$f7,$ff,$ff,$bf,$ff,$df,$ff,$ff,$ff,$f7 ; [$961b]
                                                                        ; byte
 
@@ -5779,6 +6454,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .....▒▒▒
 ; .....▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_15:             ; [$962b]
     db $01,$03,$03,$03,$07,$04,$00,$00,$01,$03,$07,$04,$00,$03,$07,$07 ; [$962b]
                                                                        ; byte
 
@@ -5793,6 +6469,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░▒███
 ; ▒▒▒░▒███
 ;
+SPRITE_TILES_PORTRAIT_NURSE_19:             ; [$963b]
     db $37,$17,$13,$13,$13,$17,$17,$17,$cf,$ef,$ef,$ef,$ef,$ef,$ef,$ef ; [$963b]
                                                                        ; byte
 
@@ -5807,6 +6484,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █████▒▒░
 ; █████░░░
 ;
+SPRITE_TILES_PORTRAIT_NURSE_20:             ; [$964b]
     db $fb,$fd,$ff,$ff,$ff,$ff,$f9,$ff,$ff,$ff,$fe,$ff,$fe,$fe,$fe,$f8 ; [$964b]
                                                                        ; byte
 
@@ -5821,6 +6499,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒▒▒▒
 ; ....░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_18:             ; [$965b]
     db $00,$00,$08,$08,$08,$08,$00,$08,$07,$07,$07,$07,$07,$07,$0f,$07 ; [$965b]
                                                                        ; byte
 
@@ -5835,6 +6514,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒▒▒▒
 ; ....░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_21:             ; [$966b]
     db $00,$00,$00,$00,$00,$00,$00,$08,$0f,$0f,$0f,$0f,$0f,$0f,$0f,$07 ; [$966b]
                                                                        ; byte
 
@@ -5849,6 +6529,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒..▒▒▒
 ; ▒▒▒..▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_22:             ; [$967b]
     db $17,$17,$17,$03,$03,$08,$00,$00,$ef,$ef,$ef,$ef,$ef,$e7,$e7,$e7 ; [$967b]
                                                                        ; byte
 
@@ -5863,6 +6544,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒█▒▒▒▒
 ; ░░▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_24:             ; [$968b]
     db $e0,$f4,$c7,$c1,$c0,$98,$50,$c0,$9f,$8f,$b0,$b8,$3f,$7f,$bf,$3f ; [$968b]
                                                                        ; byte
 
@@ -5877,6 +6559,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█▒░▒▒▒▒
 ; ▒▒.▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_NURSE_25:             ; [$969b]
     db $08,$18,$1c,$1c,$00,$00,$50,$00,$f7,$e7,$67,$e3,$f9,$ff,$ef,$df ; [$969b]
                                                                        ; byte
 
@@ -5891,6 +6574,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒█████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_31:      ; [$96ab]
     db $ff,$ff,$ff,$ff,$ff,$e7,$1f,$ff,$fe,$fe,$fe,$fe,$ff,$ff,$ff,$ff ; [$96ab]
                                                                        ; byte
 
@@ -5905,6 +6589,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..▒▒▒▒▒▒
 ; ..▒▒▒▒▒▒
 ;
+TILES_PORTRAITS_53:                         ; [$96bb]
     db $00,$00,$00,$00,$00,$00,$00,$00,$1f,$1f,$1f,$1f,$3f,$3f,$3f,$3f ; [$96bb]
                                                                        ; byte
 
@@ -5919,6 +6604,11 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒░░░
 ; ....░░▒▒
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_MEAT_SALESMAN
+;     [$PRG8::9307]
+;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_00:     ; [$96cb]
     db $00,$00,$00,$00,$00,$02,$07,$0c,$00,$00,$01,$03,$07,$04,$08,$03 ; [$96cb]
                                                                        ; byte
 
@@ -5933,6 +6623,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒█▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_01:     ; [$96db]
     db $00,$30,$c0,$04,$43,$82,$00,$40,$3f,$ef,$ff,$fb,$b8,$7c,$ff,$ff ; [$96db]
                                                                        ; byte
 
@@ -5947,6 +6638,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░.▒▒▒▒▒
 ; ▒▒▒.▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_02:     ; [$96eb]
     db $3c,$03,$00,$00,$80,$40,$40,$00,$c0,$fc,$ff,$ff,$7f,$3f,$9f,$ef ; [$96eb]
                                                                        ; byte
 
@@ -5961,6 +6653,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░....
 ; ▒▒▒░....
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_03:     ; [$96fb]
     db $00,$00,$80,$40,$20,$20,$10,$10,$00,$00,$00,$80,$c0,$c0,$e0,$e0 ; [$96fb]
                                                                        ; byte
 
@@ -5975,6 +6668,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░██.▒░
 ; .░▒█▒.░░
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_04:     ; [$970b]
     db $08,$06,$04,$08,$11,$2a,$39,$53,$00,$06,$0c,$06,$0d,$1b,$1a,$38 ; [$970b]
                                                                        ; byte
 
@@ -5989,6 +6683,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒█░▒██
 ; ░░▒▒.▒█▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_05:     ; [$971b]
     db $60,$63,$c2,$c6,$80,$31,$9b,$c2,$bc,$bb,$7f,$fb,$ff,$ef,$77,$37 ; [$971b]
                                                                        ; byte
 
@@ -6003,6 +6698,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_06:     ; [$972b]
     db $00,$e0,$b8,$38,$00,$80,$80,$00,$3f,$df,$a7,$27,$ff,$ff,$ff,$ff ; [$972b]
                                                                        ; byte
 
@@ -6017,6 +6713,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒.▒▒░░░.
 ; ▒▒▒░.░░.
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_07:     ; [$973b]
     db $10,$08,$08,$08,$04,$02,$0e,$16,$e0,$f0,$f0,$f0,$e0,$dc,$b0,$e0 ; [$973b]
                                                                        ; byte
 
@@ -6031,6 +6728,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .░▒█▒░▒█
 ; .░▒█▒░▒█
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_08:     ; [$974b]
     db $42,$43,$44,$6c,$78,$4a,$55,$55,$3c,$3c,$39,$11,$05,$3c,$3b,$3b ; [$974b]
                                                                        ; byte
 
@@ -6045,6 +6743,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ███▒▒▒░░
 ; █▒▒▒▒▒░▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_09:     ; [$975b]
     db $b0,$f8,$88,$88,$0c,$06,$e3,$82,$07,$07,$f7,$f7,$f3,$01,$fc,$fd ; [$975b]
                                                                        ; byte
 
@@ -6059,6 +6758,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░.....
 ; ░.......
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_11:     ; [$976b]
     db $2e,$5c,$74,$60,$c8,$d8,$e0,$80,$c0,$80,$88,$98,$30,$20,$00,$00 ; [$976b]
                                                                        ; byte
 
@@ -6073,6 +6773,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...░░░▒▒
 ; .....░░░
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_12:     ; [$977b]
     db $54,$43,$45,$4b,$2a,$28,$1c,$07,$3b,$3c,$3a,$37,$17,$17,$03,$00 ; [$977b]
                                                                        ; byte
 
@@ -6087,6 +6788,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ░▒▒▒▒░░░
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_13:     ; [$978b]
     db $02,$00,$e0,$10,$00,$00,$00,$87,$fd,$ff,$1f,$ef,$ff,$ff,$ff,$78 ; [$978b]
                                                                        ; byte
 
@@ -6101,6 +6803,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░░..░░
 ; ░░░.░░░░
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_14:     ; [$979b]
     db $01,$01,$03,$07,$0e,$1d,$73,$ef,$fe,$fe,$fc,$f8,$f0,$e0,$80,$00 ; [$979b]
                                                                        ; byte
 
@@ -6115,6 +6818,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒▒▒▒▒▒
 ; ░▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_16__KEY_SALESMAN_18: ; [$97ab]
     db $8f,$83,$80,$88,$88,$84,$80,$80,$70,$7c,$7f,$7f,$7f,$7f,$7f,$7f ; [$97ab]
                                                                        ; byte
 
@@ -6129,6 +6833,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░░░░░.
 ; ▒▒▒▒░░░.
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_17:       ; [$97bb]
     db $fc,$fc,$3c,$1c,$0c,$0c,$3e,$0e,$00,$00,$c0,$e0,$f0,$f0,$c0,$f0 ; [$97bb]
                                                                        ; byte
 
@@ -6143,6 +6848,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ███..▒▒▒
 ; █████...
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_20__KEY_SALESMAN_24: ; [$97cb]
     db $00,$00,$00,$00,$00,$80,$e0,$f8,$ff,$ff,$ff,$ff,$7f,$9f,$e7,$f8 ; [$97cb]
                                                                        ; byte
 
@@ -6157,6 +6863,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒..███
 ; ░░.███▒▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_21__KEY_SALESMAN_25: ; [$97db]
     db $0e,$06,$02,$00,$02,$01,$07,$dc,$f0,$f8,$fc,$fe,$fc,$f9,$e7,$1f ; [$97db]
                                                                        ; byte
 
@@ -6171,6 +6878,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████░░▒▒
 ; █████.▒▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_17:      ; [$97eb]
     db $f6,$f4,$f0,$f0,$f0,$f4,$fc,$f8,$f0,$f3,$f7,$f7,$f7,$f3,$f3,$fb ; [$97eb]
                                                                        ; byte
 
@@ -6185,6 +6893,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒.
 ; ▒▒▒▒▒▒▒.
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_28:      ; [$97fb]
     db $17,$0b,$0b,$05,$01,$00,$00,$00,$e7,$f3,$f3,$f9,$fd,$fe,$fe,$fe ; [$97fb]
                                                                        ; byte
 
@@ -6199,6 +6908,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░███████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_29:      ; [$980b]
     db $bf,$bf,$bf,$7f,$7f,$7f,$ff,$ff,$ff,$bf,$bf,$7f,$7f,$7f,$7f,$ff ; [$980b]
                                                                        ; byte
 
@@ -6213,6 +6923,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒.█...
 ; ▒▒▒.██..
 ;
+TILES_PORTRAITS_75:                         ; [$981b]
     db $00,$00,$80,$60,$10,$18,$08,$0c,$00,$00,$00,$a0,$d0,$d8,$e8,$ec ; [$981b]
                                                                        ; byte
 
@@ -6227,6 +6938,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒▒▒▒▒▒
 ; ░▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_30:     ; [$982b]
     db $80,$80,$00,$00,$00,$80,$80,$80,$7f,$7f,$ff,$ff,$ff,$7f,$7f,$7f ; [$982b]
                                                                        ; byte
 
@@ -6241,6 +6953,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_10:     ; [$983b]
     db $00,$00,$04,$04,$08,$30,$e0,$00,$ff,$ff,$fb,$fb,$f7,$cf,$1f,$ff ; [$983b]
                                                                        ; byte
 
@@ -6255,6 +6968,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░██.▒░
 ; .░▒█▒.░░
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_32:     ; [$984b]
     db $08,$01,$08,$08,$11,$2a,$39,$53,$07,$06,$07,$00,$0d,$1b,$1a,$38 ; [$984b]
                                                                        ; byte
 
@@ -6269,6 +6983,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒█░▒██
 ; ░░▒▒.▒█▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_33:     ; [$985b]
     db $63,$60,$c4,$c1,$80,$31,$9b,$c2,$bf,$bb,$78,$fe,$ff,$ef,$77,$37 ; [$985b]
                                                                        ; byte
 
@@ -6283,6 +6998,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_34:     ; [$986b]
     db $00,$00,$00,$38,$00,$80,$80,$00,$ff,$ff,$ff,$07,$ff,$ff,$ff,$ff ; [$986b]
                                                                        ; byte
 
@@ -6297,6 +7013,10 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒█▒█
 ; ....██▒█
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_MAGICIAN [$PRG8::9285]
+;
+SPRITE_TILES_PORTRAIT_MAGICIAN_00:          ; [$987b]
     db $00,$00,$00,$03,$03,$06,$05,$0d,$00,$00,$01,$03,$07,$07,$0f,$0f ; [$987b]
                                                                        ; byte
 
@@ -6311,6 +7031,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█████.▒
 ; ▒███▒.▒▒
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_01:          ; [$988b]
     db $1f,$73,$ec,$db,$56,$b6,$7c,$70,$1e,$7f,$ff,$ff,$ff,$fe,$fd,$fb ; [$988b]
                                                                        ; byte
 
@@ -6325,6 +7046,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .░▒▒█.░░
 ; .░███.▒▒
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_02:          ; [$989b]
     db $17,$17,$1f,$3f,$2f,$24,$4b,$78,$1e,$1d,$13,$2f,$37,$38,$38,$3b ; [$989b]
                                                                        ; byte
 
@@ -6339,6 +7061,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██.▒.▒.▒
 ; █..▒▒..▒
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_03:          ; [$98ab]
     db $f9,$fc,$fe,$ff,$1f,$05,$c0,$80,$77,$fb,$fd,$fe,$1e,$64,$d5,$99 ; [$98ab]
                                                                        ; byte
 
@@ -6353,6 +7076,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .█▒█▒.▒█
 ; .▒▒▒█░██
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_04:          ; [$98bb]
     db $31,$30,$18,$58,$50,$11,$51,$0f,$7a,$7d,$7d,$3d,$7b,$7b,$7b,$7b ; [$98bb]
                                                                        ; byte
 
@@ -6367,6 +7091,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░░████
 ; ▒░░█████
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_05:          ; [$98cb]
     db $1d,$f1,$23,$c1,$00,$9a,$3f,$7f,$e3,$0f,$d7,$37,$f1,$e4,$cf,$9f ; [$98cb]
                                                                        ; byte
 
@@ -6381,6 +7106,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒█▒▒░█
 ; .█▒█▒▒░█
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_06:          ; [$98db]
     db $10,$40,$1b,$59,$0a,$53,$13,$53,$7b,$7b,$68,$6c,$74,$3d,$7d,$7d ; [$98db]
                                                                        ; byte
 
@@ -6395,6 +7121,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒▒░█▒▒
 ; ▒▒░░░▒░░
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_07:          ; [$98eb]
     db $7f,$ff,$ff,$fc,$f8,$f1,$cc,$3b,$bf,$7f,$7f,$ff,$fc,$fb,$f7,$c4 ; [$98eb]
                                                                        ; byte
 
@@ -6409,6 +7136,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .░▒█▒░█░
 ; .░▒█▒░▒█
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_35:     ; [$98fb]
     db $42,$43,$44,$6d,$78,$4a,$57,$55,$3c,$3c,$39,$10,$04,$3c,$3a,$3b ; [$98fb]
                                                                        ; byte
 
@@ -6423,6 +7151,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...░▒▒░░
 ; ██▒▒▒▒░▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_36:     ; [$990b]
     db $b0,$f8,$88,$08,$0c,$06,$13,$c2,$07,$07,$f7,$f7,$03,$01,$0c,$fd ; [$990b]
                                                                        ; byte
 
@@ -6437,6 +7166,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .███▒.▒▒
 ; .██▒..▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_16:     ; [$991b]
     db $c9,$07,$0e,$1c,$18,$38,$70,$60,$30,$f7,$ef,$de,$dd,$bd,$7b,$73 ; [$991b]
                                                                        ; byte
 
@@ -6451,6 +7181,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░█▒▒▒▒▒
 ; ▒▒░░▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_17:     ; [$992b]
     db $ff,$cf,$a7,$40,$bb,$80,$60,$30,$00,$70,$78,$bf,$44,$7f,$bf,$cf ; [$992b]
                                                                        ; byte
 
@@ -6465,6 +7196,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒.█
 ; ▒▒▒▒▒░██
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_18:     ; [$993b]
     db $9f,$ff,$ff,$bf,$1f,$06,$01,$07,$00,$00,$00,$40,$e0,$f8,$fd,$fb ; [$993b]
                                                                        ; byte
 
@@ -6479,6 +7211,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ███▒....
 ; ██▒.░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_19:     ; [$994b]
     db $80,$f0,$e0,$9f,$7f,$ff,$e0,$c8,$00,$00,$00,$1f,$7f,$ff,$f0,$e7 ; [$994b]
                                                                        ; byte
 
@@ -6507,6 +7240,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █░░░░▒▒█
 ; ░█░░░░░▒
 ;
+SPRITE_TILES_PORTRAIT_KING_15__MAGICIAN_10: ; [$996b]
     db $ab,$aa,$ce,$cb,$e2,$f2,$f9,$fe,$7f,$7f,$3f,$3f,$1f,$8f,$87,$41 ; [$996b]
                                                                        ; byte
 
@@ -6521,6 +7255,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒.██▒
 ; ▒▒▒▒.██▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_24:     ; [$997b]
     db $03,$03,$07,$07,$06,$06,$06,$06,$fb,$fb,$f7,$f7,$f7,$f7,$f7,$f7 ; [$997b]
                                                                        ; byte
 
@@ -6535,6 +7270,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒▒▒▒
 ; .▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_25:     ; [$998b]
     db $80,$00,$00,$00,$00,$00,$00,$00,$df,$bf,$bf,$7f,$7f,$7f,$7f,$7f ; [$998b]
                                                                        ; byte
 
@@ -6549,6 +7285,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█▒█░░██
 ; ░▒█▒░░▒░
 ;
+SPRITE_TILES_PORTRAIT_KING_18__GURU_10__MAGICIAN_13: ; [$999b]
     db $73,$fc,$7e,$bf,$3e,$9f,$5f,$ad,$80,$90,$d9,$cc,$ef,$f7,$f3,$72 ; [$999b]
                                                                        ; byte
 
@@ -6563,6 +7300,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒.
 ; ▒▒▒▒▒▒▒.
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_26:     ; [$99ab]
     db $08,$00,$04,$00,$00,$02,$00,$00,$f0,$f8,$f8,$fc,$fc,$fc,$fe,$fe ; [$99ab]
                                                                        ; byte
 
@@ -6577,6 +7315,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█▒█░▒█░
 ; ▒█▒█░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KING_19:              ; [$99bb]
     db $4e,$5f,$4b,$29,$ae,$af,$5b,$58,$f5,$f6,$f6,$f6,$f5,$f6,$f6,$f7 ; [$99bb]
                                                                        ; byte
 
@@ -6591,6 +7330,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░░....
 ; ▒▒▒░....
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_20:     ; [$99cb]
     db $00,$00,$00,$80,$40,$20,$f0,$10,$00,$00,$00,$00,$80,$c0,$00,$e0 ; [$99cb]
                                                                        ; byte
 
@@ -6605,6 +7345,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_31:     ; [$99db]
     db $01,$01,$01,$00,$00,$00,$00,$00,$fe,$fe,$fe,$ff,$ff,$ff,$ff,$ff ; [$99db]
                                                                        ; byte
 
@@ -6619,6 +7360,11 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░██░
 ; ....░██░
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_MARTIAL_ARTIST
+;     [$PRG8::9265]
+;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_00:    ; [$99eb]
     db $01,$03,$01,$07,$07,$07,$0f,$0f,$00,$01,$03,$03,$02,$02,$06,$06 ; [$99eb]
                                                                        ; byte
 
@@ -6633,6 +7379,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░███▒▒▒▒
 ; █▒███▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_01:    ; [$99fb]
     db $b5,$d5,$fd,$b4,$a0,$30,$f0,$b8,$ff,$ff,$87,$79,$7d,$fe,$7f,$ff ; [$99fb]
                                                                        ; byte
 
@@ -6647,6 +7394,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒░
 ; ▒▒▒▒▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_02:    ; [$9a0b]
     db $63,$47,$84,$06,$02,$03,$01,$01,$fc,$f8,$83,$b8,$7c,$fc,$fe,$fe ; [$9a0b]
                                                                        ; byte
 
@@ -6661,6 +7409,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒░░....
 ; .░░░....
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_03:    ; [$9a1b]
     db $80,$c0,$c0,$e0,$60,$30,$30,$70,$00,$00,$00,$00,$80,$40,$40,$00 ; [$9a1b]
                                                                        ; byte
 
@@ -6675,6 +7424,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░█▒▒▒.
 ; ...▒▒▒▒█
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_04:    ; [$9a2b]
     db $0f,$0f,$0a,$0b,$1b,$2f,$30,$01,$06,$06,$07,$05,$05,$11,$1e,$1f ; [$9a2b]
                                                                        ; byte
 
@@ -6689,6 +7439,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ███░█.░█
 ; ▒█..█░░█
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_05:    ; [$9a3b]
     db $98,$e0,$81,$b3,$0c,$76,$fb,$4f,$ff,$1f,$0e,$c0,$81,$71,$e9,$c9 ; [$9a3b]
                                                                        ; byte
 
@@ -6703,6 +7454,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░.▒█.██
 ; ▒░░█.░█▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_06:    ; [$9a4b]
     db $01,$0f,$70,$07,$11,$66,$4b,$76,$fe,$f0,$80,$80,$80,$86,$9b,$93 ; [$9a4b]
                                                                        ; byte
 
@@ -6717,6 +7469,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒░.▒░..
 ; .▒░▒░░..
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_07:    ; [$9a5b]
     db $d0,$90,$90,$10,$94,$78,$a4,$2c,$20,$20,$20,$20,$20,$84,$48,$50 ; [$9a5b]
                                                                        ; byte
 
@@ -6731,6 +7484,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░░▒▒
 ; .....░▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_08:    ; [$9a6b]
     db $1b,$13,$1b,$09,$09,$0c,$0c,$04,$07,$0f,$07,$07,$07,$03,$03,$03 ; [$9a6b]
                                                                        ; byte
 
@@ -6745,6 +7499,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░▒▒▒░
 ; ▒▒░▒▒░░▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_09:    ; [$9a7b]
     db $05,$0f,$bb,$09,$0c,$0a,$11,$26,$fb,$f3,$c7,$f3,$f1,$f4,$ee,$d9 ; [$9a7b]
                                                                        ; byte
 
@@ -6759,6 +7514,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░░░▒▒▒
 ; ▒░░░░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_10:    ; [$9a8b]
     db $60,$30,$19,$16,$10,$78,$78,$78,$9f,$cf,$c6,$c9,$af,$07,$87,$87 ; [$9a8b]
                                                                        ; byte
 
@@ -6773,6 +7529,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░.....
 ; ▒░░.....
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_11:    ; [$9a9b]
     db $7c,$6c,$6c,$6c,$78,$38,$20,$60,$80,$80,$80,$80,$80,$c0,$c0,$80 ; [$9a9b]
                                                                        ; byte
 
@@ -6787,6 +7544,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ......░░
 ; .......░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_12:    ; [$9aab]
     db $04,$04,$04,$04,$06,$02,$03,$01,$03,$03,$03,$03,$01,$01,$00,$00 ; [$9aab]
                                                                        ; byte
 
@@ -6801,6 +7559,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒██
 ; ▒▒▒▒▒█▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_13:    ; [$9abb]
     db $01,$17,$2e,$00,$03,$06,$03,$04,$e0,$cf,$df,$ff,$fc,$f8,$ff,$ff ; [$9abb]
                                                                        ; byte
 
@@ -6815,6 +7574,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_14:    ; [$9acb]
     db $c8,$80,$00,$00,$c1,$60,$00,$00,$07,$f3,$fb,$ff,$3e,$1f,$ff,$ff ; [$9acb]
                                                                        ; byte
 
@@ -6829,6 +7589,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░......
 ; ░░......
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_15:    ; [$9adb]
     db $60,$60,$e0,$e0,$60,$60,$40,$c0,$80,$80,$00,$00,$80,$80,$80,$00 ; [$9adb]
                                                                        ; byte
 
@@ -6843,6 +7604,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒▒░.░█
 ; ▒....░░█
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_27:    ; [$9aeb]
     db $98,$e0,$81,$b3,$0c,$66,$8b,$07,$ff,$1f,$0e,$c0,$f1,$f9,$71,$81 ; [$9aeb]
                                                                        ; byte
 
@@ -6857,6 +7619,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██░..░░░
 ; ░██░░...
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_18:    ; [$9afb]
     db $00,$00,$c0,$60,$bc,$5f,$e7,$f8,$ff,$ff,$3f,$1f,$03,$80,$c0,$60 ; [$9afb]
                                                                        ; byte
 
@@ -6871,6 +7634,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░░░░░█
 ; ░▒░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_17:    ; [$9b0b]
     db $82,$73,$ef,$4f,$1a,$3f,$7f,$bf,$01,$82,$f6,$f6,$e7,$c3,$81,$40 ; [$9b0b]
                                                                        ; byte
 
@@ -6885,6 +7649,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_16:    ; [$9b1b]
     db $ff,$0f,$3f,$00,$00,$00,$00,$00,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$9b1b]
                                                                        ; byte
 
@@ -6899,6 +7664,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒▒▒▒▒▒
 ; ██▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_20:    ; [$9b2b]
     db $b1,$8c,$87,$00,$00,$60,$c0,$c0,$4e,$73,$78,$ff,$ff,$ff,$ff,$ff ; [$9b2b]
                                                                        ; byte
 
@@ -6913,6 +7679,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒░
 ; ▒▒▒▒▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_21:    ; [$9b3b]
     db $f7,$7f,$1f,$03,$01,$01,$01,$01,$38,$8c,$e0,$fc,$fe,$fe,$fe,$fe ; [$9b3b]
                                                                        ; byte
 
@@ -6927,6 +7694,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒..░░▒▒
 ; ▒█.░░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_19:    ; [$9b4b]
     db $3f,$e9,$f3,$eb,$a7,$4e,$8c,$58,$c0,$1c,$38,$70,$d0,$a1,$43,$c7 ; [$9b4b]
                                                                        ; byte
 
@@ -6941,6 +7709,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒░
 ; ▒▒▒▒▒▒░░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_24:    ; [$9b5b]
     db $07,$0f,$b9,$02,$01,$01,$01,$03,$f8,$f0,$46,$fd,$fe,$fe,$fe,$fc ; [$9b5b]
                                                                        ; byte
 
@@ -6955,6 +7724,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████▒░██
 ; ███▒▒░▒█
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_11:          ; [$9b6b]
     db $e7,$f7,$e7,$f7,$e7,$e7,$f7,$e5,$f9,$fb,$fb,$fb,$fb,$fb,$fb,$fb ; [$9b6b]
                                                                        ; byte
 
@@ -6969,6 +7739,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░..░░░▒
 ; ░█.░.░░░
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_22:    ; [$9b7b]
     db $99,$59,$99,$58,$9c,$4c,$ce,$d7,$c7,$87,$47,$c7,$c3,$83,$01,$40 ; [$9b7b]
                                                                        ; byte
 
@@ -6983,6 +7754,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒████▒█
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_23:    ; [$9b8b]
     db $c0,$c0,$c0,$c0,$c0,$f0,$3d,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$9b8b]
                                                                        ; byte
 
@@ -6997,6 +7769,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒..░░░▒▒
 ; ▒..░░░▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_25:    ; [$9b9b]
     db $9b,$5d,$de,$9f,$5f,$5e,$1c,$1c,$c0,$80,$00,$40,$80,$81,$83,$83 ; [$9b9b]
                                                                        ; byte
 
@@ -7011,6 +7784,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_26:    ; [$9bab]
     db $e0,$fc,$ff,$e0,$00,$50,$00,$00,$1f,$03,$00,$1f,$ff,$ff,$ff,$ff ; [$9bab]
                                                                        ; byte
 
@@ -7025,6 +7799,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░.▒▒▒▒.
 ; ▒░░....▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_28:    ; [$9bbb]
     db $01,$0f,$70,$07,$11,$68,$40,$60,$fe,$f0,$80,$80,$8e,$9f,$9e,$81 ; [$9bbb]
                                                                        ; byte
 
@@ -7039,6 +7814,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒░░▒▒
 ; ▒▒▒▒▒▒██
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_29:    ; [$9bcb]
     db $11,$20,$28,$0c,$07,$01,$0c,$03,$e0,$c0,$d0,$ff,$ff,$fe,$f3,$ff ; [$9bcb]
                                                                        ; byte
 
@@ -7053,6 +7829,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MARTIAL_ARTIST_30:    ; [$9bdb]
     db $c8,$04,$1c,$04,$81,$c0,$20,$00,$07,$03,$03,$fb,$fe,$3f,$df,$ff ; [$9bdb]
                                                                        ; byte
 
@@ -7067,6 +7844,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒.▒.▒
 ; .......▒
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_16:          ; [$9beb]
     db $f9,$fc,$fe,$ff,$1f,$85,$00,$00,$77,$fb,$fd,$fe,$1e,$64,$f5,$01 ; [$9beb]
                                                                        ; byte
 
@@ -7081,6 +7859,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒▒░▒██
 ; ▒▒░░░▒░░
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_17:          ; [$9bfb]
     db $7f,$ff,$fe,$fb,$fc,$f0,$cb,$3b,$bf,$7f,$7f,$fc,$f8,$f8,$f7,$c4 ; [$9bfb]
                                                                        ; byte
 
@@ -7095,6 +7874,10 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..██░░.█
 ; ..██▒.▒▒
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_KING [$PRG8::923a]
+;
+SPRITE_TILES_PORTRAIT_KING_00:              ; [$9c0b]
     db $84,$4a,$22,$39,$2d,$2f,$3d,$30,$94,$52,$6a,$21,$31,$31,$31,$3b ; [$9c0b]
                                                                        ; byte
 
@@ -7109,6 +7892,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █░░▒██░░
 ; █░░▒█▒░▒
 ;
+SPRITE_TILES_PORTRAIT_KING_01:              ; [$9c1b]
     db $01,$0a,$0b,$65,$81,$66,$ef,$ea,$41,$49,$68,$0d,$07,$99,$9c,$9d ; [$9c1b]
                                                                        ; byte
 
@@ -7123,6 +7907,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░▒█░░█
 ; ..▒██░██
 ;
+SPRITE_TILES_PORTRAIT_KING_02:              ; [$9c2b]
     db $18,$24,$1c,$01,$04,$17,$2f,$1f,$3b,$1d,$0e,$0e,$00,$0c,$19,$3b ; [$9c2b]
                                                                        ; byte
 
@@ -7137,6 +7922,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██████▒▒
 ; ██▒█░░░▒
 ;
+SPRITE_TILES_PORTRAIT_KING_03:              ; [$9c3b]
     db $f5,$7d,$3c,$07,$92,$fe,$fc,$de,$cb,$e3,$fb,$78,$00,$ff,$ff,$f1 ; [$9c3b]
                                                                        ; byte
 
@@ -7151,6 +7937,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒█▒░▒██
 ; .▒█▒░▒▒█
 ;
+SPRITE_TILES_PORTRAIT_KING_04:              ; [$9c4b]
     db $2b,$1e,$3f,$2f,$3c,$2a,$2b,$29,$17,$37,$74,$70,$73,$77,$77,$77 ; [$9c4b]
                                                                        ; byte
 
@@ -7165,6 +7952,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░▒.▒▒▒
 ; █▒▒▒░.░▒
 ;
+SPRITE_TILES_PORTRAIT_KING_05:              ; [$9c5b]
     db $05,$63,$ca,$f4,$0d,$19,$e0,$8a,$82,$24,$cd,$fb,$f3,$e7,$17,$f1 ; [$9c5b]
                                                                        ; byte
 
@@ -7179,6 +7967,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒.▒███
 ; ▒░.░▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KING_06:              ; [$9c6b]
     db $c0,$cc,$53,$3e,$b1,$96,$07,$50,$01,$28,$b3,$df,$ce,$e9,$ef,$8f ; [$9c6b]
                                                                        ; byte
 
@@ -7193,6 +7982,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒░█▒█.
 ; ▒▒▒░███.
 ;
+SPRITE_TILES_PORTRAIT_KING_07:              ; [$9c7b]
     db $da,$74,$fa,$fc,$36,$9c,$1a,$1e,$ec,$ee,$2e,$0e,$ce,$ee,$ee,$ee ; [$9c7b]
                                                                        ; byte
 
@@ -7207,6 +7997,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .█▒██▒██
 ; .█▒█▒███
 ;
+SPRITE_TILES_PORTRAIT_KING_08:              ; [$9c8b]
     db $28,$38,$3f,$5f,$3f,$7f,$5b,$57,$77,$77,$70,$7b,$7f,$7f,$7f,$7f ; [$9c8b]
                                                                        ; byte
 
@@ -7221,6 +8012,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒░░▒▒█
 ; ▒█▒░▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KING_09:              ; [$9c9b]
     db $1c,$fe,$ff,$ff,$fe,$ef,$99,$50,$ec,$7f,$ff,$fe,$f9,$f0,$e7,$ef ; [$9c9b]
                                                                        ; byte
 
@@ -7235,6 +8027,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░█▒█▒██▒
 ; ░█▒█▒▒█▒
 ;
+SPRITE_TILES_PORTRAIT_KING_11__MAGICIAN_09: ; [$9cab]
     db $37,$20,$0e,$a4,$76,$74,$d6,$d2,$6e,$7f,$77,$7f,$af,$af,$7f,$7f ; [$9cab]
                                                                        ; byte
 
@@ -7249,6 +8042,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█▒█▒███
 ; ▒▒█▒████
 ;
+SPRITE_TILES_PORTRAIT_KING_12:              ; [$9cbb]
     db $43,$f7,$ff,$ff,$df,$57,$57,$2f,$fc,$fb,$ff,$ff,$ff,$ff,$ff,$ff ; [$9cbb]
                                                                        ; byte
 
@@ -7263,6 +8057,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..██▒░▒▒
 ; .█▒▒░▒█▒
 ;
+SPRITE_TILES_PORTRAIT_KING_10:              ; [$9ccb]
     db $00,$00,$00,$01,$06,$0c,$34,$4a,$00,$00,$00,$00,$01,$0b,$3b,$77 ; [$9ccb]
                                                                        ; byte
 
@@ -7277,6 +8072,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░█░█░█░▒
 ; ░░░░░░█░
 ;
+SPRITE_TILES_PORTRAIT_KING_14:              ; [$9cdb]
     db $4e,$ad,$af,$af,$bf,$5e,$fe,$ff,$fb,$7b,$7d,$7d,$6b,$f5,$55,$02 ; [$9cdb]
                                                                        ; byte
 
@@ -7291,6 +8087,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██▒░▒██▒
 ; █▒░▒███▒
 ;
+SPRITE_TILES_PORTRAIT_KING_13:              ; [$9ceb]
     db $be,$56,$ee,$af,$6f,$d6,$d6,$ae,$e7,$ef,$df,$de,$df,$ef,$ef,$df ; [$9ceb]
                                                                        ; byte
 
@@ -7305,6 +8102,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒░░▒▒█
 ; █▒▒░░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KING_17:              ; [$9cfb]
     db $b1,$9a,$c9,$98,$9d,$cc,$99,$98,$cf,$e7,$f7,$e7,$e3,$f3,$e7,$e7 ; [$9cfb]
                                                                        ; byte
 
@@ -7319,6 +8117,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒██▒░▒██
 ; ▒███▒░▒█
 ;
+SPRITE_TILES_PORTRAIT_KING_16:              ; [$9d0b]
     db $7d,$6a,$77,$f5,$f6,$6b,$6b,$75,$e7,$f7,$fb,$7b,$fb,$f7,$f7,$fb ; [$9d0b]
                                                                        ; byte
 
@@ -7333,6 +8132,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░▒.▒▒▒
 ; █▒▒▒░.░▒
 ;
+SPRITE_TILES_PORTRAIT_KING_20:              ; [$9d1b]
     db $7d,$43,$12,$0c,$0d,$19,$e0,$8a,$82,$fc,$e5,$03,$f3,$e7,$17,$f1 ; [$9d1b]
                                                                        ; byte
 
@@ -7347,6 +8147,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒.▒███
 ; ▒░.░▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KING_21:              ; [$9d2b]
     db $de,$c8,$40,$20,$b1,$96,$07,$50,$01,$3f,$af,$d0,$ce,$e9,$ef,$8f ; [$9d2b]
                                                                        ; byte
 
@@ -7361,6 +8162,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒▒░....
 ; ▒█▒░.▒██
 ;
+SPRITE_TILES_PORTRAIT_KING_22:              ; [$9d3b]
     db $1c,$fe,$ff,$ff,$fe,$e9,$90,$53,$ec,$7f,$ff,$fe,$f9,$f0,$e0,$e7 ; [$9d3b]
                                                                        ; byte
 
@@ -7375,6 +8177,11 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...▒▒░▒▒
 ; ..▒░▒░▒▒
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_TOOLS_SALESMAN
+;     [$PRG8::932d]
+;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_00:    ; [$9d4b]
     db $00,$00,$00,$00,$00,$04,$04,$14,$00,$00,$00,$01,$03,$0b,$1b,$2b ; [$9d4b]
                                                                        ; byte
 
@@ -7389,6 +8196,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░▒▒▒▒░
 ; ▒▒▒▒░░▒▒
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_01:    ; [$9d5b]
     db $18,$60,$80,$0f,$00,$1e,$61,$0c,$07,$1f,$7f,$f0,$ff,$e1,$9e,$f3 ; [$9d5b]
                                                                        ; byte
 
@@ -7403,6 +8211,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .█▒░░.▒▒
 ; .▒█░░.▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_04__TOOLS_SALESMAN_02: ; [$9d6b]
     db $2a,$58,$6c,$5c,$7c,$38,$58,$38,$11,$23,$11,$21,$01,$03,$63,$63 ; [$9d6b]
                                                                        ; byte
 
@@ -7417,6 +8226,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒██▒▒░▒
 ; ▒▒▒▒▒▒░▒
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_03:    ; [$9d7b]
     db $33,$00,$00,$02,$3c,$c0,$32,$02,$cc,$ff,$fd,$c1,$83,$3f,$7d,$fd ; [$9d7b]
                                                                        ; byte
 
@@ -7431,6 +8241,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..▒▒░.░▒
 ; ...░░░░░
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_08__TOOLS_SALESMAN_04: ; [$9d8b]
     db $08,$2c,$14,$14,$15,$0c,$0a,$1f,$53,$43,$63,$23,$23,$33,$31,$00 ; [$9d8b]
                                                                        ; byte
 
@@ -7445,6 +8256,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░.▒.░░
 ; ░░.▒▒░..
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_09__TOOLS_SALESMAN_05: ; [$9d9b]
     db $06,$22,$4c,$74,$09,$14,$23,$c4,$81,$61,$cb,$fb,$f7,$e3,$c8,$18 ; [$9d9b]
                                                                        ; byte
 
@@ -7459,6 +8271,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░░░░
 ; .....░░░
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_06:    ; [$9dab]
     db $0d,$1e,$1f,$1f,$0f,$0f,$0f,$07,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9dab]
                                                                        ; byte
 
@@ -7473,6 +8286,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░.▒▒▒.
 ; ░░░░░░.░
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_07:    ; [$9dbb]
     db $0f,$f8,$f5,$e0,$e7,$e0,$e0,$fd,$30,$00,$03,$0f,$08,$0c,$0e,$00 ; [$9dbb]
                                                                        ; byte
 
@@ -7487,6 +8301,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░.▒.░░
 ; ░░.▒▒░..
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_22__TOOLS_SALESMAN_19: ; [$9dcb]
     db $06,$42,$04,$05,$09,$14,$23,$c4,$f1,$f9,$73,$8b,$f7,$e3,$c8,$18 ; [$9dcb]
                                                                        ; byte
 
@@ -7501,6 +8316,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░.▒▒░.
 ; ░░░░░░.▒
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_20:    ; [$9ddb]
     db $0f,$f8,$f0,$e5,$e0,$e7,$e2,$fc,$30,$00,$00,$0b,$0f,$08,$0c,$01 ; [$9ddb]
                                                                        ; byte
 
@@ -7515,6 +8331,10 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░░░░
 ; ....▒░░.
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_GURU [$PRG8::9252]
+;
+SPRITE_TILES_PORTRAIT_GURU_00:              ; [$9deb]
     db $03,$03,$05,$07,$05,$06,$0f,$06,$00,$00,$02,$00,$02,$01,$00,$08 ; [$9deb]
                                                                        ; byte
 
@@ -7529,6 +8349,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒█░█▒▒
 ; ░░▒▒█▒▒█
 ;
+SPRITE_TILES_PORTRAIT_GURU_01:              ; [$9dfb]
     db $f6,$93,$54,$2b,$6b,$ab,$9c,$c9,$09,$7f,$ff,$ff,$ff,$7f,$77,$3f ; [$9dfb]
                                                                        ; byte
 
@@ -7543,6 +8364,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...░▒▒.▒
 ; ...░█░.▒
 ;
+SPRITE_TILES_PORTRAIT_GURU_02:              ; [$9e0b]
     db $13,$1f,$11,$19,$10,$18,$10,$1c,$0c,$0c,$0c,$0c,$0d,$0d,$0d,$09 ; [$9e0b]
                                                                        ; byte
 
@@ -7557,6 +8379,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒█..█░░▒
 ; ▒▒▒░░░░▒
 ;
+SPRITE_TILES_PORTRAIT_GURU_03:              ; [$9e1b]
     db $04,$88,$78,$86,$23,$6a,$4e,$1e,$03,$70,$87,$01,$70,$69,$c9,$e1 ; [$9e1b]
                                                                        ; byte
 
@@ -7571,6 +8394,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░▒▒▒.░
 ; ..░██░.░
 ;
+SPRITE_TILES_PORTRAIT_GURU_04:              ; [$9e2b]
     db $21,$29,$21,$29,$21,$39,$21,$3d,$1c,$1c,$1c,$1c,$1c,$1c,$1c,$18 ; [$9e2b]
                                                                        ; byte
 
@@ -7585,6 +8409,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒░
 ; ▒▒▒▒▒░░░
 ;
+SPRITE_TILES_PORTRAIT_GURU_05:              ; [$9e3b]
     db $65,$45,$02,$8d,$46,$43,$01,$07,$fb,$fb,$f9,$70,$b8,$bc,$fe,$f8 ; [$9e3b]
                                                                        ; byte
 
@@ -7599,6 +8424,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░░▒▒▒▒
 ; ...▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_GURU_06:              ; [$9e4b]
     db $20,$38,$20,$38,$20,$3a,$30,$00,$1e,$1e,$1e,$1f,$1f,$1f,$0f,$1f ; [$9e4b]
                                                                        ; byte
 
@@ -7613,6 +8439,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒.░░▒▒▒
 ; .▒▒..░░░
 ;
+SPRITE_TILES_PORTRAIT_GURU_07:              ; [$9e5b]
     db $88,$81,$80,$43,$41,$20,$18,$07,$70,$7f,$7f,$3c,$3f,$1f,$47,$60 ; [$9e5b]
                                                                        ; byte
 
@@ -7627,6 +8454,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒....░░▒
 ; ▒▒▒░░░░▒
 ;
+SPRITE_TILES_PORTRAIT_GURU_16:              ; [$9e6b]
     db $04,$88,$6c,$46,$03,$06,$06,$1e,$03,$70,$f3,$f9,$fc,$79,$81,$e1 ; [$9e6b]
                                                                        ; byte
 
@@ -7641,6 +8469,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒.░░▒▒▒
 ; .▒▒..░░░
 ;
+SPRITE_TILES_PORTRAIT_GURU_17:              ; [$9e7b]
     db $88,$84,$81,$40,$43,$20,$18,$07,$70,$78,$7f,$3f,$3c,$1f,$47,$60 ; [$9e7b]
                                                                        ; byte
 
@@ -7655,6 +8484,11 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ......▒█
 ; .....░██
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_KEY_SALESMAN
+;     [$PRG8::9343]
+;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_00:      ; [$9e8b]
     db $00,$00,$00,$00,$01,$02,$01,$07,$00,$00,$00,$00,$00,$01,$03,$03 ; [$9e8b]
                                                                        ; byte
 
@@ -7669,6 +8503,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒░.▒██▒
 ; ▒░░.▒█▒▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_01:      ; [$9e9b]
     db $00,$10,$66,$bc,$d2,$11,$a6,$64,$00,$0f,$19,$70,$e1,$e7,$cf,$8f ; [$9e9b]
                                                                        ; byte
 
@@ -7683,6 +8518,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░█░▒░.
 ; ▒▒░░▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_02__KEY_SALESMAN_02: ; [$9eab]
     db $00,$08,$b6,$5d,$2a,$1d,$3a,$31,$00,$f0,$c8,$62,$b1,$d0,$d4,$ce ; [$9eab]
                                                                        ; byte
 
@@ -7697,6 +8533,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░█▒░
 ; ...░▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_04:      ; [$9ebb]
     db $07,$0b,$0f,$0f,$1a,$1f,$0d,$11,$02,$05,$02,$05,$0f,$32,$06,$0e ; [$9ebb]
                                                                        ; byte
 
@@ -7711,6 +8548,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒.▒█▒
 ; .▒▒░▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_05:      ; [$9ecb]
     db $40,$c0,$c0,$80,$80,$03,$02,$10,$9f,$1f,$1f,$3f,$3c,$78,$77,$6f ; [$9ecb]
                                                                        ; byte
 
@@ -7725,6 +8563,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒▒░▒█▒
 ; ▒░█▒░▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_06:      ; [$9edb]
     db $00,$00,$20,$0c,$44,$cf,$4a,$68,$ff,$ff,$df,$b3,$38,$30,$b7,$b7 ; [$9edb]
                                                                        ; byte
 
@@ -7739,6 +8578,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░......
 ; ▒░......
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_07:      ; [$9eeb]
     db $c0,$c0,$c0,$c0,$40,$80,$c0,$40,$00,$00,$00,$00,$00,$00,$00,$80 ; [$9eeb]
                                                                        ; byte
 
@@ -7753,6 +8593,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒▒░▒
 ; ....░▒░▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_08:      ; [$9efb]
     db $10,$1a,$02,$00,$08,$02,$02,$0a,$24,$20,$34,$17,$13,$09,$0d,$05 ; [$9efb]
                                                                        ; byte
 
@@ -7767,6 +8608,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒▒▒▒▒▒
 ; ▒░░░▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_09:      ; [$9f0b]
     db $31,$06,$6b,$47,$00,$00,$80,$71,$c1,$fe,$f7,$f8,$ff,$ff,$7f,$8e ; [$9f0b]
                                                                        ; byte
 
@@ -7781,6 +8623,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░...▒▒
 ; ▒▒░░..░░
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_10:      ; [$9f1b]
     db $0a,$0c,$8b,$23,$1a,$f8,$60,$33,$72,$70,$f3,$f8,$e1,$01,$83,$c0 ; [$9f1b]
                                                                        ; byte
 
@@ -7795,6 +8638,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░......
 ; ░░......
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_11:      ; [$9f2b]
     db $e0,$e0,$e0,$60,$60,$c0,$c0,$c0,$00,$00,$00,$80,$80,$00,$00,$00 ; [$9f2b]
                                                                        ; byte
 
@@ -7809,6 +8653,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒▒▒▒▒▒
 ; ▒░░░▒▒▒░
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_35:      ; [$9f3b]
     db $38,$04,$60,$43,$00,$00,$80,$71,$c7,$f3,$f8,$fc,$ff,$ff,$7f,$8e ; [$9f3b]
                                                                        ; byte
 
@@ -7823,6 +8668,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░░...▒▒
 ; ▒▒░░..░░
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_36:      ; [$9f4b]
     db $08,$0c,$8b,$23,$1a,$f8,$60,$33,$f7,$73,$70,$f8,$e1,$01,$83,$c0 ; [$9f4b]
                                                                        ; byte
 
@@ -7837,6 +8683,11 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░░░░
 ; ....░░░░
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_SMOKING_GUY
+;     [$PRG8::92e9]
+;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_00:       ; [$9f5b]
     db $00,$00,$03,$03,$07,$07,$0f,$0f,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9f5b]
                                                                        ; byte
 
@@ -7851,6 +8702,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░.▒█▒.▒
 ; ░.▒▒█▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_01:       ; [$9f6b]
     db $3f,$ff,$ff,$ff,$fe,$e2,$c8,$88,$00,$00,$00,$00,$00,$00,$1d,$3f ; [$9f6b]
                                                                        ; byte
 
@@ -7865,6 +8717,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒.
 ; ▒░▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_02:       ; [$9f7b]
     db $f0,$fc,$fe,$bf,$83,$05,$00,$40,$00,$00,$00,$00,$40,$e8,$fe,$bf ; [$9f7b]
                                                                        ; byte
 
@@ -7879,6 +8732,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░......
 ; .░......
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_03__SMOKING_GUY_03__KEY_SALESMAN_03: ; [$9f8b]
     db $00,$00,$00,$00,$80,$80,$c0,$40,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9f8b]
                                                                        ; byte
 
@@ -7893,6 +8747,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..▒█▒.░░
 ; ..▒.█▒.░
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_04:       ; [$9f9b]
     db $0f,$1f,$1f,$1f,$0f,$27,$13,$09,$00,$00,$00,$00,$00,$10,$38,$2c ; [$9f9b]
                                                                        ; byte
 
@@ -7907,6 +8762,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒███
 ; .▒▒▒▒▒█▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_05:       ; [$9fab]
     db $83,$89,$91,$05,$0a,$0d,$07,$02,$3c,$30,$26,$68,$72,$74,$7f,$7f ; [$9fab]
                                                                        ; byte
 
@@ -7921,6 +8777,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒░.███
 ; ░░▒▒░.░░
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_06:       ; [$9fbb]
     db $00,$04,$83,$c1,$54,$51,$57,$cb,$3b,$f8,$78,$30,$a4,$a1,$a7,$30 ; [$9fbb]
                                                                        ; byte
 
@@ -7935,6 +8792,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░......
 ; ░░......
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_07__SMOKING_GUY_07: ; [$9fcb]
     db $40,$40,$40,$40,$c0,$c0,$c0,$c0,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9fcb]
                                                                        ; byte
 
@@ -7949,6 +8807,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....▒▒░▒
 ; ....░▒░▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_08:       ; [$9fdb]
     db $13,$18,$01,$00,$08,$02,$02,$0a,$24,$23,$36,$17,$13,$09,$0d,$05 ; [$9fdb]
                                                                        ; byte
 
@@ -7963,6 +8822,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░▒▒▒▒░
 ; ▒▒░▒▒░░█
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_09:       ; [$9feb]
     db $87,$20,$00,$80,$41,$31,$21,$27,$78,$ff,$ff,$7f,$be,$ce,$de,$d9 ; [$9feb]
                                                                        ; byte
 
@@ -7977,6 +8837,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; █▒░░..░░
 ; ▒▒▒░░░░░
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_10:       ; [$9ffb]
     db $c3,$c5,$02,$02,$34,$4c,$b3,$1f,$38,$38,$7c,$7c,$09,$01,$c0,$e0 ; [$9ffb]
                                                                        ; byte
 
@@ -7991,6 +8852,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░......
 ; ░░......
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_10__SMOKING_GUY_11: ; [$a00b]
     db $c0,$60,$60,$60,$60,$c0,$c0,$c0,$00,$80,$80,$80,$80,$00,$00,$00 ; [$a00b]
                                                                        ; byte
 
@@ -8005,6 +8867,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ........
 ; ........
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_12__KEY_SALESMAN_12: ; [$a01b]
     db $06,$03,$03,$01,$01,$01,$00,$00,$01,$00,$00,$00,$00,$00,$00,$00 ; [$a01b]
                                                                        ; byte
 
@@ -8019,6 +8882,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒.░░▒░▒
 ; ░▒▒...░░
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_13__KEY_SALESMAN_13: ; [$a02b]
     db $00,$08,$09,$88,$00,$60,$1a,$83,$ff,$f7,$f6,$77,$7f,$9f,$c5,$60 ; [$a02b]
                                                                        ; byte
 
@@ -8033,6 +8897,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_GURU_11__MAGICIAN_14__DOCTOR_19__NURSE_23__MEAT_SALESMAN_27__TOOLS_SALESMAN_13__KEY_SALESMAN_30: ; [$a03b]
     db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$a03b]
                                                                        ; byte
 
@@ -8047,6 +8912,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_17__PINKSHIRT_18__SMOKING_GUY_22__MEAT_SALESMAN_23: ; [$a04b]
     db $00,$00,$00,$00,$00,$00,$00,$00,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff ; [$a04b]
                                                                        ; byte
 
@@ -8061,6 +8927,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_23:      ; [$a05b]
     db $f8,$fc,$fc,$fe,$ff,$ff,$ff,$ff,$fb,$fd,$fd,$fe,$ff,$ff,$ff,$ff ; [$a05b]
                                                                        ; byte
 
@@ -8075,6 +8942,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒█▒▒▒░░
 ; ▒▒▒▒▒░░.
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_14__KEY_SALESMAN_14: ; [$a06b]
     db $41,$f5,$83,$1e,$27,$33,$23,$06,$80,$79,$fc,$e0,$d8,$fc,$fc,$f8 ; [$a06b]
                                                                        ; byte
 
@@ -8089,6 +8957,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ........
 ; ........
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_15__KEY_SALESMAN_15: ; [$a07b]
     db $80,$f8,$18,$00,$00,$00,$00,$00,$00,$f0,$e0,$00,$00,$00,$00,$00 ; [$a07b]
                                                                        ; byte
 
@@ -8103,6 +8972,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒...
 ; .▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_25:       ; [$a08b]
     db $83,$89,$91,$04,$06,$00,$00,$00,$3c,$30,$26,$6f,$7f,$77,$78,$7f ; [$a08b]
                                                                        ; byte
 
@@ -8117,6 +8987,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒░▒░....
 ; ░░▒▒░.░░
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_26:       ; [$a09b]
     db $00,$04,$83,$c0,$50,$55,$50,$cb,$3b,$f8,$78,$37,$a7,$22,$a0,$30 ; [$a09b]
                                                                        ; byte
 
@@ -8131,6 +9002,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒█▒▒▒░░
 ; ▒▒▒▒▒░░.
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_27__KEY_SALESMAN_37: ; [$a0ab]
     db $41,$81,$b3,$06,$3f,$33,$23,$06,$80,$03,$fc,$f8,$c0,$fc,$fc,$f8 ; [$a0ab]
                                                                        ; byte
 
@@ -8145,6 +9017,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ........
 ; ........
 ;
+SPRITE_TILES_PORTRAIT_SMOKING_GUY_28__KEY_SALESMAN_38: ; [$a0bb]
     db $80,$40,$e0,$18,$10,$00,$00,$00,$00,$80,$f0,$20,$00,$00,$00,$00 ; [$a0bb]
                                                                        ; byte
 
@@ -8159,6 +9032,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_08:    ; [$a0cb]
     db $07,$00,$00,$00,$00,$00,$00,$00,$00,$1f,$7f,$ff,$ff,$ff,$ff,$ff ; [$a0cb]
                                                                        ; byte
 
@@ -8173,6 +9047,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒.██████
 ; ▒.██████
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_09:    ; [$a0db]
     db $f7,$7b,$3d,$3e,$3f,$3f,$3f,$3f,$f0,$70,$38,$bc,$bf,$bf,$bf,$bf ; [$a0db]
                                                                        ; byte
 
@@ -8187,6 +9062,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██░░░░░░
 ; █████▒▒█
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_10:    ; [$a0eb]
     db $ff,$ff,$ff,$7f,$9d,$e2,$ff,$f9,$00,$00,$00,$00,$00,$80,$c0,$ff ; [$a0eb]
                                                                        ; byte
 
@@ -8201,6 +9077,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒.
 ; ▒▒▒▒▒▒▒.
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_11:    ; [$a0fb]
     db $00,$00,$00,$00,$02,$00,$00,$00,$ff,$ff,$fb,$fd,$fc,$fe,$fe,$fe ; [$a0fb]
                                                                        ; byte
 
@@ -8215,6 +9092,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_12__KEY_SALESMAN_26: ; [$a10b]
     db $7f,$3f,$3f,$3f,$7f,$7f,$ff,$ff,$7f,$7f,$7f,$7f,$ff,$ff,$ff,$ff ; [$a10b]
                                                                        ; byte
 
@@ -8229,6 +9107,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒.▒▒░▒▒
 ; ▒▒░▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_20__TOOLS_SALESMAN_14__KEY_SALESMAN_33: ; [$a11b]
     db $00,$00,$04,$08,$13,$24,$04,$20,$fd,$fd,$f9,$f0,$e4,$cb,$db,$df ; [$a11b]
                                                                        ; byte
 
@@ -8243,6 +9122,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░▒▒░..██
 ; ░▒░▒▒▒..
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_21__TOOLS_SALESMAN_15__KEY_SALESMAN_34: ; [$a12b]
     db $ff,$ff,$ff,$ff,$3f,$4f,$93,$a0,$ff,$ff,$ff,$ff,$3f,$8f,$63,$5c ; [$a12b]
                                                                        ; byte
 
@@ -8257,6 +9137,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ░░░░░░░▒
 ; .░░░░░░░
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_16:    ; [$a13b]
     db $85,$25,$80,$00,$00,$80,$fe,$7f,$7a,$da,$7f,$ff,$ff,$7f,$01,$00 ; [$a13b]
                                                                        ; byte
 
@@ -8271,6 +9152,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ░░░░░░▒▒
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_17:    ; [$a14b]
     db $02,$24,$84,$04,$00,$02,$00,$fc,$fd,$db,$7b,$fb,$ff,$fd,$ff,$03 ; [$a14b]
                                                                        ; byte
 
@@ -8285,6 +9167,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒.█
 ; ▒▒▒▒▒▒.█
 ;
+SPRITE_TILES_PORTRAIT_TOOLS_SALESMAN_18:    ; [$a15b]
     db $3f,$5f,$0f,$07,$13,$23,$01,$01,$3f,$9f,$ef,$f7,$eb,$db,$fd,$fd ; [$a15b]
                                                                        ; byte
 
@@ -8299,6 +9182,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒.██
 ; .▒▒▒▒.██
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_21:     ; [$a16b]
     db $40,$40,$41,$01,$01,$03,$03,$03,$3e,$3e,$3d,$7d,$7d,$7b,$7b,$7b ; [$a16b]
                                                                        ; byte
 
@@ -8313,6 +9197,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ..░▒▒▒▒▒
 ; ..░▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_MEAT_SALESMAN_15:     ; [$a17b]
     db $00,$03,$04,$08,$00,$10,$20,$20,$00,$00,$03,$07,$0f,$0f,$1f,$1f ; [$a17b]
                                                                        ; byte
 
@@ -8327,6 +9212,10 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...▒▒░░.
 ; ..▒░▒░.░
 ;
+; XREFS:
+;     SPRITE_TILES_PORTRAIT_ADDRS_DOCTOR [$PRG8::9298]
+;
+SPRITE_TILES_PORTRAIT_DOCTOR_00:            ; [$a18b]
     db $00,$00,$03,$04,$03,$04,$06,$15,$00,$00,$00,$03,$04,$0b,$18,$28 ; [$a18b]
                                                                        ; byte
 
@@ -8341,6 +9230,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ...▒▒▒▒.
 ; ▒▒▒▒░░▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_01:            ; [$a19b]
     db $1f,$f0,$0d,$f0,$1c,$e0,$00,$0c,$00,$0f,$f2,$0f,$e3,$01,$1e,$f3 ; [$a19b]
                                                                        ; byte
 
@@ -8355,6 +9245,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ....░▒▒▒
 ; .▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_05:            ; [$a1ab]
     db $03,$38,$06,$01,$00,$40,$08,$00,$fc,$c7,$f9,$fe,$fd,$81,$07,$7f ; [$a1ab]
                                                                        ; byte
 
@@ -8369,6 +9260,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒.░▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_06:            ; [$a1bb]
     db $c0,$1c,$60,$80,$06,$13,$20,$00,$3f,$e3,$9f,$71,$e0,$8c,$9f,$ff ; [$a1bb]
                                                                        ; byte
 
@@ -8383,6 +9275,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_12__MEAT_SALESMAN_22: ; [$a1cb]
     db $06,$02,$f2,$f9,$fc,$fe,$ff,$ff,$01,$f1,$f9,$fc,$fe,$ff,$ff,$ff ; [$a1cb]
                                                                        ; byte
 
@@ -8397,6 +9290,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒.░░░▒▒▒
 ; █▒.░░░░░
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_13:            ; [$a1db]
     db $a0,$41,$00,$03,$81,$60,$38,$9f,$40,$bf,$ff,$fc,$7f,$1f,$87,$c0 ; [$a1db]
                                                                        ; byte
 
@@ -8411,6 +9305,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒.░░░▒▒▒
 ; █▒.░░░░░
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_23:            ; [$a1eb]
     db $a0,$40,$01,$00,$83,$61,$38,$9f,$40,$b8,$ff,$ff,$7c,$1f,$87,$c0 ; [$a1eb]
                                                                        ; byte
 
@@ -8425,6 +9320,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_16__MEAT_SALESMAN_28: ; [$a1fb]
     db $cf,$e7,$f3,$f8,$ff,$ff,$ff,$ff,$e0,$f0,$f8,$fc,$ff,$ff,$ff,$ff ; [$a1fb]
                                                                        ; byte
 
@@ -8439,6 +9335,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .███████
 ; ▒███████
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_11:            ; [$a20b]
     db $00,$00,$00,$07,$1f,$3f,$7f,$7f,$00,$00,$07,$1f,$3f,$7f,$7f,$ff ; [$a20b]
                                                                        ; byte
 
@@ -8453,6 +9350,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒▒▒▒▒▒
 ; ▒▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_14:            ; [$a21b]
     db $e0,$80,$00,$00,$00,$00,$00,$00,$e0,$9f,$7f,$ff,$ff,$ff,$ff,$ff ; [$a21b]
                                                                        ; byte
 
@@ -8467,6 +9365,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒▒.▒███
 ; ▒▒▒.▒███
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_15:            ; [$a22b]
     db $ff,$3b,$1b,$13,$13,$07,$07,$07,$ff,$3b,$db,$d7,$d7,$ef,$ef,$ef ; [$a22b]
                                                                        ; byte
 
@@ -8495,6 +9394,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ██████░█
 ; ░████▒░█
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_08__MEAT_SALESMAN_29: ; [$a24b]
     db $01,$03,$7f,$fe,$ff,$ff,$ff,$fb,$03,$0f,$3f,$7f,$fe,$fd,$fd,$7d ; [$a24b]
                                                                        ; byte
 
@@ -8509,6 +9409,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_MAGICIAN_12:          ; [$a25b]
     db $d3,$f4,$3b,$80,$f5,$fa,$ff,$ff,$ff,$5b,$e4,$ff,$ff,$ff,$ff,$ff ; [$a25b]
                                                                        ; byte
 
@@ -8523,6 +9424,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒██████
 ; .▒██████
 ;
+SPRITE_TILES_PORTRAIT_DOCTOR_18:            ; [$a26b]
     db $0f,$0f,$0f,$1f,$1f,$3f,$3f,$3f,$df,$df,$df,$bf,$bf,$7f,$7f,$7f ; [$a26b]
                                                                        ; byte
 
@@ -8537,6 +9439,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████░█.░
 ; █████░█░
 ;
+SPRITE_TILES_PORTRAIT_GURU_09:              ; [$a27b]
     db $28,$28,$3c,$f4,$f9,$fd,$fd,$ff,$1e,$1c,$01,$02,$ea,$f4,$f4,$fa ; [$a27b]
                                                                        ; byte
 
@@ -8551,6 +9454,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ████████
 ; ████████
 ;
+SPRITE_TILES_PORTRAIT_GURU_12:              ; [$a28b]
     db $fe,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$fa,$fd,$fe,$ff,$ff,$ff,$ff,$ff ; [$a28b]
                                                                        ; byte
 
@@ -8565,6 +9469,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒██░█.▒█
 ; ▒███░█.█
 ;
+SPRITE_TILES_PORTRAIT_GURU_13:              ; [$a29b]
     db $bd,$2a,$97,$d5,$e6,$73,$79,$7d,$67,$77,$bb,$5b,$ab,$d7,$eb,$f5 ; [$a29b]
                                                                        ; byte
 
@@ -8579,6 +9484,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒██▒░▒..
 ; ▒███░▒.█
 ;
+SPRITE_TILES_PORTRAIT_GURU_14:              ; [$a2ab]
     db $7e,$6b,$74,$f1,$f8,$6b,$68,$79,$e2,$f5,$f8,$7d,$f4,$f7,$f4,$f5 ; [$a2ab]
                                                                        ; byte
 
@@ -8593,6 +9499,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒██▒░▒██
 ; ▒███▒░▒█
 ;
+SPRITE_TILES_PORTRAIT_GURU_15:              ; [$a2bb]
     db $7d,$69,$75,$f5,$f6,$6b,$6b,$75,$e5,$f5,$f9,$79,$f8,$f7,$f7,$fb ; [$a2bb]
                                                                        ; byte
 
@@ -8663,6 +9570,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒▒░░░░░.
 ; ▒▒▒▒░░░.
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_19:      ; [$a30b]
     db $fc,$fd,$3c,$1c,$0c,$0c,$3e,$0e,$00,$01,$c1,$e1,$f1,$f1,$c0,$f0 ; [$a30b]
                                                                        ; byte
 
@@ -8677,6 +9585,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ▒███████
 ; ▒███████
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_20:      ; [$a31b]
     db $00,$80,$f0,$fc,$fe,$ff,$7f,$7f,$00,$80,$f0,$fc,$fe,$ff,$ff,$ff ; [$a31b]
                                                                        ; byte
 
@@ -8691,6 +9600,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; ███.....
 ; ████....
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_21:      ; [$a32b]
     db $00,$00,$00,$00,$00,$80,$e0,$f0,$00,$00,$00,$00,$00,$80,$e0,$f0 ; [$a32b]
                                                                        ; byte
 
@@ -8705,6 +9615,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒▒..
 ; .▒▒▒▒▒▒.
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_27:      ; [$a33b]
     db $c0,$80,$80,$00,$00,$00,$00,$00,$c0,$b0,$b8,$78,$7c,$7c,$7c,$7e ; [$a33b]
                                                                        ; byte
 
@@ -8719,6 +9630,7 @@ TILES_PORTRAITS_START:                      ; [$936b]
 ; .▒▒▒▒▒▒▒
 ; .▒▒▒▒▒▒▒
 ;
+SPRITE_TILES_PORTRAIT_KEY_SALESMAN_32:      ; [$a34b]
     db $00,$00,$00,$00,$00,$00,$00,$00,$fe,$fe,$ff,$ff,$ff,$7f,$7f,$7f ; [$a34b]
                                                                        ; byte
 

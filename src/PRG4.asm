@@ -20,7 +20,7 @@
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf07]
 ;
-AREA_TILESETS_1:                            ; [$8000]
+AREA_TILESETS_EOLIS:                        ; [$8000]
     db $80,$3e,$9e,$00,$a0,$0b,$51,$00,$7e,$00,$00,$00,$07,$00,$00,$00 ; [$8000]
                                                                        ; byte
 
@@ -1816,7 +1816,7 @@ AREA_TILESETS_1:                            ; [$8000]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf0b]
 ;
-AREA_TILESETS_3:                            ; [$8800]
+AREA_TILESETS_TRUNK:                        ; [$8800]
     db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$8800]
                                                                        ; byte
 
@@ -3612,7 +3612,7 @@ AREA_TILESETS_3:                            ; [$8800]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf0d]
 ;
-AREA_TILESETS_4:                            ; [$9000]
+AREA_TILESETS_MIST:                         ; [$9000]
     db $20,$00,$80,$12,$00,$01,$40,$04,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9000]
                                                                        ; byte
 
@@ -5408,7 +5408,7 @@ AREA_TILESETS_4:                            ; [$9000]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf09]
 ;
-AREA_TILESETS_2:                            ; [$9800]
+AREA_TILESETS_BRANCHES:                     ; [$9800]
     db $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff,$00,$00,$00,$00,$00,$00,$00,$00 ; [$9800]
                                                                        ; byte
 
@@ -7204,7 +7204,7 @@ AREA_TILESETS_2:                            ; [$9800]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf11]
 ;
-AREA_TILESETS_6:                            ; [$a000]
+AREA_TILESETS_TOWNS:                        ; [$a000]
     db $ff,$8c,$90,$90,$81,$1f,$ff,$00,$7f,$ff,$ff,$ff,$fe,$e0,$00,$00 ; [$a000]
                                                                        ; byte
 
@@ -9000,7 +9000,7 @@ AREA_TILESETS_6:                            ; [$a000]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf13]
 ;
-AREA_TILESETS_7:                            ; [$a800]
+AREA_TILESETS_KINGSROOM_GURU_HOSPITAL:      ; [$a800]
     db $a3,$6b,$6b,$31,$80,$ff,$ff,$e3,$5c,$dc,$dc,$ee,$7f,$00,$00,$1c ; [$a800]
                                                                        ; byte
 
@@ -10348,7 +10348,7 @@ AREA_TILESETS_7:                            ; [$a800]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf15]
 ;
-AREA_TILESETS_8:                            ; [$ae00]
+AREA_TILESETS_SHOPS_HOUSE_TAVERN:           ; [$ae00]
     db $ff,$18,$18,$ff,$fe,$81,$81,$ff,$ef,$ef,$ef,$00,$ff,$fe,$fe,$00 ; [$ae00]
                                                                        ; byte
 
@@ -11696,7 +11696,7 @@ AREA_TILESETS_8:                            ; [$ae00]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf17]
 ;
-AREA_TILESETS_9:                            ; [$b400]
+AREA_TILESETS_MARTIALARTS_MAGICTRAINER:     ; [$b400]
     db $00,$eb,$bb,$d4,$1b,$24,$ff,$ff,$ff,$ff,$ff,$ff,$ec,$db,$00,$00 ; [$b400]
                                                                        ; byte
 
@@ -12596,7 +12596,7 @@ AREA_TILESETS_9:                            ; [$b400]
 ; XREFS:
 ;     TILE_INDEX_TO_ADDR [$PRG15_MIRROR::cf0f]
 ;
-AREA_TILESETS_5:                            ; [$b800]
+AREA_TILESETS_DARTMOOR_EVIL_LAIR:           ; [$b800]
     db $f2,$f3,$03,$b2,$b5,$09,$13,$4c,$01,$00,$00,$01,$02,$06,$2c,$b0 ; [$b800]
                                                                        ; byte
 

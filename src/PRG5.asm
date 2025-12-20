@@ -6,275 +6,528 @@
 
     BASE $8000
 
+
 ;============================================================================
-; TODO: Document thunk_Sound_Init
+; Initialize sound effect playback.
+;
+; This is a thunking function that wraps
+; SoundEffects_Init.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     SoundEffects_Init
 ;
 ; XREFS:
 ;     Game_InitScreenAndMusic
 ;============================================================================
-thunk_Sound_Init:                           ; [$8000]
-    JMP Sound_Init
+thunk_SoundEffects_Init:                    ; [$8000]
+    JMP SoundEffects_Init
+
 
 ;============================================================================
-; TODO: Document thunk_Sound_HandleOnInterrupt
+; Handle sound effects on hardware interrupt.
+;
+; This is a thunking function that wraps
+; SoundEffects_HandleOnInterrupt.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     SoundEffects_HandleOnInterrupt
 ;
 ; XREFS:
 ;     OnInterrupt
 ;============================================================================
-thunk_Sound_HandleOnInterrupt:              ; [$8003]
-    JMP Sound_HandleOnInterrupt
+thunk_SoundEffects_HandleOnInterrupt:       ; [$8003]
+    JMP SoundEffects_HandleOnInterrupt
+
 
 ;============================================================================
-; TODO: Document thunk_Sound_InitPlayingState
+; Initialize the playing state for music and sound effects.
+;
+; This is a thunking function that wraps
+; Audio_InitPlayingState.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Audio_InitPlayingState
 ;
 ; XREFS:
 ;     Game_InitScreenAndMusic
 ;============================================================================
-thunk_Sound_InitPlayingState:               ; [$8006]
-    JMP Sound_InitPlayingState
+thunk_Audio_InitPlayingState:               ; [$8006]
+    JMP Audio_InitPlayingState
+
 
 ;============================================================================
-; TODO: Document thunk_Audio_HandleOnInterrupt
+; Handle music on interrupt.
+;
+; This is a thunking function that wraps
+; Music_HandleOnInterrupt.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     None.
+;
+; CALLS:
+;     Music_HandleOnInterrupt
 ;
 ; XREFS:
 ;     OnInterrupt
 ;============================================================================
-thunk_Audio_HandleOnInterrupt:              ; [$8009]
-    JMP Audio_HandleOnInterrupt
-    db $ff                                  ; [$800c] undefined
+thunk_Music_HandleOnInterrupt:              ; [$8009]
+    JMP Music_HandleOnInterrupt
+    db $ff                                  ; Unused padding byte.
+
 
 ;============================================================================
-; TODO: Document Audio_HandleOnInterrupt
+; Handle music on interrupt.
+;
+; If the game is paused, no music will play.
+;
+; If no music or sound effects are set, audio will be reset.
+;
+; If music is set but not playing, the music data will be
+; loaded.
+;
+; If music is set and playing, the next actions or notes of
+; the MScripts will be invoked, playing parts of the music.
+;
+; INPUTS:
+;     Game_PausedState:
+;         Whether the game is paused.
+;
+;     Music_Current:
+;         The currently-set music.
+;
+; OUTPUTS:
+;     None.
+;
+; CALLS:
+;     Audio_HandlePaused
+;     Audio_ResetIfNothingSet
+;     Music_Load
+;     Music_PlayNext
+;
+; XREFS:
+;     thunk_Music_HandleOnInterrupt
+;============================================================================
+Music_HandleOnInterrupt:                    ; [$800d]
+    LDA a:Game_PausedState                  ; Load the paused state.
+    BNE Audio_HandlePaused                  ; If paused, then jump.
+
+
+    ;
+    ; The game is not paused. Music can be played.
+    ;
+    LDA Music_Current                       ; Load the current music to play.
+    BEQ Audio_ResetIfNothingSet             ; If unset, jump to reset audio
+                                            ; if nothing else is playing.
+
+
+    ;
+    ; There is music to play.
+    ;
+    ; If bit 0x80 is set, then it's already playing. We'll just
+    ; continue to play it.
+    ;
+    ; If it's not set, load the new music.
+    ;
+    BPL Music_Load                          ; Jump to load the music.
+
+
+    ;
+    ; Music is currently playing. Play the next piece of the
+    ; music.
+    ;
+    JMP Music_PlayNext                      ; Jump to play the next part of
+                                            ; the current music.
+
+
+;============================================================================
+; Initialize the music and sound effects state.
+;
+; This will clear out the music and sound effects
+; in preparation for loading a new part of the game.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     Game_PausedState:
+;     Music_Current:
+;     SoundEffect_HandlerIndex:
+;     SND_CHN:
+;     SoundEffect_Current:
+;     SoundEffect_Unused_PriorityID:
+;         Cleared.
 ;
 ; XREFS:
-;     thunk_Audio_HandleOnInterrupt
+;     thunk_Audio_InitPlayingState
 ;============================================================================
-Audio_HandleOnInterrupt:                    ; [$800d]
-    LDA a:PauseFlag
-    BNE Audio_HandleIsPaused
-    LDA CurrentMusic
-    BEQ Audio_HandleNotPlaying
-    BPL Audio_LoadMusic
-    JMP Audio_PlayMusic
-
-;============================================================================
-; TODO: Document Sound_InitPlayingState
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;
-; XREFS:
-;     thunk_Sound_InitPlayingState
-;============================================================================
-Sound_InitPlayingState:                     ; [$801b]
+Audio_InitPlayingState:                     ; [$801b]
     LDA #$00
-    STA CurrentMusic
-    STA NextSoundEffect
-    STA a:SOUND_DAT_0122
-    STA a:SND_CHN
-    STA a:PauseFlag
-    STA a:CurrentSoundIndex
+    STA Music_Current                       ; Clear the current music.
+    STA SoundEffect_Current                 ; Clear the next sound effect.
+    STA a:SoundEffect_HandlerIndex
+    STA a:SND_CHN                           ; Clear the sound channel.
+    STA a:Game_PausedState                  ; Clear the paused flag.
+    STA a:SoundEffect_Unused_PriorityID     ; Clear the ID of the
+                                            ; highest-priority sound effect.
     RTS
 
+
 ;============================================================================
-; TODO: Document Audio_HandleIsPaused
+; Pause audio when the game is paused.
+;
+; This will mark the audio as paused in response to the game
+; being paused.
+;
+; If there's no music set, and no sound effects set, then
+; this will also trigger a full audio reset.
 ;
 ; INPUTS:
-;     A
+;     N:
+;         The game/audio paused state.
+;
+;         See Game_PausedState for documentation.
+;
+;     Music_Current:
+;         The current music to check.
+;
+;     SoundEffect_TicksRemaining:
+;         The list of sound effect slots to check.
 ;
 ; OUTPUTS:
-;     TODO
+;     Game_PausedState:
+;         The updated paused state.
+;
+; CALLS:
+;     Audio_Reset
+;     Audio_ResetIfNothingSet
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Music_HandleOnInterrupt
 ;============================================================================
-Audio_HandleIsPaused:                       ; [$802e]
-    BMI Audio_HandleNotPlaying
-    ORA #$80
-    STA a:PauseFlag
-    JSR Audio_Reset
+Audio_HandlePaused:                         ; [$802e]
+    ;
+    ; First, check if we've already handled an audio pause state.
+    ;
+    BMI Audio_ResetIfNothingSet             ; If the audio paused state is
+                                            ; already set, then jump.
+
 
     ;
-    ; XREFS:
-    ;     Audio_HandleIsPaused
-    ;     Audio_HandleOnInterrupt
+    ; The game is paused, but audio is not. Set that bit and
+    ; reset audio.
     ;
-Audio_HandleNotPlaying:                     ; [$8038]
-    LDA CurrentMusic
-    BNE @_return
-    LDX #$03
+    ORA #$80                                ; Set bit 7 (audio paused).
+    STA a:Game_PausedState                  ; Store it.
+    JSR Audio_Reset                         ; Reset audio.
 
-  @_loop:                                   ; [$803e]
-    LDA SoundEffects,X
-    BNE @_return
-    DEX
-    BPL @_loop
-    JMP Audio_Reset
+    ;
+    ; v-- Fall through --v
+    ;
+
+
+;============================================================================
+; Reset the audio state if no music or sounds are set.
+;
+; If there's no music set, and no sound effects set, then
+; this will trigger a full audio reset.
+;
+; INPUTS:
+;     Music_Current:
+;         The current music to check.
+;
+;     SoundEffect_TicksRemaining:
+;         The list of sound effect slots to check.
+;
+; OUTPUTS:
+;     None.
+;
+; CALLS:
+;     Audio_Reset
+;
+; XREFS:
+;     Audio_HandlePaused
+;     Music_HandleOnInterrupt
+;============================================================================
+Audio_ResetIfNothingSet:                    ; [$8038]
+    LDA Music_Current                       ; Load the current music.
+    BNE @_return                            ; If it's set, return. Nothing to
+                                            ; do.
+
+
+    ;
+    ; There's no music playing. Check if sound effects
+    ; are playing.
+    ;
+    LDX #$03                                ; X = 3 (loop counter).
+
+  @_checkSoundEffectLoop:                   ; [$803e]
+    LDA SoundEffect_TicksRemaining,X        ; Load the sound effect at the
+                                            ; current index.
+    BNE @_return                            ; If it's set, then return.
+    DEX                                     ; X-- (loop counter).
+    BPL @_checkSoundEffectLoop              ; If >= 0, loop.
+
+
+    ;
+    ; This has looped through all sound effects, and none
+    ; were set. Audio can now be reset.
+    ;
+    JMP Audio_Reset                         ; Reset the audio.
 
   @_return:                                 ; [$8049]
     RTS
 
+
 ;============================================================================
-; TODO: Document Audio_Reset
+; Reset all audio channels.
+;
+; Square Wave 1 Hi/Lo and Noise Volume will be set to 16.
+; Everything else will be set to 0.
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     SQ1_HI:
+;     SQ1_LO:
+;     NOISE_VOL:
+;         Set to 16.
+;
+;     NOISE_HI:
+;     NOISE_LO:
+;     SQ1_SWEEP:
+;     SQ1_VOL:
+;     SQ2_HI:
+;     SQ2_LO:
+;     SQ2_SWEEP:
+;     SQ2_VOL:
+;     TRI_HI:
+;     TRI_LINEAR:
+;     TRI_LO:
+;         Set to 0.
 ;
 ; XREFS:
-;     Audio_HandleIsPaused
-;     Audio_LoadMusic
-;     Sound_Init
+;     Audio_HandlePaused
+;     Audio_ResetIfNothingSet
+;     Music_Load
+;     SoundEffects_Init
 ;============================================================================
 Audio_Reset:                                ; [$804a]
     LDA #$10
-    STA a:SQ1_VOL
-    STA a:SQ2_VOL
-    STA a:NOISE_VOL
+    STA a:SQ1_VOL                           ; Set to 16.
+    STA a:SQ2_VOL                           ; Set to 16.
+    STA a:NOISE_VOL                         ; Set to 16.
     LDA #$00
-    STA a:SQ1_SWEEP
-    STA a:SQ1_LO
-    STA a:SQ1_HI
-    STA a:SQ2_SWEEP
-    STA a:SQ2_LO
-    STA a:SQ2_HI
-    STA a:TRI_LINEAR
-    STA a:TRI_LO
-    STA a:TRI_HI
-    STA a:NOISE_LO
-    STA a:NOISE_HI
+    STA a:SQ1_SWEEP                         ; Set to 0.
+    STA a:SQ1_LO                            ; Set to 0.
+    STA a:SQ1_HI                            ; Set to 0.
+    STA a:SQ2_SWEEP                         ; Set to 0.
+    STA a:SQ2_LO                            ; Set to 0.
+    STA a:SQ2_HI                            ; Set to 0.
+    STA a:TRI_LINEAR                        ; Set to 0.
+    STA a:TRI_LO                            ; Set to 0.
+    STA a:TRI_HI                            ; Set to 0.
+    STA a:NOISE_LO                          ; Set to 0.
+    STA a:NOISE_HI                          ; Set to 0.
     RTS
+
+
 ;============================================================================
-; TODO: Document Audio_LoadMusic
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; Load channel and MScript state for music.
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Music_HandleOnInterrupt
 ;============================================================================
-Audio_LoadMusic:                            ; [$8079]
+Music_Load:                                 ; [$8079]
     ;
     ; Load the current music to play.
     ;
-    LDA CurrentMusic
+    LDA Music_Current                       ; Load the current music.
     ORA #$80                                ; Mark as currently playing.
-    STA CurrentMusic                        ; Store that.
+    STA Music_Current                       ; Store that.
 
 
     ;
     ; Convert to a lookup index for the table.
     ;
-    ASL A                                   ; Music *= 8
+    ; This will be multiplied by 8, giving us word boundaries
+    ; across 4 channels.
+    ;
+    ASL A                                   ; Convert to a word boundary.
+    ASL A                                   ; And multiply by 4 channels.
     ASL A
-    ASL A
-    TAY                                     ; Y = A (Music lookup index)
+    TAY                                     ; Y = result (Music lookup
+                                            ; index).
 
 
     ;
     ; Begin loading the starting MScripts.
     ;
-    LDX #$07                                ; X = 7 (loop counter)
+    ; This will load all 4 channels of MScripts for the selected
+    ; piece of music, indexed from last channel to first.
+    ;
+    ; Bear in mind, the loop counter is looping over addresses, so
+    ; it loops 8 times, or 2 bytes * 4 channels. Indexes will be
+    ; based off the music ID, though, not the loop counter.
+    ;
+    LDX #$07                                ; X = 7 (loop counter).
 
   @_loadMusicLoop:                          ; [$8085]
-    LDA MUSIC_LOOKUP,Y
-    STA Music_CurrentScriptAddrs,X
-    STA a:MScript_SavedAddr
-    DEY
-    DEX
-    BPL @_loadMusicLoop
-    INX
-    STX a:MScript_Maybe_8BitCounter
-    STX a:Music_Wave_Length_Highs
-    STX a:Something_Music_0162
-    STX a:Something_Music_0163
-    STX a:Music_SQ_Vol
-    STX a:Something_Music_0175
-    STX a:Music_SQEffect_Mode
-    STX a:Something_Music_0177
-    STX a:Music_SQEffect_Counter
-    STX a:Something_Music_017a
+    LDA MSCRIPTS_LOOKUP,Y                   ; Load the MScript channel
+                                            ; address at Y.
+    STA Music_CurrentScriptAddrs,X          ; Store it in the list of channel
+                                            ; addresses.
+
+
+    ;
+    ; BUG: This tries to save the address for a return/repeat, but
+    ;      it always saves in the first channel slot, which is
+    ;      incorrect.
+    ;
+    STA a:MScript_SavedAddr                 ; Store it as the latest saved
+                                            ; address as well, for push/pop
+                                            ; purposes.
+
+
+    ;
+    ; Prepare for the next loop iteration and lookup.
+    ;
+    DEY                                     ; Y-- (lookup index).
+    DEX                                     ; X-- (loop counter).
+    BPL @_loadMusicLoop                     ; If X >= 0, loop.
+
+
+    ;
+    ; We're out of the loop. Clear a bunch of state.
+    ;
+    INX                                     ; Set X back to 0 (-1 + 1 == 0).
+    STX a:Music_Global_Transpose
+    STX a:Music_Channel_Transpose
+    STX a:Music_Channel_Transpose_1_
+    STX a:Music_Channel_Transpose_2_
+    STX a:Music_SQ_Fades
+    STX a:Music_SQ_Fades_1_
+    STX a:Music_SQEnvelope_Mode
+    STX a:Music_SQEnvelope_Mode_1_
+    STX a:Music_SQEnvelope_Phase
+    STX a:Music_SQEnvelope_Phase_1_
     STX a:Music_Current_SQ_Low
-    STX a:Music_SQ2_Low
+    STX a:Music_Current_SQ_Low_1_
     STX a:Music_Note_Period_Low
     STX a:Music_Note_Period_High
-    STX a:Maybe_Unused_Music_016f
+    STX a:MScript_Unused_RawValue
     STX a:Something_Music_Triangle_017e
     STX a:Music_Noise_Remaining
-    STX a:Something_Music_0178
+    STX a:Music_SQEffect_Delta
     STX a:MScript_CurValue
-    STX a:Music_Something_SQ_017f
-    STX a:Something_Music_0180
-    STX a:Music_SQ2_Length_Reduction
-    INX
-    STX a:Music_Repeats
-    STX a:Something_Music_0131
-    STX a:Something_Music_0132
-    STX a:Something_Music_0133
-    STX a:MScript_RepeatCounts
-    STX a:Something_Music_012d
-    STX a:Something_Music_012e
-    STX a:Something_Music_012f
-    LDA #$08
+    STX a:Music_SQPitchDelta_Mask
+    STX a:Music_SQPitchDelta_Mask_1_
+    STX a:Music_SQ2_TimerLowBias
+
+
+    ;
+    ; Set the following to 1.
+    ;
+    INX                                     ; X = 1
+    STX a:Music_NoteTicksRemaining
+    STX a:Music_NoteTicksRemaining_1_
+    STX a:Music_NoteTicksRemaining_2_
+    STX a:Music_NoteTicksRemaining_3_
+
+
+    ;
+    ; Clear the repeat counts for each channel.
+    ;
+    STX a:MScript_NoteDurations
+    STX a:MScript_NoteDurations_1_
+    STX a:MScript_NoteDurations_2_
+    STX a:MScript_NoteDurations_3_
+
+
+    ;
+    ; Set the following to 8.
+    ;
+    LDA #$08                                ; A = 8
     STA a:Music_SQ_Note_Lengths
     STA a:Music_Note_Length_High
-    STA a:Music_Unused
-    STA a:Music_Unused_1_
-    LDA #$90
-    STA a:Something_Music_SQ_0172
-    STA a:Something_Music_0173
-    JMP Audio_Reset
+    STA a:Music_Unused_0166
+    STA a:Music_Unused_0166_1_
+
+
+    ;
+    ; Set the following to 144.
+    ;
+    LDA #$90                                ; A = 144
+    STA a:Music_SQ_ControlBits
+    STA a:Music_SQ_ControlBits_1_
+
+
+    ;
+    ; Reset audio channels.
+    ;
+    JMP Audio_Reset                         ; Reset the audio channels.
+
+
 ;============================================================================
-; TODO: Document Audio_PlayMusic
+; Play the next op in each MScript channel.
+;
+; This will perform the next operation for each channel,
+; unsetting the music if all are complete.
+;
+; If a channel has a repeat set, its repeat count will
+; be reduced by 1 and the current note/value will be played.
+; Otherwise, the next operation in the MScript will be
+; invoked.
+;
+; Once all channels are marked completed, the music will be
+; unset.
 ;
 ; INPUTS:
-;     None.
+;     Music_NoteTicksRemaining:
+;         The repeat counters for each channel.
 ;
 ; OUTPUTS:
-;     TODO
+;     Music_NoteTicksRemaining:
+;         The updated repeat counters for each channel.
+;
+;     Music_NumChannelsCompleted:
+;         The number of channels completed after this run.
+;
+;     Music_Current:
+;         Unset, if all channels completed.
+;
+;     MScript_CurrentChannel:
+;         Clobbered.
+;
+; CALLS:
+;     MScripts_InvokeNext
+;     Music_PlayForChannel
 ;
 ; XREFS:
-;     Audio_HandleOnInterrupt
+;     Music_HandleOnInterrupt
 ;============================================================================
-Audio_PlayMusic:                            ; [$8106]
+Music_PlayNext:                             ; [$8106]
     ;
     ; Set the initial state for tracking per-channel playback
     ; for this invocation.
@@ -294,11 +547,11 @@ Audio_PlayMusic:                            ; [$8106]
     ;
   @_loop:                                   ; [$810e]
     LDX a:MScript_CurrentChannel            ; X = Current channel index
-    DEC Music_Repeats,X
-    BNE @LAB_PRG5__8119
+    DEC Music_NoteTicksRemaining,X
+    BNE @_play
     JSR MScripts_InvokeNext
 
-  @LAB_PRG5__8119:                          ; [$8119]
+  @_play:                                   ; [$8119]
     JSR Music_PlayForChannel                ; Play music on this channel.
     INC a:MScript_CurrentChannel            ; Move to the next channel.
     LDA a:MScript_CurrentChannel            ; Load that channel index.
@@ -319,7 +572,7 @@ Audio_PlayMusic:                            ; [$8106]
     ; All channels have finished, so clear the current music.
     ;
     LDA #$00
-    STA CurrentMusic                        ; Unset the current music.
+    STA Music_Current                       ; Unset the current music.
 
   @_return:                                 ; [$8131]
     RTS
@@ -334,7 +587,7 @@ Audio_PlayMusic:                            ; [$8106]
 ;     TODO
 ;
 ; XREFS:
-;     Audio_PlayMusic
+;     Music_PlayNext
 ;============================================================================
 Music_PlayForChannel:                       ; [$8132]
     LDX a:MScript_CurrentChannel            ; Load the current channel index.
@@ -364,9 +617,15 @@ Music_PlayForChannel:                       ; [$8132]
     ; Check if there's currently a sound effect playing
     ; on the Triangle Wave channel.
     ;
-    LDA SoundEffects,X                      ; Load the current sound effect
+    LDA SoundEffect_TicksRemaining,X        ; Load the current sound effect
                                             ; on the Triangle Wave channel.
-    BNE @_clearTriangleWave                 ; If one is set, jump.
+    BNE @_clearTriangleWave                 ; If one is set, jump to clear
+                                            ; it.
+
+
+    ;
+    ; No sound effect is playing on the Triangle Wave channel.
+    ;
     LDA a:MScript_CurValue                  ; Load the value to play.
     STA a:TRI_LINEAR                        ; Set it on the channel.
     RTS                                     ; And return.
@@ -383,96 +642,176 @@ Music_PlayForChannel:                       ; [$8132]
     ;
   @_isSquareWave:                           ; [$8160]
     LDX a:MScript_CurrentChannel
-    LDY Music_SQEffect_Mode,X
-    BEQ @LAB_PRG5__816f
+    LDY Music_SQEnvelope_Mode,X
+    BEQ Music_PlaySQEnvelopeModeLinearTrailoff
     DEY
-    BEQ @LAB_PRG5__8192
+    BEQ Music_PlaySQEnvelopeModeCurveButHeld
     DEY
-    BEQ @LAB_PRG5__81bc
+    BEQ Music_PlaySQEnvelopeModePluck
     RTS
 
 
+;============================================================================
+; Play SQ envelope mode 0: Linear, trails off.
+;
+; This updates the Square Wave channel's volume level,
+; optionally applying a square pitch effect.
+;
+; This is used to smoothly fade out the volume.
+;
+; INPUTS:
+;     MScript_CurrentChannel:
+;         The current MScript channel.
+;
+;     Music_SQEnvelope_Value:
+;         The counter values for the mode, across
+;         SQ channels.
+;
+;     SoundEffect_TicksRemaining:
+;         The currently-playing sound effects.
+;
+; OUTPUTS:
+;     Music_SQEnvelope_Value:
+;         The updated counter values.
+;
+;     MScript_CurValue:
+;         The updated volume.
+;
+; CALLS:
+;     Music_ApplySQPitchEffectToLO:
+;     Music_UpdateSQVolRegister
+;
+; XREFS:
+;     Music_PlayForChannel
+;============================================================================
+Music_PlaySQEnvelopeModeLinearTrailoff:     ; [$816f]
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+
+
     ;
-    ; XXX 0: Linear, trails off
+    ; Check if the counter is 0. If so, it'll stay that way
+    ; until playback finishes.
     ;
-  @LAB_PRG5__816f:                          ; [$816f]
-    LDX a:MScript_CurrentChannel
-    LDA Music_SQEffect_CurValue,X
-    BEQ @LAB_PRG5__817d
+    LDA Music_SQEnvelope_Value,X            ; Load the fade-out counter value
+                                            ; for the mode.
+    BEQ @LAB_PRG5__817d                     ; If it's 0, jump.
+
+
+    ;
+    ; The counter is a positive value. Subtract 3 and store it.
+    ;
     SEC
-    SBC #$03
-    STA Music_SQEffect_CurValue,X
+    SBC #$03                                ; Subtract 3 from the counter.
+    STA Music_SQEnvelope_Value,X            ; Store the new counter.
 
+
+    ;
+    ; Convert the value to a value between 0-15.
+    ;
+    ; This effectively shifts any value into the lower nibble.
+    ;
   @LAB_PRG5__817d:                          ; [$817d]
+    LSR A                                   ; Shift into the lower nibble.
     LSR A
     LSR A
     LSR A
-    LSR A
-    AND #$0f
-    STA a:MScript_CurValue
-    LDA SoundEffects,X
-    BNE @_return1
-    JSR Music_UpdateSQVol
-    JSR Music_UpdateSQLo
+    AND #$0f                                ; Mask out the upper nibble.
+    STA a:MScript_CurValue                  ; Store as the new volume value
+                                            ; for the Square Wave.
 
-  @_return1:                                ; [$8191]
+
+    ;
+    ; Check if any special effects are playing on this channel.
+    ;
+    LDA SoundEffect_TicksRemaining,X        ; Load any current special
+                                            ; effects on this channel.
+    BNE @_return                            ; If set, return.
+    JSR Music_UpdateSQVolRegister           ; Update the volume and flags the
+                                            ; SQ*_VOL register.
+    JSR Music_ApplySQPitchEffectToLO        ; Apply the mode's pitch effect
+                                            ; to the SQ*_LO register.
+
+  @_return:                                 ; [$8191]
     RTS
-
-
+;============================================================================
+; TODO: Document Music_PlaySQEnvelopeModeCurveButHeld
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Music_PlayForChannel
+;============================================================================
+Music_PlaySQEnvelopeModeCurveButHeld:       ; [$8192]
     ;
-    ; XXX 1: Curve but held
+    ; This is SQ Mode 1: Curve but held
     ;
-  @LAB_PRG5__8192:                          ; [$8192]
-    LDX a:MScript_CurrentChannel
-    LDA Music_SQEffect_CurValue,X
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    LDA Music_SQEnvelope_Value,X
     AND #$0f
-    STA Music_SQEffect_CurValue,X
+    STA Music_SQEnvelope_Value,X
     CMP #$0d
     BCC @LAB_PRG5__81a7
-    DEC Music_SQEffect_CurValue,X
-    DEC Music_SQEffect_CurValue,X
+    DEC Music_SQEnvelope_Value,X
+    DEC Music_SQEnvelope_Value,X
 
   @LAB_PRG5__81a7:                          ; [$81a7]
-    INC Music_SQEffect_Counter,X
-    LDA Music_SQEffect_CurValue,X
+    INC Music_SQEnvelope_Phase,X
+    LDA Music_SQEnvelope_Value,X
     STA a:MScript_CurValue
-    LDA SoundEffects,X
-    BNE @_return2
-    JSR Music_UpdateSQVol
-    JSR Music_UpdateSQLo
+    LDA SoundEffect_TicksRemaining,X
+    BNE @_return
+    JSR Music_UpdateSQVolRegister
+    JSR Music_ApplySQPitchEffectToLO
 
-  @_return2:                                ; [$81bb]
+  @_return:                                 ; [$81bb]
     RTS
-
-
+;============================================================================
+; TODO: Document Music_PlaySQEnvelopeModePluck
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     Music_PlayForChannel
+;============================================================================
+Music_PlaySQEnvelopeModePluck:              ; [$81bc]
     ;
-    ; XXX 2
+    ; This is SQ Mode 2: Table-based envelope (pluck effect)
     ;
-  @LAB_PRG5__81bc:                          ; [$81bc]
-    LDX a:MScript_CurrentChannel
-    LDA Music_SQEffect_Counter,X
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    LDA Music_SQEnvelope_Phase,X
     LSR A
     LSR A
     TAY
-    LDA @_return3+1,Y
+    LDA SQ_MODE_2_PLUCK_VALUES,Y
     BEQ @LAB_PRG5__81cd
-    INC Music_SQEffect_Counter,X
+    INC Music_SQEnvelope_Phase,X
 
   @LAB_PRG5__81cd:                          ; [$81cd]
     STA a:MScript_CurValue
-    LDA SoundEffects,X
-    BNE @_return3
-    JSR Music_UpdateSQVol
-    JSR Music_UpdateSQLo
+    LDA SoundEffect_TicksRemaining,X
+    BNE @_return
+    JSR Music_UpdateSQVolRegister
+    JSR Music_ApplySQPitchEffectToLO
 
-  @_return3:                                ; [$81db]
+  @_return:                                 ; [$81db]
     RTS
 
 ;
 ; XREFS:
-;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModePluck
 ;
-BYTE_ARRAY_PRG5__81dc:                      ; [$81dc]
+SQ_MODE_2_PLUCK_VALUES:                     ; [$81dc]
     db $07                                  ; [0]:
     db $0a                                  ; [1]:
     db $0d                                  ; [2]:
@@ -495,38 +834,82 @@ BYTE_ARRAY_PRG5__81dc:                      ; [$81dc]
     db $01                                  ; [19]:
     db $00                                  ; [20]:
 
+
 ;============================================================================
-; TODO: Document Music_UpdateSQVol
+; Update the Square Wave volume and control bits.
+;
+; This will load in the pending value for square wave volume
+; and reduce it by any fade set by an MScript op. This will
+; be the volume for the SQ1_VOL or
+; SQ2_VOL channel.
+;
+; The control bits (duty cycle, length counter halt,
+; constant volume/envelope flag) will then be applied to
+; the register.
+;
+; See https://www.nesdev.org/wiki/APU_Pulse
 ;
 ; INPUTS:
-;     None.
+;     MScript_CurrentChannel:
+;         The current channel being processed (0 or 1).
+;
+;     MScript_CurValue:
+;         The current volume value to use as a base.
+;
+;     Music_SQ_Fades:
+;         The fade values to subtract from the volume
+;         (indexed by channel).
+;
+;     Music_SQ_ControlBits:
+;         The control bits to set for the register.
 ;
 ; OUTPUTS:
-;     TODO
+;     SQ1_VOL:
+;     SQ2_VOL:
+;         The updated Square Wave register.
 ;
 ; XREFS:
-;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;============================================================================
-Music_UpdateSQVol:                          ; [$81f1]
-    LDX a:MScript_CurrentChannel
-    TXA
-    ASL A
-    ASL A
-    TAY
-    LDA a:MScript_CurValue
-    SEC
-    SBC Music_SQ_Vol,X
-    BCS @LAB_PRG5__8203
-    LDA #$00
+Music_UpdateSQVolRegister:                  ; [$81f1]
+    ;
+    ; Compute the address for the Square Wave volume register.
+    ;
+    LDX a:MScript_CurrentChannel            ; Load the MScript channel.
+    TXA                                     ; A = result.
+    ASL A                                   ; Convert to a word boundary.
+    ASL A                                   ; And double, giving us the start
+                                            ; of either SQ channel volume
+                                            ; addresses.
+    TAY                                     ; Y = resulting index.
 
-  @LAB_PRG5__8203:                          ; [$8203]
-    LDX a:MScript_CurrentChannel
-    ORA Something_Music_SQ_0172,X
-    STA SQ1_VOL,Y
+
+    ;
+    ; Apply any fade set.
+    ;
+    LDA a:MScript_CurValue                  ; Load the volume to set.
+    SEC
+    SBC Music_SQ_Fades,X                    ; Subtract any fade that was set.
+    BCS @_setVolume                         ; If positive, jump.
+
+
+    ;
+    ; The volume went negative. Cap to 0.
+    ;
+    LDA #$00                                ; Set the volume to 0.
+
+  @_setVolume:                              ; [$8203]
+    LDX a:MScript_CurrentChannel            ; Load the current SQ channel as
+                                            ; an index.
+    ORA Music_SQ_ControlBits,X              ; Apply control bits to the value
+                                            ; to set for the register.
+    STA SQ1_VOL,Y                           ; And set the register.
     RTS
 
 ;============================================================================
-; TODO: Document Music_UpdateSQLo
+; TODO: Document Music_ApplySQPitchEffectToLO
 ;
 ; INPUTS:
 ;     None.
@@ -535,29 +918,72 @@ Music_UpdateSQVol:                          ; [$81f1]
 ;     TODO
 ;
 ; XREFS:
-;     Music_PlayForChannel
+;     Music_PlaySQEnvelopeModeCurveButHeld
+;     Music_PlaySQEnvelopeModeLinearTrailoff
+;     Music_PlaySQEnvelopeModePluck
 ;============================================================================
-Music_UpdateSQLo:                           ; [$820d]
-    LDX a:MScript_CurrentChannel
-    LDA Music_SQEffect_Counter,X
-    CMP #$12
-    BCC @_return
+Music_ApplySQPitchEffectToLO:               ; [$820d]
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+
+
+    ;
+    ; Make sure the phase counter reached 18 before we make any
+    ; changes. This provides a delay.
+    ;
+    LDA Music_SQEnvelope_Phase,X            ; Load the phase counter for the
+                                            ; channel.
+    CMP #$12                                ; Is it < 18?
+    BCC @_return                            ; If so, end.
+
+
+    ;
+    ; The counter hit 18, so we can begin updating state.
+    ;
+    ; First we'll divide the counter by 4, giving a quarter speed.
+    ; Then we'll AND with the depth mask, defining the range (e.g.,
+    ; $04 == 0..4 repeating).
+    ;
+    ; The result is a delta used later.
+    ;
+    LSR A                                   ; Divide by 4, giving quarter
+                                            ; speed.
     LSR A
-    LSR A
-    AND Music_Something_SQ_017f,X
-    STA a:Something_Music_0178
-    LDA SoundEffects,X
-    BNE @_return
-    LDA a:MScript_CurrentChannel
-    ASL A
-    ASL A
-    TAY
-    LDA Music_Current_SQ_Low,X
-    CMP Music_Something_SQ_017f,X
-    BCC @_return
+    AND Music_SQPitchDelta_Mask,X           ; AND with our depth mask,
+                                            ; defining the range.
+    STA a:Music_SQEffect_Delta              ; Store as the delta.
+    LDA SoundEffect_TicksRemaining,X        ; Check for sound effects on this
+                                            ; channel.
+    BNE @_return                            ; If any are set, skip playing on
+                                            ; this channel.
+
+
+    ;
+    ; No sound effects are playing, so we can continue.
+    ;
+    LDA a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    ASL A                                   ; Convert to a word boundary.
+    ASL A                                   ; And multiply by 2 for the
+                                            ; channel offset.
+    TAY                                     ; Y = resulting index.
+
+
+    ;
+    ; Don't apply the effect if the base is too small to subtract from.
+    ;
+    LDA Music_Current_SQ_Low,X              ; Load the low value .
+    CMP Music_SQPitchDelta_Mask,X           ; Is it less than the depth mask?
+    BCC @_return                            ; If so, return.
+
+
+    ;
+    ; Subtract the delta and store it in the SQ*_LO register.
+    ;
     SEC
-    SBC a:Something_Music_0178
-    STA SQ1_LO,Y
+    SBC a:Music_SQEffect_Delta              ; Subtract the delta calculated
+                                            ; above.
+    STA SQ1_LO,Y                            ; And store it in the register.
 
   @_return:                                 ; [$8239]
     RTS
@@ -572,24 +998,24 @@ Music_UpdateSQLo:                           ; [$820d]
 ;     TODO
 ;
 ; XREFS:
-;     Audio_PlayMusic
-;     MScript_Op_0xEE
-;     MScript_Op_0xEF
-;     MScript_Op_0xF0
-;     MScript_Op_0xF2
-;     MScript_Op_0xF7
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_EndLoop
 ;     MScript_Op_JumpSubroutine
+;     MScript_Op_NextLoopIfNCompleted
 ;     MScript_Op_NoOp
-;     MScript_Op_Restart
+;     MScript_Op_RestartChannel
 ;     MScript_Op_RestoreAddr
 ;     MScript_Op_Return
 ;     MScript_Op_SaveAddr
+;     MScript_Op_SetChannelTranspose
+;     MScript_Op_SetControlBits
+;     MScript_Op_SetGlobalTranspose
+;     MScript_Op_SetSQ2Detune
+;     MScript_Op_SetSQEnvelopeMode
+;     MScript_Op_SetSQPitchEffectDepth
 ;     MScript_Op_SetSQVol
-;     MScript_Op_SetWaveHigh
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
+;     Music_PlayNext
 ;============================================================================
 MScripts_InvokeNext:                        ; [$823a]
     LDX a:MScript_CurrentChannel            ; X = Channel index being
@@ -617,7 +1043,7 @@ MScripts_InvokeNext:                        ; [$823a]
     ;
   @_handleScriptValue:                      ; [$8255]
     CMP #$ee                                ; Is this < 0xEE?
-    BCC MScripts_InvokeNext_Something_828e  ; If so, jump.
+    BCC MScripts_SetNoteLengthFromNext      ; If so, jump.
 
 
     ;
@@ -658,7 +1084,7 @@ MSCRIPT_OP_HANDLERS:                        ; [$826a]
                                             ; [$PRG5::826e]
     dw MScript_Op_EndLoop-1                 ; MScript_Op_EndLoop
                                             ; [$PRG5::8270]
-    dw MScript_Op_ContinueIfNLoops-1        ; MScript_Op_ContinueIfNLoops
+    dw MScript_Op_NextLoopIfNCompleted-1    ; MScript_Op_NextLoopIfNCompleted
                                             ; [$PRG5::8272]
     dw MScript_Op_NoOp-1                    ; MScript_Op_NoOp
                                             ; [$PRG5::8274]
@@ -666,29 +1092,29 @@ MSCRIPT_OP_HANDLERS:                        ; [$826a]
                                             ; [$PRG5::8276]
     dw MScript_Op_JumpSubroutine-1          ; MScript_Op_JumpSubroutine
                                             ; [$PRG5::8278]
-    dw MScript_Op_0xF7-1                    ; MScript_Op_0xF7
+    dw MScript_Op_SetGlobalTranspose-1      ; MScript_Op_SetGlobalTranspose
                                             ; [$PRG5::827a]
-    dw MScript_Op_SetWaveHigh-1             ; MScript_Op_SetWaveHigh
+    dw MScript_Op_SetChannelTranspose-1     ; MScript_Op_SetChannelTranspose
                                             ; [$PRG5::827c]
     dw MScript_Op_Return-1                  ; MScript_Op_Return
                                             ; [$PRG5::827e]
-    dw MScript_Op_Restart-1                 ; MScript_Op_Restart
+    dw MScript_Op_RestartChannel-1          ; MScript_Op_RestartChannel
                                             ; [$PRG5::8280]
-    dw MScript_Op_0xF3-1                    ; MScript_Op_0xF3
+    dw MScript_Op_RepeatValue-1             ; MScript_Op_RepeatValue
                                             ; [$PRG5::8282]
-    dw MScript_Op_0xF2-1                    ; MScript_Op_0xF2
+    dw MScript_Op_SetControlBits-1          ; MScript_Op_SetControlBits
                                             ; [$PRG5::8284]
     dw MScript_Op_SetSQVol-1                ; MScript_Op_SetSQVol
                                             ; [$PRG5::8286]
-    dw MScript_Op_0xF0-1                    ; MScript_Op_0xF0
+    dw MScript_Op_SetSQEnvelopeMode-1       ; MScript_Op_SetSQEnvelopeMode
                                             ; [$PRG5::8288]
-    dw MScript_Op_0xEF-1                    ; MScript_Op_0xEF
+    dw MScript_Op_SetSQPitchEffectDepth-1   ; MScript_Op_SetSQPitchEffectDepth
                                             ; [$PRG5::828a]
-    dw MScript_Op_0xEE-1                    ; MScript_Op_0xEE
+    dw MScript_Op_SetSQ2Detune-1            ; MScript_Op_SetSQ2Detune
                                             ; [$PRG5::828c]
 
 ;============================================================================
-; TODO: Document MScripts_InvokeNext_Something_828e
+; TODO: Document MScripts_SetNoteLengthFromNext
 ;
 ; INPUTS:
 ;     None.
@@ -699,17 +1125,17 @@ MSCRIPT_OP_HANDLERS:                        ; [$826a]
 ; XREFS:
 ;     MScripts_InvokeNext
 ;============================================================================
-MScripts_InvokeNext_Something_828e:         ; [$828e]
+MScripts_SetNoteLengthFromNext:             ; [$828e]
     LDA a:MScript_CurValue                  ; Load the current script value.
     AND #$7f                                ; Discard bit 7.
-    BPL MScripts_InvokeNext_Something_8298
+    BPL MScripts_SetNoteLengthFromValue
 
     ;
     ; v-- Fall through --v
     ;
 
 ;============================================================================
-; TODO: Document MScript_Op_0xF3
+; TODO: Document MScript_Op_RepeatValue
 ;
 ; INPUTS:
 ;     None.
@@ -717,7 +1143,7 @@ MScripts_InvokeNext_Something_828e:         ; [$828e]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_0xF3:                            ; [$8295]
+MScript_Op_RepeatValue:                     ; [$8295]
     JSR MScripts_GetNextValue               ; Get the next value in the
                                             ; script.
 
@@ -726,7 +1152,7 @@ MScript_Op_0xF3:                            ; [$8295]
     ;
 
 ;============================================================================
-; TODO: Document MScripts_InvokeNext_Something_8298
+; TODO: Document MScripts_SetNoteLengthFromValue
 ;
 ; INPUTS:
 ;     A
@@ -735,11 +1161,11 @@ MScript_Op_0xF3:                            ; [$8295]
 ;     TODO
 ;
 ; XREFS:
-;     MScripts_InvokeNext_Something_828e
+;     MScripts_SetNoteLengthFromNext
 ;============================================================================
-MScripts_InvokeNext_Something_8298:         ; [$8298]
+MScripts_SetNoteLengthFromValue:            ; [$8298]
     LDX a:MScript_CurrentChannel
-    STA MScript_RepeatCounts,X
+    STA MScript_NoteDurations,X
     STA a:MScript_CurValue
     LDX a:MScript_CurrentChannel
     CPX #$02
@@ -754,7 +1180,7 @@ MScripts_InvokeNext_Something_8298:         ; [$8298]
     SEC
     SBC a:MScript_CurValue
     CMP #$10
-    BCS @LAB_PRG5__82cc
+    BCS @_beginCheckOffsets
     ASL A
     ASL A
     ASL A
@@ -762,27 +1188,27 @@ MScripts_InvokeNext_Something_8298:         ; [$8298]
     ORA #$08
     STA Music_SQ_Note_Lengths,X
     CMP #$08
-    BNE @LAB_PRG5__82dd
+    BNE @_invokeNext
     LDA #$18
-    BNE @LAB_PRG5__82da
+    BNE @_storeLength
 
-  @LAB_PRG5__82cc:                          ; [$82cc]
+  @_beginCheckOffsets:                      ; [$82cc]
     LDY #$00
 
-  @LAB_PRG5__82ce:                          ; [$82ce]
+  @_checkOffsetLoop:                        ; [$82ce]
     CMP $856f,Y
-    BCS @LAB_PRG5__82d7
+    BCS @_loadLength
     INY
     INY
-    BNE @LAB_PRG5__82ce
+    BNE @_checkOffsetLoop
 
-  @LAB_PRG5__82d7:                          ; [$82d7]
+  @_loadLength:                             ; [$82d7]
     LDA $8570,Y
 
-  @LAB_PRG5__82da:                          ; [$82da]
+  @_storeLength:                            ; [$82da]
     STA Music_SQ_Note_Lengths,X
 
-  @LAB_PRG5__82dd:                          ; [$82dd]
+  @_invokeNext:                             ; [$82dd]
     JMP MScripts_InvokeNext
     JMP MScripts_InvokeNext                 ; Unreachable?
 
@@ -802,7 +1228,7 @@ MScripts_InvokeNext_Something_8298:         ; [$8298]
 MScripts_PlayIfHasValue:                    ; [$82e3]
     CMP #$00
     BNE Music_PlayWaveOrNoise
-    JMP Music_StoreRepeat
+    JMP Music_StoreNoteDuration
 
 ;============================================================================
 ; TODO: Document Music_PlayWaveOrNoise
@@ -854,14 +1280,14 @@ Music_PlayWaveOrNoise:                      ; [$82ea]
 ;============================================================================
 Music_PlayNoise:                            ; [$82ff]
     DEC a:Music_Noise_Remaining
-    LDA a:SOUND_DAT_0126
+    LDA a:SoundEffect_TicksRemaining_3_
     BEQ @LAB_PRG5__830a
-    JMP Music_StoreRepeat
+    JMP Music_StoreNoteDuration
 
   @LAB_PRG5__830a:                          ; [$830a]
     LDA a:Music_Noise_Index
     BNE @LAB_PRG5__8312
-    JMP Music_StoreRepeat
+    JMP Music_StoreNoteDuration
 
   @LAB_PRG5__8312:                          ; [$8312]
     ASL A
@@ -876,7 +1302,7 @@ Music_PlayNoise:                            ; [$82ff]
     INY
     CPY #$04
     BCC @LAB_PRG5__8317
-    JMP Music_StoreRepeat
+    JMP Music_StoreNoteDuration
 
 ;============================================================================
 ; TODO: Document Music_PlayWave
@@ -892,9 +1318,9 @@ Music_PlayNoise:                            ; [$82ff]
 ;============================================================================
 Music_PlayWave:                             ; [$8326]
     LDX a:MScript_CurrentChannel
-    LDA SoundEffects,X
+    LDA SoundEffect_TicksRemaining,X
     BEQ @_setNote
-    JMP Music_StoreRepeat
+    JMP Music_StoreNoteDuration
 
   @_setNote:                                ; [$8331]
     LDX a:MScript_CurrentChannel
@@ -932,7 +1358,7 @@ Music_PlayWave:                             ; [$8326]
     ORA a:Music_SQ_Note_Lengths
     STA a:SQ1_HI
     LDA #$00
-    STA a:Music_SQEffect_Counter
+    STA a:Music_SQEnvelope_Phase
     BEQ @_finish
 
 
@@ -945,35 +1371,51 @@ Music_PlayWave:                             ; [$8326]
     STA a:SQ2_SWEEP
     LDY a:MScript_CurValue
     LDA a:Music_Note_Period_Low
-    CMP a:Music_SQ2_Length_Reduction
+    CMP a:Music_SQ2_TimerLowBias
     BCC @_setSQ2HiLo
     SEC
-    SBC a:Music_SQ2_Length_Reduction
+    SBC a:Music_SQ2_TimerLowBias
 
   @_setSQ2HiLo:                             ; [$838d]
     STA a:SQ2_LO
-    STA a:Music_SQ2_Low
+    STA a:Music_Current_SQ_Low_1_
     LDA a:Music_Note_Period_High
     ORA a:Music_Note_Length_High
     STA a:SQ2_HI
     LDA #$00
-    STA a:Something_Music_017a
+    STA a:Music_SQEnvelope_Phase_1_
 
   @_finish:                                 ; [$83a1]
     LDX a:MScript_CurrentChannel
     LDA #$ff
-    STA Music_SQEffect_CurValue,X
-    JSR Music_StoreRepeat
+    STA Music_SQEnvelope_Value,X
+    JSR Music_StoreNoteDuration
     RTS
 
+
 ;============================================================================
-; TODO: Document Music_StoreRepeat
+; Set the current per-channel repeat duration.
+;
+; MScripts maintain a per-channel "repeat count", which
+; controls how many update ticks the current
+; note/rest/noise value should be held before the script
+; advances to the next byte.
+;
+; This copies MScript_NoteDurations (set by a script) into
+; Music_NoteTicksRemaining (used for play back) for the
+; current channel, which is decremented by the main music
+; update loop to delay script advancement.
 ;
 ; INPUTS:
-;     None.
+;     MScript_CurrentChannel:
+;         The current MScript channel.
+;
+;     MScript_NoteDurations:
+;         The per-channel repeat counts set by the script.
 ;
 ; OUTPUTS:
-;     TODO
+;     Music_NoteTicksRemaining:
+;         The remaining tick counts for playback.
 ;
 ; XREFS:
 ;     MScripts_PlayIfHasValue
@@ -981,10 +1423,12 @@ Music_PlayWave:                             ; [$8326]
 ;     Music_PlayTriangleWave
 ;     Music_PlayWave
 ;============================================================================
-Music_StoreRepeat:                          ; [$83ad]
-    LDX a:MScript_CurrentChannel
-    LDA MScript_RepeatCounts,X
-    STA Music_Repeats,X
+Music_StoreNoteDuration:                    ; [$83ad]
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    LDA MScript_NoteDurations,X             ; Load the repeat counts for this
+                                            ; channel.
+    STA Music_NoteTicksRemaining,X          ; Copy them over.
     RTS
 
 ;============================================================================
@@ -1000,25 +1444,38 @@ Music_StoreRepeat:                          ; [$83ad]
 ;     Music_PlayWave
 ;============================================================================
 Music_PlayTriangleWave:                     ; [$83b7]
-    JSR Music_StoreRepeat
+    JSR Music_StoreNoteDuration
     STA a:MScript_CurValue
     LSR A
     LSR A
-    STA a:Something_Music_0178
+    STA a:Music_SQEffect_Delta
     LDA a:MScript_CurValue
     SEC
-    SBC a:Something_Music_0178
+    SBC a:Music_SQEffect_Delta
     STA a:Something_Music_Triangle_017e
     RTS
 
+
 ;============================================================================
-; TODO: Document Music_SetNote
+; Set the note value to play.
 ;
-; INPUTS:
-;     Y
+; Note values are relative semitone indices, not absolute
+; pitches. They are are converted into a playable frequency
+; through several transformations.
 ;
-; OUTPUTS:
-;     TODO
+; The final pitch depends on:
+;
+; 1. The channel base offset (MUSIC_CHANNEL_NOTE_OFFSETS)
+; 2. The channel transposition (Music_Channel_Transpose)
+; 3. The global transposition (Music_Global_Transpose)
+; 4. An octave normalization loop (12 semitones per octave)
+;
+; A value of 0x00 represents a rest. Any other value is
+; processed through the above steps.
+;
+; As a result, the same byte value in different MScripts
+; (or on different channels) does not necessarily produce
+; the same audible pitch.
 ;
 ; XREFS:
 ;     Music_PlayWave
@@ -1027,12 +1484,12 @@ Music_SetNote:                              ; [$83cd]
     LDX a:MScript_CurrentChannel
     LDA a:MScript_CurValue
     CLC
-    ADC $856c,X
+    ADC MUSIC_CHANNEL_NOTE_OFFSETS,X
     CLC
-    ADC Music_Wave_Length_Highs,X
+    ADC Music_Channel_Transpose,X
     CLC
-    ADC a:MScript_Maybe_8BitCounter
-    STY a:Maybe_Unused_Music_016f
+    ADC a:Music_Global_Transpose
+    STY a:MScript_Unused_RawValue
 
 
     ;
@@ -1078,20 +1535,16 @@ Music_SetNote:                              ; [$83cd]
   @_return:                                 ; [$8407]
     RTS
 
+
 ;============================================================================
-; TODO: Document MScript_Op_End
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; MScript Op 0xFF: End the channel's script.
 ;
 ; XREFS:
 ;     MSCRIPT_OP_HANDLERS [$PRG5::826a]
 ;============================================================================
 MScript_Op_End:                             ; [$8408]
-    LDX a:MScript_CurrentChannel
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
 
 
     ;
@@ -1101,133 +1554,224 @@ MScript_Op_End:                             ; [$8408]
     ; instruction until every channel has completed.
     ;
     LDA #$01
-    STA Music_Repeats,X
-    TXA
-    ASL A
-    TAX
+    STA Music_NoteTicksRemaining,X          ; Set this to repeat 1 more time
+                                            ; (infinitely).
+    TXA                                     ; A = MScript channel.
+    ASL A                                   ; Convert to a word boundary for
+                                            ; an address index.
+    TAX                                     ; X = result.
 
 
     ;
     ; Decrement the offset into the script to keep it on this
-    ; 0xFF until all channels complete.
+    ; 0xFF operation until all channels complete.
     ;
-    LDA Music_CurrentScriptAddrs,X
-    BNE @LAB_PRG5__8419
-    DEC Music_CurrentScriptAddrs+1,X
+    LDA Music_CurrentScriptAddrs,X          ; Load the current script address
+                                            ; for this channel.
+    BNE @_setAddr                           ; If lower byte is not 0, jump.
 
-  @LAB_PRG5__8419:                          ; [$8419]
-    DEC Music_CurrentScriptAddrs,X
+
+    ;
+    ; Lower byte of the address is 0. We'll need to decrement
+    ; the upper byte.
+    ;
+    DEC Music_CurrentScriptAddrs+1,X        ; Decrement the upper byte of the
+                                            ; address.
+
+  @_setAddr:                                ; [$8419]
+    DEC Music_CurrentScriptAddrs,X          ; Decrement the lower byte of the
+                                            ; address.
 
 
     ;
     ; Mark this channel as completed.
     ;
-    INC a:Music_NumChannelsCompleted
+    INC a:Music_NumChannelsCompleted        ; Mark the channel as complete.
     RTS
 
-;============================================================================
-; TODO: Document MScript_Op_BeginLoop
-;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
-;============================================================================
-MScript_Op_BeginLoop:                       ; [$841f]
-    JSR MScripts_GetNextValue
-    LDX a:MScript_CurrentChannel
-    STA MScript_LoopLength,X
-    LDA #$01
-    STA MScript_LoopCounter,X
-    TXA
-    ASL A
-    TAX
-    LDA Music_CurrentScriptAddrs,X
-    STA MScript_LoopStartAddrs,X
-    LDA Music_CurrentScriptAddrs+1,X
-    STA MScript_LoopStartAddrs+1,X
-    JMP MScripts_InvokeNext
 
 ;============================================================================
-; TODO: Document MScript_Op_ContinueIfNLoops
+; MScript Op $FD: Begin Loop.
 ;
-; INPUTS:
-;     None.
+; Marks the start of a loop. This address will be used
+; when looping.
 ;
-; OUTPUTS:
-;     TODO
+; The loop will end when after it completes the specified
+; number of loops, or when another operation breaks out
+; of the loop.
+;
+; The initial loop counter is set to 1 internally.
+;
+; Loops cannot be nested.
+;
+; ARGS:
+;     1. Number of iterations (1 byte)
 ;============================================================================
-MScript_Op_ContinueIfNLoops:                ; [$843d]
-    JSR MScripts_GetNextValue
-    LDX a:MScript_CurrentChannel
-    CMP MScript_LoopCounter,X
-    BCS @_invokeNext
-    TXA
-    ASL A
-    TAX
-    LDA MScript_LoopEndAddrs,X
-    STA Music_CurrentScriptAddrs,X
-    LDA MScript_LoopEndAddrs+1,X
-    STA Music_CurrentScriptAddrs+1,X
+MScript_Op_BeginLoop:                       ; [$841f]
+    ;
+    ; Read the number of iterations to loop from the script.
+    ;
+    JSR MScripts_GetNextValue               ; Load the next value from the
+                                            ; script.
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    STA MScript_LoopLength,X                ; Store the length of this loop
+                                            ; to the next value.
+
+
+    ;
+    ; Set the starting value for the loop counter (1).
+    ;
+    LDA #$01
+    STA MScript_LoopCounter,X               ; Set the starting loop counter
+                                            ; to 1.
+
+
+    ;
+    ; Store the start address of the loop.
+    ;
+    TXA                                     ; A = Loop length.
+    ASL A                                   ; Convert to a word boundary for
+                                            ; an index.
+    TAX                                     ; X = resulting index.
+    LDA Music_CurrentScriptAddrs,X          ; Load the lower byte of the
+                                            ; current script address for the
+                                            ; channel.
+    STA MScript_LoopStartAddrs,X            ; Store as the lower byte of the
+                                            ; starting address for the loop.
+    LDA Music_CurrentScriptAddrs+1,X        ; Load the upper byte.
+    STA MScript_LoopStartAddrs+1,X          ; Store that.
+
+
+    ;
+    ; We're done. Invoke the next op in the script.
+    ;
+    JMP MScripts_InvokeNext                 ; Invoke the next operation.
+
+
+;============================================================================
+; MSCript Op $FE: Restart Loop If >= N Iterations
+;
+; If >= N iterations have been completed, restart the
+; loop, advancing the loop iteration count.
+;
+; If < N iterations have been completed, proceed with
+; the next operation in the script.
+;
+; ARGS:
+;     1. Number of iterations to check (1 byte)
+;============================================================================
+MScript_Op_NextLoopIfNCompleted:            ; [$843d]
+    JSR MScripts_GetNextValue               ; Load the current MScript
+                                            ; channel.
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    CMP MScript_LoopCounter,X               ; Has the specified number of
+                                            ; loops been completed?
+    BCS @_invokeNext                        ; If so, invoke the next
+                                            ; operation within this loop.
+
+
+    ;
+    ; The specified number of loops have not been completed.
+    ; Restart the loop.
+    ;
+    TXA                                     ; A = Current channel.
+    ASL A                                   ; Convert to a word boundary for
+                                            ; lookup tables.
+    TAX                                     ; X = result.
+    LDA MScript_LoopEndAddrs,X              ; Load the lower byte of the loop
+                                            ; end address.
+    STA Music_CurrentScriptAddrs,X          ; Set as the lower byte of the
+                                            ; next address.
+    LDA MScript_LoopEndAddrs+1,X            ; Load the upper byte of the loop
+                                            ; end address.
+    STA Music_CurrentScriptAddrs+1,X        ; Set as the upper byte of the
+                                            ; next address.
 
   @_invokeNext:                             ; [$8455]
     JMP MScripts_InvokeNext
 
+
 ;============================================================================
-; TODO: Document MScript_Op_EndLoop
+; MScript Op $FC: End Loop.
 ;
-; INPUTS:
-;     None.
+; Marks the end of the loop.
 ;
-; OUTPUTS:
-;     TODO
+; If the loop counter has hit the loop length (and
+; remember, the loop counter is 1-based), the loop will
+; end.
+;
+; If it's under the loop length, the loop will restart.
 ;============================================================================
 MScript_Op_EndLoop:                         ; [$8458]
-    LDX a:MScript_CurrentChannel
-    LDA MScript_LoopCounter,X
-    CMP MScript_LoopLength,X
-    BCS @_invokeNext
-    INC MScript_LoopCounter,X
-    TXA
-    ASL A
-    TAX
+    LDX a:MScript_CurrentChannel            ; Load the current MScript
+                                            ; channel.
+    LDA MScript_LoopCounter,X               ; Load the current loop counter.
+    CMP MScript_LoopLength,X                ; Is it >= the loop length?
+    BCS @_invokeNext                        ; If so, invoke the next
+                                            ; operation after the loop.
 
 
     ;
-    ; ..
+    ; The script can continue to loop.
     ;
-    LDA Music_CurrentScriptAddrs,X
-    STA MScript_LoopEndAddrs,X
-    LDA Music_CurrentScriptAddrs+1,X
-    STA MScript_LoopEndAddrs+1,X
+    INC MScript_LoopCounter,X               ; Increment the loop counter.
+    TXA                                     ; A = MScript channel.
+    ASL A                                   ; Convert to a word boundary for
+                                            ; lookup tables.
+    TAX                                     ; X = resulting index.
 
 
     ;
-    ; ..
+    ; Set the current script address as the end of the loop.
     ;
-    LDA MScript_LoopStartAddrs,X
-    STA Music_CurrentScriptAddrs,X
-    LDA MScript_LoopStartAddrs+1,X
-    STA Music_CurrentScriptAddrs+1,X
+    LDA Music_CurrentScriptAddrs,X          ; Load the lower byte of the
+                                            ; current script address.
+    STA MScript_LoopEndAddrs,X              ; Set as the lower byte of the
+                                            ; end of the loop.
+    LDA Music_CurrentScriptAddrs+1,X        ; Load the upper byte of the
+                                            ; current script address.
+    STA MScript_LoopEndAddrs+1,X            ; Set as the upper byte of the
+                                            ; end of the loop.
 
+
+    ;
+    ; Set the start of the loop as the current script address.
+    ;
+    LDA MScript_LoopStartAddrs,X            ; Load the lower byte of the
+                                            ; address of the start of the
+                                            ; loop.
+    STA Music_CurrentScriptAddrs,X          ; Set as the lower byte of the
+                                            ; current script address.
+    LDA MScript_LoopStartAddrs+1,X          ; Load the upper byte of the
+                                            ; address of the start of the
+                                            ; loop.
+    STA Music_CurrentScriptAddrs+1,X        ; Set as the upper byte of the
+                                            ; current script address.
+
+
+    ;
+    ; We're done. Proceed with the script, either looping or
+    ; moving on from the loop.
+    ;
   @_invokeNext:                             ; [$847d]
-    JMP MScripts_InvokeNext
+    JMP MScripts_InvokeNext                 ; Invoke the next operation in
+                                            ; the script.
+
 
 ;============================================================================
-; TODO: Document MScript_Op_NoOp
+; MScript Op $FA: No-Op
 ;
-; INPUTS:
-;     None.
-;
-; OUTPUTS:
-;     TODO
+; Does nothing. Simply acts as padding to help keep
+; scripts across channels in sync.
 ;============================================================================
 MScript_Op_NoOp:                            ; [$8480]
-    JMP MScripts_InvokeNext
+    JMP MScripts_InvokeNext                 ; Invoke the next operation in
+                                            ; the script.
 
 ;============================================================================
-; TODO: Document MScript_Op_0xF2
+; TODO: Document MScript_Op_SetControlBits
 ;
 ; INPUTS:
 ;     None.
@@ -1235,10 +1779,10 @@ MScript_Op_NoOp:                            ; [$8480]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_0xF2:                            ; [$8483]
+MScript_Op_SetControlBits:                  ; [$8483]
     JSR MScripts_GetNextValue
     LDX a:MScript_CurrentChannel
-    STA Something_Music_SQ_0172,X
+    STA Music_SQ_ControlBits,X
     JMP MScripts_InvokeNext
 
 ;============================================================================
@@ -1251,11 +1795,11 @@ MScript_Op_0xF2:                            ; [$8483]
 ;     TODO
 ;============================================================================
 MScript_Op_SaveAddr:                        ; [$848f]
-    JSR MScript_Op_SaveAddr_Inner
+    JSR MScript_Op_SaveAddr_Store
     JMP MScripts_InvokeNext
 
 ;============================================================================
-; TODO: Document MScript_Op_SaveAddr_Inner
+; TODO: Document MScript_Op_SaveAddr_Store
 ;
 ; INPUTS:
 ;     None.
@@ -1266,7 +1810,7 @@ MScript_Op_SaveAddr:                        ; [$848f]
 ; XREFS:
 ;     MScript_Op_SaveAddr
 ;============================================================================
-MScript_Op_SaveAddr_Inner:                  ; [$8495]
+MScript_Op_SaveAddr_Store:                  ; [$8495]
     LDA a:MScript_CurrentChannel
     ASL A
     TAX
@@ -1296,7 +1840,7 @@ MScript_Op_RestoreAddr:                     ; [$84a5]
     JMP MScripts_InvokeNext
 
 ;============================================================================
-; TODO: Document MScript_Op_Restart
+; TODO: Document MScript_Op_RestartChannel
 ;
 ; INPUTS:
 ;     None.
@@ -1304,8 +1848,8 @@ MScript_Op_RestoreAddr:                     ; [$84a5]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_Restart:                         ; [$84b7]
-    LDA CurrentMusic
+MScript_Op_RestartChannel:                  ; [$84b7]
+    LDA Music_Current
     ASL A
     ASL A
     SEC
@@ -1315,7 +1859,7 @@ MScript_Op_Restart:                         ; [$84b7]
     LDX #$00
 
   @_loop:                                   ; [$84c2]
-    LDA MUSIC_LOOKUP_START_THEME,Y
+    LDA MSCRIPTS_TITLESCREEN,Y
     STA Music_CurrentScriptAddrs,X
     INY
     INX
@@ -1371,7 +1915,7 @@ MScript_Op_Return:                          ; [$84f0]
     JMP MScripts_InvokeNext                 ; Invoke the script there.
 
 ;============================================================================
-; TODO: Document MScript_Op_SetWaveHigh
+; TODO: Document MScript_Op_SetChannelTranspose
 ;
 ; INPUTS:
 ;     None.
@@ -1379,14 +1923,14 @@ MScript_Op_Return:                          ; [$84f0]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_SetWaveHigh:                     ; [$8502]
+MScript_Op_SetChannelTranspose:             ; [$8502]
     JSR MScripts_GetNextValue
     LDX a:MScript_CurrentChannel
-    STA Music_Wave_Length_Highs,X
+    STA Music_Channel_Transpose,X
     JMP MScripts_InvokeNext
 
 ;============================================================================
-; TODO: Document MScript_Op_0xF7
+; TODO: Document MScript_Op_SetGlobalTranspose
 ;
 ; INPUTS:
 ;     None.
@@ -1394,9 +1938,9 @@ MScript_Op_SetWaveHigh:                     ; [$8502]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_0xF7:                            ; [$850e]
+MScript_Op_SetGlobalTranspose:              ; [$850e]
     JSR MScripts_GetNextValue
-    STA a:MScript_Maybe_8BitCounter
+    STA a:Music_Global_Transpose
     JMP MScripts_InvokeNext
 
 ;============================================================================
@@ -1411,26 +1955,36 @@ MScript_Op_0xF7:                            ; [$850e]
 MScript_Op_SetSQVol:                        ; [$8517]
     JSR MScripts_GetNextValue
     LDX a:MScript_CurrentChannel
-    STA Music_SQ_Vol,X
+    STA Music_SQ_Fades,X
     JMP MScripts_InvokeNext
 
+
 ;============================================================================
-; TODO: Document MScript_Op_0xF0
+; MScript Op $F0: Set the envelope mode for the Square Wave.
 ;
-; INPUTS:
-;     None.
+; This supports the following values:
 ;
-; OUTPUTS:
-;     TODO
+; 0: Volume decay
+;
+;    Ramps down the volume smoothly.
+;
+; 1: Curve but held
+;
+;    Clamps the envelope into a range 0..15 and then slows
+;    the decay.
+;
+; 2: Pre-built attack/decay curve
+;
+;    Pitches up and then down in a set pattern.
 ;============================================================================
-MScript_Op_0xF0:                            ; [$8523]
+MScript_Op_SetSQEnvelopeMode:               ; [$8523]
     JSR MScripts_GetNextValue
     LDX a:MScript_CurrentChannel
-    STA Music_SQEffect_Mode,X
+    STA Music_SQEnvelope_Mode,X
     JMP MScripts_InvokeNext
 
 ;============================================================================
-; TODO: Document MScript_Op_0xEF
+; TODO: Document MScript_Op_SetSQPitchEffectDepth
 ;
 ; INPUTS:
 ;     None.
@@ -1438,24 +1992,36 @@ MScript_Op_0xF0:                            ; [$8523]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-MScript_Op_0xEF:                            ; [$852f]
+MScript_Op_SetSQPitchEffectDepth:           ; [$852f]
     JSR MScripts_GetNextValue
     LDX a:MScript_CurrentChannel
-    STA Music_Something_SQ_017f,X
+    STA Music_SQPitchDelta_Mask,X
     JMP MScripts_InvokeNext
 
+
 ;============================================================================
-; TODO: Document MScript_Op_0xEE
+; MScript Op $EE: Set the SQ2 pitch bias (detune).
 ;
-; INPUTS:
-;     None.
+; This operation applies a SQ2-only pitch adjustment by
+; subtracting a small value from the low byte of the
+; square wave timer period before writing to SQ2_LO.
 ;
-; OUTPUTS:
-;     TODO
+; The value is compared against the computed timer low
+; byte and clamped to avoid underflow. This produces a
+; subtle upward pitch shift when non-zero.
+;
+; This is not related to note length or envelope timing.
+; It is a pitch modification applied after note
+; calculation, before writing to the APU.
+;
+; This may be used to provide a simple chorus/harmony
+; effect.
+;
+; A value of 0 disables this effect.
 ;============================================================================
-MScript_Op_0xEE:                            ; [$853b]
+MScript_Op_SetSQ2Detune:                    ; [$853b]
     JSR MScripts_GetNextValue
-    STA a:Music_SQ2_Length_Reduction
+    STA a:Music_SQ2_TimerLowBias
     JMP MScripts_InvokeNext
 
 ;============================================================================
@@ -1468,17 +2034,17 @@ MScript_Op_0xEE:                            ; [$853b]
 ;     A
 ;
 ; XREFS:
-;     MScript_Op_0xEE
-;     MScript_Op_0xEF
-;     MScript_Op_0xF0
-;     MScript_Op_0xF2
-;     MScript_Op_0xF3
-;     MScript_Op_0xF7
 ;     MScript_Op_BeginLoop
-;     MScript_Op_ContinueIfNLoops
 ;     MScript_Op_JumpSubroutine
+;     MScript_Op_NextLoopIfNCompleted
+;     MScript_Op_RepeatValue
+;     MScript_Op_SetChannelTranspose
+;     MScript_Op_SetControlBits
+;     MScript_Op_SetGlobalTranspose
+;     MScript_Op_SetSQ2Detune
+;     MScript_Op_SetSQEnvelopeMode
+;     MScript_Op_SetSQPitchEffectDepth
 ;     MScript_Op_SetSQVol
-;     MScript_Op_SetWaveHigh
 ;     MScripts_InvokeNext
 ;============================================================================
 MScripts_GetNextValue:                      ; [$8544]
@@ -1495,7 +2061,8 @@ MScripts_GetNextValue:                      ; [$8544]
 
 
 ;============================================================================
-; Base note lookup table for C2 through B2.
+; Base note lookup table for 12 semitones (C..B), used
+; with octave normalization.
 ;
 ; XREFS:
 ;     Music_SetNote
@@ -1508,7 +2075,7 @@ MScripts_GetNextValue:                      ; [$8544]
 ;     SoundEffect_SetNote
 ;
 AUDIO_NOTES:                                ; [$8552]
-    dw $0000                                ; [0]:
+    dw $0000                                ; [0]: Unused/padding
     dw $06ae                                ; [1]: C2
     dw $064e                                ; [2]: C2#2
     dw $05f3                                ; [3]: D2
@@ -1522,39 +2089,49 @@ AUDIO_NOTES:                                ; [$8552]
     dw $03bf                                ; [11]: A2#2
     dw $0389                                ; [12]: B2
 
+
+;============================================================================
+; Signed semitone offsets for pitched channels.
+;
+; Noise appears to be a sentinel.
+;
+; XREFS:
+;     Music_SetNote
+;============================================================================
+
 ;
 ; XREFS:
 ;     Music_SetNote
 ;
-BYTE_ARRAY_PRG5__856c:                      ; [$856c]
-    db $f4                                  ; [0]:
-    db $f4                                  ; [1]:
-    db $0c                                  ; [2]:
+MUSIC_CHANNEL_NOTE_OFFSETS:                 ; [$856c]
+    db $f4                                  ; [0]: SQ1 (one octave down)
+    db $f4                                  ; [1]: SQ2 (one octave down)
+    db $0c                                  ; [2]: Triangle (1 octave up)
 
 ;
 ; XREFS:
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
 ;
-BYTE_ARRAY_PRG5__856c_3_:                   ; [$856f]
-    db $7f                                  ; [3]:
+MUSIC_CHANNEL_NOTE_OFFSETS_3_:              ; [$856f]
+    db $7f                                  ; [3]: Noise (sentinel?)
 
 ;
 ; XREFS:
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
 ;
 BYTE_PRG5__8570:                            ; [$8570]
     db $08                                  ; [$8570] byte
 
 ;
 ; XREFS:
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
 ;
 BYTE_PRG5__8571:                            ; [$8571]
     db $60                                  ; [$8571] byte
 
 ;
 ; XREFS:
-;     MScripts_InvokeNext_Something_8298
+;     MScripts_SetNoteLengthFromValue
 ;
 BYTE_PRG5__8572:                            ; [$8572]
     db $c0,$50,$40,$30,$b0,$28,$30,$24,$d0,$1e,$50,$18,$a0 ; [$8572] byte
@@ -1587,15 +2164,15 @@ MUSIC_NOISE_VALUES:                         ; [$857f]
 ; Table of sound effects to handler table indexes.
 ;
 ; XREFS:
-;     Sound_HandleOnInterrupt
+;     SoundEffects_HandleOnInterrupt
 ;============================================================================
 
 ;
 ; XREFS:
-;     Sound_HandleOnInterrupt
+;     SoundEffects_HandleOnInterrupt
 ;
 SOUND_EFFECT_HANDLER_INDEXES:               ; [$8590]
-    db $00                                  ; [0]:
+    db $00                                  ; [0]: Set up sound effects
     db $2c                                  ; [1]: Message
     db $60                                  ; [2]: Hit Enemy
     db $5c                                  ; [3]: Enemy died
@@ -1613,87 +2190,141 @@ SOUND_EFFECT_HANDLER_INDEXES:               ; [$8590]
                                             ; entered
     db $3c                                  ; [15]: Pushing block
     db $54                                  ; [16]: Coin dropped
-    db $48                                  ; [17]:
+    db $48                                  ; [17]: ?? Unused
     db $44                                  ; [18]: Pakukame
     db $24                                  ; [19]: Fill HP or MP
     db $6c                                  ; [20]: Tilte magic spell
     db $1c                                  ; [21]: Step sound
     db $10                                  ; [22]: Player died
     db $14                                  ; [23]: Ladder dropped
-    db $18                                  ; [24]:
+    db $18                                  ; [24]: Show player menu
     db $20                                  ; [25]: Changed gold amount
     db $0c                                  ; [26]: Use special item 2
     db $08                                  ; [27]: Bread touched
-    db $04                                  ; [28]:
+    db $04                                  ; [28]: Coin touched
+
+
+;============================================================================
+; A jump table of sound effect handler functions.
+;
+; This table is in pairs of sound effect setup and on-tick
+; handlers. The setup handler runs when loading a new sound
+; effect, and the on-tick handler runs for any existing
+; loaded sound effect.
+;
+; These may be separate functions, or two parts of
+; essentially the same function.
+;
+; XREFS:
+;     SoundEffects_HandleOnInterrupt
+;============================================================================
 
 ;
 ; XREFS:
-;     Sound_HandleOnInterrupt
+;     SoundEffects_HandleOnInterrupt
 ;
 SOUND_EFFECT_HANDLERS:                      ; [$85ad]
-    dw Sound_Init-1                         ; Sound_Init
+    dw SoundEffects_Init-1                  ; SoundEffects_Init
                                             ; [$PRG5::85ad]
-    dw $867f                                ; _return
+    dw SoundEffect_NoOp-1                   ; SoundEffect_NoOp
                                             ; [$PRG5::85af]
-    dw SoundEffect_Handler_CoinTouched-1    ; 0x04
-    dw FUN_PRG5__8ece-1                     ; FUN_PRG5__8ece
+    dw SoundEffect_CoinTouched_Setup-1      ; 0x04
+    dw SoundEffect_CoinTouched_OnTick-1     ; SoundEffect_CoinTouched_OnTick
                                             ; [$PRG5::85b3]
-    dw SoundEffect_Handler_BreadTouched-1   ; 0x08
-    dw $8e87                                ; [$85b7] ushort
-    dw SoundEffect_Handler_Maybe_UseSpecialItem2-1 ; 0x0C
-    dw $8dea                                ; [$85bb] ushort
-    dw SoundEffect_Handler_PlayerDied-1     ; 0x10
-    dw $8cb3                                ; [$85bf] ushort
-    dw SoundEffect_Handler_LadderDropped-1  ; 0x14
-    dw $8d35                                ; [$85c3] ushort
-    dw SoundEffect_Handler_ShowPlayerMenu-1 ; 0x18
-    dw $8d70                                ; [$85c7] ushort
-    dw SoundEffect_Handler_Maybe_Step-1     ; 0x1C
-    dw $8c72                                ; [$85cb] ushort
-    dw SoundEffect_Handler_GoldAmountChanged-1 ; 0x20
-    dw $8620                                ; [$85cf] ushort
-    dw SoundEffect_Handler_FillHPOrMP-1     ; 0x24
-    dw $8bc4                                ; [$85d3] ushort
-    dw SoundEffect_Handler_PasswordCharInput-1 ; 0x28
-    dw $8620                                ; [$85d7] ushort
-    dw SoundEffect_Handler_Message-1        ; 0x2C
-    dw $86a7                                ; [$85db] ushort
-    dw SoundEffect_Handler_CursorMoved-1    ; 0x30
-    dw $89b1                                ; [$85df] ushort
-    dw SoundEffect_Handler_CharacterInput-1 ; 0x34
-    dw $8a46                                ; [$85e3] ushort
-    dw SoundEffect_Handler_OpenDoor-1       ; 0x38
-    dw $881e                                ; [$85e7] ushort
-    dw SoundEffect_Handler_PushBlock-1      ; 0x3C
-    dw $8aa6                                ; [$85eb] ushort
-    dw SoundEffect_Handler_Maybe_Typing-1   ; 0x40
-    dw $8876                                ; [$85ef] ushort
-    dw SoundEffect_Handler_Pakukame-1       ; 0x44
-    dw $8b6e                                ; [$85f3] ushort
-    dw SoundEffect_Handler_0x48-1           ; 0x48
-    dw $8b1e                                ; [$85f7] ushort
-    dw SoundEffect_Handler_ItemPickedUp-1   ; 0x4C
-    dw $88d1                                ; [$85fb] ushort
-    dw SoundEffect_Handler_CoinTouchedCommon-1 ; 0x50
-    dw $892d                                ; [$85ff] ushort
-    dw SoundEffect_Handler_CoinDropped-1    ; 0x54
-    dw $8ad9                                ; [$8603] ushort
-    dw SoundEffect_Handler_ShieldHitByMagic-1 ; 0x58
-    dw $8a0e                                ; [$8607] ushort
-    dw SoundEffect_Handler_EnemyDied-1      ; 0x5C
-    dw $8742                                ; [$860b] ushort
-    dw SoundEffect_Handler_HitEnemy-1       ; 0x60
-    dw $86df                                ; [$860f] ushort
-    dw SoundEffect_Handler_HitPlayer-1      ; 0x64
-    dw $877a                                ; [$8613] ushort
-    dw SoundEffect_Handler_MagicHitObstacle-1 ; 0x68
-    dw $8981                                ; [$8617] ushort
-    dw SoundEffect_Handler_Tilte-1          ; 0x6C
-    dw $8c1d                                ; [$861b] ushort
-    dw SoundEffect_Handler_Magic-1          ; 0x70
-    dw $87c1                                ; [$861f] ushort
+    dw SoundEffect_BreadTouched_Setup-1     ; 0x08
+    dw SoundEffect_BreadTouched_OnTick-1    ; SoundEffect_BreadTouched_OnTick
+                                            ; [$PRG5::85b7]
+    dw SoundEffect_Maybe_UseSpecialItem2_Setup-1 ; 0x0C
+    dw SoundEffect_Maybe_UseSpecialItem2_OnTick-1 ; SoundEffect_Maybe_UseSpecialItem2_OnTick
+                                                  ; [$PRG5::85bb]
+    dw SoundEffect_PlayerDied_Setup-1       ; 0x10
+    dw SoundEffect_PlayerDied_OnTick-1      ; SoundEffect_PlayerDied_OnTick
+                                            ; [$PRG5::85bf]
+    dw SoundEffect_LadderDropped_Setup-1    ; 0x14
+    dw SoundEffect_LadderDropped_OnTick-1   ; SoundEffect_LadderDropped_OnTick
+                                            ; [$PRG5::85c3]
+    dw SoundEffect_ShowPlayerMenu_Setup-1   ; 0x18
+    dw SoundEffect_ShowPlayerMenu_OnTick-1  ; SoundEffect_ShowPlayerMenu_OnTick
+                                            ; [$PRG5::85c7]
+    dw SoundEffect_Maybe_Step_Setup-1       ; 0x1C
+    dw SoundEffect_Maybe_Step_OnTick-1      ; SoundEffect_Maybe_Step_OnTick
+                                            ; [$PRG5::85cb]
+    dw SoundEffect_GoldAmountChanged_Setup-1 ; 0x20
+    dw SoundEffects_DecrementCounter-1      ; SoundEffects_DecrementCounter
+                                            ; [$PRG5::85cf]
+    dw SoundEffect_FillHPOrMP_Setup-1       ; 0x24
+    dw SoundEffect_FillHPOrMP_OnTick-1      ; SoundEffect_FillHPOrMP_OnTick
+                                            ; [$PRG5::85d3]
+    dw SoundEffect_PasswordCharInput_Setup-1 ; 0x28
+    dw SoundEffects_DecrementCounter-1      ; SoundEffects_DecrementCounter
+                                            ; [$PRG5::85d7]
+    dw SoundEffect_Message_Setup-1          ; 0x2C
+    dw SoundEffect_Message_OnTick-1         ; SoundEffect_Message_OnTick
+                                            ; [$PRG5::85db]
+    dw SoundEffect_CursorMoved_Setup-1      ; 0x30
+    dw SoundEffect_CursorMoved_OnTick-1     ; SoundEffect_CursorMoved_OnTick
+                                            ; [$PRG5::85df]
+    dw SoundEffect_CharacterInput_Setup-1   ; 0x34
+    dw SoundEffect_CharacterInput_OnTick-1  ; SoundEffect_CharacterInput_OnTick
+                                            ; [$PRG5::85e3]
+    dw SoundEffect_OpenDoor_Setup-1         ; 0x38
+    dw SoundEffect_OpenDoor_OnTick-1        ; SoundEffect_OpenDoor_OnTick
+                                            ; [$PRG5::85e7]
+    dw SoundEffect_PushBlock_Setup-1        ; 0x3C
+    dw SoundEffect_PushBlock_OnTick-1       ; SoundEffect_PushBlock_OnTick
+                                            ; [$PRG5::85eb]
+    dw SoundEffect_Maybe_Typing_Setup-1     ; 0x40
+    dw SoundEffect_Maybe_Typing_OnTick-1    ; SoundEffect_Maybe_Typing_OnTick
+                                            ; [$PRG5::85ef]
+    dw SoundEffect_Pakukame_Setup-1         ; 0x44
+    dw SoundEffect_Pakukame_OnTick-1        ; SoundEffect_Pakukame_OnTick
+                                            ; [$PRG5::85f3]
+    dw SoundEffect_0x48_Setup-1             ; 0x48
+    dw SoundEffect_0x48_OnTick-1            ; SoundEffect_0x48_OnTick
+                                            ; [$PRG5::85f7]
+    dw SoundEffect_ItemPickedUp_Setup-1     ; 0x4C
+    dw SoundEffect_ItemPickedUp_OnTick-1    ; SoundEffect_ItemPickedUp_OnTick
+                                            ; [$PRG5::85fb]
+    dw SoundEffect_CoinTouchedCommon_Setup-1 ; 0x50
+    dw SoundEffect_CoinTouchedCommon_OnTick-1 ; SoundEffect_CoinTouchedCommon_OnTick
+                                              ; [$PRG5::85ff]
+    dw SoundEffect_CoinDropped_Setup-1      ; 0x54
+    dw SoundEffect_CoinDropped_OnTick-1     ; SoundEffect_CoinDropped_OnTick
+                                            ; [$PRG5::8603]
+    dw SoundEffect_ShieldHitByMagic_Setup-1 ; 0x58
+    dw SoundEffect_ShieldHitByMagic_OnTick-1 ; SoundEffect_ShieldHitByMagic_OnTick
+                                             ; [$PRG5::8607]
+    dw SoundEffect_EnemyDied_Setup-1        ; 0x5C
+    dw SoundEffect_EnemyDied_OnTick-1       ; SoundEffect_EnemyDied_OnTick
+                                            ; [$PRG5::860b]
+    dw SoundEffect_HitEnemy_Setup-1         ; 0x60
+    dw SoundEffect_HitEnemy_OnTick-1        ; SoundEffect_HitEnemy_OnTick
+                                            ; [$PRG5::860f]
+    dw SoundEffect_HitPlayer_Setup-1        ; 0x64
+    dw SoundEffect_HitPlayer_OnTick-1       ; SoundEffect_HitPlayer_OnTick
+                                            ; [$PRG5::8613]
+    dw SoundEffect_MagicHitObstacle_Setup-1 ; 0x68
+    dw SoundEffect_MagicHitObstacle_OnTick-1 ; SoundEffect_MagicHitObstacle_OnTick
+                                             ; [$PRG5::8617]
+    dw SoundEffect_Tilte_Setup-1            ; 0x6C
+    dw SoundEffect_Tilte_OnTick-1           ; SoundEffect_Tilte_OnTick
+                                            ; [$PRG5::861b]
+    dw SoundEffect_Magic_Setup-1            ; 0x70
+    dw SoundEffect_Magic_OnTick-1           ; SoundEffect_Magic_OnTick
+                                            ; [$PRG5::861f]
 
-    db $ce,$27,$01,$d0,$08                  ; [$8622] undefined
+;============================================================================
+; TODO: Document SoundEffects_DecrementCounter
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;============================================================================
+SoundEffects_DecrementCounter:              ; [$8621]
+    DEC a:SoundEffect_State_Counter
+    BNE Sound_ResetCurrentSound_Return
 
 ;============================================================================
 ; TODO: Document Sound_ResetCurrentSound
@@ -1705,41 +2336,46 @@ SOUND_EFFECT_HANDLERS:                      ; [$85ad]
 ;     TODO
 ;
 ; XREFS:
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
-;     Sound_HandleOnInterrupt
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_LadderDropped_OnTick
+;     SoundEffect_MagicHitObstacle_OnTick
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Maybe_Step_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Message_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PushBlock_OnTick
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_Tilte_OnTick
+;     SoundEffects_HandleOnInterrupt
 ;============================================================================
 Sound_ResetCurrentSound:                    ; [$8626]
     LDA #$00
-    STA a:SOUND_DAT_0122
-    STA a:CurrentSoundIndex
-    RTS
+    STA a:SoundEffect_HandlerIndex
+    STA a:SoundEffect_Unused_PriorityID
 
+    ;
+    ; XREFS:
+    ;     SoundEffects_DecrementCounter
+    ;
+Sound_ResetCurrentSound_Return:             ; [$862e]
+    RTS
 ;============================================================================
-; TODO: Document Sound_HandleOnInterrupt
+; TODO: Document SoundEffects_HandleOnInterrupt
 ;
 ; INPUTS:
 ;     None.
@@ -1748,88 +2384,212 @@ Sound_ResetCurrentSound:                    ; [$8626]
 ;     TODO
 ;
 ; XREFS:
-;     thunk_Sound_HandleOnInterrupt
+;     thunk_SoundEffects_HandleOnInterrupt
 ;============================================================================
-Sound_HandleOnInterrupt:                    ; [$862f]
-    LDX #$03
+SoundEffects_HandleOnInterrupt:             ; [$862f]
+    ;
+    ; Loop through all channels, decrementing the sound effect
+    ; tick count for each.
+    ;
+    LDX #$03                                ; X = 3 (channel loop counter).
 
-  @LAB_PRG5__8631:                          ; [$8631]
-    LDA SoundEffects,X
-    BEQ @LAB_PRG5__8639
-    DEC SoundEffects,X
+  @_checkActiveEffectsLoop:                 ; [$8631]
+    LDA SoundEffect_TicksRemaining,X        ; Load the sound effect ticks
+                                            ; remaining for this channel.
+    BEQ @_prepareNextActiveEffectsLoopIter  ; If this channel is done,
+                                            ; prepare for the next iteration.
+    DEC SoundEffect_TicksRemaining,X        ; Reduce the ticks remaining by
+                                            ; 1.
 
-  @LAB_PRG5__8639:                          ; [$8639]
-    DEX
-    BPL @LAB_PRG5__8631
-    LDA NextSoundEffect
-    BMI @LAB_PRG5__866f
-    TAX
-    ORA #$80
-    STA NextSoundEffect
-    CPX #$1d
-    BCS @LAB_PRG5__866f
-    LDA a:SOUND_DAT_0122
-    BEQ @LAB_PRG5__8658
-    LDA SOUND_EFFECT_HANDLER_INDEXES,X
-    CMP a:SOUND_DAT_0122
-    BCC @LAB_PRG5__8658
-    BNE @LAB_PRG5__866f
+  @_prepareNextActiveEffectsLoopIter:       ; [$8639]
+    DEX                                     ; X-- (loop counter).
+    BPL @_checkActiveEffectsLoop            ; If >= 0, loop.
 
-  @LAB_PRG5__8658:                          ; [$8658]
-    LDA SOUND_EFFECT_HANDLER_INDEXES,X
-    STA a:SOUND_DAT_0122
-    TAX
+
+    ;
+    ; Check if the current sound effect is playing or just set.
+    ;
+    ; Playing is indicated by bit 7 == 1.
+    ;
+    LDA SoundEffect_Current                 ; Load the ID of the sound effect
+                                            ; that's set.
+    BMI @_runOnTickHandler                  ; If the sound effect is playing
+                                            ; (bit 7 is set), jump to load
+                                            ; the current handler.
+
+
+    ;
+    ; The sound effect is set but not currently playing.
+    ; Mark it as playing.
+    ;
+    TAX                                     ; X = A (sound effect ID).
+    ORA #$80                                ; Set the Playing state (bit 7).
+    STA SoundEffect_Current                 ; Update the sound effect.
+    CPX #$1d                                ; Is this sound ID in range?
+    BCS @_runOnTickHandler                  ; If so, load and run the on-tick
+                                            ; handler.
+
+
+    ;
+    ; The sound effect ID is in range. Check if we have a
+    ; computed sound effect handler for it.
+    ;
+    LDA a:SoundEffect_HandlerIndex          ; Load the current sound effect
+                                            ; handler index.
+    BEQ @_newHandler                        ; If 0 (init sound), we're ready
+                                            ; to jump to load a new handler.
+
+
+    ;
+    ; There's an existing sound effect handler being used.
+    ; Check if it matches the sound effect to play, and then
+    ; either use it or load a new handler.
+    ;
+    LDA SOUND_EFFECT_HANDLER_INDEXES,X      ; Load the sound effect handler
+                                            ; index for this sound effect.
+    CMP a:SoundEffect_HandlerIndex          ; Does it match the existing
+                                            ; handler?
+    BCC @_newHandler                        ; If not, look for a new handler
+                                            ; and reset for the sound.
+    BNE @_runOnTickHandler                  ; Else, it's a match, so just
+                                            ; load the handler to run it.
+
+
+    ;
+    ; Reset the sound effect handler and state for a new sound
+    ; effect.
+    ;
+  @_newHandler:                             ; [$8658]
+    LDA SOUND_EFFECT_HANDLER_INDEXES,X      ; Load the sound effect handler
+                                            ; index for this ID.
+    STA a:SoundEffect_HandlerIndex          ; Store as the new index.
+    TAX                                     ; X = A (index).
+
+
+    ;
+    ; Clear out the number of ticks remaining for the old sound
+    ; effect.
+    ;
     LDA #$00
-    STA a:SoundEffects
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0125
-    STA a:SOUND_DAT_0126
-    BEQ @LAB_PRG5__8674
+    STA a:SoundEffect_TicksRemaining        ; SQ1 ticks remaining = 0
+    STA a:SoundEffect_TicksRemaining_1_     ; SQ2 ticks remaining = 0
+    STA a:SoundEffect_TicksRemaining_2_     ; TRI ticks remaining = 0
+    STA a:SoundEffect_TicksRemaining_3_     ; Noise ticks remaining = 0
+    BEQ @_checkAndRunHandler                ; Immediately jump to check and
+                                            ; run the setup handler for the
+                                            ; sound effect.
 
-  @LAB_PRG5__866f:                          ; [$866f]
-    LDX a:SOUND_DAT_0122
+
+    ;
+    ; Load the secondary, on-tick stage for the sound effect
+    ; handler.
+    ;
+    ; Every sound effect handler has a setup stage and an
+    ; on-tick stage. Pairs of each are in the sound effect
+    ; handlers table.
+    ;
+  @_runOnTickHandler:                       ; [$866f]
+    LDX a:SoundEffect_HandlerIndex          ; Load the index of the sound
+                                            ; effect handler.
+    INX                                     ; Advance to the next address for
+                                            ; the on-tick handler.
     INX
-    INX
 
-  @LAB_PRG5__8674:                          ; [$8674]
-    CPX #$74
-    BCS Sound_ResetCurrentSound
-    LDA SOUND_EFFECT_HANDLERS+1,X
-    PHA
-    LDA SOUND_EFFECT_HANDLERS,X
-    PHA
 
-  @_return:                                 ; [$8680]
-    RTS
+    ;
+    ; Check if the sound effect index is within bounds of the
+    ; handlers table.
+    ;
+    ; Note that the last sound effect handler index is 0x70, but
+    ; 0x72 would be the last on-tick handler. This is checking
+    ; that this is < 0x74, with the idea being that 0x73 would
+    ; never be set (unless there was a major programming flaw).
+    ;
+  @_checkAndRunHandler:                     ; [$8674]
+    CPX #$74                                ; Is this a valid sound effect
+                                            ; within the handlers lookup
+                                            ; table?
+    BCS Sound_ResetCurrentSound             ; If not, reset the current sound
+                                            ; effect.
+    LDA SOUND_EFFECT_HANDLERS+1,X           ; Load the upper byte of the
+                                            ; handler address.
+    PHA                                     ; Push it to the stack.
+    LDA SOUND_EFFECT_HANDLERS,X             ; Load the lower byte.
+    PHA                                     ; Push it to the stack.
+
+    ;
+    ; v-- Fall through --v
+    ;
 
 ;============================================================================
-; TODO: Document Sound_Init
+; TODO: Document SoundEffect_NoOp
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
 ;     TODO
+;============================================================================
+SoundEffect_NoOp:                           ; [$8680]
+    RTS
+
+
+;============================================================================
+; Initialize support for sound effects.
+;
+; This will clear out state, perform an audio reset, and
+; then enable the SQ1, SQ2, TRI, and Noise channels.
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     DMC_RAW:
+;         Set to 0.
+;
+;     SND_CHN:
+;         Set to 0xF (SQ1/SQ2/TRI/Noise).
+;
+;     SoundEffect_Unused_PriorityID:
+;     SoundEffect_TicksRemaining:
+;     SoundEffect_TicksRemaining+1:
+;     $0125:
+;     $0126:
+;         Set to 0.
+;
+; CALLS:
+;     Audio_Reset
 ;
 ; XREFS:
 ;     SOUND_EFFECT_HANDLERS [$PRG5::85ad]
-;     thunk_Sound_Init
+;     thunk_SoundEffects_Init
 ;============================================================================
-Sound_Init:                                 ; [$8681]
+SoundEffects_Init:                          ; [$8681]
     LDA #$00
-    STA a:DMC_RAW
-    STA a:SoundEffects
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0125
-    STA a:SOUND_DAT_0126
-    STA a:CurrentSoundIndex
-    JSR Audio_Reset
+    STA a:DMC_RAW                           ; Disable raw DMC.
+
+
+    ;
+    ; Clear the ticks remaining for all sound effect channels.
+    ;
+    STA a:SoundEffect_TicksRemaining        ; Set SQ1 ticks remaining = 0.
+    STA a:SoundEffect_TicksRemaining_1_     ; Set SQ2 ticks remaining = 0.
+    STA a:SoundEffect_TicksRemaining_2_     ; Set TRI ticks remaining = 0.
+    STA a:SoundEffect_TicksRemaining_3_     ; Set Noise ticks remaining = 0.
+    STA a:SoundEffect_Unused_PriorityID     ; Set priority ID (unused) to 0.
+
+
+    ;
+    ; Perform an audio reset and then enable the SQ1/SQ2/TRI/Noise
+    ; channels.
+    ;
+    JSR Audio_Reset                         ; Reset the audio.
     LDA #$0f
-    STA a:SND_CHN
+    STA a:SND_CHN                           ; Enable channels.
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Message
+; TODO: Document SoundEffect_Message_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -1837,22 +2597,74 @@ Sound_Init:                                 ; [$8681]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_Message:                ; [$869e]
+SoundEffect_Message_Setup:                  ; [$869e]
     LDA #$06
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_     ; Set TRI ticks remaining to 6.
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter         ; Set state counter to 0.
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Message_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;============================================================================
+SoundEffect_Message_OnTick:                 ; [$86a8]
     LDA #$1f
-    STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
-    AND #$02
-    TAX
-    LDA @_return+1,X
+    STA a:NOISE_VOL                         ; Set Noise volume to 31.
+
+
+    ;
+    ; Load a value from the lookup table for NOISE_LO.
+    ;
+    ; This switches sounds every 2 ticks, producing a typing
+    ; sound.
+    ;
+    ; BUG:
+    ;     And this is fascinating. The loud clack-clack typing
+    ;     sound, reminiscent of an old typewriter, appears to
+    ;     be a bug.
+    ;
+    ;     SOUNDEFFECT_MESSAGE_NOISE_LO defines the
+    ;     typing sounds, and produces a much softer sound, one
+    ;     that feels more appropriate considering other NES
+    ;     games.
+    ;
+    ;     That's not what's used, though. The AND #$02 instruction
+    ;     produces an offset of 0 or 2, with 2 causing an
+    ;     out-of-bounds read, pulling #$A9 out of the following
+    ;     function (an LDA instruction). This is much sharper than
+    ;     #$01, producing that sound.
+    ;
+    ;     My guess is they originally had an AND #$01, and wanted
+    ;     to reduce the sound change from every tick to every
+    ;     other tick, but didn't update the table with a padding
+    ;     byte, so it overflowed.
+    ;
+    ;     Maybe they were aiming for this as a hack at this
+    ;     point, or maybe they messed up but nobody really noticed
+    ;     because the sound ended up sounding so good and thus
+    ;     passed QA. In any case, the shipped behavior does not
+    ;     match the original intent of this code.
+    ;
+    LDA a:SoundEffect_State_Counter         ; Load the sound effect counter.
+    AND #$02                                ; Keep bit 1 (on 2 ticks, off 2
+                                            ; ticks).
+    TAX                                     ; X = result.
+    LDA SOUNDEFFECT_MESSAGE_NOISE_LO,X      ; Load the NOISE_LO value for
+                                            ; this state.
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
-    INC a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
+    LDA a:SoundEffect_State_Counter
     CMP #$04
     BCC @_return
     LDA #$10
@@ -1864,13 +2676,14 @@ SoundEffect_Handler_Message:                ; [$869e]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Message
+;     SoundEffect_Message_OnTick
 ;
-BYTE_PRG5__86d1:                            ; [$86d1]
-    db $10,$01                              ; [$86d1] byte
+SOUNDEFFECT_MESSAGE_NOISE_LO:               ; [$86d1]
+    db $10                                  ; [0]:
+    db $01                                  ; [1]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_HitEnemy
+; TODO: Document SoundEffect_HitEnemy_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -1878,27 +2691,42 @@ BYTE_PRG5__86d1:                            ; [$86d1]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_HitEnemy:               ; [$86d3]
+SoundEffect_HitEnemy_Setup:                 ; [$86d3]
     LDA #$14
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
-    LDX a:SoundEffect_MaybeIndex
-    LDA $8724,X
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_HitEnemy_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_HitEnemy_OnTick:                ; [$86e0]
+    LDX a:SoundEffect_State_Counter
+    LDA SOUNDEFFECT_HIT_ENEMY_NOTES,X
     CMP #$ff
-    BNE @LAB_PRG5__86f5
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__86f5:                          ; [$86f5]
+  @_play:                                   ; [$86f5]
     JSR SoundEffect_SetNote
     LDA #$5f
     STA a:SQ2_VOL
     STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     EOR #$0f
     ORA #$98
     STA a:SQ2_SWEEP
@@ -1910,45 +2738,73 @@ SoundEffect_Handler_HitEnemy:               ; [$86d3]
     STA a:NOISE_HI
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_HitEnemy
+;     SoundEffect_HitEnemy_OnTick
 ;
-DAT_PRG5__8724:                             ; [$8724]
-    db $62                                  ; [$8724] undefined1
-
-    hex 4e 3c 50 48 65 51 48 56 52 5f 58 65 4d 55 ff ; [$8726] undefined
+SOUNDEFFECT_HIT_ENEMY_NOTES:                ; [$8724]
+    db $62                                  ; [0]:
+    db $4e                                  ; [1]:
+    db $3c                                  ; [2]:
+    db $50                                  ; [3]:
+    db $48                                  ; [4]:
+    db $65                                  ; [5]:
+    db $51                                  ; [6]:
+    db $48                                  ; [7]:
+    db $56                                  ; [8]:
+    db $52                                  ; [9]:
+    db $5f                                  ; [10]:
+    db $58                                  ; [11]:
+    db $65                                  ; [12]:
+    db $4d                                  ; [13]:
+    db $55                                  ; [14]:
+    db $ff                                  ; [15]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_EnemyDied
+; TODO: Document SoundEffect_EnemyDied_Setup
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;============================================================================
-SoundEffect_Handler_EnemyDied:              ; [$8734]
+SoundEffect_EnemyDied_Setup:                ; [$8734]
     LDA #$16
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$14
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$00
     STA a:SoundEffect_State_0128
-    DEC a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__8750
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_EnemyDied_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_EnemyDied_OnTick:               ; [$8743]
+    DEC a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8750:                          ; [$8750]
+  @_play:                                   ; [$8750]
     LDX a:SoundEffect_State_0128
     LDA #$1f
     STA a:NOISE_VOL
-    LDA $8767,X
+    LDA SOUNDEFFECT_ENEMY_DIED_NOISE_LO,X
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
@@ -1957,36 +2813,58 @@ SoundEffect_Handler_EnemyDied:              ; [$8734]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_EnemyDied
+;     SoundEffect_EnemyDied_OnTick
 ;
-DAT_PRG5__8767:                             ; [$8767]
-    db $0f                                  ; [$8767] undefined1
-
-    hex 0c 0e 0b 0d 09 03 02 01 00          ; [$8769] undefined
+SOUNDEFFECT_ENEMY_DIED_NOISE_LO:            ; [$8767]
+    db $0f                                  ; [0]:
+    db $0c                                  ; [1]:
+    db $0e                                  ; [2]:
+    db $0b                                  ; [3]:
+    db $0d                                  ; [4]:
+    db $09                                  ; [5]:
+    db $03                                  ; [6]:
+    db $02                                  ; [7]:
+    db $01                                  ; [8]:
+    db $00                                  ; [9]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_HitPlayer
+; TODO: Document SoundEffect_HitPlayer_Setup
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;============================================================================
-SoundEffect_Handler_HitPlayer:              ; [$8771]
+SoundEffect_HitPlayer_Setup:                ; [$8771]
     LDA #$0f
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
-    LDX a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_HitPlayer_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_HitPlayer_OnTick:               ; [$877b]
+    LDX a:SoundEffect_State_Counter
     LDA SOUNDEFFECT_HITPLAYER_NOTES,X
     CMP #$ff
-    BNE @LAB_PRG5__878d
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__878d:                          ; [$878d]
+  @_play:                                   ; [$878d]
     JSR SoundEffect_SetNote
     LDA #$df
     STA a:SQ2_VOL
@@ -1996,56 +2874,81 @@ SoundEffect_Handler_HitPlayer:              ; [$8771]
     STA a:SQ2_LO
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_HitPlayer
+;     SoundEffect_HitPlayer_OnTick
 ;
 SOUNDEFFECT_HITPLAYER_NOTES:                ; [$87aa]
-    db $29,$24,$28,$22,$1f,$29,$2b,$2c,$2d,$2a,$ff ; [$87aa] byte
+    db $29                                  ; [0]:
+    db $24                                  ; [1]:
+    db $28                                  ; [2]:
+    db $22                                  ; [3]:
+    db $1f                                  ; [4]:
+    db $29                                  ; [5]:
+    db $2b                                  ; [6]:
+    db $2c                                  ; [7]:
+    db $2d                                  ; [8]:
+    db $2a                                  ; [9]:
+    db $ff                                  ; [10]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Magic
+; TODO: Document SoundEffect_Magic_Setup
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;============================================================================
-SoundEffect_Handler_Magic:                  ; [$87b5]
+SoundEffect_Magic_Setup:                    ; [$87b5]
     LDA #$32
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0128
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Magic_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Magic_OnTick:                   ; [$87c2]
     LDX a:SoundEffect_State_0128
-    LDA @_return+1,X
-    BNE @LAB_PRG5__87d2
+    LDA SOUNDEFFECT_MAGIC_SQ2_VOL,X
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__87d2:                          ; [$87d2]
+  @_play:                                   ; [$87d2]
     ORA #$50
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$03
     TAX
-    LDA $8806,X
+    LDA SOUNDEFFECT_MAGIC_SQ2_LO,X
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
+    LDA a:SoundEffect_State_Counter
     CMP #$08
     BNE @_return
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     INC a:SoundEffect_State_0128
 
   @_return:                                 ; [$87ff]
@@ -2053,45 +2956,60 @@ SoundEffect_Handler_Magic:                  ; [$87b5]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Magic
+;     SoundEffect_Magic_OnTick
 ;
-BYTE_PRG5__8800:                            ; [$8800]
+SOUNDEFFECT_MAGIC_SQ2_VOL:                  ; [$8800]
     db $0f,$0b,$07,$04,$01,$00              ; [$8800] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Magic
+;     SoundEffect_Magic_OnTick
 ;
-BYTE_PRG5__8806:                            ; [$8806]
+SOUNDEFFECT_MAGIC_SQ2_LO:                   ; [$8806]
     db $b0,$a0,$a8,$98                      ; [$8806] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_OpenDoor
+; TODO: Document SoundEffect_OpenDoor_Setup
 ;
 ; INPUTS:
 ;     None.
 ;
 ; OUTPUTS:
-;     TODO
+;     A
 ;============================================================================
-SoundEffect_Handler_OpenDoor:               ; [$880a]
+SoundEffect_OpenDoor_Setup:                 ; [$880a]
     LDA #$3c
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$37
     STA a:SoundEffect_State_0129
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0128
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_OpenDoor_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_OpenDoor_OnTick:                ; [$881f]
     DEC a:SoundEffect_State_0129
-    BNE @LAB_PRG5__882f
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__882f:                          ; [$882f]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$882f]
+    LDA a:SoundEffect_State_Counter
     LSR A
     LSR A
     EOR #$ff
@@ -2101,30 +3019,30 @@ SoundEffect_Handler_OpenDoor:               ; [$880a]
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$07
     TAY
     LDA #$60
     SEC
-    SBC $8865,Y
+    SBC SOUNDEFFECT_OPEN_DOOR_SQ2_NOISE_LO,Y
     STA a:SQ2_LO
     AND #$0f
     STA a:NOISE_LO
     LDA #$00
     STA a:SQ2_HI
     STA a:NOISE_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_OpenDoor
+;     SoundEffect_OpenDoor_OnTick
 ;
-BYTE_PRG5__8865:                            ; [$8865]
+SOUNDEFFECT_OPEN_DOOR_SQ2_NOISE_LO:         ; [$8865]
     db $00,$03,$0a,$15,$25,$15,$0a,$03      ; [$8865] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Maybe_Typing
+; TODO: Document SoundEffect_Maybe_Typing_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2132,26 +3050,41 @@ BYTE_PRG5__8865:                            ; [$8865]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_Maybe_Typing:           ; [$886d]
+SoundEffect_Maybe_Typing_Setup:             ; [$886d]
     LDA #$28
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
-    LDA a:SOUND_DAT_0124
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Maybe_Typing_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Maybe_Typing_OnTick:            ; [$8877]
+    LDA a:SoundEffect_TicksRemaining_1_
     AND #$01
     BNE @_return
-    LDX a:SoundEffect_MaybeIndex
+    LDX a:SoundEffect_State_Counter
     LDA SOUNDEFFECT_MAYBE_TYPING_NOTES,X
     CMP #$ff
-    BNE @LAB_PRG5__8890
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8890:                          ; [$8890]
+  @_play:                                   ; [$8890]
     JSR SoundEffect_SetNote
-    INC a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
+    LDA a:SoundEffect_State_Counter
     EOR #$ff
     AND #$0f
     ORA #$d4
@@ -2168,7 +3101,7 @@ SoundEffect_Handler_Maybe_Typing:           ; [$886d]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Maybe_Typing
+;     SoundEffect_Maybe_Typing_OnTick
 ;
 SOUNDEFFECT_MAYBE_TYPING_NOTES:             ; [$88b4]
     db $2b,$2d,$2f,$24,$38,$2a,$37,$39,$3b,$24,$38,$42,$2b,$2d,$2f,$18 ; [$88b4]
@@ -2176,7 +3109,7 @@ SOUNDEFFECT_MAYBE_TYPING_NOTES:             ; [$88b4]
     db $ff                                  ; [$88c4] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_ItemPickedUp
+; TODO: Document SoundEffect_ItemPickedUp_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2184,31 +3117,46 @@ SOUNDEFFECT_MAYBE_TYPING_NOTES:             ; [$88b4]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_ItemPickedUp:           ; [$88c5]
+SoundEffect_ItemPickedUp_Setup:             ; [$88c5]
     LDA #$3c
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0128
-    LDX a:SoundEffect_MaybeIndex
-    LDA SOUNDEFFECT_ITEMPICKEDUP_NOTES,X
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_ItemPickedUp_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_ItemPickedUp_OnTick:            ; [$88d2]
+    LDX a:SoundEffect_State_Counter
+    LDA SOUNDEFFECT_ITEM_PICKED_UP_NOTES,X
     CMP #$ff
-    BNE @LAB_PRG5__88e5
+    BNE @_playNote
     INC a:SoundEffect_State_0128
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     RTS
 
-  @LAB_PRG5__88e5:                          ; [$88e5]
+  @_playNote:                               ; [$88e5]
     JSR SoundEffect_SetNote
     LDX a:SoundEffect_State_0128
-    LDA SOUNDEFFECT_ITEMPICKEDUP_SQ2_VOLS,X
-    BNE @LAB_PRG5__88f8
+    LDA SOUNDEFFECT_ITEM_PICKED_UP_SQ2_VOLS,X
+    BNE @_playSQ2
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__88f8:                          ; [$88f8]
+  @_playSQ2:                                ; [$88f8]
     ORA #$90
     STA a:SQ2_VOL
     LDA #$00
@@ -2217,25 +3165,25 @@ SoundEffect_Handler_ItemPickedUp:           ; [$88c5]
     STA a:SQ2_LO
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_ItemPickedUp_OnTick
 ;
-SOUNDEFFECT_ITEMPICKEDUP_SQ2_VOLS:          ; [$8912]
+SOUNDEFFECT_ITEM_PICKED_UP_SQ2_VOLS:        ; [$8912]
     db $0f,$0c,$09,$05,$02,$00              ; [$8912] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_ItemPickedUp
+;     SoundEffect_ItemPickedUp_OnTick
 ;
-SOUNDEFFECT_ITEMPICKEDUP_NOTES:             ; [$8918]
+SOUNDEFFECT_ITEM_PICKED_UP_NOTES:           ; [$8918]
     db $3f,$43,$4a,$55,$5b,$60,$ff          ; [$8918] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_CoinTouchedCommon
+; TODO: Document SoundEffect_CoinTouchedCommon_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2244,61 +3192,73 @@ SOUNDEFFECT_ITEMPICKEDUP_NOTES:             ; [$8918]
 ;     TODO
 ;
 ; XREFS:
-;     SoundEffect_Handler_CoinTouched
+;     SoundEffect_CoinTouched_Setup
 ;============================================================================
-SoundEffect_Handler_CoinTouchedCommon:      ; [$891f]
+SoundEffect_CoinTouchedCommon_Setup:        ; [$891f]
     LDA #$1e
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$50
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$00
     STA a:SoundEffect_State_0128
 
     ;
-    ; XREFS:
-    ;     FUN_PRG5__8ece
+    ; v-- Fall through --v
     ;
-SoundEffect_Handler_CoinTouchedCommon__Loop: ; [$892e]
+
+;============================================================================
+; TODO: Document SoundEffect_CoinTouchedCommon_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;
+; XREFS:
+;     SoundEffect_CoinTouched_OnTick
+;============================================================================
+SoundEffect_CoinTouchedCommon_OnTick:       ; [$892e]
     LDX a:SoundEffect_State_0128
-    LDA SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL_SEQUENCE,X
-    BNE @LAB_PRG5__893e
+    LDA SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL,X
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__893e:                          ; [$893e]
+  @_play:                                   ; [$893e]
     ORA #$d0
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     STA a:SQ2_LO
     CLC
     ADC #$04
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     SEC
     SBC #$10
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     BNE @_return
     INC a:SoundEffect_State_0128
     LDA #$50
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
 
   @_return:                                 ; [$896c]
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CoinTouchedCommon
+;     SoundEffect_CoinTouchedCommon_OnTick
 ;
-SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL_SEQUENCE:  ; [$896d]
+SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL:           ; [$896d]
     db $0f,$0c,$09,$06,$03,$00              ; [$896d] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_MagicHitObstacle
+; TODO: Document SoundEffect_MagicHitObstacle_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2306,26 +3266,41 @@ SOUNDEFFECT_COIN_TOUCHED_SQ2_VOL_SEQUENCE:  ; [$896d]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_MagicHitObstacle:       ; [$8973]
+SoundEffect_MagicHitObstacle_Setup:         ; [$8973]
     LDA #$1e
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$20
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$00
     STA a:SoundEffect_State_0128
-    DEC a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__898f
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_MagicHitObstacle_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_MagicHitObstacle_OnTick:        ; [$8982]
+    DEC a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__898f:                          ; [$898f]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$898f]
+    LDA a:SoundEffect_State_Counter
     LSR A
     AND #$0f
     ORA #$10
     STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$0f
     STA a:NOISE_LO
     LDA #$00
@@ -2333,7 +3308,7 @@ SoundEffect_Handler_MagicHitObstacle:       ; [$8973]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_CursorMoved
+; TODO: Document SoundEffect_CursorMoved_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2341,50 +3316,65 @@ SoundEffect_Handler_MagicHitObstacle:       ; [$8973]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_CursorMoved:            ; [$89a8]
+SoundEffect_CursorMoved_Setup:              ; [$89a8]
     LDA #$16
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$0f
-    STA a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__89bf
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_CursorMoved_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_CursorMoved_OnTick:             ; [$89b2]
+    LDA a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__89bf:                          ; [$89bf]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$89bf]
+    LDA a:SoundEffect_State_Counter
     AND #$0f
     ORA #$50
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$07
     TAY
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$02
     STA a:SoundEffect_State_0128
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$01
     CLC
     ADC a:SoundEffect_State_0128
     TAX
-    LDA SOUNDEFFECT_CURSORMOVED_SQ2_LO,X
+    LDA SOUNDEFFECT_CURSOR_MOVED_SQ2_LO,X
     SEC
     SBC SOUNDEFFECT_CURSORMOVED_SQ2_LO_DELTA,Y
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
-    DEC a:SoundEffect_MaybeIndex
+    DEC a:SoundEffect_State_Counter
     RTS
 
-SOUNDEFFECT_CURSORMOVED_SQ2_LO:             ; [$89f9]
+SOUNDEFFECT_CURSOR_MOVED_SQ2_LO:            ; [$89f9]
     db $51,$34,$b8                          ; [$89f9] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CursorMoved
+;     SoundEffect_CursorMoved_OnTick
 ;
 BYTE_PRG5__89fc:                            ; [$89fc]
     db $93                                  ; [$89fc] byte
@@ -2394,13 +3384,13 @@ SOUNDEFFECT_CURSORMOVED_SQ2_LO_DELTA:       ; [$89fd]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CursorMoved
+;     SoundEffect_CursorMoved_OnTick
 ;
 BYTE_PRG5__8a04:                            ; [$8a04]
     db $01                                  ; [$8a04] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_ShieldHitByMagic
+; TODO: Document SoundEffect_ShieldHitByMagic_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2408,44 +3398,59 @@ BYTE_PRG5__8a04:                            ; [$8a04]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_ShieldHitByMagic:       ; [$8a05]
+SoundEffect_ShieldHitByMagic_Setup:         ; [$8a05]
     LDA #$14
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$10
-    STA a:SoundEffect_MaybeIndex
-    DEC a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__8a1c
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_ShieldHitByMagic_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_ShieldHitByMagic_OnTick:        ; [$8a0f]
+    DEC a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8a1c:                          ; [$8a1c]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$8a1c]
+    LDA a:SoundEffect_State_Counter
     ORA #$90
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$01
     TAX
-    LDA SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_SEQUENCE,X
+    LDA SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO,X
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
     RTS
 
-SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_SEQUENCE: ; [$8a3b]
+SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO:     ; [$8a3b]
     db $30                                  ; [0]:
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_ShieldHitByMagic
+;     SoundEffect_ShieldHitByMagic_OnTick
 ;
-SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_SEQUENCE_1_: ; [$8a3c]
+SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_1_:  ; [$8a3c]
     db $1a                                  ; [1]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_CharacterInput
+; TODO: Document SoundEffect_CharacterInput_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2453,24 +3458,39 @@ SOUNDEFFECT_SHIELD_HIT_BY_MAGIC_SQ2_LO_SEQUENCE_1_: ; [$8a3c]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_CharacterInput:         ; [$8a3d]
+SoundEffect_CharacterInput_Setup:           ; [$8a3d]
     LDA #$1e
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
-    INC a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_CharacterInput_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_CharacterInput_OnTick:          ; [$8a47]
+    INC a:SoundEffect_State_Counter
+    LDA a:SoundEffect_State_Counter
     LSR A
     LSR A
     TAX
-    LDA SOUNDEFFECT_CHARINPUT_NOTES,X
+    LDA SOUNDEFFECT_CHAR_INPUT_NOTES,X
     CMP #$ff
-    BNE @LAB_PRG5__8a5f
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8a5f:                          ; [$8a5f]
+  @_play:                                   ; [$8a5f]
     JSR SoundEffect_SetNote
     LDA #$bf
     STA a:SQ2_VOL
@@ -2484,9 +3504,9 @@ SoundEffect_Handler_CharacterInput:         ; [$8a3d]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_CharacterInput
+;     SoundEffect_CharacterInput_OnTick
 ;
-SOUNDEFFECT_CHARINPUT_NOTES:                ; [$8a79]
+SOUNDEFFECT_CHAR_INPUT_NOTES:               ; [$8a79]
     db $37                                  ; [0]:
     db $39                                  ; [1]:
     db $32                                  ; [2]:
@@ -2494,7 +3514,7 @@ SOUNDEFFECT_CHARINPUT_NOTES:                ; [$8a79]
     db $ff                                  ; [4]:
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_PasswordCharInput
+; TODO: Document SoundEffect_PasswordCharInput_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2502,11 +3522,11 @@ SOUNDEFFECT_CHARINPUT_NOTES:                ; [$8a79]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_PasswordCharInput:      ; [$8a7e]
+SoundEffect_PasswordCharInput_Setup:        ; [$8a7e]
     LDA #$0a
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$02
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$81
     STA a:SQ2_VOL
     LDA #$00
@@ -2518,7 +3538,7 @@ SoundEffect_Handler_PasswordCharInput:      ; [$8a7e]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_PushBlock
+; TODO: Document SoundEffect_PushBlock_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2526,39 +3546,54 @@ SoundEffect_Handler_PasswordCharInput:      ; [$8a7e]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-SoundEffect_Handler_PushBlock:              ; [$8a9d]
+SoundEffect_PushBlock_Setup:                ; [$8a9d]
     LDA #$20
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$1e
-    STA a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__8ab4
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_PushBlock_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_PushBlock_OnTick:               ; [$8aa7]
+    LDA a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8ab4:                          ; [$8ab4]
+  @_play:                                   ; [$8ab4]
     LDA #$1f
     STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$01
     TAX
-    LDA SOUNDEFFECT_PUSH_BLOCK_NOISE_LO_SEQUENCE,X
+    LDA SOUNDEFFECT_PUSH_BLOCK_NOISE_LO,X
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
-    DEC a:SoundEffect_MaybeIndex
+    DEC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_PushBlock
+;     SoundEffect_PushBlock_OnTick
 ;
-SOUNDEFFECT_PUSH_BLOCK_NOISE_LO_SEQUENCE:   ; [$8ace]
+SOUNDEFFECT_PUSH_BLOCK_NOISE_LO:            ; [$8ace]
     db $0f,$0b                              ; [$8ace] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_CoinDropped
+; TODO: Document SoundEffect_CoinDropped_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2566,25 +3601,40 @@ SOUNDEFFECT_PUSH_BLOCK_NOISE_LO_SEQUENCE:   ; [$8ace]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_CoinDropped:            ; [$8ad0]
+SoundEffect_CoinDropped_Setup:              ; [$8ad0]
     LDA #$32
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$08
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_CoinDropped_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_CoinDropped_OnTick:             ; [$8ada]
     LDA #$86
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     CMP #$05
-    BNE @LAB_PRG5__8af5
+    BNE @_checkUpdateCounter
     LDA #$35
     STA a:SQ2_LO
     LDA #$20
     STA a:SQ2_HI
 
-  @LAB_PRG5__8af5:                          ; [$8af5]
-    DEC a:SoundEffect_MaybeIndex
+  @_checkUpdateCounter:                     ; [$8af5]
+    DEC a:SoundEffect_State_Counter
     BNE @_return
     LDA #$20
     STA a:SQ2_LO
@@ -2596,7 +3646,7 @@ SoundEffect_Handler_CoinDropped:            ; [$8ad0]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_0x48
+; TODO: Document SoundEffect_0x48_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2604,25 +3654,40 @@ SoundEffect_Handler_CoinDropped:            ; [$8ad0]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_0x48:                   ; [$8b08]
+SoundEffect_0x48_Setup:                     ; [$8b08]
     LDA #$23
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$16
     STA a:SoundEffect_State_0128
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$1e
     STA a:SoundEffect_State_0129
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_0x48_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_0x48_OnTick:                    ; [$8b1f]
     DEC a:SoundEffect_State_0129
-    BNE @LAB_PRG5__8b2f
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8b2f:                          ; [$8b2f]
-    LDA a:SOUND_DAT_0124
+  @_play:                                   ; [$8b2f]
+    LDA a:SoundEffect_TicksRemaining_1_
     AND #$01
     BNE @_return
     LDA #$df
@@ -2631,11 +3696,11 @@ SoundEffect_Handler_0x48:                   ; [$8b08]
     STA a:NOISE_VOL
     LDA #$a3
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     STA a:SQ2_LO
     CLC
     ADC #$10
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     DEC a:SoundEffect_State_0128
     LDA a:SoundEffect_State_0128
     AND #$0f
@@ -2648,7 +3713,7 @@ SoundEffect_Handler_0x48:                   ; [$8b08]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Pakukame
+; TODO: Document SoundEffect_Pakukame_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2656,19 +3721,34 @@ SoundEffect_Handler_0x48:                   ; [$8b08]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_Pakukame:               ; [$8b65]
+SoundEffect_Pakukame_Setup:                 ; [$8b65]
     LDA #$46
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
-    LDA a:SOUND_DAT_0124
-    BNE @LAB_PRG5__8b7c
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Pakukame_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Pakukame_OnTick:                ; [$8b6f]
+    LDA a:SoundEffect_TicksRemaining_1_
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8b7c:                          ; [$8b7c]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$8b7c]
+    LDA a:SoundEffect_State_Counter
     AND #$3c
     LSR A
     LSR A
@@ -2679,27 +3759,27 @@ SoundEffect_Handler_Pakukame:               ; [$8b65]
     STA a:SQ2_SWEEP
     LDA #$01
     STA a:SQ2_HI
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$07
     TAX
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     CLC
     ADC #$32
     SEC
-    SBC SOUNDEFFECT_PAKUKAME_SQ2_LO_SEQUENCE,X
+    SBC SOUNDEFFECT_PAKUKAME_SQ2_LO,X
     STA a:SQ2_LO
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Pakukame
+;     SoundEffect_Pakukame_OnTick
 ;
-SOUNDEFFECT_PAKUKAME_SQ2_LO_SEQUENCE:       ; [$8bab]
+SOUNDEFFECT_PAKUKAME_SQ2_LO:                ; [$8bab]
     db $00,$08,$14,$20,$2d,$20,$14,$08      ; [$8bab] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_FillHPOrMP
+; TODO: Document SoundEffect_FillHPOrMP_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2707,57 +3787,72 @@ SOUNDEFFECT_PAKUKAME_SQ2_LO_SEQUENCE:       ; [$8bab]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_FillHPOrMP:             ; [$8bb3]
+SoundEffect_FillHPOrMP_Setup:               ; [$8bb3]
     LDA #$23
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$19
     STA a:SoundEffect_State_0129
     STA a:SoundEffect_State_0128
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_FillHPOrMP_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_FillHPOrMP_OnTick:              ; [$8bc5]
     DEC a:SoundEffect_State_0128
-    BNE @LAB_PRG5__8bd2
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8bd2:                          ; [$8bd2]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$8bd2]
+    LDA a:SoundEffect_State_Counter
     AND #$03
     TAY
-    LDA SOUNDEFFECT_FILLHPORMP_SQ2_VOL_SEQUENCE,Y
+    LDA SOUNDEFFECT_FILL_HP_OR_MP_SQ2_VOL,Y
     STA a:SQ2_VOL
     LDA #$aa
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$01
     TAX
     LDA FOREPAW_BLOCKS_SCREEN_12,X
     ORA a:SoundEffect_State_0129
-    SBC a:SoundEffect_MaybeIndex
+    SBC a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0129
     STA a:SQ2_LO
     LDA #$00
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_FillHPOrMP_OnTick
 ;
-SOUNDEFFECT_FILLHPORMP_SQ2_VOL_SEQUENCE:    ; [$8c01]
+SOUNDEFFECT_FILL_HP_OR_MP_SQ2_VOL:          ; [$8c01]
     db $1f,$5f,$9f,$df                      ; [$8c01] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_FillHPOrMP
+;     SoundEffect_FillHPOrMP_OnTick
 ;
-BYTE_PRG5__8c05:                            ; [$8c05]
+SOUNDEFFECT_FILL_HP_OR_MP_SQ2_LO:           ; [$8c05]
     db $60,$30                              ; [$8c05] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Tilte
+; TODO: Document SoundEffect_Tilte_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2765,28 +3860,43 @@ BYTE_PRG5__8c05:                            ; [$8c05]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_Tilte:                  ; [$8c07]
+SoundEffect_Tilte_Setup:                    ; [$8c07]
     LDA #$1e
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$0f
     STA a:SoundEffect_State_0129
     LDA #$01
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$07
     STA a:SoundEffect_State_0128
-    DEC a:SoundEffect_MaybeIndex
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Tilte_OnTick
+;
+; INPUTS:
+;     A
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Tilte_OnTick:                   ; [$8c1e]
+    DEC a:SoundEffect_State_Counter
     BNE @_return
     DEC a:SoundEffect_State_0128
     LDA a:SoundEffect_State_0128
-    STA a:SoundEffect_MaybeIndex
-    BNE @LAB_PRG5__8c39
+    STA a:SoundEffect_State_Counter
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8c39:                          ; [$8c39]
+  @_play:                                   ; [$8c39]
     LDA #$48
     STA a:SQ2_VOL
     LDA #$00
@@ -2810,7 +3920,7 @@ SoundEffect_Handler_Tilte:                  ; [$8c07]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Maybe_Step
+; TODO: Document SoundEffect_Maybe_Step_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2818,23 +3928,38 @@ SoundEffect_Handler_Tilte:                  ; [$8c07]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_Maybe_Step:             ; [$8c69]
+SoundEffect_Maybe_Step_Setup:               ; [$8c69]
     LDA #$05
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$03
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Maybe_Step_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Maybe_Step_OnTick:              ; [$8c73]
     LDA #$01
     STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     CMP #$03
-    BNE @LAB_PRG5__8c89
+    BNE @_updateCheckCounter
     LDA #$0a
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
 
-  @LAB_PRG5__8c89:                          ; [$8c89]
-    DEC a:SoundEffect_MaybeIndex
+  @_updateCheckCounter:                     ; [$8c89]
+    DEC a:SoundEffect_State_Counter
     BNE @_return
     LDA #$02
     STA a:NOISE_LO
@@ -2846,7 +3971,7 @@ SoundEffect_Handler_Maybe_Step:             ; [$8c69]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_PlayerDied
+; TODO: Document SoundEffect_PlayerDied_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2854,30 +3979,45 @@ SoundEffect_Handler_Maybe_Step:             ; [$8c69]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_PlayerDied:             ; [$8c9c]
+SoundEffect_PlayerDied_Setup:               ; [$8c9c]
     LDA #$41
-    STA a:SoundEffects
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0125
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_2_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$3c
     STA a:SoundEffect_State_0128
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_PlayerDied_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_PlayerDied_OnTick:              ; [$8cb4]
     LDA #$00
     STA a:TRI_LINEAR
     STA a:TRI_LO
     STA a:TRI_LO
     DEC a:SoundEffect_State_0128
-    BNE @LAB_PRG5__8cd2
+    BNE @_play
     LDA #$10
     STA a:SQ1_VOL
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8cd2:                          ; [$8cd2]
-    LDA a:SoundEffect_MaybeIndex
+  @_play:                                   ; [$8cd2]
+    LDA a:SoundEffect_State_Counter
     EOR #$ff
     LSR A
     LSR A
@@ -2891,14 +4031,14 @@ SoundEffect_Handler_PlayerDied:             ; [$8c9c]
     LDA #$00
     STA a:SQ2_SWEEP
     STA a:SQ1_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$03
     TAX
-    LDA SOUNDEFFECT_PLAYERDIED_NOTES,X
+    LDA SOUNDEFFECT_PLAYER_DIED_NOTES,X
     JSR SoundEffect_SetNote
     LDA a:SoundEffect_Note_Low
     CLC
-    ADC a:SoundEffect_MaybeIndex
+    ADC a:SoundEffect_State_Counter
     STA a:SQ2_LO
     CLC
     ADC #$10
@@ -2906,23 +4046,23 @@ SoundEffect_Handler_PlayerDied:             ; [$8c9c]
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
     STA a:SQ1_HI
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$03
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
-SOUNDEFFECT_PLAYERDIED_NOTES:               ; [$8d28]
+SOUNDEFFECT_PLAYER_DIED_NOTES:              ; [$8d28]
     db $4f,$32,$4c,$3c                      ; [$8d28] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_LadderDropped
+; TODO: Document SoundEffect_LadderDropped_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2930,23 +4070,38 @@ SOUNDEFFECT_PLAYERDIED_NOTES:               ; [$8d28]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_LadderDropped:          ; [$8d2c]
+SoundEffect_LadderDropped_Setup:            ; [$8d2c]
     LDA #$0a
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$03
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_LadderDropped_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_LadderDropped_OnTick:           ; [$8d36]
     LDA #$07
     STA a:NOISE_VOL
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     CMP #$03
-    BNE @LAB_PRG5__8d4c
+    BNE @_updateCheckCounter
     LDA #$0f
     STA a:NOISE_LO
     LDA #$18
     STA a:NOISE_HI
 
-  @LAB_PRG5__8d4c:                          ; [$8d4c]
-    DEC a:SoundEffect_MaybeIndex
+  @_updateCheckCounter:                     ; [$8d4c]
+    DEC a:SoundEffect_State_Counter
     BNE @_return
     LDA #$05
     STA a:NOISE_LO
@@ -2958,7 +4113,7 @@ SoundEffect_Handler_LadderDropped:          ; [$8d2c]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_ShowPlayerMenu
+; TODO: Document SoundEffect_ShowPlayerMenu_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -2966,23 +4121,38 @@ SoundEffect_Handler_LadderDropped:          ; [$8d2c]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_ShowPlayerMenu:         ; [$8d5f]
+SoundEffect_ShowPlayerMenu_Setup:           ; [$8d5f]
     LDA #$23
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0128
     LDA #$20
     STA a:SoundEffect_State_0129
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_ShowPlayerMenu_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_ShowPlayerMenu_OnTick:          ; [$8d71]
     DEC a:SoundEffect_State_0129
     LDA a:SoundEffect_State_0129
     LSR A
-    BNE @LAB_PRG5__8d82
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8d82:                          ; [$8d82]
+  @_play:                                   ; [$8d82]
     ORA #$d0
     STA a:SQ2_VOL
     LDA #$00
@@ -2990,29 +4160,29 @@ SoundEffect_Handler_ShowPlayerMenu:         ; [$8d5f]
     LDA a:SoundEffect_State_0128
     AND #$03
     TAX
-    LDA SOUNDEFFECT_SHOWPLAYERMENU_NOTES,X
+    LDA SOUNDEFFECT_SHOW_PLAYER_MENU_NOTES,X
     JSR SoundEffect_SetNote
     LDA a:SoundEffect_Note_Low
     SEC
-    SBC a:SoundEffect_MaybeIndex
+    SBC a:SoundEffect_State_Counter
     STA a:SQ2_LO
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
-    INC a:SoundEffect_MaybeIndex
-    INC a:SoundEffect_MaybeIndex
-    INC a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
+    INC a:SoundEffect_State_Counter
+    INC a:SoundEffect_State_Counter
     INC a:SoundEffect_State_0128
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_ShowPlayerMenu_OnTick
 ;
-SOUNDEFFECT_SHOWPLAYERMENU_NOTES:           ; [$8db5]
+SOUNDEFFECT_SHOW_PLAYER_MENU_NOTES:         ; [$8db5]
     db $5b,$4f,$43,$37                      ; [$8db5] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_GoldAmountChanged
+; TODO: Document SoundEffect_GoldAmountChanged_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -3020,11 +4190,11 @@ SOUNDEFFECT_SHOWPLAYERMENU_NOTES:           ; [$8db5]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_GoldAmountChanged:      ; [$8db9]
+SoundEffect_GoldAmountChanged_Setup:        ; [$8db9]
     LDA #$0a
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$02
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$82
     STA a:SQ2_VOL
     LDA #$00
@@ -3036,7 +4206,7 @@ SoundEffect_Handler_GoldAmountChanged:      ; [$8db9]
     RTS
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_Maybe_UseSpecialItem2
+; TODO: Document SoundEffect_Maybe_UseSpecialItem2_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -3044,37 +4214,52 @@ SoundEffect_Handler_GoldAmountChanged:      ; [$8db9]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
+SoundEffect_Maybe_UseSpecialItem2_Setup:    ; [$8dd8]
     LDA #$44
-    STA a:SOUND_DAT_0124
-    STA a:SOUND_DAT_0126
+    STA a:SoundEffect_TicksRemaining_1_
+    STA a:SoundEffect_TicksRemaining_3_
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SoundEffect_State_0128
     STA a:SoundEffect_State_0129
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_Maybe_UseSpecialItem2_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_Maybe_UseSpecialItem2_OnTick:   ; [$8deb]
     LDA a:SoundEffect_State_0129
     LSR A
     TAX
     LDA SOUNDEFFECT_SPECIALITEM2_NOISE_VOL,X
-    BNE @LAB_PRG5__8e00
+    BNE @_hasNoise
     LDA #$10
     STA a:SQ2_VOL
     STA a:NOISE_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8e00:                          ; [$8e00]
+  @_hasNoise:                               ; [$8e00]
     ORA #$90
     STA a:NOISE_VOL
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     ASL A
     STA a:SoundEffect_State_0128
-    LDX a:SoundEffect_MaybeIndex
+    LDX a:SoundEffect_State_Counter
     LDA SOUNDEFFECT_SPECIALITEM2_NOTES,X
     CMP #$ff
-    BEQ @LAB_PRG5__8e56
+    BEQ @_hasNotes
     JSR SoundEffect_SetNote
     LDA a:SoundEffect_Note_Low
     CLC
@@ -3082,18 +4267,18 @@ SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
     STA a:SQ2_LO
     LDA a:SoundEffect_Note_High
     STA a:SQ2_HI
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     AND #$01
     TAX
     LDA SOUNDEFFECT_SPECIALITEM2_NOISE_LO,X
     CLC
-    ADC a:SoundEffect_MaybeIndex
+    ADC a:SoundEffect_State_Counter
     AND #$0f
     STA a:NOISE_LO
     LDA #$00
     STA a:NOISE_HI
-    INC a:SoundEffect_MaybeIndex
-    LDA a:SoundEffect_MaybeIndex
+    INC a:SoundEffect_State_Counter
+    LDA a:SoundEffect_State_Counter
     AND #$07
     BNE @_return
     INC a:SoundEffect_State_0129
@@ -3101,36 +4286,36 @@ SoundEffect_Handler_Maybe_UseSpecialItem2:  ; [$8dd8]
   @_return:                                 ; [$8e55]
     RTS
 
-  @LAB_PRG5__8e56:                          ; [$8e56]
+  @_hasNotes:                               ; [$8e56]
     LDA #$00
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     INC a:SoundEffect_State_0129
     RTS
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
 ;
 SOUNDEFFECT_SPECIALITEM2_NOISE_VOL:         ; [$8e5f]
     db $0f,$0d,$09,$05,$00                  ; [$8e5f] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
 ;
 SOUNDEFFECT_SPECIALITEM2_NOISE_LO:          ; [$8e64]
     db $0c,$07                              ; [$8e64] byte
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
 ;
 SOUNDEFFECT_SPECIALITEM2_NOTES:             ; [$8e66]
     db $24,$27,$2b,$30,$48,$4b,$4f,$54,$33,$44,$52,$57,$57,$5c,$62,$ff ; [$8e66]
                                                                        ; byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_BreadTouched
+; TODO: Document SoundEffect_BreadTouched_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -3138,34 +4323,49 @@ SOUNDEFFECT_SPECIALITEM2_NOTES:             ; [$8e66]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_BreadTouched:           ; [$8e76]
+SoundEffect_BreadTouched_Setup:             ; [$8e76]
     LDA #$18
-    STA a:SOUND_DAT_0124
+    STA a:SoundEffect_TicksRemaining_1_
     LDA #$ff
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     LDA #$00
     STA a:SoundEffect_State_0128
     STA a:SoundEffect_State_0129
+
+    ;
+    ; v-- Fall through --v
+    ;
+
+;============================================================================
+; TODO: Document SoundEffect_BreadTouched_OnTick
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     A
+;============================================================================
+SoundEffect_BreadTouched_OnTick:            ; [$8e88]
     LDA a:SoundEffect_State_0128
     LSR A
     LSR A
     TAX
     LDA SOUNDEFFECT_BREADTOUCHED_SQ2_HI,X
     STA a:SoundEffect_State_0129
-    BNE @LAB_PRG5__8e9e
+    BNE @_play
     LDA #$10
     STA a:SQ2_VOL
     JMP Sound_ResetCurrentSound
 
-  @LAB_PRG5__8e9e:                          ; [$8e9e]
+  @_play:                                   ; [$8e9e]
     LDA #$df
     STA a:SQ2_VOL
     LDA #$00
     STA a:SQ2_SWEEP
-    LDA a:SoundEffect_MaybeIndex
+    LDA a:SoundEffect_State_Counter
     SEC
     SBC a:SoundEffect_State_0129
-    STA a:SoundEffect_MaybeIndex
+    STA a:SoundEffect_State_Counter
     STA a:SQ2_LO
     TXA
     AND #$03
@@ -3178,13 +4378,13 @@ SoundEffect_Handler_BreadTouched:           ; [$8e76]
 
 ;
 ; XREFS:
-;     SoundEffect_Handler_BreadTouched
+;     SoundEffect_BreadTouched_OnTick
 ;
 SOUNDEFFECT_BREADTOUCHED_SQ2_HI:            ; [$8ec5]
     db $1f,$36,$63,$76,$c8,$00              ; [$8ec5] byte
 
 ;============================================================================
-; TODO: Document SoundEffect_Handler_CoinTouched
+; TODO: Document SoundEffect_CoinTouched_Setup
 ;
 ; INPUTS:
 ;     None.
@@ -3192,11 +4392,11 @@ SOUNDEFFECT_BREADTOUCHED_SQ2_HI:            ; [$8ec5]
 ; OUTPUTS:
 ;     TODO
 ;============================================================================
-SoundEffect_Handler_CoinTouched:            ; [$8ecb]
-    JMP SoundEffect_Handler_CoinTouchedCommon
+SoundEffect_CoinTouched_Setup:              ; [$8ecb]
+    JMP SoundEffect_CoinTouchedCommon_Setup
 
 ;============================================================================
-; TODO: Document FUN_PRG5__8ece
+; TODO: Document SoundEffect_CoinTouched_OnTick
 ;
 ; INPUTS:
 ;     None.
@@ -3204,8 +4404,8 @@ SoundEffect_Handler_CoinTouched:            ; [$8ecb]
 ; OUTPUTS:
 ;     A
 ;============================================================================
-FUN_PRG5__8ece:                             ; [$8ece]
-    JMP SoundEffect_Handler_CoinTouchedCommon__Loop
+SoundEffect_CoinTouched_OnTick:             ; [$8ece]
+    JMP SoundEffect_CoinTouchedCommon_OnTick
 
 ;============================================================================
 ; TODO: Document SoundEffect_SetNote
@@ -3217,14 +4417,14 @@ FUN_PRG5__8ece:                             ; [$8ece]
 ;     TODO
 ;
 ; XREFS:
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShowPlayerMenu
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
 ;============================================================================
 SoundEffect_SetNote:                        ; [$8ed1]
     SEC
@@ -3232,7 +4432,7 @@ SoundEffect_SetNote:                        ; [$8ed1]
 
 
     ;
-    ; Loop, subtracting 12 (number of notes in our lookup
+    ; Loop, subtracting 12 (number of semitones in our lookup
     ; table) each iteration, until < 0.
     ;
     ; The number of loop iterations will be used later to
@@ -3277,115 +4477,115 @@ SoundEffect_SetNote:                        ; [$8ed1]
 ; music data for each channel.
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;============================================================================
 
 ;
 ; XREFS:
-;     Audio_LoadMusic
+;     Music_Load
 ;
-MUSIC_LOOKUP:                               ; [$8efa]
+MSCRIPTS_LOOKUP:                            ; [$8efa]
     db $ff                                  ; [$8efa] byte
 
 ;
 ; XREFS:
-;     MScript_Op_Restart
+;     MScript_Op_RestartChannel
 ;
-MUSIC_LOOKUP_START_THEME:                   ; [$8efb]
-    dw $8f7c                                ; [0]:
-    dw $9020                                ; [1]:
-    dw $9161                                ; [2]:
-    dw $928e                                ; [3]:
+MSCRIPTS_TITLESCREEN:                       ; [$8efb]
+    dw MSCRIPT_TITLESCREEN_SQ1              ; [0]:
+    dw MSCRIPT_TITLESCREEN_SQ2              ; [1]:
+    dw MSCRIPT_TITLESCREEN_TRI              ; [2]:
+    dw BYTE_PRG5__928e                      ; [3]:
 
-MUSIC_LOOKUP_DAYBREAK:                      ; [$8f03]
-    dw $93b9                                ; [0]:
-    dw $9458                                ; [1]:
-    dw $9540                                ; [2]:
-    dw $9660                                ; [3]:
+MSCRIPTS_DAYBREAK:                          ; [$8f03]
+    dw MSCRIPT_DAYBREAK_SQ1                 ; [0]:
+    dw MSCRIPT_DAYBREAK_SQ2                 ; [1]:
+    dw MSCRIPT_DAYBREAK_TRI                 ; [2]:
+    dw MSCRIPT_DAYBREAK_NOISE               ; [3]:
 
-MUSIC_LOOKUP_APOLUNE:                       ; [$8f0b]
-    dw $9662                                ; [0]:
-    dw $971c                                ; [1]:
-    dw $987a                                ; [2]:
-    dw $9a48                                ; [3]:
+MSCRIPTS_APOLUNE:                           ; [$8f0b]
+    dw MSCRIPT_APOLUNE_SQ1                  ; [0]:
+    dw MSCRIPT_APOLUNE_SQ2                  ; [1]:
+    dw MSCRIPT_APOLUNE_TRI                  ; [2]:
+    dw MSCRIPT_APOLUNE_NOISE                ; [3]:
 
-MUSIC_LOOKUP_CONFLATE:                      ; [$8f13]
-    dw $9a92                                ; [0]:
-    dw $9b15                                ; [1]:
-    dw $9bbd                                ; [2]:
-    dw $9c5f                                ; [3]:
+MSCRIPTS_CONFLATE:                          ; [$8f13]
+    dw MSCRIPT_CONFLATE_SQ1                 ; [0]:
+    dw MSCRIPT_CONFLATE_SQ2                 ; [1]:
+    dw MSCRIPT_CONFLATE_TRI                 ; [2]:
+    dw MSCRIPT_CONFLATE_NOISE               ; [3]:
 
-MUSIC_LOOKUP_FOREPAW:                       ; [$8f1b]
-    dw $9d38                                ; [0]:
-    dw $9daf                                ; [1]:
-    dw $9e73                                ; [2]:
-    dw $9ee0                                ; [3]:
+MSCRIPTS_FOREPAW:                           ; [$8f1b]
+    dw MSCRIPT_FOREPAW_SQ1                  ; [0]:
+    dw MSCRIPT_FOREPAW_SQ2                  ; [1]:
+    dw MSCRIPT_FOREPAW_TRI                  ; [2]:
+    dw MSCRIPT_FOREPAW_NOISE                ; [3]:
 
-MUSIC_LOOKUP_TOWER:                         ; [$8f23]
-    dw $9ee2                                ; [0]:
-    dw $9f67                                ; [1]:
-    dw $9ffa                                ; [2]:
-    dw $a0b1                                ; [3]:
+MSCRIPTS_TOWER:                             ; [$8f23]
+    dw MSCRIPT_TOWER_SQ1                    ; [0]:
+    dw MSCRIPT_TOWER_SQ2                    ; [1]:
+    dw MSCRIPT_TOWER_TRI                    ; [2]:
+    dw MSCRIPT_TOWER_NOISE                  ; [3]:
 
-MUSIC_LOOKUP_EOLIS:                         ; [$8f2b]
-    dw $a163                                ; [0]:
-    dw $a21b                                ; [1]:
-    dw $a2d1                                ; [2]:
-    dw $a3b8                                ; [3]:
+MSCRIPTS_EOLIS:                             ; [$8f2b]
+    dw MSCRIPT_EOLIS_SQ1                    ; [0]:
+    dw MSCRIPT_EOLIS_SQ2                    ; [1]:
+    dw MSCRIPT_EOLIS_TRI                    ; [2]:
+    dw MSCRIPT_EOLIS_NOISE                  ; [3]:
 
-MUSIC_LOOKUP_DEATH:                         ; [$8f33]
-    dw $a4a1                                ; [0]:
-    dw $a530                                ; [1]:
-    dw $a5bb                                ; [2]:
-    dw $a65c                                ; [3]:
+MSCRIPTS_MANTRA:                            ; [$8f33]
+    dw MSCRIPT_MANTRA_SQ1                   ; [0]:
+    dw MSCRIPT_MANTRA_SQ2                   ; [1]:
+    dw MSCRIPT_MANTRA_TRI                   ; [2]:
+    dw MSCRIPT_MANTRA_NOISE                 ; [3]:
 
-MUSIC_LOOKUP_MASCON_VICTIM:                 ; [$8f3b]
-    dw $a65e                                ; [0]:
-    dw $a6b0                                ; [1]:
-    dw $a700                                ; [2]:
-    dw $a78a                                ; [3]:
+MSCRIPTS_MASCON_VICTIM:                     ; [$8f3b]
+    dw MSCRIPT_MASCON_VICTIM_SQ1            ; [0]:
+    dw MSCRIPT_MASCON_VICTIM_SQ2            ; [1]:
+    dw MSCRIPT_MASCON_VICTIM_TRI            ; [2]:
+    dw MSCRIPT_MASCON_VICTIM_NOISE          ; [3]:
 
-MUSIC_LOOKUP_BOSS:                          ; [$8f43]
-    dw $a7b9                                ; [0]:
-    dw $a816                                ; [1]:
-    dw $a874                                ; [2]:
-    dw $a8f8                                ; [3]:
+MSCRIPTS_BOSS:                              ; [$8f43]
+    dw MSCRIPT_BOSS_SQ1                     ; [0]:
+    dw MSCRIPT_BOSS_SQ2                     ; [1]:
+    dw MSCRIPT_BOSS_TRI                     ; [2]:
+    dw MSCRIPT_BOSS_NOISE                   ; [3]:
 
-MUSIC_LOOKUP_HOURGLASS:                     ; [$8f4b]
-    dw $a8fa                                ; [0]:
-    dw $a93e                                ; [1]:
-    dw $a982                                ; [2]:
-    dw $aa1c                                ; [3]:
+MSCRIPTS_HOURGLASS:                         ; [$8f4b]
+    dw MSCRIPT_HOURGLASS_SQ1                ; [0]:
+    dw MSCRIPT_HOURGLASS_SQ2                ; [1]:
+    dw MSCRIPT_HOURGLASS_TRI                ; [2]:
+    dw MSCRIPT_HOURGLASS_NOISE              ; [3]:
 
-MUSIC_LOOKUP_ENDING:                        ; [$8f53]
-    dw $aa87                                ; [0]:
-    dw $ab47                                ; [1]:
-    dw $ac99                                ; [2]:
-    dw $addd                                ; [3]:
+MSCRIPTS_ENDING:                            ; [$8f53]
+    dw MSCRIPT_ENDING_SQ1                   ; [0]:
+    dw MSCRIPT_ENDING_SQ2                   ; [1]:
+    dw MSCRIPT_ENDING_TRI                   ; [2]:
+    dw MSCRIPT_ENDING_NOISE                 ; [3]:
 
-MUSIC_LOOKUP_KINGS_ROOM:                    ; [$8f5b]
-    dw $af20                                ; [0]:
-    dw $af49                                ; [1]:
-    dw $af72                                ; [2]:
-    dw $afaa                                ; [3]:
+MSCRIPTS_KINGS_ROOM:                        ; [$8f5b]
+    dw MSCRIPT_KINGS_ROOM_SQ1               ; [0]:
+    dw MSCRIPT_KINGS_ROOM_SQ2               ; [1]:
+    dw MSCRIPT_KINGS_ROOM_TRI               ; [2]:
+    dw MSCRIPT_KINGS_ROOM_NOISE             ; [3]:
 
-MUSIC_LOOKUP_TEMPLE:                        ; [$8f63]
-    dw $afac                                ; [0]:
-    dw $b007                                ; [1]:
-    dw $b042                                ; [2]:
-    dw $b073                                ; [3]:
+MSCRIPTS_TEMPLE:                            ; [$8f63]
+    dw MSCRIPT_TEMPLE_SQ1                   ; [0]:
+    dw MSCRIPT_TEMPLE_SQ2                   ; [1]:
+    dw MSCRIPT_TEMPLE_TRI                   ; [2]:
+    dw MSCRIPT_TEMPLE_NOISE                 ; [3]:
 
-MUSIC_LOOKUP_SHOP:                          ; [$8f6b]
-    dw $b075                                ; [0]:
-    dw $b0b8                                ; [1]:
-    dw $b0fb                                ; [2]:
-    dw $b142                                ; [3]:
+MSCRIPTS_SHOP:                              ; [$8f6b]
+    dw MSCRIPT_SHOP_SQ1                     ; [0]:
+    dw MSCRIPT_SHOP_SQ2                     ; [1]:
+    dw MSCRIPT_SHOP_TRI                     ; [2]:
+    dw MSCRIPT_SHOP_NOISE                   ; [3]:
 
-MUSIC_LOOKUP_EVIL_FORTRESS:                 ; [$8f73]
-    dw $b144                                ; [0]:
-    dw $b1cc                                ; [1]:
-    dw $b277                                ; [2]:
-    dw $b321                                ; [3]:
+MSCRIPTS_EVIL_FORTRESS:                     ; [$8f73]
+    dw MSCRIPT_EVIL_FORTRESS_SQ1            ; [0]:
+    dw MSCRIPT_EVIL_FORTRESS_SQ2            ; [1]:
+    dw MSCRIPT_EVIL_FORTRESS_TRI            ; [2]:
+    dw MSCRIPT_EVIL_FORTRESS_NOISE          ; [3]:
     db $ff                                  ; [$8f7b] byte
 
 
@@ -3393,750 +4593,3659 @@ MUSIC_LOOKUP_EVIL_FORTRESS:                 ; [$8f73]
 ; Music for the start screen.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_START_THEME [$PRG5::8efb]
+;     MSCRIPTS_TITLESCREEN [$PRG5::8efb]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_START_THEME [$PRG5::8efb]
+;     MSCRIPTS_TITLESCREEN [$PRG5::8efb]
 ;
-MSCRIPT_START_THEME_SQ1:                    ; [$8f7c]
-    db MSCRIPT_OP_MAYBE_SET_8BITCOUNTER     ; [$8f7c] MScriptOp
-    db $ff                                  ; [$8f7d] byte
-
-    db MSCRIPT_OP_SET_SQ_VOL
-    db $00                                  ; [$8f7f] byte
-
-    db MSCRIPT_OP_MAYBE_SET_0172
-    db $d0                                  ; [$8f81] byte
-
-    db MSCRIPT_OP_SET_SQ_DECAY_MODE
-    db $00                                  ; [$8f83] byte
-
-    db MSCRIPT_OP_SET_SQ1_HIGH
-    db $f4,$86,$1f,$21,$23,$24,$26,$28,$29,$2a,$2b,$2d,$2f,$30,$32,$34 ; [$8f85]
-                                                                       ; byte
-    db $35,$36                              ; [$8f95] byte
-
-    db MSCRIPT_OP_MAYBE_SET_0172
-    db $d0                                  ; [$8f98] byte
-
-    db MSCRIPT_OP_BEGIN_LOOP
-    db $02,$b0,$37,$3c,$3e,$45,$c8,$43,$8c,$3c,$3e,$3f,$3c,$3f,$3e,$00 ; [$8f9a]
-                                                                       ; byte
-    db $3b,$98,$37                          ; [$8faa] byte
-
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_BEGIN_LOOP                ; [$8fae] MScriptOp
-    db $02,$a4,$43,$8c,$3c,$b0,$3c,$8c,$41,$41,$40,$a4,$3c,$8c,$37,$39 ; [$8faf]
-                                                                       ; byte
-    db $a4,$3a,$8c,$3a,$39,$3a,$39,$bc,$37  ; [$8fbf] byte
-
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; If i >, continue.
-    db $01,$86,$37,$39,$3b,$3c,$3e,$40,$41,$42 ; [$8fc9] byte
-
-    db MSCRIPT_OP_END_LOOP                  ; End loop.
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; [$8fd4] MScriptOp
-    db $02,$86,$3c,$3b,$3c,$3e,$40,$41,$42,$43,$b0,$44,$46,$c8,$43,$8c ; [$8fd5]
-                                                                       ; byte
-    db $3c,$3e,$3f,$3f,$41,$3e,$00,$3c,$3a,$98,$37,$86,$38,$37,$8c,$35 ; [$8fe5]
-                                                                       ; byte
-    db $92,$37,$86,$30,$33,$37,$3c,$37,$3c,$3f,$b0,$44,$46,$bc,$43,$8c ; [$8ff5]
-                                                                       ; byte
-    db $3c,$3c,$3e,$3f,$3f,$41,$3e,$00,$3c,$98,$3a,$8c,$3f,$3f,$41,$3e ; [$9005]
-                                                                       ; byte
-    db $00,$3c,$3a                          ; [$9015] byte
-
-    db MSCRIPT_OP_SET_REPEATED              ; Set repeated 204 times.
-    db $cc,$3c,$d4,$00,$ec,$3c              ; [$9019] byte
-
-    db MSCRIPT_OP_MAYBE_END
-
-;
-; XREFS:
-;     MUSIC_LOOKUP_START_THEME [$PRG5::8efd]
-;
-MSCRIPT_START_THEME_SQ2:                    ; [$9020]
-    db MSCRIPT_OP_SET_SQ_VOL                ; Set volume to 3.
-    db $03                                  ; [$9021] byte
-
-    db MSCRIPT_OP_MAYBE_SET_0172
-    db $90                                  ; [$9023] byte
-
-    db MSCRIPT_OP_SET_SQ_DECAY_MODE
-    db $00                                  ; [$9025] byte
-
-    db MSCRIPT_OP_MAYBE_SET_0181
-    db $02,$98,$00,$86,$21,$23,$24,$26,$28,$29,$2b,$2d,$2f,$30,$32,$33 ; [$9027]
-                                                                       ; byte
-    db MSCRIPT_OP_MAYBE_SET_0181            ; [$9037] MScriptOp
-    db $00                                  ; [$9038] byte
-
-    db MSCRIPT_OP_MAYBE_SET_0172
-    db $50                                  ; [$903a] byte
-
-    db MSCRIPT_OP_BEGIN_LOOP
-    db $02                                  ; Loops = 2
-    db $86,$34,$34,$34,$00,$3c,$2b,$34,$34,$34,$34,$34,$00,$3c,$2b,$34 ; [$903d]
-                                                                       ; byte
-    db $34,$35,$35,$35,$00,$3c,$2d,$35,$35,$35,$35,$35,$00,$3c,$2d,$35 ; [$904d]
-                                                                       ; byte
-    db $35,$34,$34,$34,$00,$3c,$2b,$34,$34,$34,$30,$2b,$30,$34,$34,$37 ; [$905d]
-                                                                       ; byte
-    db $37,$2c,$30,$33,$38,$3c,$38,$2b,$00,$00,$00,$22,$26,$2b,$2f,$32 ; [$906d]
-                                                                       ; byte
-    db $2f                                  ; [$907d] byte
-
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_BEGIN_LOOP                ; [$907f] MScriptOp
-    db $02                                  ; Loops = 2
-    db $86,$34,$37,$2b,$30,$34,$37,$2b,$30,$34,$37,$2b,$30,$34,$37,$2b ; [$9081]
-                                                                       ; byte
-    db $30,$35,$37,$2b,$30,$34,$37,$2b,$30,$34,$37,$2b,$30,$34,$37,$30 ; [$9091]
-                                                                       ; byte
-    db $34,$27,$2b,$2e,$33,$37,$33,$2e,$2b,$29,$2d,$30,$35,$30,$2d,$2b ; [$90a1]
-                                                                       ; byte
-    db $26                                  ; [$90b1] byte
-
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS
-    db $01,$86,$2b,$30,$34,$30,$2b,$30,$34,$30,$34,$35,$37,$39,$3b,$3c ; [$90b3]
-                                                                       ; byte
-    db $3e,$3f                              ; [$90c3] byte
-
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; [$90c6] MScriptOp
-    db $02                                  ; Loops = 2
-    db $86,$2b,$30,$34,$30,$2b,$30,$34,$30,$34,$33,$34,$35,$37,$39,$3b ; [$90c8]
-                                                                       ; byte
-    db $3c                                  ; [$90d8] byte
-
-    db MSCRIPT_OP_BEGIN_LOOP                ; Loop 2 times
-    db $02,$86,$2c,$30,$33,$38,$3c,$3f,$3c,$38,$2e,$32,$35,$3a,$3e,$41 ; [$90da]
-                                                                       ; byte
-    db $3e,$3a,$24,$28,$2b,$30,$34,$37,$3c,$40,$3c,$37,$34,$30,$2b,$28 ; [$90ea]
-                                                                       ; byte
-    db $24,$28,$2c,$30,$33,$38,$3c,$38,$35,$32,$2e,$29,$2e,$32,$35,$32 ; [$90fa]
-                                                                       ; byte
-    db $2e,$32                              ; [$910a] byte
-
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; Skip to end of loop if 1 loop
-                                            ; completed
-    db $01,$8c,$33,$86,$35,$33,$8c,$30,$30,$86,$24,$27,$2b,$30,$33,$30 ; [$910d]
-                                                                       ; byte
-    db $2b,$27                              ; [$911d] byte
-
-    db MSCRIPT_OP_END_LOOP                  ; End of loop
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; [$9120] MScriptOp
-    db $02,$86,$33,$38,$3c,$38,$33,$38,$8c,$3a,$00,$35,$37,$92,$34,$86 ; [$9121]
-                                                                       ; byte
-    db $30,$2b,$30,$28,$2b,$24,$28,$34,$30,$2b,$30,$28,$2b,$24,$28,$32 ; [$9131]
-                                                                       ; byte
-    db $2e,$29,$2e,$26,$29,$22,$26,$32,$2e,$29,$2e,$26,$29,$22,$26,$30 ; [$9141]
-                                                                       ; byte
-    db $2c,$27,$2c,$24,$27,$20,$24,$33,$30,$2c,$30,$27,$2c,$ec,$27 ; [$9151]
-                                                                   ; byte
-
-    db MSCRIPT_OP_MAYBE_END                 ; End.
-
-;
-; XREFS:
-;     MUSIC_LOOKUP_START_THEME [$PRG5::8eff]
-;
-MSCRIPT_START_THEME_TRI:                    ; [$9161]
-    db $b0,$00,$86,$23,$24,$26,$28,$29,$2b,$2d,$2f ; [$9161] byte
-
-    db MSCRIPT_OP_BEGIN_LOOP
-    db $02,$86,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$916d]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$917d]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$918d]
-                                                                       ; byte
-    db $18,$18,$14,$14,$20,$20,$14,$14,$13,$00,$00,$00,$1f,$1f,$13,$13 ; [$919d]
-                                                                       ; byte
-    db $13,$13                              ; [$91ad] byte
-
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_BEGIN_LOOP                ; [$91b0] MScriptOp
-    db $02,$86,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$91b1]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$91c1]
-                                                                       ; byte
-    db $18,$18,$1b,$1b,$1b,$1b,$1b,$00,$1b,$1b,$1d,$1d,$1d,$1d,$1d,$00 ; [$91d1]
-                                                                       ; byte
-    db $1d,$1d,$18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00 ; [$91e1]
-                                                                       ; byte
-    db $18,$18                              ; [$91f1] byte
-
-    db MSCRIPT_OP_END_LOOP
-    db $14,$14,$14,$14,$14,$14,$14,$14,$16,$16,$16,$16,$16,$16,$16,$16 ; [$91f4]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00,$18,$18 ; [$9204]
-                                                                       ; byte
-    db $14,$14,$14,$14,$14,$14,$16,$00,$00,$00,$16,$16,$16,$16,$16,$16 ; [$9214]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00,$18,$18 ; [$9224]
-                                                                       ; byte
-    db $14,$14,$14,$14,$14,$14,$14,$14,$16,$16,$16,$16,$16,$16,$16,$16 ; [$9234]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$00,$18,$18,$18,$18,$18,$18,$18,$00,$18,$18 ; [$9244]
-                                                                       ; byte
-    db $14,$14,$14,$14,$14,$14,$16,$00,$00,$00,$16,$16,$16,$16,$16,$16 ; [$9254]
-                                                                       ; byte
-    db $14,$14,$14,$14,$14,$14,$16,$00,$00,$00,$16,$16,$16,$16,$98,$18 ; [$9264]
-                                                                       ; byte
-    db $8c,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18 ; [$9274]
-                                                                       ; byte
-    db $18,$18,$18,$18,$18,$18,$18,$ec,$20  ; [$9284] byte
-
-    db MSCRIPT_OP_MAYBE_END
+MSCRIPT_TITLESCREEN_SQ1:                    ; [$8f7c]
+    db MSCRIPT_OP_SET_GLOBAL_TRANSPOSE      ; Op: Set global transpose
+    db $ff                                  ;  '- Down 1 semitone
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $00                                  ;  '- Reduce volume by 0
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db $86                                  ; Note length: 6
+    db $1f                                  ; F#2
+    db $21                                  ; G#2
+    db $23                                  ; A#2
+    db $24                                  ; B2
+    db $26                                  ; C#3
+    db $28                                  ; D#3
+    db $29                                  ; E3
+    db $2a                                  ; F3
+    db $2b                                  ; F#3
+    db $2d                                  ; G#3
+    db $2f                                  ; A#3
+    db $30                                  ; B3
+    db $32                                  ; C#4
+    db $34                                  ; D#4
+    db $35                                  ; E4
+    db $36                                  ; F4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $45                                  ; G#5
+    db $c8                                  ; Note length: 72
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3c                                  ; B4
+    db $3f                                  ; D5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3b                                  ; A#4
+    db $98                                  ; Note length: 24
+    db $37                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a4                                  ; Note length: 36
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $41                                  ; E5
+    db $41                                  ; E5
+    db $40                                  ; D#5
+    db $a4                                  ; Note length: 36
+    db $3c                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $37                                  ; F#4
+    db $39                                  ; G#4
+    db $a4                                  ; Note length: 36
+    db $3a                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A4
+    db $39                                  ; G#4
+    db $3a                                  ; A4
+    db $39                                  ; G#4
+    db $bc                                  ; Note length: 60
+    db $37                                  ; F#4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loops
+    db $86                                  ; Note length: 6
+    db $37                                  ; F#4
+    db $39                                  ; G#4
+    db $3b                                  ; A#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $40                                  ; D#5
+    db $41                                  ; E5
+    db $42                                  ; F5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $3c                                  ; B4
+    db $3b                                  ; A#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $40                                  ; D#5
+    db $41                                  ; E5
+    db $42                                  ; F5
+    db $43                                  ; F#5
+    db $b0                                  ; Note length: 48
+    db $44                                  ; G5
+    db $46                                  ; A5
+    db $c8                                  ; Note length: 72
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3a                                  ; A4
+    db $98                                  ; Note length: 24
+    db $37                                  ; F#4
+    db $86                                  ; Note length: 6
+    db $38                                  ; G4
+    db $37                                  ; F#4
+    db $8c                                  ; Note length: 12
+    db $35                                  ; E4
+    db $92                                  ; Note length: 18
+    db $37                                  ; F#4
+    db $86                                  ; Note length: 6
+    db $30                                  ; B3
+    db $33                                  ; D4
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $3f                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $44                                  ; G5
+    db $46                                  ; A5
+    db $bc                                  ; Note length: 60
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3a                                  ; A4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $cc                                  ;  '- 204 ticks
+    db $3c                                  ; B4
+    db $d4                                  ; Note length: 84
+    db $00                                  ; Rest
+    db $ec                                  ; Note length: 108
+    db $3c                                  ; B4
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_START_THEME [$PRG5::8f01]
+;     MSCRIPTS_TITLESCREEN [$PRG5::8efd]
 ;
-MSCRIPT_START_THEME_NOISE:                  ; [$928e]
+MSCRIPT_TITLESCREEN_SQ2:                    ; [$9020]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $03                                  ;  '- Reduce volume by 3
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $02                                  ;  '- 2
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $21                                  ; A2
+    db $23                                  ; B2
+    db $24                                  ; C3
+    db $26                                  ; D3
+    db $28                                  ; E3
+    db $29                                  ; F3
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $32                                  ; D4
+    db $33                                  ; D#4
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $00                                  ;  '- 0
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $2b                                  ; G3
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $2b                                  ; G3
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $2d                                  ; A3
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $2d                                  ; A3
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $2b                                  ; G3
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $22                                  ; A#2
+    db $26                                  ; D3
+    db $2b                                  ; G3
+    db $2f                                  ; B3
+    db $32                                  ; D4
+    db $2f                                  ; B3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $27                                  ; D#3
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $33                                  ; D#4
+    db $37                                  ; G4
+    db $33                                  ; D#4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $29                                  ; F3
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $2b                                  ; G3
+    db $26                                  ; D3
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loops
+    db $86                                  ; Note length: 6
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $3f                                  ; D#5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $3f                                  ; D#5
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $41                                  ; F5
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $24                                  ; C3
+    db $28                                  ; E3
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $28                                  ; E3
+    db $24                                  ; C3
+    db $28                                  ; E3
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $35                                  ; F4
+    db $32                                  ; D4
+    db $2e                                  ; A#3
+    db $29                                  ; F3
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $32                                  ; D4
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loops
+    db $8c                                  ; Note length: 12
+    db $33                                  ; D#4
+    db $86                                  ; Note length: 6
+    db $35                                  ; F4
+    db $33                                  ; D#4
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $86                                  ; Note length: 6
+    db $24                                  ; C3
+    db $27                                  ; D#3
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $27                                  ; D#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A#4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $92                                  ; Note length: 18
+    db $34                                  ; E4
+    db $86                                  ; Note length: 6
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $28                                  ; E3
+    db $2b                                  ; G3
+    db $24                                  ; C3
+    db $28                                  ; E3
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $28                                  ; E3
+    db $2b                                  ; G3
+    db $24                                  ; C3
+    db $28                                  ; E3
+    db $32                                  ; D4
+    db $2e                                  ; A#3
+    db $29                                  ; F3
+    db $2e                                  ; A#3
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $22                                  ; A#2
+    db $26                                  ; D3
+    db $32                                  ; D4
+    db $2e                                  ; A#3
+    db $29                                  ; F3
+    db $2e                                  ; A#3
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $22                                  ; A#2
+    db $26                                  ; D3
+    db $30                                  ; C4
+    db $2c                                  ; G#3
+    db $27                                  ; D#3
+    db $2c                                  ; G#3
+    db $24                                  ; C3
+    db $27                                  ; D#3
+    db $20                                  ; G#2
+    db $24                                  ; C3
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $27                                  ; D#3
+    db $2c                                  ; G#3
+    db $ec                                  ; Note length: 108
+    db $27                                  ; D#3
+    db MSCRIPT_OP_END                       ; Op: End
+
+;
+; XREFS:
+;     MSCRIPTS_TITLESCREEN [$PRG5::8eff]
+;
+MSCRIPT_TITLESCREEN_TRI:                    ; [$9161]
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $23                                  ; B4
+    db $24                                  ; C5
+    db $26                                  ; D5
+    db $28                                  ; E5
+    db $29                                  ; F5
+    db $2b                                  ; G5
+    db $2d                                  ; A5
+    db $2f                                  ; B5
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $20                                  ; G#4
+    db $20                                  ; G#4
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $1b                                  ; D#4
+    db $1b                                  ; D#4
+    db $1b                                  ; D#4
+    db $1b                                  ; D#4
+    db $1b                                  ; D#4
+    db $00                                  ; Rest
+    db $1b                                  ; D#4
+    db $1b                                  ; D#4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $16                                  ; A#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $16                                  ; A#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $16                                  ; A#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $98                                  ; Note length: 24
+    db $18                                  ; C4
+    db $8c                                  ; Note length: 12
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $ec                                  ; Note length: 108
+    db $20                                  ; G#4
+    db MSCRIPT_OP_END                       ; Op: End
+
+;
+; XREFS:
+;     MSCRIPTS_TITLESCREEN [$PRG5::8f01]
+;
+BYTE_PRG5__928e:                            ; [$928e]
     db $8c,$21,$00,$21,$00,$86,$31,$21,$31,$31,$31,$21,$31,$31 ; [$928e] byte
 
-    db MSCRIPT_OP_BEGIN_LOOP
-    db $02,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c ; [$929d]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$929e]
                                                                        ; byte
-    db $21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31 ; [$92ad]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$92ae]
                                                                        ; byte
-    db $31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31 ; [$92bd]
+    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$92be]
                                                                        ; byte
-    db $00,$31,$31,$8c,$21,$21,$21,$21,$21,$21,$86,$31,$00,$8c,$21,$21 ; [$92cd]
+    db $31,$31,$8c,$21,$21,$21,$21,$21,$21,$86,$31,$00,$8c,$21,$21,$86 ; [$92ce]
                                                                        ; byte
-    db $86,$21,$21                          ; [$92dd] byte
+    db $21,$21                              ; [$92de] byte
 
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_BEGIN_LOOP                ; [$92e1] MScriptOp
-    db $02,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c ; [$92e2]
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$92e3]
                                                                        ; byte
-    db $21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31 ; [$92f2]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$92f3]
                                                                        ; byte
-    db $31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31 ; [$9302]
+    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$9303]
                                                                        ; byte
-    db $00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31 ; [$9312]
+    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31 ; [$9313]
                                                                        ; byte
-    db $31,$31,$00,$31,$31,$21,$21,$21,$00  ; [$9322] byte
+    db $31,$00,$31,$31,$21,$21,$21,$00      ; [$9323] byte
 
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_BEGIN_LOOP                ; [$932c] MScriptOp
-    db $02,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c ; [$932d]
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$932e]
                                                                        ; byte
-    db $21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31 ; [$933d]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$933e]
                                                                        ; byte
-    db $31,$8c,$21,$86,$31,$31              ; [$934d] byte
+    db $8c,$21,$86,$31,$31                  ; [$934e] byte
 
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS
-    db $01,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c ; [$9354]
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$9355]
                                                                        ; byte
-    db $21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$8c ; [$9364]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$8c,$21 ; [$9365]
                                                                        ; byte
-    db $21,$86,$21,$21,$21,$00              ; [$9374] byte
+    db $86,$21,$21,$21,$00                  ; [$9375] byte
 
-    db MSCRIPT_OP_END_LOOP
-    db MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS  ; [$937b] MScriptOp
-    db $02,$8c,$21,$21,$21,$21,$86,$31,$31,$8c,$21,$21,$86,$21,$21,$8c ; [$937c]
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c,$21,$21,$21,$21,$86,$31,$31,$8c,$21,$21,$86,$21,$21,$8c,$21 ; [$937d]
                                                                        ; byte
-    db $21,$21,$21,$21,$00,$21,$21          ; [$938c] byte
+    db $21,$21,$21,$00,$21,$21              ; [$938d] byte
 
-    db MSCRIPT_OP_BEGIN_LOOP
-    db $02,$86,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00 ; [$9394]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31 ; [$9395]
                                                                        ; byte
-    db $31,$31                              ; [$93a4] byte
+    db $31                                  ; [$93a5] byte
 
-    db MSCRIPT_OP_END_LOOP
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
     db $31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$31,$ec,$31 ; [$93a7]
                                                                        ; byte
-    db MSCRIPT_OP_MAYBE_END                 ; [$93b7] MScriptOp
-    db MSCRIPT_OP_MAYBE_END                 ; [$93b8] MScriptOp
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for Daybreak.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DAYBREAK [$PRG5::8f03]
+;     MSCRIPTS_DAYBREAK [$PRG5::8f03]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DAYBREAK [$PRG5::8f03]
+;     MSCRIPTS_DAYBREAK [$PRG5::8f03]
 ;
-MUSIC_DAYBREAK_1:                           ; [$93b9]
-    db $f1,$01,$f2,$90,$f0,$01,$ef,$02,$fd,$02,$98,$2d,$2f,$30,$37,$c8 ; [$93b9]
-                                                                       ; byte
-    db $36,$98,$32,$c8,$35,$98,$2f,$e0,$34,$98,$2d,$2f,$30,$37,$c8,$36 ; [$93c9]
-                                                                       ; byte
-    db $98,$32,$c8,$35,$98,$2f,$e0,$2f,$98,$32,$34,$35,$3c,$c8,$3b,$98 ; [$93d9]
-                                                                       ; byte
-    db $38,$c8,$39,$98,$34,$e0,$30,$98,$30,$32,$34,$39,$33,$34,$36,$3b ; [$93e9]
-                                                                       ; byte
-    db $e0,$3b,$fb,$01,$e0,$34,$fc,$fb,$02,$a4,$34,$8c,$34,$39,$34,$39 ; [$93f9]
-                                                                       ; byte
-    db $3c,$98,$3f,$3c,$3b,$38,$a4,$39,$8c,$34,$39,$34,$39,$3c,$98,$40 ; [$9409]
-                                                                       ; byte
-    db $41,$3c,$3e,$a4,$3a,$8c,$41,$40,$3c,$3b,$38,$39,$34,$30,$34,$98 ; [$9419]
-                                                                       ; byte
-    db $2d,$2c,$8c,$2b,$00,$00,$f2,$90,$f0,$00,$34,$35,$36,$37,$38,$e0 ; [$9429]
-                                                                       ; byte
-    db $00,$a4,$00,$8c,$38,$37,$36,$35,$34,$e0,$00,$a4,$00,$8c,$34,$35 ; [$9439]
-                                                                       ; byte
-    db $36,$37,$38,$e0,$00,$a4,$00,$8c,$38,$37,$36,$35,$34,$f4,$ff ; [$9449]
-                                                                   ; byte
+MSCRIPT_DAYBREAK_SQ1:                       ; [$93b9]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $01                                  ;  '- Reduce volume by 1
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_SQ_PITCH_EFFECT_DEPTH ; Op: Set SQ2 envelope depth
+    db $02                                  ;  '- 2
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $c8                                  ; Note length: 72
+    db $36                                  ; F#4
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $c8                                  ; Note length: 72
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $e0                                  ; Note length: 96
+    db $34                                  ; E4
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $c8                                  ; Note length: 72
+    db $36                                  ; F#4
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $c8                                  ; Note length: 72
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $e0                                  ; Note length: 96
+    db $2f                                  ; B3
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $3c                                  ; C5
+    db $c8                                  ; Note length: 72
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $38                                  ; G#4
+    db $c8                                  ; Note length: 72
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $30                                  ; C4
+    db $98                                  ; Note length: 24
+    db $30                                  ; C4
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $3b                                  ; B4
+    db $e0                                  ; Note length: 96
+    db $3b                                  ; B4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $e0                                  ; Note length: 96
+    db $34                                  ; E4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $a4                                  ; Note length: 36
+    db $34                                  ; E4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $3f                                  ; D#5
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $38                                  ; G#4
+    db $a4                                  ; Note length: 36
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $40                                  ; E5
+    db $41                                  ; F5
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $a4                                  ; Note length: 36
+    db $3a                                  ; A#4
+    db $8c                                  ; Note length: 12
+    db $41                                  ; F5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $38                                  ; G#4
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $8c                                  ; Note length: 12
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $38                                  ; G#4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $38                                  ; G#4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DAYBREAK [$PRG5::8f05]
+;     MSCRIPTS_DAYBREAK [$PRG5::8f05]
 ;
-MUSIC_DAYBREAK_2:                           ; [$9458]
-    db $f1,$05,$f2,$13,$f0,$01,$f2,$90,$8c,$00,$98,$2d,$2f,$30,$37,$c8 ; [$9458]
-                                                                       ; byte
-    db $36,$98,$32,$c8,$35,$98,$2f,$e0,$34,$98,$2d,$2f,$30,$37,$c8,$36 ; [$9468]
-                                                                       ; byte
-    db $98,$32,$c8,$35,$98,$2f,$e0,$2f,$98,$32,$34,$35,$3c,$c8,$3b,$98 ; [$9478]
-                                                                       ; byte
-    db $38,$c8,$39,$98,$34,$e0,$30,$98,$30,$32,$34,$39,$33,$34,$36,$3b ; [$9488]
-                                                                       ; byte
-    db $e0,$3b,$f1,$03,$8c,$34,$32,$2f,$30,$2d,$2f,$2c,$b0,$00,$98,$2d ; [$9498]
-                                                                       ; byte
-    db $2f,$2d,$2f,$30,$2d,$2f,$30,$2f,$2d,$2c,$29,$28,$26,$24,$28,$2d ; [$94a8]
-                                                                       ; byte
-    db $2f,$2d,$2f,$30,$2d,$2f,$2d,$29,$26,$28,$2f,$2c,$28,$00,$00,$32 ; [$94b8]
-                                                                       ; byte
-    db $30,$2f,$2d,$2c,$28,$00,$31,$2d,$31,$2d,$2a,$27,$b0,$24,$98,$28 ; [$94c8]
-                                                                       ; byte
-    db $2d,$30,$2f,$30,$2f,$33,$34,$2d,$2f,$2c,$a4,$30,$8c,$30,$34,$30 ; [$94d8]
-                                                                       ; byte
-    db $34,$39,$3c,$3c,$39,$39,$38,$38,$32,$32,$a4,$30,$8c,$30,$34,$30 ; [$94e8]
-                                                                       ; byte
-    db $34,$39,$3c,$3c,$3e,$3e,$34,$34,$3b,$3b,$a4,$35,$8c,$3e,$3c,$39 ; [$94f8]
-                                                                       ; byte
-    db $38,$32,$34,$30,$2d,$30,$98,$28,$27,$8c,$26,$00,$00,$f1,$03,$f2 ; [$9508]
-                                                                       ; byte
-    db $50,$f0,$00,$30,$31,$32,$33,$34,$e0,$00,$a4,$00,$8c,$34,$33,$32 ; [$9518]
-                                                                       ; byte
-    db $31,$30,$e0,$00,$a4,$00,$8c,$30,$31,$32,$33,$34,$e0,$00,$a4,$00 ; [$9528]
-                                                                       ; byte
-    db $8c,$34,$33,$32,$31,$30,$f4,$ff      ; [$9538] byte
+MSCRIPT_DAYBREAK_SQ2:                       ; [$9458]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $05                                  ;  '- Reduce volume by 5
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $13                                  ;  '- Duty cycle 0     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $c8                                  ; Note length: 72
+    db $36                                  ; F#4
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $c8                                  ; Note length: 72
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $e0                                  ; Note length: 96
+    db $34                                  ; E4
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $c8                                  ; Note length: 72
+    db $36                                  ; F#4
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $c8                                  ; Note length: 72
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $e0                                  ; Note length: 96
+    db $2f                                  ; B3
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $3c                                  ; C5
+    db $c8                                  ; Note length: 72
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $38                                  ; G#4
+    db $c8                                  ; Note length: 72
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $30                                  ; C4
+    db $98                                  ; Note length: 24
+    db $30                                  ; C4
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $3b                                  ; B4
+    db $e0                                  ; Note length: 96
+    db $3b                                  ; B4
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $03                                  ;  '- Reduce volume by 3
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $32                                  ; D4
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $28                                  ; E3
+    db $26                                  ; D3
+    db $24                                  ; C3
+    db $28                                  ; E3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $28                                  ; E3
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $28                                  ; E3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $28                                  ; E3
+    db $00                                  ; Rest
+    db $31                                  ; C#4
+    db $2d                                  ; A3
+    db $31                                  ; C#4
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $27                                  ; D#3
+    db $b0                                  ; Note length: 48
+    db $24                                  ; C3
+    db $98                                  ; Note length: 24
+    db $28                                  ; E3
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $a4                                  ; Note length: 36
+    db $30                                  ; C4
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $39                                  ; A4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $32                                  ; D4
+    db $32                                  ; D4
+    db $a4                                  ; Note length: 36
+    db $30                                  ; C4
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $3e                                  ; D5
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $3b                                  ; B4
+    db $3b                                  ; B4
+    db $a4                                  ; Note length: 36
+    db $35                                  ; F4
+    db $8c                                  ; Note length: 12
+    db $3e                                  ; D5
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $38                                  ; G#4
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $98                                  ; Note length: 24
+    db $28                                  ; E3
+    db $27                                  ; D#3
+    db $8c                                  ; Note length: 12
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $03                                  ;  '- Reduce volume by 3
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db $30                                  ; C4
+    db $31                                  ; C#4
+    db $32                                  ; D4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db $31                                  ; C#4
+    db $30                                  ; C4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C4
+    db $31                                  ; C#4
+    db $32                                  ; D4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db $31                                  ; C#4
+    db $30                                  ; C4
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DAYBREAK [$PRG5::8f07]
+;     MSCRIPTS_DAYBREAK [$PRG5::8f07]
 ;
-MUSIC_DAYBREAK_3:                           ; [$9540]
-    db $fd,$02,$8c,$15,$21,$1c,$21,$00,$21,$1c,$21,$18,$21,$1c,$21,$00 ; [$9540]
-                                                                       ; byte
-    db $21,$1c,$21,$17,$21,$1a,$21,$00,$21,$1a,$21,$10,$1c,$17,$1c,$00 ; [$9550]
-                                                                       ; byte
-    db $1c,$17,$1c,$15,$21,$1c,$21,$00,$21,$1c,$21,$18,$21,$1c,$21,$00 ; [$9560]
-                                                                       ; byte
-    db $21,$1c,$21,$17,$21,$1a,$21,$00,$21,$1a,$21,$10,$1c,$17,$1c,$00 ; [$9570]
-                                                                       ; byte
-    db $1c,$17,$1c,$1a,$26,$21,$26,$00,$26,$21,$26,$10,$1c,$17,$1c,$00 ; [$9580]
-                                                                       ; byte
-    db $1c,$17,$1c,$15,$21,$1c,$21,$00,$21,$1c,$21,$18,$21,$1b,$21,$00 ; [$9590]
-                                                                       ; byte
-    db $21,$1b,$21,$13,$1c,$18,$1c,$00,$1c,$18,$1c,$17,$21,$1b,$21,$00 ; [$95a0]
-                                                                       ; byte
-    db $21,$1e,$21,$10,$1c,$17,$1c,$00,$1c,$17,$1c,$fb,$01,$8c,$10,$1c ; [$95b0]
-                                                                       ; byte
-    db $1d,$1a,$1c,$18,$1a,$17,$fc,$fb,$02,$8c,$10,$11,$10,$21,$1c,$18 ; [$95c0]
-                                                                       ; byte
-    db $15,$10,$10,$98,$10,$8c,$10,$10,$98,$10,$8c,$10,$21,$1c,$15,$21 ; [$95d0]
-                                                                       ; byte
-    db $1c,$18,$15,$10,$10,$98,$10,$8c,$10,$10,$98,$10,$8c,$10,$16,$16 ; [$95e0]
-                                                                       ; byte
-    db $1a,$1a,$1c,$1c,$10,$10,$15,$98,$15,$8c,$15,$98,$18,$17,$8c,$16 ; [$95f0]
-                                                                       ; byte
-    db $16,$16,$16,$16,$17,$18,$19,$86,$19,$25,$19,$25,$1c,$28,$1c,$28 ; [$9600]
-                                                                       ; byte
-    db $20,$2c,$20,$2c,$1c,$28,$1c,$28,$19,$25,$19,$25,$19,$25,$8c,$19 ; [$9610]
-                                                                       ; byte
-    db $18,$17,$16,$15,$86,$15,$21,$15,$21,$18,$24,$18,$24,$1c,$28,$1c ; [$9620]
-                                                                       ; byte
-    db $28,$18,$24,$18,$24,$15,$21,$15,$21,$15,$21,$8c,$15,$16,$17,$18 ; [$9630]
-                                                                       ; byte
-    db $19,$86,$19,$25,$19,$25,$1c,$28,$1c,$28,$20,$2c,$20,$2c,$1c,$28 ; [$9640]
-                                                                       ; byte
-    db $1c,$28,$19,$25,$19,$25,$19,$25,$8c,$19,$18,$17,$16,$15,$f4,$ff ; [$9650]
-                                                                       ; byte
+MSCRIPT_DAYBREAK_TRI:                       ; [$9540]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $17                                  ; B3
+    db $21                                  ; A4
+    db $1a                                  ; D4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1a                                  ; D4
+    db $21                                  ; A4
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $17                                  ; B3
+    db $21                                  ; A4
+    db $1a                                  ; D4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1a                                  ; D4
+    db $21                                  ; A4
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $1a                                  ; D4
+    db $26                                  ; D5
+    db $21                                  ; A4
+    db $26                                  ; D5
+    db $00                                  ; Rest
+    db $26                                  ; D5
+    db $21                                  ; A4
+    db $26                                  ; D5
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1b                                  ; D#4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1b                                  ; D#4
+    db $21                                  ; A4
+    db $13                                  ; G3
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $21                                  ; A4
+    db $1b                                  ; D#4
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1e                                  ; F#4
+    db $21                                  ; A4
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $1d                                  ; F4
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $1a                                  ; D4
+    db $17                                  ; B3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $15                                  ; A3
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $98                                  ; Note length: 24
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $98                                  ; Note length: 24
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $15                                  ; A3
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $98                                  ; Note length: 24
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $98                                  ; Note length: 24
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $15                                  ; A3
+    db $98                                  ; Note length: 24
+    db $15                                  ; A3
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $98                                  ; Note length: 24
+    db $18                                  ; C4
+    db $17                                  ; B3
+    db $8c                                  ; Note length: 12
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $19                                  ; C#4
+    db $86                                  ; Note length: 6
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $20                                  ; G#4
+    db $2c                                  ; G#5
+    db $20                                  ; G#4
+    db $2c                                  ; G#5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $8c                                  ; Note length: 12
+    db $19                                  ; C#4
+    db $18                                  ; C4
+    db $17                                  ; B3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $86                                  ; Note length: 6
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $19                                  ; C#4
+    db $86                                  ; Note length: 6
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $20                                  ; G#4
+    db $2c                                  ; G#5
+    db $20                                  ; G#4
+    db $2c                                  ; G#5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $19                                  ; C#4
+    db $25                                  ; C#5
+    db $8c                                  ; Note length: 12
+    db $19                                  ; C#4
+    db $18                                  ; C4
+    db $17                                  ; B3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DAYBREAK [$PRG5::8f09]
+;     MSCRIPTS_DAYBREAK [$PRG5::8f09]
 ;
-MUSIC_DAYBREAK_4:                           ; [$9660]
-    db $ff,$ff                              ; [$9660] byte
+MSCRIPT_DAYBREAK_NOISE:                     ; [$9660]
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for Apolune.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_APOLUNE [$PRG5::8f0b]
+;     MSCRIPTS_APOLUNE [$PRG5::8f0b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_APOLUNE [$PRG5::8f0b]
+;     MSCRIPTS_APOLUNE [$PRG5::8f0b]
 ;
-MUSIC_APOLUNE_1:                            ; [$9662]
-    db $e0,$00,$00,$f8,$c3,$96,$f8,$c3,$96,$f1,$00,$f2,$90,$f0,$00,$8c ; [$9662]
-                                                                       ; byte
-    db $32,$34,$36,$37,$86,$39,$00,$98,$3e,$8c,$39,$98,$3c,$8c,$39,$98 ; [$9672]
-                                                                       ; byte
-    db $35,$8c,$37,$98,$39,$40,$8c,$3d,$98,$39,$8c,$3b,$98,$3d,$3e,$8c ; [$9682]
-                                                                       ; byte
-    db $3b,$98,$37,$8c,$39,$98,$3b,$8c,$32,$34,$36,$37,$86,$39,$00,$98 ; [$9692]
-                                                                       ; byte
-    db $3e,$8c,$39,$98,$3c,$8c,$39,$98,$35,$8c,$37,$98,$39,$40,$8c,$3d ; [$96a2]
-                                                                       ; byte
-    db $98,$39,$8c,$3b,$98,$3d,$3e,$8c,$3b,$98,$37,$8c,$39,$98,$3b,$f4 ; [$96b2]
-                                                                       ; byte
-    db $ff,$f1,$02,$f2,$d0,$f0,$01,$8c,$39,$38,$39,$b0,$3c,$8c,$39,$98 ; [$96c2]
-                                                                       ; byte
-    db $3a,$8c,$3a,$bc,$3e,$98,$38,$41,$40,$3e,$8c,$3e,$3d,$00,$bc,$40 ; [$96d2]
-                                                                       ; byte
-    db $8c,$39,$38,$39,$b0,$3c,$8c,$39,$98,$3a,$8c,$3a,$bc,$3e,$98,$38 ; [$96e2]
-                                                                       ; byte
-    db $41,$40,$3e,$8c,$3e,$3d,$00,$bc,$40,$b0,$41,$98,$40,$3e,$b0,$3c ; [$96f2]
-                                                                       ; byte
-    db $98,$3b,$39,$c8,$37,$8c,$34,$ec,$39,$b0,$41,$98,$40,$3e,$b0,$3c ; [$9702]
-                                                                       ; byte
-    db $98,$3b,$39,$c8,$37,$8c,$34,$ec,$39,$f5 ; [$9712] byte
+MSCRIPT_APOLUNE_SQ1:                        ; [$9662]
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $96C3
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $96C3
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $00                                  ;  '- Reduce volume by 0
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db $8c                                  ; Note length: 12
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $86                                  ; Note length: 6
+    db $39                                  ; A4
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $35                                  ; F4
+    db $8c                                  ; Note length: 12
+    db $37                                  ; G4
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $40                                  ; E5
+    db $8c                                  ; Note length: 12
+    db $3d                                  ; C#5
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $3d                                  ; C#5
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3b                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $86                                  ; Note length: 6
+    db $39                                  ; A4
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $35                                  ; F4
+    db $8c                                  ; Note length: 12
+    db $37                                  ; G4
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $40                                  ; E5
+    db $8c                                  ; Note length: 12
+    db $3d                                  ; C#5
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $3d                                  ; C#5
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3b                                  ; B4
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+
+  @_subroutine:                             ; [$96c3]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $38                                  ; G#4
+    db $39                                  ; A4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A#4
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A#4
+    db $bc                                  ; Note length: 60
+    db $3e                                  ; D5
+    db $98                                  ; Note length: 24
+    db $38                                  ; G#4
+    db $41                                  ; F5
+    db $40                                  ; E5
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3e                                  ; D5
+    db $3d                                  ; C#5
+    db $00                                  ; Rest
+    db $bc                                  ; Note length: 60
+    db $40                                  ; E5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $38                                  ; G#4
+    db $39                                  ; A4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A#4
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A#4
+    db $bc                                  ; Note length: 60
+    db $3e                                  ; D5
+    db $98                                  ; Note length: 24
+    db $38                                  ; G#4
+    db $41                                  ; F5
+    db $40                                  ; E5
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3e                                  ; D5
+    db $3d                                  ; C#5
+    db $00                                  ; Rest
+    db $bc                                  ; Note length: 60
+    db $40                                  ; E5
+    db $b0                                  ; Note length: 48
+    db $41                                  ; F5
+    db $98                                  ; Note length: 24
+    db $40                                  ; E5
+    db $3e                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $c8                                  ; Note length: 72
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $ec                                  ; Note length: 108
+    db $39                                  ; A4
+    db $b0                                  ; Note length: 48
+    db $41                                  ; F5
+    db $98                                  ; Note length: 24
+    db $40                                  ; E5
+    db $3e                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $c8                                  ; Note length: 72
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $ec                                  ; Note length: 108
+    db $39                                  ; A4
+    db $f5                                  ; Op: Return from subroutine
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_APOLUNE [$PRG5::8f0d]
+;     MSCRIPTS_APOLUNE [$PRG5::8f0d]
 ;
-MUSIC_APOLUNE_2:                            ; [$971c]
-    db $e0,$00,$00,$f8,$a6,$97,$f8,$a6,$97,$f1,$02,$f2,$50,$f0,$00,$86 ; [$971c]
-                                                                       ; byte
-    db $00,$8c,$32,$34,$36,$86,$37,$36,$00,$98,$39,$8c,$36,$86,$39,$39 ; [$972c]
-                                                                       ; byte
-    db $39,$00,$8c,$35,$98,$2d,$8c,$30,$86,$35,$34,$8c,$35,$86,$3d,$31 ; [$973c]
-                                                                       ; byte
-    db $3d,$00,$8c,$39,$98,$31,$8c,$34,$86,$39,$34,$31,$2d,$3b,$2f,$3b ; [$974c]
-                                                                       ; byte
-    db $00,$37,$00,$98,$2f,$8c,$32,$86,$37,$32,$2f,$2b,$00,$8c,$32,$34 ; [$975c]
-                                                                       ; byte
-    db $36,$86,$37,$36,$00,$98,$39,$8c,$36,$86,$39,$39,$39,$00,$8c,$35 ; [$976c]
-                                                                       ; byte
-    db $98,$2d,$8c,$30,$86,$35,$34,$8c,$35,$86,$3d,$31,$3d,$00,$8c,$39 ; [$977c]
-                                                                       ; byte
-    db $98,$31,$8c,$34,$86,$39,$34,$31,$2d,$3b,$2f,$3b,$00,$37,$00,$98 ; [$978c]
-                                                                       ; byte
-    db $2f,$8c,$32,$86,$37,$32,$2f,$2b,$f4,$ff,$f1,$04,$f2,$90,$f0,$01 ; [$979c]
-                                                                       ; byte
-    db $8c,$30,$2f,$30,$b0,$34,$8c,$30,$98,$32,$8c,$32,$98,$3a,$8c,$35 ; [$97ac]
-                                                                       ; byte
-    db $32,$35,$98,$34,$3e,$3c,$3b,$8c,$39,$39,$00,$34,$31,$86,$34,$00 ; [$97bc]
-                                                                       ; byte
-    db $8c,$31,$86,$34,$00,$8c,$30,$2f,$30,$b0,$34,$8c,$30,$98,$32,$8c ; [$97cc]
-                                                                       ; byte
-    db $32,$98,$3a,$8c,$35,$32,$35,$98,$34,$3e,$3c,$3b,$8c,$39,$39,$00 ; [$97dc]
-                                                                       ; byte
-    db $86,$31,$34,$39,$3d,$40,$45,$40,$3d,$39,$34,$29,$00,$2e,$32,$29 ; [$97ec]
-                                                                       ; byte
-    db $00,$2e,$32,$28,$2b,$2e,$32,$26,$00,$2e,$32,$24,$00,$2d,$30,$24 ; [$97fc]
-                                                                       ; byte
-    db $00,$2d,$30,$23,$2d,$30,$34,$21,$29,$2d,$30,$1f,$28,$2b,$2f,$00 ; [$980c]
-                                                                       ; byte
-    db $28,$2b,$2f,$1f,$28,$2b,$2f,$28,$00,$8c,$25,$86,$21,$00,$26,$2a ; [$981c]
-                                                                       ; byte
-    db $36,$32,$2d,$2a,$21,$00,$26,$2a,$36,$32,$2d,$2a,$29,$2b,$2e,$32 ; [$982c]
-                                                                       ; byte
-    db $29,$2b,$2e,$32,$00,$2b,$2e,$32,$26,$2b,$2e,$32,$24,$2d,$30,$34 ; [$983c]
-                                                                       ; byte
-    db $24,$2d,$30,$34,$00,$29,$2d,$30,$21,$29,$2d,$30,$1f,$28,$2b,$2f ; [$984c]
-                                                                       ; byte
-    db $1f,$28,$2b,$2f,$1f,$28,$2b,$2f,$28,$00,$8c,$25,$86,$21,$26,$2a ; [$985c]
-                                                                       ; byte
-    db $2d,$32,$2d,$2a,$2d,$21,$26,$2a,$2d,$32,$2d,$8c,$26,$f5 ; [$986c] byte
+MSCRIPT_APOLUNE_SQ2:                        ; [$971c]
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $97A6
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $97A6
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db $86                                  ; Note length: 6
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $34                                  ; A9
+    db $36                                  ; A9
+    db $86                                  ; Note length: 6
+    db $37                                  ; A9
+    db $36                                  ; A9
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $39                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $36                                  ; A9
+    db $86                                  ; Note length: 6
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $86                                  ; Note length: 6
+    db $35                                  ; A9
+    db $34                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $86                                  ; Note length: 6
+    db $3d                                  ; A9
+    db $31                                  ; A9
+    db $3d                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A9
+    db $98                                  ; Note length: 24
+    db $31                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $34                                  ; A9
+    db $86                                  ; Note length: 6
+    db $39                                  ; A9
+    db $34                                  ; A9
+    db $31                                  ; A9
+    db $2d                                  ; A9
+    db $3b                                  ; A9
+    db $2f                                  ; A9
+    db $3b                                  ; A9
+    db $00                                  ; Rest
+    db $37                                  ; A9
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2f                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $86                                  ; Note length: 6
+    db $37                                  ; A9
+    db $32                                  ; A9
+    db $2f                                  ; A9
+    db $2b                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $34                                  ; A9
+    db $36                                  ; A9
+    db $86                                  ; Note length: 6
+    db $37                                  ; A9
+    db $36                                  ; A9
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $39                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $36                                  ; A9
+    db $86                                  ; Note length: 6
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $86                                  ; Note length: 6
+    db $35                                  ; A9
+    db $34                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $86                                  ; Note length: 6
+    db $3d                                  ; A9
+    db $31                                  ; A9
+    db $3d                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A9
+    db $98                                  ; Note length: 24
+    db $31                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $34                                  ; A9
+    db $86                                  ; Note length: 6
+    db $39                                  ; A9
+    db $34                                  ; A9
+    db $31                                  ; A9
+    db $2d                                  ; A9
+    db $3b                                  ; A9
+    db $2f                                  ; A9
+    db $3b                                  ; A9
+    db $00                                  ; Rest
+    db $37                                  ; A9
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2f                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $86                                  ; Note length: 6
+    db $37                                  ; A9
+    db $32                                  ; A9
+    db $2f                                  ; A9
+    db $2b                                  ; A9
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+
+  @_subroutine:                             ; [$97a6]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $2f                                  ; A9
+    db $30                                  ; A9
+    db $b0                                  ; Note length: 48
+    db $34                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $98                                  ; Note length: 24
+    db $32                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $32                                  ; A9
+    db $35                                  ; A9
+    db $98                                  ; Note length: 24
+    db $34                                  ; A9
+    db $3e                                  ; A9
+    db $3c                                  ; A9
+    db $3b                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $00                                  ; Rest
+    db $34                                  ; A9
+    db $31                                  ; A9
+    db $86                                  ; Note length: 6
+    db $34                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $31                                  ; A9
+    db $86                                  ; Note length: 6
+    db $34                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $2f                                  ; A9
+    db $30                                  ; A9
+    db $b0                                  ; Note length: 48
+    db $34                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $30                                  ; A9
+    db $98                                  ; Note length: 24
+    db $32                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $32                                  ; A9
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $35                                  ; A9
+    db $32                                  ; A9
+    db $35                                  ; A9
+    db $98                                  ; Note length: 24
+    db $34                                  ; A9
+    db $3e                                  ; A9
+    db $3c                                  ; A9
+    db $3b                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A9
+    db $39                                  ; A9
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $31                                  ; A9
+    db $34                                  ; A9
+    db $39                                  ; A9
+    db $3d                                  ; A9
+    db $40                                  ; A9
+    db $45                                  ; A9
+    db $40                                  ; A9
+    db $3d                                  ; A9
+    db $39                                  ; A9
+    db $34                                  ; A9
+    db $29                                  ; A9
+    db $00                                  ; Rest
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $29                                  ; A9
+    db $00                                  ; Rest
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $26                                  ; A9
+    db $00                                  ; Rest
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $24                                  ; A9
+    db $00                                  ; Rest
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $24                                  ; A9
+    db $00                                  ; Rest
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $23                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $34                                  ; A9
+    db $21                                  ; A9
+    db $29                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $1f                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $00                                  ; Rest
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $1f                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $28                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $25                                  ; A9
+    db $86                                  ; Note length: 6
+    db $21                                  ; A9
+    db $00                                  ; Rest
+    db $26                                  ; A9
+    db $2a                                  ; A9
+    db $36                                  ; A9
+    db $32                                  ; A9
+    db $2d                                  ; A9
+    db $2a                                  ; A9
+    db $21                                  ; A9
+    db $00                                  ; Rest
+    db $26                                  ; A9
+    db $2a                                  ; A9
+    db $36                                  ; A9
+    db $32                                  ; A9
+    db $2d                                  ; A9
+    db $2a                                  ; A9
+    db $29                                  ; A9
+    db $2b                                  ; A9
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $29                                  ; A9
+    db $2b                                  ; A9
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $00                                  ; Rest
+    db $2b                                  ; A9
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $26                                  ; A9
+    db $2b                                  ; A9
+    db $2e                                  ; A9
+    db $32                                  ; A9
+    db $24                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $34                                  ; A9
+    db $24                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $34                                  ; A9
+    db $00                                  ; Rest
+    db $29                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $21                                  ; A9
+    db $29                                  ; A9
+    db $2d                                  ; A9
+    db $30                                  ; A9
+    db $1f                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $1f                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $1f                                  ; A9
+    db $28                                  ; A9
+    db $2b                                  ; A9
+    db $2f                                  ; A9
+    db $28                                  ; A9
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $25                                  ; A9
+    db $86                                  ; Note length: 6
+    db $21                                  ; A9
+    db $26                                  ; A9
+    db $2a                                  ; A9
+    db $2d                                  ; A9
+    db $32                                  ; A9
+    db $2d                                  ; A9
+    db $2a                                  ; A9
+    db $2d                                  ; A9
+    db $21                                  ; A9
+    db $26                                  ; A9
+    db $2a                                  ; A9
+    db $2d                                  ; A9
+    db $32                                  ; A9
+    db $2d                                  ; A9
+    db $8c                                  ; Note length: 12
+    db $26                                  ; A9
+    db MSCRIPT_OP_RET                       ; Op: Return from subroutine
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_APOLUNE [$PRG5::8f0f]
+;     MSCRIPTS_APOLUNE [$PRG5::8f0f]
 ;
-MUSIC_APOLUNE_3:                            ; [$987a]
-    db $8c,$15,$86,$21,$00,$8c,$10,$86,$1c,$00,$8c,$13,$86,$1f,$00,$12 ; [$987a]
-                                                                       ; byte
-    db $12,$1e,$00,$8c,$15,$86,$21,$00,$8c,$10,$86,$1c,$00,$13,$13,$1f ; [$988a]
-                                                                       ; byte
-    db $1f,$12,$12,$1e,$00,$f8,$27,$99,$f8,$27,$99,$0e,$00,$15,$00,$0e ; [$989a]
-                                                                       ; byte
-    db $00,$15,$00,$0e,$0e,$15,$00,$0e,$00,$15,$00,$11,$00,$18,$00,$11 ; [$98aa]
-                                                                       ; byte
-    db $00,$18,$00,$11,$11,$18,$00,$11,$00,$18,$00,$15,$00,$21,$00,$15 ; [$98ba]
-                                                                       ; byte
-    db $00,$1c,$00,$15,$15,$1c,$00,$15,$00,$1c,$1c,$13,$00,$1a,$00,$13 ; [$98ca]
-                                                                       ; byte
-    db $00,$1a,$1f,$13,$13,$1f,$00,$13,$00,$13,$1f,$0e,$00,$15,$00,$0e ; [$98da]
-                                                                       ; byte
-    db $00,$15,$00,$0e,$0e,$15,$00,$0e,$00,$15,$00,$11,$00,$18,$00,$11 ; [$98ea]
-                                                                       ; byte
-    db $00,$18,$00,$11,$11,$18,$00,$11,$00,$18,$00,$15,$00,$21,$00,$15 ; [$98fa]
-                                                                       ; byte
-    db $00,$1c,$00,$15,$15,$1c,$00,$15,$00,$1c,$1c,$13,$00,$1a,$00,$13 ; [$990a]
-                                                                       ; byte
-    db $00,$1a,$1f,$13,$13,$1f,$00,$13,$00,$13,$1f,$f4,$ff,$8c,$15,$86 ; [$991a]
-                                                                       ; byte
-    db $21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21 ; [$992a]
-                                                                       ; byte
-    db $00,$8c,$16,$86,$22,$00,$8c,$16,$86,$22,$00,$8c,$16,$86,$22,$00 ; [$993a]
-                                                                       ; byte
-    db $8c,$16,$86,$22,$00,$8c,$14,$86,$20,$00,$8c,$14,$86,$20,$00,$8c ; [$994a]
-                                                                       ; byte
-    db $10,$86,$1c,$00,$8c,$10,$86,$1c,$00,$8c,$15,$86,$21,$00,$8c,$15 ; [$995a]
-                                                                       ; byte
-    db $86,$21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86 ; [$996a]
-                                                                       ; byte
-    db $21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21 ; [$997a]
-                                                                       ; byte
-    db $00,$8c,$16,$86,$22,$00,$8c,$16,$86,$22,$00,$8c,$16,$86,$22,$00 ; [$998a]
-                                                                       ; byte
-    db $8c,$16,$86,$22,$00,$8c,$14,$86,$20,$00,$8c,$14,$86,$20,$00,$8c ; [$999a]
-                                                                       ; byte
-    db $10,$86,$1c,$00,$8c,$10,$86,$1c,$00,$8c,$15,$86,$21,$00,$8c,$15 ; [$99aa]
-                                                                       ; byte
-    db $86,$21,$00,$8c,$15,$86,$21,$00,$8c,$15,$86,$21,$00,$13,$13,$13 ; [$99ba]
-                                                                       ; byte
-    db $13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$11,$11,$11 ; [$99ca]
-                                                                       ; byte
-    db $11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$10,$10,$10 ; [$99da]
-                                                                       ; byte
-    db $10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$0e,$0e,$0e ; [$99ea]
-                                                                       ; byte
-    db $0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$13,$13,$13 ; [$99fa]
-                                                                       ; byte
-    db $13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$13,$11,$11,$11 ; [$9a0a]
-                                                                       ; byte
-    db $11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$11,$10,$10,$10 ; [$9a1a]
-                                                                       ; byte
-    db $10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$10,$0e,$0e,$0e ; [$9a2a]
-                                                                       ; byte
-    db $0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$0e,$f5 ; [$9a3a] byte
+MSCRIPT_APOLUNE_TRI:                        ; [$987a]
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $86                                  ; Note length: 6
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $86                                  ; Note length: 6
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $13                                  ; G3
+    db $86                                  ; Note length: 6
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $12                                  ; F#3
+    db $12                                  ; F#3
+    db $1e                                  ; F#4
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $86                                  ; Note length: 6
+    db $21                                  ; A4
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $86                                  ; Note length: 6
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $12                                  ; F#3
+    db $12                                  ; F#3
+    db $1e                                  ; F#4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $9927
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $9927
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $15                                  ; C7
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $1c                                  ; G7
+    db $1c                                  ; G7
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $1a                                  ; F7
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $1a                                  ; F7
+    db $1f                                  ; A#7
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $1f                                  ; A#7
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $1f                                  ; A#7
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $0e                                  ; F6
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $11                                  ; G#6
+    db $00                                  ; Rest
+    db $18                                  ; D#7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $15                                  ; C7
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $15                                  ; C7
+    db $00                                  ; Rest
+    db $1c                                  ; G7
+    db $1c                                  ; G7
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $1a                                  ; F7
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $1a                                  ; F7
+    db $1f                                  ; A#7
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $1f                                  ; A#7
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $1f                                  ; A#7
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+
+  @_subroutine:                             ; [$9927]
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $14                                  ; B6
+    db $86                                  ; Note length: 6
+    db $20                                  ; B7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $14                                  ; B6
+    db $86                                  ; Note length: 6
+    db $20                                  ; B7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; G6
+    db $86                                  ; Note length: 6
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; G6
+    db $86                                  ; Note length: 6
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $16                                  ; C#7
+    db $86                                  ; Note length: 6
+    db $22                                  ; C#8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $14                                  ; B6
+    db $86                                  ; Note length: 6
+    db $20                                  ; B7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $14                                  ; B6
+    db $86                                  ; Note length: 6
+    db $20                                  ; B7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; G6
+    db $86                                  ; Note length: 6
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; G6
+    db $86                                  ; Note length: 6
+    db $1c                                  ; G7
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $15                                  ; C7
+    db $86                                  ; Note length: 6
+    db $21                                  ; C8
+    db $00                                  ; Rest
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $13                                  ; A#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $11                                  ; G#6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $10                                  ; G6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db $0e                                  ; F6
+    db MSCRIPT_OP_RET                       ; Op: Return from subroutine
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_APOLUNE [$PRG5::8f11]
+;     MSCRIPTS_APOLUNE [$PRG5::8f11]
 ;
-MUSIC_APOLUNE_4:                            ; [$9a48]
+MSCRIPT_APOLUNE_NOISE:                      ; [$9a48]
     db $8c,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$86 ; [$9a48]
                                                                        ; byte
-    db $31,$31,$8c,$31,$f8,$70,$9a,$f8,$70,$9a,$fd,$08,$8c,$00,$21,$00 ; [$9a58]
+    db $31,$31,$8c,$31                      ; [$9a58] byte
+
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $9A70
+    db MSCRIPT_OP_JSR                       ; Op: Jump to subroutine
+    dw @_subroutine                         ;  '- $9A70
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $08                                  ;  '- 8 iterations
+    db $8c,$00,$21,$00,$21,$00,$21,$00,$21  ; [$9a64] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+
+  @_subroutine:                             ; [$9a70]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $08                                  ;  '- 8 iterations
+    db $8c,$00,$21,$00,$21,$00,$21,$00,$21  ; [$9a72] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $08                                  ;  '- 8 iterations
+    db $86,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31 ; [$9a7e]
                                                                        ; byte
-    db $21,$00,$21,$00,$21,$fc,$f4,$ff,$fd,$08,$8c,$00,$21,$00,$21,$00 ; [$9a68]
-                                                                       ; byte
-    db $21,$00,$21,$fc,$fd,$08,$86,$31,$00,$31,$31,$31,$00,$31,$31,$31 ; [$9a78]
-                                                                       ; byte
-    db $00,$31,$31,$31,$00,$31,$31,$fc,$f5,$ff ; [$9a88] byte
+    db $31                                  ; [$9a8e] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RET                       ; Op: Return from subroutine
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for Conflate.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_CONFLATE [$PRG5::8f13]
+;     MSCRIPTS_CONFLATE [$PRG5::8f13]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_CONFLATE [$PRG5::8f13]
+;     MSCRIPTS_CONFLATE [$PRG5::8f13]
 ;
-MUSIC_CONFLATE_1:                           ; [$9a92]
-    db $f1,$02,$f2,$90,$f0,$01,$fd,$02,$98,$37,$36,$a4,$33,$bc,$34,$8c ; [$9a92]
-                                                                       ; byte
-    db $34,$37,$3b,$98,$3e,$8c,$3b,$37,$34,$98,$3d,$8c,$35,$bc,$3c,$8c ; [$9aa2]
-                                                                       ; byte
-    db $39,$3c,$40,$98,$43,$8c,$40,$3c,$39,$a4,$42,$8c,$3e,$3a,$37,$00 ; [$9ab2]
-                                                                       ; byte
-    db $32,$b0,$35,$a4,$33,$8c,$32,$b0,$00,$8c,$2b,$2e,$32,$36,$b0,$00 ; [$9ac2]
-                                                                       ; byte
-    db $fc,$00,$98,$3b,$8c,$3c,$3e,$00,$34,$00,$00,$3b,$3b,$3c,$3e,$00 ; [$9ad2]
-                                                                       ; byte
-    db $3b,$34,$37,$39,$3f,$00,$b0,$3f,$8c,$39,$3f,$41,$3f,$2d,$2d,$33 ; [$9ae2]
-                                                                       ; byte
-    db $00,$86,$3f,$40,$98,$41,$8c,$3d,$3a,$00,$35,$3a,$3d,$41,$41,$3d ; [$9af2]
-                                                                       ; byte
-    db $3a,$00,$3a,$3d,$3a,$3e,$3f,$3e,$3a,$36,$33,$36,$33,$32,$32,$32 ; [$9b02]
-                                                                       ; byte
-    db $00,$f4,$ff                          ; [$9b12] byte
+MSCRIPT_CONFLATE_SQ1:                       ; [$9a92]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $a4                                  ; Note length: 36
+    db $33                                  ; D#4
+    db $bc                                  ; Note length: 60
+    db $34                                  ; E4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3b                                  ; B4
+    db $37                                  ; G4
+    db $34                                  ; E4
+    db $98                                  ; Note length: 24
+    db $3d                                  ; C#5
+    db $8c                                  ; Note length: 12
+    db $35                                  ; F4
+    db $bc                                  ; Note length: 60
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $98                                  ; Note length: 24
+    db $43                                  ; G5
+    db $8c                                  ; Note length: 12
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $a4                                  ; Note length: 36
+    db $42                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $b0                                  ; Note length: 48
+    db $35                                  ; F4
+    db $a4                                  ; Note length: 36
+    db $33                                  ; D#4
+    db $8c                                  ; Note length: 12
+    db $32                                  ; D4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $36                                  ; F#4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $fc                                  ; Op: End loop
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $3b                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $3b                                  ; B4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $00                                  ; Rest
+    db $3b                                  ; B4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $3f                                  ; D#5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $3f                                  ; D#5
+    db $41                                  ; F5
+    db $3f                                  ; D#5
+    db $2d                                  ; A3
+    db $2d                                  ; A3
+    db $33                                  ; D#4
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $3f                                  ; D#5
+    db $40                                  ; E5
+    db $98                                  ; Note length: 24
+    db $41                                  ; F5
+    db $8c                                  ; Note length: 12
+    db $3d                                  ; C#5
+    db $3a                                  ; A#4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $3d                                  ; C#5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $3d                                  ; C#5
+    db $3a                                  ; A#4
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $3d                                  ; C#5
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $3f                                  ; D#5
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $36                                  ; F#4
+    db $33                                  ; D#4
+    db $36                                  ; F#4
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db $32                                  ; D4
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_CONFLATE [$PRG5::8f15]
+;     MSCRIPTS_CONFLATE [$PRG5::8f15]
 ;
-MUSIC_CONFLATE_2:                           ; [$9b15]
-    db $f1,$02,$f2,$90,$fd,$02,$98,$2f,$2d,$a4,$2a,$8c,$2b,$00,$2b,$22 ; [$9b15]
-                                                                       ; byte
-    db $23,$2b,$2f,$34,$98,$37,$8c,$34,$2f,$2b,$98,$39,$8c,$2d,$39,$00 ; [$9b25]
-                                                                       ; byte
-    db $39,$2c,$2d,$ee,$01,$f1,$05,$86,$00,$8c,$39,$3c,$40,$92,$43,$8c ; [$9b35]
-                                                                       ; byte
-    db $3c,$39,$34,$ee,$00,$f1,$02,$a4,$3e,$8c,$3a,$37,$32,$00,$2e,$86 ; [$9b45]
-                                                                       ; byte
-    db $27,$2b,$2e,$32,$35,$32,$2e,$2b,$25,$29,$2c,$30,$33,$30,$8c,$2f ; [$9b55]
-                                                                       ; byte
-    db $b0,$00,$8c,$32,$37,$3a,$3e,$b0,$00,$fc,$00,$98,$37,$8c,$39,$3b ; [$9b65]
-                                                                       ; byte
-    db $00,$28,$00,$00,$37,$37,$39,$3b,$00,$37,$2b,$2f,$30,$39,$00,$98 ; [$9b75]
-                                                                       ; byte
-    db $39,$8c,$35,$30,$35,$39,$3c,$39,$29,$29,$2d,$00,$86,$3b,$3c,$98 ; [$9b85]
-                                                                       ; byte
-    db $3d,$8c,$3a,$35,$00,$31,$35,$3a,$3d,$3d,$3a,$35,$00,$31,$35,$31 ; [$9b95]
-                                                                       ; byte
-    db $86,$3a,$32,$3a,$33,$3a,$32,$36,$2e,$33,$2a,$2e,$27,$2a,$22,$2e ; [$9ba5]
-                                                                       ; byte
-    db $27,$8c,$2b,$2b,$2a,$00,$f4,$ff      ; [$9bb5] byte
+MSCRIPT_CONFLATE_SQ2:                       ; [$9b15]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db $a4                                  ; Note length: 36
+    db $2a                                  ; F#3
+    db $8c                                  ; Note length: 12
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $22                                  ; A#2
+    db $23                                  ; B2
+    db $2b                                  ; G3
+    db $2f                                  ; B3
+    db $34                                  ; E4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $2d                                  ; A3
+    db $39                                  ; A4
+    db $00                                  ; Rest
+    db $39                                  ; A4
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $01                                  ;  '- 1
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $05                                  ;  '- Reduce volume by 5
+    db $86                                  ; Note length: 6
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $92                                  ; Note length: 18
+    db $43                                  ; G5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $00                                  ;  '- 0
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db $a4                                  ; Note length: 36
+    db $3e                                  ; D5
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $86                                  ; Note length: 6
+    db $27                                  ; D#3
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $32                                  ; D4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $25                                  ; C#3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $8c                                  ; Note length: 12
+    db $2f                                  ; B3
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $fc                                  ; Op: End loop
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $00                                  ; Rest
+    db $28                                  ; E3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $2b                                  ; G3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $39                                  ; A4
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $29                                  ; F3
+    db $29                                  ; F3
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $3d                                  ; C#5
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $31                                  ; C#4
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $3d                                  ; C#5
+    db $3d                                  ; C#5
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $31                                  ; C#4
+    db $35                                  ; F4
+    db $31                                  ; C#4
+    db $86                                  ; Note length: 6
+    db $3a                                  ; A#4
+    db $32                                  ; D4
+    db $3a                                  ; A#4
+    db $33                                  ; D#4
+    db $3a                                  ; A#4
+    db $32                                  ; D4
+    db $36                                  ; F#4
+    db $2e                                  ; A#3
+    db $33                                  ; D#4
+    db $2a                                  ; F#3
+    db $2e                                  ; A#3
+    db $27                                  ; D#3
+    db $2a                                  ; F#3
+    db $22                                  ; A#2
+    db $2e                                  ; A#3
+    db $27                                  ; D#3
+    db $8c                                  ; Note length: 12
+    db $2b                                  ; G3
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_CONFLATE [$PRG5::8f17]
+;     MSCRIPTS_CONFLATE [$PRG5::8f17]
 ;
-MUSIC_CONFLATE_3:                           ; [$9bbd]
-    db $fd,$02,$b0,$00,$8c,$10,$10,$13,$10,$17,$17,$10,$86,$1c,$10,$8c ; [$9bbd]
-                                                                       ; byte
-    db $10,$10,$13,$10,$17,$17,$10,$86,$1c,$10,$8c,$11,$11,$15,$11,$18 ; [$9bcd]
-                                                                       ; byte
-    db $18,$11,$86,$1d,$11,$8c,$15,$18,$1c,$98,$1f,$8c,$1c,$15,$86,$21 ; [$9bdd]
-                                                                       ; byte
-    db $15,$8c,$13,$13,$16,$13,$1a,$1a,$13,$86,$1f,$13,$8c,$0f,$0f,$16 ; [$9bed]
-                                                                       ; byte
-    db $86,$1b,$0f,$8c,$0d,$0d,$14,$86,$19,$0d,$a4,$13,$86,$14,$15,$8c ; [$9bfd]
-                                                                       ; byte
-    db $16,$1a,$1f,$13,$fb,$01,$b0,$00,$fc,$fb,$02,$8c,$00,$1f,$1d,$1b ; [$9c0d]
-                                                                       ; byte
-    db $1a,$16,$13,$14,$15,$1c,$23,$1f,$21,$1c,$00,$13,$15,$1c,$23,$1f ; [$9c1d]
-                                                                       ; byte
-    db $21,$13,$15,$10,$11,$18,$21,$1d,$1f,$1d,$00,$0c,$11,$18,$21,$1f ; [$9c2d]
-                                                                       ; byte
-    db $00,$1d,$18,$11,$16,$1d,$22,$1d,$24,$22,$00,$11,$16,$1d,$24,$22 ; [$9c3d]
-                                                                       ; byte
-    db $00,$1d,$16,$11,$0f,$16,$1b,$16,$1d,$1b,$16,$0f,$0e,$0e,$0e,$00 ; [$9c4d]
-                                                                       ; byte
-    db $f4,$ff                              ; [$9c5d] byte
+MSCRIPT_CONFLATE_TRI:                       ; [$9bbd]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $10                                  ; E3
+    db $17                                  ; B3
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $86                                  ; Note length: 6
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $10                                  ; E3
+    db $17                                  ; B3
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $86                                  ; Note length: 6
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $15                                  ; A3
+    db $11                                  ; F3
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $11                                  ; F3
+    db $86                                  ; Note length: 6
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $98                                  ; Note length: 24
+    db $1f                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $86                                  ; Note length: 6
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $8c                                  ; Note length: 12
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $16                                  ; A#3
+    db $13                                  ; G3
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $13                                  ; G3
+    db $86                                  ; Note length: 6
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $8c                                  ; Note length: 12
+    db $0f                                  ; D#3
+    db $0f                                  ; D#3
+    db $16                                  ; A#3
+    db $86                                  ; Note length: 6
+    db $1b                                  ; D#4
+    db $0f                                  ; D#3
+    db $8c                                  ; Note length: 12
+    db $0d                                  ; C#3
+    db $0d                                  ; C#3
+    db $14                                  ; G#3
+    db $86                                  ; Note length: 6
+    db $19                                  ; C#4
+    db $0d                                  ; C#3
+    db $a4                                  ; Note length: 36
+    db $13                                  ; G3
+    db $86                                  ; Note length: 6
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $8c                                  ; Note length: 12
+    db $16                                  ; A#3
+    db $1a                                  ; D4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $1d                                  ; F4
+    db $1b                                  ; D#4
+    db $1a                                  ; D4
+    db $16                                  ; A#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $1c                                  ; E4
+    db $23                                  ; B4
+    db $1f                                  ; G4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $1c                                  ; E4
+    db $23                                  ; B4
+    db $1f                                  ; G4
+    db $21                                  ; A4
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1d                                  ; F4
+    db $1f                                  ; G4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $0c                                  ; C3
+    db $11                                  ; F3
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $18                                  ; C4
+    db $11                                  ; F3
+    db $16                                  ; A#3
+    db $1d                                  ; F4
+    db $22                                  ; A#4
+    db $1d                                  ; F4
+    db $24                                  ; C5
+    db $22                                  ; A#4
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $16                                  ; A#3
+    db $1d                                  ; F4
+    db $24                                  ; C5
+    db $22                                  ; A#4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $16                                  ; A#3
+    db $11                                  ; F3
+    db $0f                                  ; D#3
+    db $16                                  ; A#3
+    db $1b                                  ; D#4
+    db $16                                  ; A#3
+    db $1d                                  ; F4
+    db $1b                                  ; D#4
+    db $16                                  ; A#3
+    db $0f                                  ; D#3
+    db $0e                                  ; D3
+    db $0e                                  ; D3
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_CONFLATE [$PRG5::8f19]
+;     MSCRIPTS_CONFLATE [$PRG5::8f19]
 ;
-MUSIC_CONFLATE_4:                           ; [$9c5f]
-    db $fd,$02,$86,$31,$00,$00,$00,$31,$00,$00,$00,$86,$31,$00,$31,$00 ; [$9c5f]
+MSCRIPT_CONFLATE_NOISE:                     ; [$9c5f]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$00,$00,$31,$00,$00,$00,$86,$31,$00,$31,$00,$8c,$21 ; [$9c61]
                                                                        ; byte
-    db $8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31,$00,$31 ; [$9c6f]
+    db $21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31,$00,$31,$00,$8c ; [$9c71]
                                                                        ; byte
-    db $00,$8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31,$00 ; [$9c7f]
+    db $21,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31,$00,$31,$00 ; [$9c81]
                                                                        ; byte
-    db $31,$00,$8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$21,$86,$31,$00 ; [$9c8f]
+    db $8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$21,$86,$31,$00,$31,$00 ; [$9c91]
                                                                        ; byte
-    db $31,$00,$31,$00,$31,$00,$31,$00,$8c,$21,$21,$86,$21,$21,$31,$00 ; [$9c9f]
+    db $31,$00,$31,$00,$31,$00,$8c,$21,$21,$86,$21,$21,$31,$00,$31,$00 ; [$9ca1]
                                                                        ; byte
-    db $31,$00,$8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31 ; [$9caf]
+    db $8c,$21,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$31,$00,$31 ; [$9cb1]
                                                                        ; byte
-    db $00,$31,$00,$8c,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$8c ; [$9cbf]
+    db $00,$8c,$21,$86,$31,$00,$31,$00,$8c,$21,$86,$31,$00,$8c,$21,$86 ; [$9cc1]
                                                                        ; byte
-    db $21,$86,$31,$00,$00,$00,$31,$00,$00,$00,$8c,$21,$21,$21,$21,$fb ; [$9ccf]
+    db $31,$00,$00,$00,$31,$00,$00,$00,$8c,$21,$21,$21,$21 ; [$9cd1] byte
+
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c,$00,$86,$31,$31,$8c,$21,$00      ; [$9ce0] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $b0,$00,$8c,$00,$31,$86,$31,$31,$31,$00,$8c,$00,$00,$31,$00,$00 ; [$9ceb]
                                                                        ; byte
-    db $01,$8c,$00,$86,$31,$31,$8c,$21,$00,$fc,$fb,$02,$b0,$00,$8c,$00 ; [$9cdf]
+    db $31,$00,$00,$00,$00,$31,$00,$00,$31,$00,$00,$00,$00,$31,$00,$00 ; [$9cfb]
                                                                        ; byte
-    db $31,$86,$31,$31,$31,$00,$8c,$00,$00,$31,$00,$00,$31,$00,$00,$00 ; [$9cef]
+    db $31,$00,$00,$00,$00,$31,$00,$00,$31,$00,$86,$31,$31,$8c,$00,$00 ; [$9d0b]
                                                                        ; byte
-    db $00,$31,$00,$00,$31,$00,$00,$00,$00,$31,$00,$00,$31,$00,$00,$00 ; [$9cff]
+    db $31,$00,$00,$31,$00,$00,$00,$00,$31,$00,$00,$31,$00,$00,$00,$00 ; [$9d1b]
                                                                        ; byte
-    db $00,$31,$00,$00,$31,$00,$86,$31,$31,$8c,$00,$00,$31,$00,$00,$31 ; [$9d0f]
-                                                                       ; byte
-    db $00,$00,$00,$00,$31,$00,$00,$31,$00,$00,$00,$00,$31,$00,$00,$31 ; [$9d1f]
-                                                                       ; byte
-    db $31,$00,$31,$31,$31,$00,$f4,$ff,$ff  ; [$9d2f] byte
+    db $31,$00,$00,$31,$31,$00,$31,$31,$31,$00 ; [$9d2b] byte
+
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for Forepaw.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_FOREPAW [$PRG5::8f1b]
+;     MSCRIPTS_FOREPAW [$PRG5::8f1b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_FOREPAW [$PRG5::8f1b]
+;     MSCRIPTS_FOREPAW [$PRG5::8f1b]
 ;
-MUSIC_FOREPAW_1:                            ; [$9d38]
-    db $f1,$03,$f2,$50,$f0,$00,$90,$1f,$22,$2a,$26,$1f,$22,$2a,$26,$1f ; [$9d38]
-                                                                       ; byte
-    db $22,$2a,$26,$1f,$22,$2a,$26,$f9,$fd,$02,$90,$1f,$22,$2a,$26,$1f ; [$9d48]
-                                                                       ; byte
-    db $22,$2a,$26,$1f,$22,$2a,$26,$1f,$22,$2a,$26,$1f,$22,$2a,$26,$1f ; [$9d58]
-                                                                       ; byte
-    db $22,$2a,$26,$1f,$22,$2a,$26,$1f,$22,$2a,$26,$fc,$fd,$02,$a0,$32 ; [$9d68]
-                                                                       ; byte
-    db $33,$c0,$38,$a0,$36,$37,$c0,$3e,$a0,$3d,$39,$3c,$3b,$c0,$37,$32 ; [$9d78]
-                                                                       ; byte
-    db $fc,$fd,$02,$90,$26,$29,$2c,$34,$2c,$29,$26,$29,$26,$29,$2c,$34 ; [$9d88]
-                                                                       ; byte
-    db $2c,$29,$26,$29,$2b,$2e,$31,$39,$31,$2e,$2b,$2e,$2b,$2e,$31,$39 ; [$9d98]
-                                                                       ; byte
-    db $31,$2e,$2b,$25,$fc,$fe,$ff          ; [$9da8] byte
+MSCRIPT_FOREPAW_SQ1:                        ; [$9d38]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $03                                  ;  '- Reduce volume by 3
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db MSCRIPT_OP_PUSH_ADDR                 ; Op: Save address
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a0                                  ; Note length: 32
+    db $32                                  ; D4
+    db $33                                  ; D#4
+    db $c0                                  ; Note length: 64
+    db $38                                  ; G#4
+    db $a0                                  ; Note length: 32
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $c0                                  ; Note length: 64
+    db $3e                                  ; D5
+    db $a0                                  ; Note length: 32
+    db $3d                                  ; C#5
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $c0                                  ; Note length: 64
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $34                                  ; E4
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $34                                  ; E4
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $31                                  ; C#4
+    db $39                                  ; A4
+    db $31                                  ; C#4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $31                                  ; C#4
+    db $39                                  ; A4
+    db $31                                  ; C#4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $25                                  ; C#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_POP_ADDR                  ; Op: Jump to saved address
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_FOREPAW [$PRG5::8f1d]
+;     MSCRIPTS_FOREPAW [$PRG5::8f1d]
 ;
-MUSIC_FOREPAW_2:                            ; [$9daf]
-    db $f1,$05,$f2,$90,$f0,$00,$ee,$02,$f2,$11,$88,$00,$90,$1f,$22,$2a ; [$9daf]
-                                                                       ; byte
-    db $26,$1f,$22,$2a,$90,$26,$90,$1f,$22,$2a,$26,$1f,$22,$2a,$88,$26 ; [$9dbf]
-                                                                       ; byte
-    db $f9,$fd,$02,$88,$00,$90,$1f,$22,$2a,$26,$1f,$22,$2a,$90,$26,$90 ; [$9dcf]
-                                                                       ; byte
-    db $1f,$22,$2a,$26,$1f,$22,$2a,$90,$26,$90,$1f,$22,$2a,$26,$1f,$22 ; [$9ddf]
-                                                                       ; byte
-    db $2a,$90,$26,$90,$1f,$22,$2a,$26,$1f,$22,$2a,$88,$26,$fc,$fd,$02 ; [$9def]
-                                                                       ; byte
-    db $88,$00,$32,$2d,$2a,$28,$33,$2d,$2a,$28,$38,$32,$2d,$2a,$28,$26 ; [$9dff]
-                                                                       ; byte
-    db $21,$1f,$36,$32,$2d,$2a,$37,$32,$2c,$28,$3e,$3b,$34,$2f,$2a,$27 ; [$9e0f]
-                                                                       ; byte
-    db $26,$26,$3d,$39,$36,$32,$39,$36,$32,$2d,$3c,$39,$34,$2d,$3b,$36 ; [$9e1f]
-                                                                       ; byte
-    db $34,$2f,$37,$32,$2f,$2b,$2a,$26,$23,$1f,$32,$2f,$2b,$28,$26,$23 ; [$9e2f]
-                                                                       ; byte
-    db $1f,$fc,$f1,$02,$fd,$02,$88,$00,$90,$26,$29,$2c,$34,$2c,$29,$26 ; [$9e3f]
-                                                                       ; byte
-    db $88,$29,$29,$90,$26,$29,$2c,$34,$2c,$29,$26,$90,$29,$90,$2b,$2e ; [$9e4f]
-                                                                       ; byte
-    db $31,$39,$31,$2e,$2b,$90,$2e,$90,$2b,$2e,$31,$39,$31,$2e,$2b,$88 ; [$9e5f]
-                                                                       ; byte
-    db $25,$fc,$fe,$ff                      ; [$9e6f] byte
+MSCRIPT_FOREPAW_SQ2:                        ; [$9daf]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $05                                  ;  '- Reduce volume by 5
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $02                                  ;  '- 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $11                                  ;  '- Duty cycle 0     Constant
+                                            ; volume/envelope
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $88                                  ; Note length: 8
+    db $26                                  ; D3
+    db MSCRIPT_OP_PUSH_ADDR                 ; Op: Save address
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $22                                  ; A#2
+    db $2a                                  ; F#3
+    db $88                                  ; Note length: 8
+    db $26                                  ; D3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $28                                  ; E3
+    db $38                                  ; G#4
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $28                                  ; E3
+    db $26                                  ; D3
+    db $21                                  ; A2
+    db $1f                                  ; G2
+    db $36                                  ; F#4
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $2c                                  ; G#3
+    db $28                                  ; E3
+    db $3e                                  ; D5
+    db $3b                                  ; B4
+    db $34                                  ; E4
+    db $2f                                  ; B3
+    db $2a                                  ; F#3
+    db $27                                  ; D#3
+    db $26                                  ; D3
+    db $26                                  ; D3
+    db $3d                                  ; C#5
+    db $39                                  ; A4
+    db $36                                  ; F#4
+    db $32                                  ; D4
+    db $39                                  ; A4
+    db $36                                  ; F#4
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $2d                                  ; A3
+    db $3b                                  ; B4
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $2f                                  ; B3
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $26                                  ; D3
+    db $23                                  ; B2
+    db $1f                                  ; G2
+    db $32                                  ; D4
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $28                                  ; E3
+    db $26                                  ; D3
+    db $23                                  ; B2
+    db $1f                                  ; G2
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $34                                  ; E4
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $88                                  ; Note length: 8
+    db $29                                  ; F3
+    db $29                                  ; F3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $34                                  ; E4
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $90                                  ; Note length: 16
+    db $29                                  ; F3
+    db $90                                  ; Note length: 16
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $31                                  ; C#4
+    db $39                                  ; A4
+    db $31                                  ; C#4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $90                                  ; Note length: 16
+    db $2e                                  ; A#3
+    db $90                                  ; Note length: 16
+    db $2b                                  ; G3
+    db $2e                                  ; A#3
+    db $31                                  ; C#4
+    db $39                                  ; A4
+    db $31                                  ; C#4
+    db $2e                                  ; A#3
+    db $2b                                  ; G3
+    db $88                                  ; Note length: 8
+    db $25                                  ; C#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_POP_ADDR                  ; Op: Jump to saved address
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_FOREPAW [$PRG5::8f1f]
+;     MSCRIPTS_FOREPAW [$PRG5::8f1f]
 ;
-MUSIC_FOREPAW_3:                            ; [$9e73]
-    db $f3,$80,$00,$00,$f9,$fd,$02,$90,$36,$37,$c0,$39,$90,$36,$37,$c0 ; [$9e73]
-                                                                       ; byte
-    db $34,$2d,$90,$36,$37,$c0,$39,$90,$36,$37,$34,$33,$32,$d0,$2d,$fc ; [$9e83]
-                                                                       ; byte
-    db $fd,$04,$88,$1a,$00,$a0,$1a,$88,$1a,$1a,$1a,$00,$a0,$1a,$88,$1a ; [$9e93]
-                                                                       ; byte
-    db $1a,$1a,$00,$a0,$1a,$88,$1a,$1a,$1a,$00,$a0,$1a,$88,$1a,$1a,$fc ; [$9ea3]
-                                                                       ; byte
-    db $fd,$02,$b0,$00,$88,$28,$20,$90,$1a,$1d,$a0,$00,$b0,$00,$88,$28 ; [$9eb3]
-                                                                       ; byte
-    db $20,$90,$1a,$1d,$a0,$00,$b0,$00,$88,$2d,$25,$90,$1f,$22,$a0,$00 ; [$9ec3]
-                                                                       ; byte
-    db $b0,$00,$88,$2d,$25,$90,$1f,$22,$a0,$19,$fc,$fe,$ff ; [$9ed3] byte
+MSCRIPT_FOREPAW_TRI:                        ; [$9e73]
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $80                                  ;  '- 128 ticks
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_PUSH_ADDR                 ; Op: Save address
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#6
+    db $37                                  ; G6
+    db $c0                                  ; Note length: 64
+    db $39                                  ; A6
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#6
+    db $37                                  ; G6
+    db $c0                                  ; Note length: 64
+    db $34                                  ; E6
+    db $2d                                  ; A5
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#6
+    db $37                                  ; G6
+    db $c0                                  ; Note length: 64
+    db $39                                  ; A6
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#6
+    db $37                                  ; G6
+    db $34                                  ; E6
+    db $33                                  ; D#6
+    db $32                                  ; D6
+    db $d0                                  ; Note length: 80
+    db $2d                                  ; A5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $04                                  ;  '- 4 iterations
+    db $88                                  ; Note length: 8
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $a0                                  ; Note length: 32
+    db $1a                                  ; D4
+    db $88                                  ; Note length: 8
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $a0                                  ; Note length: 32
+    db $1a                                  ; D4
+    db $88                                  ; Note length: 8
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $a0                                  ; Note length: 32
+    db $1a                                  ; D4
+    db $88                                  ; Note length: 8
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $a0                                  ; Note length: 32
+    db $1a                                  ; D4
+    db $88                                  ; Note length: 8
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $28                                  ; E5
+    db $20                                  ; G#4
+    db $90                                  ; Note length: 16
+    db $1a                                  ; D4
+    db $1d                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $28                                  ; E5
+    db $20                                  ; G#4
+    db $90                                  ; Note length: 16
+    db $1a                                  ; D4
+    db $1d                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $2d                                  ; A5
+    db $25                                  ; C#5
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G4
+    db $22                                  ; A#4
+    db $a0                                  ; Note length: 32
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $2d                                  ; A5
+    db $25                                  ; C#5
+    db $90                                  ; Note length: 16
+    db $1f                                  ; G4
+    db $22                                  ; A#4
+    db $a0                                  ; Note length: 32
+    db $19                                  ; C#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_POP_ADDR                  ; Op: Jump to saved address
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_FOREPAW [$PRG5::8f21]
+;     MSCRIPTS_FOREPAW [$PRG5::8f21]
 ;
-MUSIC_FOREPAW_4:                            ; [$9ee0]
+MSCRIPT_FOREPAW_NOISE:                      ; [$9ee0]
     db $ff,$ff                              ; [$9ee0] byte
 
 
@@ -4144,486 +8253,2400 @@ MUSIC_FOREPAW_4:                            ; [$9ee0]
 ; Music for Tower.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TOWER [$PRG5::8f23]
+;     MSCRIPTS_TOWER [$PRG5::8f23]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TOWER [$PRG5::8f23]
+;     MSCRIPTS_TOWER [$PRG5::8f23]
 ;
-MUSIC_TOWER_1:                              ; [$9ee2]
-    db $f1,$02,$f2,$90,$f0,$00,$fd,$02,$88,$00,$3c,$3b,$37,$00,$00,$00 ; [$9ee2]
-                                                                       ; byte
-    db $00,$00,$3a,$39,$35,$38,$00,$00,$00,$fc,$fd,$02,$88,$00,$3c,$3b ; [$9ef2]
-                                                                       ; byte
-    db $98,$37,$88,$38,$37,$00,$3a,$39,$35,$38,$39,$38,$00,$fc,$fd,$02 ; [$9f02]
-                                                                       ; byte
-    db $88,$35,$35,$35,$35,$90,$34,$00,$b0,$00,$88,$35,$35,$35,$35,$90 ; [$9f12]
-                                                                       ; byte
-    db $34,$c0,$00,$90,$35,$37,$37,$38,$38,$3a,$3a,$3c,$3c,$3d,$a0,$35 ; [$9f22]
-                                                                       ; byte
-    db $34,$00,$30,$88,$35,$37,$00,$37,$00,$37,$35,$30,$37,$37,$35,$00 ; [$9f32]
-                                                                       ; byte
-    db $37,$00,$38,$37,$e0,$00,$88,$30,$31,$30,$00,$fc,$fd,$02,$98,$31 ; [$9f42]
-                                                                       ; byte
-    db $30,$90,$35,$a0,$34,$35,$98,$37,$34,$90,$35,$a0,$3d,$88,$37,$35 ; [$9f52]
-                                                                       ; byte
-    db $34,$33,$fc,$f4,$ff                  ; [$9f62] byte
+MSCRIPT_TOWER_SQ1:                          ; [$9ee2]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $39                                  ; A4
+    db $35                                  ; F4
+    db $38                                  ; G#4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $88                                  ; Note length: 8
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $39                                  ; A4
+    db $35                                  ; F4
+    db $38                                  ; G#4
+    db $39                                  ; A4
+    db $38                                  ; G#4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $90                                  ; Note length: 16
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $90                                  ; Note length: 16
+    db $34                                  ; E4
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $3a                                  ; A#4
+    db $3a                                  ; A#4
+    db $3c                                  ; C5
+    db $3c                                  ; C5
+    db $3d                                  ; C#5
+    db $a0                                  ; Note length: 32
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $88                                  ; Note length: 8
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $30                                  ; C4
+    db $31                                  ; C#4
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $31                                  ; C#4
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $3d                                  ; C#5
+    db $88                                  ; Note length: 8
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TOWER [$PRG5::8f25]
+;     MSCRIPTS_TOWER [$PRG5::8f25]
 ;
-MUSIC_TOWER_2:                              ; [$9f67]
-    db $f1,$02,$f2,$90,$f0,$00,$ee,$04,$fd,$02,$88,$00,$30,$2f,$2b,$00 ; [$9f67]
-                                                                       ; byte
-    db $00,$00,$00,$00,$2e,$2d,$29,$2c,$00,$00,$00,$fc,$ee,$00,$fd,$02 ; [$9f77]
-                                                                       ; byte
-    db $88,$00,$37,$36,$98,$32,$88,$33,$32,$00,$35,$34,$30,$33,$34,$33 ; [$9f87]
-                                                                       ; byte
-    db $00,$fc,$fd,$02,$88,$30,$30,$30,$30,$90,$2f,$00,$b0,$00,$88,$00 ; [$9f97]
-                                                                       ; byte
-    db $00,$30,$30,$90,$2f,$c0,$00,$90,$2c,$30,$30,$35,$35,$37,$37,$38 ; [$9fa7]
-                                                                       ; byte
-    db $38,$3a,$a0,$30,$2f,$00,$2e,$88,$30,$34,$00,$34,$00,$34,$30,$2c ; [$9fb7]
-                                                                       ; byte
-    db $34,$34,$32,$00,$34,$00,$35,$34,$e0,$00,$88,$30,$2f,$2e,$00,$fc ; [$9fc7]
-                                                                       ; byte
-    db $f1,$07,$ee,$01,$fd,$02,$88,$00,$98,$31,$30,$90,$35,$a0,$34,$a0 ; [$9fd7]
-                                                                       ; byte
-    db $35,$98,$37,$34,$90,$35,$9c,$3d,$88,$37,$35,$34,$84,$33,$f1,$04 ; [$9fe7]
-                                                                       ; byte
-    db $fc,$f4,$ff                          ; [$9ff7] byte
+MSCRIPT_TOWER_SQ2:                          ; [$9f67]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $04                                  ;  '- 4
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $2d                                  ; A3
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $00                                  ;  '- 0
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $88                                  ; Note length: 8
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $2f                                  ; B3
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $3a                                  ; A#4
+    db $a0                                  ; Note length: 32
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $88                                  ; Note length: 8
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $2c                                  ; G#3
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2e                                  ; A#3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $07                                  ;  '- Reduce volume by 7
+    db MSCRIPT_OP_SET_SQ2_PITCH_BIAS        ; Op: Set SQ2 pitch bias
+    db $01                                  ;  '- 1
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $31                                  ; C#4
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $35                                  ; F4
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $9c                                  ; Note length: 28
+    db $3d                                  ; C#5
+    db $88                                  ; Note length: 8
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $84                                  ; Note length: 4
+    db $33                                  ; D#4
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TOWER [$PRG5::8f27]
+;     MSCRIPTS_TOWER [$PRG5::8f27]
 ;
-MUSIC_TOWER_3:                              ; [$9ffa]
-    db $fd,$02,$88,$18,$00,$00,$18,$00,$00,$18,$00,$18,$00,$00,$18,$00 ; [$9ffa]
-                                                                       ; byte
-    db $00,$18,$18,$90,$18,$88,$00,$18,$00,$00,$90,$18,$18,$88,$00,$18 ; [$a00a]
-                                                                       ; byte
-    db $00,$0c,$18,$0c,$fc,$fd,$02,$88,$14,$14,$14,$14,$90,$13,$88,$18 ; [$a01a]
-                                                                       ; byte
-    db $19,$00,$19,$18,$13,$90,$0c,$88,$00,$00,$14,$14,$90,$13,$00,$88 ; [$a02a]
-                                                                       ; byte
-    db $17,$18,$0c,$0d,$0e,$00,$90,$00,$88,$20,$18,$11,$11,$00,$11,$1d ; [$a03a]
-                                                                       ; byte
-    db $1d,$1c,$18,$11,$11,$00,$11,$1d,$1d,$1c,$18,$a0,$14,$90,$13,$88 ; [$a04a]
-                                                                       ; byte
-    db $1f,$13,$a0,$00,$98,$1f,$88,$18,$90,$0c,$88,$00,$18,$00,$18,$0c ; [$a05a]
-                                                                       ; byte
-    db $0c,$90,$0c,$88,$00,$18,$00,$18,$0c,$0c,$00,$00,$1f,$24,$1e,$1d ; [$a06a]
-                                                                       ; byte
-    db $1c,$14,$a0,$13,$88,$18,$17,$18,$00,$fc,$fd,$02,$90,$13,$88,$00 ; [$a07a]
-                                                                       ; byte
-    db $90,$13,$88,$00,$13,$00,$13,$00,$00,$13,$00,$00,$13,$13,$fc,$fd ; [$a08a]
-                                                                       ; byte
-    db $02,$90,$13,$88,$1f,$90,$13,$88,$1f,$13,$1f,$13,$13,$1f,$90,$13 ; [$a09a]
-                                                                       ; byte
-    db $88,$1f,$13,$1f,$fc,$f4,$ff          ; [$a0aa] byte
+MSCRIPT_TOWER_TRI:                          ; [$9ffa]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $90                                  ; Note length: 16
+    db $18                                  ; C4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $0c                                  ; C3
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $18                                  ; C4
+    db $19                                  ; C#4
+    db $00                                  ; Rest
+    db $19                                  ; C#4
+    db $18                                  ; C4
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $0c                                  ; C3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db $0d                                  ; C#3
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $20                                  ; G#4
+    db $18                                  ; C4
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $a0                                  ; Note length: 32
+    db $14                                  ; G#3
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $a0                                  ; Note length: 32
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $1f                                  ; G4
+    db $88                                  ; Note length: 8
+    db $18                                  ; C4
+    db $90                                  ; Note length: 16
+    db $0c                                  ; C3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db $0c                                  ; C3
+    db $90                                  ; Note length: 16
+    db $0c                                  ; C3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db $0c                                  ; C3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $24                                  ; C5
+    db $1e                                  ; F#4
+    db $1d                                  ; F4
+    db $1c                                  ; E4
+    db $14                                  ; G#3
+    db $a0                                  ; Note length: 32
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $18                                  ; C4
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TOWER [$PRG5::8f29]
+;     MSCRIPTS_TOWER [$PRG5::8f29]
 ;
-MUSIC_TOWER_4:                              ; [$a0b1]
-    db $fd,$04,$88,$21,$31,$31,$21,$31,$31,$21,$31,$21,$31,$31,$21,$31 ; [$a0b1]
+MSCRIPT_TOWER_NOISE:                        ; [$a0b1]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $04                                  ;  '- 4 iterations
+    db $88,$21,$31,$31,$21,$31,$31,$21,$31,$21,$31,$31,$21,$31,$31,$21 ; [$a0b3]
                                                                        ; byte
-    db $31,$21,$31,$fc,$fd,$02,$88,$21,$21,$21,$21,$21,$00,$31,$31,$31 ; [$a0c1]
+    db $31                                  ; [$a0c3] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$21,$21,$21,$21,$21,$00,$31,$31,$31,$31,$31,$31,$21,$00,$00 ; [$a0c7]
                                                                        ; byte
-    db $31,$31,$31,$21,$00,$00,$21,$11,$11,$11,$00,$85,$31,$31,$86,$31 ; [$a0d1]
+    db $21,$11,$11,$11,$00,$85,$31,$31,$86,$31,$88,$31,$31,$31,$31,$21 ; [$a0d7]
                                                                        ; byte
-    db $88,$31,$31,$31,$31,$21,$00,$21,$00,$21,$21,$31,$00,$31,$00,$31 ; [$a0e1]
+    db $00,$21,$00,$21,$21,$31,$00,$31,$00,$31,$31,$21,$00,$31,$00,$31 ; [$a0e7]
                                                                        ; byte
-    db $31,$21,$00,$31,$00,$31,$31,$31,$31,$21,$21,$31,$00,$31,$00,$31 ; [$a0f1]
+    db $31,$31,$31,$21,$21,$31,$00,$31,$00,$31,$00,$31,$00,$85,$31,$31 ; [$a0f7]
                                                                        ; byte
-    db $00,$31,$00,$85,$31,$31,$86,$31,$88,$31,$31,$21,$21,$31,$00,$31 ; [$a101]
+    db $86,$31,$88,$31,$31,$21,$21,$31,$00,$31,$31,$31,$31,$21,$31,$31 ; [$a107]
                                                                        ; byte
-    db $31,$31,$31,$21,$31,$31,$31,$31,$31,$31,$31,$21,$31,$31,$31,$a0 ; [$a111]
+    db $31,$31,$31,$31,$31,$21,$31,$31,$31,$a0,$00,$88,$21,$21,$21,$21 ; [$a117]
                                                                        ; byte
-    db $00,$88,$21,$21,$21,$21,$85,$31,$31,$86,$31,$88,$31,$31,$85,$31 ; [$a121]
+    db $85,$31,$31,$86,$31,$88,$31,$31,$85,$31,$31,$86,$31,$88,$21,$21 ; [$a127]
                                                                        ; byte
-    db $31,$86,$31,$88,$21,$21,$fc,$fd,$02,$88,$31,$00,$00,$31,$00,$00 ; [$a131]
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$31,$00,$00,$31,$00,$00,$31,$00,$31,$00,$00,$31,$00,$00,$31 ; [$a13a]
                                                                        ; byte
-    db $31,$00,$31,$00,$00,$31,$00,$00,$31,$31,$fc,$fd,$02,$88,$31,$11 ; [$a141]
+    db $31                                  ; [$a14a] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$31,$11,$11,$31,$11,$11,$31,$11,$31,$11,$11,$31,$11,$11,$31 ; [$a14e]
                                                                        ; byte
-    db $11,$31,$11,$11,$31,$11,$31,$11,$11,$31,$11,$11,$31,$31,$fc,$f4 ; [$a151]
-                                                                       ; byte
-    db $ff,$ff                              ; [$a161] byte
+    db $31                                  ; [$a15e] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for Eolis.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EOLIS [$PRG5::8f2b]
+;     MSCRIPTS_EOLIS [$PRG5::8f2b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EOLIS [$PRG5::8f2b]
+;     MSCRIPTS_EOLIS [$PRG5::8f2b]
 ;
-MUSIC_EOLIS_1:                              ; [$a163]
-    db $f1,$02,$f2,$90,$f0,$01,$e0,$00,$00,$00,$b0,$00,$8c,$00,$34,$36 ; [$a163]
-                                                                       ; byte
-    db $38,$fd,$02,$98,$39,$8c,$38,$3b,$39,$3b,$3c,$3e,$40,$41,$3f,$40 ; [$a173]
-                                                                       ; byte
-    db $b0,$00,$98,$37,$8c,$36,$39,$37,$39,$3a,$3c,$3e,$3f,$3d,$3e,$b0 ; [$a183]
-                                                                       ; byte
-    db $00,$a4,$3f,$8c,$43,$41,$3c,$00,$3e,$00,$3e,$41,$3f,$00,$3a,$37 ; [$a193]
-                                                                       ; byte
-    db $00,$38,$3c,$38,$3f,$00,$3f,$00,$38,$fb,$01,$8c,$3c,$38,$3f,$00 ; [$a1a3]
-                                                                       ; byte
-    db $00,$34,$36,$38,$fc,$fb,$02,$8c,$3c,$38,$3f,$00,$3f,$34,$2f,$2c ; [$a1b3]
-                                                                       ; byte
-    db $2d,$34,$2d,$32,$00,$2f,$2b,$00,$fd,$02,$b0,$40,$98,$39,$40,$3f ; [$a1c3]
-                                                                       ; byte
-    db $8c,$41,$98,$40,$8c,$3c,$39,$34,$38,$38,$3b,$39,$b0,$00,$98,$32 ; [$a1d3]
-                                                                       ; byte
-    db $8c,$34,$30,$b0,$00,$fc,$fd,$02,$b0,$00,$8c,$00,$2d,$98,$00,$00 ; [$a1e3]
-                                                                       ; byte
-    db $8c,$00,$28,$2d,$2c,$29,$26,$b0,$00,$8c,$00,$2d,$98,$00,$8c,$00 ; [$a1f3]
-                                                                       ; byte
-    db $34,$33,$2f,$32,$31,$2d,$30,$fc,$2d,$00,$c8,$00,$e0,$00,$00,$b0 ; [$a203]
-                                                                       ; byte
-    db $00,$8c,$00,$2b,$2a,$29,$f4,$ff      ; [$a213] byte
+MSCRIPT_EOLIS_SQ1:                          ; [$a163]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $38                                  ; G#4
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $38                                  ; G#4
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $40                                  ; E5
+    db $41                                  ; F5
+    db $3f                                  ; D#5
+    db $40                                  ; E5
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $37                                  ; G4
+    db $8c                                  ; Note length: 12
+    db $36                                  ; F#4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3a                                  ; A#4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $3f                                  ; D#5
+    db $3d                                  ; C#5
+    db $3e                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $3f                                  ; D#5
+    db $8c                                  ; Note length: 12
+    db $43                                  ; G5
+    db $41                                  ; F5
+    db $3c                                  ; C5
+    db $00                                  ; Rest
+    db $3e                                  ; D5
+    db $00                                  ; Rest
+    db $3e                                  ; D5
+    db $41                                  ; F5
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $38                                  ; G#4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $38                                  ; G#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $3f                                  ; D#5
+    db $00                                  ; Rest
+    db $3f                                  ; D#5
+    db $34                                  ; E4
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $34                                  ; E4
+    db $2d                                  ; A3
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $40                                  ; E5
+    db $98                                  ; Note length: 24
+    db $39                                  ; A4
+    db $40                                  ; E5
+    db $3f                                  ; D#5
+    db $8c                                  ; Note length: 12
+    db $41                                  ; F5
+    db $98                                  ; Note length: 24
+    db $40                                  ; E5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $32                                  ; D4
+    db $8c                                  ; Note length: 12
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $28                                  ; E3
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $33                                  ; D#4
+    db $2f                                  ; B3
+    db $32                                  ; D4
+    db $31                                  ; C#4
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $fc                                  ; Op: End loop
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $c8                                  ; Note length: 72
+    db $00                                  ; Rest
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $29                                  ; F3
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EOLIS [$PRG5::8f2d]
+;     MSCRIPTS_EOLIS [$PRG5::8f2d]
 ;
-MUSIC_EOLIS_2:                              ; [$a21b]
-    db $f1,$02,$f2,$90,$e0,$00,$00,$00,$b0,$00,$8c,$00,$28,$33,$32,$fd ; [$a21b]
-                                                                       ; byte
-    db $02,$98,$30,$8c,$2f,$32,$30,$34,$39,$3b,$3c,$3e,$3b,$3c,$b0,$00 ; [$a22b]
-                                                                       ; byte
-    db $98,$2e,$8c,$2d,$30,$2e,$32,$37,$39,$3a,$3c,$39,$3a,$b0,$00,$a4 ; [$a23b]
-                                                                       ; byte
-    db $3c,$8c,$3f,$3e,$39,$00,$3a,$00,$3a,$3e,$3c,$00,$33,$30,$00,$30 ; [$a24b]
-                                                                       ; byte
-    db $33,$30,$37,$00,$37,$00,$30,$fb,$01,$8c,$33,$30,$37,$00,$00,$00 ; [$a25b]
-                                                                       ; byte
-    db $33,$32,$fc,$fb,$02,$8c,$33,$30,$37,$00,$37,$2f,$2c,$28,$24,$2d ; [$a26b]
-                                                                       ; byte
-    db $24,$2f,$00,$2b,$26,$00,$fd,$02,$b0,$3c,$98,$34,$3c,$3b,$8c,$3e ; [$a27b]
-                                                                       ; byte
-    db $98,$3c,$8c,$39,$34,$30,$32,$32,$34,$30,$b0,$00,$98,$2f,$8c,$30 ; [$a28b]
-                                                                       ; byte
-    db $2d,$b0,$00,$fc,$fd,$02,$b0,$00,$8c,$00,$23,$98,$00,$00,$8c,$00 ; [$a29b]
-                                                                       ; byte
-    db $23,$28,$27,$24,$21,$b0,$00,$8c,$00,$23,$98,$00,$8c,$00,$2f,$2e ; [$a2ab]
-                                                                       ; byte
-    db $2a,$2d,$2c,$28,$2b,$fc,$2a,$00,$c8,$00,$e0,$00,$00,$b0,$00,$8c ; [$a2bb]
-                                                                       ; byte
-    db $00,$26,$25,$24,$f4,$ff              ; [$a2cb] byte
+MSCRIPT_EOLIS_SQ2:                          ; [$a21b]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $30                                  ; C4
+    db $8c                                  ; Note length: 12
+    db $2f                                  ; B3
+    db $32                                  ; D4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2e                                  ; A#3
+    db $8c                                  ; Note length: 12
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3a                                  ; A#4
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $3a                                  ; A#4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $a4                                  ; Note length: 36
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $3f                                  ; D#5
+    db $3e                                  ; D5
+    db $39                                  ; A4
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $00                                  ; Rest
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $3c                                  ; C5
+    db $00                                  ; Rest
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c                                  ; Note length: 12
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $33                                  ; D#4
+    db $32                                  ; D4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c                                  ; Note length: 12
+    db $33                                  ; D#4
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $28                                  ; E3
+    db $24                                  ; C3
+    db $2d                                  ; A3
+    db $24                                  ; C3
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $98                                  ; Note length: 24
+    db $34                                  ; E4
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $3e                                  ; D5
+    db $98                                  ; Note length: 24
+    db $3c                                  ; C5
+    db $8c                                  ; Note length: 12
+    db $39                                  ; A4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $32                                  ; D4
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $2f                                  ; B3
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $23                                  ; B2
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $23                                  ; B2
+    db $28                                  ; E3
+    db $27                                  ; D#3
+    db $24                                  ; C3
+    db $21                                  ; A2
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $23                                  ; B2
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $2f                                  ; B3
+    db $2e                                  ; A#3
+    db $2a                                  ; F#3
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $28                                  ; E3
+    db $2b                                  ; G3
+    db $fc                                  ; Op: End loop
+    db $2a                                  ; F#3
+    db $00                                  ; Rest
+    db $c8                                  ; Note length: 72
+    db $00                                  ; Rest
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $8c                                  ; Note length: 12
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $25                                  ; C#3
+    db $24                                  ; C3
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EOLIS [$PRG5::8f2f]
+;     MSCRIPTS_EOLIS [$PRG5::8f2f]
 ;
-MUSIC_EOLIS_3:                              ; [$a2d1]
-    db $8c,$15,$00,$21,$15,$1a,$1c,$00,$10,$13,$15,$21,$15,$1a,$1c,$00 ; [$a2d1]
-                                                                       ; byte
-    db $10,$15,$00,$21,$15,$1a,$1c,$10,$13,$15,$17,$18,$1a,$00,$1c,$17 ; [$a2e1]
-                                                                       ; byte
-    db $10,$fd,$02,$98,$15,$8c,$21,$1c,$10,$1c,$00,$10,$15,$1f,$21,$1c ; [$a2f1]
-                                                                       ; byte
-    db $00,$18,$15,$10,$98,$13,$8c,$1f,$1a,$0e,$1a,$00,$0e,$13,$1d,$1f ; [$a301]
-                                                                       ; byte
-    db $1a,$00,$16,$13,$0e,$0c,$0c,$18,$0c,$11,$1d,$00,$11,$16,$00,$22 ; [$a311]
-                                                                       ; byte
-    db $0f,$00,$1b,$16,$0f,$14,$1a,$14,$1b,$00,$1b,$00,$0f,$fb,$01,$8c ; [$a321]
-                                                                       ; byte
-    db $14,$20,$14,$11,$10,$10,$12,$14,$fc,$fb,$02,$8c,$14,$20,$14,$00 ; [$a331]
-                                                                       ; byte
-    db $10,$10,$12,$14,$15,$1c,$15,$1a,$00,$17,$13,$00,$fd,$02,$8c,$15 ; [$a341]
-                                                                       ; byte
-    db $00,$21,$10,$13,$15,$00,$10,$14,$17,$10,$15,$00,$21,$1c,$15,$98 ; [$a351]
-                                                                       ; byte
-    db $10,$8c,$1c,$15,$00,$20,$21,$1c,$10,$12,$14,$15,$00,$1c,$1b,$1a ; [$a361]
-                                                                       ; byte
-    db $fc,$fd,$02,$8c,$1c,$10,$11,$10,$00,$11,$00,$10,$1c,$10,$11,$10 ; [$a371]
-                                                                       ; byte
-    db $00,$1c,$1b,$17,$10,$10,$11,$10,$00,$11,$00,$10,$00,$10,$11,$10 ; [$a381]
-                                                                       ; byte
-    db $00,$12,$11,$10,$fc,$15,$00,$21,$15,$1a,$1c,$00,$10,$13,$15,$21 ; [$a391]
-                                                                       ; byte
-    db $15,$1a,$1c,$10,$13,$15,$00,$21,$15,$1a,$1c,$00,$10,$13,$15,$21 ; [$a3a1]
-                                                                       ; byte
-    db $20,$00,$15,$14,$13,$f4,$ff          ; [$a3b1] byte
+MSCRIPT_EOLIS_TRI:                          ; [$a2d1]
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $15                                  ; A3
+    db $8c                                  ; Note length: 12
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $15                                  ; A3
+    db $1f                                  ; G4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $15                                  ; A3
+    db $10                                  ; E3
+    db $98                                  ; Note length: 24
+    db $13                                  ; G3
+    db $8c                                  ; Note length: 12
+    db $1f                                  ; G4
+    db $1a                                  ; D4
+    db $0e                                  ; D3
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $13                                  ; G3
+    db $1d                                  ; F4
+    db $1f                                  ; G4
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $16                                  ; A#3
+    db $13                                  ; G3
+    db $0e                                  ; D3
+    db $0c                                  ; C3
+    db $0c                                  ; C3
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $16                                  ; A#3
+    db $00                                  ; Rest
+    db $22                                  ; A#4
+    db $0f                                  ; D#3
+    db $00                                  ; Rest
+    db $1b                                  ; D#4
+    db $16                                  ; A#3
+    db $0f                                  ; D#3
+    db $14                                  ; G#3
+    db $1a                                  ; D4
+    db $14                                  ; G#3
+    db $1b                                  ; D#4
+    db $00                                  ; Rest
+    db $1b                                  ; D#4
+    db $00                                  ; Rest
+    db $0f                                  ; D#3
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c                                  ; Note length: 12
+    db $14                                  ; G#3
+    db $20                                  ; G#4
+    db $14                                  ; G#3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $12                                  ; F#3
+    db $14                                  ; G#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c                                  ; Note length: 12
+    db $14                                  ; G#3
+    db $20                                  ; G#4
+    db $14                                  ; G#3
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $12                                  ; F#3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $17                                  ; B3
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c                                  ; Note length: 12
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $14                                  ; G#3
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $98                                  ; Note length: 24
+    db $10                                  ; E3
+    db $8c                                  ; Note length: 12
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $20                                  ; G#4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $12                                  ; F#3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $1b                                  ; D#4
+    db $1a                                  ; D4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c                                  ; Note length: 12
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $1b                                  ; D#4
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $00                                  ; Rest
+    db $11                                  ; F3
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db $00                                  ; Rest
+    db $12                                  ; F#3
+    db $11                                  ; F3
+    db $10                                  ; E3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $00                                  ; Rest
+    db $21                                  ; A4
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1c                                  ; E4
+    db $00                                  ; Rest
+    db $10                                  ; E3
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $21                                  ; A4
+    db $20                                  ; G#4
+    db $00                                  ; Rest
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EOLIS [$PRG5::8f31]
+;     MSCRIPTS_EOLIS [$PRG5::8f31]
 ;
-MUSIC_EOLIS_4:                              ; [$a3b8]
+MSCRIPT_EOLIS_NOISE:                        ; [$a3b8]
     db $8c,$3c,$3c,$30,$3c,$3c,$30,$3c,$3c,$3c,$3c,$30,$3c,$3c,$30,$3c ; [$a3b8]
                                                                        ; byte
     db $3c,$3c,$3c,$30,$3c,$3c,$30,$3c,$3c,$30,$30,$30,$30,$00,$3c,$3c ; [$a3c8]
                                                                        ; byte
-    db $3c,$fd,$02,$8c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c ; [$a3d8]
+    db $3c                                  ; [$a3d8] byte
+
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30 ; [$a3db]
                                                                        ; byte
-    db $3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c ; [$a3e8]
+    db $3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30 ; [$a3eb]
                                                                        ; byte
-    db $3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c ; [$a3f8]
+    db $3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$30,$30 ; [$a3fb]
                                                                        ; byte
-    db $3c,$30,$30,$30,$3c,$3c,$30,$3c,$3c,$30,$3c,$3c,$fb,$01,$8c,$3c ; [$a408]
+    db $30,$3c,$3c,$30,$3c,$3c,$30,$3c,$3c  ; [$a40b] byte
+
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c,$3c,$3c,$30,$3c,$3c,$30,$3c,$3c  ; [$a416] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c,$3c,$3c,$30,$3c,$30,$3c,$3c,$3c,$30,$30,$30,$30,$00,$30,$30 ; [$a422]
                                                                        ; byte
-    db $3c,$30,$3c,$3c,$30,$3c,$3c,$fc,$fb,$02,$8c,$3c,$3c,$30,$3c,$30 ; [$a418]
+    db $00                                  ; [$a432] byte
+
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c,$3c,$3c,$30,$3c,$3c,$30,$00,$3c,$3c,$3c,$30,$3c,$3c,$30,$00 ; [$a435]
                                                                        ; byte
-    db $3c,$3c,$3c,$30,$30,$30,$30,$00,$30,$30,$00,$fd,$02,$8c,$3c,$3c ; [$a428]
+    db $3c,$3c,$3c,$30,$3c,$3c,$30,$00,$3c,$3c,$3c,$30,$3c,$3c,$30,$30 ; [$a445]
                                                                        ; byte
-    db $30,$3c,$3c,$30,$00,$3c,$3c,$3c,$30,$3c,$3c,$30,$00,$3c,$3c,$3c ; [$a438]
+    db $30                                  ; [$a455] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8c,$3c,$3c,$3c,$3c,$3c,$30,$3c,$3c,$3c,$3c,$3c,$3c,$3c,$30,$30 ; [$a459]
                                                                        ; byte
-    db $30,$3c,$3c,$30,$00,$3c,$3c,$3c,$30,$3c,$3c,$30,$30,$30,$fc,$fd ; [$a448]
+    db $30,$3c,$3c,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$3c,$86 ; [$a469]
                                                                        ; byte
-    db $02,$8c,$3c,$3c,$3c,$3c,$3c,$30,$3c,$3c,$3c,$3c,$3c,$3c,$3c,$30 ; [$a458]
+    db $3c,$3c,$8c,$30                      ; [$a479] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $3c,$00,$30,$3c,$3c,$30,$3c,$3c,$3c,$00,$30,$3c,$3c,$30,$3c,$3c ; [$a47e]
                                                                        ; byte
-    db $30,$30,$3c,$3c,$3c,$3c,$3c,$30,$3c,$3c,$3c,$30,$3c,$3c,$3c,$3c ; [$a468]
+    db $3c,$00,$30,$3c,$3c,$30,$3c,$3c,$3c,$3c,$30,$3c,$3c,$30,$30,$30 ; [$a48e]
                                                                        ; byte
-    db $86,$3c,$3c,$8c,$30,$fc,$3c,$00,$30,$3c,$3c,$30,$3c,$3c,$3c,$00 ; [$a478]
-                                                                       ; byte
-    db $30,$3c,$3c,$30,$3c,$3c,$3c,$00,$30,$3c,$3c,$30,$3c,$3c,$3c,$3c ; [$a488]
-                                                                       ; byte
-    db $30,$3c,$3c,$30,$30,$30,$f4,$ff,$ff  ; [$a498] byte
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for the death screen.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DEATH [$PRG5::8f33]
+;     MSCRIPTS_MANTRA [$PRG5::8f33]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DEATH [$PRG5::8f33]
+;     MSCRIPTS_MANTRA [$PRG5::8f33]
 ;
-MUSIC_DEATH_1:                              ; [$a4a1]
-    db $f1,$04,$f2,$90,$f0,$02,$fd,$02,$a0,$34,$90,$33,$34,$a0,$36,$90 ; [$a4a1]
-                                                                       ; byte
-    db $3b,$b0,$37,$90,$36,$37,$a0,$39,$90,$3e,$c0,$3b,$90,$37,$3c,$3b ; [$a4b1]
-                                                                       ; byte
-    db $39,$37,$b0,$39,$90,$36,$3b,$39,$37,$36,$fc,$fd,$02,$a0,$34,$90 ; [$a4c1]
-                                                                       ; byte
-    db $33,$34,$a0,$36,$90,$3b,$b0,$37,$90,$36,$37,$a0,$39,$90,$3e,$c0 ; [$a4d1]
-                                                                       ; byte
-    db $3b,$90,$37,$3c,$3b,$39,$37,$fb,$01,$b0,$39,$90,$36,$3b,$39,$37 ; [$a4e1]
-                                                                       ; byte
-    db $36,$fc,$fb,$02,$90,$39,$37,$36,$b0,$3b,$a0,$2f,$90,$3b,$3b,$3b ; [$a4f1]
-                                                                       ; byte
-    db $3b,$a0,$3b,$90,$3e,$d0,$3c,$90,$3c,$3b,$39,$37,$a0,$36,$40,$3e ; [$a501]
-                                                                       ; byte
-    db $39,$b0,$3c,$a0,$3b,$90,$3b,$3c,$3e,$b0,$40,$90,$37,$c0,$37,$a0 ; [$a511]
-                                                                       ; byte
-    db $3e,$3c,$37,$39,$d6,$3b,$95,$39,$37,$a0,$36,$e0,$00,$f4,$ff ; [$a521]
-                                                                   ; byte
+MSCRIPT_MANTRA_SQ1:                         ; [$a4a1]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $02                                  ;  '- Mode 2: Pluck
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a0                                  ; Note length: 32
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $36                                  ; F#4
+    db $90                                  ; Note length: 16
+    db $3b                                  ; B4
+    db $b0                                  ; Note length: 48
+    db $37                                  ; G4
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $a0                                  ; Note length: 32
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $3e                                  ; D5
+    db $c0                                  ; Note length: 64
+    db $3b                                  ; B4
+    db $90                                  ; Note length: 16
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $b0                                  ; Note length: 48
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#4
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a0                                  ; Note length: 32
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $33                                  ; D#4
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $36                                  ; F#4
+    db $90                                  ; Note length: 16
+    db $3b                                  ; B4
+    db $b0                                  ; Note length: 48
+    db $37                                  ; G4
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $a0                                  ; Note length: 32
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $3e                                  ; D5
+    db $c0                                  ; Note length: 64
+    db $3b                                  ; B4
+    db $90                                  ; Note length: 16
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $b0                                  ; Note length: 48
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#4
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $90                                  ; Note length: 16
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $b0                                  ; Note length: 48
+    db $3b                                  ; B4
+    db $a0                                  ; Note length: 32
+    db $2f                                  ; B3
+    db $90                                  ; Note length: 16
+    db $3b                                  ; B4
+    db $3b                                  ; B4
+    db $3b                                  ; B4
+    db $3b                                  ; B4
+    db $a0                                  ; Note length: 32
+    db $3b                                  ; B4
+    db $90                                  ; Note length: 16
+    db $3e                                  ; D5
+    db $d0                                  ; Note length: 80
+    db $3c                                  ; C5
+    db $90                                  ; Note length: 16
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $a0                                  ; Note length: 32
+    db $36                                  ; F#4
+    db $40                                  ; E5
+    db $3e                                  ; D5
+    db $39                                  ; A4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $a0                                  ; Note length: 32
+    db $3b                                  ; B4
+    db $90                                  ; Note length: 16
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $40                                  ; E5
+    db $90                                  ; Note length: 16
+    db $37                                  ; G4
+    db $c0                                  ; Note length: 64
+    db $37                                  ; G4
+    db $a0                                  ; Note length: 32
+    db $3e                                  ; D5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $d6                                  ; Note length: 86
+    db $3b                                  ; B4
+    db $95                                  ; Note length: 21
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $a0                                  ; Note length: 32
+    db $36                                  ; F#4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DEATH [$PRG5::8f35]
+;     MSCRIPTS_MANTRA [$PRG5::8f35]
 ;
-MUSIC_DEATH_2:                              ; [$a530]
-    db $f1,$06,$f2,$90,$f0,$02,$f3,$80,$00,$00,$00,$00,$fd,$02,$a0,$2b ; [$a530]
-                                                                       ; byte
-    db $90,$2a,$2b,$a0,$2d,$90,$2a,$b0,$2f,$90,$2d,$2f,$a0,$30,$90,$36 ; [$a540]
-                                                                       ; byte
-    db $c0,$32,$90,$2f,$34,$32,$30,$2f,$b0,$34,$90,$31,$33,$31,$2f,$2d ; [$a550]
-                                                                       ; byte
-    db $fc,$2b,$28,$2a,$2b,$2d,$2a,$2d,$2f,$26,$2b,$2d,$2f,$30,$2d,$36 ; [$a560]
-                                                                       ; byte
-    db $32,$2b,$2f,$2b,$2f,$34,$32,$30,$2f,$31,$34,$31,$a0,$33,$90,$2b ; [$a570]
-                                                                       ; byte
-    db $a0,$2a,$90,$38,$38,$38,$38,$a0,$38,$90,$3b,$d0,$39,$90,$39,$37 ; [$a580]
-                                                                       ; byte
-    db $36,$34,$a0,$32,$3c,$39,$36,$b0,$38,$a0,$37,$90,$37,$39,$3b,$b0 ; [$a590]
-                                                                       ; byte
-    db $3c,$90,$34,$a0,$34,$90,$30,$34,$39,$32,$39,$30,$34,$2b,$34,$2d ; [$a5a0]
-                                                                       ; byte
-    db $d6,$34,$95,$36,$34,$a0,$33,$e0,$00,$f4,$ff ; [$a5b0] byte
+MSCRIPT_MANTRA_SQ2:                         ; [$a530]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $06                                  ;  '- Reduce volume by 6
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $02                                  ;  '- Mode 2: Pluck
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $80                                  ;  '- 128 ticks
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a0                                  ; Note length: 32
+    db $2b                                  ; G3
+    db $90                                  ; Note length: 16
+    db $2a                                  ; F#3
+    db $2b                                  ; G3
+    db $a0                                  ; Note length: 32
+    db $2d                                  ; A3
+    db $90                                  ; Note length: 16
+    db $2a                                  ; F#3
+    db $b0                                  ; Note length: 48
+    db $2f                                  ; B3
+    db $90                                  ; Note length: 16
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $a0                                  ; Note length: 32
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $36                                  ; F#4
+    db $c0                                  ; Note length: 64
+    db $32                                  ; D4
+    db $90                                  ; Note length: 16
+    db $2f                                  ; B3
+    db $34                                  ; E4
+    db $32                                  ; D4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $b0                                  ; Note length: 48
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $31                                  ; C#4
+    db $33                                  ; D#4
+    db $31                                  ; C#4
+    db $2f                                  ; B3
+    db $2d                                  ; A3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $2b                                  ; G3
+    db $28                                  ; E3
+    db $2a                                  ; F#3
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $2a                                  ; F#3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $26                                  ; D3
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $2d                                  ; A3
+    db $36                                  ; F#4
+    db $32                                  ; D4
+    db $2b                                  ; G3
+    db $2f                                  ; B3
+    db $2b                                  ; G3
+    db $2f                                  ; B3
+    db $34                                  ; E4
+    db $32                                  ; D4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $31                                  ; C#4
+    db $34                                  ; E4
+    db $31                                  ; C#4
+    db $a0                                  ; Note length: 32
+    db $33                                  ; D#4
+    db $90                                  ; Note length: 16
+    db $2b                                  ; G3
+    db $a0                                  ; Note length: 32
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $38                                  ; G#4
+    db $a0                                  ; Note length: 32
+    db $38                                  ; G#4
+    db $90                                  ; Note length: 16
+    db $3b                                  ; B4
+    db $d0                                  ; Note length: 80
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $32                                  ; D4
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $36                                  ; F#4
+    db $b0                                  ; Note length: 48
+    db $38                                  ; G#4
+    db $a0                                  ; Note length: 32
+    db $37                                  ; G4
+    db $90                                  ; Note length: 16
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; C5
+    db $90                                  ; Note length: 16
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $39                                  ; A4
+    db $32                                  ; D4
+    db $39                                  ; A4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $2b                                  ; G3
+    db $34                                  ; E4
+    db $2d                                  ; A3
+    db $d6                                  ; Note length: 86
+    db $34                                  ; E4
+    db $95                                  ; Note length: 21
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $33                                  ; D#4
+    db $e0                                  ; Note length: 96
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DEATH [$PRG5::8f37]
+;     MSCRIPTS_MANTRA [$PRG5::8f37]
 ;
-MUSIC_DEATH_3:                              ; [$a5bb]
-    db $fd,$02,$90,$1c,$28,$23,$1c,$1e,$28,$27,$23,$1f,$28,$23,$1c,$21 ; [$a5bb]
-                                                                       ; byte
-    db $2b,$28,$1e,$1f,$2b,$26,$1f,$18,$24,$1f,$18,$1e,$2a,$25,$1e,$23 ; [$a5cb]
-                                                                       ; byte
-    db $27,$2a,$23,$fc,$fd,$02,$90,$10,$1c,$17,$10,$12,$1c,$1b,$17,$13 ; [$a5db]
-                                                                       ; byte
-    db $1c,$17,$10,$15,$1f,$1c,$12,$13,$1f,$1a,$13,$0c,$18,$13,$0c,$fb ; [$a5eb]
-                                                                       ; byte
-    db $01,$90,$12,$1e,$19,$12,$17,$23,$1e,$17,$fc,$fb,$02,$90,$12,$19 ; [$a5fb]
-                                                                       ; byte
-    db $1c,$a0,$17,$90,$17,$18,$17,$1c,$23,$28,$23,$1c,$20,$23,$1c,$15 ; [$a60b]
-                                                                       ; byte
-    db $18,$21,$1c,$15,$18,$1c,$21,$0e,$15,$1a,$15,$0e,$12,$15,$1a,$1b ; [$a61b]
-                                                                       ; byte
-    db $18,$14,$a0,$13,$90,$1a,$1f,$1a,$18,$1c,$1f,$24,$1f,$1c,$18,$13 ; [$a62b]
-                                                                       ; byte
-    db $15,$18,$1c,$21,$21,$1c,$18,$15,$12,$15,$18,$1c,$96,$1e,$95,$1c ; [$a63b]
-                                                                       ; byte
-    db $18,$90,$17,$00,$84,$23,$24,$88,$23,$a0,$23,$90,$21,$1f,$1e,$f4 ; [$a64b]
-                                                                       ; byte
-    db $ff                                  ; [$a65b] byte
+MSCRIPT_MANTRA_TRI:                         ; [$a5bb]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $1c                                  ; E4
+    db $28                                  ; E5
+    db $23                                  ; B4
+    db $1c                                  ; E4
+    db $1e                                  ; F#4
+    db $28                                  ; E5
+    db $27                                  ; D#5
+    db $23                                  ; B4
+    db $1f                                  ; G4
+    db $28                                  ; E5
+    db $23                                  ; B4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $2b                                  ; G5
+    db $28                                  ; E5
+    db $1e                                  ; F#4
+    db $1f                                  ; G4
+    db $2b                                  ; G5
+    db $26                                  ; D5
+    db $1f                                  ; G4
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $1f                                  ; G4
+    db $18                                  ; C4
+    db $1e                                  ; F#4
+    db $2a                                  ; F#5
+    db $25                                  ; C#5
+    db $1e                                  ; F#4
+    db $23                                  ; B4
+    db $27                                  ; D#5
+    db $2a                                  ; F#5
+    db $23                                  ; B4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $10                                  ; E3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $12                                  ; F#3
+    db $1c                                  ; E4
+    db $1b                                  ; D#4
+    db $17                                  ; B3
+    db $13                                  ; G3
+    db $1c                                  ; E4
+    db $17                                  ; B3
+    db $10                                  ; E3
+    db $15                                  ; A3
+    db $1f                                  ; G4
+    db $1c                                  ; E4
+    db $12                                  ; F#3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1a                                  ; D4
+    db $13                                  ; G3
+    db $0c                                  ; C3
+    db $18                                  ; C4
+    db $13                                  ; G3
+    db $0c                                  ; C3
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $90                                  ; Note length: 16
+    db $12                                  ; F#3
+    db $1e                                  ; F#4
+    db $19                                  ; C#4
+    db $12                                  ; F#3
+    db $17                                  ; B3
+    db $23                                  ; B4
+    db $1e                                  ; F#4
+    db $17                                  ; B3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $90                                  ; Note length: 16
+    db $12                                  ; F#3
+    db $19                                  ; C#4
+    db $1c                                  ; E4
+    db $a0                                  ; Note length: 32
+    db $17                                  ; B3
+    db $90                                  ; Note length: 16
+    db $17                                  ; B3
+    db $18                                  ; C4
+    db $17                                  ; B3
+    db $1c                                  ; E4
+    db $23                                  ; B4
+    db $28                                  ; E5
+    db $23                                  ; B4
+    db $1c                                  ; E4
+    db $20                                  ; G#4
+    db $23                                  ; B4
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $18                                  ; C4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $15                                  ; A3
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $0e                                  ; D3
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $15                                  ; A3
+    db $0e                                  ; D3
+    db $12                                  ; F#3
+    db $15                                  ; A3
+    db $1a                                  ; D4
+    db $1b                                  ; D#4
+    db $18                                  ; C4
+    db $14                                  ; G#3
+    db $a0                                  ; Note length: 32
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $1a                                  ; D4
+    db $1f                                  ; G4
+    db $1a                                  ; D4
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $1f                                  ; G4
+    db $24                                  ; C5
+    db $1f                                  ; G4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $13                                  ; G3
+    db $15                                  ; A3
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $21                                  ; A4
+    db $21                                  ; A4
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $15                                  ; A3
+    db $12                                  ; F#3
+    db $15                                  ; A3
+    db $18                                  ; C4
+    db $1c                                  ; E4
+    db $96                                  ; Note length: 22
+    db $1e                                  ; F#4
+    db $95                                  ; Note length: 21
+    db $1c                                  ; E4
+    db $18                                  ; C4
+    db $90                                  ; Note length: 16
+    db $17                                  ; B3
+    db $00                                  ; Rest
+    db $84                                  ; Note length: 4
+    db $23                                  ; B4
+    db $24                                  ; C5
+    db $88                                  ; Note length: 8
+    db $23                                  ; B4
+    db $a0                                  ; Note length: 32
+    db $23                                  ; B4
+    db $90                                  ; Note length: 16
+    db $21                                  ; A4
+    db $1f                                  ; G4
+    db $1e                                  ; F#4
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_DEATH [$PRG5::8f39]
+;     MSCRIPTS_MANTRA [$PRG5::8f39]
 ;
-MUSIC_DEATH_4:                              ; [$a65c]
-    db $ff,$ff                              ; [$a65c] byte
+MSCRIPT_MANTRA_NOISE:                       ; [$a65c]
+    db MSCRIPT_OP_END                       ; [$a65c] MScriptOp
+    db MSCRIPT_OP_END                       ; [$a65d] MScriptOp
 
 
 ;============================================================================
 ; Music for Macon/Victim.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_MASCON_VICTIM [$PRG5::8f3b]
+;     MSCRIPTS_MASCON_VICTIM [$PRG5::8f3b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_MASCON_VICTIM [$PRG5::8f3b]
+;     MSCRIPTS_MASCON_VICTIM [$PRG5::8f3b]
 ;
-MUSIC_MASCON_VICTIM_1:                      ; [$a65e]
-    db $f1,$02,$f2,$50,$f0,$00,$f3,$a0,$00,$00,$00,$00,$fd,$03,$8a,$00 ; [$a65e]
-                                                                       ; byte
-    db $00,$2d,$00,$00,$2f,$00,$00,$30,$00,$00,$2f,$00,$00,$00,$2d,$00 ; [$a66e]
-                                                                       ; byte
-    db $2d,$2c,$2d,$2f,$00,$2f,$00,$30,$00,$30,$2f,$00,$00,$00,$00,$00 ; [$a67e]
-                                                                       ; byte
-    db $00,$2b,$00,$00,$2d,$00,$00,$2e,$00,$00,$2d,$00,$00,$00,$2b,$00 ; [$a68e]
-                                                                       ; byte
-    db $2b,$2a,$2b,$2d,$00,$2d,$00,$2e,$00,$2e,$2d,$00,$00,$00,$00,$fc ; [$a69e]
-                                                                       ; byte
-    db $f4,$ff                              ; [$a6ae] byte
+MSCRIPT_MASCON_VICTIM_SQ1:                  ; [$a65e]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $a0                                  ;  '- 160 ticks
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $03                                  ;  '- 3 iterations
+    db $8a                                  ; Note length: 10
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_MASCON_VICTIM [$PRG5::8f3d]
+;     MSCRIPTS_MASCON_VICTIM [$PRG5::8f3d]
 ;
-MUSIC_MASCON_VICTIM_2:                      ; [$a6b0]
-    db $f1,$02,$f2,$90,$f3,$a0,$00,$00,$00,$00,$fd,$03,$8a,$00,$00,$29 ; [$a6b0]
-                                                                       ; byte
-    db $00,$00,$2b,$00,$00,$2d,$00,$00,$2b,$00,$00,$00,$29,$00,$29,$28 ; [$a6c0]
-                                                                       ; byte
-    db $29,$2b,$00,$2b,$00,$2d,$00,$2d,$2b,$00,$00,$00,$00,$00,$00,$27 ; [$a6d0]
-                                                                       ; byte
-    db $00,$00,$29,$00,$00,$2b,$00,$00,$29,$00,$00,$00,$27,$00,$27,$26 ; [$a6e0]
-                                                                       ; byte
-    db $27,$29,$00,$29,$00,$2b,$00,$2b,$29,$00,$00,$00,$00,$fc,$f4,$ff ; [$a6f0]
-                                                                       ; byte
+MSCRIPT_MASCON_VICTIM_SQ2:                  ; [$a6b0]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $a0                                  ;  '- 160 ticks
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $03                                  ;  '- 3 iterations
+    db $8a                                  ; Note length: 10
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $28                                  ; E3
+    db $29                                  ; F3
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $2d                                  ; A3
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $27                                  ; D#3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $27                                  ; D#3
+    db $00                                  ; Rest
+    db $27                                  ; D#3
+    db $26                                  ; D3
+    db $27                                  ; D#3
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_MASCON_VICTIM [$PRG5::8f3f]
+;     MSCRIPTS_MASCON_VICTIM [$PRG5::8f3f]
 ;
-MUSIC_MASCON_VICTIM_3:                      ; [$a700]
-    db $fd,$02,$8a,$1f,$00,$00,$00,$1f,$00,$00,$1f,$1f,$00,$1f,$00,$00 ; [$a700]
-                                                                       ; byte
-    db $00,$00,$00,$1f,$00,$1e,$1f,$00,$1f,$00,$1f,$1f,$00,$1f,$00,$00 ; [$a710]
-                                                                       ; byte
-    db $00,$1a,$18,$1d,$00,$00,$00,$1d,$00,$00,$1d,$1d,$00,$1d,$00,$00 ; [$a720]
-                                                                       ; byte
-    db $00,$00,$00,$1d,$00,$1c,$1d,$00,$1d,$00,$1d,$1d,$00,$1d,$00,$00 ; [$a730]
-                                                                       ; byte
-    db $00,$1d,$1e,$fc,$fd,$02,$8a,$13,$1f,$1f,$13,$13,$1f,$1f,$13,$13 ; [$a740]
-                                                                       ; byte
-    db $1f,$13,$1f,$1f,$13,$1f,$1f,$13,$1f,$12,$13,$1f,$13,$1f,$13,$13 ; [$a750]
-                                                                       ; byte
-    db $1f,$13,$13,$1f,$13,$0e,$0c,$11,$11,$1d,$1d,$11,$1d,$1d,$11,$11 ; [$a760]
-                                                                       ; byte
-    db $1d,$11,$1d,$1d,$11,$1d,$1d,$11,$1d,$10,$11,$1d,$11,$1d,$1d,$11 ; [$a770]
-                                                                       ; byte
-    db $1d,$11,$11,$1d,$11,$11,$12,$fc,$f4,$ff ; [$a780] byte
+MSCRIPT_MASCON_VICTIM_TRI:                  ; [$a700]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8a                                  ; Note length: 10
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1e                                  ; F#4
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $18                                  ; C4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1c                                  ; E4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1d                                  ; F4
+    db $1e                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8a                                  ; Note length: 10
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $12                                  ; F#3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $0e                                  ; D3
+    db $0c                                  ; C3
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $10                                  ; E3
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $11                                  ; F3
+    db $12                                  ; F#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_MASCON_VICTIM [$PRG5::8f41]
+;     MSCRIPTS_MASCON_VICTIM [$PRG5::8f41]
 ;
-MUSIC_MASCON_VICTIM_4:                      ; [$a78a]
-    db $fd,$08,$8a,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31 ; [$a78a]
+MSCRIPT_MASCON_VICTIM_NOISE:                ; [$a78a]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $08                                  ;  '- 8 iterations
+    db $8a,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$85 ; [$a78c]
                                                                        ; byte
-    db $31,$85,$31,$31,$31,$31,$8a,$31,$31,$31,$31,$31,$31,$31,$31,$31 ; [$a79a]
+    db $31,$31,$31,$31,$8a,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31,$31 ; [$a79c]
                                                                        ; byte
-    db $31,$31,$31,$85,$31,$31,$31,$31,$8a,$31,$31,$fc,$f4,$ff,$ff ; [$a7aa]
-                                                                   ; byte
+    db $31,$85,$31,$31,$31,$31,$8a,$31,$31  ; [$a7ac] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for boss battles.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_BOSS [$PRG5::8f43]
+;     MSCRIPTS_BOSS [$PRG5::8f43]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_BOSS [$PRG5::8f43]
+;     MSCRIPTS_BOSS [$PRG5::8f43]
 ;
-MUSIC_BOSS_1:                               ; [$a7b9]
-    db $f1,$02,$f2,$90,$f0,$01,$fd,$02,$8f,$34,$28,$33,$27,$2f,$23,$2e ; [$a7b9]
-                                                                       ; byte
-    db $22,$34,$28,$33,$27,$2f,$23,$2e,$22,$35,$29,$34,$28,$30,$24,$2f ; [$a7c9]
-                                                                       ; byte
-    db $23,$35,$29,$34,$28,$30,$24,$2f,$23,$38,$37,$2c,$2d,$38,$37,$2c ; [$a7d9]
-                                                                       ; byte
-    db $2d,$97,$3a,$87,$39,$97,$2d,$87,$2e,$97,$3d,$87,$3c,$97,$30,$87 ; [$a7e9]
-                                                                       ; byte
-    db $31,$85,$43,$42,$41,$3c,$3b,$3a,$37,$36,$35,$30,$2f,$2c,$2b,$2a ; [$a7f9]
-                                                                       ; byte
-    db $29,$24,$23,$22,$18,$19,$1a,$1b,$1c,$1d,$fc,$f4,$ff ; [$a809] byte
+MSCRIPT_BOSS_SQ1:                           ; [$a7b9]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8f                                  ; Note length: 15
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $27                                  ; D#3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $2e                                  ; A#3
+    db $22                                  ; A#2
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $27                                  ; D#3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $2e                                  ; A#3
+    db $22                                  ; A#2
+    db $35                                  ; F4
+    db $29                                  ; F3
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $30                                  ; C4
+    db $24                                  ; C3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $35                                  ; F4
+    db $29                                  ; F3
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $30                                  ; C4
+    db $24                                  ; C3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $97                                  ; Note length: 23
+    db $3a                                  ; A#4
+    db $87                                  ; Note length: 7
+    db $39                                  ; A4
+    db $97                                  ; Note length: 23
+    db $2d                                  ; A3
+    db $87                                  ; Note length: 7
+    db $2e                                  ; A#3
+    db $97                                  ; Note length: 23
+    db $3d                                  ; C#5
+    db $87                                  ; Note length: 7
+    db $3c                                  ; C5
+    db $97                                  ; Note length: 23
+    db $30                                  ; C4
+    db $87                                  ; Note length: 7
+    db $31                                  ; C#4
+    db $85                                  ; Note length: 5
+    db $43                                  ; G5
+    db $42                                  ; F#5
+    db $41                                  ; F5
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $29                                  ; F3
+    db $24                                  ; C3
+    db $23                                  ; B2
+    db $22                                  ; A#2
+    db $18                                  ; C2
+    db $19                                  ; C#2
+    db $1a                                  ; D2
+    db $1b                                  ; D#2
+    db $1c                                  ; E2
+    db $1d                                  ; F2
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_BOSS [$PRG5::8f45]
+;     MSCRIPTS_BOSS [$PRG5::8f45]
 ;
-MUSIC_BOSS_2:                               ; [$a816]
-    db $f1,$04,$f2,$90,$f2,$17,$fd,$02,$88,$00,$8f,$34,$28,$33,$27,$2f ; [$a816]
-                                                                       ; byte
-    db $23,$2e,$22,$34,$28,$33,$27,$2f,$23,$2e,$22,$35,$29,$34,$28,$30 ; [$a826]
-                                                                       ; byte
-    db $24,$2f,$23,$35,$29,$34,$28,$30,$24,$2f,$23,$38,$37,$2c,$2d,$38 ; [$a836]
-                                                                       ; byte
-    db $37,$2c,$2d,$97,$3a,$87,$39,$97,$2d,$87,$2e,$97,$3d,$87,$3c,$97 ; [$a846]
-                                                                       ; byte
-    db $30,$87,$31,$85,$43,$42,$41,$3c,$3b,$3a,$37,$36,$35,$30,$2f,$2c ; [$a856]
-                                                                       ; byte
-    db $2b,$2a,$29,$24,$23,$22,$18,$19,$1a,$87,$1b,$fc,$f4,$ff ; [$a866] byte
+MSCRIPT_BOSS_SQ2:                           ; [$a816]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $17                                  ;  '- Duty cycle 0     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $8f                                  ; Note length: 15
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $27                                  ; D#3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $2e                                  ; A#3
+    db $22                                  ; A#2
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $33                                  ; D#4
+    db $27                                  ; D#3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $2e                                  ; A#3
+    db $22                                  ; A#2
+    db $35                                  ; F4
+    db $29                                  ; F3
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $30                                  ; C4
+    db $24                                  ; C3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $35                                  ; F4
+    db $29                                  ; F3
+    db $34                                  ; E4
+    db $28                                  ; E3
+    db $30                                  ; C4
+    db $24                                  ; C3
+    db $2f                                  ; B3
+    db $23                                  ; B2
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $38                                  ; G#4
+    db $37                                  ; G4
+    db $2c                                  ; G#3
+    db $2d                                  ; A3
+    db $97                                  ; Note length: 23
+    db $3a                                  ; A#4
+    db $87                                  ; Note length: 7
+    db $39                                  ; A4
+    db $97                                  ; Note length: 23
+    db $2d                                  ; A3
+    db $87                                  ; Note length: 7
+    db $2e                                  ; A#3
+    db $97                                  ; Note length: 23
+    db $3d                                  ; C#5
+    db $87                                  ; Note length: 7
+    db $3c                                  ; C5
+    db $97                                  ; Note length: 23
+    db $30                                  ; C4
+    db $87                                  ; Note length: 7
+    db $31                                  ; C#4
+    db $85                                  ; Note length: 5
+    db $43                                  ; G5
+    db $42                                  ; F#5
+    db $41                                  ; F5
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $2c                                  ; G#3
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $29                                  ; F3
+    db $24                                  ; C3
+    db $23                                  ; B2
+    db $22                                  ; A#2
+    db $18                                  ; C2
+    db $19                                  ; C#2
+    db $1a                                  ; D2
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#2
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_BOSS [$PRG5::8f47]
+;     MSCRIPTS_BOSS [$PRG5::8f47]
 ;
-MUSIC_BOSS_3:                               ; [$a874]
-    db $fd,$02,$f6,$fd,$8a,$13,$14,$13,$14,$13,$14,$15,$14,$15,$14,$15 ; [$a874]
-                                                                       ; byte
-    db $14,$13,$14,$13,$14,$13,$14,$15,$14,$15,$14,$15,$14,$14,$15,$14 ; [$a884]
-                                                                       ; byte
-    db $15,$14,$15,$16,$15,$16,$15,$16,$15,$14,$15,$14,$15,$14,$15,$16 ; [$a894]
-                                                                       ; byte
-    db $15,$16,$15,$16,$15,$f6,$00,$88,$0f,$87,$1b,$88,$27,$87,$1b,$88 ; [$a8a4]
-                                                                       ; byte
-    db $0f,$87,$1b,$88,$27,$87,$1b,$88,$0f,$87,$1b,$88,$27,$87,$1b,$88 ; [$a8b4]
-                                                                       ; byte
-    db $0f,$87,$1b,$88,$27,$87,$1b,$88,$11,$87,$1d,$88,$29,$87,$1d,$88 ; [$a8c4]
-                                                                       ; byte
-    db $11,$87,$1d,$88,$29,$87,$1d,$88,$14,$87,$20,$88,$2c,$87,$20,$88 ; [$a8d4]
-                                                                       ; byte
-    db $14,$87,$20,$88,$2c,$87,$20,$94,$37,$38,$2f,$23,$8a,$29,$2a,$23 ; [$a8e4]
-                                                                       ; byte
-    db $24,$fc,$f4,$ff                      ; [$a8f4] byte
+MSCRIPT_BOSS_TRI:                           ; [$a874]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $fd                                  ;  '- Down 3 semitones
+    db $8a                                  ; Note length: 10
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $13                                  ; G3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $00                                  ;  '- Reset
+    db $88                                  ; Note length: 8
+    db $0f                                  ; D#3
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $27                                  ; D#5
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $0f                                  ; D#3
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $27                                  ; D#5
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $0f                                  ; D#3
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $27                                  ; D#5
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $0f                                  ; D#3
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $27                                  ; D#5
+    db $87                                  ; Note length: 7
+    db $1b                                  ; D#4
+    db $88                                  ; Note length: 8
+    db $11                                  ; F3
+    db $87                                  ; Note length: 7
+    db $1d                                  ; F4
+    db $88                                  ; Note length: 8
+    db $29                                  ; F5
+    db $87                                  ; Note length: 7
+    db $1d                                  ; F4
+    db $88                                  ; Note length: 8
+    db $11                                  ; F3
+    db $87                                  ; Note length: 7
+    db $1d                                  ; F4
+    db $88                                  ; Note length: 8
+    db $29                                  ; F5
+    db $87                                  ; Note length: 7
+    db $1d                                  ; F4
+    db $88                                  ; Note length: 8
+    db $14                                  ; G#3
+    db $87                                  ; Note length: 7
+    db $20                                  ; G#4
+    db $88                                  ; Note length: 8
+    db $2c                                  ; G#5
+    db $87                                  ; Note length: 7
+    db $20                                  ; G#4
+    db $88                                  ; Note length: 8
+    db $14                                  ; G#3
+    db $87                                  ; Note length: 7
+    db $20                                  ; G#4
+    db $88                                  ; Note length: 8
+    db $2c                                  ; G#5
+    db $87                                  ; Note length: 7
+    db $20                                  ; G#4
+    db $94                                  ; Note length: 20
+    db $37                                  ; G6
+    db $38                                  ; G#6
+    db $2f                                  ; B5
+    db $23                                  ; B4
+    db $8a                                  ; Note length: 10
+    db $29                                  ; F5
+    db $2a                                  ; F#5
+    db $23                                  ; B4
+    db $24                                  ; C5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_BOSS [$PRG5::8f49]
+;     MSCRIPTS_BOSS [$PRG5::8f49]
 ;
-MUSIC_BOSS_4:                               ; [$a8f8]
+MSCRIPT_BOSS_NOISE:                         ; [$a8f8]
     db $ff,$ff                              ; [$a8f8] byte
 
 
@@ -4631,312 +10654,1481 @@ MUSIC_BOSS_4:                               ; [$a8f8]
 ; TODO: Music 0x0B
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_HOURGLASS [$PRG5::8f4b]
+;     MSCRIPTS_HOURGLASS [$PRG5::8f4b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_HOURGLASS [$PRG5::8f4b]
+;     MSCRIPTS_HOURGLASS [$PRG5::8f4b]
 ;
-MUSIC_HOURGLASS_1:                          ; [$a8fa]
-    db $f1,$02,$f2,$50,$f0,$01,$fd,$02,$f3,$80,$00,$c0,$00,$fc,$fd,$03 ; [$a8fa]
-                                                                       ; byte
-    db $84,$1f,$24,$1f,$00,$00,$00,$00,$00,$2b,$30,$2b,$00,$00,$00,$00 ; [$a90a]
-                                                                       ; byte
-    db $00,$24,$29,$24,$00,$00,$00,$00,$00,$30,$35,$30,$00,$00,$00,$00 ; [$a91a]
-                                                                       ; byte
-    db $00,$29,$2e,$29,$00,$00,$00,$00,$00,$35,$3a,$35,$00,$00,$00,$00 ; [$a92a]
-                                                                       ; byte
-    db $00,$fc,$f4,$ff                      ; [$a93a] byte
+MSCRIPT_HOURGLASS_SQ1:                      ; [$a8fa]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $80                                  ;  '- 128 ticks
+    db $00                                  ; Rest
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $03                                  ;  '- 3 iterations
+    db $84                                  ; Note length: 4
+    db $1f                                  ; G2
+    db $24                                  ; C3
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C3
+    db $29                                  ; F3
+    db $24                                  ; C3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $2e                                  ; A#3
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_HOURGLASS [$PRG5::8f4d]
+;     MSCRIPTS_HOURGLASS [$PRG5::8f4d]
 ;
-MUSIC_HOURGLASS_2:                          ; [$a93e]
-    db $f1,$02,$f2,$90,$f2,$13,$fd,$02,$f3,$80,$00,$c0,$00,$fc,$fd,$03 ; [$a93e]
-                                                                       ; byte
-    db $84,$00,$1f,$24,$1f,$00,$00,$00,$00,$00,$2b,$30,$2b,$00,$00,$00 ; [$a94e]
-                                                                       ; byte
-    db $00,$00,$24,$29,$24,$00,$00,$00,$00,$00,$30,$35,$30,$00,$00,$00 ; [$a95e]
-                                                                       ; byte
-    db $00,$00,$29,$2e,$29,$00,$00,$00,$00,$00,$35,$3a,$35,$00,$00,$00 ; [$a96e]
-                                                                       ; byte
-    db $00,$fc,$f4,$ff                      ; [$a97e] byte
+MSCRIPT_HOURGLASS_SQ2:                      ; [$a93e]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $13                                  ;  '- Duty cycle 0     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $80                                  ;  '- 128 ticks
+    db $00                                  ; Rest
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $03                                  ;  '- 3 iterations
+    db $84                                  ; Note length: 4
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $24                                  ; C3
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C3
+    db $29                                  ; F3
+    db $24                                  ; C3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $30                                  ; C4
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $29                                  ; F3
+    db $2e                                  ; A#3
+    db $29                                  ; F3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_HOURGLASS [$PRG5::8f4f]
+;     MSCRIPTS_HOURGLASS [$PRG5::8f4f]
 ;
-MUSIC_HOURGLASS_3:                          ; [$a982]
-    db $fd,$02,$84,$0e,$00,$00,$00,$0e,$00,$00,$00,$1a,$00,$00,$00,$1a ; [$a982]
-                                                                       ; byte
-    db $00,$00,$00,$13,$00,$00,$00,$13,$00,$00,$00,$1f,$00,$00,$00,$1f ; [$a992]
-                                                                       ; byte
-    db $00,$00,$00,$18,$00,$00,$00,$18,$00,$00,$00,$24,$00,$00,$00,$24 ; [$a9a2]
-                                                                       ; byte
-    db $00,$00,$00,$fc,$fd,$02,$84,$0e,$00,$00,$00,$0e,$00,$00,$00,$1a ; [$a9b2]
-                                                                       ; byte
-    db $00,$00,$00,$1a,$00,$00,$00,$13,$00,$00,$00,$13,$00,$00,$00,$1f ; [$a9c2]
-                                                                       ; byte
-    db $00,$00,$00,$1f,$00,$00,$00,$18,$00,$00,$00,$18,$00,$00,$00,$24 ; [$a9d2]
-                                                                       ; byte
-    db $00,$00,$00,$24,$00,$00,$00,$fc,$0e,$00,$0e,$00,$0e,$00,$0e,$00 ; [$a9e2]
-                                                                       ; byte
-    db $1a,$00,$1a,$00,$1a,$00,$1a,$00,$13,$00,$13,$00,$13,$00,$13,$00 ; [$a9f2]
-                                                                       ; byte
-    db $1f,$00,$1f,$00,$1f,$00,$1f,$00,$18,$00,$18,$00,$18,$00,$18,$00 ; [$aa02]
-                                                                       ; byte
-    db $24,$00,$24,$00,$24,$00,$24,$00,$f4,$ff ; [$aa12] byte
+MSCRIPT_HOURGLASS_TRI:                      ; [$a982]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $84                                  ; Note length: 4
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $84                                  ; Note length: 4
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $0e                                  ; D3
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db $24                                  ; C5
+    db $00                                  ; Rest
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_HOURGLASS [$PRG5::8f51]
+;     MSCRIPTS_HOURGLASS [$PRG5::8f51]
 ;
-MUSIC_HOURGLASS_4:                          ; [$aa1c]
-    db $fd,$03,$84,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31 ; [$aa1c]
+MSCRIPT_HOURGLASS_NOISE:                    ; [$aa1c]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $03                                  ;  '- 3 iterations
+    db $84,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00 ; [$aa1e]
                                                                        ; byte
-    db $00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31 ; [$aa2c]
+    db $00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00 ; [$aa2e]
                                                                        ; byte
-    db $00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31 ; [$aa3c]
+    db $00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00,$00,$31,$00,$00 ; [$aa3e]
                                                                        ; byte
-    db $00,$00,$00,$fc,$fd,$02,$84,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa4c]
+    db $00                                  ; [$aa4e] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $84,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa52]
                                                                        ; byte
-    db $00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa5c]
+    db $00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa62]
                                                                        ; byte
-    db $00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa6c]
+    db $00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31,$00,$31 ; [$aa72]
                                                                        ; byte
-    db $00,$31,$00,$31,$00,$31,$00,$fc,$f4,$ff,$ff ; [$aa7c] byte
+    db $00                                  ; [$aa82] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for the ending outro sequence.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_ENDING [$PRG5::8f53]
+;     MSCRIPTS_ENDING [$PRG5::8f53]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_ENDING [$PRG5::8f53]
+;     MSCRIPTS_ENDING [$PRG5::8f53]
 ;
-MUSIC_ENDING_1:                             ; [$aa87]
-    db $f7,$ff,$f1,$00,$f2,$d0,$f0,$01,$ef,$02,$f6,$f4,$86,$1f,$21,$23 ; [$aa87]
-                                                                       ; byte
-    db $24,$26,$28,$29,$2a,$2b,$2d,$2f,$30,$32,$34,$35,$36,$f2,$90,$fd ; [$aa97]
-                                                                       ; byte
-    db $02,$b0,$37,$3c,$3e,$45,$c8,$43,$8c,$3c,$3e,$3f,$3c,$3f,$3e,$00 ; [$aaa7]
-                                                                       ; byte
-    db $3b,$98,$37,$fc,$fd,$02,$a4,$43,$8c,$3c,$b0,$3c,$8c,$41,$41,$40 ; [$aab7]
-                                                                       ; byte
-    db $a4,$3c,$8c,$37,$39,$a4,$3a,$8c,$3a,$39,$3a,$39,$bc,$37,$fb,$01 ; [$aac7]
-                                                                       ; byte
-    db $86,$37,$39,$3b,$3c,$3e,$40,$41,$42,$fc,$fb,$02,$86,$3c,$3b,$3c ; [$aad7]
-                                                                       ; byte
-    db $3e,$40,$41,$42,$43,$b0,$44,$46,$c8,$43,$8c,$3c,$3e,$3f,$3f,$41 ; [$aae7]
-                                                                       ; byte
-    db $3e,$00,$3c,$3a,$98,$37,$86,$38,$37,$8c,$35,$92,$37,$86,$30,$33 ; [$aaf7]
-                                                                       ; byte
-    db $37,$3c,$37,$3c,$3f,$b0,$44,$46,$bc,$43,$8c,$3c,$3c,$3e,$3f,$3f ; [$ab07]
-                                                                       ; byte
-    db $41,$3e,$00,$3c,$98,$3a,$8c,$3f,$3f,$41,$3e,$00,$3c,$3a,$f3,$cc ; [$ab17]
-                                                                       ; byte
-    db $3c,$86,$3f,$00,$3c,$3f,$44,$00,$3f,$44,$46,$41,$3e,$3a,$3c,$00 ; [$ab27]
-                                                                       ; byte
-    db $3c,$3c,$88,$3c,$00,$00,$00,$3c,$37,$3c,$40,$98,$3c,$88,$00,$ff ; [$ab37]
-                                                                       ; byte
+MSCRIPT_ENDING_SQ1:                         ; [$aa87]
+    db MSCRIPT_OP_SET_GLOBAL_TRANSPOSE      ; Op: Set global transpose
+    db $ff                                  ;  '- Down 1 semitone
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $00                                  ;  '- Reduce volume by 0
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_SQ_PITCH_EFFECT_DEPTH ; Op: Set SQ2 envelope depth
+    db $02                                  ;  '- 2
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db $86                                  ; Note length: 6
+    db $1f                                  ; F#2
+    db $21                                  ; G#2
+    db $23                                  ; A#2
+    db $24                                  ; B2
+    db $26                                  ; C#3
+    db $28                                  ; D#3
+    db $29                                  ; E3
+    db $2a                                  ; F3
+    db $2b                                  ; F#3
+    db $2d                                  ; G#3
+    db $2f                                  ; A#3
+    db $30                                  ; B3
+    db $32                                  ; C#4
+    db $34                                  ; D#4
+    db $35                                  ; E4
+    db $36                                  ; F4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $45                                  ; G#5
+    db $c8                                  ; Note length: 72
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3c                                  ; B4
+    db $3f                                  ; D5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3b                                  ; A#4
+    db $98                                  ; Note length: 24
+    db $37                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $a4                                  ; Note length: 36
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $b0                                  ; Note length: 48
+    db $3c                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $41                                  ; E5
+    db $41                                  ; E5
+    db $40                                  ; D#5
+    db $a4                                  ; Note length: 36
+    db $3c                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $37                                  ; F#4
+    db $39                                  ; G#4
+    db $a4                                  ; Note length: 36
+    db $3a                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3a                                  ; A4
+    db $39                                  ; G#4
+    db $3a                                  ; A4
+    db $39                                  ; G#4
+    db $bc                                  ; Note length: 60
+    db $37                                  ; F#4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $86                                  ; Note length: 6
+    db $37                                  ; F#4
+    db $39                                  ; G#4
+    db $3b                                  ; A#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $40                                  ; D#5
+    db $41                                  ; E5
+    db $42                                  ; F5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $3c                                  ; B4
+    db $3b                                  ; A#4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $40                                  ; D#5
+    db $41                                  ; E5
+    db $42                                  ; F5
+    db $43                                  ; F#5
+    db $b0                                  ; Note length: 48
+    db $44                                  ; G5
+    db $46                                  ; A5
+    db $c8                                  ; Note length: 72
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3a                                  ; A4
+    db $98                                  ; Note length: 24
+    db $37                                  ; F#4
+    db $86                                  ; Note length: 6
+    db $38                                  ; G4
+    db $37                                  ; F#4
+    db $8c                                  ; Note length: 12
+    db $35                                  ; E4
+    db $92                                  ; Note length: 18
+    db $37                                  ; F#4
+    db $86                                  ; Note length: 6
+    db $30                                  ; B3
+    db $33                                  ; D4
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $3f                                  ; D5
+    db $b0                                  ; Note length: 48
+    db $44                                  ; G5
+    db $46                                  ; A5
+    db $bc                                  ; Note length: 60
+    db $43                                  ; F#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; B4
+    db $3c                                  ; B4
+    db $3e                                  ; C#5
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $98                                  ; Note length: 24
+    db $3a                                  ; A4
+    db $8c                                  ; Note length: 12
+    db $3f                                  ; D5
+    db $3f                                  ; D5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3a                                  ; A4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $cc                                  ;  '- 204 ticks
+    db $3c                                  ; B4
+    db $86                                  ; Note length: 6
+    db $3f                                  ; D5
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3f                                  ; D5
+    db $44                                  ; G5
+    db $00                                  ; Rest
+    db $3f                                  ; D5
+    db $44                                  ; G5
+    db $46                                  ; A5
+    db $41                                  ; E5
+    db $3e                                  ; C#5
+    db $3a                                  ; A4
+    db $3c                                  ; B4
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $3c                                  ; B4
+    db $88                                  ; Note length: 8
+    db $3c                                  ; B4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $3c                                  ; B4
+    db $37                                  ; F#4
+    db $3c                                  ; B4
+    db $40                                  ; D#5
+    db $98                                  ; Note length: 24
+    db $3c                                  ; B4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_ENDING [$PRG5::8f55]
+;     MSCRIPTS_ENDING [$PRG5::8f55]
 ;
-MUSIC_ENDING_2:                             ; [$ab47]
-    db $f1,$04,$f2,$d0,$f0,$00,$ef,$00,$f6,$f4,$f2,$13,$98,$00,$86,$2d ; [$ab47]
-                                                                       ; byte
-    db $2f,$30,$32,$34,$35,$37,$39,$3b,$3c,$3e,$3f,$f2,$50,$f0,$01,$fd ; [$ab57]
-                                                                       ; byte
-    db $02,$86,$40,$40,$40,$00,$48,$37,$40,$40,$40,$40,$40,$00,$48,$37 ; [$ab67]
-                                                                       ; byte
-    db $40,$40,$41,$41,$41,$00,$48,$39,$41,$41,$41,$41,$41,$00,$48,$39 ; [$ab77]
-                                                                       ; byte
-    db $41,$41,$40,$40,$40,$00,$48,$37,$40,$40,$40,$3c,$37,$3c,$40,$40 ; [$ab87]
-                                                                       ; byte
-    db $43,$43,$38,$3c,$3f,$44,$48,$44,$37,$00,$00,$00,$2e,$32,$37,$3b ; [$ab97]
-                                                                       ; byte
-    db $3e,$3b,$fc,$fd,$02,$86,$40,$43,$37,$3c,$40,$43,$37,$3c,$40,$43 ; [$aba7]
-                                                                       ; byte
-    db $37,$3c,$40,$43,$37,$3c,$41,$43,$37,$3c,$40,$43,$37,$3c,$40,$43 ; [$abb7]
-                                                                       ; byte
-    db $37,$3c,$40,$43,$3c,$40,$33,$37,$3a,$3f,$43,$3f,$3a,$37,$35,$39 ; [$abc7]
-                                                                       ; byte
-    db $3c,$41,$3c,$39,$37,$32,$fb,$01,$86,$37,$3c,$40,$3c,$37,$3c,$40 ; [$abd7]
-                                                                       ; byte
-    db $3c,$40,$41,$43,$45,$47,$48,$4a,$4b,$fc,$fb,$02,$86,$37,$3c,$40 ; [$abe7]
-                                                                       ; byte
-    db $3c,$37,$3c,$40,$3c,$40,$3f,$40,$41,$43,$45,$47,$48,$fd,$02,$86 ; [$abf7]
-                                                                       ; byte
-    db $38,$3c,$3f,$44,$48,$4b,$48,$44,$3a,$3e,$41,$46,$4a,$4d,$4a,$46 ; [$ac07]
-                                                                       ; byte
-    db $30,$34,$37,$3c,$40,$43,$48,$4c,$48,$43,$40,$3c,$37,$34,$30,$34 ; [$ac17]
-                                                                       ; byte
-    db $38,$3c,$3f,$44,$48,$44,$41,$3e,$3a,$35,$3a,$3e,$41,$3e,$3a,$3e ; [$ac27]
-                                                                       ; byte
-    db $fb,$01,$8c,$3f,$86,$41,$3f,$8c,$3c,$3c,$86,$30,$33,$37,$3c,$3f ; [$ac37]
-                                                                       ; byte
-    db $3c,$37,$33,$fc,$fb,$02,$86,$3f,$44,$48,$44,$3f,$44,$8c,$46,$00 ; [$ac47]
-                                                                       ; byte
-    db $41,$43,$92,$40,$86,$3c,$37,$3c,$34,$37,$30,$34,$40,$3c,$37,$3c ; [$ac57]
-                                                                       ; byte
-    db $34,$37,$30,$34,$3e,$3a,$35,$3a,$32,$35,$2e,$32,$3e,$3a,$35,$3a ; [$ac67]
-                                                                       ; byte
-    db $32,$35,$2e,$32,$3c,$38,$33,$38,$30,$33,$2c,$30,$41,$3e,$3a,$35 ; [$ac77]
-                                                                       ; byte
-    db $3e,$00,$3e,$3e,$88,$34,$00,$00,$00,$34,$30,$34,$37,$98,$34,$88 ; [$ac87]
-                                                                       ; byte
-    db $00,$ff                              ; [$ac97] byte
+MSCRIPT_ENDING_SQ2:                         ; [$ab47]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ_PITCH_EFFECT_DEPTH ; Op: Set SQ2 envelope depth
+    db $00                                  ;  '- 0
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $13                                  ;  '- Duty cycle 0     Constant
+                                            ; volume/envelope
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $2d                                  ; A3
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db $32                                  ; D4
+    db $34                                  ; E4
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3c                                  ; C5
+    db $3e                                  ; D5
+    db $3f                                  ; D#5
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $50                                  ;  '- Duty cycle 1     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $00                                  ; Rest
+    db $48                                  ; C6
+    db $37                                  ; G4
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $00                                  ; Rest
+    db $48                                  ; C6
+    db $37                                  ; G4
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $00                                  ; Rest
+    db $48                                  ; C6
+    db $39                                  ; A4
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $00                                  ; Rest
+    db $48                                  ; C6
+    db $39                                  ; A4
+    db $41                                  ; F5
+    db $41                                  ; F5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $00                                  ; Rest
+    db $48                                  ; C6
+    db $37                                  ; G4
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $43                                  ; G5
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $3f                                  ; D#5
+    db $44                                  ; G#5
+    db $48                                  ; C6
+    db $44                                  ; G#5
+    db $37                                  ; G4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $3b                                  ; B4
+    db $3e                                  ; D5
+    db $3b                                  ; B4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $41                                  ; F5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $33                                  ; D#4
+    db $37                                  ; G4
+    db $3a                                  ; A#4
+    db $3f                                  ; D#5
+    db $43                                  ; G5
+    db $3f                                  ; D#5
+    db $3a                                  ; A#4
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $41                                  ; F5
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $86                                  ; Note length: 6
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $41                                  ; F5
+    db $43                                  ; G5
+    db $45                                  ; A5
+    db $47                                  ; B5
+    db $48                                  ; C6
+    db $4a                                  ; D6
+    db $4b                                  ; D#6
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3f                                  ; D#5
+    db $40                                  ; E5
+    db $41                                  ; F5
+    db $43                                  ; G5
+    db $45                                  ; A5
+    db $47                                  ; B5
+    db $48                                  ; C6
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $3f                                  ; D#5
+    db $44                                  ; G#5
+    db $48                                  ; C6
+    db $4b                                  ; D#6
+    db $48                                  ; C6
+    db $44                                  ; G#5
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $41                                  ; F5
+    db $46                                  ; A#5
+    db $4a                                  ; D6
+    db $4d                                  ; F6
+    db $4a                                  ; D6
+    db $46                                  ; A#5
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $43                                  ; G5
+    db $48                                  ; C6
+    db $4c                                  ; E6
+    db $48                                  ; C6
+    db $43                                  ; G5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $38                                  ; G#4
+    db $3c                                  ; C5
+    db $3f                                  ; D#5
+    db $44                                  ; G#5
+    db $48                                  ; C6
+    db $44                                  ; G#5
+    db $41                                  ; F5
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db $41                                  ; F5
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $3e                                  ; D5
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $8c                                  ; Note length: 12
+    db $3f                                  ; D#5
+    db $86                                  ; Note length: 6
+    db $41                                  ; F5
+    db $3f                                  ; D#5
+    db $8c                                  ; Note length: 12
+    db $3c                                  ; C5
+    db $3c                                  ; C5
+    db $86                                  ; Note length: 6
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $3f                                  ; D#5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $33                                  ; D#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $86                                  ; Note length: 6
+    db $3f                                  ; D#5
+    db $44                                  ; G#5
+    db $48                                  ; C6
+    db $44                                  ; G#5
+    db $3f                                  ; D#5
+    db $44                                  ; G#5
+    db $8c                                  ; Note length: 12
+    db $46                                  ; A#5
+    db $00                                  ; Rest
+    db $41                                  ; F5
+    db $43                                  ; G5
+    db $92                                  ; Note length: 18
+    db $40                                  ; E5
+    db $86                                  ; Note length: 6
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $3a                                  ; A#4
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $2e                                  ; A#3
+    db $32                                  ; D4
+    db $3c                                  ; C5
+    db $38                                  ; G#4
+    db $33                                  ; D#4
+    db $38                                  ; G#4
+    db $30                                  ; C4
+    db $33                                  ; D#4
+    db $2c                                  ; G#3
+    db $30                                  ; C4
+    db $41                                  ; F5
+    db $3e                                  ; D5
+    db $3a                                  ; A#4
+    db $35                                  ; F4
+    db $3e                                  ; D5
+    db $00                                  ; Rest
+    db $3e                                  ; D5
+    db $3e                                  ; D5
+    db $88                                  ; Note length: 8
+    db $34                                  ; E4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $34                                  ; E4
+    db $37                                  ; G4
+    db $98                                  ; Note length: 24
+    db $34                                  ; E4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_ENDING [$PRG5::8f57]
+;     MSCRIPTS_ENDING [$PRG5::8f57]
 ;
-MUSIC_ENDING_3:                             ; [$ac99]
-    db $f6,$e8,$b0,$00,$86,$3b,$3c,$3e,$40,$41,$43,$45,$47,$fd,$02,$86 ; [$ac99]
-                                                                       ; byte
-    db $30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30,$30,$00,$30,$30 ; [$aca9]
-                                                                       ; byte
-    db $30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30,$30,$00,$30,$30 ; [$acb9]
-                                                                       ; byte
-    db $30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30,$30,$00,$30,$30 ; [$acc9]
-                                                                       ; byte
-    db $2c,$2c,$38,$38,$2c,$2c,$2b,$00,$00,$00,$37,$37,$2b,$2b,$2b,$2b ; [$acd9]
-                                                                       ; byte
-    db $fc,$fd,$02,$86,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30 ; [$ace9]
-                                                                       ; byte
-    db $30,$00,$30,$30,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30 ; [$acf9]
-                                                                       ; byte
-    db $30,$00,$30,$30,$33,$33,$33,$33,$33,$00,$33,$33,$35,$35,$35,$35 ; [$ad09]
-                                                                       ; byte
-    db $35,$00,$35,$35,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30,$30 ; [$ad19]
-                                                                       ; byte
-    db $30,$00,$30,$30,$fc,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$2e,$2e ; [$ad29]
-                                                                       ; byte
-    db $2e,$2e,$2e,$2e,$2e,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30 ; [$ad39]
-                                                                       ; byte
-    db $30,$30,$00,$30,$30,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$00,$00,$00,$2e ; [$ad49]
-                                                                       ; byte
-    db $2e,$2e,$2e,$2e,$2e,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30 ; [$ad59]
-                                                                       ; byte
-    db $30,$30,$00,$30,$30,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$2e,$2e ; [$ad69]
-                                                                       ; byte
-    db $2e,$2e,$2e,$2e,$2e,$30,$30,$30,$30,$30,$00,$30,$30,$30,$30,$30 ; [$ad79]
-                                                                       ; byte
-    db $30,$30,$00,$30,$30,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$00,$00,$00,$2e ; [$ad89]
-                                                                       ; byte
-    db $2e,$2e,$2e,$2e,$2e,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$00,$00,$00,$2e ; [$ad99]
-                                                                       ; byte
-    db $2e,$2e,$2e,$8c,$30,$86,$30,$30,$30,$30,$30,$30,$30,$30,$30,$30 ; [$ada9]
-                                                                       ; byte
-    db $30,$30,$30,$30,$30,$86,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2c,$2e,$2e ; [$adb9]
-                                                                       ; byte
-    db $2e,$2e,$2e,$00,$2e,$2e,$88,$30,$00,$00,$00,$30,$34,$30,$30,$98 ; [$adc9]
-                                                                       ; byte
-    db $30,$88,$00,$ff                      ; [$add9] byte
+MSCRIPT_ENDING_TRI:                         ; [$ac99]
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $e8                                  ;  '- Down 2 octaves
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $86                                  ; Note length: 6
+    db $3b                                  ; B6
+    db $3c                                  ; C7
+    db $3e                                  ; D7
+    db $40                                  ; E7
+    db $41                                  ; F7
+    db $43                                  ; G7
+    db $45                                  ; A7
+    db $47                                  ; B7
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $38                                  ; G#6
+    db $38                                  ; G#6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2b                                  ; G5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $37                                  ; G6
+    db $37                                  ; G6
+    db $2b                                  ; G5
+    db $2b                                  ; G5
+    db $2b                                  ; G5
+    db $2b                                  ; G5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86                                  ; Note length: 6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $33                                  ; D#6
+    db $33                                  ; D#6
+    db $33                                  ; D#6
+    db $33                                  ; D#6
+    db $33                                  ; D#6
+    db $00                                  ; Rest
+    db $33                                  ; D#6
+    db $33                                  ; D#6
+    db $35                                  ; F6
+    db $35                                  ; F6
+    db $35                                  ; F6
+    db $35                                  ; F6
+    db $35                                  ; F6
+    db $00                                  ; Rest
+    db $35                                  ; F6
+    db $35                                  ; F6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $8c                                  ; Note length: 12
+    db $30                                  ; C6
+    db $86                                  ; Note length: 6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $86                                  ; Note length: 6
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2c                                  ; G#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $00                                  ; Rest
+    db $2e                                  ; A#5
+    db $2e                                  ; A#5
+    db $88                                  ; Note length: 8
+    db $30                                  ; C6
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $34                                  ; E6
+    db $30                                  ; C6
+    db $30                                  ; C6
+    db $98                                  ; Note length: 24
+    db $30                                  ; C6
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_ENDING [$PRG5::8f59]
+;     MSCRIPTS_ENDING [$PRG5::8f59]
 ;
-MUSIC_ENDING_4:                             ; [$addd]
+MSCRIPT_ENDING_NOISE:                       ; [$addd]
     db $8c,$21,$86,$31,$31,$8c,$21,$86,$31,$31,$21,$21,$21,$21,$21,$21 ; [$addd]
                                                                        ; byte
-    db $21,$21,$fd,$02,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$aded]
+    db $21,$21                              ; [$aded] byte
+
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$adf1]
                                                                        ; byte
-    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31 ; [$adfd]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$ae01]
                                                                        ; byte
-    db $31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86 ; [$ae0d]
+    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$ae11]
                                                                        ; byte
-    db $31,$31,$31,$00,$31,$31,$8c,$21,$21,$21,$21,$21,$21,$86,$31,$00 ; [$ae1d]
+    db $31,$31,$8c,$21,$21,$21,$21,$21,$21,$86,$31,$00,$8c,$21,$21,$86 ; [$ae21]
                                                                        ; byte
-    db $8c,$21,$21,$86,$21,$21,$fc,$fd,$02,$86,$31,$00,$31,$31,$8c,$21 ; [$ae2d]
+    db $21,$21                              ; [$ae31] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$ae36]
                                                                        ; byte
-    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$ae3d]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$ae46]
                                                                        ; byte
-    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$ae4d]
+    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$ae56]
                                                                        ; byte
-    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31 ; [$ae5d]
+    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31 ; [$ae66]
                                                                        ; byte
-    db $31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$21,$21,$21 ; [$ae6d]
+    db $31,$00,$31,$31,$21,$21,$21,$31      ; [$ae76] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$ae81]
                                                                        ; byte
-    db $31,$fc,$fd,$02,$86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$ae7d]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31 ; [$ae91]
                                                                        ; byte
-    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31 ; [$ae8d]
+    db $8c,$21,$86,$31,$31                  ; [$aea1] byte
+
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $01                                  ;  '- 1 loop
+    db $86,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21 ; [$aea8]
                                                                        ; byte
-    db $31,$00,$31,$31,$8c,$21,$86,$31,$31,$fb,$01,$86,$31,$00,$31,$31 ; [$ae9d]
+    db $86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00,$8c,$21 ; [$aeb8]
                                                                        ; byte
-    db $8c,$21,$86,$31,$31,$31,$00,$31,$31,$8c,$21,$86,$31,$31,$31,$00 ; [$aead]
+    db $86,$21,$21,$21,$31                  ; [$aec8] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS      ; Op: Next loop if looped N times
+    db $02                                  ;  '- 2 loops
+    db $8c,$21,$21,$21,$21,$86,$31,$00,$8c,$21,$21,$86,$21,$21,$8c,$21 ; [$aed0]
                                                                        ; byte
-    db $31,$31,$8c,$21,$86,$31,$31,$31,$00,$8c,$21,$86,$21,$21,$21,$31 ; [$aebd]
+    db $21,$21,$21,$00,$21,$21,$21          ; [$aee0] byte
+
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $86,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31 ; [$aee9]
                                                                        ; byte
-    db $fc,$fb,$02,$8c,$21,$21,$21,$21,$86,$31,$00,$8c,$21,$21,$86,$21 ; [$aecd]
+    db $31                                  ; [$aef9] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db $86,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$86,$21,$00 ; [$aefb]
                                                                        ; byte
-    db $21,$8c,$21,$21,$21,$21,$00,$21,$21,$21,$fd,$02,$86,$31,$00,$31 ; [$aedd]
+    db $21,$21,$88,$21,$00,$84,$21,$21,$21,$21,$88,$21,$21,$21,$21,$98 ; [$af0b]
                                                                        ; byte
-    db $31,$31,$00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$fc,$86,$31 ; [$aeed]
-                                                                       ; byte
-    db $00,$31,$31,$31,$00,$31,$31,$31,$00,$31,$31,$86,$21,$00,$21,$21 ; [$aefd]
-                                                                       ; byte
-    db $88,$21,$00,$84,$21,$21,$21,$21,$88,$21,$21,$21,$21,$98,$21,$88 ; [$af0d]
-                                                                       ; byte
-    db $00,$ff,$ff                          ; [$af1d] byte
+    db $21,$88,$00                          ; [$af1b] byte
+
+    db MSCRIPT_OP_END                       ; Op: End
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
 ; Music for the King's room.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_KINGS_ROOM [$PRG5::8f5b]
+;     MSCRIPTS_KINGS_ROOM [$PRG5::8f5b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_KINGS_ROOM [$PRG5::8f5b]
+;     MSCRIPTS_KINGS_ROOM [$PRG5::8f5b]
 ;
-MUSIC_KINGS_ROOM_1:                         ; [$af20]
-    db $f1,$00,$f2,$b0,$f0,$01,$f6,$f4,$fd,$02,$b0,$30,$2b,$30,$37,$c0 ; [$af20]
-                                                                       ; byte
-    db $37,$90,$35,$34,$e0,$35,$c0,$35,$90,$34,$32,$b0,$34,$30,$c0,$34 ; [$af30]
-                                                                       ; byte
-    db $90,$2d,$30,$b0,$30,$2f,$fc,$f4,$ff  ; [$af40] byte
+MSCRIPT_KINGS_ROOM_SQ1:                     ; [$af20]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $00                                  ;  '- Reduce volume by 0
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $b0                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $30                                  ; C4
+    db $37                                  ; G4
+    db $c0                                  ; Note length: 64
+    db $37                                  ; G4
+    db $90                                  ; Note length: 16
+    db $35                                  ; F4
+    db $34                                  ; E4
+    db $e0                                  ; Note length: 96
+    db $35                                  ; F4
+    db $c0                                  ; Note length: 64
+    db $35                                  ; F4
+    db $90                                  ; Note length: 16
+    db $34                                  ; E4
+    db $32                                  ; D4
+    db $b0                                  ; Note length: 48
+    db $34                                  ; E4
+    db $30                                  ; C4
+    db $c0                                  ; Note length: 64
+    db $34                                  ; E4
+    db $90                                  ; Note length: 16
+    db $2d                                  ; A3
+    db $30                                  ; C4
+    db $b0                                  ; Note length: 48
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_KINGS_ROOM [$PRG5::8f5d]
+;     MSCRIPTS_KINGS_ROOM [$PRG5::8f5d]
 ;
-MUSIC_KINGS_ROOM_2:                         ; [$af49]
-    db $f1,$02,$f2,$b0,$f6,$f4,$f0,$01,$fd,$02,$b0,$28,$28,$28,$34,$c0 ; [$af49]
-                                                                       ; byte
-    db $2e,$90,$30,$2e,$e0,$2d,$c0,$2c,$90,$30,$2c,$b0,$2b,$28,$c0,$2a ; [$af59]
-                                                                       ; byte
-    db $90,$26,$2a,$b0,$29,$26,$fc,$f4,$ff  ; [$af69] byte
+MSCRIPT_KINGS_ROOM_SQ2:                     ; [$af49]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $b0                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $b0                                  ; Note length: 48
+    db $28                                  ; E3
+    db $28                                  ; E3
+    db $28                                  ; E3
+    db $34                                  ; E4
+    db $c0                                  ; Note length: 64
+    db $2e                                  ; A#3
+    db $90                                  ; Note length: 16
+    db $30                                  ; C4
+    db $2e                                  ; A#3
+    db $e0                                  ; Note length: 96
+    db $2d                                  ; A3
+    db $c0                                  ; Note length: 64
+    db $2c                                  ; G#3
+    db $90                                  ; Note length: 16
+    db $30                                  ; C4
+    db $2c                                  ; G#3
+    db $b0                                  ; Note length: 48
+    db $2b                                  ; G3
+    db $28                                  ; E3
+    db $c0                                  ; Note length: 64
+    db $2a                                  ; F#3
+    db $90                                  ; Note length: 16
+    db $26                                  ; D3
+    db $2a                                  ; F#3
+    db $b0                                  ; Note length: 48
+    db $29                                  ; F3
+    db $26                                  ; D3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_KINGS_ROOM [$PRG5::8f5f]
+;     MSCRIPTS_KINGS_ROOM [$PRG5::8f5f]
 ;
-MUSIC_KINGS_ROOM_3:                         ; [$af72]
-    db $f6,$f4,$fd,$02,$90,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18,$18 ; [$af72]
-                                                                       ; byte
-    db $18,$18,$18,$18,$24,$18,$18,$18,$18,$18,$24,$18,$18,$1d,$1d,$1d ; [$af82]
-                                                                       ; byte
-    db $1d,$1d,$1d,$18,$18,$18,$18,$18,$18,$1a,$1a,$1a,$1a,$1a,$1a,$1f ; [$af92]
-                                                                       ; byte
-    db $1f,$1f,$1f,$1f,$1f,$fc,$f4,$ff      ; [$afa2] byte
+MSCRIPT_KINGS_ROOM_TRI:                     ; [$af72]
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $24                                  ; C5
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $1d                                  ; F4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db $1f                                  ; G4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_KINGS_ROOM [$PRG5::8f61]
+;     MSCRIPTS_KINGS_ROOM [$PRG5::8f61]
 ;
-MUSIC_KINGS_ROOM_4:                         ; [$afaa]
+MSCRIPT_KINGS_ROOM_NOISE:                   ; [$afaa]
     db $ff,$ff                              ; [$afaa] byte
 
 
@@ -4944,57 +12136,233 @@ MUSIC_KINGS_ROOM_4:                         ; [$afaa]
 ; Music for the temples.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TEMPLE [$PRG5::8f63]
+;     MSCRIPTS_TEMPLE [$PRG5::8f63]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TEMPLE [$PRG5::8f63]
+;     MSCRIPTS_TEMPLE [$PRG5::8f63]
 ;
-MUSIC_TEMPLE_1:                             ; [$afac]
-    db $f1,$02,$f2,$b0,$f0,$01,$f6,$f4,$fd,$02,$ac,$00,$32,$d8,$37,$c2 ; [$afac]
-                                                                       ; byte
-    db $37,$8b,$36,$34,$d8,$36,$ac,$00,$37,$d8,$3e,$c2,$3e,$8b,$3c,$3b ; [$afbc]
-                                                                       ; byte
-    db $ac,$39,$37,$c2,$37,$96,$36,$d8,$36,$ac,$00,$32,$d8,$37,$c2,$37 ; [$afcc]
-                                                                       ; byte
-    db $8b,$36,$34,$d8,$36,$ac,$00,$32,$37,$3b,$c2,$3e,$96,$40,$c2,$34 ; [$afdc]
-                                                                       ; byte
-    db $96,$39,$ac,$37,$96,$36,$34,$8b,$36,$37,$36,$37,$88,$36,$87,$37 ; [$afec]
-                                                                       ; byte
-    db $87,$36,$8b,$34,$36,$d8,$37,$36,$fc,$f4,$ff ; [$affc] byte
+MSCRIPT_TEMPLE_SQ1:                         ; [$afac]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $b0                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $ac                                  ; Note length: 44
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $d8                                  ; Note length: 88
+    db $37                                  ; G4
+    db $c2                                  ; Note length: 66
+    db $37                                  ; G4
+    db $8b                                  ; Note length: 11
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $d8                                  ; Note length: 88
+    db $36                                  ; F#4
+    db $ac                                  ; Note length: 44
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $d8                                  ; Note length: 88
+    db $3e                                  ; D5
+    db $c2                                  ; Note length: 66
+    db $3e                                  ; D5
+    db $8b                                  ; Note length: 11
+    db $3c                                  ; C5
+    db $3b                                  ; B4
+    db $ac                                  ; Note length: 44
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $c2                                  ; Note length: 66
+    db $37                                  ; G4
+    db $96                                  ; Note length: 22
+    db $36                                  ; F#4
+    db $d8                                  ; Note length: 88
+    db $36                                  ; F#4
+    db $ac                                  ; Note length: 44
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $d8                                  ; Note length: 88
+    db $37                                  ; G4
+    db $c2                                  ; Note length: 66
+    db $37                                  ; G4
+    db $8b                                  ; Note length: 11
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $d8                                  ; Note length: 88
+    db $36                                  ; F#4
+    db $ac                                  ; Note length: 44
+    db $00                                  ; Rest
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $3b                                  ; B4
+    db $c2                                  ; Note length: 66
+    db $3e                                  ; D5
+    db $96                                  ; Note length: 22
+    db $40                                  ; E5
+    db $c2                                  ; Note length: 66
+    db $34                                  ; E4
+    db $96                                  ; Note length: 22
+    db $39                                  ; A4
+    db $ac                                  ; Note length: 44
+    db $37                                  ; G4
+    db $96                                  ; Note length: 22
+    db $36                                  ; F#4
+    db $34                                  ; E4
+    db $8b                                  ; Note length: 11
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db $37                                  ; G4
+    db $88                                  ; Note length: 8
+    db $36                                  ; F#4
+    db $87                                  ; Note length: 7
+    db $37                                  ; G4
+    db $87                                  ; Note length: 7
+    db $36                                  ; F#4
+    db $8b                                  ; Note length: 11
+    db $34                                  ; E4
+    db $36                                  ; F#4
+    db $d8                                  ; Note length: 88
+    db $37                                  ; G4
+    db $36                                  ; F#4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TEMPLE [$PRG5::8f65]
+;     MSCRIPTS_TEMPLE [$PRG5::8f65]
 ;
-MUSIC_TEMPLE_2:                             ; [$b007]
-    db $f1,$02,$f2,$b0,$f0,$01,$f6,$f4,$fd,$02,$f3,$b0,$2f,$f3,$84,$30 ; [$b007]
-                                                                       ; byte
-    db $ac,$30,$f3,$b0,$32,$d8,$34,$34,$f3,$84,$30,$96,$32,$30,$f3,$b0 ; [$b017]
-                                                                       ; byte
-    db $2f,$f3,$84,$30,$ac,$30,$d8,$2f,$ac,$32,$37,$c2,$37,$96,$3c,$c2 ; [$b027]
-                                                                       ; byte
-    db $30,$96,$34,$d8,$30,$30,$2f,$30,$fc,$f4,$ff ; [$b037] byte
+MSCRIPT_TEMPLE_SQ2:                         ; [$b007]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $b0                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $b0                                  ;  '- 176 ticks
+    db $2f                                  ; B3
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $30                                  ; C4
+    db $ac                                  ; Note length: 44
+    db $30                                  ; C4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $b0                                  ;  '- 176 ticks
+    db $32                                  ; D4
+    db $d8                                  ; Note length: 88
+    db $34                                  ; E4
+    db $34                                  ; E4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $30                                  ; C4
+    db $96                                  ; Note length: 22
+    db $32                                  ; D4
+    db $30                                  ; C4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $b0                                  ;  '- 176 ticks
+    db $2f                                  ; B3
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $30                                  ; C4
+    db $ac                                  ; Note length: 44
+    db $30                                  ; C4
+    db $d8                                  ; Note length: 88
+    db $2f                                  ; B3
+    db $ac                                  ; Note length: 44
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $c2                                  ; Note length: 66
+    db $37                                  ; G4
+    db $96                                  ; Note length: 22
+    db $3c                                  ; C5
+    db $c2                                  ; Note length: 66
+    db $30                                  ; C4
+    db $96                                  ; Note length: 22
+    db $34                                  ; E4
+    db $d8                                  ; Note length: 88
+    db $30                                  ; C4
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $30                                  ; C4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TEMPLE [$PRG5::8f67]
+;     MSCRIPTS_TEMPLE [$PRG5::8f67]
 ;
-MUSIC_TEMPLE_3:                             ; [$b042]
-    db $f6,$e8,$fd,$02,$f3,$84,$1f,$ac,$1f,$f3,$b0,$21,$f3,$84,$23,$ac ; [$b042]
-                                                                       ; byte
-    db $23,$d8,$24,$25,$26,$26,$f3,$84,$1f,$ac,$1f,$f3,$b0,$21,$d8,$23 ; [$b052]
-                                                                       ; byte
-    db $23,$c2,$34,$96,$37,$c2,$2d,$96,$30,$d8,$26,$26,$1f,$26,$fc,$f4 ; [$b062]
-                                                                       ; byte
-    db $ff                                  ; [$b072] byte
+MSCRIPT_TEMPLE_TRI:                         ; [$b042]
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $e8                                  ;  '- Down 2 octaves
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $1f                                  ; G4
+    db $ac                                  ; Note length: 44
+    db $1f                                  ; G4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $b0                                  ;  '- 176 ticks
+    db $21                                  ; A4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $23                                  ; B4
+    db $ac                                  ; Note length: 44
+    db $23                                  ; B4
+    db $d8                                  ; Note length: 88
+    db $24                                  ; C5
+    db $25                                  ; C#5
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $84                                  ;  '- 132 ticks
+    db $1f                                  ; G4
+    db $ac                                  ; Note length: 44
+    db $1f                                  ; G4
+    db MSCRIPT_OP_SET_NOTE_DURATION         ; Op: Set note duration
+    db $b0                                  ;  '- 176 ticks
+    db $21                                  ; A4
+    db $d8                                  ; Note length: 88
+    db $23                                  ; B4
+    db $23                                  ; B4
+    db $c2                                  ; Note length: 66
+    db $34                                  ; E6
+    db $96                                  ; Note length: 22
+    db $37                                  ; G6
+    db $c2                                  ; Note length: 66
+    db $2d                                  ; A5
+    db $96                                  ; Note length: 22
+    db $30                                  ; C6
+    db $d8                                  ; Note length: 88
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db $1f                                  ; G4
+    db $26                                  ; D5
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_TEMPLE [$PRG5::8f69]
+;     MSCRIPTS_TEMPLE [$PRG5::8f69]
 ;
-MUSIC_TEMPLE_4:                             ; [$b073]
+MSCRIPT_TEMPLE_NOISE:                       ; [$b073]
     db $ff,$ff                              ; [$b073] byte
 
 
@@ -5002,565 +12370,1023 @@ MUSIC_TEMPLE_4:                             ; [$b073]
 ; Music for the shops.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_SHOP [$PRG5::8f6b]
+;     MSCRIPTS_SHOP [$PRG5::8f6b]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_SHOP [$PRG5::8f6b]
+;     MSCRIPTS_SHOP [$PRG5::8f6b]
 ;
-MUSIC_SHOP_1:                               ; [$b075]
-    db $f1,$02,$f2,$90,$f0,$01,$fd,$02,$8e,$26,$00,$00,$00,$26,$00,$00 ; [$b075]
-                                                                       ; byte
-    db $00,$26,$00,$00,$00,$26,$00,$00,$00,$26,$00,$00,$00,$26,$00,$00 ; [$b085]
-                                                                       ; byte
-    db $00,$00,$24,$25,$26,$1f,$20,$21,$00,$fc,$fd,$02,$8e,$2b,$00,$2b ; [$b095]
-                                                                       ; byte
-    db $2d,$00,$00,$00,$87,$30,$2f,$8e,$2b,$00,$2b,$2d,$00,$00,$00,$00 ; [$b0a5]
-                                                                       ; byte
-    db $fc,$f4,$ff                          ; [$b0b5] byte
+MSCRIPT_SHOP_SQ1:                           ; [$b075]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $24                                  ; C3
+    db $25                                  ; C#3
+    db $26                                  ; D3
+    db $1f                                  ; G2
+    db $20                                  ; G#2
+    db $21                                  ; A2
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $87                                  ; Note length: 7
+    db $30                                  ; C4
+    db $2f                                  ; B3
+    db $8e                                  ; Note length: 14
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db $2b                                  ; G3
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_SHOP [$PRG5::8f6d]
+;     MSCRIPTS_SHOP [$PRG5::8f6d]
 ;
-MUSIC_SHOP_2:                               ; [$b0b8]
-    db $f1,$02,$f2,$90,$f0,$01,$fd,$02,$8e,$1f,$00,$00,$00,$1f,$00,$00 ; [$b0b8]
-                                                                       ; byte
-    db $00,$1f,$00,$00,$00,$1f,$00,$00,$00,$1f,$00,$00,$00,$1f,$00,$00 ; [$b0c8]
-                                                                       ; byte
-    db $00,$00,$18,$19,$1a,$13,$14,$15,$00,$fc,$fd,$02,$8e,$24,$00,$24 ; [$b0d8]
-                                                                       ; byte
-    db $26,$00,$00,$00,$87,$2b,$2a,$8e,$24,$00,$24,$26,$00,$00,$00,$00 ; [$b0e8]
-                                                                       ; byte
-    db $fc,$f4,$ff                          ; [$b0f8] byte
+MSCRIPT_SHOP_SQ2:                           ; [$b0b8]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $01                                  ;  '- Mode 1: Curve but held
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $1f                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C2
+    db $19                                  ; C#2
+    db $1a                                  ; D2
+    db $13                                  ; A9
+    db $14                                  ; A9
+    db $15                                  ; A9
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $24                                  ; C3
+    db $00                                  ; Rest
+    db $24                                  ; C3
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $87                                  ; Note length: 7
+    db $2b                                  ; G3
+    db $2a                                  ; F#3
+    db $8e                                  ; Note length: 14
+    db $24                                  ; C3
+    db $00                                  ; Rest
+    db $24                                  ; C3
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_SHOP [$PRG5::8f6f]
+;     MSCRIPTS_SHOP [$PRG5::8f6f]
 ;
-MUSIC_SHOP_3:                               ; [$b0fb]
-    db $f6,$f4,$fd,$02,$8e,$35,$00,$32,$37,$3c,$00,$3b,$32,$00,$35,$32 ; [$b0fb]
-                                                                       ; byte
-    db $37,$3c,$3b,$32,$00,$35,$00,$32,$37,$3c,$00,$3b,$32,$00,$30,$31 ; [$b10b]
-                                                                       ; byte
-    db $32,$2b,$2c,$2d,$00,$fc,$fd,$02,$8e,$26,$00,$26,$26,$87,$1a,$00 ; [$b11b]
-                                                                       ; byte
-    db $1a,$00,$1a,$00,$1a,$1a,$8e,$26,$00,$26,$26,$87,$1a,$00,$1a,$00 ; [$b12b]
-                                                                       ; byte
-    db $1a,$00,$1a,$1a,$fc,$f4,$ff          ; [$b13b] byte
+MSCRIPT_SHOP_TRI:                           ; [$b0fb]
+    db MSCRIPT_OP_SET_CHANNEL_TRANSPOSE     ; Op: Set channel transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $35                                  ; F6
+    db $00                                  ; Rest
+    db $32                                  ; D6
+    db $37                                  ; G6
+    db $3c                                  ; C7
+    db $00                                  ; Rest
+    db $3b                                  ; B6
+    db $32                                  ; D6
+    db $00                                  ; Rest
+    db $35                                  ; F6
+    db $32                                  ; D6
+    db $37                                  ; G6
+    db $3c                                  ; C7
+    db $3b                                  ; B6
+    db $32                                  ; D6
+    db $00                                  ; Rest
+    db $35                                  ; F6
+    db $00                                  ; Rest
+    db $32                                  ; D6
+    db $37                                  ; G6
+    db $3c                                  ; C7
+    db $00                                  ; Rest
+    db $3b                                  ; B6
+    db $32                                  ; D6
+    db $00                                  ; Rest
+    db $30                                  ; C6
+    db $31                                  ; C#6
+    db $32                                  ; D6
+    db $2b                                  ; G5
+    db $2c                                  ; G#5
+    db $2d                                  ; A5
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $8e                                  ; Note length: 14
+    db $26                                  ; D5
+    db $00                                  ; Rest
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db $87                                  ; Note length: 7
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db $8e                                  ; Note length: 14
+    db $26                                  ; D5
+    db $00                                  ; Rest
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db $87                                  ; Note length: 7
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $00                                  ; Rest
+    db $1a                                  ; D4
+    db $1a                                  ; D4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_SHOP [$PRG5::8f71]
+;     MSCRIPTS_SHOP [$PRG5::8f71]
 ;
-MUSIC_SHOP_4:                               ; [$b142]
-    db $ff,$ff                              ; [$b142] byte
+MSCRIPT_SHOP_NOISE:                         ; [$b142]
+    db $ff,$ff                              ; [$b142] undefined
 
 
 ;============================================================================
 ; Music for the Evil Fortress.
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EVIL_FORTRESS [$PRG5::8f73]
+;     MSCRIPTS_EVIL_FORTRESS [$PRG5::8f73]
 ;============================================================================
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EVIL_FORTRESS [$PRG5::8f73]
+;     MSCRIPTS_EVIL_FORTRESS [$PRG5::8f73]
 ;
-MUSIC_EVIL_FORTRESS_1:                      ; [$b144]
-    db $f7,$f4,$f1,$02,$f0,$00,$f2,$d0,$fd,$02,$88,$00,$3c,$37,$32,$00 ; [$b144]
-                                                                       ; byte
-    db $00,$00,$00,$00,$3a,$35,$30,$2b,$00,$00,$00,$fc,$fd,$02,$88,$00 ; [$b154]
-                                                                       ; byte
-    db $3c,$37,$98,$32,$88,$37,$32,$00,$3a,$35,$90,$30,$88,$35,$30,$00 ; [$b164]
-                                                                       ; byte
-    db $fc,$fd,$02,$88,$39,$39,$39,$39,$90,$37,$00,$b0,$00,$88,$39,$39 ; [$b174]
-                                                                       ; byte
-    db $39,$39,$90,$37,$c0,$00,$90,$32,$37,$37,$3c,$3c,$41,$41,$3c,$3c ; [$b184]
-                                                                       ; byte
-    db $37,$a0,$39,$37,$00,$90,$2c,$2e,$88,$37,$37,$37,$38,$00,$38,$00 ; [$b194]
-                                                                       ; byte
-    db $38,$3a,$3a,$3a,$38,$00,$38,$00,$38,$a0,$37,$35,$c0,$00,$fc,$fd ; [$b1a4]
-                                                                       ; byte
-    db $02,$98,$35,$39,$90,$3c,$a0,$3b,$39,$98,$3c,$40,$90,$39,$a0,$3e ; [$b1b4]
-                                                                       ; byte
-    db $88,$3b,$39,$37,$36,$fc,$f4,$ff      ; [$b1c4] byte
+MSCRIPT_EVIL_FORTRESS_SQ1:                  ; [$b144]
+    db MSCRIPT_OP_SET_GLOBAL_TRANSPOSE      ; Op: Set global transpose
+    db $f4                                  ;  '- Down 1 octave
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $02                                  ;  '- Reduce volume by 2
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $d0                                  ;  '- Duty cycle 3     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $3c                                  ; C4
+    db $37                                  ; G3
+    db $32                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $3a                                  ; A#3
+    db $35                                  ; F3
+    db $30                                  ; C3
+    db $2b                                  ; G2
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $3c                                  ; C4
+    db $37                                  ; G3
+    db $98                                  ; Note length: 24
+    db $32                                  ; D3
+    db $88                                  ; Note length: 8
+    db $37                                  ; G3
+    db $32                                  ; D3
+    db $00                                  ; Rest
+    db $3a                                  ; A#3
+    db $35                                  ; F3
+    db $90                                  ; Note length: 16
+    db $30                                  ; C3
+    db $88                                  ; Note length: 8
+    db $35                                  ; F3
+    db $30                                  ; C3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $90                                  ; Note length: 16
+    db $37                                  ; G3
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $39                                  ; A3
+    db $90                                  ; Note length: 16
+    db $37                                  ; G3
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $32                                  ; D3
+    db $37                                  ; G3
+    db $37                                  ; G3
+    db $3c                                  ; C4
+    db $3c                                  ; C4
+    db $41                                  ; F4
+    db $41                                  ; F4
+    db $3c                                  ; C4
+    db $3c                                  ; C4
+    db $37                                  ; G3
+    db $a0                                  ; Note length: 32
+    db $39                                  ; A3
+    db $37                                  ; G3
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $2c                                  ; G#2
+    db $2e                                  ; A#2
+    db $88                                  ; Note length: 8
+    db $37                                  ; G3
+    db $37                                  ; G3
+    db $37                                  ; G3
+    db $38                                  ; G#3
+    db $00                                  ; Rest
+    db $38                                  ; G#3
+    db $00                                  ; Rest
+    db $38                                  ; G#3
+    db $3a                                  ; A#3
+    db $3a                                  ; A#3
+    db $3a                                  ; A#3
+    db $38                                  ; G#3
+    db $00                                  ; Rest
+    db $38                                  ; G#3
+    db $00                                  ; Rest
+    db $38                                  ; G#3
+    db $a0                                  ; Note length: 32
+    db $37                                  ; G3
+    db $35                                  ; F3
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $98                                  ; Note length: 24
+    db $35                                  ; F3
+    db $39                                  ; A3
+    db $90                                  ; Note length: 16
+    db $3c                                  ; C4
+    db $a0                                  ; Note length: 32
+    db $3b                                  ; B3
+    db $39                                  ; A3
+    db $98                                  ; Note length: 24
+    db $3c                                  ; C4
+    db $40                                  ; E4
+    db $90                                  ; Note length: 16
+    db $39                                  ; A3
+    db $a0                                  ; Note length: 32
+    db $3e                                  ; D4
+    db $88                                  ; Note length: 8
+    db $3b                                  ; B3
+    db $39                                  ; A3
+    db $37                                  ; G3
+    db $36                                  ; F#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EVIL_FORTRESS [$PRG5::8f75]
+;     MSCRIPTS_EVIL_FORTRESS [$PRG5::8f75]
 ;
-MUSIC_EVIL_FORTRESS_2:                      ; [$b1cc]
-    db $f1,$04,$f0,$00,$f2,$90,$fd,$02,$88,$00,$37,$32,$2d,$00,$00,$00 ; [$b1cc]
-                                                                       ; byte
-    db $00,$00,$35,$30,$2b,$26,$00,$00,$00,$fc,$fd,$02,$88,$00,$37,$32 ; [$b1dc]
-                                                                       ; byte
-    db $98,$2d,$88,$32,$2d,$00,$35,$30,$90,$2b,$88,$30,$2b,$00,$fc,$fd ; [$b1ec]
-                                                                       ; byte
-    db $02,$88,$35,$35,$35,$35,$90,$32,$00,$b0,$00,$88,$00,$00,$35,$35 ; [$b1fc]
-                                                                       ; byte
-    db $90,$32,$c0,$00,$90,$2d,$32,$32,$37,$37,$3c,$3c,$37,$37,$32,$a0 ; [$b20c]
-                                                                       ; byte
-    db $35,$33,$00,$90,$29,$2c,$88,$33,$33,$33,$35,$00,$35,$00,$35,$37 ; [$b21c]
-                                                                       ; byte
-    db $37,$37,$35,$00,$35,$00,$35,$a0,$33,$31,$c0,$00,$fc,$88,$00,$98 ; [$b22c]
-                                                                       ; byte
-    db $35,$39,$90,$3c,$a0,$3b,$a0,$39,$98,$3c,$40,$90,$39,$9c,$3e,$88 ; [$b23c]
-                                                                       ; byte
-    db $3b,$39,$37,$84,$36,$88,$32,$35,$32,$35,$39,$35,$39,$3c,$37,$3b ; [$b24c]
-                                                                       ; byte
-    db $37,$35,$39,$35,$32,$35,$39,$3c,$39,$3c,$40,$3c,$35,$39,$3b,$3e ; [$b25c]
-                                                                       ; byte
-    db $3b,$8c,$37,$88,$3b,$39,$37,$84,$36,$f4,$ff ; [$b26c] byte
+MSCRIPT_EVIL_FORTRESS_SQ2:                  ; [$b1cc]
+    db MSCRIPT_OP_SET_SQ_FADE               ; Op: Set SQ fade
+    db $04                                  ;  '- Reduce volume by 4
+    db MSCRIPT_OP_SET_SQ_ENVELOPE_MODE      ; Op: Set envelope mode
+    db $00                                  ;  '- Mode 0: Linear decay
+    db MSCRIPT_OP_SET_SQ_CONTROL_BITS       ; Op: Set SQ control bits
+    db $90                                  ;  '- Duty cycle 2     Constant
+                                            ; volume/envelope
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $26                                  ; D3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $98                                  ; Note length: 24
+    db $2d                                  ; A3
+    db $88                                  ; Note length: 8
+    db $32                                  ; D4
+    db $2d                                  ; A3
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $30                                  ; C4
+    db $90                                  ; Note length: 16
+    db $2b                                  ; G3
+    db $88                                  ; Note length: 8
+    db $30                                  ; C4
+    db $2b                                  ; G3
+    db $00                                  ; Rest
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $90                                  ; Note length: 16
+    db $32                                  ; D4
+    db $00                                  ; Rest
+    db $b0                                  ; Note length: 48
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $35                                  ; F4
+    db $90                                  ; Note length: 16
+    db $32                                  ; D4
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $2d                                  ; A3
+    db $32                                  ; D4
+    db $32                                  ; D4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $3c                                  ; C5
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $32                                  ; D4
+    db $a0                                  ; Note length: 32
+    db $35                                  ; F4
+    db $33                                  ; D#4
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $29                                  ; F3
+    db $2c                                  ; G#3
+    db $88                                  ; Note length: 8
+    db $33                                  ; D#4
+    db $33                                  ; D#4
+    db $33                                  ; D#4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $00                                  ; Rest
+    db $35                                  ; F4
+    db $a0                                  ; Note length: 32
+    db $33                                  ; D#4
+    db $31                                  ; C#4
+    db $c0                                  ; Note length: 64
+    db $00                                  ; Rest
+    db $fc                                  ; Op: End loop
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $90                                  ; Note length: 16
+    db $3c                                  ; C5
+    db $a0                                  ; Note length: 32
+    db $3b                                  ; B4
+    db $a0                                  ; Note length: 32
+    db $39                                  ; A4
+    db $98                                  ; Note length: 24
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $90                                  ; Note length: 16
+    db $39                                  ; A4
+    db $9c                                  ; Note length: 28
+    db $3e                                  ; D5
+    db $88                                  ; Note length: 8
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $84                                  ; Note length: 4
+    db $36                                  ; F#4
+    db $88                                  ; Note length: 8
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $37                                  ; G4
+    db $3b                                  ; B4
+    db $37                                  ; G4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $35                                  ; F4
+    db $32                                  ; D4
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $39                                  ; A4
+    db $3c                                  ; C5
+    db $40                                  ; E5
+    db $3c                                  ; C5
+    db $35                                  ; F4
+    db $39                                  ; A4
+    db $3b                                  ; B4
+    db $3e                                  ; D5
+    db $3b                                  ; B4
+    db $8c                                  ; Note length: 12
+    db $37                                  ; G4
+    db $88                                  ; Note length: 8
+    db $3b                                  ; B4
+    db $39                                  ; A4
+    db $37                                  ; G4
+    db $84                                  ; Note length: 4
+    db $36                                  ; F#4
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EVIL_FORTRESS [$PRG5::8f77]
+;     MSCRIPTS_EVIL_FORTRESS [$PRG5::8f77]
 ;
-MUSIC_EVIL_FORTRESS_3:                      ; [$b277]
-    db $fd,$02,$88,$18,$00,$00,$18,$00,$00,$18,$00,$18,$00,$00,$18,$00 ; [$b277]
-                                                                       ; byte
-    db $00,$18,$18,$90,$18,$88,$00,$18,$00,$00,$90,$18,$18,$88,$00,$18 ; [$b287]
-                                                                       ; byte
-    db $00,$0c,$18,$0c,$fc,$fd,$02,$88,$13,$13,$13,$13,$90,$13,$88,$1d ; [$b297]
-                                                                       ; byte
-    db $1f,$00,$1f,$1d,$1a,$90,$13,$88,$00,$00,$13,$13,$90,$13,$00,$88 ; [$b2a7]
-                                                                       ; byte
-    db $1d,$1f,$11,$12,$13,$00,$90,$00,$88,$11,$13,$90,$21,$26,$26,$2b ; [$b2b7]
-                                                                       ; byte
-    db $2b,$26,$26,$21,$a0,$13,$90,$11,$88,$1d,$11,$a0,$00,$98,$22,$88 ; [$b2c7]
-                                                                       ; byte
-    db $16,$22,$16,$22,$22,$00,$22,$16,$22,$22,$16,$22,$22,$00,$22,$16 ; [$b2d7]
-                                                                       ; byte
-    db $22,$a0,$16,$16,$98,$00,$88,$16,$16,$15,$14,$12,$fc,$fd,$02,$90 ; [$b2e7]
-                                                                       ; byte
-    db $13,$88,$00,$90,$13,$88,$00,$13,$00,$13,$00,$00,$13,$00,$00,$13 ; [$b2f7]
-                                                                       ; byte
-    db $13,$fc,$fd,$02,$90,$13,$88,$1f,$90,$13,$88,$1f,$13,$1f,$13,$13 ; [$b307]
-                                                                       ; byte
-    db $1f,$90,$13,$88,$1f,$13,$1f,$fc,$f4,$ff ; [$b317] byte
+MSCRIPT_EVIL_FORTRESS_TRI:                  ; [$b277]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $90                                  ; Note length: 16
+    db $18                                  ; C4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $18                                  ; C4
+    db $18                                  ; C4
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $18                                  ; C4
+    db $00                                  ; Rest
+    db $0c                                  ; C3
+    db $18                                  ; C4
+    db $0c                                  ; C3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88                                  ; Note length: 8
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1d                                  ; F4
+    db $1f                                  ; G4
+    db $00                                  ; Rest
+    db $1f                                  ; G4
+    db $1d                                  ; F4
+    db $1a                                  ; D4
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $1d                                  ; F4
+    db $1f                                  ; G4
+    db $11                                  ; F3
+    db $12                                  ; F#3
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $11                                  ; F3
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $21                                  ; A4
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db $2b                                  ; G5
+    db $2b                                  ; G5
+    db $26                                  ; D5
+    db $26                                  ; D5
+    db $21                                  ; A4
+    db $a0                                  ; Note length: 32
+    db $13                                  ; G3
+    db $90                                  ; Note length: 16
+    db $11                                  ; F3
+    db $88                                  ; Note length: 8
+    db $1d                                  ; F4
+    db $11                                  ; F3
+    db $a0                                  ; Note length: 32
+    db $00                                  ; Rest
+    db $98                                  ; Note length: 24
+    db $22                                  ; A#4
+    db $88                                  ; Note length: 8
+    db $16                                  ; A#3
+    db $22                                  ; A#4
+    db $16                                  ; A#3
+    db $22                                  ; A#4
+    db $22                                  ; A#4
+    db $00                                  ; Rest
+    db $22                                  ; A#4
+    db $16                                  ; A#3
+    db $22                                  ; A#4
+    db $22                                  ; A#4
+    db $16                                  ; A#3
+    db $22                                  ; A#4
+    db $22                                  ; A#4
+    db $00                                  ; Rest
+    db $22                                  ; A#4
+    db $16                                  ; A#3
+    db $22                                  ; A#4
+    db $a0                                  ; Note length: 32
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $98                                  ; Note length: 24
+    db $00                                  ; Rest
+    db $88                                  ; Note length: 8
+    db $16                                  ; A#3
+    db $16                                  ; A#3
+    db $15                                  ; A3
+    db $14                                  ; G#3
+    db $12                                  ; F#3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $00                                  ; Rest
+    db $00                                  ; Rest
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db $90                                  ; Note length: 16
+    db $13                                  ; G3
+    db $88                                  ; Note length: 8
+    db $1f                                  ; G4
+    db $13                                  ; G3
+    db $1f                                  ; G4
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 ;
 ; XREFS:
-;     MUSIC_LOOKUP_EVIL_FORTRESS [$PRG5::8f79]
+;     MSCRIPTS_EVIL_FORTRESS [$PRG5::8f79]
 ;
-MUSIC_EVIL_FORTRESS_4:                      ; [$b321]
-    db $fd,$04,$88,$21,$31,$31,$21,$31,$31,$21,$31,$21,$31,$31,$21,$31 ; [$b321]
+MSCRIPT_EVIL_FORTRESS_NOISE:                ; [$b321]
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $04                                  ;  '- 4 iterations
+    db $88,$21,$31,$31,$21,$31,$31,$21,$31,$21,$31,$31,$21,$31,$31,$21 ; [$b323]
                                                                        ; byte
-    db $31,$21,$31,$fc,$fd,$02,$88,$21,$21,$21,$21,$21,$00,$31,$31,$31 ; [$b331]
+    db $31                                  ; [$b333] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$21,$21,$21,$21,$21,$00,$31,$31,$31,$31,$31,$31,$21,$00,$00 ; [$b337]
                                                                        ; byte
-    db $31,$31,$31,$21,$00,$00,$21,$11,$11,$11,$00,$85,$31,$31,$86,$31 ; [$b341]
+    db $21,$11,$11,$11,$00,$85,$31,$31,$86,$31,$88,$31,$31,$31,$31,$21 ; [$b347]
                                                                        ; byte
-    db $88,$31,$31,$31,$31,$21,$00,$21,$00,$21,$21,$31,$00,$31,$00,$31 ; [$b351]
+    db $00,$21,$00,$21,$21,$31,$00,$31,$00,$31,$31,$21,$00,$31,$00,$31 ; [$b357]
                                                                        ; byte
-    db $31,$21,$00,$31,$00,$31,$31,$31,$31,$21,$21,$31,$00,$31,$00,$31 ; [$b361]
+    db $31,$31,$31,$21,$21,$31,$00,$31,$00,$31,$00,$31,$00,$85,$31,$31 ; [$b367]
                                                                        ; byte
-    db $00,$31,$00,$85,$31,$31,$86,$31,$88,$31,$31,$21,$21,$31,$00,$31 ; [$b371]
+    db $86,$31,$88,$31,$31,$21,$21,$31,$00,$31,$31,$31,$31,$21,$31,$31 ; [$b377]
                                                                        ; byte
-    db $31,$31,$31,$21,$31,$31,$31,$31,$31,$31,$31,$21,$31,$31,$31,$a0 ; [$b381]
+    db $31,$31,$31,$31,$31,$21,$31,$31,$31,$a0,$00,$88,$21,$21,$21,$21 ; [$b387]
                                                                        ; byte
-    db $00,$88,$21,$21,$21,$21,$85,$31,$31,$86,$31,$88,$31,$31,$85,$31 ; [$b391]
+    db $85,$31,$31,$86,$31,$88,$31,$31,$85,$31,$31,$86,$31,$88,$21,$21 ; [$b397]
                                                                        ; byte
-    db $31,$86,$31,$88,$21,$21,$fc,$fd,$02,$88,$31,$00,$00,$31,$00,$00 ; [$b3a1]
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$31,$00,$00,$31,$00,$00,$31,$00,$31,$00,$00,$31,$00,$00,$31 ; [$b3aa]
                                                                        ; byte
-    db $31,$00,$31,$00,$00,$31,$00,$00,$31,$31,$fc,$fd,$02,$88,$31,$11 ; [$b3b1]
+    db $31                                  ; [$b3ba] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_BEGIN_LOOP                ; Op: Begin loop
+    db $02                                  ;  '- 2 iterations
+    db $88,$31,$11,$11,$31,$11,$11,$31,$11,$31,$11,$11,$31,$11,$11,$31 ; [$b3be]
                                                                        ; byte
-    db $11,$31,$11,$11,$31,$11,$31,$11,$11,$31,$11,$11,$31,$31,$fc,$f4 ; [$b3c1]
-                                                                       ; byte
-    db $ff,$a7,$ff                          ; [$b3d1] byte
+    db $31                                  ; [$b3ce] byte
+
+    db MSCRIPT_OP_END_LOOP                  ; Op: End loop
+    db MSCRIPT_OP_RESTART_CHANNEL           ; Op: Restart channel
+    db MSCRIPT_OP_END                       ; Op: End
 
 
 ;============================================================================
-; Post-music data.
+; Post-MScript data.
+;
+; At first glance, this appears to be structured data.
+; 4 words in a sequence, each with 0xFF00 as the trailing
+; value.
+;
+; There are exceptions to this, though:
+;
+;   Address | Value
+;   --------+------
+;   $B878   | F700
+;   $B8D0   | F700
+;   $BAE0   | DF00
+;   $BBF8   | FF20
+;   $BD10   | FF01
+;   $BE10   | 7F00
+;   $BF08   | EF00
+;
+; If we do assume group of 4 words, though, there are a
+; few observations:
+;
+; 1. Words 1, 2, and 4 usually start with 0xFF.
+; 2. Word 3 may be anything.
+; 3. 0xFF00 is usually the 4th byte, but as shown above,
+;    not always.
+;
+; I've checked the music engines for various Hudson Soft
+; games during, shortly before, and shortly after this
+; era, and couldn't find anything matching this. The music
+; engines generally match the MScripts here (though
+; Faxanadu's is more complex).
+;
+; It's possible this was floating point data or something
+; for SQ envelope curves, but left out.
+;
+; In any case, this data seems unused by the shipped game.
 ;============================================================================
-    db $75,$ff,$57,$61,$00,$ff,$e9,$ff,$f8,$ff,$ad,$fe,$00,$ff,$23,$ff ; [$b3d4]
-                                                                       ; byte
-    db $fd,$ff,$29,$ed,$00,$ff,$7c,$ff,$3a,$ff,$ba,$4c,$00,$ff,$37,$ff ; [$b3e4]
-                                                                       ; byte
-    db $7b,$ff,$4c,$32,$00,$ff,$48,$ff,$be,$ff,$3a,$d6,$00,$ff,$82,$ff ; [$b3f4]
-                                                                       ; byte
-    db $53,$ff,$4e,$fb,$00,$ff,$84,$ff,$f8,$ff,$d8,$eb,$00,$ff,$74,$ff ; [$b404]
-                                                                       ; byte
-    db $ef,$ff,$bd,$db,$00,$ff,$39,$ff,$ff,$ff,$ee,$97,$00,$ff,$0a,$ff ; [$b414]
-                                                                       ; byte
-    db $c6,$ff,$c5,$ff,$00,$ff,$02,$ff,$7d,$ff,$74,$f1,$00,$ff,$3e,$ff ; [$b424]
-                                                                       ; byte
-    db $93,$ff,$b1,$7b,$00,$ff,$c6,$ff,$5d,$ff,$ff,$73,$00,$ff,$84,$ff ; [$b434]
-                                                                       ; byte
-    db $11,$ff,$e4,$bf,$00,$ff,$3c,$ff,$b3,$ff,$3f,$7d,$00,$ff,$8a,$ff ; [$b444]
-                                                                       ; byte
-    db $5e,$ff,$c3,$7f,$00,$ff,$cc,$ff,$de,$ff,$3f,$f8,$00,$ff,$45,$ff ; [$b454]
-                                                                       ; byte
-    db $d3,$ff,$ee,$77,$00,$ff,$80,$ff,$85,$ff,$79,$7e,$00,$ff,$95,$ff ; [$b464]
-                                                                       ; byte
-    db $62,$ff,$73,$2f,$00,$ff,$f3,$ff,$ff,$ff,$0c,$ff,$00,$ff,$95,$ff ; [$b474]
-                                                                       ; byte
-    db $82,$ff,$ab,$7f,$00,$ff,$c0,$ff,$5a,$ff,$01,$97,$00,$ff,$12,$ff ; [$b484]
-                                                                       ; byte
-    db $5d,$ff,$aa,$f3,$00,$ff,$f0,$ff,$18,$ff,$f3,$f9,$00,$ff,$00,$ff ; [$b494]
-                                                                       ; byte
-    db $3e,$ff,$6a,$cb,$00,$ff,$57,$ff,$bb,$ff,$78,$fe,$00,$ff,$a7,$ff ; [$b4a4]
-                                                                       ; byte
-    db $23,$ff,$d2,$80,$00,$ff,$a5,$ff,$6e,$ff,$2f,$b6,$00,$ff,$50,$ff ; [$b4b4]
-                                                                       ; byte
-    db $66,$ff,$20,$75,$00,$ff,$55,$ff,$f7,$ff,$5b,$ed,$00,$ff,$60,$ff ; [$b4c4]
-                                                                       ; byte
-    db $e8,$ff,$78,$9e,$00,$ff,$d9,$ff,$13,$ff,$bd,$ff,$00,$ff,$ec,$ff ; [$b4d4]
-                                                                       ; byte
-    db $0b,$ff,$26,$fd,$00,$ff,$e2,$ff,$58,$ff,$36,$77,$00,$ff,$40,$ff ; [$b4e4]
-                                                                       ; byte
-    db $b6,$ff,$02,$ff,$00,$ff,$f9,$ff,$df,$ff,$b0,$58,$00,$ff,$b4,$ff ; [$b4f4]
-                                                                       ; byte
-    db $9e,$ff,$aa,$fb,$00,$ff,$84,$ff,$9a,$ff,$9f,$ff,$00,$ff,$34,$ff ; [$b504]
-                                                                       ; byte
-    db $d3,$ff,$32,$9f,$00,$ff,$4a,$ff,$57,$ff,$6f,$6d,$00,$ff,$2a,$ff ; [$b514]
-                                                                       ; byte
-    db $64,$ff,$fe,$dd,$00,$ff,$94,$ff,$d1,$ff,$bb,$ef,$00,$ff,$2c,$ff ; [$b524]
-                                                                       ; byte
-    db $5f,$ff,$cb,$bf,$00,$ff,$e7,$ff,$7c,$ff,$f3,$7d,$00,$ff,$90,$ff ; [$b534]
-                                                                       ; byte
-    db $51,$ff,$33,$ec,$00,$ff,$59,$ff,$a4,$ff,$72,$7f,$00,$ff,$1a,$ff ; [$b544]
-                                                                       ; byte
-    db $0f,$ff,$c5,$af,$00,$ff,$2f,$ff,$e9,$ff,$15,$30,$00,$ff,$03,$ff ; [$b554]
-                                                                       ; byte
-    db $06,$ff,$13,$bf,$00,$ff,$0b,$ff,$fb,$ff,$e2,$fe,$00,$ff,$d5,$ff ; [$b564]
-                                                                       ; byte
-    db $c7,$ff,$69,$9f,$00,$ff,$32,$ff,$76,$ff,$fc,$06,$00,$ff,$14,$ff ; [$b574]
-                                                                       ; byte
-    db $3c,$ff,$6f,$0f,$00,$ff,$ad,$ff,$ea,$ff,$db,$af,$00,$ff,$27,$ff ; [$b584]
-                                                                       ; byte
-    db $ee,$ff,$f9,$4c,$00,$ff,$23,$ff,$5d,$ff,$57,$fe,$00,$ff,$04,$ff ; [$b594]
-                                                                       ; byte
-    db $b1,$ff,$e2,$f7,$00,$ff,$a4,$ff,$53,$ff,$fa,$ff,$00,$ff,$2c,$ff ; [$b5a4]
-                                                                       ; byte
-    db $5f,$ff,$fd,$8c,$00,$ff,$7d,$ff,$77,$ff,$e8,$52,$00,$ff,$00,$ff ; [$b5b4]
-                                                                       ; byte
-    db $83,$ff,$35,$bf,$00,$ff,$58,$ff,$d7,$ff,$ef,$d7,$00,$ff,$60,$ff ; [$b5c4]
-                                                                       ; byte
-    db $f8,$ff,$d1,$de,$00,$ff,$94,$ff,$f3,$ff,$ea,$cf,$00,$ff,$08,$ff ; [$b5d4]
-                                                                       ; byte
-    db $48,$ff,$7b,$fb,$00,$ff,$33,$ff,$d6,$ff,$7f,$83,$00,$ff,$71,$ff ; [$b5e4]
-                                                                       ; byte
-    db $4e,$ff,$45,$ff,$00,$ff,$fc,$ff,$97,$ef,$f6,$3e,$00,$ff,$40,$ff ; [$b5f4]
-                                                                       ; byte
-    db $05,$ff,$4b,$ff,$00,$ff,$04,$ff,$72,$ff,$69,$ff,$00,$ff,$12,$ff ; [$b604]
-                                                                       ; byte
-    db $c8,$ff,$e9,$ef,$00,$ff,$d8,$ff,$df,$ff,$af,$03,$00,$ff,$27,$ff ; [$b614]
-                                                                       ; byte
-    db $2c,$ff,$11,$ff,$00,$ff,$94,$ff,$22,$ff,$f2,$ff,$00,$ff,$e4,$ff ; [$b624]
-                                                                       ; byte
-    db $bd,$ff,$f7,$92,$00,$ff,$26,$ff,$ff,$ff,$a7,$65,$00,$ff,$61,$ff ; [$b634]
-                                                                       ; byte
-    db $a8,$ff,$b0,$be,$00,$ff,$0d,$ff,$a2,$ff,$51,$a3,$00,$ff,$f0,$ff ; [$b644]
-                                                                       ; byte
-    db $c4,$ff,$04,$ae,$00,$ff,$3b,$ff,$7f,$ff,$3b,$cf,$00,$ff,$01,$ff ; [$b654]
-                                                                       ; byte
-    db $56,$ff,$61,$ff,$00,$ff,$8d,$ff,$fb,$ff,$81,$f7,$00,$ff,$12,$ff ; [$b664]
-                                                                       ; byte
-    db $cb,$ff,$73,$df,$00,$ff,$71,$ff,$d9,$ff,$b7,$bf,$00,$ff,$00,$ff ; [$b674]
-                                                                       ; byte
-    db $59,$ff,$79,$97,$00,$ff,$42,$ff,$7d,$ff,$b9,$ea,$00,$ff,$70,$ff ; [$b684]
-                                                                       ; byte
-    db $db,$ff,$fd,$30,$00,$ff,$08,$ff,$67,$ff,$9f,$8e,$00,$ff,$01,$ff ; [$b694]
-                                                                       ; byte
-    db $1f,$ff,$27,$7f,$00,$ff,$c0,$ff,$27,$ff,$50,$6f,$00,$ff,$63,$ff ; [$b6a4]
-                                                                       ; byte
-    db $be,$ff,$40,$cf,$00,$ff,$c5,$ff,$da,$ff,$1f,$9f,$00,$ff,$28,$ff ; [$b6b4]
-                                                                       ; byte
-    db $e5,$ff,$a3,$b7,$00,$ff,$c2,$ff,$19,$ff,$8b,$9f,$00,$ff,$44,$ff ; [$b6c4]
-                                                                       ; byte
-    db $f7,$ff,$d5,$ef,$00,$ff,$2d,$ff,$ad,$ff,$d5,$7f,$00,$ff,$22,$ff ; [$b6d4]
-                                                                       ; byte
-    db $3e,$ff,$75,$5f,$00,$ff,$01,$ff,$ed,$ff,$14,$df,$00,$ff,$38,$ff ; [$b6e4]
-                                                                       ; byte
-    db $7d,$ff,$fa,$d3,$00,$ff,$7c,$ff,$bd,$ff,$de,$ce,$00,$ff,$3e,$ff ; [$b6f4]
-                                                                       ; byte
-    db $e7,$ff,$e1,$e6,$00,$ff,$38,$ff,$3a,$ff,$59,$f5,$00,$ff,$05,$ff ; [$b704]
-                                                                       ; byte
-    db $17,$ef,$75,$5e,$00,$ff,$6b,$ff,$fd,$ff,$de,$34,$00,$ff,$32,$ff ; [$b714]
-                                                                       ; byte
-    db $5b,$ff,$00,$f3,$00,$ff,$20,$ff,$da,$ff,$5e,$ff,$00,$ff,$04,$ff ; [$b724]
-                                                                       ; byte
-    db $e0,$ff,$c1,$f3,$00,$ff,$49,$ff,$b7,$ff,$9e,$ee,$00,$ff,$72,$ff ; [$b734]
-                                                                       ; byte
-    db $34,$ff,$76,$d5,$00,$ff,$01,$ff,$69,$ff,$0d,$fe,$00,$ff,$bb,$ff ; [$b744]
-                                                                       ; byte
-    db $20,$ff,$e4,$7e,$00,$ff,$43,$ff,$b7,$ff,$7b,$18,$00,$ff,$61,$ff ; [$b754]
-                                                                       ; byte
-    db $03,$ff,$e0,$ff,$00,$ff,$89,$ff,$f5,$ff,$66,$8f,$00,$ff,$fe,$ff ; [$b764]
-                                                                       ; byte
-    db $c7,$ff,$fd,$bf,$00,$ff,$28,$ff,$eb,$ff,$af,$eb,$00,$ff,$04,$ff ; [$b774]
-                                                                       ; byte
-    db $0a,$ff,$c1,$bf,$00,$ff,$50,$ff,$21,$df,$f4,$db,$00,$ff,$dc,$ff ; [$b784]
-                                                                       ; byte
-    db $9e,$ff,$ff,$bd,$00,$ff,$8b,$ff,$be,$ff,$cd,$b5,$00,$ff,$00,$ff ; [$b794]
-                                                                       ; byte
-    db $39,$ff,$1c,$ff,$00,$ff,$08,$ff,$11,$ff,$b7,$bf,$00,$ff,$f2,$ff ; [$b7a4]
-                                                                       ; byte
-    db $77,$ff,$f4,$f7,$00,$ff,$64,$ff,$53,$ff,$ff,$b3,$00,$ff,$81,$ff ; [$b7b4]
-                                                                       ; byte
-    db $55,$ff,$cd,$97,$00,$ff,$1e,$ff,$39,$ff,$68,$fb,$00,$ff,$a0,$ff ; [$b7c4]
-                                                                       ; byte
-    db $fd,$ff,$ca,$ee,$00,$ff,$ae,$df,$f4,$fb,$7f,$6b,$00,$ff,$44,$ff ; [$b7d4]
-                                                                       ; byte
-    db $93,$ff,$f5,$7c,$00,$ff,$46,$ff,$04,$ff,$fd,$7f,$00,$ff,$e0,$ff ; [$b7e4]
-                                                                       ; byte
-    db $34,$df,$7b,$fe,$00,$ff,$5a,$ff,$eb,$ff,$19,$c1,$00,$ff,$31,$ff ; [$b7f4]
-                                                                       ; byte
-    db $a4,$ff,$26,$3d,$00,$ff,$e0,$ff,$b0,$ff,$e3,$ff,$00,$ff,$fa,$ff ; [$b804]
-                                                                       ; byte
-    db $71,$ff,$f9,$fe,$00,$ff,$3b,$ff,$fe,$ff,$cf,$de,$00,$ff,$16,$ff ; [$b814]
-                                                                       ; byte
-    db $e5,$ff,$bc,$1d,$00,$ff,$05,$ff,$9e,$ff,$bb,$fb,$00,$ff,$b0,$ff ; [$b824]
-                                                                       ; byte
-    db $bb,$ff,$9e,$e7,$00,$ff,$50,$ff,$bc,$ff,$cd,$a6,$00,$ff,$3a,$ff ; [$b834]
-                                                                       ; byte
-    db $02,$ff,$e2,$de,$00,$ff,$42,$ff,$3a,$ff,$c5,$33,$00,$ff,$d2,$ff ; [$b844]
-                                                                       ; byte
-    db $67,$ff,$5b,$7d,$00,$ff,$6e,$ff,$d9,$ff,$fd,$59,$00,$ff,$80,$ff ; [$b854]
-                                                                       ; byte
-    db $0c,$ff,$02,$df,$00,$ff,$a4,$ff,$9a,$ff,$93,$ff,$00,$ff,$06,$ff ; [$b864]
-                                                                       ; byte
-    db $a7,$ff,$7e,$df,$00,$f7,$3d,$ff,$71,$ff,$ee,$4f,$00,$ff,$04,$ff ; [$b874]
-                                                                       ; byte
-    db $10,$ff,$c8,$bb,$00,$ff,$12,$ff,$2f,$ff,$f5,$74,$00,$ff,$30,$ff ; [$b884]
-                                                                       ; byte
-    db $f3,$ff,$5e,$55,$00,$ff,$c2,$ff,$de,$ff,$b6,$b4,$00,$ff,$81,$ff ; [$b894]
-                                                                       ; byte
-    db $6a,$ff,$f7,$fd,$00,$ff,$93,$ff,$24,$ff,$47,$b6,$00,$ff,$45,$ff ; [$b8a4]
-                                                                       ; byte
-    db $6b,$ff,$17,$37,$00,$ff,$88,$ff,$76,$ff,$7f,$2f,$00,$ff,$00,$ff ; [$b8b4]
-                                                                       ; byte
-    db $be,$ff,$9a,$fd,$00,$ff,$b2,$ff,$db,$ff,$dc,$af,$00,$f7,$aa,$ff ; [$b8c4]
-                                                                       ; byte
-    db $7e,$ff,$ed,$df,$00,$ff,$68,$ff,$ed,$ff,$bb,$7c,$00,$ff,$20,$ff ; [$b8d4]
-                                                                       ; byte
-    db $12,$ff,$39,$8b,$00,$ff,$70,$ff,$e0,$ff,$1c,$9d,$00,$ff,$67,$ff ; [$b8e4]
-                                                                       ; byte
-    db $83,$fd,$f4,$93,$00,$ff,$19,$ff,$79,$ff,$bf,$7f,$00,$ff,$a1,$ff ; [$b8f4]
-                                                                       ; byte
-    db $3a,$ff,$8a,$f7,$00,$ff,$84,$ff,$5e,$ff,$b5,$6b,$00,$ff,$b0,$ff ; [$b904]
-                                                                       ; byte
-    db $65,$ff,$d6,$f9,$00,$ff,$72,$ff,$7b,$ff,$74,$8d,$00,$ff,$08,$ff ; [$b914]
-                                                                       ; byte
-    db $0d,$ff,$5d,$bd,$00,$ff,$00,$ff,$82,$ff,$7a,$3f,$00,$ff,$e2,$ff ; [$b924]
-                                                                       ; byte
-    db $b2,$ff,$a4,$7e,$00,$ff,$e7,$ff,$95,$fe,$b5,$af,$00,$ff,$80,$ff ; [$b934]
-                                                                       ; byte
-    db $10,$ff,$31,$f8,$00,$ff,$40,$ff,$6a,$ff,$7e,$ff,$00,$ff,$45,$ff ; [$b944]
-                                                                       ; byte
-    db $5d,$ff,$21,$67,$00,$ff,$c0,$ff,$af,$ff,$85,$e3,$00,$ff,$00,$ff ; [$b954]
-                                                                       ; byte
-    db $12,$ff,$97,$cf,$00,$ff,$b0,$ff,$63,$ff,$b8,$ce,$00,$ff,$fa,$ff ; [$b964]
-                                                                       ; byte
-    db $3b,$ff,$a3,$e5,$00,$ff,$60,$ff,$5b,$ff,$89,$76,$00,$ff,$80,$ff ; [$b974]
-                                                                       ; byte
-    db $52,$ff,$52,$7e,$00,$ff,$a0,$ff,$1f,$ff,$66,$d7,$00,$ff,$76,$ff ; [$b984]
-                                                                       ; byte
-    db $9d,$ff,$f9,$14,$00,$ff,$ff,$ff,$2f,$ff,$f7,$52,$00,$ff,$9c,$ff ; [$b994]
-                                                                       ; byte
-    db $04,$ff,$76,$ff,$00,$ff,$94,$ff,$72,$ff,$7f,$4e,$00,$ff,$a7,$ff ; [$b9a4]
-                                                                       ; byte
-    db $c7,$ff,$66,$6d,$00,$ff,$9d,$ff,$7f,$ff,$7c,$26,$00,$ff,$26,$ff ; [$b9b4]
-                                                                       ; byte
-    db $c7,$ff,$72,$ff,$00,$ff,$31,$ff,$b7,$ff,$7e,$e9,$00,$ff,$bc,$ff ; [$b9c4]
-                                                                       ; byte
-    db $de,$ff,$e7,$e4,$00,$ff,$7b,$ff,$f2,$fe,$f3,$eb,$00,$ff,$e8,$ff ; [$b9d4]
-                                                                       ; byte
-    db $32,$ff,$9d,$f7,$00,$ff,$80,$ff,$36,$ff,$9c,$ff,$00,$ff,$88,$ff ; [$b9e4]
-                                                                       ; byte
-    db $eb,$ff,$eb,$a7,$00,$ff,$8f,$ff,$77,$ff,$df,$79,$00,$ff,$fa,$ff ; [$b9f4]
-                                                                       ; byte
-    db $a6,$ff,$cd,$ff,$00,$ff,$a0,$ff,$b4,$ff,$52,$eb,$00,$ff,$dc,$ff ; [$ba04]
-                                                                       ; byte
-    db $be,$ff,$c5,$6d,$00,$ff,$63,$ff,$fd,$ff,$a2,$42,$00,$ff,$a4,$ff ; [$ba14]
-                                                                       ; byte
-    db $c1,$ff,$88,$fd,$00,$ff,$30,$ff,$6a,$ff,$92,$7d,$00,$ff,$70,$ff ; [$ba24]
-                                                                       ; byte
-    db $bb,$ff,$76,$ff,$00,$ff,$b4,$ff,$f5,$ff,$fe,$dc,$00,$ff,$80,$ff ; [$ba34]
-                                                                       ; byte
-    db $37,$ff,$a4,$e7,$00,$ff,$40,$ff,$43,$ff,$7d,$f7,$00,$ff,$12,$ff ; [$ba44]
-                                                                       ; byte
-    db $f1,$ff,$57,$df,$00,$ff,$d7,$ff,$c5,$ff,$3b,$e7,$00,$ff,$6c,$ff ; [$ba54]
-                                                                       ; byte
-    db $de,$ff,$98,$5a,$00,$ff,$82,$ff,$8e,$ff,$23,$5e,$00,$ff,$06,$ff ; [$ba64]
-                                                                       ; byte
-    db $bd,$ff,$a7,$6f,$00,$ff,$bc,$ff,$eb,$ff,$55,$0b,$00,$ff,$a1,$ff ; [$ba74]
-                                                                       ; byte
-    db $cd,$ff,$15,$d7,$00,$ff,$a2,$ff,$ca,$ff,$2b,$8f,$00,$ff,$6f,$ff ; [$ba84]
-                                                                       ; byte
-    db $fe,$ff,$db,$68,$00,$ff,$b8,$ff,$d7,$ff,$df,$55,$00,$ff,$b4,$ff ; [$ba94]
-                                                                       ; byte
-    db $06,$ff,$cd,$bf,$00,$ff,$d0,$ff,$78,$ff,$e6,$ed,$00,$ff,$e4,$ff ; [$baa4]
-                                                                       ; byte
-    db $dd,$ff,$ba,$ce,$00,$ff,$4d,$ff,$df,$ff,$c5,$95,$00,$ff,$2a,$ff ; [$bab4]
-                                                                       ; byte
-    db $ed,$ff,$36,$fe,$00,$ff,$00,$ff,$c3,$ff,$7f,$df,$00,$ff,$40,$ff ; [$bac4]
-                                                                       ; byte
-    db $f5,$fb,$b1,$ec,$00,$ff,$d8,$ff,$df,$ff,$7d,$bf,$00,$df,$04,$ff ; [$bad4]
-                                                                       ; byte
-    db $b5,$ff,$e7,$af,$00,$ff,$00,$ff,$51,$ff,$ff,$d3,$00,$ff,$95,$ff ; [$bae4]
-                                                                       ; byte
-    db $74,$ff,$e4,$8f,$00,$ff,$c1,$ff,$7f,$ff,$7f,$54,$00,$ff,$40,$ff ; [$baf4]
-                                                                       ; byte
-    db $0f,$ff,$d9,$3f,$00,$ff,$44,$ff,$4d,$ff,$bf,$cf,$00,$ff,$32,$ff ; [$bb04]
-                                                                       ; byte
-    db $f9,$ff,$ab,$f7,$00,$ff,$f1,$ff,$df,$af,$7f,$02,$00,$ff,$54,$ff ; [$bb14]
-                                                                       ; byte
-    db $23,$ff,$59,$9f,$00,$ff,$07,$ff,$b1,$ff,$a4,$ef,$00,$ff,$30,$ff ; [$bb24]
-                                                                       ; byte
-    db $66,$ff,$6e,$de,$00,$ff,$e2,$ff,$6f,$ff,$fb,$bd,$00,$ff,$85,$ff ; [$bb34]
-                                                                       ; byte
-    db $27,$ff,$13,$fb,$00,$ff,$08,$ff,$52,$ff,$de,$bd,$00,$ff,$be,$ff ; [$bb44]
-                                                                       ; byte
-    db $bb,$ff,$ee,$b7,$00,$ff,$23,$ff,$f7,$ff,$7f,$ae,$00,$ff,$00,$ff ; [$bb54]
-                                                                       ; byte
-    db $8b,$ff,$31,$ef,$00,$ff,$c1,$ff,$80,$ff,$9b,$7f,$00,$ff,$76,$ff ; [$bb64]
-                                                                       ; byte
-    db $b0,$ff,$3f,$b3,$00,$ff,$55,$ff,$bf,$ff,$79,$aa,$00,$ff,$11,$ff ; [$bb74]
-                                                                       ; byte
-    db $c4,$ff,$38,$8f,$00,$ff,$53,$ff,$e0,$ff,$0a,$e1,$00,$ff,$03,$ff ; [$bb84]
-                                                                       ; byte
-    db $7e,$ff,$5e,$f7,$00,$ff,$62,$ff,$f3,$ff,$5e,$35,$00,$ff,$54,$ff ; [$bb94]
-                                                                       ; byte
-    db $41,$ff,$2e,$df,$00,$ff,$03,$ff,$6c,$ff,$b5,$5f,$00,$ff,$c4,$ff ; [$bba4]
-                                                                       ; byte
-    db $e2,$ff,$5e,$df,$00,$ff,$f6,$ff,$5f,$ff,$a5,$0f,$00,$ff,$c1,$ff ; [$bbb4]
-                                                                       ; byte
-    db $21,$ff,$4f,$43,$00,$ff,$48,$ff,$15,$ff,$e0,$df,$00,$ff,$64,$ff ; [$bbc4]
-                                                                       ; byte
-    db $34,$ff,$b1,$7d,$00,$ff,$f8,$ff,$ff,$ff,$bc,$2d,$00,$ff,$09,$ff ; [$bbd4]
-                                                                       ; byte
-    db $e6,$ff,$4d,$f6,$00,$ff,$60,$ff,$81,$ff,$15,$af,$00,$ff,$30,$ff ; [$bbe4]
-                                                                       ; byte
-    db $a3,$ff,$ba,$3a,$20,$ff,$53,$ff,$15,$ff,$ed,$ae,$00,$ff,$21,$ff ; [$bbf4]
-                                                                       ; byte
-    db $95,$ff,$b3,$fe,$00,$ff,$cc,$ff,$c5,$ff,$63,$2f,$00,$ff,$68,$ff ; [$bc04]
-                                                                       ; byte
-    db $3a,$ff,$7e,$ee,$00,$ff,$b4,$ff,$5b,$ff,$6e,$31,$00,$ff,$10,$ff ; [$bc14]
-                                                                       ; byte
-    db $cf,$ff,$98,$e7,$00,$ff,$60,$ff,$a7,$ff,$21,$3f,$00,$ff,$10,$ff ; [$bc24]
-                                                                       ; byte
-    db $ef,$ff,$cd,$eb,$00,$ff,$2e,$ff,$ff,$ff,$c0,$5e,$00,$ff,$00,$ff ; [$bc34]
-                                                                       ; byte
-    db $be,$ff,$31,$ff,$00,$ff,$02,$ff,$de,$ff,$8a,$ff,$00,$ff,$42,$ff ; [$bc44]
-                                                                       ; byte
-    db $be,$ff,$b8,$9c,$00,$ff,$95,$ff,$ed,$ff,$fc,$2e,$00,$ff,$04,$ff ; [$bc54]
-                                                                       ; byte
-    db $f5,$ff,$15,$cf,$00,$ff,$4e,$ff,$ee,$ff,$28,$dc,$00,$ff,$0a,$ff ; [$bc64]
-                                                                       ; byte
-    db $f1,$ff,$5d,$76,$00,$ff,$b1,$ff,$97,$ff,$6b,$7a,$00,$ff,$85,$ff ; [$bc74]
-                                                                       ; byte
-    db $39,$ff,$15,$cf,$00,$ff,$c6,$ff,$cb,$ff,$fb,$77,$00,$ff,$1f,$ff ; [$bc84]
-                                                                       ; byte
-    db $d7,$ff,$ac,$e1,$00,$ff,$1a,$ff,$c8,$ef,$55,$e8,$00,$ff,$8a,$ff ; [$bc94]
-                                                                       ; byte
-    db $ea,$ff,$f4,$bd,$00,$ff,$80,$ff,$2f,$ff,$d7,$ef,$00,$ff,$72,$ff ; [$bca4]
-                                                                       ; byte
-    db $45,$ff,$f3,$fd,$00,$ff,$ef,$ff,$ef,$ff,$8d,$23,$00,$ff,$20,$ff ; [$bcb4]
-                                                                       ; byte
-    db $91,$ff,$9c,$ed,$00,$ff,$45,$ff,$aa,$ff,$93,$ee,$00,$ff,$06,$ff ; [$bcc4]
-                                                                       ; byte
-    db $4f,$ff,$a3,$9f,$00,$ff,$dd,$ff,$ff,$ff,$fb,$0d,$00,$ff,$28,$ff ; [$bcd4]
-                                                                       ; byte
-    db $05,$ff,$2b,$6d,$00,$ff,$d2,$ff,$51,$ff,$bc,$fd,$00,$ff,$45,$ff ; [$bce4]
-                                                                       ; byte
-    db $86,$ff,$a0,$fa,$00,$ff,$b2,$ff,$af,$ff,$71,$14,$00,$ff,$20,$ff ; [$bcf4]
-                                                                       ; byte
-    db $53,$ff,$57,$ff,$00,$ff,$f5,$ff,$bf,$ff,$35,$fd,$01,$ff,$93,$ff ; [$bd04]
-                                                                       ; byte
-    db $e6,$ff,$bd,$e8,$00,$ff,$5f,$ff,$b9,$ff,$b8,$ff,$00,$ff,$70,$ff ; [$bd14]
-                                                                       ; byte
-    db $73,$ff,$c6,$df,$00,$ff,$03,$ff,$71,$ff,$89,$af,$00,$ff,$01,$ff ; [$bd24]
-                                                                       ; byte
-    db $ab,$ff,$6d,$e7,$00,$ff,$d7,$ff,$62,$ff,$36,$47,$00,$ff,$40,$ff ; [$bd34]
-                                                                       ; byte
-    db $34,$ff,$41,$ef,$00,$ff,$b9,$ff,$39,$ff,$3e,$6e,$00,$ff,$af,$ff ; [$bd44]
-                                                                       ; byte
-    db $17,$ff,$3e,$ff,$00,$ff,$69,$ff,$5d,$ff,$67,$23,$00,$ff,$a2,$ff ; [$bd54]
-                                                                       ; byte
-    db $1a,$ff,$f4,$db,$00,$ff,$87,$ff,$b3,$ff,$68,$ae,$00,$ff,$63,$ff ; [$bd64]
-                                                                       ; byte
-    db $6b,$ff,$65,$fd,$00,$ff,$09,$ff,$fd,$ff,$ef,$4c,$00,$ff,$01,$ff ; [$bd74]
-                                                                       ; byte
-    db $65,$ff,$18,$ea,$00,$ff,$30,$ff,$a3,$ff,$b6,$7f,$00,$ff,$9f,$ff ; [$bd84]
-                                                                       ; byte
-    db $ea,$fe,$7f,$be,$00,$ff,$de,$ff,$25,$ff,$df,$1e,$00,$ff,$11,$ff ; [$bd94]
-                                                                       ; byte
-    db $50,$ff,$6b,$7e,$00,$ff,$86,$ff,$f4,$ff,$b5,$af,$00,$ff,$d0,$ff ; [$bda4]
-                                                                       ; byte
-    db $e3,$ff,$3d,$df,$00,$ff,$cd,$ff,$ff,$ff,$75,$59,$00,$ff,$19,$ff ; [$bdb4]
-                                                                       ; byte
-    db $33,$ff,$74,$bb,$00,$ff,$30,$ff,$ee,$ff,$7e,$fb,$00,$ff,$1a,$ff ; [$bdc4]
-                                                                       ; byte
-    db $f9,$ff,$ed,$df,$00,$ff,$1d,$ff,$dd,$ff,$cf,$39,$00,$ff,$00,$ff ; [$bdd4]
-                                                                       ; byte
-    db $de,$ff,$c4,$97,$00,$ff,$b4,$ff,$d3,$ff,$99,$ff,$00,$ff,$a2,$ff ; [$bde4]
-                                                                       ; byte
-    db $e6,$7e,$b7,$f7,$00,$ff,$5c,$ff,$b7,$ff,$5f,$34,$00,$ff,$0a,$ff ; [$bdf4]
-                                                                       ; byte
-    db $c4,$ff,$c2,$ff,$00,$ff,$40,$ff,$75,$ff,$56,$be,$00,$7f,$2c,$ff ; [$be04]
-                                                                       ; byte
-    db $99,$ff,$9b,$7f,$00,$ff,$cd,$ff,$ff,$fe,$dd,$29,$00,$ff,$02,$ff ; [$be14]
-                                                                       ; byte
-    db $15,$ff,$33,$df,$00,$ff,$04,$ff,$75,$ff,$5e,$a6,$00,$ff,$2d,$ff ; [$be24]
-                                                                       ; byte
-    db $23,$ff,$9f,$97,$00,$ff,$5f,$ff,$f7,$ff,$92,$03,$00,$ff,$68,$ff ; [$be34]
-                                                                       ; byte
-    db $46,$ff,$48,$fe,$00,$ff,$08,$ff,$9a,$ff,$ed,$ff,$00,$ff,$24,$ff ; [$be44]
-                                                                       ; byte
-    db $7f,$ff,$63,$f7,$00,$ff,$28,$ff,$7d,$ff,$5a,$dd,$00,$ff,$15,$ff ; [$be54]
-                                                                       ; byte
-    db $02,$ff,$0a,$fd,$00,$ff,$06,$ff,$7c,$ff,$d2,$38,$00,$ff,$33,$ff ; [$be64]
-                                                                       ; byte
-    db $7b,$ff,$6f,$c2,$00,$ff,$a9,$ff,$a8,$ff,$db,$dd,$00,$ff,$c0,$ff ; [$be74]
-                                                                       ; byte
-    db $bb,$ff,$fc,$6b,$00,$ff,$70,$ff,$b1,$ff,$49,$bf,$00,$ff,$56,$ff ; [$be84]
-                                                                       ; byte
-    db $bc,$ff,$e5,$a6,$00,$ff,$0c,$ff,$73,$ff,$ed,$e7,$00,$ff,$aa,$ff ; [$be94]
-                                                                       ; byte
-    db $27,$ff,$41,$5b,$00,$ff,$09,$ff,$7c,$fb,$ee,$ef,$00,$ff,$68,$ff ; [$bea4]
-                                                                       ; byte
-    db $f8,$ff,$53,$6c,$00,$ff,$39,$ff,$ff,$ff,$7b,$b8,$00,$ff,$80,$ff ; [$beb4]
-                                                                       ; byte
-    db $66,$ff,$65,$7c,$00,$ff,$dd,$ff,$ff,$ff,$9b,$83,$00,$ff,$61,$ef ; [$bec4]
-                                                                       ; byte
-    db $c7,$df,$70,$f5,$00,$ff,$ed,$ff,$fa,$ff,$b3,$4c,$00,$ff,$08,$ff ; [$bed4]
-                                                                       ; byte
-    db $6b,$ff,$10,$97,$00,$ff,$a0,$ff,$62,$ff,$cd,$ee,$00,$ff,$50,$ff ; [$bee4]
-                                                                       ; byte
-    db $fd,$ff,$75,$ef,$00,$ff,$20,$ff,$1f,$ff,$d9,$7b,$00,$ff,$ae,$ff ; [$bef4]
-                                                                       ; byte
-    db $9d,$ff,$e3,$ff,$00,$ef,$82,$ff,$95,$ff,$9e,$ff,$00,$ff,$c3,$ff ; [$bf04]
-                                                                       ; byte
-    db $e7,$ff,$ed,$6f,$00,$ff,$c0,$ff,$37,$ff,$ff,$fe,$00,$ff,$11,$ff ; [$bf14]
-                                                                       ; byte
-    db $64,$ff,$c3,$df,$00,$ff,$76,$ff,$2e,$ff,$9b,$cb,$00,$ff,$1a,$ff ; [$bf24]
-                                                                       ; byte
-    db $ed,$ff,$45,$b9,$00,$ff,$cf,$ff,$eb,$ff,$15,$c7,$00,$ff,$5e,$ff ; [$bf34]
-                                                                       ; byte
-    db $21,$ff,$23,$ef,$00,$ff,$31,$ff,$f0,$ff,$b7,$75,$00,$ff,$12,$ff ; [$bf44]
-                                                                       ; byte
-    db $3e,$ff,$de,$de,$00,$ff,$45,$ff,$f8,$ff,$eb,$9f,$00,$ff,$b9,$ff ; [$bf54]
-                                                                       ; byte
-    db $17,$ff,$3f,$fe,$00,$ff,$24,$ff,$fc,$ff,$e9,$bd,$00,$ff,$fc,$ff ; [$bf64]
-                                                                       ; byte
-    db $f1,$ff,$54,$bb,$00,$ff,$c4,$ff,$aa,$ff,$53,$7b,$00,$ff,$d0,$ff ; [$bf74]
-                                                                       ; byte
-    db $12,$ff,$b6,$ef,$00,$ff,$a1,$ff,$48,$ff,$ca,$b6,$00,$ff,$79,$ff ; [$bf84]
-                                                                       ; byte
-    db $51,$ff,$72,$3f,$00,$ff,$7a,$ff,$73,$ff,$f2,$99,$00,$ff,$41,$ff ; [$bf94]
-                                                                       ; byte
-    db $d4,$ff,$19,$ff,$00,$ff,$c0,$ff,$5c,$ff,$98,$c7,$00,$ff,$6a,$ff ; [$bfa4]
-                                                                       ; byte
-    db $7a,$ff,$9c,$be,$00,$ff,$7d,$ff,$fd,$ff,$a6,$8e,$00,$ff,$29,$ff ; [$bfb4]
-                                                                       ; byte
-    db $db,$ff,$83,$91,$00,$ff,$81,$ff,$b5,$ff,$aa,$79,$00,$ff,$0c,$ff ; [$bfc4]
-                                                                       ; byte
-    db $fe,$ff,$bf,$e3,$00,$ff,$a6,$ff,$da,$ff,$fa,$fa,$00,$ff,$46,$ff ; [$bfd4]
-                                                                       ; byte
-    db $65,$ff,$e2,$7d,$00,$ff,$fa,$ff,$f5,$ff,$98,$d6,$00,$ff,$22,$ff ; [$bfe4]
-                                                                       ; byte
-    db $f5,$ff,$f6,$b3,$00,$ff,$a2,$ff,$f7,$ff,$fe,$bf ; [$bff4] byte
+    dw $ffa7,$ff75,$6157,$ff00,$ffe9,$fff8,$fead,$ff00 ; [$b3d2] ushort
+    dw $ff23,$fffd,$ed29,$ff00,$ff7c,$ff3a,$4cba,$ff00 ; [$b3e2] ushort
+    dw $ff37,$ff7b,$324c,$ff00,$ff48,$ffbe,$d63a,$ff00 ; [$b3f2] ushort
+    dw $ff82,$ff53,$fb4e,$ff00,$ff84,$fff8,$ebd8,$ff00 ; [$b402] ushort
+    dw $ff74,$ffef,$dbbd,$ff00,$ff39,$ffff,$97ee,$ff00 ; [$b412] ushort
+    dw $ff0a,$ffc6,$ffc5,$ff00,$ff02,$ff7d,$f174,$ff00 ; [$b422] ushort
+    dw $ff3e,$ff93,$7bb1,$ff00,$ffc6,$ff5d,$73ff,$ff00 ; [$b432] ushort
+    dw $ff84,$ff11,$bfe4,$ff00,$ff3c,$ffb3,$7d3f,$ff00 ; [$b442] ushort
+    dw $ff8a,$ff5e,$7fc3,$ff00,$ffcc,$ffde,$f83f,$ff00 ; [$b452] ushort
+    dw $ff45,$ffd3,$77ee,$ff00,$ff80,$ff85,$7e79,$ff00 ; [$b462] ushort
+    dw $ff95,$ff62,$2f73,$ff00,$fff3,$ffff,$ff0c,$ff00 ; [$b472] ushort
+    dw $ff95,$ff82,$7fab,$ff00,$ffc0,$ff5a,$9701,$ff00 ; [$b482] ushort
+    dw $ff12,$ff5d,$f3aa,$ff00,$fff0,$ff18,$f9f3,$ff00 ; [$b492] ushort
+    dw $ff00,$ff3e,$cb6a,$ff00,$ff57,$ffbb,$fe78,$ff00 ; [$b4a2] ushort
+    dw $ffa7,$ff23,$80d2,$ff00,$ffa5,$ff6e,$b62f,$ff00 ; [$b4b2] ushort
+    dw $ff50,$ff66,$7520,$ff00,$ff55,$fff7,$ed5b,$ff00 ; [$b4c2] ushort
+    dw $ff60,$ffe8,$9e78,$ff00,$ffd9,$ff13,$ffbd,$ff00 ; [$b4d2] ushort
+    dw $ffec,$ff0b,$fd26,$ff00,$ffe2,$ff58,$7736,$ff00 ; [$b4e2] ushort
+    dw $ff40,$ffb6,$ff02,$ff00,$fff9,$ffdf,$58b0,$ff00 ; [$b4f2] ushort
+    dw $ffb4,$ff9e,$fbaa,$ff00,$ff84,$ff9a,$ff9f,$ff00 ; [$b502] ushort
+    dw $ff34,$ffd3,$9f32,$ff00,$ff4a,$ff57,$6d6f,$ff00 ; [$b512] ushort
+    dw $ff2a,$ff64,$ddfe,$ff00,$ff94,$ffd1,$efbb,$ff00 ; [$b522] ushort
+    dw $ff2c,$ff5f,$bfcb,$ff00,$ffe7,$ff7c,$7df3,$ff00 ; [$b532] ushort
+    dw $ff90,$ff51,$ec33,$ff00,$ff59,$ffa4,$7f72,$ff00 ; [$b542] ushort
+    dw $ff1a,$ff0f,$afc5,$ff00,$ff2f,$ffe9,$3015,$ff00 ; [$b552] ushort
+    dw $ff03,$ff06,$bf13,$ff00,$ff0b,$fffb,$fee2,$ff00 ; [$b562] ushort
+    dw $ffd5,$ffc7,$9f69,$ff00,$ff32,$ff76,$06fc,$ff00 ; [$b572] ushort
+    dw $ff14,$ff3c,$0f6f,$ff00,$ffad,$ffea,$afdb,$ff00 ; [$b582] ushort
+    dw $ff27,$ffee,$4cf9,$ff00,$ff23,$ff5d,$fe57,$ff00 ; [$b592] ushort
+    dw $ff04,$ffb1,$f7e2,$ff00,$ffa4,$ff53,$fffa,$ff00 ; [$b5a2] ushort
+    dw $ff2c,$ff5f,$8cfd,$ff00,$ff7d,$ff77,$52e8,$ff00 ; [$b5b2] ushort
+    dw $ff00,$ff83,$bf35,$ff00,$ff58,$ffd7,$d7ef,$ff00 ; [$b5c2] ushort
+    dw $ff60,$fff8,$ded1,$ff00,$ff94,$fff3,$cfea,$ff00 ; [$b5d2] ushort
+    dw $ff08,$ff48,$fb7b,$ff00,$ff33,$ffd6,$837f,$ff00 ; [$b5e2] ushort
+    dw $ff71,$ff4e,$ff45,$ff00,$fffc,$ef97,$3ef6,$ff00 ; [$b5f2] ushort
+    dw $ff40,$ff05,$ff4b,$ff00,$ff04,$ff72,$ff69,$ff00 ; [$b602] ushort
+    dw $ff12,$ffc8,$efe9,$ff00,$ffd8,$ffdf,$03af,$ff00 ; [$b612] ushort
+    dw $ff27,$ff2c,$ff11,$ff00,$ff94,$ff22,$fff2,$ff00 ; [$b622] ushort
+    dw $ffe4,$ffbd,$92f7,$ff00,$ff26,$ffff,$65a7,$ff00 ; [$b632] ushort
+    dw $ff61,$ffa8,$beb0,$ff00,$ff0d,$ffa2,$a351,$ff00 ; [$b642] ushort
+    dw $fff0,$ffc4,$ae04,$ff00,$ff3b,$ff7f,$cf3b,$ff00 ; [$b652] ushort
+    dw $ff01,$ff56,$ff61,$ff00,$ff8d,$fffb,$f781,$ff00 ; [$b662] ushort
+    dw $ff12,$ffcb,$df73,$ff00,$ff71,$ffd9,$bfb7,$ff00 ; [$b672] ushort
+    dw $ff00,$ff59,$9779,$ff00,$ff42,$ff7d,$eab9,$ff00 ; [$b682] ushort
+    dw $ff70,$ffdb,$30fd,$ff00,$ff08,$ff67,$8e9f,$ff00 ; [$b692] ushort
+    dw $ff01,$ff1f,$7f27,$ff00,$ffc0,$ff27,$6f50,$ff00 ; [$b6a2] ushort
+    dw $ff63,$ffbe,$cf40,$ff00,$ffc5,$ffda,$9f1f,$ff00 ; [$b6b2] ushort
+    dw $ff28,$ffe5,$b7a3,$ff00,$ffc2,$ff19,$9f8b,$ff00 ; [$b6c2] ushort
+    dw $ff44,$fff7,$efd5,$ff00,$ff2d,$ffad,$7fd5,$ff00 ; [$b6d2] ushort
+    dw $ff22,$ff3e,$5f75,$ff00,$ff01,$ffed,$df14,$ff00 ; [$b6e2] ushort
+    dw $ff38,$ff7d,$d3fa,$ff00,$ff7c,$ffbd,$cede,$ff00 ; [$b6f2] ushort
+    dw $ff3e,$ffe7,$e6e1,$ff00,$ff38,$ff3a,$f559,$ff00 ; [$b702] ushort
+    dw $ff05,$ef17,$5e75,$ff00,$ff6b,$fffd,$34de,$ff00 ; [$b712] ushort
+    dw $ff32,$ff5b,$f300,$ff00,$ff20,$ffda,$ff5e,$ff00 ; [$b722] ushort
+    dw $ff04,$ffe0,$f3c1,$ff00,$ff49,$ffb7,$ee9e,$ff00 ; [$b732] ushort
+    dw $ff72,$ff34,$d576,$ff00,$ff01,$ff69,$fe0d,$ff00 ; [$b742] ushort
+    dw $ffbb,$ff20,$7ee4,$ff00,$ff43,$ffb7,$187b,$ff00 ; [$b752] ushort
+    dw $ff61,$ff03,$ffe0,$ff00,$ff89,$fff5,$8f66,$ff00 ; [$b762] ushort
+    dw $fffe,$ffc7,$bffd,$ff00,$ff28,$ffeb,$ebaf,$ff00 ; [$b772] ushort
+    dw $ff04,$ff0a,$bfc1,$ff00,$ff50,$df21,$dbf4,$ff00 ; [$b782] ushort
+    dw $ffdc,$ff9e,$bdff,$ff00,$ff8b,$ffbe,$b5cd,$ff00 ; [$b792] ushort
+    dw $ff00,$ff39,$ff1c,$ff00,$ff08,$ff11,$bfb7,$ff00 ; [$b7a2] ushort
+    dw $fff2,$ff77,$f7f4,$ff00,$ff64,$ff53,$b3ff,$ff00 ; [$b7b2] ushort
+    dw $ff81,$ff55,$97cd,$ff00,$ff1e,$ff39,$fb68,$ff00 ; [$b7c2] ushort
+    dw $ffa0,$fffd,$eeca,$ff00,$dfae,$fbf4,$6b7f,$ff00 ; [$b7d2] ushort
+    dw $ff44,$ff93,$7cf5,$ff00,$ff46,$ff04,$7ffd,$ff00 ; [$b7e2] ushort
+    dw $ffe0,$df34,$fe7b,$ff00,$ff5a,$ffeb,$c119,$ff00 ; [$b7f2] ushort
+    dw $ff31,$ffa4,$3d26,$ff00,$ffe0,$ffb0,$ffe3,$ff00 ; [$b802] ushort
+    dw $fffa,$ff71,$fef9,$ff00,$ff3b,$fffe,$decf,$ff00 ; [$b812] ushort
+    dw $ff16,$ffe5,$1dbc,$ff00,$ff05,$ff9e,$fbbb,$ff00 ; [$b822] ushort
+    dw $ffb0,$ffbb,$e79e,$ff00,$ff50,$ffbc,$a6cd,$ff00 ; [$b832] ushort
+    dw $ff3a,$ff02,$dee2,$ff00,$ff42,$ff3a,$33c5,$ff00 ; [$b842] ushort
+    dw $ffd2,$ff67,$7d5b,$ff00,$ff6e,$ffd9,$59fd,$ff00 ; [$b852] ushort
+    dw $ff80,$ff0c,$df02,$ff00,$ffa4,$ff9a,$ff93,$ff00 ; [$b862] ushort
+    dw $ff06,$ffa7,$df7e,$f700,$ff3d,$ff71,$4fee,$ff00 ; [$b872] ushort
+    dw $ff04,$ff10,$bbc8,$ff00,$ff12,$ff2f,$74f5,$ff00 ; [$b882] ushort
+    dw $ff30,$fff3,$555e,$ff00,$ffc2,$ffde,$b4b6,$ff00 ; [$b892] ushort
+    dw $ff81,$ff6a,$fdf7,$ff00,$ff93,$ff24,$b647,$ff00 ; [$b8a2] ushort
+    dw $ff45,$ff6b,$3717,$ff00,$ff88,$ff76,$2f7f,$ff00 ; [$b8b2] ushort
+    dw $ff00,$ffbe,$fd9a,$ff00,$ffb2,$ffdb,$afdc,$f700 ; [$b8c2] ushort
+    dw $ffaa,$ff7e,$dfed,$ff00,$ff68,$ffed,$7cbb,$ff00 ; [$b8d2] ushort
+    dw $ff20,$ff12,$8b39,$ff00,$ff70,$ffe0,$9d1c,$ff00 ; [$b8e2] ushort
+    dw $ff67,$fd83,$93f4,$ff00,$ff19,$ff79,$7fbf,$ff00 ; [$b8f2] ushort
+    dw $ffa1,$ff3a,$f78a,$ff00,$ff84,$ff5e,$6bb5,$ff00 ; [$b902] ushort
+    dw $ffb0,$ff65,$f9d6,$ff00,$ff72,$ff7b,$8d74,$ff00 ; [$b912] ushort
+    dw $ff08,$ff0d,$bd5d,$ff00,$ff00,$ff82,$3f7a,$ff00 ; [$b922] ushort
+    dw $ffe2,$ffb2,$7ea4,$ff00,$ffe7,$fe95,$afb5,$ff00 ; [$b932] ushort
+    dw $ff80,$ff10,$f831,$ff00,$ff40,$ff6a,$ff7e,$ff00 ; [$b942] ushort
+    dw $ff45,$ff5d,$6721,$ff00,$ffc0,$ffaf,$e385,$ff00 ; [$b952] ushort
+    dw $ff00,$ff12,$cf97,$ff00,$ffb0,$ff63,$ceb8,$ff00 ; [$b962] ushort
+    dw $fffa,$ff3b,$e5a3,$ff00,$ff60,$ff5b,$7689,$ff00 ; [$b972] ushort
+    dw $ff80,$ff52,$7e52,$ff00,$ffa0,$ff1f,$d766,$ff00 ; [$b982] ushort
+    dw $ff76,$ff9d,$14f9,$ff00,$ffff,$ff2f,$52f7,$ff00 ; [$b992] ushort
+    dw $ff9c,$ff04,$ff76,$ff00,$ff94,$ff72,$4e7f,$ff00 ; [$b9a2] ushort
+    dw $ffa7,$ffc7,$6d66,$ff00,$ff9d,$ff7f,$267c,$ff00 ; [$b9b2] ushort
+    dw $ff26,$ffc7,$ff72,$ff00,$ff31,$ffb7,$e97e,$ff00 ; [$b9c2] ushort
+    dw $ffbc,$ffde,$e4e7,$ff00,$ff7b,$fef2,$ebf3,$ff00 ; [$b9d2] ushort
+    dw $ffe8,$ff32,$f79d,$ff00,$ff80,$ff36,$ff9c,$ff00 ; [$b9e2] ushort
+    dw $ff88,$ffeb,$a7eb,$ff00,$ff8f,$ff77,$79df,$ff00 ; [$b9f2] ushort
+    dw $fffa,$ffa6,$ffcd,$ff00,$ffa0,$ffb4,$eb52,$ff00 ; [$ba02] ushort
+    dw $ffdc,$ffbe,$6dc5,$ff00,$ff63,$fffd,$42a2,$ff00 ; [$ba12] ushort
+    dw $ffa4,$ffc1,$fd88,$ff00,$ff30,$ff6a,$7d92,$ff00 ; [$ba22] ushort
+    dw $ff70,$ffbb,$ff76,$ff00,$ffb4,$fff5,$dcfe,$ff00 ; [$ba32] ushort
+    dw $ff80,$ff37,$e7a4,$ff00,$ff40,$ff43,$f77d,$ff00 ; [$ba42] ushort
+    dw $ff12,$fff1,$df57,$ff00,$ffd7,$ffc5,$e73b,$ff00 ; [$ba52] ushort
+    dw $ff6c,$ffde,$5a98,$ff00,$ff82,$ff8e,$5e23,$ff00 ; [$ba62] ushort
+    dw $ff06,$ffbd,$6fa7,$ff00,$ffbc,$ffeb,$0b55,$ff00 ; [$ba72] ushort
+    dw $ffa1,$ffcd,$d715,$ff00,$ffa2,$ffca,$8f2b,$ff00 ; [$ba82] ushort
+    dw $ff6f,$fffe,$68db,$ff00,$ffb8,$ffd7,$55df,$ff00 ; [$ba92] ushort
+    dw $ffb4,$ff06,$bfcd,$ff00,$ffd0,$ff78,$ede6,$ff00 ; [$baa2] ushort
+    dw $ffe4,$ffdd,$ceba,$ff00,$ff4d,$ffdf,$95c5,$ff00 ; [$bab2] ushort
+    dw $ff2a,$ffed,$fe36,$ff00,$ff00,$ffc3,$df7f,$ff00 ; [$bac2] ushort
+    dw $ff40,$fbf5,$ecb1,$ff00,$ffd8,$ffdf,$bf7d,$df00 ; [$bad2] ushort
+    dw $ff04,$ffb5,$afe7,$ff00,$ff00,$ff51,$d3ff,$ff00 ; [$bae2] ushort
+    dw $ff95,$ff74,$8fe4,$ff00,$ffc1,$ff7f,$547f,$ff00 ; [$baf2] ushort
+    dw $ff40,$ff0f,$3fd9,$ff00,$ff44,$ff4d,$cfbf,$ff00 ; [$bb02] ushort
+    dw $ff32,$fff9,$f7ab,$ff00,$fff1,$afdf,$027f,$ff00 ; [$bb12] ushort
+    dw $ff54,$ff23,$9f59,$ff00,$ff07,$ffb1,$efa4,$ff00 ; [$bb22] ushort
+    dw $ff30,$ff66,$de6e,$ff00,$ffe2,$ff6f,$bdfb,$ff00 ; [$bb32] ushort
+    dw $ff85,$ff27,$fb13,$ff00,$ff08,$ff52,$bdde,$ff00 ; [$bb42] ushort
+    dw $ffbe,$ffbb,$b7ee,$ff00,$ff23,$fff7,$ae7f,$ff00 ; [$bb52] ushort
+    dw $ff00,$ff8b,$ef31,$ff00,$ffc1,$ff80,$7f9b,$ff00 ; [$bb62] ushort
+    dw $ff76,$ffb0,$b33f,$ff00,$ff55,$ffbf,$aa79,$ff00 ; [$bb72] ushort
+    dw $ff11,$ffc4,$8f38,$ff00,$ff53,$ffe0,$e10a,$ff00 ; [$bb82] ushort
+    dw $ff03,$ff7e,$f75e,$ff00,$ff62,$fff3,$355e,$ff00 ; [$bb92] ushort
+    dw $ff54,$ff41,$df2e,$ff00,$ff03,$ff6c,$5fb5,$ff00 ; [$bba2] ushort
+    dw $ffc4,$ffe2,$df5e,$ff00,$fff6,$ff5f,$0fa5,$ff00 ; [$bbb2] ushort
+    dw $ffc1,$ff21,$434f,$ff00,$ff48,$ff15,$dfe0,$ff00 ; [$bbc2] ushort
+    dw $ff64,$ff34,$7db1,$ff00,$fff8,$ffff,$2dbc,$ff00 ; [$bbd2] ushort
+    dw $ff09,$ffe6,$f64d,$ff00,$ff60,$ff81,$af15,$ff00 ; [$bbe2] ushort
+    dw $ff30,$ffa3,$3aba,$ff20,$ff53,$ff15,$aeed,$ff00 ; [$bbf2] ushort
+    dw $ff21,$ff95,$feb3,$ff00,$ffcc,$ffc5,$2f63,$ff00 ; [$bc02] ushort
+    dw $ff68,$ff3a,$ee7e,$ff00,$ffb4,$ff5b,$316e,$ff00 ; [$bc12] ushort
+    dw $ff10,$ffcf,$e798,$ff00,$ff60,$ffa7,$3f21,$ff00 ; [$bc22] ushort
+    dw $ff10,$ffef,$ebcd,$ff00,$ff2e,$ffff,$5ec0,$ff00 ; [$bc32] ushort
+    dw $ff00,$ffbe,$ff31,$ff00,$ff02,$ffde,$ff8a,$ff00 ; [$bc42] ushort
+    dw $ff42,$ffbe,$9cb8,$ff00,$ff95,$ffed,$2efc,$ff00 ; [$bc52] ushort
+    dw $ff04,$fff5,$cf15,$ff00,$ff4e,$ffee,$dc28,$ff00 ; [$bc62] ushort
+    dw $ff0a,$fff1,$765d,$ff00,$ffb1,$ff97,$7a6b,$ff00 ; [$bc72] ushort
+    dw $ff85,$ff39,$cf15,$ff00,$ffc6,$ffcb,$77fb,$ff00 ; [$bc82] ushort
+    dw $ff1f,$ffd7,$e1ac,$ff00,$ff1a,$efc8,$e855,$ff00 ; [$bc92] ushort
+    dw $ff8a,$ffea,$bdf4,$ff00,$ff80,$ff2f,$efd7,$ff00 ; [$bca2] ushort
+    dw $ff72,$ff45,$fdf3,$ff00,$ffef,$ffef,$238d,$ff00 ; [$bcb2] ushort
+    dw $ff20,$ff91,$ed9c,$ff00,$ff45,$ffaa,$ee93,$ff00 ; [$bcc2] ushort
+    dw $ff06,$ff4f,$9fa3,$ff00,$ffdd,$ffff,$0dfb,$ff00 ; [$bcd2] ushort
+    dw $ff28,$ff05,$6d2b,$ff00,$ffd2,$ff51,$fdbc,$ff00 ; [$bce2] ushort
+    dw $ff45,$ff86,$faa0,$ff00,$ffb2,$ffaf,$1471,$ff00 ; [$bcf2] ushort
+    dw $ff20,$ff53,$ff57,$ff00,$fff5,$ffbf,$fd35,$ff01 ; [$bd02] ushort
+    dw $ff93,$ffe6,$e8bd,$ff00,$ff5f,$ffb9,$ffb8,$ff00 ; [$bd12] ushort
+    dw $ff70,$ff73,$dfc6,$ff00,$ff03,$ff71,$af89,$ff00 ; [$bd22] ushort
+    dw $ff01,$ffab,$e76d,$ff00,$ffd7,$ff62,$4736,$ff00 ; [$bd32] ushort
+    dw $ff40,$ff34,$ef41,$ff00,$ffb9,$ff39,$6e3e,$ff00 ; [$bd42] ushort
+    dw $ffaf,$ff17,$ff3e,$ff00,$ff69,$ff5d,$2367,$ff00 ; [$bd52] ushort
+    dw $ffa2,$ff1a,$dbf4,$ff00,$ff87,$ffb3,$ae68,$ff00 ; [$bd62] ushort
+    dw $ff63,$ff6b,$fd65,$ff00,$ff09,$fffd,$4cef,$ff00 ; [$bd72] ushort
+    dw $ff01,$ff65,$ea18,$ff00,$ff30,$ffa3,$7fb6,$ff00 ; [$bd82] ushort
+    dw $ff9f,$feea,$be7f,$ff00,$ffde,$ff25,$1edf,$ff00 ; [$bd92] ushort
+    dw $ff11,$ff50,$7e6b,$ff00,$ff86,$fff4,$afb5,$ff00 ; [$bda2] ushort
+    dw $ffd0,$ffe3,$df3d,$ff00,$ffcd,$ffff,$5975,$ff00 ; [$bdb2] ushort
+    dw $ff19,$ff33,$bb74,$ff00,$ff30,$ffee,$fb7e,$ff00 ; [$bdc2] ushort
+    dw $ff1a,$fff9,$dfed,$ff00,$ff1d,$ffdd,$39cf,$ff00 ; [$bdd2] ushort
+    dw $ff00,$ffde,$97c4,$ff00,$ffb4,$ffd3,$ff99,$ff00 ; [$bde2] ushort
+    dw $ffa2,$7ee6,$f7b7,$ff00,$ff5c,$ffb7,$345f,$ff00 ; [$bdf2] ushort
+    dw $ff0a,$ffc4,$ffc2,$ff00,$ff40,$ff75,$be56,$7f00 ; [$be02] ushort
+    dw $ff2c,$ff99,$7f9b,$ff00,$ffcd,$feff,$29dd,$ff00 ; [$be12] ushort
+    dw $ff02,$ff15,$df33,$ff00,$ff04,$ff75,$a65e,$ff00 ; [$be22] ushort
+    dw $ff2d,$ff23,$979f,$ff00,$ff5f,$fff7,$0392,$ff00 ; [$be32] ushort
+    dw $ff68,$ff46,$fe48,$ff00,$ff08,$ff9a,$ffed,$ff00 ; [$be42] ushort
+    dw $ff24,$ff7f,$f763,$ff00,$ff28,$ff7d,$dd5a,$ff00 ; [$be52] ushort
+    dw $ff15,$ff02,$fd0a,$ff00,$ff06,$ff7c,$38d2,$ff00 ; [$be62] ushort
+    dw $ff33,$ff7b,$c26f,$ff00,$ffa9,$ffa8,$dddb,$ff00 ; [$be72] ushort
+    dw $ffc0,$ffbb,$6bfc,$ff00,$ff70,$ffb1,$bf49,$ff00 ; [$be82] ushort
+    dw $ff56,$ffbc,$a6e5,$ff00,$ff0c,$ff73,$e7ed,$ff00 ; [$be92] ushort
+    dw $ffaa,$ff27,$5b41,$ff00,$ff09,$fb7c,$efee,$ff00 ; [$bea2] ushort
+    dw $ff68,$fff8,$6c53,$ff00,$ff39,$ffff,$b87b,$ff00 ; [$beb2] ushort
+    dw $ff80,$ff66,$7c65,$ff00,$ffdd,$ffff,$839b,$ff00 ; [$bec2] ushort
+    dw $ef61,$dfc7,$f570,$ff00,$ffed,$fffa,$4cb3,$ff00 ; [$bed2] ushort
+    dw $ff08,$ff6b,$9710,$ff00,$ffa0,$ff62,$eecd,$ff00 ; [$bee2] ushort
+    dw $ff50,$fffd,$ef75,$ff00,$ff20,$ff1f,$7bd9,$ff00 ; [$bef2] ushort
+    dw $ffae,$ff9d,$ffe3,$ef00,$ff82,$ff95,$ff9e,$ff00 ; [$bf02] ushort
+    dw $ffc3,$ffe7,$6fed,$ff00,$ffc0,$ff37,$feff,$ff00 ; [$bf12] ushort
+    dw $ff11,$ff64,$dfc3,$ff00,$ff76,$ff2e,$cb9b,$ff00 ; [$bf22] ushort
+    dw $ff1a,$ffed,$b945,$ff00,$ffcf,$ffeb,$c715,$ff00 ; [$bf32] ushort
+    dw $ff5e,$ff21,$ef23,$ff00,$ff31,$fff0,$75b7,$ff00 ; [$bf42] ushort
+    dw $ff12,$ff3e,$dede,$ff00,$ff45,$fff8,$9feb,$ff00 ; [$bf52] ushort
+    dw $ffb9,$ff17,$fe3f,$ff00,$ff24,$fffc,$bde9,$ff00 ; [$bf62] ushort
+    dw $fffc,$fff1,$bb54,$ff00,$ffc4,$ffaa,$7b53,$ff00 ; [$bf72] ushort
+    dw $ffd0,$ff12,$efb6,$ff00,$ffa1,$ff48,$b6ca,$ff00 ; [$bf82] ushort
+    dw $ff79,$ff51,$3f72,$ff00,$ff7a,$ff73,$99f2,$ff00 ; [$bf92] ushort
+    dw $ff41,$ffd4,$ff19,$ff00,$ffc0,$ff5c,$c798,$ff00 ; [$bfa2] ushort
+    dw $ff6a,$ff7a,$be9c,$ff00,$ff7d,$fffd,$8ea6,$ff00 ; [$bfb2] ushort
+    dw $ff29,$ffdb,$9183,$ff00,$ff81,$ffb5,$79aa,$ff00 ; [$bfc2] ushort
+    dw $ff0c,$fffe,$e3bf,$ff00,$ffa6,$ffda,$fafa,$ff00 ; [$bfd2] ushort
+    dw $ff46,$ff65,$7de2,$ff00,$fffa,$fff5,$d698,$ff00 ; [$bfe2] ushort
+    dw $ff22,$fff5,$b3f6,$ff00,$ffa2,$fff7,$bffe ; [$bff2] ushort

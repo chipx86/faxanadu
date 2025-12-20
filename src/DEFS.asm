@@ -178,7 +178,7 @@ ISCRIPT_ENTITY_MAGICIAN                            EQU $83
 ISCRIPT_ENTITY_DOCTOR                              EQU $84
 ISCRIPT_ENTITY_NURSE                               EQU $85
 ISCRIPT_ENTITY_PINK_SHIRT_GUY                      EQU $86
-ISCRIPT_ENTIY_SMOKING_GUY                          EQU $87
+ISCRIPT_ENTITY_SMOKING_GUY                         EQU $87
 ISCRIPT_ENTITY_MEAT_SALESMAN                       EQU $88
 ISCRIPT_ENTITY_TOOLS_SALESMAN                      EQU $89
 ISCRIPT_ENTITY_KEY_SALESMAN                        EQU $8a
@@ -365,12 +365,6 @@ ITEMINVENTORY_PENDANT                              EQU $13
 ITEMINVENTORY_BLACK_ONYX                           EQU $14
 ITEMINVENTORY_FIRE_CRYSTAL                         EQU $15
 ITEMINVENTORY_NO_ITEM_SELECTED                     EQU $ff
-
-;============================================================================
-; LoadedState
-;============================================================================
-LOADED_STATE_READY                                 EQU $00
-LOADED_STATE_NOT_PLAYING                           EQU $ff
 
 ;============================================================================
 ; Message
@@ -586,24 +580,24 @@ MOVING_SPRITE_FULLY_OBSCURED                       EQU $03
 ;============================================================================
 ; MScriptOp
 ;============================================================================
-MSCRIPT_OP_MAYBE_SET_0181                          EQU $ee
-MSCRIPT_OP_MAYBE_SET_017F                          EQU $ef
-MSCRIPT_OP_SET_SQ_DECAY_MODE                       EQU $f0
-MSCRIPT_OP_SET_SQ_VOL                              EQU $f1
-MSCRIPT_OP_MAYBE_SET_0172                          EQU $f2
-MSCRIPT_OP_SET_REPEATED                            EQU $f3
-MSCRIPT_OP_MAYBE_RESTART_SONG                      EQU $f4
+MSCRIPT_OP_SET_SQ2_PITCH_BIAS                      EQU $ee
+MSCRIPT_OP_SET_SQ_PITCH_EFFECT_DEPTH               EQU $ef
+MSCRIPT_OP_SET_SQ_ENVELOPE_MODE                    EQU $f0
+MSCRIPT_OP_SET_SQ_FADE                             EQU $f1
+MSCRIPT_OP_SET_SQ_CONTROL_BITS                     EQU $f2
+MSCRIPT_OP_SET_NOTE_DURATION                       EQU $f3
+MSCRIPT_OP_RESTART_CHANNEL                         EQU $f4
 MSCRIPT_OP_RET                                     EQU $f5
-MSCRIPT_OP_SET_SQ1_HIGH                            EQU $f6
-MSCRIPT_OP_MAYBE_SET_8BITCOUNTER                   EQU $f7
+MSCRIPT_OP_SET_CHANNEL_TRANSPOSE                   EQU $f6
+MSCRIPT_OP_SET_GLOBAL_TRANSPOSE                    EQU $f7
 MSCRIPT_OP_JSR                                     EQU $f8
 MSCRIPT_OP_PUSH_ADDR                               EQU $f9
 MSCRIPT_OP_NOOP                                    EQU $fa
-MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS                EQU $fb
+MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS                    EQU $fb
 MSCRIPT_OP_END_LOOP                                EQU $fc
 MSCRIPT_OP_BEGIN_LOOP                              EQU $fd
 MSCRIPT_OP_POP_ADDR                                EQU $fe
-MSCRIPT_OP_MAYBE_END                               EQU $ff
+MSCRIPT_OP_END                                     EQU $ff
 
 ;============================================================================
 ; Music
@@ -627,9 +621,79 @@ MUSIC_SHOP                                         EQU $0f
 MUSIC_EVIL_FORTRESS                                EQU $10
 
 ;============================================================================
+; MusicNote
+;============================================================================
+NOTE_REST                                          EQU $00
+NOTE_01_C2                                         EQU $01
+NOTE_02_Cs2                                        EQU $02
+NOTE_03_D2                                         EQU $03
+NOTE_04_Ds2                                        EQU $04
+NOTE_05_E2                                         EQU $05
+NOTE_06_F2                                         EQU $06
+NOTE_07_Fs2                                        EQU $07
+NOTE_08_G2                                         EQU $08
+NOTE_09_Gs2                                        EQU $09
+NOTE_0A_A2                                         EQU $0a
+NOTE_0B_As2                                        EQU $0b
+NOTE_0C_B2                                         EQU $0c
+NOTE_0D_C3                                         EQU $0d
+NOTE_0E_Cs3                                        EQU $0e
+NOTE_0F_D3                                         EQU $0f
+NOTE_10_Ds3                                        EQU $10
+NOTE_11_E3                                         EQU $11
+NOTE_12_F3                                         EQU $12
+NOTE_13_Fs3                                        EQU $13
+NOTE_14_G3                                         EQU $14
+NOTE_15_Gs3                                        EQU $15
+NOTE_16_A3                                         EQU $16
+NOTE_17_As3                                        EQU $17
+NOTE_18_B3                                         EQU $18
+NOTE_19_C4                                         EQU $19
+NOTE_1A_Cs4                                        EQU $1a
+NOTE_1B_D4                                         EQU $1b
+NOTE_1C_Ds4                                        EQU $1c
+NOTE_1D_E4                                         EQU $1d
+NOTE_1E_F4                                         EQU $1e
+NOTE_1F_Fs4                                        EQU $1f
+NOTE_20_G4                                         EQU $20
+NOTE_21_Gs4                                        EQU $21
+NOTE_22_A4                                         EQU $22
+NOTE_23_As4                                        EQU $23
+NOTE_24_B4                                         EQU $24
+NOTE_25_C5                                         EQU $25
+NOTE_26_Cs5                                        EQU $26
+NOTE_27_D5                                         EQU $27
+NOTE_28_Ds5                                        EQU $28
+NOTE_29_E5                                         EQU $29
+NOTE_2A_F5                                         EQU $2a
+NOTE_2B_Fs5                                        EQU $2b
+NOTE_2C_G5                                         EQU $2c
+NOTE_2D_Gs5                                        EQU $2d
+NOTE_2E_A5                                         EQU $2e
+NOTE_2F_As5                                        EQU $2f
+NOTE_30_B5                                         EQU $30
+NOTE_31_C6                                         EQU $31
+NOTE_32_Cs6                                        EQU $32
+NOTE_33_D6                                         EQU $33
+NOTE_34_Ds6                                        EQU $34
+NOTE_35_E6                                         EQU $35
+NOTE_36_F6                                         EQU $36
+NOTE_37_Fs6                                        EQU $37
+NOTE_38_G6                                         EQU $38
+NOTE_39_Gs6                                        EQU $39
+NOTE_3A_A6                                         EQU $3a
+NOTE_3B_As6                                        EQU $3b
+NOTE_3C_B6                                         EQU $3c
+
+;============================================================================
 ; Palette
 ;============================================================================
 PALETTE_EOLIS                                      EQU $00
+PALETTE_01                                         EQU $01
+PALETTE_02                                         EQU $02
+PALETTE_03                                         EQU $03
+PALETTE_04                                         EQU $04
+PALETTE_05                                         EQU $05
 PALETTE_OUTSIDE                                    EQU $06
 PALETTE_TOWER                                      EQU $07
 PALETTE_BRANCH                                     EQU $08
@@ -641,7 +705,7 @@ PALETTE_FRATERNAL                                  EQU $0d
 PALETTE_KING_GRIEVES_ROOM                          EQU $0e
 PALETTE_EVIL_FORTRESS                              EQU $0f
 PALETTE_START_SCREEN                               EQU $10
-PALETTTE_KINGS_ROOM                                EQU $11
+PALETTE_KINGS_ROOM                                 EQU $11
 PALETTE_TEMPLE                                     EQU $12
 PALETTE_HOSPITAL                                   EQU $13
 PALETTE_TAVERN                                     EQU $14
@@ -786,6 +850,12 @@ SCREEN_EVENT_UNSET                                 EQU $ff
 SCREEN_HAS_SPECIAL_EVENT                           EQU $80
 
 ;============================================================================
+; ScreenReadyState
+;============================================================================
+SCREEN_STATE_READY                                 EQU $00
+SCREEN_STATE_NOT_PLAYING                           EQU $ff
+
+;============================================================================
 ; ScreenScrollLoadMode
 ;============================================================================
 SCROLL_LOAD_TILES                                  EQU $00
@@ -894,6 +964,13 @@ BIT_RING_OF_RUBY                                   EQU $40
 BIT_RING_OF_ELF                                    EQU $80
 BIT_CLEAR_ELIXIR                                   EQU $f7
 BIT_ALL                                            EQU $ff
+
+;============================================================================
+; Sprite0Mode
+;============================================================================
+SPRITE0_MODE_X8_Y23                                EQU $00
+SPRITE0_MODE_X0_Y72                                EQU $01
+SPRITE0_MODE_NONE                                  EQU $ff
 
 ;============================================================================
 ; SpriteAction
@@ -1057,7 +1134,7 @@ SPRITE_NPC_MEAT_SALESMAN                           EQU $40
 SPRITE_NPC_LADY_BLUE_DRESS_WITH_CUP                EQU $41
 SPRITE_NPC_GUARD_1                                 EQU $42
 SPRITE_NPC_DOCTOR                                  EQU $43
-SPRITE_NPC_WALKING_WOMAN_1                         EQU $44
+SPRITE_NPC_NURSE                                   EQU $44
 SPRITE_NPC_WALKING_WOMAN_2                         EQU $45
 SPRITE_ENEMY_UNUSED_EYEBALL                        EQU $46
 SPRITE_ENEMY_ZOZURA                                EQU $47
@@ -1132,6 +1209,13 @@ SPRITE_OP_GOTO                                     EQU $05
 SPRITE_OP_ADD_TO_SPRITE_DATA                       EQU $06
 SPRITE_OP_SET_PHASE                                EQU $07
 SPRITE_OP_END_SCRIPT                               EQU $ff
+
+;============================================================================
+; SQEffectMode
+;============================================================================
+SQEFFECT_MODE_VOLUME_DECAY                         EQU $00
+SQEFFECT_MODE_CURVE_HELD                           EQU $01
+SQEFFECT_MODE_TABLE_DRIVEN                         EQU $02
 
 ;============================================================================
 ; Temple

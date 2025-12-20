@@ -12,7 +12,7 @@ ROMBankStart:                               ; [$8000]
 
 ;
 ; XREFS:
-;     Player_DrawArmorTile
+;     Player_LoadArmorTile
 ;
 USHORT_8004:                                ; [$8004]
     dw $389c                                ; Mascon
@@ -29,7 +29,7 @@ EOLIS_BLOCKS:                               ; [$8006]
 
 ;
 ; XREFS:
-;     Player_DrawShieldTile
+;     Player_LoadShieldTile
 ;
 USHORT_800a:                                ; [$800a]
     dw $00f3                                ; EOLIS_BLOCKS_SCREEN_2
@@ -99,7 +99,7 @@ EOLIS_BLOCKS_SCREEN_4:                      ; [$81c9]
 
 ;
 ; XREFS:
-;     Screen_LoadBackgroundPalette
+;     Screen_LoadUIPalette
 ;
 DAT_81f0:                                   ; [$81f0]
     hex b4 a7 2c cb d5 5c 47 44 d1 c0 36 0d 85 cb b1 65 ; [$81f0] undefined

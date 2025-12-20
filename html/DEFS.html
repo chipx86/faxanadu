@@ -442,7 +442,7 @@ pre {
 
 <div class="n">ISCRIPT_ENTITY_PINK_SHIRT_GUY</div> <div class="i">EQU</div> <div class="v">$86</div>
 
-<div class="n">ISCRIPT_ENTIY_SMOKING_GUY</div> <div class="i">EQU</div> <div class="v">$87</div>
+<div class="n">ISCRIPT_ENTITY_SMOKING_GUY</div> <div class="i">EQU</div> <div class="v">$87</div>
 
 <div class="n">ISCRIPT_ENTITY_MEAT_SALESMAN</div> <div class="i">EQU</div> <div class="v">$88</div>
 
@@ -807,14 +807,6 @@ pre {
 <div class="n">ITEMINVENTORY_FIRE_CRYSTAL</div> <div class="i">EQU</div> <div class="v">$15</div>
 
 <div class="n">ITEMINVENTORY_NO_ITEM_SELECTED</div> <div class="i">EQU</div> <div class="v">$ff</div>
-
-</div><span class="l"></span>
-<div class="cp">;============================================================================
-; LoadedState
-;============================================================================
-</div><div class="equs"><div class="n">LOADED_STATE_READY</div> <div class="i">EQU</div> <div class="v">$00</div>
-
-<div class="n">LOADED_STATE_NOT_PLAYING</div> <div class="i">EQU</div> <div class="v">$ff</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1234,25 +1226,25 @@ pre {
 <div class="cp">;============================================================================
 ; MScriptOp
 ;============================================================================
-</div><div class="equs"><div class="n">MSCRIPT_OP_MAYBE_SET_0181</div> <div class="i">EQU</div> <div class="v">$ee</div>
+</div><div class="equs"><div class="n">MSCRIPT_OP_SET_SQ2_PITCH_BIAS</div> <div class="i">EQU</div> <div class="v">$ee</div>
 
-<div class="n">MSCRIPT_OP_MAYBE_SET_017F</div> <div class="i">EQU</div> <div class="v">$ef</div>
+<div class="n">MSCRIPT_OP_SET_SQ_PITCH_EFFECT_DEPTH</div> <div class="i">EQU</div> <div class="v">$ef</div>
 
-<div class="n">MSCRIPT_OP_SET_SQ_DECAY_MODE</div> <div class="i">EQU</div> <div class="v">$f0</div>
+<div class="n">MSCRIPT_OP_SET_SQ_ENVELOPE_MODE</div> <div class="i">EQU</div> <div class="v">$f0</div>
 
-<div class="n">MSCRIPT_OP_SET_SQ_VOL</div> <div class="i">EQU</div> <div class="v">$f1</div>
+<div class="n">MSCRIPT_OP_SET_SQ_FADE</div> <div class="i">EQU</div> <div class="v">$f1</div>
 
-<div class="n">MSCRIPT_OP_MAYBE_SET_0172</div> <div class="i">EQU</div> <div class="v">$f2</div>
+<div class="n">MSCRIPT_OP_SET_SQ_CONTROL_BITS</div> <div class="i">EQU</div> <div class="v">$f2</div>
 
-<div class="n">MSCRIPT_OP_SET_REPEATED</div> <div class="i">EQU</div> <div class="v">$f3</div>
+<div class="n">MSCRIPT_OP_SET_NOTE_DURATION</div> <div class="i">EQU</div> <div class="v">$f3</div>
 
-<div class="n">MSCRIPT_OP_MAYBE_RESTART_SONG</div> <div class="i">EQU</div> <div class="v">$f4</div>
+<div class="n">MSCRIPT_OP_RESTART_CHANNEL</div> <div class="i">EQU</div> <div class="v">$f4</div>
 
 <div class="n">MSCRIPT_OP_RET</div> <div class="i">EQU</div> <div class="v">$f5</div>
 
-<div class="n">MSCRIPT_OP_SET_SQ1_HIGH</div> <div class="i">EQU</div> <div class="v">$f6</div>
+<div class="n">MSCRIPT_OP_SET_CHANNEL_TRANSPOSE</div> <div class="i">EQU</div> <div class="v">$f6</div>
 
-<div class="n">MSCRIPT_OP_MAYBE_SET_8BITCOUNTER</div> <div class="i">EQU</div> <div class="v">$f7</div>
+<div class="n">MSCRIPT_OP_SET_GLOBAL_TRANSPOSE</div> <div class="i">EQU</div> <div class="v">$f7</div>
 
 <div class="n">MSCRIPT_OP_JSR</div> <div class="i">EQU</div> <div class="v">$f8</div>
 
@@ -1260,7 +1252,7 @@ pre {
 
 <div class="n">MSCRIPT_OP_NOOP</div> <div class="i">EQU</div> <div class="v">$fa</div>
 
-<div class="n">MSCRIPT_OP_CONTINUE_LOOP_IF_N_ITERS</div> <div class="i">EQU</div> <div class="v">$fb</div>
+<div class="n">MSCRIPT_OP_NEXT_LOOP_IF_N_ITERS</div> <div class="i">EQU</div> <div class="v">$fb</div>
 
 <div class="n">MSCRIPT_OP_END_LOOP</div> <div class="i">EQU</div> <div class="v">$fc</div>
 
@@ -1268,7 +1260,7 @@ pre {
 
 <div class="n">MSCRIPT_OP_POP_ADDR</div> <div class="i">EQU</div> <div class="v">$fe</div>
 
-<div class="n">MSCRIPT_OP_MAYBE_END</div> <div class="i">EQU</div> <div class="v">$ff</div>
+<div class="n">MSCRIPT_OP_END</div> <div class="i">EQU</div> <div class="v">$ff</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -1310,9 +1302,145 @@ pre {
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
+; MusicNote
+;============================================================================
+</div><div class="equs"><div class="n">NOTE_REST</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">NOTE_01_C2</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">NOTE_02_Cs2</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">NOTE_03_D2</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">NOTE_04_Ds2</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">NOTE_05_E2</div> <div class="i">EQU</div> <div class="v">$05</div>
+
+<div class="n">NOTE_06_F2</div> <div class="i">EQU</div> <div class="v">$06</div>
+
+<div class="n">NOTE_07_Fs2</div> <div class="i">EQU</div> <div class="v">$07</div>
+
+<div class="n">NOTE_08_G2</div> <div class="i">EQU</div> <div class="v">$08</div>
+
+<div class="n">NOTE_09_Gs2</div> <div class="i">EQU</div> <div class="v">$09</div>
+
+<div class="n">NOTE_0A_A2</div> <div class="i">EQU</div> <div class="v">$0a</div>
+
+<div class="n">NOTE_0B_As2</div> <div class="i">EQU</div> <div class="v">$0b</div>
+
+<div class="n">NOTE_0C_B2</div> <div class="i">EQU</div> <div class="v">$0c</div>
+
+<div class="n">NOTE_0D_C3</div> <div class="i">EQU</div> <div class="v">$0d</div>
+
+<div class="n">NOTE_0E_Cs3</div> <div class="i">EQU</div> <div class="v">$0e</div>
+
+<div class="n">NOTE_0F_D3</div> <div class="i">EQU</div> <div class="v">$0f</div>
+
+<div class="n">NOTE_10_Ds3</div> <div class="i">EQU</div> <div class="v">$10</div>
+
+<div class="n">NOTE_11_E3</div> <div class="i">EQU</div> <div class="v">$11</div>
+
+<div class="n">NOTE_12_F3</div> <div class="i">EQU</div> <div class="v">$12</div>
+
+<div class="n">NOTE_13_Fs3</div> <div class="i">EQU</div> <div class="v">$13</div>
+
+<div class="n">NOTE_14_G3</div> <div class="i">EQU</div> <div class="v">$14</div>
+
+<div class="n">NOTE_15_Gs3</div> <div class="i">EQU</div> <div class="v">$15</div>
+
+<div class="n">NOTE_16_A3</div> <div class="i">EQU</div> <div class="v">$16</div>
+
+<div class="n">NOTE_17_As3</div> <div class="i">EQU</div> <div class="v">$17</div>
+
+<div class="n">NOTE_18_B3</div> <div class="i">EQU</div> <div class="v">$18</div>
+
+<div class="n">NOTE_19_C4</div> <div class="i">EQU</div> <div class="v">$19</div>
+
+<div class="n">NOTE_1A_Cs4</div> <div class="i">EQU</div> <div class="v">$1a</div>
+
+<div class="n">NOTE_1B_D4</div> <div class="i">EQU</div> <div class="v">$1b</div>
+
+<div class="n">NOTE_1C_Ds4</div> <div class="i">EQU</div> <div class="v">$1c</div>
+
+<div class="n">NOTE_1D_E4</div> <div class="i">EQU</div> <div class="v">$1d</div>
+
+<div class="n">NOTE_1E_F4</div> <div class="i">EQU</div> <div class="v">$1e</div>
+
+<div class="n">NOTE_1F_Fs4</div> <div class="i">EQU</div> <div class="v">$1f</div>
+
+<div class="n">NOTE_20_G4</div> <div class="i">EQU</div> <div class="v">$20</div>
+
+<div class="n">NOTE_21_Gs4</div> <div class="i">EQU</div> <div class="v">$21</div>
+
+<div class="n">NOTE_22_A4</div> <div class="i">EQU</div> <div class="v">$22</div>
+
+<div class="n">NOTE_23_As4</div> <div class="i">EQU</div> <div class="v">$23</div>
+
+<div class="n">NOTE_24_B4</div> <div class="i">EQU</div> <div class="v">$24</div>
+
+<div class="n">NOTE_25_C5</div> <div class="i">EQU</div> <div class="v">$25</div>
+
+<div class="n">NOTE_26_Cs5</div> <div class="i">EQU</div> <div class="v">$26</div>
+
+<div class="n">NOTE_27_D5</div> <div class="i">EQU</div> <div class="v">$27</div>
+
+<div class="n">NOTE_28_Ds5</div> <div class="i">EQU</div> <div class="v">$28</div>
+
+<div class="n">NOTE_29_E5</div> <div class="i">EQU</div> <div class="v">$29</div>
+
+<div class="n">NOTE_2A_F5</div> <div class="i">EQU</div> <div class="v">$2a</div>
+
+<div class="n">NOTE_2B_Fs5</div> <div class="i">EQU</div> <div class="v">$2b</div>
+
+<div class="n">NOTE_2C_G5</div> <div class="i">EQU</div> <div class="v">$2c</div>
+
+<div class="n">NOTE_2D_Gs5</div> <div class="i">EQU</div> <div class="v">$2d</div>
+
+<div class="n">NOTE_2E_A5</div> <div class="i">EQU</div> <div class="v">$2e</div>
+
+<div class="n">NOTE_2F_As5</div> <div class="i">EQU</div> <div class="v">$2f</div>
+
+<div class="n">NOTE_30_B5</div> <div class="i">EQU</div> <div class="v">$30</div>
+
+<div class="n">NOTE_31_C6</div> <div class="i">EQU</div> <div class="v">$31</div>
+
+<div class="n">NOTE_32_Cs6</div> <div class="i">EQU</div> <div class="v">$32</div>
+
+<div class="n">NOTE_33_D6</div> <div class="i">EQU</div> <div class="v">$33</div>
+
+<div class="n">NOTE_34_Ds6</div> <div class="i">EQU</div> <div class="v">$34</div>
+
+<div class="n">NOTE_35_E6</div> <div class="i">EQU</div> <div class="v">$35</div>
+
+<div class="n">NOTE_36_F6</div> <div class="i">EQU</div> <div class="v">$36</div>
+
+<div class="n">NOTE_37_Fs6</div> <div class="i">EQU</div> <div class="v">$37</div>
+
+<div class="n">NOTE_38_G6</div> <div class="i">EQU</div> <div class="v">$38</div>
+
+<div class="n">NOTE_39_Gs6</div> <div class="i">EQU</div> <div class="v">$39</div>
+
+<div class="n">NOTE_3A_A6</div> <div class="i">EQU</div> <div class="v">$3a</div>
+
+<div class="n">NOTE_3B_As6</div> <div class="i">EQU</div> <div class="v">$3b</div>
+
+<div class="n">NOTE_3C_B6</div> <div class="i">EQU</div> <div class="v">$3c</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
 ; Palette
 ;============================================================================
 </div><div class="equs"><div class="n">PALETTE_EOLIS</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">PALETTE_01</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">PALETTE_02</div> <div class="i">EQU</div> <div class="v">$02</div>
+
+<div class="n">PALETTE_03</div> <div class="i">EQU</div> <div class="v">$03</div>
+
+<div class="n">PALETTE_04</div> <div class="i">EQU</div> <div class="v">$04</div>
+
+<div class="n">PALETTE_05</div> <div class="i">EQU</div> <div class="v">$05</div>
 
 <div class="n">PALETTE_OUTSIDE</div> <div class="i">EQU</div> <div class="v">$06</div>
 
@@ -1336,7 +1464,7 @@ pre {
 
 <div class="n">PALETTE_START_SCREEN</div> <div class="i">EQU</div> <div class="v">$10</div>
 
-<div class="n">PALETTTE_KINGS_ROOM</div> <div class="i">EQU</div> <div class="v">$11</div>
+<div class="n">PALETTE_KINGS_ROOM</div> <div class="i">EQU</div> <div class="v">$11</div>
 
 <div class="n">PALETTE_TEMPLE</div> <div class="i">EQU</div> <div class="v">$12</div>
 
@@ -1584,6 +1712,14 @@ pre {
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
+; ScreenReadyState
+;============================================================================
+</div><div class="equs"><div class="n">SCREEN_STATE_READY</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SCREEN_STATE_NOT_PLAYING</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
 ; ScreenScrollLoadMode
 ;============================================================================
 </div><div class="equs"><div class="n">SCROLL_LOAD_TILES</div> <div class="i">EQU</div> <div class="v">$00</div>
@@ -1773,6 +1909,16 @@ pre {
 <div class="n">BIT_CLEAR_ELIXIR</div> <div class="i">EQU</div> <div class="v">$f7</div>
 
 <div class="n">BIT_ALL</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; Sprite0Mode
+;============================================================================
+</div><div class="equs"><div class="n">SPRITE0_MODE_X8_Y23</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SPRITE0_MODE_X0_Y72</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SPRITE0_MODE_NONE</div> <div class="i">EQU</div> <div class="v">$ff</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================
@@ -2084,7 +2230,7 @@ pre {
 
 <div class="n">SPRITE_NPC_DOCTOR</div> <div class="i">EQU</div> <div class="v">$43</div>
 
-<div class="n">SPRITE_NPC_WALKING_WOMAN_1</div> <div class="i">EQU</div> <div class="v">$44</div>
+<div class="n">SPRITE_NPC_NURSE</div> <div class="i">EQU</div> <div class="v">$44</div>
 
 <div class="n">SPRITE_NPC_WALKING_WOMAN_2</div> <div class="i">EQU</div> <div class="v">$45</div>
 
@@ -2221,6 +2367,16 @@ pre {
 <div class="n">SPRITE_OP_SET_PHASE</div> <div class="i">EQU</div> <div class="v">$07</div>
 
 <div class="n">SPRITE_OP_END_SCRIPT</div> <div class="i">EQU</div> <div class="v">$ff</div>
+
+</div><span class="l"></span>
+<div class="cp">;============================================================================
+; SQEffectMode
+;============================================================================
+</div><div class="equs"><div class="n">SQEFFECT_MODE_VOLUME_DECAY</div> <div class="i">EQU</div> <div class="v">$00</div>
+
+<div class="n">SQEFFECT_MODE_CURVE_HELD</div> <div class="i">EQU</div> <div class="v">$01</div>
+
+<div class="n">SQEFFECT_MODE_TABLE_DRIVEN</div> <div class="i">EQU</div> <div class="v">$02</div>
 
 </div><span class="l"></span>
 <div class="cp">;============================================================================

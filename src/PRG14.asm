@@ -46,7 +46,7 @@ Sprites_UpdateAll:                          ; [$8000]
     ; Process this sprite slot if it's populated with a
     ; valid sprite.
     ;
-  @_updateSprite:                           ; [$8011]
+  @_updateSpriteLoop:                       ; [$8011]
     STX a:CurrentSpriteIndex
     LDA CurrentSprites_Entities,X
     BMI @LAB_PRG14__8043
@@ -85,7 +85,7 @@ Sprites_UpdateAll:                          ; [$8000]
   @LAB_PRG14__8043:                         ; [$8043]
     LDX a:CurrentSpriteIndex
     DEX
-    BPL @_updateSprite
+    BPL @_updateSpriteLoop
     LDA #$00
     STA Sprites_PPUOffset
     RTS
@@ -418,9 +418,9 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
     ; If the enemy is Sugata, clear the greyscale set when it
     ; attacked so we don't get stuck in greyscale forever.
     ;
-    LDA ScreenColorMode                     ; Load the screen color mode.
+    LDA PPU_Mask                            ; Load the screen color mode.
     AND #$fe                                ; Clear the greyscale bit.
-    STA ScreenColorMode                     ; Store it.
+    STA PPU_Mask                            ; Store it.
 
 
     ;
@@ -497,7 +497,7 @@ SpriteUpdateHandler_Effect_EnemyDeath:      ; [$822e]
     LDA CurrentSprites_YPos,X
     CLC
     ADC Temp_00
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA #$00
     STA Sprites_PPUOffset
     LDA #$01
@@ -510,7 +510,7 @@ SpriteUpdateHandler_Effect_EnemyDeath:      ; [$822e]
     LDA CurrentSprites_YPos,X
     CLC
     ADC Temp_00
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA #$00
     STA Sprites_PPUOffset
     LDA #$02
@@ -567,9 +567,9 @@ SpriteUpdateHandler_Effect_LightningBall20: ; [$828b]
   @LAB_PRG14__82a2:                         ; [$82a2]
     LDX a:CurrentSpriteIndex
     LDA CurrentSprites_XPos_Full,X
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA CurrentSprites_YPos,X
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA CurrentSprites_BehaviorData2,X
     ASL A
     ASL A
@@ -585,14 +585,14 @@ SpriteUpdateHandler_Effect_LightningBall20: ; [$828b]
     LDA CurrentSprites_YPos,X
     CLC
     ADC Temp_00
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     JMP @LAB_PRG14__82d1
 
   @LAB_PRG14__82ca:                         ; [$82ca]
     LDA CurrentSprites_XPos_Full,X
     CLC
     ADC Temp_00
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
 
   @LAB_PRG14__82d1:                         ; [$82d1]
     LDA $82f4,Y
@@ -2452,10 +2452,10 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ; Sugata will flash the screen, and this prevents the screen
     ; from getting stuck in greyscale.
     ;
-    LDA ScreenColorMode                     ; Load the current screen mode.
+    LDA PPU_Mask                            ; Load the current screen mode.
     AND #$fe                                ; Clear bit 0, setting to
                                             ; greyscale.
-    STA ScreenColorMode                     ; Store back as the screen mode.
+    STA PPU_Mask                            ; Store back as the screen mode.
 
   @_handleEnemyGeneric:                     ; [$88a9]
     LDA #$03                                ; Play sound #3.
@@ -2669,13 +2669,17 @@ CurrentSprite_CheckHitPlayer:               ; [$890a]
     ASL A
     TAY
     CPY #$10
-    BCS @_return
+    BCS Player_HandleCollision_NoOp
     LDA SPRITE_COLLISION_HANDLERS+1,Y
     PHA
     LDA SPRITE_COLLISION_HANDLERS,Y
     PHA
 
-  @_return:                                 ; [$8957]
+    ;
+    ; XREFS:
+    ;     CurrentSprite_CheckHitPlayer
+    ;
+Player_HandleCollision_NoOp:                ; [$8957]
     RTS
 
 
@@ -3741,9 +3745,9 @@ CurrentSprite_UpdateState:                  ; [$8bd2]
     ; Update sprite state.
     ;
     LDA CurrentSprites_XPos_Full,X
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA CurrentSprites_YPos,X
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA Screen_Maybe_ScrollXCounter
     STA Unused_Sprite_ScrollPosX
     LDA Player_Something_ScrollPosY
@@ -4056,112 +4060,127 @@ SpriteUpdateHandler_Invisible:              ; [$8c98]
     STA MovingSpriteVisibility
     RTS
 
+
+;============================================================================
+; Offsets into TILEINFO_ENTITY_ADDRS for each entity.
+;
+; XREFS:
+;     Sprite_EnterNextAppearancePhase
+;============================================================================
+
 ;
 ; XREFS:
 ;     Sprite_EnterNextAppearancePhase
 ;
 SPRITE_APPEARANCE_PHASE_OFFSETS:            ; [$8c9f]
     db $00                                  ; [0]:
-    db $db                                  ; [1]: Bread
-    db $93                                  ; [2]: Dropped coin
-    db $83                                  ; [3]:
-    db $01                                  ; [4]: Raiden
-    db $05                                  ; [5]:
-    db $07                                  ; [6]:
-    db $0a                                  ; [7]:
-    db $0c                                  ; [8]:
-    db $0e                                  ; [9]:
-    db $ef                                  ; [10]:
-    db $13                                  ; [11]:
-    db $15                                  ; [12]:
-    db $17                                  ; [13]:
-    db $1a                                  ; [14]:
-    db $1d                                  ; [15]:
-    db $21                                  ; [16]:
-    db $71                                  ; [17]:
-    db $6c                                  ; [18]:
-    db $a9                                  ; [19]:
-    db $a9                                  ; [20]:
-    db $23                                  ; [21]:
-    db $00                                  ; [22]:
-    db $26                                  ; [23]:
-    db $29                                  ; [24]:
-    db $2b                                  ; [25]:
-    db $2f                                  ; [26]:
-    db $31                                  ; [27]:
-    db $33                                  ; [28]:
-    db $35                                  ; [29]:
-    db $39                                  ; [30]:
-    db $3c                                  ; [31]:
-    db $3f                                  ; [32]:
-    db $44                                  ; [33]:
-    db $47                                  ; [34]:
-    db $49                                  ; [35]:
-    db $4b                                  ; [36]:
-    db $00                                  ; [37]:
-    db $4f                                  ; [38]:
-    db $52                                  ; [39]:
-    db $54                                  ; [40]:
-    db $00                                  ; [41]:
-    db $58                                  ; [42]: Monodron
-    db $5b                                  ; [43]:
-    db $5d                                  ; [44]:
-    db $79                                  ; [45]:
-    db $75                                  ; [46]:
-    db $64                                  ; [47]:
-    db $7d                                  ; [48]:
-    db $83                                  ; [49]:
-    db $80                                  ; [50]:
-    db $89                                  ; [51]:
-    db $ae                                  ; [52]:
-    db $b1                                  ; [53]:
-    db $b4                                  ; [54]:
-    db $b7                                  ; [55]:
-    db $b9                                  ; [56]:
-    db $bb                                  ; [57]:
-    db $bd                                  ; [58]:
-    db $c1                                  ; [59]:
-    db $c3                                  ; [60]:
-    db $c5                                  ; [61]:
-    db $c7                                  ; [62]:
-    db $c9                                  ; [63]:
-    db $cb                                  ; [64]:
-    db $cd                                  ; [65]:
-    db $cf                                  ; [66]:
-    db $d1                                  ; [67]:
-    db $d3                                  ; [68]:
-    db $d5                                  ; [69]:
-    db $d7                                  ; [70]:
-    db $d9                                  ; [71]:
-    db $dc                                  ; [72]:
-    db $dd                                  ; [73]:
-    db $de                                  ; [74]:
-    db $df                                  ; [75]:
-    db $e0                                  ; [76]:
-    db $e1                                  ; [77]:
-    db $e2                                  ; [78]:
-    db $00                                  ; [79]:
-    db $e3                                  ; [80]:
-    db $f1                                  ; [81]:
-    db $e8                                  ; [82]:
-    db $f3                                  ; [83]:
-    db $95                                  ; [84]:
-    db $f6                                  ; [85]:
-    db $f7                                  ; [86]:
-    db $f8                                  ; [87]:
-    db $f9                                  ; [88]:
-    db $fa                                  ; [89]:
-    db $fb                                  ; [90]:
-    db $e3                                  ; [91]:
-    db $f6                                  ; [92]:
-    db $df                                  ; [93]:
-    db $e0                                  ; [94]:
-    db $dc                                  ; [95]:
-    db $e2                                  ; [96]:
-    db $e8                                  ; [97]:
-    db $e8                                  ; [98]:
-    db $e8                                  ; [99]:
-    db $a9                                  ; [100]:
+    db $db                                  ; [1]: Dropped: Bread
+    db $93                                  ; [2]: Dropped: Coin
+    db $83                                  ; [3]: Enemy: ?
+    db $01                                  ; [4]: Enemy: Raiden
+    db $05                                  ; [5]: Enemy: Necron Aides
+    db $07                                  ; [6]: Enemy: Zombie
+    db $0a                                  ; [7]: Enemy: Hornet
+    db $0c                                  ; [8]: Enemy: Bihoruda
+    db $0e                                  ; [9]: Enemy: Lilith
+    db $ef                                  ; [10]: Magic: ?
+    db $13                                  ; [11]: Enemy: Yuinaru
+    db $15                                  ; [12]: Enemy: Snowman
+    db $17                                  ; [13]: Enemy: Nash
+    db $1a                                  ; [14]: Enemy: Fire Giant
+    db $1d                                  ; [15]: Enemy: Ishiisu
+    db $21                                  ; [16]: Enemy: Execution Hood
+    db $71                                  ; [17]: Boss: Rokusutahn
+    db $6c                                  ; [18]: Boss: unused (round body
+                                            ; of snake boss)
+    db $a9                                  ; [19]: Effect: Enemy death
+    db $a9                                  ; [20]: Effect: Lightning ball
+    db $23                                  ; [21]: Enemy: Charron
+    db $00                                  ; [22]: Enemy: ? (Unused)
+    db $26                                  ; [23]: Enemy: Geributa
+    db $29                                  ; [24]: Enemy: Sugata
+    db $2b                                  ; [25]: Enemy: Grimlock
+    db $2f                                  ; [26]: Enemy: Giant Bees
+    db $31                                  ; [27]: Enemy: Myconid
+    db $33                                  ; [28]: Enemy: Naga
+    db $35                                  ; [29]: Enemy: Skeleton Knight
+                                            ; (unused)
+    db $39                                  ; [30]: Enemy: Giant Strider
+    db $3c                                  ; [31]: Enemy: Sir Gawaine
+    db $3f                                  ; [32]: Enemy: Maskman
+    db $44                                  ; [33]: Enemy: Wolfman
+    db $47                                  ; [34]: Enemy: Yareeka
+    db $49                                  ; [35]: Enemy: Magman
+    db $4b                                  ; [36]: Enemy: Curly-tailed guy
+                                            ; with spear (unused)
+    db $00                                  ; [37]: Enemy: ? (unused)
+    db $4f                                  ; [38]: Enemy: Ikeda
+    db $52                                  ; [39]: Enemy: Muppet guy
+                                            ; (unused)
+    db $54                                  ; [40]: Enemy: Lamprey
+    db $00                                  ; [41]: Enemy: ? (unused)
+    db $58                                  ; [42]: Enemy: Monodron
+    db $5b                                  ; [43]: Enemy: Winged skeleton
+                                            ; (unused)
+    db $5d                                  ; [44]: Enemy: Tamazutsu
+    db $79                                  ; [45]: Boss: Ripasheiku
+    db $75                                  ; [46]: Boss: Zoradohna
+    db $64                                  ; [47]: Boss: Borabohra
+    db $7d                                  ; [48]: Boss: Pakukame
+    db $83                                  ; [49]: Boss: Zorugeriru
+    db $80                                  ; [50]: Boss: King Grieve
+    db $89                                  ; [51]: Boss: Shadow Eura
+    db $ae                                  ; [52]: NPC: Walking Man 1
+    db $b1                                  ; [53]: NPC: Blue lady (unused)
+    db $b4                                  ; [54]: NPC: Child (unused)
+    db $b7                                  ; [55]: NPC: Armor Salesman
+    db $b9                                  ; [56]: NPC: Martial Artist
+    db $bb                                  ; [57]: NPC: Guru
+    db $bd                                  ; [58]: NPC: King
+    db $c1                                  ; [59]: NPC: Magic Teacher
+    db $c3                                  ; [60]: NPC: Key Salesman
+    db $c5                                  ; [61]: NPC: Smoking Man
+    db $c7                                  ; [62]: NPC: Man in Chair
+    db $c9                                  ; [63]: NPC: Sitting Man
+    db $cb                                  ; [64]: NPC: Meat Salesman
+    db $cd                                  ; [65]: NPC: Lady in Blue Dress
+                                            ; with Cup
+    db $cf                                  ; [66]: NPC: Guard
+    db $d1                                  ; [67]: NPC: Doctor
+    db $d3                                  ; [68]: NPC: Walking Woman 1
+    db $d5                                  ; [69]: NPC: Walking Woman 2
+    db $d7                                  ; [70]: Enemy: Eyeball (unused)
+    db $d9                                  ; [71]: Enemy: Zozura
+    db $dc                                  ; [72]: Item: Glove
+    db $dd                                  ; [73]: Item: Black Onyx
+    db $de                                  ; [74]: Item: Pendant
+    db $df                                  ; [75]: Item: Red Potion
+    db $e0                                  ; [76]: Item: Poison
+    db $e1                                  ; [77]: Item: Elixir
+    db $e2                                  ; [78]: Item: Ointment
+    db $00                                  ; [79]: Trigger: Intro
+    db $e3                                  ; [80]: Item: Mattock
+    db $f1                                  ; [81]: Magic: ?
+    db $e8                                  ; [82]: Effect: Fountain
+    db $f3                                  ; [83]: Magic: ?
+    db $95                                  ; [84]: Magic: Enemy Fireball
+    db $f6                                  ; [85]: Item: Wing Boots
+    db $f7                                  ; [86]: Item: Hour Glass
+    db $f8                                  ; [87]: Item: Magical Rod
+    db $f9                                  ; [88]: Item: Battle Suit
+    db $fa                                  ; [89]: Item: Battle Helmet
+    db $fb                                  ; [90]: Item: Dragon Slayer
+    db $e3                                  ; [91]: Item: Mattock
+    db $f6                                  ; [92]: Item: Wing Boots (from
+                                            ; quest)
+    db $df                                  ; [93]: Item: Red Potion
+    db $e0                                  ; [94]: Item: Poison
+    db $dc                                  ; [95]: Item: Glove
+    db $e2                                  ; [96]: Item: Ointment
+    db $e8                                  ; [97]: Effect: Spring of Trunk
+    db $e8                                  ; [98]: Effect: Spring of Sky
+    db $e8                                  ; [99]: Effect: Spring of Tower
+    db $a9                                  ; [100]: Effect: Boss Death
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_MaybeFallingRocks__ClearEntity
@@ -4280,25 +4299,32 @@ SpriteUpdateHandler_Coin:                   ; [$8d6e]
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::808f]
 ;============================================================================
 SpriteUpdateHandler_Enemy_Raiden:           ; [$8d80]
-    JSR CurrentSprite_UpdateFlipMask
+    JSR CurrentSprite_UpdateFlipMask        ; Update the flip mask for the
+                                            ; sprite based on its facing
+                                            ; direction.
     LDY #$00
-    LDA CurrentSprites_Phases,X
-    CMP #$02
-    BEQ @LAB_PRG14__8d96
-    LDA a:SpriteUpdateCounter
+    LDA CurrentSprites_Phases,X             ; Load the current phase.
+    CMP #$02                                ; Is it 2?
+    BEQ @_isPhase2                          ; If so, jump.
+    LDA a:SpriteUpdateCounter               ; Load the sprite's update
+                                            ; counter.
+    LSR A                                   ; Divide by 4.
     LSR A
-    LSR A
-    AND #$01
-    JMP Sprite_EnterNextAppearancePhase
+    AND #$01                                ; Use the odd/even bit as the
+                                            ; phase, giving phases 0 or 1.
+    JMP Sprite_EnterNextAppearancePhase     ; Set that as the new phase.
 
-  @LAB_PRG14__8d96:                         ; [$8d96]
-    LDA a:SpriteUpdateCounter
+  @_isPhase2:                               ; [$8d96]
+    LDA a:SpriteUpdateCounter               ; Load the sprite's update
+                                            ; counter.
+    LSR A                                   ; Divide by 8.
     LSR A
     LSR A
-    LSR A
-    AND #$01
-    ORA #$02
-    JMP Sprite_EnterNextAppearancePhase
+    AND #$01                                ; Keep the odd/even bit for the
+                                            ; phase.
+    ORA #$02                                ; And OR with 2, giving phases 2
+                                            ; or 3.
+    JMP Sprite_EnterNextAppearancePhase     ; Set that as the new phase.
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_NecronAides
@@ -4435,17 +4461,21 @@ BYTE_ARRAY_PRG14__8e40:                     ; [$8e40]
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::8091]
 ;============================================================================
 SpriteUpdateHandler_Enemy_NecronAides:      ; [$8e44]
-    JSR CurrentSprite_UpdateFlipMask
-    LDA a:SpriteUpdateCounter
+    JSR CurrentSprite_UpdateFlipMask        ; Update the flip mask for the
+                                            ; sprite based on its facing
+                                            ; direction.
+    LDA a:SpriteUpdateCounter               ; Load the sprite's update
+                                            ; counter.
+    LSR A                                   ; Divide it by 4.
     LSR A
-    LSR A
-    LDY CurrentSprites_Phases,X
-    BMI @LAB_PRG14__8e52
-    LSR A
+    LDY CurrentSprites_Phases,X             ; Load the current sprite phase.
+    BMI @_setPhase                          ; If unset, jump.
+    LSR A                                   ; Divide again by 2 (total of 8).
 
-  @LAB_PRG14__8e52:                         ; [$8e52]
-    AND #$01
-    JMP Sprite_EnterNextAppearancePhase
+  @_setPhase:                               ; [$8e52]
+    AND #$01                                ; Keep the odd/even bit, yielding
+                                            ; a phase of 0 or 1.
+    JMP Sprite_EnterNextAppearancePhase     ; Set the appearance phase.
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_Zombie
@@ -4460,10 +4490,13 @@ SpriteUpdateHandler_Enemy_NecronAides:      ; [$8e44]
 ;     SPRITE_UPDATE_HANDLERS [$PRG14::8093]
 ;============================================================================
 SpriteUpdateHandler_Enemy_Zombie:           ; [$8e57]
-    JSR CurrentSprite_UpdateFlipMask
+    JSR CurrentSprite_UpdateFlipMask        ; Update the flip mask for the
+                                            ; sprite based on its facing
+                                            ; direction.
     LDY #$00
-    JSR Sprite_GetPreviousSpritePhase
-    LSR A
+    JSR Sprite_GetPreviousSpritePhase       ; Get the previous phase for the
+                                            ; sprite.
+    LSR A                                   ; Divide it by 2.
     BCS @LAB_PRG14__8e6f
     LDA a:SpriteUpdateCounter
     LSR A
@@ -5425,7 +5458,7 @@ SpriteUpdateHandler_Enemy_Grimlock:         ; [$92b0]
     LSR A
     AND #$03
     TAY
-    LDA $92dc,Y
+    LDA SPRITE_GRIMLOCK_PHASES,Y
     TAY
 
   @LAB_PRG14__92d8:                         ; [$92d8]
@@ -5436,7 +5469,7 @@ SpriteUpdateHandler_Enemy_Grimlock:         ; [$92b0]
 ; XREFS:
 ;     SpriteUpdateHandler_Enemy_Grimlock
 ;
-BYTE_ARRAY_PRG14__92dc:                     ; [$92dc]
+SPRITE_GRIMLOCK_PHASES:                     ; [$92dc]
     db $00                                  ; [0]:
     db $01                                  ; [1]:
     db $02                                  ; [2]:
@@ -7271,27 +7304,27 @@ SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart: ; [$9adc]
     JSR Sprite_EnterNextAppearancePhase
     LDX a:CurrentSpriteIndex
     LDA a:Sprite12BodyPartHandler
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA a:Sprite12BodyPartHandler_3_
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA #$04
     JSR Sprite_EnterNextAppearancePhase
     LDX a:CurrentSpriteIndex
     LDA a:Sprite12BodyPartHandler_1_
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA a:Sprite12BodyPartHandler_4_
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA #$04
     JSR Sprite_EnterNextAppearancePhase
     LDX a:CurrentSpriteIndex
     LDA a:Sprite12BodyPartHandler_2_
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA a:Sprite12BodyPartHandler_5_
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA CurrentSprites_PPUOffsets,X
     STA Sprites_PPUOffset
     LDA CurrentSprites_BehaviorData3,X
@@ -8318,7 +8351,7 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
     JSR BScript_Action_FacePlayerX
     JSR Sprite_SetBehaviorReady
     LDA #$0a
-    STA CurrentMusic
+    STA Music_Current
 
   @LAB_PRG14__a007:                         ; [$a007]
     JSR BScript_Action_FacePlayerX
@@ -8344,7 +8377,7 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
     BNE @LAB_PRG14__a035
 
   @LAB_PRG14__a032:                         ; [$a032]
-    JSR FUN_PRG14__a077
+    JSR SpriteBehavior_ShadowEura__a077
 
   @LAB_PRG14__a035:                         ; [$a035]
     PLA
@@ -8408,7 +8441,7 @@ SpriteUpdateHandler_Boss_ShadowEura:        ; [$a06e]
     JMP Sprite_EnterNextAppearancePhase
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a077
+; TODO: Document SpriteBehavior_ShadowEura__a077
 ;
 ; INPUTS:
 ;     X
@@ -8419,7 +8452,7 @@ SpriteUpdateHandler_Boss_ShadowEura:        ; [$a06e]
 ; XREFS:
 ;     SpriteBehavior_ShadowEura
 ;============================================================================
-FUN_PRG14__a077:                            ; [$a077]
+SpriteBehavior_ShadowEura__a077:            ; [$a077]
     LDA CurrentSprites_Flags,X
     AND #$01
     TAY
@@ -8431,11 +8464,11 @@ FUN_PRG14__a077:                            ; [$a077]
     CLC
     ADC #$10
     STA a:CurrentSprite_Arg_CastMagicY
-    JMP FUN_PRG14__a12d
+    JMP SpriteBehavior_ShadowEura__a12d
 
 ;
 ; XREFS:
-;     FUN_PRG14__a077
+;     SpriteBehavior_ShadowEura__a077
 ;
 BYTE_ARRAY_PRG14__a091:                     ; [$a091]
     db $00                                  ; [0]:
@@ -8644,7 +8677,7 @@ SpriteUpdateHandler_TODO_Garbled10:         ; [$a120]
     JMP Sprite_EnterNextAppearancePhase
 
 ;============================================================================
-; TODO: Document FUN_PRG14__a12d
+; TODO: Document SpriteBehavior_ShadowEura__a12d
 ;
 ; INPUTS:
 ;     X
@@ -8654,9 +8687,9 @@ SpriteUpdateHandler_TODO_Garbled10:         ; [$a120]
 ;     TODO
 ;
 ; XREFS:
-;     FUN_PRG14__a077
+;     SpriteBehavior_ShadowEura__a077
 ;============================================================================
-FUN_PRG14__a12d:                            ; [$a12d]
+SpriteBehavior_ShadowEura__a12d:            ; [$a12d]
     JSR Sprites_HasMaxOnScreen
     BCS @_return
     LDA #$53
@@ -8819,9 +8852,9 @@ SpriteUpdateHandler_EnemyMagic:             ; [$a1f5]
 ;
 ; XREFS:
 ;     BScript_Action_CastMagic
-;     FUN_PRG14__a12d
 ;     SpriteBehavior_ExecutionHood__a0ad
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     Sprite_CastMagic
 ;============================================================================
@@ -8866,10 +8899,10 @@ Sprite_Maybe_ResetState:                    ; [$a202]
 ; XREFS:
 ;     BScript_Action_CastMagic
 ;     FUN_PRG14__a0a0
-;     FUN_PRG14__a12d
 ;     FUN_PRG14__a1cc
 ;     SpriteBehavior_ExecutionHood__a093
 ;     SpriteBehavior_Pakukame
+;     SpriteBehavior_ShadowEura__a12d
 ;     SpriteBehavior_Zorugeriru
 ;     SpriteBehavior_Zorugeriru__9e13
 ;     Sprite_CastMagic
@@ -10278,13 +10311,13 @@ SPRITE_BEHAVIORS:                           ; [$a5e7]
     dw SpriteBehavior_BounceAndExpire-1     ; [2]: Item: Dropped coin
     dw SpriteBehavior_Garbled3-1            ; [3]:
     dw SpriteBehavior_WalkForward-1         ; [4]: Common
-    dw $a6ad                                ; [5]:
+    dw SpriteBehavior_Return-1              ; [5]:
     dw SpriteBehavior_EnemyUnused18-1       ; [6]:
     dw SpriteBehavior_LightningBallOrCharron-1 ; [7]:
     dw SpriteBehavior_LightningBallOrCharron-1 ; [8]:
     dw SpriteBehavior_Hop-1                 ; [9]: Enemy: Monodron
     dw SpriteBehavior_Ripasheiku-1          ; [10]: Boss: Dragon boss guy
-    dw $a6ad                                ; [11]:
+    dw SpriteBehavior_Return-1              ; [11]:
     dw SpriteBehavior_Borabohra-1           ; [12]:
     dw SpriteBehavior_Pakukame-1            ; [13]:
     dw SpriteBehavior_Zorugeriru-1          ; [14]:
@@ -10410,12 +10443,24 @@ Sprites_UpdateBehavior:                     ; [$a66b]
     STA CurrentSprites_BehaviorAddrs_U,X
 
     ;
-    ; XREFS:
-    ;     SPRITE_BEHAVIORS [$PRG14::a5f1]
-    ;     SPRITE_BEHAVIORS [$PRG14::a5fd]
-    ;     Sprites_CountdownBehavior
+    ; v-- Fall through --v
     ;
-RETURN_A6AE:                                ; [$a6ae]
+
+;============================================================================
+; TODO: Document SpriteBehavior_Return
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     SPRITE_BEHAVIORS [$PRG14::a5f1]
+;     SPRITE_BEHAVIORS [$PRG14::a5fd]
+;     Sprites_CountdownBehavior
+;============================================================================
+SpriteBehavior_Return:                      ; [$a6ae]
     RTS
 
 ;============================================================================
@@ -10438,9 +10483,9 @@ RETURN_A6AE:                                ; [$a6ae]
 ;============================================================================
 Sprites_CountdownBehavior:                  ; [$a6af]
     LDA CurrentSprites_BehaviorArg1,X
-    BEQ RETURN_A6AE
+    BEQ SpriteBehavior_Return
     DEC CurrentSprites_BehaviorArg1,X
-    BNE RETURN_A6AE
+    BNE SpriteBehavior_Return
     JMP Sprite_FinishBehavior
 
 ;============================================================================
@@ -11984,17 +12029,17 @@ SpriteBehavior_FlashScreenHitPlayer:        ; [$ab26]
     BNE @LAB_PRG14__ab39
     LDA #$02
     STA CurrentSprites_BehaviorData2,X
-    LDA ScreenColorMode
+    LDA PPU_Mask
     ORA #$01
-    STA ScreenColorMode
+    STA PPU_Mask
     JSR Sprite_SetBehaviorReady
 
   @LAB_PRG14__ab39:                         ; [$ab39]
     DEC CurrentSprites_BehaviorData2,X
     BNE @_return
-    LDA ScreenColorMode
+    LDA PPU_Mask
     AND #$fe
-    STA ScreenColorMode
+    STA PPU_Mask
     LDA #$04
     JSR $d0e4
     LDA #$3c
@@ -12673,37 +12718,37 @@ SPRITE_MAYBE_DROP_RANDOM_DATA:              ; [$aced]
 ;     Sprites_PopulateNextAvailableSprite
 ;
 SPRITE_BSCRIPTS:                            ; [$ad2d]
-    dw $adf7                                ; [0]:
+    dw BSCRIPTS_NOOP                        ; [0]:
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_1_:                         ; [$ad2f]
-    dw $adf8                                ; [1]: Dropped: Bread
+    dw BSCRIPTS_OBJ_BREAD                   ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_2_:                         ; [$ad31]
-    dw $af02                                ; [2]: Dropped: Coin
-    dw $ae02                                ; [3]: Enemy: ?
-    dw $ae16                                ; [4]: Enemy: Raiden
-    dw $af31                                ; [5]: Enemy: Necron Aides
-    dw $af06                                ; [6]: Enemy: Zombie
-    dw $ae0a                                ; [7]: Enemy: Hornet
-    dw $ae0e                                ; [8]: Enemy: Bihoruda
-    dw $ae12                                ; [9]: Enemy: Lilith
-    dw $b120                                ; [10]: Magic: ?
-    dw $af35                                ; [11]: Enemy: Yuinaru
-    dw $aee5                                ; [12]: Enemy: Snowman
-    dw $af39                                ; [13]: Enemy: Nash
-    dw $af3d                                ; [14]: Enemy: Fire Giant
-    dw $af54                                ; [15]: Enemy: Ishiisu
-    dw $af58                                ; [16]: Enemy: Execution Hood
-    dw $b0ac                                ; [17]: Boss: Rokusutahn
-    dw $b0d3                                ; [18]: Boss: unused (round body
+    dw BSCRIPTS_OBJ_COIN                    ; [2]: Dropped: Coin
+    dw SPRITE_BEHAVIORS_GARBLED_03          ; [3]: Enemy: ?
+    dw BSCRIPTS_ENEMY_RAIDEN                ; [4]: Enemy: Raiden
+    dw BSCRIPTS_ENEMY_NECRON_AIDES          ; [5]: Enemy: Necron Aides
+    dw BSCRIPTS_ENEMY_ZOMBIE                ; [6]: Enemy: Zombie
+    dw BSCRIPTS_ENEMY_HORNET                ; [7]: Enemy: Hornet
+    dw BSCRIPTS_ENEMY_BIHORUDA              ; [8]: Enemy: Bihoruda
+    dw BSCRIPTS_ENEMY_LILITH                ; [9]: Enemy: Lilith
+    dw BSCRIPTS_GARBLED_10                  ; [10]: Magic: ?
+    dw BSCRIPTS_ENEMY_YUINARU               ; [11]: Enemy: Yuinaru
+    dw BSCRIPTS_ENEMY_SNOWMAN               ; [12]: Enemy: Snowman
+    dw BSCRIPTS_ENEMY_NASH                  ; [13]: Enemy: Nash
+    dw BSCRIPTS_ENEMY_FIRE_GIANT            ; [14]: Enemy: Fire Giant
+    dw BSCRIPTS_ENEMY_ISHIISU               ; [15]: Enemy: Ishiisu
+    dw BSCRIPTS_ENEMY_EXECUTION_HOOD        ; [16]: Enemy: Execution Hood
+    dw BSCRIPTS_BOSS_ROKUSUTAHN             ; [17]: Boss: Rokusutahn
+    dw BSCRIPTS_ENEMY_UNUSED_18             ; [18]: Boss: unused (round body
                                             ; of snake boss)
 
 ;
@@ -12711,112 +12756,112 @@ SPRITE_BSCRIPTS_2_:                         ; [$ad31]
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_19_:                        ; [$ad53]
-    dw $af5c                                ; [19]: Effect: Enemy death
+    dw BSCRIPTS_LIGHTNING_BALL_19           ; [19]: Effect: Enemy death
 
 ;
 ; XREFS:
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_20_:                        ; [$ad55]
-    dw $af60                                ; [20]: Effect: Lightning ball
-    dw $af68                                ; [21]: Enemy: Charron
-    dw $adf7                                ; [22]: Enemy: ? (Unused)
-    dw $af89                                ; [23]: Enemy: Geributa
-    dw $af98                                ; [24]: Enemy: Sugata
-    dw $afb5                                ; [25]: Enemy: Grimlock
-    dw $b01b                                ; [26]: Enemy: Giant Bees
-    dw $b01f                                ; [27]: Enemy: Myconid
-    dw $b044                                ; [28]: Enemy: Naga
-    dw $b0a8                                ; [29]: Enemy: Skeleton Knight
+    dw BSCRIPTS_ENEMY_CHARRON               ; [20]: Effect: Lightning ball
+    dw BSCRIPTS_ENEMY_UNUSED_21             ; [21]: Enemy: Charron
+    dw BSCRIPTS_NOOP                        ; [22]: Enemy: ? (Unused)
+    dw BSCRIPTS_ENEMY_GERIBUTA              ; [23]: Enemy: Geributa
+    dw BSCRIPTS_ENEMY_SUGATA                ; [24]: Enemy: Sugata
+    dw BSCRIPTS_ENEMY_GRIMLOCK              ; [25]: Enemy: Grimlock
+    dw BSCRIPTS_ENEMY_GIANT_BEES            ; [26]: Enemy: Giant Bees
+    dw BSCRIPTS_ENEMY_MYCONID               ; [27]: Enemy: Myconid
+    dw BSCRIPTS_ENEMY_NAGA                  ; [28]: Enemy: Naga
+    dw BSCRIPTS_ENEMY_UNUSED_29             ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    dw $b048                                ; [30]: Enemy: Giant Strider
-    dw $b07a                                ; [31]: Enemy: Sir Gawaine
-    dw $b07e                                ; [32]: Enemy: Maskman
-    dw $b07a                                ; [33]: Enemy: Wolfman
-    dw $b058                                ; [34]: Enemy: Yareeka
-    dw $b05c                                ; [35]: Enemy: Magman
-    dw $b060                                ; [36]: Enemy: Curly-tailed guy
+    dw BSCRIPTS_ENEMY_GIANT_STRIDER         ; [30]: Enemy: Giant Strider
+    dw BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN   ; [31]: Enemy: Sir Gawaine
+    dw BSCRIPTS_ENEMY_MASKMAN               ; [32]: Enemy: Maskman
+    dw BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN   ; [33]: Enemy: Wolfman
+    dw BSCRIPTS_ENEMY_YAREEKA               ; [34]: Enemy: Yareeka
+    dw BSCRIPTS_ENEMY_MAGMAN                ; [35]: Enemy: Magman
+    dw BSCRIPTS_ENEMY_UNUSED_36             ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    dw $adf7                                ; [37]: Enemy: ? (unused)
-    dw $ae8c                                ; [38]: Enemy: Ikeda
-    dw $b064                                ; [39]: Enemy: Muppet guy
+    dw BSCRIPTS_NOOP                        ; [37]: Enemy: ? (unused)
+    dw BSCRIPTS_ENEMY_IKEDA                 ; [38]: Enemy: Ikeda
+    dw BSCRIPTS_ENEMY_UNUSED_39             ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    dw $b068                                ; [40]: Enemy: Lamprey
-    dw $adf7                                ; [41]: Enemy: ? (unused)
-    dw $aecc                                ; [42]: Enemy: Monodron
-    dw $b072                                ; [43]: Enemy: Winged skeleton
+    dw BSCRIPTS_ENEMY_LAMPREY               ; [40]: Enemy: Lamprey
+    dw BSCRIPTS_NOOP                        ; [41]: Enemy: ? (unused)
+    dw BSCRIPTS_ENEMY_MONODRON              ; [42]: Enemy: Monodron
+    dw BSCRIPTS_ENEMY_UNUSED_43             ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    dw $b076                                ; [44]: Enemy: Tamazutsu
-    dw $b0d7                                ; [45]: Boss: Ripasheiku
-    dw $b0db                                ; [46]: Boss: Zoradohna
-    dw $b108                                ; [47]: Boss: Borabohra
-    dw $b10c                                ; [48]: Boss: Pakukame
-    dw $b110                                ; [49]: Boss: Zorugeriru
-    dw $b114                                ; [50]: Boss: King Grieve
-    dw $b118                                ; [51]: Boss: Shadow Eura
-    dw $b124                                ; [52]: NPC: Walking Man 1
-    dw $b131                                ; [53]: NPC: Blue lady (unused)
-    dw $b149                                ; [54]: NPC: Child (unused)
-    dw $b167                                ; [55]: NPC: Armor Salesman
-    dw $b16b                                ; [56]: NPC: Martial Artist
-    dw $b173                                ; [57]: NPC: Priest
-    dw $b17d                                ; [58]: NPC: King
-    dw $b19e                                ; [59]: NPC: Magic Teacher
-    dw $b1ae                                ; [60]: NPC: Key Salesman
-    dw $b1b2                                ; [61]: NPC: Smoking Man
-    dw $b1ba                                ; [62]: NPC: Man in Chair
-    dw $b1c2                                ; [63]: NPC: Sitting Man
-    dw $b1c6                                ; [64]: NPC: Meat Salesman
-    dw $b1cc                                ; [65]: NPC: Lady in Blue Dress
-                                            ; with Cup
-    dw $b1de                                ; [66]: NPC: Guard
-    dw $b1a6                                ; [67]: NPC: Doctor
-    dw $b1eb                                ; [68]: NPC: Walking Woman 1
-    dw $b1fa                                ; [69]: NPC: Walking Woman 2
-    dw $ae43                                ; [70]: Enemy: Eyeball (unused)
-    dw $aeb1                                ; [71]: Enemy: Zozura
-    dw $b20f                                ; [72]: Item: Glove
-    dw $b253                                ; [73]: Item: Black Onyx
-    dw $b257                                ; [74]: Item: Pendant
-    dw $b217                                ; [75]: Item: Red Potion
-    dw $b217                                ; [76]: Item: Poison
-    dw $b217                                ; [77]: Item: Elixir
-    dw $b20b                                ; [78]: Item: Ointment
-    dw $b217                                ; [79]: Trigger: Intro
+    dw BSCRIPTS_ENEMY_TAMAZUTSU             ; [44]: Enemy: Tamazutsu
+    dw BSCRIPTS_BOSS_RIPASHEIKU             ; [45]: Boss: Ripasheiku
+    dw BSCRIPTS_BOSS_ZORADOHNA              ; [46]: Boss: Zoradohna
+    dw BSCRIPTS_BOSS_BORABOHRA              ; [47]: Boss: Borabohra
+    dw BSCRIPTS_BOSS_PAKUKAME               ; [48]: Boss: Pakukame
+    dw BSCRIPTS_BOSS_ZORUGERIRU             ; [49]: Boss: Zorugeriru
+    dw BSCRIPTS_BOSS_KING_GRIEVE            ; [50]: Boss: King Grieve
+    dw BSCRIPTS_BOSS_SHADOW_EURA            ; [51]: Boss: Shadow Eura
+    dw BSCRIPTS_NPC_WALKING_MAN             ; [52]: NPC: Walking Man 1
+    dw BSCRIPTS_NPC_UNUSED_BLUE_LADY        ; [53]: NPC: Blue lady (unused)
+    dw BSCRIPTS_NPC_UNUSED_CHILD            ; [54]: NPC: Child (unused)
+    dw BSCRIPTS_NPC_ARMOR_SALESMAN          ; [55]: NPC: Armor Salesman
+    dw BSCRIPTS_NPC_MARTIAL_ARTS            ; [56]: NPC: Martial Artist
+    dw BSCRIPTS_NPC_PRIEST                  ; [57]: NPC: Priest
+    dw BSCRIPTS_NPC_KING                    ; [58]: NPC: King
+    dw BSCRIPTS_NPC_MAGIC_TEACHER           ; [59]: NPC: Magic Teacher
+    dw BSCRIPTS_NPC_KEY_SALESMAN            ; [60]: NPC: Key Salesman
+    dw BSCRIPTS_NPC_SMOKING_MAN             ; [61]: NPC: Smoking Man
+    dw BSCRIPTS_NPC_MAN_IN_CHAIR            ; [62]: NPC: Man in Chair
+    dw BSCRIPTS_NPC_SITTING_MAN             ; [63]: NPC: Sitting Man
+    dw BSCRIPTS_NPC_MEAT_SALESMAN           ; [64]: NPC: Meat Salesman
+    dw BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ; [65]: NPC: Lady in Blue Dress
+                                             ; with Cup
+    dw BSCRIPTS_NPC_KINGS_GUARD             ; [66]: NPC: Guard
+    dw BSCRIPTS_NPC_DOCTOR                  ; [67]: NPC: Doctor
+    dw BSCRIPTS_NPC_WALKING_WOMAN_01        ; [68]: NPC: Walking Woman 1
+    dw BSCRIPTS_NPC_WALKING_WOMAN_02        ; [69]: NPC: Walking Woman 2
+    dw BSCRIPTS_ENEMY_UNUSED_EYEBALL        ; [70]: Enemy: Eyeball (unused)
+    dw BSCRIPTS_ENEMY_ZOZURA                ; [71]: Enemy: Zozura
+    dw BSCRIPTS_OBJ_GLOVE                   ; [72]: Item: Glove
+    dw BSCRIPTS_OBJ_BLACK_ONYX              ; [73]: Item: Black Onyx
+    dw BSCRIPTS_OBJ_PENDANT                 ; [74]: Item: Pendant
+    dw BSCRIPTS_OBJ_POTIONLIKE              ; [75]: Item: Red Potion
+    dw BSCRIPTS_OBJ_POTIONLIKE              ; [76]: Item: Poison
+    dw BSCRIPTS_OBJ_POTIONLIKE              ; [77]: Item: Elixir
+    dw BSCRIPTS_OBJ_OINTMENT                ; [78]: Item: Ointment
+    dw BSCRIPTS_OBJ_POTIONLIKE              ; [79]: Trigger: Intro
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_BSCRIPTS_80_:                        ; [$adcd]
-    dw $b21b                                ; [80]: Item: Mattock
+    dw BSCRIPTS_OBJ_MATTOCK                 ; [80]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_BSCRIPTS_81_:                        ; [$adcf]
-    dw $b11c                                ; [81]: Magic: ?
-    dw $b223                                ; [82]: Effect: Fountain
-    dw $ae06                                ; [83]: Magic: ?
-    dw $b11c                                ; [84]: Magic: Enemy Fireball
-    dw $b213                                ; [85]: Item: Wing Boots
-    dw $b21f                                ; [86]: Item: Hour Glass
-    dw $b24f                                ; [87]: Item: Magical Rod
-    dw $b243                                ; [88]: Item: Battle Suit
-    dw $b247                                ; [89]: Item: Battle Helmet
-    dw $b24b                                ; [90]: Item: Dragon Slayer
-    dw $b25b                                ; [91]: Item: Mattock
-    dw $b25f                                ; [92]: Item: Wing Boots (from
+    dw BSCRIPTS_GARBLED_81                  ; [81]: Magic: ?
+    dw BSCRIPTS_FOUNTAIN                    ; [82]: Effect: Fountain
+    dw SPRITE_BEHAVIORS_UNKNOWN_83          ; [83]: Magic: ?
+    dw BSCRIPTS_GARBLED_81                  ; [84]: Magic: Enemy Fireball
+    dw BSCRIPTS_OBJ_WINGBOOTS               ; [85]: Item: Wing Boots
+    dw BSCRIPTS_OBJ_HOURGLASS               ; [86]: Item: Hour Glass
+    dw BSCRIPTS_OBJ_MAGICAL_ROD             ; [87]: Item: Magical Rod
+    dw BSCRIPTS_OBJ_BATTLE_SUIT             ; [88]: Item: Battle Suit
+    dw BSCRIPTS_OBJ_BATTLE_HELMET           ; [89]: Item: Battle Helmet
+    dw BSCRIPTS_OBJ_DRAGON_SLAYER           ; [90]: Item: Dragon Slayer
+    dw BSCRIPTS_OBJ_MATTOCK_QUEST           ; [91]: Item: Mattock
+    dw BSCRIPTS_OBJ_WINGSBOOTS_QUEST        ; [92]: Item: Wing Boots (from
                                             ; quest)
-    dw $b263                                ; [93]: Item: Red Potion
-    dw $b267                                ; [94]: Item: Poison
-    dw $b26b                                ; [95]: Item: Glove
-    dw $b26f                                ; [96]: Item: Ointment
-    dw $b22b                                ; [97]: Effect: Spring of Trunk
-    dw $b233                                ; [98]: Effect: Spring of Sky
-    dw $b23b                                ; [99]: Effect: Spring of Tower
-    dw $af64                                ; [100]: Effect: Boss Death
+    dw BSCRIPTS_OBJ_RED_POTION_RANDOM       ; [93]: Item: Red Potion
+    dw BSCRIPTS_OBJ_POISON                  ; [94]: Item: Poison
+    dw BSCRIPTS_OBJ_GLOVE_RANDOM            ; [95]: Item: Glove
+    dw BSCRIPTS_OBJ_OINTMENT_RANDOM         ; [96]: Item: Ointment
+    dw BSCRIPTS_SPRING_OF_FORTRESS          ; [97]: Effect: Spring of Trunk
+    dw BSCRIPTS_SPRING_OF_SKY               ; [98]: Effect: Spring of Sky
+    dw BSCRIPTS_SPRING_OF_JOKER             ; [99]: Effect: Spring of Tower
+    dw BSCRIPTS_EFFECT_BOSS_DEATH           ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -12994,9 +13039,9 @@ BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance
     db $00                                  ;  |- X direction
     db $30                                  ;  |- If < 48
-    dw $ae2f                                ;  |- Then
+    dw @_isNearPlayer                       ;  |- Then
                                             ; @_isNearPlayer
-    dw $ae28                                ;  '- Else,
+    dw @_checkDistanceLoop                  ;  '- Else,
                                             ; @_checkDistanceLoop
 
   @_isNearPlayer:                           ; [$ae2f]
@@ -13018,7 +13063,7 @@ BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
     db $e0                                  ;  |- 224 pixels
     db $00                                  ;  '- 0 blocks
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $ae16                                ;  '-
+    dw BSCRIPTS_ENEMY_RAIDEN                ;  '-
                                             ; BSCRIPTS_ENEMY_RAIDEN
 
 
@@ -13049,9 +13094,9 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $30                                  ;  |- If < 48
-    dw $ae53                                ;  |- Then
+    dw @_isNearPlayerX                      ;  |- Then
                                             ; @_isNearPlayerX
-    dw $ae4c                                ;  '- Else
+    dw @_waitNearPlayerX                    ;  '- Else
                                             ; @_waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae53]
@@ -13073,9 +13118,9 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $01                                  ;  |- Y direction
     db $08                                  ;  |- If < 8
-    dw $ae67                                ;  |- Then
+    dw @_isNearPlayerY                      ;  |- Then
                                             ; @_isNearPlayerY
-    dw $ae60                                ;  '- Then
+    dw @_waitNearPlayerY                    ;  '- Then
                                             ; @_waitNearPlayerY
 
   @_isNearPlayerY:                          ; [$ae67]
@@ -13115,7 +13160,7 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     db $00                                  ;  |- 0 pixels Y
     db $01                                  ;  '- 1 block Y
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $ae43                                ;  '-
+    dw BSCRIPTS_ENEMY_UNUSED_EYEBALL        ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_EYEBALL
 
 
@@ -13143,8 +13188,8 @@ BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $40                                  ;  |- If < 64 pixels
-    dw $ae9a                                ;  |- Then _isNearPlayerX
-    dw $ae93                                ;  '- Else _waitNearPlayerX
+    dw @_isNearPlayerX                      ;  |- Then _isNearPlayerX
+    dw @_waitNearPlayerX                    ;  '- Else _waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae9a]
     db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
@@ -13169,7 +13214,7 @@ BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
     db $00                                  ;  |- 0 blocks X
     db $02                                  ;  '- Hop mode 2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $ae8c                                ;  '-
+    dw BSCRIPTS_ENEMY_IKEDA                 ;  '-
                                             ; BSCRIPTS_ENEMY_IKEDA
 
 
@@ -13193,7 +13238,7 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
     db $60                                  ;  |- 96 pixels
     db $00                                  ;  '- 0 blocks
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $aeb1                                ;  '-
+    dw BSCRIPTS_ENEMY_ZOZURA                ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13220,7 +13265,7 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
     db $60                                  ;  |- 96 pixels
     db $00                                  ;  '- 0 blocks
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $aeb1                                ;  '-
+    dw BSCRIPTS_ENEMY_ZOZURA                ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13260,7 +13305,7 @@ BSCRIPTS_ENEMY_MONODRON:                    ; [$aecc]
     db $01                                  ;  |- X full amount
     db $02                                  ;  '- Hop mode 2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $aecc                                ;  '-
+    dw BSCRIPTS_ENEMY_MONODRON              ;  '-
                                             ; BSCRIPTS_ENEMY_MONODRON
 
 
@@ -13294,8 +13339,8 @@ BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check player distance
     db $00                                  ;  |- X direction
     db $20                                  ;  |- If < 32 pixels
-    dw $aef8                                ;  |- Then _isNearPlayer
-    dw $aef1                                ;  '- Else
+    dw @_isNearPlayer                       ;  |- Then _isNearPlayer
+    dw @_waitNearPlayer                     ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$aef8]
@@ -13307,7 +13352,7 @@ BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
     db $02                                  ;  |- 2 blocks X
     db $04                                  ;  '- Hop mode 4
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $aee5                                ;  '-
+    dw BSCRIPTS_ENEMY_SNOWMAN               ;  '-
                                             ; BSCRIPTS_ENEMY_SNOWMAN
 
 
@@ -13383,7 +13428,7 @@ BSCRIPTS_ENEMY_ZOMBIE:                      ; [$af06]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $af06                                ;  '-
+    dw BSCRIPTS_ENEMY_ZOMBIE                ;  '-
                                             ; BSCRIPTS_ENEMY_ZOMBIE
 
 
@@ -13466,8 +13511,8 @@ BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $20                                  ;  |- If < 32 pixels
-    dw $af49                                ;  |- Then _isNearPlayer
-    dw $af42                                ;  '- Else _waitNearPlayer
+    dw @_isNearPlayer                       ;  |- Then _isNearPlayer
+    dw @_waitNearPlayer                     ;  '- Else _waitNearPlayer
 
   @_isNearPlayer:                           ; [$af49]
     db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
@@ -13479,7 +13524,7 @@ BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
     db $80                                  ;  |- 128 pixels X
     db $01                                  ;  '- 1 block X
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $af3d                                ;  '-
+    dw BSCRIPTS_ENEMY_FIRE_GIANT            ;  '-
                                             ; BSCRIPTS_ENEMY_FIRE_GIANT
 
 
@@ -13621,7 +13666,7 @@ BSCRIPTS_ENEMY_UNUSED_21:                   ; [$af68]
     db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
     db $08                                  ;  '- For 8 ticks
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $af68                                ;  '-
+    dw BSCRIPTS_ENEMY_UNUSED_21             ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_21
 
 
@@ -13653,7 +13698,7 @@ BSCRIPTS_ENEMY_GERIBUTA:                    ; [$af89]
     db $00                                  ;  |- 0 pixels X
     db $02                                  ;  '- 2 blocks X
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $af8e                                ;  '-
+    dw @_moveTowardPlayerLoop               ;  '-
                                             ; @_moveTowardPlayerLoop
 
 
@@ -13696,7 +13741,7 @@ BSCRIPTS_ENEMY_SUGATA:                      ; [$af98]
     db SPRITE_BEHAVIOR_FLASH_DAMAGE_PLAYER  ;  |- Flash screen, damage player
     db $00                                  ;  '- (unused)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $af98                                ;  '-
+    dw BSCRIPTS_ENEMY_SUGATA                ;  '-
                                             ; BSCRIPTS_ENEMY_SUGATA
 
 
@@ -13756,9 +13801,9 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $01                                  ;  |- Y direction
     db $10                                  ;  |- If < 16 pixels
-    dw $afff                                ;  |- Then
+    dw @_nearPlayerY                        ;  |- Then
                                             ; @_nearPlayerY
-    dw $afe5                                ;  '- Else
+    dw @_awayFromPlayerY                    ;  '- Else
                                             ; @_awayFromPlayerY
 
   @_awayFromPlayerY:                        ; [$afe5]
@@ -13773,11 +13818,11 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $10                                  ;  |- If < 16 pixels
-    dw $aff5                                ;  |- Then
+    dw @_nearPlayerX                        ;  |- Then
                                             ; @_nearPlayerX
-    dw $afeb                                ;  '- Else _waitNearPlayerX
+    dw @_waitNearPlayerX                    ;  '- Else _waitNearPlayerX
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $afb5                                ;  '-
+    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX:                            ; [$aff5]
@@ -13789,7 +13834,7 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     db $01                                  ;  |- 1 block X
     db $02                                  ;  '- Hop mode 2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $afb5                                ;  '-
+    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerY:                            ; [$afff]
@@ -13806,12 +13851,12 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $10                                  ;  |- If < 16 pixels
-    dw $b011                                ;  |- Then
+    dw @_nearPlayerX2                       ;  |- Then
                                             ; @_nearPlayerX2
-    dw $b007                                ;  '- Else
+    dw @_waitNearPlayerX2                   ;  '- Else
                                             ; @_waitNearPlayerX2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $afb5                                ;  '-
+    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX2:                           ; [$b011]
@@ -13823,7 +13868,7 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     db $02                                  ;  |- 2 blocks X
     db $02                                  ;  '- Hop mode 2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $afb5                                ;  '-
+    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
 
@@ -13893,7 +13938,7 @@ BSCRIPTS_ENEMY_MYCONID:                     ; [$b01f]
     db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
     db $1e                                  ;  '- For 30 ticks
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b01f                                ;  '-
+    dw BSCRIPTS_ENEMY_MYCONID               ;  '-
                                             ; BSCRIPTS_ENEMY_MYCONID
 
 
@@ -13942,7 +13987,7 @@ BSCRIPTS_ENEMY_GIANT_STRIDER:               ; [$b048]
     db $01                                  ;  |- 1 block X
     db $02                                  ;  '- Hop mode 2
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b048                                ;  '-
+    dw BSCRIPTS_ENEMY_GIANT_STRIDER         ;  '-
                                             ; BSCRIPTS_ENEMY_GIANT_STRIDER
 
 
@@ -14042,7 +14087,7 @@ BSCRIPTS_ENEMY_LAMPREY:                     ; [$b068]
     db $50                                  ;  |- 80 pixels X
     db $00                                  ;  '- 0 blocks X
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b068                                ;  '-
+    dw BSCRIPTS_ENEMY_LAMPREY               ;  '-
                                             ; BSCRIPTS_ENEMY_LAMPREY
 
 
@@ -14157,7 +14202,7 @@ BSCRIPTS_ENEMY_MASKMAN:                     ; [$b07e]
     db $01                                  ;  |- 1 block X
     db $01                                  ;  '- Hop mode 1
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b07e                                ;  '-
+    dw BSCRIPTS_ENEMY_MASKMAN               ;  '-
                                             ; BSCRIPTS_ENEMY_MASKMAN
 
 
@@ -14217,8 +14262,8 @@ BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance
     db $00                                  ;  |- Check X
     db $10                                  ;  |- If < 16 pixels
-    dw $b0ca                                ;  |- Then hop
-    dw $b0d0                                ;  '- Else loop
+    dw @_hop                                ;  |- Then hop
+    dw @_loop                               ;  '- Else loop
 
   @_hop:                                    ; [$b0ca]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b0ca] SpriteOp
@@ -14230,7 +14275,7 @@ BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
 
   @_loop:                                   ; [$b0d0]
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b0ac                                ;  '-
+    dw BSCRIPTS_BOSS_ROKUSUTAHN             ;  '-
                                             ; BSCRIPTS_BOSS_ROKUSUTAHN
 
 
@@ -14316,9 +14361,9 @@ BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- X direction
     db $20                                  ;  |- If < 32 pixels
-    dw $b0fc                                ;  |- Then
+    dw @_isNearPlayer                       ;  |- Then
                                             ; @_isNearPlayer
-    dw $b0f5                                ;  '- Else
+    dw @_waitNearPlayer                     ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$b0fc]
@@ -14332,7 +14377,7 @@ BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
     db $02                                  ;  |- 2 blocks X
     db $01                                  ;  '- Hop mode 1
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b0ed                                ;  '-
+    dw @_mainLoop                           ;  '-
                                             ; @_mainLoop
 
 
@@ -14482,7 +14527,7 @@ BSCRIPTS_GARBLED_10:                        ; [$b120]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::ad95]
 ;
-BSCRIPTS_NPC_WALKING_MAN_1:                 ; [$b124]
+BSCRIPTS_NPC_WALKING_MAN:                   ; [$b124]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
     db $3c                                  ;  |- For 60 ticks
@@ -14494,8 +14539,8 @@ BSCRIPTS_NPC_WALKING_MAN_1:                 ; [$b124]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b124                                ;  '-
-                                            ; BSCRIPTS_NPC_WALKING_MAN+1
+    dw BSCRIPTS_NPC_WALKING_MAN             ;  '-
+                                            ; BSCRIPTS_NPC_WALKING_MAN
 
 
 ;============================================================================
@@ -14532,7 +14577,7 @@ BSCRIPTS_NPC_UNUSED_BLUE_LADY:              ; [$b131]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b131                                ;  '-
+    dw BSCRIPTS_NPC_UNUSED_BLUE_LADY        ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_BLUE_LADY
 
 
@@ -14576,7 +14621,7 @@ BSCRIPTS_NPC_UNUSED_CHILD:                  ; [$b149]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b149                                ;  '-
+    dw BSCRIPTS_NPC_UNUSED_CHILD            ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_CHILD
 
 
@@ -14616,7 +14661,7 @@ BSCRIPTS_NPC_MARTIAL_ARTS:                  ; [$b16b]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b16b                                ;  '-
+    dw BSCRIPTS_NPC_MARTIAL_ARTS            ;  '-
                                             ; BSCRIPTS_NPC_MARTIAL_ARTS
 
 
@@ -14635,7 +14680,7 @@ BSCRIPTS_NPC_PRIEST:                        ; [$b173]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Set sprite data
-    dw $00ba                                ;  |- X position
+    dw CurrentSprites_XPos_Full             ;  |- X position
     db $04                                  ;  '- to 4
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_FALL                 ;  |- Stand still
@@ -14668,9 +14713,9 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- For 0 ticks
     db $40                                  ;  |- If < 64 pixels
-    dw $b187                                ;  |- Then
+    dw @_nearPlayer                         ;  |- Then
                                             ; @_nearPlayer
-    dw $b180                                ;  '- Else
+    dw @_waitNearPlayerLoop                 ;  '- Else
                                             ; @_waitNearPlayerLoop
 
 
@@ -14681,7 +14726,7 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
   @_nearPlayer:                             ; [$b187]
     db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add value to
-    dw $00ba                                ;  |- Sprite X position
+    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
     db $08                                  ;  '- Plus 8
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
@@ -14698,9 +14743,9 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
     db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
     db $00                                  ;  |- For 0 ticks
     db $48                                  ;  |- If < 72 pixels
-    dw $b18f                                ;  |- Then
+    dw @_waitAwayFromPlayerLoop             ;  |- Then
                                             ; @_waitAwayFromPlayerLoop
-    dw $b196                                ;  '- Else
+    dw @_awayFromPlayer                     ;  '- Else
                                             ; @_awayFromPlayer
 
 
@@ -14711,10 +14756,10 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
   @_awayFromPlayer:                         ; [$b196]
     db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add value to
-    dw $00ba                                ;  |- Sprite X position
+    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
     db $f8                                  ;  '- Minus 8
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b17d                                ;  '-
+    dw BSCRIPTS_NPC_KING                    ;  '-
                                             ; BSCRIPTS_NPC_KING
 
 
@@ -14736,7 +14781,7 @@ BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_MAYBE_DISABLE_AND_GOTO     ; Op: Maybe: Disable and Go To
-    dw $b19e                                ;  '-
+    dw BSCRIPTS_NPC_MAGIC_TEACHER           ;  '-
                                             ; BSCRIPTS_NPC_MAGIC_TEACHER
 
 
@@ -14753,7 +14798,7 @@ BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
 ;
 BSCRIPTS_NPC_DOCTOR:                        ; [$b1a6]
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add to sprite value
-    dw $00ba                                ;  |- Sprite X position
+    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
     db $08                                  ;  '- Add 8
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
@@ -14797,7 +14842,7 @@ BSCRIPTS_NPC_SMOKING_MAN:                   ; [$b1b2]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1b2                                ;  '-
+    dw BSCRIPTS_NPC_SMOKING_MAN             ;  '-
                                             ; BSCRIPTS_NPC_SMOKING_MAN
 
 
@@ -14819,7 +14864,7 @@ BSCRIPTS_NPC_MAN_IN_CHAIR:                  ; [$b1ba]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1ba                                ;  '-
+    dw BSCRIPTS_NPC_MAN_IN_CHAIR            ;  '-
                                             ; BSCRIPTS_NPC_MAN_IN_CHAIR
 
 
@@ -14834,7 +14879,7 @@ BSCRIPTS_NPC_MAN_IN_CHAIR:                  ; [$b1ba]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::adab]
 ;
-BSCRIPTS_NPC_SITTING_MAN_1:                 ; [$b1c2]
+BSCRIPTS_NPC_SITTING_MAN:                   ; [$b1c2]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
     db $00                                  ;  '- For 0 ticks
@@ -14889,8 +14934,8 @@ BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP:      ; [$b1cc]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1cc                                ;  '-
-                                            ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
+    dw BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ;  '-
+                                             ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
 
 
 ;============================================================================
@@ -14916,7 +14961,7 @@ BSCRIPTS_NPC_KINGS_GUARD:                   ; [$b1de]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1de                                ;  '-
+    dw BSCRIPTS_NPC_KINGS_GUARD             ;  '-
                                             ; BSCRIPTS_NPC_KINGS_GUARD
 
 
@@ -14931,7 +14976,7 @@ BSCRIPTS_NPC_KINGS_GUARD:                   ; [$b1de]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::adb5]
 ;
-BSCRIPTS_NPC_WALKING_WOMAN_1:               ; [$b1eb]
+BSCRIPTS_NPC_WALKING_WOMAN_01:              ; [$b1eb]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
     db $50                                  ;  |- For 80 ticks
@@ -14945,8 +14990,8 @@ BSCRIPTS_NPC_WALKING_WOMAN_1:               ; [$b1eb]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1eb                                ;  '-
-                                            ; BSCRIPTS_NPC_WALKING_WOMAN+1
+    dw BSCRIPTS_NPC_WALKING_WOMAN_01        ;  '-
+                                            ; BSCRIPTS_NPC_WALKING_WOMAN_01
 
 
 ;============================================================================
@@ -14960,7 +15005,7 @@ BSCRIPTS_NPC_WALKING_WOMAN_1:               ; [$b1eb]
 ; XREFS:
 ;     SPRITE_BSCRIPTS [$PRG14::adb7]
 ;
-BSCRIPTS_NPC_WALKING_WOMAN_2:               ; [$b1fa]
+BSCRIPTS_NPC_WALKING_WOMAN_02:              ; [$b1fa]
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
     db $3c                                  ;  |- For 60 ticks
@@ -14976,8 +15021,8 @@ BSCRIPTS_NPC_WALKING_WOMAN_2:               ; [$b1fa]
     db SPRITE_OP_RUN_ACTION                 ; Op: Run action
     db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
     db SPRITE_OP_GOTO                       ; Op: Goto
-    dw $b1fa                                ;  '-
-                                            ; BSCRIPTS_NPC_WALKING_WOMAN_2
+    dw BSCRIPTS_NPC_WALKING_WOMAN_02        ;  '-
+                                            ; BSCRIPTS_NPC_WALKING_WOMAN_02
 
 
 ;============================================================================
@@ -15113,7 +15158,7 @@ BSCRIPTS_OBJ_HOURGLASS:                     ; [$b21f]
 ;
 BSCRIPTS_FOUNTAIN:                          ; [$b223]
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add to sprite value
-    dw $00ba                                ;  |- Sprite X position
+    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
     db $08                                  ;  '- Plus 8
     db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
     db SPRITE_BEHAVIOR_FOUNTAIN             ; [$b228] SpriteBehavior
@@ -15135,7 +15180,7 @@ BSCRIPTS_FOUNTAIN:                          ; [$b223]
 ;
 BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b22b] SpriteOp
-    dw $00ba                                ; CurrentSprites_XPos_Full
+    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b22c]
     db $08                                  ; [$b22e] byte
 
@@ -15159,7 +15204,7 @@ BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
 ;
 BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b233] SpriteOp
-    dw $00ba                                ; CurrentSprites_XPos_Full
+    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b234]
     db $08                                  ; [$b236] byte
 
@@ -15183,7 +15228,7 @@ BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
 ;
 BSCRIPTS_SPRING_OF_JOKER:                   ; [$b23b]
     db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b23b] SpriteOp
-    dw $00ba                                ; CurrentSprites_XPos_Full
+    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b23c]
     db $08                                  ; [$b23e] byte
 
@@ -16801,12 +16846,12 @@ Player_DrawWeapon:                          ; [$b7d6]
     AND #$40
     STA CurrentSprite_FlipMask
     LDA PlayerPosXPlus10
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA Maybe_Something_WeaponPosY
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA Temp_00
     PHA
-    JSR CurrentSprite_CalculateVisibility
+    JSR Player_CalculateVisibility
     PLA
     STA Temp_00
     LDX a:Player_CurWeapon
@@ -16883,14 +16928,14 @@ MAYBE_WEAPON_RANGES:                        ; [$b897]
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b89f:                      ; [$b89f]
-    dw $b8af                                ; [0]: Dagger
-    dw $b8bf                                ; [1]: Dagger + shield
-    dw $b8cf                                ; [2]: Long Sword
-    dw $b8df                                ; [3]: Long Sword + shield
-    dw $b8ef                                ; [4]: Giant Blade
-    dw $b8ff                                ; [5]: Giant Blade + shield
-    dw $b8ff                                ; [6]: Dragon Slayer
-    dw $b8ff                                ; [7]: Dragon Slayer + shield
+    dw DAT_PRG14__b8af                      ; [0]: Dagger
+    dw DAT_PRG14__b8bf                      ; [1]: Dagger + shield
+    dw DAT_PRG14__b8cf                      ; [2]: Long Sword
+    dw DAT_PRG14__b8df                      ; [3]: Long Sword + shield
+    dw DAT_PRG14__b8ef                      ; [4]: Giant Blade
+    dw DAT_PRG14__b8ff                      ; [5]: Giant Blade + shield
+    dw DAT_PRG14__b8ff                      ; [6]: Dragon Slayer
+    dw DAT_PRG14__b8ff                      ; [7]: Dragon Slayer + shield
 
 ;
 ; XREFS:
@@ -16941,10 +16986,10 @@ DAT_PRG14__b8ff:                            ; [$b8ff]
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b90f:                      ; [$b90f]
-    dw $b917                                ; [0]: Hand dagger
-    dw $b91f                                ; [1]: Long sword
-    dw $b91f                                ; [2]: Giant blade
-    dw $b91f                                ; [3]: Dragon slayer
+    dw DAT_PRG14__b917                      ; [0]: Hand dagger
+    dw DAT_PRG14__b91f                      ; [1]: Long sword
+    dw DAT_PRG14__b91f                      ; [2]: Giant blade
+    dw DAT_PRG14__b91f                      ; [3]: Dragon slayer
 
 ;
 ; XREFS:
@@ -17103,12 +17148,12 @@ Player_DrawShield:                          ; [$b982]
     LDA #$30
     STA Sprites_PPUOffset
     LDA a:Player_ShieldPositionX
-    STA Maybe_Arg_CurrentSprite_PosX
+    STA Arg_DrawSprite_PosX
     LDA a:Player_ShieldPositionY
-    STA Maybe_Arg_CurrentSprite_PosY
+    STA Arg_DrawSprite_PosY
     LDA Temp_00
     PHA
-    JSR CurrentSprite_CalculateVisibility
+    JSR Player_CalculateVisibility
     PLA
     STA Temp_00
     LDY Temp_00
@@ -17155,7 +17200,7 @@ SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
     db $00                                  ; [15]:
 
 ;============================================================================
-; TODO: Document CurrentSprite_CalculateVisibility
+; TODO: Document Player_CalculateVisibility
 ;
 ; INPUTS:
 ;     None.
@@ -17169,12 +17214,12 @@ SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
 ;     FUN_PRG15_MIRROR__ec58
 ;     Player_DrawBody
 ;============================================================================
-CurrentSprite_CalculateVisibility:          ; [$b9ed]
+Player_CalculateVisibility:                 ; [$b9ed]
     LDA #$00
     STA Temp_MovingSpriteVisibility
-    LDA Maybe_Arg_CurrentSprite_PosY
+    LDA Arg_DrawSprite_PosY
     STA Arg_PixelPosY
-    LDA Maybe_Arg_CurrentSprite_PosX
+    LDA Arg_DrawSprite_PosX
     CLC
     ADC #$04
     STA Arg_PixelPosX
@@ -17193,7 +17238,7 @@ CurrentSprite_CalculateVisibility:          ; [$b9ed]
     STA Temp_MovingSpriteVisibility
 
   @LAB_PRG14__ba14:                         ; [$ba14]
-    LDA Maybe_Arg_CurrentSprite_PosX
+    LDA Arg_DrawSprite_PosX
     CLC
     ADC #$0c
     STA Arg_PixelPosX
@@ -17227,7 +17272,7 @@ CurrentSprite_CalculateVisibility:          ; [$b9ed]
 
     ;
     ; XREFS:
-    ;     CurrentSprite_CalculateVisibility
+    ;     Player_CalculateVisibility
     ;
 SUB_PRG14__ba48:                            ; [$ba48]
     STA MovingSpriteVisibility

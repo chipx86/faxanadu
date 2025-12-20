@@ -141,8 +141,8 @@ pre {
 <a name="SQ1_VOL"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
-;     <a href="PRG5.html#Music_UpdateSQVol">Music_UpdateSQVol</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#Music_UpdateSQVolRegister">Music_UpdateSQVolRegister</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4000" href="#4000">[4000]</a><a href="#SQ1_VOL" class="la">SQ1_VOL:</a><span class="ce">; [$4000]</span></span>
 <span class="l"><a class="anc" name="4000" href="#4000">[4000]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4000] undefined</span></span>
@@ -151,7 +151,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4001" href="#4001">[4001]</a><a href="#SQ1_SWEEP" class="la">SQ1_SWEEP:</a><span class="ce">; [$4001]</span></span>
 <span class="l"><a class="anc" name="4001" href="#4001">[4001]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4001] undefined</span></span>
@@ -159,9 +159,9 @@ pre {
 <a name="SQ1_LO"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
+;     <a href="PRG5.html#Music_ApplySQPitchEffectToLO">Music_ApplySQPitchEffectToLO</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#Music_UpdateSQLo">Music_UpdateSQLo</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4002" href="#4002">[4002]</a><a href="#SQ1_LO" class="la">SQ1_LO:</a><span class="ce">; [$4002]</span></span>
 <span class="l"><a class="anc" name="4002" href="#4002">[4002]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4002] undefined</span></span>
@@ -170,7 +170,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4003" href="#4003">[4003]</a><a href="#SQ1_HI" class="la">SQ1_HI:</a><span class="ce">; [$4003]</span></span>
 <span class="l"><a class="anc" name="4003" href="#4003">[4003]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4003] undefined</span></span>
@@ -178,27 +178,27 @@ pre {
 <a name="SQ2_VOL"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_BreadTouched">SoundEffect_Handler_BreadTouched</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CharacterInput">SoundEffect_Handler_CharacterInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinDropped">SoundEffect_Handler_CoinDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinTouchedCommon">SoundEffect_Handler_CoinTouchedCommon</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CursorMoved">SoundEffect_Handler_CursorMoved</a>
-;     <a href="PRG5.html#SoundEffect_Handler_FillHPOrMP">SoundEffect_Handler_FillHPOrMP</a>
-;     <a href="PRG5.html#SoundEffect_Handler_GoldAmountChanged">SoundEffect_Handler_GoldAmountChanged</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitPlayer">SoundEffect_Handler_HitPlayer</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ItemPickedUp">SoundEffect_Handler_ItemPickedUp</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Magic">SoundEffect_Handler_Magic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Typing">SoundEffect_Handler_Maybe_Typing</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Pakukame">SoundEffect_Handler_Pakukame</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PasswordCharInput">SoundEffect_Handler_PasswordCharInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShieldHitByMagic">SoundEffect_Handler_ShieldHitByMagic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShowPlayerMenu">SoundEffect_Handler_ShowPlayerMenu</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_BreadTouched_OnTick">SoundEffect_BreadTouched_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CharacterInput_OnTick">SoundEffect_CharacterInput_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinDropped_OnTick">SoundEffect_CoinDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinTouchedCommon_OnTick">SoundEffect_CoinTouchedCommon_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CursorMoved_OnTick">SoundEffect_CursorMoved_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_FillHPOrMP_OnTick">SoundEffect_FillHPOrMP_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_GoldAmountChanged_Setup">SoundEffect_GoldAmountChanged_Setup</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitPlayer_OnTick">SoundEffect_HitPlayer_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ItemPickedUp_OnTick">SoundEffect_ItemPickedUp_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Magic_OnTick">SoundEffect_Magic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Typing_OnTick">SoundEffect_Maybe_Typing_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Pakukame_OnTick">SoundEffect_Pakukame_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PasswordCharInput_Setup">SoundEffect_PasswordCharInput_Setup</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShieldHitByMagic_OnTick">SoundEffect_ShieldHitByMagic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShowPlayerMenu_OnTick">SoundEffect_ShowPlayerMenu_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4004" href="#4004">[4004]</a><a href="#SQ2_VOL" class="la">SQ2_VOL:</a><span class="ce">; [$4004]</span></span>
 <span class="l"><a class="anc" name="4004" href="#4004">[4004]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4004] undefined</span></span>
@@ -207,27 +207,27 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_BreadTouched">SoundEffect_Handler_BreadTouched</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CharacterInput">SoundEffect_Handler_CharacterInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinDropped">SoundEffect_Handler_CoinDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinTouchedCommon">SoundEffect_Handler_CoinTouchedCommon</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CursorMoved">SoundEffect_Handler_CursorMoved</a>
-;     <a href="PRG5.html#SoundEffect_Handler_FillHPOrMP">SoundEffect_Handler_FillHPOrMP</a>
-;     <a href="PRG5.html#SoundEffect_Handler_GoldAmountChanged">SoundEffect_Handler_GoldAmountChanged</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitPlayer">SoundEffect_Handler_HitPlayer</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ItemPickedUp">SoundEffect_Handler_ItemPickedUp</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Magic">SoundEffect_Handler_Magic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Typing">SoundEffect_Handler_Maybe_Typing</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Pakukame">SoundEffect_Handler_Pakukame</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PasswordCharInput">SoundEffect_Handler_PasswordCharInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShieldHitByMagic">SoundEffect_Handler_ShieldHitByMagic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShowPlayerMenu">SoundEffect_Handler_ShowPlayerMenu</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_BreadTouched_OnTick">SoundEffect_BreadTouched_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CharacterInput_OnTick">SoundEffect_CharacterInput_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinDropped_OnTick">SoundEffect_CoinDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinTouchedCommon_OnTick">SoundEffect_CoinTouchedCommon_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CursorMoved_OnTick">SoundEffect_CursorMoved_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_FillHPOrMP_OnTick">SoundEffect_FillHPOrMP_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_GoldAmountChanged_Setup">SoundEffect_GoldAmountChanged_Setup</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitPlayer_OnTick">SoundEffect_HitPlayer_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ItemPickedUp_OnTick">SoundEffect_ItemPickedUp_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Magic_OnTick">SoundEffect_Magic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Typing_OnTick">SoundEffect_Maybe_Typing_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Pakukame_OnTick">SoundEffect_Pakukame_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PasswordCharInput_Setup">SoundEffect_PasswordCharInput_Setup</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShieldHitByMagic_OnTick">SoundEffect_ShieldHitByMagic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShowPlayerMenu_OnTick">SoundEffect_ShowPlayerMenu_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4005" href="#4005">[4005]</a><a href="#SQ2_SWEEP" class="la">SQ2_SWEEP:</a><span class="ce">; [$4005]</span></span>
 <span class="l"><a class="anc" name="4005" href="#4005">[4005]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4005] undefined</span></span>
@@ -236,27 +236,27 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_BreadTouched">SoundEffect_Handler_BreadTouched</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CharacterInput">SoundEffect_Handler_CharacterInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinDropped">SoundEffect_Handler_CoinDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinTouchedCommon">SoundEffect_Handler_CoinTouchedCommon</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CursorMoved">SoundEffect_Handler_CursorMoved</a>
-;     <a href="PRG5.html#SoundEffect_Handler_FillHPOrMP">SoundEffect_Handler_FillHPOrMP</a>
-;     <a href="PRG5.html#SoundEffect_Handler_GoldAmountChanged">SoundEffect_Handler_GoldAmountChanged</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitPlayer">SoundEffect_Handler_HitPlayer</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ItemPickedUp">SoundEffect_Handler_ItemPickedUp</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Magic">SoundEffect_Handler_Magic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Typing">SoundEffect_Handler_Maybe_Typing</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Pakukame">SoundEffect_Handler_Pakukame</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PasswordCharInput">SoundEffect_Handler_PasswordCharInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShieldHitByMagic">SoundEffect_Handler_ShieldHitByMagic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShowPlayerMenu">SoundEffect_Handler_ShowPlayerMenu</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_BreadTouched_OnTick">SoundEffect_BreadTouched_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CharacterInput_OnTick">SoundEffect_CharacterInput_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinDropped_OnTick">SoundEffect_CoinDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinTouchedCommon_OnTick">SoundEffect_CoinTouchedCommon_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CursorMoved_OnTick">SoundEffect_CursorMoved_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_FillHPOrMP_OnTick">SoundEffect_FillHPOrMP_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_GoldAmountChanged_Setup">SoundEffect_GoldAmountChanged_Setup</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitPlayer_OnTick">SoundEffect_HitPlayer_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ItemPickedUp_OnTick">SoundEffect_ItemPickedUp_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Magic_OnTick">SoundEffect_Magic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Typing_OnTick">SoundEffect_Maybe_Typing_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Pakukame_OnTick">SoundEffect_Pakukame_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PasswordCharInput_Setup">SoundEffect_PasswordCharInput_Setup</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShieldHitByMagic_OnTick">SoundEffect_ShieldHitByMagic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShowPlayerMenu_OnTick">SoundEffect_ShowPlayerMenu_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4006" href="#4006">[4006]</a><a href="#SQ2_LO" class="la">SQ2_LO:</a><span class="ce">; [$4006]</span></span>
 <span class="l"><a class="anc" name="4006" href="#4006">[4006]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4006] undefined</span></span>
@@ -265,27 +265,27 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_BreadTouched">SoundEffect_Handler_BreadTouched</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CharacterInput">SoundEffect_Handler_CharacterInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinDropped">SoundEffect_Handler_CoinDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CoinTouchedCommon">SoundEffect_Handler_CoinTouchedCommon</a>
-;     <a href="PRG5.html#SoundEffect_Handler_CursorMoved">SoundEffect_Handler_CursorMoved</a>
-;     <a href="PRG5.html#SoundEffect_Handler_FillHPOrMP">SoundEffect_Handler_FillHPOrMP</a>
-;     <a href="PRG5.html#SoundEffect_Handler_GoldAmountChanged">SoundEffect_Handler_GoldAmountChanged</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitPlayer">SoundEffect_Handler_HitPlayer</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ItemPickedUp">SoundEffect_Handler_ItemPickedUp</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Magic">SoundEffect_Handler_Magic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Typing">SoundEffect_Handler_Maybe_Typing</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Pakukame">SoundEffect_Handler_Pakukame</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PasswordCharInput">SoundEffect_Handler_PasswordCharInput</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShieldHitByMagic">SoundEffect_Handler_ShieldHitByMagic</a>
-;     <a href="PRG5.html#SoundEffect_Handler_ShowPlayerMenu">SoundEffect_Handler_ShowPlayerMenu</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_BreadTouched_OnTick">SoundEffect_BreadTouched_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CharacterInput_OnTick">SoundEffect_CharacterInput_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinDropped_OnTick">SoundEffect_CoinDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CoinTouchedCommon_OnTick">SoundEffect_CoinTouchedCommon_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_CursorMoved_OnTick">SoundEffect_CursorMoved_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_FillHPOrMP_OnTick">SoundEffect_FillHPOrMP_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_GoldAmountChanged_Setup">SoundEffect_GoldAmountChanged_Setup</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitPlayer_OnTick">SoundEffect_HitPlayer_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ItemPickedUp_OnTick">SoundEffect_ItemPickedUp_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Magic_OnTick">SoundEffect_Magic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Typing_OnTick">SoundEffect_Maybe_Typing_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Pakukame_OnTick">SoundEffect_Pakukame_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PasswordCharInput_Setup">SoundEffect_PasswordCharInput_Setup</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShieldHitByMagic_OnTick">SoundEffect_ShieldHitByMagic_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_ShowPlayerMenu_OnTick">SoundEffect_ShowPlayerMenu_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4007" href="#4007">[4007]</a><a href="#SQ2_HI" class="la">SQ2_HI:</a><span class="ce">; [$4007]</span></span>
 <span class="l"><a class="anc" name="4007" href="#4007">[4007]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4007] undefined</span></span>
@@ -295,7 +295,7 @@ pre {
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayForChannel">Music_PlayForChannel</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="4008" href="#4008">[4008]</a><a href="#TRI_LINEAR" class="la">TRI_LINEAR:</a><span class="ce">; [$4008]</span></span>
 <span class="l"><a class="anc" name="4008" href="#4008">[4008]</a><span class="cd"><span class="i">db</span> <span class="o">$00,$00</span></span><span class="ce">; [$4008] undefined</span></span>
@@ -304,7 +304,7 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayWave">Music_PlayWave</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="400a" href="#400a">[400a]</a><a href="#TRI_LO" class="la">TRI_LO:</a><span class="ce">; [$400a]</span></span>
 <span class="l"><a class="anc" name="400a" href="#400a">[400a]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$400a] undefined</span></span>
@@ -321,18 +321,18 @@ pre {
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
 ;     <a href="PRG5.html#Music_PlayNoise">Music_PlayNoise</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_EnemyDied">SoundEffect_Handler_EnemyDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_LadderDropped">SoundEffect_Handler_LadderDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_MagicHitObstacle">SoundEffect_Handler_MagicHitObstacle</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Step">SoundEffect_Handler_Maybe_Step</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Message">SoundEffect_Handler_Message</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PushBlock">SoundEffect_Handler_PushBlock</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_EnemyDied_OnTick">SoundEffect_EnemyDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_LadderDropped_OnTick">SoundEffect_LadderDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_MagicHitObstacle_OnTick">SoundEffect_MagicHitObstacle_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Step_OnTick">SoundEffect_Maybe_Step_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Message_OnTick">SoundEffect_Message_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PushBlock_OnTick">SoundEffect_PushBlock_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="400c" href="#400c">[400c]</a><a href="#NOISE_VOL" class="la">NOISE_VOL:</a><span class="ce">; [$400c]</span></span>
 <span class="l"><a class="anc" name="400c" href="#400c">[400c]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$400c] undefined1</span></span>
@@ -347,18 +347,18 @@ pre {
 <a name="NOISE_LO"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_EnemyDied">SoundEffect_Handler_EnemyDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_LadderDropped">SoundEffect_Handler_LadderDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_MagicHitObstacle">SoundEffect_Handler_MagicHitObstacle</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Step">SoundEffect_Handler_Maybe_Step</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Message">SoundEffect_Handler_Message</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PushBlock">SoundEffect_Handler_PushBlock</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_EnemyDied_OnTick">SoundEffect_EnemyDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_LadderDropped_OnTick">SoundEffect_LadderDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_MagicHitObstacle_OnTick">SoundEffect_MagicHitObstacle_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Step_OnTick">SoundEffect_Maybe_Step_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Message_OnTick">SoundEffect_Message_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PushBlock_OnTick">SoundEffect_PushBlock_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="400e" href="#400e">[400e]</a><a href="#NOISE_LO" class="la">NOISE_LO:</a><span class="ce">; [$400e]</span></span>
 <span class="l"><a class="anc" name="400e" href="#400e">[400e]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$400e] undefined</span></span>
@@ -366,18 +366,18 @@ pre {
 <a name="NOISE_HI"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG5.html#Audio_Reset">Audio_Reset</a>
-;     <a href="PRG5.html#SoundEffect_Handler_0x48">SoundEffect_Handler_0x48</a>
-;     <a href="PRG5.html#SoundEffect_Handler_EnemyDied">SoundEffect_Handler_EnemyDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_HitEnemy">SoundEffect_Handler_HitEnemy</a>
-;     <a href="PRG5.html#SoundEffect_Handler_LadderDropped">SoundEffect_Handler_LadderDropped</a>
-;     <a href="PRG5.html#SoundEffect_Handler_MagicHitObstacle">SoundEffect_Handler_MagicHitObstacle</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_Step">SoundEffect_Handler_Maybe_Step</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Maybe_UseSpecialItem2">SoundEffect_Handler_Maybe_UseSpecialItem2</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Message">SoundEffect_Handler_Message</a>
-;     <a href="PRG5.html#SoundEffect_Handler_OpenDoor">SoundEffect_Handler_OpenDoor</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PlayerDied">SoundEffect_Handler_PlayerDied</a>
-;     <a href="PRG5.html#SoundEffect_Handler_PushBlock">SoundEffect_Handler_PushBlock</a>
-;     <a href="PRG5.html#SoundEffect_Handler_Tilte">SoundEffect_Handler_Tilte</a>
+;     <a href="PRG5.html#SoundEffect_0x48_OnTick">SoundEffect_0x48_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_EnemyDied_OnTick">SoundEffect_EnemyDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_HitEnemy_OnTick">SoundEffect_HitEnemy_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_LadderDropped_OnTick">SoundEffect_LadderDropped_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_MagicHitObstacle_OnTick">SoundEffect_MagicHitObstacle_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_Step_OnTick">SoundEffect_Maybe_Step_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Maybe_UseSpecialItem2_OnTick">SoundEffect_Maybe_UseSpecialItem2_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Message_OnTick">SoundEffect_Message_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_OpenDoor_OnTick">SoundEffect_OpenDoor_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PlayerDied_OnTick">SoundEffect_PlayerDied_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_PushBlock_OnTick">SoundEffect_PushBlock_OnTick</a>
+;     <a href="PRG5.html#SoundEffect_Tilte_OnTick">SoundEffect_Tilte_OnTick</a>
 ;
 </div><span class="l"><a class="anc" name="400f" href="#400f">[400f]</a><a href="#NOISE_HI" class="la">NOISE_HI:</a><span class="ce">; [$400f]</span></span>
 <span class="l"><a class="anc" name="400f" href="#400f">[400f]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$400f] undefined</span></span>
@@ -387,7 +387,7 @@ pre {
 <span class="l"></span>
 <a name="DMC_RAW"></a><div class="c">;
 ; XREFS:
-;     <a href="PRG5.html#Sound_Init">Sound_Init</a>
+;     <a href="PRG5.html#SoundEffects_Init">SoundEffects_Init</a>
 ;
 </div><span class="l"><a class="anc" name="4011" href="#4011">[4011]</a><a href="#DMC_RAW" class="la">DMC_RAW:</a><span class="ce">; [$4011]</span></span>
 <span class="l"><a class="anc" name="4011" href="#4011">[4011]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4011] undefined</span></span>
@@ -407,8 +407,8 @@ pre {
 <span class="l"></span>
 <a name="SND_CHN"></a><div class="c">;
 ; XREFS:
-;     <a href="PRG5.html#Sound_Init">Sound_Init</a>
-;     <a href="PRG5.html#Sound_InitPlayingState">Sound_InitPlayingState</a>
+;     <a href="PRG5.html#Audio_InitPlayingState">Audio_InitPlayingState</a>
+;     <a href="PRG5.html#SoundEffects_Init">SoundEffects_Init</a>
 ;
 </div><span class="l"><a class="anc" name="4015" href="#4015">[4015]</a><a href="#SND_CHN" class="la">SND_CHN:</a><span class="ce">; [$4015]</span></span>
 <span class="l"><a class="anc" name="4015" href="#4015">[4015]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$4015] SoundChannels</span></span>

@@ -9,8 +9,8 @@
 ;
 ; XREFS:
 ;     Audio_Reset
-;     Music_UpdateSQVol
-;     SoundEffect_Handler_PlayerDied
+;     Music_UpdateSQVolRegister
+;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_VOL:                                    ; [$4000]
     db $00                                  ; [$4000] undefined
@@ -19,7 +19,7 @@ SQ1_VOL:                                    ; [$4000]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_SWEEP:                                  ; [$4001]
     db $00                                  ; [$4001] undefined
@@ -27,9 +27,9 @@ SQ1_SWEEP:                                  ; [$4001]
 ;
 ; XREFS:
 ;     Audio_Reset
+;     Music_ApplySQPitchEffectToLO
 ;     Music_PlayWave
-;     Music_UpdateSQLo
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_LO:                                     ; [$4002]
     db $00                                  ; [$4002] undefined
@@ -38,7 +38,7 @@ SQ1_LO:                                     ; [$4002]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_HI:                                     ; [$4003]
     db $00                                  ; [$4003] undefined
@@ -46,27 +46,27 @@ SQ1_HI:                                     ; [$4003]
 ;
 ; XREFS:
 ;     Audio_Reset
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 SQ2_VOL:                                    ; [$4004]
     db $00                                  ; [$4004] undefined
@@ -75,27 +75,27 @@ SQ2_VOL:                                    ; [$4004]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 SQ2_SWEEP:                                  ; [$4005]
     db $00                                  ; [$4005] undefined
@@ -104,27 +104,27 @@ SQ2_SWEEP:                                  ; [$4005]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 SQ2_LO:                                     ; [$4006]
     db $00                                  ; [$4006] undefined
@@ -133,27 +133,27 @@ SQ2_LO:                                     ; [$4006]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_BreadTouched
-;     SoundEffect_Handler_CharacterInput
-;     SoundEffect_Handler_CoinDropped
-;     SoundEffect_Handler_CoinTouchedCommon
-;     SoundEffect_Handler_CursorMoved
-;     SoundEffect_Handler_FillHPOrMP
-;     SoundEffect_Handler_GoldAmountChanged
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_HitPlayer
-;     SoundEffect_Handler_ItemPickedUp
-;     SoundEffect_Handler_Magic
-;     SoundEffect_Handler_Maybe_Typing
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_Pakukame
-;     SoundEffect_Handler_PasswordCharInput
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_ShieldHitByMagic
-;     SoundEffect_Handler_ShowPlayerMenu
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_BreadTouched_OnTick
+;     SoundEffect_CharacterInput_OnTick
+;     SoundEffect_CoinDropped_OnTick
+;     SoundEffect_CoinTouchedCommon_OnTick
+;     SoundEffect_CursorMoved_OnTick
+;     SoundEffect_FillHPOrMP_OnTick
+;     SoundEffect_GoldAmountChanged_Setup
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_HitPlayer_OnTick
+;     SoundEffect_ItemPickedUp_OnTick
+;     SoundEffect_Magic_OnTick
+;     SoundEffect_Maybe_Typing_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_Pakukame_OnTick
+;     SoundEffect_PasswordCharInput_Setup
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_ShieldHitByMagic_OnTick
+;     SoundEffect_ShowPlayerMenu_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 SQ2_HI:                                     ; [$4007]
     db $00                                  ; [$4007] undefined
@@ -163,7 +163,7 @@ SQ2_HI:                                     ; [$4007]
 ;     Audio_Reset
 ;     Music_PlayForChannel
 ;     Music_PlayWave
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
 TRI_LINEAR:                                 ; [$4008]
     db $00,$00                              ; [$4008] undefined
@@ -172,7 +172,7 @@ TRI_LINEAR:                                 ; [$4008]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayWave
-;     SoundEffect_Handler_PlayerDied
+;     SoundEffect_PlayerDied_OnTick
 ;
 TRI_LO:                                     ; [$400a]
     db $00                                  ; [$400a] undefined
@@ -189,18 +189,18 @@ TRI_HI:                                     ; [$400b]
 ; XREFS:
 ;     Audio_Reset
 ;     Music_PlayNoise
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_LadderDropped_OnTick
+;     SoundEffect_MagicHitObstacle_OnTick
+;     SoundEffect_Maybe_Step_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Message_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PushBlock_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 NOISE_VOL:                                  ; [$400c]
     db $00                                  ; [$400c] undefined1
@@ -215,18 +215,18 @@ DAT_400d:                                   ; [$400d]
 ;
 ; XREFS:
 ;     Audio_Reset
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_LadderDropped_OnTick
+;     SoundEffect_MagicHitObstacle_OnTick
+;     SoundEffect_Maybe_Step_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Message_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PushBlock_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 NOISE_LO:                                   ; [$400e]
     db $00                                  ; [$400e] undefined
@@ -234,18 +234,18 @@ NOISE_LO:                                   ; [$400e]
 ;
 ; XREFS:
 ;     Audio_Reset
-;     SoundEffect_Handler_0x48
-;     SoundEffect_Handler_EnemyDied
-;     SoundEffect_Handler_HitEnemy
-;     SoundEffect_Handler_LadderDropped
-;     SoundEffect_Handler_MagicHitObstacle
-;     SoundEffect_Handler_Maybe_Step
-;     SoundEffect_Handler_Maybe_UseSpecialItem2
-;     SoundEffect_Handler_Message
-;     SoundEffect_Handler_OpenDoor
-;     SoundEffect_Handler_PlayerDied
-;     SoundEffect_Handler_PushBlock
-;     SoundEffect_Handler_Tilte
+;     SoundEffect_0x48_OnTick
+;     SoundEffect_EnemyDied_OnTick
+;     SoundEffect_HitEnemy_OnTick
+;     SoundEffect_LadderDropped_OnTick
+;     SoundEffect_MagicHitObstacle_OnTick
+;     SoundEffect_Maybe_Step_OnTick
+;     SoundEffect_Maybe_UseSpecialItem2_OnTick
+;     SoundEffect_Message_OnTick
+;     SoundEffect_OpenDoor_OnTick
+;     SoundEffect_PlayerDied_OnTick
+;     SoundEffect_PushBlock_OnTick
+;     SoundEffect_Tilte_OnTick
 ;
 NOISE_HI:                                   ; [$400f]
     db $00                                  ; [$400f] undefined
@@ -255,7 +255,7 @@ DMC_FREQ:                                   ; [$4010]
 
 ;
 ; XREFS:
-;     Sound_Init
+;     SoundEffects_Init
 ;
 DMC_RAW:                                    ; [$4011]
     db $00                                  ; [$4011] undefined
@@ -275,8 +275,8 @@ OAMDMA:                                     ; [$4014]
 
 ;
 ; XREFS:
-;     Sound_Init
-;     Sound_InitPlayingState
+;     Audio_InitPlayingState
+;     SoundEffects_Init
 ;
 SND_CHN:                                    ; [$4015]
     db $00                                  ; [$4015] SoundChannels
