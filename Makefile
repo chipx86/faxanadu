@@ -1,4 +1,5 @@
-ASM6F = asm6f
+CA65 = ca65
+LD65 = ld65
 
 NES_ROM = faxanadu.nes
 BUILD_NES_ROM = build/faxanadu.nes
@@ -97,9 +98,13 @@ $(MAIN_SOURCE): $(INCLUDED_SOURCES)
 	@touch $(MAIN_SOURCE)
 
 
-$(BUILD_NES_ROM): $(MAIN_SOURCE)
+./build/faxanadu.o: ./src/faxanadu.asm
 	@mkdir -p build
-	@cd src && $(ASM6F) -m faxanadu.asm "../$(BUILD_NES_ROM)"
+	@$(CA65) $< -o $@
+
+
+$(BUILD_NES_ROM): ./build/faxanadu.o ./src/ld65.cfg
+	@$(LD65) -o "$(BUILD_NES_ROM)" -C src/ld65.cfg ./build/faxanadu.o
 	@cp "$(BUILD_MESEN_FILE)" mesen/
 	@sha256sum "$(BUILD_NES_ROM)"
 

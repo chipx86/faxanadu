@@ -4,7 +4,8 @@
 ; PPU ($2000 - $2007)
 ;============================================================================
 
-    BASE $2000
+    .segment "PPU"
+    .ORG $2000
 
 ;
 ; XREFS:
@@ -17,7 +18,7 @@
 ;     Screen_WriteScrollVertPPUTileData
 ;
 PPUCTRL:                                    ; [$2000]
-    db $00                                  ; [$2000] PPUCtrlFlags
+    .byte $00                               ; [$2000] PPUCtrlFlags
 
 ;
 ; XREFS:
@@ -26,7 +27,7 @@ PPUCTRL:                                    ; [$2000]
 ;     PPU_HandleOnInterrupt
 ;
 PPUMASK:                                    ; [$2001]
-    db $00                                  ; [$2001] PPUMaskFlags
+    .byte $00                               ; [$2001] PPUMaskFlags
 
 ;
 ; XREFS:
@@ -35,24 +36,24 @@ PPUMASK:                                    ; [$2001]
 ;     PPU_HandleOnInterrupt
 ;
 PPUSTATUS:                                  ; [$2002]
-    db $00                                  ; [$2002] PPUStatusFlags
+    .byte $00                               ; [$2002] PPUStatusFlags
 
 ;
 ; XREFS:
 ;     OnInterrupt
 ;
 OAMADDR:                                    ; [$2003]
-    db $00                                  ; [$2003] byte
+    .byte $00                               ; [$2003] byte
 
 OAMDATA:                                    ; [$2004]
-    db $00                                  ; [$2004] byte
+    .byte $00                               ; [$2004] byte
 
 ;
 ; XREFS:
 ;     PPU_HandleOnInterrupt
 ;
 PPUSCROLL:                                  ; [$2005]
-    db $00                                  ; [$2005] byte
+    .byte $00                               ; [$2005] byte
 
 ;
 ; XREFS:
@@ -77,7 +78,7 @@ PPUSCROLL:                                  ; [$2005]
 ;     UI_SetHUDPPUAttributes
 ;
 PPUADDR:                                    ; [$2006]
-    db $00                                  ; [$2006] byte
+    .byte $00                               ; [$2006] byte
 
 ;
 ; XREFS:
@@ -103,4 +104,4 @@ PPUADDR:                                    ; [$2006]
 ;     UI_SetHUDPPUAttributes
 ;
 PPUDATA:                                    ; [$2007]
-    db $00                                  ; [$2007] byte
+    .byte $00                               ; [$2007] byte

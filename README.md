@@ -42,7 +42,7 @@ To learn more about all the cool stuff in Faxanadu, see:
 
 * [src](https://github.com/chipx86/faxanadu/tree/main/src) -
   Annotated assembly files for Faxanadu, compatible with
-  [asm6f](https://github.com/freem/asm6f).
+  [ca65](https://cc65.github.io/).
 * [html](https://github.com/chipx86/faxanadu/tree/main/html) -
   HTML version of the annotated HTML assembly files
 * [ghidra](https://github.com/chipx86/faxanadu/tree/main/ghidra) -
@@ -55,7 +55,7 @@ To learn more about all the cool stuff in Faxanadu, see:
 # Compiling Faxanadu
 
 The [source files](https://github.com/chipx86/faxanadu/tree/main/src) can be
-compiled using [asm6f](https://github.com/freem/asm6f), producing a
+compiled using [ca65](https://cc65.github.io/), producing a
 byte-for-byte copy of the Faxanadu code.
 
 This has been tested on macOS and Linux.

@@ -136,7 +136,8 @@ pre {
 ; PPU ($2000 - $2007)
 ;============================================================================
 </div><span class="l"></span>
-<span class="l"><span class="cd"><span class="i">BASE $2000</span></span></span>
+<span class="l"><span class="cd"><span class="i">.segment "PPU"</span></span></span>
+<span class="l"><span class="cd"><span class="i">.ORG $2000</span></span></span>
 <span class="l"></span>
 <a name="PPUCTRL"></a><div class="c">;
 ; XREFS:
@@ -149,7 +150,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>
 ;
 </div><span class="l"><a class="anc" name="2000" href="#2000">[2000]</a><a href="#PPUCTRL" class="la">PPUCTRL:</a><span class="ce">; [$2000]</span></span>
-<span class="l"><a class="anc" name="2000" href="#2000">[2000]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2000] PPUCtrlFlags</span></span>
+<span class="l"><a class="anc" name="2000" href="#2000">[2000]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2000] PPUCtrlFlags</span></span>
 <span class="l"></span>
 <a name="PPUMASK"></a><div class="c">;
 ; XREFS:
@@ -158,7 +159,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
 </div><span class="l"><a class="anc" name="2001" href="#2001">[2001]</a><a href="#PPUMASK" class="la">PPUMASK:</a><span class="ce">; [$2001]</span></span>
-<span class="l"><a class="anc" name="2001" href="#2001">[2001]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2001] PPUMaskFlags</span></span>
+<span class="l"><a class="anc" name="2001" href="#2001">[2001]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2001] PPUMaskFlags</span></span>
 <span class="l"></span>
 <a name="PPUSTATUS"></a><div class="c">;
 ; XREFS:
@@ -167,24 +168,24 @@ pre {
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
 </div><span class="l"><a class="anc" name="2002" href="#2002">[2002]</a><a href="#PPUSTATUS" class="la">PPUSTATUS:</a><span class="ce">; [$2002]</span></span>
-<span class="l"><a class="anc" name="2002" href="#2002">[2002]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2002] PPUStatusFlags</span></span>
+<span class="l"><a class="anc" name="2002" href="#2002">[2002]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2002] PPUStatusFlags</span></span>
 <span class="l"></span>
 <a name="OAMADDR"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#OnInterrupt">OnInterrupt</a>
 ;
 </div><span class="l"><a class="anc" name="2003" href="#2003">[2003]</a><a href="#OAMADDR" class="la">OAMADDR:</a><span class="ce">; [$2003]</span></span>
-<span class="l"><a class="anc" name="2003" href="#2003">[2003]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2003] byte</span></span>
+<span class="l"><a class="anc" name="2003" href="#2003">[2003]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2003] byte</span></span>
 <span class="l"></span>
 <a name="OAMDATA"></a><span class="l"><a class="anc" name="2004" href="#2004">[2004]</a><a href="#OAMDATA" class="la">OAMDATA:</a><span class="ce">; [$2004]</span></span>
-<span class="l"><a class="anc" name="2004" href="#2004">[2004]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2004] byte</span></span>
+<span class="l"><a class="anc" name="2004" href="#2004">[2004]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2004] byte</span></span>
 <span class="l"></span>
 <a name="PPUSCROLL"></a><div class="c">;
 ; XREFS:
 ;     <a href="PRG15_MIRROR.html#PPU_HandleOnInterrupt">PPU_HandleOnInterrupt</a>
 ;
 </div><span class="l"><a class="anc" name="2005" href="#2005">[2005]</a><a href="#PPUSCROLL" class="la">PPUSCROLL:</a><span class="ce">; [$2005]</span></span>
-<span class="l"><a class="anc" name="2005" href="#2005">[2005]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2005] byte</span></span>
+<span class="l"><a class="anc" name="2005" href="#2005">[2005]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2005] byte</span></span>
 <span class="l"></span>
 <a name="PPUADDR"></a><div class="c">;
 ; XREFS:
@@ -209,7 +210,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
 </div><span class="l"><a class="anc" name="2006" href="#2006">[2006]</a><a href="#PPUADDR" class="la">PPUADDR:</a><span class="ce">; [$2006]</span></span>
-<span class="l"><a class="anc" name="2006" href="#2006">[2006]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2006] byte</span></span>
+<span class="l"><a class="anc" name="2006" href="#2006">[2006]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2006] byte</span></span>
 <span class="l"></span>
 <a name="PPUDATA"></a><div class="c">;
 ; XREFS:
@@ -235,7 +236,7 @@ pre {
 ;     <a href="PRG15_MIRROR.html#UI_SetHUDPPUAttributes">UI_SetHUDPPUAttributes</a>
 ;
 </div><span class="l"><a class="anc" name="2007" href="#2007">[2007]</a><a href="#PPUDATA" class="la">PPUDATA:</a><span class="ce">; [$2007]</span></span>
-<span class="l"><a class="anc" name="2007" href="#2007">[2007]</a><span class="cd"><span class="i">db</span> <span class="o">$00</span></span><span class="ce">; [$2007] byte</span></span>
+<span class="l"><a class="anc" name="2007" href="#2007">[2007]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$2007] byte</span></span>
 </pre>
  </body>
 </html>

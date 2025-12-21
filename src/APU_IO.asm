@@ -4,7 +4,8 @@
 ; APU_IO ($4000 - $4017)
 ;============================================================================
 
-    BASE $4000
+    .segment "APU_IO"
+    .ORG $4000
 
 ;
 ; XREFS:
@@ -13,7 +14,7 @@
 ;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_VOL:                                    ; [$4000]
-    db $00                                  ; [$4000] undefined
+    .byte $00                               ; [$4000] undefined
 
 ;
 ; XREFS:
@@ -22,7 +23,7 @@ SQ1_VOL:                                    ; [$4000]
 ;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_SWEEP:                                  ; [$4001]
-    db $00                                  ; [$4001] undefined
+    .byte $00                               ; [$4001] undefined
 
 ;
 ; XREFS:
@@ -32,7 +33,7 @@ SQ1_SWEEP:                                  ; [$4001]
 ;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_LO:                                     ; [$4002]
-    db $00                                  ; [$4002] undefined
+    .byte $00                               ; [$4002] undefined
 
 ;
 ; XREFS:
@@ -41,7 +42,7 @@ SQ1_LO:                                     ; [$4002]
 ;     SoundEffect_PlayerDied_OnTick
 ;
 SQ1_HI:                                     ; [$4003]
-    db $00                                  ; [$4003] undefined
+    .byte $00                               ; [$4003] undefined
 
 ;
 ; XREFS:
@@ -69,7 +70,7 @@ SQ1_HI:                                     ; [$4003]
 ;     SoundEffect_Tilte_OnTick
 ;
 SQ2_VOL:                                    ; [$4004]
-    db $00                                  ; [$4004] undefined
+    .byte $00                               ; [$4004] undefined
 
 ;
 ; XREFS:
@@ -98,7 +99,7 @@ SQ2_VOL:                                    ; [$4004]
 ;     SoundEffect_Tilte_OnTick
 ;
 SQ2_SWEEP:                                  ; [$4005]
-    db $00                                  ; [$4005] undefined
+    .byte $00                               ; [$4005] undefined
 
 ;
 ; XREFS:
@@ -127,7 +128,7 @@ SQ2_SWEEP:                                  ; [$4005]
 ;     SoundEffect_Tilte_OnTick
 ;
 SQ2_LO:                                     ; [$4006]
-    db $00                                  ; [$4006] undefined
+    .byte $00                               ; [$4006] undefined
 
 ;
 ; XREFS:
@@ -156,7 +157,7 @@ SQ2_LO:                                     ; [$4006]
 ;     SoundEffect_Tilte_OnTick
 ;
 SQ2_HI:                                     ; [$4007]
-    db $00                                  ; [$4007] undefined
+    .byte $00                               ; [$4007] undefined
 
 ;
 ; XREFS:
@@ -166,7 +167,7 @@ SQ2_HI:                                     ; [$4007]
 ;     SoundEffect_PlayerDied_OnTick
 ;
 TRI_LINEAR:                                 ; [$4008]
-    db $00,$00                              ; [$4008] undefined
+    .byte $00,$00                           ; [$4008] undefined
 
 ;
 ; XREFS:
@@ -175,7 +176,7 @@ TRI_LINEAR:                                 ; [$4008]
 ;     SoundEffect_PlayerDied_OnTick
 ;
 TRI_LO:                                     ; [$400a]
-    db $00                                  ; [$400a] undefined
+    .byte $00                               ; [$400a] undefined
 
 ;
 ; XREFS:
@@ -183,7 +184,7 @@ TRI_LO:                                     ; [$400a]
 ;     Music_PlayWave
 ;
 TRI_HI:                                     ; [$400b]
-    db $00                                  ; [$400b] undefined
+    .byte $00                               ; [$400b] undefined
 
 ;
 ; XREFS:
@@ -203,14 +204,14 @@ TRI_HI:                                     ; [$400b]
 ;     SoundEffect_Tilte_OnTick
 ;
 NOISE_VOL:                                  ; [$400c]
-    db $00                                  ; [$400c] undefined1
+    .byte $00                               ; [$400c] undefined1
 
 ;
 ; XREFS:
 ;     Music_PlayNoise
 ;
 DAT_400d:                                   ; [$400d]
-    db $00                                  ; [$400d] undefined1
+    .byte $00                               ; [$400d] undefined1
 
 ;
 ; XREFS:
@@ -229,7 +230,7 @@ DAT_400d:                                   ; [$400d]
 ;     SoundEffect_Tilte_OnTick
 ;
 NOISE_LO:                                   ; [$400e]
-    db $00                                  ; [$400e] undefined
+    .byte $00                               ; [$400e] undefined
 
 ;
 ; XREFS:
@@ -248,30 +249,30 @@ NOISE_LO:                                   ; [$400e]
 ;     SoundEffect_Tilte_OnTick
 ;
 NOISE_HI:                                   ; [$400f]
-    db $00                                  ; [$400f] undefined
+    .byte $00                               ; [$400f] undefined
 
 DMC_FREQ:                                   ; [$4010]
-    db $00                                  ; [$4010] undefined
+    .byte $00                               ; [$4010] undefined
 
 ;
 ; XREFS:
 ;     SoundEffects_Init
 ;
 DMC_RAW:                                    ; [$4011]
-    db $00                                  ; [$4011] undefined
+    .byte $00                               ; [$4011] undefined
 
 DMC_START:                                  ; [$4012]
-    db $00                                  ; [$4012] undefined
+    .byte $00                               ; [$4012] undefined
 
 DMC_LEN:                                    ; [$4013]
-    db $00                                  ; [$4013] undefined
+    .byte $00                               ; [$4013] undefined
 
 ;
 ; XREFS:
 ;     OnInterrupt
 ;
 OAMDMA:                                     ; [$4014]
-    db $00                                  ; [$4014] undefined
+    .byte $00                               ; [$4014] undefined
 
 ;
 ; XREFS:
@@ -279,18 +280,18 @@ OAMDMA:                                     ; [$4014]
 ;     SoundEffects_Init
 ;
 SND_CHN:                                    ; [$4015]
-    db $00                                  ; [$4015] SoundChannels
+    .byte $00                               ; [$4015] SoundChannels
 
 ;
 ; XREFS:
 ;     Input_HandleOnInterrupt
 ;
 JOY1:                                       ; [$4016]
-    db $00                                  ; [$4016] undefined1
+    .byte $00                               ; [$4016] undefined1
 
 ;
 ; XREFS:
 ;     Input_HandleOnInterrupt
 ;
 JOY2:                                       ; [$4017]
-    db $00                                  ; [$4017] undefined1
+    .byte $00                               ; [$4017] undefined1

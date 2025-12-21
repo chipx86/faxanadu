@@ -4,7 +4,8 @@
 ; PRG14 ($8000 - $bfff)
 ;============================================================================
 
-    BASE $8000
+    .segment "PRG14"
+    .ORG $8000
 
 ;============================================================================
 ; TODO: Document Sprites_UpdateAll
@@ -153,131 +154,139 @@ Sprites_UpdateAllStates:                    ; [$8070]
 ;     CurrentSprite_UpdateState
 ;
 SPRITE_UPDATE_HANDLERS:                     ; [$8087]
-    dw SpriteUpdateHandler_Invisible-1      ; [0]:
-    dw SpriteUpdateHandler_Bread-1          ; [1]: Dropped: Bread
-    dw SpriteUpdateHandler_Coin-1           ; [2]: Dropped: Coin
-    dw SpriteUpdateHandler_Garbled03-1      ; [3]: Enemy: ?
-    dw SpriteUpdateHandler_Enemy_Raiden-1   ; [4]: Enemy: Raiden
-    dw SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
-    dw SpriteUpdateHandler_Enemy_Zombie-1   ; [6]: Enemy: Zombie
-    dw SpriteUpdateHandler_Enemy_Hornet-1   ; [7]: Enemy: Hornet
-    dw SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
-    dw SpriteUpdateHandler_Enemy_Lilith-1   ; [9]: Enemy: Lilith
+    .word SpriteUpdateHandler_Invisible-1   ; [0]:
+    .word SpriteUpdateHandler_Bread-1       ; [1]: Dropped: Bread
+    .word SpriteUpdateHandler_Coin-1        ; [2]: Dropped: Coin
+    .word SpriteUpdateHandler_Garbled03-1   ; [3]: Enemy: ?
+    .word SpriteUpdateHandler_Enemy_Raiden-1 ; [4]: Enemy: Raiden
+    .word SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
+    .word SpriteUpdateHandler_Enemy_Zombie-1 ; [6]: Enemy: Zombie
+    .word SpriteUpdateHandler_Enemy_Hornet-1 ; [7]: Enemy: Hornet
+    .word SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
+    .word SpriteUpdateHandler_Enemy_Lilith-1 ; [9]: Enemy: Lilith
 
 
 ;============================================================================
 ; SpriteUpdateHandler_Enemy_Garbled_10
 ;============================================================================
-    dw SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
-    dw SpriteUpdateHandler_Enemy_Yuinaru-1  ; [11]: Enemy: Yuinaru
-    dw SpriteUpdateHandler_Enemy_Snowman-1  ; [12]: Enemy: Snowman
-    dw SpriteUpdateHandler_Enemy_Nash-1     ; [13]: Enemy: Nash
-    dw SpriteUpdateHandler_Enemy_FireGiant-1 ; [14]: Enemy: Fire Giant
-    dw SpriteUpdateHandler_Enemy_Ishiisu-1  ; [15]: Enemy: Ishiisu
-    dw SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution
-                                                 ; Hood
-    dw SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
-    dw SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1 ; [18]: Boss: unused
-                                                         ; (round body of
-                                                         ; snake boss)
-    dw SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy death
-    dw SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect: Lightning
-                                                    ; ball
-    dw SpriteUpdateHandler_Enemy_Charron-1  ; [21]: Enemy: Charron
-    dw SpriteUpdateHandler_Invisible-1      ; [22]: Enemy: ? (Unused)
-    dw SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
-    dw SpriteUpdateHandler_Enemy_Sugata-1   ; [24]: Enemy: Sugata
-    dw SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
-    dw SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
-    dw SpriteUpdateHandler_Enemy_Myconid-1  ; [27]: Enemy: Myconid
-    dw SpriteUpdateHandler_Enemy_Naga-1     ; [28]: Enemy: Naga
-    dw SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Skeleton Knight
-                                            ; (unused)
-    dw SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant Strider
-    dw SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
-                                                      ; Gawaine
-    dw SpriteUpdateHandler_Enemy_Maskman-1  ; [32]: Enemy: Maskman
-    dw thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]: Enemy:
-                                                            ; Wolfman
-    dw SpriteUpdateHandler_Enemy_Yareeka-1  ; [34]: Enemy: Yareeka
-    dw SpriteUpdateHandler_Enemy_Magman-1   ; [35]: Enemy: Magman
-    dw SpriteUpdateHandler_Enemy_Unused_CurlyTail-1 ; [36]: Enemy:
-                                                    ; Curly-tailed guy with
-                                                    ; spear (unused)
-    dw SpriteUpdateHandler_Invisible-1      ; [37]: Enemy: ? (unused)
-    dw SpriteUpdateHandler_Enemy_Ikeda-1    ; [38]: Enemy: Ikeda
-    dw SpriteUpdateHandler_Enemy_MuppetGuy-1 ; [39]: Enemy: Muppet guy
-                                             ; (unused)
-    dw SpriteUpdateHandler_Enemy_Lamprey-1  ; [40]: Enemy: Lamprey
-    dw SpriteUpdateHandler_Invisible-1      ; [41]: Enemy: ? (unused)
-    dw SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
-    dw SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1 ; [43]: Enemy:
-                                                         ; Winged skeleton
-                                                         ; (unused)
-    dw SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
-    dw SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
-    dw SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
-    dw SpriteUpdateHandler_Boss_Borabohra-1 ; [47]: Boss: Borabohra
-    dw SpriteUpdateHandler_Boss_Pakukame-1  ; [48]: Boss: Pakukame
-    dw SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
-    dw SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
-    dw SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
-    dw SpriteUpdateHandler_NPC_Walking-1    ; [52]: NPC: Walking Man 1
-    dw thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Blue lady
+    .word SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
+    .word SpriteUpdateHandler_Enemy_Yuinaru-1 ; [11]: Enemy: Yuinaru
+    .word SpriteUpdateHandler_Enemy_Snowman-1 ; [12]: Enemy: Snowman
+    .word SpriteUpdateHandler_Enemy_Nash-1  ; [13]: Enemy: Nash
+    .word SpriteUpdateHandler_Enemy_FireGiant-1 ; [14]: Enemy: Fire Giant
+    .word SpriteUpdateHandler_Enemy_Ishiisu-1 ; [15]: Enemy: Ishiisu
+    .word SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution
+                                                    ; Hood
+    .word SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
+    .word SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1 ; [18]: Boss:
+                                                            ; unused (round
+                                                            ; body of snake
+                                                            ; boss)
+    .word SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy death
+    .word SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect:
+                                                       ; Lightning ball
+    .word SpriteUpdateHandler_Enemy_Charron-1 ; [21]: Enemy: Charron
+    .word SpriteUpdateHandler_Invisible-1   ; [22]: Enemy: ? (Unused)
+    .word SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
+    .word SpriteUpdateHandler_Enemy_Sugata-1 ; [24]: Enemy: Sugata
+    .word SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
+    .word SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
+    .word SpriteUpdateHandler_Enemy_Myconid-1 ; [27]: Enemy: Myconid
+    .word SpriteUpdateHandler_Enemy_Naga-1  ; [28]: Enemy: Naga
+    .word SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Skeleton Knight
+                                               ; (unused)
+    .word SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant
+                                                   ; Strider
+    .word SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
+                                                         ; Gawaine
+    .word SpriteUpdateHandler_Enemy_Maskman-1 ; [32]: Enemy: Maskman
+    .word thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]: Enemy:
+                                                               ; Wolfman
+    .word SpriteUpdateHandler_Enemy_Yareeka-1 ; [34]: Enemy: Yareeka
+    .word SpriteUpdateHandler_Enemy_Magman-1 ; [35]: Enemy: Magman
+    .word SpriteUpdateHandler_Enemy_Unused_CurlyTail-1 ; [36]: Enemy:
+                                                       ; Curly-tailed guy
+                                                       ; with spear (unused)
+    .word SpriteUpdateHandler_Invisible-1   ; [37]: Enemy: ? (unused)
+    .word SpriteUpdateHandler_Enemy_Ikeda-1 ; [38]: Enemy: Ikeda
+    .word SpriteUpdateHandler_Enemy_MuppetGuy-1 ; [39]: Enemy: Muppet guy
                                                 ; (unused)
-    dw thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Child (unused)
-    dw SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
-    dw SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Artist
-    dw SpriteUpdateHandler_NPC_Priest-1     ; [57]: NPC: Priest
-    dw SpriteUpdateHandler_NPC_King-1       ; [58]: NPC: King
-    dw SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
-    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key Salesman
-    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking Man
-    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in Chair
-    dw SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting Man
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
-                                                     ; Salesman
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in
-                                                     ; Blue Dress with Cup
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: Guard
-    dw SpriteUpdateHandler_NPC_Doctor-1     ; [67]: NPC: Doctor
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking
-                                                     ; Woman 1
-    dw SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking
-                                                     ; Woman 2
-    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy:
-                                                        ; Eyeball (unused)
-    dw SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy: Zozura
-    dw SpriteUpdateHandler_Item_Standard-1  ; [72]: Item: Glove
-    dw SpriteUpdateHandler_Item_Special-1   ; [73]: Item: Black Onyx
-    dw SpriteUpdateHandler_Item_Special-1   ; [74]: Item: Pendant
-    dw SpriteUpdateHandler_Item_Standard-1  ; [75]: Item: Red Potion
-    dw SpriteUpdateHandler_Item_Standard-1  ; [76]: Item: Poison
-    dw SpriteUpdateHandler_Item_Standard-1  ; [77]: Item: Elixir
-    dw SpriteUpdateHandler_Item_Standard-1  ; [78]: Item: Ointment
-    dw SpriteUpdateHandler_Invisible-1      ; [79]: Trigger: Intro
-    dw SpriteUpdateHandler_Item_Standard-1  ; [80]: Item: Mattock
-    dw SpriteUpdateHandler_Magic_81-1       ; [81]: Magic: ?
-    dw SpriteUpdateHandler_Effect_Fountain-1 ; [82]: Effect: Fountain
-    dw SpriteUpdateHandler_Magic_83-1       ; [83]: Magic: ?
-    dw SpriteUpdateHandler_EnemyMagic-1     ; [84]: Magic: Enemy Fireball
-    dw SpriteUpdateHandler_Item_Standard-1  ; [85]: Item: Wing Boots
-    dw SpriteUpdateHandler_Item_Standard-1  ; [86]: Item: Hour Glass
-    dw SpriteUpdateHandler_Item_Special-1   ; [87]: Item: Magical Rod
-    dw SpriteUpdateHandler_Item_Special-1   ; [88]: Item: Battle Suit
-    dw SpriteUpdateHandler_Item_Special-1   ; [89]: Item: Battle Helmet
-    dw SpriteUpdateHandler_Item_Special-1   ; [90]: Item: Dragon Slayer
-    dw SpriteUpdateHandler_Item_Standard-1  ; [91]: Item: Mattock
-    dw SpriteUpdateHandler_Item_Standard-1  ; [92]: Item: Wing Boots (from
-                                            ; quest)
-    dw SpriteUpdateHandler_Item_Standard-1  ; [93]: Item: Red Potion
-    dw SpriteUpdateHandler_Item_Standard-1  ; [94]: Item: Poison
-    dw SpriteUpdateHandler_Item_Standard-1  ; [95]: Item: Glove
-    dw SpriteUpdateHandler_Item_Standard-1  ; [96]: Item: Ointment
-    dw SpriteUpdateHandler_Effect_Spring-1  ; [97]: Effect: Spring of Trunk
-    dw SpriteUpdateHandler_Effect_Spring-1  ; [98]: Effect: Spring of Sky
-    dw SpriteUpdateHandler_Effect_Spring-1  ; [99]: Effect: Spring of Tower
-    dw SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
+    .word SpriteUpdateHandler_Enemy_Lamprey-1 ; [40]: Enemy: Lamprey
+    .word SpriteUpdateHandler_Invisible-1   ; [41]: Enemy: ? (unused)
+    .word SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
+    .word SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1 ; [43]: Enemy:
+                                                            ; Winged skeleton
+                                                            ; (unused)
+    .word SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
+    .word SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
+    .word SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
+    .word SpriteUpdateHandler_Boss_Borabohra-1 ; [47]: Boss: Borabohra
+    .word SpriteUpdateHandler_Boss_Pakukame-1 ; [48]: Boss: Pakukame
+    .word SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
+    .word SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
+    .word SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
+    .word SpriteUpdateHandler_NPC_Walking-1 ; [52]: NPC: Walking Man 1
+    .word thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Blue lady
+                                                   ; (unused)
+    .word thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Child
+                                                   ; (unused)
+    .word SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
+    .word SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Artist
+    .word SpriteUpdateHandler_NPC_Priest-1  ; [57]: NPC: Priest
+    .word SpriteUpdateHandler_NPC_King-1    ; [58]: NPC: King
+    .word SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
+    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key
+                                                       ; Salesman
+    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking
+                                                       ; Man
+    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in
+                                                       ; Chair
+    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting
+                                                       ; Man
+    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
+                                                        ; Salesman
+    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in
+                                                        ; Blue Dress with Cup
+    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: Guard
+    .word SpriteUpdateHandler_NPC_Doctor-1  ; [67]: NPC: Doctor
+    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking
+                                                        ; Woman 1
+    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking
+                                                        ; Woman 2
+    .word SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy:
+                                                           ; Eyeball (unused)
+    .word SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy:
+                                                           ; Zozura
+    .word SpriteUpdateHandler_Item_Standard-1 ; [72]: Item: Glove
+    .word SpriteUpdateHandler_Item_Special-1 ; [73]: Item: Black Onyx
+    .word SpriteUpdateHandler_Item_Special-1 ; [74]: Item: Pendant
+    .word SpriteUpdateHandler_Item_Standard-1 ; [75]: Item: Red Potion
+    .word SpriteUpdateHandler_Item_Standard-1 ; [76]: Item: Poison
+    .word SpriteUpdateHandler_Item_Standard-1 ; [77]: Item: Elixir
+    .word SpriteUpdateHandler_Item_Standard-1 ; [78]: Item: Ointment
+    .word SpriteUpdateHandler_Invisible-1   ; [79]: Trigger: Intro
+    .word SpriteUpdateHandler_Item_Standard-1 ; [80]: Item: Mattock
+    .word SpriteUpdateHandler_Magic_81-1    ; [81]: Magic: ?
+    .word SpriteUpdateHandler_Effect_Fountain-1 ; [82]: Effect: Fountain
+    .word SpriteUpdateHandler_Magic_83-1    ; [83]: Magic: ?
+    .word SpriteUpdateHandler_EnemyMagic-1  ; [84]: Magic: Enemy Fireball
+    .word SpriteUpdateHandler_Item_Standard-1 ; [85]: Item: Wing Boots
+    .word SpriteUpdateHandler_Item_Standard-1 ; [86]: Item: Hour Glass
+    .word SpriteUpdateHandler_Item_Special-1 ; [87]: Item: Magical Rod
+    .word SpriteUpdateHandler_Item_Special-1 ; [88]: Item: Battle Suit
+    .word SpriteUpdateHandler_Item_Special-1 ; [89]: Item: Battle Helmet
+    .word SpriteUpdateHandler_Item_Special-1 ; [90]: Item: Dragon Slayer
+    .word SpriteUpdateHandler_Item_Standard-1 ; [91]: Item: Mattock
+    .word SpriteUpdateHandler_Item_Standard-1 ; [92]: Item: Wing Boots (from
+                                              ; quest)
+    .word SpriteUpdateHandler_Item_Standard-1 ; [93]: Item: Red Potion
+    .word SpriteUpdateHandler_Item_Standard-1 ; [94]: Item: Poison
+    .word SpriteUpdateHandler_Item_Standard-1 ; [95]: Item: Glove
+    .word SpriteUpdateHandler_Item_Standard-1 ; [96]: Item: Ointment
+    .word SpriteUpdateHandler_Effect_Spring-1 ; [97]: Effect: Spring of Trunk
+    .word SpriteUpdateHandler_Effect_Spring-1 ; [98]: Effect: Spring of Sky
+    .word SpriteUpdateHandler_Effect_Spring-1 ; [99]: Effect: Spring of Tower
+    .word SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
 
 ;============================================================================
 ; TODO: Document Sprites_Maybe_UpdateHitByMagic
@@ -610,42 +619,42 @@ SpriteUpdateHandler_Effect_LightningBall20: ; [$828b]
     DEY
     BPL @LAB_PRG14__82a2
     RTS
-    db $01                                  ; [0]:
-    db $02                                  ; [1]:
-    db $03                                  ; [2]:
+    .byte $01                               ; [0]:
+    .byte $02                               ; [1]:
+    .byte $03                               ; [2]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;
 BYTE_ARRAY_PRG14__82ec_3_:                  ; [$82ef]
-    db $03                                  ; [3]:
-    db $ff                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $03                               ; [3]:
+    .byte $ff                               ; [0]:
+    .byte $00                               ; [1]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;
 BYTE_ARRAY_PRG14__82f0_2_:                  ; [$82f2]
-    db $ff                                  ; [2]:
+    .byte $ff                               ; [2]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;
 BYTE_ARRAY_PRG14__82f0_3_:                  ; [$82f3]
-    db $00                                  ; [3]:
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
+    .byte $00                               ; [3]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $00                               ; [2]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Effect_LightningBall20
 ;
 BYTE_ARRAY_PRG14__82f4_3_:                  ; [$82f7]
-    db $40                                  ; [3]:
+    .byte $40                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Sprite_CalcDistanceXToPlayer
@@ -925,28 +934,28 @@ Sprites_CalcYFromGravity:                   ; [$83e1]
 ;     Sprites_CalcYFromGravity
 ;
 SPRITE_BEHAVIOR_HOP_PEAK_TICKS:             ; [$83f7]
-    db $ff                                  ; [0]:
-    db $7f                                  ; [1]:
-    db $3f                                  ; [2]:
-    db $1f                                  ; [3]:
-    db $0f                                  ; [4]:
-    db $07                                  ; [5]:
-    db $03                                  ; [6]:
-    db $01                                  ; [7]:
+    .byte $ff                               ; [0]:
+    .byte $7f                               ; [1]:
+    .byte $3f                               ; [2]:
+    .byte $1f                               ; [3]:
+    .byte $0f                               ; [4]:
+    .byte $07                               ; [5]:
+    .byte $03                               ; [6]:
+    .byte $01                               ; [7]:
 
 ;
 ; XREFS:
 ;     Sprites_CalcYFromGravity
 ;
 SPRITES_MAYBE_GRAVITY:                      ; [$83ff]
-    db $00                                  ; [0]:
-    db $80                                  ; [1]:
-    db $40                                  ; [2]:
-    db $20                                  ; [3]:
-    db $10                                  ; [4]:
-    db $08                                  ; [5]:
-    db $04                                  ; [6]:
-    db $02                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $80                               ; [1]:
+    .byte $40                               ; [2]:
+    .byte $20                               ; [3]:
+    .byte $10                               ; [4]:
+    .byte $08                               ; [5]:
+    .byte $04                               ; [6]:
+    .byte $02                               ; [7]:
 
 ;============================================================================
 ; TODO: Document BScript_Action_FlipXDirection
@@ -1381,8 +1390,8 @@ SpriteBehavior_RestoreXRegister:            ; [$852e]
 ;     FUN_PRG14__854c
 ;
 SPRITE_WALK_PIXEL_MOVEMENT_TABLE:           ; [$8532]
-    db $00                                  ; [0]: 0 pixel movement
-    db $0f                                  ; [1]: 15 pixel movement
+    .byte $00                               ; [0]: 0 pixel movement
+    .byte $0f                               ; [1]: 15 pixel movement
 
 ;============================================================================
 ; TODO: Document Sprite_CanClimb
@@ -1689,7 +1698,7 @@ Sprite_CalculateNewVertPos:                 ; [$85ca]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC $861d,Y
+    ADC BYTE_ARRAY_PRG14__861d,Y
     STA Arg_PixelPosX
     LDY CurrentSprites_HitBoxTypes,X
     LDA CurrentSprites_YPos,X
@@ -1704,8 +1713,8 @@ Sprite_CalculateNewVertPos:                 ; [$85ca]
     RTS
 
 BYTE_ARRAY_PRG14__861d:                     ; [$861d]
-    db $00                                  ; [0]:
-    db $0f                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $0f                               ; [1]:
 
 ;============================================================================
 ; TODO: Document Sprites_SetCurrentSpriteCanMove
@@ -2512,10 +2521,10 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
 ;     Player_HitSpriteWithWeapon
 ;
 WEAPON_TO_GLOVE_STRENGTH:                   ; [$88c7]
-    db $02                                  ; [0]: Hand Dagger -- 2HP
-    db $04                                  ; [1]: Long Sword -- 4HP
-    db $08                                  ; [2]: Giant Blade -- 8HP
-    db $0a                                  ; [3]: Dragon Slayer -- 10HP
+    .byte $02                               ; [0]: Hand Dagger -- 2HP
+    .byte $04                               ; [1]: Long Sword -- 4HP
+    .byte $08                               ; [2]: Giant Blade -- 8HP
+    .byte $0a                               ; [3]: Dragon Slayer -- 10HP
 
 
 ;============================================================================
@@ -2569,7 +2578,7 @@ Sprites_IsSpriteOutOfWeaponRange:           ; [$88cb]
     ; Check the distance in the Y direction between the
     ; weapon and the sprite.
     ;
-    LDA MAYBE_SPRITE_EXTENTS+1,Y
+    LDA MAYBE_SPRITE_EXTENTS_1_,Y
     CLC
     ADC Maybe_WeaponRange_Y
     STA Temp_00
@@ -2695,15 +2704,15 @@ Player_HandleCollision_NoOp:                ; [$8957]
 ;     CurrentSprite_CheckHitPlayer
 ;
 SPRITE_COLLISION_HANDLERS:                  ; [$8958]
-    dw Player_HandleTouchEnemy-1            ; Player_HandleTouchEnemy
+    .word Player_HandleTouchEnemy-1         ; Player_HandleTouchEnemy
                                             ; [$PRG14::8958]
-    dw Player_HandleTouchBreadOrCoin-1      ; Coin/meat touched
-    dw Player_CheckHandlePressUpOnNPC-1     ; Press Up on NPC
-    dw $8956                                ; Large animation. Just return.
-    dw Player_HandleTouchNPC-1              ; Collide with NPC
-    dw Player_HandleTouchItem-1             ; Item touched
-    dw Player_HandleTouchEnemyMagic-1       ; Enemy magic touched
-    dw Player_HandleTouchEnemy-1            ; Enemy touched
+    .word Player_HandleTouchBreadOrCoin-1   ; Coin/meat touched
+    .word Player_CheckHandlePressUpOnNPC-1  ; Press Up on NPC
+    .word $8956                             ; Large animation. Just return.
+    .word Player_HandleTouchNPC-1           ; Collide with NPC
+    .word Player_HandleTouchItem-1          ; Item touched
+    .word Player_HandleTouchEnemyMagic-1    ; Enemy magic touched
+    .word Player_HandleTouchEnemy-1         ; Enemy touched
 
 
 ;============================================================================
@@ -2794,8 +2803,8 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_8998                         ; If so, return.
     JSR $f859                               ; Execute the handler.
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$8995]
@@ -2935,15 +2944,15 @@ Player_HandleTouchEnemy:                    ; [$89ae]
     JSR Player_SetDamagedBySprite           ; Mark the player as damaged and
                                             ; set state.
     JMP Player_ApplyDamage                  ; Apply damage.
-    db $60                                  ; [$89d2] byte
+    .byte $60                               ; [$89d2] byte
 
 ;
 ; XREFS:
 ;     Player_SetDamagedBySprite
 ;
 SPRITES_FACING_VALUE_TO_OPPOSITE_PLAYER_FACING_BITMASK: ; [$89d3]
-    db $40                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $40                               ; [0]:
+    .byte $00                               ; [1]:
 
 
 ;============================================================================
@@ -3043,8 +3052,8 @@ Player_HandleTouchNPC:                      ; [$89ef]
     BEQ RETURN_8998                         ; If so, return.
     JSR $f859                               ; Else, execute the IScript at
                                             ; that value.
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3134,16 +3143,16 @@ Sprite_SetBoundsFromTemp:                   ; [$8a51]
     RTS
 
 SPRITE_GETBOUNDS_COMMON:                    ; [$8a71]
-    db $30                                  ; [0]:
-    db $08                                  ; [1]:
-    db $f0                                  ; [2]:
-    db $00                                  ; [3]:
+    .byte $30                               ; [0]:
+    .byte $08                               ; [1]:
+    .byte $f0                               ; [2]:
+    .byte $00                               ; [3]:
 
 SPRITE_GETBOUNDS_MASKMAN:                   ; [$8a75]
-    db $20                                  ; [0]:
-    db $10                                  ; [1]:
-    db $f8                                  ; [2]:
-    db $00                                  ; [3]:
+    .byte $20                               ; [0]:
+    .byte $10                               ; [1]:
+    .byte $f8                               ; [2]:
+    .byte $00                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Player_ApplyDamage
@@ -3239,10 +3248,10 @@ RETURN_8AD7:                                ; [$8ad7]
 ;     Player_ApplyDamage
 ;
 ARMOR_DEFENSE_MULTIPLIERS:                  ; [$8ad8]
-    db $00                                  ; [0]: Leather (0)
-    db $01                                  ; [1]: Studded Mail (1)
-    db $02                                  ; [2]: Full Plate (2)
-    db $04                                  ; [3]: Battle Suit (4)
+    .byte $00                               ; [0]: Leather (0)
+    .byte $01                               ; [1]: Studded Mail (1)
+    .byte $02                               ; [2]: Full Plate (2)
+    .byte $04                               ; [3]: Battle Suit (4)
 
 
 ;============================================================================
@@ -3485,11 +3494,11 @@ CastMagic_HitHandler_NoOp:                  ; [$8b72]
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_WIDTHS:                      ; [$8b73]
-    db $0b                                  ; [0]: Deluge (11)
-    db $0b                                  ; [1]: Thunder (11)
-    db $1b                                  ; [2]: Fire (27)
-    db $0b                                  ; [3]: Death (11)
-    db $0b                                  ; [4]: Tilte (11)
+    .byte $0b                               ; [0]: Deluge (11)
+    .byte $0b                               ; [1]: Thunder (11)
+    .byte $1b                               ; [2]: Fire (27)
+    .byte $0b                               ; [3]: Death (11)
+    .byte $0b                               ; [4]: Tilte (11)
 
 
 ;============================================================================
@@ -3504,11 +3513,11 @@ CAST_MAGIC_HIT_WIDTHS:                      ; [$8b73]
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_HEIGHTS:                     ; [$8b78]
-    db $0b                                  ; [0]: Deluge (11)
-    db $1b                                  ; [1]: Thunder (27)
-    db $0b                                  ; [2]: Fire (11)
-    db $0b                                  ; [3]: Death (11)
-    db $0b                                  ; [4]: Tilte (11)
+    .byte $0b                               ; [0]: Deluge (11)
+    .byte $1b                               ; [1]: Thunder (27)
+    .byte $0b                               ; [2]: Fire (11)
+    .byte $0b                               ; [3]: Death (11)
+    .byte $0b                               ; [4]: Tilte (11)
 
 
 ;============================================================================
@@ -3523,11 +3532,11 @@ CAST_MAGIC_HIT_HEIGHTS:                     ; [$8b78]
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_BEHAVIORS:                   ; [$8b7d]
-    db $00                                  ; [0]: Deluge (0)
-    db $01                                  ; [1]: Thunder (1)
-    db $02                                  ; [2]: Fire (2)
-    db $ff                                  ; [3]: Death (none)
-    db $ff                                  ; [4]: Tilte (none)
+    .byte $00                               ; [0]: Deluge (0)
+    .byte $01                               ; [1]: Thunder (1)
+    .byte $02                               ; [2]: Fire (2)
+    .byte $ff                               ; [3]: Death (none)
+    .byte $ff                               ; [4]: Tilte (none)
 
 
 ;============================================================================
@@ -3542,11 +3551,11 @@ CAST_MAGIC_HIT_BEHAVIORS:                   ; [$8b7d]
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_IFRAMES:                     ; [$8b82]
-    db $04                                  ; [0]: Deluge (4)
-    db $08                                  ; [1]: Thunder (8)
-    db $ff                                  ; [2]: Fire (none)
-    db $ff                                  ; [3]: Death (none)
-    db $ff                                  ; [4]: Tilte (none)
+    .byte $04                               ; [0]: Deluge (4)
+    .byte $08                               ; [1]: Thunder (8)
+    .byte $ff                               ; [2]: Fire (none)
+    .byte $ff                               ; [3]: Death (none)
+    .byte $ff                               ; [4]: Tilte (none)
 
 
 ;============================================================================
@@ -3784,8 +3793,8 @@ CurrentSprite_UpdateState:                  ; [$8bd2]
 ;     CurrentSprite_UpdateFlipMask
 ;
 SPRITES_FACING_TO_FLIPMASK:                 ; [$8c18]
-    db $00                                  ; [0]:
-    db $40                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $40                               ; [1]:
 
 ;============================================================================
 ; TODO: Document CurrentSprite_CalculateVisibility
@@ -4073,114 +4082,114 @@ SpriteUpdateHandler_Invisible:              ; [$8c98]
 ;     Sprite_EnterNextAppearancePhase
 ;
 SPRITE_APPEARANCE_PHASE_OFFSETS:            ; [$8c9f]
-    db $00                                  ; [0]:
-    db $db                                  ; [1]: Dropped: Bread
-    db $93                                  ; [2]: Dropped: Coin
-    db $83                                  ; [3]: Enemy: ?
-    db $01                                  ; [4]: Enemy: Raiden
-    db $05                                  ; [5]: Enemy: Necron Aides
-    db $07                                  ; [6]: Enemy: Zombie
-    db $0a                                  ; [7]: Enemy: Hornet
-    db $0c                                  ; [8]: Enemy: Bihoruda
-    db $0e                                  ; [9]: Enemy: Lilith
-    db $ef                                  ; [10]: Magic: ?
-    db $13                                  ; [11]: Enemy: Yuinaru
-    db $15                                  ; [12]: Enemy: Snowman
-    db $17                                  ; [13]: Enemy: Nash
-    db $1a                                  ; [14]: Enemy: Fire Giant
-    db $1d                                  ; [15]: Enemy: Ishiisu
-    db $21                                  ; [16]: Enemy: Execution Hood
-    db $71                                  ; [17]: Boss: Rokusutahn
-    db $6c                                  ; [18]: Boss: unused (round body
+    .byte $00                               ; [0]:
+    .byte $db                               ; [1]: Dropped: Bread
+    .byte $93                               ; [2]: Dropped: Coin
+    .byte $83                               ; [3]: Enemy: ?
+    .byte $01                               ; [4]: Enemy: Raiden
+    .byte $05                               ; [5]: Enemy: Necron Aides
+    .byte $07                               ; [6]: Enemy: Zombie
+    .byte $0a                               ; [7]: Enemy: Hornet
+    .byte $0c                               ; [8]: Enemy: Bihoruda
+    .byte $0e                               ; [9]: Enemy: Lilith
+    .byte $ef                               ; [10]: Magic: ?
+    .byte $13                               ; [11]: Enemy: Yuinaru
+    .byte $15                               ; [12]: Enemy: Snowman
+    .byte $17                               ; [13]: Enemy: Nash
+    .byte $1a                               ; [14]: Enemy: Fire Giant
+    .byte $1d                               ; [15]: Enemy: Ishiisu
+    .byte $21                               ; [16]: Enemy: Execution Hood
+    .byte $71                               ; [17]: Boss: Rokusutahn
+    .byte $6c                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $a9                                  ; [19]: Effect: Enemy death
-    db $a9                                  ; [20]: Effect: Lightning ball
-    db $23                                  ; [21]: Enemy: Charron
-    db $00                                  ; [22]: Enemy: ? (Unused)
-    db $26                                  ; [23]: Enemy: Geributa
-    db $29                                  ; [24]: Enemy: Sugata
-    db $2b                                  ; [25]: Enemy: Grimlock
-    db $2f                                  ; [26]: Enemy: Giant Bees
-    db $31                                  ; [27]: Enemy: Myconid
-    db $33                                  ; [28]: Enemy: Naga
-    db $35                                  ; [29]: Enemy: Skeleton Knight
+    .byte $a9                               ; [19]: Effect: Enemy death
+    .byte $a9                               ; [20]: Effect: Lightning ball
+    .byte $23                               ; [21]: Enemy: Charron
+    .byte $00                               ; [22]: Enemy: ? (Unused)
+    .byte $26                               ; [23]: Enemy: Geributa
+    .byte $29                               ; [24]: Enemy: Sugata
+    .byte $2b                               ; [25]: Enemy: Grimlock
+    .byte $2f                               ; [26]: Enemy: Giant Bees
+    .byte $31                               ; [27]: Enemy: Myconid
+    .byte $33                               ; [28]: Enemy: Naga
+    .byte $35                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $39                                  ; [30]: Enemy: Giant Strider
-    db $3c                                  ; [31]: Enemy: Sir Gawaine
-    db $3f                                  ; [32]: Enemy: Maskman
-    db $44                                  ; [33]: Enemy: Wolfman
-    db $47                                  ; [34]: Enemy: Yareeka
-    db $49                                  ; [35]: Enemy: Magman
-    db $4b                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $39                               ; [30]: Enemy: Giant Strider
+    .byte $3c                               ; [31]: Enemy: Sir Gawaine
+    .byte $3f                               ; [32]: Enemy: Maskman
+    .byte $44                               ; [33]: Enemy: Wolfman
+    .byte $47                               ; [34]: Enemy: Yareeka
+    .byte $49                               ; [35]: Enemy: Magman
+    .byte $4b                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $00                                  ; [37]: Enemy: ? (unused)
-    db $4f                                  ; [38]: Enemy: Ikeda
-    db $52                                  ; [39]: Enemy: Muppet guy
+    .byte $00                               ; [37]: Enemy: ? (unused)
+    .byte $4f                               ; [38]: Enemy: Ikeda
+    .byte $52                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $54                                  ; [40]: Enemy: Lamprey
-    db $00                                  ; [41]: Enemy: ? (unused)
-    db $58                                  ; [42]: Enemy: Monodron
-    db $5b                                  ; [43]: Enemy: Winged skeleton
+    .byte $54                               ; [40]: Enemy: Lamprey
+    .byte $00                               ; [41]: Enemy: ? (unused)
+    .byte $58                               ; [42]: Enemy: Monodron
+    .byte $5b                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $5d                                  ; [44]: Enemy: Tamazutsu
-    db $79                                  ; [45]: Boss: Ripasheiku
-    db $75                                  ; [46]: Boss: Zoradohna
-    db $64                                  ; [47]: Boss: Borabohra
-    db $7d                                  ; [48]: Boss: Pakukame
-    db $83                                  ; [49]: Boss: Zorugeriru
-    db $80                                  ; [50]: Boss: King Grieve
-    db $89                                  ; [51]: Boss: Shadow Eura
-    db $ae                                  ; [52]: NPC: Walking Man 1
-    db $b1                                  ; [53]: NPC: Blue lady (unused)
-    db $b4                                  ; [54]: NPC: Child (unused)
-    db $b7                                  ; [55]: NPC: Armor Salesman
-    db $b9                                  ; [56]: NPC: Martial Artist
-    db $bb                                  ; [57]: NPC: Guru
-    db $bd                                  ; [58]: NPC: King
-    db $c1                                  ; [59]: NPC: Magic Teacher
-    db $c3                                  ; [60]: NPC: Key Salesman
-    db $c5                                  ; [61]: NPC: Smoking Man
-    db $c7                                  ; [62]: NPC: Man in Chair
-    db $c9                                  ; [63]: NPC: Sitting Man
-    db $cb                                  ; [64]: NPC: Meat Salesman
-    db $cd                                  ; [65]: NPC: Lady in Blue Dress
+    .byte $5d                               ; [44]: Enemy: Tamazutsu
+    .byte $79                               ; [45]: Boss: Ripasheiku
+    .byte $75                               ; [46]: Boss: Zoradohna
+    .byte $64                               ; [47]: Boss: Borabohra
+    .byte $7d                               ; [48]: Boss: Pakukame
+    .byte $83                               ; [49]: Boss: Zorugeriru
+    .byte $80                               ; [50]: Boss: King Grieve
+    .byte $89                               ; [51]: Boss: Shadow Eura
+    .byte $ae                               ; [52]: NPC: Walking Man 1
+    .byte $b1                               ; [53]: NPC: Blue lady (unused)
+    .byte $b4                               ; [54]: NPC: Child (unused)
+    .byte $b7                               ; [55]: NPC: Armor Salesman
+    .byte $b9                               ; [56]: NPC: Martial Artist
+    .byte $bb                               ; [57]: NPC: Guru
+    .byte $bd                               ; [58]: NPC: King
+    .byte $c1                               ; [59]: NPC: Magic Teacher
+    .byte $c3                               ; [60]: NPC: Key Salesman
+    .byte $c5                               ; [61]: NPC: Smoking Man
+    .byte $c7                               ; [62]: NPC: Man in Chair
+    .byte $c9                               ; [63]: NPC: Sitting Man
+    .byte $cb                               ; [64]: NPC: Meat Salesman
+    .byte $cd                               ; [65]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $cf                                  ; [66]: NPC: Guard
-    db $d1                                  ; [67]: NPC: Doctor
-    db $d3                                  ; [68]: NPC: Walking Woman 1
-    db $d5                                  ; [69]: NPC: Walking Woman 2
-    db $d7                                  ; [70]: Enemy: Eyeball (unused)
-    db $d9                                  ; [71]: Enemy: Zozura
-    db $dc                                  ; [72]: Item: Glove
-    db $dd                                  ; [73]: Item: Black Onyx
-    db $de                                  ; [74]: Item: Pendant
-    db $df                                  ; [75]: Item: Red Potion
-    db $e0                                  ; [76]: Item: Poison
-    db $e1                                  ; [77]: Item: Elixir
-    db $e2                                  ; [78]: Item: Ointment
-    db $00                                  ; [79]: Trigger: Intro
-    db $e3                                  ; [80]: Item: Mattock
-    db $f1                                  ; [81]: Magic: ?
-    db $e8                                  ; [82]: Effect: Fountain
-    db $f3                                  ; [83]: Magic: ?
-    db $95                                  ; [84]: Magic: Enemy Fireball
-    db $f6                                  ; [85]: Item: Wing Boots
-    db $f7                                  ; [86]: Item: Hour Glass
-    db $f8                                  ; [87]: Item: Magical Rod
-    db $f9                                  ; [88]: Item: Battle Suit
-    db $fa                                  ; [89]: Item: Battle Helmet
-    db $fb                                  ; [90]: Item: Dragon Slayer
-    db $e3                                  ; [91]: Item: Mattock
-    db $f6                                  ; [92]: Item: Wing Boots (from
+    .byte $cf                               ; [66]: NPC: Guard
+    .byte $d1                               ; [67]: NPC: Doctor
+    .byte $d3                               ; [68]: NPC: Walking Woman 1
+    .byte $d5                               ; [69]: NPC: Walking Woman 2
+    .byte $d7                               ; [70]: Enemy: Eyeball (unused)
+    .byte $d9                               ; [71]: Enemy: Zozura
+    .byte $dc                               ; [72]: Item: Glove
+    .byte $dd                               ; [73]: Item: Black Onyx
+    .byte $de                               ; [74]: Item: Pendant
+    .byte $df                               ; [75]: Item: Red Potion
+    .byte $e0                               ; [76]: Item: Poison
+    .byte $e1                               ; [77]: Item: Elixir
+    .byte $e2                               ; [78]: Item: Ointment
+    .byte $00                               ; [79]: Trigger: Intro
+    .byte $e3                               ; [80]: Item: Mattock
+    .byte $f1                               ; [81]: Magic: ?
+    .byte $e8                               ; [82]: Effect: Fountain
+    .byte $f3                               ; [83]: Magic: ?
+    .byte $95                               ; [84]: Magic: Enemy Fireball
+    .byte $f6                               ; [85]: Item: Wing Boots
+    .byte $f7                               ; [86]: Item: Hour Glass
+    .byte $f8                               ; [87]: Item: Magical Rod
+    .byte $f9                               ; [88]: Item: Battle Suit
+    .byte $fa                               ; [89]: Item: Battle Helmet
+    .byte $fb                               ; [90]: Item: Dragon Slayer
+    .byte $e3                               ; [91]: Item: Mattock
+    .byte $f6                               ; [92]: Item: Wing Boots (from
                                             ; quest)
-    db $df                                  ; [93]: Item: Red Potion
-    db $e0                                  ; [94]: Item: Poison
-    db $dc                                  ; [95]: Item: Glove
-    db $e2                                  ; [96]: Item: Ointment
-    db $e8                                  ; [97]: Effect: Spring of Trunk
-    db $e8                                  ; [98]: Effect: Spring of Sky
-    db $e8                                  ; [99]: Effect: Spring of Tower
-    db $a9                                  ; [100]: Effect: Boss Death
+    .byte $df                               ; [93]: Item: Red Potion
+    .byte $e0                               ; [94]: Item: Poison
+    .byte $dc                               ; [95]: Item: Glove
+    .byte $e2                               ; [96]: Item: Ointment
+    .byte $e8                               ; [97]: Effect: Spring of Trunk
+    .byte $e8                               ; [98]: Effect: Spring of Sky
+    .byte $e8                               ; [99]: Effect: Spring of Tower
+    .byte $a9                               ; [100]: Effect: Boss Death
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_MaybeFallingRocks__ClearEntity
@@ -4357,7 +4366,7 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
     TAY
     LDA CurrentSprites_YPos,X
     CLC
-    ADC $8e3a,Y
+    ADC BYTE_ARRAY_PRG14__8e3a,Y
     STA Arg_PixelPosY
     LDA CurrentSprites_XPos_Full,X
     STA Arg_PixelPosX
@@ -4388,9 +4397,9 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
     LSR A
     AND #$03
     TAY
-    LDA $8e3c,Y
+    LDA BYTE_ARRAY_PRG14__8e3c,Y
     STA a:Arg_DeltaY_Frac
-    LDA $8e40,Y
+    LDA BYTE_ARRAY_PRG14__8e40,Y
     STA a:Arg_DeltaY_Full
     JMP Sprite_CalculateNewVertPos
 
@@ -4425,28 +4434,28 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
 ;     SpriteBehavior_NecronAides
 ;
 BYTE_ARRAY_PRG14__8e3a:                     ; [$8e3a]
-    db $ff                                  ; [0]:
-    db $20                                  ; [1]:
+    .byte $ff                               ; [0]:
+    .byte $20                               ; [1]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_NecronAides
 ;
 BYTE_ARRAY_PRG14__8e3c:                     ; [$8e3c]
-    db $20                                  ; [0]:
-    db $40                                  ; [1]:
-    db $80                                  ; [2]:
-    db $00                                  ; [3]:
+    .byte $20                               ; [0]:
+    .byte $40                               ; [1]:
+    .byte $80                               ; [2]:
+    .byte $00                               ; [3]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_NecronAides
 ;
 BYTE_ARRAY_PRG14__8e40:                     ; [$8e40]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_NecronAides
@@ -4516,10 +4525,10 @@ SpriteUpdateHandler_Enemy_Zombie:           ; [$8e57]
 ;     SpriteUpdateHandler_Enemy_Zombie
 ;
 SPRITEBEHAVIOR_ENEMY_ZOMBIE_PHASES:         ; [$8e73]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_BuzzAround
@@ -4567,29 +4576,29 @@ SpriteBehavior_BuzzAround:                  ; [$8e77]
 ;     SpriteBehavior_BuzzAround
 ;
 SPRITE_BEHAVIOR_BUZZ_AROUND_Y_FRAC:         ; [$8eb0]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $80                                  ; [2]:
-    db $40                                  ; [3]:
-    db $00                                  ; [4]:
-    db $40                                  ; [5]:
-    db $80                                  ; [6]:
-    db $00                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $80                               ; [2]:
+    .byte $40                               ; [3]:
+    .byte $00                               ; [4]:
+    .byte $40                               ; [5]:
+    .byte $80                               ; [6]:
+    .byte $00                               ; [7]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_BuzzAround
 ;
 SPRITE_BEHAVIOR_BUZZ_AROUND_X_FRAC:         ; [$8eb8]
-    db $02                                  ; [0]:
-    db $01                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $00                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $01                                  ; [7]:
-    db $ff,$01                              ; [$8ec0] undefined
+    .byte $02                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $00                               ; [3]:
+    .byte $00                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $01                               ; [7]:
+    .byte $ff,$01                           ; [$8ec0] undefined
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_Hornet
@@ -5125,7 +5134,7 @@ SpriteBehavior_Ishiisu:                     ; [$9129]
     TAY
     LDA Player_Flags
     AND #$40
-    EOR @_return2+1,Y
+    EOR BYTE_ARRAY_PRG14__918c,Y
     BNE @_return1
     INC CurrentSprites_Phases,X
     LDA #$1e
@@ -5154,8 +5163,8 @@ SpriteBehavior_Ishiisu:                     ; [$9129]
 ;     SpriteBehavior_Ishiisu
 ;
 BYTE_ARRAY_PRG14__918c:                     ; [$918c]
-    db $40                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $40                               ; [0]:
+    .byte $00                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_Ishiisu
@@ -5470,10 +5479,10 @@ SpriteUpdateHandler_Enemy_Grimlock:         ; [$92b0]
 ;     SpriteUpdateHandler_Enemy_Grimlock
 ;
 SPRITE_GRIMLOCK_PHASES:                     ; [$92dc]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_GiantBees
@@ -6440,7 +6449,7 @@ SpriteUpdateHandler_Enemy_Lamprey:          ; [$9770]
     LDA CurrentSprite_FlipMask
     EOR LAMPREY_HORIZ_FLIP_BITS,Y
     STA CurrentSprite_FlipMask
-    LDA $978b,Y
+    LDA BYTE_ARRAY_PRG14__978b,Y
     TAY
     TYA
     JMP Sprite_EnterNextAppearancePhase
@@ -6450,28 +6459,28 @@ SpriteUpdateHandler_Enemy_Lamprey:          ; [$9770]
 ;     SpriteUpdateHandler_Enemy_Lamprey
 ;
 BYTE_ARRAY_PRG14__978b:                     ; [$978b]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $01                                  ; [2]:
-    db $00                                  ; [3]:
-    db $01                                  ; [4]:
-    db $01                                  ; [5]:
-    db $00                                  ; [6]:
-    db $01                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $01                               ; [2]:
+    .byte $00                               ; [3]:
+    .byte $01                               ; [4]:
+    .byte $01                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $01                               ; [7]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Enemy_Lamprey
 ;
 LAMPREY_HORIZ_FLIP_BITS:                    ; [$9793]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $40                                  ; [2]:
-    db $40                                  ; [3]:
-    db $40                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $40                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $40                               ; [2]:
+    .byte $40                               ; [3]:
+    .byte $40                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $40                               ; [7]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_Monodron
@@ -6498,10 +6507,10 @@ SpriteUpdateHandler_Enemy_Monodron:         ; [$979b]
 ;     SpriteUpdateHandler_Enemy_Monodron
 ;
 SPRITE_MONODRON_APPEARANCE_PHASES:          ; [$97aa]
-    db $00                                  ; [0]:
-    db $02                                  ; [1]:
-    db $00                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $02                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_EnemyUnused43
@@ -6552,7 +6561,7 @@ SpriteBehavior_EnemyUnused43:               ; [$97ae]
   @LAB_PRG14__97f4:                         ; [$97f4]
     LDA Player_PosX_Block
     CLC
-    ADC @_return+1,Y
+    ADC BYTE_ARRAY_PRG14__9851,Y
     SEC
     SBC CurrentSprites_XPos_Full,X
     BEQ @LAB_PRG14__9820
@@ -6606,14 +6615,14 @@ SpriteBehavior_EnemyUnused43:               ; [$97ae]
 ;     SpriteBehavior_EnemyUnused43
 ;
 BYTE_ARRAY_PRG14__9851:                     ; [$9851]
-    db $20                                  ; [0]:
+    .byte $20                               ; [0]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_EnemyUnused43
 ;
 BYTE_ARRAY_PRG14__9851_1_:                  ; [$9852]
-    db $e0                                  ; [1]:
+    .byte $e0                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Enemy_Unused_WingedSkeleton
@@ -6744,7 +6753,7 @@ SpriteUpdateHandler_Enemy_Tamazutsu:        ; [$98b3]
     LSR A
     LSR A
     TAY
-    LDA $9905,Y
+    LDA BYTE_ARRAY_PRG14__9905,Y
     TAY
     JMP @LAB_PRG14__9900
 
@@ -6761,7 +6770,7 @@ SpriteUpdateHandler_Enemy_Tamazutsu:        ; [$98b3]
     LSR A
     LSR A
     TAY
-    LDA $9908,Y
+    LDA BYTE_ARRAY_PRG14__9908,Y
     TAY
 
   @LAB_PRG14__9900:                         ; [$9900]
@@ -6774,18 +6783,18 @@ SpriteUpdateHandler_Enemy_Tamazutsu:        ; [$98b3]
 ;     SpriteUpdateHandler_Enemy_Tamazutsu
 ;
 BYTE_ARRAY_PRG14__9905:                     ; [$9905]
-    db $08                                  ; [0]:
-    db $06                                  ; [1]:
-    db $04                                  ; [2]:
+    .byte $08                               ; [0]:
+    .byte $06                               ; [1]:
+    .byte $04                               ; [2]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Enemy_Tamazutsu
 ;
 BYTE_ARRAY_PRG14__9908:                     ; [$9908]
-    db $04                                  ; [0]:
-    db $06                                  ; [1]:
-    db $08                                  ; [2]:
+    .byte $04                               ; [0]:
+    .byte $06                               ; [1]:
+    .byte $08                               ; [2]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Boss_Rokusutahn
@@ -6964,7 +6973,7 @@ SpriteBehavior_EnemyUnused18__9991:         ; [$9991]
 
   @LAB_PRG14__99d1:                         ; [$99d1]
     LDY Area_CurrentArea
-    LDA @_return+1,Y
+    LDA BYTE_ARRAY_PRG14__99ef,Y
     STA a:Something_UnusedSprite_BlockOffset
     JSR $d7b0
 
@@ -6985,10 +6994,10 @@ SpriteBehavior_EnemyUnused18__9991:         ; [$9991]
 ;     SpriteBehavior_EnemyUnused18__9991
 ;
 BYTE_ARRAY_PRG14__99ef:                     ; [$99ef]
-    db $00                                  ; [0]:
-    db $08                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $08                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $00                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Maybe_SpriteBody__99f3
@@ -7105,10 +7114,10 @@ FUN_PRG14__9a3c:                            ; [$9a3c]
 ;     FUN_PRG14__9a3c
 ;
 MAYBE_BODY_HANDLERS:                        ; [$9a4f]
-    dw Maybe_BodyHandler__9a57-1            ; [0]:
-    dw Maybe_BodyHandler__9a7a-1            ; [1]:
-    dw Maybe_BodyHandler__9a7a-1            ; [2]:
-    dw Maybe_BodyHandler__9a57-1            ; [3]:
+    .word Maybe_BodyHandler__9a57-1         ; [0]:
+    .word Maybe_BodyHandler__9a7a-1         ; [1]:
+    .word Maybe_BodyHandler__9a7a-1         ; [2]:
+    .word Maybe_BodyHandler__9a57-1         ; [3]:
 
 ;============================================================================
 ; TODO: Document Maybe_BodyHandler__9a57
@@ -7125,7 +7134,7 @@ MAYBE_BODY_HANDLERS:                        ; [$9a4f]
 ;============================================================================
 Maybe_BodyHandler__9a57:                    ; [$9a57]
     JSR FUN_PRG14__9a87
-    LDX $9a91,Y
+    LDX BYTE_ARRAY_PRG14__9a91,Y
     DEX
     INC Sprite12BodyPartHandler,X
 
@@ -7174,7 +7183,7 @@ FUN_PRG14__9a61:                            ; [$9a61]
 ;============================================================================
 Maybe_BodyHandler__9a7a:                    ; [$9a7a]
     JSR FUN_PRG14__9a87
-    LDX $9a99,Y
+    LDX BYTE_ARRAY_PRG14__9a99,Y
     DEX
     DEC Sprite12BodyPartHandler,X
     JMP FUN_PRG14__9a61
@@ -7206,28 +7215,28 @@ FUN_PRG14__9a87:                            ; [$9a87]
 ;     Maybe_BodyHandler__9a57
 ;
 BYTE_ARRAY_PRG14__9a91:                     ; [$9a91]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $03                                  ; [3]:
-    db $02                                  ; [4]:
-    db $03                                  ; [5]:
-    db $03                                  ; [6]:
-    db $00                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $03                               ; [3]:
+    .byte $02                               ; [4]:
+    .byte $03                               ; [5]:
+    .byte $03                               ; [6]:
+    .byte $00                               ; [7]:
 
 ;
 ; XREFS:
 ;     Maybe_BodyHandler__9a7a
 ;
 BYTE_ARRAY_PRG14__9a99:                     ; [$9a99]
-    db $00                                  ; [0]:
-    db $03                                  ; [1]:
-    db $03                                  ; [2]:
-    db $02                                  ; [3]:
-    db $03                                  ; [4]:
-    db $02                                  ; [5]:
-    db $01                                  ; [6]:
-    db $00                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $03                               ; [1]:
+    .byte $03                               ; [2]:
+    .byte $02                               ; [3]:
+    .byte $03                               ; [4]:
+    .byte $02                               ; [5]:
+    .byte $01                               ; [6]:
+    .byte $00                               ; [7]:
 
 ;============================================================================
 ; TODO: Document FUN_PRG14__9aa1
@@ -7369,7 +7378,7 @@ SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos: ; [$9b45]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC @_return+1,Y
+    ADC BYTE_ARRAY_PRG14__9b81,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -7396,8 +7405,8 @@ SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos: ; [$9b45]
 ;     SpriteBehavior_Ripasheiku_CastMagicOrUpdatePos
 ;
 BYTE_ARRAY_PRG14__9b81:                     ; [$9b81]
-    db $10                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $10                               ; [0]:
+    .byte $00                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_Ripasheiku
@@ -7816,7 +7825,7 @@ SpriteUpdateHandler_Boss_Pakukame:          ; [$9d94]
     DEY
 
   @LAB_PRG14__9d9f:                         ; [$9d9f]
-    LDA $9da5,Y
+    LDA BYTE_ARRAY_PRG14__9da5,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -7824,10 +7833,10 @@ SpriteUpdateHandler_Boss_Pakukame:          ; [$9d94]
 ;     SpriteUpdateHandler_Boss_Pakukame
 ;
 BYTE_ARRAY_PRG14__9da5:                     ; [$9da5]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_Zorugeriru
@@ -7993,7 +8002,7 @@ SpriteUpdateHandler_Boss_Zorugeriru:        ; [$9e4f]
     TAY
 
   @LAB_PRG14__9e63:                         ; [$9e63]
-    LDA $9e69,Y
+    LDA BYTE_ARRAY_PRG14__9e69,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -8001,10 +8010,10 @@ SpriteUpdateHandler_Boss_Zorugeriru:        ; [$9e4f]
 ;     SpriteUpdateHandler_Boss_Zorugeriru
 ;
 BYTE_ARRAY_PRG14__9e69:                     ; [$9e69]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_Garbled3
@@ -8200,7 +8209,7 @@ SpriteBehavior_KingGrieve_9f65:             ; [$9f65]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC $9f9c,Y
+    ADC BYTE_ARRAY_PRG14__9f9c,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -8243,8 +8252,8 @@ SpriteBehavior_KingGrieve_9f86:             ; [$9f86]
 ;     SpriteBehavior_KingGrieve_9f65
 ;
 BYTE_ARRAY_PRG14__9f9c:                     ; [$9f9c]
-    db $00                                  ; [0]:
-    db $30                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $30                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_KingGrieve_MoveDown
@@ -8306,7 +8315,7 @@ SpriteUpdateHandler_Boss_KingGrieve:        ; [$9fc4]
     TAY
 
   @LAB_PRG14__9fd9:                         ; [$9fd9]
-    LDA $9fdf,Y
+    LDA BYTE_ARRAY_PRG14__9fdf,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -8314,16 +8323,16 @@ SpriteUpdateHandler_Boss_KingGrieve:        ; [$9fc4]
 ;     SpriteUpdateHandler_Boss_KingGrieve
 ;
 BYTE_ARRAY_PRG14__9fdf:                     ; [$9fdf]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
 
 ;
 ; XREFS:
 ;     SpriteUpdateHandler_Boss_KingGrieve
 ;
 BYTE_ARRAY_PRG14__9fdf_2_:                  ; [$9fe1]
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_ShadowEura
@@ -8382,7 +8391,7 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
   @LAB_PRG14__a035:                         ; [$a035]
     PLA
     TAY
-    LDA @_return+1,Y
+    LDA BYTE_ARRAY_PRG14__a064,Y
     STA a:Arg_DeltaX_Full
     LDA #$00
     STA a:Arg_DeltaX_Frac
@@ -8412,16 +8421,16 @@ SpriteBehavior_ShadowEura:                  ; [$9fe3]
 ;     SpriteBehavior_ShadowEura
 ;
 BYTE_ARRAY_PRG14__a064:                     ; [$a064]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $08                                  ; [2]:
-    db $08                                  ; [3]:
-    db $08                                  ; [4]:
-    db $00                                  ; [5]:
-    db $00                                  ; [6]:
-    db $08                                  ; [7]:
-    db $08                                  ; [8]:
-    db $08                                  ; [9]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $08                               ; [2]:
+    .byte $08                               ; [3]:
+    .byte $08                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $08                               ; [7]:
+    .byte $08                               ; [8]:
+    .byte $08                               ; [9]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Boss_ShadowEura
@@ -8458,7 +8467,7 @@ SpriteBehavior_ShadowEura__a077:            ; [$a077]
     TAY
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC $a091,Y
+    ADC BYTE_ARRAY_PRG14__a091,Y
     STA a:CurrentSprite_Arg_CastMagicX
     LDA CurrentSprites_YPos,X
     CLC
@@ -8471,8 +8480,8 @@ SpriteBehavior_ShadowEura__a077:            ; [$a077]
 ;     SpriteBehavior_ShadowEura__a077
 ;
 BYTE_ARRAY_PRG14__a091:                     ; [$a091]
-    db $00                                  ; [0]:
-    db $20                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $20                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_ExecutionHood__a093
@@ -9062,7 +9071,7 @@ SpriteUpdateHandler_NPC_Walking:            ; [$a26b]
     TAY
 
   @LAB_PRG14__a280:                         ; [$a280]
-    LDA $a286,Y
+    LDA BYTE_ARRAY_PRG14__a286,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -9070,10 +9079,10 @@ SpriteUpdateHandler_NPC_Walking:            ; [$a26b]
 ;     SpriteUpdateHandler_NPC_Walking
 ;
 BYTE_ARRAY_PRG14__a286:                     ; [$a286]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $00                                  ; [2]:
-    db $02                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $02                               ; [3]:
 
 ;============================================================================
 ; TODO: Document thunk1_SpriteUpdateHandler_NPC_Walking
@@ -9196,7 +9205,7 @@ SpriteUpdateHandler_NPC_King:               ; [$a2be]
     LSR A
     AND #$01
     CLC
-    ADC $a2d6,Y
+    ADC BYTE_ARRAY_PRG14__a2d6,Y
     JMP Sprite_EnterNextAppearancePhase
 
 ;
@@ -9204,8 +9213,8 @@ SpriteUpdateHandler_NPC_King:               ; [$a2be]
 ;     SpriteUpdateHandler_NPC_King
 ;
 BYTE_ARRAY_PRG14__a2d6:                     ; [$a2d6]
-    db $00                                  ; [0]:
-    db $02                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $02                               ; [1]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_NPC_MagicTeacher
@@ -9435,10 +9444,10 @@ SpriteUpdateHandler_Effect_Fountain:        ; [$a335]
 ;     SpriteUpdateHandler_Effect_Fountain
 ;
 SPRITE_FOUNTAIN_PHASES:                     ; [$a347]
-    db $04                                  ; [0]:
-    db $05                                  ; [1]:
-    db $06                                  ; [2]:
-    db $05                                  ; [3]:
+    .byte $04                               ; [0]:
+    .byte $05                               ; [1]:
+    .byte $06                               ; [2]:
+    .byte $05                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Item_Special
@@ -10306,76 +10315,78 @@ SpriteUpdateHandler_Effect_Spring:          ; [$a5d2]
 ;     Sprites_UpdateBehavior
 ;
 SPRITE_BEHAVIORS:                           ; [$a5e7]
-    dw SpriteBehavior_MoveTowardPlayer-1    ; [0]: Common
-    dw SpriteBehavior_Wait-1                ; [1]: Common
-    dw SpriteBehavior_BounceAndExpire-1     ; [2]: Item: Dropped coin
-    dw SpriteBehavior_Garbled3-1            ; [3]:
-    dw SpriteBehavior_WalkForward-1         ; [4]: Common
-    dw SpriteBehavior_Return-1              ; [5]:
-    dw SpriteBehavior_EnemyUnused18-1       ; [6]:
-    dw SpriteBehavior_LightningBallOrCharron-1 ; [7]:
-    dw SpriteBehavior_LightningBallOrCharron-1 ; [8]:
-    dw SpriteBehavior_Hop-1                 ; [9]: Enemy: Monodron
-    dw SpriteBehavior_Ripasheiku-1          ; [10]: Boss: Dragon boss guy
-    dw SpriteBehavior_Return-1              ; [11]:
-    dw SpriteBehavior_Borabohra-1           ; [12]:
-    dw SpriteBehavior_Pakukame-1            ; [13]:
-    dw SpriteBehavior_Zorugeriru-1          ; [14]:
-    dw SpriteBehavior_KingGrieve-1          ; [15]:
-    dw SpriteBehavior_ShadowEura-1          ; [16]:
-    dw SpriteBehavior_SomethingEyeball_17-1 ; [17]:
-    dw SpriteBehavior_SomethingZoradohna_18-1 ; [18]:
-    dw SpriteBehavior_MoveVertically-1      ; [19]:
-    dw SpriteBehavior__a8d7-1               ; [20]:
-    dw SpriteBehavior_Fall-1                ; [21]: Common
-    dw SpriteBehavior_NecronAides-1         ; [22]: Enemy: Necron Aides
-    dw SpriteBehavior_Bihoruda-1            ; [23]: Enemy: Bihoruda
-    dw SpriteBehavior_Lilith-1              ; [24]: Enemy: Lilith
-    dw SpriteBehavior_Yuinaru-1             ; [25]: Enemy: Yuinaru
-    dw SpriteBehavior_Nash-1                ; [26]: Enemy: Nash
-    dw SpriteBehavior_EnemyMagic-1          ; [27]:
-    dw _thunk_SpriteBehavior__a0cb-1        ; [28]:
-    dw SpriteBehavior_Unknown_29-1          ; [29]:
-    dw _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
-    dw SpriteBehavior_FlashScreenHitPlayer-1 ; [31]:
-    dw SpriteBehavior_GiantBees-1           ; [32]: Enemy: Giant Bees
-    dw SpriteBehavior_Naga-1                ; [33]: Enemy: Naga
-    dw SpriteBehavior_Yareeka-1             ; [34]: Enemy: Yareeka
-    dw SpriteBehavior_Magman-1              ; [35]: Enemy: Magman
-    dw SpriteBehavior_EnemyUnused36-1       ; [36]: Enemy: Unused 36
-    dw SpriteBehavior_EnemyUnused39-1       ; [37]: Enemy: Unused 39
-    dw SpriteBehavior_EnemyUnused43-1       ; [38]: Enemy: Unused 43
-    dw SpriteBehavior_Tamazutsu-1           ; [39]: Enemy: Tamazutsu
-    dw SpriteBehavior_SirGawaineWolfman-1   ; [40]: Enemy: Sir Gawaine Enemy:
-                                            ; Wolfman
-    dw SpriteBehavior_Ointment-1            ; [41]: Item: Ointment
-    dw SpriteBehavior_Glove-1               ; [42]: Item: Glove
-    dw SpriteBehavior_BattleSuitDroppedByZoradohna-1 ; [43]: Item: Battle
-                                                     ; Suit
-    dw SpriteBehavior_BattleHelmetDroppedByZoradohna-1 ; [44]: Item: Battle
-                                                       ; Helmet
-    dw SpriteBehavior_DragonSlayerDroppedByKingGrieve-1 ; [45]: Item: Dragon
-                                                        ; Slayer
-    dw SpriteBehavior_MattockDroppedFromRipasheiku-1 ; [46]: Item: Mattock
-    dw SpriteBehavior_WingBootsDroppedByZorugeriru-1 ; [47]: Item: Wing Boots
-    dw SpriteBehavior_BlackOnyxDropFromZoradohna-1 ; [48]: Item: Black Onyx
-    dw SpriteBehavior_PendantDroppedFromRipasheiku-1 ; [49]: Item: Pendant
-    dw SpriteBehavior_RandomlyShowItem_50-1 ; [50]:
-    dw SpriteBehavior_RandomlyShowItem_51-1 ; [51]:
-    dw SpriteBehavior_RandomlyShowItem_52-1 ; [52]:
-    dw SpriteBehavior_RandomlyShowItem_53-1 ; [53]:
-    dw SpriteBehavior_RandomlyShowItem_54-1 ; [54]:
-    dw SpriteBehavior_RandomlyShowItem_55-1 ; [55]:
-    dw SpriteBehavior_RandomlyShowItem_56-1 ; [56]:
-    dw SpriteBehavior_Fountain-1            ; [57]: Spring of Fountain
-    dw SpriteBehavior_SpringOfFortress-1    ; [58]: Spring of Fortress
-    dw SpriteBehavior_SpringOfSky-1         ; [59]: Spring of Sky
-    dw SpriteBehavior_SpringOfJoker-1       ; [60]: Spring of Joker
-    dw SpriteBehavior_ShowMagicalRod-1      ; [61]: Item: Magical Rod
-    dw SpriteBehavior_BossDeath-1           ; [62]: Effect: Boss Death
-    dw SpriteBehavior_BuzzAround-1          ; [63]: Enemy: Hornet
-    dw SpriteBehavior_Ishiisu-1             ; [64]: Enemy: Ishiisu
-    dw SpriteBehavior_ExecutionHood-1       ; [65]: Enemy: Execution Hood
+    .word SpriteBehavior_MoveTowardPlayer-1 ; [0]: Common
+    .word SpriteBehavior_Wait-1             ; [1]: Common
+    .word SpriteBehavior_BounceAndExpire-1  ; [2]: Item: Dropped coin
+    .word SpriteBehavior_Garbled3-1         ; [3]:
+    .word SpriteBehavior_WalkForward-1      ; [4]: Common
+    .word SpriteBehavior_Return-1           ; [5]:
+    .word SpriteBehavior_EnemyUnused18-1    ; [6]:
+    .word SpriteBehavior_LightningBallOrCharron-1 ; [7]:
+    .word SpriteBehavior_LightningBallOrCharron-1 ; [8]:
+    .word SpriteBehavior_Hop-1              ; [9]: Enemy: Monodron
+    .word SpriteBehavior_Ripasheiku-1       ; [10]: Boss: Dragon boss guy
+    .word SpriteBehavior_Return-1           ; [11]:
+    .word SpriteBehavior_Borabohra-1        ; [12]:
+    .word SpriteBehavior_Pakukame-1         ; [13]:
+    .word SpriteBehavior_Zorugeriru-1       ; [14]:
+    .word SpriteBehavior_KingGrieve-1       ; [15]:
+    .word SpriteBehavior_ShadowEura-1       ; [16]:
+    .word SpriteBehavior_SomethingEyeball_17-1 ; [17]:
+    .word SpriteBehavior_SomethingZoradohna_18-1 ; [18]:
+    .word SpriteBehavior_MoveVertically-1   ; [19]:
+    .word SpriteBehavior__a8d7-1            ; [20]:
+    .word SpriteBehavior_Fall-1             ; [21]: Common
+    .word SpriteBehavior_NecronAides-1      ; [22]: Enemy: Necron Aides
+    .word SpriteBehavior_Bihoruda-1         ; [23]: Enemy: Bihoruda
+    .word SpriteBehavior_Lilith-1           ; [24]: Enemy: Lilith
+    .word SpriteBehavior_Yuinaru-1          ; [25]: Enemy: Yuinaru
+    .word SpriteBehavior_Nash-1             ; [26]: Enemy: Nash
+    .word SpriteBehavior_EnemyMagic-1       ; [27]:
+    .word _thunk_SpriteBehavior__a0cb-1     ; [28]:
+    .word SpriteBehavior_Unknown_29-1       ; [29]:
+    .word _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
+    .word SpriteBehavior_FlashScreenHitPlayer-1 ; [31]:
+    .word SpriteBehavior_GiantBees-1        ; [32]: Enemy: Giant Bees
+    .word SpriteBehavior_Naga-1             ; [33]: Enemy: Naga
+    .word SpriteBehavior_Yareeka-1          ; [34]: Enemy: Yareeka
+    .word SpriteBehavior_Magman-1           ; [35]: Enemy: Magman
+    .word SpriteBehavior_EnemyUnused36-1    ; [36]: Enemy: Unused 36
+    .word SpriteBehavior_EnemyUnused39-1    ; [37]: Enemy: Unused 39
+    .word SpriteBehavior_EnemyUnused43-1    ; [38]: Enemy: Unused 43
+    .word SpriteBehavior_Tamazutsu-1        ; [39]: Enemy: Tamazutsu
+    .word SpriteBehavior_SirGawaineWolfman-1 ; [40]: Enemy: Sir Gawaine
+                                             ; Enemy: Wolfman
+    .word SpriteBehavior_Ointment-1         ; [41]: Item: Ointment
+    .word SpriteBehavior_Glove-1            ; [42]: Item: Glove
+    .word SpriteBehavior_BattleSuitDroppedByZoradohna-1 ; [43]: Item: Battle
+                                                        ; Suit
+    .word SpriteBehavior_BattleHelmetDroppedByZoradohna-1 ; [44]: Item:
+                                                          ; Battle Helmet
+    .word SpriteBehavior_DragonSlayerDroppedByKingGrieve-1 ; [45]: Item:
+                                                           ; Dragon Slayer
+    .word SpriteBehavior_MattockDroppedFromRipasheiku-1 ; [46]: Item: Mattock
+    .word SpriteBehavior_WingBootsDroppedByZorugeriru-1 ; [47]: Item: Wing
+                                                        ; Boots
+    .word SpriteBehavior_BlackOnyxDropFromZoradohna-1 ; [48]: Item: Black
+                                                      ; Onyx
+    .word SpriteBehavior_PendantDroppedFromRipasheiku-1 ; [49]: Item: Pendant
+    .word SpriteBehavior_RandomlyShowItem_50-1 ; [50]:
+    .word SpriteBehavior_RandomlyShowItem_51-1 ; [51]:
+    .word SpriteBehavior_RandomlyShowItem_52-1 ; [52]:
+    .word SpriteBehavior_RandomlyShowItem_53-1 ; [53]:
+    .word SpriteBehavior_RandomlyShowItem_54-1 ; [54]:
+    .word SpriteBehavior_RandomlyShowItem_55-1 ; [55]:
+    .word SpriteBehavior_RandomlyShowItem_56-1 ; [56]:
+    .word SpriteBehavior_Fountain-1         ; [57]: Spring of Fountain
+    .word SpriteBehavior_SpringOfFortress-1 ; [58]: Spring of Fortress
+    .word SpriteBehavior_SpringOfSky-1      ; [59]: Spring of Sky
+    .word SpriteBehavior_SpringOfJoker-1    ; [60]: Spring of Joker
+    .word SpriteBehavior_ShowMagicalRod-1   ; [61]: Item: Magical Rod
+    .word SpriteBehavior_BossDeath-1        ; [62]: Effect: Boss Death
+    .word SpriteBehavior_BuzzAround-1       ; [63]: Enemy: Hornet
+    .word SpriteBehavior_Ishiisu-1          ; [64]: Enemy: Ishiisu
+    .word SpriteBehavior_ExecutionHood-1    ; [65]: Enemy: Execution Hood
 
 ;============================================================================
 ; TODO: Document Sprites_UpdateBehavior
@@ -10532,14 +10543,14 @@ BScripts_LoadNextOp:                        ; [$a6bc]
 ;     BScripts_LoadNextOp
 ;
 BSCRIPT_OP_HANDLERS:                        ; [$a6d8]
-    dw BScript_Op_SwitchBehavior-1          ; [0]:
-    dw BScript_Op_MaybeDisableAndGoTo-1     ; [1]:
-    dw BScript_Op_RunAction-1               ; [2]:
-    dw BScript_Op_CheckDistanceToPlayer-1   ; [3]:
-    dw BScript_Op_FinishBehavior-1          ; [4]:
-    dw BScript_Op_GoTo-1                    ; [5]:
-    dw BScript_Op_AddToSpriteData-1         ; [6]:
-    dw BScript_Op_SetPhase-1                ; [7]:
+    .word BScript_Op_SwitchBehavior-1       ; [0]:
+    .word BScript_Op_MaybeDisableAndGoTo-1  ; [1]:
+    .word BScript_Op_RunAction-1            ; [2]:
+    .word BScript_Op_CheckDistanceToPlayer-1 ; [3]:
+    .word BScript_Op_FinishBehavior-1       ; [4]:
+    .word BScript_Op_GoTo-1                 ; [5]:
+    .word BScript_Op_AddToSpriteData-1      ; [6]:
+    .word BScript_Op_SetPhase-1             ; [7]:
 
 ;============================================================================
 ; TODO: Document BScript_Op_SetPhase
@@ -10738,16 +10749,16 @@ Sprites_Maybe_Skip2AndLoadNextAction:       ; [$a78c]
 ;     BScript_Op_RunAction
 ;
 BSCRIPT_ACTIONS:                            ; [$a794]
-    dw BScript_Action_FacePlayerX-1         ; [0]: Face Player (X)
-    dw BScript_Action_FlipXDirection-1      ; [1]: Flip X Direction
-    dw BScript_Action_FacePlayerY-1         ; [2]: Face Player (Y)
-    dw BScript_Action_FlipYDirection-1      ; [3]: Flip Y Direction
-    dw BScript_Action_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X
-                                               ; Direction
-    dw BScript_Action_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y
-                                               ; Direction
-    dw BScript_Action_RiseUp-1              ; [6]: Rise Up
-    dw BScript_Action_CastMagic-1           ; [7]: Cast Magic
+    .word BScript_Action_FacePlayerX-1      ; [0]: Face Player (X)
+    .word BScript_Action_FlipXDirection-1   ; [1]: Flip X Direction
+    .word BScript_Action_FacePlayerY-1      ; [2]: Face Player (Y)
+    .word BScript_Action_FlipYDirection-1   ; [3]: Flip Y Direction
+    .word BScript_Action_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X
+                                                  ; Direction
+    .word BScript_Action_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y
+                                                  ; Direction
+    .word BScript_Action_RiseUp-1           ; [6]: Rise Up
+    .word BScript_Action_CastMagic-1        ; [7]: Cast Magic
 
 
 ;============================================================================
@@ -10869,8 +10880,8 @@ BScript_Op_CheckDistanceToPlayer:           ; [$a7e5]
 ;     BScript_Op_CheckDistanceToPlayer
 ;
 SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS: ; [$a7f4]
-    dw SpriteOp_CheckDistanceToPlayer_X-1   ; [0]:
-    dw SpriteOp_CheckDistanceToPlayer_Y-1   ; [1]:
+    .word SpriteOp_CheckDistanceToPlayer_X-1 ; [0]:
+    .word SpriteOp_CheckDistanceToPlayer_Y-1 ; [1]:
 
 
 ;============================================================================
@@ -11860,44 +11871,44 @@ SpriteBehavior_Hop:                         ; [$a9de]
 ;     SpriteBehavior_Hop
 ;
 SPRITE_BEHAVIOUR_HOP_START_TICKS:           ; [$aa72]
-    db $40                                  ; [0]:
-    db $20                                  ; [1]:
-    db $10                                  ; [2]: Monodron
-    db $08                                  ; [3]:
-    db $10                                  ; [4]:
+    .byte $40                               ; [0]:
+    .byte $20                               ; [1]:
+    .byte $10                               ; [2]: Monodron
+    .byte $08                               ; [3]:
+    .byte $10                               ; [4]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_Hop
 ;
 SPRITE_BEHAVIOR_HOP_GRAVITY:                ; [$aa77]
-    db $02                                  ; [0]:
-    db $03                                  ; [1]:
-    db $04                                  ; [2]:
-    db $05                                  ; [3]:
-    db $04                                  ; [4]:
+    .byte $02                               ; [0]:
+    .byte $03                               ; [1]:
+    .byte $04                               ; [2]:
+    .byte $05                               ; [3]:
+    .byte $04                               ; [4]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_Hop
 ;
 SPRITE_BEHAVIOR_HOP_JUMP_STRENGTH:          ; [$aa7c]
-    db $04                                  ; [0]:
-    db $05                                  ; [1]:
-    db $06                                  ; [2]:
-    db $07                                  ; [3]:
-    db $07                                  ; [4]:
+    .byte $04                               ; [0]:
+    .byte $05                               ; [1]:
+    .byte $06                               ; [2]:
+    .byte $07                               ; [3]:
+    .byte $07                               ; [4]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_Hop
 ;
 SPRITE_BEHAVIOR_HOP_GROUND_TICKS:           ; [$aa81]
-    db $c0                                  ; [0]:
-    db $60                                  ; [1]:
-    db $30                                  ; [2]:
-    db $18                                  ; [3]:
-    db $30                                  ; [4]:
+    .byte $c0                               ; [0]:
+    .byte $60                               ; [1]:
+    .byte $30                               ; [2]:
+    .byte $18                               ; [3]:
+    .byte $30                               ; [4]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_SomethingZoradohna_18
@@ -11937,20 +11948,20 @@ SpriteBehavior_SomethingZoradohna_18:       ; [$aa86]
     STA a:Arg_DeltaX_Frac
     JSR Sprite_MoveHorizAndTurnAroundIfNeeded
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA $aaf2,Y
+    LDA BYTE_ARRAY_PRG14__aaf2,Y
     TAY
     LDA CurrentSprites_BehaviorData3,X
     JSR Sprites_CalcYFromGravity
     PHA
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA $aaf6,Y
+    LDA BYTE_ARRAY_PRG14__aaf6,Y
     TAY
     PLA
     JSR Sprites_CalcVerticalSpriteMovement
     JSR Sprite_MoveVertical
     INC CurrentSprites_BehaviorData3,X
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA $aaf2,Y
+    LDA BYTE_ARRAY_PRG14__aaf2,Y
     TAY
     DEY
     LDA CurrentSprites_BehaviorData3,X
@@ -11966,20 +11977,20 @@ SpriteBehavior_SomethingZoradohna_18:       ; [$aa86]
 ;     SpriteBehavior_SomethingZoradohna_18
 ;
 BYTE_ARRAY_PRG14__aaf2:                     ; [$aaf2]
-    db $03                                  ; [0]:
-    db $04                                  ; [1]:
-    db $05                                  ; [2]:
-    db $06                                  ; [3]:
+    .byte $03                               ; [0]:
+    .byte $04                               ; [1]:
+    .byte $05                               ; [2]:
+    .byte $06                               ; [3]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_SomethingZoradohna_18
 ;
 BYTE_ARRAY_PRG14__aaf6:                     ; [$aaf6]
-    db $03                                  ; [0]:
-    db $05                                  ; [1]:
-    db $05                                  ; [2]:
-    db $07                                  ; [3]:
+    .byte $03                               ; [0]:
+    .byte $05                               ; [1]:
+    .byte $05                               ; [2]:
+    .byte $07                               ; [3]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_MoveVertically
@@ -12089,11 +12100,11 @@ SpriteBehavior_BossDeath:                   ; [$ab67]
     BCS @LAB_PRG14__abb0
     LDA CurrentSprites_XPos_Full,X
     CLC
-    ADC $abb6,Y
+    ADC BYTE_ARRAY_PRG14__abb6,Y
     STA CurrentSprites_XPos_Full,X
     LDA CurrentSprites_YPos,X
     CLC
-    ADC $abc1,Y
+    ADC BYTE_ARRAY_PRG14__abc1,Y
     STA CurrentSprites_YPos,X
     LDA #$00
     STA CurrentSprites_BehaviorData2,X
@@ -12117,34 +12128,34 @@ SpriteBehavior_BossDeath:                   ; [$ab67]
 ;     SpriteBehavior_BossDeath
 ;
 BYTE_ARRAY_PRG14__abb6:                     ; [$abb6]
-    db $00                                  ; [0]:
-    db $20                                  ; [1]:
-    db $f0                                  ; [2]:
-    db $f0                                  ; [3]:
-    db $20                                  ; [4]:
-    db $e0                                  ; [5]:
-    db $20                                  ; [6]:
-    db $f0                                  ; [7]:
-    db $f0                                  ; [8]:
-    db $20                                  ; [9]:
-    db $e0                                  ; [10]:
+    .byte $00                               ; [0]:
+    .byte $20                               ; [1]:
+    .byte $f0                               ; [2]:
+    .byte $f0                               ; [3]:
+    .byte $20                               ; [4]:
+    .byte $e0                               ; [5]:
+    .byte $20                               ; [6]:
+    .byte $f0                               ; [7]:
+    .byte $f0                               ; [8]:
+    .byte $20                               ; [9]:
+    .byte $e0                               ; [10]:
 
 ;
 ; XREFS:
 ;     SpriteBehavior_BossDeath
 ;
 BYTE_ARRAY_PRG14__abc1:                     ; [$abc1]
-    db $00                                  ; [0]:
-    db $20                                  ; [1]:
-    db $f0                                  ; [2]:
-    db $10                                  ; [3]:
-    db $e0                                  ; [4]:
-    db $00                                  ; [5]:
-    db $20                                  ; [6]:
-    db $f0                                  ; [7]:
-    db $10                                  ; [8]:
-    db $e0                                  ; [9]:
-    db $00                                  ; [10]:
+    .byte $00                               ; [0]:
+    .byte $20                               ; [1]:
+    .byte $f0                               ; [2]:
+    .byte $10                               ; [3]:
+    .byte $e0                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $20                               ; [6]:
+    .byte $f0                               ; [7]:
+    .byte $10                               ; [8]:
+    .byte $e0                               ; [9]:
+    .byte $00                               ; [10]:
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_LightningBallOrCharron
@@ -12315,7 +12326,7 @@ Sprite_HandleDeathDropIfPossible:           ; [$ac21]
 Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
     STY Temp_00
     LDY CurrentSprites_InternalBehaviorStates,X
-    LDA $b672,Y
+    LDA BYTE_ARRAY_PRG14__b672,Y
     CMP #$ff
     BEQ @_return
     CMP #$40
@@ -12364,7 +12375,7 @@ Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS:                       ; [$ac71]
-    dw Sprites_ReplaceWithCoinDrop-1        ; Sprites_ReplaceWithCoinDrop
+    .word Sprites_ReplaceWithCoinDrop-1     ; Sprites_ReplaceWithCoinDrop
                                             ; [$PRG14::ac71]
 
 ;
@@ -12372,7 +12383,7 @@ SPRITE_DROP_HANDLERS:                       ; [$ac71]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS_LAST:                  ; [$ac73]
-    dw Sprite_ReplaceWithBreadDrop-1        ; Sprite_ReplaceWithBreadDrop
+    .word Sprite_ReplaceWithBreadDrop-1     ; Sprite_ReplaceWithBreadDrop
                                             ; [$PRG14::ac73]
 
 
@@ -12640,70 +12651,70 @@ Sprite_ReplaceWithMattock:                  ; [$aca6]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_MAYBE_DROP_RANDOM_DATA:              ; [$aced]
-    db $0a                                  ; [0]:
-    db $0f                                  ; [1]:
-    db $12                                  ; [2]:
-    db $14                                  ; [3]:
-    db $16                                  ; [4]:
-    db $1a                                  ; [5]:
-    db $20                                  ; [6]:
-    db $35                                  ; [7]:
-    db $38                                  ; [8]:
-    db $3b                                  ; [9]:
-    db $3f                                  ; [10]:
-    db $40                                  ; [11]:
-    db $43                                  ; [12]:
-    db $48                                  ; [13]:
-    db $4a                                  ; [14]:
-    db $4e                                  ; [15]:
-    db $55                                  ; [16]:
-    db $5a                                  ; [17]:
-    db $62                                  ; [18]:
-    db $64                                  ; [19]:
-    db $73                                  ; [20]:
-    db $78                                  ; [21]:
-    db $80                                  ; [22]:
-    db $88                                  ; [23]:
-    db $96                                  ; [24]:
-    db $b4                                  ; [25]:
-    db $be                                  ; [26]:
-    db $c8                                  ; [27]:
-    db $dc                                  ; [28]:
-    db $e6                                  ; [29]:
-    db $f0                                  ; [30]:
-    db $fa                                  ; [31]:
-    db $00                                  ; [32]:
-    db $00                                  ; [33]:
-    db $00                                  ; [34]:
-    db $00                                  ; [35]:
-    db $00                                  ; [36]:
-    db $00                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $00                                  ; [40]:
-    db $00                                  ; [41]:
-    db $00                                  ; [42]:
-    db $00                                  ; [43]:
-    db $00                                  ; [44]:
-    db $00                                  ; [45]:
-    db $00                                  ; [46]:
-    db $00                                  ; [47]:
-    db $02                                  ; [48]:
-    db $04                                  ; [49]:
-    db $08                                  ; [50]:
-    db $10                                  ; [51]:
-    db $0e                                  ; [52]:
-    db $14                                  ; [53]:
-    db $19                                  ; [54]:
-    db $1e                                  ; [55]:
-    db $1f                                  ; [56]:
-    db $28                                  ; [57]:
-    db $32                                  ; [58]:
-    db $37                                  ; [59]:
-    db $3c                                  ; [60]:
-    db $40                                  ; [61]:
-    db $46                                  ; [62]:
-    db $4c                                  ; [63]:
+    .byte $0a                               ; [0]:
+    .byte $0f                               ; [1]:
+    .byte $12                               ; [2]:
+    .byte $14                               ; [3]:
+    .byte $16                               ; [4]:
+    .byte $1a                               ; [5]:
+    .byte $20                               ; [6]:
+    .byte $35                               ; [7]:
+    .byte $38                               ; [8]:
+    .byte $3b                               ; [9]:
+    .byte $3f                               ; [10]:
+    .byte $40                               ; [11]:
+    .byte $43                               ; [12]:
+    .byte $48                               ; [13]:
+    .byte $4a                               ; [14]:
+    .byte $4e                               ; [15]:
+    .byte $55                               ; [16]:
+    .byte $5a                               ; [17]:
+    .byte $62                               ; [18]:
+    .byte $64                               ; [19]:
+    .byte $73                               ; [20]:
+    .byte $78                               ; [21]:
+    .byte $80                               ; [22]:
+    .byte $88                               ; [23]:
+    .byte $96                               ; [24]:
+    .byte $b4                               ; [25]:
+    .byte $be                               ; [26]:
+    .byte $c8                               ; [27]:
+    .byte $dc                               ; [28]:
+    .byte $e6                               ; [29]:
+    .byte $f0                               ; [30]:
+    .byte $fa                               ; [31]:
+    .byte $00                               ; [32]:
+    .byte $00                               ; [33]:
+    .byte $00                               ; [34]:
+    .byte $00                               ; [35]:
+    .byte $00                               ; [36]:
+    .byte $00                               ; [37]:
+    .byte $00                               ; [38]:
+    .byte $00                               ; [39]:
+    .byte $00                               ; [40]:
+    .byte $00                               ; [41]:
+    .byte $00                               ; [42]:
+    .byte $00                               ; [43]:
+    .byte $00                               ; [44]:
+    .byte $00                               ; [45]:
+    .byte $00                               ; [46]:
+    .byte $00                               ; [47]:
+    .byte $02                               ; [48]:
+    .byte $04                               ; [49]:
+    .byte $08                               ; [50]:
+    .byte $10                               ; [51]:
+    .byte $0e                               ; [52]:
+    .byte $14                               ; [53]:
+    .byte $19                               ; [54]:
+    .byte $1e                               ; [55]:
+    .byte $1f                               ; [56]:
+    .byte $28                               ; [57]:
+    .byte $32                               ; [58]:
+    .byte $37                               ; [59]:
+    .byte $3c                               ; [60]:
+    .byte $40                               ; [61]:
+    .byte $46                               ; [62]:
+    .byte $4c                               ; [63]:
 
 
 ;============================================================================
@@ -12718,37 +12729,37 @@ SPRITE_MAYBE_DROP_RANDOM_DATA:              ; [$aced]
 ;     Sprites_PopulateNextAvailableSprite
 ;
 SPRITE_BSCRIPTS:                            ; [$ad2d]
-    dw BSCRIPTS_NOOP                        ; [0]:
+    .word BSCRIPTS_NOOP                     ; [0]:
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_1_:                         ; [$ad2f]
-    dw BSCRIPTS_OBJ_BREAD                   ; [1]: Dropped: Bread
+    .word BSCRIPTS_OBJ_BREAD                ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_2_:                         ; [$ad31]
-    dw BSCRIPTS_OBJ_COIN                    ; [2]: Dropped: Coin
-    dw SPRITE_BEHAVIORS_GARBLED_03          ; [3]: Enemy: ?
-    dw BSCRIPTS_ENEMY_RAIDEN                ; [4]: Enemy: Raiden
-    dw BSCRIPTS_ENEMY_NECRON_AIDES          ; [5]: Enemy: Necron Aides
-    dw BSCRIPTS_ENEMY_ZOMBIE                ; [6]: Enemy: Zombie
-    dw BSCRIPTS_ENEMY_HORNET                ; [7]: Enemy: Hornet
-    dw BSCRIPTS_ENEMY_BIHORUDA              ; [8]: Enemy: Bihoruda
-    dw BSCRIPTS_ENEMY_LILITH                ; [9]: Enemy: Lilith
-    dw BSCRIPTS_GARBLED_10                  ; [10]: Magic: ?
-    dw BSCRIPTS_ENEMY_YUINARU               ; [11]: Enemy: Yuinaru
-    dw BSCRIPTS_ENEMY_SNOWMAN               ; [12]: Enemy: Snowman
-    dw BSCRIPTS_ENEMY_NASH                  ; [13]: Enemy: Nash
-    dw BSCRIPTS_ENEMY_FIRE_GIANT            ; [14]: Enemy: Fire Giant
-    dw BSCRIPTS_ENEMY_ISHIISU               ; [15]: Enemy: Ishiisu
-    dw BSCRIPTS_ENEMY_EXECUTION_HOOD        ; [16]: Enemy: Execution Hood
-    dw BSCRIPTS_BOSS_ROKUSUTAHN             ; [17]: Boss: Rokusutahn
-    dw BSCRIPTS_ENEMY_UNUSED_18             ; [18]: Boss: unused (round body
+    .word BSCRIPTS_OBJ_COIN                 ; [2]: Dropped: Coin
+    .word SPRITE_BEHAVIORS_GARBLED_03       ; [3]: Enemy: ?
+    .word BSCRIPTS_ENEMY_RAIDEN             ; [4]: Enemy: Raiden
+    .word BSCRIPTS_ENEMY_NECRON_AIDES       ; [5]: Enemy: Necron Aides
+    .word BSCRIPTS_ENEMY_ZOMBIE             ; [6]: Enemy: Zombie
+    .word BSCRIPTS_ENEMY_HORNET             ; [7]: Enemy: Hornet
+    .word BSCRIPTS_ENEMY_BIHORUDA           ; [8]: Enemy: Bihoruda
+    .word BSCRIPTS_ENEMY_LILITH             ; [9]: Enemy: Lilith
+    .word BSCRIPTS_GARBLED_10               ; [10]: Magic: ?
+    .word BSCRIPTS_ENEMY_YUINARU            ; [11]: Enemy: Yuinaru
+    .word BSCRIPTS_ENEMY_SNOWMAN            ; [12]: Enemy: Snowman
+    .word BSCRIPTS_ENEMY_NASH               ; [13]: Enemy: Nash
+    .word BSCRIPTS_ENEMY_FIRE_GIANT         ; [14]: Enemy: Fire Giant
+    .word BSCRIPTS_ENEMY_ISHIISU            ; [15]: Enemy: Ishiisu
+    .word BSCRIPTS_ENEMY_EXECUTION_HOOD     ; [16]: Enemy: Execution Hood
+    .word BSCRIPTS_BOSS_ROKUSUTAHN          ; [17]: Boss: Rokusutahn
+    .word BSCRIPTS_ENEMY_UNUSED_18          ; [18]: Boss: unused (round body
                                             ; of snake boss)
 
 ;
@@ -12756,112 +12767,112 @@ SPRITE_BSCRIPTS_2_:                         ; [$ad31]
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_19_:                        ; [$ad53]
-    dw BSCRIPTS_LIGHTNING_BALL_19           ; [19]: Effect: Enemy death
+    .word BSCRIPTS_LIGHTNING_BALL_19        ; [19]: Effect: Enemy death
 
 ;
 ; XREFS:
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_20_:                        ; [$ad55]
-    dw BSCRIPTS_ENEMY_CHARRON               ; [20]: Effect: Lightning ball
-    dw BSCRIPTS_ENEMY_UNUSED_21             ; [21]: Enemy: Charron
-    dw BSCRIPTS_NOOP                        ; [22]: Enemy: ? (Unused)
-    dw BSCRIPTS_ENEMY_GERIBUTA              ; [23]: Enemy: Geributa
-    dw BSCRIPTS_ENEMY_SUGATA                ; [24]: Enemy: Sugata
-    dw BSCRIPTS_ENEMY_GRIMLOCK              ; [25]: Enemy: Grimlock
-    dw BSCRIPTS_ENEMY_GIANT_BEES            ; [26]: Enemy: Giant Bees
-    dw BSCRIPTS_ENEMY_MYCONID               ; [27]: Enemy: Myconid
-    dw BSCRIPTS_ENEMY_NAGA                  ; [28]: Enemy: Naga
-    dw BSCRIPTS_ENEMY_UNUSED_29             ; [29]: Enemy: Skeleton Knight
+    .word BSCRIPTS_ENEMY_CHARRON            ; [20]: Effect: Lightning ball
+    .word BSCRIPTS_ENEMY_UNUSED_21          ; [21]: Enemy: Charron
+    .word BSCRIPTS_NOOP                     ; [22]: Enemy: ? (Unused)
+    .word BSCRIPTS_ENEMY_GERIBUTA           ; [23]: Enemy: Geributa
+    .word BSCRIPTS_ENEMY_SUGATA             ; [24]: Enemy: Sugata
+    .word BSCRIPTS_ENEMY_GRIMLOCK           ; [25]: Enemy: Grimlock
+    .word BSCRIPTS_ENEMY_GIANT_BEES         ; [26]: Enemy: Giant Bees
+    .word BSCRIPTS_ENEMY_MYCONID            ; [27]: Enemy: Myconid
+    .word BSCRIPTS_ENEMY_NAGA               ; [28]: Enemy: Naga
+    .word BSCRIPTS_ENEMY_UNUSED_29          ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    dw BSCRIPTS_ENEMY_GIANT_STRIDER         ; [30]: Enemy: Giant Strider
-    dw BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN   ; [31]: Enemy: Sir Gawaine
-    dw BSCRIPTS_ENEMY_MASKMAN               ; [32]: Enemy: Maskman
-    dw BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN   ; [33]: Enemy: Wolfman
-    dw BSCRIPTS_ENEMY_YAREEKA               ; [34]: Enemy: Yareeka
-    dw BSCRIPTS_ENEMY_MAGMAN                ; [35]: Enemy: Magman
-    dw BSCRIPTS_ENEMY_UNUSED_36             ; [36]: Enemy: Curly-tailed guy
+    .word BSCRIPTS_ENEMY_GIANT_STRIDER      ; [30]: Enemy: Giant Strider
+    .word BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [31]: Enemy: Sir Gawaine
+    .word BSCRIPTS_ENEMY_MASKMAN            ; [32]: Enemy: Maskman
+    .word BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [33]: Enemy: Wolfman
+    .word BSCRIPTS_ENEMY_YAREEKA            ; [34]: Enemy: Yareeka
+    .word BSCRIPTS_ENEMY_MAGMAN             ; [35]: Enemy: Magman
+    .word BSCRIPTS_ENEMY_UNUSED_36          ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    dw BSCRIPTS_NOOP                        ; [37]: Enemy: ? (unused)
-    dw BSCRIPTS_ENEMY_IKEDA                 ; [38]: Enemy: Ikeda
-    dw BSCRIPTS_ENEMY_UNUSED_39             ; [39]: Enemy: Muppet guy
+    .word BSCRIPTS_NOOP                     ; [37]: Enemy: ? (unused)
+    .word BSCRIPTS_ENEMY_IKEDA              ; [38]: Enemy: Ikeda
+    .word BSCRIPTS_ENEMY_UNUSED_39          ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    dw BSCRIPTS_ENEMY_LAMPREY               ; [40]: Enemy: Lamprey
-    dw BSCRIPTS_NOOP                        ; [41]: Enemy: ? (unused)
-    dw BSCRIPTS_ENEMY_MONODRON              ; [42]: Enemy: Monodron
-    dw BSCRIPTS_ENEMY_UNUSED_43             ; [43]: Enemy: Winged skeleton
+    .word BSCRIPTS_ENEMY_LAMPREY            ; [40]: Enemy: Lamprey
+    .word BSCRIPTS_NOOP                     ; [41]: Enemy: ? (unused)
+    .word BSCRIPTS_ENEMY_MONODRON           ; [42]: Enemy: Monodron
+    .word BSCRIPTS_ENEMY_UNUSED_43          ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    dw BSCRIPTS_ENEMY_TAMAZUTSU             ; [44]: Enemy: Tamazutsu
-    dw BSCRIPTS_BOSS_RIPASHEIKU             ; [45]: Boss: Ripasheiku
-    dw BSCRIPTS_BOSS_ZORADOHNA              ; [46]: Boss: Zoradohna
-    dw BSCRIPTS_BOSS_BORABOHRA              ; [47]: Boss: Borabohra
-    dw BSCRIPTS_BOSS_PAKUKAME               ; [48]: Boss: Pakukame
-    dw BSCRIPTS_BOSS_ZORUGERIRU             ; [49]: Boss: Zorugeriru
-    dw BSCRIPTS_BOSS_KING_GRIEVE            ; [50]: Boss: King Grieve
-    dw BSCRIPTS_BOSS_SHADOW_EURA            ; [51]: Boss: Shadow Eura
-    dw BSCRIPTS_NPC_WALKING_MAN             ; [52]: NPC: Walking Man 1
-    dw BSCRIPTS_NPC_UNUSED_BLUE_LADY        ; [53]: NPC: Blue lady (unused)
-    dw BSCRIPTS_NPC_UNUSED_CHILD            ; [54]: NPC: Child (unused)
-    dw BSCRIPTS_NPC_ARMOR_SALESMAN          ; [55]: NPC: Armor Salesman
-    dw BSCRIPTS_NPC_MARTIAL_ARTS            ; [56]: NPC: Martial Artist
-    dw BSCRIPTS_NPC_PRIEST                  ; [57]: NPC: Priest
-    dw BSCRIPTS_NPC_KING                    ; [58]: NPC: King
-    dw BSCRIPTS_NPC_MAGIC_TEACHER           ; [59]: NPC: Magic Teacher
-    dw BSCRIPTS_NPC_KEY_SALESMAN            ; [60]: NPC: Key Salesman
-    dw BSCRIPTS_NPC_SMOKING_MAN             ; [61]: NPC: Smoking Man
-    dw BSCRIPTS_NPC_MAN_IN_CHAIR            ; [62]: NPC: Man in Chair
-    dw BSCRIPTS_NPC_SITTING_MAN             ; [63]: NPC: Sitting Man
-    dw BSCRIPTS_NPC_MEAT_SALESMAN           ; [64]: NPC: Meat Salesman
-    dw BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ; [65]: NPC: Lady in Blue Dress
-                                             ; with Cup
-    dw BSCRIPTS_NPC_KINGS_GUARD             ; [66]: NPC: Guard
-    dw BSCRIPTS_NPC_DOCTOR                  ; [67]: NPC: Doctor
-    dw BSCRIPTS_NPC_WALKING_WOMAN_01        ; [68]: NPC: Walking Woman 1
-    dw BSCRIPTS_NPC_WALKING_WOMAN_02        ; [69]: NPC: Walking Woman 2
-    dw BSCRIPTS_ENEMY_UNUSED_EYEBALL        ; [70]: Enemy: Eyeball (unused)
-    dw BSCRIPTS_ENEMY_ZOZURA                ; [71]: Enemy: Zozura
-    dw BSCRIPTS_OBJ_GLOVE                   ; [72]: Item: Glove
-    dw BSCRIPTS_OBJ_BLACK_ONYX              ; [73]: Item: Black Onyx
-    dw BSCRIPTS_OBJ_PENDANT                 ; [74]: Item: Pendant
-    dw BSCRIPTS_OBJ_POTIONLIKE              ; [75]: Item: Red Potion
-    dw BSCRIPTS_OBJ_POTIONLIKE              ; [76]: Item: Poison
-    dw BSCRIPTS_OBJ_POTIONLIKE              ; [77]: Item: Elixir
-    dw BSCRIPTS_OBJ_OINTMENT                ; [78]: Item: Ointment
-    dw BSCRIPTS_OBJ_POTIONLIKE              ; [79]: Trigger: Intro
+    .word BSCRIPTS_ENEMY_TAMAZUTSU          ; [44]: Enemy: Tamazutsu
+    .word BSCRIPTS_BOSS_RIPASHEIKU          ; [45]: Boss: Ripasheiku
+    .word BSCRIPTS_BOSS_ZORADOHNA           ; [46]: Boss: Zoradohna
+    .word BSCRIPTS_BOSS_BORABOHRA           ; [47]: Boss: Borabohra
+    .word BSCRIPTS_BOSS_PAKUKAME            ; [48]: Boss: Pakukame
+    .word BSCRIPTS_BOSS_ZORUGERIRU          ; [49]: Boss: Zorugeriru
+    .word BSCRIPTS_BOSS_KING_GRIEVE         ; [50]: Boss: King Grieve
+    .word BSCRIPTS_BOSS_SHADOW_EURA         ; [51]: Boss: Shadow Eura
+    .word BSCRIPTS_NPC_WALKING_MAN          ; [52]: NPC: Walking Man 1
+    .word BSCRIPTS_NPC_UNUSED_BLUE_LADY     ; [53]: NPC: Blue lady (unused)
+    .word BSCRIPTS_NPC_UNUSED_CHILD         ; [54]: NPC: Child (unused)
+    .word BSCRIPTS_NPC_ARMOR_SALESMAN       ; [55]: NPC: Armor Salesman
+    .word BSCRIPTS_NPC_MARTIAL_ARTS         ; [56]: NPC: Martial Artist
+    .word BSCRIPTS_NPC_PRIEST               ; [57]: NPC: Priest
+    .word BSCRIPTS_NPC_KING                 ; [58]: NPC: King
+    .word BSCRIPTS_NPC_MAGIC_TEACHER        ; [59]: NPC: Magic Teacher
+    .word BSCRIPTS_NPC_KEY_SALESMAN         ; [60]: NPC: Key Salesman
+    .word BSCRIPTS_NPC_SMOKING_MAN          ; [61]: NPC: Smoking Man
+    .word BSCRIPTS_NPC_MAN_IN_CHAIR         ; [62]: NPC: Man in Chair
+    .word BSCRIPTS_NPC_SITTING_MAN          ; [63]: NPC: Sitting Man
+    .word BSCRIPTS_NPC_MEAT_SALESMAN        ; [64]: NPC: Meat Salesman
+    .word BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ; [65]: NPC: Lady in Blue
+                                                ; Dress with Cup
+    .word BSCRIPTS_NPC_KINGS_GUARD          ; [66]: NPC: Guard
+    .word BSCRIPTS_NPC_DOCTOR               ; [67]: NPC: Doctor
+    .word BSCRIPTS_NPC_WALKING_WOMAN_01     ; [68]: NPC: Walking Woman 1
+    .word BSCRIPTS_NPC_WALKING_WOMAN_02     ; [69]: NPC: Walking Woman 2
+    .word BSCRIPTS_ENEMY_UNUSED_EYEBALL     ; [70]: Enemy: Eyeball (unused)
+    .word BSCRIPTS_ENEMY_ZOZURA             ; [71]: Enemy: Zozura
+    .word BSCRIPTS_OBJ_GLOVE                ; [72]: Item: Glove
+    .word BSCRIPTS_OBJ_BLACK_ONYX           ; [73]: Item: Black Onyx
+    .word BSCRIPTS_OBJ_PENDANT              ; [74]: Item: Pendant
+    .word BSCRIPTS_OBJ_POTIONLIKE           ; [75]: Item: Red Potion
+    .word BSCRIPTS_OBJ_POTIONLIKE           ; [76]: Item: Poison
+    .word BSCRIPTS_OBJ_POTIONLIKE           ; [77]: Item: Elixir
+    .word BSCRIPTS_OBJ_OINTMENT             ; [78]: Item: Ointment
+    .word BSCRIPTS_OBJ_POTIONLIKE           ; [79]: Trigger: Intro
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_BSCRIPTS_80_:                        ; [$adcd]
-    dw BSCRIPTS_OBJ_MATTOCK                 ; [80]: Item: Mattock
+    .word BSCRIPTS_OBJ_MATTOCK              ; [80]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_BSCRIPTS_81_:                        ; [$adcf]
-    dw BSCRIPTS_GARBLED_81                  ; [81]: Magic: ?
-    dw BSCRIPTS_FOUNTAIN                    ; [82]: Effect: Fountain
-    dw SPRITE_BEHAVIORS_UNKNOWN_83          ; [83]: Magic: ?
-    dw BSCRIPTS_GARBLED_81                  ; [84]: Magic: Enemy Fireball
-    dw BSCRIPTS_OBJ_WINGBOOTS               ; [85]: Item: Wing Boots
-    dw BSCRIPTS_OBJ_HOURGLASS               ; [86]: Item: Hour Glass
-    dw BSCRIPTS_OBJ_MAGICAL_ROD             ; [87]: Item: Magical Rod
-    dw BSCRIPTS_OBJ_BATTLE_SUIT             ; [88]: Item: Battle Suit
-    dw BSCRIPTS_OBJ_BATTLE_HELMET           ; [89]: Item: Battle Helmet
-    dw BSCRIPTS_OBJ_DRAGON_SLAYER           ; [90]: Item: Dragon Slayer
-    dw BSCRIPTS_OBJ_MATTOCK_QUEST           ; [91]: Item: Mattock
-    dw BSCRIPTS_OBJ_WINGSBOOTS_QUEST        ; [92]: Item: Wing Boots (from
+    .word BSCRIPTS_GARBLED_81               ; [81]: Magic: ?
+    .word BSCRIPTS_FOUNTAIN                 ; [82]: Effect: Fountain
+    .word SPRITE_BEHAVIORS_UNKNOWN_83       ; [83]: Magic: ?
+    .word BSCRIPTS_GARBLED_81               ; [84]: Magic: Enemy Fireball
+    .word BSCRIPTS_OBJ_WINGBOOTS            ; [85]: Item: Wing Boots
+    .word BSCRIPTS_OBJ_HOURGLASS            ; [86]: Item: Hour Glass
+    .word BSCRIPTS_OBJ_MAGICAL_ROD          ; [87]: Item: Magical Rod
+    .word BSCRIPTS_OBJ_BATTLE_SUIT          ; [88]: Item: Battle Suit
+    .word BSCRIPTS_OBJ_BATTLE_HELMET        ; [89]: Item: Battle Helmet
+    .word BSCRIPTS_OBJ_DRAGON_SLAYER        ; [90]: Item: Dragon Slayer
+    .word BSCRIPTS_OBJ_MATTOCK_QUEST        ; [91]: Item: Mattock
+    .word BSCRIPTS_OBJ_WINGSBOOTS_QUEST     ; [92]: Item: Wing Boots (from
                                             ; quest)
-    dw BSCRIPTS_OBJ_RED_POTION_RANDOM       ; [93]: Item: Red Potion
-    dw BSCRIPTS_OBJ_POISON                  ; [94]: Item: Poison
-    dw BSCRIPTS_OBJ_GLOVE_RANDOM            ; [95]: Item: Glove
-    dw BSCRIPTS_OBJ_OINTMENT_RANDOM         ; [96]: Item: Ointment
-    dw BSCRIPTS_SPRING_OF_FORTRESS          ; [97]: Effect: Spring of Trunk
-    dw BSCRIPTS_SPRING_OF_SKY               ; [98]: Effect: Spring of Sky
-    dw BSCRIPTS_SPRING_OF_JOKER             ; [99]: Effect: Spring of Tower
-    dw BSCRIPTS_EFFECT_BOSS_DEATH           ; [100]: Effect: Boss Death
+    .word BSCRIPTS_OBJ_RED_POTION_RANDOM    ; [93]: Item: Red Potion
+    .word BSCRIPTS_OBJ_POISON               ; [94]: Item: Poison
+    .word BSCRIPTS_OBJ_GLOVE_RANDOM         ; [95]: Item: Glove
+    .word BSCRIPTS_OBJ_OINTMENT_RANDOM      ; [96]: Item: Ointment
+    .word BSCRIPTS_SPRING_OF_FORTRESS       ; [97]: Effect: Spring of Trunk
+    .word BSCRIPTS_SPRING_OF_SKY            ; [98]: Effect: Spring of Sky
+    .word BSCRIPTS_SPRING_OF_JOKER          ; [99]: Effect: Spring of Tower
+    .word BSCRIPTS_EFFECT_BOSS_DEATH        ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -12882,7 +12893,7 @@ SPRITE_BSCRIPTS_81_:                        ; [$adcf]
 ;     SPRITE_BSCRIPTS [$PRG14::ad7f]
 ;
 BSCRIPTS_NOOP:                              ; [$adf7]
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12897,16 +12908,16 @@ BSCRIPTS_NOOP:                              ; [$adf7]
 ;     SPRITE_BSCRIPTS [$PRG14::ad2f]
 ;
 BSCRIPTS_OBJ_BREAD:                         ; [$adf8]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels
-    db $00                                  ;  |- 3 blocks
-    db $03                                  ;  '- Hop mode 3
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $ff                                  ;  |- For 255 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels
+    .byte $00                               ;  |- 3 blocks
+    .byte $03                               ;  '- Hop mode 3
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $ff                               ;  |- For 255 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12921,11 +12932,11 @@ BSCRIPTS_OBJ_BREAD:                         ; [$adf8]
 ;     SPRITE_BSCRIPTS [$PRG14::ad33]
 ;
 SPRITE_BEHAVIORS_GARBLED_03:                ; [$ae02]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_GARBLED_3            ; [$ae03] SpriteBehavior
-    db $00                                  ; [$ae04] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_GARBLED_3         ; [$ae03] SpriteBehavior
+    .byte $00                               ; [$ae04] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12940,11 +12951,11 @@ SPRITE_BEHAVIORS_GARBLED_03:                ; [$ae02]
 ;     SPRITE_BSCRIPTS [$PRG14::add3]
 ;
 SPRITE_BEHAVIORS_UNKNOWN_83:                ; [$ae06]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$ae06] SpriteOp
-    db SPRITE_BEHAVIOR_UNKNOWN_29           ; [$ae07] SpriteBehavior
-    db $00                                  ; [$ae08] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$ae06] SpriteOp
+    .byte SPRITE_BEHAVIOR_UNKNOWN_29        ; [$ae07] SpriteBehavior
+    .byte $00                               ; [$ae08] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12959,10 +12970,10 @@ SPRITE_BEHAVIORS_UNKNOWN_83:                ; [$ae06]
 ;     SPRITE_BSCRIPTS [$PRG14::ad3b]
 ;
 BSCRIPTS_ENEMY_HORNET:                      ; [$ae0a]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_BUZZ_AROUND          ;  |- Buzz around
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_BUZZ_AROUND       ;  |- Buzz around
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12977,11 +12988,11 @@ BSCRIPTS_ENEMY_HORNET:                      ; [$ae0a]
 ;     SPRITE_BSCRIPTS [$PRG14::ad3d]
 ;
 BSCRIPTS_ENEMY_BIHORUDA:                    ; [$ae0e]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_BIHORUDA             ; [$ae0f] SpriteBehavior
-    db $00                                  ; [$ae10] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_BIHORUDA          ; [$ae0f] SpriteBehavior
+    .byte $00                               ; [$ae10] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -12996,11 +13007,11 @@ BSCRIPTS_ENEMY_BIHORUDA:                    ; [$ae0e]
 ;     SPRITE_BSCRIPTS [$PRG14::ad3f]
 ;
 BSCRIPTS_ENEMY_LILITH:                      ; [$ae12]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_LILITH               ; [$ae13] SpriteBehavior
-    db $00                                  ; [$ae14] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_LILITH            ; [$ae13] SpriteBehavior
+    .byte $00                               ; [$ae14] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13015,55 +13026,55 @@ BSCRIPTS_ENEMY_LILITH:                      ; [$ae12]
 ;     SPRITE_BSCRIPTS [$PRG14::ad35]
 ;
 BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $14                                  ;  |- For 20 ticks
-    db $00                                  ;  |- 0 pixels
-    db $01                                  ;  '- 1 block
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  |- 2 pixels X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels
-    db $01                                  ;  '- 1 block
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $14                               ;  |- For 20 ticks
+    .byte $00                               ;  |- 0 pixels
+    .byte $01                               ;  '- 1 block
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  |- 2 pixels X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels
+    .byte $01                               ;  '- 1 block
 
   @_checkDistanceLoop:                      ; [$ae28]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance
-    db $00                                  ;  |- X direction
-    db $30                                  ;  |- If < 48
-    dw @_isNearPlayer                       ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance
+    .byte $00                               ;  |- X direction
+    .byte $30                               ;  |- If < 48
+    .word @_isNearPlayer                    ;  |- Then
                                             ; @_isNearPlayer
-    dw @_checkDistanceLoop                  ;  '- Else,
+    .word @_checkDistanceLoop               ;  '- Else,
                                             ; @_checkDistanceLoop
 
   @_isNearPlayer:                           ; [$ae2f]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall
-    db $07                                  ;  '- For 7 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $40                                  ;  |- 64 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $00                                  ;  '- Hop mode 0
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $14                                  ;  |- For 20 ticks
-    db $e0                                  ;  |- 224 pixels
-    db $00                                  ;  '- 0 blocks
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_RAIDEN                ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall
+    .byte $07                               ;  '- For 7 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $40                               ;  |- 64 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $00                               ;  '- Hop mode 0
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $14                               ;  |- For 20 ticks
+    .byte $e0                               ;  |- 224 pixels
+    .byte $00                               ;  '- 0 blocks
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_RAIDEN             ;  '-
                                             ; BSCRIPTS_ENEMY_RAIDEN
 
 
@@ -13079,88 +13090,88 @@ BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
 ;     SPRITE_BSCRIPTS [$PRG14::adb9]
 ;
 BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MAYBE_MOVE_XY        ;  |- TODO: Move X/Y
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $00                                  ;  |- 0 pixels Y
-    db $00                                  ;  '- 0 blocks Y
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MAYBE_MOVE_XY     ;  |- TODO: Move X/Y
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $00                               ;  '- 0 blocks Y
 
   @_waitNearPlayerX:                        ; [$ae4c]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $30                                  ;  |- If < 48
-    dw @_isNearPlayerX                      ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $30                               ;  |- If < 48
+    .word @_isNearPlayerX                   ;  |- Then
                                             ; @_isNearPlayerX
-    dw @_waitNearPlayerX                    ;  '- Else
+    .word @_waitNearPlayerX                 ;  '- Else
                                             ; @_waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae53]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_Y          ;  '- Face player (Y)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MAYBE_MOVE_XY        ;  |- Move X/Y
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $00                                  ;  |- 0 pixels Y
-    db $01                                  ;  '- 1 block Y
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_Y       ;  '- Face player (Y)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MAYBE_MOVE_XY     ;  |- Move X/Y
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $01                               ;  '- 1 block Y
 
   @_waitNearPlayerY:                        ; [$ae60]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $01                                  ;  |- Y direction
-    db $08                                  ;  |- If < 8
-    dw @_isNearPlayerY                      ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $01                               ;  |- Y direction
+    .byte $08                               ;  |- If < 8
+    .word @_isNearPlayerY                   ;  |- Then
                                             ; @_isNearPlayerY
-    dw @_waitNearPlayerY                    ;  '- Then
+    .word @_waitNearPlayerY                 ;  '- Then
                                             ; @_waitNearPlayerY
 
   @_isNearPlayerY:                          ; [$ae67]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MAYBE_MOVE_XY        ;  |- Move X/Y
-    db $32                                  ;  |- For 50 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $00                                  ;  |- 0 pixels Y
-    db $00                                  ;  '- 0 blocks Y
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_Y_DIRECTION       ;  '- Flip Y direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MAYBE_MOVE_XY        ;  |- Move X/Y
-    db $32                                  ;  |- For 50 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $00                                  ;  |- 0 pixels Y
-    db $01                                  ;  '- 1 block Y
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_Y_DIRECTION ;  '- Randomly flip Y
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MAYBE_MOVE_XY        ;  |- Move X/Y
-    db $0a                                  ;  |- For 10 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $00                                  ;  |- 0 pixels Y
-    db $01                                  ;  '- 1 block Y
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_UNUSED_EYEBALL        ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MAYBE_MOVE_XY     ;  |- Move X/Y
+    .byte $32                               ;  |- For 50 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $00                               ;  '- 0 blocks Y
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_Y_DIRECTION    ;  '- Flip Y direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MAYBE_MOVE_XY     ;  |- Move X/Y
+    .byte $32                               ;  |- For 50 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $01                               ;  '- 1 block Y
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_Y_DIRECTION ;  '- Randomly flip Y
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MAYBE_MOVE_XY     ;  |- Move X/Y
+    .byte $0a                               ;  |- For 10 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $01                               ;  '- 1 block Y
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_UNUSED_EYEBALL     ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_EYEBALL
 
 
@@ -13176,45 +13187,45 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
 ;     SPRITE_BSCRIPTS [$PRG14::ad79]
 ;
 BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels
-    db $01                                  ;  '- 1 block
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels
+    .byte $01                               ;  '- 1 block
 
   @_waitNearPlayerX:                        ; [$ae93]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $40                                  ;  |- If < 64 pixels
-    dw @_isNearPlayerX                      ;  |- Then _isNearPlayerX
-    dw @_waitNearPlayerX                    ;  '- Else _waitNearPlayerX
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $40                               ;  |- If < 64 pixels
+    .word @_isNearPlayerX                   ;  |- Then _isNearPlayerX
+    .word @_waitNearPlayerX                 ;  '- Else _waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae9a]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 blocks X
-    db $01                                  ;  '- Hop mode 1
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $0a                                  ;  |- For 10 ticks
-    db $08                                  ;  |- 8 pixels
-    db $00                                  ;  '- 0 blocks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_IKEDA                 ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 blocks X
+    .byte $01                               ;  '- Hop mode 1
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $0a                               ;  |- For 10 ticks
+    .byte $08                               ;  |- 8 pixels
+    .byte $00                               ;  '- 0 blocks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_IKEDA              ;  '-
                                             ; BSCRIPTS_ENEMY_IKEDA
 
 
@@ -13230,15 +13241,15 @@ BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
 ;     SPRITE_BSCRIPTS [$PRG14::adbb]
 ;
 BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ; '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $3c                                  ;  |- For 60 ticks
-    db $60                                  ;  |- 96 pixels
-    db $00                                  ;  '- 0 blocks
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_ZOZURA                ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ; '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $60                               ;  |- 96 pixels
+    .byte $00                               ;  '- 0 blocks
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_ZOZURA             ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13249,23 +13260,23 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
 ; but would randomly change the X direction and continue
 ; walking.
 ;
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $3c                                  ;  |- For 60 ticks
-    db $60                                  ;  |- 96 pixels
-    db $00                                  ;  '- 0 blocks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $14                                  ;  |- For 20 ticks
-    db $60                                  ;  |- 96 pixels
-    db $00                                  ;  '- 0 blocks
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_ZOZURA                ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $60                               ;  |- 96 pixels
+    .byte $00                               ;  '- 0 blocks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $14                               ;  |- For 20 ticks
+    .byte $60                               ;  |- 96 pixels
+    .byte $00                               ;  '- 0 blocks
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_ZOZURA             ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13281,31 +13292,31 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
 ;     SPRITE_BSCRIPTS [$PRG14::ad81]
 ;
 BSCRIPTS_ENEMY_MONODRON:                    ; [$aecc]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly change X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- X fractional amount
-    db $01                                  ;  |- X full amount
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run Action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $14                                  ;  '- For 20 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $80                                  ;  |- X fractional amount
-    db $01                                  ;  |- X full amount
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_MONODRON              ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly change X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- X fractional amount
+    .byte $01                               ;  |- X full amount
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run Action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $14                               ;  '- For 20 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $80                               ;  |- X fractional amount
+    .byte $01                               ;  |- X full amount
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_MONODRON           ;  '-
                                             ; BSCRIPTS_ENEMY_MONODRON
 
 
@@ -13321,38 +13332,38 @@ BSCRIPTS_ENEMY_MONODRON:                    ; [$aecc]
 ;     SPRITE_BSCRIPTS [$PRG14::ad45]
 ;
 BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/Wait
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ;  Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels
-    db $02                                  ;  '- 2 blocks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/Wait
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ;  Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels
+    .byte $02                               ;  '- 2 blocks
 
   @_waitNearPlayer:                         ; [$aef1]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check player distance
-    db $00                                  ;  |- X direction
-    db $20                                  ;  |- If < 32 pixels
-    dw @_isNearPlayer                       ;  |- Then _isNearPlayer
-    dw @_waitNearPlayer                     ;  '- Else
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check player distance
+    .byte $00                               ;  |- X direction
+    .byte $20                               ;  |- If < 32 pixels
+    .word @_isNearPlayer                    ;  |- Then _isNearPlayer
+    .word @_waitNearPlayer                  ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$aef8]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  |- 2 blocks X
-    db $04                                  ;  '- Hop mode 4
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_SNOWMAN               ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  |- 2 blocks X
+    .byte $04                               ;  '- Hop mode 4
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_SNOWMAN            ;  '-
                                             ; BSCRIPTS_ENEMY_SNOWMAN
 
 
@@ -13368,10 +13379,10 @@ BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
 ;     SPRITE_BSCRIPTS [$PRG14::ad31]
 ;
 BSCRIPTS_OBJ_COIN:                          ; [$af02]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_BOUNCE_AND_EXPIRE    ;  |- Bounce and expire
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_BOUNCE_AND_EXPIRE ;  |- Bounce and expire
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13386,49 +13397,49 @@ BSCRIPTS_OBJ_COIN:                          ; [$af02]
 ;     SPRITE_BSCRIPTS [$PRG14::ad39]
 ;
 BSCRIPTS_ENEMY_ZOMBIE:                      ; [$af06]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $14                                  ;  |- For 20 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $14                                  ;  |- For 20 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $3c                                  ;  '- For 60 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_ZOMBIE                ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $3c                               ;  '- For 60 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_ZOMBIE             ;  '-
                                             ; BSCRIPTS_ENEMY_ZOMBIE
 
 
@@ -13444,11 +13455,11 @@ BSCRIPTS_ENEMY_ZOMBIE:                      ; [$af06]
 ;     SPRITE_BSCRIPTS [$PRG14::ad37]
 ;
 BSCRIPTS_ENEMY_NECRON_AIDES:                ; [$af31]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af31] SpriteOp
-    db SPRITE_BEHAVIOR_NECRON_AIDES         ; [$af32] SpriteBehavior
-    db $00                                  ; [$af33] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af31] SpriteOp
+    .byte SPRITE_BEHAVIOR_NECRON_AIDES      ; [$af32] SpriteBehavior
+    .byte $00                               ; [$af33] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13463,11 +13474,11 @@ BSCRIPTS_ENEMY_NECRON_AIDES:                ; [$af31]
 ;     SPRITE_BSCRIPTS [$PRG14::ad43]
 ;
 BSCRIPTS_ENEMY_YUINARU:                     ; [$af35]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af35] SpriteOp
-    db SPRITE_BEHAVIOR_YUINARU              ; [$af36] SpriteBehavior
-    db $00                                  ; [$af37] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af35] SpriteOp
+    .byte SPRITE_BEHAVIOR_YUINARU           ; [$af36] SpriteBehavior
+    .byte $00                               ; [$af37] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13482,11 +13493,11 @@ BSCRIPTS_ENEMY_YUINARU:                     ; [$af35]
 ;     SPRITE_BSCRIPTS [$PRG14::ad47]
 ;
 BSCRIPTS_ENEMY_NASH:                        ; [$af39]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af39] SpriteOp
-    db SPRITE_BEHAVIOR_NASH                 ; [$af3a] SpriteBehavior
-    db $00                                  ; [$af3b] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af39] SpriteOp
+    .byte SPRITE_BEHAVIOR_NASH              ; [$af3a] SpriteBehavior
+    .byte $00                               ; [$af3b] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13501,30 +13512,30 @@ BSCRIPTS_ENEMY_NASH:                        ; [$af39]
 ;     SPRITE_BSCRIPTS [$PRG14::ad49]
 ;
 BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
 
   @_waitNearPlayer:                         ; [$af42]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $20                                  ;  |- If < 32 pixels
-    dw @_isNearPlayer                       ;  |- Then _isNearPlayer
-    dw @_waitNearPlayer                     ;  '- Else _waitNearPlayer
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $20                               ;  |- If < 32 pixels
+    .word @_isNearPlayer                    ;  |- Then _isNearPlayer
+    .word @_waitNearPlayer                  ;  '- Else _waitNearPlayer
 
   @_isNearPlayer:                           ; [$af49]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_FIRE_GIANT            ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_FIRE_GIANT         ;  '-
                                             ; BSCRIPTS_ENEMY_FIRE_GIANT
 
 
@@ -13540,11 +13551,11 @@ BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
 ;     SPRITE_BSCRIPTS [$PRG14::ad4b]
 ;
 BSCRIPTS_ENEMY_ISHIISU:                     ; [$af54]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af54] SpriteOp
-    db SPRITE_BEHAVIOR_ISHIISU              ; [$af55] SpriteBehavior
-    db $00                                  ; [$af56] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af54] SpriteOp
+    .byte SPRITE_BEHAVIOR_ISHIISU           ; [$af55] SpriteBehavior
+    .byte $00                               ; [$af56] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13559,11 +13570,11 @@ BSCRIPTS_ENEMY_ISHIISU:                     ; [$af54]
 ;     SPRITE_BSCRIPTS [$PRG14::ad4d]
 ;
 BSCRIPTS_ENEMY_EXECUTION_HOOD:              ; [$af58]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af58] SpriteOp
-    db SPRITE_BEHAVIOR_EXECUTION_HOOD       ; [$af59] SpriteBehavior
-    db $00                                  ; [$af5a] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af58] SpriteOp
+    .byte SPRITE_BEHAVIOR_EXECUTION_HOOD    ; [$af59] SpriteBehavior
+    .byte $00                               ; [$af5a] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13578,11 +13589,11 @@ BSCRIPTS_ENEMY_EXECUTION_HOOD:              ; [$af58]
 ;     SPRITE_BSCRIPTS [$PRG14::ad53]
 ;
 BSCRIPTS_LIGHTNING_BALL_19:                 ; [$af5c]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af5c] SpriteOp
-    db SPRITE_BEHAVIOR_MAYBE_LIGHTNINGBALL  ; [$af5d] SpriteBehavior
-    db $00                                  ; [$af5e] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af5c] SpriteOp
+    .byte SPRITE_BEHAVIOR_MAYBE_LIGHTNINGBALL ; [$af5d] SpriteBehavior
+    .byte $00                               ; [$af5e] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13597,11 +13608,11 @@ BSCRIPTS_LIGHTNING_BALL_19:                 ; [$af5c]
 ;     SPRITE_BSCRIPTS [$PRG14::ad55]
 ;
 BSCRIPTS_ENEMY_CHARRON:                     ; [$af60]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af60] SpriteOp
-    db SPRITE_BEHAVIOR_LIGHTNINBALL_CHARRON ; [$af61] SpriteBehavior
-    db $00                                  ; [$af62] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af60] SpriteOp
+    .byte SPRITE_BEHAVIOR_LIGHTNINBALL_CHARRON ; [$af61] SpriteBehavior
+    .byte $00                               ; [$af62] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13616,11 +13627,11 @@ BSCRIPTS_ENEMY_CHARRON:                     ; [$af60]
 ;     SPRITE_BSCRIPTS [$PRG14::adf5]
 ;
 BSCRIPTS_EFFECT_BOSS_DEATH:                 ; [$af64]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$af64] SpriteOp
-    db SPRITE_BEHAVIOR_EFFECT_BOSS_DEATH    ; [$af65] SpriteBehavior
-    db $00                                  ; [$af66] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$af64] SpriteOp
+    .byte SPRITE_BEHAVIOR_EFFECT_BOSS_DEATH ; [$af65] SpriteBehavior
+    .byte $00                               ; [$af66] byte
 
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -13635,38 +13646,38 @@ BSCRIPTS_EFFECT_BOSS_DEATH:                 ; [$af64]
 ;     SPRITE_BSCRIPTS [$PRG14::ad57]
 ;
 BSCRIPTS_ENEMY_UNUSED_21:                   ; [$af68]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $10                                  ;  '- For 16 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $1e                                  ;  |- For 30 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $10                                  ;  '- For 16 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $1e                                  ;  |- For 30 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $08                                  ;  '- For 8 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_CAST_MAGIC             ;  '- Cast magic
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $08                                  ;  '- For 8 ticks
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_UNUSED_21             ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $10                               ;  '- For 16 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $1e                               ;  |- For 30 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $10                               ;  '- For 16 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $1e                               ;  |- For 30 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $08                               ;  '- For 8 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_CAST_MAGIC          ;  '- Cast magic
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $08                               ;  '- For 8 ticks
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_UNUSED_21          ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_21
 
 
@@ -13682,23 +13693,23 @@ BSCRIPTS_ENEMY_UNUSED_21:                   ; [$af68]
 ;     SPRITE_BSCRIPTS [$PRG14::ad5b]
 ;
 BSCRIPTS_ENEMY_GERIBUTA:                    ; [$af89]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
-                                               ; direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_CLEAR_READY_SET_BIT_7 ; [$af8c] SpriteBehavior
-    db $00                                  ; [$af8d] byte
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_RANDOMLY_FLIP_X_DIRECTION ;  '- Randomly flip X
+                                                  ; direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_CLEAR_READY_SET_BIT_7 ; [$af8c] SpriteBehavior
+    .byte $00                               ; [$af8d] byte
 
   @_moveTowardPlayerLoop:                   ; [$af8e]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $1e                                  ;  |- For 30 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  '- 2 blocks X
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw @_moveTowardPlayerLoop               ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $1e                               ;  |- For 30 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  '- 2 blocks X
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word @_moveTowardPlayerLoop            ;  '-
                                             ; @_moveTowardPlayerLoop
 
 
@@ -13714,34 +13725,35 @@ BSCRIPTS_ENEMY_GERIBUTA:                    ; [$af89]
 ;     SPRITE_BSCRIPTS [$PRG14::ad5d]
 ;
 BSCRIPTS_ENEMY_SUGATA:                      ; [$af98]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player (X)
-    db $1e                                  ;  |- For 30 ticks
-    db $00                                  ;  |- 0 pixels per tick
-    db $01                                  ;  '- 1 block per tick
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player (X)
-    db $28                                  ;  |- For 40 ticks
-    db $00                                  ;  |- 0 pixels per tick
-    db $01                                  ;  '- 1 block per tick
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player (X)
-    db $14                                  ;  |- For 20 ticks
-    db $80                                  ;  |- 128 pixels per tick
-    db $00                                  ;  '- 0 blocks per tick
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FLASH_DAMAGE_PLAYER  ;  |- Flash screen, damage player
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_SUGATA                ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player (X)
+    .byte $1e                               ;  |- For 30 ticks
+    .byte $00                               ;  |- 0 pixels per tick
+    .byte $01                               ;  '- 1 block per tick
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player (X)
+    .byte $28                               ;  |- For 40 ticks
+    .byte $00                               ;  |- 0 pixels per tick
+    .byte $01                               ;  '- 1 block per tick
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player (X)
+    .byte $14                               ;  |- For 20 ticks
+    .byte $80                               ;  |- 128 pixels per tick
+    .byte $00                               ;  '- 0 blocks per tick
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FLASH_DAMAGE_PLAYER ;  |- Flash screen, damage
+                                              ; player
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_SUGATA             ;  '-
                                             ; BSCRIPTS_ENEMY_SUGATA
 
 
@@ -13757,118 +13769,118 @@ BSCRIPTS_ENEMY_SUGATA:                      ; [$af98]
 ;     SPRITE_BSCRIPTS [$PRG14::ad5f]
 ;
 BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $10                                  ;  '- For 16 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $14                                  ;  '- For 20 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0e                                  ;  '- For 14 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $10                                  ;  '- For 16 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $12                                  ;  '- For 18 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $01                                  ;  |- Y direction
-    db $10                                  ;  |- If < 16 pixels
-    dw @_nearPlayerY                        ;  |- Then
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $10                               ;  '- For 16 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $14                               ;  '- For 20 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0e                               ;  '- For 14 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $10                               ;  '- For 16 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $12                               ;  '- For 18 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $01                               ;  |- Y direction
+    .byte $10                               ;  |- If < 16 pixels
+    .word @_nearPlayerY                     ;  |- Then
                                             ; @_nearPlayerY
-    dw @_awayFromPlayerY                    ;  '- Else
+    .word @_awayFromPlayerY                 ;  '- Else
                                             ; @_awayFromPlayerY
 
   @_awayFromPlayerY:                        ; [$afe5]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
 
   @_waitNearPlayerX:                        ; [$afeb]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $10                                  ;  |- If < 16 pixels
-    dw @_nearPlayerX                        ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $10                               ;  |- If < 16 pixels
+    .word @_nearPlayerX                     ;  |- Then
                                             ; @_nearPlayerX
-    dw @_waitNearPlayerX                    ;  '- Else _waitNearPlayerX
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
+    .word @_waitNearPlayerX                 ;  '- Else _waitNearPlayerX
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX:                            ; [$aff5]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerY:                            ; [$afff]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SET_PHASE                  ; Op: Set phase
-    db $09                                  ;  '- 9
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  '- 2 pixels X
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SET_PHASE               ; Op: Set phase
+    .byte $09                               ;  '- 9
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  '- 2 pixels X
 
   @_waitNearPlayerX2:                       ; [$b007]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $10                                  ;  |- If < 16 pixels
-    dw @_nearPlayerX2                       ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $10                               ;  |- If < 16 pixels
+    .word @_nearPlayerX2                    ;  |- Then
                                             ; @_nearPlayerX2
-    dw @_waitNearPlayerX2                   ;  '- Else
+    .word @_waitNearPlayerX2                ;  '- Else
                                             ; @_waitNearPlayerX2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX2:                           ; [$b011]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  |- 2 blocks X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_GRIMLOCK              ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  |- 2 blocks X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
 
@@ -13884,11 +13896,11 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
 ;     SPRITE_BSCRIPTS [$PRG14::ad61]
 ;
 BSCRIPTS_ENEMY_GIANT_BEES:                  ; [$b01b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b01b] SpriteOp
-    db SPRITE_BEHAVIOR_GIANT_BEES           ; [$b01c] SpriteBehavior
-    db $00                                  ; [$b01d] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b01b] SpriteOp
+    .byte SPRITE_BEHAVIOR_GIANT_BEES        ; [$b01c] SpriteBehavior
+    .byte $00                               ; [$b01d] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -13903,42 +13915,42 @@ BSCRIPTS_ENEMY_GIANT_BEES:                  ; [$b01b]
 ;     SPRITE_BSCRIPTS [$PRG14::ad63]
 ;
 BSCRIPTS_ENEMY_MYCONID:                     ; [$b01f]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $3c                                  ;  |- For 60 ticks
-    db $40                                  ;  |- 64 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $3c                                  ;  |- For 60 ticks
-    db $40                                  ;  |- 64 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_MYCONID               ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $40                               ;  |- 64 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $40                               ;  |- 64 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_MYCONID            ;  '-
                                             ; BSCRIPTS_ENEMY_MYCONID
 
 
@@ -13954,11 +13966,11 @@ BSCRIPTS_ENEMY_MYCONID:                     ; [$b01f]
 ;     SPRITE_BSCRIPTS [$PRG14::ad65]
 ;
 BSCRIPTS_ENEMY_NAGA:                        ; [$b044]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b044] SpriteOp
-    db SPRITE_BEHAVIOR_NAGA                 ; [$b045] SpriteBehavior
-    db $00                                  ; [$b046] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b044] SpriteOp
+    .byte SPRITE_BEHAVIOR_NAGA              ; [$b045] SpriteBehavior
+    .byte $00                               ; [$b046] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -13973,21 +13985,21 @@ BSCRIPTS_ENEMY_NAGA:                        ; [$b044]
 ;     SPRITE_BSCRIPTS [$PRG14::ad69]
 ;
 BSCRIPTS_ENEMY_GIANT_STRIDER:               ; [$b048]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Walk toward player
-    db $3c                                  ;  |- For 60 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_GIANT_STRIDER         ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Walk toward player
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_GIANT_STRIDER      ;  '-
                                             ; BSCRIPTS_ENEMY_GIANT_STRIDER
 
 
@@ -14003,11 +14015,11 @@ BSCRIPTS_ENEMY_GIANT_STRIDER:               ; [$b048]
 ;     SPRITE_BSCRIPTS [$PRG14::ad71]
 ;
 BSCRIPTS_ENEMY_YAREEKA:                     ; [$b058]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b058] SpriteOp
-    db SPRITE_BEHAVIOR_YAREEKA              ; [$b059] SpriteBehavior
-    db $00                                  ; [$b05a] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b058] SpriteOp
+    .byte SPRITE_BEHAVIOR_YAREEKA           ; [$b059] SpriteBehavior
+    .byte $00                               ; [$b05a] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14022,11 +14034,11 @@ BSCRIPTS_ENEMY_YAREEKA:                     ; [$b058]
 ;     SPRITE_BSCRIPTS [$PRG14::ad73]
 ;
 BSCRIPTS_ENEMY_MAGMAN:                      ; [$b05c]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b05c] SpriteOp
-    db SPRITE_BEHAVIOR_MAGMAN               ; [$b05d] SpriteBehavior
-    db $00                                  ; [$b05e] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b05c] SpriteOp
+    .byte SPRITE_BEHAVIOR_MAGMAN            ; [$b05d] SpriteBehavior
+    .byte $00                               ; [$b05e] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14041,11 +14053,11 @@ BSCRIPTS_ENEMY_MAGMAN:                      ; [$b05c]
 ;     SPRITE_BSCRIPTS [$PRG14::ad75]
 ;
 BSCRIPTS_ENEMY_UNUSED_36:                   ; [$b060]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b060] SpriteOp
-    db SPRITE_BEHAVIOR_ENEMY_UNUSED_36      ; [$b061] SpriteBehavior
-    db $00                                  ; [$b062] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b060] SpriteOp
+    .byte SPRITE_BEHAVIOR_ENEMY_UNUSED_36   ; [$b061] SpriteBehavior
+    .byte $00                               ; [$b062] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14060,11 +14072,11 @@ BSCRIPTS_ENEMY_UNUSED_36:                   ; [$b060]
 ;     SPRITE_BSCRIPTS [$PRG14::ad7b]
 ;
 BSCRIPTS_ENEMY_UNUSED_39:                   ; [$b064]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b064] SpriteOp
-    db SPRITE_BEHAVIOR_ENEMY_UNUSED_39      ; [$b065] SpriteBehavior
-    db $00                                  ; [$b066] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b064] SpriteOp
+    .byte SPRITE_BEHAVIOR_ENEMY_UNUSED_39   ; [$b065] SpriteBehavior
+    .byte $00                               ; [$b066] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14079,15 +14091,15 @@ BSCRIPTS_ENEMY_UNUSED_39:                   ; [$b064]
 ;     SPRITE_BSCRIPTS [$PRG14::ad7d]
 ;
 BSCRIPTS_ENEMY_LAMPREY:                     ; [$b068]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Walk toward player
-    db $3c                                  ;  |- For 60 ticks
-    db $50                                  ;  |- 80 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_LAMPREY               ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Walk toward player
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $50                               ;  |- 80 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_LAMPREY            ;  '-
                                             ; BSCRIPTS_ENEMY_LAMPREY
 
 
@@ -14103,11 +14115,11 @@ BSCRIPTS_ENEMY_LAMPREY:                     ; [$b068]
 ;     SPRITE_BSCRIPTS [$PRG14::ad83]
 ;
 BSCRIPTS_ENEMY_UNUSED_43:                   ; [$b072]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b072] SpriteOp
-    db SPRITE_BEHAVIOR_ENEMY_UNUSED_43      ; [$b073] SpriteBehavior
-    db $00                                  ; [$b074] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b072] SpriteOp
+    .byte SPRITE_BEHAVIOR_ENEMY_UNUSED_43   ; [$b073] SpriteBehavior
+    .byte $00                               ; [$b074] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14122,11 +14134,11 @@ BSCRIPTS_ENEMY_UNUSED_43:                   ; [$b072]
 ;     SPRITE_BSCRIPTS [$PRG14::ad85]
 ;
 BSCRIPTS_ENEMY_TAMAZUTSU:                   ; [$b076]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b076] SpriteOp
-    db SPRITE_BEHAVIOR_TAMAZUTSU            ; [$b077] SpriteBehavior
-    db $00                                  ; [$b078] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b076] SpriteOp
+    .byte SPRITE_BEHAVIOR_TAMAZUTSU         ; [$b077] SpriteBehavior
+    .byte $00                               ; [$b078] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14143,11 +14155,11 @@ BSCRIPTS_ENEMY_TAMAZUTSU:                   ; [$b076]
 ;     SPRITE_BSCRIPTS [$PRG14::ad6f]
 ;
 BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN:         ; [$b07a]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b07a] SpriteOp
-    db SPRITE_BEHAVIOR_SIR_GAWAINE_WOLFMAN  ; [$b07b] SpriteBehavior
-    db $00                                  ; [$b07c] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b07a] SpriteOp
+    .byte SPRITE_BEHAVIOR_SIR_GAWAINE_WOLFMAN ; [$b07b] SpriteBehavior
+    .byte $00                               ; [$b07c] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14162,47 +14174,47 @@ BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN:         ; [$b07a]
 ;     SPRITE_BSCRIPTS [$PRG14::ad6d]
 ;
 BSCRIPTS_ENEMY_MASKMAN:                     ; [$b07e]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Walk toward player
-    db $14                                  ;  |- For 20 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Walk toward player
-    db $14                                  ;  |- For 20 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Walk toward player
-    db $14                                  ;  |- For 20 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $01                                  ;  '- Hop mode 1
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_ENEMY_MASKMAN               ;  '-
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Walk toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Walk toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Walk toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $01                               ;  '- Hop mode 1
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_ENEMY_MASKMAN            ;  '-
                                             ; BSCRIPTS_ENEMY_MASKMAN
 
 
@@ -14218,10 +14230,10 @@ BSCRIPTS_ENEMY_MASKMAN:                     ; [$b07e]
 ;     SPRITE_BSCRIPTS [$PRG14::ad67]
 ;
 BSCRIPTS_ENEMY_UNUSED_29:                   ; [$b0a8]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14236,46 +14248,46 @@ BSCRIPTS_ENEMY_UNUSED_29:                   ; [$b0a8]
 ;     SPRITE_BSCRIPTS [$PRG14::ad4f]
 ;
 BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $14                                  ;  |- For 20 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $14                                  ;  |- For 20 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $08                                  ;  |- For 8 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  '- 1 block X
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance
-    db $00                                  ;  |- Check X
-    db $10                                  ;  |- If < 16 pixels
-    dw @_hop                                ;  |- Then hop
-    dw @_loop                               ;  '- Else loop
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $14                               ;  |- For 20 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $08                               ;  |- For 8 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  '- 1 block X
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance
+    .byte $00                               ;  |- Check X
+    .byte $10                               ;  |- If < 16 pixels
+    .word @_hop                             ;  |- Then hop
+    .word @_loop                            ;  '- Else loop
 
   @_hop:                                    ; [$b0ca]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b0ca] SpriteOp
-    db SPRITE_BEHAVIOR_HOP                  ; Op: Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $02                                  ;  '- Hop mode 2
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b0ca] SpriteOp
+    .byte SPRITE_BEHAVIOR_HOP               ; Op: Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $02                               ;  '- Hop mode 2
 
   @_loop:                                   ; [$b0d0]
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_BOSS_ROKUSUTAHN             ;  '-
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_BOSS_ROKUSUTAHN          ;  '-
                                             ; BSCRIPTS_BOSS_ROKUSUTAHN
 
 
@@ -14291,11 +14303,11 @@ BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
 ;     SPRITE_BSCRIPTS [$PRG14::ad51]
 ;
 BSCRIPTS_ENEMY_UNUSED_18:                   ; [$b0d3]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b0d3] SpriteOp
-    db SPRITE_BEHAVIOR_ENEMY_UNUSED_18      ; [$b0d4] SpriteBehavior
-    db $00                                  ; [$b0d5] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b0d3] SpriteOp
+    .byte SPRITE_BEHAVIOR_ENEMY_UNUSED_18   ; [$b0d4] SpriteBehavior
+    .byte $00                               ; [$b0d5] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14310,10 +14322,10 @@ BSCRIPTS_ENEMY_UNUSED_18:                   ; [$b0d3]
 ;     SPRITE_BSCRIPTS [$PRG14::ad87]
 ;
 BSCRIPTS_BOSS_RIPASHEIKU:                   ; [$b0d7]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_RIPASHEIKU           ;  |- Ripasheiku boss
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_RIPASHEIKU        ;  |- Ripasheiku boss
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14328,56 +14340,56 @@ BSCRIPTS_BOSS_RIPASHEIKU:                   ; [$b0d7]
 ;     SPRITE_BSCRIPTS [$PRG14::ad89]
 ;
 BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WAIT                 ;  |- Wait
-    db $3c                                  ;  '- For 60 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused
-    db $00                                  ;  |- 0 pixels X
-    db $00                                  ;  |- 0 blocks X
-    db $02                                  ;  '- Hop mode 2
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLY_UP                 ;  '- Rise up
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_VERT            ;  |- Move vertically
-    db $08                                  ;  |- For 8 ticks
-    db $00                                  ;  |- 0 pixels Y
-    db $02                                  ;  '- 2 blocks Y
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
+    .byte $3c                               ;  '- For 60 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused
+    .byte $00                               ;  |- 0 pixels X
+    .byte $00                               ;  |- 0 blocks X
+    .byte $02                               ;  '- Hop mode 2
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLY_UP              ;  '- Rise up
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_VERT         ;  |- Move vertically
+    .byte $08                               ;  |- For 8 ticks
+    .byte $00                               ;  |- 0 pixels Y
+    .byte $02                               ;  '- 2 blocks Y
 
   @_mainLoop:                               ; [$b0ed]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_SOMETHING_ZORADOHNA_18 ;  |- TODO
-    db $00                                  ;  |- For 0 ticks
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $02                                  ;  '- TODO: Value 2
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_SOMETHING_ZORADOHNA_18 ;  |- TODO
+    .byte $00                               ;  |- For 0 ticks
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $02                               ;  '- TODO: Value 2
 
   @_waitNearPlayer:                         ; [$b0f5]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- X direction
-    db $20                                  ;  |- If < 32 pixels
-    dw @_isNearPlayer                       ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- X direction
+    .byte $20                               ;  |- If < 32 pixels
+    .word @_isNearPlayer                    ;  |- Then
                                             ; @_isNearPlayer
-    dw @_waitNearPlayer                     ;  '- Else
+    .word @_waitNearPlayer                  ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$b0fc]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $02                                  ;  |- 2 blocks X
-    db $01                                  ;  '- Hop mode 1
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw @_mainLoop                           ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $02                               ;  |- 2 blocks X
+    .byte $01                               ;  '- Hop mode 1
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word @_mainLoop                        ;  '-
                                             ; @_mainLoop
 
 
@@ -14393,11 +14405,11 @@ BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
 ;     SPRITE_BSCRIPTS [$PRG14::ad8b]
 ;
 BSCRIPTS_BOSS_BORABOHRA:                    ; [$b108]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b108] SpriteOp
-    db SPRITE_BEHAVIOR_BORABOHRA            ; [$b109] SpriteBehavior
-    db $00                                  ; [$b10a] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b108] SpriteOp
+    .byte SPRITE_BEHAVIOR_BORABOHRA         ; [$b109] SpriteBehavior
+    .byte $00                               ; [$b10a] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14412,11 +14424,11 @@ BSCRIPTS_BOSS_BORABOHRA:                    ; [$b108]
 ;     SPRITE_BSCRIPTS [$PRG14::ad8d]
 ;
 BSCRIPTS_BOSS_PAKUKAME:                     ; [$b10c]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b10c] SpriteOp
-    db SPRITE_BEHAVIOR_PAKUKAME             ; [$b10d] SpriteBehavior
-    db $00                                  ; [$b10e] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b10c] SpriteOp
+    .byte SPRITE_BEHAVIOR_PAKUKAME          ; [$b10d] SpriteBehavior
+    .byte $00                               ; [$b10e] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14431,11 +14443,11 @@ BSCRIPTS_BOSS_PAKUKAME:                     ; [$b10c]
 ;     SPRITE_BSCRIPTS [$PRG14::ad8f]
 ;
 BSCRIPTS_BOSS_ZORUGERIRU:                   ; [$b110]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b110] SpriteOp
-    db SPRITE_BEHAVIOR_ZORUGERIRU           ; [$b111] SpriteBehavior
-    db $00                                  ; [$b112] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b110] SpriteOp
+    .byte SPRITE_BEHAVIOR_ZORUGERIRU        ; [$b111] SpriteBehavior
+    .byte $00                               ; [$b112] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14450,11 +14462,11 @@ BSCRIPTS_BOSS_ZORUGERIRU:                   ; [$b110]
 ;     SPRITE_BSCRIPTS [$PRG14::ad91]
 ;
 BSCRIPTS_BOSS_KING_GRIEVE:                  ; [$b114]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b114] SpriteOp
-    db SPRITE_BEHAVIOR_KING_GRIEVE          ; [$b115] SpriteBehavior
-    db $00                                  ; [$b116] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b114] SpriteOp
+    .byte SPRITE_BEHAVIOR_KING_GRIEVE       ; [$b115] SpriteBehavior
+    .byte $00                               ; [$b116] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14469,11 +14481,11 @@ BSCRIPTS_BOSS_KING_GRIEVE:                  ; [$b114]
 ;     SPRITE_BSCRIPTS [$PRG14::ad93]
 ;
 BSCRIPTS_BOSS_SHADOW_EURA:                  ; [$b118]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b118] SpriteOp
-    db SPRITE_BEHAVIOR_SHADOW_EURA          ; [$b119] SpriteBehavior
-    db $00                                  ; [$b11a] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b118] SpriteOp
+    .byte SPRITE_BEHAVIOR_SHADOW_EURA       ; [$b119] SpriteBehavior
+    .byte $00                               ; [$b11a] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14490,11 +14502,11 @@ BSCRIPTS_BOSS_SHADOW_EURA:                  ; [$b118]
 ;     SPRITE_BSCRIPTS [$PRG14::add5]
 ;
 BSCRIPTS_GARBLED_81:                        ; [$b11c]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b11c] SpriteOp
-    db SPRITE_BEHAVIOR_SOMETHING_GARBLED_81 ; [$b11d] SpriteBehavior
-    db $00                                  ; [$b11e] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b11c] SpriteOp
+    .byte SPRITE_BEHAVIOR_SOMETHING_GARBLED_81 ; [$b11d] SpriteBehavior
+    .byte $00                               ; [$b11e] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14509,11 +14521,11 @@ BSCRIPTS_GARBLED_81:                        ; [$b11c]
 ;     SPRITE_BSCRIPTS [$PRG14::ad41]
 ;
 BSCRIPTS_GARBLED_10:                        ; [$b120]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b120] SpriteOp
-    db SPRITE_BEHAVIOR_SOMETHING_GARBLED_10 ; [$b121] SpriteBehavior
-    db $00                                  ; [$b122] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b120] SpriteOp
+    .byte SPRITE_BEHAVIOR_SOMETHING_GARBLED_10 ; [$b121] SpriteBehavior
+    .byte $00                               ; [$b122] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -14528,18 +14540,18 @@ BSCRIPTS_GARBLED_10:                        ; [$b120]
 ;     SPRITE_BSCRIPTS [$PRG14::ad95]
 ;
 BSCRIPTS_NPC_WALKING_MAN:                   ; [$b124]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $3c                                  ;  |- For 60 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Stand still
-    db $1e                                  ;  '- For 30 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_WALKING_MAN             ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Stand still
+    .byte $1e                               ;  '- For 30 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_WALKING_MAN          ;  '-
                                             ; BSCRIPTS_NPC_WALKING_MAN
 
 
@@ -14555,29 +14567,29 @@ BSCRIPTS_NPC_WALKING_MAN:                   ; [$b124]
 ;     SPRITE_BSCRIPTS [$PRG14::ad97]
 ;
 BSCRIPTS_NPC_UNUSED_BLUE_LADY:              ; [$b131]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $50                                  ;  |- For 80 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $14                                  ;  |- For 20 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $50                                  ;  |- For 80 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_UNUSED_BLUE_LADY        ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $50                               ;  |- For 80 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $14                               ;  |- For 20 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $50                               ;  |- For 80 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_UNUSED_BLUE_LADY     ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_BLUE_LADY
 
 
@@ -14593,35 +14605,35 @@ BSCRIPTS_NPC_UNUSED_BLUE_LADY:              ; [$b131]
 ;     SPRITE_BSCRIPTS [$PRG14::ad99]
 ;
 BSCRIPTS_NPC_UNUSED_CHILD:                  ; [$b149]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $3c                                  ;  |- For 60 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $03                                  ;  '- Hop mode 3
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_HOP                  ;  |- Hop
-    db $00                                  ;  |- (unused)
-    db $00                                  ;  |- 0 pixels X
-    db $01                                  ;  |- 1 block X
-    db $03                                  ;  '- Hop mode 3
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WALK_FORWARD         ;  |- Walk forward
-    db $0a                                  ;  |- For 10 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_UNUSED_CHILD            ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $03                               ;  '- Hop mode 3
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_HOP               ;  |- Hop
+    .byte $00                               ;  |- (unused)
+    .byte $00                               ;  |- 0 pixels X
+    .byte $01                               ;  |- 1 block X
+    .byte $03                               ;  '- Hop mode 3
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WALK_FORWARD      ;  |- Walk forward
+    .byte $0a                               ;  |- For 10 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_UNUSED_CHILD         ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_CHILD
 
 
@@ -14637,10 +14649,10 @@ BSCRIPTS_NPC_UNUSED_CHILD:                  ; [$b149]
 ;     SPRITE_BSCRIPTS [$PRG14::ad9b]
 ;
 BSCRIPTS_NPC_ARMOR_SALESMAN:                ; [$b167]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14655,13 +14667,13 @@ BSCRIPTS_NPC_ARMOR_SALESMAN:                ; [$b167]
 ;     SPRITE_BSCRIPTS [$PRG14::ad9d]
 ;
 BSCRIPTS_NPC_MARTIAL_ARTS:                  ; [$b16b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $01                                  ;  '- 1 tick
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_MARTIAL_ARTS            ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $01                               ;  '- 1 tick
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_MARTIAL_ARTS         ;  '-
                                             ; BSCRIPTS_NPC_MARTIAL_ARTS
 
 
@@ -14677,15 +14689,15 @@ BSCRIPTS_NPC_MARTIAL_ARTS:                  ; [$b16b]
 ;     SPRITE_BSCRIPTS [$PRG14::ad9f]
 ;
 BSCRIPTS_NPC_PRIEST:                        ; [$b173]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Set sprite data
-    dw CurrentSprites_XPos_Full             ;  |- X position
-    db $04                                  ;  '- to 4
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Stand still
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Set sprite data
+    .word CurrentSprites_XPos_Full          ;  |- X position
+    .byte $04                               ;  '- to 4
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Stand still
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14700,9 +14712,9 @@ BSCRIPTS_NPC_PRIEST:                        ; [$b173]
 ;     SPRITE_BSCRIPTS [$PRG14::ada1]
 ;
 BSCRIPTS_NPC_KING:                          ; [$b17d]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
 
 
 ;
@@ -14710,12 +14722,12 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
 ; of each other.
 ;
   @_waitNearPlayerLoop:                     ; [$b180]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- For 0 ticks
-    db $40                                  ;  |- If < 64 pixels
-    dw @_nearPlayer                         ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- For 0 ticks
+    .byte $40                               ;  |- If < 64 pixels
+    .word @_nearPlayer                      ;  |- Then
                                             ; @_nearPlayer
-    dw @_waitNearPlayerLoop                 ;  '- Else
+    .word @_waitNearPlayerLoop              ;  '- Else
                                             ; @_waitNearPlayerLoop
 
 
@@ -14724,13 +14736,13 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
 ; 8 pixels and stand on the ground.
 ;
   @_nearPlayer:                             ; [$b187]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add value to
-    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
-    db $08                                  ;  '- Plus 8
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add value to
+    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    .byte $08                               ;  '- Plus 8
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
 
 
 ;
@@ -14740,12 +14752,12 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
 ; position incremented when standing up.
 ;
   @_waitAwayFromPlayerLoop:                 ; [$b18f]
-    db SPRITE_OP_CHECK_DISTANCE             ; Op: Check distance to player
-    db $00                                  ;  |- For 0 ticks
-    db $48                                  ;  |- If < 72 pixels
-    dw @_waitAwayFromPlayerLoop             ;  |- Then
+    .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
+    .byte $00                               ;  |- For 0 ticks
+    .byte $48                               ;  |- If < 72 pixels
+    .word @_waitAwayFromPlayerLoop          ;  |- Then
                                             ; @_waitAwayFromPlayerLoop
-    dw @_awayFromPlayer                     ;  '- Else
+    .word @_awayFromPlayer                  ;  '- Else
                                             ; @_awayFromPlayer
 
 
@@ -14754,12 +14766,12 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
 ; The King can sit down.
 ;
   @_awayFromPlayer:                         ; [$b196]
-    db SPRITE_OP_FINISH_BEHAVIOR            ; Op: Finish behavior
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add value to
-    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
-    db $f8                                  ;  '- Minus 8
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_KING                    ;  '-
+    .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add value to
+    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    .byte $f8                               ;  '- Minus 8
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_KING                 ;  '-
                                             ; BSCRIPTS_NPC_KING
 
 
@@ -14775,13 +14787,13 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
 ;     SPRITE_BSCRIPTS [$PRG14::ada3]
 ;
 BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $01                                  ;  '- For 1 tick
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_MAYBE_DISABLE_AND_GOTO     ; Op: Maybe: Disable and Go To
-    dw BSCRIPTS_NPC_MAGIC_TEACHER           ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $01                               ;  '- For 1 tick
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_MAYBE_DISABLE_AND_GOTO  ; Op: Maybe: Disable and Go To
+    .word BSCRIPTS_NPC_MAGIC_TEACHER        ;  '-
                                             ; BSCRIPTS_NPC_MAGIC_TEACHER
 
 
@@ -14797,13 +14809,13 @@ BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
 ;     SPRITE_BSCRIPTS [$PRG14::adb3]
 ;
 BSCRIPTS_NPC_DOCTOR:                        ; [$b1a6]
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add to sprite value
-    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
-    db $08                                  ;  '- Add 8
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add to sprite value
+    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    .byte $08                               ;  '- Add 8
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14818,10 +14830,10 @@ BSCRIPTS_NPC_DOCTOR:                        ; [$b1a6]
 ;     SPRITE_BSCRIPTS [$PRG14::ada5]
 ;
 BSCRIPTS_NPC_KEY_SALESMAN:                  ; [$b1ae]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14836,13 +14848,13 @@ BSCRIPTS_NPC_KEY_SALESMAN:                  ; [$b1ae]
 ;     SPRITE_BSCRIPTS [$PRG14::ada7]
 ;
 BSCRIPTS_NPC_SMOKING_MAN:                   ; [$b1b2]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_SMOKING_MAN             ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_SMOKING_MAN          ;  '-
                                             ; BSCRIPTS_NPC_SMOKING_MAN
 
 
@@ -14858,13 +14870,13 @@ BSCRIPTS_NPC_SMOKING_MAN:                   ; [$b1b2]
 ;     SPRITE_BSCRIPTS [$PRG14::ada9]
 ;
 BSCRIPTS_NPC_MAN_IN_CHAIR:                  ; [$b1ba]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_MAN_IN_CHAIR            ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_MAN_IN_CHAIR         ;  '-
                                             ; BSCRIPTS_NPC_MAN_IN_CHAIR
 
 
@@ -14880,10 +14892,10 @@ BSCRIPTS_NPC_MAN_IN_CHAIR:                  ; [$b1ba]
 ;     SPRITE_BSCRIPTS [$PRG14::adab]
 ;
 BSCRIPTS_NPC_SITTING_MAN:                   ; [$b1c2]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14898,12 +14910,12 @@ BSCRIPTS_NPC_SITTING_MAN:                   ; [$b1c2]
 ;     SPRITE_BSCRIPTS [$PRG14::adad]
 ;
 BSCRIPTS_NPC_MEAT_SALESMAN:                 ; [$b1c6]
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $00                                  ;  '- For 0 ticks
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $00                               ;  '- For 0 ticks
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -14918,24 +14930,24 @@ BSCRIPTS_NPC_MEAT_SALESMAN:                 ; [$b1c6]
 ;     SPRITE_BSCRIPTS [$PRG14::adaf]
 ;
 BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP:      ; [$b1cc]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $c0                                  ;  |- For 192 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $28                                  ;  |- For 40 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ;  '-
-                                             ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $c0                               ;  |- For 192 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $28                               ;  |- For 40 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ;  '-
+                                                ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
 
 
 ;============================================================================
@@ -14950,18 +14962,18 @@ BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP:      ; [$b1cc]
 ;     SPRITE_BSCRIPTS [$PRG14::adb1]
 ;
 BSCRIPTS_NPC_KINGS_GUARD:                   ; [$b1de]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $50                                  ;  |- For 80 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $05                                  ;  '- For 5 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_KINGS_GUARD             ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $50                               ;  |- For 80 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $05                               ;  '- For 5 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_KINGS_GUARD          ;  '-
                                             ; BSCRIPTS_NPC_KINGS_GUARD
 
 
@@ -14977,20 +14989,20 @@ BSCRIPTS_NPC_KINGS_GUARD:                   ; [$b1de]
 ;     SPRITE_BSCRIPTS [$PRG14::adb5]
 ;
 BSCRIPTS_NPC_WALKING_WOMAN_01:              ; [$b1eb]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $50                                  ;  |- For 80 ticks
-    db $c0                                  ;  |- 192 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FALL                 ;  |- Fall/wait
-    db $0a                                  ;  '- For 10 ticks
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FACE_PLAYER_X          ;  '- Face player (X)
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_WALKING_WOMAN_01        ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $50                               ;  |- For 80 ticks
+    .byte $c0                               ;  |- 192 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
+    .byte $0a                               ;  '- For 10 ticks
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_WALKING_WOMAN_01     ;  '-
                                             ; BSCRIPTS_NPC_WALKING_WOMAN_01
 
 
@@ -15006,22 +15018,22 @@ BSCRIPTS_NPC_WALKING_WOMAN_01:              ; [$b1eb]
 ;     SPRITE_BSCRIPTS [$PRG14::adb7]
 ;
 BSCRIPTS_NPC_WALKING_WOMAN_02:              ; [$b1fa]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $3c                                  ;  |- For 60 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER   ;  |- Move toward player
-    db $50                                  ;  |- For 80 ticks
-    db $80                                  ;  |- 128 pixels X
-    db $00                                  ;  '- 0 blocks X
-    db SPRITE_OP_RUN_ACTION                 ; Op: Run action
-    db SPRITE_ACTION_FLIP_X_DIRECTION       ;  '- Flip X direction
-    db SPRITE_OP_GOTO                       ; Op: Goto
-    dw BSCRIPTS_NPC_WALKING_WOMAN_02        ;  '-
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $3c                               ;  |- For 60 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MOVE_TOWARD_PLAYER ;  |- Move toward player
+    .byte $50                               ;  |- For 80 ticks
+    .byte $80                               ;  |- 128 pixels X
+    .byte $00                               ;  '- 0 blocks X
+    .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
+    .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
+    .byte SPRITE_OP_GOTO                    ; Op: Goto
+    .word BSCRIPTS_NPC_WALKING_WOMAN_02     ;  '-
                                             ; BSCRIPTS_NPC_WALKING_WOMAN_02
 
 
@@ -15037,11 +15049,11 @@ BSCRIPTS_NPC_WALKING_WOMAN_02:              ; [$b1fa]
 ;     SPRITE_BSCRIPTS [$PRG14::adc9]
 ;
 BSCRIPTS_OBJ_OINTMENT:                      ; [$b20b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b20b] SpriteOp
-    db SPRITE_BEHAVIOR_ITEM_OINTMENT        ; [$b20c] SpriteBehavior
-    db $00                                  ; [$b20d] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b20b] SpriteOp
+    .byte SPRITE_BEHAVIOR_ITEM_OINTMENT     ; [$b20c] SpriteBehavior
+    .byte $00                               ; [$b20d] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15056,11 +15068,11 @@ BSCRIPTS_OBJ_OINTMENT:                      ; [$b20b]
 ;     SPRITE_BSCRIPTS [$PRG14::adbd]
 ;
 BSCRIPTS_OBJ_GLOVE:                         ; [$b20f]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b20f] SpriteOp
-    db SPRITE_BEHAVIOR_ITEM_GLOVE           ; [$b210] SpriteBehavior
-    db $00                                  ; [$b211] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b20f] SpriteOp
+    .byte SPRITE_BEHAVIOR_ITEM_GLOVE        ; [$b210] SpriteBehavior
+    .byte $00                               ; [$b211] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15075,11 +15087,11 @@ BSCRIPTS_OBJ_GLOVE:                         ; [$b20f]
 ;     SPRITE_BSCRIPTS [$PRG14::add7]
 ;
 BSCRIPTS_OBJ_WINGBOOTS:                     ; [$b213]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b213] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_55 ; [$b214] SpriteBehavior
-    db $00                                  ; [$b215] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b213] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_55 ; [$b214] SpriteBehavior
+    .byte $00                               ; [$b215] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15100,11 +15112,11 @@ BSCRIPTS_OBJ_WINGBOOTS:                     ; [$b213]
 ;     SPRITE_BSCRIPTS [$PRG14::adcb]
 ;
 BSCRIPTS_OBJ_POTIONLIKE:                    ; [$b217]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b217] SpriteOp
-    db SPRITE_BEHAVIOR_FALL                 ; [$b218] SpriteBehavior
-    db $00                                  ; [$b219] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b217] SpriteOp
+    .byte SPRITE_BEHAVIOR_FALL              ; [$b218] SpriteBehavior
+    .byte $00                               ; [$b219] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15119,11 +15131,11 @@ BSCRIPTS_OBJ_POTIONLIKE:                    ; [$b217]
 ;     SPRITE_BSCRIPTS [$PRG14::adcd]
 ;
 BSCRIPTS_OBJ_MATTOCK:                       ; [$b21b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b21b] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_50 ; [$b21c] SpriteBehavior
-    db $00                                  ; [$b21d] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b21b] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_50 ; [$b21c] SpriteBehavior
+    .byte $00                               ; [$b21d] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15138,11 +15150,11 @@ BSCRIPTS_OBJ_MATTOCK:                       ; [$b21b]
 ;     SPRITE_BSCRIPTS [$PRG14::add9]
 ;
 BSCRIPTS_OBJ_HOURGLASS:                     ; [$b21f]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b21f] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_51 ; [$b220] SpriteBehavior
-    db $00                                  ; [$b221] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b21f] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_51 ; [$b220] SpriteBehavior
+    .byte $00                               ; [$b221] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15157,14 +15169,14 @@ BSCRIPTS_OBJ_HOURGLASS:                     ; [$b21f]
 ;     SPRITE_BSCRIPTS [$PRG14::add1]
 ;
 BSCRIPTS_FOUNTAIN:                          ; [$b223]
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; Op: Add to sprite value
-    dw CurrentSprites_XPos_Full             ;  |- Sprite X position
-    db $08                                  ;  '- Plus 8
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_FOUNTAIN             ; [$b228] SpriteBehavior
-    db $00                                  ; [$b229] byte
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add to sprite value
+    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    .byte $08                               ;  '- Plus 8
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_FOUNTAIN          ; [$b228] SpriteBehavior
+    .byte $00                               ; [$b229] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15179,16 +15191,16 @@ BSCRIPTS_FOUNTAIN:                          ; [$b223]
 ;     SPRITE_BSCRIPTS [$PRG14::adef]
 ;
 BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b22b] SpriteOp
-    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b22b] SpriteOp
+    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b22c]
-    db $08                                  ; [$b22e] byte
+    .byte $08                               ; [$b22e] byte
 
-    db SPRITE_OP_SWITCH_BEHAVIOR
-    db SPRITE_BEHAVIOR_SPRING_OF_FORTRESS   ; [$b230] SpriteBehavior
-    db $00                                  ; [$b231] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR
+    .byte SPRITE_BEHAVIOR_SPRING_OF_FORTRESS ; [$b230] SpriteBehavior
+    .byte $00                               ; [$b231] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15203,16 +15215,16 @@ BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
 ;     SPRITE_BSCRIPTS [$PRG14::adf1]
 ;
 BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b233] SpriteOp
-    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b233] SpriteOp
+    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b234]
-    db $08                                  ; [$b236] byte
+    .byte $08                               ; [$b236] byte
 
-    db SPRITE_OP_SWITCH_BEHAVIOR
-    db SPRITE_BEHAVIOR_SPRING_OF_SKY        ; [$b238] SpriteBehavior
-    db $00                                  ; [$b239] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR
+    .byte SPRITE_BEHAVIOR_SPRING_OF_SKY     ; [$b238] SpriteBehavior
+    .byte $00                               ; [$b239] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15227,16 +15239,16 @@ BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
 ;     SPRITE_BSCRIPTS [$PRG14::adf3]
 ;
 BSCRIPTS_SPRING_OF_JOKER:                   ; [$b23b]
-    db SPRITE_OP_ADD_TO_SPRITE_DATA         ; [$b23b] SpriteOp
-    dw CurrentSprites_XPos_Full             ; CurrentSprites_XPos_Full
+    .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b23b] SpriteOp
+    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b23c]
-    db $08                                  ; [$b23e] byte
+    .byte $08                               ; [$b23e] byte
 
-    db SPRITE_OP_SWITCH_BEHAVIOR
-    db SPRITE_BEHAVIOR_SPRING_OF_JOKER      ; [$b240] SpriteBehavior
-    db $00                                  ; [$b241] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR
+    .byte SPRITE_BEHAVIOR_SPRING_OF_JOKER   ; [$b240] SpriteBehavior
+    .byte $00                               ; [$b241] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15251,12 +15263,12 @@ BSCRIPTS_SPRING_OF_JOKER:                   ; [$b23b]
 ;     SPRITE_BSCRIPTS [$PRG14::addd]
 ;
 BSCRIPTS_OBJ_BATTLE_SUIT:                   ; [$b243]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b243] SpriteOp
-    db SPRITE_BEHAVIOR_BATTLE_SUIT_DROPPED_BY_ZORADOHNA ; [$b244]
-                                                        ; SpriteBehavior
-    db $00                                  ; [$b245] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b243] SpriteOp
+    .byte SPRITE_BEHAVIOR_BATTLE_SUIT_DROPPED_BY_ZORADOHNA ; [$b244]
+                                                           ; SpriteBehavior
+    .byte $00                               ; [$b245] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15271,12 +15283,12 @@ BSCRIPTS_OBJ_BATTLE_SUIT:                   ; [$b243]
 ;     SPRITE_BSCRIPTS [$PRG14::addf]
 ;
 BSCRIPTS_OBJ_BATTLE_HELMET:                 ; [$b247]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b247] SpriteOp
-    db SPRITE_BEHAVIOR_BATTLE_HELMET_DROPPED_BY_ZORADOHNA ; [$b248]
-                                                          ; SpriteBehavior
-    db $00                                  ; [$b249] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b247] SpriteOp
+    .byte SPRITE_BEHAVIOR_BATTLE_HELMET_DROPPED_BY_ZORADOHNA ; [$b248]
+                                                             ; SpriteBehavior
+    .byte $00                               ; [$b249] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15291,12 +15303,12 @@ BSCRIPTS_OBJ_BATTLE_HELMET:                 ; [$b247]
 ;     SPRITE_BSCRIPTS [$PRG14::ade1]
 ;
 BSCRIPTS_OBJ_DRAGON_SLAYER:                 ; [$b24b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b24b] SpriteOp
-    db SPRITE_BEHAVIOR_DRAGON_SLAYER_DROPPED_BY_KING_GRIEVE ; [$b24c]
-                                                            ; SpriteBehavior
-    db $00                                  ; [$b24d] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b24b] SpriteOp
+    .byte SPRITE_BEHAVIOR_DRAGON_SLAYER_DROPPED_BY_KING_GRIEVE ; [$b24c]
+                                                               ; SpriteBehavior
+    .byte $00                               ; [$b24d] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15311,11 +15323,11 @@ BSCRIPTS_OBJ_DRAGON_SLAYER:                 ; [$b24b]
 ;     SPRITE_BSCRIPTS [$PRG14::addb]
 ;
 BSCRIPTS_OBJ_MAGICAL_ROD:                   ; [$b24f]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b24f] SpriteOp
-    db SPRITE_BEHAVIOR_SHOW_MAGICAL_ROD     ; [$b250] SpriteBehavior
-    db $00                                  ; [$b251] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b24f] SpriteOp
+    .byte SPRITE_BEHAVIOR_SHOW_MAGICAL_ROD  ; [$b250] SpriteBehavior
+    .byte $00                               ; [$b251] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15330,12 +15342,12 @@ BSCRIPTS_OBJ_MAGICAL_ROD:                   ; [$b24f]
 ;     SPRITE_BSCRIPTS [$PRG14::adbf]
 ;
 BSCRIPTS_OBJ_BLACK_ONYX:                    ; [$b253]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_BLACK_ONYX_DROPPED_FROM_ZORADOHNA ;  |- Black Onyx
-                                                         ; drops from
-                                                         ; Zoradohna
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_BLACK_ONYX_DROPPED_FROM_ZORADOHNA ;  |- Black Onyx
+                                                            ; drops from
+                                                            ; Zoradohna
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -15350,11 +15362,11 @@ BSCRIPTS_OBJ_BLACK_ONYX:                    ; [$b253]
 ;     SPRITE_BSCRIPTS [$PRG14::adc1]
 ;
 BSCRIPTS_OBJ_PENDANT:                       ; [$b257]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_PENDANT_DROPPED_FROM_RIPASHEIKU ;  |- Pendant drops
-                                                       ; from Ripasheiku
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_PENDANT_DROPPED_FROM_RIPASHEIKU ;  |- Pendant drops
+                                                          ; from Ripasheiku
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -15369,11 +15381,11 @@ BSCRIPTS_OBJ_PENDANT:                       ; [$b257]
 ;     SPRITE_BSCRIPTS [$PRG14::ade3]
 ;
 BSCRIPTS_OBJ_MATTOCK_QUEST:                 ; [$b25b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_MATTOCK_DROPPED_BY_RPIASHEIKU ;  |- Mattock drops from
-                                                     ; Ripasheiku
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_MATTOCK_DROPPED_BY_RPIASHEIKU ;  |- Mattock drops
+                                                        ; from Ripasheiku
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -15388,11 +15400,12 @@ BSCRIPTS_OBJ_MATTOCK_QUEST:                 ; [$b25b]
 ;     SPRITE_BSCRIPTS [$PRG14::ade5]
 ;
 BSCRIPTS_OBJ_WINGSBOOTS_QUEST:              ; [$b25f]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; Op: Switch behavior
-    db SPRITE_BEHAVIOR_WING_BOOTS_DROPPED_BY_ZORUGERIRU ;  |- Wing Boots
-                                                        ; drops by Zorugeriru
-    db $00                                  ;  '- (unused)
-    db SPRITE_OP_END_SCRIPT                 ; Op: End script
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
+    .byte SPRITE_BEHAVIOR_WING_BOOTS_DROPPED_BY_ZORUGERIRU ;  |- Wing Boots
+                                                           ; drops by
+                                                           ; Zorugeriru
+    .byte $00                               ;  '- (unused)
+    .byte SPRITE_OP_END_SCRIPT              ; Op: End script
 
 
 ;============================================================================
@@ -15407,11 +15420,11 @@ BSCRIPTS_OBJ_WINGSBOOTS_QUEST:              ; [$b25f]
 ;     SPRITE_BSCRIPTS [$PRG14::ade7]
 ;
 BSCRIPTS_OBJ_RED_POTION_RANDOM:             ; [$b263]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b263] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_52 ; [$b264] SpriteBehavior
-    db $00                                  ; [$b265] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b263] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_52 ; [$b264] SpriteBehavior
+    .byte $00                               ; [$b265] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15426,11 +15439,11 @@ BSCRIPTS_OBJ_RED_POTION_RANDOM:             ; [$b263]
 ;     SPRITE_BSCRIPTS [$PRG14::ade9]
 ;
 BSCRIPTS_OBJ_POISON:                        ; [$b267]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b267] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_53 ; [$b268] SpriteBehavior
-    db $00                                  ; [$b269] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b267] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_53 ; [$b268] SpriteBehavior
+    .byte $00                               ; [$b269] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15445,11 +15458,11 @@ BSCRIPTS_OBJ_POISON:                        ; [$b267]
 ;     SPRITE_BSCRIPTS [$PRG14::adeb]
 ;
 BSCRIPTS_OBJ_GLOVE_RANDOM:                  ; [$b26b]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b26b] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_54 ; [$b26c] SpriteBehavior
-    db $00                                  ; [$b26d] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b26b] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_54 ; [$b26c] SpriteBehavior
+    .byte $00                               ; [$b26d] byte
 
-    db SPRITE_OP_END_SCRIPT
+    .byte SPRITE_OP_END_SCRIPT
 
 
 ;============================================================================
@@ -15464,36 +15477,61 @@ BSCRIPTS_OBJ_GLOVE_RANDOM:                  ; [$b26b]
 ;     SPRITE_BSCRIPTS [$PRG14::aded]
 ;
 BSCRIPTS_OBJ_OINTMENT_RANDOM:               ; [$b26f]
-    db SPRITE_OP_SWITCH_BEHAVIOR            ; [$b26f] SpriteOp
-    db SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_56 ; [$b270] SpriteBehavior
-    db $00,$ff                              ; [$b271] byte
+    .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b26f] SpriteOp
+    .byte SPRITE_BEHAVIOR_RANDOMLY_SHOW_ITEM_56 ; [$b270] SpriteBehavior
+    .byte $00,$ff                           ; [$b271] byte
 
-    hex 00 00 10 20 00 08 10 08 04 08 08 08 00 00 10 10 ; [$b274] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 10 ; [$b283] undefined
-    hex 00 00 10 10 00 00 10 10 00 00 10 10 00 00 10 10 ; [$b293] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b2a3] undefined
-    hex 00 00 10 20 04 00 18 30 00 00 10 20 00 00 00 00 ; [$b2b3] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 10 00 00 10 20 ; [$b2c3] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b2d3] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b2e3] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b2f3] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b303] undefined
-    hex 00 00 10 20 00 00 10 20 00 00 10 20 00 00 10 20 ; [$b313] undefined
-    hex 00 00 10 20 00 00 20 40 00 00 20 30 04 00 18 30 ; [$b323] undefined
-    hex 00 00 20 20 00 00 10 20 00 00 40 18 08 00 28 50 ; [$b333] undefined
-    hex f8 00 20 20 f8 00 20 20 f8 00 20 20 00 00 28 30 ; [$b343] undefined
-    hex f0 00 30 20 00 00 30 20 00 00 30 20 f0 00 30 20 ; [$b353] undefined
-    hex 00 00 20 20 f8 00 20 20 00 00 20 30 f8 00 20 20 ; [$b363] undefined
-    hex f8 00 20 20 f8 00 20 20 f8 00 20 20 f8 00 20 20 ; [$b373] undefined
-    hex f8 00 20 20 f8 00 20 20 00 00 10 10 00 00 10 10 ; [$b383] undefined
-    hex 00 00 08 10 00 00 08 10 00 00 08 10 00 00 08 10 ; [$b393] undefined
-    hex 00 00 08 10 00 00 10 10 00 00 10 10 00 00 10 c0 ; [$b3a3] undefined
-    hex 00 00 10 10 04 04 08 08 00 00 20 20 00 00 10 10 ; [$b3b3] undefined
-    hex 00 00 10 10 00 00 10 10 00 00 10 10 00 00 10 10 ; [$b3c3] undefined
-    hex 00 00 10 10 00 00 10 10 00 00 10 10 00 00 10 10 ; [$b3d3] undefined
-    hex 00 00 10 10 00 00 10 10 00 00 10 10 00 00 10 10 ; [$b3e3] undefined
-    hex 00 00 10 10 00 00 20 20 00 00 20 20 00 00 20 20 ; [$b3f3] undefined
-    db $00,$00,$20,$20                      ; [$b403] undefined
+    .byte $00,$00,$10,$20,$00,$08,$10,$08   ; [$b274] undefined
+    .byte $04,$08,$08,$08,$00,$00,$10,$10   ; [$b27b] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b283] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$10   ; [$b28b] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b293] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b29b] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2a3] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2ab] undefined
+    .byte $00,$00,$10,$20,$04,$00,$18,$30   ; [$b2b3] undefined
+    .byte $00,$00,$10,$20,$00,$00,$00,$00   ; [$b2bb] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2c3] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$20   ; [$b2cb] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2d3] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2db] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2e3] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2eb] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2f3] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b2fb] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b303] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b30b] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b313] undefined
+    .byte $00,$00,$10,$20,$00,$00,$10,$20   ; [$b31b] undefined
+    .byte $00,$00,$10,$20,$00,$00,$20,$40   ; [$b323] undefined
+    .byte $00,$00,$20,$30,$04,$00,$18,$30   ; [$b32b] undefined
+    .byte $00,$00,$20,$20,$00,$00,$10,$20   ; [$b333] undefined
+    .byte $00,$00,$40,$18,$08,$00,$28,$50   ; [$b33b] undefined
+    .byte $f8,$00,$20,$20,$f8,$00,$20,$20   ; [$b343] undefined
+    .byte $f8,$00,$20,$20,$00,$00,$28,$30   ; [$b34b] undefined
+    .byte $f0,$00,$30,$20,$00,$00,$30,$20   ; [$b353] undefined
+    .byte $00,$00,$30,$20,$f0,$00,$30,$20   ; [$b35b] undefined
+    .byte $00,$00,$20,$20,$f8,$00,$20,$20   ; [$b363] undefined
+    .byte $00,$00,$20,$30,$f8,$00,$20,$20   ; [$b36b] undefined
+    .byte $f8,$00,$20,$20,$f8,$00,$20,$20   ; [$b373] undefined
+    .byte $f8,$00,$20,$20,$f8,$00,$20,$20   ; [$b37b] undefined
+    .byte $f8,$00,$20,$20,$f8,$00,$20,$20   ; [$b383] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b38b] undefined
+    .byte $00,$00,$08,$10,$00,$00,$08,$10   ; [$b393] undefined
+    .byte $00,$00,$08,$10,$00,$00,$08,$10   ; [$b39b] undefined
+    .byte $00,$00,$08,$10,$00,$00,$10,$10   ; [$b3a3] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$c0   ; [$b3ab] undefined
+    .byte $00,$00,$10,$10,$04,$04,$08,$08   ; [$b3b3] undefined
+    .byte $00,$00,$20,$20,$00,$00,$10,$10   ; [$b3bb] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3c3] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3cb] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3d3] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3db] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3e3] undefined
+    .byte $00,$00,$10,$10,$00,$00,$10,$10   ; [$b3eb] undefined
+    .byte $00,$00,$10,$10,$00,$00,$20,$20   ; [$b3f3] undefined
+    .byte $00,$00,$20,$20,$00,$00,$20,$20   ; [$b3fb] undefined
+    .byte $00,$00,$20,$20                   ; [$b403] undefined
 
 ;
 ; XREFS:
@@ -15501,214 +15539,214 @@ BSCRIPTS_OBJ_OINTMENT_RANDOM:               ; [$b26f]
 ;
 MAYBE_SPRITE_EXTENTS:                       ; [$b407]
 SPRITE_ENTITY_WEAPON_RANGES:
-    db $10                                  ; [0]:
+    .byte $10                               ; [0]:
 
 ;
 ; XREFS:
 ;     Sprites_IsSpriteOutOfWeaponRange
 ;
 MAYBE_SPRITE_EXTENTS_1_:                    ; [$b408]
-    db $20                                  ; [1]:
-    db $10                                  ; [2]:
-    db $08                                  ; [3]:
-    db $08                                  ; [4]:
-    db $08                                  ; [5]:
-    db $10                                  ; [6]:
-    db $10                                  ; [7]:
-    db $10                                  ; [8]:
-    db $20                                  ; [9]:
-    db $10                                  ; [10]:
-    db $20                                  ; [11]:
-    db $10                                  ; [12]:
-    db $20                                  ; [13]:
-    db $10                                  ; [14]:
-    db $10                                  ; [15]:
-    db $10                                  ; [16]:
-    db $10                                  ; [17]:
-    db $10                                  ; [18]:
-    db $10                                  ; [19]:
-    db $10                                  ; [20]:
-    db $10                                  ; [21]:
-    db $10                                  ; [22]:
-    db $10                                  ; [23]:
-    db $10                                  ; [24]:
-    db $20                                  ; [25]:
-    db $10                                  ; [26]:
-    db $20                                  ; [27]:
-    db $10                                  ; [28]:
-    db $10                                  ; [29]:
-    db $10                                  ; [30]:
-    db $20                                  ; [31]:
-    db $10                                  ; [32]:
-    db $20                                  ; [33]:
-    db $20                                  ; [34]:
-    db $10                                  ; [35]:
-    db $10                                  ; [36]:
-    db $20                                  ; [37]:
-    db $00                                  ; [38]:
-    db $00                                  ; [39]:
-    db $10                                  ; [40]:
-    db $20                                  ; [41]:
-    db $10                                  ; [42]:
-    db $20                                  ; [43]:
-    db $10                                  ; [44]:
-    db $10                                  ; [45]:
-    db $10                                  ; [46]:
-    db $20                                  ; [47]:
-    db $10                                  ; [48]:
-    db $20                                  ; [49]:
-    db $10                                  ; [50]:
-    db $20                                  ; [51]:
-    db $10                                  ; [52]:
-    db $20                                  ; [53]:
-    db $10                                  ; [54]:
-    db $20                                  ; [55]:
-    db $10                                  ; [56]:
-    db $20                                  ; [57]:
-    db $10                                  ; [58]:
-    db $20                                  ; [59]:
-    db $10                                  ; [60]:
-    db $20                                  ; [61]:
-    db $10                                  ; [62]:
-    db $20                                  ; [63]:
-    db $10                                  ; [64]:
-    db $20                                  ; [65]:
-    db $10                                  ; [66]:
-    db $20                                  ; [67]:
-    db $10                                  ; [68]:
-    db $20                                  ; [69]:
-    db $10                                  ; [70]:
-    db $20                                  ; [71]:
-    db $10                                  ; [72]:
-    db $20                                  ; [73]:
-    db $10                                  ; [74]:
-    db $20                                  ; [75]:
-    db $10                                  ; [76]:
-    db $20                                  ; [77]:
-    db $10                                  ; [78]:
-    db $20                                  ; [79]:
-    db $10                                  ; [80]:
-    db $20                                  ; [81]:
-    db $10                                  ; [82]:
-    db $20                                  ; [83]:
-    db $10                                  ; [84]:
-    db $20                                  ; [85]:
-    db $10                                  ; [86]:
-    db $20                                  ; [87]:
-    db $10                                  ; [88]:
-    db $20                                  ; [89]:
-    db $20                                  ; [90]:
-    db $20                                  ; [91]:
-    db $20                                  ; [92]:
-    db $18                                  ; [93]:
-    db $20                                  ; [94]:
-    db $10                                  ; [95]:
-    db $20                                  ; [96]:
-    db $18                                  ; [97]:
-    db $10                                  ; [98]:
-    db $20                                  ; [99]:
-    db $40                                  ; [100]:
-    db $10                                  ; [101]:
-    db $30                                  ; [102]:
-    db $20                                  ; [103]:
-    db $10                                  ; [104]:
-    db $20                                  ; [105]:
-    db $10                                  ; [106]:
-    db $20                                  ; [107]:
-    db $10                                  ; [108]:
-    db $20                                  ; [109]:
-    db $28                                  ; [110]:
-    db $30                                  ; [111]:
-    db $20                                  ; [112]:
-    db $20                                  ; [113]:
-    db $30                                  ; [114]:
-    db $20                                  ; [115]:
-    db $30                                  ; [116]:
-    db $20                                  ; [117]:
-    db $20                                  ; [118]:
-    db $20                                  ; [119]:
-    db $10                                  ; [120]:
-    db $20                                  ; [121]:
-    db $10                                  ; [122]:
-    db $20                                  ; [123]:
-    db $10                                  ; [124]:
-    db $20                                  ; [125]:
-    db $10                                  ; [126]:
-    db $20                                  ; [127]:
-    db $10                                  ; [128]:
-    db $20                                  ; [129]:
-    db $10                                  ; [130]:
-    db $20                                  ; [131]:
-    db $10                                  ; [132]:
-    db $20                                  ; [133]:
-    db $10                                  ; [134]:
-    db $20                                  ; [135]:
-    db $10                                  ; [136]:
-    db $20                                  ; [137]:
-    db $10                                  ; [138]:
-    db $20                                  ; [139]:
-    db $10                                  ; [140]:
-    db $10                                  ; [141]:
-    db $10                                  ; [142]:
-    db $10                                  ; [143]:
-    db $08                                  ; [144]:
-    db $10                                  ; [145]:
-    db $08                                  ; [146]:
-    db $10                                  ; [147]:
-    db $08                                  ; [148]:
-    db $10                                  ; [149]:
-    db $08                                  ; [150]:
-    db $10                                  ; [151]:
-    db $08                                  ; [152]:
-    db $10                                  ; [153]:
-    db $10                                  ; [154]:
-    db $10                                  ; [155]:
-    db $10                                  ; [156]:
-    db $10                                  ; [157]:
-    db $10                                  ; [158]:
-    db $c0                                  ; [159]:
-    db $10                                  ; [160]:
-    db $10                                  ; [161]:
-    db $08                                  ; [162]:
-    db $08                                  ; [163]:
-    db $20                                  ; [164]:
-    db $20                                  ; [165]:
-    db $10                                  ; [166]:
-    db $10                                  ; [167]:
-    db $10                                  ; [168]:
-    db $10                                  ; [169]:
-    db $10                                  ; [170]:
-    db $10                                  ; [171]:
-    db $10                                  ; [172]:
-    db $10                                  ; [173]:
-    db $10                                  ; [174]:
-    db $10                                  ; [175]:
-    db $10                                  ; [176]:
-    db $10                                  ; [177]:
-    db $10                                  ; [178]:
-    db $10                                  ; [179]:
-    db $10                                  ; [180]:
-    db $10                                  ; [181]:
-    db $10                                  ; [182]:
-    db $10                                  ; [183]:
-    db $10                                  ; [184]:
-    db $10                                  ; [185]:
-    db $10                                  ; [186]:
-    db $10                                  ; [187]:
-    db $10                                  ; [188]:
-    db $10                                  ; [189]:
-    db $10                                  ; [190]:
-    db $10                                  ; [191]:
-    db $10                                  ; [192]:
-    db $10                                  ; [193]:
-    db $10                                  ; [194]:
-    db $10                                  ; [195]:
-    db $10                                  ; [196]:
-    db $10                                  ; [197]:
-    db $10                                  ; [198]:
-    db $10                                  ; [199]:
-    db $10                                  ; [200]:
-    db $10                                  ; [201]:
+    .byte $20                               ; [1]:
+    .byte $10                               ; [2]:
+    .byte $08                               ; [3]:
+    .byte $08                               ; [4]:
+    .byte $08                               ; [5]:
+    .byte $10                               ; [6]:
+    .byte $10                               ; [7]:
+    .byte $10                               ; [8]:
+    .byte $20                               ; [9]:
+    .byte $10                               ; [10]:
+    .byte $20                               ; [11]:
+    .byte $10                               ; [12]:
+    .byte $20                               ; [13]:
+    .byte $10                               ; [14]:
+    .byte $10                               ; [15]:
+    .byte $10                               ; [16]:
+    .byte $10                               ; [17]:
+    .byte $10                               ; [18]:
+    .byte $10                               ; [19]:
+    .byte $10                               ; [20]:
+    .byte $10                               ; [21]:
+    .byte $10                               ; [22]:
+    .byte $10                               ; [23]:
+    .byte $10                               ; [24]:
+    .byte $20                               ; [25]:
+    .byte $10                               ; [26]:
+    .byte $20                               ; [27]:
+    .byte $10                               ; [28]:
+    .byte $10                               ; [29]:
+    .byte $10                               ; [30]:
+    .byte $20                               ; [31]:
+    .byte $10                               ; [32]:
+    .byte $20                               ; [33]:
+    .byte $20                               ; [34]:
+    .byte $10                               ; [35]:
+    .byte $10                               ; [36]:
+    .byte $20                               ; [37]:
+    .byte $00                               ; [38]:
+    .byte $00                               ; [39]:
+    .byte $10                               ; [40]:
+    .byte $20                               ; [41]:
+    .byte $10                               ; [42]:
+    .byte $20                               ; [43]:
+    .byte $10                               ; [44]:
+    .byte $10                               ; [45]:
+    .byte $10                               ; [46]:
+    .byte $20                               ; [47]:
+    .byte $10                               ; [48]:
+    .byte $20                               ; [49]:
+    .byte $10                               ; [50]:
+    .byte $20                               ; [51]:
+    .byte $10                               ; [52]:
+    .byte $20                               ; [53]:
+    .byte $10                               ; [54]:
+    .byte $20                               ; [55]:
+    .byte $10                               ; [56]:
+    .byte $20                               ; [57]:
+    .byte $10                               ; [58]:
+    .byte $20                               ; [59]:
+    .byte $10                               ; [60]:
+    .byte $20                               ; [61]:
+    .byte $10                               ; [62]:
+    .byte $20                               ; [63]:
+    .byte $10                               ; [64]:
+    .byte $20                               ; [65]:
+    .byte $10                               ; [66]:
+    .byte $20                               ; [67]:
+    .byte $10                               ; [68]:
+    .byte $20                               ; [69]:
+    .byte $10                               ; [70]:
+    .byte $20                               ; [71]:
+    .byte $10                               ; [72]:
+    .byte $20                               ; [73]:
+    .byte $10                               ; [74]:
+    .byte $20                               ; [75]:
+    .byte $10                               ; [76]:
+    .byte $20                               ; [77]:
+    .byte $10                               ; [78]:
+    .byte $20                               ; [79]:
+    .byte $10                               ; [80]:
+    .byte $20                               ; [81]:
+    .byte $10                               ; [82]:
+    .byte $20                               ; [83]:
+    .byte $10                               ; [84]:
+    .byte $20                               ; [85]:
+    .byte $10                               ; [86]:
+    .byte $20                               ; [87]:
+    .byte $10                               ; [88]:
+    .byte $20                               ; [89]:
+    .byte $20                               ; [90]:
+    .byte $20                               ; [91]:
+    .byte $20                               ; [92]:
+    .byte $18                               ; [93]:
+    .byte $20                               ; [94]:
+    .byte $10                               ; [95]:
+    .byte $20                               ; [96]:
+    .byte $18                               ; [97]:
+    .byte $10                               ; [98]:
+    .byte $20                               ; [99]:
+    .byte $40                               ; [100]:
+    .byte $10                               ; [101]:
+    .byte $30                               ; [102]:
+    .byte $20                               ; [103]:
+    .byte $10                               ; [104]:
+    .byte $20                               ; [105]:
+    .byte $10                               ; [106]:
+    .byte $20                               ; [107]:
+    .byte $10                               ; [108]:
+    .byte $20                               ; [109]:
+    .byte $28                               ; [110]:
+    .byte $30                               ; [111]:
+    .byte $20                               ; [112]:
+    .byte $20                               ; [113]:
+    .byte $30                               ; [114]:
+    .byte $20                               ; [115]:
+    .byte $30                               ; [116]:
+    .byte $20                               ; [117]:
+    .byte $20                               ; [118]:
+    .byte $20                               ; [119]:
+    .byte $10                               ; [120]:
+    .byte $20                               ; [121]:
+    .byte $10                               ; [122]:
+    .byte $20                               ; [123]:
+    .byte $10                               ; [124]:
+    .byte $20                               ; [125]:
+    .byte $10                               ; [126]:
+    .byte $20                               ; [127]:
+    .byte $10                               ; [128]:
+    .byte $20                               ; [129]:
+    .byte $10                               ; [130]:
+    .byte $20                               ; [131]:
+    .byte $10                               ; [132]:
+    .byte $20                               ; [133]:
+    .byte $10                               ; [134]:
+    .byte $20                               ; [135]:
+    .byte $10                               ; [136]:
+    .byte $20                               ; [137]:
+    .byte $10                               ; [138]:
+    .byte $20                               ; [139]:
+    .byte $10                               ; [140]:
+    .byte $10                               ; [141]:
+    .byte $10                               ; [142]:
+    .byte $10                               ; [143]:
+    .byte $08                               ; [144]:
+    .byte $10                               ; [145]:
+    .byte $08                               ; [146]:
+    .byte $10                               ; [147]:
+    .byte $08                               ; [148]:
+    .byte $10                               ; [149]:
+    .byte $08                               ; [150]:
+    .byte $10                               ; [151]:
+    .byte $08                               ; [152]:
+    .byte $10                               ; [153]:
+    .byte $10                               ; [154]:
+    .byte $10                               ; [155]:
+    .byte $10                               ; [156]:
+    .byte $10                               ; [157]:
+    .byte $10                               ; [158]:
+    .byte $c0                               ; [159]:
+    .byte $10                               ; [160]:
+    .byte $10                               ; [161]:
+    .byte $08                               ; [162]:
+    .byte $08                               ; [163]:
+    .byte $20                               ; [164]:
+    .byte $20                               ; [165]:
+    .byte $10                               ; [166]:
+    .byte $10                               ; [167]:
+    .byte $10                               ; [168]:
+    .byte $10                               ; [169]:
+    .byte $10                               ; [170]:
+    .byte $10                               ; [171]:
+    .byte $10                               ; [172]:
+    .byte $10                               ; [173]:
+    .byte $10                               ; [174]:
+    .byte $10                               ; [175]:
+    .byte $10                               ; [176]:
+    .byte $10                               ; [177]:
+    .byte $10                               ; [178]:
+    .byte $10                               ; [179]:
+    .byte $10                               ; [180]:
+    .byte $10                               ; [181]:
+    .byte $10                               ; [182]:
+    .byte $10                               ; [183]:
+    .byte $10                               ; [184]:
+    .byte $10                               ; [185]:
+    .byte $10                               ; [186]:
+    .byte $10                               ; [187]:
+    .byte $10                               ; [188]:
+    .byte $10                               ; [189]:
+    .byte $10                               ; [190]:
+    .byte $10                               ; [191]:
+    .byte $10                               ; [192]:
+    .byte $10                               ; [193]:
+    .byte $10                               ; [194]:
+    .byte $10                               ; [195]:
+    .byte $10                               ; [196]:
+    .byte $10                               ; [197]:
+    .byte $10                               ; [198]:
+    .byte $10                               ; [199]:
+    .byte $10                               ; [200]:
+    .byte $10                               ; [201]:
 
 ;
 ; XREFS:
@@ -15718,13 +15756,13 @@ MAYBE_SPRITE_EXTENTS_1_:                    ; [$b408]
 ;     Sprites_MoveRight
 ;
 SPRITE_HITBOX_WIDTHS:                       ; [$b4d1]
-    db $0f                                  ; [0]:
-    db $0f                                  ; [1]:
-    db $1f                                  ; [2]:
-    db $1f                                  ; [3]:
-    db $1f                                  ; [4]:
-    db $3f                                  ; [5]:
-    db $2f                                  ; [6]:
+    .byte $0f                               ; [0]:
+    .byte $0f                               ; [1]:
+    .byte $1f                               ; [2]:
+    .byte $1f                               ; [3]:
+    .byte $1f                               ; [4]:
+    .byte $3f                               ; [5]:
+    .byte $2f                               ; [6]:
 
 ;
 ; XREFS:
@@ -15735,13 +15773,13 @@ SPRITE_HITBOX_WIDTHS:                       ; [$b4d1]
 ;     Sprites_MoveRight__86c6
 ;
 SPRITE_HITBOX_HEIGHTS:                      ; [$b4d8]
-    db $0f                                  ; [0]:
-    db $1f                                  ; [1]:
-    db $2f                                  ; [2]:
-    db $3f                                  ; [3]:
-    db $1f                                  ; [4]:
-    db $1f                                  ; [5]:
-    db $4f                                  ; [6]:
+    .byte $0f                               ; [0]:
+    .byte $1f                               ; [1]:
+    .byte $2f                               ; [2]:
+    .byte $3f                               ; [3]:
+    .byte $1f                               ; [4]:
+    .byte $1f                               ; [5]:
+    .byte $4f                               ; [6]:
 
 
 ;============================================================================
@@ -15756,132 +15794,132 @@ SPRITE_HITBOX_HEIGHTS:                      ; [$b4d8]
 ;     Sprites_PopulateNextAvailableSprite
 ;
 SPRITE_ENTITIES_HITBOX_TYPES:               ; [$b4df]
-    db SPRITE_HITBOX_1                      ; [0]:
-    db SPRITE_HITBOX_1                      ; [1]: Dropped: Bread
+    .byte SPRITE_HITBOX_1                   ; [0]:
+    .byte SPRITE_HITBOX_1                   ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_2_:            ; [$b4e1]
-    db SPRITE_HITBOX_0                      ; [2]: Dropped: Coin
-    db SPRITE_HITBOX_1                      ; [3]: Enemy: ?
-    db SPRITE_HITBOX_1                      ; [4]: Enemy: Raiden
-    db SPRITE_HITBOX_1                      ; [5]: Enemy: Necron Aides
-    db SPRITE_HITBOX_1                      ; [6]: Enemy: Zombie
-    db SPRITE_HITBOX_0                      ; [7]: Enemy: Hornet
-    db SPRITE_HITBOX_0                      ; [8]: Enemy: Bihoruda
-    db SPRITE_HITBOX_0                      ; [9]: Enemy: Lilith
-    db SPRITE_HITBOX_0                      ; [10]: Magic: ?
-    db SPRITE_HITBOX_0                      ; [11]: Enemy: Yuinaru
-    db SPRITE_HITBOX_1                      ; [12]: Enemy: Snowman
-    db SPRITE_HITBOX_1                      ; [13]: Enemy: Nash
-    db SPRITE_HITBOX_1                      ; [14]: Enemy: Fire Giant
-    db SPRITE_HITBOX_1                      ; [15]: Enemy: Ishiisu
-    db SPRITE_HITBOX_1                      ; [16]: Enemy: Execution Hood
-    db SPRITE_HITBOX_2                      ; [17]: Boss: Rokusutahn
-    db SPRITE_HITBOX_1                      ; [18]: Boss: unused (round body
+    .byte SPRITE_HITBOX_0                   ; [2]: Dropped: Coin
+    .byte SPRITE_HITBOX_1                   ; [3]: Enemy: ?
+    .byte SPRITE_HITBOX_1                   ; [4]: Enemy: Raiden
+    .byte SPRITE_HITBOX_1                   ; [5]: Enemy: Necron Aides
+    .byte SPRITE_HITBOX_1                   ; [6]: Enemy: Zombie
+    .byte SPRITE_HITBOX_0                   ; [7]: Enemy: Hornet
+    .byte SPRITE_HITBOX_0                   ; [8]: Enemy: Bihoruda
+    .byte SPRITE_HITBOX_0                   ; [9]: Enemy: Lilith
+    .byte SPRITE_HITBOX_0                   ; [10]: Magic: ?
+    .byte SPRITE_HITBOX_0                   ; [11]: Enemy: Yuinaru
+    .byte SPRITE_HITBOX_1                   ; [12]: Enemy: Snowman
+    .byte SPRITE_HITBOX_1                   ; [13]: Enemy: Nash
+    .byte SPRITE_HITBOX_1                   ; [14]: Enemy: Fire Giant
+    .byte SPRITE_HITBOX_1                   ; [15]: Enemy: Ishiisu
+    .byte SPRITE_HITBOX_1                   ; [16]: Enemy: Execution Hood
+    .byte SPRITE_HITBOX_2                   ; [17]: Boss: Rokusutahn
+    .byte SPRITE_HITBOX_1                   ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db SPRITE_HITBOX_1                      ; [19]: Effect: Enemy death
-    db SPRITE_HITBOX_1                      ; [20]: Effect: Lightning ball
-    db SPRITE_HITBOX_1                      ; [21]: Enemy: Charron
-    db SPRITE_HITBOX_1                      ; [22]: Enemy: ? (Unused)
-    db SPRITE_HITBOX_1                      ; [23]: Enemy: Geributa
-    db SPRITE_HITBOX_1                      ; [24]: Enemy: Sugata
-    db SPRITE_HITBOX_1                      ; [25]: Enemy: Grimlock
-    db SPRITE_HITBOX_1                      ; [26]: Enemy: Giant Bees
-    db SPRITE_HITBOX_1                      ; [27]: Enemy: Myconid
-    db SPRITE_HITBOX_1                      ; [28]: Enemy: Naga
-    db SPRITE_HITBOX_1                      ; [29]: Enemy: Skeleton Knight
+    .byte SPRITE_HITBOX_1                   ; [19]: Effect: Enemy death
+    .byte SPRITE_HITBOX_1                   ; [20]: Effect: Lightning ball
+    .byte SPRITE_HITBOX_1                   ; [21]: Enemy: Charron
+    .byte SPRITE_HITBOX_1                   ; [22]: Enemy: ? (Unused)
+    .byte SPRITE_HITBOX_1                   ; [23]: Enemy: Geributa
+    .byte SPRITE_HITBOX_1                   ; [24]: Enemy: Sugata
+    .byte SPRITE_HITBOX_1                   ; [25]: Enemy: Grimlock
+    .byte SPRITE_HITBOX_1                   ; [26]: Enemy: Giant Bees
+    .byte SPRITE_HITBOX_1                   ; [27]: Enemy: Myconid
+    .byte SPRITE_HITBOX_1                   ; [28]: Enemy: Naga
+    .byte SPRITE_HITBOX_1                   ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db SPRITE_HITBOX_1                      ; [30]: Enemy: Giant Strider
-    db SPRITE_HITBOX_1                      ; [31]: Enemy: Sir Gawaine
-    db SPRITE_HITBOX_1                      ; [32]: Enemy: Maskman
-    db SPRITE_HITBOX_1                      ; [33]: Enemy: Wolfman
-    db SPRITE_HITBOX_1                      ; [34]: Enemy: Yareeka
-    db SPRITE_HITBOX_1                      ; [35]: Enemy: Magman
-    db SPRITE_HITBOX_1                      ; [36]: Enemy: Curly-tailed guy
+    .byte SPRITE_HITBOX_1                   ; [30]: Enemy: Giant Strider
+    .byte SPRITE_HITBOX_1                   ; [31]: Enemy: Sir Gawaine
+    .byte SPRITE_HITBOX_1                   ; [32]: Enemy: Maskman
+    .byte SPRITE_HITBOX_1                   ; [33]: Enemy: Wolfman
+    .byte SPRITE_HITBOX_1                   ; [34]: Enemy: Yareeka
+    .byte SPRITE_HITBOX_1                   ; [35]: Enemy: Magman
+    .byte SPRITE_HITBOX_1                   ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db SPRITE_HITBOX_1                      ; [37]: Enemy: ? (unused)
-    db SPRITE_HITBOX_1                      ; [38]: Enemy: Ikeda
-    db SPRITE_HITBOX_1                      ; [39]: Enemy: Muppet guy
+    .byte SPRITE_HITBOX_1                   ; [37]: Enemy: ? (unused)
+    .byte SPRITE_HITBOX_1                   ; [38]: Enemy: Ikeda
+    .byte SPRITE_HITBOX_1                   ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db SPRITE_HITBOX_1                      ; [40]: Enemy: Lamprey
-    db SPRITE_HITBOX_1                      ; [41]: Enemy: ? (unused)
-    db SPRITE_HITBOX_1                      ; [42]: Enemy: Monodron
-    db SPRITE_HITBOX_1                      ; [43]: Enemy: Winged skeleton
+    .byte SPRITE_HITBOX_1                   ; [40]: Enemy: Lamprey
+    .byte SPRITE_HITBOX_1                   ; [41]: Enemy: ? (unused)
+    .byte SPRITE_HITBOX_1                   ; [42]: Enemy: Monodron
+    .byte SPRITE_HITBOX_1                   ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db SPRITE_HITBOX_1                      ; [44]: Enemy: Tamazutsu
-    db SPRITE_HITBOX_3                      ; [45]: Boss: Ripasheiku
-    db SPRITE_HITBOX_2                      ; [46]: Boss: Zoradohna
-    db SPRITE_HITBOX_2                      ; [47]: Boss: Borabohra
-    db SPRITE_HITBOX_1                      ; [48]: Boss: Pakukame
-    db SPRITE_HITBOX_1                      ; [49]: Boss: King Grieve
-    db SPRITE_HITBOX_1                      ; [50]: Boss: Shadow Eura
-    db SPRITE_HITBOX_1                      ; [51]: NPC: Walking Man 1
-    db SPRITE_HITBOX_1                      ; [52]: NPC: Blue lady (unused)
-    db SPRITE_HITBOX_1                      ; [53]: NPC: Child (unused)
-    db SPRITE_HITBOX_1                      ; [54]: NPC: Armor Salesman
-    db SPRITE_HITBOX_1                      ; [55]: NPC: Martial Artist
-    db SPRITE_HITBOX_1                      ; [56]: NPC: Priest
-    db SPRITE_HITBOX_1                      ; [57]: NPC: King
-    db SPRITE_HITBOX_1                      ; [58]: NPC: Magic Teacher
-    db SPRITE_HITBOX_1                      ; [59]: NPC: Key Salesman
-    db SPRITE_HITBOX_1                      ; [60]: NPC: Smoking Man
-    db SPRITE_HITBOX_1                      ; [61]: NPC: Man in Chair
-    db SPRITE_HITBOX_1                      ; [62]: NPC: Sitting Man
-    db SPRITE_HITBOX_1                      ; [63]: NPC: Meat Salesman
-    db SPRITE_HITBOX_1                      ; [64]: NPC: Lady in Blue Dress
+    .byte SPRITE_HITBOX_1                   ; [44]: Enemy: Tamazutsu
+    .byte SPRITE_HITBOX_3                   ; [45]: Boss: Ripasheiku
+    .byte SPRITE_HITBOX_2                   ; [46]: Boss: Zoradohna
+    .byte SPRITE_HITBOX_2                   ; [47]: Boss: Borabohra
+    .byte SPRITE_HITBOX_1                   ; [48]: Boss: Pakukame
+    .byte SPRITE_HITBOX_1                   ; [49]: Boss: King Grieve
+    .byte SPRITE_HITBOX_1                   ; [50]: Boss: Shadow Eura
+    .byte SPRITE_HITBOX_1                   ; [51]: NPC: Walking Man 1
+    .byte SPRITE_HITBOX_1                   ; [52]: NPC: Blue lady (unused)
+    .byte SPRITE_HITBOX_1                   ; [53]: NPC: Child (unused)
+    .byte SPRITE_HITBOX_1                   ; [54]: NPC: Armor Salesman
+    .byte SPRITE_HITBOX_1                   ; [55]: NPC: Martial Artist
+    .byte SPRITE_HITBOX_1                   ; [56]: NPC: Priest
+    .byte SPRITE_HITBOX_1                   ; [57]: NPC: King
+    .byte SPRITE_HITBOX_1                   ; [58]: NPC: Magic Teacher
+    .byte SPRITE_HITBOX_1                   ; [59]: NPC: Key Salesman
+    .byte SPRITE_HITBOX_1                   ; [60]: NPC: Smoking Man
+    .byte SPRITE_HITBOX_1                   ; [61]: NPC: Man in Chair
+    .byte SPRITE_HITBOX_1                   ; [62]: NPC: Sitting Man
+    .byte SPRITE_HITBOX_1                   ; [63]: NPC: Meat Salesman
+    .byte SPRITE_HITBOX_1                   ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db SPRITE_HITBOX_1                      ; [65]: NPC: Guard
-    db SPRITE_HITBOX_1                      ; [66]: NPC: Doctor
-    db SPRITE_HITBOX_1                      ; [67]: NPC: Walking Woman 1
-    db SPRITE_HITBOX_1                      ; [68]: NPC: Walking Woman 2
-    db SPRITE_HITBOX_1                      ; [69]: Enemy: Eyeball (unused)
-    db SPRITE_HITBOX_0                      ; [70]: Enemy: Zozura
-    db SPRITE_HITBOX_0                      ; [71]: Item: Glove
-    db SPRITE_HITBOX_0                      ; [72]: Item: Black Onyx
-    db SPRITE_HITBOX_0                      ; [73]: Item: Pendant
-    db SPRITE_HITBOX_0                      ; [74]: Item: Red Potion
-    db SPRITE_HITBOX_0                      ; [75]: Item: Poison
-    db SPRITE_HITBOX_0                      ; [76]: Item: Elixir
-    db SPRITE_HITBOX_0                      ; [77]: Item: Ointment
-    db SPRITE_HITBOX_0                      ; [78]: Trigger: Intro
-    db SPRITE_HITBOX_1                      ; [79]: Item: Mattock
+    .byte SPRITE_HITBOX_1                   ; [65]: NPC: Guard
+    .byte SPRITE_HITBOX_1                   ; [66]: NPC: Doctor
+    .byte SPRITE_HITBOX_1                   ; [67]: NPC: Walking Woman 1
+    .byte SPRITE_HITBOX_1                   ; [68]: NPC: Walking Woman 2
+    .byte SPRITE_HITBOX_1                   ; [69]: Enemy: Eyeball (unused)
+    .byte SPRITE_HITBOX_0                   ; [70]: Enemy: Zozura
+    .byte SPRITE_HITBOX_0                   ; [71]: Item: Glove
+    .byte SPRITE_HITBOX_0                   ; [72]: Item: Black Onyx
+    .byte SPRITE_HITBOX_0                   ; [73]: Item: Pendant
+    .byte SPRITE_HITBOX_0                   ; [74]: Item: Red Potion
+    .byte SPRITE_HITBOX_0                   ; [75]: Item: Poison
+    .byte SPRITE_HITBOX_0                   ; [76]: Item: Elixir
+    .byte SPRITE_HITBOX_0                   ; [77]: Item: Ointment
+    .byte SPRITE_HITBOX_0                   ; [78]: Trigger: Intro
+    .byte SPRITE_HITBOX_1                   ; [79]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_80_:           ; [$b52f]
-    db SPRITE_HITBOX_0                      ; [80]: Magic: ?
+    .byte SPRITE_HITBOX_0                   ; [80]: Magic: ?
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
-    db SPRITE_HITBOX_0                      ; [81]: Effect: Fountain
-    db SPRITE_HITBOX_4                      ; [82]: Magic: ?
-    db SPRITE_HITBOX_0                      ; [83]: Magic: ?
-    db SPRITE_HITBOX_0                      ; [84]: Item: Wing Boots
-    db SPRITE_HITBOX_0                      ; [85]: Item: Hour Glass
-    db SPRITE_HITBOX_0                      ; [86]: Item: Magical Rod
-    db SPRITE_HITBOX_0                      ; [87]: Item: Battle Suit
-    db SPRITE_HITBOX_0                      ; [88]: Item: Battle Helmet
-    db SPRITE_HITBOX_0                      ; [89]: Item: Dragon Slayer
-    db SPRITE_HITBOX_0                      ; [90]: Item: Mattock
-    db SPRITE_HITBOX_0                      ; [91]: Item: Wing Boots (from
+    .byte SPRITE_HITBOX_0                   ; [81]: Effect: Fountain
+    .byte SPRITE_HITBOX_4                   ; [82]: Magic: ?
+    .byte SPRITE_HITBOX_0                   ; [83]: Magic: ?
+    .byte SPRITE_HITBOX_0                   ; [84]: Item: Wing Boots
+    .byte SPRITE_HITBOX_0                   ; [85]: Item: Hour Glass
+    .byte SPRITE_HITBOX_0                   ; [86]: Item: Magical Rod
+    .byte SPRITE_HITBOX_0                   ; [87]: Item: Battle Suit
+    .byte SPRITE_HITBOX_0                   ; [88]: Item: Battle Helmet
+    .byte SPRITE_HITBOX_0                   ; [89]: Item: Dragon Slayer
+    .byte SPRITE_HITBOX_0                   ; [90]: Item: Mattock
+    .byte SPRITE_HITBOX_0                   ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db SPRITE_HITBOX_0                      ; [92]: Item: Red Potion
-    db SPRITE_HITBOX_0                      ; [93]: Item: Poison
-    db SPRITE_HITBOX_0                      ; [94]: Item: Glove
-    db SPRITE_HITBOX_0                      ; [95]: Item: Ointment
-    db SPRITE_HITBOX_0                      ; [96]: Effect: Spring of Trunk
-    db SPRITE_HITBOX_4                      ; [97]: Effect: Spring of Sky
-    db SPRITE_HITBOX_4                      ; [98]: Effect: Spring of Tower
-    db SPRITE_HITBOX_4                      ; [99]: Effect: Boss Death
-    db SPRITE_HITBOX_1                      ; [100]:
+    .byte SPRITE_HITBOX_0                   ; [92]: Item: Red Potion
+    .byte SPRITE_HITBOX_0                   ; [93]: Item: Poison
+    .byte SPRITE_HITBOX_0                   ; [94]: Item: Glove
+    .byte SPRITE_HITBOX_0                   ; [95]: Item: Ointment
+    .byte SPRITE_HITBOX_0                   ; [96]: Effect: Spring of Trunk
+    .byte SPRITE_HITBOX_4                   ; [97]: Effect: Spring of Sky
+    .byte SPRITE_HITBOX_4                   ; [98]: Effect: Spring of Tower
+    .byte SPRITE_HITBOX_4                   ; [99]: Effect: Boss Death
+    .byte SPRITE_HITBOX_1                   ; [100]:
 
 
 ;============================================================================
@@ -15921,114 +15959,114 @@ SPRITE_ENTITIES_HITBOX_TYPES_81_:           ; [$b530]
 ;     Sprites_HasBoss
 ;
 SPRITE_CATEGORIES_BY_ENTITY:                ; [$b544]
-    db SPRITE_ENEMY                         ; [0]:
-    db SPRITE_DROPPED                       ; [1]: Dropped: Bread
-    db SPRITE_DROPPED                       ; [2]: Dropped: Coin
-    db SPRITE_ENEMY                         ; [3]: Enemy: ?
-    db SPRITE_ENEMY                         ; [4]: Enemy: Raiden
-    db SPRITE_ENEMY                         ; [5]: Enemy: Necron Aides
-    db SPRITE_ENEMY                         ; [6]: Enemy: Zombie
-    db SPRITE_ENEMY                         ; [7]: Enemy: Hornet
-    db SPRITE_ENEMY                         ; [8]: Enemy: Bihoruda
-    db SPRITE_ENEMY                         ; [9]: Enemy: Lilith
-    db SPRITE_MAGIC                         ; [10]: Magic: ?
-    db SPRITE_ENEMY                         ; [11]: Enemy: Yuinaru
-    db SPRITE_ENEMY                         ; [12]: Enemy: Snowman
-    db SPRITE_ENEMY                         ; [13]: Enemy: Nash
-    db SPRITE_ENEMY                         ; [14]: Enemy: Fire Giant
-    db SPRITE_ENEMY                         ; [15]: Enemy: Ishiisu
-    db SPRITE_ENEMY                         ; [16]: Enemy: Execution Hood
-    db SPRITE_BOSS                          ; [17]: Boss: Rokusutahn
-    db SPRITE_BOSS                          ; [18]: Boss: unused (round body
+    .byte SPRITE_ENEMY                      ; [0]:
+    .byte SPRITE_DROPPED                    ; [1]: Dropped: Bread
+    .byte SPRITE_DROPPED                    ; [2]: Dropped: Coin
+    .byte SPRITE_ENEMY                      ; [3]: Enemy: ?
+    .byte SPRITE_ENEMY                      ; [4]: Enemy: Raiden
+    .byte SPRITE_ENEMY                      ; [5]: Enemy: Necron Aides
+    .byte SPRITE_ENEMY                      ; [6]: Enemy: Zombie
+    .byte SPRITE_ENEMY                      ; [7]: Enemy: Hornet
+    .byte SPRITE_ENEMY                      ; [8]: Enemy: Bihoruda
+    .byte SPRITE_ENEMY                      ; [9]: Enemy: Lilith
+    .byte SPRITE_MAGIC                      ; [10]: Magic: ?
+    .byte SPRITE_ENEMY                      ; [11]: Enemy: Yuinaru
+    .byte SPRITE_ENEMY                      ; [12]: Enemy: Snowman
+    .byte SPRITE_ENEMY                      ; [13]: Enemy: Nash
+    .byte SPRITE_ENEMY                      ; [14]: Enemy: Fire Giant
+    .byte SPRITE_ENEMY                      ; [15]: Enemy: Ishiisu
+    .byte SPRITE_ENEMY                      ; [16]: Enemy: Execution Hood
+    .byte SPRITE_BOSS                       ; [17]: Boss: Rokusutahn
+    .byte SPRITE_BOSS                       ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db SPRITE_EFFECT                        ; [19]: Effect: Enemy death
-    db SPRITE_EFFECT                        ; [20]: Effect: Lightning ball
-    db SPRITE_ENEMY                         ; [21]: Enemy: Charron
-    db SPRITE_ENEMY                         ; [22]: Enemy: ? (Unused)
-    db SPRITE_ENEMY                         ; [23]: Enemy: Geributa
-    db SPRITE_ENEMY                         ; [24]: Enemy: Sugata
-    db SPRITE_ENEMY                         ; [25]: Enemy: Grimlock
-    db SPRITE_ENEMY                         ; [26]: Enemy: Giant Bees
-    db SPRITE_ENEMY                         ; [27]: Enemy: Myconid
-    db SPRITE_ENEMY                         ; [28]: Enemy: Naga
-    db SPRITE_ENEMY                         ; [29]: Enemy: Skeleton Knight
+    .byte SPRITE_EFFECT                     ; [19]: Effect: Enemy death
+    .byte SPRITE_EFFECT                     ; [20]: Effect: Lightning ball
+    .byte SPRITE_ENEMY                      ; [21]: Enemy: Charron
+    .byte SPRITE_ENEMY                      ; [22]: Enemy: ? (Unused)
+    .byte SPRITE_ENEMY                      ; [23]: Enemy: Geributa
+    .byte SPRITE_ENEMY                      ; [24]: Enemy: Sugata
+    .byte SPRITE_ENEMY                      ; [25]: Enemy: Grimlock
+    .byte SPRITE_ENEMY                      ; [26]: Enemy: Giant Bees
+    .byte SPRITE_ENEMY                      ; [27]: Enemy: Myconid
+    .byte SPRITE_ENEMY                      ; [28]: Enemy: Naga
+    .byte SPRITE_ENEMY                      ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db SPRITE_ENEMY                         ; [30]: Enemy: Giant Strider
-    db SPRITE_ENEMY                         ; [31]: Enemy: Sir Gawaine
-    db SPRITE_ENEMY                         ; [32]: Enemy: Maskman
-    db SPRITE_ENEMY                         ; [33]: Enemy: Wolfman
-    db SPRITE_ENEMY                         ; [34]: Enemy: Yareeka
-    db SPRITE_ENEMY                         ; [35]: Enemy: Magman
-    db SPRITE_ENEMY                         ; [36]: Enemy: Curly-tailed guy
+    .byte SPRITE_ENEMY                      ; [30]: Enemy: Giant Strider
+    .byte SPRITE_ENEMY                      ; [31]: Enemy: Sir Gawaine
+    .byte SPRITE_ENEMY                      ; [32]: Enemy: Maskman
+    .byte SPRITE_ENEMY                      ; [33]: Enemy: Wolfman
+    .byte SPRITE_ENEMY                      ; [34]: Enemy: Yareeka
+    .byte SPRITE_ENEMY                      ; [35]: Enemy: Magman
+    .byte SPRITE_ENEMY                      ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db SPRITE_ENEMY                         ; [37]: Enemy: ? (unused)
-    db SPRITE_ENEMY                         ; [38]: Enemy: Ikeda
-    db SPRITE_ENEMY                         ; [39]: Enemy: Muppet guy
+    .byte SPRITE_ENEMY                      ; [37]: Enemy: ? (unused)
+    .byte SPRITE_ENEMY                      ; [38]: Enemy: Ikeda
+    .byte SPRITE_ENEMY                      ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db SPRITE_ENEMY                         ; [40]: Enemy: Lamprey
-    db SPRITE_ENEMY                         ; [41]: Enemy: ? (unused)
-    db SPRITE_ENEMY                         ; [42]: Enemy: Monodron
-    db SPRITE_ENEMY                         ; [43]: Enemy: Winged skeleton
+    .byte SPRITE_ENEMY                      ; [40]: Enemy: Lamprey
+    .byte SPRITE_ENEMY                      ; [41]: Enemy: ? (unused)
+    .byte SPRITE_ENEMY                      ; [42]: Enemy: Monodron
+    .byte SPRITE_ENEMY                      ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db SPRITE_ENEMY                         ; [44]: Enemy: Tamazutsu
-    db SPRITE_BOSS                          ; [45]: Boss: Ripasheiku
-    db SPRITE_BOSS                          ; [46]: Boss: Zoradohna
-    db SPRITE_BOSS                          ; [47]: Boss: Borabohra
-    db SPRITE_BOSS                          ; [48]: Boss: Pakukame
-    db SPRITE_BOSS                          ; [49]: Boss: King Grieve
-    db SPRITE_BOSS                          ; [50]: Boss: Shadow Eura
-    db SPRITE_BOSS                          ; [51]: NPC: Walking Man 1
-    db SPRITE_NPC                           ; [52]: NPC: Blue lady (unused)
-    db SPRITE_NPC                           ; [53]: NPC: Child (unused)
-    db SPRITE_NPC                           ; [54]: NPC: Armor Salesman
-    db SPRITE_NPC                           ; [55]: NPC: Martial Artist
-    db SPRITE_NPC                           ; [56]: NPC: Priest
-    db SPRITE_NPC                           ; [57]: NPC: King
-    db SPRITE_NPC                           ; [58]: NPC: Magic Teacher
-    db SPRITE_NPC                           ; [59]: NPC: Key Salesman
-    db SPRITE_NPC                           ; [60]: NPC: Smoking Man
-    db SPRITE_NPC                           ; [61]: NPC: Man in Chair
-    db SPRITE_NPC                           ; [62]: NPC: Sitting Man
-    db SPRITE_NPC                           ; [63]: NPC: Meat Salesman
-    db SPRITE_NPC                           ; [64]: NPC: Lady in Blue Dress
+    .byte SPRITE_ENEMY                      ; [44]: Enemy: Tamazutsu
+    .byte SPRITE_BOSS                       ; [45]: Boss: Ripasheiku
+    .byte SPRITE_BOSS                       ; [46]: Boss: Zoradohna
+    .byte SPRITE_BOSS                       ; [47]: Boss: Borabohra
+    .byte SPRITE_BOSS                       ; [48]: Boss: Pakukame
+    .byte SPRITE_BOSS                       ; [49]: Boss: King Grieve
+    .byte SPRITE_BOSS                       ; [50]: Boss: Shadow Eura
+    .byte SPRITE_BOSS                       ; [51]: NPC: Walking Man 1
+    .byte SPRITE_NPC                        ; [52]: NPC: Blue lady (unused)
+    .byte SPRITE_NPC                        ; [53]: NPC: Child (unused)
+    .byte SPRITE_NPC                        ; [54]: NPC: Armor Salesman
+    .byte SPRITE_NPC                        ; [55]: NPC: Martial Artist
+    .byte SPRITE_NPC                        ; [56]: NPC: Priest
+    .byte SPRITE_NPC                        ; [57]: NPC: King
+    .byte SPRITE_NPC                        ; [58]: NPC: Magic Teacher
+    .byte SPRITE_NPC                        ; [59]: NPC: Key Salesman
+    .byte SPRITE_NPC                        ; [60]: NPC: Smoking Man
+    .byte SPRITE_NPC                        ; [61]: NPC: Man in Chair
+    .byte SPRITE_NPC                        ; [62]: NPC: Sitting Man
+    .byte SPRITE_NPC                        ; [63]: NPC: Meat Salesman
+    .byte SPRITE_NPC                        ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db SPRITE_NPC                           ; [65]: NPC: Guard
-    db SPRITE_NPC                           ; [66]: NPC: Doctor
-    db SPRITE_NPC                           ; [67]: NPC: Walking Woman 1
-    db SPRITE_NPC                           ; [68]: NPC: Walking Woman 2
-    db SPRITE_NPC                           ; [69]: Enemy: Eyeball (unused)
-    db SPRITE_ENEMY                         ; [70]: Enemy: Zozura
-    db SPRITE_ENEMY                         ; [71]: Item: Glove
-    db SPRITE_ITEM                          ; [72]: Item: Black Onyx
-    db SPRITE_ITEM                          ; [73]: Item: Pendant
-    db SPRITE_ITEM                          ; [74]: Item: Red Potion
-    db SPRITE_ITEM                          ; [75]: Item: Poison
-    db SPRITE_ITEM                          ; [76]: Item: Elixir
-    db SPRITE_ITEM                          ; [77]: Item: Ointment
-    db SPRITE_ITEM                          ; [78]: Trigger: Intro
-    db SPRITE_TRIGGER                       ; [79]: Item: Mattock
-    db SPRITE_ITEM                          ; [80]: Magic: ?
-    db SPRITE_MAGIC                         ; [81]: Effect: Fountain
-    db SPRITE_EFFECT                        ; [82]: Magic: ?
-    db SPRITE_MAGIC                         ; [83]: Magic: ?
-    db SPRITE_MAGIC                         ; [84]: Item: Wing Boots
-    db SPRITE_ITEM                          ; [85]: Item: Hour Glass
-    db SPRITE_ITEM                          ; [86]: Item: Magical Rod
-    db SPRITE_ITEM                          ; [87]: Item: Battle Suit
-    db SPRITE_ITEM                          ; [88]: Item: Battle Helmet
-    db SPRITE_ITEM                          ; [89]: Item: Dragon Slayer
-    db SPRITE_ITEM                          ; [90]: Item: Mattock
-    db SPRITE_ITEM                          ; [91]: Item: Wing Boots (from
+    .byte SPRITE_NPC                        ; [65]: NPC: Guard
+    .byte SPRITE_NPC                        ; [66]: NPC: Doctor
+    .byte SPRITE_NPC                        ; [67]: NPC: Walking Woman 1
+    .byte SPRITE_NPC                        ; [68]: NPC: Walking Woman 2
+    .byte SPRITE_NPC                        ; [69]: Enemy: Eyeball (unused)
+    .byte SPRITE_ENEMY                      ; [70]: Enemy: Zozura
+    .byte SPRITE_ENEMY                      ; [71]: Item: Glove
+    .byte SPRITE_ITEM                       ; [72]: Item: Black Onyx
+    .byte SPRITE_ITEM                       ; [73]: Item: Pendant
+    .byte SPRITE_ITEM                       ; [74]: Item: Red Potion
+    .byte SPRITE_ITEM                       ; [75]: Item: Poison
+    .byte SPRITE_ITEM                       ; [76]: Item: Elixir
+    .byte SPRITE_ITEM                       ; [77]: Item: Ointment
+    .byte SPRITE_ITEM                       ; [78]: Trigger: Intro
+    .byte SPRITE_TRIGGER                    ; [79]: Item: Mattock
+    .byte SPRITE_ITEM                       ; [80]: Magic: ?
+    .byte SPRITE_MAGIC                      ; [81]: Effect: Fountain
+    .byte SPRITE_EFFECT                     ; [82]: Magic: ?
+    .byte SPRITE_MAGIC                      ; [83]: Magic: ?
+    .byte SPRITE_MAGIC                      ; [84]: Item: Wing Boots
+    .byte SPRITE_ITEM                       ; [85]: Item: Hour Glass
+    .byte SPRITE_ITEM                       ; [86]: Item: Magical Rod
+    .byte SPRITE_ITEM                       ; [87]: Item: Battle Suit
+    .byte SPRITE_ITEM                       ; [88]: Item: Battle Helmet
+    .byte SPRITE_ITEM                       ; [89]: Item: Dragon Slayer
+    .byte SPRITE_ITEM                       ; [90]: Item: Mattock
+    .byte SPRITE_ITEM                       ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db SPRITE_ITEM                          ; [92]: Item: Red Potion
-    db SPRITE_ITEM                          ; [93]: Item: Poison
-    db SPRITE_ITEM                          ; [94]: Item: Glove
-    db SPRITE_ITEM                          ; [95]: Item: Ointment
-    db SPRITE_ITEM                          ; [96]: Effect: Spring of Trunk
-    db SPRITE_EFFECT                        ; [97]: Effect: Spring of Sky
-    db SPRITE_EFFECT                        ; [98]: Effect: Spring of Tower
-    db SPRITE_EFFECT                        ; [99]: Effect: Boss Death
-    db SPRITE_EFFECT                        ; [100]:
+    .byte SPRITE_ITEM                       ; [92]: Item: Red Potion
+    .byte SPRITE_ITEM                       ; [93]: Item: Poison
+    .byte SPRITE_ITEM                       ; [94]: Item: Glove
+    .byte SPRITE_ITEM                       ; [95]: Item: Ointment
+    .byte SPRITE_ITEM                       ; [96]: Effect: Spring of Trunk
+    .byte SPRITE_EFFECT                     ; [97]: Effect: Spring of Sky
+    .byte SPRITE_EFFECT                     ; [98]: Effect: Spring of Tower
+    .byte SPRITE_EFFECT                     ; [99]: Effect: Boss Death
+    .byte SPRITE_EFFECT                     ; [100]:
 
 
 ;============================================================================
@@ -16043,120 +16081,120 @@ SPRITE_CATEGORIES_BY_ENTITY:                ; [$b544]
 ;     Sprites_PopulateNextAvailableSprite
 ;
 SPRITE_ENTITIES_HP:                         ; [$b5a9]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]: Dropped: Bread
-    db $00                                  ; [2]: Dropped: Coin
-    db $00                                  ; [3]: Enemy: ?
-    db $12                                  ; [4]: Enemy: Raiden
-    db $18                                  ; [5]: Enemy: Necron Aides
-    db $0e                                  ; [6]: Enemy: Zombie
-    db $03                                  ; [7]: Enemy: Hornet
-    db $05                                  ; [8]: Enemy: Bihoruda
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]: Dropped: Bread
+    .byte $00                               ; [2]: Dropped: Coin
+    .byte $00                               ; [3]: Enemy: ?
+    .byte $12                               ; [4]: Enemy: Raiden
+    .byte $18                               ; [5]: Enemy: Necron Aides
+    .byte $0e                               ; [6]: Enemy: Zombie
+    .byte $03                               ; [7]: Enemy: Hornet
+    .byte $05                               ; [8]: Enemy: Bihoruda
 
 ;
 ; XREFS:
 ;     SpriteBehavior_Pakukame
 ;
 SPRITE_ENTITIES_HP_9_:                      ; [$b5b2]
-    db $07                                  ; [9]: Enemy: Lilith
-    db $08                                  ; [10]: Magic: ?
-    db $03                                  ; [11]: Enemy: Yuinaru
-    db $10                                  ; [12]: Enemy: Snowman
-    db $0c                                  ; [13]: Enemy: Nash
-    db $14                                  ; [14]: Enemy: Fire Giant
-    db $18                                  ; [15]: Enemy: Ishiisu
-    db $64                                  ; [16]: Enemy: Execution Hood
-    db $46                                  ; [17]: Boss: Rokusutahn
-    db $24                                  ; [18]: Boss: unused (round body
+    .byte $07                               ; [9]: Enemy: Lilith
+    .byte $08                               ; [10]: Magic: ?
+    .byte $03                               ; [11]: Enemy: Yuinaru
+    .byte $10                               ; [12]: Enemy: Snowman
+    .byte $0c                               ; [13]: Enemy: Nash
+    .byte $14                               ; [14]: Enemy: Fire Giant
+    .byte $18                               ; [15]: Enemy: Ishiisu
+    .byte $64                               ; [16]: Enemy: Execution Hood
+    .byte $46                               ; [17]: Boss: Rokusutahn
+    .byte $24                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $00                                  ; [19]: Effect: Enemy death
-    db $00                                  ; [20]: Effect: Lightning ball
-    db $1a                                  ; [21]: Enemy: Charron
-    db $08                                  ; [22]: Enemy: ? (Unused)
-    db $12                                  ; [23]: Enemy: Geributa
-    db $16                                  ; [24]: Enemy: Sugata
-    db $1d                                  ; [25]: Enemy: Grimlock
-    db $13                                  ; [26]: Enemy: Giant Bees
-    db $16                                  ; [27]: Enemy: Myconid
-    db $17                                  ; [28]: Enemy: Naga
-    db $00                                  ; [29]: Enemy: Skeleton Knight
+    .byte $00                               ; [19]: Effect: Enemy death
+    .byte $00                               ; [20]: Effect: Lightning ball
+    .byte $1a                               ; [21]: Enemy: Charron
+    .byte $08                               ; [22]: Enemy: ? (Unused)
+    .byte $12                               ; [23]: Enemy: Geributa
+    .byte $16                               ; [24]: Enemy: Sugata
+    .byte $1d                               ; [25]: Enemy: Grimlock
+    .byte $13                               ; [26]: Enemy: Giant Bees
+    .byte $16                               ; [27]: Enemy: Myconid
+    .byte $17                               ; [28]: Enemy: Naga
+    .byte $00                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $1d                                  ; [30]: Enemy: Giant Strider
-    db $23                                  ; [31]: Enemy: Sir Gawaine
-    db $20                                  ; [32]: Enemy: Maskman
-    db $26                                  ; [33]: Enemy: Wolfman
-    db $30                                  ; [34]: Enemy: Yareeka
-    db $17                                  ; [35]: Enemy: Magman
-    db $24                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $1d                               ; [30]: Enemy: Giant Strider
+    .byte $23                               ; [31]: Enemy: Sir Gawaine
+    .byte $20                               ; [32]: Enemy: Maskman
+    .byte $26                               ; [33]: Enemy: Wolfman
+    .byte $30                               ; [34]: Enemy: Yareeka
+    .byte $17                               ; [35]: Enemy: Magman
+    .byte $24                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $1f                                  ; [37]: Enemy: ? (unused)
-    db $11                                  ; [38]: Enemy: Ikeda
-    db $20                                  ; [39]: Enemy: Muppet guy
+    .byte $1f                               ; [37]: Enemy: ? (unused)
+    .byte $11                               ; [38]: Enemy: Ikeda
+    .byte $20                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $38                                  ; [40]: Enemy: Lamprey
-    db $24                                  ; [41]: Enemy: ? (unused)
-    db $0a                                  ; [42]: Enemy: Monodron
-    db $0b                                  ; [43]: Enemy: Winged skeleton
+    .byte $38                               ; [40]: Enemy: Lamprey
+    .byte $24                               ; [41]: Enemy: ? (unused)
+    .byte $0a                               ; [42]: Enemy: Monodron
+    .byte $0b                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $1a                                  ; [44]: Enemy: Tamazutsu
-    db $4b                                  ; [45]: Boss: Ripasheiku
-    db $73                                  ; [46]: Boss: Zoradohna
-    db $69                                  ; [47]: Boss: Borabohra
-    db $28                                  ; [48]: Boss: Pakukame
-    db $18                                  ; [49]: Boss: King Grieve
-    db $fa                                  ; [50]: Boss: Shadow Eura
-    db $fa                                  ; [51]: NPC: Walking Man 1
-    db $00                                  ; [52]: NPC: Blue lady (unused)
-    db $00                                  ; [53]: NPC: Child (unused)
-    db $00                                  ; [54]: NPC: Armor Salesman
-    db $00                                  ; [55]: NPC: Martial Artist
-    db $00                                  ; [56]: NPC: Priest
-    db $00                                  ; [57]: NPC: King
-    db $00                                  ; [58]: NPC: Magic Teacher
-    db $00                                  ; [59]: NPC: Key Salesman
-    db $00                                  ; [60]: NPC: Smoking Man
-    db $00                                  ; [61]: NPC: Man in Chair
-    db $00                                  ; [62]: NPC: Sitting Man
-    db $00                                  ; [63]: NPC: Meat Salesman
-    db $00                                  ; [64]: NPC: Lady in Blue Dress
+    .byte $1a                               ; [44]: Enemy: Tamazutsu
+    .byte $4b                               ; [45]: Boss: Ripasheiku
+    .byte $73                               ; [46]: Boss: Zoradohna
+    .byte $69                               ; [47]: Boss: Borabohra
+    .byte $28                               ; [48]: Boss: Pakukame
+    .byte $18                               ; [49]: Boss: King Grieve
+    .byte $fa                               ; [50]: Boss: Shadow Eura
+    .byte $fa                               ; [51]: NPC: Walking Man 1
+    .byte $00                               ; [52]: NPC: Blue lady (unused)
+    .byte $00                               ; [53]: NPC: Child (unused)
+    .byte $00                               ; [54]: NPC: Armor Salesman
+    .byte $00                               ; [55]: NPC: Martial Artist
+    .byte $00                               ; [56]: NPC: Priest
+    .byte $00                               ; [57]: NPC: King
+    .byte $00                               ; [58]: NPC: Magic Teacher
+    .byte $00                               ; [59]: NPC: Key Salesman
+    .byte $00                               ; [60]: NPC: Smoking Man
+    .byte $00                               ; [61]: NPC: Man in Chair
+    .byte $00                               ; [62]: NPC: Sitting Man
+    .byte $00                               ; [63]: NPC: Meat Salesman
+    .byte $00                               ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $00                                  ; [65]: NPC: Guard
-    db $00                                  ; [66]: NPC: Doctor
-    db $00                                  ; [67]: NPC: Walking Woman 1
-    db $00                                  ; [68]: NPC: Walking Woman 2
-    db $00                                  ; [69]: Enemy: Eyeball (unused)
-    db $10                                  ; [70]: Enemy: Zozura
-    db $09                                  ; [71]: Item: Glove
-    db $00                                  ; [72]: Item: Black Onyx
-    db $00                                  ; [73]: Item: Pendant
-    db $00                                  ; [74]: Item: Red Potion
-    db $00                                  ; [75]: Item: Poison
-    db $00                                  ; [76]: Item: Elixir
-    db $00                                  ; [77]: Item: Ointment
-    db $00                                  ; [78]: Trigger: Intro
-    db $00                                  ; [79]: Item: Mattock
-    db $00                                  ; [80]: Magic: ?
-    db $08                                  ; [81]: Effect: Fountain
-    db $00                                  ; [82]: Magic: ?
-    db $08                                  ; [83]: Magic: ?
-    db $08                                  ; [84]: Item: Wing Boots
-    db $00                                  ; [85]: Item: Hour Glass
-    db $00                                  ; [86]: Item: Magical Rod
-    db $00                                  ; [87]: Item: Battle Suit
-    db $00                                  ; [88]: Item: Battle Helmet
-    db $00                                  ; [89]: Item: Dragon Slayer
-    db $00                                  ; [90]: Item: Mattock
-    db $00                                  ; [91]: Item: Wing Boots (from
+    .byte $00                               ; [65]: NPC: Guard
+    .byte $00                               ; [66]: NPC: Doctor
+    .byte $00                               ; [67]: NPC: Walking Woman 1
+    .byte $00                               ; [68]: NPC: Walking Woman 2
+    .byte $00                               ; [69]: Enemy: Eyeball (unused)
+    .byte $10                               ; [70]: Enemy: Zozura
+    .byte $09                               ; [71]: Item: Glove
+    .byte $00                               ; [72]: Item: Black Onyx
+    .byte $00                               ; [73]: Item: Pendant
+    .byte $00                               ; [74]: Item: Red Potion
+    .byte $00                               ; [75]: Item: Poison
+    .byte $00                               ; [76]: Item: Elixir
+    .byte $00                               ; [77]: Item: Ointment
+    .byte $00                               ; [78]: Trigger: Intro
+    .byte $00                               ; [79]: Item: Mattock
+    .byte $00                               ; [80]: Magic: ?
+    .byte $08                               ; [81]: Effect: Fountain
+    .byte $00                               ; [82]: Magic: ?
+    .byte $08                               ; [83]: Magic: ?
+    .byte $08                               ; [84]: Item: Wing Boots
+    .byte $00                               ; [85]: Item: Hour Glass
+    .byte $00                               ; [86]: Item: Magical Rod
+    .byte $00                               ; [87]: Item: Battle Suit
+    .byte $00                               ; [88]: Item: Battle Helmet
+    .byte $00                               ; [89]: Item: Dragon Slayer
+    .byte $00                               ; [90]: Item: Mattock
+    .byte $00                               ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db $00                                  ; [92]: Item: Red Potion
-    db $00                                  ; [93]: Item: Poison
-    db $00                                  ; [94]: Item: Glove
-    db $00                                  ; [95]: Item: Ointment
-    db $00                                  ; [96]: Effect: Spring of Trunk
-    db $00                                  ; [97]: Effect: Spring of Sky
-    db $00                                  ; [98]: Effect: Spring of Tower
-    db $00                                  ; [99]: Effect: Boss Death
-    db $00                                  ; [100]:
+    .byte $00                               ; [92]: Item: Red Potion
+    .byte $00                               ; [93]: Item: Poison
+    .byte $00                               ; [94]: Item: Glove
+    .byte $00                               ; [95]: Item: Ointment
+    .byte $00                               ; [96]: Effect: Spring of Trunk
+    .byte $00                               ; [97]: Effect: Spring of Sky
+    .byte $00                               ; [98]: Effect: Spring of Tower
+    .byte $00                               ; [99]: Effect: Boss Death
+    .byte $00                               ; [100]:
 
 
 ;============================================================================
@@ -16171,227 +16209,227 @@ SPRITE_ENTITIES_HP_9_:                      ; [$b5b2]
 ;     Player_AddExperienceFromSprite
 ;
 ENEMY_EXPERIENCE:                           ; [$b60e]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]: Dropped: Bread
-    db $00                                  ; [2]: Dropped: Coin
-    db $00                                  ; [3]: Enemy: ?
-    db $23                                  ; [4]: Enemy: Raiden
-    db $37                                  ; [5]: Enemy: Necron Aides
-    db $19                                  ; [6]: Enemy: Zombie
-    db $19                                  ; [7]: Enemy: Hornet
-    db $23                                  ; [8]: Enemy: Bihoruda
-    db $19                                  ; [9]: Enemy: Lilith
-    db $00                                  ; [10]: Magic: ?
-    db $19                                  ; [11]: Enemy: Yuinaru
-    db $37                                  ; [12]: Enemy: Snowman
-    db $3c                                  ; [13]: Enemy: Nash
-    db $2d                                  ; [14]: Enemy: Fire Giant
-    db $0a                                  ; [15]: Enemy: Ishiisu
-    db $32                                  ; [16]: Enemy: Execution Hood
-    db $78                                  ; [17]: Boss: Rokusutahn
-    db $5a                                  ; [18]: Boss: unused (round body
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]: Dropped: Bread
+    .byte $00                               ; [2]: Dropped: Coin
+    .byte $00                               ; [3]: Enemy: ?
+    .byte $23                               ; [4]: Enemy: Raiden
+    .byte $37                               ; [5]: Enemy: Necron Aides
+    .byte $19                               ; [6]: Enemy: Zombie
+    .byte $19                               ; [7]: Enemy: Hornet
+    .byte $23                               ; [8]: Enemy: Bihoruda
+    .byte $19                               ; [9]: Enemy: Lilith
+    .byte $00                               ; [10]: Magic: ?
+    .byte $19                               ; [11]: Enemy: Yuinaru
+    .byte $37                               ; [12]: Enemy: Snowman
+    .byte $3c                               ; [13]: Enemy: Nash
+    .byte $2d                               ; [14]: Enemy: Fire Giant
+    .byte $0a                               ; [15]: Enemy: Ishiisu
+    .byte $32                               ; [16]: Enemy: Execution Hood
+    .byte $78                               ; [17]: Boss: Rokusutahn
+    .byte $5a                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $00                                  ; [19]: Effect: Enemy death
-    db $00                                  ; [20]: Effect: Lightning ball
-    db $41                                  ; [21]: Enemy: Charron
-    db $00                                  ; [22]: Enemy: ? (Unused)
-    db $28                                  ; [23]: Enemy: Geributa
-    db $0d                                  ; [24]: Enemy: Sugata
-    db $3a                                  ; [25]: Enemy: Grimlock
-    db $1d                                  ; [26]: Enemy: Giant Bees
-    db $1a                                  ; [27]: Enemy: Myconid
-    db $23                                  ; [28]: Enemy: Naga
-    db $00                                  ; [29]: Enemy: Skeleton Knight
+    .byte $00                               ; [19]: Effect: Enemy death
+    .byte $00                               ; [20]: Effect: Lightning ball
+    .byte $41                               ; [21]: Enemy: Charron
+    .byte $00                               ; [22]: Enemy: ? (Unused)
+    .byte $28                               ; [23]: Enemy: Geributa
+    .byte $0d                               ; [24]: Enemy: Sugata
+    .byte $3a                               ; [25]: Enemy: Grimlock
+    .byte $1d                               ; [26]: Enemy: Giant Bees
+    .byte $1a                               ; [27]: Enemy: Myconid
+    .byte $23                               ; [28]: Enemy: Naga
+    .byte $00                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $30                                  ; [30]: Enemy: Giant Strider
-    db $3a                                  ; [31]: Enemy: Sir Gawaine
-    db $36                                  ; [32]: Enemy: Maskman
-    db $31                                  ; [33]: Enemy: Wolfman
-    db $1e                                  ; [34]: Enemy: Yareeka
-    db $3e                                  ; [35]: Enemy: Magman
-    db $26                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $30                               ; [30]: Enemy: Giant Strider
+    .byte $3a                               ; [31]: Enemy: Sir Gawaine
+    .byte $36                               ; [32]: Enemy: Maskman
+    .byte $31                               ; [33]: Enemy: Wolfman
+    .byte $1e                               ; [34]: Enemy: Yareeka
+    .byte $3e                               ; [35]: Enemy: Magman
+    .byte $26                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $19                                  ; [37]: Enemy: ? (unused)
-    db $21                                  ; [38]: Enemy: Ikeda
-    db $1d                                  ; [39]: Enemy: Muppet guy
+    .byte $19                               ; [37]: Enemy: ? (unused)
+    .byte $21                               ; [38]: Enemy: Ikeda
+    .byte $1d                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $1e                                  ; [40]: Enemy: Lamprey
-    db $18                                  ; [41]: Enemy: ? (unused)
-    db $14                                  ; [42]: Enemy: Monodron
-    db $12                                  ; [43]: Enemy: Winged skeleton
+    .byte $1e                               ; [40]: Enemy: Lamprey
+    .byte $18                               ; [41]: Enemy: ? (unused)
+    .byte $14                               ; [42]: Enemy: Monodron
+    .byte $12                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $0f                                  ; [44]: Enemy: Tamazutsu
-    db $5a                                  ; [45]: Boss: Ripasheiku
-    db $9e                                  ; [46]: Boss: Zoradohna
-    db $4b                                  ; [47]: Boss: Borabohra
-    db $55                                  ; [48]: Boss: Pakukame
-    db $50                                  ; [49]: Boss: King Grieve
-    db $00                                  ; [50]: Boss: Shadow Eura
-    db $00                                  ; [51]: NPC: Walking Man 1
-    db $00                                  ; [52]: NPC: Blue lady (unused)
-    db $00                                  ; [53]: NPC: Child (unused)
-    db $00                                  ; [54]: NPC: Armor Salesman
-    db $00                                  ; [55]: NPC: Martial Artist
-    db $00                                  ; [56]: NPC: Priest
-    db $00                                  ; [57]: NPC: King
-    db $00                                  ; [58]: NPC: Magic Teacher
-    db $00                                  ; [59]: NPC: Key Salesman
-    db $00                                  ; [60]: NPC: Smoking Man
-    db $00                                  ; [61]: NPC: Man in Chair
-    db $00                                  ; [62]: NPC: Sitting Man
-    db $00                                  ; [63]: NPC: Meat Salesman
-    db $00                                  ; [64]: NPC: Lady in Blue Dress
+    .byte $0f                               ; [44]: Enemy: Tamazutsu
+    .byte $5a                               ; [45]: Boss: Ripasheiku
+    .byte $9e                               ; [46]: Boss: Zoradohna
+    .byte $4b                               ; [47]: Boss: Borabohra
+    .byte $55                               ; [48]: Boss: Pakukame
+    .byte $50                               ; [49]: Boss: King Grieve
+    .byte $00                               ; [50]: Boss: Shadow Eura
+    .byte $00                               ; [51]: NPC: Walking Man 1
+    .byte $00                               ; [52]: NPC: Blue lady (unused)
+    .byte $00                               ; [53]: NPC: Child (unused)
+    .byte $00                               ; [54]: NPC: Armor Salesman
+    .byte $00                               ; [55]: NPC: Martial Artist
+    .byte $00                               ; [56]: NPC: Priest
+    .byte $00                               ; [57]: NPC: King
+    .byte $00                               ; [58]: NPC: Magic Teacher
+    .byte $00                               ; [59]: NPC: Key Salesman
+    .byte $00                               ; [60]: NPC: Smoking Man
+    .byte $00                               ; [61]: NPC: Man in Chair
+    .byte $00                               ; [62]: NPC: Sitting Man
+    .byte $00                               ; [63]: NPC: Meat Salesman
+    .byte $00                               ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $00                                  ; [65]: NPC: Guard
-    db $00                                  ; [66]: NPC: Doctor
-    db $00                                  ; [67]: NPC: Walking Woman 1
-    db $00                                  ; [68]: NPC: Walking Woman 2
-    db $00                                  ; [69]: Enemy: Eyeball (unused)
-    db $19                                  ; [70]: Enemy: Zozura
-    db $1e                                  ; [71]: Item: Glove
-    db $00                                  ; [72]: Item: Black Onyx
-    db $00                                  ; [73]: Item: Pendant
-    db $00                                  ; [74]: Item: Red Potion
-    db $00                                  ; [75]: Item: Poison
-    db $00                                  ; [76]: Item: Elixir
-    db $00                                  ; [77]: Item: Ointment
-    db $00                                  ; [78]: Trigger: Intro
-    db $00                                  ; [79]: Item: Mattock
-    db $00                                  ; [80]: Magic: ?
-    db $08                                  ; [81]: Effect: Fountain
-    db $00                                  ; [82]: Magic: ?
-    db $08                                  ; [83]: Magic: ?
-    db $08                                  ; [84]: Item: Wing Boots
-    db $00                                  ; [85]: Item: Hour Glass
-    db $00                                  ; [86]: Item: Magical Rod
-    db $00                                  ; [87]: Item: Battle Suit
-    db $00                                  ; [88]: Item: Battle Helmet
-    db $00                                  ; [89]: Item: Dragon Slayer
-    db $00                                  ; [90]: Item: Mattock
-    db $00                                  ; [91]: Item: Wing Boots (from
+    .byte $00                               ; [65]: NPC: Guard
+    .byte $00                               ; [66]: NPC: Doctor
+    .byte $00                               ; [67]: NPC: Walking Woman 1
+    .byte $00                               ; [68]: NPC: Walking Woman 2
+    .byte $00                               ; [69]: Enemy: Eyeball (unused)
+    .byte $19                               ; [70]: Enemy: Zozura
+    .byte $1e                               ; [71]: Item: Glove
+    .byte $00                               ; [72]: Item: Black Onyx
+    .byte $00                               ; [73]: Item: Pendant
+    .byte $00                               ; [74]: Item: Red Potion
+    .byte $00                               ; [75]: Item: Poison
+    .byte $00                               ; [76]: Item: Elixir
+    .byte $00                               ; [77]: Item: Ointment
+    .byte $00                               ; [78]: Trigger: Intro
+    .byte $00                               ; [79]: Item: Mattock
+    .byte $00                               ; [80]: Magic: ?
+    .byte $08                               ; [81]: Effect: Fountain
+    .byte $00                               ; [82]: Magic: ?
+    .byte $08                               ; [83]: Magic: ?
+    .byte $08                               ; [84]: Item: Wing Boots
+    .byte $00                               ; [85]: Item: Hour Glass
+    .byte $00                               ; [86]: Item: Magical Rod
+    .byte $00                               ; [87]: Item: Battle Suit
+    .byte $00                               ; [88]: Item: Battle Helmet
+    .byte $00                               ; [89]: Item: Dragon Slayer
+    .byte $00                               ; [90]: Item: Mattock
+    .byte $00                               ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db $00                                  ; [92]: Item: Red Potion
-    db $00                                  ; [93]: Item: Poison
-    db $00                                  ; [94]: Item: Glove
-    db $00                                  ; [95]: Item: Ointment
-    db $00                                  ; [96]: Effect: Spring of Trunk
-    db $00                                  ; [97]: Effect: Spring of Sky
-    db $00                                  ; [98]: Effect: Spring of Tower
-    db $00                                  ; [99]: Effect: Boss Death
+    .byte $00                               ; [92]: Item: Red Potion
+    .byte $00                               ; [93]: Item: Poison
+    .byte $00                               ; [94]: Item: Glove
+    .byte $00                               ; [95]: Item: Ointment
+    .byte $00                               ; [96]: Effect: Spring of Trunk
+    .byte $00                               ; [97]: Effect: Spring of Sky
+    .byte $00                               ; [98]: Effect: Spring of Tower
+    .byte $00                               ; [99]: Effect: Boss Death
 
 ;
 ; XREFS:
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 BYTE_ARRAY_PRG14__b672:                     ; [$b672]
-    db $ff                                  ; [0]:
-    db $ff                                  ; [1]: Dropped: Bread
-    db $ff                                  ; [2]: Dropped: Coin
-    db $00                                  ; [3]: Enemy: ?
-    db $08                                  ; [4]: Enemy: Raiden
-    db $11                                  ; [5]: Enemy: Necron Aides
-    db $ff                                  ; [6]: Enemy: Zombie
-    db $07                                  ; [7]: Enemy: Hornet
-    db $08                                  ; [8]: Enemy: Bihoruda
-    db $ff                                  ; [9]: Enemy: Lilith
-    db $00                                  ; [10]: Magic: ?
-    db $32                                  ; [11]: Enemy: Yuinaru
-    db $13                                  ; [12]: Enemy: Snowman
-    db $12                                  ; [13]: Enemy: Nash
-    db $11                                  ; [14]: Enemy: Fire Giant
-    db $15                                  ; [15]: Enemy: Ishiisu
-    db $1d                                  ; [16]: Enemy: Execution Hood
-    db $15                                  ; [17]: Boss: Rokusutahn
-    db $06                                  ; [18]: Boss: unused (round body
+    .byte $ff                               ; [0]:
+    .byte $ff                               ; [1]: Dropped: Bread
+    .byte $ff                               ; [2]: Dropped: Coin
+    .byte $00                               ; [3]: Enemy: ?
+    .byte $08                               ; [4]: Enemy: Raiden
+    .byte $11                               ; [5]: Enemy: Necron Aides
+    .byte $ff                               ; [6]: Enemy: Zombie
+    .byte $07                               ; [7]: Enemy: Hornet
+    .byte $08                               ; [8]: Enemy: Bihoruda
+    .byte $ff                               ; [9]: Enemy: Lilith
+    .byte $00                               ; [10]: Magic: ?
+    .byte $32                               ; [11]: Enemy: Yuinaru
+    .byte $13                               ; [12]: Enemy: Snowman
+    .byte $12                               ; [13]: Enemy: Nash
+    .byte $11                               ; [14]: Enemy: Fire Giant
+    .byte $15                               ; [15]: Enemy: Ishiisu
+    .byte $1d                               ; [16]: Enemy: Execution Hood
+    .byte $15                               ; [17]: Boss: Rokusutahn
+    .byte $06                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $ff                                  ; [19]: Effect: Enemy death
-    db $ff                                  ; [20]: Effect: Lightning ball
-    db $14                                  ; [21]: Enemy: Charron
-    db $00                                  ; [22]: Enemy: ? (Unused)
-    db $0f                                  ; [23]: Enemy: Geributa
-    db $13                                  ; [24]: Enemy: Sugata
-    db $12                                  ; [25]: Enemy: Grimlock
-    db $14                                  ; [26]: Enemy: Giant Bees
-    db $32                                  ; [27]: Enemy: Myconid
-    db $38                                  ; [28]: Enemy: Naga
-    db $ff                                  ; [29]: Enemy: Skeleton Knight
+    .byte $ff                               ; [19]: Effect: Enemy death
+    .byte $ff                               ; [20]: Effect: Lightning ball
+    .byte $14                               ; [21]: Enemy: Charron
+    .byte $00                               ; [22]: Enemy: ? (Unused)
+    .byte $0f                               ; [23]: Enemy: Geributa
+    .byte $13                               ; [24]: Enemy: Sugata
+    .byte $12                               ; [25]: Enemy: Grimlock
+    .byte $14                               ; [26]: Enemy: Giant Bees
+    .byte $32                               ; [27]: Enemy: Myconid
+    .byte $38                               ; [28]: Enemy: Naga
+    .byte $ff                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $16                                  ; [30]: Enemy: Giant Strider
-    db $18                                  ; [31]: Enemy: Sir Gawaine
-    db $19                                  ; [32]: Enemy: Maskman
-    db $1a                                  ; [33]: Enemy: Wolfman
-    db $33                                  ; [34]: Enemy: Yareeka
-    db $1b                                  ; [35]: Enemy: Magman
-    db $17                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $16                               ; [30]: Enemy: Giant Strider
+    .byte $18                               ; [31]: Enemy: Sir Gawaine
+    .byte $19                               ; [32]: Enemy: Maskman
+    .byte $1a                               ; [33]: Enemy: Wolfman
+    .byte $33                               ; [34]: Enemy: Yareeka
+    .byte $1b                               ; [35]: Enemy: Magman
+    .byte $17                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $18                                  ; [37]: Enemy: ? (unused)
-    db $13                                  ; [38]: Enemy: Ikeda
-    db $33                                  ; [39]: Enemy: Muppet guy
+    .byte $18                               ; [37]: Enemy: ? (unused)
+    .byte $13                               ; [38]: Enemy: Ikeda
+    .byte $33                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $34                                  ; [40]: Enemy: Lamprey
-    db $33                                  ; [41]: Enemy: ? (unused)
-    db $09                                  ; [42]: Enemy: Monodron
-    db $34                                  ; [43]: Enemy: Winged skeleton
+    .byte $34                               ; [40]: Enemy: Lamprey
+    .byte $33                               ; [41]: Enemy: ? (unused)
+    .byte $09                               ; [42]: Enemy: Monodron
+    .byte $34                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $15                                  ; [44]: Enemy: Tamazutsu
-    db $19                                  ; [45]: Boss: Ripasheiku
-    db $1c                                  ; [46]: Boss: Zoradohna
-    db $08                                  ; [47]: Boss: Borabohra
-    db $16                                  ; [48]: Boss: Pakukame
-    db $03                                  ; [49]: Boss: King Grieve
-    db $ff                                  ; [50]: Boss: Shadow Eura
-    db $ff                                  ; [51]: NPC: Walking Man 1
-    db $ff                                  ; [52]: NPC: Blue lady (unused)
-    db $ff                                  ; [53]: NPC: Child (unused)
-    db $ff                                  ; [54]: NPC: Armor Salesman
-    db $ff                                  ; [55]: NPC: Martial Artist
-    db $ff                                  ; [56]: NPC: Priest
-    db $ff                                  ; [57]: NPC: King
-    db $ff                                  ; [58]: NPC: Magic Teacher
-    db $ff                                  ; [59]: NPC: Key Salesman
-    db $ff                                  ; [60]: NPC: Smoking Man
-    db $ff                                  ; [61]: NPC: Man in Chair
-    db $ff                                  ; [62]: NPC: Sitting Man
-    db $ff                                  ; [63]: NPC: Meat Salesman
-    db $ff                                  ; [64]: NPC: Lady in Blue Dress
+    .byte $15                               ; [44]: Enemy: Tamazutsu
+    .byte $19                               ; [45]: Boss: Ripasheiku
+    .byte $1c                               ; [46]: Boss: Zoradohna
+    .byte $08                               ; [47]: Boss: Borabohra
+    .byte $16                               ; [48]: Boss: Pakukame
+    .byte $03                               ; [49]: Boss: King Grieve
+    .byte $ff                               ; [50]: Boss: Shadow Eura
+    .byte $ff                               ; [51]: NPC: Walking Man 1
+    .byte $ff                               ; [52]: NPC: Blue lady (unused)
+    .byte $ff                               ; [53]: NPC: Child (unused)
+    .byte $ff                               ; [54]: NPC: Armor Salesman
+    .byte $ff                               ; [55]: NPC: Martial Artist
+    .byte $ff                               ; [56]: NPC: Priest
+    .byte $ff                               ; [57]: NPC: King
+    .byte $ff                               ; [58]: NPC: Magic Teacher
+    .byte $ff                               ; [59]: NPC: Key Salesman
+    .byte $ff                               ; [60]: NPC: Smoking Man
+    .byte $ff                               ; [61]: NPC: Man in Chair
+    .byte $ff                               ; [62]: NPC: Sitting Man
+    .byte $ff                               ; [63]: NPC: Meat Salesman
+    .byte $ff                               ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $ff                                  ; [65]: NPC: Guard
-    db $ff                                  ; [66]: NPC: Doctor
-    db $ff                                  ; [67]: NPC: Walking Woman 1
-    db $ff                                  ; [68]: NPC: Walking Woman 2
-    db $ff                                  ; [69]: Enemy: Eyeball (unused)
-    db $0f                                  ; [70]: Enemy: Zozura
-    db $32                                  ; [71]: Item: Glove
-    db $ff                                  ; [72]: Item: Black Onyx
-    db $ff                                  ; [73]: Item: Pendant
-    db $ff                                  ; [74]: Item: Red Potion
-    db $ff                                  ; [75]: Item: Poison
-    db $ff                                  ; [76]: Item: Elixir
-    db $ff                                  ; [77]: Item: Ointment
-    db $ff                                  ; [78]: Trigger: Intro
-    db $ff                                  ; [79]: Item: Mattock
-    db $ff                                  ; [80]: Magic: ?
-    db $00                                  ; [81]: Effect: Fountain
-    db $ff                                  ; [82]: Magic: ?
-    db $00                                  ; [83]: Magic: ?
-    db $00                                  ; [84]: Item: Wing Boots
-    db $ff                                  ; [85]: Item: Hour Glass
-    db $ff                                  ; [86]: Item: Magical Rod
-    db $ff                                  ; [87]: Item: Battle Suit
-    db $ff                                  ; [88]: Item: Battle Helmet
-    db $ff                                  ; [89]: Item: Dragon Slayer
-    db $ff                                  ; [90]: Item: Mattock
-    db $ff                                  ; [91]: Item: Wing Boots (from
+    .byte $ff                               ; [65]: NPC: Guard
+    .byte $ff                               ; [66]: NPC: Doctor
+    .byte $ff                               ; [67]: NPC: Walking Woman 1
+    .byte $ff                               ; [68]: NPC: Walking Woman 2
+    .byte $ff                               ; [69]: Enemy: Eyeball (unused)
+    .byte $0f                               ; [70]: Enemy: Zozura
+    .byte $32                               ; [71]: Item: Glove
+    .byte $ff                               ; [72]: Item: Black Onyx
+    .byte $ff                               ; [73]: Item: Pendant
+    .byte $ff                               ; [74]: Item: Red Potion
+    .byte $ff                               ; [75]: Item: Poison
+    .byte $ff                               ; [76]: Item: Elixir
+    .byte $ff                               ; [77]: Item: Ointment
+    .byte $ff                               ; [78]: Trigger: Intro
+    .byte $ff                               ; [79]: Item: Mattock
+    .byte $ff                               ; [80]: Magic: ?
+    .byte $00                               ; [81]: Effect: Fountain
+    .byte $ff                               ; [82]: Magic: ?
+    .byte $00                               ; [83]: Magic: ?
+    .byte $00                               ; [84]: Item: Wing Boots
+    .byte $ff                               ; [85]: Item: Hour Glass
+    .byte $ff                               ; [86]: Item: Magical Rod
+    .byte $ff                               ; [87]: Item: Battle Suit
+    .byte $ff                               ; [88]: Item: Battle Helmet
+    .byte $ff                               ; [89]: Item: Dragon Slayer
+    .byte $ff                               ; [90]: Item: Mattock
+    .byte $ff                               ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db $ff                                  ; [92]: Item: Red Potion
-    db $ff                                  ; [93]: Item: Poison
-    db $ff                                  ; [94]: Item: Glove
-    db $ff                                  ; [95]: Item: Ointment
-    db $ff                                  ; [96]: Effect: Spring of Trunk
-    db $ff                                  ; [97]: Effect: Spring of Sky
-    db $ff                                  ; [98]: Effect: Spring of Tower
-    db $ff                                  ; [99]: Effect: Boss Death
-    db $ff                                  ; [100]:
+    .byte $ff                               ; [92]: Item: Red Potion
+    .byte $ff                               ; [93]: Item: Poison
+    .byte $ff                               ; [94]: Item: Glove
+    .byte $ff                               ; [95]: Item: Ointment
+    .byte $ff                               ; [96]: Effect: Spring of Trunk
+    .byte $ff                               ; [97]: Effect: Spring of Sky
+    .byte $ff                               ; [98]: Effect: Spring of Tower
+    .byte $ff                               ; [99]: Effect: Boss Death
+    .byte $ff                               ; [100]:
 
 
 ;============================================================================
@@ -16408,227 +16446,227 @@ BYTE_ARRAY_PRG14__b672:                     ; [$b672]
 ;     Player_HandleHitByMagic
 ;
 SPRITE_ENTITY_DAMAGES:                      ; [$b6d7]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]: Dropped: Bread
-    db $00                                  ; [2]: Dropped: Coin
-    db $1f                                  ; [3]: Enemy: ?
-    db $07                                  ; [4]: Enemy: Raiden
-    db $09                                  ; [5]: Enemy: Necron Aides
-    db $06                                  ; [6]: Enemy: Zombie
-    db $03                                  ; [7]: Enemy: Hornet
-    db $04                                  ; [8]: Enemy: Bihoruda
-    db $06                                  ; [9]: Enemy: Lilith
-    db $1c                                  ; [10]: Magic: ?
-    db $03                                  ; [11]: Enemy: Yuinaru
-    db $04                                  ; [12]: Enemy: Snowman
-    db $05                                  ; [13]: Enemy: Nash
-    db $07                                  ; [14]: Enemy: Fire Giant
-    db $0d                                  ; [15]: Enemy: Ishiisu
-    db $0f                                  ; [16]: Enemy: Execution Hood
-    db $14                                  ; [17]: Boss: Rokusutahn
-    db $14                                  ; [18]: Boss: unused (round body
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]: Dropped: Bread
+    .byte $00                               ; [2]: Dropped: Coin
+    .byte $1f                               ; [3]: Enemy: ?
+    .byte $07                               ; [4]: Enemy: Raiden
+    .byte $09                               ; [5]: Enemy: Necron Aides
+    .byte $06                               ; [6]: Enemy: Zombie
+    .byte $03                               ; [7]: Enemy: Hornet
+    .byte $04                               ; [8]: Enemy: Bihoruda
+    .byte $06                               ; [9]: Enemy: Lilith
+    .byte $1c                               ; [10]: Magic: ?
+    .byte $03                               ; [11]: Enemy: Yuinaru
+    .byte $04                               ; [12]: Enemy: Snowman
+    .byte $05                               ; [13]: Enemy: Nash
+    .byte $07                               ; [14]: Enemy: Fire Giant
+    .byte $0d                               ; [15]: Enemy: Ishiisu
+    .byte $0f                               ; [16]: Enemy: Execution Hood
+    .byte $14                               ; [17]: Boss: Rokusutahn
+    .byte $14                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $00                                  ; [19]: Effect: Enemy death
-    db $00                                  ; [20]: Effect: Lightning ball
-    db $07                                  ; [21]: Enemy: Charron
-    db $0a                                  ; [22]: Enemy: ? (Unused)
-    db $0a                                  ; [23]: Enemy: Geributa
-    db $04                                  ; [24]: Enemy: Sugata
-    db $0d                                  ; [25]: Enemy: Grimlock
-    db $05                                  ; [26]: Enemy: Giant Bees
-    db $0e                                  ; [27]: Enemy: Myconid
-    db $17                                  ; [28]: Enemy: Naga
-    db $00                                  ; [29]: Enemy: Skeleton Knight
+    .byte $00                               ; [19]: Effect: Enemy death
+    .byte $00                               ; [20]: Effect: Lightning ball
+    .byte $07                               ; [21]: Enemy: Charron
+    .byte $0a                               ; [22]: Enemy: ? (Unused)
+    .byte $0a                               ; [23]: Enemy: Geributa
+    .byte $04                               ; [24]: Enemy: Sugata
+    .byte $0d                               ; [25]: Enemy: Grimlock
+    .byte $05                               ; [26]: Enemy: Giant Bees
+    .byte $0e                               ; [27]: Enemy: Myconid
+    .byte $17                               ; [28]: Enemy: Naga
+    .byte $00                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $0f                                  ; [30]: Enemy: Giant Strider
-    db $0c                                  ; [31]: Enemy: Sir Gawaine
-    db $0b                                  ; [32]: Enemy: Maskman
-    db $11                                  ; [33]: Enemy: Wolfman
-    db $12                                  ; [34]: Enemy: Yareeka
-    db $09                                  ; [35]: Enemy: Magman
-    db $10                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $0f                               ; [30]: Enemy: Giant Strider
+    .byte $0c                               ; [31]: Enemy: Sir Gawaine
+    .byte $0b                               ; [32]: Enemy: Maskman
+    .byte $11                               ; [33]: Enemy: Wolfman
+    .byte $12                               ; [34]: Enemy: Yareeka
+    .byte $09                               ; [35]: Enemy: Magman
+    .byte $10                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $0b                                  ; [37]: Enemy: ? (unused)
-    db $07                                  ; [38]: Enemy: Ikeda
-    db $0a                                  ; [39]: Enemy: Muppet guy
+    .byte $0b                               ; [37]: Enemy: ? (unused)
+    .byte $07                               ; [38]: Enemy: Ikeda
+    .byte $0a                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $10                                  ; [40]: Enemy: Lamprey
-    db $0c                                  ; [41]: Enemy: ? (unused)
-    db $05                                  ; [42]: Enemy: Monodron
-    db $06                                  ; [43]: Enemy: Winged skeleton
+    .byte $10                               ; [40]: Enemy: Lamprey
+    .byte $0c                               ; [41]: Enemy: ? (unused)
+    .byte $05                               ; [42]: Enemy: Monodron
+    .byte $06                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $0f                                  ; [44]: Enemy: Tamazutsu
-    db $12                                  ; [45]: Boss: Ripasheiku
-    db $1c                                  ; [46]: Boss: Zoradohna
-    db $18                                  ; [47]: Boss: Borabohra
-    db $0d                                  ; [48]: Boss: Pakukame
-    db $0b                                  ; [49]: Boss: King Grieve
-    db $28                                  ; [50]: Boss: Shadow Eura
-    db $29                                  ; [51]: NPC: Walking Man 1
-    db $00                                  ; [52]: NPC: Blue lady (unused)
-    db $00                                  ; [53]: NPC: Child (unused)
-    db $00                                  ; [54]: NPC: Armor Salesman
-    db $00                                  ; [55]: NPC: Martial Artist
-    db $00                                  ; [56]: NPC: Priest
-    db $00                                  ; [57]: NPC: King
-    db $00                                  ; [58]: NPC: Magic Teacher
-    db $00                                  ; [59]: NPC: Key Salesman
-    db $00                                  ; [60]: NPC: Smoking Man
-    db $00                                  ; [61]: NPC: Man in Chair
-    db $00                                  ; [62]: NPC: Sitting Man
-    db $00                                  ; [63]: NPC: Meat Salesman
-    db $00                                  ; [64]: NPC: Lady in Blue Dress
+    .byte $0f                               ; [44]: Enemy: Tamazutsu
+    .byte $12                               ; [45]: Boss: Ripasheiku
+    .byte $1c                               ; [46]: Boss: Zoradohna
+    .byte $18                               ; [47]: Boss: Borabohra
+    .byte $0d                               ; [48]: Boss: Pakukame
+    .byte $0b                               ; [49]: Boss: King Grieve
+    .byte $28                               ; [50]: Boss: Shadow Eura
+    .byte $29                               ; [51]: NPC: Walking Man 1
+    .byte $00                               ; [52]: NPC: Blue lady (unused)
+    .byte $00                               ; [53]: NPC: Child (unused)
+    .byte $00                               ; [54]: NPC: Armor Salesman
+    .byte $00                               ; [55]: NPC: Martial Artist
+    .byte $00                               ; [56]: NPC: Priest
+    .byte $00                               ; [57]: NPC: King
+    .byte $00                               ; [58]: NPC: Magic Teacher
+    .byte $00                               ; [59]: NPC: Key Salesman
+    .byte $00                               ; [60]: NPC: Smoking Man
+    .byte $00                               ; [61]: NPC: Man in Chair
+    .byte $00                               ; [62]: NPC: Sitting Man
+    .byte $00                               ; [63]: NPC: Meat Salesman
+    .byte $00                               ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $00                                  ; [65]: NPC: Guard
-    db $00                                  ; [66]: NPC: Doctor
-    db $00                                  ; [67]: NPC: Walking Woman 1
-    db $00                                  ; [68]: NPC: Walking Woman 2
-    db $00                                  ; [69]: Enemy: Eyeball (unused)
-    db $08                                  ; [70]: Enemy: Zozura
-    db $07                                  ; [71]: Item: Glove
-    db $00                                  ; [72]: Item: Black Onyx
-    db $00                                  ; [73]: Item: Pendant
-    db $00                                  ; [74]: Item: Red Potion
-    db $00                                  ; [75]: Item: Poison
-    db $00                                  ; [76]: Item: Elixir
-    db $00                                  ; [77]: Item: Ointment
-    db $00                                  ; [78]: Trigger: Intro
-    db $00                                  ; [79]: Item: Mattock
-    db $00                                  ; [80]: Magic: ?
-    db $08                                  ; [81]: Effect: Fountain
-    db $00                                  ; [82]: Magic: ?
-    db $1c                                  ; [83]: Magic: ?
-    db $08                                  ; [84]: Item: Wing Boots
-    db $00                                  ; [85]: Item: Hour Glass
-    db $00                                  ; [86]: Item: Magical Rod
-    db $00                                  ; [87]: Item: Battle Suit
-    db $00                                  ; [88]: Item: Battle Helmet
-    db $00                                  ; [89]: Item: Dragon Slayer
-    db $00                                  ; [90]: Item: Mattock
-    db $00                                  ; [91]: Item: Wing Boots (from
+    .byte $00                               ; [65]: NPC: Guard
+    .byte $00                               ; [66]: NPC: Doctor
+    .byte $00                               ; [67]: NPC: Walking Woman 1
+    .byte $00                               ; [68]: NPC: Walking Woman 2
+    .byte $00                               ; [69]: Enemy: Eyeball (unused)
+    .byte $08                               ; [70]: Enemy: Zozura
+    .byte $07                               ; [71]: Item: Glove
+    .byte $00                               ; [72]: Item: Black Onyx
+    .byte $00                               ; [73]: Item: Pendant
+    .byte $00                               ; [74]: Item: Red Potion
+    .byte $00                               ; [75]: Item: Poison
+    .byte $00                               ; [76]: Item: Elixir
+    .byte $00                               ; [77]: Item: Ointment
+    .byte $00                               ; [78]: Trigger: Intro
+    .byte $00                               ; [79]: Item: Mattock
+    .byte $00                               ; [80]: Magic: ?
+    .byte $08                               ; [81]: Effect: Fountain
+    .byte $00                               ; [82]: Magic: ?
+    .byte $1c                               ; [83]: Magic: ?
+    .byte $08                               ; [84]: Item: Wing Boots
+    .byte $00                               ; [85]: Item: Hour Glass
+    .byte $00                               ; [86]: Item: Magical Rod
+    .byte $00                               ; [87]: Item: Battle Suit
+    .byte $00                               ; [88]: Item: Battle Helmet
+    .byte $00                               ; [89]: Item: Dragon Slayer
+    .byte $00                               ; [90]: Item: Mattock
+    .byte $00                               ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db $00                                  ; [92]: Item: Red Potion
-    db $00                                  ; [93]: Item: Poison
-    db $00                                  ; [94]: Item: Glove
-    db $00                                  ; [95]: Item: Ointment
-    db $00                                  ; [96]: Effect: Spring of Trunk
-    db $00                                  ; [97]: Effect: Spring of Sky
-    db $00                                  ; [98]: Effect: Spring of Tower
-    db $00                                  ; [99]: Effect: Boss Death
+    .byte $00                               ; [92]: Item: Red Potion
+    .byte $00                               ; [93]: Item: Poison
+    .byte $00                               ; [94]: Item: Glove
+    .byte $00                               ; [95]: Item: Ointment
+    .byte $00                               ; [96]: Effect: Spring of Trunk
+    .byte $00                               ; [97]: Effect: Spring of Sky
+    .byte $00                               ; [98]: Effect: Spring of Tower
+    .byte $00                               ; [99]: Effect: Boss Death
 
 ;
 ; XREFS:
 ;     Player_HitEnemyWithMagic
 ;
 SPRITE_ENTITY_MAYBE_MAGIC_DEFENSE:          ; [$b73b]
-    db $fc                                  ; [0]:
-    db $fc                                  ; [1]: Dropped: Bread
-    db $fc                                  ; [2]: Dropped: Coin
-    db $fc                                  ; [3]: Enemy: ?
-    db $10                                  ; [4]: Enemy: Raiden
-    db $50                                  ; [5]: Enemy: Necron Aides
-    db $0c                                  ; [6]: Enemy: Zombie
-    db $00                                  ; [7]: Enemy: Hornet
-    db $00                                  ; [8]: Enemy: Bihoruda
-    db $00                                  ; [9]: Enemy: Lilith
-    db $fc                                  ; [10]: Magic: ?
-    db $00                                  ; [11]: Enemy: Yuinaru
-    db $04                                  ; [12]: Enemy: Snowman
-    db $fc                                  ; [13]: Enemy: Nash
-    db $40                                  ; [14]: Enemy: Fire Giant
-    db $14                                  ; [15]: Enemy: Ishiisu
-    db $c0                                  ; [16]: Enemy: Execution Hood
-    db $00                                  ; [17]: Boss: Rokusutahn
-    db $d0                                  ; [18]: Boss: unused (round body
+    .byte $fc                               ; [0]:
+    .byte $fc                               ; [1]: Dropped: Bread
+    .byte $fc                               ; [2]: Dropped: Coin
+    .byte $fc                               ; [3]: Enemy: ?
+    .byte $10                               ; [4]: Enemy: Raiden
+    .byte $50                               ; [5]: Enemy: Necron Aides
+    .byte $0c                               ; [6]: Enemy: Zombie
+    .byte $00                               ; [7]: Enemy: Hornet
+    .byte $00                               ; [8]: Enemy: Bihoruda
+    .byte $00                               ; [9]: Enemy: Lilith
+    .byte $fc                               ; [10]: Magic: ?
+    .byte $00                               ; [11]: Enemy: Yuinaru
+    .byte $04                               ; [12]: Enemy: Snowman
+    .byte $fc                               ; [13]: Enemy: Nash
+    .byte $40                               ; [14]: Enemy: Fire Giant
+    .byte $14                               ; [15]: Enemy: Ishiisu
+    .byte $c0                               ; [16]: Enemy: Execution Hood
+    .byte $00                               ; [17]: Boss: Rokusutahn
+    .byte $d0                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $fc                                  ; [19]: Effect: Enemy death
-    db $fc                                  ; [20]: Effect: Lightning ball
-    db $00                                  ; [21]: Enemy: Charron
-    db $fc                                  ; [22]: Enemy: ? (Unused)
-    db $00                                  ; [23]: Enemy: Geributa
-    db $3c                                  ; [24]: Enemy: Sugata
-    db $00                                  ; [25]: Enemy: Grimlock
-    db $0c                                  ; [26]: Enemy: Giant Bees
-    db $14                                  ; [27]: Enemy: Myconid
-    db $00                                  ; [28]: Enemy: Naga
-    db $00                                  ; [29]: Enemy: Skeleton Knight
+    .byte $fc                               ; [19]: Effect: Enemy death
+    .byte $fc                               ; [20]: Effect: Lightning ball
+    .byte $00                               ; [21]: Enemy: Charron
+    .byte $fc                               ; [22]: Enemy: ? (Unused)
+    .byte $00                               ; [23]: Enemy: Geributa
+    .byte $3c                               ; [24]: Enemy: Sugata
+    .byte $00                               ; [25]: Enemy: Grimlock
+    .byte $0c                               ; [26]: Enemy: Giant Bees
+    .byte $14                               ; [27]: Enemy: Myconid
+    .byte $00                               ; [28]: Enemy: Naga
+    .byte $00                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $00                                  ; [30]: Enemy: Giant Strider
-    db $00                                  ; [31]: Enemy: Sir Gawaine
-    db $00                                  ; [32]: Enemy: Maskman
-    db $00                                  ; [33]: Enemy: Wolfman
-    db $00                                  ; [34]: Enemy: Yareeka
-    db $00                                  ; [35]: Enemy: Magman
-    db $00                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $00                               ; [30]: Enemy: Giant Strider
+    .byte $00                               ; [31]: Enemy: Sir Gawaine
+    .byte $00                               ; [32]: Enemy: Maskman
+    .byte $00                               ; [33]: Enemy: Wolfman
+    .byte $00                               ; [34]: Enemy: Yareeka
+    .byte $00                               ; [35]: Enemy: Magman
+    .byte $00                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $54                                  ; [37]: Enemy: ? (unused)
-    db $00                                  ; [38]: Enemy: Ikeda
-    db $40                                  ; [39]: Enemy: Muppet guy
+    .byte $54                               ; [37]: Enemy: ? (unused)
+    .byte $00                               ; [38]: Enemy: Ikeda
+    .byte $40                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $00                                  ; [40]: Enemy: Lamprey
-    db $00                                  ; [41]: Enemy: ? (unused)
-    db $00                                  ; [42]: Enemy: Monodron
-    db $00                                  ; [43]: Enemy: Winged skeleton
+    .byte $00                               ; [40]: Enemy: Lamprey
+    .byte $00                               ; [41]: Enemy: ? (unused)
+    .byte $00                               ; [42]: Enemy: Monodron
+    .byte $00                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $14                                  ; [44]: Enemy: Tamazutsu
-    db $40                                  ; [45]: Boss: Ripasheiku
-    db $f4                                  ; [46]: Boss: Zoradohna
-    db $e0                                  ; [47]: Boss: Borabohra
-    db $44                                  ; [48]: Boss: Pakukame
-    db $00                                  ; [49]: Boss: King Grieve
-    db $fc                                  ; [50]: Boss: Shadow Eura
-    db $fc                                  ; [51]: NPC: Walking Man 1
-    db $fc                                  ; [52]: NPC: Blue lady (unused)
-    db $fc                                  ; [53]: NPC: Child (unused)
-    db $fc                                  ; [54]: NPC: Armor Salesman
-    db $fc                                  ; [55]: NPC: Martial Artist
-    db $fc                                  ; [56]: NPC: Priest
-    db $fc                                  ; [57]: NPC: King
-    db $fc                                  ; [58]: NPC: Magic Teacher
-    db $fc                                  ; [59]: NPC: Key Salesman
-    db $fc                                  ; [60]: NPC: Smoking Man
-    db $fc                                  ; [61]: NPC: Man in Chair
-    db $fc                                  ; [62]: NPC: Sitting Man
-    db $fc                                  ; [63]: NPC: Meat Salesman
-    db $fc                                  ; [64]: NPC: Lady in Blue Dress
+    .byte $14                               ; [44]: Enemy: Tamazutsu
+    .byte $40                               ; [45]: Boss: Ripasheiku
+    .byte $f4                               ; [46]: Boss: Zoradohna
+    .byte $e0                               ; [47]: Boss: Borabohra
+    .byte $44                               ; [48]: Boss: Pakukame
+    .byte $00                               ; [49]: Boss: King Grieve
+    .byte $fc                               ; [50]: Boss: Shadow Eura
+    .byte $fc                               ; [51]: NPC: Walking Man 1
+    .byte $fc                               ; [52]: NPC: Blue lady (unused)
+    .byte $fc                               ; [53]: NPC: Child (unused)
+    .byte $fc                               ; [54]: NPC: Armor Salesman
+    .byte $fc                               ; [55]: NPC: Martial Artist
+    .byte $fc                               ; [56]: NPC: Priest
+    .byte $fc                               ; [57]: NPC: King
+    .byte $fc                               ; [58]: NPC: Magic Teacher
+    .byte $fc                               ; [59]: NPC: Key Salesman
+    .byte $fc                               ; [60]: NPC: Smoking Man
+    .byte $fc                               ; [61]: NPC: Man in Chair
+    .byte $fc                               ; [62]: NPC: Sitting Man
+    .byte $fc                               ; [63]: NPC: Meat Salesman
+    .byte $fc                               ; [64]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $fc                                  ; [65]: NPC: Guard
-    db $fc                                  ; [66]: NPC: Doctor
-    db $fc                                  ; [67]: NPC: Walking Woman 1
-    db $fc                                  ; [68]: NPC: Walking Woman 2
-    db $fc                                  ; [69]: Enemy: Eyeball (unused)
-    db $00                                  ; [70]: Enemy: Zozura
-    db $00                                  ; [71]: Item: Glove
-    db $00                                  ; [72]: Item: Black Onyx
-    db $fc                                  ; [73]: Item: Pendant
-    db $fc                                  ; [74]: Item: Red Potion
-    db $00                                  ; [75]: Item: Poison
-    db $fc                                  ; [76]: Item: Elixir
-    db $00                                  ; [77]: Item: Ointment
-    db $fc                                  ; [78]: Trigger: Intro
-    db $fc                                  ; [79]: Item: Mattock
-    db $00                                  ; [80]: Magic: ?
-    db $fc                                  ; [81]: Effect: Fountain
-    db $fc                                  ; [82]: Magic: ?
-    db $fc                                  ; [83]: Magic: ?
-    db $fc                                  ; [84]: Item: Wing Boots
-    db $fc                                  ; [85]: Item: Hour Glass
-    db $fc                                  ; [86]: Item: Magical Rod
-    db $fc                                  ; [87]: Item: Battle Suit
-    db $fc                                  ; [88]: Item: Battle Helmet
-    db $fc                                  ; [89]: Item: Dragon Slayer
-    db $fc                                  ; [90]: Item: Mattock
-    db $fc                                  ; [91]: Item: Wing Boots (from
+    .byte $fc                               ; [65]: NPC: Guard
+    .byte $fc                               ; [66]: NPC: Doctor
+    .byte $fc                               ; [67]: NPC: Walking Woman 1
+    .byte $fc                               ; [68]: NPC: Walking Woman 2
+    .byte $fc                               ; [69]: Enemy: Eyeball (unused)
+    .byte $00                               ; [70]: Enemy: Zozura
+    .byte $00                               ; [71]: Item: Glove
+    .byte $00                               ; [72]: Item: Black Onyx
+    .byte $fc                               ; [73]: Item: Pendant
+    .byte $fc                               ; [74]: Item: Red Potion
+    .byte $00                               ; [75]: Item: Poison
+    .byte $fc                               ; [76]: Item: Elixir
+    .byte $00                               ; [77]: Item: Ointment
+    .byte $fc                               ; [78]: Trigger: Intro
+    .byte $fc                               ; [79]: Item: Mattock
+    .byte $00                               ; [80]: Magic: ?
+    .byte $fc                               ; [81]: Effect: Fountain
+    .byte $fc                               ; [82]: Magic: ?
+    .byte $fc                               ; [83]: Magic: ?
+    .byte $fc                               ; [84]: Item: Wing Boots
+    .byte $fc                               ; [85]: Item: Hour Glass
+    .byte $fc                               ; [86]: Item: Magical Rod
+    .byte $fc                               ; [87]: Item: Battle Suit
+    .byte $fc                               ; [88]: Item: Battle Helmet
+    .byte $fc                               ; [89]: Item: Dragon Slayer
+    .byte $fc                               ; [90]: Item: Mattock
+    .byte $fc                               ; [91]: Item: Wing Boots (from
                                             ; quest)
-    db $fc                                  ; [92]: Item: Red Potion
-    db $fc                                  ; [93]: Item: Poison
-    db $fc                                  ; [94]: Item: Glove
-    db $fc                                  ; [95]: Item: Ointment
-    db $fc                                  ; [96]: Effect: Spring of Trunk
-    db $fc                                  ; [97]: Effect: Spring of Sky
-    db $fc                                  ; [98]: Effect: Spring of Tower
-    db $fc                                  ; [99]: Effect: Boss Death
-    db $fc                                  ; [$b79f] undefined
+    .byte $fc                               ; [92]: Item: Red Potion
+    .byte $fc                               ; [93]: Item: Poison
+    .byte $fc                               ; [94]: Item: Glove
+    .byte $fc                               ; [95]: Item: Ointment
+    .byte $fc                               ; [96]: Effect: Spring of Trunk
+    .byte $fc                               ; [97]: Effect: Spring of Sky
+    .byte $fc                               ; [98]: Effect: Spring of Tower
+    .byte $fc                               ; [99]: Effect: Boss Death
+    .byte $fc                               ; [$b79f] undefined
 
 
 ;============================================================================
@@ -16643,11 +16681,11 @@ SPRITE_ENTITY_MAYBE_MAGIC_DEFENSE:          ; [$b73b]
 ;     Player_HitEnemyWithMagic
 ;
 MAGIC_DAMAGE:                               ; [$b7a0]
-    db $06                                  ; [0]: Deluge -- 6HP
-    db $09                                  ; [1]: Thunder -- 9HP
-    db $18                                  ; [2]: Fire -- 12HP
-    db $22                                  ; [3]: Death -- 34HP
-    db $26                                  ; [4]: Tilte -- 38HP
+    .byte $06                               ; [0]: Deluge -- 6HP
+    .byte $09                               ; [1]: Thunder -- 9HP
+    .byte $18                               ; [2]: Fire -- 12HP
+    .byte $22                               ; [3]: Death -- 34HP
+    .byte $26                               ; [4]: Tilte -- 38HP
 
 
 ;============================================================================
@@ -16662,10 +16700,10 @@ MAGIC_DAMAGE:                               ; [$b7a0]
 ;     Player_HitSpriteWithWeapon
 ;
 WEAPON_STRENGTHS:                           ; [$b7a5]
-    db $04                                  ; [0]: Hand Dagger -- 4HP
-    db $08                                  ; [1]: Long Sword -- 8HP
-    db $0c                                  ; [2]: Giant Blade -- 12HP
-    db $10                                  ; [3]: Dragon Slayer -- 16HP
+    .byte $04                               ; [0]: Hand Dagger -- 4HP
+    .byte $08                               ; [1]: Long Sword -- 8HP
+    .byte $0c                               ; [2]: Giant Blade -- 12HP
+    .byte $10                               ; [3]: Dragon Slayer -- 16HP
 
 
 ;============================================================================
@@ -16680,11 +16718,11 @@ WEAPON_STRENGTHS:                           ; [$b7a5]
 ;     Player_ReduceMP
 ;
 MAGIC_COSTS:                                ; [$b7a9]
-    db $02                                  ; [0]: Deluge
-    db $04                                  ; [1]: Thunder
-    db $06                                  ; [2]: Fire
-    db $0a                                  ; [3]: Death
-    db $10                                  ; [4]: Tilte
+    .byte $02                               ; [0]: Deluge
+    .byte $04                               ; [1]: Thunder
+    .byte $06                               ; [2]: Fire
+    .byte $0a                               ; [3]: Death
+    .byte $10                               ; [4]: Tilte
 
 
 ;============================================================================
@@ -16789,9 +16827,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     ORA Temp_00
     ASL A
     TAX
-    LDA $b89f,X
+    LDA PTR_ARRAY_PRG14__b89f,X
     STA Temp_Addr_L
-    LDA $b8a0,X
+    LDA PTR_ARRAY_PRG14__b89f+1,X
     STA Temp_Addr_U
     JSR Maybe_Player_CalcAnimFrame
     STA Temp_00
@@ -16817,9 +16855,9 @@ Player_DrawWeapon:                          ; [$b7d6]
     LDA a:Player_CurWeapon
     ASL A
     TAX
-    LDA $b90f,X
+    LDA PTR_ARRAY_PRG14__b90f,X
     STA Temp_Addr_L
-    LDA $b910,X
+    LDA PTR_ARRAY_PRG14__b90f+1,X
     STA Temp_Addr_U
     LDY Temp_00
     LDA Player_PosY
@@ -16875,20 +16913,20 @@ Player_DrawWeapon:                          ; [$b7d6]
 ;     Player_DrawWeapon
 ;
 WEAPONS_SPRITE_L:                           ; [$b878]
-    db $40                                  ; [0]:
-    db $48                                  ; [1]:
-    db $50                                  ; [2]:
-    db $58                                  ; [3]:
+    .byte $40                               ; [0]:
+    .byte $48                               ; [1]:
+    .byte $50                               ; [2]:
+    .byte $58                               ; [3]:
 
 ;
 ; XREFS:
 ;     Player_DrawWeapon
 ;
 WEAPONS_SPRITE_U:                           ; [$b87c]
-    db $38                                  ; [0]:
-    db $38                                  ; [1]:
-    db $38                                  ; [2]:
-    db $34                                  ; [3]:
+    .byte $38                               ; [0]:
+    .byte $38                               ; [1]:
+    .byte $38                               ; [2]:
+    .byte $34                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Player_CalcValueAndFFForNeg
@@ -16914,63 +16952,68 @@ Player_CalcValueAndFFForNeg:                ; [$b880]
 
   @_return:                                 ; [$b88e]
     RTS
-    hex 18 10 18 18 18 18 20 00             ; [$b88f] undefined
+    .byte $18,$10,$18,$18,$18,$18,$20,$00   ; [$b88f] undefined
 
 ;
 ; XREFS:
 ;     Player_DrawWeapon
 ;
 MAYBE_WEAPON_RANGES:                        ; [$b897]
-    dw $0408,$0810,$0810,$0810              ; [$b897] ushort
+    .word $0408,$0810,$0810,$0810           ; [$b897] ushort
 
 ;
 ; XREFS:
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b89f:                      ; [$b89f]
-    dw DAT_PRG14__b8af                      ; [0]: Dagger
-    dw DAT_PRG14__b8bf                      ; [1]: Dagger + shield
-    dw DAT_PRG14__b8cf                      ; [2]: Long Sword
-    dw DAT_PRG14__b8df                      ; [3]: Long Sword + shield
-    dw DAT_PRG14__b8ef                      ; [4]: Giant Blade
-    dw DAT_PRG14__b8ff                      ; [5]: Giant Blade + shield
-    dw DAT_PRG14__b8ff                      ; [6]: Dragon Slayer
-    dw DAT_PRG14__b8ff                      ; [7]: Dragon Slayer + shield
+    .word DAT_PRG14__b8af                   ; [0]: Dagger
+    .word DAT_PRG14__b8bf                   ; [1]: Dagger + shield
+    .word DAT_PRG14__b8cf                   ; [2]: Long Sword
+    .word DAT_PRG14__b8df                   ; [3]: Long Sword + shield
+    .word DAT_PRG14__b8ef                   ; [4]: Giant Blade
+    .word DAT_PRG14__b8ff                   ; [5]: Giant Blade + shield
+    .word DAT_PRG14__b8ff                   ; [6]: Dragon Slayer
+    .word DAT_PRG14__b8ff                   ; [7]: Dragon Slayer + shield
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b89f]
 ;
 DAT_PRG14__b8af:                            ; [$b8af]
-    hex f8 10 fc 0c f8 10 f8 10 f8 10 f8 0e f0 18 00 00 ; [$b8af] undefined
+    .byte $f8,$10,$fc,$0c,$f8,$10,$f8,$10   ; [$b8af] undefined
+    .byte $f8,$10,$f8,$0e,$f0,$18,$00,$00   ; [$b8b7] undefined
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b8a1]
 ;
 DAT_PRG14__b8bf:                            ; [$b8bf]
-    hex f8 10 f8 10 f8 10 f8 10 f8 10 f8 10 f0 18 00 00 ; [$b8bf] undefined
+    .byte $f8,$10,$f8,$10,$f8,$10,$f8,$10   ; [$b8bf] undefined
+    .byte $f8,$10,$f8,$10,$f0,$18,$00,$00   ; [$b8c7] undefined
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b8a3]
 ;
 DAT_PRG14__b8cf:                            ; [$b8cf]
-    hex f8 10 fc 0c f8 10 f8 10 f8 10 f0 10 e8 18 00 00 ; [$b8cf] undefined
+    .byte $f8,$10,$fc,$0c,$f8,$10,$f8,$10   ; [$b8cf] undefined
+    .byte $f8,$10,$f0,$10,$e8,$18,$00,$00   ; [$b8d7] undefined
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b8a5]
 ;
 DAT_PRG14__b8df:                            ; [$b8df]
-    hex f8 10 f8 10 f8 10 f8 10 f8 10 f0 10 e8 18 00 00 ; [$b8df] undefined
+    .byte $f8,$10,$f8,$10,$f8,$10,$f8,$10   ; [$b8df] undefined
+    .byte $f8,$10,$f0,$10,$e8,$18,$00,$00   ; [$b8e7] undefined
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b8a7]
 ;
 DAT_PRG14__b8ef:                            ; [$b8ef]
-    hex f0 10 fc 0c f8 10 f0 10 f8 10 f0 10 e8 18 00 00 ; [$b8ef] undefined
+    .byte $f0,$10,$fc,$0c,$f8,$10,$f0,$10   ; [$b8ef] undefined
+    .byte $f8,$10,$f0,$10,$e8,$18,$00,$00   ; [$b8f7] undefined
 
 ;
 ; XREFS:
@@ -16979,24 +17022,25 @@ DAT_PRG14__b8ef:                            ; [$b8ef]
 ;     PTR_ARRAY_PRG14__b89f [$PRG14::b8ad]
 ;
 DAT_PRG14__b8ff:                            ; [$b8ff]
-    hex f0 10 f8 10 f8 10 f0 10 f8 10 f0 10 e8 18 00 00 ; [$b8ff] undefined
+    .byte $f0,$10,$f8,$10,$f8,$10,$f0,$10   ; [$b8ff] undefined
+    .byte $f8,$10,$f0,$10,$e8,$18,$00,$00   ; [$b907] undefined
 
 ;
 ; XREFS:
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b90f:                      ; [$b90f]
-    dw DAT_PRG14__b917                      ; [0]: Hand dagger
-    dw DAT_PRG14__b91f                      ; [1]: Long sword
-    dw DAT_PRG14__b91f                      ; [2]: Giant blade
-    dw DAT_PRG14__b91f                      ; [3]: Dragon slayer
+    .word DAT_PRG14__b917                   ; [0]: Hand dagger
+    .word DAT_PRG14__b91f                   ; [1]: Long sword
+    .word DAT_PRG14__b91f                   ; [2]: Giant blade
+    .word DAT_PRG14__b91f                   ; [3]: Dragon slayer
 
 ;
 ; XREFS:
 ;     PTR_ARRAY_PRG14__b90f [$PRG14::b90f]
 ;
 DAT_PRG14__b917:                            ; [$b917]
-    hex 08 08 08 08 08 08 06 00             ; [$b917] undefined
+    .byte $08,$08,$08,$08,$08,$08,$06,$00   ; [$b917] undefined
 
 ;
 ; XREFS:
@@ -17005,7 +17049,7 @@ DAT_PRG14__b917:                            ; [$b917]
 ;     PTR_ARRAY_PRG14__b90f [$PRG14::b915]
 ;
 DAT_PRG14__b91f:                            ; [$b91f]
-    hex 00 08 08 00 08 08 06 00             ; [$b91f] undefined
+    .byte $00,$08,$08,$00,$08,$08,$06,$00   ; [$b91f] undefined
 
 ;============================================================================
 ; TODO: Document Maybe_Player_CalcAnimFrame
@@ -17058,7 +17102,7 @@ Maybe_Player_CalcAnimFrame:                 ; [$b927]
 
   @LAB_PRG14__b958:                         ; [$b958]
     LDX PlayerHitsPhaseCounter
-    LDA $b97b,X
+    LDA BYTE_ARRAY_PRG14__b97b,X
     RTS
 
   @LAB_PRG14__b95e:                         ; [$b95e]
@@ -17081,7 +17125,7 @@ Maybe_Player_CalcAnimFrame:                 ; [$b927]
 
   @LAB_PRG14__b976:                         ; [$b976]
     TAX
-    LDA $b97e,X
+    LDA BYTE_ARRAY_PRG14__b97e,X
     RTS
 
 ;
@@ -17089,19 +17133,19 @@ Maybe_Player_CalcAnimFrame:                 ; [$b927]
 ;     Maybe_Player_CalcAnimFrame
 ;
 BYTE_ARRAY_PRG14__b97b:                     ; [$b97b]
-    db $04                                  ; [0]:
-    db $05                                  ; [1]:
-    db $06                                  ; [2]:
+    .byte $04                               ; [0]:
+    .byte $05                               ; [1]:
+    .byte $06                               ; [2]:
 
 ;
 ; XREFS:
 ;     Maybe_Player_CalcAnimFrame
 ;
 BYTE_ARRAY_PRG14__b97e:                     ; [$b97e]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Player_DrawShield
@@ -17168,36 +17212,36 @@ Player_DrawShield:                          ; [$b982]
 ;     Player_DrawShield
 ;
 MAYBE_SHIELD_SPRITE_PPU_OFFSETS:            ; [$b9d5]
-    db $60                                  ; [0]:
-    db $60                                  ; [1]:
-    db $60                                  ; [2]:
-    db $60                                  ; [3]:
-    db $61                                  ; [4]:
-    db $60                                  ; [5]:
-    db $62                                  ; [6]:
-    db $42                                  ; [7]:
+    .byte $60                               ; [0]:
+    .byte $60                               ; [1]:
+    .byte $60                               ; [2]:
+    .byte $60                               ; [3]:
+    .byte $61                               ; [4]:
+    .byte $60                               ; [5]:
+    .byte $62                               ; [6]:
+    .byte $42                               ; [7]:
 
 ;
 ; XREFS:
 ;     Player_DrawShield
 ;
 SHIELD_SPRITE_OFFSETS_X:                    ; [$b9dd]
-    db $00                                  ; [0]:
-    db $08                                  ; [1]:
-    db $00                                  ; [2]:
-    db $08                                  ; [3]:
-    db $00                                  ; [4]:
-    db $08                                  ; [5]:
-    db $00                                  ; [6]:
-    db $08                                  ; [7]:
-    db $00                                  ; [8]:
-    db $08                                  ; [9]:
-    db $00                                  ; [10]:
-    db $08                                  ; [11]:
-    db $08                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
+    .byte $00                               ; [0]:
+    .byte $08                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $08                               ; [3]:
+    .byte $00                               ; [4]:
+    .byte $08                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $08                               ; [7]:
+    .byte $00                               ; [8]:
+    .byte $08                               ; [9]:
+    .byte $00                               ; [10]:
+    .byte $08                               ; [11]:
+    .byte $08                               ; [12]:
+    .byte $00                               ; [13]:
+    .byte $00                               ; [14]:
+    .byte $00                               ; [15]:
 
 ;============================================================================
 ; TODO: Document Player_CalculateVisibility
@@ -17634,60 +17678,62 @@ CastMagic_Noop:                             ; [$baec]
 ;     Player_CastMagic
 ;
 CAST_MAGIC_START_Y:                         ; [$baed]
-    db $08                                  ; [0]: Deluge
-    db $00                                  ; [1]: Thunder
-    db $00                                  ; [2]: Fire
-    db $08                                  ; [3]: Death
-    db $08                                  ; [4]: Tilte
+    .byte $08                               ; [0]: Deluge
+    .byte $00                               ; [1]: Thunder
+    .byte $00                               ; [2]: Fire
+    .byte $08                               ; [3]: Death
+    .byte $08                               ; [4]: Tilte
 
 ;
 ; XREFS:
 ;     Player_CastMagic
 ;
 CAST_MAGIC_START_X:                         ; [$baf2]
-    db $00                                  ; [0]: Deluge
-    db $00                                  ; [1]: Thunder
-    db $00                                  ; [2]: Fire
-    db $00                                  ; [3]: Death
-    db $00                                  ; [4]: Tilte
+    .byte $00                               ; [0]: Deluge
+    .byte $00                               ; [1]: Thunder
+    .byte $00                               ; [2]: Fire
+    .byte $00                               ; [3]: Death
+    .byte $00                               ; [4]: Tilte
 
 ;
 ; XREFS:
 ;     CastMagic_RunSpellHandler
 ;
 CAST_MAGIC_UPDATE_HANDLERS:                 ; [$baf7]
-    dw CastMagic_UpdateDeluge-1             ; [0]: Deluge
-    dw CastMagic_UpdateThunderOrDeath-1     ; [1]: Thunder
-    dw CastMagic_UpdateFire-1               ; [2]: Fire
-    dw CastMagic_HandleDeath-1              ; [3]: Death
-    dw CastMagic_UpdateTilte-1              ; [4]: Tilte
-    dw CastMagic_Unused_UpdateDelugeAfterFirstHit-1 ; [5]: Deluge after first
-                                                    ; hit
-    dw CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first hit
-    dw CastMagic_UpdateFireAfterFirstHit-1  ; [7]: Fire after first hit
-    dw CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
-    dw CastMagic_Noop-1                     ; [9]: UNUSED: No-op
-    dw CastMagic_Unused_UpdateHitWallEffect-1 ; [10]: UNUSED: Hit Wall effect
-    dw CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after first
-                                            ; hit
+    .word CastMagic_UpdateDeluge-1          ; [0]: Deluge
+    .word CastMagic_UpdateThunderOrDeath-1  ; [1]: Thunder
+    .word CastMagic_UpdateFire-1            ; [2]: Fire
+    .word CastMagic_HandleDeath-1           ; [3]: Death
+    .word CastMagic_UpdateTilte-1           ; [4]: Tilte
+    .word CastMagic_Unused_UpdateDelugeAfterFirstHit-1 ; [5]: Deluge after
+                                                       ; first hit
+    .word CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first
+                                                 ; hit
+    .word CastMagic_UpdateFireAfterFirstHit-1 ; [7]: Fire after first hit
+    .word CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
+    .word CastMagic_Noop-1                  ; [9]: UNUSED: No-op
+    .word CastMagic_Unused_UpdateHitWallEffect-1 ; [10]: UNUSED: Hit Wall
+                                                 ; effect
+    .word CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after
+                                               ; first hit
 
 ;
 ; XREFS:
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
-    dw CastMagic_HitHandler_Deluge-1        ; [0]: Deluge
-    dw CastMagic_HitHandler_Thunder-1       ; [1]: Thunder
-    dw CastMagic_HitHandler_Fire-1          ; [2]: Fire
-    dw CastMagic_HitHandler_Death-1         ; [3]: Death
-    dw CastMagic_HitHandler_Tilte-1         ; [4]: Tilte
-    dw CastMagic_HitHandler_NoOp-1          ; [5]: Deluge after first hit
-    dw CastMagic_HitHandler_NoOp-1          ; [6]: Thunder after first hit
-    dw CastMagic_HitHandler_NoOp-1          ; [7]: Fire after first hit
-    dw CastMagic_HitHandler_NoOp-1          ; [8]: Death after first hit
-    dw CastMagic_HitHandler_NoOp-1          ; [9]: UNUSED
-    dw CastMagic_HitHandler_NoOp-1          ; [10]: UNUSED: Hit Wall effect
-    dw CastMagic_HitHandler_NoOp-1          ; [11]: Tilte after first hit
+    .word CastMagic_HitHandler_Deluge-1     ; [0]: Deluge
+    .word CastMagic_HitHandler_Thunder-1    ; [1]: Thunder
+    .word CastMagic_HitHandler_Fire-1       ; [2]: Fire
+    .word CastMagic_HitHandler_Death-1      ; [3]: Death
+    .word CastMagic_HitHandler_Tilte-1      ; [4]: Tilte
+    .word CastMagic_HitHandler_NoOp-1       ; [5]: Deluge after first hit
+    .word CastMagic_HitHandler_NoOp-1       ; [6]: Thunder after first hit
+    .word CastMagic_HitHandler_NoOp-1       ; [7]: Fire after first hit
+    .word CastMagic_HitHandler_NoOp-1       ; [8]: Death after first hit
+    .word CastMagic_HitHandler_NoOp-1       ; [9]: UNUSED
+    .word CastMagic_HitHandler_NoOp-1       ; [10]: UNUSED: Hit Wall effect
+    .word CastMagic_HitHandler_NoOp-1       ; [11]: Tilte after first hit
 
 
 ;============================================================================
@@ -17702,22 +17748,22 @@ CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
 ;     CastMagic_RunUpdateSpellHandler
 ;
 CAST_MAGIC_UPDATE_FINISH_HANDLERS:          ; [$bb27]
-    dw CastMagic_FinishHandler_Deluge-1     ; [0]: Deluge
-    dw CastMagic_FinishHandler_Thunder-1    ; [1]: Thunder
-    dw CastMagic_FinishHandler_Fire-1       ; [2]: Fire
-    dw CastMagic_FinishHandler_Death-1      ; [3]: Death
-    dw CastMagic_FinishHandler_Tilte-1      ; [4]: Tilte
-    dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [5]: Deluge after
+    .word CastMagic_FinishHandler_Deluge-1  ; [0]: Deluge
+    .word CastMagic_FinishHandler_Thunder-1 ; [1]: Thunder
+    .word CastMagic_FinishHandler_Fire-1    ; [2]: Fire
+    .word CastMagic_FinishHandler_Death-1   ; [3]: Death
+    .word CastMagic_FinishHandler_Tilte-1   ; [4]: Tilte
+    .word CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [5]: Deluge after
+                                                          ; first hit
+    .word CastMagic_FinishHandler_Thunder-1 ; [6]: Thunder after first hit
+    .word CastMagic_FinishHandler_Fire-1    ; [7]: Fire after first hit
+    .word CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
+                                                          ; first hit
+    .word CastMagic_Noop-1                  ; [9]: UNUSED
+    .word CastMagic_FinishHandler_HitWallEffect-1 ; [10]: UNUSED: Hit Wall
+                                                  ; effect
+    .word CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after
                                                        ; first hit
-    dw CastMagic_FinishHandler_Thunder-1    ; [6]: Thunder after first hit
-    dw CastMagic_FinishHandler_Fire-1       ; [7]: Fire after first hit
-    dw CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
-                                                       ; first hit
-    dw CastMagic_Noop-1                     ; [9]: UNUSED
-    dw CastMagic_FinishHandler_HitWallEffect-1 ; [10]: UNUSED: Hit Wall
-                                               ; effect
-    dw CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after first
-                                                    ; hit
 
 
 ;============================================================================
@@ -18654,11 +18700,11 @@ CastMagic_UpdateXPosition:                  ; [$bcaf]
 ;     CastMagic_UpdateXPosition
 ;
 CAST_MAGIC_MAX_SCREEN_WIDTHS:               ; [$bcf6]
-    db $f0                                  ; [0]:
-    db $f0                                  ; [1]:
-    db $e0                                  ; [2]:
-    db $f0                                  ; [3]:
-    db $f0                                  ; [4]:
+    .byte $f0                               ; [0]:
+    .byte $f0                               ; [1]:
+    .byte $e0                               ; [2]:
+    .byte $f0                               ; [3]:
+    .byte $f0                               ; [4]:
 
 
 ;============================================================================
@@ -19044,72 +19090,109 @@ CastMagic_CheckDirection:                   ; [$bd8f]
 ;     CastMagic_CheckDirection_Right
 ;
 CAST_MAGIC_WIDTHS:                          ; [$bd9d]
-    db $0f                                  ; [0]: Deluge
-    db $0f                                  ; [1]: Thunder
-    db $1f                                  ; [2]: Fire
-    db $0f                                  ; [3]: Death
-    db $0f                                  ; [4]: Tilte
-    db $0f                                  ; [5]: Deluge after hit
-    db $0f                                  ; [6]: Thunder after hit
-    db $1f                                  ; [7]: Fire after hit
-    db $0f                                  ; [8]: Death after hit
-    db $0f                                  ; [9]: Unknown
-    db $0f                                  ; [10]: Hit Wall effect (unused)
-    db $0f                                  ; [11]: Tilte after hit
+    .byte $0f                               ; [0]: Deluge
+    .byte $0f                               ; [1]: Thunder
+    .byte $1f                               ; [2]: Fire
+    .byte $0f                               ; [3]: Death
+    .byte $0f                               ; [4]: Tilte
+    .byte $0f                               ; [5]: Deluge after hit
+    .byte $0f                               ; [6]: Thunder after hit
+    .byte $1f                               ; [7]: Fire after hit
+    .byte $0f                               ; [8]: Death after hit
+    .byte $0f                               ; [9]: Unknown
+    .byte $0f                               ; [10]: Hit Wall effect (unused)
+    .byte $0f                               ; [11]: Tilte after hit
 
 ;
 ; XREFS:
 ;     CastMagic_CheckDirection_CheckImpassable
 ;
 CAST_MAGIC_HEIGHTS:                         ; [$bda9]
-    db $0f                                  ; [0]: Deluge
-    db $1f                                  ; [1]: Thunder
-    db $0f                                  ; [2]: Fire
-    db $0f                                  ; [3]: Death
-    db $0f                                  ; [4]: Tilte
-    db $0f                                  ; [5]: Deluge after hit
-    db $1f                                  ; [6]: Thunder after hit
-    db $0f                                  ; [7]: Fire after hit
-    db $0f                                  ; [8]: Death after hit
-    db $0f                                  ; [9]: Unknown
-    db $0f                                  ; [10]: Hit Wall effect (unused)
-    db $0f                                  ; [11]: Tilte after hit
+    .byte $0f                               ; [0]: Deluge
+    .byte $1f                               ; [1]: Thunder
+    .byte $0f                               ; [2]: Fire
+    .byte $0f                               ; [3]: Death
+    .byte $0f                               ; [4]: Tilte
+    .byte $0f                               ; [5]: Deluge after hit
+    .byte $1f                               ; [6]: Thunder after hit
+    .byte $0f                               ; [7]: Fire after hit
+    .byte $0f                               ; [8]: Death after hit
+    .byte $0f                               ; [9]: Unknown
+    .byte $0f                               ; [10]: Hit Wall effect (unused)
+    .byte $0f                               ; [11]: Tilte after hit
 
 UNUSED_SPACE_PRG14:                         ; [$bdb5]
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdb5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdc5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdd5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bde5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bdf5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be05] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be15] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be25] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be35] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be45] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be55] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be65] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be75] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be85] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$be95] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bea5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$beb5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bec5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bed5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bee5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bef5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf05] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf15] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf25] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf35] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf45] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf55] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf65] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf75] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf85] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bf95] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bfa5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bfb5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bfc5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bfd5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$bfe5] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff    ; [$bff5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdbd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdc5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdcd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdd5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bddd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bde5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bded] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdf5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bdfd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be05] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be0d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be15] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be1d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be25] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be2d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be35] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be3d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be45] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be4d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be55] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be5d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be65] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be6d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be75] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be7d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be85] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be8d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be95] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$be9d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bea5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bead] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$beb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bebd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bec5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$becd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bed5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bedd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bee5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$beed] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bef5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$befd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf05] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf0d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf15] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf1d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf25] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf2d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf35] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf3d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf45] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf4d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf55] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf5d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf65] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf6d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf75] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf7d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf85] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf8d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf95] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bf9d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfa5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfad] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfbd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfc5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfcd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfd5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfdd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfe5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bfed] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$bff5] undefined
+    .byte $ff,$ff,$ff                       ; [$bffd] undefined

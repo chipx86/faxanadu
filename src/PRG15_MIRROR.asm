@@ -4,7 +4,8 @@
 ; PRG15_MIRROR ($c000 - $ffff)
 ;============================================================================
 
-    BASE $c000
+    .segment "PRG15_MIRROR"
+    .ORG $c000
 
 
 ;============================================================================
@@ -92,31 +93,31 @@ UI_SetHUDPPUAttributes:                     ; [$c000]
 ;     UI_SetHUDPPUAttributes
 ;
 HUD_ATTRIBUTE_DATA_BY_INDEX:                ; [$c01b]
-    db $00                                  ; [0]: Dartmoor, Castle of
+    .byte $00                               ; [0]: Dartmoor, Castle of
                                             ; Fraternal, King Grieve's Room
-    db $55                                  ; [1]: Start Screen
-    db $aa                                  ; [2]: Most exterior areas.
-    db $ff                                  ; [3]: Most interior areas.
-    db $41                                  ; [4]: Here and below are unused.
-    db $20                                  ; [5]:
-    db $04                                  ; [6]:
-    db $07                                  ; [7]:
-    db $08                                  ; [8]:
-    db $09                                  ; [9]:
-    db $0a                                  ; [10]:
-    db $61                                  ; [11]:
-    db $20                                  ; [12]:
-    db $04                                  ; [13]:
-    db $0b                                  ; [14]:
-    db $0c                                  ; [15]:
-    db $0d                                  ; [16]:
-    db $0e                                  ; [17]:
-    db $56                                  ; [18]:
-    db $20                                  ; [19]:
-    db $03                                  ; [20]:
-    db $0f                                  ; [21]:
-    db $10                                  ; [22]:
-    db $11                                  ; [23]:
+    .byte $55                               ; [1]: Start Screen
+    .byte $aa                               ; [2]: Most exterior areas.
+    .byte $ff                               ; [3]: Most interior areas.
+    .byte $41                               ; [4]: Here and below are unused.
+    .byte $20                               ; [5]:
+    .byte $04                               ; [6]:
+    .byte $07                               ; [7]:
+    .byte $08                               ; [8]:
+    .byte $09                               ; [9]:
+    .byte $0a                               ; [10]:
+    .byte $61                               ; [11]:
+    .byte $20                               ; [12]:
+    .byte $04                               ; [13]:
+    .byte $0b                               ; [14]:
+    .byte $0c                               ; [15]:
+    .byte $0d                               ; [16]:
+    .byte $0e                               ; [17]:
+    .byte $56                               ; [18]:
+    .byte $20                               ; [19]:
+    .byte $03                               ; [20]:
+    .byte $0f                               ; [21]:
+    .byte $10                               ; [22]:
+    .byte $11                               ; [23]:
 
 
 ;============================================================================
@@ -391,7 +392,7 @@ Player_ReduceMP:                            ; [$c0c3]
     LDX a:SelectedMagic                     ; Load the selected magic spell.
     LDA a:Player_MP                         ; Load the player's total MP.
     SEC
-    SBC $b7a9,X                             ; Look up the cost of this spell.
+    SBC MAGIC_COSTS,X                       ; Look up the cost of this spell.
     BCC @_notEnoughMP                       ; If there's not enough MP for
                                             ; the spell, then jump.
 
@@ -623,10 +624,10 @@ Screen_LoadAllScreenInfo:                   ; [$c154]
     ; Set the starting address of the screen data.
     ;
     TAY                                     ; Y = A
-    LDA $8210,Y                             ; Load the upper byte of the
+    LDA AREA_SPRITE_ADDRESSES,Y             ; Load the upper byte of the
                                             ; address.
     STA Temp_Addr_L                         ; Store for reading.
-    LDA $8211,Y                             ; Load the lower byte of thea
+    LDA AREA_SPRITE_ADDRESSES+1,Y           ; Load the lower byte of thea
                                             ; ddress.
     STA Temp_Addr_U                         ; Store it.
 
@@ -1095,10 +1096,10 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     LDA a:CurrentSprite_Entity              ; Load the sprite entity.
     STA CurrentSprites_Entities,X           ; Set it.
     TAY                                     ; Y = A (entity)
-    LDA $b4df,Y                             ; Load the hitbox type for the
+    LDA SPRITE_ENTITIES_HITBOX_TYPES,Y      ; Load the hitbox type for the
                                             ; entity.
     STA CurrentSprites_HitBoxTypes,X        ; Set it.
-    LDA $b5a9,Y                             ; Load the HP for the entity.
+    LDA SPRITE_ENTITIES_HP,Y                ; Load the HP for the entity.
     STA CurrentSprites_HP,X                 ; Set it.
 
 
@@ -1108,11 +1109,11 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
     TYA                                     ; A = Y (entity)
     ASL A                                   ; Convert to a word boundary.
     TAY                                     ; Y = A
-    LDA $ad2d,Y                             ; Load the lower byte of the
+    LDA SPRITE_BSCRIPTS,Y                   ; Load the lower byte of the
                                             ; behavior script for the entity.
     STA CurrentSprites_BehaviorAddrs_L,X    ; Set the lower byte of the
                                             ; address.
-    LDA $ad2e,Y                             ; Load the upper byte.
+    LDA SPRITE_BSCRIPTS+1,Y                 ; Load the upper byte.
     STA CurrentSprites_BehaviorAddrs_U,X    ; Set the upper byte.
     LDA #$ff                                ; A = 0xFF (unset)
     STA CurrentSprites_Behaviors,X          ; Clear the current behavior
@@ -1139,14 +1140,14 @@ Sprites_PopulateNextAvailableSprite:        ; [$c205]
 ;     Sprites_StoreBankForCurrentSprite
 ;
 SPRITE_IMAGE_BANKS:                         ; [$c259]
-    db $06                                  ; [0]: Bank for sprites 0-54
+    .byte $06                               ; [0]: Bank for sprites 0-54
 
 ;
 ; XREFS:
 ;     Sprites_StoreBankForCurrentSprite
 ;
 SPRITE_IMAGE_BANKS_1_:                      ; [$c25a]
-    db $07                                  ; [1]: Bank for sprites 55-100
+    .byte $07                               ; [1]: Bank for sprites 55-100
 
 
 ;============================================================================
@@ -1563,10 +1564,10 @@ CastMagic_RunUpdateSpellHandler:            ; [$c2e9]
     ASL A                                   ; Convert to a word boundary for
                                             ; the lookup table.
     TAY                                     ; Y = A
-    LDA $bb28,Y                             ; Load the lower byte of the
+    LDA DAT_bb28,Y                          ; Load the lower byte of the
                                             ; finish handler.
     PHA                                     ; Push to the stack.
-    LDA $bb27,Y                             ; Load the upper byte.
+    LDA DAT_bb27,Y                          ; Load the upper byte.
     PHA                                     ; Push.
 
   @_return:                                 ; [$c314]
@@ -1779,20 +1780,20 @@ CastMagic_SetAppearance:                    ; [$c37d]
 ;     CastMagic_SetAppearance
 ;
 SPRITE_MAGIC_IMAGE_ADDRS_U:                 ; [$c387]
-    db $95                                  ; [0]: Deluge
-    db $99                                  ; [1]: Thunder
-    db $9b                                  ; [2]: Fire
-    db $9d                                  ; [3]: Death
-    db $a1                                  ; [4]: Tilte
-    db $a5                                  ; [5]: UNUSED: Deluge after first
+    .byte $95                               ; [0]: Deluge
+    .byte $99                               ; [1]: Thunder
+    .byte $9b                               ; [2]: Fire
+    .byte $9d                               ; [3]: Death
+    .byte $a1                               ; [4]: Tilte
+    .byte $a5                               ; [5]: UNUSED: Deluge after first
                                             ; hit
-    db $99                                  ; [6]: Thunder after first hit
-    db $9b                                  ; [7]: Fire after first hit
-    db $a5                                  ; [8]: UNUSED: Death after first
+    .byte $99                               ; [6]: Thunder after first hit
+    .byte $9b                               ; [7]: Fire after first hit
+    .byte $a5                               ; [8]: UNUSED: Death after first
                                             ; hit
-    db $a5                                  ; [9]: UNUSED
-    db $a5                                  ; [10]: UNUSED: Hit wall effect
-    db $a5                                  ; [11]: Tilte after first hit
+    .byte $a5                               ; [9]: UNUSED
+    .byte $a5                               ; [10]: UNUSED: Hit wall effect
+    .byte $a5                               ; [11]: Tilte after first hit
 
 
 ;============================================================================
@@ -2242,42 +2243,42 @@ CastMagic_FinishHandler_TilteAfterFirstHit: ; [$c42c]
     RTS
 
 MAGICHITHANDLER_c42c_ARRAY1:                ; [$c46c]
-    db $ff                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $ff                               ; [0]:
+    .byte $00                               ; [1]:
 
 ;
 ; XREFS:
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 MAGICHITHANDLER_c42c_ARRAY1_2_:             ; [$c46e]
-    db $ff                                  ; [2]:
+    .byte $ff                               ; [2]:
 
 ;
 ; XREFS:
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 MAGICHITHANDLER_c42c_ARRAY1_3_:             ; [$c46f]
-    db $00                                  ; [3]:
-    db $ff                                  ; [0]:
-    db $ff                                  ; [1]:
-    db $00                                  ; [2]:
+    .byte $00                               ; [3]:
+    .byte $ff                               ; [0]:
+    .byte $ff                               ; [1]:
+    .byte $00                               ; [2]:
 
 ;
 ; XREFS:
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 BYTE_ARRAY_PRG15_MIRROR__c470_3_:           ; [$c473]
-    db $00                                  ; [3]:
-    db $00                                  ; [0]:
-    db $02                                  ; [1]:
-    db $01                                  ; [2]:
+    .byte $00                               ; [3]:
+    .byte $00                               ; [0]:
+    .byte $02                               ; [1]:
+    .byte $01                               ; [2]:
 
 ;
 ; XREFS:
 ;     CastMagic_FinishHandler_TilteAfterFirstHit
 ;
 BYTE_ARRAY_PRG15_MIRROR__c474_3_:           ; [$c477]
-    db $03                                  ; [3]:
+    .byte $03                               ; [3]:
 
 
 ;============================================================================
@@ -2393,23 +2394,23 @@ GameLoop_UseItem_Return:                    ; [$c49c]
 ;     GameLoop_CheckUseCurrentItem
 ;
 USE_ITEM_JUMP_TABLE:                        ; [$c49d]
-    dw $c49b                                ; [0]: Ring of Elf
-    dw $c49b                                ; [1]: Ring of Ruby
-    dw $c49b                                ; [2]: Ring of Dworf
-    dw $c49b                                ; [3]: Demon's Ring
-    dw $c49b                                ; [4]: "A" Key
-    dw $c49b                                ; [5]: "K" Key
-    dw $c49b                                ; [6]: "Q" Key
-    dw $c49b                                ; [7]: "J" Key
-    dw $c49b                                ; [8]: "Jo" Key
-    dw Player_UseMattock-1                  ; [9]: Mattock
-    dw $c49b                                ; [10]: Magical Rod
-    dw $c49b                                ; [11]: Crystal
-    dw $c49b                                ; [12]: Lamp
-    dw Player_UseHourGlass-1                ; [13]: Hour Glass
-    dw $c49b                                ; [14]: Book
-    dw Player_UseWingBoots-1                ; [15]: Wing Boots
-    dw Player_UseRedPotion-1                ; [16]: Red Potion
+    .word $c49b                             ; [0]: Ring of Elf
+    .word $c49b                             ; [1]: Ring of Ruby
+    .word $c49b                             ; [2]: Ring of Dworf
+    .word $c49b                             ; [3]: Demon's Ring
+    .word $c49b                             ; [4]: "A" Key
+    .word $c49b                             ; [5]: "K" Key
+    .word $c49b                             ; [6]: "Q" Key
+    .word $c49b                             ; [7]: "J" Key
+    .word $c49b                             ; [8]: "Jo" Key
+    .word Player_UseMattock-1               ; [9]: Mattock
+    .word $c49b                             ; [10]: Magical Rod
+    .word $c49b                             ; [11]: Crystal
+    .word $c49b                             ; [12]: Lamp
+    .word Player_UseHourGlass-1             ; [13]: Hour Glass
+    .word $c49b                             ; [14]: Book
+    .word Player_UseWingBoots-1             ; [15]: Wing Boots
+    .word Player_UseRedPotion-1             ; [16]: Red Potion
 
 
 ;============================================================================
@@ -2495,8 +2496,8 @@ Player_UseElixir:                           ; [$c4ca]
     ;
     LDA #$85                                ; 0x85 == Use Elixir.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -2660,8 +2661,8 @@ Player_UseRedPotion:                        ; [$c533]
     ;
     LDA #$80                                ; 0x80 == Use Red Potion IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$c53b]
@@ -2775,8 +2776,8 @@ Player_UseWingBoots:                        ; [$c579]
     LDA #$83                                ; 0x83 == Wing Boots used
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -2824,13 +2825,13 @@ Player_UseWingBoots:                        ; [$c579]
 ;     Player_UseWingBoots
 ;
 TITLE_TO_WINGBOOTS_DURATION:                ; [$c599]
-    db $28                                  ; [0]: 40 seconds: Novice,
+    .byte $28                               ; [0]: 40 seconds: Novice,
                                             ; Aspirant, Battler, Fighter
-    db $1e                                  ; [1]: 30 seconds: Adept,
+    .byte $1e                               ; [1]: 30 seconds: Adept,
                                             ; Chevalier, Veteran, Warrior
-    db $14                                  ; [2]: 20 seconds: Swordman,
+    .byte $14                               ; [2]: 20 seconds: Swordman,
                                             ; Hero, Soldier, Myrmidon
-    db $0a                                  ; [3]: 10 seconds: Champion,
+    .byte $0a                               ; [3]: 10 seconds: Champion,
                                             ; Superhero, Paladin, Lord
 
 
@@ -2913,8 +2914,8 @@ Game_DecWingBootsDuration:                  ; [$c59d]
     LDA #$96                                ; 0x96 == Wing Boots are gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -2969,8 +2970,8 @@ Player_UseHourGlass:                        ; [$c5c8]
     ;
     LDA #$82                                ; Set the IScript to run to 0x82.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3075,8 +3076,8 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
     LDA #$97                                ; 0x97 == Hour Glass is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3244,8 +3245,8 @@ Player_UseMattock:                          ; [$c616]
     ;
     LDA #$81
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3346,14 +3347,14 @@ Player_UseMattock:                          ; [$c616]
 ;     Player_UseMattock
 ;
 USE_MATTOCK_BLOCK_DISTANCES:                ; [$c68d]
-    db $ff                                  ; [0]:
+    .byte $ff                               ; [0]:
 
 ;
 ; XREFS:
 ;     Player_UseMattock
 ;
 USE_MATTOCK_BLOCK_DISTANCES_1_:             ; [$c68e]
-    db $10                                  ; [1]:
+    .byte $10                               ; [1]:
 
 
 ;============================================================================
@@ -3373,38 +3374,38 @@ USE_MATTOCK_BLOCK_DISTANCES_1_:             ; [$c68e]
 ;     Player_UseMattock
 ;
 USE_MATTOCK_BLOCK_TRANSITIONS:              ; [$c68f]
-    db $00                                  ; [0]: Eolis
-    db $00                                  ; [1]:
-    db $00                                  ; [2]:
-    db $00                                  ; [3]:
-    db $63                                  ; [4]: Apolune
-    db $85                                  ; [5]:
-    db $86                                  ; [6]:
-    db $42                                  ; [7]:
-    db $00                                  ; [8]: Forepaw
-    db $00                                  ; [9]:
-    db $00                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]: Mascon
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]: Victim
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]: Conflate
-    db $00                                  ; [21]:
-    db $00                                  ; [22]:
-    db $00                                  ; [23]:
-    db $00                                  ; [24]: Daybreak
-    db $00                                  ; [25]:
-    db $00                                  ; [26]:
-    db $00                                  ; [27]:
-    db $00                                  ; [28]: Evil Fortress
-    db $00                                  ; [29]:
-    db $00                                  ; [30]:
-    db $00                                  ; [31]:
+    .byte $00                               ; [0]: Eolis
+    .byte $00                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $00                               ; [3]:
+    .byte $63                               ; [4]: Apolune
+    .byte $85                               ; [5]:
+    .byte $86                               ; [6]:
+    .byte $42                               ; [7]:
+    .byte $00                               ; [8]: Forepaw
+    .byte $00                               ; [9]:
+    .byte $00                               ; [10]:
+    .byte $00                               ; [11]:
+    .byte $00                               ; [12]: Mascon
+    .byte $00                               ; [13]:
+    .byte $00                               ; [14]:
+    .byte $00                               ; [15]:
+    .byte $00                               ; [16]: Victim
+    .byte $00                               ; [17]:
+    .byte $00                               ; [18]:
+    .byte $00                               ; [19]:
+    .byte $00                               ; [20]: Conflate
+    .byte $00                               ; [21]:
+    .byte $00                               ; [22]:
+    .byte $00                               ; [23]:
+    .byte $00                               ; [24]: Daybreak
+    .byte $00                               ; [25]:
+    .byte $00                               ; [26]:
+    .byte $00                               ; [27]:
+    .byte $00                               ; [28]: Evil Fortress
+    .byte $00                               ; [29]:
+    .byte $00                               ; [30]:
+    .byte $00                               ; [31]:
 
 
 ;============================================================================
@@ -3465,8 +3466,8 @@ Player_PickUpHourGlass:                     ; [$c6be]
     LDA #$8a                                ; 0x8A == Hour Glass picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3546,8 +3547,8 @@ Player_PickUpWingBoots:                     ; [$c6d8]
     LDA #$89                                ; 0x89 == Wing boots picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3609,8 +3610,8 @@ Player_PickUpBattleSuit:                    ; [$c6ea]
     LDA #$8b                                ; 0x8B == Battle Suit picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3687,8 +3688,8 @@ Player_PickUpBattleHelmet:                  ; [$c70a]
     LDA #$8c                                ; 0x8C == Battle Helmet picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3766,8 +3767,8 @@ Player_PickUpDragonSlayer:                  ; [$c72a]
     LDA #$8d                                ; 0x8D == Dragon Slayer picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -3869,8 +3870,8 @@ Player_PickUpMattock:                       ; [$c752]
     LDA #$88                                ; 0x88 == Mattock picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4129,8 +4130,8 @@ Player_PickUpGlove:                         ; [$c7cf]
     LDA #$92                                ; 0x92 == Glove picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4181,8 +4182,8 @@ Player_PickUpBlackOnyx:                     ; [$c7e4]
     LDA #$8e                                ; 0x8E == Black Onyx picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4234,8 +4235,8 @@ Player_PickUpPendant:                       ; [$c7fa]
     LDA #$8f                                ; 0x8F = Pendant picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4287,8 +4288,8 @@ Player_PickUpMagicalRod:                    ; [$c810]
     LDA #$90                                ; 0x90 == Magical Rod picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4340,8 +4341,8 @@ Player_PickUpRedPotion:                     ; [$c826]
     LDA #$87                                ; 0x87 == Red Potion picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4393,8 +4394,8 @@ Player_PickUpPoison:                        ; [$c83c]
     LDA #$91                                ; 0x91 = Poison picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4467,8 +4468,8 @@ Player_PickUpElixir:                        ; [$c864]
     LDA #$86                                ; 0x86 == Elixir picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4519,8 +4520,8 @@ Player_PickUpOintment:                      ; [$c87a]
     LDA #$94                                ; 0x94 == Ointment picked up
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
 
@@ -4629,8 +4630,8 @@ Game_DecGloveDuration:                      ; [$c89b]
     ;
     LDA #$93                                ; 0x93 == Glove is gone IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8b3]
@@ -4694,8 +4695,8 @@ Game_DecOintmentDuration:                   ; [$c8b4]
     LDA #$95                                ; 0x95 == Ointment is gone
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8cc]
@@ -5544,7 +5545,7 @@ Input_HandleOnInterrupt:                    ; [$ca35]
 GetRandom:                                  ; [$ca6e]
     LDX Random_Offset                       ; Load the current offset into
                                             ; the bank.
-    LDA ROMBankStart,X                      ; Load the byte value at that
+    LDA Sprites_UpdateAll,X                 ; Load the byte value at that
                                             ; offset.
     EOR Joy1_ButtonMask                     ; XOR with the controler 1 button
                                             ; mask.
@@ -6242,22 +6243,22 @@ Sprites_Reset:                              ; [$cb53]
 ; Start X/Y locations for the default sprite 0.
 ;============================================================================
 SPRITES_START_XY:                           ; [$cb96]
-    db $17                                  ; [0]:
+    .byte $17                               ; [0]:
                                             ; SPRITE_0_RANGE_1_START
                                             ; when
                                             ; Sprites_Sprite0Mode
                                             ; == 0
-    db $48                                  ; [1]:
+    .byte $48                               ; [1]:
                                             ; SPRITE_0_RANGE_1_START
                                             ; when
                                             ; Sprites_Sprite0Mode
                                             ; == 0xFF
-    db $08                                  ; [2]:
+    .byte $08                               ; [2]:
                                             ; SPRITE0_X
                                             ; when
                                             ; Sprites_Sprite0Mode
                                             ; == 0
-    db $00                                  ; [3]:
+    .byte $00                               ; [3]:
                                             ; SPRITE0_X
                                             ; when
                                             ; Sprites_Sprite0Mode
@@ -6517,8 +6518,8 @@ MMC1_SaveROMBankAndUpdateTo:                ; [$cc15]
 ;     TextBox_GetBackingAttributeData
 ;     TextBox_LoadAndShowMessage
 ;     TextBox_LoadItemSourceTiles
-;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
+;     TextBox_WriteChar
 ;     Textbox_Maybe_GetAreaBehindTextbox
 ;     UI_DrawSelectedItem
 ;============================================================================
@@ -6887,14 +6888,14 @@ PPUBuffer_DrawCommand_RemoveVerticalLines:  ; [$ccec]
 ;     PPUBuffer_DrawCommand_RemoveVerticalLines
 ;
 PPUBUFFER_DRAWCOMMAND_0xFA_MASKS:           ; [$cd33]
-    db $fe                                  ; [0]:
-    db $df                                  ; [1]:
-    db $f7                                  ; [2]:
-    db $fd                                  ; [3]:
-    db $bf                                  ; [4]:
-    db $ef                                  ; [5]:
-    db $7f                                  ; [6]:
-    db $fb                                  ; [7]:
+    .byte $fe                               ; [0]:
+    .byte $df                               ; [1]:
+    .byte $f7                               ; [2]:
+    .byte $fd                               ; [3]:
+    .byte $bf                               ; [4]:
+    .byte $ef                               ; [5]:
+    .byte $7f                               ; [6]:
+    .byte $fb                               ; [7]:
 
 
 ;============================================================================
@@ -7350,114 +7351,114 @@ Sprites_LoadImageForCurrentSprite:          ; [$cdb5]
 ;     CurrentSprite_LoadTilesInfo
 ;
 SPRITES_PPU_TILE_COUNTS:                    ; [$ce1b]
-    db $01                                  ; [0]:
-    db $01                                  ; [1]: Dropped: Bread
-    db $01                                  ; [2]: Dropped: Coin
-    db $01                                  ; [3]: Enemy: ?
-    db $10                                  ; [4]: Enemy: Raiden
-    db $10                                  ; [5]: Enemy: Necron Aides
-    db $10                                  ; [6]: Enemy: Zombie
-    db $08                                  ; [7]: Enemy: Hornet
-    db $06                                  ; [8]: Enemy: Bihoruda
-    db $06                                  ; [9]: Enemy: Lilith
-    db $07                                  ; [10]: Magic: ?
-    db $06                                  ; [11]: Enemy: Yuinaru
-    db $0c                                  ; [12]: Enemy: Snowman
-    db $10                                  ; [13]: Enemy: Nash
-    db $10                                  ; [14]: Enemy: Fire Giant
-    db $12                                  ; [15]: Enemy: Ishiisu
-    db $0d                                  ; [16]: Enemy: Execution Hood
-    db $26                                  ; [17]: Boss: Rokusutahn
-    db $10                                  ; [18]: Boss: unused (round body
+    .byte $01                               ; [0]:
+    .byte $01                               ; [1]: Dropped: Bread
+    .byte $01                               ; [2]: Dropped: Coin
+    .byte $01                               ; [3]: Enemy: ?
+    .byte $10                               ; [4]: Enemy: Raiden
+    .byte $10                               ; [5]: Enemy: Necron Aides
+    .byte $10                               ; [6]: Enemy: Zombie
+    .byte $08                               ; [7]: Enemy: Hornet
+    .byte $06                               ; [8]: Enemy: Bihoruda
+    .byte $06                               ; [9]: Enemy: Lilith
+    .byte $07                               ; [10]: Magic: ?
+    .byte $06                               ; [11]: Enemy: Yuinaru
+    .byte $0c                               ; [12]: Enemy: Snowman
+    .byte $10                               ; [13]: Enemy: Nash
+    .byte $10                               ; [14]: Enemy: Fire Giant
+    .byte $12                               ; [15]: Enemy: Ishiisu
+    .byte $0d                               ; [16]: Enemy: Execution Hood
+    .byte $26                               ; [17]: Boss: Rokusutahn
+    .byte $10                               ; [18]: Boss: unused (round body
                                             ; of snake boss)
-    db $00                                  ; [19]: Effect: Enemy death
-    db $00                                  ; [20]: Effect: Lightning ball
-    db $16                                  ; [21]: Enemy: Charron
-    db $17                                  ; [22]: Enemy: ? (Unused)
-    db $10                                  ; [23]: Enemy: Geributa
-    db $0e                                  ; [24]: Enemy: Sugata
-    db $12                                  ; [25]: Enemy: Grimlock
-    db $0c                                  ; [26]: Enemy: Giant Bees
-    db $0e                                  ; [27]: Enemy: Myconid
-    db $10                                  ; [28]: Enemy: Naga
-    db $10                                  ; [29]: Enemy: Skeleton Knight
+    .byte $00                               ; [19]: Effect: Enemy death
+    .byte $00                               ; [20]: Effect: Lightning ball
+    .byte $16                               ; [21]: Enemy: Charron
+    .byte $17                               ; [22]: Enemy: ? (Unused)
+    .byte $10                               ; [23]: Enemy: Geributa
+    .byte $0e                               ; [24]: Enemy: Sugata
+    .byte $12                               ; [25]: Enemy: Grimlock
+    .byte $0c                               ; [26]: Enemy: Giant Bees
+    .byte $0e                               ; [27]: Enemy: Myconid
+    .byte $10                               ; [28]: Enemy: Naga
+    .byte $10                               ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    db $12                                  ; [30]: Enemy: Giant Strider
-    db $12                                  ; [31]: Enemy: Sir Gawaine
-    db $1f                                  ; [32]: Enemy: Maskman
-    db $16                                  ; [33]: Enemy: Wolfman
-    db $0f                                  ; [34]: Enemy: Yareeka
-    db $10                                  ; [35]: Enemy: Magman
-    db $13                                  ; [36]: Enemy: Curly-tailed guy
+    .byte $12                               ; [30]: Enemy: Giant Strider
+    .byte $12                               ; [31]: Enemy: Sir Gawaine
+    .byte $1f                               ; [32]: Enemy: Maskman
+    .byte $16                               ; [33]: Enemy: Wolfman
+    .byte $0f                               ; [34]: Enemy: Yareeka
+    .byte $10                               ; [35]: Enemy: Magman
+    .byte $13                               ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    db $10                                  ; [37]: Enemy: ? (unused)
-    db $11                                  ; [38]: Enemy: Ikeda
-    db $10                                  ; [39]: Enemy: Muppet guy
+    .byte $10                               ; [37]: Enemy: ? (unused)
+    .byte $11                               ; [38]: Enemy: Ikeda
+    .byte $10                               ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    db $10                                  ; [40]: Enemy: Lamprey
-    db $10                                  ; [41]: Enemy: ? (unused)
-    db $13                                  ; [42]: Enemy: Monodron
-    db $0c                                  ; [43]: Enemy: Winged skeleton
+    .byte $10                               ; [40]: Enemy: Lamprey
+    .byte $10                               ; [41]: Enemy: ? (unused)
+    .byte $13                               ; [42]: Enemy: Monodron
+    .byte $0c                               ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    db $12                                  ; [44]: Enemy: Tamazutsu
-    db $3e                                  ; [45]: Boss: Ripasheiku
-    db $33                                  ; [46]: Boss: Zoradohna
-    db $1c                                  ; [47]: Boss: Borabohra
-    db $0e                                  ; [48]: Boss: Pakukame
-    db $25                                  ; [49]: Boss: Zorugeriru
-    db $54                                  ; [50]: Boss: King Grieve
-    db $69                                  ; [51]: Boss: Shadow Eura
-    db $10                                  ; [52]: NPC: Walking Man 1
-    db $10                                  ; [53]: NPC: Blue lady (unused)
-    db $09                                  ; [54]: NPC: Child (unused)
-    db $08                                  ; [55]: NPC: Armor Salesman
-    db $0b                                  ; [56]: NPC: Martial Artist
-    db $0b                                  ; [57]: NPC: Priest
-    db $14                                  ; [58]: NPC: King
-    db $0c                                  ; [59]: NPC: Magic Teacher
-    db $08                                  ; [60]: NPC: Key Salesman
-    db $0a                                  ; [61]: NPC: Smoking Man
-    db $0e                                  ; [62]: NPC: Man in Chair
-    db $0a                                  ; [63]: NPC: Sitting Man
-    db $0d                                  ; [64]: NPC: Meat Salesman
-    db $10                                  ; [65]: NPC: Lady in Blue Dress
+    .byte $12                               ; [44]: Enemy: Tamazutsu
+    .byte $3e                               ; [45]: Boss: Ripasheiku
+    .byte $33                               ; [46]: Boss: Zoradohna
+    .byte $1c                               ; [47]: Boss: Borabohra
+    .byte $0e                               ; [48]: Boss: Pakukame
+    .byte $25                               ; [49]: Boss: Zorugeriru
+    .byte $54                               ; [50]: Boss: King Grieve
+    .byte $69                               ; [51]: Boss: Shadow Eura
+    .byte $10                               ; [52]: NPC: Walking Man 1
+    .byte $10                               ; [53]: NPC: Blue lady (unused)
+    .byte $09                               ; [54]: NPC: Child (unused)
+    .byte $08                               ; [55]: NPC: Armor Salesman
+    .byte $0b                               ; [56]: NPC: Martial Artist
+    .byte $0b                               ; [57]: NPC: Priest
+    .byte $14                               ; [58]: NPC: King
+    .byte $0c                               ; [59]: NPC: Magic Teacher
+    .byte $08                               ; [60]: NPC: Key Salesman
+    .byte $0a                               ; [61]: NPC: Smoking Man
+    .byte $0e                               ; [62]: NPC: Man in Chair
+    .byte $0a                               ; [63]: NPC: Sitting Man
+    .byte $0d                               ; [64]: NPC: Meat Salesman
+    .byte $10                               ; [65]: NPC: Lady in Blue Dress
                                             ; with Cup
-    db $10                                  ; [66]: NPC: Guard
-    db $0b                                  ; [67]: NPC: Doctor
-    db $0e                                  ; [68]: NPC: Walking Woman 1
-    db $0d                                  ; [69]: NPC: Walking Woman 2
-    db $09                                  ; [70]: Enemy: Eyeball (unused)
-    db $08                                  ; [71]: Enemy: Zozura
-    db $02                                  ; [72]: Item: Glove
-    db $02                                  ; [73]: Item: Black Onyx
-    db $04                                  ; [74]: Item: Pendant
-    db $02                                  ; [75]: Item: Red Potion
-    db $02                                  ; [76]: Item: Poison
-    db $04                                  ; [77]: Item: Elixir
-    db $02                                  ; [78]: Item: Ointment
-    db $00                                  ; [79]: Trigger: Intro
-    db $02                                  ; [80]: Item: Mattock
-    db $00                                  ; [81]: Magic: ?
-    db $0c                                  ; [82]: Effect: Fountain
-    db $00                                  ; [83]: Magic: ?
-    db $00                                  ; [84]: Magic: Enemy Fireball
-    db $04                                  ; [85]: Item: Wing Boots
-    db $02                                  ; [86]: Item: Hour Glass
-    db $04                                  ; [87]: Item: Magical Rod
-    db $02                                  ; [88]: Item: Battle Suit
-    db $04                                  ; [89]: Item: Battle Helmet
-    db $04                                  ; [90]: Item: Dragon Slayer
-    db $02                                  ; [91]: Item: Mattock
-    db $04                                  ; [92]: Item: Wing Boots (from
+    .byte $10                               ; [66]: NPC: Guard
+    .byte $0b                               ; [67]: NPC: Doctor
+    .byte $0e                               ; [68]: NPC: Walking Woman 1
+    .byte $0d                               ; [69]: NPC: Walking Woman 2
+    .byte $09                               ; [70]: Enemy: Eyeball (unused)
+    .byte $08                               ; [71]: Enemy: Zozura
+    .byte $02                               ; [72]: Item: Glove
+    .byte $02                               ; [73]: Item: Black Onyx
+    .byte $04                               ; [74]: Item: Pendant
+    .byte $02                               ; [75]: Item: Red Potion
+    .byte $02                               ; [76]: Item: Poison
+    .byte $04                               ; [77]: Item: Elixir
+    .byte $02                               ; [78]: Item: Ointment
+    .byte $00                               ; [79]: Trigger: Intro
+    .byte $02                               ; [80]: Item: Mattock
+    .byte $00                               ; [81]: Magic: ?
+    .byte $0c                               ; [82]: Effect: Fountain
+    .byte $00                               ; [83]: Magic: ?
+    .byte $00                               ; [84]: Magic: Enemy Fireball
+    .byte $04                               ; [85]: Item: Wing Boots
+    .byte $02                               ; [86]: Item: Hour Glass
+    .byte $04                               ; [87]: Item: Magical Rod
+    .byte $02                               ; [88]: Item: Battle Suit
+    .byte $04                               ; [89]: Item: Battle Helmet
+    .byte $04                               ; [90]: Item: Dragon Slayer
+    .byte $02                               ; [91]: Item: Mattock
+    .byte $04                               ; [92]: Item: Wing Boots (from
                                             ; quest)
-    db $02                                  ; [93]: Item: Red Potion
-    db $02                                  ; [94]: Item: Poison
-    db $02                                  ; [95]: Item: Glove
-    db $02                                  ; [96]: Item: Ointment
-    db $0c                                  ; [97]: Effect: Spring of Trunk
-    db $0c                                  ; [98]: Effect: Spring of Sky
-    db $0c                                  ; [99]: Effect: Spring of Tower
-    db $00                                  ; [100]: Effect: Boss Death
+    .byte $02                               ; [93]: Item: Red Potion
+    .byte $02                               ; [94]: Item: Poison
+    .byte $02                               ; [95]: Item: Glove
+    .byte $02                               ; [96]: Item: Ointment
+    .byte $0c                               ; [97]: Effect: Spring of Trunk
+    .byte $0c                               ; [98]: Effect: Spring of Sky
+    .byte $0c                               ; [99]: Effect: Spring of Tower
+    .byte $00                               ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -7734,18 +7735,18 @@ Area_LoadTiles:                             ; [$ceb8]
 ;     Area_LoadTiles
 ;
 TILE_INDEX_TO_ADDR:                         ; [$cf07]
-    dw AREA_TILESETS_EOLIS                  ; [0]: Eolis
-    dw AREA_TILESETS_BRANCHES               ; [1]: Branches
-    dw AREA_TILESETS_TRUNK                  ; [2]: Trunk
-    dw AREA_TILESETS_MIST                   ; [3]: Mist
-    dw AREA_TILESETS_DARTMOOR_EVIL_LAIR     ; [4]: Dartmoor Castle Evil Lair
-    dw AREA_TILESETS_TOWNS                  ; [5]: Towns
-    dw AREA_TILESETS_KINGSROOM_GURU_HOSPITAL ; [6]: King's Room Guru Room
-                                             ; Hospital
-    dw AREA_TILESETS_SHOPS_HOUSE_TAVERN     ; [7]: Tavern Tool Shop Key Shop
+    .word AREA_TILESETS_EOLIS               ; [0]: Eolis
+    .word AREA_TILESETS_BRANCHES            ; [1]: Branches
+    .word AREA_TILESETS_TRUNK               ; [2]: Trunk
+    .word AREA_TILESETS_MIST                ; [3]: Mist
+    .word AREA_TILESETS_DARTMOOR_EVIL_LAIR  ; [4]: Dartmoor Castle Evil Lair
+    .word AREA_TILESETS_TOWNS               ; [5]: Towns
+    .word AREA_TILESETS_KINGSROOM_GURU_HOSPITAL ; [6]: King's Room Guru Room
+                                                ; Hospital
+    .word AREA_TILESETS_SHOPS_HOUSE_TAVERN  ; [7]: Tavern Tool Shop Key Shop
                                             ; House Meat Shop
-    dw AREA_TILESETS_MARTIALARTS_MAGICTRAINER ; [8]: Martial Arts Magic
-                                              ; Trainer
+    .word AREA_TILESETS_MARTIALARTS_MAGICTRAINER ; [8]: Martial Arts Magic
+                                                 ; Trainer
 
 
 ;============================================================================
@@ -7762,17 +7763,17 @@ TILE_INDEX_TO_ADDR:                         ; [$cf07]
 ;     Area_LoadTiles
 ;
 TILE_INDEX_TO_PPU_ADDR_UPPER:               ; [$cf19]
-    db $18                                  ; [0]: Eolis
-    db $18                                  ; [1]: Branches
-    db $18                                  ; [2]: Trunk
-    db $18                                  ; [3]: Mist
-    db $18                                  ; [4]: Dartmoor Castle Evil Lair
-    db $18                                  ; [5]: Towns
-    db $1a                                  ; [6]: King's Room Guru Room
+    .byte $18                               ; [0]: Eolis
+    .byte $18                               ; [1]: Branches
+    .byte $18                               ; [2]: Trunk
+    .byte $18                               ; [3]: Mist
+    .byte $18                               ; [4]: Dartmoor Castle Evil Lair
+    .byte $18                               ; [5]: Towns
+    .byte $1a                               ; [6]: King's Room Guru Room
                                             ; Hospital
-    db $1a                                  ; [7]: Tavern Tool Shop Key Shop
+    .byte $1a                               ; [7]: Tavern Tool Shop Key Shop
                                             ; House Meat Shop
-    db $1a                                  ; [8]: Martial Arts Magic Trainer
+    .byte $1a                               ; [8]: Martial Arts Magic Trainer
 
 
 ;============================================================================
@@ -7795,17 +7796,17 @@ TILE_INDEX_TO_PPU_ADDR_UPPER:               ; [$cf19]
 ;     Area_LoadTiles
 ;
 TILE_INDEX_TO_NUM_CHR_PAGES:                ; [$cf22]
-    db $08                                  ; [0]: Eolis
-    db $08                                  ; [1]: Branches
-    db $08                                  ; [2]: Trunk
-    db $08                                  ; [3]: Mist
-    db $08                                  ; [4]: Dartmoor Castle Evil Lair
-    db $08                                  ; [5]: Towns
-    db $06                                  ; [6]: King's Room Guru Room
+    .byte $08                               ; [0]: Eolis
+    .byte $08                               ; [1]: Branches
+    .byte $08                               ; [2]: Trunk
+    .byte $08                               ; [3]: Mist
+    .byte $08                               ; [4]: Dartmoor Castle Evil Lair
+    .byte $08                               ; [5]: Towns
+    .byte $06                               ; [6]: King's Room Guru Room
                                             ; Hospital
-    db $06                                  ; [7]: Tavern Tool Shop Key Shop
+    .byte $06                               ; [7]: Tavern Tool Shop Key Shop
                                             ; House Meat Shop
-    db $04                                  ; [8]: Martial Arts Magic Trainer
+    .byte $04                               ; [8]: Martial Arts Magic Trainer
 
 
 ;============================================================================
@@ -8170,16 +8171,16 @@ PPUBuffer_DrawCommand_Noop:                 ; [$cfbb]
 ;     PPUBuffer_Draw
 ;
 PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
-    dw PPUBuffer_DrawCommand_WritePalette-1 ; [0]: Command 0x00: Write
-                                            ; Palette to PPU
-    dw PPUBuffer_DrawCommand_Noop-1         ; [1]: Command 0xFF
-    dw PPUBuffer_DrawCommand_Noop-1         ; [2]: Command 0xFE
-    dw PPUBuffer_DrawCommand_Noop-1         ; [3]: Command 0xFD
-    dw PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC:
-                                                      ; Rotate Tiles Right
-    dw PPUBuffer_DrawCommand_Noop-1         ; [5]: Command 0xFB
-    dw PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA:
-                                                   ; Remove Vertical Lines
+    .word PPUBuffer_DrawCommand_WritePalette-1 ; [0]: Command 0x00: Write
+                                               ; Palette to PPU
+    .word PPUBuffer_DrawCommand_Noop-1      ; [1]: Command 0xFF
+    .word PPUBuffer_DrawCommand_Noop-1      ; [2]: Command 0xFE
+    .word PPUBuffer_DrawCommand_Noop-1      ; [3]: Command 0xFD
+    .word PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC:
+                                                         ; Rotate Tiles Right
+    .word PPUBuffer_DrawCommand_Noop-1      ; [5]: Command 0xFB
+    .word PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA:
+                                                      ; Remove Vertical Lines
 
 
 ;============================================================================
@@ -8238,7 +8239,7 @@ PPUBuffer_HasCapacity:                      ; [$cfd0]
 
   @_return:                                 ; [$cfd9]
     RTS
-    db $09,$80                              ; [$cfda] word
+    .byte $09,$80                           ; [$cfda] word
 
 
 ;============================================================================
@@ -8293,8 +8294,8 @@ PPUBuffer_HasCapacity:                      ; [$cfd0]
 ;     Sprites_LoadImageForCurrentSprite
 ;     TextBox_FillPlaceholderTextAtLineWithStartChar
 ;     TextBox_LoadItemSourceTiles
-;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_QueuePPUBufferTextBoxLength
+;     TextBox_WriteChar
 ;     UI_ClearSelectedItemPic
 ;     UI_DrawDigitsZeroPadded
 ;     UI_DrawManaOrHPBar
@@ -8534,7 +8535,7 @@ Screen_LoadUIPalette:                       ; [$d03b]
     ;
     ; Set the attribute data index for the HUD.
     ;
-    LDA $81f0,Y                             ; Load the HUD attribute data for
+    LDA DAT_81f0,Y                          ; Load the HUD attribute data for
                                             ; this index.
     STA a:UI_AttributeDataIndex             ; Set it for the HUD/textboxes.
 
@@ -8931,10 +8932,10 @@ Screen_SetFadeOutPalette:                   ; [$d0ad]
 ;     Screen_SetFadeOutPalette
 ;
 FADE_OUT_DELTA_TABLE:                       ; [$d0e0]
-    db $10                                  ; [0]:
-    db $20                                  ; [1]:
-    db $30                                  ; [2]:
-    db $40                                  ; [3]:
+    .byte $10                               ; [0]:
+    .byte $20                               ; [1]:
+    .byte $30                               ; [2]:
+    .byte $40                               ; [3]:
 
 
 ;============================================================================
@@ -9211,7 +9212,7 @@ Area_LoadScrollDataRight:                   ; [$d127]
     STA Maybe_PlayerX_ForScroll
     LDA #$00
     STA Screen_ScrollPlayerTransitionCounter
-    LDA $d1e9,X
+    LDA SCREEN_MAYBE_PLAYERX_FOR_SCROLL_MODE_2_,X
     STA Maybe_PlayerY_ForScroll
     RTS
 
@@ -9220,16 +9221,16 @@ Area_LoadScrollDataRight:                   ; [$d127]
 ;     Area_LoadScrollDataRight
 ;
 SCREEN_MAYBE_PLAYERX_FOR_SCROLL_MODE:       ; [$d1e7]
-    db $00                                  ; [0]:
-    db $f0                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $f0                               ; [1]:
 
 ;
 ; XREFS:
 ;     Area_LoadScrollDataRight
 ;
 SCREEN_MAYBE_PLAYERX_FOR_SCROLL_MODE_2_:    ; [$d1e9]
-    db $00                                  ; [2]:
-    db $d0                                  ; [3]:
+    .byte $00                               ; [2]:
+    .byte $d0                               ; [3]:
 
 
 ;============================================================================
@@ -9537,9 +9538,9 @@ Area_LoadNextCompressedScreenBit:           ; [$d258]
 ;     Area_LoadBlocks
 ;
 BLOCK_DATA_OFFSETS_FOR_BIT_VALUES:          ; [$d273]
-    db $ff                                  ; [0]:
-    db $f0                                  ; [1]:
-    db $ef                                  ; [2]:
+    .byte $ff                               ; [0]:
+    .byte $f0                               ; [1]:
+    .byte $ef                               ; [2]:
 
 
 ;============================================================================
@@ -10184,15 +10185,15 @@ Screen_LoadBlockDataVert:                   ; [$d3ba]
     LDA #$01
     STA Screen_MaybeUnused_0075
     RTS
-    db $00                                  ; [0]:
+    .byte $00                               ; [0]:
 
 ;
 ; XREFS:
 ;     Screen_LoadBlockDataVert
 ;
 BYTE_ARRAY_PRG15_MIRROR__d4cb_1_:           ; [$d4cc]
-    db $00                                  ; [1]:
-    db $00,$08                              ; [$d4cd] byte
+    .byte $00                               ; [1]:
+    .byte $00,$08                           ; [$d4cd] byte
 
 ;
 ; XREFS:
@@ -10201,8 +10202,8 @@ BYTE_ARRAY_PRG15_MIRROR__d4cb_1_:           ; [$d4cc]
 ;     Screen_LoadBlocksHoriz
 ;
 SET_BLOCKS_TILEMAP_OFFSETS_L:               ; [$d4cf]
-    db $42                                  ; [0]:
-    db $42                                  ; [1]:
+    .byte $42                               ; [0]:
+    .byte $42                               ; [1]:
 
 ;
 ; XREFS:
@@ -10211,8 +10212,8 @@ SET_BLOCKS_TILEMAP_OFFSETS_L:               ; [$d4cf]
 ;     Screen_LoadBlocksHoriz
 ;
 SET_BLOCKS_TILEMAP_OFFSETS_U:               ; [$d4d1]
-    db $02                                  ; [0]:
-    db $02                                  ; [1]:
+    .byte $02                               ; [0]:
+    .byte $02                               ; [1]:
 
 
 ;============================================================================
@@ -10231,10 +10232,10 @@ SET_BLOCKS_TILEMAP_OFFSETS_U:               ; [$d4d1]
 ;     Screen_LoadBlocksHoriz
 ;
 BLOCK_ATTRS_BITMASKS:                       ; [$d4d3]
-    db $03                                  ; [0]: Mask bits 0 and 1
-    db $0c                                  ; [1]: Mask bits 2 and 3
-    db $30                                  ; [2]: Mask bits 4 and 5
-    db $c0                                  ; [3]: Mask bits 6 and 7
+    .byte $03                               ; [0]: Mask bits 0 and 1
+    .byte $0c                               ; [1]: Mask bits 2 and 3
+    .byte $30                               ; [2]: Mask bits 4 and 5
+    .byte $c0                               ; [3]: Mask bits 6 and 7
 
 
 ;============================================================================
@@ -10362,7 +10363,7 @@ Screen_LoadBlocksHoriz:                     ; [$d503]
     ADC SCROLL_HORIZ_END_POS,X
     STA Temp_00
     LDA PPU_ScrollScreenHoriz
-    ADC $d61b,X
+    ADC BYTE_ARRAY_PRG15_MIRROR__d61b,X
     STA Screen_Maybe_ScrollHorizDirection
     LDA Area_CurrentScreen
     STA MaybeUnused_006d
@@ -10661,16 +10662,16 @@ Screen_LoadBlocksHoriz:                     ; [$d503]
 ;     Screen_LoadBlocksHoriz
 ;
 SCROLL_HORIZ_END_POS:                       ; [$d619]
-    db $00                                  ; [0]:
-    db $ff                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $ff                               ; [1]:
 
 ;
 ; XREFS:
 ;     Screen_LoadBlocksHoriz
 ;
 BYTE_ARRAY_PRG15_MIRROR__d61b:              ; [$d61b]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
 
 ;============================================================================
 ; TODO: Document Screen_RunWriteScrollDataHandler
@@ -10725,20 +10726,20 @@ Screen_RunWriteScrollDataHandler:           ; [$d61d]
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_L:              ; [$d64c]
-    db <Screen_WriteScrollVertPPUTileData-1 ; [0]:
-    db $72                                  ; [1]:
-    db $98                                  ; [2]:
-    db $b0                                  ; [3]:
+    .byte <Screen_WriteScrollVertPPUTileData-1 ; [0]:
+    .byte $72                               ; [1]:
+    .byte $98                               ; [2]:
+    .byte $b0                               ; [3]:
 
 ;
 ; XREFS:
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_U:              ; [$d650]
-    db $d6                                  ; [0]:
-    db $d6                                  ; [1]:
-    db $d6                                  ; [2]:
-    db $d6                                  ; [3]:
+    .byte $d6                               ; [0]:
+    .byte $d6                               ; [1]:
+    .byte $d6                               ; [2]:
+    .byte $d6                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Screen_WriteScrollVertPPUTileData
@@ -10950,22 +10951,22 @@ Area_HandleBreakableFloor:                  ; [$d6ce]
 ;     Area_HandleBreakableFloor
 ;
 BREAKABLE_FLOOR_TRANSITIONS:                ; [$d6ef]
-    db $34                                  ; [0]:
+    .byte $34                               ; [0]:
 
 ;
 ; XREFS:
 ;     Area_HandleBreakableFloor
 ;
 BREAKABLE_FLOOR_TRANSITIONS_1_:             ; [$d6f0]
-    db $2c                                  ; [1]:
+    .byte $2c                               ; [1]:
 
 ;
 ; XREFS:
 ;     Area_HandleBreakableFloor
 ;
 BREAKABLE_FLOOR_TRANSITIONS_2_:             ; [$d6f1]
-    db $5c                                  ; [2]:
-    db $13                                  ; [3]:
+    .byte $5c                               ; [2]:
+    .byte $13                               ; [3]:
 
 
 ;============================================================================
@@ -10986,8 +10987,8 @@ BREAKABLE_FLOOR_TRANSITIONS_2_:             ; [$d6f1]
 ;     Area_SetBlocks_SetAttributes
 ;
 SET_BLOCKS_SCREEN_TILEMAP_ADDRS_U:          ; [$d6f3]
-    db $20                                  ; [0]: Screen 0
-    db $24                                  ; [1]: Screen 1
+    .byte $20                               ; [0]: Screen 0
+    .byte $24                               ; [1]: Screen 1
 
 
 ;============================================================================
@@ -11167,14 +11168,14 @@ Game_OpenPathToMascon:                      ; [$d6f5]
 ;     Game_OpenPathToMascon
 ;
 MASCON_FOUNTAIN_BLOCK_1_AIR:                ; [$d768]
-    db $42                                  ; Air
+    .byte $42                               ; Air
 
 ;
 ; XREFS:
 ;     Game_OpenPathToMascon
 ;
 MASCON_FOUNTAIN_BLOCK_2_AIR:                ; [$d769]
-    db $42                                  ; Air
+    .byte $42                               ; Air
 
 
 ;============================================================================
@@ -11189,14 +11190,14 @@ MASCON_FOUNTAIN_BLOCK_2_AIR:                ; [$d769]
 ;     Game_OpenPathToMascon
 ;
 MASCON_FOUNTAIN_BLOCK_1_STONE:              ; [$d76a]
-    db $88                                  ; Stone cover
+    .byte $88                               ; Stone cover
 
 ;
 ; XREFS:
 ;     Game_OpenPathToMascon
 ;
 MASCON_FOUNTAIN_BLOCK_2_STONE:              ; [$d76b]
-    db $88                                  ; Stone cover
+    .byte $88                               ; Stone cover
 
 
 ;============================================================================
@@ -11216,8 +11217,8 @@ MASCON_FOUNTAIN_BLOCK_2_STONE:              ; [$d76b]
 ;     Game_OpenPathToMascon
 ;
 GAME_LADDER_TO_MASCON_BLOCK_OFFSETS:        ; [$d76c]
-    db $01                                  ; [0]: X + 1
-    db $ff                                  ; [1]: Y + 1
+    .byte $01                               ; [0]: X + 1
+    .byte $ff                               ; [1]: Y + 1
 
 
 ;============================================================================
@@ -11340,7 +11341,7 @@ Game_DropLadderToMascon:                    ; [$d76e]
 ;     Game_DropLadderToMascon
 ;
 DROP_LADDER_TO_MASCON_LADDER_BLOCK:         ; [$d7af]
-    db $20                                  ; Ladder block
+    .byte $20                               ; Ladder block
 
 ;============================================================================
 ; TODO: Document SpriteBehavior_EnemyUnused18_SomethingSetBlocks
@@ -11738,20 +11739,20 @@ Area_SetBlocks_SetAttributes:               ; [$d82d]
 ;     Area_SetBlocks_SetAttributes
 ;
 SET_BLOCKS_TILE_CORNER_MASK:                ; [$d8a4]
-    db $03                                  ; [0]:
-    db $0c                                  ; [1]:
-    db $30                                  ; [2]:
-    db $c0                                  ; [3]:
+    .byte $03                               ; [0]:
+    .byte $0c                               ; [1]:
+    .byte $30                               ; [2]:
+    .byte $c0                               ; [3]:
 
 ;
 ; XREFS:
 ;     Area_SetBlocks_SetAttributes
 ;
 SET_BLOCKS_TILE_CORNER_MASK_INVERT:         ; [$d8a8]
-    db $fc                                  ; [0]:
-    db $f3                                  ; [1]:
-    db $cf                                  ; [2]:
-    db $3f                                  ; [3]:
+    .byte $fc                               ; [0]:
+    .byte $f3                               ; [1]:
+    .byte $cf                               ; [2]:
+    .byte $3f                               ; [3]:
 ;============================================================================
 ; TODO: Document Area_SetPPUAddrForBlockIndex
 ;
@@ -11790,7 +11791,7 @@ Area_SetPPUAddrForBlockIndex:               ; [$d8ac]
     AND #$01
     TAY
     LDA a:PPU_TargetAddr_U
-    ORA $d8ea,Y
+    ORA BYTE_ARRAY_PRG15_MIRROR__d8ea,Y
     STA a:PPU_TargetAddr_U
     LDA a:PPU_TargetAddr
     CLC
@@ -11806,8 +11807,8 @@ Area_SetPPUAddrForBlockIndex:               ; [$d8ac]
 ;     Area_SetPPUAddrForBlockIndex
 ;
 BYTE_ARRAY_PRG15_MIRROR__d8ea:              ; [$d8ea]
-    db $20                                  ; [0]:
-    db $24                                  ; [1]:
+    .byte $20                               ; [0]:
+    .byte $24                               ; [1]:
 
 
 ;============================================================================
@@ -12019,8 +12020,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ; Run IScript 0xFF via jump to IScripts_Begin.
     ;
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterIScriptFarJump:                    ; [$d996]
@@ -12033,8 +12034,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ; to Player_SetInitialExpAndGold.
     ;
     JSR MMC1_LoadBankAndJump                ; Run:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw Player_SetInitialExpAndGold-1        ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word Player_SetInitialExpAndGold-1     ; Address =
                                             ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$d9a0]
@@ -12280,14 +12281,14 @@ Player_DrawDeathAnimation:                  ; [$d9d6]
 ;     Player_DrawDeathAnimation
 ;
 DEATH_ANIMATION_DRAW_ADDR_LOWER:            ; [$da21]
-    db $00                                  ; [0]:
-    db $10                                  ; [1]:
-    db $20                                  ; [2]:
-    db $30                                  ; [3]:
-    db $40                                  ; [4]:
-    db $50                                  ; [5]:
-    db $60                                  ; [6]:
-    db $70                                  ; [7]:
+    .byte $00                               ; [0]:
+    .byte $10                               ; [1]:
+    .byte $20                               ; [2]:
+    .byte $30                               ; [3]:
+    .byte $40                               ; [4]:
+    .byte $50                               ; [5]:
+    .byte $60                               ; [6]:
+    .byte $70                               ; [7]:
 
 
 ;============================================================================
@@ -12667,12 +12668,12 @@ FUN_PRG15_MIRROR__daf6:                     ; [$daf6]
 ;     Game_SetupAndLoadOutsideArea
 ;
 DOOR_OUTSIDE_REGION_INDEXES:                ; [$dafe]
-    db AREA_EOLIS                           ; [0]: Eolis
-    db AREA_APOLUNE                         ; [1]: Trunk
-    db AREA_FOREPAW                         ; [2]: Mist
-    db AREA_CONFLATE                        ; [3]: Branch
-    db AREA_DAYBREAK                        ; [4]: Dartmoor
-    db AREA_EVIL_FORTRESS                   ; [5]: Evil Fortress
+    .byte AREA_EOLIS                        ; [0]: Eolis
+    .byte AREA_APOLUNE                      ; [1]: Trunk
+    .byte AREA_FOREPAW                      ; [2]: Mist
+    .byte AREA_CONFLATE                     ; [3]: Branch
+    .byte AREA_DAYBREAK                     ; [4]: Dartmoor
+    .byte AREA_EVIL_FORTRESS                ; [5]: Evil Fortress
 
 
 ;============================================================================
@@ -13634,14 +13635,14 @@ Game_SpawnInTemple:                         ; [$dd61]
 ;     Game_SpawnInTemple
 ;
 CURRENT_REGION_FOR_TEMPLE_SPAWN:            ; [$ddad]
-    db REGION_EOLIS                         ; [0]: First town
-    db REGION_BRANCH                        ; [1]: Apolune
-    db REGION_BRANCH                        ; [2]: Forepaw
-    db REGION_MIST                          ; [3]: Fog
-    db REGION_BRANCH                        ; [4]: Victim
-    db REGION_BRANCH                        ; [5]: Conflate
-    db REGION_BRANCH                        ; [6]: Daybreak
-    db REGION_BRANCH                        ; [7]: Final town
+    .byte REGION_EOLIS                      ; [0]: First town
+    .byte REGION_BRANCH                     ; [1]: Apolune
+    .byte REGION_BRANCH                     ; [2]: Forepaw
+    .byte REGION_MIST                       ; [3]: Fog
+    .byte REGION_BRANCH                     ; [4]: Victim
+    .byte REGION_BRANCH                     ; [5]: Conflate
+    .byte REGION_BRANCH                     ; [6]: Daybreak
+    .byte REGION_BRANCH                     ; [7]: Final town
 
 
 ;============================================================================
@@ -13656,14 +13657,14 @@ CURRENT_REGION_FOR_TEMPLE_SPAWN:            ; [$ddad]
 ;     Game_SpawnInTemple
 ;
 START_PLAYERPOSX_FULL_FOR_TEMPLE_SPAWN:     ; [$ddb5]
-    db $50                                  ; [0]: First town
-    db $50                                  ; [1]: Apolune
-    db $30                                  ; [2]: Forepaw
-    db $90                                  ; [3]: Fog
-    db $30                                  ; [4]: Victim
-    db $90                                  ; [5]: Conflate
-    db $60                                  ; [6]: Daybreak
-    db $30                                  ; [7]: Final town
+    .byte $50                               ; [0]: First town
+    .byte $50                               ; [1]: Apolune
+    .byte $30                               ; [2]: Forepaw
+    .byte $90                               ; [3]: Fog
+    .byte $30                               ; [4]: Victim
+    .byte $90                               ; [5]: Conflate
+    .byte $60                               ; [6]: Daybreak
+    .byte $30                               ; [7]: Final town
 
 
 ;============================================================================
@@ -13678,14 +13679,14 @@ START_PLAYERPOSX_FULL_FOR_TEMPLE_SPAWN:     ; [$ddb5]
 ;     Game_SpawnInTemple
 ;
 MAYBE_START_PLAYERPOSY_FOR_TEMPLE_SPAWN:    ; [$ddbd]
-    db $90                                  ; [0]: First town
-    db $90                                  ; [1]: Apolune
-    db $90                                  ; [2]: Forepaw
-    db $80                                  ; [3]: Fog
-    db $90                                  ; [4]: Victim
-    db $90                                  ; [5]: Conflate
-    db $90                                  ; [6]: Daybreak
-    db $90                                  ; [7]: Final town
+    .byte $90                               ; [0]: First town
+    .byte $90                               ; [1]: Apolune
+    .byte $90                               ; [2]: Forepaw
+    .byte $80                               ; [3]: Fog
+    .byte $90                               ; [4]: Victim
+    .byte $90                               ; [5]: Conflate
+    .byte $90                               ; [6]: Daybreak
+    .byte $90                               ; [7]: Final town
 
 
 ;============================================================================
@@ -13700,14 +13701,14 @@ MAYBE_START_PLAYERPOSY_FOR_TEMPLE_SPAWN:    ; [$ddbd]
 ;     Game_SpawnInTemple
 ;
 DEST_SCREEN_FOR_TEMPLE_SPAWN:               ; [$ddc5]
-    db $02                                  ; [0]: First town
-    db $0b                                  ; [1]: Apolune
-    db $10                                  ; [2]: Forepaw
-    db $1e                                  ; [3]: Fog
-    db $23                                  ; [4]: Victim
-    db $2b                                  ; [5]: Conflate
-    db $33                                  ; [6]: Daybreak
-    db $3c                                  ; [7]: Final town
+    .byte $02                               ; [0]: First town
+    .byte $0b                               ; [1]: Apolune
+    .byte $10                               ; [2]: Forepaw
+    .byte $1e                               ; [3]: Fog
+    .byte $23                               ; [4]: Victim
+    .byte $2b                               ; [5]: Conflate
+    .byte $33                               ; [6]: Daybreak
+    .byte $3c                               ; [7]: Final town
 
 
 ;============================================================================
@@ -13722,14 +13723,14 @@ DEST_SCREEN_FOR_TEMPLE_SPAWN:               ; [$ddc5]
 ;     Game_SpawnInTemple
 ;
 START_MAYBE_NEXT_AREA_FOR_TEMPLE_SPAWN:     ; [$ddcd]
-    db REGION_EOLIS                         ; [0]: First town
-    db REGION_TRUNK                         ; [1]: Apolune
-    db REGION_TRUNK                         ; [2]: Forepaw
-    db REGION_MIST                          ; [3]: Fog
-    db REGION_MIST                          ; [4]: Victim
-    db REGION_BRANCH                        ; [5]: Conflate
-    db REGION_BRANCH                        ; [6]: Daybreak
-    db REGION_DARTMOOR                      ; [7]: Final town
+    .byte REGION_EOLIS                      ; [0]: First town
+    .byte REGION_TRUNK                      ; [1]: Apolune
+    .byte REGION_TRUNK                      ; [2]: Forepaw
+    .byte REGION_MIST                       ; [3]: Fog
+    .byte REGION_MIST                       ; [4]: Victim
+    .byte REGION_BRANCH                     ; [5]: Conflate
+    .byte REGION_BRANCH                     ; [6]: Daybreak
+    .byte REGION_DARTMOOR                   ; [7]: Final town
 
 
 ;============================================================================
@@ -13744,14 +13745,14 @@ START_MAYBE_NEXT_AREA_FOR_TEMPLE_SPAWN:     ; [$ddcd]
 ;     Game_SpawnInTemple
 ;
 START_SCREEN_FOR_TEMPLE_SPAWN:              ; [$ddd5]
-    db $02                                  ; [0]: First town
-    db $01                                  ; [1]: Apolune
-    db $03                                  ; [2]: Forepaw
-    db $06                                  ; [3]: Fog
-    db $06                                  ; [4]: Victim
-    db $08                                  ; [5]: Conflate
-    db $0b                                  ; [6]: Daybreak
-    db $0c                                  ; [7]: Final town
+    .byte $02                               ; [0]: First town
+    .byte $01                               ; [1]: Apolune
+    .byte $03                               ; [2]: Forepaw
+    .byte $06                               ; [3]: Fog
+    .byte $06                               ; [4]: Victim
+    .byte $08                               ; [5]: Conflate
+    .byte $0b                               ; [6]: Daybreak
+    .byte $0c                               ; [7]: Final town
 
 
 ;============================================================================
@@ -14280,20 +14281,20 @@ Game_LoadCurrentArea:                       ; [$def5]
 ;     Game_LoadFirstLevel
 ;
 AREA_TO_SCREEN_DATA_BANKS:                  ; [$df34]
-    db BANK_0_AREA_DATA                     ; [0]: Eolis
-    db BANK_1_AREA_DATA                     ; [1]: Apolune
-    db BANK_0_AREA_DATA                     ; [2]: Forepaw
-    db BANK_0_AREA_DATA                     ; [3]: Mascon
+    .byte BANK_0_AREA_DATA                  ; [0]: Eolis
+    .byte BANK_1_AREA_DATA                  ; [1]: Apolune
+    .byte BANK_0_AREA_DATA                  ; [2]: Forepaw
+    .byte BANK_0_AREA_DATA                  ; [3]: Mascon
 
 ;
 ; XREFS:
 ;     Game_EnterBuilding
 ;
 AREA_TO_SCREEN_DATA_BANKS_4_:               ; [$df38]
-    db BANK_2_AREA_DATA                     ; [4]: Victim
-    db BANK_1_AREA_DATA                     ; [5]: Conflate
-    db BANK_2_AREA_DATA                     ; [6]: Daybreak
-    db BANK_2_AREA_DATA                     ; [7]: Evil Fortress
+    .byte BANK_2_AREA_DATA                  ; [4]: Victim
+    .byte BANK_1_AREA_DATA                  ; [5]: Conflate
+    .byte BANK_2_AREA_DATA                  ; [6]: Daybreak
+    .byte BANK_2_AREA_DATA                  ; [7]: Evil Fortress
 
 ;
 ; XREFS:
@@ -14303,20 +14304,20 @@ AREA_TO_SCREEN_DATA_BANKS_4_:               ; [$df38]
 ;     Game_LoadFirstLevel
 ;
 AREA_TO_BANK_OFFSET:                        ; [$df3c]
-    db BANK_0_AREA_DATA                     ; [0]: Eolis
-    db BANK_0_AREA_DATA                     ; [1]: Apolune
-    db BANK_1_AREA_DATA                     ; [2]: Forepaw
-    db BANK_2_AREA_DATA                     ; [3]: Mascon
+    .byte BANK_0_AREA_DATA                  ; [0]: Eolis
+    .byte BANK_0_AREA_DATA                  ; [1]: Apolune
+    .byte BANK_1_AREA_DATA                  ; [2]: Forepaw
+    .byte BANK_2_AREA_DATA                  ; [3]: Mascon
 
 ;
 ; XREFS:
 ;     Game_EnterBuilding
 ;
 AREA_TO_BANK_OFFSET_4_:                     ; [$df40]
-    db BANK_1_AREA_DATA                     ; [4]: Victim
-    db BANK_1_AREA_DATA                     ; [5]: Conflate
-    db BANK_0_AREA_DATA                     ; [6]: Daybreak
-    db BANK_2_AREA_DATA                     ; [7]: Evil Fortress
+    .byte BANK_1_AREA_DATA                  ; [4]: Victim
+    .byte BANK_1_AREA_DATA                  ; [5]: Conflate
+    .byte BANK_0_AREA_DATA                  ; [6]: Daybreak
+    .byte BANK_2_AREA_DATA                  ; [7]: Evil Fortress
 
 
 ;============================================================================
@@ -14337,14 +14338,14 @@ AREA_TO_BANK_OFFSET_4_:                     ; [$df40]
 ;     Game_LoadFirstLevel
 ;
 CURRENT_AREA_TO_TILES_INDEX_TABLE:          ; [$df44]
-    db $00                                  ; [0]: Eolis
-    db $02                                  ; [1]: First town
-    db $03                                  ; [2]:
-    db $05                                  ; [3]:
-    db $06                                  ; [4]:
-    db $01                                  ; [5]:
-    db $04                                  ; [6]:
-    db $04                                  ; [7]: Final boss room
+    .byte $00                               ; [0]: Eolis
+    .byte $02                               ; [1]: First town
+    .byte $03                               ; [2]:
+    .byte $05                               ; [3]:
+    .byte $06                               ; [4]:
+    .byte $01                               ; [5]:
+    .byte $04                               ; [6]:
+    .byte $04                               ; [7]: Final boss room
 
 
 ;============================================================================
@@ -14363,15 +14364,15 @@ CURRENT_AREA_TO_TILES_INDEX_TABLE:          ; [$df44]
 ;     Game_SpawnInTemple
 ;
 AREA_PALETTE_INDEXES:                       ; [$df4c]
-    db PALETTE_EOLIS                        ; [0]: Eolis
-    db PALETTE_OUTSIDE                      ; [1]:
-    db PALETTE_MIST                         ; [2]:
-    db PALETTE_TOWN                         ; [3]:
-    db PALETTE_TOWN                         ; [4]:
-    db PALETTE_BRANCH                       ; [5]:
-    db PALETTE_DARTMOOR                     ; [6]:
-    db PALETTE_EVIL_FORTRESS                ; [7]:
-    hex 00 00 00 00 00 00 00 00             ; [$df54] undefined
+    .byte PALETTE_EOLIS                     ; [0]: Eolis
+    .byte PALETTE_OUTSIDE                   ; [1]:
+    .byte PALETTE_MIST                      ; [2]:
+    .byte PALETTE_TOWN                      ; [3]:
+    .byte PALETTE_TOWN                      ; [4]:
+    .byte PALETTE_BRANCH                    ; [5]:
+    .byte PALETTE_DARTMOOR                  ; [6]:
+    .byte PALETTE_EVIL_FORTRESS             ; [7]:
+    .byte $00,$00,$00,$00,$00,$00,$00,$00   ; [$df54] undefined
 
 ;
 ; XREFS:
@@ -14381,14 +14382,14 @@ AREA_PALETTE_INDEXES:                       ; [$df4c]
 ;     Game_SpawnInTemple
 ;
 AREA_TO_MUSIC_TABLE:                        ; [$df5c]
-    db MUSIC_EOLIS                          ; [0]: Eolis
-    db MUSIC_APOLUNE                        ; [1]: Apolune
-    db MUSIC_FOREPAW                        ; [2]: Forepaw
-    db MUSIC_MASCON_VICTIM                  ; [3]: Mascon
-    db MUSIC_MASCON_VICTIM                  ; [4]: Victim
-    db MUSIC_CONFLATE                       ; [5]: Conflate
-    db MUSIC_DAYBREAK                       ; [6]: Daybreak
-    db MUSIC_EVIL_FORTRESS                  ; [7]: Evil Fortress
+    .byte MUSIC_EOLIS                       ; [0]: Eolis
+    .byte MUSIC_APOLUNE                     ; [1]: Apolune
+    .byte MUSIC_FOREPAW                     ; [2]: Forepaw
+    .byte MUSIC_MASCON_VICTIM               ; [3]: Mascon
+    .byte MUSIC_MASCON_VICTIM               ; [4]: Victim
+    .byte MUSIC_CONFLATE                    ; [5]: Conflate
+    .byte MUSIC_DAYBREAK                    ; [6]: Daybreak
+    .byte MUSIC_EVIL_FORTRESS               ; [7]: Evil Fortress
 
 ;============================================================================
 ; TODO: Document Game_EnterAreaHandler
@@ -14701,10 +14702,10 @@ RETURN_E011:                                ; [$e011]
 ;     Fog_UpdateTiles
 ;
 FOG_START_TILE_INDEXES:                     ; [$e012]
-    db $18                                  ; [0]:
-    db $06                                  ; [1]:
-    db $30                                  ; [2]:
-    db $0c                                  ; [3]:
+    .byte $18                               ; [0]:
+    .byte $06                               ; [1]:
+    .byte $30                               ; [2]:
+    .byte $0c                               ; [3]:
 
 
 ;============================================================================
@@ -14758,8 +14759,8 @@ GameLoop_CheckShowPlayerMenu:               ; [$e016]
     ; Open the inventory via jump to PlayerMenu_Show.
     ;
     JSR MMC1_LoadBankAndJump                ; Open the Player Menu.
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw PlayerMenu_Show-1                    ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word PlayerMenu_Show-1                 ; Address =
                                             ; PlayerMenu_Show
 
     ;
@@ -15406,10 +15407,10 @@ RETURN_E14F:                                ; [$e14f]
 ;     Player_CheckHandleAttack
 ;
 PLAYER_HIT_PHASES:                          ; [$e150]
-    db $08                                  ; [0]: 8 frames thrusting out
+    .byte $08                               ; [0]: 8 frames thrusting out
                                             ; weapon
-    db $03                                  ; [1]: 3 frames of waiting
-    db $08                                  ; [2]: 8 frames withdrawing
+    .byte $03                               ; [1]: 3 frames of waiting
+    .byte $08                               ; [2]: 8 frames withdrawing
                                             ; weapon
 
 
@@ -15921,8 +15922,8 @@ Player_TryMoveLeft:                         ; [$e220]
     LDA #$00
     STA Player_PosX_Block                   ; Set the X position to 0.
     RTS                                     ; And return.
-    db $00                                  ; [0]:
-    db $0f                                  ; [1]:
+    .byte $00                               ; [0]:
+    .byte $0f                               ; [1]:
 
 
 ;============================================================================
@@ -16019,7 +16020,7 @@ Player_UpdateAcceleration:                  ; [$e291]
     TAX
     LDA Player_MoveAcceleration
     CLC
-    ADC @_return+1,X
+    ADC BYTE_ARRAY_PRG15_MIRROR__e2c4,X
     STA Player_MoveAcceleration
     LDA Player_MoveAcceleration_U
     ADC #$00
@@ -16033,10 +16034,10 @@ Player_UpdateAcceleration:                  ; [$e291]
 ;     Player_UpdateAcceleration
 ;
 BYTE_ARRAY_PRG15_MIRROR__e2c4:              ; [$e2c4]
-    db $02                                  ; [0]:
-    db $04                                  ; [1]:
-    db $06                                  ; [2]:
-    db $08                                  ; [3]:
+    .byte $02                               ; [0]:
+    .byte $04                               ; [1]:
+    .byte $06                               ; [2]:
+    .byte $08                               ; [3]:
 
 ;============================================================================
 ; TODO: Document Player_CheckHandleClimb
@@ -16466,7 +16467,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
   @LAB_PRG15_MIRROR__e46b:                  ; [$e46b]
     LDA Player_PosY
     SEC
-    SBC $e4d6,X
+    SBC BYTE_ARRAY_PRG15_MIRROR__e4d6,X
     STA Player_PosY
     BCS @LAB_PRG15_MIRROR__e481
     LDY #$02
@@ -16499,7 +16500,7 @@ Player_ContinueHandleClimbOrJump:           ; [$e444]
   @LAB_PRG15_MIRROR__e4a2:                  ; [$e4a2]
     LDA Player_PosY
     CLC
-    ADC $e4d6,X
+    ADC BYTE_ARRAY_PRG15_MIRROR__e4d6,X
     STA Player_PosY
     LDX #$03
     JSR Player_CheckIfPassable
@@ -16569,38 +16570,38 @@ Maybe_SetPlayerForScrollUp:                 ; [$e4c9]
 ;     Player_ContinueHandleClimbOrJump
 ;
 BYTE_ARRAY_PRG15_MIRROR__e4d6:              ; [$e4d6]
-    db $08                                  ; [0]:
-    db $04                                  ; [1]:
-    db $04                                  ; [2]:
-    db $04                                  ; [3]:
-    db $04                                  ; [4]:
-    db $02                                  ; [5]:
-    db $02                                  ; [6]:
-    db $01                                  ; [7]:
-    db $01                                  ; [8]:
-    db $01                                  ; [9]:
-    db $01                                  ; [10]:
-    db $00                                  ; [11]:
-    db $00                                  ; [12]:
-    db $00                                  ; [13]:
-    db $00                                  ; [14]:
-    db $00                                  ; [15]:
-    db $00                                  ; [16]:
-    db $00                                  ; [17]:
-    db $00                                  ; [18]:
-    db $00                                  ; [19]:
-    db $00                                  ; [20]:
-    db $01                                  ; [21]:
-    db $01                                  ; [22]:
-    db $01                                  ; [23]:
-    db $01                                  ; [24]:
-    db $02                                  ; [25]:
-    db $02                                  ; [26]:
-    db $04                                  ; [27]:
-    db $04                                  ; [28]:
-    db $04                                  ; [29]:
-    db $04                                  ; [30]:
-    db $08                                  ; [31]:
+    .byte $08                               ; [0]:
+    .byte $04                               ; [1]:
+    .byte $04                               ; [2]:
+    .byte $04                               ; [3]:
+    .byte $04                               ; [4]:
+    .byte $02                               ; [5]:
+    .byte $02                               ; [6]:
+    .byte $01                               ; [7]:
+    .byte $01                               ; [8]:
+    .byte $01                               ; [9]:
+    .byte $01                               ; [10]:
+    .byte $00                               ; [11]:
+    .byte $00                               ; [12]:
+    .byte $00                               ; [13]:
+    .byte $00                               ; [14]:
+    .byte $00                               ; [15]:
+    .byte $00                               ; [16]:
+    .byte $00                               ; [17]:
+    .byte $00                               ; [18]:
+    .byte $00                               ; [19]:
+    .byte $00                               ; [20]:
+    .byte $01                               ; [21]:
+    .byte $01                               ; [22]:
+    .byte $01                               ; [23]:
+    .byte $01                               ; [24]:
+    .byte $02                               ; [25]:
+    .byte $02                               ; [26]:
+    .byte $04                               ; [27]:
+    .byte $04                               ; [28]:
+    .byte $04                               ; [29]:
+    .byte $04                               ; [30]:
+    .byte $08                               ; [31]:
 
 ;============================================================================
 ; TODO: Document Area_CheckCanClimbAdjacent
@@ -16628,7 +16629,7 @@ Area_CheckCanClimbAdjacent:                 ; [$e4f6]
   @LAB_PRG15_MIRROR__e503:                  ; [$e503]
     LDA Player_PosX_Block
     CLC
-    ADC $e524,X
+    ADC BYTE_PRG15_MIRROR__e524,X
     STA Arg_PixelPosX
     LDA Player_PosY
     CLC
@@ -16651,14 +16652,14 @@ Area_CheckCanClimbAdjacent:                 ; [$e4f6]
 ;     Area_CheckCanClimbAdjacent
 ;
 BYTE_PRG15_MIRROR__e524:                    ; [$e524]
-    db $00                                  ; [$e524] byte
+    .byte $00                               ; [$e524] byte
 
 ;
 ; XREFS:
 ;     Area_CheckCanClimbAdjacent
 ;
 BYTE_PRG15_MIRROR__e525:                    ; [$e525]
-    db $0f                                  ; [$e525] byte
+    .byte $0f                               ; [$e525] byte
 
 ;============================================================================
 ; TODO: Document Player_CheckHandleEnterDoor
@@ -16731,44 +16732,44 @@ Player_CheckHandleEnterDoor:                ; [$e526]
 ; match up palettes to the music that should play when
 ; switching screens.
 ;============================================================================
-    db PALETTE_OUTSIDE                      ; [0]:
-    db PALETTE_TOWER                        ; [1]:
-    db PALETTE_MIST                         ; [2]:
-    db PALETTE_SUFFER                       ; [3]:
-    db PALETTE_DARTMOOR                     ; [4]:
+    .byte PALETTE_OUTSIDE                   ; [0]:
+    .byte PALETTE_TOWER                     ; [1]:
+    .byte PALETTE_MIST                      ; [2]:
+    .byte PALETTE_SUFFER                    ; [3]:
+    .byte PALETTE_DARTMOOR                  ; [4]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
 Palette_ARRAY_PRG15_MIRROR__e569_5_:        ; [$e56e]
-    db PALETTE_FRATERNAL                    ; [5]:
+    .byte PALETTE_FRATERNAL                 ; [5]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
 Palette_ARRAY_PRG15_MIRROR__e569_6_:        ; [$e56f]
-    db PALETTE_KING_GRIEVES_ROOM            ; [6]:
-    db MUSIC_APOLUNE                        ; [0]:
-    db MUSIC_MAYBE_TOWER                    ; [1]:
-    db MUSIC_FOREPAW                        ; [2]:
-    db MUSIC_MAYBE_TOWER                    ; [3]:
-    db MUSIC_DAYBREAK                       ; [4]:
+    .byte PALETTE_KING_GRIEVES_ROOM         ; [6]:
+    .byte MUSIC_APOLUNE                     ; [0]:
+    .byte MUSIC_MAYBE_TOWER                 ; [1]:
+    .byte MUSIC_FOREPAW                     ; [2]:
+    .byte MUSIC_MAYBE_TOWER                 ; [3]:
+    .byte MUSIC_DAYBREAK                    ; [4]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
 Music_ARRAY_PRG15_MIRROR__e570_5_:          ; [$e575]
-    db MUSIC_MAYBE_TOWER                    ; [5]:
+    .byte MUSIC_MAYBE_TOWER                 ; [5]:
 
 ;
 ; XREFS:
 ;     Player_CheckHandleEnterDoor
 ;
 Music_ARRAY_PRG15_MIRROR__e570_6_:          ; [$e576]
-    db MUSIC_MAYBE_TOWER                    ; [6]:
+    .byte MUSIC_MAYBE_TOWER                 ; [6]:
 
 ;============================================================================
 ; TODO: Document Player_EnterDoorToInside
@@ -16872,70 +16873,70 @@ SUB_RETURN_E5DA:                            ; [$e5da]
 ;     Player_EnterDoorToOutside
 ;
 DOOR_LOOKUP_REQUIREMENTS:                   ; [$e5db]
-    db $00                                  ; [0]: No key required
-    db $04                                  ; [1]: "J" key required
-    db $00                                  ; [2]: No key required
-    db $03                                  ; [3]: "Q" key required
-    db $00                                  ; [4]: No key required
-    db $01                                  ; [5]: "A" key required
-    db $00                                  ; [6]: No key required
-    db $07                                  ; [7]: Ring of Dworf required
-    db $00                                  ; [8]: No key required
-    db $08                                  ; [9]: Demon's Ring required
-    db $00                                  ; [10]: No key required
-    db $00                                  ; [11]: No key required
+    .byte $00                               ; [0]: No key required
+    .byte $04                               ; [1]: "J" key required
+    .byte $00                               ; [2]: No key required
+    .byte $03                               ; [3]: "Q" key required
+    .byte $00                               ; [4]: No key required
+    .byte $01                               ; [5]: "A" key required
+    .byte $00                               ; [6]: No key required
+    .byte $07                               ; [7]: Ring of Dworf required
+    .byte $00                               ; [8]: No key required
+    .byte $08                               ; [9]: Demon's Ring required
+    .byte $00                               ; [10]: No key required
+    .byte $00                               ; [11]: No key required
 
 ;
 ; XREFS:
 ;     Player_EnterDoorToOutside
 ;
 MAYBE_REGION_TRANSITION_MAP:                ; [$e5e7]
-    db REGION_EOLIS                         ; [0]:
-    db REGION_TRUNK                         ; [1]:
-    db REGION_EOLIS                         ; [2]:
-    db REGION_MIST                          ; [3]:
-    db REGION_TRUNK                         ; [4]:
-    db REGION_BRANCH                        ; [5]:
-    db REGION_MIST                          ; [6]:
-    db REGION_DARTMOOR                      ; [7]:
-    db REGION_BRANCH                        ; [8]:
-    db REGION_EVIL_FORTRESS                 ; [9]:
-    db REGION_DARTMOOR                      ; [10]:
-    db REGION_EVIL_FORTRESS                 ; [11]:
+    .byte REGION_EOLIS                      ; [0]:
+    .byte REGION_TRUNK                      ; [1]:
+    .byte REGION_EOLIS                      ; [2]:
+    .byte REGION_MIST                       ; [3]:
+    .byte REGION_TRUNK                      ; [4]:
+    .byte REGION_BRANCH                     ; [5]:
+    .byte REGION_MIST                       ; [6]:
+    .byte REGION_DARTMOOR                   ; [7]:
+    .byte REGION_BRANCH                     ; [8]:
+    .byte REGION_EVIL_FORTRESS              ; [9]:
+    .byte REGION_DARTMOOR                   ; [10]:
+    .byte REGION_EVIL_FORTRESS              ; [11]:
 
 ;
 ; XREFS:
 ;     Player_EnterDoorToOutside
 ;
 MAYBE_SCREEN_TRANSITION_MAP:                ; [$e5f3]
-    db $00                                  ; [0]:
-    db $00                                  ; [1]:
-    db $08                                  ; [2]:
-    db $11                                  ; [3]:
-    db $28                                  ; [4]:
-    db $00                                  ; [5]:
-    db $1f                                  ; [6]:
-    db $00                                  ; [7]:
-    db $27                                  ; [8]:
-    db $08                                  ; [9]:
-    db $0e                                  ; [10]:
-    db $0e                                  ; [11]:
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $08                               ; [2]:
+    .byte $11                               ; [3]:
+    .byte $28                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $1f                               ; [6]:
+    .byte $00                               ; [7]:
+    .byte $27                               ; [8]:
+    .byte $08                               ; [9]:
+    .byte $0e                               ; [10]:
+    .byte $0e                               ; [11]:
 
 ;
 ; XREFS:
 ;     Player_EnterDoorToInside
 ;
 BUILDING_MUSIC:                             ; [$e5ff]
-    db MUSIC_KINGS_ROOM                     ; [0]: King's Room
-    db MUSIC_TEMPLE                         ; [1]: Temple
-    db MUSIC_SHOP                           ; [2]: Hospital
-    db MUSIC_SHOP                           ; [3]: Tavern
-    db MUSIC_SHOP                           ; [4]: Tool Shop
-    db MUSIC_SHOP                           ; [5]: Key Shop
-    db MUSIC_SHOP                           ; [6]: House
-    db MUSIC_SHOP                           ; [7]: Meat Shop
-    db MUSIC_SHOP                           ; [8]: Martial Arts
-    db MUSIC_SHOP                           ; [9]: Magic Shop
+    .byte MUSIC_KINGS_ROOM                  ; [0]: King's Room
+    .byte MUSIC_TEMPLE                      ; [1]: Temple
+    .byte MUSIC_SHOP                        ; [2]: Hospital
+    .byte MUSIC_SHOP                        ; [3]: Tavern
+    .byte MUSIC_SHOP                        ; [4]: Tool Shop
+    .byte MUSIC_SHOP                        ; [5]: Key Shop
+    .byte MUSIC_SHOP                        ; [6]: House
+    .byte MUSIC_SHOP                        ; [7]: Meat Shop
+    .byte MUSIC_SHOP                        ; [8]: Martial Arts
+    .byte MUSIC_SHOP                        ; [9]: Magic Shop
 
 
 ;============================================================================
@@ -16950,48 +16951,48 @@ BUILDING_MUSIC:                             ; [$e5ff]
 ;     Player_EnterDoorToInside
 ;
 BUILDING_PALETTES:                          ; [$e609]
-    db PALETTE_KINGS_ROOM                   ; [0]: King's Room
-    db PALETTE_TEMPLE                       ; [1]: Temple
-    db PALETTE_HOSPITAL                     ; [2]: Hospital
-    db PALETTE_TAVERN                       ; [3]: Tavern
-    db PALETTE_TOOL_SHOP                    ; [4]: Tool Shop
-    db PALETTE_KEY_SHOP                     ; [5]: Key Shop
-    db PALETTE_HOUSE                        ; [6]: House
-    db PALETTE_MEAT_SHOP                    ; [7]: Meat Shop
-    db PALETTE_MARTIAL_ARTS                 ; [8]: Martial Arts
-    db PALETTE_MAGIC_SHOP                   ; [9]: Magic Shop
+    .byte PALETTE_KINGS_ROOM                ; [0]: King's Room
+    .byte PALETTE_TEMPLE                    ; [1]: Temple
+    .byte PALETTE_HOSPITAL                  ; [2]: Hospital
+    .byte PALETTE_TAVERN                    ; [3]: Tavern
+    .byte PALETTE_TOOL_SHOP                 ; [4]: Tool Shop
+    .byte PALETTE_KEY_SHOP                  ; [5]: Key Shop
+    .byte PALETTE_HOUSE                     ; [6]: House
+    .byte PALETTE_MEAT_SHOP                 ; [7]: Meat Shop
+    .byte PALETTE_MARTIAL_ARTS              ; [8]: Martial Arts
+    .byte PALETTE_MAGIC_SHOP                ; [9]: Magic Shop
 
 ;
 ; XREFS:
 ;     Player_EnterDoorToInside
 ;
 BUILDING_MAYBE_TILES_INDEXES:               ; [$e613]
-    db $06                                  ; [0]: King's Room
-    db $06                                  ; [1]: Temple
-    db $06                                  ; [2]: Hospital
-    db $07                                  ; [3]: Tavern
-    db $07                                  ; [4]: Tool Shop
-    db $07                                  ; [5]: Key Shop
-    db $07                                  ; [6]: House
-    db $07                                  ; [7]: Meat Shop
-    db $08                                  ; [8]: Martial Arts
-    db $08                                  ; [9]: Magic Shop
+    .byte $06                               ; [0]: King's Room
+    .byte $06                               ; [1]: Temple
+    .byte $06                               ; [2]: Hospital
+    .byte $07                               ; [3]: Tavern
+    .byte $07                               ; [4]: Tool Shop
+    .byte $07                               ; [5]: Key Shop
+    .byte $07                               ; [6]: House
+    .byte $07                               ; [7]: Meat Shop
+    .byte $08                               ; [8]: Martial Arts
+    .byte $08                               ; [9]: Magic Shop
 
 ;
 ; XREFS:
 ;     Player_EnterDoorToInside
 ;
 BUILDING_START_POSITIONS:                   ; [$e61d]
-    db $9e                                  ; [0]: King's Room
-    db $9e                                  ; [1]: Temple
-    db $9e                                  ; [2]: Hospital
-    db $8e                                  ; [3]: Tavern
-    db $7e                                  ; [4]: Tool Shop
-    db $7e                                  ; [5]: Key Shop
-    db $7e                                  ; [6]: House
-    db $7e                                  ; [7]: Meat Shop
-    db $8e                                  ; [8]: Martial Arts
-    db $8e                                  ; [9]: Magic Shop
+    .byte $9e                               ; [0]: King's Room
+    .byte $9e                               ; [1]: Temple
+    .byte $9e                               ; [2]: Hospital
+    .byte $8e                               ; [3]: Tavern
+    .byte $7e                               ; [4]: Tool Shop
+    .byte $7e                               ; [5]: Key Shop
+    .byte $7e                               ; [6]: House
+    .byte $7e                               ; [7]: Meat Shop
+    .byte $8e                               ; [8]: Martial Arts
+    .byte $8e                               ; [9]: Magic Shop
 
 
 ;============================================================================
@@ -18126,24 +18127,24 @@ Area_GetBlockProperty:                      ; [$e8c6]
 ;     Area_GetFromImpassableMap
 ;
 BLOCK_PROPERTY_IMPASSABLE_MAP:              ; [$e8d9]
-    db $00                                  ; [0]: Air
-    db $01                                  ; [1]: Solid
-    db $00                                  ; [2]: Ladder
-    db $00                                  ; [3]: Door
-    db $00                                  ; [4]: Foreground
-    db $01                                  ; [5]: Breakable floor
-    db $01                                  ; [6]: Pushable
-    db $01                                  ; [7]: ??
-    db $01                                  ; [8]: ??
-    db $00                                  ; [9]: Maybe: Transition down
-    db $00                                  ; [10]: Maybe: Transition up
-    db $01                                  ; [11]: Breakable by Mattock
-    db $00                                  ; [12]: Area transition
+    .byte $00                               ; [0]: Air
+    .byte $01                               ; [1]: Solid
+    .byte $00                               ; [2]: Ladder
+    .byte $00                               ; [3]: Door
+    .byte $00                               ; [4]: Foreground
+    .byte $01                               ; [5]: Breakable floor
+    .byte $01                               ; [6]: Pushable
+    .byte $01                               ; [7]: ??
+    .byte $01                               ; [8]: ??
+    .byte $00                               ; [9]: Maybe: Transition down
+    .byte $00                               ; [10]: Maybe: Transition up
+    .byte $01                               ; [11]: Breakable by Mattock
+    .byte $00                               ; [12]: Area transition
                                             ; left-to-right
-    db $00                                  ; [13]: Area transition
+    .byte $00                               ; [13]: Area transition
                                             ; right-to-left
-    db $00                                  ; [14]: ??
-    db $00                                  ; [15]: ??
+    .byte $00                               ; [14]: ??
+    .byte $00                               ; [15]: ??
 
 
 ;============================================================================
@@ -18345,8 +18346,8 @@ Player_CheckOnBreakableBlock:               ; [$e905]
 ;     Player_CheckOnBreakableBlock
 ;============================================================================
   @_CHECK_BREAKABLE_BLOCK_X_OFFSETS:        ; [$e95b]
-    db $04                                  ; [0]: Facing left
-    db $0c                                  ; [1]: Facing right
+    .byte $04                               ; [0]: Facing left
+    .byte $0c                               ; [1]: Facing right
 
 ;============================================================================
 ; TODO: Document Player_CheckPushingBlock
@@ -18382,7 +18383,7 @@ Player_CheckPushingBlock:                   ; [$e95d]
     STA Arg_PixelPosY
     LDA Player_PosX_Block
     CLC
-    ADC $e9be,X
+    ADC BYTE_ARRAY_PRG15_MIRROR__e9be,X
     STA Arg_PixelPosX
 
 
@@ -18440,8 +18441,8 @@ Player_CheckPushingBlock:                   ; [$e95d]
 ;     Player_CheckPushingBlock
 ;
 BYTE_ARRAY_PRG15_MIRROR__e9be:              ; [$e9be]
-    db $ff                                  ; [0]:
-    db $10                                  ; [1]:
+    .byte $ff                               ; [0]:
+    .byte $10                               ; [1]:
 ;============================================================================
 ; TODO: Document Player_CheckSwitchScreen
 ;
@@ -18512,9 +18513,9 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
     LDA Area_CurrentArea
     ASL A
     TAX
-    LDA @_return+1,X
+    LDA USHORT_PRG15_MIRROR__ea37,X
     STA Temp_Addr_L
-    LDA $ea38,X
+    LDA USHORT_PRG15_MIRROR__ea37+1,X
     STA Temp_Addr_U
     LDY #$00
 
@@ -18550,24 +18551,24 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
 ;     Player_CheckSwitchScreen
 ;
 USHORT_PRG15_MIRROR__ea37:                  ; [$ea37]
-    dw BYTE_PRG15_MIRROR__ea4f              ; Eolis
-    dw BYTE_PRG15_MIRROR__ea47              ; Apolune
-    dw BYTE_PRG15_MIRROR__ea4f              ; Forepaw
-    dw BYTE_PRG15_MIRROR__ea4f              ; Mascon
-    dw BYTE_PRG15_MIRROR__ea4f              ; Victim
-    dw BYTE_PRG15_MIRROR__ea4f              ; Conflate
-    dw BYTE_PRG15_MIRROR__ea4f              ; Daybreak
-    dw BYTE_PRG15_MIRROR__ea4f              ; Evil Fortress
+    .word BYTE_PRG15_MIRROR__ea4f           ; Eolis
+    .word BYTE_PRG15_MIRROR__ea47           ; Apolune
+    .word BYTE_PRG15_MIRROR__ea4f           ; Forepaw
+    .word BYTE_PRG15_MIRROR__ea4f           ; Mascon
+    .word BYTE_PRG15_MIRROR__ea4f           ; Victim
+    .word BYTE_PRG15_MIRROR__ea4f           ; Conflate
+    .word BYTE_PRG15_MIRROR__ea4f           ; Daybreak
+    .word BYTE_PRG15_MIRROR__ea4f           ; Evil Fortress
 
 BYTE_PRG15_MIRROR__ea47:                    ; [$ea47]
-    db $0c                                  ; Current screen comparator
-    db $16                                  ; New screen index
-    db $b3                                  ; Y, X
-    db $06                                  ; Area
-    db $16                                  ; Current screen comparator
-    db $0c                                  ; New screen index
-    db $2d                                  ; Y, X
-    db $06                                  ; Area
+    .byte $0c                               ; Current screen comparator
+    .byte $16                               ; New screen index
+    .byte $b3                               ; Y, X
+    .byte $06                               ; Area
+    .byte $16                               ; Current screen comparator
+    .byte $0c                               ; New screen index
+    .byte $2d                               ; Y, X
+    .byte $06                               ; Area
 
 ;
 ; XREFS:
@@ -18575,7 +18576,7 @@ BYTE_PRG15_MIRROR__ea47:                    ; [$ea47]
 ;     [$PRG15_MIRROR::ea37]
 ;
 BYTE_PRG15_MIRROR__ea4f:                    ; [$ea4f]
-    db $ff                                  ; [$ea4f] byte
+    .byte $ff                               ; [$ea4f] byte
 
 
 ;============================================================================
@@ -18681,14 +18682,14 @@ Player_CheckSwitchScreen_SwitchAreaHoriz:   ; [$ea5f]
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;
 AREA_TOWN_TRANSITIONS_DATA:                 ; [$ea9c]
-    dw TOWN_TRANSITIONS_EMPTY               ; [0]: Eolis
-    dw TOWN_TRANSITIONS_APOLUNE             ; [1]: Apolune
-    dw TOWN_TRANSITIONS_FOREPAW             ; [2]: Forepaw
-    dw TOWN_TRANSITIONS_MASCON              ; [3]: Mascon
-    dw TOWN_TRANSITIONS_EMPTY               ; [4]: Victim
-    dw TOWN_TRANSITIONS_CONFLATE            ; [5]: Conflate
-    dw TOWN_TRANSITIONS_DAYBREAK            ; [6]: Daybreak
-    dw TOWN_TRANSITIONS_EMPTY               ; [7]: Evil Fortress
+    .word TOWN_TRANSITIONS_EMPTY            ; [0]: Eolis
+    .word TOWN_TRANSITIONS_APOLUNE          ; [1]: Apolune
+    .word TOWN_TRANSITIONS_FOREPAW          ; [2]: Forepaw
+    .word TOWN_TRANSITIONS_MASCON           ; [3]: Mascon
+    .word TOWN_TRANSITIONS_EMPTY            ; [4]: Victim
+    .word TOWN_TRANSITIONS_CONFLATE         ; [5]: Conflate
+    .word TOWN_TRANSITIONS_DAYBREAK         ; [6]: Daybreak
+    .word TOWN_TRANSITIONS_EMPTY            ; [7]: Evil Fortress
 
 ;
 ; XREFS:
@@ -18696,37 +18697,37 @@ AREA_TOWN_TRANSITIONS_DATA:                 ; [$ea9c]
 ;     [$PRG15_MIRROR::ea9e]
 ;
 TOWN_TRANSITIONS_APOLUNE:                   ; [$eaac]
-    db $00                                  ; [$eaac] byte
+    .byte $00                               ; [$eaac] byte
 
-    db AREA_MASCON
-    db $02,$92                              ; [$eaae] byte
+    .byte AREA_MASCON
+    .byte $02,$92                           ; [$eaae] byte
 
-    db PALETTE_TOWN
-    db $07                                  ; Entering Apolune from Trunk
+    .byte PALETTE_TOWN
+    .byte $07                               ; Entering Apolune from Trunk
                                             ; (screen 7)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $00                                  ;   |-> Screen index 0
-    db $92                                  ;   |-> Start position Y=9, X=2
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $08                                  ; [$eab6] byte
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $00                               ;   |-> Screen index 0
+    .byte $92                               ;   |-> Start position Y=9, X=2
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $08                               ; [$eab6] byte
 
-    db AREA_MASCON
-    db $01,$9e                              ; [$eab8] byte
+    .byte AREA_MASCON
+    .byte $01,$9e                           ; [$eab8] byte
 
-    db PALETTE_TOWN
-    db $1a                                  ; Entering Forepaw from Trunk
+    .byte PALETTE_TOWN
+    .byte $1a                               ; Entering Forepaw from Trunk
                                             ; (screen 26)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $02                                  ;   |-> Screen index 2
-    db $92                                  ;   |-> Start position X=2, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $1d                                  ; [$eac0] byte
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $02                               ;   |-> Screen index 2
+    .byte $92                               ;   |-> Start position X=2, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $1d                               ; [$eac0] byte
 
-    db AREA_MASCON
-    db $03,$9e                              ; [$eac2] byte
+    .byte AREA_MASCON
+    .byte $03,$9e                           ; [$eac2] byte
 
-    db PALETTE_TOWN
-    db $ff                                  ; [$eac5] byte
+    .byte PALETTE_TOWN
+    .byte $ff                               ; [$eac5] byte
 
 ;
 ; XREFS:
@@ -18734,79 +18735,79 @@ TOWN_TRANSITIONS_APOLUNE:                   ; [$eaac]
 ;     [$PRG15_MIRROR::eaa2]
 ;
 TOWN_TRANSITIONS_MASCON:                    ; [$eac6]
-    db $00                                  ; Exiting left from Apolune
+    .byte $00                               ; Exiting left from Apolune
                                             ; screen 0
-    db AREA_APOLUNE                         ;   |-> Switch to area 1
-    db $07                                  ;   |-> Screen index 6
-    db $7e                                  ;   |-> Start position Y=7, X=14
-    db PALETTE_OUTSIDE                      ;   '-> Palette 6
-    db $01                                  ; Exit right from Apolune screen
+    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte $07                               ;   |-> Screen index 6
+    .byte $7e                               ;   |-> Start position Y=7, X=14
+    .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
+    .byte $01                               ; Exit right from Apolune screen
                                             ; 1
-    db AREA_APOLUNE                         ;   |-> Switch to area 1
-    db $08                                  ;   |-> Screen index 8
-    db $71                                  ;   |-> Start position Y=7, X=1
-    db PALETTE_OUTSIDE                      ;   '-> Palette 6
-    db $02                                  ; Exiting left from Forepaw to
+    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte $08                               ;   |-> Screen index 8
+    .byte $71                               ;   |-> Start position Y=7, X=1
+    .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
+    .byte $02                               ; Exiting left from Forepaw to
                                             ; Trunk (screen 2)
-    db AREA_APOLUNE                         ;   |-> Switch to area 1
-    db $1a                                  ;   |-> Screen index 26
-    db $7e                                  ;   |-> Start position X=14, Y=7
-    db PALETTE_OUTSIDE                      ;   '-> Palette 6
-    db $03                                  ; Exiting right from Forepaw to
+    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte $1a                               ;   |-> Screen index 26
+    .byte $7e                               ;   |-> Start position X=14, Y=7
+    .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
+    .byte $03                               ; Exiting right from Forepaw to
                                             ; Branch (screen 3)
-    db AREA_APOLUNE                         ;   |-> Switch to area 3
-    db $1d                                  ;   |-> Screen index 29
-    db $71                                  ;   |-> Start position X=1, Y=7
-    db PALETTE_OUTSIDE                      ;   |-> Palette 6
-    db $04                                  ; Exiting left from Mascon to
+    .byte AREA_APOLUNE                      ;   |-> Switch to area 3
+    .byte $1d                               ;   |-> Screen index 29
+    .byte $71                               ;   |-> Start position X=1, Y=7
+    .byte PALETTE_OUTSIDE                   ;   |-> Palette 6
+    .byte $04                               ; Exiting left from Mascon to
                                             ; Mist (screen 4)
-    db AREA_FOREPAW                         ;   |-> Switch to area 2
-    db $09                                  ;   |-> Screen index 9
-    db $9e                                  ;   |-> Start position X=14, Y=9
-    db PALETTE_MIST                         ;   '-> Palette 10
-    db $05                                  ; Exiting right from Mascon to
+    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte $09                               ;   |-> Screen index 9
+    .byte $9e                               ;   |-> Start position X=14, Y=9
+    .byte PALETTE_MIST                      ;   '-> Palette 10
+    .byte $05                               ; Exiting right from Mascon to
                                             ; Mist (screen 5)
-    db AREA_FOREPAW                         ;   |-> Switch to area 2
-    db $0c                                  ;   |-> Screen index 12
-    db $91                                  ;   |-> Start position X=1, Y=9
-    db PALETTE_MIST                         ;   '-> Palette 10
-    db $06                                  ; Exit left from Victim to Mist
+    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte $0c                               ;   |-> Screen index 12
+    .byte $91                               ;   |-> Start position X=1, Y=9
+    .byte PALETTE_MIST                      ;   '-> Palette 10
+    .byte $06                               ; Exit left from Victim to Mist
                                             ; from screen 6
-    db AREA_FOREPAW                         ;   |-> Switch to area 2
-    db $22                                  ;   |-> Screen index 34
-    db $9e                                  ;   |-> Start position X=14, Y=9
-    db PALETTE_MIST                         ;   '-> Palette 10
-    db $07                                  ; Exit right from Victim to Mist
+    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte $22                               ;   |-> Screen index 34
+    .byte $9e                               ;   |-> Start position X=14, Y=9
+    .byte PALETTE_MIST                      ;   '-> Palette 10
+    .byte $07                               ; Exit right from Victim to Mist
                                             ; on screen 7
-    db AREA_FOREPAW                         ;   |-> Switch to area 7
-    db $25                                  ;   |-> Screen index = 37
-    db $91                                  ;   |-> Start position X=1, Y=9
-    db PALETTE_MIST                         ;   '-> Palette 10
-    db $08                                  ; Exit left from Conflate to
+    .byte AREA_FOREPAW                      ;   |-> Switch to area 7
+    .byte $25                               ;   |-> Screen index = 37
+    .byte $91                               ;   |-> Start position X=1, Y=9
+    .byte PALETTE_MIST                      ;   '-> Palette 10
+    .byte $08                               ; Exit left from Conflate to
                                             ; Branch
-    db AREA_CONFLATE                        ;   |-> Switch to area 5
-    db $0d                                  ;   |-> Screen index 13
-    db $7e                                  ;   |-> Start position X=14, Y=7
-    db PALETTE_BRANCH                       ;   '-> Palette 8
-    db $0a                                  ; Exit left from Daybreak to
+    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte $0d                               ;   |-> Screen index 13
+    .byte $7e                               ;   |-> Start position X=14, Y=7
+    .byte PALETTE_BRANCH                    ;   '-> Palette 8
+    .byte $0a                               ; Exit left from Daybreak to
                                             ; Branch
-    db AREA_CONFLATE                        ;   |-> Switch to area 5
-    db $23                                  ;   |-> Screen index 35
-    db $7e                                  ;   |-> Start position X=14, Y=7
-    db PALETTE_BRANCH                       ;   '-> Palette 8
-    db $0b                                  ; Exit right from Daybreak to
+    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte $23                               ;   |-> Screen index 35
+    .byte $7e                               ;   |-> Start position X=14, Y=7
+    .byte PALETTE_BRANCH                    ;   '-> Palette 8
+    .byte $0b                               ; Exit right from Daybreak to
                                             ; Branch
-    db AREA_CONFLATE                        ;   |-> Switch to area 5
-    db $24                                  ;   |-> Screen index 36
-    db $71                                  ;   |-> Start position X=1, Y=7
-    db PALETTE_BRANCH                       ;   '-> Palette 8
-    db $0c                                  ; Exit left from Dartmoor to
+    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte $24                               ;   |-> Screen index 36
+    .byte $71                               ;   |-> Start position X=1, Y=7
+    .byte PALETTE_BRANCH                    ;   '-> Palette 8
+    .byte $0c                               ; Exit left from Dartmoor to
                                             ; Branch (screen 12)
-    db AREA_DAYBREAK                        ;   |-> Switch to area 6
-    db $03                                  ;   |-> Screen index 3
-    db $7e                                  ;   |-> Start position X=14, Y=7
-    db PALETTE_DARTMOOR                     ;   '-> Palette 12
-    db $ff                                  ; [$eb02] byte
+    .byte AREA_DAYBREAK                     ;   |-> Switch to area 6
+    .byte $03                               ;   |-> Screen index 3
+    .byte $7e                               ;   |-> Start position X=14, Y=7
+    .byte PALETTE_DARTMOOR                  ;   '-> Palette 12
+    .byte $ff                               ; [$eb02] byte
 
 ;
 ; XREFS:
@@ -18814,31 +18815,31 @@ TOWN_TRANSITIONS_MASCON:                    ; [$eac6]
 ;     [$PRG15_MIRROR::eaa0]
 ;
 TOWN_TRANSITIONS_FOREPAW:                   ; [$eb03]
-    db $09                                  ; Entering Mascon from Mist
+    .byte $09                               ; Entering Mascon from Mist
                                             ; (screen 9)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $04                                  ;   |-> Screen index 4
-    db $91                                  ;   |-> Start position X=1, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $0c                                  ; Entering left to Mascon from
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $04                               ;   |-> Screen index 4
+    .byte $91                               ;   |-> Start position X=1, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $0c                               ; Entering left to Mascon from
                                             ; Mist
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $05                                  ;   |-> Screen index 5
-    db $9e                                  ;   |-> Start position X=14, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $22                                  ; Enering right to Victim from
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $05                               ;   |-> Screen index 5
+    .byte $9e                               ;   |-> Start position X=14, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $22                               ; Enering right to Victim from
                                             ; Mist (screen 34)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $06                                  ;   |-> Screen index 6
-    db $91                                  ;   |-> Start position X=1, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $25                                  ; Entering left to Victim from
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $06                               ;   |-> Screen index 6
+    .byte $91                               ;   |-> Start position X=1, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $25                               ; Entering left to Victim from
                                             ; Mist (screen 37)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $07                                  ;   |-> Screen index 7
-    db $9e                                  ;   |-> Start position X=14, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $ff                                  ; [$eb17] byte
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $07                               ;   |-> Screen index 7
+    .byte $9e                               ;   |-> Start position X=14, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $ff                               ; [$eb17] byte
 
 ;
 ; XREFS:
@@ -18846,25 +18847,25 @@ TOWN_TRANSITIONS_FOREPAW:                   ; [$eb03]
 ;     [$PRG15_MIRROR::eaa6]
 ;
 TOWN_TRANSITIONS_CONFLATE:                  ; [$eb18]
-    db $0d                                  ; Entering right to Conflate from
+    .byte $0d                               ; Entering right to Conflate from
                                             ; Branch (screen 13)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $08                                  ;   |-> Screen index 8
-    db $91                                  ;   |-> Start position X=1, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $23                                  ; Entering Daybreak from Branch
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $08                               ;   |-> Screen index 8
+    .byte $91                               ;   |-> Start position X=1, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $23                               ; Entering Daybreak from Branch
                                             ; (screen 35)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $0a                                  ;   |-> Screen index 10
-    db $92                                  ;   |-> Start position X=2, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $24                                  ; Entering Daybreak from Branch
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $0a                               ;   |-> Screen index 10
+    .byte $92                               ;   |-> Start position X=2, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $24                               ; Entering Daybreak from Branch
                                             ; (screen 36)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $0b                                  ;   |-> Screen index 11
-    db $9e                                  ;   |-> Start position X=14, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $ff                                  ; [$eb27] byte
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $0b                               ;   |-> Screen index 11
+    .byte $9e                               ;   |-> Start position X=14, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $ff                               ; [$eb27] byte
 
 ;
 ; XREFS:
@@ -18872,13 +18873,13 @@ TOWN_TRANSITIONS_CONFLATE:                  ; [$eb18]
 ;     [$PRG15_MIRROR::eaa8]
 ;
 TOWN_TRANSITIONS_DAYBREAK:                  ; [$eb28]
-    db $03                                  ; Entering right to Dartmoor from
+    .byte $03                               ; Entering right to Dartmoor from
                                             ; Branch (screen 3)
-    db AREA_MASCON                          ;   |-> Switch to area 3
-    db $0c                                  ;   |-> Screen index 12
-    db $92                                  ;   |-> Start position X=2, Y=9
-    db PALETTE_TOWN                         ;   '-> Palette 27
-    db $ff                                  ; [$eb2d] byte
+    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte $0c                               ;   |-> Screen index 12
+    .byte $92                               ;   |-> Start position X=2, Y=9
+    .byte PALETTE_TOWN                      ;   '-> Palette 27
+    .byte $ff                               ; [$eb2d] byte
 
 ;
 ; XREFS:
@@ -18890,7 +18891,7 @@ TOWN_TRANSITIONS_DAYBREAK:                  ; [$eb28]
 ;     [$PRG15_MIRROR::eaaa]
 ;
 TOWN_TRANSITIONS_EMPTY:                     ; [$eb2e]
-    db $ff                                  ; [$eb2e] byte
+    .byte $ff                               ; [$eb2e] byte
 
 
 ;============================================================================
@@ -18941,30 +18942,30 @@ Game_RunDoorRequirementHandler:             ; [$eb2f]
 ;     Game_RunDoorRequirementHandler
 ;
 DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:         ; [$eb3f]
-    db $3d                                  ; [0]: No key, return
+    .byte $3d                               ; [0]: No key, return
 
 ;
 ; XREFS:
 ;     Game_RunDoorRequirementHandler
 ;
-DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_0__1:    ; [$eb40]
-    db $eb                                  ; [0]:
-    db $50                                  ; [1]: "A" Key
-    db $eb                                  ; [1]:
-    db $60                                  ; [2]: "K" Key
-    db $eb                                  ; [2]:
-    db $70                                  ; [3]: "Q" Key
-    db $eb                                  ; [3]:
-    db $80                                  ; [4]: "J" Key
-    db $eb                                  ; [4]:
-    db $90                                  ; [5]: "Jo" Key
-    db $eb                                  ; [5]:
-    db $a0                                  ; [6]: Ring of Elf
-    db $eb                                  ; [6]:
-    db $b0                                  ; [7]: Ring of Dworf
-    db $eb                                  ; [7]:
-    db $c0                                  ; [8]: Demon's Ring
-    db $eb                                  ; [8]:
+DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_1:       ; [$eb40]
+    .byte $eb                               ; [0]:
+    .byte $50                               ; [1]: "A" Key
+    .byte $eb                               ; [1]:
+    .byte $60                               ; [2]: "K" Key
+    .byte $eb                               ; [2]:
+    .byte $70                               ; [3]: "Q" Key
+    .byte $eb                               ; [3]:
+    .byte $80                               ; [4]: "J" Key
+    .byte $eb                               ; [4]:
+    .byte $90                               ; [5]: "Jo" Key
+    .byte $eb                               ; [5]:
+    .byte $a0                               ; [6]: Ring of Elf
+    .byte $eb                               ; [6]:
+    .byte $b0                               ; [7]: Ring of Dworf
+    .byte $eb                               ; [7]:
+    .byte $c0                               ; [8]: Demon's Ring
+    .byte $eb                               ; [8]:
 
 
 ;============================================================================
@@ -19002,8 +19003,8 @@ Game_OpenDoorWithAKey:                      ; [$eb51]
     LDA #$7d                                ; 0x7D == "A" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb60]
@@ -19045,8 +19046,8 @@ Game_OpenDoorWithKKey:                      ; [$eb61]
     LDA #$7c                                ; 0x7C == "K" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb70]
@@ -19088,8 +19089,8 @@ Game_OpenDoorWithQKey:                      ; [$eb71]
     LDA #$7b                                ; 0x7B == "Q" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb80]
@@ -19131,8 +19132,8 @@ Game_OpenDoorWithJKey:                      ; [$eb81]
     LDA #$02                                ; 0x02 == "J" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb90]
@@ -19174,8 +19175,8 @@ Game_OpenDoorWithJoKey:                     ; [$eb91]
     LDA #$7e                                ; 0x7E == "Jo" Key required
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eba0]
@@ -19216,8 +19217,8 @@ Game_OpenDoorWithRingOfElf:                 ; [$eba1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebb0]
@@ -19258,8 +19259,8 @@ Game_OpenDoorWithRingOfDworf:               ; [$ebb1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebc0]
@@ -19300,8 +19301,8 @@ Game_OpenDoorWithDemonsRing:                ; [$ebc1]
     ;
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd0]
@@ -19328,8 +19329,8 @@ Game_UnlockDoorWithUsableItem:              ; [$ebd1]
     ;
     LDA #$84                                ; 0x84 == Used key IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw IScripts_Begin-1                     ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd9]
@@ -19452,14 +19453,14 @@ Player_DrawBody:                            ; [$ebee]
 ;     Player_DrawBody
 ;
 PLAYER_BODY_TILEINFO_START_OFFSETS:         ; [$ec49]
-    db $00                                  ; [0]: Leather Armor
-    db $08                                  ; [1]: Leather Armor + Shield
-    db $10                                  ; [2]: Studded Mail
-    db $18                                  ; [3]: Studded Mail + Shield
-    db $20                                  ; [4]: Full Plate
-    db $28                                  ; [5]: Full Plate + Shield
-    db $30                                  ; [6]: Battle Suit
-    db $38                                  ; [7]: Battle Suit + Shield
+    .byte $00                               ; [0]: Leather Armor
+    .byte $08                               ; [1]: Leather Armor + Shield
+    .byte $10                               ; [2]: Studded Mail
+    .byte $18                               ; [3]: Studded Mail + Shield
+    .byte $20                               ; [4]: Full Plate
+    .byte $28                               ; [5]: Full Plate + Shield
+    .byte $30                               ; [6]: Battle Suit
+    .byte $38                               ; [7]: Battle Suit + Shield
 
 ;============================================================================
 ; TODO: Document Player_SetFacingLeft
@@ -19504,7 +19505,7 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     INY
 
   @LAB_PRG15_MIRROR__ec6b:                  ; [$ec6b]
-    LDA @_return+1,Y
+    LDA BYTE_ARRAY_PRG15_MIRROR__eca2,Y
     JSR $b880
     LDA Player_PosX_Block
     CLC
@@ -19530,7 +19531,7 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
     TYA
     ORA Temp_00
     TAY
-    LDA $eca4,Y
+    LDA BYTE_ARRAY_PRG15_MIRROR__eca4,Y
     JMP Sprite_SetPlayerAppearanceAddr
 
   @_return:                                 ; [$eca1]
@@ -19541,28 +19542,28 @@ FUN_PRG15_MIRROR__ec58:                     ; [$ec58]
 ;     FUN_PRG15_MIRROR__ec58
 ;
 BYTE_ARRAY_PRG15_MIRROR__eca2:              ; [$eca2]
-    db $f8                                  ; [0]:
+    .byte $f8                               ; [0]:
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__ec58
 ;
 BYTE_ARRAY_PRG15_MIRROR__eca2_1_:           ; [$eca3]
-    db $10                                  ; [1]:
+    .byte $10                               ; [1]:
 
 ;
 ; XREFS:
 ;     FUN_PRG15_MIRROR__ec58
 ;
 BYTE_ARRAY_PRG15_MIRROR__eca4:              ; [$eca4]
-    db $63                                  ; [0]: Leather Armor
-    db $67                                  ; [1]: Leather Armor + Shield
-    db $64                                  ; [2]: Studded Mail
-    db $68                                  ; [3]: Studded Mail + Shield
-    db $65                                  ; [4]: Full Plate
-    db $69                                  ; [5]: Full Plate + Shield
-    db $66                                  ; [6]: Battle Suit
-    db $6a                                  ; [7]: Battle Suit + Shield
+    .byte $63                               ; [0]: Leather Armor
+    .byte $67                               ; [1]: Leather Armor + Shield
+    .byte $64                               ; [2]: Studded Mail
+    .byte $68                               ; [3]: Studded Mail + Shield
+    .byte $65                               ; [4]: Full Plate
+    .byte $69                               ; [5]: Full Plate + Shield
+    .byte $66                               ; [6]: Battle Suit
+    .byte $6a                               ; [7]: Battle Suit + Shield
 
 ;============================================================================
 ; TODO: Document Player_GetBodySpriteFrameOffset
@@ -19602,7 +19603,7 @@ Player_GetBodySpriteFrameOffset:            ; [$ecac]
 
   @LAB_PRG15_MIRROR__eccc:                  ; [$eccc]
     LDX PlayerHitsPhaseCounter
-    LDA $ecf3,X
+    LDA BYTE_ARRAY_PRG15_MIRROR__ecf3,X
     RTS
 
   @LAB_PRG15_MIRROR__ecd2:                  ; [$ecd2]
@@ -19625,7 +19626,7 @@ Player_GetBodySpriteFrameOffset:            ; [$ecac]
 
   @LAB_PRG15_MIRROR__ecea:                  ; [$ecea]
     TAX
-    LDA $ecef,X
+    LDA BYTE_ARRAY_PRG15_MIRROR__ecef,X
     RTS
 
 ;
@@ -19633,19 +19634,19 @@ Player_GetBodySpriteFrameOffset:            ; [$ecac]
 ;     Player_GetBodySpriteFrameOffset
 ;
 BYTE_ARRAY_PRG15_MIRROR__ecef:              ; [$ecef]
-    db $00                                  ; [0]:
-    db $01                                  ; [1]:
-    db $02                                  ; [2]:
-    db $01                                  ; [3]:
+    .byte $00                               ; [0]:
+    .byte $01                               ; [1]:
+    .byte $02                               ; [2]:
+    .byte $01                               ; [3]:
 
 ;
 ; XREFS:
 ;     Player_GetBodySpriteFrameOffset
 ;
 BYTE_ARRAY_PRG15_MIRROR__ecf3:              ; [$ecf3]
-    db $04                                  ; [0]:
-    db $05                                  ; [1]:
-    db $06                                  ; [2]:
+    .byte $04                               ; [0]:
+    .byte $05                               ; [1]:
+    .byte $06                               ; [2]:
 
 
 ;============================================================================
@@ -20010,17 +20011,17 @@ Player_LoadArmorTilesToPPU:                 ; [$ed72]
 ;     Player_LoadArmorTilesToPPU
 ;
 PLAYER_ARMOR_TILE_COUNTS:                   ; [$ed95]
-    db $33                                  ; [0]: Leather Armor (51 tiles)
-    db $27                                  ; [1]: Leather Armor + Shield (39
+    .byte $33                               ; [0]: Leather Armor (51 tiles)
+    .byte $27                               ; [1]: Leather Armor + Shield (39
                                             ; tiles)
-    db $33                                  ; [2]: Studded Mail (51 tiles)
-    db $27                                  ; [3]: Studded Mail + Shield (39
+    .byte $33                               ; [2]: Studded Mail (51 tiles)
+    .byte $27                               ; [3]: Studded Mail + Shield (39
                                             ; tiles)
-    db $34                                  ; [4]: Full Plate (52 tiles)
-    db $28                                  ; [5]: Full Plate + Shield (40
+    .byte $34                               ; [4]: Full Plate (52 tiles)
+    .byte $28                               ; [5]: Full Plate + Shield (40
                                             ; tiles)
-    db $32                                  ; [6]: Battle Helmet (50 tiles)
-    db $32                                  ; [7]: Battle Helmet + Shield (50
+    .byte $32                               ; [6]: Battle Helmet (50 tiles)
+    .byte $32                               ; [7]: Battle Helmet + Shield (50
                                             ; tiles)
 
 
@@ -20113,10 +20114,10 @@ Player_LoadWeaponTilesToPPU:                ; [$ed9d]
 ;     Player_LoadWeaponTilesToPPU
 ;
 PLAYER_WEAPON_TILE_COUNTS:                  ; [$edc1]
-    db $02                                  ; [0]: Dagger
-    db $05                                  ; [1]: Long Sword
-    db $06                                  ; [2]: Giant Blade
-    db $08                                  ; [3]: Dragon Slayer
+    .byte $02                               ; [0]: Dagger
+    .byte $05                               ; [1]: Long Sword
+    .byte $06                               ; [2]: Giant Blade
+    .byte $08                               ; [3]: Dragon Slayer
 
 
 ;============================================================================
@@ -20131,10 +20132,10 @@ PLAYER_WEAPON_TILE_COUNTS:                  ; [$edc1]
 ;     Player_LoadWeaponTilesToPPU
 ;
 PLAYER_WEAPON_TILE_PPU_ADDRS:               ; [$edc5]
-    dw $0380                                ; [0]: Dagger
-    dw $0380                                ; [1]: Long Sword
-    dw $0380                                ; [2]: Giant Blade
-    dw $0340                                ; [3]: Dragon Slayer
+    .word $0380                             ; [0]: Dagger
+    .word $0380                             ; [1]: Long Sword
+    .word $0380                             ; [2]: Giant Blade
+    .word $0340                             ; [3]: Dragon Slayer
 
 
 ;============================================================================
@@ -21068,21 +21069,21 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 ;     GameLoop_RunScreenEventHandlers
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
-    db $68                                  ; [0]: Handle pushable block on
+    .byte $68                               ; [0]: Handle pushable block on
                                             ; path to Mascon.
 
 ;
 ; XREFS:
 ;     GameLoop_RunScreenEventHandlers
 ;
-SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_0__1:     ; [$ef64]
-    db $ef                                  ; [0]:
-    db $9d                                  ; [1]: Handle a standard boss
+SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_1:        ; [$ef64]
+    .byte $ef                               ; [0]:
+    .byte $9d                               ; [1]: Handle a standard boss
                                             ; battle.
-    db $ef                                  ; [1]:
-    db $d3                                  ; [2]: Handle end-game sequence
+    .byte $ef                               ; [1]:
+    .byte $d3                               ; [2]: Handle end-game sequence
                                             ; after killing the final boss.
-    db $ef                                  ; [2]:
+    .byte $ef                               ; [2]:
 
 
 ;============================================================================
@@ -21457,7 +21458,7 @@ Sprites_HasBoss:                            ; [$eff8]
   @_loop:                                   ; [$effa]
     LDY CurrentSprites_Entities,X           ; Load the sprite entity at that
                                             ; index.
-    LDA $b544,Y                             ; Load the category for the
+    LDA SPRITE_CATEGORIES_BY_ENTITY,Y       ; Load the category for the
                                             ; entity.
     CMP #$07                                ; Is it 7 (boss)?
     BNE @_notBoss                           ; If not, jump.
@@ -22284,7 +22285,7 @@ Sprite_Draw_FlippedHoriz:                   ; [$f181]
     AND #$01
     TAY
     LDA MovingSpriteVisibility
-    AND $f226,Y
+    AND BYTE_ARRAY_PRG15_MIRROR__f226,Y
     BEQ @LAB_PRG15_MIRROR__f205
     LDA Temp_01
     ORA #$20
@@ -22317,16 +22318,16 @@ Sprite_Draw_FlippedHoriz:                   ; [$f181]
 ;     Sprite_Draw_Standard
 ;
 DRAW_SPRITE_VISIBILITY_MASK:                ; [$f224]
-    db $01                                  ; [0]: Trailing visibility
-    db $02                                  ; [1]: Leading visibility
+    .byte $01                               ; [0]: Trailing visibility
+    .byte $02                               ; [1]: Leading visibility
 
 ;
 ; XREFS:
 ;     Sprite_Draw_FlippedHoriz
 ;
 BYTE_ARRAY_PRG15_MIRROR__f226:              ; [$f226]
-    db $02                                  ; [0]:
-    db $01                                  ; [1]:
+    .byte $02                               ; [0]:
+    .byte $01                               ; [1]:
 
 
 ;============================================================================
@@ -22395,22 +22396,22 @@ Sprites_IncNextSpriteSlot:                  ; [$f228]
 ;     Sprite_Draw_Standard
 ;
 SPRITE_TILE_BLOCK_POSITIONS:                ; [$f23d]
-    db $00                                  ; [0]:
-    db $08                                  ; [1]:
-    db $10                                  ; [2]:
-    db $18                                  ; [3]:
-    db $20                                  ; [4]:
-    db $28                                  ; [5]:
-    db $30                                  ; [6]:
-    db $38                                  ; [7]:
-    db $40                                  ; [8]:
-    db $48                                  ; [9]:
-    db $50                                  ; [10]:
-    db $58                                  ; [11]:
-    db $60                                  ; [12]:
-    db $68                                  ; [13]:
-    db $70                                  ; [14]:
-    db $78                                  ; [15]:
+    .byte $00                               ; [0]:
+    .byte $08                               ; [1]:
+    .byte $10                               ; [2]:
+    .byte $18                               ; [3]:
+    .byte $20                               ; [4]:
+    .byte $28                               ; [5]:
+    .byte $30                               ; [6]:
+    .byte $38                               ; [7]:
+    .byte $40                               ; [8]:
+    .byte $48                               ; [9]:
+    .byte $50                               ; [10]:
+    .byte $58                               ; [11]:
+    .byte $60                               ; [12]:
+    .byte $68                               ; [13]:
+    .byte $70                               ; [14]:
+    .byte $78                               ; [15]:
 
 
 ;============================================================================
@@ -22552,9 +22553,9 @@ IScripts_ClearPortraitImage:                ; [$f281]
     ; (from bank 15).
     ;
     JSR MMC1_LoadBankAndJump                ; Load sprite imagesin bank 14.
-    db BANK_14_LOGIC                        ; Bank = 14 Address =
+    .byte BANK_14_LOGIC                     ; Bank = 14 Address =
                                             ; GameLoop_LoadSpriteImages
-    dw GameLoop_LoadSpriteImages-1          ; GameLoop_LoadSpriteImages
+    .word GameLoop_LoadSpriteImages-1       ; GameLoop_LoadSpriteImages
                                             ; [$PRG15_MIRROR::f296]
 
   @_afterFarJump:                           ; [$f298]
@@ -22706,8 +22707,8 @@ IScripts_GetPortraitOffset:                 ; [$f2d5]
 ;     IScripts_DrawPortraitAnimationFrame
 ;
 PORTRAIT_EYE_APPEARANCE_OFFSETS:            ; [$f2df]
-    db $01                                  ; [0]:
-    db $02                                  ; [1]:
+    .byte $01                               ; [0]:
+    .byte $02                               ; [1]:
 
 
 ;============================================================================
@@ -22722,8 +22723,8 @@ PORTRAIT_EYE_APPEARANCE_OFFSETS:            ; [$f2df]
 ;     IScripts_DrawPortraitAnimationFrame
 ;
 PORTRAIT_MOUTH_APPEARANCE_OFFSETS:          ; [$f2e1]
-    db $03                                  ; [0]:
-    db $04                                  ; [1]:
+    .byte $03                               ; [0]:
+    .byte $04                               ; [1]:
 
 
 ;============================================================================
@@ -23080,37 +23081,37 @@ SoundEffect_SetCurrent:                     ; [$f36f]
 ;     SoundEffect_SetCurrent
 ;
 SOUND_PRIORITIES:                           ; [$f388]
-    db $00                                  ; [0]:
-    db $08                                  ; [1]:
-    db $15                                  ; [2]: Hit enemy with weapon
-    db $14                                  ; [3]: Enemy is dead
-    db $04                                  ; [4]: Player hit
-    db $19                                  ; [5]: Magic
-    db $0b                                  ; [6]: Open door
-    db $0d                                  ; [7]:
-    db $10                                  ; [8]: Item picked up
-    db $11                                  ; [9]: Touched coin
-    db $17                                  ; [10]: Cast magic hit an
+    .byte $00                               ; [0]:
+    .byte $08                               ; [1]:
+    .byte $15                               ; [2]: Hit enemy with weapon
+    .byte $14                               ; [3]: Enemy is dead
+    .byte $04                               ; [4]: Player hit
+    .byte $19                               ; [5]: Magic
+    .byte $0b                               ; [6]: Open door
+    .byte $0d                               ; [7]:
+    .byte $10                               ; [8]: Item picked up
+    .byte $11                               ; [9]: Touched coin
+    .byte $17                               ; [10]: Cast magic hit an
                                             ; obstacle
-    db $09                                  ; [11]: Cursor moved
-    db $13                                  ; [12]: Text input
-    db $0a                                  ; [13]:
-    db $07                                  ; [14]: Password character
+    .byte $09                               ; [11]: Cursor moved
+    .byte $13                               ; [12]: Text input
+    .byte $0a                               ; [13]:
+    .byte $07                               ; [14]: Password character
                                             ; entered
-    db $0c                                  ; [15]: Block pushed
-    db $12                                  ; [16]: Coin dropped
-    db $0f                                  ; [17]:
-    db $0e                                  ; [18]:
-    db $06                                  ; [19]: Filling HP or MP
-    db $18                                  ; [20]: Tilte magic cast
-    db $04                                  ; [21]: Player taking step
-    db $01                                  ; [22]:
-    db $02                                  ; [23]:
-    db $03                                  ; [24]:
-    db $05                                  ; [25]: Gold changed
-    db $03                                  ; [26]: Item used
-    db $10                                  ; [27]: Touched meat
-    db $02                                  ; [28]:
+    .byte $0c                               ; [15]: Block pushed
+    .byte $12                               ; [16]: Coin dropped
+    .byte $0f                               ; [17]:
+    .byte $0e                               ; [18]:
+    .byte $06                               ; [19]: Filling HP or MP
+    .byte $18                               ; [20]: Tilte magic cast
+    .byte $04                               ; [21]: Player taking step
+    .byte $01                               ; [22]:
+    .byte $02                               ; [23]:
+    .byte $03                               ; [24]:
+    .byte $05                               ; [25]: Gold changed
+    .byte $03                               ; [26]: Item used
+    .byte $10                               ; [27]: Touched meat
+    .byte $02                               ; [28]:
 
 
 ;============================================================================
@@ -23187,8 +23188,8 @@ PPU_LoadGlyphsForStrings:                   ; [$f3a5]
 ;     Sprites_LoadSpriteValue
 ;     TextBox_LoadAndShowMessage
 ;     TextBox_LoadItemSourceTiles
-;     TextBox_Maybe_WriteLineOfChars
 ;     TextBox_ShowNextChar
+;     TextBox_WriteChar
 ;     UI_DrawSelectedItem
 ;============================================================================
 MMC1_UpdatePRGBankToStackA:                 ; [$f3d6]
@@ -23288,7 +23289,7 @@ IScripts_LoadAndShowMessage:                ; [$f3e9]
 ;     Message_ProcessedLength:
 ;         The length of the message string.
 ;
-;     Maybe_MessageCharPos:
+;     TextBox_Timer:
 ;         The starting message character position (0).
 ;
 ;     Message_StartAddr+1:
@@ -23354,7 +23355,7 @@ Messages_Load:                              ; [$f3f5]
     ;
     LDY #$00                                ; Y = 0 (start of our lookup
                                             ; offset)
-    STY a:Maybe_MessageCharPos              ; Set start character pos to 0
+    STY a:TextBox_Timer                     ; Set start character pos to 0
 
 
     ;
@@ -23542,11 +23543,11 @@ TextBox_ClearShopSizeAtOffset_return:       ; [$f465]
 ;     CurrentROMBank:
 ;         The current ROM bank.
 ;
-;     Maybe_MessageCharPos:
+;     TextBox_Timer:
 ;         The current message character position.
 ;
 ; OUTPUTS:
-;     Maybe_MessageCharPos:
+;     TextBox_Timer:
 ;         The incremented position.
 ;
 ;     TextBox_PlayTextSound:
@@ -23579,7 +23580,7 @@ TextBox_ShowNextChar:                       ; [$f466]
     ;
     ; Show the next character.
     ;
-    INC a:Maybe_MessageCharPos              ; Increment the next character
+    INC a:TextBox_Timer                     ; Increment the next character
                                             ; position.
     LDA #$01                                ; A = 1
     STA a:TextBox_PlayTextSound             ; Store it.
@@ -23643,7 +23644,7 @@ Maybe_TextBox_ShowCurrentMessageID:         ; [$f491]
     BEQ TextBox_ClearShopSizeAtOffset_return ; If unset, return.
     LDA a:TextBox_MessagePaused
     BNE TextBox_ClearShopSizeAtOffset_return
-    LDA a:Maybe_MessageCharPos              ; Load the character position to
+    LDA a:TextBox_Timer                     ; Load the character position to
                                             ; display.
     AND #$03                                ; Check the first 2 bits.
     BNE TextBox_ClearShopSizeAtOffset_return ; If neither bit is set, return.
@@ -23781,7 +23782,7 @@ TextBox_ShowMessageWithSound:               ; [$f4f3]
 ;     TextBox_ShowMessageWithSound
 ;============================================================================
 TextBox_ShowMessage:                        ; [$f4ff]
-    JSR TextBox_Maybe_WriteLineOfChars
+    JSR TextBox_WriteChar
 
     ;
     ; v-- Fall through --v
@@ -24371,7 +24372,7 @@ TextBox_FillPlaceholderTextAtLineWithStartChar: ; [$f5d9]
 ; XREFS:
 ;     TextBox_ShowMessage
 ;============================================================================
-TextBox_Maybe_WriteLineOfChars:             ; [$f5f3]
+TextBox_WriteChar:                          ; [$f5f3]
     ;
     ; Normalize the ASCII value into an index in the characters
     ; table.
@@ -24477,7 +24478,7 @@ TextBox_Maybe_WriteLineOfChars:             ; [$f5f3]
 ;     PPUBuffer_WriteFromTemp
 ;
 ; XREFS:
-;     TextBox_Maybe_WriteLineOfChars
+;     TextBox_WriteChar
 ;============================================================================
 TextBox_Write8BytesFromTemp:                ; [$f63e]
     LDY #$00                                ; Y = 0
@@ -24495,22 +24496,38 @@ TextBox_Write8BytesFromTemp:                ; [$f63e]
 ;     TextBox_ShowMessage_ShowPlayerTitle
 ;
 PLAYER_TITLE_STRINGS:                       ; [$f649]
-    db "Novice          "                   ; [$f649] char
-    db "Aspirant        "                   ; [$f659] char
-    db "Battler         "                   ; [$f669] char
-    db "Fighter         "                   ; [$f679] char
-    db "Adept           "                   ; [$f689] char
-    db "Chevalier       "                   ; [$f699] char
-    db "Veteran         "                   ; [$f6a9] char
-    db "Warrior         "                   ; [$f6b9] char
-    db "Swordman        "                   ; [$f6c9] char
-    db "Hero            "                   ; [$f6d9] char
-    db "Soldier         "                   ; [$f6e9] char
-    db "Myrmidon        "                   ; [$f6f9] char
-    db "Champion        "                   ; [$f709] char
-    db "Superhero       "                   ; [$f719] char
-    db "Paladin         "                   ; [$f729] char
-    db "Lord            "                   ; [$f739] char
+    .byte "Novice  "                        ; [$f649] char
+    .byte "        "                        ; [$f651] char
+    .byte "Aspirant"                        ; [$f659] char
+    .byte "        "                        ; [$f661] char
+    .byte "Battler "                        ; [$f669] char
+    .byte "        "                        ; [$f671] char
+    .byte "Fighter "                        ; [$f679] char
+    .byte "        "                        ; [$f681] char
+    .byte "Adept   "                        ; [$f689] char
+    .byte "        "                        ; [$f691] char
+    .byte "Chevalie"                        ; [$f699] char
+    .byte "r       "                        ; [$f6a1] char
+    .byte "Veteran "                        ; [$f6a9] char
+    .byte "        "                        ; [$f6b1] char
+    .byte "Warrior "                        ; [$f6b9] char
+    .byte "        "                        ; [$f6c1] char
+    .byte "Swordman"                        ; [$f6c9] char
+    .byte "        "                        ; [$f6d1] char
+    .byte "Hero    "                        ; [$f6d9] char
+    .byte "        "                        ; [$f6e1] char
+    .byte "Soldier "                        ; [$f6e9] char
+    .byte "        "                        ; [$f6f1] char
+    .byte "Myrmidon"                        ; [$f6f9] char
+    .byte "        "                        ; [$f701] char
+    .byte "Champion"                        ; [$f709] char
+    .byte "        "                        ; [$f711] char
+    .byte "Superher"                        ; [$f719] char
+    .byte "o       "                        ; [$f721] char
+    .byte "Paladin "                        ; [$f729] char
+    .byte "        "                        ; [$f731] char
+    .byte "Lord    "                        ; [$f739] char
+    .byte "        "                        ; [$f741] char
 
 
 ;============================================================================
@@ -24527,27 +24544,27 @@ PLAYER_TITLE_STRINGS:                       ; [$f649]
 ;     Player_CheckReachedNextTitle
 ;
 PLAYER_TITLE_EXP_NEEDED:                    ; [$f749]
-    dw $03e8                                ; [0]: Aspirant (1,000 exp)
+    .word $03e8                             ; [0]: Aspirant (1,000 exp)
 
 ;
 ; XREFS:
 ;     PlayerMenu_ShowStatusMenu
 ;
 PLAYER_TITLE_EXP_NEEDED_1_:                 ; [$f74b]
-    dw $0898                                ; [1]: Battler (2,200 exp)
-    dw $0dac                                ; [2]: Fighter (3,500 exp)
-    dw $12c0                                ; [3]: Adept (4,800 exp)
-    dw $1838                                ; [4]: Chevalier (6,200 exp)
-    dw $1f40                                ; [5]: Veteran (8,000 exp)
-    dw $2710                                ; [6]: Warrior (10,000 exp)
-    dw $30d4                                ; [7]: Swordman (12,500 exp)
-    dw $3a98                                ; [8]: Hero (15,000 exp)
-    dw $4650                                ; [9]: Soldier (18,000 exp)
-    dw $55f0                                ; [10]: Myrmidon (22,000 exp)
-    dw $6590                                ; [11]: Champion (26,000 exp)
-    dw $7530                                ; [12]: Superhero (30,000 exp)
-    dw $88b8                                ; [13]: Paladin (35,000 exp)
-    dw $afc8                                ; [14]: Lord (45,000 exp)
+    .word $0898                             ; [1]: Battler (2,200 exp)
+    .word $0dac                             ; [2]: Fighter (3,500 exp)
+    .word $12c0                             ; [3]: Adept (4,800 exp)
+    .word $1838                             ; [4]: Chevalier (6,200 exp)
+    .word $1f40                             ; [5]: Veteran (8,000 exp)
+    .word $2710                             ; [6]: Warrior (10,000 exp)
+    .word $30d4                             ; [7]: Swordman (12,500 exp)
+    .word $3a98                             ; [8]: Hero (15,000 exp)
+    .word $4650                             ; [9]: Soldier (18,000 exp)
+    .word $55f0                             ; [10]: Myrmidon (22,000 exp)
+    .word $6590                             ; [11]: Champion (26,000 exp)
+    .word $7530                             ; [12]: Superhero (30,000 exp)
+    .word $88b8                             ; [13]: Paladin (35,000 exp)
+    .word $afc8                             ; [14]: Lord (45,000 exp)
 
 
 ;============================================================================
@@ -24562,21 +24579,21 @@ PLAYER_TITLE_EXP_NEEDED_1_:                 ; [$f74b]
 ;     Player_SetInitialExpAndGold
 ;
 PLAYER_TITLE_GOLD:                          ; [$f767]
-    dw $01f4                                ; [0]:
-    dw $0320                                ; [1]:
-    dw $04b0                                ; [2]:
-    dw $0640                                ; [3]:
-    dw $0834                                ; [4]:
-    dw $0af0                                ; [5]:
-    dw $0dac                                ; [6]:
-    dw $10cc                                ; [7]:
-    dw $1450                                ; [8]:
-    dw $1838                                ; [9]:
-    dw $1d4c                                ; [10]:
-    dw $2328                                ; [11]:
-    dw $2904                                ; [12]:
-    dw $32c8                                ; [13]:
-    dw $3a98                                ; [14]:
+    .word $01f4                             ; [0]:
+    .word $0320                             ; [1]:
+    .word $04b0                             ; [2]:
+    .word $0640                             ; [3]:
+    .word $0834                             ; [4]:
+    .word $0af0                             ; [5]:
+    .word $0dac                             ; [6]:
+    .word $10cc                             ; [7]:
+    .word $1450                             ; [8]:
+    .word $1838                             ; [9]:
+    .word $1d4c                             ; [10]:
+    .word $2328                             ; [11]:
+    .word $2904                             ; [12]:
+    .word $32c8                             ; [13]:
+    .word $3a98                             ; [14]:
 
 
 ;============================================================================
@@ -24867,12 +24884,12 @@ textBox_GetAreaBehindTextBox_restoreAndReturn: ; [$f7f6]
 ; XREFS:
 ;     IScriptAction_AddInventoryItem_ClearTextBox
 ;     IScripts_FillPlaceholderText
+;     PlayerMenu_DrawStringLines
 ;     PlayerMenu_ShowStatusMenu
 ;     PlayerMenu_ShowSubmenu
 ;     TextBox_Close
 ;     TextBox_DrawItemImage
 ;     TextBox_DrawItemName
-;     TextBox_DrawStringLines
 ;     TextBox_Open
 ;     TextBox_DrawZeroPaddedNumber
 ;     TextBox_ShowMessage_Fill4Lines
@@ -24992,7 +25009,7 @@ PPU_IncrementAddrBy32:                      ; [$f826]
 ;         The updated PPU target address.
 ;
 ; XREFS:
-;     TextBox_DrawStringLines
+;     PlayerMenu_DrawStringLines
 ;     PPU_IncrementAddrBy16
 ;     PPU_IncrementAddrBy8
 ;============================================================================
@@ -25436,20 +25453,20 @@ PPU_WriteTilesFromCHRRAM:                   ; [$f89e]
 ;     UI_DrawHUDSprites
 ;
 UI_STATUS_SYMBOL_PPU_ADDR_L:                ; [$f8cb]
-    db $41                                  ; [0]: 0x2041 -- "M" (Magic)
+    .byte $41                               ; [0]: 0x2041 -- "M" (Magic)
 
 ;
 ; XREFS:
 ;     UI_DrawHUDSprites
 ;
 UI_STATUS_SYMBOL_PPU_ADDR_L_1_:             ; [$f8cc]
-    db $61                                  ; [1]: 0x2061 -- "P" (Power)
-    db $6e                                  ; [2]: 0x206E -- "G" (Gold)
-    db $4e                                  ; [3]: 0x204E -- "E" (Experience)
-    db $56                                  ; [4]: 0x2056 -- "T" (Time)
-    db $5b                                  ; [5]: 0x205B -- Top-left of "["
+    .byte $61                               ; [1]: 0x2061 -- "P" (Power)
+    .byte $6e                               ; [2]: 0x206E -- "G" (Gold)
+    .byte $4e                               ; [3]: 0x204E -- "E" (Experience)
+    .byte $56                               ; [4]: 0x2056 -- "T" (Time)
+    .byte $5b                               ; [5]: 0x205B -- Top-left of "["
                                             ; (Selected item)
-    db $7b                                  ; [6]: 0x207B -- Bottom-left of
+    .byte $7b                               ; [6]: 0x207B -- Bottom-left of
                                             ; "[" (Selected item)
 
 
@@ -25470,45 +25487,45 @@ UI_STATUS_SYMBOL_PPU_ADDR_L_1_:             ; [$f8cc]
 ;     UI_DrawHUDSprites
 ;
 UI_STATUS_TILES:                            ; [$f8d2]
-    db $1c                                  ; [0]: "M" (Magic)
+    .byte $1c                               ; [0]: "M" (Magic)
 
 ;
 ; XREFS:
 ;     UI_DrawHUDSprites
 ;
 UI_STATUS_TILES_1_:                         ; [$f8d3]
-    db $0a                                  ; [1]: ":"
+    .byte $0a                               ; [1]: ":"
 
 ;
 ; XREFS:
 ;     UI_DrawHUDSprites
 ;
 UI_STATUS_TILES_2_:                         ; [$f8d4]
-    db $00                                  ; [2]:
-    db $1f                                  ; [3]: "P" (Power)
-    db $0a                                  ; [4]: ":"
-    db $00                                  ; [5]:
-    db $16                                  ; [6]: "G" (Gold)
-    db $3a                                  ; [7]: ":"
-    db $00                                  ; [8]:
-    db $14                                  ; [9]: "E" (Experience)
-    db $3a                                  ; [10]: ":"
-    db $00                                  ; [11]:
-    db $23                                  ; [12]: "T" (Time)
-    db $3a                                  ; [13]: ":"
-    db $00                                  ; [14]:
-    db $2c                                  ; [15]: Top of "[" (current item)
-    db $3c                                  ; [16]: <blank space>
-    db $3d                                  ; [17]: <blank space>
-    db $2e                                  ; [18]: Top of "]" (current item)
-    db $00                                  ; [19]:
-    db $2d                                  ; [20]: Bottom of "[" (current
+    .byte $00                               ; [2]:
+    .byte $1f                               ; [3]: "P" (Power)
+    .byte $0a                               ; [4]: ":"
+    .byte $00                               ; [5]:
+    .byte $16                               ; [6]: "G" (Gold)
+    .byte $3a                               ; [7]: ":"
+    .byte $00                               ; [8]:
+    .byte $14                               ; [9]: "E" (Experience)
+    .byte $3a                               ; [10]: ":"
+    .byte $00                               ; [11]:
+    .byte $23                               ; [12]: "T" (Time)
+    .byte $3a                               ; [13]: ":"
+    .byte $00                               ; [14]:
+    .byte $2c                               ; [15]: Top of "[" (current item)
+    .byte $3c                               ; [16]: <blank space>
+    .byte $3d                               ; [17]: <blank space>
+    .byte $2e                               ; [18]: Top of "]" (current item)
+    .byte $00                               ; [19]:
+    .byte $2d                               ; [20]: Bottom of "[" (current
                                             ; item)
-    db $3e                                  ; [21]: <blank space>
-    db $3f                                  ; [22]: <blank space>
-    db $2f                                  ; [23]: Bottom of "]" (current
+    .byte $3e                               ; [21]: <blank space>
+    .byte $3f                               ; [22]: <blank space>
+    .byte $2f                               ; [23]: Bottom of "]" (current
                                             ; item)
-    db $00                                  ; [24]:
+    .byte $00                               ; [24]:
 
 
 ;============================================================================
@@ -26478,37 +26495,37 @@ UI_GetValueForDigit:                        ; [$fa55]
     RTS
 
 STATUS_BAR_PPU_ADDR_L:                      ; [$fa6c]
-    db $63                                  ; [0]: Power bar
+    .byte $63                               ; [0]: Power bar
 
 ;
 ; XREFS:
 ;     UI_DrawManaOrHPBar
 ;
 STATUS_BAR_PPU_ADDR_L_1_:                   ; [$fa6d]
-    db $43                                  ; [1]: Mana bar
-    db $08                                  ; [0]: Power bar
+    .byte $43                               ; [1]: Mana bar
+    .byte $08                               ; [0]: Power bar
 
 ;
 ; XREFS:
 ;     UI_DrawManaOrHPBar
 ;
 BYTE_ARRAY_PRG15_MIRROR__fa6e_1_:           ; [$fa6f]
-    db $09                                  ; [1]: Manab ar
-    db $0c                                  ; [0]: Power bar
+    .byte $09                               ; [1]: Manab ar
+    .byte $0c                               ; [0]: Power bar
 
 ;
 ; XREFS:
 ;     UI_DrawManaOrHPBar
 ;
 BYTE_ARRAY_PRG15_MIRROR__fa70_1_:           ; [$fa71]
-    db $0d                                  ; [1]: Mana bar
+    .byte $0d                               ; [1]: Mana bar
 
 BYTE_ARRAY_PRG15_MIRROR__fa72:              ; [$fa72]
-    db $c0                                  ; [0]:
+    .byte $c0                               ; [0]:
 
 BYTE_ARRAY_PRG15_MIRROR__fa72_1_:           ; [$fa73]
-    db $d0                                  ; [1]:
-    db $60                                  ; [2]:
+    .byte $d0                               ; [1]:
+    .byte $60                               ; [2]:
 ;============================================================================
 ; TODO: Document UI_DrawPlayerHPValue
 ;
@@ -26666,7 +26683,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     LDA #$10
     STA PPU_TargetAddr_U
     LDX Maybe_Temp4
-    LDA $fa72,X
+    LDA BYTE_ARRAY_PRG15_MIRROR__fa72,X
     STA PPU_TargetAddr
     LDA #$10
     JSR PPUBuffer_QueueCommandOrLength
@@ -26682,7 +26699,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ;           program code instead of an array of values.
     ;
   @LAB_PRG15_MIRROR__fb05:                  ; [$fb05]
-    LDA $fb2f,Y
+    LDA BYTE_PRG15_MIRROR__fb2f,Y
     INY
     JSR PPUBuffer_Set
     TYA
@@ -26692,7 +26709,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     RTS
 
   @LAB_PRG15_MIRROR__fb14:                  ; [$fb14]
-    LDA $fb37,Y
+    LDA BYTE_PRG15_MIRROR__fb37,Y
     INY
     JSR PPUBuffer_Set
     TYA
@@ -26704,7 +26721,7 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
     ; XXX Is this correct? It's reading from program code.
     ;
   @LAB_PRG15_MIRROR__fb20:                  ; [$fb20]
-    LDA $fb27,Y
+    LDA @LAB_PRG15_MIRROR__fb27,Y
     INY
     JSR PPUBuffer_Set
 
@@ -26720,28 +26737,28 @@ UI_DrawManaOrHPBar:                         ; [$fa90]
 ;     LAB_PRG15_MIRROR__fb05 [$PRG15_MIRROR::fb05]
 ;
 BYTE_PRG15_MIRROR__fb2f:                    ; [$fb2f]
-    db $00,$ff,$00,$00,$00,$00,$ff,$00      ; [$fb2f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb2f] byte
 
 ;
 ; XREFS:
 ;     LAB_PRG15_MIRROR__fb14 [$PRG15_MIRROR::fb14]
 ;
 BYTE_PRG15_MIRROR__fb37:                    ; [$fb37]
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$80,$80,$80,$80,$ff,$00 ; [$fb37]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$c0,$c0,$c0,$c0,$ff,$00 ; [$fb47]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$e0,$e0,$e0,$e0,$ff,$00 ; [$fb57]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f0,$f0,$f0,$f0,$ff,$00 ; [$fb67]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$f8,$f8,$f8,$f8,$ff,$00 ; [$fb77]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fc,$fc,$fc,$fc,$ff,$00 ; [$fb87]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00,$00,$ff,$fe,$fe,$fe,$fe,$ff,$00 ; [$fb97]
-                                                                       ; byte
-    db $00,$ff,$00,$00,$00,$00,$ff,$00      ; [$fba7] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb37] byte
+    .byte $00,$ff,$80,$80,$80,$80,$ff,$00   ; [$fb3f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb47] byte
+    .byte $00,$ff,$c0,$c0,$c0,$c0,$ff,$00   ; [$fb4f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb57] byte
+    .byte $00,$ff,$e0,$e0,$e0,$e0,$ff,$00   ; [$fb5f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb67] byte
+    .byte $00,$ff,$f0,$f0,$f0,$f0,$ff,$00   ; [$fb6f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb77] byte
+    .byte $00,$ff,$f8,$f8,$f8,$f8,$ff,$00   ; [$fb7f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb87] byte
+    .byte $00,$ff,$fc,$fc,$fc,$fc,$ff,$00   ; [$fb8f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fb97] byte
+    .byte $00,$ff,$fe,$fe,$fe,$fe,$ff,$00   ; [$fb9f] byte
+    .byte $00,$ff,$00,$00,$00,$00,$ff,$00   ; [$fba7] byte
 
 ;============================================================================
 ; TODO: Document UI_DrawSelectedItem
@@ -26776,7 +26793,7 @@ UI_DrawSelectedItem:                        ; [$fbaf]
     JSR MMC1_UpdateROMBank
 
   @LAB_PRG15_MIRROR__fbd1:                  ; [$fbd1]
-    LDA $b4e4,Y
+    LDA ITEM_TILEMAP_INDEXES,Y
     JSR UI_Maybe_GetItemSpritePPUTileAddr
     TYA
     PHA
@@ -26905,22 +26922,22 @@ TextBox_LoadItemSourceTiles:                ; [$fc18]
 ;     TextBox_LoadItemSourceTiles
 ;
 FUN_PRG15_MIRROR__fc0b__LOWER_ADDR_TABLE:   ; [$fc5b]
-    db $a0                                  ; [0]:
-    db $b0                                  ; [1]:
-    db $c0                                  ; [2]:
-    db $d0                                  ; [3]:
-    db $e4                                  ; [4]:
+    .byte $a0                               ; [0]:
+    .byte $b0                               ; [1]:
+    .byte $c0                               ; [2]:
+    .byte $d0                               ; [3]:
+    .byte $e4                               ; [4]:
 
 ;
 ; XREFS:
 ;     TextBox_LoadItemSourceTiles
 ;
 FUN_PRG15_MIRROR__fc0b__UPPER_ADDR_TABLE:   ; [$fc60]
-    db $b4                                  ; [0]:
-    db $b4                                  ; [1]:
-    db $b4                                  ; [2]:
-    db $b4                                  ; [3]:
-    db $b4                                  ; [4]:
+    .byte $b4                               ; [0]:
+    .byte $b4                               ; [1]:
+    .byte $b4                               ; [2]:
+    .byte $b4                               ; [3]:
+    .byte $b4                               ; [4]:
 
 
 ;============================================================================
@@ -26961,8 +26978,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ; Switch to bank 12 and run StartScreen_Draw.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw StartScreen_Draw-1                   ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word StartScreen_Draw-1                ; Address =
                                             ; StartScreen_Draw
 
 
@@ -26978,8 +26995,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ; Switch to bank 12 and run StartScreen_CheckHandleInput.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw StartScreen_CheckHandleInput-1       ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word StartScreen_CheckHandleInput-1    ; Address =
                                             ; StartScreen_CheckHandleInput
 
   @_afterCheckHandleInputFarJump:           ; [$fc7a]
@@ -27007,8 +27024,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ; Switch to bank 12 and run PasswordScreen_Show.
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw PasswordScreen_Show-1                ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word PasswordScreen_Show-1             ; Address =
                                             ; PasswordScreen_Show
 
 
@@ -27017,8 +27034,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
   @_afterPasswordScreenShow:                ; [$fc8f]
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw Player_SetInitialExpAndGold-1        ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word Player_SetInitialExpAndGold-1     ; Address =
                                             ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$fc95]
@@ -27032,8 +27049,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
   @_startGame:                              ; [$fc98]
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw SplashAnimation_RunIntro-1           ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word SplashAnimation_RunIntro-1        ; Address =
                                             ; SplashAnimation_RunIntro
 
 
@@ -27042,8 +27059,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
   @_afterRunIntroFarJump:                   ; [$fc9e]
     JSR MMC1_LoadBankAndJump                ; Jump to:
-    db BANK_12_LOGIC                        ; Bank = 12
-    dw Player_SetStartGameState-1           ; Address =
+    .byte BANK_12_LOGIC                     ; Bank = 12
+    .word Player_SetStartGameState-1        ; Address =
                                             ; Player_SetStartGameState
 
 
@@ -27174,80 +27191,129 @@ PPU_ClearAllTilemaps:                       ; [$fcb9]
     DEX                                     ; X--
     BNE @_loop                              ; If not 0, loop.
     RTS
-    hex bd ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fccd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fcdd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fced] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fcfd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd0d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd1d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd2d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd3d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd4d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd5d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd6d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd7d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd8d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fd9d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fdad] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fdbd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fdcd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fddd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fded] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fdfd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe0d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe1d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe2d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe3d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe4d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe5d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe6d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe7d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe8d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fe9d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fead] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$febd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fecd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fedd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$feed] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$fefd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff0d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff1d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff2d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff3d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff4d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff5d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff6d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff7d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff8d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ff9d] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffad] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffbd] undefined
-    hex ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ff ; [$ffcd] undefined
-    db $ff,$ff,$ff                          ; [$ffdd] undefined
+    .byte $bd,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fccd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fcd5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fcdd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fce5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fced] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fcf5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fcfd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd05] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd0d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd15] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd1d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd25] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd2d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd35] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd3d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd45] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd4d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd55] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd5d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd65] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd6d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd75] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd7d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd85] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd8d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd95] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fd9d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fda5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdad] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdbd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdc5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdcd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdd5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fddd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fde5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fded] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdf5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fdfd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe05] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe0d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe15] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe1d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe25] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe2d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe35] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe3d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe45] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe4d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe55] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe5d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe65] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe6d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe75] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe7d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe85] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe8d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe95] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fe9d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fea5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fead] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$feb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$febd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fec5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fecd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fed5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fedd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fee5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$feed] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fef5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$fefd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff05] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff0d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff15] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff1d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff25] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff2d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff35] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff3d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff45] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff4d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff55] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff5d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff65] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff6d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff75] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff7d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff85] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff8d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff95] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ff9d] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffa5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffad] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffb5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffbd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffc5] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffcd] undefined
+    .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$ffd5] undefined
+    .byte $ff,$ff,$ff                       ; [$ffdd] undefined
 
-    db $20                                  ; Game title
-    db $20,$20,$20,$20,$20,$20,$20,$46,$41,$58,$41,$4e,$41,$44,$55 ; [$ffe1]
-                                                                   ; string
+    .byte $20                               ; Game title
+    .byte $20,$20,$20,$20,$20,$20,$20,$46   ; [$ffe1] string
+    .byte $41,$58,$41,$4e,$41,$44,$55       ; [$ffe9] string
 
-    dw $4227                                ; PRG Checksum
-    dw $0000                                ; CHR CHecksum
-    db $48                                  ; CHR size: 0 = 8KiB CHR type: 0
+    .word $4227                             ; PRG Checksum
+    .word $0000                             ; CHR CHecksum
+    .byte $48                               ; CHR size: 0 = 8KiB CHR type: 0
                                             ; = CHR ROM PRG size: 5 = 512KiB
-    db $04                                  ; Mapper:    4 = MMC Nametable: 0
+    .byte $04                               ; Mapper:    4 = MMC Nametable: 0
                                             ; = Horizontal arrangement
-    db $01                                  ; Title encoding: 1 = ASCII
-    db $07                                  ; Title length: 8 bytes
-    db $18                                  ; Licensee Code: Hudson Soft
-    db $94                                  ; Header validation byte
-    dw OnInterrupt                          ; OnInterrupt
+    .byte $01                               ; Title encoding: 1 = ASCII
+    .byte $07                               ; Title length: 8 bytes
+    .byte $18                               ; Licensee Code: Hudson Soft
+    .byte $94                               ; Header validation byte
+    .word OnInterrupt                       ; OnInterrupt
                                             ; [$PRG15_MIRROR::fffa]
-    dw Game_Init                            ; Game_Init
+    .word Game_Init                         ; Game_Init
                                             ; [$PRG15_MIRROR::fffc]
-    db $d5                                  ; [$fffe] undefined
+    .byte $d5                               ; [$fffe] undefined
 
 ;
 ; XREFS:
 ;     MMC1_Init
 ;
 MMC1_SERIAL:                                ; [$ffff]
-    db $c9                                  ; [$ffff] undefined
+    .byte $c9                               ; [$ffff] undefined
