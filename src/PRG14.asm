@@ -164,11 +164,6 @@ SPRITE_UPDATE_HANDLERS:                     ; [$8087]
     .word SpriteUpdateHandler_Enemy_Hornet-1 ; [7]: Enemy: Hornet
     .word SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
     .word SpriteUpdateHandler_Enemy_Lilith-1 ; [9]: Enemy: Lilith
-
-
-;============================================================================
-; SpriteUpdateHandler_Enemy_Garbled_10
-;============================================================================
     .word SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
     .word SpriteUpdateHandler_Enemy_Yuinaru-1 ; [11]: Enemy: Yuinaru
     .word SpriteUpdateHandler_Enemy_Snowman-1 ; [12]: Enemy: Snowman
@@ -372,7 +367,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
 
   @LAB_PRG14__81b6:                         ; [$81b6]
     LDA #$02
-    JSR $d0e4
+    JSR Sound_PlayEffect
     LDA MAGIC_DAMAGE,Y
     STA Temp_00
     LDA a:SpecialItems
@@ -443,7 +438,7 @@ Player_HitEnemyWithMagic:                   ; [$81a7]
     ; Play the killed enemy sound effect.
     ;
     LDA #$03
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
 
     ;
@@ -758,7 +753,7 @@ SpriteBehavior_Unknown_29_SomeSetup:        ; [$8329]
     STA a:Arg_PlayerHealthDelta_L
     STA a:BYTE_04bf
     STA CurrentSprites_BehaviorState_XFrac,X
-    JSR $c0ec
+    JSR Player_Something_ChangeHP
     LDA a:Arg_PlayerHealthDelta_U
     STA CurrentSprites_BehaviorState_YFull,X
     LDA a:Arg_PlayerHealthDelta_L
@@ -776,7 +771,7 @@ SpriteBehavior_Unknown_29_SomeSetup:        ; [$8329]
     STA a:Arg_PlayerHealthDelta_L
     STA a:BYTE_04bf
     STA CurrentSprites_BehaviorState_YFrac,X
-    JSR $c0ec
+    JSR Player_Something_ChangeHP
     LDA a:Arg_PlayerHealthDelta_U
     STA CurrentSprites_BehaviorState_XFull,X
     LDA a:Arg_PlayerHealthDelta_L
@@ -1461,8 +1456,8 @@ FUN_PRG14__854c:                            ; [$854c]
     CLC
     ADC SPRITE_WALK_PIXEL_MOVEMENT_TABLE,Y
     STA Arg_PixelPosX
-    JSR $e86c
-    JMP $e887
+    JSR Area_ConvertPixelsToBlockPos
+    JMP Area_IsBlockImpassableOrLadder
 
 ;============================================================================
 ; TODO: Document Sprite_MoveVertAndFlipIfNeeded
@@ -1706,8 +1701,8 @@ Sprite_CalculateNewVertPos:                 ; [$85ca]
     ADC SPRITE_HITBOX_HEIGHTS,Y
     STA Arg_PixelPosY
     INC Arg_PixelPosY
-    JSR $e86c
-    JSR $e87c
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
     LDX a:CurrentSpriteIndex
     RTS
@@ -2039,8 +2034,8 @@ FUN_PRG14__86bd:                            ; [$86bd]
 Sprites_MoveRight__86c6:                    ; [$86c6]
     LDA CurrentSprites_YPos,Y
     STA Arg_PixelPosY
-    JSR $e86c
-    JSR $e87c
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
     BNE @LAB_PRG14__870c
     LDY a:CurrentSpriteIndex
@@ -2059,7 +2054,7 @@ Sprites_MoveRight__86c6:                    ; [$86c6]
     CLC
     ADC #$10
     TAX
-    JSR $e87c
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
     BNE @LAB_PRG14__870c
     BEQ @LAB_PRG14__86e1
@@ -2073,7 +2068,7 @@ Sprites_MoveRight__86c6:                    ; [$86c6]
     CLC
     ADC #$10
     TAX
-    JSR $e87c
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
 
   @LAB_PRG14__870c:                         ; [$870c]
@@ -2124,8 +2119,8 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
   @LAB_PRG14__873a:                         ; [$873a]
     LDA CurrentSprites_XPos_Full,Y
     STA Arg_PixelPosX
-    JSR $e86c
-    JSR $e87c
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
     BNE @LAB_PRG14__8778
     LDY a:CurrentSpriteIndex
@@ -2141,7 +2136,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     STA Temp_HitBoxValue
     BCC @LAB_PRG14__8768
     INX
-    JSR $e87c
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
     BNE @LAB_PRG14__8778
     BEQ @LAB_PRG14__8755
@@ -2152,7 +2147,7 @@ CurrentSprite_CanMoveInDirection:           ; [$8710]
     AND #$0f
     BEQ @LAB_PRG14__8778
     INX
-    JSR $e87c
+    JSR ScreenBuffer_IsBlockImpassable
     STA Blocks_Result
 
   @LAB_PRG14__8778:                         ; [$8778]
@@ -2233,7 +2228,7 @@ Player_HandleShieldHitByMagic:              ; [$87cb]
     LDA #$ff
     STA CurrentSprites_Entities,X
     LDA #$0c
-    JSR $d0e4
+    JSR Sound_PlayEffect
     RTS
 
 ;============================================================================
@@ -2267,7 +2262,7 @@ Player_HandleHitByMagic:                    ; [$87dc]
 
   @LAB_PRG14__87fa:                         ; [$87fa]
     JSR Player_SetDamagedBySprite
-    JMP $c08e
+    JMP Player_ReduceHP
     DEC CurrentSprites_HitCounter,X
     RTS
 
@@ -2347,7 +2342,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ;
     ; Play the Hit Enemy sound.
     ;
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
 
     ;
@@ -2474,7 +2469,7 @@ Player_HitSpriteWithWeapon:                 ; [$8804]
     ; Play a sound for the enemy kill, reset state, and add
     ; experience.
     ;
-    JSR $d0e4
+    JSR Sound_PlayEffect
     LDA #$00
     STA CurrentSprites_HitCounter,X         ; Clear the hit counter for the
                                             ; dead enemy.
@@ -2613,11 +2608,14 @@ Sprites_IsSpriteOutOfWeaponRange:           ; [$88cb]
 ;
 ; CALLS:
 ;     Player_PickUp
+;
+; XREFS:
+;     SPRITE_COLLISION_HANDLERS [$PRG14::8962]
 ;============================================================================
 Player_HandleTouchItem:                     ; [$88fb]
     LDA CurrentSprites_Entities,X           ; Load the entity at the given
                                             ; index.
-    JSR $c764                               ; Pick up the item.
+    JSR Player_PickUp                       ; Pick up the item.
     LDX a:CurrentSpriteIndex                ; X = current sprite index.
 
 
@@ -2687,6 +2685,7 @@ CurrentSprite_CheckHitPlayer:               ; [$890a]
     ;
     ; XREFS:
     ;     CurrentSprite_CheckHitPlayer
+    ;     SPRITE_COLLISION_HANDLERS [$PRG14::895e]
     ;
 Player_HandleCollision_NoOp:                ; [$8957]
     RTS
@@ -2704,15 +2703,15 @@ Player_HandleCollision_NoOp:                ; [$8957]
 ;     CurrentSprite_CheckHitPlayer
 ;
 SPRITE_COLLISION_HANDLERS:                  ; [$8958]
-    .word Player_HandleTouchEnemy-1         ; Player_HandleTouchEnemy
-                                            ; [$PRG14::8958]
-    .word Player_HandleTouchBreadOrCoin-1   ; Coin/meat touched
-    .word Player_CheckHandlePressUpOnNPC-1  ; Press Up on NPC
-    .word $8956                             ; Large animation. Just return.
-    .word Player_HandleTouchNPC-1           ; Collide with NPC
-    .word Player_HandleTouchItem-1          ; Item touched
-    .word Player_HandleTouchEnemyMagic-1    ; Enemy magic touched
-    .word Player_HandleTouchEnemy-1         ; Enemy touched
+    .word Player_HandleTouchEnemy-1         ; [0]:
+    .word Player_HandleTouchBreadOrCoin-1   ; [1]: Coin/meat touched
+    .word Player_CheckHandlePressUpOnNPC-1  ; [2]: Press Up on NPC
+    .word Player_HandleCollision_NoOp-1     ; [3]: Large animation. Just
+                                            ; return.
+    .word Player_HandleTouchNPC-1           ; [4]: Collide with NPC
+    .word Player_HandleTouchItem-1          ; [5]: Item touched
+    .word Player_HandleTouchEnemyMagic-1    ; [6]: Enemy magic touched
+    .word Player_HandleTouchEnemy-1         ; [7]: Enemy touched
 
 
 ;============================================================================
@@ -2734,6 +2733,9 @@ SPRITE_COLLISION_HANDLERS:                  ; [$8958]
 ; CALLS:
 ;     Player_HandleTouchCoin
 ;     Player_HandleTouchBread
+;
+; XREFS:
+;     SPRITE_COLLISION_HANDLERS [$PRG14::895a]
 ;============================================================================
 Player_HandleTouchBreadOrCoin:              ; [$8968]
     ;
@@ -2784,6 +2786,9 @@ Player_HandleTouchBreadOrCoin:              ; [$8968]
 ;
 ; CALLS:
 ;     MMC1_LoadBankAndJump
+;
+; XREFS:
+;     SPRITE_COLLISION_HANDLERS [$PRG14::895c]
 ;============================================================================
 Player_CheckHandlePressUpOnNPC:             ; [$897f]
     ;
@@ -2802,7 +2807,7 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     STA a:CurrentSprite_Value               ; Store it as the current value.
     CMP #$ff                                ; Is it 0xFF?
     BEQ RETURN_8998                         ; If so, return.
-    JSR $f859                               ; Execute the handler.
+    JSR MMC1_LoadBankAndJump                ; Execute the handler.
     .byte BANK_12_LOGIC                     ; Bank = 12
     .word IScripts_Begin-1                  ; Address =
                                             ; IScripts_Begin
@@ -2843,6 +2848,9 @@ RETURN_8998:                                ; [$8998]
 ;
 ; CALLS:
 ;     Player_HandleTouchEnemy
+;
+; XREFS:
+;     SPRITE_COLLISION_HANDLERS [$PRG14::8964]
 ;============================================================================
 Player_HandleTouchEnemyMagic:               ; [$8999]
     LDA Player_InvincibilityPhase
@@ -2897,6 +2905,7 @@ RETURN_89AD:                                ; [$89ad]
 ; XREFS:
 ;     Player_HandleTouchEnemyMagic
 ;     SPRITE_COLLISION_HANDLERS [$PRG14::8958]
+;     SPRITE_COLLISION_HANDLERS [$PRG14::8966]
 ;============================================================================
 Player_HandleTouchEnemy:                    ; [$89ae]
     ;
@@ -2940,7 +2949,7 @@ Player_HandleTouchEnemy:                    ; [$89ae]
     ;
   @_handleDamage:                           ; [$89c7]
     LDA #$04
-    JSR $d0e4                               ; Play the Player Hit sound.
+    JSR Sound_PlayEffect                    ; Play the Player Hit sound.
     JSR Player_SetDamagedBySprite           ; Mark the player as damaged and
                                             ; set state.
     JMP Player_ApplyDamage                  ; Apply damage.
@@ -3043,6 +3052,9 @@ Player_SetDamagedBySprite:                  ; [$89d5]
 ;
 ; CALLS:
 ;     MMC1_LoadBankAndJump
+;
+; XREFS:
+;     SPRITE_COLLISION_HANDLERS [$PRG14::8960]
 ;============================================================================
 Player_HandleTouchNPC:                      ; [$89ef]
     LDA CurrentSprites_Values,X             ; Load the value for this sprite.
@@ -3050,7 +3062,7 @@ Player_HandleTouchNPC:                      ; [$89ef]
                                             ; value.
     CMP #$ff                                ; Is it 0xFF (unset)?
     BEQ RETURN_8998                         ; If so, return.
-    JSR $f859                               ; Else, execute the IScript at
+    JSR MMC1_LoadBankAndJump                ; Else, execute the IScript at
                                             ; that value.
     .byte BANK_12_LOGIC                     ; Bank = 12
     .word IScripts_Begin-1                  ; Address =
@@ -3226,7 +3238,7 @@ Player_ApplyDamage:                         ; [$8a79]
     STA a:Arg_PlayerHealthDelta_U
 
   @LAB_PRG14__8ad4:                         ; [$8ad4]
-    JMP $c08e
+    JMP Player_ReduceHP
 
     ;
     ; XREFS:
@@ -3590,7 +3602,7 @@ Player_AddExperienceFromSprite:             ; [$8b87]
                                             ; experience.
     LDA #$00
     STA Temp_Int24_M                        ; Store 0 as the middle byte.
-    JSR $f957                               ; Update the player's experience.
+    JSR Player_UpdateExperience             ; Update the player's experience.
     LDX a:CurrentSpriteIndex
     RTS
 
@@ -3625,7 +3637,7 @@ Player_AddExperienceFromSprite:             ; [$8b87]
 ;============================================================================
 Player_HandleTouchCoin:                     ; [$8b9a]
     LDA #$09
-    JSR $d0e4                               ; Play sound 9 (coin touched).
+    JSR Sound_PlayEffect                    ; Play sound 9 (coin touched).
 
 
     ;
@@ -3662,7 +3674,7 @@ Player_HandleTouchCoin:                     ; [$8b9a]
     ;
     ; Render and prepare to return.
     ;
-    JSR $f9e7                               ; Render the new gold amount.
+    JSR UI_DrawGoldValue                    ; Render the new gold amount.
     LDX a:CurrentSpriteIndex                ; Set X = current sprite index.
     RTS
 
@@ -3689,11 +3701,11 @@ Player_HandleTouchCoin:                     ; [$8b9a]
 ;============================================================================
 Player_HandleTouchBread:                    ; [$8bc0]
     LDA #$1b
-    JSR $d0e4                               ; Play sound 0x1B (pick up meat).
+    JSR Sound_PlayEffect                    ; Play sound 0x1B (pick up meat).
     LDX a:CurrentSpriteIndex                ; Load the current sprite index
                                             ; for meat.
     LDA CurrentSprites_Values,X             ; Load the HP value for it.
-    JSR $c07b                               ; Add it to the player's HP.
+    JSR Player_AddHP                        ; Add it to the player's HP.
     LDX a:CurrentSpriteIndex
     RTS
 
@@ -3835,8 +3847,8 @@ CurrentSprite_CalculateVisibility:          ; [$8c1a]
     ;
     ; Convert to a block position.
     ;
-    JSR $e86c
-    JSR $e8c3
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_LoadBlockProperty
     CMP #$04
     BEQ @LAB_PRG14__8c3e
     CMP #$0d
@@ -3855,8 +3867,8 @@ CurrentSprite_CalculateVisibility:          ; [$8c1a]
     CLC
     ADC #$0c
     STA Arg_PixelPosX
-    JSR $e86c
-    JSR $e8c3
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_LoadBlockProperty
     CMP #$04
     BEQ @LAB_PRG14__8c60
     CMP #$0d
@@ -4045,7 +4057,7 @@ Sprite_EnterNextAppearancePhase:            ; [$8c8e]
     CLC
     LDY CurrentSprites_Entities,X
     ADC SPRITE_APPEARANCE_PHASE_OFFSETS,Y
-    JMP $f057
+    JMP Sprite_SetAppearanceAddrFromOffset
 
 ;============================================================================
 ; TODO: Document SpriteUpdateHandler_Invisible
@@ -4370,8 +4382,8 @@ SpriteBehavior_NecronAides:                 ; [$8da3]
     STA Arg_PixelPosY
     LDA CurrentSprites_XPos_Full,X
     STA Arg_PixelPosX
-    JSR $e86c
-    JSR $e8c3
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_LoadBlockProperty
     LDX a:CurrentSpriteIndex
     CMP #$02
     BEQ @LAB_PRG14__8de4
@@ -6966,7 +6978,7 @@ SpriteBehavior_EnemyUnused18__9991:         ; [$9991]
     LSR A
     LSR A
     STA Temp_00
-    LDA $037c,Y
+    LDA Sprite12BodyPartHandler_3_,Y
     AND #$f0
     ORA Temp_00
     STA a:Something_UnusedSprite_ScreenBufferOffset
@@ -6975,7 +6987,7 @@ SpriteBehavior_EnemyUnused18__9991:         ; [$9991]
     LDY Area_CurrentArea
     LDA BYTE_ARRAY_PRG14__99ef,Y
     STA a:Something_UnusedSprite_BlockOffset
-    JSR $d7b0
+    JSR SpriteBehavior_EnemyUnused18_SomethingSetBlocks
 
   @LAB_PRG14__99dc:                         ; [$99dc]
     LDX a:CurrentSpriteIndex
@@ -7728,7 +7740,7 @@ SpriteBehavior_Pakukame:                    ; [$9cf2]
     BCS @_return1
     INC CurrentSprites_Phases,X
     LDA #$12
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
   @_return1:                                ; [$9d2a]
     RTS
@@ -8063,7 +8075,7 @@ SpriteBehavior_Garbled3:                    ; [$9e6d]
     LDA #$05
     STA CurrentSprites_BehaviorData2,X
     LDA #$07
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
   @_return1:                                ; [$9ebb]
     RTS
@@ -9507,7 +9519,7 @@ SpriteBehavior_BattleSuitDroppedByZoradohna: ; [$a354]
 
   @_checkOnScreen:                          ; [$a377]
     LDA #$2e
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9549,7 +9561,7 @@ SpriteBehavior_BattleHelmetDroppedByZoradohna: ; [$a384]
 
   @_checkOnScreen:                          ; [$a3a7]
     LDA #$2e
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9615,7 +9627,7 @@ SpriteBehavior_DragonSlayerDroppedByKingGrieve: ; [$a3bf]
 
   @_checkOnScreen:                          ; [$a3e2]
     LDA #$32
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9649,7 +9661,7 @@ SpriteBehavior_MattockDroppedFromRipasheiku: ; [$a3ef]
 
   @_checkOnScreen:                          ; [$a406]
     LDA #$2d
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9687,7 +9699,7 @@ SpriteBehavior_WingBootsDroppedByZorugeriru: ; [$a413]
 
   @_checkOnScreen:                          ; [$a42a]
     LDA #$31
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9721,7 +9733,7 @@ SpriteBehavior_BlackOnyxDropFromZoradohna:  ; [$a437]
 
   @_checkOnScreen:                          ; [$a44e]
     LDA #$2e
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -9755,7 +9767,7 @@ SpriteBehavior_PendantDroppedFromRipasheiku: ; [$a45b]
 
   @_checkOnScreen:                          ; [$a472]
     LDA #$2d
-    JSR $efe6
+    JSR Maybe_IsSpriteEntityNotOnScreen
     BCC @_setVisible
     JMP Sprites_HideSprite
 
@@ -10787,7 +10799,7 @@ BScript_Action_RiseUp:                      ; [$a7a4]
 ;     SpriteBehavior_Lilith
 ;============================================================================
 BScript_Action_RandomlyFlipXDirection:      ; [$a7ad]
-    JSR $ca6e                               ; Load a random value.
+    JSR GetRandom                           ; Load a random value.
     LDX a:CurrentSpriteIndex                ; X = Current sprite index.
     CMP #$80                                ; Is the random value < 128?
     BCS @_setFaceRight                      ; If so, jump to set facing
@@ -10814,7 +10826,7 @@ BScript_Action_RandomlyFlipXDirection:      ; [$a7ad]
 ;     BSCRIPT_ACTIONS [$PRG14::a79e]
 ;============================================================================
 BScript_Action_RandomlyFlipYDirection:      ; [$a7c9]
-    JSR $ca6e                               ; Load a random value.
+    JSR GetRandom                           ; Load a random value.
     LDX a:CurrentSpriteIndex                ; X = Current sprite index.
     CMP #$80                                ; Is the random value < 128?
     BCS @_setFalling                        ; If so, jump to set falling.
@@ -12052,7 +12064,7 @@ SpriteBehavior_FlashScreenHitPlayer:        ; [$ab26]
     AND #$fe
     STA PPU_Mask
     LDA #$04
-    JSR $d0e4
+    JSR Sound_PlayEffect
     LDA #$3c
     STA Player_InvincibilityPhase
     LDA Player_StatusFlag
@@ -12062,7 +12074,7 @@ SpriteBehavior_FlashScreenHitPlayer:        ; [$ab26]
     STA a:Arg_PlayerHealthDelta_L
     LDA #$0a
     STA a:Arg_PlayerHealthDelta_U
-    JSR $c08e
+    JSR Player_ReduceHP
     LDX a:CurrentSpriteIndex
     JMP Sprite_FinishBehavior
 
@@ -12109,7 +12121,7 @@ SpriteBehavior_BossDeath:                   ; [$ab67]
     LDA #$00
     STA CurrentSprites_BehaviorData2,X
     LDA #$03
-    JSR $d0e4
+    JSR Sound_PlayEffect
     LDA CurrentSprites_Phases,X
     CMP #$05
     BCS @_return
@@ -12412,7 +12424,7 @@ SPRITE_DROP_HANDLERS_LAST:                  ; [$ac73]
 ;============================================================================
 Sprites_ReplaceWithCoinDrop:                ; [$ac75]
     LDA #$10
-    JSR $d0e4
+    JSR Sound_PlayEffect
     TYA
     TAX
     LDA #$02
@@ -16898,7 +16910,7 @@ Player_DrawWeapon:                          ; [$b7d6]
     LDA Temp_00
     CLC
     ADC WEAPONS_SPRITE_L,X
-    JMP $f039
+    JMP Sprite_SetPlayerAppearanceAddr
 
 
 ;============================================================================
@@ -17202,7 +17214,7 @@ Player_DrawShield:                          ; [$b982]
     STA Temp_00
     LDY Temp_00
     LDA MAYBE_SHIELD_SPRITE_PPU_OFFSETS,Y
-    JMP $f039
+    JMP Sprite_SetPlayerAppearanceAddr
 
   @_return:                                 ; [$b9d4]
     RTS
@@ -17267,8 +17279,8 @@ Player_CalculateVisibility:                 ; [$b9ed]
     CLC
     ADC #$04
     STA Arg_PixelPosX
-    JSR $e86c
-    JSR $e8c3
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_LoadBlockProperty
     CMP #$04
     BEQ @LAB_PRG14__ba0e
     CMP #$0d
@@ -17286,8 +17298,8 @@ Player_CalculateVisibility:                 ; [$b9ed]
     CLC
     ADC #$0c
     STA Arg_PixelPosX
-    JSR $e86c
-    JSR $e8c3
+    JSR Area_ConvertPixelsToBlockPos
+    JSR ScreenBuffer_LoadBlockProperty
     CMP #$04
     BEQ @LAB_PRG14__ba2d
     CMP #$0d
@@ -17454,7 +17466,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
     ; Check if the player is climbing a ladder.
     ;
-    JSR $ecf6                               ; Check if the player can cast
+    JSR Player_IsClimbing                   ; Check if the player can cast
                                             ; magic.
     BCS @_return2                           ; If not, we're done.
 
@@ -17491,7 +17503,7 @@ Player_CastMagic:                           ; [$ba5b]
     ; for the spell cost.
     ;
   @LAB_PRG14__ba79:                         ; [$ba79]
-    JSR $c0c3                               ; Reduce the MP.
+    JSR Player_ReduceMP                     ; Reduce the MP.
     BCS @_return1                           ; If there's not enough, we're
                                             ; done.
 
@@ -17509,7 +17521,7 @@ Player_CastMagic:                           ; [$ba5b]
     ; has its own sound.
     ;
     LDA #$05
-    JSR $d0e4                               ; Play the standard magic sound
+    JSR Sound_PlayEffect                    ; Play the standard magic sound
                                             ; effect.
     JMP @_placeMagic
 
@@ -17519,7 +17531,7 @@ Player_CastMagic:                           ; [$ba5b]
     ;
   @_playTilteSound:                         ; [$ba8d]
     LDA #$14
-    JSR $d0e4                               ; Play the Tilte magic sound
+    JSR Sound_PlayEffect                    ; Play the Tilte magic sound
                                             ; effect.
 
 
@@ -17852,7 +17864,7 @@ CastMagic_UpdateDeluge:                     ; [$bb45]
     ; It hit a block. Play the sound effect.
     ;
     LDA #$0a
-    JSR $d0e4                               ; Play the Magic Hit Obstacle
+    JSR Sound_PlayEffect                    ; Play the Magic Hit Obstacle
                                             ; sound effect.
 
 
@@ -18060,7 +18072,7 @@ CastMagic_UpdateFire:                       ; [$bb9c]
     ; It hit a block. Play the sound effect.
     ;
     LDA #$0a
-    JSR $d0e4                               ; Play the Magic Hit Obstacle
+    JSR Sound_PlayEffect                    ; Play the Magic Hit Obstacle
                                             ; sound effect.
 
 
@@ -18963,9 +18975,9 @@ CastMagic_CheckDirection_CheckImpassable:   ; [$bd58]
     ;
     LDA a:CastMagic_YPos_Full               ; A = Magic full Y position
     STA Arg_PixelPosY                       ; Store as the Y argument.
-    JSR $e86c                               ; Convert the pixels to a screen
+    JSR Area_ConvertPixelsToBlockPos        ; Convert the pixels to a screen
                                             ; block lookup position.
-    JSR $e87c                               ; Check if the block is
+    JSR ScreenBuffer_IsBlockImpassable      ; Check if the block is
                                             ; impassable.
     STA Blocks_Result                       ; Set the tentative result
                                             ; accordingly.
@@ -18986,7 +18998,7 @@ CastMagic_CheckDirection_CheckImpassable:   ; [$bd58]
     CLC
     ADC #$10                                ; Add 16 (next block).
     TAX                                     ; X = A (result)
-    JSR $e87c                               ; Check if the block is
+    JSR ScreenBuffer_IsBlockImpassable      ; Check if the block is
                                             ; impassable.
     STA Blocks_Result                       ; Store the tentative result.
     BNE @_return                            ; If not passable, return the
@@ -19006,7 +19018,7 @@ CastMagic_CheckDirection_CheckImpassable:   ; [$bd58]
     CLC
     ADC #$10                                ; Add 16 (next block).
     TAX                                     ; X = A (result)
-    JSR $e87c                               ; Check if the block is
+    JSR ScreenBuffer_IsBlockImpassable      ; Check if the block is
                                             ; impassable.
     STA Blocks_Result                       ; Store the result.
 

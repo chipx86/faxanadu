@@ -144,7 +144,7 @@ pre {
 ; Relative offset to the area tables.
 ;============================================================================
 </div><span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><a href="#AREAS_TABLE_PTR" class="la">AREAS_TABLE_PTR:</a><span class="ce">; [$8000]</span></span>
-<span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><span class="cd"><span class="i">.word</span> <span class="o">$0002</span></span><span class="ce">; <a href="#AREA_TABLES">AREA_TABLES</a> [$PRG3::8000]</span></span>
+<span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#AREA_TABLES">AREA_TABLES</a>-$8000</span></span><span class="ce">; <a href="#AREA_TABLES">AREA_TABLES</a> [$PRG3::8000]</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="AREA_TABLES"></a><div class="cp">;============================================================================
@@ -159,14 +159,14 @@ pre {
 ;     <a href="#AREAS_TABLE_PTR">AREAS_TABLE_PTR</a> [$PRG3::8000]
 ;
 </div><span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><a href="#AREA_TABLES" class="la">AREA_TABLES:</a><span class="ce">; [$8002]</span></span>
-<span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><span class="cd"><span class="i">.word</span> <span class="o">$0012</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a> [$PRG3::8002]</span></span>
-<span class="l"><a class="anc" name="8004" href="#8004">[8004]</a><span class="cd"><span class="i">.word</span> <span class="o">$0413</span></span><span class="ce">; <a href="#APOLUNE_AREA_DATA">APOLUNE_AREA_DATA</a> [$PRG3::8004]</span></span>
-<span class="l"><a class="anc" name="8006" href="#8006">[8006]</a><span class="cd"><span class="i">.word</span> <span class="o">$090a</span></span><span class="ce">; <a href="#FOREPAW_AREA_DATA">FOREPAW_AREA_DATA</a> [$PRG3::8006]</span></span>
-<span class="l"><a class="anc" name="8008" href="#8008">[8008]</a><span class="cd"><span class="i">.word</span> <span class="o">$1829</span></span><span class="ce">; <a href="#MASCON_AREA_DATA">MASCON_AREA_DATA</a> [$PRG3::8008]</span></span>
-<span class="l"><a class="anc" name="800a" href="#800a">[800a]</a><span class="cd"><span class="i">.word</span> <span class="o">$11ac</span></span><span class="ce">; <a href="#VICTIM_AREA_DATA">VICTIM_AREA_DATA</a> [$PRG3::800a]</span></span>
-<span class="l"><a class="anc" name="800c" href="#800c">[800c]</a><span class="cd"><span class="i">.word</span> <span class="o">$0e7b</span></span><span class="ce">; <a href="#CONFLATE_AREA_DATA">CONFLATE_AREA_DATA</a> [$PRG3::800c]</span></span>
-<span class="l"><a class="anc" name="800e" href="#800e">[800e]</a><span class="cd"><span class="i">.word</span> <span class="o">$1c7e</span></span><span class="ce">; <a href="#DAYBREAK_AREA_DATA">DAYBREAK_AREA_DATA</a> [$PRG3::800e]</span></span>
-<span class="l"><a class="anc" name="8010" href="#8010">[8010]</a><span class="cd"><span class="i">.word</span> <span class="o">$2049</span></span><span class="ce">; <a href="#EVIL_FORTRESS_AREA_DATA">EVIL_FORTRESS_AREA_DATA</a> [$PRG3::8010]</span></span>
+<span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a> [$PRG3::8002]</span></span>
+<span class="l"><a class="anc" name="8004" href="#8004">[8004]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#APOLUNE_AREA_DATA">APOLUNE_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#APOLUNE_AREA_DATA">APOLUNE_AREA_DATA</a> [$PRG3::8004]</span></span>
+<span class="l"><a class="anc" name="8006" href="#8006">[8006]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#FOREPAW_AREA_DATA">FOREPAW_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#FOREPAW_AREA_DATA">FOREPAW_AREA_DATA</a> [$PRG3::8006]</span></span>
+<span class="l"><a class="anc" name="8008" href="#8008">[8008]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MASCON_AREA_DATA">MASCON_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#MASCON_AREA_DATA">MASCON_AREA_DATA</a> [$PRG3::8008]</span></span>
+<span class="l"><a class="anc" name="800a" href="#800a">[800a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#VICTIM_AREA_DATA">VICTIM_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#VICTIM_AREA_DATA">VICTIM_AREA_DATA</a> [$PRG3::800a]</span></span>
+<span class="l"><a class="anc" name="800c" href="#800c">[800c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#CONFLATE_AREA_DATA">CONFLATE_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#CONFLATE_AREA_DATA">CONFLATE_AREA_DATA</a> [$PRG3::800c]</span></span>
+<span class="l"><a class="anc" name="800e" href="#800e">[800e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DAYBREAK_AREA_DATA">DAYBREAK_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#DAYBREAK_AREA_DATA">DAYBREAK_AREA_DATA</a> [$PRG3::800e]</span></span>
+<span class="l"><a class="anc" name="8010" href="#8010">[8010]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EVIL_FORTRESS_AREA_DATA">EVIL_FORTRESS_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#EVIL_FORTRESS_AREA_DATA">EVIL_FORTRESS_AREA_DATA</a> [$PRG3::8010]</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="EOLIS_AREA_DATA"></a><div class="cp">;============================================================================

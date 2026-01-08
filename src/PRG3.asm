@@ -12,7 +12,7 @@
 ; Relative offset to the area tables.
 ;============================================================================
 AREAS_TABLE_PTR:                            ; [$8000]
-    .word $0002                             ; AREA_TABLES
+    .word AREA_TABLES-$8000                 ; AREA_TABLES
                                             ; [$PRG3::8000]
 
 
@@ -28,21 +28,21 @@ AREAS_TABLE_PTR:                            ; [$8000]
 ;     AREAS_TABLE_PTR [$PRG3::8000]
 ;
 AREA_TABLES:                                ; [$8002]
-    .word $0012                             ; EOLIS_AREA_DATA
+    .word EOLIS_AREA_DATA-$8000             ; EOLIS_AREA_DATA
                                             ; [$PRG3::8002]
-    .word $0413                             ; APOLUNE_AREA_DATA
+    .word APOLUNE_AREA_DATA-$8000           ; APOLUNE_AREA_DATA
                                             ; [$PRG3::8004]
-    .word $090a                             ; FOREPAW_AREA_DATA
+    .word FOREPAW_AREA_DATA-$8000           ; FOREPAW_AREA_DATA
                                             ; [$PRG3::8006]
-    .word $1829                             ; MASCON_AREA_DATA
+    .word MASCON_AREA_DATA-$8000            ; MASCON_AREA_DATA
                                             ; [$PRG3::8008]
-    .word $11ac                             ; VICTIM_AREA_DATA
+    .word VICTIM_AREA_DATA-$8000            ; VICTIM_AREA_DATA
                                             ; [$PRG3::800a]
-    .word $0e7b                             ; CONFLATE_AREA_DATA
+    .word CONFLATE_AREA_DATA-$8000          ; CONFLATE_AREA_DATA
                                             ; [$PRG3::800c]
-    .word $1c7e                             ; DAYBREAK_AREA_DATA
+    .word DAYBREAK_AREA_DATA-$8000          ; DAYBREAK_AREA_DATA
                                             ; [$PRG3::800e]
-    .word $2049                             ; EVIL_FORTRESS_AREA_DATA
+    .word EVIL_FORTRESS_AREA_DATA-$8000     ; EVIL_FORTRESS_AREA_DATA
                                             ; [$PRG3::8010]
 
 

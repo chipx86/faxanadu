@@ -5976,14 +5976,14 @@ Screen_ScrollVertPPUAttrData_1_:            ; [$028b]
 ; XREFS:
 ;     PPUBuffer_DrawCommand_WritePalette
 ;
-Screen_PaletteData:                         ; [$0293]
+Screen_PaletteData_Tiles:                   ; [$0293]
     .byte $00                               ; [0]:
 
 ;
 ; XREFS:
 ;     PPUBuffer_DrawCommand_WritePalette
 ;
-Screen_PaletteData_1_:                      ; [$0294]
+Screen_PaletteData_Tiles_1_:                ; [$0294]
     .byte $00                               ; [1]:
     .byte $00                               ; [2]:
     .byte $00                               ; [3]:
@@ -6003,22 +6003,24 @@ Screen_PaletteData_1_:                      ; [$0294]
 ; XREFS:
 ;     Screen_SetFadeOutPalette
 ;
-Screen_PaletteData_15_:                     ; [$02a2]
+Screen_PaletteData_Tiles_15_:               ; [$02a2]
     .byte $00                               ; [15]:
-    .byte $00                               ; [16]:
-    .byte $00                               ; [17]:
-    .byte $00                               ; [18]:
-    .byte $00                               ; [19]:
-    .byte $00                               ; [20]:
-    .byte $00                               ; [21]:
-    .byte $00                               ; [22]:
-    .byte $00                               ; [23]:
-    .byte $00                               ; [24]:
-    .byte $00                               ; [25]:
-    .byte $00                               ; [26]:
-    .byte $00                               ; [27]:
-    .byte $00                               ; [28]:
-    .byte $00                               ; [29]:
+
+Screen_PaletteData_Sprites:                 ; [$02a3]
+    .byte $00                               ; [0]:
+    .byte $00                               ; [1]:
+    .byte $00                               ; [2]:
+    .byte $00                               ; [3]:
+    .byte $00                               ; [4]:
+    .byte $00                               ; [5]:
+    .byte $00                               ; [6]:
+    .byte $00                               ; [7]:
+    .byte $00                               ; [8]:
+    .byte $00                               ; [9]:
+    .byte $00                               ; [10]:
+    .byte $00                               ; [11]:
+    .byte $00                               ; [12]:
+    .byte $00                               ; [13]:
 
 ;
 ; XREFS:
@@ -6028,8 +6030,8 @@ Screen_PaletteData_15_:                     ; [$02a2]
 ;     StartScreen_Draw
 ;     Screen_SetPaletteData
 ;
-Screen_PaletteData_30_:                     ; [$02b1]
-    .byte $00                               ; [30]:
+Screen_PaletteData_Sprites_14_:             ; [$02b1]
+    .byte $00                               ; [14]:
 
 ;
 ; XREFS:
@@ -6039,8 +6041,8 @@ Screen_PaletteData_30_:                     ; [$02b1]
 ;     StartScreen_Draw
 ;     Screen_SetPaletteData
 ;
-Screen_PaletteData_31_:                     ; [$02b2]
-    .byte $00                               ; [31]:
+Screen_PaletteData_Sprites_15_:             ; [$02b2]
+    .byte $00                               ; [15]:
 
 
 ;============================================================================

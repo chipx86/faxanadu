@@ -296,12 +296,7 @@ pre {
 <span class="l"><a class="anc" name="8095" href="#8095">[8095]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Hornet">SpriteUpdateHandler_Enemy_Hornet</a>-1</span></span><span class="ce">; [7]: Enemy: Hornet</span></span>
 <span class="l"><a class="anc" name="8097" href="#8097">[8097]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Bihoruda">SpriteUpdateHandler_Enemy_Bihoruda</a>-1</span></span><span class="ce">; [8]: Enemy: Bihoruda</span></span>
 <span class="l"><a class="anc" name="8099" href="#8099">[8099]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Lilith">SpriteUpdateHandler_Enemy_Lilith</a>-1</span></span><span class="ce">; [9]: Enemy: Lilith</span></span>
-<span class="l"></span>
-<span class="l"></span>
-<div class="cp">;============================================================================
-; SpriteUpdateHandler_Enemy_Garbled_10
-;============================================================================
-</div><span class="l"><a class="anc" name="809b" href="#809b">[809b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_TODO_Garbled10">SpriteUpdateHandler_TODO_Garbled10</a>-1</span></span><span class="ce">; [10]: Magic: ?</span></span>
+<span class="l"><a class="anc" name="809b" href="#809b">[809b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_TODO_Garbled10">SpriteUpdateHandler_TODO_Garbled10</a>-1</span></span><span class="ce">; [10]: Magic: ?</span></span>
 <span class="l"><a class="anc" name="809d" href="#809d">[809d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Yuinaru">SpriteUpdateHandler_Enemy_Yuinaru</a>-1</span></span><span class="ce">; [11]: Enemy: Yuinaru</span></span>
 <span class="l"><a class="anc" name="809f" href="#809f">[809f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Snowman">SpriteUpdateHandler_Enemy_Snowman</a>-1</span></span><span class="ce">; [12]: Enemy: Snowman</span></span>
 <span class="l"><a class="anc" name="80a1" href="#80a1">[80a1]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#SpriteUpdateHandler_Enemy_Nash">SpriteUpdateHandler_Enemy_Nash</a>-1</span></span><span class="ce">; [13]: Enemy: Nash</span></span>
@@ -477,7 +472,7 @@ pre {
 <span class="l"></span>
 <a name=":81b6:@LAB_PRG14__81b6"></a><span class="l"><a class="anc" name="81b6" href="#81b6">[81b6]</a><a href="#:81b6:@LAB_PRG14__81b6" class="lla">@LAB_PRG14__81b6:</a><span class="ce">; [$81b6]</span></span>
 <span class="l"><a class="anc" name="81b6" href="#81b6">[81b6]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$02</span></span></span>
-<span class="l"><a class="anc" name="81b8" href="#81b8">[81b8]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="81b8" href="#81b8">[81b8]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="81bb" href="#81bb">[81bb]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="#MAGIC_DAMAGE">MAGIC_DAMAGE</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="81be" href="#81be">[81be]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="81c0" href="#81c0">[81c0]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#SpecialItems">SpecialItems</a></span></span></span>
@@ -548,7 +543,7 @@ pre {
 ; Play the killed enemy sound effect.
 ;
 </div><span class="l"><a class="anc" name="8218" href="#8218">[8218]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$03</span></span></span>
-<span class="l"><a class="anc" name="821a" href="#821a">[821a]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="821a" href="#821a">[821a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -863,7 +858,7 @@ pre {
 <span class="l"><a class="anc" name="834e" href="#834e">[834e]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_L">Arg_PlayerHealthDelta_L</a></span></span></span>
 <span class="l"><a class="anc" name="8351" href="#8351">[8351]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#BYTE_04bf">BYTE_04bf</a></span></span></span>
 <span class="l"><a class="anc" name="8354" href="#8354">[8354]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorState_XFrac">CurrentSprites_BehaviorState_XFrac</a>,X</span></span></span>
-<span class="l"><a class="anc" name="8357" href="#8357">[8357]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c0ec</span></span></span>
+<span class="l"><a class="anc" name="8357" href="#8357">[8357]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a></span></span></span>
 <span class="l"><a class="anc" name="835a" href="#835a">[835a]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_U">Arg_PlayerHealthDelta_U</a></span></span></span>
 <span class="l"><a class="anc" name="835d" href="#835d">[835d]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorState_YFull">CurrentSprites_BehaviorState_YFull</a>,X</span></span></span>
 <span class="l"><a class="anc" name="8360" href="#8360">[8360]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_L">Arg_PlayerHealthDelta_L</a></span></span></span>
@@ -881,7 +876,7 @@ pre {
 <span class="l"><a class="anc" name="837a" href="#837a">[837a]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_L">Arg_PlayerHealthDelta_L</a></span></span></span>
 <span class="l"><a class="anc" name="837d" href="#837d">[837d]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#BYTE_04bf">BYTE_04bf</a></span></span></span>
 <span class="l"><a class="anc" name="8380" href="#8380">[8380]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorState_YFrac">CurrentSprites_BehaviorState_YFrac</a>,X</span></span></span>
-<span class="l"><a class="anc" name="8383" href="#8383">[8383]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c0ec</span></span></span>
+<span class="l"><a class="anc" name="8383" href="#8383">[8383]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_Something_ChangeHP">Player_Something_ChangeHP</a></span></span></span>
 <span class="l"><a class="anc" name="8386" href="#8386">[8386]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_U">Arg_PlayerHealthDelta_U</a></span></span></span>
 <span class="l"><a class="anc" name="8389" href="#8389">[8389]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorState_XFull">CurrentSprites_BehaviorState_XFull</a>,X</span></span></span>
 <span class="l"><a class="anc" name="838c" href="#838c">[838c]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_L">Arg_PlayerHealthDelta_L</a></span></span></span>
@@ -1559,8 +1554,8 @@ pre {
 <span class="l"><a class="anc" name="8558" href="#8558">[8558]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="8559" href="#8559">[8559]</a><span class="cd"><span class="i">ADC</span> <span class="o"><a href="#SPRITE_WALK_PIXEL_MOVEMENT_TABLE">SPRITE_WALK_PIXEL_MOVEMENT_TABLE</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="855c" href="#855c">[855c]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="855e" href="#855e">[855e]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8561" href="#8561">[8561]</a><span class="cd"><span class="i">JMP</span> <span class="o">$e887</span></span></span>
+<span class="l"><a class="anc" name="855e" href="#855e">[855e]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8561" href="#8561">[8561]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Area_IsBlockImpassableOrLadder">Area_IsBlockImpassableOrLadder</a></span></span></span>
 <span class="l"></span>
 </pre><pre><a name="Sprite_MoveVertAndFlipIfNeeded"></a><div class="cp">;============================================================================
 ; TODO: Document Sprite_MoveVertAndFlipIfNeeded
@@ -1802,8 +1797,8 @@ pre {
 <span class="l"><a class="anc" name="860a" href="#860a">[860a]</a><span class="cd"><span class="i">ADC</span> <span class="o"><a href="#SPRITE_HITBOX_HEIGHTS">SPRITE_HITBOX_HEIGHTS</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="860d" href="#860d">[860d]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosY">Arg_PixelPosY</a></span></span></span>
 <span class="l"><a class="anc" name="860f" href="#860f">[860f]</a><span class="cd"><span class="i">INC</span> <span class="o"><a href="RAM.html#Arg_PixelPosY">Arg_PixelPosY</a></span></span></span>
-<span class="l"><a class="anc" name="8611" href="#8611">[8611]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8614" href="#8614">[8614]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="8611" href="#8611">[8611]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8614" href="#8614">[8614]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="8617" href="#8617">[8617]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><a class="anc" name="8619" href="#8619">[8619]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
 <span class="l"><a class="anc" name="861c" href="#861c">[861c]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -2127,8 +2122,8 @@ pre {
 </div><span class="l"><a class="anc" name="86c6" href="#86c6">[86c6]</a><a href="#Sprites_MoveRight__86c6" class="la">Sprites_MoveRight__86c6:</a><span class="ce">; [$86c6]</span></span>
 <span class="l"><a class="anc" name="86c6" href="#86c6">[86c6]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_YPos">CurrentSprites_YPos</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="86c9" href="#86c9">[86c9]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosY">Arg_PixelPosY</a></span></span></span>
-<span class="l"><a class="anc" name="86cb" href="#86cb">[86cb]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="86ce" href="#86ce">[86ce]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="86cb" href="#86cb">[86cb]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="86ce" href="#86ce">[86ce]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="86d1" href="#86d1">[86d1]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><a class="anc" name="86d3" href="#86d3">[86d3]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG14__870c">@LAB_PRG14__870c</a></span></span></span>
 <span class="l"><a class="anc" name="86d5" href="#86d5">[86d5]</a><span class="cd"><span class="i">LDY</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
@@ -2147,7 +2142,7 @@ pre {
 <span class="l"><a class="anc" name="86eb" href="#86eb">[86eb]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="86ec" href="#86ec">[86ec]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span></span>
 <span class="l"><a class="anc" name="86ee" href="#86ee">[86ee]</a><span class="cd"><span class="i">TAX</span></span></span>
-<span class="l"><a class="anc" name="86ef" href="#86ef">[86ef]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="86ef" href="#86ef">[86ef]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="86f2" href="#86f2">[86f2]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><a class="anc" name="86f4" href="#86f4">[86f4]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG14__870c">@LAB_PRG14__870c</a></span></span></span>
 <span class="l"><a class="anc" name="86f6" href="#86f6">[86f6]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__86e1">@LAB_PRG14__86e1</a></span></span></span>
@@ -2161,7 +2156,7 @@ pre {
 <span class="l"><a class="anc" name="8703" href="#8703">[8703]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="8704" href="#8704">[8704]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span></span>
 <span class="l"><a class="anc" name="8706" href="#8706">[8706]</a><span class="cd"><span class="i">TAX</span></span></span>
-<span class="l"><a class="anc" name="8707" href="#8707">[8707]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="8707" href="#8707">[8707]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="870a" href="#870a">[870a]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"></span>
 <a name=":870c:@LAB_PRG14__870c"></a><span class="l"><a class="anc" name="870c" href="#870c">[870c]</a><a href="#:870c:@LAB_PRG14__870c" class="lla">@LAB_PRG14__870c:</a><span class="ce">; [$870c]</span></span>
@@ -2212,8 +2207,8 @@ pre {
 <a name=":873a:@LAB_PRG14__873a"></a><span class="l"><a class="anc" name="873a" href="#873a">[873a]</a><a href="#:873a:@LAB_PRG14__873a" class="lla">@LAB_PRG14__873a:</a><span class="ce">; [$873a]</span></span>
 <span class="l"><a class="anc" name="873a" href="#873a">[873a]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_XPos_Full">CurrentSprites_XPos_Full</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="873d" href="#873d">[873d]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="873f" href="#873f">[873f]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8742" href="#8742">[8742]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="873f" href="#873f">[873f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8742" href="#8742">[8742]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="8745" href="#8745">[8745]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><a class="anc" name="8747" href="#8747">[8747]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG14__8778">@LAB_PRG14__8778</a></span></span></span>
 <span class="l"><a class="anc" name="8749" href="#8749">[8749]</a><span class="cd"><span class="i">LDY</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
@@ -2229,7 +2224,7 @@ pre {
 <span class="l"><a class="anc" name="875a" href="#875a">[875a]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_HitBoxValue">Temp_HitBoxValue</a></span></span></span>
 <span class="l"><a class="anc" name="875c" href="#875c">[875c]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@LAB_PRG14__8768">@LAB_PRG14__8768</a></span></span></span>
 <span class="l"><a class="anc" name="875e" href="#875e">[875e]</a><span class="cd"><span class="i">INX</span></span></span>
-<span class="l"><a class="anc" name="875f" href="#875f">[875f]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="875f" href="#875f">[875f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="8762" href="#8762">[8762]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"><a class="anc" name="8764" href="#8764">[8764]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG14__8778">@LAB_PRG14__8778</a></span></span></span>
 <span class="l"><a class="anc" name="8766" href="#8766">[8766]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__8755">@LAB_PRG14__8755</a></span></span></span>
@@ -2240,7 +2235,7 @@ pre {
 <span class="l"><a class="anc" name="876e" href="#876e">[876e]</a><span class="cd"><span class="i">AND</span> <span class="o">#$0f</span></span></span>
 <span class="l"><a class="anc" name="8770" href="#8770">[8770]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__8778">@LAB_PRG14__8778</a></span></span></span>
 <span class="l"><a class="anc" name="8772" href="#8772">[8772]</a><span class="cd"><span class="i">INX</span></span></span>
-<span class="l"><a class="anc" name="8773" href="#8773">[8773]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span></span>
+<span class="l"><a class="anc" name="8773" href="#8773">[8773]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span></span>
 <span class="l"><a class="anc" name="8776" href="#8776">[8776]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span></span>
 <span class="l"></span>
 <a name=":8778:@LAB_PRG14__8778"></a><span class="l"><a class="anc" name="8778" href="#8778">[8778]</a><a href="#:8778:@LAB_PRG14__8778" class="lla">@LAB_PRG14__8778:</a><span class="ce">; [$8778]</span></span>
@@ -2321,7 +2316,7 @@ pre {
 <span class="l"><a class="anc" name="87d1" href="#87d1">[87d1]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
 <span class="l"><a class="anc" name="87d3" href="#87d3">[87d3]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_Entities">CurrentSprites_Entities</a>,X</span></span></span>
 <span class="l"><a class="anc" name="87d6" href="#87d6">[87d6]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$0c</span></span></span>
-<span class="l"><a class="anc" name="87d8" href="#87d8">[87d8]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="87d8" href="#87d8">[87d8]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="87db" href="#87db">[87db]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
 </pre><pre><a name="Player_HandleHitByMagic"></a><div class="cp">;============================================================================
@@ -2355,7 +2350,7 @@ pre {
 <span class="l"></span>
 <a name=":87fa:@LAB_PRG14__87fa"></a><span class="l"><a class="anc" name="87fa" href="#87fa">[87fa]</a><a href="#:87fa:@LAB_PRG14__87fa" class="lla">@LAB_PRG14__87fa:</a><span class="ce">; [$87fa]</span></span>
 <span class="l"><a class="anc" name="87fa" href="#87fa">[87fa]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a></span></span></span>
-<span class="l"><a class="anc" name="87fd" href="#87fd">[87fd]</a><span class="cd"><span class="i">JMP</span> <span class="o">$c08e</span></span></span>
+<span class="l"><a class="anc" name="87fd" href="#87fd">[87fd]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a></span></span></span>
 <span class="l"><a class="anc" name="8800" href="#8800">[8800]</a><span class="cd"><span class="i">DEC</span> <span class="o"><a href="RAM.html#CurrentSprites_HitCounter">CurrentSprites_HitCounter</a>,X</span></span></span>
 <span class="l"><a class="anc" name="8803" href="#8803">[8803]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -2435,7 +2430,7 @@ pre {
 <div class="c">;
 ; Play the Hit Enemy sound.
 ;
-</div><span class="l"><a class="anc" name="884b" href="#884b">[884b]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+</div><span class="l"><a class="anc" name="884b" href="#884b">[884b]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -2556,7 +2551,7 @@ pre {
 ; Play a sound for the enemy kill, reset state, and add
 ; experience.
 ;
-</div><span class="l"><a class="anc" name="88ab" href="#88ab">[88ab]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+</div><span class="l"><a class="anc" name="88ab" href="#88ab">[88ab]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="88ae" href="#88ae">[88ae]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><a class="anc" name="88b0" href="#88b0">[88b0]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_HitCounter">CurrentSprites_HitCounter</a>,X</span></span><span class="ce">; Clear the hit counter for the dead enemy.</span></span>
 <span class="l"><a class="anc" name="88b3" href="#88b3">[88b3]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Player_AddExperienceFromSprite">Player_AddExperienceFromSprite</a></span></span><span class="ce">; Add experience for the current sprite.</span></span>
@@ -2691,10 +2686,13 @@ pre {
 ;
 ; CALLS:
 ;     Player_PickUp
+;
+; XREFS:
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::8962]
 ;============================================================================
 </div><span class="l"><a class="anc" name="88fb" href="#88fb">[88fb]</a><a href="#Player_HandleTouchItem" class="la">Player_HandleTouchItem:</a><span class="ce">; [$88fb]</span></span>
 <span class="l"><a class="anc" name="88fb" href="#88fb">[88fb]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_Entities">CurrentSprites_Entities</a>,X</span></span><span class="ce">; Load the entity at the given index.</span></span>
-<span class="l"><a class="anc" name="88fe" href="#88fe">[88fe]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c764</span></span><span class="ce">; Pick up the item.</span></span>
+<span class="l"><a class="anc" name="88fe" href="#88fe">[88fe]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_PickUp">Player_PickUp</a></span></span><span class="ce">; Pick up the item.</span></span>
 <span class="l"><a class="anc" name="8901" href="#8901">[8901]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span><span class="ce">; X = current sprite index.</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -2763,6 +2761,7 @@ pre {
 <a name="Player_HandleCollision_NoOp"></a><div class="c">;
 ; XREFS:
 ;     <a href="#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::895e]
 ;
 </div><span class="l"><a class="anc" name="8957" href="#8957">[8957]</a><a href="#Player_HandleCollision_NoOp" class="la">Player_HandleCollision_NoOp:</a><span class="ce">; [$8957]</span></span>
 <span class="l"><a class="anc" name="8957" href="#8957">[8957]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -2780,14 +2779,14 @@ pre {
 ;     <a href="#CurrentSprite_CheckHitPlayer">CurrentSprite_CheckHitPlayer</a>
 ;
 </div><span class="l"><a class="anc" name="8958" href="#8958">[8958]</a><a href="#SPRITE_COLLISION_HANDLERS" class="la">SPRITE_COLLISION_HANDLERS:</a><span class="ce">; [$8958]</span></span>
-<span class="l"><a class="anc" name="8958" href="#8958">[8958]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>-1</span></span><span class="ce">; <a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a> [$PRG14::8958]</span></span>
-<span class="l"><a class="anc" name="895a" href="#895a">[895a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchBreadOrCoin">Player_HandleTouchBreadOrCoin</a>-1</span></span><span class="ce">; Coin/meat touched</span></span>
-<span class="l"><a class="anc" name="895c" href="#895c">[895c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_CheckHandlePressUpOnNPC">Player_CheckHandlePressUpOnNPC</a>-1</span></span><span class="ce">; Press Up on NPC</span></span>
-<span class="l"><a class="anc" name="895e" href="#895e">[895e]</a><span class="cd"><span class="i">.word</span> <span class="o">$8956</span></span><span class="ce">; Large animation. Just return.</span></span>
-<span class="l"><a class="anc" name="8960" href="#8960">[8960]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchNPC">Player_HandleTouchNPC</a>-1</span></span><span class="ce">; Collide with NPC</span></span>
-<span class="l"><a class="anc" name="8962" href="#8962">[8962]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchItem">Player_HandleTouchItem</a>-1</span></span><span class="ce">; Item touched</span></span>
-<span class="l"><a class="anc" name="8964" href="#8964">[8964]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>-1</span></span><span class="ce">; Enemy magic touched</span></span>
-<span class="l"><a class="anc" name="8966" href="#8966">[8966]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>-1</span></span><span class="ce">; Enemy touched</span></span>
+<span class="l"><a class="anc" name="8958" href="#8958">[8958]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>-1</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><a class="anc" name="895a" href="#895a">[895a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchBreadOrCoin">Player_HandleTouchBreadOrCoin</a>-1</span></span><span class="ce">; [1]: Coin/meat touched</span></span>
+<span class="l"><a class="anc" name="895c" href="#895c">[895c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_CheckHandlePressUpOnNPC">Player_CheckHandlePressUpOnNPC</a>-1</span></span><span class="ce">; [2]: Press Up on NPC</span></span>
+<span class="l"><a class="anc" name="895e" href="#895e">[895e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleCollision_NoOp">Player_HandleCollision_NoOp</a>-1</span></span><span class="ce">; [3]: Large animation. Just return.</span></span>
+<span class="l"><a class="anc" name="8960" href="#8960">[8960]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchNPC">Player_HandleTouchNPC</a>-1</span></span><span class="ce">; [4]: Collide with NPC</span></span>
+<span class="l"><a class="anc" name="8962" href="#8962">[8962]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchItem">Player_HandleTouchItem</a>-1</span></span><span class="ce">; [5]: Item touched</span></span>
+<span class="l"><a class="anc" name="8964" href="#8964">[8964]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>-1</span></span><span class="ce">; [6]: Enemy magic touched</span></span>
+<span class="l"><a class="anc" name="8966" href="#8966">[8966]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>-1</span></span><span class="ce">; [7]: Enemy touched</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="Player_HandleTouchBreadOrCoin"></a><div class="cp">;============================================================================
@@ -2809,6 +2808,9 @@ pre {
 ; CALLS:
 ;     <a href="#Player_HandleTouchCoin">Player_HandleTouchCoin</a>
 ;     <a href="#Player_HandleTouchBread">Player_HandleTouchBread</a>
+;
+; XREFS:
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::895a]
 ;============================================================================
 </div><span class="l"><a class="anc" name="8968" href="#8968">[8968]</a><a href="#Player_HandleTouchBreadOrCoin" class="la">Player_HandleTouchBreadOrCoin:</a><span class="ce">; [$8968]</span></span>
 <div class="c">;
@@ -2858,6 +2860,9 @@ pre {
 ;
 ; CALLS:
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
+;
+; XREFS:
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::895c]
 ;============================================================================
 </div><span class="l"><a class="anc" name="897f" href="#897f">[897f]</a><a href="#Player_CheckHandlePressUpOnNPC" class="la">Player_CheckHandlePressUpOnNPC:</a><span class="ce">; [$897f]</span></span>
 <div class="c">;
@@ -2876,7 +2881,7 @@ pre {
 <span class="l"><a class="anc" name="8988" href="#8988">[8988]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#CurrentSprite_Value">CurrentSprite_Value</a></span></span><span class="ce">; Store it as the current value.</span></span>
 <span class="l"><a class="anc" name="898b" href="#898b">[898b]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$ff</span></span><span class="ce">; Is it 0xFF?</span></span>
 <span class="l"><a class="anc" name="898d" href="#898d">[898d]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#RETURN_8998">RETURN_8998</a></span></span><span class="ce">; If so, return.</span></span>
-<span class="l"><a class="anc" name="898f" href="#898f">[898f]</a><span class="cd"><span class="i">JSR</span> <span class="o">$f859</span></span><span class="ce">; Execute the handler.</span></span>
+<span class="l"><a class="anc" name="898f" href="#898f">[898f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Execute the handler.</span></span>
 <span class="l"><a class="anc" name="8992" href="#8992">[8992]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
 <span class="l"><a class="anc" name="8993" href="#8993">[8993]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
@@ -2916,6 +2921,9 @@ pre {
 ;
 ; CALLS:
 ;     <a href="#Player_HandleTouchEnemy">Player_HandleTouchEnemy</a>
+;
+; XREFS:
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::8964]
 ;============================================================================
 </div><span class="l"><a class="anc" name="8999" href="#8999">[8999]</a><a href="#Player_HandleTouchEnemyMagic" class="la">Player_HandleTouchEnemyMagic:</a><span class="ce">; [$8999]</span></span>
 <span class="l"><a class="anc" name="8999" href="#8999">[8999]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_InvincibilityPhase">Player_InvincibilityPhase</a></span></span></span>
@@ -2970,6 +2978,7 @@ pre {
 ; XREFS:
 ;     <a href="#Player_HandleTouchEnemyMagic">Player_HandleTouchEnemyMagic</a>
 ;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::8958]
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::8966]
 ;============================================================================
 </div><span class="l"><a class="anc" name="89ae" href="#89ae">[89ae]</a><a href="#Player_HandleTouchEnemy" class="la">Player_HandleTouchEnemy:</a><span class="ce">; [$89ae]</span></span>
 <div class="c">;
@@ -3009,7 +3018,7 @@ pre {
 ;
 </div><span class="l"><a class="anc" name="89c7" href="#89c7">[89c7]</a><a href="#:89c7:@_handleDamage" class="lla">@_handleDamage:</a><span class="ce">; [$89c7]</span></span>
 <span class="l"><a class="anc" name="89c7" href="#89c7">[89c7]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$04</span></span></span>
-<span class="l"><a class="anc" name="89c9" href="#89c9">[89c9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play the Player Hit sound.</span></span>
+<span class="l"><a class="anc" name="89c9" href="#89c9">[89c9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play the Player Hit sound.</span></span>
 <span class="l"><a class="anc" name="89cc" href="#89cc">[89cc]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Player_SetDamagedBySprite">Player_SetDamagedBySprite</a></span></span><span class="ce">; Mark the player as damaged and set state.</span></span>
 <span class="l"><a class="anc" name="89cf" href="#89cf">[89cf]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Player_ApplyDamage">Player_ApplyDamage</a></span></span><span class="ce">; Apply damage.</span></span>
 <span class="l"><a class="anc" name="89d2" href="#89d2">[89d2]</a><span class="cd"><span class="i">.byte</span> <span class="o">$60</span></span><span class="ce">; [$89d2] byte</span></span>
@@ -3106,13 +3115,16 @@ pre {
 ;
 ; CALLS:
 ;     <a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a>
+;
+; XREFS:
+;     <a href="#SPRITE_COLLISION_HANDLERS">SPRITE_COLLISION_HANDLERS</a> [$PRG14::8960]
 ;============================================================================
 </div><span class="l"><a class="anc" name="89ef" href="#89ef">[89ef]</a><a href="#Player_HandleTouchNPC" class="la">Player_HandleTouchNPC:</a><span class="ce">; [$89ef]</span></span>
 <span class="l"><a class="anc" name="89ef" href="#89ef">[89ef]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_Values">CurrentSprites_Values</a>,X</span></span><span class="ce">; Load the value for this sprite.</span></span>
 <span class="l"><a class="anc" name="89f2" href="#89f2">[89f2]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#CurrentSprite_Value">CurrentSprite_Value</a></span></span><span class="ce">; Store as the current sprite's value.</span></span>
 <span class="l"><a class="anc" name="89f5" href="#89f5">[89f5]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$ff</span></span><span class="ce">; Is it 0xFF (unset)?</span></span>
 <span class="l"><a class="anc" name="89f7" href="#89f7">[89f7]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#RETURN_8998">RETURN_8998</a></span></span><span class="ce">; If so, return.</span></span>
-<span class="l"><a class="anc" name="89f9" href="#89f9">[89f9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$f859</span></span><span class="ce">; Else, execute the IScript at that value.</span></span>
+<span class="l"><a class="anc" name="89f9" href="#89f9">[89f9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Else, execute the IScript at that value.</span></span>
 <span class="l"><a class="anc" name="89fc" href="#89fc">[89fc]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
 <span class="l"><a class="anc" name="89fd" href="#89fd">[89fd]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
@@ -3284,7 +3296,7 @@ pre {
 <span class="l"><a class="anc" name="8ad1" href="#8ad1">[8ad1]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_U">Arg_PlayerHealthDelta_U</a></span></span></span>
 <span class="l"></span>
 <a name=":8ad4:@LAB_PRG14__8ad4"></a><span class="l"><a class="anc" name="8ad4" href="#8ad4">[8ad4]</a><a href="#:8ad4:@LAB_PRG14__8ad4" class="lla">@LAB_PRG14__8ad4:</a><span class="ce">; [$8ad4]</span></span>
-<span class="l"><a class="anc" name="8ad4" href="#8ad4">[8ad4]</a><span class="cd"><span class="i">JMP</span> <span class="o">$c08e</span></span></span>
+<span class="l"><a class="anc" name="8ad4" href="#8ad4">[8ad4]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a></span></span></span>
 <span class="l"></span>
 <a name="RETURN_8AD7"></a><div class="c">;
 ; XREFS:
@@ -3630,7 +3642,7 @@ pre {
 <span class="l"><a class="anc" name="8b8d" href="#8b8d">[8b8d]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Int24">Temp_Int24</a></span></span><span class="ce">; Store as the lower byte of the experience.</span></span>
 <span class="l"><a class="anc" name="8b8f" href="#8b8f">[8b8f]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><a class="anc" name="8b91" href="#8b91">[8b91]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Int24_M">Temp_Int24_M</a></span></span><span class="ce">; Store 0 as the middle byte.</span></span>
-<span class="l"><a class="anc" name="8b93" href="#8b93">[8b93]</a><span class="cd"><span class="i">JSR</span> <span class="o">$f957</span></span><span class="ce">; Update the player's experience.</span></span>
+<span class="l"><a class="anc" name="8b93" href="#8b93">[8b93]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_UpdateExperience">Player_UpdateExperience</a></span></span><span class="ce">; Update the player's experience.</span></span>
 <span class="l"><a class="anc" name="8b96" href="#8b96">[8b96]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
 <span class="l"><a class="anc" name="8b99" href="#8b99">[8b99]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -3665,7 +3677,7 @@ pre {
 ;============================================================================
 </div><span class="l"><a class="anc" name="8b9a" href="#8b9a">[8b9a]</a><a href="#Player_HandleTouchCoin" class="la">Player_HandleTouchCoin:</a><span class="ce">; [$8b9a]</span></span>
 <span class="l"><a class="anc" name="8b9a" href="#8b9a">[8b9a]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$09</span></span></span>
-<span class="l"><a class="anc" name="8b9c" href="#8b9c">[8b9c]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play sound 9 (coin touched).</span></span>
+<span class="l"><a class="anc" name="8b9c" href="#8b9c">[8b9c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play sound 9 (coin touched).</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -3697,7 +3709,7 @@ Set Carry = overflow.</span></span>
 <div class="c">;
 ; Render and prepare to return.
 ;
-</div><span class="l"><a class="anc" name="8bb9" href="#8bb9">[8bb9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$f9e7</span></span><span class="ce">; Render the new gold amount.</span></span>
+</div><span class="l"><a class="anc" name="8bb9" href="#8bb9">[8bb9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#UI_DrawGoldValue">UI_DrawGoldValue</a></span></span><span class="ce">; Render the new gold amount.</span></span>
 <span class="l"><a class="anc" name="8bbc" href="#8bbc">[8bbc]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span><span class="ce">; Set X = current sprite index.</span></span>
 <span class="l"><a class="anc" name="8bbf" href="#8bbf">[8bbf]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -3724,10 +3736,10 @@ Set Carry = overflow.</span></span>
 ;============================================================================
 </div><span class="l"><a class="anc" name="8bc0" href="#8bc0">[8bc0]</a><a href="#Player_HandleTouchBread" class="la">Player_HandleTouchBread:</a><span class="ce">; [$8bc0]</span></span>
 <span class="l"><a class="anc" name="8bc0" href="#8bc0">[8bc0]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$1b</span></span></span>
-<span class="l"><a class="anc" name="8bc2" href="#8bc2">[8bc2]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play sound 0x1B (pick up meat).</span></span>
+<span class="l"><a class="anc" name="8bc2" href="#8bc2">[8bc2]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play sound 0x1B (pick up meat).</span></span>
 <span class="l"><a class="anc" name="8bc5" href="#8bc5">[8bc5]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span><span class="ce">; Load the current sprite index for meat.</span></span>
 <span class="l"><a class="anc" name="8bc8" href="#8bc8">[8bc8]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_Values">CurrentSprites_Values</a>,X</span></span><span class="ce">; Load the HP value for it.</span></span>
-<span class="l"><a class="anc" name="8bcb" href="#8bcb">[8bcb]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c07b</span></span><span class="ce">; Add it to the player's HP.</span></span>
+<span class="l"><a class="anc" name="8bcb" href="#8bcb">[8bcb]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_AddHP">Player_AddHP</a></span></span><span class="ce">; Add it to the player's HP.</span></span>
 <span class="l"><a class="anc" name="8bce" href="#8bce">[8bce]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
 <span class="l"><a class="anc" name="8bd1" href="#8bd1">[8bd1]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
@@ -3867,8 +3879,8 @@ Set Carry = overflow.</span></span>
 <div class="c">;
 ; Convert to a block position.
 ;
-</div><span class="l"><a class="anc" name="8c2c" href="#8c2c">[8c2c]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8c2f" href="#8c2f">[8c2f]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e8c3</span></span></span>
+</div><span class="l"><a class="anc" name="8c2c" href="#8c2c">[8c2c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8c2f" href="#8c2f">[8c2f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a></span></span></span>
 <span class="l"><a class="anc" name="8c32" href="#8c32">[8c32]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span></span>
 <span class="l"><a class="anc" name="8c34" href="#8c34">[8c34]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__8c3e">@LAB_PRG14__8c3e</a></span></span></span>
 <span class="l"><a class="anc" name="8c36" href="#8c36">[8c36]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
@@ -3887,8 +3899,8 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="8c49" href="#8c49">[8c49]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="8c4a" href="#8c4a">[8c4a]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$0c</span></span></span>
 <span class="l"><a class="anc" name="8c4c" href="#8c4c">[8c4c]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="8c4e" href="#8c4e">[8c4e]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8c51" href="#8c51">[8c51]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e8c3</span></span></span>
+<span class="l"><a class="anc" name="8c4e" href="#8c4e">[8c4e]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8c51" href="#8c51">[8c51]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a></span></span></span>
 <span class="l"><a class="anc" name="8c54" href="#8c54">[8c54]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span></span>
 <span class="l"><a class="anc" name="8c56" href="#8c56">[8c56]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__8c60">@LAB_PRG14__8c60</a></span></span></span>
 <span class="l"><a class="anc" name="8c58" href="#8c58">[8c58]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
@@ -4076,7 +4088,7 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="8c8e" href="#8c8e">[8c8e]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="8c8f" href="#8c8f">[8c8f]</a><span class="cd"><span class="i">LDY</span> <span class="o"><a href="RAM.html#CurrentSprites_Entities">CurrentSprites_Entities</a>,X</span></span></span>
 <span class="l"><a class="anc" name="8c92" href="#8c92">[8c92]</a><span class="cd"><span class="i">ADC</span> <span class="o"><a href="#SPRITE_APPEARANCE_PHASE_OFFSETS">SPRITE_APPEARANCE_PHASE_OFFSETS</a>,Y</span></span></span>
-<span class="l"><a class="anc" name="8c95" href="#8c95">[8c95]</a><span class="cd"><span class="i">JMP</span> <span class="o">$f057</span></span></span>
+<span class="l"><a class="anc" name="8c95" href="#8c95">[8c95]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Sprite_SetAppearanceAddrFromOffset">Sprite_SetAppearanceAddrFromOffset</a></span></span></span>
 <span class="l"></span>
 </pre><pre><a name="SpriteUpdateHandler_Invisible"></a><div class="cp">;============================================================================
 ; TODO: Document SpriteUpdateHandler_Invisible
@@ -4387,8 +4399,8 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="8dc9" href="#8dc9">[8dc9]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosY">Arg_PixelPosY</a></span></span></span>
 <span class="l"><a class="anc" name="8dcb" href="#8dcb">[8dcb]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_XPos_Full">CurrentSprites_XPos_Full</a>,X</span></span></span>
 <span class="l"><a class="anc" name="8dcd" href="#8dcd">[8dcd]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="8dcf" href="#8dcf">[8dcf]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="8dd2" href="#8dd2">[8dd2]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e8c3</span></span></span>
+<span class="l"><a class="anc" name="8dcf" href="#8dcf">[8dcf]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="8dd2" href="#8dd2">[8dd2]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a></span></span></span>
 <span class="l"><a class="anc" name="8dd5" href="#8dd5">[8dd5]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
 <span class="l"><a class="anc" name="8dd8" href="#8dd8">[8dd8]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$02</span></span></span>
 <span class="l"><a class="anc" name="8dda" href="#8dda">[8dda]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__8de4">@LAB_PRG14__8de4</a></span></span></span>
@@ -6975,7 +6987,7 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="99c3" href="#99c3">[99c3]</a><span class="cd"><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><a class="anc" name="99c4" href="#99c4">[99c4]</a><span class="cd"><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><a class="anc" name="99c5" href="#99c5">[99c5]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><a class="anc" name="99c7" href="#99c7">[99c7]</a><span class="cd"><span class="i">LDA</span> <span class="o">$037c,Y</span></span></span>
+<span class="l"><a class="anc" name="99c7" href="#99c7">[99c7]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Sprite12BodyPartHandler_3_">Sprite12BodyPartHandler_3_</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="99ca" href="#99ca">[99ca]</a><span class="cd"><span class="i">AND</span> <span class="o">#$f0</span></span></span>
 <span class="l"><a class="anc" name="99cc" href="#99cc">[99cc]</a><span class="cd"><span class="i">ORA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="99ce" href="#99ce">[99ce]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_UnusedSprite_ScreenBufferOffset">Something_UnusedSprite_ScreenBufferOffset</a></span></span></span>
@@ -6984,7 +6996,7 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="99d1" href="#99d1">[99d1]</a><span class="cd"><span class="i">LDY</span> <span class="o"><a href="RAM.html#Area_CurrentArea">Area_CurrentArea</a></span></span></span>
 <span class="l"><a class="anc" name="99d3" href="#99d3">[99d3]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="#BYTE_ARRAY_PRG14__99ef">BYTE_ARRAY_PRG14__99ef</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="99d6" href="#99d6">[99d6]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Something_UnusedSprite_BlockOffset">Something_UnusedSprite_BlockOffset</a></span></span></span>
-<span class="l"><a class="anc" name="99d9" href="#99d9">[99d9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d7b0</span></span></span>
+<span class="l"><a class="anc" name="99d9" href="#99d9">[99d9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#SpriteBehavior_EnemyUnused18_SomethingSetBlocks">SpriteBehavior_EnemyUnused18_SomethingSetBlocks</a></span></span></span>
 <span class="l"></span>
 <a name=":99dc:@LAB_PRG14__99dc"></a><span class="l"><a class="anc" name="99dc" href="#99dc">[99dc]</a><a href="#:99dc:@LAB_PRG14__99dc" class="lla">@LAB_PRG14__99dc:</a><span class="ce">; [$99dc]</span></span>
 <span class="l"><a class="anc" name="99dc" href="#99dc">[99dc]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
@@ -7737,7 +7749,7 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="9d20" href="#9d20">[9d20]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_return1">@_return1</a></span></span></span>
 <span class="l"><a class="anc" name="9d22" href="#9d22">[9d22]</a><span class="cd"><span class="i">INC</span> <span class="o"><a href="RAM.html#CurrentSprites_Phases">CurrentSprites_Phases</a>,X</span></span></span>
 <span class="l"><a class="anc" name="9d25" href="#9d25">[9d25]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$12</span></span></span>
-<span class="l"><a class="anc" name="9d27" href="#9d27">[9d27]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="9d27" href="#9d27">[9d27]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"></span>
 <a name=":9d2a:@_return1"></a><span class="l"><a class="anc" name="9d2a" href="#9d2a">[9d2a]</a><a href="#:9d2a:@_return1" class="lla">@_return1:</a><span class="ce">; [$9d2a]</span></span>
 <span class="l"><a class="anc" name="9d2a" href="#9d2a">[9d2a]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -8072,7 +8084,7 @@ Set Carry = overflow.</span></span>
 <span class="l"><a class="anc" name="9eb1" href="#9eb1">[9eb1]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$05</span></span></span>
 <span class="l"><a class="anc" name="9eb3" href="#9eb3">[9eb3]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorData2">CurrentSprites_BehaviorData2</a>,X</span></span></span>
 <span class="l"><a class="anc" name="9eb6" href="#9eb6">[9eb6]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$07</span></span></span>
-<span class="l"><a class="anc" name="9eb8" href="#9eb8">[9eb8]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="9eb8" href="#9eb8">[9eb8]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"></span>
 <a name=":9ebb:@_return1"></a><span class="l"><a class="anc" name="9ebb" href="#9ebb">[9ebb]</a><a href="#:9ebb:@_return1" class="lla">@_return1:</a><span class="ce">; [$9ebb]</span></span>
 <span class="l"><a class="anc" name="9ebb" href="#9ebb">[9ebb]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -9515,7 +9527,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a377:@_checkOnScreen"></a><span class="l"><a class="anc" name="a377" href="#a377">[a377]</a><a href="#:a377:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a377]</span></span>
 <span class="l"><a class="anc" name="a377" href="#a377">[a377]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$2e</span></span></span>
-<span class="l"><a class="anc" name="a379" href="#a379">[a379]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a379" href="#a379">[a379]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a37c" href="#a37c">[a37c]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a37e" href="#a37e">[a37e]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9557,7 +9569,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a3a7:@_checkOnScreen"></a><span class="l"><a class="anc" name="a3a7" href="#a3a7">[a3a7]</a><a href="#:a3a7:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a3a7]</span></span>
 <span class="l"><a class="anc" name="a3a7" href="#a3a7">[a3a7]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$2e</span></span></span>
-<span class="l"><a class="anc" name="a3a9" href="#a3a9">[a3a9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a3a9" href="#a3a9">[a3a9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a3ac" href="#a3ac">[a3ac]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a3ae" href="#a3ae">[a3ae]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9623,7 +9635,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a3e2:@_checkOnScreen"></a><span class="l"><a class="anc" name="a3e2" href="#a3e2">[a3e2]</a><a href="#:a3e2:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a3e2]</span></span>
 <span class="l"><a class="anc" name="a3e2" href="#a3e2">[a3e2]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$32</span></span></span>
-<span class="l"><a class="anc" name="a3e4" href="#a3e4">[a3e4]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a3e4" href="#a3e4">[a3e4]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a3e7" href="#a3e7">[a3e7]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a3e9" href="#a3e9">[a3e9]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9657,7 +9669,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a406:@_checkOnScreen"></a><span class="l"><a class="anc" name="a406" href="#a406">[a406]</a><a href="#:a406:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a406]</span></span>
 <span class="l"><a class="anc" name="a406" href="#a406">[a406]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$2d</span></span></span>
-<span class="l"><a class="anc" name="a408" href="#a408">[a408]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a408" href="#a408">[a408]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a40b" href="#a40b">[a40b]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a40d" href="#a40d">[a40d]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9694,7 +9706,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a42a:@_checkOnScreen"></a><span class="l"><a class="anc" name="a42a" href="#a42a">[a42a]</a><a href="#:a42a:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a42a]</span></span>
 <span class="l"><a class="anc" name="a42a" href="#a42a">[a42a]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$31</span></span></span>
-<span class="l"><a class="anc" name="a42c" href="#a42c">[a42c]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a42c" href="#a42c">[a42c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a42f" href="#a42f">[a42f]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a431" href="#a431">[a431]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9728,7 +9740,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a44e:@_checkOnScreen"></a><span class="l"><a class="anc" name="a44e" href="#a44e">[a44e]</a><a href="#:a44e:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a44e]</span></span>
 <span class="l"><a class="anc" name="a44e" href="#a44e">[a44e]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$2e</span></span></span>
-<span class="l"><a class="anc" name="a450" href="#a450">[a450]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a450" href="#a450">[a450]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a453" href="#a453">[a453]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a455" href="#a455">[a455]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -9762,7 +9774,7 @@ Set Carry = overflow.</span></span>
 <span class="l"></span>
 <a name=":a472:@_checkOnScreen"></a><span class="l"><a class="anc" name="a472" href="#a472">[a472]</a><a href="#:a472:@_checkOnScreen" class="lla">@_checkOnScreen:</a><span class="ce">; [$a472]</span></span>
 <span class="l"><a class="anc" name="a472" href="#a472">[a472]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$2d</span></span></span>
-<span class="l"><a class="anc" name="a474" href="#a474">[a474]</a><span class="cd"><span class="i">JSR</span> <span class="o">$efe6</span></span></span>
+<span class="l"><a class="anc" name="a474" href="#a474">[a474]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Maybe_IsSpriteEntityNotOnScreen">Maybe_IsSpriteEntityNotOnScreen</a></span></span></span>
 <span class="l"><a class="anc" name="a477" href="#a477">[a477]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_setVisible">@_setVisible</a></span></span></span>
 <span class="l"><a class="anc" name="a479" href="#a479">[a479]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprites_HideSprite">Sprites_HideSprite</a></span></span></span>
 <span class="l"></span>
@@ -10783,7 +10795,7 @@ Enemy: Wolfman</span></span>
 ;     <a href="#SpriteBehavior_Lilith">SpriteBehavior_Lilith</a>
 ;============================================================================
 </div><span class="l"><a class="anc" name="a7ad" href="#a7ad">[a7ad]</a><a href="#BScript_Action_RandomlyFlipXDirection" class="la">BScript_Action_RandomlyFlipXDirection:</a><span class="ce">; [$a7ad]</span></span>
-<span class="l"><a class="anc" name="a7ad" href="#a7ad">[a7ad]</a><span class="cd"><span class="i">JSR</span> <span class="o">$ca6e</span></span><span class="ce">; Load a random value.</span></span>
+<span class="l"><a class="anc" name="a7ad" href="#a7ad">[a7ad]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#GetRandom">GetRandom</a></span></span><span class="ce">; Load a random value.</span></span>
 <span class="l"><a class="anc" name="a7b0" href="#a7b0">[a7b0]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span><span class="ce">; X = Current sprite index.</span></span>
 <span class="l"><a class="anc" name="a7b3" href="#a7b3">[a7b3]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$80</span></span><span class="ce">; Is the random value &lt; 128?</span></span>
 <span class="l"><a class="anc" name="a7b5" href="#a7b5">[a7b5]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_setFaceRight">@_setFaceRight</a></span></span><span class="ce">; If so, jump to set facing right.</span></span>
@@ -10809,7 +10821,7 @@ Enemy: Wolfman</span></span>
 ;     <a href="#BSCRIPT_ACTIONS">BSCRIPT_ACTIONS</a> [$PRG14::a79e]
 ;============================================================================
 </div><span class="l"><a class="anc" name="a7c9" href="#a7c9">[a7c9]</a><a href="#BScript_Action_RandomlyFlipYDirection" class="la">BScript_Action_RandomlyFlipYDirection:</a><span class="ce">; [$a7c9]</span></span>
-<span class="l"><a class="anc" name="a7c9" href="#a7c9">[a7c9]</a><span class="cd"><span class="i">JSR</span> <span class="o">$ca6e</span></span><span class="ce">; Load a random value.</span></span>
+<span class="l"><a class="anc" name="a7c9" href="#a7c9">[a7c9]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#GetRandom">GetRandom</a></span></span><span class="ce">; Load a random value.</span></span>
 <span class="l"><a class="anc" name="a7cc" href="#a7cc">[a7cc]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span><span class="ce">; X = Current sprite index.</span></span>
 <span class="l"><a class="anc" name="a7cf" href="#a7cf">[a7cf]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$80</span></span><span class="ce">; Is the random value &lt; 128?</span></span>
 <span class="l"><a class="anc" name="a7d1" href="#a7d1">[a7d1]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_setFalling">@_setFalling</a></span></span><span class="ce">; If so, jump to set falling.</span></span>
@@ -12023,7 +12035,7 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="ab40" href="#ab40">[ab40]</a><span class="cd"><span class="i">AND</span> <span class="o">#$fe</span></span></span>
 <span class="l"><a class="anc" name="ab42" href="#ab42">[ab42]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_Mask">PPU_Mask</a></span></span></span>
 <span class="l"><a class="anc" name="ab44" href="#ab44">[ab44]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$04</span></span></span>
-<span class="l"><a class="anc" name="ab46" href="#ab46">[ab46]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="ab46" href="#ab46">[ab46]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="ab49" href="#ab49">[ab49]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$3c</span></span></span>
 <span class="l"><a class="anc" name="ab4b" href="#ab4b">[ab4b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_InvincibilityPhase">Player_InvincibilityPhase</a></span></span></span>
 <span class="l"><a class="anc" name="ab4d" href="#ab4d">[ab4d]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span></span>
@@ -12033,7 +12045,7 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="ab55" href="#ab55">[ab55]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_L">Arg_PlayerHealthDelta_L</a></span></span></span>
 <span class="l"><a class="anc" name="ab58" href="#ab58">[ab58]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$0a</span></span></span>
 <span class="l"><a class="anc" name="ab5a" href="#ab5a">[ab5a]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#Arg_PlayerHealthDelta_U">Arg_PlayerHealthDelta_U</a></span></span></span>
-<span class="l"><a class="anc" name="ab5d" href="#ab5d">[ab5d]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c08e</span></span></span>
+<span class="l"><a class="anc" name="ab5d" href="#ab5d">[ab5d]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_ReduceHP">Player_ReduceHP</a></span></span></span>
 <span class="l"><a class="anc" name="ab60" href="#ab60">[ab60]</a><span class="cd"><span class="i">LDX</span> <span class="o">a:<a href="RAM.html#CurrentSpriteIndex">CurrentSpriteIndex</a></span></span></span>
 <span class="l"><a class="anc" name="ab63" href="#ab63">[ab63]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Sprite_FinishBehavior">Sprite_FinishBehavior</a></span></span></span>
 <span class="l"></span>
@@ -12080,7 +12092,7 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="ab9b" href="#ab9b">[ab9b]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><a class="anc" name="ab9d" href="#ab9d">[ab9d]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentSprites_BehaviorData2">CurrentSprites_BehaviorData2</a>,X</span></span></span>
 <span class="l"><a class="anc" name="aba0" href="#aba0">[aba0]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$03</span></span></span>
-<span class="l"><a class="anc" name="aba2" href="#aba2">[aba2]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="aba2" href="#aba2">[aba2]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="aba5" href="#aba5">[aba5]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_Phases">CurrentSprites_Phases</a>,X</span></span></span>
 <span class="l"><a class="anc" name="aba8" href="#aba8">[aba8]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$05</span></span></span>
 <span class="l"><a class="anc" name="abaa" href="#abaa">[abaa]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
@@ -12381,7 +12393,7 @@ If overflow, C = 1</span></span>
 ;============================================================================
 </div><span class="l"><a class="anc" name="ac75" href="#ac75">[ac75]</a><a href="#Sprites_ReplaceWithCoinDrop" class="la">Sprites_ReplaceWithCoinDrop:</a><span class="ce">; [$ac75]</span></span>
 <span class="l"><a class="anc" name="ac75" href="#ac75">[ac75]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$10</span></span></span>
-<span class="l"><a class="anc" name="ac77" href="#ac77">[ac77]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span></span>
+<span class="l"><a class="anc" name="ac77" href="#ac77">[ac77]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span></span>
 <span class="l"><a class="anc" name="ac7a" href="#ac7a">[ac7a]</a><span class="cd"><span class="i">TYA</span></span></span>
 <span class="l"><a class="anc" name="ac7b" href="#ac7b">[ac7b]</a><span class="cd"><span class="i">TAX</span></span></span>
 <span class="l"><a class="anc" name="ac7c" href="#ac7c">[ac7c]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$02</span></span></span>
@@ -16725,7 +16737,7 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="b86f" href="#b86f">[b86f]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="b871" href="#b871">[b871]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="b872" href="#b872">[b872]</a><span class="cd"><span class="i">ADC</span> <span class="o"><a href="#WEAPONS_SPRITE_L">WEAPONS_SPRITE_L</a>,X</span></span></span>
-<span class="l"><a class="anc" name="b875" href="#b875">[b875]</a><span class="cd"><span class="i">JMP</span> <span class="o">$f039</span></span></span>
+<span class="l"><a class="anc" name="b875" href="#b875">[b875]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a></span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="WEAPONS_SPRITE_L"></a><div class="cp">;============================================================================
@@ -17029,7 +17041,7 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="b9ca" href="#b9ca">[b9ca]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="b9cc" href="#b9cc">[b9cc]</a><span class="cd"><span class="i">LDY</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="b9ce" href="#b9ce">[b9ce]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="#MAYBE_SHIELD_SPRITE_PPU_OFFSETS">MAYBE_SHIELD_SPRITE_PPU_OFFSETS</a>,Y</span></span></span>
-<span class="l"><a class="anc" name="b9d1" href="#b9d1">[b9d1]</a><span class="cd"><span class="i">JMP</span> <span class="o">$f039</span></span></span>
+<span class="l"><a class="anc" name="b9d1" href="#b9d1">[b9d1]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="PRG15_MIRROR.html#Sprite_SetPlayerAppearanceAddr">Sprite_SetPlayerAppearanceAddr</a></span></span></span>
 <span class="l"></span>
 <a name=":b9d4:@_return"></a><span class="l"><a class="anc" name="b9d4" href="#b9d4">[b9d4]</a><a href="#:b9d4:@_return" class="lla">@_return:</a><span class="ce">; [$b9d4]</span></span>
 <span class="l"><a class="anc" name="b9d4" href="#b9d4">[b9d4]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -17094,8 +17106,8 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="b9f7" href="#b9f7">[b9f7]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="b9f8" href="#b9f8">[b9f8]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$04</span></span></span>
 <span class="l"><a class="anc" name="b9fa" href="#b9fa">[b9fa]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="b9fc" href="#b9fc">[b9fc]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="b9ff" href="#b9ff">[b9ff]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e8c3</span></span></span>
+<span class="l"><a class="anc" name="b9fc" href="#b9fc">[b9fc]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="b9ff" href="#b9ff">[b9ff]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a></span></span></span>
 <span class="l"><a class="anc" name="ba02" href="#ba02">[ba02]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span></span>
 <span class="l"><a class="anc" name="ba04" href="#ba04">[ba04]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__ba0e">@LAB_PRG14__ba0e</a></span></span></span>
 <span class="l"><a class="anc" name="ba06" href="#ba06">[ba06]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
@@ -17113,8 +17125,8 @@ If overflow, C = 1</span></span>
 <span class="l"><a class="anc" name="ba16" href="#ba16">[ba16]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="ba17" href="#ba17">[ba17]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$0c</span></span></span>
 <span class="l"><a class="anc" name="ba19" href="#ba19">[ba19]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosX">Arg_PixelPosX</a></span></span></span>
-<span class="l"><a class="anc" name="ba1b" href="#ba1b">[ba1b]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span></span>
-<span class="l"><a class="anc" name="ba1e" href="#ba1e">[ba1e]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e8c3</span></span></span>
+<span class="l"><a class="anc" name="ba1b" href="#ba1b">[ba1b]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span></span>
+<span class="l"><a class="anc" name="ba1e" href="#ba1e">[ba1e]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_LoadBlockProperty">ScreenBuffer_LoadBlockProperty</a></span></span></span>
 <span class="l"><a class="anc" name="ba21" href="#ba21">[ba21]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span></span>
 <span class="l"><a class="anc" name="ba23" href="#ba23">[ba23]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG14__ba2d">@LAB_PRG14__ba2d</a></span></span></span>
 <span class="l"><a class="anc" name="ba25" href="#ba25">[ba25]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$0d</span></span></span>
@@ -17278,7 +17290,7 @@ If overflow, C = 1</span></span>
 <div class="c">;
 ; Check if the player is climbing a ladder.
 ;
-</div><span class="l"><a class="anc" name="ba60" href="#ba60">[ba60]</a><span class="cd"><span class="i">JSR</span> <span class="o">$ecf6</span></span><span class="ce">; Check if the player can cast magic.</span></span>
+</div><span class="l"><a class="anc" name="ba60" href="#ba60">[ba60]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_IsClimbing">Player_IsClimbing</a></span></span><span class="ce">; Check if the player can cast magic.</span></span>
 <span class="l"><a class="anc" name="ba63" href="#ba63">[ba63]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_return2">@_return2</a></span></span><span class="ce">; If not, we're done.</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -17312,7 +17324,7 @@ If overflow, C = 1</span></span>
 ; for the spell cost.
 ;
 </div><span class="l"><a class="anc" name="ba79" href="#ba79">[ba79]</a><a href="#:ba79:@LAB_PRG14__ba79" class="lla">@LAB_PRG14__ba79:</a><span class="ce">; [$ba79]</span></span>
-<span class="l"><a class="anc" name="ba79" href="#ba79">[ba79]</a><span class="cd"><span class="i">JSR</span> <span class="o">$c0c3</span></span><span class="ce">; Reduce the MP.</span></span>
+<span class="l"><a class="anc" name="ba79" href="#ba79">[ba79]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Player_ReduceMP">Player_ReduceMP</a></span></span><span class="ce">; Reduce the MP.</span></span>
 <span class="l"><a class="anc" name="ba7c" href="#ba7c">[ba7c]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_return1">@_return1</a></span></span><span class="ce">; If there's not enough, we're done.</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -17329,7 +17341,7 @@ If overflow, C = 1</span></span>
 ; has its own sound.
 ;
 </div><span class="l"><a class="anc" name="ba85" href="#ba85">[ba85]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$05</span></span></span>
-<span class="l"><a class="anc" name="ba87" href="#ba87">[ba87]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play the standard magic sound effect.</span></span>
+<span class="l"><a class="anc" name="ba87" href="#ba87">[ba87]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play the standard magic sound effect.</span></span>
 <span class="l"><a class="anc" name="ba8a" href="#ba8a">[ba8a]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#@_placeMagic">@_placeMagic</a></span></span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -17338,7 +17350,7 @@ If overflow, C = 1</span></span>
 ;
 </div><span class="l"><a class="anc" name="ba8d" href="#ba8d">[ba8d]</a><a href="#:ba8d:@_playTilteSound" class="lla">@_playTilteSound:</a><span class="ce">; [$ba8d]</span></span>
 <span class="l"><a class="anc" name="ba8d" href="#ba8d">[ba8d]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$14</span></span></span>
-<span class="l"><a class="anc" name="ba8f" href="#ba8f">[ba8f]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play the Tilte magic sound effect.</span></span>
+<span class="l"><a class="anc" name="ba8f" href="#ba8f">[ba8f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play the Tilte magic sound effect.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":ba92:@_placeMagic"></a><div class="c">;
@@ -17649,7 +17661,7 @@ If overflow, C = 1</span></span>
 ; It hit a block. Play the sound effect.
 ;
 </div><span class="l"><a class="anc" name="bb5b" href="#bb5b">[bb5b]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$0a</span></span></span>
-<span class="l"><a class="anc" name="bb5d" href="#bb5d">[bb5d]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play the Magic Hit Obstacle sound effect.</span></span>
+<span class="l"><a class="anc" name="bb5d" href="#bb5d">[bb5d]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play the Magic Hit Obstacle sound effect.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -17849,7 +17861,7 @@ If overflow, C = 1</span></span>
 ; It hit a block. Play the sound effect.
 ;
 </div><span class="l"><a class="anc" name="bbb2" href="#bbb2">[bbb2]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$0a</span></span></span>
-<span class="l"><a class="anc" name="bbb4" href="#bbb4">[bbb4]</a><span class="cd"><span class="i">JSR</span> <span class="o">$d0e4</span></span><span class="ce">; Play the Magic Hit Obstacle sound effect.</span></span>
+<span class="l"><a class="anc" name="bbb4" href="#bbb4">[bbb4]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Sound_PlayEffect">Sound_PlayEffect</a></span></span><span class="ce">; Play the Magic Hit Obstacle sound effect.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -18721,8 +18733,8 @@ Else, fall through.</span></span>
 ;
 </div><span class="l"><a class="anc" name="bd58" href="#bd58">[bd58]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_YPos_Full">CastMagic_YPos_Full</a></span></span><span class="ce">; A = Magic full Y position</span></span>
 <span class="l"><a class="anc" name="bd5b" href="#bd5b">[bd5b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Arg_PixelPosY">Arg_PixelPosY</a></span></span><span class="ce">; Store as the Y argument.</span></span>
-<span class="l"><a class="anc" name="bd5d" href="#bd5d">[bd5d]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e86c</span></span><span class="ce">; Convert the pixels to a screen block lookup position.</span></span>
-<span class="l"><a class="anc" name="bd60" href="#bd60">[bd60]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span><span class="ce">; Check if the block is impassable.</span></span>
+<span class="l"><a class="anc" name="bd5d" href="#bd5d">[bd5d]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#Area_ConvertPixelsToBlockPos">Area_ConvertPixelsToBlockPos</a></span></span><span class="ce">; Convert the pixels to a screen block lookup position.</span></span>
+<span class="l"><a class="anc" name="bd60" href="#bd60">[bd60]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span><span class="ce">; Check if the block is impassable.</span></span>
 <span class="l"><a class="anc" name="bd63" href="#bd63">[bd63]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span><span class="ce">; Set the tentative result accordingly.</span></span>
 <span class="l"><a class="anc" name="bd65" href="#bd65">[bd65]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span><span class="ce">; If not passable, return the result.</span></span>
 <span class="l"></span>
@@ -18739,7 +18751,7 @@ Else, fall through.</span></span>
 <span class="l"><a class="anc" name="bd72" href="#bd72">[bd72]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="bd73" href="#bd73">[bd73]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span><span class="ce">; Add 16 (next block).</span></span>
 <span class="l"><a class="anc" name="bd75" href="#bd75">[bd75]</a><span class="cd"><span class="i">TAX</span></span><span class="ce">; X = A (result)</span></span>
-<span class="l"><a class="anc" name="bd76" href="#bd76">[bd76]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span><span class="ce">; Check if the block is impassable.</span></span>
+<span class="l"><a class="anc" name="bd76" href="#bd76">[bd76]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span><span class="ce">; Check if the block is impassable.</span></span>
 <span class="l"><a class="anc" name="bd79" href="#bd79">[bd79]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span><span class="ce">; Store the tentative result.</span></span>
 <span class="l"><a class="anc" name="bd7b" href="#bd7b">[bd7b]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@_return">@_return</a></span></span><span class="ce">; If not passable, return the result.</span></span>
 <span class="l"></span>
@@ -18756,7 +18768,7 @@ Else, fall through.</span></span>
 <span class="l"><a class="anc" name="bd85" href="#bd85">[bd85]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="bd86" href="#bd86">[bd86]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span><span class="ce">; Add 16 (next block).</span></span>
 <span class="l"><a class="anc" name="bd88" href="#bd88">[bd88]</a><span class="cd"><span class="i">TAX</span></span><span class="ce">; X = A (result)</span></span>
-<span class="l"><a class="anc" name="bd89" href="#bd89">[bd89]</a><span class="cd"><span class="i">JSR</span> <span class="o">$e87c</span></span><span class="ce">; Check if the block is impassable.</span></span>
+<span class="l"><a class="anc" name="bd89" href="#bd89">[bd89]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="PRG15_MIRROR.html#ScreenBuffer_IsBlockImpassable">ScreenBuffer_IsBlockImpassable</a></span></span><span class="ce">; Check if the block is impassable.</span></span>
 <span class="l"><a class="anc" name="bd8c" href="#bd8c">[bd8c]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Blocks_Result">Blocks_Result</a></span></span><span class="ce">; Store the result.</span></span>
 <span class="l"></span>
 <a name=":bd8e:@_return"></a><span class="l"><a class="anc" name="bd8e" href="#bd8e">[bd8e]</a><a href="#:bd8e:@_return" class="lla">@_return:</a><span class="ce">; [$bd8e]</span></span>

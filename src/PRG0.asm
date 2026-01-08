@@ -8,7 +8,7 @@
     .ORG $8000
 
 ROMBankStart:                               ; [$8000]
-    .word $0006                             ; Eolis
+    .word EOLIS_BLOCKS-$8000                ; Eolis
     .word $0429                             ; Forepaw
 
 ;

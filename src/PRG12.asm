@@ -879,7 +879,7 @@ IScripts_Begin:                             ; [$8242]
     ; Begin showing the portrait information.
     ;
     AND #$7f                                ; Keep the portrait ID bits.
-    JSR $f24d                               ; Draw the portrait image.
+    JSR IScripts_LoadPortraitTiles          ; Draw the portrait image.
     JSR IScripts_OpenForPortrait            ; Draw the portrait frame.
 
   @_continueScript:                         ; [$8267]
@@ -1065,7 +1065,7 @@ IScriptAction_Jump:                         ; [$82ab]
 ;============================================================================
 IScriptAction_FinishGame:                   ; [$82ae]
     JSR SplashAnimation_RunOutro            ; Show the outro animation.
-    JMP $c913                               ; Re-initialize the game.
+    JMP Game_Init                           ; Re-initialize the game.
 
 
 ;============================================================================
@@ -1091,7 +1091,7 @@ IScriptAction_EndScript:                    ; [$82b4]
     LDA a:Temp_0201                         ; Load the portrait ID.
     BPL @_noPortrait                        ; If a portrait ID is not set,
                                             ; jump.
-    JSR $f281                               ; Clear the portrait image.
+    JSR IScripts_ClearPortraitImage         ; Clear the portrait image.
     JMP TextBox_ClearForPortraitAndText     ; Clear the portrait frame.
 
   @_noPortrait:                             ; [$82c2]
@@ -1121,7 +1121,7 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
     ;
     JSR IScripts_LoadByte                   ; Load the next byte as the
                                             ; message ID.
-    JSR $f3f5                               ; Load the message.
+    JSR Messages_Load                       ; Load the message.
 
 
     ;
@@ -1129,7 +1129,7 @@ IScriptAction_ShowUnskippableMessage:       ; [$82c5]
     ;
   @_loop:                                   ; [$82cb]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR $f466                               ; Draw the next character in the
+    JSR TextBox_ShowNextChar                ; Draw the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinue         ; Check if the message should
                                             ; continue.
@@ -1165,7 +1165,7 @@ IScriptAction_ShowMessage:                  ; [$82d9]
     ;
     JSR IScripts_LoadByte                   ; Load the next byte as the
                                             ; message ID.
-    JSR $f3f5                               ; Load the message.
+    JSR Messages_Load                       ; Load the message.
 
 
     ;
@@ -1173,7 +1173,7 @@ IScriptAction_ShowMessage:                  ; [$82d9]
     ;
   @_loop:                                   ; [$82df]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR $f466                               ; Draw the next character in the
+    JSR TextBox_ShowNextChar                ; Draw the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissMessage ; Check if the message is
                                                     ; done or continued.
@@ -1210,11 +1210,11 @@ IScriptAction_ShowMessage:                  ; [$82d9]
 ;============================================================================
 IScriptAction_ShowQuestionMessage:          ; [$82ef]
     JSR IScripts_LoadByte                   ; Load the message ID parameer.
-    JSR $f3f5                               ; Load the message string.
+    JSR Messages_Load                       ; Load the message string.
 
   @_messageLoop:                            ; [$82f5]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR $f466                               ; Show the next character in the
+    JSR TextBox_ShowNextChar                ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
                                                      ; continue or dismiss.
@@ -1258,11 +1258,11 @@ IScriptAction_ShowQuestionMessage:          ; [$82ef]
 ;============================================================================
 IScriptAction_ShowQuestionMessageCheckIfDismissed: ; [$8308]
     JSR IScripts_LoadByte                   ; Load the message ID parameer.
-    JSR $f3f5                               ; Load the message string.
+    JSR Messages_Load                       ; Load the message string.
 
   @_messageLoop:                            ; [$830e]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR $f466                               ; Show the next character in the
+    JSR TextBox_ShowNextChar                ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissQuestion ; Check whether to
                                                      ; continue or dismiss.
@@ -1356,7 +1356,7 @@ IScripts_ProgressivelySubtractGold:         ; [$8321]
     LDA #$00                                ; A = 0
     STA Temp_Int24_M                        ; Store as the upper byte to
                                             ; subtract.
-    JSR $f9a5                               ; Subtract the gold from the
+    JSR Player_SubtractGold                 ; Subtract the gold from the
                                             ; player.
     JMP IScripts_ProgressivelySubtractGold  ; And loop.
 
@@ -1477,7 +1477,7 @@ IScripts_ShowNotEnoughMoney:                ; [$837c]
 ;     IScriptAction_ShowSellMenu
 ;============================================================================
 IScripts_ShowFinalMessage:                  ; [$837e]
-    JSR $f3f5                               ; Load the message string.
+    JSR Messages_Load                       ; Load the message string.
 
 
     ;
@@ -1485,7 +1485,7 @@ IScripts_ShowFinalMessage:                  ; [$837e]
     ;
   @_messageLoop:                            ; [$8381]
     JSR IScripts_UpdatePortraitAnimation    ; Update the portrait animation.
-    JSR $f466                               ; Show the next character in the
+    JSR TextBox_ShowNextChar                ; Show the next character in the
                                             ; textbox.
     JSR TextBox_CheckShouldContinueOrDismissMessage ; Check whether to
                                                     ; continue or dismiss.
@@ -1621,11 +1621,11 @@ IScriptAction_AddInventoryItem:             ; [$839f]
 ;============================================================================
 IScriptAction_OpenShop:                     ; [$83d8]
     LDA #$14                                ; "What would you like?"
-    JSR $f3f5
+    JSR Messages_Load
 
   @LAB_PRG12__83dd:                         ; [$83dd]
     JSR IScripts_UpdatePortraitAnimation
-    JSR $f466
+    JSR TextBox_ShowNextChar
     JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__83dd
@@ -1662,7 +1662,7 @@ IScriptAction_OpenShop:                     ; [$83d8]
     BEQ @LAB_PRG12__8439
     CMP #$94
     BEQ @LAB_PRG12__8439
-    JSR $f785
+    JSR Player_GetInventoryIndexForItem
     TAX
     LDA NumberOfWeapons,X                   ; Number of weapons in the
                                             ; player's inventory.
@@ -1781,7 +1781,7 @@ Shop_GetPlayerHasSelectedItem:              ; [$8482]
 
   @LAB_PRG12__84bf:                         ; [$84bf]
     PHA
-    JSR $f785
+    JSR Player_GetInventoryIndexForItem
     TAX
     LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24
@@ -2026,7 +2026,7 @@ IScripts_ProgressivelyAddGold:              ; [$8537]
     STA Temp_Int24
     LDA #$00
     STA Temp_Int24_M
-    JSR $f9c1
+    JSR Player_AddGold
     JMP IScripts_ProgressivelyAddGold
 
   @LAB_PRG12__8566:                         ; [$8566]
@@ -2065,7 +2065,7 @@ IScripts_PlayGoldChangeSound:               ; [$8574]
     ;
     LDA #$19                                ; 0x19 == Change gold amount
                                             ; sound
-    JSR $d0e4                               ; Play the sound.
+    JSR Sound_PlayEffect                    ; Play the sound.
 
   @_return:                                 ; [$857f]
     RTS
@@ -2101,7 +2101,7 @@ IScriptAction_AddMP:                        ; [$8580]
     LDX a:Player_MP                         ; X = Remaining value to add.
     INX                                     ; X++
     TXA                                     ; A = X
-    JSR $fa85                               ; Set the current mana points.
+    JSR Player_SetMP                        ; Set the current mana points.
     DEC a:IScript_HPOrMPValueToAdd          ; Decrement the remaining value
                                             ; to add.
     BNE @_fillLoop                          ; If we're not done, loop.
@@ -2144,7 +2144,7 @@ IScripts_PlayFillingSound:                  ; [$85a3]
     AND #$03
     BNE RETURN_85AE
     LDA #$13
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
     ;
     ; XREFS:
@@ -2192,7 +2192,7 @@ IScriptAction_AddHP:                        ; [$85af]
     LDX a:Temp_AddedHPValue                 ; X = Remaining value to add
     INX                                     ; X++
     TXA                                     ; A = X
-    JSR $fa75                               ; Draw the next bit of health.
+    JSR UI_DrawPlayerHPValue                ; Draw the next bit of health.
     DEC a:IScript_HPOrMPValueToAdd          ; Decrement the remaining amount
                                             ; to add.
     BNE @_fillLoop                          ; If there's more to add, loop.
@@ -2235,10 +2235,6 @@ IScriptAction_IfQuestCompleted:             ; [$85d1]
   @_hasQuestCompleted:                      ; [$85e0]
     JMP IScripts_JumpToNextAddr
 
-;
-; XREFS:
-;     IScriptAction_SetQuestComplete
-;
 ISCRIPTS_QUEST_BITS:                        ; [$85e3]
     .byte $01,$02,$04                       ; [$85e3] byte
 
@@ -2259,7 +2255,7 @@ IScriptAction_SetQuestComplete:             ; [$85e6]
                                             ; index into our table.
     TAX                                     ; X = result
     LDA a:Quests                            ; Load the current player quests.
-    ORA $85e2,X                             ; OR it with the bit for this
+    ORA ISCRIPTS_QUEST_BITS-1,X             ; OR it with the bit for this
                                             ; index.
     STA a:Quests                            ; Store as the new quests
                                             ; bitmask.
@@ -2405,7 +2401,7 @@ IScriptAction_ShowBuySellMenu:              ; [$8630]
     ;
     LDA #$10                                ; 0x10 == "Did you come here to
                                             ; buy and sell?"
-    JSR $f3e9                               ; Load and show that message in
+    JSR IScripts_LoadAndShowMessage         ; Load and show that message in
                                             ; its entirety.
 
 
@@ -2505,7 +2501,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
     BEQ @LAB_PRG12__86b7
     TXA
     PHA
-    JSR $f78b
+    JSR Player_GetInventoryBitForIndex
     STA a:Maybe_Shop_InventoryBitmask
     LDA INVENTORY_CATEGORY_L,X
     STA Temp_Int24_U
@@ -2516,7 +2512,7 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
   @LAB_PRG12__8689:                         ; [$8689]
     TYA
     PHA
-    LDA ($ee),Y
+    LDA (Temp_Int24_U),Y
     ORA a:Maybe_Shop_InventoryBitmask
     TAX
     JSR IScripts_SellMenu_Something8704
@@ -2553,11 +2549,11 @@ IScriptAction_ShowSellMenu:                 ; [$8660]
 
   @LAB_PRG12__86c6:                         ; [$86c6]
     LDA #$13
-    JSR $f3f5
+    JSR Messages_Load
 
   @LAB_PRG12__86cb:                         ; [$86cb]
     JSR IScripts_UpdatePortraitAnimation
-    JSR $f466
+    JSR TextBox_ShowNextChar
     JSR TextBox_CheckShouldContinueOrDismissMessage
     BCS @_endScript
     BNE @LAB_PRG12__86cb
@@ -2710,7 +2706,7 @@ IScriptAction_CheckUpdatePlayerTitle:       ; [$8726]
 ;============================================================================
 IScriptAction_ShowPassword:                 ; [$8737]
     JSR Password_GenerateStateAndReset      ; Generate the password state.
-    JSR $f434                               ; Clear the textbox.
+    JSR TextBox_ClearPasswordSize           ; Clear the textbox.
     LDA #$00
     STA a:IScripts_Unused_207               ; DEADCODE: Set to 0.
 
@@ -2758,7 +2754,7 @@ PasswordScreen_ShowNextChar:                ; [$8757]
     PHP                                     ; Push flags to stack.
     TAY                                     ; Y = A (index)
     LDA PASSWORD_ENTERED_CHARS,Y            ; A = character at index Y
-    JSR $f4ff                               ; Show the character in the
+    JSR TextBox_ShowMessage                 ; Show the character in the
                                             ; textbox.
     PLP                                     ; Pop flags.
     RTS
@@ -2909,9 +2905,9 @@ RETURN_87AF:                                ; [$87af]
 ;     Maybe_Shop_DrawTextBox
 ;============================================================================
 IScripts_UpdatePortraitAnimation:           ; [$87b0]
-    JSR $ca25                               ; Wait for the next frame.
-    JSR $cb47                               ; Set up state for a screen draw.
-    JSR $dc46                               ; Draw the screen in a frozen
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JSR Screen_ResetSpritesForGamePlay      ; Set up state for a screen draw.
+    JSR Game_DrawScreenInFrozenState        ; Draw the screen in a frozen
                                             ; animation state.
     LDA a:Temp_0201                         ; Load the portrait ID.
     BPL RETURN_87AF                         ; If no portrait, return.
@@ -2949,7 +2945,7 @@ IScripts_UpdatePortraitAnimation:           ; [$87b0]
   @_drawFrame:                              ; [$87d6]
     JSR IScripts_SetPortraitSpriteXY        ; Set the X/Y location for the
                                             ; portrait sprite.
-    JMP $f29b                               ; Draw the computed animation
+    JMP IScripts_DrawPortraitAnimationFrame ; Draw the computed animation
                                             ; frame.
 
 
@@ -3263,7 +3259,7 @@ PlayerMenu_Show:                            ; [$8a93]
     LDA #$0e
     STA a:TextBox_Height
     LDA #$18
-    JSR $d0e4
+    JSR Sound_PlayEffect
     JSR TextBox_Open
     LDA #$73
     STA Temp_Int24
@@ -3284,8 +3280,8 @@ PlayerMenu_Show:                            ; [$8a93]
     JSR PlayerMenu_DrawStringLines
 
   @_inputLoop:                              ; [$8add]
-    JSR $ca25
-    JSR $cb47
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForGamePlay
     JSR Menu_UpdateAndDraw
     LDA Joy1_ChangedButtonMask
     BMI @_loadMenuIDs
@@ -3333,19 +3329,19 @@ PlayerMenu_ShowSubmenu:                     ; [$8afa]
     CLC
     ADC #$02
     STA TextBox_ContentsY
-    JSR $f804
+    JSR PPU_SetAddrForTextBoxPos
     LDA #$43
     STA Temp_Int24
     LDA #$8a
     STA Temp_Int24_M
     LDA a:Menu_CursorPos
-    JSR $f78c
+    JSR Math_MultiplyBy16
     TAY
     JSR UI_DrawString
 
   @_inputLoop:                              ; [$8b41]
-    JSR $ca25
-    JSR $cb47
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForGamePlay
     LDA Joy1_ChangedButtonMask
     ASL A
     BPL @_inputLoop
@@ -3403,8 +3399,8 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
     ;
     ; Wait for input on the menu.
     ;
-    JSR $ca25                               ; Wait for the next frame.
-    JSR $cb47                               ; Set up draw state.
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JSR Screen_ResetSpritesForGamePlay      ; Set up draw state.
     JSR Menu_UpdateAndDraw                  ; Update and draw the menu.
     LDA Joy1_ChangedButtonMask              ; Check for a changed button.
     BMI @_hasInput                          ; If the the "A" button is
@@ -3485,7 +3481,7 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
     ; They have all three. Equip them all and close the menu.
     ;
     LDA #$08                                ; 0x08 == Item Pick-Up sound.
-    JSR $d0e4                               ; Play it.
+    JSR Sound_PlayEffect                    ; Play it.
     LDA #$03                                ; 0x03 == Dragon Slayer.
     JSR Player_Equip                        ; Equip it.
     LDA #$23                                ; 0x23 == Battle Suit.
@@ -3508,10 +3504,10 @@ PlayerMenu_HandleInventoryMenuInput:        ; [$8b71]
 ;============================================================================
 PlayerMenu_EquipItem:                       ; [$8bce]
     LDA #$08                                ; 0x08 == Item pick-up sound.
-    JSR $d0e4                               ; Play it.
+    JSR Sound_PlayEffect                    ; Play it.
     LDX a:Menu_CursorPos                    ; X = Menu cursor position.
     LDA a:PlayerMenu_SelectedInventory      ; A = Selected inventory.
-    JSR $f78b                               ; Get the inventory bits.
+    JSR Player_GetInventoryBitForIndex      ; Get the inventory bits.
     ORA DataArray,X                         ; OR it with the selected item
                                             ; index as an item ID.
     JSR Player_Equip                        ; Equip the resulting item.
@@ -3532,7 +3528,7 @@ PlayerMenu_EquipItem:                       ; [$8bce]
 PlayerMenu_HandleInvalidChoice:             ; [$8be5]
     LDA #$0d                                ; 0x0D == Invalid Choice sound
                                             ; effect.
-    JSR $d0e4                               ; Play it.
+    JSR Sound_PlayEffect                    ; Play it.
     JMP PlayerMenu_HandleInventoryMenuInput ; Resume handling of the
                                             ; inventory menu.
 
@@ -3595,7 +3591,7 @@ PlayerMenu_DrawInventoryItems:              ; [$8c04]
     INY
     STY TextBox_ContentsX
     LDA a:PlayerMenu_SelectedInventory
-    JSR $f78b
+    JSR Player_GetInventoryBitForIndex
     ORA DataArray,X
     PHA
     JSR TextBox_DrawItemImage
@@ -3629,9 +3625,9 @@ PlayerMenu_DrawInventoryItems:              ; [$8c04]
 TextBox_DrawItemName:                       ; [$8c36]
     PHA
     PHA
-    JSR $f804
+    JSR PPU_SetAddrForTextBoxPos
     PLA
-    JSR $f785
+    JSR Player_GetInventoryIndexForItem
     TAX
     LDA ITEM_NAME_CATEGORIES_L,X
     STA Temp_Int24
@@ -3639,7 +3635,7 @@ TextBox_DrawItemName:                       ; [$8c36]
     STA Temp_Int24_M
     PLA
     AND #$1f
-    JSR $f78c
+    JSR Math_MultiplyBy16
     BCC @LAB_PRG12__8c54
     INC Temp_Int24_M
 
@@ -3726,14 +3722,14 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; relative to that address.
     ;
     LDA Temp_Int24                          ; Load the item ID.
-    JSR $fc18                               ; Load the source tiles address
+    JSR TextBox_LoadItemSourceTiles         ; Load the source tiles address
                                             ; in the PPU.
 
 
     ;
     ; Position the image where the text would normally go.
     ;
-    JSR $f804                               ; Set the draw position for the
+    JSR PPU_SetAddrForTextBoxPos            ; Set the draw position for the
                                             ; image.
 
 
@@ -3748,16 +3744,16 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; (16 == 8 bytes * 2 tiles)
     ;
     LDA #$02                                ; A = 2 (tiles)
-    JSR $cfdc                               ; Write the length to the PPU
+    JSR PPUBuffer_QueueCommandOrLength      ; Write the length to the PPU
                                             ; buffer.
     PLA                                     ; Pull the index from the stack.
     ASL A                                   ; Multiply by 16.
     ASL A
     ADC #$40                                ; Add 64 + C.
-    JSR $f845                               ; Add to the PPU buffer.
+    JSR PPUBuffer_Set                       ; Add to the PPU buffer.
     CLC
     ADC #$01                                ; Add 1.
-    JSR $f845                               ; Add to the PPU buffer.
+    JSR PPUBuffer_Set                       ; Add to the PPU buffer.
 
 
     ;
@@ -3766,7 +3762,7 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ;
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
                                             ; offset.
-    JSR $f826                               ; Increment the PPU address by
+    JSR PPU_IncrementAddrBy32               ; Increment the PPU address by
                                             ; 32.
 
 
@@ -3781,17 +3777,17 @@ TextBox_DrawItemImage:                      ; [$8c58]
     ; (16 == 8 bytes * 2 tiles)
     ;
     LDA #$02                                ; A = 2 (tiles)
-    JSR $cfdc                               ; Write the length to the PPU
+    JSR PPUBuffer_QueueCommandOrLength      ; Write the length to the PPU
                                             ; buffer.
     PLA                                     ; Pull the index from the stack.
     ASL A                                   ; Multiply by 16.
     ASL A
     ADC #$42                                ; Add 66 + C.
-    JSR $f845                               ; Add left tile index the PPU
+    JSR PPUBuffer_Set                       ; Add left tile index the PPU
                                             ; buffer.
     CLC
     ADC #$01                                ; Add 1.
-    JSR $f845                               ; Add right tile to the PPU
+    JSR PPUBuffer_Set                       ; Add right tile to the PPU
                                             ; buffer.
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer write
                                             ; offset.
@@ -3845,7 +3841,7 @@ Player_Equip:                               ; [$8ca9]
     ;
     STA a:Temp_EquipingItem                 ; Store the item that we're
                                             ; equipping.
-    JSR $f785                               ; Compute the inventory index of
+    JSR Player_GetInventoryIndexForItem     ; Compute the inventory index of
                                             ; the item.
     TAX                                     ; Set X = the inventory index we
                                             ; computed
@@ -3881,7 +3877,7 @@ Player_Equip:                               ; [$8ca9]
     ;
     ; Set the normalized value within the inventory.
     ;
-    JSR $f785                               ; Calculate the inventory slot
+    JSR Player_GetInventoryIndexForItem     ; Calculate the inventory slot
                                             ; again.
     TAY                                     ; Set Y = inventory slot
     LDA a:Temp_EquipingItem                 ; Set A = new item
@@ -3900,21 +3896,21 @@ Player_Equip:                               ; [$8ca9]
     ;
     ; Inventory 0 (weapons)
     ;
-    JMP $edec                               ; Set the current weapon.
+    JMP Player_SetWeapon                    ; Set the current weapon.
 
 
     ;
     ; Inventory 1 (armor)
     ;
   @_isArmor:                                ; [$8ce7]
-    JMP $ee05                               ; Set the current armor.
+    JMP Player_SetArmor                     ; Set the current armor.
 
 
     ;
     ; Inventory 2 (shield)
     ;
   @_isShield:                               ; [$8cea]
-    JMP $ee0d                               ; Set the current shield.
+    JMP Player_SetShield                    ; Set the current shield.
 
 
     ;
@@ -3928,7 +3924,7 @@ Player_Equip:                               ; [$8ca9]
     ; Inventory 4 (normal items)
     ;
   @_isItem:                                 ; [$8cf0]
-    JMP $fc0b                               ; Set the current item.
+    JMP Player_SetItem                      ; Set the current item.
 
 
 ;============================================================================
@@ -4034,7 +4030,7 @@ Player_LacksItem:                           ; [$8cf7]
     BEQ @_specialItemMatched
     PHA                                     ; Push the item value on the
                                             ; stack.
-    JSR $f785                               ; Get the inventory for the item.
+    JSR Player_GetInventoryIndexForItem     ; Get the inventory for the item.
     TAY                                     ; Set Y = inventory.
     LDA INVENTORY_CATEGORY_L,Y
     STA Temp_Int24
@@ -4275,10 +4271,10 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     CLC
     ADC #$02                                ; Add 2.
     STA TextBox_ContentsY                   ; Set as the draw Y coordinate.
-    JSR $f804                               ; Set this as the PPU draw
+    JSR PPU_SetAddrForTextBoxPos            ; Set this as the PPU draw
                                             ; position.
     LDA a:PlayerTitle                       ; Load the player title.
-    JSR $f78c                               ; Multiply by 16 to get an index
+    JSR Math_MultiplyBy16                   ; Multiply by 16 to get an index
                                             ; into the strings.
     TAY                                     ; Y = A (result)
     LDA #$43                                ; 0x43 == lower byte of Player
@@ -4322,7 +4318,7 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     LDA #$00                                ; Upper byte is always 0.
     STA Temp_Int24_U                        ; Store it.
     LDY #$05                                ; 5 = Maximum number of digits.
-    JSR $fa03                               ; Draw the number zero-padded.
+    JSR TextBox_DrawZeroPaddedNumber        ; Draw the number zero-padded.
 
 
     ;
@@ -4357,7 +4353,7 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     ADC #$09                                ; Add 9 (image X coordinate).
     STA TextBox_ContentsX                   ; Store as the draw X coordinate.
     TXA                                     ; A = X (loop counter).
-    JSR $f78b                               ; Get the inventory bit for this
+    JSR Player_GetInventoryBitForIndex      ; Get the inventory bit for this
                                             ; index.
     ORA SelectedWeapon,X                    ; OR with the item value,
                                             ; yielding an inventory-backed
@@ -4441,8 +4437,8 @@ PlayerMenu_ShowStatusMenu:                  ; [$8d5a]
     ; Draw the menu, freezing gameplay until dismissed.
     ;
   @_waitForInputLoop:                       ; [$8e41]
-    JSR $ca25                               ; Wait for the next frame.
-    JSR $cb47                               ; Draw with screen state paused.
+    JSR WaitForNextFrame                    ; Wait for the next frame.
+    JSR Screen_ResetSpritesForGamePlay      ; Draw with screen state paused.
     LDA Joy1_ChangedButtonMask              ; Load the changed button mask.
     ASL A                                   ; Shift the "A" button state into
                                             ; N.
@@ -4507,7 +4503,7 @@ PlayerMenu_DrawStringLines:                 ; [$8e6b]
     CLC
     ADC #$02
     STA TextBox_ContentsY
-    JSR $f804
+    JSR PPU_SetAddrForTextBoxPos
     LDX #$00
 
   @_drawLinesLoop:                          ; [$8e80]
@@ -4521,7 +4517,7 @@ PlayerMenu_DrawStringLines:                 ; [$8e6b]
     TAY
     JSR UI_DrawString
     LDA #$40
-    JSR $f828
+    JSR PPU_IncrementAddrBy
     PLA
     TAX
     INX
@@ -4574,7 +4570,7 @@ UI_DrawString:                              ; [$8e9b]
                                             ; loaded string.
     STA Temp_Int24_U                        ; Store it.
     INY                                     ; Y++ (character offset)
-    JSR $cfdc                               ; Queue drawing up to the length.
+    JSR PPUBuffer_QueueCommandOrLength      ; Queue drawing up to the length.
 
 
     ;
@@ -4585,7 +4581,7 @@ UI_DrawString:                              ; [$8e9b]
     JSR Strings_ASCIIToIndex                ; Conver the ASCII value to a
                                             ; tile index.
     INY                                     ; Y++ (character offset)
-    JSR $f845                               ; Set that in the PPU buffer.
+    JSR PPUBuffer_Set                       ; Set that in the PPU buffer.
     DEC Temp_Int24_U                        ; Decrement loop counter.
     BNE @_drawLoop                          ; If we're not done, loop.
     STX PPUBuffer_WriteOffset               ; Store the new PPU buffer upper
@@ -4641,7 +4637,7 @@ IScriptAction_AddInventoryItem_ClearTextBox: ; [$8ec1]
     LDX a:TextBox_Y
     INX
     STX TextBox_ContentsY
-    JSR $f804
+    JSR PPU_SetAddrForTextBoxPos
     LDX a:TextBox_Height
 
   @_clearLoop:                              ; [$8ed3]
@@ -4651,11 +4647,11 @@ IScriptAction_AddInventoryItem_ClearTextBox: ; [$8ec1]
     TAY
     SEC
     SBC #$02
-    JSR $cfdc
+    JSR PPUBuffer_QueueCommandOrLength
     LDA #$00
-    JSR $f839
+    JSR TextBox_FillPPUBufferForTextWidth
     STX PPUBuffer_WriteOffset
-    JSR $f826
+    JSR PPU_IncrementAddrBy32
     PLA
     TAX
     DEX
@@ -4687,16 +4683,16 @@ TextBox_Open:                               ; [$8ef1]
     STA TextBox_ContentsX
     LDA a:TextBox_Y
     STA TextBox_ContentsY
-    JSR $f804
-    JSR $f832
+    JSR PPU_SetAddrForTextBoxPos
+    JSR TextBox_QueuePPUBufferTextBoxLength
     LDA #$01
-    JSR $f845
+    JSR PPUBuffer_Set
     LDA #$02
-    JSR $f839
+    JSR TextBox_FillPPUBufferForTextWidth
     LDA #$03
-    JSR $f845
+    JSR PPUBuffer_Set
     STX PPUBuffer_WriteOffset
-    JSR $f826
+    JSR PPU_IncrementAddrBy32
 
 
     ;
@@ -4707,15 +4703,15 @@ TextBox_Open:                               ; [$8ef1]
   @_drawFrameSides:                         ; [$8f18]
     TYA
     PHA
-    JSR $f832
+    JSR TextBox_QueuePPUBufferTextBoxLength
     LDA #$04
-    JSR $f845
+    JSR PPUBuffer_Set
     LDA #$00
-    JSR $f839
+    JSR TextBox_FillPPUBufferForTextWidth
     LDA #$04
-    JSR $f845
+    JSR PPUBuffer_Set
     STX PPUBuffer_WriteOffset
-    JSR $f826
+    JSR PPU_IncrementAddrBy32
     PLA
     TAY
     DEY
@@ -4726,13 +4722,13 @@ TextBox_Open:                               ; [$8ef1]
     ;
     ; Draw the bottom of the box's frame.
     ;
-    JSR $f832
+    JSR TextBox_QueuePPUBufferTextBoxLength
     LDA #$05
-    JSR $f845
+    JSR PPUBuffer_Set
     LDA #$02
-    JSR $f839
+    JSR TextBox_FillPPUBufferForTextWidth
     LDA #$06
-    JSR $f845
+    JSR PPUBuffer_Set
     STX PPUBuffer_WriteOffset
     LDA #$00
 
@@ -4846,7 +4842,7 @@ TextBox_FillBackground:                     ; [$8f51]
     PHA
     LDA TextBox_ContentsX
     STA Temp_Int24
-    JSR $cfdc
+    JSR PPUBuffer_QueueCommandOrLength
 
 
     ;
@@ -4855,11 +4851,11 @@ TextBox_FillBackground:                     ; [$8f51]
   @_drawColsLoop:                           ; [$8fdc]
     LDA TextBox_AttributeData,Y
     INY
-    JSR $f845
+    JSR PPUBuffer_Set
     DEC Temp_Int24
     BNE @_drawColsLoop
     STX PPUBuffer_WriteOffset
-    JSR $f822
+    JSR PPU_IncrementAddrBy8
     PLA
     CLC
     ADC #$08
@@ -4906,7 +4902,7 @@ TextBox_GetBackgroundAttributeData:         ; [$8ff6]
     ; The textbox is closed. Return the attribute of the background
     ; area behind it.
     ;
-    JMP $f791                               ; Return the attribute data
+    JMP TextBox_GetBackingAttributeData     ; Return the attribute data
                                             ; behind the textbox.
 
 
@@ -4946,7 +4942,7 @@ TextBox_Close:                              ; [$9002]
     STA TextBox_ContentsX
     LDA a:TextBox_Y
     STA TextBox_ContentsY
-    JSR $f804
+    JSR PPU_SetAddrForTextBoxPos
     LDY a:TextBox_Height
 
   @_closeYLoop:                             ; [$901a]
@@ -4956,11 +4952,11 @@ TextBox_Close:                              ; [$9002]
     PHA
     LDA a:TextBox_Width
     TAY
-    JSR $cfdc
+    JSR PPUBuffer_QueueCommandOrLength
 
   @_closeXLoop:                             ; [$9026]
-    JSR $f7b7
-    JSR $f845
+    JSR Textbox_Maybe_GetAreaBehindTextbox
+    JSR PPUBuffer_Set
     INC TextBox_ContentsX
     DEY
     BNE @_closeXLoop
@@ -4970,7 +4966,7 @@ TextBox_Close:                              ; [$9002]
     PLA
     TAY
     INC TextBox_ContentsY
-    JSR $f826
+    JSR PPU_IncrementAddrBy32
     DEY
     BNE @_closeYLoop
     RTS
@@ -4982,12 +4978,12 @@ TextBox_Close:                              ; [$9002]
 DEADCODE_FUN_PRG12__9041:                   ; [$9041]
     LDA #$05
     STA TextBox_ContentsX
-    JSR $cfdc
+    JSR PPUBuffer_QueueCommandOrLength
 
   @LAB_PRG12__9048:                         ; [$9048]
     LDA TextBox_AttributeData,Y
     INY
-    JSR $f845
+    JSR PPUBuffer_Set
     DEC TextBox_ContentsX
     BNE @LAB_PRG12__9048
     STX PPUBuffer_WriteOffset
@@ -5036,7 +5032,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     STX a:Menu_CursorPos                    ; Set the new cursor position.
     LDA #$0b                                ; 0xB = Cursor movement sound
                                             ; effect.
-    JSR $d0e4                               ; Play the sound effect.
+    JSR Sound_PlayEffect                    ; Play the sound effect.
 
 
     ;
@@ -5066,7 +5062,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     ADC #$10                                ; Add 16.
     STA Temp_Int24                          ; Store it temporarily.
     LDA a:Menu_CursorPos                    ; A = cursor position.
-    JSR $f78c                               ; A = A * 16 (2 tile height)
+    JSR Math_MultiplyBy16                   ; A = A * 16 (2 tile height)
     ADC Temp_Int24                          ; A = A + our Y value.
     SBC #$20                                ; A = A - 32 (padding and nudging
                                             ; up a tile).
@@ -5077,7 +5073,7 @@ Menu_UpdateAndDraw:                         ; [$9056]
     ; Draw the selection symbol.
     ;
     LDA #$ad                                ; A = 0xAD (right arrow symbol).
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 
     ;
@@ -5126,23 +5122,23 @@ Menu_UpdateAndDraw:                         ; [$9056]
 ;     TODO
 ;============================================================================
 PasswordScreen_Show:                        ; [$909d]
-    JSR $caf7
+    JSR PPU_WaitUntilFlushed
     LDA #$10
     STA a:PPUADDR
     LDA #$00
     STA a:PPUADDR
     LDY #$10
-    JSR $fcb2
-    JSR $f3a5
+    JSR PPU_FillData
+    JSR PPU_LoadGlyphsForStrings
     LDY #$1f
 
   @LAB_PRG12__90b4:                         ; [$90b4]
     LDA PASSWORD_SCREEN_PALETTE,Y
-    STA Screen_PaletteData,Y
+    STA Screen_PaletteData_Tiles,Y
     DEY
     BPL @LAB_PRG12__90b4
-    JSR $d090
-    JSR $fcb9
+    JSR PPUBuffer_WritePalette
+    JSR PPU_ClearAllTilemaps
 
 
     ;
@@ -5157,7 +5153,7 @@ PasswordScreen_Show:                        ; [$909d]
     STA a:PPUADDR
     LDA #$5f
     LDY #$10
-    JSR $fcb2
+    JSR PPU_FillData
 
 
     ;
@@ -5170,7 +5166,7 @@ PasswordScreen_Show:                        ; [$909d]
     STA a:PPUADDR
     LDA #$5f
     LDY #$10
-    JSR $fcb2
+    JSR PPU_FillData
 
 
     ;
@@ -5254,7 +5250,7 @@ PasswordScreen_Show:                        ; [$909d]
     ;
     ; Handle password input.
     ;
-    JSR $cb27
+    JSR Screen_ResetForNonGame
 
     ;
     ; v-- Fall through --v
@@ -5276,8 +5272,8 @@ PasswordScreen_Show:                        ; [$909d]
 ;     PasswordScreen_WaitForInput
 ;============================================================================
 PasswordScreen_WaitForInput:                ; [$9140]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR PasswordScreen_DrawAndHandleInputLoop
     BCC PasswordScreen_WaitForInput
     CMP #$83
@@ -5311,8 +5307,8 @@ PasswordScreen_HandleWrongPasswordAndWaitForInput: ; [$915f]
     JSR Sound_PlayInputSound
 
   @_handleWrongPassword:                    ; [$9162]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR PasswordScreen_WriteWrongPassword
     LDA Joy1_ChangedButtonMask
     BPL @_handleWrongPassword
@@ -5505,7 +5501,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     ; Queue up a string of 23 characters.
     ;
     LDA #$17
-    JSR $cfdc                               ; Queue 23 characters to draw.
+    JSR PPUBuffer_QueueCommandOrLength      ; Queue 23 characters to draw.
 
 
     ;
@@ -5514,7 +5510,7 @@ PasswordScreen_DrawMessage:                 ; [$9195]
     LDY #$00                                ; Y = 0 (loop counter)
 
   @LAB_PRG12__91ae:                         ; [$91ae]
-    JSR $f842                               ; Put the next character from our
+    JSR PPUBuffer_WriteFromTemp             ; Put the next character from our
                                             ; loaded string into the PPU
                                             ; buffer.
     CPY #$17                                ; Have we written 23 characters?
@@ -5937,10 +5933,10 @@ PasswordScreen_WriteCharTile:               ; [$92ed]
     ; Write to the PPU buffer.
     ;
     LDA #$01                                ; A = 1 (write length)
-    JSR $cfdc                               ; Queue the length.
+    JSR PPUBuffer_QueueCommandOrLength      ; Queue the length.
     PLA                                     ; Pull the caller-provided tile
                                             ; value.
-    JSR $f845                               ; Write the tile to the buffer.
+    JSR PPUBuffer_Set                       ; Write the tile to the buffer.
     STX PPUBuffer_WriteOffset               ; Update the write offset.
 
     ;
@@ -6039,7 +6035,7 @@ PasswordScreen_HandleInputChar:             ; [$9312]
 Sound_PlayInputSound:                       ; [$9341]
     PHA                                     ; Push A to the stack.
     LDA #$0d                                ; 0xD == Character Input sound
-    JSR $d0e4                               ; Play the sound effect.
+    JSR Sound_PlayEffect                    ; Play the sound effect.
     PLA                                     ; Pop A from the stack.
     RTS
 
@@ -6062,7 +6058,7 @@ Sound_PlayInputSound:                       ; [$9341]
 Sound_PlayMoveCursorSound:                  ; [$9349]
     PHA                                     ; Push A to the stack.
     LDA #$0b                                ; 0xB == Cursor Movement sound.
-    JSR $d0e4                               ; Play the sound effect.
+    JSR Sound_PlayEffect                    ; Play the sound effect.
     PLA                                     ; Pop A from the stack.
 
     ;
@@ -6225,7 +6221,7 @@ PasswordScreen_HandleDeleteAtCursor:        ; [$93b4]
     CPX a:Password_EnteredCharsLength
     BEQ @LAB_PRG12__93d7
     LDX a:Password_FieldCursorPos
-    LDA ScreenBuffer+1,X
+    LDA DAT_0601,X
     STA ScreenBuffer,X
     JSR PasswordScreen_DrawAtCursorPosition
     INC a:Password_FieldCursorPos
@@ -6294,7 +6290,7 @@ PasswordScreen_DrawAndHandleInputLoop:      ; [$9405]
   @LAB_PRG12__9416:                         ; [$9416]
     PHA
     LDA #$0e
-    JSR $d0e4
+    JSR Sound_PlayEffect
     PLA
     JSR PasswordScreen_IsCursorSpotInvalid
     SEC
@@ -6963,7 +6959,7 @@ PasswordScreen_DrawSelectionCursor:         ; [$954f]
     ADC #$55                                ; Add 85 (start of first row).
     TAY                                     ; Y = result.
     LDA #$e4                                ; A = 0xE4 (hand symbol)
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 
 ;============================================================================
@@ -7513,7 +7509,7 @@ Password_DecodeValueList:                   ; [$96c2]
     ; Store the resulting item in our buffer.
     ;
     TXA                                     ; A = item value
-    STA ($ee),Y                             ; Store in our decode buffer.
+    STA (Temp_Int24_U),Y                    ; Store in our decode buffer.
     INY                                     ; Y++
     CPY a:Password_TempA                    ; Have we read all the items?
     BNE @_loop                              ; If not, loop.
@@ -8172,7 +8168,7 @@ Password_EncodeValueList:                   ; [$982a]
     ;
     ; Password_EncodeValue(entryList[Y], X, numBits)
     ;
-    LDA ($ee),Y                             ; A = value at bits offset
+    LDA (Temp_Int24_U),Y                    ; A = value at bits offset
     LDY a:Password_TempX                    ; Y =
                                             ; Password_TempX
                                             ; (num bits)
@@ -8481,8 +8477,8 @@ IScripts_FillPlaceholderText:               ; [$9910]
     ;
     ; Clear the textbox and prepare to write to it.
     ;
-    JSR $f44a                               ; Clear the existing text tiles.
-    JSR $f804                               ; Set the PPU address for the
+    JSR TextBox_ClearTextTiles              ; Clear the existing text tiles.
+    JSR PPU_SetAddrForTextBoxPos            ; Set the PPU address for the
                                             ; text position to write to.
 
 
@@ -8490,13 +8486,17 @@ IScripts_FillPlaceholderText:               ; [$9910]
     ; Write 4 lines of arbitrary characters.
     ;
     LDY #$40
-    JSR $f5d9                               ; Write "@ABCDEFGHIJKLMNO"
+    JSR TextBox_FillPlaceholderTextAtLineWithStartChar ; Write
+                                                       ; "@ABCDEFGHIJKLMNO"
     LDY #$50
-    JSR $f5d9                               ; Write "PQRSTUVWXYZ[\]^_"
+    JSR TextBox_FillPlaceholderTextAtLineWithStartChar ; Write
+                                                       ; "PQRSTUVWXYZ[\]^_"
     LDY #$60
-    JSR $f5d9                               ; Write "`abcdefghijklmno"
+    JSR TextBox_FillPlaceholderTextAtLineWithStartChar ; Write
+                                                       ; "`abcdefghijklmno"
     LDY #$70
-    JMP $f5d9                               ; Write "pqrstuvwxyz{|}~."
+    JMP TextBox_FillPlaceholderTextAtLineWithStartChar ; Write
+                                                       ; "pqrstuvwxyz{|}~."
 
 ;============================================================================
 ; TODO: Document TextBox_CheckShouldContinue
@@ -8560,7 +8560,7 @@ TextBox_PrepareContinueMessage:             ; [$9949]
     STA a:TextBox_MessagePaused
     LDA #$04
     STA a:Unused_Arg_Text_NumLines
-    JMP $f539
+    JMP TextBox_ShowMessage_Prepare4Lines
 
 ;============================================================================
 ; TODO: Document TextBox_CheckShouldContinueOrDismissMessage
@@ -8764,7 +8764,7 @@ TextBox_DrawDownArrowTerminatorSymbol:      ; [$99a1]
     ;
     LDA #$e5                                ; A = 0xE5 (animation frame
                                             ; offset).
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 
 ;============================================================================
@@ -8833,7 +8833,7 @@ TextBox_DrawUpArrowTerminatorSymbol:        ; [$99be]
     ; Draw the symbol.
     ;
     LDA #$e6                                ; A = 0xE6 (up arrow symbol).
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 
 ;============================================================================
@@ -8899,7 +8899,7 @@ TextBox_DrawQuestionMarkTerminatorSymbol:   ; [$99db]
     ; Draw the symbol.
     ;
     LDA #$e7                                ; A = 0xE7 (question mark symbol)
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 ;============================================================================
 ; TODO: Document Shop_Draw
@@ -8966,7 +8966,7 @@ Shop_Draw:                                  ; [$99f8]
     STA TextBox_ContentsX
     INC TextBox_ContentsY
     LDY #$05
-    JSR $fa26
+    JSR UI_DrawDigitsNoLeadingZeroes
     INC TextBox_ContentsY
     PLA
     TAX
@@ -9015,7 +9015,7 @@ Player_RemoveItem:                          ; [$9a6a]
     CMP #$94
     BEQ @_isSpecialItem
     STA Temp_Int24_U
-    JSR $f785
+    JSR Player_GetInventoryIndexForItem
     TAX
     LDA NumberOfWeapons,X
     BEQ @_return
@@ -9194,7 +9194,7 @@ Player_AddToInventory:                      ; [$9af7]
     DEX                                     ; Next i
     BPL @_checkSpecialItems
     STA Temp_Int24_U
-    JSR $f785                               ; Convert the item ID to a
+    JSR Player_GetInventoryIndexForItem     ; Convert the item ID to a
                                             ; category.
     TAX
     LDA INVENTORY_CATEGORY_L,X
@@ -9294,21 +9294,21 @@ INVENTORY_CATEGORY_U_4_:                    ; [$9b32]
 ;
 ITEM_NAME_CATEGORIES_L:                     ; [$9b33]
     .byte <ITEM_NAMES_WEAPONS               ; [0]:
-    .byte $7d                               ; [1]:
-    .byte $bd                               ; [2]:
-    .byte $fd                               ; [3]:
-    .byte $4d                               ; [4]:
+    .byte <ITEM_NAMES_ARMOR                 ; [1]:
+    .byte <ITEM_NAMES_SHIELDS               ; [2]:
+    .byte <ITEM_NAMES_MAGIC                 ; [3]:
+    .byte <ITEM_NAMES_KEYS                  ; [4]:
 
 ;
 ; XREFS:
 ;     TextBox_DrawItemName
 ;
 ITEM_NAME_CATEGORIES_U:                     ; [$9b38]
-    .byte $9b                               ; [0]:
-    .byte $9b                               ; [1]:
-    .byte $9b                               ; [2]:
-    .byte $9b                               ; [3]:
-    .byte $9c                               ; [4]:
+    .byte >ITEM_NAMES_WEAPONS               ; [0]:
+    .byte >ITEM_NAMES_ARMOR                 ; [1]:
+    .byte >ITEM_NAMES_SHIELDS               ; [2]:
+    .byte >ITEM_NAMES_MAGIC                 ; [3]:
+    .byte >ITEM_NAMES_KEYS                  ; [4]:
 
 ;
 ; XREFS:
@@ -9422,6 +9422,8 @@ ITEM_NAMES_KEYS:                            ; [$9c4d]
     .byte "NIX     "                        ; [$9d95] char
     .byte $0d,"FIRE CR"                     ; [$9d9d] char
     .byte "YSTAL   "                        ; [$9da5] char
+
+STARTSCREEEN_PALETTE_SPRITES:               ; [$9dad]
     .byte $0f                               ; [0]:
     .byte $00                               ; [1]:
     .byte $10                               ; [2]:
@@ -9441,14 +9443,14 @@ ITEM_NAMES_KEYS:                            ; [$9c4d]
 ; XREFS:
 ;     StartScreen_Draw
 ;
-BYTE_ARRAY_PRG12__9dad_14_:                 ; [$9dbb]
+STARTSCREEEN_PALETTE_SPRITES_14_:           ; [$9dbb]
     .byte $10                               ; [14]:
 
 ;
 ; XREFS:
 ;     StartScreen_Draw
 ;
-BYTE_ARRAY_PRG12__9dad_15_:                 ; [$9dbc]
+STARTSCREEEN_PALETTE_SPRITES_15_:           ; [$9dbc]
     .byte $20                               ; [15]:
 
 TEXT_TILES_START:                           ; [$9dbd]
@@ -9583,7 +9585,7 @@ UI_DrawText:                                ; [$9e0e]
 ;     TODO
 ;============================================================================
 StartScreen_Draw:                           ; [$9e21]
-    JSR $caf7
+    JSR PPU_WaitUntilFlushed
 
 
     ;
@@ -9602,7 +9604,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$e0
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
 
 
     ;
@@ -9621,7 +9623,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$1b
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
 
 
     ;
@@ -9640,8 +9642,8 @@ StartScreen_Draw:                           ; [$9e21]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$0a
-    JSR $f89e
-    JSR $fcb9
+    JSR PPU_WriteTilesFromCHRRAM
+    JSR PPU_ClearAllTilemaps
 
 
     ;
@@ -9660,7 +9662,7 @@ StartScreen_Draw:                           ; [$9e21]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$04
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
 
 
     ;
@@ -9780,18 +9782,18 @@ StartScreen_Draw:                           ; [$9e21]
     STA Temp_Int24_M
     JSR UI_DrawText
     LDA #$10
-    JSR $d03b
+    JSR Screen_LoadUIPalette
     LDX #$0f
 
   @LAB_PRG12__9f31:                         ; [$9f31]
-    LDA $9dad,X
-    STA $02a3,X
+    LDA STARTSCREEEN_PALETTE_SPRITES,X
+    STA Screen_PaletteData_Sprites,X
     DEX
     BPL @LAB_PRG12__9f31
-    JSR $d090
+    JSR PPUBuffer_WritePalette
     LDA #$01
     STA Music_Current
-    JMP $cb27
+    JMP Screen_ResetForNonGame
 
 ;============================================================================
 ; TODO: Document StartScreen_CheckHandleInput
@@ -9810,7 +9812,7 @@ StartScreen_CheckHandleInput:               ; [$9f44]
     EOR #$01
     STA a:DAT_0687
     LDA #$0b
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
   @LAB_PRG12__9f57:                         ; [$9f57]
     LDY #$00
@@ -9826,7 +9828,7 @@ StartScreen_CheckHandleInput:               ; [$9f44]
     LDX BYTE_ARRAY_PRG12__9f69,Y            ; X = menu item X position.
     LDY #$7e                                ; Y = 126.
     LDA #$ad                                ; A = 0xAD (right arrow symbol)
-    JMP $fca7                               ; Draw the symbol.
+    JMP UI_DrawPromptInputSymbol            ; Draw the symbol.
 
 ;
 ; XREFS:
@@ -14493,17 +14495,17 @@ SplashAnimation_Intro_SomethingA708:        ; [$a708]
     LDY #$1f
 
   @LAB_PRG12__a714:                         ; [$a714]
-    LDA Screen_PaletteData,Y
+    LDA Screen_PaletteData_Tiles,Y
     SEC
     SBC #$10
     BPL @LAB_PRG12__a71e
     LDA #$0f
 
   @LAB_PRG12__a71e:                         ; [$a71e]
-    STA Screen_PaletteData,Y
+    STA Screen_PaletteData_Tiles,Y
     DEY
     BPL @LAB_PRG12__a714
-    JMP $d090
+    JMP PPUBuffer_WritePalette
 
   @LAB_PRG12__a727:                         ; [$a727]
     RTS
@@ -14555,7 +14557,7 @@ SPLASHANIM_PALETTE_U:                       ; [$a72e]
 ;============================================================================
 SplashAnimation_DrawScenery:                ; [$a730]
     STA a:SplashAnimation_SceneIndex
-    JSR $caf7
+    JSR PPU_WaitUntilFlushed
     LDA #$a0
     STA IScriptOrCHRAddr
     LDA #$9b
@@ -14566,7 +14568,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$90
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
     LDA #$a0
     STA IScriptOrCHRAddr
     LDA #$a4
@@ -14577,7 +14579,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     STA PPU_TargetAddr_U
     LDX #$0a
     LDY #$80
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
     LDX a:SplashAnimation_SceneIndex
     LDA SPLASHANIM_CHR_L,X
     STA IScriptOrCHRAddr
@@ -14589,7 +14591,7 @@ SplashAnimation_DrawScenery:                ; [$a730]
     STA PPU_TargetAddr
     LDX #$0a
     LDY #$40
-    JSR $f89e
+    JSR PPU_WriteTilesFromCHRRAM
     LDX a:SplashAnimation_SceneIndex
     LDA SPLASHANIM_PALETTE_L,X
     STA Temp_Int24
@@ -14599,10 +14601,10 @@ SplashAnimation_DrawScenery:                ; [$a730]
 
   @_paletteLoop:                            ; [$a78f]
     LDA (Temp_Int24),Y
-    STA Screen_PaletteData,Y
+    STA Screen_PaletteData_Tiles,Y
     DEY
     BPL @_paletteLoop
-    JMP $d090
+    JMP PPUBuffer_WritePalette
 
 ;============================================================================
 ; TODO: Document SplashAnimation_RunIntro
@@ -14624,11 +14626,11 @@ SplashAnimation_RunIntro:                   ; [$a79a]
     STA a:SplashAnimation_PaletteStage
     LDA #$00
     STA Music_Current
-    JSR $cb27
+    JSR Screen_ResetForNonGame
 
   @LAB_PRG12__a7ae:                         ; [$a7ae]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_Maybe_CalcPlayerAnimState
     JSR SplashAnimation_Maybe_AnimPlayerStep
@@ -14914,7 +14916,7 @@ SplashAnimation_Maybe_AnimPlayerStep:       ; [$a8be]
     AND #$0f
     BNE @LAB_PRG12__a8d8
     LDA #$15
-    JSR $d0e4
+    JSR Sound_PlayEffect
 
   @LAB_PRG12__a8d8:                         ; [$a8d8]
     LDA BYTE_ARRAY_PRG12__a8de,X
@@ -15041,11 +15043,11 @@ SplashAnimation_RunOutro:                   ; [$a932]
     JSR SplashAnimation_SomethingOutro_A99C
     LDA #$0c
     STA Music_Current
-    JSR $cb27
+    JSR Screen_ResetForNonGame
 
   @LAB_PRG12__a944:                         ; [$a944]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_Maybe_CalcPlayerAnimSize
     JSR SplashAnimation_OutroFuncAF82
@@ -15057,8 +15059,8 @@ SplashAnimation_RunOutro:                   ; [$a932]
     BCC @LAB_PRG12__a944
 
   @LAB_PRG12__a963:                         ; [$a963]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
@@ -15069,8 +15071,8 @@ SplashAnimation_RunOutro:                   ; [$a932]
     STA InterruptCounter
 
   @LAB_PRG12__a97d:                         ; [$a97d]
-    JSR $ca25
-    JSR $cb4f
+    JSR WaitForNextFrame
+    JSR Screen_ResetSpritesForNonGame
     JSR SplashAnimation_SomethingUpdateState
     JSR SplashAnimation_SomethingOutroA9C9
     JSR SplashAnimation_SomethingA9F2
