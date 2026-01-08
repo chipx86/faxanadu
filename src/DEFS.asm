@@ -3,13 +3,13 @@
 ; Area
 ;============================================================================
 AREA_EOLIS                                         = $00
-AREA_APOLUNE                                       = $01
-AREA_FOREPAW                                       = $02
-AREA_MASCON                                        = $03
-AREA_VICTIM_OR_INSIDE                              = $04
-AREA_CONFLATE                                      = $05
-AREA_DAYBREAK                                      = $06
-AREA_EVIL_FORTRESS                                 = $07
+AREA_TRUNK                                         = $01
+AREA_MIST                                          = $02
+AREA_TOWNS                                         = $03
+AREA_BUILDINGS                                     = $04
+AREA_BRANCH                                        = $05
+AREA_DARTMOOR                                      = $06
+AREA_ZENIS                                         = $07
 
 ;============================================================================
 ; AreasRegion

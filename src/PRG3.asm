@@ -30,15 +30,15 @@ AREAS_TABLE_PTR:                            ; [$8000]
 AREA_TABLES:                                ; [$8002]
     .word EOLIS_AREA_DATA-$8000             ; EOLIS_AREA_DATA
                                             ; [$PRG3::8002]
-    .word APOLUNE_AREA_DATA-$8000           ; APOLUNE_AREA_DATA
+    .word TRUNK_AREA_DATA-$8000             ; TRUNK_AREA_DATA
                                             ; [$PRG3::8004]
-    .word FOREPAW_AREA_DATA-$8000           ; FOREPAW_AREA_DATA
+    .word MIST_AREA_DATA-$8000              ; MIST_AREA_DATA
                                             ; [$PRG3::8006]
-    .word MASCON_AREA_DATA-$8000            ; MASCON_AREA_DATA
+    .word TOWNS_AREA_DATA-$8000             ; TOWNS_AREA_DATA
                                             ; [$PRG3::8008]
-    .word VICTIM_AREA_DATA-$8000            ; VICTIM_AREA_DATA
+    .word BUILDINGS_AREA_DATA-$8000         ; BUILDINGS_AREA_DATA
                                             ; [$PRG3::800a]
-    .word CONFLATE_AREA_DATA-$8000          ; CONFLATE_AREA_DATA
+    .word BRANCHES_AREA_DATA-$8000          ; BRANCHES_AREA_DATA
                                             ; [$PRG3::800c]
     .word DAYBREAK_AREA_DATA-$8000          ; DAYBREAK_AREA_DATA
                                             ; [$PRG3::800e]
@@ -58,15 +58,15 @@ AREA_TABLES:                                ; [$8002]
 ;     AREA_TABLES [$PRG3::8002]
 ;
 EOLIS_AREA_DATA:                            ; [$8012]
-    .word $001c                             ; EOLIS_AREA_DATA.blockAttrsRelPtr
-                                            ; [$PRG3::8012]
-    .word $02a6                             ; EOLIS_BLOCK_PROPERTIES
+    .word EOLIS_AREA_DATA_blockAttrsRelPtr-$8000 ; EOLIS_AREA_DATA.blockAttrsRelPtr
+                                                 ; [$PRG3::8012]
+    .word EOLIS_BLOCK_PROPERTIES-$8000      ; EOLIS_BLOCK_PROPERTIES
                                             ; [$PRG3::8014]
-    .word $0326                             ; EOLIS_SCROLL_DATA
+    .word EOLIS_SCROLL_DATA-$8000           ; EOLIS_SCROLL_DATA
                                             ; [$PRG3::8016]
-    .word $034a                             ; EOLIS_DOOR_LOCATIONS
+    .word EOLIS_DOOR_LOCATIONS-$8000        ; EOLIS_DOOR_LOCATIONS
                                             ; [$PRG3::8018]
-    .word $0373                             ; EOLIS_DOOR_DESTINATIONS
+    .word EOLIS_DOOR_DESTINATIONS-$8000     ; EOLIS_DOOR_DESTINATIONS
                                             ; [$PRG3::801a]
 
 ;
@@ -74,15 +74,15 @@ EOLIS_AREA_DATA:                            ; [$8012]
 ;     EOLIS_AREA_DATA [$PRG3::8012]
 ;
 EOLIS_AREA_DATA_blockAttrsRelPtr:           ; [$801c]
-    .word $0026                             ; EOLIS_BLOCK_ATTRIBUTES
+    .word EOLIS_BLOCK_ATTRIBUTES-$8000      ; EOLIS_BLOCK_ATTRIBUTES
                                             ; [$PRG3::801c]
-    .word $00a6                             ; EOLIS_BLOCK_DATA+1
+    .word EOLIS_BLOCK_DATA_01-$8000         ; EOLIS_BLOCK_DATA_01
                                             ; [$PRG3::801e]
-    .word $0126                             ; EOLIS_BLOCK_DATA_2
+    .word EOLIS_BLOCK_DATA_02-$8000         ; EOLIS_BLOCK_DATA_02
                                             ; [$PRG3::8020]
-    .word $01a6                             ; EOLIS_BLOCK_DATA_3
+    .word EOLIS_BLOCK_DATA_03-$8000         ; EOLIS_BLOCK_DATA_03
                                             ; [$PRG3::8022]
-    .word $0226                             ; EOLIS_BLOCK_DATA_4
+    .word EOLIS_BLOCK_DATA_04-$8000         ; EOLIS_BLOCK_DATA_04
                                             ; [$PRG3::8024]
 
 
@@ -239,7 +239,7 @@ EOLIS_BLOCK_ATTRIBUTES:                     ; [$8026]
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::801e]
 ;
-EOLIS_BLOCK_DATA_1:                         ; [$80a6]
+EOLIS_BLOCK_DATA_01:                        ; [$80a6]
     .byte $00                               ; [0]:
     .byte $83                               ; [1]:
     .byte $95                               ; [2]:
@@ -381,7 +381,7 @@ EOLIS_BLOCK_DATA_1:                         ; [$80a6]
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8020]
 ;
-EOLIS_BLOCK_DATA_2:                         ; [$8126]
+EOLIS_BLOCK_DATA_02:                        ; [$8126]
     .byte $00                               ; [0]:
     .byte $83                               ; [1]:
     .byte $8e                               ; [2]:
@@ -523,7 +523,7 @@ EOLIS_BLOCK_DATA_2:                         ; [$8126]
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8022]
 ;
-EOLIS_BLOCK_DATA_3:                         ; [$81a6]
+EOLIS_BLOCK_DATA_03:                        ; [$81a6]
     .byte $00                               ; [0]:
     .byte $83                               ; [1]:
     .byte $ab                               ; [2]:
@@ -665,7 +665,7 @@ EOLIS_BLOCK_DATA_3:                         ; [$81a6]
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8024]
 ;
-EOLIS_BLOCK_DATA_4:                         ; [$8226]
+EOLIS_BLOCK_DATA_04:                        ; [$8226]
     .byte $00                               ; [0]:
     .byte $83                               ; [1]:
     .byte $ab                               ; [2]:
@@ -1076,37 +1076,37 @@ EOLIS_DOOR_DESTINATIONS:                    ; [$8373]
     .byte $04,$04,$00,$00,$05,$09,$06,$00   ; [$8403] undefined
     .byte $06,$08,$06,$00,$07,$00,$06,$00   ; [$840b] undefined
 
-APOLUNE_AREA_DATA:                          ; [$8413]
-    .word $041d                             ; APOLUNE_AREA_DATA.blockAttrsRelPtr
-                                            ; [$PRG3::8413]
-    .word $06d4                             ; AREA_3_BLOCK_PROPERTIES
+TRUNK_AREA_DATA:                            ; [$8413]
+    .word TRUNK_AREA_DATA_blockAttrsRelPtr-$8000 ; TRUNK_AREA_DATA.blockAttrsRelPtr
+                                                 ; [$PRG3::8413]
+    .word AREA_3_BLOCK_PROPERTIES-$8000     ; AREA_3_BLOCK_PROPERTIES
                                             ; [$PRG3::8415]
-    .word $075d                             ; AREA_3_SCROLL_DATA
+    .word AREA_3_SCROLL_DATA-$8000          ; AREA_3_SCROLL_DATA
                                             ; [$PRG3::8417]
-    .word $085d                             ; AREA_3_DOOR_LOCATIONS
+    .word AREA_3_DOOR_LOCATIONS-$8000       ; AREA_3_DOOR_LOCATIONS
                                             ; [$PRG3::8419]
-    .word $0882                             ; AREA_3_DOOR_DESTINATIONS
+    .word AREA_3_DOOR_DESTINATIONS-$8000    ; AREA_3_DOOR_DESTINATIONS
                                             ; [$PRG3::841b]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8413]
+;     TRUNK_AREA_DATA [$PRG3::8413]
 ;
-APOLUNE_AREA_DATA_blockAttrsRelPtr:         ; [$841d]
-    .word $0427                             ; AREA_3_BLOCK_ATTRIBUTES
+TRUNK_AREA_DATA_blockAttrsRelPtr:           ; [$841d]
+    .word AREA_3_BLOCK_ATTRIBUTES-$8000     ; AREA_3_BLOCK_ATTRIBUTES
                                             ; [$PRG3::841d]
-    .word $04b0                             ; AREA_3_BLOCK_DATA+1
+    .word AREA_3_BLOCK_DATA_01-$8000        ; AREA_3_BLOCK_DATA_01
                                             ; [$PRG3::841f]
-    .word $0539                             ; AREA_3_BLOCK_DATA_2
+    .word AREA_3_BLOCK_DATA_02-$8000        ; AREA_3_BLOCK_DATA_02
                                             ; [$PRG3::8421]
-    .word $05c2                             ; AREA_3_BLOCK_DATA_3
+    .word AREA_3_BLOCK_DATA_03-$8000        ; AREA_3_BLOCK_DATA_03
                                             ; [$PRG3::8423]
-    .word $064b                             ; AREA_3_BLOCK_DATA_4
+    .word AREA_3_BLOCK_DATA_04-$8000        ; AREA_3_BLOCK_DATA_04
                                             ; [$PRG3::8425]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::841d]
+;     TRUNK_AREA_DATA [$PRG3::841d]
 ;
 AREA_3_BLOCK_ATTRIBUTES:                    ; [$8427]
     .byte $00                               ; [0]:
@@ -1249,9 +1249,9 @@ AREA_3_BLOCK_ATTRIBUTES:                    ; [$8427]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::841f]
+;     TRUNK_AREA_DATA [$PRG3::841f]
 ;
-AREA_3_BLOCK_DATA_1:                        ; [$84b0]
+AREA_3_BLOCK_DATA_01:                       ; [$84b0]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $80                               ; [2]:
@@ -1392,9 +1392,9 @@ AREA_3_BLOCK_DATA_1:                        ; [$84b0]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8421]
+;     TRUNK_AREA_DATA [$PRG3::8421]
 ;
-AREA_3_BLOCK_DATA_2:                        ; [$8539]
+AREA_3_BLOCK_DATA_02:                       ; [$8539]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $80                               ; [2]:
@@ -1535,9 +1535,9 @@ AREA_3_BLOCK_DATA_2:                        ; [$8539]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8423]
+;     TRUNK_AREA_DATA [$PRG3::8423]
 ;
-AREA_3_BLOCK_DATA_3:                        ; [$85c2]
+AREA_3_BLOCK_DATA_03:                       ; [$85c2]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $91                               ; [2]:
@@ -1678,9 +1678,9 @@ AREA_3_BLOCK_DATA_3:                        ; [$85c2]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8425]
+;     TRUNK_AREA_DATA [$PRG3::8425]
 ;
-AREA_3_BLOCK_DATA_4:                        ; [$864b]
+AREA_3_BLOCK_DATA_04:                       ; [$864b]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $93                               ; [2]:
@@ -1821,7 +1821,7 @@ AREA_3_BLOCK_DATA_4:                        ; [$864b]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8415]
+;     TRUNK_AREA_DATA [$PRG3::8415]
 ;
 AREA_3_BLOCK_PROPERTIES:                    ; [$86d4]
     .byte BLOCK_IS_AIR                      ; [0]:
@@ -1964,7 +1964,7 @@ AREA_3_BLOCK_PROPERTIES:                    ; [$86d4]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8417]
+;     TRUNK_AREA_DATA [$PRG3::8417]
 ;
 AREA_3_SCROLL_DATA:                         ; [$875d]
     .byte $ff                               ; [0]:
@@ -2226,7 +2226,7 @@ AREA_3_SCROLL_DATA:                         ; [$875d]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::8419]
+;     TRUNK_AREA_DATA [$PRG3::8419]
 ;
 AREA_3_DOOR_LOCATIONS:                      ; [$885d]
     .byte $28                               ; [0]:
@@ -2269,7 +2269,7 @@ AREA_3_DOOR_LOCATIONS:                      ; [$885d]
 
 ;
 ; XREFS:
-;     APOLUNE_AREA_DATA [$PRG3::841b]
+;     TRUNK_AREA_DATA [$PRG3::841b]
 ;
 AREA_3_DOOR_DESTINATIONS:                   ; [$8882]
     .byte $0d                               ; [0]:
@@ -2416,27 +2416,27 @@ AREA_3_DOOR_DESTINATIONS:                   ; [$8882]
 ; 68 doors (0x8DDF - 0x8D9A - 1)
 ; 136 tiles (0x8A2E - 0x89A6)
 ;============================================================================
-FOREPAW_AREA_DATA:                          ; [$890a]
-    .word $0914                             ; Block attributes pointer
-    .word $0bc6                             ; Block properties
-    .word $0c4e                             ; Scroll data
-    .word $0d9a                             ; Door locations
-    .word $0ddf                             ; Door destinations
+MIST_AREA_DATA:                             ; [$890a]
+    .word MIST_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes pointer
+    .word AREA_1_BLOCK_PROPERTIES-$8000     ; Block properties
+    .word AREA_1_SCROLL_DATA-$8000          ; Scroll data
+    .word AREA_1_DOOR_LOCATIONS-$8000       ; Door locations
+    .word AREA_1_DOOR_DESTINATIONS-$8000    ; Door destinations
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::890a]
+;     MIST_AREA_DATA [$PRG3::890a]
 ;
-FOREPAW_AREA_DATA_blockAttrsRelPtr:         ; [$8914]
-    .word $091e                             ; Block attributes
-    .word $09a6                             ; Block data 1
-    .word $0a2e                             ; Block data 2
-    .word $0ab6                             ; Block data 3
-    .word $0b3e                             ; Block data 4
+MIST_AREA_DATA_blockAttrsRelPtr:            ; [$8914]
+    .word AREA_1_BLOCK_ATTRIBUTES-$8000     ; Block attributes
+    .word AREA_1_BLOCK_DATA_01-$8000        ; Block data 1
+    .word AREA_1_BLOCK_DATA_02-$8000        ; Block data 2
+    .word AREA_1_BLOCK_DATA_03-$8000        ; Block data 3
+    .word AREA_1_BLOCK_DATA_04-$8000        ; Block data 4
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::8914]
+;     MIST_AREA_DATA [$PRG3::8914]
 ;
 AREA_1_BLOCK_ATTRIBUTES:                    ; [$891e]
     .byte $00                               ; [0]:
@@ -2578,9 +2578,9 @@ AREA_1_BLOCK_ATTRIBUTES:                    ; [$891e]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::8916]
+;     MIST_AREA_DATA [$PRG3::8916]
 ;
-AREA_1_BLOCK_DATA_1:                        ; [$89a6]
+AREA_1_BLOCK_DATA_01:                       ; [$89a6]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $80                               ; [2]:
@@ -2720,9 +2720,9 @@ AREA_1_BLOCK_DATA_1:                        ; [$89a6]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::8918]
+;     MIST_AREA_DATA [$PRG3::8918]
 ;
-AREA_1_BLOCK_DATA_2:                        ; [$8a2e]
+AREA_1_BLOCK_DATA_02:                       ; [$8a2e]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $00                               ; [2]:
@@ -2862,9 +2862,9 @@ AREA_1_BLOCK_DATA_2:                        ; [$8a2e]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::891a]
+;     MIST_AREA_DATA [$PRG3::891a]
 ;
-AREA_1_BLOCK_DATA_3:                        ; [$8ab6]
+AREA_1_BLOCK_DATA_03:                       ; [$8ab6]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $80                               ; [2]:
@@ -3004,9 +3004,9 @@ AREA_1_BLOCK_DATA_3:                        ; [$8ab6]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::891c]
+;     MIST_AREA_DATA [$PRG3::891c]
 ;
-AREA_1_BLOCK_DATA_4:                        ; [$8b3e]
+AREA_1_BLOCK_DATA_04:                       ; [$8b3e]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $00                               ; [2]:
@@ -3146,7 +3146,7 @@ AREA_1_BLOCK_DATA_4:                        ; [$8b3e]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::890c]
+;     MIST_AREA_DATA [$PRG3::890c]
 ;
 AREA_1_BLOCK_PROPERTIES:                    ; [$8bc6]
     .byte BLOCK_IS_AIR                      ; [0]:
@@ -3288,7 +3288,7 @@ AREA_1_BLOCK_PROPERTIES:                    ; [$8bc6]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::890e]
+;     MIST_AREA_DATA [$PRG3::890e]
 ;
 AREA_1_SCROLL_DATA:                         ; [$8c4e]
     .byte $ff                               ; [0]:
@@ -3626,7 +3626,7 @@ AREA_1_SCROLL_DATA:                         ; [$8c4e]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::8910]
+;     MIST_AREA_DATA [$PRG3::8910]
 ;
 AREA_1_DOOR_LOCATIONS:                      ; [$8d9a]
     .byte $00                               ; [0]:
@@ -3701,7 +3701,7 @@ AREA_1_DOOR_LOCATIONS:                      ; [$8d9a]
 
 ;
 ; XREFS:
-;     FOREPAW_AREA_DATA [$PRG3::8912]
+;     MIST_AREA_DATA [$PRG3::8912]
 ;
 AREA_1_DOOR_DESTINATIONS:                   ; [$8ddf]
     .word $0b3e,$0003,$0b45,$0002           ; [$8ddf] ushort
@@ -3732,27 +3732,28 @@ AREA_1_DOOR_DESTINATIONS:                   ; [$8ddf]
 ; 40 doors
 ; 94 tiles
 ;============================================================================
-CONFLATE_AREA_DATA:                         ; [$8e7b]
-    .word $0e85                             ; Block attributes pointer
-    .word $1065                             ; Block properties
-    .word $10c3                             ; Scroll data
-    .word $1163                             ; Door locations
-    .word $118c                             ; Door destinations
+BRANCHES_AREA_DATA:                         ; [$8e7b]
+    .word BRANCHES_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes
+                                                    ; pointer
+    .word AREA_4_BLOCK_PROPERTIES-$8000     ; Block properties
+    .word AREA_4_SCROLL_DATA-$8000          ; Scroll data
+    .word AREA_4_DOOR_LOCATIONS-$8000       ; Door locations
+    .word AREA_4_DOOR_DESTINATIONS-$8000    ; Door destinations
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e7b]
+;     BRANCHES_AREA_DATA [$PRG3::8e7b]
 ;
-CONFLATE_AREA_DATA_blockAttrsRelPtr:        ; [$8e85]
-    .word $0e8f                             ; Block attributes
-    .word $0eed                             ; Block data 1
-    .word $0f4b                             ; Block data 2
-    .word $0fa9                             ; Block data 3
-    .word $1007                             ; Block data 4
+BRANCHES_AREA_DATA_blockAttrsRelPtr:        ; [$8e85]
+    .word AREA_4_BLOCK_ATTRIBUTES-$8000     ; Block attributes
+    .word AREA_4_BLOCK_DATA_01-$8000        ; Block data 1
+    .word AREA_4_BLOCK_DATA_02-$8000        ; Block data 2
+    .word AREA_4_BLOCK_DATA_03-$8000        ; Block data 3
+    .word AREA_4_BLOCK_DATA_04-$8000        ; Block data 4
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e85]
+;     BRANCHES_AREA_DATA [$PRG3::8e85]
 ;
 AREA_4_BLOCK_ATTRIBUTES:                    ; [$8e8f]
     .byte $00                               ; [0]:
@@ -3852,9 +3853,9 @@ AREA_4_BLOCK_ATTRIBUTES:                    ; [$8e8f]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e87]
+;     BRANCHES_AREA_DATA [$PRG3::8e87]
 ;
-AREA_4_BLOCK_DATA_1:                        ; [$8eed]
+AREA_4_BLOCK_DATA_01:                       ; [$8eed]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $80                               ; [2]:
@@ -3952,9 +3953,9 @@ AREA_4_BLOCK_DATA_1:                        ; [$8eed]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e89]
+;     BRANCHES_AREA_DATA [$PRG3::8e89]
 ;
-AREA_4_BLOCK_DATA_2:                        ; [$8f4b]
+AREA_4_BLOCK_DATA_02:                       ; [$8f4b]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $80                               ; [2]:
@@ -4052,9 +4053,9 @@ AREA_4_BLOCK_DATA_2:                        ; [$8f4b]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e8b]
+;     BRANCHES_AREA_DATA [$PRG3::8e8b]
 ;
-AREA_4_BLOCK_DATA_3:                        ; [$8fa9]
+AREA_4_BLOCK_DATA_03:                       ; [$8fa9]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $91                               ; [2]:
@@ -4152,9 +4153,9 @@ AREA_4_BLOCK_DATA_3:                        ; [$8fa9]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e8d]
+;     BRANCHES_AREA_DATA [$PRG3::8e8d]
 ;
-AREA_4_BLOCK_DATA_4:                        ; [$9007]
+AREA_4_BLOCK_DATA_04:                       ; [$9007]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $93                               ; [2]:
@@ -4252,7 +4253,7 @@ AREA_4_BLOCK_DATA_4:                        ; [$9007]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e7d]
+;     BRANCHES_AREA_DATA [$PRG3::8e7d]
 ;
 AREA_4_BLOCK_PROPERTIES:                    ; [$9065]
     .byte BLOCK_IS_AIR                      ; [0]:
@@ -4352,7 +4353,7 @@ AREA_4_BLOCK_PROPERTIES:                    ; [$9065]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e7f]
+;     BRANCHES_AREA_DATA [$PRG3::8e7f]
 ;
 AREA_4_SCROLL_DATA:                         ; [$90c3]
     .byte $ff                               ; [0]:
@@ -4518,7 +4519,7 @@ AREA_4_SCROLL_DATA:                         ; [$90c3]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e81]
+;     BRANCHES_AREA_DATA [$PRG3::8e81]
 ;
 AREA_4_DOOR_LOCATIONS:                      ; [$9163]
     .byte $0a                               ; [0]:
@@ -4565,7 +4566,7 @@ AREA_4_DOOR_LOCATIONS:                      ; [$9163]
 
 ;
 ; XREFS:
-;     CONFLATE_AREA_DATA [$PRG3::8e83]
+;     BRANCHES_AREA_DATA [$PRG3::8e83]
 ;
 AREA_4_DOOR_DESTINATIONS:                   ; [$918c]
     .byte $09,$09,$02,$00,$0a,$08,$00,$00   ; [$918c] undefined
@@ -4580,27 +4581,28 @@ AREA_4_DOOR_DESTINATIONS:                   ; [$918c]
 ; 0 doors
 ; 256 tiles
 ;============================================================================
-VICTIM_AREA_DATA:                           ; [$91ac]
-    .word $11b6                             ; Block attributes pointer
-    .word $16c0                             ; Block properties
-    .word $17c0                             ; Scroll data
-    .word $17e8                             ; Door locations
-    .word $17e9                             ; Door destinations
+BUILDINGS_AREA_DATA:                        ; [$91ac]
+    .word BUILDINGS_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes
+                                                     ; pointer
+    .word AREA_6_BLOCK_PROPERTIES-$8000     ; Block properties
+    .word AREA_6_SCROLL_DATA-$8000          ; Scroll data
+    .word AREA_6_DOOR_LOCATIONS-$8000       ; Door locations
+    .word AREA_6_DOOR_DESTINATIONS-$8000    ; Door destinations
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91ac]
+;     BUILDINGS_AREA_DATA [$PRG3::91ac]
 ;
-VICTIM_AREA_DATA_blockAttrsRelPtr:          ; [$91b6]
-    .word $11c0                             ; Block attributes
-    .word $12c0                             ; Block data 1
-    .word $13c0                             ; Block data 2
-    .word $14c0                             ; Block data 3
-    .word $15c0                             ; Block data 4
+BUILDINGS_AREA_DATA_blockAttrsRelPtr:       ; [$91b6]
+    .word AREA_6_BLOCK_ATTRIBUTES-$8000     ; Block attributes
+    .word AREA_6_BLOCK_DATA_01-$8000        ; Block data 1
+    .word AREA_6_BLOCK_DATA_02-$8000        ; Block data 2
+    .word AREA_6_BLOCK_DATA_03-$8000        ; Block data 3
+    .word AREA_6_BLOCK_DATA_04-$8000        ; Block data 4
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91b6]
+;     BUILDINGS_AREA_DATA [$PRG3::91b6]
 ;
 AREA_6_BLOCK_ATTRIBUTES:                    ; [$91c0]
     .byte $00                               ; [0]:
@@ -4862,9 +4864,9 @@ AREA_6_BLOCK_ATTRIBUTES:                    ; [$91c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91b8]
+;     BUILDINGS_AREA_DATA [$PRG3::91b8]
 ;
-AREA_6_BLOCK_DATA_1:                        ; [$92c0]
+AREA_6_BLOCK_DATA_01:                       ; [$92c0]
     .byte $00                               ; [0]:
     .byte $b0                               ; [1]:
     .byte $b0                               ; [2]:
@@ -5124,9 +5126,9 @@ AREA_6_BLOCK_DATA_1:                        ; [$92c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91ba]
+;     BUILDINGS_AREA_DATA [$PRG3::91ba]
 ;
-AREA_6_BLOCK_DATA_2:                        ; [$93c0]
+AREA_6_BLOCK_DATA_02:                       ; [$93c0]
     .byte $00                               ; [0]:
     .byte $b1                               ; [1]:
     .byte $b1                               ; [2]:
@@ -5386,9 +5388,9 @@ AREA_6_BLOCK_DATA_2:                        ; [$93c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91bc]
+;     BUILDINGS_AREA_DATA [$PRG3::91bc]
 ;
-AREA_6_BLOCK_DATA_3:                        ; [$94c0]
+AREA_6_BLOCK_DATA_03:                       ; [$94c0]
     .byte $00                               ; [0]:
     .byte $b0                               ; [1]:
     .byte $a0                               ; [2]:
@@ -5648,9 +5650,9 @@ AREA_6_BLOCK_DATA_3:                        ; [$94c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91be]
+;     BUILDINGS_AREA_DATA [$PRG3::91be]
 ;
-AREA_6_BLOCK_DATA_4:                        ; [$95c0]
+AREA_6_BLOCK_DATA_04:                       ; [$95c0]
     .byte $00                               ; [0]:
     .byte $b1                               ; [1]:
     .byte $a1                               ; [2]:
@@ -5910,7 +5912,7 @@ AREA_6_BLOCK_DATA_4:                        ; [$95c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91ae]
+;     BUILDINGS_AREA_DATA [$PRG3::91ae]
 ;
 AREA_6_BLOCK_PROPERTIES:                    ; [$96c0]
     .byte BLOCK_IS_AIR                      ; [0]:
@@ -6172,7 +6174,7 @@ AREA_6_BLOCK_PROPERTIES:                    ; [$96c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91b0]
+;     BUILDINGS_AREA_DATA [$PRG3::91b0]
 ;
 AREA_6_SCROLL_DATA:                         ; [$97c0]
     .byte $ff                               ; [0]:
@@ -6218,14 +6220,14 @@ AREA_6_SCROLL_DATA:                         ; [$97c0]
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91b2]
+;     BUILDINGS_AREA_DATA [$PRG3::91b2]
 ;
 AREA_6_DOOR_LOCATIONS:                      ; [$97e8]
     .byte $ff                               ; [$97e8] byte
 
 ;
 ; XREFS:
-;     VICTIM_AREA_DATA [$PRG3::91b4]
+;     BUILDINGS_AREA_DATA [$PRG3::91b4]
 ;
 AREA_6_DOOR_DESTINATIONS:                   ; [$97e9]
     .byte $ff,$ba,$ff,$ff,$ff,$ff,$48,$00   ; [$97e9] undefined
@@ -6244,27 +6246,27 @@ AREA_6_DOOR_DESTINATIONS:                   ; [$97e9]
 ; 172 doors
 ; 112 tiles
 ;============================================================================
-MASCON_AREA_DATA:                           ; [$9829]
-    .word $1833                             ; Block attributes pointer
-    .word $1a6d                             ; Block properties
-    .word $1aed                             ; Scroll data
-    .word $1b25                             ; Door locations
-    .word $1bd2                             ; Door destinations
+TOWNS_AREA_DATA:                            ; [$9829]
+    .word TOWNS_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes pointer
+    .word AREA_2_BLOCK_PROPERTIES-$8000     ; Block properties
+    .word AREA_2_SCROLL_DATA-$8000          ; Scroll data
+    .word AREA_2_DOOR_LOCATIONS-$8000       ; Door locations
+    .word AREA_2_DOOR_DESTINATIONS-$8000    ; Door destinations
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9829]
+;     TOWNS_AREA_DATA [$PRG3::9829]
 ;
-MASCON_AREA_DATA_blockAttrsRelPtr:          ; [$9833]
-    .word $183d                             ; Block attributes
-    .word $18ad                             ; Block data 1
-    .word $191d                             ; Block data 2
-    .word $198d                             ; Block data 3
-    .word $19fd                             ; Block data 4
+TOWNS_AREA_DATA_blockAttrsRelPtr:           ; [$9833]
+    .word AREA_2_BLOCK_ATTRIBUTES-$8000     ; Block attributes
+    .word AREA_2_BLOCK_DATA_01-$8000        ; Block data 1
+    .word AREA_2_BLOCK_DATA_02-$8000        ; Block data 2
+    .word AREA_2_BLOCK_DATA_03-$8000        ; Block data 3
+    .word AREA_2_BLOCK_DATA_04-$8000        ; Block data 4
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9833]
+;     TOWNS_AREA_DATA [$PRG3::9833]
 ;
 AREA_2_BLOCK_ATTRIBUTES:                    ; [$983d]
     .byte $00                               ; [0]:
@@ -6382,9 +6384,9 @@ AREA_2_BLOCK_ATTRIBUTES:                    ; [$983d]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9835]
+;     TOWNS_AREA_DATA [$PRG3::9835]
 ;
-AREA_2_BLOCK_DATA_1:                        ; [$98ad]
+AREA_2_BLOCK_DATA_01:                       ; [$98ad]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $80                               ; [2]:
@@ -6500,9 +6502,9 @@ AREA_2_BLOCK_DATA_1:                        ; [$98ad]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9837]
+;     TOWNS_AREA_DATA [$PRG3::9837]
 ;
-AREA_2_BLOCK_DATA_2:                        ; [$991d]
+AREA_2_BLOCK_DATA_02:                       ; [$991d]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $81                               ; [2]:
@@ -6618,9 +6620,9 @@ AREA_2_BLOCK_DATA_2:                        ; [$991d]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9839]
+;     TOWNS_AREA_DATA [$PRG3::9839]
 ;
-AREA_2_BLOCK_DATA_3:                        ; [$998d]
+AREA_2_BLOCK_DATA_03:                       ; [$998d]
     .byte $00                               ; [0]:
     .byte $81                               ; [1]:
     .byte $87                               ; [2]:
@@ -6736,9 +6738,9 @@ AREA_2_BLOCK_DATA_3:                        ; [$998d]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::983b]
+;     TOWNS_AREA_DATA [$PRG3::983b]
 ;
-AREA_2_BLOCK_DATA_4:                        ; [$99fd]
+AREA_2_BLOCK_DATA_04:                       ; [$99fd]
     .byte $00                               ; [0]:
     .byte $80                               ; [1]:
     .byte $87                               ; [2]:
@@ -6854,7 +6856,7 @@ AREA_2_BLOCK_DATA_4:                        ; [$99fd]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::982b]
+;     TOWNS_AREA_DATA [$PRG3::982b]
 ;
 AREA_2_BLOCK_PROPERTIES:                    ; [$9a6d]
     .byte BLOCK_IS_AIR                      ; [0]:
@@ -6988,7 +6990,7 @@ AREA_2_BLOCK_PROPERTIES:                    ; [$9a6d]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::982d]
+;     TOWNS_AREA_DATA [$PRG3::982d]
 ;
 AREA_2_SCROLL_DATA:                         ; [$9aed]
     .byte $ff                               ; [0]:
@@ -7050,7 +7052,7 @@ AREA_2_SCROLL_DATA:                         ; [$9aed]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::982f]
+;     TOWNS_AREA_DATA [$PRG3::982f]
 ;
 AREA_2_DOOR_LOCATIONS:                      ; [$9b25]
     .byte $00                               ; [0]:
@@ -7229,7 +7231,7 @@ AREA_2_DOOR_LOCATIONS:                      ; [$9b25]
 
 ;
 ; XREFS:
-;     MASCON_AREA_DATA [$PRG3::9831]
+;     TOWNS_AREA_DATA [$PRG3::9831]
 ;
 AREA_2_DOOR_DESTINATIONS:                   ; [$9bd2]
     .byte $08                               ; [0]:
@@ -7413,15 +7415,15 @@ AREA_2_DOOR_DESTINATIONS:                   ; [$9bd2]
 ; 99 tiles
 ;============================================================================
 DAYBREAK_AREA_DATA:                         ; [$9c7e]
-    .word $1c88                             ; DAYBREAK_AREA_DATA.blockAttrsRelPtr
-                                            ; [$PRG3::9c7e]
-    .word $1e81                             ; AREA_5_BLOCK_PROPERTIES
+    .word DAYBREAK_AREA_DATA_blockAttrsRelPtr-$8000 ; DAYBREAK_AREA_DATA.blockAttrsRelPtr
+                                                    ; [$PRG3::9c7e]
+    .word AREA_5_BLOCK_PROPERTIES-$8000     ; AREA_5_BLOCK_PROPERTIES
                                             ; [$PRG3::9c80]
-    .word $1ee4                             ; AREA_5_SCROLL_DATA
+    .word AREA_5_SCROLL_DATA-$8000          ; AREA_5_SCROLL_DATA
                                             ; [$PRG3::9c82]
-    .word $1f64                             ; AREA_5_DOOR_LOCATIONS
+    .word AREA_5_DOOR_LOCATIONS-$8000       ; AREA_5_DOOR_LOCATIONS
                                             ; [$PRG3::9c84]
-    .word $1fa5                             ; AREA_5_DOOR_DESTINATIONS
+    .word AREA_5_DOOR_DESTINATIONS-$8000    ; AREA_5_DOOR_DESTINATIONS
                                             ; [$PRG3::9c86]
 
 ;
@@ -7429,15 +7431,15 @@ DAYBREAK_AREA_DATA:                         ; [$9c7e]
 ;     DAYBREAK_AREA_DATA [$PRG3::9c7e]
 ;
 DAYBREAK_AREA_DATA_blockAttrsRelPtr:        ; [$9c88]
-    .word $1c92                             ; AREA_5_BLOCK_ATTRIBUTES
+    .word AREA_5_BLOCK_ATTRIBUTES-$8000     ; AREA_5_BLOCK_ATTRIBUTES
                                             ; [$PRG3::9c88]
-    .word $1cf5                             ; AREA_5_BLOCK_DATA+1
+    .word AREA_5_BLOCK_DATA_01-$8000        ; AREA_5_BLOCK_DATA_01
                                             ; [$PRG3::9c8a]
-    .word $1d58                             ; AREA_5_BLOCK_DATA_2
+    .word AREA_5_BLOCK_DATA_02-$8000        ; AREA_5_BLOCK_DATA_02
                                             ; [$PRG3::9c8c]
-    .word $1dbb                             ; AREA_5_BLOCK_DATA_3
+    .word AREA_5_BLOCK_DATA_03-$8000        ; AREA_5_BLOCK_DATA_03
                                             ; [$PRG3::9c8e]
-    .word $1e1e                             ; AREA_5_BLOCK_DATA_4
+    .word AREA_5_BLOCK_DATA_04-$8000        ; AREA_5_BLOCK_DATA_04
                                             ; [$PRG3::9c90]
 
 ;
@@ -7549,7 +7551,7 @@ AREA_5_BLOCK_ATTRIBUTES:                    ; [$9c92]
 ; XREFS:
 ;     DAYBREAK_AREA_DATA [$PRG3::9c8a]
 ;
-AREA_5_BLOCK_DATA_1:                        ; [$9cf5]
+AREA_5_BLOCK_DATA_01:                       ; [$9cf5]
     .byte $00                               ; [0]:
     .byte $a0                               ; [1]:
     .byte $a1                               ; [2]:
@@ -7654,7 +7656,7 @@ AREA_5_BLOCK_DATA_1:                        ; [$9cf5]
 ; XREFS:
 ;     DAYBREAK_AREA_DATA [$PRG3::9c8c]
 ;
-AREA_5_BLOCK_DATA_2:                        ; [$9d58]
+AREA_5_BLOCK_DATA_02:                       ; [$9d58]
     .byte $00                               ; [0]:
     .byte $a1                               ; [1]:
     .byte $a2                               ; [2]:
@@ -7759,7 +7761,7 @@ AREA_5_BLOCK_DATA_2:                        ; [$9d58]
 ; XREFS:
 ;     DAYBREAK_AREA_DATA [$PRG3::9c8e]
 ;
-AREA_5_BLOCK_DATA_3:                        ; [$9dbb]
+AREA_5_BLOCK_DATA_03:                       ; [$9dbb]
     .byte $00                               ; [0]:
     .byte $9f                               ; [1]:
     .byte $86                               ; [2]:
@@ -7864,7 +7866,7 @@ AREA_5_BLOCK_DATA_3:                        ; [$9dbb]
 ; XREFS:
 ;     DAYBREAK_AREA_DATA [$PRG3::9c90]
 ;
-AREA_5_BLOCK_DATA_4:                        ; [$9e1e]
+AREA_5_BLOCK_DATA_04:                       ; [$9e1e]
     .byte $00                               ; [0]:
     .byte $85                               ; [1]:
     .byte $8f                               ; [2]:
@@ -8360,15 +8362,15 @@ AREA_5_DOOR_DESTINATIONS:                   ; [$9fa5]
     .byte $04,$00,$00                       ; [$a046] undefined
 
 EVIL_FORTRESS_AREA_DATA:                    ; [$a049]
-    .word $2053                             ; EVIL_FORTRESS_AREA_DATA.blockAttrsRelPtr
-                                            ; [$PRG3::a049]
-    .word $219d                             ; BYTE_ARRAY_PRG3__a19d
+    .word EVIL_FORTRESS_AREA_DATA_blockAttrsRelPtr-$8000 ; EVIL_FORTRESS_AREA_DATA.blockAttrsRelPtr
+                                                         ; [$PRG3::a049]
+    .word BYTE_ARRAY_PRG3__a19d-$8000       ; BYTE_ARRAY_PRG3__a19d
                                             ; [$PRG3::a04b]
-    .word $21dd                             ; BYTE_ARRAY_PRG3__a1dd
+    .word BYTE_ARRAY_PRG3__a1dd-$8000       ; BYTE_ARRAY_PRG3__a1dd
                                             ; [$PRG3::a04d]
-    .word $222d                             ; BYTE_ARRAY_PRG3__a22d
+    .word BYTE_ARRAY_PRG3__a22d-$8000       ; BYTE_ARRAY_PRG3__a22d
                                             ; [$PRG3::a04f]
-    .word $2236                             ; DAT_PRG3__a236
+    .word DAT_PRG3__a236-$8000              ; DAT_PRG3__a236
                                             ; [$PRG3::a051]
 
 ;
@@ -8376,15 +8378,15 @@ EVIL_FORTRESS_AREA_DATA:                    ; [$a049]
 ;     EVIL_FORTRESS_AREA_DATA [$PRG3::a049]
 ;
 EVIL_FORTRESS_AREA_DATA_blockAttrsRelPtr:   ; [$a053]
-    .word $205d                             ; BYTE_ARRAY_PRG3__a05d
+    .word BYTE_ARRAY_PRG3__a05d-$8000       ; BYTE_ARRAY_PRG3__a05d
                                             ; [$PRG3::a053]
-    .word $209d                             ; BYTE_ARRAY_PRG3__a09d
+    .word BYTE_ARRAY_PRG3__a09d-$8000       ; BYTE_ARRAY_PRG3__a09d
                                             ; [$PRG3::a055]
-    .word $20dd                             ; BYTE_ARRAY_PRG3__a0dd
+    .word BYTE_ARRAY_PRG3__a0dd-$8000       ; BYTE_ARRAY_PRG3__a0dd
                                             ; [$PRG3::a057]
-    .word $211d                             ; BYTE_ARRAY_PRG3__a11d
+    .word BYTE_ARRAY_PRG3__a11d-$8000       ; BYTE_ARRAY_PRG3__a11d
                                             ; [$PRG3::a059]
-    .word $215d                             ; BYTE_ARRAY_PRG3__a15d
+    .word BYTE_ARRAY_PRG3__a15d-$8000       ; BYTE_ARRAY_PRG3__a15d
                                             ; [$PRG3::a05b]
 
 ;

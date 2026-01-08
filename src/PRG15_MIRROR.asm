@@ -1564,10 +1564,10 @@ CastMagic_RunUpdateSpellHandler:            ; [$c2e9]
     ASL A                                   ; Convert to a word boundary for
                                             ; the lookup table.
     TAY                                     ; Y = A
-    LDA DAT_bb28,Y                          ; Load the lower byte of the
+    LDA BYTE_bb28,Y                         ; Load the lower byte of the
                                             ; finish handler.
     PHA                                     ; Push to the stack.
-    LDA DAT_bb27,Y                          ; Load the upper byte.
+    LDA BYTE_bb27,Y                         ; Load the upper byte.
     PHA                                     ; Push.
 
   @_return:                                 ; [$c314]
@@ -8536,7 +8536,7 @@ Screen_LoadUIPalette:                       ; [$d03b]
     ;
     ; Set the attribute data index for the HUD.
     ;
-    LDA DAT_81f0,Y                          ; Load the HUD attribute data for
+    LDA BYTE_81f0,Y                         ; Load the HUD attribute data for
                                             ; this index.
     STA a:UI_AttributeDataIndex             ; Set it for the HUD/textboxes.
 
@@ -12678,11 +12678,11 @@ FUN_PRG15_MIRROR__daf6:                     ; [$daf6]
 ;
 DOOR_OUTSIDE_REGION_INDEXES:                ; [$dafe]
     .byte AREA_EOLIS                        ; [0]: Eolis
-    .byte AREA_APOLUNE                      ; [1]: Trunk
-    .byte AREA_FOREPAW                      ; [2]: Mist
-    .byte AREA_CONFLATE                     ; [3]: Branch
-    .byte AREA_DAYBREAK                     ; [4]: Dartmoor
-    .byte AREA_EVIL_FORTRESS                ; [5]: Evil Fortress
+    .byte AREA_TRUNK                        ; [1]: Trunk
+    .byte AREA_MIST                         ; [2]: Mist
+    .byte AREA_BRANCH                       ; [3]: Branch
+    .byte AREA_DARTMOOR                     ; [4]: Dartmoor
+    .byte AREA_ZENIS                        ; [5]: Evil Fortress
 
 
 ;============================================================================
@@ -14291,19 +14291,31 @@ Game_LoadCurrentArea:                       ; [$def5]
 ;
 AREA_TO_SCREEN_DATA_BANKS:                  ; [$df34]
     .byte BANK_0_AREA_DATA                  ; [0]: Eolis
-    .byte BANK_1_AREA_DATA                  ; [1]: Apolune
-    .byte BANK_0_AREA_DATA                  ; [2]: Forepaw
-    .byte BANK_0_AREA_DATA                  ; [3]: Mascon
+    .byte BANK_1_AREA_DATA                  ; [1]: Trunk
+    .byte BANK_0_AREA_DATA                  ; [2]: Mist
+    .byte BANK_0_AREA_DATA                  ; [3]: Towns
 
 ;
 ; XREFS:
 ;     Game_EnterBuilding
 ;
 AREA_TO_SCREEN_DATA_BANKS_4_:               ; [$df38]
-    .byte BANK_2_AREA_DATA                  ; [4]: Victim
-    .byte BANK_1_AREA_DATA                  ; [5]: Conflate
-    .byte BANK_2_AREA_DATA                  ; [6]: Daybreak
-    .byte BANK_2_AREA_DATA                  ; [7]: Evil Fortress
+    .byte BANK_2_AREA_DATA                  ; [4]: Buildings
+    .byte BANK_1_AREA_DATA                  ; [5]: Branch
+    .byte BANK_2_AREA_DATA                  ; [6]: Dartmoor
+    .byte BANK_2_AREA_DATA                  ; [7]: Zenis
+
+
+;============================================================================
+; A mapping of areas to the starting pointer offsets within the ROM banks
+; above.
+;
+; XREFS:
+;     Game_EnterAreaHandler
+;     Game_ExitBuilding
+;     Game_LoadCurrentArea
+;     Game_LoadFirstLevel
+;============================================================================
 
 ;
 ; XREFS:
@@ -14313,20 +14325,20 @@ AREA_TO_SCREEN_DATA_BANKS_4_:               ; [$df38]
 ;     Game_LoadFirstLevel
 ;
 AREA_TO_BANK_OFFSET:                        ; [$df3c]
-    .byte BANK_0_AREA_DATA                  ; [0]: Eolis
-    .byte BANK_0_AREA_DATA                  ; [1]: Apolune
-    .byte BANK_1_AREA_DATA                  ; [2]: Forepaw
-    .byte BANK_2_AREA_DATA                  ; [3]: Mascon
+    .byte $00                               ; [0]: Eolis
+    .byte $00                               ; [1]: Trunk
+    .byte $01                               ; [2]: Mist
+    .byte $02                               ; [3]: Towns
 
 ;
 ; XREFS:
 ;     Game_EnterBuilding
 ;
 AREA_TO_BANK_OFFSET_4_:                     ; [$df40]
-    .byte BANK_1_AREA_DATA                  ; [4]: Victim
-    .byte BANK_1_AREA_DATA                  ; [5]: Conflate
-    .byte BANK_0_AREA_DATA                  ; [6]: Daybreak
-    .byte BANK_2_AREA_DATA                  ; [7]: Evil Fortress
+    .byte $01                               ; [4]: Buildings
+    .byte $01                               ; [5]: Branch
+    .byte $00                               ; [6]: Dartmoor
+    .byte $02                               ; [7]: Zenis
 
 
 ;============================================================================
@@ -18692,47 +18704,47 @@ Player_CheckSwitchScreen_SwitchAreaHoriz:   ; [$ea5f]
 ;
 AREA_TOWN_TRANSITIONS_DATA:                 ; [$ea9c]
     .word TOWN_TRANSITIONS_EMPTY            ; [0]: Eolis
-    .word TOWN_TRANSITIONS_APOLUNE          ; [1]: Apolune
-    .word TOWN_TRANSITIONS_FOREPAW          ; [2]: Forepaw
-    .word TOWN_TRANSITIONS_MASCON           ; [3]: Mascon
-    .word TOWN_TRANSITIONS_EMPTY            ; [4]: Victim
-    .word TOWN_TRANSITIONS_CONFLATE         ; [5]: Conflate
-    .word TOWN_TRANSITIONS_DAYBREAK         ; [6]: Daybreak
-    .word TOWN_TRANSITIONS_EMPTY            ; [7]: Evil Fortress
+    .word TOWN_TRANSITIONS_TRUNK            ; [1]: Trunk
+    .word TOWN_TRANSITIONS_MIST             ; [2]: Mist
+    .word TOWN_TRANSITIONS_TOWNS            ; [3]: Towns
+    .word TOWN_TRANSITIONS_EMPTY            ; [4]: Buildings
+    .word TOWN_TRANSITIONS_BRANCH           ; [5]: Branch
+    .word TOWN_TRANSITIONS_DARTMOOR         ; [6]: Dartmoor
+    .word TOWN_TRANSITIONS_EMPTY            ; [7]: Zenis
 
 ;
 ; XREFS:
 ;     AREA_TOWN_TRANSITIONS_DATA
 ;     [$PRG15_MIRROR::ea9e]
 ;
-TOWN_TRANSITIONS_APOLUNE:                   ; [$eaac]
+TOWN_TRANSITIONS_TRUNK:                     ; [$eaac]
     .byte $00                               ; [$eaac] byte
 
-    .byte AREA_MASCON
+    .byte AREA_TOWNS
     .byte $02,$92                           ; [$eaae] byte
 
     .byte PALETTE_TOWN
-    .byte $07                               ; Entering Apolune from Trunk
+    .byte $07                               ; Entering Trunk from Trunk
                                             ; (screen 7)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $00                               ;   |-> Screen index 0
     .byte $92                               ;   |-> Start position Y=9, X=2
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $08                               ; [$eab6] byte
 
-    .byte AREA_MASCON
+    .byte AREA_TOWNS
     .byte $01,$9e                           ; [$eab8] byte
 
     .byte PALETTE_TOWN
-    .byte $1a                               ; Entering Forepaw from Trunk
+    .byte $1a                               ; Entering Trunk from Trunk
                                             ; (screen 26)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $02                               ;   |-> Screen index 2
     .byte $92                               ;   |-> Start position X=2, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $1d                               ; [$eac0] byte
 
-    .byte AREA_MASCON
+    .byte AREA_TOWNS
     .byte $03,$9e                           ; [$eac2] byte
 
     .byte PALETTE_TOWN
@@ -18743,76 +18755,76 @@ TOWN_TRANSITIONS_APOLUNE:                   ; [$eaac]
 ;     AREA_TOWN_TRANSITIONS_DATA
 ;     [$PRG15_MIRROR::eaa2]
 ;
-TOWN_TRANSITIONS_MASCON:                    ; [$eac6]
+TOWN_TRANSITIONS_TOWNS:                     ; [$eac6]
     .byte $00                               ; Exiting left from Apolune
                                             ; screen 0
-    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte AREA_TRUNK                        ;   |-> Switch to area 1
     .byte $07                               ;   |-> Screen index 6
     .byte $7e                               ;   |-> Start position Y=7, X=14
     .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
     .byte $01                               ; Exit right from Apolune screen
                                             ; 1
-    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte AREA_TRUNK                        ;   |-> Switch to area 1
     .byte $08                               ;   |-> Screen index 8
     .byte $71                               ;   |-> Start position Y=7, X=1
     .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
     .byte $02                               ; Exiting left from Forepaw to
                                             ; Trunk (screen 2)
-    .byte AREA_APOLUNE                      ;   |-> Switch to area 1
+    .byte AREA_TRUNK                        ;   |-> Switch to area 1
     .byte $1a                               ;   |-> Screen index 26
     .byte $7e                               ;   |-> Start position X=14, Y=7
     .byte PALETTE_OUTSIDE                   ;   '-> Palette 6
     .byte $03                               ; Exiting right from Forepaw to
                                             ; Branch (screen 3)
-    .byte AREA_APOLUNE                      ;   |-> Switch to area 3
+    .byte AREA_TRUNK                        ;   |-> Switch to area 3
     .byte $1d                               ;   |-> Screen index 29
     .byte $71                               ;   |-> Start position X=1, Y=7
     .byte PALETTE_OUTSIDE                   ;   |-> Palette 6
     .byte $04                               ; Exiting left from Mascon to
                                             ; Mist (screen 4)
-    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte AREA_MIST                         ;   |-> Switch to area 2
     .byte $09                               ;   |-> Screen index 9
     .byte $9e                               ;   |-> Start position X=14, Y=9
     .byte PALETTE_MIST                      ;   '-> Palette 10
     .byte $05                               ; Exiting right from Mascon to
                                             ; Mist (screen 5)
-    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte AREA_MIST                         ;   |-> Switch to area 2
     .byte $0c                               ;   |-> Screen index 12
     .byte $91                               ;   |-> Start position X=1, Y=9
     .byte PALETTE_MIST                      ;   '-> Palette 10
     .byte $06                               ; Exit left from Victim to Mist
                                             ; from screen 6
-    .byte AREA_FOREPAW                      ;   |-> Switch to area 2
+    .byte AREA_MIST                         ;   |-> Switch to area 2
     .byte $22                               ;   |-> Screen index 34
     .byte $9e                               ;   |-> Start position X=14, Y=9
     .byte PALETTE_MIST                      ;   '-> Palette 10
     .byte $07                               ; Exit right from Victim to Mist
                                             ; on screen 7
-    .byte AREA_FOREPAW                      ;   |-> Switch to area 7
+    .byte AREA_MIST                         ;   |-> Switch to area 7
     .byte $25                               ;   |-> Screen index = 37
     .byte $91                               ;   |-> Start position X=1, Y=9
     .byte PALETTE_MIST                      ;   '-> Palette 10
     .byte $08                               ; Exit left from Conflate to
                                             ; Branch
-    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte AREA_BRANCH                       ;   |-> Switch to area 5
     .byte $0d                               ;   |-> Screen index 13
     .byte $7e                               ;   |-> Start position X=14, Y=7
     .byte PALETTE_BRANCH                    ;   '-> Palette 8
     .byte $0a                               ; Exit left from Daybreak to
                                             ; Branch
-    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte AREA_BRANCH                       ;   |-> Switch to area 5
     .byte $23                               ;   |-> Screen index 35
     .byte $7e                               ;   |-> Start position X=14, Y=7
     .byte PALETTE_BRANCH                    ;   '-> Palette 8
     .byte $0b                               ; Exit right from Daybreak to
                                             ; Branch
-    .byte AREA_CONFLATE                     ;   |-> Switch to area 5
+    .byte AREA_BRANCH                       ;   |-> Switch to area 5
     .byte $24                               ;   |-> Screen index 36
     .byte $71                               ;   |-> Start position X=1, Y=7
     .byte PALETTE_BRANCH                    ;   '-> Palette 8
     .byte $0c                               ; Exit left from Dartmoor to
                                             ; Branch (screen 12)
-    .byte AREA_DAYBREAK                     ;   |-> Switch to area 6
+    .byte AREA_DARTMOOR                     ;   |-> Switch to area 6
     .byte $03                               ;   |-> Screen index 3
     .byte $7e                               ;   |-> Start position X=14, Y=7
     .byte PALETTE_DARTMOOR                  ;   '-> Palette 12
@@ -18823,28 +18835,28 @@ TOWN_TRANSITIONS_MASCON:                    ; [$eac6]
 ;     AREA_TOWN_TRANSITIONS_DATA
 ;     [$PRG15_MIRROR::eaa0]
 ;
-TOWN_TRANSITIONS_FOREPAW:                   ; [$eb03]
+TOWN_TRANSITIONS_MIST:                      ; [$eb03]
     .byte $09                               ; Entering Mascon from Mist
                                             ; (screen 9)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $04                               ;   |-> Screen index 4
     .byte $91                               ;   |-> Start position X=1, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $0c                               ; Entering left to Mascon from
                                             ; Mist
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $05                               ;   |-> Screen index 5
     .byte $9e                               ;   |-> Start position X=14, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $22                               ; Enering right to Victim from
                                             ; Mist (screen 34)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $06                               ;   |-> Screen index 6
     .byte $91                               ;   |-> Start position X=1, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $25                               ; Entering left to Victim from
                                             ; Mist (screen 37)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $07                               ;   |-> Screen index 7
     .byte $9e                               ;   |-> Start position X=14, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
@@ -18855,22 +18867,22 @@ TOWN_TRANSITIONS_FOREPAW:                   ; [$eb03]
 ;     AREA_TOWN_TRANSITIONS_DATA
 ;     [$PRG15_MIRROR::eaa6]
 ;
-TOWN_TRANSITIONS_CONFLATE:                  ; [$eb18]
+TOWN_TRANSITIONS_BRANCH:                    ; [$eb18]
     .byte $0d                               ; Entering right to Conflate from
                                             ; Branch (screen 13)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $08                               ;   |-> Screen index 8
     .byte $91                               ;   |-> Start position X=1, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $23                               ; Entering Daybreak from Branch
                                             ; (screen 35)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $0a                               ;   |-> Screen index 10
     .byte $92                               ;   |-> Start position X=2, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
     .byte $24                               ; Entering Daybreak from Branch
                                             ; (screen 36)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $0b                               ;   |-> Screen index 11
     .byte $9e                               ;   |-> Start position X=14, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
@@ -18881,10 +18893,10 @@ TOWN_TRANSITIONS_CONFLATE:                  ; [$eb18]
 ;     AREA_TOWN_TRANSITIONS_DATA
 ;     [$PRG15_MIRROR::eaa8]
 ;
-TOWN_TRANSITIONS_DAYBREAK:                  ; [$eb28]
+TOWN_TRANSITIONS_DARTMOOR:                  ; [$eb28]
     .byte $03                               ; Entering right to Dartmoor from
                                             ; Branch (screen 3)
-    .byte AREA_MASCON                       ;   |-> Switch to area 3
+    .byte AREA_TOWNS                        ;   |-> Switch to area 3
     .byte $0c                               ;   |-> Screen index 12
     .byte $92                               ;   |-> Start position X=2, Y=9
     .byte PALETTE_TOWN                      ;   '-> Palette 27
@@ -20638,11 +20650,11 @@ Player_LoadShieldTile:                      ; [$ee93]
     ;
     ; Load the address for the start of the shield tile IDs.
     ;
-    LDA a:USHORT_800a                       ; Load the lower byte of the tile
+    LDA a:TILES_SHIELDS_START_REF           ; Load the lower byte of the tile
                                             ; IDs start address.
     STA Temp_Addr_L                         ; Store as the lower byte of the
                                             ; address to read from.
-    LDA a:USHORT_800a+1                     ; Load the upper byte of the tile
+    LDA a:TILES_SHIELDS_START_REF+1         ; Load the upper byte of the tile
                                             ; IDs start address.
     STA Temp_Addr_U                         ; Store as the upper byte of the
                                             ; address to read from.
@@ -20715,11 +20727,11 @@ Player_LoadArmorTile:                       ; [$eea9]
     ;
     ; Load the address for the start of the armor tile IDs.
     ;
-    LDA a:USHORT_8004                       ; Load the lower byte of the tile
+    LDA a:TILES_ARMOR_START_REF             ; Load the lower byte of the tile
                                             ; IDs start address.
     STA Temp_Addr_L                         ; Store as the lower byte of the
                                             ; address to read from.
-    LDA a:USHORT_8004+1                     ; Load the upper byte of the tile
+    LDA a:TILES_ARMOR_START_REF+1           ; Load the upper byte of the tile
                                             ; IDs start address.
     STA Temp_Addr_U                         ; Store as the upper byte of the
                                             ; address to read from.

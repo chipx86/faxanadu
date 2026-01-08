@@ -1591,9 +1591,9 @@ pre {
 </div><span class="l"><a class="anc" name="c307" href="#c307">[c307]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CastMagic_Type">CastMagic_Type</a></span></span><span class="ce">; Load the magic type.</span></span>
 <span class="l"><a class="anc" name="c30a" href="#c30a">[c30a]</a><span class="cd"><span class="i">ASL</span> <span class="o">A</span></span><span class="ce">; Convert to a word boundary for the lookup table.</span></span>
 <span class="l"><a class="anc" name="c30b" href="#c30b">[c30b]</a><span class="cd"><span class="i">TAY</span></span><span class="ce">; Y = A</span></span>
-<span class="l"><a class="anc" name="c30c" href="#c30c">[c30c]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#DAT_bb28">DAT_bb28</a>,Y</span></span><span class="ce">; Load the lower byte of the finish handler.</span></span>
+<span class="l"><a class="anc" name="c30c" href="#c30c">[c30c]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#BYTE_bb28">BYTE_bb28</a>,Y</span></span><span class="ce">; Load the lower byte of the finish handler.</span></span>
 <span class="l"><a class="anc" name="c30f" href="#c30f">[c30f]</a><span class="cd"><span class="i">PHA</span></span><span class="ce">; Push to the stack.</span></span>
-<span class="l"><a class="anc" name="c310" href="#c310">[c310]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#DAT_bb27">DAT_bb27</a>,Y</span></span><span class="ce">; Load the upper byte.</span></span>
+<span class="l"><a class="anc" name="c310" href="#c310">[c310]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#BYTE_bb27">BYTE_bb27</a>,Y</span></span><span class="ce">; Load the upper byte.</span></span>
 <span class="l"><a class="anc" name="c313" href="#c313">[c313]</a><span class="cd"><span class="i">PHA</span></span><span class="ce">; Push.</span></span>
 <span class="l"></span>
 <a name=":c314:@_return"></a><span class="l"><a class="anc" name="c314" href="#c314">[c314]</a><a href="#:c314:@_return" class="lla">@_return:</a><span class="ce">; [$c314]</span></span>
@@ -8192,7 +8192,7 @@ and address bytes and all the data bytes.</span></span>
 <div class="c">;
 ; Set the attribute data index for the HUD.
 ;
-</div><span class="l"><a class="anc" name="d045" href="#d045">[d045]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#DAT_81f0">DAT_81f0</a>,Y</span></span><span class="ce">; Load the HUD attribute data for this index.</span></span>
+</div><span class="l"><a class="anc" name="d045" href="#d045">[d045]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#BYTE_81f0">BYTE_81f0</a>,Y</span></span><span class="ce">; Load the HUD attribute data for this index.</span></span>
 <span class="l"><a class="anc" name="d048" href="#d048">[d048]</a><span class="cd"><span class="i">STA</span> <span class="o">a:<a href="RAM.html#UI_AttributeDataIndex">UI_AttributeDataIndex</a></span></span><span class="ce">; Set it for the HUD/textboxes.</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -12143,11 +12143,11 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="dafe" href="#dafe">[dafe]</a><a href="#DOOR_OUTSIDE_REGION_INDEXES" class="la">DOOR_OUTSIDE_REGION_INDEXES:</a><span class="ce">; [$dafe]</span></span>
 <span class="l"><a class="anc" name="dafe" href="#dafe">[dafe]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_EOLIS</span></span><span class="ce">; [0]: Eolis</span></span>
-<span class="l"><a class="anc" name="daff" href="#daff">[daff]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_APOLUNE</span></span><span class="ce">; [1]: Trunk</span></span>
-<span class="l"><a class="anc" name="db00" href="#db00">[db00]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_FOREPAW</span></span><span class="ce">; [2]: Mist</span></span>
-<span class="l"><a class="anc" name="db01" href="#db01">[db01]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_CONFLATE</span></span><span class="ce">; [3]: Branch</span></span>
-<span class="l"><a class="anc" name="db02" href="#db02">[db02]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_DAYBREAK</span></span><span class="ce">; [4]: Dartmoor</span></span>
-<span class="l"><a class="anc" name="db03" href="#db03">[db03]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_EVIL_FORTRESS</span></span><span class="ce">; [5]: Evil Fortress</span></span>
+<span class="l"><a class="anc" name="daff" href="#daff">[daff]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TRUNK</span></span><span class="ce">; [1]: Trunk</span></span>
+<span class="l"><a class="anc" name="db00" href="#db00">[db00]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MIST</span></span><span class="ce">; [2]: Mist</span></span>
+<span class="l"><a class="anc" name="db01" href="#db01">[db01]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_BRANCH</span></span><span class="ce">; [3]: Branch</span></span>
+<span class="l"><a class="anc" name="db02" href="#db02">[db02]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_DARTMOOR</span></span><span class="ce">; [4]: Dartmoor</span></span>
+<span class="l"><a class="anc" name="db03" href="#db03">[db03]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_ZENIS</span></span><span class="ce">; [5]: Evil Fortress</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="EndGame_BeginKingsRoomSequence"></a><div class="cp">;============================================================================
@@ -13706,21 +13706,33 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="df34" href="#df34">[df34]</a><a href="#AREA_TO_SCREEN_DATA_BANKS" class="la">AREA_TO_SCREEN_DATA_BANKS:</a><span class="ce">; [$df34]</span></span>
 <span class="l"><a class="anc" name="df34" href="#df34">[df34]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [0]: Eolis</span></span>
-<span class="l"><a class="anc" name="df35" href="#df35">[df35]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [1]: Apolune</span></span>
-<span class="l"><a class="anc" name="df36" href="#df36">[df36]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [2]: Forepaw</span></span>
-<span class="l"><a class="anc" name="df37" href="#df37">[df37]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [3]: Mascon</span></span>
+<span class="l"><a class="anc" name="df35" href="#df35">[df35]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [1]: Trunk</span></span>
+<span class="l"><a class="anc" name="df36" href="#df36">[df36]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [2]: Mist</span></span>
+<span class="l"><a class="anc" name="df37" href="#df37">[df37]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [3]: Towns</span></span>
 <span class="l"></span>
 <a name="AREA_TO_SCREEN_DATA_BANKS_4_"></a><div class="c">;
 ; XREFS:
 ;     <a href="#Game_EnterBuilding">Game_EnterBuilding</a>
 ;
 </div><span class="l"><a class="anc" name="df38" href="#df38">[df38]</a><a href="#AREA_TO_SCREEN_DATA_BANKS_4_" class="la">AREA_TO_SCREEN_DATA_BANKS_4_:</a><span class="ce">; [$df38]</span></span>
-<span class="l"><a class="anc" name="df38" href="#df38">[df38]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [4]: Victim</span></span>
-<span class="l"><a class="anc" name="df39" href="#df39">[df39]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [5]: Conflate</span></span>
-<span class="l"><a class="anc" name="df3a" href="#df3a">[df3a]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [6]: Daybreak</span></span>
-<span class="l"><a class="anc" name="df3b" href="#df3b">[df3b]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [7]: Evil Fortress</span></span>
+<span class="l"><a class="anc" name="df38" href="#df38">[df38]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [4]: Buildings</span></span>
+<span class="l"><a class="anc" name="df39" href="#df39">[df39]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [5]: Branch</span></span>
+<span class="l"><a class="anc" name="df3a" href="#df3a">[df3a]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [6]: Dartmoor</span></span>
+<span class="l"><a class="anc" name="df3b" href="#df3b">[df3b]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [7]: Zenis</span></span>
 <span class="l"></span>
-<a name="AREA_TO_BANK_OFFSET"></a><div class="c">;
+<span class="l"></span>
+<a name="AREA_TO_BANK_OFFSET"></a><div class="cp">;============================================================================
+; A mapping of areas to the starting pointer offsets within the ROM banks
+; above.
+;
+; XREFS:
+;     <a href="#Game_EnterAreaHandler">Game_EnterAreaHandler</a>
+;     <a href="#Game_ExitBuilding">Game_ExitBuilding</a>
+;     <a href="#Game_LoadCurrentArea">Game_LoadCurrentArea</a>
+;     <a href="#Game_LoadFirstLevel">Game_LoadFirstLevel</a>
+;============================================================================
+</div><span class="l"></span>
+<div class="c">;
 ; XREFS:
 ;     <a href="#Game_EnterAreaHandler">Game_EnterAreaHandler</a>
 ;     <a href="#Game_ExitBuilding">Game_ExitBuilding</a>
@@ -13728,20 +13740,20 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;     <a href="#Game_LoadFirstLevel">Game_LoadFirstLevel</a>
 ;
 </div><span class="l"><a class="anc" name="df3c" href="#df3c">[df3c]</a><a href="#AREA_TO_BANK_OFFSET" class="la">AREA_TO_BANK_OFFSET:</a><span class="ce">; [$df3c]</span></span>
-<span class="l"><a class="anc" name="df3c" href="#df3c">[df3c]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [0]: Eolis</span></span>
-<span class="l"><a class="anc" name="df3d" href="#df3d">[df3d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [1]: Apolune</span></span>
-<span class="l"><a class="anc" name="df3e" href="#df3e">[df3e]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [2]: Forepaw</span></span>
-<span class="l"><a class="anc" name="df3f" href="#df3f">[df3f]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [3]: Mascon</span></span>
+<span class="l"><a class="anc" name="df3c" href="#df3c">[df3c]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [0]: Eolis</span></span>
+<span class="l"><a class="anc" name="df3d" href="#df3d">[df3d]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [1]: Trunk</span></span>
+<span class="l"><a class="anc" name="df3e" href="#df3e">[df3e]</a><span class="cd"><span class="i">.byte</span> <span class="o">$01</span></span><span class="ce">; [2]: Mist</span></span>
+<span class="l"><a class="anc" name="df3f" href="#df3f">[df3f]</a><span class="cd"><span class="i">.byte</span> <span class="o">$02</span></span><span class="ce">; [3]: Towns</span></span>
 <span class="l"></span>
 <a name="AREA_TO_BANK_OFFSET_4_"></a><div class="c">;
 ; XREFS:
 ;     <a href="#Game_EnterBuilding">Game_EnterBuilding</a>
 ;
 </div><span class="l"><a class="anc" name="df40" href="#df40">[df40]</a><a href="#AREA_TO_BANK_OFFSET_4_" class="la">AREA_TO_BANK_OFFSET_4_:</a><span class="ce">; [$df40]</span></span>
-<span class="l"><a class="anc" name="df40" href="#df40">[df40]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [4]: Victim</span></span>
-<span class="l"><a class="anc" name="df41" href="#df41">[df41]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_1_AREA_DATA</span></span><span class="ce">; [5]: Conflate</span></span>
-<span class="l"><a class="anc" name="df42" href="#df42">[df42]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_0_AREA_DATA</span></span><span class="ce">; [6]: Daybreak</span></span>
-<span class="l"><a class="anc" name="df43" href="#df43">[df43]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_2_AREA_DATA</span></span><span class="ce">; [7]: Evil Fortress</span></span>
+<span class="l"><a class="anc" name="df40" href="#df40">[df40]</a><span class="cd"><span class="i">.byte</span> <span class="o">$01</span></span><span class="ce">; [4]: Buildings</span></span>
+<span class="l"><a class="anc" name="df41" href="#df41">[df41]</a><span class="cd"><span class="i">.byte</span> <span class="o">$01</span></span><span class="ce">; [5]: Branch</span></span>
+<span class="l"><a class="anc" name="df42" href="#df42">[df42]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [6]: Dartmoor</span></span>
+<span class="l"><a class="anc" name="df43" href="#df43">[df43]</a><span class="cd"><span class="i">.byte</span> <span class="o">$02</span></span><span class="ce">; [7]: Zenis</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="CURRENT_AREA_TO_TILES_INDEX_TABLE"></a><div class="cp">;============================================================================
@@ -17937,177 +17949,177 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="ea9c" href="#ea9c">[ea9c]</a><a href="#AREA_TOWN_TRANSITIONS_DATA" class="la">AREA_TOWN_TRANSITIONS_DATA:</a><span class="ce">; [$ea9c]</span></span>
 <span class="l"><a class="anc" name="ea9c" href="#ea9c">[ea9c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_EMPTY">TOWN_TRANSITIONS_EMPTY</a></span></span><span class="ce">; [0]: Eolis</span></span>
-<span class="l"><a class="anc" name="ea9e" href="#ea9e">[ea9e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_APOLUNE">TOWN_TRANSITIONS_APOLUNE</a></span></span><span class="ce">; [1]: Apolune</span></span>
-<span class="l"><a class="anc" name="eaa0" href="#eaa0">[eaa0]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_FOREPAW">TOWN_TRANSITIONS_FOREPAW</a></span></span><span class="ce">; [2]: Forepaw</span></span>
-<span class="l"><a class="anc" name="eaa2" href="#eaa2">[eaa2]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_MASCON">TOWN_TRANSITIONS_MASCON</a></span></span><span class="ce">; [3]: Mascon</span></span>
-<span class="l"><a class="anc" name="eaa4" href="#eaa4">[eaa4]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_EMPTY">TOWN_TRANSITIONS_EMPTY</a></span></span><span class="ce">; [4]: Victim</span></span>
-<span class="l"><a class="anc" name="eaa6" href="#eaa6">[eaa6]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_CONFLATE">TOWN_TRANSITIONS_CONFLATE</a></span></span><span class="ce">; [5]: Conflate</span></span>
-<span class="l"><a class="anc" name="eaa8" href="#eaa8">[eaa8]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_DAYBREAK">TOWN_TRANSITIONS_DAYBREAK</a></span></span><span class="ce">; [6]: Daybreak</span></span>
-<span class="l"><a class="anc" name="eaaa" href="#eaaa">[eaaa]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_EMPTY">TOWN_TRANSITIONS_EMPTY</a></span></span><span class="ce">; [7]: Evil Fortress</span></span>
+<span class="l"><a class="anc" name="ea9e" href="#ea9e">[ea9e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_TRUNK">TOWN_TRANSITIONS_TRUNK</a></span></span><span class="ce">; [1]: Trunk</span></span>
+<span class="l"><a class="anc" name="eaa0" href="#eaa0">[eaa0]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_MIST">TOWN_TRANSITIONS_MIST</a></span></span><span class="ce">; [2]: Mist</span></span>
+<span class="l"><a class="anc" name="eaa2" href="#eaa2">[eaa2]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_TOWNS">TOWN_TRANSITIONS_TOWNS</a></span></span><span class="ce">; [3]: Towns</span></span>
+<span class="l"><a class="anc" name="eaa4" href="#eaa4">[eaa4]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_EMPTY">TOWN_TRANSITIONS_EMPTY</a></span></span><span class="ce">; [4]: Buildings</span></span>
+<span class="l"><a class="anc" name="eaa6" href="#eaa6">[eaa6]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_BRANCH">TOWN_TRANSITIONS_BRANCH</a></span></span><span class="ce">; [5]: Branch</span></span>
+<span class="l"><a class="anc" name="eaa8" href="#eaa8">[eaa8]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_DARTMOOR">TOWN_TRANSITIONS_DARTMOOR</a></span></span><span class="ce">; [6]: Dartmoor</span></span>
+<span class="l"><a class="anc" name="eaaa" href="#eaaa">[eaaa]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWN_TRANSITIONS_EMPTY">TOWN_TRANSITIONS_EMPTY</a></span></span><span class="ce">; [7]: Zenis</span></span>
 <span class="l"></span>
-<a name="TOWN_TRANSITIONS_APOLUNE"></a><div class="c">;
+<a name="TOWN_TRANSITIONS_TRUNK"></a><div class="c">;
 ; XREFS:
 ;     <a href="#AREA_TOWN_TRANSITIONS_DATA">AREA_TOWN_TRANSITIONS_DATA</a>
 ;     [$PRG15_MIRROR::ea9e]
 ;
-</div><span class="l"><a class="anc" name="eaac" href="#eaac">[eaac]</a><a href="#TOWN_TRANSITIONS_APOLUNE" class="la">TOWN_TRANSITIONS_APOLUNE:</a><span class="ce">; [$eaac]</span></span>
+</div><span class="l"><a class="anc" name="eaac" href="#eaac">[eaac]</a><a href="#TOWN_TRANSITIONS_TRUNK" class="la">TOWN_TRANSITIONS_TRUNK:</a><span class="ce">; [$eaac]</span></span>
 <span class="l"><a class="anc" name="eaac" href="#eaac">[eaac]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; [$eaac] byte</span></span>
 <span class="l"></span>
-<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span></span>
+<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span></span>
 <span class="l"><a class="anc" name="eaae" href="#eaae">[eaae]</a><span class="cd"><span class="i">.byte</span> <span class="o">$02,$92</span></span><span class="ce">; [$eaae] byte</span></span>
 <span class="l"></span>
 <span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span></span>
-<span class="l"><a class="anc" name="eab1" href="#eab1">[eab1]</a><span class="cd"><span class="i">.byte</span> <span class="o">$07</span></span><span class="ce">; Entering Apolune from Trunk (screen 7)</span></span>
-<span class="l"><a class="anc" name="eab2" href="#eab2">[eab2]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eab1" href="#eab1">[eab1]</a><span class="cd"><span class="i">.byte</span> <span class="o">$07</span></span><span class="ce">; Entering Trunk from Trunk (screen 7)</span></span>
+<span class="l"><a class="anc" name="eab2" href="#eab2">[eab2]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eab3" href="#eab3">[eab3]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">;   |-&gt; Screen index 0</span></span>
 <span class="l"><a class="anc" name="eab4" href="#eab4">[eab4]</a><span class="cd"><span class="i">.byte</span> <span class="o">$92</span></span><span class="ce">;   |-&gt; Start position Y=9, X=2</span></span>
 <span class="l"><a class="anc" name="eab5" href="#eab5">[eab5]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eab6" href="#eab6">[eab6]</a><span class="cd"><span class="i">.byte</span> <span class="o">$08</span></span><span class="ce">; [$eab6] byte</span></span>
 <span class="l"></span>
-<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span></span>
+<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span></span>
 <span class="l"><a class="anc" name="eab8" href="#eab8">[eab8]</a><span class="cd"><span class="i">.byte</span> <span class="o">$01,$9e</span></span><span class="ce">; [$eab8] byte</span></span>
 <span class="l"></span>
 <span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span></span>
-<span class="l"><a class="anc" name="eabb" href="#eabb">[eabb]</a><span class="cd"><span class="i">.byte</span> <span class="o">$1a</span></span><span class="ce">; Entering Forepaw from Trunk (screen 26)</span></span>
-<span class="l"><a class="anc" name="eabc" href="#eabc">[eabc]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eabb" href="#eabb">[eabb]</a><span class="cd"><span class="i">.byte</span> <span class="o">$1a</span></span><span class="ce">; Entering Trunk from Trunk (screen 26)</span></span>
+<span class="l"><a class="anc" name="eabc" href="#eabc">[eabc]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eabd" href="#eabd">[eabd]</a><span class="cd"><span class="i">.byte</span> <span class="o">$02</span></span><span class="ce">;   |-&gt; Screen index 2</span></span>
 <span class="l"><a class="anc" name="eabe" href="#eabe">[eabe]</a><span class="cd"><span class="i">.byte</span> <span class="o">$92</span></span><span class="ce">;   |-&gt; Start position X=2, Y=9</span></span>
 <span class="l"><a class="anc" name="eabf" href="#eabf">[eabf]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eac0" href="#eac0">[eac0]</a><span class="cd"><span class="i">.byte</span> <span class="o">$1d</span></span><span class="ce">; [$eac0] byte</span></span>
 <span class="l"></span>
-<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span></span>
+<span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span></span>
 <span class="l"><a class="anc" name="eac2" href="#eac2">[eac2]</a><span class="cd"><span class="i">.byte</span> <span class="o">$03,$9e</span></span><span class="ce">; [$eac2] byte</span></span>
 <span class="l"></span>
 <span class="l"><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span></span>
 <span class="l"><a class="anc" name="eac5" href="#eac5">[eac5]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ff</span></span><span class="ce">; [$eac5] byte</span></span>
 <span class="l"></span>
-<a name="TOWN_TRANSITIONS_MASCON"></a><div class="c">;
+<a name="TOWN_TRANSITIONS_TOWNS"></a><div class="c">;
 ; XREFS:
 ;     <a href="#AREA_TOWN_TRANSITIONS_DATA">AREA_TOWN_TRANSITIONS_DATA</a>
 ;     [$PRG15_MIRROR::eaa2]
 ;
-</div><span class="l"><a class="anc" name="eac6" href="#eac6">[eac6]</a><a href="#TOWN_TRANSITIONS_MASCON" class="la">TOWN_TRANSITIONS_MASCON:</a><span class="ce">; [$eac6]</span></span>
+</div><span class="l"><a class="anc" name="eac6" href="#eac6">[eac6]</a><a href="#TOWN_TRANSITIONS_TOWNS" class="la">TOWN_TRANSITIONS_TOWNS:</a><span class="ce">; [$eac6]</span></span>
 <span class="l"><a class="anc" name="eac6" href="#eac6">[eac6]</a><span class="cd"><span class="i">.byte</span> <span class="o">$00</span></span><span class="ce">; Exiting left from Apolune screen 0</span></span>
-<span class="l"><a class="anc" name="eac7" href="#eac7">[eac7]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_APOLUNE</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
+<span class="l"><a class="anc" name="eac7" href="#eac7">[eac7]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TRUNK</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
 <span class="l"><a class="anc" name="eac8" href="#eac8">[eac8]</a><span class="cd"><span class="i">.byte</span> <span class="o">$07</span></span><span class="ce">;   |-&gt; Screen index 6</span></span>
 <span class="l"><a class="anc" name="eac9" href="#eac9">[eac9]</a><span class="cd"><span class="i">.byte</span> <span class="o">$7e</span></span><span class="ce">;   |-&gt; Start position Y=7, X=14</span></span>
 <span class="l"><a class="anc" name="eaca" href="#eaca">[eaca]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_OUTSIDE</span></span><span class="ce">;   '-&gt; Palette 6</span></span>
 <span class="l"><a class="anc" name="eacb" href="#eacb">[eacb]</a><span class="cd"><span class="i">.byte</span> <span class="o">$01</span></span><span class="ce">; Exit right from Apolune screen 1</span></span>
-<span class="l"><a class="anc" name="eacc" href="#eacc">[eacc]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_APOLUNE</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
+<span class="l"><a class="anc" name="eacc" href="#eacc">[eacc]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TRUNK</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
 <span class="l"><a class="anc" name="eacd" href="#eacd">[eacd]</a><span class="cd"><span class="i">.byte</span> <span class="o">$08</span></span><span class="ce">;   |-&gt; Screen index 8</span></span>
 <span class="l"><a class="anc" name="eace" href="#eace">[eace]</a><span class="cd"><span class="i">.byte</span> <span class="o">$71</span></span><span class="ce">;   |-&gt; Start position Y=7, X=1</span></span>
 <span class="l"><a class="anc" name="eacf" href="#eacf">[eacf]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_OUTSIDE</span></span><span class="ce">;   '-&gt; Palette 6</span></span>
 <span class="l"><a class="anc" name="ead0" href="#ead0">[ead0]</a><span class="cd"><span class="i">.byte</span> <span class="o">$02</span></span><span class="ce">; Exiting left from Forepaw to Trunk (screen 2)</span></span>
-<span class="l"><a class="anc" name="ead1" href="#ead1">[ead1]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_APOLUNE</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
+<span class="l"><a class="anc" name="ead1" href="#ead1">[ead1]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TRUNK</span></span><span class="ce">;   |-&gt; Switch to area 1</span></span>
 <span class="l"><a class="anc" name="ead2" href="#ead2">[ead2]</a><span class="cd"><span class="i">.byte</span> <span class="o">$1a</span></span><span class="ce">;   |-&gt; Screen index 26</span></span>
 <span class="l"><a class="anc" name="ead3" href="#ead3">[ead3]</a><span class="cd"><span class="i">.byte</span> <span class="o">$7e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=7</span></span>
 <span class="l"><a class="anc" name="ead4" href="#ead4">[ead4]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_OUTSIDE</span></span><span class="ce">;   '-&gt; Palette 6</span></span>
 <span class="l"><a class="anc" name="ead5" href="#ead5">[ead5]</a><span class="cd"><span class="i">.byte</span> <span class="o">$03</span></span><span class="ce">; Exiting right from Forepaw to Branch (screen 3)</span></span>
-<span class="l"><a class="anc" name="ead6" href="#ead6">[ead6]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_APOLUNE</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="ead6" href="#ead6">[ead6]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TRUNK</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="ead7" href="#ead7">[ead7]</a><span class="cd"><span class="i">.byte</span> <span class="o">$1d</span></span><span class="ce">;   |-&gt; Screen index 29</span></span>
 <span class="l"><a class="anc" name="ead8" href="#ead8">[ead8]</a><span class="cd"><span class="i">.byte</span> <span class="o">$71</span></span><span class="ce">;   |-&gt; Start position X=1, Y=7</span></span>
 <span class="l"><a class="anc" name="ead9" href="#ead9">[ead9]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_OUTSIDE</span></span><span class="ce">;   |-&gt; Palette 6</span></span>
 <span class="l"><a class="anc" name="eada" href="#eada">[eada]</a><span class="cd"><span class="i">.byte</span> <span class="o">$04</span></span><span class="ce">; Exiting left from Mascon to Mist (screen 4)</span></span>
-<span class="l"><a class="anc" name="eadb" href="#eadb">[eadb]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_FOREPAW</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
+<span class="l"><a class="anc" name="eadb" href="#eadb">[eadb]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MIST</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
 <span class="l"><a class="anc" name="eadc" href="#eadc">[eadc]</a><span class="cd"><span class="i">.byte</span> <span class="o">$09</span></span><span class="ce">;   |-&gt; Screen index 9</span></span>
 <span class="l"><a class="anc" name="eadd" href="#eadd">[eadd]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=9</span></span>
 <span class="l"><a class="anc" name="eade" href="#eade">[eade]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_MIST</span></span><span class="ce">;   '-&gt; Palette 10</span></span>
 <span class="l"><a class="anc" name="eadf" href="#eadf">[eadf]</a><span class="cd"><span class="i">.byte</span> <span class="o">$05</span></span><span class="ce">; Exiting right from Mascon to Mist (screen 5)</span></span>
-<span class="l"><a class="anc" name="eae0" href="#eae0">[eae0]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_FOREPAW</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
+<span class="l"><a class="anc" name="eae0" href="#eae0">[eae0]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MIST</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
 <span class="l"><a class="anc" name="eae1" href="#eae1">[eae1]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0c</span></span><span class="ce">;   |-&gt; Screen index 12</span></span>
 <span class="l"><a class="anc" name="eae2" href="#eae2">[eae2]</a><span class="cd"><span class="i">.byte</span> <span class="o">$91</span></span><span class="ce">;   |-&gt; Start position X=1, Y=9</span></span>
 <span class="l"><a class="anc" name="eae3" href="#eae3">[eae3]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_MIST</span></span><span class="ce">;   '-&gt; Palette 10</span></span>
 <span class="l"><a class="anc" name="eae4" href="#eae4">[eae4]</a><span class="cd"><span class="i">.byte</span> <span class="o">$06</span></span><span class="ce">; Exit left from Victim to Mist from screen 6</span></span>
-<span class="l"><a class="anc" name="eae5" href="#eae5">[eae5]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_FOREPAW</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
+<span class="l"><a class="anc" name="eae5" href="#eae5">[eae5]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MIST</span></span><span class="ce">;   |-&gt; Switch to area 2</span></span>
 <span class="l"><a class="anc" name="eae6" href="#eae6">[eae6]</a><span class="cd"><span class="i">.byte</span> <span class="o">$22</span></span><span class="ce">;   |-&gt; Screen index 34</span></span>
 <span class="l"><a class="anc" name="eae7" href="#eae7">[eae7]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=9</span></span>
 <span class="l"><a class="anc" name="eae8" href="#eae8">[eae8]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_MIST</span></span><span class="ce">;   '-&gt; Palette 10</span></span>
 <span class="l"><a class="anc" name="eae9" href="#eae9">[eae9]</a><span class="cd"><span class="i">.byte</span> <span class="o">$07</span></span><span class="ce">; Exit right from Victim to Mist on screen 7</span></span>
-<span class="l"><a class="anc" name="eaea" href="#eaea">[eaea]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_FOREPAW</span></span><span class="ce">;   |-&gt; Switch to area 7</span></span>
+<span class="l"><a class="anc" name="eaea" href="#eaea">[eaea]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MIST</span></span><span class="ce">;   |-&gt; Switch to area 7</span></span>
 <span class="l"><a class="anc" name="eaeb" href="#eaeb">[eaeb]</a><span class="cd"><span class="i">.byte</span> <span class="o">$25</span></span><span class="ce">;   |-&gt; Screen index = 37</span></span>
 <span class="l"><a class="anc" name="eaec" href="#eaec">[eaec]</a><span class="cd"><span class="i">.byte</span> <span class="o">$91</span></span><span class="ce">;   |-&gt; Start position X=1, Y=9</span></span>
 <span class="l"><a class="anc" name="eaed" href="#eaed">[eaed]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_MIST</span></span><span class="ce">;   '-&gt; Palette 10</span></span>
 <span class="l"><a class="anc" name="eaee" href="#eaee">[eaee]</a><span class="cd"><span class="i">.byte</span> <span class="o">$08</span></span><span class="ce">; Exit left from Conflate to Branch</span></span>
-<span class="l"><a class="anc" name="eaef" href="#eaef">[eaef]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_CONFLATE</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
+<span class="l"><a class="anc" name="eaef" href="#eaef">[eaef]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_BRANCH</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
 <span class="l"><a class="anc" name="eaf0" href="#eaf0">[eaf0]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0d</span></span><span class="ce">;   |-&gt; Screen index 13</span></span>
 <span class="l"><a class="anc" name="eaf1" href="#eaf1">[eaf1]</a><span class="cd"><span class="i">.byte</span> <span class="o">$7e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=7</span></span>
 <span class="l"><a class="anc" name="eaf2" href="#eaf2">[eaf2]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_BRANCH</span></span><span class="ce">;   '-&gt; Palette 8</span></span>
 <span class="l"><a class="anc" name="eaf3" href="#eaf3">[eaf3]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0a</span></span><span class="ce">; Exit left from Daybreak to Branch</span></span>
-<span class="l"><a class="anc" name="eaf4" href="#eaf4">[eaf4]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_CONFLATE</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
+<span class="l"><a class="anc" name="eaf4" href="#eaf4">[eaf4]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_BRANCH</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
 <span class="l"><a class="anc" name="eaf5" href="#eaf5">[eaf5]</a><span class="cd"><span class="i">.byte</span> <span class="o">$23</span></span><span class="ce">;   |-&gt; Screen index 35</span></span>
 <span class="l"><a class="anc" name="eaf6" href="#eaf6">[eaf6]</a><span class="cd"><span class="i">.byte</span> <span class="o">$7e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=7</span></span>
 <span class="l"><a class="anc" name="eaf7" href="#eaf7">[eaf7]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_BRANCH</span></span><span class="ce">;   '-&gt; Palette 8</span></span>
 <span class="l"><a class="anc" name="eaf8" href="#eaf8">[eaf8]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0b</span></span><span class="ce">; Exit right from Daybreak to Branch</span></span>
-<span class="l"><a class="anc" name="eaf9" href="#eaf9">[eaf9]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_CONFLATE</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
+<span class="l"><a class="anc" name="eaf9" href="#eaf9">[eaf9]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_BRANCH</span></span><span class="ce">;   |-&gt; Switch to area 5</span></span>
 <span class="l"><a class="anc" name="eafa" href="#eafa">[eafa]</a><span class="cd"><span class="i">.byte</span> <span class="o">$24</span></span><span class="ce">;   |-&gt; Screen index 36</span></span>
 <span class="l"><a class="anc" name="eafb" href="#eafb">[eafb]</a><span class="cd"><span class="i">.byte</span> <span class="o">$71</span></span><span class="ce">;   |-&gt; Start position X=1, Y=7</span></span>
 <span class="l"><a class="anc" name="eafc" href="#eafc">[eafc]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_BRANCH</span></span><span class="ce">;   '-&gt; Palette 8</span></span>
 <span class="l"><a class="anc" name="eafd" href="#eafd">[eafd]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0c</span></span><span class="ce">; Exit left from Dartmoor to Branch (screen 12)</span></span>
-<span class="l"><a class="anc" name="eafe" href="#eafe">[eafe]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_DAYBREAK</span></span><span class="ce">;   |-&gt; Switch to area 6</span></span>
+<span class="l"><a class="anc" name="eafe" href="#eafe">[eafe]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_DARTMOOR</span></span><span class="ce">;   |-&gt; Switch to area 6</span></span>
 <span class="l"><a class="anc" name="eaff" href="#eaff">[eaff]</a><span class="cd"><span class="i">.byte</span> <span class="o">$03</span></span><span class="ce">;   |-&gt; Screen index 3</span></span>
 <span class="l"><a class="anc" name="eb00" href="#eb00">[eb00]</a><span class="cd"><span class="i">.byte</span> <span class="o">$7e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=7</span></span>
 <span class="l"><a class="anc" name="eb01" href="#eb01">[eb01]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_DARTMOOR</span></span><span class="ce">;   '-&gt; Palette 12</span></span>
 <span class="l"><a class="anc" name="eb02" href="#eb02">[eb02]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ff</span></span><span class="ce">; [$eb02] byte</span></span>
 <span class="l"></span>
-<a name="TOWN_TRANSITIONS_FOREPAW"></a><div class="c">;
+<a name="TOWN_TRANSITIONS_MIST"></a><div class="c">;
 ; XREFS:
 ;     <a href="#AREA_TOWN_TRANSITIONS_DATA">AREA_TOWN_TRANSITIONS_DATA</a>
 ;     [$PRG15_MIRROR::eaa0]
 ;
-</div><span class="l"><a class="anc" name="eb03" href="#eb03">[eb03]</a><a href="#TOWN_TRANSITIONS_FOREPAW" class="la">TOWN_TRANSITIONS_FOREPAW:</a><span class="ce">; [$eb03]</span></span>
+</div><span class="l"><a class="anc" name="eb03" href="#eb03">[eb03]</a><a href="#TOWN_TRANSITIONS_MIST" class="la">TOWN_TRANSITIONS_MIST:</a><span class="ce">; [$eb03]</span></span>
 <span class="l"><a class="anc" name="eb03" href="#eb03">[eb03]</a><span class="cd"><span class="i">.byte</span> <span class="o">$09</span></span><span class="ce">; Entering Mascon from Mist (screen 9)</span></span>
-<span class="l"><a class="anc" name="eb04" href="#eb04">[eb04]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb04" href="#eb04">[eb04]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb05" href="#eb05">[eb05]</a><span class="cd"><span class="i">.byte</span> <span class="o">$04</span></span><span class="ce">;   |-&gt; Screen index 4</span></span>
 <span class="l"><a class="anc" name="eb06" href="#eb06">[eb06]</a><span class="cd"><span class="i">.byte</span> <span class="o">$91</span></span><span class="ce">;   |-&gt; Start position X=1, Y=9</span></span>
 <span class="l"><a class="anc" name="eb07" href="#eb07">[eb07]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb08" href="#eb08">[eb08]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0c</span></span><span class="ce">; Entering left to Mascon from Mist</span></span>
-<span class="l"><a class="anc" name="eb09" href="#eb09">[eb09]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb09" href="#eb09">[eb09]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb0a" href="#eb0a">[eb0a]</a><span class="cd"><span class="i">.byte</span> <span class="o">$05</span></span><span class="ce">;   |-&gt; Screen index 5</span></span>
 <span class="l"><a class="anc" name="eb0b" href="#eb0b">[eb0b]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=9</span></span>
 <span class="l"><a class="anc" name="eb0c" href="#eb0c">[eb0c]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb0d" href="#eb0d">[eb0d]</a><span class="cd"><span class="i">.byte</span> <span class="o">$22</span></span><span class="ce">; Enering right to Victim from Mist (screen 34)</span></span>
-<span class="l"><a class="anc" name="eb0e" href="#eb0e">[eb0e]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb0e" href="#eb0e">[eb0e]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb0f" href="#eb0f">[eb0f]</a><span class="cd"><span class="i">.byte</span> <span class="o">$06</span></span><span class="ce">;   |-&gt; Screen index 6</span></span>
 <span class="l"><a class="anc" name="eb10" href="#eb10">[eb10]</a><span class="cd"><span class="i">.byte</span> <span class="o">$91</span></span><span class="ce">;   |-&gt; Start position X=1, Y=9</span></span>
 <span class="l"><a class="anc" name="eb11" href="#eb11">[eb11]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb12" href="#eb12">[eb12]</a><span class="cd"><span class="i">.byte</span> <span class="o">$25</span></span><span class="ce">; Entering left to Victim from Mist (screen 37)</span></span>
-<span class="l"><a class="anc" name="eb13" href="#eb13">[eb13]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb13" href="#eb13">[eb13]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb14" href="#eb14">[eb14]</a><span class="cd"><span class="i">.byte</span> <span class="o">$07</span></span><span class="ce">;   |-&gt; Screen index 7</span></span>
 <span class="l"><a class="anc" name="eb15" href="#eb15">[eb15]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=9</span></span>
 <span class="l"><a class="anc" name="eb16" href="#eb16">[eb16]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb17" href="#eb17">[eb17]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ff</span></span><span class="ce">; [$eb17] byte</span></span>
 <span class="l"></span>
-<a name="TOWN_TRANSITIONS_CONFLATE"></a><div class="c">;
+<a name="TOWN_TRANSITIONS_BRANCH"></a><div class="c">;
 ; XREFS:
 ;     <a href="#AREA_TOWN_TRANSITIONS_DATA">AREA_TOWN_TRANSITIONS_DATA</a>
 ;     [$PRG15_MIRROR::eaa6]
 ;
-</div><span class="l"><a class="anc" name="eb18" href="#eb18">[eb18]</a><a href="#TOWN_TRANSITIONS_CONFLATE" class="la">TOWN_TRANSITIONS_CONFLATE:</a><span class="ce">; [$eb18]</span></span>
+</div><span class="l"><a class="anc" name="eb18" href="#eb18">[eb18]</a><a href="#TOWN_TRANSITIONS_BRANCH" class="la">TOWN_TRANSITIONS_BRANCH:</a><span class="ce">; [$eb18]</span></span>
 <span class="l"><a class="anc" name="eb18" href="#eb18">[eb18]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0d</span></span><span class="ce">; Entering right to Conflate from Branch (screen 13)</span></span>
-<span class="l"><a class="anc" name="eb19" href="#eb19">[eb19]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb19" href="#eb19">[eb19]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb1a" href="#eb1a">[eb1a]</a><span class="cd"><span class="i">.byte</span> <span class="o">$08</span></span><span class="ce">;   |-&gt; Screen index 8</span></span>
 <span class="l"><a class="anc" name="eb1b" href="#eb1b">[eb1b]</a><span class="cd"><span class="i">.byte</span> <span class="o">$91</span></span><span class="ce">;   |-&gt; Start position X=1, Y=9</span></span>
 <span class="l"><a class="anc" name="eb1c" href="#eb1c">[eb1c]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb1d" href="#eb1d">[eb1d]</a><span class="cd"><span class="i">.byte</span> <span class="o">$23</span></span><span class="ce">; Entering Daybreak from Branch (screen 35)</span></span>
-<span class="l"><a class="anc" name="eb1e" href="#eb1e">[eb1e]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb1e" href="#eb1e">[eb1e]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb1f" href="#eb1f">[eb1f]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0a</span></span><span class="ce">;   |-&gt; Screen index 10</span></span>
 <span class="l"><a class="anc" name="eb20" href="#eb20">[eb20]</a><span class="cd"><span class="i">.byte</span> <span class="o">$92</span></span><span class="ce">;   |-&gt; Start position X=2, Y=9</span></span>
 <span class="l"><a class="anc" name="eb21" href="#eb21">[eb21]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb22" href="#eb22">[eb22]</a><span class="cd"><span class="i">.byte</span> <span class="o">$24</span></span><span class="ce">; Entering Daybreak from Branch (screen 36)</span></span>
-<span class="l"><a class="anc" name="eb23" href="#eb23">[eb23]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb23" href="#eb23">[eb23]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb24" href="#eb24">[eb24]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0b</span></span><span class="ce">;   |-&gt; Screen index 11</span></span>
 <span class="l"><a class="anc" name="eb25" href="#eb25">[eb25]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9e</span></span><span class="ce">;   |-&gt; Start position X=14, Y=9</span></span>
 <span class="l"><a class="anc" name="eb26" href="#eb26">[eb26]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
 <span class="l"><a class="anc" name="eb27" href="#eb27">[eb27]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ff</span></span><span class="ce">; [$eb27] byte</span></span>
 <span class="l"></span>
-<a name="TOWN_TRANSITIONS_DAYBREAK"></a><div class="c">;
+<a name="TOWN_TRANSITIONS_DARTMOOR"></a><div class="c">;
 ; XREFS:
 ;     <a href="#AREA_TOWN_TRANSITIONS_DATA">AREA_TOWN_TRANSITIONS_DATA</a>
 ;     [$PRG15_MIRROR::eaa8]
 ;
-</div><span class="l"><a class="anc" name="eb28" href="#eb28">[eb28]</a><a href="#TOWN_TRANSITIONS_DAYBREAK" class="la">TOWN_TRANSITIONS_DAYBREAK:</a><span class="ce">; [$eb28]</span></span>
+</div><span class="l"><a class="anc" name="eb28" href="#eb28">[eb28]</a><a href="#TOWN_TRANSITIONS_DARTMOOR" class="la">TOWN_TRANSITIONS_DARTMOOR:</a><span class="ce">; [$eb28]</span></span>
 <span class="l"><a class="anc" name="eb28" href="#eb28">[eb28]</a><span class="cd"><span class="i">.byte</span> <span class="o">$03</span></span><span class="ce">; Entering right to Dartmoor from Branch (screen 3)</span></span>
-<span class="l"><a class="anc" name="eb29" href="#eb29">[eb29]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_MASCON</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
+<span class="l"><a class="anc" name="eb29" href="#eb29">[eb29]</a><span class="cd"><span class="i">.byte</span> <span class="o">AREA_TOWNS</span></span><span class="ce">;   |-&gt; Switch to area 3</span></span>
 <span class="l"><a class="anc" name="eb2a" href="#eb2a">[eb2a]</a><span class="cd"><span class="i">.byte</span> <span class="o">$0c</span></span><span class="ce">;   |-&gt; Screen index 12</span></span>
 <span class="l"><a class="anc" name="eb2b" href="#eb2b">[eb2b]</a><span class="cd"><span class="i">.byte</span> <span class="o">$92</span></span><span class="ce">;   |-&gt; Start position X=2, Y=9</span></span>
 <span class="l"><a class="anc" name="eb2c" href="#eb2c">[eb2c]</a><span class="cd"><span class="i">.byte</span> <span class="o">PALETTE_TOWN</span></span><span class="ce">;   '-&gt; Palette 27</span></span>
@@ -19784,9 +19796,9 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 <div class="c">;
 ; Load the address for the start of the shield tile IDs.
 ;
-</div><span class="l"><a class="anc" name="ee9c" href="#ee9c">[ee9c]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#USHORT_800a">USHORT_800a</a></span></span><span class="ce">; Load the lower byte of the tile IDs start address.</span></span>
+</div><span class="l"><a class="anc" name="ee9c" href="#ee9c">[ee9c]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="PRG8.html#TILES_SHIELDS_START_REF">TILES_SHIELDS_START_REF</a></span></span><span class="ce">; Load the lower byte of the tile IDs start address.</span></span>
 <span class="l"><a class="anc" name="ee9f" href="#ee9f">[ee9f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a></span></span><span class="ce">; Store as the lower byte of the address to read from.</span></span>
-<span class="l"><a class="anc" name="eea1" href="#eea1">[eea1]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#USHORT_800a">USHORT_800a</a>+1</span></span><span class="ce">; Load the upper byte of the tile IDs start address.</span></span>
+<span class="l"><a class="anc" name="eea1" href="#eea1">[eea1]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="PRG8.html#TILES_SHIELDS_START_REF">TILES_SHIELDS_START_REF</a>+1</span></span><span class="ce">; Load the upper byte of the tile IDs start address.</span></span>
 <span class="l"><a class="anc" name="eea4" href="#eea4">[eea4]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Addr_U">Temp_Addr_U</a></span></span><span class="ce">; Store as the upper byte of the address to read from.</span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -19857,9 +19869,9 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 <div class="c">;
 ; Load the address for the start of the armor tile IDs.
 ;
-</div><span class="l"><a class="anc" name="eeb2" href="#eeb2">[eeb2]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#USHORT_8004">USHORT_8004</a></span></span><span class="ce">; Load the lower byte of the tile IDs start address.</span></span>
+</div><span class="l"><a class="anc" name="eeb2" href="#eeb2">[eeb2]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="PRG8.html#TILES_ARMOR_START_REF">TILES_ARMOR_START_REF</a></span></span><span class="ce">; Load the lower byte of the tile IDs start address.</span></span>
 <span class="l"><a class="anc" name="eeb5" href="#eeb5">[eeb5]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Addr_L">Temp_Addr_L</a></span></span><span class="ce">; Store as the lower byte of the address to read from.</span></span>
-<span class="l"><a class="anc" name="eeb7" href="#eeb7">[eeb7]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#USHORT_8004">USHORT_8004</a>+1</span></span><span class="ce">; Load the upper byte of the tile IDs start address.</span></span>
+<span class="l"><a class="anc" name="eeb7" href="#eeb7">[eeb7]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="PRG8.html#TILES_ARMOR_START_REF">TILES_ARMOR_START_REF</a>+1</span></span><span class="ce">; Load the upper byte of the tile IDs start address.</span></span>
 <span class="l"><a class="anc" name="eeba" href="#eeba">[eeba]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_Addr_U">Temp_Addr_U</a></span></span><span class="ce">; Store as the upper byte of the address to read from.</span></span>
 <span class="l"></span>
 <span class="l"></span>
