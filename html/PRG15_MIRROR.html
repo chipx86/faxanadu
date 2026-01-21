@@ -18162,7 +18162,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;============================================================================
 </div><span class="l"><a class="anc" name="eb2f" href="#eb2f">[eb2f]</a><a href="#Game_RunDoorRequirementHandler" class="la">Game_RunDoorRequirementHandler:</a><span class="ce">; [$eb2f]</span></span>
 <span class="l"><a class="anc" name="eb2f" href="#eb2f">[eb2f]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentDoor_KeyRequirement">CurrentDoor_KeyRequirement</a></span></span></span>
-<span class="l"><a class="anc" name="eb32" href="#eb32">[eb32]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@_return">@_return</a></span></span></span>
+<span class="l"><a class="anc" name="eb32" href="#eb32">[eb32]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#RETURN_EB3E">RETURN_EB3E</a></span></span></span>
 <span class="l"><a class="anc" name="eb34" href="#eb34">[eb34]</a><span class="cd"><span class="i">ASL</span> <span class="o">A</span></span></span>
 <span class="l"><a class="anc" name="eb35" href="#eb35">[eb35]</a><span class="cd"><span class="i">TAY</span></span></span>
 <span class="l"><a class="anc" name="eb36" href="#eb36">[eb36]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS</a>+1,Y</span></span></span>
@@ -18170,7 +18170,21 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 <span class="l"><a class="anc" name="eb3a" href="#eb3a">[eb3a]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS</a>,Y</span></span></span>
 <span class="l"><a class="anc" name="eb3d" href="#eb3d">[eb3d]</a><span class="cd"><span class="i">PHA</span></span></span>
 <span class="l"></span>
-<a name=":eb3e:@_return"></a><span class="l"><a class="anc" name="eb3e" href="#eb3e">[eb3e]</a><a href="#:eb3e:@_return" class="lla">@_return:</a><span class="ce">; [$eb3e]</span></span>
+</pre><pre><a name="RETURN_EB3E"></a><div class="cp">;============================================================================
+; TODO: Document RETURN_EB3E
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     <a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS</a>
+;     [$PRG15_MIRROR::eb3f]
+;     <a href="#Game_RunDoorRequirementHandler">Game_RunDoorRequirementHandler</a>
+;============================================================================
+</div><span class="l"><a class="anc" name="eb3e" href="#eb3e">[eb3e]</a><a href="#RETURN_EB3E" class="la">RETURN_EB3E:</a><span class="ce">; [$eb3e]</span></span>
 <span class="l"><a class="anc" name="eb3e" href="#eb3e">[eb3e]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -18186,30 +18200,15 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;     <a href="#Game_RunDoorRequirementHandler">Game_RunDoorRequirementHandler</a>
 ;
 </div><span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS" class="la">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:</a><span class="ce">; [$eb3f]</span></span>
-<span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><span class="cd"><span class="i">.byte</span> <span class="o">$3d</span></span><span class="ce">; [0]: No key, return</span></span>
-<span class="l"></span>
-<a name="DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_1"></a><div class="c">;
-; XREFS:
-;     <a href="#Game_RunDoorRequirementHandler">Game_RunDoorRequirementHandler</a>
-;
-</div><span class="l"><a class="anc" name="eb40" href="#eb40">[eb40]</a><a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_1" class="la">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_1:</a><span class="ce">; [$eb40]</span></span>
-<span class="l"><a class="anc" name="eb40" href="#eb40">[eb40]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [0]:</span></span>
-<span class="l"><a class="anc" name="eb41" href="#eb41">[eb41]</a><span class="cd"><span class="i">.byte</span> <span class="o">$50</span></span><span class="ce">; [1]: "A" Key</span></span>
-<span class="l"><a class="anc" name="eb42" href="#eb42">[eb42]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [1]:</span></span>
-<span class="l"><a class="anc" name="eb43" href="#eb43">[eb43]</a><span class="cd"><span class="i">.byte</span> <span class="o">$60</span></span><span class="ce">; [2]: "K" Key</span></span>
-<span class="l"><a class="anc" name="eb44" href="#eb44">[eb44]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [2]:</span></span>
-<span class="l"><a class="anc" name="eb45" href="#eb45">[eb45]</a><span class="cd"><span class="i">.byte</span> <span class="o">$70</span></span><span class="ce">; [3]: "Q" Key</span></span>
-<span class="l"><a class="anc" name="eb46" href="#eb46">[eb46]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [3]:</span></span>
-<span class="l"><a class="anc" name="eb47" href="#eb47">[eb47]</a><span class="cd"><span class="i">.byte</span> <span class="o">$80</span></span><span class="ce">; [4]: "J" Key</span></span>
-<span class="l"><a class="anc" name="eb48" href="#eb48">[eb48]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [4]:</span></span>
-<span class="l"><a class="anc" name="eb49" href="#eb49">[eb49]</a><span class="cd"><span class="i">.byte</span> <span class="o">$90</span></span><span class="ce">; [5]: "Jo" Key</span></span>
-<span class="l"><a class="anc" name="eb4a" href="#eb4a">[eb4a]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [5]:</span></span>
-<span class="l"><a class="anc" name="eb4b" href="#eb4b">[eb4b]</a><span class="cd"><span class="i">.byte</span> <span class="o">$a0</span></span><span class="ce">; [6]: Ring of Elf</span></span>
-<span class="l"><a class="anc" name="eb4c" href="#eb4c">[eb4c]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [6]:</span></span>
-<span class="l"><a class="anc" name="eb4d" href="#eb4d">[eb4d]</a><span class="cd"><span class="i">.byte</span> <span class="o">$b0</span></span><span class="ce">; [7]: Ring of Dworf</span></span>
-<span class="l"><a class="anc" name="eb4e" href="#eb4e">[eb4e]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [7]:</span></span>
-<span class="l"><a class="anc" name="eb4f" href="#eb4f">[eb4f]</a><span class="cd"><span class="i">.byte</span> <span class="o">$c0</span></span><span class="ce">; [8]: Demon's Ring</span></span>
-<span class="l"><a class="anc" name="eb50" href="#eb50">[eb50]</a><span class="cd"><span class="i">.byte</span> <span class="o">$eb</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#RETURN_EB3E">RETURN_EB3E</a>-1</span></span><span class="ce">; [0]: [0]: No key, return</span></span>
+<span class="l"><a class="anc" name="eb41" href="#eb41">[eb41]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithAKey">Game_OpenDoorWithAKey</a>-1</span></span><span class="ce">; [0]: [1]: "A" Key</span></span>
+<span class="l"><a class="anc" name="eb43" href="#eb43">[eb43]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithKKey">Game_OpenDoorWithKKey</a>-1</span></span><span class="ce">; [0]: [2]: "K" Key</span></span>
+<span class="l"><a class="anc" name="eb45" href="#eb45">[eb45]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithQKey">Game_OpenDoorWithQKey</a>-1</span></span><span class="ce">; [0]: [3]: "Q" Key</span></span>
+<span class="l"><a class="anc" name="eb47" href="#eb47">[eb47]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithJKey">Game_OpenDoorWithJKey</a>-1</span></span><span class="ce">; [0]: [4]: "J" Key</span></span>
+<span class="l"><a class="anc" name="eb49" href="#eb49">[eb49]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithJoKey">Game_OpenDoorWithJoKey</a>-1</span></span><span class="ce">; [0]: [5]: "Jo" Key</span></span>
+<span class="l"><a class="anc" name="eb4b" href="#eb4b">[eb4b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithRingOfElf">Game_OpenDoorWithRingOfElf</a>-1</span></span><span class="ce">; [0]: [6]: Ring of Elf</span></span>
+<span class="l"><a class="anc" name="eb4d" href="#eb4d">[eb4d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithRingOfDworf">Game_OpenDoorWithRingOfDworf</a>-1</span></span><span class="ce">; [0]: [7]: Ring of Dworf</span></span>
+<span class="l"><a class="anc" name="eb4f" href="#eb4f">[eb4f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithDemonsRing">Game_OpenDoorWithDemonsRing</a>-1</span></span><span class="ce">; [0]: [8]: Demon's Ring</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="Game_OpenDoorWithAKey"></a><div class="cp">;============================================================================
@@ -20200,18 +20199,9 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;     <a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
 ;
 </div><span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><a href="#SPECIAL_SCREEN_EVENT_LOOKUP_TABLE" class="la">SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:</a><span class="ce">; [$ef63]</span></span>
-<span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><span class="cd"><span class="i">.byte</span> <span class="o">$68</span></span><span class="ce">; [0]: Handle pushable block on path to Mascon.</span></span>
-<span class="l"></span>
-<a name="SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_1"></a><div class="c">;
-; XREFS:
-;     <a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
-;
-</div><span class="l"><a class="anc" name="ef64" href="#ef64">[ef64]</a><a href="#SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_1" class="la">SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_1:</a><span class="ce">; [$ef64]</span></span>
-<span class="l"><a class="anc" name="ef64" href="#ef64">[ef64]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ef</span></span><span class="ce">; [0]:</span></span>
-<span class="l"><a class="anc" name="ef65" href="#ef65">[ef65]</a><span class="cd"><span class="i">.byte</span> <span class="o">$9d</span></span><span class="ce">; [1]: Handle a standard boss battle.</span></span>
-<span class="l"><a class="anc" name="ef66" href="#ef66">[ef66]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ef</span></span><span class="ce">; [1]:</span></span>
-<span class="l"><a class="anc" name="ef67" href="#ef67">[ef67]</a><span class="cd"><span class="i">.byte</span> <span class="o">$d3</span></span><span class="ce">; [2]: Handle end-game sequence after killing the final boss.</span></span>
-<span class="l"><a class="anc" name="ef68" href="#ef68">[ef68]</a><span class="cd"><span class="i">.byte</span> <span class="o">$ef</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>-1</span></span><span class="ce">; [0]: Handle pushable block on path to Mascon.</span></span>
+<span class="l"><a class="anc" name="ef65" href="#ef65">[ef65]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>-1</span></span><span class="ce">; [1]: Handle a standard boss battle.</span></span>
+<span class="l"><a class="anc" name="ef67" href="#ef67">[ef67]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandleFinalBossKilled">ScreenEvents_HandleFinalBossKilled</a>-1</span></span><span class="ce">; [2]: Handle end-game sequence after killing the final boss.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="ScreenEvents_HandlePathToMasconEvent"></a><div class="cp">;============================================================================
@@ -20292,18 +20282,18 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 <span class="l"><a class="anc" name="ef88" href="#ef88">[ef88]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
 <span class="l"><a class="anc" name="ef8a" href="#ef8a">[ef8a]</a><span class="cd"><span class="i">LDX</span> <span class="o">#$07</span></span></span>
 <span class="l"></span>
-<a name=":ef8c:@LAB_PRG15_MIRROR__ef8c"></a><span class="l"><a class="anc" name="ef8c" href="#ef8c">[ef8c]</a><a href="#:ef8c:@LAB_PRG15_MIRROR__ef8c" class="lla">@LAB_PRG15_MIRROR__ef8c:</a><span class="ce">; [$ef8c]</span></span>
+<a name=":ef8c:@_loop"></a><span class="l"><a class="anc" name="ef8c" href="#ef8c">[ef8c]</a><a href="#:ef8c:@_loop" class="lla">@_loop:</a><span class="ce">; [$ef8c]</span></span>
 <span class="l"><a class="anc" name="ef8c" href="#ef8c">[ef8c]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentSprites_Entities">CurrentSprites_Entities</a>,X</span></span></span>
 <span class="l"><a class="anc" name="ef8f" href="#ef8f">[ef8f]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$ff</span></span></span>
-<span class="l"><a class="anc" name="ef91" href="#ef91">[ef91]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ef99">@LAB_PRG15_MIRROR__ef99</a></span></span></span>
+<span class="l"><a class="anc" name="ef91" href="#ef91">[ef91]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@_prepareNextIter">@_prepareNextIter</a></span></span></span>
 <span class="l"><a class="anc" name="ef93" href="#ef93">[ef93]</a><span class="cd"><span class="i">CMP</span> <span class="o"><a href="RAM.html#Temp_00">Temp_00</a></span></span></span>
-<span class="l"><a class="anc" name="ef95" href="#ef95">[ef95]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ef99">@LAB_PRG15_MIRROR__ef99</a></span></span></span>
+<span class="l"><a class="anc" name="ef95" href="#ef95">[ef95]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#@_prepareNextIter">@_prepareNextIter</a></span></span></span>
 <span class="l"><a class="anc" name="ef97" href="#ef97">[ef97]</a><span class="cd"><span class="i">SEC</span></span></span>
 <span class="l"><a class="anc" name="ef98" href="#ef98">[ef98]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
-<a name=":ef99:@LAB_PRG15_MIRROR__ef99"></a><span class="l"><a class="anc" name="ef99" href="#ef99">[ef99]</a><a href="#:ef99:@LAB_PRG15_MIRROR__ef99" class="lla">@LAB_PRG15_MIRROR__ef99:</a><span class="ce">; [$ef99]</span></span>
+<a name=":ef99:@_prepareNextIter"></a><span class="l"><a class="anc" name="ef99" href="#ef99">[ef99]</a><a href="#:ef99:@_prepareNextIter" class="lla">@_prepareNextIter:</a><span class="ce">; [$ef99]</span></span>
 <span class="l"><a class="anc" name="ef99" href="#ef99">[ef99]</a><span class="cd"><span class="i">DEX</span></span></span>
-<span class="l"><a class="anc" name="ef9a" href="#ef9a">[ef9a]</a><span class="cd"><span class="i">BPL</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__ef8c">@LAB_PRG15_MIRROR__ef8c</a></span></span></span>
+<span class="l"><a class="anc" name="ef9a" href="#ef9a">[ef9a]</a><span class="cd"><span class="i">BPL</span> <span class="o"><a href="#@_loop">@_loop</a></span></span></span>
 <span class="l"><a class="anc" name="ef9c" href="#ef9c">[ef9c]</a><span class="cd"><span class="i">CLC</span></span></span>
 <span class="l"><a class="anc" name="ef9d" href="#ef9d">[ef9d]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>

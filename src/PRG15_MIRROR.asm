@@ -18939,7 +18939,7 @@ TOWN_TRANSITIONS_EMPTY:                     ; [$eb2e]
 ;============================================================================
 Game_RunDoorRequirementHandler:             ; [$eb2f]
     LDA a:CurrentDoor_KeyRequirement
-    BEQ @_return
+    BEQ RETURN_EB3E
     ASL A
     TAY
     LDA DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS+1,Y
@@ -18947,7 +18947,21 @@ Game_RunDoorRequirementHandler:             ; [$eb2f]
     LDA DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS,Y
     PHA
 
-  @_return:                                 ; [$eb3e]
+;============================================================================
+; TODO: Document RETURN_EB3E
+;
+; INPUTS:
+;     None.
+;
+; OUTPUTS:
+;     TODO
+;
+; XREFS:
+;     DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS
+;     [$PRG15_MIRROR::eb3f]
+;     Game_RunDoorRequirementHandler
+;============================================================================
+RETURN_EB3E:                                ; [$eb3e]
     RTS
 
 
@@ -18963,30 +18977,15 @@ Game_RunDoorRequirementHandler:             ; [$eb2f]
 ;     Game_RunDoorRequirementHandler
 ;
 DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:         ; [$eb3f]
-    .byte $3d                               ; [0]: No key, return
-
-;
-; XREFS:
-;     Game_RunDoorRequirementHandler
-;
-DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS_1:       ; [$eb40]
-    .byte $eb                               ; [0]:
-    .byte $50                               ; [1]: "A" Key
-    .byte $eb                               ; [1]:
-    .byte $60                               ; [2]: "K" Key
-    .byte $eb                               ; [2]:
-    .byte $70                               ; [3]: "Q" Key
-    .byte $eb                               ; [3]:
-    .byte $80                               ; [4]: "J" Key
-    .byte $eb                               ; [4]:
-    .byte $90                               ; [5]: "Jo" Key
-    .byte $eb                               ; [5]:
-    .byte $a0                               ; [6]: Ring of Elf
-    .byte $eb                               ; [6]:
-    .byte $b0                               ; [7]: Ring of Dworf
-    .byte $eb                               ; [7]:
-    .byte $c0                               ; [8]: Demon's Ring
-    .byte $eb                               ; [8]:
+    .word RETURN_EB3E-1                     ; [0]: [0]: No key, return
+    .word Game_OpenDoorWithAKey-1           ; [0]: [1]: "A" Key
+    .word Game_OpenDoorWithKKey-1           ; [0]: [2]: "K" Key
+    .word Game_OpenDoorWithQKey-1           ; [0]: [3]: "Q" Key
+    .word Game_OpenDoorWithJKey-1           ; [0]: [4]: "J" Key
+    .word Game_OpenDoorWithJoKey-1          ; [0]: [5]: "Jo" Key
+    .word Game_OpenDoorWithRingOfElf-1      ; [0]: [6]: Ring of Elf
+    .word Game_OpenDoorWithRingOfDworf-1    ; [0]: [7]: Ring of Dworf
+    .word Game_OpenDoorWithDemonsRing-1     ; [0]: [8]: Demon's Ring
 
 
 ;============================================================================
@@ -21090,21 +21089,13 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 ;     GameLoop_RunScreenEventHandlers
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
-    .byte $68                               ; [0]: Handle pushable block on
-                                            ; path to Mascon.
-
-;
-; XREFS:
-;     GameLoop_RunScreenEventHandlers
-;
-SPECIAL_SCREEN_EVENT_LOOKUP_TABLE_1:        ; [$ef64]
-    .byte $ef                               ; [0]:
-    .byte $9d                               ; [1]: Handle a standard boss
+    .word ScreenEvents_HandlePathToMasconEvent-1 ; [0]: Handle pushable block
+                                                 ; on path to Mascon.
+    .word ScreenEvents_HandleBoss-1         ; [1]: Handle a standard boss
                                             ; battle.
-    .byte $ef                               ; [1]:
-    .byte $d3                               ; [2]: Handle end-game sequence
-                                            ; after killing the final boss.
-    .byte $ef                               ; [2]:
+    .word ScreenEvents_HandleFinalBossKilled-1 ; [2]: Handle end-game
+                                               ; sequence after killing the
+                                               ; final boss.
 
 
 ;============================================================================
@@ -21189,18 +21180,18 @@ Sprites_HasSpritesNotOfType:                ; [$ef88]
     STA Temp_00
     LDX #$07
 
-  @LAB_PRG15_MIRROR__ef8c:                  ; [$ef8c]
+  @_loop:                                   ; [$ef8c]
     LDA CurrentSprites_Entities,X
     CMP #$ff
-    BEQ @LAB_PRG15_MIRROR__ef99
+    BEQ @_prepareNextIter
     CMP Temp_00
-    BEQ @LAB_PRG15_MIRROR__ef99
+    BEQ @_prepareNextIter
     SEC
     RTS
 
-  @LAB_PRG15_MIRROR__ef99:                  ; [$ef99]
+  @_prepareNextIter:                        ; [$ef99]
     DEX
-    BPL @LAB_PRG15_MIRROR__ef8c
+    BPL @_loop
     CLC
     RTS
 
