@@ -5,14 +5,14 @@
 ;============================================================================
 
     .segment "PRG3"
-    .ORG $8000
+    .reloc
 
 
 ;============================================================================
 ; Relative offset to the area tables.
 ;============================================================================
 AREAS_TABLE_PTR:                            ; [$8000]
-    .word AREA_TABLES-$8000                 ; AREA_TABLES
+    .word (AREA_TABLES-$8000) & $FFFF       ; AREA_TABLES
                                             ; [$PRG3::8000]
 
 
@@ -28,21 +28,21 @@ AREAS_TABLE_PTR:                            ; [$8000]
 ;     AREAS_TABLE_PTR [$PRG3::8000]
 ;
 AREA_TABLES:                                ; [$8002]
-    .word EOLIS_AREA_DATA-$8000             ; EOLIS_AREA_DATA
+    .word (EOLIS_AREA_DATA-$8000) & $FFFF   ; EOLIS_AREA_DATA
                                             ; [$PRG3::8002]
-    .word TRUNK_AREA_DATA-$8000             ; TRUNK_AREA_DATA
+    .word (TRUNK_AREA_DATA-$8000) & $FFFF   ; TRUNK_AREA_DATA
                                             ; [$PRG3::8004]
-    .word MIST_AREA_DATA-$8000              ; MIST_AREA_DATA
+    .word (MIST_AREA_DATA-$8000) & $FFFF    ; MIST_AREA_DATA
                                             ; [$PRG3::8006]
-    .word TOWNS_AREA_DATA-$8000             ; TOWNS_AREA_DATA
+    .word (TOWNS_AREA_DATA-$8000) & $FFFF   ; TOWNS_AREA_DATA
                                             ; [$PRG3::8008]
-    .word BUILDINGS_AREA_DATA-$8000         ; BUILDINGS_AREA_DATA
-                                            ; [$PRG3::800a]
-    .word BRANCH_AREA_DATA-$8000            ; BRANCH_AREA_DATA
+    .word (BUILDINGS_AREA_DATA-$8000) & $FFFF ; BUILDINGS_AREA_DATA
+                                              ; [$PRG3::800a]
+    .word (BRANCH_AREA_DATA-$8000) & $FFFF  ; BRANCH_AREA_DATA
                                             ; [$PRG3::800c]
-    .word DARTMOOR_AREA_DATA-$8000          ; DARTMOOR_AREA_DATA
-                                            ; [$PRG3::800e]
-    .word ZENITH_AREA_DATA-$8000            ; ZENITH_AREA_DATA
+    .word (DARTMOOR_AREA_DATA-$8000) & $FFFF ; DARTMOOR_AREA_DATA
+                                             ; [$PRG3::800e]
+    .word (ZENITH_AREA_DATA-$8000) & $FFFF  ; ZENITH_AREA_DATA
                                             ; [$PRG3::8010]
 
 
@@ -58,32 +58,32 @@ AREA_TABLES:                                ; [$8002]
 ;     AREA_TABLES [$PRG3::8002]
 ;
 EOLIS_AREA_DATA:                            ; [$8012]
-    .word EOLIS_AREA_DATA_blockAttrsRelPtr-$8000 ; EOLIS_AREA_DATA.blockAttrsRelPtr
-                                                 ; [$PRG3::8012]
-    .word EOLIS_BLOCK_PROPERTIES-$8000      ; EOLIS_BLOCK_PROPERTIES
-                                            ; [$PRG3::8014]
-    .word EOLIS_SCROLL_DATA-$8000           ; EOLIS_SCROLL_DATA
+    .word (EOLIS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; EOLIS_AREA_DATA.blockAttrsRelPtr
+                                                           ; [$PRG3::8012]
+    .word (EOLIS_BLOCK_PROPERTIES-$8000) & $FFFF ; EOLIS_BLOCK_PROPERTIES
+                                                 ; [$PRG3::8014]
+    .word (EOLIS_SCROLL_DATA-$8000) & $FFFF ; EOLIS_SCROLL_DATA
                                             ; [$PRG3::8016]
-    .word EOLIS_DOOR_LOCATIONS-$8000        ; EOLIS_DOOR_LOCATIONS
-                                            ; [$PRG3::8018]
-    .word EOLIS_DOOR_DESTINATIONS-$8000     ; EOLIS_DOOR_DESTINATIONS
-                                            ; [$PRG3::801a]
+    .word (EOLIS_DOOR_LOCATIONS-$8000) & $FFFF ; EOLIS_DOOR_LOCATIONS
+                                               ; [$PRG3::8018]
+    .word (EOLIS_DOOR_DESTINATIONS-$8000) & $FFFF ; EOLIS_DOOR_DESTINATIONS
+                                                  ; [$PRG3::801a]
 
 ;
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8012]
 ;
 EOLIS_AREA_DATA_blockAttrsRelPtr:           ; [$801c]
-    .word EOLIS_BLOCK_ATTRIBUTES-$8000      ; EOLIS_BLOCK_ATTRIBUTES
-                                            ; [$PRG3::801c]
-    .word EOLIS_BLOCK_DATA_01-$8000         ; EOLIS_BLOCK_DATA_01
-                                            ; [$PRG3::801e]
-    .word EOLIS_BLOCK_DATA_02-$8000         ; EOLIS_BLOCK_DATA_02
-                                            ; [$PRG3::8020]
-    .word EOLIS_BLOCK_DATA_03-$8000         ; EOLIS_BLOCK_DATA_03
-                                            ; [$PRG3::8022]
-    .word EOLIS_BLOCK_DATA_04-$8000         ; EOLIS_BLOCK_DATA_04
-                                            ; [$PRG3::8024]
+    .word (EOLIS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; EOLIS_BLOCK_ATTRIBUTES
+                                                 ; [$PRG3::801c]
+    .word (EOLIS_BLOCK_DATA_01-$8000) & $FFFF ; EOLIS_BLOCK_DATA_01
+                                              ; [$PRG3::801e]
+    .word (EOLIS_BLOCK_DATA_02-$8000) & $FFFF ; EOLIS_BLOCK_DATA_02
+                                              ; [$PRG3::8020]
+    .word (EOLIS_BLOCK_DATA_03-$8000) & $FFFF ; EOLIS_BLOCK_DATA_03
+                                              ; [$PRG3::8022]
+    .word (EOLIS_BLOCK_DATA_04-$8000) & $FFFF ; EOLIS_BLOCK_DATA_04
+                                              ; [$PRG3::8024]
 
 
 ;============================================================================
@@ -1077,32 +1077,32 @@ EOLIS_DOOR_DESTINATIONS:                    ; [$8373]
     .byte $06,$08,$06,$00,$07,$00,$06,$00   ; [$840b] undefined
 
 TRUNK_AREA_DATA:                            ; [$8413]
-    .word TRUNK_AREA_DATA_blockAttrsRelPtr-$8000 ; TRUNK_AREA_DATA.blockAttrsRelPtr
-                                                 ; [$PRG3::8413]
-    .word TRUNK_BLOCK_PROPERTIES-$8000      ; TRUNK_BLOCK_PROPERTIES
-                                            ; [$PRG3::8415]
-    .word TRUNK_SCROLL_DATA-$8000           ; TRUNK_SCROLL_DATA
+    .word (TRUNK_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; TRUNK_AREA_DATA.blockAttrsRelPtr
+                                                           ; [$PRG3::8413]
+    .word (TRUNK_BLOCK_PROPERTIES-$8000) & $FFFF ; TRUNK_BLOCK_PROPERTIES
+                                                 ; [$PRG3::8415]
+    .word (TRUNK_SCROLL_DATA-$8000) & $FFFF ; TRUNK_SCROLL_DATA
                                             ; [$PRG3::8417]
-    .word TRUNK_DOOR_LOCATIONS-$8000        ; TRUNK_DOOR_LOCATIONS
-                                            ; [$PRG3::8419]
-    .word TRUNK_DOOR_DESTINATIONS-$8000     ; TRUNK_DOOR_DESTINATIONS
-                                            ; [$PRG3::841b]
+    .word (TRUNK_DOOR_LOCATIONS-$8000) & $FFFF ; TRUNK_DOOR_LOCATIONS
+                                               ; [$PRG3::8419]
+    .word (TRUNK_DOOR_DESTINATIONS-$8000) & $FFFF ; TRUNK_DOOR_DESTINATIONS
+                                                  ; [$PRG3::841b]
 
 ;
 ; XREFS:
 ;     TRUNK_AREA_DATA [$PRG3::8413]
 ;
 TRUNK_AREA_DATA_blockAttrsRelPtr:           ; [$841d]
-    .word TRUNK_BLOCK_ATTRIBUTES-$8000      ; TRUNK_BLOCK_ATTRIBUTES
-                                            ; [$PRG3::841d]
-    .word TRUNK_BLOCK_DATA_01-$8000         ; TRUNK_BLOCK_DATA_01
-                                            ; [$PRG3::841f]
-    .word TRUNK_BLOCK_DATA_02-$8000         ; TRUNK_BLOCK_DATA_02
-                                            ; [$PRG3::8421]
-    .word TRUNK_BLOCK_DATA_03-$8000         ; TRUNK_BLOCK_DATA_03
-                                            ; [$PRG3::8423]
-    .word TRUNK_BLOCK_DATA_04-$8000         ; TRUNK_BLOCK_DATA_04
-                                            ; [$PRG3::8425]
+    .word (TRUNK_BLOCK_ATTRIBUTES-$8000) & $FFFF ; TRUNK_BLOCK_ATTRIBUTES
+                                                 ; [$PRG3::841d]
+    .word (TRUNK_BLOCK_DATA_01-$8000) & $FFFF ; TRUNK_BLOCK_DATA_01
+                                              ; [$PRG3::841f]
+    .word (TRUNK_BLOCK_DATA_02-$8000) & $FFFF ; TRUNK_BLOCK_DATA_02
+                                              ; [$PRG3::8421]
+    .word (TRUNK_BLOCK_DATA_03-$8000) & $FFFF ; TRUNK_BLOCK_DATA_03
+                                              ; [$PRG3::8423]
+    .word (TRUNK_BLOCK_DATA_04-$8000) & $FFFF ; TRUNK_BLOCK_DATA_04
+                                              ; [$PRG3::8425]
 
 ;
 ; XREFS:
@@ -2417,22 +2417,23 @@ TRUNK_DOOR_DESTINATIONS:                    ; [$8882]
 ; 136 tiles (0x8A2E - 0x89A6)
 ;============================================================================
 MIST_AREA_DATA:                             ; [$890a]
-    .word MIST_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes pointer
-    .word MIST_BLOCK_PROPERTIES-$8000       ; Block properties
-    .word MIST_SCROLL_DATA-$8000            ; Scroll data
-    .word MIST_DOOR_LOCATIONS-$8000         ; Door locations
-    .word MIST_DOOR_DESTINATIONS-$8000      ; Door destinations
+    .word (MIST_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block attributes
+                                                          ; pointer
+    .word (MIST_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
+    .word (MIST_SCROLL_DATA-$8000) & $FFFF  ; Scroll data
+    .word (MIST_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
+    .word (MIST_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
 
 ;
 ; XREFS:
 ;     MIST_AREA_DATA [$PRG3::890a]
 ;
 MIST_AREA_DATA_blockAttrsRelPtr:            ; [$8914]
-    .word MIST_BLOCK_ATTRIBUTES-$8000       ; Block attributes
-    .word MIST_BLOCK_DATA_01-$8000          ; Block data 1
-    .word MIST_BLOCK_DATA_02-$8000          ; Block data 2
-    .word MIST_BLOCK_DATA_03-$8000          ; Block data 3
-    .word MIST_BLOCK_DATA_04-$8000          ; Block data 4
+    .word (MIST_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
+    .word (MIST_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
+    .word (MIST_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
+    .word (MIST_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
+    .word (MIST_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
 
 ;
 ; XREFS:
@@ -3704,26 +3705,84 @@ MIST_DOOR_LOCATIONS:                        ; [$8d9a]
 ;     MIST_AREA_DATA [$PRG3::8912]
 ;
 MIST_DOOR_DESTINATIONS:                     ; [$8ddf]
-    .word $0b3e,$0003,$0b45,$0002           ; [$8ddf] ushort
-    .word $0b50,$0002,$0b4f,$0003           ; [$8de7] ushort
-    .word $0a00,$0000,$0a17,$0000           ; [$8def] ushort
-    .word $0a01,$0000,$0a20,$0000           ; [$8df7] ushort
-    .word $0000,$0000,$04fd,$00ce           ; [$8dff] ushort
-    .word $0000,$0000,$00be,$0000           ; [$8e07] ushort
-    .word $0000,$0000,$007e,$0013           ; [$8e0f] ushort
-    .word $0000,$0000,$007f,$0000           ; [$8e17] ushort
-    .word $0000,$0000,$0017,$000d           ; [$8e1f] ushort
-    .word $0000,$0000,$0092,$0054           ; [$8e27] ushort
-    .word $0000,$0000,$00e2,$0091           ; [$8e2f] ushort
-    .word $0000,$0000,$00b8,$00a1           ; [$8e37] ushort
-    .word $0000,$0000,$004a,$001d           ; [$8e3f] ushort
-    .word $0000,$0000,$00cf,$0068           ; [$8e47] ushort
-    .word $0000,$0000,$00f0,$00d4           ; [$8e4f] ushort
-    .word $0000,$0000,$00d4,$0000           ; [$8e57] ushort
-    .word $091c,$0000,$031d,$0000           ; [$8e5f] ushort
-    .word $011e,$0000,$021f,$0000           ; [$8e67] ushort
-    .word $0420,$0000,$0621,$0000           ; [$8e6f] ushort
-    .word $0622,$0000                       ; [$8e77] ushort
+    .word $0b3e                             ; [0]:
+    .word $0003                             ; [1]:
+    .word $0b45                             ; [2]:
+    .word $0002                             ; [3]:
+    .word $0b50                             ; [4]:
+    .word $0002                             ; [5]:
+    .word $0b4f                             ; [6]:
+    .word $0003                             ; [7]:
+    .word $0a00                             ; [8]:
+    .word $0000                             ; [9]:
+    .word $0a17                             ; [10]:
+    .word $0000                             ; [11]:
+    .word $0a01                             ; [12]:
+    .word $0000                             ; [13]:
+    .word $0a20                             ; [14]:
+    .word $0000                             ; [15]:
+    .word $0000                             ; [16]:
+    .word $0000                             ; [17]:
+    .word $04fd                             ; [18]:
+    .word $00ce                             ; [19]:
+    .word $0000                             ; [20]:
+    .word $0000                             ; [21]:
+    .word $00be                             ; [22]:
+    .word $0000                             ; [23]:
+    .word $0000                             ; [24]:
+    .word $0000                             ; [25]:
+    .word $007e                             ; [26]:
+    .word $0013                             ; [27]:
+    .word $0000                             ; [28]:
+    .word $0000                             ; [29]:
+    .word $007f                             ; [30]:
+    .word $0000                             ; [31]:
+    .word $0000                             ; [32]:
+    .word $0000                             ; [33]:
+    .word $0017                             ; [34]:
+    .word $000d                             ; [35]:
+    .word $0000                             ; [36]:
+    .word $0000                             ; [37]:
+    .word $0092                             ; [38]:
+    .word $0054                             ; [39]:
+    .word $0000                             ; [40]:
+    .word $0000                             ; [41]:
+    .word $00e2                             ; [42]:
+    .word $0091                             ; [43]:
+    .word $0000                             ; [44]:
+    .word $0000                             ; [45]:
+    .word $00b8                             ; [46]:
+    .word $00a1                             ; [47]:
+    .word $0000                             ; [48]:
+    .word $0000                             ; [49]:
+    .word $004a                             ; [50]:
+    .word $001d                             ; [51]:
+    .word $0000                             ; [52]:
+    .word $0000                             ; [53]:
+    .word $00cf                             ; [54]:
+    .word $0068                             ; [55]:
+    .word $0000                             ; [56]:
+    .word $0000                             ; [57]:
+    .word $00f0                             ; [58]:
+    .word $00d4                             ; [59]:
+    .word $0000                             ; [60]:
+    .word $0000                             ; [61]:
+    .word $00d4                             ; [62]:
+    .word $0000                             ; [63]:
+    .word $091c                             ; [64]:
+    .word $0000                             ; [65]:
+    .word $031d                             ; [66]:
+    .word $0000                             ; [67]:
+    .word $011e                             ; [68]:
+    .word $0000                             ; [69]:
+    .word $021f                             ; [70]:
+    .word $0000                             ; [71]:
+    .word $0420                             ; [72]:
+    .word $0000                             ; [73]:
+    .word $0621                             ; [74]:
+    .word $0000                             ; [75]:
+    .word $0622                             ; [76]:
+    .word $0000                             ; [77]:
 
 
 ;============================================================================
@@ -3733,22 +3792,24 @@ MIST_DOOR_DESTINATIONS:                     ; [$8ddf]
 ; 94 tiles
 ;============================================================================
 BRANCH_AREA_DATA:                           ; [$8e7b]
-    .word BRANCH_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes pointer
-    .word BRANCH_BLOCK_PROPERTIES-$8000     ; Block properties
-    .word BRANCH_SCROLL_DATA-$8000          ; Scroll data
-    .word BRANCH_DOOR_LOCATIONS-$8000       ; Door locations
-    .word BRANCH_DOOR_DESTINATIONS-$8000    ; Door destinations
+    .word (BRANCH_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block
+                                                            ; attributes
+                                                            ; pointer
+    .word (BRANCH_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
+    .word (BRANCH_SCROLL_DATA-$8000) & $FFFF ; Scroll data
+    .word (BRANCH_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
+    .word (BRANCH_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
 
 ;
 ; XREFS:
 ;     BRANCH_AREA_DATA [$PRG3::8e7b]
 ;
 BRANCH_AREA_DATA_blockAttrsRelPtr:          ; [$8e85]
-    .word BRANCH_BLOCK_ATTRIBUTES-$8000     ; Block attributes
-    .word BRANCH_BLOCK_DATA_01-$8000        ; Block data 1
-    .word BRANCH_BLOCK_DATA_02-$8000        ; Block data 2
-    .word BRANCH_BLOCK_DATA_03-$8000        ; Block data 3
-    .word BRANCH_BLOCK_DATA_04-$8000        ; Block data 4
+    .word (BRANCH_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
+    .word (BRANCH_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
+    .word (BRANCH_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
+    .word (BRANCH_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
+    .word (BRANCH_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
 
 ;
 ; XREFS:
@@ -4581,23 +4642,24 @@ BRANCH_DOOR_DESTINATIONS:                   ; [$918c]
 ; 256 tiles
 ;============================================================================
 BUILDINGS_AREA_DATA:                        ; [$91ac]
-    .word BUILDINGS_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes
-                                                     ; pointer
-    .word BUILDINGS_BLOCK_PROPERTIES-$8000  ; Block properties
-    .word BUILDINGS_SCROLL_DATA-$8000       ; Scroll data
-    .word BUILDINGS_DOOR_LOCATIONS-$8000    ; Door locations
-    .word BUILDINGS_DOOR_DESTINATIONS-$8000 ; Door destinations
+    .word (BUILDINGS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block
+                                                               ; attributes
+                                                               ; pointer
+    .word (BUILDINGS_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
+    .word (BUILDINGS_SCROLL_DATA-$8000) & $FFFF ; Scroll data
+    .word (BUILDINGS_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
+    .word (BUILDINGS_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
 
 ;
 ; XREFS:
 ;     BUILDINGS_AREA_DATA [$PRG3::91ac]
 ;
 BUILDINGS_AREA_DATA_blockAttrsRelPtr:       ; [$91b6]
-    .word BUILDINGS_BLOCK_ATTRIBUTES-$8000  ; Block attributes
-    .word BUILDINGS_BLOCK_DATA_01-$8000     ; Block data 1
-    .word BUILDINGS_BLOCK_DATA_02-$8000     ; Block data 2
-    .word BUILDINGS_BLOCK_DATA_03-$8000     ; Block data 3
-    .word BUILDINGS_BLOCK_DATA_04-$8000     ; Block data 4
+    .word (BUILDINGS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
+    .word (BUILDINGS_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
+    .word (BUILDINGS_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
+    .word (BUILDINGS_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
+    .word (BUILDINGS_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
 
 ;
 ; XREFS:
@@ -6246,22 +6308,23 @@ BUILDINGS_DOOR_DESTINATIONS:                ; [$97e9]
 ; 112 tiles
 ;============================================================================
 TOWNS_AREA_DATA:                            ; [$9829]
-    .word TOWNS_AREA_DATA_blockAttrsRelPtr-$8000 ; Block attributes pointer
-    .word TOWNS_BLOCK_PROPERTIES-$8000      ; Block properties
-    .word TOWNS_SCROLL_DATA-$8000           ; Scroll data
-    .word TOWNS_DOOR_LOCATIONS-$8000        ; Door locations
-    .word TOWNS_DOOR_DESTINATIONS-$8000     ; Door destinations
+    .word (TOWNS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block attributes
+                                                           ; pointer
+    .word (TOWNS_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
+    .word (TOWNS_SCROLL_DATA-$8000) & $FFFF ; Scroll data
+    .word (TOWNS_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
+    .word (TOWNS_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
 
 ;
 ; XREFS:
 ;     TOWNS_AREA_DATA [$PRG3::9829]
 ;
 TOWNS_AREA_DATA_blockAttrsRelPtr:           ; [$9833]
-    .word TOWNS_BLOCK_ATTRIBUTES-$8000      ; Block attributes
-    .word TOWNS_BLOCK_DATA_01-$8000         ; Block data 1
-    .word TOWNS_BLOCK_DATA_02-$8000         ; Block data 2
-    .word TOWNS_BLOCK_DATA_03-$8000         ; Block data 3
-    .word TOWNS_BLOCK_DATA_04-$8000         ; Block data 4
+    .word (TOWNS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
+    .word (TOWNS_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
+    .word (TOWNS_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
+    .word (TOWNS_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
+    .word (TOWNS_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
 
 ;
 ; XREFS:
@@ -7414,32 +7477,32 @@ TOWNS_DOOR_DESTINATIONS:                    ; [$9bd2]
 ; 99 tiles
 ;============================================================================
 DARTMOOR_AREA_DATA:                         ; [$9c7e]
-    .word DARTMOOR_AREA_DATA_blockAttrsRelPtr-$8000 ; DARTMOOR_AREA_DATA.blockAttrsRelPtr
-                                                    ; [$PRG3::9c7e]
-    .word DARTMOOR_BLOCK_PROPERTIES-$8000   ; DARTMOOR_BLOCK_PROPERTIES
-                                            ; [$PRG3::9c80]
-    .word DARTMOOR_SCROLL_DATA-$8000        ; DARTMOOR_SCROLL_DATA
-                                            ; [$PRG3::9c82]
-    .word DARTMOOR_DOOR_LOCATIONS-$8000     ; DARTMOOR_DOOR_LOCATIONS
-                                            ; [$PRG3::9c84]
-    .word DARTMOOR_DOOR_DESTINATIONS-$8000  ; DARTMOOR_DOOR_DESTINATIONS
-                                            ; [$PRG3::9c86]
+    .word (DARTMOOR_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; DARTMOOR_AREA_DATA.blockAttrsRelPtr
+                                                              ; [$PRG3::9c7e]
+    .word (DARTMOOR_BLOCK_PROPERTIES-$8000) & $FFFF ; DARTMOOR_BLOCK_PROPERTIES
+                                                    ; [$PRG3::9c80]
+    .word (DARTMOOR_SCROLL_DATA-$8000) & $FFFF ; DARTMOOR_SCROLL_DATA
+                                               ; [$PRG3::9c82]
+    .word (DARTMOOR_DOOR_LOCATIONS-$8000) & $FFFF ; DARTMOOR_DOOR_LOCATIONS
+                                                  ; [$PRG3::9c84]
+    .word (DARTMOOR_DOOR_DESTINATIONS-$8000) & $FFFF ; DARTMOOR_DOOR_DESTINATIONS
+                                                     ; [$PRG3::9c86]
 
 ;
 ; XREFS:
 ;     DARTMOOR_AREA_DATA [$PRG3::9c7e]
 ;
 DARTMOOR_AREA_DATA_blockAttrsRelPtr:        ; [$9c88]
-    .word DARTMOOR_BLOCK_ATTRIBUTES-$8000   ; DARTMOOR_BLOCK_ATTRIBUTES
-                                            ; [$PRG3::9c88]
-    .word DARTMOOR_BLOCK_DATA_01-$8000      ; DARTMOOR_BLOCK_DATA_01
-                                            ; [$PRG3::9c8a]
-    .word DARTMOOR_BLOCK_DATA_02-$8000      ; DARTMOOR_BLOCK_DATA_02
-                                            ; [$PRG3::9c8c]
-    .word DARTMOOR_BLOCK_DATA_03-$8000      ; DARTMOOR_BLOCK_DATA_03
-                                            ; [$PRG3::9c8e]
-    .word DARTMOOR_BLOCK_DATA_04-$8000      ; DARTMOOR_BLOCK_DATA_04
-                                            ; [$PRG3::9c90]
+    .word (DARTMOOR_BLOCK_ATTRIBUTES-$8000) & $FFFF ; DARTMOOR_BLOCK_ATTRIBUTES
+                                                    ; [$PRG3::9c88]
+    .word (DARTMOOR_BLOCK_DATA_01-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_01
+                                                 ; [$PRG3::9c8a]
+    .word (DARTMOOR_BLOCK_DATA_02-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_02
+                                                 ; [$PRG3::9c8c]
+    .word (DARTMOOR_BLOCK_DATA_03-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_03
+                                                 ; [$PRG3::9c8e]
+    .word (DARTMOOR_BLOCK_DATA_04-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_04
+                                                 ; [$PRG3::9c90]
 
 ;
 ; XREFS:
@@ -8361,32 +8424,32 @@ DARTMOOR_DOOR_DESTINATIONS:                 ; [$9fa5]
     .byte $04,$00,$00                       ; [$a046] undefined
 
 ZENITH_AREA_DATA:                           ; [$a049]
-    .word ZENITH_AREA_DATA_blockAttrsRelPtr-$8000 ; ZENITH_AREA_DATA.blockAttrsRelPtr
-                                                  ; [$PRG3::a049]
-    .word ZENITH_BLOCK_PROPERTIES-$8000     ; ZENITH_BLOCK_PROPERTIES
-                                            ; [$PRG3::a04b]
-    .word ZENITH_SCROLL_DATA-$8000          ; ZENITH_SCROLL_DATA
-                                            ; [$PRG3::a04d]
-    .word ZENITH_DOOR_LOCATIONS-$8000       ; ZENITH_DOOR_LOCATIONS
-                                            ; [$PRG3::a04f]
-    .word ZENITH_DOOR_DESTINATIONS-$8000    ; ZENITH_DOOR_DESTINATIONS
-                                            ; [$PRG3::a051]
+    .word (ZENITH_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; ZENITH_AREA_DATA.blockAttrsRelPtr
+                                                            ; [$PRG3::a049]
+    .word (ZENITH_BLOCK_PROPERTIES-$8000) & $FFFF ; ZENITH_BLOCK_PROPERTIES
+                                                  ; [$PRG3::a04b]
+    .word (ZENITH_SCROLL_DATA-$8000) & $FFFF ; ZENITH_SCROLL_DATA
+                                             ; [$PRG3::a04d]
+    .word (ZENITH_DOOR_LOCATIONS-$8000) & $FFFF ; ZENITH_DOOR_LOCATIONS
+                                                ; [$PRG3::a04f]
+    .word (ZENITH_DOOR_DESTINATIONS-$8000) & $FFFF ; ZENITH_DOOR_DESTINATIONS
+                                                   ; [$PRG3::a051]
 
 ;
 ; XREFS:
 ;     ZENITH_AREA_DATA [$PRG3::a049]
 ;
 ZENITH_AREA_DATA_blockAttrsRelPtr:          ; [$a053]
-    .word ZENITH_BLOCK_ATTRIBUTES-$8000     ; ZENITH_BLOCK_ATTRIBUTES
-                                            ; [$PRG3::a053]
-    .word ZENITH_BLOCK_DATA_01-$8000        ; ZENITH_BLOCK_DATA_01
-                                            ; [$PRG3::a055]
-    .word ZENITH_BLOCK_DATA_02-$8000        ; ZENITH_BLOCK_DATA_02
-                                            ; [$PRG3::a057]
-    .word ZENITH_BLOCK_DATA_03-$8000        ; ZENITH_BLOCK_DATA_03
-                                            ; [$PRG3::a059]
-    .word ZENITH_BLOCK_DATA_04-$8000        ; ZENITH_BLOCK_DATA_04
-                                            ; [$PRG3::a05b]
+    .word (ZENITH_BLOCK_ATTRIBUTES-$8000) & $FFFF ; ZENITH_BLOCK_ATTRIBUTES
+                                                  ; [$PRG3::a053]
+    .word (ZENITH_BLOCK_DATA_01-$8000) & $FFFF ; ZENITH_BLOCK_DATA_01
+                                               ; [$PRG3::a055]
+    .word (ZENITH_BLOCK_DATA_02-$8000) & $FFFF ; ZENITH_BLOCK_DATA_02
+                                               ; [$PRG3::a057]
+    .word (ZENITH_BLOCK_DATA_03-$8000) & $FFFF ; ZENITH_BLOCK_DATA_03
+                                               ; [$PRG3::a059]
+    .word (ZENITH_BLOCK_DATA_04-$8000) & $FFFF ; ZENITH_BLOCK_DATA_04
+                                               ; [$PRG3::a05b]
 
 ;
 ; XREFS:

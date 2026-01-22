@@ -5,7 +5,7 @@
 ;============================================================================
 
     .segment "PRG7"
-    .ORG $8000
+    .reloc
 
     .word $000c                             ; Start of the sprite entity
                                             ; images.

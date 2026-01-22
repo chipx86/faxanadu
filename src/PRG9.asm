@@ -5,7 +5,7 @@
 ;============================================================================
 
     .segment "PRG9"
-    .ORG $8000
+    .reloc
 
     .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$8000] undefined
     .byte $ff,$ff,$ff,$ff,$ff,$ff,$ff,$ff   ; [$8008] undefined

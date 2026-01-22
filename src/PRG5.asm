@@ -5,7 +5,7 @@
 ;============================================================================
 
     .segment "PRG5"
-    .ORG $8000
+    .reloc
 
 
 ;============================================================================
@@ -1077,42 +1077,42 @@ MScripts_InvokeNext:                        ; [$823a]
 ;     MScripts_InvokeNext
 ;
 MSCRIPT_OP_HANDLERS:                        ; [$826a]
-    .word MScript_Op_End-1                  ; MScript_Op_End
+    .word (MScript_Op_End-1) & $FFFF        ; MScript_Op_End
                                             ; [$PRG5::826a]
-    .word MScript_Op_RestoreAddr-1          ; MScript_Op_RestoreAddr
-                                            ; [$PRG5::826c]
-    .word MScript_Op_BeginLoop-1            ; MScript_Op_BeginLoop
+    .word (MScript_Op_RestoreAddr-1) & $FFFF ; MScript_Op_RestoreAddr
+                                             ; [$PRG5::826c]
+    .word (MScript_Op_BeginLoop-1) & $FFFF  ; MScript_Op_BeginLoop
                                             ; [$PRG5::826e]
-    .word MScript_Op_EndLoop-1              ; MScript_Op_EndLoop
+    .word (MScript_Op_EndLoop-1) & $FFFF    ; MScript_Op_EndLoop
                                             ; [$PRG5::8270]
-    .word MScript_Op_NextLoopIfNCompleted-1 ; MScript_Op_NextLoopIfNCompleted
-                                            ; [$PRG5::8272]
-    .word MScript_Op_NoOp-1                 ; MScript_Op_NoOp
+    .word (MScript_Op_NextLoopIfNCompleted-1) & $FFFF ; MScript_Op_NextLoopIfNCompleted
+                                                      ; [$PRG5::8272]
+    .word (MScript_Op_NoOp-1) & $FFFF       ; MScript_Op_NoOp
                                             ; [$PRG5::8274]
-    .word MScript_Op_SaveAddr-1             ; MScript_Op_SaveAddr
+    .word (MScript_Op_SaveAddr-1) & $FFFF   ; MScript_Op_SaveAddr
                                             ; [$PRG5::8276]
-    .word MScript_Op_JumpSubroutine-1       ; MScript_Op_JumpSubroutine
-                                            ; [$PRG5::8278]
-    .word MScript_Op_SetGlobalTranspose-1   ; MScript_Op_SetGlobalTranspose
-                                            ; [$PRG5::827a]
-    .word MScript_Op_SetChannelTranspose-1  ; MScript_Op_SetChannelTranspose
-                                            ; [$PRG5::827c]
-    .word MScript_Op_Return-1               ; MScript_Op_Return
+    .word (MScript_Op_JumpSubroutine-1) & $FFFF ; MScript_Op_JumpSubroutine
+                                                ; [$PRG5::8278]
+    .word (MScript_Op_SetGlobalTranspose-1) & $FFFF ; MScript_Op_SetGlobalTranspose
+                                                    ; [$PRG5::827a]
+    .word (MScript_Op_SetChannelTranspose-1) & $FFFF ; MScript_Op_SetChannelTranspose
+                                                     ; [$PRG5::827c]
+    .word (MScript_Op_Return-1) & $FFFF     ; MScript_Op_Return
                                             ; [$PRG5::827e]
-    .word MScript_Op_RestartChannel-1       ; MScript_Op_RestartChannel
-                                            ; [$PRG5::8280]
-    .word MScript_Op_RepeatValue-1          ; MScript_Op_RepeatValue
-                                            ; [$PRG5::8282]
-    .word MScript_Op_SetControlBits-1       ; MScript_Op_SetControlBits
-                                            ; [$PRG5::8284]
-    .word MScript_Op_SetSQVol-1             ; MScript_Op_SetSQVol
+    .word (MScript_Op_RestartChannel-1) & $FFFF ; MScript_Op_RestartChannel
+                                                ; [$PRG5::8280]
+    .word (MScript_Op_RepeatValue-1) & $FFFF ; MScript_Op_RepeatValue
+                                             ; [$PRG5::8282]
+    .word (MScript_Op_SetControlBits-1) & $FFFF ; MScript_Op_SetControlBits
+                                                ; [$PRG5::8284]
+    .word (MScript_Op_SetSQVol-1) & $FFFF   ; MScript_Op_SetSQVol
                                             ; [$PRG5::8286]
-    .word MScript_Op_SetSQEnvelopeMode-1    ; MScript_Op_SetSQEnvelopeMode
-                                            ; [$PRG5::8288]
-    .word MScript_Op_SetSQPitchEffectDepth-1 ; MScript_Op_SetSQPitchEffectDepth
-                                             ; [$PRG5::828a]
-    .word MScript_Op_SetSQ2Detune-1         ; MScript_Op_SetSQ2Detune
-                                            ; [$PRG5::828c]
+    .word (MScript_Op_SetSQEnvelopeMode-1) & $FFFF ; MScript_Op_SetSQEnvelopeMode
+                                                   ; [$PRG5::8288]
+    .word (MScript_Op_SetSQPitchEffectDepth-1) & $FFFF ; MScript_Op_SetSQPitchEffectDepth
+                                                       ; [$PRG5::828a]
+    .word (MScript_Op_SetSQ2Detune-1) & $FFFF ; MScript_Op_SetSQ2Detune
+                                              ; [$PRG5::828c]
 
 ;============================================================================
 ; TODO: Document MScripts_SetNoteLengthFromNext
@@ -2226,94 +2226,94 @@ SOUND_EFFECT_HANDLER_INDEXES:               ; [$8590]
 ;     SoundEffects_HandleOnInterrupt
 ;
 SOUND_EFFECT_HANDLERS:                      ; [$85ad]
-    .word SoundEffects_Init-1               ; SoundEffects_Init
+    .word (SoundEffects_Init-1) & $FFFF     ; SoundEffects_Init
                                             ; [$PRG5::85ad]
-    .word SoundEffect_NoOp-1                ; SoundEffect_NoOp
+    .word (SoundEffect_NoOp-1) & $FFFF      ; SoundEffect_NoOp
                                             ; [$PRG5::85af]
-    .word SoundEffect_CoinTouched_Setup-1   ; 0x04
-    .word SoundEffect_CoinTouched_OnTick-1  ; SoundEffect_CoinTouched_OnTick
-                                            ; [$PRG5::85b3]
-    .word SoundEffect_BreadTouched_Setup-1  ; 0x08
-    .word SoundEffect_BreadTouched_OnTick-1 ; SoundEffect_BreadTouched_OnTick
-                                            ; [$PRG5::85b7]
-    .word SoundEffect_Maybe_UseSpecialItem2_Setup-1 ; 0x0C
-    .word SoundEffect_Maybe_UseSpecialItem2_OnTick-1 ; SoundEffect_Maybe_UseSpecialItem2_OnTick
-                                                     ; [$PRG5::85bb]
-    .word SoundEffect_PlayerDied_Setup-1    ; 0x10
-    .word SoundEffect_PlayerDied_OnTick-1   ; SoundEffect_PlayerDied_OnTick
-                                            ; [$PRG5::85bf]
-    .word SoundEffect_LadderDropped_Setup-1 ; 0x14
-    .word SoundEffect_LadderDropped_OnTick-1 ; SoundEffect_LadderDropped_OnTick
-                                             ; [$PRG5::85c3]
-    .word SoundEffect_ShowPlayerMenu_Setup-1 ; 0x18
-    .word SoundEffect_ShowPlayerMenu_OnTick-1 ; SoundEffect_ShowPlayerMenu_OnTick
-                                              ; [$PRG5::85c7]
-    .word SoundEffect_Maybe_Step_Setup-1    ; 0x1C
-    .word SoundEffect_Maybe_Step_OnTick-1   ; SoundEffect_Maybe_Step_OnTick
-                                            ; [$PRG5::85cb]
-    .word SoundEffect_GoldAmountChanged_Setup-1 ; 0x20
-    .word SoundEffects_DecrementCounter-1   ; SoundEffects_DecrementCounter
-                                            ; [$PRG5::85cf]
-    .word SoundEffect_FillHPOrMP_Setup-1    ; 0x24
-    .word SoundEffect_FillHPOrMP_OnTick-1   ; SoundEffect_FillHPOrMP_OnTick
-                                            ; [$PRG5::85d3]
-    .word SoundEffect_PasswordCharInput_Setup-1 ; 0x28
-    .word SoundEffects_DecrementCounter-1   ; SoundEffects_DecrementCounter
-                                            ; [$PRG5::85d7]
-    .word SoundEffect_Message_Setup-1       ; 0x2C
-    .word SoundEffect_Message_OnTick-1      ; SoundEffect_Message_OnTick
-                                            ; [$PRG5::85db]
-    .word SoundEffect_CursorMoved_Setup-1   ; 0x30
-    .word SoundEffect_CursorMoved_OnTick-1  ; SoundEffect_CursorMoved_OnTick
-                                            ; [$PRG5::85df]
-    .word SoundEffect_CharacterInput_Setup-1 ; 0x34
-    .word SoundEffect_CharacterInput_OnTick-1 ; SoundEffect_CharacterInput_OnTick
-                                              ; [$PRG5::85e3]
-    .word SoundEffect_OpenDoor_Setup-1      ; 0x38
-    .word SoundEffect_OpenDoor_OnTick-1     ; SoundEffect_OpenDoor_OnTick
-                                            ; [$PRG5::85e7]
-    .word SoundEffect_PushBlock_Setup-1     ; 0x3C
-    .word SoundEffect_PushBlock_OnTick-1    ; SoundEffect_PushBlock_OnTick
-                                            ; [$PRG5::85eb]
-    .word SoundEffect_Maybe_Typing_Setup-1  ; 0x40
-    .word SoundEffect_Maybe_Typing_OnTick-1 ; SoundEffect_Maybe_Typing_OnTick
-                                            ; [$PRG5::85ef]
-    .word SoundEffect_Pakukame_Setup-1      ; 0x44
-    .word SoundEffect_Pakukame_OnTick-1     ; SoundEffect_Pakukame_OnTick
-                                            ; [$PRG5::85f3]
-    .word SoundEffect_0x48_Setup-1          ; 0x48
-    .word SoundEffect_0x48_OnTick-1         ; SoundEffect_0x48_OnTick
-                                            ; [$PRG5::85f7]
-    .word SoundEffect_ItemPickedUp_Setup-1  ; 0x4C
-    .word SoundEffect_ItemPickedUp_OnTick-1 ; SoundEffect_ItemPickedUp_OnTick
-                                            ; [$PRG5::85fb]
-    .word SoundEffect_CoinTouchedCommon_Setup-1 ; 0x50
-    .word SoundEffect_CoinTouchedCommon_OnTick-1 ; SoundEffect_CoinTouchedCommon_OnTick
-                                                 ; [$PRG5::85ff]
-    .word SoundEffect_CoinDropped_Setup-1   ; 0x54
-    .word SoundEffect_CoinDropped_OnTick-1  ; SoundEffect_CoinDropped_OnTick
-                                            ; [$PRG5::8603]
-    .word SoundEffect_ShieldHitByMagic_Setup-1 ; 0x58
-    .word SoundEffect_ShieldHitByMagic_OnTick-1 ; SoundEffect_ShieldHitByMagic_OnTick
-                                                ; [$PRG5::8607]
-    .word SoundEffect_EnemyDied_Setup-1     ; 0x5C
-    .word SoundEffect_EnemyDied_OnTick-1    ; SoundEffect_EnemyDied_OnTick
-                                            ; [$PRG5::860b]
-    .word SoundEffect_HitEnemy_Setup-1      ; 0x60
-    .word SoundEffect_HitEnemy_OnTick-1     ; SoundEffect_HitEnemy_OnTick
-                                            ; [$PRG5::860f]
-    .word SoundEffect_HitPlayer_Setup-1     ; 0x64
-    .word SoundEffect_HitPlayer_OnTick-1    ; SoundEffect_HitPlayer_OnTick
-                                            ; [$PRG5::8613]
-    .word SoundEffect_MagicHitObstacle_Setup-1 ; 0x68
-    .word SoundEffect_MagicHitObstacle_OnTick-1 ; SoundEffect_MagicHitObstacle_OnTick
-                                                ; [$PRG5::8617]
-    .word SoundEffect_Tilte_Setup-1         ; 0x6C
-    .word SoundEffect_Tilte_OnTick-1        ; SoundEffect_Tilte_OnTick
-                                            ; [$PRG5::861b]
-    .word SoundEffect_Magic_Setup-1         ; 0x70
-    .word SoundEffect_Magic_OnTick-1        ; SoundEffect_Magic_OnTick
-                                            ; [$PRG5::861f]
+    .word (SoundEffect_CoinTouched_Setup-1) & $FFFF ; 0x04
+    .word (SoundEffect_CoinTouched_OnTick-1) & $FFFF ; SoundEffect_CoinTouched_OnTick
+                                                     ; [$PRG5::85b3]
+    .word (SoundEffect_BreadTouched_Setup-1) & $FFFF ; 0x08
+    .word (SoundEffect_BreadTouched_OnTick-1) & $FFFF ; SoundEffect_BreadTouched_OnTick
+                                                      ; [$PRG5::85b7]
+    .word (SoundEffect_Maybe_UseSpecialItem2_Setup-1) & $FFFF ; 0x0C
+    .word (SoundEffect_Maybe_UseSpecialItem2_OnTick-1) & $FFFF ; SoundEffect_Maybe_UseSpecialItem2_OnTick
+                                                               ; [$PRG5::85bb]
+    .word (SoundEffect_PlayerDied_Setup-1) & $FFFF ; 0x10
+    .word (SoundEffect_PlayerDied_OnTick-1) & $FFFF ; SoundEffect_PlayerDied_OnTick
+                                                    ; [$PRG5::85bf]
+    .word (SoundEffect_LadderDropped_Setup-1) & $FFFF ; 0x14
+    .word (SoundEffect_LadderDropped_OnTick-1) & $FFFF ; SoundEffect_LadderDropped_OnTick
+                                                       ; [$PRG5::85c3]
+    .word (SoundEffect_ShowPlayerMenu_Setup-1) & $FFFF ; 0x18
+    .word (SoundEffect_ShowPlayerMenu_OnTick-1) & $FFFF ; SoundEffect_ShowPlayerMenu_OnTick
+                                                        ; [$PRG5::85c7]
+    .word (SoundEffect_Maybe_Step_Setup-1) & $FFFF ; 0x1C
+    .word (SoundEffect_Maybe_Step_OnTick-1) & $FFFF ; SoundEffect_Maybe_Step_OnTick
+                                                    ; [$PRG5::85cb]
+    .word (SoundEffect_GoldAmountChanged_Setup-1) & $FFFF ; 0x20
+    .word (SoundEffects_DecrementCounter-1) & $FFFF ; SoundEffects_DecrementCounter
+                                                    ; [$PRG5::85cf]
+    .word (SoundEffect_FillHPOrMP_Setup-1) & $FFFF ; 0x24
+    .word (SoundEffect_FillHPOrMP_OnTick-1) & $FFFF ; SoundEffect_FillHPOrMP_OnTick
+                                                    ; [$PRG5::85d3]
+    .word (SoundEffect_PasswordCharInput_Setup-1) & $FFFF ; 0x28
+    .word (SoundEffects_DecrementCounter-1) & $FFFF ; SoundEffects_DecrementCounter
+                                                    ; [$PRG5::85d7]
+    .word (SoundEffect_Message_Setup-1) & $FFFF ; 0x2C
+    .word (SoundEffect_Message_OnTick-1) & $FFFF ; SoundEffect_Message_OnTick
+                                                 ; [$PRG5::85db]
+    .word (SoundEffect_CursorMoved_Setup-1) & $FFFF ; 0x30
+    .word (SoundEffect_CursorMoved_OnTick-1) & $FFFF ; SoundEffect_CursorMoved_OnTick
+                                                     ; [$PRG5::85df]
+    .word (SoundEffect_CharacterInput_Setup-1) & $FFFF ; 0x34
+    .word (SoundEffect_CharacterInput_OnTick-1) & $FFFF ; SoundEffect_CharacterInput_OnTick
+                                                        ; [$PRG5::85e3]
+    .word (SoundEffect_OpenDoor_Setup-1) & $FFFF ; 0x38
+    .word (SoundEffect_OpenDoor_OnTick-1) & $FFFF ; SoundEffect_OpenDoor_OnTick
+                                                  ; [$PRG5::85e7]
+    .word (SoundEffect_PushBlock_Setup-1) & $FFFF ; 0x3C
+    .word (SoundEffect_PushBlock_OnTick-1) & $FFFF ; SoundEffect_PushBlock_OnTick
+                                                   ; [$PRG5::85eb]
+    .word (SoundEffect_Maybe_Typing_Setup-1) & $FFFF ; 0x40
+    .word (SoundEffect_Maybe_Typing_OnTick-1) & $FFFF ; SoundEffect_Maybe_Typing_OnTick
+                                                      ; [$PRG5::85ef]
+    .word (SoundEffect_Pakukame_Setup-1) & $FFFF ; 0x44
+    .word (SoundEffect_Pakukame_OnTick-1) & $FFFF ; SoundEffect_Pakukame_OnTick
+                                                  ; [$PRG5::85f3]
+    .word (SoundEffect_0x48_Setup-1) & $FFFF ; 0x48
+    .word (SoundEffect_0x48_OnTick-1) & $FFFF ; SoundEffect_0x48_OnTick
+                                              ; [$PRG5::85f7]
+    .word (SoundEffect_ItemPickedUp_Setup-1) & $FFFF ; 0x4C
+    .word (SoundEffect_ItemPickedUp_OnTick-1) & $FFFF ; SoundEffect_ItemPickedUp_OnTick
+                                                      ; [$PRG5::85fb]
+    .word (SoundEffect_CoinTouchedCommon_Setup-1) & $FFFF ; 0x50
+    .word (SoundEffect_CoinTouchedCommon_OnTick-1) & $FFFF ; SoundEffect_CoinTouchedCommon_OnTick
+                                                           ; [$PRG5::85ff]
+    .word (SoundEffect_CoinDropped_Setup-1) & $FFFF ; 0x54
+    .word (SoundEffect_CoinDropped_OnTick-1) & $FFFF ; SoundEffect_CoinDropped_OnTick
+                                                     ; [$PRG5::8603]
+    .word (SoundEffect_ShieldHitByMagic_Setup-1) & $FFFF ; 0x58
+    .word (SoundEffect_ShieldHitByMagic_OnTick-1) & $FFFF ; SoundEffect_ShieldHitByMagic_OnTick
+                                                          ; [$PRG5::8607]
+    .word (SoundEffect_EnemyDied_Setup-1) & $FFFF ; 0x5C
+    .word (SoundEffect_EnemyDied_OnTick-1) & $FFFF ; SoundEffect_EnemyDied_OnTick
+                                                   ; [$PRG5::860b]
+    .word (SoundEffect_HitEnemy_Setup-1) & $FFFF ; 0x60
+    .word (SoundEffect_HitEnemy_OnTick-1) & $FFFF ; SoundEffect_HitEnemy_OnTick
+                                                  ; [$PRG5::860f]
+    .word (SoundEffect_HitPlayer_Setup-1) & $FFFF ; 0x64
+    .word (SoundEffect_HitPlayer_OnTick-1) & $FFFF ; SoundEffect_HitPlayer_OnTick
+                                                   ; [$PRG5::8613]
+    .word (SoundEffect_MagicHitObstacle_Setup-1) & $FFFF ; 0x68
+    .word (SoundEffect_MagicHitObstacle_OnTick-1) & $FFFF ; SoundEffect_MagicHitObstacle_OnTick
+                                                          ; [$PRG5::8617]
+    .word (SoundEffect_Tilte_Setup-1) & $FFFF ; 0x6C
+    .word (SoundEffect_Tilte_OnTick-1) & $FFFF ; SoundEffect_Tilte_OnTick
+                                               ; [$PRG5::861b]
+    .word (SoundEffect_Magic_Setup-1) & $FFFF ; 0x70
+    .word (SoundEffect_Magic_OnTick-1) & $FFFF ; SoundEffect_Magic_OnTick
+                                               ; [$PRG5::861f]
 
 ;============================================================================
 ; TODO: Document SoundEffects_DecrementCounter

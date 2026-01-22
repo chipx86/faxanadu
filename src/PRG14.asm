@@ -5,7 +5,7 @@
 ;============================================================================
 
     .segment "PRG14"
-    .ORG $8000
+    .reloc
 
 ;============================================================================
 ; TODO: Document Sprites_UpdateAll
@@ -154,134 +154,215 @@ Sprites_UpdateAllStates:                    ; [$8070]
 ;     CurrentSprite_UpdateState
 ;
 SPRITE_UPDATE_HANDLERS:                     ; [$8087]
-    .word SpriteUpdateHandler_Invisible-1   ; [0]:
-    .word SpriteUpdateHandler_Bread-1       ; [1]: Dropped: Bread
-    .word SpriteUpdateHandler_Coin-1        ; [2]: Dropped: Coin
-    .word SpriteUpdateHandler_Garbled03-1   ; [3]: Enemy: ?
-    .word SpriteUpdateHandler_Enemy_Raiden-1 ; [4]: Enemy: Raiden
-    .word SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron Aides
-    .word SpriteUpdateHandler_Enemy_Zombie-1 ; [6]: Enemy: Zombie
-    .word SpriteUpdateHandler_Enemy_Hornet-1 ; [7]: Enemy: Hornet
-    .word SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
-    .word SpriteUpdateHandler_Enemy_Lilith-1 ; [9]: Enemy: Lilith
-    .word SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
-    .word SpriteUpdateHandler_Enemy_Yuinaru-1 ; [11]: Enemy: Yuinaru
-    .word SpriteUpdateHandler_Enemy_Snowman-1 ; [12]: Enemy: Snowman
-    .word SpriteUpdateHandler_Enemy_Nash-1  ; [13]: Enemy: Nash
-    .word SpriteUpdateHandler_Enemy_FireGiant-1 ; [14]: Enemy: Fire Giant
-    .word SpriteUpdateHandler_Enemy_Ishiisu-1 ; [15]: Enemy: Ishiisu
-    .word SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy: Execution
-                                                    ; Hood
-    .word SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
-    .word SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1 ; [18]: Boss:
-                                                            ; unused (round
-                                                            ; body of snake
-                                                            ; boss)
-    .word SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy death
-    .word SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect:
-                                                       ; Lightning ball
-    .word SpriteUpdateHandler_Enemy_Charron-1 ; [21]: Enemy: Charron
-    .word SpriteUpdateHandler_Invisible-1   ; [22]: Enemy: ? (Unused)
-    .word SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
-    .word SpriteUpdateHandler_Enemy_Sugata-1 ; [24]: Enemy: Sugata
-    .word SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
-    .word SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
-    .word SpriteUpdateHandler_Enemy_Myconid-1 ; [27]: Enemy: Myconid
-    .word SpriteUpdateHandler_Enemy_Naga-1  ; [28]: Enemy: Naga
-    .word SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Skeleton Knight
-                                               ; (unused)
-    .word SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant
-                                                   ; Strider
-    .word SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
-                                                         ; Gawaine
-    .word SpriteUpdateHandler_Enemy_Maskman-1 ; [32]: Enemy: Maskman
-    .word thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]: Enemy:
-                                                               ; Wolfman
-    .word SpriteUpdateHandler_Enemy_Yareeka-1 ; [34]: Enemy: Yareeka
-    .word SpriteUpdateHandler_Enemy_Magman-1 ; [35]: Enemy: Magman
-    .word SpriteUpdateHandler_Enemy_Unused_CurlyTail-1 ; [36]: Enemy:
-                                                       ; Curly-tailed guy
-                                                       ; with spear (unused)
-    .word SpriteUpdateHandler_Invisible-1   ; [37]: Enemy: ? (unused)
-    .word SpriteUpdateHandler_Enemy_Ikeda-1 ; [38]: Enemy: Ikeda
-    .word SpriteUpdateHandler_Enemy_MuppetGuy-1 ; [39]: Enemy: Muppet guy
-                                                ; (unused)
-    .word SpriteUpdateHandler_Enemy_Lamprey-1 ; [40]: Enemy: Lamprey
-    .word SpriteUpdateHandler_Invisible-1   ; [41]: Enemy: ? (unused)
-    .word SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
-    .word SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1 ; [43]: Enemy:
-                                                            ; Winged skeleton
-                                                            ; (unused)
-    .word SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
-    .word SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
-    .word SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
-    .word SpriteUpdateHandler_Boss_Borabohra-1 ; [47]: Boss: Borabohra
-    .word SpriteUpdateHandler_Boss_Pakukame-1 ; [48]: Boss: Pakukame
-    .word SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
-    .word SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
-    .word SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
-    .word SpriteUpdateHandler_NPC_Walking-1 ; [52]: NPC: Walking Man 1
-    .word thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Blue lady
-                                                   ; (unused)
-    .word thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Child
-                                                   ; (unused)
-    .word SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor Salesman
-    .word SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Artist
-    .word SpriteUpdateHandler_NPC_Priest-1  ; [57]: NPC: Priest
-    .word SpriteUpdateHandler_NPC_King-1    ; [58]: NPC: King
-    .word SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
-    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key
-                                                       ; Salesman
-    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking
-                                                       ; Man
-    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in
-                                                       ; Chair
-    .word SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting
-                                                       ; Man
-    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
-                                                        ; Salesman
-    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady in
-                                                        ; Blue Dress with Cup
-    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: Guard
-    .word SpriteUpdateHandler_NPC_Doctor-1  ; [67]: NPC: Doctor
-    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC: Walking
-                                                        ; Woman 1
-    .word SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC: Walking
-                                                        ; Woman 2
-    .word SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy:
-                                                           ; Eyeball (unused)
-    .word SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy:
-                                                           ; Zozura
-    .word SpriteUpdateHandler_Item_Standard-1 ; [72]: Item: Glove
-    .word SpriteUpdateHandler_Item_Special-1 ; [73]: Item: Black Onyx
-    .word SpriteUpdateHandler_Item_Special-1 ; [74]: Item: Pendant
-    .word SpriteUpdateHandler_Item_Standard-1 ; [75]: Item: Red Potion
-    .word SpriteUpdateHandler_Item_Standard-1 ; [76]: Item: Poison
-    .word SpriteUpdateHandler_Item_Standard-1 ; [77]: Item: Elixir
-    .word SpriteUpdateHandler_Item_Standard-1 ; [78]: Item: Ointment
-    .word SpriteUpdateHandler_Invisible-1   ; [79]: Trigger: Intro
-    .word SpriteUpdateHandler_Item_Standard-1 ; [80]: Item: Mattock
-    .word SpriteUpdateHandler_Magic_81-1    ; [81]: Magic: ?
-    .word SpriteUpdateHandler_Effect_Fountain-1 ; [82]: Effect: Fountain
-    .word SpriteUpdateHandler_Magic_83-1    ; [83]: Magic: ?
-    .word SpriteUpdateHandler_EnemyMagic-1  ; [84]: Magic: Enemy Fireball
-    .word SpriteUpdateHandler_Item_Standard-1 ; [85]: Item: Wing Boots
-    .word SpriteUpdateHandler_Item_Standard-1 ; [86]: Item: Hour Glass
-    .word SpriteUpdateHandler_Item_Special-1 ; [87]: Item: Magical Rod
-    .word SpriteUpdateHandler_Item_Special-1 ; [88]: Item: Battle Suit
-    .word SpriteUpdateHandler_Item_Special-1 ; [89]: Item: Battle Helmet
-    .word SpriteUpdateHandler_Item_Special-1 ; [90]: Item: Dragon Slayer
-    .word SpriteUpdateHandler_Item_Standard-1 ; [91]: Item: Mattock
-    .word SpriteUpdateHandler_Item_Standard-1 ; [92]: Item: Wing Boots (from
-                                              ; quest)
-    .word SpriteUpdateHandler_Item_Standard-1 ; [93]: Item: Red Potion
-    .word SpriteUpdateHandler_Item_Standard-1 ; [94]: Item: Poison
-    .word SpriteUpdateHandler_Item_Standard-1 ; [95]: Item: Glove
-    .word SpriteUpdateHandler_Item_Standard-1 ; [96]: Item: Ointment
-    .word SpriteUpdateHandler_Effect_Spring-1 ; [97]: Effect: Spring of Trunk
-    .word SpriteUpdateHandler_Effect_Spring-1 ; [98]: Effect: Spring of Sky
-    .word SpriteUpdateHandler_Effect_Spring-1 ; [99]: Effect: Spring of Tower
-    .word SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss Death
+    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [0]:
+    .word (SpriteUpdateHandler_Bread-1) & $FFFF ; [1]: Dropped: Bread
+    .word (SpriteUpdateHandler_Coin-1) & $FFFF ; [2]: Dropped: Coin
+    .word (SpriteUpdateHandler_Garbled03-1) & $FFFF ; [3]: Enemy: ?
+    .word (SpriteUpdateHandler_Enemy_Raiden-1) & $FFFF ; [4]: Enemy: Raiden
+    .word (SpriteUpdateHandler_Enemy_NecronAides-1) & $FFFF ; [5]: Enemy:
+                                                            ; Necron Aides
+    .word (SpriteUpdateHandler_Enemy_Zombie-1) & $FFFF ; [6]: Enemy: Zombie
+    .word (SpriteUpdateHandler_Enemy_Hornet-1) & $FFFF ; [7]: Enemy: Hornet
+    .word (SpriteUpdateHandler_Enemy_Bihoruda-1) & $FFFF ; [8]: Enemy:
+                                                         ; Bihoruda
+    .word (SpriteUpdateHandler_Enemy_Lilith-1) & $FFFF ; [9]: Enemy: Lilith
+    .word (SpriteUpdateHandler_TODO_Garbled10-1) & $FFFF ; [10]: Magic: ?
+    .word (SpriteUpdateHandler_Enemy_Yuinaru-1) & $FFFF ; [11]: Enemy:
+                                                        ; Yuinaru
+    .word (SpriteUpdateHandler_Enemy_Snowman-1) & $FFFF ; [12]: Enemy:
+                                                        ; Snowman
+    .word (SpriteUpdateHandler_Enemy_Nash-1) & $FFFF ; [13]: Enemy: Nash
+    .word (SpriteUpdateHandler_Enemy_FireGiant-1) & $FFFF ; [14]: Enemy: Fire
+                                                          ; Giant
+    .word (SpriteUpdateHandler_Enemy_Ishiisu-1) & $FFFF ; [15]: Enemy:
+                                                        ; Ishiisu
+    .word (SpriteUpdateHandler_Enemy_ExecutionHood-1) & $FFFF ; [16]: Enemy:
+                                                              ; Execution
+                                                              ; Hood
+    .word (SpriteUpdateHandler_Boss_Rokusutahn-1) & $FFFF ; [17]: Boss:
+                                                          ; Rokusutahn
+    .word (SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1) & $FFFF ; [18]:
+                                                                      ; Boss:
+                                                                      ; unused
+                                                                      ; (round
+                                                                      ; body
+                                                                      ; of
+                                                                      ; snake
+                                                                      ; boss)
+    .word (SpriteUpdateHandler_Effect_EnemyDeath-1) & $FFFF ; [19]: Effect:
+                                                            ; Enemy death
+    .word (SpriteUpdateHandler_Effect_LightningBall20-1) & $FFFF ; [20]:
+                                                                 ; Effect:
+                                                                 ; Lightning
+                                                                 ; ball
+    .word (SpriteUpdateHandler_Enemy_Charron-1) & $FFFF ; [21]: Enemy:
+                                                        ; Charron
+    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [22]: Enemy: ? (Unused)
+    .word (SpriteUpdateHandler_Enemy_Geributa-1) & $FFFF ; [23]: Enemy:
+                                                         ; Geributa
+    .word (SpriteUpdateHandler_Enemy_Sugata-1) & $FFFF ; [24]: Enemy: Sugata
+    .word (SpriteUpdateHandler_Enemy_Grimlock-1) & $FFFF ; [25]: Enemy:
+                                                         ; Grimlock
+    .word (SpriteUpdateHandler_Enemy_GiantBees-1) & $FFFF ; [26]: Enemy:
+                                                          ; Giant Bees
+    .word (SpriteUpdateHandler_Enemy_Myconid-1) & $FFFF ; [27]: Enemy:
+                                                        ; Myconid
+    .word (SpriteUpdateHandler_Enemy_Naga-1) & $FFFF ; [28]: Enemy: Naga
+    .word (SpriteUpdateHandler_Enemy_Unused29-1) & $FFFF ; [29]: Enemy:
+                                                         ; Skeleton Knight
+                                                         ; (unused)
+    .word (SpriteUpdateHandler_Enemy_GiantStrider-1) & $FFFF ; [30]: Enemy:
+                                                             ; Giant Strider
+    .word (SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1) & $FFFF ; [31]:
+                                                                   ; Enemy:
+                                                                   ; Sir
+                                                                   ; Gawaine
+    .word (SpriteUpdateHandler_Enemy_Maskman-1) & $FFFF ; [32]: Enemy:
+                                                        ; Maskman
+    .word (thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1) & $FFFF ; [33]:
+                                                                         ; Enemy:
+                                                                         ; Wolfman
+    .word (SpriteUpdateHandler_Enemy_Yareeka-1) & $FFFF ; [34]: Enemy:
+                                                        ; Yareeka
+    .word (SpriteUpdateHandler_Enemy_Magman-1) & $FFFF ; [35]: Enemy: Magman
+    .word (SpriteUpdateHandler_Enemy_Unused_CurlyTail-1) & $FFFF ; [36]:
+                                                                 ; Enemy:
+                                                                 ; Curly-tailed
+                                                                 ; guy with
+                                                                 ; spear
+                                                                 ; (unused)
+    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [37]: Enemy: ? (unused)
+    .word (SpriteUpdateHandler_Enemy_Ikeda-1) & $FFFF ; [38]: Enemy: Ikeda
+    .word (SpriteUpdateHandler_Enemy_MuppetGuy-1) & $FFFF ; [39]: Enemy:
+                                                          ; Muppet guy
+                                                          ; (unused)
+    .word (SpriteUpdateHandler_Enemy_Lamprey-1) & $FFFF ; [40]: Enemy:
+                                                        ; Lamprey
+    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [41]: Enemy: ? (unused)
+    .word (SpriteUpdateHandler_Enemy_Monodron-1) & $FFFF ; [42]: Enemy:
+                                                         ; Monodron
+    .word (SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1) & $FFFF ; [43]:
+                                                                      ; Enemy:
+                                                                      ; Winged
+                                                                      ; skeleton
+                                                                      ; (unused)
+    .word (SpriteUpdateHandler_Enemy_Tamazutsu-1) & $FFFF ; [44]: Enemy:
+                                                          ; Tamazutsu
+    .word (SpriteUpdateHandler_Boss_Ripasheiku-1) & $FFFF ; [45]: Boss:
+                                                          ; Ripasheiku
+    .word (SpriteUpdateHandler_Boss_Zoradohna-1) & $FFFF ; [46]: Boss:
+                                                         ; Zoradohna
+    .word (SpriteUpdateHandler_Boss_Borabohra-1) & $FFFF ; [47]: Boss:
+                                                         ; Borabohra
+    .word (SpriteUpdateHandler_Boss_Pakukame-1) & $FFFF ; [48]: Boss:
+                                                        ; Pakukame
+    .word (SpriteUpdateHandler_Boss_Zorugeriru-1) & $FFFF ; [49]: Boss:
+                                                          ; Zorugeriru
+    .word (SpriteUpdateHandler_Boss_KingGrieve-1) & $FFFF ; [50]: Boss: King
+                                                          ; Grieve
+    .word (SpriteUpdateHandler_Boss_ShadowEura-1) & $FFFF ; [51]: Boss:
+                                                          ; Shadow Eura
+    .word (SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [52]: NPC: Walking
+                                                      ; Man 1
+    .word (thunk1_SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [53]: NPC:
+                                                             ; Blue lady
+                                                             ; (unused)
+    .word (thunk2_SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [54]: NPC:
+                                                             ; Child (unused)
+    .word (SpriteUpdateHandler_NPC_ArmorSalesman-1) & $FFFF ; [55]: NPC:
+                                                            ; Armor Salesman
+    .word (SpriteUpdateHandler_NPC_MartialArts-1) & $FFFF ; [56]: NPC:
+                                                          ; Martial Artist
+    .word (SpriteUpdateHandler_NPC_Priest-1) & $FFFF ; [57]: NPC: Priest
+    .word (SpriteUpdateHandler_NPC_King-1) & $FFFF ; [58]: NPC: King
+    .word (SpriteUpdateHandler_NPC_MagicTeacher-1) & $FFFF ; [59]: NPC: Magic
+                                                           ; Teacher
+    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [60]: NPC:
+                                                                 ; Key
+                                                                 ; Salesman
+    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [61]: NPC:
+                                                                 ; Smoking
+                                                                 ; Man
+    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [62]: NPC:
+                                                                 ; Man in
+                                                                 ; Chair
+    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [63]: NPC:
+                                                                 ; Sitting
+                                                                 ; Man
+    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [64]:
+                                                                  ; NPC: Meat
+                                                                  ; Salesman
+    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [65]:
+                                                                  ; NPC: Lady
+                                                                  ; in Blue
+                                                                  ; Dress
+                                                                  ; with Cup
+    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [66]:
+                                                                  ; NPC:
+                                                                  ; Guard
+    .word (SpriteUpdateHandler_NPC_Doctor-1) & $FFFF ; [67]: NPC: Doctor
+    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [68]:
+                                                                  ; NPC:
+                                                                  ; Walking
+                                                                  ; Woman 1
+    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [69]:
+                                                                  ; NPC:
+                                                                  ; Walking
+                                                                  ; Woman 2
+    .word (SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1) & $FFFF ; [70]:
+                                                                     ; Enemy:
+                                                                     ; Eyeball
+                                                                     ; (unused)
+    .word (SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1) & $FFFF ; [71]:
+                                                                     ; Enemy:
+                                                                     ; Zozura
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [72]: Item: Glove
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [73]: Item: Black
+                                                       ; Onyx
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [74]: Item: Pendant
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [75]: Item: Red
+                                                        ; Potion
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [76]: Item: Poison
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [77]: Item: Elixir
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [78]: Item:
+                                                        ; Ointment
+    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [79]: Trigger: Intro
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [80]: Item: Mattock
+    .word (SpriteUpdateHandler_Magic_81-1) & $FFFF ; [81]: Magic: ?
+    .word (SpriteUpdateHandler_Effect_Fountain-1) & $FFFF ; [82]: Effect:
+                                                          ; Fountain
+    .word (SpriteUpdateHandler_Magic_83-1) & $FFFF ; [83]: Magic: ?
+    .word (SpriteUpdateHandler_EnemyMagic-1) & $FFFF ; [84]: Magic: Enemy
+                                                     ; Fireball
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [85]: Item: Wing
+                                                        ; Boots
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [86]: Item: Hour
+                                                        ; Glass
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [87]: Item: Magical
+                                                       ; Rod
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [88]: Item: Battle
+                                                       ; Suit
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [89]: Item: Battle
+                                                       ; Helmet
+    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [90]: Item: Dragon
+                                                       ; Slayer
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [91]: Item: Mattock
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [92]: Item: Wing
+                                                        ; Boots (from quest)
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [93]: Item: Red
+                                                        ; Potion
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [94]: Item: Poison
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [95]: Item: Glove
+    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [96]: Item:
+                                                        ; Ointment
+    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [97]: Effect:
+                                                        ; Spring of Trunk
+    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [98]: Effect:
+                                                        ; Spring of Sky
+    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [99]: Effect:
+                                                        ; Spring of Tower
+    .word (SpriteUpdateHandler_Effect_BossDeath-1) & $FFFF ; [100]: Effect:
+                                                           ; Boss Death
 
 ;============================================================================
 ; TODO: Document Sprites_Maybe_UpdateHitByMagic
@@ -2703,15 +2784,15 @@ Player_HandleCollision_NoOp:                ; [$8957]
 ;     CurrentSprite_CheckHitPlayer
 ;
 SPRITE_COLLISION_HANDLERS:                  ; [$8958]
-    .word Player_HandleTouchEnemy-1         ; [0]:
-    .word Player_HandleTouchBreadOrCoin-1   ; [1]: Coin/meat touched
-    .word Player_CheckHandlePressUpOnNPC-1  ; [2]: Press Up on NPC
-    .word Player_HandleCollision_NoOp-1     ; [3]: Large animation. Just
-                                            ; return.
-    .word Player_HandleTouchNPC-1           ; [4]: Collide with NPC
-    .word Player_HandleTouchItem-1          ; [5]: Item touched
-    .word Player_HandleTouchEnemyMagic-1    ; [6]: Enemy magic touched
-    .word Player_HandleTouchEnemy-1         ; [7]: Enemy touched
+    .word (Player_HandleTouchEnemy-1) & $FFFF ; [0]:
+    .word (Player_HandleTouchBreadOrCoin-1) & $FFFF ; [1]: Coin/meat touched
+    .word (Player_CheckHandlePressUpOnNPC-1) & $FFFF ; [2]: Press Up on NPC
+    .word (Player_HandleCollision_NoOp-1) & $FFFF ; [3]: Large animation.
+                                                  ; Just return.
+    .word (Player_HandleTouchNPC-1) & $FFFF ; [4]: Collide with NPC
+    .word (Player_HandleTouchItem-1) & $FFFF ; [5]: Item touched
+    .word (Player_HandleTouchEnemyMagic-1) & $FFFF ; [6]: Enemy magic touched
+    .word (Player_HandleTouchEnemy-1) & $FFFF ; [7]: Enemy touched
 
 
 ;============================================================================
@@ -2809,7 +2890,7 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     BEQ RETURN_8998                         ; If so, return.
     JSR MMC1_LoadBankAndJump                ; Execute the handler.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$8995]
@@ -3065,7 +3146,7 @@ Player_HandleTouchNPC:                      ; [$89ef]
     JSR MMC1_LoadBankAndJump                ; Else, execute the IScript at
                                             ; that value.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -7126,10 +7207,10 @@ FUN_PRG14__9a3c:                            ; [$9a3c]
 ;     FUN_PRG14__9a3c
 ;
 MAYBE_BODY_HANDLERS:                        ; [$9a4f]
-    .word Maybe_BodyHandler__9a57-1         ; [0]:
-    .word Maybe_BodyHandler__9a7a-1         ; [1]:
-    .word Maybe_BodyHandler__9a7a-1         ; [2]:
-    .word Maybe_BodyHandler__9a57-1         ; [3]:
+    .word (Maybe_BodyHandler__9a57-1) & $FFFF ; [0]:
+    .word (Maybe_BodyHandler__9a7a-1) & $FFFF ; [1]:
+    .word (Maybe_BodyHandler__9a7a-1) & $FFFF ; [2]:
+    .word (Maybe_BodyHandler__9a57-1) & $FFFF ; [3]:
 
 ;============================================================================
 ; TODO: Document Maybe_BodyHandler__9a57
@@ -10327,78 +10408,94 @@ SpriteUpdateHandler_Effect_Spring:          ; [$a5d2]
 ;     Sprites_UpdateBehavior
 ;
 SPRITE_BEHAVIORS:                           ; [$a5e7]
-    .word SpriteBehavior_MoveTowardPlayer-1 ; [0]: Common
-    .word SpriteBehavior_Wait-1             ; [1]: Common
-    .word SpriteBehavior_BounceAndExpire-1  ; [2]: Item: Dropped coin
-    .word SpriteBehavior_Garbled3-1         ; [3]:
-    .word SpriteBehavior_WalkForward-1      ; [4]: Common
-    .word SpriteBehavior_Return-1           ; [5]:
-    .word SpriteBehavior_EnemyUnused18-1    ; [6]:
-    .word SpriteBehavior_LightningBallOrCharron-1 ; [7]:
-    .word SpriteBehavior_LightningBallOrCharron-1 ; [8]:
-    .word SpriteBehavior_Hop-1              ; [9]: Enemy: Monodron
-    .word SpriteBehavior_Ripasheiku-1       ; [10]: Boss: Dragon boss guy
-    .word SpriteBehavior_Return-1           ; [11]:
-    .word SpriteBehavior_Borabohra-1        ; [12]:
-    .word SpriteBehavior_Pakukame-1         ; [13]:
-    .word SpriteBehavior_Zorugeriru-1       ; [14]:
-    .word SpriteBehavior_KingGrieve-1       ; [15]:
-    .word SpriteBehavior_ShadowEura-1       ; [16]:
-    .word SpriteBehavior_SomethingEyeball_17-1 ; [17]:
-    .word SpriteBehavior_SomethingZoradohna_18-1 ; [18]:
-    .word SpriteBehavior_MoveVertically-1   ; [19]:
-    .word SpriteBehavior__a8d7-1            ; [20]:
-    .word SpriteBehavior_Fall-1             ; [21]: Common
-    .word SpriteBehavior_NecronAides-1      ; [22]: Enemy: Necron Aides
-    .word SpriteBehavior_Bihoruda-1         ; [23]: Enemy: Bihoruda
-    .word SpriteBehavior_Lilith-1           ; [24]: Enemy: Lilith
-    .word SpriteBehavior_Yuinaru-1          ; [25]: Enemy: Yuinaru
-    .word SpriteBehavior_Nash-1             ; [26]: Enemy: Nash
-    .word SpriteBehavior_EnemyMagic-1       ; [27]:
-    .word _thunk_SpriteBehavior__a0cb-1     ; [28]:
-    .word SpriteBehavior_Unknown_29-1       ; [29]:
-    .word _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
-    .word SpriteBehavior_FlashScreenHitPlayer-1 ; [31]:
-    .word SpriteBehavior_GiantBees-1        ; [32]: Enemy: Giant Bees
-    .word SpriteBehavior_Naga-1             ; [33]: Enemy: Naga
-    .word SpriteBehavior_Yareeka-1          ; [34]: Enemy: Yareeka
-    .word SpriteBehavior_Magman-1           ; [35]: Enemy: Magman
-    .word SpriteBehavior_EnemyUnused36-1    ; [36]: Enemy: Unused 36
-    .word SpriteBehavior_EnemyUnused39-1    ; [37]: Enemy: Unused 39
-    .word SpriteBehavior_EnemyUnused43-1    ; [38]: Enemy: Unused 43
-    .word SpriteBehavior_Tamazutsu-1        ; [39]: Enemy: Tamazutsu
-    .word SpriteBehavior_SirGawaineWolfman-1 ; [40]: Enemy: Sir Gawaine
-                                             ; Enemy: Wolfman
-    .word SpriteBehavior_Ointment-1         ; [41]: Item: Ointment
-    .word SpriteBehavior_Glove-1            ; [42]: Item: Glove
-    .word SpriteBehavior_BattleSuitDroppedByZoradohna-1 ; [43]: Item: Battle
-                                                        ; Suit
-    .word SpriteBehavior_BattleHelmetDroppedByZoradohna-1 ; [44]: Item:
-                                                          ; Battle Helmet
-    .word SpriteBehavior_DragonSlayerDroppedByKingGrieve-1 ; [45]: Item:
-                                                           ; Dragon Slayer
-    .word SpriteBehavior_MattockDroppedFromRipasheiku-1 ; [46]: Item: Mattock
-    .word SpriteBehavior_WingBootsDroppedByZorugeriru-1 ; [47]: Item: Wing
-                                                        ; Boots
-    .word SpriteBehavior_BlackOnyxDropFromZoradohna-1 ; [48]: Item: Black
-                                                      ; Onyx
-    .word SpriteBehavior_PendantDroppedFromRipasheiku-1 ; [49]: Item: Pendant
-    .word SpriteBehavior_RandomlyShowItem_50-1 ; [50]:
-    .word SpriteBehavior_RandomlyShowItem_51-1 ; [51]:
-    .word SpriteBehavior_RandomlyShowItem_52-1 ; [52]:
-    .word SpriteBehavior_RandomlyShowItem_53-1 ; [53]:
-    .word SpriteBehavior_RandomlyShowItem_54-1 ; [54]:
-    .word SpriteBehavior_RandomlyShowItem_55-1 ; [55]:
-    .word SpriteBehavior_RandomlyShowItem_56-1 ; [56]:
-    .word SpriteBehavior_Fountain-1         ; [57]: Spring of Fountain
-    .word SpriteBehavior_SpringOfFortress-1 ; [58]: Spring of Fortress
-    .word SpriteBehavior_SpringOfSky-1      ; [59]: Spring of Sky
-    .word SpriteBehavior_SpringOfJoker-1    ; [60]: Spring of Joker
-    .word SpriteBehavior_ShowMagicalRod-1   ; [61]: Item: Magical Rod
-    .word SpriteBehavior_BossDeath-1        ; [62]: Effect: Boss Death
-    .word SpriteBehavior_BuzzAround-1       ; [63]: Enemy: Hornet
-    .word SpriteBehavior_Ishiisu-1          ; [64]: Enemy: Ishiisu
-    .word SpriteBehavior_ExecutionHood-1    ; [65]: Enemy: Execution Hood
+    .word (SpriteBehavior_MoveTowardPlayer-1) & $FFFF ; [0]: Common
+    .word (SpriteBehavior_Wait-1) & $FFFF   ; [1]: Common
+    .word (SpriteBehavior_BounceAndExpire-1) & $FFFF ; [2]: Item: Dropped
+                                                     ; coin
+    .word (SpriteBehavior_Garbled3-1) & $FFFF ; [3]:
+    .word (SpriteBehavior_WalkForward-1) & $FFFF ; [4]: Common
+    .word (SpriteBehavior_Return-1) & $FFFF ; [5]:
+    .word (SpriteBehavior_EnemyUnused18-1) & $FFFF ; [6]:
+    .word (SpriteBehavior_LightningBallOrCharron-1) & $FFFF ; [7]:
+    .word (SpriteBehavior_LightningBallOrCharron-1) & $FFFF ; [8]:
+    .word (SpriteBehavior_Hop-1) & $FFFF    ; [9]: Enemy: Monodron
+    .word (SpriteBehavior_Ripasheiku-1) & $FFFF ; [10]: Boss: Dragon boss guy
+    .word (SpriteBehavior_Return-1) & $FFFF ; [11]:
+    .word (SpriteBehavior_Borabohra-1) & $FFFF ; [12]:
+    .word (SpriteBehavior_Pakukame-1) & $FFFF ; [13]:
+    .word (SpriteBehavior_Zorugeriru-1) & $FFFF ; [14]:
+    .word (SpriteBehavior_KingGrieve-1) & $FFFF ; [15]:
+    .word (SpriteBehavior_ShadowEura-1) & $FFFF ; [16]:
+    .word (SpriteBehavior_SomethingEyeball_17-1) & $FFFF ; [17]:
+    .word (SpriteBehavior_SomethingZoradohna_18-1) & $FFFF ; [18]:
+    .word (SpriteBehavior_MoveVertically-1) & $FFFF ; [19]:
+    .word (SpriteBehavior__a8d7-1) & $FFFF  ; [20]:
+    .word (SpriteBehavior_Fall-1) & $FFFF   ; [21]: Common
+    .word (SpriteBehavior_NecronAides-1) & $FFFF ; [22]: Enemy: Necron Aides
+    .word (SpriteBehavior_Bihoruda-1) & $FFFF ; [23]: Enemy: Bihoruda
+    .word (SpriteBehavior_Lilith-1) & $FFFF ; [24]: Enemy: Lilith
+    .word (SpriteBehavior_Yuinaru-1) & $FFFF ; [25]: Enemy: Yuinaru
+    .word (SpriteBehavior_Nash-1) & $FFFF   ; [26]: Enemy: Nash
+    .word (SpriteBehavior_EnemyMagic-1) & $FFFF ; [27]:
+    .word (_thunk_SpriteBehavior__a0cb-1) & $FFFF ; [28]:
+    .word (SpriteBehavior_Unknown_29-1) & $FFFF ; [29]:
+    .word (_thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1) & $FFFF ; [30]:
+    .word (SpriteBehavior_FlashScreenHitPlayer-1) & $FFFF ; [31]:
+    .word (SpriteBehavior_GiantBees-1) & $FFFF ; [32]: Enemy: Giant Bees
+    .word (SpriteBehavior_Naga-1) & $FFFF   ; [33]: Enemy: Naga
+    .word (SpriteBehavior_Yareeka-1) & $FFFF ; [34]: Enemy: Yareeka
+    .word (SpriteBehavior_Magman-1) & $FFFF ; [35]: Enemy: Magman
+    .word (SpriteBehavior_EnemyUnused36-1) & $FFFF ; [36]: Enemy: Unused 36
+    .word (SpriteBehavior_EnemyUnused39-1) & $FFFF ; [37]: Enemy: Unused 39
+    .word (SpriteBehavior_EnemyUnused43-1) & $FFFF ; [38]: Enemy: Unused 43
+    .word (SpriteBehavior_Tamazutsu-1) & $FFFF ; [39]: Enemy: Tamazutsu
+    .word (SpriteBehavior_SirGawaineWolfman-1) & $FFFF ; [40]: Enemy: Sir
+                                                       ; Gawaine Enemy:
+                                                       ; Wolfman
+    .word (SpriteBehavior_Ointment-1) & $FFFF ; [41]: Item: Ointment
+    .word (SpriteBehavior_Glove-1) & $FFFF  ; [42]: Item: Glove
+    .word (SpriteBehavior_BattleSuitDroppedByZoradohna-1) & $FFFF ; [43]:
+                                                                  ; Item:
+                                                                  ; Battle
+                                                                  ; Suit
+    .word (SpriteBehavior_BattleHelmetDroppedByZoradohna-1) & $FFFF ; [44]:
+                                                                    ; Item:
+                                                                    ; Battle
+                                                                    ; Helmet
+    .word (SpriteBehavior_DragonSlayerDroppedByKingGrieve-1) & $FFFF ; [45]:
+                                                                     ; Item:
+                                                                     ; Dragon
+                                                                     ; Slayer
+    .word (SpriteBehavior_MattockDroppedFromRipasheiku-1) & $FFFF ; [46]:
+                                                                  ; Item:
+                                                                  ; Mattock
+    .word (SpriteBehavior_WingBootsDroppedByZorugeriru-1) & $FFFF ; [47]:
+                                                                  ; Item:
+                                                                  ; Wing
+                                                                  ; Boots
+    .word (SpriteBehavior_BlackOnyxDropFromZoradohna-1) & $FFFF ; [48]: Item:
+                                                                ; Black Onyx
+    .word (SpriteBehavior_PendantDroppedFromRipasheiku-1) & $FFFF ; [49]:
+                                                                  ; Item:
+                                                                  ; Pendant
+    .word (SpriteBehavior_RandomlyShowItem_50-1) & $FFFF ; [50]:
+    .word (SpriteBehavior_RandomlyShowItem_51-1) & $FFFF ; [51]:
+    .word (SpriteBehavior_RandomlyShowItem_52-1) & $FFFF ; [52]:
+    .word (SpriteBehavior_RandomlyShowItem_53-1) & $FFFF ; [53]:
+    .word (SpriteBehavior_RandomlyShowItem_54-1) & $FFFF ; [54]:
+    .word (SpriteBehavior_RandomlyShowItem_55-1) & $FFFF ; [55]:
+    .word (SpriteBehavior_RandomlyShowItem_56-1) & $FFFF ; [56]:
+    .word (SpriteBehavior_Fountain-1) & $FFFF ; [57]: Spring of Fountain
+    .word (SpriteBehavior_SpringOfFortress-1) & $FFFF ; [58]: Spring of
+                                                      ; Fortress
+    .word (SpriteBehavior_SpringOfSky-1) & $FFFF ; [59]: Spring of Sky
+    .word (SpriteBehavior_SpringOfJoker-1) & $FFFF ; [60]: Spring of Joker
+    .word (SpriteBehavior_ShowMagicalRod-1) & $FFFF ; [61]: Item: Magical Rod
+    .word (SpriteBehavior_BossDeath-1) & $FFFF ; [62]: Effect: Boss Death
+    .word (SpriteBehavior_BuzzAround-1) & $FFFF ; [63]: Enemy: Hornet
+    .word (SpriteBehavior_Ishiisu-1) & $FFFF ; [64]: Enemy: Ishiisu
+    .word (SpriteBehavior_ExecutionHood-1) & $FFFF ; [65]: Enemy: Execution
+                                                   ; Hood
 
 ;============================================================================
 ; TODO: Document Sprites_UpdateBehavior
@@ -10555,14 +10652,14 @@ BScripts_LoadNextOp:                        ; [$a6bc]
 ;     BScripts_LoadNextOp
 ;
 BSCRIPT_OP_HANDLERS:                        ; [$a6d8]
-    .word BScript_Op_SwitchBehavior-1       ; [0]:
-    .word BScript_Op_MaybeDisableAndGoTo-1  ; [1]:
-    .word BScript_Op_RunAction-1            ; [2]:
-    .word BScript_Op_CheckDistanceToPlayer-1 ; [3]:
-    .word BScript_Op_FinishBehavior-1       ; [4]:
-    .word BScript_Op_GoTo-1                 ; [5]:
-    .word BScript_Op_AddToSpriteData-1      ; [6]:
-    .word BScript_Op_SetPhase-1             ; [7]:
+    .word (BScript_Op_SwitchBehavior-1) & $FFFF ; [0]:
+    .word (BScript_Op_MaybeDisableAndGoTo-1) & $FFFF ; [1]:
+    .word (BScript_Op_RunAction-1) & $FFFF  ; [2]:
+    .word (BScript_Op_CheckDistanceToPlayer-1) & $FFFF ; [3]:
+    .word (BScript_Op_FinishBehavior-1) & $FFFF ; [4]:
+    .word (BScript_Op_GoTo-1) & $FFFF       ; [5]:
+    .word (BScript_Op_AddToSpriteData-1) & $FFFF ; [6]:
+    .word (BScript_Op_SetPhase-1) & $FFFF   ; [7]:
 
 ;============================================================================
 ; TODO: Document BScript_Op_SetPhase
@@ -10761,16 +10858,18 @@ Sprites_Maybe_Skip2AndLoadNextAction:       ; [$a78c]
 ;     BScript_Op_RunAction
 ;
 BSCRIPT_ACTIONS:                            ; [$a794]
-    .word BScript_Action_FacePlayerX-1      ; [0]: Face Player (X)
-    .word BScript_Action_FlipXDirection-1   ; [1]: Flip X Direction
-    .word BScript_Action_FacePlayerY-1      ; [2]: Face Player (Y)
-    .word BScript_Action_FlipYDirection-1   ; [3]: Flip Y Direction
-    .word BScript_Action_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X
-                                                  ; Direction
-    .word BScript_Action_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y
-                                                  ; Direction
-    .word BScript_Action_RiseUp-1           ; [6]: Rise Up
-    .word BScript_Action_CastMagic-1        ; [7]: Cast Magic
+    .word (BScript_Action_FacePlayerX-1) & $FFFF ; [0]: Face Player (X)
+    .word (BScript_Action_FlipXDirection-1) & $FFFF ; [1]: Flip X Direction
+    .word (BScript_Action_FacePlayerY-1) & $FFFF ; [2]: Face Player (Y)
+    .word (BScript_Action_FlipYDirection-1) & $FFFF ; [3]: Flip Y Direction
+    .word (BScript_Action_RandomlyFlipXDirection-1) & $FFFF ; [4]: Randomly
+                                                            ; Flip X
+                                                            ; Direction
+    .word (BScript_Action_RandomlyFlipYDirection-1) & $FFFF ; [5]: Randomly
+                                                            ; Flip Y
+                                                            ; Direction
+    .word (BScript_Action_RiseUp-1) & $FFFF ; [6]: Rise Up
+    .word (BScript_Action_CastMagic-1) & $FFFF ; [7]: Cast Magic
 
 
 ;============================================================================
@@ -10892,8 +10991,8 @@ BScript_Op_CheckDistanceToPlayer:           ; [$a7e5]
 ;     BScript_Op_CheckDistanceToPlayer
 ;
 SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS: ; [$a7f4]
-    .word SpriteOp_CheckDistanceToPlayer_X-1 ; [0]:
-    .word SpriteOp_CheckDistanceToPlayer_Y-1 ; [1]:
+    .word (SpriteOp_CheckDistanceToPlayer_X-1) & $FFFF ; [0]:
+    .word (SpriteOp_CheckDistanceToPlayer_Y-1) & $FFFF ; [1]:
 
 
 ;============================================================================
@@ -12387,16 +12486,16 @@ Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS:                       ; [$ac71]
-    .word Sprites_ReplaceWithCoinDrop-1     ; Sprites_ReplaceWithCoinDrop
-                                            ; [$PRG14::ac71]
+    .word (Sprites_ReplaceWithCoinDrop-1) & $FFFF ; Sprites_ReplaceWithCoinDrop
+                                                  ; [$PRG14::ac71]
 
 ;
 ; XREFS:
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS_LAST:                  ; [$ac73]
-    .word Sprite_ReplaceWithBreadDrop-1     ; Sprite_ReplaceWithBreadDrop
-                                            ; [$PRG14::ac73]
+    .word (Sprite_ReplaceWithBreadDrop-1) & $FFFF ; Sprite_ReplaceWithBreadDrop
+                                                  ; [$PRG14::ac73]
 
 
 ;============================================================================
@@ -17712,40 +17811,46 @@ CAST_MAGIC_START_X:                         ; [$baf2]
 ;     CastMagic_RunSpellHandler
 ;
 CAST_MAGIC_UPDATE_HANDLERS:                 ; [$baf7]
-    .word CastMagic_UpdateDeluge-1          ; [0]: Deluge
-    .word CastMagic_UpdateThunderOrDeath-1  ; [1]: Thunder
-    .word CastMagic_UpdateFire-1            ; [2]: Fire
-    .word CastMagic_HandleDeath-1           ; [3]: Death
-    .word CastMagic_UpdateTilte-1           ; [4]: Tilte
-    .word CastMagic_Unused_UpdateDelugeAfterFirstHit-1 ; [5]: Deluge after
-                                                       ; first hit
-    .word CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first
-                                                 ; hit
-    .word CastMagic_UpdateFireAfterFirstHit-1 ; [7]: Fire after first hit
-    .word CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
-    .word CastMagic_Noop-1                  ; [9]: UNUSED: No-op
-    .word CastMagic_Unused_UpdateHitWallEffect-1 ; [10]: UNUSED: Hit Wall
-                                                 ; effect
-    .word CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after
-                                               ; first hit
+    .word (CastMagic_UpdateDeluge-1) & $FFFF ; [0]: Deluge
+    .word (CastMagic_UpdateThunderOrDeath-1) & $FFFF ; [1]: Thunder
+    .word (CastMagic_UpdateFire-1) & $FFFF  ; [2]: Fire
+    .word (CastMagic_HandleDeath-1) & $FFFF ; [3]: Death
+    .word (CastMagic_UpdateTilte-1) & $FFFF ; [4]: Tilte
+    .word (CastMagic_Unused_UpdateDelugeAfterFirstHit-1) & $FFFF ; [5]:
+                                                                 ; Deluge
+                                                                 ; after
+                                                                 ; first hit
+    .word (CastMagic_UpdateThunderAfterFirstHit-1) & $FFFF ; [6]: Thunder
+                                                           ; after first hit
+    .word (CastMagic_UpdateFireAfterFirstHit-1) & $FFFF ; [7]: Fire after
+                                                        ; first hit
+    .word (CastMagic_UpdateDeathAfterFirstHit-1) & $FFFF ; [8]: Death after
+                                                         ; first hit
+    .word (CastMagic_Noop-1) & $FFFF        ; [9]: UNUSED: No-op
+    .word (CastMagic_Unused_UpdateHitWallEffect-1) & $FFFF ; [10]: UNUSED:
+                                                           ; Hit Wall effect
+    .word (CastMagic_UpdateTilteAfterFirstHit-1) & $FFFF ; [11]: Tilte magic
+                                                         ; after first hit
 
 ;
 ; XREFS:
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
-    .word CastMagic_HitHandler_Deluge-1     ; [0]: Deluge
-    .word CastMagic_HitHandler_Thunder-1    ; [1]: Thunder
-    .word CastMagic_HitHandler_Fire-1       ; [2]: Fire
-    .word CastMagic_HitHandler_Death-1      ; [3]: Death
-    .word CastMagic_HitHandler_Tilte-1      ; [4]: Tilte
-    .word CastMagic_HitHandler_NoOp-1       ; [5]: Deluge after first hit
-    .word CastMagic_HitHandler_NoOp-1       ; [6]: Thunder after first hit
-    .word CastMagic_HitHandler_NoOp-1       ; [7]: Fire after first hit
-    .word CastMagic_HitHandler_NoOp-1       ; [8]: Death after first hit
-    .word CastMagic_HitHandler_NoOp-1       ; [9]: UNUSED
-    .word CastMagic_HitHandler_NoOp-1       ; [10]: UNUSED: Hit Wall effect
-    .word CastMagic_HitHandler_NoOp-1       ; [11]: Tilte after first hit
+    .word (CastMagic_HitHandler_Deluge-1) & $FFFF ; [0]: Deluge
+    .word (CastMagic_HitHandler_Thunder-1) & $FFFF ; [1]: Thunder
+    .word (CastMagic_HitHandler_Fire-1) & $FFFF ; [2]: Fire
+    .word (CastMagic_HitHandler_Death-1) & $FFFF ; [3]: Death
+    .word (CastMagic_HitHandler_Tilte-1) & $FFFF ; [4]: Tilte
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [5]: Deluge after first hit
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [6]: Thunder after first
+                                                ; hit
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [7]: Fire after first hit
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [8]: Death after first hit
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [9]: UNUSED
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [10]: UNUSED: Hit Wall
+                                                ; effect
+    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [11]: Tilte after first hit
 
 
 ;============================================================================
@@ -17760,22 +17865,32 @@ CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
 ;     CastMagic_RunUpdateSpellHandler
 ;
 CAST_MAGIC_UPDATE_FINISH_HANDLERS:          ; [$bb27]
-    .word CastMagic_FinishHandler_Deluge-1  ; [0]: Deluge
-    .word CastMagic_FinishHandler_Thunder-1 ; [1]: Thunder
-    .word CastMagic_FinishHandler_Fire-1    ; [2]: Fire
-    .word CastMagic_FinishHandler_Death-1   ; [3]: Death
-    .word CastMagic_FinishHandler_Tilte-1   ; [4]: Tilte
-    .word CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [5]: Deluge after
-                                                          ; first hit
-    .word CastMagic_FinishHandler_Thunder-1 ; [6]: Thunder after first hit
-    .word CastMagic_FinishHandler_Fire-1    ; [7]: Fire after first hit
-    .word CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death after
-                                                          ; first hit
-    .word CastMagic_Noop-1                  ; [9]: UNUSED
-    .word CastMagic_FinishHandler_HitWallEffect-1 ; [10]: UNUSED: Hit Wall
-                                                  ; effect
-    .word CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after
-                                                       ; first hit
+    .word (CastMagic_FinishHandler_Deluge-1) & $FFFF ; [0]: Deluge
+    .word (CastMagic_FinishHandler_Thunder-1) & $FFFF ; [1]: Thunder
+    .word (CastMagic_FinishHandler_Fire-1) & $FFFF ; [2]: Fire
+    .word (CastMagic_FinishHandler_Death-1) & $FFFF ; [3]: Death
+    .word (CastMagic_FinishHandler_Tilte-1) & $FFFF ; [4]: Tilte
+    .word (CastMagic_FinishHandler_DelugeOrDeathAfterHit-1) & $FFFF ; [5]:
+                                                                    ; Deluge
+                                                                    ; after
+                                                                    ; first
+                                                                    ; hit
+    .word (CastMagic_FinishHandler_Thunder-1) & $FFFF ; [6]: Thunder after
+                                                      ; first hit
+    .word (CastMagic_FinishHandler_Fire-1) & $FFFF ; [7]: Fire after first
+                                                   ; hit
+    .word (CastMagic_FinishHandler_DelugeOrDeathAfterHit-1) & $FFFF ; [8]:
+                                                                    ; Death
+                                                                    ; after
+                                                                    ; first
+                                                                    ; hit
+    .word (CastMagic_Noop-1) & $FFFF        ; [9]: UNUSED
+    .word (CastMagic_FinishHandler_HitWallEffect-1) & $FFFF ; [10]: UNUSED:
+                                                            ; Hit Wall effect
+    .word (CastMagic_FinishHandler_TilteAfterFirstHit-1) & $FFFF ; [11]:
+                                                                 ; Tilte
+                                                                 ; after
+                                                                 ; first hit
 
 
 ;============================================================================

@@ -5,7 +5,7 @@
 ;============================================================================
 
     .segment "PRG15_MIRROR"
-    .ORG $c000
+    .reloc
 
 
 ;============================================================================
@@ -2394,23 +2394,23 @@ GameLoop_UseItem_Return:                    ; [$c49c]
 ;     GameLoop_CheckUseCurrentItem
 ;
 USE_ITEM_JUMP_TABLE:                        ; [$c49d]
-    .word GameLoop_UseItem_Return-1         ; [0]: Ring of Elf
-    .word GameLoop_UseItem_Return-1         ; [1]: Ring of Ruby
-    .word GameLoop_UseItem_Return-1         ; [2]: Ring of Dworf
-    .word GameLoop_UseItem_Return-1         ; [3]: Demon's Ring
-    .word GameLoop_UseItem_Return-1         ; [4]: "A" Key
-    .word GameLoop_UseItem_Return-1         ; [5]: "K" Key
-    .word GameLoop_UseItem_Return-1         ; [6]: "Q" Key
-    .word GameLoop_UseItem_Return-1         ; [7]: "J" Key
-    .word GameLoop_UseItem_Return-1         ; [8]: "Jo" Key
-    .word Player_UseMattock-1               ; [9]: Mattock
-    .word GameLoop_UseItem_Return-1         ; [10]: Magical Rod
-    .word GameLoop_UseItem_Return-1         ; [11]: Crystal
-    .word GameLoop_UseItem_Return-1         ; [12]: Lamp
-    .word Player_UseHourGlass-1             ; [13]: Hour Glass
-    .word GameLoop_UseItem_Return-1         ; [14]: Book
-    .word Player_UseWingBoots-1             ; [15]: Wing Boots
-    .word Player_UseRedPotion-1             ; [16]: Red Potion
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [0]: Ring of Elf
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [1]: Ring of Ruby
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [2]: Ring of Dworf
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [3]: Demon's Ring
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [4]: "A" Key
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [5]: "K" Key
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [6]: "Q" Key
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [7]: "J" Key
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [8]: "Jo" Key
+    .word (Player_UseMattock-1) & $FFFF     ; [9]: Mattock
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [10]: Magical Rod
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [11]: Crystal
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [12]: Lamp
+    .word (Player_UseHourGlass-1) & $FFFF   ; [13]: Hour Glass
+    .word (GameLoop_UseItem_Return-1) & $FFFF ; [14]: Book
+    .word (Player_UseWingBoots-1) & $FFFF   ; [15]: Wing Boots
+    .word (Player_UseRedPotion-1) & $FFFF   ; [16]: Red Potion
 
 
 ;============================================================================
@@ -2497,7 +2497,7 @@ Player_UseElixir:                           ; [$c4ca]
     LDA #$85                                ; 0x85 == Use Elixir.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -2662,7 +2662,7 @@ Player_UseRedPotion:                        ; [$c533]
     LDA #$80                                ; 0x80 == Use Red Potion IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$c53b]
@@ -2777,7 +2777,7 @@ Player_UseWingBoots:                        ; [$c579]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -2915,7 +2915,7 @@ Game_DecWingBootsDuration:                  ; [$c59d]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -2971,7 +2971,7 @@ Player_UseHourGlass:                        ; [$c5c8]
     LDA #$82                                ; Set the IScript to run to 0x82.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3077,7 +3077,7 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3246,7 +3246,7 @@ Player_UseMattock:                          ; [$c616]
     LDA #$81
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3467,7 +3467,7 @@ Player_PickUpHourGlass:                     ; [$c6be]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3548,7 +3548,7 @@ Player_PickUpWingBoots:                     ; [$c6d8]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3611,7 +3611,7 @@ Player_PickUpBattleSuit:                    ; [$c6ea]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3689,7 +3689,7 @@ Player_PickUpBattleHelmet:                  ; [$c70a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3768,7 +3768,7 @@ Player_PickUpDragonSlayer:                  ; [$c72a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -3871,7 +3871,7 @@ Player_PickUpMattock:                       ; [$c752]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4131,7 +4131,7 @@ Player_PickUpGlove:                         ; [$c7cf]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4183,7 +4183,7 @@ Player_PickUpBlackOnyx:                     ; [$c7e4]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4236,7 +4236,7 @@ Player_PickUpPendant:                       ; [$c7fa]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4289,7 +4289,7 @@ Player_PickUpMagicalRod:                    ; [$c810]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4342,7 +4342,7 @@ Player_PickUpRedPotion:                     ; [$c826]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4395,7 +4395,7 @@ Player_PickUpPoison:                        ; [$c83c]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4469,7 +4469,7 @@ Player_PickUpElixir:                        ; [$c864]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4521,7 +4521,7 @@ Player_PickUpOintment:                      ; [$c87a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
 
@@ -4631,7 +4631,7 @@ Game_DecGloveDuration:                      ; [$c89b]
     LDA #$93                                ; 0x93 == Glove is gone IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8b3]
@@ -4696,7 +4696,7 @@ Game_DecOintmentDuration:                   ; [$c8b4]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8cc]
@@ -8172,16 +8172,25 @@ PPUBuffer_DrawCommand_Noop:                 ; [$cfbb]
 ;     PPUBuffer_Draw
 ;
 PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
-    .word PPUBuffer_DrawCommand_WritePalette-1 ; [0]: Command 0x00: Write
-                                               ; Palette to PPU
-    .word PPUBuffer_DrawCommand_Noop-1      ; [1]: Command 0xFF
-    .word PPUBuffer_DrawCommand_Noop-1      ; [2]: Command 0xFE
-    .word PPUBuffer_DrawCommand_Noop-1      ; [3]: Command 0xFD
-    .word PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1 ; [4]: Command 0xFC:
-                                                         ; Rotate Tiles Right
-    .word PPUBuffer_DrawCommand_Noop-1      ; [5]: Command 0xFB
-    .word PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA:
-                                                      ; Remove Vertical Lines
+    .word (PPUBuffer_DrawCommand_WritePalette-1) & $FFFF ; [0]: Command 0x00:
+                                                         ; Write Palette to
+                                                         ; PPU
+    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [1]: Command 0xFF
+    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [2]: Command 0xFE
+    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [3]: Command 0xFD
+    .word (PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1) & $FFFF ; [4]:
+                                                                   ; Command
+                                                                   ; 0xFC:
+                                                                   ; Rotate
+                                                                   ; Tiles
+                                                                   ; Right
+    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [5]: Command 0xFB
+    .word (PPUBuffer_DrawCommand_RemoveVerticalLines-1) & $FFFF ; [6]:
+                                                                ; Command
+                                                                ; 0xFA:
+                                                                ; Remove
+                                                                ; Vertical
+                                                                ; Lines
 
 
 ;============================================================================
@@ -9758,14 +9767,15 @@ RETURN_D2E6:                                ; [$d2e6]
 ;     Screen_UpdateForScroll
 ;============================================================================
 Screen_HandleScroll:                        ; [$d2e7]
-    LDX Screen_ScrollDirection
-    BEQ Screen_HandleScrollLeft
+    LDX Screen_ScrollDirection              ; Load the scroll direction.
+    BEQ Screen_HandleScrollLeft             ; If 0, jump to scroll left.
     DEX
-    BEQ Screen_HandleScrollRight
+    BEQ Screen_HandleScrollRight            ; If 1, jump to scroll right.
     DEX
-    BEQ Screen_HandleScrollUp
+    BEQ Screen_HandleScrollUp               ; If 2, jump to scroll up.
     DEX
-    BNE RETURN_D2E6
+    BNE RETURN_D2E6                         ; If anything but 3 (down),
+                                            ; return.
 
     ;
     ; v-- Fall through --v
@@ -9863,45 +9873,90 @@ Screen_HandleScrollLeft:                    ; [$d34a]
     ;
     ; The screen is scrolling left.
     ;
-    LDA Screen_ScrollHorizLoadCounter
-    CMP #$fc
-    BCS @LAB_PRG15_MIRROR__d364
-    LDA PPU_ScrollX
-    SEC
-    SBC #$01
-    STA PPU_ScrollX
-    PHP
-    LDA PPU_ScrollScreen
-    SBC #$00
-    STA PPU_ScrollScreen
-    PLP
-    BNE @LAB_PRG15_MIRROR__d364
-    JSR Screen_StopScrollAndLoadBlockProperties
+    LDA Screen_ScrollHorizLoadCounter       ; Load the screen blocks
+                                            ; horizontal load counter.
+    CMP #$fc                                ; Is it >= 0xFC?
+    BCS @_checkLoadBlocks                   ; If so, jump.
 
-  @LAB_PRG15_MIRROR__d364:                  ; [$d364]
-    LDA Screen_ScrollHorizLoadCounter
-    SEC
-    SBC #$01
-    STA Screen_ScrollHorizLoadCounter
-    LDA PPU_ScrollScreenHoriz
-    SBC #$00
-    STA PPU_ScrollScreenHoriz
-    CMP PPU_ScrollScreen
-    BNE @_finish
-    LDA PPU_ScrollX
-    CMP #$04
-    BCS @_finish
-    RTS
 
-  @_finish:                                 ; [$d37c]
-    LDA a:CurrentROMBank
-    PHA
-    LDX #$03
-    JSR MMC1_UpdateROMBank
-    JSR Screen_LoadDataLeft
-    PLA
-    TAX
-    JSR MMC1_UpdateROMBank
+    ;
+    ; We haven't loaded 252 columns yet.
+    ;
+    ; Start by reducing the scroll X counter by 1.
+    ;
+    LDA PPU_ScrollX                         ; Load the scroll X counter.
+    SEC
+    SBC #$01                                ; Subtract 1.
+    STA PPU_ScrollX                         ; And store it.
+    PHP                                     ; Push flags to the stack.
+    LDA PPU_ScrollScreen                    ; Load the scroll screen we're
+                                            ; using.
+    SBC #$00                                ; Subtract carry from above.
+    STA PPU_ScrollScreen                    ; Store it.
+    PLP                                     ; Pop flags from the stack.
+    BNE @_checkLoadBlocks                   ; If scroll X > 0, jump.
+
+
+    ;
+    ; PPU_ScrollX hit 0, so we can stop scrolling and load
+    ; the block properties for the new screen.
+    ;
+    JSR Screen_StopScrollAndLoadBlockProperties ; Stop scrolling and load the
+                                                ; block properties.
+
+  @_checkLoadBlocks:                        ; [$d364]
+    LDA Screen_ScrollHorizLoadCounter       ; Load the screen blocks
+                                            ; horizontal load counter.
+    SEC
+    SBC #$01                                ; Subtract 1.
+    STA Screen_ScrollHorizLoadCounter       ; Store it.
+    LDA PPU_ScrollScreenHoriz               ; Load the index of the screen
+                                            ; using for scrolling
+                                            ; horizontally.
+    SBC #$00                                ; Subtract carry, if wrapping
+                                            ; above.
+    STA PPU_ScrollScreenHoriz               ; Store it.
+
+
+    ;
+    ; Check if we're ready to load blocks to the left.
+    ;
+    ; This will only load if the screen index has changed or
+    ; the scroll X is >= 4.
+    ;
+    CMP PPU_ScrollScreen                    ; Is the horizontal scroll screen
+                                            ; the same as the current screen?
+    BNE @_loadBlocks                        ; If not, jump to load blocks.
+    LDA PPU_ScrollX                         ; Load the scroll X position.
+    CMP #$04                                ; Is it >= 4?
+    BCS @_loadBlocks                        ; If so, jump to load blocks.
+    RTS                                     ; Else, we're done.
+
+
+    ;
+    ; Save the current ROM bank and switch to bank 3 (Area metadata).
+    ;
+  @_loadBlocks:                             ; [$d37c]
+    LDA a:CurrentROMBank                    ; Load the current ROM bank.
+    PHA                                     ; Push it to the stack.
+    LDX #$03                                ; Bank 3 = Area metadata.
+    JSR MMC1_UpdateROMBank                  ; Switch to it.
+
+
+    ;
+    ; Load data for the screen to the left of the current screen.
+    ;
+    JSR Screen_LoadDataLeft                 ; Load data to the left of the
+                                            ; current screen.
+
+
+    ;
+    ; Switch back to the saved bank.
+    ;
+    PLA                                     ; Pull the current bank from the
+                                            ; stack.
+    TAX                                     ; X = A (bank).
+    JSR MMC1_UpdateROMBank                  ; Switch back to that bank.
     RTS
 
 
@@ -10385,52 +10440,65 @@ Screen_LoadBlocksHoriz:                     ; [$d503]
     ;
     ; Load 30 blocks to render in the next draw phase.
     ;
-    LDX #$00                                ; X = 0 (counter)
+    LDX #$00                                ; X = 0 (loop counter)
 
 
     ;
     ; Determine the offset for the blocks to load.
     ;
+    ; This is data populated by Area_LoadBlocks.
+    ;
   @_loadBlocksLoop:                         ; [$d52c]
-    LDY Screen_ScrollHorizLoadOffset
-    LDA (Temp_08),Y
+    LDY Screen_ScrollHorizLoadOffset        ; Y = Load offset.
+    LDA (Temp_08),Y                         ; A = Loaded block data at Y.
 
 
     ;
     ; Load the blocks information.
     ;
-    TAY
-    LDA (CurrentArea_BlockData1StartAddr),Y
-    STA CurrentArea_BlockData1CurAddr
-    LDA (CurrentArea_BlockData3StartAddr),Y
-    STA CurrentArea_BlockData2CurAddr
-    LDA (CurrentArea_BlockData2StartAddr),Y
-    STA CurrentArea_BlockData3CurAddr
-    LDA (CurrentArea_BlockData4StartAddr),Y
-    STA CurrentArea_BlockData4CurAddr
+    TAY                                     ; Y = A (block data).
+    LDA (CurrentArea_BlockData1StartAddr),Y ; A = Block data 1 address at Y.
+    STA CurrentArea_BlockData1CurAddr       ; Store it for processing.
+    LDA (CurrentArea_BlockData3StartAddr),Y ; A = Block data 3 address at Y.
+    STA CurrentArea_BlockData2CurAddr       ; Store it for processing.
+    LDA (CurrentArea_BlockData2StartAddr),Y ; A = Block data 2 address at Y.
+    STA CurrentArea_BlockData3CurAddr       ; Store it for processing.
+    LDA (CurrentArea_BlockData4StartAddr),Y ; A = Block data 4 address at Y.
+    STA CurrentArea_BlockData4CurAddr       ; Store it for processing.
 
 
     ;
-    ; Convert the block counter to a tile width.
+    ; Convert the block counter to a tile width and use it
+    ; to determine which part of the block data to load.
     ;
-    LDA Screen_ScrollHorizLoadCounter
-    AND #$08
-    LSR A
+    ; If the load counter
+    ;
+    LDA Screen_ScrollHorizLoadCounter       ; A = Horizontal load counter.
+    AND #$08                                ; Every 8...
+    LSR A                                   ; Divide by 4 (convert to 0 or
+                                            ; 2).
     LSR A
     TAY
-    LDA CurrentArea_BlockData1CurAddr,Y
-    STA Temp_0200,X
-    LDA CurrentArea_BlockData2CurAddr,Y
-    STA Temp_0201,X
-    LDA Temp_08
+    LDA CurrentArea_BlockData1CurAddr,Y     ; A = Block data 1 or 3.
+    STA Temp_0200,X                         ; Store it temporarily.
+    LDA CurrentArea_BlockData2CurAddr,Y     ; A = Block data 2 or 4.
+    STA Temp_0201,X                         ; Store it temporarily.
+    LDA Temp_08                             ; Load the dest screen buffer
+                                            ; address.
     CLC
-    ADC #$10
-    STA Temp_08
-    LDA Temp_09
-    ADC #$00
-    STA Temp_09
-    INX
-    INX
+    ADC #$10                                ; Increment by 16.
+    STA Temp_08                             ; Store the lower byte of the new
+                                            ; address.
+    LDA Temp_09                             ; Load the upper byte.
+    ADC #$00                                ; Add carry, if wrapped.
+    STA Temp_09                             ; Store the upper byte.
+
+
+    ;
+    ; Advance the loop counter by 2.
+    ;
+    INX                                     ; X++ (loop counter).
+    INX                                     ; X++ (loop counter).
     CPX #$1e
     BCC @_loadBlocksLoop
     LDA #$01
@@ -10727,20 +10795,20 @@ Screen_RunWriteScrollDataHandler:           ; [$d61d]
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_L:              ; [$d64c]
-    .byte <(Screen_WriteScrollVertPPUTileData-1) ; [0]:
-    .byte <(Screen_WriteScrollHorizPPUTileData-1) ; [1]:
-    .byte <(Screen_WriteScrollVertPPUAttrData-1) ; [2]:
-    .byte <(Screen_WriteScrollHorizPPUAttrData-1) ; [3]:
+    .byte <((Screen_WriteScrollVertPPUTileData-1) & $FFFF) ; [0]:
+    .byte <((Screen_WriteScrollHorizPPUTileData-1) & $FFFF) ; [1]:
+    .byte <((Screen_WriteScrollVertPPUAttrData-1) & $FFFF) ; [2]:
+    .byte <((Screen_WriteScrollHorizPPUAttrData-1) & $FFFF) ; [3]:
 
 ;
 ; XREFS:
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_U:              ; [$d650]
-    .byte >(Screen_WriteScrollVertPPUTileData-1) ; [0]:
-    .byte >(Screen_WriteScrollHorizPPUTileData-1) ; [1]:
-    .byte >(Screen_WriteScrollVertPPUAttrData-1) ; [2]:
-    .byte >(Screen_WriteScrollHorizPPUAttrData-1) ; [3]:
+    .byte >((Screen_WriteScrollVertPPUTileData-1) & $FFFF) ; [0]:
+    .byte >((Screen_WriteScrollHorizPPUTileData-1) & $FFFF) ; [1]:
+    .byte >((Screen_WriteScrollVertPPUAttrData-1) & $FFFF) ; [2]:
+    .byte >((Screen_WriteScrollHorizPPUAttrData-1) & $FFFF) ; [3]:
 
 ;============================================================================
 ; TODO: Document Screen_WriteScrollVertPPUTileData
@@ -12030,7 +12098,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterIScriptFarJump:                    ; [$d996]
@@ -12044,8 +12112,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     JSR MMC1_LoadBankAndJump                ; Run:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word Player_SetInitialExpAndGold-1     ; Address =
-                                            ; Player_SetInitialExpAndGold
+    .word (Player_SetInitialExpAndGold-1) & $FFFF ; Address =
+                                                  ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$d9a0]
     JSR Screen_FadeToBlack                  ; Fade the screen to black.
@@ -14781,7 +14849,7 @@ GameLoop_CheckShowPlayerMenu:               ; [$e016]
     ;
     JSR MMC1_LoadBankAndJump                ; Open the Player Menu.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word PlayerMenu_Show-1                 ; Address =
+    .word (PlayerMenu_Show-1) & $FFFF       ; Address =
                                             ; PlayerMenu_Show
 
     ;
@@ -15126,8 +15194,8 @@ Player_SetInitialState:                     ; [$e0aa]
     LDA #$00
     STA Screen_Maybe_ScrollXCounter
     STA Player_Something_ScrollPosY
-    STA PPU_ScrollScreenVert
-    STA PPU_ScrollScreenHoriz               ; DEADCODE: Overridden below.
+    STA PPU_ScrollScreenVert                ; DEADCODE: Overridden below.
+    STA PPU_ScrollScreenHoriz
 
 
     ;
@@ -15137,7 +15205,7 @@ Player_SetInitialState:                     ; [$e0aa]
     STA Player_StatusFlag                   ; Set the player status to 0.
     STA Player_InvincibilityPhase           ; Set the invincibility phase to
                                             ; 0.
-    STA PPU_ScrollScreenVert                ; Set this again, apparently.
+    STA PPU_ScrollScreenVert                ; Set the vertical scroll to 0.
 
 
     ;
@@ -18977,15 +19045,15 @@ RETURN_EB3E:                                ; [$eb3e]
 ;     Game_RunDoorRequirementHandler
 ;
 DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:         ; [$eb3f]
-    .word RETURN_EB3E-1                     ; [0]: [0]: No key, return
-    .word Game_OpenDoorWithAKey-1           ; [0]: [1]: "A" Key
-    .word Game_OpenDoorWithKKey-1           ; [0]: [2]: "K" Key
-    .word Game_OpenDoorWithQKey-1           ; [0]: [3]: "Q" Key
-    .word Game_OpenDoorWithJKey-1           ; [0]: [4]: "J" Key
-    .word Game_OpenDoorWithJoKey-1          ; [0]: [5]: "Jo" Key
-    .word Game_OpenDoorWithRingOfElf-1      ; [0]: [6]: Ring of Elf
-    .word Game_OpenDoorWithRingOfDworf-1    ; [0]: [7]: Ring of Dworf
-    .word Game_OpenDoorWithDemonsRing-1     ; [0]: [8]: Demon's Ring
+    .word (RETURN_EB3E-1) & $FFFF           ; [0]: [0]: No key, return
+    .word (Game_OpenDoorWithAKey-1) & $FFFF ; [0]: [1]: "A" Key
+    .word (Game_OpenDoorWithKKey-1) & $FFFF ; [0]: [2]: "K" Key
+    .word (Game_OpenDoorWithQKey-1) & $FFFF ; [0]: [3]: "Q" Key
+    .word (Game_OpenDoorWithJKey-1) & $FFFF ; [0]: [4]: "J" Key
+    .word (Game_OpenDoorWithJoKey-1) & $FFFF ; [0]: [5]: "Jo" Key
+    .word (Game_OpenDoorWithRingOfElf-1) & $FFFF ; [0]: [6]: Ring of Elf
+    .word (Game_OpenDoorWithRingOfDworf-1) & $FFFF ; [0]: [7]: Ring of Dworf
+    .word (Game_OpenDoorWithDemonsRing-1) & $FFFF ; [0]: [8]: Demon's Ring
 
 
 ;============================================================================
@@ -19024,7 +19092,7 @@ Game_OpenDoorWithAKey:                      ; [$eb51]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb60]
@@ -19067,7 +19135,7 @@ Game_OpenDoorWithKKey:                      ; [$eb61]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb70]
@@ -19110,7 +19178,7 @@ Game_OpenDoorWithQKey:                      ; [$eb71]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb80]
@@ -19153,7 +19221,7 @@ Game_OpenDoorWithJKey:                      ; [$eb81]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb90]
@@ -19196,7 +19264,7 @@ Game_OpenDoorWithJoKey:                     ; [$eb91]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eba0]
@@ -19238,7 +19306,7 @@ Game_OpenDoorWithRingOfElf:                 ; [$eba1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebb0]
@@ -19280,7 +19348,7 @@ Game_OpenDoorWithRingOfDworf:               ; [$ebb1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebc0]
@@ -19322,7 +19390,7 @@ Game_OpenDoorWithDemonsRing:                ; [$ebc1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd0]
@@ -19350,7 +19418,7 @@ Game_UnlockDoorWithUsableItem:              ; [$ebd1]
     LDA #$84                                ; 0x84 == Used key IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word IScripts_Begin-1                  ; Address =
+    .word (IScripts_Begin-1) & $FFFF        ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd9]
@@ -21089,13 +21157,16 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 ;     GameLoop_RunScreenEventHandlers
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
-    .word ScreenEvents_HandlePathToMasconEvent-1 ; [0]: Handle pushable block
-                                                 ; on path to Mascon.
-    .word ScreenEvents_HandleBoss-1         ; [1]: Handle a standard boss
-                                            ; battle.
-    .word ScreenEvents_HandleFinalBossKilled-1 ; [2]: Handle end-game
-                                               ; sequence after killing the
-                                               ; final boss.
+    .word (ScreenEvents_HandlePathToMasconEvent-1) & $FFFF ; [0]: Handle
+                                                           ; pushable block
+                                                           ; on path to
+                                                           ; Mascon.
+    .word (ScreenEvents_HandleBoss-1) & $FFFF ; [1]: Handle a standard boss
+                                              ; battle.
+    .word (ScreenEvents_HandleFinalBossKilled-1) & $FFFF ; [2]: Handle
+                                                         ; end-game sequence
+                                                         ; after killing the
+                                                         ; final boss.
 
 
 ;============================================================================
@@ -22567,8 +22638,8 @@ IScripts_ClearPortraitImage:                ; [$f281]
     JSR MMC1_LoadBankAndJump                ; Load sprite imagesin bank 14.
     .byte BANK_14_LOGIC                     ; Bank = 14 Address =
                                             ; GameLoop_LoadSpriteImages
-    .word GameLoop_LoadSpriteImages-1       ; GameLoop_LoadSpriteImages
-                                            ; [$PRG15_MIRROR::f296]
+    .word (GameLoop_LoadSpriteImages-1) & $FFFF ; GameLoop_LoadSpriteImages
+                                                ; [$PRG15_MIRROR::f296]
 
   @_afterFarJump:                           ; [$f298]
     RTS
@@ -26991,7 +27062,7 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word StartScreen_Draw-1                ; Address =
+    .word (StartScreen_Draw-1) & $FFFF      ; Address =
                                             ; StartScreen_Draw
 
 
@@ -27008,8 +27079,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word StartScreen_CheckHandleInput-1    ; Address =
-                                            ; StartScreen_CheckHandleInput
+    .word (StartScreen_CheckHandleInput-1) & $FFFF ; Address =
+                                                   ; StartScreen_CheckHandleInput
 
   @_afterCheckHandleInputFarJump:           ; [$fc7a]
     LDA Joy1_ChangedButtonMask              ; Check the changed controller 1
@@ -27037,7 +27108,7 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word PasswordScreen_Show-1             ; Address =
+    .word (PasswordScreen_Show-1) & $FFFF   ; Address =
                                             ; PasswordScreen_Show
 
 
@@ -27047,8 +27118,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_afterPasswordScreenShow:                ; [$fc8f]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word Player_SetInitialExpAndGold-1     ; Address =
-                                            ; Player_SetInitialExpAndGold
+    .word (Player_SetInitialExpAndGold-1) & $FFFF ; Address =
+                                                  ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$fc95]
     JMP Player_Spawn
@@ -27062,8 +27133,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_startGame:                              ; [$fc98]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word SplashAnimation_RunIntro-1        ; Address =
-                                            ; SplashAnimation_RunIntro
+    .word (SplashAnimation_RunIntro-1) & $FFFF ; Address =
+                                               ; SplashAnimation_RunIntro
 
 
     ;
@@ -27072,8 +27143,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_afterRunIntroFarJump:                   ; [$fc9e]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word Player_SetStartGameState-1        ; Address =
-                                            ; Player_SetStartGameState
+    .word (Player_SetStartGameState-1) & $FFFF ; Address =
+                                               ; Player_SetStartGameState
 
 
     ;

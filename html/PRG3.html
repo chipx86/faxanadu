@@ -137,14 +137,14 @@ pre {
 ;============================================================================
 </div><span class="l"></span>
 <span class="l"><span class="cd"><span class="i">.segment "PRG3"</span></span></span>
-<span class="l"><span class="cd"><span class="i">.ORG $8000</span></span></span>
+<span class="l"><span class="cd"><span class="i">.reloc</span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="AREAS_TABLE_PTR"></a><div class="cp">;============================================================================
 ; Relative offset to the area tables.
 ;============================================================================
 </div><span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><a href="#AREAS_TABLE_PTR" class="la">AREAS_TABLE_PTR:</a><span class="ce">; [$8000]</span></span>
-<span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#AREA_TABLES">AREA_TABLES</a>-$8000</span></span><span class="ce">; <a href="#AREA_TABLES">AREA_TABLES</a> [$PRG3::8000]</span></span>
+<span class="l"><a class="anc" name="8000" href="#8000">[8000]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#AREA_TABLES">AREA_TABLES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#AREA_TABLES">AREA_TABLES</a> [$PRG3::8000]</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="AREA_TABLES"></a><div class="cp">;============================================================================
@@ -159,14 +159,14 @@ pre {
 ;     <a href="#AREAS_TABLE_PTR">AREAS_TABLE_PTR</a> [$PRG3::8000]
 ;
 </div><span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><a href="#AREA_TABLES" class="la">AREA_TABLES:</a><span class="ce">; [$8002]</span></span>
-<span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a> [$PRG3::8002]</span></span>
-<span class="l"><a class="anc" name="8004" href="#8004">[8004]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_AREA_DATA">TRUNK_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_AREA_DATA">TRUNK_AREA_DATA</a> [$PRG3::8004]</span></span>
-<span class="l"><a class="anc" name="8006" href="#8006">[8006]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_AREA_DATA">MIST_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#MIST_AREA_DATA">MIST_AREA_DATA</a> [$PRG3::8006]</span></span>
-<span class="l"><a class="anc" name="8008" href="#8008">[8008]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_AREA_DATA">TOWNS_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#TOWNS_AREA_DATA">TOWNS_AREA_DATA</a> [$PRG3::8008]</span></span>
-<span class="l"><a class="anc" name="800a" href="#800a">[800a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_AREA_DATA">BUILDINGS_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#BUILDINGS_AREA_DATA">BUILDINGS_AREA_DATA</a> [$PRG3::800a]</span></span>
-<span class="l"><a class="anc" name="800c" href="#800c">[800c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_AREA_DATA">BRANCH_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#BRANCH_AREA_DATA">BRANCH_AREA_DATA</a> [$PRG3::800c]</span></span>
-<span class="l"><a class="anc" name="800e" href="#800e">[800e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_AREA_DATA">DARTMOOR_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_AREA_DATA">DARTMOOR_AREA_DATA</a> [$PRG3::800e]</span></span>
-<span class="l"><a class="anc" name="8010" href="#8010">[8010]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_AREA_DATA">ZENITH_AREA_DATA</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_AREA_DATA">ZENITH_AREA_DATA</a> [$PRG3::8010]</span></span>
+<span class="l"><a class="anc" name="8002" href="#8002">[8002]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a> [$PRG3::8002]</span></span>
+<span class="l"><a class="anc" name="8004" href="#8004">[8004]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_AREA_DATA">TRUNK_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_AREA_DATA">TRUNK_AREA_DATA</a> [$PRG3::8004]</span></span>
+<span class="l"><a class="anc" name="8006" href="#8006">[8006]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_AREA_DATA">MIST_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#MIST_AREA_DATA">MIST_AREA_DATA</a> [$PRG3::8006]</span></span>
+<span class="l"><a class="anc" name="8008" href="#8008">[8008]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_AREA_DATA">TOWNS_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TOWNS_AREA_DATA">TOWNS_AREA_DATA</a> [$PRG3::8008]</span></span>
+<span class="l"><a class="anc" name="800a" href="#800a">[800a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_AREA_DATA">BUILDINGS_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#BUILDINGS_AREA_DATA">BUILDINGS_AREA_DATA</a> [$PRG3::800a]</span></span>
+<span class="l"><a class="anc" name="800c" href="#800c">[800c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_AREA_DATA">BRANCH_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#BRANCH_AREA_DATA">BRANCH_AREA_DATA</a> [$PRG3::800c]</span></span>
+<span class="l"><a class="anc" name="800e" href="#800e">[800e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_AREA_DATA">DARTMOOR_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_AREA_DATA">DARTMOOR_AREA_DATA</a> [$PRG3::800e]</span></span>
+<span class="l"><a class="anc" name="8010" href="#8010">[8010]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_AREA_DATA">ZENITH_AREA_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_AREA_DATA">ZENITH_AREA_DATA</a> [$PRG3::8010]</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="EOLIS_AREA_DATA"></a><div class="cp">;============================================================================
@@ -181,22 +181,22 @@ pre {
 ;     <a href="#AREA_TABLES">AREA_TABLES</a> [$PRG3::8002]
 ;
 </div><span class="l"><a class="anc" name="8012" href="#8012">[8012]</a><a href="#EOLIS_AREA_DATA" class="la">EOLIS_AREA_DATA:</a><span class="ce">; [$8012]</span></span>
-<span class="l"><a class="anc" name="8012" href="#8012">[8012]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_AREA_DATA_blockAttrsRelPtr">EOLIS_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA.blockAttrsRelPtr">EOLIS_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::8012]</span></span>
-<span class="l"><a class="anc" name="8014" href="#8014">[8014]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_PROPERTIES">EOLIS_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_PROPERTIES">EOLIS_BLOCK_PROPERTIES</a> [$PRG3::8014]</span></span>
-<span class="l"><a class="anc" name="8016" href="#8016">[8016]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_SCROLL_DATA">EOLIS_SCROLL_DATA</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_SCROLL_DATA">EOLIS_SCROLL_DATA</a> [$PRG3::8016]</span></span>
-<span class="l"><a class="anc" name="8018" href="#8018">[8018]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_DOOR_LOCATIONS">EOLIS_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_DOOR_LOCATIONS">EOLIS_DOOR_LOCATIONS</a> [$PRG3::8018]</span></span>
-<span class="l"><a class="anc" name="801a" href="#801a">[801a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_DOOR_DESTINATIONS">EOLIS_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_DOOR_DESTINATIONS">EOLIS_DOOR_DESTINATIONS</a> [$PRG3::801a]</span></span>
+<span class="l"><a class="anc" name="8012" href="#8012">[8012]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_AREA_DATA_blockAttrsRelPtr">EOLIS_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_AREA_DATA.blockAttrsRelPtr">EOLIS_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::8012]</span></span>
+<span class="l"><a class="anc" name="8014" href="#8014">[8014]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_PROPERTIES">EOLIS_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_PROPERTIES">EOLIS_BLOCK_PROPERTIES</a> [$PRG3::8014]</span></span>
+<span class="l"><a class="anc" name="8016" href="#8016">[8016]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_SCROLL_DATA">EOLIS_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_SCROLL_DATA">EOLIS_SCROLL_DATA</a> [$PRG3::8016]</span></span>
+<span class="l"><a class="anc" name="8018" href="#8018">[8018]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_DOOR_LOCATIONS">EOLIS_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_DOOR_LOCATIONS">EOLIS_DOOR_LOCATIONS</a> [$PRG3::8018]</span></span>
+<span class="l"><a class="anc" name="801a" href="#801a">[801a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_DOOR_DESTINATIONS">EOLIS_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_DOOR_DESTINATIONS">EOLIS_DOOR_DESTINATIONS</a> [$PRG3::801a]</span></span>
 <span class="l"></span>
 <a name="EOLIS_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#EOLIS_AREA_DATA">EOLIS_AREA_DATA</a> [$PRG3::8012]
 ;
 </div><span class="l"><a class="anc" name="801c" href="#801c">[801c]</a><a href="#EOLIS_AREA_DATA_blockAttrsRelPtr" class="la">EOLIS_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$801c]</span></span>
-<span class="l"><a class="anc" name="801c" href="#801c">[801c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_ATTRIBUTES">EOLIS_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_ATTRIBUTES">EOLIS_BLOCK_ATTRIBUTES</a> [$PRG3::801c]</span></span>
-<span class="l"><a class="anc" name="801e" href="#801e">[801e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_DATA_01">EOLIS_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_01">EOLIS_BLOCK_DATA_01</a> [$PRG3::801e]</span></span>
-<span class="l"><a class="anc" name="8020" href="#8020">[8020]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_DATA_02">EOLIS_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_02">EOLIS_BLOCK_DATA_02</a> [$PRG3::8020]</span></span>
-<span class="l"><a class="anc" name="8022" href="#8022">[8022]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_DATA_03">EOLIS_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_03">EOLIS_BLOCK_DATA_03</a> [$PRG3::8022]</span></span>
-<span class="l"><a class="anc" name="8024" href="#8024">[8024]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#EOLIS_BLOCK_DATA_04">EOLIS_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_04">EOLIS_BLOCK_DATA_04</a> [$PRG3::8024]</span></span>
+<span class="l"><a class="anc" name="801c" href="#801c">[801c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_ATTRIBUTES">EOLIS_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_ATTRIBUTES">EOLIS_BLOCK_ATTRIBUTES</a> [$PRG3::801c]</span></span>
+<span class="l"><a class="anc" name="801e" href="#801e">[801e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_DATA_01">EOLIS_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_01">EOLIS_BLOCK_DATA_01</a> [$PRG3::801e]</span></span>
+<span class="l"><a class="anc" name="8020" href="#8020">[8020]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_DATA_02">EOLIS_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_02">EOLIS_BLOCK_DATA_02</a> [$PRG3::8020]</span></span>
+<span class="l"><a class="anc" name="8022" href="#8022">[8022]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_DATA_03">EOLIS_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_03">EOLIS_BLOCK_DATA_03</a> [$PRG3::8022]</span></span>
+<span class="l"><a class="anc" name="8024" href="#8024">[8024]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#EOLIS_BLOCK_DATA_04">EOLIS_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#EOLIS_BLOCK_DATA_04">EOLIS_BLOCK_DATA_04</a> [$PRG3::8024]</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="EOLIS_BLOCK_ATTRIBUTES"></a><div class="cp">;============================================================================
@@ -1190,22 +1190,22 @@ pre {
 <span class="l"><a class="anc" name="840b" href="#840b">[840b]</a><span class="cd"><span class="i">.byte</span> <span class="o">$06,$08,$06,$00,$07,$00,$06,$00</span></span><span class="ce">; [$840b] undefined</span></span>
 <span class="l"></span>
 <a name="TRUNK_AREA_DATA"></a><span class="l"><a class="anc" name="8413" href="#8413">[8413]</a><a href="#TRUNK_AREA_DATA" class="la">TRUNK_AREA_DATA:</a><span class="ce">; [$8413]</span></span>
-<span class="l"><a class="anc" name="8413" href="#8413">[8413]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_AREA_DATA_blockAttrsRelPtr">TRUNK_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_AREA_DATA.blockAttrsRelPtr">TRUNK_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::8413]</span></span>
-<span class="l"><a class="anc" name="8415" href="#8415">[8415]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_PROPERTIES">TRUNK_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_PROPERTIES">TRUNK_BLOCK_PROPERTIES</a> [$PRG3::8415]</span></span>
-<span class="l"><a class="anc" name="8417" href="#8417">[8417]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_SCROLL_DATA">TRUNK_SCROLL_DATA</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_SCROLL_DATA">TRUNK_SCROLL_DATA</a> [$PRG3::8417]</span></span>
-<span class="l"><a class="anc" name="8419" href="#8419">[8419]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_DOOR_LOCATIONS">TRUNK_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_DOOR_LOCATIONS">TRUNK_DOOR_LOCATIONS</a> [$PRG3::8419]</span></span>
-<span class="l"><a class="anc" name="841b" href="#841b">[841b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_DOOR_DESTINATIONS">TRUNK_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_DOOR_DESTINATIONS">TRUNK_DOOR_DESTINATIONS</a> [$PRG3::841b]</span></span>
+<span class="l"><a class="anc" name="8413" href="#8413">[8413]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_AREA_DATA_blockAttrsRelPtr">TRUNK_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_AREA_DATA.blockAttrsRelPtr">TRUNK_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::8413]</span></span>
+<span class="l"><a class="anc" name="8415" href="#8415">[8415]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_PROPERTIES">TRUNK_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_PROPERTIES">TRUNK_BLOCK_PROPERTIES</a> [$PRG3::8415]</span></span>
+<span class="l"><a class="anc" name="8417" href="#8417">[8417]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_SCROLL_DATA">TRUNK_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_SCROLL_DATA">TRUNK_SCROLL_DATA</a> [$PRG3::8417]</span></span>
+<span class="l"><a class="anc" name="8419" href="#8419">[8419]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_DOOR_LOCATIONS">TRUNK_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_DOOR_LOCATIONS">TRUNK_DOOR_LOCATIONS</a> [$PRG3::8419]</span></span>
+<span class="l"><a class="anc" name="841b" href="#841b">[841b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_DOOR_DESTINATIONS">TRUNK_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_DOOR_DESTINATIONS">TRUNK_DOOR_DESTINATIONS</a> [$PRG3::841b]</span></span>
 <span class="l"></span>
 <a name="TRUNK_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#TRUNK_AREA_DATA">TRUNK_AREA_DATA</a> [$PRG3::8413]
 ;
 </div><span class="l"><a class="anc" name="841d" href="#841d">[841d]</a><a href="#TRUNK_AREA_DATA_blockAttrsRelPtr" class="la">TRUNK_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$841d]</span></span>
-<span class="l"><a class="anc" name="841d" href="#841d">[841d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_ATTRIBUTES">TRUNK_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_ATTRIBUTES">TRUNK_BLOCK_ATTRIBUTES</a> [$PRG3::841d]</span></span>
-<span class="l"><a class="anc" name="841f" href="#841f">[841f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_DATA_01">TRUNK_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_01">TRUNK_BLOCK_DATA_01</a> [$PRG3::841f]</span></span>
-<span class="l"><a class="anc" name="8421" href="#8421">[8421]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_DATA_02">TRUNK_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_02">TRUNK_BLOCK_DATA_02</a> [$PRG3::8421]</span></span>
-<span class="l"><a class="anc" name="8423" href="#8423">[8423]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_DATA_03">TRUNK_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_03">TRUNK_BLOCK_DATA_03</a> [$PRG3::8423]</span></span>
-<span class="l"><a class="anc" name="8425" href="#8425">[8425]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TRUNK_BLOCK_DATA_04">TRUNK_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_04">TRUNK_BLOCK_DATA_04</a> [$PRG3::8425]</span></span>
+<span class="l"><a class="anc" name="841d" href="#841d">[841d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_ATTRIBUTES">TRUNK_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_ATTRIBUTES">TRUNK_BLOCK_ATTRIBUTES</a> [$PRG3::841d]</span></span>
+<span class="l"><a class="anc" name="841f" href="#841f">[841f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_DATA_01">TRUNK_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_01">TRUNK_BLOCK_DATA_01</a> [$PRG3::841f]</span></span>
+<span class="l"><a class="anc" name="8421" href="#8421">[8421]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_DATA_02">TRUNK_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_02">TRUNK_BLOCK_DATA_02</a> [$PRG3::8421]</span></span>
+<span class="l"><a class="anc" name="8423" href="#8423">[8423]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_DATA_03">TRUNK_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_03">TRUNK_BLOCK_DATA_03</a> [$PRG3::8423]</span></span>
+<span class="l"><a class="anc" name="8425" href="#8425">[8425]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TRUNK_BLOCK_DATA_04">TRUNK_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#TRUNK_BLOCK_DATA_04">TRUNK_BLOCK_DATA_04</a> [$PRG3::8425]</span></span>
 <span class="l"></span>
 <a name="TRUNK_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -2520,22 +2520,22 @@ pre {
 ; 136 tiles (0x8A2E - 0x89A6)
 ;============================================================================
 </div><span class="l"><a class="anc" name="890a" href="#890a">[890a]</a><a href="#MIST_AREA_DATA" class="la">MIST_AREA_DATA:</a><span class="ce">; [$890a]</span></span>
-<span class="l"><a class="anc" name="890a" href="#890a">[890a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_AREA_DATA_blockAttrsRelPtr">MIST_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; Block attributes pointer</span></span>
-<span class="l"><a class="anc" name="890c" href="#890c">[890c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_PROPERTIES">MIST_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; Block properties</span></span>
-<span class="l"><a class="anc" name="890e" href="#890e">[890e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_SCROLL_DATA">MIST_SCROLL_DATA</a>-$8000</span></span><span class="ce">; Scroll data</span></span>
-<span class="l"><a class="anc" name="8910" href="#8910">[8910]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_DOOR_LOCATIONS">MIST_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; Door locations</span></span>
-<span class="l"><a class="anc" name="8912" href="#8912">[8912]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_DOOR_DESTINATIONS">MIST_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; Door destinations</span></span>
+<span class="l"><a class="anc" name="890a" href="#890a">[890a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_AREA_DATA_blockAttrsRelPtr">MIST_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes pointer</span></span>
+<span class="l"><a class="anc" name="890c" href="#890c">[890c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_PROPERTIES">MIST_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block properties</span></span>
+<span class="l"><a class="anc" name="890e" href="#890e">[890e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_SCROLL_DATA">MIST_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Scroll data</span></span>
+<span class="l"><a class="anc" name="8910" href="#8910">[8910]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_DOOR_LOCATIONS">MIST_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door locations</span></span>
+<span class="l"><a class="anc" name="8912" href="#8912">[8912]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_DOOR_DESTINATIONS">MIST_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door destinations</span></span>
 <span class="l"></span>
 <a name="MIST_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#MIST_AREA_DATA">MIST_AREA_DATA</a> [$PRG3::890a]
 ;
 </div><span class="l"><a class="anc" name="8914" href="#8914">[8914]</a><a href="#MIST_AREA_DATA_blockAttrsRelPtr" class="la">MIST_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$8914]</span></span>
-<span class="l"><a class="anc" name="8914" href="#8914">[8914]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_ATTRIBUTES">MIST_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; Block attributes</span></span>
-<span class="l"><a class="anc" name="8916" href="#8916">[8916]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_DATA_01">MIST_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; Block data 1</span></span>
-<span class="l"><a class="anc" name="8918" href="#8918">[8918]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_DATA_02">MIST_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; Block data 2</span></span>
-<span class="l"><a class="anc" name="891a" href="#891a">[891a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_DATA_03">MIST_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; Block data 3</span></span>
-<span class="l"><a class="anc" name="891c" href="#891c">[891c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#MIST_BLOCK_DATA_04">MIST_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; Block data 4</span></span>
+<span class="l"><a class="anc" name="8914" href="#8914">[8914]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_ATTRIBUTES">MIST_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes</span></span>
+<span class="l"><a class="anc" name="8916" href="#8916">[8916]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_DATA_01">MIST_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 1</span></span>
+<span class="l"><a class="anc" name="8918" href="#8918">[8918]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_DATA_02">MIST_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 2</span></span>
+<span class="l"><a class="anc" name="891a" href="#891a">[891a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_DATA_03">MIST_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 3</span></span>
+<span class="l"><a class="anc" name="891c" href="#891c">[891c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#MIST_BLOCK_DATA_04">MIST_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 4</span></span>
 <span class="l"></span>
 <a name="MIST_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -3807,26 +3807,84 @@ pre {
 ;     <a href="#MIST_AREA_DATA">MIST_AREA_DATA</a> [$PRG3::8912]
 ;
 </div><span class="l"><a class="anc" name="8ddf" href="#8ddf">[8ddf]</a><a href="#MIST_DOOR_DESTINATIONS" class="la">MIST_DOOR_DESTINATIONS:</a><span class="ce">; [$8ddf]</span></span>
-<span class="l"><a class="anc" name="8ddf" href="#8ddf">[8ddf]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b3e,$0003,$0b45,$0002</span></span><span class="ce">; [$8ddf] ushort</span></span>
-<span class="l"><a class="anc" name="8de7" href="#8de7">[8de7]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b50,$0002,$0b4f,$0003</span></span><span class="ce">; [$8de7] ushort</span></span>
-<span class="l"><a class="anc" name="8def" href="#8def">[8def]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a00,$0000,$0a17,$0000</span></span><span class="ce">; [$8def] ushort</span></span>
-<span class="l"><a class="anc" name="8df7" href="#8df7">[8df7]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a01,$0000,$0a20,$0000</span></span><span class="ce">; [$8df7] ushort</span></span>
-<span class="l"><a class="anc" name="8dff" href="#8dff">[8dff]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$04fd,$00ce</span></span><span class="ce">; [$8dff] ushort</span></span>
-<span class="l"><a class="anc" name="8e07" href="#8e07">[8e07]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00be,$0000</span></span><span class="ce">; [$8e07] ushort</span></span>
-<span class="l"><a class="anc" name="8e0f" href="#8e0f">[8e0f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$007e,$0013</span></span><span class="ce">; [$8e0f] ushort</span></span>
-<span class="l"><a class="anc" name="8e17" href="#8e17">[8e17]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$007f,$0000</span></span><span class="ce">; [$8e17] ushort</span></span>
-<span class="l"><a class="anc" name="8e1f" href="#8e1f">[8e1f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$0017,$000d</span></span><span class="ce">; [$8e1f] ushort</span></span>
-<span class="l"><a class="anc" name="8e27" href="#8e27">[8e27]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$0092,$0054</span></span><span class="ce">; [$8e27] ushort</span></span>
-<span class="l"><a class="anc" name="8e2f" href="#8e2f">[8e2f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00e2,$0091</span></span><span class="ce">; [$8e2f] ushort</span></span>
-<span class="l"><a class="anc" name="8e37" href="#8e37">[8e37]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00b8,$00a1</span></span><span class="ce">; [$8e37] ushort</span></span>
-<span class="l"><a class="anc" name="8e3f" href="#8e3f">[8e3f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$004a,$001d</span></span><span class="ce">; [$8e3f] ushort</span></span>
-<span class="l"><a class="anc" name="8e47" href="#8e47">[8e47]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00cf,$0068</span></span><span class="ce">; [$8e47] ushort</span></span>
-<span class="l"><a class="anc" name="8e4f" href="#8e4f">[8e4f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00f0,$00d4</span></span><span class="ce">; [$8e4f] ushort</span></span>
-<span class="l"><a class="anc" name="8e57" href="#8e57">[8e57]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000,$0000,$00d4,$0000</span></span><span class="ce">; [$8e57] ushort</span></span>
-<span class="l"><a class="anc" name="8e5f" href="#8e5f">[8e5f]</a><span class="cd"><span class="i">.word</span> <span class="o">$091c,$0000,$031d,$0000</span></span><span class="ce">; [$8e5f] ushort</span></span>
-<span class="l"><a class="anc" name="8e67" href="#8e67">[8e67]</a><span class="cd"><span class="i">.word</span> <span class="o">$011e,$0000,$021f,$0000</span></span><span class="ce">; [$8e67] ushort</span></span>
-<span class="l"><a class="anc" name="8e6f" href="#8e6f">[8e6f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0420,$0000,$0621,$0000</span></span><span class="ce">; [$8e6f] ushort</span></span>
-<span class="l"><a class="anc" name="8e77" href="#8e77">[8e77]</a><span class="cd"><span class="i">.word</span> <span class="o">$0622,$0000</span></span><span class="ce">; [$8e77] ushort</span></span>
+<span class="l"><a class="anc" name="8ddf" href="#8ddf">[8ddf]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b3e</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><a class="anc" name="8de1" href="#8de1">[8de1]</a><span class="cd"><span class="i">.word</span> <span class="o">$0003</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><a class="anc" name="8de3" href="#8de3">[8de3]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b45</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><a class="anc" name="8de5" href="#8de5">[8de5]</a><span class="cd"><span class="i">.word</span> <span class="o">$0002</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><a class="anc" name="8de7" href="#8de7">[8de7]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b50</span></span><span class="ce">; [4]:</span></span>
+<span class="l"><a class="anc" name="8de9" href="#8de9">[8de9]</a><span class="cd"><span class="i">.word</span> <span class="o">$0002</span></span><span class="ce">; [5]:</span></span>
+<span class="l"><a class="anc" name="8deb" href="#8deb">[8deb]</a><span class="cd"><span class="i">.word</span> <span class="o">$0b4f</span></span><span class="ce">; [6]:</span></span>
+<span class="l"><a class="anc" name="8ded" href="#8ded">[8ded]</a><span class="cd"><span class="i">.word</span> <span class="o">$0003</span></span><span class="ce">; [7]:</span></span>
+<span class="l"><a class="anc" name="8def" href="#8def">[8def]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a00</span></span><span class="ce">; [8]:</span></span>
+<span class="l"><a class="anc" name="8df1" href="#8df1">[8df1]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [9]:</span></span>
+<span class="l"><a class="anc" name="8df3" href="#8df3">[8df3]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a17</span></span><span class="ce">; [10]:</span></span>
+<span class="l"><a class="anc" name="8df5" href="#8df5">[8df5]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [11]:</span></span>
+<span class="l"><a class="anc" name="8df7" href="#8df7">[8df7]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a01</span></span><span class="ce">; [12]:</span></span>
+<span class="l"><a class="anc" name="8df9" href="#8df9">[8df9]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [13]:</span></span>
+<span class="l"><a class="anc" name="8dfb" href="#8dfb">[8dfb]</a><span class="cd"><span class="i">.word</span> <span class="o">$0a20</span></span><span class="ce">; [14]:</span></span>
+<span class="l"><a class="anc" name="8dfd" href="#8dfd">[8dfd]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [15]:</span></span>
+<span class="l"><a class="anc" name="8dff" href="#8dff">[8dff]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [16]:</span></span>
+<span class="l"><a class="anc" name="8e01" href="#8e01">[8e01]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [17]:</span></span>
+<span class="l"><a class="anc" name="8e03" href="#8e03">[8e03]</a><span class="cd"><span class="i">.word</span> <span class="o">$04fd</span></span><span class="ce">; [18]:</span></span>
+<span class="l"><a class="anc" name="8e05" href="#8e05">[8e05]</a><span class="cd"><span class="i">.word</span> <span class="o">$00ce</span></span><span class="ce">; [19]:</span></span>
+<span class="l"><a class="anc" name="8e07" href="#8e07">[8e07]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [20]:</span></span>
+<span class="l"><a class="anc" name="8e09" href="#8e09">[8e09]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [21]:</span></span>
+<span class="l"><a class="anc" name="8e0b" href="#8e0b">[8e0b]</a><span class="cd"><span class="i">.word</span> <span class="o">$00be</span></span><span class="ce">; [22]:</span></span>
+<span class="l"><a class="anc" name="8e0d" href="#8e0d">[8e0d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [23]:</span></span>
+<span class="l"><a class="anc" name="8e0f" href="#8e0f">[8e0f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [24]:</span></span>
+<span class="l"><a class="anc" name="8e11" href="#8e11">[8e11]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [25]:</span></span>
+<span class="l"><a class="anc" name="8e13" href="#8e13">[8e13]</a><span class="cd"><span class="i">.word</span> <span class="o">$007e</span></span><span class="ce">; [26]:</span></span>
+<span class="l"><a class="anc" name="8e15" href="#8e15">[8e15]</a><span class="cd"><span class="i">.word</span> <span class="o">$0013</span></span><span class="ce">; [27]:</span></span>
+<span class="l"><a class="anc" name="8e17" href="#8e17">[8e17]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [28]:</span></span>
+<span class="l"><a class="anc" name="8e19" href="#8e19">[8e19]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [29]:</span></span>
+<span class="l"><a class="anc" name="8e1b" href="#8e1b">[8e1b]</a><span class="cd"><span class="i">.word</span> <span class="o">$007f</span></span><span class="ce">; [30]:</span></span>
+<span class="l"><a class="anc" name="8e1d" href="#8e1d">[8e1d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [31]:</span></span>
+<span class="l"><a class="anc" name="8e1f" href="#8e1f">[8e1f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [32]:</span></span>
+<span class="l"><a class="anc" name="8e21" href="#8e21">[8e21]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [33]:</span></span>
+<span class="l"><a class="anc" name="8e23" href="#8e23">[8e23]</a><span class="cd"><span class="i">.word</span> <span class="o">$0017</span></span><span class="ce">; [34]:</span></span>
+<span class="l"><a class="anc" name="8e25" href="#8e25">[8e25]</a><span class="cd"><span class="i">.word</span> <span class="o">$000d</span></span><span class="ce">; [35]:</span></span>
+<span class="l"><a class="anc" name="8e27" href="#8e27">[8e27]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [36]:</span></span>
+<span class="l"><a class="anc" name="8e29" href="#8e29">[8e29]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [37]:</span></span>
+<span class="l"><a class="anc" name="8e2b" href="#8e2b">[8e2b]</a><span class="cd"><span class="i">.word</span> <span class="o">$0092</span></span><span class="ce">; [38]:</span></span>
+<span class="l"><a class="anc" name="8e2d" href="#8e2d">[8e2d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0054</span></span><span class="ce">; [39]:</span></span>
+<span class="l"><a class="anc" name="8e2f" href="#8e2f">[8e2f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [40]:</span></span>
+<span class="l"><a class="anc" name="8e31" href="#8e31">[8e31]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [41]:</span></span>
+<span class="l"><a class="anc" name="8e33" href="#8e33">[8e33]</a><span class="cd"><span class="i">.word</span> <span class="o">$00e2</span></span><span class="ce">; [42]:</span></span>
+<span class="l"><a class="anc" name="8e35" href="#8e35">[8e35]</a><span class="cd"><span class="i">.word</span> <span class="o">$0091</span></span><span class="ce">; [43]:</span></span>
+<span class="l"><a class="anc" name="8e37" href="#8e37">[8e37]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [44]:</span></span>
+<span class="l"><a class="anc" name="8e39" href="#8e39">[8e39]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [45]:</span></span>
+<span class="l"><a class="anc" name="8e3b" href="#8e3b">[8e3b]</a><span class="cd"><span class="i">.word</span> <span class="o">$00b8</span></span><span class="ce">; [46]:</span></span>
+<span class="l"><a class="anc" name="8e3d" href="#8e3d">[8e3d]</a><span class="cd"><span class="i">.word</span> <span class="o">$00a1</span></span><span class="ce">; [47]:</span></span>
+<span class="l"><a class="anc" name="8e3f" href="#8e3f">[8e3f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [48]:</span></span>
+<span class="l"><a class="anc" name="8e41" href="#8e41">[8e41]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [49]:</span></span>
+<span class="l"><a class="anc" name="8e43" href="#8e43">[8e43]</a><span class="cd"><span class="i">.word</span> <span class="o">$004a</span></span><span class="ce">; [50]:</span></span>
+<span class="l"><a class="anc" name="8e45" href="#8e45">[8e45]</a><span class="cd"><span class="i">.word</span> <span class="o">$001d</span></span><span class="ce">; [51]:</span></span>
+<span class="l"><a class="anc" name="8e47" href="#8e47">[8e47]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [52]:</span></span>
+<span class="l"><a class="anc" name="8e49" href="#8e49">[8e49]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [53]:</span></span>
+<span class="l"><a class="anc" name="8e4b" href="#8e4b">[8e4b]</a><span class="cd"><span class="i">.word</span> <span class="o">$00cf</span></span><span class="ce">; [54]:</span></span>
+<span class="l"><a class="anc" name="8e4d" href="#8e4d">[8e4d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0068</span></span><span class="ce">; [55]:</span></span>
+<span class="l"><a class="anc" name="8e4f" href="#8e4f">[8e4f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [56]:</span></span>
+<span class="l"><a class="anc" name="8e51" href="#8e51">[8e51]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [57]:</span></span>
+<span class="l"><a class="anc" name="8e53" href="#8e53">[8e53]</a><span class="cd"><span class="i">.word</span> <span class="o">$00f0</span></span><span class="ce">; [58]:</span></span>
+<span class="l"><a class="anc" name="8e55" href="#8e55">[8e55]</a><span class="cd"><span class="i">.word</span> <span class="o">$00d4</span></span><span class="ce">; [59]:</span></span>
+<span class="l"><a class="anc" name="8e57" href="#8e57">[8e57]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [60]:</span></span>
+<span class="l"><a class="anc" name="8e59" href="#8e59">[8e59]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [61]:</span></span>
+<span class="l"><a class="anc" name="8e5b" href="#8e5b">[8e5b]</a><span class="cd"><span class="i">.word</span> <span class="o">$00d4</span></span><span class="ce">; [62]:</span></span>
+<span class="l"><a class="anc" name="8e5d" href="#8e5d">[8e5d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [63]:</span></span>
+<span class="l"><a class="anc" name="8e5f" href="#8e5f">[8e5f]</a><span class="cd"><span class="i">.word</span> <span class="o">$091c</span></span><span class="ce">; [64]:</span></span>
+<span class="l"><a class="anc" name="8e61" href="#8e61">[8e61]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [65]:</span></span>
+<span class="l"><a class="anc" name="8e63" href="#8e63">[8e63]</a><span class="cd"><span class="i">.word</span> <span class="o">$031d</span></span><span class="ce">; [66]:</span></span>
+<span class="l"><a class="anc" name="8e65" href="#8e65">[8e65]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [67]:</span></span>
+<span class="l"><a class="anc" name="8e67" href="#8e67">[8e67]</a><span class="cd"><span class="i">.word</span> <span class="o">$011e</span></span><span class="ce">; [68]:</span></span>
+<span class="l"><a class="anc" name="8e69" href="#8e69">[8e69]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [69]:</span></span>
+<span class="l"><a class="anc" name="8e6b" href="#8e6b">[8e6b]</a><span class="cd"><span class="i">.word</span> <span class="o">$021f</span></span><span class="ce">; [70]:</span></span>
+<span class="l"><a class="anc" name="8e6d" href="#8e6d">[8e6d]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [71]:</span></span>
+<span class="l"><a class="anc" name="8e6f" href="#8e6f">[8e6f]</a><span class="cd"><span class="i">.word</span> <span class="o">$0420</span></span><span class="ce">; [72]:</span></span>
+<span class="l"><a class="anc" name="8e71" href="#8e71">[8e71]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [73]:</span></span>
+<span class="l"><a class="anc" name="8e73" href="#8e73">[8e73]</a><span class="cd"><span class="i">.word</span> <span class="o">$0621</span></span><span class="ce">; [74]:</span></span>
+<span class="l"><a class="anc" name="8e75" href="#8e75">[8e75]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [75]:</span></span>
+<span class="l"><a class="anc" name="8e77" href="#8e77">[8e77]</a><span class="cd"><span class="i">.word</span> <span class="o">$0622</span></span><span class="ce">; [76]:</span></span>
+<span class="l"><a class="anc" name="8e79" href="#8e79">[8e79]</a><span class="cd"><span class="i">.word</span> <span class="o">$0000</span></span><span class="ce">; [77]:</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name="BRANCH_AREA_DATA"></a><div class="cp">;============================================================================
@@ -3836,22 +3894,22 @@ pre {
 ; 94 tiles
 ;============================================================================
 </div><span class="l"><a class="anc" name="8e7b" href="#8e7b">[8e7b]</a><a href="#BRANCH_AREA_DATA" class="la">BRANCH_AREA_DATA:</a><span class="ce">; [$8e7b]</span></span>
-<span class="l"><a class="anc" name="8e7b" href="#8e7b">[8e7b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_AREA_DATA_blockAttrsRelPtr">BRANCH_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; Block attributes pointer</span></span>
-<span class="l"><a class="anc" name="8e7d" href="#8e7d">[8e7d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_PROPERTIES">BRANCH_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; Block properties</span></span>
-<span class="l"><a class="anc" name="8e7f" href="#8e7f">[8e7f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_SCROLL_DATA">BRANCH_SCROLL_DATA</a>-$8000</span></span><span class="ce">; Scroll data</span></span>
-<span class="l"><a class="anc" name="8e81" href="#8e81">[8e81]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_DOOR_LOCATIONS">BRANCH_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; Door locations</span></span>
-<span class="l"><a class="anc" name="8e83" href="#8e83">[8e83]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_DOOR_DESTINATIONS">BRANCH_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; Door destinations</span></span>
+<span class="l"><a class="anc" name="8e7b" href="#8e7b">[8e7b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_AREA_DATA_blockAttrsRelPtr">BRANCH_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes pointer</span></span>
+<span class="l"><a class="anc" name="8e7d" href="#8e7d">[8e7d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_PROPERTIES">BRANCH_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block properties</span></span>
+<span class="l"><a class="anc" name="8e7f" href="#8e7f">[8e7f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_SCROLL_DATA">BRANCH_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Scroll data</span></span>
+<span class="l"><a class="anc" name="8e81" href="#8e81">[8e81]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_DOOR_LOCATIONS">BRANCH_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door locations</span></span>
+<span class="l"><a class="anc" name="8e83" href="#8e83">[8e83]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_DOOR_DESTINATIONS">BRANCH_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door destinations</span></span>
 <span class="l"></span>
 <a name="BRANCH_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#BRANCH_AREA_DATA">BRANCH_AREA_DATA</a> [$PRG3::8e7b]
 ;
 </div><span class="l"><a class="anc" name="8e85" href="#8e85">[8e85]</a><a href="#BRANCH_AREA_DATA_blockAttrsRelPtr" class="la">BRANCH_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$8e85]</span></span>
-<span class="l"><a class="anc" name="8e85" href="#8e85">[8e85]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_ATTRIBUTES">BRANCH_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; Block attributes</span></span>
-<span class="l"><a class="anc" name="8e87" href="#8e87">[8e87]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_DATA_01">BRANCH_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; Block data 1</span></span>
-<span class="l"><a class="anc" name="8e89" href="#8e89">[8e89]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_DATA_02">BRANCH_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; Block data 2</span></span>
-<span class="l"><a class="anc" name="8e8b" href="#8e8b">[8e8b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_DATA_03">BRANCH_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; Block data 3</span></span>
-<span class="l"><a class="anc" name="8e8d" href="#8e8d">[8e8d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BRANCH_BLOCK_DATA_04">BRANCH_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; Block data 4</span></span>
+<span class="l"><a class="anc" name="8e85" href="#8e85">[8e85]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_ATTRIBUTES">BRANCH_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes</span></span>
+<span class="l"><a class="anc" name="8e87" href="#8e87">[8e87]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_DATA_01">BRANCH_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 1</span></span>
+<span class="l"><a class="anc" name="8e89" href="#8e89">[8e89]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_DATA_02">BRANCH_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 2</span></span>
+<span class="l"><a class="anc" name="8e8b" href="#8e8b">[8e8b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_DATA_03">BRANCH_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 3</span></span>
+<span class="l"><a class="anc" name="8e8d" href="#8e8d">[8e8d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BRANCH_BLOCK_DATA_04">BRANCH_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 4</span></span>
 <span class="l"></span>
 <a name="BRANCH_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -4684,22 +4742,22 @@ pre {
 ; 256 tiles
 ;============================================================================
 </div><span class="l"><a class="anc" name="91ac" href="#91ac">[91ac]</a><a href="#BUILDINGS_AREA_DATA" class="la">BUILDINGS_AREA_DATA:</a><span class="ce">; [$91ac]</span></span>
-<span class="l"><a class="anc" name="91ac" href="#91ac">[91ac]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_AREA_DATA_blockAttrsRelPtr">BUILDINGS_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; Block attributes pointer</span></span>
-<span class="l"><a class="anc" name="91ae" href="#91ae">[91ae]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_PROPERTIES">BUILDINGS_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; Block properties</span></span>
-<span class="l"><a class="anc" name="91b0" href="#91b0">[91b0]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_SCROLL_DATA">BUILDINGS_SCROLL_DATA</a>-$8000</span></span><span class="ce">; Scroll data</span></span>
-<span class="l"><a class="anc" name="91b2" href="#91b2">[91b2]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_DOOR_LOCATIONS">BUILDINGS_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; Door locations</span></span>
-<span class="l"><a class="anc" name="91b4" href="#91b4">[91b4]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_DOOR_DESTINATIONS">BUILDINGS_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; Door destinations</span></span>
+<span class="l"><a class="anc" name="91ac" href="#91ac">[91ac]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_AREA_DATA_blockAttrsRelPtr">BUILDINGS_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes pointer</span></span>
+<span class="l"><a class="anc" name="91ae" href="#91ae">[91ae]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_PROPERTIES">BUILDINGS_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block properties</span></span>
+<span class="l"><a class="anc" name="91b0" href="#91b0">[91b0]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_SCROLL_DATA">BUILDINGS_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Scroll data</span></span>
+<span class="l"><a class="anc" name="91b2" href="#91b2">[91b2]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_DOOR_LOCATIONS">BUILDINGS_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door locations</span></span>
+<span class="l"><a class="anc" name="91b4" href="#91b4">[91b4]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_DOOR_DESTINATIONS">BUILDINGS_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door destinations</span></span>
 <span class="l"></span>
 <a name="BUILDINGS_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#BUILDINGS_AREA_DATA">BUILDINGS_AREA_DATA</a> [$PRG3::91ac]
 ;
 </div><span class="l"><a class="anc" name="91b6" href="#91b6">[91b6]</a><a href="#BUILDINGS_AREA_DATA_blockAttrsRelPtr" class="la">BUILDINGS_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$91b6]</span></span>
-<span class="l"><a class="anc" name="91b6" href="#91b6">[91b6]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_ATTRIBUTES">BUILDINGS_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; Block attributes</span></span>
-<span class="l"><a class="anc" name="91b8" href="#91b8">[91b8]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_DATA_01">BUILDINGS_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; Block data 1</span></span>
-<span class="l"><a class="anc" name="91ba" href="#91ba">[91ba]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_DATA_02">BUILDINGS_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; Block data 2</span></span>
-<span class="l"><a class="anc" name="91bc" href="#91bc">[91bc]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_DATA_03">BUILDINGS_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; Block data 3</span></span>
-<span class="l"><a class="anc" name="91be" href="#91be">[91be]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#BUILDINGS_BLOCK_DATA_04">BUILDINGS_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; Block data 4</span></span>
+<span class="l"><a class="anc" name="91b6" href="#91b6">[91b6]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_ATTRIBUTES">BUILDINGS_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes</span></span>
+<span class="l"><a class="anc" name="91b8" href="#91b8">[91b8]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_DATA_01">BUILDINGS_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 1</span></span>
+<span class="l"><a class="anc" name="91ba" href="#91ba">[91ba]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_DATA_02">BUILDINGS_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 2</span></span>
+<span class="l"><a class="anc" name="91bc" href="#91bc">[91bc]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_DATA_03">BUILDINGS_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 3</span></span>
+<span class="l"><a class="anc" name="91be" href="#91be">[91be]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#BUILDINGS_BLOCK_DATA_04">BUILDINGS_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 4</span></span>
 <span class="l"></span>
 <a name="BUILDINGS_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -6348,22 +6406,22 @@ pre {
 ; 112 tiles
 ;============================================================================
 </div><span class="l"><a class="anc" name="9829" href="#9829">[9829]</a><a href="#TOWNS_AREA_DATA" class="la">TOWNS_AREA_DATA:</a><span class="ce">; [$9829]</span></span>
-<span class="l"><a class="anc" name="9829" href="#9829">[9829]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_AREA_DATA_blockAttrsRelPtr">TOWNS_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; Block attributes pointer</span></span>
-<span class="l"><a class="anc" name="982b" href="#982b">[982b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_PROPERTIES">TOWNS_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; Block properties</span></span>
-<span class="l"><a class="anc" name="982d" href="#982d">[982d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_SCROLL_DATA">TOWNS_SCROLL_DATA</a>-$8000</span></span><span class="ce">; Scroll data</span></span>
-<span class="l"><a class="anc" name="982f" href="#982f">[982f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_DOOR_LOCATIONS">TOWNS_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; Door locations</span></span>
-<span class="l"><a class="anc" name="9831" href="#9831">[9831]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_DOOR_DESTINATIONS">TOWNS_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; Door destinations</span></span>
+<span class="l"><a class="anc" name="9829" href="#9829">[9829]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_AREA_DATA_blockAttrsRelPtr">TOWNS_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes pointer</span></span>
+<span class="l"><a class="anc" name="982b" href="#982b">[982b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_PROPERTIES">TOWNS_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block properties</span></span>
+<span class="l"><a class="anc" name="982d" href="#982d">[982d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_SCROLL_DATA">TOWNS_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Scroll data</span></span>
+<span class="l"><a class="anc" name="982f" href="#982f">[982f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_DOOR_LOCATIONS">TOWNS_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door locations</span></span>
+<span class="l"><a class="anc" name="9831" href="#9831">[9831]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_DOOR_DESTINATIONS">TOWNS_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Door destinations</span></span>
 <span class="l"></span>
 <a name="TOWNS_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#TOWNS_AREA_DATA">TOWNS_AREA_DATA</a> [$PRG3::9829]
 ;
 </div><span class="l"><a class="anc" name="9833" href="#9833">[9833]</a><a href="#TOWNS_AREA_DATA_blockAttrsRelPtr" class="la">TOWNS_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$9833]</span></span>
-<span class="l"><a class="anc" name="9833" href="#9833">[9833]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_ATTRIBUTES">TOWNS_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; Block attributes</span></span>
-<span class="l"><a class="anc" name="9835" href="#9835">[9835]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_DATA_01">TOWNS_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; Block data 1</span></span>
-<span class="l"><a class="anc" name="9837" href="#9837">[9837]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_DATA_02">TOWNS_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; Block data 2</span></span>
-<span class="l"><a class="anc" name="9839" href="#9839">[9839]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_DATA_03">TOWNS_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; Block data 3</span></span>
-<span class="l"><a class="anc" name="983b" href="#983b">[983b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#TOWNS_BLOCK_DATA_04">TOWNS_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; Block data 4</span></span>
+<span class="l"><a class="anc" name="9833" href="#9833">[9833]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_ATTRIBUTES">TOWNS_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block attributes</span></span>
+<span class="l"><a class="anc" name="9835" href="#9835">[9835]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_DATA_01">TOWNS_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 1</span></span>
+<span class="l"><a class="anc" name="9837" href="#9837">[9837]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_DATA_02">TOWNS_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 2</span></span>
+<span class="l"><a class="anc" name="9839" href="#9839">[9839]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_DATA_03">TOWNS_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 3</span></span>
+<span class="l"><a class="anc" name="983b" href="#983b">[983b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#TOWNS_BLOCK_DATA_04">TOWNS_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; Block data 4</span></span>
 <span class="l"></span>
 <a name="TOWNS_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -7516,22 +7574,22 @@ pre {
 ; 99 tiles
 ;============================================================================
 </div><span class="l"><a class="anc" name="9c7e" href="#9c7e">[9c7e]</a><a href="#DARTMOOR_AREA_DATA" class="la">DARTMOOR_AREA_DATA:</a><span class="ce">; [$9c7e]</span></span>
-<span class="l"><a class="anc" name="9c7e" href="#9c7e">[9c7e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_AREA_DATA_blockAttrsRelPtr">DARTMOOR_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_AREA_DATA.blockAttrsRelPtr">DARTMOOR_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::9c7e]</span></span>
-<span class="l"><a class="anc" name="9c80" href="#9c80">[9c80]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_PROPERTIES">DARTMOOR_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_PROPERTIES">DARTMOOR_BLOCK_PROPERTIES</a> [$PRG3::9c80]</span></span>
-<span class="l"><a class="anc" name="9c82" href="#9c82">[9c82]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_SCROLL_DATA">DARTMOOR_SCROLL_DATA</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_SCROLL_DATA">DARTMOOR_SCROLL_DATA</a> [$PRG3::9c82]</span></span>
-<span class="l"><a class="anc" name="9c84" href="#9c84">[9c84]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_DOOR_LOCATIONS">DARTMOOR_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_DOOR_LOCATIONS">DARTMOOR_DOOR_LOCATIONS</a> [$PRG3::9c84]</span></span>
-<span class="l"><a class="anc" name="9c86" href="#9c86">[9c86]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_DOOR_DESTINATIONS">DARTMOOR_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_DOOR_DESTINATIONS">DARTMOOR_DOOR_DESTINATIONS</a> [$PRG3::9c86]</span></span>
+<span class="l"><a class="anc" name="9c7e" href="#9c7e">[9c7e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_AREA_DATA_blockAttrsRelPtr">DARTMOOR_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_AREA_DATA.blockAttrsRelPtr">DARTMOOR_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::9c7e]</span></span>
+<span class="l"><a class="anc" name="9c80" href="#9c80">[9c80]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_PROPERTIES">DARTMOOR_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_PROPERTIES">DARTMOOR_BLOCK_PROPERTIES</a> [$PRG3::9c80]</span></span>
+<span class="l"><a class="anc" name="9c82" href="#9c82">[9c82]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_SCROLL_DATA">DARTMOOR_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_SCROLL_DATA">DARTMOOR_SCROLL_DATA</a> [$PRG3::9c82]</span></span>
+<span class="l"><a class="anc" name="9c84" href="#9c84">[9c84]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_DOOR_LOCATIONS">DARTMOOR_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_DOOR_LOCATIONS">DARTMOOR_DOOR_LOCATIONS</a> [$PRG3::9c84]</span></span>
+<span class="l"><a class="anc" name="9c86" href="#9c86">[9c86]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_DOOR_DESTINATIONS">DARTMOOR_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_DOOR_DESTINATIONS">DARTMOOR_DOOR_DESTINATIONS</a> [$PRG3::9c86]</span></span>
 <span class="l"></span>
 <a name="DARTMOOR_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#DARTMOOR_AREA_DATA">DARTMOOR_AREA_DATA</a> [$PRG3::9c7e]
 ;
 </div><span class="l"><a class="anc" name="9c88" href="#9c88">[9c88]</a><a href="#DARTMOOR_AREA_DATA_blockAttrsRelPtr" class="la">DARTMOOR_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$9c88]</span></span>
-<span class="l"><a class="anc" name="9c88" href="#9c88">[9c88]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_ATTRIBUTES">DARTMOOR_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_ATTRIBUTES">DARTMOOR_BLOCK_ATTRIBUTES</a> [$PRG3::9c88]</span></span>
-<span class="l"><a class="anc" name="9c8a" href="#9c8a">[9c8a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_DATA_01">DARTMOOR_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_01">DARTMOOR_BLOCK_DATA_01</a> [$PRG3::9c8a]</span></span>
-<span class="l"><a class="anc" name="9c8c" href="#9c8c">[9c8c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_DATA_02">DARTMOOR_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_02">DARTMOOR_BLOCK_DATA_02</a> [$PRG3::9c8c]</span></span>
-<span class="l"><a class="anc" name="9c8e" href="#9c8e">[9c8e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_DATA_03">DARTMOOR_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_03">DARTMOOR_BLOCK_DATA_03</a> [$PRG3::9c8e]</span></span>
-<span class="l"><a class="anc" name="9c90" href="#9c90">[9c90]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#DARTMOOR_BLOCK_DATA_04">DARTMOOR_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_04">DARTMOOR_BLOCK_DATA_04</a> [$PRG3::9c90]</span></span>
+<span class="l"><a class="anc" name="9c88" href="#9c88">[9c88]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_ATTRIBUTES">DARTMOOR_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_ATTRIBUTES">DARTMOOR_BLOCK_ATTRIBUTES</a> [$PRG3::9c88]</span></span>
+<span class="l"><a class="anc" name="9c8a" href="#9c8a">[9c8a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_DATA_01">DARTMOOR_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_01">DARTMOOR_BLOCK_DATA_01</a> [$PRG3::9c8a]</span></span>
+<span class="l"><a class="anc" name="9c8c" href="#9c8c">[9c8c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_DATA_02">DARTMOOR_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_02">DARTMOOR_BLOCK_DATA_02</a> [$PRG3::9c8c]</span></span>
+<span class="l"><a class="anc" name="9c8e" href="#9c8e">[9c8e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_DATA_03">DARTMOOR_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_03">DARTMOOR_BLOCK_DATA_03</a> [$PRG3::9c8e]</span></span>
+<span class="l"><a class="anc" name="9c90" href="#9c90">[9c90]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#DARTMOOR_BLOCK_DATA_04">DARTMOOR_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#DARTMOOR_BLOCK_DATA_04">DARTMOOR_BLOCK_DATA_04</a> [$PRG3::9c90]</span></span>
 <span class="l"></span>
 <a name="DARTMOOR_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:
@@ -8453,22 +8511,22 @@ pre {
 <span class="l"><a class="anc" name="a046" href="#a046">[a046]</a><span class="cd"><span class="i">.byte</span> <span class="o">$04,$00,$00</span></span><span class="ce">; [$a046] undefined</span></span>
 <span class="l"></span>
 <a name="ZENITH_AREA_DATA"></a><span class="l"><a class="anc" name="a049" href="#a049">[a049]</a><a href="#ZENITH_AREA_DATA" class="la">ZENITH_AREA_DATA:</a><span class="ce">; [$a049]</span></span>
-<span class="l"><a class="anc" name="a049" href="#a049">[a049]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_AREA_DATA_blockAttrsRelPtr">ZENITH_AREA_DATA_blockAttrsRelPtr</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_AREA_DATA.blockAttrsRelPtr">ZENITH_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::a049]</span></span>
-<span class="l"><a class="anc" name="a04b" href="#a04b">[a04b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_PROPERTIES">ZENITH_BLOCK_PROPERTIES</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_PROPERTIES">ZENITH_BLOCK_PROPERTIES</a> [$PRG3::a04b]</span></span>
-<span class="l"><a class="anc" name="a04d" href="#a04d">[a04d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_SCROLL_DATA">ZENITH_SCROLL_DATA</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_SCROLL_DATA">ZENITH_SCROLL_DATA</a> [$PRG3::a04d]</span></span>
-<span class="l"><a class="anc" name="a04f" href="#a04f">[a04f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_DOOR_LOCATIONS">ZENITH_DOOR_LOCATIONS</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_DOOR_LOCATIONS">ZENITH_DOOR_LOCATIONS</a> [$PRG3::a04f]</span></span>
-<span class="l"><a class="anc" name="a051" href="#a051">[a051]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_DOOR_DESTINATIONS">ZENITH_DOOR_DESTINATIONS</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_DOOR_DESTINATIONS">ZENITH_DOOR_DESTINATIONS</a> [$PRG3::a051]</span></span>
+<span class="l"><a class="anc" name="a049" href="#a049">[a049]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_AREA_DATA_blockAttrsRelPtr">ZENITH_AREA_DATA_blockAttrsRelPtr</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_AREA_DATA.blockAttrsRelPtr">ZENITH_AREA_DATA.blockAttrsRelPtr</a> [$PRG3::a049]</span></span>
+<span class="l"><a class="anc" name="a04b" href="#a04b">[a04b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_PROPERTIES">ZENITH_BLOCK_PROPERTIES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_PROPERTIES">ZENITH_BLOCK_PROPERTIES</a> [$PRG3::a04b]</span></span>
+<span class="l"><a class="anc" name="a04d" href="#a04d">[a04d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_SCROLL_DATA">ZENITH_SCROLL_DATA</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_SCROLL_DATA">ZENITH_SCROLL_DATA</a> [$PRG3::a04d]</span></span>
+<span class="l"><a class="anc" name="a04f" href="#a04f">[a04f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_DOOR_LOCATIONS">ZENITH_DOOR_LOCATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_DOOR_LOCATIONS">ZENITH_DOOR_LOCATIONS</a> [$PRG3::a04f]</span></span>
+<span class="l"><a class="anc" name="a051" href="#a051">[a051]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_DOOR_DESTINATIONS">ZENITH_DOOR_DESTINATIONS</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_DOOR_DESTINATIONS">ZENITH_DOOR_DESTINATIONS</a> [$PRG3::a051]</span></span>
 <span class="l"></span>
 <a name="ZENITH_AREA_DATA_blockAttrsRelPtr"></a><div class="c">;
 ; XREFS:
 ;     <a href="#ZENITH_AREA_DATA">ZENITH_AREA_DATA</a> [$PRG3::a049]
 ;
 </div><span class="l"><a class="anc" name="a053" href="#a053">[a053]</a><a href="#ZENITH_AREA_DATA_blockAttrsRelPtr" class="la">ZENITH_AREA_DATA_blockAttrsRelPtr:</a><span class="ce">; [$a053]</span></span>
-<span class="l"><a class="anc" name="a053" href="#a053">[a053]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_ATTRIBUTES">ZENITH_BLOCK_ATTRIBUTES</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_ATTRIBUTES">ZENITH_BLOCK_ATTRIBUTES</a> [$PRG3::a053]</span></span>
-<span class="l"><a class="anc" name="a055" href="#a055">[a055]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_DATA_01">ZENITH_BLOCK_DATA_01</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_01">ZENITH_BLOCK_DATA_01</a> [$PRG3::a055]</span></span>
-<span class="l"><a class="anc" name="a057" href="#a057">[a057]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_DATA_02">ZENITH_BLOCK_DATA_02</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_02">ZENITH_BLOCK_DATA_02</a> [$PRG3::a057]</span></span>
-<span class="l"><a class="anc" name="a059" href="#a059">[a059]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_DATA_03">ZENITH_BLOCK_DATA_03</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_03">ZENITH_BLOCK_DATA_03</a> [$PRG3::a059]</span></span>
-<span class="l"><a class="anc" name="a05b" href="#a05b">[a05b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ZENITH_BLOCK_DATA_04">ZENITH_BLOCK_DATA_04</a>-$8000</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_04">ZENITH_BLOCK_DATA_04</a> [$PRG3::a05b]</span></span>
+<span class="l"><a class="anc" name="a053" href="#a053">[a053]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_ATTRIBUTES">ZENITH_BLOCK_ATTRIBUTES</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_ATTRIBUTES">ZENITH_BLOCK_ATTRIBUTES</a> [$PRG3::a053]</span></span>
+<span class="l"><a class="anc" name="a055" href="#a055">[a055]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_DATA_01">ZENITH_BLOCK_DATA_01</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_01">ZENITH_BLOCK_DATA_01</a> [$PRG3::a055]</span></span>
+<span class="l"><a class="anc" name="a057" href="#a057">[a057]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_DATA_02">ZENITH_BLOCK_DATA_02</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_02">ZENITH_BLOCK_DATA_02</a> [$PRG3::a057]</span></span>
+<span class="l"><a class="anc" name="a059" href="#a059">[a059]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_DATA_03">ZENITH_BLOCK_DATA_03</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_03">ZENITH_BLOCK_DATA_03</a> [$PRG3::a059]</span></span>
+<span class="l"><a class="anc" name="a05b" href="#a05b">[a05b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ZENITH_BLOCK_DATA_04">ZENITH_BLOCK_DATA_04</a>-$8000) &amp; $FFFF</span></span><span class="ce">; <a href="#ZENITH_BLOCK_DATA_04">ZENITH_BLOCK_DATA_04</a> [$PRG3::a05b]</span></span>
 <span class="l"></span>
 <a name="ZENITH_BLOCK_ATTRIBUTES"></a><div class="c">;
 ; XREFS:

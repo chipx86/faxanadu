@@ -5,77 +5,77 @@
 ;============================================================================
 
     .segment "PRG2"
-    .ORG $8000
+    .reloc
 
-    .word ZENITH_BLOCKS-$8000               ; Zenith
-    .word BUILDINGS_BLOCKS-$8000            ; Buildings
-    .word DARTMOOR_BLOCKS-$8000             ; Dartmoor
+    .word (ZENITH_BLOCKS-$8000) & $FFFF     ; Zenith
+    .word (BUILDINGS_BLOCKS-$8000) & $FFFF  ; Buildings
+    .word (DARTMOOR_BLOCKS-$8000) & $FFFF   ; Dartmoor
 
 ZENITH_BLOCKS:                              ; [$8006]
-    .word ZENITH_BLOCKS_SCREEN_00-$8000     ; ZENITH_BLOCKS_SCREEN_00
-                                            ; [$PRG2::8006]
-    .word ZENITH_BLOCKS_SCREEN_01-$8000     ; ZENITH_BLOCKS_SCREEN_01
-                                            ; [$PRG2::8008]
-    .word ZENITH_BLOCKS_SCREEN_02-$8000     ; ZENITH_BLOCKS_SCREEN_02
-                                            ; [$PRG2::800a]
-    .word ZENITH_BLOCKS_SCREEN_03-$8000     ; ZENITH_BLOCKS_SCREEN_03
-                                            ; [$PRG2::800c]
-    .word ZENITH_BLOCKS_SCREEN_04-$8000     ; ZENITH_BLOCKS_SCREEN_04
-                                            ; [$PRG2::800e]
-    .word ZENITH_BLOCKS_SCREEN_05-$8000     ; ZENITH_BLOCKS_SCREEN_05
-                                            ; [$PRG2::8010]
-    .word ZENITH_BLOCKS_SCREEN_06-$8000     ; ZENITH_BLOCKS_SCREEN_06
-                                            ; [$PRG2::8012]
-    .word ZENITH_BLOCKS_SCREEN_07-$8000     ; ZENITH_BLOCKS_SCREEN_07
-                                            ; [$PRG2::8014]
-    .word ZENITH_BLOCKS_SCREEN_08-$8000     ; ZENITH_BLOCKS_SCREEN_08
-                                            ; [$PRG2::8016]
-    .word ZENITH_BLOCKS_SCREEN_09-$8000     ; ZENITH_BLOCKS_SCREEN_09
-                                            ; [$PRG2::8018]
-    .word ZENITH_BLOCKS_SCREEN_10-$8000     ; ZENITH_BLOCKS_SCREEN_10
-                                            ; [$PRG2::801a]
-    .word ZENITH_BLOCKS_SCREEN_11-$8000     ; ZENITH_BLOCKS_SCREEN_11
-                                            ; [$PRG2::801c]
-    .word ZENITH_BLOCKS_SCREEN_12-$8000     ; ZENITH_BLOCKS_SCREEN_12
-                                            ; [$PRG2::801e]
-    .word ZENITH_BLOCKS_SCREEN_13-$8000     ; ZENITH_BLOCKS_SCREEN_13
-                                            ; [$PRG2::8020]
-    .word ZENITH_BLOCKS_SCREEN_14-$8000     ; ZENITH_BLOCKS_SCREEN_14
-                                            ; [$PRG2::8022]
-    .word ZENITH_BLOCKS_SCREEN_15-$8000     ; ZENITH_BLOCKS_SCREEN_15
-                                            ; [$PRG2::8024]
-    .word ZENITH_BLOCKS_SCREEN_16-$8000     ; ZENITH_BLOCKS_SCREEN_16
-                                            ; [$PRG2::8026]
-    .word ZENITH_BLOCKS_SCREEN_17-$8000     ; ZENITH_BLOCKS_SCREEN_17
-                                            ; [$PRG2::8028]
-    .word ZENITH_BLOCKS_SCREEN_18-$8000     ; ZENITH_BLOCKS_SCREEN_18
-                                            ; [$PRG2::802a]
-    .word ZENITH_BLOCKS_SCREEN_19-$8000     ; ZENITH_BLOCKS_SCREEN_19
-                                            ; [$PRG2::802c]
-    .word ZENITH_BLOCKS_SCREEN_20-$8000     ; ZENITH_BLOCKS_SCREEN_20
-                                            ; [$PRG2::802e]
-    .word ZENITH_BLOCKS_SCREEN_21-$8000     ; ZENITH_BLOCKS_SCREEN_21
-                                            ; [$PRG2::8030]
-    .word ZENITH_BLOCKS_SCREEN_22-$8000     ; ZENITH_BLOCKS_SCREEN_22
-                                            ; [$PRG2::8032]
-    .word ZENITH_BLOCKS_SCREEN_23-$8000     ; ZENITH_BLOCKS_SCREEN_23
-                                            ; [$PRG2::8034]
-    .word ZENITH_BLOCKS_SCREEN_24-$8000     ; ZENITH_BLOCKS_SCREEN_24
-                                            ; [$PRG2::8036]
-    .word ZENITH_BLOCKS_SCREEN_25-$8000     ; ZENITH_BLOCKS_SCREEN_25
-                                            ; [$PRG2::8038]
-    .word ZENITH_BLOCKS_SCREEN_26-$8000     ; ZENITH_BLOCKS_SCREEN_26
-                                            ; [$PRG2::803a]
-    .word ZENITH_BLOCKS_SCREEN_27-$8000     ; ZENITH_BLOCKS_SCREEN_27
-                                            ; [$PRG2::803c]
-    .word ZENITH_BLOCKS_SCREEN_28-$8000     ; ZENITH_BLOCKS_SCREEN_28
-                                            ; [$PRG2::803e]
-    .word ZENITH_BLOCKS_SCREEN_29-$8000     ; ZENITH_BLOCKS_SCREEN_29
-                                            ; [$PRG2::8040]
-    .word ZENITH_BLOCKS_SCREEN_30-$8000     ; ZENITH_BLOCKS_SCREEN_30
-                                            ; [$PRG2::8042]
-    .word ZENITH_BLOCKS_SCREEN_31-$8000     ; ZENITH_BLOCKS_SCREEN_31
-                                            ; [$PRG2::8044]
+    .word (ZENITH_BLOCKS_SCREEN_00-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_00
+                                                  ; [$PRG2::8006]
+    .word (ZENITH_BLOCKS_SCREEN_01-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_01
+                                                  ; [$PRG2::8008]
+    .word (ZENITH_BLOCKS_SCREEN_02-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_02
+                                                  ; [$PRG2::800a]
+    .word (ZENITH_BLOCKS_SCREEN_03-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_03
+                                                  ; [$PRG2::800c]
+    .word (ZENITH_BLOCKS_SCREEN_04-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_04
+                                                  ; [$PRG2::800e]
+    .word (ZENITH_BLOCKS_SCREEN_05-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_05
+                                                  ; [$PRG2::8010]
+    .word (ZENITH_BLOCKS_SCREEN_06-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_06
+                                                  ; [$PRG2::8012]
+    .word (ZENITH_BLOCKS_SCREEN_07-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_07
+                                                  ; [$PRG2::8014]
+    .word (ZENITH_BLOCKS_SCREEN_08-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_08
+                                                  ; [$PRG2::8016]
+    .word (ZENITH_BLOCKS_SCREEN_09-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_09
+                                                  ; [$PRG2::8018]
+    .word (ZENITH_BLOCKS_SCREEN_10-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_10
+                                                  ; [$PRG2::801a]
+    .word (ZENITH_BLOCKS_SCREEN_11-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_11
+                                                  ; [$PRG2::801c]
+    .word (ZENITH_BLOCKS_SCREEN_12-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_12
+                                                  ; [$PRG2::801e]
+    .word (ZENITH_BLOCKS_SCREEN_13-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_13
+                                                  ; [$PRG2::8020]
+    .word (ZENITH_BLOCKS_SCREEN_14-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_14
+                                                  ; [$PRG2::8022]
+    .word (ZENITH_BLOCKS_SCREEN_15-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_15
+                                                  ; [$PRG2::8024]
+    .word (ZENITH_BLOCKS_SCREEN_16-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_16
+                                                  ; [$PRG2::8026]
+    .word (ZENITH_BLOCKS_SCREEN_17-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_17
+                                                  ; [$PRG2::8028]
+    .word (ZENITH_BLOCKS_SCREEN_18-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_18
+                                                  ; [$PRG2::802a]
+    .word (ZENITH_BLOCKS_SCREEN_19-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_19
+                                                  ; [$PRG2::802c]
+    .word (ZENITH_BLOCKS_SCREEN_20-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_20
+                                                  ; [$PRG2::802e]
+    .word (ZENITH_BLOCKS_SCREEN_21-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_21
+                                                  ; [$PRG2::8030]
+    .word (ZENITH_BLOCKS_SCREEN_22-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_22
+                                                  ; [$PRG2::8032]
+    .word (ZENITH_BLOCKS_SCREEN_23-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_23
+                                                  ; [$PRG2::8034]
+    .word (ZENITH_BLOCKS_SCREEN_24-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_24
+                                                  ; [$PRG2::8036]
+    .word (ZENITH_BLOCKS_SCREEN_25-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_25
+                                                  ; [$PRG2::8038]
+    .word (ZENITH_BLOCKS_SCREEN_26-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_26
+                                                  ; [$PRG2::803a]
+    .word (ZENITH_BLOCKS_SCREEN_27-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_27
+                                                  ; [$PRG2::803c]
+    .word (ZENITH_BLOCKS_SCREEN_28-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_28
+                                                  ; [$PRG2::803e]
+    .word (ZENITH_BLOCKS_SCREEN_29-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_29
+                                                  ; [$PRG2::8040]
+    .word (ZENITH_BLOCKS_SCREEN_30-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_30
+                                                  ; [$PRG2::8042]
+    .word (ZENITH_BLOCKS_SCREEN_31-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_31
+                                                  ; [$PRG2::8044]
 
 ;
 ; XREFS:
@@ -991,26 +991,26 @@ ZENITH_BLOCKS_SCREEN_31:                    ; [$996a]
     .byte $1c,$0b,$01,$c0,$b0,$1c,$09       ; [$9a3a] byte
 
 BUILDINGS_BLOCKS:                           ; [$9a41]
-    .word BUILDINGS_BLOCKS_SCREEN_00-$8000  ; BUILDINGS_BLOCKS_SCREEN_00
-                                            ; [$PRG2::9a41]
-    .word BUILDINGS_BLOCKS_SCREEN_01-$8000  ; BUILDINGS_BLOCKS_SCREEN_01
-                                            ; [$PRG2::9a43]
-    .word BUILDINGS_BLOCKS_SCREEN_02-$8000  ; BUILDINGS_BLOCKS_SCREEN_02
-                                            ; [$PRG2::9a45]
-    .word BUILDINGS_BLOCKS_SCREEN_03-$8000  ; BUILDINGS_BLOCKS_SCREEN_03
-                                            ; [$PRG2::9a47]
-    .word BUILDINGS_BLOCKS_SCREEN_04-$8000  ; BUILDINGS_BLOCKS_SCREEN_04
-                                            ; [$PRG2::9a49]
-    .word BUILDINGS_BLOCKS_SCREEN_05-$8000  ; BUILDINGS_BLOCKS_SCREEN_05
-                                            ; [$PRG2::9a4b]
-    .word BUILDINGS_BLOCKS_SCREEN_06-$8000  ; BUILDINGS_BLOCKS_SCREEN_06
-                                            ; [$PRG2::9a4d]
-    .word BUILDINGS_BLOCKS_SCREEN_07-$8000  ; BUILDINGS_BLOCKS_SCREEN_07
-                                            ; [$PRG2::9a4f]
-    .word BUILDINGS_BLOCKS_SCREEN_08-$8000  ; BUILDINGS_BLOCKS_SCREEN_08
-                                            ; [$PRG2::9a51]
-    .word BUILDINGS_BLOCKS_SCREEN_09-$8000  ; BUILDINGS_BLOCKS_SCREEN_09
-                                            ; [$PRG2::9a53]
+    .word (BUILDINGS_BLOCKS_SCREEN_00-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_00
+                                                     ; [$PRG2::9a41]
+    .word (BUILDINGS_BLOCKS_SCREEN_01-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_01
+                                                     ; [$PRG2::9a43]
+    .word (BUILDINGS_BLOCKS_SCREEN_02-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_02
+                                                     ; [$PRG2::9a45]
+    .word (BUILDINGS_BLOCKS_SCREEN_03-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_03
+                                                     ; [$PRG2::9a47]
+    .word (BUILDINGS_BLOCKS_SCREEN_04-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_04
+                                                     ; [$PRG2::9a49]
+    .word (BUILDINGS_BLOCKS_SCREEN_05-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_05
+                                                     ; [$PRG2::9a4b]
+    .word (BUILDINGS_BLOCKS_SCREEN_06-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_06
+                                                     ; [$PRG2::9a4d]
+    .word (BUILDINGS_BLOCKS_SCREEN_07-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_07
+                                                     ; [$PRG2::9a4f]
+    .word (BUILDINGS_BLOCKS_SCREEN_08-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_08
+                                                     ; [$PRG2::9a51]
+    .word (BUILDINGS_BLOCKS_SCREEN_09-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_09
+                                                     ; [$PRG2::9a53]
 
 ;
 ; XREFS:
@@ -1179,46 +1179,46 @@ BUILDINGS_BLOCKS_SCREEN_09:                 ; [$9e2b]
     .byte $00                               ; [$9e93] byte
 
 DARTMOOR_BLOCKS:                            ; [$9e94]
-    .word DARTMOOR_BLOCKS_SCREEN_00-$8000   ; DARTMOOR_BLOCKS_SCREEN_00
-                                            ; [$PRG2::9e94]
-    .word DARTMOOR_BLOCKS_SCREEN_01-$8000   ; DARTMOOR_BLOCKS_SCREEN_01
-                                            ; [$PRG2::9e96]
-    .word DARTMOOR_BLOCKS_SCREEN_02-$8000   ; DARTMOOR_BLOCKS_SCREEN_02
-                                            ; [$PRG2::9e98]
-    .word DARTMOOR_BLOCKS_SCREEN_03-$8000   ; DARTMOOR_BLOCKS_SCREEN_03
-                                            ; [$PRG2::9e9a]
-    .word DARTMOOR_BLOCKS_SCREEN_04-$8000   ; DARTMOOR_BLOCKS_SCREEN_04
-                                            ; [$PRG2::9e9c]
-    .word DARTMOOR_BLOCKS_SCREEN_05-$8000   ; DARTMOOR_BLOCKS_SCREEN_05
-                                            ; [$PRG2::9e9e]
-    .word DARTMOOR_BLOCKS_SCREEN_06-$8000   ; DARTMOOR_BLOCKS_SCREEN_06
-                                            ; [$PRG2::9ea0]
-    .word DARTMOOR_BLOCKS_SCREEN_07-$8000   ; DARTMOOR_BLOCKS_SCREEN_07
-                                            ; [$PRG2::9ea2]
-    .word DARTMOOR_BLOCKS_SCREEN_08-$8000   ; DARTMOOR_BLOCKS_SCREEN_08
-                                            ; [$PRG2::9ea4]
-    .word DARTMOOR_BLOCKS_SCREEN_09-$8000   ; DARTMOOR_BLOCKS_SCREEN_09
-                                            ; [$PRG2::9ea6]
-    .word DARTMOOR_BLOCKS_SCREEN_10-$8000   ; DARTMOOR_BLOCKS_SCREEN_10
-                                            ; [$PRG2::9ea8]
-    .word DARTMOOR_BLOCKS_SCREEN_11-$8000   ; DARTMOOR_BLOCKS_SCREEN_11
-                                            ; [$PRG2::9eaa]
-    .word DARTMOOR_BLOCKS_SCREEN_12-$8000   ; DARTMOOR_BLOCKS_SCREEN_12
-                                            ; [$PRG2::9eac]
-    .word DARTMOOR_BLOCKS_SCREEN_13-$8000   ; DARTMOOR_BLOCKS_SCREEN_13
-                                            ; [$PRG2::9eae]
-    .word DARTMOOR_BLOCKS_SCREEN_14-$8000   ; DARTMOOR_BLOCKS_SCREEN_14
-                                            ; [$PRG2::9eb0]
-    .word DARTMOOR_BLOCKS_SCREEN_15-$8000   ; DARTMOOR_BLOCKS_SCREEN_15
-                                            ; [$PRG2::9eb2]
-    .word DARTMOOR_BLOCKS_SCREEN_16-$8000   ; DARTMOOR_BLOCKS_SCREEN_16
-                                            ; [$PRG2::9eb4]
-    .word DARTMOOR_BLOCKS_SCREEN_17-$8000   ; DARTMOOR_BLOCKS_SCREEN_17
-                                            ; [$PRG2::9eb6]
-    .word DARTMOOR_BLOCKS_SCREEN_18-$8000   ; DARTMOOR_BLOCKS_SCREEN_18
-                                            ; [$PRG2::9eb8]
-    .word DARTMOOR_BLOCKS_SCREEN_19-$8000   ; DARTMOOR_BLOCKS_SCREEN_19
-                                            ; [$PRG2::9eba]
+    .word (DARTMOOR_BLOCKS_SCREEN_00-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_00
+                                                    ; [$PRG2::9e94]
+    .word (DARTMOOR_BLOCKS_SCREEN_01-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_01
+                                                    ; [$PRG2::9e96]
+    .word (DARTMOOR_BLOCKS_SCREEN_02-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_02
+                                                    ; [$PRG2::9e98]
+    .word (DARTMOOR_BLOCKS_SCREEN_03-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_03
+                                                    ; [$PRG2::9e9a]
+    .word (DARTMOOR_BLOCKS_SCREEN_04-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_04
+                                                    ; [$PRG2::9e9c]
+    .word (DARTMOOR_BLOCKS_SCREEN_05-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_05
+                                                    ; [$PRG2::9e9e]
+    .word (DARTMOOR_BLOCKS_SCREEN_06-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_06
+                                                    ; [$PRG2::9ea0]
+    .word (DARTMOOR_BLOCKS_SCREEN_07-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_07
+                                                    ; [$PRG2::9ea2]
+    .word (DARTMOOR_BLOCKS_SCREEN_08-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_08
+                                                    ; [$PRG2::9ea4]
+    .word (DARTMOOR_BLOCKS_SCREEN_09-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_09
+                                                    ; [$PRG2::9ea6]
+    .word (DARTMOOR_BLOCKS_SCREEN_10-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_10
+                                                    ; [$PRG2::9ea8]
+    .word (DARTMOOR_BLOCKS_SCREEN_11-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_11
+                                                    ; [$PRG2::9eaa]
+    .word (DARTMOOR_BLOCKS_SCREEN_12-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_12
+                                                    ; [$PRG2::9eac]
+    .word (DARTMOOR_BLOCKS_SCREEN_13-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_13
+                                                    ; [$PRG2::9eae]
+    .word (DARTMOOR_BLOCKS_SCREEN_14-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_14
+                                                    ; [$PRG2::9eb0]
+    .word (DARTMOOR_BLOCKS_SCREEN_15-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_15
+                                                    ; [$PRG2::9eb2]
+    .word (DARTMOOR_BLOCKS_SCREEN_16-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_16
+                                                    ; [$PRG2::9eb4]
+    .word (DARTMOOR_BLOCKS_SCREEN_17-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_17
+                                                    ; [$PRG2::9eb6]
+    .word (DARTMOOR_BLOCKS_SCREEN_18-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_18
+                                                    ; [$PRG2::9eb8]
+    .word (DARTMOOR_BLOCKS_SCREEN_19-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_19
+                                                    ; [$PRG2::9eba]
 
 ;
 ; XREFS:
@@ -1824,516 +1824,530 @@ DARTMOOR_BLOCKS_SCREEN_19:                  ; [$aa3d]
     .byte $04,$00,$00,$00,$00,$00,$92,$00   ; [$afe5] byte
     .byte $01,$00,$00,$00,$00,$00,$d9,$08   ; [$afed] byte
     .byte $05,$00,$00,$00,$00,$00,$85,$10   ; [$aff5] byte
-    .byte $00,$00,$00,$00,$ff,$fc,$ff,$ff   ; [$affd] byte
-    .byte $ff,$f7,$4e,$00,$ff,$bf,$ff,$ff   ; [$b005] byte
-    .byte $ff,$ff,$a2,$00,$ff,$eb,$ff,$fb   ; [$b00d] byte
-    .byte $ff,$ff,$f8,$00,$ff,$99,$ff,$df   ; [$b015] byte
-    .byte $ff,$7f,$df,$00,$ff,$7f,$ff,$fd   ; [$b01d] byte
-    .byte $ff,$fd,$9f,$02,$ff,$7f,$ff,$ff   ; [$b025] byte
-    .byte $ff,$df,$fe,$01,$ff,$ff,$ff,$fe   ; [$b02d] byte
-    .byte $ff,$ff,$77,$00,$ff,$6b,$ff,$df   ; [$b035] byte
-    .byte $ff,$ff,$7f,$00,$ff,$d7,$ff,$bf   ; [$b03d] byte
-    .byte $ff,$ff,$ef,$00,$ff,$9f,$ff,$ff   ; [$b045] byte
-    .byte $ff,$b9,$6e,$00,$ff,$1f,$ff,$ff   ; [$b04d] byte
-    .byte $ff,$ff,$ff,$00,$ff,$ee,$ff,$fd   ; [$b055] byte
-    .byte $ff,$ff,$55,$00,$ff,$1c,$ff,$ff   ; [$b05d] byte
-    .byte $ff,$df,$5a,$04,$ff,$bf,$ff,$fe   ; [$b065] byte
-    .byte $ff,$ff,$5f,$00,$ff,$f7,$ff,$ff   ; [$b06d] byte
-    .byte $ff,$ff,$7c,$00,$ff,$fe,$ff,$ff   ; [$b075] byte
-    .byte $ff,$ff,$fc,$00,$ff,$5b,$ff,$7f   ; [$b07d] byte
-    .byte $ff,$ff,$ff,$00,$ff,$e3,$ff,$df   ; [$b085] byte
-    .byte $ff,$ff,$6e,$00,$ff,$f2,$ff,$ff   ; [$b08d] byte
-    .byte $ff,$5f,$9d,$00,$ff,$f7,$ff,$ff   ; [$b095] byte
-    .byte $ff,$ff,$9f,$00,$ff,$77,$ff,$df   ; [$b09d] byte
-    .byte $ff,$ff,$2d,$00,$ff,$7d,$ff,$fb   ; [$b0a5] byte
-    .byte $ff,$d8,$8f,$00,$ff,$c9,$ff,$ff   ; [$b0ad] byte
-    .byte $ff,$ff,$44,$00,$ff,$43,$ff,$ff   ; [$b0b5] byte
-    .byte $ff,$ff,$fa,$00,$ff,$6d,$ff,$ff   ; [$b0bd] byte
-    .byte $ff,$fc,$cb,$00,$ff,$cb,$ff,$ff   ; [$b0c5] byte
-    .byte $ff,$ff,$4c,$00,$ff,$ee,$ff,$ef   ; [$b0cd] byte
-    .byte $ff,$f7,$f9,$00,$ff,$ef,$ff,$ff   ; [$b0d5] byte
-    .byte $ff,$ff,$ae,$00,$ff,$1d,$ff,$d3   ; [$b0dd] byte
-    .byte $ff,$67,$dd,$00,$ff,$ce,$ff,$df   ; [$b0e5] byte
-    .byte $ff,$ff,$3e,$00,$ff,$c9,$ff,$ff   ; [$b0ed] byte
-    .byte $ff,$ff,$11,$00,$ff,$f9,$ff,$ff   ; [$b0f5] byte
-    .byte $ff,$ff,$0e,$00,$ff,$ed,$ff,$ff   ; [$b0fd] byte
-    .byte $ff,$f7,$99,$00,$ff,$de,$ff,$ff   ; [$b105] byte
-    .byte $ff,$bf,$1a,$00,$ff,$af,$ff,$ff   ; [$b10d] byte
-    .byte $ff,$fd,$b6,$00,$ff,$57,$ff,$fe   ; [$b115] byte
-    .byte $ff,$ef,$eb,$00,$ff,$f5,$ff,$ff   ; [$b11d] byte
-    .byte $ff,$fa,$b6,$00,$ff,$ff,$ff,$ff   ; [$b125] byte
-    .byte $ff,$ff,$7e,$00,$ff,$e8,$ff,$ff   ; [$b12d] byte
-    .byte $ff,$ff,$63,$00,$ff,$ef,$ff,$ff   ; [$b135] byte
-    .byte $ff,$fb,$f6,$00,$ff,$aa,$ff,$7f   ; [$b13d] byte
-    .byte $ff,$7f,$72,$00,$ff,$7e,$ff,$ff   ; [$b145] byte
-    .byte $ff,$f7,$dd,$00,$ff,$e3,$ff,$ff   ; [$b14d] byte
-    .byte $ff,$ff,$1d,$00,$ff,$74,$ff,$fd   ; [$b155] byte
-    .byte $ff,$ff,$dd,$00,$ff,$d5,$ff,$df   ; [$b15d] byte
-    .byte $ff,$ff,$79,$00,$ff,$f2,$ff,$ed   ; [$b165] byte
-    .byte $ff,$ff,$fd,$00,$ff,$f9,$ff,$fe   ; [$b16d] byte
-    .byte $ff,$ff,$3f,$00,$ff,$ce,$ff,$ff   ; [$b175] byte
-    .byte $ff,$bf,$ca,$00,$ff,$ee,$ff,$ff   ; [$b17d] byte
-    .byte $ff,$fd,$27,$00,$ff,$79,$ff,$7f   ; [$b185] byte
-    .byte $ff,$fb,$cd,$00,$ff,$87,$ff,$bf   ; [$b18d] byte
-    .byte $ff,$ff,$7b,$00,$ff,$ff,$ff,$ff   ; [$b195] byte
-    .byte $ff,$fd,$5b,$00,$ff,$f6,$ff,$ff   ; [$b19d] byte
-    .byte $ff,$ef,$ed,$00,$ff,$ff,$ff,$ff   ; [$b1a5] byte
-    .byte $ff,$ff,$73,$00,$ff,$b1,$ff,$ff   ; [$b1ad] byte
-    .byte $ff,$eb,$db,$00,$ff,$cd,$ff,$ff   ; [$b1b5] byte
-    .byte $ff,$ff,$16,$00,$ff,$63,$ff,$ff   ; [$b1bd] byte
-    .byte $ff,$fd,$fa,$00,$ff,$bb,$ff,$ff   ; [$b1c5] byte
-    .byte $ff,$ff,$3c,$00,$ff,$dd,$ff,$ff   ; [$b1cd] byte
-    .byte $ff,$ff,$d6,$00,$ff,$ff,$ff,$3d   ; [$b1d5] byte
-    .byte $ff,$ff,$59,$00,$ff,$99,$ff,$ff   ; [$b1dd] byte
-    .byte $ff,$ff,$3e,$00,$ff,$d9,$ff,$7f   ; [$b1e5] byte
-    .byte $ff,$ed,$92,$00,$bf,$ce,$ff,$ff   ; [$b1ed] byte
-    .byte $ff,$fb,$e3,$08,$ff,$9e,$ff,$ff   ; [$b1f5] byte
-    .byte $ff,$ff,$a4,$00,$ff,$fe,$ff,$3e   ; [$b1fd] byte
-    .byte $ff,$fb,$b7,$08,$ff,$dd,$ff,$ff   ; [$b205] byte
-    .byte $ff,$ff,$38,$00,$ff,$75,$ff,$ff   ; [$b20d] byte
-    .byte $ff,$ff,$27,$00,$ff,$f9,$ff,$5f   ; [$b215] byte
-    .byte $ff,$ff,$ad,$00,$ff,$de,$ff,$bf   ; [$b21d] byte
-    .byte $ff,$ff,$bb,$00,$ff,$f9,$ff,$ff   ; [$b225] byte
-    .byte $ff,$ff,$55,$00,$ff,$fe,$ff,$ff   ; [$b22d] byte
-    .byte $ff,$ff,$5b,$00,$ff,$fe,$ff,$ff   ; [$b235] byte
-    .byte $ff,$cf,$2d,$00,$ff,$e5,$ff,$fb   ; [$b23d] byte
-    .byte $ff,$fd,$77,$00,$ff,$cb,$ff,$db   ; [$b245] byte
-    .byte $ff,$ff,$79,$00,$ff,$ff,$ff,$fe   ; [$b24d] byte
-    .byte $ff,$ff,$52,$01,$ff,$df,$ff,$fd   ; [$b255] byte
-    .byte $ff,$fe,$b7,$00,$ff,$bd,$ff,$ef   ; [$b25d] byte
-    .byte $ff,$bd,$33,$00,$ff,$73,$ff,$f7   ; [$b265] byte
-    .byte $ff,$fe,$de,$00,$ff,$e7,$ff,$ff   ; [$b26d] byte
-    .byte $ff,$9f,$bd,$00,$ff,$ff,$ff,$fe   ; [$b275] byte
-    .byte $ff,$fb,$bd,$00,$ff,$9b,$ff,$7f   ; [$b27d] byte
-    .byte $ff,$eb,$ec,$00,$ff,$fe,$ff,$fd   ; [$b285] byte
-    .byte $ff,$ff,$51,$00,$ff,$83,$ff,$ff   ; [$b28d] byte
-    .byte $ff,$ff,$8d,$00,$ff,$db,$ff,$ed   ; [$b295] byte
-    .byte $ff,$ff,$8f,$00,$ff,$09,$ff,$f7   ; [$b29d] byte
-    .byte $ff,$7d,$ff,$00,$ff,$d1,$ff,$e7   ; [$b2a5] byte
-    .byte $ff,$fb,$ea,$00,$ff,$b1,$ff,$df   ; [$b2ad] byte
-    .byte $ff,$ff,$c5,$00,$ff,$2f,$ff,$ff   ; [$b2b5] byte
-    .byte $ff,$ef,$bd,$00,$ff,$75,$ff,$f5   ; [$b2bd] byte
-    .byte $ff,$3d,$bf,$00,$ff,$65,$ff,$7e   ; [$b2c5] byte
-    .byte $ff,$ff,$9a,$00,$ff,$7f,$ff,$ff   ; [$b2cd] byte
-    .byte $ff,$fe,$cf,$00,$ff,$f3,$ff,$ff   ; [$b2d5] byte
-    .byte $ff,$ff,$6f,$00,$ff,$64,$ff,$db   ; [$b2dd] byte
-    .byte $ff,$4e,$c7,$00,$ff,$b8,$ff,$bf   ; [$b2e5] byte
-    .byte $ff,$ad,$03,$00,$ff,$d6,$ff,$ef   ; [$b2ed] byte
-    .byte $ff,$ff,$49,$00,$ff,$ff,$ff,$ff   ; [$b2f5] byte
-    .byte $ff,$f7,$5a,$00,$ff,$ed,$ff,$ef   ; [$b2fd] byte
-    .byte $ff,$ff,$aa,$00,$ff,$9e,$ff,$7f   ; [$b305] byte
-    .byte $ff,$fd,$fd,$00,$ff,$7f,$ff,$ff   ; [$b30d] byte
-    .byte $ff,$ff,$7d,$00,$ff,$27,$ff,$ef   ; [$b315] byte
-    .byte $ff,$ff,$d8,$00,$ff,$9f,$ff,$ff   ; [$b31d] byte
-    .byte $ff,$ff,$bd,$00,$ff,$f7,$ff,$ff   ; [$b325] byte
-    .byte $ff,$f7,$e4,$00,$ff,$bf,$ff,$fd   ; [$b32d] byte
-    .byte $ff,$ff,$75,$00,$ff,$7a,$ff,$ff   ; [$b335] byte
-    .byte $ff,$7d,$e6,$00,$ff,$f0,$ff,$ed   ; [$b33d] byte
-    .byte $ff,$ff,$d5,$00,$ff,$f7,$ff,$ff   ; [$b345] byte
-    .byte $ff,$bf,$7e,$00,$ff,$bf,$ff,$f7   ; [$b34d] byte
-    .byte $ff,$ff,$b7,$00,$ff,$3f,$ff,$ff   ; [$b355] byte
-    .byte $ff,$ff,$7b,$00,$ff,$d7,$ff,$fe   ; [$b35d] byte
-    .byte $ff,$fb,$a4,$00,$ff,$bc,$ff,$b7   ; [$b365] byte
-    .byte $ff,$f3,$df,$20,$ff,$fa,$ff,$ff   ; [$b36d] byte
-    .byte $ff,$7f,$51,$00,$ff,$fb,$ff,$ef   ; [$b375] byte
-    .byte $ff,$ff,$ff,$00,$ff,$0f,$ff,$ff   ; [$b37d] byte
-    .byte $ff,$fe,$3e,$00,$ff,$ff,$ff,$ff   ; [$b385] byte
-    .byte $ff,$ff,$70,$00,$ff,$ff,$ff,$ff   ; [$b38d] byte
-    .byte $ff,$ff,$f8,$00,$ff,$7d,$ff,$ff   ; [$b395] byte
-    .byte $ff,$df,$85,$00,$ff,$b5,$ff,$ff   ; [$b39d] byte
-    .byte $ff,$36,$4a,$00,$ff,$66,$ff,$fd   ; [$b3a5] byte
-    .byte $ff,$7f,$8c,$00,$ff,$f1,$ff,$fb   ; [$b3ad] byte
-    .byte $ff,$ff,$94,$00,$ff,$f5,$ff,$ff   ; [$b3b5] byte
-    .byte $ff,$7d,$78,$00,$ff,$26,$ff,$ff   ; [$b3bd] byte
-    .byte $ff,$7f,$b5,$00,$ff,$48,$ff,$fb   ; [$b3c5] byte
-    .byte $ff,$fd,$e3,$00,$ff,$d3,$ff,$ff   ; [$b3cd] byte
-    .byte $ff,$f7,$13,$80,$ff,$df,$ff,$ff   ; [$b3d5] byte
-    .byte $ff,$ff,$b4,$00,$ff,$85,$ff,$fb   ; [$b3dd] byte
-    .byte $ff,$ff,$c5,$00,$ff,$df,$ff,$7f   ; [$b3e5] byte
-    .byte $ff,$77,$2f,$00,$ff,$6f,$ff,$ff   ; [$b3ed] byte
-    .byte $ff,$7f,$6c,$00,$ff,$d7,$ff,$f1   ; [$b3f5] byte
-    .byte $ff,$ff,$f1,$00,$ff,$ff,$ff,$f7   ; [$b3fd] byte
-    .byte $ff,$ff,$35,$00,$ff,$fd,$ff,$ff   ; [$b405] byte
-    .byte $ff,$ff,$79,$00,$ff,$fe,$ff,$ff   ; [$b40d] byte
-    .byte $ff,$ff,$67,$00,$ff,$23,$ff,$ff   ; [$b415] byte
-    .byte $ff,$bf,$fa,$00,$ff,$fc,$ff,$b9   ; [$b41d] byte
-    .byte $ff,$ff,$bd,$00,$ff,$bf,$ff,$ff   ; [$b425] byte
-    .byte $ff,$ff,$d9,$00,$ff,$7f,$ff,$f7   ; [$b42d] byte
-    .byte $ff,$ff,$a7,$00,$ff,$ff,$ff,$ff   ; [$b435] byte
-    .byte $ff,$fd,$ff,$00,$ff,$e9,$ff,$ff   ; [$b43d] byte
-    .byte $ff,$fe,$ad,$02,$ff,$7d,$ff,$fd   ; [$b445] byte
-    .byte $ff,$ff,$7f,$00,$ff,$ea,$ff,$ff   ; [$b44d] byte
-    .byte $ff,$ed,$ff,$00,$ff,$df,$ff,$ff   ; [$b455] byte
-    .byte $ff,$ff,$63,$00,$ff,$59,$ff,$ff   ; [$b45d] byte
-    .byte $ff,$ff,$e5,$00,$ff,$73,$ff,$f7   ; [$b465] byte
-    .byte $ff,$ff,$3f,$00,$ff,$77,$ff,$ff   ; [$b46d] byte
-    .byte $ff,$f6,$4f,$00,$ff,$b5,$ff,$ff   ; [$b475] byte
-    .byte $ff,$7f,$bd,$00,$ff,$90,$ff,$d7   ; [$b47d] byte
-    .byte $ff,$9f,$df,$00,$ff,$7f,$ff,$df   ; [$b485] byte
-    .byte $ff,$f7,$ca,$00,$ff,$66,$ff,$fd   ; [$b48d] byte
-    .byte $ff,$ff,$ca,$00,$ff,$fb,$ff,$ff   ; [$b495] byte
-    .byte $ff,$ff,$27,$00,$ff,$c7,$ff,$ff   ; [$b49d] byte
-    .byte $ff,$ff,$6e,$00,$ff,$7d,$ff,$ef   ; [$b4a5] byte
-    .byte $ff,$ff,$7d,$00,$ff,$eb,$ff,$ee   ; [$b4ad] byte
-    .byte $ff,$ed,$ff,$00,$ff,$fe,$ff,$f7   ; [$b4b5] byte
-    .byte $ff,$ff,$2e,$04,$ff,$36,$ff,$fa   ; [$b4bd] byte
-    .byte $ff,$7b,$19,$00,$ff,$e4,$ff,$fc   ; [$b4c5] byte
-    .byte $ff,$df,$37,$00,$ff,$df,$ff,$ff   ; [$b4cd] byte
-    .byte $ff,$f3,$34,$00,$ff,$6b,$ff,$fe   ; [$b4d5] byte
-    .byte $ff,$ff,$38,$00,$ff,$e3,$ff,$fb   ; [$b4dd] byte
-    .byte $ff,$f7,$da,$00,$ff,$f7,$ff,$3e   ; [$b4e5] byte
-    .byte $ff,$ff,$0c,$00,$ff,$ae,$ff,$ff   ; [$b4ed] byte
-    .byte $ff,$ff,$7d,$00,$ff,$fa,$ff,$df   ; [$b4f5] byte
-    .byte $ff,$fe,$4f,$00,$ff,$ff,$ff,$ff   ; [$b4fd] byte
-    .byte $ff,$fe,$27,$00,$ff,$df,$ff,$be   ; [$b505] byte
-    .byte $ff,$bf,$b5,$00,$ff,$b7,$ff,$fe   ; [$b50d] byte
-    .byte $ff,$ff,$f7,$00,$ff,$dd,$ff,$ff   ; [$b515] byte
-    .byte $ff,$ff,$63,$02,$ff,$ff,$ff,$ef   ; [$b51d] byte
-    .byte $ff,$ff,$fc,$00,$ff,$5f,$ff,$ff   ; [$b525] byte
-    .byte $ff,$ff,$9f,$00,$ff,$df,$ff,$df   ; [$b52d] byte
-    .byte $ff,$ff,$9c,$00,$ff,$37,$ff,$f7   ; [$b535] byte
-    .byte $ff,$ff,$df,$00,$ff,$e3,$ff,$fe   ; [$b53d] byte
-    .byte $ff,$da,$fb,$00,$ff,$b5,$ff,$f7   ; [$b545] byte
-    .byte $ff,$ff,$dd,$00,$ff,$f5,$ff,$fe   ; [$b54d] byte
-    .byte $ff,$ff,$96,$00,$ff,$c7,$ff,$5d   ; [$b555] byte
-    .byte $ff,$de,$b5,$00,$ff,$de,$ff,$7d   ; [$b55d] byte
-    .byte $ff,$ff,$fd,$00,$ff,$73,$ff,$bf   ; [$b565] byte
-    .byte $ff,$fd,$17,$00,$ff,$ed,$ff,$f7   ; [$b56d] byte
-    .byte $ff,$ff,$fc,$00,$ff,$fb,$ff,$ff   ; [$b575] byte
-    .byte $ff,$df,$7f,$00,$ff,$79,$ff,$ff   ; [$b57d] byte
-    .byte $ff,$ff,$5d,$00,$ff,$ff,$ff,$fe   ; [$b585] byte
-    .byte $ff,$ff,$b5,$00,$ff,$3b,$ff,$ef   ; [$b58d] byte
-    .byte $ff,$fd,$d7,$00,$ff,$7f,$ff,$ff   ; [$b595] byte
-    .byte $ff,$bf,$66,$00,$ff,$ec,$ff,$fc   ; [$b59d] byte
-    .byte $ff,$ef,$47,$00,$ff,$ed,$ff,$eb   ; [$b5a5] byte
-    .byte $ff,$be,$38,$00,$ff,$ef,$ff,$ff   ; [$b5ad] byte
-    .byte $ff,$ff,$d6,$00,$ff,$7a,$ff,$ff   ; [$b5b5] byte
-    .byte $ff,$ff,$e7,$00,$ff,$f5,$ff,$7f   ; [$b5bd] byte
-    .byte $ff,$ff,$a8,$00,$ff,$ef,$ff,$bf   ; [$b5c5] byte
-    .byte $ff,$ff,$8b,$00,$ff,$f9,$ff,$7d   ; [$b5cd] byte
-    .byte $ff,$dd,$10,$00,$ff,$ef,$ff,$ef   ; [$b5d5] byte
-    .byte $ff,$bf,$2e,$00,$ff,$66,$ff,$ed   ; [$b5dd] byte
-    .byte $ff,$f6,$7d,$00,$ff,$12,$ff,$7f   ; [$b5e5] byte
-    .byte $ff,$fd,$b5,$00,$ff,$6f,$ff,$7f   ; [$b5ed] byte
-    .byte $ff,$ff,$d6,$00,$ff,$fb,$ff,$fe   ; [$b5f5] byte
-    .byte $ff,$7f,$27,$00,$ff,$ff,$ff,$ff   ; [$b5fd] byte
-    .byte $ff,$fb,$bb,$00,$ff,$e8,$ff,$ff   ; [$b605] byte
-    .byte $ff,$ff,$b5,$00,$ff,$ef,$ff,$ff   ; [$b60d] byte
-    .byte $ff,$ff,$ff,$00,$ff,$bf,$ff,$ef   ; [$b615] byte
-    .byte $ff,$ff,$cc,$00,$ff,$ee,$ff,$9e   ; [$b61d] byte
-    .byte $ff,$ff,$dd,$00,$ff,$7f,$ff,$ff   ; [$b625] byte
-    .byte $ff,$ff,$a5,$00,$ff,$f1,$ff,$ff   ; [$b62d] byte
-    .byte $ff,$ff,$74,$00,$ff,$f7,$ff,$ff   ; [$b635] byte
-    .byte $ff,$ff,$7f,$00,$ff,$f7,$ff,$ef   ; [$b63d] byte
-    .byte $ff,$be,$ef,$00,$ff,$2f,$ff,$ff   ; [$b645] byte
-    .byte $ff,$ff,$ff,$00,$ff,$bd,$ff,$ff   ; [$b64d] byte
-    .byte $ff,$ff,$d4,$00,$ff,$fd,$ff,$ef   ; [$b655] byte
-    .byte $ff,$df,$7f,$00,$ff,$32,$ff,$7f   ; [$b65d] byte
-    .byte $ff,$be,$fd,$00,$ff,$db,$ff,$bf   ; [$b665] byte
-    .byte $ff,$7f,$ff,$00,$ff,$db,$ff,$fb   ; [$b66d] byte
-    .byte $ff,$9c,$fa,$00,$ff,$a5,$ff,$ff   ; [$b675] byte
-    .byte $ff,$7f,$e3,$00,$ff,$bb,$ff,$df   ; [$b67d] byte
-    .byte $ff,$fb,$3f,$00,$ff,$e2,$ff,$fb   ; [$b685] byte
-    .byte $ff,$fe,$e8,$00,$ff,$2b,$ff,$db   ; [$b68d] byte
-    .byte $ff,$ff,$de,$00,$ff,$3d,$ff,$ff   ; [$b695] byte
-    .byte $ff,$ff,$cf,$00,$ff,$c9,$ff,$fd   ; [$b69d] byte
-    .byte $ff,$d7,$04,$00,$ff,$4b,$ff,$ff   ; [$b6a5] byte
-    .byte $ff,$ff,$b3,$00,$ff,$59,$ff,$ff   ; [$b6ad] byte
-    .byte $ff,$bf,$5e,$00,$ff,$fb,$ff,$bf   ; [$b6b5] byte
-    .byte $ff,$ff,$a8,$00,$ff,$a2,$ff,$f7   ; [$b6bd] byte
-    .byte $ff,$df,$fd,$00,$ff,$1f,$ff,$ff   ; [$b6c5] byte
-    .byte $ff,$ff,$50,$00,$ff,$eb,$ff,$fb   ; [$b6cd] byte
-    .byte $ff,$ff,$e3,$00,$ff,$f5,$ff,$ff   ; [$b6d5] byte
-    .byte $ff,$ff,$e2,$00,$ff,$ae,$ff,$7c   ; [$b6dd] byte
-    .byte $ff,$ef,$be,$00,$ff,$df,$ff,$fe   ; [$b6e5] byte
-    .byte $ff,$ff,$d5,$00,$ff,$cd,$ff,$ff   ; [$b6ed] byte
-    .byte $ff,$ff,$6e,$00,$ff,$7f,$ff,$fb   ; [$b6f5] byte
-    .byte $ff,$ff,$14,$00,$ff,$b7,$ff,$6e   ; [$b6fd] byte
-    .byte $ff,$ff,$5f,$00,$ff,$ff,$ff,$ff   ; [$b705] byte
-    .byte $ff,$df,$6b,$00,$ff,$77,$ff,$fd   ; [$b70d] byte
-    .byte $ff,$fd,$71,$00,$ff,$d9,$ff,$ef   ; [$b715] byte
-    .byte $ff,$7f,$f7,$00,$ff,$fe,$ff,$ff   ; [$b71d] byte
-    .byte $ff,$ff,$ce,$00,$ff,$af,$ff,$ff   ; [$b725] byte
-    .byte $ff,$7f,$ff,$00,$ff,$d7,$ff,$ff   ; [$b72d] byte
-    .byte $ff,$ff,$85,$00,$ff,$ad,$ff,$ff   ; [$b735] byte
-    .byte $ff,$f7,$eb,$00,$ff,$34,$ff,$7f   ; [$b73d] byte
-    .byte $ff,$b7,$b3,$01,$ff,$f7,$ff,$f7   ; [$b745] byte
-    .byte $ff,$e1,$3d,$00,$ff,$cc,$ff,$ff   ; [$b74d] byte
-    .byte $ff,$fe,$ff,$00,$ff,$f6,$ff,$ee   ; [$b755] byte
-    .byte $ff,$ff,$e7,$00,$ff,$77,$ff,$ff   ; [$b75d] byte
-    .byte $ff,$ef,$fb,$00,$ff,$33,$ff,$ff   ; [$b765] byte
-    .byte $ff,$ff,$59,$00,$ff,$df,$ff,$ff   ; [$b76d] byte
-    .byte $ff,$fb,$59,$00,$ff,$fd,$ff,$ff   ; [$b775] byte
-    .byte $ff,$ff,$77,$00,$ff,$b7,$ff,$ff   ; [$b77d] byte
-    .byte $ff,$ff,$b7,$00,$ff,$ca,$ff,$ff   ; [$b785] byte
-    .byte $ff,$be,$3e,$00,$ff,$5f,$ff,$ff   ; [$b78d] byte
-    .byte $ff,$ff,$6b,$00,$ff,$7f,$ff,$df   ; [$b795] byte
-    .byte $ff,$ff,$7d,$00,$ff,$ee,$ff,$7f   ; [$b79d] byte
-    .byte $ff,$bf,$cf,$00,$ff,$06,$ff,$ff   ; [$b7a5] byte
-    .byte $ff,$f7,$3b,$00,$ff,$7b,$ff,$ff   ; [$b7ad] byte
-    .byte $ff,$fe,$d4,$14,$ff,$1a,$ff,$fd   ; [$b7b5] byte
-    .byte $ff,$db,$29,$00,$ff,$5f,$ff,$ff   ; [$b7bd] byte
-    .byte $ff,$ef,$dc,$00,$ff,$a0,$ff,$ff   ; [$b7c5] byte
-    .byte $ff,$ff,$8c,$00,$ff,$6d,$ff,$ef   ; [$b7cd] byte
-    .byte $ff,$fb,$cb,$00,$ff,$ef,$ff,$ff   ; [$b7d5] byte
-    .byte $ff,$ff,$f0,$00,$ff,$3a,$ff,$fb   ; [$b7dd] byte
-    .byte $ff,$df,$bd,$00,$ff,$ff,$ff,$fd   ; [$b7e5] byte
-    .byte $ff,$ff,$ab,$00,$ff,$87,$ff,$ff   ; [$b7ed] byte
-    .byte $ff,$ff,$d0,$00,$ff,$7f,$ff,$f9   ; [$b7f5] byte
-    .byte $ff,$ff,$60,$04,$ff,$bf,$ff,$bf   ; [$b7fd] byte
-    .byte $ff,$ff,$ca,$00,$ff,$cf,$ff,$ff   ; [$b805] byte
-    .byte $ff,$ef,$f4,$00,$ff,$ff,$ff,$7f   ; [$b80d] byte
-    .byte $ff,$ff,$4b,$00,$ff,$f5,$ff,$fd   ; [$b815] byte
-    .byte $ff,$ff,$ff,$00,$ff,$eb,$ff,$ff   ; [$b81d] byte
-    .byte $ff,$ff,$df,$01,$ff,$fe,$ff,$e7   ; [$b825] byte
-    .byte $ff,$ff,$b9,$00,$ff,$7e,$ff,$ef   ; [$b82d] byte
-    .byte $ff,$ff,$22,$00,$ff,$bf,$ff,$f7   ; [$b835] byte
-    .byte $ff,$ff,$af,$00,$ff,$a1,$ff,$ef   ; [$b83d] byte
-    .byte $ff,$fe,$ee,$00,$ff,$9b,$ff,$ff   ; [$b845] byte
-    .byte $ff,$5f,$f6,$00,$ff,$ff,$ff,$ff   ; [$b84d] byte
-    .byte $ff,$ff,$b6,$00,$ff,$3d,$ff,$ff   ; [$b855] byte
-    .byte $ff,$ff,$f6,$00,$ff,$df,$ff,$ff   ; [$b85d] byte
-    .byte $ff,$fe,$70,$10,$ff,$f3,$ff,$7f   ; [$b865] byte
-    .byte $ff,$ff,$f0,$00,$ff,$bf,$ff,$ff   ; [$b86d] byte
-    .byte $ff,$ff,$9f,$00,$ff,$fa,$ff,$ff   ; [$b875] byte
-    .byte $ff,$fb,$c7,$00,$ff,$9c,$ff,$7d   ; [$b87d] byte
-    .byte $ff,$ff,$e8,$00,$ff,$f1,$ff,$fd   ; [$b885] byte
-    .byte $ff,$f7,$1d,$00,$ff,$d6,$ff,$ff   ; [$b88d] byte
-    .byte $ff,$ff,$39,$40,$ff,$5a,$ff,$ff   ; [$b895] byte
-    .byte $ff,$ff,$97,$00,$ff,$f4,$ff,$ff   ; [$b89d] byte
-    .byte $ff,$f6,$97,$00,$ff,$e7,$ff,$f7   ; [$b8a5] byte
-    .byte $ff,$ff,$4a,$00,$ff,$9d,$ff,$ff   ; [$b8ad] byte
-    .byte $ff,$6f,$b7,$00,$ff,$b7,$ff,$ff   ; [$b8b5] byte
-    .byte $ff,$f7,$ea,$00,$ff,$8d,$ff,$7f   ; [$b8bd] byte
-    .byte $ff,$ff,$8b,$00,$ff,$65,$ff,$ff   ; [$b8c5] byte
-    .byte $ff,$fb,$37,$00,$ff,$cf,$ff,$ff   ; [$b8cd] byte
-    .byte $ff,$bf,$1c,$00,$ff,$db,$ff,$ff   ; [$b8d5] byte
-    .byte $ff,$ff,$a6,$00,$ff,$64,$ff,$2b   ; [$b8dd] byte
-    .byte $ff,$bf,$e7,$00,$ff,$a7,$ff,$ff   ; [$b8e5] byte
-    .byte $ff,$de,$5e,$00,$ff,$73,$ff,$ff   ; [$b8ed] byte
-    .byte $ff,$ff,$b6,$00,$ff,$fe,$ff,$ff   ; [$b8f5] byte
-    .byte $ff,$ff,$ce,$00,$ff,$7c,$ff,$fb   ; [$b8fd] byte
-    .byte $ff,$ff,$b0,$20,$ff,$ff,$ff,$ff   ; [$b905] byte
-    .byte $ff,$ef,$fd,$00,$ff,$fd,$ff,$fd   ; [$b90d] byte
-    .byte $ff,$f7,$78,$00,$ff,$7d,$ff,$ff   ; [$b915] byte
-    .byte $ff,$ff,$ee,$00,$ff,$fd,$ff,$ef   ; [$b91d] byte
-    .byte $ff,$ff,$be,$02,$ff,$f6,$ff,$f7   ; [$b925] byte
-    .byte $ff,$f7,$9d,$00,$ff,$d7,$ff,$ff   ; [$b92d] byte
-    .byte $ff,$f7,$f5,$00,$ff,$ff,$ff,$ff   ; [$b935] byte
-    .byte $ff,$df,$af,$00,$ff,$f2,$ff,$df   ; [$b93d] byte
-    .byte $ff,$ff,$af,$00,$ff,$62,$ff,$df   ; [$b945] byte
-    .byte $ff,$fd,$3f,$00,$ff,$f6,$ff,$ef   ; [$b94d] byte
-    .byte $ff,$ff,$36,$00,$ff,$dd,$ff,$ff   ; [$b955] byte
-    .byte $ff,$be,$7d,$00,$ff,$fd,$ff,$cd   ; [$b95d] byte
-    .byte $ff,$ff,$eb,$00,$ff,$ce,$ff,$ff   ; [$b965] byte
-    .byte $ff,$fb,$9a,$00,$ff,$f7,$ff,$ff   ; [$b96d] byte
-    .byte $ff,$ff,$ec,$00,$ff,$5f,$ff,$7f   ; [$b975] byte
-    .byte $ff,$fb,$e4,$00,$ff,$c5,$ff,$ff   ; [$b97d] byte
-    .byte $ff,$7f,$fc,$00,$ff,$3f,$ff,$e9   ; [$b985] byte
-    .byte $ff,$fe,$ef,$00,$ff,$ff,$ff,$f7   ; [$b98d] byte
-    .byte $ff,$fb,$5a,$00,$ff,$f7,$ff,$ff   ; [$b995] byte
-    .byte $ff,$ff,$2e,$00,$ff,$e5,$ff,$f9   ; [$b99d] byte
-    .byte $ff,$ff,$d6,$00,$ff,$e5,$ff,$ff   ; [$b9a5] byte
-    .byte $ff,$7f,$93,$00,$ff,$e3,$ff,$fe   ; [$b9ad] byte
-    .byte $ff,$ff,$a6,$00,$ff,$f7,$ff,$f5   ; [$b9b5] byte
-    .byte $ff,$ff,$ef,$00,$ff,$db,$ff,$df   ; [$b9bd] byte
-    .byte $ff,$cf,$4b,$00,$ff,$88,$ff,$bf   ; [$b9c5] byte
-    .byte $ff,$fe,$f1,$00,$ff,$ca,$ff,$ff   ; [$b9cd] byte
-    .byte $ff,$fd,$a2,$00,$ff,$bf,$ff,$ff   ; [$b9d5] byte
-    .byte $ff,$7f,$e8,$00,$ff,$04,$ff,$bd   ; [$b9dd] byte
-    .byte $ff,$5d,$bf,$00,$ff,$4f,$ff,$fe   ; [$b9e5] byte
-    .byte $ff,$ff,$7a,$00,$ff,$76,$ff,$df   ; [$b9ed] byte
-    .byte $7f,$bf,$5b,$00,$ff,$7b,$ff,$ff   ; [$b9f5] byte
-    .byte $ff,$ff,$62,$00,$ff,$d7,$ff,$fb   ; [$b9fd] byte
-    .byte $ff,$3f,$7f,$00,$ff,$de,$ff,$fe   ; [$ba05] byte
-    .byte $ff,$df,$74,$00,$ff,$3a,$ff,$ff   ; [$ba0d] byte
-    .byte $ff,$ff,$85,$00,$ff,$54,$ff,$fd   ; [$ba15] byte
-    .byte $ff,$ef,$f6,$00,$ff,$be,$ff,$df   ; [$ba1d] byte
-    .byte $ff,$df,$ab,$00,$ff,$ff,$ff,$f7   ; [$ba25] byte
-    .byte $ff,$ef,$ad,$00,$ff,$f7,$ff,$ff   ; [$ba2d] byte
-    .byte $ff,$ff,$f9,$00,$ff,$3f,$ff,$ff   ; [$ba35] byte
-    .byte $ff,$ff,$76,$00,$ff,$fb,$ff,$f5   ; [$ba3d] byte
-    .byte $ff,$ef,$af,$00,$ff,$df,$ff,$ff   ; [$ba45] byte
-    .byte $ff,$ff,$75,$00,$ff,$8b,$ff,$ff   ; [$ba4d] byte
-    .byte $ff,$df,$7c,$00,$ff,$f7,$ff,$7f   ; [$ba55] byte
-    .byte $ff,$ff,$fb,$00,$ff,$bd,$ff,$6f   ; [$ba5d] byte
-    .byte $ff,$ed,$7c,$00,$ff,$fc,$ff,$6f   ; [$ba65] byte
-    .byte $ff,$ff,$ef,$00,$ff,$ff,$ff,$5f   ; [$ba6d] byte
-    .byte $ff,$ff,$ed,$00,$ff,$f8,$ff,$ff   ; [$ba75] byte
-    .byte $ff,$ff,$6c,$00,$ff,$7b,$ff,$ff   ; [$ba7d] byte
-    .byte $ff,$ff,$7e,$00,$ff,$cb,$ff,$ff   ; [$ba85] byte
-    .byte $ff,$f3,$d3,$00,$ff,$7e,$ff,$ff   ; [$ba8d] byte
-    .byte $ff,$ff,$e8,$00,$ff,$dd,$ff,$fd   ; [$ba95] byte
-    .byte $ff,$ff,$d3,$00,$ff,$b7,$ff,$fe   ; [$ba9d] byte
-    .byte $ff,$df,$72,$00,$ff,$fd,$ff,$ff   ; [$baa5] byte
-    .byte $ff,$ef,$f1,$00,$ff,$e9,$ff,$f3   ; [$baad] byte
-    .byte $ff,$fb,$df,$00,$ff,$7d,$ff,$ff   ; [$bab5] byte
-    .byte $ff,$ff,$30,$00,$ff,$7e,$ff,$ff   ; [$babd] byte
-    .byte $ff,$eb,$3d,$00,$ff,$c7,$ff,$bf   ; [$bac5] byte
-    .byte $ff,$ff,$20,$00,$ff,$fb,$ff,$ef   ; [$bacd] byte
-    .byte $ff,$df,$c0,$00,$ff,$df,$ff,$ff   ; [$bad5] byte
-    .byte $ff,$ff,$73,$00,$ff,$dd,$ff,$76   ; [$badd] byte
-    .byte $ff,$fd,$ff,$00,$ff,$ca,$ff,$3e   ; [$bae5] byte
-    .byte $ff,$ff,$bd,$00,$ff,$fa,$ff,$7f   ; [$baed] byte
-    .byte $ff,$f7,$b0,$00,$ff,$71,$ff,$de   ; [$baf5] byte
-    .byte $ff,$fd,$d7,$00,$ff,$bf,$ff,$ef   ; [$bafd] byte
-    .byte $ff,$7f,$35,$00,$ff,$ad,$ff,$77   ; [$bb05] byte
-    .byte $ff,$fd,$9c,$00,$ff,$7f,$ff,$ff   ; [$bb0d] byte
-    .byte $ff,$f7,$f9,$00,$ff,$e6,$ff,$fd   ; [$bb15] byte
-    .byte $ff,$7f,$fe,$04,$ff,$c3,$ff,$ac   ; [$bb1d] byte
-    .byte $ff,$7f,$b8,$00,$ff,$5d,$ff,$fd   ; [$bb25] byte
-    .byte $ff,$7f,$dd,$00,$ff,$fd,$ff,$ff   ; [$bb2d] byte
-    .byte $ff,$ff,$ff,$00,$ff,$6d,$ff,$bb   ; [$bb35] byte
-    .byte $ff,$ff,$be,$00,$ff,$ed,$ff,$ff   ; [$bb3d] byte
-    .byte $ff,$f7,$b9,$00,$ff,$6d,$ff,$ef   ; [$bb45] byte
-    .byte $ff,$ff,$ff,$00,$ff,$fd,$ff,$ff   ; [$bb4d] byte
-    .byte $ff,$f7,$fc,$00,$ff,$ee,$ff,$7f   ; [$bb55] byte
-    .byte $ff,$ff,$d1,$00,$ff,$ef,$ff,$b7   ; [$bb5d] byte
-    .byte $ff,$f3,$b3,$00,$ff,$7f,$ff,$fd   ; [$bb65] byte
-    .byte $ff,$ff,$b3,$00,$ff,$6a,$ff,$ff   ; [$bb6d] byte
-    .byte $ff,$ff,$f7,$00,$ff,$f9,$ff,$ff   ; [$bb75] byte
-    .byte $ff,$ff,$c2,$00,$ff,$c4,$ff,$ff   ; [$bb7d] byte
-    .byte $ff,$ff,$a7,$00,$ff,$c7,$ff,$fe   ; [$bb85] byte
-    .byte $ff,$ff,$55,$00,$ff,$6d,$ff,$ff   ; [$bb8d] byte
-    .byte $ff,$fe,$7f,$00,$ff,$f2,$ff,$ff   ; [$bb95] byte
-    .byte $ff,$ff,$f8,$00,$ff,$9f,$ff,$ff   ; [$bb9d] byte
-    .byte $ff,$fb,$2e,$00,$ff,$0b,$ff,$ff   ; [$bba5] byte
-    .byte $ff,$ef,$5f,$00,$ff,$ff,$ff,$ef   ; [$bbad] byte
-    .byte $ff,$ef,$b1,$00,$ff,$df,$ff,$ff   ; [$bbb5] byte
-    .byte $ff,$ff,$16,$00,$ff,$5f,$ff,$cf   ; [$bbbd] byte
-    .byte $ff,$ff,$99,$01,$ff,$a0,$ff,$ff   ; [$bbc5] byte
-    .byte $ff,$ff,$76,$00,$ff,$af,$ff,$ff   ; [$bbcd] byte
-    .byte $ff,$bf,$9d,$00,$ff,$7f,$ff,$ff   ; [$bbd5] byte
-    .byte $ff,$ff,$fc,$00,$ff,$69,$ff,$3e   ; [$bbdd] byte
-    .byte $ff,$b6,$4c,$00,$ff,$9f,$ff,$fb   ; [$bbe5] byte
-    .byte $ff,$cf,$17,$00,$ff,$fb,$ff,$1f   ; [$bbed] byte
-    .byte $ff,$f7,$34,$00,$ff,$7e,$ff,$f3   ; [$bbf5] byte
-    .byte $ff,$ff,$bc,$00,$ff,$db,$ff,$ff   ; [$bbfd] byte
-    .byte $ff,$ef,$8e,$00,$ff,$ff,$ff,$ff   ; [$bc05] byte
-    .byte $ff,$7f,$be,$00,$ff,$c9,$ff,$fd   ; [$bc0d] byte
-    .byte $ff,$ff,$76,$00,$ff,$77,$ff,$d3   ; [$bc15] byte
-    .byte $ff,$ef,$ef,$00,$ff,$7f,$ff,$ff   ; [$bc1d] byte
-    .byte $ff,$fe,$c9,$00,$ff,$ef,$ff,$ff   ; [$bc25] byte
-    .byte $ff,$ff,$7e,$00,$ff,$ff,$ff,$ff   ; [$bc2d] byte
-    .byte $ff,$f7,$3b,$00,$ff,$fb,$ff,$ff   ; [$bc35] byte
-    .byte $ff,$ff,$ff,$00,$ff,$7a,$ff,$df   ; [$bc3d] byte
-    .byte $ff,$7b,$e7,$00,$ff,$fe,$ff,$ef   ; [$bc45] byte
-    .byte $ff,$ff,$17,$00,$ff,$f3,$ff,$ff   ; [$bc4d] byte
-    .byte $ff,$ff,$c3,$00,$ff,$df,$ff,$f9   ; [$bc55] byte
-    .byte $ff,$ff,$3f,$00,$ff,$cf,$ff,$bf   ; [$bc5d] byte
-    .byte $ff,$ff,$ef,$00,$ff,$cf,$ff,$fa   ; [$bc65] byte
-    .byte $ff,$df,$ab,$00,$ff,$69,$ff,$de   ; [$bc6d] byte
-    .byte $ff,$ff,$eb,$00,$ff,$ff,$ff,$f6   ; [$bc75] byte
-    .byte $ff,$df,$7f,$00,$ff,$fd,$ff,$b7   ; [$bc7d] byte
-    .byte $ff,$ff,$7f,$00,$ff,$5f,$ff,$f7   ; [$bc85] byte
-    .byte $ff,$bf,$9b,$00,$ff,$fe,$ff,$ff   ; [$bc8d] byte
-    .byte $ff,$fd,$ce,$00,$ff,$fb,$ff,$fd   ; [$bc95] byte
-    .byte $ff,$ff,$7b,$00,$ff,$01,$ff,$f7   ; [$bc9d] byte
-    .byte $ff,$6f,$fc,$00,$ff,$f8,$ff,$eb   ; [$bca5] byte
-    .byte $ff,$b7,$b1,$00,$ff,$5f,$ff,$ff   ; [$bcad] byte
-    .byte $fd,$5f,$c2,$00,$ff,$df,$ff,$ff   ; [$bcb5] byte
-    .byte $ff,$ff,$e2,$00,$ff,$4b,$ff,$ef   ; [$bcbd] byte
-    .byte $ff,$fa,$b7,$00,$ff,$cc,$ff,$ff   ; [$bcc5] byte
-    .byte $ff,$ff,$3d,$00,$ff,$ff,$ff,$ff   ; [$bccd] byte
-    .byte $ff,$bf,$8f,$00,$ff,$7f,$ff,$bf   ; [$bcd5] byte
-    .byte $ff,$ef,$2d,$00,$ff,$a3,$ff,$be   ; [$bcdd] byte
-    .byte $ff,$ff,$2b,$00,$ff,$54,$ff,$fb   ; [$bce5] byte
-    .byte $ff,$ff,$15,$00,$ff,$4d,$ff,$ff   ; [$bced] byte
-    .byte $ff,$ff,$2e,$00,$ff,$72,$ff,$ff   ; [$bcf5] byte
-    .byte $ff,$fd,$fd,$00,$ff,$5b,$ff,$ff   ; [$bcfd] byte
-    .byte $ff,$37,$7f,$00,$ff,$d7,$ff,$fe   ; [$bd05] byte
-    .byte $ff,$ff,$72,$00,$ff,$a7,$ff,$ff   ; [$bd0d] byte
-    .byte $ff,$ff,$7f,$00,$ff,$fe,$ff,$bf   ; [$bd15] byte
-    .byte $ff,$ff,$f3,$00,$ff,$a5,$ff,$f7   ; [$bd1d] byte
-    .byte $ff,$ff,$af,$00,$ff,$ee,$ff,$ff   ; [$bd25] byte
-    .byte $ff,$f7,$1c,$00,$ff,$ff,$ff,$ff   ; [$bd2d] byte
-    .byte $ff,$7f,$77,$00,$ff,$ff,$ff,$ff   ; [$bd35] byte
-    .byte $ff,$ff,$e9,$80,$ff,$d4,$ff,$df   ; [$bd3d] byte
-    .byte $ff,$ff,$db,$00,$ff,$bb,$ff,$fb   ; [$bd45] byte
-    .byte $ff,$fb,$7e,$00,$ff,$9f,$ff,$cb   ; [$bd4d] byte
-    .byte $ff,$fd,$d7,$00,$ff,$fa,$ff,$ff   ; [$bd55] byte
-    .byte $ff,$fe,$f7,$00,$ff,$de,$ff,$ed   ; [$bd5d] byte
-    .byte $ff,$f7,$05,$00,$ff,$a7,$ff,$df   ; [$bd65] byte
-    .byte $ff,$ff,$de,$00,$ff,$7b,$ff,$ff   ; [$bd6d] byte
-    .byte $ff,$fd,$56,$00,$ff,$71,$ff,$ff   ; [$bd75] byte
-    .byte $ff,$fe,$f1,$00,$ff,$ef,$ff,$fd   ; [$bd7d] byte
-    .byte $ff,$ff,$d7,$00,$ff,$3f,$ff,$fb   ; [$bd85] byte
-    .byte $ff,$fe,$2f,$00,$ff,$7e,$ff,$bb   ; [$bd8d] byte
-    .byte $ff,$bf,$ff,$00,$ff,$3d,$ff,$fb   ; [$bd95] byte
-    .byte $ff,$df,$3b,$00,$ff,$ac,$ff,$ff   ; [$bd9d] byte
-    .byte $ff,$fb,$57,$00,$ff,$8c,$ff,$e7   ; [$bda5] byte
-    .byte $ff,$ee,$31,$00,$ff,$cf,$ff,$ff   ; [$bdad] byte
-    .byte $ff,$fb,$e8,$00,$ff,$5d,$ff,$fd   ; [$bdb5] byte
-    .byte $ff,$ff,$4c,$00,$ff,$d6,$ff,$ff   ; [$bdbd] byte
-    .byte $ff,$f3,$99,$00,$ff,$f3,$ff,$ff   ; [$bdc5] byte
-    .byte $ff,$bb,$7e,$00,$ff,$dd,$ff,$ff   ; [$bdcd] byte
-    .byte $ff,$bf,$05,$00,$ff,$5e,$ff,$ff   ; [$bdd5] byte
-    .byte $ff,$fe,$33,$00,$ff,$b6,$ff,$f7   ; [$bddd] byte
-    .byte $ff,$ff,$fe,$00,$ff,$5e,$ff,$ff   ; [$bde5] byte
-    .byte $ff,$f9,$c6,$00,$ff,$27,$ff,$ea   ; [$bded] byte
-    .byte $ff,$bf,$62,$00,$ff,$fb,$ff,$ff   ; [$bdf5] byte
-    .byte $ff,$ff,$28,$00,$ff,$ef,$ff,$ff   ; [$bdfd] byte
-    .byte $ff,$fb,$6d,$00,$ff,$bb,$ff,$fb   ; [$be05] byte
-    .byte $ff,$ff,$ff,$00,$ff,$3f,$ff,$ff   ; [$be0d] byte
-    .byte $ff,$fd,$fb,$00,$ff,$73,$ff,$f7   ; [$be15] byte
-    .byte $ff,$ff,$b7,$00,$ff,$5c,$ff,$fb   ; [$be1d] byte
-    .byte $ff,$ff,$bf,$00,$ff,$ff,$ff,$ff   ; [$be25] byte
-    .byte $ff,$ff,$fc,$00,$ff,$5e,$ff,$bf   ; [$be2d] byte
-    .byte $ff,$ff,$f9,$00,$ff,$3a,$ff,$df   ; [$be35] byte
-    .byte $ff,$fb,$5a,$00,$ff,$fd,$ff,$df   ; [$be3d] byte
-    .byte $ff,$ff,$99,$00,$ff,$77,$ff,$ff   ; [$be45] byte
-    .byte $ff,$ff,$ba,$00,$ff,$fb,$ff,$bf   ; [$be4d] byte
-    .byte $ff,$ff,$ad,$00,$ff,$d5,$ff,$ff   ; [$be55] byte
-    .byte $ff,$7f,$7c,$00,$ff,$e7,$ff,$6b   ; [$be5d] byte
-    .byte $ff,$be,$ff,$00,$ff,$d4,$ff,$ff   ; [$be65] byte
-    .byte $ff,$ff,$72,$00,$ff,$df,$ff,$fa   ; [$be6d] byte
-    .byte $ff,$ab,$d9,$00,$ff,$fa,$ff,$7f   ; [$be75] byte
-    .byte $ff,$fd,$67,$00,$ff,$7e,$ff,$ff   ; [$be7d] byte
-    .byte $ff,$e7,$39,$00,$ff,$d3,$ff,$ff   ; [$be85] byte
-    .byte $ff,$ff,$dd,$00,$ff,$d7,$ff,$ff   ; [$be8d] byte
-    .byte $ff,$ef,$23,$00,$ff,$fd,$ff,$ff   ; [$be95] byte
-    .byte $ff,$ff,$96,$00,$ff,$a6,$ff,$ff   ; [$be9d] byte
-    .byte $ff,$de,$3d,$00,$ff,$ff,$ff,$ff   ; [$bea5] byte
-    .byte $ff,$df,$ea,$00,$ff,$c6,$ff,$7f   ; [$bead] byte
-    .byte $ff,$fb,$b2,$00,$ff,$6f,$ff,$ff   ; [$beb5] byte
-    .byte $ff,$ff,$3f,$00,$ff,$12,$ff,$6f   ; [$bebd] byte
-    .byte $ff,$ff,$a7,$00,$ff,$cb,$ff,$ff   ; [$bec5] byte
-    .byte $ff,$bf,$46,$00,$ff,$ff,$ff,$ff   ; [$becd] byte
-    .byte $ff,$7f,$55,$00,$ff,$1f,$ff,$ff   ; [$bed5] byte
-    .byte $ff,$ff,$29,$00,$ff,$dc,$ff,$dd   ; [$bedd] byte
-    .byte $ff,$ef,$ff,$00,$ff,$ce,$ff,$fd   ; [$bee5] byte
-    .byte $ff,$ff,$15,$00,$ff,$ae,$ff,$ff   ; [$beed] byte
-    .byte $ff,$ff,$bb,$00,$ff,$d9,$ff,$cd   ; [$bef5] byte
-    .byte $ff,$ff,$68,$00,$ff,$52,$ff,$de   ; [$befd] byte
-    .byte $ff,$fd,$ed,$00,$ff,$bf,$ff,$ff   ; [$bf05] byte
-    .byte $ff,$bf,$be,$00,$ff,$b7,$ff,$ff   ; [$bf0d] byte
-    .byte $ff,$ff,$df,$00,$ff,$ff,$ff,$ff   ; [$bf15] byte
-    .byte $ff,$ef,$6e,$00,$ff,$3c,$ff,$ff   ; [$bf1d] byte
-    .byte $ff,$fa,$bf,$00,$ff,$f7,$ff,$ee   ; [$bf25] byte
-    .byte $ff,$ef,$c5,$04,$ff,$9b,$ff,$ff   ; [$bf2d] byte
-    .byte $ff,$ff,$df,$01,$ff,$35,$ff,$ff   ; [$bf35] byte
-    .byte $ff,$ff,$fc,$00,$ff,$ff,$ff,$df   ; [$bf3d] byte
-    .byte $ff,$f7,$b9,$00,$ff,$ff,$ff,$df   ; [$bf45] byte
-    .byte $ff,$fe,$bf,$00,$ff,$ff,$ff,$ff   ; [$bf4d] byte
-    .byte $ff,$bf,$72,$00,$ff,$bd,$ff,$ff   ; [$bf55] byte
-    .byte $ff,$f7,$75,$00,$ff,$aa,$ff,$f6   ; [$bf5d] byte
-    .byte $ff,$bf,$d8,$00,$ff,$ef,$ff,$fb   ; [$bf65] byte
-    .byte $ff,$ff,$c4,$00,$ff,$bf,$ff,$bf   ; [$bf6d] byte
-    .byte $ff,$fc,$8b,$00,$ff,$fe,$ff,$d7   ; [$bf75] byte
-    .byte $ff,$fe,$bb,$00,$ff,$18,$ff,$bf   ; [$bf7d] byte
-    .byte $ff,$fe,$c5,$00,$ff,$7b,$ff,$ff   ; [$bf85] byte
-    .byte $ff,$fb,$ba,$00,$ff,$7d,$ff,$ff   ; [$bf8d] byte
-    .byte $ff,$ff,$3f,$00,$ff,$76,$ff,$ff   ; [$bf95] byte
-    .byte $ff,$ff,$73,$00,$ff,$2e,$ff,$fd   ; [$bf9d] byte
-    .byte $ff,$f7,$fb,$00,$ff,$fe,$ff,$fd   ; [$bfa5] byte
-    .byte $ff,$77,$99,$00,$ff,$d5,$ff,$dd   ; [$bfad] byte
-    .byte $ff,$ff,$67,$00,$ff,$bf,$ff,$ff   ; [$bfb5] byte
-    .byte $ff,$df,$46,$00,$ff,$31,$ff,$9f   ; [$bfbd] byte
-    .byte $ff,$fa,$bd,$00,$ff,$48,$ff,$ff   ; [$bfc5] byte
-    .byte $ff,$ff,$86,$00,$ff,$3f,$ff,$ff   ; [$bfcd] byte
-    .byte $ff,$ff,$8e,$00,$ff,$f3,$ff,$ff   ; [$bfd5] byte
-    .byte $ff,$ff,$8e,$00,$ff,$98,$ff,$9b   ; [$bfdd] byte
-    .byte $ff,$bf,$91,$00,$ff,$e7,$ff,$b7   ; [$bfe5] byte
-    .byte $ff,$b7,$c0,$00,$ff,$af,$ff,$ff   ; [$bfed] byte
-    .byte $ff,$bf,$2b,$00,$ff,$fb,$ff,$f7   ; [$bff5] byte
-    .byte $ff,$fe,$d2                       ; [$bffd] byte
+    .byte $00,$00,$00                       ; [$affd] byte
+
+
+;============================================================================
+; TODO: Blocks of 8 bytes. Seems to be:
+;
+; 0) 00-04 (flags?)
+; 1) 0xFF
+; 2) value
+; 3) 0xFF
+; 4) value
+; 5) 0xFF
+; 6) value
+; 7) value
+;============================================================================
+    .byte $00,$ff,$fc,$ff,$ff,$ff,$f7,$4e   ; [$b000] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$ff,$a2   ; [$b008] byte
+    .byte $00,$ff,$eb,$ff,$fb,$ff,$ff,$f8   ; [$b010] byte
+    .byte $00,$ff,$99,$ff,$df,$ff,$7f,$df   ; [$b018] byte
+    .byte $00,$ff,$7f,$ff,$fd,$ff,$fd,$9f   ; [$b020] byte
+    .byte $02,$ff,$7f,$ff,$ff,$ff,$df,$fe   ; [$b028] byte
+    .byte $01,$ff,$ff,$ff,$fe,$ff,$ff,$77   ; [$b030] byte
+    .byte $00,$ff,$6b,$ff,$df,$ff,$ff,$7f   ; [$b038] byte
+    .byte $00,$ff,$d7,$ff,$bf,$ff,$ff,$ef   ; [$b040] byte
+    .byte $00,$ff,$9f,$ff,$ff,$ff,$b9,$6e   ; [$b048] byte
+    .byte $00,$ff,$1f,$ff,$ff,$ff,$ff,$ff   ; [$b050] byte
+    .byte $00,$ff,$ee,$ff,$fd,$ff,$ff,$55   ; [$b058] byte
+    .byte $00,$ff,$1c,$ff,$ff,$ff,$df,$5a   ; [$b060] byte
+    .byte $04,$ff,$bf,$ff,$fe,$ff,$ff,$5f   ; [$b068] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$7c   ; [$b070] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$ff,$fc   ; [$b078] byte
+    .byte $00,$ff,$5b,$ff,$7f,$ff,$ff,$ff   ; [$b080] byte
+    .byte $00,$ff,$e3,$ff,$df,$ff,$ff,$6e   ; [$b088] byte
+    .byte $00,$ff,$f2,$ff,$ff,$ff,$5f,$9d   ; [$b090] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$9f   ; [$b098] byte
+    .byte $00,$ff,$77,$ff,$df,$ff,$ff,$2d   ; [$b0a0] byte
+    .byte $00,$ff,$7d,$ff,$fb,$ff,$d8,$8f   ; [$b0a8] byte
+    .byte $00,$ff,$c9,$ff,$ff,$ff,$ff,$44   ; [$b0b0] byte
+    .byte $00,$ff,$43,$ff,$ff,$ff,$ff,$fa   ; [$b0b8] byte
+    .byte $00,$ff,$6d,$ff,$ff,$ff,$fc,$cb   ; [$b0c0] byte
+    .byte $00,$ff,$cb,$ff,$ff,$ff,$ff,$4c   ; [$b0c8] byte
+    .byte $00,$ff,$ee,$ff,$ef,$ff,$f7,$f9   ; [$b0d0] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$ff,$ae   ; [$b0d8] byte
+    .byte $00,$ff,$1d,$ff,$d3,$ff,$67,$dd   ; [$b0e0] byte
+    .byte $00,$ff,$ce,$ff,$df,$ff,$ff,$3e   ; [$b0e8] byte
+    .byte $00,$ff,$c9,$ff,$ff,$ff,$ff,$11   ; [$b0f0] byte
+    .byte $00,$ff,$f9,$ff,$ff,$ff,$ff,$0e   ; [$b0f8] byte
+    .byte $00,$ff,$ed,$ff,$ff,$ff,$f7,$99   ; [$b100] byte
+    .byte $00,$ff,$de,$ff,$ff,$ff,$bf,$1a   ; [$b108] byte
+    .byte $00,$ff,$af,$ff,$ff,$ff,$fd,$b6   ; [$b110] byte
+    .byte $00,$ff,$57,$ff,$fe,$ff,$ef,$eb   ; [$b118] byte
+    .byte $00,$ff,$f5,$ff,$ff,$ff,$fa,$b6   ; [$b120] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$7e   ; [$b128] byte
+    .byte $00,$ff,$e8,$ff,$ff,$ff,$ff,$63   ; [$b130] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$fb,$f6   ; [$b138] byte
+    .byte $00,$ff,$aa,$ff,$7f,$ff,$7f,$72   ; [$b140] byte
+    .byte $00,$ff,$7e,$ff,$ff,$ff,$f7,$dd   ; [$b148] byte
+    .byte $00,$ff,$e3,$ff,$ff,$ff,$ff,$1d   ; [$b150] byte
+    .byte $00,$ff,$74,$ff,$fd,$ff,$ff,$dd   ; [$b158] byte
+    .byte $00,$ff,$d5,$ff,$df,$ff,$ff,$79   ; [$b160] byte
+    .byte $00,$ff,$f2,$ff,$ed,$ff,$ff,$fd   ; [$b168] byte
+    .byte $00,$ff,$f9,$ff,$fe,$ff,$ff,$3f   ; [$b170] byte
+    .byte $00,$ff,$ce,$ff,$ff,$ff,$bf,$ca   ; [$b178] byte
+    .byte $00,$ff,$ee,$ff,$ff,$ff,$fd,$27   ; [$b180] byte
+    .byte $00,$ff,$79,$ff,$7f,$ff,$fb,$cd   ; [$b188] byte
+    .byte $00,$ff,$87,$ff,$bf,$ff,$ff,$7b   ; [$b190] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$fd,$5b   ; [$b198] byte
+    .byte $00,$ff,$f6,$ff,$ff,$ff,$ef,$ed   ; [$b1a0] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$73   ; [$b1a8] byte
+    .byte $00,$ff,$b1,$ff,$ff,$ff,$eb,$db   ; [$b1b0] byte
+    .byte $00,$ff,$cd,$ff,$ff,$ff,$ff,$16   ; [$b1b8] byte
+    .byte $00,$ff,$63,$ff,$ff,$ff,$fd,$fa   ; [$b1c0] byte
+    .byte $00,$ff,$bb,$ff,$ff,$ff,$ff,$3c   ; [$b1c8] byte
+    .byte $00,$ff,$dd,$ff,$ff,$ff,$ff,$d6   ; [$b1d0] byte
+    .byte $00,$ff,$ff,$ff,$3d,$ff,$ff,$59   ; [$b1d8] byte
+    .byte $00,$ff,$99,$ff,$ff,$ff,$ff,$3e   ; [$b1e0] byte
+    .byte $00,$ff,$d9,$ff,$7f,$ff,$ed,$92   ; [$b1e8] byte
+    .byte $00,$bf,$ce,$ff,$ff,$ff,$fb,$e3   ; [$b1f0] byte
+    .byte $08,$ff,$9e,$ff,$ff,$ff,$ff,$a4   ; [$b1f8] byte
+    .byte $00,$ff,$fe,$ff,$3e,$ff,$fb,$b7   ; [$b200] byte
+    .byte $08,$ff,$dd,$ff,$ff,$ff,$ff,$38   ; [$b208] byte
+    .byte $00,$ff,$75,$ff,$ff,$ff,$ff,$27   ; [$b210] byte
+    .byte $00,$ff,$f9,$ff,$5f,$ff,$ff,$ad   ; [$b218] byte
+    .byte $00,$ff,$de,$ff,$bf,$ff,$ff,$bb   ; [$b220] byte
+    .byte $00,$ff,$f9,$ff,$ff,$ff,$ff,$55   ; [$b228] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$ff,$5b   ; [$b230] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$cf,$2d   ; [$b238] byte
+    .byte $00,$ff,$e5,$ff,$fb,$ff,$fd,$77   ; [$b240] byte
+    .byte $00,$ff,$cb,$ff,$db,$ff,$ff,$79   ; [$b248] byte
+    .byte $00,$ff,$ff,$ff,$fe,$ff,$ff,$52   ; [$b250] byte
+    .byte $01,$ff,$df,$ff,$fd,$ff,$fe,$b7   ; [$b258] byte
+    .byte $00,$ff,$bd,$ff,$ef,$ff,$bd,$33   ; [$b260] byte
+    .byte $00,$ff,$73,$ff,$f7,$ff,$fe,$de   ; [$b268] byte
+    .byte $00,$ff,$e7,$ff,$ff,$ff,$9f,$bd   ; [$b270] byte
+    .byte $00,$ff,$ff,$ff,$fe,$ff,$fb,$bd   ; [$b278] byte
+    .byte $00,$ff,$9b,$ff,$7f,$ff,$eb,$ec   ; [$b280] byte
+    .byte $00,$ff,$fe,$ff,$fd,$ff,$ff,$51   ; [$b288] byte
+    .byte $00,$ff,$83,$ff,$ff,$ff,$ff,$8d   ; [$b290] byte
+    .byte $00,$ff,$db,$ff,$ed,$ff,$ff,$8f   ; [$b298] byte
+    .byte $00,$ff,$09,$ff,$f7,$ff,$7d,$ff   ; [$b2a0] byte
+    .byte $00,$ff,$d1,$ff,$e7,$ff,$fb,$ea   ; [$b2a8] byte
+    .byte $00,$ff,$b1,$ff,$df,$ff,$ff,$c5   ; [$b2b0] byte
+    .byte $00,$ff,$2f,$ff,$ff,$ff,$ef,$bd   ; [$b2b8] byte
+    .byte $00,$ff,$75,$ff,$f5,$ff,$3d,$bf   ; [$b2c0] byte
+    .byte $00,$ff,$65,$ff,$7e,$ff,$ff,$9a   ; [$b2c8] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$fe,$cf   ; [$b2d0] byte
+    .byte $00,$ff,$f3,$ff,$ff,$ff,$ff,$6f   ; [$b2d8] byte
+    .byte $00,$ff,$64,$ff,$db,$ff,$4e,$c7   ; [$b2e0] byte
+    .byte $00,$ff,$b8,$ff,$bf,$ff,$ad,$03   ; [$b2e8] byte
+    .byte $00,$ff,$d6,$ff,$ef,$ff,$ff,$49   ; [$b2f0] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$f7,$5a   ; [$b2f8] byte
+    .byte $00,$ff,$ed,$ff,$ef,$ff,$ff,$aa   ; [$b300] byte
+    .byte $00,$ff,$9e,$ff,$7f,$ff,$fd,$fd   ; [$b308] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$ff,$7d   ; [$b310] byte
+    .byte $00,$ff,$27,$ff,$ef,$ff,$ff,$d8   ; [$b318] byte
+    .byte $00,$ff,$9f,$ff,$ff,$ff,$ff,$bd   ; [$b320] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$f7,$e4   ; [$b328] byte
+    .byte $00,$ff,$bf,$ff,$fd,$ff,$ff,$75   ; [$b330] byte
+    .byte $00,$ff,$7a,$ff,$ff,$ff,$7d,$e6   ; [$b338] byte
+    .byte $00,$ff,$f0,$ff,$ed,$ff,$ff,$d5   ; [$b340] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$bf,$7e   ; [$b348] byte
+    .byte $00,$ff,$bf,$ff,$f7,$ff,$ff,$b7   ; [$b350] byte
+    .byte $00,$ff,$3f,$ff,$ff,$ff,$ff,$7b   ; [$b358] byte
+    .byte $00,$ff,$d7,$ff,$fe,$ff,$fb,$a4   ; [$b360] byte
+    .byte $00,$ff,$bc,$ff,$b7,$ff,$f3,$df   ; [$b368] byte
+    .byte $20,$ff,$fa,$ff,$ff,$ff,$7f,$51   ; [$b370] byte
+    .byte $00,$ff,$fb,$ff,$ef,$ff,$ff,$ff   ; [$b378] byte
+    .byte $00,$ff,$0f,$ff,$ff,$ff,$fe,$3e   ; [$b380] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$70   ; [$b388] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$f8   ; [$b390] byte
+    .byte $00,$ff,$7d,$ff,$ff,$ff,$df,$85   ; [$b398] byte
+    .byte $00,$ff,$b5,$ff,$ff,$ff,$36,$4a   ; [$b3a0] byte
+    .byte $00,$ff,$66,$ff,$fd,$ff,$7f,$8c   ; [$b3a8] byte
+    .byte $00,$ff,$f1,$ff,$fb,$ff,$ff,$94   ; [$b3b0] byte
+    .byte $00,$ff,$f5,$ff,$ff,$ff,$7d,$78   ; [$b3b8] byte
+    .byte $00,$ff,$26,$ff,$ff,$ff,$7f,$b5   ; [$b3c0] byte
+    .byte $00,$ff,$48,$ff,$fb,$ff,$fd,$e3   ; [$b3c8] byte
+    .byte $00,$ff,$d3,$ff,$ff,$ff,$f7,$13   ; [$b3d0] byte
+    .byte $80,$ff,$df,$ff,$ff,$ff,$ff,$b4   ; [$b3d8] byte
+    .byte $00,$ff,$85,$ff,$fb,$ff,$ff,$c5   ; [$b3e0] byte
+    .byte $00,$ff,$df,$ff,$7f,$ff,$77,$2f   ; [$b3e8] byte
+    .byte $00,$ff,$6f,$ff,$ff,$ff,$7f,$6c   ; [$b3f0] byte
+    .byte $00,$ff,$d7,$ff,$f1,$ff,$ff,$f1   ; [$b3f8] byte
+    .byte $00,$ff,$ff,$ff,$f7,$ff,$ff,$35   ; [$b400] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$ff,$79   ; [$b408] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$ff,$67   ; [$b410] byte
+    .byte $00,$ff,$23,$ff,$ff,$ff,$bf,$fa   ; [$b418] byte
+    .byte $00,$ff,$fc,$ff,$b9,$ff,$ff,$bd   ; [$b420] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$ff,$d9   ; [$b428] byte
+    .byte $00,$ff,$7f,$ff,$f7,$ff,$ff,$a7   ; [$b430] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$fd,$ff   ; [$b438] byte
+    .byte $00,$ff,$e9,$ff,$ff,$ff,$fe,$ad   ; [$b440] byte
+    .byte $02,$ff,$7d,$ff,$fd,$ff,$ff,$7f   ; [$b448] byte
+    .byte $00,$ff,$ea,$ff,$ff,$ff,$ed,$ff   ; [$b450] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$ff,$63   ; [$b458] byte
+    .byte $00,$ff,$59,$ff,$ff,$ff,$ff,$e5   ; [$b460] byte
+    .byte $00,$ff,$73,$ff,$f7,$ff,$ff,$3f   ; [$b468] byte
+    .byte $00,$ff,$77,$ff,$ff,$ff,$f6,$4f   ; [$b470] byte
+    .byte $00,$ff,$b5,$ff,$ff,$ff,$7f,$bd   ; [$b478] byte
+    .byte $00,$ff,$90,$ff,$d7,$ff,$9f,$df   ; [$b480] byte
+    .byte $00,$ff,$7f,$ff,$df,$ff,$f7,$ca   ; [$b488] byte
+    .byte $00,$ff,$66,$ff,$fd,$ff,$ff,$ca   ; [$b490] byte
+    .byte $00,$ff,$fb,$ff,$ff,$ff,$ff,$27   ; [$b498] byte
+    .byte $00,$ff,$c7,$ff,$ff,$ff,$ff,$6e   ; [$b4a0] byte
+    .byte $00,$ff,$7d,$ff,$ef,$ff,$ff,$7d   ; [$b4a8] byte
+    .byte $00,$ff,$eb,$ff,$ee,$ff,$ed,$ff   ; [$b4b0] byte
+    .byte $00,$ff,$fe,$ff,$f7,$ff,$ff,$2e   ; [$b4b8] byte
+    .byte $04,$ff,$36,$ff,$fa,$ff,$7b,$19   ; [$b4c0] byte
+    .byte $00,$ff,$e4,$ff,$fc,$ff,$df,$37   ; [$b4c8] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$f3,$34   ; [$b4d0] byte
+    .byte $00,$ff,$6b,$ff,$fe,$ff,$ff,$38   ; [$b4d8] byte
+    .byte $00,$ff,$e3,$ff,$fb,$ff,$f7,$da   ; [$b4e0] byte
+    .byte $00,$ff,$f7,$ff,$3e,$ff,$ff,$0c   ; [$b4e8] byte
+    .byte $00,$ff,$ae,$ff,$ff,$ff,$ff,$7d   ; [$b4f0] byte
+    .byte $00,$ff,$fa,$ff,$df,$ff,$fe,$4f   ; [$b4f8] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$fe,$27   ; [$b500] byte
+    .byte $00,$ff,$df,$ff,$be,$ff,$bf,$b5   ; [$b508] byte
+    .byte $00,$ff,$b7,$ff,$fe,$ff,$ff,$f7   ; [$b510] byte
+    .byte $00,$ff,$dd,$ff,$ff,$ff,$ff,$63   ; [$b518] byte
+    .byte $02,$ff,$ff,$ff,$ef,$ff,$ff,$fc   ; [$b520] byte
+    .byte $00,$ff,$5f,$ff,$ff,$ff,$ff,$9f   ; [$b528] byte
+    .byte $00,$ff,$df,$ff,$df,$ff,$ff,$9c   ; [$b530] byte
+    .byte $00,$ff,$37,$ff,$f7,$ff,$ff,$df   ; [$b538] byte
+    .byte $00,$ff,$e3,$ff,$fe,$ff,$da,$fb   ; [$b540] byte
+    .byte $00,$ff,$b5,$ff,$f7,$ff,$ff,$dd   ; [$b548] byte
+    .byte $00,$ff,$f5,$ff,$fe,$ff,$ff,$96   ; [$b550] byte
+    .byte $00,$ff,$c7,$ff,$5d,$ff,$de,$b5   ; [$b558] byte
+    .byte $00,$ff,$de,$ff,$7d,$ff,$ff,$fd   ; [$b560] byte
+    .byte $00,$ff,$73,$ff,$bf,$ff,$fd,$17   ; [$b568] byte
+    .byte $00,$ff,$ed,$ff,$f7,$ff,$ff,$fc   ; [$b570] byte
+    .byte $00,$ff,$fb,$ff,$ff,$ff,$df,$7f   ; [$b578] byte
+    .byte $00,$ff,$79,$ff,$ff,$ff,$ff,$5d   ; [$b580] byte
+    .byte $00,$ff,$ff,$ff,$fe,$ff,$ff,$b5   ; [$b588] byte
+    .byte $00,$ff,$3b,$ff,$ef,$ff,$fd,$d7   ; [$b590] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$bf,$66   ; [$b598] byte
+    .byte $00,$ff,$ec,$ff,$fc,$ff,$ef,$47   ; [$b5a0] byte
+    .byte $00,$ff,$ed,$ff,$eb,$ff,$be,$38   ; [$b5a8] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$ff,$d6   ; [$b5b0] byte
+    .byte $00,$ff,$7a,$ff,$ff,$ff,$ff,$e7   ; [$b5b8] byte
+    .byte $00,$ff,$f5,$ff,$7f,$ff,$ff,$a8   ; [$b5c0] byte
+    .byte $00,$ff,$ef,$ff,$bf,$ff,$ff,$8b   ; [$b5c8] byte
+    .byte $00,$ff,$f9,$ff,$7d,$ff,$dd,$10   ; [$b5d0] byte
+    .byte $00,$ff,$ef,$ff,$ef,$ff,$bf,$2e   ; [$b5d8] byte
+    .byte $00,$ff,$66,$ff,$ed,$ff,$f6,$7d   ; [$b5e0] byte
+    .byte $00,$ff,$12,$ff,$7f,$ff,$fd,$b5   ; [$b5e8] byte
+    .byte $00,$ff,$6f,$ff,$7f,$ff,$ff,$d6   ; [$b5f0] byte
+    .byte $00,$ff,$fb,$ff,$fe,$ff,$7f,$27   ; [$b5f8] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$fb,$bb   ; [$b600] byte
+    .byte $00,$ff,$e8,$ff,$ff,$ff,$ff,$b5   ; [$b608] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$ff,$ff   ; [$b610] byte
+    .byte $00,$ff,$bf,$ff,$ef,$ff,$ff,$cc   ; [$b618] byte
+    .byte $00,$ff,$ee,$ff,$9e,$ff,$ff,$dd   ; [$b620] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$ff,$a5   ; [$b628] byte
+    .byte $00,$ff,$f1,$ff,$ff,$ff,$ff,$74   ; [$b630] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$7f   ; [$b638] byte
+    .byte $00,$ff,$f7,$ff,$ef,$ff,$be,$ef   ; [$b640] byte
+    .byte $00,$ff,$2f,$ff,$ff,$ff,$ff,$ff   ; [$b648] byte
+    .byte $00,$ff,$bd,$ff,$ff,$ff,$ff,$d4   ; [$b650] byte
+    .byte $00,$ff,$fd,$ff,$ef,$ff,$df,$7f   ; [$b658] byte
+    .byte $00,$ff,$32,$ff,$7f,$ff,$be,$fd   ; [$b660] byte
+    .byte $00,$ff,$db,$ff,$bf,$ff,$7f,$ff   ; [$b668] byte
+    .byte $00,$ff,$db,$ff,$fb,$ff,$9c,$fa   ; [$b670] byte
+    .byte $00,$ff,$a5,$ff,$ff,$ff,$7f,$e3   ; [$b678] byte
+    .byte $00,$ff,$bb,$ff,$df,$ff,$fb,$3f   ; [$b680] byte
+    .byte $00,$ff,$e2,$ff,$fb,$ff,$fe,$e8   ; [$b688] byte
+    .byte $00,$ff,$2b,$ff,$db,$ff,$ff,$de   ; [$b690] byte
+    .byte $00,$ff,$3d,$ff,$ff,$ff,$ff,$cf   ; [$b698] byte
+    .byte $00,$ff,$c9,$ff,$fd,$ff,$d7,$04   ; [$b6a0] byte
+    .byte $00,$ff,$4b,$ff,$ff,$ff,$ff,$b3   ; [$b6a8] byte
+    .byte $00,$ff,$59,$ff,$ff,$ff,$bf,$5e   ; [$b6b0] byte
+    .byte $00,$ff,$fb,$ff,$bf,$ff,$ff,$a8   ; [$b6b8] byte
+    .byte $00,$ff,$a2,$ff,$f7,$ff,$df,$fd   ; [$b6c0] byte
+    .byte $00,$ff,$1f,$ff,$ff,$ff,$ff,$50   ; [$b6c8] byte
+    .byte $00,$ff,$eb,$ff,$fb,$ff,$ff,$e3   ; [$b6d0] byte
+    .byte $00,$ff,$f5,$ff,$ff,$ff,$ff,$e2   ; [$b6d8] byte
+    .byte $00,$ff,$ae,$ff,$7c,$ff,$ef,$be   ; [$b6e0] byte
+    .byte $00,$ff,$df,$ff,$fe,$ff,$ff,$d5   ; [$b6e8] byte
+    .byte $00,$ff,$cd,$ff,$ff,$ff,$ff,$6e   ; [$b6f0] byte
+    .byte $00,$ff,$7f,$ff,$fb,$ff,$ff,$14   ; [$b6f8] byte
+    .byte $00,$ff,$b7,$ff,$6e,$ff,$ff,$5f   ; [$b700] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$df,$6b   ; [$b708] byte
+    .byte $00,$ff,$77,$ff,$fd,$ff,$fd,$71   ; [$b710] byte
+    .byte $00,$ff,$d9,$ff,$ef,$ff,$7f,$f7   ; [$b718] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$ff,$ce   ; [$b720] byte
+    .byte $00,$ff,$af,$ff,$ff,$ff,$7f,$ff   ; [$b728] byte
+    .byte $00,$ff,$d7,$ff,$ff,$ff,$ff,$85   ; [$b730] byte
+    .byte $00,$ff,$ad,$ff,$ff,$ff,$f7,$eb   ; [$b738] byte
+    .byte $00,$ff,$34,$ff,$7f,$ff,$b7,$b3   ; [$b740] byte
+    .byte $01,$ff,$f7,$ff,$f7,$ff,$e1,$3d   ; [$b748] byte
+    .byte $00,$ff,$cc,$ff,$ff,$ff,$fe,$ff   ; [$b750] byte
+    .byte $00,$ff,$f6,$ff,$ee,$ff,$ff,$e7   ; [$b758] byte
+    .byte $00,$ff,$77,$ff,$ff,$ff,$ef,$fb   ; [$b760] byte
+    .byte $00,$ff,$33,$ff,$ff,$ff,$ff,$59   ; [$b768] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$fb,$59   ; [$b770] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$ff,$77   ; [$b778] byte
+    .byte $00,$ff,$b7,$ff,$ff,$ff,$ff,$b7   ; [$b780] byte
+    .byte $00,$ff,$ca,$ff,$ff,$ff,$be,$3e   ; [$b788] byte
+    .byte $00,$ff,$5f,$ff,$ff,$ff,$ff,$6b   ; [$b790] byte
+    .byte $00,$ff,$7f,$ff,$df,$ff,$ff,$7d   ; [$b798] byte
+    .byte $00,$ff,$ee,$ff,$7f,$ff,$bf,$cf   ; [$b7a0] byte
+    .byte $00,$ff,$06,$ff,$ff,$ff,$f7,$3b   ; [$b7a8] byte
+    .byte $00,$ff,$7b,$ff,$ff,$ff,$fe,$d4   ; [$b7b0] byte
+    .byte $14,$ff,$1a,$ff,$fd,$ff,$db,$29   ; [$b7b8] byte
+    .byte $00,$ff,$5f,$ff,$ff,$ff,$ef,$dc   ; [$b7c0] byte
+    .byte $00,$ff,$a0,$ff,$ff,$ff,$ff,$8c   ; [$b7c8] byte
+    .byte $00,$ff,$6d,$ff,$ef,$ff,$fb,$cb   ; [$b7d0] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$ff,$f0   ; [$b7d8] byte
+    .byte $00,$ff,$3a,$ff,$fb,$ff,$df,$bd   ; [$b7e0] byte
+    .byte $00,$ff,$ff,$ff,$fd,$ff,$ff,$ab   ; [$b7e8] byte
+    .byte $00,$ff,$87,$ff,$ff,$ff,$ff,$d0   ; [$b7f0] byte
+    .byte $00,$ff,$7f,$ff,$f9,$ff,$ff,$60   ; [$b7f8] byte
+    .byte $04,$ff,$bf,$ff,$bf,$ff,$ff,$ca   ; [$b800] byte
+    .byte $00,$ff,$cf,$ff,$ff,$ff,$ef,$f4   ; [$b808] byte
+    .byte $00,$ff,$ff,$ff,$7f,$ff,$ff,$4b   ; [$b810] byte
+    .byte $00,$ff,$f5,$ff,$fd,$ff,$ff,$ff   ; [$b818] byte
+    .byte $00,$ff,$eb,$ff,$ff,$ff,$ff,$df   ; [$b820] byte
+    .byte $01,$ff,$fe,$ff,$e7,$ff,$ff,$b9   ; [$b828] byte
+    .byte $00,$ff,$7e,$ff,$ef,$ff,$ff,$22   ; [$b830] byte
+    .byte $00,$ff,$bf,$ff,$f7,$ff,$ff,$af   ; [$b838] byte
+    .byte $00,$ff,$a1,$ff,$ef,$ff,$fe,$ee   ; [$b840] byte
+    .byte $00,$ff,$9b,$ff,$ff,$ff,$5f,$f6   ; [$b848] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$b6   ; [$b850] byte
+    .byte $00,$ff,$3d,$ff,$ff,$ff,$ff,$f6   ; [$b858] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$fe,$70   ; [$b860] byte
+    .byte $10,$ff,$f3,$ff,$7f,$ff,$ff,$f0   ; [$b868] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$ff,$9f   ; [$b870] byte
+    .byte $00,$ff,$fa,$ff,$ff,$ff,$fb,$c7   ; [$b878] byte
+    .byte $00,$ff,$9c,$ff,$7d,$ff,$ff,$e8   ; [$b880] byte
+    .byte $00,$ff,$f1,$ff,$fd,$ff,$f7,$1d   ; [$b888] byte
+    .byte $00,$ff,$d6,$ff,$ff,$ff,$ff,$39   ; [$b890] byte
+    .byte $40,$ff,$5a,$ff,$ff,$ff,$ff,$97   ; [$b898] byte
+    .byte $00,$ff,$f4,$ff,$ff,$ff,$f6,$97   ; [$b8a0] byte
+    .byte $00,$ff,$e7,$ff,$f7,$ff,$ff,$4a   ; [$b8a8] byte
+    .byte $00,$ff,$9d,$ff,$ff,$ff,$6f,$b7   ; [$b8b0] byte
+    .byte $00,$ff,$b7,$ff,$ff,$ff,$f7,$ea   ; [$b8b8] byte
+    .byte $00,$ff,$8d,$ff,$7f,$ff,$ff,$8b   ; [$b8c0] byte
+    .byte $00,$ff,$65,$ff,$ff,$ff,$fb,$37   ; [$b8c8] byte
+    .byte $00,$ff,$cf,$ff,$ff,$ff,$bf,$1c   ; [$b8d0] byte
+    .byte $00,$ff,$db,$ff,$ff,$ff,$ff,$a6   ; [$b8d8] byte
+    .byte $00,$ff,$64,$ff,$2b,$ff,$bf,$e7   ; [$b8e0] byte
+    .byte $00,$ff,$a7,$ff,$ff,$ff,$de,$5e   ; [$b8e8] byte
+    .byte $00,$ff,$73,$ff,$ff,$ff,$ff,$b6   ; [$b8f0] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$ff,$ce   ; [$b8f8] byte
+    .byte $00,$ff,$7c,$ff,$fb,$ff,$ff,$b0   ; [$b900] byte
+    .byte $20,$ff,$ff,$ff,$ff,$ff,$ef,$fd   ; [$b908] byte
+    .byte $00,$ff,$fd,$ff,$fd,$ff,$f7,$78   ; [$b910] byte
+    .byte $00,$ff,$7d,$ff,$ff,$ff,$ff,$ee   ; [$b918] byte
+    .byte $00,$ff,$fd,$ff,$ef,$ff,$ff,$be   ; [$b920] byte
+    .byte $02,$ff,$f6,$ff,$f7,$ff,$f7,$9d   ; [$b928] byte
+    .byte $00,$ff,$d7,$ff,$ff,$ff,$f7,$f5   ; [$b930] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$df,$af   ; [$b938] byte
+    .byte $00,$ff,$f2,$ff,$df,$ff,$ff,$af   ; [$b940] byte
+    .byte $00,$ff,$62,$ff,$df,$ff,$fd,$3f   ; [$b948] byte
+    .byte $00,$ff,$f6,$ff,$ef,$ff,$ff,$36   ; [$b950] byte
+    .byte $00,$ff,$dd,$ff,$ff,$ff,$be,$7d   ; [$b958] byte
+    .byte $00,$ff,$fd,$ff,$cd,$ff,$ff,$eb   ; [$b960] byte
+    .byte $00,$ff,$ce,$ff,$ff,$ff,$fb,$9a   ; [$b968] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$ec   ; [$b970] byte
+    .byte $00,$ff,$5f,$ff,$7f,$ff,$fb,$e4   ; [$b978] byte
+    .byte $00,$ff,$c5,$ff,$ff,$ff,$7f,$fc   ; [$b980] byte
+    .byte $00,$ff,$3f,$ff,$e9,$ff,$fe,$ef   ; [$b988] byte
+    .byte $00,$ff,$ff,$ff,$f7,$ff,$fb,$5a   ; [$b990] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$2e   ; [$b998] byte
+    .byte $00,$ff,$e5,$ff,$f9,$ff,$ff,$d6   ; [$b9a0] byte
+    .byte $00,$ff,$e5,$ff,$ff,$ff,$7f,$93   ; [$b9a8] byte
+    .byte $00,$ff,$e3,$ff,$fe,$ff,$ff,$a6   ; [$b9b0] byte
+    .byte $00,$ff,$f7,$ff,$f5,$ff,$ff,$ef   ; [$b9b8] byte
+    .byte $00,$ff,$db,$ff,$df,$ff,$cf,$4b   ; [$b9c0] byte
+    .byte $00,$ff,$88,$ff,$bf,$ff,$fe,$f1   ; [$b9c8] byte
+    .byte $00,$ff,$ca,$ff,$ff,$ff,$fd,$a2   ; [$b9d0] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$7f,$e8   ; [$b9d8] byte
+    .byte $00,$ff,$04,$ff,$bd,$ff,$5d,$bf   ; [$b9e0] byte
+    .byte $00,$ff,$4f,$ff,$fe,$ff,$ff,$7a   ; [$b9e8] byte
+    .byte $00,$ff,$76,$ff,$df,$7f,$bf,$5b   ; [$b9f0] byte
+    .byte $00,$ff,$7b,$ff,$ff,$ff,$ff,$62   ; [$b9f8] byte
+    .byte $00,$ff,$d7,$ff,$fb,$ff,$3f,$7f   ; [$ba00] byte
+    .byte $00,$ff,$de,$ff,$fe,$ff,$df,$74   ; [$ba08] byte
+    .byte $00,$ff,$3a,$ff,$ff,$ff,$ff,$85   ; [$ba10] byte
+    .byte $00,$ff,$54,$ff,$fd,$ff,$ef,$f6   ; [$ba18] byte
+    .byte $00,$ff,$be,$ff,$df,$ff,$df,$ab   ; [$ba20] byte
+    .byte $00,$ff,$ff,$ff,$f7,$ff,$ef,$ad   ; [$ba28] byte
+    .byte $00,$ff,$f7,$ff,$ff,$ff,$ff,$f9   ; [$ba30] byte
+    .byte $00,$ff,$3f,$ff,$ff,$ff,$ff,$76   ; [$ba38] byte
+    .byte $00,$ff,$fb,$ff,$f5,$ff,$ef,$af   ; [$ba40] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$ff,$75   ; [$ba48] byte
+    .byte $00,$ff,$8b,$ff,$ff,$ff,$df,$7c   ; [$ba50] byte
+    .byte $00,$ff,$f7,$ff,$7f,$ff,$ff,$fb   ; [$ba58] byte
+    .byte $00,$ff,$bd,$ff,$6f,$ff,$ed,$7c   ; [$ba60] byte
+    .byte $00,$ff,$fc,$ff,$6f,$ff,$ff,$ef   ; [$ba68] byte
+    .byte $00,$ff,$ff,$ff,$5f,$ff,$ff,$ed   ; [$ba70] byte
+    .byte $00,$ff,$f8,$ff,$ff,$ff,$ff,$6c   ; [$ba78] byte
+    .byte $00,$ff,$7b,$ff,$ff,$ff,$ff,$7e   ; [$ba80] byte
+    .byte $00,$ff,$cb,$ff,$ff,$ff,$f3,$d3   ; [$ba88] byte
+    .byte $00,$ff,$7e,$ff,$ff,$ff,$ff,$e8   ; [$ba90] byte
+    .byte $00,$ff,$dd,$ff,$fd,$ff,$ff,$d3   ; [$ba98] byte
+    .byte $00,$ff,$b7,$ff,$fe,$ff,$df,$72   ; [$baa0] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$ef,$f1   ; [$baa8] byte
+    .byte $00,$ff,$e9,$ff,$f3,$ff,$fb,$df   ; [$bab0] byte
+    .byte $00,$ff,$7d,$ff,$ff,$ff,$ff,$30   ; [$bab8] byte
+    .byte $00,$ff,$7e,$ff,$ff,$ff,$eb,$3d   ; [$bac0] byte
+    .byte $00,$ff,$c7,$ff,$bf,$ff,$ff,$20   ; [$bac8] byte
+    .byte $00,$ff,$fb,$ff,$ef,$ff,$df,$c0   ; [$bad0] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$ff,$73   ; [$bad8] byte
+    .byte $00,$ff,$dd,$ff,$76,$ff,$fd,$ff   ; [$bae0] byte
+    .byte $00,$ff,$ca,$ff,$3e,$ff,$ff,$bd   ; [$bae8] byte
+    .byte $00,$ff,$fa,$ff,$7f,$ff,$f7,$b0   ; [$baf0] byte
+    .byte $00,$ff,$71,$ff,$de,$ff,$fd,$d7   ; [$baf8] byte
+    .byte $00,$ff,$bf,$ff,$ef,$ff,$7f,$35   ; [$bb00] byte
+    .byte $00,$ff,$ad,$ff,$77,$ff,$fd,$9c   ; [$bb08] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$f7,$f9   ; [$bb10] byte
+    .byte $00,$ff,$e6,$ff,$fd,$ff,$7f,$fe   ; [$bb18] byte
+    .byte $04,$ff,$c3,$ff,$ac,$ff,$7f,$b8   ; [$bb20] byte
+    .byte $00,$ff,$5d,$ff,$fd,$ff,$7f,$dd   ; [$bb28] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$ff,$ff   ; [$bb30] byte
+    .byte $00,$ff,$6d,$ff,$bb,$ff,$ff,$be   ; [$bb38] byte
+    .byte $00,$ff,$ed,$ff,$ff,$ff,$f7,$b9   ; [$bb40] byte
+    .byte $00,$ff,$6d,$ff,$ef,$ff,$ff,$ff   ; [$bb48] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$f7,$fc   ; [$bb50] byte
+    .byte $00,$ff,$ee,$ff,$7f,$ff,$ff,$d1   ; [$bb58] byte
+    .byte $00,$ff,$ef,$ff,$b7,$ff,$f3,$b3   ; [$bb60] byte
+    .byte $00,$ff,$7f,$ff,$fd,$ff,$ff,$b3   ; [$bb68] byte
+    .byte $00,$ff,$6a,$ff,$ff,$ff,$ff,$f7   ; [$bb70] byte
+    .byte $00,$ff,$f9,$ff,$ff,$ff,$ff,$c2   ; [$bb78] byte
+    .byte $00,$ff,$c4,$ff,$ff,$ff,$ff,$a7   ; [$bb80] byte
+    .byte $00,$ff,$c7,$ff,$fe,$ff,$ff,$55   ; [$bb88] byte
+    .byte $00,$ff,$6d,$ff,$ff,$ff,$fe,$7f   ; [$bb90] byte
+    .byte $00,$ff,$f2,$ff,$ff,$ff,$ff,$f8   ; [$bb98] byte
+    .byte $00,$ff,$9f,$ff,$ff,$ff,$fb,$2e   ; [$bba0] byte
+    .byte $00,$ff,$0b,$ff,$ff,$ff,$ef,$5f   ; [$bba8] byte
+    .byte $00,$ff,$ff,$ff,$ef,$ff,$ef,$b1   ; [$bbb0] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$ff,$16   ; [$bbb8] byte
+    .byte $00,$ff,$5f,$ff,$cf,$ff,$ff,$99   ; [$bbc0] byte
+    .byte $01,$ff,$a0,$ff,$ff,$ff,$ff,$76   ; [$bbc8] byte
+    .byte $00,$ff,$af,$ff,$ff,$ff,$bf,$9d   ; [$bbd0] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$ff,$fc   ; [$bbd8] byte
+    .byte $00,$ff,$69,$ff,$3e,$ff,$b6,$4c   ; [$bbe0] byte
+    .byte $00,$ff,$9f,$ff,$fb,$ff,$cf,$17   ; [$bbe8] byte
+    .byte $00,$ff,$fb,$ff,$1f,$ff,$f7,$34   ; [$bbf0] byte
+    .byte $00,$ff,$7e,$ff,$f3,$ff,$ff,$bc   ; [$bbf8] byte
+    .byte $00,$ff,$db,$ff,$ff,$ff,$ef,$8e   ; [$bc00] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$7f,$be   ; [$bc08] byte
+    .byte $00,$ff,$c9,$ff,$fd,$ff,$ff,$76   ; [$bc10] byte
+    .byte $00,$ff,$77,$ff,$d3,$ff,$ef,$ef   ; [$bc18] byte
+    .byte $00,$ff,$7f,$ff,$ff,$ff,$fe,$c9   ; [$bc20] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$ff,$7e   ; [$bc28] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$f7,$3b   ; [$bc30] byte
+    .byte $00,$ff,$fb,$ff,$ff,$ff,$ff,$ff   ; [$bc38] byte
+    .byte $00,$ff,$7a,$ff,$df,$ff,$7b,$e7   ; [$bc40] byte
+    .byte $00,$ff,$fe,$ff,$ef,$ff,$ff,$17   ; [$bc48] byte
+    .byte $00,$ff,$f3,$ff,$ff,$ff,$ff,$c3   ; [$bc50] byte
+    .byte $00,$ff,$df,$ff,$f9,$ff,$ff,$3f   ; [$bc58] byte
+    .byte $00,$ff,$cf,$ff,$bf,$ff,$ff,$ef   ; [$bc60] byte
+    .byte $00,$ff,$cf,$ff,$fa,$ff,$df,$ab   ; [$bc68] byte
+    .byte $00,$ff,$69,$ff,$de,$ff,$ff,$eb   ; [$bc70] byte
+    .byte $00,$ff,$ff,$ff,$f6,$ff,$df,$7f   ; [$bc78] byte
+    .byte $00,$ff,$fd,$ff,$b7,$ff,$ff,$7f   ; [$bc80] byte
+    .byte $00,$ff,$5f,$ff,$f7,$ff,$bf,$9b   ; [$bc88] byte
+    .byte $00,$ff,$fe,$ff,$ff,$ff,$fd,$ce   ; [$bc90] byte
+    .byte $00,$ff,$fb,$ff,$fd,$ff,$ff,$7b   ; [$bc98] byte
+    .byte $00,$ff,$01,$ff,$f7,$ff,$6f,$fc   ; [$bca0] byte
+    .byte $00,$ff,$f8,$ff,$eb,$ff,$b7,$b1   ; [$bca8] byte
+    .byte $00,$ff,$5f,$ff,$ff,$fd,$5f,$c2   ; [$bcb0] byte
+    .byte $00,$ff,$df,$ff,$ff,$ff,$ff,$e2   ; [$bcb8] byte
+    .byte $00,$ff,$4b,$ff,$ef,$ff,$fa,$b7   ; [$bcc0] byte
+    .byte $00,$ff,$cc,$ff,$ff,$ff,$ff,$3d   ; [$bcc8] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$bf,$8f   ; [$bcd0] byte
+    .byte $00,$ff,$7f,$ff,$bf,$ff,$ef,$2d   ; [$bcd8] byte
+    .byte $00,$ff,$a3,$ff,$be,$ff,$ff,$2b   ; [$bce0] byte
+    .byte $00,$ff,$54,$ff,$fb,$ff,$ff,$15   ; [$bce8] byte
+    .byte $00,$ff,$4d,$ff,$ff,$ff,$ff,$2e   ; [$bcf0] byte
+    .byte $00,$ff,$72,$ff,$ff,$ff,$fd,$fd   ; [$bcf8] byte
+    .byte $00,$ff,$5b,$ff,$ff,$ff,$37,$7f   ; [$bd00] byte
+    .byte $00,$ff,$d7,$ff,$fe,$ff,$ff,$72   ; [$bd08] byte
+    .byte $00,$ff,$a7,$ff,$ff,$ff,$ff,$7f   ; [$bd10] byte
+    .byte $00,$ff,$fe,$ff,$bf,$ff,$ff,$f3   ; [$bd18] byte
+    .byte $00,$ff,$a5,$ff,$f7,$ff,$ff,$af   ; [$bd20] byte
+    .byte $00,$ff,$ee,$ff,$ff,$ff,$f7,$1c   ; [$bd28] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$7f,$77   ; [$bd30] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$e9   ; [$bd38] byte
+    .byte $80,$ff,$d4,$ff,$df,$ff,$ff,$db   ; [$bd40] byte
+    .byte $00,$ff,$bb,$ff,$fb,$ff,$fb,$7e   ; [$bd48] byte
+    .byte $00,$ff,$9f,$ff,$cb,$ff,$fd,$d7   ; [$bd50] byte
+    .byte $00,$ff,$fa,$ff,$ff,$ff,$fe,$f7   ; [$bd58] byte
+    .byte $00,$ff,$de,$ff,$ed,$ff,$f7,$05   ; [$bd60] byte
+    .byte $00,$ff,$a7,$ff,$df,$ff,$ff,$de   ; [$bd68] byte
+    .byte $00,$ff,$7b,$ff,$ff,$ff,$fd,$56   ; [$bd70] byte
+    .byte $00,$ff,$71,$ff,$ff,$ff,$fe,$f1   ; [$bd78] byte
+    .byte $00,$ff,$ef,$ff,$fd,$ff,$ff,$d7   ; [$bd80] byte
+    .byte $00,$ff,$3f,$ff,$fb,$ff,$fe,$2f   ; [$bd88] byte
+    .byte $00,$ff,$7e,$ff,$bb,$ff,$bf,$ff   ; [$bd90] byte
+    .byte $00,$ff,$3d,$ff,$fb,$ff,$df,$3b   ; [$bd98] byte
+    .byte $00,$ff,$ac,$ff,$ff,$ff,$fb,$57   ; [$bda0] byte
+    .byte $00,$ff,$8c,$ff,$e7,$ff,$ee,$31   ; [$bda8] byte
+    .byte $00,$ff,$cf,$ff,$ff,$ff,$fb,$e8   ; [$bdb0] byte
+    .byte $00,$ff,$5d,$ff,$fd,$ff,$ff,$4c   ; [$bdb8] byte
+    .byte $00,$ff,$d6,$ff,$ff,$ff,$f3,$99   ; [$bdc0] byte
+    .byte $00,$ff,$f3,$ff,$ff,$ff,$bb,$7e   ; [$bdc8] byte
+    .byte $00,$ff,$dd,$ff,$ff,$ff,$bf,$05   ; [$bdd0] byte
+    .byte $00,$ff,$5e,$ff,$ff,$ff,$fe,$33   ; [$bdd8] byte
+    .byte $00,$ff,$b6,$ff,$f7,$ff,$ff,$fe   ; [$bde0] byte
+    .byte $00,$ff,$5e,$ff,$ff,$ff,$f9,$c6   ; [$bde8] byte
+    .byte $00,$ff,$27,$ff,$ea,$ff,$bf,$62   ; [$bdf0] byte
+    .byte $00,$ff,$fb,$ff,$ff,$ff,$ff,$28   ; [$bdf8] byte
+    .byte $00,$ff,$ef,$ff,$ff,$ff,$fb,$6d   ; [$be00] byte
+    .byte $00,$ff,$bb,$ff,$fb,$ff,$ff,$ff   ; [$be08] byte
+    .byte $00,$ff,$3f,$ff,$ff,$ff,$fd,$fb   ; [$be10] byte
+    .byte $00,$ff,$73,$ff,$f7,$ff,$ff,$b7   ; [$be18] byte
+    .byte $00,$ff,$5c,$ff,$fb,$ff,$ff,$bf   ; [$be20] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ff,$fc   ; [$be28] byte
+    .byte $00,$ff,$5e,$ff,$bf,$ff,$ff,$f9   ; [$be30] byte
+    .byte $00,$ff,$3a,$ff,$df,$ff,$fb,$5a   ; [$be38] byte
+    .byte $00,$ff,$fd,$ff,$df,$ff,$ff,$99   ; [$be40] byte
+    .byte $00,$ff,$77,$ff,$ff,$ff,$ff,$ba   ; [$be48] byte
+    .byte $00,$ff,$fb,$ff,$bf,$ff,$ff,$ad   ; [$be50] byte
+    .byte $00,$ff,$d5,$ff,$ff,$ff,$7f,$7c   ; [$be58] byte
+    .byte $00,$ff,$e7,$ff,$6b,$ff,$be,$ff   ; [$be60] byte
+    .byte $00,$ff,$d4,$ff,$ff,$ff,$ff,$72   ; [$be68] byte
+    .byte $00,$ff,$df,$ff,$fa,$ff,$ab,$d9   ; [$be70] byte
+    .byte $00,$ff,$fa,$ff,$7f,$ff,$fd,$67   ; [$be78] byte
+    .byte $00,$ff,$7e,$ff,$ff,$ff,$e7,$39   ; [$be80] byte
+    .byte $00,$ff,$d3,$ff,$ff,$ff,$ff,$dd   ; [$be88] byte
+    .byte $00,$ff,$d7,$ff,$ff,$ff,$ef,$23   ; [$be90] byte
+    .byte $00,$ff,$fd,$ff,$ff,$ff,$ff,$96   ; [$be98] byte
+    .byte $00,$ff,$a6,$ff,$ff,$ff,$de,$3d   ; [$bea0] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$df,$ea   ; [$bea8] byte
+    .byte $00,$ff,$c6,$ff,$7f,$ff,$fb,$b2   ; [$beb0] byte
+    .byte $00,$ff,$6f,$ff,$ff,$ff,$ff,$3f   ; [$beb8] byte
+    .byte $00,$ff,$12,$ff,$6f,$ff,$ff,$a7   ; [$bec0] byte
+    .byte $00,$ff,$cb,$ff,$ff,$ff,$bf,$46   ; [$bec8] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$7f,$55   ; [$bed0] byte
+    .byte $00,$ff,$1f,$ff,$ff,$ff,$ff,$29   ; [$bed8] byte
+    .byte $00,$ff,$dc,$ff,$dd,$ff,$ef,$ff   ; [$bee0] byte
+    .byte $00,$ff,$ce,$ff,$fd,$ff,$ff,$15   ; [$bee8] byte
+    .byte $00,$ff,$ae,$ff,$ff,$ff,$ff,$bb   ; [$bef0] byte
+    .byte $00,$ff,$d9,$ff,$cd,$ff,$ff,$68   ; [$bef8] byte
+    .byte $00,$ff,$52,$ff,$de,$ff,$fd,$ed   ; [$bf00] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$bf,$be   ; [$bf08] byte
+    .byte $00,$ff,$b7,$ff,$ff,$ff,$ff,$df   ; [$bf10] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$ef,$6e   ; [$bf18] byte
+    .byte $00,$ff,$3c,$ff,$ff,$ff,$fa,$bf   ; [$bf20] byte
+    .byte $00,$ff,$f7,$ff,$ee,$ff,$ef,$c5   ; [$bf28] byte
+    .byte $04,$ff,$9b,$ff,$ff,$ff,$ff,$df   ; [$bf30] byte
+    .byte $01,$ff,$35,$ff,$ff,$ff,$ff,$fc   ; [$bf38] byte
+    .byte $00,$ff,$ff,$ff,$df,$ff,$f7,$b9   ; [$bf40] byte
+    .byte $00,$ff,$ff,$ff,$df,$ff,$fe,$bf   ; [$bf48] byte
+    .byte $00,$ff,$ff,$ff,$ff,$ff,$bf,$72   ; [$bf50] byte
+    .byte $00,$ff,$bd,$ff,$ff,$ff,$f7,$75   ; [$bf58] byte
+    .byte $00,$ff,$aa,$ff,$f6,$ff,$bf,$d8   ; [$bf60] byte
+    .byte $00,$ff,$ef,$ff,$fb,$ff,$ff,$c4   ; [$bf68] byte
+    .byte $00,$ff,$bf,$ff,$bf,$ff,$fc,$8b   ; [$bf70] byte
+    .byte $00,$ff,$fe,$ff,$d7,$ff,$fe,$bb   ; [$bf78] byte
+    .byte $00,$ff,$18,$ff,$bf,$ff,$fe,$c5   ; [$bf80] byte
+    .byte $00,$ff,$7b,$ff,$ff,$ff,$fb,$ba   ; [$bf88] byte
+    .byte $00,$ff,$7d,$ff,$ff,$ff,$ff,$3f   ; [$bf90] byte
+    .byte $00,$ff,$76,$ff,$ff,$ff,$ff,$73   ; [$bf98] byte
+    .byte $00,$ff,$2e,$ff,$fd,$ff,$f7,$fb   ; [$bfa0] byte
+    .byte $00,$ff,$fe,$ff,$fd,$ff,$77,$99   ; [$bfa8] byte
+    .byte $00,$ff,$d5,$ff,$dd,$ff,$ff,$67   ; [$bfb0] byte
+    .byte $00,$ff,$bf,$ff,$ff,$ff,$df,$46   ; [$bfb8] byte
+    .byte $00,$ff,$31,$ff,$9f,$ff,$fa,$bd   ; [$bfc0] byte
+    .byte $00,$ff,$48,$ff,$ff,$ff,$ff,$86   ; [$bfc8] byte
+    .byte $00,$ff,$3f,$ff,$ff,$ff,$ff,$8e   ; [$bfd0] byte
+    .byte $00,$ff,$f3,$ff,$ff,$ff,$ff,$8e   ; [$bfd8] byte
+    .byte $00,$ff,$98,$ff,$9b,$ff,$bf,$91   ; [$bfe0] byte
+    .byte $00,$ff,$e7,$ff,$b7,$ff,$b7,$c0   ; [$bfe8] byte
+    .byte $00,$ff,$af,$ff,$ff,$ff,$bf,$2b   ; [$bff0] byte
+    .byte $00,$ff,$fb,$ff,$f7,$ff,$fe,$d2   ; [$bff8] byte

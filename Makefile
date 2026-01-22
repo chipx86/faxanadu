@@ -26,7 +26,8 @@ INCLUDED_SOURCES = \
 	src/PRG12.asm \
 	src/PRG13.asm \
 	src/PRG14.asm \
-	src/PRG15_MIRROR.asm
+	src/PRG15_MIRROR.asm \
+	src/ZEROPAGE.asm
 
 DELETE_SOURCES = \
 	html/PRG0_MIRROR.html \

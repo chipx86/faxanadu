@@ -5,140 +5,140 @@
 ;============================================================================
 
     .segment "PRG1"
-    .ORG $8000
+    .reloc
 
-    .word TRUNK_BLOCKS-$8000                ; Trunk
-    .word BRANCH_BLOCKS-$8000               ; Branch
+    .word (TRUNK_BLOCKS-$8000) & $FFFF      ; Trunk
+    .word (BRANCH_BLOCKS-$8000) & $FFFF     ; Branch
 
 TRUNK_BLOCKS:                               ; [$8004]
-    .word TRUNK_BLOCKS_SCREEN_00_27-$8000   ; TRUNK_BLOCKS_SCREEN_00_27
-                                            ; [$PRG1::8004]
-    .word TRUNK_BLOCKS_SCREEN_01-$8000      ; TRUNK_BLOCKS_SCREEN_01
-                                            ; [$PRG1::8006]
-    .word TRUNK_BLOCKS_SCREEN_02-$8000      ; TRUNK_BLOCKS_SCREEN_02
-                                            ; [$PRG1::8008]
-    .word TRUNK_BLOCKS_SCREEN_03-$8000      ; TRUNK_BLOCKS_SCREEN_03
-                                            ; [$PRG1::800a]
-    .word TRUNK_BLOCKS_SCREEN_04-$8000      ; TRUNK_BLOCKS_SCREEN_04
-                                            ; [$PRG1::800c]
-    .word TRUNK_BLOCKS_SCREEN_05-$8000      ; TRUNK_BLOCKS_SCREEN_05
-                                            ; [$PRG1::800e]
-    .word TRUNK_BLOCKS_SCREEN_06-$8000      ; TRUNK_BLOCKS_SCREEN_06
-                                            ; [$PRG1::8010]
-    .word TRUNK_BLOCKS_SCREEN_07-$8000      ; TRUNK_BLOCKS_SCREEN_07
-                                            ; [$PRG1::8012]
-    .word TRUNK_BLOCKS_SCREEN_08-$8000      ; TRUNK_BLOCKS_SCREEN_08
-                                            ; [$PRG1::8014]
-    .word TRUNK_BLOCKS_SCREEN_09-$8000      ; TRUNK_BLOCKS_SCREEN_09
-                                            ; [$PRG1::8016]
-    .word TRUNK_BLOCKS_SCREEN_10-$8000      ; TRUNK_BLOCKS_SCREEN_10
-                                            ; [$PRG1::8018]
-    .word TRUNK_BLOCKS_SCREEN_11-$8000      ; TRUNK_BLOCKS_SCREEN_11
-                                            ; [$PRG1::801a]
-    .word TRUNK_BLOCKS_SCREEN_12-$8000      ; TRUNK_BLOCKS_SCREEN_12
-                                            ; [$PRG1::801c]
-    .word TRUNK_BLOCKS_SCREEN_13-$8000      ; TRUNK_BLOCKS_SCREEN_13
-                                            ; [$PRG1::801e]
-    .word TRUNK_BLOCKS_SCREEN_14-$8000      ; TRUNK_BLOCKS_SCREEN_14
-                                            ; [$PRG1::8020]
-    .word TRUNK_BLOCKS_SCREEN_15-$8000      ; TRUNK_BLOCKS_SCREEN_15
-                                            ; [$PRG1::8022]
-    .word TRUNK_BLOCKS_SCREEN_16-$8000      ; TRUNK_BLOCKS_SCREEN_16
-                                            ; [$PRG1::8024]
-    .word TRUNK_BLOCKS_SCREEN_17-$8000      ; TRUNK_BLOCKS_SCREEN_17
-                                            ; [$PRG1::8026]
-    .word TRUNK_BLOCKS_SCREEN_18-$8000      ; TRUNK_BLOCKS_SCREEN_18
-                                            ; [$PRG1::8028]
-    .word TRUNK_BLOCKS_SCREEN_19-$8000      ; TRUNK_BLOCKS_SCREEN_19
-                                            ; [$PRG1::802a]
-    .word TRUNK_BLOCKS_SCREEN_20-$8000      ; TRUNK_BLOCKS_SCREEN_20
-                                            ; [$PRG1::802c]
-    .word TRUNK_BLOCKS_SCREEN_21-$8000      ; TRUNK_BLOCKS_SCREEN_21
-                                            ; [$PRG1::802e]
-    .word TRUNK_BLOCKS_SCREEN_22-$8000      ; TRUNK_BLOCKS_SCREEN_22
-                                            ; [$PRG1::8030]
-    .word TRUNK_BLOCKS_SCREEN_23-$8000      ; TRUNK_BLOCKS_SCREEN_23
-                                            ; [$PRG1::8032]
-    .word TRUNK_BLOCKS_SCREEN_24-$8000      ; TRUNK_BLOCKS_SCREEN_24
-                                            ; [$PRG1::8034]
-    .word TRUNK_BLOCKS_SCREEN_25-$8000      ; TRUNK_BLOCKS_SCREEN_25
-                                            ; [$PRG1::8036]
-    .word TRUNK_BLOCKS_SCREEN_26-$8000      ; TRUNK_BLOCKS_SCREEN_26
-                                            ; [$PRG1::8038]
-    .word TRUNK_BLOCKS_SCREEN_00_27-$8000   ; TRUNK_BLOCKS_SCREEN_00_27
-                                            ; [$PRG1::803a]
-    .word TRUNK_BLOCKS_SCREEN_28-$8000      ; TRUNK_BLOCKS_SCREEN_28
-                                            ; [$PRG1::803c]
-    .word TRUNK_BLOCKS_SCREEN_29-$8000      ; TRUNK_BLOCKS_SCREEN_29
-                                            ; [$PRG1::803e]
-    .word TRUNK_BLOCKS_SCREEN_30-$8000      ; TRUNK_BLOCKS_SCREEN_30
-                                            ; [$PRG1::8040]
-    .word TRUNK_BLOCKS_SCREEN_31-$8000      ; TRUNK_BLOCKS_SCREEN_31
-                                            ; [$PRG1::8042]
-    .word TRUNK_BLOCKS_SCREEN_32-$8000      ; TRUNK_BLOCKS_SCREEN_32
-                                            ; [$PRG1::8044]
-    .word TRUNK_BLOCKS_SCREEN_33-$8000      ; TRUNK_BLOCKS_SCREEN_33
-                                            ; [$PRG1::8046]
-    .word TRUNK_BLOCKS_SCREEN_34-$8000      ; TRUNK_BLOCKS_SCREEN_34
-                                            ; [$PRG1::8048]
-    .word TRUNK_BLOCKS_SCREEN_35-$8000      ; TRUNK_BLOCKS_SCREEN_35
-                                            ; [$PRG1::804a]
-    .word TRUNK_BLOCKS_SCREEN_36-$8000      ; TRUNK_BLOCKS_SCREEN_36
-                                            ; [$PRG1::804c]
-    .word TRUNK_BLOCKS_SCREEN_37-$8000      ; TRUNK_BLOCKS_SCREEN_37
-                                            ; [$PRG1::804e]
-    .word TRUNK_BLOCKS_SCREEN_38-$8000      ; TRUNK_BLOCKS_SCREEN_38
-                                            ; [$PRG1::8050]
-    .word TRUNK_BLOCKS_SCREEN_39-$8000      ; TRUNK_BLOCKS_SCREEN_39
-                                            ; [$PRG1::8052]
-    .word TRUNK_BLOCKS_SCREEN_40-$8000      ; TRUNK_BLOCKS_SCREEN_40
-                                            ; [$PRG1::8054]
-    .word TRUNK_BLOCKS_SCREEN_41-$8000      ; TRUNK_BLOCKS_SCREEN_41
-                                            ; [$PRG1::8056]
-    .word TRUNK_BLOCKS_SCREEN_42-$8000      ; TRUNK_BLOCKS_SCREEN_42
-                                            ; [$PRG1::8058]
-    .word TRUNK_BLOCKS_SCREEN_43-$8000      ; TRUNK_BLOCKS_SCREEN_43
-                                            ; [$PRG1::805a]
-    .word TRUNK_BLOCKS_SCREEN_44-$8000      ; TRUNK_BLOCKS_SCREEN_44
-                                            ; [$PRG1::805c]
-    .word TRUNK_BLOCKS_SCREEN_45-$8000      ; TRUNK_BLOCKS_SCREEN_45
-                                            ; [$PRG1::805e]
-    .word TRUNK_BLOCKS_SCREEN_46-$8000      ; TRUNK_BLOCKS_SCREEN_46
-                                            ; [$PRG1::8060]
-    .word TRUNK_BLOCKS_SCREEN_47-$8000      ; TRUNK_BLOCKS_SCREEN_47
-                                            ; [$PRG1::8062]
-    .word TRUNK_BLOCKS_SCREEN_48-$8000      ; TRUNK_BLOCKS_SCREEN_48
-                                            ; [$PRG1::8064]
-    .word TRUNK_BLOCKS_SCREEN_49-$8000      ; TRUNK_BLOCKS_SCREEN_49
-                                            ; [$PRG1::8066]
-    .word TRUNK_BLOCKS_SCREEN_50-$8000      ; TRUNK_BLOCKS_SCREEN_50
-                                            ; [$PRG1::8068]
-    .word TRUNK_BLOCKS_SCREEN_51-$8000      ; TRUNK_BLOCKS_SCREEN_51
-                                            ; [$PRG1::806a]
-    .word TRUNK_BLOCKS_SCREEN_52-$8000      ; TRUNK_BLOCKS_SCREEN_52
-                                            ; [$PRG1::806c]
-    .word TRUNK_BLOCKS_SCREEN_53-$8000      ; TRUNK_BLOCKS_SCREEN_53
-                                            ; [$PRG1::806e]
-    .word TRUNK_BLOCKS_SCREEN_54-$8000      ; TRUNK_BLOCKS_SCREEN_54
-                                            ; [$PRG1::8070]
-    .word TRUNK_BLOCKS_SCREEN_55-$8000      ; TRUNK_BLOCKS_SCREEN_55
-                                            ; [$PRG1::8072]
-    .word TRUNK_BLOCKS_SCREEN_56-$8000      ; TRUNK_BLOCKS_SCREEN_56
-                                            ; [$PRG1::8074]
-    .word TRUNK_BLOCKS_SCREEN_57-$8000      ; TRUNK_BLOCKS_SCREEN_57
-                                            ; [$PRG1::8076]
-    .word TRUNK_BLOCKS_SCREEN_58-$8000      ; TRUNK_BLOCKS_SCREEN_58
-                                            ; [$PRG1::8078]
-    .word TRUNK_BLOCKS_SCREEN_59-$8000      ; TRUNK_BLOCKS_SCREEN_59
-                                            ; [$PRG1::807a]
-    .word TRUNK_BLOCKS_SCREEN_60-$8000      ; TRUNK_BLOCKS_SCREEN_60
-                                            ; [$PRG1::807c]
-    .word TRUNK_BLOCKS_SCREEN_61-$8000      ; TRUNK_BLOCKS_SCREEN_61
-                                            ; [$PRG1::807e]
-    .word TRUNK_BLOCKS_SCREEN_62-$8000      ; TRUNK_BLOCKS_SCREEN_62
-                                            ; [$PRG1::8080]
-    .word TRUNK_BLOCKS_SCREEN_63-$8000      ; TRUNK_BLOCKS_SCREEN_63
-                                            ; [$PRG1::8082]
+    .word (TRUNK_BLOCKS_SCREEN_00_27-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_00_27
+                                                    ; [$PRG1::8004]
+    .word (TRUNK_BLOCKS_SCREEN_01-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_01
+                                                 ; [$PRG1::8006]
+    .word (TRUNK_BLOCKS_SCREEN_02-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_02
+                                                 ; [$PRG1::8008]
+    .word (TRUNK_BLOCKS_SCREEN_03-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_03
+                                                 ; [$PRG1::800a]
+    .word (TRUNK_BLOCKS_SCREEN_04-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_04
+                                                 ; [$PRG1::800c]
+    .word (TRUNK_BLOCKS_SCREEN_05-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_05
+                                                 ; [$PRG1::800e]
+    .word (TRUNK_BLOCKS_SCREEN_06-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_06
+                                                 ; [$PRG1::8010]
+    .word (TRUNK_BLOCKS_SCREEN_07-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_07
+                                                 ; [$PRG1::8012]
+    .word (TRUNK_BLOCKS_SCREEN_08-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_08
+                                                 ; [$PRG1::8014]
+    .word (TRUNK_BLOCKS_SCREEN_09-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_09
+                                                 ; [$PRG1::8016]
+    .word (TRUNK_BLOCKS_SCREEN_10-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_10
+                                                 ; [$PRG1::8018]
+    .word (TRUNK_BLOCKS_SCREEN_11-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_11
+                                                 ; [$PRG1::801a]
+    .word (TRUNK_BLOCKS_SCREEN_12-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_12
+                                                 ; [$PRG1::801c]
+    .word (TRUNK_BLOCKS_SCREEN_13-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_13
+                                                 ; [$PRG1::801e]
+    .word (TRUNK_BLOCKS_SCREEN_14-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_14
+                                                 ; [$PRG1::8020]
+    .word (TRUNK_BLOCKS_SCREEN_15-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_15
+                                                 ; [$PRG1::8022]
+    .word (TRUNK_BLOCKS_SCREEN_16-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_16
+                                                 ; [$PRG1::8024]
+    .word (TRUNK_BLOCKS_SCREEN_17-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_17
+                                                 ; [$PRG1::8026]
+    .word (TRUNK_BLOCKS_SCREEN_18-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_18
+                                                 ; [$PRG1::8028]
+    .word (TRUNK_BLOCKS_SCREEN_19-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_19
+                                                 ; [$PRG1::802a]
+    .word (TRUNK_BLOCKS_SCREEN_20-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_20
+                                                 ; [$PRG1::802c]
+    .word (TRUNK_BLOCKS_SCREEN_21-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_21
+                                                 ; [$PRG1::802e]
+    .word (TRUNK_BLOCKS_SCREEN_22-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_22
+                                                 ; [$PRG1::8030]
+    .word (TRUNK_BLOCKS_SCREEN_23-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_23
+                                                 ; [$PRG1::8032]
+    .word (TRUNK_BLOCKS_SCREEN_24-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_24
+                                                 ; [$PRG1::8034]
+    .word (TRUNK_BLOCKS_SCREEN_25-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_25
+                                                 ; [$PRG1::8036]
+    .word (TRUNK_BLOCKS_SCREEN_26-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_26
+                                                 ; [$PRG1::8038]
+    .word (TRUNK_BLOCKS_SCREEN_00_27-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_00_27
+                                                    ; [$PRG1::803a]
+    .word (TRUNK_BLOCKS_SCREEN_28-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_28
+                                                 ; [$PRG1::803c]
+    .word (TRUNK_BLOCKS_SCREEN_29-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_29
+                                                 ; [$PRG1::803e]
+    .word (TRUNK_BLOCKS_SCREEN_30-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_30
+                                                 ; [$PRG1::8040]
+    .word (TRUNK_BLOCKS_SCREEN_31-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_31
+                                                 ; [$PRG1::8042]
+    .word (TRUNK_BLOCKS_SCREEN_32-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_32
+                                                 ; [$PRG1::8044]
+    .word (TRUNK_BLOCKS_SCREEN_33-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_33
+                                                 ; [$PRG1::8046]
+    .word (TRUNK_BLOCKS_SCREEN_34-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_34
+                                                 ; [$PRG1::8048]
+    .word (TRUNK_BLOCKS_SCREEN_35-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_35
+                                                 ; [$PRG1::804a]
+    .word (TRUNK_BLOCKS_SCREEN_36-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_36
+                                                 ; [$PRG1::804c]
+    .word (TRUNK_BLOCKS_SCREEN_37-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_37
+                                                 ; [$PRG1::804e]
+    .word (TRUNK_BLOCKS_SCREEN_38-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_38
+                                                 ; [$PRG1::8050]
+    .word (TRUNK_BLOCKS_SCREEN_39-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_39
+                                                 ; [$PRG1::8052]
+    .word (TRUNK_BLOCKS_SCREEN_40-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_40
+                                                 ; [$PRG1::8054]
+    .word (TRUNK_BLOCKS_SCREEN_41-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_41
+                                                 ; [$PRG1::8056]
+    .word (TRUNK_BLOCKS_SCREEN_42-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_42
+                                                 ; [$PRG1::8058]
+    .word (TRUNK_BLOCKS_SCREEN_43-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_43
+                                                 ; [$PRG1::805a]
+    .word (TRUNK_BLOCKS_SCREEN_44-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_44
+                                                 ; [$PRG1::805c]
+    .word (TRUNK_BLOCKS_SCREEN_45-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_45
+                                                 ; [$PRG1::805e]
+    .word (TRUNK_BLOCKS_SCREEN_46-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_46
+                                                 ; [$PRG1::8060]
+    .word (TRUNK_BLOCKS_SCREEN_47-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_47
+                                                 ; [$PRG1::8062]
+    .word (TRUNK_BLOCKS_SCREEN_48-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_48
+                                                 ; [$PRG1::8064]
+    .word (TRUNK_BLOCKS_SCREEN_49-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_49
+                                                 ; [$PRG1::8066]
+    .word (TRUNK_BLOCKS_SCREEN_50-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_50
+                                                 ; [$PRG1::8068]
+    .word (TRUNK_BLOCKS_SCREEN_51-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_51
+                                                 ; [$PRG1::806a]
+    .word (TRUNK_BLOCKS_SCREEN_52-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_52
+                                                 ; [$PRG1::806c]
+    .word (TRUNK_BLOCKS_SCREEN_53-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_53
+                                                 ; [$PRG1::806e]
+    .word (TRUNK_BLOCKS_SCREEN_54-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_54
+                                                 ; [$PRG1::8070]
+    .word (TRUNK_BLOCKS_SCREEN_55-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_55
+                                                 ; [$PRG1::8072]
+    .word (TRUNK_BLOCKS_SCREEN_56-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_56
+                                                 ; [$PRG1::8074]
+    .word (TRUNK_BLOCKS_SCREEN_57-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_57
+                                                 ; [$PRG1::8076]
+    .word (TRUNK_BLOCKS_SCREEN_58-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_58
+                                                 ; [$PRG1::8078]
+    .word (TRUNK_BLOCKS_SCREEN_59-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_59
+                                                 ; [$PRG1::807a]
+    .word (TRUNK_BLOCKS_SCREEN_60-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_60
+                                                 ; [$PRG1::807c]
+    .word (TRUNK_BLOCKS_SCREEN_61-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_61
+                                                 ; [$PRG1::807e]
+    .word (TRUNK_BLOCKS_SCREEN_62-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_62
+                                                 ; [$PRG1::8080]
+    .word (TRUNK_BLOCKS_SCREEN_63-$8000) & $FFFF ; TRUNK_BLOCKS_SCREEN_63
+                                                 ; [$PRG1::8082]
 
 ;
 ; XREFS:
@@ -1583,86 +1583,86 @@ TRUNK_BLOCKS_SCREEN_63:                     ; [$a7c4]
     .byte $8c,$6f,$08,$2a,$aa,$aa,$aa       ; [$a87c] byte
 
 BRANCH_BLOCKS:                              ; [$a883]
-    .word BRANCH_BLOCKS_SCREEN_00-$8000     ; BRANCH_BLOCKS_SCREEN_00
-                                            ; [$PRG1::a883]
-    .word BRANCH_BLOCKS_SCREEN_01-$8000     ; BRANCH_BLOCKS_SCREEN_01
-                                            ; [$PRG1::a885]
-    .word BRANCH_BLOCKS_SCREEN_02-$8000     ; BRANCH_BLOCKS_SCREEN_02
-                                            ; [$PRG1::a887]
-    .word BRANCH_BLOCKS_SCREEN_03-$8000     ; BRANCH_BLOCKS_SCREEN_03
-                                            ; [$PRG1::a889]
-    .word BRANCH_BLOCKS_SCREEN_04-$8000     ; BRANCH_BLOCKS_SCREEN_04
-                                            ; [$PRG1::a88b]
-    .word BRANCH_BLOCKS_SCREEN_05-$8000     ; BRANCH_BLOCKS_SCREEN_05
-                                            ; [$PRG1::a88d]
-    .word BRANCH_BLOCKS_SCREEN_06-$8000     ; BRANCH_BLOCKS_SCREEN_06
-                                            ; [$PRG1::a88f]
-    .word BRANCH_BLOCKS_SCREEN_07-$8000     ; BRANCH_BLOCKS_SCREEN_07
-                                            ; [$PRG1::a891]
-    .word BRANCH_BLOCKS_SCREEN_08-$8000     ; BRANCH_BLOCKS_SCREEN_08
-                                            ; [$PRG1::a893]
-    .word BRANCH_BLOCKS_SCREEN_09-$8000     ; BRANCH_BLOCKS_SCREEN_09
-                                            ; [$PRG1::a895]
-    .word BRANCH_BLOCKS_SCREEN_10-$8000     ; BRANCH_BLOCKS_SCREEN_10
-                                            ; [$PRG1::a897]
-    .word BRANCH_BLOCKS_SCREEN_11-$8000     ; BRANCH_BLOCKS_SCREEN_11
-                                            ; [$PRG1::a899]
-    .word BRANCH_BLOCKS_SCREEN_12-$8000     ; BRANCH_BLOCKS_SCREEN_12
-                                            ; [$PRG1::a89b]
-    .word BRANCH_BLOCKS_SCREEN_13-$8000     ; BRANCH_BLOCKS_SCREEN_13
-                                            ; [$PRG1::a89d]
-    .word BRANCH_BLOCKS_SCREEN_14-$8000     ; BRANCH_BLOCKS_SCREEN_14
-                                            ; [$PRG1::a89f]
-    .word BRANCH_BLOCKS_SCREEN_15-$8000     ; BRANCH_BLOCKS_SCREEN_15
-                                            ; [$PRG1::a8a1]
-    .word BRANCH_BLOCKS_SCREEN_16-$8000     ; BRANCH_BLOCKS_SCREEN_16
-                                            ; [$PRG1::a8a3]
-    .word BRANCH_BLOCKS_SCREEN_17-$8000     ; BRANCH_BLOCKS_SCREEN_17
-                                            ; [$PRG1::a8a5]
-    .word BRANCH_BLOCKS_SCREEN_18-$8000     ; BRANCH_BLOCKS_SCREEN_18
-                                            ; [$PRG1::a8a7]
-    .word BRANCH_BLOCKS_SCREEN_19-$8000     ; BRANCH_BLOCKS_SCREEN_19
-                                            ; [$PRG1::a8a9]
-    .word BRANCH_BLOCKS_SCREEN_20-$8000     ; BRANCH_BLOCKS_SCREEN_20
-                                            ; [$PRG1::a8ab]
-    .word BRANCH_BLOCKS_SCREEN_21-$8000     ; BRANCH_BLOCKS_SCREEN_21
-                                            ; [$PRG1::a8ad]
-    .word BRANCH_BLOCKS_SCREEN_22-$8000     ; BRANCH_BLOCKS_SCREEN_22
-                                            ; [$PRG1::a8af]
-    .word BRANCH_BLOCKS_SCREEN_23-$8000     ; BRANCH_BLOCKS_SCREEN_23
-                                            ; [$PRG1::a8b1]
-    .word BRANCH_BLOCKS_SCREEN_24-$8000     ; BRANCH_BLOCKS_SCREEN_24
-                                            ; [$PRG1::a8b3]
-    .word BRANCH_BLOCKS_SCREEN_25-$8000     ; BRANCH_BLOCKS_SCREEN_25
-                                            ; [$PRG1::a8b5]
-    .word BRANCH_BLOCKS_SCREEN_26-$8000     ; BRANCH_BLOCKS_SCREEN_26
-                                            ; [$PRG1::a8b7]
-    .word BRANCH_BLOCKS_SCREEN_27-$8000     ; BRANCH_BLOCKS_SCREEN_27
-                                            ; [$PRG1::a8b9]
-    .word BRANCH_BLOCKS_SCREEN_28-$8000     ; BRANCH_BLOCKS_SCREEN_28
-                                            ; [$PRG1::a8bb]
-    .word BRANCH_BLOCKS_SCREEN_29-$8000     ; BRANCH_BLOCKS_SCREEN_29
-                                            ; [$PRG1::a8bd]
-    .word BRANCH_BLOCKS_SCREEN_30-$8000     ; BRANCH_BLOCKS_SCREEN_30
-                                            ; [$PRG1::a8bf]
-    .word BRANCH_BLOCKS_SCREEN_31-$8000     ; BRANCH_BLOCKS_SCREEN_31
-                                            ; [$PRG1::a8c1]
-    .word BRANCH_BLOCKS_SCREEN_32-$8000     ; BRANCH_BLOCKS_SCREEN_32
-                                            ; [$PRG1::a8c3]
-    .word BRANCH_BLOCKS_SCREEN_33-$8000     ; BRANCH_BLOCKS_SCREEN_33
-                                            ; [$PRG1::a8c5]
-    .word BRANCH_BLOCKS_SCREEN_34-$8000     ; BRANCH_BLOCKS_SCREEN_34
-                                            ; [$PRG1::a8c7]
-    .word BRANCH_BLOCKS_SCREEN_35-$8000     ; BRANCH_BLOCKS_SCREEN_35
-                                            ; [$PRG1::a8c9]
-    .word BRANCH_BLOCKS_SCREEN_36-$8000     ; BRANCH_BLOCKS_SCREEN_36
-                                            ; [$PRG1::a8cb]
-    .word BRANCH_BLOCKS_SCREEN_37-$8000     ; BRANCH_BLOCKS_SCREEN_37
-                                            ; [$PRG1::a8cd]
-    .word BRANCH_BLOCKS_SCREEN_38-$8000     ; BRANCH_BLOCKS_SCREEN_38
-                                            ; [$PRG1::a8cf]
-    .word BRANCH_BLOCKS_SCREEN_39-$8000     ; BRANCH_BLOCKS_SCREEN_39
-                                            ; [$PRG1::a8d1]
+    .word (BRANCH_BLOCKS_SCREEN_00-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_00
+                                                  ; [$PRG1::a883]
+    .word (BRANCH_BLOCKS_SCREEN_01-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_01
+                                                  ; [$PRG1::a885]
+    .word (BRANCH_BLOCKS_SCREEN_02-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_02
+                                                  ; [$PRG1::a887]
+    .word (BRANCH_BLOCKS_SCREEN_03-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_03
+                                                  ; [$PRG1::a889]
+    .word (BRANCH_BLOCKS_SCREEN_04-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_04
+                                                  ; [$PRG1::a88b]
+    .word (BRANCH_BLOCKS_SCREEN_05-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_05
+                                                  ; [$PRG1::a88d]
+    .word (BRANCH_BLOCKS_SCREEN_06-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_06
+                                                  ; [$PRG1::a88f]
+    .word (BRANCH_BLOCKS_SCREEN_07-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_07
+                                                  ; [$PRG1::a891]
+    .word (BRANCH_BLOCKS_SCREEN_08-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_08
+                                                  ; [$PRG1::a893]
+    .word (BRANCH_BLOCKS_SCREEN_09-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_09
+                                                  ; [$PRG1::a895]
+    .word (BRANCH_BLOCKS_SCREEN_10-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_10
+                                                  ; [$PRG1::a897]
+    .word (BRANCH_BLOCKS_SCREEN_11-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_11
+                                                  ; [$PRG1::a899]
+    .word (BRANCH_BLOCKS_SCREEN_12-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_12
+                                                  ; [$PRG1::a89b]
+    .word (BRANCH_BLOCKS_SCREEN_13-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_13
+                                                  ; [$PRG1::a89d]
+    .word (BRANCH_BLOCKS_SCREEN_14-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_14
+                                                  ; [$PRG1::a89f]
+    .word (BRANCH_BLOCKS_SCREEN_15-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_15
+                                                  ; [$PRG1::a8a1]
+    .word (BRANCH_BLOCKS_SCREEN_16-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_16
+                                                  ; [$PRG1::a8a3]
+    .word (BRANCH_BLOCKS_SCREEN_17-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_17
+                                                  ; [$PRG1::a8a5]
+    .word (BRANCH_BLOCKS_SCREEN_18-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_18
+                                                  ; [$PRG1::a8a7]
+    .word (BRANCH_BLOCKS_SCREEN_19-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_19
+                                                  ; [$PRG1::a8a9]
+    .word (BRANCH_BLOCKS_SCREEN_20-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_20
+                                                  ; [$PRG1::a8ab]
+    .word (BRANCH_BLOCKS_SCREEN_21-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_21
+                                                  ; [$PRG1::a8ad]
+    .word (BRANCH_BLOCKS_SCREEN_22-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_22
+                                                  ; [$PRG1::a8af]
+    .word (BRANCH_BLOCKS_SCREEN_23-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_23
+                                                  ; [$PRG1::a8b1]
+    .word (BRANCH_BLOCKS_SCREEN_24-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_24
+                                                  ; [$PRG1::a8b3]
+    .word (BRANCH_BLOCKS_SCREEN_25-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_25
+                                                  ; [$PRG1::a8b5]
+    .word (BRANCH_BLOCKS_SCREEN_26-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_26
+                                                  ; [$PRG1::a8b7]
+    .word (BRANCH_BLOCKS_SCREEN_27-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_27
+                                                  ; [$PRG1::a8b9]
+    .word (BRANCH_BLOCKS_SCREEN_28-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_28
+                                                  ; [$PRG1::a8bb]
+    .word (BRANCH_BLOCKS_SCREEN_29-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_29
+                                                  ; [$PRG1::a8bd]
+    .word (BRANCH_BLOCKS_SCREEN_30-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_30
+                                                  ; [$PRG1::a8bf]
+    .word (BRANCH_BLOCKS_SCREEN_31-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_31
+                                                  ; [$PRG1::a8c1]
+    .word (BRANCH_BLOCKS_SCREEN_32-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_32
+                                                  ; [$PRG1::a8c3]
+    .word (BRANCH_BLOCKS_SCREEN_33-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_33
+                                                  ; [$PRG1::a8c5]
+    .word (BRANCH_BLOCKS_SCREEN_34-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_34
+                                                  ; [$PRG1::a8c7]
+    .word (BRANCH_BLOCKS_SCREEN_35-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_35
+                                                  ; [$PRG1::a8c9]
+    .word (BRANCH_BLOCKS_SCREEN_36-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_36
+                                                  ; [$PRG1::a8cb]
+    .word (BRANCH_BLOCKS_SCREEN_37-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_37
+                                                  ; [$PRG1::a8cd]
+    .word (BRANCH_BLOCKS_SCREEN_38-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_38
+                                                  ; [$PRG1::a8cf]
+    .word (BRANCH_BLOCKS_SCREEN_39-$8000) & $FFFF ; BRANCH_BLOCKS_SCREEN_39
+                                                  ; [$PRG1::a8d1]
 
 ;
 ; XREFS:

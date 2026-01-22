@@ -137,7 +137,7 @@ pre {
 ;============================================================================
 </div><span class="l"></span>
 <span class="l"><span class="cd"><span class="i">.segment "PRG15_MIRROR"</span></span></span>
-<span class="l"><span class="cd"><span class="i">.ORG $c000</span></span></span>
+<span class="l"><span class="cd"><span class="i">.reloc</span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="UI_SetHUDPPUAttributes"></a><div class="cp">;============================================================================
@@ -2368,23 +2368,23 @@ pre {
 ;     <a href="#GameLoop_CheckUseCurrentItem">GameLoop_CheckUseCurrentItem</a>
 ;
 </div><span class="l"><a class="anc" name="c49d" href="#c49d">[c49d]</a><a href="#USE_ITEM_JUMP_TABLE" class="la">USE_ITEM_JUMP_TABLE:</a><span class="ce">; [$c49d]</span></span>
-<span class="l"><a class="anc" name="c49d" href="#c49d">[c49d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [0]: Ring of Elf</span></span>
-<span class="l"><a class="anc" name="c49f" href="#c49f">[c49f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [1]: Ring of Ruby</span></span>
-<span class="l"><a class="anc" name="c4a1" href="#c4a1">[c4a1]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [2]: Ring of Dworf</span></span>
-<span class="l"><a class="anc" name="c4a3" href="#c4a3">[c4a3]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [3]: Demon's Ring</span></span>
-<span class="l"><a class="anc" name="c4a5" href="#c4a5">[c4a5]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [4]: "A" Key</span></span>
-<span class="l"><a class="anc" name="c4a7" href="#c4a7">[c4a7]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [5]: "K" Key</span></span>
-<span class="l"><a class="anc" name="c4a9" href="#c4a9">[c4a9]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [6]: "Q" Key</span></span>
-<span class="l"><a class="anc" name="c4ab" href="#c4ab">[c4ab]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [7]: "J" Key</span></span>
-<span class="l"><a class="anc" name="c4ad" href="#c4ad">[c4ad]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [8]: "Jo" Key</span></span>
-<span class="l"><a class="anc" name="c4af" href="#c4af">[c4af]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_UseMattock">Player_UseMattock</a>-1</span></span><span class="ce">; [9]: Mattock</span></span>
-<span class="l"><a class="anc" name="c4b1" href="#c4b1">[c4b1]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [10]: Magical Rod</span></span>
-<span class="l"><a class="anc" name="c4b3" href="#c4b3">[c4b3]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [11]: Crystal</span></span>
-<span class="l"><a class="anc" name="c4b5" href="#c4b5">[c4b5]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [12]: Lamp</span></span>
-<span class="l"><a class="anc" name="c4b7" href="#c4b7">[c4b7]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_UseHourGlass">Player_UseHourGlass</a>-1</span></span><span class="ce">; [13]: Hour Glass</span></span>
-<span class="l"><a class="anc" name="c4b9" href="#c4b9">[c4b9]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1</span></span><span class="ce">; [14]: Book</span></span>
-<span class="l"><a class="anc" name="c4bb" href="#c4bb">[c4bb]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_UseWingBoots">Player_UseWingBoots</a>-1</span></span><span class="ce">; [15]: Wing Boots</span></span>
-<span class="l"><a class="anc" name="c4bd" href="#c4bd">[c4bd]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Player_UseRedPotion">Player_UseRedPotion</a>-1</span></span><span class="ce">; [16]: Red Potion</span></span>
+<span class="l"><a class="anc" name="c49d" href="#c49d">[c49d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: Ring of Elf</span></span>
+<span class="l"><a class="anc" name="c49f" href="#c49f">[c49f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [1]: Ring of Ruby</span></span>
+<span class="l"><a class="anc" name="c4a1" href="#c4a1">[c4a1]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [2]: Ring of Dworf</span></span>
+<span class="l"><a class="anc" name="c4a3" href="#c4a3">[c4a3]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [3]: Demon's Ring</span></span>
+<span class="l"><a class="anc" name="c4a5" href="#c4a5">[c4a5]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [4]: "A" Key</span></span>
+<span class="l"><a class="anc" name="c4a7" href="#c4a7">[c4a7]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [5]: "K" Key</span></span>
+<span class="l"><a class="anc" name="c4a9" href="#c4a9">[c4a9]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [6]: "Q" Key</span></span>
+<span class="l"><a class="anc" name="c4ab" href="#c4ab">[c4ab]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [7]: "J" Key</span></span>
+<span class="l"><a class="anc" name="c4ad" href="#c4ad">[c4ad]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [8]: "Jo" Key</span></span>
+<span class="l"><a class="anc" name="c4af" href="#c4af">[c4af]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Player_UseMattock">Player_UseMattock</a>-1) &amp; $FFFF</span></span><span class="ce">; [9]: Mattock</span></span>
+<span class="l"><a class="anc" name="c4b1" href="#c4b1">[c4b1]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [10]: Magical Rod</span></span>
+<span class="l"><a class="anc" name="c4b3" href="#c4b3">[c4b3]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [11]: Crystal</span></span>
+<span class="l"><a class="anc" name="c4b5" href="#c4b5">[c4b5]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [12]: Lamp</span></span>
+<span class="l"><a class="anc" name="c4b7" href="#c4b7">[c4b7]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Player_UseHourGlass">Player_UseHourGlass</a>-1) &amp; $FFFF</span></span><span class="ce">; [13]: Hour Glass</span></span>
+<span class="l"><a class="anc" name="c4b9" href="#c4b9">[c4b9]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_UseItem_Return">GameLoop_UseItem_Return</a>-1) &amp; $FFFF</span></span><span class="ce">; [14]: Book</span></span>
+<span class="l"><a class="anc" name="c4bb" href="#c4bb">[c4bb]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Player_UseWingBoots">Player_UseWingBoots</a>-1) &amp; $FFFF</span></span><span class="ce">; [15]: Wing Boots</span></span>
+<span class="l"><a class="anc" name="c4bd" href="#c4bd">[c4bd]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Player_UseRedPotion">Player_UseRedPotion</a>-1) &amp; $FFFF</span></span><span class="ce">; [16]: Red Potion</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="Player_ClearSelectedItem"></a><div class="cp">;============================================================================
@@ -2469,7 +2469,7 @@ pre {
 </div><span class="l"><a class="anc" name="c4d2" href="#c4d2">[c4d2]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$85</span></span><span class="ce">; 0x85 == Use Elixir.</span></span>
 <span class="l"><a class="anc" name="c4d4" href="#c4d4">[c4d4]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c4d7" href="#c4d7">[c4d7]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c4d8" href="#c4d8">[c4d8]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c4d8" href="#c4d8">[c4d8]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="Player_FillHPAndMP"></a><div class="cp">;============================================================================
@@ -2629,7 +2629,7 @@ pre {
 </div><span class="l"><a class="anc" name="c533" href="#c533">[c533]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$80</span></span><span class="ce">; 0x80 == Use Red Potion IScript.</span></span>
 <span class="l"><a class="anc" name="c535" href="#c535">[c535]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c538" href="#c538">[c538]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c539" href="#c539">[c539]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c539" href="#c539">[c539]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":c53b:@_afterFarJump"></a><span class="l"><a class="anc" name="c53b" href="#c53b">[c53b]</a><a href="#:c53b:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$c53b]</span></span>
 <span class="l"><a class="anc" name="c53b" href="#c53b">[c53b]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Player_ClearSelectedItem">Player_ClearSelectedItem</a></span></span><span class="ce">; Clear the selected item.</span></span>
@@ -2739,7 +2739,7 @@ pre {
 </div><span class="l"><a class="anc" name="c579" href="#c579">[c579]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$83</span></span><span class="ce">; 0x83 == Wing Boots used IScript.</span></span>
 <span class="l"><a class="anc" name="c57b" href="#c57b">[c57b]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c57e" href="#c57e">[c57e]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c57f" href="#c57f">[c57f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c57f" href="#c57f">[c57f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c581:@_afterFarJump"></a><div class="c">;
@@ -2864,7 +2864,7 @@ pre {
 </div><span class="l"><a class="anc" name="c5bf" href="#c5bf">[c5bf]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$96</span></span><span class="ce">; 0x96 == Wing Boots are gone IScript.</span></span>
 <span class="l"><a class="anc" name="c5c1" href="#c5c1">[c5c1]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="c5c4" href="#c5c4">[c5c4]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c5c5" href="#c5c5">[c5c5]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c5c5" href="#c5c5">[c5c5]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c5c7:@_return"></a><div class="c">;
@@ -2919,7 +2919,7 @@ pre {
 </div><span class="l"><a class="anc" name="c5c8" href="#c5c8">[c5c8]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$82</span></span><span class="ce">; Set the IScript to run to 0x82.</span></span>
 <span class="l"><a class="anc" name="c5ca" href="#c5ca">[c5ca]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c5cd" href="#c5cd">[c5cd]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c5ce" href="#c5ce">[c5ce]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c5ce" href="#c5ce">[c5ce]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c5d0:@_afterFarJump"></a><div class="c">;
@@ -3014,7 +3014,7 @@ pre {
 </div><span class="l"><a class="anc" name="c5fb" href="#c5fb">[c5fb]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$97</span></span><span class="ce">; 0x97 == Hour Glass is gone IScript.</span></span>
 <span class="l"><a class="anc" name="c5fd" href="#c5fd">[c5fd]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="c600" href="#c600">[c600]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c601" href="#c601">[c601]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c601" href="#c601">[c601]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c603:@_afterFarJump"></a><div class="c">;
@@ -3172,7 +3172,7 @@ pre {
 </div><span class="l"><a class="anc" name="c644" href="#c644">[c644]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$81</span></span></span>
 <span class="l"><a class="anc" name="c646" href="#c646">[c646]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c649" href="#c649">[c649]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c64a" href="#c64a">[c64a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c64a" href="#c64a">[c64a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c64c:@_afterFarJump"></a><div class="c">;
@@ -3386,7 +3386,7 @@ pre {
 </div><span class="l"><a class="anc" name="c6be" href="#c6be">[c6be]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8a</span></span><span class="ce">; 0x8A == Hour Glass picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c6c0" href="#c6c0">[c6c0]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c6c3" href="#c6c3">[c6c3]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c6c4" href="#c6c4">[c6c4]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c6c4" href="#c6c4">[c6c4]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c6c6:@_afterFarJump"></a><div class="c">;
@@ -3465,7 +3465,7 @@ pre {
 </div><span class="l"><a class="anc" name="c6d8" href="#c6d8">[c6d8]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$89</span></span><span class="ce">; 0x89 == Wing boots picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c6da" href="#c6da">[c6da]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c6dd" href="#c6dd">[c6dd]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c6de" href="#c6de">[c6de]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c6de" href="#c6de">[c6de]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c6e0:@_afterFarJump"></a><div class="c">;
@@ -3526,7 +3526,7 @@ pre {
 </div><span class="l"><a class="anc" name="c6ea" href="#c6ea">[c6ea]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8b</span></span><span class="ce">; 0x8B == Battle Suit picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c6ec" href="#c6ec">[c6ec]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c6ef" href="#c6ef">[c6ef]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c6f0" href="#c6f0">[c6f0]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c6f0" href="#c6f0">[c6f0]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c6f2:@_afterFarJump"></a><div class="c">;
@@ -3601,7 +3601,7 @@ pre {
 </div><span class="l"><a class="anc" name="c70a" href="#c70a">[c70a]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8c</span></span><span class="ce">; 0x8C == Battle Helmet picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c70c" href="#c70c">[c70c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run it.</span></span>
 <span class="l"><a class="anc" name="c70f" href="#c70f">[c70f]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c710" href="#c710">[c710]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c710" href="#c710">[c710]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c712:@_afterFarJump"></a><div class="c">;
@@ -3678,7 +3678,7 @@ pre {
 </div><span class="l"><a class="anc" name="c72a" href="#c72a">[c72a]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8d</span></span><span class="ce">; 0x8D == Dragon Slayer picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c72c" href="#c72c">[c72c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run it.</span></span>
 <span class="l"><a class="anc" name="c72f" href="#c72f">[c72f]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c730" href="#c730">[c730]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c730" href="#c730">[c730]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c732:@_afterFarJump"></a><div class="c">;
@@ -3778,7 +3778,7 @@ pre {
 </div><span class="l"><a class="anc" name="c752" href="#c752">[c752]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$88</span></span><span class="ce">; 0x88 == Mattock picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c754" href="#c754">[c754]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c757" href="#c757">[c757]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c758" href="#c758">[c758]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c758" href="#c758">[c758]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c75a:@_afterFarJump"></a><div class="c">;
@@ -4018,7 +4018,7 @@ pre {
 </div><span class="l"><a class="anc" name="c7cf" href="#c7cf">[c7cf]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$92</span></span><span class="ce">; 0x92 == Glove picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c7d1" href="#c7d1">[c7d1]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c7d4" href="#c7d4">[c7d4]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c7d5" href="#c7d5">[c7d5]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c7d5" href="#c7d5">[c7d5]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c7d7:@_afterFarJump"></a><div class="c">;
@@ -4068,7 +4068,7 @@ pre {
 </div><span class="l"><a class="anc" name="c7e4" href="#c7e4">[c7e4]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8e</span></span><span class="ce">; 0x8E == Black Onyx picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c7e6" href="#c7e6">[c7e6]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c7e9" href="#c7e9">[c7e9]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c7ea" href="#c7ea">[c7ea]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c7ea" href="#c7ea">[c7ea]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c7ec:@_afterFarJump"></a><div class="c">;
@@ -4118,7 +4118,7 @@ pre {
 </div><span class="l"><a class="anc" name="c7fa" href="#c7fa">[c7fa]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$8f</span></span><span class="ce">; 0x8F = Pendant picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c7fc" href="#c7fc">[c7fc]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c7ff" href="#c7ff">[c7ff]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c800" href="#c800">[c800]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c800" href="#c800">[c800]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c802:@_afterFarJump"></a><div class="c">;
@@ -4168,7 +4168,7 @@ pre {
 </div><span class="l"><a class="anc" name="c810" href="#c810">[c810]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$90</span></span><span class="ce">; 0x90 == Magical Rod picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c812" href="#c812">[c812]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c815" href="#c815">[c815]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c816" href="#c816">[c816]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c816" href="#c816">[c816]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c818:@_afterFarJump"></a><div class="c">;
@@ -4218,7 +4218,7 @@ pre {
 </div><span class="l"><a class="anc" name="c826" href="#c826">[c826]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$87</span></span><span class="ce">; 0x87 == Red Potion picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c828" href="#c828">[c828]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c82b" href="#c82b">[c82b]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c82c" href="#c82c">[c82c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c82c" href="#c82c">[c82c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c82e:@_afterFarJump"></a><div class="c">;
@@ -4268,7 +4268,7 @@ pre {
 </div><span class="l"><a class="anc" name="c83c" href="#c83c">[c83c]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$91</span></span><span class="ce">; 0x91 = Poison picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c83e" href="#c83e">[c83e]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c841" href="#c841">[c841]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c842" href="#c842">[c842]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c842" href="#c842">[c842]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c844:@_afterFarJump"></a><div class="c">;
@@ -4335,7 +4335,7 @@ pre {
 </div><span class="l"><a class="anc" name="c864" href="#c864">[c864]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$86</span></span><span class="ce">; 0x86 == Elixir picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c866" href="#c866">[c866]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c869" href="#c869">[c869]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c86a" href="#c86a">[c86a]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c86a" href="#c86a">[c86a]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c86c:@_afterFarJump"></a><div class="c">;
@@ -4384,7 +4384,7 @@ pre {
 </div><span class="l"><a class="anc" name="c87a" href="#c87a">[c87a]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$94</span></span><span class="ce">; 0x94 == Ointment picked up IScript.</span></span>
 <span class="l"><a class="anc" name="c87c" href="#c87c">[c87c]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run IScript:</span></span>
 <span class="l"><a class="anc" name="c87f" href="#c87f">[c87f]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c880" href="#c880">[c880]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c880" href="#c880">[c880]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":c882:@_afterFarJump"></a><div class="c">;
@@ -4489,7 +4489,7 @@ pre {
 </div><span class="l"><a class="anc" name="c8ab" href="#c8ab">[c8ab]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$93</span></span><span class="ce">; 0x93 == Glove is gone IScript.</span></span>
 <span class="l"><a class="anc" name="c8ad" href="#c8ad">[c8ad]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="c8b0" href="#c8b0">[c8b0]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c8b1" href="#c8b1">[c8b1]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c8b1" href="#c8b1">[c8b1]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":c8b3:@_return"></a><span class="l"><a class="anc" name="c8b3" href="#c8b3">[c8b3]</a><a href="#:c8b3:@_return" class="lla">@_return:</a><span class="ce">; [$c8b3]</span></span>
 <span class="l"><a class="anc" name="c8b3" href="#c8b3">[c8b3]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -4548,7 +4548,7 @@ pre {
 </div><span class="l"><a class="anc" name="c8c4" href="#c8c4">[c8c4]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$95</span></span><span class="ce">; 0x95 == Ointment is gone IScript.</span></span>
 <span class="l"><a class="anc" name="c8c6" href="#c8c6">[c8c6]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="c8c9" href="#c8c9">[c8c9]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="c8ca" href="#c8ca">[c8ca]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="c8ca" href="#c8ca">[c8ca]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":c8cc:@_return"></a><span class="l"><a class="anc" name="c8cc" href="#c8cc">[c8cc]</a><a href="#:c8cc:@_return" class="lla">@_return:</a><span class="ce">; [$c8cc]</span></span>
 <span class="l"><a class="anc" name="c8cc" href="#c8cc">[c8cc]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -7838,13 +7838,13 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#PPUBuffer_Draw">PPUBuffer_Draw</a>
 ;
 </div><span class="l"><a class="anc" name="cfbc" href="#cfbc">[cfbc]</a><a href="#PPUBUFFER_DRAW_COMMANDS" class="la">PPUBUFFER_DRAW_COMMANDS:</a><span class="ce">; [$cfbc]</span></span>
-<span class="l"><a class="anc" name="cfbc" href="#cfbc">[cfbc]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_WritePalette">PPUBuffer_DrawCommand_WritePalette</a>-1</span></span><span class="ce">; [0]: Command 0x00: Write Palette to PPU</span></span>
-<span class="l"><a class="anc" name="cfbe" href="#cfbe">[cfbe]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [1]: Command 0xFF</span></span>
-<span class="l"><a class="anc" name="cfc0" href="#cfc0">[cfc0]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [2]: Command 0xFE</span></span>
-<span class="l"><a class="anc" name="cfc2" href="#cfc2">[cfc2]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [3]: Command 0xFD</span></span>
-<span class="l"><a class="anc" name="cfc4" href="#cfc4">[cfc4]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>-1</span></span><span class="ce">; [4]: Command 0xFC: Rotate Tiles Right</span></span>
-<span class="l"><a class="anc" name="cfc6" href="#cfc6">[cfc6]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1</span></span><span class="ce">; [5]: Command 0xFB</span></span>
-<span class="l"><a class="anc" name="cfc8" href="#cfc8">[cfc8]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>-1</span></span><span class="ce">; [6]: Command 0xFA: Remove Vertical Lines</span></span>
+<span class="l"><a class="anc" name="cfbc" href="#cfbc">[cfbc]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_WritePalette">PPUBuffer_DrawCommand_WritePalette</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: Command 0x00: Write Palette to PPU</span></span>
+<span class="l"><a class="anc" name="cfbe" href="#cfbe">[cfbe]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1) &amp; $FFFF</span></span><span class="ce">; [1]: Command 0xFF</span></span>
+<span class="l"><a class="anc" name="cfc0" href="#cfc0">[cfc0]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1) &amp; $FFFF</span></span><span class="ce">; [2]: Command 0xFE</span></span>
+<span class="l"><a class="anc" name="cfc2" href="#cfc2">[cfc2]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1) &amp; $FFFF</span></span><span class="ce">; [3]: Command 0xFD</span></span>
+<span class="l"><a class="anc" name="cfc4" href="#cfc4">[cfc4]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_RotateTilesRight1Pixel">PPUBuffer_DrawCommand_RotateTilesRight1Pixel</a>-1) &amp; $FFFF</span></span><span class="ce">; [4]: Command 0xFC: Rotate Tiles Right</span></span>
+<span class="l"><a class="anc" name="cfc6" href="#cfc6">[cfc6]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_Noop">PPUBuffer_DrawCommand_Noop</a>-1) &amp; $FFFF</span></span><span class="ce">; [5]: Command 0xFB</span></span>
+<span class="l"><a class="anc" name="cfc8" href="#cfc8">[cfc8]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#PPUBuffer_DrawCommand_RemoveVerticalLines">PPUBuffer_DrawCommand_RemoveVerticalLines</a>-1) &amp; $FFFF</span></span><span class="ce">; [6]: Command 0xFA: Remove Vertical Lines</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="PPUBuffer_WaitForCapacity"></a><div class="cp">;============================================================================
@@ -9351,14 +9351,14 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Screen_UpdateForScroll">Screen_UpdateForScroll</a>
 ;============================================================================
 </div><span class="l"><a class="anc" name="d2e7" href="#d2e7">[d2e7]</a><a href="#Screen_HandleScroll" class="la">Screen_HandleScroll:</a><span class="ce">; [$d2e7]</span></span>
-<span class="l"><a class="anc" name="d2e7" href="#d2e7">[d2e7]</a><span class="cd"><span class="i">LDX</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span></span>
-<span class="l"><a class="anc" name="d2e9" href="#d2e9">[d2e9]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a></span></span></span>
+<span class="l"><a class="anc" name="d2e7" href="#d2e7">[d2e7]</a><span class="cd"><span class="i">LDX</span> <span class="o"><a href="RAM.html#Screen_ScrollDirection">Screen_ScrollDirection</a></span></span><span class="ce">; Load the scroll direction.</span></span>
+<span class="l"><a class="anc" name="d2e9" href="#d2e9">[d2e9]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollLeft">Screen_HandleScrollLeft</a></span></span><span class="ce">; If 0, jump to scroll left.</span></span>
 <span class="l"><a class="anc" name="d2eb" href="#d2eb">[d2eb]</a><span class="cd"><span class="i">DEX</span></span></span>
-<span class="l"><a class="anc" name="d2ec" href="#d2ec">[d2ec]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a></span></span></span>
+<span class="l"><a class="anc" name="d2ec" href="#d2ec">[d2ec]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollRight">Screen_HandleScrollRight</a></span></span><span class="ce">; If 1, jump to scroll right.</span></span>
 <span class="l"><a class="anc" name="d2ee" href="#d2ee">[d2ee]</a><span class="cd"><span class="i">DEX</span></span></span>
-<span class="l"><a class="anc" name="d2ef" href="#d2ef">[d2ef]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a></span></span></span>
+<span class="l"><a class="anc" name="d2ef" href="#d2ef">[d2ef]</a><span class="cd"><span class="i">BEQ</span> <span class="o"><a href="#Screen_HandleScrollUp">Screen_HandleScrollUp</a></span></span><span class="ce">; If 2, jump to scroll up.</span></span>
 <span class="l"><a class="anc" name="d2f1" href="#d2f1">[d2f1]</a><span class="cd"><span class="i">DEX</span></span></span>
-<span class="l"><a class="anc" name="d2f2" href="#d2f2">[d2f2]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#RETURN_D2E6">RETURN_D2E6</a></span></span></span>
+<span class="l"><a class="anc" name="d2f2" href="#d2f2">[d2f2]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#RETURN_D2E6">RETURN_D2E6</a></span></span><span class="ce">; If anything but 3 (down), return.</span></span>
 <span class="l"></span>
 <div class="c">;
 ; v-- Fall through --v
@@ -9456,45 +9456,80 @@ and address bytes and all the data bytes.</span></span>
 <div class="c">;
 ; The screen is scrolling left.
 ;
-</div><span class="l"><a class="anc" name="d34a" href="#d34a">[d34a]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span></span>
-<span class="l"><a class="anc" name="d34c" href="#d34c">[d34c]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$fc</span></span></span>
-<span class="l"><a class="anc" name="d34e" href="#d34e">[d34e]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d364">@LAB_PRG15_MIRROR__d364</a></span></span></span>
-<span class="l"><a class="anc" name="d350" href="#d350">[d350]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span></span>
+</div><span class="l"><a class="anc" name="d34a" href="#d34a">[d34a]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span><span class="ce">; Load the screen blocks horizontal load counter.</span></span>
+<span class="l"><a class="anc" name="d34c" href="#d34c">[d34c]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$fc</span></span><span class="ce">; Is it &gt;= 0xFC?</span></span>
+<span class="l"><a class="anc" name="d34e" href="#d34e">[d34e]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_checkLoadBlocks">@_checkLoadBlocks</a></span></span><span class="ce">; If so, jump.</span></span>
+<span class="l"></span>
+<span class="l"></span>
+<div class="c">;
+; We haven't loaded 252 columns yet.
+;
+; Start by reducing the scroll X counter by 1.
+;
+</div><span class="l"><a class="anc" name="d350" href="#d350">[d350]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span><span class="ce">; Load the scroll X counter.</span></span>
 <span class="l"><a class="anc" name="d352" href="#d352">[d352]</a><span class="cd"><span class="i">SEC</span></span></span>
-<span class="l"><a class="anc" name="d353" href="#d353">[d353]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$01</span></span></span>
-<span class="l"><a class="anc" name="d355" href="#d355">[d355]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span></span>
-<span class="l"><a class="anc" name="d357" href="#d357">[d357]</a><span class="cd"><span class="i">PHP</span></span></span>
-<span class="l"><a class="anc" name="d358" href="#d358">[d358]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span></span>
-<span class="l"><a class="anc" name="d35a" href="#d35a">[d35a]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$00</span></span></span>
-<span class="l"><a class="anc" name="d35c" href="#d35c">[d35c]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span></span>
-<span class="l"><a class="anc" name="d35e" href="#d35e">[d35e]</a><span class="cd"><span class="i">PLP</span></span></span>
-<span class="l"><a class="anc" name="d35f" href="#d35f">[d35f]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@LAB_PRG15_MIRROR__d364">@LAB_PRG15_MIRROR__d364</a></span></span></span>
-<span class="l"><a class="anc" name="d361" href="#d361">[d361]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span></span>
+<span class="l"><a class="anc" name="d353" href="#d353">[d353]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$01</span></span><span class="ce">; Subtract 1.</span></span>
+<span class="l"><a class="anc" name="d355" href="#d355">[d355]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span><span class="ce">; And store it.</span></span>
+<span class="l"><a class="anc" name="d357" href="#d357">[d357]</a><span class="cd"><span class="i">PHP</span></span><span class="ce">; Push flags to the stack.</span></span>
+<span class="l"><a class="anc" name="d358" href="#d358">[d358]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span><span class="ce">; Load the scroll screen we're using.</span></span>
+<span class="l"><a class="anc" name="d35a" href="#d35a">[d35a]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$00</span></span><span class="ce">; Subtract carry from above.</span></span>
+<span class="l"><a class="anc" name="d35c" href="#d35c">[d35c]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><a class="anc" name="d35e" href="#d35e">[d35e]</a><span class="cd"><span class="i">PLP</span></span><span class="ce">; Pop flags from the stack.</span></span>
+<span class="l"><a class="anc" name="d35f" href="#d35f">[d35f]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@_checkLoadBlocks">@_checkLoadBlocks</a></span></span><span class="ce">; If scroll X &gt; 0, jump.</span></span>
 <span class="l"></span>
-<a name=":d364:@LAB_PRG15_MIRROR__d364"></a><span class="l"><a class="anc" name="d364" href="#d364">[d364]</a><a href="#:d364:@LAB_PRG15_MIRROR__d364" class="lla">@LAB_PRG15_MIRROR__d364:</a><span class="ce">; [$d364]</span></span>
-<span class="l"><a class="anc" name="d364" href="#d364">[d364]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span></span>
+<span class="l"></span>
+<div class="c">;
+; <a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a> hit 0, so we can stop scrolling and load
+; the block properties for the new screen.
+;
+</div><span class="l"><a class="anc" name="d361" href="#d361">[d361]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Screen_StopScrollAndLoadBlockProperties">Screen_StopScrollAndLoadBlockProperties</a></span></span><span class="ce">; Stop scrolling and load the block properties.</span></span>
+<span class="l"></span>
+<a name=":d364:@_checkLoadBlocks"></a><span class="l"><a class="anc" name="d364" href="#d364">[d364]</a><a href="#:d364:@_checkLoadBlocks" class="lla">@_checkLoadBlocks:</a><span class="ce">; [$d364]</span></span>
+<span class="l"><a class="anc" name="d364" href="#d364">[d364]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span><span class="ce">; Load the screen blocks horizontal load counter.</span></span>
 <span class="l"><a class="anc" name="d366" href="#d366">[d366]</a><span class="cd"><span class="i">SEC</span></span></span>
-<span class="l"><a class="anc" name="d367" href="#d367">[d367]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$01</span></span></span>
-<span class="l"><a class="anc" name="d369" href="#d369">[d369]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span></span>
-<span class="l"><a class="anc" name="d36b" href="#d36b">[d36b]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span></span>
-<span class="l"><a class="anc" name="d36d" href="#d36d">[d36d]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$00</span></span></span>
-<span class="l"><a class="anc" name="d36f" href="#d36f">[d36f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span></span>
-<span class="l"><a class="anc" name="d371" href="#d371">[d371]</a><span class="cd"><span class="i">CMP</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span></span>
-<span class="l"><a class="anc" name="d373" href="#d373">[d373]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@_finish">@_finish</a></span></span></span>
-<span class="l"><a class="anc" name="d375" href="#d375">[d375]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span></span>
-<span class="l"><a class="anc" name="d377" href="#d377">[d377]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span></span>
-<span class="l"><a class="anc" name="d379" href="#d379">[d379]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_finish">@_finish</a></span></span></span>
-<span class="l"><a class="anc" name="d37b" href="#d37b">[d37b]</a><span class="cd"><span class="i">RTS</span></span></span>
+<span class="l"><a class="anc" name="d367" href="#d367">[d367]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$01</span></span><span class="ce">; Subtract 1.</span></span>
+<span class="l"><a class="anc" name="d369" href="#d369">[d369]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span><span class="ce">; Store it.</span></span>
+<span class="l"><a class="anc" name="d36b" href="#d36b">[d36b]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span><span class="ce">; Load the index of the screen using for scrolling horizontally.</span></span>
+<span class="l"><a class="anc" name="d36d" href="#d36d">[d36d]</a><span class="cd"><span class="i">SBC</span> <span class="o">#$00</span></span><span class="ce">; Subtract carry, if wrapping above.</span></span>
+<span class="l"><a class="anc" name="d36f" href="#d36f">[d36f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span><span class="ce">; Store it.</span></span>
 <span class="l"></span>
-<a name=":d37c:@_finish"></a><span class="l"><a class="anc" name="d37c" href="#d37c">[d37c]</a><a href="#:d37c:@_finish" class="lla">@_finish:</a><span class="ce">; [$d37c]</span></span>
-<span class="l"><a class="anc" name="d37c" href="#d37c">[d37c]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank">CurrentROMBank</a></span></span></span>
-<span class="l"><a class="anc" name="d37f" href="#d37f">[d37f]</a><span class="cd"><span class="i">PHA</span></span></span>
-<span class="l"><a class="anc" name="d380" href="#d380">[d380]</a><span class="cd"><span class="i">LDX</span> <span class="o">#$03</span></span></span>
-<span class="l"><a class="anc" name="d382" href="#d382">[d382]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdateROMBank">MMC1_UpdateROMBank</a></span></span></span>
-<span class="l"><a class="anc" name="d385" href="#d385">[d385]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Screen_LoadDataLeft">Screen_LoadDataLeft</a></span></span></span>
-<span class="l"><a class="anc" name="d388" href="#d388">[d388]</a><span class="cd"><span class="i">PLA</span></span></span>
-<span class="l"><a class="anc" name="d389" href="#d389">[d389]</a><span class="cd"><span class="i">TAX</span></span></span>
-<span class="l"><a class="anc" name="d38a" href="#d38a">[d38a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdateROMBank">MMC1_UpdateROMBank</a></span></span></span>
+<span class="l"></span>
+<div class="c">;
+; Check if we're ready to load blocks to the left.
+;
+; This will only load if the screen index has changed or
+; the scroll X is &gt;= 4.
+;
+</div><span class="l"><a class="anc" name="d371" href="#d371">[d371]</a><span class="cd"><span class="i">CMP</span> <span class="o"><a href="RAM.html#PPU_ScrollScreen">PPU_ScrollScreen</a></span></span><span class="ce">; Is the horizontal scroll screen the same as the current screen?</span></span>
+<span class="l"><a class="anc" name="d373" href="#d373">[d373]</a><span class="cd"><span class="i">BNE</span> <span class="o"><a href="#@_loadBlocks">@_loadBlocks</a></span></span><span class="ce">; If not, jump to load blocks.</span></span>
+<span class="l"><a class="anc" name="d375" href="#d375">[d375]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#PPU_ScrollX">PPU_ScrollX</a></span></span><span class="ce">; Load the scroll X position.</span></span>
+<span class="l"><a class="anc" name="d377" href="#d377">[d377]</a><span class="cd"><span class="i">CMP</span> <span class="o">#$04</span></span><span class="ce">; Is it &gt;= 4?</span></span>
+<span class="l"><a class="anc" name="d379" href="#d379">[d379]</a><span class="cd"><span class="i">BCS</span> <span class="o"><a href="#@_loadBlocks">@_loadBlocks</a></span></span><span class="ce">; If so, jump to load blocks.</span></span>
+<span class="l"><a class="anc" name="d37b" href="#d37b">[d37b]</a><span class="cd"><span class="i">RTS</span></span><span class="ce">; Else, we're done.</span></span>
+<span class="l"></span>
+<span class="l"></span>
+<a name=":d37c:@_loadBlocks"></a><div class="c">;
+; Save the current ROM bank and switch to bank 3 (Area metadata).
+;
+</div><span class="l"><a class="anc" name="d37c" href="#d37c">[d37c]</a><a href="#:d37c:@_loadBlocks" class="lla">@_loadBlocks:</a><span class="ce">; [$d37c]</span></span>
+<span class="l"><a class="anc" name="d37c" href="#d37c">[d37c]</a><span class="cd"><span class="i">LDA</span> <span class="o">a:<a href="RAM.html#CurrentROMBank">CurrentROMBank</a></span></span><span class="ce">; Load the current ROM bank.</span></span>
+<span class="l"><a class="anc" name="d37f" href="#d37f">[d37f]</a><span class="cd"><span class="i">PHA</span></span><span class="ce">; Push it to the stack.</span></span>
+<span class="l"><a class="anc" name="d380" href="#d380">[d380]</a><span class="cd"><span class="i">LDX</span> <span class="o">#$03</span></span><span class="ce">; Bank 3 = Area metadata.</span></span>
+<span class="l"><a class="anc" name="d382" href="#d382">[d382]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdateROMBank">MMC1_UpdateROMBank</a></span></span><span class="ce">; Switch to it.</span></span>
+<span class="l"></span>
+<span class="l"></span>
+<div class="c">;
+; Load data for the screen to the left of the current screen.
+;
+</div><span class="l"><a class="anc" name="d385" href="#d385">[d385]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Screen_LoadDataLeft">Screen_LoadDataLeft</a></span></span><span class="ce">; Load data to the left of the current screen.</span></span>
+<span class="l"></span>
+<span class="l"></span>
+<div class="c">;
+; Switch back to the saved bank.
+;
+</div><span class="l"><a class="anc" name="d388" href="#d388">[d388]</a><span class="cd"><span class="i">PLA</span></span><span class="ce">; Pull the current bank from the stack.</span></span>
+<span class="l"><a class="anc" name="d389" href="#d389">[d389]</a><span class="cd"><span class="i">TAX</span></span><span class="ce">; X = A (bank).</span></span>
+<span class="l"><a class="anc" name="d38a" href="#d38a">[d38a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_UpdateROMBank">MMC1_UpdateROMBank</a></span></span><span class="ce">; Switch back to that bank.</span></span>
 <span class="l"><a class="anc" name="d38d" href="#d38d">[d38d]</a><span class="cd"><span class="i">RTS</span></span></span>
 <span class="l"></span>
 <span class="l"></span>
@@ -9966,52 +10001,62 @@ and address bytes and all the data bytes.</span></span>
 <div class="c">;
 ; Load 30 blocks to render in the next draw phase.
 ;
-</div><span class="l"><a class="anc" name="d52a" href="#d52a">[d52a]</a><span class="cd"><span class="i">LDX</span> <span class="o">#$00</span></span><span class="ce">; X = 0 (counter)</span></span>
+</div><span class="l"><a class="anc" name="d52a" href="#d52a">[d52a]</a><span class="cd"><span class="i">LDX</span> <span class="o">#$00</span></span><span class="ce">; X = 0 (loop counter)</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":d52c:@_loadBlocksLoop"></a><div class="c">;
 ; Determine the offset for the blocks to load.
 ;
+; This is data populated by <a href="#Area_LoadBlocks">Area_LoadBlocks</a>.
+;
 </div><span class="l"><a class="anc" name="d52c" href="#d52c">[d52c]</a><a href="#:d52c:@_loadBlocksLoop" class="lla">@_loadBlocksLoop:</a><span class="ce">; [$d52c]</span></span>
-<span class="l"><a class="anc" name="d52c" href="#d52c">[d52c]</a><span class="cd"><span class="i">LDY</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadOffset">Screen_ScrollHorizLoadOffset</a></span></span></span>
-<span class="l"><a class="anc" name="d52e" href="#d52e">[d52e]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span></span>
+<span class="l"><a class="anc" name="d52c" href="#d52c">[d52c]</a><span class="cd"><span class="i">LDY</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadOffset">Screen_ScrollHorizLoadOffset</a></span></span><span class="ce">; Y = Load offset.</span></span>
+<span class="l"><a class="anc" name="d52e" href="#d52e">[d52e]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#Temp_08">Temp_08</a>),Y</span></span><span class="ce">; A = Loaded block data at Y.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
 ; Load the blocks information.
 ;
-</div><span class="l"><a class="anc" name="d530" href="#d530">[d530]</a><span class="cd"><span class="i">TAY</span></span></span>
-<span class="l"><a class="anc" name="d531" href="#d531">[d531]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData1StartAddr">CurrentArea_BlockData1StartAddr</a>),Y</span></span></span>
-<span class="l"><a class="anc" name="d533" href="#d533">[d533]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData1CurAddr">CurrentArea_BlockData1CurAddr</a></span></span></span>
-<span class="l"><a class="anc" name="d535" href="#d535">[d535]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData3StartAddr">CurrentArea_BlockData3StartAddr</a>),Y</span></span></span>
-<span class="l"><a class="anc" name="d537" href="#d537">[d537]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData2CurAddr">CurrentArea_BlockData2CurAddr</a></span></span></span>
-<span class="l"><a class="anc" name="d539" href="#d539">[d539]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData2StartAddr">CurrentArea_BlockData2StartAddr</a>),Y</span></span></span>
-<span class="l"><a class="anc" name="d53b" href="#d53b">[d53b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData3CurAddr">CurrentArea_BlockData3CurAddr</a></span></span></span>
-<span class="l"><a class="anc" name="d53d" href="#d53d">[d53d]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData4StartAddr">CurrentArea_BlockData4StartAddr</a>),Y</span></span></span>
-<span class="l"><a class="anc" name="d53f" href="#d53f">[d53f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData4CurAddr">CurrentArea_BlockData4CurAddr</a></span></span></span>
+</div><span class="l"><a class="anc" name="d530" href="#d530">[d530]</a><span class="cd"><span class="i">TAY</span></span><span class="ce">; Y = A (block data).</span></span>
+<span class="l"><a class="anc" name="d531" href="#d531">[d531]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData1StartAddr">CurrentArea_BlockData1StartAddr</a>),Y</span></span><span class="ce">; A = Block data 1 address at Y.</span></span>
+<span class="l"><a class="anc" name="d533" href="#d533">[d533]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData1CurAddr">CurrentArea_BlockData1CurAddr</a></span></span><span class="ce">; Store it for processing.</span></span>
+<span class="l"><a class="anc" name="d535" href="#d535">[d535]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData3StartAddr">CurrentArea_BlockData3StartAddr</a>),Y</span></span><span class="ce">; A = Block data 3 address at Y.</span></span>
+<span class="l"><a class="anc" name="d537" href="#d537">[d537]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData2CurAddr">CurrentArea_BlockData2CurAddr</a></span></span><span class="ce">; Store it for processing.</span></span>
+<span class="l"><a class="anc" name="d539" href="#d539">[d539]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData2StartAddr">CurrentArea_BlockData2StartAddr</a>),Y</span></span><span class="ce">; A = Block data 2 address at Y.</span></span>
+<span class="l"><a class="anc" name="d53b" href="#d53b">[d53b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData3CurAddr">CurrentArea_BlockData3CurAddr</a></span></span><span class="ce">; Store it for processing.</span></span>
+<span class="l"><a class="anc" name="d53d" href="#d53d">[d53d]</a><span class="cd"><span class="i">LDA</span> <span class="o">(<a href="RAM.html#CurrentArea_BlockData4StartAddr">CurrentArea_BlockData4StartAddr</a>),Y</span></span><span class="ce">; A = Block data 4 address at Y.</span></span>
+<span class="l"><a class="anc" name="d53f" href="#d53f">[d53f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData4CurAddr">CurrentArea_BlockData4CurAddr</a></span></span><span class="ce">; Store it for processing.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
-; Convert the block counter to a tile width.
+; Convert the block counter to a tile width and use it
+; to determine which part of the block data to load.
 ;
-</div><span class="l"><a class="anc" name="d541" href="#d541">[d541]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span></span>
-<span class="l"><a class="anc" name="d543" href="#d543">[d543]</a><span class="cd"><span class="i">AND</span> <span class="o">#$08</span></span></span>
-<span class="l"><a class="anc" name="d545" href="#d545">[d545]</a><span class="cd"><span class="i">LSR</span> <span class="o">A</span></span></span>
+; If the load counter
+;
+</div><span class="l"><a class="anc" name="d541" href="#d541">[d541]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Screen_ScrollHorizLoadCounter">Screen_ScrollHorizLoadCounter</a></span></span><span class="ce">; A = Horizontal load counter.</span></span>
+<span class="l"><a class="anc" name="d543" href="#d543">[d543]</a><span class="cd"><span class="i">AND</span> <span class="o">#$08</span></span><span class="ce">; Every 8...</span></span>
+<span class="l"><a class="anc" name="d545" href="#d545">[d545]</a><span class="cd"><span class="i">LSR</span> <span class="o">A</span></span><span class="ce">; Divide by 4 (convert to 0 or 2).</span></span>
 <span class="l"><a class="anc" name="d546" href="#d546">[d546]</a><span class="cd"><span class="i">LSR</span> <span class="o">A</span></span></span>
 <span class="l"><a class="anc" name="d547" href="#d547">[d547]</a><span class="cd"><span class="i">TAY</span></span></span>
-<span class="l"><a class="anc" name="d548" href="#d548">[d548]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData1CurAddr">CurrentArea_BlockData1CurAddr</a>,Y</span></span></span>
-<span class="l"><a class="anc" name="d54b" href="#d54b">[d54b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_0200">Temp_0200</a>,X</span></span></span>
-<span class="l"><a class="anc" name="d54e" href="#d54e">[d54e]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData2CurAddr">CurrentArea_BlockData2CurAddr</a>,Y</span></span></span>
-<span class="l"><a class="anc" name="d551" href="#d551">[d551]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_0201">Temp_0201</a>,X</span></span></span>
-<span class="l"><a class="anc" name="d554" href="#d554">[d554]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_08">Temp_08</a></span></span></span>
+<span class="l"><a class="anc" name="d548" href="#d548">[d548]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData1CurAddr">CurrentArea_BlockData1CurAddr</a>,Y</span></span><span class="ce">; A = Block data 1 or 3.</span></span>
+<span class="l"><a class="anc" name="d54b" href="#d54b">[d54b]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_0200">Temp_0200</a>,X</span></span><span class="ce">; Store it temporarily.</span></span>
+<span class="l"><a class="anc" name="d54e" href="#d54e">[d54e]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#CurrentArea_BlockData2CurAddr">CurrentArea_BlockData2CurAddr</a>,Y</span></span><span class="ce">; A = Block data 2 or 4.</span></span>
+<span class="l"><a class="anc" name="d551" href="#d551">[d551]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_0201">Temp_0201</a>,X</span></span><span class="ce">; Store it temporarily.</span></span>
+<span class="l"><a class="anc" name="d554" href="#d554">[d554]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_08">Temp_08</a></span></span><span class="ce">; Load the dest screen buffer address.</span></span>
 <span class="l"><a class="anc" name="d556" href="#d556">[d556]</a><span class="cd"><span class="i">CLC</span></span></span>
-<span class="l"><a class="anc" name="d557" href="#d557">[d557]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span></span>
-<span class="l"><a class="anc" name="d559" href="#d559">[d559]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_08">Temp_08</a></span></span></span>
-<span class="l"><a class="anc" name="d55b" href="#d55b">[d55b]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_09">Temp_09</a></span></span></span>
-<span class="l"><a class="anc" name="d55d" href="#d55d">[d55d]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$00</span></span></span>
-<span class="l"><a class="anc" name="d55f" href="#d55f">[d55f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_09">Temp_09</a></span></span></span>
-<span class="l"><a class="anc" name="d561" href="#d561">[d561]</a><span class="cd"><span class="i">INX</span></span></span>
-<span class="l"><a class="anc" name="d562" href="#d562">[d562]</a><span class="cd"><span class="i">INX</span></span></span>
+<span class="l"><a class="anc" name="d557" href="#d557">[d557]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$10</span></span><span class="ce">; Increment by 16.</span></span>
+<span class="l"><a class="anc" name="d559" href="#d559">[d559]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_08">Temp_08</a></span></span><span class="ce">; Store the lower byte of the new address.</span></span>
+<span class="l"><a class="anc" name="d55b" href="#d55b">[d55b]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Temp_09">Temp_09</a></span></span><span class="ce">; Load the upper byte.</span></span>
+<span class="l"><a class="anc" name="d55d" href="#d55d">[d55d]</a><span class="cd"><span class="i">ADC</span> <span class="o">#$00</span></span><span class="ce">; Add carry, if wrapped.</span></span>
+<span class="l"><a class="anc" name="d55f" href="#d55f">[d55f]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Temp_09">Temp_09</a></span></span><span class="ce">; Store the upper byte.</span></span>
+<span class="l"></span>
+<span class="l"></span>
+<div class="c">;
+; Advance the loop counter by 2.
+;
+</div><span class="l"><a class="anc" name="d561" href="#d561">[d561]</a><span class="cd"><span class="i">INX</span></span><span class="ce">; X++ (loop counter).</span></span>
+<span class="l"><a class="anc" name="d562" href="#d562">[d562]</a><span class="cd"><span class="i">INX</span></span><span class="ce">; X++ (loop counter).</span></span>
 <span class="l"><a class="anc" name="d563" href="#d563">[d563]</a><span class="cd"><span class="i">CPX</span> <span class="o">#$1e</span></span></span>
 <span class="l"><a class="anc" name="d565" href="#d565">[d565]</a><span class="cd"><span class="i">BCC</span> <span class="o"><a href="#@_loadBlocksLoop">@_loadBlocksLoop</a></span></span></span>
 <span class="l"><a class="anc" name="d567" href="#d567">[d567]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$01</span></span></span>
@@ -10287,20 +10332,20 @@ and address bytes and all the data bytes.</span></span>
 ;     <a href="#Screen_RunWriteScrollDataHandler">Screen_RunWriteScrollDataHandler</a>
 ;
 </div><span class="l"><a class="anc" name="d64c" href="#d64c">[d64c]</a><a href="#SCREEN_WRITESCROLL_HANDLERS_L" class="la">SCREEN_WRITESCROLL_HANDLERS_L:</a><span class="ce">; [$d64c]</span></span>
-<span class="l"><a class="anc" name="d64c" href="#d64c">[d64c]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;(<a href="#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>-1)</span></span><span class="ce">; [0]:</span></span>
-<span class="l"><a class="anc" name="d64d" href="#d64d">[d64d]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;(<a href="#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>-1)</span></span><span class="ce">; [1]:</span></span>
-<span class="l"><a class="anc" name="d64e" href="#d64e">[d64e]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;(<a href="#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>-1)</span></span><span class="ce">; [2]:</span></span>
-<span class="l"><a class="anc" name="d64f" href="#d64f">[d64f]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;(<a href="#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>-1)</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><a class="anc" name="d64c" href="#d64c">[d64c]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;((<a href="#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><a class="anc" name="d64d" href="#d64d">[d64d]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;((<a href="#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><a class="anc" name="d64e" href="#d64e">[d64e]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;((<a href="#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><a class="anc" name="d64f" href="#d64f">[d64f]</a><span class="cd"><span class="i">.byte</span> <span class="o">&lt;((<a href="#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [3]:</span></span>
 <span class="l"></span>
 <a name="SCREEN_WRITESCROLL_HANDLERS_U"></a><div class="c">;
 ; XREFS:
 ;     <a href="#Screen_RunWriteScrollDataHandler">Screen_RunWriteScrollDataHandler</a>
 ;
 </div><span class="l"><a class="anc" name="d650" href="#d650">[d650]</a><a href="#SCREEN_WRITESCROLL_HANDLERS_U" class="la">SCREEN_WRITESCROLL_HANDLERS_U:</a><span class="ce">; [$d650]</span></span>
-<span class="l"><a class="anc" name="d650" href="#d650">[d650]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;(<a href="#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>-1)</span></span><span class="ce">; [0]:</span></span>
-<span class="l"><a class="anc" name="d651" href="#d651">[d651]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;(<a href="#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>-1)</span></span><span class="ce">; [1]:</span></span>
-<span class="l"><a class="anc" name="d652" href="#d652">[d652]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;(<a href="#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>-1)</span></span><span class="ce">; [2]:</span></span>
-<span class="l"><a class="anc" name="d653" href="#d653">[d653]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;(<a href="#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>-1)</span></span><span class="ce">; [3]:</span></span>
+<span class="l"><a class="anc" name="d650" href="#d650">[d650]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;((<a href="#Screen_WriteScrollVertPPUTileData">Screen_WriteScrollVertPPUTileData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [0]:</span></span>
+<span class="l"><a class="anc" name="d651" href="#d651">[d651]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;((<a href="#Screen_WriteScrollHorizPPUTileData">Screen_WriteScrollHorizPPUTileData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [1]:</span></span>
+<span class="l"><a class="anc" name="d652" href="#d652">[d652]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;((<a href="#Screen_WriteScrollVertPPUAttrData">Screen_WriteScrollVertPPUAttrData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [2]:</span></span>
+<span class="l"><a class="anc" name="d653" href="#d653">[d653]</a><span class="cd"><span class="i">.byte</span> <span class="o">&gt;((<a href="#Screen_WriteScrollHorizPPUAttrData">Screen_WriteScrollHorizPPUAttrData</a>-1) &amp; $FFFF)</span></span><span class="ce">; [3]:</span></span>
 <span class="l"></span>
 </pre><pre><a name="Screen_WriteScrollVertPPUTileData"></a><div class="cp">;============================================================================
 ; TODO: Document Screen_WriteScrollVertPPUTileData
@@ -11529,7 +11574,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="d990" href="#d990">[d990]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="d993" href="#d993">[d993]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="d994" href="#d994">[d994]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="d994" href="#d994">[d994]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":d996:@_afterIScriptFarJump"></a><span class="l"><a class="anc" name="d996" href="#d996">[d996]</a><a href="#:d996:@_afterIScriptFarJump" class="lla">@_afterIScriptFarJump:</a><span class="ce">; [$d996]</span></span>
 <span class="l"><a class="anc" name="d996" href="#d996">[d996]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$00</span></span><span class="ce">; 0 = No music</span></span>
@@ -11542,7 +11587,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="d99a" href="#d99a">[d99a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run:</span></span>
 <span class="l"><a class="anc" name="d99d" href="#d99d">[d99d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="d99e" href="#d99e">[d99e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a></span></span>
+<span class="l"><a class="anc" name="d99e" href="#d99e">[d99e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a></span></span>
 <span class="l"></span>
 <a name=":d9a0:@_afterSetExpGoldFarJump"></a><span class="l"><a class="anc" name="d9a0" href="#d9a0">[d9a0]</a><a href="#:d9a0:@_afterSetExpGoldFarJump" class="lla">@_afterSetExpGoldFarJump:</a><span class="ce">; [$d9a0]</span></span>
 <span class="l"><a class="anc" name="d9a0" href="#d9a0">[d9a0]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#Screen_FadeToBlack">Screen_FadeToBlack</a></span></span><span class="ce">; Fade the screen to black.</span></span>
@@ -14180,7 +14225,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;
 </div><span class="l"><a class="anc" name="e024" href="#e024">[e024]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Open the Player Menu.</span></span>
 <span class="l"><a class="anc" name="e027" href="#e027">[e027]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="e028" href="#e028">[e028]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#PlayerMenu_Show">PlayerMenu_Show</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#PlayerMenu_Show">PlayerMenu_Show</a></span></span>
+<span class="l"><a class="anc" name="e028" href="#e028">[e028]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#PlayerMenu_Show">PlayerMenu_Show</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#PlayerMenu_Show">PlayerMenu_Show</a></span></span>
 <span class="l"></span>
 <a name="RETURN_E02A"></a><div class="c">;
 ; XREFS:
@@ -14513,8 +14558,8 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="e0aa" href="#e0aa">[e0aa]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$00</span></span></span>
 <span class="l"><a class="anc" name="e0ac" href="#e0ac">[e0ac]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Screen_Maybe_ScrollXCounter">Screen_Maybe_ScrollXCounter</a></span></span></span>
 <span class="l"><a class="anc" name="e0ae" href="#e0ae">[e0ae]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_Something_ScrollPosY">Player_Something_ScrollPosY</a></span></span></span>
-<span class="l"><a class="anc" name="e0b0" href="#e0b0">[e0b0]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenVert">PPU_ScrollScreenVert</a></span></span></span>
-<span class="l"><a class="anc" name="e0b2" href="#e0b2">[e0b2]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span><span class="ce">; DEADCODE: Overridden below.</span></span>
+<span class="l"><a class="anc" name="e0b0" href="#e0b0">[e0b0]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenVert">PPU_ScrollScreenVert</a></span></span><span class="ce">; DEADCODE: Overridden below.</span></span>
+<span class="l"><a class="anc" name="e0b2" href="#e0b2">[e0b2]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenHoriz">PPU_ScrollScreenHoriz</a></span></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -14523,7 +14568,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="e0b4" href="#e0b4">[e0b4]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_MoveAcceleration">Player_MoveAcceleration</a></span></span><span class="ce">; Set the player speed to 0.</span></span>
 <span class="l"><a class="anc" name="e0b6" href="#e0b6">[e0b6]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_StatusFlag">Player_StatusFlag</a></span></span><span class="ce">; Set the player status to 0.</span></span>
 <span class="l"><a class="anc" name="e0b8" href="#e0b8">[e0b8]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#Player_InvincibilityPhase">Player_InvincibilityPhase</a></span></span><span class="ce">; Set the invincibility phase to 0.</span></span>
-<span class="l"><a class="anc" name="e0ba" href="#e0ba">[e0ba]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenVert">PPU_ScrollScreenVert</a></span></span><span class="ce">; Set this again, apparently.</span></span>
+<span class="l"><a class="anc" name="e0ba" href="#e0ba">[e0ba]</a><span class="cd"><span class="i">STA</span> <span class="o"><a href="RAM.html#PPU_ScrollScreenVert">PPU_ScrollScreenVert</a></span></span><span class="ce">; Set the vertical scroll to 0.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 <div class="c">;
@@ -18200,15 +18245,15 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;     <a href="#Game_RunDoorRequirementHandler">Game_RunDoorRequirementHandler</a>
 ;
 </div><span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><a href="#DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS" class="la">DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:</a><span class="ce">; [$eb3f]</span></span>
-<span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#RETURN_EB3E">RETURN_EB3E</a>-1</span></span><span class="ce">; [0]: [0]: No key, return</span></span>
-<span class="l"><a class="anc" name="eb41" href="#eb41">[eb41]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithAKey">Game_OpenDoorWithAKey</a>-1</span></span><span class="ce">; [0]: [1]: "A" Key</span></span>
-<span class="l"><a class="anc" name="eb43" href="#eb43">[eb43]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithKKey">Game_OpenDoorWithKKey</a>-1</span></span><span class="ce">; [0]: [2]: "K" Key</span></span>
-<span class="l"><a class="anc" name="eb45" href="#eb45">[eb45]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithQKey">Game_OpenDoorWithQKey</a>-1</span></span><span class="ce">; [0]: [3]: "Q" Key</span></span>
-<span class="l"><a class="anc" name="eb47" href="#eb47">[eb47]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithJKey">Game_OpenDoorWithJKey</a>-1</span></span><span class="ce">; [0]: [4]: "J" Key</span></span>
-<span class="l"><a class="anc" name="eb49" href="#eb49">[eb49]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithJoKey">Game_OpenDoorWithJoKey</a>-1</span></span><span class="ce">; [0]: [5]: "Jo" Key</span></span>
-<span class="l"><a class="anc" name="eb4b" href="#eb4b">[eb4b]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithRingOfElf">Game_OpenDoorWithRingOfElf</a>-1</span></span><span class="ce">; [0]: [6]: Ring of Elf</span></span>
-<span class="l"><a class="anc" name="eb4d" href="#eb4d">[eb4d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithRingOfDworf">Game_OpenDoorWithRingOfDworf</a>-1</span></span><span class="ce">; [0]: [7]: Ring of Dworf</span></span>
-<span class="l"><a class="anc" name="eb4f" href="#eb4f">[eb4f]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#Game_OpenDoorWithDemonsRing">Game_OpenDoorWithDemonsRing</a>-1</span></span><span class="ce">; [0]: [8]: Demon's Ring</span></span>
+<span class="l"><a class="anc" name="eb3f" href="#eb3f">[eb3f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#RETURN_EB3E">RETURN_EB3E</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [0]: No key, return</span></span>
+<span class="l"><a class="anc" name="eb41" href="#eb41">[eb41]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithAKey">Game_OpenDoorWithAKey</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [1]: "A" Key</span></span>
+<span class="l"><a class="anc" name="eb43" href="#eb43">[eb43]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithKKey">Game_OpenDoorWithKKey</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [2]: "K" Key</span></span>
+<span class="l"><a class="anc" name="eb45" href="#eb45">[eb45]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithQKey">Game_OpenDoorWithQKey</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [3]: "Q" Key</span></span>
+<span class="l"><a class="anc" name="eb47" href="#eb47">[eb47]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithJKey">Game_OpenDoorWithJKey</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [4]: "J" Key</span></span>
+<span class="l"><a class="anc" name="eb49" href="#eb49">[eb49]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithJoKey">Game_OpenDoorWithJoKey</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [5]: "Jo" Key</span></span>
+<span class="l"><a class="anc" name="eb4b" href="#eb4b">[eb4b]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithRingOfElf">Game_OpenDoorWithRingOfElf</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [6]: Ring of Elf</span></span>
+<span class="l"><a class="anc" name="eb4d" href="#eb4d">[eb4d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithRingOfDworf">Game_OpenDoorWithRingOfDworf</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [7]: Ring of Dworf</span></span>
+<span class="l"><a class="anc" name="eb4f" href="#eb4f">[eb4f]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#Game_OpenDoorWithDemonsRing">Game_OpenDoorWithDemonsRing</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: [8]: Demon's Ring</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="Game_OpenDoorWithAKey"></a><div class="cp">;============================================================================
@@ -18245,7 +18290,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eb58" href="#eb58">[eb58]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7d</span></span><span class="ce">; 0x7D == "A" Key required IScript.</span></span>
 <span class="l"><a class="anc" name="eb5a" href="#eb5a">[eb5a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="eb5d" href="#eb5d">[eb5d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="eb5e" href="#eb5e">[eb5e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="eb5e" href="#eb5e">[eb5e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":eb60:@_afterFarJump"></a><span class="l"><a class="anc" name="eb60" href="#eb60">[eb60]</a><a href="#:eb60:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$eb60]</span></span>
 <span class="l"><a class="anc" name="eb60" href="#eb60">[eb60]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18285,7 +18330,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eb68" href="#eb68">[eb68]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7c</span></span><span class="ce">; 0x7C == "K" Key required IScript.</span></span>
 <span class="l"><a class="anc" name="eb6a" href="#eb6a">[eb6a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="eb6d" href="#eb6d">[eb6d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="eb6e" href="#eb6e">[eb6e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="eb6e" href="#eb6e">[eb6e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":eb70:@_afterFarJump"></a><span class="l"><a class="anc" name="eb70" href="#eb70">[eb70]</a><a href="#:eb70:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$eb70]</span></span>
 <span class="l"><a class="anc" name="eb70" href="#eb70">[eb70]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18325,7 +18370,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eb78" href="#eb78">[eb78]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7b</span></span><span class="ce">; 0x7B == "Q" Key required IScript.</span></span>
 <span class="l"><a class="anc" name="eb7a" href="#eb7a">[eb7a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="eb7d" href="#eb7d">[eb7d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="eb7e" href="#eb7e">[eb7e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="eb7e" href="#eb7e">[eb7e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":eb80:@_afterFarJump"></a><span class="l"><a class="anc" name="eb80" href="#eb80">[eb80]</a><a href="#:eb80:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$eb80]</span></span>
 <span class="l"><a class="anc" name="eb80" href="#eb80">[eb80]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18365,7 +18410,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eb88" href="#eb88">[eb88]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$02</span></span><span class="ce">; 0x02 == "J" Key required IScript.</span></span>
 <span class="l"><a class="anc" name="eb8a" href="#eb8a">[eb8a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="eb8d" href="#eb8d">[eb8d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="eb8e" href="#eb8e">[eb8e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="eb8e" href="#eb8e">[eb8e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":eb90:@_afterFarJump"></a><span class="l"><a class="anc" name="eb90" href="#eb90">[eb90]</a><a href="#:eb90:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$eb90]</span></span>
 <span class="l"><a class="anc" name="eb90" href="#eb90">[eb90]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18405,7 +18450,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eb98" href="#eb98">[eb98]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7e</span></span><span class="ce">; 0x7E == "Jo" Key required IScript.</span></span>
 <span class="l"><a class="anc" name="eb9a" href="#eb9a">[eb9a]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="eb9d" href="#eb9d">[eb9d]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="eb9e" href="#eb9e">[eb9e]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="eb9e" href="#eb9e">[eb9e]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":eba0:@_afterFarJump"></a><span class="l"><a class="anc" name="eba0" href="#eba0">[eba0]</a><a href="#:eba0:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$eba0]</span></span>
 <span class="l"><a class="anc" name="eba0" href="#eba0">[eba0]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18444,7 +18489,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="eba8" href="#eba8">[eba8]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7f</span></span><span class="ce">; 0x7F == Ring required IScript.</span></span>
 <span class="l"><a class="anc" name="ebaa" href="#ebaa">[ebaa]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="ebad" href="#ebad">[ebad]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="ebae" href="#ebae">[ebae]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="ebae" href="#ebae">[ebae]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":ebb0:@_afterFarJump"></a><span class="l"><a class="anc" name="ebb0" href="#ebb0">[ebb0]</a><a href="#:ebb0:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$ebb0]</span></span>
 <span class="l"><a class="anc" name="ebb0" href="#ebb0">[ebb0]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18483,7 +18528,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="ebb8" href="#ebb8">[ebb8]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7f</span></span><span class="ce">; 0x7F == Ring required IScript.</span></span>
 <span class="l"><a class="anc" name="ebba" href="#ebba">[ebba]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="ebbd" href="#ebbd">[ebbd]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="ebbe" href="#ebbe">[ebbe]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="ebbe" href="#ebbe">[ebbe]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":ebc0:@_afterFarJump"></a><span class="l"><a class="anc" name="ebc0" href="#ebc0">[ebc0]</a><a href="#:ebc0:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$ebc0]</span></span>
 <span class="l"><a class="anc" name="ebc0" href="#ebc0">[ebc0]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18522,7 +18567,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="ebc8" href="#ebc8">[ebc8]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$7f</span></span><span class="ce">; 0x7F == Ring required IScript.</span></span>
 <span class="l"><a class="anc" name="ebca" href="#ebca">[ebca]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="ebcd" href="#ebcd">[ebcd]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="ebce" href="#ebce">[ebce]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="ebce" href="#ebce">[ebce]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":ebd0:@_afterFarJump"></a><span class="l"><a class="anc" name="ebd0" href="#ebd0">[ebd0]</a><a href="#:ebd0:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$ebd0]</span></span>
 <span class="l"><a class="anc" name="ebd0" href="#ebd0">[ebd0]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -18549,7 +18594,7 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 </div><span class="l"><a class="anc" name="ebd1" href="#ebd1">[ebd1]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$84</span></span><span class="ce">; 0x84 == Used key IScript.</span></span>
 <span class="l"><a class="anc" name="ebd3" href="#ebd3">[ebd3]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Run the IScript:</span></span>
 <span class="l"><a class="anc" name="ebd6" href="#ebd6">[ebd6]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="ebd7" href="#ebd7">[ebd7]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
+<span class="l"><a class="anc" name="ebd7" href="#ebd7">[ebd7]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#IScripts_Begin">IScripts_Begin</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#IScripts_Begin">IScripts_Begin</a></span></span>
 <span class="l"></span>
 <a name=":ebd9:@_afterFarJump"></a><span class="l"><a class="anc" name="ebd9" href="#ebd9">[ebd9]</a><a href="#:ebd9:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$ebd9]</span></span>
 <span class="l"><a class="anc" name="ebd9" href="#ebd9">[ebd9]</a><span class="cd"><span class="i">LDA</span> <span class="o">#$ff</span></span></span>
@@ -20199,9 +20244,9 @@ Realistically, $23C0 (we guarantee 0x20 or 0x24 above for the screen).</span></s
 ;     <a href="#GameLoop_RunScreenEventHandlers">GameLoop_RunScreenEventHandlers</a>
 ;
 </div><span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><a href="#SPECIAL_SCREEN_EVENT_LOOKUP_TABLE" class="la">SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:</a><span class="ce">; [$ef63]</span></span>
-<span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>-1</span></span><span class="ce">; [0]: Handle pushable block on path to Mascon.</span></span>
-<span class="l"><a class="anc" name="ef65" href="#ef65">[ef65]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>-1</span></span><span class="ce">; [1]: Handle a standard boss battle.</span></span>
-<span class="l"><a class="anc" name="ef67" href="#ef67">[ef67]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#ScreenEvents_HandleFinalBossKilled">ScreenEvents_HandleFinalBossKilled</a>-1</span></span><span class="ce">; [2]: Handle end-game sequence after killing the final boss.</span></span>
+<span class="l"><a class="anc" name="ef63" href="#ef63">[ef63]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ScreenEvents_HandlePathToMasconEvent">ScreenEvents_HandlePathToMasconEvent</a>-1) &amp; $FFFF</span></span><span class="ce">; [0]: Handle pushable block on path to Mascon.</span></span>
+<span class="l"><a class="anc" name="ef65" href="#ef65">[ef65]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ScreenEvents_HandleBoss">ScreenEvents_HandleBoss</a>-1) &amp; $FFFF</span></span><span class="ce">; [1]: Handle a standard boss battle.</span></span>
+<span class="l"><a class="anc" name="ef67" href="#ef67">[ef67]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#ScreenEvents_HandleFinalBossKilled">ScreenEvents_HandleFinalBossKilled</a>-1) &amp; $FFFF</span></span><span class="ce">; [2]: Handle end-game sequence after killing the final boss.</span></span>
 <span class="l"></span>
 <span class="l"></span>
 </pre><pre><a name="ScreenEvents_HandlePathToMasconEvent"></a><div class="cp">;============================================================================
@@ -21581,7 +21626,7 @@ Else...</span></span>
 </div><span class="l"><a class="anc" name="f292" href="#f292">[f292]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Load sprite imagesin bank 14.</span></span>
 <span class="l"><a class="anc" name="f295" href="#f295">[f295]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_14_LOGIC</span></span><span class="ce">; Bank = 14
 Address = <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a></span></span>
-<span class="l"><a class="anc" name="f296" href="#f296">[f296]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a>-1</span></span><span class="ce">; <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a> [$PRG15_MIRROR::f296]</span></span>
+<span class="l"><a class="anc" name="f296" href="#f296">[f296]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a>-1) &amp; $FFFF</span></span><span class="ce">; <a href="#GameLoop_LoadSpriteImages">GameLoop_LoadSpriteImages</a> [$PRG15_MIRROR::f296]</span></span>
 <span class="l"></span>
 <a name=":f298:@_afterFarJump"></a><span class="l"><a class="anc" name="f298" href="#f298">[f298]</a><a href="#:f298:@_afterFarJump" class="lla">@_afterFarJump:</a><span class="ce">; [$f298]</span></span>
 <span class="l"><a class="anc" name="f298" href="#f298">[f298]</a><span class="cd"><span class="i">RTS</span></span></span>
@@ -25798,7 +25843,7 @@ Set C as the out going bit.</span></span>
 ;
 </div><span class="l"><a class="anc" name="fc68" href="#fc68">[fc68]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fc6b" href="#fc6b">[fc6b]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fc6c" href="#fc6c">[fc6c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a></span></span>
+<span class="l"><a class="anc" name="fc6c" href="#fc6c">[fc6c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#StartScreen_Draw">StartScreen_Draw</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":fc6e:@_waitForInput"></a><div class="c">;
@@ -25814,7 +25859,7 @@ Set C as the out going bit.</span></span>
 ;
 </div><span class="l"><a class="anc" name="fc74" href="#fc74">[fc74]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fc77" href="#fc77">[fc77]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fc78" href="#fc78">[fc78]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a></span></span>
+<span class="l"><a class="anc" name="fc78" href="#fc78">[fc78]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#StartScreen_CheckHandleInput">StartScreen_CheckHandleInput</a></span></span>
 <span class="l"></span>
 <a name=":fc7a:@_afterCheckHandleInputFarJump"></a><span class="l"><a class="anc" name="fc7a" href="#fc7a">[fc7a]</a><a href="#:fc7a:@_afterCheckHandleInputFarJump" class="lla">@_afterCheckHandleInputFarJump:</a><span class="ce">; [$fc7a]</span></span>
 <span class="l"><a class="anc" name="fc7a" href="#fc7a">[fc7a]</a><span class="cd"><span class="i">LDA</span> <span class="o"><a href="RAM.html#Joy1_ChangedButtonMask">Joy1_ChangedButtonMask</a></span></span><span class="ce">; Check the changed controller 1 button mask.</span></span>
@@ -25841,7 +25886,7 @@ Else, fall through.</span></span>
 ;
 </div><span class="l"><a class="anc" name="fc89" href="#fc89">[fc89]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fc8c" href="#fc8c">[fc8c]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fc8d" href="#fc8d">[fc8d]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a></span></span>
+<span class="l"><a class="anc" name="fc8d" href="#fc8d">[fc8d]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#PasswordScreen_Show">PasswordScreen_Show</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":fc8f:@_afterPasswordScreenShow"></a><div class="c">;
@@ -25850,7 +25895,7 @@ Else, fall through.</span></span>
 </div><span class="l"><a class="anc" name="fc8f" href="#fc8f">[fc8f]</a><a href="#:fc8f:@_afterPasswordScreenShow" class="lla">@_afterPasswordScreenShow:</a><span class="ce">; [$fc8f]</span></span>
 <span class="l"><a class="anc" name="fc8f" href="#fc8f">[fc8f]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fc92" href="#fc92">[fc92]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fc93" href="#fc93">[fc93]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a></span></span>
+<span class="l"><a class="anc" name="fc93" href="#fc93">[fc93]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetInitialExpAndGold">Player_SetInitialExpAndGold</a></span></span>
 <span class="l"></span>
 <a name=":fc95:@_afterSetExpGoldFarJump"></a><span class="l"><a class="anc" name="fc95" href="#fc95">[fc95]</a><a href="#:fc95:@_afterSetExpGoldFarJump" class="lla">@_afterSetExpGoldFarJump:</a><span class="ce">; [$fc95]</span></span>
 <span class="l"><a class="anc" name="fc95" href="#fc95">[fc95]</a><span class="cd"><span class="i">JMP</span> <span class="o"><a href="#Player_Spawn">Player_Spawn</a></span></span></span>
@@ -25864,7 +25909,7 @@ Else, fall through.</span></span>
 </div><span class="l"><a class="anc" name="fc98" href="#fc98">[fc98]</a><a href="#:fc98:@_startGame" class="lla">@_startGame:</a><span class="ce">; [$fc98]</span></span>
 <span class="l"><a class="anc" name="fc98" href="#fc98">[fc98]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fc9b" href="#fc9b">[fc9b]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fc9c" href="#fc9c">[fc9c]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a></span></span>
+<span class="l"><a class="anc" name="fc9c" href="#fc9c">[fc9c]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#SplashAnimation_RunIntro">SplashAnimation_RunIntro</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":fc9e:@_afterRunIntroFarJump"></a><div class="c">;
@@ -25873,7 +25918,7 @@ Else, fall through.</span></span>
 </div><span class="l"><a class="anc" name="fc9e" href="#fc9e">[fc9e]</a><a href="#:fc9e:@_afterRunIntroFarJump" class="lla">@_afterRunIntroFarJump:</a><span class="ce">; [$fc9e]</span></span>
 <span class="l"><a class="anc" name="fc9e" href="#fc9e">[fc9e]</a><span class="cd"><span class="i">JSR</span> <span class="o"><a href="#MMC1_LoadBankAndJump">MMC1_LoadBankAndJump</a></span></span><span class="ce">; Jump to:</span></span>
 <span class="l"><a class="anc" name="fca1" href="#fca1">[fca1]</a><span class="cd"><span class="i">.byte</span> <span class="o">BANK_12_LOGIC</span></span><span class="ce">; Bank = 12</span></span>
-<span class="l"><a class="anc" name="fca2" href="#fca2">[fca2]</a><span class="cd"><span class="i">.word</span> <span class="o"><a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>-1</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a></span></span>
+<span class="l"><a class="anc" name="fca2" href="#fca2">[fca2]</a><span class="cd"><span class="i">.word</span> <span class="o">(<a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a>-1) &amp; $FFFF</span></span><span class="ce">; Address = <a href="PRG12.html#Player_SetStartGameState">Player_SetStartGameState</a></span></span>
 <span class="l"></span>
 <span class="l"></span>
 <a name=":fca4:@_afterSetStartGameStateFarJump"></a><div class="c">;
