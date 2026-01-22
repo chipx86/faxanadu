@@ -8,33 +8,33 @@
     .reloc
 
 ROMBankStart:                               ; [$8000]
-    .word (EOLIS_BLOCKS-$8000) & $FFFF      ; Eolis
-    .word (MIST_BLOCKS-$8000) & $FFFF       ; Mist
-    .word (TOWNS_BLOCKS-$8000) & $FFFF      ; Towns
+    bank_offset_16 EOLIS_BLOCKS             ; Eolis
+    bank_offset_16 MIST_BLOCKS              ; Mist
+    bank_offset_16 TOWNS_BLOCKS             ; Towns
 
 ;
 ; XREFS:
 ;     ROMBankStart [$8000]
 ;
 EOLIS_BLOCKS:                               ; [$8006]
-    .word (EOLIS_BLOCKS_SCREEN_00-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_00
-                                                 ; [$8006]
-    .word (EOLIS_BLOCKS_SCREEN_01-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_01
-                                                 ; [$8008]
-    .word (EOLIS_BLOCKS_SCREEN_02-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_02
-                                                 ; [$800a]
-    .word (EOLIS_BLOCKS_SCREEN_03-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_03
-                                                 ; [$800c]
-    .word (EOLIS_BLOCKS_SCREEN_04-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_04
-                                                 ; [$800e]
-    .word (EOLIS_BLOCKS_SCREEN_05-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_05
-                                                 ; [$8010]
-    .word (EOLIS_BLOCKS_SCREEN_06-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_06
-                                                 ; [$8012]
-    .word (EOLIS_BLOCKS_SCREEN_07-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_07
-                                                 ; [$8014]
-    .word (EOLIS_BLOCKS_SCREEN_08-$8000) & $FFFF ; EOLIS_BLOCKS_SCREEN_08
-                                                 ; [$8016]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_00   ; EOLIS_BLOCKS_SCREEN_00
+                                            ; [$8006]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_01   ; EOLIS_BLOCKS_SCREEN_01
+                                            ; [$8008]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_02   ; EOLIS_BLOCKS_SCREEN_02
+                                            ; [$800a]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_03   ; EOLIS_BLOCKS_SCREEN_03
+                                            ; [$800c]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_04   ; EOLIS_BLOCKS_SCREEN_04
+                                            ; [$800e]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_05   ; EOLIS_BLOCKS_SCREEN_05
+                                            ; [$8010]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_06   ; EOLIS_BLOCKS_SCREEN_06
+                                            ; [$8012]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_07   ; EOLIS_BLOCKS_SCREEN_07
+                                            ; [$8014]
+    bank_offset_16 EOLIS_BLOCKS_SCREEN_08   ; EOLIS_BLOCKS_SCREEN_08
+                                            ; [$8016]
 
 ;
 ; XREFS:
@@ -200,172 +200,172 @@ EOLIS_BLOCKS_SCREEN_08:                     ; [$83bf]
     .byte $00,$00                           ; [$8427] byte
 
 MIST_BLOCKS:                                ; [$8429]
-    .word (MIST_BLOCKS_SCREEN_00_10_11_35_36-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_00_10_11_35_36
-                                                            ; [$8429]
-    .word (MIST_BLOCKS_SCREEN_01-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_01
-                                                ; [$842b]
-    .word (MIST_BLOCKS_SCREEN_02-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_02
-                                                ; [$842d]
-    .word (MIST_BLOCKS_SCREEN_03-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_03
-                                                ; [$842f]
-    .word (MIST_BLOCKS_SCREEN_04-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_04
-                                                ; [$8431]
-    .word (MIST_BLOCKS_SCREEN_05-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_05
-                                                ; [$8433]
-    .word (MIST_BLOCKS_SCREEN_06-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_06
-                                                ; [$8435]
-    .word (MIST_BLOCKS_SCREEN_07-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_07
-                                                ; [$8437]
-    .word (MIST_BLOCKS_SCREEN_08-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_08
-                                                ; [$8439]
-    .word (MIST_BLOCKS_SCREEN_09-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_09
-                                                ; [$843b]
-    .word (MIST_BLOCKS_SCREEN_00_10_11_35_36-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_00_10_11_35_36
-                                                            ; [$843d]
-    .word (MIST_BLOCKS_SCREEN_00_10_11_35_36-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_00_10_11_35_36
-                                                            ; [$843f]
-    .word (MIST_BLOCKS_SCREEN_12-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_12
-                                                ; [$8441]
-    .word (MIST_BLOCKS_SCREEN_13-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_13
-                                                ; [$8443]
-    .word (MIST_BLOCKS_SCREEN_14-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_14
-                                                ; [$8445]
-    .word (MIST_BLOCKS_SCREEN_15-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_15
-                                                ; [$8447]
-    .word (MIST_BLOCKS_SCREEN_16-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_16
-                                                ; [$8449]
-    .word (MIST_BLOCKS_SCREEN_17-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_17
-                                                ; [$844b]
-    .word (MIST_BLOCKS_SCREEN_18-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_18
-                                                ; [$844d]
-    .word (MIST_BLOCKS_SCREEN_19-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_19
-                                                ; [$844f]
-    .word (MIST_BLOCKS_SCREEN_20-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_20
-                                                ; [$8451]
-    .word (MIST_BLOCKS_SCREEN_21-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_21
-                                                ; [$8453]
-    .word (MIST_BLOCKS_SCREEN_22-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_22
-                                                ; [$8455]
-    .word (MIST_BLOCKS_SCREEN_23-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_23
-                                                ; [$8457]
-    .word (MIST_BLOCKS_SCREEN_24-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_24
-                                                ; [$8459]
-    .word (MIST_BLOCKS_SCREEN_25-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_25
-                                                ; [$845b]
-    .word (MIST_BLOCKS_SCREEN_26-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_26
-                                                ; [$845d]
-    .word (MIST_BLOCKS_SCREEN_27-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_27
-                                                ; [$845f]
-    .word (MIST_BLOCKS_SCREEN_28-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_28
-                                                ; [$8461]
-    .word (MIST_BLOCKS_SCREEN_29-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_29
-                                                ; [$8463]
-    .word (MIST_BLOCKS_SCREEN_30-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_30
-                                                ; [$8465]
-    .word (MIST_BLOCKS_SCREEN_31-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_31
-                                                ; [$8467]
-    .word (MIST_BLOCKS_SCREEN_32-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_32
-                                                ; [$8469]
-    .word (MIST_BLOCKS_SCREEN_33-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_33
-                                                ; [$846b]
-    .word (MIST_BLOCKS_SCREEN_34-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_34
-                                                ; [$846d]
-    .word (MIST_BLOCKS_SCREEN_00_10_11_35_36-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_00_10_11_35_36
-                                                            ; [$846f]
-    .word (MIST_BLOCKS_SCREEN_00_10_11_35_36-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_00_10_11_35_36
-                                                            ; [$8471]
-    .word (MIST_BLOCKS_SCREEN_37-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_37
-                                                ; [$8473]
-    .word (MIST_BLOCKS_SCREEN_38-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_38
-                                                ; [$8475]
-    .word (MIST_BLOCKS_SCREEN_39-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_39
-                                                ; [$8477]
-    .word (MIST_BLOCKS_SCREEN_40-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_40
-                                                ; [$8479]
-    .word (MIST_BLOCKS_SCREEN_41-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_41
-                                                ; [$847b]
-    .word (MIST_BLOCKS_SCREEN_42-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_42
-                                                ; [$847d]
-    .word (MIST_BLOCKS_SCREEN_43-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_43
-                                                ; [$847f]
-    .word (MIST_BLOCKS_SCREEN_44-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_44
-                                                ; [$8481]
-    .word (MIST_BLOCKS_SCREEN_45-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_45
-                                                ; [$8483]
-    .word (MIST_BLOCKS_SCREEN_46-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_46
-                                                ; [$8485]
-    .word (MIST_BLOCKS_SCREEN_47-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_47
-                                                ; [$8487]
-    .word (MIST_BLOCKS_SCREEN_48-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_48
-                                                ; [$8489]
-    .word (MIST_BLOCKS_SCREEN_49-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_49
-                                                ; [$848b]
-    .word (MIST_BLOCKS_SCREEN_50-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_50
-                                                ; [$848d]
-    .word (MIST_BLOCKS_SCREEN_51-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_51
-                                                ; [$848f]
-    .word (MIST_BLOCKS_SCREEN_52-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_52
-                                                ; [$8491]
-    .word (MIST_BLOCKS_SCREEN_53-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_53
-                                                ; [$8493]
-    .word (MIST_BLOCKS_SCREEN_54-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_54
-                                                ; [$8495]
-    .word (MIST_BLOCKS_SCREEN_55-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_55
-                                                ; [$8497]
-    .word (MIST_BLOCKS_SCREEN_56-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_56
-                                                ; [$8499]
-    .word (MIST_BLOCKS_SCREEN_57-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_57
-                                                ; [$849b]
-    .word (MIST_BLOCKS_SCREEN_58-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_58
-                                                ; [$849d]
-    .word (MIST_BLOCKS_SCREEN_59-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_59
-                                                ; [$849f]
-    .word (MIST_BLOCKS_SCREEN_60-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_60
-                                                ; [$84a1]
-    .word (MIST_BLOCKS_SCREEN_61-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_61
-                                                ; [$84a3]
-    .word (MIST_BLOCKS_SCREEN_62-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_62
-                                                ; [$84a5]
-    .word (MIST_BLOCKS_SCREEN_63-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_63
-                                                ; [$84a7]
-    .word (MIST_BLOCKS_SCREEN_64-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_64
-                                                ; [$84a9]
-    .word (MIST_BLOCKS_SCREEN_65-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_65
-                                                ; [$84ab]
-    .word (MIST_BLOCKS_SCREEN_66-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_66
-                                                ; [$84ad]
-    .word (MIST_BLOCKS_SCREEN_67-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_67
-                                                ; [$84af]
-    .word (MIST_BLOCKS_SCREEN_68-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_68
-                                                ; [$84b1]
-    .word (MIST_BLOCKS_SCREEN_69-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_69
-                                                ; [$84b3]
-    .word (MIST_BLOCKS_SCREEN_70-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_70
-                                                ; [$84b5]
-    .word (MIST_BLOCKS_SCREEN_71-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_71
-                                                ; [$84b7]
-    .word (MIST_BLOCKS_SCREEN_72-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_72
-                                                ; [$84b9]
-    .word (MIST_BLOCKS_SCREEN_73-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_73
-                                                ; [$84bb]
-    .word (MIST_BLOCKS_SCREEN_74-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_74
-                                                ; [$84bd]
-    .word (MIST_BLOCKS_SCREEN_75-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_75
-                                                ; [$84bf]
-    .word (MIST_BLOCKS_SCREEN_76-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_76
-                                                ; [$84c1]
-    .word (MIST_BLOCKS_SCREEN_77-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_77
-                                                ; [$84c3]
-    .word (MIST_BLOCKS_SCREEN_78-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_78
-                                                ; [$84c5]
-    .word (MIST_BLOCKS_SCREEN_79-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_79
-                                                ; [$84c7]
-    .word (MIST_BLOCKS_SCREEN_80-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_80
-                                                ; [$84c9]
-    .word (MIST_BLOCKS_SCREEN_81-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_81
-                                                ; [$84cb]
-    .word (MIST_BLOCKS_SCREEN_82-$8000) & $FFFF ; MIST_BLOCKS_SCREEN_82
-                                                ; [$84cd]
+    bank_offset_16 MIST_BLOCKS_SCREEN_00_10_11_35_36 ; MIST_BLOCKS_SCREEN_00_10_11_35_36
+                                                     ; [$8429]
+    bank_offset_16 MIST_BLOCKS_SCREEN_01    ; MIST_BLOCKS_SCREEN_01
+                                            ; [$842b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_02    ; MIST_BLOCKS_SCREEN_02
+                                            ; [$842d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_03    ; MIST_BLOCKS_SCREEN_03
+                                            ; [$842f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_04    ; MIST_BLOCKS_SCREEN_04
+                                            ; [$8431]
+    bank_offset_16 MIST_BLOCKS_SCREEN_05    ; MIST_BLOCKS_SCREEN_05
+                                            ; [$8433]
+    bank_offset_16 MIST_BLOCKS_SCREEN_06    ; MIST_BLOCKS_SCREEN_06
+                                            ; [$8435]
+    bank_offset_16 MIST_BLOCKS_SCREEN_07    ; MIST_BLOCKS_SCREEN_07
+                                            ; [$8437]
+    bank_offset_16 MIST_BLOCKS_SCREEN_08    ; MIST_BLOCKS_SCREEN_08
+                                            ; [$8439]
+    bank_offset_16 MIST_BLOCKS_SCREEN_09    ; MIST_BLOCKS_SCREEN_09
+                                            ; [$843b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_00_10_11_35_36 ; MIST_BLOCKS_SCREEN_00_10_11_35_36
+                                                     ; [$843d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_00_10_11_35_36 ; MIST_BLOCKS_SCREEN_00_10_11_35_36
+                                                     ; [$843f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_12    ; MIST_BLOCKS_SCREEN_12
+                                            ; [$8441]
+    bank_offset_16 MIST_BLOCKS_SCREEN_13    ; MIST_BLOCKS_SCREEN_13
+                                            ; [$8443]
+    bank_offset_16 MIST_BLOCKS_SCREEN_14    ; MIST_BLOCKS_SCREEN_14
+                                            ; [$8445]
+    bank_offset_16 MIST_BLOCKS_SCREEN_15    ; MIST_BLOCKS_SCREEN_15
+                                            ; [$8447]
+    bank_offset_16 MIST_BLOCKS_SCREEN_16    ; MIST_BLOCKS_SCREEN_16
+                                            ; [$8449]
+    bank_offset_16 MIST_BLOCKS_SCREEN_17    ; MIST_BLOCKS_SCREEN_17
+                                            ; [$844b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_18    ; MIST_BLOCKS_SCREEN_18
+                                            ; [$844d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_19    ; MIST_BLOCKS_SCREEN_19
+                                            ; [$844f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_20    ; MIST_BLOCKS_SCREEN_20
+                                            ; [$8451]
+    bank_offset_16 MIST_BLOCKS_SCREEN_21    ; MIST_BLOCKS_SCREEN_21
+                                            ; [$8453]
+    bank_offset_16 MIST_BLOCKS_SCREEN_22    ; MIST_BLOCKS_SCREEN_22
+                                            ; [$8455]
+    bank_offset_16 MIST_BLOCKS_SCREEN_23    ; MIST_BLOCKS_SCREEN_23
+                                            ; [$8457]
+    bank_offset_16 MIST_BLOCKS_SCREEN_24    ; MIST_BLOCKS_SCREEN_24
+                                            ; [$8459]
+    bank_offset_16 MIST_BLOCKS_SCREEN_25    ; MIST_BLOCKS_SCREEN_25
+                                            ; [$845b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_26    ; MIST_BLOCKS_SCREEN_26
+                                            ; [$845d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_27    ; MIST_BLOCKS_SCREEN_27
+                                            ; [$845f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_28    ; MIST_BLOCKS_SCREEN_28
+                                            ; [$8461]
+    bank_offset_16 MIST_BLOCKS_SCREEN_29    ; MIST_BLOCKS_SCREEN_29
+                                            ; [$8463]
+    bank_offset_16 MIST_BLOCKS_SCREEN_30    ; MIST_BLOCKS_SCREEN_30
+                                            ; [$8465]
+    bank_offset_16 MIST_BLOCKS_SCREEN_31    ; MIST_BLOCKS_SCREEN_31
+                                            ; [$8467]
+    bank_offset_16 MIST_BLOCKS_SCREEN_32    ; MIST_BLOCKS_SCREEN_32
+                                            ; [$8469]
+    bank_offset_16 MIST_BLOCKS_SCREEN_33    ; MIST_BLOCKS_SCREEN_33
+                                            ; [$846b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_34    ; MIST_BLOCKS_SCREEN_34
+                                            ; [$846d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_00_10_11_35_36 ; MIST_BLOCKS_SCREEN_00_10_11_35_36
+                                                     ; [$846f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_00_10_11_35_36 ; MIST_BLOCKS_SCREEN_00_10_11_35_36
+                                                     ; [$8471]
+    bank_offset_16 MIST_BLOCKS_SCREEN_37    ; MIST_BLOCKS_SCREEN_37
+                                            ; [$8473]
+    bank_offset_16 MIST_BLOCKS_SCREEN_38    ; MIST_BLOCKS_SCREEN_38
+                                            ; [$8475]
+    bank_offset_16 MIST_BLOCKS_SCREEN_39    ; MIST_BLOCKS_SCREEN_39
+                                            ; [$8477]
+    bank_offset_16 MIST_BLOCKS_SCREEN_40    ; MIST_BLOCKS_SCREEN_40
+                                            ; [$8479]
+    bank_offset_16 MIST_BLOCKS_SCREEN_41    ; MIST_BLOCKS_SCREEN_41
+                                            ; [$847b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_42    ; MIST_BLOCKS_SCREEN_42
+                                            ; [$847d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_43    ; MIST_BLOCKS_SCREEN_43
+                                            ; [$847f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_44    ; MIST_BLOCKS_SCREEN_44
+                                            ; [$8481]
+    bank_offset_16 MIST_BLOCKS_SCREEN_45    ; MIST_BLOCKS_SCREEN_45
+                                            ; [$8483]
+    bank_offset_16 MIST_BLOCKS_SCREEN_46    ; MIST_BLOCKS_SCREEN_46
+                                            ; [$8485]
+    bank_offset_16 MIST_BLOCKS_SCREEN_47    ; MIST_BLOCKS_SCREEN_47
+                                            ; [$8487]
+    bank_offset_16 MIST_BLOCKS_SCREEN_48    ; MIST_BLOCKS_SCREEN_48
+                                            ; [$8489]
+    bank_offset_16 MIST_BLOCKS_SCREEN_49    ; MIST_BLOCKS_SCREEN_49
+                                            ; [$848b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_50    ; MIST_BLOCKS_SCREEN_50
+                                            ; [$848d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_51    ; MIST_BLOCKS_SCREEN_51
+                                            ; [$848f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_52    ; MIST_BLOCKS_SCREEN_52
+                                            ; [$8491]
+    bank_offset_16 MIST_BLOCKS_SCREEN_53    ; MIST_BLOCKS_SCREEN_53
+                                            ; [$8493]
+    bank_offset_16 MIST_BLOCKS_SCREEN_54    ; MIST_BLOCKS_SCREEN_54
+                                            ; [$8495]
+    bank_offset_16 MIST_BLOCKS_SCREEN_55    ; MIST_BLOCKS_SCREEN_55
+                                            ; [$8497]
+    bank_offset_16 MIST_BLOCKS_SCREEN_56    ; MIST_BLOCKS_SCREEN_56
+                                            ; [$8499]
+    bank_offset_16 MIST_BLOCKS_SCREEN_57    ; MIST_BLOCKS_SCREEN_57
+                                            ; [$849b]
+    bank_offset_16 MIST_BLOCKS_SCREEN_58    ; MIST_BLOCKS_SCREEN_58
+                                            ; [$849d]
+    bank_offset_16 MIST_BLOCKS_SCREEN_59    ; MIST_BLOCKS_SCREEN_59
+                                            ; [$849f]
+    bank_offset_16 MIST_BLOCKS_SCREEN_60    ; MIST_BLOCKS_SCREEN_60
+                                            ; [$84a1]
+    bank_offset_16 MIST_BLOCKS_SCREEN_61    ; MIST_BLOCKS_SCREEN_61
+                                            ; [$84a3]
+    bank_offset_16 MIST_BLOCKS_SCREEN_62    ; MIST_BLOCKS_SCREEN_62
+                                            ; [$84a5]
+    bank_offset_16 MIST_BLOCKS_SCREEN_63    ; MIST_BLOCKS_SCREEN_63
+                                            ; [$84a7]
+    bank_offset_16 MIST_BLOCKS_SCREEN_64    ; MIST_BLOCKS_SCREEN_64
+                                            ; [$84a9]
+    bank_offset_16 MIST_BLOCKS_SCREEN_65    ; MIST_BLOCKS_SCREEN_65
+                                            ; [$84ab]
+    bank_offset_16 MIST_BLOCKS_SCREEN_66    ; MIST_BLOCKS_SCREEN_66
+                                            ; [$84ad]
+    bank_offset_16 MIST_BLOCKS_SCREEN_67    ; MIST_BLOCKS_SCREEN_67
+                                            ; [$84af]
+    bank_offset_16 MIST_BLOCKS_SCREEN_68    ; MIST_BLOCKS_SCREEN_68
+                                            ; [$84b1]
+    bank_offset_16 MIST_BLOCKS_SCREEN_69    ; MIST_BLOCKS_SCREEN_69
+                                            ; [$84b3]
+    bank_offset_16 MIST_BLOCKS_SCREEN_70    ; MIST_BLOCKS_SCREEN_70
+                                            ; [$84b5]
+    bank_offset_16 MIST_BLOCKS_SCREEN_71    ; MIST_BLOCKS_SCREEN_71
+                                            ; [$84b7]
+    bank_offset_16 MIST_BLOCKS_SCREEN_72    ; MIST_BLOCKS_SCREEN_72
+                                            ; [$84b9]
+    bank_offset_16 MIST_BLOCKS_SCREEN_73    ; MIST_BLOCKS_SCREEN_73
+                                            ; [$84bb]
+    bank_offset_16 MIST_BLOCKS_SCREEN_74    ; MIST_BLOCKS_SCREEN_74
+                                            ; [$84bd]
+    bank_offset_16 MIST_BLOCKS_SCREEN_75    ; MIST_BLOCKS_SCREEN_75
+                                            ; [$84bf]
+    bank_offset_16 MIST_BLOCKS_SCREEN_76    ; MIST_BLOCKS_SCREEN_76
+                                            ; [$84c1]
+    bank_offset_16 MIST_BLOCKS_SCREEN_77    ; MIST_BLOCKS_SCREEN_77
+                                            ; [$84c3]
+    bank_offset_16 MIST_BLOCKS_SCREEN_78    ; MIST_BLOCKS_SCREEN_78
+                                            ; [$84c5]
+    bank_offset_16 MIST_BLOCKS_SCREEN_79    ; MIST_BLOCKS_SCREEN_79
+                                            ; [$84c7]
+    bank_offset_16 MIST_BLOCKS_SCREEN_80    ; MIST_BLOCKS_SCREEN_80
+                                            ; [$84c9]
+    bank_offset_16 MIST_BLOCKS_SCREEN_81    ; MIST_BLOCKS_SCREEN_81
+                                            ; [$84cb]
+    bank_offset_16 MIST_BLOCKS_SCREEN_82    ; MIST_BLOCKS_SCREEN_82
+                                            ; [$84cd]
 
 ;
 ; XREFS:
@@ -2222,34 +2222,34 @@ MIST_BLOCKS_SCREEN_82:                      ; [$b7f7]
     .byte $de,$40,$00,$00,$00               ; [$b897] byte
 
 TOWNS_BLOCKS:                               ; [$b89c]
-    .word (TOWNS_BLOCKS_SCREEN_00-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_00
-                                                 ; [$b89c]
-    .word (TOWNS_BLOCKS_SCREEN_01-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_01
-                                                 ; [$b89e]
-    .word (TOWNS_BLOCKS_SCREEN_02-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_02
-                                                 ; [$b8a0]
-    .word (TOWNS_BLOCKS_SCREEN_03-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_03
-                                                 ; [$b8a2]
-    .word (TOWNS_BLOCKS_SCREEN_04-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_04
-                                                 ; [$b8a4]
-    .word (TOWNS_BLOCKS_SCREEN_05-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_05
-                                                 ; [$b8a6]
-    .word (TOWNS_BLOCKS_SCREEN_06-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_06
-                                                 ; [$b8a8]
-    .word (TOWNS_BLOCKS_SCREEN_07-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_07
-                                                 ; [$b8aa]
-    .word (TOWNS_BLOCKS_SCREEN_08-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_08
-                                                 ; [$b8ac]
-    .word (TOWNS_BLOCKS_SCREEN_09-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_09
-                                                 ; [$b8ae]
-    .word (TOWNS_BLOCKS_SCREEN_10-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_10
-                                                 ; [$b8b0]
-    .word (TOWNS_BLOCKS_SCREEN_11-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_11
-                                                 ; [$b8b2]
-    .word (TOWNS_BLOCKS_SCREEN_12-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_12
-                                                 ; [$b8b4]
-    .word (TOWNS_BLOCKS_SCREEN_13-$8000) & $FFFF ; TOWNS_BLOCKS_SCREEN_13
-                                                 ; [$b8b6]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_00   ; TOWNS_BLOCKS_SCREEN_00
+                                            ; [$b89c]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_01   ; TOWNS_BLOCKS_SCREEN_01
+                                            ; [$b89e]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_02   ; TOWNS_BLOCKS_SCREEN_02
+                                            ; [$b8a0]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_03   ; TOWNS_BLOCKS_SCREEN_03
+                                            ; [$b8a2]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_04   ; TOWNS_BLOCKS_SCREEN_04
+                                            ; [$b8a4]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_05   ; TOWNS_BLOCKS_SCREEN_05
+                                            ; [$b8a6]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_06   ; TOWNS_BLOCKS_SCREEN_06
+                                            ; [$b8a8]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_07   ; TOWNS_BLOCKS_SCREEN_07
+                                            ; [$b8aa]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_08   ; TOWNS_BLOCKS_SCREEN_08
+                                            ; [$b8ac]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_09   ; TOWNS_BLOCKS_SCREEN_09
+                                            ; [$b8ae]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_10   ; TOWNS_BLOCKS_SCREEN_10
+                                            ; [$b8b0]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_11   ; TOWNS_BLOCKS_SCREEN_11
+                                            ; [$b8b2]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_12   ; TOWNS_BLOCKS_SCREEN_12
+                                            ; [$b8b4]
+    bank_offset_16 TOWNS_BLOCKS_SCREEN_13   ; TOWNS_BLOCKS_SCREEN_13
+                                            ; [$b8b6]
 
 ;
 ; XREFS:

@@ -634,14 +634,14 @@ PALETTE_INDEX_TO_UI_BG_ATTRIBUTE_INDEX:     ; [$81f0]
 ;     Screen_LoadAllScreenInfo
 ;
 AREA_SPRITE_ADDRESSES:                      ; [$8210]
-    .word SPRITE_INFO_EOLIS                 ; Eolis
-    .word SPRITE_INFO_APOLUNE               ; Apolune
-    .word SPRITE_INFO_FOREPAW               ; Forepaw
-    .word SPRITE_INFO_MASCON                ; Mascon
-    .word SPRITE_INFO_VICTIM                ; Victim
-    .word SPRITE_INFO_CONFLATE              ; Conflate
-    .word SPRITE_INFO_DAYBREAK              ; Daybreak
-    .word SPRITE_INFO_ZENIS                 ; Final
+    pointer SPRITE_INFO_EOLIS               ; Eolis
+    pointer SPRITE_INFO_APOLUNE             ; Apolune
+    pointer SPRITE_INFO_FOREPAW             ; Forepaw
+    pointer SPRITE_INFO_MASCON              ; Mascon
+    pointer SPRITE_INFO_VICTIM              ; Victim
+    pointer SPRITE_INFO_CONFLATE            ; Conflate
+    pointer SPRITE_INFO_DAYBREAK            ; Daybreak
+    pointer SPRITE_INFO_ZENIS               ; Final
 
 
 ;============================================================================
@@ -656,15 +656,15 @@ AREA_SPRITE_ADDRESSES:                      ; [$8210]
 ;     AREA_SPRITE_ADDRESSES [$PRG11::8210]
 ;
 SPRITE_INFO_EOLIS:                          ; [$8220]
-    .word SPRITE_INFO_EOLIS_SCREEN_00       ; Screen 0
-    .word SPRITE_INFO_EOLIS_SCREEN_01       ; Screen 1
-    .word SPRITE_INFO_EOLIS_SCREEN_02       ; Screen 2
-    .word SPRITE_INFO_EOLIS_SCREEN_03       ; Screen 3
-    .word SPRITE_INFO_EOLIS_SCREEN_04       ; Screen 4
-    .word SPRITE_INFO_EOLIS_SCREEN_05       ; Screen 5
-    .word SPRITE_INFO_EOLIS_SCREEN_06       ; Screen 6
-    .word SPRITE_INFO_EOLIS_SCREEN_07       ; Screen 7
-    .word SPRITE_INFO_EOLIS_SCREEN_08       ; Screen 8
+    pointer SPRITE_INFO_EOLIS_SCREEN_00     ; Screen 0
+    pointer SPRITE_INFO_EOLIS_SCREEN_01     ; Screen 1
+    pointer SPRITE_INFO_EOLIS_SCREEN_02     ; Screen 2
+    pointer SPRITE_INFO_EOLIS_SCREEN_03     ; Screen 3
+    pointer SPRITE_INFO_EOLIS_SCREEN_04     ; Screen 4
+    pointer SPRITE_INFO_EOLIS_SCREEN_05     ; Screen 5
+    pointer SPRITE_INFO_EOLIS_SCREEN_06     ; Screen 6
+    pointer SPRITE_INFO_EOLIS_SCREEN_07     ; Screen 7
+    pointer SPRITE_INFO_EOLIS_SCREEN_08     ; Screen 8
 
 ;
 ; XREFS:
@@ -736,133 +736,133 @@ SPRITE_INFO_EOLIS_SCREEN_08:                ; [$825c]
 ; Apolune Sprite Information
 ;============================================================================
 SPRITE_INFO_APOLUNE:                        ; [$8260]
-    .word SPRITE_INFO_APOLUNE_SCREEN_00     ; SPRITE_INFO_APOLUNE_SCREEN_00
+    pointer SPRITE_INFO_APOLUNE_SCREEN_00   ; SPRITE_INFO_APOLUNE_SCREEN_00
                                             ; [$PRG11::8260]
-    .word SPRITE_INFO_APOLUNE_SCREEN_01     ; SPRITE_INFO_APOLUNE_SCREEN_01
+    pointer SPRITE_INFO_APOLUNE_SCREEN_01   ; SPRITE_INFO_APOLUNE_SCREEN_01
                                             ; [$PRG11::8262]
-    .word SPRITE_INFO_APOLUNE_SCREEN_02     ; SPRITE_INFO_APOLUNE_SCREEN_02
+    pointer SPRITE_INFO_APOLUNE_SCREEN_02   ; SPRITE_INFO_APOLUNE_SCREEN_02
                                             ; [$PRG11::8264]
-    .word SPRITE_INFO_APOLUNE_SCREEN_03     ; SPRITE_INFO_APOLUNE_SCREEN_03
+    pointer SPRITE_INFO_APOLUNE_SCREEN_03   ; SPRITE_INFO_APOLUNE_SCREEN_03
                                             ; [$PRG11::8266]
-    .word SPRITE_INFO_APOLUNE_SCREEN_04     ; SPRITE_INFO_APOLUNE_SCREEN_04
+    pointer SPRITE_INFO_APOLUNE_SCREEN_04   ; SPRITE_INFO_APOLUNE_SCREEN_04
                                             ; [$PRG11::8268]
-    .word SPRITE_INFO_APOLUNE_SCREEN_05     ; SPRITE_INFO_APOLUNE_SCREEN_05
+    pointer SPRITE_INFO_APOLUNE_SCREEN_05   ; SPRITE_INFO_APOLUNE_SCREEN_05
                                             ; [$PRG11::826a]
-    .word SPRITE_INFO_APOLUNE_SCREEN_06     ; SPRITE_INFO_APOLUNE_SCREEN_06
+    pointer SPRITE_INFO_APOLUNE_SCREEN_06   ; SPRITE_INFO_APOLUNE_SCREEN_06
                                             ; [$PRG11::826c]
-    .word SPRITE_INFO_APOLUNE_SCREEN_07     ; SPRITE_INFO_APOLUNE_SCREEN_07
+    pointer SPRITE_INFO_APOLUNE_SCREEN_07   ; SPRITE_INFO_APOLUNE_SCREEN_07
                                             ; [$PRG11::826e]
-    .word SPRITE_INFO_APOLUNE_SCREEN_08     ; SPRITE_INFO_APOLUNE_SCREEN_08
+    pointer SPRITE_INFO_APOLUNE_SCREEN_08   ; SPRITE_INFO_APOLUNE_SCREEN_08
                                             ; [$PRG11::8270]
-    .word SPRITE_INFO_APOLUNE_SCREEN_09     ; SPRITE_INFO_APOLUNE_SCREEN_09
+    pointer SPRITE_INFO_APOLUNE_SCREEN_09   ; SPRITE_INFO_APOLUNE_SCREEN_09
                                             ; [$PRG11::8272]
-    .word SPRITE_INFO_APOLUNE_SCREEN_10     ; SPRITE_INFO_APOLUNE_SCREEN_10
+    pointer SPRITE_INFO_APOLUNE_SCREEN_10   ; SPRITE_INFO_APOLUNE_SCREEN_10
                                             ; [$PRG11::8274]
-    .word SPRITE_INFO_APOLUNE_SCREEN_11     ; SPRITE_INFO_APOLUNE_SCREEN_11
+    pointer SPRITE_INFO_APOLUNE_SCREEN_11   ; SPRITE_INFO_APOLUNE_SCREEN_11
                                             ; [$PRG11::8276]
-    .word SPRITE_INFO_APOLUNE_SCREEN_12     ; SPRITE_INFO_APOLUNE_SCREEN_12
+    pointer SPRITE_INFO_APOLUNE_SCREEN_12   ; SPRITE_INFO_APOLUNE_SCREEN_12
                                             ; [$PRG11::8278]
-    .word SPRITE_INFO_APOLUNE_SCREEN_13     ; SPRITE_INFO_APOLUNE_SCREEN_13
+    pointer SPRITE_INFO_APOLUNE_SCREEN_13   ; SPRITE_INFO_APOLUNE_SCREEN_13
                                             ; [$PRG11::827a]
-    .word SPRITE_INFO_APOLUNE_SCREEN_14     ; SPRITE_INFO_APOLUNE_SCREEN_14
+    pointer SPRITE_INFO_APOLUNE_SCREEN_14   ; SPRITE_INFO_APOLUNE_SCREEN_14
                                             ; [$PRG11::827c]
-    .word SPRITE_INFO_APOLUNE_SCREEN_15     ; SPRITE_INFO_APOLUNE_SCREEN_15
+    pointer SPRITE_INFO_APOLUNE_SCREEN_15   ; SPRITE_INFO_APOLUNE_SCREEN_15
                                             ; [$PRG11::827e]
-    .word SPRITE_INFO_APOLUNE_SCREEN_16     ; SPRITE_INFO_APOLUNE_SCREEN_16
+    pointer SPRITE_INFO_APOLUNE_SCREEN_16   ; SPRITE_INFO_APOLUNE_SCREEN_16
                                             ; [$PRG11::8280]
-    .word SPRITE_INFO_APOLUNE_SCREEN_17     ; SPRITE_INFO_APOLUNE_SCREEN_17
+    pointer SPRITE_INFO_APOLUNE_SCREEN_17   ; SPRITE_INFO_APOLUNE_SCREEN_17
                                             ; [$PRG11::8282]
-    .word SPRITE_INFO_APOLUNE_SCREEN_18     ; SPRITE_INFO_APOLUNE_SCREEN_18
+    pointer SPRITE_INFO_APOLUNE_SCREEN_18   ; SPRITE_INFO_APOLUNE_SCREEN_18
                                             ; [$PRG11::8284]
-    .word SPRITE_INFO_APOLUNE_SCREEN_19     ; SPRITE_INFO_APOLUNE_SCREEN_19
+    pointer SPRITE_INFO_APOLUNE_SCREEN_19   ; SPRITE_INFO_APOLUNE_SCREEN_19
                                             ; [$PRG11::8286]
-    .word SPRITE_INFO_APOLUNE_SCREEN_20     ; SPRITE_INFO_APOLUNE_SCREEN_20
+    pointer SPRITE_INFO_APOLUNE_SCREEN_20   ; SPRITE_INFO_APOLUNE_SCREEN_20
                                             ; [$PRG11::8288]
-    .word SPRITE_INFO_APOLUNE_SCREEN_21     ; SPRITE_INFO_APOLUNE_SCREEN_21
+    pointer SPRITE_INFO_APOLUNE_SCREEN_21   ; SPRITE_INFO_APOLUNE_SCREEN_21
                                             ; [$PRG11::828a]
-    .word SPRITE_INFO_APOLUNE_SCREEN_22     ; SPRITE_INFO_APOLUNE_SCREEN_22
+    pointer SPRITE_INFO_APOLUNE_SCREEN_22   ; SPRITE_INFO_APOLUNE_SCREEN_22
                                             ; [$PRG11::828c]
-    .word SPRITE_INFO_APOLUNE_SCREEN_23     ; SPRITE_INFO_APOLUNE_SCREEN_23
+    pointer SPRITE_INFO_APOLUNE_SCREEN_23   ; SPRITE_INFO_APOLUNE_SCREEN_23
                                             ; [$PRG11::828e]
-    .word SPRITE_INFO_APOLUNE_SCREEN_24     ; SPRITE_INFO_APOLUNE_SCREEN_24
+    pointer SPRITE_INFO_APOLUNE_SCREEN_24   ; SPRITE_INFO_APOLUNE_SCREEN_24
                                             ; [$PRG11::8290]
-    .word SPRITE_INFO_APOLUNE_SCREEN_25     ; SPRITE_INFO_APOLUNE_SCREEN_25
+    pointer SPRITE_INFO_APOLUNE_SCREEN_25   ; SPRITE_INFO_APOLUNE_SCREEN_25
                                             ; [$PRG11::8292]
-    .word SPRITE_INFO_APOLUNE_SCREEN_26     ; SPRITE_INFO_APOLUNE_SCREEN_26
+    pointer SPRITE_INFO_APOLUNE_SCREEN_26   ; SPRITE_INFO_APOLUNE_SCREEN_26
                                             ; [$PRG11::8294]
-    .word SPRITE_INFO_APOLUNE_SCREEN_27     ; SPRITE_INFO_APOLUNE_SCREEN_27
+    pointer SPRITE_INFO_APOLUNE_SCREEN_27   ; SPRITE_INFO_APOLUNE_SCREEN_27
                                             ; [$PRG11::8296]
-    .word SPRITE_INFO_APOLUNE_SCREEN_28     ; SPRITE_INFO_APOLUNE_SCREEN_28
+    pointer SPRITE_INFO_APOLUNE_SCREEN_28   ; SPRITE_INFO_APOLUNE_SCREEN_28
                                             ; [$PRG11::8298]
-    .word SPRITE_INFO_APOLUNE_SCREEN_29     ; SPRITE_INFO_APOLUNE_SCREEN_29
+    pointer SPRITE_INFO_APOLUNE_SCREEN_29   ; SPRITE_INFO_APOLUNE_SCREEN_29
                                             ; [$PRG11::829a]
-    .word SPRITE_INFO_APOLUNE_SCREEN_30     ; SPRITE_INFO_APOLUNE_SCREEN_30
+    pointer SPRITE_INFO_APOLUNE_SCREEN_30   ; SPRITE_INFO_APOLUNE_SCREEN_30
                                             ; [$PRG11::829c]
-    .word SPRITE_INFO_APOLUNE_SCREEN_31     ; SPRITE_INFO_APOLUNE_SCREEN_31
+    pointer SPRITE_INFO_APOLUNE_SCREEN_31   ; SPRITE_INFO_APOLUNE_SCREEN_31
                                             ; [$PRG11::829e]
-    .word SPRITE_INFO_APOLUNE_SCREEN_32     ; SPRITE_INFO_APOLUNE_SCREEN_32
+    pointer SPRITE_INFO_APOLUNE_SCREEN_32   ; SPRITE_INFO_APOLUNE_SCREEN_32
                                             ; [$PRG11::82a0]
-    .word SPRITE_INFO_APOLUNE_SCREEN_33     ; SPRITE_INFO_APOLUNE_SCREEN_33
+    pointer SPRITE_INFO_APOLUNE_SCREEN_33   ; SPRITE_INFO_APOLUNE_SCREEN_33
                                             ; [$PRG11::82a2]
-    .word SPRITE_INFO_APOLUNE_SCREEN_34     ; SPRITE_INFO_APOLUNE_SCREEN_34
+    pointer SPRITE_INFO_APOLUNE_SCREEN_34   ; SPRITE_INFO_APOLUNE_SCREEN_34
                                             ; [$PRG11::82a4]
-    .word SPRITE_INFO_APOLUNE_SCREEN_35     ; SPRITE_INFO_APOLUNE_SCREEN_35
+    pointer SPRITE_INFO_APOLUNE_SCREEN_35   ; SPRITE_INFO_APOLUNE_SCREEN_35
                                             ; [$PRG11::82a6]
-    .word SPRITE_INFO_APOLUNE_SCREEN_36     ; SPRITE_INFO_APOLUNE_SCREEN_36
+    pointer SPRITE_INFO_APOLUNE_SCREEN_36   ; SPRITE_INFO_APOLUNE_SCREEN_36
                                             ; [$PRG11::82a8]
-    .word SPRITE_INFO_APOLUNE_SCREEN_37     ; SPRITE_INFO_APOLUNE_SCREEN_37
+    pointer SPRITE_INFO_APOLUNE_SCREEN_37   ; SPRITE_INFO_APOLUNE_SCREEN_37
                                             ; [$PRG11::82aa]
-    .word SPRITE_INFO_APOLUNE_SCREEN_38     ; SPRITE_INFO_APOLUNE_SCREEN_38
+    pointer SPRITE_INFO_APOLUNE_SCREEN_38   ; SPRITE_INFO_APOLUNE_SCREEN_38
                                             ; [$PRG11::82ac]
-    .word SPRITE_INFO_APOLUNE_SCREEN_39     ; SPRITE_INFO_APOLUNE_SCREEN_39
+    pointer SPRITE_INFO_APOLUNE_SCREEN_39   ; SPRITE_INFO_APOLUNE_SCREEN_39
                                             ; [$PRG11::82ae]
-    .word SPRITE_INFO_APOLUNE_SCREEN_40     ; SPRITE_INFO_APOLUNE_SCREEN_40
+    pointer SPRITE_INFO_APOLUNE_SCREEN_40   ; SPRITE_INFO_APOLUNE_SCREEN_40
                                             ; [$PRG11::82b0]
-    .word SPRITE_INFO_APOLUNE_SCREEN_41     ; SPRITE_INFO_APOLUNE_SCREEN_41
+    pointer SPRITE_INFO_APOLUNE_SCREEN_41   ; SPRITE_INFO_APOLUNE_SCREEN_41
                                             ; [$PRG11::82b2]
-    .word SPRITE_INFO_APOLUNE_SCREEN_42     ; SPRITE_INFO_APOLUNE_SCREEN_42
+    pointer SPRITE_INFO_APOLUNE_SCREEN_42   ; SPRITE_INFO_APOLUNE_SCREEN_42
                                             ; [$PRG11::82b4]
-    .word SPRITE_INFO_APOLUNE_SCREEN_43     ; SPRITE_INFO_APOLUNE_SCREEN_43
+    pointer SPRITE_INFO_APOLUNE_SCREEN_43   ; SPRITE_INFO_APOLUNE_SCREEN_43
                                             ; [$PRG11::82b6]
-    .word SPRITE_INFO_APOLUNE_SCREEN_44     ; SPRITE_INFO_APOLUNE_SCREEN_44
+    pointer SPRITE_INFO_APOLUNE_SCREEN_44   ; SPRITE_INFO_APOLUNE_SCREEN_44
                                             ; [$PRG11::82b8]
-    .word SPRITE_INFO_APOLUNE_SCREEN_45     ; SPRITE_INFO_APOLUNE_SCREEN_45
+    pointer SPRITE_INFO_APOLUNE_SCREEN_45   ; SPRITE_INFO_APOLUNE_SCREEN_45
                                             ; [$PRG11::82ba]
-    .word SPRITE_INFO_APOLUNE_SCREEN_46     ; SPRITE_INFO_APOLUNE_SCREEN_46
+    pointer SPRITE_INFO_APOLUNE_SCREEN_46   ; SPRITE_INFO_APOLUNE_SCREEN_46
                                             ; [$PRG11::82bc]
-    .word SPRITE_INFO_APOLUNE_SCREEN_47     ; SPRITE_INFO_APOLUNE_SCREEN_47
+    pointer SPRITE_INFO_APOLUNE_SCREEN_47   ; SPRITE_INFO_APOLUNE_SCREEN_47
                                             ; [$PRG11::82be]
-    .word SPRITE_INFO_APOLUNE_SCREEN_48     ; SPRITE_INFO_APOLUNE_SCREEN_48
+    pointer SPRITE_INFO_APOLUNE_SCREEN_48   ; SPRITE_INFO_APOLUNE_SCREEN_48
                                             ; [$PRG11::82c0]
-    .word SPRITE_INFO_APOLUNE_SCREEN_49     ; SPRITE_INFO_APOLUNE_SCREEN_49
+    pointer SPRITE_INFO_APOLUNE_SCREEN_49   ; SPRITE_INFO_APOLUNE_SCREEN_49
                                             ; [$PRG11::82c2]
-    .word SPRITE_INFO_APOLUNE_SCREEN_50     ; SPRITE_INFO_APOLUNE_SCREEN_50
+    pointer SPRITE_INFO_APOLUNE_SCREEN_50   ; SPRITE_INFO_APOLUNE_SCREEN_50
                                             ; [$PRG11::82c4]
-    .word SPRITE_INFO_APOLUNE_SCREEN_51     ; SPRITE_INFO_APOLUNE_SCREEN_51
+    pointer SPRITE_INFO_APOLUNE_SCREEN_51   ; SPRITE_INFO_APOLUNE_SCREEN_51
                                             ; [$PRG11::82c6]
-    .word SPRITE_INFO_APOLUNE_SCREEN_52     ; SPRITE_INFO_APOLUNE_SCREEN_52
+    pointer SPRITE_INFO_APOLUNE_SCREEN_52   ; SPRITE_INFO_APOLUNE_SCREEN_52
                                             ; [$PRG11::82c8]
-    .word SPRITE_INFO_APOLUNE_SCREEN_53     ; SPRITE_INFO_APOLUNE_SCREEN_53
+    pointer SPRITE_INFO_APOLUNE_SCREEN_53   ; SPRITE_INFO_APOLUNE_SCREEN_53
                                             ; [$PRG11::82ca]
-    .word SPRITE_INFO_APOLUNE_SCREEN_54     ; SPRITE_INFO_APOLUNE_SCREEN_54
+    pointer SPRITE_INFO_APOLUNE_SCREEN_54   ; SPRITE_INFO_APOLUNE_SCREEN_54
                                             ; [$PRG11::82cc]
-    .word SPRITE_INFO_APOLUNE_SCREEN_55     ; SPRITE_INFO_APOLUNE_SCREEN_55
+    pointer SPRITE_INFO_APOLUNE_SCREEN_55   ; SPRITE_INFO_APOLUNE_SCREEN_55
                                             ; [$PRG11::82ce]
-    .word SPRITE_INFO_APOLUNE_SCREEN_56     ; SPRITE_INFO_APOLUNE_SCREEN_56
+    pointer SPRITE_INFO_APOLUNE_SCREEN_56   ; SPRITE_INFO_APOLUNE_SCREEN_56
                                             ; [$PRG11::82d0]
-    .word SPRITE_INFO_APOLUNE_SCREEN_57     ; SPRITE_INFO_APOLUNE_SCREEN_57
+    pointer SPRITE_INFO_APOLUNE_SCREEN_57   ; SPRITE_INFO_APOLUNE_SCREEN_57
                                             ; [$PRG11::82d2]
-    .word SPRITE_INFO_APOLUNE_SCREEN_58     ; SPRITE_INFO_APOLUNE_SCREEN_58
+    pointer SPRITE_INFO_APOLUNE_SCREEN_58   ; SPRITE_INFO_APOLUNE_SCREEN_58
                                             ; [$PRG11::82d4]
-    .word SPRITE_INFO_APOLUNE_SCREEN_59     ; SPRITE_INFO_APOLUNE_SCREEN_59
+    pointer SPRITE_INFO_APOLUNE_SCREEN_59   ; SPRITE_INFO_APOLUNE_SCREEN_59
                                             ; [$PRG11::82d6]
-    .word SPRITE_INFO_APOLUNE_SCREEN_60     ; SPRITE_INFO_APOLUNE_SCREEN_60
+    pointer SPRITE_INFO_APOLUNE_SCREEN_60   ; SPRITE_INFO_APOLUNE_SCREEN_60
                                             ; [$PRG11::82d8]
-    .word SPRITE_INFO_APOLUNE_SCREEN_61     ; SPRITE_INFO_APOLUNE_SCREEN_61
+    pointer SPRITE_INFO_APOLUNE_SCREEN_61   ; SPRITE_INFO_APOLUNE_SCREEN_61
                                             ; [$PRG11::82da]
-    .word SPRITE_INFO_APOLUNE_SCREEN_62     ; SPRITE_INFO_APOLUNE_SCREEN_62
+    pointer SPRITE_INFO_APOLUNE_SCREEN_62   ; SPRITE_INFO_APOLUNE_SCREEN_62
                                             ; [$PRG11::82dc]
-    .word SPRITE_INFO_APOLUNE_SCREEN_63     ; SPRITE_INFO_APOLUNE_SCREEN_63
+    pointer SPRITE_INFO_APOLUNE_SCREEN_63   ; SPRITE_INFO_APOLUNE_SCREEN_63
                                             ; [$PRG11::82de]
 
 ;
@@ -1369,171 +1369,171 @@ SPRITE_INFO_APOLUNE_SCREEN_27:              ; [$8480]
 ; Forepaw Sprite Information
 ;============================================================================
 SPRITE_INFO_FOREPAW:                        ; [$8482]
-    .word SPRITE_INFO_FOREPAW_SCREEN_00     ; SPRITE_INFO_FOREPAW_SCREEN_00
+    pointer SPRITE_INFO_FOREPAW_SCREEN_00   ; SPRITE_INFO_FOREPAW_SCREEN_00
                                             ; [$PRG11::8482]
-    .word SPRITE_INFO_FOREPAW_SCREEN_01     ; SPRITE_INFO_FOREPAW_SCREEN_01
+    pointer SPRITE_INFO_FOREPAW_SCREEN_01   ; SPRITE_INFO_FOREPAW_SCREEN_01
                                             ; [$PRG11::8484]
-    .word SPRITE_INFO_FOREPAW_SCREEN_02     ; SPRITE_INFO_FOREPAW_SCREEN_02
+    pointer SPRITE_INFO_FOREPAW_SCREEN_02   ; SPRITE_INFO_FOREPAW_SCREEN_02
                                             ; [$PRG11::8486]
-    .word SPRITE_INFO_FOREPAW_SCREEN_03     ; SPRITE_INFO_FOREPAW_SCREEN_03
+    pointer SPRITE_INFO_FOREPAW_SCREEN_03   ; SPRITE_INFO_FOREPAW_SCREEN_03
                                             ; [$PRG11::8488]
-    .word SPRITE_INFO_FOREPAW_SCREEN_04     ; SPRITE_INFO_FOREPAW_SCREEN_04
+    pointer SPRITE_INFO_FOREPAW_SCREEN_04   ; SPRITE_INFO_FOREPAW_SCREEN_04
                                             ; [$PRG11::848a]
-    .word SPRITE_INFO_FOREPAW_SCREEN_05     ; SPRITE_INFO_FOREPAW_SCREEN_05
+    pointer SPRITE_INFO_FOREPAW_SCREEN_05   ; SPRITE_INFO_FOREPAW_SCREEN_05
                                             ; [$PRG11::848c]
-    .word SPRITE_INFO_FOREPAW_SCREEN_06     ; SPRITE_INFO_FOREPAW_SCREEN_06
+    pointer SPRITE_INFO_FOREPAW_SCREEN_06   ; SPRITE_INFO_FOREPAW_SCREEN_06
                                             ; [$PRG11::848e]
-    .word SPRITE_INFO_FOREPAW_SCREEN_07     ; SPRITE_INFO_FOREPAW_SCREEN_07
+    pointer SPRITE_INFO_FOREPAW_SCREEN_07   ; SPRITE_INFO_FOREPAW_SCREEN_07
                                             ; [$PRG11::8490]
-    .word SPRITE_INFO_FOREPAW_SCREEN_08     ; SPRITE_INFO_FOREPAW_SCREEN_08
+    pointer SPRITE_INFO_FOREPAW_SCREEN_08   ; SPRITE_INFO_FOREPAW_SCREEN_08
                                             ; [$PRG11::8492]
-    .word SPRITE_INFO_FOREPAW_SCREEN_09     ; SPRITE_INFO_FOREPAW_SCREEN_09
+    pointer SPRITE_INFO_FOREPAW_SCREEN_09   ; SPRITE_INFO_FOREPAW_SCREEN_09
                                             ; [$PRG11::8494]
-    .word SPRITE_INFO_FOREPAW_SCREEN_10_11  ; SPRITE_INFO_FOREPAW_SCREEN_10_11
-                                            ; [$PRG11::8496]
-    .word SPRITE_INFO_FOREPAW_SCREEN_10_11  ; SPRITE_INFO_FOREPAW_SCREEN_10_11
-                                            ; [$PRG11::8498]
-    .word SPRITE_INFO_FOREPAW_SCREEN_12     ; SPRITE_INFO_FOREPAW_SCREEN_12
+    pointer SPRITE_INFO_FOREPAW_SCREEN_10_11 ; SPRITE_INFO_FOREPAW_SCREEN_10_11
+                                             ; [$PRG11::8496]
+    pointer SPRITE_INFO_FOREPAW_SCREEN_10_11 ; SPRITE_INFO_FOREPAW_SCREEN_10_11
+                                             ; [$PRG11::8498]
+    pointer SPRITE_INFO_FOREPAW_SCREEN_12   ; SPRITE_INFO_FOREPAW_SCREEN_12
                                             ; [$PRG11::849a]
-    .word SPRITE_INFO_FOREPAW_SCREEN_13     ; SPRITE_INFO_FOREPAW_SCREEN_13
+    pointer SPRITE_INFO_FOREPAW_SCREEN_13   ; SPRITE_INFO_FOREPAW_SCREEN_13
                                             ; [$PRG11::849c]
-    .word SPRITE_INFO_FOREPAW_SCREEN_14     ; SPRITE_INFO_FOREPAW_SCREEN_14
+    pointer SPRITE_INFO_FOREPAW_SCREEN_14   ; SPRITE_INFO_FOREPAW_SCREEN_14
                                             ; [$PRG11::849e]
-    .word SPRITE_INFO_FOREPAW_SCREEN_15     ; SPRITE_INFO_FOREPAW_SCREEN_15
+    pointer SPRITE_INFO_FOREPAW_SCREEN_15   ; SPRITE_INFO_FOREPAW_SCREEN_15
                                             ; [$PRG11::84a0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_16     ; SPRITE_INFO_FOREPAW_SCREEN_16
+    pointer SPRITE_INFO_FOREPAW_SCREEN_16   ; SPRITE_INFO_FOREPAW_SCREEN_16
                                             ; [$PRG11::84a2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_17     ; SPRITE_INFO_FOREPAW_SCREEN_17
+    pointer SPRITE_INFO_FOREPAW_SCREEN_17   ; SPRITE_INFO_FOREPAW_SCREEN_17
                                             ; [$PRG11::84a4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_18     ; SPRITE_INFO_FOREPAW_SCREEN_18
+    pointer SPRITE_INFO_FOREPAW_SCREEN_18   ; SPRITE_INFO_FOREPAW_SCREEN_18
                                             ; [$PRG11::84a6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_19     ; SPRITE_INFO_FOREPAW_SCREEN_19
+    pointer SPRITE_INFO_FOREPAW_SCREEN_19   ; SPRITE_INFO_FOREPAW_SCREEN_19
                                             ; [$PRG11::84a8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_20     ; SPRITE_INFO_FOREPAW_SCREEN_20
+    pointer SPRITE_INFO_FOREPAW_SCREEN_20   ; SPRITE_INFO_FOREPAW_SCREEN_20
                                             ; [$PRG11::84aa]
-    .word SPRITE_INFO_FOREPAW_SCREEN_21     ; SPRITE_INFO_FOREPAW_SCREEN_21
+    pointer SPRITE_INFO_FOREPAW_SCREEN_21   ; SPRITE_INFO_FOREPAW_SCREEN_21
                                             ; [$PRG11::84ac]
-    .word SPRITE_INFO_FOREPAW_SCREEN_22     ; SPRITE_INFO_FOREPAW_SCREEN_22
+    pointer SPRITE_INFO_FOREPAW_SCREEN_22   ; SPRITE_INFO_FOREPAW_SCREEN_22
                                             ; [$PRG11::84ae]
-    .word SPRITE_INFO_FOREPAW_SCREEN_23     ; SPRITE_INFO_FOREPAW_SCREEN_23
+    pointer SPRITE_INFO_FOREPAW_SCREEN_23   ; SPRITE_INFO_FOREPAW_SCREEN_23
                                             ; [$PRG11::84b0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_24     ; SPRITE_INFO_FOREPAW_SCREEN_24
+    pointer SPRITE_INFO_FOREPAW_SCREEN_24   ; SPRITE_INFO_FOREPAW_SCREEN_24
                                             ; [$PRG11::84b2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_25     ; SPRITE_INFO_FOREPAW_SCREEN_25
+    pointer SPRITE_INFO_FOREPAW_SCREEN_25   ; SPRITE_INFO_FOREPAW_SCREEN_25
                                             ; [$PRG11::84b4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_26     ; SPRITE_INFO_FOREPAW_SCREEN_26
+    pointer SPRITE_INFO_FOREPAW_SCREEN_26   ; SPRITE_INFO_FOREPAW_SCREEN_26
                                             ; [$PRG11::84b6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_27     ; SPRITE_INFO_FOREPAW_SCREEN_27
+    pointer SPRITE_INFO_FOREPAW_SCREEN_27   ; SPRITE_INFO_FOREPAW_SCREEN_27
                                             ; [$PRG11::84b8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_28     ; SPRITE_INFO_FOREPAW_SCREEN_28
+    pointer SPRITE_INFO_FOREPAW_SCREEN_28   ; SPRITE_INFO_FOREPAW_SCREEN_28
                                             ; [$PRG11::84ba]
-    .word SPRITE_INFO_FOREPAW_SCREEN_29     ; SPRITE_INFO_FOREPAW_SCREEN_29
+    pointer SPRITE_INFO_FOREPAW_SCREEN_29   ; SPRITE_INFO_FOREPAW_SCREEN_29
                                             ; [$PRG11::84bc]
-    .word SPRITE_INFO_FOREPAW_SCREEN_30     ; SPRITE_INFO_FOREPAW_SCREEN_30
+    pointer SPRITE_INFO_FOREPAW_SCREEN_30   ; SPRITE_INFO_FOREPAW_SCREEN_30
                                             ; [$PRG11::84be]
-    .word SPRITE_INFO_FOREPAW_SCREEN_31     ; SPRITE_INFO_FOREPAW_SCREEN_31
+    pointer SPRITE_INFO_FOREPAW_SCREEN_31   ; SPRITE_INFO_FOREPAW_SCREEN_31
                                             ; [$PRG11::84c0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_32     ; SPRITE_INFO_FOREPAW_SCREEN_32
+    pointer SPRITE_INFO_FOREPAW_SCREEN_32   ; SPRITE_INFO_FOREPAW_SCREEN_32
                                             ; [$PRG11::84c2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_33     ; SPRITE_INFO_FOREPAW_SCREEN_33
+    pointer SPRITE_INFO_FOREPAW_SCREEN_33   ; SPRITE_INFO_FOREPAW_SCREEN_33
                                             ; [$PRG11::84c4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_34     ; SPRITE_INFO_FOREPAW_SCREEN_34
+    pointer SPRITE_INFO_FOREPAW_SCREEN_34   ; SPRITE_INFO_FOREPAW_SCREEN_34
                                             ; [$PRG11::84c6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_35_36  ; SPRITE_INFO_FOREPAW_SCREEN_35_36
-                                            ; [$PRG11::84c8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_35_36  ; SPRITE_INFO_FOREPAW_SCREEN_35_36
-                                            ; [$PRG11::84ca]
-    .word SPRITE_INFO_FOREPAW_SCREEN_37     ; SPRITE_INFO_FOREPAW_SCREEN_37
+    pointer SPRITE_INFO_FOREPAW_SCREEN_35_36 ; SPRITE_INFO_FOREPAW_SCREEN_35_36
+                                             ; [$PRG11::84c8]
+    pointer SPRITE_INFO_FOREPAW_SCREEN_35_36 ; SPRITE_INFO_FOREPAW_SCREEN_35_36
+                                             ; [$PRG11::84ca]
+    pointer SPRITE_INFO_FOREPAW_SCREEN_37   ; SPRITE_INFO_FOREPAW_SCREEN_37
                                             ; [$PRG11::84cc]
-    .word SPRITE_INFO_FOREPAW_SCREEN_38     ; SPRITE_INFO_FOREPAW_SCREEN_38
+    pointer SPRITE_INFO_FOREPAW_SCREEN_38   ; SPRITE_INFO_FOREPAW_SCREEN_38
                                             ; [$PRG11::84ce]
-    .word SPRITE_INFO_FOREPAW_SCREEN_39     ; SPRITE_INFO_FOREPAW_SCREEN_39
+    pointer SPRITE_INFO_FOREPAW_SCREEN_39   ; SPRITE_INFO_FOREPAW_SCREEN_39
                                             ; [$PRG11::84d0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_40     ; SPRITE_INFO_FOREPAW_SCREEN_40
+    pointer SPRITE_INFO_FOREPAW_SCREEN_40   ; SPRITE_INFO_FOREPAW_SCREEN_40
                                             ; [$PRG11::84d2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_41     ; SPRITE_INFO_FOREPAW_SCREEN_41
+    pointer SPRITE_INFO_FOREPAW_SCREEN_41   ; SPRITE_INFO_FOREPAW_SCREEN_41
                                             ; [$PRG11::84d4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_42     ; SPRITE_INFO_FOREPAW_SCREEN_42
+    pointer SPRITE_INFO_FOREPAW_SCREEN_42   ; SPRITE_INFO_FOREPAW_SCREEN_42
                                             ; [$PRG11::84d6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_43     ; SPRITE_INFO_FOREPAW_SCREEN_43
+    pointer SPRITE_INFO_FOREPAW_SCREEN_43   ; SPRITE_INFO_FOREPAW_SCREEN_43
                                             ; [$PRG11::84d8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_44     ; SPRITE_INFO_FOREPAW_SCREEN_44
+    pointer SPRITE_INFO_FOREPAW_SCREEN_44   ; SPRITE_INFO_FOREPAW_SCREEN_44
                                             ; [$PRG11::84da]
-    .word SPRITE_INFO_FOREPAW_SCREEN_45     ; SPRITE_INFO_FOREPAW_SCREEN_45
+    pointer SPRITE_INFO_FOREPAW_SCREEN_45   ; SPRITE_INFO_FOREPAW_SCREEN_45
                                             ; [$PRG11::84dc]
-    .word SPRITE_INFO_FOREPAW_SCREEN_46     ; SPRITE_INFO_FOREPAW_SCREEN_46
+    pointer SPRITE_INFO_FOREPAW_SCREEN_46   ; SPRITE_INFO_FOREPAW_SCREEN_46
                                             ; [$PRG11::84de]
-    .word SPRITE_INFO_FOREPAW_SCREEN_47     ; SPRITE_INFO_FOREPAW_SCREEN_47
+    pointer SPRITE_INFO_FOREPAW_SCREEN_47   ; SPRITE_INFO_FOREPAW_SCREEN_47
                                             ; [$PRG11::84e0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_48     ; SPRITE_INFO_FOREPAW_SCREEN_48
+    pointer SPRITE_INFO_FOREPAW_SCREEN_48   ; SPRITE_INFO_FOREPAW_SCREEN_48
                                             ; [$PRG11::84e2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_49     ; SPRITE_INFO_FOREPAW_SCREEN_49
+    pointer SPRITE_INFO_FOREPAW_SCREEN_49   ; SPRITE_INFO_FOREPAW_SCREEN_49
                                             ; [$PRG11::84e4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_50     ; SPRITE_INFO_FOREPAW_SCREEN_50
+    pointer SPRITE_INFO_FOREPAW_SCREEN_50   ; SPRITE_INFO_FOREPAW_SCREEN_50
                                             ; [$PRG11::84e6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_51     ; SPRITE_INFO_FOREPAW_SCREEN_51
+    pointer SPRITE_INFO_FOREPAW_SCREEN_51   ; SPRITE_INFO_FOREPAW_SCREEN_51
                                             ; [$PRG11::84e8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_52     ; SPRITE_INFO_FOREPAW_SCREEN_52
+    pointer SPRITE_INFO_FOREPAW_SCREEN_52   ; SPRITE_INFO_FOREPAW_SCREEN_52
                                             ; [$PRG11::84ea]
-    .word SPRITE_INFO_FOREPAW_SCREEN_53     ; SPRITE_INFO_FOREPAW_SCREEN_53
+    pointer SPRITE_INFO_FOREPAW_SCREEN_53   ; SPRITE_INFO_FOREPAW_SCREEN_53
                                             ; [$PRG11::84ec]
-    .word SPRITE_INFO_FOREPAW_SCREEN_54     ; SPRITE_INFO_FOREPAW_SCREEN_54
+    pointer SPRITE_INFO_FOREPAW_SCREEN_54   ; SPRITE_INFO_FOREPAW_SCREEN_54
                                             ; [$PRG11::84ee]
-    .word SPRITE_INFO_FOREPAW_SCREEN_55     ; SPRITE_INFO_FOREPAW_SCREEN_55
+    pointer SPRITE_INFO_FOREPAW_SCREEN_55   ; SPRITE_INFO_FOREPAW_SCREEN_55
                                             ; [$PRG11::84f0]
-    .word SPRITE_INFO_FOREPAW_SCREEN_56     ; SPRITE_INFO_FOREPAW_SCREEN_56
+    pointer SPRITE_INFO_FOREPAW_SCREEN_56   ; SPRITE_INFO_FOREPAW_SCREEN_56
                                             ; [$PRG11::84f2]
-    .word SPRITE_INFO_FOREPAW_SCREEN_57     ; SPRITE_INFO_FOREPAW_SCREEN_57
+    pointer SPRITE_INFO_FOREPAW_SCREEN_57   ; SPRITE_INFO_FOREPAW_SCREEN_57
                                             ; [$PRG11::84f4]
-    .word SPRITE_INFO_FOREPAW_SCREEN_58     ; SPRITE_INFO_FOREPAW_SCREEN_58
+    pointer SPRITE_INFO_FOREPAW_SCREEN_58   ; SPRITE_INFO_FOREPAW_SCREEN_58
                                             ; [$PRG11::84f6]
-    .word SPRITE_INFO_FOREPAW_SCREEN_59     ; SPRITE_INFO_FOREPAW_SCREEN_59
+    pointer SPRITE_INFO_FOREPAW_SCREEN_59   ; SPRITE_INFO_FOREPAW_SCREEN_59
                                             ; [$PRG11::84f8]
-    .word SPRITE_INFO_FOREPAW_SCREEN_60     ; SPRITE_INFO_FOREPAW_SCREEN_60
+    pointer SPRITE_INFO_FOREPAW_SCREEN_60   ; SPRITE_INFO_FOREPAW_SCREEN_60
                                             ; [$PRG11::84fa]
-    .word SPRITE_INFO_FOREPAW_SCREEN_61     ; SPRITE_INFO_FOREPAW_SCREEN_61
+    pointer SPRITE_INFO_FOREPAW_SCREEN_61   ; SPRITE_INFO_FOREPAW_SCREEN_61
                                             ; [$PRG11::84fc]
-    .word SPRITE_INFO_FOREPAW_SCREEN_62     ; SPRITE_INFO_FOREPAW_SCREEN_62
+    pointer SPRITE_INFO_FOREPAW_SCREEN_62   ; SPRITE_INFO_FOREPAW_SCREEN_62
                                             ; [$PRG11::84fe]
-    .word SPRITE_INFO_FOREPAW_SCREEN_63     ; SPRITE_INFO_FOREPAW_SCREEN_63
+    pointer SPRITE_INFO_FOREPAW_SCREEN_63   ; SPRITE_INFO_FOREPAW_SCREEN_63
                                             ; [$PRG11::8500]
-    .word SPRITE_INFO_FOREPAW_SCREEN_64     ; SPRITE_INFO_FOREPAW_SCREEN_64
+    pointer SPRITE_INFO_FOREPAW_SCREEN_64   ; SPRITE_INFO_FOREPAW_SCREEN_64
                                             ; [$PRG11::8502]
-    .word SPRITE_INFO_FOREPAW_SCREEN_65     ; SPRITE_INFO_FOREPAW_SCREEN_65
+    pointer SPRITE_INFO_FOREPAW_SCREEN_65   ; SPRITE_INFO_FOREPAW_SCREEN_65
                                             ; [$PRG11::8504]
-    .word SPRITE_INFO_FOREPAW_SCREEN_66     ; SPRITE_INFO_FOREPAW_SCREEN_66
+    pointer SPRITE_INFO_FOREPAW_SCREEN_66   ; SPRITE_INFO_FOREPAW_SCREEN_66
                                             ; [$PRG11::8506]
-    .word SPRITE_INFO_FOREPAW_SCREEN_67     ; SPRITE_INFO_FOREPAW_SCREEN_67
+    pointer SPRITE_INFO_FOREPAW_SCREEN_67   ; SPRITE_INFO_FOREPAW_SCREEN_67
                                             ; [$PRG11::8508]
-    .word SPRITE_INFO_FOREPAW_SCREEN_68     ; SPRITE_INFO_FOREPAW_SCREEN_68
+    pointer SPRITE_INFO_FOREPAW_SCREEN_68   ; SPRITE_INFO_FOREPAW_SCREEN_68
                                             ; [$PRG11::850a]
-    .word SPRITE_INFO_FOREPAW_SCREEN_69     ; SPRITE_INFO_FOREPAW_SCREEN_69
+    pointer SPRITE_INFO_FOREPAW_SCREEN_69   ; SPRITE_INFO_FOREPAW_SCREEN_69
                                             ; [$PRG11::850c]
-    .word SPRITE_INFO_FOREPAW_SCREEN_70     ; SPRITE_INFO_FOREPAW_SCREEN_70
+    pointer SPRITE_INFO_FOREPAW_SCREEN_70   ; SPRITE_INFO_FOREPAW_SCREEN_70
                                             ; [$PRG11::850e]
-    .word SPRITE_INFO_FOREPAW_SCREEN_71     ; SPRITE_INFO_FOREPAW_SCREEN_71
+    pointer SPRITE_INFO_FOREPAW_SCREEN_71   ; SPRITE_INFO_FOREPAW_SCREEN_71
                                             ; [$PRG11::8510]
-    .word SPRITE_INFO_FOREPAW_SCREEN_72     ; SPRITE_INFO_FOREPAW_SCREEN_72
+    pointer SPRITE_INFO_FOREPAW_SCREEN_72   ; SPRITE_INFO_FOREPAW_SCREEN_72
                                             ; [$PRG11::8512]
-    .word SPRITE_INFO_FOREPAW_SCREEN_73     ; SPRITE_INFO_FOREPAW_SCREEN_73
+    pointer SPRITE_INFO_FOREPAW_SCREEN_73   ; SPRITE_INFO_FOREPAW_SCREEN_73
                                             ; [$PRG11::8514]
-    .word SPRITE_INFO_FOREPAW_SCREEN_74     ; SPRITE_INFO_FOREPAW_SCREEN_74
+    pointer SPRITE_INFO_FOREPAW_SCREEN_74   ; SPRITE_INFO_FOREPAW_SCREEN_74
                                             ; [$PRG11::8516]
-    .word SPRITE_INFO_FOREPAW_SCREEN_75     ; SPRITE_INFO_FOREPAW_SCREEN_75
+    pointer SPRITE_INFO_FOREPAW_SCREEN_75   ; SPRITE_INFO_FOREPAW_SCREEN_75
                                             ; [$PRG11::8518]
-    .word SPRITE_INFO_FOREPAW_SCREEN_76     ; SPRITE_INFO_FOREPAW_SCREEN_76
+    pointer SPRITE_INFO_FOREPAW_SCREEN_76   ; SPRITE_INFO_FOREPAW_SCREEN_76
                                             ; [$PRG11::851a]
-    .word SPRITE_INFO_FOREPAW_SCREEN_77     ; SPRITE_INFO_FOREPAW_SCREEN_77
+    pointer SPRITE_INFO_FOREPAW_SCREEN_77   ; SPRITE_INFO_FOREPAW_SCREEN_77
                                             ; [$PRG11::851c]
-    .word SPRITE_INFO_FOREPAW_SCREEN_78     ; SPRITE_INFO_FOREPAW_SCREEN_78
+    pointer SPRITE_INFO_FOREPAW_SCREEN_78   ; SPRITE_INFO_FOREPAW_SCREEN_78
                                             ; [$PRG11::851e]
-    .word SPRITE_INFO_FOREPAW_SCREEN_79     ; SPRITE_INFO_FOREPAW_SCREEN_79
+    pointer SPRITE_INFO_FOREPAW_SCREEN_79   ; SPRITE_INFO_FOREPAW_SCREEN_79
                                             ; [$PRG11::8520]
-    .word SPRITE_INFO_FOREPAW_SCREEN_80     ; SPRITE_INFO_FOREPAW_SCREEN_80
+    pointer SPRITE_INFO_FOREPAW_SCREEN_80   ; SPRITE_INFO_FOREPAW_SCREEN_80
                                             ; [$PRG11::8522]
-    .word SPRITE_INFO_FOREPAW_SCREEN_81     ; SPRITE_INFO_FOREPAW_SCREEN_81
+    pointer SPRITE_INFO_FOREPAW_SCREEN_81   ; SPRITE_INFO_FOREPAW_SCREEN_81
                                             ; [$PRG11::8524]
-    .word SPRITE_INFO_FOREPAW_SCREEN_82     ; SPRITE_INFO_FOREPAW_SCREEN_82
+    pointer SPRITE_INFO_FOREPAW_SCREEN_82   ; SPRITE_INFO_FOREPAW_SCREEN_82
                                             ; [$PRG11::8526]
 
 ;
@@ -2206,85 +2206,85 @@ SPRITE_INFO_FOREPAW_SCREEN_82:              ; [$8744]
 ; Conflate Sprite Information
 ;============================================================================
 SPRITE_INFO_CONFLATE:                       ; [$874a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_00    ; SPRITE_INFO_CONFLATE_SCREEN_00
+    pointer SPRITE_INFO_CONFLATE_SCREEN_00  ; SPRITE_INFO_CONFLATE_SCREEN_00
                                             ; [$PRG11::874a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_01    ; SPRITE_INFO_CONFLATE_SCREEN_01
+    pointer SPRITE_INFO_CONFLATE_SCREEN_01  ; SPRITE_INFO_CONFLATE_SCREEN_01
                                             ; [$PRG11::874c]
-    .word SPRITE_INFO_CONFLATE_SCREEN_02    ; SPRITE_INFO_CONFLATE_SCREEN_02
+    pointer SPRITE_INFO_CONFLATE_SCREEN_02  ; SPRITE_INFO_CONFLATE_SCREEN_02
                                             ; [$PRG11::874e]
-    .word SPRITE_INFO_CONFLATE_SCREEN_03    ; SPRITE_INFO_CONFLATE_SCREEN_03
+    pointer SPRITE_INFO_CONFLATE_SCREEN_03  ; SPRITE_INFO_CONFLATE_SCREEN_03
                                             ; [$PRG11::8750]
-    .word SPRITE_INFO_CONFLATE_SCREEN_04    ; SPRITE_INFO_CONFLATE_SCREEN_04
+    pointer SPRITE_INFO_CONFLATE_SCREEN_04  ; SPRITE_INFO_CONFLATE_SCREEN_04
                                             ; [$PRG11::8752]
-    .word SPRITE_INFO_CONFLATE_SCREEN_05    ; SPRITE_INFO_CONFLATE_SCREEN_05
+    pointer SPRITE_INFO_CONFLATE_SCREEN_05  ; SPRITE_INFO_CONFLATE_SCREEN_05
                                             ; [$PRG11::8754]
-    .word SPRITE_INFO_CONFLATE_SCREEN_06    ; SPRITE_INFO_CONFLATE_SCREEN_06
+    pointer SPRITE_INFO_CONFLATE_SCREEN_06  ; SPRITE_INFO_CONFLATE_SCREEN_06
                                             ; [$PRG11::8756]
-    .word SPRITE_INFO_CONFLATE_SCREEN_07    ; SPRITE_INFO_CONFLATE_SCREEN_07
+    pointer SPRITE_INFO_CONFLATE_SCREEN_07  ; SPRITE_INFO_CONFLATE_SCREEN_07
                                             ; [$PRG11::8758]
-    .word SPRITE_INFO_CONFLATE_SCREEN_08    ; SPRITE_INFO_CONFLATE_SCREEN_08
+    pointer SPRITE_INFO_CONFLATE_SCREEN_08  ; SPRITE_INFO_CONFLATE_SCREEN_08
                                             ; [$PRG11::875a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_09    ; SPRITE_INFO_CONFLATE_SCREEN_09
+    pointer SPRITE_INFO_CONFLATE_SCREEN_09  ; SPRITE_INFO_CONFLATE_SCREEN_09
                                             ; [$PRG11::875c]
-    .word SPRITE_INFO_CONFLATE_SCREEN_10    ; SPRITE_INFO_CONFLATE_SCREEN_10
+    pointer SPRITE_INFO_CONFLATE_SCREEN_10  ; SPRITE_INFO_CONFLATE_SCREEN_10
                                             ; [$PRG11::875e]
-    .word SPRITE_INFO_CONFLATE_SCREEN_11    ; SPRITE_INFO_CONFLATE_SCREEN_11
+    pointer SPRITE_INFO_CONFLATE_SCREEN_11  ; SPRITE_INFO_CONFLATE_SCREEN_11
                                             ; [$PRG11::8760]
-    .word SPRITE_INFO_CONFLATE_SCREEN_12    ; SPRITE_INFO_CONFLATE_SCREEN_12
+    pointer SPRITE_INFO_CONFLATE_SCREEN_12  ; SPRITE_INFO_CONFLATE_SCREEN_12
                                             ; [$PRG11::8762]
-    .word SPRITE_INFO_CONFLATE_SCREEN_13    ; SPRITE_INFO_CONFLATE_SCREEN_13
+    pointer SPRITE_INFO_CONFLATE_SCREEN_13  ; SPRITE_INFO_CONFLATE_SCREEN_13
                                             ; [$PRG11::8764]
-    .word SPRITE_INFO_CONFLATE_SCREEN_14    ; SPRITE_INFO_CONFLATE_SCREEN_14
+    pointer SPRITE_INFO_CONFLATE_SCREEN_14  ; SPRITE_INFO_CONFLATE_SCREEN_14
                                             ; [$PRG11::8766]
-    .word SPRITE_INFO_CONFLATE_SCREEN_15    ; SPRITE_INFO_CONFLATE_SCREEN_15
+    pointer SPRITE_INFO_CONFLATE_SCREEN_15  ; SPRITE_INFO_CONFLATE_SCREEN_15
                                             ; [$PRG11::8768]
-    .word SPRITE_INFO_CONFLATE_SCREEN_16    ; SPRITE_INFO_CONFLATE_SCREEN_16
+    pointer SPRITE_INFO_CONFLATE_SCREEN_16  ; SPRITE_INFO_CONFLATE_SCREEN_16
                                             ; [$PRG11::876a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_17    ; SPRITE_INFO_CONFLATE_SCREEN_17
+    pointer SPRITE_INFO_CONFLATE_SCREEN_17  ; SPRITE_INFO_CONFLATE_SCREEN_17
                                             ; [$PRG11::876c]
-    .word SPRITE_INFO_CONFLATE_SCREEN_18    ; SPRITE_INFO_CONFLATE_SCREEN_18
+    pointer SPRITE_INFO_CONFLATE_SCREEN_18  ; SPRITE_INFO_CONFLATE_SCREEN_18
                                             ; [$PRG11::876e]
-    .word SPRITE_INFO_CONFLATE_SCREEN_19    ; SPRITE_INFO_CONFLATE_SCREEN_19
+    pointer SPRITE_INFO_CONFLATE_SCREEN_19  ; SPRITE_INFO_CONFLATE_SCREEN_19
                                             ; [$PRG11::8770]
-    .word SPRITE_INFO_CONFLATE_SCREEN_20    ; SPRITE_INFO_CONFLATE_SCREEN_20
+    pointer SPRITE_INFO_CONFLATE_SCREEN_20  ; SPRITE_INFO_CONFLATE_SCREEN_20
                                             ; [$PRG11::8772]
-    .word SPRITE_INFO_CONFLATE_SCREEN_21    ; SPRITE_INFO_CONFLATE_SCREEN_21
+    pointer SPRITE_INFO_CONFLATE_SCREEN_21  ; SPRITE_INFO_CONFLATE_SCREEN_21
                                             ; [$PRG11::8774]
-    .word SPRITE_INFO_CONFLATE_SCREEN_22    ; SPRITE_INFO_CONFLATE_SCREEN_22
+    pointer SPRITE_INFO_CONFLATE_SCREEN_22  ; SPRITE_INFO_CONFLATE_SCREEN_22
                                             ; [$PRG11::8776]
-    .word SPRITE_INFO_CONFLATE_SCREEN_23    ; SPRITE_INFO_CONFLATE_SCREEN_23
+    pointer SPRITE_INFO_CONFLATE_SCREEN_23  ; SPRITE_INFO_CONFLATE_SCREEN_23
                                             ; [$PRG11::8778]
-    .word SPRITE_INFO_CONFLATE_SCREEN_24    ; SPRITE_INFO_CONFLATE_SCREEN_24
+    pointer SPRITE_INFO_CONFLATE_SCREEN_24  ; SPRITE_INFO_CONFLATE_SCREEN_24
                                             ; [$PRG11::877a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_25    ; SPRITE_INFO_CONFLATE_SCREEN_25
+    pointer SPRITE_INFO_CONFLATE_SCREEN_25  ; SPRITE_INFO_CONFLATE_SCREEN_25
                                             ; [$PRG11::877c]
-    .word SPRITE_INFO_CONFLATE_SCREEN_26    ; SPRITE_INFO_CONFLATE_SCREEN_26
+    pointer SPRITE_INFO_CONFLATE_SCREEN_26  ; SPRITE_INFO_CONFLATE_SCREEN_26
                                             ; [$PRG11::877e]
-    .word SPRITE_INFO_CONFLATE_SCREEN_27    ; SPRITE_INFO_CONFLATE_SCREEN_27
+    pointer SPRITE_INFO_CONFLATE_SCREEN_27  ; SPRITE_INFO_CONFLATE_SCREEN_27
                                             ; [$PRG11::8780]
-    .word SPRITE_INFO_CONFLATE_SCREEN_28    ; SPRITE_INFO_CONFLATE_SCREEN_28
+    pointer SPRITE_INFO_CONFLATE_SCREEN_28  ; SPRITE_INFO_CONFLATE_SCREEN_28
                                             ; [$PRG11::8782]
-    .word SPRITE_INFO_CONFLATE_SCREEN_29    ; SPRITE_INFO_CONFLATE_SCREEN_29
+    pointer SPRITE_INFO_CONFLATE_SCREEN_29  ; SPRITE_INFO_CONFLATE_SCREEN_29
                                             ; [$PRG11::8784]
-    .word SPRITE_INFO_CONFLATE_SCREEN_30    ; SPRITE_INFO_CONFLATE_SCREEN_30
+    pointer SPRITE_INFO_CONFLATE_SCREEN_30  ; SPRITE_INFO_CONFLATE_SCREEN_30
                                             ; [$PRG11::8786]
-    .word SPRITE_INFO_CONFLATE_SCREEN_31    ; SPRITE_INFO_CONFLATE_SCREEN_31
+    pointer SPRITE_INFO_CONFLATE_SCREEN_31  ; SPRITE_INFO_CONFLATE_SCREEN_31
                                             ; [$PRG11::8788]
-    .word SPRITE_INFO_CONFLATE_SCREEN_32    ; SPRITE_INFO_CONFLATE_SCREEN_32
+    pointer SPRITE_INFO_CONFLATE_SCREEN_32  ; SPRITE_INFO_CONFLATE_SCREEN_32
                                             ; [$PRG11::878a]
-    .word SPRITE_INFO_CONFLATE_SCREEN_33    ; SPRITE_INFO_CONFLATE_SCREEN_33
+    pointer SPRITE_INFO_CONFLATE_SCREEN_33  ; SPRITE_INFO_CONFLATE_SCREEN_33
                                             ; [$PRG11::878c]
-    .word SPRITE_INFO_CONFLATE_SCREEN_34    ; SPRITE_INFO_CONFLATE_SCREEN_34
+    pointer SPRITE_INFO_CONFLATE_SCREEN_34  ; SPRITE_INFO_CONFLATE_SCREEN_34
                                             ; [$PRG11::878e]
-    .word SPRITE_INFO_CONFLATE_SCREEN_35    ; SPRITE_INFO_CONFLATE_SCREEN_35
+    pointer SPRITE_INFO_CONFLATE_SCREEN_35  ; SPRITE_INFO_CONFLATE_SCREEN_35
                                             ; [$PRG11::8790]
-    .word SPRITE_INFO_CONFLATE_SCREEN_36    ; SPRITE_INFO_CONFLATE_SCREEN_36
+    pointer SPRITE_INFO_CONFLATE_SCREEN_36  ; SPRITE_INFO_CONFLATE_SCREEN_36
                                             ; [$PRG11::8792]
-    .word SPRITE_INFO_CONFLATE_SCREEN_37    ; SPRITE_INFO_CONFLATE_SCREEN_37
+    pointer SPRITE_INFO_CONFLATE_SCREEN_37  ; SPRITE_INFO_CONFLATE_SCREEN_37
                                             ; [$PRG11::8794]
-    .word SPRITE_INFO_CONFLATE_SCREEN_38    ; SPRITE_INFO_CONFLATE_SCREEN_38
+    pointer SPRITE_INFO_CONFLATE_SCREEN_38  ; SPRITE_INFO_CONFLATE_SCREEN_38
                                             ; [$PRG11::8796]
-    .word SPRITE_INFO_CONFLATE_SCREEN_39    ; SPRITE_INFO_CONFLATE_SCREEN_39
+    pointer SPRITE_INFO_CONFLATE_SCREEN_39  ; SPRITE_INFO_CONFLATE_SCREEN_39
                                             ; [$PRG11::8798]
 
 ;
@@ -2612,69 +2612,69 @@ SPRITE_INFO_CONFLATE_SCREEN_39:             ; [$889c]
 ; Daybreak Sprite Information
 ;============================================================================
 SPRITE_INFO_DAYBREAK:                       ; [$88a2]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_00    ; SPRITE_INFO_DAYBREAK_SCREEN_00
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_00  ; SPRITE_INFO_DAYBREAK_SCREEN_00
                                             ; [$PRG11::88a2]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_01    ; SPRITE_INFO_DAYBREAK_SCREEN_01
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_01  ; SPRITE_INFO_DAYBREAK_SCREEN_01
                                             ; [$PRG11::88a4]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_02    ; SPRITE_INFO_DAYBREAK_SCREEN_02
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_02  ; SPRITE_INFO_DAYBREAK_SCREEN_02
                                             ; [$PRG11::88a6]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_03    ; SPRITE_INFO_DAYBREAK_SCREEN_03
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_03  ; SPRITE_INFO_DAYBREAK_SCREEN_03
                                             ; [$PRG11::88a8]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_04    ; SPRITE_INFO_DAYBREAK_SCREEN_04
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_04  ; SPRITE_INFO_DAYBREAK_SCREEN_04
                                             ; [$PRG11::88aa]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_05    ; SPRITE_INFO_DAYBREAK_SCREEN_05
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_05  ; SPRITE_INFO_DAYBREAK_SCREEN_05
                                             ; [$PRG11::88ac]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_06    ; SPRITE_INFO_DAYBREAK_SCREEN_06
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_06  ; SPRITE_INFO_DAYBREAK_SCREEN_06
                                             ; [$PRG11::88ae]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_07    ; SPRITE_INFO_DAYBREAK_SCREEN_07
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_07  ; SPRITE_INFO_DAYBREAK_SCREEN_07
                                             ; [$PRG11::88b0]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_08    ; SPRITE_INFO_DAYBREAK_SCREEN_08
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_08  ; SPRITE_INFO_DAYBREAK_SCREEN_08
                                             ; [$PRG11::88b2]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_09    ; SPRITE_INFO_DAYBREAK_SCREEN_09
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_09  ; SPRITE_INFO_DAYBREAK_SCREEN_09
                                             ; [$PRG11::88b4]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_10    ; SPRITE_INFO_DAYBREAK_SCREEN_10
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_10  ; SPRITE_INFO_DAYBREAK_SCREEN_10
                                             ; [$PRG11::88b6]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_11    ; SPRITE_INFO_DAYBREAK_SCREEN_11
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_11  ; SPRITE_INFO_DAYBREAK_SCREEN_11
                                             ; [$PRG11::88b8]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_12    ; SPRITE_INFO_DAYBREAK_SCREEN_12
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_12  ; SPRITE_INFO_DAYBREAK_SCREEN_12
                                             ; [$PRG11::88ba]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_13    ; SPRITE_INFO_DAYBREAK_SCREEN_13
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_13  ; SPRITE_INFO_DAYBREAK_SCREEN_13
                                             ; [$PRG11::88bc]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_14    ; SPRITE_INFO_DAYBREAK_SCREEN_14
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_14  ; SPRITE_INFO_DAYBREAK_SCREEN_14
                                             ; [$PRG11::88be]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_15    ; SPRITE_INFO_DAYBREAK_SCREEN_15
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_15  ; SPRITE_INFO_DAYBREAK_SCREEN_15
                                             ; [$PRG11::88c0]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_16    ; SPRITE_INFO_DAYBREAK_SCREEN_16
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_16  ; SPRITE_INFO_DAYBREAK_SCREEN_16
                                             ; [$PRG11::88c2]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_17    ; SPRITE_INFO_DAYBREAK_SCREEN_17
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_17  ; SPRITE_INFO_DAYBREAK_SCREEN_17
                                             ; [$PRG11::88c4]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_18    ; SPRITE_INFO_DAYBREAK_SCREEN_18
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_18  ; SPRITE_INFO_DAYBREAK_SCREEN_18
                                             ; [$PRG11::88c6]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_19    ; SPRITE_INFO_DAYBREAK_SCREEN_19
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_19  ; SPRITE_INFO_DAYBREAK_SCREEN_19
                                             ; [$PRG11::88c8]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_20    ; SPRITE_INFO_DAYBREAK_SCREEN_20
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_20  ; SPRITE_INFO_DAYBREAK_SCREEN_20
                                             ; [$PRG11::88ca]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_21    ; SPRITE_INFO_DAYBREAK_SCREEN_21
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_21  ; SPRITE_INFO_DAYBREAK_SCREEN_21
                                             ; [$PRG11::88cc]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_22    ; SPRITE_INFO_DAYBREAK_SCREEN_22
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_22  ; SPRITE_INFO_DAYBREAK_SCREEN_22
                                             ; [$PRG11::88ce]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_23    ; SPRITE_INFO_DAYBREAK_SCREEN_23
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_23  ; SPRITE_INFO_DAYBREAK_SCREEN_23
                                             ; [$PRG11::88d0]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_24    ; SPRITE_INFO_DAYBREAK_SCREEN_24
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_24  ; SPRITE_INFO_DAYBREAK_SCREEN_24
                                             ; [$PRG11::88d2]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_25    ; SPRITE_INFO_DAYBREAK_SCREEN_25
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_25  ; SPRITE_INFO_DAYBREAK_SCREEN_25
                                             ; [$PRG11::88d4]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_26    ; SPRITE_INFO_DAYBREAK_SCREEN_26
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_26  ; SPRITE_INFO_DAYBREAK_SCREEN_26
                                             ; [$PRG11::88d6]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_27    ; SPRITE_INFO_DAYBREAK_SCREEN_27
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_27  ; SPRITE_INFO_DAYBREAK_SCREEN_27
                                             ; [$PRG11::88d8]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_28    ; SPRITE_INFO_DAYBREAK_SCREEN_28
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_28  ; SPRITE_INFO_DAYBREAK_SCREEN_28
                                             ; [$PRG11::88da]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_29    ; SPRITE_INFO_DAYBREAK_SCREEN_29
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_29  ; SPRITE_INFO_DAYBREAK_SCREEN_29
                                             ; [$PRG11::88dc]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_30    ; SPRITE_INFO_DAYBREAK_SCREEN_30
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_30  ; SPRITE_INFO_DAYBREAK_SCREEN_30
                                             ; [$PRG11::88de]
-    .word SPRITE_INFO_DAYBREAK_SCREEN_31    ; SPRITE_INFO_DAYBREAK_SCREEN_31
+    pointer SPRITE_INFO_DAYBREAK_SCREEN_31  ; SPRITE_INFO_DAYBREAK_SCREEN_31
                                             ; [$PRG11::88e0]
 
 ;
@@ -2949,45 +2949,45 @@ SPRITE_INFO_DAYBREAK_SCREEN_31:             ; [$89b8]
 ; Zenis Sprite Information
 ;============================================================================
 SPRITE_INFO_ZENIS:                          ; [$89bc]
-    .word SPRITE_INFO_ZENIS_SCREEN_00       ; SPRITE_INFO_ZENIS_SCREEN_00
+    pointer SPRITE_INFO_ZENIS_SCREEN_00     ; SPRITE_INFO_ZENIS_SCREEN_00
                                             ; [$PRG11::89bc]
-    .word SPRITE_INFO_ZENIS_SCREEN_01       ; SPRITE_INFO_ZENIS_SCREEN_01
+    pointer SPRITE_INFO_ZENIS_SCREEN_01     ; SPRITE_INFO_ZENIS_SCREEN_01
                                             ; [$PRG11::89be]
-    .word SPRITE_INFO_ZENIS_SCREEN_02       ; SPRITE_INFO_ZENIS_SCREEN_02
+    pointer SPRITE_INFO_ZENIS_SCREEN_02     ; SPRITE_INFO_ZENIS_SCREEN_02
                                             ; [$PRG11::89c0]
-    .word SPRITE_INFO_ZENIS_SCREEN_03       ; SPRITE_INFO_ZENIS_SCREEN_03
+    pointer SPRITE_INFO_ZENIS_SCREEN_03     ; SPRITE_INFO_ZENIS_SCREEN_03
                                             ; [$PRG11::89c2]
-    .word SPRITE_INFO_ZENIS_SCREEN_04       ; SPRITE_INFO_ZENIS_SCREEN_04
+    pointer SPRITE_INFO_ZENIS_SCREEN_04     ; SPRITE_INFO_ZENIS_SCREEN_04
                                             ; [$PRG11::89c4]
-    .word SPRITE_INFO_ZENIS_SCREEN_05       ; SPRITE_INFO_ZENIS_SCREEN_05
+    pointer SPRITE_INFO_ZENIS_SCREEN_05     ; SPRITE_INFO_ZENIS_SCREEN_05
                                             ; [$PRG11::89c6]
-    .word SPRITE_INFO_ZENIS_SCREEN_06       ; SPRITE_INFO_ZENIS_SCREEN_06
+    pointer SPRITE_INFO_ZENIS_SCREEN_06     ; SPRITE_INFO_ZENIS_SCREEN_06
                                             ; [$PRG11::89c8]
-    .word SPRITE_INFO_ZENIS_SCREEN_07       ; SPRITE_INFO_ZENIS_SCREEN_07
+    pointer SPRITE_INFO_ZENIS_SCREEN_07     ; SPRITE_INFO_ZENIS_SCREEN_07
                                             ; [$PRG11::89ca]
-    .word SPRITE_INFO_ZENIS_SCREEN_08       ; SPRITE_INFO_ZENIS_SCREEN_08
+    pointer SPRITE_INFO_ZENIS_SCREEN_08     ; SPRITE_INFO_ZENIS_SCREEN_08
                                             ; [$PRG11::89cc]
-    .word SPRITE_INFO_ZENIS_SCREEN_09       ; SPRITE_INFO_ZENIS_SCREEN_09
+    pointer SPRITE_INFO_ZENIS_SCREEN_09     ; SPRITE_INFO_ZENIS_SCREEN_09
                                             ; [$PRG11::89ce]
-    .word SPRITE_INFO_ZENIS_SCREEN_10       ; SPRITE_INFO_ZENIS_SCREEN_10
+    pointer SPRITE_INFO_ZENIS_SCREEN_10     ; SPRITE_INFO_ZENIS_SCREEN_10
                                             ; [$PRG11::89d0]
-    .word SPRITE_INFO_ZENIS_SCREEN_11       ; SPRITE_INFO_ZENIS_SCREEN_11
+    pointer SPRITE_INFO_ZENIS_SCREEN_11     ; SPRITE_INFO_ZENIS_SCREEN_11
                                             ; [$PRG11::89d2]
-    .word SPRITE_INFO_ZENIS_SCREEN_12       ; SPRITE_INFO_ZENIS_SCREEN_12
+    pointer SPRITE_INFO_ZENIS_SCREEN_12     ; SPRITE_INFO_ZENIS_SCREEN_12
                                             ; [$PRG11::89d4]
-    .word SPRITE_INFO_ZENIS_SCREEN_13       ; SPRITE_INFO_ZENIS_SCREEN_13
+    pointer SPRITE_INFO_ZENIS_SCREEN_13     ; SPRITE_INFO_ZENIS_SCREEN_13
                                             ; [$PRG11::89d6]
-    .word SPRITE_INFO_ZENIS_SCREEN_14       ; SPRITE_INFO_ZENIS_SCREEN_14
+    pointer SPRITE_INFO_ZENIS_SCREEN_14     ; SPRITE_INFO_ZENIS_SCREEN_14
                                             ; [$PRG11::89d8]
-    .word SPRITE_INFO_ZENIS_SCREEN_15       ; SPRITE_INFO_ZENIS_SCREEN_15
+    pointer SPRITE_INFO_ZENIS_SCREEN_15     ; SPRITE_INFO_ZENIS_SCREEN_15
                                             ; [$PRG11::89da]
-    .word SPRITE_INFO_ZENIS_SCREEN_16       ; SPRITE_INFO_ZENIS_SCREEN_16
+    pointer SPRITE_INFO_ZENIS_SCREEN_16     ; SPRITE_INFO_ZENIS_SCREEN_16
                                             ; [$PRG11::89dc]
-    .word SPRITE_INFO_ZENIS_SCREEN_17       ; SPRITE_INFO_ZENIS_SCREEN_17
+    pointer SPRITE_INFO_ZENIS_SCREEN_17     ; SPRITE_INFO_ZENIS_SCREEN_17
                                             ; [$PRG11::89de]
-    .word SPRITE_INFO_ZENIS_SCREEN_18       ; SPRITE_INFO_ZENIS_SCREEN_18
+    pointer SPRITE_INFO_ZENIS_SCREEN_18     ; SPRITE_INFO_ZENIS_SCREEN_18
                                             ; [$PRG11::89e0]
-    .word SPRITE_INFO_ZENIS_SCREEN_19       ; SPRITE_INFO_ZENIS_SCREEN_19
+    pointer SPRITE_INFO_ZENIS_SCREEN_19     ; SPRITE_INFO_ZENIS_SCREEN_19
                                             ; [$PRG11::89e2]
 
 ;
@@ -3177,145 +3177,145 @@ SPRITE_INFO_ZENIS_SCREEN_19:                ; [$8a6e]
 ; Victim and Indoor Area Sprite Information
 ;============================================================================
 SPRITE_INFO_VICTIM:                         ; [$8a76]
-    .word SPRITE_INFO_VICTIM_SCREEN_00      ; SPRITE_INFO_VICTIM_SCREEN_00
+    pointer SPRITE_INFO_VICTIM_SCREEN_00    ; SPRITE_INFO_VICTIM_SCREEN_00
                                             ; [$PRG11::8a76]
-    .word SPRITE_INFO_VICTIM_SCREEN_01      ; SPRITE_INFO_VICTIM_SCREEN_01
+    pointer SPRITE_INFO_VICTIM_SCREEN_01    ; SPRITE_INFO_VICTIM_SCREEN_01
                                             ; [$PRG11::8a78]
-    .word SPRITE_INFO_VICTIM_SCREEN_02      ; SPRITE_INFO_VICTIM_SCREEN_02
+    pointer SPRITE_INFO_VICTIM_SCREEN_02    ; SPRITE_INFO_VICTIM_SCREEN_02
                                             ; [$PRG11::8a7a]
-    .word SPRITE_INFO_VICTIM_SCREEN_03      ; SPRITE_INFO_VICTIM_SCREEN_03
+    pointer SPRITE_INFO_VICTIM_SCREEN_03    ; SPRITE_INFO_VICTIM_SCREEN_03
                                             ; [$PRG11::8a7c]
-    .word SPRITE_INFO_VICTIM_SCREEN_04      ; SPRITE_INFO_VICTIM_SCREEN_04
+    pointer SPRITE_INFO_VICTIM_SCREEN_04    ; SPRITE_INFO_VICTIM_SCREEN_04
                                             ; [$PRG11::8a7e]
-    .word SPRITE_INFO_VICTIM_SCREEN_05      ; SPRITE_INFO_VICTIM_SCREEN_05
+    pointer SPRITE_INFO_VICTIM_SCREEN_05    ; SPRITE_INFO_VICTIM_SCREEN_05
                                             ; [$PRG11::8a80]
-    .word SPRITE_INFO_VICTIM_SCREEN_06      ; SPRITE_INFO_VICTIM_SCREEN_06
+    pointer SPRITE_INFO_VICTIM_SCREEN_06    ; SPRITE_INFO_VICTIM_SCREEN_06
                                             ; [$PRG11::8a82]
-    .word SPRITE_INFO_VICTIM_SCREEN_07      ; SPRITE_INFO_VICTIM_SCREEN_07
+    pointer SPRITE_INFO_VICTIM_SCREEN_07    ; SPRITE_INFO_VICTIM_SCREEN_07
                                             ; [$PRG11::8a84]
-    .word SPRITE_INFO_VICTIM_SCREEN_08      ; SPRITE_INFO_VICTIM_SCREEN_08
+    pointer SPRITE_INFO_VICTIM_SCREEN_08    ; SPRITE_INFO_VICTIM_SCREEN_08
                                             ; [$PRG11::8a86]
-    .word SPRITE_INFO_VICTIM_SCREEN_09      ; SPRITE_INFO_VICTIM_SCREEN_09
+    pointer SPRITE_INFO_VICTIM_SCREEN_09    ; SPRITE_INFO_VICTIM_SCREEN_09
                                             ; [$PRG11::8a88]
-    .word SPRITE_INFO_VICTIM_SCREEN_10      ; SPRITE_INFO_VICTIM_SCREEN_10
+    pointer SPRITE_INFO_VICTIM_SCREEN_10    ; SPRITE_INFO_VICTIM_SCREEN_10
                                             ; [$PRG11::8a8a]
-    .word SPRITE_INFO_VICTIM_SCREEN_11      ; SPRITE_INFO_VICTIM_SCREEN_11
+    pointer SPRITE_INFO_VICTIM_SCREEN_11    ; SPRITE_INFO_VICTIM_SCREEN_11
                                             ; [$PRG11::8a8c]
-    .word SPRITE_INFO_VICTIM_SCREEN_12      ; SPRITE_INFO_VICTIM_SCREEN_12
+    pointer SPRITE_INFO_VICTIM_SCREEN_12    ; SPRITE_INFO_VICTIM_SCREEN_12
                                             ; [$PRG11::8a8e]
-    .word SPRITE_INFO_VICTIM_SCREEN_13      ; SPRITE_INFO_VICTIM_SCREEN_13
+    pointer SPRITE_INFO_VICTIM_SCREEN_13    ; SPRITE_INFO_VICTIM_SCREEN_13
                                             ; [$PRG11::8a90]
-    .word SPRITE_INFO_VICTIM_SCREEN_14      ; SPRITE_INFO_VICTIM_SCREEN_14
+    pointer SPRITE_INFO_VICTIM_SCREEN_14    ; SPRITE_INFO_VICTIM_SCREEN_14
                                             ; [$PRG11::8a92]
-    .word SPRITE_INFO_VICTIM_SCREEN_15      ; SPRITE_INFO_VICTIM_SCREEN_15
+    pointer SPRITE_INFO_VICTIM_SCREEN_15    ; SPRITE_INFO_VICTIM_SCREEN_15
                                             ; [$PRG11::8a94]
-    .word SPRITE_INFO_VICTIM_SCREEN_16      ; SPRITE_INFO_VICTIM_SCREEN_16
+    pointer SPRITE_INFO_VICTIM_SCREEN_16    ; SPRITE_INFO_VICTIM_SCREEN_16
                                             ; [$PRG11::8a96]
-    .word SPRITE_INFO_VICTIM_SCREEN_17      ; SPRITE_INFO_VICTIM_SCREEN_17
+    pointer SPRITE_INFO_VICTIM_SCREEN_17    ; SPRITE_INFO_VICTIM_SCREEN_17
                                             ; [$PRG11::8a98]
-    .word SPRITE_INFO_VICTIM_SCREEN_18      ; SPRITE_INFO_VICTIM_SCREEN_18
+    pointer SPRITE_INFO_VICTIM_SCREEN_18    ; SPRITE_INFO_VICTIM_SCREEN_18
                                             ; [$PRG11::8a9a]
-    .word SPRITE_INFO_VICTIM_SCREEN_19      ; SPRITE_INFO_VICTIM_SCREEN_19
+    pointer SPRITE_INFO_VICTIM_SCREEN_19    ; SPRITE_INFO_VICTIM_SCREEN_19
                                             ; [$PRG11::8a9c]
-    .word SPRITE_INFO_VICTIM_SCREEN_20      ; SPRITE_INFO_VICTIM_SCREEN_20
+    pointer SPRITE_INFO_VICTIM_SCREEN_20    ; SPRITE_INFO_VICTIM_SCREEN_20
                                             ; [$PRG11::8a9e]
-    .word SPRITE_INFO_VICTIM_SCREEN_21      ; SPRITE_INFO_VICTIM_SCREEN_21
+    pointer SPRITE_INFO_VICTIM_SCREEN_21    ; SPRITE_INFO_VICTIM_SCREEN_21
                                             ; [$PRG11::8aa0]
-    .word SPRITE_INFO_VICTIM_SCREEN_22      ; SPRITE_INFO_VICTIM_SCREEN_22
+    pointer SPRITE_INFO_VICTIM_SCREEN_22    ; SPRITE_INFO_VICTIM_SCREEN_22
                                             ; [$PRG11::8aa2]
-    .word SPRITE_INFO_VICTIM_SCREEN_23      ; SPRITE_INFO_VICTIM_SCREEN_23
+    pointer SPRITE_INFO_VICTIM_SCREEN_23    ; SPRITE_INFO_VICTIM_SCREEN_23
                                             ; [$PRG11::8aa4]
-    .word SPRITE_INFO_VICTIM_SCREEN_24      ; SPRITE_INFO_VICTIM_SCREEN_24
+    pointer SPRITE_INFO_VICTIM_SCREEN_24    ; SPRITE_INFO_VICTIM_SCREEN_24
                                             ; [$PRG11::8aa6]
-    .word SPRITE_INFO_VICTIM_SCREEN_25      ; SPRITE_INFO_VICTIM_SCREEN_25
+    pointer SPRITE_INFO_VICTIM_SCREEN_25    ; SPRITE_INFO_VICTIM_SCREEN_25
                                             ; [$PRG11::8aa8]
-    .word SPRITE_INFO_VICTIM_SCREEN_26      ; SPRITE_INFO_VICTIM_SCREEN_26
+    pointer SPRITE_INFO_VICTIM_SCREEN_26    ; SPRITE_INFO_VICTIM_SCREEN_26
                                             ; [$PRG11::8aaa]
-    .word SPRITE_INFO_VICTIM_SCREEN_27      ; SPRITE_INFO_VICTIM_SCREEN_27
+    pointer SPRITE_INFO_VICTIM_SCREEN_27    ; SPRITE_INFO_VICTIM_SCREEN_27
                                             ; [$PRG11::8aac]
-    .word SPRITE_INFO_VICTIM_SCREEN_28      ; SPRITE_INFO_VICTIM_SCREEN_28
+    pointer SPRITE_INFO_VICTIM_SCREEN_28    ; SPRITE_INFO_VICTIM_SCREEN_28
                                             ; [$PRG11::8aae]
-    .word SPRITE_INFO_VICTIM_SCREEN_29      ; SPRITE_INFO_VICTIM_SCREEN_29
+    pointer SPRITE_INFO_VICTIM_SCREEN_29    ; SPRITE_INFO_VICTIM_SCREEN_29
                                             ; [$PRG11::8ab0]
-    .word SPRITE_INFO_VICTIM_SCREEN_30      ; SPRITE_INFO_VICTIM_SCREEN_30
+    pointer SPRITE_INFO_VICTIM_SCREEN_30    ; SPRITE_INFO_VICTIM_SCREEN_30
                                             ; [$PRG11::8ab2]
-    .word SPRITE_INFO_VICTIM_SCREEN_31      ; SPRITE_INFO_VICTIM_SCREEN_31
+    pointer SPRITE_INFO_VICTIM_SCREEN_31    ; SPRITE_INFO_VICTIM_SCREEN_31
                                             ; [$PRG11::8ab4]
-    .word SPRITE_INFO_VICTIM_SCREEN_32      ; SPRITE_INFO_VICTIM_SCREEN_32
+    pointer SPRITE_INFO_VICTIM_SCREEN_32    ; SPRITE_INFO_VICTIM_SCREEN_32
                                             ; [$PRG11::8ab6]
-    .word SPRITE_INFO_VICTIM_SCREEN_33      ; SPRITE_INFO_VICTIM_SCREEN_33
+    pointer SPRITE_INFO_VICTIM_SCREEN_33    ; SPRITE_INFO_VICTIM_SCREEN_33
                                             ; [$PRG11::8ab8]
-    .word SPRITE_INFO_VICTIM_SCREEN_34      ; SPRITE_INFO_VICTIM_SCREEN_34
+    pointer SPRITE_INFO_VICTIM_SCREEN_34    ; SPRITE_INFO_VICTIM_SCREEN_34
                                             ; [$PRG11::8aba]
-    .word SPRITE_INFO_VICTIM_SCREEN_35      ; SPRITE_INFO_VICTIM_SCREEN_35
+    pointer SPRITE_INFO_VICTIM_SCREEN_35    ; SPRITE_INFO_VICTIM_SCREEN_35
                                             ; [$PRG11::8abc]
-    .word SPRITE_INFO_VICTIM_SCREEN_36      ; SPRITE_INFO_VICTIM_SCREEN_36
+    pointer SPRITE_INFO_VICTIM_SCREEN_36    ; SPRITE_INFO_VICTIM_SCREEN_36
                                             ; [$PRG11::8abe]
-    .word SPRITE_INFO_VICTIM_SCREEN_37      ; SPRITE_INFO_VICTIM_SCREEN_37
+    pointer SPRITE_INFO_VICTIM_SCREEN_37    ; SPRITE_INFO_VICTIM_SCREEN_37
                                             ; [$PRG11::8ac0]
-    .word SPRITE_INFO_VICTIM_SCREEN_38      ; SPRITE_INFO_VICTIM_SCREEN_38
+    pointer SPRITE_INFO_VICTIM_SCREEN_38    ; SPRITE_INFO_VICTIM_SCREEN_38
                                             ; [$PRG11::8ac2]
-    .word SPRITE_INFO_VICTIM_SCREEN_39      ; SPRITE_INFO_VICTIM_SCREEN_39
+    pointer SPRITE_INFO_VICTIM_SCREEN_39    ; SPRITE_INFO_VICTIM_SCREEN_39
                                             ; [$PRG11::8ac4]
-    .word SPRITE_INFO_VICTIM_SCREEN_40      ; SPRITE_INFO_VICTIM_SCREEN_40
+    pointer SPRITE_INFO_VICTIM_SCREEN_40    ; SPRITE_INFO_VICTIM_SCREEN_40
                                             ; [$PRG11::8ac6]
-    .word SPRITE_INFO_VICTIM_SCREEN_41      ; SPRITE_INFO_VICTIM_SCREEN_41
+    pointer SPRITE_INFO_VICTIM_SCREEN_41    ; SPRITE_INFO_VICTIM_SCREEN_41
                                             ; [$PRG11::8ac8]
-    .word SPRITE_INFO_VICTIM_SCREEN_42      ; SPRITE_INFO_VICTIM_SCREEN_42
+    pointer SPRITE_INFO_VICTIM_SCREEN_42    ; SPRITE_INFO_VICTIM_SCREEN_42
                                             ; [$PRG11::8aca]
-    .word SPRITE_INFO_VICTIM_SCREEN_43      ; SPRITE_INFO_VICTIM_SCREEN_43
+    pointer SPRITE_INFO_VICTIM_SCREEN_43    ; SPRITE_INFO_VICTIM_SCREEN_43
                                             ; [$PRG11::8acc]
-    .word SPRITE_INFO_VICTIM_SCREEN_44      ; SPRITE_INFO_VICTIM_SCREEN_44
+    pointer SPRITE_INFO_VICTIM_SCREEN_44    ; SPRITE_INFO_VICTIM_SCREEN_44
                                             ; [$PRG11::8ace]
-    .word SPRITE_INFO_VICTIM_SCREEN_45      ; SPRITE_INFO_VICTIM_SCREEN_45
+    pointer SPRITE_INFO_VICTIM_SCREEN_45    ; SPRITE_INFO_VICTIM_SCREEN_45
                                             ; [$PRG11::8ad0]
-    .word SPRITE_INFO_VICTIM_SCREEN_46      ; SPRITE_INFO_VICTIM_SCREEN_46
+    pointer SPRITE_INFO_VICTIM_SCREEN_46    ; SPRITE_INFO_VICTIM_SCREEN_46
                                             ; [$PRG11::8ad2]
-    .word SPRITE_INFO_VICTIM_SCREEN_47      ; SPRITE_INFO_VICTIM_SCREEN_47
+    pointer SPRITE_INFO_VICTIM_SCREEN_47    ; SPRITE_INFO_VICTIM_SCREEN_47
                                             ; [$PRG11::8ad4]
-    .word SPRITE_INFO_VICTIM_SCREEN_48      ; SPRITE_INFO_VICTIM_SCREEN_48
+    pointer SPRITE_INFO_VICTIM_SCREEN_48    ; SPRITE_INFO_VICTIM_SCREEN_48
                                             ; [$PRG11::8ad6]
-    .word SPRITE_INFO_VICTIM_SCREEN_49      ; SPRITE_INFO_VICTIM_SCREEN_49
+    pointer SPRITE_INFO_VICTIM_SCREEN_49    ; SPRITE_INFO_VICTIM_SCREEN_49
                                             ; [$PRG11::8ad8]
-    .word SPRITE_INFO_VICTIM_SCREEN_50      ; SPRITE_INFO_VICTIM_SCREEN_50
+    pointer SPRITE_INFO_VICTIM_SCREEN_50    ; SPRITE_INFO_VICTIM_SCREEN_50
                                             ; [$PRG11::8ada]
-    .word SPRITE_INFO_VICTIM_SCREEN_51      ; SPRITE_INFO_VICTIM_SCREEN_51
+    pointer SPRITE_INFO_VICTIM_SCREEN_51    ; SPRITE_INFO_VICTIM_SCREEN_51
                                             ; [$PRG11::8adc]
-    .word SPRITE_INFO_VICTIM_SCREEN_52      ; SPRITE_INFO_VICTIM_SCREEN_52
+    pointer SPRITE_INFO_VICTIM_SCREEN_52    ; SPRITE_INFO_VICTIM_SCREEN_52
                                             ; [$PRG11::8ade]
-    .word SPRITE_INFO_VICTIM_SCREEN_53      ; SPRITE_INFO_VICTIM_SCREEN_53
+    pointer SPRITE_INFO_VICTIM_SCREEN_53    ; SPRITE_INFO_VICTIM_SCREEN_53
                                             ; [$PRG11::8ae0]
-    .word SPRITE_INFO_VICTIM_SCREEN_54      ; SPRITE_INFO_VICTIM_SCREEN_54
+    pointer SPRITE_INFO_VICTIM_SCREEN_54    ; SPRITE_INFO_VICTIM_SCREEN_54
                                             ; [$PRG11::8ae2]
-    .word SPRITE_INFO_VICTIM_SCREEN_55      ; SPRITE_INFO_VICTIM_SCREEN_55
+    pointer SPRITE_INFO_VICTIM_SCREEN_55    ; SPRITE_INFO_VICTIM_SCREEN_55
                                             ; [$PRG11::8ae4]
-    .word SPRITE_INFO_VICTIM_SCREEN_56      ; SPRITE_INFO_VICTIM_SCREEN_56
+    pointer SPRITE_INFO_VICTIM_SCREEN_56    ; SPRITE_INFO_VICTIM_SCREEN_56
                                             ; [$PRG11::8ae6]
-    .word SPRITE_INFO_VICTIM_SCREEN_57      ; SPRITE_INFO_VICTIM_SCREEN_57
+    pointer SPRITE_INFO_VICTIM_SCREEN_57    ; SPRITE_INFO_VICTIM_SCREEN_57
                                             ; [$PRG11::8ae8]
-    .word SPRITE_INFO_VICTIM_SCREEN_58      ; SPRITE_INFO_VICTIM_SCREEN_58
+    pointer SPRITE_INFO_VICTIM_SCREEN_58    ; SPRITE_INFO_VICTIM_SCREEN_58
                                             ; [$PRG11::8aea]
-    .word SPRITE_INFO_VICTIM_SCREEN_59      ; SPRITE_INFO_VICTIM_SCREEN_59
+    pointer SPRITE_INFO_VICTIM_SCREEN_59    ; SPRITE_INFO_VICTIM_SCREEN_59
                                             ; [$PRG11::8aec]
-    .word SPRITE_INFO_VICTIM_SCREEN_60      ; SPRITE_INFO_VICTIM_SCREEN_60
+    pointer SPRITE_INFO_VICTIM_SCREEN_60    ; SPRITE_INFO_VICTIM_SCREEN_60
                                             ; [$PRG11::8aee]
-    .word SPRITE_INFO_VICTIM_SCREEN_61      ; SPRITE_INFO_VICTIM_SCREEN_61
+    pointer SPRITE_INFO_VICTIM_SCREEN_61    ; SPRITE_INFO_VICTIM_SCREEN_61
                                             ; [$PRG11::8af0]
-    .word SPRITE_INFO_VICTIM_SCREEN_62      ; SPRITE_INFO_VICTIM_SCREEN_62
+    pointer SPRITE_INFO_VICTIM_SCREEN_62    ; SPRITE_INFO_VICTIM_SCREEN_62
                                             ; [$PRG11::8af2]
-    .word SPRITE_INFO_VICTIM_SCREEN_63      ; SPRITE_INFO_VICTIM_SCREEN_63
+    pointer SPRITE_INFO_VICTIM_SCREEN_63    ; SPRITE_INFO_VICTIM_SCREEN_63
                                             ; [$PRG11::8af4]
-    .word SPRITE_INFO_VICTIM_SCREEN_64      ; SPRITE_INFO_VICTIM_SCREEN_64
+    pointer SPRITE_INFO_VICTIM_SCREEN_64    ; SPRITE_INFO_VICTIM_SCREEN_64
                                             ; [$PRG11::8af6]
-    .word SPRITE_INFO_VICTIM_SCREEN_65      ; SPRITE_INFO_VICTIM_SCREEN_65
+    pointer SPRITE_INFO_VICTIM_SCREEN_65    ; SPRITE_INFO_VICTIM_SCREEN_65
                                             ; [$PRG11::8af8]
-    .word SPRITE_INFO_VICTIM_SCREEN_66      ; SPRITE_INFO_VICTIM_SCREEN_66
+    pointer SPRITE_INFO_VICTIM_SCREEN_66    ; SPRITE_INFO_VICTIM_SCREEN_66
                                             ; [$PRG11::8afa]
-    .word SPRITE_INFO_VICTIM_SCREEN_67      ; SPRITE_INFO_VICTIM_SCREEN_67
+    pointer SPRITE_INFO_VICTIM_SCREEN_67    ; SPRITE_INFO_VICTIM_SCREEN_67
                                             ; [$PRG11::8afc]
-    .word SPRITE_INFO_VICTIM_SCREEN_68      ; SPRITE_INFO_VICTIM_SCREEN_68
+    pointer SPRITE_INFO_VICTIM_SCREEN_68    ; SPRITE_INFO_VICTIM_SCREEN_68
                                             ; [$PRG11::8afe]
-    .word SPRITE_INFO_VICTIM_SCREEN_69      ; SPRITE_INFO_VICTIM_SCREEN_69
+    pointer SPRITE_INFO_VICTIM_SCREEN_69    ; SPRITE_INFO_VICTIM_SCREEN_69
                                             ; [$PRG11::8b00]
 
 ;
@@ -3859,33 +3859,33 @@ SPRITE_INFO_VICTIM_SCREEN_69:               ; [$8c88]
 ; Mascon Sprite Information
 ;============================================================================
 SPRITE_INFO_MASCON:                         ; [$8c8d]
-    .word SPRITE_INFO_MASCON_SCREEN_00      ; SPRITE_INFO_MASCON_SCREEN_00
+    pointer SPRITE_INFO_MASCON_SCREEN_00    ; SPRITE_INFO_MASCON_SCREEN_00
                                             ; [$PRG11::8c8d]
-    .word SPRITE_INFO_MASCON_SCREEN_01      ; SPRITE_INFO_MASCON_SCREEN_01
+    pointer SPRITE_INFO_MASCON_SCREEN_01    ; SPRITE_INFO_MASCON_SCREEN_01
                                             ; [$PRG11::8c8f]
-    .word SPRITE_INFO_MASCON_SCREEN_02      ; SPRITE_INFO_MASCON_SCREEN_02
+    pointer SPRITE_INFO_MASCON_SCREEN_02    ; SPRITE_INFO_MASCON_SCREEN_02
                                             ; [$PRG11::8c91]
-    .word SPRITE_INFO_MASCON_SCREEN_03      ; SPRITE_INFO_MASCON_SCREEN_03
+    pointer SPRITE_INFO_MASCON_SCREEN_03    ; SPRITE_INFO_MASCON_SCREEN_03
                                             ; [$PRG11::8c93]
-    .word SPRITE_INFO_MASCON_SCREEN_04      ; SPRITE_INFO_MASCON_SCREEN_04
+    pointer SPRITE_INFO_MASCON_SCREEN_04    ; SPRITE_INFO_MASCON_SCREEN_04
                                             ; [$PRG11::8c95]
-    .word SPRITE_INFO_MASCON_SCREEN_05      ; SPRITE_INFO_MASCON_SCREEN_05
+    pointer SPRITE_INFO_MASCON_SCREEN_05    ; SPRITE_INFO_MASCON_SCREEN_05
                                             ; [$PRG11::8c97]
-    .word SPRITE_INFO_MASCON_SCREEN_06      ; SPRITE_INFO_MASCON_SCREEN_06
+    pointer SPRITE_INFO_MASCON_SCREEN_06    ; SPRITE_INFO_MASCON_SCREEN_06
                                             ; [$PRG11::8c99]
-    .word SPRITE_INFO_MASCON_SCREEN_07      ; SPRITE_INFO_MASCON_SCREEN_07
+    pointer SPRITE_INFO_MASCON_SCREEN_07    ; SPRITE_INFO_MASCON_SCREEN_07
                                             ; [$PRG11::8c9b]
-    .word SPRITE_INFO_MASCON_SCREEN_08      ; SPRITE_INFO_MASCON_SCREEN_08
+    pointer SPRITE_INFO_MASCON_SCREEN_08    ; SPRITE_INFO_MASCON_SCREEN_08
                                             ; [$PRG11::8c9d]
-    .word SPRITE_INFO_MASCON_SCREEN_09      ; SPRITE_INFO_MASCON_SCREEN_09
+    pointer SPRITE_INFO_MASCON_SCREEN_09    ; SPRITE_INFO_MASCON_SCREEN_09
                                             ; [$PRG11::8c9f]
-    .word SPRITE_INFO_MASCON_SCREEN_10      ; SPRITE_INFO_MASCON_SCREEN_10
+    pointer SPRITE_INFO_MASCON_SCREEN_10    ; SPRITE_INFO_MASCON_SCREEN_10
                                             ; [$PRG11::8ca1]
-    .word SPRITE_INFO_MASCON_SCREEN_11      ; SPRITE_INFO_MASCON_SCREEN_11
+    pointer SPRITE_INFO_MASCON_SCREEN_11    ; SPRITE_INFO_MASCON_SCREEN_11
                                             ; [$PRG11::8ca3]
-    .word SPRITE_INFO_MASCON_SCREEN_12_13   ; SPRITE_INFO_MASCON_SCREEN_12_13
+    pointer SPRITE_INFO_MASCON_SCREEN_12_13 ; SPRITE_INFO_MASCON_SCREEN_12_13
                                             ; [$PRG11::8ca5]
-    .word SPRITE_INFO_MASCON_SCREEN_12_13   ; SPRITE_INFO_MASCON_SCREEN_12_13
+    pointer SPRITE_INFO_MASCON_SCREEN_12_13 ; SPRITE_INFO_MASCON_SCREEN_12_13
                                             ; [$PRG11::8ca7]
 
 ;

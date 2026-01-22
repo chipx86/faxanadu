@@ -7,75 +7,75 @@
     .segment "PRG2"
     .reloc
 
-    .word (ZENITH_BLOCKS-$8000) & $FFFF     ; Zenith
-    .word (BUILDINGS_BLOCKS-$8000) & $FFFF  ; Buildings
-    .word (DARTMOOR_BLOCKS-$8000) & $FFFF   ; Dartmoor
+    bank_offset_16 ZENITH_BLOCKS            ; Zenith
+    bank_offset_16 BUILDINGS_BLOCKS         ; Buildings
+    bank_offset_16 DARTMOOR_BLOCKS          ; Dartmoor
 
 ZENITH_BLOCKS:                              ; [$8006]
-    .word (ZENITH_BLOCKS_SCREEN_00-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_00
-                                                  ; [$PRG2::8006]
-    .word (ZENITH_BLOCKS_SCREEN_01-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_01
-                                                  ; [$PRG2::8008]
-    .word (ZENITH_BLOCKS_SCREEN_02-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_02
-                                                  ; [$PRG2::800a]
-    .word (ZENITH_BLOCKS_SCREEN_03-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_03
-                                                  ; [$PRG2::800c]
-    .word (ZENITH_BLOCKS_SCREEN_04-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_04
-                                                  ; [$PRG2::800e]
-    .word (ZENITH_BLOCKS_SCREEN_05-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_05
-                                                  ; [$PRG2::8010]
-    .word (ZENITH_BLOCKS_SCREEN_06-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_06
-                                                  ; [$PRG2::8012]
-    .word (ZENITH_BLOCKS_SCREEN_07-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_07
-                                                  ; [$PRG2::8014]
-    .word (ZENITH_BLOCKS_SCREEN_08-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_08
-                                                  ; [$PRG2::8016]
-    .word (ZENITH_BLOCKS_SCREEN_09-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_09
-                                                  ; [$PRG2::8018]
-    .word (ZENITH_BLOCKS_SCREEN_10-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_10
-                                                  ; [$PRG2::801a]
-    .word (ZENITH_BLOCKS_SCREEN_11-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_11
-                                                  ; [$PRG2::801c]
-    .word (ZENITH_BLOCKS_SCREEN_12-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_12
-                                                  ; [$PRG2::801e]
-    .word (ZENITH_BLOCKS_SCREEN_13-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_13
-                                                  ; [$PRG2::8020]
-    .word (ZENITH_BLOCKS_SCREEN_14-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_14
-                                                  ; [$PRG2::8022]
-    .word (ZENITH_BLOCKS_SCREEN_15-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_15
-                                                  ; [$PRG2::8024]
-    .word (ZENITH_BLOCKS_SCREEN_16-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_16
-                                                  ; [$PRG2::8026]
-    .word (ZENITH_BLOCKS_SCREEN_17-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_17
-                                                  ; [$PRG2::8028]
-    .word (ZENITH_BLOCKS_SCREEN_18-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_18
-                                                  ; [$PRG2::802a]
-    .word (ZENITH_BLOCKS_SCREEN_19-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_19
-                                                  ; [$PRG2::802c]
-    .word (ZENITH_BLOCKS_SCREEN_20-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_20
-                                                  ; [$PRG2::802e]
-    .word (ZENITH_BLOCKS_SCREEN_21-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_21
-                                                  ; [$PRG2::8030]
-    .word (ZENITH_BLOCKS_SCREEN_22-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_22
-                                                  ; [$PRG2::8032]
-    .word (ZENITH_BLOCKS_SCREEN_23-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_23
-                                                  ; [$PRG2::8034]
-    .word (ZENITH_BLOCKS_SCREEN_24-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_24
-                                                  ; [$PRG2::8036]
-    .word (ZENITH_BLOCKS_SCREEN_25-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_25
-                                                  ; [$PRG2::8038]
-    .word (ZENITH_BLOCKS_SCREEN_26-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_26
-                                                  ; [$PRG2::803a]
-    .word (ZENITH_BLOCKS_SCREEN_27-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_27
-                                                  ; [$PRG2::803c]
-    .word (ZENITH_BLOCKS_SCREEN_28-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_28
-                                                  ; [$PRG2::803e]
-    .word (ZENITH_BLOCKS_SCREEN_29-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_29
-                                                  ; [$PRG2::8040]
-    .word (ZENITH_BLOCKS_SCREEN_30-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_30
-                                                  ; [$PRG2::8042]
-    .word (ZENITH_BLOCKS_SCREEN_31-$8000) & $FFFF ; ZENITH_BLOCKS_SCREEN_31
-                                                  ; [$PRG2::8044]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_00  ; ZENITH_BLOCKS_SCREEN_00
+                                            ; [$PRG2::8006]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_01  ; ZENITH_BLOCKS_SCREEN_01
+                                            ; [$PRG2::8008]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_02  ; ZENITH_BLOCKS_SCREEN_02
+                                            ; [$PRG2::800a]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_03  ; ZENITH_BLOCKS_SCREEN_03
+                                            ; [$PRG2::800c]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_04  ; ZENITH_BLOCKS_SCREEN_04
+                                            ; [$PRG2::800e]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_05  ; ZENITH_BLOCKS_SCREEN_05
+                                            ; [$PRG2::8010]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_06  ; ZENITH_BLOCKS_SCREEN_06
+                                            ; [$PRG2::8012]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_07  ; ZENITH_BLOCKS_SCREEN_07
+                                            ; [$PRG2::8014]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_08  ; ZENITH_BLOCKS_SCREEN_08
+                                            ; [$PRG2::8016]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_09  ; ZENITH_BLOCKS_SCREEN_09
+                                            ; [$PRG2::8018]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_10  ; ZENITH_BLOCKS_SCREEN_10
+                                            ; [$PRG2::801a]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_11  ; ZENITH_BLOCKS_SCREEN_11
+                                            ; [$PRG2::801c]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_12  ; ZENITH_BLOCKS_SCREEN_12
+                                            ; [$PRG2::801e]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_13  ; ZENITH_BLOCKS_SCREEN_13
+                                            ; [$PRG2::8020]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_14  ; ZENITH_BLOCKS_SCREEN_14
+                                            ; [$PRG2::8022]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_15  ; ZENITH_BLOCKS_SCREEN_15
+                                            ; [$PRG2::8024]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_16  ; ZENITH_BLOCKS_SCREEN_16
+                                            ; [$PRG2::8026]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_17  ; ZENITH_BLOCKS_SCREEN_17
+                                            ; [$PRG2::8028]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_18  ; ZENITH_BLOCKS_SCREEN_18
+                                            ; [$PRG2::802a]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_19  ; ZENITH_BLOCKS_SCREEN_19
+                                            ; [$PRG2::802c]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_20  ; ZENITH_BLOCKS_SCREEN_20
+                                            ; [$PRG2::802e]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_21  ; ZENITH_BLOCKS_SCREEN_21
+                                            ; [$PRG2::8030]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_22  ; ZENITH_BLOCKS_SCREEN_22
+                                            ; [$PRG2::8032]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_23  ; ZENITH_BLOCKS_SCREEN_23
+                                            ; [$PRG2::8034]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_24  ; ZENITH_BLOCKS_SCREEN_24
+                                            ; [$PRG2::8036]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_25  ; ZENITH_BLOCKS_SCREEN_25
+                                            ; [$PRG2::8038]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_26  ; ZENITH_BLOCKS_SCREEN_26
+                                            ; [$PRG2::803a]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_27  ; ZENITH_BLOCKS_SCREEN_27
+                                            ; [$PRG2::803c]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_28  ; ZENITH_BLOCKS_SCREEN_28
+                                            ; [$PRG2::803e]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_29  ; ZENITH_BLOCKS_SCREEN_29
+                                            ; [$PRG2::8040]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_30  ; ZENITH_BLOCKS_SCREEN_30
+                                            ; [$PRG2::8042]
+    bank_offset_16 ZENITH_BLOCKS_SCREEN_31  ; ZENITH_BLOCKS_SCREEN_31
+                                            ; [$PRG2::8044]
 
 ;
 ; XREFS:
@@ -991,26 +991,26 @@ ZENITH_BLOCKS_SCREEN_31:                    ; [$996a]
     .byte $1c,$0b,$01,$c0,$b0,$1c,$09       ; [$9a3a] byte
 
 BUILDINGS_BLOCKS:                           ; [$9a41]
-    .word (BUILDINGS_BLOCKS_SCREEN_00-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_00
-                                                     ; [$PRG2::9a41]
-    .word (BUILDINGS_BLOCKS_SCREEN_01-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_01
-                                                     ; [$PRG2::9a43]
-    .word (BUILDINGS_BLOCKS_SCREEN_02-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_02
-                                                     ; [$PRG2::9a45]
-    .word (BUILDINGS_BLOCKS_SCREEN_03-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_03
-                                                     ; [$PRG2::9a47]
-    .word (BUILDINGS_BLOCKS_SCREEN_04-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_04
-                                                     ; [$PRG2::9a49]
-    .word (BUILDINGS_BLOCKS_SCREEN_05-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_05
-                                                     ; [$PRG2::9a4b]
-    .word (BUILDINGS_BLOCKS_SCREEN_06-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_06
-                                                     ; [$PRG2::9a4d]
-    .word (BUILDINGS_BLOCKS_SCREEN_07-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_07
-                                                     ; [$PRG2::9a4f]
-    .word (BUILDINGS_BLOCKS_SCREEN_08-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_08
-                                                     ; [$PRG2::9a51]
-    .word (BUILDINGS_BLOCKS_SCREEN_09-$8000) & $FFFF ; BUILDINGS_BLOCKS_SCREEN_09
-                                                     ; [$PRG2::9a53]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_00 ; BUILDINGS_BLOCKS_SCREEN_00
+                                              ; [$PRG2::9a41]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_01 ; BUILDINGS_BLOCKS_SCREEN_01
+                                              ; [$PRG2::9a43]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_02 ; BUILDINGS_BLOCKS_SCREEN_02
+                                              ; [$PRG2::9a45]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_03 ; BUILDINGS_BLOCKS_SCREEN_03
+                                              ; [$PRG2::9a47]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_04 ; BUILDINGS_BLOCKS_SCREEN_04
+                                              ; [$PRG2::9a49]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_05 ; BUILDINGS_BLOCKS_SCREEN_05
+                                              ; [$PRG2::9a4b]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_06 ; BUILDINGS_BLOCKS_SCREEN_06
+                                              ; [$PRG2::9a4d]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_07 ; BUILDINGS_BLOCKS_SCREEN_07
+                                              ; [$PRG2::9a4f]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_08 ; BUILDINGS_BLOCKS_SCREEN_08
+                                              ; [$PRG2::9a51]
+    bank_offset_16 BUILDINGS_BLOCKS_SCREEN_09 ; BUILDINGS_BLOCKS_SCREEN_09
+                                              ; [$PRG2::9a53]
 
 ;
 ; XREFS:
@@ -1179,46 +1179,46 @@ BUILDINGS_BLOCKS_SCREEN_09:                 ; [$9e2b]
     .byte $00                               ; [$9e93] byte
 
 DARTMOOR_BLOCKS:                            ; [$9e94]
-    .word (DARTMOOR_BLOCKS_SCREEN_00-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_00
-                                                    ; [$PRG2::9e94]
-    .word (DARTMOOR_BLOCKS_SCREEN_01-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_01
-                                                    ; [$PRG2::9e96]
-    .word (DARTMOOR_BLOCKS_SCREEN_02-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_02
-                                                    ; [$PRG2::9e98]
-    .word (DARTMOOR_BLOCKS_SCREEN_03-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_03
-                                                    ; [$PRG2::9e9a]
-    .word (DARTMOOR_BLOCKS_SCREEN_04-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_04
-                                                    ; [$PRG2::9e9c]
-    .word (DARTMOOR_BLOCKS_SCREEN_05-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_05
-                                                    ; [$PRG2::9e9e]
-    .word (DARTMOOR_BLOCKS_SCREEN_06-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_06
-                                                    ; [$PRG2::9ea0]
-    .word (DARTMOOR_BLOCKS_SCREEN_07-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_07
-                                                    ; [$PRG2::9ea2]
-    .word (DARTMOOR_BLOCKS_SCREEN_08-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_08
-                                                    ; [$PRG2::9ea4]
-    .word (DARTMOOR_BLOCKS_SCREEN_09-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_09
-                                                    ; [$PRG2::9ea6]
-    .word (DARTMOOR_BLOCKS_SCREEN_10-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_10
-                                                    ; [$PRG2::9ea8]
-    .word (DARTMOOR_BLOCKS_SCREEN_11-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_11
-                                                    ; [$PRG2::9eaa]
-    .word (DARTMOOR_BLOCKS_SCREEN_12-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_12
-                                                    ; [$PRG2::9eac]
-    .word (DARTMOOR_BLOCKS_SCREEN_13-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_13
-                                                    ; [$PRG2::9eae]
-    .word (DARTMOOR_BLOCKS_SCREEN_14-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_14
-                                                    ; [$PRG2::9eb0]
-    .word (DARTMOOR_BLOCKS_SCREEN_15-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_15
-                                                    ; [$PRG2::9eb2]
-    .word (DARTMOOR_BLOCKS_SCREEN_16-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_16
-                                                    ; [$PRG2::9eb4]
-    .word (DARTMOOR_BLOCKS_SCREEN_17-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_17
-                                                    ; [$PRG2::9eb6]
-    .word (DARTMOOR_BLOCKS_SCREEN_18-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_18
-                                                    ; [$PRG2::9eb8]
-    .word (DARTMOOR_BLOCKS_SCREEN_19-$8000) & $FFFF ; DARTMOOR_BLOCKS_SCREEN_19
-                                                    ; [$PRG2::9eba]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_00 ; DARTMOOR_BLOCKS_SCREEN_00
+                                             ; [$PRG2::9e94]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_01 ; DARTMOOR_BLOCKS_SCREEN_01
+                                             ; [$PRG2::9e96]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_02 ; DARTMOOR_BLOCKS_SCREEN_02
+                                             ; [$PRG2::9e98]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_03 ; DARTMOOR_BLOCKS_SCREEN_03
+                                             ; [$PRG2::9e9a]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_04 ; DARTMOOR_BLOCKS_SCREEN_04
+                                             ; [$PRG2::9e9c]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_05 ; DARTMOOR_BLOCKS_SCREEN_05
+                                             ; [$PRG2::9e9e]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_06 ; DARTMOOR_BLOCKS_SCREEN_06
+                                             ; [$PRG2::9ea0]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_07 ; DARTMOOR_BLOCKS_SCREEN_07
+                                             ; [$PRG2::9ea2]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_08 ; DARTMOOR_BLOCKS_SCREEN_08
+                                             ; [$PRG2::9ea4]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_09 ; DARTMOOR_BLOCKS_SCREEN_09
+                                             ; [$PRG2::9ea6]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_10 ; DARTMOOR_BLOCKS_SCREEN_10
+                                             ; [$PRG2::9ea8]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_11 ; DARTMOOR_BLOCKS_SCREEN_11
+                                             ; [$PRG2::9eaa]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_12 ; DARTMOOR_BLOCKS_SCREEN_12
+                                             ; [$PRG2::9eac]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_13 ; DARTMOOR_BLOCKS_SCREEN_13
+                                             ; [$PRG2::9eae]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_14 ; DARTMOOR_BLOCKS_SCREEN_14
+                                             ; [$PRG2::9eb0]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_15 ; DARTMOOR_BLOCKS_SCREEN_15
+                                             ; [$PRG2::9eb2]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_16 ; DARTMOOR_BLOCKS_SCREEN_16
+                                             ; [$PRG2::9eb4]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_17 ; DARTMOOR_BLOCKS_SCREEN_17
+                                             ; [$PRG2::9eb6]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_18 ; DARTMOOR_BLOCKS_SCREEN_18
+                                             ; [$PRG2::9eb8]
+    bank_offset_16 DARTMOOR_BLOCKS_SCREEN_19 ; DARTMOOR_BLOCKS_SCREEN_19
+                                             ; [$PRG2::9eba]
 
 ;
 ; XREFS:

@@ -1,5 +1,7 @@
 .feature string_escapes;
 
+.INCLUDE "macros.inc"
+
 .INCLUDE "DEFS.asm"
 .INCLUDE "ZEROPAGE.asm"
 .INCLUDE "RAM.asm"

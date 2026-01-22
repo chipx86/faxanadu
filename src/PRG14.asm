@@ -154,215 +154,145 @@ Sprites_UpdateAllStates:                    ; [$8070]
 ;     CurrentSprite_UpdateState
 ;
 SPRITE_UPDATE_HANDLERS:                     ; [$8087]
-    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [0]:
-    .word (SpriteUpdateHandler_Bread-1) & $FFFF ; [1]: Dropped: Bread
-    .word (SpriteUpdateHandler_Coin-1) & $FFFF ; [2]: Dropped: Coin
-    .word (SpriteUpdateHandler_Garbled03-1) & $FFFF ; [3]: Enemy: ?
-    .word (SpriteUpdateHandler_Enemy_Raiden-1) & $FFFF ; [4]: Enemy: Raiden
-    .word (SpriteUpdateHandler_Enemy_NecronAides-1) & $FFFF ; [5]: Enemy:
-                                                            ; Necron Aides
-    .word (SpriteUpdateHandler_Enemy_Zombie-1) & $FFFF ; [6]: Enemy: Zombie
-    .word (SpriteUpdateHandler_Enemy_Hornet-1) & $FFFF ; [7]: Enemy: Hornet
-    .word (SpriteUpdateHandler_Enemy_Bihoruda-1) & $FFFF ; [8]: Enemy:
-                                                         ; Bihoruda
-    .word (SpriteUpdateHandler_Enemy_Lilith-1) & $FFFF ; [9]: Enemy: Lilith
-    .word (SpriteUpdateHandler_TODO_Garbled10-1) & $FFFF ; [10]: Magic: ?
-    .word (SpriteUpdateHandler_Enemy_Yuinaru-1) & $FFFF ; [11]: Enemy:
-                                                        ; Yuinaru
-    .word (SpriteUpdateHandler_Enemy_Snowman-1) & $FFFF ; [12]: Enemy:
-                                                        ; Snowman
-    .word (SpriteUpdateHandler_Enemy_Nash-1) & $FFFF ; [13]: Enemy: Nash
-    .word (SpriteUpdateHandler_Enemy_FireGiant-1) & $FFFF ; [14]: Enemy: Fire
-                                                          ; Giant
-    .word (SpriteUpdateHandler_Enemy_Ishiisu-1) & $FFFF ; [15]: Enemy:
-                                                        ; Ishiisu
-    .word (SpriteUpdateHandler_Enemy_ExecutionHood-1) & $FFFF ; [16]: Enemy:
-                                                              ; Execution
-                                                              ; Hood
-    .word (SpriteUpdateHandler_Boss_Rokusutahn-1) & $FFFF ; [17]: Boss:
-                                                          ; Rokusutahn
-    .word (SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1) & $FFFF ; [18]:
-                                                                      ; Boss:
-                                                                      ; unused
-                                                                      ; (round
-                                                                      ; body
-                                                                      ; of
-                                                                      ; snake
-                                                                      ; boss)
-    .word (SpriteUpdateHandler_Effect_EnemyDeath-1) & $FFFF ; [19]: Effect:
-                                                            ; Enemy death
-    .word (SpriteUpdateHandler_Effect_LightningBall20-1) & $FFFF ; [20]:
-                                                                 ; Effect:
-                                                                 ; Lightning
-                                                                 ; ball
-    .word (SpriteUpdateHandler_Enemy_Charron-1) & $FFFF ; [21]: Enemy:
-                                                        ; Charron
-    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [22]: Enemy: ? (Unused)
-    .word (SpriteUpdateHandler_Enemy_Geributa-1) & $FFFF ; [23]: Enemy:
-                                                         ; Geributa
-    .word (SpriteUpdateHandler_Enemy_Sugata-1) & $FFFF ; [24]: Enemy: Sugata
-    .word (SpriteUpdateHandler_Enemy_Grimlock-1) & $FFFF ; [25]: Enemy:
-                                                         ; Grimlock
-    .word (SpriteUpdateHandler_Enemy_GiantBees-1) & $FFFF ; [26]: Enemy:
-                                                          ; Giant Bees
-    .word (SpriteUpdateHandler_Enemy_Myconid-1) & $FFFF ; [27]: Enemy:
-                                                        ; Myconid
-    .word (SpriteUpdateHandler_Enemy_Naga-1) & $FFFF ; [28]: Enemy: Naga
-    .word (SpriteUpdateHandler_Enemy_Unused29-1) & $FFFF ; [29]: Enemy:
-                                                         ; Skeleton Knight
-                                                         ; (unused)
-    .word (SpriteUpdateHandler_Enemy_GiantStrider-1) & $FFFF ; [30]: Enemy:
-                                                             ; Giant Strider
-    .word (SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1) & $FFFF ; [31]:
-                                                                   ; Enemy:
-                                                                   ; Sir
-                                                                   ; Gawaine
-    .word (SpriteUpdateHandler_Enemy_Maskman-1) & $FFFF ; [32]: Enemy:
-                                                        ; Maskman
-    .word (thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1) & $FFFF ; [33]:
-                                                                         ; Enemy:
-                                                                         ; Wolfman
-    .word (SpriteUpdateHandler_Enemy_Yareeka-1) & $FFFF ; [34]: Enemy:
-                                                        ; Yareeka
-    .word (SpriteUpdateHandler_Enemy_Magman-1) & $FFFF ; [35]: Enemy: Magman
-    .word (SpriteUpdateHandler_Enemy_Unused_CurlyTail-1) & $FFFF ; [36]:
+    pointer SpriteUpdateHandler_Invisible-1 ; [0]:
+    pointer SpriteUpdateHandler_Bread-1     ; [1]: Dropped: Bread
+    pointer SpriteUpdateHandler_Coin-1      ; [2]: Dropped: Coin
+    pointer SpriteUpdateHandler_Garbled03-1 ; [3]: Enemy: ?
+    pointer SpriteUpdateHandler_Enemy_Raiden-1 ; [4]: Enemy: Raiden
+    pointer SpriteUpdateHandler_Enemy_NecronAides-1 ; [5]: Enemy: Necron
+                                                    ; Aides
+    pointer SpriteUpdateHandler_Enemy_Zombie-1 ; [6]: Enemy: Zombie
+    pointer SpriteUpdateHandler_Enemy_Hornet-1 ; [7]: Enemy: Hornet
+    pointer SpriteUpdateHandler_Enemy_Bihoruda-1 ; [8]: Enemy: Bihoruda
+    pointer SpriteUpdateHandler_Enemy_Lilith-1 ; [9]: Enemy: Lilith
+    pointer SpriteUpdateHandler_TODO_Garbled10-1 ; [10]: Magic: ?
+    pointer SpriteUpdateHandler_Enemy_Yuinaru-1 ; [11]: Enemy: Yuinaru
+    pointer SpriteUpdateHandler_Enemy_Snowman-1 ; [12]: Enemy: Snowman
+    pointer SpriteUpdateHandler_Enemy_Nash-1 ; [13]: Enemy: Nash
+    pointer SpriteUpdateHandler_Enemy_FireGiant-1 ; [14]: Enemy: Fire Giant
+    pointer SpriteUpdateHandler_Enemy_Ishiisu-1 ; [15]: Enemy: Ishiisu
+    pointer SpriteUpdateHandler_Enemy_ExecutionHood-1 ; [16]: Enemy:
+                                                      ; Execution Hood
+    pointer SpriteUpdateHandler_Boss_Rokusutahn-1 ; [17]: Boss: Rokusutahn
+    pointer SpriteUpdateHandler_Enemy_Unused_SnakeRoundPart-1 ; [18]: Boss:
+                                                              ; unused (round
+                                                              ; body of snake
+                                                              ; boss)
+    pointer SpriteUpdateHandler_Effect_EnemyDeath-1 ; [19]: Effect: Enemy
+                                                    ; death
+    pointer SpriteUpdateHandler_Effect_LightningBall20-1 ; [20]: Effect:
+                                                         ; Lightning ball
+    pointer SpriteUpdateHandler_Enemy_Charron-1 ; [21]: Enemy: Charron
+    pointer SpriteUpdateHandler_Invisible-1 ; [22]: Enemy: ? (Unused)
+    pointer SpriteUpdateHandler_Enemy_Geributa-1 ; [23]: Enemy: Geributa
+    pointer SpriteUpdateHandler_Enemy_Sugata-1 ; [24]: Enemy: Sugata
+    pointer SpriteUpdateHandler_Enemy_Grimlock-1 ; [25]: Enemy: Grimlock
+    pointer SpriteUpdateHandler_Enemy_GiantBees-1 ; [26]: Enemy: Giant Bees
+    pointer SpriteUpdateHandler_Enemy_Myconid-1 ; [27]: Enemy: Myconid
+    pointer SpriteUpdateHandler_Enemy_Naga-1 ; [28]: Enemy: Naga
+    pointer SpriteUpdateHandler_Enemy_Unused29-1 ; [29]: Enemy: Skeleton
+                                                 ; Knight (unused)
+    pointer SpriteUpdateHandler_Enemy_GiantStrider-1 ; [30]: Enemy: Giant
+                                                     ; Strider
+    pointer SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [31]: Enemy: Sir
+                                                           ; Gawaine
+    pointer SpriteUpdateHandler_Enemy_Maskman-1 ; [32]: Enemy: Maskman
+    pointer thunk_SpriteUpdateHandler_Enemy_SirGawaine_Wolfman-1 ; [33]:
                                                                  ; Enemy:
-                                                                 ; Curly-tailed
-                                                                 ; guy with
-                                                                 ; spear
-                                                                 ; (unused)
-    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [37]: Enemy: ? (unused)
-    .word (SpriteUpdateHandler_Enemy_Ikeda-1) & $FFFF ; [38]: Enemy: Ikeda
-    .word (SpriteUpdateHandler_Enemy_MuppetGuy-1) & $FFFF ; [39]: Enemy:
-                                                          ; Muppet guy
-                                                          ; (unused)
-    .word (SpriteUpdateHandler_Enemy_Lamprey-1) & $FFFF ; [40]: Enemy:
-                                                        ; Lamprey
-    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [41]: Enemy: ? (unused)
-    .word (SpriteUpdateHandler_Enemy_Monodron-1) & $FFFF ; [42]: Enemy:
-                                                         ; Monodron
-    .word (SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1) & $FFFF ; [43]:
-                                                                      ; Enemy:
-                                                                      ; Winged
-                                                                      ; skeleton
-                                                                      ; (unused)
-    .word (SpriteUpdateHandler_Enemy_Tamazutsu-1) & $FFFF ; [44]: Enemy:
-                                                          ; Tamazutsu
-    .word (SpriteUpdateHandler_Boss_Ripasheiku-1) & $FFFF ; [45]: Boss:
-                                                          ; Ripasheiku
-    .word (SpriteUpdateHandler_Boss_Zoradohna-1) & $FFFF ; [46]: Boss:
-                                                         ; Zoradohna
-    .word (SpriteUpdateHandler_Boss_Borabohra-1) & $FFFF ; [47]: Boss:
-                                                         ; Borabohra
-    .word (SpriteUpdateHandler_Boss_Pakukame-1) & $FFFF ; [48]: Boss:
-                                                        ; Pakukame
-    .word (SpriteUpdateHandler_Boss_Zorugeriru-1) & $FFFF ; [49]: Boss:
-                                                          ; Zorugeriru
-    .word (SpriteUpdateHandler_Boss_KingGrieve-1) & $FFFF ; [50]: Boss: King
-                                                          ; Grieve
-    .word (SpriteUpdateHandler_Boss_ShadowEura-1) & $FFFF ; [51]: Boss:
-                                                          ; Shadow Eura
-    .word (SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [52]: NPC: Walking
-                                                      ; Man 1
-    .word (thunk1_SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [53]: NPC:
-                                                             ; Blue lady
+                                                                 ; Wolfman
+    pointer SpriteUpdateHandler_Enemy_Yareeka-1 ; [34]: Enemy: Yareeka
+    pointer SpriteUpdateHandler_Enemy_Magman-1 ; [35]: Enemy: Magman
+    pointer SpriteUpdateHandler_Enemy_Unused_CurlyTail-1 ; [36]: Enemy:
+                                                         ; Curly-tailed guy
+                                                         ; with spear
+                                                         ; (unused)
+    pointer SpriteUpdateHandler_Invisible-1 ; [37]: Enemy: ? (unused)
+    pointer SpriteUpdateHandler_Enemy_Ikeda-1 ; [38]: Enemy: Ikeda
+    pointer SpriteUpdateHandler_Enemy_MuppetGuy-1 ; [39]: Enemy: Muppet guy
+                                                  ; (unused)
+    pointer SpriteUpdateHandler_Enemy_Lamprey-1 ; [40]: Enemy: Lamprey
+    pointer SpriteUpdateHandler_Invisible-1 ; [41]: Enemy: ? (unused)
+    pointer SpriteUpdateHandler_Enemy_Monodron-1 ; [42]: Enemy: Monodron
+    pointer SpriteUpdateHandler_Enemy_Unused_WingedSkeleton-1 ; [43]: Enemy:
+                                                              ; Winged
+                                                              ; skeleton
+                                                              ; (unused)
+    pointer SpriteUpdateHandler_Enemy_Tamazutsu-1 ; [44]: Enemy: Tamazutsu
+    pointer SpriteUpdateHandler_Boss_Ripasheiku-1 ; [45]: Boss: Ripasheiku
+    pointer SpriteUpdateHandler_Boss_Zoradohna-1 ; [46]: Boss: Zoradohna
+    pointer SpriteUpdateHandler_Boss_Borabohra-1 ; [47]: Boss: Borabohra
+    pointer SpriteUpdateHandler_Boss_Pakukame-1 ; [48]: Boss: Pakukame
+    pointer SpriteUpdateHandler_Boss_Zorugeriru-1 ; [49]: Boss: Zorugeriru
+    pointer SpriteUpdateHandler_Boss_KingGrieve-1 ; [50]: Boss: King Grieve
+    pointer SpriteUpdateHandler_Boss_ShadowEura-1 ; [51]: Boss: Shadow Eura
+    pointer SpriteUpdateHandler_NPC_Walking-1 ; [52]: NPC: Walking Man 1
+    pointer thunk1_SpriteUpdateHandler_NPC_Walking-1 ; [53]: NPC: Blue lady
+                                                     ; (unused)
+    pointer thunk2_SpriteUpdateHandler_NPC_Walking-1 ; [54]: NPC: Child
+                                                     ; (unused)
+    pointer SpriteUpdateHandler_NPC_ArmorSalesman-1 ; [55]: NPC: Armor
+                                                    ; Salesman
+    pointer SpriteUpdateHandler_NPC_MartialArts-1 ; [56]: NPC: Martial Artist
+    pointer SpriteUpdateHandler_NPC_Priest-1 ; [57]: NPC: Priest
+    pointer SpriteUpdateHandler_NPC_King-1  ; [58]: NPC: King
+    pointer SpriteUpdateHandler_NPC_MagicTeacher-1 ; [59]: NPC: Magic Teacher
+    pointer SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [60]: NPC: Key
+                                                         ; Salesman
+    pointer SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [61]: NPC: Smoking
+                                                         ; Man
+    pointer SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [62]: NPC: Man in
+                                                         ; Chair
+    pointer SpriteUpdateHandler_NPC_KeySalesman_Others-1 ; [63]: NPC: Sitting
+                                                         ; Man
+    pointer SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [64]: NPC: Meat
+                                                          ; Salesman
+    pointer SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [65]: NPC: Lady
+                                                          ; in Blue Dress
+                                                          ; with Cup
+    pointer SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [66]: NPC: Guard
+    pointer SpriteUpdateHandler_NPC_Doctor-1 ; [67]: NPC: Doctor
+    pointer SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [68]: NPC:
+                                                          ; Walking Woman 1
+    pointer SpriteUpdateHandler_NPC_MeatSalesman_Others-1 ; [69]: NPC:
+                                                          ; Walking Woman 2
+    pointer SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [70]: Enemy:
+                                                             ; Eyeball
                                                              ; (unused)
-    .word (thunk2_SpriteUpdateHandler_NPC_Walking-1) & $FFFF ; [54]: NPC:
-                                                             ; Child (unused)
-    .word (SpriteUpdateHandler_NPC_ArmorSalesman-1) & $FFFF ; [55]: NPC:
-                                                            ; Armor Salesman
-    .word (SpriteUpdateHandler_NPC_MartialArts-1) & $FFFF ; [56]: NPC:
-                                                          ; Martial Artist
-    .word (SpriteUpdateHandler_NPC_Priest-1) & $FFFF ; [57]: NPC: Priest
-    .word (SpriteUpdateHandler_NPC_King-1) & $FFFF ; [58]: NPC: King
-    .word (SpriteUpdateHandler_NPC_MagicTeacher-1) & $FFFF ; [59]: NPC: Magic
-                                                           ; Teacher
-    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [60]: NPC:
-                                                                 ; Key
-                                                                 ; Salesman
-    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [61]: NPC:
-                                                                 ; Smoking
-                                                                 ; Man
-    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [62]: NPC:
-                                                                 ; Man in
-                                                                 ; Chair
-    .word (SpriteUpdateHandler_NPC_KeySalesman_Others-1) & $FFFF ; [63]: NPC:
-                                                                 ; Sitting
-                                                                 ; Man
-    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [64]:
-                                                                  ; NPC: Meat
-                                                                  ; Salesman
-    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [65]:
-                                                                  ; NPC: Lady
-                                                                  ; in Blue
-                                                                  ; Dress
-                                                                  ; with Cup
-    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [66]:
-                                                                  ; NPC:
-                                                                  ; Guard
-    .word (SpriteUpdateHandler_NPC_Doctor-1) & $FFFF ; [67]: NPC: Doctor
-    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [68]:
-                                                                  ; NPC:
-                                                                  ; Walking
-                                                                  ; Woman 1
-    .word (SpriteUpdateHandler_NPC_MeatSalesman_Others-1) & $FFFF ; [69]:
-                                                                  ; NPC:
-                                                                  ; Walking
-                                                                  ; Woman 2
-    .word (SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1) & $FFFF ; [70]:
-                                                                     ; Enemy:
-                                                                     ; Eyeball
-                                                                     ; (unused)
-    .word (SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1) & $FFFF ; [71]:
-                                                                     ; Enemy:
-                                                                     ; Zozura
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [72]: Item: Glove
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [73]: Item: Black
-                                                       ; Onyx
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [74]: Item: Pendant
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [75]: Item: Red
-                                                        ; Potion
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [76]: Item: Poison
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [77]: Item: Elixir
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [78]: Item:
-                                                        ; Ointment
-    .word (SpriteUpdateHandler_Invisible-1) & $FFFF ; [79]: Trigger: Intro
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [80]: Item: Mattock
-    .word (SpriteUpdateHandler_Magic_81-1) & $FFFF ; [81]: Magic: ?
-    .word (SpriteUpdateHandler_Effect_Fountain-1) & $FFFF ; [82]: Effect:
-                                                          ; Fountain
-    .word (SpriteUpdateHandler_Magic_83-1) & $FFFF ; [83]: Magic: ?
-    .word (SpriteUpdateHandler_EnemyMagic-1) & $FFFF ; [84]: Magic: Enemy
-                                                     ; Fireball
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [85]: Item: Wing
-                                                        ; Boots
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [86]: Item: Hour
-                                                        ; Glass
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [87]: Item: Magical
-                                                       ; Rod
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [88]: Item: Battle
-                                                       ; Suit
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [89]: Item: Battle
-                                                       ; Helmet
-    .word (SpriteUpdateHandler_Item_Special-1) & $FFFF ; [90]: Item: Dragon
-                                                       ; Slayer
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [91]: Item: Mattock
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [92]: Item: Wing
-                                                        ; Boots (from quest)
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [93]: Item: Red
-                                                        ; Potion
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [94]: Item: Poison
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [95]: Item: Glove
-    .word (SpriteUpdateHandler_Item_Standard-1) & $FFFF ; [96]: Item:
-                                                        ; Ointment
-    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [97]: Effect:
-                                                        ; Spring of Trunk
-    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [98]: Effect:
-                                                        ; Spring of Sky
-    .word (SpriteUpdateHandler_Effect_Spring-1) & $FFFF ; [99]: Effect:
-                                                        ; Spring of Tower
-    .word (SpriteUpdateHandler_Effect_BossDeath-1) & $FFFF ; [100]: Effect:
-                                                           ; Boss Death
+    pointer SpriteUpdateHandler_Enemy_UnusedEyeball_Zozura-1 ; [71]: Enemy:
+                                                             ; Zozura
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [72]: Item: Glove
+    pointer SpriteUpdateHandler_Item_Special-1 ; [73]: Item: Black Onyx
+    pointer SpriteUpdateHandler_Item_Special-1 ; [74]: Item: Pendant
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [75]: Item: Red Potion
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [76]: Item: Poison
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [77]: Item: Elixir
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [78]: Item: Ointment
+    pointer SpriteUpdateHandler_Invisible-1 ; [79]: Trigger: Intro
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [80]: Item: Mattock
+    pointer SpriteUpdateHandler_Magic_81-1  ; [81]: Magic: ?
+    pointer SpriteUpdateHandler_Effect_Fountain-1 ; [82]: Effect: Fountain
+    pointer SpriteUpdateHandler_Magic_83-1  ; [83]: Magic: ?
+    pointer SpriteUpdateHandler_EnemyMagic-1 ; [84]: Magic: Enemy Fireball
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [85]: Item: Wing Boots
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [86]: Item: Hour Glass
+    pointer SpriteUpdateHandler_Item_Special-1 ; [87]: Item: Magical Rod
+    pointer SpriteUpdateHandler_Item_Special-1 ; [88]: Item: Battle Suit
+    pointer SpriteUpdateHandler_Item_Special-1 ; [89]: Item: Battle Helmet
+    pointer SpriteUpdateHandler_Item_Special-1 ; [90]: Item: Dragon Slayer
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [91]: Item: Mattock
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [92]: Item: Wing Boots
+                                                ; (from quest)
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [93]: Item: Red Potion
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [94]: Item: Poison
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [95]: Item: Glove
+    pointer SpriteUpdateHandler_Item_Standard-1 ; [96]: Item: Ointment
+    pointer SpriteUpdateHandler_Effect_Spring-1 ; [97]: Effect: Spring of
+                                                ; Trunk
+    pointer SpriteUpdateHandler_Effect_Spring-1 ; [98]: Effect: Spring of Sky
+    pointer SpriteUpdateHandler_Effect_Spring-1 ; [99]: Effect: Spring of
+                                                ; Tower
+    pointer SpriteUpdateHandler_Effect_BossDeath-1 ; [100]: Effect: Boss
+                                                   ; Death
 
 ;============================================================================
 ; TODO: Document Sprites_Maybe_UpdateHitByMagic
@@ -2784,15 +2714,15 @@ Player_HandleCollision_NoOp:                ; [$8957]
 ;     CurrentSprite_CheckHitPlayer
 ;
 SPRITE_COLLISION_HANDLERS:                  ; [$8958]
-    .word (Player_HandleTouchEnemy-1) & $FFFF ; [0]:
-    .word (Player_HandleTouchBreadOrCoin-1) & $FFFF ; [1]: Coin/meat touched
-    .word (Player_CheckHandlePressUpOnNPC-1) & $FFFF ; [2]: Press Up on NPC
-    .word (Player_HandleCollision_NoOp-1) & $FFFF ; [3]: Large animation.
-                                                  ; Just return.
-    .word (Player_HandleTouchNPC-1) & $FFFF ; [4]: Collide with NPC
-    .word (Player_HandleTouchItem-1) & $FFFF ; [5]: Item touched
-    .word (Player_HandleTouchEnemyMagic-1) & $FFFF ; [6]: Enemy magic touched
-    .word (Player_HandleTouchEnemy-1) & $FFFF ; [7]: Enemy touched
+    pointer Player_HandleTouchEnemy-1       ; [0]:
+    pointer Player_HandleTouchBreadOrCoin-1 ; [1]: Coin/meat touched
+    pointer Player_CheckHandlePressUpOnNPC-1 ; [2]: Press Up on NPC
+    pointer Player_HandleCollision_NoOp-1   ; [3]: Large animation. Just
+                                            ; return.
+    pointer Player_HandleTouchNPC-1         ; [4]: Collide with NPC
+    pointer Player_HandleTouchItem-1        ; [5]: Item touched
+    pointer Player_HandleTouchEnemyMagic-1  ; [6]: Enemy magic touched
+    pointer Player_HandleTouchEnemy-1       ; [7]: Enemy touched
 
 
 ;============================================================================
@@ -2890,7 +2820,7 @@ Player_CheckHandlePressUpOnNPC:             ; [$897f]
     BEQ RETURN_8998                         ; If so, return.
     JSR MMC1_LoadBankAndJump                ; Execute the handler.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$8995]
@@ -3146,7 +3076,7 @@ Player_HandleTouchNPC:                      ; [$89ef]
     JSR MMC1_LoadBankAndJump                ; Else, execute the IScript at
                                             ; that value.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -7207,10 +7137,10 @@ FUN_PRG14__9a3c:                            ; [$9a3c]
 ;     FUN_PRG14__9a3c
 ;
 MAYBE_BODY_HANDLERS:                        ; [$9a4f]
-    .word (Maybe_BodyHandler__9a57-1) & $FFFF ; [0]:
-    .word (Maybe_BodyHandler__9a7a-1) & $FFFF ; [1]:
-    .word (Maybe_BodyHandler__9a7a-1) & $FFFF ; [2]:
-    .word (Maybe_BodyHandler__9a57-1) & $FFFF ; [3]:
+    pointer Maybe_BodyHandler__9a57-1       ; [0]:
+    pointer Maybe_BodyHandler__9a7a-1       ; [1]:
+    pointer Maybe_BodyHandler__9a7a-1       ; [2]:
+    pointer Maybe_BodyHandler__9a57-1       ; [3]:
 
 ;============================================================================
 ; TODO: Document Maybe_BodyHandler__9a57
@@ -10408,94 +10338,80 @@ SpriteUpdateHandler_Effect_Spring:          ; [$a5d2]
 ;     Sprites_UpdateBehavior
 ;
 SPRITE_BEHAVIORS:                           ; [$a5e7]
-    .word (SpriteBehavior_MoveTowardPlayer-1) & $FFFF ; [0]: Common
-    .word (SpriteBehavior_Wait-1) & $FFFF   ; [1]: Common
-    .word (SpriteBehavior_BounceAndExpire-1) & $FFFF ; [2]: Item: Dropped
-                                                     ; coin
-    .word (SpriteBehavior_Garbled3-1) & $FFFF ; [3]:
-    .word (SpriteBehavior_WalkForward-1) & $FFFF ; [4]: Common
-    .word (SpriteBehavior_Return-1) & $FFFF ; [5]:
-    .word (SpriteBehavior_EnemyUnused18-1) & $FFFF ; [6]:
-    .word (SpriteBehavior_LightningBallOrCharron-1) & $FFFF ; [7]:
-    .word (SpriteBehavior_LightningBallOrCharron-1) & $FFFF ; [8]:
-    .word (SpriteBehavior_Hop-1) & $FFFF    ; [9]: Enemy: Monodron
-    .word (SpriteBehavior_Ripasheiku-1) & $FFFF ; [10]: Boss: Dragon boss guy
-    .word (SpriteBehavior_Return-1) & $FFFF ; [11]:
-    .word (SpriteBehavior_Borabohra-1) & $FFFF ; [12]:
-    .word (SpriteBehavior_Pakukame-1) & $FFFF ; [13]:
-    .word (SpriteBehavior_Zorugeriru-1) & $FFFF ; [14]:
-    .word (SpriteBehavior_KingGrieve-1) & $FFFF ; [15]:
-    .word (SpriteBehavior_ShadowEura-1) & $FFFF ; [16]:
-    .word (SpriteBehavior_SomethingEyeball_17-1) & $FFFF ; [17]:
-    .word (SpriteBehavior_SomethingZoradohna_18-1) & $FFFF ; [18]:
-    .word (SpriteBehavior_MoveVertically-1) & $FFFF ; [19]:
-    .word (SpriteBehavior__a8d7-1) & $FFFF  ; [20]:
-    .word (SpriteBehavior_Fall-1) & $FFFF   ; [21]: Common
-    .word (SpriteBehavior_NecronAides-1) & $FFFF ; [22]: Enemy: Necron Aides
-    .word (SpriteBehavior_Bihoruda-1) & $FFFF ; [23]: Enemy: Bihoruda
-    .word (SpriteBehavior_Lilith-1) & $FFFF ; [24]: Enemy: Lilith
-    .word (SpriteBehavior_Yuinaru-1) & $FFFF ; [25]: Enemy: Yuinaru
-    .word (SpriteBehavior_Nash-1) & $FFFF   ; [26]: Enemy: Nash
-    .word (SpriteBehavior_EnemyMagic-1) & $FFFF ; [27]:
-    .word (_thunk_SpriteBehavior__a0cb-1) & $FFFF ; [28]:
-    .word (SpriteBehavior_Unknown_29-1) & $FFFF ; [29]:
-    .word (_thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1) & $FFFF ; [30]:
-    .word (SpriteBehavior_FlashScreenHitPlayer-1) & $FFFF ; [31]:
-    .word (SpriteBehavior_GiantBees-1) & $FFFF ; [32]: Enemy: Giant Bees
-    .word (SpriteBehavior_Naga-1) & $FFFF   ; [33]: Enemy: Naga
-    .word (SpriteBehavior_Yareeka-1) & $FFFF ; [34]: Enemy: Yareeka
-    .word (SpriteBehavior_Magman-1) & $FFFF ; [35]: Enemy: Magman
-    .word (SpriteBehavior_EnemyUnused36-1) & $FFFF ; [36]: Enemy: Unused 36
-    .word (SpriteBehavior_EnemyUnused39-1) & $FFFF ; [37]: Enemy: Unused 39
-    .word (SpriteBehavior_EnemyUnused43-1) & $FFFF ; [38]: Enemy: Unused 43
-    .word (SpriteBehavior_Tamazutsu-1) & $FFFF ; [39]: Enemy: Tamazutsu
-    .word (SpriteBehavior_SirGawaineWolfman-1) & $FFFF ; [40]: Enemy: Sir
-                                                       ; Gawaine Enemy:
-                                                       ; Wolfman
-    .word (SpriteBehavior_Ointment-1) & $FFFF ; [41]: Item: Ointment
-    .word (SpriteBehavior_Glove-1) & $FFFF  ; [42]: Item: Glove
-    .word (SpriteBehavior_BattleSuitDroppedByZoradohna-1) & $FFFF ; [43]:
-                                                                  ; Item:
-                                                                  ; Battle
-                                                                  ; Suit
-    .word (SpriteBehavior_BattleHelmetDroppedByZoradohna-1) & $FFFF ; [44]:
-                                                                    ; Item:
-                                                                    ; Battle
-                                                                    ; Helmet
-    .word (SpriteBehavior_DragonSlayerDroppedByKingGrieve-1) & $FFFF ; [45]:
-                                                                     ; Item:
-                                                                     ; Dragon
-                                                                     ; Slayer
-    .word (SpriteBehavior_MattockDroppedFromRipasheiku-1) & $FFFF ; [46]:
-                                                                  ; Item:
-                                                                  ; Mattock
-    .word (SpriteBehavior_WingBootsDroppedByZorugeriru-1) & $FFFF ; [47]:
-                                                                  ; Item:
-                                                                  ; Wing
-                                                                  ; Boots
-    .word (SpriteBehavior_BlackOnyxDropFromZoradohna-1) & $FFFF ; [48]: Item:
-                                                                ; Black Onyx
-    .word (SpriteBehavior_PendantDroppedFromRipasheiku-1) & $FFFF ; [49]:
-                                                                  ; Item:
-                                                                  ; Pendant
-    .word (SpriteBehavior_RandomlyShowItem_50-1) & $FFFF ; [50]:
-    .word (SpriteBehavior_RandomlyShowItem_51-1) & $FFFF ; [51]:
-    .word (SpriteBehavior_RandomlyShowItem_52-1) & $FFFF ; [52]:
-    .word (SpriteBehavior_RandomlyShowItem_53-1) & $FFFF ; [53]:
-    .word (SpriteBehavior_RandomlyShowItem_54-1) & $FFFF ; [54]:
-    .word (SpriteBehavior_RandomlyShowItem_55-1) & $FFFF ; [55]:
-    .word (SpriteBehavior_RandomlyShowItem_56-1) & $FFFF ; [56]:
-    .word (SpriteBehavior_Fountain-1) & $FFFF ; [57]: Spring of Fountain
-    .word (SpriteBehavior_SpringOfFortress-1) & $FFFF ; [58]: Spring of
-                                                      ; Fortress
-    .word (SpriteBehavior_SpringOfSky-1) & $FFFF ; [59]: Spring of Sky
-    .word (SpriteBehavior_SpringOfJoker-1) & $FFFF ; [60]: Spring of Joker
-    .word (SpriteBehavior_ShowMagicalRod-1) & $FFFF ; [61]: Item: Magical Rod
-    .word (SpriteBehavior_BossDeath-1) & $FFFF ; [62]: Effect: Boss Death
-    .word (SpriteBehavior_BuzzAround-1) & $FFFF ; [63]: Enemy: Hornet
-    .word (SpriteBehavior_Ishiisu-1) & $FFFF ; [64]: Enemy: Ishiisu
-    .word (SpriteBehavior_ExecutionHood-1) & $FFFF ; [65]: Enemy: Execution
-                                                   ; Hood
+    pointer SpriteBehavior_MoveTowardPlayer-1 ; [0]: Common
+    pointer SpriteBehavior_Wait-1           ; [1]: Common
+    pointer SpriteBehavior_BounceAndExpire-1 ; [2]: Item: Dropped coin
+    pointer SpriteBehavior_Garbled3-1       ; [3]:
+    pointer SpriteBehavior_WalkForward-1    ; [4]: Common
+    pointer SpriteBehavior_Return-1         ; [5]:
+    pointer SpriteBehavior_EnemyUnused18-1  ; [6]:
+    pointer SpriteBehavior_LightningBallOrCharron-1 ; [7]:
+    pointer SpriteBehavior_LightningBallOrCharron-1 ; [8]:
+    pointer SpriteBehavior_Hop-1            ; [9]: Enemy: Monodron
+    pointer SpriteBehavior_Ripasheiku-1     ; [10]: Boss: Dragon boss guy
+    pointer SpriteBehavior_Return-1         ; [11]:
+    pointer SpriteBehavior_Borabohra-1      ; [12]:
+    pointer SpriteBehavior_Pakukame-1       ; [13]:
+    pointer SpriteBehavior_Zorugeriru-1     ; [14]:
+    pointer SpriteBehavior_KingGrieve-1     ; [15]:
+    pointer SpriteBehavior_ShadowEura-1     ; [16]:
+    pointer SpriteBehavior_SomethingEyeball_17-1 ; [17]:
+    pointer SpriteBehavior_SomethingZoradohna_18-1 ; [18]:
+    pointer SpriteBehavior_MoveVertically-1 ; [19]:
+    pointer SpriteBehavior__a8d7-1          ; [20]:
+    pointer SpriteBehavior_Fall-1           ; [21]: Common
+    pointer SpriteBehavior_NecronAides-1    ; [22]: Enemy: Necron Aides
+    pointer SpriteBehavior_Bihoruda-1       ; [23]: Enemy: Bihoruda
+    pointer SpriteBehavior_Lilith-1         ; [24]: Enemy: Lilith
+    pointer SpriteBehavior_Yuinaru-1        ; [25]: Enemy: Yuinaru
+    pointer SpriteBehavior_Nash-1           ; [26]: Enemy: Nash
+    pointer SpriteBehavior_EnemyMagic-1     ; [27]:
+    pointer _thunk_SpriteBehavior__a0cb-1   ; [28]:
+    pointer SpriteBehavior_Unknown_29-1     ; [29]:
+    pointer _thunk_Sprite_ClearBehaviorReadyAndSetSubtypeBit7-1 ; [30]:
+    pointer SpriteBehavior_FlashScreenHitPlayer-1 ; [31]:
+    pointer SpriteBehavior_GiantBees-1      ; [32]: Enemy: Giant Bees
+    pointer SpriteBehavior_Naga-1           ; [33]: Enemy: Naga
+    pointer SpriteBehavior_Yareeka-1        ; [34]: Enemy: Yareeka
+    pointer SpriteBehavior_Magman-1         ; [35]: Enemy: Magman
+    pointer SpriteBehavior_EnemyUnused36-1  ; [36]: Enemy: Unused 36
+    pointer SpriteBehavior_EnemyUnused39-1  ; [37]: Enemy: Unused 39
+    pointer SpriteBehavior_EnemyUnused43-1  ; [38]: Enemy: Unused 43
+    pointer SpriteBehavior_Tamazutsu-1      ; [39]: Enemy: Tamazutsu
+    pointer SpriteBehavior_SirGawaineWolfman-1 ; [40]: Enemy: Sir Gawaine
+                                               ; Enemy: Wolfman
+    pointer SpriteBehavior_Ointment-1       ; [41]: Item: Ointment
+    pointer SpriteBehavior_Glove-1          ; [42]: Item: Glove
+    pointer SpriteBehavior_BattleSuitDroppedByZoradohna-1 ; [43]: Item:
+                                                          ; Battle Suit
+    pointer SpriteBehavior_BattleHelmetDroppedByZoradohna-1 ; [44]: Item:
+                                                            ; Battle Helmet
+    pointer SpriteBehavior_DragonSlayerDroppedByKingGrieve-1 ; [45]: Item:
+                                                             ; Dragon Slayer
+    pointer SpriteBehavior_MattockDroppedFromRipasheiku-1 ; [46]: Item:
+                                                          ; Mattock
+    pointer SpriteBehavior_WingBootsDroppedByZorugeriru-1 ; [47]: Item: Wing
+                                                          ; Boots
+    pointer SpriteBehavior_BlackOnyxDropFromZoradohna-1 ; [48]: Item: Black
+                                                        ; Onyx
+    pointer SpriteBehavior_PendantDroppedFromRipasheiku-1 ; [49]: Item:
+                                                          ; Pendant
+    pointer SpriteBehavior_RandomlyShowItem_50-1 ; [50]:
+    pointer SpriteBehavior_RandomlyShowItem_51-1 ; [51]:
+    pointer SpriteBehavior_RandomlyShowItem_52-1 ; [52]:
+    pointer SpriteBehavior_RandomlyShowItem_53-1 ; [53]:
+    pointer SpriteBehavior_RandomlyShowItem_54-1 ; [54]:
+    pointer SpriteBehavior_RandomlyShowItem_55-1 ; [55]:
+    pointer SpriteBehavior_RandomlyShowItem_56-1 ; [56]:
+    pointer SpriteBehavior_Fountain-1       ; [57]: Spring of Fountain
+    pointer SpriteBehavior_SpringOfFortress-1 ; [58]: Spring of Fortress
+    pointer SpriteBehavior_SpringOfSky-1    ; [59]: Spring of Sky
+    pointer SpriteBehavior_SpringOfJoker-1  ; [60]: Spring of Joker
+    pointer SpriteBehavior_ShowMagicalRod-1 ; [61]: Item: Magical Rod
+    pointer SpriteBehavior_BossDeath-1      ; [62]: Effect: Boss Death
+    pointer SpriteBehavior_BuzzAround-1     ; [63]: Enemy: Hornet
+    pointer SpriteBehavior_Ishiisu-1        ; [64]: Enemy: Ishiisu
+    pointer SpriteBehavior_ExecutionHood-1  ; [65]: Enemy: Execution Hood
 
 ;============================================================================
 ; TODO: Document Sprites_UpdateBehavior
@@ -10652,14 +10568,14 @@ BScripts_LoadNextOp:                        ; [$a6bc]
 ;     BScripts_LoadNextOp
 ;
 BSCRIPT_OP_HANDLERS:                        ; [$a6d8]
-    .word (BScript_Op_SwitchBehavior-1) & $FFFF ; [0]:
-    .word (BScript_Op_MaybeDisableAndGoTo-1) & $FFFF ; [1]:
-    .word (BScript_Op_RunAction-1) & $FFFF  ; [2]:
-    .word (BScript_Op_CheckDistanceToPlayer-1) & $FFFF ; [3]:
-    .word (BScript_Op_FinishBehavior-1) & $FFFF ; [4]:
-    .word (BScript_Op_GoTo-1) & $FFFF       ; [5]:
-    .word (BScript_Op_AddToSpriteData-1) & $FFFF ; [6]:
-    .word (BScript_Op_SetPhase-1) & $FFFF   ; [7]:
+    pointer BScript_Op_SwitchBehavior-1     ; [0]:
+    pointer BScript_Op_MaybeDisableAndGoTo-1 ; [1]:
+    pointer BScript_Op_RunAction-1          ; [2]:
+    pointer BScript_Op_CheckDistanceToPlayer-1 ; [3]:
+    pointer BScript_Op_FinishBehavior-1     ; [4]:
+    pointer BScript_Op_GoTo-1               ; [5]:
+    pointer BScript_Op_AddToSpriteData-1    ; [6]:
+    pointer BScript_Op_SetPhase-1           ; [7]:
 
 ;============================================================================
 ; TODO: Document BScript_Op_SetPhase
@@ -10858,18 +10774,16 @@ Sprites_Maybe_Skip2AndLoadNextAction:       ; [$a78c]
 ;     BScript_Op_RunAction
 ;
 BSCRIPT_ACTIONS:                            ; [$a794]
-    .word (BScript_Action_FacePlayerX-1) & $FFFF ; [0]: Face Player (X)
-    .word (BScript_Action_FlipXDirection-1) & $FFFF ; [1]: Flip X Direction
-    .word (BScript_Action_FacePlayerY-1) & $FFFF ; [2]: Face Player (Y)
-    .word (BScript_Action_FlipYDirection-1) & $FFFF ; [3]: Flip Y Direction
-    .word (BScript_Action_RandomlyFlipXDirection-1) & $FFFF ; [4]: Randomly
-                                                            ; Flip X
-                                                            ; Direction
-    .word (BScript_Action_RandomlyFlipYDirection-1) & $FFFF ; [5]: Randomly
-                                                            ; Flip Y
-                                                            ; Direction
-    .word (BScript_Action_RiseUp-1) & $FFFF ; [6]: Rise Up
-    .word (BScript_Action_CastMagic-1) & $FFFF ; [7]: Cast Magic
+    pointer BScript_Action_FacePlayerX-1    ; [0]: Face Player (X)
+    pointer BScript_Action_FlipXDirection-1 ; [1]: Flip X Direction
+    pointer BScript_Action_FacePlayerY-1    ; [2]: Face Player (Y)
+    pointer BScript_Action_FlipYDirection-1 ; [3]: Flip Y Direction
+    pointer BScript_Action_RandomlyFlipXDirection-1 ; [4]: Randomly Flip X
+                                                    ; Direction
+    pointer BScript_Action_RandomlyFlipYDirection-1 ; [5]: Randomly Flip Y
+                                                    ; Direction
+    pointer BScript_Action_RiseUp-1         ; [6]: Rise Up
+    pointer BScript_Action_CastMagic-1      ; [7]: Cast Magic
 
 
 ;============================================================================
@@ -10991,8 +10905,8 @@ BScript_Op_CheckDistanceToPlayer:           ; [$a7e5]
 ;     BScript_Op_CheckDistanceToPlayer
 ;
 SPRITEOP_CHECKDISTANCETOPLAYER_SUBCOMMANDS: ; [$a7f4]
-    .word (SpriteOp_CheckDistanceToPlayer_X-1) & $FFFF ; [0]:
-    .word (SpriteOp_CheckDistanceToPlayer_Y-1) & $FFFF ; [1]:
+    pointer SpriteOp_CheckDistanceToPlayer_X-1 ; [0]:
+    pointer SpriteOp_CheckDistanceToPlayer_Y-1 ; [1]:
 
 
 ;============================================================================
@@ -12486,16 +12400,16 @@ Maybe_Sprite_HandleDeathDrop:               ; [$ac2d]
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS:                       ; [$ac71]
-    .word (Sprites_ReplaceWithCoinDrop-1) & $FFFF ; Sprites_ReplaceWithCoinDrop
-                                                  ; [$PRG14::ac71]
+    pointer Sprites_ReplaceWithCoinDrop-1   ; Sprites_ReplaceWithCoinDrop
+                                            ; [$PRG14::ac71]
 
 ;
 ; XREFS:
 ;     Maybe_Sprite_HandleDeathDrop
 ;
 SPRITE_DROP_HANDLERS_LAST:                  ; [$ac73]
-    .word (Sprite_ReplaceWithBreadDrop-1) & $FFFF ; Sprite_ReplaceWithBreadDrop
-                                                  ; [$PRG14::ac73]
+    pointer Sprite_ReplaceWithBreadDrop-1   ; Sprite_ReplaceWithBreadDrop
+                                            ; [$PRG14::ac73]
 
 
 ;============================================================================
@@ -12840,37 +12754,37 @@ SPRITE_MAYBE_DROP_RANDOM_DATA:              ; [$aced]
 ;     Sprites_PopulateNextAvailableSprite
 ;
 SPRITE_BSCRIPTS:                            ; [$ad2d]
-    .word BSCRIPTS_NOOP                     ; [0]:
+    pointer BSCRIPTS_NOOP                   ; [0]:
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_1_:                         ; [$ad2f]
-    .word BSCRIPTS_OBJ_BREAD                ; [1]: Dropped: Bread
+    pointer BSCRIPTS_OBJ_BREAD              ; [1]: Dropped: Bread
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithDroppedItem
 ;
 SPRITE_BSCRIPTS_2_:                         ; [$ad31]
-    .word BSCRIPTS_OBJ_COIN                 ; [2]: Dropped: Coin
-    .word SPRITE_BEHAVIORS_GARBLED_03       ; [3]: Enemy: ?
-    .word BSCRIPTS_ENEMY_RAIDEN             ; [4]: Enemy: Raiden
-    .word BSCRIPTS_ENEMY_NECRON_AIDES       ; [5]: Enemy: Necron Aides
-    .word BSCRIPTS_ENEMY_ZOMBIE             ; [6]: Enemy: Zombie
-    .word BSCRIPTS_ENEMY_HORNET             ; [7]: Enemy: Hornet
-    .word BSCRIPTS_ENEMY_BIHORUDA           ; [8]: Enemy: Bihoruda
-    .word BSCRIPTS_ENEMY_LILITH             ; [9]: Enemy: Lilith
-    .word BSCRIPTS_GARBLED_10               ; [10]: Magic: ?
-    .word BSCRIPTS_ENEMY_YUINARU            ; [11]: Enemy: Yuinaru
-    .word BSCRIPTS_ENEMY_SNOWMAN            ; [12]: Enemy: Snowman
-    .word BSCRIPTS_ENEMY_NASH               ; [13]: Enemy: Nash
-    .word BSCRIPTS_ENEMY_FIRE_GIANT         ; [14]: Enemy: Fire Giant
-    .word BSCRIPTS_ENEMY_ISHIISU            ; [15]: Enemy: Ishiisu
-    .word BSCRIPTS_ENEMY_EXECUTION_HOOD     ; [16]: Enemy: Execution Hood
-    .word BSCRIPTS_BOSS_ROKUSUTAHN          ; [17]: Boss: Rokusutahn
-    .word BSCRIPTS_ENEMY_UNUSED_18          ; [18]: Boss: unused (round body
+    pointer BSCRIPTS_OBJ_COIN               ; [2]: Dropped: Coin
+    pointer SPRITE_BEHAVIORS_GARBLED_03     ; [3]: Enemy: ?
+    pointer BSCRIPTS_ENEMY_RAIDEN           ; [4]: Enemy: Raiden
+    pointer BSCRIPTS_ENEMY_NECRON_AIDES     ; [5]: Enemy: Necron Aides
+    pointer BSCRIPTS_ENEMY_ZOMBIE           ; [6]: Enemy: Zombie
+    pointer BSCRIPTS_ENEMY_HORNET           ; [7]: Enemy: Hornet
+    pointer BSCRIPTS_ENEMY_BIHORUDA         ; [8]: Enemy: Bihoruda
+    pointer BSCRIPTS_ENEMY_LILITH           ; [9]: Enemy: Lilith
+    pointer BSCRIPTS_GARBLED_10             ; [10]: Magic: ?
+    pointer BSCRIPTS_ENEMY_YUINARU          ; [11]: Enemy: Yuinaru
+    pointer BSCRIPTS_ENEMY_SNOWMAN          ; [12]: Enemy: Snowman
+    pointer BSCRIPTS_ENEMY_NASH             ; [13]: Enemy: Nash
+    pointer BSCRIPTS_ENEMY_FIRE_GIANT       ; [14]: Enemy: Fire Giant
+    pointer BSCRIPTS_ENEMY_ISHIISU          ; [15]: Enemy: Ishiisu
+    pointer BSCRIPTS_ENEMY_EXECUTION_HOOD   ; [16]: Enemy: Execution Hood
+    pointer BSCRIPTS_BOSS_ROKUSUTAHN        ; [17]: Boss: Rokusutahn
+    pointer BSCRIPTS_ENEMY_UNUSED_18        ; [18]: Boss: unused (round body
                                             ; of snake boss)
 
 ;
@@ -12878,112 +12792,112 @@ SPRITE_BSCRIPTS_2_:                         ; [$ad31]
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_19_:                        ; [$ad53]
-    .word BSCRIPTS_LIGHTNING_BALL_19        ; [19]: Effect: Enemy death
+    pointer BSCRIPTS_LIGHTNING_BALL_19      ; [19]: Effect: Enemy death
 
 ;
 ; XREFS:
 ;     Sprite_SetDeathEntity
 ;
 SPRITE_BSCRIPTS_20_:                        ; [$ad55]
-    .word BSCRIPTS_ENEMY_CHARRON            ; [20]: Effect: Lightning ball
-    .word BSCRIPTS_ENEMY_UNUSED_21          ; [21]: Enemy: Charron
-    .word BSCRIPTS_NOOP                     ; [22]: Enemy: ? (Unused)
-    .word BSCRIPTS_ENEMY_GERIBUTA           ; [23]: Enemy: Geributa
-    .word BSCRIPTS_ENEMY_SUGATA             ; [24]: Enemy: Sugata
-    .word BSCRIPTS_ENEMY_GRIMLOCK           ; [25]: Enemy: Grimlock
-    .word BSCRIPTS_ENEMY_GIANT_BEES         ; [26]: Enemy: Giant Bees
-    .word BSCRIPTS_ENEMY_MYCONID            ; [27]: Enemy: Myconid
-    .word BSCRIPTS_ENEMY_NAGA               ; [28]: Enemy: Naga
-    .word BSCRIPTS_ENEMY_UNUSED_29          ; [29]: Enemy: Skeleton Knight
+    pointer BSCRIPTS_ENEMY_CHARRON          ; [20]: Effect: Lightning ball
+    pointer BSCRIPTS_ENEMY_UNUSED_21        ; [21]: Enemy: Charron
+    pointer BSCRIPTS_NOOP                   ; [22]: Enemy: ? (Unused)
+    pointer BSCRIPTS_ENEMY_GERIBUTA         ; [23]: Enemy: Geributa
+    pointer BSCRIPTS_ENEMY_SUGATA           ; [24]: Enemy: Sugata
+    pointer BSCRIPTS_ENEMY_GRIMLOCK         ; [25]: Enemy: Grimlock
+    pointer BSCRIPTS_ENEMY_GIANT_BEES       ; [26]: Enemy: Giant Bees
+    pointer BSCRIPTS_ENEMY_MYCONID          ; [27]: Enemy: Myconid
+    pointer BSCRIPTS_ENEMY_NAGA             ; [28]: Enemy: Naga
+    pointer BSCRIPTS_ENEMY_UNUSED_29        ; [29]: Enemy: Skeleton Knight
                                             ; (unused)
-    .word BSCRIPTS_ENEMY_GIANT_STRIDER      ; [30]: Enemy: Giant Strider
-    .word BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [31]: Enemy: Sir Gawaine
-    .word BSCRIPTS_ENEMY_MASKMAN            ; [32]: Enemy: Maskman
-    .word BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [33]: Enemy: Wolfman
-    .word BSCRIPTS_ENEMY_YAREEKA            ; [34]: Enemy: Yareeka
-    .word BSCRIPTS_ENEMY_MAGMAN             ; [35]: Enemy: Magman
-    .word BSCRIPTS_ENEMY_UNUSED_36          ; [36]: Enemy: Curly-tailed guy
+    pointer BSCRIPTS_ENEMY_GIANT_STRIDER    ; [30]: Enemy: Giant Strider
+    pointer BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [31]: Enemy: Sir Gawaine
+    pointer BSCRIPTS_ENEMY_MASKMAN          ; [32]: Enemy: Maskman
+    pointer BSCRIPTS_ENEMY_SIR_GAWAINE_WOLFMAN ; [33]: Enemy: Wolfman
+    pointer BSCRIPTS_ENEMY_YAREEKA          ; [34]: Enemy: Yareeka
+    pointer BSCRIPTS_ENEMY_MAGMAN           ; [35]: Enemy: Magman
+    pointer BSCRIPTS_ENEMY_UNUSED_36        ; [36]: Enemy: Curly-tailed guy
                                             ; with spear (unused)
-    .word BSCRIPTS_NOOP                     ; [37]: Enemy: ? (unused)
-    .word BSCRIPTS_ENEMY_IKEDA              ; [38]: Enemy: Ikeda
-    .word BSCRIPTS_ENEMY_UNUSED_39          ; [39]: Enemy: Muppet guy
+    pointer BSCRIPTS_NOOP                   ; [37]: Enemy: ? (unused)
+    pointer BSCRIPTS_ENEMY_IKEDA            ; [38]: Enemy: Ikeda
+    pointer BSCRIPTS_ENEMY_UNUSED_39        ; [39]: Enemy: Muppet guy
                                             ; (unused)
-    .word BSCRIPTS_ENEMY_LAMPREY            ; [40]: Enemy: Lamprey
-    .word BSCRIPTS_NOOP                     ; [41]: Enemy: ? (unused)
-    .word BSCRIPTS_ENEMY_MONODRON           ; [42]: Enemy: Monodron
-    .word BSCRIPTS_ENEMY_UNUSED_43          ; [43]: Enemy: Winged skeleton
+    pointer BSCRIPTS_ENEMY_LAMPREY          ; [40]: Enemy: Lamprey
+    pointer BSCRIPTS_NOOP                   ; [41]: Enemy: ? (unused)
+    pointer BSCRIPTS_ENEMY_MONODRON         ; [42]: Enemy: Monodron
+    pointer BSCRIPTS_ENEMY_UNUSED_43        ; [43]: Enemy: Winged skeleton
                                             ; (unused)
-    .word BSCRIPTS_ENEMY_TAMAZUTSU          ; [44]: Enemy: Tamazutsu
-    .word BSCRIPTS_BOSS_RIPASHEIKU          ; [45]: Boss: Ripasheiku
-    .word BSCRIPTS_BOSS_ZORADOHNA           ; [46]: Boss: Zoradohna
-    .word BSCRIPTS_BOSS_BORABOHRA           ; [47]: Boss: Borabohra
-    .word BSCRIPTS_BOSS_PAKUKAME            ; [48]: Boss: Pakukame
-    .word BSCRIPTS_BOSS_ZORUGERIRU          ; [49]: Boss: Zorugeriru
-    .word BSCRIPTS_BOSS_KING_GRIEVE         ; [50]: Boss: King Grieve
-    .word BSCRIPTS_BOSS_SHADOW_EURA         ; [51]: Boss: Shadow Eura
-    .word BSCRIPTS_NPC_WALKING_MAN          ; [52]: NPC: Walking Man 1
-    .word BSCRIPTS_NPC_UNUSED_BLUE_LADY     ; [53]: NPC: Blue lady (unused)
-    .word BSCRIPTS_NPC_UNUSED_CHILD         ; [54]: NPC: Child (unused)
-    .word BSCRIPTS_NPC_ARMOR_SALESMAN       ; [55]: NPC: Armor Salesman
-    .word BSCRIPTS_NPC_MARTIAL_ARTS         ; [56]: NPC: Martial Artist
-    .word BSCRIPTS_NPC_PRIEST               ; [57]: NPC: Priest
-    .word BSCRIPTS_NPC_KING                 ; [58]: NPC: King
-    .word BSCRIPTS_NPC_MAGIC_TEACHER        ; [59]: NPC: Magic Teacher
-    .word BSCRIPTS_NPC_KEY_SALESMAN         ; [60]: NPC: Key Salesman
-    .word BSCRIPTS_NPC_SMOKING_MAN          ; [61]: NPC: Smoking Man
-    .word BSCRIPTS_NPC_MAN_IN_CHAIR         ; [62]: NPC: Man in Chair
-    .word BSCRIPTS_NPC_SITTING_MAN          ; [63]: NPC: Sitting Man
-    .word BSCRIPTS_NPC_MEAT_SALESMAN        ; [64]: NPC: Meat Salesman
-    .word BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ; [65]: NPC: Lady in Blue
-                                                ; Dress with Cup
-    .word BSCRIPTS_NPC_KINGS_GUARD          ; [66]: NPC: Guard
-    .word BSCRIPTS_NPC_DOCTOR               ; [67]: NPC: Doctor
-    .word BSCRIPTS_NPC_WALKING_WOMAN_01     ; [68]: NPC: Walking Woman 1
-    .word BSCRIPTS_NPC_WALKING_WOMAN_02     ; [69]: NPC: Walking Woman 2
-    .word BSCRIPTS_ENEMY_UNUSED_EYEBALL     ; [70]: Enemy: Eyeball (unused)
-    .word BSCRIPTS_ENEMY_ZOZURA             ; [71]: Enemy: Zozura
-    .word BSCRIPTS_OBJ_GLOVE                ; [72]: Item: Glove
-    .word BSCRIPTS_OBJ_BLACK_ONYX           ; [73]: Item: Black Onyx
-    .word BSCRIPTS_OBJ_PENDANT              ; [74]: Item: Pendant
-    .word BSCRIPTS_OBJ_POTIONLIKE           ; [75]: Item: Red Potion
-    .word BSCRIPTS_OBJ_POTIONLIKE           ; [76]: Item: Poison
-    .word BSCRIPTS_OBJ_POTIONLIKE           ; [77]: Item: Elixir
-    .word BSCRIPTS_OBJ_OINTMENT             ; [78]: Item: Ointment
-    .word BSCRIPTS_OBJ_POTIONLIKE           ; [79]: Trigger: Intro
+    pointer BSCRIPTS_ENEMY_TAMAZUTSU        ; [44]: Enemy: Tamazutsu
+    pointer BSCRIPTS_BOSS_RIPASHEIKU        ; [45]: Boss: Ripasheiku
+    pointer BSCRIPTS_BOSS_ZORADOHNA         ; [46]: Boss: Zoradohna
+    pointer BSCRIPTS_BOSS_BORABOHRA         ; [47]: Boss: Borabohra
+    pointer BSCRIPTS_BOSS_PAKUKAME          ; [48]: Boss: Pakukame
+    pointer BSCRIPTS_BOSS_ZORUGERIRU        ; [49]: Boss: Zorugeriru
+    pointer BSCRIPTS_BOSS_KING_GRIEVE       ; [50]: Boss: King Grieve
+    pointer BSCRIPTS_BOSS_SHADOW_EURA       ; [51]: Boss: Shadow Eura
+    pointer BSCRIPTS_NPC_WALKING_MAN        ; [52]: NPC: Walking Man 1
+    pointer BSCRIPTS_NPC_UNUSED_BLUE_LADY   ; [53]: NPC: Blue lady (unused)
+    pointer BSCRIPTS_NPC_UNUSED_CHILD       ; [54]: NPC: Child (unused)
+    pointer BSCRIPTS_NPC_ARMOR_SALESMAN     ; [55]: NPC: Armor Salesman
+    pointer BSCRIPTS_NPC_MARTIAL_ARTS       ; [56]: NPC: Martial Artist
+    pointer BSCRIPTS_NPC_PRIEST             ; [57]: NPC: Priest
+    pointer BSCRIPTS_NPC_KING               ; [58]: NPC: King
+    pointer BSCRIPTS_NPC_MAGIC_TEACHER      ; [59]: NPC: Magic Teacher
+    pointer BSCRIPTS_NPC_KEY_SALESMAN       ; [60]: NPC: Key Salesman
+    pointer BSCRIPTS_NPC_SMOKING_MAN        ; [61]: NPC: Smoking Man
+    pointer BSCRIPTS_NPC_MAN_IN_CHAIR       ; [62]: NPC: Man in Chair
+    pointer BSCRIPTS_NPC_SITTING_MAN        ; [63]: NPC: Sitting Man
+    pointer BSCRIPTS_NPC_MEAT_SALESMAN      ; [64]: NPC: Meat Salesman
+    pointer BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ; [65]: NPC: Lady in Blue
+                                                  ; Dress with Cup
+    pointer BSCRIPTS_NPC_KINGS_GUARD        ; [66]: NPC: Guard
+    pointer BSCRIPTS_NPC_DOCTOR             ; [67]: NPC: Doctor
+    pointer BSCRIPTS_NPC_WALKING_WOMAN_01   ; [68]: NPC: Walking Woman 1
+    pointer BSCRIPTS_NPC_WALKING_WOMAN_02   ; [69]: NPC: Walking Woman 2
+    pointer BSCRIPTS_ENEMY_UNUSED_EYEBALL   ; [70]: Enemy: Eyeball (unused)
+    pointer BSCRIPTS_ENEMY_ZOZURA           ; [71]: Enemy: Zozura
+    pointer BSCRIPTS_OBJ_GLOVE              ; [72]: Item: Glove
+    pointer BSCRIPTS_OBJ_BLACK_ONYX         ; [73]: Item: Black Onyx
+    pointer BSCRIPTS_OBJ_PENDANT            ; [74]: Item: Pendant
+    pointer BSCRIPTS_OBJ_POTIONLIKE         ; [75]: Item: Red Potion
+    pointer BSCRIPTS_OBJ_POTIONLIKE         ; [76]: Item: Poison
+    pointer BSCRIPTS_OBJ_POTIONLIKE         ; [77]: Item: Elixir
+    pointer BSCRIPTS_OBJ_OINTMENT           ; [78]: Item: Ointment
+    pointer BSCRIPTS_OBJ_POTIONLIKE         ; [79]: Trigger: Intro
 
 ;
 ; XREFS:
 ;     Sprite_ReplaceWithMattock
 ;
 SPRITE_BSCRIPTS_80_:                        ; [$adcd]
-    .word BSCRIPTS_OBJ_MATTOCK              ; [80]: Item: Mattock
+    pointer BSCRIPTS_OBJ_MATTOCK            ; [80]: Item: Mattock
 
 ;
 ; XREFS:
 ;     Sprite_Maybe_ResetState
 ;
 SPRITE_BSCRIPTS_81_:                        ; [$adcf]
-    .word BSCRIPTS_GARBLED_81               ; [81]: Magic: ?
-    .word BSCRIPTS_FOUNTAIN                 ; [82]: Effect: Fountain
-    .word SPRITE_BEHAVIORS_UNKNOWN_83       ; [83]: Magic: ?
-    .word BSCRIPTS_GARBLED_81               ; [84]: Magic: Enemy Fireball
-    .word BSCRIPTS_OBJ_WINGBOOTS            ; [85]: Item: Wing Boots
-    .word BSCRIPTS_OBJ_HOURGLASS            ; [86]: Item: Hour Glass
-    .word BSCRIPTS_OBJ_MAGICAL_ROD          ; [87]: Item: Magical Rod
-    .word BSCRIPTS_OBJ_BATTLE_SUIT          ; [88]: Item: Battle Suit
-    .word BSCRIPTS_OBJ_BATTLE_HELMET        ; [89]: Item: Battle Helmet
-    .word BSCRIPTS_OBJ_DRAGON_SLAYER        ; [90]: Item: Dragon Slayer
-    .word BSCRIPTS_OBJ_MATTOCK_QUEST        ; [91]: Item: Mattock
-    .word BSCRIPTS_OBJ_WINGSBOOTS_QUEST     ; [92]: Item: Wing Boots (from
+    pointer BSCRIPTS_GARBLED_81             ; [81]: Magic: ?
+    pointer BSCRIPTS_FOUNTAIN               ; [82]: Effect: Fountain
+    pointer SPRITE_BEHAVIORS_UNKNOWN_83     ; [83]: Magic: ?
+    pointer BSCRIPTS_GARBLED_81             ; [84]: Magic: Enemy Fireball
+    pointer BSCRIPTS_OBJ_WINGBOOTS          ; [85]: Item: Wing Boots
+    pointer BSCRIPTS_OBJ_HOURGLASS          ; [86]: Item: Hour Glass
+    pointer BSCRIPTS_OBJ_MAGICAL_ROD        ; [87]: Item: Magical Rod
+    pointer BSCRIPTS_OBJ_BATTLE_SUIT        ; [88]: Item: Battle Suit
+    pointer BSCRIPTS_OBJ_BATTLE_HELMET      ; [89]: Item: Battle Helmet
+    pointer BSCRIPTS_OBJ_DRAGON_SLAYER      ; [90]: Item: Dragon Slayer
+    pointer BSCRIPTS_OBJ_MATTOCK_QUEST      ; [91]: Item: Mattock
+    pointer BSCRIPTS_OBJ_WINGSBOOTS_QUEST   ; [92]: Item: Wing Boots (from
                                             ; quest)
-    .word BSCRIPTS_OBJ_RED_POTION_RANDOM    ; [93]: Item: Red Potion
-    .word BSCRIPTS_OBJ_POISON               ; [94]: Item: Poison
-    .word BSCRIPTS_OBJ_GLOVE_RANDOM         ; [95]: Item: Glove
-    .word BSCRIPTS_OBJ_OINTMENT_RANDOM      ; [96]: Item: Ointment
-    .word BSCRIPTS_SPRING_OF_FORTRESS       ; [97]: Effect: Spring of Trunk
-    .word BSCRIPTS_SPRING_OF_SKY            ; [98]: Effect: Spring of Sky
-    .word BSCRIPTS_SPRING_OF_JOKER          ; [99]: Effect: Spring of Tower
-    .word BSCRIPTS_EFFECT_BOSS_DEATH        ; [100]: Effect: Boss Death
+    pointer BSCRIPTS_OBJ_RED_POTION_RANDOM  ; [93]: Item: Red Potion
+    pointer BSCRIPTS_OBJ_POISON             ; [94]: Item: Poison
+    pointer BSCRIPTS_OBJ_GLOVE_RANDOM       ; [95]: Item: Glove
+    pointer BSCRIPTS_OBJ_OINTMENT_RANDOM    ; [96]: Item: Ointment
+    pointer BSCRIPTS_SPRING_OF_FORTRESS     ; [97]: Effect: Spring of Trunk
+    pointer BSCRIPTS_SPRING_OF_SKY          ; [98]: Effect: Spring of Sky
+    pointer BSCRIPTS_SPRING_OF_JOKER        ; [99]: Effect: Spring of Tower
+    pointer BSCRIPTS_EFFECT_BOSS_DEATH      ; [100]: Effect: Boss Death
 
 
 ;============================================================================
@@ -13161,9 +13075,9 @@ BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance
     .byte $00                               ;  |- X direction
     .byte $30                               ;  |- If < 48
-    .word @_isNearPlayer                    ;  |- Then
+    pointer @_isNearPlayer                  ;  |- Then
                                             ; @_isNearPlayer
-    .word @_checkDistanceLoop               ;  '- Else,
+    pointer @_checkDistanceLoop             ;  '- Else,
                                             ; @_checkDistanceLoop
 
   @_isNearPlayer:                           ; [$ae2f]
@@ -13185,7 +13099,7 @@ BSCRIPTS_ENEMY_RAIDEN:                      ; [$ae16]
     .byte $e0                               ;  |- 224 pixels
     .byte $00                               ;  '- 0 blocks
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_RAIDEN             ;  '-
+    pointer BSCRIPTS_ENEMY_RAIDEN           ;  '-
                                             ; BSCRIPTS_ENEMY_RAIDEN
 
 
@@ -13216,9 +13130,9 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $30                               ;  |- If < 48
-    .word @_isNearPlayerX                   ;  |- Then
+    pointer @_isNearPlayerX                 ;  |- Then
                                             ; @_isNearPlayerX
-    .word @_waitNearPlayerX                 ;  '- Else
+    pointer @_waitNearPlayerX               ;  '- Else
                                             ; @_waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae53]
@@ -13240,9 +13154,9 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $01                               ;  |- Y direction
     .byte $08                               ;  |- If < 8
-    .word @_isNearPlayerY                   ;  |- Then
+    pointer @_isNearPlayerY                 ;  |- Then
                                             ; @_isNearPlayerY
-    .word @_waitNearPlayerY                 ;  '- Then
+    pointer @_waitNearPlayerY               ;  '- Then
                                             ; @_waitNearPlayerY
 
   @_isNearPlayerY:                          ; [$ae67]
@@ -13282,7 +13196,7 @@ BSCRIPTS_ENEMY_UNUSED_EYEBALL:              ; [$ae43]
     .byte $00                               ;  |- 0 pixels Y
     .byte $01                               ;  '- 1 block Y
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_UNUSED_EYEBALL     ;  '-
+    pointer BSCRIPTS_ENEMY_UNUSED_EYEBALL   ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_EYEBALL
 
 
@@ -13310,8 +13224,8 @@ BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $40                               ;  |- If < 64 pixels
-    .word @_isNearPlayerX                   ;  |- Then _isNearPlayerX
-    .word @_waitNearPlayerX                 ;  '- Else _waitNearPlayerX
+    pointer @_isNearPlayerX                 ;  |- Then _isNearPlayerX
+    pointer @_waitNearPlayerX               ;  '- Else _waitNearPlayerX
 
   @_isNearPlayerX:                          ; [$ae9a]
     .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
@@ -13336,7 +13250,7 @@ BSCRIPTS_ENEMY_IKEDA:                       ; [$ae8c]
     .byte $00                               ;  |- 0 blocks X
     .byte $02                               ;  '- Hop mode 2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_IKEDA              ;  '-
+    pointer BSCRIPTS_ENEMY_IKEDA            ;  '-
                                             ; BSCRIPTS_ENEMY_IKEDA
 
 
@@ -13360,7 +13274,7 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
     .byte $60                               ;  |- 96 pixels
     .byte $00                               ;  '- 0 blocks
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_ZOZURA             ;  '-
+    pointer BSCRIPTS_ENEMY_ZOZURA           ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13387,7 +13301,7 @@ BSCRIPTS_ENEMY_ZOZURA:                      ; [$aeb1]
     .byte $60                               ;  |- 96 pixels
     .byte $00                               ;  '- 0 blocks
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_ZOZURA             ;  '-
+    pointer BSCRIPTS_ENEMY_ZOZURA           ;  '-
                                             ; BSCRIPTS_ENEMY_ZOZURA
 
 
@@ -13427,7 +13341,7 @@ BSCRIPTS_ENEMY_MONODRON:                    ; [$aecc]
     .byte $01                               ;  |- X full amount
     .byte $02                               ;  '- Hop mode 2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_MONODRON           ;  '-
+    pointer BSCRIPTS_ENEMY_MONODRON         ;  '-
                                             ; BSCRIPTS_ENEMY_MONODRON
 
 
@@ -13461,8 +13375,8 @@ BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check player distance
     .byte $00                               ;  |- X direction
     .byte $20                               ;  |- If < 32 pixels
-    .word @_isNearPlayer                    ;  |- Then _isNearPlayer
-    .word @_waitNearPlayer                  ;  '- Else
+    pointer @_isNearPlayer                  ;  |- Then _isNearPlayer
+    pointer @_waitNearPlayer                ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$aef8]
@@ -13474,7 +13388,7 @@ BSCRIPTS_ENEMY_SNOWMAN:                     ; [$aee5]
     .byte $02                               ;  |- 2 blocks X
     .byte $04                               ;  '- Hop mode 4
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_SNOWMAN            ;  '-
+    pointer BSCRIPTS_ENEMY_SNOWMAN          ;  '-
                                             ; BSCRIPTS_ENEMY_SNOWMAN
 
 
@@ -13550,7 +13464,7 @@ BSCRIPTS_ENEMY_ZOMBIE:                      ; [$af06]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_ZOMBIE             ;  '-
+    pointer BSCRIPTS_ENEMY_ZOMBIE           ;  '-
                                             ; BSCRIPTS_ENEMY_ZOMBIE
 
 
@@ -13633,8 +13547,8 @@ BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $20                               ;  |- If < 32 pixels
-    .word @_isNearPlayer                    ;  |- Then _isNearPlayer
-    .word @_waitNearPlayer                  ;  '- Else _waitNearPlayer
+    pointer @_isNearPlayer                  ;  |- Then _isNearPlayer
+    pointer @_waitNearPlayer                ;  '- Else _waitNearPlayer
 
   @_isNearPlayer:                           ; [$af49]
     .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
@@ -13646,7 +13560,7 @@ BSCRIPTS_ENEMY_FIRE_GIANT:                  ; [$af3d]
     .byte $80                               ;  |- 128 pixels X
     .byte $01                               ;  '- 1 block X
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_FIRE_GIANT         ;  '-
+    pointer BSCRIPTS_ENEMY_FIRE_GIANT       ;  '-
                                             ; BSCRIPTS_ENEMY_FIRE_GIANT
 
 
@@ -13788,7 +13702,7 @@ BSCRIPTS_ENEMY_UNUSED_21:                   ; [$af68]
     .byte SPRITE_BEHAVIOR_WAIT              ;  |- Wait
     .byte $08                               ;  '- For 8 ticks
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_UNUSED_21          ;  '-
+    pointer BSCRIPTS_ENEMY_UNUSED_21        ;  '-
                                             ; BSCRIPTS_ENEMY_UNUSED_21
 
 
@@ -13820,7 +13734,7 @@ BSCRIPTS_ENEMY_GERIBUTA:                    ; [$af89]
     .byte $00                               ;  |- 0 pixels X
     .byte $02                               ;  '- 2 blocks X
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word @_moveTowardPlayerLoop            ;  '-
+    pointer @_moveTowardPlayerLoop          ;  '-
                                             ; @_moveTowardPlayerLoop
 
 
@@ -13864,7 +13778,7 @@ BSCRIPTS_ENEMY_SUGATA:                      ; [$af98]
                                               ; player
     .byte $00                               ;  '- (unused)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_SUGATA             ;  '-
+    pointer BSCRIPTS_ENEMY_SUGATA           ;  '-
                                             ; BSCRIPTS_ENEMY_SUGATA
 
 
@@ -13924,9 +13838,9 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $01                               ;  |- Y direction
     .byte $10                               ;  |- If < 16 pixels
-    .word @_nearPlayerY                     ;  |- Then
+    pointer @_nearPlayerY                   ;  |- Then
                                             ; @_nearPlayerY
-    .word @_awayFromPlayerY                 ;  '- Else
+    pointer @_awayFromPlayerY               ;  '- Else
                                             ; @_awayFromPlayerY
 
   @_awayFromPlayerY:                        ; [$afe5]
@@ -13941,11 +13855,11 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $10                               ;  |- If < 16 pixels
-    .word @_nearPlayerX                     ;  |- Then
+    pointer @_nearPlayerX                   ;  |- Then
                                             ; @_nearPlayerX
-    .word @_waitNearPlayerX                 ;  '- Else _waitNearPlayerX
+    pointer @_waitNearPlayerX               ;  '- Else _waitNearPlayerX
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
+    pointer BSCRIPTS_ENEMY_GRIMLOCK         ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX:                            ; [$aff5]
@@ -13957,7 +13871,7 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     .byte $01                               ;  |- 1 block X
     .byte $02                               ;  '- Hop mode 2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
+    pointer BSCRIPTS_ENEMY_GRIMLOCK         ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerY:                            ; [$afff]
@@ -13974,12 +13888,12 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $10                               ;  |- If < 16 pixels
-    .word @_nearPlayerX2                    ;  |- Then
+    pointer @_nearPlayerX2                  ;  |- Then
                                             ; @_nearPlayerX2
-    .word @_waitNearPlayerX2                ;  '- Else
+    pointer @_waitNearPlayerX2              ;  '- Else
                                             ; @_waitNearPlayerX2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
+    pointer BSCRIPTS_ENEMY_GRIMLOCK         ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
   @_nearPlayerX2:                           ; [$b011]
@@ -13991,7 +13905,7 @@ BSCRIPTS_ENEMY_GRIMLOCK:                    ; [$afb5]
     .byte $02                               ;  |- 2 blocks X
     .byte $02                               ;  '- Hop mode 2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_GRIMLOCK           ;  '-
+    pointer BSCRIPTS_ENEMY_GRIMLOCK         ;  '-
                                             ; BSCRIPTS_ENEMY_GRIMLOCK
 
 
@@ -14061,7 +13975,7 @@ BSCRIPTS_ENEMY_MYCONID:                     ; [$b01f]
     .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
     .byte $1e                               ;  '- For 30 ticks
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_MYCONID            ;  '-
+    pointer BSCRIPTS_ENEMY_MYCONID          ;  '-
                                             ; BSCRIPTS_ENEMY_MYCONID
 
 
@@ -14110,7 +14024,7 @@ BSCRIPTS_ENEMY_GIANT_STRIDER:               ; [$b048]
     .byte $01                               ;  |- 1 block X
     .byte $02                               ;  '- Hop mode 2
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_GIANT_STRIDER      ;  '-
+    pointer BSCRIPTS_ENEMY_GIANT_STRIDER    ;  '-
                                             ; BSCRIPTS_ENEMY_GIANT_STRIDER
 
 
@@ -14210,7 +14124,7 @@ BSCRIPTS_ENEMY_LAMPREY:                     ; [$b068]
     .byte $50                               ;  |- 80 pixels X
     .byte $00                               ;  '- 0 blocks X
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_LAMPREY            ;  '-
+    pointer BSCRIPTS_ENEMY_LAMPREY          ;  '-
                                             ; BSCRIPTS_ENEMY_LAMPREY
 
 
@@ -14325,7 +14239,7 @@ BSCRIPTS_ENEMY_MASKMAN:                     ; [$b07e]
     .byte $01                               ;  |- 1 block X
     .byte $01                               ;  '- Hop mode 1
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_ENEMY_MASKMAN            ;  '-
+    pointer BSCRIPTS_ENEMY_MASKMAN          ;  '-
                                             ; BSCRIPTS_ENEMY_MASKMAN
 
 
@@ -14385,8 +14299,8 @@ BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance
     .byte $00                               ;  |- Check X
     .byte $10                               ;  |- If < 16 pixels
-    .word @_hop                             ;  |- Then hop
-    .word @_loop                            ;  '- Else loop
+    pointer @_hop                           ;  |- Then hop
+    pointer @_loop                          ;  '- Else loop
 
   @_hop:                                    ; [$b0ca]
     .byte SPRITE_OP_SWITCH_BEHAVIOR         ; [$b0ca] SpriteOp
@@ -14398,7 +14312,7 @@ BSCRIPTS_BOSS_ROKUSUTAHN:                   ; [$b0ac]
 
   @_loop:                                   ; [$b0d0]
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_BOSS_ROKUSUTAHN          ;  '-
+    pointer BSCRIPTS_BOSS_ROKUSUTAHN        ;  '-
                                             ; BSCRIPTS_BOSS_ROKUSUTAHN
 
 
@@ -14484,9 +14398,9 @@ BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- X direction
     .byte $20                               ;  |- If < 32 pixels
-    .word @_isNearPlayer                    ;  |- Then
+    pointer @_isNearPlayer                  ;  |- Then
                                             ; @_isNearPlayer
-    .word @_waitNearPlayer                  ;  '- Else
+    pointer @_waitNearPlayer                ;  '- Else
                                             ; @_waitNearPlayer
 
   @_isNearPlayer:                           ; [$b0fc]
@@ -14500,7 +14414,7 @@ BSCRIPTS_BOSS_ZORADOHNA:                    ; [$b0db]
     .byte $02                               ;  |- 2 blocks X
     .byte $01                               ;  '- Hop mode 1
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word @_mainLoop                        ;  '-
+    pointer @_mainLoop                      ;  '-
                                             ; @_mainLoop
 
 
@@ -14662,7 +14576,7 @@ BSCRIPTS_NPC_WALKING_MAN:                   ; [$b124]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_WALKING_MAN          ;  '-
+    pointer BSCRIPTS_NPC_WALKING_MAN        ;  '-
                                             ; BSCRIPTS_NPC_WALKING_MAN
 
 
@@ -14700,7 +14614,7 @@ BSCRIPTS_NPC_UNUSED_BLUE_LADY:              ; [$b131]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_UNUSED_BLUE_LADY     ;  '-
+    pointer BSCRIPTS_NPC_UNUSED_BLUE_LADY   ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_BLUE_LADY
 
 
@@ -14744,7 +14658,7 @@ BSCRIPTS_NPC_UNUSED_CHILD:                  ; [$b149]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_UNUSED_CHILD         ;  '-
+    pointer BSCRIPTS_NPC_UNUSED_CHILD       ;  '-
                                             ; BSCRIPTS_NPC_UNUSED_CHILD
 
 
@@ -14784,7 +14698,7 @@ BSCRIPTS_NPC_MARTIAL_ARTS:                  ; [$b16b]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_MARTIAL_ARTS         ;  '-
+    pointer BSCRIPTS_NPC_MARTIAL_ARTS       ;  '-
                                             ; BSCRIPTS_NPC_MARTIAL_ARTS
 
 
@@ -14803,7 +14717,7 @@ BSCRIPTS_NPC_PRIEST:                        ; [$b173]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Set sprite data
-    .word CurrentSprites_XPos_Full          ;  |- X position
+    pointer CurrentSprites_XPos_Full        ;  |- X position
     .byte $04                               ;  '- to 4
     .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
     .byte SPRITE_BEHAVIOR_FALL              ;  |- Stand still
@@ -14836,9 +14750,9 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- For 0 ticks
     .byte $40                               ;  |- If < 64 pixels
-    .word @_nearPlayer                      ;  |- Then
+    pointer @_nearPlayer                    ;  |- Then
                                             ; @_nearPlayer
-    .word @_waitNearPlayerLoop              ;  '- Else
+    pointer @_waitNearPlayerLoop            ;  '- Else
                                             ; @_waitNearPlayerLoop
 
 
@@ -14849,7 +14763,7 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
   @_nearPlayer:                             ; [$b187]
     .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add value to
-    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    pointer CurrentSprites_XPos_Full        ;  |- Sprite X position
     .byte $08                               ;  '- Plus 8
     .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
     .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
@@ -14866,9 +14780,9 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
     .byte SPRITE_OP_CHECK_DISTANCE          ; Op: Check distance to player
     .byte $00                               ;  |- For 0 ticks
     .byte $48                               ;  |- If < 72 pixels
-    .word @_waitAwayFromPlayerLoop          ;  |- Then
+    pointer @_waitAwayFromPlayerLoop        ;  |- Then
                                             ; @_waitAwayFromPlayerLoop
-    .word @_awayFromPlayer                  ;  '- Else
+    pointer @_awayFromPlayer                ;  '- Else
                                             ; @_awayFromPlayer
 
 
@@ -14879,10 +14793,10 @@ BSCRIPTS_NPC_KING:                          ; [$b17d]
   @_awayFromPlayer:                         ; [$b196]
     .byte SPRITE_OP_FINISH_BEHAVIOR         ; Op: Finish behavior
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add value to
-    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    pointer CurrentSprites_XPos_Full        ;  |- Sprite X position
     .byte $f8                               ;  '- Minus 8
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_KING                 ;  '-
+    pointer BSCRIPTS_NPC_KING               ;  '-
                                             ; BSCRIPTS_NPC_KING
 
 
@@ -14904,7 +14818,7 @@ BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_MAYBE_DISABLE_AND_GOTO  ; Op: Maybe: Disable and Go To
-    .word BSCRIPTS_NPC_MAGIC_TEACHER        ;  '-
+    pointer BSCRIPTS_NPC_MAGIC_TEACHER      ;  '-
                                             ; BSCRIPTS_NPC_MAGIC_TEACHER
 
 
@@ -14921,7 +14835,7 @@ BSCRIPTS_NPC_MAGIC_TEACHER:                 ; [$b19e]
 ;
 BSCRIPTS_NPC_DOCTOR:                        ; [$b1a6]
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add to sprite value
-    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    pointer CurrentSprites_XPos_Full        ;  |- Sprite X position
     .byte $08                               ;  '- Add 8
     .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
     .byte SPRITE_BEHAVIOR_FALL              ;  |- Fall/wait
@@ -14965,7 +14879,7 @@ BSCRIPTS_NPC_SMOKING_MAN:                   ; [$b1b2]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_SMOKING_MAN          ;  '-
+    pointer BSCRIPTS_NPC_SMOKING_MAN        ;  '-
                                             ; BSCRIPTS_NPC_SMOKING_MAN
 
 
@@ -14987,7 +14901,7 @@ BSCRIPTS_NPC_MAN_IN_CHAIR:                  ; [$b1ba]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_MAN_IN_CHAIR         ;  '-
+    pointer BSCRIPTS_NPC_MAN_IN_CHAIR       ;  '-
                                             ; BSCRIPTS_NPC_MAN_IN_CHAIR
 
 
@@ -15057,8 +14971,8 @@ BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP:      ; [$b1cc]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ;  '-
-                                                ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
+    pointer BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP ;  '-
+                                                  ; BSCRIPTS_NPC_LADY_BLUE_DRESS_WITH_CUP
 
 
 ;============================================================================
@@ -15084,7 +14998,7 @@ BSCRIPTS_NPC_KINGS_GUARD:                   ; [$b1de]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_KINGS_GUARD          ;  '-
+    pointer BSCRIPTS_NPC_KINGS_GUARD        ;  '-
                                             ; BSCRIPTS_NPC_KINGS_GUARD
 
 
@@ -15113,7 +15027,7 @@ BSCRIPTS_NPC_WALKING_WOMAN_01:              ; [$b1eb]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FACE_PLAYER_X       ;  '- Face player (X)
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_WALKING_WOMAN_01     ;  '-
+    pointer BSCRIPTS_NPC_WALKING_WOMAN_01   ;  '-
                                             ; BSCRIPTS_NPC_WALKING_WOMAN_01
 
 
@@ -15144,7 +15058,7 @@ BSCRIPTS_NPC_WALKING_WOMAN_02:              ; [$b1fa]
     .byte SPRITE_OP_RUN_ACTION              ; Op: Run action
     .byte SPRITE_ACTION_FLIP_X_DIRECTION    ;  '- Flip X direction
     .byte SPRITE_OP_GOTO                    ; Op: Goto
-    .word BSCRIPTS_NPC_WALKING_WOMAN_02     ;  '-
+    pointer BSCRIPTS_NPC_WALKING_WOMAN_02   ;  '-
                                             ; BSCRIPTS_NPC_WALKING_WOMAN_02
 
 
@@ -15281,7 +15195,7 @@ BSCRIPTS_OBJ_HOURGLASS:                     ; [$b21f]
 ;
 BSCRIPTS_FOUNTAIN:                          ; [$b223]
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; Op: Add to sprite value
-    .word CurrentSprites_XPos_Full          ;  |- Sprite X position
+    pointer CurrentSprites_XPos_Full        ;  |- Sprite X position
     .byte $08                               ;  '- Plus 8
     .byte SPRITE_OP_SWITCH_BEHAVIOR         ; Op: Switch behavior
     .byte SPRITE_BEHAVIOR_FOUNTAIN          ; [$b228] SpriteBehavior
@@ -15303,7 +15217,7 @@ BSCRIPTS_FOUNTAIN:                          ; [$b223]
 ;
 BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b22b] SpriteOp
-    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
+    pointer CurrentSprites_XPos_Full        ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b22c]
     .byte $08                               ; [$b22e] byte
 
@@ -15327,7 +15241,7 @@ BSCRIPTS_SPRING_OF_FORTRESS:                ; [$b22b]
 ;
 BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b233] SpriteOp
-    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
+    pointer CurrentSprites_XPos_Full        ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b234]
     .byte $08                               ; [$b236] byte
 
@@ -15351,7 +15265,7 @@ BSCRIPTS_SPRING_OF_SKY:                     ; [$b233]
 ;
 BSCRIPTS_SPRING_OF_JOKER:                   ; [$b23b]
     .byte SPRITE_OP_ADD_TO_SPRITE_DATA      ; [$b23b] SpriteOp
-    .word CurrentSprites_XPos_Full          ; CurrentSprites_XPos_Full
+    pointer CurrentSprites_XPos_Full        ; CurrentSprites_XPos_Full
                                             ; [$PRG14::b23c]
     .byte $08                               ; [$b23e] byte
 
@@ -17077,14 +16991,14 @@ MAYBE_WEAPON_RANGES:                        ; [$b897]
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b89f:                      ; [$b89f]
-    .word DAT_PRG14__b8af                   ; [0]: Dagger
-    .word DAT_PRG14__b8bf                   ; [1]: Dagger + shield
-    .word DAT_PRG14__b8cf                   ; [2]: Long Sword
-    .word DAT_PRG14__b8df                   ; [3]: Long Sword + shield
-    .word DAT_PRG14__b8ef                   ; [4]: Giant Blade
-    .word DAT_PRG14__b8ff                   ; [5]: Giant Blade + shield
-    .word DAT_PRG14__b8ff                   ; [6]: Dragon Slayer
-    .word DAT_PRG14__b8ff                   ; [7]: Dragon Slayer + shield
+    pointer DAT_PRG14__b8af                 ; [0]: Dagger
+    pointer DAT_PRG14__b8bf                 ; [1]: Dagger + shield
+    pointer DAT_PRG14__b8cf                 ; [2]: Long Sword
+    pointer DAT_PRG14__b8df                 ; [3]: Long Sword + shield
+    pointer DAT_PRG14__b8ef                 ; [4]: Giant Blade
+    pointer DAT_PRG14__b8ff                 ; [5]: Giant Blade + shield
+    pointer DAT_PRG14__b8ff                 ; [6]: Dragon Slayer
+    pointer DAT_PRG14__b8ff                 ; [7]: Dragon Slayer + shield
 
 ;
 ; XREFS:
@@ -17141,10 +17055,10 @@ DAT_PRG14__b8ff:                            ; [$b8ff]
 ;     Player_DrawWeapon
 ;
 PTR_ARRAY_PRG14__b90f:                      ; [$b90f]
-    .word DAT_PRG14__b917                   ; [0]: Hand dagger
-    .word DAT_PRG14__b91f                   ; [1]: Long sword
-    .word DAT_PRG14__b91f                   ; [2]: Giant blade
-    .word DAT_PRG14__b91f                   ; [3]: Dragon slayer
+    pointer DAT_PRG14__b917                 ; [0]: Hand dagger
+    pointer DAT_PRG14__b91f                 ; [1]: Long sword
+    pointer DAT_PRG14__b91f                 ; [2]: Giant blade
+    pointer DAT_PRG14__b91f                 ; [3]: Dragon slayer
 
 ;
 ; XREFS:
@@ -17811,46 +17725,40 @@ CAST_MAGIC_START_X:                         ; [$baf2]
 ;     CastMagic_RunSpellHandler
 ;
 CAST_MAGIC_UPDATE_HANDLERS:                 ; [$baf7]
-    .word (CastMagic_UpdateDeluge-1) & $FFFF ; [0]: Deluge
-    .word (CastMagic_UpdateThunderOrDeath-1) & $FFFF ; [1]: Thunder
-    .word (CastMagic_UpdateFire-1) & $FFFF  ; [2]: Fire
-    .word (CastMagic_HandleDeath-1) & $FFFF ; [3]: Death
-    .word (CastMagic_UpdateTilte-1) & $FFFF ; [4]: Tilte
-    .word (CastMagic_Unused_UpdateDelugeAfterFirstHit-1) & $FFFF ; [5]:
-                                                                 ; Deluge
-                                                                 ; after
-                                                                 ; first hit
-    .word (CastMagic_UpdateThunderAfterFirstHit-1) & $FFFF ; [6]: Thunder
-                                                           ; after first hit
-    .word (CastMagic_UpdateFireAfterFirstHit-1) & $FFFF ; [7]: Fire after
-                                                        ; first hit
-    .word (CastMagic_UpdateDeathAfterFirstHit-1) & $FFFF ; [8]: Death after
+    pointer CastMagic_UpdateDeluge-1        ; [0]: Deluge
+    pointer CastMagic_UpdateThunderOrDeath-1 ; [1]: Thunder
+    pointer CastMagic_UpdateFire-1          ; [2]: Fire
+    pointer CastMagic_HandleDeath-1         ; [3]: Death
+    pointer CastMagic_UpdateTilte-1         ; [4]: Tilte
+    pointer CastMagic_Unused_UpdateDelugeAfterFirstHit-1 ; [5]: Deluge after
                                                          ; first hit
-    .word (CastMagic_Noop-1) & $FFFF        ; [9]: UNUSED: No-op
-    .word (CastMagic_Unused_UpdateHitWallEffect-1) & $FFFF ; [10]: UNUSED:
-                                                           ; Hit Wall effect
-    .word (CastMagic_UpdateTilteAfterFirstHit-1) & $FFFF ; [11]: Tilte magic
-                                                         ; after first hit
+    pointer CastMagic_UpdateThunderAfterFirstHit-1 ; [6]: Thunder after first
+                                                   ; hit
+    pointer CastMagic_UpdateFireAfterFirstHit-1 ; [7]: Fire after first hit
+    pointer CastMagic_UpdateDeathAfterFirstHit-1 ; [8]: Death after first hit
+    pointer CastMagic_Noop-1                ; [9]: UNUSED: No-op
+    pointer CastMagic_Unused_UpdateHitWallEffect-1 ; [10]: UNUSED: Hit Wall
+                                                   ; effect
+    pointer CastMagic_UpdateTilteAfterFirstHit-1 ; [11]: Tilte magic after
+                                                 ; first hit
 
 ;
 ; XREFS:
 ;     Sprite_CheckHitByCastMagic
 ;
 CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
-    .word (CastMagic_HitHandler_Deluge-1) & $FFFF ; [0]: Deluge
-    .word (CastMagic_HitHandler_Thunder-1) & $FFFF ; [1]: Thunder
-    .word (CastMagic_HitHandler_Fire-1) & $FFFF ; [2]: Fire
-    .word (CastMagic_HitHandler_Death-1) & $FFFF ; [3]: Death
-    .word (CastMagic_HitHandler_Tilte-1) & $FFFF ; [4]: Tilte
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [5]: Deluge after first hit
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [6]: Thunder after first
-                                                ; hit
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [7]: Fire after first hit
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [8]: Death after first hit
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [9]: UNUSED
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [10]: UNUSED: Hit Wall
-                                                ; effect
-    .word (CastMagic_HitHandler_NoOp-1) & $FFFF ; [11]: Tilte after first hit
+    pointer CastMagic_HitHandler_Deluge-1   ; [0]: Deluge
+    pointer CastMagic_HitHandler_Thunder-1  ; [1]: Thunder
+    pointer CastMagic_HitHandler_Fire-1     ; [2]: Fire
+    pointer CastMagic_HitHandler_Death-1    ; [3]: Death
+    pointer CastMagic_HitHandler_Tilte-1    ; [4]: Tilte
+    pointer CastMagic_HitHandler_NoOp-1     ; [5]: Deluge after first hit
+    pointer CastMagic_HitHandler_NoOp-1     ; [6]: Thunder after first hit
+    pointer CastMagic_HitHandler_NoOp-1     ; [7]: Fire after first hit
+    pointer CastMagic_HitHandler_NoOp-1     ; [8]: Death after first hit
+    pointer CastMagic_HitHandler_NoOp-1     ; [9]: UNUSED
+    pointer CastMagic_HitHandler_NoOp-1     ; [10]: UNUSED: Hit Wall effect
+    pointer CastMagic_HitHandler_NoOp-1     ; [11]: Tilte after first hit
 
 
 ;============================================================================
@@ -17865,32 +17773,22 @@ CAST_MAGIC_HIT_HANDLERS:                    ; [$bb0f]
 ;     CastMagic_RunUpdateSpellHandler
 ;
 CAST_MAGIC_UPDATE_FINISH_HANDLERS:          ; [$bb27]
-    .word (CastMagic_FinishHandler_Deluge-1) & $FFFF ; [0]: Deluge
-    .word (CastMagic_FinishHandler_Thunder-1) & $FFFF ; [1]: Thunder
-    .word (CastMagic_FinishHandler_Fire-1) & $FFFF ; [2]: Fire
-    .word (CastMagic_FinishHandler_Death-1) & $FFFF ; [3]: Death
-    .word (CastMagic_FinishHandler_Tilte-1) & $FFFF ; [4]: Tilte
-    .word (CastMagic_FinishHandler_DelugeOrDeathAfterHit-1) & $FFFF ; [5]:
-                                                                    ; Deluge
-                                                                    ; after
-                                                                    ; first
-                                                                    ; hit
-    .word (CastMagic_FinishHandler_Thunder-1) & $FFFF ; [6]: Thunder after
-                                                      ; first hit
-    .word (CastMagic_FinishHandler_Fire-1) & $FFFF ; [7]: Fire after first
-                                                   ; hit
-    .word (CastMagic_FinishHandler_DelugeOrDeathAfterHit-1) & $FFFF ; [8]:
-                                                                    ; Death
-                                                                    ; after
-                                                                    ; first
-                                                                    ; hit
-    .word (CastMagic_Noop-1) & $FFFF        ; [9]: UNUSED
-    .word (CastMagic_FinishHandler_HitWallEffect-1) & $FFFF ; [10]: UNUSED:
-                                                            ; Hit Wall effect
-    .word (CastMagic_FinishHandler_TilteAfterFirstHit-1) & $FFFF ; [11]:
-                                                                 ; Tilte
-                                                                 ; after
-                                                                 ; first hit
+    pointer CastMagic_FinishHandler_Deluge-1 ; [0]: Deluge
+    pointer CastMagic_FinishHandler_Thunder-1 ; [1]: Thunder
+    pointer CastMagic_FinishHandler_Fire-1  ; [2]: Fire
+    pointer CastMagic_FinishHandler_Death-1 ; [3]: Death
+    pointer CastMagic_FinishHandler_Tilte-1 ; [4]: Tilte
+    pointer CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [5]: Deluge
+                                                            ; after first hit
+    pointer CastMagic_FinishHandler_Thunder-1 ; [6]: Thunder after first hit
+    pointer CastMagic_FinishHandler_Fire-1  ; [7]: Fire after first hit
+    pointer CastMagic_FinishHandler_DelugeOrDeathAfterHit-1 ; [8]: Death
+                                                            ; after first hit
+    pointer CastMagic_Noop-1                ; [9]: UNUSED
+    pointer CastMagic_FinishHandler_HitWallEffect-1 ; [10]: UNUSED: Hit Wall
+                                                    ; effect
+    pointer CastMagic_FinishHandler_TilteAfterFirstHit-1 ; [11]: Tilte after
+                                                         ; first hit
 
 
 ;============================================================================

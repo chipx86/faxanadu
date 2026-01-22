@@ -1077,42 +1077,42 @@ MScripts_InvokeNext:                        ; [$823a]
 ;     MScripts_InvokeNext
 ;
 MSCRIPT_OP_HANDLERS:                        ; [$826a]
-    .word (MScript_Op_End-1) & $FFFF        ; MScript_Op_End
+    pointer MScript_Op_End-1                ; MScript_Op_End
                                             ; [$PRG5::826a]
-    .word (MScript_Op_RestoreAddr-1) & $FFFF ; MScript_Op_RestoreAddr
-                                             ; [$PRG5::826c]
-    .word (MScript_Op_BeginLoop-1) & $FFFF  ; MScript_Op_BeginLoop
+    pointer MScript_Op_RestoreAddr-1        ; MScript_Op_RestoreAddr
+                                            ; [$PRG5::826c]
+    pointer MScript_Op_BeginLoop-1          ; MScript_Op_BeginLoop
                                             ; [$PRG5::826e]
-    .word (MScript_Op_EndLoop-1) & $FFFF    ; MScript_Op_EndLoop
+    pointer MScript_Op_EndLoop-1            ; MScript_Op_EndLoop
                                             ; [$PRG5::8270]
-    .word (MScript_Op_NextLoopIfNCompleted-1) & $FFFF ; MScript_Op_NextLoopIfNCompleted
-                                                      ; [$PRG5::8272]
-    .word (MScript_Op_NoOp-1) & $FFFF       ; MScript_Op_NoOp
+    pointer MScript_Op_NextLoopIfNCompleted-1 ; MScript_Op_NextLoopIfNCompleted
+                                              ; [$PRG5::8272]
+    pointer MScript_Op_NoOp-1               ; MScript_Op_NoOp
                                             ; [$PRG5::8274]
-    .word (MScript_Op_SaveAddr-1) & $FFFF   ; MScript_Op_SaveAddr
+    pointer MScript_Op_SaveAddr-1           ; MScript_Op_SaveAddr
                                             ; [$PRG5::8276]
-    .word (MScript_Op_JumpSubroutine-1) & $FFFF ; MScript_Op_JumpSubroutine
-                                                ; [$PRG5::8278]
-    .word (MScript_Op_SetGlobalTranspose-1) & $FFFF ; MScript_Op_SetGlobalTranspose
-                                                    ; [$PRG5::827a]
-    .word (MScript_Op_SetChannelTranspose-1) & $FFFF ; MScript_Op_SetChannelTranspose
-                                                     ; [$PRG5::827c]
-    .word (MScript_Op_Return-1) & $FFFF     ; MScript_Op_Return
+    pointer MScript_Op_JumpSubroutine-1     ; MScript_Op_JumpSubroutine
+                                            ; [$PRG5::8278]
+    pointer MScript_Op_SetGlobalTranspose-1 ; MScript_Op_SetGlobalTranspose
+                                            ; [$PRG5::827a]
+    pointer MScript_Op_SetChannelTranspose-1 ; MScript_Op_SetChannelTranspose
+                                             ; [$PRG5::827c]
+    pointer MScript_Op_Return-1             ; MScript_Op_Return
                                             ; [$PRG5::827e]
-    .word (MScript_Op_RestartChannel-1) & $FFFF ; MScript_Op_RestartChannel
-                                                ; [$PRG5::8280]
-    .word (MScript_Op_RepeatValue-1) & $FFFF ; MScript_Op_RepeatValue
-                                             ; [$PRG5::8282]
-    .word (MScript_Op_SetControlBits-1) & $FFFF ; MScript_Op_SetControlBits
-                                                ; [$PRG5::8284]
-    .word (MScript_Op_SetSQVol-1) & $FFFF   ; MScript_Op_SetSQVol
+    pointer MScript_Op_RestartChannel-1     ; MScript_Op_RestartChannel
+                                            ; [$PRG5::8280]
+    pointer MScript_Op_RepeatValue-1        ; MScript_Op_RepeatValue
+                                            ; [$PRG5::8282]
+    pointer MScript_Op_SetControlBits-1     ; MScript_Op_SetControlBits
+                                            ; [$PRG5::8284]
+    pointer MScript_Op_SetSQVol-1           ; MScript_Op_SetSQVol
                                             ; [$PRG5::8286]
-    .word (MScript_Op_SetSQEnvelopeMode-1) & $FFFF ; MScript_Op_SetSQEnvelopeMode
-                                                   ; [$PRG5::8288]
-    .word (MScript_Op_SetSQPitchEffectDepth-1) & $FFFF ; MScript_Op_SetSQPitchEffectDepth
-                                                       ; [$PRG5::828a]
-    .word (MScript_Op_SetSQ2Detune-1) & $FFFF ; MScript_Op_SetSQ2Detune
-                                              ; [$PRG5::828c]
+    pointer MScript_Op_SetSQEnvelopeMode-1  ; MScript_Op_SetSQEnvelopeMode
+                                            ; [$PRG5::8288]
+    pointer MScript_Op_SetSQPitchEffectDepth-1 ; MScript_Op_SetSQPitchEffectDepth
+                                               ; [$PRG5::828a]
+    pointer MScript_Op_SetSQ2Detune-1       ; MScript_Op_SetSQ2Detune
+                                            ; [$PRG5::828c]
 
 ;============================================================================
 ; TODO: Document MScripts_SetNoteLengthFromNext
@@ -2226,94 +2226,94 @@ SOUND_EFFECT_HANDLER_INDEXES:               ; [$8590]
 ;     SoundEffects_HandleOnInterrupt
 ;
 SOUND_EFFECT_HANDLERS:                      ; [$85ad]
-    .word (SoundEffects_Init-1) & $FFFF     ; SoundEffects_Init
+    pointer SoundEffects_Init-1             ; SoundEffects_Init
                                             ; [$PRG5::85ad]
-    .word (SoundEffect_NoOp-1) & $FFFF      ; SoundEffect_NoOp
+    pointer SoundEffect_NoOp-1              ; SoundEffect_NoOp
                                             ; [$PRG5::85af]
-    .word (SoundEffect_CoinTouched_Setup-1) & $FFFF ; 0x04
-    .word (SoundEffect_CoinTouched_OnTick-1) & $FFFF ; SoundEffect_CoinTouched_OnTick
-                                                     ; [$PRG5::85b3]
-    .word (SoundEffect_BreadTouched_Setup-1) & $FFFF ; 0x08
-    .word (SoundEffect_BreadTouched_OnTick-1) & $FFFF ; SoundEffect_BreadTouched_OnTick
-                                                      ; [$PRG5::85b7]
-    .word (SoundEffect_Maybe_UseSpecialItem2_Setup-1) & $FFFF ; 0x0C
-    .word (SoundEffect_Maybe_UseSpecialItem2_OnTick-1) & $FFFF ; SoundEffect_Maybe_UseSpecialItem2_OnTick
-                                                               ; [$PRG5::85bb]
-    .word (SoundEffect_PlayerDied_Setup-1) & $FFFF ; 0x10
-    .word (SoundEffect_PlayerDied_OnTick-1) & $FFFF ; SoundEffect_PlayerDied_OnTick
-                                                    ; [$PRG5::85bf]
-    .word (SoundEffect_LadderDropped_Setup-1) & $FFFF ; 0x14
-    .word (SoundEffect_LadderDropped_OnTick-1) & $FFFF ; SoundEffect_LadderDropped_OnTick
-                                                       ; [$PRG5::85c3]
-    .word (SoundEffect_ShowPlayerMenu_Setup-1) & $FFFF ; 0x18
-    .word (SoundEffect_ShowPlayerMenu_OnTick-1) & $FFFF ; SoundEffect_ShowPlayerMenu_OnTick
-                                                        ; [$PRG5::85c7]
-    .word (SoundEffect_Maybe_Step_Setup-1) & $FFFF ; 0x1C
-    .word (SoundEffect_Maybe_Step_OnTick-1) & $FFFF ; SoundEffect_Maybe_Step_OnTick
-                                                    ; [$PRG5::85cb]
-    .word (SoundEffect_GoldAmountChanged_Setup-1) & $FFFF ; 0x20
-    .word (SoundEffects_DecrementCounter-1) & $FFFF ; SoundEffects_DecrementCounter
-                                                    ; [$PRG5::85cf]
-    .word (SoundEffect_FillHPOrMP_Setup-1) & $FFFF ; 0x24
-    .word (SoundEffect_FillHPOrMP_OnTick-1) & $FFFF ; SoundEffect_FillHPOrMP_OnTick
-                                                    ; [$PRG5::85d3]
-    .word (SoundEffect_PasswordCharInput_Setup-1) & $FFFF ; 0x28
-    .word (SoundEffects_DecrementCounter-1) & $FFFF ; SoundEffects_DecrementCounter
-                                                    ; [$PRG5::85d7]
-    .word (SoundEffect_Message_Setup-1) & $FFFF ; 0x2C
-    .word (SoundEffect_Message_OnTick-1) & $FFFF ; SoundEffect_Message_OnTick
-                                                 ; [$PRG5::85db]
-    .word (SoundEffect_CursorMoved_Setup-1) & $FFFF ; 0x30
-    .word (SoundEffect_CursorMoved_OnTick-1) & $FFFF ; SoundEffect_CursorMoved_OnTick
-                                                     ; [$PRG5::85df]
-    .word (SoundEffect_CharacterInput_Setup-1) & $FFFF ; 0x34
-    .word (SoundEffect_CharacterInput_OnTick-1) & $FFFF ; SoundEffect_CharacterInput_OnTick
-                                                        ; [$PRG5::85e3]
-    .word (SoundEffect_OpenDoor_Setup-1) & $FFFF ; 0x38
-    .word (SoundEffect_OpenDoor_OnTick-1) & $FFFF ; SoundEffect_OpenDoor_OnTick
-                                                  ; [$PRG5::85e7]
-    .word (SoundEffect_PushBlock_Setup-1) & $FFFF ; 0x3C
-    .word (SoundEffect_PushBlock_OnTick-1) & $FFFF ; SoundEffect_PushBlock_OnTick
-                                                   ; [$PRG5::85eb]
-    .word (SoundEffect_Maybe_Typing_Setup-1) & $FFFF ; 0x40
-    .word (SoundEffect_Maybe_Typing_OnTick-1) & $FFFF ; SoundEffect_Maybe_Typing_OnTick
-                                                      ; [$PRG5::85ef]
-    .word (SoundEffect_Pakukame_Setup-1) & $FFFF ; 0x44
-    .word (SoundEffect_Pakukame_OnTick-1) & $FFFF ; SoundEffect_Pakukame_OnTick
-                                                  ; [$PRG5::85f3]
-    .word (SoundEffect_0x48_Setup-1) & $FFFF ; 0x48
-    .word (SoundEffect_0x48_OnTick-1) & $FFFF ; SoundEffect_0x48_OnTick
-                                              ; [$PRG5::85f7]
-    .word (SoundEffect_ItemPickedUp_Setup-1) & $FFFF ; 0x4C
-    .word (SoundEffect_ItemPickedUp_OnTick-1) & $FFFF ; SoundEffect_ItemPickedUp_OnTick
-                                                      ; [$PRG5::85fb]
-    .word (SoundEffect_CoinTouchedCommon_Setup-1) & $FFFF ; 0x50
-    .word (SoundEffect_CoinTouchedCommon_OnTick-1) & $FFFF ; SoundEffect_CoinTouchedCommon_OnTick
-                                                           ; [$PRG5::85ff]
-    .word (SoundEffect_CoinDropped_Setup-1) & $FFFF ; 0x54
-    .word (SoundEffect_CoinDropped_OnTick-1) & $FFFF ; SoundEffect_CoinDropped_OnTick
-                                                     ; [$PRG5::8603]
-    .word (SoundEffect_ShieldHitByMagic_Setup-1) & $FFFF ; 0x58
-    .word (SoundEffect_ShieldHitByMagic_OnTick-1) & $FFFF ; SoundEffect_ShieldHitByMagic_OnTick
-                                                          ; [$PRG5::8607]
-    .word (SoundEffect_EnemyDied_Setup-1) & $FFFF ; 0x5C
-    .word (SoundEffect_EnemyDied_OnTick-1) & $FFFF ; SoundEffect_EnemyDied_OnTick
-                                                   ; [$PRG5::860b]
-    .word (SoundEffect_HitEnemy_Setup-1) & $FFFF ; 0x60
-    .word (SoundEffect_HitEnemy_OnTick-1) & $FFFF ; SoundEffect_HitEnemy_OnTick
-                                                  ; [$PRG5::860f]
-    .word (SoundEffect_HitPlayer_Setup-1) & $FFFF ; 0x64
-    .word (SoundEffect_HitPlayer_OnTick-1) & $FFFF ; SoundEffect_HitPlayer_OnTick
-                                                   ; [$PRG5::8613]
-    .word (SoundEffect_MagicHitObstacle_Setup-1) & $FFFF ; 0x68
-    .word (SoundEffect_MagicHitObstacle_OnTick-1) & $FFFF ; SoundEffect_MagicHitObstacle_OnTick
-                                                          ; [$PRG5::8617]
-    .word (SoundEffect_Tilte_Setup-1) & $FFFF ; 0x6C
-    .word (SoundEffect_Tilte_OnTick-1) & $FFFF ; SoundEffect_Tilte_OnTick
-                                               ; [$PRG5::861b]
-    .word (SoundEffect_Magic_Setup-1) & $FFFF ; 0x70
-    .word (SoundEffect_Magic_OnTick-1) & $FFFF ; SoundEffect_Magic_OnTick
-                                               ; [$PRG5::861f]
+    pointer SoundEffect_CoinTouched_Setup-1 ; 0x04
+    pointer SoundEffect_CoinTouched_OnTick-1 ; SoundEffect_CoinTouched_OnTick
+                                             ; [$PRG5::85b3]
+    pointer SoundEffect_BreadTouched_Setup-1 ; 0x08
+    pointer SoundEffect_BreadTouched_OnTick-1 ; SoundEffect_BreadTouched_OnTick
+                                              ; [$PRG5::85b7]
+    pointer SoundEffect_Maybe_UseSpecialItem2_Setup-1 ; 0x0C
+    pointer SoundEffect_Maybe_UseSpecialItem2_OnTick-1 ; SoundEffect_Maybe_UseSpecialItem2_OnTick
+                                                       ; [$PRG5::85bb]
+    pointer SoundEffect_PlayerDied_Setup-1  ; 0x10
+    pointer SoundEffect_PlayerDied_OnTick-1 ; SoundEffect_PlayerDied_OnTick
+                                            ; [$PRG5::85bf]
+    pointer SoundEffect_LadderDropped_Setup-1 ; 0x14
+    pointer SoundEffect_LadderDropped_OnTick-1 ; SoundEffect_LadderDropped_OnTick
+                                               ; [$PRG5::85c3]
+    pointer SoundEffect_ShowPlayerMenu_Setup-1 ; 0x18
+    pointer SoundEffect_ShowPlayerMenu_OnTick-1 ; SoundEffect_ShowPlayerMenu_OnTick
+                                                ; [$PRG5::85c7]
+    pointer SoundEffect_Maybe_Step_Setup-1  ; 0x1C
+    pointer SoundEffect_Maybe_Step_OnTick-1 ; SoundEffect_Maybe_Step_OnTick
+                                            ; [$PRG5::85cb]
+    pointer SoundEffect_GoldAmountChanged_Setup-1 ; 0x20
+    pointer SoundEffects_DecrementCounter-1 ; SoundEffects_DecrementCounter
+                                            ; [$PRG5::85cf]
+    pointer SoundEffect_FillHPOrMP_Setup-1  ; 0x24
+    pointer SoundEffect_FillHPOrMP_OnTick-1 ; SoundEffect_FillHPOrMP_OnTick
+                                            ; [$PRG5::85d3]
+    pointer SoundEffect_PasswordCharInput_Setup-1 ; 0x28
+    pointer SoundEffects_DecrementCounter-1 ; SoundEffects_DecrementCounter
+                                            ; [$PRG5::85d7]
+    pointer SoundEffect_Message_Setup-1     ; 0x2C
+    pointer SoundEffect_Message_OnTick-1    ; SoundEffect_Message_OnTick
+                                            ; [$PRG5::85db]
+    pointer SoundEffect_CursorMoved_Setup-1 ; 0x30
+    pointer SoundEffect_CursorMoved_OnTick-1 ; SoundEffect_CursorMoved_OnTick
+                                             ; [$PRG5::85df]
+    pointer SoundEffect_CharacterInput_Setup-1 ; 0x34
+    pointer SoundEffect_CharacterInput_OnTick-1 ; SoundEffect_CharacterInput_OnTick
+                                                ; [$PRG5::85e3]
+    pointer SoundEffect_OpenDoor_Setup-1    ; 0x38
+    pointer SoundEffect_OpenDoor_OnTick-1   ; SoundEffect_OpenDoor_OnTick
+                                            ; [$PRG5::85e7]
+    pointer SoundEffect_PushBlock_Setup-1   ; 0x3C
+    pointer SoundEffect_PushBlock_OnTick-1  ; SoundEffect_PushBlock_OnTick
+                                            ; [$PRG5::85eb]
+    pointer SoundEffect_Maybe_Typing_Setup-1 ; 0x40
+    pointer SoundEffect_Maybe_Typing_OnTick-1 ; SoundEffect_Maybe_Typing_OnTick
+                                              ; [$PRG5::85ef]
+    pointer SoundEffect_Pakukame_Setup-1    ; 0x44
+    pointer SoundEffect_Pakukame_OnTick-1   ; SoundEffect_Pakukame_OnTick
+                                            ; [$PRG5::85f3]
+    pointer SoundEffect_0x48_Setup-1        ; 0x48
+    pointer SoundEffect_0x48_OnTick-1       ; SoundEffect_0x48_OnTick
+                                            ; [$PRG5::85f7]
+    pointer SoundEffect_ItemPickedUp_Setup-1 ; 0x4C
+    pointer SoundEffect_ItemPickedUp_OnTick-1 ; SoundEffect_ItemPickedUp_OnTick
+                                              ; [$PRG5::85fb]
+    pointer SoundEffect_CoinTouchedCommon_Setup-1 ; 0x50
+    pointer SoundEffect_CoinTouchedCommon_OnTick-1 ; SoundEffect_CoinTouchedCommon_OnTick
+                                                   ; [$PRG5::85ff]
+    pointer SoundEffect_CoinDropped_Setup-1 ; 0x54
+    pointer SoundEffect_CoinDropped_OnTick-1 ; SoundEffect_CoinDropped_OnTick
+                                             ; [$PRG5::8603]
+    pointer SoundEffect_ShieldHitByMagic_Setup-1 ; 0x58
+    pointer SoundEffect_ShieldHitByMagic_OnTick-1 ; SoundEffect_ShieldHitByMagic_OnTick
+                                                  ; [$PRG5::8607]
+    pointer SoundEffect_EnemyDied_Setup-1   ; 0x5C
+    pointer SoundEffect_EnemyDied_OnTick-1  ; SoundEffect_EnemyDied_OnTick
+                                            ; [$PRG5::860b]
+    pointer SoundEffect_HitEnemy_Setup-1    ; 0x60
+    pointer SoundEffect_HitEnemy_OnTick-1   ; SoundEffect_HitEnemy_OnTick
+                                            ; [$PRG5::860f]
+    pointer SoundEffect_HitPlayer_Setup-1   ; 0x64
+    pointer SoundEffect_HitPlayer_OnTick-1  ; SoundEffect_HitPlayer_OnTick
+                                            ; [$PRG5::8613]
+    pointer SoundEffect_MagicHitObstacle_Setup-1 ; 0x68
+    pointer SoundEffect_MagicHitObstacle_OnTick-1 ; SoundEffect_MagicHitObstacle_OnTick
+                                                  ; [$PRG5::8617]
+    pointer SoundEffect_Tilte_Setup-1       ; 0x6C
+    pointer SoundEffect_Tilte_OnTick-1      ; SoundEffect_Tilte_OnTick
+                                            ; [$PRG5::861b]
+    pointer SoundEffect_Magic_Setup-1       ; 0x70
+    pointer SoundEffect_Magic_OnTick-1      ; SoundEffect_Magic_OnTick
+                                            ; [$PRG5::861f]
 
 ;============================================================================
 ; TODO: Document SoundEffects_DecrementCounter
@@ -4494,100 +4494,100 @@ MSCRIPTS_LOOKUP:                            ; [$8efa]
 ;     MScript_Op_RestartChannel
 ;
 MSCRIPTS_TITLESCREEN:                       ; [$8efb]
-    .word MSCRIPT_TITLESCREEN_SQ1           ; [0]:
-    .word MSCRIPT_TITLESCREEN_SQ2           ; [1]:
-    .word MSCRIPT_TITLESCREEN_TRI           ; [2]:
-    .word BYTE_PRG5__928e                   ; [3]:
+    pointer MSCRIPT_TITLESCREEN_SQ1         ; [0]:
+    pointer MSCRIPT_TITLESCREEN_SQ2         ; [1]:
+    pointer MSCRIPT_TITLESCREEN_TRI         ; [2]:
+    pointer BYTE_PRG5__928e                 ; [3]:
 
 MSCRIPTS_DAYBREAK:                          ; [$8f03]
-    .word MSCRIPT_DAYBREAK_SQ1              ; [0]:
-    .word MSCRIPT_DAYBREAK_SQ2              ; [1]:
-    .word MSCRIPT_DAYBREAK_TRI              ; [2]:
-    .word MSCRIPT_DAYBREAK_NOISE            ; [3]:
+    pointer MSCRIPT_DAYBREAK_SQ1            ; [0]:
+    pointer MSCRIPT_DAYBREAK_SQ2            ; [1]:
+    pointer MSCRIPT_DAYBREAK_TRI            ; [2]:
+    pointer MSCRIPT_DAYBREAK_NOISE          ; [3]:
 
 MSCRIPTS_APOLUNE:                           ; [$8f0b]
-    .word MSCRIPT_APOLUNE_SQ1               ; [0]:
-    .word MSCRIPT_APOLUNE_SQ2               ; [1]:
-    .word MSCRIPT_APOLUNE_TRI               ; [2]:
-    .word MSCRIPT_APOLUNE_NOISE             ; [3]:
+    pointer MSCRIPT_APOLUNE_SQ1             ; [0]:
+    pointer MSCRIPT_APOLUNE_SQ2             ; [1]:
+    pointer MSCRIPT_APOLUNE_TRI             ; [2]:
+    pointer MSCRIPT_APOLUNE_NOISE           ; [3]:
 
 MSCRIPTS_CONFLATE:                          ; [$8f13]
-    .word MSCRIPT_CONFLATE_SQ1              ; [0]:
-    .word MSCRIPT_CONFLATE_SQ2              ; [1]:
-    .word MSCRIPT_CONFLATE_TRI              ; [2]:
-    .word MSCRIPT_CONFLATE_NOISE            ; [3]:
+    pointer MSCRIPT_CONFLATE_SQ1            ; [0]:
+    pointer MSCRIPT_CONFLATE_SQ2            ; [1]:
+    pointer MSCRIPT_CONFLATE_TRI            ; [2]:
+    pointer MSCRIPT_CONFLATE_NOISE          ; [3]:
 
 MSCRIPTS_FOREPAW:                           ; [$8f1b]
-    .word MSCRIPT_FOREPAW_SQ1               ; [0]:
-    .word MSCRIPT_FOREPAW_SQ2               ; [1]:
-    .word MSCRIPT_FOREPAW_TRI               ; [2]:
-    .word MSCRIPT_FOREPAW_NOISE             ; [3]:
+    pointer MSCRIPT_FOREPAW_SQ1             ; [0]:
+    pointer MSCRIPT_FOREPAW_SQ2             ; [1]:
+    pointer MSCRIPT_FOREPAW_TRI             ; [2]:
+    pointer MSCRIPT_FOREPAW_NOISE           ; [3]:
 
 MSCRIPTS_TOWER:                             ; [$8f23]
-    .word MSCRIPT_TOWER_SQ1                 ; [0]:
-    .word MSCRIPT_TOWER_SQ2                 ; [1]:
-    .word MSCRIPT_TOWER_TRI                 ; [2]:
-    .word MSCRIPT_TOWER_NOISE               ; [3]:
+    pointer MSCRIPT_TOWER_SQ1               ; [0]:
+    pointer MSCRIPT_TOWER_SQ2               ; [1]:
+    pointer MSCRIPT_TOWER_TRI               ; [2]:
+    pointer MSCRIPT_TOWER_NOISE             ; [3]:
 
 MSCRIPTS_EOLIS:                             ; [$8f2b]
-    .word MSCRIPT_EOLIS_SQ1                 ; [0]:
-    .word MSCRIPT_EOLIS_SQ2                 ; [1]:
-    .word MSCRIPT_EOLIS_TRI                 ; [2]:
-    .word MSCRIPT_EOLIS_NOISE               ; [3]:
+    pointer MSCRIPT_EOLIS_SQ1               ; [0]:
+    pointer MSCRIPT_EOLIS_SQ2               ; [1]:
+    pointer MSCRIPT_EOLIS_TRI               ; [2]:
+    pointer MSCRIPT_EOLIS_NOISE             ; [3]:
 
 MSCRIPTS_MANTRA:                            ; [$8f33]
-    .word MSCRIPT_MANTRA_SQ1                ; [0]:
-    .word MSCRIPT_MANTRA_SQ2                ; [1]:
-    .word MSCRIPT_MANTRA_TRI                ; [2]:
-    .word MSCRIPT_MANTRA_NOISE              ; [3]:
+    pointer MSCRIPT_MANTRA_SQ1              ; [0]:
+    pointer MSCRIPT_MANTRA_SQ2              ; [1]:
+    pointer MSCRIPT_MANTRA_TRI              ; [2]:
+    pointer MSCRIPT_MANTRA_NOISE            ; [3]:
 
 MSCRIPTS_MASCON_VICTIM:                     ; [$8f3b]
-    .word MSCRIPT_MASCON_VICTIM_SQ1         ; [0]:
-    .word MSCRIPT_MASCON_VICTIM_SQ2         ; [1]:
-    .word MSCRIPT_MASCON_VICTIM_TRI         ; [2]:
-    .word MSCRIPT_MASCON_VICTIM_NOISE       ; [3]:
+    pointer MSCRIPT_MASCON_VICTIM_SQ1       ; [0]:
+    pointer MSCRIPT_MASCON_VICTIM_SQ2       ; [1]:
+    pointer MSCRIPT_MASCON_VICTIM_TRI       ; [2]:
+    pointer MSCRIPT_MASCON_VICTIM_NOISE     ; [3]:
 
 MSCRIPTS_BOSS:                              ; [$8f43]
-    .word MSCRIPT_BOSS_SQ1                  ; [0]:
-    .word MSCRIPT_BOSS_SQ2                  ; [1]:
-    .word MSCRIPT_BOSS_TRI                  ; [2]:
-    .word MSCRIPT_BOSS_NOISE                ; [3]:
+    pointer MSCRIPT_BOSS_SQ1                ; [0]:
+    pointer MSCRIPT_BOSS_SQ2                ; [1]:
+    pointer MSCRIPT_BOSS_TRI                ; [2]:
+    pointer MSCRIPT_BOSS_NOISE              ; [3]:
 
 MSCRIPTS_HOURGLASS:                         ; [$8f4b]
-    .word MSCRIPT_HOURGLASS_SQ1             ; [0]:
-    .word MSCRIPT_HOURGLASS_SQ2             ; [1]:
-    .word MSCRIPT_HOURGLASS_TRI             ; [2]:
-    .word MSCRIPT_HOURGLASS_NOISE           ; [3]:
+    pointer MSCRIPT_HOURGLASS_SQ1           ; [0]:
+    pointer MSCRIPT_HOURGLASS_SQ2           ; [1]:
+    pointer MSCRIPT_HOURGLASS_TRI           ; [2]:
+    pointer MSCRIPT_HOURGLASS_NOISE         ; [3]:
 
 MSCRIPTS_ENDING:                            ; [$8f53]
-    .word MSCRIPT_ENDING_SQ1                ; [0]:
-    .word MSCRIPT_ENDING_SQ2                ; [1]:
-    .word MSCRIPT_ENDING_TRI                ; [2]:
-    .word MSCRIPT_ENDING_NOISE              ; [3]:
+    pointer MSCRIPT_ENDING_SQ1              ; [0]:
+    pointer MSCRIPT_ENDING_SQ2              ; [1]:
+    pointer MSCRIPT_ENDING_TRI              ; [2]:
+    pointer MSCRIPT_ENDING_NOISE            ; [3]:
 
 MSCRIPTS_KINGS_ROOM:                        ; [$8f5b]
-    .word MSCRIPT_KINGS_ROOM_SQ1            ; [0]:
-    .word MSCRIPT_KINGS_ROOM_SQ2            ; [1]:
-    .word MSCRIPT_KINGS_ROOM_TRI            ; [2]:
-    .word MSCRIPT_KINGS_ROOM_NOISE          ; [3]:
+    pointer MSCRIPT_KINGS_ROOM_SQ1          ; [0]:
+    pointer MSCRIPT_KINGS_ROOM_SQ2          ; [1]:
+    pointer MSCRIPT_KINGS_ROOM_TRI          ; [2]:
+    pointer MSCRIPT_KINGS_ROOM_NOISE        ; [3]:
 
 MSCRIPTS_TEMPLE:                            ; [$8f63]
-    .word MSCRIPT_TEMPLE_SQ1                ; [0]:
-    .word MSCRIPT_TEMPLE_SQ2                ; [1]:
-    .word MSCRIPT_TEMPLE_TRI                ; [2]:
-    .word MSCRIPT_TEMPLE_NOISE              ; [3]:
+    pointer MSCRIPT_TEMPLE_SQ1              ; [0]:
+    pointer MSCRIPT_TEMPLE_SQ2              ; [1]:
+    pointer MSCRIPT_TEMPLE_TRI              ; [2]:
+    pointer MSCRIPT_TEMPLE_NOISE            ; [3]:
 
 MSCRIPTS_SHOP:                              ; [$8f6b]
-    .word MSCRIPT_SHOP_SQ1                  ; [0]:
-    .word MSCRIPT_SHOP_SQ2                  ; [1]:
-    .word MSCRIPT_SHOP_TRI                  ; [2]:
-    .word MSCRIPT_SHOP_NOISE                ; [3]:
+    pointer MSCRIPT_SHOP_SQ1                ; [0]:
+    pointer MSCRIPT_SHOP_SQ2                ; [1]:
+    pointer MSCRIPT_SHOP_TRI                ; [2]:
+    pointer MSCRIPT_SHOP_NOISE              ; [3]:
 
 MSCRIPTS_EVIL_FORTRESS:                     ; [$8f73]
-    .word MSCRIPT_EVIL_FORTRESS_SQ1         ; [0]:
-    .word MSCRIPT_EVIL_FORTRESS_SQ2         ; [1]:
-    .word MSCRIPT_EVIL_FORTRESS_TRI         ; [2]:
-    .word MSCRIPT_EVIL_FORTRESS_NOISE       ; [3]:
+    pointer MSCRIPT_EVIL_FORTRESS_SQ1       ; [0]:
+    pointer MSCRIPT_EVIL_FORTRESS_SQ2       ; [1]:
+    pointer MSCRIPT_EVIL_FORTRESS_TRI       ; [2]:
+    pointer MSCRIPT_EVIL_FORTRESS_NOISE     ; [3]:
     .byte $ff                               ; [$8f7b] byte
 
 
@@ -6209,9 +6209,9 @@ MSCRIPT_APOLUNE_SQ1:                        ; [$9662]
     .byte $00                               ; Rest
     .byte $00                               ; Rest
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $96C3
+    pointer @_subroutine                    ;  '- $96C3
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $96C3
+    pointer @_subroutine                    ;  '- $96C3
     .byte MSCRIPT_OP_SET_SQ_FADE            ; Op: Set SQ fade
     .byte $00                               ;  '- Reduce volume by 0
     .byte MSCRIPT_OP_SET_SQ_CONTROL_BITS    ; Op: Set SQ control bits
@@ -6403,9 +6403,9 @@ MSCRIPT_APOLUNE_SQ2:                        ; [$971c]
     .byte $00                               ; Rest
     .byte $00                               ; Rest
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $97A6
+    pointer @_subroutine                    ;  '- $97A6
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $97A6
+    pointer @_subroutine                    ;  '- $97A6
     .byte MSCRIPT_OP_SET_SQ_FADE            ; Op: Set SQ fade
     .byte $02                               ;  '- Reduce volume by 2
     .byte MSCRIPT_OP_SET_SQ_CONTROL_BITS    ; Op: Set SQ control bits
@@ -6795,9 +6795,9 @@ MSCRIPT_APOLUNE_TRI:                        ; [$987a]
     .byte $1e                               ; F#4
     .byte $00                               ; Rest
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $9927
+    pointer @_subroutine                    ;  '- $9927
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $9927
+    pointer @_subroutine                    ;  '- $9927
     .byte $0e                               ; F6
     .byte $00                               ; Rest
     .byte $15                               ; C7
@@ -7230,9 +7230,9 @@ MSCRIPT_APOLUNE_NOISE:                      ; [$9a48]
     .byte $31,$31,$8c,$31                   ; [$9a58] byte
 
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $9A70
+    pointer @_subroutine                    ;  '- $9A70
     .byte MSCRIPT_OP_JSR                    ; Op: Jump to subroutine
-    .word @_subroutine                      ;  '- $9A70
+    pointer @_subroutine                    ;  '- $9A70
     .byte MSCRIPT_OP_BEGIN_LOOP             ; Op: Begin loop
     .byte $08                               ;  '- 8 iterations
     .byte $8c,$00,$21,$00,$21,$00,$21,$00   ; [$9a64] byte

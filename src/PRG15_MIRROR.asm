@@ -2394,23 +2394,23 @@ GameLoop_UseItem_Return:                    ; [$c49c]
 ;     GameLoop_CheckUseCurrentItem
 ;
 USE_ITEM_JUMP_TABLE:                        ; [$c49d]
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [0]: Ring of Elf
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [1]: Ring of Ruby
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [2]: Ring of Dworf
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [3]: Demon's Ring
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [4]: "A" Key
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [5]: "K" Key
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [6]: "Q" Key
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [7]: "J" Key
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [8]: "Jo" Key
-    .word (Player_UseMattock-1) & $FFFF     ; [9]: Mattock
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [10]: Magical Rod
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [11]: Crystal
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [12]: Lamp
-    .word (Player_UseHourGlass-1) & $FFFF   ; [13]: Hour Glass
-    .word (GameLoop_UseItem_Return-1) & $FFFF ; [14]: Book
-    .word (Player_UseWingBoots-1) & $FFFF   ; [15]: Wing Boots
-    .word (Player_UseRedPotion-1) & $FFFF   ; [16]: Red Potion
+    pointer GameLoop_UseItem_Return-1       ; [0]: Ring of Elf
+    pointer GameLoop_UseItem_Return-1       ; [1]: Ring of Ruby
+    pointer GameLoop_UseItem_Return-1       ; [2]: Ring of Dworf
+    pointer GameLoop_UseItem_Return-1       ; [3]: Demon's Ring
+    pointer GameLoop_UseItem_Return-1       ; [4]: "A" Key
+    pointer GameLoop_UseItem_Return-1       ; [5]: "K" Key
+    pointer GameLoop_UseItem_Return-1       ; [6]: "Q" Key
+    pointer GameLoop_UseItem_Return-1       ; [7]: "J" Key
+    pointer GameLoop_UseItem_Return-1       ; [8]: "Jo" Key
+    pointer Player_UseMattock-1             ; [9]: Mattock
+    pointer GameLoop_UseItem_Return-1       ; [10]: Magical Rod
+    pointer GameLoop_UseItem_Return-1       ; [11]: Crystal
+    pointer GameLoop_UseItem_Return-1       ; [12]: Lamp
+    pointer Player_UseHourGlass-1           ; [13]: Hour Glass
+    pointer GameLoop_UseItem_Return-1       ; [14]: Book
+    pointer Player_UseWingBoots-1           ; [15]: Wing Boots
+    pointer Player_UseRedPotion-1           ; [16]: Red Potion
 
 
 ;============================================================================
@@ -2497,7 +2497,7 @@ Player_UseElixir:                           ; [$c4ca]
     LDA #$85                                ; 0x85 == Use Elixir.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -2662,7 +2662,7 @@ Player_UseRedPotion:                        ; [$c533]
     LDA #$80                                ; 0x80 == Use Red Potion IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$c53b]
@@ -2777,7 +2777,7 @@ Player_UseWingBoots:                        ; [$c579]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -2915,7 +2915,7 @@ Game_DecWingBootsDuration:                  ; [$c59d]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -2971,7 +2971,7 @@ Player_UseHourGlass:                        ; [$c5c8]
     LDA #$82                                ; Set the IScript to run to 0x82.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3077,7 +3077,7 @@ Game_DecHourGlassDuration:                  ; [$c5eb]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3246,7 +3246,7 @@ Player_UseMattock:                          ; [$c616]
     LDA #$81
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3467,7 +3467,7 @@ Player_PickUpHourGlass:                     ; [$c6be]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3548,7 +3548,7 @@ Player_PickUpWingBoots:                     ; [$c6d8]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3611,7 +3611,7 @@ Player_PickUpBattleSuit:                    ; [$c6ea]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3689,7 +3689,7 @@ Player_PickUpBattleHelmet:                  ; [$c70a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3768,7 +3768,7 @@ Player_PickUpDragonSlayer:                  ; [$c72a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run it.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -3871,7 +3871,7 @@ Player_PickUpMattock:                       ; [$c752]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4131,7 +4131,7 @@ Player_PickUpGlove:                         ; [$c7cf]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4183,7 +4183,7 @@ Player_PickUpBlackOnyx:                     ; [$c7e4]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4236,7 +4236,7 @@ Player_PickUpPendant:                       ; [$c7fa]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4289,7 +4289,7 @@ Player_PickUpMagicalRod:                    ; [$c810]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4342,7 +4342,7 @@ Player_PickUpRedPotion:                     ; [$c826]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4395,7 +4395,7 @@ Player_PickUpPoison:                        ; [$c83c]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4469,7 +4469,7 @@ Player_PickUpElixir:                        ; [$c864]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4521,7 +4521,7 @@ Player_PickUpOintment:                      ; [$c87a]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
 
@@ -4631,7 +4631,7 @@ Game_DecGloveDuration:                      ; [$c89b]
     LDA #$93                                ; 0x93 == Glove is gone IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8b3]
@@ -4696,7 +4696,7 @@ Game_DecOintmentDuration:                   ; [$c8b4]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_return:                                 ; [$c8cc]
@@ -7736,18 +7736,18 @@ Area_LoadTiles:                             ; [$ceb8]
 ;     Area_LoadTiles
 ;
 TILE_INDEX_TO_ADDR:                         ; [$cf07]
-    .word AREA_TILESETS_EOLIS               ; [0]: Eolis
-    .word AREA_TILESETS_BRANCHES            ; [1]: Branches
-    .word AREA_TILESETS_TRUNK               ; [2]: Trunk
-    .word AREA_TILESETS_MIST                ; [3]: Mist
-    .word AREA_TILESETS_DARTMOOR_EVIL_LAIR  ; [4]: Dartmoor Castle Evil Lair
-    .word AREA_TILESETS_TOWNS               ; [5]: Towns
-    .word AREA_TILESETS_KINGSROOM_GURU_HOSPITAL ; [6]: King's Room Guru Room
-                                                ; Hospital
-    .word AREA_TILESETS_SHOPS_HOUSE_TAVERN  ; [7]: Tavern Tool Shop Key Shop
-                                            ; House Meat Shop
-    .word AREA_TILESETS_MARTIALARTS_MAGICTRAINER ; [8]: Martial Arts Magic
-                                                 ; Trainer
+    pointer AREA_TILESETS_EOLIS             ; [0]: Eolis
+    pointer AREA_TILESETS_BRANCHES          ; [1]: Branches
+    pointer AREA_TILESETS_TRUNK             ; [2]: Trunk
+    pointer AREA_TILESETS_MIST              ; [3]: Mist
+    pointer AREA_TILESETS_DARTMOOR_EVIL_LAIR ; [4]: Dartmoor Castle Evil Lair
+    pointer AREA_TILESETS_TOWNS             ; [5]: Towns
+    pointer AREA_TILESETS_KINGSROOM_GURU_HOSPITAL ; [6]: King's Room Guru
+                                                  ; Room Hospital
+    pointer AREA_TILESETS_SHOPS_HOUSE_TAVERN ; [7]: Tavern Tool Shop Key Shop
+                                             ; House Meat Shop
+    pointer AREA_TILESETS_MARTIALARTS_MAGICTRAINER ; [8]: Martial Arts Magic
+                                                   ; Trainer
 
 
 ;============================================================================
@@ -8172,25 +8172,18 @@ PPUBuffer_DrawCommand_Noop:                 ; [$cfbb]
 ;     PPUBuffer_Draw
 ;
 PPUBUFFER_DRAW_COMMANDS:                    ; [$cfbc]
-    .word (PPUBuffer_DrawCommand_WritePalette-1) & $FFFF ; [0]: Command 0x00:
-                                                         ; Write Palette to
-                                                         ; PPU
-    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [1]: Command 0xFF
-    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [2]: Command 0xFE
-    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [3]: Command 0xFD
-    .word (PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1) & $FFFF ; [4]:
-                                                                   ; Command
-                                                                   ; 0xFC:
-                                                                   ; Rotate
-                                                                   ; Tiles
-                                                                   ; Right
-    .word (PPUBuffer_DrawCommand_Noop-1) & $FFFF ; [5]: Command 0xFB
-    .word (PPUBuffer_DrawCommand_RemoveVerticalLines-1) & $FFFF ; [6]:
-                                                                ; Command
-                                                                ; 0xFA:
-                                                                ; Remove
-                                                                ; Vertical
-                                                                ; Lines
+    pointer PPUBuffer_DrawCommand_WritePalette-1 ; [0]: Command 0x00: Write
+                                                 ; Palette to PPU
+    pointer PPUBuffer_DrawCommand_Noop-1    ; [1]: Command 0xFF
+    pointer PPUBuffer_DrawCommand_Noop-1    ; [2]: Command 0xFE
+    pointer PPUBuffer_DrawCommand_Noop-1    ; [3]: Command 0xFD
+    pointer PPUBuffer_DrawCommand_RotateTilesRight1Pixel-1 ; [4]: Command
+                                                           ; 0xFC: Rotate
+                                                           ; Tiles Right
+    pointer PPUBuffer_DrawCommand_Noop-1    ; [5]: Command 0xFB
+    pointer PPUBuffer_DrawCommand_RemoveVerticalLines-1 ; [6]: Command 0xFA:
+                                                        ; Remove Vertical
+                                                        ; Lines
 
 
 ;============================================================================
@@ -10795,20 +10788,20 @@ Screen_RunWriteScrollDataHandler:           ; [$d61d]
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_L:              ; [$d64c]
-    .byte <((Screen_WriteScrollVertPPUTileData-1) & $FFFF) ; [0]:
-    .byte <((Screen_WriteScrollHorizPPUTileData-1) & $FFFF) ; [1]:
-    .byte <((Screen_WriteScrollVertPPUAttrData-1) & $FFFF) ; [2]:
-    .byte <((Screen_WriteScrollHorizPPUAttrData-1) & $FFFF) ; [3]:
+    .byte <(Screen_WriteScrollVertPPUTileData-1) ; [0]:
+    .byte <(Screen_WriteScrollHorizPPUTileData-1) ; [1]:
+    .byte <(Screen_WriteScrollVertPPUAttrData-1) ; [2]:
+    .byte <(Screen_WriteScrollHorizPPUAttrData-1) ; [3]:
 
 ;
 ; XREFS:
 ;     Screen_RunWriteScrollDataHandler
 ;
 SCREEN_WRITESCROLL_HANDLERS_U:              ; [$d650]
-    .byte >((Screen_WriteScrollVertPPUTileData-1) & $FFFF) ; [0]:
-    .byte >((Screen_WriteScrollHorizPPUTileData-1) & $FFFF) ; [1]:
-    .byte >((Screen_WriteScrollVertPPUAttrData-1) & $FFFF) ; [2]:
-    .byte >((Screen_WriteScrollHorizPPUAttrData-1) & $FFFF) ; [3]:
+    .byte >(Screen_WriteScrollVertPPUTileData-1) ; [0]:
+    .byte >(Screen_WriteScrollHorizPPUTileData-1) ; [1]:
+    .byte >(Screen_WriteScrollVertPPUAttrData-1) ; [2]:
+    .byte >(Screen_WriteScrollHorizPPUAttrData-1) ; [3]:
 
 ;============================================================================
 ; TODO: Document Screen_WriteScrollVertPPUTileData
@@ -12098,7 +12091,7 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterIScriptFarJump:                    ; [$d996]
@@ -12112,8 +12105,8 @@ Player_HandleDeath:                         ; [$d8ec]
     ;
     JSR MMC1_LoadBankAndJump                ; Run:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (Player_SetInitialExpAndGold-1) & $FFFF ; Address =
-                                                  ; Player_SetInitialExpAndGold
+    pointer Player_SetInitialExpAndGold-1   ; Address =
+                                            ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$d9a0]
     JSR Screen_FadeToBlack                  ; Fade the screen to black.
@@ -14849,7 +14842,7 @@ GameLoop_CheckShowPlayerMenu:               ; [$e016]
     ;
     JSR MMC1_LoadBankAndJump                ; Open the Player Menu.
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (PlayerMenu_Show-1) & $FFFF       ; Address =
+    pointer PlayerMenu_Show-1               ; Address =
                                             ; PlayerMenu_Show
 
     ;
@@ -18640,14 +18633,14 @@ Player_CheckSwitchScreen:                   ; [$e9c0]
 ;     Player_CheckSwitchScreen
 ;
 AREA_SCREEN_COMPARATORS:                    ; [$ea37]
-    .word BYTE_PRG15_MIRROR__ea4f           ; Eolis
-    .word BYTE_PRG15_MIRROR__ea47           ; Apolune
-    .word BYTE_PRG15_MIRROR__ea4f           ; Forepaw
-    .word BYTE_PRG15_MIRROR__ea4f           ; Mascon
-    .word BYTE_PRG15_MIRROR__ea4f           ; Victim
-    .word BYTE_PRG15_MIRROR__ea4f           ; Conflate
-    .word BYTE_PRG15_MIRROR__ea4f           ; Daybreak
-    .word BYTE_PRG15_MIRROR__ea4f           ; Evil Fortress
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Eolis
+    pointer BYTE_PRG15_MIRROR__ea47         ; Apolune
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Forepaw
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Mascon
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Victim
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Conflate
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Daybreak
+    pointer BYTE_PRG15_MIRROR__ea4f         ; Evil Fortress
 
 BYTE_PRG15_MIRROR__ea47:                    ; [$ea47]
     .byte $0c                               ; Current screen comparator
@@ -18771,14 +18764,14 @@ Player_CheckSwitchScreen_SwitchAreaHoriz:   ; [$ea5f]
 ;     Player_CheckSwitchScreen_SwitchAreaHoriz
 ;
 AREA_TOWN_TRANSITIONS_DATA:                 ; [$ea9c]
-    .word TOWN_TRANSITIONS_EMPTY            ; [0]: Eolis
-    .word TOWN_TRANSITIONS_TRUNK            ; [1]: Trunk
-    .word TOWN_TRANSITIONS_MIST             ; [2]: Mist
-    .word TOWN_TRANSITIONS_TOWNS            ; [3]: Towns
-    .word TOWN_TRANSITIONS_EMPTY            ; [4]: Buildings
-    .word TOWN_TRANSITIONS_BRANCH           ; [5]: Branch
-    .word TOWN_TRANSITIONS_DARTMOOR         ; [6]: Dartmoor
-    .word TOWN_TRANSITIONS_EMPTY            ; [7]: Zenis
+    pointer TOWN_TRANSITIONS_EMPTY          ; [0]: Eolis
+    pointer TOWN_TRANSITIONS_TRUNK          ; [1]: Trunk
+    pointer TOWN_TRANSITIONS_MIST           ; [2]: Mist
+    pointer TOWN_TRANSITIONS_TOWNS          ; [3]: Towns
+    pointer TOWN_TRANSITIONS_EMPTY          ; [4]: Buildings
+    pointer TOWN_TRANSITIONS_BRANCH         ; [5]: Branch
+    pointer TOWN_TRANSITIONS_DARTMOOR       ; [6]: Dartmoor
+    pointer TOWN_TRANSITIONS_EMPTY          ; [7]: Zenis
 
 ;
 ; XREFS:
@@ -19045,15 +19038,15 @@ RETURN_EB3E:                                ; [$eb3e]
 ;     Game_RunDoorRequirementHandler
 ;
 DOOR_REQUIREMENT_LOOKUP_FUNC_ADDRS:         ; [$eb3f]
-    .word (RETURN_EB3E-1) & $FFFF           ; [0]: [0]: No key, return
-    .word (Game_OpenDoorWithAKey-1) & $FFFF ; [0]: [1]: "A" Key
-    .word (Game_OpenDoorWithKKey-1) & $FFFF ; [0]: [2]: "K" Key
-    .word (Game_OpenDoorWithQKey-1) & $FFFF ; [0]: [3]: "Q" Key
-    .word (Game_OpenDoorWithJKey-1) & $FFFF ; [0]: [4]: "J" Key
-    .word (Game_OpenDoorWithJoKey-1) & $FFFF ; [0]: [5]: "Jo" Key
-    .word (Game_OpenDoorWithRingOfElf-1) & $FFFF ; [0]: [6]: Ring of Elf
-    .word (Game_OpenDoorWithRingOfDworf-1) & $FFFF ; [0]: [7]: Ring of Dworf
-    .word (Game_OpenDoorWithDemonsRing-1) & $FFFF ; [0]: [8]: Demon's Ring
+    pointer RETURN_EB3E-1                   ; [0]: [0]: No key, return
+    pointer Game_OpenDoorWithAKey-1         ; [0]: [1]: "A" Key
+    pointer Game_OpenDoorWithKKey-1         ; [0]: [2]: "K" Key
+    pointer Game_OpenDoorWithQKey-1         ; [0]: [3]: "Q" Key
+    pointer Game_OpenDoorWithJKey-1         ; [0]: [4]: "J" Key
+    pointer Game_OpenDoorWithJoKey-1        ; [0]: [5]: "Jo" Key
+    pointer Game_OpenDoorWithRingOfElf-1    ; [0]: [6]: Ring of Elf
+    pointer Game_OpenDoorWithRingOfDworf-1  ; [0]: [7]: Ring of Dworf
+    pointer Game_OpenDoorWithDemonsRing-1   ; [0]: [8]: Demon's Ring
 
 
 ;============================================================================
@@ -19092,7 +19085,7 @@ Game_OpenDoorWithAKey:                      ; [$eb51]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb60]
@@ -19135,7 +19128,7 @@ Game_OpenDoorWithKKey:                      ; [$eb61]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb70]
@@ -19178,7 +19171,7 @@ Game_OpenDoorWithQKey:                      ; [$eb71]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb80]
@@ -19221,7 +19214,7 @@ Game_OpenDoorWithJKey:                      ; [$eb81]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eb90]
@@ -19264,7 +19257,7 @@ Game_OpenDoorWithJoKey:                     ; [$eb91]
                                             ; IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$eba0]
@@ -19306,7 +19299,7 @@ Game_OpenDoorWithRingOfElf:                 ; [$eba1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebb0]
@@ -19348,7 +19341,7 @@ Game_OpenDoorWithRingOfDworf:               ; [$ebb1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebc0]
@@ -19390,7 +19383,7 @@ Game_OpenDoorWithDemonsRing:                ; [$ebc1]
     LDA #$7f                                ; 0x7F == Ring required IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd0]
@@ -19418,7 +19411,7 @@ Game_UnlockDoorWithUsableItem:              ; [$ebd1]
     LDA #$84                                ; 0x84 == Used key IScript.
     JSR MMC1_LoadBankAndJump                ; Run the IScript:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (IScripts_Begin-1) & $FFFF        ; Address =
+    pointer IScripts_Begin-1                ; Address =
                                             ; IScripts_Begin
 
   @_afterFarJump:                           ; [$ebd9]
@@ -21157,16 +21150,13 @@ GameLoop_RunScreenEventHandlers:            ; [$ef4b]
 ;     GameLoop_RunScreenEventHandlers
 ;
 SPECIAL_SCREEN_EVENT_LOOKUP_TABLE:          ; [$ef63]
-    .word (ScreenEvents_HandlePathToMasconEvent-1) & $FFFF ; [0]: Handle
-                                                           ; pushable block
-                                                           ; on path to
-                                                           ; Mascon.
-    .word (ScreenEvents_HandleBoss-1) & $FFFF ; [1]: Handle a standard boss
-                                              ; battle.
-    .word (ScreenEvents_HandleFinalBossKilled-1) & $FFFF ; [2]: Handle
-                                                         ; end-game sequence
-                                                         ; after killing the
-                                                         ; final boss.
+    pointer ScreenEvents_HandlePathToMasconEvent-1 ; [0]: Handle pushable
+                                                   ; block on path to Mascon.
+    pointer ScreenEvents_HandleBoss-1       ; [1]: Handle a standard boss
+                                            ; battle.
+    pointer ScreenEvents_HandleFinalBossKilled-1 ; [2]: Handle end-game
+                                                 ; sequence after killing the
+                                                 ; final boss.
 
 
 ;============================================================================
@@ -22638,8 +22628,8 @@ IScripts_ClearPortraitImage:                ; [$f281]
     JSR MMC1_LoadBankAndJump                ; Load sprite imagesin bank 14.
     .byte BANK_14_LOGIC                     ; Bank = 14 Address =
                                             ; GameLoop_LoadSpriteImages
-    .word (GameLoop_LoadSpriteImages-1) & $FFFF ; GameLoop_LoadSpriteImages
-                                                ; [$PRG15_MIRROR::f296]
+    pointer GameLoop_LoadSpriteImages-1     ; GameLoop_LoadSpriteImages
+                                            ; [$PRG15_MIRROR::f296]
 
   @_afterFarJump:                           ; [$f298]
     RTS
@@ -27062,7 +27052,7 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (StartScreen_Draw-1) & $FFFF      ; Address =
+    pointer StartScreen_Draw-1              ; Address =
                                             ; StartScreen_Draw
 
 
@@ -27079,8 +27069,8 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (StartScreen_CheckHandleInput-1) & $FFFF ; Address =
-                                                   ; StartScreen_CheckHandleInput
+    pointer StartScreen_CheckHandleInput-1  ; Address =
+                                            ; StartScreen_CheckHandleInput
 
   @_afterCheckHandleInputFarJump:           ; [$fc7a]
     LDA Joy1_ChangedButtonMask              ; Check the changed controller 1
@@ -27108,7 +27098,7 @@ Game_ShowStartScreen:                       ; [$fc65]
     ;
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (PasswordScreen_Show-1) & $FFFF   ; Address =
+    pointer PasswordScreen_Show-1           ; Address =
                                             ; PasswordScreen_Show
 
 
@@ -27118,8 +27108,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_afterPasswordScreenShow:                ; [$fc8f]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (Player_SetInitialExpAndGold-1) & $FFFF ; Address =
-                                                  ; Player_SetInitialExpAndGold
+    pointer Player_SetInitialExpAndGold-1   ; Address =
+                                            ; Player_SetInitialExpAndGold
 
   @_afterSetExpGoldFarJump:                 ; [$fc95]
     JMP Player_Spawn
@@ -27133,8 +27123,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_startGame:                              ; [$fc98]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (SplashAnimation_RunIntro-1) & $FFFF ; Address =
-                                               ; SplashAnimation_RunIntro
+    pointer SplashAnimation_RunIntro-1      ; Address =
+                                            ; SplashAnimation_RunIntro
 
 
     ;
@@ -27143,8 +27133,8 @@ Game_ShowStartScreen:                       ; [$fc65]
   @_afterRunIntroFarJump:                   ; [$fc9e]
     JSR MMC1_LoadBankAndJump                ; Jump to:
     .byte BANK_12_LOGIC                     ; Bank = 12
-    .word (Player_SetStartGameState-1) & $FFFF ; Address =
-                                               ; Player_SetStartGameState
+    pointer Player_SetStartGameState-1      ; Address =
+                                            ; Player_SetStartGameState
 
 
     ;
@@ -27388,9 +27378,9 @@ PPU_ClearAllTilemaps:                       ; [$fcb9]
     .byte $07                               ; Title length: 8 bytes
     .byte $18                               ; Licensee Code: Hudson Soft
     .byte $94                               ; Header validation byte
-    .word OnInterrupt                       ; OnInterrupt
+    pointer OnInterrupt                     ; OnInterrupt
                                             ; [$PRG15_MIRROR::fffa]
-    .word Game_Init                         ; Game_Init
+    pointer Game_Init                       ; Game_Init
                                             ; [$PRG15_MIRROR::fffc]
     .byte $d5                               ; [$fffe] undefined
 

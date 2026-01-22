@@ -10276,7 +10276,8 @@ ISCRIPT_EOLIS_WALKING_MAN_1:                ; [$a0a3]
     .byte ISCRIPT_ENTITY_GENERIC            ; Show a generic textbox.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_NPC_FIRST_WALKING_MAN_GO_TO_APOLUNE ; If yes, then jump.
+    pointer @_ISCRIPT_NPC_FIRST_WALKING_MAN_GO_TO_APOLUNE ; If yes, then
+                                                          ; jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_GO_SEE_KING.
     .byte MESSAGEID_GO_SEE_KING             ; [$a0a8] Message
@@ -10324,7 +10325,7 @@ ISCRIPT_EOLIS_WALKING_WOMAN_1:              ; [$a0b1]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Elf.
     .byte SPECIAL_RING_OF_ELF               ; [$a0b3] InventoryItem
-    .word @_ISCRIPT_A081_HAS_RING           ; If yes, jump.
+    pointer @_ISCRIPT_A081_HAS_RING         ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THIS_IS_EOLIS.
     .byte MESSAGEID_THIS_IS_EOLIS           ; [$a0b7] Message
@@ -10360,7 +10361,7 @@ ISCRIPT_EOLIS_GURU:                         ; [$a0bc]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Elf.
     .byte SPECIAL_RING_OF_ELF               ; [$a0be] InventoryItem
-    .word @_ISCRIPT_GURU_EOLIS_HAS_RING     ; If yes, then jump.
+    pointer @_ISCRIPT_GURU_EOLIS_HAS_RING   ; If yes, then jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_TAKE_RING_TO_KING.
     .byte MESSAGEID_TAKE_RING_TO_KING       ; [$a0c2] Message
@@ -10391,7 +10392,7 @@ ISCRIPT_EOLIS_WALKING_WOMAN_2:              ; [$a0c9]
     .byte ISCRIPT_ENTITY_GENERIC            ; Show a generic text box.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_A0C9_HAS_GOLD           ; If yes, jump.
+    pointer @_ISCRIPT_A0C9_HAS_GOLD         ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_LAST_WELL_ALMOST_DRY.
     .byte MESSAGEID_LAST_WELL_ALMOST_DRY    ; [$a0ce] Message
@@ -10425,7 +10426,7 @@ ISCRIPT_EOLIS_SMOKING_MAN:                  ; [$a0d3]
     .byte ISCRIPT_ENTITY_GENERIC            ; Show a generic text box.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_NPC_SMOKING_MAN_HAS_GOLD ; If yes, jump.
+    pointer @_ISCRIPT_NPC_SMOKING_MAN_HAS_GOLD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DWARVES_ARE_HERE.
     .byte MESSAGEID_DWARVES_ARE_HERE        ; [$a0d8] Message
@@ -10463,7 +10464,7 @@ ISCRIPT_EOLIS_KINGS_GUARD:                  ; [$a0dd]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Elf.
     .byte SPECIAL_RING_OF_ELF               ; [$a0df] InventoryItem
-    .word @_ISCRIPT_KINGS_GUARD_HAS_RING    ; If yes, jump.
+    pointer @_ISCRIPT_KINGS_GUARD_HAS_RING  ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_CANT_LET_YOU_GO.
     .byte MESSAGEID_CANT_LET_YOU_GO         ; [$a0e3] Message
@@ -10472,7 +10473,7 @@ ISCRIPT_EOLIS_KINGS_GUARD:                  ; [$a0dd]
   @_ISCRIPT_KINGS_GUARD_HAS_RING:           ; [$a0e5]
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_KINGS_GUARD_HAS_GOLD    ; If yes, then jump.
+    pointer @_ISCRIPT_KINGS_GUARD_HAS_GOLD  ; If yes, then jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_KING_IS_WAITING.
     .byte MESSAGEID_KING_IS_WAITING         ; [$a0e9] Message
@@ -10500,7 +10501,7 @@ ISCRIPT_A0EE:                               ; [$a0ee]
     .byte ISCRIPT_ENTITY_GENERIC            ; Show a generic text box.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_A0EE_HAS_GOLD           ; If yes, jump.
+    pointer @_ISCRIPT_A0EE_HAS_GOLD         ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DWARVES_ROBBING_ELVES.
     .byte MESSAGEID_DWARVES_ROBBING_ELVES   ; [$a0f3] Message
@@ -10528,7 +10529,7 @@ ISCRIPT_A0F8:                               ; [$a0f8]
     .byte ISCRIPT_ENTITY_GENERIC            ; Show a generic text box.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has any
                                             ; gold.
-    .word @_ISCRIPT_A0F8_HAS_GOLD           ; If yes, jump.
+    pointer @_ISCRIPT_A0F8_HAS_GOLD         ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_LISTEN_TO_PEOPLE.
     .byte MESSAGEID_LISTEN_TO_PEOPLE        ; [$a0fd] Message
@@ -10585,7 +10586,7 @@ ISCRIPT_A10B:                               ; [$a10b]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Small Shield.
     .byte SHIELD_SMALL                      ; [$a10d] InventoryItem
-    .word @_ISCRIPT_A10B_HAS_SMALL_SHIELD   ; If yes, jump.
+    pointer @_ISCRIPT_A10B_HAS_SMALL_SHIELD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_APOLUNE.
     .byte MESSAGEID_WELCOME_TO_APOLUNE      ; [$a111] Message
@@ -10614,7 +10615,7 @@ ISCRIPT_A116:                               ; [$a116]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Small Shield.
     .byte SHIELD_SMALL                      ; [$a118] InventoryItem
-    .word @_ISCRIPT_A116_HAS_SMALL_SHIELD   ; If yes, jump.
+    pointer @_ISCRIPT_A116_HAS_SMALL_SHIELD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DIRECTIONS_TO_TRUNK.
     .byte MESSAGEID_DIRECTIONS_TO_TRUNK     ; [$a11c] Message
@@ -10643,7 +10644,7 @@ ISCRIPT_A121:                               ; [$a121]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Small Shield.
     .byte SHIELD_SMALL                      ; [$a123] InventoryItem
-    .word @_ISCRIPT_A121_HAS_SMALL_SHIELD   ; If yes, jump.
+    pointer @_ISCRIPT_A121_HAS_SMALL_SHIELD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_SHOULD_HAVE_SHIELD.
     .byte MESSAGEID_SHOULD_HAVE_SHIELD      ; [$a127] Message
@@ -10672,7 +10673,7 @@ ISCRIPT_A12C:                               ; [$a12c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Small Shield.
     .byte SHIELD_SMALL                      ; [$a12e] InventoryItem
-    .word @_ISCRIPT_A12C_HAS_SMALL_SHIELD   ; If yes, jump.
+    pointer @_ISCRIPT_A12C_HAS_SMALL_SHIELD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_BLOCKED_PASSAGE.
     .byte MESSAGEID_BLOCKED_PASSAGE         ; [$a132] Message
@@ -10720,7 +10721,7 @@ ISCRIPT_A13B:                               ; [$a13b]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Small Shield.
     .byte SHIELD_SMALL                      ; [$a13d] InventoryItem
-    .word @_ISCRIPT_A13B_HAS_SMALL_SHIELD   ; If yes, jump.
+    pointer @_ISCRIPT_A13B_HAS_SMALL_SHIELD ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_DOCTOR_CAN_HELP.
     .byte MESSAGEID_DOCTOR_CAN_HELP         ; [$a141] Message
@@ -10749,7 +10750,7 @@ ISCRIPT_A146:                               ; [$a146]
     .byte ISCRIPT_ACTION_CHECK_PLAYER_RANK  ; Check if the player has reached
                                             ; Aspirant yet.
     .byte RANK_ASPIRANT                     ; [$a148] PlayerTitle
-    .word @_ISCRIPT_A146_HAS_ASPIRANT       ; If yes, jump.
+    pointer @_ISCRIPT_A146_HAS_ASPIRANT     ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_LEARN_MANTRAS.
     .byte MESSAGEID_LEARN_MANTRAS           ; [$a14c] Message
@@ -10816,7 +10817,8 @@ ISCRIPT_FOREPAW_GREETER:                    ; [$a157]
                                             ; completed the Spring of Trunk
                                             ; quest.
     .byte QUEST_SPRING_OF_TRUNK             ; [$a159] Quests
-    .word @_ISCRIPT_FOREPAW_GREETER_SPRING_OF_TRUNK_COMPLETE ; If yes, jump.
+    pointer @_ISCRIPT_FOREPAW_GREETER_SPRING_OF_TRUNK_COMPLETE ; If yes,
+                                                               ; jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_FOREPAW.
     .byte MESSAGEID_WELCOME_TO_FOREPAW      ; [$a15d] Message
@@ -10845,7 +10847,7 @@ ISCRIPT_A162:                               ; [$a162]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Ruby.
     .byte SPECIAL_RING_OF_RUBY              ; [$a164] InventoryItem
-    .word @_ISCRIPT_A162_HAS_RING_OF_RUBY   ; If yes, jump.
+    pointer @_ISCRIPT_A162_HAS_RING_OF_RUBY ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_FIND_3_SPRINGS.
     .byte MESSAGEID_FIND_3_SPRINGS          ; [$a168] Message
@@ -10875,7 +10877,7 @@ ISCRIPT_A16D:                               ; [$a16d]
                                             ; completed the Spring of Trunk
                                             ; quest.
     .byte QUEST_SPRING_OF_TRUNK             ; [$a16f] Quests
-    .word @_ISCRIPT_A175                    ; If yes, jump.
+    pointer @_ISCRIPT_A175                  ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_FOUNTAIN_IN_SKY.
     .byte MESSAGEID_FOUNTAIN_IN_SKY         ; [$a173] Message
@@ -10905,7 +10907,7 @@ ISCRIPT_A178:                               ; [$a178]
                                             ; completed the Spring of Trunk
                                             ; quest.
     .byte QUEST_SPRING_OF_TRUNK             ; [$a17a] Quests
-    .word @_ISCRIPT_A178_SPRING_OF_TRUNK_COMPLETED ; If yes, jump.
+    pointer @_ISCRIPT_A178_SPRING_OF_TRUNK_COMPLETED ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_SPRING_IN_TOWER.
     .byte MESSAGEID_SPRING_IN_TOWER         ; [$a17e] Message
@@ -10916,7 +10918,7 @@ ISCRIPT_A178:                               ; [$a178]
                                             ; completed the Spring of Sky
                                             ; quest.
     .byte QUEST_SPRING_OF_SKY               ; [$a181] Quests
-    .word @_ISCRIPT_A178_SPRING_OF_SKY_COMPLETED ; If yes, jump.
+    pointer @_ISCRIPT_A178_SPRING_OF_SKY_COMPLETED ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WINGBOOTS_IN_TOWER.
     .byte MESSAGEID_WINGBOOTS_IN_TOWER      ; [$a185] Message
@@ -10945,7 +10947,7 @@ ISCRIPT_A18A:                               ; [$a18a]
     .byte ISCRIPT_ACTION_CHECK_QUEST        ; Check if the Spring of Sky
                                             ; quest is complete.
     .byte QUEST_SPRING_OF_SKY               ; [$a18c] Quests
-    .word @_ISCRIPT_A18A_IS_COMPLETE        ; If yes, jump.
+    pointer @_ISCRIPT_A18A_IS_COMPLETE      ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_FOUNTAIN_IN_SKY_HINT.
     .byte MESSAGEID_FOUNTAIN_IN_SKY_HINT    ; [$a190] Message
@@ -10955,7 +10957,7 @@ ISCRIPT_A18A:                               ; [$a18a]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Joker key.
     .byte KEY_JO                            ; [$a193] InventoryItem
-    .word @_ISCRIPT_A192_HAS_JOKER          ; If yes, jump.
+    pointer @_ISCRIPT_A192_HAS_JOKER        ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_USE_THIS_KEY_FOR_FIRST_SPRING.
     .byte MESSAGEID_USE_THIS_KEY_FOR_FIRST_SPRING ; [$a197] Message
@@ -10993,7 +10995,7 @@ ISCRIPT_SPRING_OF_SKY:                      ; [$a19e]
     .byte ISCRIPT_ACTION_CHECK_QUEST        ; Check if the Spring of Sky
                                             ; quest is complete.
     .byte QUEST_SPRING_OF_SKY               ; [$a1a0] Quests
-    .word @_ISCRIPT_SPRING_OF_SKY_IS_COMPLETE ; If it has, jump.
+    pointer @_ISCRIPT_SPRING_OF_SKY_IS_COMPLETE ; If it has, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_HO_HO_HO_ZZZ.
     .byte MESSAGEID_HO_HO_HO_ZZZ            ; [$a1a4] Message
@@ -11033,14 +11035,14 @@ ISCRIPT_SPRING_OF_TRUNK:                    ; [$a1ab]
     .byte ISCRIPT_ACTION_CHECK_QUEST        ; Check if the Spring of Trunk
                                             ; quest is complete.
     .byte QUEST_SPRING_OF_TRUNK             ; [$a1ad] Quests
-    .word @_ISCRIPT_SPRING_OF_TRUNK_IS_COMPLETE ; If yes, jump.
+    pointer @_ISCRIPT_SPRING_OF_TRUNK_IS_COMPLETE ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Else, show
                                                ; MESSAGE_THIS_IS_SPRING_OF_TRUNK_GET_ELIXIR.
     .byte MESSAGEID_THIS_IS_SPRING_OF_TRUNK_GET_ELIXIR ; [$a1b1] Message
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Elixir.
     .byte SPECIAL_ELIXIR                    ; [$a1b3] InventoryItem
-    .word @_ISCRIPT_SPRING_OF_TRUNK_HAS_ELIXIR ; If yes, jump.
+    pointer @_ISCRIPT_SPRING_OF_TRUNK_HAS_ELIXIR ; If yes, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_COME_BACK_WITH_MEDICINE.
     .byte MESSAGEID_COME_BACK_WITH_MEDICINE ; [$a1b7] Message
@@ -11080,7 +11082,7 @@ ISCRIPT_A1C3:                               ; [$a1c3]
     .byte ISCRIPT_ACTION_CHECK_QUEST        ; Check if all spring quests are
                                             ; complete.
     .byte $03                               ; [$a1c5] Quests
-    .word @_ISCRIPT_A1C3_COMPLETED_SPRINGS  ; If so, jump.
+    pointer @_ISCRIPT_A1C3_COMPLETED_SPRINGS ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_WILL_REVIVE_SPRING
     .byte MESSAGEID_WILL_REVIVE_SPRING      ; [$a1c9] Message
@@ -11093,7 +11095,7 @@ ISCRIPT_A1C3:                               ; [$a1c3]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Ruby.
     .byte SPECIAL_RING_OF_RUBY              ; [$a1ce] InventoryItem
-    .word @_ISCRIPT_A1CD_HAS_RING_OF_RUBY   ; If so, jump.
+    pointer @_ISCRIPT_A1CD_HAS_RING_OF_RUBY ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_GIVING_RING_OF_RUBY
     .byte MESSAGEID_GIVING_RING_OF_RUBY     ; [$a1d2] Message
@@ -11125,7 +11127,7 @@ ISCRIPT_A1D9:                               ; [$a1d9]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Large Shield.
     .byte SHIELD_LARGE                      ; [$a1db] InventoryItem
-    .word @_ISCRIPT_A1D9_HAS_LARGE_SHIELD   ; If so, jump.
+    pointer @_ISCRIPT_A1D9_HAS_LARGE_SHIELD ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_MASCON
     .byte MESSAGEID_WELCOME_TO_MASCON       ; [$a1df] Message
@@ -11154,7 +11156,7 @@ ISCRIPT_A1E4:                               ; [$a1e4]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Pendant.
     .byte SPECIAL_PENDANT                   ; [$a1e6] InventoryItem
-    .word @_ISCRIPT_A1E4_HAS_PENDANT        ; If so, jump.
+    pointer @_ISCRIPT_A1E4_HAS_PENDANT      ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_METEORITE_BECOMES_POISON
     .byte MESSAGEID_METEORITE_BECOMES_POISON ; [$a1ea] Message
@@ -11183,7 +11185,7 @@ ISCRIPT_A1EF:                               ; [$a1ef]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Large Shield.
     .byte SHIELD_LARGE                      ; [$a1f1] InventoryItem
-    .word @_ISCRIPT_A1EF_HAS_SHIELD         ; If so, branch.
+    pointer @_ISCRIPT_A1EF_HAS_SHIELD       ; If so, branch.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_STORES_OUTSIDE_TOWN
     .byte MESSAGEID_STORES_OUTSIDE_TOWN     ; [$a1f5] Message
@@ -11212,7 +11214,7 @@ ISCRIPT_A1FA:                               ; [$a1fa]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Fire magic.
     .byte MAGIC_FIRE                        ; [$a1fc] InventoryItem
-    .word @_ISCRIPT_A1FA_HAS_FIRE           ; If so, jump.
+    pointer @_ISCRIPT_A1FA_HAS_FIRE         ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DIRECTIONS_TO_SUFFER.
     .byte MESSAGEID_DIRECTIONS_TO_SUFFER    ; [$a200] Message
@@ -11241,7 +11243,7 @@ ISCRIPT_A205:                               ; [$a205]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Fire magic.
     .byte MAGIC_FIRE                        ; [$a207] InventoryItem
-    .word @_ISCRIPT_A205_HAS_FIRE           ; If so, jump.
+    pointer @_ISCRIPT_A205_HAS_FIRE         ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_MIST
     .byte MESSAGEID_WELCOME_TO_MIST         ; [$a20b] Message
@@ -11278,7 +11280,7 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_MAN:           ; [$a210]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Pendant.
     .byte SPECIAL_PENDANT                   ; [$a212] InventoryItem
-    .word @_ISCRIPT_OVERWORLD_MIST_HOUSE_MAN_HAS_PENDANT ; If so, jump.
+    pointer @_ISCRIPT_OVERWORLD_MIST_HOUSE_MAN_HAS_PENDANT ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_TOWER_OF_SUFFER_SOON.
     .byte MESSAGEID_TOWER_OF_SUFFER_SOON    ; [$a216] Message
@@ -11315,7 +11317,7 @@ ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN:         ; [$a21b]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Pendant.
     .byte SPECIAL_PENDANT                   ; [$a21d] InventoryItem
-    .word @_ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN_HAS_PENDANT ; If so, jump.
+    pointer @_ISCRIPT_OVERWORLD_MIST_HOUSE_WOMAN_HAS_PENDANT ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DWARVES_CHANTING.
     .byte MESSAGEID_DWARVES_CHANTING        ; [$a221] Message
@@ -11344,7 +11346,7 @@ ISCRIPT_A226:                               ; [$a226]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Hour Glass.
     .byte ITEM_HOUR_GLASS                   ; [$a228] InventoryItem
-    .word @_ISCRIPT_A226_HAS_HOURGLASS      ; If so, jump.
+    pointer @_ISCRIPT_A226_HAS_HOURGLASS    ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_HOUR_GLASS.
     .byte MESSAGEID_HOUR_GLASS              ; [$a22c] Message
@@ -11373,7 +11375,7 @@ ISCRIPT_A231:                               ; [$a231]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Thunder magic.
     .byte MAGIC_THUNDER                     ; [$a233] InventoryItem
-    .word @_ISCRIPT_A231_HAS_THUNDER        ; If so, jump.
+    pointer @_ISCRIPT_A231_HAS_THUNDER      ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_VICTIM.
     .byte MESSAGEID_WELCOME_TO_VICTIM       ; [$a237] Message
@@ -11402,7 +11404,7 @@ ISCRIPT_A23C:                               ; [$a23c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Thunder magic.
     .byte MAGIC_THUNDER                     ; [$a23e] InventoryItem
-    .word @_ISCRIPT_A23C_HAS_THUNDER        ; If so, jump.
+    pointer @_ISCRIPT_A23C_HAS_THUNDER      ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_MAGIC_CONSUMES_POWER.
     .byte MESSAGEID_MAGIC_CONSUMES_POWER    ; [$a242] Message
@@ -11431,7 +11433,7 @@ ISCRIPT_A247:                               ; [$a247]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Thunder magic.
     .byte MAGIC_THUNDER                     ; [$a249] InventoryItem
-    .word @_ISCRIPT_A247_HAS_THUNDER        ; If so, jump.
+    pointer @_ISCRIPT_A247_HAS_THUNDER      ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_MAGIC_HALL_OUTSIDE_TOWN.
     .byte MESSAGEID_MAGIC_HALL_OUTSIDE_TOWN ; [$a24d] Message
@@ -11460,7 +11462,7 @@ ISCRIPT_A252:                               ; [$a252]
     .byte ISCRIPT_ACTION_CHECK_PLAYER_RANK  ; Check if the Player has at
                                             ; least the Soldier rank.
     .byte RANK_SOLDIER                      ; [$a254] PlayerTitle
-    .word @_ISCRIPT_A252_HAS_RANK           ; If so, jump.
+    pointer @_ISCRIPT_A252_HAS_RANK         ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_GO_TO_CAPITAL.
     .byte MESSAGEID_GO_TO_CAPITAL           ; [$a258] Message
@@ -11470,7 +11472,7 @@ ISCRIPT_A252:                               ; [$a252]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Full Plate armor.
     .byte ARMOR_FULL_PLATE                  ; [$a25b] InventoryItem
-    .word @_ISCRIPT_A252_HAS_ARMOR          ; If so, jump.
+    pointer @_ISCRIPT_A252_HAS_ARMOR        ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_GOT_ARMOR_FOR_BOTTLE.
     .byte MESSAGEID_GOT_ARMOR_FOR_BOTTLE    ; [$a25f] Message
@@ -11502,7 +11504,7 @@ ISCRIPT_A266:                               ; [$a266]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Thunder magic.
     .byte MAGIC_THUNDER                     ; [$a268] InventoryItem
-    .word @_ISCRIPT_A266_HAS_THUNDER        ; If so, jump.
+    pointer @_ISCRIPT_A266_HAS_THUNDER      ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_IM_LOST.
     .byte MESSAGEID_IM_LOST                 ; [$a26c] Message
@@ -11531,7 +11533,7 @@ ISCRIPT_A271:                               ; [$a271]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Thunder magic.
     .byte MAGIC_THUNDER                     ; [$a273] InventoryItem
-    .word @_ISCRIPT_A271_HAS_THUNDER        ; If so, branch.
+    pointer @_ISCRIPT_A271_HAS_THUNDER      ; If so, branch.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_MAGIC_OF_JUSTICE_OR_DESTRUCTION.
     .byte MESSAGEID_MAGIC_OF_JUSTICE_OR_DESTRUCTION ; [$a277] Message
@@ -11560,7 +11562,7 @@ ISCRIPT_A27C:                               ; [$a27c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Black Onyx.
     .byte SPECIAL_BLACK_ONYX                ; [$a27e] InventoryItem
-    .word @_ISCRIPT_A27C_HAS_BLACK_ONYX     ; If so, jump.
+    pointer @_ISCRIPT_A27C_HAS_BLACK_ONYX   ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DIRECTIONS_TO_TOWER_OF_MIST.
     .byte MESSAGEID_DIRECTIONS_TO_TOWER_OF_MIST ; [$a282] Message
@@ -11570,7 +11572,7 @@ ISCRIPT_A27C:                               ; [$a27c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the "A"
                                             ; key.
     .byte KEY_A                             ; [$a285] InventoryItem
-    .word @_ISCRIPT_A27C_HAS_KEY            ; If so, jump.
+    pointer @_ISCRIPT_A27C_HAS_KEY          ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_USE_KEY_FOR_CONFLATE.
     .byte MESSAGEID_USE_KEY_FOR_CONFLATE    ; [$a289] Message
@@ -11602,7 +11604,7 @@ ISCRIPT_A290:                               ; [$a290]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Giant Blade.
     .byte WEAPON_GIANT_BLADE                ; [$a292] InventoryItem
-    .word @_ISCRIPT_A290_HAS_GIANT_BLADE    ; If so, jump.
+    pointer @_ISCRIPT_A290_HAS_GIANT_BLADE  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WELCOME_TO_CONFLATE.
     .byte MESSAGEID_WELCOME_TO_CONFLATE     ; [$a296] Message
@@ -11631,7 +11633,7 @@ ISCRIPT_A29B:                               ; [$a29b]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Giant Blade.
     .byte WEAPON_GIANT_BLADE                ; [$a29d] InventoryItem
-    .word @_ISCRIPT_A29B_HAS_GIANT_BLADE    ; If so, jump.
+    pointer @_ISCRIPT_A29B_HAS_GIANT_BLADE  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_TOWN_SURROUNDED_BY_DOORS.
     .byte MESSAGEID_TOWN_SURROUNDED_BY_DOORS ; [$a2a1] Message
@@ -11660,7 +11662,7 @@ ISCRIPT_A2A6:                               ; [$a2a6]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Dworf.
     .byte SPECIAL_RING_OF_DWORF             ; [$a2a8] InventoryItem
-    .word @_ISCRIPT_A2A6_HAS_RING_OF_DWORF  ; If so, jump.
+    pointer @_ISCRIPT_A2A6_HAS_RING_OF_DWORF ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_GUARDIAN_OF_GURU.
     .byte MESSAGEID_GUARDIAN_OF_GURU        ; [$a2ac] Message
@@ -11670,7 +11672,7 @@ ISCRIPT_A2A6:                               ; [$a2a6]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Magical Rod.
     .byte SPECIAL_MAGICAL_ROD               ; [$a2af] InventoryItem
-    .word @_ISCRIPT_A2A6_HAS_MAGICAL_ROD    ; If so, jump.
+    pointer @_ISCRIPT_A2A6_HAS_MAGICAL_ROD  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_SOMETHING_YOU_CAN_GET.
     .byte MESSAGEID_SOMETHING_YOU_CAN_GET   ; [$a2b3] Message
@@ -11699,7 +11701,7 @@ ISCRIPT_A2B8:                               ; [$a2b8]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Helmet.
     .byte SHIELD_BATTLE_HELMET              ; [$a2ba] InventoryItem
-    .word @_ISCRIPT_A2B8_HAS_BATTLE_HELMET  ; If so, jump.
+    pointer @_ISCRIPT_A2B8_HAS_BATTLE_HELMET ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_USED_TO_TRADE_WITH_DWARVES.
     .byte MESSAGEID_USED_TO_TRADE_WITH_DWARVES ; [$a2be] Message
@@ -11728,7 +11730,7 @@ ISCRIPT_A2C3:                               ; [$a2c3]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Helmet.
     .byte SHIELD_BATTLE_HELMET              ; [$a2c5] InventoryItem
-    .word @_ISCRIPT_A2C3_HAS_BATTLE_HELMET  ; If so, jump.
+    pointer @_ISCRIPT_A2C3_HAS_BATTLE_HELMET ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_USED_TO_VISIT_DWARVES.
     .byte MESSAGEID_USED_TO_VISIT_DWARVES   ; [$a2c9] Message
@@ -11757,7 +11759,7 @@ ISCRIPT_A2CE:                               ; [$a2ce]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Tilte magic.
     .byte MAGIC_TILTE                       ; [$a2d0] InventoryItem
-    .word @_ISCRIPT_A2CE_HAS_TILTE          ; If so, jump.
+    pointer @_ISCRIPT_A2CE_HAS_TILTE        ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DIRECTIONS_DAYBREAK.
     .byte MESSAGEID_DIRECTIONS_DAYBREAK     ; [$a2d4] Message
@@ -11786,7 +11788,7 @@ ISCRIPT_A2D9:                               ; [$a2d9]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Suit.
     .byte ARMOR_BATTLE_SUIT                 ; [$a2db] InventoryItem
-    .word @_ISCRIPT_A2D9_HAS_BATTLE_SUIT    ; If so, jump.
+    pointer @_ISCRIPT_A2D9_HAS_BATTLE_SUIT  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_LOOK_FOR_BATTLE_SUIT.
     .byte MESSAGEID_LOOK_FOR_BATTLE_SUIT    ; [$a2df] Message
@@ -11817,7 +11819,7 @@ ISCRIPT_A2E4:                               ; [$a2e4]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Dworf.
     .byte SPECIAL_RING_OF_DWORF             ; [$a2e6] InventoryItem
-    .word @_ISCRIPT_A2E4_HAS_RING_OF_DWORF  ; If so, jump.
+    pointer @_ISCRIPT_A2E4_HAS_RING_OF_DWORF ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_YOU_ARE_FAMOUS_GOOD_LOOKING.
     .byte MESSAGEID_YOU_ARE_FAMOUS_GOOD_LOOKING ; [$a2ea] Message
@@ -11846,7 +11848,7 @@ ISCRIPT_A2EF:                               ; [$a2ef]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Suit.
     .byte ARMOR_BATTLE_SUIT                 ; [$a2f1] InventoryItem
-    .word @_ISCRIPT_A2EF_HAS_BATTLE_SUIT    ; If so, jump.
+    pointer @_ISCRIPT_A2EF_HAS_BATTLE_SUIT  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_WHEN_TAKE_BATH.
     .byte MESSAGEID_WHEN_TAKE_BATH          ; [$a2f5] Message
@@ -11875,7 +11877,7 @@ ISCRIPT_A2FA:                               ; [$a2fa]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Suit.
     .byte ARMOR_BATTLE_SUIT                 ; [$a2fc] InventoryItem
-    .word @_ISCRIPT_A2FA_HAS_BATTLE_SUIT    ; If so, jump.
+    pointer @_ISCRIPT_A2FA_HAS_BATTLE_SUIT  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DID_YOU_GET_BATTLE_SUIT.
     .byte MESSAGEID_DID_YOU_GET_BATTLE_SUIT ; [$a300] Message
@@ -11904,7 +11906,7 @@ ISCRIPT_A305:                               ; [$a305]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Suit.
     .byte ARMOR_BATTLE_SUIT                 ; [$a307] InventoryItem
-    .word @_ISCRIPT_A305_HAS_BATTLE_SUIT    ; If so, jump.
+    pointer @_ISCRIPT_A305_HAS_BATTLE_SUIT  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_IS_FIRST_VISIT_TO_STORE.
     .byte MESSAGEID_IS_FIRST_VISIT_TO_STORE ; [$a30b] Message
@@ -11933,7 +11935,7 @@ ISCRIPT_A310:                               ; [$a310]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Dragon Slayer.
     .byte WEAPON_DRAGON_SLAYER              ; [$a312] InventoryItem
-    .word @_ISCRIPT_A310_HAS_DRAGON_SLAYER  ; If so, jump.
+    pointer @_ISCRIPT_A310_HAS_DRAGON_SLAYER ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_DIRECTIONS_TO_FRATERNAL.
     .byte MESSAGEID_DIRECTIONS_TO_FRATERNAL ; [$a316] Message
@@ -11969,7 +11971,7 @@ ISCRIPT_OVERWORLD_HOUSE_MAN:                ; [$a31b]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Dragon Slayer.
     .byte WEAPON_DRAGON_SLAYER              ; [$a31d] InventoryItem
-    .word @_ISCRIPT_OVERWORLD_HOUSE_MAN_HAS_DRAGON_SLAYER ; If so, jump.
+    pointer @_ISCRIPT_OVERWORLD_HOUSE_MAN_HAS_DRAGON_SLAYER ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_KING_GRIEVE_HAS_DRAGON_SLAYER.
     .byte MESSAGEID_KING_GRIEVE_HAS_DRAGON_SLAYER ; [$a321] Message
@@ -12006,7 +12008,7 @@ ISCRIPT_OVERWORLD_HOUSE_WOMAN:              ; [$a326]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Dragon Slayer.
     .byte WEAPON_DRAGON_SLAYER              ; [$a328] InventoryItem
-    .word @_ISCRIPT_OVERWORLD_HOUSE_WOMAN_HAS_DRAGON_SLAYER ; If so, jump.
+    pointer @_ISCRIPT_OVERWORLD_HOUSE_WOMAN_HAS_DRAGON_SLAYER ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_GO_TO_FRATERNAL_GURU.
     .byte MESSAGEID_GO_TO_FRATERNAL_GURU    ; [$a32c] Message
@@ -12035,7 +12037,7 @@ ISCRIPT_A331:                               ; [$a331]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Dragon Slayer.
     .byte WEAPON_DRAGON_SLAYER              ; [$a333] InventoryItem
-    .word @_ISCRIPT_A331_HAS_DRAGON_SLAYER  ; If so, jump.
+    pointer @_ISCRIPT_A331_HAS_DRAGON_SLAYER ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_SEARCH_CASTLE_FOR_GURU.
     .byte MESSAGEID_SEARCH_CASTLE_FOR_GURU  ; [$a337] Message
@@ -12077,7 +12079,7 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Dragon Slayer.
     .byte WEAPON_DRAGON_SLAYER              ; [$a33e] InventoryItem
-    .word @_ISCRIPT_A33C_HAS_DRAGON_SLAYER  ; If so, jump.
+    pointer @_ISCRIPT_A33C_HAS_DRAGON_SLAYER ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Else, show
                                             ; MESSAGE_METEORITE_EXPOSITION_2.
     .byte MESSAGEID_METEORITE_EXPOSITION_2  ; [$a342] Message
@@ -12087,7 +12089,7 @@ ISCRIPT_FRATERNAL_GURU:                     ; [$a33c]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Demon's Ring.
     .byte SPECIAL_DEMONS_RING               ; [$a345] InventoryItem
-    .word @_ISCRIPT_A33C_HAS_DEMONS_RING    ; If so, jump.
+    pointer @_ISCRIPT_A33C_HAS_DEMONS_RING  ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_DEFEATED_KING_GRIEVE.
     .byte MESSAGEID_DEFEATED_KING_GRIEVE    ; [$a349] Message
@@ -12124,7 +12126,7 @@ ISCRIPT_EOLIS_KING:                         ; [$a350]
     .byte ISCRIPT_ENTITY_KING               ; Show the King portrait text
                                             ; box.
     .byte ISCRIPT_ACTION_CHECK_GOLD         ; Check if the player has gold.
-    .word @_ISCRIPT_NPC_KING_FOLLOW_UP_HAS_GOLD ; If so, jump.
+    pointer @_ISCRIPT_NPC_KING_FOLLOW_UP_HAS_GOLD ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Else, show
                                                   ; MESSAGE_KING_EXPOSITION.
     .byte MESSAGEID_KING_EXPOSITION         ; [$a355] Message
@@ -12194,7 +12196,7 @@ ISCRIPT_AFTER_VICTIM_MAGIC_SHOP:            ; [$a368]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Fire magic.
     .byte MAGIC_FIRE                        ; [$a36a] InventoryItem
-    .word @_ISCRIPT_AFTER_VICTIM_MAGIC_SHOP_HAS_FIRE ; If so, jump.
+    pointer @_ISCRIPT_AFTER_VICTIM_MAGIC_SHOP_HAS_FIRE ; If so, jump.
     .byte ISCRIPT_ACTION_SHOW_QUESTION_MESSAGE ; Else, show a dismissible
                                                ; MESSAGE_MAGIC_FIRE_3000G.
     .byte MESSAGEID_MAGIC_FIRE_3000G        ; [$a36e] Message
@@ -12234,9 +12236,9 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a37c] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_EOLIS_TOOL_SHOP_BUY     ; If Buy, jump.
+    pointer @_ISCRIPT_EOLIS_TOOL_SHOP_BUY   ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word EOLIS_TOOL_SHOP_ITEMS             ; EOLIS_TOOL_SHOP_ITEMS
+    pointer EOLIS_TOOL_SHOP_ITEMS           ; EOLIS_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a381]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12245,7 +12247,7 @@ ISCRIPT_EOLIS_TOOL_SHOP:                    ; [$a37a]
 
   @_ISCRIPT_EOLIS_TOOL_SHOP_BUY:            ; [$a386]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word EOLIS_TOOL_SHOP_ITEMS             ; EOLIS_TOOL_SHOP_ITEMS
+    pointer EOLIS_TOOL_SHOP_ITEMS           ; EOLIS_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a387]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12271,9 +12273,9 @@ ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a38e] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_APOLUNE_TOOL_SHOP_BUY   ; If Buy, jump.
+    pointer @_ISCRIPT_APOLUNE_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word APOLUNE_TOOL_SHOP_ITEMS           ; APOLUNE_TOOL_SHOP_ITEMS
+    pointer APOLUNE_TOOL_SHOP_ITEMS         ; APOLUNE_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a393]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12282,7 +12284,7 @@ ISCRIPT_APOLUNE_TOOL_SHOP:                  ; [$a38c]
 
   @_ISCRIPT_APOLUNE_TOOL_SHOP_BUY:          ; [$a398]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word APOLUNE_TOOL_SHOP_ITEMS           ; Choose Buy
+    pointer APOLUNE_TOOL_SHOP_ITEMS         ; Choose Buy
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
     .byte MESSAGEID_THANK_YOU_FOR_SHOPPING  ; [$a39c] Message
@@ -12307,9 +12309,9 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3a0] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP_BUY ; If Buy, jump.
+    pointer @_ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word BEFORE_APOLUNE_TOOL_SHOP_ITEMS    ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
+    pointer BEFORE_APOLUNE_TOOL_SHOP_ITEMS  ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3a5]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12318,7 +12320,7 @@ ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP:           ; [$a39e]
 
   @_ISCRIPT_BEFORE_APOLUNE_TOOL_SHOP_BUY:   ; [$a3aa]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word BEFORE_APOLUNE_TOOL_SHOP_ITEMS    ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
+    pointer BEFORE_APOLUNE_TOOL_SHOP_ITEMS  ; BEFORE_APOLUNE_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3ab]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12344,9 +12346,9 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3b2] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_FOREPAW_TOOL_SHOP_BUY   ; If Buy, jump.
+    pointer @_ISCRIPT_FOREPAW_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word FOREPAW_TOOL_SHOP_ITEMS           ; FOREPAW_TOOL_SHOP_ITEMS
+    pointer FOREPAW_TOOL_SHOP_ITEMS         ; FOREPAW_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3b7]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12355,7 +12357,7 @@ ISCRIPT_FOREPAW_TOOL_SHOP:                  ; [$a3b0]
 
   @_ISCRIPT_FOREPAW_TOOL_SHOP_BUY:          ; [$a3bc]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word FOREPAW_TOOL_SHOP_ITEMS           ; FOREPAW_TOOL_SHOP_ITEMS
+    pointer FOREPAW_TOOL_SHOP_ITEMS         ; FOREPAW_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3bd]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12381,9 +12383,9 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3c4] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_MASCON_TOOL_SHOP_BUY    ; If Buy, jump.
+    pointer @_ISCRIPT_MASCON_TOOL_SHOP_BUY  ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word MASCON_TOOL_SHOP_ITEMS            ; MASCON_TOOL_SHOP_ITEMS
+    pointer MASCON_TOOL_SHOP_ITEMS          ; MASCON_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3c9]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12392,7 +12394,7 @@ ISCRIPT_MASCON_TOOL_SHOP:                   ; [$a3c2]
 
   @_ISCRIPT_MASCON_TOOL_SHOP_BUY:           ; [$a3ce]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word MASCON_TOOL_SHOP_ITEMS            ; MASCON_TOOL_SHOP_ITEMS
+    pointer MASCON_TOOL_SHOP_ITEMS          ; MASCON_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3cf]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12418,9 +12420,9 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3d6] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_AFTER_MASCON_TOOL_SHOP_BUY ; If Buy, jump.
+    pointer @_ISCRIPT_AFTER_MASCON_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word AFTER_MASCON_TOOL_SHOP_ITEMS      ; AFTER_MASCON_TOOL_SHOP_ITEMS
+    pointer AFTER_MASCON_TOOL_SHOP_ITEMS    ; AFTER_MASCON_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3db]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12429,7 +12431,7 @@ ISCRIPT_AFTER_MASCON_TOOL_SHOP:             ; [$a3d4]
 
   @_ISCRIPT_AFTER_MASCON_TOOL_SHOP_BUY:     ; [$a3e0]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word AFTER_MASCON_TOOL_SHOP_ITEMS      ; AFTER_MASCON_TOOL_SHOP_ITEMS
+    pointer AFTER_MASCON_TOOL_SHOP_ITEMS    ; AFTER_MASCON_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3e1]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12455,9 +12457,9 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3e8] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_VICTIM_TOOL_SHOP_BUY    ; If Buy, jump.
+    pointer @_ISCRIPT_VICTIM_TOOL_SHOP_BUY  ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word VICTIM_TOOL_SHOP_ITEMS            ; VICTIM_TOOL_SHOP_ITEMS
+    pointer VICTIM_TOOL_SHOP_ITEMS          ; VICTIM_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3ed]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12466,7 +12468,7 @@ ISCRIPT_VICTIM_TOOL_SHOP:                   ; [$a3e6]
 
   @_ISCRIPT_VICTIM_TOOL_SHOP_BUY:           ; [$a3f2]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word VICTIM_TOOL_SHOP_ITEMS            ; VICTIM_TOOL_SHOP_ITEMS
+    pointer VICTIM_TOOL_SHOP_ITEMS          ; VICTIM_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3f3]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12492,9 +12494,9 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a3fa] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_CONFLATE_TOOL_SHOP_BUY  ; If Buy, jump.
+    pointer @_ISCRIPT_CONFLATE_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word CONFLATE_TOOL_SHOP_ITEMS          ; CONFLATE_TOOL_SHOP_ITEMS
+    pointer CONFLATE_TOOL_SHOP_ITEMS        ; CONFLATE_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a3ff]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12503,7 +12505,7 @@ ISCRIPT_CONFLATE_TOOL_SHOP:                 ; [$a3f8]
 
   @_ISCRIPT_CONFLATE_TOOL_SHOP_BUY:         ; [$a404]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word CONFLATE_TOOL_SHOP_ITEMS          ; CONFLATE_TOOL_SHOP_ITEMS
+    pointer CONFLATE_TOOL_SHOP_ITEMS        ; CONFLATE_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a405]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12529,9 +12531,9 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a40c] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_DAYBREAK_TOOL_SHOP_BUY  ; If Buy, jump.
+    pointer @_ISCRIPT_DAYBREAK_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word DAYBREAK_TOOL_SHOP_ITEMS          ; DAYBREAK_TOOL_SHOP_ITEMS
+    pointer DAYBREAK_TOOL_SHOP_ITEMS        ; DAYBREAK_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a411]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12540,7 +12542,7 @@ ISCRIPT_DAYBREAK_TOOL_SHOP:                 ; [$a40a]
 
   @_ISCRIPT_DAYBREAK_TOOL_SHOP_BUY:         ; [$a416]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word DAYBREAK_TOOL_SHOP_ITEMS          ; DAYBREAK_TOOL_SHOP_ITEMS
+    pointer DAYBREAK_TOOL_SHOP_ITEMS        ; DAYBREAK_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a417]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12566,9 +12568,9 @@ ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
                                             ; MESSAGE_I_SELL_TOOLS.
     .byte MESSAGEID_I_SELL_TOOLS            ; [$a41e] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_DARTMOOR_TOOL_SHOP_BUY  ; If Buy, jump.
+    pointer @_ISCRIPT_DARTMOOR_TOOL_SHOP_BUY ; If Buy, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell, show the sell menu.
-    .word DARTMOOR_TOOL_SHOP_ITEMS          ; DARTMOOR_TOOL_SHOP_ITEMS
+    pointer DARTMOOR_TOOL_SHOP_ITEMS        ; DARTMOOR_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a423]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -12577,7 +12579,7 @@ ISCRIPT_DARTMOOR_TOOL_SHOP:                 ; [$a41c]
 
   @_ISCRIPT_DARTMOOR_TOOL_SHOP_BUY:         ; [$a428]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word DARTMOOR_TOOL_SHOP_ITEMS          ; DARTMOOR_TOOL_SHOP_ITEMS
+    pointer DARTMOOR_TOOL_SHOP_ITEMS        ; DARTMOOR_TOOL_SHOP_ITEMS
                                             ; [$PRG12::a429]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13061,10 +13063,10 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a4fe] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_EOLIS_KEY_SHOP_BUY      ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_EOLIS_KEY_SHOP_BUY    ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word EOLIS_KEY_SHOP_ITEMS              ; EOLIS_KEY_SHOP_ITEMS
+    pointer EOLIS_KEY_SHOP_ITEMS            ; EOLIS_KEY_SHOP_ITEMS
                                             ; [$PRG12::a503]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13073,7 +13075,7 @@ ISCRIPT_EOLIS_KEY_SHOP:                     ; [$a4fc]
 
   @_ISCRIPT_EOLIS_KEY_SHOP_BUY:             ; [$a508]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word EOLIS_KEY_SHOP_ITEMS              ; EOLIS_KEY_SHOP_ITEMS
+    pointer EOLIS_KEY_SHOP_ITEMS            ; EOLIS_KEY_SHOP_ITEMS
                                             ; [$PRG12::a509]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13099,10 +13101,10 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a510] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_APOLUNE_KEY_SHOP_BUY    ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_APOLUNE_KEY_SHOP_BUY  ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word APOLUNE_KEY_SHOP_ITEMS            ; APOLUNE_KEY_SHOP_ITEMS
+    pointer APOLUNE_KEY_SHOP_ITEMS          ; APOLUNE_KEY_SHOP_ITEMS
                                             ; [$PRG12::a515]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13111,7 +13113,7 @@ ISCRIPT_APOLUNE_KEY_SHOP:                   ; [$a50e]
 
   @_ISCRIPT_APOLUNE_KEY_SHOP_BUY:           ; [$a51a]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word APOLUNE_KEY_SHOP_ITEMS            ; APOLUNE_KEY_SHOP_ITEMS
+    pointer APOLUNE_KEY_SHOP_ITEMS          ; APOLUNE_KEY_SHOP_ITEMS
                                             ; [$PRG12::a51b]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13137,10 +13139,10 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a522] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_FOREPAW_KEY_SHOP_BUY    ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_FOREPAW_KEY_SHOP_BUY  ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word FOREPAW_KEY_SHOP_ITEMS            ; FOREPAW_KEY_SHOP_ITEMS
+    pointer FOREPAW_KEY_SHOP_ITEMS          ; FOREPAW_KEY_SHOP_ITEMS
                                             ; [$PRG12::a527]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13149,7 +13151,7 @@ ISCRIPT_FOREPAW_KEY_SHOP:                   ; [$a520]
 
   @_ISCRIPT_FOREPAW_KEY_SHOP_BUY:           ; [$a52c]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word FOREPAW_KEY_SHOP_ITEMS            ; FOREPAW_KEY_SHOP_ITEMS
+    pointer FOREPAW_KEY_SHOP_ITEMS          ; FOREPAW_KEY_SHOP_ITEMS
                                             ; [$PRG12::a52d]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13175,10 +13177,10 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a534] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_MASCONE_KEY_SHOP_BUY    ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_MASCONE_KEY_SHOP_BUY  ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word MACONE_KEY_SHOP_ITEMS             ; MACONE_KEY_SHOP_ITEMS
+    pointer MACONE_KEY_SHOP_ITEMS           ; MACONE_KEY_SHOP_ITEMS
                                             ; [$PRG12::a539]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13187,7 +13189,7 @@ ISCRIPT_MASCON_KEY_SHOP:                    ; [$a532]
 
   @_ISCRIPT_MASCONE_KEY_SHOP_BUY:           ; [$a53e]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word MACONE_KEY_SHOP_ITEMS             ; MACONE_KEY_SHOP_ITEMS
+    pointer MACONE_KEY_SHOP_ITEMS           ; MACONE_KEY_SHOP_ITEMS
                                             ; [$PRG12::a53f]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13213,10 +13215,10 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a546] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_VICTIM_KEY_SHOP_BUY     ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_VICTIM_KEY_SHOP_BUY   ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word VICTIM_KEY_SHOP_ITEMS             ; VICTIM_KEY_SHOP_ITEMS
+    pointer VICTIM_KEY_SHOP_ITEMS           ; VICTIM_KEY_SHOP_ITEMS
                                             ; [$PRG12::a54b]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13225,7 +13227,7 @@ ISCRIPT_VICTIM_KEY_SHOP:                    ; [$a544]
 
   @_ISCRIPT_VICTIM_KEY_SHOP_BUY:            ; [$a550]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word VICTIM_KEY_SHOP_ITEMS             ; VICTIM_KEY_SHOP_ITEMS
+    pointer VICTIM_KEY_SHOP_ITEMS           ; VICTIM_KEY_SHOP_ITEMS
                                             ; [$PRG12::a551]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13251,10 +13253,10 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a558] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_DAYBREAK_KEY_SHOP_BUY   ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_DAYBREAK_KEY_SHOP_BUY ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word DAYBREAK_KEY_SHOP_ITEMS           ; DAYBREAK_KEY_SHOP_ITEMS
+    pointer DAYBREAK_KEY_SHOP_ITEMS         ; DAYBREAK_KEY_SHOP_ITEMS
                                             ; [$PRG12::a55d]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13263,7 +13265,7 @@ ISCRIPT_DAYBREAK_KEY_SHOP:                  ; [$a556]
 
   @_ISCRIPT_DAYBREAK_KEY_SHOP_BUY:          ; [$a562]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word DAYBREAK_KEY_SHOP_ITEMS           ; DAYBREAK_KEY_SHOP_ITEMS
+    pointer DAYBREAK_KEY_SHOP_ITEMS         ; DAYBREAK_KEY_SHOP_ITEMS
                                             ; [$PRG12::a563]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13289,10 +13291,10 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
                                             ; MESSAGE_I_SELL_KEYS.
     .byte MESSAGEID_I_SELL_KEYS             ; [$a56a] Message
     .byte ISCRIPT_ACTION_SHOW_BUY_SELL_MENU ; Show the Buy/Sell menu.
-    .word @_ISCRIPT_DARTMOOR_KEY_SHOP_BUY   ; If Buy was chosen, jump.
+    pointer @_ISCRIPT_DARTMOOR_KEY_SHOP_BUY ; If Buy was chosen, jump.
     .byte ISCRIPT_ACTION_SHOW_SELL_MENU     ; If Sell was chosen, show the
                                             ; sell menu.
-    .word DARTMOOR_KEY_SHOP_ITEMS           ; DARTMOOR_KEY_SHOP_ITEMS
+    pointer DARTMOOR_KEY_SHOP_ITEMS         ; DARTMOOR_KEY_SHOP_ITEMS
                                             ; [$PRG12::a56f]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13301,7 +13303,7 @@ ISCRIPT_DARTMOOR_KEY_SHOP:                  ; [$a568]
 
   @_ISCRIPT_DARTMOOR_KEY_SHOP_BUY:          ; [$a574]
     .byte ISCRIPT_ACTION_OPEN_SHOP          ; Open the Buy shop menu.
-    .word DARTMOOR_KEY_SHOP_ITEMS           ; DARTMOOR_KEY_SHOP_ITEMS
+    pointer DARTMOOR_KEY_SHOP_ITEMS         ; DARTMOOR_KEY_SHOP_ITEMS
                                             ; [$PRG12::a575]
     .byte ISCRIPT_ACTION_SHOW_MESSAGE       ; Show
                                             ; MESSAGE_THANK_YOU_FOR_SHOPPING.
@@ -13660,11 +13662,11 @@ ISCRIPT_APOLUNE_GURU:                       ; [$a603]
     .byte TEMPLE_APOLUNE                    ; [$a605] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a60a]
 
 
@@ -13687,11 +13689,11 @@ ISCRIPT_FOREPAW_GURU:                       ; [$a60c]
     .byte TEMPLE_FOREPAW                    ; [$a60e] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a613]
 
 
@@ -13714,11 +13716,11 @@ ISCRIPT_MASCON_GURU:                        ; [$a615]
     .byte TEMPLE_MASCON                     ; [$a617] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a61c]
 
 
@@ -13741,11 +13743,11 @@ ISCRIPT_VICTIM_GURU:                        ; [$a61e]
     .byte TEMPLE_VICTIM                     ; [$a620] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a625]
 
 
@@ -13775,7 +13777,7 @@ ISCRIPT_CONFLATE_GURU:                      ; [$a627]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Battle Suit.
     .byte ARMOR_BATTLE_SUIT                 ; [$a629] InventoryItem
-    .word @_ISCRIPT_GURU_CONFLATE_HAS_BATTLE_SUIT ; If so, jump.
+    pointer @_ISCRIPT_GURU_CONFLATE_HAS_BATTLE_SUIT ; If so, jump.
 
   @_ISCRIPT_GURU_CONFLATE_DEFAULT:          ; [$a62c]
     .byte ISCRIPT_ACTION_SET_SPAWN_POINT    ; Set the spawn point to the
@@ -13783,18 +13785,18 @@ ISCRIPT_CONFLATE_GURU:                      ; [$a627]
     .byte TEMPLE_CONFLATE                   ; [$a62d] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a632]
 
   @_ISCRIPT_GURU_CONFLATE_HAS_BATTLE_SUIT:  ; [$a634]
     .byte ISCRIPT_ACTION_CHECK_FOR_ITEM     ; Check if the player has the
                                             ; Ring of Dworf.
     .byte SPECIAL_RING_OF_DWORF             ; [$a635] InventoryItem
-    .word @_ISCRIPT_GURU_CONFLATE_DEFAULT   ; If so, jump to normal guru
+    pointer @_ISCRIPT_GURU_CONFLATE_DEFAULT ; If so, jump to normal guru
                                             ; behavior.
     .byte ISCRIPT_ACTION_SHOW_UNSKIPPABLE_MESSAGE ; Show
                                                   ; MESSAGE_DIRECTIONS_DARTMORE.
@@ -13824,11 +13826,11 @@ ISCRIPT_DAYBREAK_GURU:                      ; [$a63d]
     .byte TEMPLE_DAYBREAK                   ; [$a63f] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a644]
 
 
@@ -13851,11 +13853,11 @@ ISCRIPT_GURU_FINAL:                         ; [$a646]
     .byte TEMPLE_FINAL                      ; [$a648] Temple
     .byte ISCRIPT_ACTION_CHECK_UPDATE_PLAYER_TITLE ; Check the player rank
                                                    ; and update if needed.
-    .word ISCRIPT_COMMON_GURU_NEW_RANK      ; If set, jump to show the new
+    pointer ISCRIPT_COMMON_GURU_NEW_RANK    ; If set, jump to show the new
                                             ; rank.
     .byte ISCRIPT_ACTION_JUMP               ; Else, jump to show the new
                                             ; password.
-    .word ISCRIPT_COMMON_GURU_PASSWORD      ; ISCRIPT_COMMON_GURU_PASSWORD
+    pointer ISCRIPT_COMMON_GURU_PASSWORD    ; ISCRIPT_COMMON_GURU_PASSWORD
                                             ; [$PRG12::a64d]
 
 

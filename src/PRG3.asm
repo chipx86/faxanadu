@@ -12,7 +12,7 @@
 ; Relative offset to the area tables.
 ;============================================================================
 AREAS_TABLE_PTR:                            ; [$8000]
-    .word (AREA_TABLES-$8000) & $FFFF       ; AREA_TABLES
+    bank_offset_16 AREA_TABLES              ; AREA_TABLES
                                             ; [$PRG3::8000]
 
 
@@ -28,21 +28,21 @@ AREAS_TABLE_PTR:                            ; [$8000]
 ;     AREAS_TABLE_PTR [$PRG3::8000]
 ;
 AREA_TABLES:                                ; [$8002]
-    .word (EOLIS_AREA_DATA-$8000) & $FFFF   ; EOLIS_AREA_DATA
+    bank_offset_16 EOLIS_AREA_DATA          ; EOLIS_AREA_DATA
                                             ; [$PRG3::8002]
-    .word (TRUNK_AREA_DATA-$8000) & $FFFF   ; TRUNK_AREA_DATA
+    bank_offset_16 TRUNK_AREA_DATA          ; TRUNK_AREA_DATA
                                             ; [$PRG3::8004]
-    .word (MIST_AREA_DATA-$8000) & $FFFF    ; MIST_AREA_DATA
+    bank_offset_16 MIST_AREA_DATA           ; MIST_AREA_DATA
                                             ; [$PRG3::8006]
-    .word (TOWNS_AREA_DATA-$8000) & $FFFF   ; TOWNS_AREA_DATA
+    bank_offset_16 TOWNS_AREA_DATA          ; TOWNS_AREA_DATA
                                             ; [$PRG3::8008]
-    .word (BUILDINGS_AREA_DATA-$8000) & $FFFF ; BUILDINGS_AREA_DATA
-                                              ; [$PRG3::800a]
-    .word (BRANCH_AREA_DATA-$8000) & $FFFF  ; BRANCH_AREA_DATA
+    bank_offset_16 BUILDINGS_AREA_DATA      ; BUILDINGS_AREA_DATA
+                                            ; [$PRG3::800a]
+    bank_offset_16 BRANCH_AREA_DATA         ; BRANCH_AREA_DATA
                                             ; [$PRG3::800c]
-    .word (DARTMOOR_AREA_DATA-$8000) & $FFFF ; DARTMOOR_AREA_DATA
-                                             ; [$PRG3::800e]
-    .word (ZENITH_AREA_DATA-$8000) & $FFFF  ; ZENITH_AREA_DATA
+    bank_offset_16 DARTMOOR_AREA_DATA       ; DARTMOOR_AREA_DATA
+                                            ; [$PRG3::800e]
+    bank_offset_16 ZENITH_AREA_DATA         ; ZENITH_AREA_DATA
                                             ; [$PRG3::8010]
 
 
@@ -58,32 +58,32 @@ AREA_TABLES:                                ; [$8002]
 ;     AREA_TABLES [$PRG3::8002]
 ;
 EOLIS_AREA_DATA:                            ; [$8012]
-    .word (EOLIS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; EOLIS_AREA_DATA.blockAttrsRelPtr
-                                                           ; [$PRG3::8012]
-    .word (EOLIS_BLOCK_PROPERTIES-$8000) & $FFFF ; EOLIS_BLOCK_PROPERTIES
-                                                 ; [$PRG3::8014]
-    .word (EOLIS_SCROLL_DATA-$8000) & $FFFF ; EOLIS_SCROLL_DATA
+    bank_offset_16 EOLIS_AREA_DATA_blockAttrsRelPtr ; EOLIS_AREA_DATA.blockAttrsRelPtr
+                                                    ; [$PRG3::8012]
+    bank_offset_16 EOLIS_BLOCK_PROPERTIES   ; EOLIS_BLOCK_PROPERTIES
+                                            ; [$PRG3::8014]
+    bank_offset_16 EOLIS_SCROLL_DATA        ; EOLIS_SCROLL_DATA
                                             ; [$PRG3::8016]
-    .word (EOLIS_DOOR_LOCATIONS-$8000) & $FFFF ; EOLIS_DOOR_LOCATIONS
-                                               ; [$PRG3::8018]
-    .word (EOLIS_DOOR_DESTINATIONS-$8000) & $FFFF ; EOLIS_DOOR_DESTINATIONS
-                                                  ; [$PRG3::801a]
+    bank_offset_16 EOLIS_DOOR_LOCATIONS     ; EOLIS_DOOR_LOCATIONS
+                                            ; [$PRG3::8018]
+    bank_offset_16 EOLIS_DOOR_DESTINATIONS  ; EOLIS_DOOR_DESTINATIONS
+                                            ; [$PRG3::801a]
 
 ;
 ; XREFS:
 ;     EOLIS_AREA_DATA [$PRG3::8012]
 ;
 EOLIS_AREA_DATA_blockAttrsRelPtr:           ; [$801c]
-    .word (EOLIS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; EOLIS_BLOCK_ATTRIBUTES
-                                                 ; [$PRG3::801c]
-    .word (EOLIS_BLOCK_DATA_01-$8000) & $FFFF ; EOLIS_BLOCK_DATA_01
-                                              ; [$PRG3::801e]
-    .word (EOLIS_BLOCK_DATA_02-$8000) & $FFFF ; EOLIS_BLOCK_DATA_02
-                                              ; [$PRG3::8020]
-    .word (EOLIS_BLOCK_DATA_03-$8000) & $FFFF ; EOLIS_BLOCK_DATA_03
-                                              ; [$PRG3::8022]
-    .word (EOLIS_BLOCK_DATA_04-$8000) & $FFFF ; EOLIS_BLOCK_DATA_04
-                                              ; [$PRG3::8024]
+    bank_offset_16 EOLIS_BLOCK_ATTRIBUTES   ; EOLIS_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::801c]
+    bank_offset_16 EOLIS_BLOCK_DATA_01      ; EOLIS_BLOCK_DATA_01
+                                            ; [$PRG3::801e]
+    bank_offset_16 EOLIS_BLOCK_DATA_02      ; EOLIS_BLOCK_DATA_02
+                                            ; [$PRG3::8020]
+    bank_offset_16 EOLIS_BLOCK_DATA_03      ; EOLIS_BLOCK_DATA_03
+                                            ; [$PRG3::8022]
+    bank_offset_16 EOLIS_BLOCK_DATA_04      ; EOLIS_BLOCK_DATA_04
+                                            ; [$PRG3::8024]
 
 
 ;============================================================================
@@ -1077,32 +1077,32 @@ EOLIS_DOOR_DESTINATIONS:                    ; [$8373]
     .byte $06,$08,$06,$00,$07,$00,$06,$00   ; [$840b] undefined
 
 TRUNK_AREA_DATA:                            ; [$8413]
-    .word (TRUNK_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; TRUNK_AREA_DATA.blockAttrsRelPtr
-                                                           ; [$PRG3::8413]
-    .word (TRUNK_BLOCK_PROPERTIES-$8000) & $FFFF ; TRUNK_BLOCK_PROPERTIES
-                                                 ; [$PRG3::8415]
-    .word (TRUNK_SCROLL_DATA-$8000) & $FFFF ; TRUNK_SCROLL_DATA
+    bank_offset_16 TRUNK_AREA_DATA_blockAttrsRelPtr ; TRUNK_AREA_DATA.blockAttrsRelPtr
+                                                    ; [$PRG3::8413]
+    bank_offset_16 TRUNK_BLOCK_PROPERTIES   ; TRUNK_BLOCK_PROPERTIES
+                                            ; [$PRG3::8415]
+    bank_offset_16 TRUNK_SCROLL_DATA        ; TRUNK_SCROLL_DATA
                                             ; [$PRG3::8417]
-    .word (TRUNK_DOOR_LOCATIONS-$8000) & $FFFF ; TRUNK_DOOR_LOCATIONS
-                                               ; [$PRG3::8419]
-    .word (TRUNK_DOOR_DESTINATIONS-$8000) & $FFFF ; TRUNK_DOOR_DESTINATIONS
-                                                  ; [$PRG3::841b]
+    bank_offset_16 TRUNK_DOOR_LOCATIONS     ; TRUNK_DOOR_LOCATIONS
+                                            ; [$PRG3::8419]
+    bank_offset_16 TRUNK_DOOR_DESTINATIONS  ; TRUNK_DOOR_DESTINATIONS
+                                            ; [$PRG3::841b]
 
 ;
 ; XREFS:
 ;     TRUNK_AREA_DATA [$PRG3::8413]
 ;
 TRUNK_AREA_DATA_blockAttrsRelPtr:           ; [$841d]
-    .word (TRUNK_BLOCK_ATTRIBUTES-$8000) & $FFFF ; TRUNK_BLOCK_ATTRIBUTES
-                                                 ; [$PRG3::841d]
-    .word (TRUNK_BLOCK_DATA_01-$8000) & $FFFF ; TRUNK_BLOCK_DATA_01
-                                              ; [$PRG3::841f]
-    .word (TRUNK_BLOCK_DATA_02-$8000) & $FFFF ; TRUNK_BLOCK_DATA_02
-                                              ; [$PRG3::8421]
-    .word (TRUNK_BLOCK_DATA_03-$8000) & $FFFF ; TRUNK_BLOCK_DATA_03
-                                              ; [$PRG3::8423]
-    .word (TRUNK_BLOCK_DATA_04-$8000) & $FFFF ; TRUNK_BLOCK_DATA_04
-                                              ; [$PRG3::8425]
+    bank_offset_16 TRUNK_BLOCK_ATTRIBUTES   ; TRUNK_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::841d]
+    bank_offset_16 TRUNK_BLOCK_DATA_01      ; TRUNK_BLOCK_DATA_01
+                                            ; [$PRG3::841f]
+    bank_offset_16 TRUNK_BLOCK_DATA_02      ; TRUNK_BLOCK_DATA_02
+                                            ; [$PRG3::8421]
+    bank_offset_16 TRUNK_BLOCK_DATA_03      ; TRUNK_BLOCK_DATA_03
+                                            ; [$PRG3::8423]
+    bank_offset_16 TRUNK_BLOCK_DATA_04      ; TRUNK_BLOCK_DATA_04
+                                            ; [$PRG3::8425]
 
 ;
 ; XREFS:
@@ -2417,23 +2417,22 @@ TRUNK_DOOR_DESTINATIONS:                    ; [$8882]
 ; 136 tiles (0x8A2E - 0x89A6)
 ;============================================================================
 MIST_AREA_DATA:                             ; [$890a]
-    .word (MIST_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block attributes
-                                                          ; pointer
-    .word (MIST_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
-    .word (MIST_SCROLL_DATA-$8000) & $FFFF  ; Scroll data
-    .word (MIST_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
-    .word (MIST_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
+    bank_offset_16 MIST_AREA_DATA_blockAttrsRelPtr ; Block attributes pointer
+    bank_offset_16 MIST_BLOCK_PROPERTIES    ; Block properties
+    bank_offset_16 MIST_SCROLL_DATA         ; Scroll data
+    bank_offset_16 MIST_DOOR_LOCATIONS      ; Door locations
+    bank_offset_16 MIST_DOOR_DESTINATIONS   ; Door destinations
 
 ;
 ; XREFS:
 ;     MIST_AREA_DATA [$PRG3::890a]
 ;
 MIST_AREA_DATA_blockAttrsRelPtr:            ; [$8914]
-    .word (MIST_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
-    .word (MIST_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
-    .word (MIST_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
-    .word (MIST_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
-    .word (MIST_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
+    bank_offset_16 MIST_BLOCK_ATTRIBUTES    ; Block attributes
+    bank_offset_16 MIST_BLOCK_DATA_01       ; Block data 1
+    bank_offset_16 MIST_BLOCK_DATA_02       ; Block data 2
+    bank_offset_16 MIST_BLOCK_DATA_03       ; Block data 3
+    bank_offset_16 MIST_BLOCK_DATA_04       ; Block data 4
 
 ;
 ; XREFS:
@@ -3792,24 +3791,23 @@ MIST_DOOR_DESTINATIONS:                     ; [$8ddf]
 ; 94 tiles
 ;============================================================================
 BRANCH_AREA_DATA:                           ; [$8e7b]
-    .word (BRANCH_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block
-                                                            ; attributes
-                                                            ; pointer
-    .word (BRANCH_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
-    .word (BRANCH_SCROLL_DATA-$8000) & $FFFF ; Scroll data
-    .word (BRANCH_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
-    .word (BRANCH_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
+    bank_offset_16 BRANCH_AREA_DATA_blockAttrsRelPtr ; Block attributes
+                                                     ; pointer
+    bank_offset_16 BRANCH_BLOCK_PROPERTIES  ; Block properties
+    bank_offset_16 BRANCH_SCROLL_DATA       ; Scroll data
+    bank_offset_16 BRANCH_DOOR_LOCATIONS    ; Door locations
+    bank_offset_16 BRANCH_DOOR_DESTINATIONS ; Door destinations
 
 ;
 ; XREFS:
 ;     BRANCH_AREA_DATA [$PRG3::8e7b]
 ;
 BRANCH_AREA_DATA_blockAttrsRelPtr:          ; [$8e85]
-    .word (BRANCH_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
-    .word (BRANCH_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
-    .word (BRANCH_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
-    .word (BRANCH_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
-    .word (BRANCH_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
+    bank_offset_16 BRANCH_BLOCK_ATTRIBUTES  ; Block attributes
+    bank_offset_16 BRANCH_BLOCK_DATA_01     ; Block data 1
+    bank_offset_16 BRANCH_BLOCK_DATA_02     ; Block data 2
+    bank_offset_16 BRANCH_BLOCK_DATA_03     ; Block data 3
+    bank_offset_16 BRANCH_BLOCK_DATA_04     ; Block data 4
 
 ;
 ; XREFS:
@@ -4642,24 +4640,23 @@ BRANCH_DOOR_DESTINATIONS:                   ; [$918c]
 ; 256 tiles
 ;============================================================================
 BUILDINGS_AREA_DATA:                        ; [$91ac]
-    .word (BUILDINGS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block
-                                                               ; attributes
-                                                               ; pointer
-    .word (BUILDINGS_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
-    .word (BUILDINGS_SCROLL_DATA-$8000) & $FFFF ; Scroll data
-    .word (BUILDINGS_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
-    .word (BUILDINGS_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
+    bank_offset_16 BUILDINGS_AREA_DATA_blockAttrsRelPtr ; Block attributes
+                                                        ; pointer
+    bank_offset_16 BUILDINGS_BLOCK_PROPERTIES ; Block properties
+    bank_offset_16 BUILDINGS_SCROLL_DATA    ; Scroll data
+    bank_offset_16 BUILDINGS_DOOR_LOCATIONS ; Door locations
+    bank_offset_16 BUILDINGS_DOOR_DESTINATIONS ; Door destinations
 
 ;
 ; XREFS:
 ;     BUILDINGS_AREA_DATA [$PRG3::91ac]
 ;
 BUILDINGS_AREA_DATA_blockAttrsRelPtr:       ; [$91b6]
-    .word (BUILDINGS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
-    .word (BUILDINGS_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
-    .word (BUILDINGS_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
-    .word (BUILDINGS_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
-    .word (BUILDINGS_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
+    bank_offset_16 BUILDINGS_BLOCK_ATTRIBUTES ; Block attributes
+    bank_offset_16 BUILDINGS_BLOCK_DATA_01  ; Block data 1
+    bank_offset_16 BUILDINGS_BLOCK_DATA_02  ; Block data 2
+    bank_offset_16 BUILDINGS_BLOCK_DATA_03  ; Block data 3
+    bank_offset_16 BUILDINGS_BLOCK_DATA_04  ; Block data 4
 
 ;
 ; XREFS:
@@ -6308,23 +6305,23 @@ BUILDINGS_DOOR_DESTINATIONS:                ; [$97e9]
 ; 112 tiles
 ;============================================================================
 TOWNS_AREA_DATA:                            ; [$9829]
-    .word (TOWNS_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; Block attributes
-                                                           ; pointer
-    .word (TOWNS_BLOCK_PROPERTIES-$8000) & $FFFF ; Block properties
-    .word (TOWNS_SCROLL_DATA-$8000) & $FFFF ; Scroll data
-    .word (TOWNS_DOOR_LOCATIONS-$8000) & $FFFF ; Door locations
-    .word (TOWNS_DOOR_DESTINATIONS-$8000) & $FFFF ; Door destinations
+    bank_offset_16 TOWNS_AREA_DATA_blockAttrsRelPtr ; Block attributes
+                                                    ; pointer
+    bank_offset_16 TOWNS_BLOCK_PROPERTIES   ; Block properties
+    bank_offset_16 TOWNS_SCROLL_DATA        ; Scroll data
+    bank_offset_16 TOWNS_DOOR_LOCATIONS     ; Door locations
+    bank_offset_16 TOWNS_DOOR_DESTINATIONS  ; Door destinations
 
 ;
 ; XREFS:
 ;     TOWNS_AREA_DATA [$PRG3::9829]
 ;
 TOWNS_AREA_DATA_blockAttrsRelPtr:           ; [$9833]
-    .word (TOWNS_BLOCK_ATTRIBUTES-$8000) & $FFFF ; Block attributes
-    .word (TOWNS_BLOCK_DATA_01-$8000) & $FFFF ; Block data 1
-    .word (TOWNS_BLOCK_DATA_02-$8000) & $FFFF ; Block data 2
-    .word (TOWNS_BLOCK_DATA_03-$8000) & $FFFF ; Block data 3
-    .word (TOWNS_BLOCK_DATA_04-$8000) & $FFFF ; Block data 4
+    bank_offset_16 TOWNS_BLOCK_ATTRIBUTES   ; Block attributes
+    bank_offset_16 TOWNS_BLOCK_DATA_01      ; Block data 1
+    bank_offset_16 TOWNS_BLOCK_DATA_02      ; Block data 2
+    bank_offset_16 TOWNS_BLOCK_DATA_03      ; Block data 3
+    bank_offset_16 TOWNS_BLOCK_DATA_04      ; Block data 4
 
 ;
 ; XREFS:
@@ -7477,32 +7474,32 @@ TOWNS_DOOR_DESTINATIONS:                    ; [$9bd2]
 ; 99 tiles
 ;============================================================================
 DARTMOOR_AREA_DATA:                         ; [$9c7e]
-    .word (DARTMOOR_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; DARTMOOR_AREA_DATA.blockAttrsRelPtr
-                                                              ; [$PRG3::9c7e]
-    .word (DARTMOOR_BLOCK_PROPERTIES-$8000) & $FFFF ; DARTMOOR_BLOCK_PROPERTIES
-                                                    ; [$PRG3::9c80]
-    .word (DARTMOOR_SCROLL_DATA-$8000) & $FFFF ; DARTMOOR_SCROLL_DATA
-                                               ; [$PRG3::9c82]
-    .word (DARTMOOR_DOOR_LOCATIONS-$8000) & $FFFF ; DARTMOOR_DOOR_LOCATIONS
-                                                  ; [$PRG3::9c84]
-    .word (DARTMOOR_DOOR_DESTINATIONS-$8000) & $FFFF ; DARTMOOR_DOOR_DESTINATIONS
-                                                     ; [$PRG3::9c86]
+    bank_offset_16 DARTMOOR_AREA_DATA_blockAttrsRelPtr ; DARTMOOR_AREA_DATA.blockAttrsRelPtr
+                                                       ; [$PRG3::9c7e]
+    bank_offset_16 DARTMOOR_BLOCK_PROPERTIES ; DARTMOOR_BLOCK_PROPERTIES
+                                             ; [$PRG3::9c80]
+    bank_offset_16 DARTMOOR_SCROLL_DATA     ; DARTMOOR_SCROLL_DATA
+                                            ; [$PRG3::9c82]
+    bank_offset_16 DARTMOOR_DOOR_LOCATIONS  ; DARTMOOR_DOOR_LOCATIONS
+                                            ; [$PRG3::9c84]
+    bank_offset_16 DARTMOOR_DOOR_DESTINATIONS ; DARTMOOR_DOOR_DESTINATIONS
+                                              ; [$PRG3::9c86]
 
 ;
 ; XREFS:
 ;     DARTMOOR_AREA_DATA [$PRG3::9c7e]
 ;
 DARTMOOR_AREA_DATA_blockAttrsRelPtr:        ; [$9c88]
-    .word (DARTMOOR_BLOCK_ATTRIBUTES-$8000) & $FFFF ; DARTMOOR_BLOCK_ATTRIBUTES
-                                                    ; [$PRG3::9c88]
-    .word (DARTMOOR_BLOCK_DATA_01-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_01
-                                                 ; [$PRG3::9c8a]
-    .word (DARTMOOR_BLOCK_DATA_02-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_02
-                                                 ; [$PRG3::9c8c]
-    .word (DARTMOOR_BLOCK_DATA_03-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_03
-                                                 ; [$PRG3::9c8e]
-    .word (DARTMOOR_BLOCK_DATA_04-$8000) & $FFFF ; DARTMOOR_BLOCK_DATA_04
-                                                 ; [$PRG3::9c90]
+    bank_offset_16 DARTMOOR_BLOCK_ATTRIBUTES ; DARTMOOR_BLOCK_ATTRIBUTES
+                                             ; [$PRG3::9c88]
+    bank_offset_16 DARTMOOR_BLOCK_DATA_01   ; DARTMOOR_BLOCK_DATA_01
+                                            ; [$PRG3::9c8a]
+    bank_offset_16 DARTMOOR_BLOCK_DATA_02   ; DARTMOOR_BLOCK_DATA_02
+                                            ; [$PRG3::9c8c]
+    bank_offset_16 DARTMOOR_BLOCK_DATA_03   ; DARTMOOR_BLOCK_DATA_03
+                                            ; [$PRG3::9c8e]
+    bank_offset_16 DARTMOOR_BLOCK_DATA_04   ; DARTMOOR_BLOCK_DATA_04
+                                            ; [$PRG3::9c90]
 
 ;
 ; XREFS:
@@ -8424,32 +8421,32 @@ DARTMOOR_DOOR_DESTINATIONS:                 ; [$9fa5]
     .byte $04,$00,$00                       ; [$a046] undefined
 
 ZENITH_AREA_DATA:                           ; [$a049]
-    .word (ZENITH_AREA_DATA_blockAttrsRelPtr-$8000) & $FFFF ; ZENITH_AREA_DATA.blockAttrsRelPtr
-                                                            ; [$PRG3::a049]
-    .word (ZENITH_BLOCK_PROPERTIES-$8000) & $FFFF ; ZENITH_BLOCK_PROPERTIES
-                                                  ; [$PRG3::a04b]
-    .word (ZENITH_SCROLL_DATA-$8000) & $FFFF ; ZENITH_SCROLL_DATA
-                                             ; [$PRG3::a04d]
-    .word (ZENITH_DOOR_LOCATIONS-$8000) & $FFFF ; ZENITH_DOOR_LOCATIONS
-                                                ; [$PRG3::a04f]
-    .word (ZENITH_DOOR_DESTINATIONS-$8000) & $FFFF ; ZENITH_DOOR_DESTINATIONS
-                                                   ; [$PRG3::a051]
+    bank_offset_16 ZENITH_AREA_DATA_blockAttrsRelPtr ; ZENITH_AREA_DATA.blockAttrsRelPtr
+                                                     ; [$PRG3::a049]
+    bank_offset_16 ZENITH_BLOCK_PROPERTIES  ; ZENITH_BLOCK_PROPERTIES
+                                            ; [$PRG3::a04b]
+    bank_offset_16 ZENITH_SCROLL_DATA       ; ZENITH_SCROLL_DATA
+                                            ; [$PRG3::a04d]
+    bank_offset_16 ZENITH_DOOR_LOCATIONS    ; ZENITH_DOOR_LOCATIONS
+                                            ; [$PRG3::a04f]
+    bank_offset_16 ZENITH_DOOR_DESTINATIONS ; ZENITH_DOOR_DESTINATIONS
+                                            ; [$PRG3::a051]
 
 ;
 ; XREFS:
 ;     ZENITH_AREA_DATA [$PRG3::a049]
 ;
 ZENITH_AREA_DATA_blockAttrsRelPtr:          ; [$a053]
-    .word (ZENITH_BLOCK_ATTRIBUTES-$8000) & $FFFF ; ZENITH_BLOCK_ATTRIBUTES
-                                                  ; [$PRG3::a053]
-    .word (ZENITH_BLOCK_DATA_01-$8000) & $FFFF ; ZENITH_BLOCK_DATA_01
-                                               ; [$PRG3::a055]
-    .word (ZENITH_BLOCK_DATA_02-$8000) & $FFFF ; ZENITH_BLOCK_DATA_02
-                                               ; [$PRG3::a057]
-    .word (ZENITH_BLOCK_DATA_03-$8000) & $FFFF ; ZENITH_BLOCK_DATA_03
-                                               ; [$PRG3::a059]
-    .word (ZENITH_BLOCK_DATA_04-$8000) & $FFFF ; ZENITH_BLOCK_DATA_04
-                                               ; [$PRG3::a05b]
+    bank_offset_16 ZENITH_BLOCK_ATTRIBUTES  ; ZENITH_BLOCK_ATTRIBUTES
+                                            ; [$PRG3::a053]
+    bank_offset_16 ZENITH_BLOCK_DATA_01     ; ZENITH_BLOCK_DATA_01
+                                            ; [$PRG3::a055]
+    bank_offset_16 ZENITH_BLOCK_DATA_02     ; ZENITH_BLOCK_DATA_02
+                                            ; [$PRG3::a057]
+    bank_offset_16 ZENITH_BLOCK_DATA_03     ; ZENITH_BLOCK_DATA_03
+                                            ; [$PRG3::a059]
+    bank_offset_16 ZENITH_BLOCK_DATA_04     ; ZENITH_BLOCK_DATA_04
+                                            ; [$PRG3::a05b]
 
 ;
 ; XREFS:
